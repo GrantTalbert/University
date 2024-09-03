@@ -1,0 +1,256 @@
+%basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+%math
+\usepackage{amsmath, amsthm, amsfonts, amssymb, mathtools}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{siunitx} %phyjsicsssss
+\usepackage{bbm} %mathbb for numbers
+\usepackage[all]{xy} % https://texdoc.org/serve/xyguide.pdf/0
+\makeatletter
+\renewcommand*\env@matrix[1][c]{\hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols #1}}
+\makeatother %matrix realignment
+
+%misc
+\usepackage{float}
+\usepackage[hyphens]{url}
+%\definecolor{page}{HTML}{242526}
+%\pagecolor{page}
+\usepackage{booktabs} %the \toprule and \bottomrule thick lines on tables
+
+\usepackage{hyperref}
+\definecolor{aqua}{HTML}{00C5FF}
+\hypersetup{
+    colorlinks,
+    linkcolor={aqua},
+    urlcolor={aqua},
+    citecolor={red}
+}
+
+%my commands
+\DeclarePairedDelimiter\bra{\langle}{\rvert} %Bra
+\DeclarePairedDelimiter\ket{\lvert}{\rangle} %Ket
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2} %Bra-ket
+\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}} % from https://tex.stackexchange.com/questions/120029/how-to-typeset-a-primed-vector
+\newcommand{\hati}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\hatj}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\hatk}{\boldsymbol{\hat{\textbf{k}}}}
+\newcommand{\R}{\mathbb{R}}
+\DeclareMathOperator{\diag}{diag}
+
+%theorems
+\usepackage{thmtools}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em, innertopmargin=5pt, innerbottommargin=6pt}
+\theoremstyle{definition} %because obviously
+% THEOREM STYLES
+
+\definecolor{boxColor}{HTML}{3D3D3D}
+
+% Definitions
+\newcounter{def}[chapter]\setcounter{def}{0}
+\renewcommand{\thedef}{\arabic{chapter}.\arabic{def}}
+\newenvironment{definition}[1][]{
+  \refstepcounter{def}
+  \ifstrempty{#1}{
+    \mdfsetup{
+      frametitle = {
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white]{\strut Definition~\thedef};}}}
+  {\mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white]{\strut Definition~\thedef :~#1};}}}
+  \mdfsetup{innertopmargin=-5pt,linewidth=1pt,topline=true,nobreak,frametitleaboveskip=\dimexpr-12pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% Theorems
+\newcounter{thm}[chapter]\setcounter{thm}{0}
+\renewcommand{\thethm}{\arabic{chapter}.\arabic{thm}}
+\newenvironment{theorem}[1][]{
+  \refstepcounter{thm}
+  \ifstrempty{#1}{
+    \mdfsetup{
+      frametitle = {
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Theorem~\thethm};}}}
+  {\mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Theorem~\thethm~(#1)};}}}
+  \mdfsetup{innertopmargin=2pt,linewidth=1pt,topline=true,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% Lemmas
+\newcounter{lma}[chapter]\setcounter{lma}{0}
+\renewcommand{\thelma}{\arabic{chapter}.\arabic{lma}}
+\newenvironment{lemma}[1][]{
+  \refstepcounter{lma}
+  \ifstrempty{#1}{
+    \mdfsetup{
+      frametitle = {
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Lemma~\thelma};}}}
+  {\mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Lemma~\thelma~(#1)};}}}
+  \mdfsetup{innertopmargin=2pt,linewidth=1pt,topline=true,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+
+% Corollaries
+\newcounter{corr}[chapter]\setcounter{corr}{0}
+\renewcommand{\thecorr}{\arabic{chapter}.\arabic{corr}}
+\newenvironment{corollary}[1][]{
+  \refstepcounter{corr}
+  \ifstrempty{#1}{
+    \mdfsetup{
+      frametitle = {
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Corollary~\thecorr};}}}
+  {\mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Corollary~\thecorr~(#1)};}}}
+  \mdfsetup{innertopmargin=2pt,linewidth=1pt,topline=true,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% Propositions
+\newcounter{prp}[chapter]\setcounter{prp}{0}
+\renewcommand{\theprp}{\arabic{chapter}.\arabic{prp}}
+\newenvironment{proposition}[1][]{
+  \refstepcounter{prp}
+  \ifstrempty{#1}{
+    \mdfsetup{
+      frametitle = {
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Proposition~\theprp};}}}
+  {\mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Proposition~\theprp~(#1)};}}}
+  \mdfsetup{innertopmargin=2pt,linewidth=1pt,topline=true,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% Remarks
+\newenvironment{remark}[1][]{
+  \mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white]{\strut Remark};}}
+  \mdfsetup{innertopmargin=-7pt,linewidth=1pt,topline=true,bottomline=true,leftline=false,rightline=false,nobreak,frametitleaboveskip=\dimexpr-12pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% Examples
+\newenvironment{example}[1][]{
+  \mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Example};}}
+  \mdfsetup{innertopmargin=0pt,linewidth=1pt,topline=true,bottomline=true,leftline=false,rightline=false,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% As Previously Seen
+\newenvironment{prev}[1][]{
+  \mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white]{\strut As Previously Seen};}}
+  \mdfsetup{innertopmargin=-7pt,linewidth=1pt,topline=true,bottomline=true,leftline=false,rightline=false,nobreak,frametitleaboveskip=\dimexpr-12pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+% Exercises
+\newcounter{exe}[chapter]\setcounter{exe}{0}
+\renewcommand{\theexe}{\arabic{chapter}.\arabic{exe}}
+\newenvironment{exercise}[1][]{
+  \refstepcounter{exe}
+  \mdfsetup{
+      frametitle={
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Exercise~\theexe};}}
+  \mdfsetup{roundcorner=10pt,innertopmargin=0pt,linewidth=1pt,topline=true,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+\begin{mdframed}[]}{\end{mdframed}}
+
+%theorem styles
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={linewidth=1pt,   bottomline=false, topline=false, rightline=false}, qed=\(\blacksquare\)]{proofline}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={linewidth=1pt,   bottomline=false, topline=false, rightline=false}, qed=\qedsymbol]{egline}
+
+\declaretheorem[numbered=no, name=Notation]{notation}
+
+%solution environment
+\declaretheorem[numbered=no, style=egline, name=Solution]{setsolution}
+\newenvironment{solution}[1][]{\vspace{-10pt}\begin{setsolution}}{\end{setsolution}}
+%proof environment
+\declaretheorem[numbered=no, style=proofline, name=Proof]{replacementproof}
+\renewenvironment{proof}[1][\proofname]{\begin{replacementproof}}{\end{replacementproof}}
+
+% Side Indented Theorems - https://tex.stackexchange.com/questions/429339/shifting-newtheorem
+\newtheoremstyle{side}{}{}{\advance\leftskip3cm\relax\itshape\normalfont}{-4pt}
+{\bfseries}{}{0pt}{
+\makebox[0pt][r]{
+  \smash{\parbox[t]{2.5cm}{\raggedright\thmname{#1}.
+  \thmnote{\newline(#3)}}}
+  \hspace{10.1pt}}}
+
+\theoremstyle{side}
+\newtheorem{note}{Note}
+\newtheorem{intuition}{Intuition}
+\newtheorem{claim}{Claim}
+\theoremstyle{definition}
+
+%pulls lecture files
+\newcommand{\lec}[2]{%
+	\foreach \c in {#1,...,#2}{%
+		\IfFileExists{Lectures/lec_\c.tex} {%
+			\input{Lectures/lec_\c.tex}%
+		}{}%
+	}%
+}
+%to use, in the same file directory as your header.tex and master.tex files, create a folder titled "Lectures" and put your
+%lectures into their, named lec_1.tex, lec_2.tex, and so on. In the master.tex file, write \lec{a}{b} where a is the lowest
+%number you want to call, and b is the highest.
+
+%fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[C]{\leftmark}
+
+
+%figures, taken from (https://castel.dev/post/lecture-notes-2)
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+%lectures, taken from (https://castel.dev/post/lecture-notes-3)
+\makeatother
+\def\@lecture{}%
+\newcommand{\lecture}[3]{%
+	\ifthenelse{\isempty{#3}}{%
+
+		\def\@lecture{Lecture #1}%
+	}{%
+		\def\@lecture{Lecture #1: #3}
+	}
+	\subsection*{\@lecture}
+	\hfill{\small\textsf{#2}}\par
+}
+\makeatletter
+
+\author{Grant Talbert}

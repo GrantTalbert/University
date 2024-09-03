@@ -1,0 +1,100 @@
+\lecture{1}{Tue 03 Sep 2024 09:30}{Syllabus Day}
+\chapter{Introduction to Groups}
+\section{Applications}
+Applied
+\begin{itemize}
+	\item Physics \& chemistry
+	\item Comp sci - cryptography (Particularly RSA, ECC)
+	\item Robotics??? Modelinng movements
+	\item Economics??? Symmetries in games, game theory
+\end{itemize}
+Pure
+\begin{itemize}
+	\item Symmetries of roots of polynomials, Galois
+	\item Representation theory, relates groups to lin alg
+	\item Symmetries in geometry \& topology
+\end{itemize}
+\section{Symmetries}
+\begin{definition}[Symmetry]\label{dfn:1}
+	A symmetry of a geometric object is a rearrangement of the figure preserving all properties (the arrangements of sides, vertices, distances, and angles).
+\end{definition}
+For example, a 60/60/60 triangle can be rotated by 120 degrees without changing the shape, or it can be flipped directly about one of its vertices. Both preserve all geometric properties. These transformations are rotation and reflection, respectively. Translation technically works but they don't count cuz boring lol. However doing nothing to the triangle (identity transformation), it's symmetric about that transformation. Oh and flipping about a line (equiv to 180 deg rotation) isn't symmetric. However, we can then rotateit another 180 degrees to obtain a symmetry.
+
+% make a claim environment
+\begin{claim}\label{thm:1}
+	The only symmetries of a triangle are the identity, 2 rotations and 3 reflections.
+\end{claim}
+\begin{proof}
+	Each symmetry is determined by the different possible locations of each \emph{specific} vertex, and they can have 2 orientations (face up or down), and 3 locations per orientation. $3\cdot 2=6$.
+\end{proof}
+\begin{remark}
+	This group of symmetries, as we will learn later, is the dihedral group $D_3$.
+\end{remark}
+We can compose symmetric transformations, giving rise to another symmetry. wow its almost as if its a group...
+
+Call the rotation by 60 degrees transformation $R$, and call the reflection transformation $S$. Then we can compose functions:
+\[
+	SR\text{ is a symmetry.}
+.\]
+\[
+	RR\text{ is a symmetry}
+.\]
+\[
+	SS\text{ is a symmetry}.
+.\]
+etc
+
+\begin{definition}[Cayley Table]\label{dfn:2}
+	The Cayley Table of a group (of symmetries) is a table indexed by symmetries as rows and columns, whose entries in the row $A$ and column $B$ is the symmetry $BA$.
+\end{definition}
+\begin{center}
+	Cayley Table for $D_3$ \\
+\begin{tabular}{c|cccccc}
+	R&R&S&RR&I&RS&RRS\\
+	\hline
+	S&1&2&3&4&5&6\\
+	RR&1&2&3&4&5&6\\
+	I&1&2&3&4&5&6\\
+	RS&1&2&3&4&5&6\\
+	RRS&1&2&3&4&5&6
+\end{tabular}
+	
+\end{center}
+
+
+To standardize the definition of a rotation and reflection, let's look at the symmetries of a square. We should find 8 symmetries (2 orientations, 4 vertices, $4*82=8$).
+\begin{itemize}
+	\item Rotate 90 degrees $R_{90}$
+	\item Rotate 180 degrees $R_{180}$
+	\item Rotate 270 degrees $R_{270}$
+	\item Rotate 0 degrees $1$
+	\item Reflect and rotate 0 degrees $S$
+	\item Reflect and rotate 90 degrees $R_{90}S$
+	\item Reflect and rotate 180 degrees $R_{180}S$
+	\item Reflect and rotate 270 degrees $R_{270}S$
+\end{itemize}
+\begin{center}
+	Cayley Table for the group $D_4$, represented with unconventional notation.\\
+\begin{tabular}{c|cccccccc}
+	&$R_0$ &$R_{90}$&$R_{180}$ &$R_{270}$&$H$ &$V$ &$D$ & $D'$ \\
+	\hline
+	$R_0$ &$R_0$ &$R_{90}$&$R_{180}$ &$R_{270}$ &$H$&$V$ &$D$ &$D'$ \\
+	$R_{90}$ &$R_{90}$ & $R_{180}$ &$R_{270}$ &$R_0$ &$D'$ &$D$ &$H$ &$V$ \\
+	$R_{180}$ &$R_{180}$ &$R_{270}$ &$R_0$ &$R_{90}$ &$V$ &$H$ &$D'$ &$D$ \\
+	$H$ &$H$ &$D$ &$V$ &$D'$& $R_0$ &$R_{180}$&$R_{90}$ &$R_{270}$\\
+	$V$ &$V$ &$D'$ &$H$ &$D$ &$R_{180}$ &$R_0$ &$R_{270}$ &$R_{90}$\\
+	$D$ &$D$ &$V$ &$D'$&$H$ &$R_{270}$ &$R_{90}$ &$R_0$ &$R_{180}$ \\
+	$D'$ &$D'$ &$H$ &$D$ &$V$ &$R_{90}$ &$R_{270}$ &$R_{180}$ &$R_0$
+\end{tabular}
+\end{center}
+
+This table has a few specfic properties:
+\begin{itemize}
+	\item This table is filled in without introducing new properties (closure).
+	\item Each symmetry can be represented as a composition of a standard 90 degree rotation $r$ and a standard reflection $s$ (basis of dihedral group).
+	\item Everything times $R_0$ stays the same; $AR_0=R_0A=A$ (itentity element).
+\end{itemize}
+\begin{remark}
+	The elements do not necessarily commute.
+\end{remark}
+
