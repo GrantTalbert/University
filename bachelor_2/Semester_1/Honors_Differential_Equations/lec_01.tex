@@ -1,0 +1,103 @@
+\lecture{1}{Wed 04 Sep 2024 12:22}{Introduction to Differential Equations}
+\chapter{idk}
+In Differential Equations, we study equations relating functions \& their derivatives. For example,
+\begin{itemize}
+	\item If $m(t)$ denotes the amount of some radioactive material at some time $t$, then often we have
+		\[
+			\frac{\mathrm{d}m}{\mathrm{d}t} =-km
+		.\]
+	\item If $y(t)$ is the height of a body above the ground, then a common model for the way the height changes over time is
+		\[
+			\frac{\mathrm{d} ^2 y}{\mathrm{d} t^2}=-g
+		.\]
+\end{itemize}
+
+\begin{notation}
+	Terminology that will be used throughout the course:
+	\begin{itemize}
+		\item one independent variable, usually $t$.
+		\item one dependent variable which is a function of the independent variable, usually $y$, so we give $y(t)$.
+		\item Parameters are constants that appear in the equation.
+	\end{itemize}
+\end{notation}
+
+\begin{definition}[Order of a Differential equation]\label{dfn:1}
+	The order of a differential equation is the order of the heighest derivative in that equation.
+\end{definition}
+
+For example, in the case
+\[
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} +y \frac{\mathrm{d}y}{\mathrm{d}t} +\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right)^3 = 0 
+,\]
+the heighest order derivative is order 2, so the equation is a second order differential equation.
+
+\begin{definition}[System of Differential Equatiosn]\label{dfn:2}
+	A system of differential equations involves two or more \textbf{dependent} \textbf{variables}.
+\end{definition}
+For instance, if we have variables $y(t)$ and $z(t)$, then we might have
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =f(y,z,t),\quad \frac{\mathrm{d}z}{\mathrm{d}t} =g(y,z,t)
+.\]
+In this class, we only consider \textbf{only} \textbf{one} \textbf{independent} \textbf{variable}, since this would involve partial differential equations. However, we will see multiple dependent variables.
+
+\begin{note}
+	Differential equations typically arise as models for some real world system. These models are often derived under some assumptions, which may not be satisfied in our particuluar circumstance, so solving the differential equation does not necessarily guaraentee a solution in the real world.
+\end{note}
+
+For example,
+\[
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} =-g
+\]
+is a bad description of height change vs time for an object with significant air resistance.
+
+\begin{remark}
+	Most differential equations cannot be solved explicitly; i.e. they do not have analytic solutions.
+\end{remark}
+In response to this fact we will not only investigate analytic solutions to differential equations, but also solutions via qualitative methods and numerical methods.
+
+\begin{example}\label{ex:1}
+	Let $P(t)$ be a population at time $t$. For example, some bacteria that periodically doubles in size. This is bascially the opposite of the previously seen radioactive decay example, so we might think
+	\[
+		\frac{\mathrm{d}P}{\mathrm{d}t} =rP
+	,\]
+	where the parameter $r$ is the birth rate. Since $P$ is proportional to its derivative, we can describe it as the function
+	\[
+		P(t)=Ce^{rt}
+	,\]
+	 for $C\in\mathbb{R}$. Since we're modeling a population, at $t=0$,
+	 \[
+	 	P(0)=C
+	 ,\]
+	 so in this case we take $C$ to be the original population value at $t=0$. So even though mathematically we can take $C\in\mathbb{R}$, the initial value requires us to have $C\in\mathbb{R}^+$.
+\end{example}
+\begin{definition}[Initial Value Problem]\label{dfn:3}
+	An initial value problem (IVP) is a differential equation with initial condition(s) describing the value of the dependent variable at some time $t_0$.
+
+	Generally, we need the same number of initial conditions as the order of the differential equation if we want to solve for all the parameters.
+\end{definition}
+Going back to \ref{ex:1}, recall that as the population increases, resources may become scarce. We can modify our equation to account for this. Let
+\[
+	\frac{\mathrm{d}P}{\mathrm{d}t} =rP-kP^2 = kP\left( \frac{r}{k}-P \right) 
+.\]
+For large populations, the second term will overwhelm the first term. We also know that if $\frac{r}{k}>P>0$, then $\frac{\mathrm{d}P}{\mathrm{d}t} >0$. However, if $P>\frac{r}{k}$, then $\frac{\mathrm{d}P}{\mathrm{d}t} <0$. So for small populations, the population will grow, and for large populations, the population will begin to decrease.
+
+This model is much harder to solve for $P$, so we can use qualitative analysis. We can draw a slope field drawn on the $Pt$-plane, wherein at each point $(P,t)$, we draw a line depicting the value of $\frac{\mathrm{d}P}{\mathrm{d}t} $ for that $(P,t)$. In this case, all slope values at
+\[
+	P=0\lor  P=\frac{r}{k}\eqqcolon P^*
+.\]
+will be $0$ (horizontal). As $P$ approaches these values, $\frac{\mathrm{d}P}{\mathrm{d}t} $ tends to $0$. For any point $P>P^*$, the slope will be negative. From this slope field, we know the behavior of the solution without finding the solution. So for $P_0<P^*$,
+\[
+	\lim_{t \to \infty} P(t)=P^*
+.\]
+And for $\tilde{P}_0>P^*$,
+\[
+	\lim_{t \to \infty} \tilde{P}(t)=P^*
+.\]
+
+\begin{remark}
+	The model
+	\[
+		\frac{\mathrm{d}P}{\mathrm{d}t} =kP\left( \frac{r}{k}-P \right) 
+	.\]
+	is known as the \textbf{logistic} \textbf{model}.
+\end{remark}

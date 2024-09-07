@@ -1,0 +1,352 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../preamble.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{09/12/24}
+\courseID{MA 541}
+\professor{Dr. Duque-Rosero}
+\courseSection{A1}
+\newcounter{prob}\setcounter{prob}{0}
+\renewcommand{\theprob}{\textbf{Problem \arabic{prob}. }}
+\newcommand{\problem}{\stepcounter{prob}\noindent\theprob}
+\begin{document}
+\makeproblem
+\problem hi
+
+\problem Let $n\geq 2$. Define $R$ as the rotation of the regular $n$-gon by $360$ degrees, $S$ as any reflection of the $n$-gon, and $R_0$ as the identity transformation (rotation by 0 degrees). Show
+\[
+	D_n =\left\{ R_0,R^1,R^2, \dots, R^{n-1} ,S,RS,R^2S ..,R^{n-1}S \right\}
+.\]
+Note that $R^iS=SR^P{-i}$ for all $i$.
+\begin{solution}
+	Recall the description of the elements of $D_n$ from part (a) of problem 0. The fact that $\left\{ R_0,R^1,R^2,\ldots,R^{n-1} \right\} \subseteq D_n$ is explained precisely in part (a) of problem 1. It remains to be shown that each reflection $S_1, \dots, S_n $ has the representation $R^iS$ for some $i$. I have no idea how to show this rigorously, but the problem says an explanation will suffice. Because the $n$-gon is rigid, it has only two distinct orderings for its angles, which can be called face-up and face-down.
+\end{solution}
+
+\problem For this problem, recall that $D_6$ is the dihedral group of order 12, the group of symmetries of the hexagon.
+\begin{itemize}
+	\item Find elements  $A,B\in D_6$ such that $AB\neq BA$.
+	\item Find elements $A,B,C\in D_6$ such that $AB=BC$ but $A\neq C$.
+\end{itemize}
+\begin{solution}
+	For simplicity, consider the visualization below.\\
+	\begin{center}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}\end{center}
+Take $S$ to be the reflection fixing points $a$ and $d$.
+	\begin{center}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+	\draw[dashed,thick] (-1,-1.75) -- (1,1.75); 
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$S$};
+\end{tikzpicture}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$b$}/above,
+      180/{$c$}/left,
+      240/{$d$}/below,
+      300/{$e$}/below,
+      360/{$f$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+	\draw[dashed,thick] (-1,-1.75) -- (1,1.75); 
+\end{tikzpicture}\end{center}
+From the visualization, we know $S$ maps $b$ to $f$, $e$ to $c$, and vice versa. Now take $R$ to be a clockwise rotation by $60^\circ $.
+	\begin{center}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \draw [->] (1,1.6) to [out=-30,in=100] (1.8,0.3);
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$R$};
+\end{tikzpicture}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$f$}/above,
+      120/{$e$}/above,
+      180/{$d$}/left,
+      240/{$c$}/below,
+      300/{$b$}/below,
+      360/{$a$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \draw [->] (1,1.6) to [out=-30,in=100] (1.8,0.3);
+\end{tikzpicture}\end{center}
+Consider the symmetries $A\coloneqq SR$ and $B\coloneqq R$. We have $AB=SRR$ and $BA=RSR$. Function composition is applied from right to left, so we apply the rightmost transformation first. Rather than tediously explain what point maps to what position, a visual proof has been given.
+	\begin{center}
+		$BA=RSR$\\
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$R$};
+\end{tikzpicture}
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$f$}/above,
+      120/{$e$}/above,
+      180/{$d$}/left,
+      240/{$c$}/below,
+      300/{$b$}/below,
+      360/{$a$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$S$};
+\end{tikzpicture}
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$f$}/above,
+      120/{$a$}/above,
+      180/{$b$}/left,
+      240/{$c$}/below,
+      300/{$d$}/below,
+      360/{$e$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$R$};
+\end{tikzpicture}
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$b$}/above,
+      180/{$c$}/left,
+      240/{$d$}/below,
+      300/{$e$}/below,
+      360/{$f$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\\$AB=SRR$\\
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$RR$};
+\end{tikzpicture}
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$e$}/above,
+      120/{$d$}/above,
+      180/{$c$}/left,
+      240/{$b$}/below,
+      300/{$a$}/below,
+      360/{$f$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$S$};
+\end{tikzpicture}
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$e$}/above,
+      120/{$f$}/above,
+      180/{$a$}/left,
+      240/{$b$}/below,
+      300/{$c$}/below,
+      360/{$d$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\end{center}
+Clearly these hexagons are not in the same orientation, and as such $AB\neq BA$.
+
+For the second part of the problem, let $A$ and $B$ be as previously defined. Notice that the symmetry $AB$ is equivalent to reflecting once and then rotating 4 times. Define $C\coloneqq RRRS$. With this definition, $BC=RRRRS$, one reflection and four rotations. Thus, $AB=BC$. However, it's not necessarily implied that $A\neq C$, since $SR$ and $RRRS$ may simply be different representations of the same symmetry. The result of the transformation $A$ can be seen as the result of the first two transformations present in $BA$. For simplicity, it has been redrawn below.
+\begin{center}\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$A$};
+\end{tikzpicture}
+	\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$f$}/above,
+      120/{$a$}/above,
+      180/{$b$}/left,
+      240/{$c$}/below,
+      300/{$d$}/below,
+      360/{$e$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}\end{center}
+Now consider the transformation $C $:
+	\begin{center}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$f$}/above,
+      180/{$e$}/left,
+      240/{$d$}/below,
+      300/{$c$}/below,
+      360/{$b$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$S$};
+\end{tikzpicture}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$a$}/above,
+      120/{$b$}/above,
+      180/{$c$}/left,
+      240/{$d$}/below,
+      300/{$e$}/below,
+      360/{$f$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+	\node[] at (0.9, 0.3) (a) {$RRR$};
+\end{tikzpicture}
+\begin{tikzpicture}
+   \newdimen\R
+   \R=1.5cm
+   \draw (0:\R) \foreach \x in {60,120,...,360} {  -- (\x:\R) };
+   \foreach \x/\l/\p in
+     { 60/{$d$}/above,
+      120/{$e$}/above,
+      180/{$f$}/left,
+      240/{$a$}/below,
+      300/{$b$}/below,
+      360/{$c$}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\end{center}
+Clearly, $A\neq C$. As such, we have an example of $AB=BC$ for $A\neq C$.
+\end{solution}
+
+\problem Let $G=\left\{ 1,2,3,4 \right\} $ with binary operation given by multiplication modulo $n$. Show that $G$ is a group under this operation.
+\begin{solution}
+	Clearly ``multiplication modulo $n$'' is a typo, as the value of $n$ matters, and for $n\geq 6$, there are sitiations where for some $a,b\in G$, $ab\mod n\notin G$. For example, take $n=12$. $3,2\in G$, but $3\cdot 2=6\mod 12\notin G$. Since the problem requires $G$ is a group, we take $n=5$.
+
+	Due to the ambiguity in the definition of the binary operation, I have chosen to show multiplication modulo $5$ is a binary operation on $G$ by brute force in the following Cayley table.
+	\begin{center}
+		\begin{tabular}{c|cccc}
+			$\cdot $ &1&2&3&4\\
+			\hline
+			1&1&2&3&4\\
+			2&2&4&1&3\\
+			3&3&1&4&2\\
+			4&4&3&1&1
+		\end{tabular}
+	\end{center}
+	From this table, it can also be seen that $1$ is an identity element in $G$, so there exists an identity element in $G$. It can also be seen that every element has an inverse; 1 is it's own inverse since $1\cdot 1=1\mod 5$, but also $2\cdot 3=1\mod 5$, $3\cdot2 =1\mod 5$, and $4\cdot 4=1\mod 5$. So under multiplication modulo $5$, the inverse of $2$ is $3$, the inverse of $3$ is 2, and the inverse of 4 is 4, all of which are elements of $G$. Finally, we show associativity. We know that associativity holds in $\mathbb{Z}$, and $\left\{ 1,2,3,4 \right\} \subseteq \mathbb{Z}$. Thus, associativity holds for all elements of $G$, since all elements of $G$ are also integers, which are known to be associative. Therefore, $G$ is a group under the operation of multiplication modulo $5$.
+\end{solution}
+
+\problem hi
+\end{document}

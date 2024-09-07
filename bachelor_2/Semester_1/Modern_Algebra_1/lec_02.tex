@@ -1,0 +1,96 @@
+\lecture{2}{Thu 05 Sep 2024 09:30}{Review of Proofs}
+
+\noindent No discussion tomorrow - and they will all be canceled until the grad students get tf off strike
+
+\begin{notation}
+	For $a,b\in\mathbb{Z}$, if $a$ divides $b$, that is $b/a\in\mathbb{Z}$, then we weite $a|b$ to mean $a$ divides $b$.
+\end{notation}
+\section{Integers Mod $n$}
+\begin{definition}[Integer Equivalence mod n]\label{dfn:3}
+	Integers $a,b\in\mathbb{Z}$ are equivalent mod $n$ if $n$ divides $a-b$ (the remainders are the same), and we write
+	\[
+		a\equiv b\;(mod\,n)
+	.\]
+\end{definition}
+For example, $7+4\equiv 1\;(mod\,5)$, since $5|(11-1)$.
+\begin{definition}[Integers modulo $n$]\label{dfn:4}
+	The set of integers modulo $n$ is the set $\left\{ 0,\ldots,n-1 \right\}$, and is denoted $\mathbb{Z}_n$. In $\mathbb{Z}_n$, addition and multiplication are done modulo $n$.
+\end{definition}
+\begin{center}
+	The Cayley Table for $\mathbb{Z}_6$ \\
+	\begin{tabular}{c|cccccc}
+		+&0&1&2&3&4&5\\
+		\hline
+		0&0&1&2&3&4&5\\
+		1&1&2&3&4&5&0\\
+		2&2&3&4&5&0&1\\
+		3&3&4&5&0&1&2\\
+		4&4&5&0&1&2&3\\
+		5&5&0&1&2&3&4
+	\end{tabular}
+\end{center}
+\begin{proposition}
+	Let $\mathbb{Z}_n$ be the set of integers modulo $n$, and let $a,b,c\in\mathbb{Z}_n$. We have
+	\begin{itemize}
+		\item $a+(b+c)=(a+b)+c\mod n$.
+		\item  There exists an additive identity  $0$ such that for all $a\in\mathbb{Z}_n,$ $a+0=a\mod n$.
+		\item For every $a\in\mathbb{Z}_n$, there exists an additive inverse $-a\in\mathbb{Z}_n$ such that $a+(-a)=-a+a=0\mod n$.
+		\item $a+b=b+a\mod n$ for all $a,b\in\mathbb{Z}$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	(1) Since $(a+b)+c=a+(b+c)$ in the integers, then the remainders mod $n$ are also equal.\\
+	The rest of the proof is left as an exercise
+\end{proof}
+\chapter{Groups}
+\begin{definition}[Binary Operation]\label{dfn:5}
+	Let $G$ be a set. A binary operation on $G$ is a function that assigns each ordered pair of elements of $G$ to an element of $G$.
+	\[
+		\cdot : G\times G\to G
+	.\]
+\end{definition}
+For example, in the case of $G=D_4$, then function composition $\circ (A,B)=BA$ is a binary operation on $G$. If $G=\mathbb{Z}_n$, then the binary operation is addition $+(a,b)=a+b\mod n$.
+\begin{definition}[Group]\label{dfn:6}
+	Let $G$ be a set together with a binary operation under which $G$ is closed:
+	\[
+		\cdot : G\times G \to G
+	\]
+	\[
+		\cdot : (a,b) \mapsto ab
+	.\]
+We say that $G$ is a group under this operation if the following properties are satisfied:
+\begin{enumerate}
+	\item Associativity - for any $a,b,c\in G$, $a(bc)=(ab)c$.
+	\item Identity - there exists some $e\in G$ such that for all $g\in G$, $ge=eg=g$.
+	\item Inverses - for all $a\in G$, there exists a corresponding $b\in G$ such that $ab=ba=e$. This is usually denoted $a^{-1}$.
+\end{enumerate}
+\end{definition}
+\begin{definition}[Abelian Group]\label{dfn:7}
+	Let $G$ be a group. We call $G$ an \textbf{abelian} group if $ab=ba$ for all $a,b\in G$ (commutative property). Otherwise, the group is non-abelian.
+\end{definition}
+
+For example, $D_4$ under function composition is called the Dihedral group of order 8, and $\mathbb{Z}_n$ under addition mod $n$ is the group of integers mod $n$. $D_4$ is non-abelian, while $\mathbb{Z}_n$ is abelian. More examples:
+\begin{itemize}
+	\item $\mathbb{Z}$ under addition is a group.
+	\item $\mathbb{Z}$ under division is \textbf{not} a group.
+	\item $\mathbb{Z}$ under multiplication is \textbf{not} a group.
+	\item $\mathbb{R}^*$ (the set of nonzero reals) is a group under multiplication.
+	\item $M_2(\mathbb{R})$ (set of $2\times 2$ matrices with real entries) is a group under addition.
+	\item $\operatorname{GL}_2(\mathbb{R})\subseteq M_2(\mathbb{R}) $ the general linear is a group under multiplication.
+\end{itemize}
+QUATERNIONS!
+
+Let $1$ be the identity matrix,
+ \[
+	 I=\begin{pmatrix}0&1\\-1&0\end{pmatrix},\quad J=\begin{pmatrix}0&i\\i&0\end{pmatrix},\quad K=\begin{pmatrix}i&0\\0&-i\end{pmatrix}
+,\]
+where $i^2=-1$. Then
+\[
+	I^2=J^2=K^2=-1,\quad IJ=K,\quad JK=-I,\quad KI=J,\quad JI=-K,
+\]
+\[
+	KJ=-I,\quad IK=-J
+.\]
+The group $\left\{ \pm 1, \pm I, \pm J, \pm K \right\} $ is knpwn as the quaternion group under multipliaction.
+
+

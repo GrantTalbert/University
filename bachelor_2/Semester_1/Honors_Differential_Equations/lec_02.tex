@@ -1,0 +1,119 @@
+\lecture{2}{Fri 06 Sep 2024 12:20}{uhh}
+Solutions that are constant in time are known as ``fixed points'' or ``equilibrium points'' of the system. For example, for $P^*= P$, we have
+\[
+	\frac{\mathrm{d}P}{\mathrm{d}t} =kP(P^*-P)=0
+.\]
+And for $P_0=0$, we have a similar result.
+
+This equation has an analytical solution.
+\begin{align*}
+	\qquad& \frac{\frac{\mathrm{d}P}{\mathrm{d}t} }{P\left( P^* - P \right) }=k\\
+	\implies& \int \frac{1}{P(t)\left( P^*-P(t) \right) }\frac{\mathrm{d}P}{\mathrm{d}t}  \,\mathrm{d} t=k\int  \,\mathrm{d} t = kt+C_1\\
+		&\text{Let }p=P(t) \implies\mathrm{d} p=\frac{\mathrm{d}P}{\mathrm{d}t} dt\\
+	\implies&\int \frac{\mathrm{d}p }{p\left( P^*-p \right) }=kt+C_1\\
+		&\text{fuck partial fractions}\\
+	\implies&\frac{1}{P^*}\ln \left| \frac{P(t)}{P^*-P(t)} \right| +C_2=kt+C_1
+\end{align*}
+We have
+\[
+	\ln \left| \frac{P(t)}{P^*-P(t)} \right| =P^*kt+\tilde{C}
+.\]
+$\tilde{C}$ is just a collection of constants. Take $=t_0$ to solve for the initial condition problem.
+\[
+	\ln \left| \frac{P_0}{P^*-P_0} \right| =\tilde{C}
+.\]
+\begin{cases}
+	\text{Case 1: }0<P(t)<P^*\\
+	\text{Case 2: }
+\end{cases}
+Investigation of case 1.
+\[
+	\ln \left| \frac{P(t)}{P^*-P(t)} \right| =\ln \left( \frac{P(t)}{P^*-P(t)} \right) 
+\]
+\[
+	\implies \frac{P(t)}{P^*-P(t)}=e^{(rt+\tilde{C})}=e^{\tilde{C}}e^{rt}
+.\]
+remember that $P^* = \frac{r}{k}$. We can finally solve for $P(t)$. Algebra gives
+\[
+	P(t)=\frac{P_0P^*e^{rt}}{P^*+P_0\left( e^{rt}-1 \right) }
+.\]
+or something.
+
+Say we harvest some fixed amount $H$ of the population. We now have
+\[
+	\frac{\mathrm{d}P}{\mathrm{d}t} =kP\left( P^*-P \right) -H
+.\]
+This is horrible to solve analytically. So we actually prefer to use a qualtative analysis on it, using a slope field.
+
+\begin{definition}[Seperable Differential Equations]\label{dfn:4}
+	A separable differential equation is one of the form
+	\[
+		\frac{\mathrm{d}y}{\mathrm{d}x} =f(y,t)
+	,\]
+	wherein we can separate the right hand side into two functions that only depend on one variable $f(y,t)=g(t)h(y)$.
+\end{definition}
+
+Separable DE's are in princible always solvable. Taking definition 1.4, we can give
+\[
+	\frac{1}{h(y(t))\frac{\mathrm{d}y}{\mathrm{d}x} }=g(t)
+.\]
+Integrating both sides, we have
+\[
+	\int \frac{1}{h(y(t))}\frac{\mathrm{d}y}{\mathrm{d}x}  \,\mathrm{d} t=\int g(t) \,\mathrm{d} t
+.\]
+Let
+\[
+	\tilde{y}=y(t)
+.\]
+It follows that
+\[
+	\mathrm{d} \tilde{y}=\frac{\mathrm{d}y}{\mathrm{d}x} dt
+.\]
+We then substitute in and have
+\[
+	\int \frac{\mathrm{d} \tilde{y}}{h\left( \tilde{y} \right) } =\int g(t) \,\mathrm{d} t
+.\]
+\begin{example}
+	Suppose
+	\[
+		\frac{\mathrm{d}y}{\mathrm{d}x} =t^2y^2,\quad y(0)=6
+	.\]
+	Notice that $y$ is a function of $t$. This is separable, so we have
+	\[
+		\frac{1}{y^2}\frac{\mathrm{d}y}{\mathrm{d}t} =t^2
+	.\]
+	We get
+	\[
+		\int \frac{1}{y^2} \,\mathrm{d} y=\int t^2 \,\mathrm{d} t
+	.\]
+	Solving, we have
+	\[
+		-y^{-1}+C_1=\frac{t^3}{3}+C_2
+	.\]
+	Solving for $y$, we have
+	\[
+		y=-\frac{1}{\frac{1}{3}t^3+\tilde{C}}
+	.\]
+	We can solve for $\tilde{C}$.
+	\[
+		6=\frac{1}{\tilde{C}}
+	.\]
+	Trivial.
+\end{example}
+\begin{example}
+	Suppose
+	\[
+		\frac{\mathrm{d}y}{\mathrm{d}t} =\frac{1}{y-t^2y},\quad y(0)=-4
+	.\]
+	This is also separable since $y$ factors:
+	\[
+		y \frac{\mathrm{d}y}{\mathrm{d}t} =\frac{1}{1-t^2}
+	.\]
+	\begin{align*}
+		\int y \frac{\mathrm{d}y}{\mathrm{d}t}  \,\mathrm{d} t&=\int y \,\mathrm{d} y\\
+								      &=\frac{1}{2}y^2 + C_1\\
+								      \int \frac{1}{1-t^2} \,\mathrm{d} t\\
+								      &=\int \frac{\frac{1}{2}}{1+t}+\frac{\frac{1}{2}}{1-t} \,\mathrm{d}t\\
+								      &=\frac{1}{2}\left( \ln \left| 1+t \right| +\ln \left| 1-t \right|  \right) 
+	.\end{align*}
+\end{example}
