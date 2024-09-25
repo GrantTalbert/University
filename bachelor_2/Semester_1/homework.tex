@@ -1,0 +1,101 @@
+%basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+%math
+\usepackage{amsmath, amsthm, amsfonts, amssymb, mathtools}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{siunitx} %phyjsicsssss
+\usepackage{bbm} %mathbb for numbers
+\usepackage[all]{xy} % https://texdoc.org/serve/xyguide.pdf/0
+\makeatletter
+\renewcommand*\env@matrix[1][c]{\hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols #1}}
+\makeatother %matrix realignment
+
+%misc
+\usepackage{float}
+\usepackage[hyphens]{url}
+%\definecolor{page}{HTML}{242526}
+%\pagecolor{page}
+\usepackage{booktabs} %the \toprule and \bottomrule thick lines on tables
+\usepackage{hyperref}
+\definecolor{aqua}{HTML}{00C5FF}
+\hypersetup{
+    colorlinks,
+    linkcolor={aqua},
+    urlcolor={aqua},
+    citecolor={red}
+}
+
+%my commands
+\DeclarePairedDelimiter\bra{\langle}{\rvert} %Bra
+\DeclarePairedDelimiter\ket{\lvert}{\rangle} %Ket
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2} %Bra-ket
+\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}} % from https://tex.stackexchange.com/questions/120029/how-to-typeset-a-primed-vector
+\newcommand{\hati}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\hatj}{\boldsymbol{\hat{\textbf{\j}}}}
+\newcommand{\hatk}{\boldsymbol{\hat{\textbf{k}}}}
+\newcommand{\R}{\mathbb{R}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\renewcommand{\mod}[1]{\;(\text{mod}\;#1)}
+
+%theorems
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage[framemethod=TikZ]{mdframed}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+% Side Indented Theorems - https://tex.stackexchange.com/questions/429339/shifting-newtheorem
+\newtheoremstyle{side}{}{}{\advance\leftskip3cm\relax\itshape\normalfont}{-4pt}
+{\bfseries}{}{0pt}{
+\makebox[0pt][r]{
+  \smash{\parbox[t]{2.5cm}{\raggedright\thmname{#1}.
+  \thmnote{\newline(#3)}}}
+  \hspace{10.1pt}}}
+
+\theoremstyle{side}
+\newtheorem*{note}{Note}
+\newtheorem*{intuition}{Intuition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{prev}{As Previously Seen}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{notation}{Notation}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+%fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[C]{\leftmark}
+
+%lectures, taken from (https://castel.dev/post/lecture-notes-3)
+\makeatother
+\def\@lecture{}%
+\newcommand{\lecture}[3]{%
+	\ifthenelse{\isempty{#3}}{%
+
+		\def\@lecture{Lecture #1}%
+	}{%
+		\def\@lecture{Lecture #1: #3}
+	}
+	\subsection*{\@lecture}
+	\hfill{\small\textsf{#2}}\par
+}
+\makeatletter
+\author{Grant Talbert}

@@ -1,0 +1,69 @@
+\lecture{4}{Tue 17 Sep 2024 16:56}{Bro this prof went from attending a talk on BSM Higgs interactions to teaching undergrad E\&M wtf}
+
+\begin{theorem}[Gauss' Law]\label{thm:6}
+	For a gaussian surface $S$ with enclosed charge $q_{\text{enc}}$,
+	\[
+		\Phi =\iint\limits_{S} \mathbf{E}\cdot  \,\mathrm{d} \mathbf{S}=\frac{q_{\text{enc}}}{\epsilon _0}
+	.\]
+\end{theorem}
+
+To use Gauss' law,
+\begin{itemize}
+	\item Identify the symmetry of the situation
+	\item Choose the gaussian surface over which $E bf$ is constant
+	\item Calculate the charge encosed
+\end{itemize}
+For example, with an infinitely long rod and a finite cylinder around it, since $\mathbf{E}$ is parallel to $\mathbf{\hat{n}}$, we have the surface integral just being the integral of $\left\lVert \mathbf{E} \right\rVert $ over the surface. This is easy.
+
+Calculate $E$ for a hollow, spherical shell of radius $a$ with charge $Q$ evenly distributed over its surface. Take an exterior circle with radius $r>a$ as a gaussian surface. We expect $\mathbf{E}$ to be constant at all points, and parallel to $\mathbf{\hat{n}}$. We can then apply Gauss' law. The total interior charge is $Q$, so we have
+\[
+	\iint\limits_{S} \mathbf{E}\cdot  \,\mathrm{d} \mathbf{S}=\frac{Q}{\epsilon _0}
+.\]
+It follows since $\mathbf{E}$ is constant in magnitude that
+\[
+	E\left( 4\pi r^2 \right) =\frac{Q}{\epsilon _0}\implies E=\left( \frac{1}{4\pi \epsilon _0} \right) \frac{Q}{r^2}
+.\]
+Recall here that SA for a sphere is $4\pi r^2$.
+
+For inside, we give a gaussian surface $r<a$. However, the enclosed charge in this sphere is 0, meaning the electric field within the hollow sphere is 0. We can take $r$ arbitrarily close to $a$.
+
+HOLY SHIT THE FORMULA FOR ELECTRIC FORCE/FIELD DUE TO A POINT CHARGE IS DUE TO IT FALLING OFF AS THE FIELD SPREADS OUT ACROSST HE SURFACE AREA OF AN ARBITRARY SPHERE OF SPACE AT A DISTANCE OMG
+
+For a solid sphere, we have for $r<a$ the charge will be $\rho V$, where $\rho $ is the charge density per unit volume and $V$ is the volume within the gausian surface of radius $r$. Then we have $E(4\pi r^2)=\rho V=\rho \left( \frac{4}{3}\pi r^3 \right)\frac{1}{\epsilon _0} $.
+
+THICK INFINITE LINE OF CHARGE. Rod has radius $R$ with charge density $\rho$. Shove a cylinder inside it with radius $r>R$. By Gauss' Law, $\Phi =\rho \pi R^2\ell \frac{1}{\epsilon _0} $ for some length $\ell $. We have
+ \[
+	E(2\pi r \ell )=\rho \pi R^2 \ell  \frac{1}{\epsilon _0}\implies E=\frac{\rho R^2}{2r\epsilon _0}
+.\]
+Now take $r<R$. We have the enclosed charge $\rho V=\rho \pi r^2 \ell $. By gauss' law,
+\[
+	\Phi =\rho \pi r^2 \ell \frac{1}{\epsilon _0}
+.\]
+It follows that
+\[
+	E(2\pi r \ell )=\frac{\rho \pi r^2 \ell }{\epsilon _0}\implies E= \frac{\rho r}{2\epsilon _0}
+.\]
+
+NExt: Thick, infinite slab. Thickness of $2d$ and charge density $\rho $. For $x>d$, we have a cyllinder implanted into the plane, with curved side parallel to $\mathbf{E}$ and circular sides w/ rad $r$ perpendicular, so we integrate on those sides. We have
+\[
+	\Phi =\frac{1}{\epsilon _0}\rho \pi r^2 2d
+.\]
+By gauss' law,
+\[
+	E(2\pi r^2)=\frac{1}{\epsilon _0}\pi \rho r^2 2d \implies E=\frac{\rho d}{\epsilon _0}
+.\]
+Now put the cylinder inside the slab. The enclosed charge is $\rho V$, and the volume is $2x \pi r^2$, where $x$ is distance from the center. We have
+\[
+	\Phi =\frac{\rho }{\epsilon _0} 2x\pi r^2
+.\]
+By gauss' law,
+\[
+	E(2\pi r^2)=\frac{1}{\epsilon _0}2\rho x\pi r^2 \implies E=\frac{x\rho }{\epsilon _0}
+.\]
+\section{Charges on Conductors}
+Within a solud conductor, $\mathbf{E}=\mathbf{0}$ always. The charges go to the surface of the solid, so it's like the charged surface we saw earlier. This is electrostatic, meaning ``you wait a long time after you charge it''.
+
+Suppose now there is a hole within the conductor. We can put a Gaussian surface within the insulator, which musdt have 0 flux since it's inside the conductor, so the cavity has no charge.
+
+If there is a point charge within the cavity, there is still 0 net charge and 0 flux, meaning the negative charges must accumulateon the inside of the cavity equal and opposite to $q$ point charge.
+

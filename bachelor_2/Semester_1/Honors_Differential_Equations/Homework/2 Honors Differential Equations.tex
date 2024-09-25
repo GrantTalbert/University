@@ -6,6 +6,388 @@
 \courseID{MA 231}
 \professor{Dr. C. Eugene Wayne}
 \courseSection{A1}
+\newtheorem{lama}{Lemma}
+\newtheorem{corry}{Corollary}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+
+\pgfplotsset{ % Define a common style, so we don't repeat ourselves
+    MaoYiyi/.style={
+        width=0.6\textwidth, % Overall width of the plot
+        axis equal image, % Unit vectors for both axes have the same length
+        view={0}{90}, % We need to use "3D" plots, but we set the view so we look at them from straight up
+        xmin=0, xmax=1.1, % Axis limits
+        ymin=0, ymax=1.1,
+        domain=0:1, y domain=0:1, % Domain over which to evaluate the functions
+        xtick={0,0.5,1}, ytick={0,0.5,1}, % Tick marks
+        samples=11, % How many arrows?
+        cycle list={    % Plot styles
+                gray,
+                quiver={
+                    u={1}, v={f(x)}, % End points of the arrows
+                    scale arrows=0.075,
+                    every arrow/.append style={
+                        -latex % Arrow tip
+                    },
+                }\\
+                red, samples=31, smooth, thick, no markers, domain=0:1.1\\ % The plot style for the function
+        }
+    }
+}
+
 \begin{document}
- \makeproblem
+\makeproblem
+\section*{Page 15, Problem 5}
+Consider the differential equation
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =y^3-y^2-12y
+.\]
+For what values of $y$ is $y(t)$ increasing, decreasing, and in equilibrium?
+\begin{solution}
+	Factoring, we have
+	\[
+		\frac{\mathrm{d}y}{\mathrm{d}t} =y\left( y^2-y-12 \right) =y\left( y-4 \right) \left( y+3 \right) 
+	.\]
+	We begin by identifying values of $y$ for which $\frac{\mathrm{d}y}{\mathrm{d}t} =0$. These are the equilibrium points of the system, since the rate of change is 0. Obviously, for $y=0$, $\frac{\mathrm{d}y}{\mathrm{d}t} =0$. For $y\neq 0$, we set $\frac{\mathrm{d}y}{\mathrm{d}t} =0$, and observe
+	\begin{align*}
+		&\qquad\;\;\, 0=y(y-4)(y+3)\\
+		&\implies0=(y-4)(y+3)\\
+		&\implies y\in\left\{ -3,4 \right\} 
+	.\end{align*}
+Thus, the equilibrium points of the system are the points $y=-3$, $y=0$, and $y=4$.
+
+Next, we identify values of $y$ for which $y(t)$ is increasing or decreasing. Because $\frac{\mathrm{d}y}{\mathrm{d}t} $ as a function of $y$ is a polynomial, and is thus continuous on $\mathbb{R}$ with respect to $y$, we know that for any interval $[a,b]$ with zeroes only at $a,b$, it follows that $\frac{\mathrm{d}y}{\mathrm{d}t} $ must be either entirely positive or entirely negative along this interval, except at endpoints (see Lemma 1 and Corollary 1 at end of homework for proof). This means we need only evaluate one point on each relevant interval $(-\infty,-3)$, $(-3,0)$, $(0,4)$, and $(4,\infty)$. We are doing it this way instead of using a graph because I don't feel like making a graph in latex right now.
+
+Take $t=-5\in(-\infty,-3)$. We have
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =-5\left( -5-4 \right) \left( -5+3 \right) =-5(-9)(-2)=-90
+.\]
+Therefore, $y(t)$ is decreasing for $t\in(-\infty,-3)$. Now take $t=-1\in(-3,0)$. We have
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =-1(-1-4)(-1+3)=-(-5)(2)=10
+.\]
+Therefore, $y(t)$ is increasing for $t\in(-3,0)$. Now take $t=1\in(0,4)$. We have
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =1(1-4)(1+3)=(-3)(4)=-12
+.\]
+Therefore, $y(t)$ is decreasing for $t\in(0,4)$. Now take $t=5\in(4,\infty)$. We have
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =5(5-4)(5+3)=5(8)=40
+.\]
+Therefore, $y(t)$ is increasing for $t\in(4,\infty)$. This conclusion could have reached faster by noticing the multiplicity of each root was 1, and thus the sign has to change between $0$s, and only testing one point as a result.
+
+Therefore, $y(t)$ is increasing for $t\in\left( -3,0 \right) \cup \left( 4,\infty \right) $, $y(t)$ is decreasing for $t\in\left( -\infty,-3 \right) \cup \left( 0,4 \right) $, and $y(t)$ is at equilibrium for $t\in\left\{ -3,0,4 \right\} $.
+\end{solution}
+\section*{Page 15, Problem 7}
+\begin{solution}
+We will use the model given in class; for some amount of a radioactive material $r$ at some time $t$, then
+\[
+	\frac{\mathrm{d}r}{\mathrm{d}t} =-\lambda r
+.\]
+
+First, we identify the relationship between $\lambda $ and half-life, then we plug in the given values for C-14 and I-131. Let $k$ be the half life of some substance modeled by function $r$. We must find $t$ such that $r(t)=k$. First, we find $r(t)$.
+\begin{align*}
+	\int \frac{1}{r}\frac{\mathrm{d}r}{\mathrm{d}t}  \,\mathrm{d} t&=\int -\lambda  \,\mathrm{d} t\\
+	\int \frac{1}{r} \,\mathrm{d} r&=-\lambda t+C\\
+	\ln \left| r \right| &=-\lambda t+C\\
+	r(t)&=e^{-\lambda t+C}\\
+	    &=e^{-\lambda t}e^C
+.\end{align*}
+For $t=0$,
+\[
+	r(0)=e^0e^C=e^C
+.\]
+Therefore, $e^C$ is the intial amount of material. We will call this quantity $r_0$. Now, we will briefly consider the units of $\lambda $. If we take $r$ and $r_0$ to be the same units, then $\lambda $ must be the inverse of the units of $t$. This way, the units from the $e^{-\lambda t}$ term all cancel out, and we are left with the units of $r_0$ equaling those of $r$, which is what we want.
+
+We must now find $t$ such that $r(t)=\frac{r_0}{2}$. Let $r(t)=\frac{r_0}{2}$. It folllows that
+\begin{align*}
+	\qquad&\frac{r_0}{2}=r_0e^{-\lambda t}\\
+	\implies&\frac{1}{2}=e^{-\lambda t}\\
+	\implies&\ln \frac{1}{2}=-\lambda t\\
+	\implies&-\frac{\ln \frac{1}{2}}{t}=\lambda 
+.\end{align*}
+We can now solve the problem by plugging in for $t$. In the case of C-14, we will take $t$ to be measured in years, and the units for $\lambda $ will be $\text{years}^{-1}$. I don't actually care to figure out what the units are but whatever they are we can make it work. The problem gives a half life of $t=5230$. Plugging in, we have
+\[
+	\lambda_{\text{C-14}}=-\frac{\ln \frac{1}{2}}{5230}\approx 0.0001325329
+.\]
+For I-131, we now take $t$ to be measured in days, and the units for $\lambda $ will be $\text{days}^{-1}$. The problem gices a half life of  $t=8$. Plugging in, we have
+\[
+	\lambda_{\text{I-131}}=-\frac{\ln \frac{1}{2}}{8}\approx 0.086643397
+.\]
+Why did solving this problem also involve solving problem 6
+
+With the theoretical model, using 1000 and 10,000 atoms should not impact the amount of time it takes for half of them to decay. This can be seen by rearranging the formula for $\lambda $ to obtain the half-life formula,
+\[
+	t_{\frac{1}{2}}=-\frac{\ln \frac{1}{2}}{\lambda }
+,\]
+and noticing that the starting value $r_0$ is not present, as it divides out at an earlier stage in the derivation. However, the theoretical model is an approximation of what is inherently a discrete set of particles that decay as the result of random processes, modeled as a continuous function that we can perform calculus on. So in reality, we are not likely to measure precisely the same value. They should be very close, however, since in general the approximation used herein is fairly decent.
+\end{solution}
+\section*{Page 17 Problem 10}
+\begin{solution}
+	Using the values obtained in problem 7, and changing notation slightly to be neater, we have
+	\[
+		r(t)=\exp\left(\frac{\ln \frac{1}{2}}{8}t\right)r_0\approx \exp\left(0.086643397t\right)r_0
+	.\]
+	These units are still in days. In 72 hours, which is equivalent to 3 days, we have
+	\[
+		r(3)=\exp \left( \frac{\ln \frac{1}{2}}{8}3 \right) r_0\approx 0.77110541270r_0
+	.\]
+	Therefore, about $77\%$ of the intial concentration will remain.
+	
+	After an additional 48 hours, the total time passed is 5 days. Plugging in, we get
+	\[
+		r(5)=\exp \left( \frac{\ln \frac{1}{2}}{8}5 \right) r_0\approx 0.6484197773r_0
+	.\]
+	Therefore, about $65\%$ of the intial concentration will remain.
+
+	Assuming nonzero $r_0$, then according to the model, the population will never decay. To illustrate this, we simplify the expression.
+	\[
+		r(t)=\exp \left( \frac{t}{8}\ln \frac{1}{2} \right) r_0=\exp \left( \ln \left( \frac{1}{2 ^{\frac{t}{8}}} \right) \right) r_0=2^{-\frac{t}{8}}r_0=\frac{r_0}{2^{t/8}}
+	.\]
+	For simplicity, substitute $\alpha \coloneqq \frac{t}{8}$, since as $t\to \infty$, it follows that $\alpha \to \infty$.
+\[
+	r(t)=\frac{r_0}{2^\alpha }
+.\]
+Assuming $r_0$ to be nonzero, then clearly a nonzero positive number divided by a nonzero positive number can never equal 0, and can only approach 0:
+\[
+	\lim_{\alpha  \to \infty} r(t)=\lim_{\alpha  \to \infty} \frac{r_0}{2^\alpha }=0
+.\]
+In fact, we used both this fact, and the assumption that $r_0$ is nonzero, in the derivation of the formula. We divided both sides by both $r$ and $r_0$ at some point in the derivation.
+
+However, this is a continuous model for what is inherently a probabilistic process on a discrete set of atoms. In reality, the entire group of atoms will at some point decay, as unlike the continuous model predicts, there cannot be a non-integer number of atoms. So the real answer to this question is that this is only a model for the decay process of radioactive elements, and not an exact solution, so an answer cannot be given in general.
+\end{solution}
+\section*{Page 17, Problem 12}
+The velocity of a freefalling skydiver is well modeled by the relationship
+\[
+	m \frac{\mathrm{d}v}{\mathrm{d}t} =mg-kv^2
+.\]
+Perform a qualitative analysis of this model, then find the skydiver's terminal velocity.
+\begin{solution}
+	Since $m,g,k\in\mathbb{R}^+$, we have
+	\[
+		\frac{\mathrm{d}v}{\mathrm{d}t} =\frac{mg-kv^2}{m}=g-\frac{kv^2}{m}	
+	.\]
+We know that $\frac{\mathrm{d}v}{\mathrm{d}t} $ is the acceleration, and we know $g$ is the acceleration due to gravity, so the term $\frac{kv^2}{m}$ must model the air resistance of the skydiver. As the person falls through the sky, since they have nonzero acceleration, their velocity will increase, and thus this term will also increase in magnitude. Since this term is subtracted from $g$, then when $\frac{kv^2}{m}=g$, $\frac{\mathrm{d}v}{\mathrm{d}t} $ will equal $0$. Once the acceleration equals $0$, velocity will no longer change, and the term cannot increase any more. Thus, the acceleration will remain $0$. This describes what is known as \textbf{terminal} \textbf{velocity}.
+
+A skydiver with higher mass will have a higher terminal velocity, since  the air resistance term is divided by  $m$. An increase in $ m$ will decrease the air resistance per unit velocity, and thus increase the terminal velocity. The quantities are inversely proportional. Similarly, $k$ is proportional to the terminal velocity, for basically the same reasons.
+
+To find the terminal velocity, we simply need to set
+\[g=\frac{kv^2}{m}\]
+and solve for $v$. Common sense tells us that the graph most likely has an asymptote and we will never actually reach terminal velocity, so we can also take the limit as $t$ goes to infinity if we know $v$ as a function of $t$. However, we do not know this. So instead, we obtain
+\[
+	v^2 = \frac{gm}{k}\implies v=\pm \sqrt{\frac{gm}{k}} 
+.\]
+Since velocity is downward, we say that the velocity is negative, and we choose the negative sign on the square root:
+\[
+	v=-\sqrt{\frac{gm}{k}} 
+.\]
+Thus, terminal velocity is given as $v=-\sqrt{gm/k} $.
+\end{solution}
+\section*{Page 34, Problem 8}
+Find the general solution to the following:
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =2-y
+.\]
+\begin{solution}
+	\begin{align*}
+		&\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =2-y\\
+		&\implies \int \frac{1}{2-y}\frac{\mathrm{d}y}{\mathrm{d}t}  \,\mathrm{d} t=\int  \,\mathrm{d} t\\
+		&\implies \int \frac{1}{2-y} \,\mathrm{d} y=t+C_1\\
+		&\implies \int -\frac{1}{u} \,\mathrm{d} u=t+C_1\\
+		&\implies-\ln \left| 2-y \right| +C_2=t+C_1\\
+		&\implies2-y=e^{t+\tilde{C}}\\
+		&\implies y=2-e^{t}e^{\tilde{C}}.
+	\end{align*}
+\end{solution}
+\section*{Page 34, Problem 18}
+Find the general solution to the following:
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =\frac{4t}{1+3y^2}
+.\]
+\begin{solution}
+	\begin{align*}
+		&\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =\frac{4t}{1+3y^2}\\
+		&\implies \int \left( 1+3y^2 \right) \frac{\mathrm{d}y}{\mathrm{d}t}  \,\mathrm{d} t=\int 4t \,\mathrm{d} t\\
+		&\implies \int 1+3y^2 \,\mathrm{d} y=2t^2+C_1\\
+		&\implies y+y^3=2t^2+\tilde{C}\\
+		&\implies y^3 + y + \left( 2t^2 +\tilde{C} \right) =0
+	.\end{align*}
+	The only way I could think of to simplify this further was to apply the cubic formula by taking $t$ to be constant and solving for $y$ in terms of $t$. I don't know the cubic formula so I googled it. This is actually a depressed cubic, and for any depressed cubic of the form $x^3+px+q=0$, Cardano's formula gives a single real-valued solution
+	\[
+		x=\sqrt[3]{-\frac{q}{2}+\sqrt{\frac{q^2}{4}+\frac{p^3}{27}} } +\sqrt[3]{-\frac{q}{2}-\sqrt{\frac{q^2}{4}+\frac{p^3}{27}} } 
+	.\]
+	Substituting $p=1$ and $q=2t^2+\tilde{C}$, we have
+	\[
+		y(t)=\sqrt[3]{-\frac{2t^2+\tilde{C}}{2}+\sqrt{\frac{4t^4+4t^2\tilde{C}+\tilde{C}^2}{4}+\frac{1}{27}} } +\sqrt[3]{-\frac{2t^2+\tilde{C}}{2}-\sqrt{\frac{4t^4+4t^2\tilde{C}+\tilde{C}^2}{4}+\frac{1}{27}} } 
+	.\]
+	According to WolframAlpha and Desmos, this may be incorrect, as the solution given by Wolfram is, according to Desmos, equivalent to flipping the sign between the cube roots in my solution:
+	\[
+		y(t)=\sqrt[3]{-\frac{2t^2+\tilde{C}}{2}+\sqrt{\frac{4t^4+4t^2\tilde{C}+\tilde{C}^2}{4}+\frac{1}{27}} } -\sqrt[3]{-\frac{2t^2+\tilde{C}}{2}-\sqrt{\frac{4t^4+4t^2\tilde{C}+\tilde{C}^2}{4}+\frac{1}{27}} } 
+	.\]
+	I can't find any errors in my logic, so I believe my solution might also be correct (insert nonsense about branch cuts that I don't understand yet or whatever is relevant here), but I am NOT going to verify this, since I believe $y^3+y=2t^2+\tilde{C}$ is a sufficient solution to this problem and I have a lot more homework to do.
+\end{solution}
+\section*{Page 34, Problem 27}
+Solve the initial value problem
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =-y^2,\qquad y(0)=\frac{1}{2}
+.\]
+\begin{solution}
+	\begin{align*}
+		&\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =-y^2\\
+		&\implies \int -\frac{1}{y^2}\frac{\mathrm{d}y}{\mathrm{d}t}  \,\mathrm{d} t=\int  \,\mathrm{d} t\\
+		&\implies -\int \frac{1}{y^2} \,\mathrm{d} y=t+C_1\\
+		&\implies y^{-1}=t+\tilde{C}\\
+		&\implies y=\frac{1}{t+\tilde{C}}
+	.\end{align*}
+	\[
+		y(0)=\frac{1}{2}=\frac{1}{\tilde{C}} \iff \tilde{C}=2
+	.\]
+	\[
+		\therefore y(t)=\frac{1}{t+2}
+	.\]
+\end{solution}
+\section*{Page 34, Problem 34}
+Solve the initial value problem
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =\frac{1-y^2}{y},\qquad y(0)=-2
+.\]
+\begin{solution}
+	\begin{align*}
+		&\qquad\frac{\mathrm{d}y}{\mathrm{d}t} =\frac{1-y^2}{y}\\
+		&\implies \int \frac{y}{1-y^2}\frac{\mathrm{d}y}{\mathrm{d}t}  \,\mathrm{d} t=\int  \,\mathrm{d} t\\
+		&\implies \int \frac{y}{1-y^2} \,\mathrm{d} y=t+C_1
+	.\end{align*}
+	Let $u=1-y^2$. It follows that $\mathrm{d} u=-2y\mathrm{d} y$.
+	\begin{align*}
+		\int \frac{y}{1-y^2} \,\mathrm{d} y&=\int \frac{1}{-2u}\,\mathrm{d} u\\
+						   &=-\frac{1}{2}\ln \left| u \right| \\
+						   &=-\frac{1}{2}\ln \left| 1-y^2 \right| 
+	.\end{align*}
+	\begin{align*}
+		&\qquad-\frac{1}{2}\ln \left| 1-y^2 \right| =t+\tilde{C}\\
+		&\implies 1-y^2=e^{-2(t+\tilde{C})}\\
+		&\implies y^2=1-e^{-2t}e^{-2\tilde{C}}=Ce^{-2t}\\
+		&\implies y=\pm \sqrt{1-C\exp (-2t)} 
+	.\end{align*}
+	From the intial value problem, we know to take the negative square root.
+	\begin{align*}
+		y(0)&=-2\\
+		    &=-\sqrt{1-C\exp (0)} \\
+		    &=-\sqrt{1-C} \\
+		\implies C&=-3.
+	\end{align*}
+	\[
+		\therefore y(t)=-\sqrt{1+3e^{-2t}} 
+	.\]
+\end{solution}
+\section*{Supplimental Problem 1}
+\begin{solution}
+To solve part (a), we first show $y(t)=\left( \frac{2}{3}t \right) ^{3/2}$ satisfies the intial condition.
+\[
+	y(0)=0^{3/2}=0
+.\]
+Next, we show the relationship satisfies the differential equation.
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{2}{3}t \right) ^{\frac{3}{2}}=\frac{3}{2}\left( \frac{2}{3}t \right) ^{\frac{1}{2}}\cdot \frac{2}{3}=\sqrt{\frac{2}{3}t} 
+.\]
+\[
+	y^{\frac{1}{3}}=\left( \left( \frac{2}{3}t \right) ^{\frac{3}{2}} \right) ^{\frac{1}{3}}=\sqrt{\frac{2}{3}t} 
+.\]
+Therefore,
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =y^{\frac{1}{3}}
+.\]
+The best answer I could think of was
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =-\left( \frac{2}{3}t \right) ^{\frac{3}{2}}	
+.\]
+Although this looks insanely similar to the first solution, that solution did not consider the negative solutions to the problem that exist, but this problem does. I will quickly prove that this differential equation also solves the problem.
+\[
+	-\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{2}{3}t \right) ^{\frac{3}{2}}=-\sqrt{\frac{2}{3}t} 
+.\]
+\[
+	y^{\frac{1}{3}}=\left( -\left( \frac{2}{3}t \right) ^{\frac{2}{3}} \right) ^{\frac{1}{3}}=-\sqrt{\frac{2}{3}t}
+.\]
+This is probably not the intended solution, but it's the best I can think of. Either way, the reason this differential equation does not have a unique solution is likely due to the exponents. For values of $y$ less than $0$, the derivative exists, but due to the definition of $y$ including a square root (exponent of $3/2$ is equivalent to cubing a square root), negative values of $ y$ cannot be obtained, since the square root only outputs positive numbers. Therefore, changing the equation to the negative square root produces these negative values of $y$, while still satisfying the differential equation.
+\end{solution}
+\section*{Suplimental Problem 2}
+Use Taylor's Theorem to prove the centered difference approximation, then find the error in this approximation and compare it to that of the forward difference.
+\begin{solution}
+	For some $y(t)$, Taylor's Theorem states that
+	\[
+		y(t)\approx y(t_0)+y'(t_0)(t-t_0)
+	.\]
+	It's known that this is a good approximation close to $t_0$. We can plug in
+	\[
+		y(t_0+\Delta t)\approx y(t_0)+y'(t_0)(t_0+\Delta t-t_0)=y(t_0)+y'(t_0)\Delta t
+	.\]
+	Conversely,
+	\[
+		y(t_0-\Delta t)\approx y(t_0)+y'(t_0)(t_0-\Delta t-t_0)=y(t_0)-y'(t_0)\Delta t
+	.\]
+	It follows that
+	\[
+		y(t_0+\Delta t)-y(t_0-\Delta t)\approx \left( y(t_0)+y'(t_0)\Delta t \right) -\left( y(t_0)-y'(t_0)\Delta t \right) =2\Delta t\cdot y'(t_0)
+	.\]
+	Rearranging, we have
+	\[
+		y'(t_0)\approx \frac{y(t_0+\Delta t)-y(t_0-\Delta t)}{2\Delta t}
+	.\]
+	This is the central difference approximation.
+
+	The error term in each approximation $y(t_0+\Delta t)$, $y(t_0-\Delta t)$ must clearly be less than or equal to the maximum of $|y(t)|$ on the interval $[t_0,t_0+\Delta t]$ or $[t_0-\Delta t,t_0$, times the length of the interval, $2\Delta t$. We can denote the first quantity as $M_1$ and $M_2$ for $y(t_0+\Delta t)$ and $y(t_0-\Delta t)$, respectively, so we have the error in each approximation being less or equal to $M_n2\Delta t$ for $n$ either $1$ or $2$. The error in the entire approximation can now be found.
+	\[
+		y(t_0+\Delta t)-y(t_0-\Delta t)\leq y'(t_0)2\Delta t+2\Delta t(M_1-M_2)
+	.\]
+	Therefore,
+	\[
+		\left| y'(t_0)2\Delta t-\left( y(t_0+\Delta t)-y(t_0-\Delta t) \right)  \right| \leq 2\Delta t(M_1 - M_2)
+	.\]
+	I think I very clearly have no idea what's going on with the second part of this problem. The approximation will, however, be better than that of the forward difference, due to being able to take the error value at a higher order Taylor polynomial. The 2nd term of the taylor polynomials cancels, so we can consider the remainder $R_3(t)$ when finding bounds for the error, rather than $R_2(t)$.
+\end{solution}
+\section*{Supplemental Problem 3}
+\begin{solution}
+	For $f(x)=\sin x$ about $a=0$, the first 3 nonzero terms are
+	\[
+		x,\qquad -\frac{x^3}{6},\qquad \frac{x^5}{120}
+	.\]
+	For $f(x)=\sin x$ about $a=0$, the first 3 nonzero terms are
+	\[
+		1,\qquad -\frac{x^2}{2},\qquad \frac{x^4}{24}
+	.\]
+	For $f(x)=\frac{2e^{2x}}{e^{2x}+1}$ about $a=0$, the first 3 nonzero terms are
+	\[
+		\frac{1}{2},\qquad x,\qquad -\frac{x^3}{3}
+	.\]
+	Since this function is more involved, I have also included the general first derivative. I used a calculator for the third term because I did not feel like taking more derivatives.
+	\[
+		f'(x)=\frac{\left( e^{2x}+1 \right) \left( 4e^{2x} \right) -\left( 2e^{2x} \right) \left( 2e^{2x} \right) }{\left( e^{2x}+1 \right) ^2}
+	.\]
+	
+\end{solution}
+
+
+
+
+
+
+\begin{lama}\label{thm:1}
+	Let $y : \mathbb{R} \to \mathbb{R}$ be \textbf{continuous} on $[a,b]$, and let $y(t)=0$ for $t=a$ and $t=b$, and let $y\neq 0$ for all $t\in\left( a,b \right) $. Then there does not exist $t_1,t_2\in\left[ a,b \right] $ such that $y\left( t_1 \right) <0$ and $y\left( t_2 \right) >0$. In other words, $y$ must be either strictly positive or strictly negative for all points \textbf{between} \textbf{zeroes}.
+\end{lama}
+\begin{proof}
+	Recall the intermediate value theorem, which states for any function $f$ that is continuous on the interval $[a,b]$, then for any $f(a)<c<f(b)$, there exists some $t\in[a,b]$ such that $f(t)=c$.
+
+	Let definitions of $y$, $a$, and $b$ be as stated in Lemma 1. Now suppose for purpose of contradiction that there exists $t_1,t_2\in\left[ a,b \right] $ such that $y(t_1)<0$ and $y(t_2)>0$. WLOG, let $t_1<t_2$. It follows naturally that $[t_1,t_2]\subseteq [a,b]$, and thus $(t_1,t_2)\subseteq (a,b)$.
+
+	Since $f(t_1)<0$ and $f(t_2)>0$, we have $f(t_1)<0<f(t_2)$. By the intermediate value theorem, there must exist $t'\in [t_1,t_2]$ such that $y\left( t' \right) =0$. For a variety of reasons such as $y$ being a function, we have $t'\neq t_1$ and $t'\neq t_2$, and thus $t\in \left( t_1,t_2 \right) $. Since $(t_1,t_2)\subseteq (a,b)$, we have $t'\in(a,b)$. Thus, there exists some $t\in(a,b)$ such that $y(t)=0$, contradicting the definitions of $a$ and $b$ in the theorem. Therefore, there exists no such $t_1,t_2\in[a,b]$.
+\end{proof}
+\begin{corry}
+	Let $y : \mathbb{R} \to \mathbb{R}$ be a polynomial for which $(-\infty,a]$, $[b,c]$, and $[d,\infty)$ contain no zeroes of $y$, except \textbf{possibly} at points $a,b,c,d$. Then for any specific interval $A$ matching one of these descriptions, $y(A)$ must be either strictly positive or strictly negative, except possibly at endpoints which may have $y=0$.
+\end{corry}
+\begin{proof}
+	For $A\coloneqq [a,b]$ as defined above, the proof is trivial. For $A\coloneqq (-\infty,a]$ or $[a,\infty)$, the proof follows from the same logic as above; for signs to change, there must exist $t\in A\subset \mathbb{R}$ for which $y(t)=0$.
+\end{proof}
+I could have easily done that all in one proof I dont know why I did it like this meh im not rewriting it
+
 \end{document}

@@ -1,0 +1,65 @@
+\lecture{4}{Wed 11 Sep 2024 12:24}{Alternative Derivation of Euler's Method}
+
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =f(y,t);\qquad y(t_0)=y_0
+.\]
+Goal: find an approximation to this initial value problem. Since continuous functions cannot be stored in a pc, we store approximations to the values of th efunction at a fixed set of points. On some interval $[t_0,t_k]$, we partition it into subintervals with endpoints $t_i = t_{i-1}+\Delta t$. Euler's method is to set $Y_0 = y_0$, then define $Y_{k+1}\coloneqq Y_k+(\Delta t)\cdot f(Y_k,t_k)$.
+
+Alternatively, we have
+\[
+	y_{t_k+1}=y(t_k+\Delta t)=y(t_k)+\Delta t(y'(t_k))+R_2(\Delta t)
+.\]
+Basically, this is just a taylor polynomial at $t_k$, which is near $t_{k+1}$. Rearranging, we have
+\[
+	y'(t_k)\Delta t=y(t_{k+1})-y(t_k)-R_2(\Delta t)
+.\]
+Thus,
+\[
+	y'(t_k)= \frac{y(t_{k+1})-y(t_k)-R_2(\Delta t)}{\Delta t}
+.\]
+We remove the error to give the approximation
+\[
+	y'(t_k)\approx \frac{y(t_{k+1})-y(t_k)}{\Delta t}\approx f(y(t_k),t_k)
+.\]
+The error (called the forward difference) is given as
+\[
+	\left|\frac{R_2(\Delta t)}{\Delta t}\right|\leq \frac{C_2 \left| \Delta t \right| ^2}{|\Delta t|}\leq C_2 \left| \Delta t \right| 
+.\]
+We also don't use our actual value of $y(t_k)$, we use our value $Y_{k+1}$ and $Y_k$.
+
+\section{Picard's Theorem}
+Differential equations don't always have a solution, and may also have more than one solution. So how do we know if an initial value problem has a \textbf{unique} \textbf{solution}?
+\begin{theorem}[Picard]\label{thm:2}
+	Consider the intial value problem
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =f(y,t);\qquad y(t_0)=y_0
+.\]
+Suppose there exist constants $t_0\in(a,b)$ and $y_0\in(c,d)$ such  that $\frac{\partial f}{\partial y} (y,t)$ and $f(y,t)$ are both continuous on $[a,b]\times [c,d]$. Then there exists some $\delta >0$ such that the initial value problem has a \textbf{unique} \textbf{solution} $y(t)$ for all $t\in(t_0-\delta ,t_0+\delta )$.
+\end{theorem}
+\begin{proof}
+	\[
+		\int_{t_0}^{t} \frac{\mathrm{d}y}{\mathrm{d}t} (s) \,\mathrm{d} s=\int_{t_0}^{t} f(y(s),s) \,\mathrm{d} s
+	.\]
+	We have
+	\[
+		\int_{t_0}^{t} \frac{\mathrm{d}y}{\mathrm{d}s} (s) \,\mathrm{d} s=y(t)-y(t_0)=y(t)-y_0
+	.\]
+	Thus,
+	\[
+		y(t)=y_0+\int_{t_0}^{t} f(y(s),s) \,\mathrm{d} s
+	.\]
+	We can inductively define a series of approximations. Our first approximation of $y$ is that
+	$y^{(0)}(t)=y_0$. Our next approximation is
+	\[
+		y^{(1)}(t)=y_0+\int_{t_0}^{t} f\left( y^{(0)}(s),s \right)  \,\mathrm{d} s
+	.\]
+	Then we give
+	\[
+		y^{(2)}(t)=y_0+\int_{t_0}^{t} f\left( y^{(1)}(s),s \right)  \,\mathrm{d} s
+	.\]
+	We continue to
+	 \[
+		y^{(n+1)}(t)=y_0+\int_{t_0}^{t} f\left( y^{(n)}(s),s \right)  \,\mathrm{d} s
+	.\]
+	Proof will be finished next time.
+\end{proof}

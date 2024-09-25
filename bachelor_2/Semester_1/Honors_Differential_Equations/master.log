@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.7.6)  6 SEP 2024 16:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.7.6)  11 SEP 2024 13:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -801,20 +801,20 @@ Package zref Info: New property: mdf@pagevalue on input line 895.
 Package thmtools Info: Key `mdframed' (with value `linewidth=1pt, bottomline=false, topline=false, rightline=false')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=proofline' on input line 185.
+(thmtools)             that uses `style=proofline' on input line 187.
 Package thmtools Info: Key `qed' (with value `\(\blacksquare \)')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=proofline' on input line 185.
+(thmtools)             that uses `style=proofline' on input line 187.
 Package thmtools Info: Key `mdframed' (with value `linewidth=1pt, bottomline=false, topline=false, rightline=false')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=egline' on input line 186.
+(thmtools)             that uses `style=egline' on input line 188.
 Package thmtools Info: Key `qed' (with value `\qedsymbol ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=egline' on input line 186.
-Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line 192.
+(thmtools)             that uses `style=egline' on input line 188.
+Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line 194.
  (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thmdef-mdframed.sty
 Package: thmdef-mdframed 2023/05/04 v0.76
 )
@@ -974,7 +974,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-<BU_Logo.png, id=11, 3854.4pt x 2168.1pt>
+<BU_Logo.png, id=15, 3854.4pt x 2168.1pt>
 File: BU_Logo.png Graphic file (type png)
 <use BU_Logo.png>
 Package pdftex.def Info: BU_Logo.png  used on input line 9.
@@ -985,126 +985,73 @@ Package pdftex.def Info: BU_Logo.png  used on input line 9.
 \tf@toc=\write6
 \openout6 = `master.toc'.
 
- (./lec_01.tex
+ (./lec_03.tex
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 1.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 22.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 23.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 25.
+Package hyperref Info: bookmark level for unknown setsolution defaults to 0 on input line 25.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2 \chapter
-            {idk} [1
+l.53 \end{solution}
+                    [1
 
 ]
-Chapter 1.
-Package hyperref Info: bookmark level for unknown notation defaults to 0 on input line 16.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 24.
+(mdframed)              on input line 62.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 26.
+(mdframed)              on input line 75.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 34.
+(mdframed)              on input line 76.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 36.
-Package hyperref Info: bookmark level for unknown note defaults to 0 on input line 44.
-[2
-
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+(mdframed)              on input line 84.
+ [2{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) (./lec_04.tex [3]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 54.
+(mdframed)              on input line 32.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 55.
+(mdframed)              on input line 38.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 58.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 72.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 73.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 77.
- [3]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 98.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 103.
-) (./lec_02.tex
-./lec_02.tex:25: Missing $ inserted.
-<inserted text> 
-                $
-l.25 \begin{cases}
-                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./lec_02.tex:28: Missing $ inserted.
-<inserted text> 
-                $
-l.28 \end{cases}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-[4]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 48.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 54.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 77.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 102.
- [5]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 104.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 119.
-) [6] (./master.aux)
+(mdframed)              on input line 40.
+Package hyperref Info: bookmark level for unknown replacementproof defaults to 0 on input line 40.
+ [4]) [5] (./master.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `master.out' has not changed.
-(rerunfilecheck)             Checksum: D41574F2FDAC9FB3E61F0FDF84B4043C;58.
+(rerunfilecheck)             Checksum: B421D82723FD58C5B6A38FB93D9121F3;256.
  ) 
 Here is how much of TeX's memory you used:
- 32110 strings out of 474222
- 637950 string characters out of 5748734
- 1943975 words of memory out of 5000000
- 53733 multiletter control sequences out of 15000+600000
- 575700 words of font info for 81 fonts, out of 8000000 for 9000
+ 32088 strings out of 474222
+ 637376 string characters out of 5748734
+ 1941975 words of memory out of 5000000
+ 53715 multiletter control sequences out of 15000+600000
+ 575008 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,12n,100p,3254b,1062s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1000.pfb>
-Output written on master.pdf (7 pages, 320574 bytes).
+ 89i,12n,100p,3254b,1107s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1000.pfb>
+Output written on master.pdf (6 pages, 355272 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
- 103 compressed objects within 2 object streams
- 18 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 159 PDF objects out of 1000 (max. 8388607)
+ 108 compressed objects within 2 object streams
+ 15 named destinations out of 1000 (max. 500000)
+ 34 words of extra memory for PDF output out of 10000 (max. 10000000)
 

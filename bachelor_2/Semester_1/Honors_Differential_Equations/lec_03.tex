@@ -1,0 +1,114 @@
+\lecture{3}{Mon 09 Sep 2024 12:21}{Continuing First Order ODEs}
+
+Note - the previous example was actually
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =\frac{t}{y-t^2y}
+.\]
+This makes it way easier:
+\[
+	\int y \,\mathrm{d} y=\int \frac{t}{1-t^2} \,\mathrm{d} t
+.\]
+\[
+	\frac{1}{2}y^2=-\int \frac{1}{u} \,\mathrm{d} u
+.\]
+\[
+	\frac{y^2}{2}=\ln \left| 1-t^2 \right| +C
+.\]
+Solving from here is trivial.
+
+\subsection{Mixing Problems}
+Some container full of some solution, adding more stuff from the top while also draining out some stuff from the bottom. Rates of both can be diff. Stirring all the time to make sure things are mixed.
+\begin{example}
+	Tank have 50gal of water. At $t=0$, the tank contains pure water. Salty brine is poured into the tank at a rate of 3gal/min with a concentration of 1lb/gal of salt. Brine is drained from the tank at a rate of 3gal/min. How much salt is in the tank after 5 minutes?
+\end{example}
+\begin{solution}
+	Independent variable is time and dependent variable is amount of salt. Alternatively, salt concentration can be used (exercise to reader?)
+
+	Let $S(t)$ be the amount, in lbs, of salt at some time $t$. Since we are adding 1 lb per gallon and 3 gallons per minute, we add 3 lbs per minute. This is a constant positive rate of change of $+3$. We are then removing the amount of water being removed (3 gallons) times the concentration of salt in the tank, which is the amount of salt divided by 50 gallons.
+	\[
+		\frac{\mathrm{d}S}{\mathrm{d}t} =3-3\left( \frac{S(t)}{50} \right) 
+	.\]
+	The first term is adding salt, and the second term is removing salt. Simplifying, we get
+	\[
+		\frac{\mathrm{d}S}{\mathrm{d}t} =3\left( 1-\frac{S(t)}{50} \right) =\frac{3(50-S(t))}{50}
+	.\]
+	This is separable.
+	\[
+		\int \frac{1}{50-S(t)} \,\mathrm{d} S=\int \frac{3}{50} \,\mathrm{d} t
+	.\]
+	\[
+		-\ln \left| 50-S(t) \right| =\frac{3t}{50}+C
+	.\]
+	\[
+		S(t)=50-e^{-C}e^{-\frac{3t}{50}}
+	.\]
+	\[
+		S(0)=0=50-e^{-C}
+	.\]
+	Therefore, $e^{-C}=50$, and $S(t)=50-50\exp \left( -\frac{3t}{50} \right) $.
+	Plug in the time asked for.
+	\[
+		S(5)=50\left( 1-e^{-\frac{15}{50}} \right) \text{lbs}
+	.\]
+\end{solution}
+DETOUR: NUMERICAL ANALYSIS
+
+Recall Taylor Polynomials. We know that an approximation for $f(t)$ about some $a\in\mathbb{R}$ is given by the Taylor Polynomial about $a$,
+\[
+	f(t)=\sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(t-a)^n
+.\]
+A taylor polynomial of order $n$ will be called $T_n(t)$.
+\begin{prev}
+	Euler's Method:
+
+	Take an interval split into a grid of points $t_j$, separated by value $\Delta t$. Suppose $y(t_j)$ is known, at least approximately. Obviously $y(t_{j+1})=y(t_j+\Delta t)$. This is approximately $y(t_j)+y'(t_j)\Delta t$. The derivative is usually given.
+
+	Given $\frac{\mathrm{d}y}{\mathrm{d}t} =f(y,t)$, $y(t_0)=y_0$,
+	\begin{itemize}
+		\item Pick a grid size $\Delta t$.
+		\item Set $Y_0=y_0$.
+		\item Set $Y_1=Y_0+f(Y_0,t_0)\Delta t$.
+		\item Set $Y_2=Y_1+f(Y_1,t_1)\Delta t$.
+		\item Set $Y_{n+1}=Y_n+f(Y_n,t_n)\Delta t$
+	\end{itemize}
+	In this case, $t_{n+1}=t_n+\Delta t$.
+\end{prev}
+\begin{theorem}[Taylor's theorem]\label{thm:3}
+	For some $f : \mathbb{R} \to \mathbb{R}$, then
+	\[
+		f(t)=T_n(t)+R_{n+1}(t)
+	.\]
+	If $f(t)$ is $n+1$ times continuously differentiable on $\left( a-\delta ,a+\delta  \right) $, then there exists a constant $C_{n+1}$ such that $|f(t)-T_n(t)|=\left| R_{n+1}(t) \right| \leq C_{n+1}\left| t-a \right| ^{n+1}$ for all $a-\delta <t<a+\delta $.
+
+	\[C_{n+1}\coloneqq \max \left\{ \left| f^{(n+1)}[a-\delta ,a+\delta]  \right|\right\} .\]
+\end{theorem}
+Recall the fundamental theorem of calculus says
+\[
+	f(t)-f(a)=\int_{a}^{t} f'(s) \,\mathrm{d} s
+.\]
+Let's rewrite this:
+\[
+	\int_{a}^{t} f'(s)-f'(a)+f'(a) \,\mathrm{d} s=\int_{a}^{t} f'(s)-f'(a) \,\mathrm{d} s+\int_{a}^{t} f'(a) \,\mathrm{d} s
+.\]
+The second integral is constant wrt $s$ :
+\[
+	f(t)-f(a)=\int_{a}^{t} f'(s)-f'(a) \,\mathrm{d} s+f'(a)(t-a)
+.\]
+Notice the taylor polynomial is appearing.
+\[
+	f(t)=f(a)+f'(a)(t-a)+\int_{a}^{t} f'(s)-f'(a) \,\mathrm{d} s
+.\]
+So clearly, that final integral is the remainder $R_2(t)$ in $T_1(a)$. We can keep going:
+\[
+	f(t)=f(a)+f'(a)(t-a)+\int_{a}^{t}\int_{a}^{s} f''(q) \,\mathrm{d} q \mathrm{d} s
+.\]
+Now notice that
+\[
+	\left| \int_{a}^{b} f(x) \,\mathrm{d}x  \right| \leq \int_{a}^{b} \left| f(x) \right|  \,\mathrm{d} x
+.\]
+Let $M_2 = \max_{q\in[a,t]}\left| f''(q) \right|$.
+Going back to our double integral, we have
+\[
+	\left| R_2(t) \right| =\left| \int_{a}^{t}\int_{a}^{s} f''(q) \,\mathrm{d} q \mathrm{d} s \right| \leq \int_{a}^{t}\left|\int_{a}^{s} f''(q) \,\mathrm{d} q \right|\mathrm{d} s \leq M_2\int_{a}^{t}\int_{a}^{s}  \,\mathrm{d} q \mathrm{d}s =M_2 \int_{a}^{t} (s-a) \,\mathrm{d} s=\frac{1}{2}M_2 \left| t-a \right|^2
+.\]
+We can do all of this again for $R_3$.

@@ -1,0 +1,55 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../../../report.tex}
+\usepackage{titlepageBU}
+\title{The Chocolate Bar Game}
+\date{10/10/24}
+\courseID{MA 293}
+\professor{Dr. Borkovitz}
+\courseSection{A1}
+\begin{document}
+\makereport
+\newpage
+\tableofcontents
+\newpage
+\vspace*{\fill}
+\begin{abstract}
+	lol owo
+\end{abstract}
+\vspace*{\fill}\newpage
+\section{Introduction}
+The Chocolate Bar Game is a two player game that involves the manipulation of a grid of connected squares, similar to a chocolate bar. Players are allowed to break the grid apart along the lines that run between the squares.
+
+\begin{center}
+\begin{tikzpicture}
+        [square/.style={
+            draw,
+            minimum width=width("#1"),
+            minimum height=width("#1")+2*\pgfshapeinnerysep,
+            node contents={#1}}]
+	\node at (0,0) (1) [square={$1$}, draw = red];
+        \node at (0.5,0) (2) [square={$2$}, draw = blue];
+        \node at (1,0) (3) [square={$3$}, draw = blue];
+        \node at (0,0.5) (4) [square={$4$}, draw = red];
+        \node at (0.5,0.5) (5) [square={$5$}, draw = blue];
+        \node at (1,0.5) (6) [square={$6$}, draw = blue];
+	\draw [red] (-0.5,0.25) -- (1.5,0.25);
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+\end{tikzpicture}
+\begin{tikzpicture}
+        [square/.style={
+            draw,
+            minimum width=width("#1"),
+            minimum height=width("#1")+2*\pgfshapeinnerysep,
+            node contents={#1}}]
+	\node at (0,-0.25) (1) [square={$1$}, draw = red];
+        \node at (0.5,-0.25) (2) [square={$2$}, draw = blue];
+        \node at (1,-0.25) (3) [square={$3$}, draw = blue];
+        \node at (0,0.75) (4) [square={$4$}, draw = red];
+        \node at (0.5,0.75) (5) [square={$5$}, draw = blue];
+        \node at (1,0.75) (6) [square={$6$}, draw = blue];
+	\draw [red] (-0.5,0.25) -- (1.5,0.25);
+\end{tikzpicture}
+\end{center}
+\end{document}

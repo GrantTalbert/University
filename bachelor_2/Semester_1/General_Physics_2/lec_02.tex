@@ -1,2 +1,39 @@
 \lecture{2}{Thu 05 Sep 2024 17:00}{Electric Forces and Fields}
-ill do ths myself
+
+An obvious question to ask when considering electric forces is ``how do two electrically charged objects know the other exists when separated by some distance?'' To answer this question, we introduce the notion of a field (in the classical sense). We can think of this as some charged object $A$ ``modifying space'' (generating a field) in a neighborhood of $A$. This electric field exists at an arbitrary point $P$ even if there is no charge at $P$. If we place a point charge $q_0$ at point $P$, $q_0$ experiences the force
+\[
+	\mathbf{F}_0=k \frac{q_0A}{r^2}\mathbf{\hat{r}}
+.\]
+Likewise, $A$ experiences the force $-\mathbf{F}_0$.
+
+Note that although an object creates an electric field, this field can only interact with other objects, it cannot interact with iteslf.
+
+To tell if there exists an electic field at an arbitrary point $\mathbf{x}$, we place a test charge $q$ at point $\mathbf{x}$. If $q$ experiences a force, there exists an electric field at $\mathbf{x}$.
+\begin{definition}[Electric field]\label{dfn:1}
+	The Electric Field is a vector quantity defined as
+	\[
+		\mathbf{E}=\frac{\mathbf{F}_0}{q_0}
+	.\]
+	That is, if there exists some charged object $A$ that exerts an electric force on some point charge $q_0$, then the electic field $\mathbf{E}$ at that point is equal to the force divided by the point charge. Alternatively, if $q$ is a point charge,
+	\[
+		\mathbf{E}=k \frac{q}{r^2}\mathbf{\hat{r}}
+	.\]
+	Unit vector $\mathbf{\hat{r}}$ points from source point to field point.
+\end{definition}
+As a corollary of convention, positive charges will yield values for $\mathbf{E}$ that point in the same direction as $\mathbf{\hat{r}}$, whereas negative charges will point opposite.
+
+However, objects are generally not point charges. We often model them as such, but even then we may need to model them as many different point charges. However, electric fields can be superimposed on each other, so we can define the following.
+\begin{theorem}[Electic Field and Force for Many Charges]\label{thm:2}
+	Let there exist many point charges $q_1, \dots, q_n $ that exert electric fields
+	\[
+		\mathbf{E}_1, \dots, \mathbf{E}_n 
+	.\]
+	The total electric field is given as
+	\[
+		\mathbf{E}=\sum_{i=1}^{n} \mathbf{E}_i
+	,\]
+	and the total force on any independent point charge $q _0$ is given as
+	\[
+		\mathbf{F}_0=q_0 \sum_{i=1}^{n} \mathbf{E}_i
+	.\]
+\end{theorem}

@@ -1,0 +1,103 @@
+\lecture{3}{Tue 10 Sep 2024 17:00}{34 ppl left}
+
+\begin{itemize}
+	\item Discussion this week - counts
+	\item Prelab - due sunday midnight
+	\item homework - both sheet and mastering prob sheet, due friday
+	\item start doing the reading first
+\end{itemize}
+
+If a neutrally charged object is placed in an electric field, a dipole can form (charges separate within the object), generating a force.
+
+Positive charges feel force in direction of electric field, negative charges opposite.
+
+\begin{definition}[Charge Density]\label{dfn:17}
+	Charge density is just charge per unit length.
+	\[
+		\lambda \equiv \frac{q}{L}
+	.\]
+	for charge $q$ and length $L$.
+\end{definition}
+Consider a rod of length $l$ with a uniform charge  $Q$. Take some differential length $dl$. It will have charge $dq$. At some point, it gives the electric field $dE$ with direction $\mathbf{\hat{r}}$.
+In this case, we have
+\[
+	\mathbf{E}=\int k_e \frac{\mathrm{d} q}{r^2}\mathbf{\hat{r}}
+.\]
+At the center, the $y$ component of $\mathbf{E}$ is $\mathbf{0}$, and the horizontal component will be found with $dE_x = dE\cos\theta $ with $\lambda =\frac{Q}{L}$.
+
+$dE$ is the differential magnitude of $\mathbf{E}$ induced by some $dq$. And $\cos \theta =\frac{d}{r}$, where $d$ is now the length from the center of the rod
+
+Let $r$ be the length from some differential charge $dq$ to a charge, $d$ the length from the center to the charge.
+
+We get
+\[
+	dE_x = k_e \frac{dq}{x^2 + y^2}\frac{x}{\sqrt{x^2 +y^2} }
+.\]
+EXPLANATION
+\[
+	dE=\frac{dq}{r^2}
+.\]
+Ok so basically we are replacing $q$ with $\lambda L$ which makes sense and then integrating on $y$ where $y$ spans the rod. $r$ is going to represent all the vector magnitudes. Wow this is aids without calc 3.
+
+so each differential, of the rod can be treated as a point charge. it exerts ad ifferential electic field $dE_x$, since $y$ s cancel. Then this is just $dE\cos\theta $ obviously, and we know $E=k \frac{q}{r^2}$, so we just make $q$ a $dq$. Then we have
+\[
+	dE_x = k_e \frac{dq}{r^2}\cos\theta 
+.\]
+To get $\cos \theta $, we just do horizontal over hypotenuse:
+\[
+	\frac{x}{\sqrt{x^2+y^2} }
+.\]
+The hypotenuse in this case is the leg $r$ going from $dL$ (differential of rod) to our test charge. This is convenient, because then
+\[
+	r^2 = x^2+y^2
+.\]
+We then just integrate along this:
+\[
+	E_x = \int_{-\frac{L}{2}}^{\frac{L}{2}}k_e \frac{\mathrm{d} q}{x^2+y^2}\frac{x}{\sqrt{x^2+y^2} }
+.\]
+
+HALF RING
+
+Take a differential of length $dL$. Our test charge is in the middle of the half ring. The distance from the center point to the differential of length is $\sqrt{x^2+y^2} $. The $x$ directions obv cancel (ring is top half), so we just do $y$. The $y$ component is $dE_y=dE\sin \theta $. Then $dE=k_e \frac{dq}{x^2+y^2}$. It's the same god damn integral except in $y$, but we're integrating along a circle. We can use the arclength at some $\theta $, which is the angle times the
+
+Okay the distance to the length differential is $a$ now and our angle is $\theta $. We get
+\[
+	dE_y = -dE\sin \theta 
+.\]
+The minus is because pointing down in this example yknow fuck vectors right??? Take $\theta \in[0,\pi ]$. We integrate along $\theta $. We still know
+\[
+	dE_y = -dE\sin \theta =-k_e \frac{dq}{r^2}\sin \theta 
+.\]
+Take $s=a\theta $ (arclength). Then $dq=ad\theta $. The charge of our differential $dq$ is just $\lambda ad\theta $. $a$ is just the radius. Substitute:
+\[
+	dE_y = -k \frac{\lambda a \mathrm{d} \theta }{a^2}\sin \theta 
+.\]
+Note that $\lambda =\frac{Q}{\pi a}$. We then just have
+\[
+	E_y = \int -k_e \frac{\lambda a\mathrm{d} \theta }{a^2}
+.\]
+
+RING OF CHARGE, SOME DISTANCE AWAY ($x$)
+
+Integrate along the angle around the ring $\phi $. The charge of each length differential will just be like
+\[
+	dE_x = k_e \frac{dq}{r^2}\cos \theta =k_e\frac{\lambda a\mathrm{d}\phi  }{x^2 + a^2} \frac{x}{\sqrt{x^2+a^2}}
+.\]
+Since $\lambda =\frac{Q}{2a\pi }$, we finally have
+\[
+	E_x = \int_{0}^{2\pi } k_e\left( \frac{Q}{2a\pi } \right) \frac{a}{x^2+a^2}\frac{x}{\sqrt{x^2+a^2} } \,\mathrm{d} \phi 
+.\]
+We can always give the representation with $\lambda $ as well.
+
+Doing this integral for fun. Notice that fucking everything is constant so we have
+\[
+	E_x = 2\pi k_e\left( \frac{Q}{2\pi } \right) \frac{1}{x^2+a^2}\frac{x}{\sqrt{x^2+a^2} }=k_e \frac{Qx}{\left( x^2+a^2 \right) ^\frac{3}{2}}
+.\]
+
+WHAT ABOUT A DISK, SAME PROBLEM BUT NOT A RING NOW?
+
+Well, we just found the charge for a ring, so lets integrate along 0 to the radius of each ring charge. Except now since we are on a differential length, our $Q$ becomes a $dq$, and we need to find this again. The \textbf{surface} \textbf{charge} \textbf{density} is called $\sigma $, so  $dq=\sigma dA=\sigma (2\pi ada)$. So we write
+\[
+	E_x = \int_{0}^{R} \frac{x\sigma \left( 2\pi r \right) }{(x^2 + r^2)^{3/2}} \,\mathrm{d} r
+.\]
+Replaced $a$ with $r$. Gay naming scheme.
