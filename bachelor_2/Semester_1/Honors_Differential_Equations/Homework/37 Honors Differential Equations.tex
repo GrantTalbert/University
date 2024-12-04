@@ -1,0 +1,74 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Honors Differential Equations}
+\date{12/06/24}
+\begin{document}
+\makeproblem
+\section*{Supplimental 1}
+I find it much neater to write things with inner products and norms, rather than messy integrals. Especially when the integrals are in a fraction, because then they get squished down and look really ugly and I kinda hate it.
+
+Note that $\lambda_n=0$ if and only if $n=0$. Also note that since $P_n\in L^2[-1,1]$ for all $n\in\mathbb{N}$, where we have defined $L^2$ over $\mathbb{R}$, we have the inner product
+\[
+	\left\langle P_n,P_m \right\rangle =\int_{-1}^{1} P_n(t)P_m(t) \,\mathrm{d} t
+.\]
+Let $n\neq m$ be natural numbers. By logic that has been explored previously, for the case of $\lambda_n,\lambda _m \neq 0$ it suffices to show $\lambda_n \left\langle P_n,P_m \right\rangle =\lambda_m\left\langle P_n,P_m \right\rangle $. The case of $\lambda_n=0$ must be explored somewhat since we multiply through by $\lambda_n $ at the beginning of the proof. Since $\lambda_n\neq \lambda_m$, at most one of these $\lambda $ values can be $0$, so without loss of generality let $\lambda_n\neq 0$. If we show that $\lambda_n\left\langle P_n,P_m \right\rangle =\lambda_m\left\langle P_n,P_m \right\rangle $ for the case of $\lambda_m=0$, it follows that $\lambda_n\left\langle P_n,P_m \right\rangle =0$, and thus $\left\langle P_n,P_m \right\rangle =0$. Therefore, it suffices to show this is true for the general case.
+
+Note that
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t}  \right) =\left( 1-t^2 \right) \frac{\mathrm{d}^2P_n}{\mathrm{d}t^2} -2t \frac{\mathrm{d}P_n}{\mathrm{d}t} 
+.\]
+It follows that
+\[
+	\lambda_nP_n(t)=-\frac{\mathrm{d}}{\mathrm{d}t} \left( \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t}  \right)
+.\]
+Now consider the following.
+\begin{align*}
+	\lambda_n \left\langle P_n,P_m \right\rangle &=\int_{-1}^{1} P_n(t)P_m(t) \,\mathrm{d} t\\
+						     &=\int_{-1}^{1} \lambda_nP_n(t)P_m(t) \,\mathrm{d} t
+.\end{align*}
+We can plug in our previous equation to obtain
+\[
+	\lambda_n \left\langle P_n,P_m \right\rangle =-\int_{-1}^{1} \frac{\mathrm{d}}{\mathrm{d}t} \left( \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t}  \right) P_m(t) \,\mathrm{d} t
+.\]
+By the method of integration by parts, we have
+\begin{align*}
+	-\int_{-1}^{1} \frac{\mathrm{d}}{\mathrm{d}t} \left( \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t}  \right) P_m(t) \,\mathrm{d} t&=-\left( \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t} P_m(t)\bigg\vert_{-1}^1-\int_{-1}^{1} \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t} \frac{\mathrm{d}P_m}{\mathrm{d}t}  \,\mathrm{d} t \right) \\																		  &=-\left( (1-1)\left( \frac{\mathrm{d}P_n}{\mathrm{d}t} P_m \right)\bigg\vert_{-1}^1 \right) +\int_{-1}^{1} \left( 1-t^2 \right) \frac{\mathrm{d}P_n}{\mathrm{d}t} \frac{\mathrm{d}P_m}{\mathrm{d}t}  \,\mathrm{d} t\\
+																		  &=\int_{-1}^{1} \left( 1-t^2 \right) \frac{\mathrm{d}P_m}{\mathrm{d}t} \frac{\mathrm{d}P_n}{\mathrm{d}t}  \,\mathrm{d} t
+.\end{align*}
+Using our previous equation, it follows that
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( \left( 1-t^2 \right) \frac{\mathrm{d}P_m}{\mathrm{d}t}  \right) =-\lambda_mP_m(t)
+.\]
+By the method of integration by parts, it follows that
+\begin{align*}
+	\int_{-1}^{1} \left( 1-t^2 \right) \frac{\mathrm{d}P_m}{\mathrm{d}t} \frac{\mathrm{d}P_n}{\mathrm{d}t}  \,\mathrm{d} t&=\left( \left( 1-t^2 \right) \frac{\mathrm{d}P_m}{\mathrm{d}t} P_n(t) \right)\bigg\vert_{-1}^1-\int_{-1}^{1} \frac{\mathrm{d}}{\mathrm{d}t} \left(\left( 1-t^2 \right) \frac{\mathrm{d}P_m}{\mathrm{d}t} \right) \frac{\mathrm{d}P_n}{\mathrm{d}t}  \,\mathrm{d} t\\
+															      &=(1-1)\left( \frac{\mathrm{d}P_m}{\mathrm{d}t} P_n(t) \right) \bigg\vert_{-1}^1 +\int_{-1}^{1} \lambda_mP_m(t)P_n(t) \,\mathrm{d} t\\
+															      &=\lambda_m\int_{-1}^{1} P_m(t)P_n(t) \,\mathrm{d} t\\
+															      &=\lambda_m \left\langle P_m,P_n \right\rangle \\
+															      &=\lambda_m\left\langle P_n,P_m \right\rangle 
+.\end{align*}
+Therefore, the Legendre polynomials are mutually orthogonal.
+\section*{Supplimental 2}
+Suppose that
+\[
+	f(t)=\sum_{n=0}^{\infty} c_nP_n
+\]
+for some $\left\{ c_n \right\}_{n=0}^\infty \subset \mathbb{R}$, and that this series converges for some $t\in\mathbb{R}$. Fix some arbitrary $k\in\mathbb{N}$. Given that the Legendre polynomials are mutually orthogonal, it follows that
+\begin{align*}
+	\left\langle P_k(t),f(t) \right\rangle &=\left\langle P_k(t),\sum_{n=0}^{\infty} c_nP_n(t) \right\rangle \\
+					       &=\int_{-1}^{1} P_k(t)\sum_{n=0}^{\infty} c_nP_n(t) \,\mathrm{d} t\\
+					       &=\sum_{n=0}^{\infty} \int_{-1}^{1} P_k(t)c_nP_n(t) \,\mathrm{d} t\\
+					       &=c_k\int_{-1}^{1} \left( P_k(t) \right) ^2 \,\mathrm{d} t\\
+					       &=c_k\left\lVert P_k(t) \right\rVert_2^2
+,\end{align*}
+where $\left\lVert \cdot  \right\rVert_2$ is the standard norm on $L^2$. It follows that
+\[
+	c_k=\frac{\left\langle P_k(t),f(t) \right\rangle }{\left\lVert P_k(t) \right\rVert_2^2}
+.\]
+Therefore,
+\[
+	f(t)=\sum_{n=0}^{\infty} \frac{\left\langle P_n(t),f(t) \right\rangle }{\left\lVert P_k(t) \right\rVert_2^2}P_n(t)
+.\]
+\section*{Supplimental 3}
+\end{document}

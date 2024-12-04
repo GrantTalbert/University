@@ -17,17 +17,46 @@
 \contributor{Max W.}
 \contributor{Nathan}
 \contributor{Edison}
+\usepackage{pgfplots}
+\pgfplotsset{width=17cm,compat=1.18}
+\definecolor{fgreen}{RGB}{0, 150, 0}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+\lstdefinestyle{h}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{black},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=h}
 \begin{document}
 \makereport
 \begin{abstract}
-	This paper explores the Tile Game as presented by Dr. Borkovitz in \href{https://learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com/5deff46c33361/63408239?X-Blackboard-S3-Bucket=learn-us-east-1-prod-fleet01-xythos&X-Blackboard-Expiration=1727233200000&X-Blackboard-Signature=%2BLd6DplgbKYaPIhXzAfJOapwJ31XQ%2BUqah9dEZcpI7Q%3D&X-Blackboard-Client-Id=100902&X-Blackboard-S3-Region=us-east-1&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27Excursion%25201%2520--%2520Two-Color%2520Tile%2520Game.pdf&response-content-type=application%2Fpdf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQDSXqYP%2FpIapJ1okMpHrDOF96Mj6KJ2HiOAPRhCUYdBrgIhAMeJyrkIpvOi7XZGKZEG2tI4w60vXL49gwWXdVgsehGhKr0FCN%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBBoMNjM1NTY3OTI0MTgzIgw88BMjLNBz0f6mSKIqkQVKztDxRyCG%2FNRn%2B9jZII4iSCKCEUOJtIxenwpdRh3sGilxQNwIyBBic%2Fbd7ZEEyqA0%2BDTDm3ViBOJs4vEMn2GzVUOFgOXrLRELRpgqP42QNRDNtfES3iFsS1fAKgBPHZKzGPupRwkK76nZdQUVc9Q4tB4co3xoh%2Fs2hsFrj%2FCilTkzjfpYeo5n626p3O51hT1yKT6yYr%2F0NPZbvQL%2BflsAUNTvFF2722mUneEfNeRdhTwF7v7snoZSudcA2Wuq77nGe5DFc4yrZBNIvK1j3RcnX9amVSYkQ7g06cXaTdaCT1K0PeC0tEnyjkvZV%2FB%2BfwKHT5Akfqbjw274z9EuueSXd7xGdBTATcBO%2BssH1C8AyErQXmLD5vZM6YJWeHFQn4NaKvirAmVY7cmfU2yviO9es8WGasmluK7A1a36eJzNBI1AbSwQSgEYcEI7FTbQ2Bq1gEA6sE37Wz%2FL0Ze7rbhtx6GwQB%2FkEEWNI2852T2jhj5k6LBviJBuPTQVBHRPqIVpJ7aXzT%2BX0ayg1MiTtyH7UKOdE6L2jEUYFAbQmpYyUh9liq9XP5%2FQ9lNgGlQJHrX5xwgUec2MYYjZUwn2edAVeT6EOiIHLAMyo3jNSpm3BfdjBe7WO1wqPEz0zIbQu3mmVBsQ4cclxL1bdw9QNXgd3YZXg2bF15Mbf8rtDRCfguj9qojgUeNqlb%2BgVYPGnFCa%2BvGxqsCaw853bIXX36d7PRS0VC14vCea6zx9aTxjzXhu6x%2B9KRxmQ6cyvXlVv5XekKsFf4M2oIX2B0kB79KiQR3%2FsIdHO%2FJ1%2Bste3qR1r2B8iAsMczaHQ2FJ8x9ZdZugt9Zk9OWVMNrfq%2FkzkUGCqb6sKY7XlTJf208tNlI4RLMwxdzMtwY6sAHYOMGNr6%2FHAqQdHO9Zcm4unJDaC4yKtZoWGHY%2F8Opkgxh%2F%2F9aiSyFZHcQYDooSqWtNq0CCsSSgx%2FKmzy2zeiydL7wyqRWoOl4SZDWwqpPTEbg3bDFKOvivvcf6ELUUovHjvXN3XGR1dlEJnFwQXn2o3kqWfCKA4jy0FaxLTxib81HUj%2FCBYl%2BkXgOCYmCtiEo2HLSTCmmumMl5xpi56wg2Vxutn%2Bl07YXvCbivPCwb%2BQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240924T210000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=ASIAZH6WM4PLS3QCJACU%2F20240924%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=bf03a5beef9b10e472db1774d0a75240f2351b48ac548e07a0095804393cb1bd}{Excursion 1}. 
+	This paper explores the Tile Game as presented by Dr. Borkovitz in \href{https://learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com/5deff46c33361/63408239?X-Blackboard-S3-Bucket=learn-us-east-1-prod-fleet01-xythos&X-Blackboard-Expiration=1727233200000&X-Blackboard-Signature=%2BLd6DplgbKYaPIhXzAfJOapwJ31XQ%2BUqah9dEZcpI7Q%3D&X-Blackboard-Client-Id=100902&X-Blackboard-S3-Region=us-east-1&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27Excursion%25201%2520--%2520Two-Color%2520Tile%2520Game.pdf&response-content-type=application%2Fpdf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQDSXqYP%2FpIapJ1okMpHrDOF96Mj6KJ2HiOAPRhCUYdBrgIhAMeJyrkIpvOi7XZGKZEG2tI4w60vXL49gwWXdVgsehGhKr0FCN%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBBoMNjM1NTY3OTI0MTgzIgw88BMjLNBz0f6mSKIqkQVKztDxRyCG%2FNRn%2B9jZII4iSCKCEUOJtIxenwpdRh3sGilxQNwIyBBic%2Fbd7ZEEyqA0%2BDTDm3ViBOJs4vEMn2GzVUOFgOXrLRELRpgqP42QNRDNtfES3iFsS1fAKgBPHZKzGPupRwkK76nZdQUVc9Q4tB4co3xoh%2Fs2hsFrj%2FCilTkzjfpYeo5n626p3O51hT1yKT6yYr%2F0NPZbvQL%2BflsAUNTvFF2722mUneEfNeRdhTwF7v7snoZSudcA2Wuq77nGe5DFc4yrZBNIvK1j3RcnX9amVSYkQ7g06cXaTdaCT1K0PeC0tEnyjkvZV%2FB%2BfwKHT5Akfqbjw274z9EuueSXd7xGdBTATcBO%2BssH1C8AyErQXmLD5vZM6YJWeHFQn4NaKvirAmVY7cmfU2yviO9es8WGasmluK7A1a36eJzNBI1AbSwQSgEYcEI7FTbQ2Bq1gEA6sE37Wz%2FL0Ze7rbhtx6GwQB%2FkEEWNI2852T2jhj5k6LBviJBuPTQVBHRPqIVpJ7aXzT%2BX0ayg1MiTtyH7UKOdE6L2jEUYFAbQmpYyUh9liq9XP5%2FQ9lNgGlQJHrX5xwgUec2MYYjZUwn2edAVeT6EOiIHLAMyo3jNSpm3BfdjBe7WO1wqPEz0zIbQu3mmVBsQ4cclxL1bdw9QNXgd3YZXg2bF15Mbf8rtDRCfguj9qojgUeNqlb%2BgVYPGnFCa%2BvGxqsCaw853bIXX36d7PRS0VC14vCea6zx9aTxjzXhu6x%2B9KRxmQ6cyvXlVv5XekKsFf4M2oIX2B0kB79KiQR3%2FsIdHO%2FJ1%2Bste3qR1r2B8iAsMczaHQ2FJ8x9ZdZugt9Zk9OWVMNrfq%2FkzkUGCqb6sKY7XlTJf208tNlI4RLMwxdzMtwY6sAHYOMGNr6%2FHAqQdHO9Zcm4unJDaC4yKtZoWGHY%2F8Opkgxh%2F%2F9aiSyFZHcQYDooSqWtNq0CCsSSgx%2FKmzy2zeiydL7wyqRWoOl4SZDWwqpPTEbg3bDFKOvivvcf6ELUUovHjvXN3XGR1dlEJnFwQXn2o3kqWfCKA4jy0FaxLTxib81HUj%2FCBYl%2BkXgOCYmCtiEo2HLSTCmmumMl5xpi56wg2Vxutn%2Bl07YXvCbivPCwb%2BQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240924T210000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=ASIAZH6WM4PLS3QCJACU%2F20240924%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=bf03a5beef9b10e472db1774d0a75240f2351b48ac548e07a0095804393cb1bd}{Excursion 1}. The game is able to be solved by constructing a sequence of losing positions with attached instructions for how to win for each losing tile. Although predicting the locations of losing tiles is very simple with a python script, further analysis is required to identify a purely analytical method of accomplishing this task.
 
-		I made very heavy use of theorem and proof environments in some sections, and it negatively impacted readability. As such, I have used nonstandard layouts for my theorem and proof environments to increase readability, while still maintaining some level of professionalism.
+	By analyzing losing tiles generated by a python script, we were able to identify a pattern in the placement of tiles that could fully determine their placement if applied in reverse. We verified this fact with rigorous proof.
+
+	The following is a note for the grader. You will find the ``accurate description of a strategy'' partially done in \hyperref[sec:1]{section 1}, but mostly done in \hyperref[sec:5]{section 5}. The reflection is part of \hyperref[sec:6]{section 6}, although the motivation in \hyperref[sec:1]{section 1} can be considered to be ``telling the story'', since I motivated my proofs using the same logic that led me to them in the first place. The justification is done mathematically in \hyperref[sec:2]{section 2}. It ties into the rules of the game by making definitions in \hyperref[sec:21]{section 2.1} designed around the rules of the game, and further explanation as to what the theorems and definitions imply about the game can be found in \hyperref[sec:23]{section 2.3}. \hyperref[sec:3]{Section 3} includes some numerical analysis I did with a python script that motivated a few conjectures about the problem which present a \emph{much prettier} solution, but I haven't had sufficient time to pursue and prove most of these conjectures so far, since they seem extremely difficult. Doing this will be the purpose of \hyperref[sec:4]{section 4}, which is currently a total incomplete mess with about 3 different notations and sets of definitions that is ONLY here so I can reference it in the reflection. I may very well break it off into its own project as MORE work or something I don't really know yet. Since this is just a project for a class, I opted to modify the theorem and proof environments slightly to improve readability in some areas.
 \end{abstract}
 \begin{center}
 	\textbf{\small Acknowledgements}
 \end{center}
-{\small Academic Integrity -- Please type your name to acknowledge that if
+{\small I worked only with my groupmates on this project, all of whom were named on the cover page.
+
+Academic Integrity -- Please type your name to acknowledge that if
 you collaborated on this problem, then it was only with classmates
 from either section of CAS MA 293 (except to have a partner for the
 game), that you only used allowable resources (notes from class, no
@@ -35,226 +64,422 @@ Internet searches, AI, etc.), and that you wrote this paper by
 yourself: Grant Talbert}
 \tableofcontents
 \newpage
-\section{Notes}
-For a pair $(a,b)$ with $a$ tiles color 1 and $b$ tiles color 2, $(2,1)$ is a losing positoin. It follows that $(n,n+1)$ is a losing position by
-\[
-	\phi : \left( n,n+1 \right)  \mapsto \left( n,n+1 \right) -\left( n-1,n-1 \right) =\left( 1,2 \right) 
-.\]
 \section{Introduction}\label{sec:1}
+The Tile Game is a two-player game that involves two sets of differently colored plastic tiles. The rules are as follows:
+\begin{itemize}
+	\item Players alternate turns.
+	\item On a given turn, a player can take as many tiles as they want \emph{so long as they only take from one pile of tiles}. Alternatively, a player can take from both piles of tiles, \emph{so long as they take the same amount from both}.
+	\item The last player to take a tile wins.
+\end{itemize}
+For example, consider the following game, where we start with 8 tiles of color 1, and 13 tiles of color 2.
+\begin{enumerate}
+	\item Player 1 takes 3 tiles of color 2. We now have 8 and 10.
+	\item Player 2 takes 2 tiles of color 1. We now have 6 and 10.
+	\item Player 1 takes 3 tiles of color 2. We now have 6 and 7.
+	\item Player 2 takes 5 tiles of both colors. We now have 1 and 2.
+	\item Player 1 takes 1 tile of color 2. We now have 1 and 1.
+	\item Player 2 takes 1 tile of both colors. We now have 0 and 0.
+\end{enumerate}
+Since Player 2 was the last to take a tile, and there are no more tiles to take, they win the game.
+
+The natural question to ask at this point is whether there exists a ``solution'' to the game; that is, a systematic method by which one of the players can guarentee victory for any starting position, regardless of the moves of the opponent.
 \begin{mdframed}[linewidth=1pt]
 	\textbf{Problem statement.} Given a board position with an arbitrary number of tiles for each color, what is the strategy to consistently win the game, if one exists?
 \end{mdframed}
-\section{Mathematical Formalism}\label{sec:2}
-\begin{definition}[Board Position]\label{dfn:1}
-	A \emph{board position} is a pair $(a,b)\in\mathbb{N}^2$, wherein $a$ is the number of tiles of color 1, and $b$ is the number of tiles of color 2. We will often also represent a board position as a column vector
-	\[
-		\begin{bmatrix}a\\ b\end{bmatrix}\in\mathbb{N}^2
-	.\]
-	These representations are equivalent up to isomorphism, and we will use them interchangeably.
-\end{definition}
-\begin{definition}[Moves]\label{dfn:2}
-	This definition can totally be cleaned up.
 
-	Let $\phi : \mathbb{N}^2 \to \mathbb{N}^2$ be the map\footnote{Functions are defined using modular arithmetic to keep the groups they generate finite, as it adds more structure that can be easily explored. This does not violate the rules of the game.}
-	\[
-		\phi (a,b)\equiv \begin{bmatrix}a-1\mod{a}\\b\end{bmatrix}
-	.\]
-	Let $\psi : \mathbb{N}^2 \to \mathbb{N}^2$ be the map
-	\[
-		\psi (a,b)\equiv \begin{bmatrix} a \\ b-1\mod{b} \end{bmatrix} 
-	.\]
-	Let $\xi =(a,b)$ be a board position. Then the set of current valid moves, called \emph{the set of moves on} $\xi $, denoted as $\mathscr{M} (\xi )$, is defined as
-	\[
-		\mathscr{M} (\xi )\coloneqq \left< \phi  \right>\cup \left<\psi  \right>\cup \left<\phi \psi   \right>
-	.\]
-	We may write $\phi _\xi $ and $\psi _\xi $ to denote the moves $\phi $ and $\psi $ on a board position $\xi $, but the subscript will be omitted when possible.
+Such a solution does in fact exist, and we will briefly motivate some ideas behind our solution before working through the mathematics rigorously. We will represent the number of tiles as an ordered pair $(a,b)$, where $a$ is the number of tiles of color 1, and $b$ is the number of tiles of color 2. Notice that for any number of tiles of the form $(a,0)$, $(0,b)$, or $(a,a)$, the player who goes first can win. Since we can take as many tiles as we want from a single pile, and there are 0 tiles in the other pile, we can win the first two scenarios by taking the last pile. Since the third tile has the same number in both piles, and we can take an equivalent amount from both piles, we can simply take all the tiles from both piles. Since we can win if it's our turn on any tile of this form, we call these \emph{winning positions}.
+
+Now, consider the position $(2,1)$. We only have four possible moves:
+\begin{itemize}
+	\item Take one tile from color 1, leaving it as $(1,1)$.
+	\item Take two tiles from color 1, leaving it as $(0,1)$.
+	\item Take one tile from color 2, leaving it as $(2,0)$.
+	\item Take one tile from both colors, leaving it as $(1,0)$.
+\end{itemize}
+Notice that every possible move yields a winning position, however $(2,1)$ is not itself a winning position. This means if it's your move on $(2,1)$, then you have no choice but to make it your opponent's turn on a winning position, meaning you will always lose if the game is played correctly. We call $(2,1)$ a \emph{losing position}. By the same logic, $(1,2)$ is also a losing position.
+
+These losing tiles give rise to a new set of winning positions. Since the player who moves on $(2,1)$ or $(1,2)$ will lose, if we can make it their turn on one of these positions, we will win. By the same logic as before, we know that every position for which this is possible will be of the form $(2+n,1)$, $(2,1+n)$, or $(2+n,1+n)$, where $n\geq 1$. These are all also winning positions.
+
+We can now investigate whether there exist any more losing positions, which would follow the same logic as previously; all moves map to a winning position. By trial and error, we find that $(3,5)$ and $(5,3)$ are losing positions, which generate a set of winning positions similarly to $(1,2)$ and $(2,1)$. We then find $(4,7)$ and $(7,4 )$ are losing positions, and so on.
+\input{./Excursion_1_graph.tex}
+\begin{center}
+	Figure 1: Winning and Losing Positions up to $\boldsymbol{\xi}_8$\label{fig:1}
+\end{center}
+
+\hyperref[fig:1]{Figure 1} is a great depiction of the first few losing positions, and the sets of winning positions they generate. Each red dot is a losing position. Since a winning position is simply a position that can map to a losing position, we can represent each set of winning positions as a horizontal, vertical, and diagonal line generated by the losing position, since we can only move horizontally (take tiles of color 1), veritcally (take tiles of color 2), or diagonally (take same amount of both tiles).
+
+This understanding constitutes our approach to the problem. We will show that we can ``form a chain'' of losing positions by showing the sets of winning and losing positions partition $\mathbb{N}^2$, and we will spend some time motivating and explaining what our theorems show about the game. Using our understanding, we will perform further analysis on various number patterns that arise from the solution to the game. We will conclude by talking about my feelings because thats what the template said to do and maybe it will be funny.
+
+
+
+
+
+
+
+
+
+\section{Mathematical Formalism}\label{sec:2}
+\subsection{Preliminaries}\label{sec:21}
+We begin with a series of definitions. We start by defining a board position. Since there are two different quantities to represent, both integers, and both greater than or equal to 0, we give \hyperref[dfn:1]{definition 1}.
+\begin{definition}[Board Position]\label{dfn:1}
+	A \emph{board position} is any pair $(a,b)\in\mathbb{N}^2$.\footnote{To avoid ambiguous notation and for convenience, we take $0\in\mathbb{N}$ for this paper.} We will often represent a board position as $\mathbf{n}=(a,b)$.
 \end{definition}
-\begin{proposition}\label{prp:1}
-	Let $\xi =(a,b)$ be a board position. Let $\phi ,\psi :\mathbb{N}^2\to \mathbb{N}^2$ be as defined in \hyperref[dfn:2]{definition 2}. Then
+
+It's often useful to have a clean way of notating the number of tiles on a board for a given board position. This motivates our second definition.
+\begin{definition}[Number of Tiles]\label{dfn:2}
+	Let $\mathbf{n}=(a,b)$ be a board position. Let $\left| \cdot  \right| : \mathbb{N}^2 \to \mathbb{N}$ be the map
 	\[
-		\phi ^k(a,b)\equiv \begin{bmatrix} a-k\mod{a} \\ b \end{bmatrix} 
+		\left| \mathbf{n} \right| =a+b
+	.\]
+	We say $\left| \mathbf{n} \right| $ is the \emph{number of tiles} for that given board position.
+\end{definition}
+
+Next, we can formalize our definition of a move as some function on a board position. We present \hyperref[dfn:2]{definition 3}.
+\begin{definition}[Moves]\label{dfn:3}
+	Let $\phi ,\psi : \mathbb{N}^2 \to \mathbb{N}^2$ be the maps
+	\[
+		\phi (a,b)=(a-1,b)
 	\]
 	and
 	\[
-		\psi ^k(a,b)\equiv \begin{bmatrix} a \\ b-k\mod{b} \end{bmatrix} 
-	\]
-	for any $k\in\mathbb{Z}$.
+		\psi (a,b)=(a,b-1)
+	.\]
+\end{definition}
+\begin{proposition}
+	Any move can be represented as some combination of the functions $\phi $ and $\psi $.
 \end{proposition}
 \begin{proof}
-	We use the method of proof by induction. We will prove this for $\phi $, since the proof for $\psi $ is identical.
+	Let $\mathbf{n}=(a,b)$ be a board position. According to te rules of the game, the valid moves on $\mathbf{n}$ are
+	\begin{enumerate}
+		\item Taking $0<a'\leq a$ tiles of color 1;
+		\item Taking $0<b'\leq b$ tiles of color 2;
+		\item Taking $0<c<a,b$ tiles of both color 1 and 2.
+	\end{enumerate}
+	We will prove that (1) can be represented as $\phi ^{a'}(\mathbf{n})$, (2) can be represented as $\psi ^{b'}(\mathbf{n})$, and (3) can be represented as $\left( \phi ^c\psi ^c \right) (\mathbf{n})$.
 
-	First, let $k=1$. It follows that $\phi ^k(a,b)\equiv \phi ^1(a,b)\equiv (a-1\mod{a},b)\equiv (a-k\mod{a},b)$ by definition.
+	(1) We use the method of proof by induction. Denote the number of tiles to be taken as $a'$, and presume $a'\leq a $ for each $a'$. We wish to show $\phi ^{a'}(\mathbf{n})=\left( a-a',b \right) $. Start by letting $a'=1$. We have
+	\[
+		\phi ^{a'}(a,b)=\phi (a,b)=(a-1,b)=\left( a-a',b \right) 
+	.\]
+	Now suppose the claim holds for an arbitrary $a'$. We have
+	\[
+		\phi ^{a'+1}(a,b)=\phi \left( \phi ^{a'}(a,b) \right) =\phi \left(a-a',b\right)=\left( a-a'-1,b \right) =\left( a-(a'+1),b \right) 
+	.\]
+	By induction, we are done.
 
-	Now, let $k$ be an arbitrary natural number for which $\phi ^k(a,b)\equiv (a-k\mod{a},b)$. It follows that
-	\begin{align*}
-		\phi ^{k+1}(a,b)&\equiv \phi \left( \phi ^k \begin{bmatrix} a \\ b \end{bmatrix} \right)\\
-				&\equiv \phi \begin{bmatrix} a-k\mod{a} \\ b \end{bmatrix} \\
-				&\equiv \begin{bmatrix} a-k-1\mod{a} \\ b \end{bmatrix} \\
-				&\equiv \begin{bmatrix} a-(k+1)\mod{a} \\ b \end{bmatrix} 
-	.\end{align*}
+	(2) The proof is equivalent logic to (1), but for $\psi $.
+
+	(3) Using (1) and (2), we show (3) via induction. Let $c$ be the number of tiles we wish to take, and presume $c<a,b$ for each $\mathbf{n}$. We wish to show $\phi ^c\psi ^c(a,b)=(a-c,b-c)$. Start by letting $c=1$. We have
+	\[
+		\left( \phi ^c,\psi ^c \right) (a,b)=\phi (\psi (a,b))=\phi (a,b-1)=(a-1,b-1)=(a-c,b-c)
+	.\]
+	Now suppose the claim holds for an arbitrary $c$. We have
+	\[
+		\left( \phi ^{c+1}\psi ^{c+1} \right) (a,b)=\phi ^{c+1}\left( \psi ^{c+1}(a,b) \right) =\phi ^{c+1}(a,b-(c+1))=(a-(c+1),b-(c+1))
+	.\]
 	By the method of induction, we are done.
 \end{proof}
-\begin{lemma}\label{lma:1}
-	Let $\phi ,\psi $ be as defined in \hyperref[dfn:2]{definition 2}. Then $\phi ^k\psi ^\ell =\psi ^\ell \phi ^k$ for any $k,\ell \in\mathbb{Z}$.
-\end{lemma}
-\begin{proof}
-	Let $(a,b)$ be a board position. By \hyperref[prp:1]{proposition 1}, we have
+
+We now have a convenient method of representing both board positions, and moves on those board positions. We will make two more definitions; the first one is mainly for convenience of notation.
+\begin{definition}[Set of Moves]\label{dfn:4}
+	Let $\mathbf{n}=(a,b)$ be a board position. Define $\mathscr{M} (\mathbf{n})$ as the set
 	\[
-		\phi ^k(a,b)\equiv \begin{bmatrix} a-k\mod{a} \\ b \end{bmatrix} ,\qquad \psi ^\ell \equiv \begin{bmatrix} a \\ b-\ell \mod{b} \end{bmatrix} 
+		\mathscr{M} (\mathbf{n})\coloneqq \left\{ \phi ^{k} \mid 0<k\leq a \right\} \cup \left\{ \psi ^k \mid 0<k\leq b \right\} \cup \left\{ \phi ^{k}\psi ^{k} \mid 0<k\leq a\land k\leq b \right\}
 	.\]
-	It follows that
-	\begin{align*}
-		\left( \phi ^k\psi ^\ell  \right) (a,b)&\equiv \phi ^k\left( \psi ^\ell (a,b) \right)\\
-						       &\equiv \phi ^k \begin{bmatrix} a \\ b-\ell \mod{b} \end{bmatrix}  \\
-						       &\equiv \begin{bmatrix} a-k\mod{a} \\ b-\ell \mod{b} \end{bmatrix} \\
-						       &\equiv \psi ^\ell \begin{bmatrix} a-k\mod{a} \\ b \end{bmatrix} \\
-						&\equiv \psi ^\ell \left( \phi ^k(a,b) \right) \\
-						&\equiv \left( \psi ^\ell \phi ^k \right) (a,b)
-	.\end{align*}
-	Therefore, $\phi ^k\psi ^\ell =\psi ^\ell \phi ^k$.
-\end{proof}
-\begin{lemma}\label{lma:2}
-	Let $\xi =(a,b)$ be a board position for which $\phi $ and $\psi $ are defined. Then $\phi ^n=\phi ^m$ if and only if $n\equiv m\mod{a}$. Likewise, $\psi ^n=\psi ^m$ if and only if $n\equiv m\mod{b}$. Additionally, $\left| \left<\phi  \right> \right| =a+1$ and $\left| \left<\psi  \right> \right| =b+1$.
-\end{lemma}
-\begin{proof}
-	For any cyclic group $\left<\phi  \right>$, it follows that $\phi ^\alpha =\phi ^\beta $ if and only if $\alpha \equiv \beta \mod{\left| \left<\phi  \right> \right|} $ \cite{gallian, judson}. It remains only to be shown that $\left| \left<\phi  \right> \right| =a+1$ and $\left| \left<\psi  \right> \right| =b+1$.
-\end{proof}
-\begin{lemma}\label{lma:3}
-	Let $\xi =(a,b)$ be a board position for which $\phi $ and $\psi $ are defined. Then
+	We say $\mathscr{M} (\mathbf{n})$ is the \emph{set of all possible moves} on the board position $\mathbf{n}$.
+\end{definition}
+
+Our last definition concerns winning and losing board positions. It's important to note here that although we are describing these positions as ``winning'' and ``losing'', \emph{we have yet to show their significance}. We will prove multiple claims concerning their importance after. It's most convenient to define a \emph{set} of winning positions and a \emph{set} of losing positions, so we will define those. The motivation behind these definitions may not be clear, so we suggest reading \hyperref[sec:23]{section 2.3} for a clear explanation of how these definitions tie into the rules of the game.
+\begin{definition}[Winning and Losing Positions]\label{dfn:5}
+	Define $\Xi $ as the set
 	\[
-		\left<\phi  \right>\cap \left<\psi  \right> =\left\{ \mathbbm{1}_{\mathbb{N}^2} \right\} 
+		\Xi \coloneqq \left\{ \mathbf{n} \in\mathbb{N}^2 \mid \forall \sigma \in \mathscr{M} (\mathbf{n} ):(\sigma (\mathbf{n} )\in W) \right\} 
 	.\]
-\end{lemma}
-\begin{proof}
-	hi
-\end{proof}
+	We say that $\Xi $ is the set of \emph{losing positions}. We will often denote an element of the set as $\boldsymbol{\xi} $, and we call it a \emph{losing position}.
+
+	Define $W$ as the set
+	\[
+		W\coloneqq \left\{ \mathbf{n}\in\mathbb{N}^2 \mid \exists \sigma \in \mathscr{M} (\mathbf{n}):(\sigma (\mathbf{n})\in \Xi ) \right\} 
+	.\]
+	We say that $W$ is the set of \emph{winning positions}. We call each of its elements a \emph{winning position}.
+\end{definition}
+
+Oddly, both sets are reliant on the contents of the other for their definitions, which makes the next task suprisingly challenging. With no other information, we must identify an element of one of these sets. Once we have one element, we can begin identifying the rest.
+\subsection{Solution}\label{sec:22}
 \begin{theorem}\label{thm:1}
-	Let $\xi =(\alpha ,\beta )$ be a board position for which $\phi $ and $\psi $ are defined. Then $\Psi  \coloneqq \left\{ \phi ^x\psi ^y \mid x,y\in\mathbb{Z}  \right\} $ is an abelian group. Furthermore, $\Psi \cong \mathbb{Z}_\alpha \times \mathbb{Z}_\beta $.
+	$\Xi $ and $W$ are disjoint; that is, $\Xi \cap W=\varnothing$. Additionally, $(0,0)\in \Xi $.
 \end{theorem}
 \begin{proof}
-	The associativity of $\Psi $ is trivial to prove, but very cumbersome, so we leave it as an exercise to the reader.
+	The truth of this fact follows from \hyperref[dfn:4]{definition 4}. For a move $\phi ^k$, $\psi ^k$, or $\phi ^k\psi ^k$, we specifically take $k$ to be strictly greater than $0$. This makes sense in context of the game, since $k=0$ would imply the identity map $\mathbbm{1}: \mathbf{n}\mapsto \mathbf{n}$ is an element of $\mathscr{M}  (\mathbf{n})$ for board position $\mathbf{n}$. This would equate to ``skipping a turn'' in the context of the game, which is explicity not allowed. This means for any $\mathbf{n}\in W$ or $\mathbf{m}\in \Xi $, there exists no such $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})=\mathbf{n}$, and there exists no such $\tau \in \mathscr{M} (\mathbf{m})$ such that $\tau (\mathbf{m})=\mathbf{m}$.
 
-	First, we must show that $\Psi $ is closed under function composition. Let $x,y,n,m\in\mathbb{Z}$. By the fact that function composition is associative, and by \hyperref[lma:1]{lemma 1},
-	\[
-		\left( \phi ^x\psi ^y \right) \left( \phi ^n\psi ^m \right) =\left( \phi ^x\phi ^n \right) \left( \psi ^y\psi ^m \right) =\phi ^{x+n}\psi ^{y+m}
-	.\]
-	Since $\mathbb{Z}$ is closed, $x+n,y+m\in\mathbb{Z}$, and $\Psi $ is closed under function composition.
-
-	The existence of an identity is trivial. $\phi ^0\psi ^0=\mathbbm{1}_{\mathbb{N}^2}\in \Psi $.
-
-	Finally, we show inverse elements exist. Let $\phi^x\psi^y\in\Psi $. Since $-x,-y\in\mathbb{Z}$, we have $\phi ^{-x}\psi ^{-y}\in\Psi $. It follows from \hyperref[lma:1]{lemma 1} that
-	\[
-		\left( \phi ^x\psi ^y \right) \left( \phi ^{-x}\psi ^{-y} \right) =\left( \phi ^x\phi ^{-x} \right) \left( \psi ^y\psi ^{-y} \right) =\phi ^{x-x}\psi ^{y-y}=\phi ^0\psi ^0=\mathbbm{1}_{\mathbb{N}^2}
-	.\]
+	Suppose there exists some board position $\mathbf{n}=(a,b)$ such that $\mathbf{n}\in W$ and $\mathbf{n}\in \Xi $. By the definition of $W$ in \hyperref[dfn:5]{definition 5}, there must exist some $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})\in \Xi $. By the definition of $\Xi $ in \hyperref[dfn:5]{definition 5}, all $\sigma \in \mathscr{M} (\mathbf{n})$ must have $\sigma (\mathbf{n})\in W$. Therefore, if $\mathbf{n}\in W$ and $\mathbf{n}\in \Xi $, then there exists a move $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})\in W$ and $\sigma (\mathbf{n})\in \Xi $.
 	
-	Therefore, $\Psi $ is a group. By \hyperref[lma:1]{lemma 1}, $\Psi $ is abelian. We conclude by showing the second part of the theorem. Consider the map
-	\begin{align*}
-		\tau &: \Psi  \to \left<\phi  \right>\times \left<\psi  \right>\\
-		&: \left(  \phi^k\psi ^\ell\right)  \mapsto \left( \phi ^k,\psi ^\ell  \right) 
-	.\end{align*}
+	Note once again that we take $k>0$ in \hyperref[dfn:4]{definition 4}. This implies that $\left| \sigma (\mathbf{n}) \right| \leq \left| \mathbf{n} \right| -1$. Now for some series of functions $\sigma _1,\ldots,\sigma _k$, where
+	\[
+		\sigma _1\in \mathscr{M} (\mathbf{n}),\sigma _2\in \mathscr{M} (\sigma _1(\mathbf{n})),\ldots,\sigma_k \in \mathscr{M} (\sigma _{k-1}(\sigma _{k-2}(\cdots \sigma _1(\mathbf{n})\cdots)))
+	,\]
+	we have
+	\[
+		\left| \left( \sigma _k \cdots\sigma _1 \right) (\mathbf{n}) \right| \leq \left| \mathbf{n} \right| -k
+	.\]
+	Define $\sigma _{k+1}$ the same way as the previous $\sigma _i$s were defined. By the previous logic,
+	\[
+		\left| \left( \sigma _{k+1}\cdots\sigma_1 \right) (\mathbf{n}) \right| =\left| \left( \sigma _k \cdots \sigma_1 \right) (\mathbf{n}) \right| -1=\left| \mathbf{n} \right| -k-1=\left| \mathbf{n} \right| -(k+1)
+	.\]
+	By induction,
+	 \[
+	 \max_{\sigma_1\in \mathscr{M} (\mathbf{n}),\sigma _2\in \mathscr{M} (\sigma _1(\mathbf{n})),\ldots,\sigma _{k }\in \mathscr{M} (\sigma _{n-1}(\sigma _{n-2}(\cdots \sigma _1(\mathbf{n})\cdots))) }\left| \left( \sigma _{k } \cdots \sigma _1 \right) (\mathbf{n}) \right| =\left| \mathbf{n} \right| -k
+	\]
+	for all $k$. For brevity, the subscripts for the $\max $ function will be omitted where possible hereafter. It follows that
+	 \[
+	 \max\left| \left( \sigma _{\left| \mathbf{n} \right| } \cdots \sigma _1 \right) (\mathbf{n}) \right| =\left| \mathbf{n} \right| -\left| \mathbf{n} \right| =0
+	.\]
+	Since we require a board position $\mathbf{n}\in \mathbb{N}^2$, $\left| \mathbf{n} \right| $ must be finite. Therefore, any board position will finitely terminate to $0$, and by \hyperref[dfn:4]{definition 4}, there will never be a case where $\sigma (\mathbf{n})\notin \mathbb{N}^2$. We take this fact to be obvious.
 
-	First, we show $\tau $ is a homomorphism. Let $\phi^a\psi ^b,\phi ^k\psi ^\ell \in\Psi $. It follows from \hyperref[lma:1]{lemma 1} that
-	\[
-		\tau \left( \phi ^a\psi ^b \right) \tau \left( \phi ^k\psi ^\ell  \right) =\left( \phi ^a,\psi ^b\right)\left( \phi ^k,\psi ^\ell  \right) =\left( \phi ^a\phi ^k,\psi ^b\psi ^\ell  \right) =\tau \left( \phi ^a\phi ^k\psi ^b\psi ^\ell  \right) =\tau \left( \left( \phi ^a\psi ^b \right) \left( \phi ^k\psi ^\ell  \right)  \right) 
-	.\]
-	Therefore, $\tau $ is a homomorphism. Now we show $\tau $ is a bijection.
+	Now back to the proof. Since the existence of some $\mathbf{n}\in \Xi $ and $\mathbf{n}\in W$ implies there exists $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})\in \Xi $ and $\sigma (\mathbf{n})\in W$, then by the same logic as induction, the existence of a single such $\mathbf{n}$ would imply the existence of a chain of positions in both sets, each differing from the last by a single move. By the same logic as above, this series must eventually terminate at $(0,0)$, implying that $(0,0)\in W$ and $(0,0)\in \Xi $. It remains to be shown this is not the case.
 
-	Let $\left( \phi ^a,\psi ^b \right) \in \left<\phi  \right>\times \left<\phi  \right>$. It follows that $\tau \left( \phi ^a\psi ^b \right) =\left( \phi^a,\psi ^b \right) $. Therefore, $ \tau $ is surjective. Now let $\left( \phi ^k,\psi  ^\ell  \right) \in\Psi $. Suppose that $\tau \left( \phi ^a,\psi ^b \right) =\tau \left( \phi ^k,\psi ^\ell  \right) $. It follows that
+	Clearly, $(0,0)\in \Xi $. By \hyperref[dfn:5]{definition 5}, any $\mathbf{n}\in\Xi $ is a position such that \emph{for all} $\sigma \in \mathscr{M} (\mathbf{n})$, $\sigma (\mathbf{n})\in W$. By \hyperref[dfn:4]{definition 4},
 	\[
-		\phi ^a\psi ^b=\phi ^k\psi ^\ell 
+		\mathscr{M} (0,0)=\left\{ \phi ^k \mid 0<k\leq 0 \right\} \cup \left\{ \psi ^k \mid 0<k\leq 0 \right\} \cup \left\{ \phi ^k\psi ^k \mid 0<k\leq 0 \right\} 
 	.\]
-	Since $\Psi $ is a group, left and right cancellation properties hold. Thus,
-	\[
-		\psi ^b=\phi ^{-a}\phi ^k\psi ^\ell=\phi ^{k-a}\psi ^{\ell }
-	.\]
-	We also have
-	\[
-		\phi ^{k-a}=\psi ^b\psi ^{-\ell }=\psi ^{b-\ell }
-	.\]
-	We thus have $\phi ^{k-a}=\psi ^{b-\ell }$. By \hyperref[lma:3]{lemma 3},  we have $\phi ^{k-a}=\psi ^{b-\ell }=\mathbbm{1}_{\mathbb{N}^2}$, and thus $k\equiv a\mod{\alpha }$ and $b\equiv \ell\mod{\beta } $. By \hyperref[lma:2]{lemma 2}, we have $\phi ^{k}=\phi ^a$ and $\psi ^\ell =\psi ^b$. Thus, $\tau $ is bijective, and thus an isomorphism.
+	Since there exists no such $k$, then $\mathscr{M} (0,0)=\varnothing$. The statement that for all $\sigma \in \mathscr{M} (0,0)$, $\sigma (0,0)\in W$ is then vacuously true. This is independent of our assumption that there exists some $\mathbf{n}\in \Xi $ and $\mathbf{n}\in W$.
 
-	Since $\left<\phi  \right>$ and $\left<\psi  \right>$ are cyclic, we have $\left<\phi  \right>\cong \mathbb{Z}_{\left| \phi  \right| }$ and $\left<\psi  \right>\cong \mathbb{Z}_{\left| \psi  \right| }$ \cite{gallian, judson}. Thus,
-	\[
-		\left<\phi  \right>\times \left<\psi  \right>\cong \mathbb{Z}_{\left| \phi  \right| }\times \mathbb{Z}_{\left| \psi  \right| }
-	.\]
-	By \hyperref[lma:2]{lemma 2}, we have
-	\[
-		\left<\phi  \right>\times \left<\psi  \right>\cong \mathbb{Z}_{\alpha +1}\times \mathbb{Z}_{\beta+1 }
-	.\]
-	Since isomorphism is an equivalence relation on the class of groups, we have $\Psi \cong \mathbb{Z}_{\alpha+1 }\times \mathbb{Z}_{\beta+1 }$.
+	The same is not true for $W$. By \hyperref[dfn:5]{definition 5}, any $\mathbf{n}\in W$ is a position such that \emph{there exists} $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})\in \Xi $. Our claim thus requires there to exist some $\sigma \in \mathscr{M} (0,0)$, which is not true. By contradiction, there exists no such $\mathbf{n}\in W$ and $\mathbf{n}\in \Xi $. Therefore, $\Xi \cap W=\varnothing$.
 \end{proof}
-\begin{remark}
-	We may write $\Phi _\xi $ to denote the group $\Psi $ on a board position $\xi $, but the subscript will be omitted when possible.
-\end{remark}
-\begin{corollary}\label{cor:1}
-	The set $\left<\phi \psi  \right>\subseteq \left<\phi  \right>\cup \left<\psi  \right> $ is an abelian subgroup.
-\end{corollary}
-\begin{proof}
-	whoops
-\end{proof}
-\begin{corollary}\label{cor:2}
-	Let $\xi =(a,b)$ be a board position for which $\phi $ and $\psi $ are defined. Then $\Psi $ is cyclic if and only if $\operatorname{gcd}(a,b) =1$. Specifically, $\Psi \cong \mathbb{Z}_{(a+1)(b+1)}$.
-\end{corollary}
-\begin{proof}
-	We know that $\mathbb{Z}_{a+1}\times \mathbb{Z}_{b+1}$ is cyclic if and only if $\operatorname{gcd}(a+1,b+1) =1$, and that if $\operatorname{gcd}(a+1,b+1) =1$, $\mathbb{Z}_{a+1}\times \mathbb{Z}_{b+1}\cong \mathbb{Z}_{(a+1)(b+1)}$ \cite{gallian, judson}. Since $\Psi \cong \mathbb{Z}_{a+1}\times \mathbb{Z}_{b+1}$, the same result follows.
-\end{proof}
-\begin{corollary}\label{cor:3}
-	Let $\xi =(a,b)$ be a board position for which $\phi $ and $\psi $ are defined. Then $\phi ^a\psi ^a=\left( \phi \psi  \right) ^a$.
-\end{corollary}
-\begin{proof}
-	Since $\phi ^a\psi ^a\in \Psi $, and since $\Psi $ is abelian, it follows that $\phi ^a\psi ^a=\left( \phi \psi  \right) ^a$ \cite{gallian, judson}.
-\end{proof}
-\begin{definition}[Win]\label{dfn:3}
-	a move that gives 0,0
-\end{definition}
-\begin{definition}[Primitive Winning Positions]\label{dfn:4}
-	Let $\eta =(a,b)$ be a board position, often the starting board position. Let
-	\[
-		PW(\eta )\coloneqq \left\{ (n,m)\in\mathbb{N}^2 \mid n\leq a\land m\leq b\land \left( (n=0\land m\neq 0)\lor (n\neq 0\land m=0)\lor (n=m) \right)  \right\} 
-	.\]
-	We call $PW (\eta )$ the set of \emph{primitive winning positions on} $\eta $.
-\end{definition}
-\begin{proposition}\label{prp:2}
-	Let $\xi =(a,b)$ be a board position. If $\xi \in PW (\eta )$, then the player who's turn it is to move will win.
-\end{proposition}
-\begin{proof}
-	There are three possible cases for $\xi \in PW(\eta )$. These are
-	\begin{enumerate}
-		\item $\xi =(a,0)$,
-		\item $\xi =(0,b)$, or
-		\item $\xi =(a,a)$.
-	\end{enumerate}
-	(1) Since $a\in\mathbb{N}$, by \hyperref[dfn:2]{definition 2}, $\phi ^a\in\mathscr{M} (\xi )$. By \hyperref[prp:1]{proposition 1}, $\phi ^a(a,0)=(a-a,0)=(0,0)$. By \hyperref[dfn:3]{definition 3}, this constitutes a win for the player who moved.
-
-	(2) Since $b\in\mathbb{N}$, by \hyperref[dfn:2]{definition 2}, $\psi ^b\in \mathscr{M} (\xi  )$. By \hyperref[prp:1]{proposition 1}, $\psi ^b(0,b)=(0,b-b)=(0,0)$. By \hyperref[dfn:3]{definition 3}, this constitutes a win for the player who moved.
-
-	(3) Since $a\in\mathbb{N}$, by \hyperref[dfn:2]{definition 2}, $\left( \phi \psi  \right) ^a\in \mathscr{M} (\xi )$. By \hyperref[prp:1]{proposition 1} and \hyperref[cor:3]{corollary 3}, $\left( \phi \psi \right) ^a=(a-a,a-a)=(0,0)$. By \hyperref[dfn:3]{definition 3}, this constitutes a win for the player who moved.
-\end{proof}
-\begin{definition}[Primitive Losing Positions]\label{dfn:5}
-	Let $\eta =(a,b)$ be a board position, often the starting board position. Let
-	\[
-		PL(\eta )\coloneqq \left\{ (n,m)\in\mathbb{N}^2 \mid n\leq a\land m\leq b\land (\forall \pi  \in\mathscr{M} (n,m), \pi (n,m)\in PW(\eta )) \right\} 
-	.\]
-	We call $PL(\eta )$ the set of \emph{primitive losing positions on} $\eta $.
-\end{definition}
-\begin{definition}[Position Magnitude]\label{dfn:6}
-	Let $\xi =(a,b)$ be a board position. The \emph{position magnitude} of $\xi $ is defined as
-	\[
-		\left| \xi  \right| \coloneqq a+b
-	.\]
-	This is also referred to as \emph{the number of tiles remaining}.
-\end{definition}
+\begin{note}
+	I know we weren't supposed to use the internet to solve the game, but I was not sure $\exists x\in A :P(x)$ was false for $A=\varnothing$, and this fact felt far enough separate from the game itself that I thought I would be reasonably allowed to consult the internet. The mathematics stack exchange post \cite{awa} was the resource I found the most helpful, but I found many other resources which corroborated \cite{awa}.
+\end{note}
+Now that we know $\Xi $ and $W$ are disjoint, and we know one of the elements of $\Xi $, we can begin to study the structure of $W$ and $\Xi $.
 \begin{theorem}\label{thm:2}
-	Let $\eta =(a,b)$ be a board position. For $\left| \eta  \right| \leq 2$, $PL(\eta )=\varnothing$, and for $\left| \eta  \right| >2$, $PL(\eta )=\left\{ (2,1),(1,2) \right\} $.
+	Let $\boldsymbol{\xi}= (a,b)\in \Xi $. Then $(b,a)\in \Xi $.
 \end{theorem}
 \begin{proof}
-	i need to do this too.
+	We use the method of proof by induction. We know already that $(0,0)\in \Xi $. Since $(0,0)=(0,0)$, the claim follows trivially. Now let $\boldsymbol{\xi} =(a,b)\in \Xi $ and suppose the claim holds for all $\boldsymbol{\xi} _n\in \Xi $ such that $\left| \boldsymbol{\xi} _n \right| <\left| \boldsymbol{\xi}  \right| $. By \hyperref[dfn:5]{definition 5}, we know that for all $\sigma \in \mathscr{M} \left( \boldsymbol{\xi}  \right) $, then $\sigma (\boldsymbol{\xi} )\in W$. Let $\sigma \in \mathscr{M} (\boldsymbol{\xi} )$ be an arbitrary move on the position $\boldsymbol{\xi} $. Now consider the position $\boldsymbol{\xi} ^*=(b,a)$. Let $\sigma ^*\in \mathscr{M} \left( \boldsymbol{\xi} ^* \right) $ be defined as follows:
+	\begin{itemize}
+		\item If $\sigma =\phi ^k$, then $\sigma ^*=\psi ^k$.
+		\item If $\sigma =\psi ^k$, then $\sigma ^*=\phi ^k$.
+		\item If $\sigma =\phi ^k\psi ^k$, then $\sigma ^*=\sigma $.
+	\end{itemize}
+	Since the claim holds for all $\boldsymbol{\xi}_{n}$ such that $\left| \boldsymbol{\xi} _{n} \right| <\left| \boldsymbol{\xi}  \right| $, and since each $\boldsymbol{\xi} \in \Xi $ gives rise to winning positions, we know that all winning positions $\mathbf{n}=(p,q)\in W$ such that $\left| \mathbf{n} \right| <\left| \boldsymbol{\xi}  \right| $ must also have $(q,p)\in W$. From here it is trivial to show that if $\sigma (\boldsymbol{\xi} )\in W$, then with our above definition, $\sigma ^*\left( \boldsymbol{\xi} ^* \right) \in W$. We will show for the case that $\sigma =\phi ^k$, since the logic is the same for each case.
+
+	Let $\sigma (\boldsymbol{\xi} )=\phi ^k(a,b)=(a-k,b)$. We have
+	\[
+		\sigma ^*\left( \boldsymbol{\xi} ^* \right) =\psi ^k\left( b,a \right) =(b,a-k)
+	.\]
+	Since $(a-k,b)\in W$, then by our previous logic, $(b,a-k)\in W$. Therefore, $(a,b)\in \Xi $ implies $(b,a)\in \Xi $. By induction, we are done.
 \end{proof}
-\section{Solution}\label{sec:3}
-\section{Explanation and Justification}\label{sec:4}
-\section{Conclusion}\label{sec:5}
-\appendix
-\section{Appendix}\label{appendix}
+\begin{theorem}\label{thm:3}
+	The sets $\Xi $ and $W$ form a partition on $\mathbb{N}^2$.
+\end{theorem}
+\begin{proof}
+	By \hyperref[thm:1]{theorem 1},  $\Xi \cap W=\varnothing$. We need only show $\Xi \cap W=\mathbb{N}^2$. We will use proof by induction.
+
+	Notice that $\left| (0,0) \right| =0$ and $(0,0)\in \Xi $. Also notice that there exists no board position $\mathbf{n}\neq (0,0)$ such that $\left| \mathbf{n} \right| \leq 0$. Therefore, the claim holds for all $\left| \mathbf{n} \right| \leq 0$.
+
+	Now suppose the claim holds for all $\mathbf{n}\in\mathbb{N}^2$ such that $\left| \mathbf{n} \right| \leq n$. Let $\mathbf{n}^*$ be an arbitrary board position such that $\left| \mathbf{n}^* \right| =n+1$. Recall that for all $\sigma \in \mathscr{M} \left( \mathbf{n}^* \right) $,
+	\[
+		\left| \sigma \left( \mathbf{n}^* \right)  \right| \leq (n+1)-1=n
+	.\]
+	Since the claim thus holds for $\sigma \left( \mathbf{n}^* \right) $, either $\sigma \left( \mathbf{n}^* \right) \in \Xi $ or $\sigma \left( \mathbf{n}^* \right) \in W$ is true for any given $\sigma $. We will split the remainder of the problem into two cases.
+
+	(Case 1) Suppose there exists a $\sigma^*\in \mathscr{M} \left( \mathbf{n}^* \right) $ such that $\sigma ^*\left( \mathbf{n}^* \right) \in \Xi $. Then by \hyperref[dfn:5]{definition 5}, $\mathbf{n}^*\in W$.
+
+	(Case 2) Suppose there does not exist such a $\sigma ^*\in \mathscr{M} \left( \mathbf{n}^* \right) $. Then for all $\sigma \in \mathscr{M} \left( \mathbf{n}^* \right) $, we know that $\sigma \left( \mathbf{n}^* \right) \in\mathbb{N}^2\setminus \Xi $. However, since $\left| \sigma \left( \mathbf{n}^* \right)  \right| \leq n$, and since for all $\mathbf{n}$ such that $\left| \mathbf{n} \right| \leq n$ we have either $\mathbf{n}\in W$ or $\mathbf{n}\in \Xi $, then since $\sigma \left( \mathbf{n}^* \right) \notin \Xi $, we must have $\sigma \left( \mathbf{n}^* \right) \in W$ for all $\sigma $. By \hyperref[dfn:5]{definition 5}, we thus have $\mathbf{n}^*\in \Xi $.
+
+	Therefore, for all $\mathbf{n}^*$ such that $\left| \mathbf{n}^* \right| =n+1$, we have either $\mathbf{n}^*\in \Xi $ or $\mathbf{n}^*\in W$. By induction, $\Xi \cup W=\mathbb{N}^2$.
+\end{proof}
+\begin{theorem}[Fundamental Theorem of the Tile Game]\label{thm:4}
+	Let $\boldsymbol{\xi} _n=(a,b)$ denote the losing position with the $n$th\footnote{We say that $(0,0)$ is the 0th losing position. Odd, but intuitive.} smallest value of $\left| \boldsymbol{\xi}  \right| $. By \hyperref[thm:2]{theorem 2}, let $a\geq b$ without loss of generality. Then $a=b+n$. Additionally,
+	\[
+		b=\min  \left\{ n\in\mathbb{N} \mid \forall (\boldsymbol{\xi}_{k<n}=(p,q)\in \Xi ):(n\neq p\land n\neq q) \right\} 
+	.\]
+\end{theorem}
+\begin{proof}
+	We will use the method of proof by induction. We say $(0,0)$ is the $0$th losing position. Note that $0+0=0$. Therefore, the first part of the theorem holds. Now notice that there exists no such $\boldsymbol{\xi}_k\in \Xi $ such that $k<0$. Therefore, it's vacuously true that for all losing positions $\boldsymbol{\xi}_k=(p,q)$ with $k<n$, that $n\neq p$ and $n\neq q$ for all $n\in\mathbb{N}$. Therefore, $b=\min \mathbb{N}=0$. Therefore, the second part of the statement also holds.
+
+Now assume the statements hold for all $\boldsymbol{\xi }_k$ such that $0\leq k\leq n$. We must show this implies it holds for $\boldsymbol{\xi} _{n+1}$. Let $\boldsymbol{\xi} _{n+1}=(a,b)$ and let $a>b$ without loss of generality. We then have $\boldsymbol{\xi} _{n+1}=(b+n+1,b)$. We must show $\boldsymbol{\xi} _{n+1}\in \Xi $. Recall that $\boldsymbol{\xi} _{n+1}\in \Xi $ if and only if for all $\sigma \in \mathscr{M} \left( \boldsymbol{\xi} _{n+1} \right) $, we have $\sigma (\boldsymbol{\xi} _{n+1})\in W $. We also know that for all $\sigma \in \mathscr{M} \left( \boldsymbol{\xi} _{n+1} \right) $, we have $\left| \sigma \left( \boldsymbol{\xi} _{n+1} \right)  \right| <\left| \boldsymbol{\xi} _{n+1} \right| $. If there exists some $\boldsymbol{\xi} \in \Xi $ such that $\left| \boldsymbol{\xi}  \right| <\left| \boldsymbol{\xi} _{n+1} \right| $ and $\boldsymbol{\xi} =(m,b)$ with $m \in\mathbb{N}$ an arbitrary number with $b<m<b+n+1$ without loss of generality, then it follows that there exists $\phi ^{b+n+1-m}\in \mathscr{M} \left( \boldsymbol{\xi} _{n+1} \right) $ such that 
+\[\phi ^{b+n+1-m}(\boldsymbol{\xi} _{n+1})=(b+n+1-(b+n+1-m),b)=(m,b)= \boldsymbol{\xi} \in\Xi .\]
+It follows that we must take $b$ such that for all $\boldsymbol{\xi}\in \Xi $ where $\left| \boldsymbol{\xi}  \right| <\left| \boldsymbol{\xi} _{n+1} \right| $, we have $\boldsymbol{\xi} \neq (m,b)$ for $m>b$. In other words, for all $\boldsymbol{\xi} _k=(p,q)$ such that $k<n+1$, $b\neq p$ and $b\neq q$. Note that this is equivalent to the formula for the set $b$ is claimed to be the minimum of. We will take $b$ to be the minimum of this set, and show this produces the desired results. We will then explain why $b$ must be the minimum of the set. We do it this way since both the proof that $b$ is the minimum and the proof that $(b+n+1,b)\in \Xi $ follow the same fairly lengthy logic.
+
+Let $b$ be defined in this way, and recall that $\boldsymbol{\xi}_{n+1}=(b+n+1,b)$. Since there exists no $\boldsymbol{\xi} \in \Xi $ of the form $\boldsymbol{\xi}  =(m,b)$ with an arbitrary $m>b$, we know by extension there exists no $k\in\mathbb{N}$ such that $\phi ^k\left( \boldsymbol{\xi} _{n+1} \right) \in \Xi $, since $\phi ^k\left( \boldsymbol{\xi} _{n+1} \right) =(b+d+1-k,b)$, which is of the form $(m,b)$. Additionally, since the theorem holds for all $\boldsymbol{\xi} _k$ such that $k\leq n$, we know that for all $\boldsymbol{\xi}=(a,b)\in \Xi  $ with $\left| \boldsymbol{\xi}  \right| <\left| \boldsymbol{\xi} _{n+1} \right| $ and $a>b$, it follows that $a-b<n+1$. Additionally, we know that $(b+n+1)-b=n+1$. Notice that for any $k\in\mathbb{N}$ small enough such that $\phi ^k\psi ^k\in \mathscr{M} \left( \boldsymbol{\xi} _{n+1} \right) $, we have
+\[
+	\left( \phi ^k\psi ^k \right) (b+n+1,b)=(b+n+1-k,b-k)
+.\]
+Since $(b+n+1-k)-(b-k)=n+1$, we know there does not exist some $\phi ^k\psi ^k\in \mathscr{M} \left( \boldsymbol{\xi} _{n+1} \right) $ such that $\left( \phi  ^k\psi ^k \right) \left( \boldsymbol{\xi} _{n+1} \right) \in \Xi $, since the difference between the two components of $\boldsymbol{\xi} _{n+1}$ is greater than that of any of the previous losing positions. Finally, let $\boldsymbol{\xi}_n = \left( b^*+n,b^* \right) $. We know already that $b\neq b^*$. However, since $\boldsymbol{\xi} _n$, we know that $b>b^*$, since otherwise $b^*$ would not have been the minimum. It follows that $b+n+1>b^*+n$. Since all $\boldsymbol{\xi} _{k}=(b'+d,b')\in \Xi $ with $k<n$ will, by the same logic and the fact that they also satisfy the theorem, have $b'<b^*$ and $d<n$, we have that $b+n+1>b'+d$ for all such $\boldsymbol{\xi} _k$. Therefore, there exists no $\left( b+n+1,k \right) \in \Xi $ with $\left| \left( b+n+1,k \right)  \right| <\left| \boldsymbol{\xi} _{n+1} \right| $, since for all $\boldsymbol{\xi}_k=(p,q)\in \Xi $ satisfying $\left| \boldsymbol{\xi} _k \right| <\left| \boldsymbol{\xi} _{n+1} \right| $, we have $p<b+n+1$. Notice that
+\[
+	\psi ^k\left( \boldsymbol{\xi} _{n+1} \right) =\left( b+n+1,b-k \right) 
+\]
+would be a losing position if and only if there existed some $(b+n+1,k)\in \Xi $ with $k<b$, which is not true. Therefore, there exists no $\sigma \in \mathscr{M} \left( \boldsymbol{\xi} _{n+1} \right) $ such that $\sigma \left( \boldsymbol{\xi} _{n+1} \right) \in \Xi $, and therefore $\boldsymbol{\xi}  _{n+1}\in \Xi $ by \hyperref[dfn:5]{definition 5}.
+
+We conclude with discussion as to why $b$ must be the minimum of the set. Notice that for all $b$ in the set, the pair $(b+n+1,b)$ will be on the same line $y=x+n+1$. Taking $b$ not to be the minimum of the set implies that there is some $b^*$ that \emph{is} the minimum of the set, which will lie on the same line. Since they lie on the same line, there exists some $\phi ^k\psi ^k\in \mathscr{M} \left( \boldsymbol{\xi}  \right) $ that maps $\boldsymbol{\xi} \mapsto \left( b^*+n+1,b^* \right) $, and thus for our point $\boldsymbol{\xi} =\left( b+n+1,b \right) $ to be a losing position, this point $\left( b^*+n+1,b^* \right) $ must be a winning position. However, by the same logic we used for the proof, we can show $\left( b^*+n+1,b^* \right) $ does not map to any losing positions, contradicting the claim that it is a winning position. By \hyperref[thm:3]{theorem 3}, this implies this point is a losing position. This implies no other points on the line $y=x+n+1$ can be losing positions, contradicting our claim that $b$ is not the minimum of the set. And as shown herein, taking $b$ to be the minimum works out without contradictions. Therefore, by the method of induction, we are done.
+\end{proof}
+
+
+
+
+
+\subsection{Motivation and Explanation}\label{sec:23}
+We will provide sufficient motivation for each definition, and a comprehensive explanation of the impacts of theorems 1 through 4.
+
+Since we have two distinct sets of tiles, and since we only care about the quantity of tiles in each set, we can represent a position as two numbers, each corresponding to the amount of tiles in a particular set. In other words, we can represent a position as an ordered pair $(a,b)$. We take $(a,b)$ to be integers greater than or equal to $0$. For this reason, we take $\mathbb{N}=\left\{ 0,1,\ldots \right\} $ for this paper. That way, we can use $\mathbb{N}^2$ to represent the set of all board positions. This motivates \hyperref[dfn:1]{definition 1}.
+
+The motivation behind \hyperref[dfn:2]{definition 2} is rather simple. We want a convenient way of representing the number of tiles on the board at any given time, and we chose to use the notation $\left| \mathbf{n} \right| $ to do this. I make no claims that $\left| \cdot  \right| $ is an absolute value or norm on $\mathbb{N}^2$, I simply use this notation because it's less messy than defining a function $\gamma (\mathbf{n})=a+b$, given how many functions we already have.
+
+\hyperref[dfn:3]{Definition 3} is motivated by the result of \hyperref[prp:1]{proposition 1}. If we represent a board position as an ordered pair, then we can represent a move on this board position as some function. Since all moves involve removing an integer number of tiles, and since we only have two piles we can remove tiles from, we define two moves. $\phi $ removes a tile from pile 1, and $\psi $ removes a tile from pile 2. This doesn't explicitly define a function for removing an equal amount of tiles from both piles, but we can represent this move very easily as $(\phi \psi) (\mathbf{n})$. However, we are allowed to take more than just one tile, so we need a way to show the other possible moves. This is the purpose of \hyperref[prp:1]{proposition 1}. For a board position $\mathbf{n}=(a,b)$, the three possible types of moves are
+\begin{enumerate}
+	\item $(a,b)-(k,0)$ for $0<k\leq a$.
+	\item $(a,b)-(0,k)$ for $0<k\leq b$.
+	\item $(a,b)-(k,k)$ for $0<k\leq a,b$.
+\end{enumerate}
+We showed in \hyperref[prp:1]{proposition 1} that the first type of move can be represented as $\phi ^k$, the second can be represented as $\psi ^k$ and the final type can be represented as $\phi ^k\psi ^k$.
+
+All of this motivates \hyperref[dfn:4]{definition 4}, the set of all possible moves on a given position. We define the set of moves as simply the set of all $\phi ^k$, all $\psi ^k$, and all $\phi ^k\psi ^k$. We require $k>0$, since $\phi ^0=\psi ^0$ is simply the identity function, which would equate to skipping a turn in the context of the game. We don't allow people to simply skip turns, so we require $k $ strictly greater than $0$ in the definition.
+
+\hyperref[dfn:5]{Definition 5} is the most convoluded definition we used. We call $\Xi $ the set of losing positions, and $W$ the set of winning positions. However, their definitions of each set rely on the contents of the other, which is what makes some proofs difficult. However, this makes sense when we think about it in the context of the game. Consider some losing position $\boldsymbol{\xi} \in \Xi $. Recall our discussion in \hyperref[sec:1]{section 1} of what constituted a losing position. We said that if it's your turn for the position $\boldsymbol{\xi} $, and all of your moves create a winning position for the opponent, then $\boldsymbol{\xi} $ must be a losing position, since you have no choice but to give your opponent a winning position. If we look at the definition of $\Xi $, we see this same logic echoed. Some $\boldsymbol{\xi} \in \Xi $ must satisfy the statement ``for all $\sigma \in \mathscr{M} (\boldsymbol{\xi} )$, it follows that $\sigma (\boldsymbol{\xi} )\in W$''. In other words, ``for all possible moves on our position $\boldsymbol{\xi} $, we will end up in a winning position''. This is the same logic as we considered previously.
+
+Now consider some winning position $\mathbf{n}\in W$. Again, recall our discussion in \hyperref[sec:1]{section 1}. We said a position was winning if there was a move we could make that would output a losing position, since it would then be our opponent's turn on a losing position. Looking again at the definition of $W$ in \hyperref[dfn:5]{definition 5}, we see this logic once again. Some $\mathbf{n}\in W$ must satisfy the statement ``there exists some $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})\in \Xi $ ''. In other words, ``there exists a move we can play such that the next position will be a losing position''. These definitions coencide with our discussion of what should constitute a winning or losing position. We will explain further in \hyperref[sec:5]{section 5} what precisely these definitions and our theorems say is the method to win the game.
+
+However, the definitions of $\Xi $ and $W$ still rely on the contents of each other, which means analyzing them will require explicitly finding some of their contents, at the very least to prove they are nonempty. Additionally, our intuition says winning positions and losing positions should be mutually exclusive; that is to say, a position should not be both winning or losing, it should only be one or the other. In other words,  $\Xi $ and $W$ are disjoint and share no elements. It turns out proving this fact involves identifying that $(0,0)\in \Xi $, so we prove this fact first in \hyperref[thm:1]{theorem 1}. The result that $(0,0)\in \Xi $ makes sense intuitively as well, since if it is your turn on $(0,0)$, then the opponent has taken the last tile, meaning they have won and you have lost. Thus, $(0,0)$ is a losing tile. The fact that $W$ is nonempty follows immediately from this as well.
+
+\hyperref[thm:2]{Theorem 2} deals with the percieved symmetry of the placement of losing positions. Analyzing the losing positions numerically seems to suggest that for any $(a,b)\in \Xi $, we have $(b,a)\in \Xi $. Additionally, there appear to be no other losing positions $\mathbf{n}$ with $\left| \mathbf{n} \right| =\left| (a,b) \right| $.
+
+\hyperref[thm:3]{Theorem 3} shows that another intuitive fact about losing and winning positions is true. If a position is not losing, we expect it to be winning, and vice versa. In other words, every $\mathbf{n}\in \mathbb{N}^2 $ is either losing or winning. Since we already know $\Xi \cap W=\varnothing$, this is equivalent to showing $\Xi $ and $W$ form a parition on $\mathbb{N}^2$, hence the statement of the theorem.
+
+\hyperref[thm:4]{Theorem 4} is the most important theorem we prove. Recall how in \hyperref[fig:1]{figure 1}, each losing position generated a diagonal line of winning positions. Notice the $n$th losing position (taking $(0,0)$ as the 0th losing positoin) generated the line $y=x+n$. By converse, the $n$th losing point lies on the line $y=x+n$, and thus we simply need to find $x$. This motivates the first part of the theorem. The second part of the theorem is motivated also by \hyperref[fig:1]{figure 1}. Notice how each losing position generated a horizontal and vertical line of winning positions. We claim that $x$ is simply the smallest number that has not already been ``taken up'' by one of the horizontal or vertical lines generated by the previous losing positions. Showing this rigorously is the purpose of \hyperref[thm:4]{theorem 4}.
+
+
+
+
+
+
+
+
+\section{Numerical Analysis and Further Motivation}\label{sec:3}
+With this understanding, it's fairly easy to write a python script to generate pairs $(a,b)$ up to a given maximum value $\text{MAX}=b$. The following program accomplishes this for $\text{MAX}=100$.
+\begin{lstlisting}[language=python]
+MAX = 100
+avoid = []
+losing_tiles = []
+losing_x = []
+losing_y = []
+y_int = 1
+
+for x in range(1,MAX+1):
+    if x not in avoid:
+        y = x + y_int
+        losing_tiles.append((x,y))
+        avoid.append(y)
+        y_int += 1
+\end{lstlisting}
+The program was able to generate the set of losing tiles for $\left| \mathbf{n}  \right| \approx 10^8$ in around 20 seconds, after which we ran into issues with system resources and memory capacity. \hyperref[tab:1]{Table 1} depicts all losing tiles for $\left| \mathbf{n} \right| =2616$.
+
+For most people, this would be a sufficient spot to stop. We have an algorithm that can generate the precise locations of all losing tiles for an arbitrary $\boldsymbol{\xi} \in\Xi  $, given sufficient resources. However, this algorithm does not feel as mathematical as I would like. It's checking if a number has already occured in a fairly contrived set, which doesn't feel clean enough for a solution to the problem. Luckily, there is not only a cleaner solution to the problem, but the other solution is \emph{much} more interesting, and also yields an algorithm that is about 10 times faster.
+
+Notice that \hyperref[tab:1]{table 1} includes a $\Delta x$ column. For a given $\boldsymbol{\xi} _n=(x,y)$ and $\boldsymbol{\xi} _{n-1}=(x^*,y^*)$, we define $\Delta x$ for $\boldsymbol{\xi} _n$ to be
+\[
+	\Delta x=x-x^*
+.\]
+$ \Delta x$ is thus just the change in $x$ between losing positions. By \hyperref[thm:3]{theorem 3}, we know that any losing position $\boldsymbol{\xi} _n$ can be entirely determined by its $x$ and $n$ values. Therefore, if we maintain an ordered list of $\Delta x$ values, we can obtain $n$ by the ordering, $x$ by summing $\Delta x_i$ from $1$ to $n$, and $y$ by \hyperref[thm:3]{theorem 3}. So by generating an ordered list of $\Delta x$ values, we can fully determine the placements of all losing positions.
+
+A curious pattern with the $\Delta x$ values, which we verified numerically for $\left| \mathbf{n} \right| \leq 10^7$, is that $\Delta x\in\left\{ 1,2 \right\} $. We never see $\Delta x=3$ or $\Delta x=0$, only $\Delta x=1$ or $2$.
+
+Although this is very interesting, especially if it holds in general, it alone does not constitue a general solution to the problem, since there is no apparent pattern in the ordering of 1s and 2s. However, there are some things that we can notice from our list of $\Delta x$ values. For convenience, the following is a string of the first 100 values of $\Delta x$.
+\[
+	12122121221221212212122122121221221212212122122121221212212212
+.\]
+Notice the following:
+\begin{itemize}
+	\item The sequence consists entirely of 1s and 2s.
+	\item There is never more than a single 1 in a row.
+	\item There can be either one or two 2s in a row, but never more.
+	\item Every sequence of 2s is surrounded on both sides by a sequence of 1s.
+\end{itemize}
+We claim that these statements are true for all $\left| \mathbf{n} \right| $. However, we don't need to prove this fact, as there is a stronger claim which will be proved in a follow-up paper.
+
+The reason a pattern is difficult to discern is because sometimes a string of one 2 appears, and sometimes a string of two 2s appears, both not quite randomly but not following a trivial pattern. What we will do is count the number of 2s in a row going from left to right, and form a new string of numbers from these values. We will fully ignore the 1s. This can also be viewed as assigning each character in the string an ordered value $n\in\mathbb{N}$ from left to right, and then finding $\Delta n$. When we do this, we obtain
+\[
+	121221212212212122121221
+.\]
+Notice that all of the aforementioned properties remain the same:
+\begin{itemize}
+	\item The sequence consists entirely of 1s and 2s.
+	\item There is never more than a single 1 in a row.
+	\item There can be either one or two 2s in a row, but nnever more.
+	\item Every sequence of 2s is surrounded on both sides by a sequence of 1s.
+\end{itemize}
+We can continue applying this logic, and we \emph{almost} continue to observe these properties:
+\[
+	121221212
+,\]
+\[
+	1211
+,\]
+\[
+	1
+,\]
+\[
+	0
+.\]
+The only anomaly is the two 1s in a row at the end of one of the iterations. However, we are actually applying this logic in \emph{reverse}, and this is simply an artifact from starting with an incomplete sequence.
+
+However, assuming there exist $\left| \mathbf{n} ^* \right| $ such that the logic holds for all sequences, then by applying our logic backwards, we should be able to generate $\Delta x$ values for any of these values $\left| \mathbf{n} ^* \right| $. However, since these are simply strings of integers, this claim actually implies somethng stronger; \emph{that for any $\left| \mathbf{n}\right|=n $, the $\Delta x$ values will be fully determined by the first $n$ letters of this string}.
+
+Although it's not obvious why this statement should be true, we were able to numerically verify it holds for about $\left| \mathbf{n} \right| \approx 10^8$. The proof is extremely difficult and involves many preliminary results, and the analysis of all the corollaries of these results is also very long, so we have done this analysis in a separate paper, which will be in the MORE section of my portfolio.
+
+
+
+
+
+
+
+
+\section{Explanation and Justification}\label{sec:5}
+Although we have shown a great deal about identifying losing positions, specifically in \hyperref[thm:4]{theorem 4}, and we are able to systematically generate all losing positions with a computer program, we still need to give a final explanation as to how our results determine a method to win the game. We motivated \hyperref[dfn:5]{definition 5} with the idea that
+\begin{itemize}
+	\item If there exists a move on a position such that the new position after the move is a losing position, then we call this a winning position.
+	\item If all moves on a position give a winning position, then we call this a losing position.
+\end{itemize}
+
+If you can make it your opponent's turn on a losing position, then you are clearly winning, and if your opponent has no choice but to make it your turn on a winning position, then you are clearly losing. This logic continues recursively; if your opponent gets a losing position, then it will be your turn on a winning position, meaning you can make it your opponents turn on another losing position, and so on. To determine the specific placement of these winning and losing positions, we only require a winning condition be given. In the case of this problem, the given winning condition is that the winner is the last one to take a tile. Equivalently, the loser is the player who's turn it is on the position $(0,0)$. This is our first losing tile. From here, we can generate the entirety of $\Xi $ and $W$ using logic detailed previously.
+
+Thus, to win a game, you need to first determine if you are on a winning position or a losing position. Since we have detailed methods by which you can generate losing positions, you simply need to generate a list and check against that list. If the initial position is a losing position, go second. Otherwise, go first. For every single board position $\mathbf{n}=(a,b)$, your move will follow these steps:
+\begin{enumerate}
+	\item Check for the losing position of the form $(a,k)$ for some $k\in\mathbb{N}$. If $k<b$, then there exists a move that will send you to that losing position.
+	\item Check for the losing position of the form $(k,b)$ for some $k\in\mathbb{N}$. If $k<a$, then there exists a move that will send you to that losing position.
+	\item Check the value of $\left| a-b \right| $, and check the losing position $(k,\ell )$ with this same value $\left| k-\ell  \right| =\left| a-b \right| $. If $a>k$ and $b>\ell $, then there exists a move that will send you to that losing position.
+	\item After making note of all the losing positions you can move to, make note of the number of tiles in each of these losing positions. To end the game the fastest, move to the position with the least remaining tiles. If there is only one option, move to that and ignore this step.
+\end{enumerate}
+
+As shown by the various proofs in \hyperref[sec:2]{section 2}, this strategy will guarentee victory in the tile game.
+
+
+
+\section{Conclusion}\label{sec:6}
+The problem was fairly simple to solve. I identified multiple losing positions by hand, reconized a pattern, and created the graph shown in \hyperref[fig:1]{figure 1} to depict the first few. This led to the intution behind \hyperref[thm:4]{theorem 4}, which was fairly obviously true. However, the solution felt inadequate; the fact that
+\[
+	b=\min \left\{ n\in\mathbb{N} \mid \forall \left( \boldsymbol{\xi} _{k<n}=(p,q)\in \Xi  \right) :\left( n\neq p\land n\neq q \right)  \right\} 
+\]
+felt extremely messy, as the set in question felt very algorithmic and contrived. I spent a day working in python to analyze number patterns, and eventually discovered the $\Delta x$ patterns discussed in \hyperref[sec:3]{section 3}. I proceeded to notice various properties of these patterns, and began attempting to formalize my arguments. Unfortunately due to other classes and a minor sickness, I have not had sufficient time to do substantial work therein. The function $\Phi $ that is central to my proofs is not even a function in the way it's currently defined, since $\Phi (22)\neq \Phi (2)\Phi (2)$, contradicting another part of its definition. There are simple ways to formalize it, but they get fairly messy fairly quickly, and I'm looking for a cleaner solution. All formalism attempted has been moved to a follow-up paper, which will be placed in the MORE section of my portfolio.
+
+The rubric said to talk about my feelings. When I do math, I experience the following three emotions:
+\begin{itemize}
+	\item Confusion, generally when first starting a problem or hitting a wall in a proof.
+	\item Frantic energy, generally when getting past the aforementioned wall.
+	\item Excitenent, generally when finishing a problem, proof, or identifying something particularly curious.
+\end{itemize}
+I experienced all of these emotions at the appropriate times during this problem.
+
+The next thing for me to understand is how to prove $\Phi ^n(0)$ generates the string of $\Delta x$ values. I'm trying to start by relating the strings $\Phi $ generates to the Fibonacci numbers. Intuitively, I understand why they should be related, but the proofs are extremely recursive and I'm struggling to work through them, largely due to how haphazard all my attempts to define $\Phi $ have been. However, I'm not sure how relating these strings to the Fibonacci numbers even helps show they're equivalent to the string of $\Delta x$ values, since I have no idea why that would even be true in the first place. I think proving $\Delta x\in\left\{ 1,2 \right\} $ for all $\Delta x$ would help a ton, but I'm unsure how to do this as well. This is where my learning edge is at right now.
+
+
+
 \bibliographystyle{plain}
 \bibliography{refs}
+\newpage
+\appendix
+\section{Appendix}\label{appendix}
+\begin{center}
+	Table 1: All $\boldsymbol{\xi}_n$ for $\left| \mathbf{n} \right| =2616$\label{tab:1}
+\end{center}
+\input{../../../../../code_projects/table.tex}
 \end{document}

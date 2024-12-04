@@ -1,0 +1,98 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Bubble Tea Quiz}
+\date{11/25/24}
+\begin{document}
+\makeproblem
+\begin{notation}
+	Let $N$ be the set of balls, $X$ the set of boxes, and $f : N \to X$ a counting map. We will define $n=\left| N \right| $ the number of balls, and $x=\left| X \right| $ the number of boxes.
+\end{notation}
+\section*{Problem 1}
+The balls are the servings, and the boxes are the flavors of tea. The balls are identical, and the boxes are distinct. There are no restrictions on $f$. Therefore, this is a combination with repetition problem. Since there are 4 boxes and 10 balls, the formula for this is
+\[
+	\binom{n+x-1}{x-1}=\binom{10+4-1}{4-1}=\binom{13}{9}
+.\]
+Therefore, the answer is
+\[
+	\boxed{\binom{13}{3}}
+\]
+\section*{Problem 2}
+The balls are the servings, the boxes are the flavors of tea, the balls are identical, the boxes are distinct, and the mapping is surjective. This is a variation combination with repetition problem. Since there are 4 boxes and 10 balls, the formula for this is
+\[
+	\binom{n-1}{x-1}=\binom{10-1}{4-1}=\binom{9}{3}
+.\]
+Therefore, the answer is
+\[
+	\boxed{\binom{9}{3}}
+\]
+\section*{Problem 3}
+The balls are the customers, the boxes are the flavors, and all objects are distinct. The mapping has no restrictions, so this is a multiplication principle problem. Since there are 10 boxes and 4 balls, the formula for this is
+\[
+	x^n=10^4
+.\]
+Therefore, the answer is
+\[
+	\boxed{10^4}
+\]
+\section*{Problem 4}
+The balls are servings, and the boxes are flavors of tea. The balls are identical, the boxes are distinct, and the mapping has no restrictions. Therefore, this is a combimnation with repetition problem. Since there are 10 boxes and 4 balls, the formula for this is
+\[
+	\binom{n+x-1}{n}=\binom{4+10-1}{4}=\binom{13}{4}
+.\]
+Therefore, the answer is
+\[
+	\boxed{\binom{13}{4}}
+\]
+\section*{Problem 5}
+This is the same as problem 4, but with an injective mapping. This makes it a combination problem. Since there are 10 boxes and 4 balls, the formula for this is
+\[
+	\binom{x}{n}=\binom{10}{4}
+.\]
+Therefore, the answer is
+\[
+	\boxed{\binom{10}{4}}
+\]
+\section*{Problem 6}
+The balls are students, and the boxes are flavors of tea. The balls and boxes are both distinct, and the map is surjective. This makes it a labeled set partition problem. Since there are 4 boxes and 10 balls, the formula for this is
+\[
+	x!S(n,x)=4!S(10,4)
+.\]
+Therefore, the answer is
+\[
+	\boxed{4!S(10,4)}
+\]
+\section*{Problem 7}
+The balls are bubble tea orders, and the boxes are flavors. This is an injective problem, since all the balls go into different boxes, and since the students and flavors are distinct, this is a permutation problem. Since there are 10 boxes and 4 balls, the answer is
+\[
+	\boxed{P(10,4)}
+\]
+\section*{Problem 8}
+The take out containers are the boxes, and the flavors are the balls. There are 10 balls, 4 boxes, and the map is surjective. This makes it a set partition problem. The formula for this is
+\[
+	S(x,n)=S(10,4)
+.\]
+Therefore, the answer is
+\[
+	\boxed{S(10,4)}
+\]
+\section*{Problem 9}
+The balls are students, the boxes are types of bubble tea, the balls are distinct, and the boxes are distinct. There are no restrictions on the function. This makes it a multiplication principle problem. Since there are 4 boxes and 10 balls, the formula for this is
+\[
+	x^n=4^{10}
+.\]
+Therefore, the answer is
+\[
+	\boxed{4^{10}}
+\]
+
+\section*{Problem 10}
+(a) The hardest problem was \#8 because it was tricky to read and figure out the boxes were identical. I was also not quite sure what we are supposed to do in the way of \emph{showing our work}, since the formulas were on the chart for the twelvefold way.
+
+\noindent(b) I used the Twelvefold Way chart, as well as the videos.
+
+\begin{center}\bfseries
+	I have been following and will continue to follow the academic honesty policy for this quiz.\\
+	Grant Talbert
+\end{center}
+\end{document}

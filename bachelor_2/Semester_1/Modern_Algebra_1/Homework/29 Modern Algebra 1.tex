@@ -1,0 +1,236 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{11/08/24}
+\courseID{MA 541}
+\professor{Dr. Duque-Rosero}
+\courseSection{A1}
+
+% --- QUESTIONS ---
+%
+% (3) Is my proof in part (a) rigorous enough? I feel like assuming
+% HN = \cup_{h\in H}hN
+% is a leap of logic
+% YES IT IS
+%
+% (4a) Showing via the class equation implies not using Lagrange, since it would
+% follow trivially. However, I used Lagrange on the terms in the class equation
+% that were not Z(G). Is this okay?
+% YES IT IS
+%
+% (4b) Is it okay to say "By the fundamental theorem of finite abelian groups, it
+% suffices to show G is abelian." and then just prove G is abelian?
+% YES IT DOES
+%
+% (5) My proof involved a set of cosets, a set of conjugate sets, a set function
+% from the set of conjugate sets to the set of elements of G that map H to that
+% set, a set of images under the set function, and a bijection. I managed to finish
+% the proof, but did I do it the correct way?
+% PROBABLY
+%
+% (5) Is phi really well defined?
+% I DONT KNOW
+
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{proof}(a)
+\begin{align*}
+	\phi \left( f_1, \dots, f_n  \right) \phi \left( \ell _1, \dots, \ell _n  \right) &=\left( a^{f_1}_1 \cdots a^{f_n}_n  \right) \left( a^{\ell _1}_1 \cdots a^{\ell _n}_n  \right) \\
+											  &=a_1^{f_1}a_1^{\ell _1} \cdots a_n^{f_1}a_n^{\ell _n} \\
+											  &=a^{f_1+\ell _1}_1 \cdots a^{f_n+\ell _n}_n \\
+											  &=\phi \left( f_1+\ell _1, \dots, f_n+\ell _1  \right) 
+.\end{align*}
+Additionally, notice that
+\[
+	\left( f_1, \dots, f_n  \right) +\left( \ell _1, \dots, \ell _n  \right) =(f_1+\ell _1, \dots, f_n +\ell _n)
+.\]
+Therefore, $\phi $ is a homomorphism.
+
+(b) First we show $\phi (F)=G$. Notice that for all $a_i\in G \setminus\left\{ e \right\} $, there exists $(f_1, \ldots, f_n)\in F$ such that $f_j =0$ for all $j\neq i$, and $f_i=1$. Notice that
+\[
+	\phi (0,\ldots,1,\ldots,0)=a_1^0 \cdots a_i^1\cdots a_n^0 = e\cdots a_i \cdots e = a_i
+.\]
+Therefore, for all $a_i\in G\setminus\left\{ e \right\} $, there exists $f\in F$ such that $f\mapsto a_i$. Furthermore, note that for $(0,\ldots,0)=e_F\in F$, and $\left( 0,\ldots,0 \right) \mapsto e_G$ by properties of homomorphisms. Therefore, for all $g\in G$, there exists $f\in F$ such that $f\mapsto g$, and $\phi $ is surjective. It follows that, $G\subseteq \phi (F)$. Finally, note that $\phi (f)\in G$ for all $f\in F$, so $\phi (F)=G$.
+
+We will now apply the first isomorphism theorem. Note that
+\[
+	F / \ker \phi \cong \phi (F)=G
+.\]
+By properties of isomorphisms and quotient groups, we have
+\[
+	\left| G \right| = \left| F / \ker \phi  \right| =\frac{\left| F \right| }{\left| \ker \phi  \right| }
+.\]
+It follows that
+\[
+	\left| G \right| \left| \ker \phi  \right| =\left| F \right| 
+.\]
+Since $p$ divides $\left| G \right| $, $p$ also divides $\left| G \right| \left| \ker \phi  \right| $, and therefore $p$ divides $\left| F \right| $.
+
+(c) Since $F$ is a direct product of the groups $\mathbb{Z}_{k_i}$, we have
+\[
+	\left| F \right| =k_1\cdots k_n = \prod_{i=1}^{n} k_i 
+.\]
+
+(d) Note that $\left<g \right>$ is cyclic with order $m$. By the fundamental theorem of cyclic groups, since $p|m$, there exists a subgroup $\left<g ^{m / p} \right>$ with order $p$. It follows that $\left| g^{m /p} \right| =p$.
+
+(e) If $p$ is prime amd $p|ab$, then either $p|a$ or $p|b$. This can be generalized easily with induction to show if $p|\prod_{i=1}^{n} a_i $ for $a_i\in\mathbb{Z}$, then there exists some $i$ such that $p|a_i$. Therefore, since $p$ divides the order of $F$ by part (b), and since
+\[
+	\left| F \right| =\prod_{i=1}^{n} k_i 
+\]
+by part (c), there exists at least one $k_i$ such that $p|k_i$. Since $k_i$ is the order of $a_i$, there exists $a_i\in G$ such that $p | \left| a_i \right| $. By part (d), there exists an element of order $p$ in $G$, namely $a_i^{k_i / p}$.
+\end{proof}
+\section*{Problem 2}
+(a) Because I don't feel like writing out a lot of subscripts and definitions, if i write $\mathbf{m}\in\mathbb{Z}^n$, then define $\mathbf{m}=\left( m_1, \dots, m_n \right) $. Additionally, $a \mathbf{m} = \left( am_1, \dots, am_n  \right) $.
+
+Let $\phi : \mathbb{Z}^n \to \mathbb{Z}_8^n$ be the map $g\mapsto g\mod{8}$. We will show $\phi $ is a homomorphism. Let $\mathbf{a},\mathbf{b}\in\mathbb{Z}^n$. It follows that
+\begin{align*}
+	\phi (\mathbf{a}+\mathbf{b})&=\phi \left( a_1+b_1, \dots, a_n +b_n \right) \\
+				    &=\left( a_1+b_1, \ldots, a_n + b_n \right) \mod{8}\\
+				    &\equiv \left( a_1, \dots, a_n  \right) +\left( b_1, \dots, b_n  \right) \mod{8}\\
+				    &=\phi (\mathbf{a})+\phi (\mathbf{b})
+.\end{align*}
+Therefore, $\phi $ is a homomorphism. We claim $\ker \phi =a\mathbb{Z}^n$. First, we will show $a\mathbb{Z}^n \subseteq \ker \phi $. Let $\mathbf{z}\in a\mathbb{Z}^n$. By definition, there exists $\mathbf{v}\in\mathbb{Z}$ such that $a \mathbf{v}=\mathbf{z}$. Notice that for all components $z_i$ of $\mathbf{z}$, $z_i=av_i$. Since $a|av_i$, $z_i\equiv av_i\equiv 0\mod{a}$, and thus $\mathbf{z}\mapsto \mathbf{0}$. Therefore, $\mathbf{z}\in \ker \phi $.
+
+Now we show the converse. Let $\mathbf{v}\in \ker \phi $. It follows that $a|v_i$ for all $i$, and thus there exist $q_1, \dots, q_n \in\mathbb{Z}$ such that $\mathbf{v}=\left( aq_1, \dots, aq_n  \right) =a \mathbf{q}$. Therefore, $\mathbf{v}\in a\mathbb{Z}^n$ by definition. Therefore, $\ker \phi = a\mathbb{Z}^n$.
+
+(b) Let $\psi : G \to \operatorname{Inn}(G) $ be the map $g\mapsto \phi _g$. We will show $\psi $ is a homomorphism. Since $\psi (ab)=\phi_{ab}$ and $\psi (a)\psi (b)=\phi _a\phi _b$, we must show $\phi_{ab}=\phi _a\phi _b$. Notice that
+\[
+	\phi _{ab}(x)=abx(ab)^{-1}=abxb^{-1}a^{-1}=\phi_a\left( bxb^{-1} \right) =\phi _a\phi _b(x)
+.\]
+Therefore, $\psi $ is a homomorphism. Additionally, note that for any $\phi_a\in \operatorname{Inn}(G) $, by definition $a\in G$, and thus $\psi (a)=\phi _a$. Therefore, $\psi $ is surjective. We claim $\ker \psi =Z(G)$. Note that the identity in $\operatorname{Inn}(G) $ is $\phi_e$, and $\phi _e(x)=x$. First, we show $Z(G)\subseteq \ker \psi $. Let $a\in Z (G)$. It follows that $ax=xa$ for all $x\in G$, and thus
+\[
+	\phi _a(x)=axa^{-1}=aa^{-1}x=x=\phi_e(x)
+.\]
+Therefore, $a\mapsto \phi _e$, and $a\in\ker \psi $. It follows that $Z(G)\subseteq \ker \psi $.
+
+Now we show the converse. Let $a\in \ker \psi $. It follows that $\phi_a=\phi_e$, and thus $axa^{-1}=x$ for all $x\in G$. Notice that
+\[
+	axa^{-1}=x \implies axa^{-1}a=xa \implies ax=xa
+.\]
+Since this holds for all $x\in G$, $ax=xa$ for all $x\in G$, and thus $a\in Z(G)$. Therefore, $\ker \psi \subseteq Z(G)$, and thus $\ker \psi =Z(G)$.
+\section*{Problem 3}
+\begin{proof}
+	(a) Notice that $HN = \left\{ hn \mid h\in H\land n\in N \right\} $. It follows that
+	\[
+		HN=\bigcup_{h\in H}hN
+	.\]
+	Since $H\leq G$, if $h\in H$ then $h\in G$. Since $N\triangleleft G$, it follows that $hN=Nh$ for all $h\in H$, and thus
+	\[
+		HN=\bigcup_{h\in H}hN=\bigcup_{h\in H}Nh=NH
+	.\]
+	Therefore, $HN=NH$, and $HN$ is a subgroup of $G$ by a previous homework problem. Let $k\in HN$. Since $HN\leq G$, it follows that $k\in G$. Since $N$ is normal in $G$, $kN=Nk$ for all $k\in HN$. Therefore, $N\triangleleft HN$.
+
+	(b) Let $\phi : H \to HN /N$, and let $g,h\in H$. Since $N\triangleleft HN$ by part (a), it follows that
+	\[
+		\phi (g)\phi (h)=gNhN=(gh)N=\phi (gh)
+	.\]
+	Therefore, $\phi $ is a homomorphism.
+
+	(c) Let $gN\in HN /N$.  Since $g\in HN$, there exist $h\in H$ and $n\in N$ such that $g=hn$. Since $N=eN$ and $n\in N$, by properties of cosets $nN=N$, and thus $hnN=h(nN)=hN$. Since $h\in H$, $\phi (h)=hN$, and thus $\phi $ is surjective.
+
+	(d) First we show $H\cap N\subseteq \ker \phi $. Let $g\in H\cap N$. It follows that $h\in N$, and $\phi (h)=hN$. Since $h\in N$, by properties of cosets $hN=N$. Since the identity of $HN /N$ is $eN=N$, we have $H\cap N \subseteq \ker \phi $.
+
+	Now we prove the converse. Let $h\in \ker \phi $. It follows that $\phi (h)=hN=N$. By properties of cosets, $h\in N$. Since $\ker \phi \subseteq H$, $h\in H$. Therefore, $h\in H\cap N$. Therefore, $\ker \phi =H\cap N$.
+
+	(e) Since $\phi $ is surjective by part (c), $\phi (H)=HN /N$. Since $\ker \phi =H\cap N$ by part (d), and since $\phi $ is a homomorphism by part (b), by the first isomorphism theorem it follows that
+	\[
+		H /H\cap N = HN /N
+	.\]
+\end{proof}
+\section*{Problem 4}
+(a) Let $\left| G \right| =p^n$. It follows from the class equation that
+\[
+	p^n = \left| Z(G) \right| +\sum_{a_i\notin Z\left( G \right) }\left[ G : C(a_i) \right]  
+.\]
+\begin{lemma}
+	Let $a,b,p\in\mathbb{Z}$ such that $p|a$. Then $p|(a+b)$ if and only if $p|b$.
+\end{lemma}
+\begin{proof}
+	Let $a,b,p\in\mathbb{Z}$, and let $p|a$. First, suppose $p|b$. It follows that there exist $q,r\in\mathbb{Z}$ such that $a=pq$ and $b=pr$. It follows that
+	\[
+		a+b=pq+pr=p(q+r)
+	.\]
+	Since $q+r\in\mathbb{Z}$, $p|(a+b)$.
+
+	Now suppose $p|(a+b)$. It follows that there exists $q,r\in\mathbb{Z}$ such that $a=pq$ and $a+b=pr$. It follows that
+	\begin{align*}
+		&\qquad\;\;\;a+b=pr\\
+		&\implies pq+b=pr\\
+		&\implies b=pr-pq=p(r-q)\\
+		&\implies p|b
+	.\end{align*}
+	Therefore, if $p|a$, then $p|b$ if and only if $p|(a+b)$.
+\end{proof}
+By Lagrange's theorem, $\left| cl(a) \right| =\left| C(a) \right| $ divides $p^n$. It follows that $\left[ G : C(a) \right] $ divides $p^n$. Since the only divisors of $p^n$ arae powers of $p$, we know
+\[
+	\sum_{a_i\notin Z(G)} \left[ G: C(a_i) \right]  
+\]
+is just a sum of powers of $p$, which we will write as
+\[
+	\sum_i p ^{e_i}
+.\]
+Notice that $p|p^m$ for all integers $m\neq 0$. Notice that $\left[ G : C(a_i) \right] =1$ implies $C(a_i)=G$, and thus $a_i\in Z(G)$. Therefore, $p$ will divide $\left[ G : C(a_i) \right] $ for all $a_i\notin Z(G)$, and thus
+\[
+p|\sum_{i} p ^{e_i}
+.\]
+Notice that $p|p^n$, and thus
+\[
+	p|\left( \left| Z(G) \right| +\sum_{a_i\notin Z(G)}\left[ G : C(a_i) \right]   \right) 
+.\]
+By lemma 1, it follows that $p$ divides $\left| Z(G) \right| $. Since $e\in Z(G)$ implies $\left| Z(G) \right| \geq 1$, and since $p\nmid 1$ for all $p$, we must have $Z(G)>1$.
+
+(b) By the fundamental theorem of finite abelian groups, it suffices to show $G$ is abelian. Since $\left| Z(G) \right| >1$ and $\left| Z(G) \right| $ divides $p$, we must have either $\left| Z(G) \right| =p$ or $\left| Z(G) \right| =p^2$. For the first case, suppose for purpose of contradiction that $\left| Z(G) \right| =p$. Since $Z(G)\triangleleft G$ and $G$ is finite,
+\[
+	\left| G / Z(G) \right| =\frac{\left| G \right| }{\left| Z(G) \right| }=\frac{p^2}{p}=p
+.\]
+By one of the corollaries of Lagrange's theorem, $G /Z(G)$ is cyclic. By problem 5 in homeowork 7, $G$ is abelian, and thus $Z(G)=G$, and thus $\left| Z(G) \right| =p^2$, which is a contradiction. Therefore, $\left| Z(G) \right| =p^2$.
+
+Notice that if $\left| Z(G) \right| =p^2=\left| G \right| $, since $Z(G)\subseteq G$, it follows that $Z(G)=G$, and thus $G$ is abelian.
+\section*{Problem 5}
+\begin{definition}
+	Some definitions are necessary because this is going to get messy. Let $\mathcal{L} $ be the set of left cosets of $N(H)$ in $G$. Let $\mathcal{C} $ be the set of subgroups conjugate to $H$. For all $K\in \mathcal{C} $, let $\mathcal{G} (K)$ be the set of elements in $g$ such that $gHg ^{-1}=K$. Let $\mathcal{D} $ be the set of all sets $\mathcal{G} (K)$. Symbolically, our definitions are
+	\begin{align*}
+		\mathcal{L} &=\left\{ gN(H) \mid x\in G \right\} \\
+		\mathcal{C} &=\left\{ gHg^{-1} \mid g\in G \right\} \\
+		\mathcal{G} (K)&=\left\{ g\in G \mid gHg^{-1}=K \right\} \\
+		\mathcal{D} &=\left\{ \mathcal{G} (K) \mid K\in \mathcal{C}  \right\} 
+	.\end{align*}
+\end{definition}
+This proof is so messy that I think it's worthwhile to give a brief outline of the proof.
+\begin{enumerate}
+	\item First, we show $\mathcal{D} =\mathcal{L} $. That is, the set of cosets is precisely the set of sets of elements that send $H$ to a distinct conjugate.
+	\item Next, we define a bijection $\mathcal{C} \to \mathcal{D} $ by $K\mapsto \mathcal{G} (K)$. It follows that $\left| \mathcal{C}  \right| =\left| \mathcal{D}  \right| =\left| \mathcal{L}  \right| =\left[ G : N(H) \right] $.
+\end{enumerate}
+
+First, we will show $\mathcal{D} \subseteq \mathcal{L} $. Let $\mathcal{G} (K)\in \mathcal{D} $. It follows that $K\in \mathcal{C} $. Fix some $g\in \mathcal{G} (K)$. We want to show $\mathcal{G} (K)\in \mathcal{L} $, namely $\mathcal{G} (K)=gN(H)$. First, we show $\mathcal{G} (K)\subseteq gN(H)$. Let $x\in \mathcal{G} (K)$. Notice that $xHx ^{-1}=K$. Additionally, notice that for any $gn\in gN(H)$, $gnHn ^{-1}g^{-1}=gHg^{-1}=K$, since $g\in \mathcal{G} (K)$ and $n\in N(H)$. It follows that
+\begin{align*}
+	&\qquad\;\;\;  xHx ^{-1}=gHg^{-1}\\
+	&\implies g^{-1}xHx ^{-1}g=H\\
+	&\implies \left( g^{-1} x\right)H\left( g^{-1}x \right) ^{-1}=H 
+.\end{align*}
+Therefore, $g^{-1}x\in N(H)$. By properties of cosets, $gN(H)=xN(H)$. By properties of cosets, $x\in gN(H)$. Therefore, $\mathcal{G} (K)\subseteq gN(H)$.
+
+Now we show the converse. Let $gn\in gN(H)$. Notice that
+\[
+	gnH\left( gn \right) ^{-1}=gnHn ^{-1}g^{-1}=gHg^{-1}=K
+.\]
+Therefore, $gn\in \mathcal{G} (K)$. Therefore, $gN(H)= \mathcal{G} (K)$ for at least one fixed $g\in \mathcal{G} (K)$, and thus $\mathcal{G} (K)\in\mathcal{L} $. Therefore, $\mathcal{D} \subseteq \mathcal{L} $.
+
+Now we show $\mathcal{L} \subseteq \mathcal{D} $. Let $g\in G$ such that $gHg^{-1}=K\in\mathcal{C} $, where $K$ is not necessarily a distinct subgroup from $H$. Let $gN(H)\in \mathcal{L} $. Notice that $g\in \mathcal{G} (K)$. We wish to show $gN(H)=\mathcal{G} (K)$. Let $gn\in gN\left(H \right) $. It follows that
+\[
+	gnH\left( gn \right) ^{-1}=gnHn ^{-1}g^{-1}=gHg^{-1}=K
+.\]
+Therefore, $gn\in \mathcal{G} (K)$, and $gN(H)\subseteq \mathcal{G} (K)$. Now let $x\in \mathcal{G} (K)$. It follows that $xHx ^{-1}=gHg^{-1}$, and thus
+\[
+	g^{-1}xHx ^{-1}g=H
+.\]
+Therefore, $g^{-1}x\in N(H)$, and by properties of cosets, $gN(H)=xN(H)$. By properties of cosets, $x\in gN(H)$, and $\mathcal{G} (K)=gN(H)$. Therefore, $\mathcal{L} \subseteq \mathcal{D} $.
+
+Let $\phi : \mathcal{C}  \to \mathcal{D} $ be the map $K\mapsto \mathcal{G} (K)$. First, we show $\phi $ is well defined. Let $aHa^{-1}=bHb^{-1}=K\in \mathcal{C} $ with $a\neq b$. It follows that $a,b\in \mathcal{G} (K)$, and by properties of cosets, $\mathcal{G} (K)=aN(H)=bN(H)$. Therefore, $\phi $ is well-defined.
+
+Now we show $\phi $ is surjective. Let $\mathcal{G} (K)\in \mathcal{D} $. By definition, it follows that $K\in \mathcal{C} $. Finally, we show $\phi $ is injective. Let $\mathcal{G} (K),\mathcal{G} (L)\in \mathcal{D} $ such that $\mathcal{G} (K)=\mathcal{G} (L)$. By definition, there exists $a,b\in G$ such that $K=aHa^{-1}$ and $L=bHb^{-1}$. By properties of cosets, $a,b\in \mathcal{G} (K),\mathcal{G} (L)$. Therefore, $aHa^{-1}=K$ and $aHa^{-1}=L$, and thus $K=L$.
+
+Therefore $\phi $ is a bijection, and $\left| \mathcal{C}  \right| =\left| \mathcal{D}  \right| $. Since $\left| \mathcal{D}  \right| =\left| \mathcal{L}  \right| $, it follows that $\left| \mathcal{C}  \right| =\left| \mathcal{L}  \right| $. Since $\left| \mathcal{L}  \right| =\left[ G : N(H) \right] $, it follows that $\left| \mathcal{C}  \right| =\left[ G : N(H) \right] $.
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.7.6)  20 SEP 2024 00:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.7.6)  22 OCT 2024 11:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -458,7 +458,9 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip62
-) (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 33.
+ (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks42
 \pgfutil@tempdima=\dimen284
@@ -764,13 +766,48 @@ File: md-frame-1.mdf 2013/07/01\ 1.9b: md-frame-1
 \c@mdf@zref@counter=\count349
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
-\c@theorem=\count350
-\c@corollary=\count351
-\c@lemma=\count352
-\c@proposition=\count353
-\c@definition=\count354
-
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+(/usr/share/texlive/texmf-dist/tex/latex/thmtools/thmtools.sty
+Package: thmtools 2023/05/04 v0.76
+\thmt@toks=\toks54
+\c@thmt@dummyctr=\count350
+ (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-patch.sty
+Package: thm-patch 2023/05/04 v0.76
+ (/usr/share/texlive/texmf-dist/tex/latex/thmtools/parseargs.sty
+Package: parseargs 2023/05/04 v0.76
+\@parsespec=\toks55
+)) (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-kv.sty
+Package: thm-kv 2023/05/04 v0.76
+Package thm-kv Info: Theorem names will be uppercased on input line 42.
+Package thm-kv Info: kvsetkeys patch (v1.16 or later) on input line 158.
+) (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-autoref.sty
+Package: thm-autoref 2023/05/04 v0.76
+ (/usr/share/texlive/texmf-dist/tex/latex/thmtools/aliasctr.sty
+Package: aliasctr 2023/05/04 v0.76
+)) (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-listof.sty
+Package: thm-listof 2023/05/04 v0.76
+) (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-restate.sty
+Package: thm-restate 2023/05/04 v0.76
+) (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-amsthm.sty
+Package: thm-amsthm 2023/05/04 v0.76
+\thmt@style@headstyle=\toks56
+))
+\c@theorem=\count351
+\c@corollary=\count352
+\c@lemma=\count353
+\c@proposition=\count354
+\c@definition=\count355
+Package thmtools Info: Key `mdframed' (with value `linewidth=1pt, bottomline=false, topline=false, rightline=false, innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=0pt')
+(thmtools)             is not a known style key.
+(thmtools)             Will pass this to every \declaretheorem
+(thmtools)             that uses `style=proof' on input line 87.
+Package thmtools Info: Key `qed' (with value `\qedsymbol ')
+(thmtools)             is not a known style key.
+(thmtools)             Will pass this to every \declaretheorem
+(thmtools)             that uses `style=proof' on input line 87.
+Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line 89.
+ (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thmdef-mdframed.sty
+Package: thmdef-mdframed 2023/05/04 v0.76
+) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@headwidth=\skip130
 \f@nch@O@elh=\skip131
@@ -781,7 +818,74 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@erf=\skip136
 \f@nch@O@olf=\skip137
 \f@nch@O@orf=\skip138
-)) (/home/grant-talbert/texmf/tex/latex/titlepageBU/titlepageBU.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks57
+\t@pgfplots@tokb=\toks58
+\t@pgfplots@tokc=\toks59
+\pgfplots@tmpa=\dimen338
+\c@pgfplots@coordindex=\count356
+\c@pgfplots@scanlineindex=\count357
+ (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_loader.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks60
+\t@pgf@tokb=\toks61
+\t@pgf@tokc=\toks62
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_pgfutil-common-lists.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructureext.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count358
+) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatrix.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count359
+\t@pgfplotstable@a=\toks63
+) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count360
+ (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen339
+\pgfdecoratedremainingdistance=\dimen340
+\pgfdecoratedinputsegmentcompleteddistance=\dimen341
+\pgfdecoratedinputsegmentremainingdistance=\dimen342
+\pgf@decorate@distancetomove=\dimen343
+\pgf@decorate@repeatstate=\count361
+\pgfdecorationsegmentamplitude=\dimen344
+\pgfdecorationsegmentlength=\dimen345
+)
+\tikz@lib@dec@box=\box87
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count362
+\pgfplots@xmin@reg=\dimen346
+\pgfplots@xmax@reg=\dimen347
+\pgfplots@ymin@reg=\dimen348
+\pgfplots@ymax@reg=\dimen349
+\pgfplots@zmin@reg=\dimen350
+\pgfplots@zmax@reg=\dimen351
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count363
+\lst@gtempboxa=\box88
+\lst@token=\toks64
+\lst@length=\count364
+\lst@currlwidth=\dimen352
+\lst@column=\count365
+\lst@pos=\count366
+\lst@lostspace=\dimen353
+\lst@width=\dimen354
+\lst@newlines=\count367
+\lst@lineno=\count368
+\lst@maxwidth=\dimen355
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count369
+\lst@skipnumbers=\count370
+\lst@framebox=\box89
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+) (/home/grant-talbert/texmf/tex/latex/titlepageBU/titlepageBU.sty
 Package: titlepageBU 
 ) (/usr/share/texlive/texmf-dist/tex/latex/qtree/qtree.sty
 Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
@@ -796,40 +900,40 @@ Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 114.
  (/usr/share/texlive/texmf-dist/tex/latex/pict2e/p2e-pdftex.def
 File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
 )
-\pIIe@GRAPH=\toks54
-\@arclen=\dimen338
-\@arcrad=\dimen339
-\pIIe@tempdima=\dimen340
-\pIIe@tempdimb=\dimen341
-\pIIe@tempdimc=\dimen342
-\pIIe@tempdimd=\dimen343
-\pIIe@tempdime=\dimen344
-\pIIe@tempdimf=\dimen345
+\pIIe@GRAPH=\toks65
+\@arclen=\dimen356
+\@arcrad=\dimen357
+\pIIe@tempdima=\dimen358
+\pIIe@tempdimb=\dimen359
+\pIIe@tempdimc=\dimen360
+\pIIe@tempdimd=\dimen361
+\pIIe@tempdime=\dimen362
+\pIIe@tempdimf=\dimen363
 )
-\c@treecount=\count355
-\c@branchcount=\count356
-\parentbox=\box87
-\treebox=\box88
-\treeboxone=\box89
-\treeboxtwo=\box90
-\treeboxthree=\box91
-\treeboxfour=\box92
-\treeboxfive=\box93
-\treeboxsix=\box94
-\treeboxseven=\box95
-\treeboxeight=\box96
-\treeboxnine=\box97
-\treeboxten=\box98
-\treeboxeleven=\box99
-\treeboxtwelve=\box100
-\treeboxthirteen=\box101
-\treeboxfourteen=\box102
-\treeboxfifteen=\box103
-\treeboxsixteen=\box104
-\treeboxseventeen=\box105
-\treeboxeighteen=\box106
-\treeboxnineteen=\box107
-\treeboxtwenty=\box108
+\c@treecount=\count371
+\c@branchcount=\count372
+\parentbox=\box90
+\treebox=\box91
+\treeboxone=\box92
+\treeboxtwo=\box93
+\treeboxthree=\box94
+\treeboxfour=\box95
+\treeboxfive=\box96
+\treeboxsix=\box97
+\treeboxseven=\box98
+\treeboxeight=\box99
+\treeboxnine=\box100
+\treeboxten=\box101
+\treeboxeleven=\box102
+\treeboxtwelve=\box103
+\treeboxthirteen=\box104
+\treeboxfourteen=\box105
+\treeboxfifteen=\box106
+\treeboxsixteen=\box107
+\treeboxseventeen=\box108
+\treeboxeighteen=\box109
+\treeboxnineteen=\box110
+\treeboxtwenty=\box111
 \treeoffsetone=\skip139
 \treeoffsettwo=\skip140
 \treeoffsetthree=\skip141
@@ -904,12 +1008,12 @@ File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
 \branchwidth=\skip266
 \parentwidth=\skip267
 \treewidth=\skip268
-\qta=\toks55
-\qtb=\toks56
-\nbranches=\count357
-\qroofx=\count358
-\qroofy=\count359
-\@qrscratchbox=\box109
+\qta=\toks66
+\qtb=\toks67
+\nbranches=\count373
+\qroofx=\count374
+\qroofy=\count375
+\@qrscratchbox=\box112
 )
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 12.
  (./7 Discrete Mathematics.aux)
@@ -935,17 +1039,17 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count360
-\scratchdimen=\dimen346
-\scratchbox=\box110
-\nofMPsegments=\count361
-\nofMParguments=\count362
-\everyMPshowfont=\toks57
-\MPscratchCnt=\count363
-\MPscratchDim=\dimen347
-\MPnumerator=\count364
-\makeMPintoPDFobject=\count365
-\everyMPtoPDFconversion=\toks58
+\scratchcounter=\count376
+\scratchdimen=\dimen364
+\scratchbox=\box113
+\nofMPsegments=\count377
+\nofMParguments=\count378
+\everyMPshowfont=\toks68
+\MPscratchCnt=\count379
+\MPscratchDim=\dimen365
+\MPnumerator=\count380
+\makeMPintoPDFobject=\count381
+\everyMPtoPDFconversion=\toks69
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -1003,17 +1107,21 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 12.
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 Package xypdf Info: Line width: 0.43799pt on input line 12.
-Package hyperref Info: Link coloring OFF on input line 12.
+Package hyperref Info: Link coloring ON on input line 12.
  (./7 Discrete Mathematics.out) (./7 Discrete Mathematics.out)
 \@outlinefile=\write5
 \openout5 = `"7 Discrete Mathematics.out"'.
 
+
+Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
+\c@lstlisting=\count382
 <BU_Logo.png, id=27, 3854.4pt x 2168.1pt>
 File: BU_Logo.png Graphic file (type png)
 <use BU_Logo.png>
 Package pdftex.def Info: BU_Logo.png  used on input line 13.
 (pdftex.def)             Requested size: 115.62701pt x 65.04019pt.
- [1
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc} </home/grant-talbert/texmf/tex/latex/titlepageBU/BU_Logo.png>]
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
@@ -1021,10 +1129,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.53 \begin{center}
                     [1{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [2]
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 101.
 LaTeX Font Info:    Trying to load font information for U+euf on input line 103.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [3] [4]
+)
+Package hyperref Info: bookmark level for unknown notation defaults to 0 on input line 118.
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 121.
+ [3]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 133.
+Package hyperref Info: bookmark level for unknown replacementproof defaults to 0 on input line 133.
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 168.
+ [4]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 172.
+
 
 LaTeX Warning: Hyper reference `fig:2' on page 5 undefined on input line 182.
 
@@ -1044,18 +1166,18 @@ Package rerunfilecheck Info: File `"7 Discrete Mathematics".out' has not changed
 (rerunfilecheck)             Checksum: C532B11EA602C03BEEC58524C76929B1;725.
  ) 
 Here is how much of TeX's memory you used:
- 30920 strings out of 474222
- 610646 string characters out of 5748734
+ 42978 strings out of 474222
+ 985853 string characters out of 5748734
  1966975 words of memory out of 5000000
- 52606 multiletter control sequences out of 15000+600000
+ 64481 multiletter control sequences out of 15000+600000
  575573 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,12n,100p,3279b,1048s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,14n,100p,3279b,1098s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on "7 Discrete Mathematics.pdf" (9 pages, 385517 bytes).
+Output written on "7 Discrete Mathematics.pdf" (9 pages, 385766 bytes).
 PDF statistics:
- 200 PDF objects out of 1000 (max. 8388607)
- 148 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 157 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
  58 words of extra memory for PDF output out of 10000 (max. 10000000)
 

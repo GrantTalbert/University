@@ -1,0 +1,41 @@
+\lecture{10}{Wed 23 Oct 2024 12:21}{Inhomogeneous Continuation}
+Linearity principles hold for inhomogeneous systems. In the case
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =A \mathbf{Y}+\mathbf{G}(t)
+,\]
+Let $\mathbf{Y}=(0,e^t)$.
+the general solution to the homogeneous case plus a particular solution to the inhomogeneous case will give the general solution for the inhomogeneous case. We can sometimes guess $\mathbf{Y}=Ae^{\lambda t}\mathbf{v}$ for some vector $\mathbf{v}$ and constants $A,\lambda $, but there is also a more analytic method.
+
+Du Hamel's formula says the following. Let
+	 \[
+		\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =A \mathbf{Y}+\mathbf{G}(t)
+	.\]
+Rearrange it to give
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} -A \mathbf{Y}=\mathbf{G}(t)
+.\]
+Choose $M(t)$ some matrix such that
+\[
+	M(t)\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} -M(t)A \mathbf{Y}=\frac{\mathrm{d}}{\mathrm{d}t} M(t) \mathbf{Y}
+.\]
+It follows that
+\[
+	M(t)=e^{-At}
+.\]
+Thus, let
+\[
+	e^{-At}\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t}-e^{-At}A \mathbf{Y}=e^{-At}\mathbf{G}(t)
+.\]
+By the inverse of the product rule,
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( e^{-At}\mathbf{Y} \right) =e^{-At}\mathbf{G}(t)
+.\]
+Integrating, we find
+\[
+	\mathbf{Y}(t)=e^{At}\int e^{-At}\mathbf{G}(t) \,\mathrm{d} t
+,\]
+since the inverse of the matrix $e^{-At}$ is $e^{At}$. Another simple way of stating this is
+\[
+	\mathbf{Y}(t)=e^{tA}\mathbf{Y}(0)+e^{tA}\int_{0}^{t} e^{-tA}\mathbf{G}(t) \,\mathrm{d} t
+.\]
+

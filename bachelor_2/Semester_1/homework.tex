@@ -25,7 +25,7 @@
 %\pagecolor{page}
 \usepackage{booktabs} %the \toprule and \bottomrule thick lines on tables
 \usepackage{hyperref}
-\definecolor{aqua}{HTML}{00C5FF}
+\definecolor{aqua}{HTML}{0000FF}
 \hypersetup{
     colorlinks,
     linkcolor={aqua},
@@ -51,6 +51,7 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage[framemethod=TikZ]{mdframed}
+\usepackage{thmtools}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
@@ -76,6 +77,8 @@
 \newtheorem*{notation}{Notation}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, qed=\qedsymbol]{soln}
+\declaretheorem[numbered=no, style=soln, name=Solution]{solution}
 
 %fancy headers
 \usepackage{fancyhdr}

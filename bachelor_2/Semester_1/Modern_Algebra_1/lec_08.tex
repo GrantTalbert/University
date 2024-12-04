@@ -1,0 +1,66 @@
+\lecture{8}{Tue 29 Oct 2024 09:34}{Homomorphisms}
+
+Isomorphisms are fairly restrictive. The requirement that an isomorphism be bijective means not many groups can be isomorphic. However, by dropping the bijection restriction, we can still uncover a large amount of information about relationships between groups.
+
+\begin{definition}[Homomorphism]\label{dfn:sak}
+	A map $\phi : G \to F$ is a group homomorphism if for all $a,b\in G$, $\phi (a)\phi (b)=\phi (ab)$. An isomorphism is then a bijective homomorphism.
+\end{definition}
+
+For example, consider $G=\left<g \right>$, and define $\phi : (\mathbb{Z},+) \to G$ as the map $n\mapsto g^n$. This map is clearly not bijective for any $g$ with finite order. However, regardless of whether it is bijective or not, the map is a homomorphism.
+
+Another example is the map $\det : \operatorname{GL}_n(\mathbb{R})  \to \mathbb{R}^*$, which I've previously shown is a group homomorphism. I'm pretty sure this holds for any field in fact. That is, $\det : \operatorname{GL}_n(\mathbb{F})  \to \mathbb{F}^*$ should be a homomorphism.
+
+\begin{theorem}[Properties of Homomorphisms]\label{thm:bwaaaaa}
+	Let $\phi : G \to H$ be a group homomorphism, and let $g\in G$.
+	\begin{enumerate}
+		\item $\phi (e_G)=e_F$.
+		\item For all $n\in\mathbb{Z}$, $\phi (g^n)=\phi (g)^n$.
+		\item If $\left| g \right| <\infty$, then $\left| \phi (g) \right| $ divides $\left| g \right| $. If $\left| G \right| <\infty$, then $\left| \phi (g) \right| $ divides $\left| \phi (G) \right| $.
+		\item If $K\leq G$ is cyclic, then $\phi (K)$ is cyclic in $\phi (G)$. If $K\leq G$ is normal, then $\phi (K)$ is normal in $\phi (G)$. If $K\leq G$ is abelian, then $\phi (K)$ is abelian in $\phi (G)$.
+		\item If $K\leq H$, then $\phi ^{-1}(K)\coloneqq \left\{ g\in G \mid \phi (g)\in K \right\} \leq G$. Moreover, if $K\triangleleft H$, then $\phi ^{-1}(K)\triangleleft G$.
+		\item $\phi (Z(G))\leq Z(\phi (G))$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(1) Let $e_G$ be the identity in $G$. Then, for all $g\in G$, $e_Gg=g$. Thus, $\phi (e_Gg)=\phi (g)=\phi (e_G)\phi (g)$. Therefore, $\phi (e_G)$ is the identity in $H$.
+
+	(2) Trivial. Induct on it.
+
+	(3) The second claim follows from Lagrange's theorem, so it suffices to show the first claim. Take $n=\left| g \right| $ finite. Then
+	\[
+		\phi (g)^n=\phi \left( g^n \right) =\phi (e_G)=e_F
+	.\]
+	Therefore, the order of $\phi (g)$ divides $n$.
+
+	(4) We prove the case of normal subgroups. $\phi (K)\triangleleft H$ if and only if $a\phi (K)a^{-1}\subseteq \phi (K)$. Let $a\in\phi (G)$. Thus, $a=\phi (g)$ for some $g\in G$. Let $x=\phi (k)$ for some $k\in K$. Then $axa^{-1}=\phi (g)\phi (k)\left( \phi (g) \right) ^{-1}=\phi (ghg^{-1})$. Because $K\triangleleft G$, $gkg^{-1}\in gKg^{-1}=K$. There then exists $k'\in K$ such that $gkg^{-1}=k'$. Therefore, $axa^{-1}=\phi (h')\in\phi (H)$.
+
+	(5) EFY
+
+	(6) fun
+\end{proof}
+
+\begin{definition}[Kernel]\label{dfn:kjx}
+	Lert $\phi  : G \to F$ be a group homomorphism. Then the kernel of $\phi $, denoted $\ker \phi $, is the set
+	\[
+		\ker \phi \coloneqq \left\{ g\in G \mid \phi (g)=e_F \right\} =\phi ^{-1}(e_F)
+	.\]
+\end{definition}
+
+\begin{theorem}[Properties of the Kernel]\label{thm:kasj}
+	Let $\phi : G \to F$ be a group homomorphism.
+	\begin{enumerate}
+		\item $\ker \phi \leq G$. Moreover, $\ker \phi \triangleleft G$.
+		\item $\phi (a)=\phi (b)$ if and only if $a\ker \phi =b\ker \phi $.
+		\item If $\phi (g)=a$, then $\phi ^{-1}(a)=\left\{ g\in G \mid \phi (g)=a \right\} =g\ker \phi $.
+		\item If $\left| \ker \phi  \right| =n<\infty$, then $\phi $ is injective.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(1) $\left\{ e_F \right\} \triangleleft \phi (G)$, so $\phi ^{-1}(e_F)=\ker \phi \triangleleft G$ by property (5) of homomorphisms.
+
+	(2) Let $\phi (a)=\phi (b)$. Then $\phi \phi (b)^{-1}=e_F$. Since $\phi $ is a homomorphism, $\phi (ab^{-1})=e_F$. This happens if and only if $ab^{-1}\in \ker \phi $ by definition. By properties of cosets, $a\ker \phi =b\ker \phi $.
+
+	(3) Similar to (2)
+
+	(4) EFY
+\end{proof}

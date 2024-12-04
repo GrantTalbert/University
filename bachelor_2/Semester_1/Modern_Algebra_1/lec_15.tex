@@ -1,0 +1,114 @@
+\lecture{15}{Tue 26 Nov 2024 09:30}{Ideals and Homomorphisms}
+\begin{definition}[Maximal Ideal]\label{dfn:MID}
+	An ideal $M$ in a ring $R$ is maximal if $M\neq R$ and the only ideal strictly containing $M$ is $R$.
+\end{definition}
+
+Rings can have multiple maximal ideals. For example,  $p\mathbb{Z}$ is a maximal ideal of $\mathbb{Z}$ for all prime $p$. Moreovr, Krull's theorem states maximal ideals always exist.
+
+\begin{theorem}\label{thm:akj}
+	Let $R$ be a commutative ring with unity, and let $M\subset R$ be an ideal. Then $M$ is maximal if and only if $R /M$ is a field.
+\end{theorem}
+\begin{proof}
+	done in homework 10
+\end{proof}
+
+Note that $\mathbb{Z} / p\mathbb{Z}$ is a field, proving our above statement that $\mathbb{Z}$ has multiple maximal ideals.
+
+\begin{definition}[Prime Ideal]\label{dfn:PrI}
+	A proper ideal $P$ of a commutative ring $R$ is \textbf{prime} if $ab\in P$ if and only if $a\in P$ or $b\in P$.
+\end{definition}
+
+An important property of prime numbers is that for a prime $p$, if $p|ab$, then $p|a$ or $p|b$. This is the same idea, but now with ideals instead of like numbers.
+
+\begin{proposition}
+	Let $R$ be a commutative ring with unity. Then $P$ is a prime ideal of $R$ if and only if $R /P$ is an integral domain.
+\end{proposition}
+\begin{proof}
+	also done in homework 10
+\end{proof}
+\begin{corollary}
+	Any maximal ideal is prime, but prime ideals are not necessarily maximal.
+\end{corollary}
+\begin{proof}
+	Any field is an integral domain, so it follows immediately from the previous theorem and proposition.
+\end{proof}
+
+\begin{corollary}
+	A commutative ring with unity ring $R$ is a field if and only if $\left\langle 0 \right\rangle $ is a maximal ideal.
+\end{corollary}
+\begin{proof}
+	done in the homework, except this is not a corollary in a homework but a lemma to the previous theorems.
+\end{proof}
+\begin{proposition}
+	A commutative ring with unity $R$ is an integral domain if and only if $\left\langle 0 \right\rangle $ is a prime ideal.
+\end{proposition}
+\begin{proof}
+	Let $ab=0$. Then either $a$ or $b$ is $0$. Therefore, $R$ is an integral domain.
+\end{proof}
+\chapter{Ring Homomorphisms}
+\begin{definition}[Ring Homomorphism]\label{dfn:RingHomo}
+	Let $R,S$ be rings, and let $\phi : R \to S$. Then $\phi $ is a ring homomorphism if and only if for all $a,b\in S$,
+	\[
+		\phi (ab)=\phi (a)\phi (b)\qquad \text{and}\qquad \phi (a+b)=\phi (a)+\phi (b)
+	.\]
+\end{definition}
+\begin{definition}[Ring Isomorphism]\label{dfn:RingIso}
+	Let $R,S$ be rings and let $\phi : R \to S$ be a ring homomorphism. Then $\phi $ is an isomorphism if and only if it is bijective. We write $R\cong S$ to denote that $R$ is isomorphic to $S$.
+\end{definition}
+\begin{definition}[Kernel]\label{dfn:RingKer}
+	Let $R,S$ be rings and let $\phi : R \to S$ be a ring homomorphism. Define the kernel of $\phi $ as the set
+	\[
+		\ker \phi =\left\{ r\in R \mid \phi (r)=0 \right\} 
+	.\]
+\end{definition}
+\begin{proposition}
+	Let $R,S$ be rings and let $\phi : R \to S$ be a ring homomorphism. Then $\ker \phi $ is an ideal of $R$.
+\end{proposition}
+\begin{proof}
+	Done in homework. I will take that $\ker \phi $ is a ring to be trivial. Let $r\in \ker \phi $. Note that
+	\[
+		\phi (ar)=\phi (a)0=0
+	.\]
+	Therefore, $ar\in \ker \phi $.
+\end{proof}
+\begin{proposition}
+	Let $R$ be a ring with $I$ an ideal. Define $\phi : R \to R /I$ as the map $r\mapsto r+I$. Then $\ker \phi =I$.
+\end{proposition}
+\begin{proof}
+	Let $r\in \ker \phi $. It follows that $\phi (r)=r+I=I$. By properties of cosets, $r\in I$. Now let $r\in I$. It follows by properties of cosets that $\phi (r)=r+I=I$. Therefore, $r\in \ker \phi $.
+\end{proof}
+\begin{remark}
+	We call $\phi : R \to R/I$ defined as $r\mapsto r+I$ the \textbf{canonical} \textbf{homomorphism}.
+\end{remark}
+Here's an interesting ring homomorphism. Let $\phi_\alpha $ be a linear functional. That is, let $\phi_\alpha : C[a,b] \to \mathbb{R}$ be the map $f\mapsto f(\alpha )$. Then  $\phi_\alpha $ is a ring homomorphism for all $\alpha \in\mathbb{R}$.
+
+\begin{theorem}[Properties]\label{thm:ka}
+	Let $\phi : R \to S$ be a ring homomorphism.
+	\begin{itemize}
+		\item If $R$ is a commutative ring, $\phi (R)$ is a commutative ring.
+		\item $\phi (0)=0$.
+		\item Let $R$ be a ring with unity. If $\phi $ is surjective, then $\phi (1)=1$.
+		\item If $R$ is a field and $\phi (R)\neq \left\{ 0 \right\}  $, then $\phi (R)$ is a field.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	trivial.
+\end{proof}
+\begin{theorem}[First Isomorphism Theorem]\label{thm:FIT}
+	Let $R,S$ be rings and let $\psi  : R \to S$ be a ring homomorphism. Then the map  $\eta  : R /\ker \psi   \to \psi  (R) $ defined as $r+\ker \psi  \mapsto \psi  (r)$ is a unique isomorphism. Moreover, if $\phi : R \to R /\ker \psi $ is the canonical isomorphism theorem, then $\psi =\eta \circ \phi $.
+\end{theorem}
+\begin{theorem}[Second Isomorphism Theorem]\label{thm:SIT}
+	Let $R$ be a ring and let $I,J$ be ideals of $R$. Then
+	\[
+		I /I\cap J \cong (I+J) /J
+	.\]
+\end{theorem}
+\begin{theorem}[Third Isomorphism Theoremnm]\label{thm:FIT}
+	Let $R$ be a ring and let $I,J$ be ideals of $R$ with $J \subset I \subset R$. Then
+	\[
+		R /I \cong \frac{R /J}{I /J}
+	.\]
+\end{theorem}
+\begin{theorem}[Correspondence Theorem]\label{thm:FOIT}
+	Problem 5a of hw 10? idk
+\end{theorem}

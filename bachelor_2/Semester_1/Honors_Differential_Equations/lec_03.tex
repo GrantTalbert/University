@@ -16,8 +16,7 @@ This makes it way easier:
 .\]
 Solving from here is trivial.
 
-\subsection{Mixing Problems}
-Some container full of some solution, adding more stuff from the top while also draining out some stuff from the bottom. Rates of both can be diff. Stirring all the time to make sure things are mixed.
+An important problem is the \textbf{mixing} \textbf{problem}. Some container full of some solution, adding more stuff from the top while also draining out some stuff from the bottom. Rates of both can be diff. Stirring all the time to make sure things are mixed.
 \begin{example}
 	Tank have 50gal of water. At $t=0$, the tank contains pure water. Salty brine is poured into the tank at a rate of 3gal/min with a concentration of 1lb/gal of salt. Brine is drained from the tank at a rate of 3gal/min. How much salt is in the tank after 5 minutes?
 \end{example}
@@ -51,7 +50,7 @@ Some container full of some solution, adding more stuff from the top while also 
 		S(5)=50\left( 1-e^{-\frac{15}{50}} \right) \text{lbs}
 	.\]
 \end{solution}
-DETOUR: NUMERICAL ANALYSIS
+\section{Euler's Method and Taylor's Theorem}
 
 Recall Taylor Polynomials. We know that an approximation for $f(t)$ about some $a\in\mathbb{R}$ is given by the Taylor Polynomial about $a$,
 \[
@@ -61,7 +60,7 @@ A taylor polynomial of order $n$ will be called $T_n(t)$.
 \begin{prev}
 	Euler's Method:
 
-	Take an interval split into a grid of points $t_j$, separated by value $\Delta t$. Suppose $y(t_j)$ is known, at least approximately. Obviously $y(t_{j+1})=y(t_j+\Delta t)$. This is approximately $y(t_j)+y'(t_j)\Delta t$. The derivative is usually given.
+	Take an interval split into a grid of points $t_j$, separated by value $\Delta t$. Suppose $y(t_j)$ is known, at least approximately. Define $y(t_{j+1})=y(t_j+\Delta t)$. This is approximately $y(t_j)+y'(t_j)\Delta t$. The derivative is usually given.
 
 	Given $\frac{\mathrm{d}y}{\mathrm{d}t} =f(y,t)$, $y(t_0)=y_0$,
 	\begin{itemize}
@@ -73,42 +72,123 @@ A taylor polynomial of order $n$ will be called $T_n(t)$.
 	\end{itemize}
 	In this case, $t_{n+1}=t_n+\Delta t$.
 \end{prev}
-\begin{theorem}[Taylor's theorem]\label{thm:3}
+\begin{theorem}[Taylor's theorem]\label{thm:1}
 	For some $f : \mathbb{R} \to \mathbb{R}$, then
 	\[
 		f(t)=T_n(t)+R_{n+1}(t)
 	.\]
-	If $f(t)$ is $n+1$ times continuously differentiable on $\left( a-\delta ,a+\delta  \right) $, then there exists a constant $C_{n+1}$ such that $|f(t)-T_n(t)|=\left| R_{n+1}(t) \right| \leq C_{n+1}\left| t-a \right| ^{n+1}$ for all $a-\delta <t<a+\delta $.
+	If $f(t)$ is $n+1$ times continuously differentiable on $\left( a-\varepsilon  ,a+\varepsilon \right) $, then there exists a constant $C_{n+1}$ such that $|f(t)-T_n(t)|=\left| R_{n+1}(t) \right| \leq C_{n+1}\left| t-a \right| ^{n+1}$ for all $a-\varepsilon <t<a+\varepsilon $.
 
-	\[C_{n+1}\coloneqq \max \left\{ \left| f^{(n+1)}[a-\delta ,a+\delta]  \right|\right\} .\]
+	\[C_{n+1}\coloneqq \max \left\{ \left| f^{(n+1)}[a-\varepsilon  ,a+\varepsilon ]  \right|\right\} .\]
 \end{theorem}
-Recall the fundamental theorem of calculus says
-\[
-	f(t)-f(a)=\int_{a}^{t} f'(s) \,\mathrm{d} s
-.\]
-Let's rewrite this:
-\[
-	\int_{a}^{t} f'(s)-f'(a)+f'(a) \,\mathrm{d} s=\int_{a}^{t} f'(s)-f'(a) \,\mathrm{d} s+\int_{a}^{t} f'(a) \,\mathrm{d} s
-.\]
-The second integral is constant wrt $s$ :
-\[
-	f(t)-f(a)=\int_{a}^{t} f'(s)-f'(a) \,\mathrm{d} s+f'(a)(t-a)
-.\]
-Notice the taylor polynomial is appearing.
-\[
-	f(t)=f(a)+f'(a)(t-a)+\int_{a}^{t} f'(s)-f'(a) \,\mathrm{d} s
-.\]
-So clearly, that final integral is the remainder $R_2(t)$ in $T_1(a)$. We can keep going:
-\[
-	f(t)=f(a)+f'(a)(t-a)+\int_{a}^{t}\int_{a}^{s} f''(q) \,\mathrm{d} q \mathrm{d} s
-.\]
-Now notice that
-\[
-	\left| \int_{a}^{b} f(x) \,\mathrm{d}x  \right| \leq \int_{a}^{b} \left| f(x) \right|  \,\mathrm{d} x
-.\]
-Let $M_2 = \max_{q\in[a,t]}\left| f''(q) \right|$.
-Going back to our double integral, we have
-\[
-	\left| R_2(t) \right| =\left| \int_{a}^{t}\int_{a}^{s} f''(q) \,\mathrm{d} q \mathrm{d} s \right| \leq \int_{a}^{t}\left|\int_{a}^{s} f''(q) \,\mathrm{d} q \right|\mathrm{d} s \leq M_2\int_{a}^{t}\int_{a}^{s}  \,\mathrm{d} q \mathrm{d}s =M_2 \int_{a}^{t} (s-a) \,\mathrm{d} s=\frac{1}{2}M_2 \left| t-a \right|^2
-.\]
-We can do all of this again for $R_3$.
+\begin{proof}
+	By the FTC,
+	\[
+		f(t)-f(a)=\int_{a}^{t} f'(s_1) \,\mathrm{d} s_1 = \int_{a}^{t} f'(s_1)-f'(a)+f'(a) \,\mathrm{d} s_1
+	.\]
+	We thus have
+	\[
+		f(t)=f(a)+\int_{a}^{t} f'(s_1)-f'(a)+f'(a) \,\mathrm{d} s_1=f(a)+\int_{a}^{t} f'(s_1)-f'(a) \,\mathrm{d} s_1+(t-a)f'(a)
+	.\]
+	Rearranging, we have
+	\[
+		f(t)=f(a)+f'(a)(t-a)+\int_{a}^{t} f'(s_1)-f'(a) \,\mathrm{d} s_1
+	.\]
+	Define
+	\[		R_{2}(t)\coloneqq \int_{a}^{t} f'(s_1)-f'(a) \,\mathrm{d}s_1 
+	.\]
+	From the FTC, we have
+	\[
+		\int_{a}^{t} f'(s_1)-f'(a) \,\mathrm{d} s_1=\int_{a}^{t}\int_{a}^{s_1} f''(s_2) \,\mathrm{d} s_2 \mathrm{d} s_1
+	.\]
+	We also know that for any real-valued function $\phi $,
+	\[
+		\left| \int_{t_1}^{t_2} \phi (t) \,\mathrm{d} t \right| \leq \int_{t_1}^{t_2} \left| \phi (t) \right|  \,\mathrm{d} t
+	.\]
+	Thus,
+	\[
+		R_2(t)\leq \left| R_{2}(t) \right| =\left| \int_{a}^{t}\int_{a}^{s_1} f''(s_2) \,\mathrm{d} s_2 \mathrm{d} s_1 \right| \leq \int_{a}^{t} \left| \int_{a}^{s_1} f''(s_2) \,\mathrm{d} s_2 \right|  \,\mathrm{d} s_1
+	.\]
+	Now let
+	\[
+		M_2 \coloneqq \max_{q\in[a,t]}\left|f''[a,t]\right|
+	.\]
+	It follows naturally that
+	\[
+		\int_{a}^{t} \left| \int_{a}^{s_1} f''(s_2) \,\mathrm{d} s_2 \right|  \,\mathrm{d} s_1 \leq \int_{a}^{t}\int_{a}^{s_1} M_2 \,\mathrm{d} s_2 \mathrm{d} s_1=M_2\int_{a}^{t}\int_{a}^{s_1}  \,\mathrm{d} s_2 \mathrm{d} s_1 = M_2\int_{a}^{t} (s_1-a) \,\mathrm{d} s_1=\frac{M_2}{2} (t-a)^2
+	.\]
+	Therefore,
+	\[
+		R_2(t)\leq M_2 \frac{(t-a)^2}{2!}
+	\]
+	and thus,
+	\[
+		f(t)\leq T_1(t)+ M_2 \frac{(t-a)^2}{2!}
+	\]
+	in an $\varepsilon$-neighborhood of $a$. This satisfies \ref{thm:1} for $\eta =1$. Now we take an arbitrary $\eta =\xi-1 $. (this is equivalent to taking $\eta =\xi $ in the method of induction. I chose $\xi -1$ for simplicity of notation.)
+	
+	Suppose
+	\[
+		f(t)=T_{\xi -1}+R_\xi (t)=\sum_{n=1}^{\xi -1} \left( \frac{f^{(n)}(a)}{n!}(t-a)^n\right) + \int_{a}^{t} \int_{a}^{s_1} \cdots \int_{a}^{s_{\xi -1} } f^{(\xi )}(s_\xi ) \,\mathrm{d} s_\xi \cdots \,\mathrm{d} s_2 \,\mathrm{d} s_1
+	.\]
+	By the method of induction, it suffices to show
+	\[
+		\int_{a}^{t} \int_{a}^{s_1} \cdots \int_{a}^{s_{\xi -1} } f^{(\xi )}(s_\xi ) \,\mathrm{d} s_\xi \cdots \,\mathrm{d} s_2 \,\mathrm{d} s_1 = \frac{f^{(\xi )}(a)}{\xi !}(t-a)^\xi +\int_{a}^{t} \int_{a}^{s_1} \cdots \int_{a}^{s_{\xi} } f^{(\xi+1 )}(s_{\xi +1} ) \,\mathrm{d} s_{\xi +1} \cdots \,\mathrm{d} s_2 \,\mathrm{d} s_1
+	,\]
+	and
+	\[
+		\int_{a}^{t} \int_{a}^{s_1} \cdots \int_{a}^{s_{\xi} } f^{(\xi+1 )}(s_{\xi +1} ) \,\mathrm{d} s_{\xi +1} \cdots \,\mathrm{d} s_2 \,\mathrm{d} s_1\leq \max_{s_{\xi +1}\in[a,t]}\left| f^{(\xi +1)}[a,t] \right| 
+	.\]
+	For simplicity, we will denote $\tau +1$ repeated integrals on the interval $[a,t]$ of some function $\phi (t)$ as
+	\[
+		\left(J_{[a,t]}^{\tau +1}\phi\right)(t)\coloneqq \int_{a}^{t} \int_{a}^{s_1}\cdots \int_{a}^{s_\tau  } \phi (t) \,\mathrm{d} s_\tau \cdots \mathrm{d} s_1\mathrm{d} t
+	.\]
+	We know that
+	\[
+		\left( J_{[a,t]}^{\xi }f^{(\xi )} \right) (t)=\left( J_{[a,t]}^\xi g \right) (t)	
+	\]
+	for $g(t)=f^{(\xi )}(t)-f^{(\xi )}(a)+f^{(\xi )}(a)$. From this, by the FTC using steps seen previously, it follows that
+	\[
+		R_\xi (t)=\left( J_{[a,t]}^{\xi }g \right) (t)=\left( J_{[a,t]}^{\xi +1}f^{(\xi +1)} \right) (t)+\left( J_{[a,t]}^{\xi } \right)(t) \cdot f^{(\xi )}(a)
+	.\]
+	We leave it as an exercise to the reader to show
+	\[
+		\left( J^{\xi }_{[a,t]} \right)(t) =\frac{(t-a)^{\xi }}{\xi !}
+	.\]
+	(hint: u-sub and induct on it!)
+
+	We  then have
+	\[
+	R_\xi (t)=\frac{f^{(\xi )}(t)}{\xi !}(t-a)^{\xi }+\left( J_{[a,t]}^{\xi +1} f^{(\xi +1)}\right) (t)
+	.\]
+	We can rewrite this as
+	\[
+		\left( J_{[a,t]}^{\xi +1}f^{(\xi +1)} \right) (t)=\left( J^{\xi}_{[a,t]}\int_{a}^{\xi } f^{(\xi +1)}(s_{\xi +1}) \,\mathrm{d} s_{\xi +1} \right) (t)
+	.\]
+	The first part of the proof has been clearly satisfied. Recall that for some real-valued $\phi : \mathbb{R} \to \mathbb{R}$,
+	\[
+		\int_{t_1}^{t_2} \phi (t) \,\mathrm{d} t\leq \left|\int_{t_1}^{t_2} \phi (t) \,\mathrm{d} t\right|
+	,\]
+	and
+	\[
+		\left|\int_{t_1}^{t_2} \phi (t) \,\mathrm{d} t\right| \leq \int_{t_1}^{t_2} \left| \phi (t) \right|  \,\mathrm{d} t
+	.\]
+	Applying this first fact, followed by repeated applications of this second fact give us
+	\begin{multline*}
+		\left( J^{\xi}_{[a,t]}\int_{a}^{\xi } f^{(\xi +1)}(s_{\xi +1}) \,\mathrm{d} s_{\xi +1} \right) (t)\leq \left|\left( J^{\xi}_{[a,t]}\int_{a}^{\xi } f^{(\xi +1)}(s_{\xi +1}) \,\mathrm{d} s_{\xi +1} \right) (t)\right|\\
+\leq \left( J^{\xi}_{[a,t]}\int_{a}^{\xi } \left|f^{(\xi +1)}(s_{\xi +1})\right| \,\mathrm{d} s_{\xi +1} \right) (t)
+	\end{multline*}	
+	Define
+	\[
+		M_{\xi +1}\coloneqq \max_{s_\xi \in[a,t]}\left| f^{(\xi +1)}[a,t] \right| 
+	.\]
+	It follows naturally that
+	\[
+		\left( J^{\xi}_{[a,t]}\int_{a}^{\xi } \left|f^{(\xi +1)}(s_{\xi +1})\right| \,\mathrm{d} s_{\xi +1} \right) (t) \leq \left( J_{[a,t]}^{\xi }\int_{a}^{\xi } M_{\xi +1} \,\mathrm{d} s_{\xi +1} \right) (t)=M\left( J_{[a,t]}^{\xi +1} \right) (t)=\frac{M_{\xi +1}}{(\xi +1)!}(t-a)^{\xi +1}
+	.\]
+	Therefore,
+	\[
+		R_{\xi +1}(t)\leq \frac{M_{\xi +1}}{(\xi +1)!}(t-a)^{\xi +1}
+	.\]
+	Thus, we are done.
+\end{proof}

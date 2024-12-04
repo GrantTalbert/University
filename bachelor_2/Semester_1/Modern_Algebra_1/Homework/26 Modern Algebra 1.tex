@@ -1,0 +1,176 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{11/01/24}
+\courseID{MA 541}
+\professor{Dr. Duque-Rosero}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{solution}
+	Let $G$ be a group with subgroup $H\leq G$ such that $\left[ G:H \right] =2$. We thus know $H$ has two distinct left cosets, and equivalently has two distinct right cosets. Since $H$ is a group and $e\in G$, we know one coset of $H$ is $eH=H$. Let $a\in G$ such that $aH\neq H$. Thus, the two distinct cosets of $H$ in $G$ are $H$ and $aH$. Since $eH=He$, it suffices to show $aH=Ha$. Recall from homework 5 that the set of distinct left cosets partition $G$, and thus $H\cup aH=G$. Conversely, $aH=G\setminus H$. Additionally, the set of right cosets partition $G$. Let $b\in G$ such that $Hb\neq He$. Thus, the set of distinct right cosets is $\left\{ H,Hb \right\} $. Since the set of distinct right cosets partitions $G$, we know $H\cup Hb=G$. Conversely, $G\setminus H=Hb$. Since $G\setminus H=G \setminus H$, we have $aH=Hb$. It remains to be shown $Hb=Ha$.
+
+	Suppose for purpose of contradiction that $Hb\neq Ha$. Since there are only two cosets, it follows that $Ha=He$, and thus $a\in He$. Since $eH=He$, it follows that $a\in eH$, and thus $aH=eH$ by properties of cosets, which contradicts our definition. Therefore, $Hb=Ha$. Since we had $Hb=aH$, we have $aH=Ha$. Therefore, $H\triangleleft G$.
+\end{solution}
+\section*{Problem 2}
+\begin{solution}
+	Let $G$ be a nontrivial finite abelian group with order $p^n$ for some prime $p$. By Lagrange's theorem, the order of every $g\in G$ must divide $\left| G \right| $, and thus $\left| g \right| |p^n$. Since the only divisors of a prime power $p^n$ are prime powers $p^m$ with $0\leq m\leq n$, we know $g$ must have $\left| g \right| =p^m$ for some $m$. In the case of $m=0$, we have $\left| g \right| =1$, and thus $g=e$.
+
+	Now we prove the converse. By the fundamental theorem of finite abelian groups,
+	\[
+		G\cong \prod_{i=1}^{k} \mathbb{Z}_{p_i^{e_i}}
+	\]
+	By properties of isomorphisms, if $g$ corresponds to some element $\left( z_1, \dots, z_n  \right) $ in the direct product, then $\left| g \right| =\left| \left( z_1, \dots, z_n  \right)  \right| =\operatorname{lcm}(\left| z_1 \right| ,\ldots,\left| z_n \right| ) $. Since every element $g\in G $ has order $p^a$ for some $a\in\mathbb{N}$, it follows that $\operatorname{lcm}(\left| z_1 \right| ,\ldots,\left| z_n \right| ) =p^a$. It follows that for all $i$, $\left| z_i \right| $ divides $p^a$, and since the only divisors of $p^a$ are $p^b$ for $0\leq b\leq a$, it follows that $\left| z_o \right| $ must be a power of $p$. Thus, all elements of $\mathbb{Z}_{p_i^{e_i}}$ are powers of $p$ for all $i$. Notice that since each group $\mathbb{Z}_{p_i^{e_i}}$ is cyclic, it must have some element $z^*\in\mathbb{Z}_{p_i^{e_i}}$ such that $\left| z^* \right| =\left| \mathbb{Z}_{p_i^{e_i}} \right| =p_i^{e_i}$. Since we know the order of all elements of each cyclic group is $p^b$ for some $b$, it follows that $p^b=p_i^{e_i}$. Therefore, $p_i=p$ for all $i$, and all cyclic groups have order $p ^{e_i}$. It follows that
+	\[
+		\left| G \right| =\left| \prod_{i=1}^{k} \mathbb{Z}_{p ^{e_i}}  \right| =\prod_{i=1}^{k} p ^{e_i}=p ^{\sum_{i=1}^{k} e_i}
+	.\]
+	Therefore, all elements of $G$ are of order $p^n$ if and only if $G$ is of order $p^m$.
+\end{solution}
+\section*{Problem 3}
+\begin{solution}
+	Let $G$ be an abelian group with even order, and let $H\leq G$ be a subgroup that contains all elements $g\in G$ with even order. By the fundamental theorem of finite abelian groups, we know
+	\[
+		G\cong \prod_{i=1}^{n} \mathbb{Z}_{p_i^{e_i}} 
+	\]
+	for primes $p_i$. By this fact and our knowledge of direct products, it follows that
+	\[
+		\left| G \right| \cong \prod_{i=1}^{n} p_i^{e_i} 
+	.\]
+	Since $\left| G \right| $ is even, we know $2$ divides $ \left| G \right| $. Since for any prime power $p_i^{e_i}$, its only divisors are prime powers $p_i^{m}$ for $0\leq m\leq e_i$, and since $2$ is the only even prime, it follows that there must exist some $i$ such that $p_i=2$. Without loss of generality, let this $i$ be $1$.\footnote{Ordering the groups differently in the direct product is equivalent up to isomorphism, so we can take $i=1$ without loss of generality here.} It follows that
+	\[
+		G\cong \mathbb{Z}_{2^{e_1}}\times \prod_{i=2}^{n} \mathbb{Z}_{p_i^{e_i}}
+	.\]
+	Let $\phi $ be the isomorphism described by the fundamental theorem of finite abelian groups. Then for any $g\in G$, we can define
+	\[
+		\phi (g)=\left( z_1, \dots, z_n  \right) ,
+	\]
+where $z_1\in\mathbb{Z}_{2^{e_1}}$, $z_2\in\mathbb{Z}_{p_2^{e_e}}$, and so on. Note that $\left| g \right| =\left| \phi (g) \right| $ since $\phi $ is an isomorphism. We then have the following two cases.
+
+\textbf{Case 1:} Suppose $z_1\neq 0$. Since $z_1\in\mathbb{Z}_{2^{e_1}}\setminus\left\{ 0 \right\} $, we know $\left| z_1 \right| >1$, and thus $\left| z_1 \right| \geq 2 $. Since $\left| z_1 \right| $ divides $ 2^{e_1}$, there exists some $q\in\mathbb{Z}$ such that $q\left| z_1 \right| =2^{e_1}$. Since $e_1\geq 1$, it follows that $2^{e_1-1}\in\mathbb{Z}$, and thus $2^{e_1-1}=\frac{q|z_1|}{2}\in\mathbb{Z}$, and thus $2$ divides $ \left| z_1 \right| $.
+
+Now consider the order of $g$, which is equivalent to $\left| \phi (g) \right|= \left| \left( z_1, \dots, z_n  \right)  \right| =\operatorname{lcm}(\left| z_1 \right| ,\ldots,\left| z_n \right| ) $. Note that the least common multiple is divided by all of its arguments, as it is multiples of all of them, and thus $\left| z_1 \right| $ divides $\left| g \right|  $. Since $2$ divides $\left| z_1 \right| $ and $\left| z_1 \right| $ divides $\left| g \right| $, we know $2$ divides $\left| g \right| $, and thus $g$ has an even order. Therefore, $g\in H$.
+
+\textbf{Case 2:} Suppose $z_1=0$. We then have
+\[
+	\phi (g)=\left( 0,z_2, \dots, z_n  \right)
+.\]
+From our results in case 1, we know if $\phi \left(g \right)=\left( z_1, \dots, z_n  \right)  $ with $z_1\neq 0$, then $g\in H$. It follows that $\phi (g)\in \phi (H)$ by definition of $\phi (H)$, and thus $\left( z_1, \dots, z_n  \right) \in \phi (H)$ for all $z_1\neq 0$. It follows that
+\[
+	(1,\ldots,1),(-1,z_2-1,\ldots,z_n-1)\in \phi (H)
+,\]
+where $-1\equiv 2^{e_1}-1\mod{2^{e_1}}$. Since $\phi (H)$ is a group by our properties of isomorphisms, and thus closed, we have 
+\[(1,\ldots,1)+(-1,z_2-1,\ldots,z_n-1)=(0,z_2, \ldots,z_n)=\phi (g)\in \phi (H).\]
+Therefore, $\phi (g)\in \phi \left( H \right) $. By definition of $\phi (H)$, this implies $g\in H$.
+
+Therefore, $g\in H$ for all $g\in G$, and thus $G\subseteq H$. Since $H\leq G$, we have $H\subseteq G$, and thus $H=G$.
+\end{solution}
+\section*{Problem 4}
+\begin{solution}
+	(a) Let $(a_1,a_2)\in G_1\times G_2$ and let $(h_1,h_2)\in H_1\times H_2$. It follows that $(a_1,a_2)(h_1,h_2)\in (a_1,a_2)(H_{1}\times H_2)$. We have
+	\[
+		(a_1,a_2)(h_1,h_2)=(a_1h_1,a_2h_2)
+	.\]
+	Since $a_1\in G_1$, $h_1\in H_1$, and $H_1\triangleleft G_1$, we know there exists some $h_1'\in H_1$ such that $a_1h_1=h_1'a_1$. By the same logic, there exists $h_2'\in H_2$ such that $a_2h_2=h_2'a_2$. It follows that $\left( h_1',h_2' \right) \in H_1\times H_2$, and thus
+	\[
+		(a_1h_1,a_2h_2)=\left( h_1'a_1,h_2'a_2 \right) =\left( h_1',h_2' \right) (a_1,a_2)\in \left( H_1\times H_2 \right) (a_1,a_2)
+	.\]
+	Therefore, $(a_1,a_2)(H_1\times H_2)\subseteq (H_1\times H_2)(a_1,a_2)$. Applying the same logic in reverse yields $(a_1,a_2)(H_1\times H_2)=(H_1\times H_2)(a_1,a_2)$, and thus $H_1\times H_2\triangleleft G_1\times G_2$.
+
+	(b) Let $A_1=a_1H_1$, and let $A_2=a_2H_2$ for $a_1\in G_1$ and $a_2\in G_2$. Note that $(a_1,a_2)\in G_1\times G_2$. It follows that
+	\[
+		A_1\times A_2=\left\{ (a_1h_1,a_2h_2) \mid h_1\in H_1,h_2\in H_2 \right\} 
+	.\]
+	Let $(a_1h_1,a_2h_2)\in A_1\times A_2$. Notice that
+	\[
+		(a_1h_1,a_2h_2)=(a_1,a_2)(h_1,h_2)\in (a_1,a_2)(H_1\times H_2)
+	.\]
+	Therefore, $A_1\times A_2\subseteq (a_1,a_2)(H_1\times H_2)$. Now let $(a_1,a_2)(h_1,h_2)\in (a_1,a_2)(H_1\times H_2)$. It follows that
+	\[
+		(a_1,a_2)(h_1,h_2)=(a_1h_1,a_2h_2)\in A_1\times A_2
+	.\]
+	Therefore, $A_1\times A_2=(a_1,a_2)(H_1\times H_2)$. Note that since $(a_1,a_2)\in G$, then $(a_1,a_2)(H_1\times H_2)$ is a coset of $H_1\times H_2$ with coset representative $(a_1,a_2)$.
+
+	(c) Let $(a_1,a_2)\in G_1\times G_2$. Consider the coset $(a_1,a_2)(H_1\times H_2)$. Let $(a_1,a_2)(h_1,h_2)\in (a_1,a_2)(H_1\times H_2)$. It follows that
+	\[
+		(a_1,a_2)(h_1,h_2)=(a_1h_1,a_2h_2)
+	.\]
+	Notice that $a_1h_1\in a_1H_1$ and $a_2h_2\in a_2H_2$. It follows that $(a_1,a_2)(H_1\times H_2)\subseteq a_1H_1\times a_2H_2$. Now we prove the converse. Let $(a_1h_1,a_2h_2)\in a_1H_1\times a_2H_2$. It follows that
+	\[
+		(a_1h_1,a_2h_2)=(a_1,a_2)(h_1,h_2)\in (a_1,a_2)(H_1\times H_2)
+	.\]
+	Therefore, for any coset $(a_1,a_2)(H_1\times H_2)$, we have
+	\[
+		(a_1,a_2)(H_1\times H_2)=a_1H_1\times a_2H_2
+	.\]
+	
+	(d) Let $\phi  : \left( G_1 / H_1 \right) \times \left( G_2 / H_2 \right)  \to \left( G_1 \times G_2 \right) / \left( H_1 \times H_2 \right) $ be the map
+	\[
+		(a_1H_1, a_2H_2)\mapsto (a_1,a_2)(H_1\times H_2)
+	.\]
+	We must show $\phi $ is an isomorphism. Before we do that, we will list a few facts that are important to know.
+	\begin{itemize}
+		\item Since equality for ordered pairs is defined componentwise, $(a,b)=(c,d)$ if and only if $a=c$ and $b=d$.
+		\item By part (c), $(a_1,a_2)(H_1\times H_2)=a_1H_1\times a_2H_2$ for all $(a_1,a_2)\in G_1\times G_2$.
+	\end{itemize}
+	First, we show $\phi $ is well defined. Let $\left( a_1H_1,a_2H_2 \right) ,(b_1H_1,b_2H_2)\in(G_1 / H_1)\times (G_2 / H_2)$ such that $(a_1H_1,a_2H_2)=(b_1H_1,b_2H_2) $. Notice that $a_1H_1=b_1H_1$ and $a_2H_2=b_2H_2$. It follows that
+	\begin{align*}
+		\phi (a_1H_1,a_2H_2)&=(a_1,a_2)(H_1\times H_2)\\
+				    &=a_1H_1\times a_2H_2\\
+		\phi (b_1H_1,b_2H_2)&=(b_1,b_2)(H_1\times H_2)\\
+				    &=b_1H_1\times b_2H_2
+	\end{align*}
+	Since $a_1H_1=b_1H_1$ and $a_2H_2=b_2H_2$, we know
+	\[=a_1H_1\times a_2H_2 = b_1H_1\times b_2H_2.\]
+	Therefore,
+\[\phi (a_1H_1,a_2H_2)=\phi (b_1H_1,b_2H_2).\]
+	Therefore, $\phi $ is well defined.
+
+	Now, we show $\phi $ is a homomorphism. Let definitions be as before. We have
+	\begin{align*}
+		\phi \left( a_1H_1,a_2H_2\right)\phi \left(b_1H_1,b_2H_2 \right)&=\left( (a_1,a_2)(H_1\times H_2) \right) \left( (b_1,b_2)(H_1\times H_2) \right) \\
+										&=(a_1,a_2)(b_1,b_2)(H_1\times H_2)\\
+										&=(a_1b_1,a_2b_2)(H_1\times H_2)\\
+										&=\phi (a_1b_1H_1,a_2b_2H_2)
+	.\end{align*}
+	Therefore, $\phi $ is a homomorphism. Now, we will show $\phi $ is injective. Let definitions be as before, and suppose  $\phi (a_1H_1,a_2H_2)=\phi (b_1H_1,b_2H_2)$. It follows that $(a_1,a_2)(H_1\times H_2)=(b_1,b_2)(H_1\times H_2)$, and thus, $a_1H_1\times a_2H_2=b_1H_1\times b_2H_2$. We must show $a_1H_1=b_1H_1$ and $a_2H_2=b_2H_2$. Since $a_1H_1\times a_2H_2=b_1H_1\times b_2H_2$, for all $h_1\in H_1$ and $h_2\in H_2$, there exists $h_1'\in H_1$ and $h_2'\in H_2$ such that
+	\[
+		(a_1h_1,a_2h_2)=(b_1h_1',b_2h_2')
+	.\]
+	Therefore, $a_1H_1\subseteq b_1H_1$, and $a_2H_2\subseteq b_2H_2$. Applying the same logic in reverse will show $b_1H_1\subseteq a_1H_1$ and $b_2H_2\subseteq a_2H_2$, and thus $(a_1H_1,a_2H_2)=(b_1H_1,b_2H_2)$. Therefore, $\phi $ is injective.
+
+	Finally, we show $\phi $ is surjective. Let $(a_1,a_2)(H_1\times H_2)\in (G_1\times G_2) / (H_1\times H_2)$. It follows that $a_1\in G_1$ and $a_2\in G_2$, and thus $a_1H_1\in G_1 / H_1$ and $a_2H_2\in G_2 / H_2$. Therefore,
+	\[
+		\phi (a_1H_1,a_2H_2)=(a_1,a_2)(H_1\times H_2)
+	.\]
+	Therefore, $\phi $ is surjective, and is thus an isomorphism. Therefore,
+	\[
+		(G_1 / H_1) \times (G_2 / H_2) \cong (G_1\times G_2) / (H_1 \times H_2)
+	.\]
+\end{solution}
+\section*{Problem 5}
+\begin{solution}
+	(a)  Let $G$ be a group. Notice that for all $g\in G$, we know by definition that for all $z\in Z(G)$, $zg=gz$. It follows that $gZ(G)=Z(G)g$ for all $g\in G$, and thus $Z(G)\triangleleft G$.
+
+	(b) Suppose that $G / Z(G)$ is cyclic. It follows that there exists some generator $xZ(G)$ such that $G / Z(G) = \left<xZ(G) \right>$. It follows that for all $g\in G$, there exists some integer $m$ such that $gZ(G)=(xZ(G))^m=x^mZ(G)$. It follows that for all $z_1\in Z(G)$ there exists some $z_2\in Z(G)$ such that $gz_1=x^mz_2$. Thus, $g=z_1^{-1}x^mz_2$. By the same logic, for any $h\in G$, there exist $z_3,z_4$, and an integer $n$ such that $h=z_3^{-1}x^nz_4$. Since $z_1,z_2,z_3,z_4$ commute with all elements of $G$ and $x$ commutes with itself, it follows that
+	\begin{align*}
+		gh&=z_1^{-1}x^mz_2z_3^{-1}x^nz_4\\
+		  &=z_3^{-1}z_4x^mx^nz_1^{-1}z_2\\
+		  &=z_3^{-1}z_4x^nx^mz_1^{-1}z_2\\
+		  &=z_3^{-1}x^nz_4^{-1}z_1^{-1}x^mz_2\\
+		  &=hg
+	,\end{align*}
+	for any $g,h\in G$. Therefore, $G$ is abelian.
+
+	(c) Since $\left[ G:Z(G) \right] =4$, there exist $4$ distinct cosets of $Z(G)$. Since up to isomorphism, there are only two groups of order 4, namely $\mathbb{Z}_4$ and $\mathbb{Z}_2^2$ (proof in homework 5), it suffices to show $G / Z(G)$ is not cyclic. Suppose for purpose of contradiction that $G / Z(G)$ is cyclic. By part (b), $G$ is abelian. It follows that by definition, $Z(G)=G$. Recall that $\left[ G:Z(G) \right] =\frac{\left| G \right| }{\left| Z(G) \right| }$. Since $Z(G)=G$, we have $\left[ G:Z(G) \right] =\frac{\left| G \right| }{\left| G \right| }=1$, contradicting the fact that $\left[ G:Z(G) \right] =4$. Thus, $Z(G)$ is not cyclic, and therefore must be isomorphic to $\mathbb{Z}_2^2$.
+
+	After rereading my proof, I realized this fact that $\left[ G : H \right] =\frac{\left| G \right| }{\left| H \right| }$ only holds for finite groups, so I have done a stronger proof. Suppose again for purpose of contradiction that $Z(G)$ is cyclic, and notice again that $Z(G)=G$ by part (b). In the proof of Cayley's theorem, we showed $T_a:g\mapsto ag$ is a permutation of $G$, and by definition of a permutation it follows that $T_a(G)=\left\{ ag \mid g\in G \right\} =G$ for any fixed $a\in G$. Notice that
+\[
+	T_a(G)=\left\{ ag \mid g\in G \right\} =\left\{ ag \mid g\in Z(G) \right\} =aZ(G)
+,\]
+	since $G=Z(G)$. Since $a\in G$ is arbitrary, this representation constitutes all cosets of  $Z(G)$, and thus all cosets are the same by this fact. Therefore, there only exists one coset, giving us the same contradiction as before. I will spend the remainder of the paper proving $g\mapsto ag$ is a permutation of $G$, since we didn't complete this part of the proof in class so I wasn't sure if you needed it.
+
+	For all $a\in G$, define $T_a : G \to G$ to be the map $g\mapsto ag$. First we show $T_a$ is surjective. Let $g\in G$. Since $G$ is a group and thus closed, $a^{-1}g\in G$. Notice that  $T_a(a^{-1}g)=aa^{-1}g=g$. Therefore, $T_a(g)$ is surjective. Next, we show $T_a$ is injective. Let $T_a(g)=T_a(h)$ for some $g,h\in G$. It follows that $ag=ah$. Since $G$ is a group and thus contains inverses, it follows that $a^{-1}ag=a^{-1}ah$, and thus $g=h$. Therefore, $T_a$ is a bijection, and since it is a map $G\to G$, $T_a$ is a permutation of $G$.
+\end{solution}
+\end{document}

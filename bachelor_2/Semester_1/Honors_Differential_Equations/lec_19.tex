@@ -1,0 +1,61 @@
+\lecture{19}{Fri 15 Nov 2024 12:22}{Nonlinear Qualitative Analysis}
+We can consider bifurcations in nonlinear systems using the linearization. Consider the single parameter family
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =y-x^2,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =x-a
+.\]
+Note that if $\frac{\mathrm{d}y}{\mathrm{d}t} =0$, then $x=a$. By the first equation, we then have $y=-a^2$ at an equilibrium point. Therefore, $(a,-a^2 )$ is the only equilibrium point. We can compute
+\[
+	J(\mathbf{x})=\begin{pmatrix}
+		\frac{\partial \frac{\mathrm{d}x}{\mathrm{d}t} }{\partial x} &\frac{\partial x'}{\partial y} \\[5pt]
+		\frac{\partial y'}{\partial x} &\frac{\partial y'}{\partial y} 
+	\end{pmatrix} =\begin{pmatrix}
+		-2x&-1\\
+		1&0
+	\end{pmatrix} 
+.\]
+Therefore, at the equilibrium point,
+\[
+	J(a,a^2)=\begin{pmatrix}
+		-2a&-1\\
+		1&0
+	\end{pmatrix} 
+.\]
+Then $\Tr J=-2a$, $\det J=1$.
+
+Plotting this on the trace-determinant plane, we end up with three equilibrium points: two where it crosses the parabola, and one where $a=0$. Let
+\[
+	1=\frac{1}{4}(-2a)^2
+.\]
+Then $a=\pm 1$, so our bifurcations are at $a\in \left\{ 0,-1,1 \right\} $.
+
+We want to make more global statements about the behavior of nonlinear systems. Given a system
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =f(x,y)\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =g(x,y),\]
+we define the \textbf{nullclines} to be the curves in the $xy $-plane defined by the equations $f(x,y)=0$ XOR $g(x,y)=0$. The nullclines correspond to curves on which the vector field is either vertical or horizontal. Intersections between $f$ and $g$ nullclines give equilibrium points, HOWEVER $f$ nullclines can intersect other $f$ nullclines, and those do not generate equilibria.
+
+Consider the systems
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =2x-4x^2-3xy,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =y-6y^2-xy
+.\]
+This has equilibria at $(0,0), (0,1/6), (1 /2,0), (3 /7,2 /21)$. These are a source, saddle, saddle, and sink, respectively. Also consider the system
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =6x-x^2-4xy,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =5y-2xy-2y^2
+.\]
+This has equilibria at $(0,0),(0,5 /2),(6,0),(4 /3,7 /6)$. These are a source, sink, sink, and saddle, respectively.
+
+The first system has nullclines at the $x$- and $y$-axes, a line from $(0,2 /3)$ to $(1 /2,0)$, and a line from $(0,1 /6)$ to $(?,0)$.
+
+In a linear system with a saddle, we have two straight line solutions, one of which approaches the saddle and one of which diverges. In a \textbf{nonlinear} system with a saddle, we have two special solutions, one of which approaches the saddle as $t\to \infty$, and one as $t\to -\infty$. These solutions are known as \textbf{separatrices}.
+
+\begin{theorem}[Poincare-Bendixson]\label{thm:idkLOL}
+	Suppose $(x(t),y(t))$ solves the equation
+	\[
+		\frac{\mathrm{d}x}{\mathrm{d}t} =f(x,y),\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =g(x,y)
+	,\]
+	and it is bounded for all $t\geq 0$. Then as $t\to \infty$, either $(x,y)$ approaches an equilibrium point, or $(x,y)$ approaches a periodic solution of the equation.
+\end{theorem}
+
+\begin{definition}[Periodic Solution]\label{dfn:askjn}
+	We say $(x(t),y(t))$ is a periodic solution of a system if there exists $T>0$ such taht $(x(T),y(T))=(x(0),y(0))$.
+	
+\end{definition}

@@ -1,0 +1,209 @@
+\lecture{12}{Thu 14 Nov 2024 09:31}{More Rings}
+\begin{remark}
+	The $p$-adic fields have a strange topology where if two open sets intersect then they are equal.
+\end{remark}
+
+\begin{definition}[Unity]\label{dfn:UN}
+	A ring $R$ has unity if there is $1\in R$ such that $a1=1a=a$ for all $a\in R$.
+\end{definition}
+\begin{note}
+Some books only talk about rings with unity, and call a ring without unity a rng. A lot can be said about rings with unity that do not generalize. However, we are not doing so.
+\end{note}
+\begin{definition}[Integral Domain]\label{dfn:ID}
+	A commutative ring $R$ with unity is an integral domain if for every $a,b\in R$ such that $ab=0$, then either $a=0$ or $b=0$. We say there are no zero divisors.
+\end{definition}
+\begin{definition}[Domain]\label{dfn:D}
+	A commutative ring is a domain if there are no zero divisors.
+\end{definition}
+\begin{definition}[Field]\label{dfn:Field}
+	A field is a commutative ring with unity, no zero divisors, and for all nonzero $a\in R$ there exists $a^{-1}\in R$ such that $aa^{-1}=1$.
+\end{definition}
+\begin{definition}[Division Ring]\label{dfn:Div}
+	A division ring is a ring with unity and no nonzero divisors.
+\end{definition}
+We are only concerned about the following categories.
+\begin{center}
+	\begin{tikzpicture}
+		\node (A) at (0,0) {Ring};
+		\node (B) at (3,-1.5) {Ring with Unity};
+		\node (C) at (-3,-1.5) {Commutative Ring};
+		\node (D) at (0,-3) {Integral Domain};
+		\node (E) at (0,-4.5) {Field};
+		\draw (A) -- (B) -- (D) -- (E);
+		\draw (A) -- (C) -- (D);
+	\end{tikzpicture}
+\end{center}
+
+\begin{definition}[Unit]\label{dfn:Unit}
+	Let $R$ be a ring with $a\in R\setminus\left\{ 0 \right\} $. If $a$ has a multiplicative inverse, we say $a$ is a unit of $R$. We denote the set of units in $R$ as $U(R)$.
+\end{definition}
+\begin{definition}[Zero Divisor]\label{dfn:ZD}
+	A nonzero element $a\in R$ in a commutative ring is called a zero divisor if there is a nonzero element $b\in R$ such that $ab=0$.
+\end{definition}
+\begin{remark}
+	Proof by googling it: a noncommutative ring with unity can also have zero divisors. A rng has left/right zero divisors.
+\end{remark}
+Recall that $M_2(\mathbb{C})$ is a ring. It only has unity though. We want to find a matrix ring that has some properties. Let
+\[
+	1=I_2,\qquad \hati=\begin{pmatrix}
+		0&1\\
+		-1&0
+	\end{pmatrix},\qquad \hatj=\begin{pmatrix}
+		0&i\\
+		i&0
+	\end{pmatrix} ,\qquad \hatk=\begin{pmatrix}
+		i&0\\
+		0&-i
+	\end{pmatrix}  
+.\]
+Define
+\[
+	\mathbb{H}=\left\{ a1+b\hati+c\hatj+d\hatk \mid a,b,c,d\in\mathbb{R} \right\} 
+.\]
+We call $\mathbb{H}$ the set of \textbf{quaternions}. We will show $\mathbb{H}$ is a non-commutative ring with unity, but without zero divisors. Recall that
+\[
+	\hati^2=\hatj^2=\hatk=\hati\hatj\hatk=-1,
+\]
+\[
+	\hati\hatj=\hatk,\quad \hatj\hatk=\hati,\quad\hatk\hati=\hatj
+,\]
+\[
+	\hatj\hati=-\hatk,\quad\hatk\hatj=-\hati,\quad\hati\hatk=-\hatj
+.\]
+We say $\mathbb{H}$ is anti-commutative. Note that if we multiply a quaternion $\mathbf{h}$ with its conjugate $\overline{\mathbf{h}} $, we have
+\[
+	\left( a1+b\hati+c\hatj+d\hatk \right) \left( a1-b\hati-c\hatj-d\hatk \right) =a^2+b^2+c^2+d^2
+.\]
+Therefore, these two things multiply to zero if and only if $a,b,c,d=0$. We have now shown for $\mathbf{h}\neq 0$, it and it's conjugate can be divided by this value. If $a1+b\hati+c\hatj+d\hatk\neq 0$, then
+\[
+	\left( a1+b\hati+c\hatj+d\hatk \right) \left( \frac{a1-b\hati-c\hatj-d\hatk}{a^2+b^2+c^2+d^2} \right) =1
+.\]
+This tells us that every element that is nonzero is a unit. It remains to be shown \textbf{that units are not zero divisors.}
+\begin{theorem}[Properties of Rings]\label{thm:PRG}
+	Let $R$ be a ring, and let $a,b\in R$. Then
+	\begin{itemize}
+		\item $a0=0a=0$.
+		\item $a(-b)=(-a)b=-(ab)$.
+		\item $(-a)(-b)=ab$.
+		\item $a(b-c)=ab-ac$.
+	\end{itemize}
+	If $R$ has unity, then
+	\begin{itemize}
+		\item $(-1)a=-a$.
+		\item $(-1)(-1)=1$.
+		\item The unity 1 is unique.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	(1)
+	\[
+		a0=a(0+0)=a0+a0
+	.\]
+	Since there are inverses under addition, $a0-a0=a0+a0-a0$ implies $a0=0$. Same for $0a$.
+
+	(2)
+	\[
+		a(-b)+ab=a\left( -b+b \right) =a0=0
+	.\]
+	Since inverses are unique under addition, $a(-b)=-ab$. Similarly,
+	\[
+		(-a)b+ab=(-a+a)b=0b=0
+	.\]
+	Therefore, $a(-b)=(-a)b=-ab$.
+
+	(3)
+	\[
+		(-a)(-b)+((-a)b)=(-a)(-b+b)=(-a)0=0
+	.\]
+	Since inverses are unique under addition, $(-a)(-b)=-((-a)b)=-(-ab)=ab$.
+
+	(4)
+	\[
+		a(b-c)=a(b+(-c))=ab+a(-c)
+	.\]
+	By property (2), $a(-c)=-ac$. Therefore, $a(b-c)=ab-ac$.
+
+	(5)
+	\[
+		a+(-1)a=1a-1a=(1-1)a=0a=0
+	.\]
+	Since inverses are unique under addition, $(-1)a=-a$.
+
+	(6)
+	\[
+		(-1)(-1)-1=(-1)(-1)+(-1)1=(-1)(-1+1)=(-1)0=0
+	.\]
+	Since inverses are unique under addition, $(-1)(-1)=-(-1)=1$.
+
+	(7) Let $e_1,e_2$ be identities in $R$. Since $e_1$ is an identity, $e_2=e_1e_2$. Since $e_2$ is an identity, $e_1=e_1e_2$. Therefore $e_1=e_2$.
+\end{proof}
+\begin{proposition}
+	Let $R$ be a ring, and let $a\in R$ be a unit. Then $a$ is not a zero divisor.
+\end{proposition}
+\begin{proof}
+	Let $a\in R$ be a unit, and let $ab=0$. Then $a^{-1}ab=a^{-1}0$. By properties of rings, $a^{-1}0=0$. Furthermore, $a^{-1}ab=1b=b$. Therefore, $b=0$, and $a$ is not a zero divisor.
+\end{proof}
+\begin{definition}[Subring]\label{dfn:Subring}
+	Let $(R,+,\cdot )$ be a ring with subset $S\subseteq R$. Then $S$ is called a subring if $(S,+,\cdot )$ is a ring under the inherited operations.
+\end{definition}
+\begin{proposition}
+	Let $R$ be ring with $S\subseteq R$. Then $S$ is a subring if and only if
+	\begin{enumerate}
+		\item $S\neq \varnothing$,
+		\item $rs\in S$ for all $r,s\in S$,
+		\item $r-s\in S$ for all $r,s\in S$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	h
+\end{proof}
+For example, consider the ring $M_2(\mathbb{R})$, and condiser the subset $S\subseteq M_2(\mathbb{R})$ defined as
+\[
+	S\coloneqq \left\{ \begin{pmatrix}
+			a&b\\
+			0&c
+	\end{pmatrix}  \mid a,b,c\in\mathbb{R} \right\} 
+.\]
+We will show $S$ is a subring of $M_2(\mathbb{R})$. Note that $I\in S$, so $S\neq \varnothing$. Furthermore, note that
+\[
+	\begin{pmatrix}
+		a&b\\
+		0&c
+	\end{pmatrix} \begin{pmatrix}
+		x&y\\
+		0&z
+	\end{pmatrix} =\begin{pmatrix}
+		ax&ay+bz\\
+		0&cz
+	\end{pmatrix} \in S
+.\]
+Finally, note that
+\[
+	\begin{pmatrix}
+		a&b\\
+		0&c
+	\end{pmatrix}- \begin{pmatrix}
+		x&y\\
+		0&z
+	\end{pmatrix} =\begin{pmatrix}
+		a-x&b-y\\
+		0&c-z
+	\end{pmatrix} 
+.\]
+Therefore, $S$ is a subring of $M_2(\mathbb{R})$.
+\begin{remark}
+	Let $R$ be a ring with unity. Note that $\left\{ 0 \right\} \subseteq R$ is a ring without unity. Therefore, subrings do not need to have the unity.
+\end{remark}
+Another good example of a ring is the Gaussian Integers.
+\begin{definition}[Gaussian Integers]\label{dfn:GI}
+	The gaussian integers are the set $\mathbb{Z}[i]$ defined as
+	\[
+		\mathbb{Z}[i]\coloneqq \left\{ a+bi \mid a,b\in\mathbb{Z} \right\} \subset \mathbb{C}
+	.\]
+\end{definition}
+We claim $\mathbb{Z}[i]$ is an integral domain, but not a field. Let $\alpha =a+bi\in\mathbb{Z}\left[ i \right] $, and suppose $\alpha $ is a unit. Then there exists $\beta =c+di\in\mathbb{Z}[i]$ such that $\alpha \beta =1$. We want to show this does not happen in general. Consider the conjugate $\overline{\alpha} \overline{\beta } =1$. We then have $\alpha \beta \overline{\alpha } \overline{\beta } =1$. We have
+\[
+	\left( a+bi \right) \left( a-bi \right) \left( c+di \right) \left( c-di \right) =\left( a^2+b^2 \right) \left( c^2+d^2 \right) =1
+.\]
+We now have the product of two positive integers are $1$. This happens if and only if both integers are $1$. That is, $a^2+b^2=c^2+d^2=1$. Then $a=\pm1$ and $b=0$, or vice versa. These are the only cases where $\alpha $ has a unity $\beta $. Therefore, $\mathbb{Z}[i]$ is \textbf{not} a field.
+\chapter{Integral Domains}

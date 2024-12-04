@@ -1,0 +1,166 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{12/06/24}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{proof}
+	Let $R$ be a finite, nontrivial, commutative ring with no zero divisors. Let $a\in R^*$, and let $\lambda_a : R^* \to R^*$ be the map $b\mapsto ab$. We want to show $a\in \lambda (R^*)$. This implies there exists some $k\in R$ such that $ak=a$. This is equivalent to showing $\lambda $ is surjective, and since $R$ is finite, this is equivalent to showing $\lambda $ is injective.
+
+	Suppose $\lambda_a(b)=\lambda_a(c)$, implying that $ab=ac$. It follows that $a(b-c)=0$. Since $R$ has no zero divisors and $a\neq 0$, we have $b-c=0$. It follows that $b=c$, and  $\lambda_a $ is injective. Therefore, for all $a\in R^*$, there exists $k_a\in R$ such that $ak_a=k_aa=a$. We will now show this $k$ is unique.
+
+	Let $a,b\in R^*$ such that $ak_a=a$ and $bk_b=b$. It follows since $R$ is commutative that
+	\[
+		ab=ak_abk_b=abk_ak_b
+	.\]
+	It follows that $a\left( b-bk_ak_b \right) =0$. Since $a\neq 0$ and $R$ has no zero divisors, $b=bk_ak_b$. Since $bk_b=b$ and $R$ is commutative, it follows that $b=bk_a$. Since $k_a0=0$, we know $rk_a=r$ for any arbitrary $a\in R^*$ and $r\in R$. Therefore, $k_a$ is an identity in $R$ for any $a$. Since the identity is unique in $R$, we know $k_a=k_b $ for all $a,b\in R$. Therefore, $R$ has a unity.
+\end{proof}
+\section*{Problem 2}
+\textbf{Part (a)}. Let $I,J\subset R$ be ideals of $R$. First, we show $I\cap J$ is a subring of $R$ by the subring test. Let $r,s\in I\cap J$. Therefore, $r,s\in I,J$. Since $I$ is a subring, $r-s\in I$ since $I$ is closed under addition and has inverses. Since $J$ is a subring, $r-s\in J$ by the same logic. Therefore, $r-s\in I\cap J$. Now notice that $rs\in I$ since $I$ is closed under multiplication,  and by the same logic $rs\in J$. Therefore, $rs\in I\cap J$, and $I\cap J$ is a subring. Finally, let $a\in R$. Notice that $ar\in I$ since $I$ is an ideal, and $ar\in J$ because $J$ is an ideal. Therefore, $ar\in I\cap J$, and $I\cap J$ is an ideal.
+
+\noindent\textbf{Part (b)}. Let $\phi : R \to S$ be a ring homomorphism. Let $r\in \ker \phi $. It follows that $\phi (r)=0$. Let $a\in R$. It follows that $\phi (ar)=\phi (a)\phi (r)=\phi (a)0=0$. Therefore, $ar\in \ker \phi $. It remains to be shown $\ker \phi $ is a subring of $R$.
+
+Let $r,s\in \ker \phi $. It follows that $\phi (r-s)=\phi (r)-\phi (s)=0-0=0$. Therefore, $r-s\in \ker \phi $. Now notice that $\phi (rs)=\phi (r)\phi (s)=0\cdot 0=0$. Therefore, $rs\in \ker \phi $, and $\ker \phi $ is an ideal of $R$.
+
+\noindent \textbf{Part (c)}. Let $J\subseteq S$ be an ideal. First we show $\phi ^{-1}(J)$ is a subring of $R$, which probably follows from properties of homomorphisms but at the time of doing this homework we haven't introduced homomorphisms yet. 
+
+Let $r,s\in \phi ^{-1}(J)$. It follows that $\phi (r-s)=\phi (r)-\phi (s)$. Since $\phi (r),\phi (s)\in J$, which is closed under addition, $\phi (r)-\phi (s)\in J$. Now notice that  $\phi (rs)=\phi (r)\phi (s)\in J$ by the same logic. Therefore, $\phi ^{-1}(J)$ is a subring of $R$.
+
+Now let $a\in R$. It follows that $\phi (ar)=\phi (a)\phi (r)$. Since $J$ is an ideal and $\phi (r)\in J$, then $\phi (a)\phi (r)\in J$. Therefore, $ar\in \phi ^{-1}(J)$, and $\phi ^{-1}(J)$ is an ideal.
+
+The converse is not true in general. Let $I$ be an ideal of $R$ and $\phi : R \to S$ a ring homomorphism. Let $r',s'\in \phi (I)$. By definition, there exist $r,s\in I$ such that $r'=\phi (r)$ and $s'=\phi (s)$. It follows that $r'-s'=\phi (r-s)\in\phi (I)$, and similarly $r's'\in \phi (I)$. Therefore, $\phi (I)$ is a subring of $S$. However, let $a\in S$. If $a\in \phi (R)$, then for all $a'\in R$ such that $\phi (a')=a$, we know $a\phi (r)=\phi (a'r)\in\phi (I)$ because $I$ is an ideal. However, if $a\notin \phi (R)$, then there is no guarentee that $a\phi (r)\in \phi (I)$. Therefore, the converse is not true in general, but is true for surjective homomorphisms. Moreover, the converse is true for the subset $\phi (R)$.\hfill $\blacksquare$
+\section*{Problem 3}
+\begin{notation}
+	Let $0_I$ be the zero function $0_I(x)=0$; let $1_I$ be the indicator function $1_I(x)=1$; let $0,1\in\mathbb{R}$.
+\end{notation}
+\noindent\textbf{Part (a)}. Let $f\in \operatorname{Fun}(I,\mathbb{R}) $. The additive inverse of $f$ in $\operatorname{Fun}(I,\mathbb{R}) $ is the pointwise additive inverse $-f(x)$. For any point $f(x)\in\mathbb{R}$, $-f(x)+f(x)=0$. Therefore, $(f-f)(x)=0$ for all $x$, and $f-f=0_I$.
+
+\noindent \textbf{Part (b)}. The function $1_I : I \to \mathbb{R}$ defined as  $1_I(x)=1$ is the multiplicative identity. Let $f\in \operatorname{Fun}(I,\mathbb{R}) $. It follows that
+\[
+	(1_If)(x)=1_I(x)f(x)=1f(x)=f(x)
+.\]
+Note that this last step follows since $f(x)\in\mathbb{R}$, and $1$ is the unity in $\mathbb{R}$.
+
+\noindent \textbf{Part (c)}. A function $f\in \operatorname{Fun}(I,\mathbb{R}) $ is a unit if and only if $0\notin f(I)$. Suppose $f$ has $0\notin f(I)$. Then define $f^{-1}\in \operatorname{Fun}(I,\mathbb{R}) $ such that
+\[
+	f^{-1}(x)=\frac{1}{f(x)}
+.\]
+It follows that
+\[
+	\left( f^{-1}f \right) (x)=f^{-1}(x)f(x)=\frac{1}{f(x)}f(x)=1_I
+.\]
+Now we show the converse by contrapositive. Let $0\in f(I)$. It follows that there exists at least one $a\in I$ such that $f(a)=0$. The identity  has $1_I(a)=1$ by definition, so for $f^{-1}$ to exist, $f^{-1}(a)$ must be a number such that $f^{-1}(a)0=1$. Since $\mathbb{R}$ is a field and $f^{-1}\left( x \right) \in\mathbb{R}$, we know $f^{-1}(x)0=0\neq 1$, and by contradiction $f$ is not a unit.
+
+\noindent \textbf{Part (d)}. A function is a zero divisor if and only if it is not a unit. By the contrapositive of Homework 9 Problem 2, we already know if it is a zero divisor, it is not a unit; we only prove if is not a unit then it is a zero divisor. Let $f\in \operatorname{Fun}(I,\mathbb{R}) $ not a unit. Then by (c), $0\in f(I)$. Let $A$ be the set of all $a\in I$ such that $f(a)=0$. Let $\lambda \in\mathbb{R}\setminus\left\{ 0 \right\} $, and define $g_{\lambda }\in \operatorname{Fun}(I,\mathbb{R}) $ as the map
+\[
+	g_{\lambda }(x)=
+	\begin{cases}
+		\lambda ,&x\in A\\
+		0,&x\notin A
+	\end{cases}
+.\]
+Notice that
+\[
+	(fg)(x)=f(x)g(x)=
+	\begin{cases}
+		0\lambda=0 ,&x\in A\\
+		f(x)0,&x\notin A
+	\end{cases}=0
+.\]
+Therefore, since $g\neq 0_I$, $f$ is a zero divisor.
+
+\noindent \textbf{Part (e)}. First, we show $J$ is a subring of $R$. Let $f,g\in J$. It follows that
+\[
+	(f-g)\left( \frac{1}{2} \right) =0-0=0,\qquad \left( f-g \right) \left( \frac{1}{3} \right) =0-0=0
+.\]
+Similarly, $(fg)(1 /2)=(fg)(1 /3)=0$. Therefore, $J$ is a subring. Now let $\phi \in \operatorname{Fun}(I,\mathbb{R}) $. It follows that
+\[
+	(\phi f)\left( \frac{1}{2} \right) =\phi \left( \frac{1}{2} \right) 0=0
+.\]
+Additionally,
+\[
+	\left( \phi f \right) \left( \frac{1}{3} \right) =\phi \left( \frac{1}{3} \right) 0=0
+.\]
+Therefore, $\phi f\in J $. Therefore, $J$ is an ideal of $\operatorname{Fun}(I,\mathbb{R}) $.
+
+\noindent \textbf{Part (f)}. I will quickly prove that for all quotient rings $R /I$ for $R$ a commutative ring with unity, $R /I$ is commutative and has unity. This proof will be referenced in problem 5.
+\begin{proposition}\label{1}
+	Let $R$ be a commutative ring with unity, and let $I$ be an ideal of $R$. Then $R /I$ is a commutative ring with unity.
+\end{proposition}
+\begin{proof}
+	Let $a+I,b+I\in R /I$. Since $ab=ba$, it follows that
+	\[
+		\left( a+I \right) \left( b+I \right) =ab+I=ba+I=\left( b+I \right) \left( a+I \right) 
+	.\]
+	Notice that $1+I\in R /I$. For any $a+I\in R/I$, we have
+	\[
+		\left( 1+I \right) \left( a+I \right) =1a+I=a+I
+	.\]
+	Therefore, a unity exists.
+\end{proof}
+Using this fact, we know that $\operatorname{Fun}(I,\mathbb{R})  /J$ is a commtuative ring with unity. We will characterize all zero divisors in $\operatorname{Fun}(I,\mathbb{R}) $. Since $J=0$ in this ring, any $f,g\in \operatorname{Fun}(I,\mathbb{R}) $ satisfying $fg+ J=J$ are zero divisors. Notice that if  either $f\in J$ or $g\in J$, then $fg\in J$ since $J$ is an ideal. Therefore, any element of $J$ is a zero divisor, which is expected since for all $f\in J$, we have $f+J=J=0$.
+
+Now let $f,g\notin J$. Then $f,g$ are zero divisors if and only if one of the following is satisfied:
+\begin{enumerate}
+	\item
+		\[
+			f\left( \frac{1}{2} \right) =0,\qquad g\left( \frac{1}{3} \right) =0
+		.\]
+	\item 
+		\[
+			f\left( \frac{1}{3} \right) =0,\qquad g\left( \frac{1}{2} \right) =0
+		.\]
+\end{enumerate}
+\section*{Problem 4}
+\begin{proof}
+Let $S$ be a field. Let $I$ be an ideal such that there exists some $a\in I$ such that $a\neq 0$. It suffices to show $I=S$. The existence of such an ideal is guarenteed by the fact that at least two distinct trivial ideals exist for $\left\{ 0 \right\} \neq S$. Since $a\in I$ and $a\neq 0$, there exists $a^{-1}\in S$ such that $a^{-1}a=1\in I$. Since $1\in I$, it follows that $I=S$. Therefore, any ideal $I\neq \left\{ 0 \right\} $ implies $I=S$.
+
+Now we show the converse. Let $S$ be a ring with  maximal idea $\left\{ 0 \right\} $. It follows that the only ideals are the trivial ideals. Since $S$ has unity, for all $a\in S\setminus\left\{ 0 \right\} $, there exists $1a\in \left\langle a \right\rangle $. Since $\left\langle a \right\rangle $ is an ideal of $S$ and the only ideals are $\left\{ 0 \right\} $ and $R$, we have $\left\langle a \right\rangle =S$ for all $a\in S\setminus\left\{ 0 \right\} $. Since $\left\langle a \right\rangle =S$, we have $1\in \left\langle a \right\rangle $. Therefore, there exists some $a^{-1}\in S$ such that $aa^{-1}=1$ for all $a\in S\setminus\left\{ 0 \right\} $. Therefore, all elements of $S$ are units. Since all units are not zero divisors, $S$ is a field.
+\end{proof}
+\section*{Problem 5}
+\textbf{Part (a)}. Let $I$ be an ideal of $R$, let $\mathcal{J} $ be the set of all ideals of $R$ containing $I$, and let $\mathcal{J}'$ be the set of all ideals of $R /I$. We will show the map $\phi : \mathcal{J}  \to \mathcal{J} '$ defined as $J\mapsto \pi (J)$ is a bijection.
+
+First, we will show $\phi $ is well-defined by showing $\pi (J)$ is an ideal in $R /I$. Let $\alpha +I \in\pi (J)$ and $r+I\in R /I$. It follows that $\alpha \in J$ and $r\in R$. Since $J$ is an ideal, $\alpha r\in J$, and thus
+\[
+	\left( \alpha +I \right) \left( r+I \right) =\alpha r+I\in \pi (J)
+.\]
+It remains to be shown $\pi (J)$ is a ring. Let $\alpha +I,\beta +I\in \pi (J)$. It follows that $\alpha ,\beta \in J$, and thus $\alpha -\beta ,\alpha \beta \in J$. We then have
+\[
+	\left( \alpha +I \right) -\left( \beta +I \right) =\left( \alpha -\beta  \right) +I\in \pi (J)
+.\]
+\[
+	\left( \alpha +I \right) \left( \beta +I \right) =\alpha \beta +I\in \pi (J)
+.\]
+Therefore, $\pi (J)$ is an ideal of $R /I$. This suffices to show $\phi  (J)$ is well-defined. Now we will show $\phi $ is surjective. Let $J'\in \mathcal{J} '$ be an ideal in $R /I$. Define  $J=\left\{ \alpha \in R \mid \alpha +I\in J' \right\} $. First, we will show  $J$ is an ideal in $R$. Let $r\in R$ and $\alpha +I\in J'$. It follows that $\alpha \in J$. Notice that $\left( r+I \right) \left( \alpha +I \right) =r\alpha +I\in J'$ because $J'$ is an ideal, so $r\alpha \in J$. It remains to be shown $J$ is a ring.
+
+Let $r,s\in J$. It follows that $r+I,s+I\in J'$. Because $J'$ is a ring, we have
+\[
+	\left( r+I \right) -\left( s+I \right) =\left( r-s \right) +I\in J'
+,\]
+\[
+	\left( r+I \right) \left( s+I \right) =rs+I\in J'
+.\]
+Therefore, $J$ is an ideal of $R$. Finally, we show $\phi(J)=J'$. Let $ \alpha +I\in \phi (J)$. Since $\alpha \in J$, $\alpha +I\in J'$. Now let $\alpha+I \in J'$. Since $\alpha \in J$, $\alpha +I\in \phi (J)$. Therefore, $\phi $ is surjective.
+
+Finally, we show $\phi $ is injective. Let $J_1,J_2\in \mathcal{J} $ such that $\phi (J_1)=\phi (J_2)$. It follows that for all $\alpha \in J_1$, there exists $\beta \in J_2$ such that $\alpha +I=\beta +I$. By properties of cosets, $\alpha \in \beta +I$. Since $J_2$ is a subring of $R$, it's a group under addition, and is thus closed. Since $I\subseteq J_2$ and $\beta \in J_2$, it follows that $\beta +I \subseteq J_2$. Therefore, $\alpha \in J_2$, and thus $J_1 \subseteq J_2$. Applying the same logic in reverse shows $J_1=J_2$. Therefore, $\phi $ is a bijection.
+
+\noindent \textbf{Part (b)}. Let $R /M$ be a field. It follows that there exist precisely two ideals of $R /M$, namely $R / M$ and $\left\{ M \right\} $, since $M$ is the additive identity. By part (a), there exist two ideals of $R$ containing $M$. Suppose $M$ is not the maximal ideal. It follows that there exists a maximal ideal $M'$ such that $M \subset M' \subset R$ are all ideals. This implies there exist three ideals, which is a contradiction. Therefore, $M$ is the maximal ideal.
+
+Now we show the opposite. Let $M$ be the maximal ideal. It follows that there are precisely two ideals containing $M$, namely $M$ and $R$. Therefore, there exist two ideals in $R /M$. Since a nontrivial ring always contains two trivial ideals,  we know $R /M$ is nontrivial, and thus contains only the trivial ideals. By problem 4, $R /M$ is a field.
+
+\noindent \textbf{Part (c)}. Let $P$ be a prime ideal, and let $a+P,b+P\in R /P$. It follows that
+\[
+	\left( a+P \right) \left( b+P \right) =ab+P
+.\]
+Notice that $P$ is the additive identity in $R /P$. Suppose $a+P$ and $b+P$ are zero divisors; that is, $ab+P=P$. By properties of cosets, $ab+P=P$ if and only if $ab\in P$. Since $P$ is prime, $ab\in P$ if and only if $a\in P$ or $b\in P$. Therefore, if $ab+P=P$, then by properties of cosets $a+P=P$ or $b+P=P$. Since $P=0$ in $R /P$, there are no zero divisors in $R /P$. Since $R$ is a commtutative ring with unity, $R /P$ is an integral domain by proposition \ref{1}.
+
+Now we show the converse. Let $R/P$ be an integral domain. Let $a+P,b+P\in R /P$. Consider
+\[
+	\left( a+P \right) \left( b+P \right) =ab+P
+.\]
+Since $R /P$ is an integral domain, $ab+P=P$ if and only if either $a+P=P$ or $b+P=P$. By properties of cosets, this is equivalent to the statement that $ab\in P$ if and only if $a\in P$ or $b\in P$. Therefore, $P$ is prime.
+
+\noindent \textbf{Part (d)}. Let $M$ be the maximal ideal of $R$. By part (b), $R /M$ is a field. Since fields are integral domains, by part (c), $M$ is prime. However, there exist prime ideals that are not maximal. In any integral domain, $\left\{ 0 \right\} $ is a prime ideal since no zero divisors exist. However, not all integral domains are fields. By problem 4, this means for any integral domain that is not a field, $\left\{ 0 \right\} $ is prime, but not maximal.
+\end{document}

@@ -1,0 +1,128 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{10/18/24}
+\courseID{MA 541}
+\professor{Dr. Duque-Rosero}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+I always type my solutions in LaTeX.
+\section*{Problem 1}
+\begin{solution}
+	(a) First, we show the reflexive property. For any $a\in S_ i$, it follows that $a\in S_i$, and thus $a\sim a$.
+
+	Next, we show the symmetric propery. Let $a\sim b$. It follows that $a,b\in S_i$ for some $i$. Since $a,b\in S_i$, it follows that $b\sim a$.
+
+	Finally, we show the transitive propery. Let $a\sim b$ and $b\sim c$. Since $a\sim b$, we have $a,b\in S_i$ for some $i$. Since $b\sim c$, it follows that $b,c\in S_j$ for some $j$. For any $S_i \cap S_j \neq \varnothing$ it follows that $S_i=S_j$. Since $b\in S_i,S_j$, it follows that $b\in S_i\cap S_j$ implies $S_i\cap S_j\neq \varnothing$, and thus $S_i=S_j$. Thus, $c\in S_i$. Since $a,c\in S_i$, it follows that $a\sim c$.
+
+	(b) Let $a\in S_i$, and consider the set $[a]$.  Let $b\in [a]$. It follows that $a\sim b$, and by definition of the equivalence relation $\sim $, we have $b\in S_i$. Therefore, $[a]\subseteq S_i$. Now let $b\in S_i$. By definiton of the relation $\sim $, we have $a\sim b$, and thus $b\in [a]$. Therefore, $[a]=S_i$ for all $a\in S_i$ and for all $i$. Therefore, the equivalence classes under $\sim $ are precisely the sets $S_i$.
+
+	(c) Let $P=\left\{ g_1H, \ldots,g_nH \right\} $ be the set of all the cosets of $H$ in $G$. By the theorem concerning properties of cosets, for any two cosets $g_iH,g_jH$, we have either $g_iH\cap g_jH=\varnothing$ or $g_iH=g_jH$. It remains only to be shown that $\bigcup_{i=1}^{n} g_nH=G$.
+
+	Now suppose for purpose of contradiction that there exists some $a\in G$ such that for all $i$, $a\notin g_iH$. Since $H$ is a subgroup, $e\in H$, and thus $a=ae\in aH$. By the one theorem concerning properties of cosets, we know that since $a\notin g_iH$ for all $H$, then $aH\neq g_iH$ for all $i$, and thus $P$ is not the set of all cosets, since we have identified a new distinct coset $aH\notin P$. By contradiction, we have $a\in g_iH$ for some $i$ for all $a$. Therefore, $P$ is a partition of $G$.
+\end{solution}
+\section*{Problem 2}
+\begin{solution}
+Let $L$ and $R$ be the sets of left and right cosets, respectively, of $H$ in $G$. Let $\phi : L \to R$ be the map  $gH\mapsto Hg^{-1}$. First, we show the map is well defined. Let $aH=bH$. It follow that for all $h_1\in H$, there exists some $h_2\in H$ such that $ah_1=bh_2$. It follows that
+\begin{align*}
+	&\qquad\;\;\; \left(ah_1\right)\left(h_1^{-1}a^{-1}\right)=\left(bh_2\right)\left(h_1^{-1}a^{-1}\right)\\
+	&\implies e=\left(bh_2\right)\left(h_1^{-1}a^{-1}\right)\\
+	&\implies h_2^{-1}b^{-1}=\left(h_2^{-1}b^{-1}\right)\left(bh_2\right)\left(h_1^{-1}a^{-1}\right)\\
+	&\implies h_2^{-1}b^{-1}=h_1^{-1}a^{-1}
+.\end{align*}
+We know from the properties of cosets that $a^{-1}\in Hb^{-1}$ if and only if $Ha^{-1}=Hb^{-1}$. We have
+\begin{align*}
+	&\qquad\;\;\; h_2^{-1}b^{-1}=h_1^{-1}a^{-1}\\
+	&\implies h_1h_2^{-1}b^{-1}=a^{-1}
+.\end{align*}
+Since $h_1h_2^{-1}\in H$, we have $h_1h_2^{-1}b^{-1}\in Hb^{-1}$, and thus $a\in Hb^{-1}$. Therefore, if $aH=bH$, then $Ha^{-1}=Hb^{-1}$, and the map is well defined.
+
+Now, we show the map is surjective. Let $a\in G$ and $Ha\in R$. It follows that
+\[
+	Ha=H\left( a^{-1} \right) ^{-1}=\phi \left( a^{-1}H \right) 
+.\]
+Therefore, $\phi $ is surjective. Now we show the map is injective. Suppose there exist $aH,bH\in L$ such that $\phi (aH)=\phi (bH)$. It follows that $Ha^{-1}=Hb^{-1}$, and thus for all $h_1\in H$, there exists $h_2\in H$ such that $h_1a^{-1}=h_2b^{-1}$. It follows that
+\begin{align*}
+	&\qquad\;\;\; e=\left(h_2b^{-1}\right) \left(ah_1^{-1}\right)\\
+	&\implies bh_2^{-1}=ah_1^{-1}\\
+	&\implies bh_2^{-1}h_1=a
+.\end{align*}
+Since $h_2^{-1}h_1\in H$, then $a\in bH$, and thus $aH=bH$. Therefore, $\phi $ is bijective, and $\left| L \right| =\left| R \right| $.
+\end{solution}
+\section*{Problem 3}
+\begin{solution}
+Define $\phi : G \to G$ as the map $a\mapsto a^n$. Let $a,b\in G$. We have
+\[
+	\phi (ab)=(ab)^n
+.\]
+Since $G$ is abelian,
+\[
+	(ab)^n=a^nb^n=\phi (a)\phi (b)
+.\]
+Therefore, $\phi $ is a homomorphism. Now, we show $\phi $ is surjective. Let $b\in G$. Since $n$ and $\left| G \right| $ are relatively prime, there exist $\alpha ,\beta \in\mathbb{Z}$ such that $\alpha n+\beta \left| G \right| =1$. We then have
+\[
+	g=g^1=g^{\alpha n+\beta \left| G \right| }=g^{\alpha n}g^{\beta \left| G \right| }
+.\]
+By Lagrange's theorem, $\left| g \right| $ divides $\left| G \right| $. Therefore, there exists some $\ell \in\mathbb{Z}$ such that $\left| G \right| =\ell \left| g \right| $. By definition, $g^{\left| g \right| }=e$. Therefore,
+\begin{align*}
+	g^{\alpha n}g^{\beta \left| G \right| }&=g^{\alpha n}g^{\beta \ell \left| g \right| }\\
+	 &=g^{\alpha n}\left( g^{\left| g \right| } \right) ^{\beta \ell }\\
+	 &=g^{\alpha n}e^{\beta \ell }\\
+	 &=g^{\alpha n}
+.\end{align*}
+Therefore, $g=g^{\alpha n}=\left( g^{\alpha } \right) ^{n}$ for some $\alpha $. Define $a\coloneqq g^{\alpha }$. Then $a ^n=g$. Therefore, $\phi $ is surjective.
+
+Finally, we show $\phi $ is injective. I did this in a really weird way, and after the fact a friend showed me the more straightforward method where $\left| ab^{-1} \right| $ divides both $n$ and $\left| G \right| $. Since I didn't come up with that on my own, I haven't included it, but I think my method is still correct. It's just really excessive.
+
+Let $a,b\in G$, and suppose $\phi (a)=\phi (b)$. First, we will show $\phi^k(a)=a^{n^k}$. We will use the method of proof by induction. Clearly, we have the base case of $\phi ^1(a)=a^n=a^{n^1}$. Now suppose $\phi ^k(a)=a^{n^k}$. We wish to show $\phi ^{k+1}(a)=a^{n^{k+1}}$. It follows that
+\[
+	\phi ^{k+1}(a)=\phi\left( \phi ^k(a) \right) =\phi \left( a^{n^k} \right) =\left( a^{n^k} \right) ^n=a^{n\left( n^k \right) }=a^{n^{k+1}}
+.\]
+By induction, $\phi ^k = a^{n^k}$.
+
+Next, we will show that if $\phi (a)=\phi (b)$, then $\phi^k\left(a \right) =\phi^k(b)$ for any $k\in\mathbb{N}$. We will again use the method of induction, but we assume our base case of $k=1$ is true in this proof, so we need only show the second step of induction. Suppose $\phi ^k(a)=\phi ^k(b)$ for some $k$. We wish to show $\phi ^{k+1}(a)=\phi ^{k+1}(b)$. Notice that since $\phi ^k(a)=\phi ^k\left(b \right) $, and since inverses are unique, we have $\left( \phi ^k(a) \right) ^{-1}=\left( \phi ^k(b) \right) ^{-1}$. It follows that
+\begin{align*}
+	&\qquad\;\;\; \left( \phi ^k(a) \right) ^n=\left( \phi ^k(b) \right) ^n\\
+	&\iff \left( \phi ^k(a) \right) ^n \left( \left( \phi ^k(a) \right) ^{-1} \right) ^{n}=\left( \phi ^k(b) \right) ^n \left( \left( \phi ^k(a) \right) ^{-1} \right) ^{n}\\
+	&\iff\left( \phi ^k(a) \right) ^n \left( \left( \phi ^k(a) \right) ^n \right) ^{-1}=\left( \phi ^k(b) \right) ^n \left( \left( \phi ^k(b) \right) ^n \right) ^{-1}\\
+	&\iff e=e
+.\end{align*}
+Since $e=e$, and since all statements were if and only if statements, it follows that $\phi ^{k}(a)=\phi ^k(b)$ for all $k$.
+
+Suppose there exists some $k$ such that $n^k\equiv 1\mod{\left| G \right| }$. It follows that there exists some $q\in\mathbb{Z}$ such that $n^k = q\left| G \right|+1 $. Since for any $a\in G$, the order of $a$ divides $\left| G \right| $, it follows that
+\[
+	a^{n^k}=a^{q\left| G \right| +1}=a^{q\left| G \right| }a=ea=a
+.\]
+It remains to be shown such a $k$ exists.
+
+Since $n$ is relatively prime to $\left| G \right| $, then $n\in U(\left| G \right| )$. Note that $\left| U(\left| G \right| ) \right| =\varphi (\left| G \right| )$, where $\varphi $ is the Euler totient function. By Lagrange's Theorem, $\left| n \right| $ divides $\left| U(\left| G \right| ) \right| $, and thus $n^{\left| U(\left| G \right| ) \right| }\equiv n^{\varphi (\left| G \right| )}\equiv 1\mod{\left| G \right| }$, since 1 is the identity in $U(\left| G \right| )$. It follows that
+\begin{align*}
+	&\qquad\;\;\; \phi^{\varphi (\left| G \right| )}(a)=\phi ^{\varphi (\left| G \right| )}(b)\\
+	&\implies a^{n^{\varphi (\left| G \right| )}}=b^{n^{\varphi (\left| G \right| )}}\\
+	&\implies a=b
+.\end{align*}
+Since $a=b$, $\phi $ is injective, and is thus an automorphism on any finite abelian group $G$.
+\end{solution}
+\section*{Problem 4}
+\begin{solution}
+Let $a\in G$ such that $a\in H$ and $a\in K$. By Lagrange's theorem, $\left| a \right| $ divides both $\left| H \right| $ and $\left| K \right| $. Since $H$ and $K$ have relatively prime orders, the order of $a$ must be no greater than 1, and thus can only be 1. Therefore, $a=e$, and $H\cap K=\left\{ e \right\} $.
+\end{solution}
+\section*{Problem 5}
+\begin{solution}
+Let $G$ be a group with $\left| G \right| =4$. By Lagrange's theorem, for all $a\in G$, the order of $a$ must divide $4$. Suppose there exists some $a\in G$ with $\left| a \right| =4$. Note that $a^1=a$ and $a^4=e$. We know that $a^2\neq e$ and $a^3\neq e$, since $2,3<4$ and $\left| a \right| =4$. Thus, if we can show  that $a^2\neq a$, $a^3\neq a$, and $a^2\neq a^3$, we will have shown that there are 4 distinct elements of $G$ that can be represented as powers of $a$. Since there are only 4 elements of $G$, this implies $\left<a \right> =G$. We will show all three statements by contradiction.
+\begin{align*}
+	&a^2=a \implies a=e \implies \left| a \right| =1 \Longrightarrow\Longleftarrow\\
+	&a^3 = a^2 \implies a=e \implies \left| a \right| =1 \Longrightarrow\Longleftarrow\\
+	&a^3 = a \implies a^2 = e \implies \left| a \right| =2 \Longrightarrow\Longleftarrow
+.\end{align*}
+Therefore, if there exists $a\in G$ such that $\left| a \right| =4$, then $G= \left<a \right>$. Let $b,c\in G$. Since $ G$ is generated by $a$, there exist integers $k,\ell $ such that $b=a^k$ and $c=a^\ell $. It follows that
+\[
+	bc=a^ka^\ell =a^{k+\ell }=a^{\ell +k}=a^\ell a^k=cb
+.\]
+Therefore, $G$ is abelian.
+
+Now suppose there does not exist $a\in G$ such that $\left| a \right| =4$. Notice that by contrapositive, $G$ is not cyclic. By Lagrange's theorem, for any $a\in G$, the order of $a$ divides $4$. The only positive divisors of 4 are $1$, 2, and 4. The only element with order 1 is the identity $e$, so $G$ must consist of precisely $e$ and three elements of order 2. For any $a\in G $, since either $\left| a \right| =2$ or $a=e$, we have $aa=e$, and thus $a=a^{-1}$. Let $a,b\in G$. Notice that $ab\in G$, and thus $\left( ab \right) ^{-1}=ab$. Additionally, we know $\left( ab \right) ^{-1}=b^{-1}a^{-1}$. We thus have $ab=b^{-1}a^{-1}$. Recall that $b^{-1}=b$ and $a^{-1}=a$. It follows that $ab=ba$, and $G$ is abelian.
+\end{solution}
+\end{document}

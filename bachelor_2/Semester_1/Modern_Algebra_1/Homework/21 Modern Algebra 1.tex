@@ -1,0 +1,85 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{10/25/24}
+\courseID{MA 541}
+\professor{Dr. Duque-Rosero}
+\courseSection{A1}
+\usepackage{enumitem}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{solution}
+	\begin{enumerate}[label=(\alph*)]
+		\item We know $\mathbb{Z}_n\times \mathbb{Z}_m\cong \mathbb{Z}_{nm}$ if and only if $\operatorname{gcd}(n,m) =1$. Since $\operatorname{gcd}(3,9) =3\neq 1$, the groups are not isomorphic.
+		\item By the theorem mentioned in part (a), we know $\mathbb{Z}_6\times \mathbb{Z}_5\cong \mathbb{Z}_{30}$, and $\mathbb{Z}_3\times \mathbb{Z}_{10}\cong \mathbb{Z}_{30}$, since $\operatorname{gcd}(5,6) =1$ and $\operatorname{gcd}(3,10) =1$. Since $\cong $ is an equivalence relation on the class of groups, by the transitive property we have $\mathbb{Z}_6\times \mathbb{Z}_5\cong \mathbb{Z}_3\times \mathbb{Z}_{10}$.
+		\item Notice that $D_4$ is nonabelian. Consider some $(a_1,b_1),(a_2,b_2)\in \mathbb{Z}_2\times \mathbb{Z}_4$. Since $\mathbb{Z}_2$ and $\mathbb{Z}_4$ are abelian, we have $a_1 + a_2 = a_2 + a_1$ and $b_1 + b_2=b_2+b_1$. It thus follows that 
+			\[
+				(a_1,b_1)(a_2,b_2)=(a_1+a_2,b_1+b_2)=(a_2+a_1,b_2+b_1)=(a_2,b_2)(a_1,b_1)
+			.\]
+			Therefore, $\mathbb{Z}_2\times \mathbb{Z}_4$ is abelian. Since $D_4$ is nonabelian, there exists no isomorphism.
+		\item For an isomorphism to exist, there must exist a bijection, and thus $\left| D_6\times \mathbb{Z}_2\right| =\left| A_4 \right| $. We know $\left| D_6 \times \mathbb{Z}_2 \right| =\left| D_6 \right| \left| \mathbb{Z}_2 \right| = 12\cdot 2=24$. Additionally, we know $\left| A_4 \right| =4!/2 = 24/2=12$. Since $24\neq 12$, there exists no isomorphism.
+	\end{enumerate}
+\end{solution}
+\section*{Problem 2}
+\begin{solution}
+	Let $G=\left<g \right>$, and let $H=\left<h \right>$. Suppose $G\times H$ is cyclic. Notice that the order of $G\times H=\left| G \right| \left| H \right| $. It follows that there exists some $(a,b)\in G\times H$ such that $\left| \left( a,b \right)  \right| =\left| G \right| \left| H \right| $. Since $\left| (a,b) \right| =\operatorname{lcm}(\left| a \right| ,\left| b \right| ) $, we have
+	\[
+		\left| H \right| \left| G \right| =\frac{\left| a \right| \left| b \right| }{\operatorname{gcd}(\left| a \right| ,\left| b \right| ) }
+	.\]
+	The maximum value of $\left| a \right| $ for some $a\in G$ is $\left| G \right| $, since $G$ is cyclic. Similarly, the maximum value of $\left| b \right| \in H$ is $\left| H \right| $. Therefore, the maximum value of $\left| a \right| \left| b \right| $ is $\left| H \right| \left| G \right| $. Note that if $\left| a \right| \left| b \right| <\left| H \right| \left| G \right| $, then
+	\[
+		\frac{\left| a \right| \left| b \right| }{\operatorname{gcd}(\left| a \right| ,\left| b \right| ) }<\left| H \right| \left| G \right| 
+	,\]
+	since $\operatorname{gcd}(\left| a \right| ,\left| b \right| ) \geq 1$ for all $a$ and $b$, and thus dividing by it cannot increase the number. Therefore, we fix $\left| a \right| \left| b \right| = \left| H \right| \left| G \right| $, since this is the only value of the item's order that will generate the group. It then follows that
+	\[
+		\frac{\left| H \right| \left| G \right| }{\operatorname{gcd}(\left| H \right|, \left| G \right| ) }=\left| H \right| \left| G \right| \implies \operatorname{gcd}(\left| H \right| ,\left| G \right| ) =1
+	.\]
+
+	We now show the converse. Suppose $\left| G \right| $ and $\left| H \right| $ are relatively prime. We know $\left| g \right| =\left| G \right| $ and $\left| h \right| =\left| H \right| $ since $g$ and $h$ generate their respective groups, and thus we have
+	\[
+		\frac{\left| h \right| \left| g \right| }{\operatorname{gcd}(\left| h \right| ,\left| g \right| ) }=\frac{\left| H \right| \left| G \right| }{\operatorname{gcd}(\left| H \right| ,\left| G \right| ) }=\frac{\left| H \right| \left| G \right| }{1}=\left| H \right| \left| G \right| =\left| H\times G \right| 
+	.\]
+\end{solution}
+\section*{Problem 3}
+\begin{solution}
+Suppose $HK$ is a group. Since $HK$ is a group, for all $h_1k_1\in HK$, there exists some $h_2k_2\in H K$ such that $\left( h_1k_1 \right) ^{-1}=h_2k_2$. It follows that
+\begin{align*}
+	&\qquad\;\;\;\left( h_1k_1 \right) ^{-1} = h_2k_2\\
+	&\implies \left( \left( h_1k_1 \right) ^{-1} \right) ^{-1}=\left( h_2k_2 \right) ^{-1}\\
+	&\implies h_1k_1 = k_2^{-1}h_2^{-1}
+.\end{align*}
+Notice that $k_2^{-1}h_2^{-1}\in KH$. Therefore, for all $hk\in HK$, we have $hk\in KH$, and thus $HK \subseteq KH$. Now let $kh\in KH$. Since  $K$ and $H$ are groups, $k$ has an inverse in $K$ and $h$ has an inverse in $h$. Therefore, $\left( kh \right) ^{-1}=h^{-1}k^{-1}$. Since $\left( kh \right) ^{-1}\in G$, and thus it has an inverse, it follows that $kh= \left( h^{-1}k^{-1} \right) ^{-1}$. Since $h^{-1}k^{-1}\in HK$ and $HK$ is a group, it follows that $\left( h^{-1}k^{-1} \right) ^{-1}\in HK$, and thus $kh\in HK$. Therefore, $KH\subseteq HK$. Thus, $HK=KH$.
+
+Now we show the converse. Let $h_1k_1,h_2k_2\in HK$. Since $HK=KH$, it follows that there exists some $k_3h_3\in KH$ such that $h_2k_2=k_3h_3$. We then have $h_1k_1h_2k_2=h_1k_1k_3h_3$. Since $K$ is a group, $k_1k_3\in K$. Notice that $k_1k_3h_3\in KH$. Since $HK=KH$, there exists some $h_4k_4\in HK$ such that $h_4k_4=k_1k_3h_3$. It follows that $h_1k_1k_3h_3=h_1h_4k_4$. Notice that since $H$ is a group, $h_1h_3\in H$, and thus $h_1h_4k_4\in HK$. Therefore, $HK$ is closed under the group operation. Since $G$ is a group, and thus $HK \subseteq G$, associativity holds for all $hk$. Since $H$ and $K$ are both groups, the identity $e\in H,K$. It follows that $ee=e\in HK$, and thus there exists an identity. Finally, let $hk\in HK$. Since $hk\in G$, we know $\left( hk \right) ^{-1}=k^{-1}h^{-1}$. Since $k^{-1}h^{-1}\in KH$ and $KH=HK$, there exists some $h'k' \in HK$ such that $k^{-1}h^{-1}=h'k'$. Therefore, $(hk)^{-1}=h'k'\in HK$. Therefore, $HK$ is a group.
+\end{solution}
+\section*{Problem 4}
+\begin{solution}
+	(a) Since $H$ and $K$ are groups, $H\times K$ is a group. Since $H\subseteq \mathbb{Z}$ and $K\subseteq \mathbb{Z}$, then $H\times K\subseteq \mathbb{Z}\times \mathbb{Z}$. Therefore, $H\times K$ is a subgroup of $\mathbb{Z}\times \mathbb{Z}$.
+
+	(b) Let $H,K\leq \mathbb{Z}$ be subgroups, and suppose $H\times K$ is cyclic. It follows that $H\times K$ is generated by some element $(n,m)$. Since $\mathbb{Z}$ is cyclic, by the fundamental theorem of cyclic groups we know $H,K$ are cyclic. It follows that $H =\left<a \right>$ and $K=\left<b \right>$. Thus, $H\times K=a\mathbb{Z}\times b\mathbb{Z}$. Notice that since $(n,m)$ generates $H\times K$, and since obviously $(a,b)\in H\times K$, there exists some $k$ such that $k(n,m)=(a,b)$. It follows that $kn=a$ and $km=b$. Notice again that $2b\in b\mathbb{Z}$, and thus $(a,2b)\in H\times K$. It follows that there exists some $k'$ such that $k'(n,m)=(a,2b)$. Since $k'n=a$, we have $k'n=kn$. Since $k'm=2b$, we have $k'm=2km$. If $n\neq 0$, we have $k'=k$, and thus $km=2km$. It follows that $m=0$ in the general case, since there are cases where $k\neq 0$. It follows that $H\times K=a\mathbb{Z}\times \left\{ 0 \right\} $. If we suppose instead that $m\neq 0$, by the same logic we obtain $H\times K=\left\{ 0 \right\} \times b\mathbb{Z}$. Assuming $n,m\neq 0$ fairly obviously gives the contradiction $1=2$, and assuming $n,m=0$ is simply a special case of the cases $n=0$ or $m=0$. Therefore, the cyclic subgroups $H\times K$ of $\mathbb{Z}\times \mathbb{Z}$ are those of the form $a\mathbb{Z}\times \left\{ 0 \right\} $ or $\left\{ 0 \right\} \times b\mathbb{Z}$.
+
+	(c) The set $\left<(1,1) \right>$ does not equal $H\times K$ for any $H,K\leq \mathbb{Z}$. Suppose for purpose of contradiction that $\left<(1,1) \right> = H\times K$ for some $H,K\leq \mathbb{Z}$. It follows that $1\in H,K$. Since $K$ is a group and thus closed under addition, $\left<1 \right>\subseteq K$, and since $\left<1 \right> =\mathbb{Z}$, we have $K=\mathbb{Z}$. By the same logic, we have $H=\mathbb{Z}$. Thus, $H\times K=\mathbb{Z}\times \mathbb{Z}$. Notice that $(2,1)\in\mathbb{Z}\times \mathbb{Z}$, but $(2,1)\notin \left<(1,1) \right>$. By contradiction, there exist no such $H\times K$ such that $\left<(1,1) \right> =H\times K$.
+\end{solution}
+\section*{Problem 5}
+\begin{solution}
+	(a) Let some $(a_1, \dots, a_n )\in \mathbb{Z}_p^n \setminus\left\{ e \right\} $, where $e$ is the identity. Since $p$ is prime, for all $a_i\in \mathbb{Z}_p \setminus\left\{ 0 \right\} $, we know $\left| a_i \right| =p$. Additionally, if $a_i=0$, we know $\left| a_i \right| =1$, and $\operatorname{lcm}(1,p) =p$. It follows that
+	\[
+		\left| \left( a_1, \dots, a_n  \right)  \right| =\operatorname{lcm}(\left| a_1 \right| ,\ldots, \left| a_n \right| ) =p
+	,\]
+	since all $a_i$ have either $\left| a_i \right| =p$ or $\left| a_i \right| =1$. Therefore, for all $x\in\mathbb{Z}_p^n \setminus \left\{ e \right\} $, we know $\left| x \right| =p$. Since $\left| \mathbb{Z}_p^n \right| =p^n$ and $\left| \left\{ e \right\}  \right| =1$, there exist $p^n-1$ elements of order $p$ in $\mathbb{Z}_p^n$.
+
+	(b) Since only the identity has order $1$, and all other elements of $\mathbb{Z}_p^n$ have order $p$, and for any prime, $p\geq 2$, we know there must be at least one nonzero in any subgroup of order $p$. It follows from this that each subgroup $H$ of order $p$ has at least one element $h$ of order $p$, and thus $H$ must be cyclic. Therefore, we are simply looking for the number of cyclic subgroups of $\mathbb{Z}_p^n$. Note that since there are $p^n-1$ elements of order $p$ in $\mathbb{Z}_p^n$, then there are $p^n-1$ cyclic subgroups since there are $p^n-1$ possible generators. However, these subgroups are not necessarily distinct. Since every nonzero element of a cyclic subgroup has order $p$, and since each cyclic subgroup is closed, then each cyclic subgroup has $p-1$ generators. We divide the number of cyclic subgroups by the number of generators per subgroup to find that the number of subgroups of $\mathbb{Z}_p^n$ of order $p$ is equal to
+	\[
+		\frac{p^n-1}{p-1}
+	.\]
+
+	(c) If $\left<x \right> \left<y \right>$ is an internal direct product of nontrivial cyclic subgroups of $\mathbb{Z}_p^n$, then we know by a theorem about internal direct products that $\left<x \right> \left<y \right> \cong \mathbb{Z}_p\mathbb{Z}_p \cong  \mathbb{Z}_p^2$, since $\left<x \right>,\left<y \right>\cong \mathbb{Z}_p$, and the only subgroups of order $p^2$ are isomorphic to $\mathbb{Z}_p^2$ or $\mathbb{Z}_{p^2}$, and being isomorphic to $\mathbb{Z}_{p^2}$ implies there exists a generator of order $p^2$, which we have shown does not exist in $\mathbb{Z}_p^n$. Additionally, $\left| \mathbb{Z}_p^2 \right| =p^2$. Since $\mathbb{Z}_p^n$ is abelian, $\left<x \right>\left<y \right>$ will be an internal direct product if $\left<y \right>  \cap \left<y \right> =\left\{ e \right\} $. By our logic in part (b), we know there are $p^n-1$ choices for $x$. We also know that $y\notin \left<x \right>$, and $y\neq 0$, implying that there are $p^n-1 - (p-1)=p^n-p$ elements that we can choose from for $y$. Thus, there are $\left( p^n-1 \right) \left( p^n-p \right) $ possible choices for $x,y$. However, there are multiple generators for $\left<x \right>$ and $\left<y \right>$, so we must account for this.
+	
+	Notice that any nonzero choice of $x$ will generate $\left<x \right>$, and any nonzero choice of $y$ will generate $\left<y \right>$. Thus, any nonzero choice of $(x,y)$ will generate $\left<x \right>\left<y \right>$. Since there are $p^2-1$ nonzero elements of $\left<x \right>\left<y \right>$, there are $p^2-1$ choices of elements for $x$ that will generate the group. We must then choose $y$ in the group such that $y\notin \left<x \right>$. Since the order of the group is $p^2$ and the order of $\left<x \right>$ is $p$, there are $p^2-p$ choices in $y$. By dividing out the amount by which we are overcounting, we find the number of subgroups of order $p^2$ is
+	\[
+		\frac{\left( p^n-1 \right) \left( p^n-p \right) }{\left( p^2-1 \right) \left( p^2-p \right) }
+	.\]
+\end{solution}
+\end{document}

@@ -1,0 +1,60 @@
+\lecture{13}{Tue 19 Nov 2024 09:32}{Integral Domains}
+Recall the definition.
+\begin{definition}[Integral Domain]\label{dfn:IID}
+	A ring $R$ is an integral domain if it has unity, is commutative, and has no zero divisors.
+\end{definition}
+\begin{proposition}[Cancellation Law]
+	Let $D$ be a commutative ring with unity. Then $D$ is an integral domain if and only if for all nonzero $a\in D$ with $ab=ac$, we have $b=c$.
+\end{proposition}
+\begin{proof}
+	Let $D$ be an integral domain, and let $ab=ac$ for $a,b,c\in D$ and $a$ nonzero. We have
+	\[
+		ab-ac=ac-ac=0
+	.\]
+	By the distributive property,
+	\[
+		a(b-c)=0
+	.\]
+	Since $a$ is nonzero and $D$ has no zero divisors, it follows that $b-c=0$, and thus $b=c$.
+
+	Now let $D$ be a commutative ring with unity, and let $ab=ac$ imply that $b=c$ for all $a,b,c\in D$ and $a$ nonzero. Suppose $ad=0$ for some $b\in D$. Since $a0=0$, we have $ad=a0$. Therefore, since $a$ nonzero, we have $d=0$.
+\end{proof}
+\begin{theorem}\label{thm:17}
+	Every finite integral domain is a field.
+\end{theorem}
+\begin{proof}
+	Let $D$ be a finite integral domain, and let $D^*=D\setminus\left\{ 0 \right\} $. Define $\lambda_a : D^* \to D^*$ as the map $d\mapsto ad$. We want to show that $1\in\lambda_a(D^*)$. We note that $\lambda_a$ is well defined because $a,b\neq 0$ implies $ab\neq 0$ because there are no zero divisors. We will now show $\lambda_a$ is injective. Let $ab=ac$. It follows by the cancellation law that $b=c$, and thus $\lambda_a$ is injective. Since $D^*$ is finite, the map is automatically a bijection, and $1\in D^*$ implies $1\in \lambda_a(D^*)$. Therefore, $a$ has an inverse element.
+\end{proof}
+\begin{corollary}
+	$\mathbb{Z}_p$ is a field, for $p$ prime.
+\end{corollary}
+There are fields of nonprime order. For example, $\mathbb{Z}_3[i]$ has order $9$.
+\begin{definition}[Characteristic]\label{dfn:aaj}
+	The characteristic of a ring $R$ is the smallest $n\in\mathbb{N}$ such that $nr=0$ for all $r\in R$. If no such integer exists, we say  $R$ has characteristic 0. We denote the characteristic as $\operatorname{char}(R) $.
+\end{definition}
+\begin{remark}
+	When we have a ring $R$ with $r\in R$ and $a\in\mathbb{Z}$, we write
+	\[
+		ar=\sum_{i=1}^{a} r
+	.\]
+	However, since $R$ may not be $\mathbb{Z}$, we cannot applying the ring axioms to $a$ or other elements of $\mathbb{Z}$.
+\end{remark}
+\begin{theorem}\label{thm:RINKSJA}
+	Let $R$ be a ring with unity. Then $\operatorname{char}(R)\neq 0$ implies  $\operatorname{char}(R) =\left| 1 \right|_{+} $, for $\left| \cdot  \right| _+$ the additive order. Moreover, $\left| 1 \right| _+=\infty$ implies $\operatorname{char}(R) =0$.
+\end{theorem}
+\begin{proof}
+	Let $R$ be a ring with unity. Suppose $\operatorname{char}(R) =m<\infty$. Then $\left| 1 \right| \leq m$. Suppose $\left| 1 \right| _+=n$. Then $n1=0$ by definition. Thus for all  $r\in R$, we have
+	\[
+		nr=n(1r)=(n1)r=0r=0
+	.\]
+	Therefoe, $\operatorname{char}(R) =n$.
+
+	Now suppose $\left| 1 \right| _+=\infty$. Then there exists no $n$ such that $n1=0$, and thus the characteristic is $0$ by definition.
+\end{proof}
+\begin{theorem}\label{thm:hsd}
+	The characteristic of an integral domain is either prime or $0$.
+\end{theorem}
+\begin{proof}
+	Let $D$ be an integral domain. Suppose $\operatorname{char}(D) =n\neq 0$. Since $D$ has unity, $n =\left| 1 \right| _+$. If $n$ is not prime, then $n=ab$ for some $a,b\in\mathbb{N}$ with $1<a,b<n$. We then have $\left| 1 \right|_+=ab$, and $ab1=0$. Therefore, $(a1)(b1)=0$. Since $D$ is an integral domain, it follows that either $a1$ or $b1$ is $0$. Therefore, $\left| 1 \right| _+$ either equals $a$ or $b$, and thus does not equal $n$. This is a contradtion, implying $\left| 1 \right| _+$ is prime.
+\end{proof}
+\chapter{Ideals and Quotient Rings}

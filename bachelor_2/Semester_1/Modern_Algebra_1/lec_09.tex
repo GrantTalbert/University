@@ -1,0 +1,134 @@
+\lecture{9}{Thu 31 Oct 2024 09:27}{The First Isomorphism Theorem}
+
+\begin{theorem}[First Isomorphism Theorem]\label{thm:OWOWOWOWO}
+	Let $\phi : G \to F$ be a group homomorphism. Then there exists a group isomorphism $\psi : G / \ker \phi  \to \phi (G)$ defined as $g\ker \phi \mapsto \phi (g)$.
+\end{theorem}
+\begin{proof}
+	First, we show $\psi $ is well defined. Let $g\ker \phi =g'\ker \phi $. It follows from properties of cosets that $g'\in g\ker \phi $. Therefore, there exists $h\in \ker \phi $ such that $g'=gh$. By definition, $\phi (g')=\phi (gh)=\phi (g)\phi (h)$. Since $h\in \ker \phi $, $\phi (h)=e$. Therefore, $\phi (g')=\phi (g)$. Therefore, $\psi $ is well defined.
+
+	Next, we show $\psi $ is injective. Let $\psi (g\ker \phi )=\psi (g'\ker \phi )$. It follows that $\phi (g)=\phi (g')$ by definition of $\psi $, and thus $\phi (g)\left( \phi (g') \right) ^{-1}=e$. Since $\phi $ is a homomorphism, it follows that $\phi (g)(\phi (g')^{-1})=\phi (g(g')^{-1})=e$. It follows that $g(g')^{-1}\in \ker \phi $, and by properties of cosets, $g(g')^{-1}\in \ker \phi $ if and only if $g\ker \phi =g'\ker \phi $. Therefore, $\psi $ is injective.
+
+	Now we show $\psi $ is surjective. Let $x=\phi (g)\in\phi (G)$. Notice that $g\ker \phi \mapsto \phi (g)$. Therefore, $x=\psi (g\ker \phi  )$, and $\psi $ is surjective.
+
+	Finally, we show $\psi $ is a homomorphism. Let $g\ker \phi ,g'\ker \phi \in G / \ker \phi $. It follows that
+	\[
+		\psi \left( g\ker \phi g'\ker \phi  \right) =\psi \left(gg'\ker \phi \right)=\phi \left( gg' \right) 
+	.\]
+	
+	Since $\phi $ is a homomorphism, it follows that
+	\[
+		\phi (gg')=\phi (g)\phi \left( g'\right) 
+	.\]
+	By definition,
+	\[
+		\phi (g)\phi \left( g' \right) =\psi (g\ker \phi )\psi \left( g'\ker \phi  \right) 
+	.\]
+	Therefore, $\psi $ is an isomorphism.
+\end{proof}
+
+The first isomorphism theorem is an extremely powerful theorem, similar to Lagrange's theorem, and deserves some discussion at length.
+
+\[\xymatrix{\ar @{} [dr] 
+		G \ar[d] \ar[r]^{\phi} & \phi(G) \\
+G / \ker \phi \ar[ur]_{\psi } & }\]
+
+Note that $\exists !\phi $ such that this diagram commutes.`
+\begin{corollary}
+	Let $\phi : G \to F$ be a group homomorphism with $G$ a finite group. Then $\left[ G : \ker \phi  \right] =\left| \phi (G) \right| $.
+\end{corollary}
+\begin{proof}
+	\[
+		\left[ G : \ker \phi  \right] =\frac{\left| G \right| }{\left| \ker \phi  \right| }=\left| G / \ker \phi  \right| =\left| \phi (G) \right| 
+	.\]
+\end{proof}
+\begin{corollary}
+	Let $\phi : G \to F$ be a group homomorphism with $G$ finite. Then
+	\[
+		\left| \phi (G) \right| |\left| G \right| \text{ and }\left| \phi (G) \right| |\left| F \right| 
+	.\]
+\end{corollary}
+\begin{proof}
+	By the previous corollary, $\left| G / \ker \phi  \right| =\left| G \right| $. Therefore, $\left| \phi (G) \right| $ divides $\left| G \right| $ trivially.
+\end{proof}
+\begin{corollary}
+	Let $N\triangleleft G$. Then there exists a group homomorphism $\phi : G \to K$ such that $N=\ker \phi $. Not sure why $F$ follows but its probably trivial.
+\end{corollary}
+\begin{proof}
+	Define $\phi : G \to G / N$ by $g\mapsto gN$. Trivially, this is a homomorphism. Note that the identity is $N$, and $gN=N$ if and only if $g\in N$ by our properties of cosets. Therefore, $g\mapsto N$ if and only if $g\in N$,  and $\ker \phi =N$.
+\end{proof}
+\begin{remark}
+	Normal subgroups are kernels of group homomorphisms, and the kernel of a group homomorphism is a normal subgroup.
+\end{remark}
+\begin{corollary}
+	The first isomorphism is not required, but it makes it simple. Let $\phi : G \to K$ be a group homomorphism. Then $\phi $ is injective if and only if $\ker \phi =\left\{ e \right\} $.
+\end{corollary}
+\begin{proof}
+	If $\phi $ is injective, then by the properties of homomorphisms $e\mapsto e$, and since $\phi $ is injective, there exist no other $g\in G$ such that $g\mapsto e$.
+
+	If $\ker \phi =\left\{ e \right\} $, then we know idk
+\end{proof}
+\chapter{The Class Equation and the Sylow Theorems}
+Note that this is chapter 23.
+\section{Class Equation}
+\begin{definition}[Conjugate]\label{dfn:jh}
+	Let $a,b\in G$. We say $a$ and $b$ are conjugate in $G$ if there is $x\in G$ such that $xax^{-1}=b$.
+\end{definition}
+
+\begin{definition}[Conjugacy Class]\label{dfn:hhh}
+	The conjugacy class of $a$ in $G$ is the set $cl(a)=\left\{ xax ^{-1} \mid x\in G \right\} $. This is the set of all elements conjuate to $a$ in $G$.
+\end{definition}
+Note that in general, $cl(a)\neq G$. For example, $cl(e)=\left\{ xex ^{-1} \mid \in G \right\} =\left\{ exx ^{-1} \mid x\in G \right\} =\left\{ e \right\} $. In fact, for $a\in Z(G)$, $cl(a)=\left\{ a \right\} $ by the same logic.
+\begin{theorem}\label{thm:jhs}
+	Conjugacy is an equivalence relation. Equivalently, the conjugacy classes in $G$ partition $G$.
+\end{theorem}
+\begin{proof}
+	Let $a\in G$. Note that since $e\in G$, $eae^{-1}=a\in cl(a)$. Therefore, $a\sim a$.
+
+	Let $a,b\in G$ such that $a\sim b$. It follows that there exists $x\in G$ such that $a=xbx ^{-1}$. It follows that $x ^{-1}ax=b$. Since $x ^{-1}\in G$, $a\in cl(b)$, and $b\sim a$.
+
+	Let $a,b,c\in G$ such that $a\sim b$ and $b\sim c$. It follows that there exists $x\in G$ such that $a = xbx ^{-1}$, and there exists $y\in G$ such that $b=ycy ^{-1}$. Notice that $a = xycy ^{-1}x ^{-1}$. Notice that $\left( xy \right) ^{-1}=y^{-1}x ^{-1}	$. Since $xy\in G$, $c\in cl(a)$. Therefore, $a\sim c$, and $\sim $ is an equivalence relation.
+\end{proof}
+\begin{theorem}\label{thm:kjhashj}
+	For $a\in G$, $\left| cl(a) \right| =\left[ G : C(a) \right] $.
+\end{theorem}
+\begin{proof}
+	Since $C(a)$ is normal, note that
+	\[
+		\left[ G : C(a) \right] =\left| G / C(a) \right| 
+	.\]
+	Let $T : G / C(a) \to cl(a)$ be the map $xC(a) \mapsto xax ^{-1}$. We wish to show $T$ is a well-defined bijection.
+
+	First, we show $T$ is well defined. Let $x,y\in G$ such that $xC(a)=yC(a)$. If $y=xg$ with $g\in C(a)$, then $yay^{-1}=xgag^{-1}x ^{-1}=xagg^{-1}x ^{-1}=xax ^{-1}$.
+
+	Next, we show $T$ is injective. Let $xax ^{-1}=yay^{-1}$. It follows that $ax ^{-1}=x ^{-1}yay^{-1}$, and then $ax ^{-1}y=x ^{-1}ya$. Therefore, $x ^{-1}y\in C(a)$, and $xC(a)=yC(a)$. Therefore, $T$ is injective.
+
+	Finally, we show $T$ is surjective. Let $xax ^{-1}\in cl(a)$. There then exists $x\in G$, and thus $T(xC(a))=xax ^{-1}$. Therefore, $T$ is surjective, and is thus a bijection.
+\end{proof}
+\begin{theorem}[The Class Equation]\label{thm:hiii}
+	Let $G$ be a finite group, and let $a_1, \dots, a_r $ be representatives of the distinct conjugacy classes in $G$. Then
+	\[
+		\left| G \right| =\sum_{i=1}^{r} \left| cl\left( a_i \right)  \right| = \sum_{i=1}^{r} \left[ G : C\left( a_i \right)  \right] 
+	.\]
+	This can be rewritten as
+	\[
+		\left| G \right| =\left| Z(G) \right| +\sum_{a_i\notin Z(G)} \left[ G : C\left( a_i \right)  \right]  
+	.\]
+\end{theorem}
+\begin{proof}
+	Since $a_1, \dots, a_r$ represent distinct conjugacy classes, we know $cl(a_i)\cap cl(a_j)=\varnothing$ for all $i\neq j$, and
+	\[
+		\bigcup_{i=1}^{r} cl(a_i)=G
+	.\]
+	Therefore, we can define a bijection
+	\[
+		\phi : \bigcup_{i=1}^{r} cl(a_i) \to G
+	\]
+	as the map
+	\[
+		a\mapsto a
+	.\]
+	It follows that
+	\[
+		\left| G \right| =\left| \bigcup_{i=1}^{r} cl(a_i) \right| =\sum_{i=1}^{r} \left| cl(a_i) \right| =\sum_{i=1}^{r} \left[ G : C(a_i) \right] 
+	.\]
+\end{proof}

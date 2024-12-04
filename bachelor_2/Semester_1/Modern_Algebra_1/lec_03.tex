@@ -1,0 +1,142 @@
+\lecture{3}{Mon 07 Oct 2024 20:37}{Isomorphisms, Day 2}
+\begin{prev}
+Two groups are isomorphic $G\cong H$ if there exists a bijection $\phi : G \to H$ such that $\phi (ab)=\phi (a)\phi (b)$ for all $a,b\in G$. Every infinite cyclic group is isomorphic to $\mathbb{Z}$ and every finite cyclic group of order $n$ is isomorphic to $\mathbb{Z}_n$. Cayley's theorem states every group is isomorphic to the group of permutations of some set.
+\end{prev}
+\begin{theorem}[Cayley]\label{thm:cayley}
+	Every group is isomorphic to a group of permutations of some set.
+\end{theorem}
+\begin{proof}
+	Let $G$ be a group. We want to find a  group $H$ of permutations such that $G\cong H$. For all $g\in G$, define $Tg : G \to G$ as the map $a\mapsto ga$. We claim $Tg$ is a permutation of $G$, and
+	\[
+		H=\left\{ Tg \mid g\in G \right\} 
+	.\]
+	First, we show  $Tg$ is a permutation. We must show $Tg$ is a bijection on $G$. Let $a\in G$. We have $a=gg^{-1}a=Tg\left( g^{-1}a \right) $. Therefore, $Tg$ is surjective. Now let $Tg(a)=Tg(b)$ for some $a,b\in G$. It follows that
+	\[
+		ga=gb\implies a=b
+	.\]
+	Therefore, $Tg$ is bijective, and is thus a permutation of $G$.
+
+	Next, we show $ H$ is a group. Let $a,b,g\in G$. We have
+	\[
+		(TaTb)(g)=Ta(bg)=abg=(ab)g=Tab(g)
+	.\]
+	Since $ab\in G$, $Tab\in H$. Let $a,b,c,g\in G$. We have
+	\[
+		\left( (TaTb)Tc \right) (g)=(abc)g
+	.\]
+	Associativity then follows from the fact that $G$ is a group. Let $e\in G$ be the identity. Let $a,g\in G$. It follows that
+	\[
+		(TaTe)(g)=aeg=ag=Ta(g)
+	.\]
+	We say $Te$ is the identity. Finally, let $a,a^{-1}\in G$ be inverses. We have
+	\[
+		\left( TaTa^{-1} \right) (g)=aa^{-1}g=eg=Te(g)
+	.\]
+	Therefore, inverses exist, and $H$ is a group.
+
+	Next, we show $G\cong H$. Let $\phi : G \to H$ be the map $g\mapsto Tg$. We need only show $\phi $ is an isomorphism. By definition of $H$, $\phi $ is surjective. We need only show $\phi $ is injective and homomorphic. Suppose $\phi (a)=\phi (b)$. We then have
+	\[
+		Ta(g)=Tb(g)\implies ag=bg\implies a=b
+	.\]
+	Therefore, $\phi $ is injective. Finally, we show homomorphism.
+	\[
+		\phi (ab)(g)=(TaTb)(g)=(ab)g=Tab(g)=\phi (ab)(g)
+	.\]
+	Therefore, $\phi $ is a homomorphism, and thus an isomorphism.
+\end{proof}
+
+\subsection{Equivalence Relations (Ch. 0)}
+Equivalence relations generalize the idea of equality. For example, although 5 and 12 are different numbers, $5\equiv 7\mod{7}$. So we have some sense of equality, but they're not equal. Equivalence relations generalize equality to give us a way of saying this.
+
+\begin{definition}[Equivalence Relation]\label{dfn:jsd}
+	An equivalence relation on a set $S$ is a set $R$ of ordered pairs of elements $S$, $R\subseteq S\times S$, such that
+	\begin{itemize}
+		\item (Reflexive) $(a,a)\in R$ for all $a\in S$.
+		\item (Symmetric) If $(a,b)\in R$, then $(b,a)\in R$.
+		\item (Transitive) If $(a,b)\in R$ and $(b,c)\in R$, then $(a,c)\in R$.
+	\end{itemize}
+\end{definition}
+If $(a,b)\in R$, we weite $a\sim b$, $a\approx g$, or $a\equiv b$. We usually just use $a\sim b$.
+\begin{definition}[Equivalence Classes]\label{dfn:aaa}
+	For some $a\in S$, define
+	\[
+		[a]\coloneqq \left\{ b\in S \mid (a,b)\in R \right\} 
+	.\]
+	We call $[a]$ the equivalence class of $a$, and any $b\in [a]$ has $b\sim_R a$.
+\end{definition}
+For example, $\mathbb{Z}_n=\left\{ [a] \mid a\in\mathbb{Z}\land 0\leq a<n \right\} $ for $R=\left\{ (a,b)\in\mathbb{Z}^2 \mid a\equiv b\mod{n} \right\} $.
+
+Here's a great example. Let
+\[
+	S\coloneqq \left\{ (a,b) \mid a,b\in\mathbb{Z}\land b\neq 0 \right\} 
+.\]
+Then the rational numbers are defined via the equivalence relation
+\[
+	R=\left\{ ((a,b),(c,d))\in S^2 \mid b,d\neq 0\land ad=bc \right\} 
+.\]
+Saying $((a,b),(c,d))\in R$ is equivalent to saying
+\[
+	\frac{a}{b}=\frac{c}{d}
+.\]
+I will prove this later for fun i guess
+\begin{definition}[Partition]\label{dfn:kasj}
+	A \textbf{partition} of a set $S$ is a collection $P=\left\{ S_1, \ldots,S_{\left| S \right| } \right\}  $ of nonempty disjoint subsets of $S$ such that
+	\[
+		\biguplus_{i=1}^{|S|} S_i=S
+	.\]
+\end{definition}
+For example, the sets of even and odd integers partition $\mathbb{Z}$.
+
+\begin{theorem}\label{thm:dsjk}
+	Let $R $ be an equivalence relation $\sim $ on a set $S$. Then the equivalence classes from $R$ form a partition of $S$. Conversely, for any partition $P$ on $S$, there is an equivalence relation on $S$ where the equivalence classes are the elements of $P$.
+\end{theorem}
+\chapter{Cosets and Lagrange's Theorem}
+\begin{definition}[Coset]\label{dfn:coset}
+	Let $G$ be a group, and let $H\subseteq  G$ be a nonempty subset of $G$. For any $a\in G$, we define the sets
+	\[
+		aH=\left\{ ah \mid h\in H \right\} 
+	,\]
+	and
+	\[
+		Ha=l\left\{ ha \mid h\in H \right\} 
+	.\] 
+	When $H$ is a subgroup of $G$, we call $aH$ the \emph{left coset} of $H$ in $G$ containing $a$, and similarly, $Ha$ is the \emph{right coset} of $H$ in $G$ containing $a$. We call $a$ the coset representative.
+\end{definition}
+\begin{notation}
+	$\left| aH \right| $ is the number of elements in $aH$. Same for $Ha$. This follows since $aH$ is not generally a subgroup, so we instead have the order or cardinality of $aH$. Additionally, $aHa^{-1}$ is the set
+	\[
+		aHa^{-1}=\left\{ aha^{-1} \mid h\in H \right\} 
+	.\]
+\end{notation}
+
+For example, let $G=S_3$, and let $H=\left\{ e,(23) \right\} $. Note that $e\in G$. We then have
+\[
+	e H=H
+.\]
+Note also that $(12)\in G$. We then have
+\[
+	(12)H=\left\{ (12)e ,(12)(23) \right\} =\left\{ (12),(123) \right\} 
+.\]
+Finally, note $(13)\in G$. We have
+\[
+	(13)H=\left\{ (13)e,(13)(23) \right\} =\left\{ (13),(132) \right\} 
+.\]
+Interestingly, we can check by hand that these are the only left cosets of $G$.
+
+\begin{proposition}[Properties of Cosets]\label{prp:slkj}
+	Let $H\leq G$, $a,b\in G$. Then the following are true.
+	\begin{itemize}
+		\item $a\in aH$.
+		\item $aH=H$ iff $a\in H$.
+		\item $(ab)H=a(bH)$ and $H(ab)=(Ha)b$.
+		\item $aH=bH$ if and only if $a\in bH$.
+		\item Either $aH=bH$ or $aH\cap bH=\varnothing$.
+		\item $aH=bH$ if and only if $a^{-1}b\in H$.
+		\item $\left| aH \right| =\left| bH \right| $ for all $a,b\in  G$.
+		\item $aH=Ha$ if and only if $H=aHa^{-1}$.
+		\item $aH$ is a subgroup of $G$ if and only if $aH=H$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	1,2,3 easy. 4 $aH=bH\implies ae=bh$ for some $h\in H$ since $e\in H$. then $a\in bH$. Then $a=bh$ for some $h\in H$, so $aH=bhH=bH$ for $h\in H$. the rest i do on my own.
+\end{proof}

@@ -1,0 +1,38 @@
+\lecture{6}{Tue 22 Oct 2024 09:30}{Fundamental Theorem of Finite Abelian Groups}
+\begin{proof}
+	Let $\phi : G \to H\times K$. Since $G=HK$, we know for all $g\in G$, there exists $h\in H$ and $k\in K$ such that $g=hk$. As such, let $g\mapsto (h,k)$. It's not apparent that $g$ has a unique representation as $hk$, so we must show this is true. Suppose $g=h_1k_1=h_2k_2$. We must show $h_1=h_2$ and $k_1=k_2$. Since $h_1k_1=h_2k_2$, it follows that
+	\[
+		h_2^{-1}h_1=k_2k_1^{-1}
+	.\]
+	Since $h_2^{-1}h_1\in H$ and $k_2k_1^{-1}\in K$, we have $h_2^{-1}h_1\in H\cap K=\left\{ e \right\} $. By the same logic, we have $h_1=h_2$ and $k_1=k_2$.
+
+	Next, we show $\phi $ is a homomorphism. Let $h_1k_1,h_2k_2\in G$. Then
+	\begin{align*}
+		\phi (h_1k_1)\phi (h_2k_2)&=(h_1,k_1)(h_2,k_2)\\
+					  &=(h_1h_2,k_1k_2)\\
+					  &=\phi (h_1h_2k_1k_2)\\
+					  &=\phi (h_1k_1h_2k_2)
+	.\end{align*}
+	Therefore, $\phi $ is a homomorphism. Now we show $\phi $ is injective. Let $\phi (g_1)=\phi (g_2)$, and notice it follows that $(h_1,k_1)=(h_2,k_2)$. Therefore, $h_1=h_2$ and $k_1=k_2$. Thus, $h_1k_1=h_2k_2$, and since the map is well defined, $g_1=g_2$. Thus, $\phi $ is injective.
+
+	Finally, we show $\phi $ is surjective. Let $(h,k)\in H\times K$. It follows that $\phi (hk)=(h,k)$. Since $h\in H$ and $k\in K$, $hk\in HK=G$. Thus, there exists $hk\in G$ such that $\phi (hk)=(h,k)$, and $\phi $ is surjective. Therefore, $G\cong H\times K$.
+\end{proof}
+\begin{theorem}[Fundamental Theorem of Finite Abelian Groups]\label{thm:fundabel}
+	Every finite abelian group $G$ is isomorphic to a direct product of cyclic groups of prime power order. That is,
+	\[
+		G \cong \prod_{i=1}^n \mathbb{Z}_{p_i^{e_i}}
+	,\]
+	for $p$ prime. Moreover, the number of terms in the product and the orders of the cyclic groups are uniquely determined up to isomorphism.
+\end{theorem}
+\begin{proof}
+	h
+\end{proof}
+\begin{corollary}
+	Let $p$ be a prime number. Then $\mathbb{Z}_p\times \mathbb{Z}_p \not\cong \mathbb{Z}_{p^2}$. Additionally, for any $A\in \mathbf{Ab}$, either $A \cong \mathbb{Z}_p\times \mathbb{Z}_p$, or $A\cong \mathbb{Z}_{p^2}$.
+\end{corollary}
+\begin{proof}
+	Trivial, EFY.
+\end{proof}
+\begin{definition}[Klein Group]\label{dfn:h}
+	The Klein group is the group $\mathbb{Z}_2\times \mathbb{Z}_2$, and it is the smallest group that is not cyclic up to isomorphism.
+\end{definition}

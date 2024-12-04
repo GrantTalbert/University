@@ -1,0 +1,506 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Honors Differential Equations}
+\date{11/11/24}
+\courseID{MA 231}
+\professor{Dr. Eugene Wayne}
+\courseSection{A1}
+\DeclareMathOperator{\Tr}{Tr}
+\usepackage{pgfplots}
+\begin{document}
+\makeproblem
+I \emph{really} don't think I did well on this homework.
+\section*{Section 3.4 Problem 25}
+Saddle solutions arise when the fixed point $\mathbf{0}$ is neither a sink nor source, yet there still exist straight line solutions bounding the behavior of the other solutions. Spiral solutions arise when there are no straight line solutions at all, and instead there are sinusoidal solutions due to Euler's formula. The saddle analog for spirals -- that is, when the origin is neither a sink nor source -- would be a center. If the origin is neither a sink nor a source, yet the solutions are still sinusoidal, then there has to be some closed loop that solutions tend towards. This is a center. So the reason spiral sources don't exist is because spiral behavior arises from a lack of bounding straight-line solutions, but saddles generally require straight-line solutions.
+\section*{Section 3.5 Problem 11}
+Note that $\det A=q$, $\Tr A=-p$, and thus any eigenvalue $\lambda $ satisfies
+\[
+	\lambda ^2+p\lambda +q=0
+.\]
+By the quadratic formula,
+\[
+	\lambda =\frac{-p\pm \sqrt{p^2-4q} }{2}
+.\]
+
+(a) Note that $\lambda \in\mathbb{R}$ and there exist two distinct values of $\lambda $ if $\sqrt{p^2-4q} >0$, since if it were to equal $0$, then we would only have $-p /2$ as an eigenvalue. Since $\lambda \in\mathbb{R}$, we must also have $p^2-4q>0$, which actually implies $\sqrt{p^2-4q} >0$, and thus we need $q^2>4p$.
+
+(b) Note that $\lambda \in\mathbb{C}\setminus\mathbb{R}$ if and only if $p^2-4q<0$. It follows that $p^2<4q$.
+
+(c) As stated earlier, if $p^2-4q=0$, then there would only be one eigenvalue. However, the dimension of the corresponding eigenspace must be 1, meaning the set of vectors $(x,y)$ satisfying
+\[
+	\begin{pmatrix}
+		0&1\\
+		-q&-p
+	\end{pmatrix} \begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} =-\frac{p}{2}\begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} 
+\]
+must be spanned by a singular basis vector. It follows that
+\[
+	\begin{pmatrix}
+		p /2&1\\
+		-q & -p + p /2
+	\end{pmatrix} \begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} =\mathbf{0}
+.\]
+Call this matrix (and the induced linear map) $A'$. Since we dont want $\ker A'=\left\{ \mathbf{0} \right\} $, we must have $\det A'=0$. It follows that
+\begin{align*}
+	&\qquad\;\;\;\frac{p}{2}\left( -p+\frac{p}{2} \right) +q=0\\
+	&\implies \frac{p^2}{4}-\frac{p^2}{2}+q=0\\
+	&\implies q-\frac{p^2}{4}=0\\
+	&\implies p^2=4q
+.\end{align*}
+Note that this is the same as the earlier requirement for there to be a single eigenvector. Furthermore, note that for $y=1 $, there exists $x = 2 /p$ that solves the above homogeneous system, and thus $\ker A'\neq \mathbb{R}^2$. It follows that the eigenspace is 1 dimensional.
+\section*{Section 3.6 Problem 5}
+Let $v=\frac{\mathrm{d}y}{\mathrm{d}t} $, and let $\mathbf{Y}=(v,y)$. It follows that
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} = \begin{pmatrix}
+		-2&-3\\
+		1&0
+	\end{pmatrix} \mathbf{Y}
+.\]
+We then have
+\[
+	\lambda =\frac{-2\pm \sqrt{4-12} }{2}=-1\pm i\sqrt{2} 
+.\]
+Plugging into our original system, we have
+\[
+	v=\left( -1+i\sqrt{2}  \right) y
+.\]
+Fix $y=1$. It follows that $v=-1+i\sqrt{2} $. We then have the eigenvector
+\[
+	\mathbf{x}_1=\begin{pmatrix}
+		-1+i\sqrt{2}  \\
+		1
+	\end{pmatrix} 
+.\]
+Instead of solving the system in general, we need only solve for $y(t)$, since technically this is just a single equation in $y$. Note that $\mathbf{x}_2=\mathbf{x}_1^*$. Since $\mathbb{R}$ is fixed under the complex conjugate, we then have two solutions,
+\[
+	y_1(t)= e^{\left( -1-i\sqrt{2}  \right) t},\qquad y_2(t)=e^{\left( -1+i\sqrt{2}  \right) t} 
+.\]
+Note that
+\[
+	y_1(t)=e^{-t}e^{-i\sqrt{2} t}=e^{-t}\left( \cos (-\sqrt{2} t)+i\sin \left(- \sqrt{2} t \right)  \right)
+\]
+and
+\[
+	y_2(t)=e^{-t}e^{i\sqrt{2} t}=e^{-t}\left( \cos \left( \sqrt{2} t \right) +i\sin \left( \sqrt{2} t \right)  \right) 
+.\]
+Using the fact that $\cos $ is an even function and $\sin $ is an odd function, we have
+\[
+	y_1(t)=e^{-t}\left( \cos \left( -\sqrt{2} t \right) +i\sin \left( -\sqrt{2} t \right)  \right) =e^{-t}\left( \cos \left( \sqrt{2} t \right) -i\sin \left( \sqrt{2} t \right)  \right) 
+.\]
+It follows that
+\[
+	y_1(t)+y_2(t)=e^{-t}\cos \left( \sqrt{2} t \right) ,\qquad y_2(t)-y_1(t)=e^{-t}i\sin \left( \sqrt{2} t \right) 
+.\]
+Define $y_a(t)=y_1(t)+y_2(t)$ and $y_b(t)=-i\left( y_2(t)-y_1(t) \right) $. Note that we multiplied through by $-i$ to get rid of the imaginary part. We then have the general solution
+\[
+	y(t)=C_1y_a(t)+C_2y_b(t)
+.\]
+\section*{Section 3.6 Problem 9}
+Let definitions be as in the previous problem. We have
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\begin{pmatrix}
+		4&-13\\
+		1&0
+	\end{pmatrix} \mathbf{Y}
+.\]
+It follows that
+\[
+	\lambda =\frac{4\pm \sqrt{16-52} }{2}\implies \lambda =2\pm 3i
+.\]
+It follows that $v=(2+3i)y$. Fix $y=1$. We have the eigenvectors
+\[
+	\mathbf{x}_1=\begin{pmatrix}
+		2+3i\\
+		1
+	\end{pmatrix} ,\qquad \mathbf{x}_2 = \begin{pmatrix}
+		2-3i\\
+		1
+	\end{pmatrix} 
+.\]
+Define
+\[
+	\mathbf{u}=\begin{bmatrix}
+		2\\
+		1
+	\end{bmatrix} ,\qquad \mathbf{w}=\begin{pmatrix}
+		3\\
+		0
+	\end{pmatrix} 
+.\]
+
+We then have the solutions
+\[
+	\mathbf{Y}^{(1)}(t)=e^{2t}\left( \cos (3t)\mathbf{u}-\sin (3t)\mathbf{w} \right) ,\qquad \mathbf{Y}^{(2)}(t)=e^{2t}\left( \cos (3t)\mathbf{w}+\sin (3t)\mathbf{u} \right) 
+,\]
+with general solution
+\[
+	\mathbf{Y}(t)=C_1\mathbf{Y}^{(1)}(t)+C_2 \mathbf{Y}^{(2)}(t)
+.\]
+
+Plugging in for the initial value problem, we have
+\[
+	C_1 \mathbf{u}+C_2 \mathbf{w}=\begin{pmatrix}
+		1\\
+		-4
+	\end{pmatrix} \implies \begin{pmatrix}
+		2C_1 + 3C_2\\
+		C_1
+	\end{pmatrix} =\begin{pmatrix}
+		1\\
+		-4
+	\end{pmatrix} 
+.\]
+It follows that $C_2 = 3$. Thus, the solution to the IVP is
+\[
+	\mathbf{Y}(t)=-4 \mathbf{Y}^{(1)}(t)+3\mathbf{Y}^{(2)}(t)
+.\]
+\section*{Section 3.7 Problem 4}
+Define
+\[
+	A=\begin{pmatrix}
+		a&a\\
+		1&0
+	\end{pmatrix} 
+.\]
+Note that $\det A=-a$ and $\Tr a=a$. It follows that for any $\Tr =a$, we have $\det =-a$. We thus have $\det =-\Tr $ :
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}
+		[
+		xmin = -5, xmax=5,
+		ymin = -5, ymax=5,
+		axis lines = center
+		]
+		\addplot[thick] {(x * x) / 4};
+		\addplot[thick, blue] {-x};
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+There appear to be two bifrucation points. For $a>0$, there will be a saddle point at the origin. For $-4<a<0$, there will be a spiral sink at the origin. For $a<-4$, there will be a sink at the origin. For $a=4$, there will be a saddle-like sink, and for $a=0$, there will be a weird saddle with only one eigenvector solution.
+
+The bifruactions occur at $a=0$ and $a=-4$.
+\section*{Section 3.7 Problem 6}
+Define
+\[
+	A=\begin{pmatrix}
+		2&0\\
+		a&-3
+	\end{pmatrix} 
+.\]
+We have $\Tr A=-1$ and $\det A=-6$. Thus, for all $a$, we have $(\Tr A,\det A)=(-6,-1)$.
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}
+		[
+		xmin = -7, xmax=7,
+		ymin = -7, ymax=7,
+		axis lines = center
+		]
+		\addplot[thick] {(x * x) / 4};
+		\addplot[thick, blue, only marks] coordinates {(-6,-1)};
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+There are no bifrucations. The system always has a saddle at the origin.
+\section*{Section 4.2 Problem 3}
+First we solve the homogeneous case. Consider the system
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\begin{pmatrix}
+		-3&-2\\
+		1&=
+	\end{pmatrix} \mathbf{Y}
+,\]
+where $\mathbf{Y}=(y',y)$. We have eigenvalues
+\[
+	\lambda \in \left\{ -1,-2 \right\} 
+,\]
+and corresponding eigenvectors
+\[
+	\begin{pmatrix}
+		-1\\
+		1
+	\end{pmatrix} ,\qquad \begin{pmatrix}
+		-2\\
+		1
+	\end{pmatrix} 
+.\]
+Recall that we only need to solve for $y$. We thus have the general solution to the homogeneous case is
+\[
+	y_h(t)=C_1e^{-t}+C_2e^{-2t}
+.\]
+We now want to guess a solution to the inhomogeneous case. Guess
+\[
+	y_p(t)=A\cos t+B\sin t
+.\]
+It follows that
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =-A\sin t+B\cos t,\qquad \frac{\mathrm{d}^2y}{\mathrm{d}t^2} =-A\cos t-B\sin t
+.\]
+We then have
+\begin{align*}
+	\sin t&=\left( -A\cos t-B\sin t \right) +3\left( -A\sin t+B\cos t \right) +2\left( A\cos t+B\sin t \right) \\
+	      &=\left( -A+3B+2A \right) \cos t+\left( -B-3A+2B \right) \sin t
+.\end{align*}
+We want the $\cos $ term to fall out, and we want the $\sin $ term to go to $\sin t$. Thus, we have
+\[
+	\begin{cases}
+		A+3B=0\\
+		B-3A=1
+	\end{cases}
+.\]
+It follows that $B-9B=0$, and thus $B=-1 /8$ and $A=3 /8$. We then have the particular solution
+\[
+	y_p(t)=\frac{3}{8}\cos t-\frac{1}{8}\sin t
+.\]
+Therefore,
+\[
+	y(t)=C_1e^{-t}+C_2e^{-2t}+\frac{3}{8}\cos t-\frac{1}{8}\sin t
+.\]
+\section*{Section 4.2 Problem 13}
+Let definitions be as before, and consider the homogeneous case
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\begin{pmatrix}
+		-6&-8\\
+		1&0
+	\end{pmatrix} \mathbf{Y}
+.\]
+This system has eigenvalues $-2,-4$ and eigenvectors
+\[
+	\begin{pmatrix}
+		-2\\
+		1
+	\end{pmatrix} ,\qquad \begin{pmatrix}
+		-4\\
+		1
+	\end{pmatrix} 
+.\]
+We then have
+\[
+	y_h(t)=C_1e^{-2t}+C_2e^{-4t}
+.\]
+Guess $y_p(t)=A\cos t+B\sin t$. We have
+\begin{align*}
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} +6 \frac{\mathrm{d}y}{\mathrm{d}t} +8y&=-(A\cos t+B\sin t)+6(B\cos t-A\sin t)+8(A\cos t+B\sin t)\\
+										  &=\cos t
+.\end{align*}
+It follows that
+\[
+	\begin{cases}
+		6b+7A=1\\
+		-6A+7B=0
+	\end{cases}
+.\]
+We find our particular solution is
+\[
+	y_p(t)=\frac{7}{15}\cos t-\frac{6}{15}\sin t
+.\]
+We now account for our initial conditions. Our general solutions is
+\[
+	y(t)=C_1e^{-2t}+C_2e^{-4t}+\frac{7}{15}\cos t-\frac{6}{15}\sin t
+.\]
+PLugging in $t=0$, we havee
+\[
+	C_1+C_2+\frac{7}{15}=0
+.\]
+Additionally,
+\[
+	y'(t)=-2C_1e^{-2t}-4C_2e^{-4t}-\frac{7}{15}\sin t-\frac{6}{15}\cos t
+.\]
+It follows that
+\[
+	-2C_1-4C_2-\frac{6}{15}=0
+.\]
+We then have the system
+\[
+	\begin{cases}
+		C_1+C_2=-\frac{7}{15}\\
+		C_1+2C_2=-\frac{3}{15}
+	\end{cases}
+.\]
+It follows that $C_1 = 4 /15$, and $C_2 =- 11 /15$. Therefore, our solution is
+\[
+	y(t)=\frac{4}{15}e^{-2t}-\frac{11}{15}e^{-4t}+\frac{7}{15}\cos t-\frac{6}{15}\sin t
+.\]
+\section*{Section 4.2 Problem 17}
+Note the periods for (a) and (d) are $2\pi /3$, and the periods for (b) and (c) are $2\pi $. We thus know $\omega $ for (a) and (d) is 3, and 1 for the others. Therefore, (a) and (d) can only be (v) or (vi), and (b) and (c) can only be (i) or (ii).
+
+Note that our homogeneous case has characteristic polynomial $\lambda^2+p\lambda +q=0$. It follows that if $p\gg q$, then the function will collapse towards the origin faster, and thus will have a larger amplitude. With this logic, we know (i) goes with (b), (ii) goes with (c), (v) goes with (d), and (vi) goes with (a).
+\section*{Supplimental 1}
+Define
+\[
+	A=\begin{pmatrix}
+		3&4\\
+		4&3
+	\end{pmatrix} 
+.\]
+We have
+\[
+	\lambda ^2-6\lambda -7=0\implies \left( \lambda -7 \right) \left( \lambda +1 \right) \implies \lambda \in\left\{ -1,7 \right\} 
+\]
+are eigenvalues. We then have
+\[
+	\begin{pmatrix}
+		3&4\\
+		4&3
+	\end{pmatrix} \begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} =\begin{pmatrix}
+		-x\\
+		-y
+	\end{pmatrix} \implies x=-y
+\]
+and
+\[
+	\begin{pmatrix}
+		3&4\\
+		4&3
+	\end{pmatrix} \begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} =\begin{pmatrix}
+		7x\\
+		7y
+	\end{pmatrix} \implies x=y
+.\]
+Thus, we have $\lambda_1=-1$, $\lambda_2=7$, $\mathbf{x}_1=(1,-1)$, and $\mathbf{x}_2=(1,1)$. It follows that
+\[
+	A=-\frac{1}{2}\begin{pmatrix}
+		1&1\\
+		1&-1
+	\end{pmatrix} \begin{pmatrix}
+		7&0\\
+		0&-1
+	\end{pmatrix} \begin{pmatrix}
+		-1&-1\\
+		-1&1
+	\end{pmatrix} 
+.\]
+Note that the $-1 /2$ comes from the third matrix. Define the first matrix $V$ and the second matrix $D$. We have
+\[
+	A=VDV^{-1}
+.\]
+By what we proved in class,
+\[
+	A^n=VD^nV^{-1}
+.\]
+It follows that
+\begin{align*}
+	\exp (At)&=\sum_{n=0}^{\infty} \frac{t^n}{n!}A^n\\
+		 &=\sum_{n=0}^{\infty} \frac{t^n}{n!}VD^nV^{-1}\\
+		 &=V\left( \sum_{n=0}^{\infty} \frac{t^n}{n!}D^n \right) V^{-1}\\
+		 &=V \begin{pmatrix}
+			 \sum_{n=0}^{\infty} \frac{t^n}{n!}7^n&0\\
+			 0&\sum_{n=0}^{\infty} \frac{t^n}{n!}(-1)^n
+		 \end{pmatrix} V^{-1}\\
+		 &=V\begin{pmatrix}
+			 \exp (7t)&0\\
+			 0&\exp (-t)
+		 \end{pmatrix} V^{-1}\\
+		 &=-\frac{1}{2}\begin{pmatrix}
+			 1&1\\
+			 1&-1
+		 \end{pmatrix} \begin{pmatrix}
+			 \exp (7t)&0\\
+			 0&\exp (-t)
+		 \end{pmatrix} \begin{pmatrix}
+			 -1&-1\\
+			 -1&1
+		 \end{pmatrix} \\
+		 &=-\frac{1}{2}\begin{pmatrix}
+			 -e^{7t}-e^{-t}&-e^{7t}+e^{-t}\\
+			 -e^{7t}+e^{-t}&-e^{7t}-e^{-t}
+		 \end{pmatrix} 
+.\end{align*}
+\section*{Supplimental 2}
+\begin{align*}
+	\mathbf{Y}&=e^{At} \mathbf{Y}_0 = -\frac{1}{2}\begin{pmatrix} 
+			 -e^{7t}-e^{-t}&-e^{7t}+e^{-t}\\
+			 -e^{7t}+e^{-t}&-e^{7t}-e^{-t}
+		 \end{pmatrix} \begin{pmatrix}
+		 	1\\
+			-2
+		 \end{pmatrix} \\
+		  &=\frac{1}{2}\begin{pmatrix}
+		  	e^{7t}+e^{-t}-e^{7t}+e^{-t}\\
+			-2\left( e^{7t}-e^{-t}-e^{7t}-e^{-t} \right) 
+		  \end{pmatrix} \\
+		  &=\frac{1}{2}\begin{pmatrix}
+		  	2e^{-t}\\
+			4e^{-t}
+		  \end{pmatrix} \\
+		  &=\begin{pmatrix}
+		  	e^{-t}\\
+			2e^{-t}
+		  \end{pmatrix} 
+.\end{align*}
+\section*{Supplimental 3}
+STOP GIVING US COMPLEX EIGENVALUES THESE ARE SO ANNOYING TO WORK WITH
+
+\[
+	\lambda_1=-2+i,\quad \lambda _2=-2-i,\quad \lambda _3=-1
+.\]
+\[
+	\mathbf{v}_1=\begin{pmatrix}
+		-9-3i\\
+		-5-5i\\
+		10
+	\end{pmatrix} ,\quad \mathbf{v}_2=\begin{pmatrix}
+		-9+3i\\
+		-5+5i\\
+		10
+	\end{pmatrix},\quad \mathbf{v}_3=\begin{pmatrix}
+		1\\
+		1\\
+		0
+	\end{pmatrix} 
+.\]
+Note that $\lambda_2=\lambda_1^*$, and similarly $\mathbf{v}_2=\mathbf{v}_1^*$. We have
+\begin{align*}
+	\mathbf{Y}_1(t)=&e^{-2t}e^{it}\left( \begin{pmatrix}
+		-9\\
+		-5\\
+		10
+	\end{pmatrix} +i\begin{pmatrix}
+		-3\\
+		-5\\
+		0
+\end{pmatrix}  \right)\\
+			&=e^{-2t}\left( \cos t+i\sin t \right) \left( \mathbf{u}+i\mathbf{w} \right)\\
+&=e^{-2t}\left( \cos t \mathbf{u}+ i\cos t \mathbf{w}+i\sin t \mathbf{u}-\sin t \mathbf{w} \right) 
+.\end{align*}
+Note that $\mathbf{Y}_2=\mathbf{Y}_1^*$. We then have
+\[
+	\mathbf{Y}_1+\mathbf{Y}_2=e^{-2t}\left( \cos t \mathbf{u}-\sin t \mathbf{w} \right) ,\qquad \mathbf{Y}_1 - \mathbf{Y}_2 = e^{-2t}\left( i\cos t \mathbf{w}+i\sin t \mathbf{u} \right) 
+.\]
+We then have the general solution
+\[
+	\mathbf{Y}(t)=C_1 e^{-2t}\begin{pmatrix}
+		-9\cos t+3\sin t\\
+		-5\cos t+5\sin t\\
+		10\cos t
+	\end{pmatrix} +C_2 e^{-2t}\begin{pmatrix}
+		-3\cos t-9\sin t\\
+		-5\cos t-5\sin t\\
+		10\sin t
+	\end{pmatrix} +C_3 e^{-t}\begin{pmatrix}
+		1\\
+		1\\
+		0
+	\end{pmatrix} 
+.\]
+
+$\mathbf{Y}(t)$ appears to be some sort of sink, since all the exponentials are negative so each $\mathbf{Y}_i\to 0$ as $t\to \infty$. Furthermore, since there were complex eigenvalues, it is most likely some sort of spiral sink, as the real-valued general solution is sinusoidal in $x$ and $y$, rather than a straight line. So this system most likely has a spiral sink at $\mathbf{0}$.
+\end{document}

@@ -1,0 +1,55 @@
+\lecture{23}{Mon 02 Dec 2024 12:22}{Power Series}
+Suppose the power series
+\[
+	\sum_{n=0}^{\infty} a_nt^n,\qquad \sum_{n=0}^{\infty} b_nt^n
+\]
+both have positive radii of convergence, and suppose
+\[
+	\sum_{n=0}^{\infty} a_nt^n=\sum_{n=0}^{\infty} b_nt^n
+\]
+foor all $\left| t \right| <r$ for some $r>0$. Then $a_n=b_n$ for all $n\in\mathbb{N}$. This follows rather simply from the fact that they are equal at $t=0$. If $t=0$, then the power series become $a_0=b_0$. We can then take the derivative with respect to $t$, and plug in $0$ to obtain $a_1=b_1$. By inducting on this argument, we can show $\left\{ a_n \right\}_{n=0}^\infty=\left\{ b_n \right\}_{n=0}^\infty$. By definition, the corresponding power series are equal.
+
+A corollary of this is the following. Suppose
+\[
+	\sum_{n=0}^{\infty} b_nt^n=0
+\]
+for all $\left| t \right| <r$. Then we have $a_n=0$ for all $n$. Suppose further that we have the derivative of some power series
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( \sum_{n=0}^{\infty} a_nt^n \right) =\sum_{n=0}^{\infty} na_nt^{n-1}
+.\]
+Since it's often better to express both series in terms of $t^n$ rather than $t^{n-1}$, we let $m=n-1$ and represent this as
+\[
+	\sum_{n=1}^{\infty} na_nt^{n-1}=\sum_{m=0}^{\infty} (m+1)a_{m+1}t^{m}
+.\]
+Since $m$ is just a dummy variable, we can plug in $n$ for $m$ and the series remains consistent. We then have
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( \sum_{n=0}^{\infty} a_t^n \right) =\sum_{n=0}^{\infty} (n+1)a_{n+1}t^n
+.\]
+We can then take the second derivative and obtain
+\[
+	\sum_{n=0}^{\infty} n(n+1)a_{n+2}t^n
+.\]
+In general, we will then have
+\[
+	\frac{\mathrm{d}^k}{\mathrm{d}t^k} \left( \sum_{n=0}^{\infty} a_nt^n \right)=\sum_{n=0}^{\infty}\left( a_{n+k}t^n \prod_{i=1}^k (n+i) \right) 
+.\]
+
+Now consider the next fact. Consider the IVP
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =g(t)y+h(t),\qquad y(0)=y_0
+.\]
+If $g(t),h(t)$ have power series with radii of convergence $R>0$, then the IVP has a solution $y(t)$ in the form of a power series with radius of convergence $R>0$. One interesting thing to remark here is that by the previous fact, $a_0=y_0$.
+
+Another fact is the following. Suppose $r(t),p(t),q(t),h\left(t \right) $ all have power series' with positive radii of convergence. If $r(t)\neq 0$, then the differential equation
+\[
+	r(t) \frac{\mathrm{d}^2y}{\mathrm{d}t^2} +p(t) \frac{\mathrm{d}y}{\mathrm{d}t} +q(t)y=h(t)
+\]
+has a power series solution with positive radius of convergence. We will often write this as the equation
+\[
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} +\tilde{p}(t) \frac{\mathrm{d}y}{\mathrm{d}t} +\tilde{q}(t)y=\tilde{h}(t)
+,\]
+where
+\[
+	\tilde{p}(t)=\frac{p(t)}{r(t)}
+.\]
+There are, however, examples where $r(0)\neq 0$. This makes our representation fail.

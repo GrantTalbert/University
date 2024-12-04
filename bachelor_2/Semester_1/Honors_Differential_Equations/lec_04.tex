@@ -27,7 +27,7 @@ The error (called the forward difference) is given as
 .\]
 We also don't use our actual value of $y(t_k)$, we use our value $Y_{k+1}$ and $Y_k$.
 
-\section{Picard's Theorem}
+\section{Existence and Uniqueness of Solutions}
 Differential equations don't always have a solution, and may also have more than one solution. So how do we know if an initial value problem has a \textbf{unique} \textbf{solution}?
 \begin{theorem}[Picard]\label{thm:2}
 	Consider the intial value problem
@@ -61,5 +61,18 @@ Suppose there exist constants $t_0\in(a,b)$ and $y_0\in(c,d)$ such  that $\frac{
 	 \[
 		y^{(n+1)}(t)=y_0+\int_{t_0}^{t} f\left( y^{(n)}(s),s \right)  \,\mathrm{d} s
 	.\]
-	Proof will be finished next time.
+	By real anal, the approximations converge.
+\end{proof}
+
+One important corollary of Picard's theorem, and in fact the most intuitive way to interpret Picard's theorem, is that any two solutions satisfying the theorem when plotted on the $yt$-plane, cannot intersect. Additionally, for autonomous equations, solutions cannot intersect on the $fy$-plane, since we can ``shift'' $t_0$ to make it an IVP at the point of intersection.
+
+We also have a weaker theorem guarenteeing only the existence of a solution.
+\begin{theorem}[Existence Theorem]\label{thm:3}
+	Let $f(y,t)$ be continuous on $(y,t)\in N_1 (t)\times N_2 (y)$, for $N_n(x)$ a neighborhood $(x-\varepsilon_n ,x+\varepsilon_n )$. For any $(y_0,t_0)\in N(t)\times N(y)$, there exists some function $y(t)$ and some $\varepsilon $ such that $y(t)$ is defined for $\left( t_0-\varepsilon ,t_0+\varepsilon  \right) $ and solves the IVP
+	\[
+		\frac{\mathrm{d}y}{\mathrm{d}t} =f(y,t),\qquad y(t_0)=y_0
+	.\]
+\end{theorem}
+\begin{proof}
+	not given.
 \end{proof}

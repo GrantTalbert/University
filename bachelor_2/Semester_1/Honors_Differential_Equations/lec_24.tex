@@ -1,0 +1,51 @@
+\lecture{24}{Wed 04 Dec 2024 10:11}{More Power Series}
+
+Consider Legendre's Equation, which only has power series solutions:
+\[
+	\left( 1-t^2 \right) \frac{\mathrm{d}^2y}{\mathrm{d}t^2} -2t \frac{\mathrm{d}y}{\mathrm{d}t} +\lambda y=0
+.\]
+We want power series solutions
+\[
+	y(t)=\sum_{n=0}^{\infty} a_nt^n
+.\]
+We primarily want solutions that are bounded for all $t\in [-1,1]$ for reasons due to the nature of the equation itself. Out usual method is to start by differentiating.
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =\sum_{n=0}^{\infty} na_n t^{n-1}
+.\]
+Ordinarily we shift the index, but we will not do this because the term in the equation has a $-2t$ on it:
+\[
+	-2t \frac{\mathrm{d}y}{\mathrm{d}t} =\sum_{n=0}^{\infty} -2na_nt^n
+.\]
+If we differentiate again, we have
+\[
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} =\sum_{n=0}^{\infty} n\left( n-1 \right) a_nt^{n-2}=\sum_{n=0}^{\infty} \left( n+2 \right) \left( n+1 \right) a_{n+2}t^n
+.\]
+We will actually use both of these forms by distrubuting out:
+\[
+	\left( 1-t^2 \right) \frac{\mathrm{d}^2y}{\mathrm{d}t^2} =\sum_{n=0}^{\infty} \left( n+2 \right) \left( n+1 \right) a_{n+2}t^n-\sum_{n=0}^{\infty} n\left( n-1 \right) a_nt^n
+.\]
+We then have
+\[
+	\sum_{n=0}^{\infty} \left( n+2 \right) \left( n+1 \right) a_{n+2}t^n-\sum_{n=0}^{\infty} n\left( n-1 \right) a_nt^n-\sum_{n=0}^{\infty} 2na_nt^n+\sum_{n=0}^{\infty} \lambda a_nt^n=0
+.\]
+We can combine all these sums due to the indicies being the same.
+\[
+	\sum_{n=0}^{\infty} \left( n+2 \right) \left( n+1 \right) a_{n+2}t^n+\left( -n\left( n-1 \right) -2n+\lambda  \right) a_nt^n=0
+.\]
+Therefore, by combining like terms we know each term is 0 for all $t$:
+\[
+	\left( n+2 \right) \left( n+1 \right) a_{n+2}-(n\left( n+1 \right) -\lambda )a_n=0
+.\]
+We then get the recursion relation
+\[
+	a_{n+2}=\frac{n\left( n+1 \right) -\lambda }{\left( n+2 \right) \left( n+1 \right) }a_n
+.\]
+We thus need two base cases, $a_0$ and $a_1$. For $a_2$, we have
+\[
+	a_2=\frac{-\lambda }{2}a_0,\qquad a_4 = \frac{6-\lambda }{4\cdot 3}a_2=\frac{\left( 2-\lambda  \right) \left( -\lambda  \right) }{4!}a_0
+.\]
+Inducting, we have
+\[
+	a_{n+2}=\frac{\left( n(n+1)-\lambda  \right)\left( \left( n-2 \right) \left( n-1 \right) -\lambda  \right) \cdots \left( 6-\lambda  \right) \left( -\lambda  \right)  }{(n+2)!}a_0
+.\]
+We can do a similar analysis to identify $a_n$ for odd $n$. Unfortunately, all these series diverge if they have infinitely many solutions, meaning we require all the terms after some specific term to vanish. We can remove all terms beyond the $n$ th term by setting $\lambda =n(n+1)$. This gives a function with finitely many terms, aka a polynomial. So for any $\lambda_n = n(n+1)$, there exists a polynomial solution, known as the Legendre polynomial $P_n$ of order $n$. If we work with the odd eigenvalues, we choose $a_0=0$ to get rid of the even terms for some reason, and vice versa.

@@ -1,0 +1,17 @@
+\lecture{16}{Tue 03 Dec 2024 09:30}{Group Actions}
+
+\begin{remark}
+	In a PID, an ideal is prime iff it cannot be factored. This generalizes nicely to polynomial rings. Consider a polynomial $x^2+1\in \mathbb{R}[x]$ that cannot be factored in $\mathbb{R}$. Note that $\mathbb{R}[x] /\left\langle x^2+1 \right\rangle \cong \mathbb{R}[i]=\mathbb{C}$. This is the splitting field of the polynomial, so if you have an irreductable polynomial the ring mod the ideal may be the splitting field. If its reductable u have to reduce it firsdt i think
+\end{remark}
+\chapter{Group Actions}
+Since these aren't in the book, we will use the notes by Keith Conrad in his expository papers. First, we will motivate the definitions. On the first day, we considered symmetries of regular polygons, such as the square. These were given by the dihedral groups. For example, $D_4$ has 8 elements, and $D_4\leq S_4$. Then the symmetries of the square are permutations of the set of four vertices. We want to generalize this idea of groups given as permutations of sets.
+
+\begin{definition}[Group Action]\label{dfn:a}
+	An \textbf{action} of a group $G$ on a set $X$ is the choice for each $g\in G$ of a permutation $\Pi_g : X \to X$ such that
+	\begin{itemize}
+		\item $\Pi_e$ is the identity, meaning $\Pi_e(x)=x$ for all $x\in X$.
+		\item For every $g_1,g_2\in G$, $\Pi_{g_1}\circ \Pi_{g_2}=\Pi_{g_2}\circ \Pi_{g_1}$.
+	\end{itemize}
+\end{definition}
+
+In our example, the group acting is $D_4$, and the set is the set of 4 vertices.

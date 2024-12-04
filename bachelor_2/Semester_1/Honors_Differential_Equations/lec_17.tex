@@ -1,0 +1,81 @@
+\lecture{17}{Wed 13 Nov 2024 10:15}{Function Spaces and Hilbert Spaces}
+Recall the definition of a vector space.
+\begin{definition}[Vector Space]\label{dfn:vs}
+	A vector space is an abelian group $V$ over a field $\mathbb{F}$, to which we associtate the operation scalar multiplication that satisfies
+	\begin{itemize}
+		\item $\mathbf{u}+\mathbf{v}\in V$.
+		\item $\left( \mathbf{u}+\mathbf{v} \right) +\mathbf{w}=\mathbf{u}+\left( \mathbf{v}+\mathbf{w} \right) $.
+		\item There exists $\mathbf{0}\in V$ such that $\mathbf{0}+\mathbf{v}=\mathbf{v}$.
+		\item $\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}$.
+		\item For all $\mathbf{v}$ there exists $-\mathbf{v}$ with $\mathbf{v}-\mathbf{v}=\mathbf{0}$.
+		\item There exists  $1\in\mathbb{F}$ such that $1\mathbf{v}=\mathbf{v}$.
+		\item $a(b \mathbf{v})=(ab)\mathbf{v}$.
+		\item $a(\mathbf{v}+\mathbf{u})=a \mathbf{v}+a \mathbf{u}$.
+		\item $\left( a+b \right) \mathbf{v}=a \mathbf{v}+b \mathbf{v}$.
+	\end{itemize}
+\end{definition}
+To get our notions of direction and magnitude, we need to consider inner product spaces.
+\begin{definition}[Inner Product]\label{dfn:IPs}
+	A map $\left<\cdot ,\cdot  \right> : V\times V \to \mathbb{F}$ is called an inner product if it satisfies
+	\begin{itemize}
+		\item $\left<\mathbf{u},\mathbf{v} \right> = \overline{\left<\mathbf{v},\mathbf{u} \right>}$.
+		\item $\left<\mathbf{u},\mathbf{u} \right> \geq 0$.
+		\item $\left<\mathbf{u},\mathbf{u} \right> = 0$ if and only if $\mathbf{u}=\mathbf{0}$.
+		\item $\left<k \mathbf{u},\mathbf{v} \right> =k\left<\mathbf{u},\mathbf{v} \right> $.
+		\item $\left<\mathbf{u}+\mathbf{v},\mathbf{w} \right> = \left<\mathbf{u},\mathbf{w} \right> + \left<\mathbf{v},\mathbf{w} \right>$.
+	\end{itemize}
+\end{definition}
+	Notice that in the complex case,
+	\[
+		\left<\mathbf{u},k \mathbf{v} \right> = \overline{k} \left<\mathbf{u},\mathbf{v} \right>
+	.\]
+In the physics literature, they often change the fourth property to
+\[
+	\left<\mathbf{u},k \mathbf{v} \right> = k \left<\mathbf{u},\mathbf{v} \right>
+.\]
+The canonical inner product in $\mathbb{C}^n$ is
+\[
+	\left<\mathbf{u},\mathbf{v} \right> = \sum_{i=1}^{n} u_i \overline{v_i}
+.\]
+For real-valued continuous function spaces, we define 
+\[
+	\left<f,g \right> = \int_{a}^{b} f(x)g(x) \,\mathrm{d} x
+.\]
+For complex-valued function spaces, we define 
+\[
+	\left<f,g \right> = \int_{a}^{b}f(x)\overline{g(x)}  \,\mathrm{d} x
+.\]
+\begin{definition}[Norm]\label{dfn:N}
+	Let $V$ be an inner product space. Then define $\left\lVert \cdot  \right\rVert : V \to \mathbb{F}$ as the map
+	\[
+		\left\lVert \mathbf{u} \right\rVert =\sqrt{\left<\mathbf{u},\mathbf{u} \right>} 
+	.\]
+	We call $\left\lVert \cdot  \right\rVert $ a norm.
+\end{definition}
+\begin{definition}[Distance]\label{dfn:dis}
+	Let $V$ be an inner product space with $\mathbf{u},\mathbf{v}\in V$. The distance between any two vectors $d$ is defined as
+	\[
+		d(\mathbf{u},\mathbf{v})=\left\lVert \mathbf{u}-\mathbf{v} \right\rVert 
+	.\]
+\end{definition}
+\begin{definition}[Orthogonal]\label{dfn:orth}
+	Let $V$ be an inner product space. Then we say $\mathbf{v},\mathbf{u}$ are orthogonal if and only if $\left<\mathbf{u},\mathbf{v} \right> = \mathbf{0}$.
+\end{definition}
+\begin{exercise}
+	Prove the pythagorean theorem in any inner product space. Let $V$ be an inner product space with $\mathbf{u},\mathbf{v}\in V$ and $\left<\mathbf{u},\mathbf{v} \right> = \mathbf{0}$. Then 
+	\[
+		\left\lVert \mathbf{u}+\mathbf{v} \right\rVert ^2 = \left\lVert \mathbf{u} \right\rVert +\left\lVert \mathbf{v} \right\rVert 
+	.\]
+\end{exercise}
+\begin{proof}
+	\begin{align*}
+		\left\lVert \mathbf{u}+\mathbf{v} \right\rVert ^2&=\left<\mathbf{u}+\mathbf{v},\mathbf{u}+\mathbf{v} \right>\\
+								 &=\left<\mathbf{u},\mathbf{u}+\mathbf{v} \right>+\left<\mathbf{v},\mathbf{u}+\mathbf{v} \right>\\
+								 &=\overline{\left<\mathbf{u}+\mathbf{v},\mathbf{u} \right>} +\overline{\left<\mathbf{u}+\mathbf{v},\mathbf{v} \right>} \\
+								 &=\overline{\left<\mathbf{u},\mathbf{u} \right>+\left<\mathbf{v},\mathbf{u} \right>} +\overline{\left<\mathbf{u},\mathbf{v} \right>+\left<\mathbf{v},\mathbf{v} \right>} \\
+								 &=\overline{\left<\mathbf{u},\mathbf{u} \right>+\mathbf{0}} +\overline{\mathbf{0}+\left<\mathbf{v},\mathbf{v} \right>} \\
+								 &=\overline{\left<\mathbf{u},\mathbf{u} \right>} +\overline{\left<\mathbf{v},\mathbf{v} \right>} \\
+								 &=\left<\mathbf{u},\mathbf{u} \right>+\left<\mathbf{v},\mathbf{v} \right>\\
+								 &=\left\lVert \mathbf{u} \right\rVert ^2+\left\lVert \mathbf{v} \right\rVert ^2
+	.\end{align*}
+\end{proof}

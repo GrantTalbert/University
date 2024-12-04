@@ -1,0 +1,22 @@
+\lecture{11}{Tue 12 Nov 2024 09:37}{Rings}
+\begin{definition}[Ring]\label{dfn:Ring}
+	A set $R$ is a ring if it has two closed binary operations $+,\cdot $ that satisfy the following axioms:
+	\begin{enumerate}
+		\item $a+b=b+a$ for all $a,b\in R$.
+		\item $a+(b+c)=(a+b)+c$ for all $a,b,c\in R$.
+		\item There exists an element $0\in R$ such that $a+0=a$ for all $a\in R$.
+		\item For all $a\in R$, there exists $-a\in R$ such that $a+(-a)=0$.
+		\item $(ab)c=a(bc)$ for all $a,b,c\in R$.
+		\item For all $a,b,c\in R$, $a(b+c)=ab+ac$ and $(a+b)c=ac+bc$.
+	\end{enumerate}
+\end{definition}
+\begin{definition}[Group Ring]\label{dfn:gr}
+	Let $R$ be a commutative ring with unity, and let $G$ be a finite group $G=\left\{ g_1, \dots, g_n  \right\} $. Then the group ring $R[G]$ is defined as
+	\[
+		R[G]\coloneqq \left\{ \sum_{i=1}^{n} r_1g_1 \mid \forall i: r_i\in R \right\}
+	.\]
+	Addition is componentwise, and multiplication is done  as $(r_ig_i)(r_jg_j)=r_ir_jg_k$, where $g_ig_j=g_k$.
+\end{definition}
+\begin{definition}[Commutative Ring]\label{dfn:cr}
+	A commutative ring is a ring $R$ such that $ab=ba$ for all $a,b\in R$.
+\end{definition}

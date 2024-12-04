@@ -1,0 +1,92 @@
+\lecture{16}{Mon 11 Nov 2024 12:23}{Ven der Pol Equation}
+Our first method of qualitative analysis is to focus on the origin. Take $x,y$ small and notice that the $x^2y$ term is very small, so we can drop it and only consider the linear system
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\begin{pmatrix}
+		0&1\\
+		-1&1
+	\end{pmatrix} \begin{pmatrix}
+		x\\ y
+	\end{pmatrix} 
+.\]
+This is the \textbf{linearization} of this system. We will call this matrix $J$. Note that $\Tr J=1$ and $\det J=1$. We would thus have a spiral source at the origin.
+
+Consider the project-like competitive system
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =2x-4x^2-3xy,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =y-6y-xy
+.\]
+We have fixed points at $x=1 /2$ and $y=0$, and $x=0$ and $y=1 /6$. Further, note $\frac{\mathrm{d}x}{\mathrm{d}t} =0$ at
+\[
+	y=\frac{2}{3}-\frac{4}{3}x
+,\]
+and $\frac{\mathrm{d}y}{\mathrm{d}t} =0$ at
+\[
+	y=\frac{1}{6}x-\frac{1}{6}
+.\]
+Setting these equal and solving for the equilibrium point, we find $(3 /7,2 /21)$ is a fixed point. I don't know what the next step is but he says we need to use Taylor series.
+
+Set $f(x,y)=2x-4x^2-3xy$. Recall that $f(3 /7,2 /21)=0$. By Taylor's theorem, we also know
+\[
+	f(x,y)=f\left( \frac{3}{7},\frac{2}{21} \right) +\frac{\partial f}{\partial x} \left( \frac{3}{7},\frac{2}{21} \right) \left( x-\frac{3}{7} \right) +\frac{\partial f}{\partial y} \left( \frac{3}{7},\frac{2}{21} \right) \left( y-\frac{2}{21} \right) +\cdots
+.\]
+If we are closed to the fixed point, then the further terms become small, so we ignore them. We know from our fixed point that
+\[
+	f(x,y)\approx 0+\left( 2-\frac{24}{7}-\frac{6}{21} \right) \left( x-\frac{3}{7} \right) +\left( -\frac{9}{7} \right) \left( y-\frac{2}{21} \right) =-\frac{12}{7}\left( x-\frac{3}{7} \right) -\frac{9}{7}\left( y-\frac{2}{21} \right) 
+.\]
+Now we have to set $g(x,y)=y-6y^2-xy$, $g_x(x,y)=-y$, $g_y=1-12y-x$.
+\[
+	g(x,y)\approx \frac{\partial g}{\partial x} \left( \frac{3}{7},\frac{2}{21} \right) \left( x-\frac{3}{7} \right) +\frac{\partial f}{\partial y} \left( \frac{3}{7},\frac{2}{21} \right) \left( y-\frac{2}{21} \right) 
+.\]
+\[
+	g(x,y)\approx -\frac{2}{21}\left( x-\frac{3}{7} \right) -\frac{4}{7}\left( y-\frac{2}{21} \right) 
+.\]
+Letting
+\[
+	\overline{x} =x-\frac{3}{7},\qquad \overline{y} =y-\frac{2}{21}
+,\]
+We have
+\[
+	\frac{\mathrm{d}\overline{x} }{\mathrm{d}t} =\frac{\mathrm{d}x}{\mathrm{d}t} =f(x,y)=-\frac{12}{7}\overline{x} -\frac{9}{7}\overline{y} 
+.\]
+\[
+	\frac{\mathrm{d}\overline{y} }{\mathrm{d}t} =-\frac{2}{21}\overline{x} -\frac{4}{7}\overline{y} 
+.\]
+We have
+\[
+	\frac{\mathrm{d}\overline{\mathbf{Y}}}{\mathrm{d}t} =\begin{pmatrix}
+		-\frac{12}{7}&-\frac{9}{7}\\ -\frac{2}{21}&-\frac{4}{7}
+	\end{pmatrix} \overline{\mathbf{Y}} 
+.\]
+Call this matrix $J$ again. We have $\Tr J=-\frac{16}{7}$, $\det J=\frac{6}{7}$.
+
+Now let's do taylor series again, around $(0,0)$. Let
+\[
+	f(x,y)=2x-4x^2-3xy
+.\]
+We have
+\[
+	f(x,y)=f\left(\frac{1}{2},0\right)+\frac{\partial f}{\partial x} \left( \frac{1}{2},0 \right) \left( x-\frac{1}{2} \right) +\frac{\partial f}{\partial y} \left( \frac{1}{2},0 \right) y=-2\left( x-\frac{1}{2} \right) -\frac{3}{2}y
+.\]
+Letting $g(x,y)=y-6y^2-xy$, we have
+\[
+	g(x,y)=g\left( \frac{1}{2},0 \right) +\frac{\partial g}{\partial x} \left( \frac{1}{2},0 \right) \left( x-\frac{1}{2} \right) +\frac{\partial g}{\partial y} \left( \frac{1}{2},0 \right) \left( y \right) =\frac{1}{2}y
+.\]
+Once again, write
+\[
+	\overline{x} =x-\frac{1}{2},\qquad \overline{y} =y
+.\]
+We have
+\[
+	\frac{\mathrm{d}\overline{x} }{\mathrm{d}t} =-2\overline{x} -\frac{3}{2}\overline{y} ,\qquad \frac{\mathrm{d}\overline{y} }{\mathrm{d}t} =\frac{1}{2}\overline{y} 	
+.\]
+Write it again as
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =J \overline{\mathbf{Y}} 
+.\]
+Since $\Tr J,\det J<0$, we have a saddle. But why are we calling the matrix $J $? Well,
+\[
+	J=\begin{pmatrix}
+		\frac{\partial f}{\partial x} &\frac{\partial f}{\partial y} \\
+		\frac{\partial g}{\partial x} &\frac{\partial g}{\partial y} 
+	\end{pmatrix} 
+\]
+is the Jacobian. We can thus use the Jacobian to derive the linearization of a system about an equilibrium point, which can classify the fixed points.

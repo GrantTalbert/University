@@ -1,0 +1,268 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../../../report.tex}
+\usepackage{titlepageBU}
+\title{Excursion 2}
+\date{11/14/24}
+\courseID{MA 293}
+\professor{Dr. Borkovitz}
+\courseSection{A1}
+\begin{document}
+\makereport
+	\begin{center}
+		\noindent\textbf{Acknowledgements}
+	\end{center}
+	
+	I worked with my home group to solve this problem.
+
+\section{Introduction}
+The Free Tuition problem involves a set of $n$ people aranged in a circle. A person is arbitrarily labeled as person 1, and then people are labeled in order going either clockwise, or counterclockwise. Starting at player 1, every other player is eliminated. So for example, consider a game with 6 players.
+\begin{center}
+	\begin{tikzpicture}
+	\newdimen\R
+	\R=1cm
+	\foreach \x/\l/\p in
+	{
+		60/{1}/above,
+		120/{2}/above,
+		180/{3}/left,
+		240/{4}/below,
+		300/{5}/below,
+		360/{6}/right
+	}
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+\end{tikzpicture}
+	\begin{tikzpicture}
+	\newdimen\R
+	\R=1cm
+	\foreach \x/\l/\p in
+	{
+		60/{1}/above,
+		180/{3}/left,
+		240/{4}/below,
+		300/{5}/below,
+		360/{6}/right
+	}
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \node[inner sep=1pt,circle,draw,fill,label={above:{\textcolor{red}{X}}},red] at (120:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+\end{tikzpicture}
+	\begin{tikzpicture}
+	\newdimen\R
+	\R=1cm
+	\foreach \x/\l/\p in
+	{
+		60/{1}/above,
+		180/{3}/left,
+		300/{5}/below,
+		360/{6}/right
+	}
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \foreach \x/\l/\p in
+     {
+	     120/{\textcolor{red}{X}}/above,
+		240/{\textcolor{red}{X}}/below
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l},red] at (\x:\R) {};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+\end{tikzpicture}
+	\begin{tikzpicture}
+	\newdimen\R
+	\R=1cm
+	\foreach \x/\l/\p in
+	{
+		60/{1}/above,
+		180/{3}/left,
+		300/{5}/below
+	}
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \foreach \x/\l/\p in
+     {
+	     120/{\textcolor{red}{X}}/above,
+		240/{\textcolor{red}{X}}/below,
+		360/{\textcolor{red}{X}}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l},red] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+\end{tikzpicture}
+	\begin{tikzpicture}
+	\newdimen\R
+	\R=1cm
+	\foreach \x/\l/\p in
+	{
+		60/{1}/above,
+		300/{5}/below
+	}
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \foreach \x/\l/\p in
+     {
+	     120/{\textcolor{red}{X}}/above,
+		240/{\textcolor{red}{X}}/below,
+		180/{\textcolor{red}{X}}/left,
+		360/{\textcolor{red}{X}}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l},red] at (\x:\R) {};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw [-{Stealth[length=5mm]}] (0,0) -- node[below=1.6cm] {} (2,0);
+\end{tikzpicture}
+	\begin{tikzpicture}
+	\newdimen\R
+	\R=1cm
+	\foreach \x/\l/\p in
+	{
+		300/{5}/below
+	}
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l}] at (\x:\R) {};
+     \foreach \x/\l/\p in
+     {
+	     120/{\textcolor{red}{X}}/above,
+		60/{\textcolor{red}{X}}/above,
+		240/{\textcolor{red}{X}}/below,
+		180/{\textcolor{red}{X}}/left,
+		360/{\textcolor{red}{X}}/right
+     }
+     \node[inner sep=1pt,circle,draw,fill,label={\p:\l},red] at (\x:\R) {};
+\end{tikzpicture}\\
+\noindent Figure 1: Free Tuition Game with $n=6$\label{fig:1}
+\end{center}
+As we can see in figure \ref{fig:1}, player 5 wins this game.
+
+The goal of this paper is to identify recurive and closed-form equations representing the winner of this game.
+\section{Solution and Proof}
+We used the method of brute force to compute the following table. Note that for all starting positions that are powers of two, the winning position is 1. Also note that for all positions that are not powers of two, the winning position is two greater than the previous winning position. These realizations motivate our first two lemmas.
+\newpage
+\begin{center}
+	Table 1: Winning positions for a given starting $n$\label{tab:1}\vspace{10pt}\\
+	\begin{tabular}{cc}
+		\toprule
+		Starting Position&Winning Position\\
+		\midrule
+		1&1\\
+		2&1\\
+		3&3\\
+		4&1\\
+		5&3\\
+		6&5\\
+		7&7\\
+		8&1\\
+		9&3\\
+		10&5\\
+		11&7\\
+		12&9\\
+		13&11\\
+		14&13\\
+		15&15\\
+		16&1\\
+		17&3\\
+		18&5\\
+		19&7\\
+		20&9\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\begin{definition}\label{dfn:1}
+	Let $w(n)$ denote the winning player given $n$ starting players.
+\end{definition}
+\begin{lemma}\label{lma:1}
+	Let $k\in\mathbb{N}$. Then $w(2^k)=1$.
+\end{lemma}
+\begin{proof}
+	We will use proof by the method of induction. First, let $k=0$. We then have $w(1)=1$ trivially. Now suppose the statement holds for some arbitrary $k\in\mathbb{N}$, and consider $w(2^{k+1})$. By the rules of the game, we know that on our first time around the circle, we will eliminate every 2nd player. That is, we will eliminate player $2n$ for all  $n\in\mathbb{Z}^+$ such that $2n\leq 2^{k+1}$. Since this is precisely half of the players, we now have $2^{k+1} / 2=2^{k}$ players remaining. Note that we once again skip player 1 on the next turn, so we are back to the initial position for the case of $2^k$ players. By our inductive hypothesis, this is winning for player $1$. By induction, the statement thus holds for all $n$.
+\end{proof}
+\begin{lemma}[Recursive]\label{lma:2}
+	Let $2^k\leq n<2^{k+1}$ for some $n,k\in\mathbb{N}$. Then $w(n)=1+2(n-2^k)$.
+\end{lemma}
+\begin{proof}
+	Let $k\in\mathbb{N}$ arbitrary. We will induct on the set $S=\left\{ 2^k, \ldots, 2^{+1}-1 \right\} $. Let $n=2^k$. It follows that
+	\[
+		w(n)=1+2\left( 2^k-2^k \right) =1
+	.\]
+	By lemma \ref{lma:1}, this holds. Now let the statement hold for some arbitrary $n\in S\setminus\left\{ 2^{k+1}-1 \right\} $, and consider $n+1$. Notice that after $n-2^{k}$ moves, we will have $2^k$ players remaining. Thus, the next person to be skipped will be the winner by lemma \ref{lma:1}. Since we skip a player every time, we move by 2 every time. Therefore, the move will be $2(n-2^k)$ players ahead, and thus the statement holds.
+\end{proof}
+
+Lemma \ref{lma:2} constitutes a recursive representation of the game. We consider a set of base cases $B=\left\{ 2^k \mid k\in\mathbb{N} \right\} $, and for any $n\in B$, $w(n)=1$. We then have the recursive representation $w(n)=2+w(n-1)$, provided $n \notin B$.
+
+We can now motivate a closed form solution. We want a way of identifying the greatest $2^k$ such that $n>2^k$, using only $n$. We can simplify this problem by attempting to identify $k$. Note that if $n=2^k$, then $\log_2(n)=k$, and if $n=2^{k+1}$, then $\log _2(n)=k+1$. For all $x\in [2^k,2^{k+1})\subset \mathbb{R}$, we have $\log_2(x)\in [k,k+1)$. We can make use of the floor function here, since $\left\lfloor \log_2(x) \right\rfloor=k$ for all $x$ in this interval. We can then use Lemma \ref{lma:2} to give the closed form expression
+\[
+	w(n)=1+2\left( n-2^{\left\lfloor \log_2(n) \right\rfloor} \right) 
+.\]
+\begin{theorem}[Closed Form]\label{thm:1}
+	Let $n\in\mathbb{N}$. Then
+	\[
+		w(n)=1+2\left( n-2^{\left\lfloor \log _2(n) \right\rfloor} \right) 
+	.\]
+\end{theorem}
+\begin{proof}
+	We will consider two cases, $n=2^k$ for some $k\in\mathbb{N}$, and all other $n\in\mathbb{N}$. We wish to show the representation of $w(n)$ given in this theorem is consistent with that given in lemma \ref{lma:2}.
+
+	\textbf{Case 1.} Let $n=2^k$ for some $k\in\mathbb{N}$. It follows that
+	\begin{align*}
+		w\left( 2^k \right) &=1+2\left( 2^k-2^{\left\lfloor\log_2\left( 2^k \right)\right\rfloor } \right) \\
+				    &=1+2\left( 2^k-2^{\left\lfloor k \right\rfloor} \right) \\
+				    &=1+2\left( 2^k-2^k \right) \\
+				    &=1
+	.\end{align*}
+	This is consistent with lemma \ref{lma:2}.
+
+	\textbf{Case 2.} Let $n\in\mathbb{N}$ such that $n\neq 2^k$ for some $k\in\mathbb{N}$. Let
+	\[
+		S=\left\{ 2^k\in\mathbb{N} \mid 2^k<n \right\} 
+	.\]
+	Since there exists no $n$ such that $n<2^0,2^1$, we know $S\neq \varnothing$. Since $n$ is finite, $S$ is finite, and thus has a maximal element of the form $2^k$. Let $k\in\mathbb{N}$ such that $2^k=\max S$. By lemma \ref{lma:2}, we should have $w(n)=1+2\left( n-2^k \right) $. We will show this follows from the given definition as well. Let $\lambda =n-2^k$. We have $n=\lambda +2^k$, and thus,
+	\begin{align*}
+		w(n)&=1+2\left( n-2^{\left\lfloor \log _2(n) \right\rfloor} \right) \\
+		    &=1+2\left( \lambda +2^k-2^{\left\lfloor \log_2\left( n \right)  \right\rfloor} \right) 
+	.\end{align*}
+	Notice that $2^{k+1}>n$ by definition of $S$ and $n$, and notice that
+	\[
+		\log_2\left( 2^k \right) =k,\qquad \log_2\left( 2^{k+1} \right) =k+1
+	.\]
+	 Also notice that
+	 \[
+	 	\frac{\mathrm{d}}{\mathrm{d}x} \log_2(x)=\frac{1}{x\ln 2}
+	 .\]
+	 Since $\ln 2>0$,\footnote{A similar analysis of derivatives and the fact that $0<\ln 2<1$ suffice to show this.} we have $ \frac{\mathrm{d}y}{\mathrm{d}x}\log_2(x)>0$ for all $x>0$. Therefore, $\log_2(x)$ is monotonically increasing, and since $2^k<n<2^{k+1}$, we have
+	 \[
+	 	\log_2\left( 2^k \right) <\log_2(n)<\log\left( 2^{k+1} \right) 
+	 .\]
+	 Equivalently,
+	 \[
+	 	k<\log_2(n)<k+1
+	 .\]
+	 Since $\left\{ n\in\mathbb{N} \mid k<n<k+1,k\in\mathbb{N} \right\} =\varnothing$ for all $k\in\mathbb{N}$, we have
+	 \[
+	 	\left\lfloor \log_2(n) \right\rfloor=k
+	 .\]
+	 Therefore,
+	 \begin{align*}
+		 1+2\left( \lambda +2^k-2^{\left\lfloor \log _2(n) \right\rfloor} \right) &=1+2\left( \lambda +2^k-2^{k} \right) \\
+											  &=1+2\lambda 
+	 .\end{align*}
+	 By lemma \ref{lma:2},
+	 \[
+	 	w(n)=1+2\left( \lambda +2^k-2^k \right) =1+2\lambda 
+	 .\]
+	 Therefore, the given definition is consistent with lemma \ref{lma:2}.
+\end{proof}
+\section{Conclusion}
+To solve the problem, we constructed a table, and quickly realized $w(2^k)=1$. We then realized we can reduce any problem to this case, and spent the rest of the time trying to figure out how to formulate a correct closed form equation based on this information. We eventually came up with the idea of logarithms and floor functions, but it took a while before we found the correct formulation of the idea.
+
+In all honesty, the assignment was not very interesting, and we solved it fairly quickly so it didn't feel very rewarding. This demotivated me from working on it, which is a large part of the reason I'm submitting it so incredibly late.
+
+I'm not quite sure what to say concerning my learning edge. The hardest part was realizing the application of logarithms and floor functions, but that wasn't inherently difficult, just not the first thing I think of.
+
+	Academic Integrity -- Please type your name to acknowledge that if you collaborated on this
+problem, then it was only with classmates our section of CAS MA 293 (except to have a
+partner for the game), that you only used allowable resources (notes from class, no Internet
+searches etc.), and that you wrote this paper by yourself: \textbf{Grant} \textbf{Talbert}
+\end{document}

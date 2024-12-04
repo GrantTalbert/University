@@ -1,0 +1,472 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../../../report.tex}
+\usepackage{titlepageBU}
+\title{Excursion 1 Rewrite}
+\date{11/04/24}
+\courseID{MA 293}
+\professor{Dr. Borkovitz}
+\courseSection{A1}
+\begin{document}
+\makereport
+\setcounter{page}{0}
+\begin{abstract}
+	This paper serves as a follow up to \cite{exc}, where we use data found in \cite{exc} to idenitfy various methods of constructing the set $\mathcal{L} $ of losing positions, many of which involve the sequence of strings $\left\{\Phi (n)\right\}_{n=1}^\infty$. We also identify various connections between $\mathcal{L} $ and the Fibonacci numbers, including a representation of losing positions in terms of a Fibonacci basis $\mathcal{F} $. Corollaries of our analysis include all things mentioned in \cite{more}, as well as a variety of mathematical curiosities.
+\end{abstract}
+\tableofcontents
+\newpage
+\section{Background}
+In \cite{exc}, this author investigated the Tile Game, and proposed a pseudo-solution to the game. However, interesting behavior hinting at more optimal solution was uncovered, but proving the observed behavior rigorously was difficult. This paper aims to complete the analysis of the previous paper by proving various behaviors discussed in \cite{exc}.
+\subsection{Notation}
+This paper revamps the notation from the previous paper to improve readability. We admit that readability is still a concern due to a large number of subscripts.
+\begin{definition}[Board Position]\label{dfn:1}
+	A board position is any pair $(a,b)\in\mathbb{N}^2$. We generally represent board positions as boldfaced characters, such as $\mathbf{n}=(a,b)$.
+\end{definition}
+\begin{definition}[Number of Tiles]\label{dfn:2}
+	Let $\mathbf{n}=(a,b)\in\mathbb{N}^2$, and let $\left| \cdot  \right| : \mathbb{N}^2 \to \mathbb{N}$ be the map $\left| \mathbf{n} \right| =a+b$. We say $\mathbf{n}$ is the number of tiles for the board position $\mathbf{n}$.\footnote{Although we use the notation $\left| \cdot  \right| $, we make no claims this is an absolute value or norm on $\mathbb{N}^2$. The notation is simply more convenient than defining a function.}
+\end{definition}
+\begin{definition}[Moves]\label{dfn:3}
+	Let $\phi ,\psi : \mathbb{N}^2 \to \mathbb{N}^2$ be the maps
+	\[
+		\phi (a,b)=(a-1,b)
+	\]
+	and
+	\[
+		\psi (a,b)=(a,b-1)
+	.\]
+	Let $\mathscr{M}  : \mathbb{N}^2 \to \mathcal{P} \left( \left<\phi ,\psi  \right> \right) $ be the map
+	\[
+		\mathbf{n}\mapsto \left\{ \phi ^k \mid 0<k\leq a \right\} \cup \left\{\phi ^k \mid 0<k\leq b \right\}\cup \left\{ \phi ^k\psi ^k \mid 0<k\leq a\land k\leq b \right\} 
+	.\]
+	We say $\mathscr{M}  (\mathbf{n})$ is the set of all possible moves on $\mathbf{n}$.\footnote{See \cite{exc} for proof that $\mathscr{M}  (\mathbf{n})$ constitutes all possible moves as outlined by the game. Note that instead of defining a set $\mathscr{M} (\mathbf{n})$ for all $\mathbf{n}$, we define a set function instead. The contents of $\mathscr{M} (\mathbf{n})$ remain the same, but I thought this solution was cleaner. Also note that $\left<\phi ,\psi  \right> = \left\{ \phi^n\psi ^m \mid n,m\in\mathbb{Z} \right\} $.}
+\end{definition}
+\begin{definition}[Winning and Losing Positions]\label{dfn:4}
+	Let $\mathcal{L} $ be the set
+	\[
+		\mathcal{L} \coloneqq \left\{ \mathbf{n}\in\mathbb{N} \mid \forall \sigma \in \mathscr{M} (\mathbf{n}): \sigma (\mathbf{n})\in \mathcal{W}  \right\} 
+	.\]
+	Let $\mathcal{W} $ be the set
+	\[
+		\mathcal{W} \coloneqq \left\{ \mathbf{n}\in\mathbb{N} \mid \exists \sigma \in \mathscr{M} (\mathbf{n}): \sigma (\mathbf{n})\in \mathcal{L}  \right\} 
+	.\]
+	We call $\mathcal{L} $ the set of losing positions, and $\mathcal{W} $ the set of winning positions.
+\end{definition}
+\subsection{Proven Results}
+See \cite{exc} for more rigorous justification of these results. They are listed here simply for convenience than.
+\begin{theorem}\label{thm:1}
+	$\mathcal{W} $ and $\mathcal{L} $ are disjoint, and $\left( 0,0 \right) \in \mathcal{L} $.
+\end{theorem}
+\begin{proof}
+	We suppose for contradiction that there exists $\mathbf{n}\in \mathcal{W} \cap \mathcal{L} $. We note that for any $\sigma \in \mathscr{M} (\mathbf{n})$, $\left| \sigma (\mathbf{n}) \right| \leq \left| \mathbf{n} \right| -1$. We generalize this logic via induction to claim that there exists a sequence $\mathbf{n}_1, \dots, \mathbf{n}_n \in \mathcal{W} \cap \mathcal{L} $, and that this sequence includes $(0,0)$. We then show $(0,0)\in \mathcal{L} $ but $(0,0)\notin \mathcal{W} $, and thus $\mathcal{W} \cap \mathcal{L} =\varnothing$. A corollary of this is the fact that $(0,0)\in \mathcal{L} $.
+\end{proof}
+\begin{theorem}\label{thm:2}
+	Let $(a,b)\in \mathcal{L} $. Then $(b,a)\in \mathcal{L} $.
+\end{theorem}
+\begin{proof}
+	We induct on $\left| \mathbf{n} \right| $, and prove the inductive case with three cases. If we think of $\phi $ and $\psi $ as being ``flipped'' versions of each other, then we simply flip every move and show that $(b,a)\in \mathcal{L} $.
+\end{proof}
+\begin{theorem}\label{thm:3}
+	$\mathcal{L} $ and $\mathcal{W} $ partition $\mathbb{N}^2$.
+\end{theorem}
+\begin{proof}
+	We have already proven the sets are disjoint, so we simply induct on $\left| \mathbf{n} \right| $. We then recall that any move will lower the value of $\left| \mathbf{n} \right| $, and send it to a region we have already proven is part of the partition. The remainder of the proof is done in two cases, being whether there exists $\sigma \in \mathscr{M} (\mathbf{n})$ such that $\sigma (\mathbf{n})\in \mathcal{L} $.
+\end{proof}
+\begin{notation}
+	Let $\Lambda =\left\{ \boldsymbol{\lambda} _i \right\}_{i=0}^\infty $ be a sequence of losing positions $\boldsymbol{\lambda}_i=(a,b)$ where $a\geq b$, ordered such that $\boldsymbol{\lambda}_0=\mathbf{0}$, and $\left| \boldsymbol{\lambda}_{i-1} \right| < \left| \boldsymbol{\lambda}_{i} \right| < \left| \boldsymbol{\lambda}_{i+1} \right| $. In other words, $\boldsymbol{\lambda}_n$ is the $n$th losing position, when ordered by $\left| \boldsymbol{\lambda}  \right| $.\footnote{If there exist more than two losing positions for the same value of $\boldsymbol{\lambda}_i$, then this sequence may not be well-defined. However, a corollary of theorem \ref{thm:4} makes it well defined, and the notation itself has no bearing on the legitimacy of theorem \ref{thm:4}.}
+\end{notation}
+\begin{theorem}[Fundamental Theorem]\label{thm:4}
+	Let $\boldsymbol{\lambda}_{n}=(a,b)\in \mathcal{L} $ denote the $n$th losing position, where $\mathbf{0}=(0,0)$ is the $0$th losing position. By theorem \ref{thm:2}, let $a\geq b$ without loss of generality. Then $a=b+n$, and
+	\[
+		b=\min \left\{ n\in\mathbb{N} \mid \forall \left( \boldsymbol{\lambda}_{k<n}=(p,q)\in\mathcal{L}  \right) :\left( n\neq p,q \right)  \right\} 
+	.\]
+\end{theorem}
+\begin{proof}
+	The proof is fairly involved, so I recommend reading \cite{exc}. Note that in that paper we used $\boldsymbol{\xi} $ instead of $\boldsymbol{\lambda} $, $\Xi $ instead of $\mathcal{L} $, and $W$ instead of $\mathcal{W} $. I have decided to change the notation somewhat in this paper.
+\end{proof}
+\subsection{Post-Rigorous Analysis}
+Using the results of theorem \ref{thm:4}, efficient generation of losing positions can be done via a python script.
+\begin{center}
+	Code 1: Python Script to Generate Losing Positions up to \verb|MAX| Value\label{code:1}
+\end{center}
+\begin{lstlisting}[language=Python]
+	MAX = 1000
+	avoid = set()
+	losing_tiles = []
+	y_int = 1
+
+	for x in range(1,max+1):
+		if x not in avoid:
+			losing_tiles.append((x,x+y_int))
+			avoid.add(x+y_int)
+			y_int += 1
+\end{lstlisting}
+We were able to generate all losing positions for \verb|MAX| $\approx 10^8$, after which we ran into issues with system resources. However, this was easily enough to investigate further, and make the following conjectures, all\footnote{Most aren't proven yet.} of which this paper proves:
+\begin{enumerate}
+	\item Let $\boldsymbol{\lambda}_n=(x,y)$ and $\boldsymbol{\lambda}_{n+1}=(x^*,y^*)$. Then $x^*-x\in\left\{ 1,2 \right\} $. Henceforth we will call this value $\Delta x_{n+1}$.
+	\item Start with $1$. Create a new string of integers by replacing every $1$ with a $2$, every $2$ with two $2$s, and between each set of $2$s, put a new $1$. Put $1$s at the beginning and end of the string. Applying these rules successively generates longer and longer strings of $\Delta x$ values.
+	\item Let $F_n$ denote the $n$th Fibonacci number. Then $\boldsymbol{\lambda}_{F_{2n-1}}=\left( F_{2n},F_{2n+1} \right) $.
+\end{enumerate}
+\section{Solution and Proof}
+\subsection{Definitions}
+\begin{notation}
+	Let $\boldsymbol{\lambda}_i$, $\boldsymbol{\lambda}_j\in \mathcal{L} $. If $\left| \boldsymbol{\lambda}_i \right| < \left| \boldsymbol{\lambda}_j \right| $, then we write $\boldsymbol{\lambda}_i \prec \boldsymbol{\lambda}_j$ or $\boldsymbol{\lambda}_j \succ \boldsymbol{\lambda}_i$.
+\end{notation}
+\begin{definition}[Strings]\label{dfn:5}
+	Let $\Sigma  $ be the set of all strings of integers composed entirely of $ 1$s and $2$s.
+\end{definition}
+\begin{notation}
+	When working with strings of integers, we will use juxtaposition to denote string concatenation. When this notation may be confused with multiplication, we will use the $\oplus $ symbol instead\footnote{I have no idea what symbol to use so I picked this one. If you have suggestions on better ones, it would be much appreciated.}.
+\end{notation}
+\begin{definition}[Generating functions]\label{dfn:6}
+	Let $\Phi ,\Psi : \mathbb{Z}^+ \to \Sigma $ be defined as follows.
+	\[
+		\Phi (n)=\begin{cases}
+			1,&n=1\\
+			\Phi (n-1)\Psi (n-1)\Phi (n-1),&n>1
+		\end{cases}
+	.\]
+	\[
+		\Psi (n)=
+		\begin{cases}
+			2,&n=1\\
+			\Psi (n-1)\Phi (n-2)\Psi (n-1),&n>1
+		\end{cases}
+	.\]
+\end{definition}
+\begin{definition}[Length of String]\label{dfn:8}
+	Define the map $\left\lVert \cdot  \right\rVert : \Sigma  \to \mathbb{N}$ such that $\left\lVert S \right\rVert $ is the length of the string $S$.\footnote{Once again, we make no claims $\left\lVert \cdot  \right\rVert $ is a norm on $\Sigma $. We simply use a convenient notation.}
+\end{definition}
+\begin{definition}[Sum over String]\label{dfn:9}
+	Let $T : \Sigma  \to \mathbb{N}$ be defined such that $T(S)$ is the sum over all characters in the string $S$.
+\end{definition}
+\begin{remark}
+	We claim for strings $A,B\in \Sigma $ that $\left\lVert AB \right\rVert =\left\lVert A \right\rVert +\left\lVert B \right\rVert $ and $T(AB)=T(A)+T(B)$.
+\end{remark}
+\begin{definition}[Component Extraction]\label{dfn:10}
+	Let $x_n$ and $y_n$ denote the $x$- and $y$-components of $\boldsymbol{\lambda}_n$. More precisely, define $\boldsymbol{\lambda}_n = \left( x_n,y_n \right) $ with $x_n \leq y_n$. Furthermore, for any $\boldsymbol{\lambda} = (x,y)\in \mathcal{L} $, define $\boldsymbol{\lambda} ^{(x)}=x$ and $\boldsymbol{\lambda} ^{(y)}=y$.
+\end{definition}
+\begin{definition}[Set of Deltas]\label{dfn:11}
+	Let $\omega  \in\mathbb{N}$. Define $\mathscr{X}_{\omega } $ as the set of $\Delta x$ values for all $\left| \boldsymbol{\lambda }_n \right| \leq \omega  $. Symbolically,
+	\[
+		\mathscr{X}_{\omega  }=\left\{  x_n-x_{n-1}\mid n\in\mathbb{N}\land 1\leq n \leq \omega  \right\} 
+	.\]
+	We call $\mathscr{X} _{\omega } $ the \emph{set of deltas on} $\omega  $.
+
+	Additionally, define $\mathfrak{X}_{\omega   }$ as the string formed by ordering the elements of $\mathscr{X}_{\omega  }$ according to $n$. Symbolically,
+	\[
+		\mathfrak{X}_{\omega  }\coloneqq \bigoplus_{n=1}^{\omega  }x_n - x_{n-1}
+	.\]
+\end{definition}
+\subsection{Preliminary Results}
+\begin{lemma}\label{lma:1}
+	Let $n\in\mathbb{Z}^+$. Then $\left\lVert \Phi (n) \right\rVert =F_{2n}$. Moreover, $\left\lVert \Psi (n) \right\rVert =F_{2n-1}$.
+\end{lemma}
+\begin{proof}
+	We use proof by the method of induction. Note that $\left\lVert \Phi (1) \right\rVert =\left\lVert \Psi (1) \right\rVert =1$. Since $F_2=F_{2-1}=1$, we have $\Phi (1)=F_2$ and $\Psi (1)=F_1$.
+
+	Now suppose the statement holds for $n$ and $n-1$, with $n\geq 2$ arbitrary. That is, suppose
+	\[
+		\left\lVert \Phi (n) \right\rVert =F_{2n},\qquad \left\lVert \Psi (n) \right\rVert =F_{2n-1}
+	.\]
+	We wish to show the same holds for $n+1$. Notice that
+	\begin{align*}
+		\left\lVert \Phi (n+1) \right\rVert &=\left\lVert \Phi (n)\Psi (n)\Phi (n) \right\rVert \\
+						    &=\left\lVert \Phi (n) \right\rVert +\left\lVert \Psi (n) \right\rVert +\left\lVert \Phi (n) \right\rVert\\
+						    &=F_{2n}+F_{2n-1}+F_{2n}\\
+						    &=F_{2n}+F_{2n+1}\\
+						    &=F_{2n+2}\\
+						    &=F_{2(n+1)}
+	.\end{align*}
+	Therefore, the statement holds for $\Phi (n+1)$. It remains to be shown that it holds for $\Psi (n+1)$. We have
+	\begin{align*}
+		\left\lVert \Psi (n+1)\right\rVert &=\left\lVert \Psi (n)\Phi (n-1)\Psi (n) \right\rVert \\
+						   &=\left\lVert \Phi (n) \right\rVert +\left\lVert \Phi (n-1) \right\rVert +\left\lVert \Psi (n) \right\rVert \\
+						   &=F_{2n-1}+F_{2n-2}+F_{2n-1}\\
+						   &=F_{2n-1}+F_{2n}\\
+						   &=F_{2n+1}\\
+						   &=F_{2(n+1)-1}
+	.\end{align*}
+	Therefore, the statement holds for $n+1$.
+\end{proof}
+\begin{note}
+	This proof is not sufficient; I need to show it holds for two base cases. This is easy and I will do it later.
+\end{note}
+\begin{lemma}\label{lma:2}
+	Let $n\in\mathbb{Z}^+$. Then
+	\[
+		\sum_{i=1}^{n} F_{i}=F_{2n+1}-1
+	\]
+	and
+	\[
+		\sum_{i=1}^{n} F_{2i-1}=F_{2n}
+	.\]
+	
+\end{lemma}
+\begin{proof}
+	(1) We use proof by the method of induction. Let $n=1$. Notice that $F_2=1=F_3-1$. Now suppose the claim holds for an arbitrary $n\in\mathbb{Z}^+$, and consider $n+1$. We have
+	\[
+		\sum_{i=1}^{n+1} F_{2n}=F_{2(n+1)}+\sum_{i=1}^{n} F_{2n}=F_{2n+2}+\left( F_{2n+1}-1 \right) =F_{2n+3}-1=F_{2(n+1)+1}-1
+	.\]
+	(2) We use proof by the method of induction. Let $n=1$, and notice that $F_1=F_2$. Now suppose the claim holds for an arbitrary $n\in\mathbb{Z}^+$, and consider $n+1$. We have
+	\[
+		\sum_{i=1}^{n+1} F_{2i-1}=F_{2n+1}+\sum_{i=1}^{n} F_{2i-1}=F_{2n+1}+F_{2n}=F_{2n+2}
+	.\]
+	By induction, we are done.
+\end{proof}
+\begin{lemma}\label{lma:3}
+	Let $n\in\mathbb{Z}^+$. Then
+	\[
+		T(\Phi (n))=F_{2n+1}-1
+	\]
+	and
+	\[
+		T(\Psi (n))=F_{2n}+1
+	.\]
+\end{lemma}
+\begin{proof}
+	We will use proof by the method of induction. The remainder of the proof is left as an exercise to the reader until I finish the more important results and can be bothered writing it out.
+\end{proof}
+\begin{lemma}\label{lma:4}
+	Let $\boldsymbol{\lambda }_n,\boldsymbol{\lambda } _{n+1}\in \mathcal{L}  $. Then $x_{n+1}-x_n\in\left\{ 1,2 \right\} $.
+\end{lemma}
+\begin{proof}
+	Define $\Delta x=x_{n+1}-x_n$. The fact that $\Delta x\in\mathbb{N}$ and $\Delta x\neq 0$ is trivial, so we prove $\Delta x\leq 2$.
+
+	Suppose for contradiction that $\boldsymbol{\lambda }_n=(x_n,x_n+n)$ and $\boldsymbol{\lambda } _{n+1}(x_n+\alpha ,x_n+\alpha +n+1 )$ for $\alpha >2$. By theorem \ref{thm:4}, there must exist two losing points with either $x$ or $y$ equal to both $x_n+1$ and $x_n+2$. Since there are no losing points with $x_n < x < x+\alpha $ for $x<y$, we must find losing points $\boldsymbol{\lambda } _k$, $\boldsymbol{\lambda } _\ell $ such that $y_k=x_n+1$ and $y_k=x_n+2$.
+
+	By theorem \ref{thm:4}, $x_k+k=y_k=x_n+1$, and $x_\ell +\ell =y_\ell =x_n+2$. Therefore, $x_\ell +\ell =x_k+k+1$. Recall that $k$ and $\ell $ must be distinct, and since they are integers, the minimum value for $\ell $ is $k+1$. Furthermore, by theorem 4 $x_\ell >x_k$, and thusthe minimum value of $x_\ell +\ell $ is $x_k+k+2$. However, $x_\ell +\ell =x_k+k+1<x_k+k+2$, contradicting our assumption that $y_k+1=y_\ell $. Therefore, no such $\alpha $ exists, and $\Delta x\in\left\{ 1,2 \right\} $.
+\end{proof}
+\subsection{Additivity of $\mathcal{L} $}
+One extremely important lemma relies on some of the relationships between $\mathcal{L} $ and the Fibonacci numbers. This section proves the required lemmas, since the other relationships are better suited as corollaries of our most fundamental results.
+\begin{definition}[Normalized Losing]\label{dfn:12}
+	Define $\mathcal{L} _N$ as the set
+	\[
+\mathcal{L} _N = \left\{ (a,b)\in \mathcal{L}  \mid a\leq b \right\} 
+	.\]	
+\end{definition}
+\begin{lemma}[Additivity]\label{lma:5}
+	Let $(x,y)\in \mathcal{L}_N$. Then $(x+y,x+2y)\in \mathcal{L}_N$.
+\end{lemma}
+\begin{proof}
+	We will use proof by strong induction. Sufficient base cases can be shown to hold via brute force, so consider the inductive case. That is, suppose for all $\ell <n$ that $\lambda_\ell =(a,b)\in \mathcal{L}_N$ that $(a+b,a+2b)\in \mathcal{L}_N$. We will show $\lambda_{n}=\left( x,y \right) \in \mathcal{L}_N$.
+
+	One possible proof method is to say that since $2y+x-(2+y)=y$, this is equivalent to showing $\boldsymbol{\lambda}_y$ has $x$-value of $x+y$. This is equivalent to showing for all $k>1$, $\phi^k( \boldsymbol{\lambda}_y ) \in \mathcal{W} $ NEVER MIND NO IT ISNT. but it IS equivalent to showing $\phi^k\psi^k(\boldsymbol{\lambda}_n)\in \mathcal{W} $. It might be prudent to note that $y=x+n$?
+\end{proof}
+\begin{lemma}\label{lma:6}
+	For all $n\in\mathbb{Z}^+$,
+	\[
+		\boldsymbol{\lambda}_{F_{2n-1}}=\left( F_{2n},F_{2n+1} \right) 
+	.\]
+	Additionally,
+	\[
+		\boldsymbol{\lambda}_{F_{2n}}=\left( F_{2n+1}-1,F_{2n+2}-1 \right) 
+	.\]
+\end{lemma}
+\begin{proof}
+	We will use proof by the method of induction. Let $n=1$, and note that $1=F_{2(1)-1}=F_{2(1)}$ and $\boldsymbol{\lambda} _1=(1,2)=\left(F_{2(1)},F_{2(1)+1}\right)=\left( F_{2(1)+1}-1,F_{2(1)+2}-1 \right) $. Now suppose the theorem holds for some arbitrary $n$. By lemma \ref{lma:5},
+	\[
+		\left( F_{2n}+F_{2n+1},F_{2n}+F_{2n+1}+F_{2n+1} \right) =\left( F_{2n+2},F_{2n+3} \right) =\left( F_{2(n+1)},F_{2(n+1)+1} \right) \in \mathcal{L}_N
+	.\]
+	Since $F_{2n+3}-F_{2n+2}=F_{2n+1}+F_{2(n+1)-1}$, by theorem \ref{thm:4},
+	\[
+		\boldsymbol{\lambda}_{F_{2(n+1)-1}}=\left( F_{2(n+1)},F_{2(n+1)+1} \right) 
+	.\]
+	Now consider the other statement. By lemma \ref{lma:5},
+	\[
+		\left( F_{2n+1}-1+F_{2n+2}-1,F_{2n+1}+F_{2n+2}+F_{2n+2}-3 \right) =\left( F_{2n+3}-2,F_{2n+4}-3 \right) \in \mathcal{L}_N
+	.\]
+	Since $F_{2n+4}-3-\left( F_{2n+3}-2 \right) =F_{2n+2}-1$, we must show the next $\Delta x$ is $1$. Suppose for contradiction $\Delta x=2$. Then $\left( F_{2n+3},F_{2n+4} \right) \in \mathcal{L}_N$. It follows that
+	\[
+		\left( F_{2n+3},F_{2n+4} \right) -\left( F_{2n+2}+1,F_{2n+2}+1 \right) =\left( F_{2n+1},F_{2n+2} \right) \in \mathcal{W} 
+	.\]
+	However, $\left( F_{2n+1}-1,F_{2n+2}-1 \right) \in \mathcal{L}_N $, which is a contradiction by theorem \ref{thm:2}. Therefore, by lemma \ref{lma:4}, $\Delta x=1$, and by induction, we are done.
+\end{proof}
+\subsection{The $\Phi $-$\mathfrak{X} $ Equivalence}
+We will motivate the remaining proofs with a brief discussion.
+\begin{center}
+	\begin{tikzpicture}[scale=1.7]
+		\draw[thick] (0,0) -- (9,0);
+		\draw[shift={(0,0)},color=black] (0pt, 3pt) -- (0pt, -3pt) node[below]
+			{0};
+		\foreach \x in {1,...,9}
+		\draw[shift={(\x,0)},color=black] (0pt, 3pt) -- (0pt, -3pt) node[below]
+			{\x0};
+		\draw[thick, color=red] (0, -0.4) node[below] {$T(1)$} -- (0.1, -0.4);
+		\draw[thick, color=red] (0, -1) node[below] {$T(2)$} -- (0.4, -1);
+		\draw[thick, color=red] (0, -1.6) node[below] {$T(3)$} -- (1.2, -1.6);
+		\draw[thick, color=red] (0, -2.2) node[below] {$T(4)$} -- (3.3, -2.2);
+		\draw[thick, color=red] (0, -2.8) node[below] {$T(5)$} -- (8.8, -2.8);
+
+		\draw[thick, dashed, color=blue] (0.1,-0.4) -- (0.3, -0.4);
+		\draw[thick, dashed, color=blue] (0.4,-1) -- (0.8, -1);
+		\draw[thick, dashed, color=blue] (1.2,-1.6) -- (2.1, -1.6);
+		\draw[thick, dashed, color=blue] (3.3,-2.2) -- (5.5, -2.2);
+		\draw[thick, dashed, color=blue] (8.8,-2.8) -- (9, -2.8);
+	\end{tikzpicture}
+	Figure 1: an awesome figure\footnote{I need to draw arrows and stuff on figure 1 still.}\label{fig:1}
+\end{center}
+% TODO: finish figure
+
+It appears as if regions decided by $\Phi (n)$ only impact the subsequent region $\Psi (n+1)$, and similarly regions decided by $\Psi (n)$ only impact the subsequent region $\Phi (n)$, which comes together to form $\Phi (n+1)$. We thus want to show that $\Phi $ induces $\Psi $, and $\Psi $ induces $\Phi $. This is the reasoning behind the remainder of the results.
+\begin{definition}[Inducing]\label{dfn:13}
+	Let $S$ be the set of intervals on $\mathbb{N}$. That is, let
+	\[
+		S\coloneqq \left\{ [a,b] \subseteq \mathbb{N} \mid a,b\in\mathbb{N} \right\} 
+	.\]
+	Define $\mathcal{I} : S \to S$ as the mapping
+	\[
+		[a,b]\mapsto \left[ \min \left\{ y\in\mathbb{N} \mid x\in[a,b]\land (x,y)\in \mathcal{L}_N  \right\} ,\max \left\{ y\in\mathbb{N} \mid x\in[a,b]\land (x,y)\in \mathcal{L}_N \right\}  \right] 
+	.\]
+\end{definition}
+Issue: I have no idea if this definition does what I want and I need to simplify it very bad before I can proceed. The idea is if you take an interval $I \subset \mathbb{R}$, then $\mathcal{I} $ should map it to the interval $I'\subset \mathbb{R}$ where the status of points in $I '$ as losing or winning is determined by $I$.
+\begin{lemma}\label{lma:7}
+	\[
+		\mathcal{I} \left[ T\left( \Phi (n)+\Psi (n) \right) ,T\left( \Phi (n+1 \right)  \right] =\left[ T\left( \Phi (n+1) \right)+1 ,T\left( \Phi (n+1)+\Psi (n+1) \right) -1 \right] 
+	.\]
+	This is horrible notation. Psi equivalent:
+	\[
+		\mathcal{I} \left[ T(\Phi (n)),T(\Phi (n)+\Psi (n)) \right] =\left[ T(\Phi (n)+\Psi (n))-1,T(\Phi (n+1))+1 \right] 
+	.\]
+	Im unsure about the bounds, might need to shift the +1s a bit. More qualitative analysis required.
+\end{lemma}
+\begin{proof}
+	This is going to follow ez from lemmas 3 and 5. Note that each endpoint of each interval is described by those lemmas. A similar result can be done for the $\Psi $ equivalent of this lemma.
+
+	Note -- accounting for the $+1$ s at the end and beginning of $\Phi $ can be done as a corollary of both this lemma and lemma 5. This should show each phi-like region is subject only to influence by a psi-like region, and vice versa.
+\end{proof}
+\begin{theorem}[Fundamentaler Theorem]\label{thm:5}
+	For all $n\in\mathbb{N}$, there exists some $\omega \in\mathbb{N}$ such that $\Phi (n)=\mathfrak{X}_{\omega }$.
+\end{theorem}
+\begin{proof}
+	Recall that $\Phi (n)=\Phi (n-1)\Psi (n-1)\Phi (n-1)$. We will use the method of proof by strong induction. The proof can be brute forced for the first few generations fairly trivially, so we will prove only the inductive case, and will assume sufficient base cases exist. We will show the following:
+	\begin{itemize}
+		\item A region decided by the string $\Phi (n)$ induces losing positions decided by the string $\Psi (n+1)$.
+		\item A region decided by the string $\Psi (n)$ induces losing positions decided by the string $\Phi (n)$.
+	\end{itemize}
+	We will use the notation $A\rightsquigarrow B$ to denote ``A region decided by the string $A$ induces losing positions decided by the string $B$'', when the locations of the beginning and endpoints of strings $A$ and $B$ in $\mathbb{N}$ can be well understood.
+
+	First, we will show that $\Phi (n)\rightsquigarrow \Psi (n+1)$. By definition \ref{dfn:6}, $\Phi (n)=\Phi (n-1)\Psi (n-1)\Phi (n-1)$. We wish to show that the fact that the interval $[T(\Phi (n)+\Phi (n)),T(\Phi (n+1))]$ follows $\Phi(n) $-like behavior induces $\Psi(n+1) $-like behavior along the interval $[T(\Phi (n+1))+1,T(\Phi (n+1)\Psi (n+1))]$. By lemma \ref{lma:7}, we know that
+	\[
+		\mathcal{I} \left[ T(\Phi (n)\Psi (n)),T(\Phi (n+1)) \right] =\left[ T(\Phi (n+1)+1,T(\Phi (n+1)\Psi (n+1)) \right] 
+	.\]
+	Therefore, we know the $\Phi(n) $-like region affects the target region. It remains to be shown the behavior induced is $\Psi(n+1) $-like.
+
+	Notice that $\Phi (n)=\Phi (n-1)\Psi (n-1)\Phi (n-1)$. By our inductive hypothesis, $\Phi (n-1)\rightsquigarrow \Psi (n)$ and $\Psi (n-1)\rightsquigarrow \Phi (n-1)$. Therefore,
+	\[
+	\Phi (n)=\Phi (n-1)\Psi (n-1)\Phi (n-1)\rightsquigarrow \Psi (n)\Phi (n-1)\Psi(n)=\Psi(n+1)
+	.\]
+	Therefore, $\Phi (n)\rightsquigarrow \Psi (n+1)$ along the target interval. Now we show the claim holds for $\Psi (n)$. Notice that we consider the losing positions along the boundary of $\Phi $ to be part of the $\Phi $-string, and only consider the interior of $\Psi $. By lemma \ref{lma:7}, we know $\Psi $ induces behavior along the correct region, so it remains to be shown this behavior is $\Phi $-like.
+
+	Notice that $\Psi (n)=\Psi (n-1)\Phi (n-2)\Psi (n-1)$. By our inductive hypothesis,
+	\[
+		\Psi (n)=\Psi (n-1)\Phi (n-2)\Psi (n-1)\rightsquigarrow \Phi (n-1)\Psi (n-1)\Phi (n-1)=\Phi (n)
+	.\]
+	By induction, we are done.
+\end{proof}
+\begin{note}
+	It might be prudent to show that $\Phi(n)\rightsquigarrow \Psi (n+1)$ and $\Psi (n)\rightsquigarrow \Phi (n)$ in a separate lemma, then combine the results of that \& lemma 7 to show the fundamentaler theorem.
+\end{note}
+
+The following corollary is fairly trivial given theorem \ref{thm:5}, but it shows that this theorem fully decides the placement of losing tiles in the tile game.
+
+\begin{corollary}\label{cor:1}
+	For all $\omega \in\mathbb{N}$, the string $\mathfrak{X}_\omega $ is equivalent to the first $\omega$ characters of $\Phi(n)$ for all $n\in \left\{ n\in\mathbb{N} \mid \left\lVert \Phi (n) \right\rVert \geq \omega  \right\} $.
+\end{corollary}
+\section{Discussion}
+\subsection{Reconstruction of $\mathcal{L}_N $}
+This subsection will discuss a possible construction of $\mathcal{L}_N $ from iterations of $\Phi $. Although direct construction is possible from applications of theorem \ref{thm:4}, we can use theorem \ref{thm:4} in a more creative way to minimize time-complexity. Note that each character in $\Phi $ indicates a new $x$ position by adding $\Delta x$ to the last position, and adding $\Delta  y=\Delta x+1$ to account for the results of theorem \ref{thm:4}. Therefore, we can define a losing value $\boldsymbol{\lambda}_n$ as simply the sum $\boldsymbol{\lambda}_{n-1}+(\Delta x,\Delta x+1)$. We can sum along $\Phi $ to generate all losing positions in this manner.
+\subsection{The Fibonacci Basis}
+Can I prove all losing positions are linear combinations of the Fibonacci basis
+\[
+	\mathcal{F} =\left\{ (F_{2n},F_{2n+1}) \mid n\in\mathbb{N} \right\} \subset \mathcal{L} 
+?\]
+Moreover, can I classify the linear combinations that give rise to losing positions? btw  acorollary is this
+\begin{lemma}\label{lma:5a}
+	Possibly easier to prove than the previous option, which is a corollary.
+
+	Let $\boldsymbol{\lambda}_{F_{2n-1}}=\left( F_{2n},F_{2n+1} \right) $ be a losing position. Then for all $n\in\mathbb{N}$ such that $\boldsymbol{\lambda}_n\prec \boldsymbol{\lambda}_{F_{2n-1}}$, it follows that
+	\[
+		\boldsymbol{\lambda}_n+\boldsymbol{\lambda}_{F_{2n-1}}= \boldsymbol{\lambda}_{F_{2n-1}+n}\in \mathcal{L}_N
+	.\]
+	Note here that addition is defined component-wise. That is, $(a,b)+(c,d)=(a+c,b+d)$.
+\end{lemma}
+\subsection{Applications to the Tile Game}
+This subsection will reconsider the results in context of the original problem, and will discuss methods by which a player can win the tile game, including a small number of special cases involving fibonacci numbers.
+\subsection{Mathematical Curiosities and Other Corollaries}
+\subsubsection{Occurances of the Sequence $\Phi $}
+This sequence appears to occur in a large number of places. We discuss places it occurs. Proof of most of these seems fairly simple given our current understanding, and I may in fact prove some of them.
+
+Two relate to the function $f(x)=\varphi x$. We can write every time $f(x)$ hits an integer as $0$ and every time $x$ hits an integer as $1$. We will get the sequence $\Phi -1$. This actually directly implies that $f(x)=\varphi x$ corresponds to the generating of losing positions. This string is one generation further than the losing positions, and iirc its because of the top bottom string which is also $\Phi $.
+
+Also in the array representation we can remark that the deltas between the first part of each row is $\Phi +1$ which is $F_{\Phi +2}$. Using our result  that each position is a linear combination of basis positions $\mathcal{B} $, which are the fibonacci positions $\mathcal{F} $, we can remark further that the entire table is a result of the existence  of $\Phi  $ in this side column. We can prove this too somehow.
+\subsubsection{Other Results}
+There's a lot of other mathematical curiosities in this problem that I want to mention.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Notes}
+this section is just notes im keeping
+\begin{theorem}[ksjdnfjksdn]\label{thm:kjsndkfjdn}
+	This all needs to be proven at once. With strong induction. Inside of strong induction. Maybe. Idk.
+	\[
+		\boldsymbol{\lambda}_{F_{2n-1}}=\left( F_{2n},F_{2n+1} \right) ,\quad \boldsymbol{\lambda}_{F_{2n}}=\left( F_{2n+1}-1,F_{2n+2}-1 \right) ,\quad \forall \boldsymbol{\lambda}_n\prec\boldsymbol{\lambda}_{F_{2n-1}},\; \boldsymbol{\lambda}_n+\boldsymbol{\lambda}_{F_{2n-1}}= \boldsymbol{\lambda}_{n+F_{2n-1}}
+	.\]
+\end{theorem}
+\begin{proof}
+	idfk
+\end{proof}
+I thnk that any losing position $\boldsymbol{\lambda}_m=(x,y)$ can be represented as a sum of fibonacci positions $\boldsymbol{\lambda}_{F_{2n-1}}$ with $F_{2n-1}\leq n$. This can then be represented as the system
+\[
+	\begin{pmatrix}
+		F_{2n}&F_{2(n-1)}&\cdots&F_2\\
+		F_{2n+1}&F_{2(n-1)+1}&\cdots&F_{3}
+	\end{pmatrix} \begin{pmatrix}
+		c_1\\
+		\vdots\\
+		c_n
+	\end{pmatrix} =\begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} 
+.\]
+We claim this has integer solutions $\mathbf{c}\in\mathbb{Z}^n$ iff $m<F_{2(n+1)-1}$. Equivalently, $a<F_{2(n+1)}$, $b<F_{2(n+1)+1}$. Furthermore, note that $c_i\leq i$ for all $i$. Possibly $c_i\leq 2$ for all $i$, unsure atm. Moreover, we can show every losing position is the sum of basis fibonaccis using induction. Let a losing be the sum of basis fibonaccis, next point not a fibonacci. actually idk how to do this. Perhaps we can reference a paper on Zekendorf representation, give it in terms of evens and odds instead, and derive our representation like that. Using systems, the matrix representation is equivalent to
+\[
+	a+b=\sum_{i=1}^{n} \left( F_{2(i+1)} \right) c_i
+.\]
+\begin{theorem}\label{thm:kjsd}
+	Let $(x,y)$ be a losing position. Then $(x+y,x+y+y)$ is the $y$th losing position.
+\end{theorem}
+\begin{proof}
+	We use proof by the method of strong induction. There exist a set of base cases for which its not possible so we kinda have to do cases.
+
+	Case 1: basis case (triviality)
+
+	Case 2: not a basis case. We suppose all smallers exist s.t. the theorem holds, and consider a position $(x,y)$. We then have to
+
+	ok no we need to identify the structure of the basis as part of this, which will follow from fibonacci bullcrap, and THEN we can use the structure of the previous losing positions to show all moves are winning.
+
+	The structure is going to be given a base case, you have a fibonacci recursion along the elements of that sequence, and then you can identify the base cases as precisely those without a fibonacci from all previous elements, and then show this partitions $\mathcal{L}_N$. THEN we can possibly show it holds in general, but how? oh well with the fibonaccis obviously.
+
+	One thing to remark about the structure is that for $(a,b)$ a basis position, all linear combinations are of the form $(F_na+F_{n+1}b,F_{n+1}a+F_{n+2}b)$. Proof of this will follow very fast via induction (will it?). This doesnt arrise for every $n$ so probably prudent to write $F_{2n+1}$ instead, altho idk if its odd or evens. The FUCK is it with the even subset of fibonaccis?
+
+	I'll call the basis in this case $\mathcal{Z} $ since i think its related to a zekendorf representation. Some elements include
+	\[
+		\left\{ (1,2),(4,7),(6,10),(9,15),(12,20),(14,23) \right\} \subset \mathcal{Z} 
+	.\]
+	
+\end{proof}
+
+Corollaries to the above theorem include sub additivity of losing positions and fibonaccis. We will possibly be able to construct the array given in MORE 2 directly, but that may have to wait and we may be able to construct two different arrays given the observed behavior.
+\bibliographystyle{amsplain}
+\bibliography{refs}
+\end{document}

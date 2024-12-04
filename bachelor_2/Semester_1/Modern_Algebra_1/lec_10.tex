@@ -1,0 +1,102 @@
+\lecture{10}{Tue 05 Nov 2024 09:31}{Sylow Theorems}
+\begin{corollary}
+	If $G$ is a nontrivial finite group of order $p^n$ for $p$ prime, then $\left| Z(G) \right| >1$.
+\end{corollary}
+\begin{proof}
+	See homework 8 problem 4a.
+\end{proof}
+\begin{corollary}
+	Every group of order $p^2$ is abelian.
+\end{corollary}
+\begin{proof}
+	See homework 8 problem 4b.
+\end{proof}
+\section{Sylow Theorems}
+Recall Lagrange's theorem. If $H\leq G$ with $G$ finite, then $\left| H \right| $ divides $\left| G \right| $. Remember that the converse is not true; that is, if $a$ divides $\left| G \right| $, then there need not exist a subgroup of order $a$. The Sylow Theorems give us a partial converse to Lagrange's theorem.
+\begin{theorem}[Sylow's First Theorem, 1872]\label{thm:S1}
+	Let $G$ be a finite group and $p$ a prime number. If $p^k$ divides $\left| G \right| $, then $G$ has a subgroup of order $p^k$.
+\end{theorem}
+\begin{proof}
+	Let $G$ be a finite group. We will use proof by strong induction on $\left| G \right| $. Suppose that $\left| G \right| =1$. Then the statement is true vacuously because there exists no such prime that divides $\left| G \right| $.
+
+	Now let the statement be true for all groups $G$ such that $\left| G \right| <n$. We wish to prove it holds for $\left| G \right| =n$. Suppose $p^k$ divides $\left| G \right| $. If $G$ has a proper subgroup $H$ with $p^k$ dividing $\left| H \right| $, then we are done by induction.
+
+	Now suppose there exists no proper subgroup of this form. By the class equation,
+	\[
+		\left| G \right| =\left| Z(G) \right| +\sum_{a_i\notin Z(G)} \left[ G : C(a_i) \right] 
+	,\]
+	where $a_1, \ldots, a_r$ are the representatives of distinct conjugacy classes of $G$. For any $i$, it follows that
+	\[
+		\left| G \right| =\frac{\left| G \right| }{\left| C(a_i) \right| }\left| C(a_i) \right| 
+	.\]
+	Since $C(a_i)\leq G$, by assumption, $p^k$ does not divide $\left| C(a_i) \right| $. However, $p^k$ divides $\left| G \right| $, and thus it divides $\frac{\left| G \right| }{\left| C(a_i) \right| }\left| C(a_i) \right| $. Thus, $p|\left[ G : C(a_i) \right] $ since it is greater than $0$ and the only divisors of $p^k$ are powers of $p$. Therefore,
+	\[
+		p|\left( \sum_{a_i\notin Z(G)} \left[ G: C(a_i) \right]  \right) 
+	.\]
+	Therefore, $p$ divides $\left| Z(G) \right| $. Since $Z(G)$ is abelian, by the Fundamental Theorem of Finite Abelian Groups, $Z(G)$ has an element of order $p$ since one of the cyclic groups in its decomposition must have order divisible by $p$. Let this element be $x$, and consider $\left<x \right> \leq G$. We know $\left| \left<x \right> \right| =p$. We want to reduce the order of $G$ using this group. We will use quotient groups. Note that $\left<x \right>\triangleleft G$ since $x\in Z(G)$ and $\left<x \right>\subseteq Z(G)$. The group $G / \left<x \right>$ has order $\left| G \right| /p<G$. Furthermore, $p ^{k-1}$ divides $\left| G / \left<x \right>  \right| $. By our inductive hypothesis, there exists $H\leq G / \left<x \right>$ such that $\left| H \right| =p ^{k-1}$.
+
+	Exercise: Show $H = K / \left<x \right>$ for some $K\leq G$. Construction is $K=\left\{ g_ix^j \right\} $.
+
+	Then we have $\left| K \right| =\left| H \right| p$. Therefore, $\left| K \right| =p^k$.
+\end{proof}
+\begin{corollary}[Cauchy's Theorem]
+	Let $G$ be a finite group and let $p$ divide $\left| G \right| $, with $p$ prime. Then $G$ has an element of order $p$.
+\end{corollary}
+\begin{proof}
+	By sylows theorem, since $p^1$ divides $\left| G \right| $, $G$ has a subgroup of order $p$. Since all groups of order $p$ are cyclic, there exists an element of order $p$.
+\end{proof}
+\begin{definition}[Sylow $p$-Subgroup]\label{dfn:S}
+	Let $G$ be a finite group such that $p ^k$ divides $\left| G \right| $, for $p$ prime. If $H\leq G$ is a subgroup such that $\left| H \right| =p^k$ is the largest power of $p$ that divides $\left| G \right| $, then $H$ is a Sylow $p$-subgroup of $G$.
+\end{definition}
+\begin{definition}[Conjugate Subgroups]\label{dfn:j}
+	Let $H,K\leq G$. Then $H$ and $K$ are conjugate if there exists $g\in G$ such that $H=gKg^{-1}$.
+\end{definition}
+\begin{theorem}[Sylow's Second Theorem]\label{thm:S2}
+	Let $G$ be a finite group with $H\leq G$, and let $\left| H \right| =p^k$ for $p$ a prime number. Then $H$ is a subset(group) of some Sylow $p$-subgroup of $G$.
+
+	(Equivalent statement?) All sylow $p$-subgroups are conjugate to each other.
+\end{theorem}
+\begin{proof}
+	Requires orbit-stabilizer theorem.
+\end{proof}
+\begin{theorem}[Sylow's Third Theorem]\label{thm:S3}
+	Let $G$ be a finite group with $p$ a prime number such that $\left| G \right| =p^km$ with $p\nmid m$. In other words, $p^k$ is the largest power of $p$ that divides $\left| G \right| $, so the Sylow $p$-subgroups have order $p^k$. Then the number of Sylow $p$-subgroups of $G$ is equal to $1\mod{p}$ and divides $m$. Furthermore, all Sylow $p$-subgroups are conjugate.
+\end{theorem}
+\begin{proof}
+	Also requires orbit-stabilizer theorem.
+\end{proof}
+\begin{corollary}
+	A Sylow $p$-subgroup is normal if and only if it's the only Sylow $p$-subgroup.
+\end{corollary}
+\begin{proof}
+	Let $K$ be a Sylow $p$-subgroup of $G$. If $K\triangleleft G$, then $gKg^{-1}=K$ for all $g\in G$, so by Sylow's 3rd theorem, $K$ is the only Sylow $p$-subgroup. If $K$ is the only Sylow $p$-subgroup of $G$, then $gKg^{-1}=K$ for all $g\in G$ by Sylow's theorem, and $K\triangleleft G$.
+\end{proof}
+\begin{notation}
+	Let $n_p$ be the number of Sylow $p$-subgroups of $G$.
+\end{notation}
+\begin{theorem}[LOL WTF]\label{thm:JHS}
+	Every group of order 45 is abelian.
+\end{theorem}
+\begin{proof}
+	Let $G$ be a group with $\left| G \right| =45$. Notice $45=3^2\cdot 5$. Thus,  $3|45$. Let $n_3$ be the number of sylow $3$-subgroups of $G$. By Sylow's theorem, $n_3|5$ and $n_3\equiv 1\mod{3}$. Therefore, $n_3=1$. Let $n_5$ be the number of sylow $5$-subgroups of $G$. Then $n_5|9$ and $5\equiv 1\mod{5}$. Therefore, $n_5=1$.
+
+	Let $P$ be the Sylow $3 $-subgroup, and let $Q$ be the Sylow 5-subgroup of $G$. Then $P,Q\triangleleft G$. Therefore, $PQ=QP$, and $PQ$ is a subgroup of $G$, and $P,Q\leq PQ$. By Lagrange's theorem, $\left| P \right| $ and $\left| Q \right| $ divide $\left| PQ \right| $. Since $\left| P \right| =9$ and $\left| Q \right| =5$, we know $9$ and $5$ divide $\left| PQ \right| \leq 45$. Therefore, $\left| PQ \right| =45$, and $PQ=G$. Therefore, $G\cong P\times Q$.
+
+	Notice $\left| P \right| =3^2$, so $P$ is abelian by the class equation and the fundamental theorem of finite abelian groups. Notice $\left| Q \right| =5$, so $Q$ is cyclic and abelian. Therefore, $P\times Q$ is abelian, and $G$ is abelian by isomorphism.
+\end{proof}
+\begin{theorem}\label{thm:aksh}
+	Every group of order $pq$ for $p,q$ prime numbers, $p<q$, and $q\not\equiv 1\mod{p}$ is cyclic.
+\end{theorem}
+\begin{proof}
+	EFY
+\end{proof}
+\begin{theorem}\label{thm:hsgdbjs}
+	The only group of order 255 is $\mathbb{Z}_{255}$.
+\end{theorem}
+\begin{proof}
+	use $Aut$ and normalizers.
+\end{proof}
+\begin{remark}
+	Keith Conrad expository notes are good to read.
+\end{remark}
+\chapter{Rings}

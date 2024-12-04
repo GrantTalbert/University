@@ -1,0 +1,66 @@
+\lecture{15}{Fri 08 Nov 2024 12:26}{More Heat Equation}
+However, how do we know some arbitrary $u_0(x)$ can be expanded in terms of $\sin x$ and $\cos x$ for all functions $u_0$? Note that
+\[
+	\int_{0}^{\pi } \sin ^2(nx) \,\mathrm{d} x=\frac{\pi }{2}
+.\]
+We will regard this infinite sum as a limit of partial sums in increasing terms. Even with small numbers of terms, we get extremely good approximations to the original function. This even works with piecewise functions, you just end up breaking up the integral into multiple pieces. You need much more terms to approximate it well, but it does really well. In the limit to infinity, although the fourier series converges to the function, the maximum error itself remains nonzero in the limit somehow.
+
+Now consider the same problem, but with new boundary conditions. Suppose the left end $x=0$ is submerged in ice water, but the right is insulated such that no heat goes through it (flux 0). Fourier's law says the flux of head is proportional to the rate of change in the temperature:
+\[
+	\Phi(x,t) \propto \frac{\partial u}{\partial x} ,\qquad \Phi (x,t)=-\lambda t \frac{\partial u}{\partial x} 
+.\]
+Thus we have
+\[
+	\frac{\partial u}{\partial t} =\frac{\partial ^2u}{\partial x^2} ,\quad u(x,0)=u_(x),\quad u(0,t)=0,\quad \Phi (L,t)=0\implies \frac{\partial u}{\partial x} =0
+.\]
+We have
+\[
+	\frac{\mathrm{d}^2\phi  }{\mathrm{d}x^2} =\lambda \phi (x),\quad \phi (0)=0,\quad \phi '(L)=0
+.\]
+Note that, $\lambda <0$ is still real, so define $\lambda =-\omega ^2$.
+\[
+	\frac{\mathrm{d}^2\phi }{\mathrm{d}x^2} =-\omega ^2\phi (x)
+.\]
+This has the general solution
+\[
+	\phi (x)=A\cos (\omega t)+B\sin (\omega t)
+.\]
+We now need to account for our boundary conditions. $\phi (0)=0$ implies the cosine term drops out. Thus,
+\[
+	\phi (x)=B\sin (\omega t)\implies \phi '(x)=B\omega \cos (\omega t)
+.\]
+Plugging in our boundary condition $\phi '(L)=0$, we have
+\[
+	B\omega \cos (\omega L)=0
+.\]
+Thus, either $\omega =0$ or $\cos \omega L=0$, implying. $\omega L = \frac{(2n+1)\pi }{2}$. However, recall that $\omega =0$ implies $\phi (x)=B\sin (\omega t)=0$, so we cannot have $\omega =0$. Therefore,
+\[
+	\omega L=\frac{(2n+1)\pi }{2}\implies \omega =\frac{(2n+1)\pi  }{2L}
+.\]
+We then have the solutions
+\[
+	u_n(x,t)=e^{-\left( \frac{(2n+1)\omega }{2L} \right) ^2t}B_n\sin \left( \frac{(2n+1)\pi }{2L}x \right)
+.\]
+Call
+\[
+	\lambda _n = -\left( \frac{(2n+1)\pi }{L} \right) ^2,\qquad \phi _n(x)=\sin \left( \frac{(2n+1)\pi }{2L}x \right) 
+.\]
+We are chooseing $B_n=1$ here, but the conventional choice is $1 /\ln (2L)$. Explanation left as an exercise. Also left as an exercise that
+\[
+	\left<\phi_n,\phi _m \right> =0,\quad n\neq m
+.\]
+Now we have
+\[
+	u(x,t)=\sum_{n=1}^{\infty} B_n \exp \left( -\left( \frac{(2n+1)\pi }{2L} \right) ^2 t\right) \sin \left( \frac{(2n+1)\pi }{2L}x \right) 
+.\]
+Furthermore,
+\[
+	B_n = \frac{\int_{0}^{L} u_0(x)\phi _n(x) \,\mathrm{d} x}{\int_{0}^{L} \left( \phi _n(x) \right) ^2 \,\mathrm{d} x}
+.\]
+Proof left as an exercise.
+\chapter{Nonlinear Systems}
+Consider the Van der Pol equation:
+\begin{align*}
+	\frac{\mathrm{d}x}{\mathrm{d}t} &=y\\
+	\frac{\mathrm{d}y}{\mathrm{d}t} &=-x+y-x^2
+.\end{align*}

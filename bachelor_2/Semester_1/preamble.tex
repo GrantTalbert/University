@@ -46,6 +46,8 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\renewcommand{\mod}[1]{\;(\text{mod}\;#1)}
+\DeclareMathOperator{\Tr}{Tr}
 
 %theorems
 \usepackage{thmtools}
@@ -157,7 +159,7 @@
       frametitle={
         \tikz[baseline=(current bounding box.east),outer sep=0pt]
         \node[anchor=east,rectangle,font=\bfseries,fill=white,draw,thick]{\strut Example};}}
-  \mdfsetup{innertopmargin=0pt,linewidth=1pt,topline=true,bottomline=true,leftline=false,rightline=false,nobreak,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
+  \mdfsetup{innertopmargin=0pt,linewidth=1pt,topline=true,bottomline=true,leftline=false,rightline=false,frametitleaboveskip=\dimexpr-13pt\relax\strutbox}
 \begin{mdframed}[]}{\end{mdframed}}
 
 % As Previously Seen
@@ -182,7 +184,7 @@
 \begin{mdframed}[]}{\end{mdframed}}
 
 %theorem styles
-\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={linewidth=1pt,   bottomline=false, topline=false, rightline=false}, qed=\(\blacksquare\)]{proofline}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={linewidth=1pt,   bottomline=false, topline=false, rightline=false, innerrightmargin=0pt}, qed=\(\blacksquare\)]{proofline}
 \declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={linewidth=1pt,   bottomline=false, topline=false, rightline=false}, qed=\qedsymbol]{egline}
 
 \declaretheorem[numbered=no, name=Notation]{notation}
@@ -252,5 +254,7 @@
 	\hfill{\small\textsf{#2}}\par
 }
 \makeatletter
+
+\usepackage{pgfplots}
 
 \author{Grant Talbert}

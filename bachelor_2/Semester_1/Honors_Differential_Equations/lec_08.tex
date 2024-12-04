@@ -1,0 +1,61 @@
+\lecture{8}{Wed 16 Oct 2024 12:20}{Unsure}
+
+We can give an example of this. Let
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} = \begin{bmatrix} -1&1 \\ -1&0 \end{bmatrix} \mathbf{Y},\qquad \mathbf{Y}(0)=\begin{bmatrix} 1 \\ 1 \end{bmatrix} 
+.\]
+We have
+\[
+	\det \begin{bmatrix} -1-\lambda &1 \\ -1&-\lambda  \end{bmatrix} =\lambda ^2+\lambda +1 =0
+.\]
+It follows that
+\[
+	\lambda= \frac{-1\pm \sqrt{1-4} }{2}=-\frac{1}{2}\pm \frac{i\sqrt{3} }{2}
+.\]
+We now have complex-valued eigenvalues.
+\[
+	\begin{bmatrix} -1&1 \\ -1&0 \end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} =\lambda_+ = \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} 
+.\]
+It will follow that
+\[
+	\mathbf{v}=\begin{bmatrix} -\lambda _+ \\ 1 \end{bmatrix} 
+.\]
+We then have
+\[
+	\mathbf{Y}=e^{\lambda _+t}\mathbf{v}=e^{-\frac{t}{2}}e^{it\sqrt{3}/2} \mathbf{v}
+.\]
+By Euler's formula,
+\[
+	\exp \left(- \frac{t}{2} \right) \exp \left( \frac{i\sqrt{3} }{2}t \right) =\exp \left( -\frac{t}{2} \right) \left( \cos \left( \frac{\sqrt{3} }{2}t \right) + i\sin \left( \frac{\sqrt{3} }{2}t \right) \right) 
+.\]
+Multiplying through by $\mathbf{v}$, we have
+\[
+	=\exp \left( -\frac{t}{2} \right) \left( \begin{bmatrix} \frac{1}{2}\cos \left( \frac{\sqrt{3} }{2}t \right) + \frac{\sqrt{3}  }{2}\sin \left( \frac{\sqrt{3} }{2}t \right)  \\ \cos \left( \frac{\sqrt{3} }{2}t \right)  \end{bmatrix} + i \begin{bmatrix} \frac{1}{2}\sin  \left( \frac{\sqrt{3} }{2}t \right) -\frac{\sqrt{3} }{2}\cos \left( \frac{\sqrt{3} }{2}t \right)  \\ \sin \left( \frac{\sqrt{3} }{2}t \right)  \end{bmatrix}  \right) \eqqcolon \mathbf{Y}^{(+)}
+.\]
+We will have $\mathbf{Y}^{(-)}=\left( \mathbf{Y}^{(+)} \right) ^*$, and thus by linearity, $\mathbf{Y}^{(+)}+\mathbf{Y}^{(-)}$ solves the equation, and
+\[
+	\mathbf{Y}^{(+)}+\mathbf{Y}^{(-)}=\Re \mathbf{Y} = \begin{bmatrix} \frac{1}{2}\cos \left( \frac{\sqrt{3} }{2}t \right) + \frac{\sqrt{3}  }{2}\sin \left( \frac{\sqrt{3} }{2}t \right)  \\ \cos \left( \frac{\sqrt{3} }{2}t \right)  \end{bmatrix}
+.\]
+Additionally, by linearity, $\mathbf{Y}^{(-)}-\mathbf{Y}^{(+)}$ gives us the solution
+\[
+	\Im \mathbf{Y} = \begin{bmatrix} \frac{1}{2}\sin \left( \frac{\sqrt{3} }{2}t \right) -\frac{\sqrt{3}  }{2}\cos \left( \frac{\sqrt{3} }{2}t \right)  \\ \sin \left( \frac{\sqrt{3} }{2}t \right)  \end{bmatrix} 
+.\]
+This defines a basis for the solution space over $\mathbb{R}$, which is a subspace of the original solutions space over $\mathbb{C}$, since $\mathbb{R}$ is a subfield of $\mathbb{C}$.
+
+This gives rise to a solution that spirals downwards towards the equilibrium solution $(0,0)$.
+
+\begin{definition}\label{dfn:idk}
+	If $A$ has a pair of complex conjugate eigenvalues $\lambda =\lambda_r\pm i\lambda_I$, then
+	\begin{itemize}
+		\item If $\lambda _r<0$, then we say we have a spiral sink.
+		\item If $\lambda _r>0$, then we say we have a spiral source.
+		\item If $\lambda _r=0$, then we say we have a center.
+	\end{itemize}
+	In all cases, the solutoin oscillates with an angular frequency $\lambda _I$.
+\end{definition}
+
+Finally, consider the case of $\lambda_{-}=\lambda _+$. We could have either two eigenvectors or one eigenvector. For example,
+\[
+	\begin{bmatrix} 271 \\ 0&2 \end{bmatrix} 
+\]
+has only $\ket{0}$ as an eigenvector

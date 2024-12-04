@@ -1,0 +1,18 @@
+\lecture{13}{Mon 04 Nov 2024 12:57}{Infinite Dimensional Systems}
+We are going to look at partial differential equations herein. These equations often behave precisely like ODEs, but in infinite dimensions.
+
+Suppose we have a wire that we are heating. We want to find the heat of the wire at some point along its length as a function of time. We then have a function $u$ describing the heat, which is a function of both time $t$ and position along the wire $x$. So $u : \mathbb{R}^2 \to \mathbb{R}$ is the map $(t,x)\mapsto u$. We now have to use the partial derivatives of $u$. We claim
+\[
+	\frac{\partial u}{\partial t} =\kappa \frac{\partial ^2u}{\partial x^2} 
+,\]
+for $\kappa $ some constant. Our initial condition will be some $u_0=u(0,0)$. Additionally, we also need to know boundary conditions. Suppose the wire has length $\ell $ and both ends of the wire are in an ice water bath. Our bounadry conditions are then $u(0,t)=u(\ell ,t)=0$.
+
+We can look for a straight line solution. That is, we want $u(x,t)=e^{\lambda t}v(x)$. FOr simplicity, let $\kappa =1$. If we plug in, we have
+\[
+	\lambda e^{\lambda t}v(x)=e^{\lambda t} \frac{\mathrm{d}^2v}{\mathrm{d}x^2} 
+.\]
+Canceling the exponentials, we have
+\[
+	\lambda v(x)=\frac{\mathrm{d}^2v}{\mathrm{d}x^2} 
+.\]
+We now have reduced it to a problem we already know quite a lot about, but instead of initial conditions, we have \textbf{boundary} \textbf{conditions}. So $v(0)=v(\ell )=0$.

@@ -1,0 +1,114 @@
+\lecture{9}{Fri 18 Oct 2024 12:27}{Wrapping up}
+
+Everywhere on the Trace-Determinant plane, there are two eigenvalues and two linearly independent eigenvectors if
+ \[
+	\det A \neq \frac{1}{4}\left( \operatorname{Tr }A \right) ^2
+.\]
+If we are on that parabola, however, there could be only one eigenvalue and eigenvector.For example,
+\[
+	\begin{bmatrix} 2&1 \\ 0&2 \end{bmatrix} 
+\]
+has only $\ket{0}$ as an eigenvector, and only $\lambda =2$ as an eigenvalue. We have at least the solution $\exp (\lambda t)\ket{0}$, but this is not a general solution.
+
+Since $y=\exp (2t)y_0$, since the second equation is independent of $x$, we can plug this in and get
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =2x+y_0\exp(2t)
+.\]
+It follows that $x=x_0 \exp (2t)+y_0t\exp (2t)$. Thus,
+\[
+	\mathbf{Y}(t)=\begin{bmatrix} x_0 e^{2t}+y_0te ^{2t} \\ y_0e^{2t} \end{bmatrix} 
+.\]
+Notice this is equivalent to
+\[
+	x_0 e^{2t}\begin{bmatrix} 1 \\ 0 \end{bmatrix} +y_0 \begin{bmatrix} t e^{2t} \\ e^{2t} \end{bmatrix} 
+.\]
+
+This suggests that if $A$ has only one eigenvalue $\lambda $ and one eigenvector $\mathbf{v}$, then the ``second solution'' should be proportional to $t e^{\lambda t}$.
+
+Suppose $\lambda $ is the only eigenvalue of $A$ and $\mathbf{v}$ is the correspoding eigenvector. We ``guess'' that there should be a solution of the form
+\[
+	\mathbf{Y}(t)=e^{\lambda t}(t\mathbf{v}+\mathbf{w})
+.\]
+It remains to be shown what $\mathbf{w}$ is. We have
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\lambda e^{\lambda t}(t \mathbf{v}+\mathbf{w})+e^{\lambda t}\mathbf{v}=e^{\lambda t}A(t \mathbf{v}+\mathbf{w})
+.\]
+We cancel the exponential, and have
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\lambda (t \mathbf{v}+\mathbf{w})+\mathbf{v}=A(t \mathbf{v}+\mathbf{w})
+.\]
+Distributing, we have
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\lambda t \mathbf{v}+\lambda  \mathbf{w}+\mathbf{v}=At \mathbf{v}+A \mathbf{w}
+.\]
+Since $\lambda  \mathbf{v}=A \mathbf{v}$, we cancel $t \lambda \mathbf{v}$ with $tA \mathbf{v}$, and have
+\[
+	\lambda \mathbf{w}+\mathbf{v}=A \mathbf{w}
+.\]
+Since $\mathbf{v}$ is known, this is a linear equation for $\mathbf{w}$. We claim this equation always has a solution.
+
+Since
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =ay \implies y=y_0 e^{at}
+,\]
+why not give
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =A \mathbf{Y}
+\]
+as
+\[
+	\mathbf{Y}(t) = e^{tA}\mathbf{Y}_0?
+\]
+Recall that
+\[
+	e^{tA}=\sum_{n=0}^{\infty} \frac{t^n}{n!}A^n
+.\]
+
+For example, consider the non-dampened harmonic oscillator
+\[
+	m \frac{\mathrm{d}^2x}{\mathrm{d}t^2} =-kx
+.\]
+If we let $v=\frac{\mathrm{d}x}{\mathrm{d}t} $, then
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \begin{bmatrix} x \\ v \end{bmatrix} =\begin{bmatrix} 0&1 \\ -\frac{k}{m}&0 \end{bmatrix} \begin{bmatrix} x \\ v \end{bmatrix} 
+.\]
+
+We know $A^0=I$, and $A^1=A$. We also know
+\[
+	A^2 = \begin{bmatrix} -\frac{k}{m}&0 \\ 0&-\frac{k}{m} \end{bmatrix} =-\frac{k}{m}I
+.\]
+Thus, we can compute $A^3=-\frac{k}{m}A$. Additionally, $A^4=\frac{k^2}{m^2}I$. In general,
+\[
+	A^n = \begin{cases}
+		\left( -\frac{k}{m} \right) ^{\frac{n}{2}}I,&n\in2\mathbb{Z}\\
+		\left( -\frac{k}{m} \right) ^{\frac{n-1}{2}}A,&n\notin 2\mathbb{Z}
+	\end{cases}
+.\]
+This can be proven easily with induction.
+
+Thus, we have
+\[
+	e^{tA}=\sum_{n=0}^{\infty} \frac{t^n}{n!}A^n = \sum_{\ell =0}^{\infty} \frac{t^{2\ell }}{(2\ell )!}A^{2\ell }+\sum_{\ell =0}^{\infty} \frac{t^{2\ell +1}}{(2\ell +1)!}A^{2\ell +1}= \left(\sum_{\ell =0}^{\infty} \frac{(-1)^{\ell }\left( t\sqrt{\frac{k}{m}}  \right) ^{2\ell }}{(2\ell )!}\right)I + \left( \sum_{\ell =0}^{\infty} \frac{(-1)^{\ell }\left( t\sqrt{\frac{k}{m}}  \right) ^{\ell +1}}{(2\ell +1)!} \right) A
+.\]
+\[
+	=\cos \left( t\sqrt{\frac{k}{m}}  \right) I+\sin \left(t\sqrt{\frac{k}{m}}  \right) A
+.\]
+Therefore,
+\[
+	e^{At}=\begin{bmatrix} \cos \left( t\sqrt{\frac{k}{m}}  \right) &\sin \left( t\sqrt{\frac{k}{m}}  \right)  \\ -\frac{k}{m}\sin \left( t\sqrt{\frac{k}{m}}  \right) &\cos \left( t\sqrt{\frac{k}{m}}  \right)  \end{bmatrix} 
+.\]
+This does, in fact, solve the differential equation.
+
+Note  that
+\[
+	\sum_{n=0}^{\infty} \frac{t^n}{n!}A^n=e^{tA}
+\]
+converges to a $2\times 2$ matrix for any value of any matrix $A\in M_2$. Additionally,
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( e^{tA} \right) =\frac{\mathrm{d}}{\mathrm{d}t} \sum_{n=0}^{\infty} \frac{t^n}{n!}A^n = \sum_{n=1}^{\infty} \frac{nt^{n-1}}{n!}A^n=\sum_{n=1}^{\infty} A\left( \frac{t^{n-1}A^{n-1}}{(n-1)!} \right) =Ae^{tA}=e^{tA}A
+.\]
+This implies
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( e^{tA} \right) =A\left( e^{tA} \right) 
+,\]
+and thus this solves the equation. NOTE THAT $e^{A}e^B \neq e^{A+B}$ in general.

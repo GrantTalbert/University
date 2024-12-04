@@ -1,0 +1,31 @@
+\lecture{18}{Wed 13 Nov 2024 12:22}{More Nonlinear Systems}
+Recall our exploration of equilibria with taylor series. We will define some notation. Recall that
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =f(x,y),\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =g(x,y)
+.\]
+Let
+\[
+	\mathbf{F}(x,y)=\begin{pmatrix}
+		f(x,y)\\
+		g(x,y)
+	\end{pmatrix} 
+.\]
+Then
+\[
+	F(\mathbf{Y})=F(\mathbf{Y}^*)+J(\mathbf{Y}^*)(\mathbf{Y}-\mathbf{Y}^*)+\cdots
+.\]
+If we set $\overline{\mathbf{Y}}=\mathbf{Y}-\mathbf{Y}^*$, then at an equilibrium point we have
+\[
+\frac{\mathrm{d}\overline{\mathbf{Y}}}{\mathrm{d}t} = J(\mathbf{Y}^*)\overline{\mathbf{Y}} +\cdots
+.\]
+This is a linear constant coefficient equation. Usually this linearization of a vector field exibits the same behavior near an equilibrium point as the actual vector field, but there are cases where it does not. For example, consider the system
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =y-x\left( x^2+y^2 \right) ,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =-x-y\left( x^2+y^2 \right) 
+.\]
+The only equilibrium point is $(0,0)$, and the only linear terms are
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =y,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =-x
+.\]
+This produces a center at this equilibrium point. However, our original nonlinear system does not have a center. If this were the case, then the distance function from the origin would be contant, but it is not. Note that this system has $\Tr A=0$.
+
+Fact: Let $\mathbf{Y}^*$ be an equilibrium point. If $\Tr (J(Y^*))\neq 0$ and $\det (J(\mathbf{Y}^*))\neq 0$, then the linearization of the system at the equilibrium point captures the behavior of nearby points of the full system.

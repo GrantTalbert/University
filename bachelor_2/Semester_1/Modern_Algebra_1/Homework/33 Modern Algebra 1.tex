@@ -1,0 +1,174 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{11/22/24}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+(b) Let $\phi : G \to H$ be a group homomorphism. We wish to show $\phi (g^n)=\phi (g)^n$ for all $n\in\mathbb{Z}$. First, let $n=0$. Note that $\phi(0)=\phi(e_G)$. By properties of homomorphisms, $\phi (e_G)=e_H$. Furthermore, note that since $\phi(g)\in H$, we have $\phi (g)^0=e_H$. Therefore, $\phi (g^0)=\phi (g)^0$.
+
+Now suppose that $\phi(g^n)=\phi(g)^n$ for some $n\in\mathbb{N}$. It follows that
+\[
+	\phi (g^{n+1})=\phi (g^ng)=\phi (g^n)\phi(g)
+.\]
+By our inductive hypothesis, $\phi (g^n)=\phi (g)^n$. Therefore,
+\[
+	\phi (g^n)\phi (g)=\phi (g)^n\phi (g)=\phi (g)^{n+1}
+.\]
+Therefore, the statement holds for $n+1$. We now have $\phi (g^n)=\phi (g)^n$ for all $n\in\mathbb{N}$.
+
+We must now generalize the proof to $n\in\mathbb{Z}$ by considering negative $n$. Let $n\in\mathbb{N}$. By definition,
+\[
+	g^{-n}=\left( g^{-1} \right) ^n
+.\]
+Since we took $g\in G$ to be an arbitrary element, we have
+\[
+	\phi (g^{-n})=\phi \left( (g^{-1})^n \right) =\phi \left( g^{-1} \right) ^n
+.\]
+Furthermore, note that by properties of homomorphisms, $\phi (g^{-1})=\phi (g)^{-1}$. We then have
+\[
+	\phi \left( g^{-1} \right) ^n=\left( \phi (g)^{-1} \right) ^n
+.\]
+By definition, this equals $\phi (g)^{-n}$. Therefore, for all $n\in\mathbb{Z}$, $\phi (g^n)=\phi (g)^n$.
+
+
+After rereading this I realized we actually haven't proven that $\phi (g^{-1})=\phi (g)^{-1}$, but the proof is simple.
+\[
+	e=\phi (gg^{-1})=\phi (g)\phi (g^{-1})
+.\]
+Therefore, $\phi (g)^{-1}=\phi (g^{-1})$.
+\section*{Problem 2}
+Let $G$ be a group with order $99$. Notice that $99=11\cdot 3^2$. Let $n_3$ be the number of Sylow $3$-subgroups of $G$. By Sylow's theorem, $n_3|11$ and $n_3\equiv 1\mod{3}$. Since divisors of $11$ are only $1$ and $11$, and since $11\equiv 2\mod{3}$, we know $n_3=1$. Now let $n_{11}$ be the number of Sylow $11$-subgroups of $G$. By Sylow's theorem, $n_{11}|9$ and $n_{11}\equiv 1\mod{11}$. The only positive integer $n<9$ such that $n\equiv 1\mod{11}$ is $1$, so $n_{11}=1$.
+
+Let $P$ be the Sylow $3$-subgroup with order $9$, and let $Q$ be the Sylow $11$-subgroup with order $11$. By Sylow's theorem, $P,Q\triangleleft G$ since they are the only Sylow $3$- and $11$-subgroups, respectively. Since they are normal,
+\[
+	PQ=\bigcup_{p\in P}pQ=\bigcup_{p\in P}Qp=QP
+.\]
+Therefore, $PQ$ is a subgroup of $G$. Moreover, $P,Q\leq PQ$, since $e\in P,Q $. By Lagrange's theorem, $\left| P \right| ,\left| Q \right| $ divide $\left| PQ \right| $, and since $PQ\leq G$, it follows that $\left| PQ \right| \leq \left| G \right| =99$. Note that $\left| P \right| =3^2$ and $\left| Q \right| =11$. Therefore, $9,11$ divide $\left| PQ \right| $. We have
+\[
+	\operatorname{lcm}(9,11) =\frac{9\cdot 11}{\operatorname{gcd}(9,11)}=\frac{99}{1}=99
+.\]
+Therefore, $\left| PQ \right| \geq 99$ and $\left| PQ \right| \leq 99$, and thus $PQ=G$. Therefore, $G\cong P\times Q$.
+
+Since $Q$ is order $11$ which is prime, $Q$ is cyclic, and thus abelian. Since $P$ is order $9$ which is the square of a prime, by a previous homework problem $P$ is abelian. We thus have $P\times Q$ is abelian, and $G$ is abelian by properties of isomorphisms.
+\section*{Problem 3}
+Let $p(x),q(x),r(x)\in R[x]$ such that $p,q,r$ have degrees $m,n,\ell $ and coefficients $a_i,b_i,c_i$, respectively.
+
+First, we show $R[x]$ is abelian under addition. By definition,
+\begin{align*}
+	p\left(x \right) +q(x)&=\sum_{i=0}^{\max \left\{ m,n \right\} } \left( a_i+b_i \right) x^i
+.\end{align*}
+Since $R$ is a ring, $a_i+b_i\in R$ for all $a_i,b_i\in R$. It follows that
+\[
+	\sum_{i=0}^{\max \left\{ m,n \right\} } \left( a_i+b_i \right) x^i=\sum_{i=0}^{\max \left\{ m,n \right\} } \left( b_i+a_i \right) x^i=q(x)+p(x)
+.\]
+
+Therefore, $R[x]$ is abelian. Moreover, note that $p(x)+q(x)$ is a polynomial with coefficients $(a_i+b_i)\in R$, and thus $p(x)+q(x)\in R[x]$.
+
+Now we show $R[x]$ is associative. Notice that
+\begin{align*}
+	\left( p(x)+q(x) \right) +r(x)&=\left(\sum_{i=0}^{\max \left\{ m,n \right\} } \left( a_i+b_i \right) x^i\right)+r(x)\\
+				      &=\sum_{i=0}^{\max \left\{ m,n,\ell  \right\}}\left( \left( a_i+b_i \right) +c_i\right)x^i
+.\end{align*}
+Since $R$ is a ring, addition of coefficients is associative. It follows that
+\begin{align*}
+	\sum_{i=0}^{\max \left\{ m,n,\ell  \right\}}\left( \left( a_i+b_i \right) +c_i\right)x^i&=\sum_{i=0}^{\max \left\{ m,n,\ell  \right\}} \left( a_i+\left( b_i+c_i \right)  \right) x^i\\
+												&=p(x)+\left( \sum_{i=0}^{\max \left\{ n,\ell  \right\} } \left( b_i+c_i \right) x^i \right) \\
+												&=p(x)+\left( q(x)+r(x) \right) 
+.\end{align*}
+Therefore, $R[x]$ is associative under addition. Notice that $0\in R[x]$. We have
+\[
+	p(x)+0=\sum_{i=0}^{\max \left\{ m,0 \right\} } \left( a_i+0 \right) x^i=\sum_{i=0}^{m} a_ix^i=p(x)
+.\]
+Therefore, there exists an additive identity. Finally, let $-p(x)\in R[x]$ have coefficients $-a_i$. It follows that
+\[
+	p(x)-p(x)=\sum_{i=0}^{\max \left\{ m,m \right\} } \left( a_i-a_i \right) x^i=\sum_{i=0}^{m} 0x^i=0
+.\]
+Therefore, $R[x]$ is an abelian group under addition.
+
+Now we show $R[x]$ is closed under multiplication. By definition,
+\[
+	p(x)q(x)=\sum_{i=0}^{m+n} \left(\sum_{j=0}^{i} a_jb_{i-j}\right)x^i
+.\]
+Notice that
+\[
+	\sum_{j=0}^{i} a_jb_{i-j}\in R
+\]
+for all $i,j$, since $R$ is closed under addition and multiplication. Therefore, the coefficients of this sum are all elements of $R$, and $p(x)q(x)\in R[x]$.
+
+Now we show that $R[x]$ is commutative. We have
+\[
+	p(x)q(x)=\sum_{i=0}^{m+n} \left( \sum_{j=0}^{i} a_jb_{i-j} \right) x^i
+.\]
+Notice that
+\[
+	\sum_{j=0}^{i} a_jb_{i-j}=a_0b_{i}+a_1b_{i-1}+\cdots+a_{i-1}b_1+a_ib_0
+.\]
+Since addition and multiplication are commutative over $R$, this equals
+\[
+	=a_ib_0+a_{i-1}b_1+\cdots+a_0b_{i}=\sum_{j=0}^{i} a_{i-j}b_j=\sum_{j=0}^{i} b_ja_{i-j}	
+.\]
+Therefore,
+\[
+	p(x)q(x)=\sum_{i=0}^{m+n} \left( \sum_{j=0}^{i} a_jb_{i-j} \right) x^i=\sum_{i=0}^{m+n} \left(\sum_{j=0}^{i} b_ja_{i-j}\right)x^i=q(x)p\left( x \right) 
+.\]
+Therefore, $R[x]$ is commutative over multiplication. Now we show associativity. We will use the following alternative definition of multiplication:
+\[
+	p(x)q(x)=\sum_{i=0}^{m} \sum_{j=0}^{n} a_ib_jx^{i+j}
+.\]
+We have
+\begin{align*}
+	p(x)\left( q(x)r(x) \right) &=p(x)\left( \sum_{i=0}^{n} \sum_{j=0}^{\ell } b_ic_jx^{i+j} \right) \\
+				    &=\left( \sum_{i=0}^{m} a_ix^i \right)\left( \sum_{i=0}^{n} \sum_{j=0}^{\ell } b_ic_jx^{i+j} \right)  \\
+				    &=\sum_{i=0}^{m} a_ix^i \sum_{j=0}^{n} \sum_{k=0}^{\ell } b_jc_kx^{j+k}\\
+				    &=\sum_{i=0}^{m} \sum_{j=0}^{n} \sum_{k=0}^{\ell } a_ib_jc_kx^{i+j+k}
+.\end{align*}
+Note that in this last step we apply associativity over $R$. Applying this property again, we have
+\begin{align*}
+	\sum_{i=0}^{m} \sum_{j=0}^{n} \sum_{k=0}^{\ell }\left( a_ib_j \right) c_kx^{i+j}x^k&=\sum_{i=0}^{m} \sum_{j=0}^{n}\left( a_ib_jx^{i+j}\right)\left( \sum_{k=0}^{\ell } c_kx^k \right) \\
+											   &=\sum_{i=0}^{m} \sum_{j=0}^{n} \left(a_ib_jx^{i+j}\right)r\left( x \right) \\
+											   &=\left( p(x)q(x) \right) r(x)
+.\end{align*}
+Therefore, $R[x]$ is associative under multiplication.
+
+Note that the polynomial $1\in R[x]$, where $1$ is the unity in $R$. Notice that
+\[
+	1p(x)=\sum_{k=0}^{m+0} \left( \sum_{l=0}^{k} 1_la_{k-l} \right)x^k =\sum_{k=0}^{m} a_kx^k=p(x)
+.\]
+Therefore, $1$ is a unity in $R[x]$. Finally, we show distributivity.
+\begin{align*}
+	p(x)\left( q(x)+r(x) \right) &=p(x)\left( \sum_{i=0}^{\max \left\{ n,\ell  \right\} } \left( b_i+c_i \right) x^i \right)\\
+				     &=\sum_{i=0}^{m} \sum_{j=0}^{\max \left\{ n,\ell  \right\} } a_i\left( b_j+c_j \right) x^{i+j}\\
+				     &=\sum_{i=0}^{m} \sum_{j=0}^{\max \left\{ n,\ell  \right\} } a_ib_jx^{i+j}+a_ic_jx^{i+j}\\
+				     &=\left( \sum_{i=0}^{m} \sum_{j=0}^{\max \left\{ n,\ell  \right\} } a_ib_jx^{i+j} \right) +\left( \sum_{i=0}^{m} \sum_{j=0}^{\max \left\{ n,\ell  \right\} } a_ic_jx^{i+j} \right) \\
+				     &=p(x)q(x)+p(x)r(x)
+.\end{align*}
+In the above proof, we recognized $b_i+c_i$ as the $i$th coefficient of the polynomial $q(x)+r(x)$, and then used the fact that $R$ was a ring to apply the distributive property. Therefore, $R$ is a commutative ring with unity.
+\section*{Problem 4}
+Let $R$ be a ring with $a\in R$ a unit. Since $R$ has a unit, it must have unity since the definition of an inverse requires an identity. Then by definition there exists $a^{-1}\in R$ such that $aa^{-1}=a^{-1}a=1$, where $1$ is the unity. Suppose that $ab=0$ for some $b\in R$. It follows that $a^{-1}ab=a^{-1}0$. By properties of rings,  $a^{-1}0=0$. Since $a$ is a unit, $a^{-1}ab=1b$, and since $1$ is the multiplicative identity, $1b=b$. Therefore, $b=0$. Therefore, $a$ is not a zero divisor.
+
+The converse is not true. Consider the ring $\mathbb{Z}$, which has unity and no zero divisors. However, $n$ has no multiplicative inverse in general, since $1 /n\notin \mathbb{Z}$ for $n\neq \pm1$.
+\section*{Problem 5}
+(a) Notice that $2+i\in S$. Since $\mathbb{C}$ is a ring and $S\subseteq \mathbb{C}$,\footnote{This statement is required to use associativity, commutativity, and distributivity.} it follows that
+\[
+	\left( 2+i \right) \left( 2+i \right) =3+4i
+.\]
+Notice that there exists no $n\in\mathbb{Z}$ such that $2n=3$. Therefore, $3+4i\notin S$, and $S$ is not a subring because it is not closed.
+
+\noindent(b) Notice that $p(x)=0\in S$, and thus $S\neq \varnothing$. We will now demonstrate closure under multiplication. Let $p(x),q(x)\in S$. It follows that $p(3)q(3)=0\cdot 0=0$. Therefore, $p(x)q(x)\in S$. Finally, let $p(x),q(x)\in R$. We must show $p(3)-q(3)\in R$. It follows that
+\[
+	p(3)-q(3)=0-0=0
+.\]
+Therefore, $p(3)-q(3)\in R$. By the subring test, $S$ is a subring of $\mathbb{Z}[x]$.
+
+\noindent(c) Obviously $S\neq \varnothing$. Let $a+bi,c+di\in S$. Since $\mathbb{H}$ is a ring and $S\subseteq \mathbb{H}$, it follows that
+ \[
+	 \left( a+bi \right) -\left( c+di \right) =\left( a-c \right) +bi-di=\left( a-c \right) +\left( b-d \right) i
+.\]
+Since $a0c,b-d\in\mathbb{R}$, we have $\left( a+bi \right) -\left( c+di \right) \in S$.  Now notice that
+\[
+	\left( a+bi \right) \left( c+di \right) =ac+adi+bci+-bd=\left( ac-bd \right) +\left( ad+bc \right) i
+.\]
+Since $ac-bd,ad+bc\in\mathbb{R}$, we have $\left( a+bi \right) \left( c+di \right) \in S$, and by the test for a subring, $S$ is a subring of $\mathbb{H}$.
+\end{document}

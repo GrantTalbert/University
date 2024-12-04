@@ -1,0 +1,130 @@
+\lecture{22}{Mon 25 Nov 2024 12:22}{Hamiltonian Systems}
+Suppose $m=1$ for simplicity. Then
+\[
+	\frac{\mathrm{d}^2x}{\mathrm{d}t^2} =-kx
+\]
+can be written as
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =p,\qquad \frac{\mathrm{d}p}{\mathrm{d}t} =-kx
+.\]
+Then
+\[
+	\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\begin{pmatrix}
+		0&1\\
+		-k&0
+	\end{pmatrix} \mathbf{Y}
+\]
+for $\mathbf{Y}=(x,p)$. Recall again that the kinetic energy $K=\frac{1}{2}m \left(\frac{\mathrm{d}x}{\mathrm{d}t}\right)^2 $. Substituting in $m=1$ and $v=p$, we have
+\[
+	K=\frac{1}{2}p^2
+.\]
+We also have the potential energy $V$. Recall again that for a force $\mathbf{F}$, the potential function $f$ has $\mathbf{F}=-\nabla f$. Given that $\mathbf{F}=\frac{1}{2}kx^2 \hati$, we have $V=\frac{1}{2}kx^2$. Then the total energy of the system, denoted as $H$ for hamiltonian, is
+\[
+	H(x,p)=K+V=\frac{1}{2}p^2+\frac{1}{2}kx^2
+.\]
+We can now write for our specific system that
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =\frac{\partial H}{\partial p} ,\qquad \frac{\partial p}{\partial t} =-\frac{\partial H}{\partial x} 
+.\]
+\begin{proposition}
+	Suppose that $(x(t),p(t))$ solves the hamiltonian system
+	\[
+		\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =\begin{pmatrix}
+			0&1\\
+			-k&0
+		\end{pmatrix} \mathbf{Y}
+	.\]
+	Then $H(x(t),p\left( t \right) )$ is constant.
+\end{proposition}
+\begin{proof}
+	By the chain rule,
+	\[
+		\frac{\mathrm{d}H}{\mathrm{d}t} =\frac{\partial H}{\partial x} \frac{\mathrm{d}x}{\mathrm{d}t} +\frac{\partial H}{\partial p} \frac{\mathrm{d}p}{\mathrm{d}t} 
+	.\]
+	Using our previous analysis, we have
+	\[
+		\frac{\mathrm{d}H}{\mathrm{d}t} =\frac{\partial H}{\partial x} \frac{\partial H}{\partial p} -\frac{\partial H}{\partial p} \frac{\partial H}{\partial x} =0
+	.\]
+\end{proof}
+We can now observe that for any system with a quantity $H(x,p)$ such that
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =\frac{\partial H}{\partial p} ,\qquad \frac{\mathrm{d}p}{\mathrm{d}t} =-\frac{\partial H}{\partial x} 
+,\]
+that $H$ will be constant along any solution.
+
+Consider the more interesting example of the equations of motion of a pendulum. Let the mass $m$ of the pendulum $m=1$, and let it be attached by a massless bar to a frictionless pivot. Instead of using a Newtonian approach, we will use a Hamiltonian approach to find the equations of motion. Let $\theta $ be the independent variable, which will be the angle made with the vertical.
+
+The kinetic energy is $K=\frac{1}{2}mv^2=\frac{1}{2}\left( \frac{\mathrm{d}x}{\mathrm{d}t}  \right) ^2$. Since the velocity is tangential, this is
+\[
+	K=\frac{1}{2}\left( L \frac{\mathrm{d}\theta }{\mathrm{d}t}  \right) ^2
+.\]
+Let $L=1$ for simplicity.
+
+The potential energy near the surface of the Earth of an object is $V=mgh$.  We can write $h=L-L\cos \theta =1-\cos \theta $. Let $g=1$. Then $V=1-\cos \theta $.
+
+Let $p=\frac{\mathrm{d}\theta }{\mathrm{d}t} $. The hamiltonian $H(\theta ,p)=K+V$ is
+\[
+	H(\theta ,p)=\frac{1}{2}p^2+\left( 1-\cos \theta  \right) 
+.\]
+We then have
+\[
+	\frac{\mathrm{d}\theta }{\mathrm{d}t} =\frac{\partial H}{\partial p} =p,\qquad \frac{\mathrm{d}p}{\mathrm{d}t} =-\frac{\partial H}{\partial \theta } =\sin \theta 
+.\]
+This is a nonlinear system of differential equations. Notice it only has equilibrium points on the $\theta $-axis, since we require $p=0$ and $\sin \theta =0$.
+
+Remark that since $\theta \in [-\pi ,\pi ]$ and $p\in\mathbb{R}$, this is really a cylindrical system. However, we are considering it as a plane and just fixing $\theta $ in this interval. This means we better have a periodic function on the plane.
+
+Now we want to classify the equilibrium points.
+\[
+	\mathbf{J}=\begin{pmatrix}
+		0&1\\
+		-\cos \theta &0
+	\end{pmatrix} 
+.\]
+At an equilibrium point, $-\cos \theta \in \left\{ -1,1 \right\} $. Therefore, we will have a center at the origin. Except in general, we cannot conclude the behavior for a center. At $\theta=\pi $, the eigenvalues are $\pm 1$, which is a saddle.
+
+However, for a Hamiltonian system, we can say a lot more. Consider a contour plot of $H$ in the $\theta p$-plane, which is the plot of all curves where $H$ is constant. Since $H$ is constant for all solutions, then we know that $H$ will remain on the same contour for every solution.
+ 
+Consider the curve $h=H(p,\theta )$ for $h$ small and positive? We have
+\[
+	\cos \theta =1-\frac{1}{2}\theta ^2+\frac{1}{4!}\theta ^4+\cdots
+.\]
+We then have
+\[
+h=	\frac{1}{2}p^2+\sum_{n=0}^{\infty} \frac{(-1)^nx^{2n}}{(2n)!}x^n=\frac{1}{2}p^2+\frac{1}{2}\theta ^2+\cdots
+.\]
+The contours satisfying this equation are small distortions of circles, since $h=\frac{1}{2}p^2+\frac{1}{2}\theta ^2$ is a circle. We can now confirm that there is a center at the origin.
+\begin{proposition}
+	If a given equilibrium point for a \textbf{hamiltonian} system is a center in its linearization, then it is a center.
+\end{proposition}
+
+This means that hamiltonian solutions result in an effective decrease in dimension. Solutions can only wander along individual contours of a hamiltonian.
+
+Now consider the hamiltonian at $\pi $. We have $H(0,\pi )=1-\cos \pi =2$. What does the contour look like here?
+
+We can rearrange to find
+\[
+	p^2=2\left( 1+\cos \theta  \right) 
+.\]
+We then have
+\[
+	p=\pm \sqrt{2+2\cos \theta } 
+.\]
+If $\theta $ is small, then $\cos \theta \approx 1-\frac{1}{2}\theta ^2$. We then have
+\[
+	p=\sqrt{2+2-\theta ^2} =\sqrt{4-\theta ^2} 
+.\]
+The curve then has a maximum of $2$, and it curves downwards to the two saddlepoints. The saddle's qualitative behavior comes up when $H>2$.
+
+One final remark for Hamiltonian systems is the following. If $\mathbf{x}$ is an equilibrium point of a hamiltonian system
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =\frac{\partial H}{\partial p} ,\qquad \frac{\mathrm{d}p}{\mathrm{d}t} =-\frac{\partial H}{\partial x} 
+,\]
+then the Jacobian is
+\[
+	\mathbf{J}=\begin{pmatrix}
+		\frac{\partial ^2H}{\partial x\partial p} (\mathbf{x})&\frac{\partial ^2H}{\partial p^2} (\mathbf{x})\\
+		-\frac{\partial ^2H}{\partial x^2} (\mathbf{x})&-\frac{\partial ^2H}{\partial x\partial p} (\mathbf{x})
+	\end{pmatrix} 
+.\]
+We then have $\Tr \mathbf{J}=0$, so we will have either a saddle or a center.

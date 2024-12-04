@@ -1,0 +1,51 @@
+\lecture{7}{Fri 11 Oct 2024 12:53}{Continuation of Eigens}
+Question: For complex eigenvalues, how do we find real-valued solutions?
+
+Let $\mathbf{v}_+$ be an eigenvector. We have $\mathbf{v}_+=\mathbf{u}+i \mathbf{w}$. We give $\lambda_+ = \alpha +i\beta $ and $\lambda _-=\lambda _+^*$. Thus, $\mathbf{v}_-=\mathbf{v}_+^*$. Then
+\[
+	\mathbf{Y}^{(+)}(t)=\exp (\lambda_+t) \mathbf{v}= e^{\alpha t}e^{i\beta t}\left( \mathbf{u}+i \mathbf{w} \right) 
+.\]
+By euler's formula,
+\[
+	=e^{\alpha t}\left( \cos (\beta t)+i\sin (\beta t) \right) (\mathbf{u}+i \mathbf{w})
+\]
+\[
+	=e^{\alpha t}\left( \cos (\beta t) \mathbf{u}+\cos (\beta t) i \mathbf{w}+i \sin (\beta t) \mathbf{u}+i \sin (\beta t)i \mathbf{w} \right) =e^{\alpha t}\left( \cos (\beta t) \mathbf{u}-\sin (\beta t) \mathbf{w}+i \left( \cos (\beta t) \mathbf{w}+\sin (\beta t)\mathbf{u} \right)  \right) 
+\]
+\[
+	=e^{\alpha t}\left( \cos (\beta t)\mathbf{u}-\sin (\beta t)\mathbf{w} \right) +i e^{\alpha t}\left( \cos (\beta t) \mathbf{w}+\sin (\beta t)\mathbf{u} \right) 
+.\]
+Question: For complex eigenvalues, how do we find real-valued solutions?
+
+Let $\mathbf{v}_+$ be an eigenvector. We have $\mathbf{v}_+=\mathbf{u}+i \mathbf{w}$. We give $\lambda_+ = \alpha +i\beta $ and $\lambda _-=\lambda _+^*$. Thus, $\mathbf{v}_-=\mathbf{v}_+^*$. Then
+\[
+	\mathbf{Y}^{(+)}(t)=\exp (\lambda_+t) \mathbf{v}= e^{\alpha t}e^{i\beta t}\left( \mathbf{u}+i \mathbf{w} \right) 
+.\]
+By euler's formula,
+\[
+	=e^{\alpha t}\left( \cos (\beta t)+i\sin (\beta t) \right) (\mathbf{u}+i \mathbf{w})
+\]
+\[
+	=e^{\alpha t}\left( \cos (\beta t) \mathbf{u}+\cos (\beta t) i \mathbf{w}+i \sin (\beta t) \mathbf{u}+i \sin (\beta t)i \mathbf{w} \right) =e^{\alpha t}\left( \cos (\beta t) \mathbf{u}-\sin (\beta t) \mathbf{w}+i \left( \cos (\beta t) \mathbf{w}+\sin (\beta t)\mathbf{u} \right)  \right) 
+\]
+\[
+	=e^{\alpha t}\left( \cos (\beta t)\mathbf{u}-\sin (\beta t)\mathbf{w} \right) +i e^{\alpha t}\left( \cos (\beta t) \mathbf{w}+\sin (\beta t)\mathbf{u} \right) 
+.\]
+We have $\mathbf{Y}^{(-)}=\mathbf{Y}^{(+)*}$ as well. Therefore, $\mathbf{Y}^{(+)}+\mathbf{Y}^{(-)}=\Re \left( \mathbf{Y}^{(+)} \right) =\Re\left( \mathbf{Y}^{(-)} \right) \in\mathbb{R}$. Since this is a linear combination of basis solutions, then we have the solution
+\[
+	\mathbf{Y}^{(1)}=e^{\alpha t}\left( \cos (\beta t)\mathbf{u}-\sin (\beta t)\mathbf{w} \right) 
+.\]
+Additionally, if we take $\mathbf{Y}^{(+)}-\mathbf{Y}^{(-)}=2i \Im \left( \mathbf{Y} \right) $. Since $2i$ is a scalar, we have $\Im (\mathbf{Y})$ also a solution:
+\[
+	\mathbf{Y}^{(2)}=e^{\alpha t}\left( \cos (\beta t)\mathbf{w}+\sin (\beta t)\mathbf{u} \right) 
+.\]
+These solutions are linearly independent, so we have a new basis over $\mathbb{R}$. This also implies our solution space is a subspace of the overall space.
+We have $\mathbf{Y}^{(-)}=\mathbf{Y}^{(+)*}$ as well. Therefore, $\mathbf{Y}^{(+)}+\mathbf{Y}^{(-)}=\Re \left( \mathbf{Y}^{(+)} \right) =\Re\left( \mathbf{Y}^{(-)} \right) \in\mathbb{R}$. Since this is a linear combination of basis solutions, then we have the solution
+\[
+	\mathbf{Y}^{(1)}=e^{\alpha t}\left( \cos (\beta t)\mathbf{u}-\sin (\beta t)\mathbf{w} \right) 
+.\]
+Additionally, if we take $\mathbf{Y}^{(+)}-\mathbf{Y}^{(-)}=2i \Im \left( \mathbf{Y} \right) $. Since $2i$ is a scalar, we have $\Im (\mathbf{Y})$ also a solution:
+\[
+	\mathbf{Y}^{(2)}=e^{\alpha t}\left( \cos (\beta t)\mathbf{w}+\sin (\beta t)\mathbf{u} \right) 
+.\]
+These solutions are linearly independent, so we have a new basis over $\mathbb{R}$. This also implies our solution space is a subspace of the overall space.

@@ -1,0 +1,63 @@
+\lecture{20}{Mon 18 Nov 2024 12:23}{Poincare-Bendixson}
+Consider the system
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}t} =x(2-x-y)
+.\]
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =y(y-x^2)
+.\]
+Then we have two $x$-nullclines, $x=0$ and $y=2-x$. Notice that the vector field is always pointing up along $x=0$. However, notice that in the first quadrant, the direction along the second nullcline depends on whether $y-x^2$ is positive or negative. Since $(1,1)$ is on this line and the nullcline, we have upwards to the left of this point and downwards to the right.
+
+Our $y$-nullclines are $y=0$ and $y=x^2$. This second $y$-nullcline explains the behavior seen in the previous part. Notice that the vector field points right along the first until $x=2$, then it points left. Furthermore, the vector field points right along the quadratic nullcline, until it hits $\left( 1,1 \right) $, when it turns left.
+
+From this analysis, we know the origin is a source, the equilibrium point at $(2,0)$ is a sink, and the center point $(1,1)$ is a saddle.
+
+One thing we will note is that the linearization at $\mathbf{0}$ would not have revealedthis information, but nullcline analysis was able to reveal it.
+
+Somehow the hairy ball theorem is related to the index of equilibrium points.
+\begin{proof}
+	(Proof of Theorem 4.1 Poincare-Bendixson). Recall the Jordan Curve theorem: let there be a simple closed curve $C$ in a plane, where $C$ is homeomorphic to $\mathbb{S}^1$. Then the loop divides the plane into an interior and an exterior region.
+
+	Given a solution $\mathbf{Y}$ of a system of differential equations 
+	\[
+		\frac{\mathrm{d}x}{\mathrm{d}t} =f(x,y),\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =g(x,y)
+	,\]
+	we say a point $\mathbf{x}$ is in the set $\omega^+(\mathbf{Y}(t))$ if there exists an infinite sequence $\left\{ t_n \right\}_{n=1}^\infty$, with $t_n\to \infty$ as $n\to \infty$, and
+	\[
+		\lim_{n \to \infty} \mathbf{Y}(t_n)=\mathbf{x}
+	.\]
+	We can think of this as the set of limit points of the solution $\mathbf{Y}(t)$. We call this the omega limit set. An equivalent definition of the $\omega^+(\mathbf{Y}(t))$ set is the following.
+	\[
+		\omega^+(\mathbf{Y}(t))=\bigcap_{s\geq 0} \overline{\left\{ \mathbf{Y}(t) \mid t>s \right\}  }
+	.\]
+	Note that the line is the closure of this set. Note that this contains the limit points but also the previous points, so taking $s$ bigger removes those points.
+
+	Another fact is that if $\mathbf{Y}(t)$ remains in a bounded set for all $t\geq 0$, then $\omega ^+(\mathbf{Y}(t))$ is nonempty.
+
+	The next claim we will prove.
+	\begin{notation}
+		Given a point $\mathbf{x}$, define $\phi ^t(\mathbf{x})$ to be the solution of the system with initial conditions $\mathbf{x}$ at time $t$. This function is well-defined given that Picard's theorem holds.
+	\end{notation}
+
+	We claim that if $\mathbf{x}\in \omega ^+(\mathbf{Y}(t))$, then $\phi ^t(\mathbf{x})\in \omega ^+(\mathbf{Y}(t))$.
+
+	Suppose $\phi^{t_1}\left( \phi ^{t_2}(\mathbf{x}) \right) $. Remark that since $\phi ^{t}(\mathbf{x})$ outputs a POINT on the solution evaluated at $t$, this makes sense to talk about. By Picard's theorem, $\phi ^{t_1}\left( \phi ^{t_2}\left( \mathbf{x} \right)  \right) =\phi ^{t_1+t_2}\left( \mathbf{x} \right) $. Suppose $\mathbf{x}\in\omega^+(\mathbf{Y}(t))$. Then we know there exists $\left\{ t_n \right\}_{n=1}^{\infty}$ such that
+	\[
+		\lim_{n \to \infty} \phi ^{t_n}(\mathbf{Y}(0))=\mathbf{x}
+	.\]
+	Now we have
+	\[
+		\lim_{n \to \infty} \phi ^{t_n+s}\left( \mathbf{Y}(0) \right) =\lim_{n \to \infty} \phi ^{s}\left( \phi ^{t_n}\left( \mathbf{Y}(0) \right)  \right) =\phi^s(\mathbf{x})
+	.\]
+	This follows from a corollary of Picard's theorem, which is that the solution map is continuous. Now consider the following definition. We say a curve $\gamma $ is transverse to a vector field $\mathbf{F}(\mathbf{r})$ if at every point $\mathbf{x}$ on $\gamma $, there is a tangent vector to $\gamma $ that is linearly independent of $\mathbf{F}(\mathbf{x})$.
+
+	Fact 4: there cannot be an equilibrium point on a transverse curve. This means the vector cannot change directions on a transverse curve.
+
+	Suppose $\mathbf{Y}=(x(t),y(t))$ remains bounded byt doesn't approach an equilibrium point. Fix $\mathbf{x}\in \omega ^+(\mathbf{Y})$. Since this point is not an equilibrium point, pick a curve $\gamma $ transverse to $\mathbf{Y}=(x(t),y(t))$ containing $\mathbf{x}$. Then there exists some sequence $\left\{ t_n \right\}_{n=1}^\infty$ such that $\mathbf{Y}(t_n)$ approaches $\mathbf{x}$ as $n\to \infty$, and $\mathbf{Y}(t_n)\in \gamma $ for all $n$.
+
+	An orbit $\mathbf{Y}(t)$ must cross a transverse curve monotonically. That is, we can order the points along $\gamma $; if we call this order $\prec$, then $\mathbf{Y}(t_n)\prec \gamma $ for some $n$ implies the same for all $n$. We will prove this.
+
+	Fix a point $\mathbf{Y}(t_i)$, and also consider $\mathbf{Y}(t_{i+1})$. By an extension of the intermediate value theorem, if we are to increase between these points, then to decrease along  $\gamma $ we must cross our previous curve, which is impossible by Picard's theorem.
+
+	I think this is sufficient the rest is witchcraft.
+\end{proof}

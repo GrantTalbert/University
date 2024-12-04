@@ -1,0 +1,378 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../preamble.tex}
+\usepackage{titlepageBU}
+\title{Honors Differential Equations}
+\date{10/11/24}
+\courseID{MA 231}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Section 1.9 Problem 6}
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} -\frac{2y}{t}=t^3e^t
+.\]
+\[
+	\mu (t)=e^{\int g(t) \,\mathrm{d} t}=e^{\int -\frac{2}{t} \,\mathrm{d} t}=e^{-2\ln t}=e^{\ln t^{-2}}=t^{-2}
+.\]
+\[
+	y=\frac{1}{\mu (t)}\int \mu (t)b(t) \,\mathrm{d} t=t^{2}\int t^{-2}e^tt^3 \,\mathrm{d} t=t^{2}\int te^t \,\mathrm{d} t=t^2\left( te^t-e^t+C \right) 
+.\]
+\[
+y	=e^t\left( t^3-t^2 \right) +Ct^2
+.\]
+\section*{Section 1.9 Problem 8}
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =\frac{1}{t+1}y+4t^2+4t,\quad y(1)=10
+.\]
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} -\frac{y}{t+1}=4t^2+4t
+.\]
+\[
+	\mu (t)=e^{\int -\frac{1}{t+1} \,\mathrm{d} t}=e^{-\ln \left| t+1 \right| }=\left( t+1 \right) ^{-1}
+.\]
+\begin{align*}
+	y&=\frac{1}{\mu (t)}\int \mu (t)b(t) \,\mathrm{d} t\\
+	 &=4(t+1)\int \left( t+1 \right) ^{-1}\left( t^2+t \right)  \,\mathrm{d} t\\
+	 &=4(t+1)\int \frac{t(t+1)}{t+1} \,\mathrm{d} t\\
+	 &=4(t+1)\left( \frac{1}{2}t^2+C \right) \\
+	 &=2(t+1)\left( t^2+2C \right) 
+.\end{align*}
+\[
+	y=2(t+1)\left( t^2+2C \right) 
+.\]
+\section*{Section 1.9 Problem 26}
+Let $s(t)$ be the amount of sugar in lbs at a time $t$, and let $y(t)$ be the concentration of sugar in lbs/gallon. Then
+\[
+	y\coloneqq \frac{s}{v}
+,\]
+where $v$ is the amount of sugar water in the container. We know $v=100-t$. We can write
+\[
+	\frac{\mathrm{d}s}{\mathrm{d}t} =p- \frac{s}{100-t}
+.\]
+We now solve for $s$.
+\[
+	\frac{\mathrm{d}s}{\mathrm{d}t} +\frac{s}{100-t}=p
+.\]
+\[
+	\mu (t)=e^{\int \frac{1}{100-t} \,\mathrm{d} t}=e^{-\ln 100-t}=\left( 100-t \right) ^{-1}
+.\]
+\[
+	s=(100-t)\int (100-t)^{-1}p \,\mathrm{d} t=-(100-t)(p\ln \left| 100-t \right| +C)
+.\]
+Now, we account for the IVP.
+\[
+	25=p(0-100)\ln (100)+100C\implies C=0.25+p\ln 100
+.\]
+We can plug into our earlier equation for $y$ to obtain a function for the concentration of sugar in the tank at any given time $t$.
+\[
+	y=0.25+p(\ln 100-\ln (100-t))=0.25+p\ln \left( \frac{100}{100-t} \right) 
+.\]
+(a) Suppose $y(95)=0.5$. We have
+\begin{align*}
+	&\qquad\;\;\;0.5=0.25+p\ln \left( \frac{100}{100-95} \right) \\
+	&\implies 0.25=p\ln 20\\
+	&\implies p=\frac{0.25}{\ln 20}
+.\end{align*}
+
+
+(b) This is not possible. Note that as $t\to 100$, $\frac{100}{100-t}\to +\infty$. Since as $u\to \infty$, $\ln u\to \infty$, we note that as $t\to 100$, $y$ will approach $\infty$.
+\section*{Review 7}
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =y
+.\]
+
+\section*{Review 8}
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =y-2
+.\]
+Note that
+\[
+	y=Ce^t+2
+.\]
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =Ce^t=y-2
+.\]
+For $y=2$,
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} (2)=2-2=0
+.\]
+\section*{Review 35}
+I accidentally did problem 25 instead and only noticed after I went to submit. Anyways I redid it and am submitting the correct problem this time.
+
+The given equation is \emph{not} autonomous, \emph{not} separable, and is a nonhomogeneous linear differential equation.
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} -2ty=3te ^{t^2}
+.\]
+\[
+	\mu (t)=e^{\int -2t \,\mathrm{d} t}=e^{-t^2}
+.\]
+\[
+	y=e^{t^2}\int 3t \,\mathrm{d} t=e^{t^2}\frac{3t^2}{2}+Ce^{t^2}
+.\]
+Now we solve for the IVP.
+\[
+	1=e^{0} \frac{0}{2}+Ce^{0}=C
+.\]
+Therefore,
+\[
+	y=e^{t^2}\left( \frac{3}{2}t^2+1 \right) 
+.\]
+\section*{Review 48}
+(a)
+\[
+	\frac{\mathrm{d}Q}{\mathrm{d}t}=k(Q-70),\qquad Q(0)=150
+.\]
+(b)
+\[
+	\frac{\mathrm{d}Q}{\mathrm{d}t} -kQ=-70k
+.\]
+\[
+	\mu (t)=e^{\int -k \,\mathrm{d} t}=e^{-kt}
+.\]
+\[
+	Q=e^{kt}\int e^{-kt}(-70k) \,\mathrm{d} t=e^{kt}\left( 70e^{-kt}+C \right)=70+Ce^{kt}
+.\]
+\[
+	150=70+C\implies C=80
+.\]
+\[
+	Q(1)=70+80e^{k}=140\implies e^k = \frac{7}{8}\implies k=\ln \frac{7}{8}
+.\]
+\[
+	Q(t)=70+e^{t\ln \frac{7}{8}}=70+80\left( \frac{7}{8} \right) ^t
+.\]
+\begin{align*}
+	&\qquad\;\;\;100=70+80\left( \frac{7}{8} \right) ^t\\
+	&\implies 30=80\left( \frac{7}{8} \right) ^t\\
+	&\implies \frac{3}{8}=\left( \frac{7}{8} \right) ^t\\
+	&\implies \ln \frac{3}{8}=t\ln \frac{7}{8}\\
+	&\implies t= \frac{\ln \frac{3}{8}}{\ln \frac{7}{8}}
+.\end{align*}
+\textbf{Remark.} I showed the problem to a friend and he noticed you can do it as a separable equation. This caused me to realize any autonomous first order linear nonhomogeneous differential equation is separable. Let
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =ay+b
+,\]
+where $a,b$ are not functions of $t$. Then
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =a\left( y-\frac{b}{a} \right) \implies \frac{\mathrm{d}y}{\mathrm{d}t} \frac{1}{y-\frac{b}{a}}=a
+.\]
+You end up with a general solution of $y=Ce^{at}+\frac{b}{a}$. In this case, $a=k$ and $b=70k$, so we get $y=Ce^{kt}+70$, which is the same solution we observe.
+
+\section*{Section 2.1 Problem 8}
+(a)
+\begin{figure}[ht]
+	\includegraphics[scale=0.2]{planeF.jpg}
+	\centering
+	\includegraphics[scale=0.2]{planeR.jpg}
+	\centering
+\end{figure}\\
+
+(b) The populations of $F$ and $R$ over time appear to be inversely proportional in a sense; an increase in the population of one induces a decrease in population of the other,but if any population gets too low then the other population starts decreasing, causing the low population to increase. This leads to oscilatory behavior about the equilibrium point $y=A$, and all solutions appear to approach $A$ as $t\to \infty$.
+\section*{Section 2.1 Problem 9}
+Since the $-1.2RF$ term in $\frac{\mathrm{d}R}{\mathrm{d}t} $ corresponds to the negative effect on prey population of predator-prey interaction, the $1.2$ parameter will correspond to the hunting rate. To account for a different rate, we can replace $1.2$ in both equations with $\alpha $.
+\section*{Section 2.1 Problem 20}
+(a)
+\[
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} =-\beta ^2\cos \beta t
+.\]
+\[
+	\frac{\mathrm{d}^2y}{\mathrm{d}t^2} +\frac{k}{m}y= -\beta ^2\cos \beta t+\frac{k}{m}\cos \beta t=\cos \beta t\left( \frac{k}{m}-\beta ^2 \right) =\cos \beta t
+.\]
+\[
+	\implies \frac{k}{m}-\beta ^2=1 \implies \beta =\pm \sqrt{\frac{k}{m}-1} 
+.\]
+(b) The initial condition is $(y_0,v_0)=(1,0)$ because
+\[
+	v(0)=-\beta \sin (\beta 0)=0,\qquad y(0)=\cos (\beta 0)=1
+.\]
+(c)
+\[
+	0\leq \beta t\leq 2\pi \implies 0\leq t\leq \frac{2\pi}{\beta }
+.\]
+\[
+	\frac{2\pi }{\beta }=\frac{2\pi }{\sqrt{\frac{k}{m}-1}}
+.\]
+The period is $\frac{2\pi}{\sqrt{\frac{k}{m}-1} }$.
+
+(d) I have to have done this problem wrong, it looks way too straighforward.
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.2]{plane3.jpg}
+	\centering
+\end{figure}
+\section*{Section 2.2 Problem 4}
+(a)
+\[
+	\mathbf{F}(u,v)=(u-1,v-1)
+.\]
+\newpage
+(b)
+\begin{figure}[ht]
+	\includegraphics[scale=0.25]{plane4.jpg}
+	\centering
+\end{figure}\\
+(c)
+First, we consider the IVP $(u_0,v_0)=(1.1,1.1)$.
+\begin{figure}[ht]
+	\includegraphics[scale=0.8]{uvEuler.png}
+	\centering
+\end{figure}
+\begin{figure}[ht]
+	\includegraphics[scale=0.35]{uEuler.png}
+	\includegraphics[scale=0.35]{vEuler.png}
+	\centering
+\end{figure}\newpage
+Next, we consider the IVP $(u_0,v_0)=(5,3)$.
+\begin{figure}[ht]
+	\includegraphics[scale=0.8]{53Euler.png}
+	\centering
+\end{figure}
+\begin{figure}[ht]
+	\includegraphics[scale=0.35]{5Euler.png}
+	\includegraphics[scale=0.35]{3Euler.png}
+	\centering
+\end{figure}\newpage
+
+Finally, we consider the IVP $\left( u_0,v_0 \right) =(-2,-1)$.
+\begin{figure}[ht]
+	\includegraphics[scale=0.8]{21Euler.png}
+	\centering
+\end{figure}
+\begin{figure}[ht]
+	\includegraphics[scale=0.35]{2Euler.png}
+	\includegraphics[scale=0.35]{1Euler.png}
+	\centering
+\end{figure}
+
+(e) The solution with the initial value problem $(u_0,v_0)=(1,1)$ is an equilibrium solution. Any solution of the IVP $(u_0,v_0)=(\alpha ,\alpha )$ for some $\alpha \in\mathbb{R}\setminus\left\{ 1 \right\} $ will accelerate along the line $v=u$. If $\alpha >1$, then the solution will accelerate in the positive direction, and if $\alpha <1$, then it will accelerate in the negative direction. If $(u_0,v_0)=(\alpha ,1 )$, then $v$ will remain $1$ for all $t$, and $u$ will accelerate to $+\infty$ if $\alpha >1$, and $u\to -\infty$ if $\alpha <1$. Similarly, for $(u_0,v_0)=(1,\alpha )$, the same behavior is observed, except $u$ is fixed and $v$ accelerates. For all other solutions, $u$ and $v$ will both accelerate to positive or negative $\infty$, specifically positive if they're greater than 1, and negative if they're less than 1. They will approach one of the straight line solutions we described previously, since they will be growing faster in one directiton than the other, but will never actually reach the straight line solution due to Picard's theorem.
+\section*{Section 2.2 Problem 11}
+\textbf{(a) is (vii)}. Note that (a) has equilibria only at  $(x,y)=(-1,0)$ and $(x,y)=(1,0)$. This matches only the functions (ii) and (vii). However, $\frac{\mathrm{d}y}{\mathrm{d}t} <0$ for all $y>0$, and vice versa, which matches only (vii).
+
+\textbf{(b) is (viii)}. We know that (b) is either (iii) or (viii), since for $y=0$, $\frac{\mathrm{d}x}{\mathrm{d}t} $ looks to be approximately equal to $x$ and $\frac{\mathrm{d}y}{\mathrm{d}t} =0$. Additonally, for $y\neq 0$, $\frac{\mathrm{d}x}{\mathrm{d}t} $ can become negative at some $x$ that was positive for $y=0$. This implies $\frac{\mathrm{d}x}{\mathrm{d}t} $ must be a function of $x$ and $y$. These properties rule out all functions other than (iii) and (viii). Note that for $x= 1$ and $y=0$, $\frac{\mathrm{d}x}{\mathrm{d}t} >0$ and $\frac{\mathrm{d}y}{\mathrm{d}t} =0$. Now note that for $x,y=1$, we have $\frac{\mathrm{d}x}{\mathrm{d}t} ,\frac{\mathrm{d}y}{\mathrm{d}t} <0$, implying that $\frac{\mathrm{d}x}{\mathrm{d}t} =x-g(y)$, where $g(y)$ is some function of $y$ that is positive for $y>0$. This description matches (viii). Since (iii) has $\frac{\mathrm{d}x}{\mathrm{d}t} =x+2y$, then we would have $\frac{\mathrm{d}x}{\mathrm{d}t} =3>0$ for $x,y=1$, which is incorrect.
+
+\textbf{(c) is (v)}. Note that (c) has only $(0,0)$ as an equilibrium point, the signs of $\frac{\mathrm{d}y}{\mathrm{d}t} $ and $\frac{\mathrm{d}x}{\mathrm{d}t} $ are the same as those of $x$ and $y$, and that the magnitude of $\frac{\mathrm{d}y}{\mathrm{d}t} $ appears greater than $\frac{\mathrm{d}x}{\mathrm{d}t} $ for $x=y\neq 0$. This matches (v), since $|2y|>|x|$ for all $y=x\neq 0$, and all other properties are present as well.
+
+\textbf{(d) is (vi)}. Note that (d) has only $(1,0)$ as an equilibrium point. The only function satisfying this is (vi). Additionally, the signs of $\frac{\mathrm{d}y}{\mathrm{d}t} $ match those of (d).
+\section*{Section 2.3 Problem 3}
+Guess $y=e^{\lambda t}$ for some $\lambda $. We have
+\[
+	\left( \lambda ^2+4\lambda +1 \right) e^{\lambda t}=0
+.\]
+It follows that
+\[
+	\lambda ^2+4\lambda +1=0 \implies \lambda = \frac{-4\pm\sqrt{16-4} }{2}=-2\pm\sqrt{3} 
+.\]
+We thus have the solutions
+\[
+	y=e^{\left( \sqrt{3} -2 \right) t},\qquad y=e^{(-\sqrt{3} -2)t}
+.\]
+For the first solution, we have $v(t)=\left( \sqrt{3} -2 \right) y$. For the second solution, we have $v(t)=\left( -\sqrt{3} -2 \right) y$.
+\begin{figure}[ht]
+	\includegraphics[scale=0.11]{planes1.jpg}
+	\centering
+	\caption{Solution 1}
+	\centering
+	\includegraphics[scale=0.11]{planes2.jpg}
+	\caption{Solution 2}
+	\centering
+\end{figure}
+\section*{Section 2.3 Problem 4}
+\[
+	\frac{\mathrm{d}v}{\mathrm{d}t} +6v+7y=0,\qquad \frac{\mathrm{d}y}{\mathrm{d}t} =v
+.\]
+Guess $y=e^{\lambda t}$ for some $\lambda $. We have
+\[
+	\lambda ^2 y+6\lambda y+7y=0\implies \left( \lambda ^2+6\lambda +7 \right) y=0
+.\]
+It follows that
+\[
+	\lambda ^2+6\lambda +7=0\implies \lambda =\frac{-6\pm \sqrt{36-28} }{2}=-3\pm \sqrt{2} 
+.\]
+We thus have the solutions
+\[
+	y=e^{(-3+\sqrt{2} )t},\qquad y=e^{(-3-\sqrt{2} )t}
+.\]
+For the first solution, we have $v(t)=\left( -3+\sqrt{2}  \right) y$. For the second solution, we have $v(t)=\left( -3-\sqrt{2}  \right) y$.
+\begin{figure}[ht]
+	\includegraphics[scale=0.11]{planes3.jpg}
+	\centering
+	\caption{Solution 1}
+	\centering
+	\includegraphics[scale=0.11]{planes4.jpg}
+	\caption{Solution 2}
+	\centering
+\end{figure}
+\section*{Supplimental 1}
+Define $v\coloneqq \frac{\mathrm{d}y}{\mathrm{d}t} $. We then have $\frac{\mathrm{d}v}{\mathrm{d}t} =\frac{\mathrm{d}^2y}{\mathrm{d}t^2} $. Define $u\coloneqq \frac{\mathrm{d}v}{\mathrm{d}t} $, and it follows that $\frac{\mathrm{d}u}{\mathrm{d}t} = \frac{\mathrm{d}^3y}{\mathrm{d}t^3} $. We then have the following system:
+\[
+	\frac{\mathrm{d}y}{\mathrm{d}t} =v
+,\]
+\[
+	\frac{\mathrm{d}v}{\mathrm{d}t} =u
+,\]
+\[
+	\frac{\mathrm{d}u}{\mathrm{d}t} -2u-t^2y=0
+.\]
+
+
+
+\section*{Supplimental 2}
+\[
+	z_0=4
+.\]
+\[
+	z_1=0.99z_0=3.96
+.\]
+\[
+	z_2=0.99z_1=3.9204
+.\]
+\[
+	z_3=0.99z_2=3.881196
+.\]
+\[
+	z_4=0.99z_3=3.84238404
+.\]
+\[
+	z_5=0.99z_4=3.8039602
+.\]
+\[
+	z_6=0.99z_5=3.765920598
+.\]
+\[
+	z_7=0.99z_6=3.728261392
+.\]
+\[
+	z_8=0.99z_7=3.690978778
+.\]
+\[
+	z_9=0.99z_8=3.65406899
+.\]
+\[
+	z_{10}=0.99z_9=3.6175283
+.\]
+We have the general formula
+\[
+	z_n=4\cdot 0.99^n
+.\]
+
+\section*{Supplimental 3}
+In the continuous model, $y=Ce^{-\lambda t }$. Note that $y(0)=C$, so $C$ is the initial amount of radioactive materials, which is analogous to $z_0$. We then can express
+\[
+	Ce^{-\lambda t}= Cr^{t}
+,\]
+where $z_n$ is the number of radioactive atoms after $n$ days. In other words, $n=t$. We then have the following relationship between $r$ and $\lambda $:
+\[
+	e^{-\lambda }=r
+.\]
+To find the half life, set
+\[
+	\frac{C}{2}=Cr^t
+.\]
+It follows that
+\begin{align*}
+	&\qquad\;\;\;\frac{C}{2}=Cr^t\\
+	&\implies \frac{1}{2}=r^t\\
+	&\implies \ln \frac{1}{2}=t\ln r\\
+	&\implies t=\frac{\ln \frac{1}{2}}{\ln r} 
+.\end{align*}
+\end{document}

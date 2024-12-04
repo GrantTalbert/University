@@ -1,0 +1,113 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../preamble.tex}
+\usepackage{titlepageBU}
+\title{Modern Algebra 1}
+\date{10/04/24}
+\courseID{MA 541}
+\professor{Dr. Duque-Rosero}
+\courseSection{A1}
+\renewcommand{\mod}[1]{\;(\text{mod}\;#1)}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+(a) Let $\alpha : A \to B$, $\beta : B \to C$, and $\gamma : C \to D$. It follows that
+\[
+	(\gamma (\beta \alpha ))(a)=\gamma ((\beta \alpha )(a))=\gamma (\beta (\alpha (a)))=(\gamma \beta )(\alpha (a))=((\gamma \beta )(\alpha ))(a)
+.\]
+Therefore, $\gamma (\beta \alpha )=(\gamma \beta )\alpha $.
+
+(b) Let $\alpha ,\beta $ be injective functions. Let $(\beta \alpha )(a_1)=(\beta \alpha )(a_2)$. We have
+\[
+	\beta (\alpha (a_1))=\beta (\alpha (a_2))
+.\]
+Since $\beta $ is injective, it follows that $\alpha (a_1)=\alpha (a_2)$. Since $\alpha $ is injective, it follows that $a_1=a_2$. Therefore, $\beta \alpha $ is injective.
+
+(c) Let $\alpha : \mathbb{R} \to \mathbb{R}$ be the function $\alpha (x)=x$. Clearly $\alpha $ is injective. However, $\alpha $ is also clearly surjective, so we can define $\beta : \mathbb{R} \to \mathbb{R}$ as the map $\beta (x)=x^2$ and consider the function $(\beta \alpha )(x)$. It follows that
+\[
+	(\beta \alpha )(1)=\beta (\alpha (1))=\beta (1)=1^2=1
+.\]
+Additionally, we have
+\[
+	(\beta \alpha )(-1)=\beta (\alpha (-1))=\beta (-1)=(-1)^2=1
+.\]
+Since $(\beta \alpha )(1)=(\beta \alpha )(-1)$ and $1\neq -1$, $\beta \alpha $ is not injective.
+
+(d) Let $\alpha ,\beta $ be surjective functions, and let $c\in C$. Since $\beta : B \to C$ is surjective, there exists some $b\in B$ such that $\beta (b)=c$. Since $\alpha $ is surjective, there exists some $a\in A$ such that $\alpha (a)=b$. Therefore, we have
+\[
+	(\beta \alpha )(a)=\beta (\alpha (a))=\beta (b)=c
+.\]
+Therefore, $\beta \alpha $ is surjective.
+
+(e) Let $0$ be a specific element in $B$. Let $\beta : B \to C$ be any onto function, and let $\alpha : A \to B$ map $a\mapsto 0$ for all $a\in A$. It follows that for all $a\in A$,
+\[
+	\left( \beta \alpha  \right) (a)=\beta (0)
+.\]
+For any $C$ such that there is some $c\in C\setminus\left\{ \beta (0) \right\} $ (in other words, there is more than one element in $C$), then $\beta \alpha $ is not onto because there exists some $c\in C$ such that $(\beta \alpha )(a)\neq c$ for all $a\in A$.
+
+
+(f) Let $\alpha : A \to B$ be a bijection. Define $\alpha ^{-1}: B \to A$ to be the map such that if $\alpha (a)=b$, then $\alpha ^{-1}(b)=a$. Since $\alpha $ is surjective, all $b\in B$ have a corresponding $a \in A$ such that $\alpha (a)=b$. Since $\alpha $ is also injective, for any $b\in B$, there exists preciely one $a\in A$ such that $\alpha (a)=b$. Therefore, all $b\in B$ have precisely one corresponding $a\in A$ such that $\alpha (a)=b$, and thus $\alpha ^{-1}$ is well defined. Therefore, for any given bijection $\alpha $, such a map $\alpha ^{-1}$ exists. It follows that
+\[
+	\left( \alpha^{-1} \alpha \right) (a)=\alpha ^{-1}(\alpha (a))=\alpha ^{-1}(b)=a
+.\]
+Additionally,
+\[
+	\left( \alpha \alpha ^{-1} \right) (b)=\alpha \left( \alpha ^{-1}(b) \right) =\alpha (a)=b
+.\]
+\section*{Problem 2}
+Let $S$ have $n$ elements, and let $\phi : S\rightarrow S$ be injective. Suppose there exists some $s^*\in S$ such that there does not exist $s\in S$ such that $\phi (s)=s^*$. This implies the image of $\phi $ has at most $n-1$ elements. Thus, $\phi $ maps $n$ elements to $n^*\leq n-1$ elements. This implies there must exist at least two elements $s_1,s_2\in S$, $s_1\neq s_2$ such that $\phi (s_1)=\phi (s_2)$. This is a contradiction since $\phi $ is injective, implying that there does not exist such an $s^*\in S$ such that for all $s\in S$, $\phi (s)\neq s^*$. Therefore, $\phi $ is surjective.
+
+Again let $S$ have $n$ elements and let $\phi : S\rightarrow S$ be surjective. Suppose there exists some $s_1,s_2\in S$, $s_1\neq s_2$ such that $\phi (s_1)=\phi (s_2)$. Since some element is mapped to by two elements of the domain, and since the domain and range are the same finite size, then there must exist at least one $s^*\in S $ such that for all $s\in S$, $\phi (s)\neq s^*$. This contradicts the fact that $\phi $ is surjective, implying that for all $s_1,s_2\in S$ with $s_1 \neq _2$, then $\phi (s_1)\neq \phi (s_2)$. Therefore, $\phi $ is injective.
+
+These statements do not hold for an infinite $S$. For example, take $\phi : \mathbb{Z} \to \mathbb{Z}$ defined as $\phi (n)=2n$. Obviously, the image of $\phi $ is the set of even integers, and since this is a proper subset of  $\mathbb{Z}$, $\phi $ is not surjective. However, $\phi $ is very much injective. Suppose $\phi (n)=\phi (m)$. It follows that
+\[
+	2n=2m\implies n=m
+.\]
+Therefore, $\phi $ is an example of an injective, but not surjective, map on an infinite set.
+\section*{Problem 3}
+Let $\sigma =\left( a_1, \dots, a_m \right) $. Show $\sigma ^i(a_k)=a_{k+i\mod{m}}$ and $\left| \sigma  \right| =m$.
+
+We will show the first property via induction. Since $k+i$ is taken modulo $m$, it suffices to show the properties hold for all $i\in\mathbb{Z}_m$, since for any $i\in\mathbb{Z}$, there exists some $j\in\mathbb{Z}_m$ such that $i\equiv j\mod{m}$. We know that $\sigma (a_k)=a_{k+1}$. First, let $i=1$. We have
+\[
+	\sigma^1 (a_k)=\sigma (a_k)=a_{k+1}=a_{k+i}
+\]
+by definition. Now, let $\sigma^i(a_k)+a_{k+i}$ for an arbitrary $i\in\mathbb{Z}_m$. It follows that
+\[
+	\sigma ^{i+1}(a_{k})=\sigma (\sigma ^i(a_k))=\sigma (a_{k+i})=a_{k+i+1}
+.\]
+By the method of induction, $\sigma^i(a_k)=a_{k+i}$ for all $i\in\mathbb{Z}_m$, where $k+i$ is taken modulo $m$ since $a_m\mapsto a_1$, so $\sigma (a_{m})=\sigma (a_1)=a_2$, and so on.
+
+Now we show $\left| \sigma  \right| =m$. Let $\sigma ^k (a_i)=a_i$. Then $i+k\equiv i\mod{m}$. The minimum positive integer $k$ such that $i+k\equiv i\mod{m}$ is $k=m$. Therefore, $\left| \sigma  \right| =m$.
+\section*{Problem 4}
+Let $\alpha \in S_n$ be a cycle of length $n$. Prove $C(\alpha )=\left<\alpha  \right>$.
+
+First, we show every $\alpha ^k\in C(\alpha )$. We have
+\[
+	\alpha \alpha ^k = \alpha \left( \alpha ^{k-1}\alpha  \right) =\left( \alpha \alpha ^{k-1} \right) \alpha =\alpha ^k\alpha 
+.\]
+Therefore, $\left<\alpha  \right>\subseteq C(\alpha )$.
+
+Now we show the converse. Let $\sigma \in S_n$ such that $\sigma \alpha =\alpha \sigma $. Without loss of generality, define $\alpha =(12\cdots n)$. We then have the convenient representation $\alpha (i)=i+1$. We have
+\[
+	(\sigma \alpha )(i)=\sigma (\alpha (i))=\sigma (i+1)
+.\]
+Since $\sigma \alpha =\alpha \sigma $, we have
+\[
+	(\alpha \sigma )(i)=\alpha (\sigma (i))=\sigma (i)+1
+.\]
+Since $\sigma (i)+1=\sigma (i+1)$ \textbf{for} \textbf{all} $i$, $\sigma $ must shift every component by the same amount, and thus $\sigma (i)=i+d$ for some $d\in \left\{ 1\ldots n \right\} $. Therefore, $\sigma =\alpha ^d$, and thus $\sigma \in \left<\alpha  \right>$. Therefore, $C(\alpha )\subseteq \left<\alpha  \right>$.
+
+Therefore, $C(\alpha )=\left<\alpha  \right>$.
+
+
+\section*{Problem 5}
+We can use proof by example. Consider $\sigma =\left( 12 \right)(13)=(132) $. Then $\sigma ^2=\left( 123 \right) $. Additionally, consider $\tau =(12)(14)=(142)$. Then $\tau ^2=(124)$. We have $\sigma ^2 \tau ^2= (123)(124)=(13)(24)$. Thus, $\sigma ^2\tau ^2$ is a product of disjoint transpositions. Since $\sigma ^2\tau ^2$ is a cycle on 4 distinct elements, it must be the square of some $\pi $ which is also a cycle on 4 distinct elements. Therefore, $\pi $ must be either the product of two disjoint transpositions, or a 4-cycle. However, consider the 4-cycle $(abcd)$. Notice that
+\[
+	(abcd)=(ad)(ac)(ab)
+.\]
+Since a 4-cycle can be written as a product of an odd number of transpositions, no 4-cycle can be in $A_4$. Therefore, $\pi $ must be the product of two disjoint transpositions. However, since a transposition is its own inverse and since disjoint cycles commute, for any product of disjoint transpositions $(ab)(cd)$ we have
+\[
+	((ab)(cd))^2=(ab)(cd)(ab)(cd)=(ab)(ab)(cd)(cd)=e
+.\]
+Therefore, there exists no such $\pi \in A_4$ such that $\pi ^2 = (13)(24)$. Therefore, $H$ is not closed for at least the two elements shown here, and is thus not a group.
+
+\end{document}

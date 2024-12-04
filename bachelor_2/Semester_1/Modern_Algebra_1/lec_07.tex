@@ -1,0 +1,55 @@
+\lecture{7}{Thu 24 Oct 2024 09:38}{Normal Subgroups and Factor/Quotient Groups}
+\begin{definition}[Normal Subgroup]\label{dfn:norm}
+	A subgroup $H\leq G$ is \emph{normal} if $gH=Hg$ for all $g\in G$. This is denoted $H\triangleleft G$.
+\end{definition}
+\begin{proposition}
+	If $G$ is an abelian group, then all subgroups $H\leq G$ are normal.
+\end{proposition}
+\begin{proof}
+	Since $gh=hg$ for all $g,h\in G$, we have $gH=Hg$.
+\end{proof}
+\begin{theorem}\label{thm:kj}
+	Let $G$ be a group with subgroup $N\leq G$. Then the following statements are requivalent:
+	\begin{enumerate}
+		\item $N$ is a normal subgroup of $G$.
+		\item For all $g\in G$, $gNg^{-1}\subseteq N$.
+		\item For all $g\in G$, $gNg^{-1}=N$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	($1\implies 2$) Let $N\triangleleft G$. Let $g\in G$. Thus, for all $n\in N$, there exists $n'\in N$ such that $gn=n'g$. It follows that $gng^{-1}=n'\in G$, and thus $gng^{-1}\in N$ for all $n$. Therefore, $gNg^{-1}\subseteq N$.
+
+	($2\implies 3$) Let $gNg^{-1}\subseteq N$. For all $n\in N$, there exists $n'\in N$ such that $g^{-1}n\left( g^{-1} \right) ^{-1}=n'$, since the statement holds for \emph{all} $g\in G$. Thus, $n=gn'g^{-1}$, and $N\subseteq gNg^{-1}$.
+
+	($3\implies 1$) Let $gNg^{-1}=N$. It follows that for all $n\in N$, there exists $n'\in N$ such that $gng^{-1}=n'$. It follows that $gn=n'g$ for all $n\in N$. Thus, $N\triangleleft G$.
+\end{proof}
+
+When we worked with cosets, we noted that the cosets not only aren't groups themselves, but they didn't form a group either. One reason we study normal subgroups is because they form a group, called a quotient group, or a factor group according to the book because why not.
+
+Consider some $H\leq G$, and consider the set of left cosets $\mathcal{L} =\left\{ gH \mid g\in G \right\} $. We know $\left| \mathcal{L}  \right| =\left[ G:H \right]  $. We can define a binary operation on this set:
+\[
+	(g_iH)(g_jH)\mapsto g_ig_jH
+.\]
+If this forms a group, that would give us a lot more information about the cosets in the group. Note that $eH$ is the identity, and for any $gH\in \mathcal{L} $, there exists an inverse $g^{-1}H\in \mathcal{L} $. Associativity and closure follow from $G$ being a group. BUT. This map is not well defined. If there exist $g_1,g_2\in H$ such that $g_1g_2H$ does NOT have a unique coset representative in $G$, then the map is not well defined. We will show this more rigorously.
+
+Define $L\times L\to L$ as the map $\left( (g_1H),(g_2H) \right) \mapsto g_1g_2H$. Suppose $aH=bH$, and $cH=d H$. If this map was well defined, we would need $aHcH=bHdH$. It would follow that $acH=bdH$. Since $aH=bH$, there exists $h_1$ such that $b=ah_1$. Similarly, $d=ch_2$. It follows that $bdH=ah_1ch_2H$. Since $h_2\in H$, we ahev $ah_1ch_2H=ah_1cH$. We must at this point require $ah_1cH=acH$. For this to be true, we would need $h_1cH=cH$ for all $c\in G$. Since this is not true in general, we do not have a well defined map in general.
+
+However, if we let $H$ be normal in $G$, then it is true, since $h_1c=ch'$ for some $h'$, since $Hc=cH$, and thus $h_1cH=ch'H=cH$. Therefore, we can define this group, but only if we take the set of cosets for some normal subgroup $N\triangleleft G$.
+\begin{definition}[Quotient Group]\label{dfn:quot}
+	Let $N$ be a normal subgroup of $G$. Then the set of left cosets $\mathcal{L} =\left\{ gN \mid g\in G \right\} $ under the binary operation
+	\[
+		(aN)(bN)\mapsto abN
+	\]
+	is called the quotient group of $G$ and $N$. We denote it as $G/N$, and has the order $\left[ G:N \right] $.
+\end{definition}
+\begin{theorem}\label{thm:kjsd}
+	The quotient group is a group.
+\end{theorem}
+\begin{proof}
+	EFY, read above logic
+\end{proof}
+\begin{remark}
+	Note that $G/N$ is the set of equivalence classes given by the equivalence relation $a\sim b$ if $ab^{-1}\in N$.
+\end{remark}
+Note also that $\mathbb{Z} / n\mathbb{Z}\cong \mathbb{Z}_n$.
+\chapter{Homomorphisms}

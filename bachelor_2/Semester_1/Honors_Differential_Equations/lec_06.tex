@@ -1,0 +1,66 @@
+\lecture{6}{Wed 09 Oct 2024 12:25}{Chapter 2 and Introducing Chapter 3}
+\section{Modeling via Systems}
+A system of differential equations is exactly what it sounds like. Consider some predator population $F(t)$ and prey population $R(t)$. We can describe their interaction as the system
+\begin{align*}
+	\frac{\mathrm{d}R}{\mathrm{d}t} &=2R-1.2RF\\
+	\frac{\mathrm{d}F}{\mathrm{d}t} &=-F+0.9RF
+.\end{align*}
+The $2R$ term depicts the exponential growth of prey in absense of predators, and the $-1.2RF$ depicts the negative predator-prey interaction. Conversely, the $-F$ term depicts the fact that predators die off if there is no prey to eat, and the $0.9RF$ term depicts the posititve predator-prey interaction. The parameters are fairly arbitrary and depend on the species. 
+
+\chapter{Linear Systems}
+
+\begin{prev}
+	\[
+		\frac{\mathrm{d}\mathbf{Y}}{\mathrm{d}t} =A \mathbf{Y},\qquad A(t)=\begin{bmatrix} a&b \\ c&d \end{bmatrix} ,\qquad \mathbf{Y}=\begin{bmatrix} x(t) \\ y(t) \end{bmatrix} 
+	.\]
+	For fixed point,
+	Let $A \mathbf{v}=\lambda \mathbf{v}$ for some $\mathbf{v}\in\mathbb{R}^2$. Numbers $\lambda $ that satisfy this are eigenalues. Then
+	\[
+		\mathbf{Y}(t)=e^{\lambda t}\mathbf{v}
+	.\]
+\end{prev}
+
+Worth remembering that
+\[
+	\lambda ^2+\operatorname{tr}(A) \lambda +\det A=0
+\]
+is the characteristic polynomial in $M_2 (\mathbb{R})$.
+\begin{remark}
+	For $\lambda _1,\ldots,\lambda _n$ eigenvalues of  $A$, then $\operatorname{tr}(A) =\sum_{i=1} ^n\lambda _i$.
+\end{remark}
+
+We have three cases to investigate,
+\begin{enumerate}
+	\item $\lambda_+ \neq \lambda _-$, but $\lambda_+,\lambda _-\in\mathbb{R}$.
+	\item $\lambda_+ \neq \lambda _-$ and $\lambda $ is complex. By Galois theory, $\lambda_+ = \lambda_-^*$.
+	\item $\lambda _+ = \lambda _-$. By Galois theory, both are real.
+\end{enumerate}
+
+Since
+\[
+	\lambda_\pm = \frac{\operatorname{tr}(A) \pm \sqrt{\left( \operatorname{tr}(A)  \right) ^2-4\det (A)} }{2}
+,\]
+then (2) arises only for
+\[
+	\det (A) > \frac{1}{4}\left( \operatorname{tr}(A)  \right) ^2
+.\]
+Additionally, (1) arises for
+\[
+	\det (A) < \frac{1}{4}\left( \operatorname{tr}(A)  \right) ^2
+\]
+and (3) arises for
+\[
+	\det (A)=\frac{1}{4}\left( \operatorname{tr}(A)  \right) ^2
+.\]
+
+Now we have case (1a): $\lambda_- < 0 < \lambda_+$, (1b): $0<\lambda_-<\lambda_+$, (1c): $\lambda _- < \lambda _+ < 0$. (1a) arises for
+\[
+	\operatorname{tr}(A) >-\sqrt{\operatorname{tr}^2(A)-4\det A } 
+.\]
+It follows that $\det A<0$. So for (1a), we have two straight line solutions $\mathbf{Y}^{(+)}(t)=e^{\lambda t}\mathbf{v}^{(+)}$, and likewise for $(-)$. The general solution $\mathbf{Y}(t)$ is then a linear combination of our basis:
+\[
+	\mathbf{Y}(t)=c^{(+)}\mathbf{Y}^{(+)}(t)+c^{(-)}\mathbf{Y}^{(-)}(t)
+.\]
+This gives rise to a \emph{saddle} phase portrait. For an initial condition on $\mathbf{v}^{(-)}$, we collapse towards the origin. For $\mathbf{v}^{(+)}$, we diverge.
+
+Now consider (1b). We have $\det A>0$ and $\det A<\frac{1}{4}\operatorname{tr}^2(A) $. All solutions go to infinity, and we call it a source. In (1c), they all go to 0, so we call it a sink. 

@@ -1,0 +1,131 @@
+\lecture{5}{Thu 17 Oct 2024 09:30}{Direct Products}
+
+Direct products allow us to construct new groups from previous groups, particularly through the cartesian product of these groups.
+
+\begin{definition}[Cartesian Product]\label{dfn:unknown}
+	The \textbf{cartesian} \textbf{product} of two sets $S$ and $R$ is the set of all $(s,r)$ such that $s\in S$ and $r\in R$.
+	\[
+		S\times R=\left\{ (s,r) \mid s\in S\land r\in R \right\} 
+	.\]
+\end{definition}
+
+The cartesian product of a set with itself is typically denoted $R\times R=R^2$. Now we consider the application of the cartesian product to groups. Let $(G,\cdot )$ and $(H,\circ )$ be groups. We define the binary operation
+\[
+	\star : (G\times H) \times (G \times H) \to G\times H
+\]
+as the map
+\[
+	\star : ((g_1,h_1),(g_2,h_2) \mapsto (g_1 \cdot g_2,h_1\circ h_2)
+.\]
+We will use juxtaposition instead of writing out the operators from here out.
+\begin{proposition}
+	Let $G,H$ be groups. Let $G\times H$ have associated with it the binary operation
+	\[
+		(g_1,h_1)\cdot (g_2,h_2) = (g_1g_2,h_1h_2)
+	.\]
+	Then $G\times H$ is a group.
+\end{proposition}
+\begin{proof}
+	The binary operation is closed since $G$ and $H$ are groups. The identity is $(e_G,e_H)$ for $e_G$ the identity in $G$ and $e_H$ the identity in $H$. The inverse of some $(g,h)\in G\times H$ is $\left( g^{-1},h^{-1} \right) \in G\times H$. Associativity follows from associativity.
+\end{proof}
+
+\begin{definition}[External Direct Product]\label{dfn:es}
+	The group $G\times H$ is called the external direct product of $G$ and $H$, but is really just called the \textbf{direct} \textbf{product} of $G$ and $H$.
+\end{definition}
+\begin{notation}
+	The book writes $G\oplus H$ for direct products. This is technically the ``direct sum'', which coencides with $\times $ for finitely many groups. However, people generally write $G\times H$ for direct products, not $G\oplus H$.
+\end{notation}
+
+If we continue the same construction, we can define a direct product for $n$ groups. Let $G_1, \dots, G_n $ be groups. Then 
+\[
+	G = \prod_{i=1}^{n} G_i 
+\]
+is the direct product of these groups.
+
+\begin{definition}[Least Common Multiple]\label{dfn:sjk}
+	The least common multiple of two numbers $a,b\in\mathbb{Z}\setminus\left\{ 0 \right\} $ is the smallest positive integer that is a multiple of $a$ and $b$.
+	\[
+		\operatorname{lcm}(a,b) = \max \left\{ n\in\mathbb{Z}^+ \mid \exists k\in\mathbb{Z}: n=ka\land \exists \ell \in\mathbb{Z}: n=\ell b \right\} 
+	.\]
+\end{definition}
+\begin{proposition}
+	The least common multiple of $a,b\in\mathbb{Z}\setminus\left\{ 0 \right\} $ is
+	\[
+		\operatorname{lcm}(a,b) = \frac{ab}{\operatorname{gcd}(a,b) }
+	.\]
+\end{proposition}
+\begin{theorem}\label{thm:kjsd}
+	Let $(g,h)\in G\times H$. Then
+	\[
+		\left| (g,h) \right| =\operatorname{lcm}(\left| g \right| ,\left| h \right| ) 
+	.\]
+	In general, let
+	\[
+		\left( g_1, \dots, g_n  \right) \in \prod_{i=1}^{n} G_i 
+	.\]
+	Then
+	\[
+		\left| \left( g_1, \dots, g_n  \right)  \right| =\operatorname{lcm}(\left| g_1 \right| , \dots, \left| g_n \right| ) 
+	.\]
+	
+\end{theorem}
+\begin{proof}
+	EFY
+\end{proof}
+\begin{theorem}\label{thm:kjsdfndsb}
+	\[
+		\mathbb{Z}_n\times \mathbb{Z}_m \cong \mathbb{Z}_{nm}\iff \operatorname{gcd}(n,m) =1
+	.\]
+\end{theorem}
+\begin{proof}
+	We first show $\mathbb{Z}_{n}\times \mathbb{Z}_m \cong \mathbb{Z}_{nm}$ implies that $\operatorname{gcd}(n,m) =1$. We will prove by contrapositive. Suppose $\operatorname{gcd}(n,m) \neq 1$. We will show there is no isomorphism.
+
+	Let $d=\operatorname{gcd}(n,m) >1$. Then $\frac{mn}{d}$ is divisible by both $m$ and $n$, hence for any element $(a,b)\in \mathbb{Z}_m \times \mathbb{Z}_n$,
+	\[
+		\frac{mn}{d}(a,b)=(0,0)
+	.\]
+	Since $\frac{mn}{d}<mn$, then $\mathbb{Z}_m\times \mathbb{Z}_n$ is not cyclic.
+
+	Now we show if $\operatorname{gcd}(n,m) =1$, then an isomorphism exists. Let $\operatorname{gcd}(n,m) =1$. Since there exists $1\in\mathbb{Z}_m$ with $\left| 1 \right| =m$, and likewise for $n$, there exists $(1,1)\in\mathbb{Z}_m\times \mathbb{Z}_n$ such that, by \hyperref[theorem 4.1]{thm:4.1},
+	\[
+		\left| (1,1) \right| \frac{mn}{\operatorname{gcd}(n,m) }=mn
+	.\]
+	Therefore, $\mathbb{Z}_m \times \mathbb{Z}_n \cong \mathbb{Z}_{mn}$.
+\end{proof}
+\begin{corollary}
+	Let $n_1, \dots, n_k\in\mathbb{Z}^+$. Then
+	\[
+		\prod_{i=1}^{k} \mathbb{Z}_{n_i}\cong \mathbb{Z}_{\prod_{i=1}^{k} n_i } 
+	\]
+	if and only if $\operatorname{gcd}(n_i,n_j) =1$ for all $i,j$.
+\end{corollary}
+\begin{proof}
+	EFY
+\end{proof}
+\begin{corollary}
+	Let $m=p_1^{e_1} \cdots p_k^{e_k}$ for $p_i$ primes. Then
+	\[
+		\mathbb{Z}_m \cong \prod_{i=1}^{k} \mathbb{Z}_{p_i^{e_i}} 
+	.\]
+\end{corollary}
+\begin{proof}
+	EFY
+\end{proof}
+\chapter{Normal Subgroups and Factor Groups}
+We begin with discussion of internal direct products. 
+\begin{definition}[Internal Products]\label{dfn:jksd}
+Let $G$ be a group with subgroups $H$ and $K$ satisfying the following conditions:
+\begin{itemize}
+	\item $G=HK=\left\{ hk \mid h\in H\land k\in K \right\} $.
+	\item $H\cap K=\left\{ e \right\} $.
+	\item $hk=kh$ for all $k\in K$ and $h\in H$.
+\end{itemize}
+Then $G$ is the internal product of $H$ and $K$.
+\end{definition}
+
+\begin{note}
+	Not every group can be written as the internal product of two proper subgroups. For example, $S_3$ cannot.
+\end{note}
+\begin{theorem}\label{thm:ksjd}
+	Let $G$ be the internal product of $H,K\leq G$. Then $G\cong H\times K$.
+\end{theorem}

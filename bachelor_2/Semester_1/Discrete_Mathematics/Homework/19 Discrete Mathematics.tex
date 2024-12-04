@@ -1,0 +1,147 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Recursion: Practice and Consolidation}
+\date{10/20/24}
+\courseID{MA 293}
+\professor{Dr. Borkovitz}
+\courseSection{A1}
+\author{Grant Talbert}
+\begin{document}
+\makeproblem
+\begin{abstract}
+	For the purposes of this paper, we define $0\in\mathbb{N}$. Unless otherwise noted, any map is defined $D\subseteq \mathbb{N} \to \mathbb{N}$, where $D$ is implicitly understood. Generally, either $D=\mathbb{N}$ or $D=\mathbb{N}\setminus\left\{ 1 \right\} $.
+\end{abstract}
+\section*{Problem 1}
+\subsection*{Part A}
+We will write a drone as $D$ and a queen as $Q$. We will write $G(n)$ to be the $n$th generation, represented as a string of $D$s and $Q$s. For example,
+\begin{align*}
+	G(0)&=D\\
+	G(1)&=Q\\
+	G(2)&=D,Q\\
+	G(3)&=Q,DQ
+.\end{align*}
+We have deliberately inserted commas to make the next claim more apparent. Notice that $G(0)$ appears on the left side of $G(2)$, and $G(1)$ appears on the right. Additionally, notice taht $G(1)$ appears on the left side of $G(3)$, and $G(2)$ appears on the right side of $G(3)$. We will prove this relationship holds in general. We have already proven the base case, so assume that it holds for some $G(n)$. That is, suppose $G(n)=G(n-2),G(n-1)$. We wish to show that $G(n+1)=G(n-1),G(n)$. Consider $G(n+1)$. We know $G(n-2)\mapsto G(n-1)$, and $G(n-1)\mapsto G(n)$. Thus,
+\[
+	G(n-2),G(n-1)\mapsto G(n-1),G(n)
+.\]
+By induction, the statement holds in general. Let $\left| \cdot  \right| $ denote the length of some string. Now notice that $|G(0)|=1$, $|G(1)|=1$, and for all $n>1$, we have $|G(n)|=|G(n-1)|+|G(n-2)|$. This is equivalent to the Fibonacci numbers, provided we have our base case of $F_1,F_2=1$. We do indeed have this, except it has been shifted by 1, since $|G(0)|,|G(1)|=1$, rather than 1 and 2. Thus, $\left| G(n) \right| =F_{n-1}$.
+
+For the queen bee, our starting conditions $Q(1)$ is now the same as $G(2)$. Thus, the same relation will hold, except shifted one back further. Thus, $|Q(n)|=F_{n-2}$, $\left| Q(0) \right| =1$, and $\left| Q(2) \right| =2$.
+\subsection*{Part B}
+Denote this number as $C(n)$. Since we only want number bars greater than $1$, we have $C(1)=0$. We also have $C(2)=1$. Now for an arbitrary $n$, let the first number have some length $1<k\leq n$. We then have $C(n-k)$ ways of writing the remaining numbers, and thus $C(n)$ will just be the sum through all possible starting numbers of the number of combinations $C(n-k)$ that arises from that starting number. Thus,
+\[
+	C(n)=\sum_{k=2}^{n} C(n-k)
+.\]
+This, coupled with our base cases, constitutes our recursive function.
+\subsection*{Part C}
+The number bars problem is similar to the bee problem because both can sort of be represented as strings of numbers. However, I have no idea how else they are related, meaning my answers are probably wrong.
+
+\section*{Problem 2}
+Notice that the slices subdivide the circle into sections. If a slice passes through a section, it will necessarily subdivide it into precisely two new sections. Additionally, in order to pass into a new section, it must cross a different slice. Thus, for every slice our new slice crosses, a new section is formed. Additionally, the slice produces one extra section for intersecting the circle. Thus, the slice produces a number of new sections equivalent to the number of other slices it intersects, plus one. In order to maximize the number of sections, we must maximize the number of lines each slice intersects. We know that each slice is a 2 dimensional line, and two different lines in $\mathbb{R}^2$ can only intersect each other either once, or never. Thus, a new slice can only intersect all other slices once. Therefore, for the $n$th slice, we can maximize the number of new sections by having the slice intersect the other $n-1$ slices, and then we have $n-1+1=n$ new sections. Thus, the number of sections $f$ for a given number of slices $n$ is
+\[
+	f(n)=n+f(n-1)
+.\]
+Additionally, we have
+\[
+	f(1)=2
+,\]
+since the circle itself defines a single section before any slices are made. It's not necessarily apparent that such a slice can always be made for any given $n$, but a valid construction can be made fairly easily and proven with a little linear algebra. The proof was unnecessarily long and unwieldy so I didn't feel like doing it.
+
+I claim that $f(n)=T(n)+1$ for $T$ denoting the triangle numbers. We prove this claim with the method of induction.
+
+Notice that $f(1)=2$, and notice that $T(1)=1$. Thus, $f(1)=T(1)+1$. Now suppose that for some $n$, $f(n)=T(n)+1$. We wish to show $f(n+1)=T(n+1)+1$. We have
+\begin{align*}
+	f(n+1)&=f(n)+n+1\\
+	      &=1+T(n)+(n+1)\\
+	      &=T(n+1)+1
+.\end{align*}
+By induction, $f(n)+T(n)+1$ for all $n>0$.
+
+Recall the closed form equation
+\[
+	T(n)=\frac{n(n+1)}{2}
+.\]
+It follows that
+\[
+	f(n)=\frac{n(n+1)}{2}+1
+.\]
+\section*{Problem 3}
+\subsection*{Part A}
+\begin{solution}
+Each figure increases by a width of 2. This is obvious. The width of figue 0 is 1, so we have
+\[
+	w(n) =
+	\begin{cases}
+		w(n-1) + 2,&n\geq 1\\
+		1,&n=0
+	\end{cases}
+.\]
+The closed form of this equation is thus
+\[
+	w(n) = 1 + 2n
+.\]
+\end{solution}
+\subsection*{Part B}
+\begin{solution}
+Notice that each figure can be inscribed into a square with perimiter $4w$. Notice that the perimiter of the figure and the square are the same, so we have the perimiter is $4w$. However, we choose to use $P(1)$ as our initial condition for this part, and in part 1 we took $w(0)$ to be our initial condition. Thus, we need to account for this by considering $w(n-1)$ instead of $w(n)$. We will only write $w$ for simplicity. Thus,
+\begin{align*}
+	P(n)&=4w\\
+	    &=4(1+2(n-1))\\
+	    &=4+8n-8\\
+	    &=8n-4
+.\end{align*}
+
+We also need a recursive equation, so notice that since we increase the width by 2 each time, we increase the perimiter by $4\cdot 2=8$. Thus,
+\[
+	P(n)=P(n-1)+8
+.\]
+\end{solution}
+\subsection*{Part C}
+\begin{solution}
+Notice that for each column, we add 2 squares, except the leftmost and rightmost columns, which get 1. This means we're adding the width twice, minus 2. We will define $S(n)$ as the number of tiles, with initial condition $S(1)=1$. Notice that the width function $w$ started at $n=0$, so we will use $w(n-1 )$ rather than $w(n)$. We will still only write $w$. Thus,
+\begin{align*}
+	S(n)&=S(n-1)+2w-2\\
+	    &=S(n-1)+2(2(n-1)+1)-2\\
+	    &=S(n-1)+2(2n-1)-2\\
+	    &=S(n-1)+4n-4\\
+	    &=S(n-1)+4(n-1)
+.\end{align*}
+We will consider the first few values of $S(n)$.
+\[
+	S(2)=S(1)+4(n-1)=1+4(1)
+.\]
+\[
+	S(3)=S(2)+4(n-1)=1+4(1)+4(2)=1+4(1+2)
+.\]
+\[
+	S(4)=S(3)+4(n-1)=1+4(1+2)+4(3)=1+4(1+2+3)
+.\]
+We claim
+ \[
+	S(n)=1+4\left( \sum_{i=1}^{n-1} i \right) =1+4T(n-1)
+.\]
+We will use proof by the method of induction. We have already proven the base case, so suppose this holds for some $n$. That is, suppose $S(n)=1+4T(n-1)$ for some $n$. We wish to show this implies $S(n+1)=1+4T(n)$. It follows that
+\begin{align*}
+	S(n+1)&=S(n)+4n\\
+	      &=1+4T(n-1)+4n\\
+	      &=1+4(T(n-1)+n)\\
+	      &=1+4T(n)
+.\end{align*}
+By induction, this relation holds in general. Recall that
+\[
+	T(n-1)=\frac{n(n-1)}{2}=\frac{n^2-n}{2}
+.\]
+Thus,
+\[
+	4T(n-1)=2n^2-2n
+.\]
+Therefore,
+\[
+	S(n)=1+2n^2-2n
+.\]
+\end{solution}
+
+\textbf{Academic Integrity -- Please type your name to acknowledge that if you collaborated on this problem, then it was only with classmates from either section of CAS MA 293 (except to have a partner for the game), that you only used allowable resources (notes from class, no Internet searches or AI, etc.), and that you wrote this paper by yourself:}\\
+Grant Talbert
+\end{document}

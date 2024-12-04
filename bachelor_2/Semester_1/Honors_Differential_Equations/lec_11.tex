@@ -1,0 +1,39 @@
+\lecture{11}{Mon 28 Oct 2024 12:26}{Inhomogeneous Systems}
+Consider the dampened and driven harmonic oscillator
+\[
+	\frac{\mathrm{d}^2x}{\mathrm{d}t^2} +p \frac{\mathrm{d}x}{\mathrm{d}t} +qx=g(t)
+.\]
+Setting $\frac{\mathrm{d}x}{\mathrm{d}t} =v$, we know this is equivalent to a system.
+
+Consider $g(t)=\gamma \cos (\mu t)$. By Euler's formula,
+\[
+	\Re \left( \frac{\mathrm{d}^2x}{\mathrm{d}t^2} +p \frac{\mathrm{d}x}{\mathrm{d}t} +qx \right) =\Re \left( \gamma e^{i\mu t} \right) 
+.\]
+We want to then look for complex solutions to
+\[
+	\frac{\mathrm{d}^2z}{\mathrm{d}t^2} +p \frac{\mathrm{d}z}{\mathrm{d}t} +qz=\gamma e^{i\mu t}
+.\]
+
+We can guess based on our previous analysis that $z_p(t)=be^{i\mu t}$ will solve the equation. Plugging in, we end up with
+\[
+	\gamma e^{i\mu t}=\left( -\mu ^2be^{i\mu t} \right) +\left( i\mu be^{i\mu t} \right) +\left( be^{i\mu t} \right) \implies b=\frac{\gamma }{-\mu ^2+ip\mu +q}
+,\]
+provided the denominator is nonzero. Note that the denominator is $0$ if $i\mu =\lambda $ for $\lambda $ an eigenvalue of the system. Cases of this sort are known as resonance.Note that this only fails for $p=0$, since we would require the real and imaginary components to both be $0$, and $\mu ,p,q\in\mathbb{R}$.
+
+However, we still need to find the real component of the solution
+\[
+	\frac{\gamma }{-\mu ^2+ip\mu +q}e^{i\mu t}
+.\]
+Recall the method of conjugation:
+\[
+	\frac{1}{a+bi}=\frac{a-ib}{\left( a+ib \right) \left( a-ib \right) }=\frac{a-ib}{a^2+b^2}
+.\]
+Applying this to our problem, we have
+\[
+	b=\frac{\gamma \left( -\mu ^2+q-ip\mu  \right) }{\left( q-\mu^2 \right) ^2+\left( p\mu  \right) ^2}=\frac{q\gamma -\gamma \mu ^2}{\left( q-\mu ^2 \right) ^2+p^2\mu ^2}-\frac{\gamma ip\mu }{\left( q-\mu ^2 \right) ^2+\mu ^2p^2}
+.\]
+Therefore, by our previous arguments, we have the following set of basis solutions:
+\[
+	x_1(t)=\gamma \frac{q-\mu ^2}{\left( q-\mu ^2 \right) ^2+\left( p\mu  \right) ^2}\cos (\mu t),\qquad x_2(t)=\gamma \frac{p\mu }{\left( q-\mu  \right) ^2+\left( p\mu  \right) ^2}\sin \left( \mu t \right) 
+.\]
+
