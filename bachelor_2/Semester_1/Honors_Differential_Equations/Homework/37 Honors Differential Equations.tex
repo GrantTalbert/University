@@ -1,10 +1,24 @@
 \documentclass[11pt, letterpaper]{report}
-\input{../../homework.tex}
+\input{../../../../report.tex}
 \usepackage{titlepageBU}
 \title{Honors Differential Equations}
 \date{12/06/24}
+\graphicspath{{~/Documents/University/bachelor_2/Semester_1/Honors_Differential_Equations/Homework}}
 \begin{document}
 \makeproblem
+I am extremely busy and only completeded part of the homework. To save you the trouble of figuring out what I did not do, I did not complete the following:
+\begin{itemize}
+	\item 5.3 1b, 1c, 3b, 3c, 
+\end{itemize}
+\section*{Section 5.3 Problem 1}
+\[
+	\frac{\mathrm{d}H}{\mathrm{d}t} =\frac{\partial H}{\partial x} \frac{\mathrm{d}x}{\mathrm{d}t} +\frac{\partial H}{\partial y} \frac{\mathrm{d}y}{\mathrm{d}t} =\left( x-x^3 \right) y+y\left( x^3-x \right) =y\left( x-x^3+x^3-x \right) =0
+.\]
+\section*{Section 5.3 Problem 3}
+\[
+	\frac{\mathrm{d}H}{\mathrm{d}t} =\frac{\partial H}{\partial x} \frac{\mathrm{d}x}{\mathrm{d}t} +\frac{\partial H}{\partial y} \frac{\mathrm{d}y}{\mathrm{d}t} =\cos y\left( -x\sin y+2y \right) +\left( -x\sin y+2y \right) \left( -\cos y \right) =0
+.\]
+\section*{Section 5.3 Problem 15}
 \section*{Supplimental 1}
 I find it much neater to write things with inner products and norms, rather than messy integrals. Especially when the integrals are in a fraction, because then they get squished down and look really ugly and I kinda hate it.
 
@@ -62,13 +76,41 @@ for some $\left\{ c_n \right\}_{n=0}^\infty \subset \mathbb{R}$, and that this s
 					       &=c_k\int_{-1}^{1} \left( P_k(t) \right) ^2 \,\mathrm{d} t\\
 					       &=c_k\left\lVert P_k(t) \right\rVert_2^2
 ,\end{align*}
-where $\left\lVert \cdot  \right\rVert_2$ is the standard norm on $L^2$. It follows that
+where $\left\lVert \cdot  \right\rVert_2$ is the $L^2$ norm. It follows that
 \[
 	c_k=\frac{\left\langle P_k(t),f(t) \right\rangle }{\left\lVert P_k(t) \right\rVert_2^2}
 .\]
 Therefore,
 \[
-	f(t)=\sum_{n=0}^{\infty} \frac{\left\langle P_n(t),f(t) \right\rangle }{\left\lVert P_k(t) \right\rVert_2^2}P_n(t)
+	f(t)=\sum_{n=0}^{\infty} \frac{\left\langle P_n(t),f(t) \right\rangle }{\left\lVert P_n(t) \right\rVert_2^2}P_n(t)
 .\]
+
+One further remark is that Wikipedia says $\left\lVert P_n(t) \right\rVert_2=1$ if we choose $P_n(1)=1$. It makes sense, but computing the norm was difficult, so all I was able to extract from this is that $a_0,a_1=1$ implies $P_0(t),P_1(t)=1$, so we require this to hold for the set of Legendre polynomials to be orthonormal. I won't assume this fact, since I didn't prove it, but it's an interesting aside.
 \section*{Supplimental 3}
+I used Mathematica for this. This is my first time using Mathematica, so I will attach my code. I don't feel like typing out the coefficients so I will only include the graph. The original function is in blue, and the approximation is in orange.
+\begin{lstlisting}[language=Mathematica]
+	f[x_]:=Exp[x]*Sin[Pi*x]
+
+	a = Integrate[LegendreP[0, x]*f[x], {x, -1, 1}] / Integrate[LegendreP[0, x]*LegendreP[0, x], {x, -1, 1}]
+
+	b = Integrate[LegendreP[1, x]*f[x], {x, -1, 1}] / Integrate[LegendreP[1, x]*LegendreP[1, x], {x, -1, 1}]
+
+	c = Integrate[LegendreP[2, x]*f[x], {x, -1, 1}] / Integrate[LegendreP[2, x]*LegendreP[2, x], {x, -1, 1}]
+
+	d = Integrate[LegendreP[3, x]*f[x], {x, -1, 1}] / Integrate[LegendreP[3, x]*LegendreP[3, x], {x, -1, 1}]
+
+	e = Integrate[LegendreP[4, x]*f[x], {x, -1, 1}] / Integrate[LegendreP[4, x]*LegendreP[4, x], {x, -1, 1}]
+
+
+	g[x_] = a*LegendreP[0, x] + b*LegendreP[1, x] + c*LegendreP[2, x] + d*LegendreP[3, x] + e*LegendreP[4, x]
+	
+
+
+	Plot[{f[x],g[x]},{x,-1,1}]
+\end{lstlisting}
+\begin{figure}[ht]
+	\includegraphics{Legendre.png}
+	\centering
+	\caption{Legendre Approximation}
+\end{figure}
 \end{document}

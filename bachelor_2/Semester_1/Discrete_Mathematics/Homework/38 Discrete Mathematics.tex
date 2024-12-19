@@ -1,0 +1,70 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Counting Practice and Consolidation}
+\date{12/05/24}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{enumerate}
+	\item There are 4 colors of pencils, and you buy 6 pencils. How many ways are there to buy pencils?
+	\item There are 8 colors of pencils, and you buy 2 pencils. How many ways are there to buy pencils?
+	\item There are $3$ colors of pencils, and you buy $7$ pencils. You make sure to buy at least one of each color. How many ways are there to buy pencils?
+	\item There are $7$ colors of pencils, and you buy $3$ pencils. You make sure to buy no more than one pencil of each color. How many ways are there to buy pencils?
+	\item There are precisely $7$ pencils, all with different colors, and there are $3$ different people buying pencils. How many ways are there to purchase pencils?
+	\item There are precisely $7$ pencils, all with different colors, and they are put into $3$ cups such that there are no empty cups. How many ways are there to put pencils in cups, where we consider different orderings of cups to be the same?
+	\item There are precisely $7$ pencils, all with different colors, and there are $3$ different people buying pencils. If every person buys at least one pencil, how many ways are there to purchase pencils?
+	\item There are precisely $7$ pencils, all with different colors, and there are $3$ different people buying pencils. If every person does not have to buy any pencils, how many ways are there to purchase pencils?
+	\item There are precisely $3$ pencils, all with different colors, and there are $7$ different people buying pencils. If every person does not have to buy any pencils, how many ways are there to purchase pencils?
+\end{enumerate}
+\section*{Problem 2}
+\begin{enumerate}
+	\item Suppose Tim is in a group of students. There are then $n-1$ ways to choose the other student, and similarly there are $h(n-2,x-1)$ ways of creating the other $x-1$ groups. Now suppose Tim works in a group with greater than 2 students in it. There exist $h(n-1,x)$ ways to chooes these groups, and there are then $x$ groups we can put Tim in, since we require each group have 2 or more students. It follows that
+		\[
+			h(n,x)=(n-1)h(n-2,x-1)+xh(n-1,x)
+		.\]
+	\item $n$ on the left, $x$ on the top.
+		\begin{center}
+		\begin{tabular}{c|cccc}
+			&1&2&3&4\\
+			\hline
+			1&0&0&0&0\\
+			2&1&0&0&0\\
+			3&1&0&0&0\\
+			4&1&3&0&0\\
+			5&1&10&0&0\\
+			6&1&25&15&0\\
+			7&1&56&105&0\\
+			8&1&119&490&105\\
+		\end{tabular}
+		\end{center}
+	\item First, we require $n \geq 2$, since groups must have 2 or more students. We also have $h(n,1)=1$ for all $n\geq 2$ and $x>0$. For all $n<2$ or $x<0$, $h(n,x)=0$.
+	\item It's in the table. It's 490.
+	\item The only ways to partition $8$ into $3$ integers such that they are all greater than or equal to $2$ are $4+2+2$ and $3+3+2$. For the first case, there are $C(8,4)$ possible ways to chose the first group, and then there are $C(4,2)$ ways of choosing the second. Since the groups are identical, we divide by 2 to obtain 210 possibilities. Applying this same logic to the other case, we have $C(8,3)C(5,3) /2=280$, so the answer is $h(8,3)=490$.
+	\item Since the groups must have at least two students, and the number of students is precisely twice the number of groups, we know that each group will contain precisely two students. The problem then reduces to the following. For any given first student, there are $n-1$ students to choose to work with him. This eliminates two students, so for the third, there are $n-3$ students who can work with him. Continuing this logic inductively, we find
+		\[
+			h(n,n /2)=\prod_{k=1}^{n /2}2k-1=1\cdot 3\cdot 5\cdots
+		.\]
+		We can continue this argument combinatorically. Consider a square of sidelength $n$. It will have area $n^2$. Now consider subdividing the square into $n^2$ little squares, and consider a little square in the top left. Then surround it with 3 more little squares, to form a square of length $2^2$. Then surround it with 5 more little squares to form a square of area $3^2$. Continuing this logic, note that each time we add the next odd number, and the result is the square of some number. We then have
+		\[
+			\sum_{i=1}^{n} 2i-1=n^2
+		.\]
+		It follows that
+		\[
+			\prod_{k=1}^{n /2}2k-1=\left( \frac{n}{2} \right) ^2=\frac{n^2}{4}
+		.\]
+\end{enumerate}
+\section*{Problem 3}
+\begin{enumerate}
+	\item Everything $>$ Groups and Boards $>$ Groups and Roles $>$ Groups only $>$ Roles only. I feel like since there will be a lot of people, and thus a lot of groups, permutations of whos in the group will be the biggest of the three things to consider. Then I noted that theres only 3 things to permute for roles, but 10 things to permute for boards, so permuting the boards should be bigger.
+	\item We require groups have precisely 3 members. A set partition only requires nonempty groups.
+	\item The everything case is obviously a permutation. The problem itself is equivalent to the ordering of the deck of cards, since we can index students by the elements of the deck, and each element of the deck contains all relevant properties (number, suite). The order they are handed to the students determines what student is at what board, but this is equivalent to fixing the order of the students and permuting the deck of cards equivalent to each alternate ordering. Note that these permutations also give rise to the different boards, since students recieve different numbers. This characterizes the \textbf{everything} case.
+
+
+	There are also two problems that are permutation with repetition. By the same logic, we can view groups and boards as permuting a deck without suites, and we can view roles only as permuting the deck without numbers. This is no longer a permutation since the map is no longer injective, as multiple inputs can map to the same output.
+	\item Everything: $3! =6$. Groups only: there is only 1 group. Groups and roles: $3! =6$. Groups and boards: there is only 1 board. Roles only: $3! =6$.
+	\item Everything: $6! =720$. For groups only, we can choose students at a single board $C(6,3)$ ways. However, there are two boards, so we divide by 2, and get $10$. For groups and roles, we can multiply the number of groups (which we just found) by the number of ways to assign roles in each group, which is $3!$ for each group. There's two groups, so we get $10\cdot (3!)^2=360$. Groups and boards is permutation with repetition as we already said, so $6!/(3!)^2=20$. We also said roles only was permutation with repetition, so that's $6! /(2!)^3=90$.
+	\item Everything: $30!\approx 2.6\cdot 10^{32}$. For groups only, we can divide this number by the number of ways to permute the boards and the number of ways to permute the roles in each group. We get $30! /10!(3!)^{10}\approx 1.2\cdot 10^{18}$. We can do groups and roles in the same way; divide by the number of ways to permute the boards. We have $30! /10! \approx 7.3\cdot 10^{25}$. Groups and boards is just permutation with repetition, so we have $30!/(3!)^{10}\approx 4.4\cdot 10^{24}$. Similarly, for roles only, we have $30!/(10!)^3\approx 5.6\cdot 10^{12}$.
+	\item The actual order is Everything $>$ Groups and roles $>$ Groups and boards $>$ Groups only $>$ Roles only. Wow this matches perfectly with what I said.
+\end{enumerate}
+\end{document}

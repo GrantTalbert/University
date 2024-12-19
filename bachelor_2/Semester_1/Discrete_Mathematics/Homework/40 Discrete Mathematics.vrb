@@ -1,0 +1,14 @@
+Theorem \ref{thm:1} is very important, because it lets us compute losing positions very easily with a Python script.
+	\begin{lstlisting}[language=Python]
+	#!/usr/bin/env python3
+	avoid = set()
+	losing = []
+	y_int = 1
+	MAX = 1000 # maximum number of tiles on board
+
+	for x in range(1, MAX+1):
+		if x not in avoid:
+			losing.append((x,x + y_int))
+			y_int += 1
+	\end{lstlisting}\pause
+	People were looking for patterns in the differences between the number of tiles, but there were no \emph{obvious} patterns. But a pattern exists, and theorem \ref{thm:1} lets us compute enough numbers to find it.

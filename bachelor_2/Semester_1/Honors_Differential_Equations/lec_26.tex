@@ -1,0 +1,143 @@
+\lecture{26}{Mon 09 Dec 2024 12:21}{Calculus of Variations}
+
+Recall: if $\phi (t)$ satisfies $\phi (a)=\phi (b)=0$, then $y_\varepsilon (t)=\overline{y} (t)+\varepsilon \phi (t)$ satisfies the boundary conditios for all $\varepsilon $. As a consequence, since $\overline{y} $ minimizes the length, we see that
+\[
+	L(y_\varepsilon(t))\geq L(\overline{y}(t) )
+.\]
+Define
+\[
+	\ell (\varepsilon )=L(y_\varepsilon(t))
+.\]
+We can see that $\ell $ has a minimum at $0$, so
+\[
+	\frac{\mathrm{d}\ell }{\mathrm{d}\varepsilon } (0)=0
+.\]
+We can write the formula of $\ell $ is
+\[
+	\ell (\varepsilon )=\int_{a}^{b} \sqrt{1+\left( \frac{\mathrm{d}\overline{y} }{\mathrm{d}t} +\varepsilon \frac{\mathrm{d}\phi }{\mathrm{d}t}  \right) ^2}  \,\mathrm{d} t
+.\]
+We want to differentiate with respect to $\varepsilon $. We can pull the $\varepsilon $ derivative through the integral to get
+\[
+	\frac{\mathrm{d}\ell }{\mathrm{d}\varepsilon } =\int_{a}^{b} \frac{\mathrm{d}}{\mathrm{d}\varepsilon } \sqrt{1+\left( \frac{\mathrm{d}\overline{y} }{\mathrm{d}t}+\frac{\varepsilon \mathrm{d}\phi }{\mathrm{d}t}   \right) ^2 } \,\mathrm{d} t=\int_{a}^{b} \frac{2 \frac{\mathrm{d}y}{\mathrm{d}t} +\varepsilon \frac{\mathrm{d}\phi }{\mathrm{d}t} }{2\sqrt{1+ \left(\frac{\mathrm{d}y}{\mathrm{d}t} +\varepsilon \frac{\mathrm{d}\phi }{\mathrm{d}t}  \right) ^2} } \,\mathrm{d} t
+.\]
+Integrating by parts, we see by the boundary conditions that
+\[
+	\phi (t) \frac{\frac{\mathrm{d}y}{\mathrm{d}t} }{\sqrt{1+\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2} }\bigg\vert_{a}^{b} - \int_{a}^{b} \frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\frac{\mathrm{d}y}{\mathrm{d}t} }{\sqrt{1+\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2} } \right) \phi  (t) \,\mathrm{d} t=0
+.\]
+
+\begin{lemma}[Fundamental Lemma of Calculus of Variations]
+	If $g$ is continuous and
+	\[
+		\int_{a}^{b} g(t)\phi (t) \,\mathrm{d} t=0
+	\]
+	for all continuous differentiable $\phi $ with $\phi (a)=\phi (b)=0$, then $g(t)=0$ for all $t\in[a,b]$.
+\end{lemma}
+\begin{proof}
+	By contradiction. Suppose $g$ nonzero at some point. By continuity, $g$ nonzero on an  $\varepsilon $-interval, so define $\phi  $ continuous and nonzero on that interval. Same sign btw. Remark that the integral is nonzero.
+\end{proof}
+By the fundamental lemma of the calculus of variations,
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\frac{\mathrm{d}y}{\mathrm{d}t} }{\sqrt{1+\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2} } \right) =0
+.\]
+It follows that
+\[
+	\frac{\frac{\mathrm{d}y}{\mathrm{d}t} }{\sqrt{1+\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2} }=k
+\]
+is constant. Squaring both sides and rearranging things, we have
+\[
+	\frac{1}{k^2}\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2=1+\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2
+.\]
+We see that $k^2>1$ and $\left| k \right| >1$, and we get
+\[
+	\left(\frac{\mathrm{d}y}{\mathrm{d}t}\right)=\frac{1}{\frac{1}{k^2}-1}>0
+.\]
+The minimizing path has a constant derivative. Therefore, the mimimizing path must be a linear function. Also note that we stopped writing the bars over $y$ but all the $y$ derivatives were $\overline{y} $.
+
+We can generalize this argument immediately. Let $\mathcal{L} (u,v)$ be a continuously differentiable function of two variables $u,v$, and define
+\[
+	S(y)=\int_{a}^{b} \mathcal{L} (y(t),y'(t)) \,\mathrm{d} t
+.\]
+\begin{proposition}[Euler-Lagrange Equation]
+	If $\overline{y} (t)$ minimizes or maximizes $S$ among all $C^1$ functions satisfying a given boundary condition $y(a)=A$ and $y(b)=B$, then $\overline{y} (t)$ must solve the differential equation
+	\[
+		\frac{\partial \mathcal{L}  }{\partial y} -\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial \mathcal{L} }{\partial y'}  \right) =0
+	.\]
+\end{proposition}
+\begin{proof}
+	Let $\overline{y} (t)$ minimize $S$, and choose an arbitrary $\phi  (t)\in C^1$ with $\phi (a)=\phi (b)=0$. Then we have
+	\[
+		S (\overline{y} +\varepsilon \phi )\geq S(\overline{y} )
+	.\]
+	Define $\sigma (\varepsilon ): \mathbb{R} \to \mathbb{R}$ to be
+	\[
+		S(\overline{y} +\varepsilon \phi )
+	.\]
+	We have
+	\[
+		\frac{\mathrm{d}\sigma }{\mathrm{d}\varepsilon }(0) =0
+	.\]
+	We have by our formula that
+	\[
+		\frac{\mathrm{d}\sigma }{\mathrm{d}\varepsilon } =\frac{\mathrm{d}}{\mathrm{d}\varepsilon } \int_{a}^{b} \mathcal{L} (\overline{y} +\varepsilon \phi (t),\overline{y}'+\varepsilon \phi') \,\mathrm{d} t
+	.\]
+	Pulling $\frac{\mathrm{d}}{\mathrm{d}\varepsilon } $ inside and applying the chain rule, we have
+	\[
+		=\int_{a}^{b} \frac{\partial \mathcal{L} }{\partial \overline{y} } \phi (t)+ \frac{\partial \mathcal{L} }{\partial \overline{y}'}\phi' (t)   \,\mathrm{d} t
+	.\]
+	\[
+		0=\frac{\mathrm{d}\sigma }{\mathrm{d}\varepsilon } (0)=\int_{a}^{b} \frac{\partial \mathcal{L} }{\partial y} \phi (t) \,\mathrm{d} t+\int_{a}^{b} \frac{\partial \mathcal{L} }{\partial y'} \phi ' \,\mathrm{d} t
+	.\]
+	IBP where the boundary terms have to drop:
+	\[
+		=\int_{a}^{b} \frac{\partial \mathcal{L} }{\partial y} \phi  \,\mathrm{d} t-\int_{a}^{b} \frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial \mathcal{L} }{\partial y'} \phi (t) \,\mathrm{d} t=\int_{a}^{b} \phi (t)\left(\frac{\partial \mathcal{L} }{\partial y} -\frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial \mathcal{L} }{\partial y'}  \right)\,\mathrm{d} t
+	.\]
+	By the fundamental lemma of the calculus of variations, we have
+	\[
+		\frac{\partial \mathcal{L} }{\partial y} -\frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial \mathcal{L} }{\partial y'} =0
+	.\]
+	
+\end{proof}
+A remarkable consequence of the Euler-Lagrange equation is that of the Lagrangian. Consider
+\[
+	\mathcal{L} (u,v)=\frac{1}{2}mv^2-V(u)
+.\]
+Suppose that $y(t)$ describes the position of a particle of mass $m$ moving in a conservative force with potential energy $V(u)$. Then $\mathcal{L} (y(t),y'(t))$ is called the Lagrangian of the system.
+\[
+	S(y)=\int_{a}^{b} \frac{1}{2}m(y'(t))^2-V(y(t)) \,\mathrm{d} t=\int_{a}^{b} \mathcal{L} (y,y') \,\mathrm{d} t
+\]
+is called the action, and nature always takes the path of minimum action.
+\[
+	\frac{\partial \mathcal{L} }{\partial u} =-\frac{\partial V}{\partial u} ,\qquad \frac{\partial \mathcal{L} }{\partial v} =mv
+.\]
+ The Euler-Lagrange equation says that the minimum of $S(y)$ satisfies
+ \[
+ 	-\frac{\partial V}{\partial y} (y(t))-\frac{\mathrm{d}}{\mathrm{d}t} (my'(t))=0
+ .\]
+ You then have
+ \[
+ 	m \frac{\mathrm{d}^2y}{\mathrm{d}t^2} =-\frac{\partial V}{\partial y} (y(t))
+ .\]
+ That is, the force is the negative derivative of the potential, which is one of Newton's laws.
+ \begin{definition}[Functional]\label{dfn:ls}
+ 	Let $X$ be a function set and let $\mathbb{F}$ be a set of numbers. Any map $f : X \to \mathbb{F}$ is called a \textbf{functional}.
+ \end{definition}
+
+ Recall that for The Sturm-Liouville problem
+ \[
+ 	-\frac{\mathrm{d}}{\mathrm{d}t} \left( p(t) \frac{\mathrm{d}y}{\mathrm{d}t}  \right) +q(t)y=\lambda w(t)y(t)
+ ,\]
+ (taking 0 boundary conditios for simplicity), we saw that the eigenvalue was given by
+ \[
+ 	\lambda =\frac{\int_{a}^{b} p(t) \left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right)^2+q(t)(y(t))^2  \,\mathrm{d} t}{\int_{a}^{b} w(t)(y(t))^2 \,\mathrm{d} t}
+ .\]
+We saw also that this was similar to an inner product, and when we used inner products to find eigenvalues we needed to minimize the function. So now we need to minimize this functional.
+
+Given a symmetric boundary problem, the Rayleigh Quotient is defined to be
+\[
+	R(y)= \int_{a}^{b} p(t)\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2+q(t)(y(t))^2 \,\mathrm{d} t \cdot \frac{1}{\int_{a}^{b} w(t)(y(t))^2 \,\mathrm{d} t}
+.\]
+\begin{proposition}
+	Any critical point $t$ of $R(y)$ satisfying the boundary conditions is an eigenfunction of the Sturm-Liouville problem, and the eigenvalue is the value of $R(y(t))$.
+\end{proposition}
+
+Recall that any regular Sturm-Liouville problem has a sequence of eigenvalues $\lambda_1<\lambda_2<\cdots$. In applications, the minimum eigenvalue is the most important, and that is the minimum of $R(y)$ over all continuously differentiable $y$ such that $y(a)=y(b)=0$. We have efficient ways of minimizing the Rayleigh Quotient numerically. Check the notebook its kinda wild

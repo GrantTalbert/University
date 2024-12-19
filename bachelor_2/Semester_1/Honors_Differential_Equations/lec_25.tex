@@ -1,0 +1,91 @@
+\lecture{25}{Fri 06 Dec 2024 12:20}{Sturm-Liouville Problems}
+Consider the problem
+\[
+	-\frac{\mathrm{d}}{\mathrm{d}t} \left[ p(t)\frac{\mathrm{d}y}{\mathrm{d}t}  \right] +q(t)y(t)=\lambda r(t)y(t)
+,\]
+where $p,q,r$ are given functions and $\lambda $ is constant. let us have symmetric boundary conditions
+\[
+	A_1y(a)+A_2y'(a)=0,\qquad B_1y(b)+B_2y'(b)=0
+\]
+for $(A_1,A_2)(B_1,B_2)\neq \mathbf{0} $ and $a<b$. These equations arise very naturally in the theory of PDEs.
+
+If $p,q,r\in C^1$ and if $p(t)$ and $r(t)$ are strictly greater than $0$ on $[a,b]$, then we say that the equation plus these boundary conditions are a regular Sturm-Liouville boundary value problem. Every regular problem has every solution having a corresponding value $\lambda \in\mathbb{R}$, and there exists an infinite sequence $\lambda_1 <\lambda_2<\ldots$ with
+\[
+	\lim_{n \to \infty} \lambda_n=+\infty
+\]
+such that the problem has a solution  $\left( \lambda _n,y_n(t) \right) $ for each $n\in\mathbb{Z}^+$. There exist no solutions to $\lambda \in\mathbb{C}\setminus\mathbb{R}$. Finally, every solution $y(t)$ is weakly-orthogonal with the integral
+\[
+	\int_{a}^{b} r(t)y_n(t)y_m(t) \,\mathrm{d} t=0\forall m\neq n
+.\]
+Legendre's Equation is of the form of a Sturm-Liouville problem, but since it has no boudary conditions, it's not a \textbf{regular} Sturm-Liouville BVD.
+
+\[
+	-\int_{a}^{b} y(t)\frac{\mathrm{d}}{\mathrm{d}t} \left( p(t)\frac{\mathrm{d}y}{\mathrm{d}t}  \right)  \,\mathrm{d} t+\int_{a}^{b} q(t)\left( y(t) \right) ^2 \,\mathrm{d} t=\lambda \int_{a}^{b} r(t)(y(t))^2 \,\mathrm{d} t
+.\]
+Using integration by parts on the first integral to combine the first and second integrals, and the boundary terms vanish (EFY).
+\[
+	\int_{a}^{b} p(t)\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2q(t)\left( y(t) \right) ^2 \,\mathrm{d} t=\lambda \int_{a}^{b} r(t)\left( y(t) \right) ^2 \,\mathrm{d} t
+.\]
+We can solve for $\lambda $ and write out a messy af equation.
+
+Define
+\[
+	\Lambda (x,y)=\frac{ax^2+2bxy+dy^2}{x^2+y^2}
+.\]
+In this case, $a,b,d\in\mathbb{R}$ are arbitrary. We want to maximize the function, so we set $\nabla \Lambda =\mathbf{0}$. We have
+\[
+	\frac{\partial \Lambda }{\partial x} =\frac{2ax+2by}{x^2+y^2}-\frac{2x\left( ax^2+2bxy+dy^2 \right) }{\left( x^2+y^2 \right) ^2}=\frac{2ax+2by}{x^2+y^2}-\frac{2x}{x^2+y^2}\Lambda (x,y)
+.\]
+Set this equal to $0$ and multiply through by $x^2+y^2$. We have
+\[
+	2ax+2by-2x\Lambda (x,y)=0
+.\]
+We get
+\[
+	x\Lambda(x,y)=ax+by
+.\]
+We also end up with
+\[
+	\frac{\partial \Lambda }{\partial y} =0 \implies y\Lambda(x,y)=bx+dy
+.\]
+This is very similar to the eigenvalue equation for a two-dimensional matrix:
+\[
+	\begin{pmatrix}
+		ax+by\\
+		bx+dy
+	\end{pmatrix} =\lambda \begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} 
+.\]
+This generalizes. One more thing: note that
+\[
+	\Lambda(x,y)=\frac{\left\langle v,Av \right\rangle }{\left\lVert v \right\rVert^2}
+.\]
+We can try doing this to our Sturm-Liouville problem. Now recall the previous representations of the eigenvalues of our Sturm-Liouville problems. We have a similar representation:
+\[
+	\lambda =\frac{\int_{a}^{b} \left( p(t)\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2+q(t)(y(t))^2 \right)  \,\mathrm{d} t}{\int_{a}^{b} r(t)(y(t))^2 \,\mathrm{d} t}
+.\]
+This is basically the same, we have our inner products, except our variables are now functions. To find the eigenvalues, we need to minimize this function of functions. This leads to the calculus of variations.
+
+Consider two points $(a,A),(b,B)$. We want to find the shortest line between them. Let $C$ be a smooth curve given by the function $y(t)$. We can find the arclength using the formula
+\[
+	L(y)=\int_{a}^{b} \sqrt{1+\left( \frac{\mathrm{d}y}{\mathrm{d}t}  \right) ^2}  \,\mathrm{d} t
+.\]
+Suppose $\overline{y} (t)$ is the curve that minimizes $L(y)$. Let $\phi (t)$ be a continuously differentiable function with $\phi (a)=\phi (b)=0$.
+
+Note that $y_{\varepsilon }(t)=\overline{y} (t)+\varepsilon \phi (t)$ satisfies
+\[
+	y_{\varepsilon }(a)=\overline{y} (a)+\varepsilon \phi (a)=A
+.\]
+By the same idea, $y_{\varepsilon }(b)=B$. So for any $\varepsilon $, this function $y_{\varepsilon }$ satisfies the boundary conditions. Since $\overline{y} $ is the minimum, $L(y_{\varepsilon })>L(\overline{y} )$ for all $\varepsilon$. Define $\mathcal{L} (\varepsilon )=L(y_{\varepsilon })$. We now have a function of one real variable with a minimum at $\varepsilon =0$.
+
+We can take the derivative. We have the derivative at $0$
+\[
+	\frac{\mathrm{d}\ell }{\mathrm{d}\varepsilon }(0)=0
+.\]
+Ok now this appears from our previous formula.
+\[
+	\ell (\varepsilon )=\int_{a}^{b} \sqrt{1+\left( \frac{\mathrm{d}\overline{y} }{\mathrm{d}t} +\varepsilon \frac{\mathrm{d}\phi }{\mathrm{d}t}  \right) }  \,\mathrm{d} t
+.\]
+

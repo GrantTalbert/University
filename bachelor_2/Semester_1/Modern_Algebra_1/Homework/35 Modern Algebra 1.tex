@@ -5,17 +5,16 @@
 \date{12/06/24}
 \begin{document}
 \makeproblem
+% remark - show function in 1 is well-def
 \section*{Problem 1}
 \begin{proof}
 	Let $R$ be a finite, nontrivial, commutative ring with no zero divisors. Let $a\in R^*$, and let $\lambda_a : R^* \to R^*$ be the map $b\mapsto ab$. We want to show $a\in \lambda (R^*)$. This implies there exists some $k\in R$ such that $ak=a$. This is equivalent to showing $\lambda $ is surjective, and since $R$ is finite, this is equivalent to showing $\lambda $ is injective.
 
-	Suppose $\lambda_a(b)=\lambda_a(c)$, implying that $ab=ac$. It follows that $a(b-c)=0$. Since $R$ has no zero divisors and $a\neq 0$, we have $b-c=0$. It follows that $b=c$, and  $\lambda_a $ is injective. Therefore, for all $a\in R^*$, there exists $k_a\in R$ such that $ak_a=k_aa=a$. We will now show this $k$ is unique.
-
-	Let $a,b\in R^*$ such that $ak_a=a$ and $bk_b=b$. It follows since $R$ is commutative that
+	Suppose $\lambda_a(b)=\lambda_a(c)$, implying that $ab=ac$. It follows that $a(b-c)=0$. Since $R$ has no zero divisors and $a\neq 0$, we have $b-c=0$. It follows that $b=c$, and  $\lambda_a $ is injective. Therefore, for all $a\in R^*$, there exists $1\in R$ such that $a1=1a=a$. Since there are no zero divisors and the ring is commutative, the cancellation law holds, so for any $b\in R$, it follows that
 	\[
-		ab=ak_abk_b=abk_ak_b
+		a1b=ab\implies 1b=b
 	.\]
-	It follows that $a\left( b-bk_ak_b \right) =0$. Since $a\neq 0$ and $R$ has no zero divisors, $b=bk_ak_b$. Since $bk_b=b$ and $R$ is commutative, it follows that $b=bk_a$. Since $k_a0=0$, we know $rk_a=r$ for any arbitrary $a\in R^*$ and $r\in R$. Therefore, $k_a$ is an identity in $R$ for any $a$. Since the identity is unique in $R$, we know $k_a=k_b $ for all $a,b\in R$. Therefore, $R$ has a unity.
+	Therefore, $1$ is a unity in $R$.
 \end{proof}
 \section*{Problem 2}
 \textbf{Part (a)}. Let $I,J\subset R$ be ideals of $R$. First, we show $I\cap J$ is a subring of $R$ by the subring test. Let $r,s\in I\cap J$. Therefore, $r,s\in I,J$. Since $I$ is a subring, $r-s\in I$ since $I$ is closed under addition and has inverses. Since $J$ is a subring, $r-s\in J$ by the same logic. Therefore, $r-s\in I\cap J$. Now notice that $rs\in I$ since $I$ is closed under multiplication,  and by the same logic $rs\in J$. Therefore, $rs\in I\cap J$, and $I\cap J$ is a subring. Finally, let $a\in R$. Notice that $ar\in I$ since $I$ is an ideal, and $ar\in J$ because $J$ is an ideal. Therefore, $ar\in I\cap J$, and $I\cap J$ is an ideal.
