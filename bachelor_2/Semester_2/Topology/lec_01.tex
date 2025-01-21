@@ -41,13 +41,13 @@ Otherwise, we have
 ,\]
 since we must then have $A_n=X\forall n$. Since $\varnothing,X\in \mathcal{T} $, we have (2). The same argument applies for (3); if $X\in \left\{ A_n \right\}_{n=0}^k $, we have the union is $X$; otherwise we have the union is empty. The trivial topology is also called the minimal topology, as it is the smallest possible topology since it must contain these subsets. 
 
-The next example is the discrete topology. Let $\mathcal{T} =\mathcal{P} (X)$ for some set $X$. This very trivially satisfies definition \ref{dfn:1.1}, and we will explain later why we call it the discrete topology. This is also called the maximal topology, since it is the largest possible topology.
+The next example is the discrete topology. Let $\mathcal{T} =\mathscr{P} (X)$ for some set $X$. This very trivially satisfies definition \ref{dfn:1.1}, and we will explain later why we call it the discrete topology. This is also called the maximal topology, since it is the largest possible topology.
 
 Let $X=\mathbb{R}$. We will now define what is called the Zariski topology, or sometimes the finite compliment topology. Let $\mathcal{T} $ be defined as all sets with either finite compliment in $\mathbb{R}$, or the empty set:
 \[
 	\mathcal{T} \coloneqq \left\{ Y\subseteq \mathbb{R}\mid Y=\varnothing \lor \left| \mathbb{R}\setminus Y \right| <\infty \right\}
 .\]
-We will show this is a topology. By definition, $\varnothing\in \mathcal{T} $, and we have $\mathbb{R}-\mathbb{R}=\varnothing $ is finite, so $\mathbb{R}\in \mathcal{T} $. The second example is more interesting. Consider a finite collection $\left\{ A_n \right\}_{n=1}^k \subseteq \mathcal{T} $. We want to show
+We will show this is a topology. By definition, $\varnothing\in \mathcal{T} $, and we have $\mathbb{R}\setminus\mathbb{R}=\varnothing $ is finite, so $\mathbb{R}\in \mathcal{T} $. The second example is more interesting. Consider a finite collection $\left\{ A_n \right\}_{n=1}^k \subseteq \mathcal{T} $. We want to show
 \[
 	\bigcap_{i=1}^{k} A_i
 \]
