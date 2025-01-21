@@ -1,0 +1,98 @@
+\chapter{Topological Spaces}
+\lecture{1}{Tue 21 Jan 2025 11:01}{Syllabus Day}
+Textbook not required but I already bought it wooo also biweekly homework on blackboard always due at 11:59pm. We are encouraged to type homework (awewsomeeee) also why does this one guy in the class look like a literal reddit mod LOL also karim showed up 7m late. ``I cannot give everyone an A'' great its competitive now
+
+``You've probably heard that a mug and a donut are the same thing'' I love this class. Making this notion precise and rigorous is difficult, and by the end of the semester we will be able to prove this notion.
+
+\begin{definition}[Topological Space]\label{dfn:1.1}
+	Let $X\neq \varnothing$ be a set. A topology on $X$ is a collection of subsets $\mathcal{T} \subseteq \mathscr{P} (X)$ such that
+	\begin{enumerate}
+		\item $\varnothing,X\in \mathcal{T} $;
+		\item $\mathcal{T} $ is closed under \emph{finite} intersection;
+		\item $\mathcal{T} $ is closed under union.
+	\end{enumerate}
+	We call the pair $(X,\mathcal{T} )$ a \emph{topological space}.
+\end{definition}
+\begin{definition}[Open Set]\label{dfn:1.2}
+	Let $(X,\mathcal{T} )$ be a topological space. Any subset $A\subseteq X$ such that $A\in \mathcal{T} $ is called an \emph{open set}.
+\end{definition}
+
+Note that there is a finite restriction on (2), but not on (3). We will discuss this later. Definiton \ref{dfn:1.1} is extremely abstract and seemingly arbitrary, so consider the following examples to build some intuition.
+
+The most basic example is that of the \emph{standard topology on $\mathbb{R}$}. Define $\mathcal{T} $ as the collection of all unions of open intervals of the form $(a,b)\subseteq \mathbb{R}$, together with the empty set. Trivially this definition satisfies property (1), since $(-\infty,\infty)=\mathbb{R}$ is open, and we define $\varnothing\in \mathcal{T} $. It also satisfies (3) by our definition. Showing (2) is slightly more difficult and requires $\varepsilon $-$\delta $ to make precise, and we will cover it later when we have this machinery.
+
+Consider the open sets of the form
+\[
+	\left( \frac{-1}{2^n},\frac{1}{2^n} \right) ,\quad n\in\mathbb{N}
+\]
+in the standard topology on $\mathbb{R}$. However, if we take the intersection
+\[
+	\bigcap_{n\in\mathbb{N}} \left( -\frac{1}{2^n},\frac{1}{2^n} \right) =\left\{ 0 \right\}  
+.\]
+This is \emph{not an open set} in the standard topology on $\mathbb{R}$, as it is not an open interval and not empty. This is why the finite criterion on (2) is important.
+
+Consider a more simple example. On any set $X$, the trivial topology $\mathcal{T} =\left\{ \varnothing, X \right\} $ is a topology. We trivially have criteria (1). Consider a finite collection $\left\{ A_n \right\}_{n=0}^k$. There are two cases. If $A_n=\varnothing$ for some $n$, then
+\[
+	\bigcap_{n=0}^{k} A_n=\varnothing
+.\]
+Otherwise, we have
+\[
+	\bigcap_{n=0}^{k} A_n=X
+,\]
+since we must then have $A_n=X\forall n$. Since $\varnothing,X\in \mathcal{T} $, we have (2). The same argument applies for (3); if $X\in \left\{ A_n \right\}_{n=0}^k $, we have the union is $X$; otherwise we have the union is empty. The trivial topology is also called the minimal topology, as it is the smallest possible topology since it must contain these subsets. 
+
+The next example is the discrete topology. Let $\mathcal{T} =\mathcal{P} (X)$ for some set $X$. This very trivially satisfies definition \ref{dfn:1.1}, and we will explain later why we call it the discrete topology. This is also called the maximal topology, since it is the largest possible topology.
+
+Let $X=\mathbb{R}$. We will now define what is called the Zariski topology, or sometimes the finite compliment topology. Let $\mathcal{T} $ be defined as all sets with either finite compliment in $\mathbb{R}$, or the empty set:
+\[
+	\mathcal{T} \coloneqq \left\{ Y\subseteq \mathbb{R}\mid Y=\varnothing \lor \left| \mathbb{R}\setminus Y \right| <\infty \right\}
+.\]
+We will show this is a topology. By definition, $\varnothing\in \mathcal{T} $, and we have $\mathbb{R}-\mathbb{R}=\varnothing $ is finite, so $\mathbb{R}\in \mathcal{T} $. The second example is more interesting. Consider a finite collection $\left\{ A_n \right\}_{n=1}^k \subseteq \mathcal{T} $. We want to show
+\[
+	\bigcap_{i=1}^{k} A_i
+\]
+is open. By our definition, a set is open if and only if it's compliment in $\mathbb{R}$ is finite. DeMorgan's Law states that
+\[
+	\left( \bigcap_{i=1}^{k} A_i \right)^\complement = \bigcup_{i=1}^{k} A_i^\complement
+.\]
+``I assume you learned this in high school''. Note that the maximum cardinality of this union occurs when $A_i \cap A_j = \varnothing$ for all $i\neq j$, so we have
+\[
+	\left| \bigcup_{i=1}^{k} A_i^\complement \right| =\sum_{i=1}^{k} \left| A_i^\complement \right|
+.\]
+A finite sum of finite numbers is finite. More generally, a finite union of finite sets is finite. Now we show the third criterion holds. Suppose $\left\{ A_i \right\}_{i\in I}\subseteq \mathcal{T} $. By definition, $\left| A_i^\complement \right| <\infty$ for all $i\in I$. We wish to show
+\[
+	\left(\bigcup_{i\in I} A_i\right)^\complement < \infty
+.\]
+DeMorgan's Law also states that
+\[
+	\left( \bigcup_{i\in I} A_i  \right)^{c} = \bigcap_{i\in I} A_i^{c} 
+.\]
+Since the intersection of finite sets is finite, we have that $\cup \left\{ A_i \right\}_{i\in I}$ is open. The Zariski topology is the topology used in algebraic geometry.
+\begin{definition}[Neighborhood]\label{dfn:1.3}
+	Let $X$ be a topological space and let $x\in X$. An open set $U$ such that $x\in U$ is called a \emph{neighborhood} of $x$.
+\end{definition}
+
+The intuition behind a neighborhood is the collection of points near $x$. This may not be true in a general topology, but it is true in many topologies.
+
+\begin{theorem}\label{thm:1.1}
+	Let $X$ be a topological space. Then $A\subseteq X$ is open if and only if for all $x\in A$, there exists a neighborhood $U$ such that $x\in U\subseteq A$.
+\end{theorem}
+\begin{proof}
+	Suppose $A$ is open and let $x\in A$. Then $U=A$ is a neighborhood of $x$. Now suppose for all $x\in A$, there exists an open neighborhood $U_x\subseteq A$ of $x$. Note that
+	\[
+		A\subseteq \bigcup_{x\in A} U_x 
+	\]
+	because
+	\[
+		y\in A \implies  \exists U_y\text{ s.t. }y\in U_y \implies  y\in \bigcup_{x\in A} U_x
+	.\]
+	However, since every $U_x\subseteq A$, we have also that
+	\[
+		\bigcup_{x\in A} U_x \subseteq A
+	\]
+	since
+	\[
+		y\in \bigcup_{x\in A} U_x \implies \exists U_x \text{ s.t. }y\in U_x \subseteq A 
+	.\]
+	Therefore, $A$ is open by criteria (3) in definition \ref{dfn:1.1}.
+\end{proof}

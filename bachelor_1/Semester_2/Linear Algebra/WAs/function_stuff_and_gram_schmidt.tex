@@ -1,0 +1,282 @@
+\documentclass[12pt, letterpaper]{report}
+\input{../../preamble.tex}
+\DeclareMathOperator{\rank}{rank}
+\begin{document}
+\begin{definition}[Function]
+    A function or mapping \(f:X\to Y\) is a relation between two sets \(X\) and \(Y\) such that for any \(x\in X\), there exists exactly one \(y\in Y\) such that \(f(x)=y\). 
+    \[
+        \forall x\in X, \exists! y\in Y \text{ s.t. }y=f(x) 
+    \]
+    The set \(X\) is called the domain of \(f\) and the set \(Y\) is called the codomain of \(f\).
+\end{definition}
+A function can be more rigorously defined as \(f \subset X\times Y\) where \(\forall x\in X, \exists y\in Y\text{ s.t. }(x,y)\in f \) and \((x,y)\in f \land (x,z)\in f \Longrightarrow y=z\) (I used Wikipedia to recall part of this definition).
+\begin{definition}[Onto]
+    Let \(f:X\to Y\) be a mapping. We say that \(f\) is onto or surjective if for every \(y\in Y\), there exists some \(x\in X\) such that \(y=f(x)\).
+\end{definition}
+\begin{definition}[One-to-one]
+    Let \(f:X\to Y\) be a mapping. We say that \(f\) is one-to-one or injective if for \(x_1,x_2\in X\),
+    \[f \left( x_1 \right) = f \left( x_2 \right) \iff  x_1 = x_2\]
+    Equivalently,
+    \[
+        x_1 \neq x_2 \iff f \left( x_1 \right) \neq f \left( x_2 \right) 
+    \]
+\end{definition}
+\begin{remark}
+    Functions that are one-to-one and onto are also called bijections.
+\end{remark}
+Examples:\\
+\(f:\mathbb{R}\to \mathbb{R} \) given by \(f(x)=x\) is both one-to-one and onto. \\
+\(g:\mathbb{R} \to \mathbb{R}^+ \cup \{ 0 \} \) given by \(g(x)=x^2\) is onto due to its definition, but is not injective.\\
+\(h:\mathbb{R} \to \mathbb{R} \) given by \(h(x)=e^x\) is one-to-one, but is not onto \(\mathbb{R} \).\\
+\newpage
+Apply the Gram-Schmidt Orthonormalization Process to the following bases for \(\mathbb{R} ^n\), using vectors in the order the are given. 
+\begin{exercise}
+    \[
+        B=\{ (3,4),(1,0) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v}_1 \coloneqq (3,4)
+    \]
+    \[
+        \mathbf{v}_2 \coloneqq (1,0) - \frac{\left\langle (1,0),(3,4) \right\rangle }{\left\langle (3,4) ,(3,4)\right\rangle }(3,4)=(1,0)-\frac{3}{25}(3,4)=(1,0)-\left( \frac{9}{25},\frac{12}{25} \right)= \left( \frac{16}{25},-\frac{12}{25} \right)
+    \]
+    \[
+        \mathbf{w}_1 \coloneqq \frac{(3,4)}{\sqrt{3^2 + 4^2} }= \left( \frac{3}{5},\frac{4}{5} \right)
+    \]
+    \[
+        \mathbf{w}_2 \coloneqq \frac{\left( \frac{16}{25},\frac{12}{25} \right)}{\frac{\sqrt{16^2 +12^2} }{25} }= \frac{\left( \frac{16}{25},\frac{12}{25} \right)}{\frac{4}{5}}=\frac{5}{4}\left( \frac{16}{25},\frac{12}{25} \right)= \left( \frac{4}{5},-\frac{3}{5} \right)
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2 \right\} \) forms an orthonormal basis for \(\mathbb{R}^2\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (-1,2),(1,0) \}
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v}_1\coloneqq (-1,2)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (1,0)-\frac{\left\langle (1,0),(-1,2) \right\rangle }{\left\langle (-1,2),(-1,2) \right\rangle }(-1,2)=(1,0)- \frac{-1}{5}(-1,2)=(1,0)- \left( \frac{1}{5},-\frac{2}{5} \right) = \left( \frac{4}{5},\frac{2}{5} \right)
+    \]
+    \[
+        \mathbf{w}_1\coloneqq \frac{(-1,2)}{\sqrt{5} }= \left( -\frac{1}{\sqrt{5} },\frac{2}{\sqrt{5} } \right)
+    \]
+    \[
+        \mathbf{w} _2\coloneqq \frac{\left( \frac{4}{5},\frac{2}{5} \right) }{\frac{\sqrt{16+4} }{5}}= \frac{5}{\sqrt{20} }\left(\frac{4}{5},\frac{2}{5}  \right) =\left( \frac{4}{\sqrt{20} },\frac{2}{\sqrt{20} }  \right)
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^2\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (0,1),(2,5) \} 
+    \]
+\end{exercise}	
+\begin{solution}
+    \[
+        \mathbf{v} _1\coloneqq (0,1)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (2,5)-\frac{\left\langle (2,5),(0,1) \right\rangle }{\left\langle (0,1),(0,1) \right\rangle }(0,1) = (2,5)-\frac{5}{1}(0,1)=(2,5)-(0,5)=(2,0)
+    \]
+    \[
+        \mathbf{w}_1=(0,1)
+    \]
+    \[
+        \mathbf{w}_2 = (1,0)
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^2\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (4,-3),(3,2) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v} _1\coloneqq (4,-3)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (3,2)-\frac{\left\langle (3,2),(4,-3) \right\rangle }{\left\langle (4,-3),(4,-3) \right\rangle }(4,-3)=(3,2)-\frac{6}{25}(4,-3)=(3,2)- \left( \frac{24}{25},-\frac{18}{25} \right)=\left( \frac{51}{25},\frac{68}{25} \right)
+    \]
+    \[
+        \mathbf{w} _1\coloneqq \frac{(4,-3)}{\sqrt{16+9} }=\left( \frac{4}{5},-\frac{3}{5} \right)
+    \]
+    \[
+        \mathbf{w} _2\coloneqq \frac{\left( \frac{51}{25},\frac{68}{25} \right)}{\frac{\sqrt{51^2 + 68^2} }{25}}=\frac{\left( \frac{51}{25},\frac{68}{25} \right)}{\frac{85}{25}}=\frac{25}{85}\left( \frac{51}{25},\frac{68}{25} \right)=\left( \frac{51}{85},\frac{68}{85} \right) 
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^2\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (2,1,-2),(1,2,2),(2,-2,1) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v} _1\coloneqq (2,1,-2)
+    \]
+    \[
+        \mathbf{v}_2\coloneqq (1,2,2)-\frac{\left\langle (1,2,2),(2,1,-2) \right\rangle }{\left\langle (2,1,-2),(2,1,-2) \right\rangle }(2,1,-2)=(1,2,2)-0=(1,2,2)
+    \]
+    \[
+        \mathbf{v} _3\coloneqq (2,-2,1)-\frac{\left\langle (2,-2,1),(2,1,-2) \right\rangle }{\left\langle (2,1,-2),(2,1,-2) \right\rangle }(2,1,-2)-\frac{\left\langle (2,-2,1),(1,2,2) \right\rangle }{\left\langle (1,2,2),(1,2,2) \right\rangle }(1,2,2)=(2,-2,1)
+    \]
+    \[
+        \mathbf{w} _1\coloneqq \frac{(2,1,-2)}{\sqrt{4+1+4} }= \left( \frac{2}{3},\frac{1}{3},-\frac{2}{3}\right)
+    \]
+    \[
+        \mathbf{w} _2\coloneqq \frac{(1,2,2)}{\sqrt{1+4+4} }=\left( \frac{1}{3},\frac{2}{3},\frac{2}{3} \right) 
+    \]
+    \[
+        \mathbf{w} _3\coloneqq \frac{(2,-2,1)}{\sqrt{4+4+1} }=\left( \frac{2}{3},-\frac{2}{3},\frac{1}{3} \right) 
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2,\mathbf{w} _3 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^3\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (1,0,0),(1,1,1),(1,1,-1) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v}_1 \coloneqq (1,0,0)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (1,1,1)-\frac{\left\langle (1,1,1),(1,0,0) \right\rangle }{\left\langle (1,0,0),(1,0,0) \right\rangle }(1,0,0)=(1,1,1)-(1,0,0)=(0,1,1)
+    \]
+    \[
+        \mathbf{v} _3\coloneqq (1,1,-1)-\frac{\left\langle (1,1,-1),(1,0,0) \right\rangle }{\left\langle (1,0,0),(1,0,0) \right\rangle }(1,0,0)-\frac{\left\langle (1,1,-1),(0,1,1) \right\rangle }{\left\langle (0,1,1),(0,1,1) \right\rangle }(0,1,1)=(1,1,-1)-(1,0,0)=(0,1,-1)
+    \]
+    \[
+        \mathbf{w} _1\coloneqq (1,0,0)
+    \]
+    \[
+        \mathbf{w} _3\coloneqq \left( 0,\frac{1}{\sqrt{2} },\frac{1}{\sqrt{2} } \right) 
+    \]
+    \[
+        \mathbf{w} _3\coloneqq \left( 0,\frac{1}{\sqrt{2} },-\frac{1}{\sqrt{2} } \right) 
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2,\mathbf{w} _3 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^3\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (4,-3,0),(1,2,0),(0,0,4) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v} _1\coloneqq (4,-3,0)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (1,2,0)-\frac{\left\langle (4,-3,0),(1,2,0) \right\rangle }{\left\langle (4,-3,0),(4,-3,0) \right\rangle }(4,-3,0)=(1,2,0)-\frac{2}{25}(4,-3,0)=\left( \frac{33}{25},\frac{44}{25},0 \right) 
+    \]
+    \[
+        \mathbf{v} _3\coloneqq (0,0,4)-\frac{\left\langle (0,0,4),(4,-3,0) \right\rangle }{\left\langle (4,-3,0),(4,-3,0) \right\rangle }(4,-3,0)-\frac{\left\langle (0,0,4),\left( \frac{33}{25},\frac{44}{25},0 \right)  \right\rangle }{\left\langle \left( \frac{33}{25},\frac{44}{25},0 \right)\left( \frac{33}{25},\frac{44}{25},0 \right)   \right\rangle }=(0,0,4)
+    \]
+    \[
+        \mathbf{w}_1 \coloneqq \frac{\left( 4,-3,0 \right) }{\sqrt{25} }=\left( \frac{4}{5},-\frac{3}{5},0 \right) 
+    \]
+    \[
+        \mathbf{w}_2\coloneqq \frac{\left( \frac{33}{25},\frac{44}{25},0 \right) }{\frac{\sqrt{33^2 +44^2} }{25}}=\frac{25}{55}\left( \frac{33}{25},\frac{44}{25},0 \right) =\left( \frac{3}{5},\frac{4}{5},0 \right) 
+    \]
+    \[
+        \mathbf{w} _3\coloneqq (0,0,1)
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2,\mathbf{w} _3 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^3\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (0,1,2),(2,0,0),(1,1,1) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    Obviously the first two vectors are orthogonal.
+    \[
+        \mathbf{v} _1\coloneqq (0,1,2)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (2,0,0)
+    \]
+    \[
+        \mathbf{v} _3\coloneqq (1,1,1)-\frac{\left\langle (1,1,1),(0,1,2) \right\rangle }{\left\langle (0,1,2),(0,1,2) \right\rangle }(0,1,2)-\frac{\left\langle (1,1,1),(2,0,0) \right\rangle }{\left\langle (2,0,0),(2,0,0) \right\rangle }(2,0,0)
+    \]
+    \[
+        =(1,1,1)-\frac{3}{5}(0,1,2)-\frac{1}{2}(1,0,0)=\left( 0,\frac{2}{5},-\frac{1}{5} \right) 
+    \]
+    \[
+        \mathbf{w} _1\coloneqq \left( 0,\frac{1}{\sqrt{5} },\frac{2}{\sqrt{5} } \right) 
+    \]
+    \[
+        \mathbf{w} _2\coloneqq \left( 1,0,0 \right) 
+    \]
+    \[
+        \mathbf{w} _3\coloneqq \frac{\left( 0,\frac{2}{5},-\frac{1}{5} \right) }{\frac{\sqrt{5} }{5}}=\left( 0,\frac{2}{\sqrt{5} },-\frac{1}{\sqrt{5} } \right) 
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2,\mathbf{w} _3 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^3\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (0,1,1),(1,1,0),(1,0,1) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v} _1\coloneqq (0,1,1)
+    \]
+    \[
+        \mathbf{v} _2\coloneqq (1,1,0)-\frac{\left\langle (1,1,0),(0,1,1) \right\rangle }{\left\langle (0,1,1),(0,1,1) \right\rangle }(0,1,1)=(1,1,0)-\left( 0,\frac{1}{2},\frac{1}{2} \right) =\left( 1,\frac{1}{2},-\frac{1}{2} \right) 
+    \]
+    \[
+        \mathbf{v} _3\coloneqq (1,0,1)-\frac{\left\langle (1,0,1),(0,1,1) \right\rangle }{\left\langle (0,1,1),(0,1,1) \right\rangle }(0,1,1)-\frac{\left\langle (1,0,1),\left( 1,\frac{1}{2},-\frac{1}{2} \right)  \right\rangle }{\left\langle \left( 1,\frac{1}{2},-\frac{1}{2} \right),\left( 1,\frac{1}{2},-\frac{1}{2} \right) \right\rangle }\left( 1,\frac{1}{2},-\frac{1}{2} \right)
+    \]
+    \[
+        =(1,0,1)-\left( 0,\frac{1}{2},\frac{1}{2} \right)-\left( \frac{1}{3},\frac{1}{6},-\frac{1}{6} \right)=\left( \frac{2}{3},-\frac{4}{6},\frac{4}{6} \right)   
+    \]
+    \[
+        \mathbf{w} _1\coloneqq \left( 0,\frac{1}{\sqrt{2} },\frac{1}{\sqrt{2} } \right) 
+    \]
+    \[
+        \mathbf{w} _2\coloneqq \frac{\left( 1,\frac{1}{2},-\frac{1}{2} \right) }{\sqrt{1+\frac{1}{4}+\frac{1}{4}} }=\frac{2}{\sqrt{6} }\left( 1,\frac{1}{2},-\frac{1}{2} \right)=\left( \frac{2}{\sqrt{6}},\frac{1}{\sqrt{6} },-\frac{1}{\sqrt{6} } \right)  
+    \]
+    \[
+        \mathbf{w} _3\coloneqq \frac{\left( \frac{2}{3},-\frac{2}{3},\frac{2}{3} \right) }{\frac{\sqrt{12} }{3}}=\frac{3}{\sqrt{12} }\left( \frac{2}{3},-\frac{2}{3},\frac{2}{3}\right) =\left( \frac{2}{2\sqrt{3} },-\frac{2}{2\sqrt{3} },2\sqrt{3}  \right)=\left( \frac{1}{\sqrt{3} },-\frac{1}{\sqrt{3} },\frac{1}{\sqrt{3} } \right)  
+    \]
+    The set \(\left\{ \mathbf{w} _1,\mathbf{w} _2,\mathbf{w} _3 \right\} \) forms an orthonormal basis for \(\mathbb{R} ^3\).
+\end{solution}
+\begin{exercise}
+    \[
+        B=\{ (3,4,0,0),(-1,1,0,0),(2,1,0,-1),(0,1,1,0) \} 
+    \]
+\end{exercise}
+\begin{solution}
+    \[
+        \mathbf{v} _1\coloneqq (3,4,0,0)
+    \]
+    \[
+        \mathbf{v}_2\coloneqq (-1,1,0,0)-\frac{1}{25}(3,4,0,0)=(-1,1,0,0)-\left( \frac{3}{25},\frac{4}{25},0,0 \right) =\left( -\frac{28}{25},\frac{21}{25},0,0 \right)
+    \]
+    \[
+        \mathbf{v}_3\coloneqq (2,1,0,-1)-\frac{10}{25}(3,4,0,0)-\frac{5}{7}\left( -\frac{28}{25},\frac{21}{25},0,0 \right)=\left( \frac{8}{5},-\frac{6}{5},0,-1 \right) 
+    \]
+    \[
+        \mathbf{v}_4\coloneqq (0,1,1,0)-\frac{4}{25}(3,4,0,0)-\frac{3}{7}\left( -\frac{28}{25},\frac{21}{25},0,0 \right)-\frac{-6}{25}\left( \frac{8}{5},-\frac{6}{5},0,-1 \right) =\left( \frac{108}{125},\frac{44}{125},1,-\frac{6}{25} \right) 
+    \]
+    \[
+        \mathbf{w}_1\coloneqq \frac{(3,4,0,0)}{\sqrt{25} }=\left( \frac{3}{5},\frac{4}{5},0,0 \right) 
+    \]
+    \[
+        \mathbf{w}_2\coloneqq \frac{\left( -\frac{28}{25},\frac{21}{25},0,0 \right) }{\frac{7}{5}}=\left( -\frac{4}{5},\frac{3}{5},0,0 \right) 
+    \]
+    \[
+        \mathbf{w}_3\coloneqq \frac{\left( \frac{8}{5},-\frac{6}{5},0,-1 \right)}{\sqrt{5} }= \left( \frac{8}{5\sqrt{5} },-\frac{6}{5\sqrt{5} },0,-\frac{1}{\sqrt{5} } \right) 
+    \]
+    \[
+        \mathbf{w}_4\coloneqq \left( \frac{108\sqrt{1205} }{6025},\frac{44\sqrt{1205} }{6025},\frac{5\sqrt{1205} }{241},-\frac{6\sqrt{1205} }{1205} \right) 
+    \]
+    The set \(\left\{ \mathbf{w}_1,\mathbf{w}_2,\mathbf{w}_3,\mathbf{w}_4 \right\} \) hopefully forms an orthonormal basis for \(\mathbb{R}^4\).
+\end{solution}
+\end{document}

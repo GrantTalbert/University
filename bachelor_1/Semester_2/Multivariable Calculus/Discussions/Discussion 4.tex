@@ -1,0 +1,267 @@
+\documentclass[12pt, letterpaper]{report}
+\usepackage[margin=0.75in]{geometry} %page size formatting
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage{cancel} %Lines in environmental environment denoting canceled terms
+\usepackage{systeme} %Curly bracket aligning of systems of equations
+\usepackage{mathrsfs}
+\begin{document}
+Grant Talbert 14.3.60
+Find the partial derivative \(g_{rst} \) for the function \(g:\mathbb{R} ^3\to \mathbb{R} \) given as
+\(\displaystyle g(r,s,t)=e^r \sin (st)\)
+\begin{align*}
+    \frac{\partial ^3 g}{\partial t \partial s \partial r}&= \frac{\partial^3 }{\partial t\partial s \partial r}\left( e^r \sin (st) \right) \\
+    &=\frac{\partial^2 }{\partial r \partial s}\left( se^r \cos (st) \right)\\
+    &=\frac{\partial }{\partial r}\left( e^r \cos (st)-st e^r \sin (st) \right)\\
+    &= e^r \cos (st)-st e^r \sin (st)
+\end{align*}
+\newpage
+Grant Talbert 14.8.10
+Given the function \(\displaystyle f:\mathbb{R} ^3\to \mathbb{R} \) defined as
+\(\displaystyle f(x,y,z)=e^{xyz} \)
+Find all extreme values of the function subject to the constraint \(\displaystyle 2x^2 +y^2 +z^2 =24\).\\
+\[
+    \nabla f =\left\langle yze^{xyz},xze^{xyz},xye^{xyz}    \right\rangle
+\]
+\[
+    \nabla g=\left\langle 4x,2y,2z \right\rangle 
+\]
+\[
+    \nabla f=\lambda \nabla g
+\]
+\[
+    \Longrightarrow \left\langle yze^{xyz},xze^{xyz},xye^{xyz}    \right\rangle=\lambda \left\langle 4x,2y,2z \right\rangle
+\]
+\[
+    \Longrightarrow \left\{\begin{array}{c}
+        yze^{xyz}= \lambda 4x\\
+        xze^{xyz}=\lambda 2y\\
+        xye^{xyz}=\lambda 2z\\
+        2x^2 +y^2 +z^2=24
+    \end{array}\right.
+\]
+\[
+    \text{Suppose } x,y,z\neq  0 
+\]
+\[
+    \Longrightarrow \left\{\begin{array}{c}
+        xyze^{xyz}= \lambda 4x^2\\
+        xyze^{xyz}=\lambda 2y^2\\
+        xyze^{xyz}=\lambda 2z^2\\
+        2x^2 +y^2 +z^2=24
+    \end{array}\right.
+\]
+\[
+    \Longrightarrow \lambda 4x^2 =\lambda 2y^2=\lambda 2z^2=xyze^{xyz} 
+\]
+\[
+    \Longrightarrow \lambda 2x^2 =\lambda y^2=\lambda z^2=\frac{xyze^{xyz} }{2}
+\]
+\[
+    \text{Suppose }\lambda \neq 0 
+\]
+\[
+    \Longrightarrow 2x^2=y^2=z^2=\frac{xyze^{xyz} }{2\lambda }
+\]
+\[ 
+    \Longrightarrow 2x^2 +y^2 +z^2 =\frac{xyze^{xyz} }{2\lambda }+\frac{xyze^{xyz} }{2\lambda }+\frac{xyze^{xyz} }{2\lambda }=24
+\]
+\[
+    \Longrightarrow 3\frac{xyze^{xyz} }{2\lambda }=24
+\]
+\[
+    \Longrightarrow \frac{xyze^{xyz} }{2\lambda }=8
+\]
+\[
+    \Longrightarrow 2x^2=y^2=z^2=8
+\]
+\[
+    x=\pm\sqrt{4}=\pm 2 
+\]
+\[
+    y=\pm\sqrt{8} 
+\]
+\[
+    z=\pm\sqrt{8} 
+\]
+
+    \[
+        \lambda =\frac{xyze^{xyz}}{16}
+    \]
+    \[
+        \lambda =\frac{\left( \pm 2 \right)\left( \pm \sqrt{8}  \right)\left( \pm \sqrt{8}  \right)e^{\left( \pm 2 \right)\left( \pm \sqrt{8}  \right)\left( \pm \sqrt{8}  \right)}}{16}
+    \]
+    \[
+        \lambda =\frac{(\pm 1)(\pm 1)(\pm 1)\left( 2\sqrt{8^2}  \right)e^{(\pm 1)(\pm 1)(\pm 1)\left( 2\sqrt{8^2}\right)}}{16}
+    \]
+    \[
+        \lambda =\frac{(\pm 1)(\pm 1)(\pm 1)\left( 16 \right) e^{(\pm 1)(\pm 1)(\pm 1)(16)}}{16}
+    \]
+    \[
+        \lambda =(\pm 1)(\pm 1)(\pm 1) e^{(\pm 1)(\pm 1)(\pm 1)(16)}
+    \]
+    \[
+        1^3=1\quad (-1)(1)^2=-1\quad (-1)^2 (1)=1\quad (-1)^3=1
+    \]
+    \[
+        \therefore (\pm 1)(\pm 1)(\pm 1)=\pm 1
+    \]
+    \[
+        \lambda =\pm e^{\pm 16}
+    \]
+    \[
+        \lambda \in \left\{ -e^{16} ,-\frac{1}{e^{16} },\frac{1}{e^{16} },e^{16}  \right\} 
+    \]
+    \[
+        \text{Let }\mathcal{D} \text{ be the set of all points satisfying the statement }\nabla f=\lambda \nabla g 
+    \]
+    \[
+        \left( \pm 2,\pm\sqrt{8},\pm\sqrt{8}, \pm e^{\pm 16}  \right) \in\mathcal{D} 
+    \]
+    \[
+        \text{card}(\mathcal{D} )\geq 32 
+    \]
+    \[
+        \text{Now we will suppose each variable equals to }0\text{.}  
+    \]
+    \[
+        \text{Suppose }x=0 \text{ and notice }e^0=1 
+    \]
+    \[
+        \Longrightarrow \left\{\begin{array}{c}
+            yze^{0}= 0\\
+            0e^{0}=\lambda 2y\\
+            0ze^{0}=\lambda 2z\\
+            y^2 +z^2=24
+        \end{array}\right.
+    \]
+    \[
+        \Longrightarrow \left\{\begin{array}{c}
+            yz= 0\\
+            0=\lambda 2y\\
+            0=\lambda 2z\\
+            y^2 +z^2=24
+        \end{array}\right.
+    \]
+    \[
+        yz=0\iff (y=0)\lor( z=0)\quad \text{(first equation)}
+    \]
+    \[
+        \text{Suppose }y=0 
+    \]
+    \[
+        \Longrightarrow 0=\lambda 2(0)=0\quad \text{(second equation)} 
+    \]
+    \[
+        \Longrightarrow z^2=24\neq 0\quad \text{(fourth equation)}
+    \]
+    \[
+        0=\lambda 2z,z\neq 0\quad \text{(third equation)}
+    \]
+    \[
+        \iff \lambda =0
+    \]
+    \[
+        \therefore (x=0)\land (y=0) \iff \land (\lambda =0)\land \left(z=\pm\sqrt{24} \right)
+    \]
+    \[
+        \therefore \left(0,0,\pm\sqrt{24},0 \right)\in \mathcal{D}
+    \]
+Notice that if any variable \(x,y,z\) is equal to \(0\), then the first equations will have a \(0\) on one side, and thus must be \(0=0\). Each variable has a statement wherein it is set equal to the product of the other two variables and \(\exp (x,y,z)\), which is never equal to \(0\). Therefore, at least one of the other variables must also be equal to \(0\) to satisfy this statement. One of the variables can never be equal to \(0\) for the final equation to be satisfied, so when that variable is on the side with \(\lambda \), it will follow that \(\lambda \) is equal to \(0\) to satisfy the equation. Thus, we will have the following set of points if either \(x,y,\) or \(z\) is set equal to \(0\):
+\[
+    \left( \pm\sqrt{24},0,0,0  \right),\left( 0,\pm\sqrt{24},0,0  \right),\left( 0,0,\pm\sqrt{24},0  \right)\in \mathcal{D} 
+\]
+There are exactly 38 elements of \(\mathcal{D} \). The question only actually asked for the absolute max and min, and I'm happy to not calculate 38 different function values for one problem. In fact, we don't even really have to calculate anything. Recall the original function:
+\[
+    f(x,y,z)=e^{xyz} 
+\]
+Recall the set of points \((x,y,z,\lambda )\) satisfying the relation \(\nabla f=\lambda \nabla g\):
+\[
+    \mathcal{D} =\left\{ \left( \pm 2,\pm\sqrt{8},\pm\sqrt{8},\pm e^{\pm 16}   \right),\left( \pm\sqrt{24},0,0,0  \right),\left( 0,\pm\sqrt{24},0,0  \right),\left( 0,0,\pm\sqrt{24},0  \right)  \right\} 
+\]
+We can completely ignore the \(\lambda \) values when plugging back into the equation. Let \(\mathscr{D} \) be the set of all points in \(\mathcal{D} \) but without their \(\lambda \) values (yes i changed fonts instead of letters because i felt like it):
+\[
+    \mathscr{D} =\left\{ \left( \pm 2,\pm\sqrt{8},\pm\sqrt{8}   \right),\left( \pm\sqrt{24},0,0  \right),\left( 0,\pm\sqrt{24}  \right),\left( 0,0,\pm\sqrt{24}  \right)  \right\} 
+\]
+The exponential function \(\exp :\mathbb{R} ^3\to \mathbb{R}^+ \) is always going to output a positive number with a real-valued input. Also notice that for any point \(\mathbf{x} _0=\left( x_0,y_0,z_0 \right) \)  with \(x_0\), \(y_0\), or \(z_0\) equal to 0, we have
+\[
+    f \left( \mathbf{x} _0 \right) =e^{0}=1 
+\]
+Thus, any point \(\mathbf{x}  \)  of the form 
+\[
+    \left( \pm\sqrt{24},0,0  \right),\left( 0,\pm\sqrt{24},0 \right),\left( 0,0,\pm\sqrt{24}  \right)
+\]
+will give
+\[
+    f(\mathbf{x} )=1
+\]
+Therefore we only need to consider points of the form 
+\[\mathbf{a }\coloneqq   \left( \pm 2,\pm\sqrt{8},\pm\sqrt{8}   \right)\]
+and see if they can yield some \(f\neq 1\). Notice for any point \(\mathbf{a}=(x_a,y_a,z_a) \), we have
+\[
+     x_a y_az_a=\left( \pm 2 \right) \left( \pm \sqrt{8}  \right) \left( \pm \sqrt{8}  \right)
+\] 
+\[
+    =(\pm 1)(\pm 1)(\pm 1)(16)
+\]
+\[
+    =\pm 16
+\]
+So we only actually have two values to consider to determine if there can be some \(f\neq 1\), those being \(xyz=-16\) and \(xyz=16\). Let \(\mathbf{a}_- \) be a point with \(xyz=-16\), and likewise let \(\mathbf{a} _+\) be a point with \(xyz=16\). We have 
+\[
+    f(\mathbf{a} _-)=e^{-16} =\frac{1}{e^{16} }<1
+\]
+\[
+    f(\mathbf{a} _+)=e^{16}>1 
+\]
+Therefore, \(f\) subject to the constraint \(g(x,y,z)=24\) achieves a maximum of \(\exp (16) \) at any point \(\mathbf{a} _+\) and a minimum of \(\exp (-16) \) at any point \(\mathbf{a} _{-} \).
+\newpage
+\noindent\textbf{\large Discussion 6 or something}\\
+Use polar coordinates to find the volume of the given solid:\\
+Bounded by the paraboloid \(z=1+2x^2 + 2y^2\) and the plane \(z=7\) in the first octant.\\
+Let \(V\) be the volume of the given solid. To identify the set \(D \subset \mathbb{R} ^2\) that is to be integrated over, let \(1+2x^2 + 2y^2 = 7\). Simplifying this equation will yield an expression for the level curve wherein the paraboloid intersects the plane. We have 
+\[
+    7=1+2x^2 +2y^2
+\]
+\[
+    \Longrightarrow 3=x^2 +y^2
+\]
+We find that we are integrating over a circle of radius \(\sqrt{3} \). Also recall that the question only considers the first octant, so we say \(D=\left\{ (x,y)\in\mathbb{R} ^2 \mid x^2 + y^2 \leq  3 \land x,y\in\left(0,\sqrt{3} \right] \right\} \). In general, \(0\) would not be included in the first octant, so this set would not include the set of points with \(x=0\) or \(y=0\). However, both \(z=7\) and \(z=1+2x^2 +2y^2\) are continuous for all \((x,y)\in\mathbb{R} ^2\), so the set of limit points for \(x\to 0\) or \(y\to 0\) for each respective function is equivalent to the actual function value at that point. As such, we can define a set \(D^{\prime}\coloneqq \left\{ (x,y)\in\mathbb{R} ^2 \middle| x^2 + y^2 \leq  3 \land x,y\in\left[0,\sqrt{3} \right] \right\} \) and find that\\
+\[
+    V=\iint\limits_{D}f(x,y)\,dA = \iint\limits_{D^{\prime} }f(x,y)\,dA
+\]
+Since all coefficients of the paraboloid are positive, this paraboloid must open up, and thus our integral is bounded from \emph{above} by \(z=7\), and below by \(z=1+2x^2 +\text2y^2 \). As such, we have 
+\[
+    V=\iint\limits_{D^{\prime} }7\,dA - \iint\limits_{D^{\prime} }1+2x^2 + 2y^2 dA
+\]
+This looks easy to integrate in polar coordinates. Luckily, that's what the question asked. For the general case, when a function \(f\) is continuous on \(D\) which can be given as \(r\in [a,b]\) and \(\theta \in[\alpha ,\beta ]\), where \(r\) is radius and \(\theta \) is angle, then 
+\[
+    \iint\limits_{D^{\prime} }f(x,y)\,dA = \int_\alpha ^\beta \int_a^b f \left( r\cos \theta ,r\sin \theta  \right)rdrd \theta 
+\]
+Using polar coordinates, we can write \(D^{\prime} =\left\{ (r\cos \theta ,r\sin \theta )\mid r\in[0,\sqrt{3} ]\land \theta \in \left[0,\frac{\pi}{2}\right] \right\} \) For \(f(x,y)=1+2x^2 +2y^2\), we have 
+\begin{align*}
+    \iint\limits_{D^{\prime} }f(x,y)\,dA &= \int_{0}^{\frac{\pi}{2}}\int_{0}^{\sqrt{3} }\left( 1+2r^2 \cos ^2(\theta )+2r^2 \sin ^2(\theta ) \right) rdrd \theta\\
+    &= \int_{0}^{\frac{\pi}{2}}\int_{0}^{\sqrt{3} }r+2\left( \cos ^2(\theta ) \right)r^3 + 2\left( \sin ^2(\theta ) \right)r^3\,drd \theta \\
+    &=\int_{0}^{\frac{\pi}{2}}\int_{0}^{\sqrt{3} } r+2r^3 \left( \cos ^2 (\theta )+\sin ^2(\theta ) \right) \,drd \theta \\
+    &= \int_{0}^{\frac{\pi}{2}}\int_{0}^{\sqrt{3} } r+2r^3\,drd \theta \\
+    &=\int_{0}^{\frac{\pi}{2}}\left( \frac{r^2}{2}+\frac{2r^4}{4}\right)\bigg|_{0}^{\sqrt{3} }\,d \theta \\
+    &= \int_{0}^{\frac{\pi}{2} } \frac{3}{2}+\frac{9}{2}\,d \theta \\
+    &=\int_{0}^{\frac{\pi}{2} }6\,d \theta \\
+    &= 3\pi
+\end{align*}
+Now consider the fact that the solid is bounded from above by \(z=7\). We must evaluate 
+\[
+    \iint\limits_{D^{\prime} }7\,dA
+\]
+This is a strange thing to evaluate with an integral, since common sense tells us it's a quarter cylinder with volume \(\frac{\pi r^2 h}{4}=\frac{21\pi }{4}\). However, integrals are "fun", so we should do another. \(z=7\) in polar form is still \(z=7\).
+\begin{align*}
+    \iint\limits_{D^{\prime} }7\,dA&=\int_{0}^{\frac{\pi}{2}}\int_{0}^{\sqrt{3} }7r\,drd \theta \\
+    &=\int_{0}^{\frac{\pi}{2}}\frac{7r^2}{2}\bigg| _0^{\sqrt{3} } \,d \theta \\
+    &= \int_{0}^{\frac{\pi}{2}} \frac{21}{2}\,d \theta \\
+    &= \frac{21\pi}{4}
+\end{align*}
+Now we can calculate \(V\). 
+\[
+    V= \frac{21\pi}{4}-3\pi =\frac{21\pi}{4}-\frac{12\pi}{4}=\frac{9\pi }{4}
+\]
+\hfill\(\blacksquare\) 
+\end{document}

@@ -1,0 +1,546 @@
+\documentclass[12pt, letterpaper]{article}
+\input{./preamble2.tex}
+\DeclareMathOperator{\rank}{rank}
+\begin{document}
+\section*{Notation}
+\begin{itemize}
+    \item \(\left\{ x \mid P(x) \right\} \) means ``the set of all \(x\) such that \(P(x)\) is true.''
+    \item \(A \cup B\) means \(\{ x \mid x\in A \text{ or }x\in B  \} \).
+    \item \(A\cap B\) means \(\{ x \mid x\in A \text{ and }x\in B  \} \).
+    \item \(A\setminus B\) means \(\{ x \mid x\in A \text{ and }x\notin B  \} \).
+    \item \(A \subset B\) means ``\(A\) is a subset of \(B\)'', formally defined as \(A \subset B \iff A \cap B = A\). 
+    \item \(\Longrightarrow \Longleftarrow\) is one of the notations for a contradiction.
+    \item \(\iff \) means ``if and only if.''
+    \item \(\Longrightarrow \) means ``implies.''
+    \item If \(S\) is a set, then \(\vert S \vert \) is the \textbf{cardinality} of the set, or how many elements it contains. For example, \(\vert \{ 1,89 \}  \vert=2 \) because it contains two elements.
+    \item If \(f\) is a function, then \(f:x\mapsto x^2\) is an equivalent statement to \(f(x)=x^2\), and is read ``\(f\) maps \(x\) to \(x^2\).''
+\end{itemize}
+\newpage
+\section{Problems}
+\begin{exercise}[Vector Spaces]\label{1}
+    Let \(\mathbb{Z}/2\mathbb{Z}\) denote the set of integers modulo 2; that is 
+    \[
+        \mathbb{Z}/2\mathbb{Z} = \left\{ 0,1 \right\} 
+    \]
+    where addition is defined as follows:
+    \[
+        0+0=0\;\;(\text{mod }2 )\quad 0+1=1\;\;(\text{mod }2 )
+    \]
+    \[
+        1+0=1\;\;(\text{mod }2 )\quad 1+1=0\;\;(\text{mod }2 )
+    \]
+    Prove or disprove the following statement: \(\mathbb{Z}/2\mathbb{Z}\) is a vector space.
+\end{exercise}
+\begin{exercise}[Subspaces]\label{2}
+    Let \(V\) be a vector space with subspaces \(X\) and \(Y\). Define the \textbf{sum} \textbf{of} \textbf{two} \textbf{vector} \textbf{spaces} to be 
+    \[
+        X+Y = \left\{ \mathbf{x}+\mathbf{y} \mid \mathbf{x}\in X\text{ and }\mathbf{y}\in Y  \right\}
+    \]
+    Show that \(X+Y\) is a subspace of \(V\).
+\end{exercise}
+\begin{exercise}[Linear Independence]\label{3}
+    Consider the vector space \(\mathbb{R}^2\). Let \(A\) be any matrix
+    \[
+        A=\begin{bmatrix}[r]
+            \cos \theta  &-\sin \theta    \\
+             \sin \theta &\cos \theta    \\
+        \end{bmatrix}
+    \]
+    with \(\theta \in (0,\pi )\cup (\pi ,2\pi )\). Show that for any nonzero vector \(\mathbf{v}\in \mathbb{R}^2\), the set \(\mathcal{B}  =\left\{ \mathbf{v},A \mathbf{v} \right\} \) is linearly independent.
+\end{exercise}
+\begin{exercise}[Basis]\label{4}
+    Even if you were unable to prove Exercise \ref{3}, you can still use the result that the set \(\mathcal{B}  =\left\{ \mathbf{v},A \mathbf{v} \right\} \) is linearly independent. Use this result to prove that \(\mathcal{B} \) is a basis for \(\mathbb{R}^2\).
+\end{exercise}
+\begin{exercise}[Nullity and Rank]\label{5}
+    Let \(A\in M_{2,6}\) be a \(2\times 6\) matrix with \(\rank A=2\). Find the nullity of \(A\).
+\end{exercise}
+\begin{exercise}[Transition Matrices]\label{6}
+    Prove that transition matrices are invertible.
+\end{exercise}
+\begin{exercise}[Inner Products]\label{7}
+    Let \(f\) be continuous on the interval \([a,b]\) with \(a<x\leq b\). Let \(I_a^n f(x)\) denote \(n\) repeated integrals of \(f\) from \(a\) to \(x\). For example,
+    \[
+        I_2^1 f(3)=\int_2^3 f(x)\,dx
+    \]
+    The Riemann Liouville Integral is a method of defining the integral operator \(I^\alpha \) for non-integer values of \(\alpha \). We give
+    \[
+        I_a^\alpha f(x)=\frac{1}{\Gamma (\alpha )}\int_a^x f(t)\left( x-t \right)^{\alpha -1} \,dt
+    \]
+    An important thing to note about the Riemann Liouville Integral is that for any integer values of \(\alpha \), it is equivalent to evaluating the repeated integral like normal. For example:
+    \[
+        I_a^1 f(x) = \frac{1}{\Gamma (1)}\int_a^x f(t)(x-t)^{1-1}\,dt = \frac{1}{1}\int_a^x f(t)\,dt
+    \]
+    Let \(\mathbf{x}=\left(x_1,x_2,x_3\right)\) and \(\mathbf{y}=\left( y_1,y_2,y_3 \right) \) with \(\mathbf{x},\mathbf{y}\in\mathbb{R}^3\). Let \(f(x)=x^2\). Using this definition of the repeated integral, prove or disprove whether the following function defines an inner product on \(\mathbb{R}^3\):
+    \[
+        \left\langle \mathbf{x},\mathbf{y} \right\rangle =I_1^{y_1}f \left( x_1 \right) +I_1^{y_2}f \left( x_2 \right) +I_1^{y_3}f \left( x_3 \right)
+    \]
+\end{exercise}
+\begin{exercise}[Linear Transformation Proof]\label{8}
+    Let \(T:V\to W\) be a linear transformation between \(V\) and \(W\). Prove \(T(\mathbf{0})=\mathbf{0}\).
+\end{exercise}
+\begin{exercise}[Isomorphisms]\label{9}
+    Let \(U\) and \(V\) be finite dimensional vector spaces. Prove that \(\dim U=\dim V\) if and only if \(U\cong V\).
+\end{exercise}
+\begin{exercise}[CHALLENGE]
+    Let \(U\) and \(V\) be vector spaces with \(\dim U=m\) and \(\dim V=n\). Show that the set of all linear transformations \(T:U\to V\), denoted \(\mathcal{L} (U,V)\), is a vector space with the following defintions of vector addition and scalar multiplication. Let \(T_1,T_2\in \mathcal{L} (U,V)\), \(\mathbf{u}\in U\) and \(\lambda \in \mathbb{R}\).
+    \[
+        (T_1 +T_2)(\mathbf{u})=T_1 (u)+T_2 (\mathbf{u})
+    \]
+    \[
+        (\lambda T_1)(\mathbf{u})=\lambda T_1(\mathbf{u})
+    \]
+    Then show \(\dim \mathcal{L} (U,V)=mn\) (hint: show \(\mathcal{L} (U,V)\cong M_{m,n}\) ).
+\end{exercise}
+\begin{exercise}[Fields]
+    In class, and in Exercise \ref{9} we stated that two vector spaces \(U,V\) are isomorphic if and only if \(\dim U=\dim V\). However, this theorem makes the assumption that both \(U\) and \(V\) use the same set of \textbf{scalars}. If \(U\) and \(V\) have different sets of scalars, it is not necessarily true that \(U\cong V\) if \(\dim U=\dim V\). To illustrate this, let the vector space \(V\) be the set \(\mathbb{R}^2\) with the set \(\mathbb{R}\) as the set of scalars, and let the vector space \(W\) be the set \(\mathbb{C}^2\) with the set \(\mathbb{C}\) as the set of scalars. Show that \(\dim V = 2\) and \(\dim W=2\). Then show that \(V\ncong W\).
+\end{exercise}
+\begin{exercise}[Subspace]
+    Let \(V\) be a vector space with subspaces \(U,W\). Show \(U\cup W\) is not a subspace of \(V\). Prove \(U\cap V\) is a subspace of \(V\).
+\end{exercise}
+\newpage
+\section{Solutions}
+\begin{solution}
+    Consider the scalar \(3\). Notice that \(3\cdot1=3\) and \(3\notin \mathbb{Z}/2\mathbb{Z}\). Therefore, the set is not closed under scalar multiplication. If you don't like this because \(3=1\;\;(\text{mod } 2)\), then consider the scalar 2.5. Interestingly, it satisfies all of the properties of vector addition, and only fails under scalar multiplication.
+\end{solution}
+\begin{solution}
+    If a set \(U\) is a subset of a vector space \(V\), then the \emph{test for a subspace} says \(U\) is a subspace of \(V\) if and only if
+    \begin{enumerate}
+        \item \(U\) is not empty.
+        \item \(U\) is closed under addition.
+        \item \(U\) is closed under scalar multiplication.
+    \end{enumerate}
+    Thus, \(X+Y\) is a subspace of \(V\) if it satisfies these three properties. Notice that \(X\) and \(Y\) are both defined to be subspaces themselves. We know from the vector space axioms that both \(X\) and \(Y\) must contain a \(\mathbf{0}\) vector, because otherwise they would not be vector spaces. We also know that the \(\mathbf{0}\) vector in \(X\) is the same as the \(\mathbf{0}\) vector in \(Y\) because they are both subsets of \(V\), and additive identities are unique. As such, we find that \(\mathbf{0}\in X\) and \(\mathbf{0}\in Y\). Since \(\mathbf{0}+\mathbf{0}=\mathbf{0}\), we know that \(\mathbf{0}\in X+Y\). We have now found one element that the set \(X+Y\) \textbf{must} contain, so \(X+Y\) cannot be empty. It may contain more elements, but it must contain at least \(\mathbf{0}\).\\
+    To prove the second property, consider some arbitrary \(\mathbf{x}_1,\mathbf{x}_2\in X\) and \(\mathbf{y}_1,\mathbf{y}_2\in Y\). It follows that \(\mathbf{x}_1 +\mathbf{y}_1 \in X+Y\) and \(\mathbf{x}_2 +\mathbf{y}_2 \in X+Y\). We must show that \(\mathbf{x}_1 +\mathbf{y}_1 +\mathbf{x}_2 +\mathbf{y}_2 \in X+Y\). Since these vectors must at least be elements of \(V\), since \(X\) and \(Y\) are subspaces of \(V\) and \(V\) is closed under addition, we can apply the commutative and associative properties:
+    \[
+        \mathbf{x}_1 +\mathbf{y}_1 +\mathbf{x}_2 +\mathbf{y}_2 = \left( \mathbf{x}_1 +\mathbf{x}_2 \right) + \left( \mathbf{y}_1 +\mathbf{y}_2 \right)
+    \]
+    Notice that since \(\mathbf{x}_1,\mathbf{x}_2\in X\), and since \(X\) is a subspace and is thus closed under addition, we know that \(\mathbf{x}_1 +\mathbf{x}_2 \in X\). Similarly, \(\mathbf{y}_1 +\mathbf{y}_2 \in Y\). We can define \(\mathbf{x}_3 = \mathbf{x}_1 +\mathbf{x}_2\) and \(\mathbf{y}_3 =\mathbf{y}_1 +\mathbf{y}_2\), and recognize that \(\mathbf{x}_3 \in X\) and \(\mathbf{y}_3\in Y\). Therefore,
+    \[
+        \left( \mathbf{x}_1 +\mathbf{x}_2 \right) + \left( \mathbf{y}_1 +\mathbf{y}_2 \right) = \mathbf{x}_3 +\mathbf{y}_3
+    \]
+    However, since \(\mathbf{x}_3\in X\) and \(\mathbf{y}_3 \in Y\), we are adding a single vector in \(X\) to a single vector in \(Y\), and all vectors of this form are by definition elements of \(X+Y\). Thus, \(\mathbf{x}_3 +\mathbf{y}_3 \in X+Y\). Therefore we have 
+    \[
+        \mathbf{x}_1 +\mathbf{y}_1 +\mathbf{x}_2 +\mathbf{y}_2 \in X+Y
+    \]
+    Therefore \(X+Y\) is closed under vector addition.\\
+    Finally we must show \(X+Y\) is closed under scalar multiplication. Let \(\lambda \in \mathbb{R}\) be a scalar. Let \(\mathbf{x}\in X\) and \(\mathbf{y}\in Y\). It follows that \(\mathbf{x}+\mathbf{y}\in X+Y\). We must show that \(\lambda \left( \mathbf{x}+\mathbf{y} \right)\in X+Y \). Because \(\mathbf{x}\in V\) and \(\mathbf{y}\in V\) for reasons stated earler, we can apply the distributive property. 
+    \[
+        \lambda \left( \mathbf{x}+\mathbf{y} \right) =\lambda \mathbf{x}+\lambda \mathbf{y}
+    \]
+    Since \(X\) and \(Y\) are subspaces of \(V\), they must be closed under scalar multiplication. Therefore, \(\lambda \mathbf{x}\in X\) and \(\lambda \mathbf{y}\in Y\). Thus, \(\lambda \mathbf{x}+\lambda \mathbf{y}\) is the sum of a vector in \(X\) and a vector in \(Y\) and all vectors of this form are by definition elements of \(X+Y\). Therefore,
+    \[
+        \lambda \mathbf{x}+\lambda \mathbf{y}\in X+Y
+    \]
+    \[
+        \Longrightarrow \lambda \left( \mathbf{x}+\mathbf{y} \right)\in X+Y
+    \]
+\end{solution}
+\begin{solution}
+    It's easier to write the set \((0,\pi )\cup (\pi ,2\pi )\) as \((0,2\pi )\setminus\{ \pi  \} \). This notation basically means the open interval from \(0\) to \(2\pi \), but not including the set \(\{ \pi  \}  \). First, let
+    \[
+        \mathbf{v}= \begin{bmatrix}[r]
+             a \\
+             b \\
+        \end{bmatrix}
+    \]
+    with \(a,b\in\mathbb{R}\). Now compute \(A \mathbf{v}\):
+    \begin{align*}
+        A \mathbf{v}&= \begin{bmatrix}[r]
+            \cos \theta  &-\sin \theta    \\
+             \sin \theta &\cos \theta    \\
+        \end{bmatrix} \begin{bmatrix}[r]
+             a \\
+             b \\
+        \end{bmatrix}\\
+        &=\begin{bmatrix}[r]
+             a \cos \theta -b \sin \theta  \\
+              a \sin \theta +b\cos \theta \\
+        \end{bmatrix}
+    \end{align*}
+    One way you might have thought to approach the problem is to let \(c_1,c_2\in\mathbb{R}\) and set 
+    \[
+        c_1 \begin{bmatrix}[r]
+             a \\
+              b\\
+        \end{bmatrix} +c_2 \begin{bmatrix}[r]
+             a \cos \theta -b\sin \theta  \\
+              a \sin \theta +b\cos \theta \\
+        \end{bmatrix}=\mathbf{0}
+    \]
+    or another equivalent statement. While this is correct, it leads to a system of equations that is not very intuitive. It's best to recognize that \(A \mathbf{v}\) will be a linear combination of \(\mathbf{v}\) if and only if there exists some scalar \(\lambda \) such that \(A \mathbf{v}=\lambda \mathbf{v}\). This is equivalent to simply scaling the vector \(\mathbf{v}\) by some scalar. We know that 
+    \[
+        \lambda \mathbf{v} = A\mathbf{v} \Longrightarrow \left\lVert \lambda \mathbf{v} \right\rVert = \left\lVert A\mathbf{v} \right\rVert
+    \]
+    And we also know that
+    \[
+        \left\lVert \lambda \mathbf{v} \right\rVert =\vert \lambda  \vert \lVert \mathbf{v} \rVert 
+    \]
+    It follows that
+    \begin{align*}
+        &\Longrightarrow \vert \lambda  \vert \lVert \mathbf{v} \rVert = \lVert A \mathbf{v} \rVert \\
+        &\Longrightarrow \vert \lambda  \vert = \frac{\left\lVert A \mathbf{v} \right\rVert }{\lVert \mathbf{v} \rVert}\\
+        &\Longrightarrow \lambda =\pm \frac{\left\lVert A \mathbf{v} \right\rVert }{\lVert \mathbf{v} \rVert }
+    \end{align*}
+    The second to last step is valid because \(\mathbf{v}\neq \mathbf{0}\), and thus \(\left\lVert \mathbf{v} \right\rVert\neq 0 \). We now need to compute \(\lVert A \mathbf{v} \rVert \). 
+    \begin{align*}
+        \left\lVert \begin{bmatrix}[r]
+            a \cos \theta -b\sin \theta  \\
+             a \sin \theta +b\cos \theta \\
+       \end{bmatrix} \right\rVert &=\sqrt{\left( a \cos \theta -b\sin \theta  \right)^2 +\left( a \sin \theta +b\cos \theta  \right)^2  }\\
+       &=\sqrt{a^2 \cos ^2\theta -ab\cos \theta \sin \theta +b^2 \sin ^2\theta +a^2 \cos ^2\theta +ab\cos \theta \sin \theta +b^2 \sin ^2\theta } \\
+       &=\sqrt{a^2 \left( \cos ^2 \theta +\sin ^2\theta  \right) +b^2 \left( \cos ^2 \theta +\sin ^2\theta  \right) }\\
+       &=\sqrt{a^2 +b^2}\\
+       &=\left\lVert \mathbf{v} \right\rVert  
+    \end{align*}
+    We have \(\left\lVert A\mathbf{v} \right\rVert =\lVert \mathbf{v} \rVert  \), meaning
+    \[
+        \lambda =\pm 1
+    \]
+    This implies
+    \[
+        \begin{bmatrix}[r]
+             a \\
+             b \\
+        \end{bmatrix} = \begin{bmatrix}[r]
+            a \cos \theta -b\sin \theta  \\
+             a \sin \theta +b\cos \theta \\
+       \end{bmatrix} \quad \text{ and } \quad \begin{bmatrix}[r]
+         -a \\
+         -b \\
+       \end{bmatrix}= \begin{bmatrix}[r]
+        a \cos \theta -b\sin \theta  \\
+         a \sin \theta +b\cos \theta \\
+   \end{bmatrix}
+    \]
+    The solution seems obvious, but rigorously proving it is rather difficult. Consider the case for \(A \mathbf{v}=\mathbf{v}\). Begin by considering the invertibility of the matrix \(A\).
+    \[
+        \det A = \cos ^2\theta +\sin ^2\theta =1
+    \]
+    We can find the inverse of \(A\):
+    \[
+        \begin{bmatrix}[r]
+            \cos \theta  &-\sin \theta   &1  &0   \\
+             \sin \theta &\cos \theta   &0  &1   \\
+        \end{bmatrix}\xlongrightarrow{rref} \begin{bmatrix}[r]
+            1 &0  &\cos \theta   &\sin \theta    \\
+             0&1  &-\sin \theta   &\cos \theta    \\
+        \end{bmatrix}
+    \]
+    It follows that 
+    \[
+        A^{-1} = \begin{bmatrix}[r]
+            \cos \theta  &\sin \theta    \\
+             -\sin \theta &\cos \theta    \\
+        \end{bmatrix}
+    \]
+    Consider the matrix equation 
+    \[
+        A \mathbf{v}=\mathbf{v}
+    \]
+    Since \(A\) is invertible, we have 
+    \[
+        \mathbf{v}=A^{-1} \mathbf{v}
+    \]
+    Substituting in, this implies
+    \[
+        A \mathbf{v}= A^{-1} \mathbf{v}
+    \]
+    We then have the following:
+    \begin{align*}
+        &\qquad \begin{bmatrix}[r]
+            \cos \theta  &-\sin \theta    \\
+             \sin \theta &\cos \theta    \\
+        \end{bmatrix} \begin{bmatrix}[r]
+             a \\
+             b \\
+        \end{bmatrix}=\begin{bmatrix}[r]
+            \cos \theta  &\sin \theta    \\
+             -\sin \theta &\cos \theta    \\
+        \end{bmatrix} \begin{bmatrix}[r]
+             a \\
+             b \\
+        \end{bmatrix}\\
+        &\Longrightarrow \begin{bmatrix}[r]
+             a \cos \theta -b\sin \theta  \\
+              a \sin \theta +b\cos \theta \\
+        \end{bmatrix} = \begin{bmatrix}[r]
+             a \cos \theta +b\sin \theta  \\
+              -a \sin \theta +b\cos \theta \\
+        \end{bmatrix}\\
+        &\Longrightarrow \begin{bmatrix}[r]
+            a \cos \theta -b\sin \theta  \\
+             a \sin \theta +b\cos \theta \\
+       \end{bmatrix} + \begin{bmatrix}[r]
+         -a \cos \theta  \\
+         -b \cos \theta  \\
+       \end{bmatrix} = \begin{bmatrix}[r]
+            a \cos \theta +b\sin \theta  \\
+             -a \sin \theta +b\cos \theta \\
+       \end{bmatrix} +\begin{bmatrix}[r]
+        -a \cos \theta  \\
+        -b \cos \theta  \\
+      \end{bmatrix}\\
+      &\Longrightarrow \begin{bmatrix}[r]
+         -b\sin \theta  \\
+          a \sin \theta \\
+      \end{bmatrix} = \begin{bmatrix}[r]
+         b\sin \theta  \\
+          -a \sin \theta \\
+      \end{bmatrix}\\
+      &\iff \sin \theta =0
+    \end{align*}
+    The last statement holds because \((a,b)\neq \mathbf{0}\). This gives \(\theta =n \pi \) for any integer \(n\).\\
+    Now consider \(A \mathbf{v}=-\mathbf{v}\). We have the matrix equation 
+    \[
+        A \mathbf{v}= -\mathbf{v}
+    \]
+    Since \(A\) is invertible, we have
+    \[
+        \mathbf{v}=-A^{-1} \mathbf{v}
+    \]
+    Multiplying by \(-1\), we obtain
+    \[
+        -\mathbf{v}=A^{-1} \mathbf{v}
+    \]
+    Substituting this back into the original equation, we have
+    \[
+        A \mathbf{v}= A^{-1} \mathbf{v}
+    \]
+    This is equivalent to the last statement, so it will have the same solution set. Thus, \(\theta =n\pi\) for any \(n\in\mathbb{Z}\). However, the set \((0,2\pi )\setminus\{ \pi  \} \) excludes all integer multiples of \(\pi \), and thus there exists no \(\theta \in (0,2\pi )\setminus\{ \pi  \} \) such that \(A \mathbf{v} = \mathbf{v}\) or \(A \mathbf{v}=-\mathbf{v}\). Thus, \(\mathcal{B} =\{ \mathbf{v},A \mathbf{v} \} \) is linearly independent.
+\end{solution}
+\begin{remark}
+    In chapter 7, we will learn that in the statement \(\lambda \mathbf{v}=A \mathbf{v}\), \(\lambda \) is called an eigenvalue of \(A\) and \(\mathbf{v}\) is its corresponding eigenvector. There is a way to solve for \(\lambda \) and \(\mathbf{v}\) using some creative algebreic manipulation that you may have found, where we say \(\det (\lambda I_2 - A)\neq 0\).
+\end{remark}
+\begin{solution}
+    Since \(\dim \mathbb{R}^2 = 2\) and \(\vert \mathcal{B}  \vert =2 \), and \(\mathcal{B} \) is linearly independent, \(\mathcal{B} \) forms a basis for \(\mathbb{R}^2\).
+\end{solution}
+\begin{solution}
+    If \(A\) is an \(m\times n\) matrix with \(\rank A=r\), then \(\dim N(A)=n-r\). For our case, \(n=6\) and \(r=2\). Thus, \(\dim N(A)=6-2=4\).
+\end{solution}
+\begin{solution}
+    This proof is in the notes. Consider a vector space \(V\) with \(\mathcal{B} ,\mathcal{B} ^{\prime} \subset V\) both being bases for \(V\). Let \(P\) be a transition matrix from a basis \(\mathcal{B} ^{\prime} \) to \(\mathcal{B} \), and let \(Q\) be a transition matrix from \(\mathcal{B} \) to \(\mathcal{B} ^{\prime} \). Such a matrix will always exist by definition of a basis. Let \(\mathbf{x}\in V\). We have 
+    \[
+        P[\mathbf{x}]_{\mathcal{B} ^{\prime} } =[\mathbf{x}]_\mathcal{B}
+    \]
+    We also have
+    \[
+        [\mathbf{x}]_{\mathcal{B} ^{\prime} }=Q[\mathbf{x}]_\mathcal{B} 
+    \]
+    Substituting in, we have
+    \[
+        [\mathbf{x}]_\mathcal{B} =PQ[\mathbf{x}]_\mathcal{B} \iff PQ=I_n
+    \]
+    \[
+        [\mathbf{x}]_{\mathcal{B} ^{\prime} } =QP[\mathbf{x}]_{\mathcal{B} ^{\prime} } \iff PQ=I_n
+    \]
+    Since inverses are unique, we say that \(P ^{-1} =Q\). Thus, all transition matrices have inverses.
+\end{solution}
+\begin{solution}
+    This function most likely violates every single inner product axiom. I do not know how to evaluate a fractional integral using this formula, so we will choose \(\mathbf{y}=(1,1,1)\) to make life easy, since this will cause us to have to evaluate only one integral each time. If you reread the definition, you will see an example for \(\alpha =1\) provided showing that this implies the formula simplifies to a normal single integral from \(a\) to \(x\). We will use this fact later. We will also choose \(\mathbf{x}=(1,1,1)\) for purposes of providing a counterexample. It follows that \(\mathbf{x}=\mathbf{y}\). Note that \(\mathbf{x}\neq \mathbf{0}\) and recall that for any inner product \(\langle \cdot,\cdot \rangle \), \(\langle \mathbf{x},\mathbf{x} \rangle=0 \) if and only if \(\mathbf{x}=\mathbf{0}\). We now give 
+    \[
+        \langle \mathbf{x},\mathbf{y} \rangle =I_1^1 f(1)+I_1^1 f(1)+I_1^1 f(1)
+    \]
+    \(I_1^1\) means the lower bound of the integral is \(1\), and we are integrating a single time. Recall what was said above about how this transforms the formula into a normal \textbf{single} integral with nothing weird. \(f(1)\) means the upper bound of the integral is also \(1\), and we defined \(f(x)=x^2\). Thus, we give
+    \[
+        \langle \mathbf{x},\mathbf{y} \rangle = \int_1^1 t^2\,dt +\int_1^1 t^2\,dt +\int_1^1 t^2\,dt
+    \]
+    However, we know that the integral from \(1\) to \(1\) of any function equals \(0\), so we have 
+    \[
+        \langle \mathbf{x},\mathbf{y} \rangle = 0+0+0=0
+    \]
+    However, \(\mathbf{x}\neq \mathbf{0}\) and \(\mathbf{y}\neq \mathbf{0}\). Therefore, \(\langle \cdot,\cdot \rangle \) does not define an inner product on \(\mathbb{R}^3\).
+\end{solution}
+\begin{solution}
+    Notice that \(\mathbf{0}=0 \cdot\mathbf{0}\). We can then rewrite the problem statement as \(T(0 \mathbf{0})\). By properties of linear transformations and properties of vector spaces, we have 
+    \[
+        T(0\mathbf{0})=0T(\mathbf{0})=\mathbf{0}
+    \]
+    Therefore, \(T(\mathbf{0})=\mathbf{0}\).
+\end{solution}
+\begin{solution}
+    First, show that \(\dim U =\dim V \Longrightarrow U\cong V\). Let \(\dim U=\dim V=n\). It follows that there exists some basis \(\mathcal{B}\) for \(U\) such that \(\vert \mathcal{B}  \vert =n \). Similarly, for some basis \(\mathcal{B} ^{\prime} \) of \(V\), \(\vert \mathcal{B} ^{\prime}  \vert=n \). Define the basis \(\mathcal{B} =\left\{ \mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_n \right\} \) with an arbitrary ordering. Similarly, define the basis \(\mathcal{B} ^{\prime} =\left\{ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n \right\} \) with an arbitrary ordering. Define the linear transformation \(T:U\to V\) such that \(T:\mathbf{u}_i \mapsto \mathbf{v}_i\) for all basis elements. A more intuitive visualization of this is as follows.
+    \[
+        T(\mathbf{u}_1)=\mathbf{v}_1\quad T(\mathbf{u}_2)=\mathbf{v}_2\quad\cdots\quad T(\mathbf{u}_n)=\mathbf{v}_n
+    \]
+    This definition gives rise to the entire transformation by utilizing properties of linear transformations. Since any vector \(\mathbf{u}\in U\) can be written as some linear combination \(c_1 \mathbf{u}_1 + c_2 \mathbf{u}_2 + \cdots + c_n \mathbf{u}_n\), we can write 
+    \[
+        T(\mathbf{u})=T(c_1 \mathbf{u}_1 + c_2 \mathbf{u}_2 + \cdots + c_n \mathbf{u}_n)=c_1 T(\mathbf{u}_1) + c_2 T(\mathbf{u}_2)+\cdots+c_n T(\mathbf{u}_n)
+    \]
+    \[
+        =c_1 \mathbf{v}_1 + c_2 \mathbf{v}_{2}+  \cdots + c_n \mathbf{v}_n
+    \]
+    which will be some vector in \(V\). Similarly, we can prove that \(T\) is onto by showing that every vector \(\mathbf{v}\in V\)  has a preimage in \(\mathbf{u}\in U\) by writing it as a linear combination:
+    \[
+        \mathbf{v} = c_1 \mathbf{v}_1 + \cdots + c_n \mathbf{v}_n = T(c_1 \mathbf{u}_1 + \cdots + c_n \mathbf{u}_n)
+    \]
+    Define the preimage \(\mathbf{u}\) of \(\mathbf{v}\) to be \(\mathbf{u}=c_1 \mathbf{u}_1 + \cdots + c_n \mathbf{u}_n\). Therefore \(T\) is onto. We must now show \(T\) is one-to-one. It suffices to show that for any \(\mathbf{a},\mathbf{b}\in U\), \(T(\mathbf{a})=T(\mathbf{b})\Longrightarrow \mathbf{a}=\mathbf{b}\). To show this, let 
+    \[
+        T(\mathbf{a})=T(\mathbf{b})
+    \]
+    Both of these vectors \(T(\mathbf{a}),T(\mathbf{b})\in V\), and can thus be written as some linear combination of \(\mathcal{B} ^{\prime} \).
+    \[
+        T(\mathbf{a})=a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n
+    \]
+    \[
+        T(\mathbf{b})=b_1 \mathbf{v}_1 + b_2 \mathbf{v}_2 + \cdots + b_n \mathbf{v}_n
+    \]
+    It follows that
+    \[
+        a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n = b_1 \mathbf{v}_1 + b_2 \mathbf{v}_2 + \cdots + b_n \mathbf{v}_n
+    \]
+    However, basis representations of vectors are \textbf{unique}, so this implies that 
+    \[
+        (a_1,a_2,\ldots,a_n)=(b_1,b_2,\ldots,b_n)
+    \]
+    We won't substitute this in just yet. Now consider \(\mathbf{a}\) and \(\mathbf{b}\). We can write 
+    \[
+        T(\mathbf{a})=T(a_1 \mathbf{u}_1 + a_2 \mathbf{u}_2 + \cdots + a_n \mathbf{u}_n)
+    \]
+    \[
+        T(\mathbf{b})=T(b_1 \mathbf{u}_1 + b_2 \mathbf{u}_2 + \cdots + b_n \mathbf{u}_n)
+    \]
+    Thus we have the preimages
+    \[
+     \mathbf{a}=   a_1 \mathbf{u}_1 + a_2 \mathbf{u}_2 + \cdots + a_n \mathbf{u}_n
+        \]
+        \[
+      \mathbf{b}=  b_1 \mathbf{u}_1 + b_2 \mathbf{u}_2 + \cdots + b_n \mathbf{u}_n
+    \]
+    However, recall that \((a_1,a_2,\ldots,a_n)=(b_1,b_2,\ldots,b_n)\). Thus we have
+    \[
+        \mathbf{a}=   a_1 \mathbf{u}_1 + a_2 \mathbf{u}_2 + \cdots + a_n \mathbf{u}_n
+    \]
+    \[
+        \mathbf{b}=a_1 \mathbf{u}_1 + a_2 \mathbf{u}_2 + \cdots + a_n \mathbf{u}_n
+    \]
+    \[
+        \Longrightarrow \mathbf{a}=\mathbf{b}
+    \]
+    Therefore \(T\) is one-to-one, and is therefore a vector space isomorphism.\\
+    We must now show \(U\cong V \Longrightarrow \dim U = \dim V\). Two vector spaces are isomorphic if and only if there exists an isomorphism between them. Let \(T:U\to V\) be the map given by \(T:\mathbf{x}\mapsto A \mathbf{x}\). Isomorphic linear maps can be given by invertible matrices, since multiplication by an invertible matrix gives a bijection since it's invertible. Let \(A\) be invertible to satisfy this. It follows that \(A\) must be square. Let \(A\in M_{n,n}\) to satisfy this. This matrix only has multiplication defined for a vector of dimension \(n\times 1\), which represents any \(n\)-dimensional vector space. Thus, \(U\) is \(n\)-dimensional. Furthermore, \(A \mathbf{x}\) outputs a vector of dimension \(n\times 1\). Therefore, \(\mathbf{v}\) is \(n\)-dimensional. Therefore \(U\cong V \Longrightarrow \dim U =\dim V\).\\
+    \[
+        \therefore U\cong V \iff \dim U =\dim V
+    \]
+\end{solution}
+\begin{solution}
+    To show \(\mathcal{L} (U,V)\) is a vector space, we must show it satisfies all ten axioms. Let \(T_1,T_2,T_3\in \mathcal{L} (U,V)\), \(\mathbf{u},\mathbf{v},\mathbf{w}\in U\), and \(\lambda ,\mu \in \mathbb{R}\). From the definition, we have
+    \[
+        (T_1 +T_2)(\mathbf{u})=T_1 (\mathbf{u})+T_2(\mathbf{u})
+    \]
+    We must show \((T_1 +T_2)\in \mathcal{L} \). To do this, we must show this function satisfies the linear transformation axioms:
+    \[
+        (T_1 +T_2)(\mathbf{u}+\mathbf{v})=(T_1 +T_2)(\mathbf{u})+(T_1 +T_2)(\mathbf{v})
+    \]
+    and
+    \[
+        (T_1 +T_2)(\lambda \mathbf{u})=\lambda (T_1 +T_2)(\mathbf{u})
+    \]
+    First, show vector addition is preserved.
+    \[
+        (T_1 +T_2)(\mathbf{u}+\mathbf{v})=T_1 (\mathbf{u}+\mathbf{v})+T_2(\mathbf{u}+\mathbf{v})
+    \]
+    We already know \(T_1\) and \(T_2\) are linear transformations, so we give 
+    \begin{align*}
+        T_1 (\mathbf{u}+\mathbf{v})+T_2(\mathbf{u}+\mathbf{v}) &= T_1(\mathbf{u})+T_1 (\mathbf{v})+T_2(\mathbf{u})+T_2(\mathbf{v})\\
+        &=(T_1 (\mathbf{u})+T_2(\mathbf{u}))+(T_1(\mathbf{v})+T_2(\mathbf{v}))\\
+        &=(T_{1}+T_2 )(\mathbf{u})+(T_1 +T_2)(\mathbf{v})
+    \end{align*}
+    Therefore vector addition is preserved. Now consider scalar multiplication. By definition,
+    \begin{align*}
+        (T_1 +T_2)(\lambda \mathbf{u})&=T_1 (\lambda \mathbf{u})+T_2 (\lambda \mathbf{u})\\
+        &= \lambda T_1 (\mathbf{u})+\lambda T_2(\mathbf{u})\\
+        &=\lambda (T_1 (\mathbf{u})+T_2(\mathbf{u}))\\
+        &=\lambda (T_1 +T_2)(\mathbf{u})
+    \end{align*}
+    Therefore, scalar multiplication is preserved, and \(T_1 +T_2\) is a linear transformation. Thus, \(T_1 +T_2\in\mathcal{L} \).\\
+    Now consider associativity of vector addition. By definition,
+    \begin{align*}
+        (T_1 +(T_2 +T_3))(\mathbf{u})&=T_1 (\mathbf{u})+(T_2 +T_3)(\mathbf{u})\\
+        &=T_1 (\mathbf{u})+T_2(\mathbf{u})+T_3(\mathbf{u})\\
+        &=(T_1(\mathbf{u})+T_2(\mathbf{u}))+T_3(\mathbf{u})\\
+        &=(T_1 +T_2)(\mathbf{u})+T_3(\mathbf{u})\\
+        &=((T_1 +T_2)+T_3)(\mathbf{u})
+    \end{align*}
+    Therefore, vector addition is associative in \(\mathcal{L}\).\\
+    Now consider the existence of an additive identity \(\mathbf{0}\). We can suppose that \(\mathbf{0}\) is the trivial homomorphism, that is \(\mathbf{0}:\mathbf{u}\mapsto \mathbf{0}_V\) for any \(\mathbf{u}\in U\) and for \(\mathbf{0}_V \in V\) being the additive identity of \(V\). We can verify this assumption by showing \((T_1 +\mathbf{0})(\mathbf{u})=T_1(\mathbf{u})\):
+    \begin{align*}
+        (T_1 +\mathbf{0})(\mathbf{u})&=T_1(\mathbf{u})+\mathbf{0}(\mathbf{u})\\
+        &=T_1(\mathbf{u})+\mathbf{0}_V\\
+        &=T_1(\mathbf{u})
+    \end{align*}
+    The last step follows since \(T_1(\mathbf{u})\in V\) and \(\mathbf{0}_V\) is the additive identity of this space. Therefore we have \(T_1 +\mathbf{0}=T_1\), and thus the additive identity is the trivial homomorphism.\\
+    Now we must consider the existence of inverse functions. Suppose \(T_1 +T_2 = \mathbf{0}\). We must show that \(T_1\in\mathcal{L} \Longrightarrow T_2\in \mathcal{L} \).
+    \begin{align*}
+        &\qquad T_1 +T_2 =\mathbf{0}\\
+        &\Longrightarrow T_2 = \mathbf{0}-T_1\\
+        &\Longrightarrow T_2 =-T_1
+    \end{align*}
+    We must show \(-T_1\) is a linear transformation \(U\to V\). Start by simply considering that \(-T_1(\mathbf{u})=T_1(-\mathbf{u})\), and \(-\mathbf{u}\in U\) for any \(\mathbf{u}\). To save a few lines of work I will say this is sufficient to show that \(-T_1\in\mathcal{L} \), since \(T_1\in\mathcal{L} \) and \(-\mathbf{u}\in U\).\\
+    Now consider commutativity. We have been supposing all along that \(T_1(\mathbf{u})+T_2(\mathbf{u})=T_2(\mathbf{u})+T_1(\mathbf{u})\), and similarly we have been assuming the associative property applies. This works since \(T_1(\mathbf{u}),T_{2}(\mathbf{u})\in V \), which is a vector space. Applying this information, we have
+    \[
+        (T_1 +T_2)(\mathbf{u})=T_1(\mathbf{u})+T_2(\mathbf{u})=T_2(\mathbf{u})+T_1(\mathbf{u})=(T_2 +T_1)(\mathbf{u})
+    \]
+    Therefore \(\mathcal{L} \) is commutative.\\
+    Now consider closure under scalar multiplication. By definition, we have 
+    \begin{align*}
+        (\lambda T_1)(\mathbf{u})&=\lambda T_1(\mathbf{u})\\
+        &=T_1(\lambda \mathbf{u})
+    \end{align*}
+    We know that \(T_1\in\mathcal{L} \) and \(\lambda \mathbf{u}\in U\), so \(\lambda T_1\in \mathcal{L} \). Therefore, \(\mathcal{L} \) is closed under scalar multiplication.\\
+    Now consider the distributive property of scalar multiplication over vector addition. We wish to show \(\lambda (T_1 +T_2)=\lambda T_1 +\lambda T_2\). By definition, we have
+    \begin{align*}
+        (\lambda (T_1 +T_2))(\mathbf{u})&=\lambda (T_1 +T_2)(\mathbf{u})\\
+        &=(T_1 +T_2)(\lambda \mathbf{u})\\
+        &=T_1(\lambda \mathbf{u})+T_2(\lambda \mathbf{u})\\
+        &=\lambda T_1(\mathbf{u})+\lambda T_2(\mathbf{u})\\
+        &=(\lambda T_1)(\mathbf{u})+(\lambda T_2)(\mathbf{u})
+    \end{align*}
+    Therefore scalar multiplication distributes over vector addition.\\
+    Now we wish to show that scalar multiplication distributes over scalar addition. We need to prove \((\lambda +\mu )T_1 = \lambda T_1 +\mu T_1\). By definition, we have
+    \begin{align*}
+        ((\lambda +\mu )T_1)(\mathbf{u})&=(\lambda +\mu )T_1(\mathbf{u})\\
+        &=T_1((\lambda +\mu )\mathbf{u})\\
+        &=T_1(\lambda \mathbf{u}+\mu \mathbf{u})\\
+        &=T_1(\lambda \mathbf{u})+T_1(\mu \mathbf{u})\\
+        &=\lambda T_1(\mathbf{u})+\mu T_1(\mathbf{u})\\
+        &=(\lambda T_1)(\mathbf{u})+(\mu T_1)(\mathbf{u})
+    \end{align*}
+    These steps follow from the fact that \(\mathbf{u}\) is a vector in a vector space, and as such these properties apply to \(\mathbf{u}\). Therefore, scalar multiplication distributes over scalar addition.\\
+    Now consider the existence of a scalar multiplicative identity, which we will call \(1\). We can hypothesize that \(1=1\). We can test this theory.
+    \begin{align*}
+        (1T_1)(\mathbf{u})&=1T_1(\mathbf{u})\\
+        &=T_1(1\mathbf{u})\\
+        &=T_1(\mathbf{u})
+    \end{align*}
+    This last step follows from the fact that 1 is the multiplicative identity for \(\mathbf{u}\). It follows that \(1T_1 = T_1\), and thus a scalar multiplicative identity exists.\\
+    Finally, consider associativity of scalar multiplication. We must show \((\lambda \mu )T_1 =\lambda (\mu T_1)\).
+    \begin{align*}
+        ((\lambda \mu )T_1)(\mathbf{u})&=\lambda \mu T_1(\mathbf{u})\\
+        &=\mu T_1(\lambda \mathbf{u})\\
+        &=(\mu T_1)(\lambda \mathbf{u})\\
+        &=\lambda (\mu T_1)(\mathbf{u})
+    \end{align*}
+    Therefore, scalar multiplication is associative.\\
+    Therefore, \(\mathcal{L} (U,V)\) forms a vector space.
+\end{solution}
+\begin{solution}
+    If a vector space \(V\) is given a set of scalars \(\mathbb{F}\), then we say that the space \(V\) is defined over the set \(\mathbb{F}\).\\
+    To show that \(\mathbb{R}^2\) over \(\mathbb{R}\) is of dimension \(2\), we need only recall the standard basis for \(\mathbb{R}^2:\)
+    \[
+        \mathcal{B} =\left\{ (1,0),(0,1) \right\}
+    \]
+    Since \(\left\vert \mathcal{B}  \right\vert=2 \), we have \(\dim V=2\).\\
+    To show that \(\mathbb{C}^2\) over \(\mathbb{C}\) has dimension \(2\), we need to construct a basis. This is rather easy if you recognize the significance of defining a space over \(\mathbb{C}\). The basis \(\mathcal{B} =\left\{ (1,0),(0,1) \right\} \) is a basis for \(W\) as well. To prove this, suppose \((\alpha ,\beta )\in \mathbb{C}^2\). It follows that \(\alpha ,\beta \in \mathbb{C}\). It follows that
+    \[
+        (\alpha ,\beta )=\alpha (1,0)+\beta (0,1)
+    \]
+    Thus, we have \(\dim W=2\).\\
+    Showing that \(V\ncong W\) is slightly more difficult. In general, vector space isomorphisms are given by linear maps (another word for linear transformations), which satisfy the property \(T(\alpha \mathbf{v})=\alpha T(\mathbf{v})\) for any scalar \(\alpha \), linear map \(T\), and vector \(\mathbf{v}\). Suppose there exists some transformation \(T:W\to V\). If we let \(\alpha \in \mathbb{C}\setminus\mathbb{R}\), then \(T(\alpha ,0)=\alpha T(1,0)\). However, \(\alpha \notin \mathbb{R}\), meaning that \(\alpha T(1,0)\notin \mathbb{R}^2\). Therefore there is no linear map from \(\mathbb{C}^2 \to \mathbb{R}^2\) that satisfies these properties. You can try and define one, but it will not be well defined and not be a valid function. You can define a map in the other direction, going from \(\mathbb{R}^2\) to \(\mathbb{C}^2\), but it will not be onto. Therefore there cannot be an isomorphism. If you would like, you can try and define an arbitrary function \(\phi\) that acts on the \textbf{scalars}, and let \(T(\alpha \mathbf{v})=\phi (\alpha )T(\mathbf{v})\). It will still follow that \(\mathbb{R}^2 \ncong \mathbb{C}^2\) since the function will not be one-to-one and onto.
+\end{solution}
+\begin{remark}
+    In more advanced classes on linear algebra or abstract algebra, we say that a vector space is defined over a \textbf{field} \(\mathbb{F}\), which is a different kind of algebreic structure. We then give the vector space the operation of scalar multiplication between the field and vector space. You already know of a few fields, such as the set of all real numbers, the set of all rational numbers, and the set of all complex numbers. If we go back to Exercise \ref{1}, interestingly \(\mathbb{Z}/2\mathbb{Z}\) can actually be a field, and defining \(\mathbb{Z}/2\mathbb{Z}\) over \(\mathbb{Z}/2\mathbb{Z}\) produces a vector space. In this class, however, we always assume the field is \(\mathbb{R}\), and under that assumption, \(\mathbb{Z}/2\mathbb{Z}\) fails to be a vector space, as seen in Exercise \ref{1}.
+\end{remark}
+\begin{solution}
+    Not providing a solution for this one, good luck!
+\end{solution}
+\end{document}
