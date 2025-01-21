@@ -1,0 +1,101 @@
+\section{Ideals and Quotient Rings}
+\subsection{Ideals}
+In $\mathsf{Grp}$ and $\mathsf{Set}$, we found suitable equivalence relations to quotient objects by, and were able to classify surjective morphisms with these objects. That is, we were able to identify each surjective morphism $\phi : G \to G'$ with the group
+\[
+	\frac{G}{\ker \phi }
+,\]
+which is isomorphic to $G'$. We will do the same in $\mathsf{Ring}$.
+\begin{definition}[Ideal]\label{dfn:3.3.1}
+	Let $R$ be a ring. A subgroup $I$ of $(R,+)$ is a left-idea of $R$ if $rI\subseteq I$ for all $r\in R$. Equivalently, for all $r\in R$ and $a\in I$, $ra\in I$. Right ideals are defined analogously, and two-sided ideals are simply called \emph{ideals}.
+\end{definition}
+
+Even in noncommutative cases, we are generally only interested in two-sided ideals, so we will use the word \emph{ideal} to explicitly refer to these objects.
+
+Note that for an ideal $I$ to be a subring, it must include $1_R$, but by definition this means that for all $r\in R$, $r1=r\in I$. That is, $I=R$. In general then, ideals are not subrings, but rather rngs. However, they are much more important than subrings in developing the theory. Similarly to  $\mathsf{Grp}$, ideals are also kernels of ring homomorphisms. Also note that the image of any homomorphism is a subring.
+\begin{proposition}\label{prp:3.3.1}
+	Let $\phi : R \to S$ be a ring homomorphism. Then $\ker \phi $ is an ideal of $R $.
+\end{proposition}
+\begin{proof}
+	For all $r\in R$, $a\in I$, we have
+	\[
+		\phi (ra)=\phi (r)0=0=0\phi (r)=\phi (ar)
+	.\]
+	Proving a kernel is a subgroup is trivial. More generally, the inverse image of an ideal is an ideal, and $\left\{ 0 \right\} $ is clearly an ideal.
+\end{proof}
+\subsection{Quotients}
+Since all subgroups of $(R,+)$ are normal, we have the quotient group $R /I$ who's elements are cosets $r+I$. We also have the surjective group homomorphism $\pi : R \to R /I$, $r\mapsto r+I$. We wish to findd the circumstances under which this construction satisfiess the universal property in $\mathsf{Ring}$.
+
+Since we require $\pi $ be a ring homomorphism, multiplication must be as follows: for all $a+I,b+I\in R/I$,
+\[
+	(a+I)(b+I)=\pi (a)\pi (b)=\pi (ab)=ab+I
+.\]
+If this operation is well-defined, then $R /I$ instantly becomes a ring, as associativity and distributivity are inhereted from $R$. We need only make the operation well-defined.
+
+Assuming that the operation is well-defined, we have that $I$ has to be an ideal; more precisely, we must have $I=\ker \pi $ as $i\in I$ implies $i\mapsto I$. That is, $R/I$ is a ring and $\pi : R \to  R /I$ is the canonical projection if and only if $I$ is an ideal.
+\begin{definition}[Quotient Ring]\label{dfn:3.3.2}
+	Given a ring $R$ and an ideal $I$ of $R$, the quotient of $R$ modulo $I$ is the ring $R /I$.
+\end{definition}
+
+The fact that $\mathbb{Z}$ is initial in $\mathsf{Ring}$ now gives the natural definition of characteristic. Note that the ideals of $\mathbb{Z}$ are precisely the sets $n\mathbb{Z}$ for nonnegative integers $n$.
+\begin{definition}[Characteristic]\label{dfn:3.3.3}
+	Let $R$ be a ring, and let $f : \mathbb{Z} \to R$ be the unique ring homomorphism, defined by $a\mapsto a\cdot 1_R$. The characteristic of $R$ is the well-defined non-negative integer $n$ such that $\ker f = n\mathbb{Z}$.
+\end{definition}
+
+Equivalently, the characteristic of $R$ is the order of $1_R$ in $(R,+)$ if $1_R$ has finite order, and $0$ if it has infinite order. This shows that kernels are ideals, and ideals are kernels. We can now restate some important theorems from $\mathsf{Grp}$.
+\begin{theorem}\label{thm:3.3.1}
+	Let $I$ be an ideal of $R$. Then for all ring homomorphisms $\phi : R \to S$ such that $I\subseteq \ker \phi $, there exists a unique ring homomorphism $\widetilde{\phi} : R /I \to S$ defined by $\widetilde{\phi}(r+I)=\phi (r)$ such that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+		R\arrow[dr, "\pi"]\arrow[rr, "\phi "]&&S\\
+						     &R /I\arrow[ru, "\widetilde{\phi} "']
+	\end{tikzcd}\]
+	commutes.
+\end{theorem}
+\begin{proof}
+	The morphism as a group homomorphism exists, is unique, and is trivially a ring homomorphism.
+\end{proof}
+
+\subsection{Canonical Decomposition and Consequences}
+\begin{theorem}[Canonical Decomposition]\label{thm:3.3.2}
+	Every ring homomorphism $\phi : R \to S$ can be decomposed as
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		R\arrow[rrr, bend left, "\phi "]\arrow[r, two heads]&R /\ker \phi  \arrow[r, "\sim ","\widetilde{\phi}"']& \phi (R)\arrow[r, hook]&S
+	\end{tikzcd}\]
+	where $\widetilde{\phi}$ is the isomorphism induced by theorem \ref{thm:3.3.1}.
+\end{theorem}
+\begin{proof}
+	It suffices to show the isomorphism is a ring isomorphism, since we have already shown it for groups. We have already done this, so we are done.
+\end{proof}
+\begin{corollary}[First Isomorphism Theorem]\label{cor:3.3.1}
+	Let $\phi : R \to S$ be a surjective ring homomorphism. Then
+	\[
+		S\cong \frac{R}{\ker \phi }
+	.\]
+\end{corollary}
+We can also show that subgroups of $R /I$ are in correspondence with the ideals in $R$ containing $I$. We have shown this already in proposition \ref{prp:2.8.3} for $\mathsf{Grp}$, and it takes minor effort to show the same bijection holds for ideals as well. From this, we get the third isomorphism theorem.
+\begin{proposition}[Third Isomorphism Theorem]\label{prp:3.3.2}
+	Let $I$ be an ideal of $R$, and let $J$ be an ideal of $R$ containing $I$. Then $J /I$ is an ideal of $R /I$, and
+	\[
+		\frac{R /I}{J /I}\cong \frac{R}{J}
+	.\]
+\end{proposition}
+\begin{proof}
+	The first statement for groups follows from proposition \ref{prp:2.8.3}. To show the set in question is an ideal, let $j + I\in J /I$ and $r + I\in R /I$. We have
+	\[
+		jr,rj\in J \implies (j + I)(r+I),(r+I)(j+I)\in J /I
+	.\]
+	Consider the canonical projection $\pi : R \to R / J$. Since $I\subseteq J$, by theorem \ref{3.3.1} we have a unique ring homomorphism
+	\[
+		\phi : R /I \to R /J
+	\]
+	defined by $r+I \mapsto r+J$. To show the map is surjective, let $r+J\in R /J$, and note that there are two cases. If $r\in J$, we have $\phi (I)=J$. If $r\notin J$, we have $r\notin I$, so $r+I\in R /I$, and thus $\phi (r+I)r+J$. Therefore, $\phi $ is surjective, and by corollary \ref{cor:3.3.1}, we have
+	\[
+		\frac{R /I}{\ker \phi }\cong \frac{R}{J}
+	.\]
+	Note that $\ker \phi =\left\{ r+I \mid r \in J \right\} =J /I$. Thus, $J /I$ is an ideal since it is a kernel.
+\end{proof}
+
+The second isomorphism theorem \emph{would} state that
+\[
+	\frac{I+J}{I}\cong \frac{J}{I\cap J}
+,\]
+but according to the conventions in this text, $I+J$ and $I\cap J$ are not rings. Thus, we will wait until we reach modules to discuss this theorem.

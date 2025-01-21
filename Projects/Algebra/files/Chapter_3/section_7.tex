@@ -1,0 +1,307 @@
+\section{Complexes and Homology}
+Oftentimes, instead of dealing with a single module, we have to deal with an entire sequence of modules. For example, a reall manifold of dimension $d$ has a homology group for all dimensions $0$ to $d$. The language of \emph{homological algebra} will allow us to deal with sequences of modules. We will study this further in chapter 9, but will introduce it here.
+\subsection{Complexes and Exact Sequences}
+\begin{definition}[Chain Complex]\label{dfn:3.7.1}
+	A \emph{chain complex}, or for simplicity, a \emph{complex} is a sequence of $R$-modules and $R$-module homomorphisms
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\cdots \arrow[r, "d_{i+2}"]&M_{i+1}\arrow[r, "d_{i+1}"]&M_{i}\arrow[r, "d_i"]&M_{i-1}\arrow[r, "d_{i-1}"]&\cdots
+	\end{tikzcd}\]
+	such that for all $i$, $d_i\circ d_{i+1}=0$. We denote a complex as $(M_{\bullet},d_{\bullet})$, or for simplicity, $M_{\bullet}$.
+\end{definition}
+
+Tails of a complex can be infinite in both directions. We generally also omit tails of $0$. Other conventions are also used. For example, having the indicies increase instead of decrease yields what is known as a cochain complex, and the homology of this complex is called a cohomology. We will use this convention in chapter 9, but for now, the differences are immaterial.
+
+The homomorphisms $d_i$ are called \emph{differentials}, due to important applications in geometry. Note that the requirement $d_i\circ d_{i+1}=0$ is equivalent to the requirement that $\operatorname{im}d_{i+1}\subseteq \ker d_i $. The book continues with a very nice picture that I don't feel like recreating. The idea behind a homology is to `measure' the difference between the image of $d_{i+1}$ and the kernel of $d_i$. We say a complex is \emph{exact} at $M_i$ if it has no homology there; that is,
+\[
+	\operatorname{im}d_{i+1}=\ker d_i 
+.\]
+
+For example, if $M_i$ is trivial, then the complex is necessarily exact at $M_i$, since $d_{i+1}(M_{i+1})=\left\{ 0 \right\} =\ker d_i$. A complex is called an \emph{exact sequence} if it is exact at all of its modules.
+
+\begin{proposition}\label{prp:3.7.1}
+	A complex
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\cdots\arrow[r]&0\arrow[r]&L\arrow[r, "\alpha "]&M\arrow[r]&\cdots
+	\end{tikzcd}\]
+	is exact at at $L$ if and only if $\alpha $ is a monomorphism. Additionally, a complex
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\cdots\arrow[r]&M\arrow[r,  "\beta "]&N\arrow[r]&0\arrow[r]&\cdots
+	\end{tikzcd}\]
+	is exact at $N$ if and only if $\beta $ is an epimorphism.
+\end{proposition}
+\begin{proof}
+	(1) Since the trivial homomorphism $0\to L$ has an image of  $\left\{ 0 \right\} $, for it to be exact at $M$ we require $\ker \alpha =\left\{ 0 \right\} $, and thus $\alpha $ is a monomorphism.
+
+	(2) For it to be exact at $N$, we require the image of $\beta $ to be the kernel of the trivial morphism $N\to 0$, and thus $\operatorname{im} \beta =N$. Equivalently,
+	\[
+		\frac{N}{\beta (N)}=\left\{ 0 \right\} 
+	.\]
+	Therefore, $\coker \beta $ is trivial.
+\end{proof}
+\begin{definition}[Short Exact Sequence]\label{dfn:3.7.2}
+	A short exact sequence is an exact complex of the form
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		0\arrow[r]&L\arrow[r, "\alpha "]&M\arrow[r, "\beta "]&N\arrow[r]&0
+	\end{tikzcd}\]
+\end{definition}
+
+The only extra information here that was not included in the proposition is that the sequence, to be exact at $M$, must have $\alpha (L)=\ker \beta $. By corollary \ref{cor:3.5.1}, we have
+\[
+	N\cong \frac{M}{\ker \beta }=\frac{M}{\alpha (L)}=\coker \alpha 
+.\]
+We can then identify $L$ with a submodule $\alpha (L)$ of $M$, since $\alpha $ is necessarily mono, and then we can identify $N$ with the quotient $M /\alpha (L)$, since $\beta $is necessarily epi.
+
+Short sequences are apparently common in nature. For example, every homomorphism $\phi : M \to M'$ gives rise to the short sequence
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r]&\ker \phi \arrow[r, hook, "\iota "]&M\arrow[r, two heads, "\phi "]&\phi (M)\arrow[r]&0
+\end{tikzcd}\]
+
+This observation allows us to break long complexes into many short exact sequences, which simplifies some proofs.
+
+\[\begin{tikzcd}[row sep=2.5em, column sep=0.5em]
+	&&0\arrow[dr]&&0\\
+	&&&\operatorname{im}d_{i+1} =\ker d_i\arrow[ru]\arrow[dr]\\
+	M_{i+2}\arrow[rr, "d_{i+2}"]\arrow[dr]&&M_{i+1}\arrow[rr, "d_{i+1}"']\arrow[ur]&&M_{i}\arrow[rr, "d_i"]\arrow[dr]&&M_{i-1}\\
+					      &\operatorname{im} d_{i+2}=\ker d_{i+1}\arrow[ru]\arrow[dr]&&&&\operatorname{im} d_{i}=\ker d_{i-1}\arrow[dr]\arrow[ur]\\
+	0\arrow[ru]&&0&&0\arrow[ru]&&0
+\end{tikzcd}\]
+
+This large diagram illustrates this idea. The diagonals are short exact sequences of the exact form we just considered, and there is one for each differential.
+
+\subsection{Split Exact Sequences}
+
+One important class of short exact sequences arises when considering the direct sum $M_1\oplus M_2$. More specificly, we consider the projection $M_1\oplus M_2 \to M_2$, and have the exact sequence
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r]&M_1\arrow[r, "i_{M_1}"]&M_1\oplus M_2\arrow[r, "\pi_{M_2}"]&M_2\arrow[r]&0
+\end{tikzcd}\]
+We then identify $M_1$ with the kernel of the projection. We say this sequence `splits'. More generally, a short exact sequence \emph{splits} if it is isomorphic to one of these sequences in that there is a commutative diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	0\arrow[r]&M_1\arrow[d, "\sim ", "\mathrm{id} "']\arrow[r, "\phi "]&N\arrow[d, "\sim ", "f"']\arrow[r, "\psi "]&M_2\arrow[d, "\sim ", "\mathrm{id} "']\arrow[r]&0\\
+	0\arrow[r]&M_1\arrow[r, "i"]&M_1\oplus M_2\arrow[r, "\pi "]&M_2\arrow[r]&0
+\end{tikzcd}\]
+in which all vertical maps are isomorphisms. As we will see in the exercises, we actually only need there to exist a $R$-module homomorphism $N\to M_1'\oplus M_2'$ for the isomorphisms to be forced. Note that we have that $f\phi $ is the natural injection $i_{M_1}$, and $\psi  f^{-1}$ is the natural projection $\pi_{M_2}$.
+
+Splitting sequences allows us to answer an important question; that is, what is the condition for a homomorphism having a left/right inverse? This must be stronger than being mono/epi, and split sequences allow us to find the condition.
+\begin{proposition}\label{prp:3.7.2}
+	Let $\phi : M \to N$ be an $R$-module homomorphism. Then
+	\begin{itemize}
+		\item $\phi $ has a left-inverse if and only if the sequence
+			\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+				0\arrow[r]&M\arrow[r, "\phi "]&N\arrow[r]&\coker \phi \arrow[r]&0
+			\end{tikzcd}\]
+			splits.
+		\item $\phi $ has a right-inverse if and only if the sequence
+			\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+				0\arrow[r]&\ker \phi \arrow[r]&M\arrow[r, "\phi "]&N\arrow[r]&0
+			\end{tikzcd}\]
+			splits.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	We begin by proving the statement for left-inverses. Suppose the sequence splits. Then $N\cong M \oplus M'$ for some module $M'\cong \coker \phi $. Since the sequence is exact, because it splits, we have that $\phi  $ is necessarily a monomorphism. We can then identify with the embedding map $i : M \to M \oplus M'$. More precisely, if $f$ is the isomorphism $N\to M\oplus M'$, then we have $f\phi =i$. We then have a left inverse given by the projection $\pi_M : M\oplus M' \to M$. More precisely, $\pi_M f\phi = \mathrm{id}_{M}$.
+
+	Now for the converse. Suppose $\phi $ has a left inverse $\psi $:
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		0\arrow[r]&M\arrow[r, "\phi "]\arrow[dr, "\mathrm{id}"']&N\arrow[d, "\psi "]\\
+			  &&M
+	\end{tikzcd}\]
+	First, we will show that $N\cong M\oplus \ker \psi $. The isomorphism $\eta : M\oplus \ker \psi \to N$ is given by $(m,k)\mapsto \phi (m)+k$. Since $\phi $ is a homomorphism of $R$-modules, we have trivially that this is a homomorphism. The inverse $\zeta : N\to M\oplus \ker \psi $ is given by $n\mapsto (\psi (n),n-(\phi \psi )(n))$. Note that
+	\[
+		\psi (n-(\phi \psi )(n))=\psi (n)-(\psi \phi )\psi (n)=\psi (n)-\psi (n)
+	,\]
+	and thus $n-(\phi \psi )(n)\in \ker \psi $. Since $\psi $ is a homomorphism of $R$-modules, this is also trivially a homomorphism of $R$-modules. Now we verify they are indeed inverses.
+	\[
+		\zeta \eta (m,k)=\zeta (\phi (m)+k)=(\psi (\phi (m)+k),\phi (m)+k-(\phi \psi )(\phi (m)+k))
+	.\]
+	For the first component, since $k\in \ker \psi $,
+	\[
+		\psi (\phi (m)+k)=(\psi \phi )(m)+\psi (k)=m
+	.\]
+	For the second component,
+	\[
+		\phi (m)+k-(\phi (\psi \phi )(m) + \psi (k))=\phi (m)+k-\phi (m)=k
+	.\]
+	Now we check the other direction.
+	\[
+		\eta \zeta (n)=\eta (\psi (n),n-(\phi \psi )(n))=(\phi \psi )(n)+n-(\phi \psi )(n)=n
+	.\]
+	Therefore, $M\oplus \ker \psi \cong N$, provided $\psi $ is a left-inverse to $\phi $.
+
+	There are many left-inverses to $\phi $, and we are at our leisure to choose one such that $\ker \psi \cong \coker \phi $, which will indeed make the diagram split. Note that
+	\[
+		\coker \phi = \frac{M\oplus \ker \psi }{M}
+	.\]
+	We wish to find $\ker \psi $ such that
+	\[
+		\ker \psi \cong \frac{M\oplus \ker \psi }{M}
+	.\]
+	Since $\phi $ is necessarily a monomorpism, we must have $\ker \psi \cap M=\left\{ 0 \right\} $, where we view $M$ as a submodule of $N$ via the injection $i : M \to M\oplus \ker \psi $ defined by $m\mapsto (m,0)$. However, for all $r\in M\oplus \ker \phi \setminus M$, we can define whatever we desire. I propose we define $r\mapsto 0$. This makes sense, as everything else must be in the kernel of $\psi $, so it is actually the only possible choice. Consider the $R$-module homomorphism $\ker \psi \to M\oplus \ker \psi /M$ given by $k\mapsto (0,k)+M$. First, note that this is the same as the inclusion map $\ker \psi \hookrightarrow M\oplus \ker \psi $ composed with the canonical injection, so it is trivially a homomorphism. Next, consider the inverse $(m,k)+M\mapsto k$. This is trivially an inverse, so it suffices to show it is well-defined.
+
+	Let $(m_1,k_1)+M=(m_2,k_2)+M$. Note that since the $m$ terms all drop out, and in fact $(m_1,k)+M=(m_2,k)+M$ for all $m_1,m_2\in M$, we can completely ignore the $m$ terms without loss of generality, and simply write $(0,k_1)+M=(0,k_2)+M$. It follows that
+	\[
+		(0,k_1-k_2)\in M
+	.\]
+	However, since our inclusion map $M\hookrightarrow M\oplus \ker \psi $ was defined as $m\mapsto (m,0)$, we have that $k_1-k_2=0$. Therefore, the map is well-defined, and $\ker \psi \cong \coker \phi $. I have no idea why the book didn't include this, since it is \emph{not} trivial. It might have been neater to show this using universal properties in retrospect, but oh well.
+
+	Now we prove the statement for right inverses, which is left completely as an exercise. Suppose the sequence splits. Then $M\cong \ker \phi \oplus N$, and we can view $\phi $ as the projection $\ker \phi \oplus N \to N$. The canonical injection $i : N \to \ker \phi \oplus N$ is then an inverse. This argument can be formalized in the same say I formalized the previous argument, using the explicit isomorphism.
+
+	Now suppose $\phi $ has a right-inverse $\psi $:
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		0\arrow[r]&N\arrow[r, "\psi "]\arrow[dr, "\mathrm{id} "']&M\arrow[d, "\phi "]\\
+			  &&N
+	\end{tikzcd}\]
+	We will show that $M\cong \ker \phi \oplus N$. Let $\eta : \ker \phi \oplus N \to M$ as the map $(k,n)\mapsto k+\psi (n)$. By the same logic as previously, this is a $R$-module homomorphism. Let $\zeta : M \to \ker \phi \oplus N$ be the mao $m\mapsto (m-(\psi \phi )(n),\phi (n))$. This is an inverse function by the same proof as previously. Therefore, $M\cong \ker \phi \oplus N$. Therefore, the sequence splits fairly trivially.
+\end{proof}
+
+Because of proposition \ref{prp:3.7.2}, we call left-invertible $R$-module homomorphisms `\emph{split monomorphisms}', and likewise we call right-invertible $R$-module homomorphisms  `\emph{split epimorphisms}'.
+
+We will discuss split exact sequences again in chapter 4 in the context of $\mathsf{Grp}$, and then to modules and abelian categories in chapters 8 and 9.
+
+\subsection{Homology and the Snake Lemma}
+\begin{definition}[Homology]\label{dfn:3.7.3}
+	The $i$-th homology of a complex
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		M_{\bullet}: \; \cdots\arrow[r, "d_{i+2}"]&M_{i+1}\arrow[r, "d_{i+1}"]&M_i\arrow[r, "d_i"]&M_{i-1}\arrow[r, "d_{i-1}"]&\cdots
+	\end{tikzcd}\]
+	of $R$-modules is the $R$-module
+	\[
+		H_i(M_\bullet)\coloneqq \frac{\ker d_i}{\im d_{i+1}}
+	.\]
+	
+\end{definition}
+
+We then have
+\[
+	H_i(M_\bullet)=0 \iff \im d_{i+1}=\ker d_i \iff M_\bullet\text{ is exact at }M_i
+.\]
+That is, $H_i(M_\bullet)$ is the measure of the failiure of $M_\bullet$ to be exact at $M_i$. In fact, homology can be thought of as a \emph{vast} generalization of kernel and cokernel. The particular case where $M_\bullet$ is the complex
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r]&M_1\arrow[r, "\phi "]&M_0\arrow[r]&0
+\end{tikzcd}\]
+is exact if and only if $H_1(M_\bullet)\cong \ker \phi $ and $H_0(M_\bullet)\cong \coker \phi $.
+
+We will now discuss how two short exact sequences yield one long exact sequence. We will come back to this construction later in the book in a more general manner in chapter 9. This is also important in algebraic topology apparently. The simple form we will learn about is known as the snake lemma.
+
+\begin{lemma}[The Snake Lemma]\label{lma:3.7.1}
+	Let the following diagram of two short exact sequences commute:
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		0\arrow[r]&L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+		0\arrow[r]&L_0\arrow[r, "\alpha _0"]&M_0\arrow[r, "\beta _0"]&N_0\arrow[r]&0
+	\end{tikzcd}\]
+	Then there exists an exact sequence
+	\[\begin{tikzcd}[row sep=2.5em, column sep=1.5em]
+		0\arrow[r]&\ker \lambda \arrow[r]&\ker \mu \arrow[r]&\ker \nu \arrow[r, "\delta "]&\coker \lambda \arrow[r]&\coker \mu \arrow[r]&\coker \nu \arrow[r]&0
+	\end{tikzcd}\]
+\end{lemma}
+We will skip the proof because it is a notational mess, and no real benefit comes out of stating the proof itself. It's better to investigate the definitions of the various morphisms. We will possibly return to it in chapter 9, when we will be dealing with things purely catgorically, and can prove it without appealing to elements of sets.
+
+Most of the homomorphisms are induced in straightforward ways, which I will contemplate when I return to these notes tomorrow. One thing to note is that we could have written the complex in ur statment as
+\[
+\begin{tikzcd}[row sep=0.5em, column sep=2.5em]
+0 \arrow[r] & H_1(L_\bullet) \arrow[r] & H_1(M_\bullet) \arrow[r] & H_1(N_\bullet) \arrow[dl, rounded corners=10, to path={
+    -- ([xshift=2ex]\tikztostart.east)
+    |- ([yshift=-3ex]\tikztostart.south)
+    -- ([xshift=3ex]\tikztotarget.west)
+}] \\
+&&\delta \arrow[dl, rounded corners=9, to path={
+    -| ([xshift=-2ex]\tikztotarget.west)
+    -- (\tikztotarget.west)
+}]\\
+& H_0(L_\bullet) \arrow[r] & H_0(M_\bullet) \arrow[r] & H_0(N_\bullet) \arrow[r] & 0
+\end{tikzcd}
+\]
+where each $M_\bullet$ is the complex
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r]&M_1\arrow[r, "\mu "]&M_0\arrow[r]&0
+\end{tikzcd}\]
+This is the same as our previous note on how all homomorphisms can be represented as a complex.
+
+A popular version of the snake lemma does not assume $\alpha_1$ is injective and $\beta_0$ is surjective. This means the commutative diagram of exact sequences looks like
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		&L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+		0\arrow[r]&L_0\arrow[r, "\alpha _0"]&M_0\arrow[r, "\beta _0"]&N_0
+\end{tikzcd}\]
+
+The lemma will then instead state there exists an exact sequence
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	\ker \lambda \arrow[r]&\ker \mu \arrow[r]&\ker \nu \arrow[r, "\delta "]&\coker \lambda \arrow[r]&\coker \mu \arrow[r]&\coker \nu 
+\end{tikzcd}.\]
+
+We will now consider the homomorphism $\delta $, since it is the heart of the proof. Here is the full diagram of the snake lemma.
+\[\begin{tikzcd}[row sep=2em, column sep=2.5em]
+	&0\arrow[d]&0\arrow[d]&0\arrow[d]\\
+	0\arrow[r]&\ker \lambda \arrow[r]\arrow[d]&\ker \mu \arrow[r]\arrow[d]&\ker \nu \arrow[d]\arrow[dddll, rounded corners=9, to path={
+    -- ([xshift=2ex]\tikztostart.east)
+    |- ([yshift=-3ex]\tikztostart.south)
+    -| ([xshift=-3ex]\tikztotarget.west)
+    -- ([xshift=-9ex]\tikztotarget.east)
+	}]\\
+	0\arrow[r]&L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+	0\arrow[r]&L_0\arrow[r, "\alpha _0"]\arrow[d]&M_0\arrow[r, "\beta _0"]\arrow[d]&N_0\arrow[r]\arrow[d]&0\\
+		  &\coker \lambda \arrow[r]\arrow[d]&\coker \mu \arrow[r]\arrow[d]&\coker \nu \arrow[r]\arrow[d]&0\\
+	&0&0&0
+\end{tikzcd}\]
+
+We will show here that elements of $\ker \nu $ can be mapped to $\coker \lambda $ through the diagram, and that the map we obtain is well-defined. We want to choose an element $a\in \ker \nu $, and map it along the diagram as follows:
+\[\begin{tikzcd}[row sep=2em, column sep=3em]
+	&0\arrow[d, dotted, no head]&0\arrow[d, dotted, no head]&0\arrow[d, dotted, no head]\\
+	0\arrow[r, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\arrow[d,  dotted, no head]\arrow[r, dotted, no head]&a\arrow[d]\\
+	0\arrow[r, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&c\arrow[r, "\beta _1"]\arrow[d, "\mu "]&b\arrow[r, dotted, no head]\arrow[d, dotted, no head, "\nu "]&0\\
+	0\arrow[r, dotted, no head]&e\arrow[r, "\alpha _0"]\arrow[d]&d\arrow[d, dotted, no head]\arrow[r, dotted, no head, "\beta _0"']&*\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+				   &f\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+				   &0&0&0
+\end{tikzcd}\]
+
+Now we will explain the diagram. Let $a\in \ker \nu $. Our goal is to show $a$ can be mapped into $\coker \lambda $. Since $\ker \nu $ can be viewed as a submodule of $N_1$ under the inclusion map $\ker \nu \hookrightarrow N_1$, we have $a\mapsto b\in N_1$. Since the complexes are exact, we have by proposition \ref{prp:3.7.1} that $\beta _1$ is an epimorphism, and is thus surjective. There then exists at least one $c\in M_1$ such that $\beta (c)=b$. We will claim for now that we can map $b\mapsto c$ and this operation is in fact well defined; we will show this later. We then very naturally have $\mu (c)=d\in M_0$ simply from the diagram itself. Now note that since the diagram is commutative, every subdiagram must also be commutative by definition. We then have that $(\beta_1\circ \nu) (c)=\mu (\beta _0(c))$, and thus $\nu (b)=\beta _0(d)$. This is the image on the spot marked $*$. However, recall that $b$ was the inclusion of $a$ in $N_1$, and $a\in \ker \nu $. Therefore, $\beta_0(d)=0$, and $d\in \ker \beta _0$. Since rows are exact, $\ker \beta _0= \im \alpha _0$. Therefore, there exists $e\in L_0$ such that  $\alpha _0(e)=d$. We claim once again we can define the map $d\mapsto e$, and will justify later. Finally, let $f\in \coker \lambda $ be the image of the natural projection $\pi : L_0 \to L_0 / \lambda (L_1) \cong \coker \lambda $. We then have our map $e\mapsto f$, and we claim that we can define the snaking homomorpism $\delta$ such that $a\mapsto f$. To summarize:
+\begin{itemize}
+	\item $a\mapsto b$ under the inclusion $\ker \nu \hookrightarrow N_1$;
+	\item  Since rows are exact,  $\exists c\in M_1$ such that $\beta _1(c)=b$. Map $b\mapsto c$;
+	\item $c\mapsto d$ under $\mu $;
+	\item $d\in \ker \nu $, so since rows are exact, $\exists e\in L_0$ such that $\alpha_0(e)=d$. Map $d\mapsto e$;
+	\item $e\mapsto f$ under the natural projection $\pi : L_0 \to \coker \lambda $.
+\end{itemize}
+
+We need to show our two steps with preimages are valid. The step where we map $d\mapsto e$ is valid because since rows are exact, by proposition \ref{prp:3.7.1}, $\alpha _0$ is monic, and thus an injection, so $\exists ! e\in L_0$ such that $e\mapsto d$ under $\alpha _0$.
+
+However, we made a choice in mapping $b\mapsto c$, so we must to show that the choice itself does not matter; that is, choosing a different $c$ does not impact the value of $\delta (a)$. This will make $\delta $ well-defined. We perform another diagram chase to justify this, because of course. THe relevant part of the above diagram is as follows:
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r, dotted, no head]&\arrow[d, dotted, no head, "\lambda "]\arrow[r, dotted, no head, "\alpha _1"]&c\arrow[r, "\beta _1"]\arrow[d, "\mu "]&b\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+	0\arrow[r, dotted, no head]&e\arrow[r, "\alpha _0"]\arrow[d]&d\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\,\\
+				   &f\arrow[r, dotted, no head]&\,
+\end{tikzcd}\]
+
+Suppose we choose a new $c'$ mapping to $b$:
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r, dotted, no head]&\arrow[r, dotted, no head,"\alpha _1"]&c'\arrow[r, "\beta _1"]&b\arrow[r, dotted, no head]&0
+\end{tikzcd}\]
+Since $\beta _1$ is an $R$-module homomorphism,
+\[
+	0=b-b=\beta _1(c')-\beta _1(c)=\beta_1(c'-c)
+.\]
+Thus, $c'-c\in \ker \beta _1$. By exactness, $c'-c\in \im \alpha _1$, and thus there exists $g\in L_1$ such that $\alpha _1(g)=c'-c$:
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r, dotted, no head]&g\arrow[r, "\alpha _1"]&(c'-c)\arrow[r, "\beta _1"]&0\arrow[r, dotted, no head]&0.
+\end{tikzcd}\]
+Since columns form exact sequences, we have that $\lambda (g)\in \ker \pi $, where $\pi $ is the canonical map $L_0 \to \coker \lambda $. Thus, $g$ dies in $\coker \lambda $:
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r, dotted, no head]&g\arrow[d, "\lambda "]\arrow[r, "\alpha _1"]&(c'-c)\arrow[r, "\beta _1"]\arrow[d, dotted, no head, "\mu "]&0\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+	0\arrow[r, dotted, no head]&\lambda (g)\arrow[r, dotted, no head, "\alpha _0"]\arrow[d]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\,\\
+				   &0\arrow[r, dotted, no head]&\,
+\end{tikzcd}\]
+Since the diagram commutes, and sicne $\alpha _1,\alpha _0$ are injective, we have that $\mu (c)=\alpha _0(e)$. We then have that $\mu (c'-c)=(\alpha _0\lambda )(g)$, and thus
+\[
+	\mu (c')=\mu (c'-c)+\mu (c)\mapsto e+\lambda (g)
+.\]
+Since $e\mapsto f$ and $e+\lambda (g)\mapsto f+0$, we have that $\delta$ is well-defined.
+
+The rest of the proof is left as an exercise, and I may try it tomorrow. The snake lemma makes various proofs very trivial. For example, consider the following corollary.
+\begin{corollary}
+	In the same situation as the snake lemma, if $\mu $ is surjective and $\nu $ is injective, then $\lambda $ is surjective and $\nu $ is an isomorphism.
+\end{corollary}
+\begin{proof}
+	If $\mu $ is surjective, then $\coker \mu =0$, and if $\nu $ is injective, then $\ker \nu =0$. By the snake lemma, there exists an exact sequence
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		0\arrow[r]&\ker \lambda \arrow[r]&\ker \mu \arrow[r]&0\arrow[r]&\coker \lambda \arrow[r]&0\arrow[r]&\coker \nu \arrow[r]&0.
+	\end{tikzcd}\]
+	Since the sequence is exact, we have $\coker \lambda ,\coker \nu =0$.
+\end{proof}

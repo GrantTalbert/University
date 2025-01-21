@@ -1,0 +1,203 @@
+\section{Modules Over a Ring}
+There are many parallels between $\mathsf{Grp}$ and $\mathsf{Ring}$, but there are a few issues in $\mathsf{Ring}$. Notably, ideals and kernels need not be rings, cokernels behave strangely, and even if one allows ideals to be subrings and removes the requirment of an identity, there is no large class of substuctures (like $\mathsf{Ab}$ in $\mathsf{Grp}$) where all subrings are ideals.
+
+Modules will fix these issues. If $R$ is a ring and $I$ is an ideal of $R$, then $R$, $I$, and $R /I$ are all modules over $R$. Moreover, the category of $R$-modules is much better behaved than $\mathsf{Ring}$, meaning kernels and cokernels do what we expect. In fact, the category $\mathsf{Ab}$ is equivalent to the category $\mathbb{Z}$-$\mathsf{Mod}$ of $\mathbb{Z}$-modules, and for each new ring $R$, we will get a new well-behaved category of modules. These categories are all examples of \emph{abelian categories}, which we will learn about later.
+
+\subsection{Definition of (Left-)$R$-Module}
+In short, $R$-modules are abelian groups endowed with an action of $R$ on the abelian group. Note that we were able to define group actions as a group homomorphism  $\sigma : G \to \Aut_{\mathsf{C}}( A ) $, and we said $G$ is acting on the object $A$.
+
+Recall that $\End_{\mathsf{Ab}}( G ) $ can be viewed as a \emph{ring}, so we can give an analogous definition of an action of a ring on an abelian group. A left-action of a ring $R$ on an abelian group $M$ is simply a ring homomorphism
+\[
+	\sigma : R \to \End_{\mathsf{Ab}}( M ) 
+.\]
+
+An equivalent way to represent this is with a function $\rho : R\times M \to M$ defined by $(r,m)\mapsto \sigma (r)(m)$. Note that since $\sigma $ is a ring homomorphism, we have
+\begin{itemize}
+	\item $\rho (1,m)=m$
+	\item  $\rho (r,m+n)=\rho (r,m)+\rho (r,n)$
+	\item  $\rho (r+s,m)=\rho (r,m)+\rho (s,m)$
+	\item  $\rho (rs,m)=\rho (r,\rho (s,m))$
+\end{itemize}
+We usually just say $rm$ instead of $\rho (r,m)$. The above bullet points then become
+\begin{itemize}
+	\item $1m=m$,
+	\item $r(m+n)=rm+rn$,
+	\item $(r+s)(m)=rm+sm$,
+	\item $(rs)m=r(sm)$.
+\end{itemize}
+\begin{definition}[Left-$R$-module]\label{dfn:3.5.1}
+	A left $R$-module structure on an abelian group $M$ consists of a map $\cdot : R\times M \to M$ called \emph{scalar multiplication}, defined by $(r,m\mapsto \sigma (r)(m)$, where $\sigma : R \to \End_{\mathsf{Ab}}( M ) $ is a ring homomorphism.
+\end{definition}
+
+Right $R$-modules are defined analogously, with right $R$-actions. Equivalently, we can define a right $R$-module as a left $R^\circ $-module, where $R^\circ $ is the opposite ring obtained by reversing the order of multiplication. If $R$ is commutative, these become the same ring. We will write \emph{module} to denote \emph{left-module}.
+\subsection{The Category $R$-$\mathsf{Mod}$}
+The book requests that I prove the following statements to familiarize myself with modules. First, for all $m\in M$, $0m=0$. It suffices to show the additive identity of $\End_{\mathsf{Ab}}( M ) $ is the trivial homomorphism $m\mapsto 0$, since a ring homomorphism is a group homomorphism, and $0\mapsto 0$ under a group homomorphism. We have
+\[
+	(\alpha +0)(x)=\alpha (x)+0(x)=\alpha (x)+0=\alpha (x)
+.\]
+Therefore, $0$ is the additive identity of $\End_{\mathsf{Ab}}( M ) $. Next, the book wants us to show $(-1)m=-m$. Since $\sigma $ is a ring homomorphism, we have that $-1_R$ will map to the additive inverse of $1_{\End_{\mathsf{Ab}}( M ) }$; that is, $-1_{\End_{\mathsf{Ab}}( M ) }$. Note that $1_{\End_{\mathsf{Ab}}( M ) }=\mathrm{id}_{M}$, so the additive inverse would be the map  $\alpha $ such that
+\[
+	(\mathrm{id}_M + \alpha )(x)=0 \implies \alpha (x)=-\mathrm{id}_M
+.\]
+Therefore, $(-1)m=-\mathrm{id}_M(m)=-m$.
+
+The following proposition is also a way of familiarizing myself with modules or something.
+\begin{proposition}\label{prp:3.5.1}
+	Every abelian group is a unique $\mathbb{Z}$-module.
+\end{proposition}
+\begin{proof}
+	Let $G$ be an abelian group. A $\mathbb{Z}$-module structure on $G$ is a ring homomorphism $\mathbb{Z}\to \End_{\mathsf{Ab}}( M ) $. Since $\mathbb{Z}$ is initial in $\mathsf{Ring}$, there exists precisely one such ring homomorphism.
+\end{proof}
+
+Using our previous results, we can show the action of $n\in\mathbb{Z}$ on some element $a\in M$ is simply the ordinary multiple $na = \sum_{0<i\leq n} a$.
+
+A homomorphism of $R$-modules is then a homomorphism of abelian groups which is compatible with the module structure. That is, a homomorphism $\phi : M \to N$ is a homomorphism of $R$-modules iff for all $m,n\in M$ an $r\in R$,
+\begin{itemize}
+	\item $\phi (m+n)=\phi (m)+\phi (n)$,
+	\item $\phi (rm)=r\phi (m)$.
+\end{itemize}
+It should be clear that composition of homomorphisms $R$-modules yields a homomorphism of $R$-modules, and the identity map is a homomorphism.
+\begin{definition}[$R$-$\mathsf{Mod}$]\label{dfn:3.5.2}
+	The category $R$-$\mathsf{Mod}$ is the category who's objects are (left) $R$-modules and morphisms are homomorphisms of $R$-modules.
+\end{definition}
+
+If $R=k$ is a field, $R$-modules are called $k$-vector spaces. We will denote the category of $k$-vector spaces ``$k$-$\mathsf{Vect}$''. Morphisms in  $k$-$\mathsf{Vect}$ are called \emph{linear maps}. The study of $\Vect{k} $, and when possible, $\Rmod{R} $ is called Linear Algebra. We will study these in chapters 6 and 8.
+
+Any ring homomorphism $\alpha : R \to S$ can be used to define the $R$-module where $(S,+)$ is taken as the underlying abelian group and multiplication is defined as $\rho (r,s)=\alpha (r)s$, where the operation on the right is \emph{multiplication in $S$}. For example, taking $\mathrm{id}_R : R\to R$ makes $R$ an $R$-module. We usually just write $rs$ instead of $\alpha (r)s$.
+
+We can make the ring structure in $S$ and the module stucture induced by $\alpha $ even more closely related by requiring $R$ be commutative and making $\alpha $ map to the center of $S$; the set of elements of $S$ that commute with all other elements of $S$. That means $\alpha (r)s=s\alpha (r)$. This makes this both a left- and a right-$R$-module, and additionally, the ring operation in $S$ is compatable with the $R$-module structure in that
+\[
+	(r_1s_1)(r_2s_2)=(r_1r_2)(s_1s_2)
+.\]
+This makes multiplication in $S$ `$R$-bilinear'. We can thus move the action of $R$ at will through elements of $S$. These examples are important, so we give them their own name
+\begin{definition}[$R$-algebra]\label{dfn:3.5.3}
+	Let $R$ be a commutative ring. An $R$-algebra is a ring homomorpism $\alpha : R \to S$ such that $\alpha (S)$ is contained within the center of $S$. A homomorphism of $R$-algebras is a ring homomorphism $S\to P$ that is also a $R$-module homomorphism $S\to P$.
+\end{definition}
+
+Equivalently, an $R$-algebra is an $R$-module $S$ with compatable ring structure; that is, we can move the actions of $R$ about however we desire. An  $R$-algebra $S$ is called a division algebra if $S$ is a division ring.
+
+We then get a notion of $R$-algebra homomorphism that preserves both the ring AND module structure; an $R$-algebra homomorphism $\phi : S \to K$ is a ring homomorphism $S\to K$ sch that $\phi (rx)=r\phi (x)$ for $r\in R$, $x\in S$. $R$-algebras then form a category $\Alg{R}$.
+
+If $S$ is commutative, the center condition is unnecessary so the situation is more simple. We call such a structure a commutative $R$-algebra. Commutative $R$-algebras form a subcategory of $\Alg{R}$, which is equivalent to the `coslice category' $\mathsf{CRing}^R$ of morphisms $\phi : R \to L$ for $L$ a commutative ring ($\mathsf{CRing}$ is the category of commutative rings), since each morphism $\phi : R \to L$ determines a commutative $R$-algebra on $L$.
+
+Also note that $\Alg{\mathbb{Z}}$ is the same as $\mathsf{Ring}$, as for every ring $R$ there exists exactly one ring homomorphism $\mathbb{Z}\to R$, and thus exactly one $\mathbb{Z}$-algebra $R$.
+
+The polynomial rings $R[x_1, \dots, x_n ]$ are, together with their quotients, commutative $R$-algebras (for $R$ commutative, otherwise it isn't an $R$-algebra).  The class of examples where $R=k$ is an algebraicly closed field are a particularly important class of examples that are used in classical affine algebraic geometry. See Chapter 7.2.3 for more discussion.
+
+The trivial group $\left\{ 0 \right\} $ is both initial and final in $\Rmod{R} $, and we call such an object a ``zero-object''. As in the other categories we have seen, an isomorphism in $\Rmod{R} $ is a bijective homomorphism. This is the same as in $\mathsf{Ab}$, and as we will see, they are similar in many other ways as well.
+
+If $R$ is commutative, there are even more similarities. We generally don't write $\Hom_{\Rmod{R}}(M , N) $, and instead write $\Hom_R( M,N )$. Since $M,N$ are abelian groups,
+\[
+	\Hom_{R}(M , N) \subseteq \Hom_{\mathsf{Ab}}(M , N) 
+\]
+as sets. We have seen the operation of pointwise addition makes $\Hom_{\mathsf{Ab}}(M , N) $ into an abelian group, and it follows fairly immediately that $\Hom_{R}(M , N) $ is also an abelian group under the same operations. That is, $\Hom_{R}(M , N) \in \Obj(\mathsf{ Ab }) $. We can also identify a natural action of $R$ on this group. For all $r\in R$ and $\phi \in \Hom_{R}(M , N) $, define the map $r\phi : M \to N$ as $(r\phi )(m)=r\cdot \phi (m)$. If $R$ is commutative, we have that this new function is also a $R$-module homomorphism, as for all $a\in R$ and $m\in M$,
+\[
+	(r\phi )(am)=r\phi (am)=(ra)(\phi (m))=(ar)(\phi (m))=a( (r\phi )(m))
+.\]
+Thus, we have a very natural action of $R$ on $\Hom_{R}(M , N) $ for all $R$-modules $M,N$, and thus we have $\Hom_{R}(M , N)$ as an $R$-module.
+
+If $R$ is \emph{not commutative}, then $\Hom_{R}(M , N) $ is only an abelian group. We will find more structure in chapter 8 when we discuss \emph{bimodules}.
+
+\subsection{Submodules and Quotients}
+We can construct things very quickly in $\Rmod{R} $, since $\Rmod{R} $ is basically a modified version of $\mathsf{Ab}$.
+
+A submodule $N$ of $M$ is a subgroup $N\subseteq M$ such that for all $r\in R$, $n\in N$, $rn\in N$. More simply, $N$ is an $R$-module and the inclusion $N\hookrightarrow M$ is a $R$-module homomorphism.
+
+Interestingly, when $R$ is viewed as a left-$R$-module, the submodules of $R$ are precisely the left-ideals of $R$.
+
+As usual, the image and kernel of a $R$-module homomorphism are submodules of their respective modules. Also  note that if $r$ is in the center of $R$ and $M$ is any $R$-module, then $rM$ is a submodule of $M$. If $I$ is any left-ideal of $R$, then
+\[
+	IM = \left\{ \sum_{i} r_im_i \mid r_i\in R \land m_i\in M \right\} 
+\]
+is a submodule of $M$. Finally, if $N$ is a submodule of $M$, then it is a subgroup of the abelian group $(M,+)$, and since all subgroups of abelian groups are normal, we can define the quotient $M /N$ as an abelian group.
+
+We would like to see this quotient as a module, so we would like the canonical projection $\pi : M \to M /N$ to be an $R$-module homomorphism. This forces
+\[
+	r(m+N)=r\pi (m)=\pi (rm)=rm+N
+\]
+for all $m\in M$. That is, we need to define an action of $R$ on $M /N$ by
+\[
+	r(m+N) \coloneqq rm + N
+.\]
+This trivially defines an $R$-module structure on $M /N$. The $R$-module $M /N$ is called the quotient of $M$ by $N$.
+
+If $R$ is a ring and $I$ is an ideal of $R$, then $R$, $I$, and $R /I$ are all $R$-modules. Additionally, if $R$ is commutative, then $R$ and $R /I$ are $R$-algebras.
+
+If $R$ is not commutative and $I$ is only a left-ideal, then the quotient $R /I$ is not defined as a ring, and is defined as a module with the $R$-action given by left multiplication. This reconciles our requirement that ideals be two-sided.
+
+We now have our theorems concerning homomorphisms, once again.
+\begin{theorem}\label{thm:3.5.1}
+	Let $N$ be any submodule of an $R$-module $M$. Then for all $R$-module homomorphisms $\phi : M \to P$ such that $N\subseteq \ker \phi $, there exists a unique homomorphism of $R$-modules $\widetilde{\phi} : M /N \to P$ such that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+		M\arrow[rr, "\phi "]\arrow[dr, "\pi "]&&P\\
+						      &M /N\arrow[ru, "\widetilde{\phi}"']
+	\end{tikzcd}\]
+	commutes. We have once again that $\widetilde{\phi} (m+N)=\phi (m)$.
+\end{theorem}
+\begin{proof}
+	By theorem \ref{thm:2.7.1}, this holds for groups, and all $R$-module homomorphisms are also group homomorphisms. We need only show the homomorphism is a homomorphism of $R$-modules. Let $m+N\in M /N$ and $r\in R$. We have
+	\[
+		\widetilde{\phi}  (rm+N)=\phi (rm)=r\phi (m)=r\widetilde{\phi}(m+N)
+	.\]
+\end{proof}
+
+Since we can quotient by every submodule $N$, and the kernel of the canonical projection $M\to M /N$ is $N$, we have that every submodule is a kernel. Recall that we also have that all kernels are submodules, so all substructures are in fact kernels, in the same exact way as $\mathsf{Ab}$. In other terms, every monomorphism in $\Rmod{R} $ is a kernel.
+
+\subsection{Canonical Decomposition and Isomorphism Theorems}
+\begin{theorem}\label{thm:3.5.2}
+	Every $R$-module homomorphism $\phi : M \to M'$ can be decomposed as follows:
+	\[\begin{tikzcd}[row sep=1.5em, column sep=2.5em]
+		M \arrow[rrr, bend left, "\phi "]\arrow[r, two heads, "\pi "']&M /N\arrow[r, "\sim ", "\widetilde{\phi}"']&\phi (M)\arrow[r, hook, "\iota"']&M'
+	\end{tikzcd}\]
+\end{theorem}
+\begin{proof}
+	An $R$-module homomorphism is also a group homomorphism and this theorem already holds for groups by \ref{thm:2.8.1}, so we need only show $\widetilde{\phi} $ is a homomorphism of $R$-modules. By theorem \ref{thm:3.5.1}, this follows.
+\end{proof}
+\begin{corollary}[First Isomorphism Theorem]\label{cor:3.5.1}
+	Let $\phi : M \to M'$ be a surjective ring homomorphism. Then
+	\[
+		M' \cong \frac{M}{\ker \phi }
+	.\]
+\end{corollary}
+\begin{proof}
+	Since $\phi (M)=M'$, this follows by theorem \ref{thm:3.5.2}.
+\end{proof}
+
+Once again, if $M$ is an $R$-module and $N\subseteq M$ is a submodule, then there is a bijection between submodules $P$ of $M$ containing $N$, and submodules of $M /N$.
+\begin{proposition}[Third Isomorphism Theorem]\label{prp:3.5.2}
+	Let $N$ be a submodule of an $R$-module $M$, and let $P$ be a submodule of $M$ containing $N$. Then $P /N$ is a submodule of $M /N$, and
+	\[
+		\frac{M /N}{P /N}\cong \frac{M}{P}
+	.\]
+\end{proposition}
+\begin{proof}
+	Consider the map $\phi : M/N \to M /P$ defined by $m+N\mapsto m+P$. Note that for all $m\in M$ and $r\in R$,
+	\[
+		\phi (rm+N)=rm+P=r\phi (m+N)
+	.\]
+	Therefore, $\phi $ is an $R$-algebra homomorphism, since we have already verified it is a group homomorphism. We have $\ker \phi =P /N$, so
+	\[
+		\frac{M /N}{P /N}\cong \frac{M}{P}
+	.\]
+\end{proof}
+
+Finally, we have a second isomorphism theorem of modules.
+\begin{proposition}[Second Isomorphism Theorem]\label{prp:3.5.3}
+	Let $N,P$ be submodules of an $R$-module $M$. Then
+	\begin{itemize}
+		\item $N+P$ is a submodule of $M$;
+		\item $N\cap P$ is a submodule of $M$;
+			\[
+				\frac{N+P}{N}\cong \frac{P}{N\cap P}
+			.\]
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	maaan i dont feel like proving this ugjh I hate thiis theorem
+\end{proof}
+
+More generally, for any collection $\left\{ N_{\alpha } \right\}_{\alpha \in A}$ of submodules of $M$,
+\[
+	\sum_{\alpha \in A} N_\alpha \text{ and } \bigcap_{\alpha\in A} N_\alpha  
+\]
+are submodules of $M$.

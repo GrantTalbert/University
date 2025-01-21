@@ -1,0 +1,285 @@
+\section{Products, Coproducts, etc. In $\Rmod{R} $}
+In this section, we will explore in some sense what it means for $R$-mod to be \emph{well-behaved}.
+\subsection{Products and Coproducts}
+Just like in $\mathsf{Ab}$, products and coproducts exist in $\Rmod{R} $, and moreover finite products and coproducts coencide. A direct sum $M\oplus N$ of $R$-modules can be given multiplicative structure via the map
+\[
+	r(m,n)=(rm,rn)
+.\]
+Note that this comes with the canonical projections 
+\[
+	\pi_M : M\oplus N \to M,\qquad \pi_N : M\oplus N \to N
+\]
+defined by $(m,n)\mapsto m$ and $(m,n)\mapsto n$. We also have the maps
+\[
+	i_M : M \to M\oplus N,\qquad i_N : N \to M\oplus N
+\]
+defined by $m\mapsto (m,0)$ and $n\mapsto (0,n)$.
+\begin{proposition}\label{prp:3.6.1}
+	The direct sum $M\oplus N$ satisfies the universal properties of both the product and coproduct in $\Rmod{R} $.
+\end{proposition}
+\begin{proof}
+	\emph{Product:} Let $P$ be an $R$-module, and let $\phi_M,\phi_N : P \to M,N$. The unique map $\phi_M\times \phi_N$ is required for the diagram
+	\[\begin{tikzcd}[row sep=1.5em, column sep=3.5em]
+		&&M\\
+		P\arrow[rru, bend left, "\phi_M"]\arrow[r, "\phi_M \times \phi_N"]\arrow[rrd, bend right, "\phi_N"]&M\oplus N\arrow[ru, "\pi_M"]\arrow[dr, "\pi_N"]\\
+														   &&N
+	\end{tikzcd}\]
+	to commute. Also note that since it is a product, it is an $R$-module homomorphism, and is the unique one making the diagram commute fairly trivially.
+
+	\emph{Coproduct:} Let $P$ be an $R$-module, and let $\psi_M,\psi_N : M,N \to P$. Define $\psi_M \oplus \psi_N : M\oplus N \to P$ as the map
+	\begin{align*}
+		(\psi_M\oplus \psi_N)(m,n)&=(\psi_M \oplus \psi_N)(m,0)+(\psi _M\oplus \psi _N)(0,n)\\
+					  &=(\psi_M \oplus \psi _N)\circ i_M(m)+(\psi _M\oplus \psi _N)\circ i_N(n)\\
+					  &=\psi _M(m)+\psi _N(n)
+	.\end{align*}
+	This definition is forced by the commutativity of the diagram
+	\[\begin{tikzcd}[row sep=1.5em, column sep=3.5em]
+		M\arrow[drr, bend left, "\psi _M"]\arrow[dr, "i_M"]\\
+		&M\oplus N\arrow[r, "\psi _M\oplus \psi _N"]&P\\
+		N\arrow[ru, "i_N"]\arrow[rru, bend right, "\psi _N"]
+	\end{tikzcd}.\]
+	Additionally, it is clearly a homomorphism of $R$-modules. It is unique by the commutative diagram, so we have that $M\oplus N$ is both a product and a coproduct in $\Rmod{R} $.
+\end{proof}
+
+We will write $M\oplus N$ to denote both the product and coproduct in $\Rmod{R} $, since $M\times N$ will be seen again in chapter 8 in the category of bilinear maps, and will not be interpreted as the product of $M$ and $N$. Finally, note that infinite products and coproducts do not coencide in $\Rmod{R} $.
+
+\subsection{Kernels and Cokernels}
+$\Rmod{R} $ has a $0$ object, its Hom sets are abelian groups, and it has finite products and coproducts. A category with these is called an \emph{additive category},  and since it also has kernels and cokernels, this makes it into an \emph{abelian} category. We will review these definitions in chapter 9, but for now, we will review kernels and cokernels in $\Rmod{R} $.
+
+Monomorphisms and epimorphisms behave as we expect in  $\Rmod{R} $, and for very simple reasons, unlike the complicated reasoning in $\mathsf{Grp}$ and the strange behavior in $\mathsf{Ring}$. Recall our universal properties for kernels and cokernels. Let $\phi : M \to N$ be a $R$-module homomorphism. Then $\ker \phi $ is final with respect to the property of factoring $R$-module homomorphisms $\alpha : P \to M$ such that $\phi \circ \alpha =0$:
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	P\arrow[rr, bend left, "0"]\arrow[r, "\alpha "]\arrow[dr, "\exists ! \overline{\alpha } "]&M\arrow[r, "\phi "]&N\\
+												  &\ker \phi \arrow[u, hook]
+\end{tikzcd}\]
+Cokernels are then initial with respect to the property of factoring $R$-module homomorphisms $\beta : N \to P$ such that $\beta \circ \phi =0$:
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	M\arrow[rr, bend left, "0"]\arrow[r, "\phi "]&N\arrow[r, "\beta "]\arrow[d, two heads, "\pi  "]&P\\
+						     &\coker \phi \arrow[ru, "\exists ! \overline{\beta }"] 
+\end{tikzcd}\]
+
+\begin{proposition}\label{prp:3.6.2}
+	Kernels and cokernels exist in $\Rmod{R} $. Moreover,
+	\begin{itemize}
+		\item The following are equivalent:
+			\begin{itemize}
+				\item $\phi $ is a monomorphism;
+				\item $\ker \phi $ is trivial;
+				\item $\phi $ is injective;
+			\end{itemize}
+		\item The following are equivalent:
+			\begin{itemize}
+				\item $\phi $ is an epimorphism;
+				\item $\coker \phi $ is trivial;
+				\item $\phi $ is surjective.
+			\end{itemize}
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The book doesn't prove any of these, but I want to prove them from scratch. First, we show kernels and cokernels exist in $\Rmod{R} $. Using the notation in the diagrams above, Let $\alpha : P \to M$ be a homomorphism of $R$-modules such that $\phi \circ \alpha =0$. Note that this forces $\alpha (P)\subseteq \ker \phi $, so define $\overline{\alpha } : P \to \ker \phi  $ as the map  $m\mapsto \alpha (m)$. Since $\alpha $ is a $R$-module homomorphism, we have trivially that $\overline{\alpha } $ is a $R$-module homomorphism.
+
+	Recall that we require not just that the diagram to commute, but that $\iota \circ \overline{\alpha } =\alpha $, since the morphism $\iota : \ker \phi  \to M$ needs to be final. We then trivially have that $\overline{\alpha } $ is the unique morphism from $\alpha \to \iota $, and thus $\ker \phi $ satisfies the universal property for kernels in $\Rmod{R} $.
+
+	Next, we show $\coker \phi $ exists in $\Rmod{R}  $. For $\beta \circ \phi =0$, we require that $\phi (M)\subseteq \ker \beta $. By theorem \ref{thm:3.5.1}, since $\phi (M)$ is a submodule of $N$ and $\phi (M)\subseteq \ker \beta $, there exists a unique $R$-module homomorphism $\overline{\beta } : N /\phi (M) \to P$ such that $\beta =\overline{\beta } \circ \pi_{\phi (M)} $, where $\pi_{\phi (M)}$ is the canonical projection $N \to N /\phi (M)$. Therefore, $\pi_{\phi (M)}$ is initial in the category, so we define $\coker \phi \coloneqq  N /\phi (M)$.
+
+	Now we show the statements concerning monomorphisms hold. Let $\phi $ be a monomorphism. Recall a monomorphism is a morphism $\phi : M \to N$ such that for all $\alpha,\beta : P \to M$,
+	\[
+		\phi \circ \alpha =\phi \circ \beta \implies \alpha =\beta 
+	.\]
+	Consider the maps
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\ker \phi \arrow[r, shift left, "0"]\arrow[r, shift right, "\iota "']&M\arrow[r, "\phi "]&N
+	\end{tikzcd}\]
+	where $\iota $ is the inclusion map. Note that $\iota (\ker \phi )=\ker \phi $ when viewed as a submodule of $M$, and $0_M\in \ker \phi $ by previous logic, so we have $\phi \circ \iota =\phi \circ 0$. Therefore, $\iota =0$ since $\phi $ is a monomorphism, and thus $\iota (\ker \phi )=\left\{ 0 \right\} $. Thus, $\ker \phi =\left\{ 0 \right\} $ is trivial.
+
+	Now suppose $\ker \phi $ is trivial, and let $m,n\in M$ such that $\phi (m)=\phi (n)$. We have
+	\[
+		\phi (m)=\phi (n)\implies \phi (m-n)=0_N \implies m-n\in \ker \phi \implies m-n=0 \implies m=n
+	.\]
+	Therefore,  $\phi $ is injective.
+
+	Now suppose $\phi $ is injective. Since it is injective, and since all $R$-module homomorphisms are set functions, we have that $\phi $ is a monomorphism in $\Rmod{R} $ since it is a monomorphims in $\mathsf{Set}$.
+
+	Finally, recall statements concerning epimorphisms. Suppose $\phi : M \to N$ is an epimorphism. Recall that this implies for all $R$-module homomorphism $\alpha ,\beta : N \to P$, we have
+	\[
+		\alpha \circ \phi =\beta \circ \phi \implies \alpha =\beta 
+	.\]
+	We wish to show $\coker \phi $ is trivial. Consider the dual maps
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		M\arrow[r, "\phi "]&N\arrow[r, shift left, "0"]\arrow[r, shift right, "\pi "']&\coker \phi 
+	\end{tikzcd}\]
+	where $\pi $ is the canonical map $m\mapsto m+\phi (M)$. Note that for all $m\in M$, $\phi (m)\in \phi (M)$ by definition, so we have
+	\[
+		(\pi \circ \phi )(m)=m+\phi (M)=0_{\coker \phi }
+	.\]
+	Therefore, $\pi =0$ since $\phi $ is an epimorphism, and thus $\pi (N)=\left\{ 0 \right\} $. Therefore, $\coker \phi $ is trivial.
+
+	Now suppose $\coker \phi $ is trivial. It follows that for all $n\in N$, we have $n+\phi (M)=\phi (M)$. It follows that $n\in \phi (M)$, and thus $N\subseteq \phi (M)$. Therefore, $\phi $ is surjective.
+
+	Now suppose $\phi $ is surjective. Since $\phi $ is an epimorphism in $\mathsf{Set}$, and all $R$-module homomorphisms are morphisms in $\mathsf{Set}$, it follows that $\phi $ is an epimorphism in $\Rmod{R} $.
+\end{proof}
+
+I also want to remark that for any $R$-module $M$, the submodules of $M$ are precisely the $R$-module homomorphisms $M\to \_$, and the quotients of $M$ by these submodules are precisely the cokernels of $R$-module homomorphisms $\_ \to M$. To see this, first note that we have already shown cokernels are quotient modules and kernels are submodules. Now note that for any submodule $N\subseteq M$, the kernel of the map $M\to M /N$ is $N$, so submodules are kernels. Then note that the cokernel of the inclusion map $N \hookrightarrow  M$ is $M / \iota (N)=M /N$, so quotient groups are cokernels.
+
+One last thing to remember is that in $\mathsf{Set}$, a function was monic or epi iff it had a left or right inverse, respectively. We have been told not to expect this in general categories, and it does not hold in $\Rmod{R} $.
+\subsection{Free Modules and Free Algebras}
+The universal property of free $R$-modules is modeled after the one for groups. The goal is to find an $R$-module that contains a given set $A$ with no special properties in the most efficient way possible. The universal property goes as such:
+
+Given a set $A$, a free $R$-module on $A$, denoted $F^R(A)$, is a $R$-module together with a function of sets $j: A \to F^R(A)$ such that for all $R$-modules $M$ and functions of sets $f : A \to M$, there exists a unique $R$-module homomorphism $\phi : F^R(A) \to M$ such that the diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	F^R(A)\arrow[r, "\phi "]&M\\
+	A\arrow[u, "j"]\arrow[ru, "f"]
+\end{tikzcd}\]
+commutes. Equivalently, $(j,F^R(A))$ is initial with respect to this category. We have shown that $F^R(A)$ is unique up to isomorphism since it is initial, and the function $j$ is necessarily injective. That is, if it exists.
+
+Given any set $A$, define the (infinite) direct sum $N ^{\oplus A}$ of an $R$-module $N$ as
+\[
+	N ^{\oplus A}\coloneqq \left\{ \alpha : A \to N  \mid \alpha (a)\neq 0 \text{ for only finitely many }a\in A \right\} 
+.\]
+You can think of it as $\alpha (a)=0$ almost everywhere; $\alpha(a) \neq (0)$ on a set of measure 0. We can thus treat each function as a finite collection of corresponding points. We can give it an $R$-module structure by defining $(r\alpha )(a)=r(\alpha (a))$, using the $R$-module structure on $N$.
+
+If $N=R$, we can define a map $j : A \to R ^{\oplus A}$ by sending $a\mapsto j_a$, where $j_a : A \to R$ is the map
+\[
+	j_a(x) =
+	\begin{cases}
+		1,& x=a\\
+		0,& x\neq a
+	\end{cases}
+.\]
+This identifies  every element with a function in the expected way.
+\begin{proposition}\label{prp:3.6.3}
+	\[
+		F^R(A)\cong R ^{\oplus A}
+	.\]
+\end{proposition}
+\begin{proof}
+	We need to show $R ^{\oplus A}$ is initial with respect to the given universal property. First, I actually want to show $R ^{\oplus A}$ is an $R$-module, because why not. First, we show it is abelian. Note that $-1\in R$ since $R$ is abelian, so there exists a map
+	\[
+		-j_a =
+		\begin{cases}
+			-1,&x=a\\
+			0,&x\neq a
+		\end{cases}
+	.\]
+	Note that the 0 map $a\mapsto 0$ is the identity, and $j_a-j_a=0$ fairly trivially. Associativity follows from $R$, so we have our abelian group $(R ^{\oplus A},+)$. Now note that the given definition of scalar multiplication is fairly trivially a ring action, so we have our $R$-module.
+
+	Now we show that the construction is initial. In order for $\phi \circ j=f$, we must have $\phi (j_a)=f(a)$ for all $a\in A$. Commutativity of the diagram forces this definition to be unique. We also require it be a morphism of $R$-modules, so first we need to figure out how to represent elements of $R^{\oplus A}$. Note that with our definition of multiplication,
+	\[
+		rj_a(x) = 
+		\begin{cases}
+			r1_R,&x=a\\
+			0, x\neq a
+		\end{cases}
+	.\]
+	Note here that $r1_R$ denotes the ring action, not the ring multiplication. Moreover, we can then represent any element $\alpha \in R^{\oplus A}$ as a linear combination
+	\[
+		\alpha = \sum_{i} r_i j_i
+	,\]
+	where for all $i$ such that $\alpha (i)\neq 0$, we have $\alpha (i)=(rj_i)(i)=r1_R$. We can now define our $R$-module homomorphism.
+
+	Let $\phi : R^{\oplus A} \to M$ be the map
+	\[
+		\phi \left( \sum_{i} r_ij_i \right) =\sum_{i} r_i f(i)
+	.\]
+	Note that we require $j_i \mapsto f(i)$ to make the diagram commute, and we also require it map the more general elements in this specific way to make it a $R$-module homomorphism. This forces it to be unique (this can be shown rigorously but idc enough to write it out), and it is by definition a morphism of $R$-modules. Therefore, $R^{\oplus A}\cong F^R(A)$.
+\end{proof}
+\begin{definition}[Free $R$-Module]\label{dfn:3.6.1}
+	Let $R$ be a ring, and let $A$ be a set. Then the free $R$-module on the set $A$ is the $R$-module $R^{\oplus A}$.
+\end{definition}
+
+We thus generally denote a free $R$-module as the set $R^{\oplus A}$, and if $A$ is finite with order $n$, we generally write $R^{\oplus n}$. This is all analogous to $\mathsf{Ab}$, which makes perfect sence since $\mathsf{Ab}$ is really just $\Rmod{\mathbb{Z}} $.
+
+Now we consider commutative $R$-algebras instead of $R$-modules. We will specifically consider the finite case here. Let $A=\left\{ 1, \ldots, n \right\} $. We denote by $R[A]$ the polynomial ring $R[x_1, \dots, x_n ]$, and define the function $j : A \to R[A]$ by $j(i)=x_i$.
+\begin{proposition}\label{prp:3.6.4}
+	$R[A]$ is a free commutative $R$-algebra on the set $A$.
+\end{proposition}
+\begin{proof}
+	We wish to show for every commutative $R$-algebra $S$ and function of sets $f : A \to S$, there exists a unique $R$-algebra homomorphism $\phi : R[A]\to S$ such that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		R[a]\arrow[r, "\phi "]&S\\
+		A\arrow[u, "j"]\arrow[ru, "f"]
+	\end{tikzcd}\]
+	commutes. That is, $\phi \circ j = f$.
+	
+	Recall that for any fixed ring homomorphism $\alpha : R \to S$ of commutative rings, then for all $s\in S$ there exists a unique ring homomorpism $\overline{\alpha } : R[x] \to S$ that extends $\alpha $ by sending $x\mapsto s$. This is a fairly trivial statement, but turns out to complete the proof. We already have a fixed homomorphism $\alpha : R \to S$, as a commutative $R$-algebra is a $R$-module where the action is given by left multiplication under the homomorphism $\alpha $. We can apply this extension principle $n$ times, extending $x_i \mapsto f(i)$. This is the same logic as in our free $R$-module definition, but applied to a polynomial ring. It is evident that this is a ring homomorphism by this fact.
+\end{proof}
+
+\begin{definition}[(Finite) Free $R$-Algebra]\label{dfn:3.6.2}
+	Let $A$ be a finite set, and let $R$ be a commutative ring. Then the free $R$-algebra on the set $A$ is the $R$-algebra $R[A]$.
+\end{definition}
+
+We showed earlier that for all sets $A$ of order $n$ and functions $j : A \to R$ for $R$ a commutative ring, there exists a unique ring homomorphism $\phi : \mathbb{Z}[x_1, \dots, x_n ] \to R$ such that $\phi \circ j=f$, where $j(i)=x_i$. We can now realize that this also follows from the fact that $\mathbb{Z}[x_1, \dots, x_n ]$ is a free algebra in $\Alg{\mathbb{Z}}$, which is equivalent to the category $\mathsf{CRing}$.
+
+\subsection{Submodule Generated by a Subset; Noetherian Modules}
+Let $M$ be an $R$-module, and let $A\subseteq M$ be a submodule. By the universal property of free modules, there is a unique homomorphism of $R$-modules $\phi_A : R^{\oplus A} \to M$, where we take the map $f : M \to M$ to be the identity. We call the image $\phi_A\left( R^{\oplus A} \right) \subseteq M$ the \emph{submodule generated by $A$ in $M$}, and denote it $\left\langle A \right\rangle $. If $A$ is finite, we generally denote it $\left\langle a_1, \dots, a_n  \right\rangle $.
+\begin{definition}[Submodule Generated by a Set]\label{dfn:3.6.3}
+	Let $M$ be an $R$-module, and let $A\subseteq M$ be a subset. We say that the submodule of $M$ generated by $A$, denoted $\left\langle A \right\rangle $, is the image of the unique $R$-module homomorphism $R^{\oplus A}\to M$.
+\end{definition}
+
+We also have the equivalent definition of
+\[
+	\left\langle A \right\rangle \coloneqq \left\{ \sum_{a\in A} r_a a \mid r_a \neq 0 \text{ for only finitely many }a\in A \right\} 
+.\]
+Clearly, $\left\langle A \right\rangle $ is the smallest submodule in $M$ containing $A$.
+
+We call the module $M$ \emph{finitely generated} if $M=\left\langle A \right\rangle $ for a finite set $A$. That is, if there exists a surjective $R$-module homomorphism $R^{\oplus n}\twoheadrightarrow M$ for some $n$. One incredible result in algebra is the classification of all finitely generated modules over a PID, which will be covered in chapter 6. This will also classify all finitely-generated abelian groups, since $\Rmod{\mathbb{Z}} $ is the same as $\mathsf{Ab}$.
+
+Finitely generated $R$-modules are extremely important, but also not very well-behaved. For example, consider $R=\mathbb{Z}[x_1, \dots, x_n ]$, and note that $\mathbb{Z}[x_1, \dots, x_n ]=(1)$. However, the ideal
+\[
+	(x_1,x_2, \ldots)
+\]
+is \emph{not finitely generated}. There exist finitely-generated $R$-modules that have submodules that are not finitely generated.
+\begin{definition}[Noetherian Module]\label{dfn:3.6.4}
+	A $R$-module $M$ is a Noetherian module if all submodules of $M$ are finitely generated as an $R$-module.
+\end{definition}
+
+It can be seen that a ring $R$ is Noetherian if and only if it is a Noetherian module over itself. That is, if the action of $R$ on $R$ is left-multiplication. We will study Noetherian modules in more depth later, but for now we will see some consequences of the definition.
+\begin{proposition}\label{prp:3.6.5}
+	Let $M$ be an $R$-module with a submodule $N\subseteq M$. Then $M$ is Noetherian if and only if $N$ AND $M /N$ are Noetherian.
+\end{proposition}
+\begin{proof}
+	If $M$ is Noetherian, then $N$ is Noetherian because all submodules of $N$ are submodules of $M$. To show a subgroup of $M /N$ is Noetherian, it suffices to show the image of a Noetherian module under a $R$-module homomorphism is Noetherian, as $\pi : M \to M /N$ is a $R$-module epimorphism. 
+	
+	Let $M$ be Noetherian, and let $\phi : M \to N$ be a $R$-module epimorphism (for convenience). Let $P\subseteq N$ be a submodule. We will first show $\phi ^{-1}(P)$ is a submodule of $M$. It is a subgroup by group theory, so we need to only show it is closed under scalar multiplication. Let $r\in R$ and $m\in \phi ^{-1}(P)$. It follows that
+	\[
+		\phi (rm)=r\phi (m)\in rP
+	,\]
+	since $\phi (m)\in \phi ^{-1}(P)$. However, since $P$ is a submodule, $rP\subseteq P$, since $P$ must be closed under scalar multiplication. Thus, $rm\in \phi ^{-1}(P)$. Therefore, all submodules of $N$ have submodule preimages under $\phi $. Let $P\subseteq N$ be a submodule. Since $\phi ^{-1}(P)$ is a submodule of $M$, $\phi ^{-1}(P)$ is finitely generated. That is, there exists a finite subset $A=\left\{ a_1, \dots, a_n  \right\} \subseteq \phi ^{-1}(P)$ such that $\left\langle A \right\rangle =\phi ^{-1}\left( P \right) $. Let $p\in P$. It follows that there exists at least one $m\in \phi ^{-1}\left(P \right) $ such that $\phi (m)=p$. Note that for all such $p$, there exist $\left\{ r_a \right\}_{a\in A}\subseteq R$ such that
+	\[
+		m=\sum_{a\in A} r_a a
+	.\]
+	We have $\left| \phi (A) \right| $ is finite, and we also have that
+	\[
+		p=\phi \left( \sum_{a\in A} r_aa \right) =\sum_{a\in A} r_a\phi (a)=\sum_{b\in \phi (A)} r_bb
+	.\]
+	Note that $r_b$ may not equal $r_a$, since $\phi : A \to \phi (A)$ may not necessarily be injective, so there may be duplicate $a$s. However, the point is that $A$ finitely generates $P$, so $N$ is Noetherian.
+
+	For the converse, let $N$ and $M/N $ be Noetherian. Let $P$ be a submodule of $M$. We must show $P$ is finitely generated. Since $P\cap N$ is a submodule of $N$ and $N$ is Noetherian, we have $P\cap N$ is finitely generated. By propsition \ref{prp:3.5.3}, we have
+	\[
+		\frac{P}{P\cap N}\cong \frac{P+N}{N}
+	.\]
+	Therefore, $P /(P\cap N)$ is isomorphic to a submodule of $M /N$, and is thus Noetherian, since $M /N$ is Noetherian. Moreover, $P /(P\cap N)$ is finitely generated. This implies that $P$ is finitely generated by the exercises.
+\end{proof}
+\begin{corollary}
+	Let $R$ be a Noetherian ring, and let $M$ be a finitely-generated $R$-module. Then $M$ is Noetherian.
+\end{corollary}
+\begin{proof}
+	Since $M$ is finitely generated, the unique homomorphism $R^{\oplus n}\to M$ is surjective. By theorem \ref{cor:3.5.1}, we have that $M$ is isomorphic to a quotient of $R^{\oplus n}$. By proposition \ref{prp:3.6.5}, it suffices to show $R^{\oplus }$ is Noetherian.
+
+	We use proof by induction. The base case is trivial, so suppose $R^{\oplus n-1}$ is Noetherian. Note that the map $R^{\oplus n-1}\to R^{\oplus n}$ given by $\left( r_1, \dots, r_{n-1}  \right) \mapsto \left( r_1, \dots, r_{n-1},0  \right) $ is an injective ring homomorphism that allows us to view $R^{\oplus n-1}$ as a submodule of $R^{\oplus n}$. The kernel of the surjective ring homomorphism $\left( r_1, \dots, r_n  \right) \mapsto r_n$ is $R^{\oplus n-1}$, so by corollary \ref{cor:3.5.1}, we have
+	\[
+		\frac{R^{\oplus n}}{R^{\oplus n-1}}\cong R
+	.\]
+	Since $R$ and $R^{\oplus n-1}$ are Noetherian, by proposition \ref{prp:3.6.5}, $R^{\oplus n}$ is Noetherian.
+\end{proof}
+
+\subsection{Finitely Generated vs. Finite Type}
+If $S$ is an $R$-algebra, then it can be finitely generated as both an $R$-module AND an $R$-algebra. Since these are not equivalent, we call $S$ \emph{finite} if it is finitely generated as an $R$-module, and also give the following definition.
+\begin{definition}[Finite Type]\label{dfn:3.6.3}
+	A commutative $R$-algebra $S$ is \emph{of finite type} if it is finitely generated as an $R$-algebra; that is, there exists a surjective $R$-algebra homomorphism $R[x_1, \dots, x_n ]\to S$ for some finite $n$.
+\end{definition}
+
+Equivalently, $S$ is finite if there exists a submodule $M$ of $R^{\oplus n}$ such that $S \cong R^{\oplus n} /M$, and $S$ is of finite type if there exists an ideal $I$ of $R[x_1, \dots, x_n ]$ such that $S\cong R[x_1, \dots, x_n ] /I$. Recall here that morphisms in $\Alg{R}$ are both $R$-module and ring homomorphisms, hence the ideal requirement. It shuold be clear that all finite such $S$ are of finite type, but the converse is not true in general. 
+
+There are special cases where they are the same, however. One version of \emph{Hilbert's Nullstellenatz} says that if $k,K$ are finite fields with $k\subseteq K$, then $K$ is of finite type over $k$ \emph{if and only if} it is finite over $k$. We will prove this, along with many other examples, later.
+
+Hilbert also showed in \emph{Hilbert's Basis Theorem} that if $R$ is Noetherian as a ring (and thus a $R$-module) and $S$ is a finite type $R$-algebra, then $S$ is also Noetherian as a ring, and thus, a $S$-module. This is one immediate consequence of the theorem, which will be proven in chapter 5.

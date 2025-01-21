@@ -1,0 +1,1185 @@
+\chapter{Groups, First Encounter}
+This chapter introduces groups, the category $\mathbf{Grp}$, and general features of the category, such as identifying monomorphisms, epimorphisms, equivalence relations, and quotients in $\mathbf{Grp}$. A more object-oriented treatment of $\mathbf{Grp}$ is left for Chapter 4. I will also transition for the remainder of this chapter to the serif font $\mathsf{C}$ for categories, because I want to compare it to the boldface font.
+
+\section{Definition of a Group}
+\subsection{Groups and Groupoids}
+Recall our previous definition of a groupoid. Definition \ref{dfn:1.4.3} says a groupoid is a category $\mathbf{C}$ where all morphisms are isomorphisms. The author begins with the joke that ``a group is a groupoid with only one element.'' In fact, this makes sense. Consider a groupoid $\mathsf{G}$ with $\Obj( \mathsf{G} )=\left\{ * \right\}  $. We have $\Hom_{\mathsf{G}}(* , *) =\Aut_{\mathsf{G}}( * ) $, which we already noted was a group. This set carries all the information about $\mathsf{G}$, since it only has one element. We can thus represent a group as morphisms in $\mathsf{G}$. The group operation is morphism composition, since we have an identity $\mathbbm{1}_{*} $, associativity, and all morphisms are invertible since they are isomorphisms.
+
+\subsection{Definition}
+The official definition of a group is not as a groupoid, for obvious reasons. This was simply some introduction. The official definition is as follows.
+\begin{definition}[Group]\label{dfn:2.1.1}
+	Let $G$ be a set with an operation $\cdot : G\times G \to G$. The set endowed with this operation, written as $(G,\cdot )$, is a \emph{group} if
+	\begin{itemize}
+		\item the operation is associative:
+			\[
+				\forall g,h,k\in G,(g\cdot h)\cdot k=g\cdot (h\cdot k)
+			.\]
+		\item there exists an identity element $e_G$:
+			\[
+				\exists (e_G\in G)\text{ s.t. }\forall (g\in G),e_Gg=ge_GG=g
+			.\]
+		\item every element has an inverse:
+			\[
+				\forall g\in G,\exists g^{-1}\in G\text{ s.t. }gg^{-1}=g^{-1}g=e_G
+			.\]
+	\end{itemize}
+\end{definition}
+
+The second axiom requires $G$ be nonempty. We then find that the most trivial group is a singleton $G=\left\{ e \right\} $, where $e\cdot e=e$. We call this the \emph{trivial group}. Various other standard constructions, such as $(\mathbb{R},+)$, $(\mathbb{C},+)$, $(\mathbb{Q},+)$, and $(\mathbb{Z},+)$ form groups fairly obviously. However, all of these cases are \emph{commutative}. Groups need not be commutative, although we will see commutative groups behave more nicely than normal groups.
+
+An example of a noncommutative group is the set the set of $n\times n$ invertible matrices with real entries. This is generally denoted  $\operatorname{GL}_n(\mathbb{R}) $. Since all matrices are invertible, this forms a group under matrix multiplication. However, as we know, matrix multiplication is \emph{not commutative}. We will work with linear algebra more extensively in chapter 6.
+
+\subsection{Basic Properties}
+
+From the groupoid point of view, the identity $e_G$ would instead be given as $\mathbbm{1}_{*} $. We usually omit the $G$ subscript when the group $e$ belongs to is understood. Additionally, sometimes other symbols are used for the identity, such as $0$ and $1$. One important fact about the identity is the following:
+\begin{proposition}\label{prp:2.1.1}
+	If $g,h\in G$ are identities of $G$, then $g=h=e_G$.
+\end{proposition}
+\begin{proof}
+	Since $h$ is an identity, $gh=g$. Since $g$ is an identity, $gh=h$. Therefore, $g=gh=h$.
+\end{proof}
+Note that this proof requires only that $g$ be a left identity and $h$ be a right identity. This means if there exists both a left and right identity in a group, then they are th same, and are a total identity. Additionally, this makes groups into pointed sets. Group homomorphisms are also morphisms of pointed sets, since identities must map to identities.
+\begin{proposition}\label{prp:2.1.2}
+	Inverses in a group are also unique.
+\end{proposition}
+\begin{proof}
+	Let $g,h\in G$ be inverses of some element $k$. Then $e=gk=gh$. We can left multiply by $k$ and apply associativity to obtain
+	\[
+		(kg)k=(kg)h\implies ek=eh\implies k=h
+	.\]
+\end{proof}
+
+Since the inverse is unique, we generally denote the inverse of some $g\in G$ as $g^{-1}$.
+
+Finally, note that although the group operation is binary and can only apply to two items at the time, by associativity we have
+\[
+	g_1\cdot (g_2\cdot g_3)=(g_1\cdot g_2)\cdot g_3
+.\]
+This allows us to simply write
+\[
+	g_1\cdot g_2\cdot g_3
+,\]
+since all possible interpretations of it are equivalent. This gives rise to exponential notation in groups. Given a positive integer $n$, we denote
+\[
+	g^n\coloneqq \underset{n \text{ times}}{\underbrace{g\cdot \cdots \cdot g}}
+.\]
+Additionally,
+\[
+	g^{-n}\coloneqq \underset{n \text{ times}}{\underbrace{g^{-1}\cdot \cdots \cdot g^{-1}}}
+,\]
+and
+\[
+	g^0=e
+.\]
+It's easy to check that many usual properties of exponents are satisfied. For example,
+\[
+	g^ng^m=g^{n+m}
+.\]
+\subsection{Cancellation}
+Cancellation properties hold in groups.
+\begin{proposition}\label{prp:2.1.3}
+	Let $G$ be a group. Then $\forall a,g,h\in G$,
+	\[
+		ga=ha\implies g=h\quad \land \quad ag=ah\implies g=h
+	.\]
+\end{proposition}
+\begin{proof}
+	Since $G$ is a group, $\exists g^{-1}\in G$. We have
+	\[
+		ga=ha\implies gaa^{-1}=haa^{-1}\implies g=h
+	.\]
+	Additionally,
+	\[
+		ag=ah\implies a^{-1}ag=a^{-1}ah\implies g=h
+	.\]
+\end{proof}
+Some notation - we write $\mathbb{R}^* \coloneqq \mathbb{R}\setminus\left\{ 0 \right\} $.
+\subsection{Commutative Groups}
+Note that definition \ref{dfn:2.1.1} does not require commtuativity. However, commutative groups arise naturally in many contexts, often involving the integers, as we will see throughout the text. We use the additive notation here to emphasize this fact, denote the identity as $0_A$, the inverse as $-a$, and exponential notation is replaced by multiplication. Commutative groups are called \emph{abelian} groups.
+\begin{definition}[Abelian Group]\label{dfn:2.1.2}
+	Let $G$ be a group. We say $G$ is \emph{abelian} if $\forall a,b\in G$,
+	\[
+		ab=ba
+	.\]
+\end{definition}
+
+Also note that $na$ is \emph{notation}; it denotes $a+\cdots+a$. We cannot always reasonably multiply a group element by a random integer.
+\subsection{Order}
+\begin{definition}[Order]\label{dfn:2.1.3}
+	An element $g$ of a group $G$ has finite order if there exists $n\in\mathbb{Z}^+$ such that $g^n=e$. We define the order $\left| g \right| $ as the smallest such positive $n$. If no such $n$ exists, we often write $\left| g \right| =\infty$.
+\end{definition}
+\begin{lemma}\label{lma:2.1.1}
+	If $g^n=e$ for some $n\in\mathbb{Z}^+$, then $\left| g \right| $ divides $n$.
+\end{lemma}
+\begin{proof}
+	By definition, $n\geq \left| g \right| $, so $n-\left| g \right| \geq 0$. Note that there exists some $m\in\mathbb{Z}$ such that $r=n-m\left| g \right| \geq 0$ and $n-m(\left| g \right| +1)<0$. Note here that $r<\left| g \right| $ by this argument. We have
+	\[
+		g^r=g^{n-\left| g \right| m}=g^n\left(g^{\left| g \right| }\right)^{-m}=e
+	.\]
+	By definition, $\left| g \right| $ is the smallest \emph{positive} integer such that $g^{\left| g \right| }=e$, so we have $r=0$. Thus, $n=m\left| g \right| $, and thus $\left| g \right| $ divides $n$.
+\end{proof}
+\begin{corollary}\label{cor:2.1.1}
+	Let $g\in G$ be an element of finite order, and let $N\in\mathbb{Z}$. Then
+	\[
+		g^N=e \iff N \text{ is a multiple of }\left| g \right| 
+	.\]
+\end{corollary}
+\begin{proof}
+	By the previous lemma, if $g^N=e$, then $N$ is a multiple of $\left| g \right| $. Conversely, if $N$ is a multiple of $\left| g \right| $, we have
+	\[
+		g^{N}=g^{m\left| g \right| }=\left( g^{\left| g \right| } \right) ^m=e^m=e
+	.\]
+\end{proof}
+\begin{definition}[Group Order]\label{dfn:2.1.4}
+	Let $G$ be a group. The order of $G$, denoted $\left| G \right| $, is the number of elements of $G$. If $G$ is infinite, we write $\left| G \right| =\infty$.
+\end{definition}
+
+Consider the $\left| G \right| +1$ powers of some element $g$:
+\[
+	eg^1g^2\cdots g^{\left| G \right| }
+.\]
+Since the number of powers exceeds the number of elements of $G$, there exist powers $i\neq j$ such that $g^i=g^j$. We then have $g^{j-i}=e$, and thus $\left| g \right| \leq j-i\leq \left| G \right| $. We will be able to say more once we reach Lagrange's theorem.
+
+In infinite groups, odd things can happen. You can have $g,h$ with finite order, yet $\left| gh \right| =\infty$. In abelian groups, there is much more structure.
+\begin{proposition}\label{prp:2.1.4}
+	Let $g\in G$ have finite order. Then $g^m$ has finite order for all $m\geq 0$, and
+	\[
+		\left| g^m \right| =\frac{\operatorname{lcm}(m,\left| g \right| ) }{m}=\frac{\left| g \right| }{\operatorname{gcd}(m,\left| g \right| ) }
+	.\]
+\end{proposition}
+\begin{proof}
+	The second equality follows from basic facts of gcd and lcm, so we prove only the first. The order of $g^m$ is the least $d\in\mathbb{Z}^+$ such that $g^{md}=e$. By corollary \ref{cor:2.1.1}, $md$ is a multiple of $\left| g \right| $. We then require $d$ be the smallest positive integer such that this is true. So $m\left| g^m \right| $ is the smalest multiple of $m$ is the smallest multiple of $\left| g \right| $:
+	\[
+		m\left| g^m \right| =\operatorname{lcm}(m,\left| g \right| ) 
+	.\]
+\end{proof}
+\begin{proposition}\label{prp:2.1.5}
+	If $gh=hg$, then $\left| gh \right| $ divides $\operatorname{lcm}(\left| g \right| ,\left| h \right| ) $.
+\end{proposition}
+\begin{proof}
+	If $N$ is a multiple of $\left| g \right| $ and $\left| h \right| $, then by induction,
+	\[
+		(gh)^N=g^Nh^N=e
+	.\]
+\end{proof}
+
+\section{Examples of Groups}
+\section{The Category $\mathsf{Grp}$}
+Obviously, groups will be the objects in the category $\mathsf{Grp}$. This section defines the morphisms in this category and explores basic properties.
+\subsection{Group Homomorphisms}
+A group consists of two pieces of information, a set $G$, and an operation $\cdot : G\times G \to G$ satisfying definition \ref{dfn:2.1.1}. A morphism of groups $(G,m_G)\to (H,m_H)$, known as a \emph{group homomorphism}, should be a function
+\[
+	\phi : G \to H
+\]
+that also carries information about the operations on these sets. The question is then what is the most natural way to do this?
+
+Consider the function
+\[
+	(\phi \times \phi ): G\times G \to H\times H
+\]
+defined naturally by
+\[
+	(\phi \times \phi )(a,b)=(\phi (a),\phi (b))
+.\]
+This satisfies the universal property for products, interestingly. We then have the diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	G\times G\arrow[r,"\phi \times \phi "]\arrow[d,"m_G"']&H\times H\arrow[d, "m_H"]\\
+	G\arrow[r, "\phi "']&H
+\end{tikzcd}\]
+
+The most natural thing to ask for be that this diagram commute; that is,
+\[
+	m_H((\phi \times \phi )(a,b))=\phi (m_G(a,b))
+.\]
+In more standard notation,
+\[
+	\phi (a) \cdot_H \phi (b)=\phi (a\cdot_G b)
+.\]
+\begin{definition}[Group Homomorphism]\label{dfn:3.1}
+	A function $\phi : G \to H$ is a group homomorphism if $\phi (ab)=\phi (a)\phi (b)$ for all $a,b\in G$. Equivalently, $\phi $ is a group homomorphism if the diagram above commutes.
+\end{definition}
+\subsection{$\mathsf{Grp}$: Definition}
+For groups $G,H$, we define
+\[
+	\Hom_{\mathsf{Grp}}(G , H)
+\]
+to be the set of group homomorphisms $G\to H$. If $\phi : G \to H$ and $\psi : H \to K$ are homomorphisms, we define composition $\psi \circ \phi $ in the usual way, such that $(\psi \circ \phi )(a)=\psi (\phi (a))$ for all $a\in G$. This can be represented with the commutative diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	G\times G\arrow[r, "\phi \times \phi "]\arrow[rr, bend left, "(\psi \circ \phi )\times (\psi \circ \phi )"]\arrow[d, "m_G"]&H\times H\arrow[r, "\psi \times \psi "]\arrow[d, "m_H"]&K\times K\arrow[d, "m_K"]\\
+	G\arrow[r, "\phi "]\arrow[rr, bend right, "\psi \circ \phi "]&H\arrow[r, "\psi" ]&K
+\end{tikzcd}\]
+Since function composition is associative, homomorphisms are associative, and moreover $\mathrm{id}_G$ is a group homomorphism, so $\mathsf{Grp}$ is a category.
+\subsection{Pause for Reflection}
+Definition \ref{dfn:2.1.1} gives groups more structure than just multiplication, so why don't we require group homomorphisms to preserve this structure as well? It turns out the definition we have given does, in fact, preserve these properties.
+\begin{proposition}\label{prp:2.3.1}
+	Let $\phi : G \to H$ be a group homomorphism. Then
+	\begin{itemize}
+		\item $\phi (e_G)=e_H$.
+		\item $\forall g\in G, \phi \left( g^{-1} \right) =\phi (g)^{-1}$.
+	\end{itemize}
+	Equivalently, we require that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+		G\arrow[r, "\phi "]\arrow[d,"g\mapsto g^{-1}"']&H\arrow[d,"h\mapsto h^{-1}"]\\
+		G\arrow[r,"\phi "']&H
+	\end{tikzcd}\]
+	commute.
+\end{proposition}
+\begin{proof}
+	The first item is fairly trivial.
+	\[
+		e_H\cdot \phi (e_G)=\phi (e_G)=\phi (e_G\cdot e_G)=\phi (e_G)\cdot \phi (e_G)
+	.\]
+	It follows that $e_H\cdot \phi (e_G)=\phi (e_G)\cdot \phi (e_G)$, and thus, $e_H=\phi (e_G)$. Similarly,
+	\[
+		\phi (g)\phi \left( g^{-1} \right) =\phi \left( gg^{-1} \right) =\phi (e_G)=e_H
+	.\]
+	Therefore, $\phi (g^{-1})=\phi (g)^{-1}$.
+\end{proof}
+
+This proposition guarentees that these morphisms preserve the important properties of groups.
+\subsection{Products et al.}
+$\mathsf{Grp}$ and $\mathsf{Set}$ look very similar, as a group is simply a set with more structure. In fact, there exists a forgetful functor $\mathsf{Grp}\rightsquigarrow \mathsf{Set}$ (functors will be discussed later). However, the intitial objects in $\mathsf{Set}$ are different from those in $\mathsf{Grp}$.
+\begin{proposition}\label{prp:2.3.2}
+	Trivial groups are initial and final in $\mathsf{Grp}$.
+\end{proposition}
+\begin{proof}
+	Since singletons are final in $\mathsf{Set}$, and since the constant function is fairly obviously a homomorphism, singletons are final in $\mathsf{Grp}$. Singletons are also intial since, by proposition \ref{prp:2.3.1}, the only homomorphism $\left\{ e \right\} \to G$ is the map $e\mapsto e_G$. Since only one morphism exists for all groups $G$, singletons are both initial and final.
+\end{proof}
+
+There are, however, some similarities between the categories. For example, products in $\mathsf{Grp}$ are similar to those in $\mathsf{Set}$.
+\begin{proposition}\label{prp:2.3.3}
+	With operations defined componentwise, $G\times H$ as a set product is a product in $\mathsf{Grp}$.
+\end{proposition}
+\begin{proof}
+	Recall that a product must come equipped with natural projections $\pi_G$, $\pi_H$ that satisfy the universal property that for all groups $A$ and pairs of morphisms $\phi_G : A \to G$, $\phi_H : A \to H$, there exists a unique morphism $\phi_G \times \phi _H$ such that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		&&G\\
+		A\arrow[rru, bend left, " \phi_G"]\arrow[rrd, bend right, "\phi_H"]\arrow[r,"\phi_G\times \phi _H"]&G\times H\arrow[ur, "\pi_G"]\arrow[dr, "\pi_H"]\\
+														   &&H
+	\end{tikzcd}\]
+	commutes. Using the same definitions as in  $\mathsf{Set}$, it's trivial to see that $\pi_G$ and $\pi _H$ are group homomorphisms, so we show only that the function $\phi_G \times \phi_H$ is a homomorphism, since its relation with $\mathsf{Set}$ guarentees it is unique.
+	\[
+		\phi_G\times \phi_H(ab)=(\phi_G(ab),\phi_H(ab))=(\phi_G(a),\phi_H(a))(\phi_G(b),\phi_H(b))=(\phi_G\times \phi_H(a))(\phi_G\times \phi _H(b))
+	.\]
+\end{proof}
+
+Coproducts also exist in $\mathsf{Grp}$, but are not the same as the disjoint union in set, since there is no way to equip that with a group structure. The coproduct of groups, known as the \emph{free product} and denoted $G*H$, will be explored in the exercises and not used in the book.
+
+\subsection{Abelian Groups}
+The category $\mathsf{Ab}$ is the category of abelian groups, with morphisms given by group homomorphisms. We will see later that $\mathsf{Ab}$ is an instance of a class of categories of modules over a commutative ring, all of which are \emph{abelian categories}, which will be explored in the final chapter somewhat.
+
+Products in $\mathsf{Ab}$ are the same as in $\mathsf{Grp}$, but coproducts in $\mathsf{Ab}$ are the same as products in $\mathsf{Ab}$. We refer to the coproduct in $\mathsf{Ab}$ as the \emph{direct sum}, denoted $A\oplus B$. It's important to note that even though the product $A\times B$ satisfies the universal property for coproducts in $\mathsf{Ab}$, it \emph{doesn't necessarily} satisfy it in $\mathsf{Grp}$. The coproduct in $\mathsf{Grp}$ may be different than that in $\mathsf{Ab}$.
+
+\section{Group Homomorphisms}
+\subsection{Examples}
+
+The set $\Hom_{\mathsf{Grp}}(G , H) $ is always nonempty; we can always give the homomorphism $g\mapsto e_H$. Thus, $\Hom_{\mathsf{Grp}}(G , H) $ is a ``pointed set''. This morphism is called the trivial morphism.
+
+Group actions are an important class of homomorphism. An action of a group $G$ on an object $A$ of a category $\mathsf{C}$ is a group homomorphism $G\to \Aut_{\mathsf{C}}( A ) $. That is, a group acts on an object if the elements of the group determine isomorphisms $A\to A$ in a way that preserves the group structure. An example of this is when $\mathsf{C}=\mathsf{Set}$, each element of $G$ determines a permutation of $A$. For example, $D_6\to S_3$ is a group action on the set $\left\{ 0,1,2 \right\} $. We will expand on group actions much more later.
+
+Most of the rest of the examples I have seen before and don't care much about,  so I will quickly list some of them. The exponential map $\epsilon_g : \mathbb{Z} \to G$, $a\mapsto g^a$; the quotient map $\mathbb{Z}\to \mathbb{Z}/n\mathbb{Z}$, $a\mapsto a\cdot [1]_n=[a]_n$; if $m|n$ there is a homomorphism $\phi_n^m : \mathbb{Z}/n\mathbb{Z} \to \mathbb{Z}/m\mathbb{Z}$ defined by $[a]_n\mapsto [a]_m$.
+
+\subsection{Homomorphisms and Order}
+Group homomorphisms preserve many parts of the underlying group structure, somewhat including order.
+\begin{proposition}\label{prp:2.4.1}
+	Let $\varphi : G \to H$ be a group homomorphism, and let $g$ have finite order. Then $\left| \phi (g) \right| $ divides $\left| g \right| $.
+\end{proposition}
+\begin{proof}
+	Since $\phi (g)^{\left| g \right|}=\phi \left( g^{\left| g \right| } \right)  $ by induction, applying lemma \ref{lma:2.1.1}, we obtain the statement.
+\end{proof}
+The order is in general, preserved. The map $\pi_n : \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$ does not preserve order, except for the identity element $0$. However, the order is \emph{always} preserved by isomorphisms.
+\subsection{Isomorphisms}
+An isomorphism in $\mathsf{Grp}$ is an invertible homomorphism, and since all homomorphisms are functions of sets, we might assume that an isomorphism is a bijective homomorphism, as this is the case of isomorphisms in $\mathsf{Set}$.
+\begin{proposition}\label{prp:2.4.2}
+	Let $\phi : G \to H$ be a group homomorphism. Then $\phi $ is an isomorphism if and only if it is a bijection.
+\end{proposition}
+\begin{proof}
+	Suppose $\phi : G \to H$ is an isomorphism. Then it must have an inverse. Using our knowledge of functions in $\mathsf{Set}$, a function has an inverse if and only if it is a bijection, so $\phi $ is a bijection.
+
+	Now suppose $\phi : G \to H$ is a bijective homomorphism. We must show the inverse function $\phi ^{-1}$ is a group homomorphism. Let $h_1,h_2\in H$ and $\phi ^{-1}(h_1)=g_1$, $\phi ^{-1}(h_2)=g_2$. Then
+	\[
+		\phi ^{-1}(h_1h_2)=\phi ^{-1}(\phi (g_1)\phi (g_2))=\phi ^{-1}(\phi (g_1g_2))=g_1g_2=\phi ^{-1}(h_1)\phi ^{-1}(h_2)
+	.\]
+	Therefore, bijections are precisely the isomorphisms in $\mathsf{Grp}$.
+\end{proof}
+\begin{definition}[Isomorphic Groups]\label{dfn:2.4.1}
+	Two groups $G$ and $H$ are isomorphic if they are isomorphic in $\mathsf{Grp}$. We write $G\cong H$ to state that $G$ is isomorphic to $H$.
+\end{definition}
+Automorphisms of a group are isomorphisms $G\to G$, and as explored previously, $\Aut_{\mathsf{Grp}}( G ) $ forms a group.
+\begin{definition}[Cyclic]\label{dfn:2.4.2}
+	A group is \emph{cyclic} if it is isomorphic to either $\mathbb{Z}$ or $C_n\coloneqq \mathbb{Z}/n\mathbb{Z}$ for some $n\in\mathbb{N}$.
+\end{definition}
+
+Isomorphic objects in a category are fairly indistinguishable within that category. Isomorphic \emph{groups} generally share the exact same structure. For example, we can prove the following.
+\begin{proposition}
+	Let $\phi : G \to H$ be an isomorphism.
+	\begin{itemize}
+		\item For all $g\in G$, $\left| \phi (g) \right| =\left| g \right| $.
+		\item $G$ is abelian if and only if $H$ is abelian.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The first follows from proposition \ref{prp:2.4.1}; since $\left| \phi (g) \right| $ divides $\left| g \right| $ and vice versa, we have the statement. The second is left to the reader, but is fairly trivial. I will show $G$ abelian implies $H$ abelian, since the reverse is completed by proposition \ref{prp:1.4.2}. Let $G$ be abelian. Since $\phi $ is bijective, for all $h\in H$ there exists $g\in G$ such that $\phi (g)=h$. Let $h_1,h_2\in H$ and let $\phi (g_1)=h_1$, $\phi (g_2)=h_2$. We have
+	\[
+		h_1h_2=\phi (g_1)\phi (g_2)=\phi (g_1g_2)=\phi (g_2g_1)=\phi (g_2)\phi (g_1)=h_2h_1
+	.\]
+\end{proof}
+
+The idea that isomorphic groups share basically all aspects of their structure will be applied without proof at many times throughout this book. One interesting note that will be proven in a later exercise is that two finite abelian groups are isomorphic if and only if all of their elements are of the same order.
+
+\subsection{Homomorphisms of Abelian Groups}
+Here is another example of how $\mathsf{Ab}$ is more well-behaved than $\mathsf{Grp}$. We've seen already that $\Hom_{\mathsf{Grp}}(A , B) $ is a pointed set, but in  $\mathsf{Ab}$, we can say more. $\Hom_{\mathsf{Ab}}(A , B) $ is an abelian group, but \emph{not} under function composition, since inverses need not exist. Rather, for $\phi ,\psi \in \Hom_{\mathsf{Ab}}(G , H) $, we define $\phi +\psi $ as the map
+\[
+	(\phi +\psi )(a)=\phi (a)+\psi (a)
+.\]
+Note that
+\[
+	(\phi +\psi )(a+b)=\phi (a+b)+\psi (a+b)=\phi (a)+\phi (b)+\psi (a)+\psi (b)
+.\]
+Since $H$ is commutative, we have
+\[
+	\phi (a)+\psi (a)+\phi (b)+\psi (b)=(\phi +\psi )(a)+(\phi +\psi )(b)
+.\]
+The identity then becomes the trivial homomorphism, associativity is inherited from $H$, and inverses are defined as $(-\phi )(a)=\phi (-a)$. In fact, our proof did not require $G$ to be commutative, or to even be a group. We simply require that $G$ be a set and $H$ be a commutative group, and we have $\Hom_{\mathsf{Set}}(G , H) $ an abelian group. 
+
+\section{Free Groups}
+\subsection{Motivation}
+Free groups are a more advanced type of group that we are now ready to tackle. Given a set $A$ with no special group properties, we want to construct a group $F(A)$ containing $A$.
+
+We start with a singleton. Letting $\left\{ a \right\} $ be the trivial group  would be odd, since that requires $a$ have a group-theoretic property, so instead we define $F(A)=\left\langle a \right\rangle $, and we take each power of $a$ to be a distinct group element. We define multiplication such that the exponential map $\epsilon_a(g)=a^g$ is an isomorphism $\mathbb{Z}\to \left\langle a \right\rangle $.
+
+The author asks me to now contemplate how we are going to do this for all sets. I think there will be a universal property involved. I had an idea at one point, but I forget what it is now. I will skip to the answer.
+
+\subsection{Universal Property}
+
+Given a set $A$, it's natural to consider the category $\mathscr{F}^A$ of pairs $(j,G)$ where $G$ is a group and $j : A \to G$ is a function of sets. Morphisms
+\[
+	(j,G)\to (k,H)
+\]
+are commutative diagrams
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	G\arrow[r,"\phi "]&H\\
+	A\arrow[u, "j"]\arrow[ur, "k"]
+\end{tikzcd}\]
+where $\phi $ is a group homomorphism. A free group $F(A)$ will then be the group component of an initial object in $\mathscr{F} ^A$. This implements the idea that $A$ should map to $F(A)$ in the ``most efficient way'', as any other contruction can be recovered from the initial objects via group homomorphism. This universal property defines $F(A)$ up to isomorphism, but the question is whether $F(A)$ exists.
+
+Before we construct $F(A)$, we will show the set $\left<a \right>$ satisfies this universal property for $A=\left\{ a \right\} $. The function $j : A \to \mathbb{Z}$ will send $a^n \mapsto n$. A set function $A\to G$ then amounts to choosing some group element $g\in G$ such that $g=f(a)$. This forces the unique homomorphism $\phi : \mathbb{Z} \to G$ defined by $\phi (1)=g$ for the diagram to commute.
+
+\subsection{Concrete Construction}
+Given a set $A$, we will treat elements of $A$ as an alphabet, and construct words from the elements of $A$. Let $A'$ be isomorphic but disjoint from $A$, and for all $a_i\in A$, denote $a_i^{-1}\in A'$. A word on the set $A$ is the ordered list $(a_1, \dots, a_n )$, denoted $w=a_1 \dots a_n $, where $a_i\in A\cup A'$ for all $i$. The set of words on $A$ will be denoted $W(A)$; the number $n$ of letters of $w$ is the length of $w$, and the empty word $w=\left(  \right) \in W(A)$.
+
+Words on a singleton may look like
+\[
+	aa^{-1}a^{-1}aaa^{-1}aaaa^{-1}a^{-1}a
+.\]
+Note that some of these letters are redundant; we would expect $aa^{-1}$ and $a^{-1}a$ to annihilate each other. We would like to find a reduction process for these words. Define $r : W(A) \to W(A)$ as the ``elementary reduction'' that searches for the first occurance of a pair $aa^{-1}$ or $a^{-1}a$, and removes it. For example,
+\[
+	aa^{-1}aaa^{-1}a \mapsto aaa^{-1}a
+.\]
+If no reduction is possible, meaning $r(w)=w$, we say $w$ is a reduced word.
+\begin{lemma}\label{lma:2.5.1}
+	If $w\in W(A)$ has length $n$, then $r^{\left\lfloor \frac{n}{2} \right\rfloor}(w)$ is a reduced word.
+\end{lemma}
+\begin{proof}
+	Since each application of $r$ reducesd the length by $2$, one cannot reduce the word by more than $\frac{n}{2}$ times.
+\end{proof}
+
+Define the `reduction' $R : W(A) \to W(A)$ as $R(w)=r^{\left\lfloor \frac{n}{2} \right\rfloor}(w)$, where $n$ is the length of $w$. Let $F(A)=R(W(A))$; that is, the set of reduced words on $A$. We ae ready to define a group structure on $F(A)$. For two words $w,w'\in F(A)$, define $w\cdot w'$ as the reduced juxtaposition of $w$ and $w'$,
+\[
+	w\cdot w'=R(ww')
+.\]
+This operation is clearly associative, the empty word $e=\left(  \right) $ is clearly an identity, and the inverse of a reduced word is the word obtained by reversing the letters and inverting them.
+
+Note that there exists a function $j : A \to F(A)$ defined by $a$ mapping to the word $a$.
+\begin{proposition}\label{prp:2.5.1}
+	The pair $(j,F(A))$ satisfies the universal property for free groups.
+\end{proposition}
+\begin{proof}
+	I will prove this myself before looking at the book proof, since I need practice with universal properties. Let $f : A \to G$, and let $G$ be a group. For all $a\in A$, there exists $g\in G$ such that $f(a)=g$. For the diagram to commute, we require that $\phi (j(a))=\phi (a)=g$. Applying the condition that $\phi $ is a homomorphism makes $\phi $ unique: for any composite word, since $\phi $ is a homomorphism we can break it down into singleton words, and the mappings of each singleton word is uniquely determined by $f$ in this way, so the mapping of the composite word is as well. We also let $\phi (a^{-1})=f(a)^{-1}$.
+\end{proof}
+
+\subsection{Free \emph{Abelian} Groups}
+What if we ask for free groups in $\mathsf{Ab}$? We wish to find a free abelian group $F^{ab}(A)$ that most efficiently contains the set $A$. We will use the same universal property, but require that $F^{ab}(A)$ be abelian. That is, we want $F^{ab}(A)$ to be the group satisfying the universal property that for all abelian groups $G$ and functions $f : A \to G$, there exists a unique group homomorphism $\phi  : F^{ab}(A) \to G$ such that the diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	F^{ab}(A)\arrow[r, "\phi "]&G\\
+	A\arrow[u, "j"]\arrow[ur, "f"]
+\end{tikzcd}\]
+commutes.
+
+First, some notation. Let $\mathbb{Z}^{\oplus n}$ denote
+\[
+	\underbrace{\mathbb{Z}\oplus \cdots\oplus \mathbb{Z}}_{n\text{ times}}
+.\]
+Since this is the same as a product, it is often to denote it $\mathbb{Z}^n$, but we will use this notation instead.
+\begin{proposition}\label{prp:2.5.2}
+	Let $A=\left\{ 1, \ldots, n \right\} $. Then $\mathbb{Z}^{\oplus n}$ is a free abelian group on $A$.
+\end{proposition}
+\begin{proof}
+	Let $i\mapsto (0, \ldots, 1, \ldots, 0)$, where $1$ occurs at the $i$th position. Then every element of $\mathbb{Z}^{\oplus n}$ can be written uniquely of the form
+	\[
+		(m_1, \dots, m_n )=\sum_{i=1}^{n} m_i j(i)
+	.\]
+	Let $f : A \to G$ be a function of sets. To make the diagram commute, we must have
+	\[
+		\phi \left( \sum_{i=1}^{n} m_ij(i) \right) =\sum_{i=1}^{n} m_if(i)
+	.\]
+	We just need to show $\phi $ is a homomorphism. Since $G$ is abelian, we have
+	\[
+		\phi \left( \sum_{i=1}^{n} m_ij(i) \right) +\phi \left( \sum_{i=1}^{n} k_ij(i) \right) =\sum_{i=1}^{n} m_if(i)+\sum_{i=1}^{n} k_if(i)=(m_i+k_i)f(i)
+	\]
+	\[
+		=\phi \left( \sum_{i=1}^{n} (m_i+k_i)j(i) \right) =\phi \left( \sum_{i=1}^{n} m_ij(i)+\sum_{i=1}^{n} k_ij(i) \right) 
+	.\]
+\end{proof}
+
+Proposition \ref{prp:2.5.2} defines free abelian groups for all finite sets, since all finite sets are isomorphic to some set $\left\{ 1, \ldots, n \right\} $, and we can redefine $j$ given this isomorphism. Now we consider the general case. Recall that $H^A=\Hom_{\mathsf{Set}}(A , H) $ has abelian structure given that $H$ is abelian. We can define a subset $H^{\oplus A}$ of $H^A$ as
+\[
+	H^{\oplus A}\coloneqq \left\{ \alpha : A \to H \mid \alpha (a)\neq e_H \text{ for only finitely many }a\in A \right\} 
+.\]
+My personal formulation of this would read something like
+\[
+	H^{\oplus A}\coloneqq \left\{ \alpha \in \Hom_{\mathsf{Set}}(A , H)  \mid \right|\left\{ a\in A \mid \alpha (a)=e_H \right\}\left| < \infty \right\} 
+.\]
+The operation of composition in $H^A$ induces an operation in $H^{\oplus A}$, under which $H^{\oplus A}$ is a group. Note that if $A$ is finite and $H=\mathbb{Z}$, we have
+\[
+	\mathbb{Z}^{\oplus A}\cong \mathbb{Z}^{\oplus n}
+,\]
+since we can represent $A$ as $\left\{ 1, \ldots, n \right\} $, and identify each element $(m_1, \dots, m_n )$ with a function that maps $i$ to $m_i$ for all $i$.
+
+We can generalize this idea by setting $H=\mathbb{Z}$, and noting there is a natural function $j : A \to \mathbb{Z}^{\oplus A}$ obtained by letting $a\mapsto j_a$, where
+\[
+	j_a(x) = 
+	\begin{cases}
+		1,& x=a\\
+		0,& x\neq a
+	\end{cases}
+.\]
+We then have the following representation, which is a reskinned version of what we saw before.
+\begin{proposition}\label{prp:2.5.3}
+	For every set $A$, $F^{ab}(A)\cong \mathbb{Z}^{\oplus A}$.
+\end{proposition}
+\begin{proof}
+	Note that due to the finiteness condition, every element of $\mathbb{Z}^{\oplus A}$ can be written as the finite sum
+	\[
+		\sum_{a\in A} m_aj(a),\qquad m_a\neq 0 \text{ for only finitely many }a 
+	.\]
+	The argument that this satisfies the universal property is the same as proposition \ref{prp:2.5.2}.
+\end{proof}
+
+\section{Subgroups}
+\subsection{Definition}
+\begin{definition}[Subgroup]\label{dfn:2.6.1}
+	Let $(G,\cdot )$ and $(H,*)$ be groups such that $H\subseteq G$. Then $H$ is a subgroup of $G$ if the inclusion map $\iota : H \hookrightarrow  G$ is a homomorphism.
+\end{definition}
+
+This definition is different than the one usually seen in undergraduate level classes. Note that this implies that for all $h_1,h_2\in H$, we have
+\[
+	h_1*h_2 \cong \iota (h_1 * h_2)=\iota (h_1) \cdot \iota (h_2)=h_1\cdot h_2
+.\]
+We then say the operation $*$ is induced by the group $G$, since it must necessarily be the same or an isomorphic operation, and we are then able to omit mention of the inclusion map and the alternate function without any ambiguity. This is then equivalent to the standard presentation of subgroups, being that a set $H$ is a subgroup of a group $(G,\cdot )$ if $(H,\cdot )$ is a group and $H\subseteq G$. This can be streamlined even further, in fact.
+\begin{proposition}\label{prp:2.6.1}
+	A nonempty subset $H\subseteq G$ is a subgroup if and only if $\forall a,b\in H$,
+	\[
+		ab^{-1}\in H
+	.\]
+\end{proposition}
+\begin{proof}
+	If $H$ is a subgroup, then the stataement is trivial, so we show only the reverse. Let $ab^{-1}\in H$ for all $a,b\in H$. Since $a\in H$, we have $aa^{-1}=e_G\in H$. Since we now have $e_G\in H$, we have $ae_G^{-1}\in H$ for all $a\in H$. Associativity is inhereted from $G$, so $H$ is a subgroup of $G$.
+\end{proof}
+We can show some fairly basic statements about subgroups using this fact.
+\begin{lemma}\label{lma:2.6.1}
+	If $\left\{ H_\alpha  \right\}_{\alpha \in A}$ is some family of subgroups of a group $G$, then
+	\[
+		H\coloneqq \bigcap_{\alpha \in A} H_\alpha 
+	\]
+	is a subgroup of $G$.
+\end{lemma}
+\begin{proof}
+	Since $e\in H_\alpha $ for all $\alpha \in A$, $H\neq \varnothing$. Now for all $a,b\in H$, we have $a,b\in H_\alpha $ for all $\alpha \in A$, implying that $ab^{-1}\in H_\alpha $ for all $\alpha \in A$, implying that $ab^{-1}\in H$ for all $a,b\in H$. By proposition \ref{prp:2.6.1}, $H$ is a subgroup of $G$.
+\end{proof}
+\begin{lemma}\label{lma:2.6.2}
+	Let $\phi : G \to G'$ be a group homomorphism, and let $H'$ be a subgroup of $G'$. Then $\phi ^{-1}(H')$ is a subgroup of $G$.
+\end{lemma}
+\begin{proof}
+	Since $e_{G'}\in H'$, we have $e_G\in \phi ^{-1}(H')$, and the set is nonempty. Let $a,b\in \phi ^{-1}(H)$. It follows that $\phi (a),\phi (b)\in H'$. Thus,
+	 \[
+		 \phi (a)\phi (b)^{-1}=\phi \left( ab^{-1} \right) \in H'
+	.\]
+	Therefore, $ab^{-1}\in \phi ^{-1}(H')$, and by proposition \ref{prp:2.6.1},  $\phi ^{-1}(H')$ is a subgroup of $G$.
+\end{proof}
+\subsection{Examples: Kernel and Image}
+In this subsection we discuss two interesting subgroups determined by homomorphisms, the kernel and image.
+\begin{definition}[Kernel]\label{dfn:2.6.2}
+	Let $\phi : G \to G'$ be a group homomorphism. The \emph{kernel} of $\phi $ is the subset
+	\[
+		\ker \phi \coloneqq \left\{ g\in G \mid \phi (g)=e_{G'} \right\} = \phi ^{-1}(e_{G'})
+	.\]
+\end{definition}
+\begin{proposition}\label{prp:2.6.2}
+	The kernel of a homomorphism $\phi : G \to G'$ is a subgroup. Additionally, the image $\phi (G)$ is a subgroup.
+\end{proposition}
+\begin{proof}
+	Since $\left\{ e_{G'} \right\} $ is a subgroup, by lemma \ref{lma:2.6.2}, $\ker \phi $ is a subgroup. The second proof was left as an exercise, along with a short extension. Let $a,b\in \phi(G)$. Then there exist at least one $g,h\in G$ such that $\phi (g)=a$ and $\phi (h)=b$. By the axiom of choice, we can fix two such $g,h$. Since $G$ is a group,  $gh^{-1}\in G$. It follows that
+	\[
+		\phi (gh^{-1})=\phi (g)\phi (h)^{-1}\in \phi (G)
+	.\]
+	By proposition \ref{prp:2.6.1}, $\phi (G)$ is a group homomorphism.
+
+	Now the extension - note that this argument requires only that $G$ be a group, and thus contains $gh^{-1}$. If $H\subseteq G$ is a subgroup, the same argument can be applied to show the image of any subgroup of $G$ under $\phi $ is a subgroup of $G'$.
+\end{proof}
+Kernels are special subgroups, in that they satisfy the following universal property.
+\begin{proposition}\label{prp:2.6.3}
+	Let $\phi : G \to G'$ be a group homomorphism. Then the inclusion $\iota : \ker \phi  \hookrightarrow G$ is final in the category of group homomorphisms $\alpha : K \to G$ such that $\phi \circ \alpha $ is the trivial map.
+	
+	In other words, every group homomorphism $\alpha : K \to G$ such that $\phi \circ a$ is the trivial homomorphism $\mathbf{0}$ factors uniquely through $\ker \phi $:
+	\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+		K\arrow[rr, bend left, "\mathbf{0}"]\arrow[dr, "\exists!\overline{\alpha}"]\arrow[r,"\alpha "]&G\arrow[r,"\phi "]&G'\\
+													      &\ker \phi \arrow[u, hookrightarrow]
+	\end{tikzcd}\]
+\end{proposition}
+\begin{proof}
+	I will attempt to prove this myself, once again. Note that morphisms in this category $\alpha \to \beta  $ are group homomorphisms $\overline{\alpha } $ such that $\beta \overline{\alpha} =\alpha $. A final object is thus a morphism $\iota : K\to G$ with $\phi  \circ \iota =\mathbf{0}$ such that for all $K'$ and all morphisms $\alpha : K \to G$ with $\phi \circ \alpha =\mathbf{0}$, there exists exactly one morphism $\overline{\alpha} : \alpha  \to \iota $. This explains why the diagram as shown must commute for the inclusion map to be final. This category is similar to the category $\mathsf{C}^G$.
+
+	First, note that since $\phi\circ  \alpha =\mathbf{0}$, we know $\alpha (K)\subseteq \ker \phi $. We can then define $\overline{\alpha } : K \to \ker \phi $ as the map $\overline{\alpha} (x)=\alpha (x)$ for all $x\in K$. It then follows that $\iota \circ \overline{\alpha}=\alpha$, and the diagram commutes. Furthermore, note that $\overline{\alpha } $ is unique, since if there exists $x\in K$ such that $\overline{\alpha}(x)\neq \alpha (x)$, we have $(\iota \circ \overline{\alpha}  )(x)\neq \alpha (x)$. Thus, the commutative diagram forces $\overline{\alpha } $ to be unique.
+\end{proof}
+
+Proposition \ref{prp:2.6.3} will be used later to define kernels in more general areas. Furthermore, note that this argument did not require $K$ be a group, nor that $ \alpha $ be a group homomorphism. We can then state that for all sets $K$ and functions of sets $\alpha $, the morphism $\iota : \ker \phi  \hookrightarrow G$ is still final.
+
+\subsection{Example: Subgroups Generated by a Subset}
+By the universal property of free groups, if $A\subseteq G$ is a set and $G$ is a group, then there exists a unique morphism
+\[
+	\phi_A : (j,F(A)) \to (\iota ,G)
+\]
+which is also a group homomorphism
+\[
+	\phi_A :F(A)\to G
+\]
+extending the inclusion map. The image of this homomorphism is called the subgroup $\left\langle A \right\rangle $ in $G$, or the subgroup generated by $A$. If $G$ is abelian, we replace $F(A)$ by $F^{ab}(A)$. Using our description of free groups, we know that $j(a)=a$ as a word, and thus $\phi (j(a))=\iota (a)$, and thus $\phi (a)=a$. We then replace string concatenation with multiplication, and note that all words collapse into repeated products with elements in $A$, $A'$, or the identity. That is, $\left\langle A \right\rangle $ is the set of all products of elements in $A$, inverses of those elements, or the identity. This is the most economical way to find a subgroup containing $A$ in  $G$.
+\begin{definition}[Subgroup Generated by $A$]\label{dfn:2.6.3}
+	Let $G$ be a group and $A\subseteq G$ a subset. Let $\phi_A : F(A) \to G$ be the unique group homomorphism $a\mapsto a$ guarenteed by the universal property of free groups. Then $\phi_A(F(A))=\left\langle A \right\rangle $ is called the subgroup generated by $A$. It is a subgroup of $G$ consisting of all products of elements in $A$, inverses of elements in $A$, and the identity. This is equivalent to all integer powers of all elements of $A$.
+\end{definition}
+
+If $A$ is finite, we generally write $\left\langle a_1, \dots, a_n  \right\rangle $ rather than $A$. An alternative definition is as follows. Let $\mathcal{H} $ be the set of all subgroups of $G$ that contain $A$. Then
+\[
+	\left\langle A \right\rangle =\bigcap_{H\in \mathcal{H} } H
+.\]
+Both representations describe the \emph{smallest group containing} $A$, so these are clearly equivalent.
+
+If $A=\left\{ g \right\} $ is a singleton, then as we have seen before $F(A)=\mathbb{Z}$ and $\phi_A : \mathbb{Z} \to G$ is the exponential map $\epsilon_g$. Then
+\[
+	\left\langle A \right\rangle =\left\langle g \right\rangle = \epsilon_g(\mathbb{Z})=\left\{ \ldots,g^{-2},g^{-1},e,g^{1},g^{2},\ldots \right\} 
+.\]
+This is the cyclic subgroup generated by $g$.
+\begin{definition}[Finitely-Generated]\label{dfn:2.6.4}
+	A group $G$ is \emph{finitely generated} if there exists a finite subset $A\subseteq G$ such that $G=\left\langle A \right\rangle $.
+\end{definition}
+Equivalently, a group is finitely generated if and only if there is a surjective homomorphism
+\[
+	F(A)\twoheadrightarrow G
+\]
+for some $A=\left\{ 1, \ldots, n \right\} \subseteq \mathbb{N}$. We will in fact classify all finitely generated abelian groups later on, which is an extremely important result in group theory. We will show each is a direct product of cyclic groups. Abelian groups turn out to be relatively easy to classify. Classifying finite simple groups, for example, required thousands of research articles. Moreover, there are 42 abelian groups of order 1024, while there are allegedly 49,487,365,402 groups in general of this order. Wow.
+
+\subsection{Example: Subgroups of Cyclic Groups}
+We can now identify all subgroups of $\mathbb{Z}$ and $\mathbb{Z}/n\mathbb{Z}$. First, we start with $\mathbb{Z}$. Let $d\mathbb{Z}=\left\langle d \right\rangle $.
+\begin{proposition}\label{prp:2.6.4}
+	Let $G\subseteq \mathbb{Z}$ be a subgroup. Then $G=d\mathbb{Z}$ for some $d\in\mathbb{N}$.
+\end{proposition}
+\begin{proof}
+	If $G=\left\{ 0 \right\} $, then $G=0\mathbb{Z}$. Otherwise, note that $G$ must contain positive integers, and must thus contain a smallest positive integer by the well-ordering principle. Let $d$ be the smallest such positive integer. Clearly, $d\mathbb{Z}\subseteq G$, since $G$ must be closed under addition. To show the converse, fix some $m\in G$. By the division algorithm, there exist $q,r$ with $0\leq r<d$ such that
+	\[
+		m=dq+r
+	.\]
+	It follows that $r=m-dq$, and since $dq,m\in G$, we have $r\in G$. However, $r<d$ implies that $r$ is not positive, since $d$ is the smallest positive integer in $G$. We then have $r=0$, and $m=dq$ for all $m\in G$. Therefore, $G=d\mathbb{Z}$.
+\end{proof}
+This shows us that all nontrivial subgroups of $\mathbb{Z}$ are isomorphic to $\mathbb{Z}$. Equivalently, this says that every subgroup of the free group with one generator is free.
+\begin{proposition}\label{prp:2.6.5}
+	Let $n>0$ and let $G\subseteq \mathbb{Z}/n\mathbb{Z}$ be a subgroup. Then $G=\left\langle [d]_n \right\rangle $ for some divisor $d$ of $n$.
+\end{proposition}
+\begin{proof}
+	Let $\pi_n : \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$ be the quotient map $x\mapsto [x]_n$, and consider $G'=\pi_n ^{-1}(G) $. By lemma \ref{lma:2.6.1}. $G'$ is a subgroup of $\mathbb{Z}$, and by proposition \ref{prp:2.6.4} $G'$ is cyclic, generated by some $d$. It follows that
+	 \[
+		 G=\pi_n(G')=\pi_n(\left\langle d \right\rangle)=\left\langle [d]_n \right\rangle 
+	.\]
+	Therefore, $G$ is cyclic. Since $n\in G'$ because $\pi_n(n)=[0]_n\in G$, we have that $n$ is a multiple of $d$, and thus $d|n$.
+\end{proof}
+It follows fairly easily that the divisors of $n$ are in bijection with the subgroups of $\mathbb{Z}/n\mathbb{Z}$.
+
+\subsection{Monomorphisms}
+If $H$ is a subgroup of $G$, the inclusion $H\hookrightarrow G$ is a monomorphism in $\mathsf{Grp}$ in the sense of definition \ref{dfn:1.4.5}. We can actually characterize all monomorphisms in $\mathsf{Grp}$.
+\begin{proposition}\label{prp:2.6.6}
+	Let $\phi : G \to G'$ be a group homomorphism. Then the following are equivalent.
+	\begin{itemize}
+		\item $\phi $ is a monomorphism,
+		\item $\ker \phi =\left\{ e_G \right\} $,
+		\item $\phi : G \to G'$ is injective.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	This proof is fairly trivial, so I will do it myself. ($1\implies 2$) Let $\phi $ be a monomorphism. By definition \ref{dfn:1.4.5}, for all groups $H$ and morphisms $\alpha ,\alpha'\in \Hom_{\mathsf{Grp}}(H , G) $,
+	\[
+		\phi \circ \alpha =\phi \circ \alpha ' \implies \alpha =\alpha '
+	.\]
+	Let $H=\ker \phi $, let $\alpha $ be the trivial map, and let $\alpha '$ be the inclusion map. We have obviously that $\phi \circ \alpha =\phi \circ \alpha '$, so $\alpha =\alpha '$. Therefore, $\alpha '(\ker \phi )=\ker \phi =\left\{ e_G \right\} $.
+
+	($2 \implies 3$) Let $\ker \phi =\left\{ e_G \right\} $. Suppose $\phi (g)=\phi (h)$. It follows that
+	\[
+		\phi(g)\phi(h^{-1})=e_{G'}\implies gh^{-1}\in \ker \phi \implies gh^{-1}=e_G\implies g=h
+	.\]
+	
+	($3\implies 1$) If $\phi $ is injective, then it is a monomorphism in $\mathsf{Set}$. Since all morphisms in $\mathsf{Grp}$ are morphisms in $\mathsf{Set}$, we have that $\phi $ is a monomorphism in $\mathsf{Grp}$.
+\end{proof}
+
+It's important to note that not all monomorphisms necessarily have left inverses, as they do in $\mathsf{Set}$.
+
+\section{Quotient Groups}
+\subsection{Normal Subgroups}
+\begin{definition}[Normal Subgroup]\label{dfn:2.7.1}
+	Let $N\subseteq G$ be a subgroup. Then $N$ is \emph{normal} if $\forall g\in G$ and $\forall n\in N$,
+	\[
+		gng^{-1}\in N
+	.\]
+\end{definition}
+
+Clearly every subgroup of an abelian group is normal, and there are in fact some nonabelian groups with only normal subgroups, but these are rare, and not all subgroups are normal in general.
+\begin{lemma}\label{lma:2.7.1}
+	Let $\phi : G \to G'$ be a homomorphism. Then $\ker \phi $ is a normal subgroup of $G$.
+\end{lemma}
+\begin{proof}
+	By proposition \ref{prp:2.6.2}, $\ker \phi $ is a subgroup. To show it's normal, let $g\in G$. It follows that for all $n\in \ker \phi $,
+	\[
+		\phi (gng^{-1})=\phi (g)\phi (n)\phi (g)^{-1}=\phi (g)\phi (g)^{-1}=e_{G'}\implies gng^{-1}\in \ker \phi 
+	.\]
+\end{proof}
+There is a convenient shorthand to express relevant sets. If $A\subseteq G$ is a subset and $g\in G$, then
+\[
+	gA\coloneqq \left\{ ga \mid a\in A \right\} =\left\{ h\in G \mid \exists a\in A: h=ga \right\} 
+.\]
+Similarly,
+\[
+	Ag\coloneqq \left\{ ag \mid a\in A \right\} 
+.\]
+We then have normality if
+\[
+	gNg^{-1}\subseteq N
+.\]
+As will be shown in the exercises, this is equivalent to the following:
+\[
+	gNg^{-1}=N,\qquad gN\subseteq Ng^{-1},\qquad gN=Ng
+.\]
+Note here that $gN=Ng$ does not imply that $gn=ng$ for all $n\in N$, it simply means  $\forall n\in N\exists n'\in N: g n=n'g$.
+\subsection{Quotient Group}
+Recall that we could quotient a set $A$ by a relation $\sim $, and that this construction satisfied the universal property that the quotient $A/\tildesim $ is universal with respect to the property of mapping $A$ to a set in such a way that equivalent elements have the same image. This is equivalent to showing the canonical projection $\pi : A \to A /\tildesim $ is initial in the category of maps $\phi : A \to Z$ such that $a'\sim a'' \implies \phi (a')=\phi (a'')$. We then wish to find a relation such that the canonical map $a\mapsto [a]_{\tildesim }$ satisfies this universal property.
+
+In the category $\mathsf{Grp}$, we seek a relation $\sim $ and a group homomorphism called the canonical map $\pi : G \to G /\tildesim $ that is initial with respect to group homomorphisms $\phi : G \to G'$ such that $a\sim b \implies \phi (a)=\phi (b)$. The group homomorphism requirement restricts what relations satisfy this property. For $\pi $ to be a group homomorphism, we require
+\[
+	[a]_{\tildesim } \bullet [b]_{\tildesim } = \pi (a) \bullet\pi (b)=\pi (ab)=[ab]_{\tildesim } 
+.\]
+The question is whether this operation $a\mapsto [a]_{\tildesim }$ is well defined. For this to be true, we require that if $[a]_{\tildesim }=[a]'_{\tildesim }$, then $\forall g\in G$, $[ag]_{\tildesim }=[a'g]_{\tildesim }$.
+\begin{proposition}\label{prp:2.7.1}
+	The operation $[a]\bullet[b]\coloneqq [ab]$ defines a group structure on $G /\tildesim $ if and only if $\forall a,a',g\in G$,
+	\[
+		[a]_{\tildesim }=[a']_{\tildesim }\implies [ag]_{\tildesim }=[a'g]_{\tildesim } \land [ga]_{\tildesim }=[ga']_{\tildesim }
+	.\]
+	In this case the quotient function $\pi : G \to G /\tildesim $ is a homomorphism and is universal with respect to homomorphisms $\phi : G \to G'$ such that $a\sim a'\implies \phi (a)=\phi (a')$.
+\end{proposition}
+\begin{proof}
+	We have noted the condition is necessary, so we show it is sufficient. Assume that $a\sim a' \implies ag\sim a'g \land ga\sim ga'$. Then the group operation is well defined, so we need only check it is a group. Associativity is inhereted:
+	\[
+		\left( [a]\bullet[b] \right) \bullet[c]=[ab]\bullet[c]=[(ab)c]=[a(bc)]
+	.\]
+	The class $[e_G]$ is an identity:
+	\[
+		[e_G]\bullet[a]=[e_Ga]=[a],\qquad [a]\bullet[e_G]=[ae_G]=[a]
+	.\]
+	The class $[g^{-1}]$ is the inverse of $g$:
+	\[
+		[g]\bullet[g^{-1}]=[gg^{-1}]=[e_G]
+	.\]
+	Therefore, $G /\tildesim $ is a group, and we have already seen that $\pi $ is a homomorphism.
+
+	I will do the universal property on my own. We want to show $\pi $ is initial. That is, we want to show the diagram
+	\[\begin{tikzcd}[row sep=3.5em, column sep=2.5em]
+		&G\arrow[dr,"\pi "]\arrow[dl, "\phi "']\\
+		G /\tildesim \arrow[rr, "\exists ! \psi"' ]&&G'
+	\end{tikzcd}\]
+	commutes. For the diagram to commute, we require $\psi \pi =\phi $, so $a\underset{\pi }{\mapsto}[a]_{\tildesim }\underset{\psi }{\mapsto}\phi (a)$. We then define $\psi : G /\tildesim  \to G'$ as the map $\psi ([a])=\phi (a)$. Uniqueness is guarenteed by commutativity of the diagram, and $\psi \pi = \phi $ because $\forall [a]\forall a,b\in [a]$, we know $\phi (a)=\phi (b)$ so $\phi ([a])=\left\{ \phi (a) \right\} $. We need only show $\psi $ exists; that is, show it is a group homomorphism. This follows from the fact that $\phi $ is a group homomorphism. For all $[a],[b]\in G /\tildesim $,
+	\[
+		\psi([a]\bullet[b])=\phi (ab)=\phi (a)\cdot \phi (b)=\psi ([a])\cdot \psi ([b])
+	.\]
+\end{proof}
+
+If $\sim $ is a relation satisfying the universal property, we say $\sim $ is compatable with the group structure of $G$, and call $G /\tildesim $ the quotient group of $G$ by $\sim $.
+
+\subsection{Cosets}
+The conditions obtained in proposition \ref{prp:2.7.1} characterize all compatable relations on $G$. These conditions are that
+\[
+	a\sim b\implies ag\sim bg,
+\]
+\[
+	a\sim b\implies ga\sim gb
+.\]
+
+Using this fact, we can explicitly define the compatable equivalence relations. It's prudent to show what happens if only one of these conditions is satisfied before completing our description.
+\begin{proposition}\label{prp:2.7.2}
+	Let $\sim $ be an equivalence relation on a group $G$ satisfying $a\sim b\implies ga\sim gb$. Then
+	\begin{itemize}
+		\item The equivalence class $H$ of $e_G$ is a subgroup of $ G$,
+		\item $a\sim b \iff a^{-1}b\in H \iff aH=bH$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	Let $[e_G]_{\tildesim} =H\subseteq G$. Let $a\sim e_G$ and $b\sim e_G$. We have
+	\[
+		b\sim e_G \implies e_G \sim b^{-1} \implies a\sim ab^{-1}\sim e_G
+	,\]
+	where the last step follows by transitivity and the symmetric property of equivalence relations. Therefore, by proposition \ref{prp:2.6.1}, $[e_G]_{\tildesim }$ is a subgroup of $G$.
+
+	Now let $a\sim b$. It follows that $e_G \sim a^{-1}b$, and thus $a^{-1}b\in H$. For the converse, let $a^{-1}b\in H$. It follows that $a^{-1}b\sim e_G \implies b\sim a$.
+
+	Now let $a^{-1}b\in H$. Since $H$ is closed, we have $a^{-1}bH \subseteq H$ and thus $bH\subseteq aH$. Now let $ah\in aH$. Since $a\sim b \iff a^{-1}b\in H$, we have
+	\[
+		ah \sim a \sim b \implies ah\in bH \implies aH\subseteq bH
+	.\]
+	Therefore, $aH=bH$. Now for the converse, suppose $aH=bH$. It follows that $a\in bH$, and thus $a^{-1}a=e_G \in a^{-1}bH$.
+\end{proof}
+This shows all the equivalence classes of an equivalence relation satisfying a single property are of the form $aH$ for a fixed subgroup $H=[e]_{\tildesim }$.
+\begin{definition}[Cosets]\label{dfn:2.7.2}
+	The left cosets of a  subgroup $H$ in a group $G$ are the sets $aH$ for $a\in G$. The right cosets are analogously $Ha$.
+\end{definition}
+
+We now have the following
+\begin{proposition}\label{prp:2.7.3}
+	Let $H\subseteq G$ be a subgroup, and let $\tildesim_L$ be the relation
+	\[
+		a \tildesim_L b \iff a^{-1}b\in H
+	.\]
+	Then $\tildesim_L$ satisfies $a \tildesim_L b \implies ga \sim_L gb$.
+\end{proposition}
+\begin{proof}
+	\[
+		a\sim b \implies a^{-1}b\in H \implies a^{-1}(g^{-1}g)b\in H \implies (ga)^{-1}(gb)\in H \implies ga \sim_L gb
+	.\]
+\end{proof}
+\begin{proposition}\label{prp:2.7.4}
+	There is a one-to-one correspondence between subgroups of $G$ and equivalence relations on $G$ satisfying
+	\[
+		a\sim b \implies ga\sim gb
+	.\]
+	The set $G /\tildesim_L$ can be described as the set of left cosets of $H$ in $G$.
+\end{proposition}
+\begin{proof}
+	Follows from propositions \ref{prp:2.7.2} and \ref{prp:2.7.1}.
+\end{proof}
+The mirror statements using the relation $a\sim_R b \implies ag \sim_R bg$ all follow equivalent proofs. It's important to note that left and right cosets can be different; $aH\neq Ha$ in general. Recall again that for $G /\tildesim $ to be a group, we require $\sim_L = \sim_R$. That is, we require $aH=Ha$.
+
+\subsection{Quotient by Normal Subgroups}
+\begin{proposition}\label{prp:2.7.5}
+	The relations $\sim_L$ and $\sim_R$ corresponding to a subgroup $H$ of $G$ coencide if and only if $H$ is normal in $G$.
+\end{proposition}
+\begin{proof}
+	Obviously if they coencide, then by proposition \ref{prp:2.7.2} we have $aH=Ha$. By proposition \ref{prp:2.7.2}, if the cosets coencide, then the relations coencide.
+\end{proof}
+This means the relation $\sim $ related to a group $H$ is compatible with the main group $G$ if and only if $H$ is normal in $G$.
+\begin{definition}[Quotient Group]\label{dfn:2.7.2}
+	Let $H$ be a normal subgroup of $G$. Then the \emph{quotient group of} $G$ \emph{modulo }$H$, denoted $G /H$ or $\frac{G}{H}$, is the group $G /\tildesim $ where $\sim $ is the relation as defined above, and
+	\[
+		(aH)(bH)\coloneqq (ab)H
+	.\]
+	The identity $e_{G /H}=e_GH=H$.
+\end{definition}
+
+Then, by proposition \ref{prp:2.7.1}, $\pi : G \to G /H$ defined by $g\mapsto gH$ is a group homomorphism and is universal with respect to group homomorphisms $\phi : G \to G'$ such that $aH=bH\implies \phi (a)=\phi (b)$. This universal property is suprisingly useful.
+\begin{theorem}\label{thm:2.7.1}
+	Let $H$ be a normal subgroup of $G$. Then for every group homomorphism $\phi : G \to G'$ such that $H\subseteq \ker \phi $ there exists a unique group homomorphism $\widetilde{\phi} : G /H \to G'$ such that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+		G\arrow[rr, "\phi "]\arrow[dr, "\pi"']&&G'\\
+						     &G /H\arrow[ur, "\widetilde{\phi}"']
+	\end{tikzcd}\]
+	commutes.
+\end{theorem}
+\begin{proof}
+	We need only show $H\subseteq  \ker \phi $ implies that $a\sim b \implies \phi (a)=\phi (b)$. That is, we need to show $\pi $ satisfies the universal property given earlier. This follows immediately. Let $a\sim b$, and we have $ab^{-1}\in H \implies \phi (ab^{-1})=e_{G'}$, and thus $\phi (a)=\phi (b)$.
+\end{proof}
+\subsection{Kernel $\iff$ Normal}
+If $H$ is a normal subgroup, then note taht $\pi : G \to G /H$ has the kernel $\ker \pi =H$. Since we already observed that kernels are normal, we now have that normal subgroups are kernels. This also says every subgroup of an abelian group is the kernel of some homomorphism.
+
+\section{Canonical Decomposition and Lagrange's Theorem}
+\subsection{Canonical Decomposition}
+In theorem \ref{thm:1.2.1}, we showed that a function omits a canonical decomposition into a surjection, bijection, and injection. We are now ready to show this decomposition also exists in $\mathsf{Grp}$.
+\begin{theorem}[First Isomorphism Theorem]\label{thm:2.8.1}
+	Every group homomorphism $\phi : G \to G'$ may be decomposed as follows:
+	\[\begin{tikzcd}[row sep=1em, column sep=3.5em]
+		G\arrow[rrr, bend left, "\phi "]\arrow[r, two heads]&G /\ker \phi \arrow[r, "\sim ", "\widetilde{\phi}"']& \phi(G)\arrow[r, hook] & G'
+	\end{tikzcd}\]
+	where the isomorphism $\widetilde{\phi} $ is the homomorphism induced by $\phi $ in theorem \ref{thm:2.7.1}.
+\end{theorem}
+\begin{proof}
+	We have shown already that this decomposition exists, by way of the universal property $G /\ker \phi $ satisfies - that is, each element $a\ker \phi \in G /\ker \phi $ consists of all elements $g$ such that $\phi (g)=a$. Therefore, we have already shown everything here.
+\end{proof}
+\begin{corollary}\label{cor:2.8.1}
+	Let $\phi : G \to G'$ be a \emph{surjective} group homomorphism. Then
+	\[
+		G' \cong \frac{G}{\ker \phi }
+	.\]
+\end{corollary}
+\begin{proof}
+	$\phi (G)=G'$, so by theorem \ref{thm:2.8.1}, $G /\ker \phi \cong G'$.
+\end{proof}
+The canonical decomposition of a homomorphism is very powerful, as it lets us fully characterize the image of the homomorphism. We can also prove various isomorphisms with this result.
+\begin{proposition}\label{prp:2.8.1}
+	Let $H_1\subseteq G_1$ and $H_2\subseteq G_2$ be normal subgroups. Then $H_1\times H_2$ is normal in $G_1\times G_2$ and
+	\[
+		\frac{G_1\times G_2}{H_1\times H_2}\cong \frac{G_1}{H_1}\times \frac{G_2}{H_2}
+	.\]
+\end{proposition}
+\begin{proof}
+	Composing the projections with the quotient maps gives the surjective homomorphisms
+	\[
+		\pi_1 :G_1\times G_2 \to \frac{G_1}{H_1},\qquad \pi_2: G_1\times G_2 \to \frac{G_2}{H_2}
+	.\]
+	They are surjective because the quotient map and projections are surjective by definition. By the universal property of products, $\pi_1\times \pi_2 \eqqcolon \pi $ is a morphism
+	\[
+		\pi : G_1\times G_2 \to \frac{G_1}{H_1}\times \frac{G_2}{H_2}
+	\]
+	defined by $\pi (g_1,g_2)=(g_1H_1,g_2H_2)$. Moreover, $\ker \pi =H_1\times H_2$ fairly trivially. Since $\pi $ is surjective, by corollary \ref{cor:2.8.1} we have
+	\[
+		\frac{G_1\times G_2}{H_1\times H_2}\cong \frac{G_1}{H_1}\times \frac{G_2}{H_2}
+	.\]
+\end{proof}
+
+The above proposition extends to longer factors, and a general proof of this nature can be done via induction.
+
+One interesting example is the circle group. A unit circle is often denoted $S^1$, and we can give it a group structure by associating to each point on the circle a rotation of a plane by the angle at that point. The function $\rho : \mathbb{R} \to S^1$ defined by $r$ mapping to a rotation by $2\pi r$ is then a surjective group homomorphism. Obviously the kernel of this map is $\mathbb{Z}$, so we have by the above corollary
+\[
+	S^1 \cong \mathbb{R}/\mathbb{Z}
+.\]
+Geometrically, this amounts to `wrapping $\mathbb{R}$ around the circle', and $\mathbb{Z}$ is the fundamental group of $S^1$.
+
+\subsection{Presentations}
+
+Every group is a quotient of a free group, and every abelian group is a quotient of a free abelian group. We find this by means of corollary \ref{cor:2.8.1}, using a surjective homomorphism.
+
+A presentation of a group $G$ is an explicit isomorphism
+\[
+	G \cong \frac{F(A)}{R}
+\]
+where $A$ is a set and $R$ is a subgroup of relations. Equivalently, a presentation of a group is a surjective homomorphism $\rho : F(A) \to G$ such that $\ker \rho =R$. This is a useful concept when $A$ is small and $R$ can be described explicitly. That is, by listing a set $\mathscr{R} $ of words such that $R$ is the smallest set containing $\mathscr{R} $; $R=\left\langle \mathscr{R}  \right\rangle $.
+
+A presentation of a group $G$ is then usually given of the form $(A|\mathscr{R} )$, where definitions are as above. A group is finitely presented if $A,\mathscr{R} $ are finite. Finitely presented groups are not necessarily finite; for example for any finite set $A$, the group $F(A)$ is very well infinite, however it admits the finite presentation $(A|\varnothing)$. It is also clear that groups admitting the same presentation are isomorphic, since isomorphism is an equivalence relation on any category.
+
+Now that we understand presentations, finding coproducts in $\mathsf{Grp}$ is possible, and will be done in the exercises.
+
+\subsection{Subgroups of Quotients}
+The lattice of subgroups of a quotient group  $G /H$ can be described by the lattice of subgroups in $G$; keeping the part of the lattice that corresponds to subgroups containing $H$ gives the lattice for $G /H$. This works because of the following.
+\begin{proposition}\label{prp:2.8.2}
+	Let $H$ be a normal subgroup of $G$. Then for every subgroup $K$ of $G$ containing $H$, $K /H$ can be identified with a subgroup of $G /H$. More precisely,
+	\[
+		u : \left\{ K\in \Obj(\mathsf{ Grp })  \mid U\subseteq K\subseteq G \right\}  \to \left\{ K\in \Obj(\mathsf{ Grp })  \mid K\subseteq G /H \right\} 
+	\]
+	defined by $u(K)=K /H$ is a bijection.
+\end{proposition}
+\begin{proof}
+	The group $K /H$ consists of cosets $aH\in G /H$ such that $a\in K$. It is very obvious that $K /H$ is thus a subgroup of $G /H$, and moreover if $H\subseteq K\subseteq L$, then $u(K)=K /H \subseteq L /H=u(L)$, so inclusion is preserved.
+
+	Now we show $u$ has an inverse. Let $v$ be the obvious inverse function. Let $K'$ be a subgroup of $G /H$, and let
+	\[
+		v(K')=\left\{ a\in G \mid aH\in K' \right\} 
+	.\]
+	This is clearly an inverse of $u$, so we have the statement.
+\end{proof}
+The correspondence also preserves normality. The following statement is not so much about the isomorphism, but rather about normality of the subgroups.
+\begin{proposition}[Third Isomorphism Theorem]\label{prp:2.8.3}
+	Let $H\subseteq N\subseteq G$ be subgroups, and let$H$ be normal. Then $N /H$ is normal in $G /H$ if and only if $N$ is normal in $G$, and
+	\[
+		\frac{G /H}{N /H}\cong \frac{G}{N}
+	.\]
+\end{proposition}
+\begin{proof}
+	Let $N$ be normal, and consider the projection $G \to G /N$. By the universal property of quotients (theorem \ref{thm:2.7.1}), since $H\subseteq \ker \pi =N$, there exists an induced homomorphism $G /H \to G /N$. It's easy to show the kernel of this homomorphism is $N /H$, so by theorem \ref{thm:2.8.1}, we have
+	\[
+		\frac{G /H}{N /H}\cong \frac{G}{N}
+	.\]
+	
+	Conversely, let $N /H$ be normal in $G /H$. We then have the composition of the two projections
+	\[
+		G \to \frac{G}{H} \to \frac{G /H}{N /H}
+	.\]
+	It's easy to show the kernel of this homomorphism is $N$. Also note that since these are the canonical maps, this homomorphism is surjective, so we have the isomorphism.
+\end{proof}
+
+\subsection{$HK /H$ vs. $K /(H\cap K)$}
+The notation for cosets extends to sets. We say $AB\coloneqq \left\{ ab \mid a\in A\land b\in B \right\} $. Unfortunately $H,K$ subgroups does not imply $HK$ is a subgroup in general, especially in noncommutative groups. However, this does in fact happen if $H$ and $K$ are normal. This is called the second isomorphism theorem.
+\begin{proposition}[Second Isomorphism Theorem]\label{prp:2.8.4}
+	Let $H,K$ be subgroups of $G$ and let $H$ be normal in $G$. Then $HK$ is a subgroup of $G$, $H$ is normal in $HK$, $H\cap K$ is normal in $K$, and
+	\[
+		\frac{HK}{H}\cong \frac{K}{H\cap K}
+	.\]
+\end{proposition}
+\begin{proof}
+	Note that $HK$ is the union of all cosets $Hk$; that is, if $\pi : G \to G /H$ is the canonical projection, then $HK=\pi ^{-1}(\pi (K))$. This deserves more justification. The image $\pi (K)$ is a collection of all cosets of $H$ by elements of $K$, and so the inverse is all elements in these cosets. By previous lemmas icba citing, $\pi (K)$ is a subgroup and thus $\pi ^{-1}(\pi (K))$ is a subgroup. It's very obvious that $H$ is normal in $HK$ because $K\subseteq G$. Now consider the homomorphism
+	\[
+		\phi : K \to \frac{HK}{H}
+	.\]
+	defined by $k\mapsto Hk$. That is, the inclusion $K\hookrightarrow HK$ followed by the canonical projection onto the quotient. Each of these maps is surjective, so we have immediately that
+	\[
+		\frac{HK}{H}\cong \frac{K}{\ker \phi }
+	.\]
+	The kernel of $\phi $ is the set of all $k\in K$ such that $Hk=H$; that is, $k\in H$. Therefore, $\ker \phi =H\cap K$.
+\end{proof}
+
+\subsection{The Index and Lagrange's Theorem}
+We use the notation  $G /H$ even when $H$ is not normal to denote the set of cosets of $H$ in $G$
+\begin{definition}[Index]\label{dfn:2.8.1}
+	The index of $H$ in  $G$, denoted $[G : H]$, is defined as
+	\[
+		[G:H] = \left| \frac{G}{H} \right| 
+	.\]
+\end{definition}
+\begin{lemma}\label{lma:2.8.1}
+	Let $H$ be a subgroup of $G$. Then the maps
+	\[
+		H\to gH,\quad h\mapsto gh,
+	\]
+	\[
+		H\to Hg,\quad h\mapsto hg
+	\]
+	are bijections.
+\end{lemma}
+\begin{proof}
+	Both functions are surjective by definition of coset, and cancellation shows they are invertible.
+\end{proof}
+\begin{corollary}[Lagrange's Theorem]\label{cor:2.8.2}
+	If $G$ is a finite group and $H\subseteq G$ is a subgroup, then $\left| G \right| / \left| H \right| =[G:H]$. In particular, $\left| H \right| $ divides $\left| G \right| $.
+\end{corollary}
+\begin{proof}
+	By the previous lemma, and since cosets are disjoint, $G$ is the disjoint union of the cosets $gH$ with $\left| gH \right| =\left| H \right| $, and then we have
+	\[
+		\left| G \right| =[G:H]\cdot \left| H \right| 
+	.\]
+\end{proof}
+
+Lagrange's theorem is an extremely important result in finite group theory. One important corollary is that since $\left| g \right| = \left| \left\langle g \right\rangle  \right| $ for any $g\in G$, we have $\left| g \right| $ divides $\left| G \right| $. You can also show Fermat's Little theorem with it; that for any prime integer $p$, $a^p \equiv a\mod{p}$.
+
+\subsection{Epimorphisms and Cokernels}
+We should expect a mirror statement of proposition \ref{prp:2.6.6} for epimorphisms. We almost have one; epimorphisms in $\mathsf{Grp}$ are surjections, but the proofs are suprisingly difficult for one direction. The proof is easier in $\mathsf{Ab}$ because there is a notion of a cokernel.
+
+The universal property for cokernels is the opposite of that of kernels. Given a homomorphism $\phi : G \to G'$ of \emph{abelian groups}, the cokernel of $\phi $ is the set such that the map $\pi : G' \to \coker \phi $ is initial with respect to all morphisms $\alpha $ such that $\alpha \phi=0$. That is,
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	G\arrow[rr, bend left, "0"]\arrow[r, "\phi "]&G'\arrow[r, "\alpha "]\arrow[d, two heads, "\pi "]&L\\
+						     &\coker \phi \arrow[ru, "\exists !\overline{\alpha } "]
+\end{tikzcd}\]
+must commute. Cokernels exist in $\mathsf{Ab}$ because the image of $\phi $ is \emph{normal} in $G'$, so the condition that $\alpha \phi =0$ implies $\phi (G)\subseteq \ker \alpha $, so by theorem \ref{thm:2.7.1}, $G' /\phi (G)$ is initial in this category. Therefore,
+\[
+	\coker \phi \cong \frac{G'}{\phi (G)}
+.\]
+In $\mathsf{Grp}$, subgroups are not guarenteed to be normal, so cokernels are more complex. Also note that in the abelian case, the requirement that $\alpha $ be a homomorphism is not required; it can simply be a set function that is constant on cosets of $\phi (G)$. We can now make our statement about epimorphisms of abelian groups.
+\begin{proposition}\label{prp:2.8.5}
+	Let $\phi : G \to G'$ be a homomorphism of abelian groups. Then the following are equivalent.
+	\begin{itemize}
+		\item $\phi $ is an epimorphism;
+		\item $\coker \phi $ is trivial;
+		\item $\phi : G \to G'$ is surjective.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	I can prove this on my own.
+
+	($a\implies b$) Let $\phi $ be an epimorphism. Recall definition \ref{dfn:1.4.6}: for all groups $H$ and all group homomorphisms $\beta',\beta'' : G' \to H$,
+	\[
+		\beta' \phi =\beta '' \phi \implies \beta '=\beta ''
+	.\]
+	Consider the projections
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		G\arrow[r,"\phi "]&G'\arrow[r,shift left,"\pi"]\arrow[r,shift right,"0"']& \coker \phi 
+	\end{tikzcd}\]
+	where $\pi $ is the canonical projection $G' \to G' /\phi(G) \hookrightarrow \coker \phi $, and $0$ is the trivial map $g\mapsto 0$. Since $\phi $ is an epimorphism, it suffices to show $\pi \circ \phi =0\circ \phi $. For all $g\in G$, we have
+	\[
+		\pi (\phi (g))\cong \phi (g)\phi (G)=\phi (G)\cong e_{\coker \phi }
+	.\]
+	Note here that the isomorphisms come from the fact that $\coker \phi \cong G' /\phi (G)$. Therefore, $\pi \circ \phi =0\circ \phi $.
+
+	($b\implies c$) Let $\coker \phi $ be trivial. It follows that $G' /\phi (G)$ is trivial by definition, and thus there must be precisely one coset, which is guarenteed to be $\phi (G)$. Therefore, $\phi (G)=G'$, and $\phi $ is surjective.
+
+	($c \implies a$) Let $\phi $ be surjective. It follows that $\phi $ is an epimorphism in $\mathsf{Set}$, and since all morphisms in $\mathsf{Grp}$ are morphisms in $\mathsf{Set}$, the epimorphism condition will hold in $\mathsf{Grp}$.
+\end{proof}
+
+A cokernel can still be defined in $\mathsf{Grp}$ as $G' / N$, where $N$ is the smallest normal subgroup containing $\phi (G)$. However, the above proposition fails, as $\coker \phi $ trivial does not imply $\phi $ is surjective. There are non-surjective morphisms with trivial cokernels in $\mathsf{Grp}$.
+
+\section{Group Actions}
+\subsection{Actions}
+\begin{definition}[Group Action]\label{dfn:2.9.1}
+	An action of a group $G$ on an object $A$ in a category $\mathsf{C}$ is a group homomorphism
+	\[
+		\sigma : G \to \Aut_{\mathsf{C}}( A ) 
+	.\]
+\end{definition}
+That is, each element $g\in G$ determines an automorphism of $A$, such that composition is compatable with the underlying group structure in $G$. Group actions are thus extremely important tools in studying geometric and algebraic entities, since we can study actions on these objects, no matter what category they're in. Group actions are also useful in studying groups themselves. For example, letting $D_6$ act on a triangle showed that $D_6$ is a permutation of the vertices of a triangle, viewed as a rigid body.
+
+\begin{definition}[Faithful/Effective]\label{dfn:2.8.2}
+	An action of a group $G$ on an object $A$ in a category $\mathsf{C}$ is called \emph{faithful} or \emph{effective} if the map $\sigma : G \to \Aut_{\mathsf{C}}( A ) $ is injective.
+\end{definition}
+\subsection{Actions on Sets}
+We will focus on the category $\mathsf{Set}$ this chapter, since the theory is quite rich. In this case, $\Aut_{\mathsf{Set}}( A ) =S_A$. The book also provides this second definition for a group action, which I personally dislike but oh well.
+
+An action of a group $G$ on a set $A$ is a function $\rho : G\times A \to A$ such that $\rho (e_G,a)=a$ for all $a\in A$ and $\rho (gh,a)=\rho (g,\rho (h,a))$ for all $g,h\in G$. This definition is equivalent to definition \ref{dfn:2.9.1}, when you define
+\[
+	\rho (g,a)=\sigma (g)(a)
+,\]
+and note that this is sufficient and necessary for the two requirements of $\rho $ to be satisfied. Proof of this is fairly trivial and I will skip it. We generally write $ga$ to denote $\sigma (g)(a)$.
+
+One important example of an application of group actions is Cayley's theorem.
+\begin{theorem}[Cayley]\label{thm:2.9.1}
+	Every group acts faithfully on some set. That is, every group is isomorphic to a subgroup of a permutation group.
+\end{theorem}
+\begin{proof}
+	Note that the action of any group $G$ on itself by left multiplication is faithful. Proving that the action of left multipliation is a permutation is fairly trivial, and proving permutations are distinct is simple and can be done considering the action on the identity element. From this, the isomorphism follows. I've done this proof 10 times im not writing it again.
+\end{proof}
+
+Note that we are only considering actions on the \emph{left}, due to our notation $ga$, and right actions exist such that associativity looks like $(ag)h=a(gh)$. All right actions can be turned into left actions, as shown in the exercises, so this notation is fine.
+
+\subsection{Transitive Actions and the Category $G$-$\mathsf{Set}$}
+\begin{definition}[Transitive]\label{dfn:2.9.3}
+	An action of a group $G$ on an nonempty set $A$ is \emph{transitive} if for all $a,b\in A$, there exists $g\in G$ such that $b=ga$.
+\end{definition}
+The importance of this definition is made clear by the following two definitions.
+\begin{definition}[Orbit]\label{dfn:2.9.4}
+	Let a group $G$ act on a set $A$. The orbit of $a\in A$ is defined as
+	\[
+		O_G(a)\coloneqq \left\{ ga \mid g\in G \right\} 
+	.\]
+\end{definition}
+\begin{definition}[Stabilizer]\label{dfn:2.9.5}
+	Let a group $G$ act on a set $A$. The stabilizer of $a\in A$ is defined as
+	\[
+		\operatorname{Stab}_G(a) \coloneqq \left\{ g\in G \mid ga=a \right\} 
+	.\]	
+\end{definition}
+
+Note that if an action is transitive, then the orbit of any element is the entire set $A$. Also note that (fairly obviously) orbits partition $A$, and the action is transitive within each particular orbit. Thus, we need only understand transitive actions to get a good understanding of any given group action. We can also very naturally define a category in this context.
+\begin{definition}[$G$-$\mathsf{Set}$]\label{dfn:2.9.6}
+	The category $G$-$\mathsf{Set}$ consists of objects as pairs $(\rho ,A)$, where $\rho : G\times A \to A$ is a group action in the sense of the discussion earlier, and morphisms $(\rho_1,A_1)\to (\rho_2,A_2)$ are functions $\phi : A \to A'$ such that the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		G\times A_1 \arrow[r, "\mathbbm{1}_{G} \times \phi "]\arrow[d, "\rho_1 "']& G\times A_2\arrow[d, "\rho_2"]\\
+		A_1\arrow[r,"\phi "']&A_2
+	\end{tikzcd}\]
+	commutes. With the usual shorthand, this means
+	\[
+		g\phi (a)=\phi (ga)
+	\]
+	for all $a\in A$ and $g\in G$. Such functions are called equivariant.
+\end{definition}
+
+Given this categorical formalism, we have a notion of an isomorphism of $G$-sets, which are simply equivariant bijections.
+
+\begin{proposition}\label{prp:2.9.1}
+	Every transitive left action of $G$ on a nonempty set $A$ is isomorphic to the action of left multiplication of $G$ on $G / H$, for $H= \operatorname{Stab}_G(a) $ for any $a\in A$.
+\end{proposition}
+\begin{proof}
+	Let $G$ act transitively on some set $A$, and fix $a\in A$. Let $H=\operatorname{Stab}_G(a) $. We wish to show the map
+	\[
+		\phi : G /H \to A
+	\]
+	defined by
+	\[
+		gH\mapsto ga
+	\]
+	is an equivariant bijection. I think I can prove this without looking at the book. First, I will show the map is well defined. Let $g,h\in G$ and $gH=hH$. It follows that $g^{-1}h\in H$, and thus
+	\[
+		g^{-1}ha = a \implies ha=ga
+	.\]
+	Therefore, the map is well-defined. Now I show it is equivariant. Let $k\in G$. We have
+	\[
+		\phi (k(gH))=\phi (kgH)=kga=k(ga)=k\phi (gH)
+	.\]
+	Therefore, the map is equivariant. Now we show it is a bijection by providing an explicit inverse. Let $\psi : A \to G /H$ be the map $ga\mapsto gH$. First we show thismap is well-defined. Let $g_1a=g_2a$ for some $g_1,g_2\in G$. It follows that
+	\[
+		g_1^{-1}g_2a=a \implies g_1^{-1}g_2\in H \implies g_1H=g_2H \implies \phi (g_1a)=\phi (g_2a)
+	.\]
+	The maps are obviously inverses, so we need only show $\psi $ is a morphism in $G$-$\mathsf{Set}$; that is, it's equivariant. Upon reflection, it's interesting to note the book did not even mention $\psi $ had to be a morphism in $G$-$\mathsf{Set}$. We have
+	\[
+		\psi (k(ga))=k(gH)=k\phi (ga)
+	.\]
+\end{proof}
+\begin{corollary}[Orbit-Stabilizer]\label{cor:2.9.1}
+	If $O$ is the orbit of the action of a finite group $G$ on a set $A$, then $O$ is finite, and $\left| O \right| $ divides $\left| G \right| $. In particular, $\left| G \right| =\left| \operatorname{Stab}_G(a)  \right| \left| O_G(a) \right| $ for any $a\in A$.
+\end{corollary}
+\begin{proof}
+	Consider the group action of $G$ on $O$, instead of on $A$. By definition  \ref{dfn:2.9.4}, this is still a group action, and thus is obviously transitive. By proposition \ref{prp:2.9.1}, we then have a bijection from $G / \operatorname{Stab}_G(a) \to O$. Since $A$ is finite, it follows from corollary \ref{cor:2.8.2} that
+	\[
+		\left| \frac{G}{\operatorname{Stab}_G(a) } \right| =\frac{\left| G \right| }{\left| \operatorname{Stab}_G(a)  \right| }
+	,\]
+	and thus,
+	\[
+		\left| G \right| =\left| O \right| \left| \operatorname{Stab}_G(a)  \right| 
+	.\]
+\end{proof}
+
+This corollary, called the Orbit-Stabilizer theorem, is extremely important and upgrades Lagrange's theorem to not just subgroups, but orbits of group actions. For example, there are no transitive actions of $S_3$ on a set with 5 elements, as $6$ doesn't divide $5$.
+
+We can say more, in fact, about the orders of these sets.
+\begin{proposition}\label{prp:2.9.2}
+	Let a group $G$ act on a set $A$, and let $a,b\in A$ and $g\in G$ such that $b=ga$. Then
+	\[
+		\operatorname{Stab}_G(b) =g \operatorname{Stab}_G(a) g^{-1}
+	.\]
+\end{proposition}
+\begin{proof}
+	I can do this proof on my own easily. Let $h\in \operatorname{Stab}_G(a) $. We have
+	\[
+		(ghg^{-1})(b)=(gh)(g^{-1}g)(a)=(gh)(a)=ga=b
+	.\]
+	Thus, $g \operatorname{Stab}_G(a) g^{-1}\subseteq \operatorname{Stab}_G(b) $. To show the reverse, let $h\in \operatorname{Stab}_G(b) $. We wish to show $h=gkg^{-1}$ for some $k\in \operatorname{Stab}_G(a) $. This implies that
+	\[
+		g^{-1}hg = k\in \operatorname{Stab}_G(a) 
+	,\]
+	so it suffices to show $g^{-1}hg$ fixes $a$. We have
+	\[
+		b = ga = hga \implies g^{-1}hga = a
+	.\]
+\end{proof}
+This shows also that if the stabilizer is normal, then it is independent of the choice of $a$ within the orbit of $a$. It will also be shown in the exercises that
+\[
+	\frac{G}{H}\cong_{G\text{-}\mathsf{Set}}\frac{G}{gHg^{-1}}
+.\]
+
+\section{Group Objects in Categories}
+\subsection{Categorical Viewpoint}
+The definition of a group is grounded in $\mathsf{Set}$. However, it really depends on two functions, multiplication $m$ and the inverse map $\iota : g\mapsto g^{-1}$ such that various properties are satisfied. In fact, we can re-express the definition of a group using only these functions and universal properties, removing the reliance on $\mathsf{Set}$. We can even define homomorphisms purely in terms of commutative diagrams.
+\begin{definition}[Group Object]\label{dfn:2.10.1}
+	Let $\mathsf{C}$ be a category with finite products and with a finite object $1$. A \emph{group object} in $\mathsf{C}$ consists of an object $G$ of $\mathsf{C}$ and morphisms
+	\[
+		m : G\times G \to G,\qquad e : 1 \to G,\qquad \iota : G \to G
+	\]
+	in $\mathsf{C}$ such that the diagrams
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		(G\times G)\times G\arrow[r, "m \times \mathbbm{1}_{G} "]\arrow[d, "\cong "]&G\times G\arrow[r, "m"]&G\arrow[d, equal]\\
+		G\times (G\times G)\arrow[r, "\mathbbm{1}_{G} \times m"]&G\times G\arrow[r, "m"]&G
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		1\times G\arrow[r, "e\times \mathbbm{1}_{G} "]\arrow[dr, "\cong "]&G\times G\arrow[d, "m"]&G\times 1\arrow[r, "\mathbbm{1}_{G} \times e"]\arrow[dr, "\cong "]&G\times G\arrow[d, "m"]\\
+										  &G&&G
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		G\arrow[d]\arrow[r, "\Delta "]&G\times G\arrow[r, "\mathbbm{1}_{G} \times \iota"]&G\times G\arrow[d, "m"]&G\arrow[r, "\Delta "]\arrow[d]&G\times G\arrow[r, "\iota \times \mathbbm{1}_{G} "]&G\times G\arrow[d, "m"]\\
+		1\arrow[rr, "e"]&&G&1\arrow[rr, "e"]&&G
+	\end{tikzcd}\]
+	commute, where $\Delta =\mathbbm{1}_{G} \times \mathbbm{1}_{G} $.
+\end{definition}
+
+This definition deserves extensive commentary. First, we will discuss morphisms that are not named. These morphisms are all uniquely determined by some universal property. For example, $\epsilon : G\to 1$ is unique because $1$ is final. The projection $1\times G\to G$ is the projection guarenteed by the universal property of products. By this same universal property, the composition
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	G\arrow[r, "\epsilon \times \mathbbm{1}_{G}  "]&1\times G\arrow[r, "\pi "]&G
+\end{tikzcd}\]
+is the identity, because by the universal property of products there exists precisely one map $\sigma : G \to 1\times G$ such that $\epsilon =\pi_1 \sigma $ and $\mathbbm{1}_{G} =\pi_G \sigma $. We can then see that this map must be $\epsilon \times \mathbbm{1}_{G} $. By this same logic,
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	1\times G\arrow[r, "\pi "]&G\arrow[r, "\epsilon \times \mathbbm{1}_{G} "]&1\times G
+\end{tikzcd}\]
+is also the identity, so we find that the projection $\pi : 1\times G \to G$ is an isomorphism.
+
+Now we want to recover group properties from this mess. Note that the first diagram shows commutativity; no matter the order that $m$ is applied in, we still obtain the second result. The second diagram suggests that the map $e : 1 \to G$ constitutes the identity, as the identity in a group can be viewed as the embedding of a singleton (a final object in $\mathsf{Set}$) into the group such that the object is invariant under left- and right-multiplication. The final diagram defines inverses. Illustrating what this means in set is very beneficial. Given an element of the set $a$, we have
+\[
+	a \mapsto (a,a) \mapsto (a,a^{-1}) = a \mapsto e \mapsto  e
+.\]
+That is, the inverse map  $\iota $ sends an element to an inverse of itself, which mutually annihilate into the identity.
+
+Many important categories, such as the categories of topological spaces, differentiable manifolds, schemes, algebraic varieties, and others, have notions of group objects. For example, Lie groups are group objects in the category of differentiable manifolds.

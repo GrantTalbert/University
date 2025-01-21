@@ -1,0 +1,694 @@
+\chapter{Preliminaries: Set Theory and Categories}
+\section{Naive Set Theory}
+\subsection{Sets}
+A set is a collection of objects. Sets contain elements, which are claimed to exist. Equality between sets is defined by equivalent elements, meaning repeating elements or re-ordering elements does not change the content of the set. Some sets are written by listing all elements they contain, such as $A=\left\{ 1,2,3 \right\} $, but this is not possible in general.
+\begin{definition}[Set-Builder]\label{dfn:1.1}
+	Let $S$ be a set, and let $P$ be a statement. Then $\left\{ s\in S \mid P(s) \right\} $ is the set of all $s\in S$ satisfying $P(s)$.
+\end{definition}
+For example,
+\[
+	\left\{ n\in\mathbb{Z} \mid \exists a\in\mathbb{Z}\left( n=2a \right)  \right\} 
+\]
+would be the set of all even integers. In general, we will write this set in the simpler notation $\left\{ 2n \mid n\in\mathbb{Z} \right\} $, and define these notations to be equivalent.
+\begin{definition}[Singleton Set]\label{dfn:1.2}
+	A Singleton set is a set containing exactly one element.
+\end{definition}
+For example, $\left\{ 1 \right\} $, $\left\{ x \right\} $, and $\left\{ \varnothing \right\} $ are singleton sets.
+
+Since we will make extensive use of quantifiers in this book, it's prudent to recall their definitions as well.
+\begin{definition}[Quantifiers]\label{dfn:1.3}
+	The quantifier $\forall $ means ``for all'', the quantifier $\exists $ means ``there exists'', and the quantifier $\exists !$ means ``there exists exactly one'', or ``there exists a unique''. I will notate statements formed with quantifiers as follows:
+	\[
+		\forall x\in S\left( P(x) \right) 
+	.\]
+	This reads ``for all $x\in S$, $P(x)$ is true'', and can be either true or false. I will also sometimes use the notation
+	\[
+		\forall \left( x\in S \right) \left( P(x) \right) 
+	.\]
+\end{definition}
+\subsection{Inclusion of Sets}
+\begin{definition}[Subset]\label{dfn:1.4}
+	Let $S,T$ be sets. We say that $S$ is a subset of $T$, denoted $S\subseteq T$,  if all elements of $S$ are elements of $T$. Formally,
+	\[
+		S\subseteq T \iff\forall \left( s\in S \right) \left( s\in T \right) 
+	.\]
+	A proper subset $S$ of $T$ is a set $S\subseteq T$ such that there exists some $t\in T$ such that $t\notin S$. This is denoted $S\subsetneq T$ (or $S\subset T$, but I won't use this notation here since the book doesn't), and is formally expressed as
+	\[
+		S\subsetneq T \iff \forall s\in S(s\in T)\land \exists t\in T\left( t\notin S \right) 
+	.\]
+\end{definition}
+\begin{definition}[Cardinality]\label{dfn:1.5}
+	The notation $\left| S \right| $ denotes the cardinality of the set $S$, or the number of things in $S$. For example, $\left| \left\{ 1,2 \right\}  \right| =2$. If $S$ is infinite, we will write $\left| S \right| =\infty$.
+\end{definition}
+
+I'm unsure if we will introduce infinite cardinalities later on, but I'm going to keep with the book's notation and write $\left| S \right| =\infty$ if a set is infinite. One thing to note (without proof) is that if $S,T$ are finite, then
+\[
+	S\subseteq T \implies \left| S \right| \leq \left| T \right|
+.\]
+\begin{definition}[Power Set]\label{dfn:1.6}
+	The power set $\mathscr{P} (S)$ of a set $S$ is the set of all subsets of $S$. It has cardinality $\left| \mathscr{P} (S) \right| =2^{\left| S \right| }$ if $S$ is finite.
+\end{definition}
+\subsection{Operations Between Sets}
+Now that we have some understanding of what sets are, we can begin considering operations between sets. The important ones we will consider are
+\begin{itemize}
+	\item the union $\cup $,
+	\item the intersection $\cap $,
+	\item the difference $\setminus$,
+	\item the disjoint union $\amalg $,
+	\item the Cartesian product $\times $,
+	\item and the quotient by an equivalence relation.
+\end{itemize}
+I already know the first 3 and the Cartesian product, so I won't even bother. I will note the following definition, however.
+\begin{definition}[Compliment]\label{dfn:1.7}
+	The compliment of a set $S$ in another set $T$ is simply $T\setminus S$.
+\end{definition}
+The operation $\amalg $ is very strange, and we will motivate it further before formally defining it later. We will also do the same with $\times $ for some reason.
+\subsection{Disjoint Unions, Products}
+The idea behind the disjoint union is that $S\amalg T$ should be produced by the regular union by disjoint ``copies'' of $S$ and $T$. This definition will be made more formal with the introduction of the cartesian product, but note that for finite $S,T$, that $\left| S\amalg T \right| =\left| S \right| +\left| T \right| $.
+
+\begin{definition}[Cartesian Product]\label{dfn:1.8}
+	A cartesian product $S\times T$ of two sets $S,T$ is defined as the set of all ordered pairs $(s,t)$ such that $s\in S$ and $t\in T$.
+\end{definition}
+The book notes, rather interestingly, that an ordered pair  $(s,t)$ can be defined rigorously as the set $\left\{ s,\left\{ s,t \right\}  \right\} $. One thing to note about the Cartesian product is that for $S,T$ finite sets, $\left| S\times T \right| =\left| S \right| \left| T \right| $.
+
+Using the Cartesian product, we can define the $\amalg $ operator more rigorously. Let $S'=\left\{ 0 \right\} \times S$, and $T'=\left\{ 1 \right\} \times T$. Clearly, $S'\cap T'=\varnothing$, but $S'$ and $T'$ are pretty much copies of $S$ and $T$. We then define $S\amalg T\coloneqq S'\cup T'$. We will make this definition more precise later, but this suffices for now.
+
+It makes sense to generalize $\cup $, $\cap $, $\times $, and $d\cup $ to families of sets. For example, given sets $S_1, \ldots, S_n$, we write
+\[
+	\bigcap_{i=1}^{n} S_i = S_1 \cap \cdots \cap S_n
+.\]
+However, these operations are necessarily binary, and it's not apparent that $S_1 \times \left( S_2 \times S_3 \right) =\left( S_1 \times S_2 \right) \times S_3$, for example. The language of functions will help us show this does hold, later on, so for now we can gloss over this fact.
+
+More generally, for a set of sets $\mathscr{P} $, we can write
+\[
+	\bigcup_{S\in \mathscr{P} }S,\qquad  \bigcap_{S\in \mathscr{P} }S,\qquad \coprod_{S\in \mathscr{P} }S,\qquad \prod_{S\in \mathscr{P} }S 
+\]
+for the respective operation on all sets in $\mathscr{P} $. There are important subtlties along with each definition. For example, if every  $S\in \mathscr{P} $ is nonempty, is
+\[
+	\prod_{S\in \mathscr{P} } S  \neq \varnothing?
+\]
+It turns out the issue is very strangle if $\mathscr{P} $ is infinite, and amounts to the axiom of choice.
+\subsection{Equivalence Relations, Partitions, Quotients}
+A relation $R$ on a set $S$ is a subset $R\subseteq S\times S$. If $(a,b)\in R$, we say $a$ and $b$ are related by $R$, and write $a\,R\,b$. Usually, we use symbols such as $\sim $ for relations, instead of $R$. An equivalence relation is a relation that is symmetric, transitive, and reflexive. An equivalence class $[a]_\sim $ is the set of all $b\in S$ such that $b\sim a$. The set of equivalence classes partitions $S$. Every partition determines an equivalence relation.
+\begin{definition}[Quotient Set]\label{dfn:1.1.9}
+	Let $S$ be a set and let $\sim $ be an equivalence relation on $S$. The quotient of the set $S$ with respect to the equivalence relation $\sim $ is the set
+	\[
+		S /\tildesim \coloneqq \left\{ [a]_\sim  \mid a\in S \right\} 
+	\]
+	of equivalence classes of $S$ with respect to $\sim $.
+\end{definition}
+\section{Functions}
+\subsection{Definition}
+In this book, we will often try to understand structures, as well as the ways in which they interact. Sets interact via functions, which can be formalized as a relation.
+\begin{definition}[Function]\label{dfn:1.2.1}
+	A function is a relation $f\subseteq A\times B$ such that
+	\[
+		\forall a\in A\exists !b\in B \text{ such that } (a,b)\in f
+	.\]
+	We write $f : A \to B$ to mean $f\subseteq A\times B$, and $f(a)=b$ or $a\mapsto b$ to mean $(a,b)\in f$. The collection of all functions $f : A \to B$ forms a set, denoted $B^A$.
+\end{definition}
+Every set comes with a function $\mathrm{id}_A : A \to A$ defined by $a\mapsto a$. More generally, for any set $S\subseteq A$ there is an inclusion map $S\to A$ that simply maps $s\mapsto s$.
+
+If $S\subseteq A$, we write $f(S)\coloneqq \left\{ b\in B \mid \exists a\in S(b=f(a) \right\} $, or more commonly, $f(S)=\left\{ f(s) \mid s\in S \right\} $. The largest subset $f(A)$ is called \emph{image} of $f$, and is also denoted $\operatorname{im}f $.
+\begin{definition}[Restriction]\label{dfn:1.2.2}
+	Let $f : A \to B$ be a function. The \emph{restriction} of $f$ to some subset $S\subseteq A$, denoted $f|_S$, is the function $f|_S : S \to B$ defined by $s\mapsto f(s)$.
+\end{definition}
+Equiavlently, if $\iota : S \to A$ is the inclusion map, then $f|_S=f\circ \iota $.
+\subsection{Examples: Multisets, Indexed Sets}
+I don't know if I mentioned it in my notes, but multisets were briefly mentioned earlier as sets that allowed multiple entries of the same element. A rigorous definition of a multiset may be formed from a function $m : A \to \mathbb{Z}^+$. If a multiset consists of the element $a$, and is repeated $n$ times, then $m : a \mapsto n$. $A$ is defined as the set of all elements in the multiset. This function encodes all information we need about the multiset.
+
+Another example of a function is indices. If we say ``let $a_1, \dots, a_n $ be integers,'' what we really mean is ``consider a function $a : \left\{ 1, \ldots, n \right\}  \to \mathbb{Z}$,'' with the understanding that $a_i$ is shorthand for the value of $a(i)$. Although we still think of an indexed set $\left\{ a_i \right\}_{i\in I}$ as a set who's elements are indexed by $i$ ranging over $I$, the proper definition is done by this function. These distinctions will be important later, but in general are not that important.
+\subsection{Composition of Functions}
+Functions can be composed. If $f : A \to B$ and $g : B \to C$ are functions, then $g\circ f$, defined by
+\[
+	\forall a\in A\left( (g\circ f)(a)\coloneqq g(f(a))  \right) 
+\]
+is also a function. We will often represent this with a diagram, such as
+\[\begin{tikzcd}[row sep=2.5em, column sep=2em]
+	A\arrow[r,"f"]\arrow[dr,"g\circ f"']&B\arrow[d,"g"]\\
+					    &C
+\end{tikzcd}\]
+A diagram is said to commute, or is said to be a commutative diagram, if all possible paths starting from $A$ travel to $C$.
+
+Function composition is associative. Graphically,
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	A\arrow[r,"f"]\arrow[rr,bend right,"g\circ f"']&B\arrow[r,"g"]\arrow[rr,bend left,"h\circ g"]&C\arrow[r,"h"]&D
+\end{tikzcd}\]
+The identity map is also an identity under function composition. That is, $f\circ \mathrm{id}_A=f$ and $\mathrm{id}_B\circ f=f$.
+\subsection{Injections, Surjections, Bijections}
+\begin{definition}[Injection, Surjection, Bijection]\label{dfn:1.2.3}
+	A function $f : A \to B$ is \emph{injective} if
+\[
+	\forall a\in A, \forall b\in A: a\neq b\implies f(a)\neq f(b)
+.\]
+	A function $f : A \to B$ is said to be \emph{surjective} if
+	\[
+		\forall b\in B,\exists a\in A:f(a)=b
+	.\]
+	A function $f : A \to B$ is said to be \emph{bijective} if it is both injective and surjective.
+\end{definition}
+If a function is injective, we write $f : A \hookrightarrow B$. If a function is surjective, we weite $f : A \twoheadrightarrow B$. If a function is bijective, we write $f : A \overset{\sim}{\to} B$, and say $A\cong B$.
+\begin{definition}[Isomorphic Sets]\label{dfn:1.2.4}
+	Sets $A$ and $B$ are called isomorphic if there exists a bijection $f : A \to B$.
+\end{definition}
+If two sets are isomorphic, then we have $\left| A \right| =\left| B \right| $. This allows us to make a bit more sense of the disjoint union $A\amalg B$. We want our copies $A',B'$ to be isomorphic to $A$ and $B$. Our proposal earlier obviously works.
+\subsection{Injections, Surjections, Bijections: Second Viewpoint}
+Note that if $f : A \to B$ is a bijection, we can define a map $g : B \to A$ as $b\mapsto a$ iff $f(a)=b$. Since $f$ is a bijection, $b$ is a well-defined function. Note that $f\circ g=\mathrm{id}_A$ and $g\circ f=\mathrm{id}_B$. We say that $g$ is the inverse of $f$, denoted $f^{-1}$.
+\begin{proposition}\label{prp:1.2.1}
+	Let $A\neq \varnothing$, and let $f : A \to B$ be a function. Then
+	\begin{enumerate}
+		\item $f$ has a left inverse if and only if it is injective.
+		\item $f$ has a right inverse if and only if it is surjective.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	(1) If $f : A \to B$ has a left inverse, then there exists $g : B \to A$ such that $g\circ f=\mathrm{id}_A$, Let $a_1\neq a_2$ be elements of $A$. We have
+	\[
+		g(f(a_1))=\mathrm{id}_A(a_1)=a_1\neq a_2=\mathrm{id}_A(a_2)=g(f(a_2))
+	.\]
+	Therefore, $f$ is injective.
+
+	Now let $f : A \to B$ be injective. Fix some arbitrary $s\in A$, and define
+	\[
+		g(b)\coloneqq 
+		\begin{cases}
+			a,&\exists a\in A:b=f(a)\\
+			s,&b\notin f(A).
+		\end{cases}
+	\]
+	Since $f$ is injective, $g$ is a function. Now note that if $a\in A$, then $g(f(a))=a$ by definition, so $g\circ f=\mathrm{id}_A$.
+
+	The proof of (2) is done in the exercises.
+\end{proof}
+A corollary of this is that a function $f : A \to B$ has an inverse if and only if it is a bijection. It's interesting that the left and right inverses of $f$ end up being the same, but we explore this more later. Also note that by our proof, injections have many left inverses, and similarly surjections have many right inverses. These are called \emph{sections}.
+
+Proposition \ref{prp:1.2.1} shows that even if we did not have elements, we could still relate functions by their relationship to other functions via inverses. We will explore this \emph{much} later during the section on categories.
+
+Although the standard notation for the inverse of a bijection is $f^{-1}$, we will use this notation for other functinos as well. If  $f: A \to B$ is any function and $T\subseteq B$, then $f^{-1}(T)$ denotes the subset of $A$ consisting of elements that map to $T$. That is,
+\[
+	f^{-1}(T)\coloneqq \left\{ a\in A  \mid f(a)\in T \right\} 
+.\]
+\begin{definition}[Fiber]\label{dfn:1.2.5}
+	Let $f : A \to B$ be a function, and let $T=\left\{ q \right\} \subseteq B$ be a singleton set. Then $f^{-1}(T)$, abbreviated $f^{-1}(q)$, is called the \emph{fiber} of $f$ over $q$.
+\end{definition}
+A function $f$ is bijective if for all $b\in B$, the fibre of $f$ over $b$ is nonempty, and these fibers are singletons. In this case, the notation $f^{-1}$ matches with the common notation.
+\subsection{Monomorphisms and Epimorphisms}
+There is ANOTHER way to express injectivity and surjectivity, and even though it appears more complex, somehow it's more basic.
+\begin{definition}[Monomorphism, Epimorphism]\label{dfn:1.2.6}
+	A function $f : A \to B$ is called a \emph{monomorphism}, or is said to be \emph{monic}, if for all sets $X$ and all functions $\alpha',\alpha '': X \to A$,
+	\[
+		f\circ \alpha '=f\circ \alpha ''\implies \alpha '=\alpha ''
+	.\]
+	A function $f : A \to B$ is called an \emph{epimorphism}, or is said to be \emph{epic}, if for all sets $X$ and all functions $\beta ',\beta '': A \to X$,
+	\[
+		\beta '\circ f=\beta ''\circ f\implies \beta '=\beta ''
+	.\]
+\end{definition}
+\begin{proposition}\label{prp:1.2.2}
+	A function is injective if and only if it is a monomorphism. A function is surjective if and only if it is an epimorphism.
+\end{proposition}
+\begin{proof}
+	The proof that surjective is equivalent to epimorphism is done in the exercises. Let $f : A \to B$ be injective. By proposition \ref{prp:1.2.1}, there exists a left inverse $g : B \to A$. Suppose $\alpha ',\alpha '': X \to A$ are functions and
+	\[
+		f\circ \alpha '=f\circ \alpha ''
+	.\]
+	We have
+	\[
+		\alpha '=(g\circ f)\circ \alpha '=g\circ (f\circ \alpha ')=g\circ (f\circ \alpha '')=(g\circ f)\circ \alpha ''=\alpha ''
+	.\]
+	Therefore, $\alpha '=\alpha ''$.
+
+	Now assume $f$ is a monomorphism. Choose $X=\left\{ p \right\} $ a singleton. Then all maps $\alpha : X \to A$ are determined by a choice of $a\in A$ such that $p\mapsto a$. Moreover, $\alpha': p \mapsto  a'$ and $\alpha '': p \mapsto  a''$ have $\alpha '=\alpha ''$ if and only if $a'=a''$. Therefore, if
+	\[
+		f\circ \alpha '(p)=f\circ \alpha ''(p)\implies \alpha '=\alpha ''
+	,\]
+	then we have
+	\[
+		f\circ \alpha'(p)-f\circ \alpha ''(p)\implies a'=a''
+	.\]
+	By definitionm
+	\[
+		f(a')=f(a'')\implies a'=a''
+	.\]
+	This is the contrapositive of definition \ref{dfn:1.2.3}, so we are done.
+\end{proof}
+\subsection{Basic Examples}
+Let $A,B$ be sets. Then there exist \emph{natural projections} $\pi_A,\pi _B$ such that
+\[\begin{tikzcd}[row sep=2em, column sep=1em]
+	&A\times B\arrow[ld, two heads, "\pi_A"']\arrow[dr, two heads, "\pi_B"]\\
+	A&&B
+\end{tikzcd}\]
+defined by
+\[
+	\pi_A(a,b)\coloneqq a,\qquad \pi_B(a,b)\coloneqq b
+.\]
+These maps are clearly surjective. Similarly, there are natural injections
+\[\begin{tikzcd}[row sep=2em, column sep=1em]
+	A\arrow[dr,hook]&&B\arrow[dl,hook']\\
+			&A\amalg B
+\end{tikzcd}\]
+obtained by the inclusion maps $A,B\hookrightarrow A\amalg B$.
+
+Another example is as follows. Let $\sim $ be an equivalence relation on $A$. Then there exists a clearly surjective canonical projection $A\twoheadrightarrow A /\tildesim $ defined by $a\mapsto [a]_\sim $.
+\subsection{Canonical Decomposition}
+The reason we focus on injective and surjective maps is because any function can be constructed from them. To see this, let $f : A \to B$ be any function, and note that $f$ determines an equivalence relation $\sim $ on $A$, where for any $a',a''\in A$,
+\[
+	a'\sim a'' \iff f(a')=f(a'')
+.\]
+\begin{theorem}\label{thm:1.2.1}
+	Let $f : A \to B$ be a function, and let $\sim $ be the relation on $A$ defined such that $a\sim b$ if and only if $f(a)=f(b)$. Then $f$ decomposes as follows:
+	\[\begin{tikzcd}[row sep=0.5em, column sep=2.5em]
+		A\arrow[rrr,bend left,"f"]\arrow[r, two heads]&(A /\tildesim )\arrow[r,"\sim ","\tilde{f}"']&f(A)\arrow[r,hook]&B
+	\end{tikzcd}\]
+	where the function $A\twoheadrightarrow A/\tildesim $ is the canonical projection, the function $f(A)\hookrightarrow B$ is the inclusion map, and the bijection $\tilde{f}$ is defined by
+	\[
+		\tilde{f}([a]_\sim )\coloneqq f(a)
+	.\]
+\end{theorem}
+\begin{proof}
+	Since the formula for $\tilde{f}$ immediately shows the diagram commutes, it suffices to show $\tilde{f}$ is a bijection. First, we show $\tilde{f}$ is well defined. Let $[a]_\sim =[b]_\sim $. We then have $a\sim b$, and by definition, we have $f(a)=f(b)$. Now we show $\tilde{f}$ is a bijection. If $\tilde{f}([a]_\sim )=\tilde{f}([b]_\sim )$, then $f(a)=f(b)$ by definition of $\tilde{f}$, and thus $a\sim b$, and thus $[a]_\sim =[b]_\sim $. Therefore, $\tilde{f}$ is injective. Let $b\in f(A)$. It follows by definition that there exists $a\in A$ such that $f(a)=b$. We have $\tilde{f}([a]_\sim )=f(a)=b$. Therefore, $\tilde{f}$ is surjective, and thus a bijection.
+\end{proof}
+This is actually pretty much the first isomorphism theorem of sets. The theorem will re-emerge throughout the text, with a new skin each time.
+\subsection{Clarification}
+Although it is easy to find isomorphic copies $A',B'$ of $A$ and $B$ sets, it's not guarenteed that all copies are suitable for definining the disjoint union $A\amalg B$. The resulting operation $A\amalg B$ is actually not well-defined insofar, but it's possible to see (in the exercises) that it is well-defined \emph{up to isomorphism}. That is, any two choices of the copies $A'$ and $B'$ are isomorphic to each other. This can be seen as well by looking at cartesian products and quotients. What we actually want to explore is the relationship of these sets with other sets, which will be made clear through category theory.
+\section{Categories}
+Category theory is known as ``abstract nonsense'', which is just fucking awesome. Categories are less focused on studying sets, as they are about studying structures in general, and specifically maps between structures. Categories may behave like sets in some ways, and in fact there exist functions between categories called functors, but this is imprecise.
+\subsection{Definition}
+Categories have complex definitions. There are two important aspects of a category, a collection of objects and a set of morphisms between these objects. Note that the collection of objects is NOT a set. We want there to exist a category of all sets, but there does not exist a set of all sets, as seen by Russel's Paradox. However, we can define such a structure as a \emph{class}, which does not need to have the precise structure a set does. There \emph{is} a class of all sets.
+
+Throughout this book, the notion of a class will not behave differently to that of a set.
+\begin{definition}[Category]\label{dfn:1.3.1}
+	A category $\mathbf{C}$ consists of
+	\begin{itemize}
+		\item a class $\operatorname{Obj}(\mathbf{C}) $ of \emph{objects} in the category, and
+		\item for every two objects $A,B$ of $\mathbf{C}$, a set $\operatorname{Hom}_\mathbf{C}(A,B)$ of \emph{morphisms}, with the following properties:
+			\begin{itemize}
+				\item For every object $A$ of $\mathbf{C}$, there exists the morphism $\mathbbm{1}_{A} \in \Hom_{\mathbf{C}}(A,A) $, called the \emph{identity} on $A$.
+				\item Two morphisms $f\in \Hom_{\mathbf{C}}(A , B)$ and $g\in \Hom_{\mathbf{C}}(A , B) $ determine a morphism $gf\in \Hom_{\mathbf{C}}(A , C) $. That is, for every triple of objects $A,B,C$ of $\mathbf{C}$, there exists a function of sets\footnote{A ``function of sets'' will be the language used to imply a function has a set as its domain and codomain, rather than an arbitrary object. This is different from a set-function.}
+					\[
+						\Hom_{\mathbf{C}}(A , B) \times \Hom_{\mathbf{C}}(B , C)  \to \Hom_{\mathbf{C}}(A , C) 
+					,\]
+					and the image of the pair $(f,g)$ under this map is denoted $gf$.
+				\item The composition law is associative: if $f\in \Hom_{\mathbf{C}}(A , B)$, $g\in \Hom_{\mathbf{C}}(B , C) $, and $h\in \Hom_{\mathbf{C}}(C , D) $, then
+					\[
+						(hg)f=h(gf)
+					.\]
+				\item The identity morphisms are identities with respect to composition; that is, for all $f\in \Hom_{\mathbf{C}}(A , B) $,
+					\[
+						f\mathbbm{1}_{A}=f,\qquad \mathbbm{1}_{B}  f=f
+					.\]
+			\end{itemize}
+	\end{itemize}
+\end{definition}
+The intuition behind this definition is $\Obj( \mathbf{C} ) $ generalizes the notion of a set of things in a consistent way, which allows us to talk about the structure of the objects of $\mathbf{C}$ by considering morphisms $\Hom_{\mathbf{C}}(A , B) $ for $A,B$ in $\mathbf{C}$. The morphisms can be thought of as functions from sets to sets.
+
+For this reason, morphisms $f\in \Hom_{\mathbf{C}}(A , B) $ will often be denoted $f : A \to B$ when the category $\mathbf{C}$ is known. We will often also drop the subscript $\mathbf{C}$ and write $\Hom(A , B) $ if the category is implied.
+\begin{definition}[Endomorphism]\label{dfn:1.3.2}
+	An \emph{endomorphism} is a morphism $f\in \Hom_{\mathbf{C}}(A , A) $; that is, a map from an object to itself. The set $\Hom_{\mathbf{C}}(A , A) $ is denoted $\End_{\mathbf{C}}(A)$.
+\end{definition}
+Denoting morphisms using the usual function-set notation $f : A \to B$, even though $A,B$ do not need to be sets, allows us to create diagrams of morphisms in any category. For example, the commutative diagram for the first isomorphism theorem would look like the following:
+\[
+	\begin{tikzcd}[row sep=3em, column sep=4em]
+		G \arrow[d, "\eta"'] \arrow[r, "\phi "] & \phi (G)\\
+		G / \ker \phi \arrow[ur, "\psi"]
+	\end{tikzcd}
+\]
+Diagrams are actually possible objects of categories. The precise definition of such a diagram is a set of objects in a category $\mathbf{C}$, along with morphisms of theses objects. We say the diagram commutes if every method of traversing it leads to the same destination. The specifics of the visual representation are of course irrelevant in the precise definition.
+\subsection{Examples}
+Note that most of definition \ref{dfn:1.3.1} concerned morphisms, not the objects of $\Obj( \mathbf{C} ) $. It's fair to say that the morphisms of a category are the important constituents. However, we still want to think of a category in terms of its objects. For example, oftentimes the \emph{category of sets} is often discussed. However, the emphasis should be on determining what kind of morphisms are being considered. For example, what are morphisms of sets going to be in the category of sets? In general, we take the category of sets to have morphisms identified by functions. In many cases, the morphisms are fairly obvious, as they are here. However, this is not always the case.
+\begin{definition}[Category of Sets]\label{dfn:1.3.3}
+	The category of sets, denoted $\mathbf{Set}$, is the category whos objects $\Obj( \mathbf{Set} ) $ are sets, and whos morphisms $\Hom_{\mathbf{Set}}(A , B) $ are the set of all functions of sets $f : A \to B$.
+\end{definition}
+The notation I am using in my notes for categories, which is boldfaced letters, is commonly used, but is not the same as the notation for the book, which uses the sans-serif font $\mathsf{Set}$ for its categories. I kind of like the notation and may start using it.
+
+Here is another example of a category. Suppose $S$ is a set and $\sim $ is a relation on $S$. We can model this information with a category. Let $\mathbf{C}$ have $\Obj( \mathbf{C} ) \coloneqq S$ and
+\[
+	\Hom_{\mathbf{C}}(a , b) = (a,b)\in S\times S \iff a\sim b,\qquad \text{and}\qquad \Hom_{\mathbf{C}}(a , b) =\varnothing \iff a \nsim b
+.\]
+There are very few morphisms in $\mathbf{C}$. However, we can show this encoding of all the information inside of a relation forms a category. Recall that if $\sim $ is a relation, then for all $a\in S$, $a\sim a$. Therefore, $\End(a) \neq \varnothing$, satisfying the first property of definition \ref{dfn:1.3.1}. We can define this element as $\mathbbm{1}_{a} $.
+
+To show composition holds, let $a,b,c\in S$. That is, let $a,b,c\in \Obj( \mathbf{C} ) $. Let $f\in \Hom(a , b) $ and $g\in \Hom(b , c) $. It follows that $\Hom(a , b) ,\Hom(b , c) $ are nonempty, and thus $a\sim b$ and $b\sim c$. By the transitive property of $\sim $, we have $a\sim c$, so $\Hom(a , c) \neq \varnothing$. Let $gf\coloneqq (a,c)\in \Hom(a , c) $. That is, let $(b,c)\circ (a,b)\coloneqq (a,c)$. This satisfies the composition law.
+
+To show the operation is associative, let $f=(a,b)$, $g=(b,c)$, and $h=(c,d)$. Note that $gf=(a,c)$ and $hg=(b,d)$. We have $h(gf)=(a,d)=(hg)f$. Also note that $\mathbbm{1}_{a} $ is obviously an identity, so $\mathbf{C}$ is a category.
+
+There are many constructions of this category, such as $(\mathbb{Z},=)$ or $(\mathbb{R},\leq )$. A category where the only morphisms are identities is called a \emph{discrete} category.
+\begin{definition}[Discrete Category]\label{dfn:1.3.4}
+	A category $\mathbf{C}$ is called discrete if the only morphisms are identity morphisms.
+\end{definition}
+There are two important things to note abuot these categories. Firstly, note that all discrete categories are small, and secondly note that all diagrams in discrete categories are necessarily commutative. Oh yeah I forgot that definition.
+\begin{definition}[Small Category]\label{dfn:1.3.5}
+	Let $\mathbf{C}$ be a category. If $\Obj( \mathbf{C} ) $ is a set, then $\mathbf{C}$ is called \emph{small}.
+\end{definition}
+
+Here is another example of a small category. Let $S$ be a set, and define $\hat{\mathbf{S}}$ by letting $\Obj( \hat{\mathbf{S}} ) \coloneqq \mathscr{P} (S)$, and for any $A,B\in \Obj( \hat{\mathbf{S}} ) $, let $\Hom_{\hat{\mathbf{S}}}(A , B) \coloneqq (A,B)$ if $A\subseteq B$, and $\varnothing$ otherwise. Since $\subseteq $ is a relation on any set $S$, this is clearly a category by our last example.
+
+This next example is very strange. Let $\mathbf{C}$ be a category, and let  $A$ be an object in $\mathbf{C}$. We will define a category who's objects are morphisms and who's morphisms are diagrams. Sure. Define
+\begin{itemize}
+	\item $\Obj( \mathbf{C}_A ) \coloneqq \left\{ f \mid f\in \Hom_{\mathbf{C}}(- , A)  \right\} $. That is, the objects of $\mathbf{C}_A$ are the collection of all morphisms $f$ from any object in $\mathbf{C}$ to $A$. We can then see an object as the arrow $Z\xrightarrow{f}A$ for some object $Z$ in $\mathbf{C}$. These diagrams are often drawn as
+		\[
+			\begin{tikzcd}
+				Z \arrow[d,"f"']\\
+				A
+			\end{tikzcd}
+		\]
+	\item The text says that the ``brave reader'' may want to stop reading and continue only after coming up with the definiton. I will make a guess as to what the morphisms are. Let $f : X \to A$ and $g : Y \to A$ be morphisms in $\mathbf{C}$, and thus $f,g\in \Obj( \mathbf{C}_A ) $. I think the set $\Hom(f , g) $ will be the commutative diagrams starting at $X,Y$ and terminating at $A$. That is, a morphism is a choice of map $h\in \Hom_{\mathbf{C}}(X , Y) $ such that $f=gh$. Such a map may not exist in general, or many maps may exist in general, and thus $\Hom_{\mathbf{C}_A}(f , g) $ is simply the set of all such maps. Note that since $\mathbbm{1}_{A} \in \End_{\mathbf{C}}(A) $, for any $f\in \Hom_{\mathbf{C}}(X , A) $, we have $\mathbbm{1}_{X}f =f$, and thus $\mathbbm{1}_{X} \in\End_{\mathbf{C}_A}(f) $ for all $f$. Morphism composition probably follows from morphism composition in $\mathbf{C}$, and associativity definitely follows from that. Finally, note that the identity morphisms are clearly morphisms.
+	\item Let $Z_1,Z_2$ be objects in $\mathbf{C}$, and $f_1\in \Hom_{\mathbf{C}}(Z_1 , A) $ and $f_2\in \Hom_{\mathbf{C}}(Z_2 , A) $ be objects in $\mathbf{C}_A$. That is, two arrows
+		\[
+			\begin{tikzcd}
+				Z_1\arrow[d,"f_1"']&Z_2\arrow[d,"f_2"]\\
+				A&B
+			\end{tikzcd}
+		\]
+		in $\mathbf{C}$. Morphisms $f_1 \to f_2$ are defined to be \emph{commutative diagrams}. That is, if
+		\[
+			\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+				Z_1 \arrow[rr, "\sigma "] \arrow [dr, "f_1"'] && Z_2 \arrow[dl, "f_2"]\\
+									     &A
+			\end{tikzcd}
+		,\]
+		 then the morphism $\sigma : Z_1 \to Z_2$ such that $f_1 = f_2 \sigma $ is a morphism in $\mathbf{C}_A$.
+\end{itemize}
+Wow, this is exactly what I predicted! As I noted, these morphisms fairly trivially follow the laws in definition \ref{dfn:1.3.1}. The identity is inherited from $\mathbf{C}$,
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	Z\arrow[rr, "\mathbbm{1}_{Z} "]\arrow[dr , "f"'] &&Z\arrow[dl,"f"]\\
+				       &A
+\end{tikzcd}\]
+which commutes because $\mathbf{C}$ is a category. Composition also follows from $\mathbf{C}$ being a category. Two morphisms $f_1 \to f_2 \to f_3$ correspond to the diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	Z_1 \arrow[r, "\sigma "] \arrow[dr, "f_1"'] & Z_2 \arrow[d, "f_2"] \arrow[r, "\tau "] & Z_3 \arrow[dl, "f_3"]\\
+						    &A
+\end{tikzcd}\]
+Since $\mathbf{C}$ is a category, this is the same as the diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	Z_1 \arrow[rr, "\tau \sigma "] \arrow[dr, "f_1"'] && Z_3 \arrow[ld, "f_3"]\\
+				       &A
+\end{tikzcd}\]
+which is clearly still a morphism $f_1 \to f_3$. Finally, composition is associative in $\mathbf{C}$, so it is associative in $\mathbf{C}_A$.
+
+Here's another example, similar to the previous one. Let $\mathbf{C}$ be a category, and consider the objects of a new category to be the morphisms in $\mathbf{C}$ from an object $A$ to \emph{all objects} in $\mathbf{C}$. Again, let the morphisms be suitable commutative diagrams. These are \emph{coslice categories}, which will be explored in the exercises.
+
+We will give another example, which will lead to an important definition. Consider the category $\mathbf{Set}$, and let $A=\left\{ * \right\} $ be a fixed singleton. The resulting category may be called $\mathbf{Set}^*$. An object in this category is a morphism $f : \left\{ * \right\}  \to S$ for any set $S$. The information in $\mathbf{Set}^*$ is then just the choice of a nonempty set $S$ and an element $s$ such that $*\overset{f}{\mapsto} s$, and thus is determined by $f$. We can then denote objects of $\mathbf{Set}^*$ as pairs $(S,s)$, corresponding to the map $f : \left\{ * \right\}  \to S$, $*\mapsto s$. A morphism between two objects $(S,s)\to (T,t)$ is any function of sets $\sigma : S \to T$ such that $\sigma (s)=t$. Objects of $\mathbf{Set}^*$ are called pointed sets, and many objects we will study will in fact be pointed sets. For example, group homomorphisms will be seen to be morphisms of pointed sets.
+\begin{definition}[Pointed Set]\label{dfn:1.3.6}
+	Let $\left\{ * \right\} $ be a fixed singleton set. Let $\mathbf{Set}^*$ be the category whos objects are pairs $(S,s)$ corresponding to morphisms $f : \left\{ * \right\}  \to S$, $*\mapsto s$, and where morphisms $(S,s)\to (T,t)$ are functions of sets $\sigma : S \to T$ such that $\sigma (s)=t$. Then any object of $\mathbf{Set}^*$ is called a pointed set.
+\end{definition}
+
+Another example is a more abstract variation of our previous examples. These will be essential when we revisit the definitions of $\times $ and $\amalg $. Let $\mathbf{C}$ be a category and let $A,B$ be objects of $\mathbf{C}$. Define the category $\mathbf{C}_{A,B}$ using the same procedure in which we define $\mathbf{C}_{A}$ :
+\begin{itemize}
+	\item $\Obj( \mathbf{C}_{A,B} ) $ consists of diagrams
+		\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+			&A\\
+			Z\arrow[ru,"f"]\arrow[dr,"g"']\\
+			&B
+		\end{tikzcd}\]
+		in $\mathbf{C}$, and
+	\item Morphisms
+		\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+			&A&&&A\\
+			Z_1\arrow[ru,"f_1"]\arrow[dr,"g_1"']&\arrow[rr]&&Z_2\arrow[ru,"f_2"]\arrow[dr,"g_2"']\\
+						      &B&&&B
+		\end{tikzcd}\]
+		are \emph{commutative} diagrams
+		\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+			&&A\\
+			Z_1 \arrow[urr, bend left,  "f_1"]\arrow[drr, bend right, "g_1"']\arrow[r,"\sigma "]&Z_2\arrow[ur,"f_2"]\arrow[dr,"g_2"']\\
+													    &&B
+		\end{tikzcd}\]
+		
+\end{itemize}
+This means a morphism $(f_1,g_1) \to (f_2,g_2)$ is really a map $\sigma : Z_1 \to Z_2$ such that $f_1=f_2\sigma $ and $g_1=g_2\sigma $. Flipping the arrows so that we start from $A,B$ and go to an arbitrary set produces an example more similar to those of the pointed sets, which we denote $\mathbf{C}^{A,B}$. The details are completely left to the reader here. I will note that there does not seem, according to Aluffi, to be an established notation for these categories $\mathbf{C}^{A,B}$, so we will use this.
+
+Our final example is fairly complicated. ``Experts would tell you that this looks fairly sophisticated for students just learning categories'', but I can totally get it. I don't know if this will be useful, but since I haven't actually read this part yet, ``recall'' that if $f: A \to B$ is a function of sets, and $T=\left\{ x \right\} \subseteq B$ is a singleton set, then $f^{-1}T=f^{-1}(x)=\left\{ y\in A \mid f(y)=x \right\} $ is called the \emph{fiber} of $f$ over $x$. Now I will present the example.
+
+Let $\mathbf{C}$ be a category, and choose two fixed morphisms $\alpha : A \to C$, $\beta : B \to C$ in $\mathbf{C}$, with the same target $C$. We can define the category $\mathbf{C}_{\alpha ,\beta }$ as follows.
+\begin{itemize}
+	\item The objects $\Obj( \mathbf{C}_{\alpha ,\beta } ) $ are commutative diagrams
+		\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+			&A\arrow[dr, "\alpha "]\\
+			Z\arrow[ur, "f"]\arrow[dr,"g"']&&C\\
+					&B\arrow[ur,"\beta "']
+		\end{tikzcd}\]
+		in $\mathbf{C}$, and
+	\item morphisms also correspond to commutative diagrams
+		\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+			&&A\arrow[dr,"\alpha "]\\
+			Z_1 \arrow[urr, bend left, "f_1"]\arrow[r, "\sigma "]\arrow[drr, bend right, "g_1"]&Z_2\arrow[ur,"f_2"]\arrow[dr,"g_2"]&&C\\
+													     &&B\arrow[ur,"\beta "]
+		\end{tikzcd}\]
+		
+\end{itemize}
+I will now try to understand this. An object corresponds to an object $Z$ in $\Obj( \mathbf{C} ) $, and a pair of morphisms $f : Z \to A$ and $g : Z \to B$ such that $\alpha f=\beta g$. We can represent this as a pair $(f,g)$, although I will represent it as a triple $(Z,f,g)$ to emphasize the object the morphisms originate from. A morphism $(Z_1,f_1,g_1)\to (Z_2,f_2,g_2)$ is a morphism $\sigma : Z_1 \to Z_2$ such that $f_1=f_2\sigma $ and $g_1=g_2\sigma $, which implies that $\alpha f_1=\alpha f_2\sigma $ and $\beta g_1=\beta g_2\sigma $. A similar construction can be done $\mathbf{C}^{\alpha ,\beta }$, where $\alpha : C \to A$ and $\beta : C \to B$. An object would be a diagram
+		\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+			&A\arrow[dr, "f "]\\
+			C\arrow[ur, "\alpha "]\arrow[dr,"\beta "']&&Z\\
+					&B\arrow[ur,"g "']
+		\end{tikzcd}\]
+and a morphism would also be a diagram
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	&A\arrow[dr,"f_2"]\arrow[drr,bend left,"f_1"]\\
+	C\arrow[ur,"\alpha "]\arrow[dr,"\beta "]&&Z_2\arrow[r,"\sigma "]&Z_1\\
+						&B\arrow[ur,"g_2"]\arrow[urr,bend right,"g_1"]
+\end{tikzcd}\]
+In this case, an object consists of a pair of morphisms $f : A \to Z$, $g : B \to Z$ of $\mathbf{C}$ such that $f\alpha =g\beta $, and a morphism in $\mathbf{C}^{\alpha ,\beta }$ is a morphism $\sigma : Z_2 \to Z_1$ in $\mathbf{C}$ such that $\sigma f_2\alpha =f_1\alpha $ and $\sigma g_2\beta =g_2\beta $.
+\begin{definition}[Fibered]\label{dfn:1.3.7}
+	Let $\alpha : A \to C$, $\beta : B \to C$ be morphisms in $\mathbf{C}$. Then $\mathbf{C}_{\alpha ,\beta }$ is called the \emph{fibered} version of $\mathbf{C}_{A,B}$. Similarly, for $\alpha : C \to A$ and $\beta : C \to B$ in $\mathbf{C}$, the category $\mathbf{C}^{\alpha ,\beta }$ is called the \emph{fibered} version of $\mathbf{C}^{A,B}$.
+\end{definition}
+\section{Morphisms}
+In section 2, we highlighted various typess of functions for $\mathbf{Set}$. It's useful to do the same for morphisms in an arbitrary category. However, it's not possible to make these definitions based on the elements of objects in a category, since objects need not have elements. This is why we analyzed these properties from different viewpoints, since these viewpoints translate nicely.
+\subsection{Isomorphisms}
+\begin{definition}[Isomorphism]\label{dfn:1.4.1}
+	A morphism $f\in \Hom_{\mathbf{C}}(A , B) $ is an \emph{isomorphism} if it has a two-sided inverse under composition. That is, if $\exists g\in \Hom_{\mathbf{C}}(B , A) $ such that
+	\[
+		gf=\mathbbm{1}_{A} ,\qquad fg=\mathbbm{1}_{B} 
+	,\]
+	then $f$ is an isomorphism.
+\end{definition}
+We are able to prove the identity of an inverse function is unique using sets, but we must re-verify this in the new case.
+\begin{proposition}\label{prp:1.4.1}
+	The inverse of an isomorphism is unique.
+\end{proposition}
+\begin{proof}
+	We must verify that if $g_1,g_2 : B \to A$ act as inverses to $f : A \to B$ an isomorphism, then $g_1=g_2$. We can show this easily.
+	\[
+		g_1=g_1\mathbbm{1}_{B} =g_1\left( fg_2 \right) =\left( g_1f \right) g_2=\mathbbm{1}_{A} g_2=g_2
+	.\]
+\end{proof}
+What this argument \emph{actually} proves is that a morphism $f$ with a left \textbf{and} a right inverse implies the left and right inverses are equal, and $f$ is an isomorphism. We will now denote the inverse of an isomorphism $f^{-1}$, since there is no ambiguity here.
+\begin{proposition}\label{prp:1.4.2}
+	The following are true.
+	\begin{itemize}
+		\item Each identity $\mathbbm{1}_{A} $ is an isomorphism and is its own inverse.
+		\item If $f$ is an isomorphism, then $f^{-1}$ is an isomorphism, and $\left( f^{-1} \right) ^{-1}=f$.
+		\item If $f\in \Hom_{\mathbf{C}}(A , B) $ and $g\in \Hom_{\mathbf{C}}(B , C) $ are isomorphisms, them $gf$ is an isomorphism and $(gf)^{-1}=f^{-1}g^{-1}$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	(1) We must show $\mathbbm{1}_{A} ^{-1}=\mathbbm{1}_{A} $. Note that $\mathbbm{1}_{A} \mathbbm{1}_{A} =\mathbbm{1}_{A} $ and $\mathbbm{1}_{A} \mathbbm{1}_{A} =\mathbbm{1}_{A} $ by definition \ref{dfn:1.3.1}. Therefore, $\mathbbm{1}_{A} $ is an isomorphism and $\mathbbm{1}_{A} ^{-1}=\mathbbm{1}_{A} $.
+
+	(2) We must show that $f^{-1}$ has an inverse, namely $f$. Note that since $f$ is an isomorphism,
+	\[
+		f^{-1}f=\mathbbm{1}_{A} ,\qquad ff ^{-1}=\mathbbm{1}_{B} 
+	.\]
+	Therefore, $\left( f^{-1} \right) ^{-1}=f$, and $f^{-1}$ is an isomorphism.
+
+	(3) Note that
+	\[
+		\left( f^{-1}g^{-1} \right) (gf)=f^{-1}\left( g^{-1}g \right) f=f^{-1}(\mathbbm{1}_{B} f)=f^{-1}f=\mathbbm{1}_{A} 
+	.\]
+	Additionally,
+	\[
+		(gf)\left( f^{-1}g^{-1} \right) =g\left( ff^{-1} \right) g^{-1}=\left( g\mathbbm{1}_{A}  \right) g^{-1}=gg^{-1}=\mathbbm{1}_{B} 
+	.\]
+	Therefore, $(gf)^{-1}=f^{-1}g^{-1}$. Since $gf$ has an inverse, $gf$ is an isomorphism.
+\end{proof}
+\begin{definition}[Isomorphic]\label{dfn:1.4.2}
+	Two objects $A,B$ of a category are \emph{isomorphic} if there exists an isomorphism $f\in \Hom_{\mathbf{C}}(A , B) $. We write $A\cong B$ to say $A$ is isomorphic to $B$.
+\end{definition}
+It's easy to check that $\cong $ is an equivalence relation on any category. The proof was already done in the exercises for $\mathbf{Set}$, but it can be generalized by the same argument. In fact, I will do it right now.
+\begin{proposition}\label{prp:1.4.3}
+	Isomorphism is an equivalence relation on any category.
+\end{proposition}
+\begin{proof}
+	Let $\mathbf{C}$ be a category. Note that $A\cong A$ by proposition \ref{prp:1.4.2}. Note that if $A\cong B$, then by proposition \ref{prp:1.4.2}, $f^{-1}: B \to A$ is an isomorphism, so $B\cong A$. Finally, if $A\cong B$ and $B\cong C$, then there exist isomorphisms $f : A \to B$ and $g : B \to C$. By propsosition \ref{prp:1.4.2}, $gf : A \to C$ is an isomorphism, so $A\cong C$. Therefore, $\cong $ is an equivalence relation on $\mathbf{C}$.
+\end{proof}
+We noted that identities are isomorphisms. However, in some cases, they are the \emph{only} isomorphisms in a category. For example, the category $\mathbf{C}$ obtained by the relation $\leq $ on $\mathbb{Z}$ pretty obviously only has identities as isomorphisms. If $f : a \to b$ and $g : b \to a$ are morphisms, then $a\leq b$ and $b\leq a$, implying that $a=b$.
+
+Conversely, consider a category where all morphisms are isomorphisms. Such a category is called a \emph{groupoid}.
+\begin{definition}[Groupoid]\label{dfn:1.4.3}
+	A category $\mathbf{C}$ is called a \emph{groupoid} if all morphisms are isomorphisms.
+\end{definition}
+A natural extension of the concept of isomorphisms is an automorphism.
+\begin{definition}[Automorphism]\label{dfn:1.4.4}
+	An automorphism of an object $A$ of a category  $\mathbf{C}$ is an isomorphism $A\to A$. The set of automorphisms is denoted $\Aut_{\mathbf{C}}(A)$, and it is a subset of $\End_{\mathbf{C}}(A) $.
+\end{definition}
+
+There's a few interesting things about the structure of $\Aut_{ \mathbf{C} }( A ) $. By our definitions and ropositions, we have
+\begin{itemize}
+	\item for all $f,g\in \Aut_{ \mathbf{C} }( A ) $, their composition is an element $gf\in \Aut_{ \mathbf{C} }( A ) $;
+	\item composition is associative;
+	\item $\Aut_{ \mathbf{C} }( A ) $ contains the element $\mathbbm{1}_{A} $, which is an identity under composition ($f\mathbbm{1}_{A} =\mathbbm{1}_{A} f=f$);
+	\item every element $f\in \Aut_{ \mathbf{C} }( A ) $ has an inverse $f^{-1}\in \Aut_{ \mathbf{C} }( A ) $.
+\end{itemize}
+The set $\Aut_{ \mathbf{C} }( A ) $ is a group under function composition, for all objects $A$ in all categories $\mathbf{C}$.
+\subsection{Monomorphisms and Epimorphisms}
+As noted above, since objects need not have elements, we cannot define injective and surjective morphisms in the same way we define them for functions of sets. We can, however, define \emph{monomorphisms and epimorphisms} in an arbitrary category:
+\begin{definition}[Monomorphism]\label{dfn:1.4.5}
+	Let $\mathbf{C}$ be a category. A morphism $f\in \Hom_{ \mathbf{C} }(A , B) $ is a \emph{monomorphism} if for all objects $Z$ of $\mathbf{C}$ and all morphisms $\alpha ',\alpha ''\in \Hom_{ \mathbf{C} }(Z , A) $,
+	\[
+		f\circ \alpha '=f\circ \alpha ''\implies \alpha '=\alpha ''
+	.\]
+\end{definition}
+\begin{definition}[Epimorphism]\label{dfn:1.4.6}
+	Let $\mathbf{C}$ be a category. A morphism $f\in \Hom_{ \mathbf{C} }(A , B) $ is an \emph{epimorphism} if for all objects $Z$ of $\mathbf{C}$ and all morphisms $\beta  ',\beta ''\in \Hom_{ \mathbf{C} }(B , Z) $,
+	\[
+		\beta '\circ f=\beta ''\circ f\implies \beta '=\beta ''
+	.\]
+\end{definition}
+It's been proven previously that in the category $\mathbf{Set}$, the monomorphisms are preciely the injective functions, and the epimorphisms are precisely the surjective functions. These functions are thus the category-theoretical generalizations of surjective and injective functions.
+
+In categories defined by a set and a relation, every morphism is both a monomorphism and an epimorphism. Since there is at most one morphism between any two objects, the conditions defininig these morphisms are vacuous.
+
+This example breaks some intuition we have from set theory. In $\mathbf{Set}$, a function is an isomorphism if it is both surjective and injective, and equivalently if it is both a monomorphism and an epimorphism. However, in the category defined by $\leq $ on $\mathbb{Z}$, every morphism is both a monomorphism and an epimorphism, and yet only the identity morphisms are isomorphisms. This property is thus a special feature of $\mathbf{Set}$, and it will not hold in every category. For example, it will not hold in $\mathbf{Ring}$. It will be shown in the distant future, however, that it does hold in abelian categories. Similarly, an epimorphism need not have a right inverse, unlike in $\mathbf{Set}$.
+
+\section{Universal Properties}
+Categories are extremely important in math, giving us a bird's eye view of many constructions, including those in algebra. This will be apparent in the steady appearance of constructions satisfying suitable \emph{universal properties}. We will see shortly that disjoint unions and Cartesian products can be characterized by universal properties related to the categories $\mathbf{C}^{A,B}$ and $\mathbf{C}_{A,B}$. Many of the things we will see will have a (often seemily arbitrary) explicit definition, and then an accompanying one in terms of universal properties, which will not have arbitrary choices. Finally, deeper relationships between objects become apparent when viewing them in terms of their universal properties. For example, $\times $ and $\amalg $ are really just mirror constructions of each other, which is NOT AT ALL apparent from the previous definitions.
+\subsection{Initial and Final Objects}
+\begin{definition}[Initial and Final]\label{dfn:1.5.1}
+	Let $\mathbf{C}$ be a category. We say an object $I$ of $\mathbf{C}$ is \emph{initial} in $\mathbf{C}$ if for all objects $A$ in $\mathbf{C}$, there exists \emph{exactly one} morphism $I\to A$ in $\mathbf{C}$. That is,
+	\[
+		\forall A\in \Obj( \mathbf{C} ) \left( \Hom_{ \mathbf{C} }(I , A)  \right) \text{ is a singleton set}
+	.\]
+	Similarly, we say an object $F\in \Obj( \mathbf{C} ) $ is \emph{final} in $\mathbf{C}$ if for all $A\in \Obj( \mathbf{C} ) $, there exists \emph{exactly one} morphism $A\to F$ in $\mathbf{C}$. That is,
+	\[
+		\forall A\in \Obj( \mathbf{C} ) \left( \Hom_{ \mathbf{C} }(A , F)  \right) \text{ is a singleton set}
+	.\]
+	We will call an object $A\in \Obj( \mathbf{C} ) $ \emph{terminal} if it is either initial or final.
+\end{definition}
+Initial and final objects don't need to exist. For example, the category defined by the $\leq $ relation on $\mathbb{Z}$ has no initial or final objects. Additionally, initial and final objects need not be unique. For example, every singleton set in $\mathbf{Set}$ is final in $\mathbf{Set}$. However, we can claim that if they exist, then they are unique \emph{up to a unique isomorphism}.
+\begin{proposition}\label{prp:1.5.1}
+	Let $\mathbf{C}$ be a category. If $I_1,I_2\in \Obj( \mathbf{C} ) $ are both initial, then $I_1\cong I_2$. Additionally, if $F_1,F_2\in \Obj( \mathbf{C} ) $ are both final, then $F_1\cong F_2$.
+\end{proposition}
+\begin{proof}
+	By definition \ref{dfn:1.3.1}, for all $A\in \Obj( \mathbf{C} ) $, there exists at least one morphism $\mathbbm{1}_{A} \in \Hom_{ \mathbf{C} }(A , A) $. If $I$ is initial, then by definition \ref{dfn:1.5.1} there exists a \emph{unique} morphism $\mathbbm{1}_{I} $. Now suppose $I_1,I_2$ are initial. By definition \ref{dfn:1.5.1}, there exists exactly one morphism $f\in \Hom_{ \mathbf{C} }(I_1 , I_2) $, and likewise, there exists exactly one morphism $g\in \Hom_{ \mathbf{C} }(I_2 , I_1) $. Now note that $gf\in \Hom_{ \mathbf{C} }(I_1 , I_1) $, and thus $gf=\mathbbm{1}_{I_1} $. Similarly, $fg=\mathbbm{1}_{I_2} $. Therefore, $g-f^{-1}$, and by proposition \ref{prp:1.4.2}, $f$ is an isomorphism. The proof for final objects is the same and has been done in the exercises.
+\end{proof}
+This proposition shows why all singletons in $\mathbf{Set}$ are isomorphic; although some may \emph{look} more special than others, they are really all the same.
+\subsection{Universal Properties}
+Although it is best to introduce universal properties using the language of functors, this will not be introduced until much later. For now, and for most of the text, the following working definition will suffice.
+\begin{definition}[Universal Property]\label{dfn:1.5.2}
+	We say a construction satisfies a universal property when it may be viewed as a terminal object of a category.
+\end{definition}
+This definition is strange and requires motivation. In general, we will not name the category it is viewed as terminal in, but rather will describe it as a property. For example, $\{\varnothing\}$ is universal with respect to the property of mapping to sets. This is the same as saying $\left\{ \varnothing \right\} $ is initial in $\mathbf{Set}$.
+
+This is a simple example, but oftentimes the example is more complex. We will often say something along the lines of ``object $X$ is universal with respect to the following property: for any $Y$ such that $P(Y)$, there exists a unique morphism $Y\to X$ such that ...''. Note that this implies that in the category consisting of all  $Y$ satisfying $P(Y)$ and some accompanying collection of morphisms, the set $X$ is final. We will now illustrate this strange definition with a lot of examples.
+\subsection{Quotients}
+Let $\sim $ be an equivalence relation on a set $A$. Consider the following statement. \emph{The quotient $A /\tildesim $ is universal with respect to the property of mapping $A$ to a set in such a way that equivalent elements have the same image.}
+
+This assertion is talking about maps $\phi : A \to Z$ for any set $Z$, such that $a'\sim a''\implies \phi (a')=\phi (a'')$. Thee morphisms are objects of a category, very similar to $\mathbf{C}^{A}$. Although an object needs only be specified by a morphism, we will specify it with an ordered pair $(\phi ,Z)$ for convenience. The only reasonable definition of morphisms $(\phi_1,Z_1)\to (\phi_2,Z_2)$ is by commutative diagrams
+\[\begin{tikzcd}[row sep=2.5em, column sep=1.5em]
+	Z_1\arrow[rr,"\sigma "]&&Z_2\\
+			       &A\arrow[lu,"\phi_1"]\arrow[ru,"\phi_2"']
+\end{tikzcd}\]
+This is the same as the example $\mathbf{C}^{A}$. The next natural question, given our assertion, is whether this category has initial objects. We claim that if $\pi $ is the canonical projection $A \twoheadrightarrow A/\tildesim  $ given by $a\mapsto [a]_\sim $, then $(\pi ,A/\tildesim  )$ is initial in this category.
+\begin{proof}
+	Consider any $(\phi ,Z)$ in the category. We wish to show there exists a unique morphism $(\pi ,A /\tildesim  )\to (\phi  ,Z)$. That is, we wish to show there exists a diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=1em]
+	A/\tildesim \arrow[rr,"\overline{\phi }"]&&Z\\
+					   &A\arrow[lu,"\pi "]\arrow[ru,"\phi "']
+\end{tikzcd}\]
+Let $[a]_\sim \in A /\tildesim  $. If we want the diagram to commute, then $\overline{\phi } ([a]_\sim )=\phi (a)$. Therefore, $\phi $ fully specifies the behavior of $\overline{\phi } $, and thus $\overline{\phi } $ is unique, if it exists. Now we must show it is well-defined. That is, if $[a_1]_\sim =[a_2]_\sim $, then $\phi (a_1)=\phi (a_2)$. Since it follows that $a_1\sim a_2$, and since $\phi $ is an object in our category, $\phi (a_1)=\phi (a_2)$. Therefore, $(\pi ,A/\tildesim )$ is initial in this category.
+\end{proof}
+Note that the above assertion is very bad; it does not specify what the category to be considered is, nor does it specify what the solution to the universal problem is (the morphism $\pi $). Abuse of language like this is common, and being able to translate it into precise statements is important. For example, in this statement there is only one obvious choice for a morphism which can form the initial object, and the final object is very uninteresting, so the lengthy language can be discarded.
+
+What did we learn by viewing this statement (which looks a lot like the first isomorphism theorem, but for sets) in terms of its universal property? Suppose $\sim $ is the equivalence relation starting from a function $f : A \to B$, as seen previously. Then $f$ also satisfies the universal property for $A / \tildesim $, and thus $f(A)\cong A /\tildesim $ by proposition \ref{prp:1.5.1}. This is the same as theorem \ref{thm:1.2.1}, so the universal property really describes the canonical decomposition of sets.
+\subsection{Products}
+We will now look at the Cartesian product, and identify the universal property behind it. The book says to try it yourself, and I tried, but I can't think of anything beyond using $\mathbf{C}^{A,B}$ or $\mathbf{C}_{A,B}$ to define the cartesian product, and I don't know how it follows or which to use.
+\begin{proposition}[Cartesian Product]\label{prp:1.5.2}
+Let $A,B\in \Obj( \mathbf{Set} ) $, and consider $A\times B$, with the natural projections
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	&A\\
+	A\times B\arrow[ru,"\pi_A"]\arrow[dr, "\pi_B"']\\
+	&B
+\end{tikzcd}\]
+Then for every set $Z$ and morphisms
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	&A\\
+	Z\arrow[ur,"f_1"]\arrow[dr,"f_2"']\\
+	&B
+\end{tikzcd}\]
+there exists a unique morphism $\sigma : Z \to A\times B$ such that the diagram
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	&&A\\
+	Z\arrow[urr, bend left, "f_A"]\arrow[r,"\sigma "]\arrow[drr,bend right,"f_B"']&A\times B\arrow[ur,"\pi_A"]\arrow[dr,"\pi _B"]\\
+										      &&B
+\end{tikzcd}\]
+commutes. We often denote $\sigma $ by $f_A\times f_B$.
+\end{proposition}
+\begin{proof}
+	For all $z\in Z$, define
+	\[
+		\sigma (z)=(f_A(z),f_B(z))
+	.\]
+	Then for all $z\in Z$,
+	\[
+		\pi_A \sigma (z)=\pi _A(f_A(z),f_B(z))=f_A(z),
+	\]
+	\[
+		\pi_B\sigma (z)=\pi_B(f_A(z),f_B(z))=f_B(z)
+	.\]
+	Therefore, $\pi_A\sigma =f_A$ and $\pi_A\sigma =f_B$. The definition is also required due to the commutativity of the diagram, so $\sigma $ is specified by $f_A$ and $f_B$, and is thus unique.
+\end{proof}
+We can then see $A\times B$ as a final object in the category $\mathbf{Set}_{A,B}$. The main advantage of seeing $\times $ in this way is that the universal property may be stated in \emph{any} category, whereas the definition of $A\times B$ seen earlier only makes sense in $\mathbf{Set}$. We can say that a category $\mathbf{C}$ has (finite) products, or is a category with (finite) products, if for all $A,B\in \Obj( \mathbf{C} ) $, the category $\mathbf{C}_{A,B}$ has final objects. These final objects then carry the data of a single object in $\mathbf{C}$, which we denote $A\times B$, and of two morphisms $A\times B\to A,B$, which can be seen as the canonical projections.
+
+One example of this is that in the category determined by $\leq $ on $\mathbb{Z}$, the categorical product $a\times b$ must satisfy for all $z\in\mathbb{Z}$ such that $z\leq a$ and $z\leq b$, we have $z\leq a\times b$. This universal problem has the solution $\min (a,b)$. We can then see that there is a relationship between the cartesian product of two sets and the minimum of two integers, since they both satisfy the same universal property.
+\begin{definition}[Product]\label{dfn:1.5.2}
+	Let $A,B\in \Obj( \mathbf{C} ) $ for $\mathbf{C}$ a category. A product $A\times B$ of $A$ and $B$ is an object of $\mathbf{C}$ with two morphisms $\pi_A : A\times B \to A$ and $\pi _B : A\times B \to B$, satisfying the following universal property: for all objects $Z\in \Obj( \mathbf{C} ) $ and morphisms
+	\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+		&A\\
+		Z\arrow[ur,"f_A"]\arrow[dr,"f_B"']\\
+		&B
+	\end{tikzcd}\]
+	there exists a unique morphism $\sigma : Z \to A\times B$ such that the diagram
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	&&A\\
+	Z\arrow[urr, bend left, "f_A"]\arrow[r,"\sigma "]\arrow[drr,bend right,"f_B"']&A\times B\arrow[ur,"\pi_A"]\arrow[dr,"\pi _B"]\\
+										      &&B
+\end{tikzcd}\]
+commutes.
+\end{definition}
+\subsection{Coproducts}
+The prefix ``co'' generally means the reversing of all arrows. In this case, since products are final objects in $\mathbf{C}_{A,B}$, who's objects are pairs of morphisms with a common source and targets $A,B$, coproducts would be initial objects in the category $\mathbf{C}^{A,B}$, which are pairs of morphisms with common target and sources $A,B$. The book says to predict the universal property, so I will. I was close, and have edited my answer to be correct. I got a few things backwards though, so I should probably do more exercises.
+
+\begin{definition}[Coproduct]\label{dfn:1.5.3}
+Let $A,B\in \Obj( \mathbf{C} ) $ for $\mathbf{C}$ a category. A coproduct $A\amalg B$ of $A$ and $B$ is an object of $\mathbf{C}$ with two morphisms $i_A : A \to A\amalg B$ and $i_B : B \to A\amalg B$ satisfying the universal property: for every set $Z$ and morphisms $f_A: A \to Z$, $f_B: B \to Z$, there exists a unique morphism $\sigma : A\amalg B \to Z$ such that the diagram
+\[\begin{tikzcd}[row sep=1em, column sep=2.5em]
+	A\arrow[dr,"i_A"]\arrow[drr,bend left, "f_A"]\\
+	&A\amalg B\arrow[r,"\sigma"]&Z\\
+	B\arrow[ur,"i_B"']\arrow[urr,bend right, "f_B"']
+\end{tikzcd}\]
+commutes.
+\end{definition}
+It should be very obvious that this is simply the reverse  of definition \ref{dfn:1.5.2}. We say that a category has coproducts if this universal problem has a solution for all pairs of objects $A,B$. For example, consider $A\amalg B$ in $\mathbf{Set}$.
+\begin{proposition}
+	The disjoint union is a coproduct in $\mathbf{Set}$.
+\end{proposition}
+\begin{proof}
+	Recall that the disjoint union $A\amalg B$ is defined as the union of disjoint "copies" of $A$ and $B$, such as $\left\{ 0 \right\} \times A\eqqcolon A'$ and $\left\{ 1 \right\} \times B\eqqcolon B'$. We can define $i_A(a)=(0,a)$ and $i_B(b)=(1,b)$, where
+	\[
+		a,b\in \left( \left\{ 0 \right\} \times A \right) \cup \left( \left\{ 1 \right\} \times B \right) 
+	.\]
+	Let $f_A : A \to Z$ and $f_B : B \to Z$ be arbitrary morphiisms. Define
+	\[
+		\sigma : A\amalg B \to Z
+	\]
+	as the map
+	\[
+		\sigma (c) = 
+		\begin{cases}
+			f_A(a)&\text{if }c=(0,a)\in \left\{ 0 \right\} \times A,\\
+			f_B(b)&\text{if }c=(1,b)\in \left\{ 1 \right\} \times B.
+		\end{cases}
+	\]
+	This definition makes the diagram commute rather easily, and is forced by requiring commutativity. Therefore, $\sigma $ is unique and exists.
+\end{proof}
+This shows us that the arbitrarity of choosing $\left\{ 0 \right\} $ and $\left\{ 1 \right\} $ in disjoint unions was simply one definition satisfying the universal property, and the universal property shows that all such choices are isomorphic. This sheds a lot of light on the weird disjoint union stuff, by showing all defintions are equivalent. The book also notes that in $\mathbb{Z},\leq $, we have $a\amalg b=\max (a,b)$, which is extremely beautiful and follows from the incredible symmetry between the definitions.
+\section{Note from the Reader}
+Although I \emph{understood} most of the stuff in this chapter, I didn't understand all of it well, and I also frequently got the definitions for $\mathbf{C}^{A}$ vs $\mathbf{C}_{A}$, as well as related categories, mixed up. I have added this section to give some clarification.

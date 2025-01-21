@@ -1,0 +1,150 @@
+\section{Definition of a Ring}
+\subsection{Definition}
+Rings, and by extension, modules, are created by ``decorating'' abelian groups. They are abelian groups with an additional multiplication operation on top of them, and behave similarly to common sets such as $\mathbb{Z}$ and $\mathbb{R}$. An additional, more advanced example of some motivation is that the set $\End_{\mathsf{Ab}}( A ) $ not only forms an abelian group under pointwise addition, but in fact using morphism composition as multiplication turns $\End_{\mathsf{Ab}}( A ) $ into a ring.
+
+\begin{definition}[Ring]\label{dfn:3.1.1}
+	A ring $(R,+,\cdot )$ is an abelian group $(R,+)$ together with a second binary operation $\cdot : R\times R \to R$ such that
+	\begin{itemize}
+		\item (Associativity) $\forall x,y,z\in R$, $x\cdot (y\cdot z)=(x\cdot y)\cdot z$.
+		\item (Identity) $\exists 1\in R$ such that $\forall r\in R$, $1r=r1=r$.
+		\item (Distributivity) $\forall r,s,t\in R$,
+			\[
+				r(s+t)=rs+rt\text{ and }(r+s)t=rt+st
+			.\]
+	\end{itemize}
+\end{definition}
+
+It's important to note that not all authors include the requirement that rings have $1$; they would call this definition a ``ring with identity'' or a ``ring with unity'' or a ``unital ring''. On the other hand, rings without identities are sometimes called rngs. We will use the convention that rings have identity.
+
+Given that a ring has unity, the identity is then clearly unique, by the same argument as given with groups. The identity under addition is often called $0_R$ or simply $0$, and interestingly, it behaves as one would expect.
+\begin{lemma}\label{lma:3.1.1}
+	Let $R$ be a ring. Then for all $r\in R$,
+	\[
+		0r=r0=0
+	.\]
+\end{lemma}
+\begin{proof}
+	We have
+	\[
+		r0=r(0+0)=r0+r0 \implies r0 - r0 = r0 + r0 - r0 \implies r0 = 0
+	.\]
+	The proof for the other side is identical.
+\end{proof}
+
+Additionally, we can show $-1r=-r$. We have
+\[
+	r + (-1r) = 1r + (-1r) = (1 - 1)r = 0r = 0
+\]
+from lemma \ref{lma:3.1.1}.
+\subsection{First Examples and Special Classes of Rings}
+The zero ring $\left\{ * \right\} $ is often called the trivial ring. Note that $0=1$ in this ring. Other important examples include more familiar rings, such as $\mathbb{R}$ and $\mathbb{Z}$.
+\begin{definition}[Commutative]\label{dfn:3.1.2}
+	A ring $R$ is commutative if for all $r,s\in R$, $rs=sr$.
+\end{definition}
+Commutative rings with identity are extremely important, and are studied in the subfield of algebra known as \emph{commutative algebra}.
+
+Rings need not be commutative, however. For example, the set of $2\times 2$ matrices with real entries form a ring, yet are not commutative.
+
+One final example is the rings $\mathbb{Z}/n\mathbb{Z}$, where multiplication is defined as
+\[
+	[a]_n \cdot [b]_n = [ab]_n
+.\]
+This construction satisfies the ring axioms. This ring is important, because it fails the cancellation property. In this ring, $ab = ac$ does not imply $b=c$. Of course, we assume $a,b,c\neq 0$ here, since in general $0$ cannot be canceled, and we can only define a cancellation property for nonzero elements. This property does hold in other rings, such as $\mathbb{R},\mathbb{Z},\mathbb{Q}$, and more. So the question is \emph{when} does it hold? To solve this problem, we need to investigate zero divisors. Note that in $\mathbb{Z}/4\mathbb{Z}$, $2\cdot 2=0$, but $2\neq 0$. This ring has what we call \emph{zero divisors}.
+\begin{definition}[Zero Divisor]\label{dfn:3.1.3}
+	An element $a$ in a ring $R$ is a \emph{left-zero-divisor} if there exists at least one element $b\in R^*$ such that $ab=0$. Conversely, a \emph{right-zero-divisor} is an element $a$ such that for $b\neq 0$, $ba=0$.
+\end{definition}
+\begin{proposition}\label{prp:3.1.1}
+	In a ring $R$, an element $a$ is not a left-zero-divisor if and only if left multiplication $r\mapsto ar$ is injective. Similarly, $a$ is not a right-zero-divisor if and only if right multiplication $r\mapsto ra$ is injective.
+\end{proposition}
+\begin{proof}
+	We prove only the left statement, as the right statement is analogous. First let $a,b,c\in R$ and suppose $a$ is not a zero divisor, and $ab=ac$. We then have
+	\[
+		a(b-c)=ab-ac=0
+	.\]
+	Since $a$ is not a zero divisor, we have $b-c=0$. Now suppose $r\mapsto ar$ is injective. Note that $a0=0$, so by injectivity, $ar=0 \implies r=0$. Therefore, $a$ is not a zero divisor.
+\end{proof}
+Rings such as $\mathbb{Z},\mathbb{Q},\mathbb{R}$ are commutative and do not have zero divisors. Since these rings are so important, we give a definition to all rings of this type.
+\begin{definition}[Integral Domain]\label{dfn:3.1.4}
+	An integral domain is a nonzero commutative ring with no zero divisors. That is,
+	\[
+		ab=0 \implies a=0\text{ or }b=0
+	.\]
+\end{definition}
+Integral domains are so important that chapter 5 will be devoted entirely to them. One important thing to note here is that $\mathbb{Z}/n\mathbb{Z}$ is an integral domain if and only if $n$ is prime.
+
+We will see later that $\mathbb{Z}$ is also a UFD, PID, and Euclidean domain (chapter 5 stuff), but $\mathbb{R},\mathbb{Q},\mathbb{C}$ are even more special than $\mathbb{Z}$. They are what we call fields.
+\begin{definition}[Unit]\label{dfn:3.1.5}
+	An element $u$ of a ring $R$ is a left-unit if there exists $v\in R$ such that $uv=1$. Equivalently, if $vu=1$, then $u$ is a right unit, and if $uv=vu=1$, then $u$ is a unit.
+\end{definition}
+\begin{proposition}\label{prp:3.1.2}
+	In a ring $R$,
+	\begin{itemize}
+		\item $u$ is a left/right unit if and only if left/right multiplication by $u$ is surjective.
+		\item if $u$ is a left/right unit, then right/left multiplication by $u$ is injective.
+		\item The inverse of a unit is unique.
+		\item Units form a group under multiplication.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The first statement is trivial. Let $u$ be a left unit with an inverse $v$. Then $\forall r\in R$, $vr \mapsto uvr=1r=r$. Proof for right units is analogous. Now let the map be surjective. Then there exists $v$ such that $uv=1$, so $u$ is a unit.
+
+	Let $u$ be a right unit, and let $ur=us$. If the right-inverse of $u$ is $v$, then
+	\[
+		vur=vus \implies r=s
+	.\]
+	Therefore, left multiplication is injective. The other two statements are proven in the exercises.
+\end{proof}
+We denote the inverse of a unit as $u^{-1}$. Left- and right-units are not unique in general, so we only adopt this notation when $u$ is a unit.
+\begin{definition}[Division Ring]\label{dfn:3.1.6}
+	A division ring is a ring in which all nonzero elements are units.
+\end{definition}
+
+We are mainly concerned with the commutative case in this book, which has it's own name.
+\begin{definition}[Field]\label{dfn:3.1.7}
+	A field is a nonzero commutative division ring.
+\end{definition}
+The entirety of chapter 7 will be spent studying fields. By proposition \ref{prp:3.1.2}, all fields are integral domains, but the converse is not true. It is true, however, in the finite case.
+\begin{proposition}\label{prp:3.1.3}
+	Let $R$ be a \emph{finite} ring. Then $R$ is a field if and only if $R$ is an integral domain.
+\end{proposition}
+\begin{proof}
+	The one direction is trivial, so let $R$ be an integral domain. Then multiplication by any element is injective, and since $R$ is finite, it is surjective. Therefore, by previous logic, every element is a unit. Since the ring is commutative, we don't specify left vs right.
+\end{proof}
+
+We will show much later that all finite division rings are commutative, so this commutativity postulate is in fact not needed. Note that $\mathbb{Z} / p\mathbb{Z}$ is a field iff $p$ is prime. However, these are not the only finite fields. Later, we will consider fields of the form $\mathbb{Z}/p\mathbb{Z} \times \cdots \times \mathbb{Z}/p\mathbb{Z}$.
+\subsection{Polynomial Rings}
+Polynomial rings are an important class of rings that we will study.
+\begin{definition}[Polynomial Ring]\label{dfn:3.1.8}
+	Let $R$ be a ring. A polynomial $f(x)$ in the indeterminant $x$ with coefficients in $R$ is a finite linear combination
+	\[
+		f(x)=\sum_{i\geq 0} a_ix^i
+	,\]
+	where $a_i\in R$ for all $i$. Two polynomials are equal iff the coefficients are equal. The set  $R[x]$ is the set of all such polynomials. Polynomial addition and multiplication are defined as
+	\[
+		f(x)+g(x)=\sum_{i\geq 0} (a_i+b_i)x^i
+	\]
+	and
+	\[
+		f(x)g(x)=\sum_{k\geq 0} \sum_{i+j=k} a_ib_j x^{i+j}
+	.\]
+	
+\end{definition}
+
+The degree of a polynomial, denoted $\operatorname{deg}f(x)$, is the largest integer $d$ such that $a_d\neq 0$. Polynomials of degree 0 are called constants, which form a copy of $R$ in $R[x]$. Polynomials in more indeterminants $R[x,y,z]$ can be formed by iterating this construction
+\[
+	R[x,y,z]\coloneqq R[x][y][z]
+.\]
+It can be easily checked that the order of the listing is not important, and as such these can be manipulated the same as ordinary polynomials. We will very rarely consider polynomials in infinitely many determinants; $R[x_1,x_2, \ldots]$ will denote countably many indeterminants. We must keep in mind however that we only admit finite linear combinations, even though there are infinite indeterminants. A true definition of this ring requires limits, which will be discussed in chapter 8. Ring of power series
+\[
+	\sum_{i=0}^{\infty} a_ix^i
+\]
+are denoted $R[[x]]$. We will only encounter these occasionally, athough they are important.
+
+We will discuss what properties $R[x]$ inherets from $R$ in a later section. However, note that $R[x]$ can never be a field, since the polynomial $x$ will never have an inverse.
+
+\subsection{Monoid Rings}
+Polynomial rings are specific instances of a more general construction. A semigroup is a set with an associative operation, and a monoid is a semigroup with an identity. That is, a group is a monoid where all elements are invertible. Given a monoid $(M,\cdot )$ and a ring $R$, we can define a ring $R[M]$ as formal finite linear combinations
+\[
+	\sum_{m\in M} a_m \cdot m
+,\]
+where coefficients are elements in $R$. Note that as an abelian group, $R[M]=R^{\oplus M}$. Operations are defined in the usual way, and the identity is $1_R1_M$. Group rings are the result of this construction when $M$ is a group. The Laurent polynomials is the group ring $R[\mathbb{Z}]$ or something.

@@ -1,0 +1,175 @@
+\section{The Category $\mathsf{Ring}$}
+\begin{definition}[Ring Homomorphism]\label{dfn:3.2.1}
+	A ring homomorphism $\phi : R \to S$ is a function such that for all $r,s\in R$,
+	\[
+		\phi (r+s)=\phi (r)+\phi (s)
+	,\]
+	\[
+		\phi (rs)=\phi (r)\phi (s)
+	,\]
+	\[
+		\phi (1_R)=1_S
+	.\]
+\end{definition}
+It is obvious that rings, together with ring homomorphisms, form a category, denoted $\mathsf{Ring}$. Also note that the zero ring is obviously final in $\mathsf{Ring}$, as it is a singleton and the only map to a singleton is the constant map. However, the requirement that $1\mapsto 1$ makes it NOT initial. Rather, $\mathbb{Z}$ is initial. For any ring $R$, we can define a map $\phi : \mathbb{Z} \to R$ by $\phi (n)=n\cdot 1_R$. That is, the exponential map we saw in chapter 2. Note that $\phi $ is a ring homomorphism:
+\[
+	\phi (1)=1_R,\qquad \phi (n+m)=(n+m)1_R = n1_R + m1_R
+,\]
+and by distributivity,
+\[
+	\phi (nm)=(nm)1_R=n1_R \cdot m1_R=\phi (n)\phi (m)
+.\]
+This ring homomorphism is also unique, since $1\mapsto 1_R$ and the fact that $\phi $ preserves addition determine it fully. This is why we include 1 in the definition of a ring, to make $\mathbb{Z}$ initial. $\mathbb{Z}$ is then a very special ring.
+
+Ring homomorphisms also preserve units. If $u$ is a left/right unit, then $\phi (u)$ is the same:
+\[
+	uv=1_R \implies 1_S=\phi (1_R)=\phi (uv)=\phi (u)\phi (v)
+.\]
+However, the image of a non-zero-divisor can be a zero divisor. For example, the canonical projection $\pi : \mathbb{Z} \to \mathbb{Z}/6\mathbb{Z}$ is a homomorphism, but $2\mapsto [2]_6$ is a zero divisor.
+
+\subsection{Universal Property of Polynomial Rings}
+Polynomial rings satisfy a universal property similar to that of free groups. We will state the universal property for commutative rings.
+
+Let $A=\left\{ a_1, \dots, a_n  \right\} $ be a set of order $n$. Consider the category $\mathscr{R} _A$ where objects are pairs $(j,R)$ where $R$ is a ring and $j : A \to R$ is a function of sets; morphisms
+\[
+	(j_1,R_1)\to (j_2,R_2)
+\]
+are commutative diagrams
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	R_1 \arrow[r, "\phi "]&R_2\\
+	A\arrow[u, "j_1"]\arrow[ru, "j_2"']
+\end{tikzcd}\]
+in which $\phi $ is a ring homomorphism. Consider the object $(i, \mathbb{Z}[x_1, \dots, x_n ])$, where
+\[
+	i : A \to \mathbb{Z}[x_1, \dots, x_n ]
+\]
+is the map $a_k\mapsto x_k$.
+\begin{proposition}\label{prp:3.2.1}
+	$(i,\mathbb{Z}[x_1, \dots, x_n ])$ is initial in $\mathscr{R} _A$.
+\end{proposition}
+\begin{proof}
+	Let $(j,R)$ be an arbitrary object in $\mathscr{R}_A$. If the diagram
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\mathbb{Z}[x_1, \dots, x_n ]\arrow[r, "\phi "]&R\\
+		A\arrow[u, "i"]\arrow[ru, "j"']
+	\end{tikzcd}\]
+	commutes, then we are forced to define $\phi (x_k)=j(a_k)$ for all $k$. The requirement that $\phi $ be a ring homomorphism forces
+	\[
+		\phi \left( \sum m_{i_1\cdots i_n} x_1^{i_1}\cdots x_n^{i_n} \right) =\sum \phi (m_{i_1 \cdots i_n})\phi (x_1)^{i_1}\cdots \phi (x_n)^{i_n}
+	\]
+	\[
+		\sum \iota (m_{i_1 \cdots i_n})j(a_1)^{i_1}\cdots j(a_n)^{i_n}
+	,\]
+	where $\iota $ is the unique ring homomorphism $\mathbb{Z}\to R$. This forces $\phi $ to be unique. It is clear the identity is preserved, so $\phi $ is a homomorphism.
+\end{proof}
+
+One corollary of this is that for all (not necessarily commutative) rings $S$, for all $s\in S$, there exists a unique ring homomorphism $\mathbb{Z}[x]\to S$ mapping $x\mapsto s$.
+
+Another corollary of this, which is to be shown in the exercises, is that for a ring homomorphism $\alpha : R \to S$ and some fixed $s\in S$ commuting with $\alpha (r)$ for all $r\in R$, there exists a unique ring homomorphism $\phi_s : R[x] \to S$ that maps $x\mapsto s$. Applying this to the commutative case, we can define the evaluation of a polynomial at some element $r\in R$. Consider the identity map $\mathrm{id} : R \to R$, with $R$ commutative. Clearly, $\mathrm{id} (r)$ commutes with all $r$, so we find that for all $r\in R$, there exists a unique $\phi_r : R[x] \to R$ such that $x\mapsto r$. We can then define for all $f(x)\in R[x]$ the evaluation map,
+\[
+	f : R \to R
+\]
+defined by
+\[
+	f(r)=\phi_r(f(x))
+.\]
+Informally, this map sends
+\[
+	a_nx^n  \mapsto a_n r^n
+.\]
+We will call these evaluation maps "polynomial functions", and will call elements of $R[x]$ "polynomials".
+
+\subsection{Monomorphisms and Epimorphisms}
+The kernel is defined analogously.
+\begin{definition}[Kernel]\label{dfn:3.2.2}
+	The kernel of a ring homomorphism $\phi : R \to S$ is defined as
+	\[
+		\ker \phi \coloneqq \left\{ r\in R \mid \phi (r)=0 \right\} 
+	.\]
+\end{definition}
+This is the same as the kernel of $\phi $ when viewed as a homomorphism of groups. However, the kernel is more than just a normal subgroup of $(R,+)$, as we will explore in this section. First, we have an analogous proposition for monomorphisms as in $\mathsf{Grp}$.
+\begin{proposition}\label{prp:3.2.2}
+	Let $\phi : R \to S$ be a ring homomorphism. Then the following are equivalent.
+	\begin{itemize}
+		\item  $\phi $ is a monomorphism.
+		\item $\ker \phi =\left\{ 0 \right\} $.
+		\item  $\phi $ is injective.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The book only proves the first implication. $(a\implies b)$. Let $\phi : R \to S$ be a ring homomorphism, and let $r\in \ker \phi $. By previous logic concerning proposition \ref{prp:3.2.1}, there exist unique ring homomorphisms $\mathrm{ev} _r,\mathrm{ev} _0 : \mathbb{Z}[x] \to R$.
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\mathbb{Z}[x]\arrow[r, shift left, "\mathrm{ev}_0"]\arrow[r, shift right, "\mathrm{ev}_r"']&R\arrow[r, "\phi "]&S
+	\end{tikzcd}\]
+	Let $x\in \mathbb{Z}[x]$, and note that $\mathbb{Z}$ can be viewed as a subset of $\mathbb{Z}[x]$ by the inclusion map $\mathbb{Z}\hookrightarrow \mathbb{Z}[x]$. There are two cases. If $x\in\mathbb{Z}$, then by proposition \ref{prp:3.2.1}, $\mathrm{ev}_0(x)=\mathrm{ev}_r = \iota(x)$ is the unique ring homomorphism $\mathbb{Z}\to R$. If $x\in \mathbb{Z}[x]\setminus\mathbb{Z}$, then once again the action on the coefficients is the same, and we need to look only at the action on the variable $x$. Note that $(\phi \circ \mathrm{ev}_0)(x) = 0 = \phi (r)=\left( \phi \circ \mathrm{ev}_r \right) (x)$. Therefore, $\phi \circ \mathrm{ev}_0=\phi \circ \mathrm{ev}_r$. Since $\phi $ is a monomorphism, we have $\mathrm{ev}_0=\mathrm{ev}_r$. Therefore, $0=r$, and $\ker \phi = \left\{ 0 \right\} $.
+
+	$(b\implies c)$ Let $\ker \phi =\left\{ 0 \right\} $, and let $r,s\in R$ such that $\phi (r)=\phi (s)$. It follows that
+	\[
+		\phi (r)=\phi (s)\implies \phi (r-s)=0 \implies r-s\in \ker \phi \implies r-s=0
+	.\]
+	Therefore, $\phi $ is injective.
+
+	$(c\implies a)$ Let $\phi $ be injective. Then $\phi $ is a monomorphism in $\mathsf{Set}$. Since all morphisms in $\mathsf{Ring}$ are also morphisms in $\mathsf{Set}$, we  have that $\phi $ is a monomorphism in $\mathsf{Ring}$.
+\end{proof}
+\begin{definition}[Subring]\label{dfn:3.2.3}
+	A subring $S$ of a ring $R$ is a ring $S$ such that $S\subseteq R$ and the inclusion map $S\hookrightarrow R$ is a ring homomorphism.
+\end{definition}
+
+Equivalently, $S$ is a subring of $R$ if $S\subseteq R$ is a subset containing $1_R$, and $S$ satisfies the ring axioms given the operations inhereted from $R$. Note that under this definition, $\left\{ 0 \right\} $ is not a subring of nontrivial rings, since $0\neq 1_R$ unless in the trivial case.
+
+There is a strange but important distinction between $\mathsf{Ring}$ and $\mathsf{Grp}$, concerning epimorphisms. We saw in $\mathsf{Set}$, $\mathsf{Grp}$, and $\mathsf{Ab}$, that epimorphisms are simply surjective morphisms. However, in $\mathsf{Ring}$, epimorphisms don't need to be surjective. Consider the inclusion $\iota : \mathbb{Z} \hookrightarrow \mathbb{Q}$. Clearly $\iota $ is not surjective, and thus is not an epimorphism in $\mathsf{Set}$ or $\mathsf{Ab}$, but we can show it is an epimorphism of rings. Let $\alpha_1,\alpha_2 : \mathbb{Z} \to R$ be ring homomorphisms such that $\alpha_1\iota =\alpha_2\iota $. Note that these ring homomorphisms must be equivalent on $\mathbb{Z}$, since $\mathbb{Z}$ is initial, and note that for all  rational numbers, we have
+\[
+	\alpha_i \left( \frac{a}{b} \right) =\alpha(a)\alpha(b)^{-1}
+.\]
+Therefore, $\alpha_1 = \alpha_2$. Therefore, $\iota $ is an epimorphism. This means in $\mathsf{Ring}$, a morphism can be both epi and mono, yet not an isomorphism.
+
+\subsection{Products}
+Products exist in $\mathsf{Ring}$. The product of two rings can be defined by endowing the direct product of groups $R_1\times R_2$ with componentwise multiplication. Note that this is \emph{not the only ring structure} that can be defined on the direct product of the underlying groups, as we have mentioned previously you can define a field structure on $\mathbb{Z}/p\mathbb{Z}\times \mathbb{Z}/p\mathbb{Z}$, but interpreting this as a product of rings is not a field, since $(1,0)\cdot (0,1)=(0,0)$ are zero divisors.
+
+Coproducts are difficult to develop in a general sense without tensor products, since defining a canonical projection onto it in the natural way is difficult, and we will have basically forgotten about this question by the time we develop those. We will do simple examples in the exercises, however.
+
+\subsection{$\End_{\mathsf{Ab}}( G ) $}
+The endomorphism group of an abelian group can be viewed as a ring, by taking function composition to be multiplication. Checking that these satisfy the ring axioms is trivial.
+\begin{proposition}\label{prp:3.2.3}
+	As rings, $\End_{\mathsf{Ab}}( \mathbb{Z} ) \cong \mathbb{Z}$.
+\end{proposition}
+\begin{proof}
+	Consider the map $\phi : \End_{\mathsf{Ab}}( \mathbb{Z} )  \to \mathbb{Z}$ defined by $\alpha \mapsto \alpha (1)$. By definition of addition in $\End_{\mathsf{Ab}}( \mathbb{Z} ) $, we have
+	\[
+		(\alpha +\beta )(1)=\alpha (1)+\beta (1)
+	.\]
+	Since for all $n\in\mathbb{Z}$, $\alpha (n)=n\alpha (1)$, we have
+	\[
+		\phi (\alpha \beta )=(\alpha \circ \beta )(1)=\alpha (\beta (1))=\alpha (1)\beta (1)=\phi (\alpha )\phi (\beta )
+	.\]
+	Finally, define $\psi : \mathbb{Z} \to \End_{\mathsf{Ab}}( \mathbb{Z} ) $ as the map $a\mapsto \alpha $, where $\alpha $ is defined by $n\mapsto an$. We have
+	\[
+		(\phi \circ \psi )(n)=\phi (\alpha)=\alpha (1)=1n=n
+	.\]
+	Additionally,
+	\[
+		(\psi \circ \phi )(\alpha )=\psi (\alpha (1))=\beta ,
+	\]
+	where $\beta(n)=n\alpha (1)=\alpha (n)$.
+\end{proof}
+Endomorphism rings of various structures, such as groups and vector spaces, are arguably the most important class of rings. In fact, every ring $R$ interacts with the ring of endomorphisms of the underlying abelian group. For all $r\in R$, define left multiplication by r as the map $\lambda_r$, and right multiplication $\mu _r$. We can then show a ring analogue of Cayley's theorem.
+\begin{proposition}\label{prp:3.2.4}
+	Let $R$ be a ring. Then the map $\lambda : R \to \End_{\mathsf{Ab}}( R ) $ given by $r\mapsto \lambda_r$ is an injective ring homomorphism.
+\end{proposition}
+\begin{proof}
+	Fix some $r\in R$. We have
+	\[
+		\lambda_r(a+b)=r(a+b)=ra+rb=\lambda_r(a)+\lambda_r(b)
+	.\]
+	Therefore, $\lambda_r\in \End_{\mathsf{Ab}}( R ) $. The function $\lambda $ is clearly injective; let $\lambda_r=\lambda_s$. Then $\lambda_r(1)=r=s=\lambda_s(1)$. Moreover, $\lambda_1(x)=x$ is trivially the identity map. We must show $\lambda $ satisfies the other two properties of ring homomorphisms. For all $a\in R$, we have
+	\[
+		\lambda (r+s)(a)=\lambda_{r+s}(a)=(r+s)(a)=ra+sa=\lambda_r(a)+\lambda_s(a)
+	.\]
+	Additionally, we have
+	\[
+		\lambda(rs)(a)=\lambda_{rs}(a)=(rs)(a)=\lambda_r(sa)=(\lambda_r\lambda_s)(a)=(\lambda(r)\lambda(s))(a)
+	.\]
+	Therefore, $\lambda $ is a ring homomorphism.
+\end{proof}
+
+It will be shown in the exercises that $\mu $ is not quite a ring homomorphism, because $\mu_{rs}=\mu_s \circ \mu_r$. It would be a ring homomorphism if the direction of multiplication were reversed.

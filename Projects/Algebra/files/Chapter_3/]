@@ -1,0 +1,102 @@
+\section{Complexes and Homology}
+Oftentimes, instead of dealing with a single module, we have to deal with an entire sequence of modules. For example, a reall manifold of dimension $d$ has a homology group for all dimensions $0$ to $d$. The language of \emph{homological algebra} will allow us to deal with sequences of modules. We will study this further in chapter 9, but will introduce it here.
+\subsection{Complexes and Exact Sequences}
+\begin{definition}[Chain Complex]\label{dfn:3.7.1}
+	A \emph{chain complex}, or for simplicity, a \emph{complex} is a sequence of $R$-modules and $R$-module homomorphisms
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\cdots \arrow[r, "d_{i+2}"]&M_{i+1}\arrow[r, "d_{i+1}"]&M_{i}\arrow[r, "d_i"]&M_{i-1}\arrow[r, "d_{i-1}"]&\cdots
+	\end{tikzcd}\]
+	such that for all $i$, $d_i\circ d_{i+1}=0$. We denote a complex as $(M_{\bullet},d_{\bullet})$, or for simplicity, $M_{\bullet}$.
+\end{definition}
+
+Tails of a complex can be infinite in both directions. We generally also omit tails of $0$. Other conventions are also used. For example, having the indicies increase instead of decrease yields what is known as a cochain complex, and the homology of this complex is called a cohomology. We will use this convention in chapter 9, but for now, the differences are immaterial.
+
+The homomorphisms $d_i$ are called \emph{differentials}, due to important applications in geometry. Note that the requirement $d_i\circ d_{i+1}=0$ is equivalent to the requirement that $\operatorname{im}d_{i+1}\subseteq \ker d_i $. The book continues with a very nice picture that I don't feel like recreating. The idea behind a homology is to `measure' the difference between the image of $d_{i+1}$ and the kernel of $d_i$. We say a complex is \emph{exact} at $M_i$ if it has no homology there; that is,
+\[
+	\operatorname{im}d_{i+1}=\ker d_i 
+.\]
+
+For example, if $M_i$ is trivial, then the complex is necessarily exact at $M_i$, since $d_{i+1}(M_{i+1})=\left\{ 0 \right\} =\ker d_i$. A complex is called an \emph{exact sequence} if it is exact at all of its modules.
+
+\begin{proposition}\label{prp:3.7.1}
+	A complex
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\cdots\arrow[r]&0\arrow[r]&L\arrow[r, "\alpha "]&M\arrow[r]&\cdots
+	\end{tikzcd}\]
+	is exact at at $L$ if and only if $\alpha $ is a monomorphism. Additionally, a complex
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		\cdots\arrow[r]&M\arrow[r,  "\beta "]&N\arrow[r]&0\arrow[r]&\cdots
+	\end{tikzcd}\]
+	is exact at $N$ if and only if $\beta $ is an epimorphism.
+\end{proposition}
+\begin{proof}
+	(1) Since the trivial homomorphism $0\to L$ has an image of  $\left\{ 0 \right\} $, for it to be exact at $M$ we require $\ker \alpha =\left\{ 0 \right\} $, and thus $\alpha $ is a monomorphism.
+
+	(2) For it to be exact at $N$, we require the image of $\beta $ to be the kernel of the trivial morphism $N\to 0$, and thus $\operatorname{im} \beta =N$. Equivalently,
+	\[
+		\frac{N}{\beta (N)}=\left\{ 0 \right\} 
+	.\]
+	Therefore, $\coker \beta $ is trivial.
+\end{proof}
+\begin{definition}[Short Exact Sequence]\label{dfn:3.7.2}
+	A short exact sequence is an exact complex of the form
+	\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+		0\arrow[r]&L\arrow[r, "\alpha "]&M\arrow[r, "\beta "]&N\arrow[r]&0
+	\end{tikzcd}\]
+\end{definition}
+
+The only extra information here that was not included in the proposition is that the sequence, to be exact at $M$, must have $\alpha (L)=\ker \beta $. By corollary \ref{cor:3.5.1}, we have
+\[
+	N\cong \frac{M}{\ker \beta }=\frac{M}{\alpha (L)}=\frac{M}{\coker \alpha }
+.\]
+We can then identify $L$ with a submodule $\alpha (L)$ of $M$, since $\alpha $ is necessarily mono, and then we can identify $N$ with the quotient $M /\alpha (L)$, since $\beta $is necessarily epi.
+
+Short sequences are apparently common in nature. For example, every homomorphism $\phi : M \to M'$ gives rise to the short sequence
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r]&\ker \phi \arrow[r, hook, "\iota "]&M\arrow[r, two heads, "\phi "]&\phi (M)\arrow[r]&0
+\end{tikzcd}\]
+
+This observation allows us to break long complexes into many short exact sequences, which simplifies some proofs.
+
+\[\begin{tikzcd}[row sep=2.5em, column sep=0.5em]
+	&&0\arrow[dr]&&0\\
+	&&&\operatorname{im}d_{i+1} =\ker d_i\arrow[ru]\arrow[dr]\\
+	M_{i+2}\arrow[rr, "d_{i+2}"]\arrow[dr]&&M_{i+1}\arrow[rr, "d_{i+1}"']\arrow[ur]&&M_{i}\arrow[rr, "d_i"]\arrow[dr]&&M_{i-1}\\
+					      &\operatorname{im} d_{i+2}=\ker d_{i+1}\arrow[ru]\arrow[dr]&&&&\operatorname{im} d_{i}=\ker d_{i-1}\arrow[dr]\arrow[ur]\\
+	0\arrow[ru]&&0&&0\arrow[ru]&&0
+\end{tikzcd}\]
+
+This large diagram illustrates this idea. The diagonals are short exact sequences of the exact form we just considered, and there is one for each differential.
+
+\subsection{Split Exact Sequences}
+
+One important class of short exact sequences arises when considering the direct sum $M_1\oplus M_2$. More specificly, we consider the projection $M_1\oplus M_2 \to M_2$, and have the exact sequence
+\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+	0\arrow[r]&M_1\arrow[r]&M_1\oplus M_2\arrow[r]&M_2\arrow[r]&0
+\end{tikzcd}\]
+We then identify $M_1$ with the kernel of the projection. We say this sequence `splits'. More generally, a short exact sequence \emph{splits} if it is isomorphic to one of these sequences in that there is a commutative diagram
+\[\begin{tikzcd}[row sep=2.5em, column sep=2.5em]
+	0\arrow[r]&M_1\arrow[d, "\sim "]\arrow[r]&N\arrow[d, "\sim "]\arrow[r]&M_2\arrow[d, "\sim "]\arrow[r]&0\\
+	0\arrow[r]&M_1'\arrow[r]&M_1'\oplus M_2'\arrow[r]&M_2'\arrow[r]&0
+\end{tikzcd}\]
+in which all vertical maps are isomorphisms. As we will see in the exercises, we actually only need there to exist a $R$-module homomorphism $N\to M_1'\oplus M_2'$ for the isomorphisms to be forced.
+
+Splitting sequences allows us to answer an important question; that is, what is the condition for a homomorphism having a left/right inverse? This must be stronger than being mono/epi, and split sequences allow us to find the condition.
+\begin{proposition}\label{prp:3.7.2}
+	Let $\phi : M \to N$ be an $R$-module homomorphism. Then
+	\begin{itemize}
+		\item $\phi $ has a left-inverse if and only if the sequence
+			\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+				0\arrow[r]&M\arrow[r, "\phi "]&N\arrow[r]&\coker \phi \arrow[r]&0
+			\end{tikzcd}\]
+			splits.
+		\item $\phi $ has a right-inverse if and only if the sequence
+			\[\begin{tikzcd}[row sep=2.5em, column sep=3.5em]
+				0\arrow[r]&\ker \phi \arrow[r]&M\arrow[r, "\phi "]&N\arrow[r]&0
+			\end{tikzcd}\]
+			splits.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	We begin by proving the statement for left-inverses. Suppose the sequence splits. Then $N\cong M \oplus M'$ for some module $M'\cong \coker \phi $.
+\end{proof}
