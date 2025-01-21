@@ -1,0 +1,57 @@
+\chapter{Introduction}
+\lecture{1}{Tue 21 Jan 2025 14:00}{Stern-Gerlach Experiments}
+
+The Stern-Gerlach experiments were done in the 20s, while quantum physics was still being developed. We are given a set of silver atoms, which we will consider for this experiment to be an extremely tiny bar magnet. It has a dipole magnetic moment (vector) $\boldsymbol{\mu}  $. The experiment takes a large magnet (image in notes, ill draw later) with a nonconstant magnetic field between north and south. The silver atom is then shot through the $\mathbf{B}$ field, and we look at where it comes out.
+
+Classical mechanics says the magnetic moment $\boldsymbol{\mu} $ passing through the field $\mathbf{B}$ should deflect it as follows. Energy is given by
+\[
+	E=-\boldsymbol{\mu} \cdot \mathbf{B}
+.\]
+We then get the force
+\[
+	\mathbf{F}=-\nabla E
+.\]
+For example, if $\mathbf{B}=B_z(z) \mathbf{\hat{z}}$ is slightly varying along the $z$ direction, then
+\[
+	\mathbf{F}=-\partial_z B_z \mu _z
+.\]
+Note here that $\partial_z$ is the partial wrt $z$. New notation!!!
+
+The force then depends only on the component of the magnetic moment in the $z$-direction. $F\propto \boldsymbol{\mu} \cdot \mathbf{\hat{z}}=\left| \boldsymbol{\mu}   \right| \cos \theta $, where $\theta $ is the angle formed with the $z$-axis. So
+\[
+	F_z = \left| \boldsymbol{\mu}  \right| \frac{\partial B_z}{\partial z} \cos \theta 
+.\]
+Since the angle of the moments is distributed randomly, we would expect the distribution of resultant locations to be constant, since each magnetic moment corresponds to a new location, and since the angles should be distributed evenly in $\theta $, they should be distributed evenly through the locations. However, even if they weren't \emph{purely} random, we would get \emph{some distribution}. It would be weird if we didn't see a distribution. So of course we don't see a distribution, because physics.
+
+When we actually do the experiment, they only ever come out at two points, a top point and a bottom point. Since we know what $B_z(z)$ is, and since we know the mass of a silver atom, we can find the force and thus find the exact magnetic moment. We find that $\mu_z = \pm \left| \boldsymbol{\mu}  \right| $ always. Even though the angles were randomly distributed, it always shows up as two possibilities.
+
+We say it is quantized. In classical mechanics, we have a continuous distribution, but in quantum mechanics, the possibilities are all quantized into two possibilities. In quantum physics, we will talk a lot about the state of a system, and $\ket{\Psi  }$ will denote the state of some system. The symbol $\ket{\cdot }$ is called a ``ket''.
+
+Classically, the state is the direction of the magnetic moment, since that determines all the information we need. However, in quantum mechanics, we cannot describe the state of a system using classical physics, which is why we use kets to denote it. They are a completely new thing that doesn't show up in classical mechanics, and we will describe precisely what a ket is as we continue.
+
+Since there are only two possibilities in the experiment, there must be only two states. We can find that those two states are
+\begin{itemize}
+	\item $\ket{+} $ is the state where $\mu_z = +\left| \boldsymbol{\mu}  \right| $;
+	\item $\ket{-}$ is the state where $\mu _z = -\left| \boldsymbol{\mu}  \right| $;
+\end{itemize}
+where again $\left| \boldsymbol{\mu}  \right| $ is  the moment of a silver atom.
+
+Another thing to note is that the distribution is even throughout the possible states; $50\%$ of the time we see $\ket{+}$, and the rest of the time we measure a state of $\ket{-}$.
+
+Experiment two takes all the atoms that have already been deflected, and passes them through \emph{another} magnetic field. (draw later) All the up ones keep going up, and all the down ones keep going down. Basically we didn't change anything so it stays the same. Makes sense. Ok technically we only re-measure $\ket{+}$ states.
+
+Experiment 3 starts off the same way as experiment 1, and then proceeds \emph{similarly} to experiment 2, but instead of measuring them in the $\mathbf{\hat{z}}$ axis again, we change the magnetic field to point in the $\mathbf{\hat{x}}$ direction. The $z$ direction isn't special or anything, so we can do this. Classically, we would note that $\mu_z = \left| \boldsymbol{\mu}  \right| $, so we would assume that $\mu _x=0$, since the entire moment is used up in the $z$-component. BUT of course we get a weird answer. We once again see exactly two spots hit; exactly 50\% of the time they end up in the $+x$-direction, and $50\%$ of the time they go to the $-x$-direction. So the conclusion is the moment has multiple distinct components; orthogonal directions correspond to distinct components. We call these states $\ket{+}_x$ and $\ket{-}_x$, respectively.
+
+Experiment 3 continues by measuring the atoms once again. So we measured them in $z $ and found them to be distributed 50/50 in two spots. We took the $\ket{+}$ state and measured them in the $x$-direction and found another 50/50 distribution. However, we already measured them as $\ket{+}$ in the $z$-direction, so we expect them to still be in this state. This is like if we took a black sock, sorted it based on whether it was striped or not, then checked to see if it was still black. However, we \emph{DON'T SEE THIS}. We see instead another 50/50 distribution. The particles are no longer still $\ket{+}$, but instead it's back to a completely random distribution.
+
+So what does this mean? Measuring in $z $ repeatedly keeps it in the same state, but when we measured it in the $x$ component, it changed. Later, we will explain how we know this is actually what happens, and how we know this isn't the experimental machine just being shit. So measuring it in one component changed the other component. Additionally, if we only change the direction a little, rather than orthogonally, we still measure a new distribution, it's just not 50/50. So it is the act of measurement itself that changes the state of the particle. In classical physics, measuring something doesn't change it. Welcome to quantum physics, where the state $\ket{\Psi }$ cannot have a well-defined magnetic moment in two directions at the same time.
+
+One last point, which we will discuss later. The magnetic moment $\boldsymbol{\mu} $ is related to the spin $\mathbf{S}$ by the relation
+\[
+	\boldsymbol{\mu} =\frac{ge}{2m_e}\mathbf{S}
+.\]
+The symbol $g$ is some constant. The spin $\mathbf{S}$ is the angular momentum of the electron when it's sitting still. Moment pointing up correspnds to
+\[
+	S_z = \frac{\hbar}{2}
+.\]
+

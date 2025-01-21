@@ -1,0 +1,811 @@
+\documentclass[11pt, letterpaper]{report}
+\input{../../bachelor_2/Semester_1/preamble.tex}
+\title{MA 711 (Real Analysis) Notes}
+\date{Fall 2024}
+\usepackage{titlepageBU}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\begin{document}
+\maketitle
+\begin{abstract}
+	This class was taught by Mark Kon at Boston University during the Fall 2024 semester. I attended lectures starting on November 17th, and continuing until the final lecture on December 10th. We reviewed some topology on the first day, and then generalized linear algebra to infinite dimensional spaces, specifically for vector spaces over the field of real numbers. Many of the results can be generalized further for complex vector spaces, or even arbitrary $\mathbb{F}$-spaces, but we did not consider those spaces in this class, as this is \emph{real} analysis.
+
+	In addition to attending classes, I helped a friend with his homework on two occasions (and somehow I was unironically helpful despite having never taken topology or analysis???).
+\end{abstract}
+\setcounter{page}{0}
+\tableofcontents
+\chapter{Topological Spaces}
+\begin{definition}[Metric Space]\label{dfn:0}
+	Let $X$ be a set, and let $d : X\times X \to \mathbb{R}$ be a map satisfying
+	\begin{itemize}
+		\item For any $x\in X$, $d(x,x)=0$.
+		\item (Positivity) For $x\neq y$, then $d(x,y)>0$.
+		\item (Symmetry) For $x,y\in X$, $d(x,y)=d(y,x)$.
+		\item (Triangle Inequality) For $x,y,z\in X$, $d(x,z)\leq d(x,y)+d(y,z)$.
+	\end{itemize}
+	Then the pair $(X,d)$ is called a metric space, and $d$ is called a metric on $X$.
+\end{definition}
+\begin{definition}[Topological Space]\label{dfn:1}
+	Let $X$ be a set, and let $\mathcal{T} \subseteq \mathcal{P} (X)$ be a collection of subsets of $X$. Then the pair $(X,\mathcal{T} )$ is a topological space if the following axioms are satisfied:
+	\begin{enumerate}
+		\item $\varnothing,X\in \mathcal{T} $.
+		\item $\mathcal{T} $ is closed under countably infinite unions.
+		\item $\mathcal{T} $ is closed under finitely many intersections.
+	\end{enumerate}
+\end{definition}
+An example of a topological space is $\mathbb{R}$, under the topology induced by the euclidean metric. That is, for any $x\in\mathbb{R}$, define $B_x(r)=\left\{ y\in\mathbb{R} \mid \left\lVert x-y \right\rVert <r \right\} $. Then define $\mathcal{B} =\left\{ B_x(r) \mid x,r\in\mathbb{R} \right\} $. A valid topology $\mathcal{T} $ on $\mathbb{R}$ is simply any $B\in \mathcal{B} $, or any set that can be represented as either a finite intersection or countably infinite union of sets in $\mathcal{T} $.
+\begin{remark}
+	The definition of $\mathcal{T} $ is very similar to that of a $\sigma $-algebra, and hence the definition of a topological space is similar to that of a measurable space. Furthermore, a topological space is simply an abstraction of a metric space. Instead of necessarily having open balls, we need only have open sets now.
+\end{remark}
+\begin{definition}[Open Set]\label{dfn:2}
+	Let $(X,\mathcal{T} )$ be a topological space. Then any $S\in \mathcal{T} $ is called an open set.
+\end{definition}
+\begin{definition}[Continuous Function]\label{dfn:3}
+	Let $(X,\mathcal{T} )$ and $(Y,\mathcal{S} )$ be topological spaces. Then a map $f : X \to Y$ is called continuous if for all open sets $V\subseteq Y$, the preimage $f^{-1}(V)=\left\{ x\in X \mid f(x)\in V \right\} $ is open in $X$.
+\end{definition}
+\begin{definition}[Homeomorphism]\label{dfn:4}
+	Let $(X,\mathcal{T} )$ and $(Y,\mathcal{S} )$ be topological spaces, and let $f : X \to Y$ be a function satisfying the following properties:
+	\begin{enumerate}
+		\item $f$ is bijective.
+		\item $f$ is continuous.
+		\item $f^{-1}$ is continuous.
+	\end{enumerate}
+	Then we say $f$ is a homeomorphism.
+\end{definition}
+Homeomorphisms are isomorphisms in the category of topological spaces. That means we can treat homeomorphic spaces as being precisely the same object, in the same way we would treat isomorphic groups as the same group. For example, suppose we have a statement about $X$. Using the fact that a homeomorphism is not only a bijection, but its continuous inverse means you can think of it as a bijection of the topology itself, we can treat the topologies as the same, and make the same statement about $f(X)=Y$.
+\begin{definition}[Neighborhood]\label{dfn:5}
+	Let $(X,\mathcal{T} )$ be a topological space, and let $x\in X$. Then an open subset $N\subseteq X$ is called a \textbf{neighborhood} of $x$ if $x\in N$.
+\end{definition}
+\begin{definition}[Hausdorff]\label{dfn:6}
+	Let $(X,\mathcal{T} )$ be a topological space. Then we say the space is Hausdorff if for all distinct $x,y\in X$, there exist neighborhoods $N_x,N_y\subset X$ of $x$ and $y$, respectively, such that $N_x\cap N_y=\varnothing$.
+\end{definition}
+Once again, a great example of a Hausdorff space is $\mathbb{R}$. Let $x,y\in\mathbb{R}$ be distinct points. Using our previous topology given by the metric, we know that any open subset $(a,b)\subset \mathbb{R}$ with $a\neq b$ is open in $\mathbb{R}$. Let $\left\lVert x-y \right\rVert =n$. Then the sets $B_x(n / 4),B_y(n  /4)$ are by definition neighborhoods of $x$ and $y$, but they are also obviously disjoint.
+\begin{definition}[Compact Space]\label{dfn:7}
+	Let $(X,\mathcal{T} )$ be a topological space. If every open cover of $X$ has a finite subcover, we say $X$ is compact. That is, if for all collections $C$ of open subsets satisfying
+	\[
+		\bigcup_{S\in C}S=X 
+	,\]
+	there exists a finite subcollection $F\subseteq C$ such that
+	\[
+		\bigcup_{S\in F}S=X 
+	.\]
+\end{definition}
+I honestly don't know what the intuition behind compact spaces is, so I'll just leave this here and come back to it when I take topology next semester.
+\begin{definition}[Closed Set]\label{dfn:8}
+	Let $(X,\mathcal{T} )$ be a topological space. Then a set $A\subseteq X$ is closed if $X\setminus A$ is open in $\mathcal{T} $.
+\end{definition}
+\begin{definition}[Closure]\label{dfn:9}
+	Let $(X,\mathcal{T} )$ be a topological space, and let $S\subseteq X$. Then the closure of $S$, denoted $\overline{S} $, is $S\cup \partial S$, where $\partial S$ denotes the boundary of $S$.
+\end{definition}
+\begin{theorem}\label{thm:1}
+	Let $(X,\mathcal{T} )$ and $(Y,\mathcal{S} )$ be topological spaces. Let $f : X \to Y$ be a continuous bijection. If $X$ is compact and $Y$ is Hausdorff, then $f$ has a continuous inverse.
+\end{theorem}
+\begin{proof}
+	this is supposed to be easy, so it was left as an exercise. should be fun.
+\end{proof}
+An application of this theorem is that $[0,1]$ is homeomorphic to $\mathbb{R}$. I think. I'm not sure how to show $[0,1]$ is compact though.
+\begin{definition}[Sequentially Compact]\label{dfn:10}
+	A space $X$ is sequentially compact if every sequence $\left\{ x_k \right\}_{k=1}^\infty$ in $X$ has at least one convergent subsequence  $\left\{ x_{k_i} \right\}_{i=1}^\infty$.
+\end{definition}
+\begin{theorem}\label{thm:2}
+	Let $(X,d)$ be a metric space. Then sequentially compact and compact are the same.
+\end{theorem}
+\begin{proof}
+	psure this one is hard
+\end{proof}
+\begin{definition}[Dense]\label{dfn:11}
+	Let $(X,\mathcal{T} )$ be a topological space. We say a set $Y\subseteq X$ is dense in $X$ if for all open sets $S\in \mathcal{T} $, there is at least one $y\in Y$ such that $y\in S$.
+\end{definition}
+\begin{definition}[Second Countable]\label{dfn:12}
+	Let $(X,\mathcal{T} )$ be a topological space. If there exists a countable subset $Y\subset X$ that is dense in $X$, then we say $X$ is second countable.
+\end{definition}
+An example is $\mathbb{Q}\subset \mathbb{R}$.
+
+\begin{theorem}\label{thm:3}
+	Let $(X,\mathcal{T} )$ be a second countable topological space. Then sequentially compact is equivalent to compactness.
+\end{theorem}
+\begin{proof}
+	proof left as an exercise again. ``trivial''.
+\end{proof}
+\begin{definition}[Normal]\label{dfn:13}
+	Let $(X,\mathcal{T} )$ be a topological space. Then $X$ is normal if for all closed, disjoint $A,B\subset X$, there exist open neighborhoods of $A$ and $B$ that are also disjoint.
+\end{definition}
+Now we will prove Urysohn's Lemma. This proof requires various lemmas.
+\begin{lemma}\label{lma:1}
+	Let $(X,\mathcal{T} )$ be a topological space, let $A$ be a closed set, and let $U$ be an open set containing $A$. Then there exists an open set $O\subset U$ containing $A$. That is, $A\subset O\subset U$.
+\end{lemma}
+\begin{proof}
+	this isnt that hard to prove.
+\end{proof}
+\begin{lemma}\label{lma:2}
+	Let $(X,\mathcal{T} )$ be a normal topological space, let $A\subset X$ be closed, and let $U\subseteq X$ be open and contain $A$. Then for all $\lambda \in [0,1]$, there exists an open set $O_{\lambda }$ such that
+	\begin{itemize}
+		\item If $\lambda_i<\lambda _j$, then $O_{\lambda _i}\subset \overline{O_{\lambda _i}} \subset O_{\lambda _j}$.
+		\item $A\subset O_{\lambda }\subset U$.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	i drew the picture
+\end{proof}
+\begin{theorem}[Urysohn's Lemma]\label{thm:4}
+	Let $(X,\mathcal{T} )$ be a topological space, and let $A,B\subset X$ be disjoint, closed sets. Then there exists a continuous map $f : X \to \mathbb{R}$ such that
+	\begin{itemize}
+		\item $f(x)=0$ for all $x\in A$.
+		\item $f(x)=1$ for all $x\in B$.
+		\item $f(x)\in(0,1)$ otherwise.
+		\item $f(x)$ is continuous.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	The construction is just
+	\[
+		f(x)=\inf \left\{ \lambda \mid x\in O_{\lambda } \right\} 
+	,\]
+	with the definitions from lemma \ref{lma:2}.
+\end{proof}
+\begin{theorem}[Tietze Extension]\label{thm:5}
+	Let $(X,\mathcal{T} )$ be a normal topological space, and let $F\subset X$ be a closed set. Suppose $f : F \to \mathbb{R}$ is a continuous function with $a\leq f(x)\leq b$ for some $a,b\in\mathbb{R}$. Then there exists an extension of $f$ to the entire space; $g : X \to [a,b]$ that is continuous.
+\end{theorem}
+\begin{proof}
+	left as an exercise.
+\end{proof}
+\chapter{Vector Spaces}
+\section{$L^p$ Spaces}
+We have previously explored vector spaces at length in linear algebra, and possibly even in abstract algebra. However, we want to specialize our explorations of linear algebra to function spaces, which is a large part of the field of \textbf{functional} \textbf{analysis}. Recall the definition of a vector space.
+\begin{definition}[Vector Space]\label{dfn:2.1}
+	Let $V$ be a set, $\mathbb{F}$ a field, and define the maps $+ : V\times V \to V$ and $\cdot : \mathbb{F}\times V \to V$. Then the tuple $(V,\mathbb{F},+,\cdot )$ is a vector space if and only if
+	\begin{enumerate}
+		\item $(V,+)$ is abelian.
+		\item There exists $1\in\mathbb{F}$ such that $1\mathbf{v}=\mathbf{v}$ for all $\mathbf{v}\in V$.
+		\item For all $a,b\in\mathbb{F}$ and $\mathbf{v}\in V$, $(ab)\mathbf{v}=a(b \mathbf{v})$.
+		\item For all $a\in\mathbb{F}$ and $\mathbf{u},\mathbf{v}\in V$, $a(\mathbf{u}+\mathbf{v})=a \mathbf{u}+a \mathbf{v}$.
+		\item For all $a,b\in\mathbb{F}$ and $\mathbf{v}\in V$, $(a+b)\mathbf{v}=a \mathbf{v}+b \mathbf{v}$.
+	\end{enumerate}
+\end{definition}
+We will usually call a space over $\mathbb{F}$ an $\mathbb{F}$-vector space. One important type of vector space is the $L^p$ space, which we will now define. First, we need to define the notion of ``almost everywhere'' in a precise, measure-theoretical manner.
+\begin{definition}[Almost Everywhere]\label{dfn:2.2}
+	Let $(X,\Sigma ,\mu )$ be a measure space, and let $P(x)$ be a property of $x$ for all $x\in X$. Then $P(x)$ is said to hold \emph{almost everywhere} if there exists a measureable set $N\in \Sigma $ such that $\mu (N)=0$, and $P(x)$ holds for all $x\in X\setminus N$.
+
+	Moreover, let $f : X \to \mathbb{R}$. Define the essential infimium as the maximum lower bound $a$ such that $f\geq a$ almost everywhere. Symbolically,
+	\[
+		\essinf = \left\{ a\in\mathbb{R} \mid \mu \left\{ x\in X \mid f(x)>a \right\} =0+ \right\} 
+	.\]
+	Define the essential supremium as the minimum upper bound $b$ such that $f\leq b$ almost everywhere. Symbolically,
+	\[
+		\esssup=\left\{ b\in\mathbb{R} \mid \mu \left\{ x\in X \mid f(x)<b \right\} =0 \right\} 
+	.\]
+\end{definition}
+These definitions are important for the formalism of the infinity norm, for reasons that might be made clear later. I don't know.
+\begin{definition}[$p$-norm]\label{dfn:2.3}
+	Let $(X,\Sigma ,\mu )$ be a measure space, and let $f : X \to \mathbb{R}$. Define $\left\lVert \cdot  \right\rVert _p$ as
+	\[
+		\left\lVert f \right\rVert _p\left( \int_X \left| f(x) \right| ^p \,\mathrm{d} x \right) ^{1 /p}
+	.\]
+	Moreover, define the infinity norm $\left\lVert \cdot  \right\rVert _\infty$ as
+	\[
+		\left\lVert f \right\rVert _{\infty}=\esssup f
+	.\]
+	That is, $\left\lVert f \right\rVert _\infty=a$ if $f(x)\leq a$ almost everywhere, with respect to the measure $\mu $.
+\end{definition}
+\begin{definition}[$L^p$-space]\label{dfn:2.4}
+	Let $(X,\Sigma ,\mu )$ be a measure space, and let $p\in\mathbb{R}^+\cup\left\{ +\infty \right\} $. Define $L^p(X)$ as the set
+	\[
+		L^p(X)=\left\{ f : X \to \mathbb{R} \mid \left\lVert f \right\rVert _p<\infty \right\} 
+	.\]
+\end{definition}
+\begin{definition}[Convex Function]\label{dfn:2.5}
+	A function $f : \mathbb{R} \to \mathbb{R}$ is called \textbf{convex} if it is convex up. A more formal definition of this is for any $x,y\in\mathbb{R}$ and $\lambda \in[0,1]$, $f(\lambda x+\left( 1-\lambda  \right) y)\leq \lambda f(x)+\left( 1-\lambda  \right) f(y)$.
+\end{definition}
+The motivation behind the formalism of a convex function is not as involved as it seems. Recall that a line between points $\mathbf{x}$ and $\mathbf{y}$ can be parametrized as the vector function $\mathbf{r}(t)=t\mathbf{x}+(1-t)\mathbf{y}$ for $t\in[0,1]$. This is the same idea, except we need only parametrize the interval $[x,y]$, and we are using $\lambda $ rather than $t$.
+
+Now consider the actual definition itself. Notice that $f(\lambda x+(1-\lambda )y)$ will only give us values in $f[x,y]$, and thus we only get a specific line segment. If the function is convex up, this line segment will be above the graph of $f$ for all $\lambda $, hence the definition.
+\begin{theorem}[Minkowski's Inequality]\label{thm:2.1}
+	Let $f,g\in L^p(X)$ for $p\geq 1$ and $X$ a measure space. Then
+	\[
+		\left\lVert f+g \right\rVert _p\leq \left\lVert f \right\rVert _p+\left\lVert g \right\rVert _p
+	.\]
+\end{theorem}
+\begin{proof}
+	apparently this is straightforward.
+\end{proof}
+\begin{lemma}[Young's Inequality]\label{lma:2.1}
+	Let $\alpha ,\beta >0$, and let $\lambda \in[0,1]$. Then
+	\[
+		\alpha^\lambda \beta ^{1-\lambda }\leq \lambda \alpha +\left( 1-\lambda  \right) \beta 
+	.\]
+\end{lemma}
+\begin{theorem}[Holder's Inequality]\label{thm:2.2}
+	Let $X$ be a measure space, and let $f\in L^p(X)$ and $g\in L^q(X)$. If $\frac{1}{p}+\frac{1}{q}=1$, then
+	\[
+		\int_X fg \,\mathrm{d} \mu \leq \left\lVert f \right\rVert _p\left\lVert g \right\rVert _q
+	.\]
+\end{theorem}
+\begin{proposition}\label{pro:2.1}
+	Let $(X,\Sigma ,\mu )$ be a measure space. Then $\left( L^p(X),\mathbb{R},+,\cdot  \right) $ is a vector space under the usual definitions.
+\end{proposition}
+\begin{proof}
+	Trivial except for closure under addition. Let $X$ be a measure space, and let $f,g \in L^p(X)$. By theorem \ref{thm:2.1}, $\left\lVert f+g \right\rVert_p\leq \left\lVert f \right\rVert _p+\left\lVert g \right\rVert _p$. Since $f,g\in L^p(X)$, we know $\left\lVert f \right\rVert _p,\left\lVert g \right\rVert _p$ are finite, and thus their sum is finite. Therefore, $f+g\in L^p(X)$.
+\end{proof}
+Here's a cool example of a random vector space. Let $X$ be a topological space, and let $C(X)$ be the set of continuous maps $X\to X$. Then $C(X)$ actually forms a vector space.
+\begin{definition}[Normed Space]\label{dfn:2.6}
+	Let $V$ be a vector space over $\mathbb{F}$. Let $\left\lVert \cdot  \right\rVert : V \to \mathbb{F}$ be a map satisfying
+	\begin{itemize}
+		\item $\left\lVert \mathbf{v} \right\rVert =\mathbf{0}$ if and only if $\mathbf{v}=\mathbf{0}$.
+		\item $\left\lVert \alpha \mathbf{v} \right\rVert =\left| \alpha  \right| \left\lVert \mathbf{v} \right\rVert $ for all $\alpha \in\mathbb{F}$ and $\mathbf{v}\in V$.
+		\item $\left\lVert \mathbf{v}+\mathbf{u} \right\rVert \leq \left\lVert \mathbf{v} \right\rVert +\left\lVert \mathbf{u} \right\rVert $.
+	\end{itemize}
+	Then we call $(V,\left\lVert \cdot  \right\rVert )$ a \textbf{normed} \textbf{linear} \textbf{space}.
+\end{definition}
+\begin{proposition}\label{prp:2.2}
+	The pair $\left( L^p(X),\left\lVert \cdot  \right\rVert _p \right) $ is a normed space.
+\end{proposition}
+\begin{proof}
+	I don't know how to prove the first property. For the finite case of the second, we have
+	\begin{align*}
+		\left\lVert \alpha f \right\rVert_p&=\left(\int_X \left| \alpha f \right|^p \,\mathrm{d} \mu \right)^{1 /p}\\
+						   &=\left( \int_X \left| \alpha  \right| ^p\left| f \right| ^p \,\mathrm{d} \mu  \right) ^{1/p}\\
+						   &=\left( \left| \alpha  \right| ^p \int_X \left| f \right|^p  \,\mathrm{d}\mu   \right) ^{1 /p}\\
+						   &=\left| \alpha  \right|  \left( \int_X \left| f \right| ^p \,\mathrm{d} \mu  \right) ^{1 /p}\\
+						   &=\left| \alpha  \right| \left\lVert f \right\rVert _p
+	.\end{align*}
+	For the infinite case, I have no idea. The third quality follows from theorem \ref{thm:2.1}.
+\end{proof}
+\begin{lemma}\label{lma:2.2}
+	Let  $V$ be a vector space over $\mathbb{F}$. Then $-\mathbf{v}=(-1)\mathbf{v}$.
+\end{lemma}
+\begin{proof}
+	Notice that $-1+1=0$ by definition of an inverse. We have
+	\[
+		1\mathbf{v}+(-1)\mathbf{v}=(1-1)\mathbf{v}=0\mathbf{v}=\mathbf{0}
+	.\]
+	Therefore, $(-1)\mathbf{v}=-\mathbf{v}$.
+\end{proof}
+\begin{proposition}\label{prp:2.3}
+	A normed vector space $(V,\left\lVert \cdot  \right\rVert )$ forms a metric space $(V,d)$ with $d(\mathbf{u},\mathbf{v})=\left\lVert \mathbf{u}-\mathbf{v} \right\rVert $.
+\end{proposition}
+\begin{proof}
+	By proposition \ref{prp:2.2}, definition \ref{dfn:2.6}, and definition \ref{dfn:2.1}, we have $d(\mathbf{0},\mathbf{0})=\left\lVert \mathbf{0}-\mathbf{0} \right\rVert =\left\lVert \mathbf{0} \right\rVert =\mathbf{0}$.
+
+	Now we show positive-definiteness. Let $\mathbf{v}\in V$. By definition \ref{dfn:2.1}, $\left\lVert \mathbf{0} \right\rVert =\left\lVert \mathbf{v}-\mathbf{v} \right\rVert $. By lemma \ref{lma:2.2}, $\left\lVert \mathbf{v}-\mathbf{v} \right\rVert =\left\lVert \mathbf{v}+(-1)\mathbf{v} \right\rVert $. By definition \ref{dfn:2.6},
+	\begin{align*}
+		\left\lVert \mathbf{v}+(-1)\mathbf{v} \right\rVert &\leq \left\lVert \mathbf{v} \right\rVert +\left\lVert (-1)\mathbf{v} \right\rVert \\
+								   &=\left\lVert \mathbf{v} \right\rVert +\left| -1 \right| \left\lVert \mathbf{v} \right\rVert \\
+								   &=\left\lVert \mathbf{v} \right\rVert +\left\lVert \mathbf{v} \right\rVert \\
+								   &=2\left\lVert \mathbf{v} \right\rVert 
+	.\end{align*}
+	Therefore, $\left\lVert \mathbf{0} \right\rVert \leq 2\left\lVert \mathbf{v} \right\rVert $. Since $\left\lVert \mathbf{0} \right\rVert =0$, we have $\left\lVert \mathbf{v} \right\rVert \geq 0$ for all $\mathbf{v}\in V$. By definition \ref{dfn:2.6}, $\left\lVert \mathbf{v} \right\rVert =\mathbf{0}$ if and only if $\mathbf{0}=\mathbf{v}$. Therefore, for $\mathbf{x}\neq \mathbf{y}$, by our knowledge of group theory we know that $\mathbf{x}-\mathbf{y}\neq \mathbf{0}$. Therefore, $\left\lVert \mathbf{x}-\mathbf{y} \right\rVert >0$ for all $\mathbf{x},\mathbf{y}\in V$.
+
+	Next, we show symmetry. Let $\mathbf{u},\mathbf{v}\in V$. By lemma \ref{lma:2.2}, $\left\lVert \mathbf{u}-\mathbf{v} \right\rVert =\left\lVert \mathbf{u}+(-1)\mathbf{v} \right\rVert $. By definition \ref{dfn:2.6},
+	\[
+		\left\lVert \mathbf{u}+(-1)\mathbf{v} \right\rVert =\left| -1 \right| \left\lVert (-1)\mathbf{u}+\mathbf{v} \right\rVert =\left\lVert (-1)\mathbf{u}+\mathbf{v} \right\rVert 
+	.\]
+	By lemma \ref{lma:2.2} and definition \ref{dfn:2.6},
+	\[
+		\left\lVert (-1)\mathbf{u}+\mathbf{v} \right\rVert =\left\lVert \mathbf{v}-\mathbf{u} \right\rVert 
+	.\]
+	Therefore, $d(\mathbf{u},\mathbf{v})=d(\mathbf{v},\mathbf{u})$.
+
+	Finally, we show the triangle inequality holds. Let $\mathbf{x},\mathbf{y},\mathbf{z}\in V$. By definition \ref{dfn:2.6} and definition \ref{dfn:2.1},
+	\begin{align*}
+		\left\lVert \mathbf{x}-\mathbf{z} \right\rVert &=\left\lVert \mathbf{x}-\mathbf{z}+\mathbf{0} \right\rVert \\
+							       &=\left\lVert \mathbf{x}-\mathbf{y}+\mathbf{y}-\mathbf{z} \right\rVert \\
+							       &=\left\lVert \left( \mathbf{x}-\mathbf{y} \right) +\left( \mathbf{y}-\mathbf{z} \right)  \right\rVert\\
+							       &\leq \left\lVert \mathbf{x}-\mathbf{y} \right\rVert +\left\lVert \mathbf{y}-\mathbf{z} \right\rVert 
+	.\end{align*}
+	Therefore, $d$ is a metric on $V$.
+\end{proof}
+\begin{definition}[Complete]\label{dfn:2.7}
+	A metric space $X$ is complete if every cauchy sequence in $X$ converges in $X$.
+\end{definition}
+\begin{definition}[Banach Space]\label{dfn:2.8}
+	If a normed linear space is complete when viewed as a metric space, then it is called a Banach space.
+\end{definition}
+Our goal now is to prove the Riesz-Fisher theorem, which is that $L^p(X)$ is a banach space. To do this, we need to consider many intermediary results.
+\begin{prev}\label{prv:1}
+	Given aspace measure space $(X,\Sigma ,\mu )$ with a measureable function $f : X \to \mathbb{R}$ such that $f(x)\geq 0$ for all $x$, then for $\lambda \in\mathbb{R}^*$,
+	\[
+		\mu \left\{ x \mid f(x)\geq \lambda  \right\} \leq \frac{1}{\lambda }\int_X f(x) \,\mathrm{d} \mu 
+	.\]
+	This is the Chebyshev inequality.
+\end{prev}
+\begin{lemma}[Bovel-Cantelli]\label{lma:2.3}
+	Let $(X,\Sigma ,\mu )$ be a measure spacce, and let $\left\{ E_n \right\}_{n=1}^\infty$ be an infinite set of measureable sets such that
+	\[
+		\sum_{i=1}^{\infty} \mu \left( E_i \right) <\infty
+	.\]
+	Then
+	\[
+		\mu \left\{ x \mid x\text{ is contained within an infinite number of the sets }E_n \right\} =0
+	.\]
+	More formally, but not quite formally,
+	\[
+		\mu \left\{ x\in X \mid \left| \left\{ E_n \mid x\in E_n \right\}  \right| =\infty \right\} =0
+	.\]
+\end{lemma}
+\begin{proof}
+	wtf how tf u do this
+\end{proof}
+\begin{definition}[Rapidly Cauchy]\label{dfn:2.9}
+	Let $X$ be a metric space. A sequence $\left\{ x_n \right\}_{n=1}^\infty$ is called \textbf{rapidly} \textbf{cauchy} if
+\[
+	\sum_{i=1}^{\infty} \varepsilon_i^2<\infty
+,\]
+	where $d(x_{i+1},x_i)=\varepsilon_i$.
+\end{definition}
+\begin{lemma}\label{lma:2.4}
+	If $\left\{ x_i \right\}_{i=1}^\infty$ is a cauchy sequence in a metric space $X$, then if there exists a convergent subsequence of $\left\{ x_i \right\} $ in $X$, then $\left\{ x_i \right\} $ converges in $X$.
+\end{lemma}
+\begin{proof}
+	idfk
+\end{proof}
+\begin{lemma}\label{lma:2.5}
+	If $X$ is a metric space, then all rapidly cauchy sequences are cauchy. Moreover, every cauchy sequence has a subsequence that is rapidly cauchy.
+\end{lemma}
+\begin{proof}
+	h
+\end{proof}
+\begin{corollary}\label{cor:2.1}
+	A metric space is complete if and only if any series
+	\[
+		\sum_{i=1}^{\infty} g_i
+	\]
+	that is absolutely convergent, i.e.
+	\[
+		\sum_{i=1}^\infty \left\lVert g_i \right\rVert <\infty
+	,\]
+	is automatically convergent as a series, meaning the partial sums converge.
+\end{corollary}
+\begin{proof}
+	h
+\end{proof}
+\begin{theorem}\label{thm:2.3}
+	Let $X$ be a measure space, and let $E\subseteq X$ be a measureable subset. Then every rapidly cauchy sequence in $L^p(E)$ converges. That is, $\left\{ f_n \right\}_{n=1}^\infty\to f(x)\in L^p(E)$, i.e.
+	\[
+		\lim_{n \to \infty} \left\lVert f-f_n \right\rVert_p=0
+	.\]
+	\textbf{THIS} \textbf{THEOREM} \textbf{HAS} \textbf{TO} \textbf{BE} \textbf{WRONG}
+\end{theorem}
+\begin{proof}
+	bro idk
+\end{proof}
+\begin{theorem}[Riesz-Fisher]\label{thm:2.4}
+	Let $X$ be a measurable space. Then $L^p(X)$ is a banach space.
+\end{theorem}
+\begin{proof}
+	By proposition \ref{prp:2.3}, $L^p(X)$ is a metric space. By lemma \ref{lma:2.5}, all cauchy sequences in $L^p(X)$ have rapidly cauchy subsequences. By theorem \ref{thm:2.3}, since $X\subseteq X$ is a measureable subset, all rapidly cauchy sequences in $L^p(X)$ converge in $L^p(X)$. By lemma \ref{lma:2.4}, all cauchy sequences in $L^p(X)$ converge. Therefore, $L^p(X)$ is Banach.
+\end{proof}
+\section{Operator Spaces}
+We now want to generalize our study of vector space beyond the $L^p$ spaces, although they will continue to be an important example. We will focus our studies on normed linear spaces and functions between vector spaces. We will also exclusively study real spaces.
+
+In linear algebra, a map $A$ between two spaces $X\to Y$ is generally called an \textbf{operator}.
+\begin{definition}[Linear Operator]\label{dfn:2.10}
+	Let $X,Y$ be vector spaces. A map $A : X \to Y$ is called \textbf{linear} if for all $\mathbf{x}\in X$, $A\left( \mathbf{x}+\mathbf{y} \right) =A(\mathbf{x})+A(\mathbf{y})$, and for all $\alpha \in \mathbb{F}$, $A(\alpha \mathbf{x})=\alpha A(\mathbf{x})$.
+\end{definition}
+
+An important question to ask is whether an operator is continuous, specifically with respect to the metric.
+\begin{definition}[Continuous Function (Metric)]\label{dfn:2.11}
+	Let $(X,d_X),(Y,d_Y)$ be metric spaces. A function $f : X \to Y$ is called continuous at a point $c\in X$ if for all $\varepsilon >0$, there exists a $\delta >0$ such that for all $x\in X$ satisfying $d_X(c,x)<\delta $, we have $d_y(f(c),f(x))<\varepsilon $.
+\end{definition}
+There is a theorem concerning this result, but first we must make a few definitions.
+\begin{definition}[Bounded]\label{dfn:2.12}
+	Let $\left( X,\left\lVert \cdot  \right\rVert _X \right) $ and $\left( Y,\left\lVert \cdot  \right\rVert _Y \right) $ be normed linear spaces. Then a map $A : X \to Y$ is called \textbf{bounded} if there exists some $\alpha \in\mathbb{R}$ such that $\left\lVert A \mathbf{x} \right\rVert _Y \leq \alpha \left\lVert \mathbf{x} \right\rVert _X$ for all $\mathbf{x}\in X$.
+\end{definition}
+We might then want to define the norm of an operator as this $\alpha $ scalar.
+\begin{definition}[Operator Norm]\label{dfn:2.13}
+	Let $X$ and $Y$ be normed linear spaces with norms $\left\lVert \cdot  \right\rVert _X,\left\lVert \cdot  \right\rVert _Y$, respectively. Let $A : X \to Y$ be a linear mapping. Define 
+	\[
+		\left\lVert A \right\rVert =\sup_{\mathbf{x}\in X}\frac{\left\lVert A \mathbf{x} \right\rVert_Y }{\left\lVert \mathbf{x} \right\rVert_X }
+	.\]
+\end{definition}
+\begin{proposition}\label{prp:2.4}
+	Let $(X,\left\lVert \cdot  \right\rVert _X)$ and $\left( Y,\left\lVert \cdot  \right\rVert _Y \right) $ be normed linear spaces. The linear map $A : X \to Y$ is continuous if and only if $A$ is bounded.
+\end{proposition}
+\begin{proof}
+	exercise
+\end{proof}
+\begin{definition}[Operator Space]\label{dfn:2.14}
+	Let $X,Y$ be normed linear spaces, and let $A,B : X \to Y$ be linear maps. Define addition between to operators as the map $\left( A+B \right) \mathbf{x}=A \mathbf{x}+B \mathbf{x}$. Define scalar multiplication as $\left( \alpha A \right) \mathbf{x}=\alpha \left( A \mathbf{x} \right) $ for any $\alpha \in\mathbb{R}$. Define the set
+	\[
+		\mathscr{L} \left( X,Y \right) =\left\{ A : X \to Y \mid \left\lVert A \right\rVert <\infty \right\} 
+	.\]
+	This is the operator space.
+\end{definition}
+\begin{proposition}\label{prp:2.5}
+	The space $(\mathscr{L}  (X,Y),\left\lVert \cdot  \right\rVert )$ is a normed linear space over $\mathbb{R}$, and forms a metric space with the induced metric.
+\end{proposition}
+\begin{proof}
+	By proposition \ref{prp:2.3}, it suffices to show $\mathscr{L}  (X,Y)$ is a normed linear space. Do later.
+\end{proof}
+
+A natural question to ask after our analysis of $L^p$ spaces is whether $\mathscr{L} (X,Y)$ is Banach.
+
+\begin{theorem}\label{thm:2.5}
+	Let $X,Y$ be normed linear spaces. If $Y$ is a Banach space, then $\mathscr{L} (X,Y)$ is a Banach space.
+\end{theorem}
+\begin{proof}
+	partial proof provided.
+\end{proof}
+\begin{definition}[Linear Functional]\label{dfn:2.15}
+	Let $X$ be a normed linear space over $\mathbb{R}$, and let $\psi \in \mathscr{L} (X,\mathbb{R})$. Then $\psi $ is called a \textbf{linear} \textbf{functional}.
+\end{definition}
+For example, the map $\mathbb{R}^3\to \mathbb{R}$ defined as $\mathbf{x}\mapsto 2x_1-3x_2+5x_3$ is a linear functional.
+\begin{definition}[Hamel Basis]\label{dfn:2.16}
+	Let $V$ be a vector space. A Hamel basis of $V$ is some (not necessarily finite) collection of vectors $\left\{ \mathbf{x}_\alpha  \right\}_{\alpha \in A}$ such that $\left\{ \mathbf{x}_\alpha  \right\} $ \textbf{finitely} spans $V$, and is \textbf{finitely} linearly independent.
+\end{definition}
+\begin{theorem}\label{thm:2.6}
+	Let $V$ be a vector space. Then every Hamel basis has the same cardinality. Equivalently, if $\left\{ \mathbf{x}_\alpha  \right\} _{\alpha \in A}$ and $\left\{ \mathbf{y}_\beta  \right\} _{\beta \in B}$ are Hamel bases of $V$, then $\left| A \right| =\left| B \right| $.
+\end{theorem}
+\begin{proof}
+	proof not even mentioned. banished to the shadow realm.
+\end{proof}
+\begin{definition}[Dimension]\label{dfn:2.17}
+	Let $V$ be a vector space with $\mathcal{B} $ a basis. Then we define the dimension $V$ as the cardinality of $\mathcal{B} $, denoted
+	\[
+		\dim V=\left| \mathcal{B}  \right| 
+	.\]
+\end{definition}
+
+Now we want to focus on infinite-dimensional spaces. We will begin by extending the idea of a linear combination to infinite dimensions.
+\begin{definition}[Infinite Linear Combination]\label{dfn:2.18}
+	Let $X$ be a normed linear space\footnote{NLS required for a limit to exist}, let $\left\{ \mathbf{x}_\alpha  \right\}_{\alpha \in A}\subset X$ be some collection of vectors, and let $\left\{ c_\alpha  \right\}_{\alpha \in A}\subset \mathbb{R}$ be a corresponding collection of scalars. Define the linear combination
+	\[
+		\sum_{\alpha \in A}c_\alpha \mathbf{x}_\alpha  
+	\]
+	as any sum that converges. This means the following:
+
+	If $\left| A \right| <\infty$, then the linear combination is the same as the finite case, and the meaning is thus clear.
+
+	If $\left| A \right| =\aleph_0$ is a countable indexing set, then the linear combination is defined as
+	\[
+		\sum_{n=1}^{\infty} c_n \mathbf{x}_n \triangleq \lim_{N \to \infty} \sum_{i=1}^{N} c_n \mathbf{x}_n
+	.\]
+	Notice that we specify an order in this case, since series are not necessarily commutative and associative in the general case.
+
+	If $\left| A \right| >\aleph_0$ is an uncountable indexing set, then since it does not make sense to talk about an uncountable sum, for the linear combination to exist we require all but a countable subset of $A$ satsify $c_\alpha \mathbf{x}_\alpha =\mathbf{0}$.
+\end{definition}
+\begin{definition}[Linear Independence, Spanning, Basis]\label{dfn:2.19}
+	Let $X$ be a normed linear space, and let $\mathcal{C} =\left\{ \mathbf{x}_\alpha  \right\}_{\alpha \in A}\subseteq X$ be a collection of vectors.
+	\begin{itemize}
+		\item We say $\mathcal{C} $ is \textbf{linearly} \textbf{independent} if no $\mathbf{x}_k\in \mathcal{C} $ is equal to a (infinite) linear combination of the other elements of $\mathcal{C} $.
+		\item We say $\mathcal{C} $ \textbf{spans} $X$ if every vector in $X$ can be written as a (infinite) linear combination of vectors in $\mathcal{C} $.
+		\item We say $\mathcal{C} $ is a \textbf{basis} for $X$ if it is linearly independent and spans $X$.
+	\end{itemize}
+\end{definition}
+\begin{definition}[Set of Linear Functionals]\label{dfn:2.20}
+	Let $X$ be a normed linear space. Then the set of linear functionals $X\to \mathbb{R}$ is denoted $X^\#$, which is pronounced ``X sharp''. 
+\end{definition}
+\begin{definition}[Kernel]\label{dfn:2.21}
+	Let $X,Y$ be vector spaces, and $A : X \to Y$ be a linear map. Then the \textbf{kernel} of $A$ is defined as
+	\[
+		\ker A=\left\{ \mathbf{x}\in X \mid A \mathbf{x}=\mathbf{0} \right\} 
+	.\]
+\end{definition}
+\begin{definition}[Direct Sum]\label{dfn:2.22}
+	Let $X$ be a vector space with subspaces $Y,Z\subseteq  X$. Then define
+	\[
+		Y+Z=\left\{ \mathbf{y}+\mathbf{z} \mid \mathbf{y}\in Y\land \mathbf{z}\in Z \right\} 
+	.\]
+	If $Y\cap Z=\left\{ \mathbf{0} \right\} $, we denote this as $\mathbf{Y}\oplus Z$, and call this the \textbf{direct} \textbf{sum} of $Y$ and $Z$.
+\end{definition}
+\begin{definition}[Codimension]\label{dfn:2.23}
+	Let $X$ be a vector space with subspace $Y$. Then the \textbf{codimension} of $Y$ is $n$ if and only if there exists some subspace $Z$ of $X$ such that $Y\oplus Z=X$ and $\dim Z=n$. We write
+	\[
+		\operatorname{codim}Y=\dim Z \iff Y\oplus Z=X 
+	.\]
+\end{definition}
+\begin{proposition}
+	Let $X$ be a normed linear space, and let $\psi : X \to \mathbb{R}$ be a linear functional. Then $\ker \psi $ is a subspace of $X$, and $\operatorname{codim} \ker \psi =1$.
+\end{proposition}
+\begin{proof}
+	By the time we finished the necessary definitions we had forgotten this was a statement requiring proof.
+\end{proof}
+\begin{definition}[Bounded Linear Functional]\label{dfn:2.24}
+	Let $\psi $ be a linear functional. We say $\psi $ is bounded if $\left\lVert \psi  \right\rVert <\infty$.
+\end{definition}
+\begin{definition}[Dual Space]\label{dfn:2.25}
+	LEt $X$ be a normed linear space. The dual space, denoted $X^*$ is the set of all bounded linear functionals $\psi : X \to \mathbb{R}$.
+\end{definition}
+\begin{definition}[Weak Topology]\label{dfn:2.26}
+	Let $X$ be a space, and let $F$ be any collection of maps $f : X \to \mathbb{R}$. Then the \textbf{weak} \textbf{topology} induced by $F$ on $X$ is the weakest topology on $X$ such that every $f\in F$ is continuous.
+
+	If $X$ is a normed linear space and no collection $F$ is referenced, we automatically take $F$ to be the dual space $X^*$.
+\end{definition}
+
+The weak topology is important, but very unintuitive. So we need to develop some intuition for what the weak topology looks like. A neighborhood $N$ in the weak topology requires some $\varepsilon >0$ and a collection $\Psi $ of linear functionals, and is defined as
+\[
+	N_{\varepsilon ,\Psi }=\left\{ x\in X \mid \forall \psi \in \Psi : \left| \psi (x)<\varepsilon  \right|  \right\}
+.\]
+
+For example, consider $\psi : \mathbb{R}^3 \to \mathbb{R}$ defined as $\mathbf{x}\mapsto x_1+2x_2-3x_3$. Notice that $\nabla \psi =(1,2,-3)$, and $\psi =\varepsilon $ on some plane perpendicular to $\nabla \psi $. The neighborhood is then the region between these planes.
+\begin{definition}[Partially Homogeneous Subadditive Functional]\label{dfn:2.27}
+	Let $X$ be a normed linear space, and let $p : X \to \mathbb{R}$. Then we say $p$ is a \textbf{partially} \textbf{homogeneous} \textbf{subadditive} \textbf{functional} if $p(\mathbf{x}+\mathbf{y})\leq p(\mathbf{x})+p(\mathbf{y})$ and $p(\alpha \mathbf{x})=\alpha p(\mathbf{x})$.
+\end{definition}
+One example of a partially homogeneous subadditive functional is the norm of a space.
+\begin{definition}[$p$-bounded]\label{dfn:2.28}
+	Let $X$ be a normed linear space, and let $p$ be a partially homogeneous subadditive functional. Then a linear functional $\psi : X \to \mathbb{R}$ is called $p$-bounded if $\phi (x)\leq p(x)$ for all $x$.
+\end{definition}
+
+Out final goal with operator spaces concerns the extension of linear functionals onto larger spaces. More precisely, we want to prove the Hans-Banach theorem. First, we will need the Axiom of Choice.
+\begin{mdframed}[linewidth=1pt]
+	\textbf{Axiom of Choice}: Let $\mathcal{A} $ be a collection of nonempty sets. Then a new set can be created by including precisely one $a\in A$ for all $A\in \mathcal{A} $.
+\end{mdframed}
+The Axiom of Choice is equivalent to Zorn's lemma, which is the real machinery we need.
+\begin{definition}[Partial Order]\label{dfn:2.29}
+	A set $A$ is \textbf{partially} \textbf{ordered} if there exists a relationship $\prec$ on $A$ such that for all $a,b,c\in A$,
+	\begin{itemize}
+		\item $a\prec b$ and $b\prec c$ implies $a\prec c$.
+		\item $a\prec b$ and $b\prec a$ if and only if $a=b$.
+	\end{itemize}
+	We call $A$ a \textbf{poset}.
+\end{definition}
+\begin{definition}[Total Order]\label{dfn:2.30}
+	A partially ordered set $(A,\prec)$ is called \textbf{totally} \textbf{ordered} if for all $a,b\in A$, either $a\prec b$ or $b\prec a$.
+\end{definition}
+\begin{definition}[Upper Bound]\label{dfn:2.31}
+	Let $(A,\prec)$ be a poset and $E\subset A$. Then some $a\in A $ is an upper bound of $E$ if for all $e\in E$, $e\prec a$.
+\end{definition}
+\begin{definition}[Maximal Element]\label{dfn:2.32}
+	A maximal element of a poset $(A,\prec)$ is some $a\in A$ succh that $b\prec a$ for all $b\in A $.
+\end{definition}
+\begin{theorem}[Zorn's Lemma]\label{thm:2.7}
+	Let $(X,\prec)$ be a poset such that every subset of $X$ that is totally ordered has an upper bound. Then $X$ is a maximal element.
+\end{theorem}
+We will not prove Zorn's Lemma, not for lack of ability but rather lack of time. We will use Zorn's lemma in the second part of the proof of the Hans-Banach theorem to generalize the results of the first part to infinite dimensional vector spaces. The first part is summarized in the Hans-Banach lemma.
+\begin{lemma}[Hans-Banach]\label{lma:2.6}
+	Let $X$ be a normed linear space, let $Y\subset X$ be a subspace, and let $\psi : Y \to \mathbb{R}$ be a $p$-bounded linear functional for some fixed partially homogeneous subadditive functional $p$. Let $\mathbf{z}\in X\setminus Y$, and define $Y_1 = \operatorname{span}\left( Y\cup \left\{ \mathbf{z} \right\}  \right)  $. Then $\psi $ can be extended to $Y_1$ and still be $p$-bounded.
+\end{lemma}
+\begin{proof}
+	It suffices to show that simply letting $\psi (\mathbf{z})\in\mathbb{R}$ and claiming $\psi $ is still linear is well defined, and implies that $\psi $ is still $p$-bounded for at least some choice of $\psi (\mathbf{z})$.
+\end{proof}
+One remark about the Hans-Banach lemma is that $\dim \operatorname{span}(Y\cup \left\{ \mathbf{z} \right\} ) =\dim Y+1$. This means by induction, the statement immediately generalizes to all finite dimensional spaces. That is, for $X$ finite dimenional and $\psi : Y\subset X \to \mathbb{R}$, we can extend $\psi $ to the entirety of $X$. We must now show it holds in the infinite dimensional case, which is the Hans-Banach theorem.
+\begin{theorem}[Hans-Banach]\label{thm:2.8}
+	Let $X$ be a normed linear space, let $Y\subset X$ be a subspace, and let $\psi : Y \to \mathbb{R}$ be a $p$-bounded linear functional for some fixed partially homogeneous subadditive functional $p$. Then $\psi $ can be extended to $X$ and still be $p$-bounded.
+\end{theorem}
+\begin{proof}
+	Consider $\overline{f} $, the set of all $p$-bounded linear functionals $\eta $ on all subspaces $Y_\eta $ of $X$ that extend $\psi $. Remark that for all $\eta $, $Y_\eta \supset Y$. Consider the partial order $\prec$ on $\overline{f} $ such that $\eta_1\prec \eta_2$ if and only if $\eta_2$ extends $\eta _1$. We then need to use Zorn's lemma to show there exists a maximal element of $\overline{f} $, which would be some $p$-bounded linear functional $\psi : X \to \mathbb{R}$.
+\end{proof}
+\section{Hilbert Spaces}
+We are now moving to our final topic, which generalizes the idea of inner products to infinite dimensions, largely through the concept of a Hilbert space. This will (for this class) complete our generalization of linear algebra over real vector spaces to infinite dimensions.
+\begin{definition}[Inner Product]\label{dfn:2.33}
+	Let $\mathcal{H} $ be an inner product space. A map $\left<\cdot ,\cdot  \right>: \mathcal{H} \times \mathcal{H}  \to \mathbb{R}$ is called an \textbf{inner} \textbf{product} if for all $\mathbf{x},\mathbf{y},\mathbf{z}\in \mathcal{H} $,
+	\begin{itemize}
+		\item $\left\langle \mathbf{x},\mathbf{x} \right\rangle \geq 0$ and $\left\langle \mathbf{x},\mathbf{x} \right\rangle =0$ if and only if $\mathbf{x}=\mathbf{0}$.
+		\item $\left\langle \mathbf{x},\mathbf{y}+\mathbf{z} \right\rangle =\left\langle \mathbf{x},\mathbf{y} \right\rangle +\left\langle \mathbf{x},\mathbf{z} \right\rangle $.
+		\item $\left\langle \mathbf{x},\alpha \mathbf{y} \right\rangle =\alpha \left\langle \mathbf{x},\mathbf{y} \right\rangle $ for any $\alpha \in\mathbb{R}$.
+		\item $\left\langle \mathbf{x},\mathbf{y} \right\rangle =\left\langle \mathbf{y},\mathbf{x} \right\rangle $.
+	\end{itemize}
+	The space $\left( \mathcal{H} ,\left\langle \cdot ,\cdot  \right\rangle  \right) $ is called an \textbf{inner} \textbf{product} \textbf{space}.
+\end{definition}
+\begin{theorem}\label{thm:2.9}
+	Let $\mathcal{H} $ be an inner product space. Then $\mathcal{H} $ is a normed linear space, specifically with the norm defined as
+	\[
+		\left\lVert \mathbf{x} \right\rVert =\sqrt{\left\langle \mathbf{x},\mathbf{x} \right\rangle } 
+	.\]
+\end{theorem}
+\begin{proof}
+	trivial, and ive done it b4
+\end{proof}
+\begin{definition}[Orthogonality]\label{dfn:2.34}
+	Let $\mathcal{H} $ be an inner product space. Then $\mathbf{x},\mathbf{y}\in \mathcal{H} $ are called \textbf{orthogonal} if $\left\langle \mathbf{x},\mathbf{y} \right\rangle =\mathbf{0}$.
+\end{definition}
+\begin{definition}[Orthonormal]\label{dfn:2.35}
+	Let $\left\langle \mathbf{x}_\alpha  \right\rangle_{\alpha \in A}\subset \mathcal{H} $ be a collection of vectors in an inner product space. Then the collection is called \textbf{orthonormal} if all $\mathbf{x}_\alpha $s are orthogonal to each other, and all have $\left\lVert \mathbf{x}_\alpha  \right\rVert =1$.
+\end{definition}
+\begin{proposition}[Cauchy-Schwartz Inequality]\label{prp:2.7}
+	Let $\mathcal{H} $ be an inner product space, and let $\mathbf{x},\mathbf{y}\in \mathcal{H} $. Then $\left\langle \mathbf{x},\mathbf{y} \right\rangle \leq \left\lVert \mathbf{x} \right\rVert \left\lVert \mathbf{y} \right\rVert $.
+\end{proposition}
+\begin{proof}
+	fairly trivial iirc
+\end{proof}
+\begin{definition}[Orthogonal Compliment]\label{dfn:2.36}
+	Let $V\subset \mathcal{H} $ be a subspace of an inner product space. Then $V^\perp$ is defined as the set
+	\[
+		V^\perp = \left\{ \mathbf{x}\in \mathcal{H}  \mid \forall \mathbf{y}\in V,\left\langle \mathbf{x},\mathbf{y} \right\rangle =0 \right\} 
+	.\]
+	The set $V^\perp $ is called the \textbf{orthogonal} \textbf{compliment} of $V$.
+\end{definition}
+\begin{theorem}\label{thm:2.10}
+	Let $V\subset \mathcal{H} $ be a subspace of an inner product space. Then $V\oplus V^\perp =\mathcal{H} $.
+\end{theorem}
+\begin{proof}
+	hi
+\end{proof}
+\begin{definition}[Orthogonal Subspace]\label{dfn:2.37}
+	Let $X_1,X_2$ be subspaces of the inner product space $\mathcal{H} $. Then $X_1$ and $X_2$ are \textbf{orthogonal} if for all $\mathbf{x}\in X_1$ and $\mathbf{y}\in X_2$, $\left\langle \mathbf{x},\mathbf{y} \right\rangle =0$.
+\end{definition}
+\begin{definition}[Orthogonal Projection]\label{dfn:2.38}
+	 Let $X_1,X_2\subset \mathcal{H} $ be subspaces of an inner product space such that $X_1\oplus X_2=\mathcal{H} $, and let $p : \mathcal{H}  \to \mathcal{H} $ be the map $p(\mathbf{x}_1+\mathbf{x}_2)=\mathbf{x}_1$, where $\mathbf{x}_1\in X_1$ and $\mathbf{x}_2\in X_2$ (any $\mathbf{x}\in \mathcal{H} $ can be represented in this way due to definition \ref{dfn:2.22}). Then $p$ is the \textbf{orthogonal} \textbf{projection} of $X$ onto $X_1$.
+\end{definition}
+\begin{theorem}\label{thm:2.11}
+	Let $(X,\Sigma ,\mu )$ be a measure space. Then there exists a norm-preserving isomorphism
+	\[
+		\left( L^p(X) \right)^* \cong L^q(X)
+	,\]
+	where
+	\[
+		\frac{1}{p}+\frac{1}{q}=1
+	.\]
+	Moreover, for any $\psi \in \left( L^p(X) \right)^*$, there exists exactly one $f\in L^q(X)$ such that for any $g\in L^p(X)$,
+	\[
+		\psi (g)=\int_X fg \,\mathrm{d} \mu 
+	.\]
+\end{theorem}
+\begin{proof}
+	na
+\end{proof}
+Theorem \ref{thm:2.11} is a special case of the more general Riesz Representation theorem. First, we need to finalize our definiton of a Hilbert space.
+\begin{definition}[Hilbert Space]\label{dfn:2.39}
+	Let $\mathcal{H} $ be an inner product space. We say $\mathcal{H} $ is a Hilbert space if it is also complete. In other words, a Hilbert space is an inner product Banach space.
+\end{definition}
+\begin{theorem}[Riesz Representation]\label{thm:2.12}
+	Let $\mathcal{H} $ be a Hilbert space, and let $\psi \in \mathcal{H}^*$. Then there exists a unique $h\in \mathcal{H} $ such that for all $x\in \mathcal{H} $, $\psi (x)=\left\langle h,x \right\rangle $.
+\end{theorem}
+\begin{proof}
+	Define $\left\langle h,\cdot  \right\rangle $ as the operator $x\mapsto \left\langle h,x \right\rangle  $. Note that this operator is linear and bounded, implying that $\left\langle h,\cdot  \right\rangle \in \mathcal{H}^*$. Let $\Phi : \mathcal{H}  \to \mathcal{H}^*$ be the map $x\mapsto \left\langle x,\cdot  \right\rangle $. It suffices to show this map is bijective and norm-preserving.
+\end{proof}
+\begin{proposition}[Pythagorean Identity]\label{prp:2.8}
+	Let $\left\langle u_{\alpha } \right\rangle_{\alpha \in A}\subset \mathcal{H} $ be an orthonormal set in an inner product space. Then for a collection $\left\{ c_{\alpha } \right\}_{\alpha \in A}$,
+	\[
+		\left\lVert \sum_{i=1}^{\left| A \right| } c_i u_i \right\rVert =\sum_{i=1}^{\left| A \right| } c_i^2
+	.\]
+\end{proposition}
+\begin{proof}
+	idfk
+\end{proof}
+\begin{proposition}[Bezel's Inequality]\label{prp:2.9}
+	Let $\left\{ \phi_k \right\}_{k=1}^\infty$ be an orthonormal collection in an inner product space $\mathcal{H} $. For any $h\in \mathcal{H} $,
+	\[
+		\sum_{k=1}^{\infty} \left\langle \phi_k,h \right\rangle^2 \leq \left\lVert h \right\rVert^2
+	.\]
+\end{proposition}
+\begin{proof}
+	idfk
+\end{proof}
+\begin{proposition}\label{prp:2.10}
+	Let $\left\{ \phi_k \right\}_{k=1}^\infty$ be an orthonormal set in a Hilbert space $\mathcal{H} $. Then for all $h\in \mathcal{H} $,
+	\[
+		\sum_{k=1}^{\infty} \left\langle \phi_k,h \right\rangle \phi _k
+	\]
+	converges in $\mathcal{H} $, and for all $k$,
+	\[
+		\left\langle h-\sum_{k=1}^{\infty} \left\langle \phi_k,h \right\rangle \phi _k,\phi_k \right\rangle =0
+	.\]
+\end{proposition}
+\begin{proof}
+	Wait I can do this
+	\[
+		\left\langle h-\sum_{k=1}^{\infty} \left\langle \phi_k,h \right\rangle\phi_k ,\phi_k \right\rangle =0 \implies \left\langle h,\phi_k \right\rangle =\left\langle \sum_{k=1}^{\infty} \left\langle \phi_k,h \right\rangle \phi_k,\phi_k \right\rangle 
+	.\]
+	
+\end{proof}
+\begin{definition}[Complete (Hilbert Spaces)]\label{dfn:2.40}
+	Let $\mathcal{C} =\left\{ \phi_k \right\}_{k=1}^\infty$ be an orthogonal set in a Hilbert space $\mathcal{H} $. We say this set is \textbf{complete} if it spans $\mathcal{H} $, meaning $\mathcal{C} $ is a basis.
+\end{definition}
+\begin{proposition}\label{prp:2.11}
+	If $\mathcal{C}=\left\{ \phi_k \right\}_{k=1}^\infty $ is a complete set in a Hilbert space $\mathcal{H} $, then if $\left\langle h,\phi_\alpha  \right\rangle =0$ for all $\alpha$, then $h=\mathbf{0}$.
+\end{proposition}
+\begin{proof}
+	this one looks ez
+\end{proof}
+\begin{theorem}\label{thm:2.13}
+	Every infinte dimensional separable Hilbert space $\mathcal{H} $ has a countable orthonormal basis.
+\end{theorem}
+\begin{proof}
+	Let $\overline{f} $ be the set of all orthonormal sets in $\mathcal{H} $. Define the partial order of inclusion on $\overline{f} $, that is $f_1\prec f_2$ if $f_1\subset f_2$. From here, show that every totally ordered set has an upper bound, and then by Zorn's lemma, there exists a maximal orthonormal set, which is guarenteed to be a basis. From here, just show it's countable using the fact that it's separable.
+\end{proof}
+\begin{definition}[Adjoint]\label{dfn:2.41}
+	Let $\mathcal{H} $ be a Hilbert space, and let $T\in \mathcal{L} (\mathcal{H} ,\mathcal{H} )$. Then the \textbf{adjoint} of $T$, denoted $T^*$, is the operator with the unique property that
+	\[
+		\left\langle Tu,v \right\rangle =\left\langle u,T^*v \right\rangle 
+	.\]
+\end{definition}
+Note that in the finite dimensional case where $\mathcal{L} (\mathcal{H} ,\mathcal{H} )\cong M_n(\mathbb{R})$, the adjoint is just the transpose. That is, $T^*=T^T$. Also note that $\left\lVert T^* \right\rVert =\left\lVert T \right\rVert $, $\left( A+B \right)^*=A^*+B^*$, and $(A\circ B)^*=B^*\circ A^*$.
+\begin{theorem}[Polarization Identity]\label{thm:2.14}
+	Let $\mathcal{H} $ be a Hilbert space, and let $T\in \mathcal{L} (\mathcal{H} ,\mathcal{H} )$. Then
+	\[
+		\left\langle Tu,v \right\rangle =\frac{1}{4}\left\langle T(u+v),u+v \right\rangle -\left\langle T(u-v),u-v \right\rangle 
+	.\]
+\end{theorem}
+\begin{proof}
+	idefk what is hapening anymomre.
+\end{proof}
+\begin{theorem}\label{thm:2.15}
+	Let $\mathcal{H} $ be a Hilbert space, and let $T\in \mathcal{L} (\mathcal{H} ,\mathcal{H} )$. Then
+	\[
+		\left\lVert T \right\rVert =\sup_{u\in H}\left| \left\langle Tu,u \right\rangle  \right| 
+	.\]
+\end{theorem}
+\begin{proof}
+	actually this one aint look so bad
+\end{proof}
+\begin{definition}[Self-Adjoint]\label{dfn:2.42}
+	Let $\mathcal{H} $ be a Hilbert space, and let $T\in \mathcal{L} (\mathcal{H} ,\mathcal{H} ) $. If $T=T^*$, then we say $T$ is self-adjoint.
+\end{definition}
+\begin{definition}[Non-negative]\label{dfn:2.43}
+	Let $\mathcal{H} $ be a Hilbert space, and let $T\in \mathcal{L} (\mathcal{H} ,\mathcal{H} ) $. If $\left\langle Tu,u \right\rangle \geq 0$ for all $u\in \mathcal{H} $, then we say $T$ is non-negative.
+\end{definition}
+
+Now we want to move on to discuss the Stone-Weierstrass theorem. This theorem very naturally gives rise to many important things, such as Fourier series representations of functions.
+\begin{definition}[Algebra of Functions]\label{dfn:2.44}
+	A vector space of functions that is also closed under pointwise-multiplication is called an algebra of functions.
+\end{definition}
+\begin{definition}[Separate Points]\label{dfn:2.45}
+	Let $(X,\Sigma ,\mu )$ be a measure space. Any collection $A$ of functions on $X$ is said to separate points if for any $x,y\in X$ such that $x\neq y$, there exists $f\in A$ such that $f(x)\neq f(y)$.
+\end{definition}
+
+One thing I want to remark on my own is the following three definitions from wikipedia, and their relation to definition \ref{dfn:2.44}.
+
+\begin{definition}[Associative $R$-Algebra]\label{dfn:2.46}
+	Let $R$ be a commutative ring. An $R$-algebra $A$ is a ring $A$ that is also an $R$-module such that for all $r\in R$ and $x,y\in A$,
+	\[
+		r(xy)=(rx)y
+	.\]
+	An $R$-algebra is called unital if  they have a unity.
+\end{definition}
+\begin{definition}[Banach Algebra]\label{dfn:2.47}
+	A Banach algebra is an associative $\mathbb{F}$-algebra for $\mathbb{F}$ either $\mathbb{C}$ or $\mathbb{R}$, where  the vector space $A$ is also a Banach space. A unital Banach algebra is a Banach algebra with $\left\lVert 1_A \right\rVert =1_\mathbb{F}$.
+\end{definition}
+\begin{definition}[Algebra over a Field]\label{dfn:2.48}
+	Let $\mathbb{F}$ be a field and let $A$ be a $\mathbb{F}$-vector space equipped with an additional binary operation $\cdot : A\times A \to A$. Then $A$ is an \textbf{algebra} over $\mathbb{F}$ if for all $a,b\in\mathbb{F}$ and $x,y,z\in A$,
+	\begin{itemize}
+		\item $\cdot (x+y)z=(x\cdot z)+(y\cdot z)$.
+		\item $x\cdot (y+z)=(x(\cdot y)+(x\cdot z)$.
+		\item  $(ax)\cdot (by)=(ab)(x\cdot y)$.
+	\end{itemize}
+\end{definition}
+Using these definitions, we can refactor definition \ref{dfn:2.44} as a subalgebra of the Banach algebra $C(X,\mathbb{R})$ for $X$ a topological space. We will conclude our class with a discussion of the Stone-Weierstrass theorem and some of its natural implications.
+\begin{theorem}[Stone-Weierstrass]\label{thm:2.16}
+	Let $(X,\mathcal{T} )$ be a compact, Hausdorff topological space, and let $A\subset C(X,\mathbb{R})$ be a subalgebra. Then $A$ is dense in $C(X,\mathbb{R})$ if and only if it separates points.
+\end{theorem}
+\begin{proof}
+	nope
+\end{proof}
+
+We will now use theorem \ref{thm:2.16} to derive Fourier series in a rigorous manner. Consider $X=[-\pi ,\pi ]$, specifically as viewed on the unit circle, where we say $-\pi =\pi $. Let
+\[
+	\mathscr{S} =\left\{ 1 \right\} \cup \left\{ \cos (nx),\sin (nx) \mid n\in\mathbb{Z} \right\} 
+.\]
+We want these functions to be orthonormal under the $2$-norm and associated inner product. Note
+\[
+	\left\langle 1,1 \right\rangle =\int_{-\pi }^{\pi } 1 \,\mathrm{d} x=2\pi 
+.\]
+A similar analysis of other functions shows that we need to modify our set to be
+\[
+	\mathscr{S} =\left\{ \frac{1}{\sqrt{2\pi } } \right\} \cup \frac{1}{\sqrt{\pi } }\left\{ \cos (nx),\sin (nx) \mid n\in\mathbb{Z} \right\} 
+.\]
+Then $\mathscr{S} $ is an orthonormal set under the $L^2$ inner product. Define $\mathfrak{S} =\operatorname{span}\mathscr{S}  $ under finite linear combinations, and note that any $f\in \mathfrak{S} $ has the form
+\[
+	f(x)=a_0+\sum_{n=1}^{N} a_n\cos (nx)+b_n\sin (nx)
+.\]
+It can be shown that $\mathfrak{S} $ forms an algebra, and since we take $-\pi=\pi $, it can be shown that $\mathfrak{S} $ separates points. By theorem \ref{thm:2.16}, $\mathfrak{S} $ is dense in $C(X,\mathbb{R})$.
+
+Note that $C(X,\mathbb{R})$ has the $\infty$-norm, and since it is continuous, I believe this is equivalent to the supremum norm:
+\[
+	\left\lVert f \right\rVert_{\infty}=\sup_{x\in X}\left| f(x) \right| 
+.\]
+Therefore, for all $f\in C(X,\mathbb{R})$ and for all $\varepsilon >0$, there exists some $p\in \mathfrak{S} $ such that $\left\lVert f-p \right\rVert <\varepsilon $. Therefore, $\mathfrak{S} $ spans $C(X,\mathbb{R})$.
+
+What if we now go from the $\infty$-norm to the $2$-norm? Well, it turns out that if $\mathfrak{S} $ is dense in $(C(X,\mathbb{R}),d_{\infty})$, then it is also dense in $(C(X,\mathbb{R}),d_2)$. Apparently this is easy to show. We can now consider $L^2[-\pi ,\pi ]$. It's also easy to show that $C(X,\mathbb{R})$ is dense in $L^2(X)$, so since $\mathfrak{S} $ spans $X$, we have $\mathfrak{S} $ dense in $L^2(X)$.
+
+Let $f\in L^2(X)$. We have
+\[
+	f=\frac{a_0}{2}+\sum_{n=1}^{\infty} a_n\cos (nx)+b_n\sin (nx)
+.\]
+Since we require $\mathfrak{S} $ be orthonormal, we have
+\[
+	a_n=\frac{1}{\pi }\left\langle f(x),\cos (nx) \right\rangle ,\qquad b_n=\frac{1}{\pi }\left\langle f(x),\sin (nx) \right\rangle 
+.\]
+Therefore, any function with $f(-\pi )=f(\pi )$ can be approximated by a Fourier series.
+
+Final remarks for the class include applications of functional analysis in quantum mechanics. If you have a quantum system of particles, then you can represent the set of all possible states in your system as a Hilbert space $\mathcal{H} $, and vectors $\Psi  \in \mathcal{H} $ are infinite dimensional. The time dependence of the system in quantum mechanics behaves according to the Schrodinger Equation:
+\[
+	\frac{\partial \Psi }{\partial t} =\mathbf{\hat{H}}\Psi 
+.\]
+The term $\mathbf{\hat{H}}$ is called the Hamiltonian operator, and it is an operator on $\mathcal{H} $. This is then a system of linearish differential equations, and solutions of this system are eigenfunctions and eigenvalues, and thus there are an infinite number of them.
+
+One final remark is that of quantum superposition. Suppose there exists a cat inside a box, and $\mathbf{x}$ is the state of the cat being alive, and $\mathbf{y}$ is the state of the cat being dead. Then any normalized linear combination of these vectors, such as
+\[
+	\frac{1}{\sqrt{2} }\left( \mathbf{x}+\mathbf{y} \right) 
+\]
+is a valid state in the quantum Hilbert space. According to the professor, ``this is what parallel universes are.'' I found the many worlds interpretation enjoyer I think.
+\end{document}
