@@ -1,0 +1,35 @@
+\chapter{Rings}
+\lecture{1}{Wed 22 Jan 2025 13:22}{Syllabus Day}
+\begin{definition}[Ring]\label{dfn:1.1}
+	Let $R$ be a set together with two binary operations
+	\[
+		+,\bullet : R\times R \to R
+	\]
+	such that $\forall a,b,c\in R$,
+	\begin{itemize}
+		\item $a+b=b+a $;
+		\item $(a+b)+c=a+(b+c)$;
+		\item $\exists 0\in R$ such that $a+0=a$ for all  $a\in R$;
+		\item $\forall a\in R$, $\exists b\in R$ such that $a+b=0$;
+		\item $(ab)c=a(bc)$;
+		\item $a(b+c)=ab+ac$ and $(a+b)c=ac+bc$.
+	\end{itemize}
+	We then call $(R,+,\cdot )$ a ring.
+\end{definition}
+
+Note that $(R,+)$ is an abelian group. There then clearly exists a forgetful functor $\mathbf{Ring}\to \mathbf{Grp}$ that maps $(R,+,\cdot )\mapsto (R,+)$. Examples of rings include $\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C}$ under the standard definitions of addition and multiplication. However, these rings are all commutative, and many are in fact fields. There is more to ring theory than commutative rings. Oh also $\mathbb{Z}_n$ is a ring $\forall n\in\mathbb{N}$.
+
+Note that since left multiplication is a faithful group action on itself, every row/column of the cayley table in some group has each number appear exactly once.
+
+We take the convention that rings need not have 1. Homomorphisms thus need not preserve 1, except for epimorphisms. An example of a ring without 1 is $2\mathbb{Z}$. Also note that rings need not be commutative; for example, $M_2(\mathbb{R})$. We generally divide rings into commutative rings and noncommutative rings. the category of commutative rings is denoted $\mathbf{CRing}$.
+
+\begin{definition}[Unity]\label{dfn:1.2}
+	Let $R$ be a ring with some $1\in R$ such that $\forall r\in R$, $1r=r1=r$. We say $1$ is the unity element of $R$.
+\end{definition}
+\begin{definition}[Polynomial Ring]\label{dfn:1.3}
+	Let $R$ be a ring. Define  $R[x]$ as the polynomial ring
+	\[
+		R[x]\coloneqq \left\{ \sum_{i} a_ix^i  \mid a_i\in R \right\} 
+	\]
+	of \emph{finite} linear combinations in the indeterminant $x$.
+\end{definition}

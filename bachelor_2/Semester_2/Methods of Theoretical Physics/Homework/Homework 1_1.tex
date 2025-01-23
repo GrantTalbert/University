@@ -1,0 +1,38 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\courseID{PY 355}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+
+\section*{Problem 1}
+(a) The map $B\circ A=C : \mathbb{Z} \to \mathbb{N}$ is defined by
+\[
+	C(n)=B(n+1)=(n+1)^2-n-1 = n(n+1)
+.\]
+The image is $C(\mathbb{Z})=\left\{ n^2+n\in\mathbb{N} \mid n\in\mathbb{Z} \right\} $.
+
+(b) The map $A$ is a bijection. Let $n\in\mathbb{Z}$. Since $\mathbb{Z}$ is closed under addition/subtraction, we have $n-1\in\mathbb{Z}$, and thus $A(n-1)=n$. Therefore, $A$ is surjective. Now suppose that $A(n)=A(m)$ for some $n,m\in\mathbb{Z}$. By definition of $A$,
+\[
+	A(n)=A(m)\implies n+1=m+1 \implies n+1-1 = m+1-1 \implies n=m
+.\]
+Therefore, $A$ is injective, and thus bijective.
+
+The map $B$ is neither. Note that
+\[
+	B(2)=4-2=2=1+1=(-1)^2-\left( -1 \right) =B(-1)
+.\]
+Since $2\neq -1$, $B$ is not injective. Further, suppose $3=n(n+1)$. We have
+\[
+	n^2+n-3=0 \implies n= \frac{-1 \pm \sqrt{1+12} }{2}=\frac{-1\pm \sqrt{13} }{2}\notin \mathbb{Z}
+.\]
+Therefore, there exists at least one element $3\in\mathbb{N}$ such that $3\notin B(\mathbb{Z})$, and thus $B$ is not surjective.
+
+Finally, note that since $A(\mathbb{Z})=\mathbb{Z}$, we have that $B(\mathbb{Z})=B(A(\mathbb{Z}))=C(\mathbb{Z})$, so $C$ is not surjective. Additionaly,
+\[
+	C(1)=2=(-1)^2+(-1)=C(-1)
+.\]
+Therefore, $C$ is not injective either.
+\end{document}
