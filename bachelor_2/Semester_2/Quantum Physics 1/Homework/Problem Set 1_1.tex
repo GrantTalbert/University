@@ -1,0 +1,113 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 1}
+\courseID{PY 451}
+\courseSection{A1}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+\lstdefinestyle{h}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{black},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=h}
+\begin{document}
+\makeproblem
+\section{The Zero Vector}
+As requested, the numberings I am using are as given in the lecture notes. Let $V$ be a vector space over $\mathbb{C}$ with zero vector $\ket{0} $. Then
+\[
+	0 \ket{v} \overset{*}{=} (0+0) \ket{v}  \overset{4}{=} 0 \ket{v} +0 \ket{v} \overset{8,9}{\implies} 0 \ket{v} +(0 \ket{v} -0 \ket{v}) \overset{8}{=} 0 \ket{v} \overset{\star}{=} 0 \ket{v} - 0 \ket{v}  \overset{8}{=}\ket{0} 
+.\]
+Note that the step denoted by $*$ follows by the field axioms, rather than the vector space axioms. Additionally, the step denoted $\star$ follows from the previous implication that $0 \ket{v} +0 \ket{v} =0 \ket{v} $; I just moved stuff around to make it fit on one line.
+\section{Vector Spaces}
+For all of these problems, let $V$ be the given set, and define addition and scalar multiplication pointwise; i.e. $(f+g)(x)=f(x)+g(x)$ and $(zf)(x)=z\cdot f(x)$ for all $f,g\in V$ and $z\in\mathbb{C}$.
+\begin{enumerate}
+	\item Yes.
+		\begin{enumerate}
+			\item Closure under addition:
+				\[
+					(f+g)(0)=f(0)+g(0)=0+0=0 \text{ and }(f+g)(L)=f(L)+g(L)=0+0=0
+				.\]
+				Therefore, $f+g\in V$;
+			\item Commutativity (and associativity) of addition: Since $\mathbb{C}$ is commutative under addition, for all $x\in\mathbb{C}$,
+				\[
+					(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)
+				.\]
+				Therefore, $f+g=g+f$. By the same logic, since $\mathbb{C}$ is associative under addition,
+				\[
+					(f+(g+h))(x)=f(x)+(g(x)+h(x))=(f(x)+g(x))+h(x)=((f+g)+h)(x)
+				.\]
+				Therefore, $(f+g)+h=f+(g+h)$, and $V$ is associative under addition.
+				$(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)$. Therefore, $f+g=g+f$. By the same logic since $\mathbb{C}$ is associative under addition, $(f+g)+h=f+(g+h)$;
+			\item Note that the zero function $0(x)=0$ is a function. For any $f\in V$,
+				\[
+					(f+0)(x)=f(x)+0(x)=f(x)
+				.\]
+				Therefore, $0(x)$ is an additive identity in $V$.
+			\item Let $f\in V$. Define $-f$ as the function $(-f)(x)=-f(x)$. We have $f(x)+(-f)(x)=f(x)-f(x)=0$ for all $x$. Therefore, $-f$ is an additive inverse of $f $.
+			\item $(zf)(0)=z(f(0))=z0=0$ and $(zf)(L)=z(f(L))=z0=0$, so $zf\in V$;
+		\end{enumerate}
+	\item No. Using the same definitions as before, note that the set has no additive identity. The zero function is the additive identity on the set of functions $[0,L] \to \mathbb{C}$:
+		\[
+			(f+0)(x)=f(x)+0(x)=f(x) \implies \forall x:0(x)=0
+		.\]
+		Since $V$ is a subset of the set of maps $[0,L] \to \mathbb{C}$, we have that the $0$ function must be the additive identity in $V$ as well. We have $0'(x)=0(x)$, and $0(0)=0 \not> 0$. Therefore, $0 \notin V$.
+	\item Yes. It suffices to show the only element of the space is the 0 function. Let $f\in V$. Since $f$ has a vanishing first derivative everywhere, it follows that $f$ is continuous everywhere. Let $x\in [0,L]$ and suppose for contradiction that $f(x)>0$. Since $f$ is continuous on $[0,L]$, by the intermediate value theorem, $f$ takes on every value on the interval $[0, f(x)]$ at some point on the interval $[0,x]$. Since $f$ is continuous and $f(x) \gneq0$, we have that $f$ is increasing on some subinterval of $[0, f(x)]$; equivalently, $f$ has a positive first derivative on this interval. Therefore, $f(x)=0$ for all $x\in [0,L]$. Note that this implies $f(L/2)=0$, so that property is also satisfied. Therefore, $f\in V$ implies $f=0$, so $V=\left\{ 0 \right\} $ is the trivial vector space.
+\end{enumerate}
+\section{Eigenvalues}
+\begin{enumerate}
+	\item Notice that $M= \ket{u} \bra{u}$. Let $\lambda \ket{x} = M \ket{x} $. We have
+		\[
+			\lambda \ket{x} = \ket{u} \braket{u}{x} = \ket{u} \sum_{n=1}^{10} nx_n
+		.\]
+		We will use index notation to denote this as $\ket{u} nx_n $. We have
+		\[
+			\lambda x_k = u_k nx_n = knx_n
+		.\]
+		We have
+		\[
+			\lambda x_1 = nx_n
+		.\]
+		Additionally,
+		\[
+			\lambda x_k = knx_n = k(\lambda x_1) \implies x_k = kx_1
+		.\]
+		It follows that
+		\[
+			\lambda x_1 = n(nx_1)=x_1\sum_{n=1}^{10}n^2
+		.\]
+		Therefore,
+		\[
+			\lambda = \sum_{n=1}^{10} n^2 = 385
+		.\]
+		Moreover, note that the rank of the matrix is 1:
+		\begin{lstlisting}[language=Python]		
+#!/bin/python3
+
+import numpy as np
+
+u = np.array([i for i in range(1,11)])
+print(np.linalg.matrix_rank(u @ u.T))
+\end{lstlisting}
+This program returns 1. The number of nonzero eigenvalues of a symmetric matrix is equal to its rank, and we implicitly assumed $\lambda \neq 0$ when we stated $x_k=kx_1$. If we suppose $\lambda =0$, then we have $nx_n=0$, since $k\neq 0$ for all $k$. We can define $x_k = (-1)^k1/k$, and note that
+\[
+	\sum_{n=1}^{10} (-1)^n\frac{n}{n}=5-5=0
+.\]
+Therefore, $0$ is also an eigenvalue for at least this singular vector.
+\end{enumerate}
+\end{document}
