@@ -1,0 +1,76 @@
+\lecture{2}{Thu 23 Jan 2025 14:00}{a}
+The state of a system encodes all information about a system. We denote this by $\ket{\psi} $ in quantum physics. Also note that when an index is shared over two elements:
+\[
+	M_{ik}N_{kr}
+,\]
+this implies this expression really indicates a summation over the shared index:
+\[
+	M_{ik}N_{kr}\coloneqq \sum_{k} M_{ik}N_{kr} 
+.\]
+% ?\$(\S*?) <== i think this works cuz rn $qket -> \ket{$q} is suboptimal
+% also implement hbar priority over bar -> overline
+
+A ket $ \ket{\psi} $ represents the state of some system, but it is also a vector in a $\mathbb{C}$-vector space. This ket notation is useful since we may deal with infinite-dimensional spaces, and it also plays nicely with inner products. We always assume a vector space in quantum mechanics is a space in $\mathbb{C}\text{-}\mathbf{Vect}$.
+
+The question is, what really is $ \ket{\psi} $, and how do we get information out of it? In order to do this, we need to equip our space with an inner product, making it a Hilbert space. Note that all $n$-dimensional $\mathbb{C}$-Hilbert spaces can be given as the matrix space $M_{n\times 1}(\mathbb{C})$. We then define $ \ket{\psi} ^\dagger \coloneqq \pi ^{-1}(\pi ( \ket{\psi}) ^\dagger)$, for $\pi : \mathcal{H}  \to M_{n\times 1}(\mathbb{C})$ the isomorphism. More simply, given a vector
+\[
+	\begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} 
+,\]
+define
+\[
+	\begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix}^\dagger = \begin{pmatrix}
+	x^* & y^*
+	\end{pmatrix} 
+.\]
+Equivalently,
+\[
+	(z_1 \ket{v_1} + z_2 \ket{v_2} )^\dagger=z_1^* \bra{v_1} +z_2^* \bra{v_2} 
+.\]
+
+ The Hermitian conjugate $ \ket{\psi }^\dagger $ is denoted as a `bra', $ \bra{\psi} $. Note that given vectors $ \ket{\phi} , \ket{\psi} $, we can define an inner product
+ \[
+ 	\ket{\phi} \cdot \ket{\psi} \coloneqq \braket{\phi }{\psi } 
+ .\]
+ 
+ In a more general vector space, we still denote the inner product as $\braket{\phi }{\psi } $.
+ \begin{definition}[Inner Product]\label{dfn:1.2}
+ 	An inner product is a map $\braket{\cdot }{\cdot } : \mathcal{H} \times \mathcal{H}  \to \mathbb{C}$ such that
+	\begin{itemize}
+		\item $\braket{v_1}{v_2} =\braket{v_2}{v_1} ^*$;
+		\item $\braket{v}{v} \geq 0$;
+		\item $\braket{v}{v} =0$ iff $ \ket{v} =0$;
+		\item $\left( a \bra{v_1} +b \bra{v_2}  \right) \cdot \left( c \ket{w_1} + d \ket{w_2}  \right) = ac \braket{v_1}{w_1} +ad \braket{v_1}{w_2} +bc \braket{v_2}{w_1} +bd \braket{v_2}{w_2} $.
+	\end{itemize}
+ \end{definition}
+
+ Our way of pulling information out of a ket will be by taking its inner product with a state we already understand. For example, in the Stern-Gerlach experiments, we knew the state $ \ket{+} $ indicated $\boldsymbol{\mu} $ pointing up, and $ \ket{-} $ indicated pointing down. Assume $ \ket{+} , \ket{-} , \ket{\psi} $ are all normalized with norm $1$; $\braket{\psi }{\psi } =1$. For some reason, $ \ket{+} , \ket{-} $ form a basis. We can then find the inner product of $\psi $ with any vector using this fact. The Born Rule tells us what information this actually gives us; we will state it here, specialized to the Stern-Gerlach experiments.
+
+ \begin{proposition}\label{prp:1.1}
+ 	The probability of finding the state $ \ket{\psi} = \ket{+} $ is
+	\[
+		P_+ = \left| \braket{+}{\psi }  \right| ^2
+	.\]
+	Similarly, the probability of finding the state $ \ket{\psi} =\ket{-} $ is
+	\[
+		P_-=\left| \braket{-}{\psi }  \right| ^2
+	.\]
+	Moreover, when we measure $ \ket{\psi} $ in one of these states, it turns into that state.
+ \end{proposition}
+
+Since the probabilities have to sum to 1, we assume $\psi $ has a unit norm. This follows since $\braket{+}{-} =0$, so the probability of finding it at both $ \ket{+} $ and $ \ket{-} $ is 0.
+
+Since $ \ket{+} ,\ket{-} $ forms a complete basis, we can write
+\[
+	\ket{\psi} = \braket{+}{\psi }\ket{+}  + \braket{-}{\psi } \ket{-} 
+.\]
+Then
+\[
+	\left\lVert \ket{\psi}  \right\rVert = \left| \braket{+}{\psi }  \right| ^2 + \left| \braket{0}{\psi }  \right| ^2
+.\]
+
