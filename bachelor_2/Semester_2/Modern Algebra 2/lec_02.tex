@@ -1,0 +1,64 @@
+\lecture{2}{Fri 24 Jan 2025 13:27}{hi}
+
+Let $R$ be a ring without unity. Define $S=R\times \mathbb{Z}$ or $S=r\times \mathbb{Z}_{\chr(R) }$.  Define multiplication by
+\[
+	(r,n)(s,m)=(rs+ns+mr,nm)
+.\]
+Then $(0,1)$ is a unity and there exists an inclusion $R\hookrightarrow S$ which is also a ring homomorphism by the map $r\mapsto (r,0)$.
+
+The quaternions $\mathbb{H}$ are defined as the set of linear combinations of the set $\left\{ 1,i,j,k \right\} $ wherein multiplication satisfies $ijk=-1$, $i^2=-1$, $j^2=-1$, and $k^2=-1$. They are intended as an extension of the complex numbers $\mathbb{C}$, in a similar way to how the complex numbers extend $\mathbb{R}$. However, this definition of multiplication necessitates $ij=-ji$, meaning $\mathbb{H}$ is a noncommuative ring. Furthermore, it can be shown (with some difficulty) that all elements of $\mathbb{H}$ have multiplicative inverses. So $\mathbb{H}$ is a noncommutative ring with unity with multiplicative inverses. We call this a divison ring.
+
+\begin{definition}[Division Ring]\label{dfn:1.4}
+	Let $R$ be a ring with unity, such that  $\forall r\in R$, $\exists r^{-1}\in R$ such that $rr^{-1}=r^{-1}r=1_R$. Then $R$ is a division ring.
+\end{definition}
+
+Going back down in dimension to $\mathbb{C}$ gives more structue. Elements in $\mathbb{C}$ do, in fact, commute under multiplication; this makes $\mathbb{C}$ into a field.
+
+\begin{definition}[Field]\label{dfn:1.5}
+	Let $k$ be a commutative ring with unity, such that for all $r\in k$, there exists $r^{-1}\in k$ such that $rr^{-1}=1_k$. Then $k$ is called a field.
+\end{definition}
+
+\begin{definition}[Direct Product]\label{dfn:1.6}
+	Let $R,S$ be rings. Define the direct product $R\times S$ as the cartesian product of the sets $R,S$ together with coordinate-wise addition and multiplication. Moreover, for any set of rings $R_1, \dots, R_n $, define the product $R_1 \times \cdots \times R_n$, which is defined in the same way.
+\end{definition}
+
+The direct product satisfies the universal property for products in $\mathbf{Ring}$, but there are more multiplicative structures that can be endowed to the underlying abelian group $R_1 \oplus  \cdots \oplus  R_n $, which we may or may not see when we do polynomial rings. We may write $\oplus $ instead of $\times $ in some commutative cases.
+
+\begin{proposition}\label{prp:1.1}
+	Let $R$ be a ring, and let $a,b,c\in R$. Then
+	\begin{itemize}
+		\item $a0=0a=0$;
+		\item $a(-b)=(-a)b=-ab$;
+		\item $(-a)(-b)=ab$;
+		\item $a(b-c)=ab-ac$ and $(a-b)c=ac-bc$;
+		\item $(-1)a=-a$;
+		\item $(-1)(-1)=1$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	(1) Many of these are trivial, so I will only prove a few. Let $a\in R$. Then
+	\[
+		0a=(0+0)a =0a+0a \implies 0a - 0a = 0a - 0a - 0a \implies 0=0a
+	.\]
+
+
+	(3) Now let $a,b\in R$ and note that $(-a+a)(-b)=0(-b)=0$, and thus
+	\[
+		(-a)(-b)+a(-b)=0
+	.\]
+	By property 2,
+	\[
+		(-a)(-b) + a(-b)=(-a)(-b)-(ab)
+	.\]
+	Therefore, $(-a)(-b)=ab$.
+
+	Statement holds for $n=1,2$ trivially. Let $n$ even and suppose the statement holds $\forall m\leq n$. We have
+	\[
+		x^{n+2} = \left( x^{\frac{n}{2}+1} \right) ^2 = 0 \iff x^{\frac{n}{2}+1} = 0
+	.\]
+	Therefore, $x^{n+2}=0$ iff $x=0$. Now we have immediately
+	\[
+		x \left( x^{n+1} \right) =x^{n+2}
+	.\]
+	If $x\neq 0$ but $x^{n+1}=0$, then we have $x^{n+2}=0$ for $x\neq 0$, contradiction.
+\end{proof}

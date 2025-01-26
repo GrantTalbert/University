@@ -33,7 +33,7 @@ As requested, the numberings I am using are as given in the lecture notes. Let $
 \[
 	0 \ket{v} \overset{*}{=} (0+0) \ket{v}  \overset{4}{=} 0 \ket{v} +0 \ket{v} \overset{8,9}{\implies} 0 \ket{v} +(0 \ket{v} -0 \ket{v}) \overset{8}{=} 0 \ket{v} \overset{\star}{=} 0 \ket{v} - 0 \ket{v}  \overset{8}{=}\ket{0} 
 .\]
-Note that the step denoted by $*$ follows by the field axioms, rather than the vector space axioms. Additionally, the step denoted $\star$ follows from the previous implication that $0 \ket{v} +0 \ket{v} =0 \ket{v} $; I just moved stuff around to make it fit on one line.
+Note that the step denoted by $*$ follows by the field axioms, rather than the vector space axioms. Additionally, the step denoted $\star$ follows by subtracting $ \ket{0}$ from both sides of the previous implication that $0 \ket{v} +0 \ket{v} =0 \ket{v} $; I just moved stuff around to make it fit on one line.
 \section{Vector Spaces}
 For all of these problems, let $V$ be the given set, and define addition and scalar multiplication pointwise; i.e. $(f+g)(x)=f(x)+g(x)$ and $(zf)(x)=z\cdot f(x)$ for all $f,g\in V$ and $z\in\mathbb{C}$.
 \begin{enumerate}
@@ -44,29 +44,13 @@ For all of these problems, let $V$ be the given set, and define addition and sca
 					(f+g)(0)=f(0)+g(0)=0+0=0 \text{ and }(f+g)(L)=f(L)+g(L)=0+0=0
 				.\]
 				Therefore, $f+g\in V$;
-			\item Commutativity (and associativity) of addition: Since $\mathbb{C}$ is commutative under addition, for all $x\in\mathbb{C}$,
-				\[
-					(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)
-				.\]
-				Therefore, $f+g=g+f$. By the same logic, since $\mathbb{C}$ is associative under addition,
-				\[
-					(f+(g+h))(x)=f(x)+(g(x)+h(x))=(f(x)+g(x))+h(x)=((f+g)+h)(x)
-				.\]
-				Therefore, $(f+g)+h=f+(g+h)$, and $V$ is associative under addition.
-				$(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)$. Therefore, $f+g=g+f$. By the same logic since $\mathbb{C}$ is associative under addition, $(f+g)+h=f+(g+h)$;
-			\item Note that the zero function $0(x)=0$ is a function. For any $f\in V$,
-				\[
-					(f+0)(x)=f(x)+0(x)=f(x)
-				.\]
-				Therefore, $0(x)$ is an additive identity in $V$.
-			\item Let $f\in V$. Define $-f$ as the function $(-f)(x)=-f(x)$. We have $f(x)+(-f)(x)=f(x)-f(x)=0$ for all $x$. Therefore, $-f$ is an additive inverse of $f $.
 			\item $(zf)(0)=z(f(0))=z0=0$ and $(zf)(L)=z(f(L))=z0=0$, so $zf\in V$;
 		\end{enumerate}
-	\item No. Using the same definitions as before, note that the set has no additive identity. The zero function is the additive identity on the set of functions $[0,L] \to \mathbb{C}$:
+	\item No. Using the same definitions as before, note that for any $f\in V$, $f'(0)>0$. Note that $-1\in\mathbb{C}$. We have
 		\[
-			(f+0)(x)=f(x)+0(x)=f(x) \implies \forall x:0(x)=0
+			\frac{\mathrm{d}}{\mathrm{d}x} (-1f)(x)=-f'(x)
 		.\]
-		Since $V$ is a subset of the set of maps $[0,L] \to \mathbb{C}$, we have that the $0$ function must be the additive identity in $V$ as well. We have $0'(x)=0(x)$, and $0(0)=0 \not> 0$. Therefore, $0 \notin V$.
+		It follows that $(-1f)'(0)=-f'(0)<0$, so $-1f\notin V$.
 	\item Yes. It suffices to show the only element of the space is the 0 function. Let $f\in V$. Since $f$ has a vanishing first derivative everywhere, it follows that $f$ is continuous everywhere. Let $x\in [0,L]$ and suppose for contradiction that $f(x)>0$. Since $f$ is continuous on $[0,L]$, by the intermediate value theorem, $f$ takes on every value on the interval $[0, f(x)]$ at some point on the interval $[0,x]$. Since $f$ is continuous and $f(x) \gneq0$, we have that $f$ is increasing on some subinterval of $[0, f(x)]$; equivalently, $f$ has a positive first derivative on this interval. Therefore, $f(x)=0$ for all $x\in [0,L]$. Note that this implies $f(L/2)=0$, so that property is also satisfied. Therefore, $f\in V$ implies $f=0$, so $V=\left\{ 0 \right\} $ is the trivial vector space.
 \end{enumerate}
 \section{Eigenvalues}

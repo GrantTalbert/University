@@ -1,0 +1,98 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\courseID{MA 542}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\[
+	12\cdot 16=192=24\cdot 8 \implies 12\cdot 16 \equiv 0 \mod{24}
+.\]
+\section*{Problem 3}
+\[
+	11\cdot (-4)=-44=(-3\cdot 15)+1 \implies 11\cdot (-4)\equiv 1\mod{15} 
+.\]
+\section*{Problem 5}
+\[
+	(2,3)(3,5)=(6,15)\equiv (1,6)\mod{5\times 9} 
+.\]
+\section*{Problem 7}
+The ring is commutative because it is a subring of $\mathbb{Z}$, and it has unity if and only if $n\in \left\{ 0,1 \right\} $.
+\section*{Problem 9}
+It's commutative because $\mathbb{Z}$ is commutative, and it has $(1,1)$ as a unity.
+\section*{Problem 11}
+The ring is commutative, and has $1$ as a unity. However, it is not a field. Let $a+b\sqrt{2} $ be the multiplicative inverse of $2$; that is,
+\[
+	2\left( a+b\sqrt{2}  \right) =1
+.\]
+Suppose for contradiction that $a+b\sqrt{2} \in \mathbb{Z}\left[ \sqrt{2}  \right] $. It follows that
+\[
+	2a+2b\sqrt{2} =1 \implies 2b\sqrt{2} =1-2a
+.\]
+Since $1-2a\in\mathbb{Z}$, we have that $2b\sqrt{2} \in\mathbb{Z}$. However, since $2b\in\mathbb{Z}$, we have that $2b\sqrt{2} \in\mathbb{Z}$ if and only if $b=0$. It follows that
+\[
+	1-2a=0 \implies a=\frac{1}{2}\notin \mathbb{Z} \implies \impliedby 
+.\]
+\section*{Problem 13}
+
+\section*{Problem 15}
+Anything of the form $(0,n)$ or $(n,0)$ is a zero divisor and thus not a unit. Additionally, the inverse of $(a,b)$ if $a,b\neq 0$ is $(1 /a,1 /b)$, and $1/a, 1 /b\in\mathbb{Z}$ if and only if $a,b=1$.
+\[
+	\left\{ (1,1) \right\} 
+.\]
+\section*{Problem 17}
+$\forall r\in\mathbb{Q}\setminus \left\{ 0 \right\} $, $\exists 1 /r\in\mathbb{Q} \setminus \left\{ 0 \right\} $.
+\[
+	\mathbb{Q}\setminus \left\{ 0 \right\} 
+.\]
+\section*{Problem 19}
+$a\in\mathbb{Z}_4$ is a unit if and only if $a$ is nonzero and does not divide $4$. It follows that $U(\mathbb{Z}_4)=\left\{ 1,3 \right\} $.
+\section*{Problem 27}
+The conclusion that
+\[
+	(X-I_3)(X+I_3)=0 \implies X\in \left\{-I_3, I_3 \right\} 
+\]
+does not necessarily follow in $M_3(\mathbb{R})$, because $M_3(\mathbb{R})$ has zero divisors, so the cancellation law does not necessarily hold. For example, consider the matrix
+\[
+	X=\begin{pmatrix}
+		1&0&0\\
+		0&0&1\\
+		0&1&0
+	\end{pmatrix} 
+.\]
+Note that
+\[
+	X^2 = \begin{pmatrix}
+		1&0&0\\
+		0&0&1\\
+		0&1&0
+	\end{pmatrix} ^2 = I_3
+.\]
+However, $X\neq \pm I_3$.
+\section*{Problem 39}
+Let $a,b,c\in R$. It follows that
+\[
+	a(bc)=a0=0,\qquad (ab)c=0c=0
+.\]
+Therefore, associativity holds. Since $0\in R$, closure holds. Finally, note that
+\[
+	a(b+c)=0,\qquad ab+ac=0+0=0
+,\]
+\[
+	(a+b)c=0,\qquad ac+bc=0+0=0
+.\]
+Therefore, distributivity holds, and $(R,+,\cdot )$ is a ring.
+\section*{Problem 41}
+Using the notation as in the problem, and assuming for now that $a,b\neq 0$, note that since $p$ is prime, $a,b$ are units, and thus $a,b\in U(\mathbb{Z}_p)$. Since $p$ is prime, the order of $U(\mathbb{Z}_p)$ when viewed as a group is $p-1$. It follows that
+\[
+	a^{p-1}=b^{p-1}=1
+.\]
+Therefore, $a^p=a$ and $b^p=b$. Suppose $b\neq -a$. It follows that $(a+b)$ is also an element of $U(\mathbb{Z}_p)$, so we have $(a+b)^p=a+b$ by the same logic. Therefore, $(a+b)^p=a^p+b^p$.
+
+If $b=-a$, then we have $(a-a)^p=0$. If $p$ is odd, then $(-a)^p=-a^p$, so we have $a^p-a^p=0$. If $p=2$, then $a=1$, so $1^2+1^2= 0= (1-1)^2 \mod{2} $.
+
+Finally note that if $a$ or $b=0$, then we have $(a+0)^p=a^p+0^p$ or $(0+b)^p=0^p+b^p$ trivially.
+\section*{Problem 49}
+\end{document}
