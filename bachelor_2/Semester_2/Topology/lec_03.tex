@@ -1,0 +1,86 @@
+\lecture{3}{Tue 28 Jan 2025 11:05}{Bases, Closed sets, Hausdorff}
+\begin{proposition}\label{prp:1.2}
+	Let $(X,\mathcal{T} )$ be a topological space and let $\mathcal{C} $ be a collection of open subsets of $X$. Then $\mathcal{C} $ is a basis for the topology $\mathcal{T} $ on $X$ if and only if for all open sets $U\in \mathcal{T} $, for all $x\in U$, there exists $V\in \mathcal{C} $ such that $x\in V \subseteq U$.
+\end{proposition}
+\begin{proof}
+	For all $U\in \mathcal{T} $ and for all $x\in U$, let there exist $V\subseteq U$ in $\mathcal{C} $ such that $x\in V$. Since $X$ is open, we have that for all $x\in X$, there exists $V\in \mathcal{C} $ such that $x\in V$. Now let $V_1,V_2\in \mathcal{C} $. Since $\mathcal{C} $ is a collection of open sets, $V_1 \cap V_2$ is open. We thus have that for all $x\in V_1 \cap V_2$, there exists $V_3\ \subseteq V_1 \cap V_2$ in $\mathcal{C} $ such that $x\in V_3$. By definition \ref{dfn:1.4}, $\mathcal{C} $ is a basis. We now need to show $\mathcal{T} _{\mathcal{C} }=\mathcal{T}  $. Let $U\in \mathcal{T} $. For all $x\in U$, there exists $V_x\in \mathcal{C} $ such that $x\in V_x \subseteq U$. We then have
+	\[
+		U= \bigcup_{x\in U} V_x
+	.\]
+	$V_x\in \mathcal{C} $, $U\in \mathcal{T} _{\mathcal{C} } $. Additionally, since we defined $\mathcal{C} $ as a collection of \emph{open} sets, and all $V\in \mathcal{T} _{\mathcal{C} } $ are unions of elements in $\mathcal{C} $, by definiton \ref{dfn:1.1} we have immediately that $\mathcal{T} _{\mathcal{C} } \subseteq \mathcal{T} $.
+
+	Let $\mathcal{C} $ be a basis for $\mathcal{T} $. Let $U\in \mathcal{T} =\mathcal{T} _{\mathcal{C} } $, and let $x\in U$. Since $\mathcal{C} $ is a basis, we can thus write
+	\[
+		x\in U= \bigcup_{i\in I} V_i = U,\qquad V_i\in \mathcal{C} 
+	.\]
+	Note that $x$ is in this union. Therefore, there exists some $V_i\in \left\{ V_i \right\}_{i\in I} $ such that $x\in V_i$, and we get for free that
+	\[
+		V_i \subseteq \bigcup_{i\in I} V_i
+	.\]
+	Therefore, for all open sets $U$, for all $x\in U$, there exists $V_i \in \mathcal{C} $ such that $x\in V_i \subseteq U$.
+\end{proof}
+
+\begin{definition}[Closed]\label{dfn:1.6}
+	A subset $Y\subseteq X$ is \emph{closed} in $X$ if its compliment $Y^{c} =X\setminus Y$ is open.
+\end{definition}
+
+For example, in the standard topology on $\mathbb{R} $, a closed interval $[a,b]$ with $a<b$ is closed, because $[a,b]^{c} =(-\infty ,a)\cup (b,\infty )$, and since both of these are open intervals, this set is open.
+
+\begin{lemma}\label{lma:1.1}
+	\[
+		U\in \mathcal{T} \iff \forall x\in U,\exists V_x\in \mathcal{B} \text{ s.t. } x\in V_x\subseteq U
+	.\]
+\end{lemma}
+\begin{proof}
+	Follows from previous prp.
+\end{proof}
+
+
+Using lemma \ref{lma:1.1}, we can show the sae for $\mathbb{R} ^2$. Let $\overline{B} _{\varepsilon } \left( x \right ) =\left\{ y\in\mathbb{R} ^2\mid d(y,x)\leq \varepsilon  \right\}$. Let $x'\in \overline{B}(x,\varepsilon )^{c} $, and note that $d(x,x')>\varepsilon $	, so $d(x',x)-\varepsilon >0$. Take
+\[ = 1/2
+	\gamma = \frac{1}{2}( d(x',x)-\varepsilon )>0
+.\]
+By definition, $B(x',\gamma )$ is open, and contains $x'$. It this suffices to show by lemma \ref{lma:1.1} that $B(x',\gamma )\subseteq X\setminus \overline{B} (x,\varepsilon )$. That is, for all $y\in B(x',\gamma )$, $d(x,y)>\varepsilon $. Note that $y\in B(x',\gamma )$ implies
+\[
+	d(x',y)<\gamma  = \frac{1}{2}\left( d(x',x)-\varepsilon  \right ) <d(x,x')-\varepsilon 
+.\]
+We thus have by the triangle inequality that
+\[
+	d(x,y)\geq d(x,x')-d(x',y)
+.\]
+We also have
+\[
+	d(x,x')-d(x',y)>d(x,x')-\left( d(x,x')-\varepsilon  \right ) =\varepsilon 
+.\]
+Therefore,
+\[
+	d(x,y)>\varepsilon 
+,\]
+and thus, $B(x',\gamma )\subseteq \overline{B} (x,\varepsilon )^{c} $. Therefore, for all $x\in \overline{B} (x,\varepsilon )^{c} $, there exists an open set $x'\in B(x',\gamma )\subseteq \overline{B} (x,\varepsilon )$, and thus $\overline{B} (x,\varepsilon )$ is closed.
+
+\begin{proposition}\label{prp:1.3}
+	Let $(X,\mathcal{T} )$ be a topological space. Then
+	\begin{enumerate}
+		\item $X,\varnothing $ are closed;
+		\item Finite union of closed sets are closed;
+		\item Intersections of closed sets are closed.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Done in the homework. (1) is trivial, and (2,3) follow from De Morgan's laws.
+\end{proof}
+
+\begin{definition}[Hausdorff]\label{dfn:1.7}
+	A topological space $X$ is Hausdorff if for all distinct $x,y\in X$, there exist open sets $U_x,U_y$ such that $x\in U_x$, $y\in U_y$, and $U_x \cap U_y = \varnothing $.
+\end{definition}
+
+\begin{figure}[ht]
+\incfig{Hausdorff}
+    \centering
+    \caption{Hausdorff}\label{fig:Hausdorff}
+    \centering
+\end{figure}
+
+For example, the trivial topology on $\mathbb{R} $ is \emph{not} Hausdorff. However, we would expect all nice spaces to be Hausdorff, such as $\mathbb{R} $ with the normal topology, so we study Hausdorff spaces in detail.
+
+Here's another example interesting. Let $X=\mathbb{R} \cup \left\{ 0' \right\} $, where $0'$ is some formal point outside of $\mathbb{R} $. Every open set not containing $0$ in the standard topology on $\mathbb{R} $ is open, and additionally for all open sets $U$ containing $0$,  we instead include the new open set $U'$ such that $U' = U \cup \left\{ 0' \right\} $. This is basically just $X= \mathbb{R} \amalg \mathbb{R} / \tildesim  $. This space is \emph{not Hausdorff}, since \emph{every open set} containing $0$ must also contain $0'$, so although $0\neq 0'$, there exist no disjoint neighborhoods of these points. We usually call this a line with double 0.

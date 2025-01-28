@@ -7,10 +7,35 @@
 \begin{document}
 \makeproblem
 \section*{Problem 1}
+By definition, $\varnothing ,\mathcal{T} \in\mathbb{R} $. Now let $\left\{ (-\infty ,p) \right\}_{p\in P} \subseteq \mathcal{T} $, and consider the union over this collection. Let $a=\sup  P$, and let $x\in (-\infty ,a)$.
 \section*{Problem 2}
 \section*{Problem 3}
+Note that $X^{c} =X\setminus X=\varnothing $, and $\varnothing ^{c} =X\setminus \varnothing =X$. Therefore, $\varnothing ,X$ are closed.
+
+Let $\left\{ X_a \right\}_{a\in A} $ be a collection of closed sets in $X$. It follows that there exists a collection $\left\{ Y_a \right\}_{a\in A} $ of open sets such that $ Y_a ^{c} =X_a$. It follows that
+\[
+	\bigcap_{a\in A} X_a = \bigcap_{a\in A} Y_a^{c} 
+.\]
+By De Morgan's laws, this equals
+\[
+	\left( \bigcup_{a\in A} Y_a \right ) ^{c} 
+.\]
+By the definition of a topology, $\bigcup_{a\in A} Y_a$ is open, so $\left( \bigcup_{a\in A} Y_a \right ) ^{c} $ is closed.
+
+Let $\left\{ X_k \right\}_{i=1}^k$ be a finite collection of closed sets in $X$. It follows that there exists a collection $\left\{ Y_i \right\}_{i=1}^k$ of open sets such that $Y_i^{c} =X_i$ for all $i$. By De Morgan's laws, it follows that
+\[
+	\bigcup_{i=1} ^k X_i = \bigcup_{i=1} ^k Y_i^{c} =\left( \bigcap_{i=1} ^k Y_i \right ) ^{c} 
+.\]
+By definition of a topology, since $Y_i$ is open for all $i$, it follows that $\bigcap_{i=1} ^k Y_i$ is open. Therefore, $\left( \bigcap_{i=1} ^k Y_i \right ) ^{c} $ is closed.
 \section*{Problem 4}
 \section*{Problem 5}
+Let $X$ be Hausdorff, and consider the intersection
+\[
+	U\coloneqq \bigcap_{V} \overline{V} 
+\]
+over all neighborhoods $V$ of $x$. Note that $V\subseteq \overline{V} $, and by definition of an intersection, $U \subseteq \overline{V} $ for all neighborhoods $V$ of $X$. Since $x\in V$ for all $V$, and $V \subseteq \overline{V} $, we have that $x\in U$. Now suppose for contradiction that there exists $y\in U$ such that $y\neq x$. Since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Therefore, $y\notin V_x$, and we must have $y\in \overline{V_x} \setminus V_x$. Idk how to finish the proof, but we're going to need to choose a third point.
+
+Now suppose the aforementioned intersection $U=\left\{ x \right\} $. 
 \section*{Problem 6}
 \section*{Problem 7}
 \end{document}
