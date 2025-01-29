@@ -1,0 +1,118 @@
+\lecture{3}{Tue 28 Jan 2025 14:01}{owo}
+
+The kets $\ket{+}, \ket{-}$ form a complete basis because they are the only measurable states, and the vector space is the space of all states.
+
+The born rule says
+\[
+	P_{\pm} = \left| \braket{\pm}{\psi } \right|^2
+.\]
+That is, the probability of measuring a given state is the same as the norm squared of the inner product with the state vector $\psi $ with the observable state $\ket{\pm}$.
+
+We can also change the direction in which we measure from the $\hat{z}$ direction to the $\hat{x} $ direction. We write $\ket{\pm}_x$. We can assume WLOG that these states are normalized; that is, $\braket{+}{+}_x=1$. Moreover, $\braket{+}{-}_x=0$, because we cannot measure one state and then have it change in repeated experiments with no change. This means state vectors are orthogonal. Everything about the $x$-states is the same as the $z$-states.
+
+It's difficult to describe how to desccibe a well-defined $z$ and $x$ direction at the same time; how can we show what direction $\ket{\psi }$ points in given only 2 states?
+
+Note that if you measure $\ket{+}$ in the $z$-direction, then you have a $50\%$ chance of measuring in $\ket{+}_x$ or $\ket{-}_x$, so we have that
+\[
+	P_+^{(x)} =P_-^{(x)} =\frac{1}{2} 
+.\]
+It follows that
+\[
+	\ket{\psi}_x = C_+^{(x)} \ket{+}_x+C_-^{(x)} \ket{-}
+.\]
+In this case, we have
+\[
+	P_{\pm}^{(x)} =\frac{1}{2} =\left| \braket{+_x}{+} \right| ^2 = \left| \braket{-_x}{+} \right|^2
+,\]
+because measuring $\ket{+}$ gives a $1/2$ chance of measuring either $+_x$ or $-_x$. Since $C_\pm^{(x)} \in\mathbb{C} $, we have that
+\[
+	\left| C_\pm^{(x)}  \right| =\frac{1}{\sqrt{2} } 
+.\]
+This is because
+\[
+	C_{\pm} ^{(x)} =\braket{\pm_x}{+}
+.\]
+This follows from orthogonality. Since these coefficients are complex-valued, this only tells us the probability, but we cannot discern the phase of these states. The phase of a complex number $z$ is the $\theta $ such that $z=re^{i\theta } $. We only know the magntidude, $r$. This is as far as we can go experimentally, and so we can arbitrarily choose values for $C^{(x)} _{\pm} $ without loss of generality, so we define
+\[
+	\ket{+}= \frac{1}{\sqrt{2} } \ket{+}_x + \frac{1}{\sqrt{2} } \ket{-}_x 
+.\]
+We can use the same logic to find that the magntitude of the coefficients
+\[
+	\ket{-} = C_+^{(x)} \ket{+}+C_-^{(x)} \ket{-}
+\]
+are also $1/\sqrt{2} $. However, we also know that since $\braket{+}{-}$ are orthogonal, we have that
+\[
+	\braket{-}{+}=\frac{C_+^{(x)} }{\sqrt{2} } \braket{+_x}{+_x}+\frac{C_-^{(x)} }{\sqrt{2} } \braket{-_x}{-_x}=0
+.\]
+We choose the convention that
+\[
+	C^{(x)} _+ = \frac{1}{\sqrt{2} } ,\qquad C_-^{(x)} =-\frac{1}{\sqrt{2} } 
+.\]
+\begin{mdframed}
+	\[
+		\ket{+}=\frac{1}{\sqrt{2} } \ket{+}_x+\frac{1}{\sqrt{2} } \ket{-}_x
+	,\]
+	\[
+		\ket{-}=\frac{1}{\sqrt{2} } \ket{+}_x-\frac{1}{\sqrt{2} } \ket{-}_x
+	.\]
+	\[
+		\ket{+}_x=\frac{1}{\sqrt{2} } \ket{+}+\frac{1}{\sqrt{2} } \ket{-}
+	,\]
+	\[
+		\ket{-}_x=\frac{1}{\sqrt{2} } \ket{+}-\frac{1}{\sqrt{2} } \ket{-}
+	.\]
+\end{mdframed}
+So if the act of measuring outputs some $\ket{+}$, since this doesn't have a definite $x$-component, it's then obvious how this $x$-state gets scrambled. This is superposition; a great way of saying this is ``Schrodinger's cat is a state in a vector space which is a linear combination of dead and alive''. This is because there is no way to describe what this physicsally means in english.
+
+Let's review the third Stern-Gerlach experiment again. We have measurements
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ket{\psi }\arrow[r]&Z\arrow[r]&X\arrow[r]&Z
+\end{tikzcd}\]
+
+We can give the isomorphic representations
+\[
+	\ket{+}\cong \begin{pmatrix}
+	1 \\
+	0
+\end{pmatrix},\qquad \ket{-}\cong \begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+.\]
+In this same representation, we have
+\[
+	\ket{+}_x \cong \frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 \\
+	1
+	\end{pmatrix},\qquad \ket{-}_x\frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 \\
+	-1
+	\end{pmatrix}
+.\]
+We can also perform measurements in the $Y$ direction, and use the same logic to determine the representations of $\ket{\pm}_y$. We have
+\[
+	\ket{+}_y = \frac{1}{\sqrt{2} } \left( \ket{+}+i\ket{-} \right ) ,
+\]
+\[
+	\ket{-}_y = \frac{1}{\sqrt{2} } \left( \ket{+}-i\ket{-} \right ) 
+.\]
+Our representations are then
+\[
+	\ket{+}_y \cong \frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 \\
+	i
+\end{pmatrix},\qquad \ket{-}_y \cong \frac{1}{\sqrt{2} } \begin{pmatrix}
+1 \\
+-i
+\end{pmatrix}
+.\]
+
+Now we want to talk about the generalized Born's rule. Let $\left\{ \ket{a_i} \right\}_{i\in I} $ be the collection of all possible obserable states. Since we cannot observe two different states, these vectors must be orthonormal:
+\[
+	\braket{a_i}{a_j}=\delta_{ij} 
+.\]
+The probability
+\[
+	P_{a_i} =\left| \braket{a_i}{\psi } \right| ^2
+.\]
+

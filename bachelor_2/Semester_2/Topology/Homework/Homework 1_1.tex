@@ -6,10 +6,45 @@
 \courseSection{A1}
 \begin{document}
 \makeproblem
-\section*{Problem 1}
-By definition, $\varnothing ,\mathcal{T} \in\mathbb{R} $. Now let $\left\{ (-\infty ,p) \right\}_{p\in P} \subseteq \mathcal{T} $, and consider the union over this collection. Let $a=\sup  P$, and let $x\in (-\infty ,a)$.
-\section*{Problem 2}
-\section*{Problem 3}
+\section*{Problem 1 [COMPLETE]}
+By definition, $\varnothing ,\mathcal{T} \in\mathbb{R} $. Now let $\left\{ (-\infty ,p) \right\}_{p\in P} \subseteq \mathcal{T} $, and consider the union over this collection. Let $a=\sup  P$, and let $x\in (-\infty ,a)$. We have that $a<\sup P$, and thus by definition, there exists $p\in P$ such that $a<p$. It follows that $x\in (-\infty ,p)$, and thus we have
+\[
+	x\in (-\infty ,p) \subseteq \bigcup_{p\in P} (-\infty ,p)
+.\]
+Therefore, $(-\infty ,a)\subseteq \bigcup_{p\in P} (-\infty ,p)$. Now let $x\in \bigcup_{p\in P} (-\infty ,p)$. It follows that there exists $p\in P $ such that $x\in (-\infty ,p)$, and thus $x<p$ for some $p\in P$. Since $p<\sup P=a$, we have that $x<a$, and thus $x\in (-\infty ,a)$. Therefore,
+\[
+	\bigcup_{p\in P} (-\infty ,p)=(-\infty ,\sup P)
+.\]
+Since $(-\infty ,\sup P)$ is of the same form as given in the definition of $\mathcal{T} $, we have $(-\infty ,\sup P)\in \mathcal{T} $. Therefore, $\mathcal{T} $ is closed under union.
+
+Now let $P$ be a finite subset of $\mathbb{R} $, and consider the collection $\left\{ (-\infty ,p) \right\}_{p\in P} $. Since $P$ is finite, it must have a least element. Let $a= \min P$ be this least element, and note that for all $p\in P$, $a\leq p$ implies that $(-\infty ,a)\subseteq (-\infty ,p)$. It follows that
+\[
+	(-\infty ,a)\bigcap_{p\in P} (-\infty ,p)
+.\]
+However, we also know that due to how intersections work,
+\[
+	\bigcap_{p\in P} (-\infty ,p) \subseteq (-\infty ,a)
+.\]
+Therefore, the finite intersection is of the for $(-\infty ,a)$, and thus is an element of $\mathcal{T} $. We have that $\mathcal{T} $ is closed under finite intersection, and is thus a topology on $\mathbb{R} $.
+\section*{Problem 2 [COMPLETE]}
+Let $n\in\mathbb{Z} $. If $n$ is odd, we have $n\in \left\{ n \right\}=B(n) \in \mathcal{B} $. If $n$ is even, then $n\in \left\{ n-1,n,n+1 \right\}=B(n) \in \mathcal{B} $. Therefore, for all $n\in\mathbb{Z} $, there exists $B(n)\in \mathcal{B} $ such that $n\in B(n)$.
+
+Now consider the intersection $B(n)\cap B(m)$ for $n,m\in\mathbb{Z} $. If $B(n)\cap B(m)=\varnothing $, then it is vacuously true that for all $x\in B(n)\cap B(m)$, there exists $B\in \mathcal{B} $ such that $x\in \mathcal{B} \subseteq B(n)\cap B(m)$. Thus, assume without loss of generality that the intersection is nonempty.
+
+Consider the case where either $n$ or $m$ is odd. Without loss of generality, assume $n$ is odd. We thus have
+\[
+	n\in B(n)\cap B(m) \implies B(n) = \left\{ n \right\} \subseteq B(n)\cap B(m)
+.\]
+Now consider the case where both $n$ and $m$ are even. If $n=m$, we trivially have $B(n)\subseteq B(n)\cap B(m)$ once again, since $B(n)=B(m)$, so assume without loss of generality that $n<m$. We then have
+\[
+	B(n)\cap B(m)=\left\{ n-1,n,n+1 \right\} \cap \left\{ m-1,m,m+1 \right\} 
+.\]
+Since $m>n$, but the intersection is nonempty, we must have $m-1=n+1$, since if $m$ is any greater the intersection is nonempty, but if $m$ is any less than $m=n$ or $m<n$. Note that since $n$ is even, $n+1$ is odd, so
+\[
+	B(n+1) \subseteq B(n)\cap B(m)
+.\]
+In all of these cases, note that $B(n),B(n+1)\in \mathcal{B} $, so we have that $\mathcal{B} $ is a basis for a topology on $\mathbb{Z} $.
+\section*{Problem 3 [COMPLETE]}
 Note that $X^{c} =X\setminus X=\varnothing $, and $\varnothing ^{c} =X\setminus \varnothing =X$. Therefore, $\varnothing ,X$ are closed.
 
 Let $\left\{ X_a \right\}_{a\in A} $ be a collection of closed sets in $X$. It follows that there exists a collection $\left\{ Y_a \right\}_{a\in A} $ of open sets such that $ Y_a ^{c} =X_a$. It follows that
@@ -33,9 +68,29 @@ Let $X$ be Hausdorff, and consider the intersection
 \[
 	U\coloneqq \bigcap_{V} \overline{V} 
 \]
-over all neighborhoods $V$ of $x$. Note that $V\subseteq \overline{V} $, and by definition of an intersection, $U \subseteq \overline{V} $ for all neighborhoods $V$ of $X$. Since $x\in V$ for all $V$, and $V \subseteq \overline{V} $, we have that $x\in U$. Now suppose for contradiction that there exists $y\in U$ such that $y\neq x$. Since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Therefore, $y\notin V_x$, and we must have $y\in \overline{V_x} \setminus V_x$. Idk how to finish the proof, but we're going to need to choose a third point.
+over all neighborhoods $V$ of $x$. Note that $V\subseteq \overline{V} $, and by definition of an intersection, $U \subseteq \overline{V} $ for all neighborhoods $V$ of $x$. Since $x\in V$ for all $V$, and $V \subseteq \overline{V} $, we have that $x\in U$. Now suppose for contradiction that there exists $y\in U$ such that $y\neq x$. Since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Therefore, $y\notin V_x$, and since $\overline{V_x} \subseteq U$, we must have $y\in \overline{V_x} \setminus V_x$. We need to define closure before I finish this problem.
 
 Now suppose the aforementioned intersection $U=\left\{ x \right\} $. 
-\section*{Problem 6}
-\section*{Problem 7}
+\section*{Problem 6 [COMPLETE]}
+Let definitions be as given in the problem, and suppose $X$ is Hausdorff. Then for all $x\neq y$ in $X$, there exist disjoint neighborhoods $V_x$, $V_y$ of $x$ and $y$, respectively. Equivalently, $V_x \subseteq X \setminus  V_y = V_y^{c} $. Since $V_y $ is open, $V_y^{c} $ is finite, and thus $V_x$ is finite. Note that $X = V_x \cup V_x^{c} $. Since $V_x$ and $V_x^{c} $ are finite, $X$ is finite.
+
+Now suppose $X$ is finite. It follows that all subsets $U\subseteq X$ are finite, and thus $U^{c} = X \setminus U$ is finite. Therefore, $\mathcal{T} =\mathscr{P} (X)$ is the power set of $X$, and we have that for any points $x\neq y$ in $X$, the sets $\left\{ x \right\} ,\left\{ y \right\} \in \mathcal{T} $ are trivially disjoint.
+\section*{Problem 7 [COMPLETE]}
+Note that for any $C\in \mathcal{C} $, the interesection $\bigcap_{i=1}^1 C = C\in \mathcal{B}_{\mathcal{C} } $. Therefore, $\mathcal{C} \subseteq \mathcal{B} _{\mathcal{C} } $. By definition,
+\[
+	\bigcup_{C\in \mathcal{C} } C=X
+.\]
+Therefore, for all $x\in X$, there exists $C\in \mathcal{B} _{\mathcal{C} } $ such that $x\in C$. Now let $U_1,U_2\in \mathcal{B} _{\mathcal{C} } $. It follows that there exist finite collections $\left\{ C_i \right\}_{i=1}^k, \left\{ C_j \right\}_{j=1}^\ell \subseteq \mathcal{C} $ such that
+\[
+	U_1 = \bigcap_{i=1} ^k C_i,\qquad U_2=\bigcap_{j=1}^\ell C_j
+.\]
+Let $\mathcal{V} $ be the collection of all $C_i$s and $C_j$s. We have
+\[
+	U_1 \cap U_2 = \left( \bigcap_{i=1}^k C_i \right ) \cap \left( \bigcap_{j=1}^\ell C_j \right ) =\bigcap_{V\in \mathcal{V} } V
+.\]
+Since $\left\{ C_i \right\}_{i=1} ^k$ and $\left\{ C_j \right\}_{j=1} ^\ell $ are finite, $\mathcal{V} $ is finite, and thus $U_1 \cap U_2$ is a finite intersection of elements of $\mathcal{C} $. Therefore, $U_1 \cap U_2\in \mathcal{B} _{\mathcal{C} } $. Note that
+\[
+	U_1 \cap U_2 \subseteq U_1 \cap U_2
+,\]
+and thus $\mathcal{B} _{\mathcal{C} } $ is a basis.
 \end{document}
