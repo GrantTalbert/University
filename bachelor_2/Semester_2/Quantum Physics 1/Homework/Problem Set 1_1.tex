@@ -29,7 +29,7 @@
 \begin{document}
 \makeproblem
 \section{The Zero Vector}
-As requested, the numberings I am using are as given in the lecture notes. Let $V$ be a vector space over $\mathbb{C}$ with zero vector $\ket{0} $. Then
+Let $V$ be a vector space over $\mathbb{C}$ with zero vector $\ket{0} $. Then
 \[
 	0 \ket{v} \overset{*}{=} (0+0) \ket{v}  \overset{4}{=} 0 \ket{v} +0 \ket{v} \overset{8,9}{\implies} 0 \ket{v} +(0 \ket{v} -0 \ket{v}) \overset{8}{=} 0 \ket{v} \overset{\star}{=} 0 \ket{v} - 0 \ket{v}  \overset{8}{=}\ket{0} 
 .\]
@@ -39,19 +39,21 @@ For all of these problems, let $V$ be the given set, and define addition and sca
 \begin{enumerate}
 	\item Yes.
 		\begin{enumerate}
-			\item Closure under addition:
+			\item Closure under addition: let $f,g\in V$. We have
 				\[
 					(f+g)(0)=f(0)+g(0)=0+0=0 \text{ and }(f+g)(L)=f(L)+g(L)=0+0=0
 				.\]
 				Therefore, $f+g\in V$;
-			\item $(zf)(0)=z(f(0))=z0=0$ and $(zf)(L)=z(f(L))=z0=0$, so $zf\in V$;
+			\item Closure under scalar multiplication: let $z\in\mathbb{C} $. We have
+				\[(zf)(0)=z(f(0))=z0=0 \text{ and }  (zf)(L)=z(f(L))=z0=0,\]
+ so $zf\in V$.
 		\end{enumerate}
 	\item No. Using the same definitions as before, note that for any $f\in V$, $f'(0)>0$. Note that $-1\in\mathbb{C}$. We have
 		\[
 			\frac{\mathrm{d}}{\mathrm{d}x} (-1f)(x)=-f'(x)
 		.\]
 		It follows that $(-1f)'(0)=-f'(0)<0$, so $-1f\notin V$.
-	\item Yes. It suffices to show the only element of the space is the 0 function. Let $f\in V$. Since $f$ has a vanishing first derivative everywhere, it follows that $f$ is continuous everywhere. Let $x\in [0,L]$ and suppose for contradiction that $f(x)>0$. Since $f$ is continuous on $[0,L]$, by the intermediate value theorem, $f$ takes on every value on the interval $[0, f(x)]$ at some point on the interval $[0,x]$. Since $f$ is continuous and $f(x) \gneq0$, we have that $f$ is increasing on some subinterval of $[0, f(x)]$; equivalently, $f$ has a positive first derivative on this interval. Therefore, $f(x)=0$ for all $x\in [0,L]$. Note that this implies $f(L/2)=0$, so that property is also satisfied. Therefore, $f\in V$ implies $f=0$, so $V=\left\{ 0 \right\} $ is the trivial vector space.
+	\item Yes. It suffices to show the only element of the space is the 0 function, because $0+0=0$ and $\alpha 0=0$ for all $0$ vectors in all vector spaces, and all scalars $\alpha $ in all fields. Let $f\in V$. Since $f$ has a vanishing first derivative everywhere, it follows that $f$ is continuous everywhere. Let $x\in [0,L]$ and suppose for contradiction that $f(x)>0$. Since $f$ is continuous on $[0,L]$, by the intermediate value theorem, $f$ takes on every value on the interval $[0, f(x)]$ at some point on the interval $[0,x]$. Since $f$ is continuous and $f(x) \gneq0$, we have that $f$ is increasing on some subinterval of $[0, f(x)]$; equivalently, $f$ has a positive first derivative on this interval. Therefore, $f(x)=0$ for all $x\in [0,L]$. Note that this implies $f(L/2)=0$, so that property is also satisfied. Therefore, $f\in V$ implies $f=0$, so $V=\left\{ 0 \right\} $ is the trivial vector space.
 \end{enumerate}
 \section{Eigenvalues}
 \begin{enumerate}
@@ -85,7 +87,9 @@ For all of these problems, let $V$ be the given set, and define addition and sca
 
 import numpy as np
 
-u = np.array([i for i in range(1,11)])
+u = np.arange(1, 11)
+u = u.reshape(-1, 1)
+
 print(np.linalg.matrix_rank(u @ u.T))
 \end{lstlisting}
 This program returns 1. The number of nonzero eigenvalues of a symmetric matrix is equal to its rank, and we implicitly assumed $\lambda \neq 0$ when we stated $x_k=kx_1$. If we suppose $\lambda =0$, then we have $nx_n=0$, since $k\neq 0$ for all $k$. We can define $x_k = (-1)^k1/k$, and note that
@@ -93,6 +97,35 @@ This program returns 1. The number of nonzero eigenvalues of a symmetric matrix 
 	\sum_{n=1}^{10} (-1)^n\frac{n}{n}=5-5=0
 .\]
 Therefore, $0$ is also an eigenvalue for at least this singular vector.
-\item hi
+\item I got a fever so I'm not going to do this the creative way and am just going to write a script.
+	\begin{lstlisting}[language=Python]
+#!/bin/python3
+
+import numpy as np
+
+u = np.arange(1, 11)
+u = u.reshape(-1, 1)
+
+v = np.arange(1, 11) / 2
+v = v.reshape(-1, 1)
+
+w = np.arange(1, 11)
+w = (-1) ** w / w
+w = w.reshape(-1, 1)
+
+print(np.linalg.eigvals((u @ u.T) + (v @ v.T) + (w @ w.T)))
+	\end{lstlisting}
+	This outputs
+	\begin{lstlisting}[language=Bash]
+		[ 4.81250000e+02+0.00000000e+00j  1.54976773e+00+0.00000000e+00j
+  7.78879923e-15+0.00000000e+00j -9.48602991e-15+3.10320984e-15j
+ -9.48602991e-15-3.10320984e-15j  1.96268824e-15+1.23172745e-15j
+  1.96268824e-15-1.23172745e-15j -2.11183098e-15+1.96936937e-15j
+ -2.11183098e-15-1.96936937e-15j -6.23523255e-16+0.00000000e+00j]
+	\end{lstlisting}
+	Since this matrix is the sum of three rank 1 matrices, it's rank should be no more than 3, so it should have no more than 3 nonzero eigenvalues. This implies that the last 8 eigenvalues are floating point errors, since they are very small. Moreover, running the same code but changing the last line to print \verb|np.linalg.matrix_rank(...)|, we find that the rank of the matrix is precisely 2. Therefore, the only actual eigenvalues are
+	\[
+		481.25,\qquad 1.55
+	.\]
 \end{enumerate}
 \end{document}

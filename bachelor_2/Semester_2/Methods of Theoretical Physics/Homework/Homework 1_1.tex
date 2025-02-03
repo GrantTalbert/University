@@ -30,9 +30,178 @@ Since $2\neq -1$, $B$ is not injective. Further, suppose $3=n(n+1)$. We have
 .\]
 Therefore, there exists at least one element $3\in\mathbb{N}$ such that $3\notin B(\mathbb{Z})$, and thus $B$ is not surjective.
 
-Finally, note that since $A(\mathbb{Z})=\mathbb{Z}$, we have that $B(\mathbb{Z})=B(A(\mathbb{Z}))=C(\mathbb{Z})$, so $C$ is not surjective. Additionaly,
+Finally, note that since $A(\mathbb{Z})=\mathbb{Z}$, we have that $B(\mathbb{Z})=B(A(\mathbb{Z}))=C(\mathbb{Z})$, so $C$ is not surjective because $B$ is not surjective. Additionaly,
 \[
 	C(1)=2=(-1)^2+(-1)=C(-1)
 .\]
 Therefore, $C$ is not injective either.
+\section*{Problem 2}
+\begin{enumerate}
+	\item
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} 2^x = 2^x\ln 2
+		.\]
+	\item
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} \operatorname{sinh } x = \frac{\mathrm{d}}{\mathrm{d}x} \frac{e^x-e^{-x} }{2} =\frac{1}{2} \frac{\mathrm{d}}{\mathrm{d}x} e^x-e^{-x} =\frac{e^x+e^{-x} }{2} =\operatorname{cosh} x
+		.\]
+	\item 
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} \operatorname{cosh } x = \frac{\mathrm{d}}{\mathrm{d}x} \frac{e^x+e^{-x} }{2} =\frac{1}{2} \frac{\mathrm{d}}{\mathrm{d}x} e^x+e^{-x} =\frac{e^x-e^{-x} }{2} =\operatorname{sinh} x
+		.\]
+	\item
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} \operatorname{tanh } x = \frac{\mathrm{d}}{\mathrm{d}x} \frac{\sinh x}{\cosh x} =\frac{\cosh^2 x - \sinh^2 x}{\cosh^2 x} =1-\tanh^2 x
+		.\]
+	\item 
+		\[
+			\frac{\mathrm{d}f}{\mathrm{d}x} =\frac{\mathrm{d}}{\mathrm{d}x} \frac{x^2+2}{x^2-1} = \frac{\left( x^2-1 \right) (2x)-\left( x^2+2 \right) (2x)}{\left( x^2-1 \right)^2 } 
+		.\]
+	\item 
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} x \ln x = \ln x + \frac{x}{x} = \ln x + 1
+		.\]
+	\item
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} e^{-x^2} =e^{-x^2} *(-2x)
+		.\]
+	\item
+		\begin{align*}
+			&\qquad\;\;\;f(x)=x^x\\
+			&\implies \ln f(x) = x \ln x\\
+			&\implies \frac{\mathrm{d}}{\mathrm{d}x} \ln f(x) = \frac{\mathrm{d}}{\mathrm{d}x} x \ln x\\
+			&\implies \frac{f'(x)}{f(x)} = \ln x + 1\\
+			&\implies f'(x)= \left( x^x \right) \left( \ln x + 1 \right) 
+		.\end{align*}
+\end{enumerate}
+\section*{Problem 3}
+The placement of the images got all messed up and I don't have time to fix it. Each figure's caption states what problem it belongs to. Sorry!
+
+		{\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image1.jpg}
+			\centering
+			\caption{\#3.1}
+			\centering
+		\end{figure}
+
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image2.jpg}
+			\centering
+			\caption{\#3.2}
+			\centering
+		\end{figure}
+
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image0.jpg}
+			\centering
+			\caption{\#3,3}
+			\centering
+		\end{figure}
+
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image3.jpg}
+			\centering
+			\caption{\#3.4}
+			\centering
+	\end{figure}
+
+\newpage
+
+\section*{Problem 4}
+\begin{enumerate}
+	\item 
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} \sin ^{-1} x = \frac{1}{\cos \left( \sin ^{-1} x \right) } =\frac{1}{\sqrt{1-\sin ^2\left(  \sin ^{-1} x\right ) } } =\frac{1}{\sqrt{1-x^2} } 
+		.\]
+	\item 
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} \cos ^{-1} x = \frac{1}{-\sin \left( \cos ^{-1} x \right) } =-\frac{1}{\sqrt{1-\cos ^2 \left( \cos ^{-1} x \right) } } =-\frac{1}{\sqrt{1-x^2} } 
+		.\]
+	\item 
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}x} \tan ^{-1} x = \frac{1}{\sec ^2 \left( \tan ^{-1}  x\right) } =\frac{1}{1+\tan ^2  \left( \tan ^{-1}  x\right ) } = \frac{1}{1+x^2} 
+		.\]
+\end{enumerate}
+
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image4.jpg}
+			\centering
+			\caption{\#4.1}
+			\centering
+		\end{figure}
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image5.jpg}
+			\centering
+			\caption{\#4.2}
+			\centering
+		\end{figure}
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image6.jpg}
+			\centering
+			\caption{\#4.3}
+			\centering
+		\end{figure}
+\section*{Problem 5}
+\[
+	f(0)=e^0=1
+.\]
+
+\[
+	f'(x)=e^{2x/(x+2)} \left( \frac{2(x+2)-2x}{(x+2)^2}  \right) = e^{2x/(x+2)} \left( \frac{4}{(x+2)^2}  \right) 
+.\]
+\[
+	f'(0)=e^{0} \left( \frac{4}{4}  \right ) =1
+.\]
+\[
+	f''(x)=e^{2x/(x+2)} \left( \frac{16}{(x+2)^4}   \right) + e^{2x/(x+2)} \left( \frac{-8}{\left( x+2 \right)^{3}  }   \right) 
+.\]
+\[
+	f''(0)=e^0 \left( \frac{16}{16}  \right ) + e^0 \left( \frac{-8}{8}  \right) =0
+.\]
+The Taylor expansion is
+\[
+	T_2(x)= 1 + x
+.\]
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image7.jpg}
+			\centering
+			\caption{\#5}
+			\centering
+		\end{figure}
+\section*{Problem 6}
+\begin{enumerate}
+	\item
+		\[
+			\frac{\sin (0)}{0} = 0/0
+		.\]
+		Using L'Hopital's rule,
+		\[
+			\lim_{x \to 0} \frac{\sin x}{x} =\lim_{x \to 0} \frac{\cos x}{1} =\frac{\cos 0}{1} =1
+		.\]
+	\item
+		\[
+			\frac{a^2+2a-a^2-2a}{a^2-a^2-2a+2a} =0/0
+		.\]
+		Using L'Hopital's rule,
+		\[
+			\lim_{x \to a} \frac{x^2+(2-a)x-2a}{x^2-(a+2)x+2a} =\lim_{x \to a} \frac{2x+2-a}{2x-a-2} =\frac{2a+2-a}{2a-a-2} =\frac{a+2}{a-2} 
+		.\]
+	\item
+		\[
+			\frac{e^{-0^4} -1}{\left( e^{0^2} -1 \right)^2 } = \frac{1-1}{(1-1)^2} =0/0
+		.\]
+		Using L'Hopital's rule,
+		\[
+			\lim_{x \to 0} \frac{e^{-x^4} -1}{\left( e^{x^2} -1 \right)^2 } =\lim_{x \to 0} \frac{e^{-x^4} \left( -4x^3 \right) }{2 e^{x^2} \cdot 2x} =\lim_{x \to 0} \frac{-4x^2 e^{-x^4} }{2e^{x^2} } = \frac{0}{1} =0
+		.\]
+	\item
+		\[
+			\lim_{x \to \infty} x^n e^{-ax} = \lim_{x \to \infty} \frac{x^n}{e^{ax} } = \frac{\infty }{\infty } 
+		.\]
+		Applying L'Hopital's rule,
+		\[
+			\lim_{x \to \infty} \frac{x^n}{e^{ax} } =\lim_{x \to \infty} \frac{nx^{n-1} }{ae^{ax} } \cdots \lim_{x \to \infty} \frac{(n\cdot (n-1)\cdot \cdots (n-\left\lceil n \right\rceil ))  x^{n-\left\lceil n \right\rceil  } }{a^{\left\lceil n \right\rceil } e^{ax} } =\frac{1}{\infty } =0
+		.\]
+\end{enumerate}
+
 \end{document}

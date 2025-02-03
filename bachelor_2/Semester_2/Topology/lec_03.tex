@@ -74,13 +74,6 @@ and thus, $B(x',\gamma )\subseteq \overline{B} (x,\varepsilon )^{c} $. Therefore
 	A topological space $X$ is Hausdorff if for all distinct $x,y\in X$, there exist open sets $U_x,U_y$ such that $x\in U_x$, $y\in U_y$, and $U_x \cap U_y = \varnothing $.
 \end{definition}
 
-\begin{figure}[ht]
-\incfig{Hausdorff}
-    \centering
-    \caption{Hausdorff}\label{fig:Hausdorff}
-    \centering
-\end{figure}
-
 For example, the trivial topology on $\mathbb{R} $ is \emph{not} Hausdorff. However, we would expect all nice spaces to be Hausdorff, such as $\mathbb{R} $ with the normal topology, so we study Hausdorff spaces in detail.
 
 Here's another example interesting. Let $X=\mathbb{R} \cup \left\{ 0' \right\} $, where $0'$ is some formal point outside of $\mathbb{R} $. Every open set not containing $0$ in the standard topology on $\mathbb{R} $ is open, and additionally for all open sets $U$ containing $0$,  we instead include the new open set $U'$ such that $U' = U \cup \left\{ 0' \right\} $. This is basically just $X= \mathbb{R} \amalg \mathbb{R} / \tildesim  $. This space is \emph{not Hausdorff}, since \emph{every open set} containing $0$ must also contain $0'$, so although $0\neq 0'$, there exist no disjoint neighborhoods of these points. We usually call this a line with double 0.

@@ -1,3 +1,129 @@
 \section{The Conjugation Action}
 \subsection{Action of Groups on Sets, Reminder}
-We showed previously that every transitive action of a group $G$ on a set $S$ is isomorphic to the action of left multiplication on the set of left cosets $G / \operatorname{Stab}_G(a) $, for any $a\in S$. Also recall that isomorphisms of group actions are equivariant bijections $\phi : S_1 \to S_2$ such that $\phi (ga)=g\phi (a)$. This fact applies to every set $G$ acts transitively on, and thus for any finite orbit $O$, we were able to show $\left| O \right| =[G: \operatorname{Stab}_G(a) ]$, and thus $\left| O \right| $ divides $\left| G \right| $.
+Recall that an isomorphism of $G$-actions $(\rho ,A)$ and $(\sigma ,B)$ is a bijection $\phi :A\to B$ such that $\phi (ga)=g\phi (a)$ for all $a\in A$. We call such functions \emph{equivariant bijections}.
+
+We showed previously that every transitive action of a group $G$ on a set $S$ is isomorphic to the action of left multiplication on the set of left cosets $G / \operatorname{Stab}_G(a) $, for any $a\in S$. Also recall that isomorphisms of group actions are equivariant bijections $\phi : S_1 \to S_2$ such that $\phi (ga)=g\phi (a)$. This fact applies to every set $G$ acts transitively on, and thus for any finite orbit $O$, we were able to show $\left| O \right| =[G: \operatorname{Stab}_G(a) ]$, and thus $\left| O \right| $ divides $\left| G \right| $. This is in fact quite a remarkable result, as we will see in this section.
+
+Let $G$ act on $S$, and let $G_a$ denote the stabilizer $\operatorname{Stab}_G(a)$. Let
+\[
+	Z=\left\{ a\in S\mid \forall g\in G: ga=a \right\} 
+\]
+be the set of fixed points of the action of $G$ on $A$. We obviously have $a\in Z \iff G_a=G$, so we could say that $a\in Z$ if and only if the orbit of $a$ is trivial. This leads us to the following proposition:
+\begin{proposition}\label{prp:4.1.1}
+	Let $S$ be a finite set, and let $G$ be a group acting on $S$. Then
+	\[
+		\left| S \right| =\left| Z \right| + \sum_{a\in A} [G : G_a]
+	,\]
+	where $A\subseteq S$ contains precisely one element for each nontrivial orbit in $S$ under $G$.
+\end{proposition}
+\begin{proof}
+	The orbits trivially partition $S$. Since $Z$ is the collection of all nontrivial orbits, we have
+	\[
+		\left| S \right| =\left| Z \right| +\sum_{a\in A} \left| O_a \right| 
+	,\]
+	where $O_a$ denotes the orbit of $a$, and $A$ collects all nontrivial orbits precisely once. By corollary \ref{cor:2.9.1}, $\left| O_a \right| =[G : \operatorname{Stab}_G(a)]$ for all $a$.
+\end{proof}
+
+This proposition is suprisingly strong, because as we have seen previously, each element of the sum must divide the order of $G$, so we can learn a lot about the order of $G$, or about actions of $G$.
+\begin{definition}[$p$-Group]\label{dfn:4.1.1}
+	A group $G$ is a $p$-group if the order of $G$ is a power of a prime number $p$.
+\end{definition}
+
+\begin{corollary}\label{cor:4.1.1}
+	Let $G$ be a $p$-group acting on a finite set $S$, and let $Z$ be the set of fixed points under the action. Then
+	\[
+		\left| Z \right| \equiv \left| S \right| \mod{p}
+	.\]
+\end{corollary}
+\begin{proof}
+	Since $Z$ collects all trivial orbits, we have that $[G : G_a]$ as given in proposition \ref{prp:4.1.1} is greater than 1, and is thus a multiple of $p$. Therefore, it equals 0 modulo $p$.
+\end{proof}
+
+\subsection{Center, Centralizer, Conjugacy Classes}
+\begin{definition}[Center]\label{dfn:4.1.2}
+	Let $\sigma G \to S_G$ be the group homomorphism that gives rise to the group action of $G$ on $G$ by conjugation. Then the \emph{center} of $G$, denoted $Z(G)$, is $\ker \sigma \subseteq G$.
+\end{definition}
+Equivalently, $Z(G)$ is the set of all elements of $G$ that commute with all other elements. To show this, let $g\in Z(G)$. Then $g\mapsto \mathbbm{1}_{G} $, so
+\[
+gag^{-1} =a
+\]
+$\forall a\in G$. It follows that $ga=ag$ for all $a\in G$. $Z(G)$ can also be characterized as the set of all fixed points under the action, since this implies $gag^{-1} =a$.
+
+Note that since $Z(G)$ is a kernel, it is automatically normal. Moreover, $G$ is abelian if and only if $Z(G)=G$.
+\begin{lemma}\label{lma:4.1.1}
+	Let $G$ be a group, and let $G/Z(G)$ be cyclic. Then $G$ is abelian, and $G/Z(G)$ is trivial.
+\end{lemma}
+\begin{proof}
+	I think I've done this already. Suppose $G/Z(G)$ is cyclic. Then there exists $a\in G$ such that $aZ(G)$ generates $G/Z(G)$. Then, for all $g_1,g_2\in G$, there exist $z_1,z_2\in Z(G)$ and $r_1,r_2\in\mathbb{Z} $ such that $g_1=a^{r_1} z_1$, and likewise for $g_2$, because $g_1Z(G)=a^{r_1} Z(G)$. It follows that
+	\begin{align*}
+		g_1g_2&=a^{r_1} z_1a^{r_2} z_2\\
+		      &=z_1a^{r_1} a^{r_2} z_2\\
+		      &=z_2a^{r_1} a^{r_2} z_1\\
+		      &=z_2a^{r_2} a^{r_1} z_1\\
+		      &a^{r_2} z_2a^{r_1} z_1\\
+		      &=g_2g_1
+	.\end{align*}
+	Therefore, $G$ is abelian.
+\end{proof}
+
+This subgroup brings specific attention to the action of conjugation, so we also give a special name to the stabilizers under this action.
+\begin{definition}[Centralizer]\label{dfn:4.1.3}
+	The centralizer $Z_G(a)$ is the stabilizer $\operatorname{Stab}_G (a)$ under conjugation. That is, $Z_G(a)$ is the set of all $g\in G$ such that $gag^{-1} =a$.
+\end{definition}
+Note that $Z(G)\subseteq Z_G(a)$ for all $a\in G$. In fact, it can be shown fairly easily that
+\[
+	Z(G)=\bigcap_{g\in G} Z_G(g)
+.\]
+\begin{definition}[Conjugacy Class]\label{dfn:4.1.4}
+	The conjugacy class $C(a)$ of some $a\in G$ is the orbit $O_a$ under the action of conjugation. We say two elements are conjugate if they belong to the same conjugacy class.
+\end{definition}
+The book uses the notation $\left[ a \right] $ rather than the more conventional notation $C(a)$, to remind the reader that this is in fact an equivalence class. I don't like this notation, and am not going to use it.
+
+Note that if $C(a)=\left\{ a \right\} $ is a singleton, then we must have $gag^{-1} =a$ for all $g\in G$, and thus $a\in Z(G)$. This leads us to the class formula.
+
+\subsection{The Class Formula}
+
+\begin{proposition}[Class Formula]\label{prp:4.1.2}
+	Let $G$ be a finite group. Then
+	\[
+		\left| G \right| =\left| Z(G) \right| + \sum_{a\in A} \left[ G : Z_G(a) \right] 
+	,\]
+where $A$ is any set containing one representative for each nontrivial conjugacy class. Note by corollary \ref{cor:2.9.1} that $\left[ [G : Z_G(a) \right] = \left| C(a) \right| $.
+\end{proposition}
+\begin{proof}
+	Since $Z(G)$ is the set of fixed points, and $Z_G(a)$ is the stabilizer, this follows by proposition \ref{prp:4.1.1}.
+\end{proof}
+The class equation is suprisingly useful, largely due to the fact that each summand must \emph{divide the order of} $G$.
+\begin{corollary}\label{cor:4.1.2}
+	Let $G$ be a $p$-group. Then $G$ has a nontrivial center.
+\end{corollary}
+\begin{proof}
+	Since $\left| Z(G) \right| $ divides $\left| G \right| $, we must have $\left| Z(G) \right| \equiv \left| G \right| \mod{p}$. Since $\left| G \right| $ is a multiple of $p$, and since $\left| Z(G) \right| \geq 1$, we must have $Z(G)\geq p$.
+\end{proof}
+
+What follows is a fascinating exploration of how the class equation restricts what types of groups may exist. Consider a group of order 6. If the group is abelian, the class equation tells us nothing interesting, so suppose the group is nonabelian. The only divisors of 6 are 1, 2, and 3, so we can only have those numbers show up. Note that if $\left| Z(G) \right| =2$ or 3, then $G/Z(G)$ has order 3 or 2, and is thus cyclic. Therefore, $Z(G)$ must be trivial. The class equation then tells us $6=1+\ldots $, where $\ldots $ collects the remaining classes. As stated earlier, these numbers cannot be 1, since $Z(G)$ collects all trivial conjugacy classes, so we must have each number be either 2 or 3. The only possible combination is $1+2+3$, and thus we find there is precisely one nonabelian group of order $6$.
+
+Also important is the fact that normal subgroups are unions of conjugacy classes. If $H$ is normal and $a\in H$, then for all $b=gag^{-1} $, we have $b\in gHg^{-1} =H$.
+
+\subsection{Conjugation of Subsets and Subgroups}
+We can also act by conjugation on the powerset $\mathscr{P} (G)$, which allows us to give a similar treatment to subsets and subgroups of a group $G$. If $A\subseteq G$ is a subset, then the conjugate of $A$ by some $g\in G$ is the set $gAg^{-1} $.
+\begin{definition}[Centralizer/Normalizer]\label{dfn:4.1.5}
+	The normalizer $N_G(A)$ of $A$ is the stabilizer $\Stab_{G}(A) $ under conjugation. The centralizer $Z_G(A)$ of $A$ is the subset $Z_G(A)\subseteq N_G(A)$ fixing all elements of $A$.
+\end{definition}
+Less ambiguously, $g\in N_G(A)$ if $gAg^{-1} =A$, and $g\in Z_G(A)$ if $gag^{-1} =a$ for all $a\in A$. Clearly, we have that any subgroup $H$ of $G$ is normal in $G$ if and only if $N_G(H)=G$. More generally, $N_G(H)$ is the largest subgroup of $G$ in which $H$ is normal. Also note that if $H$ is any subgroup, then $gHg^{-1} $ is also a subgroup for all $g$. We can extract some information from statements about this action as well.
+\begin{lemma}\label{lma:4.1.2}
+	Let $H\subseteq G$ be a subgroup. Then if $\left[ G : N_G(H) \right] $ is finite, then this is equal to the number of subgroups conjugate to $H$.
+\end{lemma}
+\begin{proof}
+	The collection of subgroups conjugate to $H$ is the orbit of $H$ under this action, and thus the statement follows by corollary \ref{cor:2.9.1}.
+\end{proof}
+\begin{corollary}\label{cor:4.1.3}
+	If $[G:H]$ is finite, then the number of subgroups conjugate to $H$ is finite and divides $[G:H]$.
+\end{corollary}
+\begin{proof}
+	\[
+		\left[ G:H \right] =\left[ G : N_G(H) \right] \cdot \left[ N_G(H) : H \right] 
+	.\]
+\end{proof}
+
+One final observation is as follows. Conjugation by an element in the \emph{normalizer} is a bijection fairly trivially, and is also a homomorphism fairly trivially. It's intereresting to note that if $H,K$ are subgroups of $G$ and $H\subseteq N_G(K)$; that is, $gKg^{-1} =K$ for all $g\in K$, then each element of $H$ determines an automorphism of $K$, and we have a function $H \to \Aut_{\mathsf{Grp} }(K) $.

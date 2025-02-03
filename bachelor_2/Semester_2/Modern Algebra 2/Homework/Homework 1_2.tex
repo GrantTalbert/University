@@ -1,0 +1,42 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\courseID{MA 542}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+The set $\left\{ (1,0),(0,1) \right\} $ forms a basis for $\mathbb{R} ^2$ as an $\mathbb{R} $-vector space. To prove this, let $(x,y)\in\mathbb{R}\times \mathbb{R}  $. Since $x,y\in\mathbb{R} $,
+\[
+	(x,y)=x(1,0)+y(0,1)
+.\]
+Also note that the two elements are trivially linearly independent, so they form a basis. Consider the map $\phi :\mathbb{R} \times \mathbb{R} \to \mathbb{C} $ defined by
+\[
+	(a,b)\mapsto a+bi
+.\]
+Let $r\in\mathbb{R} $ and $(c,d)\in\mathbb{R} \times \mathbb{R} $, and note that
+\[
+	\phi (r(a,b))=r(a+bi)=r\phi (a,b),
+\]
+\[
+	\phi ((a,b)+(c,d))=\phi (a+c,b+d)=(a+c)+(b+d)i=(a+bi)+(c+di)=\phi (a,b)+\phi (c,d)
+.\]
+Therefore, $\phi $ is an $\mathbb{R} $-linear map, and it also gives a bijection of basis elements:
+\[
+	\phi (1,0)=1,\qquad \phi (0,1)=i
+.\]
+Therefore, $\phi $ is a vector space isomorphism, and $\mathbb{R} \times \mathbb{R} \cong \mathbb{C} $.
+\section*{Problem 2}
+No to both. Note that $(1,0),(0,1)\neq 0\coloneqq (0,0)$. Also note that
+\[
+	(1,0)\cdot (0,1)=(1\cdot 0,0\cdot 1)=(0,0)
+.\]
+Therefore, $\mathbb{R} \times \mathbb{R} $ has zero divisors, and is not an integral domain nor a field.
+\section*{Problem 3}
+No. The number $i$ must satisfy $i^2=-1$. In $\mathbb{R} \times \mathbb{R} $, $-1$ is simply the additive inverse of $1$, and $1=(1,1)$ fairly obviously:
+\[
+	(a,b)(1,1)=(a1,b1)=(a,b)
+.\]
+We thus seek an element $(a,b)\in\mathbb{R}^2 $ such that $(a,b)^2=(-1,-1)$. Since multiplication is defined elementwise, it follows that $a^2,b^2=-1$, with $a,b\in\mathbb{R} $. This is a contradiction because there exists no $a\in\mathbb{R} $ such that $a^2=-1$.
+\end{document}

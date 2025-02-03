@@ -67,10 +67,11 @@ By definition of a topology, since $Y_i$ is open for all $i$, it follows that $\
 Let $X$ be Hausdorff, and consider the intersection
 \[
 	U\coloneqq \bigcap_{V} \overline{V} 
-\]
-over all neighborhoods $V$ of $x$. Note that $V\subseteq \overline{V} $, and by definition of an intersection, $U \subseteq \overline{V} $ for all neighborhoods $V$ of $x$. Since $x\in V$ for all $V$, and $V \subseteq \overline{V} $, we have that $x\in U$. Now suppose for contradiction that there exists $y\in U$ such that $y\neq x$. Since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Therefore, $y\notin V_x$, and since $\overline{V_x} \subseteq U$, we must have $y\in \overline{V_x} \setminus V_x$. We need to define closure before I finish this problem.
+,\]
+where $V$ ranges over all open sets in $X$ containing $x$. By definition, we have $x\in \overline{V} $ for all $V$, so $x\in U$. Note that for all $y\in X$ such that $y\neq x$, since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Since $U \overset{?}{\subseteq} V_x\subseteq \overline{V_x} $ and $y\notin V_x$, we have $y\notin U$ for all $y\neq x$ in $X$. Therefore, $U=\left\{ x \right\} $.
 
-Now suppose the aforementioned intersection $U=\left\{ x \right\} $. 
+Now for the converse, suppose $U=\left\{ x \right\} $. Let $y\in X$ be a distinct point. Since $y\notin U$, it follows that there must exist at least one neighborhood $V$ of $x$ such that $y\notin \overline{V} $. Equivalently, $y\in \overline{V} ^{c} $. Note that $\overline{V} \cap \overline{V} ^{c} =\varnothing $. Since $V\subseteq \overline{V} $, we have $V \cap \overline{V} ^{c} =\varnothing $. Since $\overline{V} $ is closed, $\overline{V} ^{c} $ is open, and contains $y$. $V$ is also open, and contains $x$. Therefore, for any two distinct points, there exist disjoint neighborhoods of those points, and $X$ is Hausdorff.
+
 \section*{Problem 6 [COMPLETE]}
 Let definitions be as given in the problem, and suppose $X$ is Hausdorff. Then for all $x\neq y$ in $X$, there exist disjoint neighborhoods $V_x$, $V_y$ of $x$ and $y$, respectively. Equivalently, $V_x \subseteq X \setminus  V_y = V_y^{c} $. Since $V_y $ is open, $V_y^{c} $ is finite, and thus $V_x$ is finite. Note that $X = V_x \cup V_x^{c} $. Since $V_x$ and $V_x^{c} $ are finite, $X$ is finite.
 

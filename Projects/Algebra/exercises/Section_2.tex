@@ -1,0 +1,133 @@
+\documentclass[11pt]{report}
+\input{../../../report.tex}
+\usepackage{titlepageBU}
+\title{Algebra Exercises}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Aut}{Aut}
+\newcommand{\tildesim}{\mathbin{\sim}}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{x}
+\declaretheorem[numberwithin=section, style=x, name=Exercise]{exercise}
+\declaretheorem[numbered=no, style=proof, name=Solution]{solution}
+\newcommand{\contradiction}{\Longrightarrow\Longleftarrow}
+\usepackage{tikz-cd}
+\author{Grant Talbert}
+\date{\today}
+\begin{document}
+\stepcounter{chapter}
+\chapter{Groups, First Encounter}
+\section{Definition of a Group}
+\begin{exercise}
+	Write a careful proof that every group is the group of isomorphisms of a groupoid. In particular, every group is the group of automorphisms of some object in some category.
+\end{exercise}
+\begin{solution}
+	Let $G$ be any group. It suffices to construct such a groupoid such that the collection of isomorphisms is isomorphic to $G$. Let $\Obj(\mathsf{G} ) =\left\{ * \right\} $. For all $g\in G$, let there exist a morphism $f_g \in \End_{\mathsf{G} }(*) $, and let morphism composition be defined as
+	\[
+		f_g \circ f_h = f_{gh} 
+	,\]
+	for $g,h\in G$, using the notation as previously. To show this is a category, it suffices to show there is an identity morphism. Note that $f_e$ is clearly an identity, since $f_g \circ f_e = f_e \circ f_g = f_g$. Therefore, $\mathsf{G} $ is a category. Now we show $\mathsf{G} $ is a groupoid. Let $f_g\in \Hom_{\mathsf{G} }(*, *) $. Since $g\in G$, there exists $g^{-1} \in G$ such that $gg^{-1} =g^{-1} g=e$. Equivalently, there exists $f_{g^{-1} } \in \End_{\mathsf{G} }(*) $ such that
+	\[
+		f_g \circ f_{g^{-1} } =f_{g^{-1} } \circ f_g = f_e
+	.\]
+	Therefore, all morphisms have inverses, and $\mathsf{G} $ is a groupoid. Since $\mathsf{G} $ has only one element, the collection of (iso)morphisms in $\mathsf{G} $ is precisely $\Aut_{\mathsf{G} } (*) $, which we have shown to be a group already. Let $\phi G \to \Aut_{\mathsf{G} }(*) $ be the map $g\mapsto f_g$. Clearly the map is well-defined and surjective. Also note that
+	\[
+		\phi (gh)=f_{gh} =f_g \circ f_h = \phi (g)\phi (h)
+	.\]
+	Therefore, $\phi $ is a homomorphism, and we need only show $\phi $ is injective. Suppose $\phi (g)=\phi (h)$. That is, $f_g=f_h$. Since inverses are unique, there exists exactly one inverse $f_{a}$ to the above morphisms. Since the identity is unique, we must have $ag=ga=e$ and $ah=ha=e$. Cancelling $a$, we have $g=h$.
+\end{solution}
+\begin{exercise}
+	Consider the sets $\varnothing ,\mathbb{N}, \mathbb{Z} ,\mathbb{Q} ,\mathbb{R} ,\mathbb{C} $ under $+$ and $\cdot $. Which are groups, and which aren't?
+\end{exercise}
+\begin{solution}
+	Clearly $\mathbb{N} $ is a group under none since it isn't closed under addition and has no multiplicative inverses. $\mathbb{Z} $ is a group under addition but not under multiplication. $\mathbb{Q} ,\mathbb{R} ,\mathbb{C} $ are all groups under $+$, and are groups under $\cdot $ if zero is removed.
+\end{solution}
+\begin{exercise}
+	Prove that $(gh)^{-1} =h^{-1} g^{-1} $ for all $g,h\in G$ a group.
+\end{exercise}
+\begin{solution}
+	Let $g,h\in G$. Note that
+	\[
+		(gh)\left( h^{-1} g^{-1}  \right) =g\left( hh^{-1}  \right) g^{-1} =ge_Gg^{-1} =gg^{-1} =e_G
+	.\]
+	Therefore, $(gh)^{-1} =h^{-1} g^{-1} $.
+\end{solution}
+\begin{exercise}
+	Suppose $g^2=e$ for all $g\in G$ a group. Prove $G$ is abelian.
+\end{exercise}
+\begin{solution}
+	Let $g,h\in G$. Since $g^2=e$ for all $g\in G$, we have $g=g^{-1} $ for all $g\in G$. By the previous exercise, $(gh)^{-1} =h^{-1} g^{-1} $. However, since $g=g^{-1} $ for all $g\in G$, we have
+	\[
+		gh=hg
+	.\]
+\end{solution}
+\begin{exercise}
+	Prove every row and column of the Cayley table for a group contains each element exactly once.
+\end{exercise}
+\begin{solution}
+	It suffices to show that left- and right-multiplication by a group element is a bijection $G \to G$. Let $g\in G$, and consider the map $a\mapsto ga$. Clearly this map is well defined, and it has an inverse map $a\mapsto g^{-1} a$, so it is a bijection. Right multiplication follows by the same logic.
+\end{solution}
+\begin{exercise}
+	Prove there is only one multiplication table for groups with 1, 2, or 3 elements. Show there are two tables for groups with 4 elements.
+\end{exercise}
+\begin{solution}
+	The case for 1 is trivial. For the second case, let $\left\{ e,g \right\} $ be a group. We must have $eg=ge=e$, $ee=e$, and since $g$ needs an inverse, we must have $gg=e$. Therefore, the group requirement forces this unique multiplication structure.
+
+	Now let $\left\{ e,a,b \right\} $ be a group. Suppose for contradiction that $a,b$ are not inverses. Then $ab$ is either $a$ or $b$. The inverse of $a$ must then be $a$, and likewise for $b$. It follows that $e=a^2=aba$. Cancelling $a$ once on the left and right gives us $a^2=e=b$, a contradiction. Therefore, $a=b^{-1} $, and this forces a unique structure.
+
+	I have done this proof before and I don't feel like repeating it so I'm just going to leave it here.
+\end{solution}
+Fuck this
+\section{Examples of Groups}
+\section{The Category $\mathsf{Grp} $}
+\begin{exercise}
+	Let $\phi : G \to H$ be a morphism in a category $\mathsf{C} $ with products. Explain why there is a unique morphism $(\phi \times \phi ): G\times G \to H\times H$ compatible in the evident way with the natural projections.
+\end{exercise}
+\begin{solution}
+	I think it's good to spell out what the ``evident way'' is. We want the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&G\arrow[r, "\phi "]&H\\
+		G\times G\arrow[ur, "\pi "]\arrow[dr, "\pi "]\arrow[r, "\phi \times \phi "]&H\times H\arrow[ru, "\pi "]\arrow[dr, "\pi "]\\
+		&G\arrow[r, "\phi "]&H
+	\end{tikzcd}\]
+	to commute. Note that $\phi $ determines a map $G\times G\to H$ given by $\phi \pi $. By the universal property of products, there exists precisely one morphism $\sigma  : G\times G \to H\times H$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&H\\
+		G\times G\arrow[r, "\sigma "]\arrow[rru, bend left, "\phi \pi "]\arrow[drr, bend right, "\phi \pi "]&H\times H\arrow[ur, "\pi "]\arrow[dr, "\pi "]\\
+												       &&H
+	\end{tikzcd}\]
+	commutes. Note that these diagrams are the same, except $\phi \times \phi $ has been replaced by $\sigma $. We can take this unique morphism $\sigma $ to be the morphism $\phi \times \phi $.
+\end{solution}
+\begin{exercise}
+	Let $\phi :G \to H$, $\psi: H \to K$ be morphisms in a category $\mathsf{C} $ with products, and consider morphisms between the products $G\times G$, $H\times H$, and $K\times K$. Prove that
+	\[
+		(\psi \phi )\times (\psi \phi  )=(\psi \times \psi )(\phi \times \phi )
+	.\]
+\end{exercise}
+\begin{solution}
+	For simplicity, since the diagrams are symmetric, I will only draw the one side of them. We have
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		G\times G\arrow[r, "\phi \times \phi "]\arrow[d, "\pi "]&H\times H\arrow[r, "\psi \times \psi "]\arrow[d, "\pi "]&K\times K\arrow[d, "\pi "]\\
+		G\arrow[r, "\phi "]&H\arrow[r, "\psi "]&K
+	\end{tikzcd}\]
+	Note that by previous logic, $(\psi \times \psi )(\phi \times \phi )$ is a unique morphism $G\times G \to K\times K$. It suffices to show then that $(\psi \phi )\times (\phi \psi )$ exists, and is a morphism $G\times G\to K\times K$. This follows fairly immediately. Condider the commutative diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		G\times G\arrow[r, "\exists !\sigma "]\arrow[d, "\pi "]&K\times K\arrow[d, "\pi "]\\
+		G\arrow[r, "\psi \phi "]&K
+	\end{tikzcd}\]
+	Since the products are symmetrical, this is in fact the full diagram for the universal property of products. By the same logic then, we have $\sigma =(\psi \phi )\times (\psi \phi )$.
+\end{solution}
+\begin{exercise}
+	Show that if $G,H$ are abelian groups, then $G\times H$ satisfies the universal property for coproducts in $\mathsf{Ab} $.
+\end{exercise}
+\begin{solution}
+	Recall the universal property of coproducts
+	\[\begin{tikzcd}[row sep = 1.5em, column sep = 2.5em]
+		G\arrow[dr, "i"]\arrow[drr, bend left, "\phi "]\\
+		&G\times H\arrow[r, "\exists ! \sigma "]&Z\\
+		H\arrow[ur, "i"]\arrow[urr, bend right, "\psi "]
+	\end{tikzcd}\]
+	yeah idfk why it has to be abelian ngl
+\end{solution}
+
+\end{document}
