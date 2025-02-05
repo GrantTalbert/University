@@ -1,0 +1,48 @@
+\lecture{4}{Mon 03 Feb 2025 13:22}{Domains}
+Observe that
+\[
+	\mathbb{Q} = \left\{ \frac{a}{b} \mid a,b\in\mathbb{Z} ,b\neq 0 \right\} 
+.\]
+Why not apply this notion of a fraction to domains other than $\mathbb{Z} $?
+\begin{proposition}\label{prp:1.6}
+	Let $D$ be a domain. Then there exists a field $F$ called the field of fractions $\operatorname{Frac} (D)$, containing (the inclusion of) $D$ as a subring.
+\end{proposition}
+\begin{proof}
+	The construction is as follows. Consider the collection
+	\[
+		S=\left\{ (a,b)\in D\times D\mid b\neq 0 \right\} 
+	.\]
+	Define an equivalence relation $\equiv $ on $S$ as
+	\[
+		(a,b)\equiv (c,d) \iff ad=bc
+	.\]
+	Define $F$ as the set of equivalence classes $D/\equiv $. We can define
+	\[
+		\frac{a}{b} \coloneqq [(a,b)]
+	.\]
+	The operations $+,\cdot $ are defined as
+	\[
+		[(a,b)]\cdot [(c,d)] = [(ac,bd)],\qquad [(a,b)]+[(c,d)]=[(ad+bc,bd)]
+	.\]
+	It remains to be shown $F$ is a field. Showing the operations are well-defined is messy and I don't care. Showing everything else is even messier and I care even less. By the method of apathy, $F$ is a field. Finally, note that we can define the inclusion $D\hookrightarrow F$ as $d\mapsto d/1$, and this map is in fact an isomorphism.
+\end{proof}
+$\operatorname{Frac} (D)$ satisfies the universal property that it is initial with respect to the property of containing $D$ as a subring. That is, any field containing $D$ must contain $\operatorname{Frac} (D)$.
+
+\begin{definition}[Polynomial Ring]\label{dfn:1.9}
+	Let $R$ be a commutative ring. Define the polynomial ring $R[x]$ as the set of $R$-linear combinations in the indeterminate $x$:
+	\[
+		R[x]\coloneqq \left\{ \sum_{i=0}^{n} a_ix^i\mid \left\{ x_i \right\}_{i=0}^k \subseteq R \right\} 
+	.\]
+Equality is defined componentwise and addition and multiplication are defined in the usual way.
+\end{definition}
+\begin{definition}[Degree]\label{dfn:1.10}
+	Let $R$ be a commutative ring, and let $f(x)\in R[x]$. Then $\operatorname{deg} f$ is the greatest $n$ such that $a_n\neq 0$, where
+	\[
+		f(x)=\sum_{i=0}^{k} a_ix^i
+	.\]
+	The degree of the 0 polynomial is $-\infty $ because woooo
+\end{definition}
+\begin{proposition}\label{prp:1.7}
+	If $R$ is an integral domain, then $R[x]$ is an integral domain.
+\end{proposition}
+

@@ -1,0 +1,111 @@
+\lecture{5}{Tue 04 Feb 2025 10:55}{Limit Points}
+
+\begin{definition}[Limit Point]\label{dfn:2.4}
+	Let $X$ be a topological space, and let $A\subseteq X$. A point $x$ is a \emph{limit point} of $A$ if every open set $U$ containing $x$ intersects $A$ at a point other than $x$.
+\end{definition}
+\begin{proposition}\label{prp:2.4}
+	Let $A'$ denote the set of limit points of $A$. Then $\overline{A} =A\cup A'$. Equivalenty, $\overline{A} \setminus A=A'$.
+\end{proposition}
+\begin{proof}
+	Recall by proposition \ref{prp:2.3} that $x\in \overline{A} $ if and only if every open neighborhood of $x$ intersects $A$. Note that if $x\in \overline{A} \setminus A$, then $x\notin A$, but since $x\in \overline{A} $, we still have that every open set must intersect $A$. Therefore, every open set containing $A$ will intersect $A$ at some point other than $x$. By definition \ref{dfn:2.4}, $x$ is a limit point of $A$. Since proposition \ref{prp:2.3} was an if and only if, we have the equality rather than a subset.
+\end{proof}
+
+This proposition motivates a definition of convergence for sequences in topological spaces.
+
+\begin{definition}[Convergence]\label{dfn:2.5}
+	Let $X$ be a topological space, and let $\left\{ x_n \right\} $ be a sequence in $X$. We say
+	\[
+		\lim_{n \to \infty} x_n = x
+	\]
+	if for any open set $U$ containing $x$, there exists $N\in\mathbb{N} $ such that $x_n\in U$ for all $n\geq N$. We then say the sequence \emph{converges to} $x$, and write $x_n \to x$.
+\end{definition}
+
+For example, in the standard topology on $\mathbb{R} $, if we let $x_n = 1/n$, then clearly
+\[
+	\lim_{n \to \infty} x_n=0
+.\]
+We also have that for any open set $U$ containing $0$, there exists $a<0<b$ such that $(a,b)\subseteq U$. By the Archimedian property, there exists $N$ such that $1/n < b$ if $n>N$.
+
+Note that the limit of the sequence may not be unique. For example, consider the trivial topology on $\mathbb{R} $, and once again consider $x_n =1/n$. We then have
+\[
+	\lim_{n \to \infty} x_n=2025
+.\]
+Since the only open set containing points is $\mathbb{R} $, every point is a limit point. The trivial topology has too few open sets to properly separate points.
+\begin{proposition}\label{prp:2.5}
+	Let $X$ be Hausdorff. Then any convergent sequence has a unique limit point.
+\end{proposition}
+\begin{proof}
+	Let $\left\{ x_n \right\} $ converge to $x$. Suppose for contradiction that there exists another distinct limit point $y$ of $\left\{ x_n \right\} $. There then exist disjoint open sets $U,V$ containing $x,y$, respectively. By definition, there then exists $N\in\mathbb{N} $ such that $x_n\in U$ for all $n\geq N$. However, $x_n \notin V$, because $U \cap V=\varnothing $. Therefore, there exists an open set $V$ of $y$ such that $x_n \notin V$ for all $n\geq N$, so $\left\{ x_n \right\} $ cannot converge to $y$, a contradiction.
+\end{proof}
+\begin{definition}[Boundary]\label{dfn:2.6}
+	Let $X$ be a topological space, and let $A\subseteq X$. Define
+	\[
+		\partial A\coloneqq \overline{A} \setminus \Int(A) 
+	.\]
+	We call $\partial A$ the \emph{boundary} of $A$.
+\end{definition}
+\begin{proposition}\label{prp:2.6}
+	Let $X$ be a topological space, and let $A\subseteq X$. Then $x\in \partial A$ if and only if for all neighborhoods $U$ of $x$ such that $U \cap A\neq \varnothing $, we have $U \cap A^{c} \neq \varnothing $.
+\end{proposition}
+\begin{proof}
+	\begin{align*}
+		x\in \partial A &\iff x\in \overline{A} \setminus \Int(A) \\
+				&\iff x\in \overline{A} \land x\notin \Int(A) \\
+				&\iff x\in \overline{A} \land x\in \Int(A) ^{c} = \overline{A^{c}} 
+	.\end{align*}
+	Therefore, for every open set $U$ containing $x$, we have $x\in U \cap \overline{A} ,U \cap \overline{A^{c} } $, and thus the statement is proven.
+\end{proof}
+
+It's very natural at this point to ask if we can construct more topological spaces, given a selection of spaces we aready know a lot about.
+\begin{definition}[Subspace Topology]\label{dfn:2.7}
+	Let $(X,\mathcal{T} )$ be a topological space, and let $A\subseteq X$. Then define
+	\[
+		\mathcal{T}_A \coloneqq \left\{ U \cap A\mid U\in \mathcal{T}  \right\} 
+	.\]
+	We say this is the subspace topology on $A$.
+\end{definition}
+
+The claim is clearly that this is a topology on $A$. We will show this using the definition. Clearly, $\varnothing,A \in \mathcal{T}_A$.
+
+Now let $\left\{ U_1, \ldots, U_n  \right\} \subseteq \mathcal{T}_A $. We can write
+\[
+	U_i = U_i' \cap A
+\]
+for all $i$. We then have
+\[
+	\bigcap_{i=1}^n U_i = \bigcap_{i=1}^n U_i' \cap A = \left( \bigcap_{i=1}^n U_i' \right) \cap A
+.\]
+Therefore,
+\[
+	\bigcap_{i=1}^n U_i \in \mathcal{T}_A
+.\]
+Finally, let $\left\{ U_i \right\}_{i\in I}\subseteq \mathcal{T}_{A}  $. Let
+\[
+	U_i = U_i' \cap A
+\]
+for all $i$. We have
+\[
+	\bigcup_{i\in I} U_i = \bigcup_{i\in I} \left( U_i' \cap A \right) =\left( \bigcup_{i\in I} U_i' \right) \cap A
+.\]
+Therefore,
+\[
+	\bigcup_{i\in I} U_i \in \mathcal{T} _A
+.\]
+We thus have that $(A,\mathcal{T}_A)$ is a topological space.
+\begin{proposition}\label{prp:2.7}
+	Let $X$ be a topological space, and let $A\subseteq X$ be a nonempty set equipped with the subsapce topology. Then $D\subseteq A$ is closed if and only if $D=C \cap A$ for some closed set $C\subseteq X$.
+\end{proposition}
+\begin{proof}
+	By definition, we must have the compliment of $D$ in $A$ is open. Define $U\coloneqq A\setminus D$. Note that since $U$ is open, there must exist an open set $U'\subseteq X$ such that $U = U' \cap A$. It follows that $A\setminus D=U' \cap A $. Something happens I don't know and I don't think the professor does either LMAO
+\end{proof}
+\begin{proposition}\label{prp:2.8}
+	Let $X$ be a topological space, and let $A\subseteq X$ be equipped with the subspace topology. If $\mathcal{B} $ is a basis for the topology on $X$, then
+	\[
+		\mathcal{B}_A \coloneqq \left\{ B \cap A\mid B\in \mathcal{B} \right\} 
+	\]
+	is a basis for the subspace topology on $A$.
+\end{proposition}
+\begin{proof}
+	yeah i REALLY dont wanna do this.
+\end{proof}
+

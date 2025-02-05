@@ -1,0 +1,105 @@
+\lecture{4}{Tue 04 Feb 2025 14:00}{Operators and Measurement}
+Postulate: Every observation can be represented by an operator on the space of states. For example, the measurement operators in the Stern-Gerlach experiments are $S_x$, $S_y$, and $S_z$. The only things you can measure are the eigenvectors of the operator of an experiment.
+
+\[
+	S_z =\frac{\hbar}{2} \begin{pmatrix}
+	1 & 0 \\
+	0 & -1
+	\end{pmatrix}
+.\]
+Clearly this has eigenvalues $\pm \frac{\hbar}{2} $ with eigenvalues as the standard basis for $\mathbb{R} ^2$. Wow, that's $\ket{+} ,\ket{-} $.
+\[
+	S_x = \frac{\hbar}{2}\begin{pmatrix}
+	0 & 1 \\
+	1 & 0
+	\end{pmatrix}
+.\]
+This has the same eigenvalues with eigenvectors
+\[
+	\frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 \\
+	1
+	\end{pmatrix},\qquad -\frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 \\
+	-1
+	\end{pmatrix}
+.\]
+Wow, that's $\ket{+}_x ,\ket{-}_x $! Also,
+\[
+	S_y =\frac{\hbar}{2}  \begin{pmatrix}
+	0 & -i \\
+	i & 0
+	\end{pmatrix}
+.\]
+Wow, this has the same eigenvalues but its eigenvectors are $\ket{+} _y,\ket{-} _y$. So we have thus noticed that the measurements we can observe are precisely the eigenvectors of the spin matrices.
+
+Any hermitian operator $A$ with eigenvalue/eigenvector pairs $a_i,\ket{a_i} $, then (assuming finite dimensionality) can be written as
+\[
+	A= \sum_{i=1}^{N} a_i \ket{a_i} \bra{a_i} 
+.\]
+We can show this: node that eigenvectors with different eigenvalues are mutually orthogonal ($\braket{a_i}{a_j} =\delta _{ij} $), so
+\[
+	A \ket{a_i} = \left( \sum_{j=1}^{N} a_j\ket{a_j} \bra{a_j}  \right) \ket{a_i} =a_i \ket{a_i} 
+.\]
+This is often the best representation for matrix operators, since we care mostly about their eigenvectors and eigenvalues. For example,
+\[
+	S_x = \frac{\hbar}{2} \ket{+}_x\bra{+}_x-\frac{\hbar}{2} \ket{-}_x\bra{-}_x = \frac{\hbar}{4} \begin{pmatrix}
+	1 & 1 \\
+	1 & 1
+	\end{pmatrix}-\frac{\hbar}{4} \begin{pmatrix}
+	-1 & 1 \\
+	1 & -1
+	\end{pmatrix}=\frac{\hbar}{2} \begin{pmatrix}
+	0 & 1 \\
+	1 & 0
+	\end{pmatrix}
+.\]
+
+What if we consider a Stern-Gerlach machine oriented along the direction $\mathbf{n} $? We can normalize it and write it in sperical coordinates:
+\[
+	\mathbf{\hat{n} } =(\sin \theta \cos \phi ,\sin \theta \sin \phi ,\cos \theta )
+.\]
+We are writing $\theta $ as the angle with $z$ and $\phi $ as the angle in $xy$. Then we can write
+\[
+	\mathbf{\hat{n} } \cdot \mathbf{S} = n_xS_x+n_yS_y+n_zS_z
+.\]
+Note that $\mathbf{S} $ is a vector of operators, so this is a largely symbolic representation.
+\begin{definition}[Hermitian Operator]\label{dfn:1.3}
+	An operator $M$ is \emph{hermitian} if $M^{\dagger} =M$ as an operator.
+\end{definition}
+In an abstract vector space, ${\dagger} $ is defined as the operator such that
+\[
+	\bra{\phi } M^{\dagger} \ket{\psi } =\left( \bra{\phi } M \ket{\psi }  \right)^*
+.\]
+\begin{definition}[Projection Operator]\label{dfn:1.4}
+	A projection operator is an operator $P$ such that $P^2=P$.
+\end{definition}
+Examples include the operators
+\[
+	P_+=\begin{pmatrix}
+	1 &  \\
+	 & 
+	\end{pmatrix},\qquad P_-=\begin{pmatrix}
+	 &  \\
+	 & 1
+	\end{pmatrix}
+.\]
+If we have any basis $\left\{ \ket{a_i}  \right\} $, then we can define
+\[
+	P_{a_i} \coloneqq \ket{a_i} \bra{a_i} 
+.\]
+Additionally,
+\[
+	\sum_{i} P_{a_i} =\mathbbm{1} 
+.\]
+This is called the completeness relation.
+
+Projection operators are how we define measurement. Suppose we perform a measurement and find the state $\ket{a_i} $. Then the final state after measurement is
+\[
+	\frac{P_{a_i} \ket{\psi } }{\sqrt{\bra{\psi } P_{a_i} \ket{\psi } } } 
+.\]
+The new Born rule is then as follows. Let $\left\{ a_i,s \right\} $ be the collection of all eigenvectors with eigenvalue $a_i$. Then
+\[
+	P_{a_i } =\sum_{s=1}^{N} \ket{a_i,s} \bra{a_i,s} 
+.\]
+

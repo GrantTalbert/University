@@ -1,0 +1,31 @@
+\section{The Sylow Theorems}
+\subsection{Cauchy's Theorem}
+The Sylow theorems consist of many important statements concerning $p$-groups.
+\begin{theorem}[Cauchy]\label{thm:2.1.1}
+	Let $G$ be a finite group, and let $p$ be a prime divisor of $\left| G \right| $. Then $G$ contains an element of order $p$.
+\end{theorem}
+\begin{proof}
+	Consider the set $S$ of ordered $p$-tuples of elements $(a_1, \ldots, a_p )$ of $G$ such that $a_1 \cdots a_p = e$. Note that we can arbitrarily choose $a_1, \ldots, a_{p-1} $, and choose $a_p$ to be the inverse of the product of these elements. Therefore, $\left| S \right| = \left| G \right| ^{p-1} $ by counting. Therefore, since $p$ divides $\left| G \right| $, it divides $\left| S \right| $. Now note that if $a_1$ is both a left- and right-inverse to $a_2 \cdots a_p$, so
+	\[
+		a_1 \cdots a_p = a_2 \cdots a_p a_1
+	.\]
+	Therefore, we can act on $S$ by $\mathbb{Z} /p\mathbb{Z} $ by taking the action of $m\in\mathbb{Z} /p\mathbb{Z} $ to be
+	\[
+		(a_{m+1} , \ldots , a_p, a_1, \ldots , a_m) 
+	.\]
+	This is still an element of $S$, as seen previously. By corollary \ref{cor:4.1.1},
+	\[
+		\left| Z \right| =\left| S \right| =0\mod{p}
+	,\]
+	where $Z$ is the collection of fixed points under this action. Fixed points take the form
+	\[
+		(a, \ldots ,a)
+	.\]
+	Since $(e, \ldots ,e)\in Z$, this set is nonempty. Since $p\geq 2$ and $p$ divides $\left| Z \right| $, we must have $\left| Z \right| >1$, and thus there exists at least one other element of this form with $a\neq e$. Since this element belongs to $S$, it follows that $a^p=e$, and we are done.
+\end{proof}
+
+This is a good time to introduce the important notion of a simple group. As will be seen in the next section, any finite group can be ``broken up'' into simple groups.
+\begin{definition}[Simple Group]\label{dfn:4.2.1}
+	A group $G$ is \emph{simple} if it is nontrivial and it's only normal subgroups are $G$ and $\left\{ e \right\} $.
+\end{definition}
+

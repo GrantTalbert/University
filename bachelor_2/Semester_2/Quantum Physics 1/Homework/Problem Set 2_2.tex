@@ -1,0 +1,534 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 2}
+\courseID{PY 451}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+	i feel bad for whoever's grading this
+\begin{enumerate}
+	\item 
+		\[
+			\bra{b_1} A \ket{a_1} =\begin{pmatrix}
+			-1 & -i
+			\end{pmatrix}^* \begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix} \begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix} = \begin{pmatrix}
+			-1 & i
+			\end{pmatrix} \begin{pmatrix}
+			3i+4i \\
+			-6i+2i
+			\end{pmatrix} = -7i+4
+		.\]
+	\item 
+		\[
+			\bra{b_1} A^\dagger \ket{a_1} = \begin{pmatrix}
+			-1 & -i
+			\end{pmatrix}^* \begin{pmatrix}
+			1 & -2 \\
+			2i & i
+			\end{pmatrix}^* \begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix} = \begin{pmatrix}
+			-1 & i
+			\end{pmatrix} \begin{pmatrix}
+			1 & -2 \\
+			-2i & -i
+			\end{pmatrix} \begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}=\begin{pmatrix}
+			-1 & i
+			\end{pmatrix} \begin{pmatrix}
+			3i-4 \\
+			-6-2i
+			\end{pmatrix}
+		\]
+		\[
+			 = (4-3i)+(2+6i)=6+3i
+		.\]
+	\item 
+		\[
+			\left( \bra{b_1} A \ket{a_1}  \right) ^{\dagger} =(-7i+4)^* = 4+7i
+		.\]
+	\item 
+		\[
+			A \ket{a_1} =\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}=3i\begin{pmatrix}
+			1 \\
+			-2
+			\end{pmatrix}+2 \begin{pmatrix}
+			2i \\
+			i
+			\end{pmatrix}=\begin{pmatrix}
+			7i \\
+			-4i
+			\end{pmatrix}
+		.\]
+	\item 
+		\[
+			\bra{b_1} A = \begin{pmatrix}
+			-1 & -i
+			\end{pmatrix}^* \begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix} = \begin{pmatrix}
+			-1 & i
+			\end{pmatrix} \begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}=\begin{pmatrix}
+			-1-2i & -2i-1
+			\end{pmatrix}
+		.\]
+	\item 
+		\[
+			\braket{b_1}{a_1} =\begin{pmatrix}
+			-1 & -i
+			\end{pmatrix}^* \begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}=\begin{pmatrix}
+			-1 & i
+			\end{pmatrix}\begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}=-3i+2i=-i
+		.\]
+	\item
+		\[
+			\braket{a_1}{b_1} =\left( \braket{b_1}{a_1}  \right)^* = (-i)^*=i
+		.\]
+	\item 
+		\[
+			\ket{b_1} \bra{a_1} = \begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix}\begin{pmatrix}
+			3i & 2
+			\end{pmatrix}^* = \begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix}\begin{pmatrix}
+			-3i & 2
+			\end{pmatrix}=\begin{pmatrix}
+			3i & -2 \\
+			-3 & -2i
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			A \ket{b_1} \bra{a_1} =\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			3i & -2 \\
+			-3 & -2i
+			\end{pmatrix}=\begin{pmatrix}
+			3i-6i & -2+4 \\
+			-6i-3i & 4+2
+			\end{pmatrix}=\begin{pmatrix}
+			-3i & 2 \\
+			-9i & 6
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			A \ket{b_1} \bra{a_1} A= \begin{pmatrix}
+			-3i & 2 \\
+			-9i & 6
+			\end{pmatrix}\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}=\begin{pmatrix}
+			-3i-4 & 6+2i \\
+			-9i-12 & 18+6i
+			\end{pmatrix}
+		.\]
+	\item why did we have to do this
+		\[
+			A^2 \ket{b_1} \bra{a_1} =\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			-3i & 2 \\
+			-9i & 6
+			\end{pmatrix}=\begin{pmatrix}
+			-3i-18 & 2+12i \\
+			6i+9 & -4+6i
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			\left( \ket{b_1} \bra{a_1}  \right) ^2 = \begin{pmatrix}
+			3i & -2 \\
+			-3 & -2i
+			\end{pmatrix}\begin{pmatrix}
+			3i & -2 \\
+			-3 & -2i
+			\end{pmatrix}=\begin{pmatrix}
+			-9+6 & -6+4i \\
+			-9i+6i & 6-4
+			\end{pmatrix}=\begin{pmatrix}
+			-3 & -2i \\
+			-3i & 2
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			A^{\dagger} \ket{a_1} =\begin{pmatrix}
+			1 & -2 \\
+			2i & i
+		\end{pmatrix}^* \begin{pmatrix}
+		3i \\
+		2
+		\end{pmatrix} = \begin{pmatrix}
+		1 & -2 \\
+		-2i & -i
+	\end{pmatrix} \begin{pmatrix}
+	3i \\
+	2
+	\end{pmatrix} = \begin{pmatrix}
+	3i-4 \\
+	6-2i
+	\end{pmatrix}
+		.\]
+	\item why do $\ket{a_1} $ and $\ket{b_1} $ have subscripts if we're only using a single $a$ and $b$ like we could just do $\ket{a} $ and $\ket{b} $ and it would be the same
+		\[
+			\left( A \ket{b_1}  \right) ^{\dagger} =\left( \begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix} \right) ^{\dagger} =\begin{pmatrix}
+			-1+2 \\
+			2+1
+			\end{pmatrix}^{\dagger} =\begin{pmatrix}
+			1 & 3
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			A \ket{b_1} -\lambda \ket{b_1} =\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix}-(2+3i)\begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix}=\begin{pmatrix}
+			-1+2 \\
+			2+1
+			\end{pmatrix}-\begin{pmatrix}
+			-2-3i \\
+			-2i+3
+			\end{pmatrix}
+		\]
+		\[
+			=\begin{pmatrix}
+			1 \\
+			3
+			\end{pmatrix}+\begin{pmatrix}
+			2+3i \\
+			-3+2i
+			\end{pmatrix}=\begin{pmatrix}
+			5+3i 
+			2i
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			\lambda A = (2+3i)\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}=\begin{pmatrix}
+			2+3i & 4i-6 \\
+			-4-6i & 2i-3
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			(\lambda -\braket{a_1}{b_1} )A=(2+3i-i)A=(2+2i)\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}=4i-4\begin{pmatrix}
+			2+2i &  \\
+			-4-4i & 2i-2
+			\end{pmatrix}
+		.\]
+	\item 
+		\[
+			\left( \braket{a_1}{a_1} +\braket{b_1}{b_1}  \right) ^{-1} =\left( \begin{pmatrix}
+			3i & 2
+			\end{pmatrix}^*\begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}+\begin{pmatrix}
+			-1 & -i
+			\end{pmatrix}^* \begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix} \right)^{-1}
+		\]
+		\[
+			 =\left( \begin{pmatrix}
+			-3i & 2
+			\end{pmatrix}\begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}+\begin{pmatrix}
+			-1 & i
+			\end{pmatrix}\begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix} \right) ^{-1} =\left( 9+4+1+1 \right) ^{-1} =\frac{1}{15} 
+		.\]
+	\item 
+		\[
+			\left( \ket{a_1} \bra{a_1} +\ket{b_1} \bra{b_1}  \right) ^{-1} =\left( \begin{pmatrix}
+			3i \\
+			2
+			\end{pmatrix}\begin{pmatrix}
+			-3i & 2
+			\end{pmatrix}+\begin{pmatrix}
+			-1 \\
+			-i
+			\end{pmatrix}\begin{pmatrix}
+			-1 & i
+			\end{pmatrix} \right) ^{-1} =\left( \begin{pmatrix}
+			9 & 6i \\
+			-6i & 4
+			\end{pmatrix}+\begin{pmatrix}
+			1 & -i \\
+			i & 1
+			\end{pmatrix} \right) ^{-1} 
+		\]
+		\[
+			=\begin{pmatrix}
+				10 & 5i \\
+			-5i & 5
+			\end{pmatrix}^{-1} =\frac{1}{50+25} \begin{pmatrix}
+			5 & -5i \\
+			5i & 10
+			\end{pmatrix}=\frac{1}{15} \begin{pmatrix}
+			1 & -i \\
+			i & 2
+			\end{pmatrix}
+		.\]
+	\item 
+		\[
+			A A^{\dagger} =\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			1 & -2 \\
+			-2i & -i
+			\end{pmatrix}=\begin{pmatrix}
+			1+4 & -2+2 \\
+			-2+2 & 4+1
+			\end{pmatrix}=\begin{pmatrix}
+			5 &  \\
+			 & 5
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			\left( A^2 \right) ^{\dagger} =\left( \begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix}\begin{pmatrix}
+			1 & 2i \\
+			-2 & i
+			\end{pmatrix} \right) ^{\dagger} =\begin{pmatrix}
+			1-4i & 2i-2 \\
+			-2-2i & -4i-1
+			\end{pmatrix}^{\dagger} =\begin{pmatrix}
+			1+4i & -2+2i \\
+			-2-2i & -1+4i
+			\end{pmatrix}
+		.\]
+	\item
+		\[
+			\left( A A^{\dagger}  \right) ^{\dagger} =\begin{pmatrix}
+			5 &  \\
+			 & 5
+			\end{pmatrix}^{\dagger} =\begin{pmatrix}
+			5 &  \\
+			 & 5
+			\end{pmatrix}
+		.\]
+\end{enumerate}
+\section*{Problem 2}
+\begin{enumerate}
+	\item Since we know the state after the first measurement, we should know all subsequent probabilities. We have shown multiple times that measurements of a basis state in an orthogonal basis yield probabilities of $1/2$ for each state, so we have that every measurement that originated at $S_z \to \ket{+} $ should be the same. Using this fact, we find that the measurements for $S_z \to \ket{-} $ have 0.15 probability, to ensure the sum of the probabilities is 1.
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
+			&&&&0.1\\
+			&&&&0.1\\
+			&&&S_z\arrow[ru, "\ket{-}"']\arrow[ruu, "\ket{+}"]&0.1\\
+			&&S_y\arrow[ru, "\ket{+}_y"]\arrow[r, "\ket{-}_y"']&S_x\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&0.1\\
+			\ket{\psi }\arrow[r]&S_z\arrow[ru, "\ket{+}"]\arrow[dr, "\ket{-} "'] \\
+					    &&S_x\arrow[dr, "\ket{-}_x"']\arrow[r, "\ket{+}_x"]&S_y\arrow[dr, "\ket{-}_y"']\arrow[r, "\ket{+}_y"]&0.15\\
+				   &&&S_z\arrow[ddr, "\ket{-}"']\arrow[dr, "\ket{+} "]&0.15\\
+				   &&&&0.15\\
+				   &&&&0.15
+		\end{tikzcd}\]
+		
+	\item First we find the norm of the given vector.
+		\[
+			3\ket{+}_x+5i\ket{-}_x+7\ket{+}_y \cong \frac{3}{\sqrt{2} } \begin{pmatrix}
+			1 \\
+			1
+			\end{pmatrix}+\frac{5i}{\sqrt{2} } \begin{pmatrix}
+			1 \\
+			-1
+			\end{pmatrix}+\frac{7}{\sqrt{2} } \begin{pmatrix}
+			1 \\
+			i
+			\end{pmatrix} \eqqcolon \frac{1}{\sqrt{2} } \begin{pmatrix}
+			10+5i \\
+			3+2i
+			\end{pmatrix}\vec{v} 
+		.\]
+		\[
+			\left\| \vec{v}  \right\| = \frac{1}{\sqrt{2} } \sqrt{\left| 10+5i \right|^2+\left| 10+5i \right|^2} =\frac{1}{\sqrt{2} } \sqrt{125+15} =\frac{\sqrt{140} }{\sqrt{2} } =\sqrt{70} 
+		.\]
+	It follows that
+	\[
+		\ket{\psi}  = \frac{1}{\sqrt{70} } \left( 3\ket{+}_x+5i\ket{-}_x+7\ket{+}_y \right) 
+	.\]
+	\item First, we compute the probabilities after the Z Stern-Gerlach machine.
+		\begin{align*}
+			\mathcal{P}_+ &=  \left| \bra{+}S_z\ket{\psi } \right| ^2\\
+				      &= \left| \begin{pmatrix}
+			1 & 0
+			\end{pmatrix}\begin{pmatrix}
+			1 &  \\
+			 & -1
+			\end{pmatrix}\left( \frac{1}{\sqrt{70} } \left( 3\ket{+}_x+5i\ket{-}_x+7\ket{+}_y  \right)\right)  \right|^2 \\
+				      &=\left| \begin{pmatrix}
+				      1 & 0
+				      \end{pmatrix}\begin{pmatrix}
+				      1 &  \\
+				       & -1
+				      \end{pmatrix}\frac{1}{\sqrt{140} } \begin{pmatrix}
+				      10+5i \\
+				      3+2i
+				      \end{pmatrix} \right|^2\\
+				      &=\left| \frac{1}{\sqrt{140} } \begin{pmatrix}
+				      1 & 0
+				      \end{pmatrix}\begin{pmatrix}
+				      10+5i \\
+				      -3-2i
+				      \end{pmatrix} \right|^2\\
+				      &=\frac{1}{140} \left| 10+5i \right|^2\\
+				      &=\frac{125}{140}\\
+				      &=\frac{25}{28} \\
+			\mathcal{P}_- &= \left| \bra{-} S_z \ket{\psi }  \right|^2\\
+				      &=\frac{1}{140} \left| 3+2i \right|^2\\
+				      &=\frac{15}{140} \\
+				      &=\frac{3}{28} 
+		.\end{align*}
+		After the first measurement, since we are measuring every time the particle goes through a machine, we will necessarily be in a basis state, so the distribution afterwards will be even. We simply divide our output by the number of possibe outcomes to obtain each probability.
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
+			&&&&25/112\\
+			&&&&25/112\\
+			&&&S_y\arrow[ru, "\ket{-}_y"']\arrow[ruu, "\ket{+}_y"]&25/112\\
+			&&S_x\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&S_y\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&25/112\\
+			\ket{\psi }\arrow[r]&S_z\arrow[ru, "\ket{+}"]\arrow[dr, "\ket{-} "'] \\
+					    &&S_x\arrow[dr, "\ket{-}_x"']\arrow[r, "\ket{+}_x"]&S_y\arrow[dr, "\ket{-}_y"']\arrow[r, "\ket{+}_y"]&3/112\\
+				   &&&S_y\arrow[ddr, "\ket{-}_y"']\arrow[dr, "\ket{+}_y"]&3/112\\
+				   &&&&3/112\\
+				   &&&&3/112
+		\end{tikzcd}\]
+\end{enumerate}
+\section*{Problem 3}
+Given a unit vector of the form $\hat{n} =(\sin \theta \cos \phi ,\sin \theta \sin \phi ,\cos \theta )$, the spin matrix $S_{\hat{n} } $ is given as
+\[
+	S_{\hat{n} } =\frac{\hbar}{2} \begin{pmatrix}
+	\cos \theta  & \sin \theta e^{-i\phi }  \\
+	\sin \theta e^{i\phi }  & -\cos \theta 
+	\end{pmatrix}
+.\]
+In the problem, $\vec{n} =(\sin \theta ,0,\cos \theta )$ is of this form given that $\phi =0$. We thus have
+\[
+	S_{\vec{n} } =\frac{\hbar}{2}\begin{pmatrix}
+	\cos \theta  & \sin \theta  \\
+	\sin \theta  & -\cos \theta 
+	\end{pmatrix}
+.\]
+We also have
+\begin{align*}
+	S_{\vec{n} } \ket{\psi_1} &\cong\frac{\hbar}{2} \begin{pmatrix}
+	\cos \theta  & \sin \theta  \\
+	\sin \theta  & -\cos \theta 
+	\end{pmatrix}\begin{pmatrix}
+	\cos (\theta /2) \\
+	\sin (\theta /2)
+	\end{pmatrix}\\
+				  &=\frac{\hbar}{2} \begin{pmatrix}
+				  \cos \theta \cos (\theta /2)+\sin \theta \sin (\theta /2) \\
+				  \sin \theta \cos (\theta /2)-\cos \theta\sin (\theta /2)
+				  \end{pmatrix}\\
+				  &=\frac{\hbar}{2}\begin{pmatrix}
+				  \cos \theta \cos (\theta /2)+2 \sin^2 (\theta /2)\cos (\theta /2) \\
+				  2\sin( \theta/2) \cos^2 (\theta /2)-\cos\theta \sin (\theta /2)
+				  \end{pmatrix}\\
+				  &=\frac{\hbar}{2}\begin{pmatrix}
+					  \left( 2 \cos ^2(\theta /2)-1 \right) \cos (\theta /2)+2 \sin ^2(\theta /2)\cos (\theta /2) \\
+				  2 \sin (\theta /2)\cos ^2(\theta /2)-\left( 2 \cos ^2(\theta /2)-1 \right) \sin (\theta /2)
+				  \end{pmatrix}\\
+				  &=\frac{\hbar}{2}\begin{pmatrix}
+				  2\left( \cos ^2(\theta /2) +\sin ^2(\theta /2)\right) \cos (\theta /2)-\cos (\theta /2) \\
+				  2 \sin (\theta /2)\cos ^2(\theta /2)-\left(2 \cos ^2(\theta /2)\sin (\theta /2)-\sin (\theta /2)\right)
+				  \end{pmatrix}\\
+				  &=\frac{\hbar}{2}\begin{pmatrix}
+				  \cos (\theta /2) \\
+				  2\left( \cos ^2(\theta /2)-\cos ^2(\theta /2) \right) \sin (\theta /2)+\sin (\theta /2)
+				  \end{pmatrix}\\
+				  &=\frac{\hbar}{2} \begin{pmatrix}
+				  \cos (\theta /2) \\
+				  \sin (\theta /2)
+				  \end{pmatrix}\\
+				  &\cong \frac{\hbar}{2}\ket{\psi_1}
+.\end{align*}
+\begin{align*}
+	S_{\vec{n} } \ket{\psi _2} &\cong \frac{\hbar}{2}\begin{pmatrix}
+	\cos \theta  & \sin \theta  \\
+	\sin \theta  & -\cos \theta 
+	\end{pmatrix}\begin{pmatrix}
+	\sin (\theta  /2) \\
+	-\cos (\theta /2)
+	\end{pmatrix}\\
+				   &=\frac{\hbar}{2}\begin{pmatrix}
+				   \cos \theta \sin (\theta /2)-\sin \theta \cos (\theta /2) \\
+				   \sin \theta \sin (\theta /2)+\cos \theta \cos (\theta /2)
+				   \end{pmatrix}\\
+				   &=\begin{pmatrix}
+				   -(\sin \theta \cos (\theta /2)-\cos \theta \sin (\theta /2) \\
+				   \sin \theta \sin (\theta /2)+\cos \theta \cos (\theta /2)
+				   \end{pmatrix}\\
+				   &=\frac{\hbar}{2}\begin{pmatrix}
+				   -\sin (\theta /2) \\
+				   \cos (\theta /2)
+				   \end{pmatrix}\\
+				   &\cong -\frac{\hbar}{2}\ket{\psi _2} 
+.\end{align*}
+Here I've used the fact that the top entry of $S_{\vec{n} } \ket{\psi_2}  $ is the negative of the bottom entry of $S_{\vec{n} } \ket{\psi _1} $, so we can just plug in the answer from there, and similarly the bottom entry of $S_{\vec{n} } \ket{\psi _2} $ is the top entry of $S_{\vec{n} } \ket{\psi _1} $.
+
+The eigenvalue of $S_{\vec{n} } ^2$ is $+\hbar^2/4 $.
+\end{document}
