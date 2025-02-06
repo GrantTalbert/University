@@ -127,7 +127,29 @@ Fuck this
 		&G\times H\arrow[r, "\exists ! \sigma "]&Z\\
 		H\arrow[ur, "i"]\arrow[urr, bend right, "\psi "]
 	\end{tikzcd}\]
-	yeah idfk why it has to be abelian ngl
+	Consider $\sigma (a,b)=\phi (a)+\psi (b)$. Note that
+	\[
+		\sigma i_G(a)=\sigma (a,0)=\phi (a)+0_G=\phi (a),
+	\]
+	and similarly for $i_H$. Therefore, the diagram commutes. Showing the morphism is unique is more difficult, and will be done at the end. Now we will show $\sigma $ is a homomorphism. Let $a,c\in G$ and $b,d\in H$. We have
+	\[
+		\sigma (a,b)+\sigma (c,d)=\phi (a)+\psi (b)+\phi (c)+\psi (d)=\phi (a+c)+\psi (b+d)=\sigma ((a,c)+(b,d))
+	.\]
+	Note that this uses the abelian hypothesis, explaining why this does not work in $\mathsf{Grp} $. Finally, we show the map is unique. We must have $\sigma (a,0)=\phi (a)$ and $\sigma (0,b)=\psi (b)$ for all $a\in G$, $b\in H$ due to the inclusion map definitions. Therefore,
+	\[
+		\sigma (a,0)+\sigma (0,b)=\phi (a)+\psi (b)
+	.\]
+	Using the homomorphism condition, we have
+	\[
+		\sigma (a,b)=\phi (a)+\psi (b)
+	.\]
+	Therefore, assuming any other definition would cause it to fail.
+\end{solution}
+\begin{exercise}
+	Let $G,H$ be groups, and assume that $G\cong G\times H$. Can you conclude that $H$ is trivial?
+\end{exercise}
+\begin{solution}
+	h
 \end{solution}
 
 \end{document}

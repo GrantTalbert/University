@@ -63,19 +63,19 @@ Let $\left\{ X_k \right\}_{i=1}^k$ be a finite collection of closed sets in $X$.
 .\]
 By definition of a topology, since $Y_i$ is open for all $i$, it follows that $\bigcap_{i=1} ^k Y_i$ is open. Therefore, $\left( \bigcap_{i=1} ^k Y_i \right ) ^{c} $ is closed.
 \section*{Problem 4}
-\section*{Problem 5}
+\section*{Problem 5 [COMPLETE]}
 Let $X$ be Hausdorff, and consider the intersection
 \[
 	U\coloneqq \bigcap_{V} \overline{V} 
 ,\]
-where $V$ ranges over all open sets in $X$ containing $x$. By definition, we have $x\in \overline{V} $ for all $V$, so $x\in U$. Note that for all $y\in X$ such that $y\neq x$, since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Since $U \overset{?}{\subseteq} V_x\subseteq \overline{V_x} $ and $y\notin V_x$, we have $y\notin U$ for all $y\neq x$ in $X$. Therefore, $U=\left\{ x \right\} $.
+where $V$ ranges over all open sets in $X$ containing $x$. By definition, we have $x\in \overline{V} $ for all $V$, so $x\in U$. Note that for all $y\in X$ such that $y\neq x$, since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Suppose for contradiction that $y\in U$. Note that $\overline{V_x} \supseteq U$, and because $y\notin V_x$, we must have $y\in \overline{V_x} \setminus V_x=\partial V_x$. It follows that $y$ is a limit point of $V_x$, and thus every open set containing $U$ must intersect $V_x$ at a point other than $y$. Therefore, $V_y$ intersects $V_x$ at some point other than $y$, and $V_y \cap V_x$ must thus contain this point, and is thus nonempty. This is a contradiction, and thus $y\notin U$.
 
 Now for the converse, suppose $U=\left\{ x \right\} $. Let $y\in X$ be a distinct point. Since $y\notin U$, it follows that there must exist at least one neighborhood $V$ of $x$ such that $y\notin \overline{V} $. Equivalently, $y\in \overline{V} ^{c} $. Note that $\overline{V} \cap \overline{V} ^{c} =\varnothing $. Since $V\subseteq \overline{V} $, we have $V \cap \overline{V} ^{c} =\varnothing $. Since $\overline{V} $ is closed, $\overline{V} ^{c} $ is open, and contains $y$. $V$ is also open, and contains $x$. Therefore, for any two distinct points, there exist disjoint neighborhoods of those points, and $X$ is Hausdorff.
 
 \section*{Problem 6 [COMPLETE]}
 Let definitions be as given in the problem, and suppose $X$ is Hausdorff. Then for all $x\neq y$ in $X$, there exist disjoint neighborhoods $V_x$, $V_y$ of $x$ and $y$, respectively. Equivalently, $V_x \subseteq X \setminus  V_y = V_y^{c} $. Since $V_y $ is open, $V_y^{c} $ is finite, and thus $V_x$ is finite. Note that $X = V_x \cup V_x^{c} $. Since $V_x$ and $V_x^{c} $ are finite, $X$ is finite.
 
-Now suppose $X$ is finite. It follows that all subsets $U\subseteq X$ are finite, and thus $U^{c} = X \setminus U$ is finite. Therefore, $\mathcal{T} =\mathscr{P} (X)$ is the power set of $X$, and we have that for any points $x\neq y$ in $X$, the sets $\left\{ x \right\} ,\left\{ y \right\} \in \mathcal{T} $ are trivially disjoint.
+Now suppose $X$ is finite. It follows that all subsets $U\subseteq X$ are finite, and thus $U^{c} = X \setminus U$ is finite. Therefore, $\mathcal{T} =\mathscr{P} (X)$ is the power set of $X$, since every possible set has finite compliment, and we have that for any points $x\neq y$ in $X$, the sets $\left\{ x \right\} ,\left\{ y \right\} \in \mathcal{T} $ are trivially disjoint.
 \section*{Problem 7 [COMPLETE]}
 Note that for any $C\in \mathcal{C} $, the interesection $\bigcap_{i=1}^1 C = C\in \mathcal{B}_{\mathcal{C} } $. Therefore, $\mathcal{C} \subseteq \mathcal{B} _{\mathcal{C} } $. By definition,
 \[

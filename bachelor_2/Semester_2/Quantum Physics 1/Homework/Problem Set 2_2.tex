@@ -399,61 +399,43 @@
 			\end{pmatrix}+\frac{7}{\sqrt{2} } \begin{pmatrix}
 			1 \\
 			i
-			\end{pmatrix} \eqqcolon \frac{1}{\sqrt{2} } \begin{pmatrix}
+			\end{pmatrix} = \frac{1}{\sqrt{2} } \begin{pmatrix}
 			10+5i \\
 			3+2i
-			\end{pmatrix}\vec{v} 
+			\end{pmatrix}
 		.\]
 		\[
-			\left\| \vec{v}  \right\| = \frac{1}{\sqrt{2} } \sqrt{\left| 10+5i \right|^2+\left| 10+5i \right|^2} =\frac{1}{\sqrt{2} } \sqrt{125+15} =\frac{\sqrt{140} }{\sqrt{2} } =\sqrt{70} 
+			\left\| \ket{\psi }  \right\| = \frac{1}{\sqrt{2} } \sqrt{\left| 10+5i \right|^2+\left| 3+2i \right|^2} =\frac{1}{\sqrt{2} } \sqrt{125+13} =\frac{\sqrt{138} }{\sqrt{2} } =\sqrt{69} 
 		.\]
 	It follows that
 	\[
-		\ket{\psi}  = \frac{1}{\sqrt{70} } \left( 3\ket{+}_x+5i\ket{-}_x+7\ket{+}_y \right) 
+		\ket{\psi}  = \frac{1}{\sqrt{69} } \left( 3\ket{+}_x+5i\ket{-}_x+7\ket{+}_y \right) 
 	.\]
-	\item First, we compute the probabilities after the Z Stern-Gerlach machine.
+	\item First, we compute the probabilities after the Z Stern-Gerlach machine. Note that
+		\[
+			\ket{\psi }= \frac{10+5i}{\sqrt{138} } \ket{+}+\frac{3+2i}{\sqrt{138} } \ket{-}
+		.\]
+		We have
 		\begin{align*}
-			\mathcal{P}_+ &=  \left| \bra{+}S_z\ket{\psi } \right| ^2\\
-				      &= \left| \begin{pmatrix}
-			1 & 0
-			\end{pmatrix}\begin{pmatrix}
-			1 &  \\
-			 & -1
-			\end{pmatrix}\left( \frac{1}{\sqrt{70} } \left( 3\ket{+}_x+5i\ket{-}_x+7\ket{+}_y  \right)\right)  \right|^2 \\
-				      &=\left| \begin{pmatrix}
-				      1 & 0
-				      \end{pmatrix}\begin{pmatrix}
-				      1 &  \\
-				       & -1
-				      \end{pmatrix}\frac{1}{\sqrt{140} } \begin{pmatrix}
-				      10+5i \\
-				      3+2i
-				      \end{pmatrix} \right|^2\\
-				      &=\left| \frac{1}{\sqrt{140} } \begin{pmatrix}
-				      1 & 0
-				      \end{pmatrix}\begin{pmatrix}
-				      10+5i \\
-				      -3-2i
-				      \end{pmatrix} \right|^2\\
-				      &=\frac{1}{140} \left| 10+5i \right|^2\\
-				      &=\frac{125}{140}\\
-				      &=\frac{25}{28} \\
-			\mathcal{P}_- &= \left| \bra{-} S_z \ket{\psi }  \right|^2\\
-				      &=\frac{1}{140} \left| 3+2i \right|^2\\
-				      &=\frac{15}{140} \\
-				      &=\frac{3}{28} 
+			\mathcal{P}_+&= \left| \bra{+}P_+ \ket{\psi } \right| ^2\\
+				     &=\left| \braket{+}{+}\braket{+}{\psi } \right| ^2\\
+				     &=\left| \braket{+}{\psi } \right| ^2\\
+				     &=\left| \frac{1}{\sqrt{138} } \left( (10+5i)\braket{+}{+}+(3+2i)\braket{+}{-} \right)  \right| ^2\\
+				     &=\left| \frac{10+5i}{\sqrt{138} }  \right| ^2\\
+				     &=\frac{125}{138} 
 		.\end{align*}
-		After the first measurement, since we are measuring every time the particle goes through a machine, we will necessarily be in a basis state, so the distribution afterwards will be even. We simply divide our output by the number of possibe outcomes to obtain each probability.
+		
+		After the first measurement, the distribution (inside only the top half or bottom half) will be even, since all subsequent measurements have 50/50 probabilities that we have proven enough times in class that I don't feel I need to do it again here. This means to get each final probability, just multiply the denominator by 4 to obtain 125/552. The tree is on the next page because it was too big to fit on this one. Also we clearly have $\mathcal{P}_-=13/138$ to make the probabilities add to 1, so the other probabilities will be $13/552$.\newpage
 		\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
-			&&&&25/112\\
-			&&&&25/112\\
-			&&&S_y\arrow[ru, "\ket{-}_y"']\arrow[ruu, "\ket{+}_y"]&25/112\\
-			&&S_x\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&S_y\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&25/112\\
+			&&&&125/552\\
+			&&&&125/552\\
+			&&&S_y\arrow[ru, "\ket{-}_y"']\arrow[ruu, "\ket{+}_y"]&125/552\\
+			&&S_x\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&S_y\arrow[ru, "\ket{+}_x"]\arrow[r, "\ket{-}_x"']&125/552\\
 			\ket{\psi }\arrow[r]&S_z\arrow[ru, "\ket{+}"]\arrow[dr, "\ket{-} "'] \\
-					    &&S_x\arrow[dr, "\ket{-}_x"']\arrow[r, "\ket{+}_x"]&S_y\arrow[dr, "\ket{-}_y"']\arrow[r, "\ket{+}_y"]&3/112\\
-				   &&&S_y\arrow[ddr, "\ket{-}_y"']\arrow[dr, "\ket{+}_y"]&3/112\\
-				   &&&&3/112\\
-				   &&&&3/112
+					    &&S_x\arrow[dr, "\ket{-}_x"']\arrow[r, "\ket{+}_x"]&S_y\arrow[dr, "\ket{-}_y"']\arrow[r, "\ket{+}_y"]&3/552\\
+				   &&&S_y\arrow[ddr, "\ket{-}_y"']\arrow[dr, "\ket{+}_y"]&3/552\\
+				   &&&&3/552\\
+				   &&&&3/552
 		\end{tikzcd}\]
 \end{enumerate}
 \section*{Problem 3}
@@ -518,7 +500,7 @@ We also have
 				   \cos \theta \sin (\theta /2)-\sin \theta \cos (\theta /2) \\
 				   \sin \theta \sin (\theta /2)+\cos \theta \cos (\theta /2)
 				   \end{pmatrix}\\
-				   &=\begin{pmatrix}
+				   &=\frac{\hbar}{2}\begin{pmatrix}
 				   -(\sin \theta \cos (\theta /2)-\cos \theta \sin (\theta /2) \\
 				   \sin \theta \sin (\theta /2)+\cos \theta \cos (\theta /2)
 				   \end{pmatrix}\\
@@ -530,5 +512,18 @@ We also have
 .\end{align*}
 Here I've used the fact that the top entry of $S_{\vec{n} } \ket{\psi_2}  $ is the negative of the bottom entry of $S_{\vec{n} } \ket{\psi _1} $, so we can just plug in the answer from there, and similarly the bottom entry of $S_{\vec{n} } \ket{\psi _2} $ is the top entry of $S_{\vec{n} } \ket{\psi _1} $.
 
-The eigenvalue of $S_{\vec{n} } ^2$ is $+\hbar^2/4 $.
+Consider $S_{\vec{n} }^2$.
+\[
+	\frac{\hbar}{2} \begin{pmatrix}
+	\cos \theta  & \sin \theta  \\
+	\sin \theta  & -\cos \theta 
+	\end{pmatrix}\frac{\hbar}{2}\begin{pmatrix}
+	\cos \theta  & \sin \theta  \\
+	\sin \theta  & -\cos \theta 
+	\end{pmatrix}=\frac{\hbar^2}{4}\begin{pmatrix}
+	\cos ^2\theta +\sin ^2\theta  & \cos \theta \sin \theta -\sin \theta \cos \theta  \\
+	\sin \theta \cos \theta -\cos \theta \sin \theta  & \sin ^2\theta +\cos ^2\theta 
+	\end{pmatrix}= \frac{\hbar^2}{4} \mathbbm{1}
+.\]
+Therefore, $S_{\vec{n} }^2=\left(  \hbar^2/4 \right) \mathbbm{1}  $.
 \end{document}

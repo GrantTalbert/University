@@ -4,7 +4,28 @@
 \title{Homework 2}
 \courseID{PY 355}
 \courseSection{A1}
-\professor{Dr. Chamon}
 \begin{document}
 \makeproblem
+\section*{Problem 1}
+\begin{enumerate}
+	\item Exponent rule
+		\[
+			\int_{0}^{1} a^y \,\mathrm{d} y= \left.\frac{a^y}{\ln a}  \right|_0^1 = \frac{a-1}{\ln a} 
+		.\]
+	\item U-substitution, $u=ay$, $du=adx$, $v=-ay$, $dv=-vdx$.
+		\[
+			\int_{0}^{x} \cosh y \,\mathrm{d} y=\int_{0}^{x} \frac{e^{ax} +e^{-ax} }{2}  \,\mathrm{d} y= \frac{1}{2} \left( \int_{0}^{x} e^{ay}  \,\mathrm{d} y+\int_{0}^{x} e^{-ay}  \,\mathrm{d} y \right)
+		\]
+		\[
+			=\frac{1}{2} \left( \int_{0}^{ax} e^u \,\mathrm{d} u-\int_{0}^{-ax} e^v \,\mathrm{d} v \right) 
+		.\]
+		
+		
+	\item Derivative of $\ln x$, u substitution $u=ay+b$, $du=1/a\,dx$.
+		\[
+			\int_{0}^{x} \frac{1}{ay+b}  \,\mathrm{d} y= \int_{0}^{x} \left( ax+b \right) ^{-1}  \,\mathrm{d} y=\int_{0}^{x} \frac{1}{a} u^{-1}  \,\mathrm{d} u= \frac{1}{a} \ln(ay+b) \bigg|_0^x = \frac{1}{a} \left( \ln (ax+b)-\ln b \right) 
+		.\]
+	\item owo
+\end{enumerate}
+
 \end{document}

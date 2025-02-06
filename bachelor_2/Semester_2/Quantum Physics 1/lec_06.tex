@@ -1,0 +1,89 @@
+\lecture{6}{Thu 06 Feb 2025 14:01}{Statistics}
+\begin{mdframed}
+	Generalized Born's Rule:
+	\begin{itemize}
+		\item Any obervation can be represented as a Hermitian operator acting on a space of kets;
+		\item The possible outcomes of the measurement are the eigenvectors of the operator;
+		\item The projector $P_{a_i} $ of an eigenvalue $a_i$ is given by the sum over all eigenstates $\ket{a_i} $ sharing this eigenvalue:
+			\[
+				P_{a_i} =\sum_{i} \ket{a_i} \bra{a_i} 
+			.\]
+		\item After measurement, $\ket{\psi } $ becomes the state
+			\[
+				\frac{P_{a_i} \ket{\psi } }{\sqrt{\bra{\psi } P_{a_i} \ket{\psi } } } 
+			.\]
+	\end{itemize}
+\end{mdframed}
+
+But what is probability? When we say the probability of an event occuring $\mathcal{P}_+=\left| \braket{+}{\psi }  \right|^2$, this really involves a limit as the number of trials goes to infinity. To do this, we need to produce more $\ket{\psi } $s. You can't clone $\ket{\psi } $, so you need to redo the entire procedure that making $\ket{\psi } $ required to get a new one. Then we have
+\[
+	\lim_{N \to \infty} \frac{N_+}{N} =\mathcal{P}_+
+.\]
+In this case, $N$ is trials and $N_+$ is $\ket{+} $ outcomes.
+
+Note that
+\[
+	\bra{\psi } S_z \ket{\psi } = \frac{\hbar}{2} \left( \braket{\psi }{+} \braket{+}{\psi } -\braket{\psi }{-} \braket{-}{\psi }  \right) =\frac{\hbar}{2} \left| \braket{\psi }{+}  \right| ^2 - \frac{\hbar}{2} \left| \braket{\psi }{-}  \right| ^2 = \frac{\hbar}{2} \left( \mathcal{P}_+-\mathcal{P}_- \right)
+.\]
+This is called the \emph{expectation value} of $S_z$ in state $\ket{\psi } $.
+\begin{definition}[Expectation Value]\label{dfn:EV}
+	The EV of an operator $X$ in a state $\ket{\psi } $ is
+	\[
+		\bra{\psi } X \ket{\psi }
+	.\]
+	Classically, the EV is the sum over all probabilities of each outcome times the outcome itself. The EV of a random variable $X$ is denoted $\left\langle X \right\rangle $. So in Quantum Mechanics, we write $\bra{\psi } A \ket{\psi } $ as $\left\langle A \right\rangle $ when the state needs not be written.
+\end{definition}
+
+I've pushed this definition forward, we need to show these definitions align. Let $A$ be a Hermitian operator. Then
+\[
+	A=\sum_{i} a_i \ket{a_i} \bra{a_i} 
+.\]
+Choose a state $\ket{\psi } $. Then $\mathcal{P}_{a_i} =\left| \braket{\psi }{a_i}  \right| ^2$. The EV is also supposed to be
+\[
+	\sum_{i} a_i \mathcal{P}_{a_i} 
+.\]
+We have
+\[
+	\bra{\psi } A \ket{\psi } =\bra{\psi } \left( \sum_{i} a_i \ket{a_i} \bra{a_i}  \right) \ket{\psi } =\sum_{i} a_i\braket{\psi }{a_i} \braket{a_i}{\psi } =\sum_{i} a_i\left| \braket{\psi }{a_i}  \right| ^2= \sum_{i} a_i \mathcal{P}_{a_i} 
+.\]
+
+The variance is the standard deviation squared. We denote the standard deviation in $A$ as $\Delta A$. The variance
+\[
+	\Delta A=\left\langle \left( A-\left\langle A \right\rangle  \right) ^2 \right\rangle 
+.\]
+
+In quantum mechanics, we do this with respect to a state $\ket{\psi } $. So we have
+\[
+	\left( \Delta A \right) ^2 = \bra{\psi } \left( A-\bra{\psi } A\ket{\psi }  \right) ^2 \ket{\psi } 
+.\]
+
+If $c$ is a number, $\left\langle c \right\rangle =c$. If $\left\langle A \right\rangle $ is a number,
+\[
+	\left\langle \left\langle A \right\rangle ^2 \right\rangle =\left\langle A \right\rangle ^2
+.\]
+Also, the expectation value is linear:
+\[
+	\left\langle cA+dB \right\rangle =c\left\langle A \right\rangle +d\left\langle B \right\rangle 
+.\]
+\begin{definition}[Variance]\label{dfn:V}
+	The Variance of an operator $A$ in a state $\ket{\psi } $ is defined as
+	\[
+		\left( \Delta A \right) ^2 = \bra{\psi } A^2-\bra{\psi } A \ket{\psi }^2 \ket{\psi }
+	.\]
+	\[
+		\left( \Delta A \right) ^2=\bra{\psi } \left( A-\bra{\psi } A\ket{\psi }  \right) ^2\ket{\psi }
+	.\]
+	\[
+		\left( \Delta A \right) ^2=\bra{\psi } \left\langle A \right\rangle \ket{\psi }
+	.\]
+\end{definition}
+
+The fact is that you cannot get a state such that the variance in $S_z$ and the variance in $S_x$ are both 0. It is a mathematical impossibility. We will prove this on tuesday. However, for now, we want to know if this is true for \emph{all} observables. When is it possible to know both at the same time?
+
+Obviously, $\ket{+} $ in $S_z$ and $S_z^3$ has 0 variance in both. So the question is really \emph{when}.
+
+Given an operator $A$, the states in which the variance is 0 is precisely the eigenvectors of $A$. The question is now when can you find a complete set of states that are eigenvectors of two observables $A,B$. You can do this \emph{if and only if}
+\[
+	[A,B]=AB-BA=0
+.\]
+In this case, $[\cdot ,\cdot ]$ is the \emph{commutator}.

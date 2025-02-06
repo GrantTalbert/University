@@ -1,0 +1,18 @@
+\lecture{5}{Wed 05 Feb 2025 16:44}{More on Operators}
+Operators represent measurements. Any hermitian operator can be represented by a sum over its eigenstates
+\[
+	A=\sum_{i} a_i \ket{a_i} \bra{a_i} 
+.\]
+This is equivalent to saying the operator in it's eigenbasis is diagonal. Recall that a projection operator is an operator $P^2=P$. If we were to measure an eigenvalue $a_i$ of the observation matrix, then we know the state becomes the associated eigenstate
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ket{\psi } \arrow[r]&\ket{a_i} .
+\end{tikzcd}\]
+We can write this as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ket{\psi } \arrow[r]&\frac{P_{a_i} \ket{\psi } }{\sqrt{\bra{\psi } P_{a_i} \ket{\psi } } } ,
+\end{tikzcd}\]
+where
+\[
+	P_{a_i} =\ket{a_i} \bra{a_i} 
+.\]
+This is just the normalized state $\ket{a_i} \braket{a_i}{\psi } $.
