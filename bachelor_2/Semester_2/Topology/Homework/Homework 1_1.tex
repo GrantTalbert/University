@@ -6,7 +6,7 @@
 \courseSection{A1}
 \begin{document}
 \makeproblem
-\section*{Problem 1 [COMPLETE]}
+\section*{Problem 1}
 By definition, $\varnothing ,\mathcal{T} \in\mathbb{R} $. Now let $\left\{ (-\infty ,p) \right\}_{p\in P} \subseteq \mathcal{T} $, and consider the union over this collection. Let $a=\sup  P$, and let $x\in (-\infty ,a)$. We have that $a<\sup P$, and thus by definition, there exists $p\in P$ such that $a<p$. It follows that $x\in (-\infty ,p)$, and thus we have
 \[
 	x\in (-\infty ,p) \subseteq \bigcup_{p\in P} (-\infty ,p)
@@ -19,14 +19,14 @@ Since $(-\infty ,\sup P)$ is of the same form as given in the definition of $\ma
 
 Now let $P$ be a finite subset of $\mathbb{R} $, and consider the collection $\left\{ (-\infty ,p) \right\}_{p\in P} $. Since $P$ is finite, it must have a least element. Let $a= \min P$ be this least element, and note that for all $p\in P$, $a\leq p$ implies that $(-\infty ,a)\subseteq (-\infty ,p)$. It follows that
 \[
-	(-\infty ,a)\bigcap_{p\in P} (-\infty ,p)
+	(-\infty ,a)\subseteq \bigcap_{p\in P} (-\infty ,p)
 .\]
-However, we also know that due to how intersections work,
+However, we also know that since $(-\infty ,a)$ is one of the elements the intersection is over,
 \[
 	\bigcap_{p\in P} (-\infty ,p) \subseteq (-\infty ,a)
 .\]
-Therefore, the finite intersection is of the for $(-\infty ,a)$, and thus is an element of $\mathcal{T} $. We have that $\mathcal{T} $ is closed under finite intersection, and is thus a topology on $\mathbb{R} $.
-\section*{Problem 2 [COMPLETE]}
+Therefore, the finite intersection is of the form $(-\infty ,a)$, and thus is an element of $\mathcal{T} $. We have that $\mathcal{T} $ is closed under finite intersection, and is thus a topology on $\mathbb{R} $.
+\section*{Problem 2}
 Let $n\in\mathbb{Z} $. If $n$ is odd, we have $n\in \left\{ n \right\}=B(n) \in \mathcal{B} $. If $n$ is even, then $n\in \left\{ n-1,n,n+1 \right\}=B(n) \in \mathcal{B} $. Therefore, for all $n\in\mathbb{Z} $, there exists $B(n)\in \mathcal{B} $ such that $n\in B(n)$.
 
 Now consider the intersection $B(n)\cap B(m)$ for $n,m\in\mathbb{Z} $. If $B(n)\cap B(m)=\varnothing $, then it is vacuously true that for all $x\in B(n)\cap B(m)$, there exists $B\in \mathcal{B} $ such that $x\in \mathcal{B} \subseteq B(n)\cap B(m)$. Thus, assume without loss of generality that the intersection is nonempty.
@@ -44,7 +44,7 @@ Since $m>n$, but the intersection is nonempty, we must have $m-1=n+1$, since if 
 	B(n+1) \subseteq B(n)\cap B(m)
 .\]
 In all of these cases, note that $B(n),B(n+1)\in \mathcal{B} $, so we have that $\mathcal{B} $ is a basis for a topology on $\mathbb{Z} $.
-\section*{Problem 3 [COMPLETE]}
+\section*{Problem 3}
 Note that $X^{c} =X\setminus X=\varnothing $, and $\varnothing ^{c} =X\setminus \varnothing =X$. Therefore, $\varnothing ,X$ are closed.
 
 Let $\left\{ X_a \right\}_{a\in A} $ be a collection of closed sets in $X$. It follows that there exists a collection $\left\{ Y_a \right\}_{a\in A} $ of open sets such that $ Y_a ^{c} =X_a$. It follows that
@@ -63,7 +63,81 @@ Let $\left\{ X_k \right\}_{i=1}^k$ be a finite collection of closed sets in $X$.
 .\]
 By definition of a topology, since $Y_i$ is open for all $i$, it follows that $\bigcap_{i=1} ^k Y_i$ is open. Therefore, $\left( \bigcap_{i=1} ^k Y_i \right ) ^{c} $ is closed.
 \section*{Problem 4}
-\section*{Problem 5 [COMPLETE]}
+Let $(x,y)\in\mathbb{R} ^2$, and choose some $\varepsilon \in \mathbb{R}_{>0} $. We have
+\[
+	(x,y)\in (x-\varepsilon ,x+\varepsilon )\times (y-\varepsilon ,y+\varepsilon )\in \mathcal{B} 
+.\]
+Now consider the intersection $A \cap B$, where
+\[
+	A\coloneqq (a_1,b_1)\times (c_1,d_1),\qquad B\coloneqq (a_2,b_2)\times (c_2,d_2)
+.\]
+Let $(x,y)\in A \cap B$. I claim
+\[
+	(x,y)\in (\max (a_1,a_2),\min (b_1,b_2))\times (\max (c_1,c_2),\min (d_1,d_2))\subseteq A \cap B
+.\]
+First, note that if $(x,y)\in A \cap B$, then we must have
+\[
+	a_1<x<b_1\text{ and } a_2<x<b_2
+.\]
+Therefore, $\max (a_1,a_2)<x<\min (b_1,b_2)$. Similarly, we have
+\[
+	c_1<y<d_1\text{ and } c_2<y<d_2
+,\]
+and thus $\max (c_1,c_2)<y<\min (d_1,d_2)$. Therefore,
+\[
+	(x,y)\in (\max (a_1,a_2),\min (b_1,b_2))\times (\max (c_1,c_2),\min (d_1,d_2))
+.\]
+It remains to be shown this set is a subset of the intersection $A \cap B$. Let $(x,y)$ in this set. It follows that $\max (a_1,a_2)<x<\min (b_1,b_2)$, and thus
+\begin{align*}
+	a_1&<x\\
+	a_2&<x\\
+	b_1&>x\\
+	b_2&>x
+.\end{align*}
+Therefore, $x\in (a_1,b_1)$ and $x\in (a_2,b_2)$. Applying the same logic to $c$ and $d$ shows $y\in (c_1,d_1)$ and $y\in (c_2,d_2)$. Therefore, we have
+\[
+	(x,y)\in \left( \left( a_1,b_1 \right) \times \left( c_1,d_1 \right)  \right) \cap \left( \left( a_2,b_2 \right) \times \left( c_2,d_2 \right)  \right) 
+.\]
+Therefore,
+\[
+	\left( \left( \max (a_1,a_2),\min (b_1,b_2) \right) \times \left( \max (c_1,c_2), \min (d_1,d_2) \right)  \right) \subseteq A \cap  B
+.\]
+Therefore, $\mathcal{B} $ is a basis on $\mathbb{R} $. It remains to be shown $\mathcal{B} $ generates the standard topology.
+
+Let $\mathcal{B}_S$ be the standard basis, $\mathcal{T}_{\mathcal{B} } $ the topology generated by $\mathcal{B} $, and $\mathcal{T}_S$ the topology generated by $\mathcal{B}_S$. It suffices to show $\mathcal{B}_S\subseteq \mathcal{T}_{\mathcal{B} } $ and $\mathcal{B} \subseteq \mathcal{T}_S$, since any topology containing one of these bases must also contain all sets generated by these bases. First, we show $\mathcal{B}\subseteq \mathcal{T}_S$.
+
+Let $U\coloneqq (a,b)\times (c,D)\in \mathcal{B}  $. Let $(x,y)\in U$, and let $d_{(x,y)} $ be the \emph{minimum} distance from $(x,y)$ to the edge of $U$. That is,
+\[
+	d_{(x,y)} = \min \left\{ d(x,a),d(x,b),d(y,c),d(y,D) \right\} 
+.\]
+For simplicity of notation, we will now refer to points with a single letter, rather than as a pair. Let $B(x,d_x)$ be the open ball of radius $d_x$ as defined previously, centered at $x$. Note that if $x\in B(x,d_x)$, then it must be a shorter distance away from $x$ than the distance to the edge of the rectangle $U$, so $x\in U$. Therefore, $B(x,d_x)\subseteq U$ for all $x\in U$. It follows that
+\[
+	\bigcup_{x\in U} B(x,d_x) \subseteq U
+,\]
+since all sets $B(x,d_x)\subseteq U$. However, since this union contains all points $x\in U$, we must also have
+\[
+	U\subseteq \bigcup_{x\in U} B(x,d_x) \implies U=\bigcup_{x\in U} B(x,d_x)
+.\]
+Therefore, $U\in \mathcal{T}_S$, and $\mathcal{B} \subseteq \mathcal{T}_S$.
+
+Now let $U\coloneqq B(k,r)\in \mathcal{T}_{\mathcal{B} } $. Consider a square $(a,b)\times (c,d)$ centered at $(x,y)$; that is, $b-a=d-c$ and
+\[
+	x=\frac{b-a}{2} ,\qquad y=\frac{d-c}{2} 
+.\]
+Note that the distance $d_{(x,y)} $ from $(x,y)$ to a corner of the square would be, by the pythagorean theorem,
+\[
+	d_{(x,y)}  = \left( \frac{b-a}{2}  \right)^2  + \left( \frac{d-c}{2}  \right) ^2 = \frac{1}{4} \left( a^2+b^2+c^2+d^2-2(ab+cd) \right)
+.\]
+Define $A_{x} $ to be the open square centered at $x$, where $d_x=r$. Note that for all $a\in A_{x} $, we must have $d(x,a)<r$, since the square is open, so $A_{x} \subseteq B(k,r)$ provided that $x\in B(k,r)$. Consider the union
+\[
+	\bigcup_{x\in B(k,r)} A_x
+.\]
+Note that since this union contains all $x\in B(k,r)$, we must have $B(k,r)$ as a subset of it. Additionally, since each set in this union is a subset of $B(k,r)$, the entire union must be a subset of $B(k,r)$. Therefore,
+\[
+	B(k,r)=\bigcup_{x\in B(k,r)} A_x
+.\]
+Since $A_x\in \mathcal{B} $, this is a union over elements of the basis, and thus $B(k,r)\in \mathcal{T}_{\mathcal{B} } $. Therefore, $\mathcal{B}_S \subseteq \mathcal{T}_{\mathcal{B} } $.
+\section*{Problem 5}
 Let $X$ be Hausdorff, and consider the intersection
 \[
 	U\coloneqq \bigcap_{V} \overline{V} 
@@ -72,11 +146,11 @@ where $V$ ranges over all open sets in $X$ containing $x$. By definition, we hav
 
 Now for the converse, suppose $U=\left\{ x \right\} $. Let $y\in X$ be a distinct point. Since $y\notin U$, it follows that there must exist at least one neighborhood $V$ of $x$ such that $y\notin \overline{V} $. Equivalently, $y\in \overline{V} ^{c} $. Note that $\overline{V} \cap \overline{V} ^{c} =\varnothing $. Since $V\subseteq \overline{V} $, we have $V \cap \overline{V} ^{c} =\varnothing $. Since $\overline{V} $ is closed, $\overline{V} ^{c} $ is open, and contains $y$. $V$ is also open, and contains $x$. Therefore, for any two distinct points, there exist disjoint neighborhoods of those points, and $X$ is Hausdorff.
 
-\section*{Problem 6 [COMPLETE]}
+\section*{Problem 6}
 Let definitions be as given in the problem, and suppose $X$ is Hausdorff. Then for all $x\neq y$ in $X$, there exist disjoint neighborhoods $V_x$, $V_y$ of $x$ and $y$, respectively. Equivalently, $V_x \subseteq X \setminus  V_y = V_y^{c} $. Since $V_y $ is open, $V_y^{c} $ is finite, and thus $V_x$ is finite. Note that $X = V_x \cup V_x^{c} $. Since $V_x$ and $V_x^{c} $ are finite, $X$ is finite.
 
 Now suppose $X$ is finite. It follows that all subsets $U\subseteq X$ are finite, and thus $U^{c} = X \setminus U$ is finite. Therefore, $\mathcal{T} =\mathscr{P} (X)$ is the power set of $X$, since every possible set has finite compliment, and we have that for any points $x\neq y$ in $X$, the sets $\left\{ x \right\} ,\left\{ y \right\} \in \mathcal{T} $ are trivially disjoint.
-\section*{Problem 7 [COMPLETE]}
+\section*{Problem 7}
 Note that for any $C\in \mathcal{C} $, the interesection $\bigcap_{i=1}^1 C = C\in \mathcal{B}_{\mathcal{C} } $. Therefore, $\mathcal{C} \subseteq \mathcal{B} _{\mathcal{C} } $. By definition,
 \[
 	\bigcup_{C\in \mathcal{C} } C=X

@@ -1,0 +1,50 @@
+\documentclass[12pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Homework 2}
+\courseID{MA 542}
+\courseSection{A1}
+\DeclareMathOperator{\im}{im}
+\begin{document}
+\makeproblem
+Let $R\coloneqq \mathbb{Z} [\sqrt{2} ]$, and let $\phi : R \to R$ be a nontrivial homomorphism.
+\section*{Problem 1}
+Note that $\phi (1)=0$ would imply that for all $r=a+b\sqrt{2} \in R$,
+\[
+	\phi (r)=\phi (a+bi)=\phi (a)+\phi (b)\phi (\sqrt{2} )=\phi \left( \sum_{0<i\leq a} 1 \right) +\phi \left( \sum_{0<j\leq b} 1 \right)\phi ( \sqrt{2} )
+\]
+\[
+	=\sum_{0<i\leq a} \phi (1)+\left( \sum_{0<j\leq b} \phi (1) \right) \phi \left( \sqrt{2}  \right) =0+0\sqrt{2} =0
+.\]
+Therefore, $\phi (1)\neq 0$. Let $\phi (1)=a$. Consider the number 4. We have
+\[
+	\phi (4)=\phi (1+1+1+1)=\phi (1)+\phi (1)+\phi (1)+\phi (1)=4a
+.\]
+We also have
+\[
+	\phi (4)=\phi (2\cdot 2)=\phi (2)\phi (2)=\phi (1+1)\phi (1+1)=\left( \phi (1)+\phi (1) \right) \left( \phi (1)+\phi (1) \right) =(2a)(2a)=4a^2
+.\]
+Since $\phi $ is a homomorphism, we have $4a=4a^2$. Since $\mathbb{Z} $ is a domain, we have $a=a^2$, and since $a\neq 0$ and $\operatorname{char} \mathbb{Z} \neq 2$, it follows that $a=1$. Therefore, $\phi (1)=1$. Now for any $r\in\mathbb{Z} $,
+\[
+	\phi (r)=\phi \left( \sum_{0<i\leq r} 1 \right) =\sum_{0<i\leq r} \phi (1)=\sum_{0<i\leq r} 1=r
+.\]
+\section*{Problem 2}
+Since $\phi $ is a homomorphism,
+\[
+	\phi (a+b\sqrt{2} )=\phi (a)+\phi (b\sqrt{2} )=\phi (a)+\phi (b)\phi (\sqrt{2})
+.\]
+By part 1, $\phi (a)=a$ and $\phi (b)=b$. Therefore,
+\[
+	\phi (a)+\phi (b)\phi (\sqrt{2} )=a+b\phi (\sqrt{2} )
+.\]
+Due to this, $\phi $ can be viewed as a $\mathbb{Z} $-module homomorphism.
+\section*{Problem 3}
+Let $\phi (\sqrt{2} )\eqqcolon a$. Note that $a^2=\phi (2)=2$ by part 1. If $a=r+s\sqrt{2} $, we must have
+\[
+	\left( r+s\sqrt{2}  \right) ^2=r^2+2s^2+2rs\sqrt{2} =2
+.\]
+Clearly, we must have $2rs\sqrt{2} =0$,\footnote{I don't feel like proving that $a+b\sqrt{2} =c+d\sqrt{2} $ iff $a=c$ and $b=d$. This can be shown by proving $\left\{ 1,\sqrt{2}  \right\} $ is a basis for $R$ when viewed as a $\mathbb{Z} $-module, then applying the fact that basis representations are unique but that's like so much work for something so obvious} and since $\mathbb{Z} $ is a domain, we must have either $r=0$ or $s=0$. If $s=0$, then $r^2=2$, and $r=\sqrt{2} \notin \mathbb{Z} $, a contradiction. Therefore, $r=0$. It follows that $2s^2=2$, and thus $s=\pm1$. Therefore,
+\[
+	\phi (\sqrt{2} )=1\sqrt{2} \text{ or } \phi (\sqrt{2} )=-1\sqrt{2}
+.\]
+\end{document}

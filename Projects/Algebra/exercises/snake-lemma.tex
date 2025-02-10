@@ -1,0 +1,142 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../../report.tex}
+\usepackage{titlepageBU}
+\title{A Proof of the Snake Lemma (For $R$-Modules)}
+\date{February 7-8th, 2025}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, qed=\qedsymbol]{proof2}
+\declaretheorem[numbered=no, style=proof2, name=Proof]{replacementproof2}
+\renewenvironment{proof}[1][]{\begin{replacementproof2}}{\end{replacementproof2}}
+\togglelogo
+\begin{document}
+\makereport
+\section{Proof}
+\begin{lemma}[The Snake Lemma]\label{snake}
+	Let the diagram of $R$-modules
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&L_1\arrow[r, "\alpha_1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+		0\arrow[r]&L_0\arrow[r, "\alpha _0"]&M_0\arrow[r, "\beta _0"]&N_1\arrow[r]&0
+	\end{tikzcd}\]
+	commute, where rows are exact complexes. Then there exists an exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&\ker \lambda \arrow[r]&\ker \mu \arrow[r]&\ker \nu \arrow[r, "\delta "]&\coker \lambda \arrow[r]&\coker \mu \arrow[r]&\coker \nu \arrow[r]&0.
+	\end{tikzcd}\]
+\end{lemma}
+\begin{proof}
+	For convenience of notation, we will denote rows by $1_\bullet $ and $0_\bullet $, and columns by $L_\bullet $, $M_\bullet $, and $N_\bullet $.
+
+Clearly, there exists the morphism $0 : 0 \to \ker \lambda $ with $\ker 0=0$ and $\im 0=\left\{ 0 \right\} $.
+
+Since $1_\bullet $ is exact, $\ker \alpha_1=\im 0=\left\{ 0 \right\} $. Consider the restriction $\alpha_1|_{\ker \lambda }$. Note that for any $a\in \ker \lambda $,
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\arrow[r, "\alpha_1"]\arrow[d, "\lambda "']&\alpha_1(a)\arrow[d, "\mu "]\\
+	0\arrow[r]&0
+\end{tikzcd}\]
+because the diagram commutes. We must then have $\im \alpha_1|_{\ker \lambda }\subseteq \ker \mu $. Therefore, the complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r, "0"]&\ker \lambda \arrow[r, "\alpha_1|_{\ker \lambda }"]&\ker \mu 
+\end{tikzcd}\]
+is exact at $0,\ker \lambda $.
+
+Now consider the restriction $\beta _1 |_{\ker \mu }: \ker \mu  \to N_1$. First, we will show $\im \beta_1\subseteq \ker \nu $. Let $a\in \ker \mu $, and note that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\arrow[r, "\beta_1"]\arrow[d, "\mu "']&\beta_1(a)\arrow[d, "\nu "]\\
+	0\arrow[r]&0
+\end{tikzcd}\]
+because the diagram commutes. Therefore, $\beta_1|_{\ker \mu }: \ker \mu  \to \ker \nu $. Also note that because $1_\bullet $ is exact, we have $a\in \im \alpha_1 \iff a\in \ker \beta_1$. Restricting these sets to the subset $\ker \mu $ does not change this fact, so we have that the complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r, "0"]&\ker \lambda\arrow[r, "\alpha_1|_{\ker \lambda }"]&\ker \mu \arrow[r, "\beta_1|_{\ker \mu }"]&\ker \nu 
+\end{tikzcd}\]
+is exact at $\ker \mu $.
+
+Now we must show the morphism $\delta : \ker \nu  \to \coker \lambda $ exists, which will be done by a diagram chase. Consider the diagram
+\begin{equation}\label{eq:1}
+	\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&0\arrow[d]&0\arrow[d]&0\arrow[d]\\
+	0\arrow[r]&\ker \lambda\arrow[r]\arrow[d]&\ker \mu \arrow[r]\arrow[d]&\ker \nu \arrow[d]\\
+	0\arrow[r]&L_1\arrow[r, "\alpha_1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta_1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+	0\arrow[r]&L_0\arrow[r, "\alpha _0"]\arrow[d]&M_0\arrow[r, "\beta _0"]\arrow[d]&N_0\arrow[r]\arrow[d]&0\\
+		  &\coker \lambda \arrow[r]\arrow[d]&\coker \mu \arrow[r]\arrow[d]&\coker \nu \arrow[r]\arrow[d]&0\\
+		  &0&0&0
+\end{tikzcd},\end{equation}
+where all unexplained arrows are induced completely naturally. Let $a\in \ker \nu $, and consider the chase
+\begin{equation}\label{eq:2}
+\begin{tikzcd}[row sep=2em, column sep=3em]
+	&0\arrow[d, dotted, no head]&0\arrow[d, dotted, no head]&0\arrow[d, dotted, no head]\\
+	0\arrow[r, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\arrow[d,  dotted, no head]\arrow[r, dotted, no head]&a\arrow[d]\\
+	0\arrow[r, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&c\arrow[r, "\beta _1"]\arrow[d, "\mu "]&b\arrow[r, dotted, no head]\arrow[d, dotted, no head, "\nu "]&0\\
+	0\arrow[r, dotted, no head]&e\arrow[r, "\alpha _0"]\arrow[d]&d\arrow[d, dotted, no head]\arrow[r, dotted, no head, "\beta _0"']&*\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+				   &f\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+				   &0&0&0
+\end{tikzcd}.
+\end{equation}
+We will show this diagram induces a homomorphism $\delta : \ker \nu  \to \coker \lambda $. The map $\ker \nu \hookrightarrow N_1$ is the inclusion map, the map $M_1\to M_0$ is $\mu $, and the map $L_0\twoheadrightarrow \coker \lambda $ is the natural projection. The only maps that need sufficient explaining are the maps $N_1\to M_1 $ and $M_0\to L_0$.
+
+Given that $b=\iota (a)$ for $\iota : \ker \lambda \hookrightarrow N_1$ the inclusion map, we define $c$ as the preimage $c\coloneqq \beta _1^{-1} (b)$. Such a $c$ must exist, as $\beta_1$ must be epic for $1_\bullet $ to be exact by lemma \ref{lma:1}. The question is whether this operation is well-defined; that is, different choices $c_1,c_2\mapsto b$ must map to the same end result if we continue along the sequence. To show this, we must first define the map $L_0\to M_0$.
+
+This map is defined similarly. Since the diagram commutes, $\beta_0(d)=\nu (b)$. However, since $b\in \ker \nu $, we have $\beta_0(d)=0$. It follows that $d\in \ker \beta $, and since $0_\bullet $ is exact, we have that $\im \alpha_0=\ker \beta_0$, and there exists an $e\in L_0$ such that $\alpha_0(e)=d$. Additionally, note that since $0_\bullet $ is exact, $\alpha_0$ is mono by lemma \ref{lma:1}, so this $e$ is unique. Therefore, we can define the map $M_0\to L_0$ such that $d\mapsto \alpha_0^{-1} (d)$, and this is well-defined.
+
+Now to show the map $b\mapsto c$ is well-defined. Let $c_1,c_2\in M_1 $ such that $\beta_1(c_1)=\beta_1(c_2)=b$. Since $\beta_1$ is a homomorphism, $\beta_1(c_1-c_2)=0$. Therefore, $c_1-c_2\in \ker \beta_1$. Since $1_\bullet $ is exact, $c_1-c_2\in \im \alpha_1$. Since $1_\bullet $ is exact, $\alpha_1$ is mono by lemma \ref{lma:1}, so there exists precisely one $g\in L_1 $ such that $\alpha_1(g)=c_1-c_2$. Consider the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r, dotted, no head]&g\arrow[d, "\lambda "]\arrow[r, "\alpha_1"]&(c_1-c_2)\arrow[r, "\beta _1"]\arrow[d, dotted, no head, "\mu "]&0\arrow[r, dotted, no head]\arrow[d, dotted, no head]&0\\
+	0\arrow[r, dotted, no head]&\lambda (g)\arrow[d]\arrow[r, dotted, no head]&\arrow[r, dotted, no head]\arrow[d, dotted, no head]&\,\\
+				   &0\arrow[r, dotted, no head]&\,
+\end{tikzcd}.\]
+We need only explain $\lambda (g)\to 0$. It suffices to show columns are exact in diagram \eqref{eq:1}, since this would imply $\im \lambda =\ker \pi  $ for $\pi : L_0 \to \coker \lambda $ the canonical projection. It suffices to show much less, actually, but I will just show this broader statement. Consider a complex of the form
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\ker \lambda \arrow[r, hook, "\iota "]&L_1\arrow[r, "\lambda "]&L_0\arrow[r, two heads, "\pi "]&\coker \lambda \arrow[r]&0 
+\end{tikzcd}\]
+
+Since $\iota : \ker \lambda \hookrightarrow L_1$ is injective by the universal property of kernels, we have that $\ker \iota =\left\{ 0 \right\} =\im 0$, and the complex is exact at $\ker \lambda $. Note that $\ker \lambda =\iota (\ker \lambda )=\im \iota $, so the complex is exact at $L_1$. Now note that since $\coker \lambda \cong L_0/\im \lambda $, we have that $\im \lambda \subseteq \ker \pi $. Additionally, $x\in \ker \pi $ implies that $\pi (x)=x+\im \lambda =\im \lambda $. By properties of cosets, it follows that $x\in \im \lambda $. Therefore, the complex is exact at $L_0$. Finally, recall the universal property of cokernels: the cokernel $\coker \lambda $ must be initial with respect to morphisms $\beta : L_0 \to Z $ such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	L_1\arrow[rr, bend left, "0"]\arrow[r, "\lambda "]&L_0\arrow[r, "\beta "]\arrow[d, two heads, "\pi "]&Z\\
+				&\coker \lambda \arrow[ru, dotted, "\overline{\beta}"]
+\end{tikzcd}\]
+commutes. Note that $\pi $ is epic, so $\im \pi = \coker \lambda =\ker 0$, so the complex is exact at $\coker \lambda $. Rows are thus exact complexes, and we have that $\pi (\lambda (g))=0$ since $\im \lambda = \ker \pi $.
+
+Now back to showing $b\mapsto c$ is well-defined. Suppose that $c_2\mapsto d\mapsto e$. Since the diagram commutes, we must have $\mu \alpha_1(g)=\alpha_0\lambda (g)$. We also have that $c_1 = c_2+\left( c_1-c_2 \right) =c_2+\alpha_1(g)$. Since $0_\bullet $ is epic, by lemma \ref{lma:1}, $\alpha_0$ is mono, and thus the only thing mapping to $d$ is $e$, and thus $\mu (c_2)=\alpha_0(e)$ by commutativity. Now note that by commutativity of the diagram, $\alpha_0(e+\lambda (g))=\mu (c_1)=\mu (c_2+c_1-c_2)$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&&c_2+c_1-c_2\arrow[d]\\
+	&e+\lambda (g)\arrow[r]&d+\alpha_0(\lambda (g))
+\end{tikzcd}\]
+Since $\lambda (g)$ dies in $\coker \lambda $, we have that $c_1\mapsto f+0=f$ in diagram \eqref{eq:2}. Therefore, $c_1,c_2$ eventually map to the same thing, and $\delta $ is well-defined overall as the map
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\arrow[r, mapsto, "\iota "]&b\arrow[r, mapsto, "\beta _1^{-1} "]&c\arrow[r, mapsto, "\mu "]&d\arrow[r, mapsto, "\alpha_0^{-1} "]&e\arrow[r, mapsto, "\pi "]&f.
+\end{tikzcd}\]
+
+Now, we must show the complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r, "0"]&\ker \lambda \arrow[r, "\alpha_1|_{\ker \lambda }"]&\ker \mu \arrow[r, "\beta_1|_{\ker \mu }"]&\ker \nu \arrow[r, "\delta "]&\coker \lambda 
+\end{tikzcd}\]
+is exact at $\ker \nu $. First, we show $\im \beta_1|_{\ker \mu}\subseteq \ker \delta $. Consider the commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ker \mu \arrow[r, "\beta_1"]\arrow[d, "\iota "]&\ker \nu \arrow[d, "\iota "]\\
+	M_1\arrow[d, "\mu "]&N_1\arrow[l, "\beta_1^{-1} "]\\
+	0
+\end{tikzcd}\]
+Notice that by the commutativity of this diagram, we have that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\arrow[r, mapsto, "\beta_1"]&\beta_1(a)\arrow[r, mapsto, "\iota "]&\beta_1(a)\arrow[r, mapsto, "\beta_1^{-1}"]&a\arrow[r, mapsto, "\mu "]&0\arrow[r, "\pi \alpha_0^{-1}"]&0
+\end{tikzcd}\]
+Therefore, $\im \beta_1\subseteq \ker \delta $. Now we show the converse.
+\end{proof}
+\appendix
+\section{Definitions and Results Used in the Proof}
+\begin{lemma}\label{lma:1}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&M_2\arrow[r, "d_1"]&M_1\arrow[r, "d_0"]&M_0\arrow[r]&0
+	\end{tikzcd}\]
+	be a short exact chain complex. Then $d_1$ is a monomorphism and $d_0$ is an epimorphism.
+\end{lemma}
+\begin{definition}[Kernel]\label{dfn:1}
+	The kernel $\ker \phi $ of an $R$-module homomorphism $\phi : R \to S$ is the $R$-module which is final with respect to mappings $\alpha : S \to Z$ such that $\phi \alpha =0$. That is, $\ker \phi $ is the $R$-module such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		R\arrow[rr, bend left, "0"]\arrow[dr, dotted]\arrow[r, "\phi "]&S\arrow[r, "\alpha "]&Z\\
+									       &\ker \phi \arrow[u, hook]
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+\end{document}

@@ -1,0 +1,62 @@
+\lecture{6}{Fri 07 Feb 2025 13:33}{More on Polynomials}
+I didn't write it down, but we have a division algorithm for polynomials. The following are corollaries.
+\begin{corollary}\label{cor:1.1}
+	Let $f(x)\in F[x]$. Then $a\in F$ is a zero of $f(x)$ if and only if $x-a$ is a factor of $f(x)$.
+\end{corollary}
+\begin{corollary}\label{cor:1.2}
+	A polynomial of degree $n$ has at most $n$ zeroes, counting multiplicity.
+\end{corollary}
+\begin{definition}[Irreducible]\label{dfn:1.13}
+	A non-constant polynomial $f(x)\in F[x]$ is \emph{irreducible} over $F$ if $f(x)$ cannot be expressed as a product of two lower degree polynomials. If $f$ is not irreducible it is reducable.
+\end{definition}
+
+\begin{proposition}\label{prp:idk}
+	Let $f(x)\in F[x]$ for $F$ a field where $\operatorname{deg} (f(x))\in \left\{ 2,3 \right\} $. Then $f(x)$ is reducible if and only if $f(x)$ has a zero in $F$.
+\end{proposition}
+\begin{proof}
+	Let $f(x)=g(x)h(x)$ with $\operatorname{deg} g(x), \operatorname{deg} h(x)<\operatorname{deg} f(x)$. Then we can assume WLOG $\operatorname{deg} g(x)=1$ and $\operatorname{deg} h(x)=1$ or 2. So $g(x)=ax+b$ where $-a^{-1} b$ is a zero of $g$ and thus a zero of $f$.
+
+	Conversely, if $f(c)=0$ for some $c\in F$, then $x-c$ is a divisor of $f$ and we have $f(x)=(x-c)h(x)$ for some $h(x)\in F[x]$.
+\end{proof}
+\begin{definition}[Content]\label{dfn:1.14}
+	The \emph{content} of an integer polynomial $f(x)\in\mathbb{Z} [x]$ is
+	\[
+		c(f(x))=\operatorname{gcd} \left( a_1, \ldots, a_n  \right) 
+	.\]
+	That is, the content is the gcd of the coefficients. A polynomial is primitive if it's content equals 1.
+\end{definition}
+\begin{lemma}[Gauss' Lemma]\label{lma:1.5}
+	The product of two primitive polynomials is primitive.
+\end{lemma}
+\begin{proof}
+	Let $f(x)\in\mathbb{Z} [x]$ and a prime $p$. If one reduces the coefficients modulo $p$, then one gets $\overline{f} (x)\in \mathbb{Z} _p[x]$. It's easy to show that
+	\[
+		h(x)=f(x)g(x)\implies \overline{h}(x)=\overline{f}(x) \overline{g} (x)
+	.\]
+	Suppose $c(f)=c(g)=1$ and $c(fg)\neq 1$. Then there is some prime $p$ that divides the coefficients of $h=fg$ and thus $\overline{h} =0$. It follows that either $\overline{f}$ or $\overline{g} $ is 0, since $\mathbb{Z} _p$ is a field, and thus $p$ divides the coefficients. Therefore, their content is not 1, a contradiction.
+\end{proof}
+\begin{theorem}\label{thm:1.3}
+	Let $f(x)\in \mathbb{Z} [x]$. If $f$ is reductable over $\mathbb{Q} $ then it is reductable over $\mathbb{Z} $.
+\end{theorem}
+\begin{proof}
+	Let $f(x)=g(x)h(x)$ for $g,h\in \mathbb{Q} [x]$. We may assume $f$ is primitive, since otherwise we could divide $f$ and $g$ by $c(f)$. Let $a,b$ be the lcm of the denominators of the coefficients of $g$ and $h$, respectively. Then
+	\[
+		a b f(x)=ag(x)bh(x)
+	.\]
+	These are now both elements of $\mathbb{Z} [x]$. I don't want to finish writing.
+\end{proof}
+\begin{corollary}\label{cor:1.3}
+	Let $f(x)\in\mathbb{Z} [x]$ be monic with a nonzero constant term. If $f(x)$ has a zero in $m\in\mathbb{Q} $, then we may assume $m\in\mathbb{Z} $ with $m|a_0$.
+\end{corollary}
+\begin{proof}
+	Let $f(x)$ have $a\in\mathbb{Q} $ a zero. Then $f$ has a linear factor $x-a\in\mathbb{Q} [x]$. By theorem \ref{thm:1.3}, $f$ has a factorization with a linear factor  $x-m\in\mathbb{Z}[x] $. You then do some witchcraft and find $m$ divides $a_0$.
+\end{proof}
+
+In the proof of Gauss' lemma, we used the fact that the remainder map $\rho : \mathbb{Z} [x] \to \mathbb{Z} _p[x]$ is a homomorphism. We can use this idea further.
+\begin{theorem}[mod $p$ irreducibility]\label{thm:1.4}
+	Let $p$ be a prime and suppose that $f(x)\in\mathbb{Z} [x]$ with $\operatorname{deg} f \geq 1$. If the reduction $\overline{f} (x)\in\mathbb{Z} _p[x]$ is irreducible over $\mathbb{Z} _p[x]$ and $\operatorname{deg} \overline{f} =\operatorname{deg} f$, then $f(x)$ is irreducible over $\mathbb{Q} $.
+\end{theorem}
+\begin{proof}
+	If $f$ is reducible over $\mathbb{Q} $, then it's reducable over $\mathbb{Z} $. Thus, $f=gh$ for $g,h\in\mathbb{Z} [x] $ lower degree polynomials. Now consider the $\mod{p}$ reductions $\overline{f} ,\overline{g} ,\overline{h} $. Suppose for contradiction that $\overline{f} $ is irreductible over $\mathbb{Z}_p[x]$. Then since $\overline{f} =\overline{g} \overline{h} $ since reduction is a homomorphism, and since $\operatorname{deg} \overline{f} =\operatorname{deg} f$, we must have $\operatorname{deg} \overline{g} <\operatorname{deg} g$, and likewise for $h$. However, we have $\operatorname{deg} \overline{f} =\operatorname{deg} \overline{g} +\operatorname{deg} \overline{h} $, a contradiction.
+\end{proof}
+
