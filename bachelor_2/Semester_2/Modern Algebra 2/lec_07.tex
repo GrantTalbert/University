@@ -1,0 +1,69 @@
+\lecture{7}{Mon 10 Feb 2025 13:25}{More More on Polynomials}
+Here's a theorem proven by Eisenstein in 1850.
+\begin{theorem}\label{thm:1.5}
+	Let $f(x)\in\mathbb{Z} [x]$. If there exists a prime $p$ that does not divide $a_n$, but $p$ divides $a_i$ for $0\leq i<n$ and $p^2$ does not divide $a_0$, then $f(x)$ is irreductable over $\mathbb{Q} $.
+\end{theorem}
+\begin{proof}
+	Recall that if $f$ is irreducible over $\mathbb{Q} $, then it is irreducible over $\mathbb{Z} $ since $\mathbb{Z} \subseteq \mathbb{Q} $. Suppose $f=gh$ for $g,h\in \mathbb{Z} [x]$ where $1\leq \operatorname{deg} g<n$, and same for $h$. Note that $p|a_0$, but $p^2$ does not divide $a_0$. We must have $p|b_0c_0$, and thus $p|b_0$ xor $p|c_0$. Since $p$ does not divide $a_n=b_rc_s$, then $p$ does not divide $b_r$, so there is a least integer $t$ such that $p$ does not divide $b_t$. We find that
+	\[
+		a_t = b_tc_0+\cdots +b_0c_t
+	.\]
+	By assumption, $p$ divides $a_t$, but this is impossible because $p$ does not divide $b_t$ and $c_0$.
+\end{proof}
+
+This theorem allows us to manufacture many examples of irreductable polynomials of any degree. For example, $f(x)=x^5-9x^4+3x^2-12$ satisfies thee conditions for $p=3$, so it is not factorable over $\mathbb{Q} $.
+
+An important class of examples this criteria is used for is the \textbf{cyclotomic} polynomials. Define
+\[
+	\Phi_p(x)\coloneqq \frac{x^p-1}{x-1} =x^{p-1} +x^{p-2} +\cdots +x+1
+.\]
+The roots of $x^p-1$ are the $p$-th roots of unity, which corresponds to chopping up the circle group $p$ times. It can be shown the $p$th roots of unity are $\zeta_p^i$, for
+\[
+	\zeta_p = e^{i \frac{2\pi }{p} } 
+.\]
+Note that $\zeta_p^p=\zeta_p^0$. Moreover, each $\zeta_p^k$ is distinct for all $k$ from $0$ to $p-1$. The cyclotomic polynomials have all solutions $\zeta_p^k$ other than $x=1$.
+
+\begin{corollary}\label{cor:1.4}
+	The cyclotomic polynomials $\Phi _p$ are irreducible over $\mathbb{Q} $.
+\end{corollary}
+\begin{proof}
+	Recall the binomial theorem
+	\[
+		(x+y)^n=\sum_{k=0}^{n} \binom{n}{k} x^k y^{n-k} 
+	.\]
+	If $p$ is prime, then
+	\[
+		\binom{p}{k} =\frac{p!}{k!(p-k)!} 
+	.\]
+	Since $p$ is prime, if $k$ is between $0,p$, then $p$ cannot divide $k!$. Additionally, $p$ does not divide $(p-k)!$.
+
+	Let
+	\[
+		f(x)=\Phi _p(x+1)=\frac{\left( x+1 \right)^p-1}{(x+1)-1} =\sum_{k=1}^{p} \binom{p}{k-1} x^{p-k} 
+	.\]
+	Every coefficient of $f(x)$ except that of $x^{p-1} $ is divisible by $p$, since $p|p!$, and notably $p^2$ does not divide $p$ choose $p-1$. By theorem \ref{thm:1.5}, $f(x)$ is irreducible over $\mathbb{Q} $. Certaintly, if $\Phi_p(x)=g(x)h(x)$, then $f(x)=g(x+1)h(x+1)$, so we must have that $\Phi _p$ is irreducible.
+\end{proof}
+
+Now let's discuss factorization in $\mathbb{F}[x]$. As we will see, $\mathbb{F} [x]$ has a division algorithm similar to that in $\mathbb{Z} $.
+
+In the naturals, one of the main properties of primes is not that their only divisors are 1 and themselves, but that if $p|rs$ then $p|r$ or $p|s$. In $\mathbb{F} [x]$, irreducible polynomials play this role.
+\begin{theorem}\label{thm:1.6}
+	Let $p(x)\in\mathbb{F} [x]$ be irreducible. If $p(x)$ divides $r(x)s(x)$, then $p(x)|r(x)$ or $p(x)|s\left(x \right) $.
+\end{theorem}
+\begin{proof}
+	later
+\end{proof}
+\begin{corollary}\label{cor:1.6}
+	Let $p(x)\in\mathbb{F} [x]$ be irreducible, and let it divide a product $r_1(x)\cdots r_n(x) \in\mathbb{F} [x]$. Then $p(x)$ divide $r_i\left( x \right) $ for at least one $i\in \left\{1, \ldots, n \right\} $.
+\end{corollary}
+\begin{proof}
+	Follows immediately from theorem \ref{thm:1.6} by induction.
+\end{proof}
+\begin{theorem}\label{thm:1.7}
+	Let $\mathbb{F} $ be a field. Then for every $f(x)\in\mathbb{F} [x]\setminus \mathbb{F} $, there exists a factorization in $\mathbb{F} [x]$ into irreducibles, where the irreducibles are unique up to order and constant factors in $\mathbb{F} $. That is, if
+	\[
+		f(x)=p_1 \cdots  p_r = q_1 \cdots q_s,
+	\]
+	for $p_i,q_i$ irreducibles, then $r=s$ and $p_i=u_iq_i$ for $u_i\in\mathbb{F} $ for all $i$.
+\end{theorem}
+We will prove this statement more generally later, as a statement about divisibility in integral domains.
