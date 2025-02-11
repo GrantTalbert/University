@@ -80,7 +80,7 @@ s(
 	{ condition = math_mode }
 ),
 s(
-	{ trig = "hbar", snippetType = "autosnippet", wordTrig = false, priority = 1200 },
+	{ trig = "hbar", snippetType = "autosnippet", wordTrig = false, priority = 2000 },
 	fmta([[
 	\hbar <>
 	]],

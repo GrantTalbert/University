@@ -1,0 +1,44 @@
+\lecture{7}{Tue 11 Feb 2025 11:08}{Quotient Topologies}
+
+A quotient can be redefined in the more intuitive way. Consider a map $f : A \to X$ with $A\subseteq X$. We have the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\arrow[r, "f"]\arrow[dr, "\pi "]&X\\
+					 &f(A)\arrow[u]
+\end{tikzcd}\]
+idk
+
+IDK what's happening. Consider $X=[0,1]$ with the subspace topology, and let $A=\left\{ 0 \right\} $. Consider the quotient map $f : A \to X$ given by $0\mapsto 1$. Then the quotient topology [check the notes i see a diagram this looks interesting]
+
+Consider $X=[0,1]\times [0,1]$. This is just the closed square in $\mathbb{R} ^2$. Let $A=\partial X$, and consider the map $A\to X$ by $(0,t)\mapsto (1,t)$, $(t,0)\mapsto (t,1)$, and otherwise the identity map. We saw already gluing together two sides gives a cylinder, but now we are gluing together the top and bottom as well. This can be seen as gluing together the circular sides of the cylinder, giving a torus.
+
+Consider the same spaces, but a new map this time. We are mapping $\left\{ 0 \right\} \times [0,1]\to \left\{ 1 \right\} \times [0,1]$ and $[0,1]\times \left\{ 0 \right\} \to [0,1]\times \left\{ 1 \right\} $, but this time we define it as $(0,t)\mapsto (1,t)$ and $(t,0)\mapsto (1-t,1)$. Let's ignore this first map and only consider the mapping in $y$. We are gluing together the top side once again, but flipping the direction. This gives us a Mobius strip, which only has one side, and is thus non-orientable.
+
+Now let's return to considering both the $x$ and $y$ mappings, We are gluing together 2 ends of a cylinder, but gluing together their ends in two opposite directions. We can't do this in 3d, but we can do it formally in mathematics. What we get is a Klein bottle. It can be shown that the Klein bottle cannot be embedded in $\mathbb{R} ^3$ in a \emph{proper} way, such that no self-intersections happen.
+
+Here's another non-orientable example. Consider the unit disc $X=\left\{ (x,y)\in\mathbb{R} ^2\mid x^2+y^2\leq 1 \right\} $ with the subspace topology, and consider $A\coloneqq \partial X=S^1$. Consider the map $A \to X$ by $(x,y)\mapsto (-x,-y)$. We call the corresponding space $X/\tildesim $ the real projective space $\mathbb{RP}^2 $. As a set, this is simply the set of lines in $\mathbb{R} ^2$ passing through the origin. Also note that
+\[
+	\mathbb{RP}^2 \cong \mathbb{R}^3 \setminus \left\{ 0,0,0 \right\} /\tildesim 
+,\]
+where $\tildesim $ is defined as
+\[
+	[(x,y,z)]=\left\{ \lambda(x,y,z)\mid \lambda \in\mathbb{R}  \right\} 
+.\]
+This is kind of because you can use a bijection to identify the unit disc $D^2$ with the entirety of $\mathbb{R} ^2$. The real projective space is non-orientable, because it's kind of like once you get to the boundary of the disc $\partial X$, the map sends you to the other side, and you have to walk across it again.
+
+Consider two surfaces $S_1,S_2$. We can construct the connected sum of $S_1$ and $S_2$, denoted $S_1\#S_2$. Choose a point $p\in S_1$, and delete a sphere at $p$. So if $p$ is a 2d surface in $\mathbb{R} ^3$, the sphere would be a 2-sphere, which is a disk. Now choose a point $g\in S_2$, and do the same. Call the corresponding spheres $S_p$ and $S_g$. The boundaries are simply the unit sphere of one lower dimension, so we can map them together. We choose a map $f : \partial S_p \to \partial S_g$, and this gives an equivalence relation. We then have that
+\[
+	S_1\#S_2=S_1\amalg S_2 /\tildesim_f
+.\]
+This basically glues two orientable surfaces (manifolds) together. Note that orientable surfaces are homeomorphic if and only if they have the same genus (defined as number of ``holes'', we will define later). This means the connected sum really just adds together the genuses.
+\begin{definition}[Connected Sum]\label{dfn:1.1.1}
+	Let $S_1,S_2$ be $n$-manifolds. Choose points $p\in S_1$, $q\in S_2$, and remove an $n$-sphere at each point. Given any map $f$ between the boundaries of these $n$-spheres, define the connected sum $S_1\#S_2$ as
+	\[
+		S_1\#S_2\coloneqq S_1\amalg S_2 / \tildesim_f
+	.\]
+\end{definition}
+
+One final example. Let $f : M \to M$ be a bijection for $M$ a topological space. We define the mapping torus $M_f$ as $M\times [0,1]/\tildesim$, where
+\[
+	(x,0)\sim (f(x),1)
+.\]
+For example, if $f : S^1 \to S^1$ is the identity map, then $S^1_f \cong T^2$ is simply the torus.

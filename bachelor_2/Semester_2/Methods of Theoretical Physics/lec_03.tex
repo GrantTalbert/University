@@ -1,0 +1,88 @@
+\lecture{3}{Tue 11 Feb 2025 12:30}{Cauchy-Riemann}
+There are a few Cauchy-Riemann conditions. I think we are viewing a complex function $f(x+iy)$ as a real function $f(x,y)$.
+\begin{itemize}
+	\item
+		\[
+			i \frac{\partial f}{\partial x} =\frac{\partial f}{\partial y} 
+		.\]
+	\item $f(x,y)=u(x,y)+iv(x,y)$.
+	\item 
+		\[
+			-\frac{\partial v}{\partial x} =\frac{\partial u}{\partial x} 
+		.\]
+	\item 
+		\[
+			\frac{\partial u}{\partial x} =\frac{\partial v}{\partial y} 
+		.\]
+\end{itemize}
+If this is true, this means $f$ is a function of $z$ only and not $z^*$. If these conditions are satisfied, $f'(z)$ exists.
+\begin{definition}[Analytic]\label{dfn:1.1}
+	A function $f(z)$ is analytic in an open region $R\subseteq \mathbb{C} $ if and only if $f'(z)$ exists in $R$. $f$ is entire if $R=\mathbb{C} $.
+\end{definition}
+
+For example, $f(z)=z^2$ is entire because $f'(z)=2z$. Similarly, $f(z)=e^z$ is entire because $f'(z)=f(z)$. Given an analytic function, we can talk about singularities.
+\begin{definition}[Singularity]\label{dfn:1.2}
+	A singularity of an analytic function is an isolated point $z$ such that $f$ is not analytic at $z$, but is analytic in an open disc surrounding $z$.
+\end{definition}
+
+For example, $f(z)=1/z$ has a singularity at $z=0$. We often call this a \emph{pole}. Similarly, $f(z)=1/z^2$ has a singularity at $z=0$ as well. More generally,
+\[
+	f(z)=\frac{R(z_0)}{z-z_0} 
+\]
+has a singularity at $z_0$. We call $R(z_0)$ the \emph{residue} of the pole, and $z_0$ is the location of the pole.
+
+For example, the residue of $e^z/z$ is
+\[
+	\lim_{z \to 0} zf(z)=1
+.\]
+
+For example,
+\[
+	f(z)=\frac{1}{z+i} =\frac{1}{z-i} =\frac{2z}{z^2+1} 
+\]
+has poles at $\pm i$.
+
+Poles generalize to higher order poles. Let
+\[
+	f(z)=\frac{C}{\left( z-z_0 \right) ^n} 
+.\]
+This function has a pole at $z_0$ of order $n$, with residue $C$.
+
+Another type of singularity is an essential singularity. Consider $f(z)=e^{1/z} $. The taylor series of this is
+\[
+	f(z)=\sum_{n=0}^{\infty} \frac{1}{n!} \frac{1}{z^n} 
+.\]
+Note that
+\[
+	\lim_{z \to 0} z^p f(z)
+\]
+is not finite for all $p\in\mathbb{N} $.
+
+The final type of singularity we will discuss is the branch cut. For example, consider $f(z)=\sqrt{z} $. There is some ambiguity in the square root, so branch cuts will sort this out. If we write
+\[
+	z=\exp i\theta 
+,\]
+then
+\[
+	z^{1/2} =\exp (i\theta /2)
+.\]
+However, we could have also written
+\[
+	z=\exp (i\left( \theta +2\pi  \right) )
+.\]
+We require this phase angle to be the same, otherwise we have a branch cut.
+
+A contour integral is an integral from $z_1$ to $z_2$, where we integrate along a path $P$ from $z_1$ to $z_2$. That is, we take the integral
+\[
+	\int_{P} f(z) \,\mathrm{d} z
+.\]
+Computing this is the same as a multivariate limit; just parameterize $P$ with a function $z(t)=x(t)+iy(t)$ for $t\in[0,1]$, and then take the integral
+\[
+	\int_{0}^{1} f(z(t)) \frac{\mathrm{d}z}{\mathrm{d}t} \,\mathrm{d} t
+.\]
+
+Path independence is when two distinct paths $P_1,P_2$ have the same integral
+\[
+	\int_{P_1} f(z) \,\mathrm{d} z=\int_{P_2} f(z) \,\mathrm{d} z
+.\]
+

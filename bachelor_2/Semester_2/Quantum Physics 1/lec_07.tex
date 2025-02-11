@@ -1,0 +1,92 @@
+\lecture{7}{Tue 11 Feb 2025 14:00}{Uncertainty Principle}
+Recall: given two operators $A,B$ corresponding to two measurable quantities, we want to know when the variance in both $A$ and $B$ can be 0. That is, we want to find a state $\ket{\psi } $ such that the variance of $A,B$ in $\ket{\psi } $ is $0$. Recall that the variance of an operator on a state is 0 precisely when $\ket{\psi } $ is an eigenstate of $A$. The question ``when are states with a definite $A$ and a definite $B$ possible'' then becomes ``when do two operators $A$ and $B$ share eigenvectors?''
+\begin{theorem}\label{thm:1.1}
+	Let $A,B$ be quantum operators. Then there exists a choice of a shared set of eigenvectors of $A$ and $B$ if and only if $[A,B]\coloneqq AB-BA=0$. In this case, $[\cdot ,\cdot ]$ is a commutator.
+\end{theorem}
+\begin{proof}
+	Let $A,B$ share a set of eigenvectors $\mathcal{B} $, which we can assume WLOG are orthonormal. Any operator is diagonal in its own eigenbasis, and its diagonal elements are the eigenvalues. Thus, $A$ and $B$ are diagonal in the eigenbasis $\mathcal{B} $. Since diagonal matrices commute, we have that $[A,B]=0$.
+
+	Now the converse. Let $[A,B]=0$. Let $\ket{a} $ be an eigenvector of $A$ with eigenvalue $a$. There are two cases, whether $\ket{a} $ is the only eigenvector with eigenvalue $a$, or not.
+
+	Case 1: Consider $B\ket{a} $. By assumption, $AB=BA$. It follows that
+	\[
+		A(B\ket{a} )=B(a\ket{a} )=aB\ket{a} 
+	.\]
+	Therefore, $B\ket{a} $ is an eigenvector of $A$, and since $A$ has only one eigenvector, $B\ket{a} =b\ket{a} $.
+\end{proof}
+
+For example, we can measure $S_z$ and $S_z^3$ at the same time. Note that
+\[
+	[S_z,S_z^3]=S_zS_z^3-S_z^3S_z=0
+.\]
+However, we said we cannot know $S_z$ and $S_x$ simultaneously. Consider the commutator
+\[
+	[S_z,S_x]=\frac{\hbar^2}{4}\left( \begin{pmatrix}
+	1 & 0 \\
+	0 & -1
+	\end{pmatrix}\begin{pmatrix}
+	0 & 1 \\
+	1 & 0
+	\end{pmatrix}-\begin{pmatrix}
+	0 & 1 \\
+	1 & 0
+	\end{pmatrix}\begin{pmatrix}
+	1 & 0 \\
+	0 & -1
+	\end{pmatrix}\right)=\frac{\hbar^2}{4} \left( \begin{pmatrix}
+	0 & 1 \\
+	-1 & 0
+	\end{pmatrix}-\begin{pmatrix}
+	0 & -1 \\
+	1 & 0
+	\end{pmatrix} \right) =\frac{\hbar^2}{2} \begin{pmatrix}
+	0 & 1 \\
+	-1 & 0
+	\end{pmatrix}
+.\]
+We thus have $\left[ S_z,S_x \right] = i\hbar S_y \neq 0$. If you compute all commutators, you find
+\[
+	[S_x,S_y]=i\hbar S_z,\qquad [S_y,S_z]=i\hbar S_x,\qquad [S_z,S_x]=i\hbar S_y
+.\]
+This is a case of the more general notion of the commutation relation of angular momentum.
+
+\begin{mdframed}[linewidth=1pt]
+	\textbf{Uncertainty Principle:} For any observables $A$ and $B$, the uncertainty (in some state $\ket{\psi }$) must obey
+	\[
+		\left( \Delta A \right) \left( \Delta B \right) \geq \frac{1}{2} \left| \left\langle \left[ A,B \right]  \right\rangle  \right| 
+	.\]
+	Recall that the uncertainty $\Delta A$ is the standard deviation.
+\end{mdframed}
+\begin{proof}
+	Define $\delta A\coloneqq A-\left\langle A \right\rangle $ and $\delta B\coloneqq B-\left\langle B \right\rangle $. Recall that the variance $\left( \Delta A \right)^2 =\left\langle \left( \delta A \right) ^2 \right\rangle $. Since $\left\langle A \right\rangle ,\left\langle B \right\rangle $ are just numbers and commute with everything,
+	\[
+		[\delta A,\delta B]=[A,B]
+	.\]
+	Define $\mathcal{O} \coloneqq \delta A+i\lambda \delta B$ for $\lambda \in\mathbb{C} $ that will be chosen soon. Note that
+	\[
+		\left| \mathcal{O} \ket{\psi }  \right| ^2\geq 0
+	\]
+	for all $\lambda $. Also note that since $\left| \ket{\psi }  \right|^2 =\braket{\psi }{\psi } $, we have
+	\[
+		\left| \mathcal{O} \ket{\psi }  \right| ^2 = \bra{\psi }  \mathcal{O} ^{\dagger} \mathcal{O} \ket{\psi } =\bra{\psi } \left( \delta A-i\lambda \delta B \right) \left( \delta A+i\lambda \delta B \right) \ket{\psi } 
+	.\]
+	Distributing, this equals
+	\[
+	\left\langle \left( \delta A \right) ^2 \right\rangle +\lambda ^2 \left\langle \left( \delta B \right) ^2 \right\rangle +i\lambda \left\langle\left[ \delta A,\delta B \right]\right\rangle=\left( \delta A \right)^2+\lambda ^2\left( \Delta B \right) ^2+i\lambda \left\langle[A,B]\right\rangle
+	.\]
+	Note that $-i \left\langle\left[ A,B \right]\right\rangle $ must be real. Choose $\left| \lambda  \right| =\frac{\Delta A}{\Delta B} $.
+
+	We find that
+	\[
+		\left( \Delta A \right) ^2+\lambda ^2\left( \Delta B \right) ^2\geq -\lambda \left| \left\langle \left[ A,B \right]  \right\rangle  \right| 
+	.\]
+	It follows by algebra that
+	\[
+		\left( \Delta B \right) \left( \Delta A \right) \geq \frac{1}{2} \left| \left\langle \left[ A,B \right]  \right\rangle  \right| 
+	.\]
+\end{proof}
+
+Consider the uncertainty of $S_x$ and $S_y$ in the state $\ket{+} $:
+\[
+	\frac{1}{2} \left| \left\langle \left[ S_x,S_y \right]  \right\rangle  \right| =\frac{1}{2} \left| \left\langle i\hbar S_z \right\rangle  \right| =\frac{1}{2} \left| i\frac{\hbar ^2}{2}  \right| =\frac{\hbar ^2}{4} 
+.\]

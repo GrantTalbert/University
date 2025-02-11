@@ -4,14 +4,15 @@
 \title{Homework 1}
 \courseID{MA 564}
 \courseSection{A1}
+\DeclareMathOperator{\Int}{Int}
 \begin{document}
 \makeproblem
 \section*{Problem 1}
-By definition, $\varnothing ,\mathcal{T} \in\mathbb{R} $. Now let $\left\{ (-\infty ,p) \right\}_{p\in P} \subseteq \mathcal{T} $, and consider the union over this collection. Let $a=\sup  P$, and let $x\in (-\infty ,a)$. We have that $a<\sup P$, and thus by definition, there exists $p\in P$ such that $a<p$. It follows that $x\in (-\infty ,p)$, and thus we have
+By definition, $\varnothing ,\mathcal{T} \in\mathbb{R} $. Now let $\left\{ (-\infty ,p) \right\}_{p\in P} \subseteq \mathcal{T} $, and consider the union over this collection. Let $a=\sup  P$, and let $x\in (-\infty ,a)$. We have that $x<\sup P$, and thus by definition, there exists $p\in P$ such that $x<p$. It follows that $x\in (-\infty ,p)$, and thus we have
 \[
 	x\in (-\infty ,p) \subseteq \bigcup_{p\in P} (-\infty ,p)
 .\]
-Therefore, $(-\infty ,a)\subseteq \bigcup_{p\in P} (-\infty ,p)$. Now let $x\in \bigcup_{p\in P} (-\infty ,p)$. It follows that there exists $p\in P $ such that $x\in (-\infty ,p)$, and thus $x<p$ for some $p\in P$. Since $p<\sup P=a$, we have that $x<a$, and thus $x\in (-\infty ,a)$. Therefore,
+Therefore, $(-\infty ,a)\subseteq \bigcup_{p\in P} (-\infty ,p)$. Now let $x\in \bigcup_{p\in P} (-\infty ,p)$. It follows that there exists $p\in P $ such that $x\in (-\infty ,p)$, and thus $x<p$ for some $p\in P$. Since $p\leq \sup P=a$, we have that $x<a$, and thus $x\in (-\infty ,a)$. Therefore,
 \[
 	\bigcup_{p\in P} (-\infty ,p)=(-\infty ,\sup P)
 .\]
@@ -142,9 +143,9 @@ Let $X$ be Hausdorff, and consider the intersection
 \[
 	U\coloneqq \bigcap_{V} \overline{V} 
 ,\]
-where $V$ ranges over all open sets in $X$ containing $x$. By definition, we have $x\in \overline{V} $ for all $V$, so $x\in U$. Note that for all $y\in X$ such that $y\neq x$, since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Suppose for contradiction that $y\in U$. Note that $\overline{V_x} \supseteq U$, and because $y\notin V_x$, we must have $y\in \overline{V_x} \setminus V_x=\partial V_x$. It follows that $y$ is a limit point of $V_x$, and thus every open set containing $U$ must intersect $V_x$ at a point other than $y$. Therefore, $V_y$ intersects $V_x$ at some point other than $y$, and $V_y \cap V_x$ must thus contain this point, and is thus nonempty. This is a contradiction, and thus $y\notin U$.
+where $V$ ranges over all open sets in $X$ containing $x$. By definition, we have $x\in \overline{V} $ for all $V$, so $x\in U$. Note that for all $y\in X$ such that $y\neq x$, since $X$ is Hausdorff, there exist disjoint neighborhoods $V_x,V_y$ of $x,y$, respectively. Suppose for contradiction that $y\in U$. Note that $\overline{V_x} \supseteq U$, and because $y\notin V_x$, we must have $y\in \overline{V_x} \setminus V_x=\partial V_x$, because $V_x$ is open and thus $\Int(A)=A$. It follows that $y$ is a limit point of $V_x$, and thus every open set containing $U$ must intersect $V_x$ at a point other than $y$. Therefore, $V_y$ intersects $V_x$ at some point other than $y$, and $V_y \cap V_x$ must thus contain this point, and is thus nonempty. This is a contradiction, and thus $y\notin U$.
 
-Now for the converse, suppose $U=\left\{ x \right\} $. Let $y\in X$ be a distinct point. Since $y\notin U$, it follows that there must exist at least one neighborhood $V$ of $x$ such that $y\notin \overline{V} $. Equivalently, $y\in \overline{V} ^{c} $. Note that $\overline{V} \cap \overline{V} ^{c} =\varnothing $. Since $V\subseteq \overline{V} $, we have $V \cap \overline{V} ^{c} =\varnothing $. Since $\overline{V} $ is closed, $\overline{V} ^{c} $ is open, and contains $y$. $V$ is also open, and contains $x$. Therefore, for any two distinct points, there exist disjoint neighborhoods of those points, and $X$ is Hausdorff.
+Now for the converse, suppose $U=\left\{ x \right\} $. Let $y\in X$ be a distinct point. Since $y\notin U$, it follows that there must exist at least one neighborhood $V$ of $x$ such that $y\notin \overline{V} $. Equivalently, $y\in \overline{V} ^{c} $. Note that $\overline{V} \cap \overline{V} ^{c} =\varnothing $. Since $V\subseteq \overline{V} $, we have $V \cap \overline{V} ^{c} =\varnothing $. Since $\overline{V} $ is closed, $\overline{V} ^{c} $ is open, and contains $y$. $V$ is also open, and contains $x$. Therefore, for any two distinct points $x,y$, there exist disjoint neighborhoods $V,\overline{V}^{c}$ of those points, and $X$ is Hausdorff.
 
 \section*{Problem 6}
 Let definitions be as given in the problem, and suppose $X$ is Hausdorff. Then for all $x\neq y$ in $X$, there exist disjoint neighborhoods $V_x$, $V_y$ of $x$ and $y$, respectively. Equivalently, $V_x \subseteq X \setminus  V_y = V_y^{c} $. Since $V_y $ is open, $V_y^{c} $ is finite, and thus $V_x$ is finite. Note that $X = V_x \cup V_x^{c} $. Since $V_x$ and $V_x^{c} $ are finite, $X$ is finite.
