@@ -1,0 +1,70 @@
+\documentclass[11pt]{report}
+\input{../../../report.tex}
+\title{Algebra Exercises}
+\usepackage{titlepageBU}
+\usepackage{xparse}
+\courseID{CAS MA 741}
+\college{College of Arts and Sciences}
+\department{Department of Mathematics and Statistics}
+\date{Winter Break, 2024/2025}
+\usepackage{tikz-cd}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\rank}{rk}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Tr}{tr}
+\newcommand{\tildesim}{\mathbin{\sim}}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{x}
+\declaretheorem[numberwithin=section, style=x, name=Exercise]{exercise}
+\declaretheorem[numbered=no, style=proof, name=Solution]{solution}
+\newcommand{\contradiction}{\Longrightarrow\Longleftarrow}
+\begin{document}
+\makereport
+\stepcounter{chapter}
+\stepcounter{chapter}
+\stepcounter{chapter}
+\stepcounter{chapter}
+\stepcounter{chapter}
+\chapter{Linear Algebra}
+\section{Free Modules Revisited}
+\begin{exercise}
+	Show $\mathbb{R} \cong \mathbb{C} $ as $\mathbb{Q} $-vector spaces.
+\end{exercise}
+\begin{solution}
+	This is tricky. I think $\dim_{\mathbb{Q} } \mathbb{R} =\aleph_0$, and $\dim_{\mathbb{Q} } \mathbb{C} =2 \dim _{\mathbb{Q} } \mathbb{R} =\dim_{\mathbb{Q} } \mathbb{R} $. Unsure how to show this.
+\end{solution}
+\begin{exercise}
+	Consider the sets
+	\begin{itemize}
+		\item $\mathfrak{gl}_n(\mathbb{R} )\coloneqq \mathcal{M}_n(\mathbb{R} )$;
+	\item $\mathfrak{sl}_n(\mathbb{R} )\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{R} )\mid \Tr M=0 \right\} $;
+	\item $\mathfrak{sl}_n(\mathbb{C} )\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{C} )\mid \Tr M=0 \right\} $;
+	\item $\mathfrak{so}_n(\mathbb{R} )\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{R} )\mid M+M^t=0 \right\} $;
+	\item $\mathfrak{su}(n)\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{C} )\mid M+M^\dagger=0 \right\} $.
+	\end{itemize}
+	Show these sets are $\mathbb{R} $-vector spaces, and compute their dimension.
+\end{exercise}
+\begin{solution}
+	First, we show $\mathfrak{gl} _n(\mathbb{R} )$ is a $\mathbb{R} $-vector space. We will use the componentwise matrix notation $M\coloneqq [m_{ij} ]$, where $m_{ij} $ are the components of the matrix $M$ and range over $\left\{ 1, \ldots ,n \right\} $. For any $r\in\mathbb{R} $, define $r[m_{ij} ]=[r m_{ij} ] $. Clearly, $\mathfrak{gl} _n(\mathbb{R} )$ is a group, so we will simply show it is a vector space. Note that $1[m_{ij} ]=[m_{ij} ]$,
+	\[
+		(r+s)[m_{ij} ]=r[m_{ij} ]+s[m_{ij} ]
+	,\]
+	and
+	\[
+		(rs)[m_{ij} ]=[rsm_{ij} ]=r[sm_{ij} ]=r\left( s[m_{ij} ] \right)  
+	.\]
+	Moreover, $r$ is an endomorphism:
+	\[
+		r\left( [m_{ij} ]+[n_{ij} ] \right) =r[m_{ij} +n_{ij} ]=[r\left( m_{ij} +n_{ij}  \right) ]=[r m_{ij} +rn_{ij} ]=[r m_{ij} ]+[rn_{ij} ]=r[m_{ij} ]+r[n_{ij} ] 
+	.\]
+	Therefore, $r\mapsto r$ is a homomorphism $\mathbb{R}  \to \End_{\mathsf{Ab} }(\mathfrak{gl}_n(\mathbb{R} )) $, and $\mathfrak{gl} _n(\mathbb{R} )$ is an $\mathbb{R} $-vector space. Finally, we compute the dimension. Obviously, $\mathfrak{gl}_n(\mathbb{R} )\cong \mathbb{R} ^{n^2} $. This is so much effort to prove so I'm not going to.
+
+	$\mathfrak{sl}_n(\mathbb{R} )$ is very difficult, but note that $\mathfrak{so}_n(\mathbb{R} )\subseteq \mathfrak{sl}_n(\mathbb{R} )\subseteq \mathfrak{gl}_n(\mathbb{R} )$,  so maybe that helps.
+
+	I think the basis for $\mathfrak{so}_n(\mathbb{R} )$ is basically one element per item $m_{ij} $ in the upper triangle (not counting main diagonal), put a 1 there, and put a $-1$ at $m_{ji} $. Then $M^t=-M$ for the basis set. I think this is the entire basis.
+\end{solution}
+
+\end{document}
+

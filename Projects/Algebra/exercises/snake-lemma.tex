@@ -119,7 +119,25 @@ Notice that by the commutativity of this diagram, we have that
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	a\arrow[r, mapsto, "\beta_1"]&\beta_1(a)\arrow[r, mapsto, "\iota "]&\beta_1(a)\arrow[r, mapsto, "\beta_1^{-1}"]&a\arrow[r, mapsto, "\mu "]&0\arrow[r, "\pi \alpha_0^{-1}"]&0
 \end{tikzcd}\]
-Therefore, $\im \beta_1\subseteq \ker \delta $. Now we show the converse.
+Therefore, $\im \beta_1\subseteq \ker \delta $. Now we show the converse. Let $a\in \ker \delta $. It follows that at some point in the sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\delta : a\arrow[r, mapsto, "\iota "]&b\arrow[r, mapsto, "\beta_1^{-1} "]&c\arrow[r, mapsto, "\mu "]&d\arrow[r, mapsto, "\alpha_0^{-1} "]&e\arrow[r, mapsto, "\pi "]&f,
+\end{tikzcd}\]
+at least one of these elements must be 0. Also note that if one element is 0, all subsequent elements must also be 0. We will go through this one at a time.
+
+If $a=0$, then $a\in \im \beta_1|_{\ker \mu }$ because $0\mapsto 0$ and $0\in \ker \mu $. If $b=0$, then $a=0$ because the inclusion $\iota $ is injective. If $c=0$, then $\beta_1(0)=b$ implies that $b=0$. If $d=0$, then $\mu (c)=0$, and thus $c\in \ker \mu $. It follows that $\beta_1(c)\in \im\beta_1|_{\ker \mu }$. Note that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ker \mu \arrow[r]\arrow[d]&\ker \nu \arrow[d]\\
+	M_1\arrow[r]&M_0
+\end{tikzcd}\]
+commutes, and thus $\beta_1(c)=a$. Therefore, $a\in \im \beta_1|_{\ker \mu }$. If $e=0$, then because $\alpha_0$ is injective, $d=0$, and $a\in \im \beta_1|_{\ker \mu }$.
+
+If $f=0$, then note that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[d, "\nu "]\\
+	\im \lambda \arrow[r, "\alpha _0"]&\im \mu \arrow[r, "\beta _0"]&\im \nu 
+\end{tikzcd}\]
+commutes. Note that $f=0$ if and only if $e\in \im \lambda $, and we have that $\beta_0\alpha _0(\lambda )=0$ because rows are exact. Then $\nu (b)=\beta_0\alpha_0(\lambda )$, and thus $b\in \ker \nu $. Great, we already knew that. Note that $e$ has a preimage under $\lambda $, which must map to $c$ by commutativity of the diagram. Since rows are exact, $\beta_1(c)=0$, and thus $b=0$. Therefore, $\ker \delta \subseteq \im \beta_1|_{\ker \mu }$, and the complex is exact at $\ker \nu $.
 \end{proof}
 \appendix
 \section{Definitions and Results Used in the Proof}
