@@ -19,7 +19,7 @@ Idfk what to do for b
 \section{Operators}
 \begin{enumerate}
 	\item h
-	\item Note that $h(x)g(x)=0$ (except possibly on $\left\{ 1/3,2/3 \right\} $ depending on how the drawing is interpreted, but this set has lebesgue measure 0 so the following conclusion still holds). It follows that
+	\item The question is wrong, since $h$ is not continuous, and thus $h\notin V$ so $Ah$ is not defined. The same is true for $g$. I will ignore this inconvenient truth to give the intended answer. Note that $h(x)g(x)=0$ (except possibly on $\left\{ 1/3,2/3 \right\} $ depending on how the drawing is interpreted, but this set has lebesgue measure 0 so the following conclusion still holds). It follows that
 		\[
 			\int_{0}^{1} h(y)g(y)g(x) \,\mathrm{d} y=0
 		.\]
@@ -35,7 +35,107 @@ Idfk what to do for b
 		\[
 			(Ah)(x)=\frac{10}{9} h(x)\int_{0}^{1} h(y) \,\mathrm{d} y=\frac{20}{27} h(x) 
 		.\]
-	\item bruh
+
+		Computing $(Ag)(x)$ is more simple, since the first and last integrals vanish. We have
+		\[
+			(Ag)(x)=g(x)\int_{0}^{1} g(y)^2 \,\mathrm{d} y=g(x)\int_{1/3}^{2/3}  \,\mathrm{d} x=\frac{1}{3} g(x)
+		.\]
+	\item The intended solution is $20/27$ with $h(x)$ as an eigenfunction, $1/3$ with $g(x)$ as an eigenfunction, and any scalar multiple of these functions. Note that the image of $A$ must be a subset of the span of $\left\{ h,g \right\} $ since $v=1/3h$ is in this span, and thus these are clearly the only possible linearly independent eigenspaces other than the 0 eigenspace.
+
+		The question is once again worded wrong, however, and if we take $V$ to actually be the space of continuous functions and $A$ to be a map $V \to \mathbb{R} ^{[0,1]} $, then the answer becomes only $0$ as an eigenvalue, since clearly any continuous eigenfunction $f$ of a nonzero eigenvalue must be constant, and plugging a nonzero constant into the integrals implies the contradiction that $1/3=10/9$. The eigenfunctions of the 0 eigenvalue are functions $f\in V$ such that
+		\[
+			\int_{0}^{1/3} f(x) \,\mathrm{d} x=-\int_{2/3}^{1} f(x) \,\mathrm{d} x,\text{ and } \int_{1/3}^{2/3} f(x) \,\mathrm{d} x=0
+		.\]
+		This will cause $Af=0$.
 \end{enumerate}
 
+\section{Born's Rule and Expectation Values}
+\begin{enumerate}
+	\item Recall:
+		\[
+			S_{\vec{n} } =\begin{pmatrix}
+			\cos \theta  & \sin \theta  \\
+			\sin \theta  & -\cos \theta 
+			\end{pmatrix},
+		\]
+		and the eigenvectors associated with eigenvales $\hbar /2,-\hbar /2$ are
+		\[
+			\ket{\psi _1} =\cos \frac{\theta }{2} \ket{+} +\sin \frac{\theta }{2} \ket{-} ,\qquad \ket{\psi _2} =\sin \frac{\theta }{2} \ket{+} -\cos \frac{\theta }{2} \ket{-} ,
+		\]
+		respectively. We have
+		\[
+			\mathcal{P}_{\hbar /2} =\left| \braket{+}{\psi_1}  \right|^2=\left| \cos \frac{\theta }{2} \braket{+}{+} +\sin \frac{\theta }{2} \braket{+}{-}  \right| ^2=\left| \cos \frac{\theta }{2}  \right| ^2
+		.\]
+		Similarly, we have
+		\[
+			\mathcal{P}_{-\hbar /2} =\left| \braket{+}{\psi_2}  \right| ^2=\left| \sin \frac{\theta }{2} \braket{+}{+} -\cos \frac{\theta }{2} \braket{+}{-}  \right| ^2 = \left| \sin \frac{\theta }{2}  \right|^2
+		.\]
+		The former is the probability of measuring $\hbar /2$, since $\ket{\psi _1} $ is the corresponding eigenvector, and the latter is the probability of finding $-\hbar /2$ for the same reason. As a quick sanity check,
+		\[
+			\left| \sin \frac{\theta }{2}  \right| ^2+\left| \cos \frac{\theta }{2}  \right| ^2=\sin ^2\frac{\theta }{2} +\cos ^2\frac{\theta }{2} =1
+		.\]
+	\item 
+		\begin{enumerate}
+			\item
+				\begin{align*}
+					\bra{+} S_{\vec{n} } \ket{+} &=\frac{\hbar }{2} \begin{pmatrix}
+					1 & 0
+					\end{pmatrix} \begin{pmatrix}
+					\cos \theta  & \sin \theta  \\
+					\sin \theta  & -\cos \theta 
+					\end{pmatrix}\begin{pmatrix}
+					1 \\
+					0
+					\end{pmatrix}\\
+								     &=\frac{\hbar }{2} \begin{pmatrix}
+								     1 & 0
+								     \end{pmatrix}\begin{pmatrix}
+								     \cos \theta  \\
+								     \sin \theta 
+								     \end{pmatrix}\\
+								     &=\frac{\hbar }{2} \cos \theta 
+				.\end{align*}
+			\item 
+				\[
+					\left\langle S_{\vec{n} }  \right\rangle =\sum_{i} \lambda_i \mathcal{P}_i=\frac{\hbar }{2} \cos ^2\frac{\theta }{2}-\frac{\hbar }{2} \sin ^2\frac{\theta }{2} =\frac{\hbar }{2} \left( \cos^2\frac{\theta }{2} -\sin ^2\frac{\theta }{2}  \right) =\frac{\hbar }{2} \cos \theta 
+				.\]
+		\end{enumerate}
+	\item
+		\begin{enumerate}
+			\item Note that
+				\[
+					\mathcal{P}_{\hbar /2} =\left| \braket{\psi _1}{\psi _1}  \right| ^2 \equiv 1
+				.\]
+				It follows that $\mathcal{P}_{-\hbar /2} =0$ by classical probability theory. Therefore, $\ket{\psi _1} $ and $\ket{\psi _2} $ are orthogonal states.
+			\item
+				\begin{enumerate}
+					\item
+						\begin{align*}
+							\bra{\psi _1} S_{\vec{n} } \ket{\psi _1} &=\frac{\hbar }{2}\begin{pmatrix}
+							\cos \frac{\theta }{2}  & \sin \frac{\theta }{2} 
+							\end{pmatrix}\begin{pmatrix}
+							\cos \theta  & \sin \theta  \\
+							\sin \theta  & -\cos \theta 
+							\end{pmatrix}\begin{pmatrix}
+							\cos \frac{\theta }{2}  \\
+							\sin \frac{\theta }{2} 
+							\end{pmatrix}\\
+												 &=\frac{\hbar }{2}\begin{pmatrix}
+												 \cos \frac{\theta }{2}  & \sin \frac{\theta }{2} 
+												 \end{pmatrix}\begin{pmatrix}
+												 \cos \theta \cos \frac{\theta }{2} +\sin \theta \sin \frac{\theta }{2}  \\
+												 \cos \frac{\theta }{2} \sin \theta -\sin \frac{\theta }{2} \cos \theta 
+												 \end{pmatrix}\\
+												 &=\frac{\hbar }{2} \left(\cos \theta \cos ^2\frac{\theta }{2} +\sin \theta \cos \frac{\theta }{2} \sin \frac{\theta }{2} +\cos \frac{\theta }{2} \sin \frac{\theta }{2} \sin \theta -\sin ^2\frac{\theta }{2} \cos \theta\right) \\
+												 &=\frac{\hbar }{2} \left(\cos \theta \left( \cos ^2\frac{\theta }{2} -\sin ^2\frac{\theta }{2}  \right) +2 \sin \theta \cos \frac{\theta }{2} \sin \frac{\theta }{2}\right) \\
+												 &=\frac{\hbar }{2} \left(\cos ^2\theta +\sin ^2\theta\right) \\
+												 &=\frac{\hbar }{2} 
+						.\end{align*}
+					\item
+						\[
+							\left\langle S_{\vec{n} }  \right\rangle =\sum_{i} \lambda_i \mathcal{P}_{i} =\frac{\hbar }{2} 1-\frac{\hbar }{2} 0=\frac{\hbar }{2} 
+						.\]
+				\end{enumerate}
+		\end{enumerate}
+\end{enumerate}
 \end{document}

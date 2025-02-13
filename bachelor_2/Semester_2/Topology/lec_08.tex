@@ -1,0 +1,101 @@
+\lecture{8}{Thu 13 Feb 2025 10:59}{owo}
+\begin{definition}[Continuous]\label{dfn:2.11}
+	Let $X,Y$ be topological spaces, and let $f : X \to Y$. We say $f$ is continuous if and only if for all open sets $U\subseteq Y$, the preimage $f^{-1} (U)$ is open.
+\end{definition}
+For example, $\mathrm{id}_X : X \to X$ is clearly continuous. Also, any constant map is continuous. Let $f : X \to Y$ be the map $x\mapsto y$ for a fixed $y\in Y$. Then for any open set containing $y$, the preimage is $X$, and for any open set not containing $y$, the preimage is $\varnothing $.
+
+Another example is the quotient topology $q : X \twoheadrightarrow A$. Note that $A$ with the quotient topology is defined such that for all open sets $U$ in $A$, the preimage $q^{-1} (U)$ is open in $X$. Therefore, the quotient map $q$ is continuous by definition. Also consider the product topology $X\times Y$ with the projections $\pi_X,\pi_Y$. These are clearly continuous. GIven an open set $V\subseteq X$, the preimage is $V\times Y$, and since $V$ is open in $X$ and $Y$ is open in $Y$, by definition \ref{dfn:2.8}, this is open. Finally, Let $A\subseteq X$ and consider the inclusion $A\hookrightarrow X$, where $A$ has the subspace topology. Note that $\iota^{-1} (V)=A \cap V$, so the inclusion is continuous.
+
+\begin{proposition}\label{prp:2.10}
+	Let $X,Y$ be topological spaces, and let $\mathcal{B} $ be a basis for the topology on $Y$. Then $f : X \to Y$ is continuous if and only if $f^{-1} (B)$ is open for all $B\in \mathcal{B} $.
+\end{proposition}
+\begin{proof}
+	If $f$ is continuous, then this follows by definition \ref{dfn:2.11}.
+
+	Let $f^{-1} (B)$ be open in $X$ for all $B\in \mathcal{B} $. Let $V\subseteq Y$ be open. It follows that there exists a collection $\left\{ B_i \right\}_{i\in I} \subseteq \mathcal{B} $ such that
+	\[
+		f^{-1} (V)=f^{-1} \left( \bigcup_{i\in I} B_i \right) =\bigcup_{i\in I} f^{-1} (B_i)
+	.\]
+	This is a union of open sets, so $f^{-1} (V)$ is open in $X$.
+\end{proof}
+
+Fr example, $f : \mathbb{R}  \to \mathbb{R} $ with the standard topology is continuous if and only if $f^{-1} (B_\delta (y))$ is open in $\mathbb{R} $, for all $\delta >0$, and for all $y\in \mathbb{R} $. Note that we can write this in the basis for the first $\mathbb{R} $:
+\[
+	f^{-1}(B_\delta (y))=\bigcup_{i\in I} B_{\delta_i} (x_i)
+\]
+for some collection of $\delta_i>0$, $x_i\in\mathbb{R} $. If $a\in\mathbb{R} $ such that $f(a)=b$, then $a\in f^{-1} (b)$, and
+\[
+	b\in f^{-1} (B_\delta (b))=\bigcup_{i\in I} B_{\delta _i} (x_i)
+.\]
+Note that $a$ is inside of this union, since $f^{-1} (b)$ is a subset of it, and thus $B_{\varepsilon } (a)\subseteq B_{\delta _i} (x_i)$ for all $i$ for $\varepsilon =\min \left\{ \left| a-(x_i-\delta _i)		 \right| ,\left| a-(x_i+\delta _i) \right|  \right\} $. We have
+\[
+	B_{\varepsilon } (a)\subseteq B_{\delta _i} (x_i)\subseteq \bigcup_{i\in I} B_{\delta _i} (x_i)=f^{-1} (B_{\delta } (b))
+.\]
+Therefore, for any $\delta >0$, there exists an $\varepsilon >0$ such that $\left| x-a \right| <\delta $ implies that $\left| f(x)-f(a) \right| <\varepsilon $. That is, $f : \mathbb{R}  \to \mathbb{R} $ is continuous if
+\[
+	\forall \delta >0\exists \varepsilon >0 : \left| x-a \right| <\delta \implies \left| f(x)-f(a) \right| <\varepsilon 
+.\]
+
+\begin{theorem}\label{thm:2.2}
+	A function $f : X \to Y$ is continuous if and only if for all $x\in X$ and $U\subseteq Y$ open such that $f(x)\in U$, there exists an open neighborhood $V\subseteq X$ of $x$ such that $f(V)\subseteq U$.
+\end{theorem}
+\begin{proof}
+	Let $f$ be continuous, and $x\in X$, and let $f(x)\in U\subseteq Y$ be open. Then the preimage $f^{-1} (U)$ contains $x$. We now want to find a neighborhood $V$ of $x$ such that $f(V)\subseteq U$. We can take $V=f^{-1} (U)$. Since $f$ is continuous, $V$ is open, and clearly $f(V)=U\subseteq U$.
+
+	Now for the converse. Suppose for any $x\in X$ and $f(x)\in U$ open in $Y$, then there exists a neighborhood $V\subseteq X$ of $x$ such that $f(V)\subseteq U$. We want to show $f^{-1} (U)$ is open. For every $x\in X$ such that $f(x)\in U$, we have that there exists an open set $x\in V_x$ such that $f(V_x)\subseteq U$. It follows that
+	\[
+		f^{-1} (U)=\bigcup_{x\in X\text{ s.t. } f(x)\in U} V_x
+	.\]
+	This is a union of open sets by assumption. I thought this previous line was the most trivial claim we have made today, but apparently it's the only one that needs explaining. Sure.
+\end{proof}
+
+\begin{theorem}\label{thm:2.3}
+	Let $f : X \to Y$ be continuous, and let $x_n\to x$ be a convergent sequence in $X$. Then $f(x_n)\to f(x)$ in $Y$.
+\end{theorem}
+\begin{proof}
+	Recall the definition of a limit of a sequence (\ref{dfn:2.5}) let $\left\{ x_n \right\} \subseteq X$. Then
+	\[
+	\lim_{x \to \infty} x_n=x
+	\]
+	if and only if for any open set $U $ containing $x$, there exists $N\in\mathbb{N} $ such that $x_n\in U$ for all $n\geq N$. Now let $x_n\to x$. We wish to show for all open $V\in Y$ containing $f(x)$, there exists $N\in\mathbb{N} $ such that $f(x_n)\in V$ for all $n\geq N$. Since $V$ is open, we have that $f^{-1} (V)$ is open. Note that for all $f(x_n)\in V$, we have $x_n\in f^{-1} (V)$. There thus exists $N\in\mathbb{N} $ such that $x_n\in f^{-1} (V)$ if $n\geq N$. Therefore, there exists $N\in\mathbb{N} $ such that $f(x_n)\in V$ if $n\geq N$, and $f(x_n)\to f(x)$.
+\end{proof}
+
+Consider the example $f : \mathbb{R}  \to \mathbb{R} $ given by $x\mapsto x^2$. Suppose $b\in f(\mathbb{R} )$, given $\varepsilon >0$, we want to find $\delta >0$ such that $\left| x-a \right| <\delta $ implies $\left| f(x)-f(a) \right| <\varepsilon $. Note that
+\[
+	\left| f(x)-f(a) \right| =\left| x^2-a^2 \right| =\left| x-a \right| \left| x+a \right| < \delta \left| x-a \right| 
+.\]
+Choose $\delta =\varepsilon /\left| x+a \right|$. We have that
+\[
+	\left| f(x)-f(a) \right| < \frac{\varepsilon }{\left| x+a \right| } \left| x+a \right| =\varepsilon 
+.\]
+There is some manipulation to turn $\left| x+a \right| $ into $\left| 3a \right| $ using some fact that I didn't see. But using this assumption $f$ is continuous. Well if $a=0$ then it breaks so we choose 1 or something.
+
+\begin{proposition}\label{prp:2.11}
+	Let $f : X \to Y$, $g : Y \to Z$ be continuous. Then $gf : X \to Z$ is continuous.
+\end{proposition}
+\begin{proof}
+	Let $U\subseteq Z$ be open. Since $g$ is continuous, $g^{-1} (U)$ is open in $Y$. Since $f$ is continuous, $f^{-1} (g^{-1} (U))$ is open in $X$. Note that
+	\[
+		(gf)^{-1} (U)=f^{-1} (g^{-1} (U))
+	.\]
+\end{proof}
+
+Using this fact, and the fact that the identity map $1_{X} $ is continuous, we have that topological spaces form a category $\mathbf{Top} $ where the morphisms are continuous maps. We can now define isomorphisms in this category.
+
+\begin{definition}[Homeomorphism]\label{dfn:2.12}
+	A function $f : X \to Y$ is a homeomorphism if and only if
+	\begin{itemize}
+		\item $f$ is bijective (the inverse is well-defined);
+		\item $f$ is continuous;
+		\item and $f^{-1} $ is continuous.
+	\end{itemize}
+	If there exists a homeomorphism $f : X \to Y$, we say $X$ is homeomorphic to $Y$, and we write $X \cong Y$.
+\end{definition}
+
+Very clearly, these are isomorphisms in $\mathbf{Top} $. For example, consider $(-1,1)\cong \mathbb{R} $ with the standard topology. Consider the map
+\[
+	x\mapsto \frac{x}{1+\left| x \right| } 
+.\]
+It's easy to see that $f(\mathbb{R} )\subseteq (-1,1)$. Also note that $f$ is strictly increasing, and thus it is bijective between its limits, which are $-1$ and $1$. Alternatively, the map $1+\left| x \right| : (-1,1) \to \mathbb{R} $ is continuous, and is clearly an inverse. Finally, we can show that $f$ is continuous by showing that $1/f^{-1} $ is continuous, and using proposition \ref{prp:2.11} together with the identity map. Therefore, $(-1,1)\cong \mathbb{R} $.
+
+Another example is $[0,1)\to S^1$ given by the map $x\mapsto (\cos (2\pi x),\sin (2\pi x))$. $f$ is trivially bijective, and is continuous because $\sin $ and $\cos $ are continuous, so their product will be continuous. HOWEVER, $f^{-1} $ is not continuous. Note that $[0,\delta )$ is open in $[0,1)$, but this will map to a partially closed interval in $S^1$. This is not open, so $f^{-1} $ is not continuous. Therefore, $f$ is not a homeomorphism.
