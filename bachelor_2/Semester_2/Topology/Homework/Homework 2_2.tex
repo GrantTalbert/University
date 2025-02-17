@@ -5,6 +5,7 @@
 \courseID{MA 564}
 \courseSection{A1}
 \DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Graph}{Graph}
 \begin{document}
 \makeproblem
 \section*{Problem 1}
@@ -13,9 +14,16 @@
 \[
 	\partial A\coloneqq \overline{A} \setminus \Int(A)
 .\]
-Let $A$ be closed. Then $A=\overline{A} $. Note that $\overline{A} \setminus \Int(A) \subseteq \overline{A} $, and $\partial A=\overline{A} \setminus \Int(A) $. Therefore, $\partial A\subseteq A$. Now for the converse, let $\partial A\subseteq A$. It follows that $\overline{A} \setminus \Int(A) \subseteq A$. idk where to go from here but it looks easy i just cant do it in my head rn
+Let $A$ be closed. Then $A=\overline{A} $. Note that $\overline{A} \setminus \Int(A) \subseteq \overline{A} $, and $\partial A=\overline{A} \setminus \Int(A) $. Therefore, $\partial A\subseteq \overline{A} =A$.
+
+Now for the converse, let $\partial A\subseteq A$. It follows that $\overline{A} \setminus \Int(A) \subseteq A$. Note that $\overline{A} =\Int(A)\cup (\overline{A} \setminus \Int(A))$. Since $\Int(A)\subseteq A$ and $\overline{A} \setminus \Int(A)\subseteq A$, we have that their union must also be a subset of $A$. That is,
+\[
+	\overline{A} =\Int(A)\cup \left( \overline{A} \setminus \Int(A) \right) \subseteq A
+.\]
+Since we also know for all sets that $A\subseteq \overline{A} $, we have that $A=\overline{A} $, and $A$ is closed.
 \section*{Problem 4}
 \section*{Problem 5}
+Let $f : X \to Y$ be continuous, and let $Y$ be Hausdorff. 
 \section*{Problem 6}
 \section*{Problem 7}
 \end{document}

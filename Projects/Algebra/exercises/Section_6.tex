@@ -20,6 +20,13 @@
 \declaretheorem[numberwithin=section, style=x, name=Exercise]{exercise}
 \declaretheorem[numbered=no, style=proof, name=Solution]{solution}
 \newcommand{\contradiction}{\Longrightarrow\Longleftarrow}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\im}{im}
+\newcommand{\Rmod}[1]{#1\text{-}\mathsf{Mod}}
+\newcommand{\Vect}[1]{#1\text{-}\mathsf{Vect}}
+\newcommand{\Alg}[1]{#1\text{-}\mathsf{Alg}}
+\renewcommand{\mod}[1]{\;(\text{mod}\;#1)}
 \begin{document}
 \makereport
 \stepcounter{chapter}
@@ -33,7 +40,15 @@
 	Show $\mathbb{R} \cong \mathbb{C} $ as $\mathbb{Q} $-vector spaces.
 \end{exercise}
 \begin{solution}
-	This is tricky. I think $\dim_{\mathbb{Q} } \mathbb{R} =\aleph_0$, and $\dim_{\mathbb{Q} } \mathbb{C} =2 \dim _{\mathbb{Q} } \mathbb{R} =\dim_{\mathbb{Q} } \mathbb{R} $. Unsure how to show this.
+	This is tricky. I think $\dim_{\mathbb{Q} } \mathbb{R} =\aleph_0$, and $\dim_{\mathbb{Q} } \mathbb{C} =2 \dim _{\mathbb{Q} } \mathbb{R} =\dim_{\mathbb{Q} } \mathbb{R} $. Unsure how to show this. Perhaps we can note that
+	\[
+		\mathbb{C} \cong \frac{\mathbb{R} [x]}{\left( x^2+1 \right) } 
+	,\]
+	and use this fact somehow. Or more notably, we can use the fact that $\mathbb{C} \cong \mathbb{R} \oplus \mathbb{R} $ as groups. Waiiiit recall that
+	\[
+		F^{\mathbb{Q} } (\mathbb{R} )\cong F^{\mathbb{Q} } \mathbb{C} \iff \mathbb{R} \cong \mathbb{C} 
+	.\]
+	Ok but these free groups arent isomorphic to $\mathbb{R} ,\mathbb{C} $. How do i find a basis?
 \end{solution}
 \begin{exercise}
 	Consider the sets
@@ -65,6 +80,209 @@
 
 	I think the basis for $\mathfrak{so}_n(\mathbb{R} )$ is basically one element per item $m_{ij} $ in the upper triangle (not counting main diagonal), put a 1 there, and put a $-1$ at $m_{ji} $. Then $M^t=-M$ for the basis set. I think this is the entire basis.
 \end{solution}
+\begin{exercise}
+	Prove $\mathfrak{su}(2)\cong \mathfrak{so}_3(\mathbb{R} )$ as $\mathbb{R} $-vector spaces. In particular these spaces can be viewed as the tangent spaces to $\operatorname{SU} (2)$ and $\operatorname{SO}_3(\mathbb{R} )$, so given the surjective homomorphism $I : \operatorname{SU} (2) \to \operatorname{SO}_3(\mathbb{R} )$ constructed in 2.8.9, there is an induced more meaningfull isomorphism.
+\end{exercise}
+\begin{solution}
+	h
+\end{solution}
+\begin{exercise}
+	Let $V$ be a $k$-vector space. A \emph{Lie Bracket} on $V$ is an operation $\left[ \cdot ,\cdot  \right] : V\times V \to V$ such that for all $u,v,w\in V $ and $a,b\in k$,
+	\begin{itemize}
+		\item $[au+bv,w]=a[u,w]+b[v,w]$ and $[w,au+bv]=a[w,u]+b[w,v]$;
+		\item $[v,v]=0$;
+		\item $[[u,v],w]+[[v,w],u]+[[w,u],v]=0$.
+	\end{itemize}
+	This last axiom is called the \emph{Jacobi identity}. A vector space endowed with a Lie bracket is called a Lie algebra. Define a category of Lie algebras over a given field. Prove the following:
+	\begin{itemize}
+		\item In a Lie algebra, $[u,v]=-[v,u]$ for all $u,v\in V$.
+		\item If $V$ is a $k$-algebra, then $[v,w]\coloneqq vw-wv$ defines a Lie bracket on $V$, so that $V$ is a Lie algebra in a natural way.
+		\item This makes $\mathfrak{gl}_n(\mathbb{R} )$ and $\mathfrak{gl}_n(\mathbb{C} )$ into Lie algebras. In fact, the sets listed in exercise 6.1.2 are all Lie algebras, with respect to a Lie bracket induced from $\mathfrak{gl}$.
+		\item $\mathfrak{su} (2)$ and $\mathfrak{so}_3(\mathbb{R} )$ are isomorphic as Lie algebras over $\mathbb{R} $.
+	\end{itemize}
+\end{exercise}
+\begin{solution}
+	Let $k$-$\mathsf{Lie} $ be the category of Lie algebras over a field $k$. Objects in $k$-$\mathsf{Lie} $ are clearly $k$-Lie algebras. Morphisms in $k$-$\mathsf{Lie} $ are $k$-linear maps $\phi : \mathfrak{u}  \to \mathfrak{v} $ such that
+	\[
+		\phi \left( [u,v]_{\mathfrak{u} }  \right) =[\phi (u),\phi (v)]_{\mathfrak{v} } 
+	.\]
+	This is a fairly natural request. Note that the identity map satisfies this requirement:
+	\[
+		1([u,v])=[u,v]=[1(u),1(v)]
+	.\]
+	Additionally, for $\phi : \mathfrak{u}  \to \mathfrak{v} $, $\psi : \mathfrak{v}  \to \mathfrak{w} $ morphisms in $k$-$\mathsf{Lie} $, we have
+	\[
+		(\psi \phi )([u,v]_{\mathfrak{u} } )=\psi \left( [\phi (u),\phi (v)]_{\mathfrak{v} }  \right) =\left[ (\psi \phi )(u),(\psi \phi )(v) \right]_{\mathfrak{w} } 
+	.\]
+	Therefore, $\psi \phi : \mathfrak{u}  \to \mathfrak{w} $ is a $k$-$\mathsf{Lie} $ morphism, and $k$-$\mathsf{Lie} $ is a category.
 
+	Note that in any lie algebra,
+	\begin{align*}
+		[u,v]+[v,u]&=[u,v]+0+[v,u]+0\\
+			   &=[u,v]+[u,u]+[v,u]+[v,v]\\
+			   &=[u,v+u]+[v,u+v]\\
+			   &=[u,u+v]+[v,u+v]\\
+			   &=[u+v,u+v]\\
+			   &=0
+	.\end{align*}
+	Therefore, $[u,v]=-[v,u]$.
+
+	Clearly, the commutator is a Lie bracket:
+	\[
+		[u,u]=u^2-u^2=0
+	;\]
+	\begin{align*}
+		[au+bv,w]&=(au+bv)w-w(au+bv)\\
+			 &=auw+bvw-awu-bwv\\
+			 &=auw-awu+bvw-bwv\\
+			 &=a[u,w]+b[v,w]
+	;\end{align*}
+	\[
+		[[u,v],w]+[[v,w],u]+[[w,u],v]
+	\]
+	\[
+		=(uv-vu)w-w(uv-vu)+(vw-wv)u-u(vw-wv)+(wu-uw)v-v(wu-uw)
+	\]
+	\[
+		=uvw-vuw-wuv+wvu+vwu-wvu-uvw+uwv+wuv-uwv-vwu+vuw
+	\]
+	\[
+		=0
+	.\]
+	I believe it is a Lie bracket in the \emph{natural way} because all $\Alg{k}$ morphisms $\phi : V \to W$ are also Lie algebra morphisms, when $V$ and $W$ are endowed with the commutator:
+	\[
+		\phi ([u,v])=\phi (uv-vu)=\phi (u)\phi (v)-\phi (v)\phi (u)=[\phi (u),\phi (v)]
+	.\]
+	
+	I think I can skip the next bullet point, since we have shown enough to show these sets are $\mathbb{R} $-algebras or $\mathbb{C} $-algebras, and this holds for all $k$-algebras.
+
+	This one is interesting.
+\end{solution}
+\begin{exercise}
+	Let $R$ be an integral domain. Prove or disprove the following:
+	\begin{itemize}
+		\item Every linearly independent subset of a free $R$-module may be completed to a basis.
+		\item Every generating subset of a free $R$-module contains a basis.
+	\end{itemize}
+\end{exercise}
+\begin{solution}
+	this looks easier
+\end{solution}
+\begin{exercise}
+	Prove that if $k$ is a field and $V$ is a $k$-vector space, and $B$ is a minimal generating set for $V$, then $B$ is a basis for $V$.
+\end{exercise}
+\begin{solution}
+	also easy
+\end{solution}
+\begin{exercise}
+	Let $R$ be an integral domain, and let $M\coloneqq R^{\oplus A} $ be a free $R$-module. Let $K$ be the field of fractions of $R$, and view $M$ as a subset of $V\coloneqq K^{\oplus A} $ in the evident way. Prove that a subset $S\subseteq M$ is linearly independent in $M$ over $R$ if and only if it is linearly independent in $V$ over $K$. Conclude that $\rank_R M=\dim_K V$. Prove that if $S$ generates $M$ over $R$, then it generates $V$ over $K$. Is the converse true?
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
+\begin{exercise}
+	Recall that for any integral domain $R$ and free $R$-module $M$, for any linearly independent subset $S$ and maximally linearly independent subset $B$ of $M$, $\left| S \right| \leq \left| B \right| $. In particular, any two maximally linearly independent subsets of a free $R$-module have the same cardinality. Using this fact, deduce that
+	\[
+		F^R(A)\cong_{\Rmod{R} } F^R(B)\iff A\cong_{\mathsf{Set} }  B
+	.\]
+	
+\end{exercise}
+\begin{solution}
+	idk how to do this ngl
+\end{solution}
+\begin{exercise}
+	Let $R$ be a commutative ring, and let $M$ be an $R$-module. Let $\mathfrak{m} $ be a maximal ideal in $R$, such that $\mathfrak{m} M=0$ (that is, $r m=0$ for all $r\in R$ and $m\in \mathfrak{m} $). Define in a natural way a vector space structure over $R/\mathfrak{m} $ on $M$.
+\end{exercise}
+\begin{solution}
+	????
+\end{solution}
+\begin{exercise}
+	Let $R$ be a commutative ring, and let $F\coloneqq R^{\oplus B} $ be a free $R$-module. Let $\mathfrak{m} $ be a maximal ideal of $R$, and let $k=R/\mathfrak{m} $ be the quotient field. Prove that $F/\mathfrak{m} F\cong k^{\oplus B} $ as $k$-vector spaces.
+\end{exercise}
+\begin{solution}
+	???????????????????//
+\end{solution}
+\begin{exercise}
+	Show that commutative rings satisfy the IBN property.
+\end{exercise}
+\begin{solution}
+	okie
+\end{solution}
+\begin{exercise}
+	Let $V$ be a $k$-vector space, and let $R=\End_{\Vect{k} }(V) $.
+	\begin{itemize}
+		\item Prove that $\End_{\Vect{k} }(V\oplus V) \cong R^4$ as an $R$-module.
+		\item Prove that $R$ does not satisfy the IBN property if $V=k^{\oplus \mathbb{N} } $.
+	\end{itemize}
+Note that $V\cong V\oplus V$ if $V=k^{\oplus \mathbb{N} } $.
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
+\begin{exercise}
+	Let $A$ be an abelian group such that $\End_{\mathsf{Ab} }(A) $ is a field of characteristic 0. Prove that $A\cong \mathbb{Q}$. (Hint: Prove that $A$ carries a $\mathbb{Q} $-vector space structure, and consider its dimension).
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
+\begin{exercise}
+	Let $V$ be a finite-dimensional vector space, and let $\phi : V \to V$ be a homomorphism of vector spaces. Prove that there exists an integer $n\in\mathbb{Z} $ such that $\ker \phi ^{n+1} =\ker \phi $ and $\im \phi ^{n+1} =\im \phi ^{n} $. Show that both claims may fail if $V$ has infinite dimension.
+\end{exercise}
+\begin{solution}
+	If iso then epic and mono so $n=1$. If not iso, since it's finite, we can probably do some kind of induction?
+\end{solution}
+\begin{exercise}
+	Consider the previous question for free $R$-modules of finite rank, where $R$ is an integral domain that is not a field. Let $\phi : F \to F$ be a homomorphism of free $R$-modules.
+	\begin{itemize}
+		\item What property immediately guarentees $\ker \phi ^{n+1} =\ker \phi ^{n} $ for $n\gg 0$?
+		\item Show there exists an $R$-module homomorphism $\phi : F \to F$ such that $\im \phi ^{n+1} \subsetneq \im \phi^n$ for all $n\in\mathbb{N} $.
+	\end{itemize}
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
+\begin{exercise}
+	Let $M$ be a module over a ring $R$. A \emph{finite composition series} for $M$ is a decreasing series of submodules
+	\[
+		\left\langle 0 \right\rangle =M_n \subsetneq \cdots \subsetneq M_0 = M
+	,\]
+	in which all quotients $M_i /M_{i+1} $ are \emph{simple} $R$-modules (exercise 3.5.4). The length of the series is the number of strict inclusions, and the composition factors are the quotients $M_i/M_{i+1} $.
+
+	Prove a Jordan-H\"older theorem for modules: any two finite composition series of a module have the same length and the same multiset of composition factors.
+
+	We say $M$ has \emph{length} $m$ if $M$ admits a finite composition series of length $m$. This notion is well-defined as a consequence of this proof.
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
+\begin{exercise}
+	Prove that a $k$-vector space $V$ has finite length as a module over $k$ if and only if it is finite dimensional and that in this case it's length is $\dim _k V$.
+\end{exercise}
+\begin{solution}
+	ifk
+\end{solution}
+\begin{exercise}
+	Let $M$ be an $R$-module of length $m$.
+	\begin{itemize}
+		\item Prove that every submodule $N$ of $M$ has finite length $n\leq m$.
+		\item Prove that the descending chain condition for submodules holds in $M$ (induct on the length).
+		\item Prove that if $R$ is an integral domain that is not a field and $F$ is a free $R$-module, then $F$ has finite length if and only if it is the 0-module.
+	\end{itemize}
+\end{exercise}
+\begin{solution}
+	wtf
+\end{solution}
+\begin{exercise}
+	Let $k$ be a field, and let $f(x)\in k[x]$. Prove that there exists a multiple of $f\left( x \right) $ in which all exponents of nonzero monomial additive factors are prime integers. (Hint: $k[x]/(f(x))$ is a finite dimensional vector space.)
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
+\begin{exercise}
+	Let $A,B$ be sets. Prove that the free groups $F(A),F(B)$ are isomorphic if and only if there exists a bijection $A\cong B$. (Hint: show that $F(A)\cong F(B)\implies F^{ab} (A)\cong F^{ab} (B)$.)
+\end{exercise}
+\begin{solution}
+	a
+\end{solution}
 \end{document}
 

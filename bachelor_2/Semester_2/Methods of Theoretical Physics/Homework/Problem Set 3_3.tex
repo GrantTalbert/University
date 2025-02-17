@@ -6,10 +6,166 @@
 \courseSection{A1}
 \begin{document}
 \makeproblem
-\section*{Extra Problem}
-Clearly, $\mathcal{S} $ is just $\mathbb{Z} [i]$. I don't feel like proving this the annoying way so I will simply show $\mathbb{Z} [i]$ is isomorphic as a ring to $\mathbb{Z} [x]/(x^2+1)$, which is guarenteed to be a ring since $(x^2+1)$ is an ideal. Note that there exists a group isomorphism
+\section*{Problem 1}
+\begin{enumerate}
+	\item Cartesian form:
+		\[
+			z_1=\frac{5}{3+4i} \cdot \frac{3-4i}{3-4i} =\frac{15+20i}{25} =\frac{3}{5} +\frac{4}{5} i
+		.\]
+		Polar form:
+		\[
+			\left| z_1 \right| =\sqrt{\frac{9+16}{25} } =1
+		.\]
+		\[
+			\theta =\arctan \frac{4}{3} \approx 0.927
+		.\]
+		\[
+			z_1=e^{i \arctan 4/3} \approx e^{0.927i} 
+		.\]
+	\item Cartesian form:
+		\[
+			z_2=\left( 3+4i \right) ^2=9-16+24i=-7+24i
+		.\]
+		Polar form:
+		\[
+			\left| z_2 \right| =\sqrt{49+576} =\sqrt{625} = 25
+		.\]
+		\[
+			\theta =\arctan -\frac{24}{7} \approx -1.287
+		.\]
+		Arctan isn't defined on the proper region of $\mathbb{R} $ so we use the negative of this number.
+		\[
+			z_2\approx 25e^{1.287i} 
+		.\]
+	\item Cartesian form:
+		\[
+			z_3=\frac{1+\sqrt{3} i}{1-\sqrt{3} i} \cdot \frac{1+\sqrt{3} i}{1+\sqrt{3} i} =\frac{1-3+2\sqrt{3} i}{4} =-\frac{1}{2} +\frac{\sqrt{3} }{2} i
+		.\]
+		Polar form:
+		\[
+			\left| z_3 \right| =\sqrt{\frac{1}{4} +\frac{3}{4} } =1
+		.\]
+		\[
+			\theta =\arctan (\sqrt{3} )=\frac{2\pi }{3} 
+		.\]
+		\[
+			z_3=e^{i2\pi /3} 
+		.\]
+	\item Eulers formula. The number is already in cartesian form, and its polar form  is $e^{i\theta } $.
+	\item Polar form:
+		\[
+			\ln z_5=i \ln 2\implies z_5=e^{i \ln 2} 
+		.\]
+		Cartesian form:
+		\[
+			z_5=\cos (\ln 2)+i \sin (\ln 2)
+		.\]
+	\item Cartesian form: note that
+		\[
+			\frac{1+i}{1-i} =\frac{1-1+2i}{1+1} =i
+		.\]
+		Thus,
+		\[
+			\ln \frac{1+i}{1-i} =\ln i
+		.\]
+		\[
+			e^{i\theta } =i \implies \theta =\frac{\pi }{2} 
+		.\]
+		Therefore,
+		\[
+			z_6=i\frac{\pi }{2} 
+		.\]
+		Polar form:
+		\[
+			i\frac{\pi }{2}=\frac{\pi }{2} \cos \frac{\pi }{2} +\frac{\pi }{2} i \sin \frac{\pi }{2}  =\frac{\pi }{2} e^{i\pi /2} 
+		.\]
+\end{enumerate}
+\section*{Problem 2}
+\begin{enumerate}
+	\item
+		\[
+			z_1+z_2=\frac{3}{5} +\frac{4}{5} i-7+24i=\frac{-32}{35} +\frac{124}{120} i
+		.\]
+		\[
+			z_1z_2\approx \exp \left( i\left( 1.287+0.927 \right)  \right) 
+		.\]
+		\[
+			\frac{z_1}{z_2} \approx \exp \left( i\left( 0.927-1.287 \right)  \right) 
+		.\]
+	\item 
+		\[
+			z_6^2=\frac{\pi ^2}{4} i^2=-\frac{\pi ^2}{4} 
+		.\]
+\end{enumerate}
+\section*{Problem 3}
+The book says
 \[
-	\frac{\mathbb{Z} [x]}{(x^2+1)} \cong_{\mathbf{Grp} } \mathbb{Z} \oplus \mathbb{Z} 
+	V(t)=L \frac{\mathrm{d}^2Q}{\mathrm{d}t^2} +R \frac{\mathrm{d}Q}{\mathrm{d}t} +\frac{Q}{C} 
+.\]
+Given our definitions, and the fact that since $Q$ is the charge, $I(t)=dQ/dt$, we have
+\[
+	I_0Z(\omega )e^{i\omega t} =Li\omega I_0e^{i\omega t} +RI_0e^{i\omega t} +\frac{Q}{C} 
+.\]
+It follows that
+\[
+	Z(\omega )=Li\omega +R+\frac{Q}{C} I_0^{-1} e^{-i\omega t} 
+.\]
+Now note that
+\[
+	Q(t)=\int I(t) \,\mathrm{d} t=\int I_0e^{i\omega t}  \,\mathrm{d} t=\frac{I_0}{i\omega } e^{i\omega t} 
+.\]
+Plugging this in, we have
+\[
+	Z(\omega )=i\omega L+R+\frac{I_0}{I_0C} \frac{e^{i\omega t} }{e^{i\omega t} i\omega } =i\omega L+R+\frac{1}{i\omega C} 
+.\]
+\section*{Problem 4}
+\begin{enumerate}
+	\item Let $z=x+iy\in\mathbb{C} $.
+		\[
+			\left| z \right| =\sqrt{x^2+y^2} \implies \left| z \right|^2=x^2+y^2\geq x^2
+		,\]
+		because $y\in\mathbb{R} $ implies $y^2\geq 0$. Therefore, $\left| z \right| \geq x$. You can also note that
+		\[
+			\left| z \right| ^2=x^2+y^2\geq y^2
+		\]
+		by the same logic, so $\left| z \right| \geq y$. Note that $x=\operatorname{Re} z$ and $y=\operatorname{Im} z$.
+	\item I don't know if we're allowed to just say $\left| zw \right| =r_1r_2=\left| z \right| \left| w \right| $ with $r_1,r_2$ the magnitudes in polar coordinates so I did it with the cartesian representation. Let $z=a+bi$, $w=c+di$. It follows that
+		\begin{align*}
+			\left| zw \right| &=\sqrt{\left( ac-bd \right) ^2+(ad+bc)^2} \\
+					  &=\sqrt{(ac)^2-2abcd+(bd)^2+(ad)^2+2abcd+(bc)^2} \\
+					  &=\sqrt{(ac)^2+(ad)^2+(bc)^2+(bd)^2} 
+		.\end{align*}
+		It follows that
+		\begin{align*}
+			\left| z \right| \left| w \right| &=\sqrt{a^2+b^2} \sqrt{c^2+d^2} \\
+							  &=\sqrt{\left( a^2+b^2 \right) \left( c^2+d^2 \right) } \\
+							  &=\sqrt{a^2c^2+a^2d^2+b^2c^2+b^2d^2} \\
+							  &=\sqrt{(ac)^2+(ad)^2+(bc)^2+(bd)^2} \\
+							  &=\left| zw \right| 
+		.\end{align*}
+		\[
+			\left| zw \right| =r_1r_2=\left| z \right| \left| w \right| 
+		.\]
+	\item Let $z=a+bi$, $w=c+di$. Note that
+		\[
+			zw^*=(a+bi)(c-di)=(ac+bd)+(bc-ad)i
+		.\]
+		Therefore, $\operatorname{Re} zw^*=ac+bd$. We have
+		\[
+			\left| z+w \right|^2=\left( a+c \right)^2+\left( b+d \right)^2=a^2+b^2+c^2+d^2+2ac+2bd=\left| z \right|^2+\left| w \right|^2+2 \operatorname{Re} zw^*
+		.\]
+\end{enumerate}
+\section*{Problem 5}
+\begin{align*}
+	e^{i(A+B)} &=e^{iA} e^{iB} \\
+	\implies \cos (A+B)+i \sin (A+B)&=\left( \cos A+i \sin A \right) \left( \cos B + i \sin B \right) \\
+					&=\cos A \cos B- \sin A \sin B+\left( \cos A \sin B+\cos B \sin A \right) i
+.\end{align*}
+Therefore,
+\[
+	\cos (A+B)=\cos A \cos B-\sin A \sin B,
 \]
-because $f(x)\coloneqq x^2+1\in\mathbb{Z} [x]$ has degree 2. Consider the definition of multiplication in $\mathbb{Z} [x]/(f(x))$. Since $f$ is monic, and since $\mathbb{Z} $ is a (idk where to go from here i think $f$ just needs to divide all degree geq 2 polynoms)
+\[
+	\sin (A+B)=\cos A \sin B+\cos B \sin A
+.\]
 \end{document}

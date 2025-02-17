@@ -7,19 +7,102 @@
 \begin{document}
 \makeproblem
 \section{Representations and Basis States}
-Even though our space is infinite-dimensional, we can isolate $v_1,v_2$ to consider a 2-dimensional subspace. The most general possible choice in this subspace, as illustrated by equation (1.1), is
+\begin{enumerate}
+	\item Even though our space is infinite-dimensional, we can isolate $v_1,v_2$ to consider a 2-dimensional subspace. The most general possible choice in this subspace, as illustrated by equation (1.1), is
 \[
 	\ket{1}=\cos \theta e^{i\phi_1} v_1+\sin \theta e^{i\phi_2} v_2,
 \]
 \[
 	\ket{2}=\sin \theta e^{i\phi_3} v_1-\cos \theta e^{i\left( \phi_3+\phi_1-\phi_2 \right) } v_2
 .\]
-
-Idfk what to do for b
+\item Note that due to orthonormality, for $v\in\{\ket{3},\ket{4} \} $,
+		\[
+			\braket{v}{1} =\frac{1}{2} \sum_{i} v_i=0
+		.\]
+		Similarly,
+		\[
+			\braket{v}{2} =\frac{1}{2}( v_1+v_2-v_3-v_4)=0
+		.\]
+		Therefore, we have
+		\[
+			v_1+v_2+v_3+v_4=v_1+v_2-v_3-v_4\implies v_3=-v_4
+		.\]
+		We then have $v_1+v_2=0$ and thus $v_1=-v_2$. We then have that $\ket{3} , \ket{4} $ must satisfy
+		\[
+			\begin{pmatrix}
+			v_1 \\
+			-v_1 \\
+			v_3 \\
+			-v_3
+			\end{pmatrix}
+		.\]
+		These vectors are determined by two distinct components $v_1,v_3$, and thus we can plug in equation 1.1 to arrive at
+		\[
+			\ket{3} =\frac{1}{\sqrt{2} } \begin{pmatrix}
+			\cos \theta e^{i\phi_1}  \\
+			-\cos \theta e^{i\phi _1}  \\
+			\sin \theta e^{i\phi _2}  \\
+			-\sin \theta e^{i\phi _2} 
+			\end{pmatrix},\qquad \ket{4} =\frac{1}{\sqrt{2} } \begin{pmatrix}
+			\sin \theta e^{i\phi _3}  \\
+			-\sin \theta e^{i\phi _3}  \\
+			-\cos \theta e^{i\left( \phi _3-\phi _1+\phi _2 \right) }  \\
+			\cos \theta e^{i\left( \phi _3-\phi _1+\phi _2 \right) } 
+			\end{pmatrix}
+		.\]
+		The $1/\sqrt{2} $ is the normalizing factor, which I guess I will show the calculation for.
+		\[
+			\begin{pmatrix}
+			\cos \theta e^{-i\phi _1}  & -\cos \theta e^{-i\phi _1}  & \sin \theta e^{-i\phi _2}  & -\sin \theta e^{-i\phi _2} 
+			\end{pmatrix}\begin{pmatrix}
+			\cos \theta e^{i\phi _1}  \\
+			-\cos \theta e^{i\phi _1}  \\
+			\sin \theta e^{i\phi _2}  \\
+			-\sin \theta e^{i\phi _2} 
+			\end{pmatrix}=\cos^2\theta +\cos ^2\theta +\sin ^2\theta +\sin ^2\theta
+		.\]
+		This is the norm squared, so the norm is $\sqrt{2} $. I'll calculate the next one as well:
+		\[
+			\begin{pmatrix}
+			\sin \theta e^{-i\phi _3}  & -\sin \theta e^{-i\phi _3}  & -\cos \theta e^{-i\left( \phi _3-\phi _1+\phi _2 \right) }  & \cos \theta e^{-i\left( \phi _3-\phi _1+\phi _2 \right) } 
+			\end{pmatrix}\begin{pmatrix}
+			\sin \theta e^{i\phi _3}  \\
+			-\sin \theta e^{i\phi _3}  \\
+			-\cos \theta e^{i\left( \phi _3-\phi _1+\phi _2 \right) }  \\
+			\cos \theta e^{i\left( \phi _3-\phi _1+\phi _2 \right) } 
+			\end{pmatrix}
+		\]
+		\[
+			=\sin ^2\theta +\sin ^2\theta +\cos ^2\theta +\cos ^2\theta =2
+		.\]
+		I will also show that they are orthogonal to each other:
+\[
+	\begin{pmatrix}
+			\cos \theta e^{-i\phi _1}  & -\cos \theta e^{-i\phi _1}  & \sin \theta e^{-i\phi _2}  & -\sin \theta e^{-i\phi _2} 
+			\end{pmatrix}\begin{pmatrix}
+			\sin \theta e^{i\phi _3}  \\
+			-\sin \theta e^{i\phi _3}  \\
+			-\cos \theta e^{i\left( \phi _3-\phi _1+\phi _2 \right) }  \\
+			\cos \theta e^{i\left( \phi _3-\phi _1+\phi _2 \right) } 
+			\end{pmatrix}
+\]
+\[
+	=2\cos \theta \sin \theta e^{i(\phi _3-\phi _1)} +2 \cos \theta \sin \theta e^{i(\phi _3-\phi _1)} =2\braket{+}{-} =0
+.\]
+These kets are also orthogonal to $\ket{1} ,\ket{2} $ because they satisfy the property I listed earlier, and since this is a set of 4 linearly independent vectors in a 4 dimensional vector space, they are necessarily a basis.
+\end{enumerate}
 \section{Operators}
 \begin{enumerate}
-	\item h
-	\item The question is wrong, since $h$ is not continuous, and thus $h\notin V$ so $Ah$ is not defined. The same is true for $g$. I will ignore this inconvenient truth to give the intended answer. Note that $h(x)g(x)=0$ (except possibly on $\left\{ 1/3,2/3 \right\} $ depending on how the drawing is interpreted, but this set has lebesgue measure 0 so the following conclusion still holds). It follows that
+	\item Note that if $A$ is Hermitian, then $\bra{p} A\ket{\Omega } =\bra{p} A^{\dagger} \ket{\Omega } $. By contrapositive, if $\bra{p} A\ket{\Omega } \neq \bra{p} A^{\dagger} \ket{\Omega } $, then $A$ is not Hermitian. Note that
+		\[
+			\bra{p} A\ket{\Omega } =\braket{p}{0} =0
+		.\]
+		We have
+		\[
+			\bra{p} A^{\dagger} \ket{\Omega } =\left( \bra{\Omega } A\ket{p}  \right) ^{\dagger} =\left( \braket{\Omega }{\Omega }  \right) ^{\dagger} 
+		.\]
+		Since $\Omega $ is a state, it must satisfy $\braket{\Omega }{\Omega } =1$, and $1^{\dagger} =1^*=1$. Therefore, $\bra{p} A\ket{\Omega } \neq \bra{p} A^{\dagger} \ket{\Omega } $, and $A$ is not Hermitian.
+	\item Note that $h(x)g(x)=0$ (except possibly on $\left\{ 1/3,2/3 \right\} $ depending on how the drawing is interpreted, but this set has lebesgue measure 0 so the following conclusion still holds). It follows that
 		\[
 			\int_{0}^{1} h(y)g(y)g(x) \,\mathrm{d} y=0
 		.\]
@@ -40,13 +123,7 @@ Idfk what to do for b
 		\[
 			(Ag)(x)=g(x)\int_{0}^{1} g(y)^2 \,\mathrm{d} y=g(x)\int_{1/3}^{2/3}  \,\mathrm{d} x=\frac{1}{3} g(x)
 		.\]
-	\item The intended solution is $20/27$ with $h(x)$ as an eigenfunction, $1/3$ with $g(x)$ as an eigenfunction, and any scalar multiple of these functions. Note that the image of $A$ must be a subset of the span of $\left\{ h,g \right\} $ since $v=1/3h$ is in this span, and thus these are clearly the only possible linearly independent eigenspaces other than the 0 eigenspace.
-
-		The question is once again worded wrong, however, and if we take $V$ to actually be the space of continuous functions and $A$ to be a map $V \to \mathbb{R} ^{[0,1]} $, then the answer becomes only $0$ as an eigenvalue, since clearly any continuous eigenfunction $f$ of a nonzero eigenvalue must be constant, and plugging a nonzero constant into the integrals implies the contradiction that $1/3=10/9$. The eigenfunctions of the 0 eigenvalue are functions $f\in V$ such that
-		\[
-			\int_{0}^{1/3} f(x) \,\mathrm{d} x=-\int_{2/3}^{1} f(x) \,\mathrm{d} x,\text{ and } \int_{1/3}^{2/3} f(x) \,\mathrm{d} x=0
-		.\]
-		This will cause $Af=0$.
+	\item By part 2, $20/27$ is an eigenvalue with $h(x)$ as an eigenfunction, and $1/3$ is an eigenvalue with $g(x)$ as an eigenfunction, and any scalar multiple of these functions is also an eigenfunction. Note that the image of $A$ must be a subset of the span of $\left\{ h,g \right\} $ since $v=1/3h$ is in this span, and thus these are clearly the only possible linearly independent eigenspaces other than the 0 eigenspace.
 \end{enumerate}
 
 \section{Born's Rule and Expectation Values}

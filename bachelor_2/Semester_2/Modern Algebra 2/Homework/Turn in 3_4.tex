@@ -1,0 +1,77 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Turn in \#3}
+\courseID{MA 542}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+Let $\phi : \mathbb{Q} (i) \to \mathbb{Q} $, and suppose for contradiction that $\phi \neq 0$. Then there exists $a+bi\in\mathbb{Q}(i)$ such that $\phi (a+bi)\neq 0$. Since $a,bi\in\mathbb{Q} (i)$ and $\phi $ is a ring homomorphism, it follows that
+\[
+	\phi (a+bi)=\phi (a)+\phi (bi)\neq 0
+.\]
+Note that if $1\mapsto 0$, then for all $x\in\mathbb{Q} (i)$,
+\[
+	\phi (x)=\phi (1x)=\phi (1)\phi (x)=0\phi (x)=0
+.\]
+This contradicts our assumption that $\phi (a+bi)\neq 0$, so we have that $\phi (1)\neq 0$. Suppose that $\phi (1)=a$ for some $r\in\mathbb{Q} $. Note that $4\in\mathbb{Q} $. It follows that
+\[
+	\phi (4)=\phi (1+1+1+1)=4\phi (1)=4r
+.\]
+Additionally,
+\[
+	\phi (4)=\phi (2)\phi (2)=(2\phi (1))(2\phi (1))=4r^2
+.\]
+Therefore, $a^2=a$, and since $a\in\mathbb{Q} \setminus \left\{ 0 \right\} $, we have that $a=1$. Therefore, $\phi (1)=1$. It follows that $\phi (r)=r$ for all $r\in\mathbb{Z} $ by the same proof I gave in the previous homework. I will now generalize this proof to $\mathbb{Q} $. Note that for all $r\in\mathbb{Q} $, there exist $p,q\in\mathbb{Z} $ such that $q=p/q=pq^{-1} $, where $q\neq 0$. It follows that for all $r\in\mathbb{Q} $,
+\[
+	\phi (r)=\phi \left( \frac{p}{q}  \right) =\phi (p)\phi \left( q^{-1}  \right) =p\phi (q)^{-1} =pq^{-1} =\frac{p}{q} 
+.\]
+Therefore, for all $r\in\mathbb{Q} $, $\phi (r)=r$. This implies that for all $a+bi\in\mathbb{Q} (i)$,
+\[
+	\phi (a+bi)=\phi (a)+\phi (bi)=a+b\phi (i)
+.\]
+Now consider $\phi (i)$. Note that $i^2=-1$, so
+\[
+	-1=\phi (-1)=\phi (i^2)=\phi (i)^2\implies \phi (i)=\sqrt{-1} =i
+.\]
+However, $i\notin \mathbb{Q} $, which is a contradiction. Since $\phi (-1)=-1$ is guarenteed since $\phi (1)\neq 0$, and this would imply that $\phi =0$, this contradicts our original assumption that $\phi \neq 0$, and thus $\phi $ is the 0 homomorphism.
+\section*{Problem 2}
+First, the commutative case. Let $\operatorname{char} R=2$, and let $\phi : R \to R$ be the map $x\mapsto x^2$. It follows that for all $x,y\in R$,
+\begin{align*}
+	\phi (x+y)&=(x+y)^2\\
+		  &=x^2+xy+xy+y^2\\
+		  &=x^2+y^2+xy(1+1)\\
+		  &=\phi (x)+\phi (y)+0xy\\
+		  &=\phi (x)+\phi (y)
+;\end{align*}
+\begin{align*}
+	\phi (xy)&=(xy)^2\\
+		 &=(xy)(xy)\\
+		 &=x^2y^2\\
+		 &=\phi (x)\phi (y)
+.\end{align*}
+Therefore, $\phi $ is a ring homomorphism.
+
+Now suppose $R$ is noncommutative. Suppose for contradiction that $\phi $ is a homomorphism. It follows that
+\begin{align*}
+	\phi (x+y)^2&=(x+y)^2\\
+		    &=(x+y)(x+y)\\
+		    &=x(x+y)+y(x+y)\\
+		    &=x^2+xy+yx+y^2\\
+		    &=x^2+y^2+xy+yx\\
+		    &=\phi (x)+\phi (y)\\
+		    &=x^2+y^2
+.\end{align*}
+It follows that $xy+yx=0$, and thus $xy=-yx$ for all $x,y\in R$.
+
+Note once again that $\operatorname{char} R=2$. It follows that for any $r\in R$,
+\[
+	r+r=r(1+1)=0\implies r+r=0\implies r=-r
+.\]
+Therefore,
+\[
+	xy+yx=xy-yx=0
+.\]
+It follows that $xy=yx$, and thus $R$ is commutative. This contradicts the fact that $R$ is noncommutative, and thus $\phi $ cannot be a homomorphism if $R$ is noncommutative.
+\end{document}

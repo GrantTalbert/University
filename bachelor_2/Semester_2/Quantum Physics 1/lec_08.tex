@@ -1,0 +1,107 @@
+\chapter{Schrodinger Equation}
+\lecture{8}{Thu 13 Feb 2025 14:01}{Schrodinger Equation}
+The Schrodinger equation is
+\begin{equation}\label{eq:1}
+	i \hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\Psi (t)} =H(t)\ket{\Psi (t)} 
+.\end{equation}
+$H$ is a Hermitian operator, known as the Hamiltonian, and it may or may not be time dependent. Physically, it represents the energy of $\Psi (t)$. Note that $\Psi $ is not constant; it evolves with time. Basically the rest of this class will be spend studying equation \eqref{eq:1}.
+
+\section{Time Independent Hamiltonians}
+We will begin with a special case, by looking at when $H(t)$ is constant with respect to $t$. That is, when the Hamiltonian is independent of time:
+\[
+	\frac{\mathrm{d}H}{\mathrm{d}t} =0
+.\]
+
+First, we want to find the eigenvalues and eigenvectors of $H$. We will write eigenvalues and eigenvectors as $H\ket{E_n} =E_n\ket{E_n} $. The $n$ ranges over the collection of all eigenvalues. We let $\ket{E_n} $ be an orthonormal eigenbasis of $H$; that is,
+\[
+	\braket{E_n}{E_m} =\delta_{nm} 
+.\]
+
+We will now solve the Schrodinger equation, which will be shown to be basically equivalent to finding the eigenbasis $\left\{ \ket{E_n}  \right\}_{n\in N} $. Note that the eigenbasis for a Hermitian operator is a basis for the full space, so
+\begin{enumerate}
+	\item First, find the eigenbasis $\left\{ \ket{E_n}  \right\}_{n\in N} $;
+	\item Next, take $\ket{\Psi (t)} $, and decompose in eigenbasis:
+		\[
+			\ket{\Psi (t)} =\sum_{n\in N} C_n(t)\ket{E_n}
+		\]
+		for some collection $\left\{ C_n(t) \right\}_{n\in N} \subseteq \mathcal{H} $.
+\end{enumerate}
+
+Plugging this into the Schrodinger equation yields
+\[
+	i\hbar \sum_{n\in N} \frac{\mathrm{d}C_n(t)}{\mathrm{d}t} \ket{E_n} =H \sum_{n\in N} C_n(t)\ket{E_n} 
+.\]
+Note that since $\ket{E_n} $ is an eigenvalue of $H$ and $H$ is linear, we have
+\[
+	i\hbar \sum_{n\in N} \dot{C_n(t)} \ket{E_n} =\sum_{n\in N} C_n(t)E_n\ket{E_n} 
+.\]
+In this case, since $H$ is time-independent, the $C_n(t)$s are viewed as constants. We can now act on the left with $\bra{E_m} $ for $m$ fixed to find
+\[
+	\bra{E_m} i\hbar \sum_{n\in N} \frac{\mathrm{d}C_n(t)}{\mathrm{d}t}  \ket{E_n} =\bra{E_m}\sum_{n\in N} C_n(t)E_n\ket{E_n} \implies i\hbar \frac{\mathrm{d}C_m(t)}{\mathrm{d}t}  =E_mC_m(t)
+\]
+because $\left\{ E_n \right\}_{n\in N} $ is orthonormal. This is trivial to solve:
+\[
+	\frac{\mathrm{d}C_m(t)}{\mathrm{d}t} \frac{1}{C_m(t)} =\frac{E_m}{i\hbar } \implies \ln C_m(t)=\frac{-iE_m}{\hbar }t+C \implies C_m(t)=C_m(0)\exp \left( \frac{-i E_m}{\hbar }t  \right)
+.\]
+Therefore,
+\[
+	\ket{\Psi (t)} =\sum_{n} C_n(0)e^{-i E_nt/\hbar} \ket{E_n}
+.\]
+Thre is an abuse of notation to write $C_n$ instead of $C_n(0)$; any function $f(t)$ when written as $f$ denotes $f(0)$.
+
+The physical signficance of the constants $C_n(t)$ changing with time indicates the probability of finding that eigenstate changes with time.
+
+We will now do the simplest possible example. Consider $\ket{\Psi (0)} =\ket{E_n} $. Clearly we have $C_m=\delta_{mn} $, so
+\[
+	\ket{\Psi (t)} =\exp \left( \frac{-iE_n}{\hbar } t \right) \ket{E_n} 
+.\]
+
+Note that when you have a state multiplied by a phase $e^{i\theta } \ket{\Psi (t)} $, then $e^{i\theta } \ket{\Psi (t)} $ and $\ket{\Psi (t)} $ give identical physical predictions.
+
+Let's measure an operator $A$ on our $\ket{\Psi (t)} $ we found a few lines back. The only possible outcomes are the eigenstates of $A$, so the probability of finding $\ket{a_i} $ is
+\[
+	\mathcal{P}_{a_I} =\left| \braket{a_i}{\Psi (t)}  \right| ^2
+.\]
+Plugging in, we have
+\[
+	\mathcal{P}_{a_i} =\left| \bra{a_i}\exp \left( \frac{-iE_n}{\hbar } t \right) \ket{E_n}  \right| ^2=\left| \exp \left( \frac{-iE_n}{\hbar } t \right) \braket{a_i}{E_n}  \right| ^2=\left| \braket{a_i}{E_n}  \right| ^2
+.\]
+Since the phase always goes away, the eigenstates of a time independent Hamiltonian must not vary with time.
+
+Now consider $\left\langle A \right\rangle $. We will show the phase goes away again. We have
+\[
+	\bra{\Psi (t)} A\ket{\Psi (t)} =\exp \left( \frac{iE_n}{\hbar } t \right) \bra{E_n} \exp \left( \frac{-iE_n}{\hbar } t \right) A\ket{E_n} =\bra{E_n} A\ket{E_n} 
+.\]
+Note that the coefficients go away because we get the number times its complex conjugate, which is its magnitude squared, which is 1 here.
+
+Now we will do a more complex example to make the following observation: although an entire phase infront of the state doesn't matter, differences in phases between eigenstates matter. Let
+\[
+	\ket{\Psi (0)} =C_1\ket{E_1} +C_2\ket{E_2} 
+.\]
+We have by the same logic that
+\[
+	\ket{\Psi (t)} =C_1 \exp \left(\frac{-iE_1}{\hbar } t\right)\ket{E_1} +C_2 \exp \left( \frac{-iE_2}{\hbar } t \right) \ket{E_2} 
+.\]
+If we measure $A$, we will find
+\[
+	\mathcal{P}_{a_i} =\left| \bra{a_i} \left( C_1\exp \left( \frac{-iE_1}{\hbar } t \right) \ket{E_1} +C_2\exp \left( \frac{-iE_2}{\hbar } t \right) \ket{E_2}  \right)  \right| ^2
+\]
+\[
+	=\left| C_1\exp \left( \frac{-iE_1}{\hbar } t \right) \braket{a_i}{E_1} +C_2\exp \left( \frac{-iE_2}{\hbar } t \right) \braket{a_i}{E_2}  \right| ^2
+\]
+\[
+	=\left| \exp \left( \frac{-iE_1}{\hbar } t \right) \left( C_1\braket{a_i}{E_1} +C_2 \exp \left( \frac{-i(E_2-E_1)}{\hbar } t \right) \braket{a_i}{E_2}  \right)  \right| ^2
+\]
+\[
+	=\left| C_1\braket{a_i}{E_1} +C_2 \exp \left( \frac{-i(E_2-E_1)}{\hbar }  \right) \braket{a_i}{E_2}  \right| ^2
+.\]
+
+Note that although we can pull out a global phase, we cannot fully get rid of the phase. That means the \emph{time dependence} of a time-independent Hamiltonian system is entirely described by the \emph{energy differences}. This is so important that we give it a definiton.
+
+\begin{definition}[Frequency]\label{dfn:2.1}
+	The frequency $\omega_{12} $ is defined as
+	\[
+		\omega_{12} \coloneqq \frac{E_1-E_2}{\hbar } 
+	.\]
+\end{definition}
+
