@@ -1,0 +1,59 @@
+\lecture{10}{Tue 18 Feb 2025 13:25}{First Isomorphism Theorem and Friends}
+
+What is the structure of a quotient ring? We keep all facts from group theory, such as
+\[
+	x+I=y+I \implies x+z+I=y+z+I,\qquad x+I=I \iff x\in I,
+\]
+\[
+	x-y\in I \iff x+I=y+I
+.\]
+We can do some interesting things with these rules. For example, if for some reason we want $2=i$ in $\mathbb{Z} [i]$, then we can write $2-i=0$, and then consider the ring
+\[
+	\frac{\mathbb{Z} [i]}{\left\langle x-i \right\rangle } 
+.\]
+However, we can in fact explore this ring further, and using elementary arithmatic show the only distinct cosets are $r+I$ for $r\in \left\{ 0,1,2,3,4 \right\} $. We in fact have
+\[
+	\frac{\mathbb{Z} [i]}{\left\langle 2-i \right\rangle } \cong \mathbb{Z} _5
+.\]
+This is a field, and thus $\left\langle 2-i \right\rangle $ is maximal.
+
+Similarly to group theory, ideals are preciely the kernels of ring homomorphisms.
+\begin{definition}[Kernel]\label{dfn:2.5}
+	Let $\phi : R \to S$ be a ring homomorphism. Then $\ker \phi $ is defined as the set
+	\[
+		\ker \phi \coloneqq \left\{ r\in R\mid \phi (r)=0 \right\} 
+	.\]
+\end{definition}
+
+\begin{proposition}\label{prp:2.3}
+	Let $\phi : R \to S$ be a ring homomorphism. Then
+	\begin{itemize}
+		\item $\phi (0_R)=0_S$;
+		\item $\phi (-r)=-\phi (r)$;
+		\item If $R'\subseteq R$ is a subring, then $\phi (R')\subseteq S$ is a subring;
+		\item If $S'\subseteq S$ is a subring, then $\phi ^{-1} (S')\subseteq R$ is a subring;
+		\item If $R$ has unity $1_R$, then $\phi (R)$ has unity $\phi (1_R)$ (but not necessarily all of $S$);
+		\item if $I$ is an ideal of $R$, then $\phi (I)$ is an ideal of $\phi (R)$;
+		\item If $J$ is an ideal of $S$, then $\phi ^{-1} \left( J \right) $ is an ideal of $R$.
+	\end{itemize}
+\end{proposition}
+\begin{proposition}\label{prp:2.4}
+	A homomorphism $\phi : R \to S$ is injective if and only if $\ker \phi $ is trivial.
+\end{proposition}
+\begin{proof}
+	Let $\phi : R \to S$ have a trivial kernel. Let $r,s\in R$ such that $\phi (r)=\phi (s)$. It follows that $\phi (r-s)=0_S$, and thus $r-s\in \ker \phi $. It follows that $r-s=0_R$, and thus $r=s$.
+
+	Let $\phi : R \to S$ be injective. Note that $0_R\mapsto 0_S$, so $0_R\in \ker \phi $. It follows that for all $x\in \ker \phi $, $k\mapsto 0_S$ implies $x=0_R$ because $\phi $ is injective.
+\end{proof}
+Note that since $\left\{ 0 \right\} $ is an ideal in all rings, and the kernel is just $\phi ^{-1} \left\{ 0 \right\} $, we have that $\ker \phi $ is an ideal.
+\begin{theorem}[First Isomorphism Theorem]\label{thm:2.1}
+	Let $\phi : R \to S$ be a ring homomorphism. Then
+	\[
+		\frac{R}{\ker \phi } \cong \phi (R)
+	.\]
+\end{theorem}
+\begin{proof}
+	Let $\phi : R \to S$, and let $\pi : R \to R/\ker \phi $ be the canonical projection. Since $R/\ker \phi $ is a quotient, there exists a unique injection $\psi : R/\ker \phi  \to S$, given by $r+I\mapsto r$. Restricting the codomain to $\phi (R)$ makes $\psi $ manifestly bijective, and thus an isomorphism.
+\end{proof}
+
+Corollaries include that if $\phi $ is injective, then $\phi (R)\cong R$, and if $\phi $ is  surjective, then $R/\ker \phi \cong S$.

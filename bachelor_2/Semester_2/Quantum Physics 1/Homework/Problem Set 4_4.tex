@@ -10,3 +10,24 @@
 \section{Complete Eigenbasis}
 \section{Time Evolution}
 \end{document}
+Trying to figure out if I can do (1) this w/o a python script. Given an orthonormal set $S\subseteq \mathcal{H}  $ for $\mathcal{H} $ a finite dimensional $\mathbb{C} $-Hilbert space with inner product $\left\langle \cdot ,\cdot  \right\rangle $, is any $\mathbb{C} $-linear combination in $S\otimes_{\mathbb{C} }  S$ (defined via inclusion and the natural morphism as the Kronecker product) Hermitian? Well let
+\[
+	\left\{ v_i \right\}_{i\in I} \subseteq S\otimes _{\mathbb{C} } S,\qquad \left\{ c_i \right\}_{i\in I} \in\mathbb{C} 
+.\]
+We have
+\[
+	\mathbf{H}\coloneqq \sum_{i\in I} c_i(v_i\otimes v_i)=\sum_{i\in I} c_iv_i^\dagger v_i
+.\]
+It follows that
+\[
+	\mathbf{H}^\dagger = \left( \sum_{i\in I} c_iv_i^\dagger v_i \right)^\dagger=\sum_{i\in I} \left( c_iv_i^\dagger v_i \right)^\dagger = \sum_{i\in I} c_i\left( v_i^\dagger v_i \right)^\dagger = \mathbf{H} 
+.\]
+Does factoring out $c_i$ from the Hermitian adjoint work? Well an adjoint of a $\mathbb{C} $-linear map $\mathbf{H} $ is the unique linear map $\mathbf{H}^\dagger$ such that for all $v,w\in V$,
+\[
+	\left\langle \mathbf{H} v,w \right\rangle =\left\langle v,\mathbf{H}^\dagger w \right\rangle 
+.\]
+Existence and uniqueness is guarenteed by the Riesz representation theorem. Since $v_i\otimes v_i$ is $\mathbb{C} $-linear $\forall i\in I$, we have that for all $c\in \mathbb{C} $, $(v_i\otimes v_i)(cv)=c (v_i\otimes v_i)(v)$. Since $\left\langle \cdot ,\cdot  \right\rangle $ is an inner product, $\left\langle cv,w \right\rangle =\left\langle v,cw \right\rangle =c\left\langle v,w \right\rangle $. It follows that
+\[
+	\left\langle v,\left( c_iv_i^\dagger v_i \right)(w) \right\rangle =\left\langle v, \right\rangle =\left\langle c_iv_i^\dagger v_i v,w \right\rangle =c_i\left\langle v_i^\dagger v_i v,w \right\rangle 
+.\]
+

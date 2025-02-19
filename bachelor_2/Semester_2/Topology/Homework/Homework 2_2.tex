@@ -9,21 +9,121 @@
 \begin{document}
 \makeproblem
 \section*{Problem 1}
-\section*{Problem 2}
-\section*{Problem 3}
+We use proof by induction. For the case of $n=1$, we trivially have
 \[
-	\partial A\coloneqq \overline{A} \setminus \Int(A)
+	\bigcup_{i=1}^1 \overline{A}_i = \overline{A}_1 = \overline{\bigcup_{i=1}^1 A_i} 
 .\]
+
+I will also show the case for $n=2$ as a lemma to the inductive step. Let $x\in \overline{A_1\cup A_2} $. It follows that for all closed sets $K$ containing $A_1\cup A_2$, we have $x\in K$. Note that since $A_1\subseteq \overline{A}_1 $ and $A_2\subseteq \overline{A}_2 $, we have $A_1\cup A_2 \subseteq \overline{A} _1 \cup \overline{A} _2$ fairly trivially. Since $\overline{A}_1$ and $\overline{A}_2$ are closed, and the union $\overline{A} _1 \cup \overline{A} _2$ is finite, we have that $\overline{A} _1\cup \overline{A} _2$ is closed. Therefore, $\overline{A} _1 \cup \overline{A} _2$ is a closed set containing $\overline{A_1\cup A_2} $, and $x\in \overline{A} _1 \cup \overline{A}_2$. Therefore, $\overline{A_1 \cup A_2} \subseteq \overline{A}_1 \cup \overline{A} _2$.
+
+Now the other direction. Let $x\in \overline{A} _1\cup \overline{A} _2$. It follows that $x\in \overline{A} _1$ or $x\in \overline{A} _{2} $. Without loss of generality, assume $x\in \overline{A} _1$. Note that $A_1 \subseteq A_1 \cup A_2\subseteq \overline{A_1\cup A_2} $, and thus $x\in \overline{A_1\cup A_2} $. Therefore, $\overline{A} _1\cup \overline{A} _2=\overline{A_1\cup A_2} $.
+
+Now for the inductive case. Let the statement hold for some $n>1$, and consider $n+1$. We have
+\[
+	\overline{\bigcup_{i=1}^{n+1} A_i} =\overline{\left(\bigcup_{i=1}^n A_i\right) \cup A_{n+1} } 
+.\]
+Since $\bigcup_{i=1}^n A_i$ and $A_{n+1} $ are just subsets of $X$, this is the closure of the union of two subsets of $X$. By the previous lemma, we have that
+\[
+	\overline{\left( \bigcup_{i=1}^n A_i \right) \cup A_{n+1} } =\left( \overline{\bigcup_{i=1}^n A_i}  \right) \cup \overline{A}_{n+1} 
+.\]
+
+By the inductive hypothesis, we have
+\[
+	\left( \overline{\bigcup_{i=1}^n A_i}  \right) \cup \overline{A}_{n+1} =\left( \bigcup_{i=1}^n \overline{A}_i \right) \cup \overline{A} _{n+1} =\bigcup_{i=1}^{n+1} \overline{A}_i
+.\]
+By induction, the statement is proven.
+
+For a counter example, consider ---
+\section*{Problem 2}
+\begin{itemize}
+	\item Clearly $\Int(A) \cup \Int(B) \subseteq \Int(A\cup B) $, but the converse does not hold in general. Consider a space $X$ with nonempty subsets $A,B,U$ such that $U\subsetneq A\cup B$, but $U \cap A \neq U$ and $U \cap B\neq U$. That is, $U$ is partially contained by $A$ and $B$ individually, and fully contained by their union. Now consider the topology $\mathcal{T} =\left\{ \varnothing ,U,X \right\} $ on $X$. Note that this set is closed under union and intersection:
+		\[
+			U \cup \varnothing =U ,\qquad U \cup X = X,
+		\]
+		\[
+			U \cap \varnothing =\varnothing ,\qquad U \cap X = U
+		.\]
+		Therefore, $\mathcal{T} $ is a topology on $X$. Also note that
+		\[
+			\Int(A\cup B) =\varnothing \cup U = U
+		,\]
+		but since $U$ is not a subset of $A$ or $B$, we have that $\Int(A) =\Int(B) =\varnothing $. Since $\varnothing \cup \varnothing =\varnothing \neq U$, the statement does not hold by counterexample.
+	\item This statement holds. Note that $\Int(A) \subseteq A$ and $\Int(B) \subseteq B$, so $\Int(A) \cap \Int(B) \subseteq A \cap B$. Also note that since $\Int(A) ,\Int(B) $ are open, this is a finite intersection of open sets, so $\Int(A) \cap \Int(B) $ is open. Since $\Int(A) \cap \Int(B) \subseteq A \cap B$, it follows that $\Int(A) \cap  \Int(B) \subseteq \Int(A \cap B) $.
+
+		Now the other direction. Let $x\in \Int(A \cap B) $. It follows that there exists some open set $U\subseteq A \cap B$ containing $x$. It follows that $U\subseteq A$ and $U\subseteq B$, and since $U$ is open, we have $U\subseteq \Int(A),\Int(B)  $. Therefore, $U\subseteq \Int(A) \cap \Int(B) $, and thus $x\in \Int(A) \cap \Int(B) $. Therefore, $\Int(A \cap B) \subseteq \Int(A) \cap \Int(B) $, and we are done.
+	\item It's easily shown $\overline{A} \cap \overline{B} \subseteq \overline{A \cap B} $, but this statement fails in the other direction, by similar logic to the first statement. Let $A,B,U\subsetneq X$ be nonempty sets such that $U$ and $A \cap B$ are disjoint, but $U$ and $A$ are not disjoint, and $U$ and $B$ are not disjoint. Once again $\mathcal{T} =\left\{ \varnothing ,U,X \right\} $ is a topology by the same argument as in statement 1. Consider the closed set $U^{c} $, which I will denote $V$ for simplicity. Since $U$ and $A \cap B$ are disjoint, this implies that $A \cap B \subsetneq X \setminus  U = V$, and thus $V \cap (A \cap B)=A \cap B$. Since $V$ is the only closed set other than $\varnothing $ and $X$, and $V \subsetneq X$, we have that $\overline{A \cap B} =V$. However, since $U$ and $A$ are not disjoint, we have that $U \cap A \neq \varnothing $, and $V$ does not contain $U \cap  A$. Therefore, $V \cap A \neq A$, and thus $A$ is not a subset of $V$. By the same logic, $B$ is not a subset of $V$ either. Therefore, $\overline{A} =X$ and $\overline{B} =X$, and since $X \cap X=X\neq V$, we have that $\overline{A \cap B} \neq \overline{A} \cap \overline{B} $.
+
+		Here's a helpful image to visualize the argument I'm making.
+		\begin{figure}[ht]
+			\includegraphics[scale=0.2]{../figures/image0.jpg}
+			\centering
+		\end{figure}
+		
+\end{itemize}
+
+
+\section*{Problem 3}
 Let $A$ be closed. Then $A=\overline{A} $. Note that $\overline{A} \setminus \Int(A) \subseteq \overline{A} $, and $\partial A=\overline{A} \setminus \Int(A) $. Therefore, $\partial A\subseteq \overline{A} =A$.
 
-Now for the converse, let $\partial A\subseteq A$. It follows that $\overline{A} \setminus \Int(A) \subseteq A$. Note that $\overline{A} =\Int(A)\cup (\overline{A} \setminus \Int(A))$. Since $\Int(A)\subseteq A$ and $\overline{A} \setminus \Int(A)\subseteq A$, we have that their union must also be a subset of $A$. That is,
+Now for the converse, let $\partial A\subseteq A$. It follows that $\overline{A} \setminus \Int(A) \subseteq A$. Note that $\overline{A} =\Int(A)\cup (\overline{A} \setminus \Int(A))$. Since $\Int(A)\subseteq A$ and $\overline{A} \setminus \Int(A)=\partial A\subseteq A$, we have that their union must also be a subset of $A$. That is,
 \[
 	\overline{A} =\Int(A)\cup \left( \overline{A} \setminus \Int(A) \right) \subseteq A
 .\]
 Since we also know for all sets that $A\subseteq \overline{A} $, we have that $A=\overline{A} $, and $A$ is closed.
 \section*{Problem 4}
+First we prove a brief lemma: for any function $f : X \to X$ for $X$ any set, and for any collection $\left\{ U_i \right\}_{i\in I} $ of subsets of $X$,
+\[
+	\bigcup_{i\in I} f^{-1} (U_i)=f^{-1} \left( \bigcup_{i\in I} U_i \right) 
+.\]
+Let $x\in \bigcup_{i\in I} f^{-1} (U_i)$. It follows that there exists $i\in I$ such that $x\in f^{-1} (U_i)$, and thus $f(x)\in U_i$. Since $U_i \subseteq \bigcup_{i\in I} U_i$, we have that $f(x)\in \bigcup_{i\in I} U_i$, and thus
+\[
+	x\in f^{-1} \left( \bigcup_{i\in I} U_i \right) 
+.\]
+Therefore, $\bigcup_{i\in I} f^{-1} (U_i)\subseteq f^{-1} \left( \bigcup_{i\in I} U_i \right) $. Now for the converse, let $x\in f^{-1} \left( \bigcup_{i\in I} U_i \right) $. It follows that $f(x)\in \bigcup_{i\in I} U_i$, and thus there exists $i\in I$ such that $f(x)\in U_i$. Therefore, $x\in f^{-1} (U_i)$, and since $f^{-1} (U_i)\subseteq \bigcup_{i\in I} f^{-1} (U_i)$, we have
+\[
+	x\in \bigcup_{i\in I} f^{-1} (U_i)
+.\]
+This proves the lemma.
+
+
 \section*{Problem 5}
 Let $f : X \to Y$ be continuous, and let $Y$ be Hausdorff. 
 \section*{Problem 6}
 \section*{Problem 7}
+Let $\pi : \Graph(f) \to X$ be the canonical projection $(x,f(x))\mapsto x$, and consider the function $\pi ^{-1} : X \to \Graph(f)$ defined by $x\mapsto (x,f(x))$. Note that this map is well-defined because $f$ is well defined; that is, if $x=y$, then we must have $f(x)=f(y)$ because $f$ is a function, and thus $\pi ^{-1} (x)=(x,f(x))=(y,f(y))=\pi ^{-1} (y)$. Also note that this is clearly an inverse to $\pi $:
+\[
+	\left( \pi ^{-1} \pi  \right) (x,f(x))=\pi ^{-1} (x)=(x,f(x));
+\]
+\[
+	\left( \pi \pi ^{-1}  \right) (x)=\pi (x,f(x))=x
+.\]
+Therefore, $\pi $ is a bijection. Now we show $\pi $ is a homeomorphism. First, we show $\pi $ is continuous. Let $U \subseteq X$ be open in $X$. Note that
+\[
+	\pi ^{-1} (U)=\left\{ (x,f(x))\in \Graph(f)\mid x\in U \right\} 
+.\]
+I claim that $\pi ^{-1} (X)=\Graph(f) \cap (U \times Y)$. Note that since $\Graph(f)$ inherits the subspace topology from the product topology on $X\times Y$, this is an open set. We have that $V_x\times Y$ is open in $X\times Y$, since $V$ is open in $X$ and $Y$ is open in $Y$. It follows that $\Graph(f) \cap (U \times Y)$ is open in $\Graph(f)$ by definition of the subspace topology.
+
+Now to show these sets are equal. Let $(x,f(x))\in \pi ^{-1} (U)$. It follows that $x\in U$, and since $f(x)\in Y$, we have $(x,f(x))\in U\times Y$. Since we also have $(x,f(x))\in \Graph(f)$, we have $(x,f(x))\in \Graph(f)\cap (U\times Y)$. Therefore, $\pi ^{-1} (U)\subseteq \Graph(f)\cap (U,Y)$.
+
+Now the converse. Let $(x,f(x))\in \Graph(f)\cap (U\times Y)$. It follows that $x\in U$, and thus $\pi (x,f(x))=x\in U$. Therefore, $(x,f(x))\in \pi ^{-1} (U)$. Therefore, $\Graph(f)\cap (U\times Y)=\pi ^{-1} (U)$.
+
+Now, we show $\pi ^{-1} $ is continuous. Note that $\left( \pi ^{-1}  \right) ^{-1} =\pi $, so we must show $\pi (U)$ is open for all open sets $U$. Let $U\subseteq\Graph(f)$ be open. Note that since $\Graph(f)$ is imbued with the subspace topology inherited from the product topology on $X\times Y$. That is, every open set $U$ can be represented as a union
+\[
+	\bigcup_{i\in I} \Graph(f) \cap (V_i \times W_i),
+\]
+for $\left\{ V_i \right\}_{i\in I} $ open in $X$ and $\left\{ W_i \right\}_{i\in I} $ open in $Y$. By the same proof given in problem 4,
+\[
+	\pi\left( \bigcup_{i\in I} \Graph(f) \cap (V_i \times W_i) \right) =\bigcup_{i\in I} \pi \left( \Graph(f) \cap (V_i \times W_i) \right) 
+.\]
+It then suffices to show $\pi\left( \Graph(f)\cap (V_i \times W_i )\right)$ is open in $X$ for some fixed $i\in I$. I claim that
+\[
+	\pi \left( \Graph(f)\cap (V_i \times W_i )\right) =V_i
+.\]
+By definition, $V_i$ is open in $X$. Note that for all $(x,f(x))\in \Graph(f) \cap (V_i\times W_i)$, we must have $x\in V_i$, and also $\pi (x,f(x))=x$. Therefore, $\pi (\Graph(f)\cap (V_i \times W_i))\subseteq V_i$. Now let $x\in V_i$. It follows that 
+
+fuck
+\[
+	\pi (f \cap U_x \times U_y)=\left\{ x\in U_x\mid f(x)\in U_y \right\} \subseteq U_x
+.\]
+How to show is open?
 \end{document}
