@@ -7,27 +7,427 @@
 \begin{document}
 \makeproblem
 \section{Expectation Values etc.}
-\section{Complete Eigenbasis}
-\section{Time Evolution}
-\end{document}
-Trying to figure out if I can do (1) this w/o a python script. Given an orthonormal set $S\subseteq \mathcal{H}  $ for $\mathcal{H} $ a finite dimensional $\mathbb{C} $-Hilbert space with inner product $\left\langle \cdot ,\cdot  \right\rangle $, is any $\mathbb{C} $-linear combination in $S\otimes_{\mathbb{C} }  S$ (defined via inclusion and the natural morphism as the Kronecker product) Hermitian? Well let
-\[
-	\left\{ v_i \right\}_{i\in I} \subseteq S\otimes _{\mathbb{C} } S,\qquad \left\{ c_i \right\}_{i\in I} \in\mathbb{C} 
-.\]
-We have
-\[
-	\mathbf{H}\coloneqq \sum_{i\in I} c_i(v_i\otimes v_i)=\sum_{i\in I} c_iv_i^\dagger v_i
-.\]
-It follows that
-\[
-	\mathbf{H}^\dagger = \left( \sum_{i\in I} c_iv_i^\dagger v_i \right)^\dagger=\sum_{i\in I} \left( c_iv_i^\dagger v_i \right)^\dagger = \sum_{i\in I} c_i\left( v_i^\dagger v_i \right)^\dagger = \mathbf{H} 
-.\]
-Does factoring out $c_i$ from the Hermitian adjoint work? Well an adjoint of a $\mathbb{C} $-linear map $\mathbf{H} $ is the unique linear map $\mathbf{H}^\dagger$ such that for all $v,w\in V$,
-\[
-	\left\langle \mathbf{H} v,w \right\rangle =\left\langle v,\mathbf{H}^\dagger w \right\rangle 
-.\]
-Existence and uniqueness is guarenteed by the Riesz representation theorem. Since $v_i\otimes v_i$ is $\mathbb{C} $-linear $\forall i\in I$, we have that for all $c\in \mathbb{C} $, $(v_i\otimes v_i)(cv)=c (v_i\otimes v_i)(v)$. Since $\left\langle \cdot ,\cdot  \right\rangle $ is an inner product, $\left\langle cv,w \right\rangle =\left\langle v,cw \right\rangle =c\left\langle v,w \right\rangle $. It follows that
-\[
-	\left\langle v,\left( c_iv_i^\dagger v_i \right)(w) \right\rangle =\left\langle v, \right\rangle =\left\langle c_iv_i^\dagger v_i v,w \right\rangle =c_i\left\langle v_i^\dagger v_i v,w \right\rangle 
-.\]
+\begin{enumerate}
+	\item This problem requires finding the eigenvalues and eigenvectors of $M$. This was done using a numpy script.
+		\begin{lstlisting}[language=Python]
+#!/bin/python3
 
+import numpy as np
+
+M = np.array([[5,0,0,0,0,0],
+              [0,0,3,0,0,0],
+              [0,3,0,0,0,0],
+              [0,0,0,0,2j,0],
+              [0,0,0,-2j,0,0],
+              [0,0,0,0,0,7]])
+
+a, b = np.linalg.eigh(M) # chatgpt said eigh > eig for hermitian matrices
+
+# get rid of floating point errors
+
+# dont print the stupid +0j so its easier to like read
+def format_complex(z):
+    if np.isclose(z.imag, 0):
+        return f"{z.real:.3f}"
+    else:
+        return f"{z.real:.3f} + {z.imag:.3f}j"
+
+# print eigenvalues
+for e in a:
+    print(format_complex(e))
+print("------------")
+
+# print eigenstates
+f_b = np.array([[format_complex(z) for z in row] for row in b])
+print(f_b)
+\end{lstlisting}
+		It gives the following output:
+		\begin{lstlisting}
+-3.000
+-2.000
+2.000
+3.000
+5.000
+7.000
+------------
+[['0.000' '0.000' '0.000' '0.000' '1.000' '0.000']
+ ['-0.707' '0.000' '0.000' '0.707' '0.000' '0.000']
+ ['0.707' '0.000' '0.000' '0.707' '0.000' '0.000']
+ ['0.000' '-0.707' '0.707' '0.000' '0.000' '0.000']
+ ['0.000' '0.000 + -0.707j' '0.000 + -0.707j' '0.000' '0.000' '0.000']
+ ['0.000' '0.000' '0.000' '0.000' '0.000' '1.000']]
+\end{lstlisting}
+		
+		The eigenvalues of $M$ are
+		\[
+			\left\{ -3,-2,2,3,5,7 \right\} 
+		.\]
+		The eigenvectors are
+		\[
+			\left\{ \begin{pmatrix}
+			0 \\
+			0 \\
+			0 \\
+			0 \\
+			1 \\
+			0
+			\end{pmatrix},\frac{1}{\sqrt{2} } \begin{pmatrix}
+			-1 \\
+			0 \\
+			0  \\
+			1  \\
+			0 \\
+			0
+			\end{pmatrix},\frac{1}{\sqrt{2} } \begin{pmatrix}
+			1 \\
+			0 \\
+			0 \\
+			1  \\
+			0 \\
+			0
+			\end{pmatrix},\frac{1}{\sqrt{2} } \begin{pmatrix}
+			0  \\
+			-1  \\
+			1 \\
+			0 \\
+			0 \\
+			0
+			\end{pmatrix}, \frac{1}{\sqrt{2} } \begin{pmatrix}
+			0\\
+			-i  \\
+			-i \\
+			0 \\
+			0 \\
+			0
+			\end{pmatrix},\begin{pmatrix}
+			0 \\
+			0 \\
+			0 \\
+			0 \\
+			0 \\
+			1
+			\end{pmatrix} \right\} 
+		.\]
+		This set is clearly already normalized, and is also fairly obviously orthogonal (easily verified by computations that would be very lengthy and annoying to include). Therefore, these are all the possible results you can measure. I will denote these states $\ket{m_i} $, which will be ordered in the same order they appear above. I don't think you want to read 2 pages of me writing out inner products so I will only show the computational steps for the first one.
+		\[
+			\mathcal{P}_{m_1} =\left| \braket{m_1}{\psi }  \right| ^2=\left|\frac{1}{\sqrt{6} } \begin{pmatrix}
+			0 & 0 & 0 & 0 & 1 & 0
+			\end{pmatrix} \begin{pmatrix}
+			1 \\
+			1 \\
+			1 \\
+			1 \\
+			1 \\
+			1
+			\end{pmatrix} \right| ^2 = \left| \frac{1}{\sqrt{6} }  \right| ^2=\frac{1}{6} 
+		;\]
+		\[
+			\mathcal{P}_{m_2} =\left| \braket{m_2}{\psi }  \right|^2 = 0;\qquad \mathcal{P}_{m_3} =\left| \braket{m_3}{\psi }  \right| ^2=\frac{1}{3} 
+		;\]
+		\[
+			\mathcal{P}_{m_4} =\left| \braket{m_4}{\psi }  \right| ^2=0 ;\qquad \mathcal{P}_{m_5} =\left| \braket{m_5}{\psi }  \right| ^2=\frac{1}{3};
+		\]
+		\[
+			\mathcal{P}_{m_6} =\left| \braket{m_6}{\psi }  \right|^2=\frac{1}{6} 
+		.\]
+	\item I will use the formula $(\Delta M)^2=\left\langle M^2 \right\rangle -\left\langle M \right\rangle ^2$, because I feel like it. First, we compute $M^2$. Since $M$ is a measurement operator, it is Hermitian. Moreover, since we are using an orthonormal set of eigenvectors, $\braket{m_i}{m_j} =\delta_{ij} $, and thus
+		\begin{align*}
+			M&=\sum_{i} m_i \ket{m_i} \bra{m_i}\\
+			\implies M^2 &= \left( \sum_{i} m_i \ket{m_i} \bra{m_i}  \right) ^2\\
+				     &=\sum_{i}\left( m_i \ket{m_i} \bra{m_i} \sum_{j} m_j\ket{m_j} \bra{m_j}  \right) \\
+				     &=\sum_{i} m_i^2 \ket{m_i} \braket{m_i}{m_i} \bra{m_i} \\
+				     &=\sum_{i} m_i^2 \ket{m_i} \bra{m_i}
+		.\end{align*}
+		Here's some code to compute this.
+		\begin{lstlisting}[language=Python]			
+#!/bin/python3
+
+import numpy as np
+
+M = np.array([[5,0,0,0,0,0],
+              [0,0,3,0,0,0],
+              [0,3,0,0,0,0],
+              [0,0,0,0,2j,0],
+              [0,0,0,-2j,0,0],
+              [0,0,0,0,0,7]])
+
+a, b = np.linalg.eigh(M)
+
+# compute the thingy
+Msq = sum(a[i] * a[i] * np.outer(b[:, i], b[:, i].conj()) for i in range(len(a)))
+
+# get rid of floating point errors
+# dont print the stupid +0j or decimals so its easier to like read
+def format_complex(z):
+    if np.isclose(z.imag, 0):
+        return f"{z.real:.0f}"
+    else:
+        return f"{z.real:.0f} + {z.imag:.0f}j"
+
+Mfsq = np.array([[format_complex(z) for z in row] for row in Msq])
+print(Mfsq)
+\end{lstlisting}
+		Output:
+		\begin{lstlisting}
+[['25' '0' '0' '0' '0' '0']
+ ['0' '9' '0' '0' '0' '0']
+ ['0' '0' '9' '0' '0' '0']
+ ['0' '0' '0' '4' '0' '0']
+ ['0' '0' '0' '0' '4' '0']
+ ['0' '0' '0' '0' '0' '49']]
+\end{lstlisting}
+		Therefore,
+		\[
+			M^2=\begin{pmatrix}
+			25 &  &  &  &  &  \\
+			 & 9 &  &  &  &  \\
+			 &  & 9 &  &  &  \\
+			 &  &  & 4 &  &  \\
+			 &  &  &  & 4 &  \\
+			 &  &  &  &  & 49
+			\end{pmatrix}
+		.\]
+	In hindsight, since I wrote a script anyways, I should have just done \verb|M @ M| but oh well. Here's a script that computes the expectation of $M$ and $M^2$ then subtracts them in the correct order.
+	\begin{lstlisting}[language=Python]	
+#!/bin/python3
+
+import numpy as np
+
+M = np.array([[5,0,0,0,0,0],
+              [0,0,3,0,0,0],
+              [0,3,0,0,0,0],
+              [0,0,0,0,2j,0],
+              [0,0,0,-2j,0,0],
+              [0,0,0,0,0,7]])
+
+Msq = M @ M 
+
+psi = (1/np.sqrt(6)) * np.ones((6, 1), dtype=complex)
+
+EV_M = psi.conj().T @ M @ psi
+EV_Msq = psi.conj().T @ Msq @ psi 
+
+stdev = np.sqrt(EV_Msq - EV_M)
+
+print(stdev)
+\end{lstlisting}
+	Output:
+	\begin{lstlisting}
+		[[3.6968455+0.j]]
+\end{lstlisting}
+	Therefore, $\Delta M \approx 3.6968455$. Now to do the same for $A$. Here is a block of code that just calculates the standard deviation.
+	\begin{lstlisting}[language=Python]	
+#!/bin/python3
+
+import numpy as np
+
+A = np.array([[0,1,0,0,0,0],
+              [1,0,0,0,0,0],
+              [0,0,0,4j,0,0],
+              [0,0,-4j,0,0,0],
+              [0,0,0,0,3,0],
+              [0,0,0,0,0,2]])
+
+Asq = A @ A 
+
+psi = (1/np.sqrt(6)) * np.ones((6, 1), dtype=complex)
+
+EV_A = psi.conj().T @ A @ psi
+EV_Asq = psi.conj().T @ Asq @ psi 
+
+stdev = np.sqrt(EV_Asq - EV_A)
+
+print(stdev)
+\end{lstlisting}
+	Output:
+	\begin{lstlisting}
+		[[2.5819889+0.j]]
+\end{lstlisting}
+	Therefore, $\Delta A \approx 2.5819889$. Here is the calculation of $\left| \left\langle \left[ A,M \right]  \right\rangle  \right| $:
+	\begin{lstlisting}[language=Python]	
+#!/bin/python3
+
+import numpy as np
+
+A = np.array([[0,1,0,0,0,0],
+              [1,0,0,0,0,0],
+              [0,0,0,4j,0,0],
+              [0,0,-4j,0,0,0],
+              [0,0,0,0,3,0],
+              [0,0,0,0,0,2]])
+
+M = np.array([[5,0,0,0,0,0],
+              [0,0,3,0,0,0],
+              [0,3,0,0,0,0],
+              [0,0,0,0,2j,0],
+              [0,0,0,-2j,0,0],
+              [0,0,0,0,0,7]])
+
+psi = (1/np.sqrt(6)) * np.ones((6, 1), dtype=complex)
+comm = (A @ M) - (M @ A)
+EV = psi.conj().T @ comm @ psi
+
+print(np.abs(EV))
+\end{lstlisting}
+	Output:
+	\begin{lstlisting}
+		[[6.]]
+\end{lstlisting}
+	The uncertainty principle states
+	\[
+		(\Delta A)(\Delta M)\geq \frac{1}{2} \left| \left\langle \left[ A,M \right]  \right\rangle  \right| 
+	.\]
+	Note that $3$ is clearly less than the product $3.7\cdot 2.6$.
+	\item (c) is correct, because if $\Delta A,\Delta M=0$, then $(\Delta A)(\Delta M)=0$, and this implies that $\left\langle A,M \right\rangle =0$. However, the matrices do not commute:
+		\begin{lstlisting}[language=Python]		
+#!/bin/python3
+
+import numpy as np
+
+A = np.array([[0,1,0,0,0,0],
+              [1,0,0,0,0,0],
+              [0,0,0,4j,0,0],
+              [0,0,-4j,0,0,0],
+              [0,0,0,0,3,0],
+              [0,0,0,0,0,2]])
+
+M = np.array([[5,0,0,0,0,0],
+              [0,0,3,0,0,0],
+              [0,3,0,0,0,0],
+              [0,0,0,0,2j,0],
+              [0,0,0,-2j,0,0],
+              [0,0,0,0,0,7]])
+
+print(A @ M - M @ A)
+\end{lstlisting}
+		
+		Output:
+		\begin{lstlisting}
+			[[ 0. +0.j -5. +0.j  3. +0.j  0. +0.j  0. +0.j  0. +0.j]
+ [ 5. +0.j  0. +0.j  0. +0.j  0.-12.j  0. +0.j  0. +0.j]
+ [-3. +0.j  0. +0.j  0. +0.j  0. +0.j -8. +0.j  0. +0.j]
+ [ 0. +0.j  0.-12.j  0. +0.j  0. +0.j  0. -6.j  0. +0.j]
+ [ 0. +0.j  0. +0.j  8. +0.j  0. -6.j  0. +0.j  0. +0.j]
+ [ 0. +0.j  0. +0.j  0. +0.j  0. +0.j  0. +0.j  0. +0.j]]
+\end{lstlisting}
+		
+\end{enumerate}
+\section{Complete Eigenbasis}
+\begin{enumerate}
+	\item This code checks whether they are eigenvectors, and prints the eigenvalue if they are.
+		\begin{lstlisting}[language=Python]		
+#!/bin/python3
+
+import numpy as np
+
+H = np.array([[31/12, 3/4, 13/12, 7/12],
+              [3/4, 11/4, 3/4, 3/4],
+              [13/12, 3/4, 25/12, 13/12],
+              [7/12, 3/4, 13/12, 31/12]])
+v1 = np.ones((4, 1))
+v2 = np.array([[-5/2], [3/2], [-1/2], [3/2]])
+v3 = np.array([[-np.sqrt(3)/4], [np.sqrt(3)/4], [-1/(4 * np.sqrt(3))], [1/(4 * np.sqrt(3))]])
+v4 = np.array([[-1], [0], [2], [-1]])
+
+# check if all list elements r same
+def all_same(vals):
+    first = vals[0]
+    return all(np.allclose(x, first) for x in vals) # thanks chatgpt
+
+# check if eigenvalue
+def is_ev(v):
+    mat = H @ v
+    vals = []
+    for i in range(1, len(v)):
+        # handle div by 0
+        if v[i, 0] == 0:
+            if mat[i, 0] != 0:
+                print("failed")
+                return False
+        else:
+            vals.append(mat[i, 0] / v[i, 0])
+    if all_same(vals) == 1:
+        return vals[0]
+    else:
+        print("failed")
+        return False
+
+# print evals if it works and print something else if it doesnt
+if is_ev(v1):
+    print(f"v1: {is_ev(v1)}")
+if is_ev(v2):
+    print(f"v2: {is_ev(v2)}")
+if is_ev(v3):
+    print(f"v3: {is_ev(v3)}")
+if is_ev(v4):
+    print(f"v4: {is_ev(v4)}")
+\end{lstlisting}
+	Output:
+	\begin{lstlisting}
+v1: 5.0
+v2: 2.0
+v3: 2.0
+v4: 1.0000000000000004
+\end{lstlisting}
+	We have that the eigenvalues are
+	\[
+		v_1=5,\quad v_2=2,\quad v_3=2,\quad v_4=1
+	.\]
+	The matrix representation in the eigenbasis is then just
+	\[
+		\begin{pmatrix}
+		5 &  &  &  \\
+		 & 2 &  &  \\
+		 &  & 2 &  \\
+		 &  &  & 1
+		\end{pmatrix}
+	.\]
+\item The vectors span the space if and only if
+	\[
+		c_1 \ket{v_1} +c_2 \ket{v_2} +c_3 \ket{v_3} +c_4 \ket{v_4} 
+	\]
+	implies $c_i=0$ for all $i$. Equivalently, the equation
+		\[
+			\begin{pmatrix}
+	\ket{v_1}  & \ket{v_2}  & \ket{v_3}  & \ket{v_4} 
+	\end{pmatrix}\ket{c}=0
+		\]
+		is solved if and only if $\ket{c} =0$. For simplicity, call the matrix of kets $V$. This happens if and only if $\ker V$ is trivial; i.e. the linear map given by the matrix is injective, and thus is bijective since our space is 4-dimensional. It follows that $V$ must have rank 4, which can be computed by numpy.
+		\begin{lstlisting}[language=Python]		
+#!/bin/python3
+
+import numpy as np
+
+v1 = np.array([1,1,1,1], dtype=complex)
+v2 = np.array([-5/2, 3/2, -1/2, 3/2], dtype=complex)
+v3 = np.array([-np.sqrt(3)/4, np.sqrt(3)/4, -1/(4 * np.sqrt(3)), 1/(4 * np.sqrt(3))], dtype=complex)
+v4 = np.array([-1, 0, 2, -1], dtype=complex)
+
+print(np.linalg.matrix_rank(np.column_stack([v1,v2,v3,v4])))
+\end{lstlisting}
+		Output:
+		\begin{lstlisting}
+			4\end{lstlisting}
+		Therefore, the eigenstates span the space.
+
+\item I'm going to use Grahm-Schmidt. Start with
+	\[
+		\ket{u_1} =\frac{1}{2} \begin{pmatrix}
+		1 \\
+		1 \\
+		1 \\
+		1
+		\end{pmatrix}
+	.\]
+	Since $\ket{v_1} $ and $\ket{v_2} $ are orthogonal,
+	\[
+		\ket{u_2} =\frac{1}{2\sqrt{11} } \begin{pmatrix}
+		-5 \\
+		3 \\
+		-1 \\
+		3
+		\end{pmatrix}
+	.\]
+	I'm crashing out I'm done please give me a 0 on everything else
+\end{enumerate}
+\end{document}

@@ -7,6 +7,85 @@
 \begin{document}
 \makeproblem
 \section*{Problem 1}
+Since $f$ is analytic, by the Cauchy-Riemann conditions we have
+\[
+	\frac{\partial u}{\partial x} =\frac{\partial v}{\partial y} ,\qquad \frac{\partial u}{\partial y} =-\frac{\partial v}{\partial x} 
+.\]
+It follows that
+\[
+	\partial_x^2 u + \partial_x^2 v = \partial_x \partial_y v-\partial_y \partial_x v=\partial_x \partial_yv - \partial_x \partial_yv=0
+.\]
+Similarly,
+\[
+	\partial_x^2v+\partial_y^2v=-\partial_x \partial _y u+\partial _y \partial _x u=-\partial_x \partial _y u + \partial _x \partial _y u = 0
+.\]
 \section*{Problem 2}
+\begin{enumerate}
+	\item Note that $f$ has a pole if and only if $z^4-1=0$. This is trivially satisfied by $\left\{ 1,i,-1,-i \right\} $:
+		\[
+			1^4=1,\quad i^4 = \left( i^2 \right)^2=(-1)^2=1,\quad (-1)^4=1^2=1,\quad (-i)^4=(-1)^4i^4=1
+		.\]
+		By the fundamental theorem of algebra, the polynomial $z^4-11$ has precisely four roots in $\mathbb{C} $ since it is of degree 4, and thus these are the \emph{only} poles. Equivalently, $z^4-1$ factors as $(z+1)(z+i)(z-1)(z-i)$. We can find the residues as follows. The residue at $1$ is
+		\[
+			\lim_{z \to 1} \frac{z-1}{(z+1)(z+i)(z-1)(z-i)} =\lim_{z \to 1} \frac{1}{(z+1)(z-i)(z-i)} =\frac{1}{2(1+i)(1-i)} =\frac{1}{4} 
+		.\]
+		The residue at $i$ is
+		\[
+			\lim_{z \to i} \frac{1}{(z+1)(z+i)(z-1)} =\frac{1}{2(i+1)(i-1)} =\frac{1}{-4i} =\frac{i}{4} 
+		.\]
+		The residue at $-1$ is
+		\[
+			\lim_{z \to -1} \frac{1}{(z-1)(z+i)(z-i)} =\frac{1}{(-2)(i-1)(-i-1)} =\frac{1}{(-2)(1+1)} =-\frac{1}{4} 
+		.\]
+		The residue at $-i$ is
+		\[
+			\lim_{z \to -i} \frac{1}{(z+1)(z-1)(z-i)} =\frac{1}{(1-i)(-1-i)(-2i)} =\frac{1}{(-2)(-2i)} =\frac{1}{4i} =-\frac{i}{4} 
+		.\]
+	\item Note that there is a simple pole if and only if $e^z+1=0$, and thus $e^z=-1$. Note that this only happens if $z=i(2n+1)\pi $ for $n\in\mathbb{Z} $. That is, $z$ is $i$ times an odd multiple of $\pi $. The poles are thus
+		\[
+			\left\{ i(2n+1)\pi \mid n\in\mathbb{Z}  \right\} 
+		.\]
+		Let $n\in\mathbb{Z} $, and note the following:
+		\[
+			e^{i(2n+1)\pi } =-1,\qquad e^{-i(2n+1)\pi } =-\cos((2n+1)\pi )-i \sin (2n+1)\pi =1
+		.\]
+		consider the residue corresponding to $n$:
+		\begin{align*}
+			\lim_{z \to i(2n+1)\pi } \frac{e^{i(2n+1)\pi } }{e^z+1} &=\lim_{z \to i(2n+1)\pi } \frac{-1}{e^{z-(2n+1)\pi +(2n+1)\pi } -(-1)} \\
+										&=\lim_{z \to i(2n+1)\pi } \frac{-1 }{e^{z} e^{i(2n+1)\pi } e^{-i(2n+1)\pi } -(-1) } \\
+										&=\lim_{z \to i(2n+1)\pi } \frac{-1}{-e^{z} -(-1)} \\
+										&=\lim_{z \to i(2n+1)\pi } \frac{-1}{-\left( e^{z} -1 \right) } \\
+										&=\lim_{z \to i(2n+1)\pi } \frac{1}{e^{z} -1} \\
+										&=\frac{1}{-1-1} \\
+										&=-\frac{1}{2} 
+		.\end{align*}
+\end{enumerate}
+
 \section*{Problem 3}
+\begin{enumerate}
+	\item Let $z(t)=t$ for $t\in[-1,1]\subset \mathbb{R} $. Then
+		\begin{align*}
+			\int_C f(z) \,\mathrm{d} z&=\int_{-1}^{1} f(z(t))\frac{\mathrm{d}z}{\mathrm{d}t}  \,\mathrm{d} t\\
+						  &=\int_{-1}^{1} t\left( \frac{\mathrm{d}}{\mathrm{d}t} t \right)  \,\mathrm{d} t\\
+						  &=\int_{-1}^{1} t \,\mathrm{d} t\\
+						  &=\frac{t^2}{2} \bigg|_{-1}^1\\
+						  &=0
+		.\end{align*}
+	\item Let $z(t)=e^{it} $ for $t\in[0,\pi ]$. Then
+		\begin{align*}
+			\int_C f(z) \,\mathrm{d} z&=\int_{0}^{\pi } f(z(t)) \frac{\mathrm{d}z}{\mathrm{d}t}  \,\mathrm{d} t\\
+						  &=\int_{0}^{\pi } e^{it} \frac{\mathrm{d}}{\mathrm{d}t} \left( e^{it}  \right)  \,\mathrm{d} t\\
+						  &=\int_{0}^{\pi } e^{it} ie^{it}  \,\mathrm{d} t\\
+						  &=i\int_{0}^{\pi } e^{2it}  \,\mathrm{d} t\\
+						  &=\frac{1}{2} \left[ e^{2it}  \right]_{0}^{\pi }\\
+						  &=\frac{1}{2} \left( e^{2\pi i} -e^{0}  \right) \\
+						  &=0
+		.\end{align*}
+	\item The antiderivative of $f(z)$ is $\frac{z^2}{2} $. Note that the endpoints of the interval $[-1,1]$ are $-1$ and $1$, and
+		\[
+			\frac{1^2}{2} -\frac{(-1)^2}{2} =0
+		.\]
+		Also note that the endpoints of the semicircle are the same, and they are parametrized in the same order, so we will get the exact same expression. Therefore, the results agree.
+\end{enumerate}
+
 \end{document}

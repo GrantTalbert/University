@@ -51,7 +51,7 @@ For a counter example, consider ---
 	\item This statement holds. Note that $\Int(A) \subseteq A$ and $\Int(B) \subseteq B$, so $\Int(A) \cap \Int(B) \subseteq A \cap B$. Also note that since $\Int(A) ,\Int(B) $ are open, this is a finite intersection of open sets, so $\Int(A) \cap \Int(B) $ is open. Since $\Int(A) \cap \Int(B) \subseteq A \cap B$, it follows that $\Int(A) \cap  \Int(B) \subseteq \Int(A \cap B) $.
 
 		Now the other direction. Let $x\in \Int(A \cap B) $. It follows that there exists some open set $U\subseteq A \cap B$ containing $x$. It follows that $U\subseteq A$ and $U\subseteq B$, and since $U$ is open, we have $U\subseteq \Int(A),\Int(B)  $. Therefore, $U\subseteq \Int(A) \cap \Int(B) $, and thus $x\in \Int(A) \cap \Int(B) $. Therefore, $\Int(A \cap B) \subseteq \Int(A) \cap \Int(B) $, and we are done.
-	\item It's easily shown $\overline{A} \cap \overline{B} \subseteq \overline{A \cap B} $, but this statement fails in the other direction, by similar logic to the first statement. Let $A,B,U\subsetneq X$ be nonempty sets such that $U$ and $A \cap B$ are disjoint, but $U$ and $A$ are not disjoint, and $U$ and $B$ are not disjoint. Once again $\mathcal{T} =\left\{ \varnothing ,U,X \right\} $ is a topology by the same argument as in statement 1. Consider the closed set $U^{c} $, which I will denote $V$ for simplicity. Since $U$ and $A \cap B$ are disjoint, this implies that $A \cap B \subsetneq X \setminus  U = V$, and thus $V \cap (A \cap B)=A \cap B$. Since $V$ is the only closed set other than $\varnothing $ and $X$, and $V \subsetneq X$, we have that $\overline{A \cap B} =V$. However, since $U$ and $A$ are not disjoint, we have that $U \cap A \neq \varnothing $, and $V$ does not contain $U \cap  A$. Therefore, $V \cap A \neq A$, and thus $A$ is not a subset of $V$. By the same logic, $B$ is not a subset of $V$ either. Therefore, $\overline{A} =X$ and $\overline{B} =X$, and since $X \cap X=X\neq V$, we have that $\overline{A \cap B} \neq \overline{A} \cap \overline{B} $.
+	\item It's easily shown $\overline{A} \cap \overline{B} \subseteq \overline{A \cap B} $, but this statement fails in the other direction, by similar logic to the first statement. Let $A,B,U\subsetneq X$ be nonempty sets such that $U$ and $A \cap B$ are disjoint, but $U$ and $A$ are not disjoint, and $U$ and $B$ are not disjoint. Once again $\mathcal{T} =\left\{ \varnothing ,U,X \right\} $ is a topology by the same argument as in statement 1. Consider the closed set $U^{c} $, which I will denote $V$ for simplicity. Since $U$ and $A \cap B$ are disjoint, this implies that $A \cap B \subseteq X \setminus  U = V$, and thus $V \cap (A \cap B)=A \cap B$. Since $V$ is the only closed set other than $\varnothing $ and $X$, and $V \subsetneq X$, we have that $\overline{A \cap B} =V$, since this is the smallest closed set containing $A \cap B$. However, since $U$ and $A$ are not disjoint, we have that $U \cap A \neq \varnothing $, and $V$ does not contain $U \cap  A$. Therefore, $V \cap A \neq A$, and thus $A$ is not a subset of $V$. By the same logic, $B$ is not a subset of $V$ either. Therefore, $\overline{A} =X$ and $\overline{B} =X$, and since $X \cap X=X\neq V$, we have that $\overline{A \cap B} \neq \overline{A} \cap \overline{B} $.
 
 		Here's a helpful image to visualize the argument I'm making.
 		\begin{figure}[ht]
@@ -88,8 +88,11 @@ This proves the lemma.
 
 \section*{Problem 5}
 Let $f : X \to Y$ be continuous, and let $Y$ be Hausdorff. 
+
 \section*{Problem 6}
 \section*{Problem 7}
+I could not solve this without requiring that $f$ be continuous, and in fact I was able to construct what I belivee is a counterexample if we assumme $f$ is not continuous. I believe it was implied that $f$ was supposed to be continuous, and have done the problem under this assumption. I only used this fact for a single statement at the end of the proof.
+
 Let $\pi : \Graph(f) \to X$ be the canonical projection $(x,f(x))\mapsto x$, and consider the function $\pi ^{-1} : X \to \Graph(f)$ defined by $x\mapsto (x,f(x))$. Note that this map is well-defined because $f$ is well defined; that is, if $x=y$, then we must have $f(x)=f(y)$ because $f$ is a function, and thus $\pi ^{-1} (x)=(x,f(x))=(y,f(y))=\pi ^{-1} (y)$. Also note that this is clearly an inverse to $\pi $:
 \[
 	\left( \pi ^{-1} \pi  \right) (x,f(x))=\pi ^{-1} (x)=(x,f(x));
@@ -115,15 +118,5 @@ for $\left\{ V_i \right\}_{i\in I} $ open in $X$ and $\left\{ W_i \right\}_{i\in
 \[
 	\pi\left( \bigcup_{i\in I} \Graph(f) \cap (V_i \times W_i) \right) =\bigcup_{i\in I} \pi \left( \Graph(f) \cap (V_i \times W_i) \right) 
 .\]
-It then suffices to show $\pi\left( \Graph(f)\cap (V_i \times W_i )\right)$ is open in $X$ for some fixed $i\in I$. I claim that
-\[
-	\pi \left( \Graph(f)\cap (V_i \times W_i )\right) =V_i
-.\]
-By definition, $V_i$ is open in $X$. Note that for all $(x,f(x))\in \Graph(f) \cap (V_i\times W_i)$, we must have $x\in V_i$, and also $\pi (x,f(x))=x$. Therefore, $\pi (\Graph(f)\cap (V_i \times W_i))\subseteq V_i$. Now let $x\in V_i$. It follows that 
-
-fuck
-\[
-	\pi (f \cap U_x \times U_y)=\left\{ x\in U_x\mid f(x)\in U_y \right\} \subseteq U_x
-.\]
-How to show is open?
+It then suffices to show $\pi\left( \Graph(f)\cap (V_i \times W_i )\right)$ is open in $X$ for some fixed $i\in I$. Let $A\coloneqq \Graph(f)\cap (V\times W)$ for $V,W$ open in $X,Y$, respectively. First, I will show that $\pi (A)=f^{-1} (W)\cap V$. Let $x\in \pi (A)$. It follows that $x\in V$ and $f(x)\in W$, and thus $x\in f^{-1} (W)\cap V$. Now let $x\in f^{-1} (W)\cap V$. It follows that $x\in V$ and $f(x)\in W$, and thus $(x,f(x))\in V \times W$. Therefore, $(x,f(x))\in A$, and $\pi (x,f(x))=x\in \pi (A)$. Therefore, $\pi (A)=f^{-1} (W)\cap V$. Since $f$ is continuous, $f^{-1} (W)$ is open in $X$, and by definition so is $V$. This is then a finite intersection of open sets, which is open. Therefore, $\pi (A)$ is open, and $\pi ^{-1} $ is continuous. Thus, $\pi $ is a homeomorphism from $\Graph(f)$ to $X$.
 \end{document}

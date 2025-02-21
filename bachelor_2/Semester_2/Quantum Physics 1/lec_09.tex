@@ -1,0 +1,84 @@
+\lecture{9}{Thu 20 Feb 2025 14:21}{More on Time Independent Hamiltonians}
+
+An example of solving the Schrodinger equation is for the case of an electron in a constant magnetic field. Let $\mathbf{B} =B_0 \mathbf{z} $, and note that the magnetic moment $\boldsymbol{\mu} $ of an electron is $\frac{-e}{m_e} \mathbf{S} $, where $\mathbf{S} $ is the spin. We have $H=-\boldsymbol{\mu} \cdot \mathbf{B} $. I think $\mathbf{S} $ is a tensor, because $\mathbf{S} \cdot \mathbf{z} =S_z$. If we define $\omega_0 = \frac{eB_0}{m_e} $, we have
+\[
+	H=\omega_0 S_z
+.\]
+Then the eigenstates are $\ket{E_1} ,\ket{E_2} =\ket{+} ,\ket{-} $, and the eigenvalues are $\pm \omega_0 \hbar /2$. Then the solutions to the Schrodinger equation are just
+\[
+	\ket{\psi (t)} C_1 e^{-i\omega_0 t/2} \ket{E_1} +C_2 e^{i\omega_0 t/2} \ket{E_2} 
+.\]
+We can then do painful matrix calculations to find that the expectation $\left\langle S_z \right\rangle $ in this state is $\frac{\hbar }{2} \left( \left| C_1 \right| ^2-\left| C_2 \right| ^2 \right) $. We can also compute the expectation in $S_x$ as well. Painful matrix calculations give us
+\[
+	\left\langle S_x \right\rangle =\frac{\hbar }{2} \left( C_1^* C_2 e^{\frac{it}{\hbar } (E_1-E_2)} +C_2^*C_1e^{-\frac{it}{\hbar } (E_1-E_2)} \right) 
+.\]
+Note that these two numbers are complex conjugates, so using Euler's formula, this immediately simplifies to just the cosines:
+\[
+	\left\langle S_x \right\rangle =\hbar r\cos \left( \frac{t\omega_{12} }{\hbar } +\phi  \right) 
+.\]
+In this case, we are representing the complex number $C_1^*C_2$ as $re^{i\phi } $. These are just initial conditions. The expectation in $\left\langle S_y \right\rangle $ is the exact same. Now consider the vector
+\[
+	\left<\mathbf{S}\right> =\begin{pmatrix}
+	\left\langle S_x \right\rangle (t) \\
+	\left\langle S_y \right\rangle (t) \\
+	\left\langle S_z \right\rangle (t)
+	\end{pmatrix}
+.\]
+
+\begin{remark}
+	We are finally calling the spin matrices the Pauli matrices. The Pauli spin matrices are the spin operators without the factor of $\hbar /2$.
+	\[
+		\sigma_x = \begin{pmatrix}
+		1 & 0 \\
+		0 & -1
+		\end{pmatrix},\qquad \sigma_y = \begin{pmatrix}
+		0 & -i \\
+		i & 0
+		\end{pmatrix},\qquad \sigma_z = \begin{pmatrix}
+		1 & 0 \\
+		0 & -1
+		\end{pmatrix}
+	.\]
+\end{remark}
+
+Ok we have already unlocked MRI machines. An MRI machine needs to align the protons in your head along some $\mathbf{x} $ direction, then it switches to the $\sigma_z$ Hamiltonian we just saw and watches the protons spin. Why? Good question! Let's ignore it and just learn how tf to align randomly distributed protons into a single direction. In classical physics, this means putting your brain's temperature to $10^{-44} $ kelvin. This would be bad, so we only want a small number of them to point up because there's a fuck ton of protons so we can still measure it even if there's only a mild deviation. The trick to doing this is to change the Hamiltonian. We want to put a small magnetic field in the perpendicular direction, as well as keeping the one in the $\mathbf{z} $ direction. We do this with a frequency, so the Hamiltonian is time dependent. Our new $\mathbf{B}$ is
+\[
+	\mathbf{B} =B_0 \mathbf{\hat{z} }+B_1 \cos (\omega t)\mathbf{\hat{x} } +B_1\sin (\omega t)\mathbf{\hat{y} } ,\qquad B_1\ll B_0
+.\]
+The Hamiltonian is now
+\[
+	H=\omega_0 S_z + \frac{e}{m_e} B_1 \left( \cos (\omega t)S_x+\sin (\omega t)S_y \right) 
+.\]
+We call $\frac{e}{m_e} B_1=\omega _1$. We then have
+\[
+	H=\frac{\hbar \omega _0}{2} \begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}+\frac{\hbar \omega _1}{2} \begin{pmatrix}
+	 & \cos(\omega t) -i \sin (\omega t) \\
+	\cos (\omega t)+i \sin (\omega t) & 
+	\end{pmatrix}
+\]
+\[
+	=\frac{\hbar }{2} \left( \omega_0 \begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}+\omega_1\begin{pmatrix}
+	 & \exp (i\omega t) \\
+	\exp (i-\omega t) & 
+	\end{pmatrix} \right) = \frac{\hbar }{2} \begin{pmatrix}
+	\omega _0 & \omega _1 \exp (i\omega t) \\
+	\omega _1 \exp (-i\omega t) & -1
+	\end{pmatrix}
+.\]
+This Hamiltonian is time dependent, so we have to solve the Schrodinger equation from scratch. We are going to choose a nice basis to represent this. THe basis we like is
+\[
+	\ket{+} =\begin{pmatrix}
+	1 \\
+	0
+\end{pmatrix},\qquad \ket{-} =\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+.\]
+These are NOT eigenstates of $H$. We are just using it because it is a nice basis. Let $\ket{\psi } =C_1(t)\ket{+} +C_2\ket{-} $.

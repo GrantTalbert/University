@@ -1,0 +1,60 @@
+\chapter{Metric Spaces}
+\lecture{9}{Thu 20 Feb 2025 10:54}{Metric Spaces}
+\begin{definition}[Metric]\label{dfn:3.1}
+	Let $X$ be a set, and let $d : X\times X \to \mathbb{R} $. Then $d$ is called a \emph{metric} if
+	\begin{itemize}
+		\item $d(x,y)=0$ if and only if $x=y$;
+		\item $d(x,y)=d(y,x)$;
+		\item (Triangle inequality) $d(x,y)+d(y,z)\geq d(x,z)$.
+	\end{itemize}
+	We say the set $X$ together with the metric $d$, denoted $(X,d)$, is a metric space.
+\end{definition}
+
+Moreover, if we only have $d(x,x)=0$ (one-direction implication instead of iff), then we call $d$ a pseudo metric. If $(X,d)$ is a pseudo-metric space, we can define an equivalence relation $x\sim y$ if and only if $d(x,y)=0$. It then follows fairly naturally that $(X/\tildesim,d)$ is a metric space.
+
+Examples of metric spaces are very abundant. For example, $\mathbb{R} ^n$ together with the usual distance function $d(x,y)=\left\| x-y \right\| $. An example of a pseudo-metric space is the space of functions on $[0,1]$, with the metric defined by
+\[
+	d(f,g)=\left| f(0.78)-g(0.78) \right| 
+.\]
+This works for any number in $[0,1]$, not just $0.78$. Clearly $f(0.78)=g(0.78)$ does not imply that $f=g$, but clearly all other claims hold.
+
+\begin{definition}[Metric Topology]\label{dfn:3.2}
+	Let $(X,d)$ be a metric space, and let $B_r\left( x \right) $ be the open ball of radius $r$ about $x$, defined as
+	\[
+		B_r(x)=\left\{ y\in X\mid d(x,y)<r \right\} 
+	.\]
+	Then the collection of all such open balls $\mathcal{B} $, given as
+	\[
+		\mathcal{B} =\left\{ B_r(x)\mid r\in\mathbb{R} ^+,x\in X \right\} 
+	\]
+	forms a basis for the \emph{metric topology} induced by $d$ on $X$.
+\end{definition}
+
+Showing that this is indeed a basis is simple, but messy. One important class of metric spaces is the $L^p$ spaces. Given continuous functions $f,g$ on $[a,b]$, the $L^p$ metric is defined as
+\[
+	\left\| f-g \right\|_p = \left(\int_{a}^{b} \left| f-g \right|^p \,\mathrm{d} x\right)^{1/p} 
+.\]
+Note that the $L^p$ spaces are more general than just continuous functions, but the norm applies to continuous functions as well.
+
+\begin{theorem}\label{thm:3.1}
+	Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $f : X \to Y$. Then $f$ is continuous if and only if for all $\varepsilon >0$, for all $x\in X$, there exists $\delta >0$ such that $f(B_{\delta } (x))\subseteq B_{\varepsilon } (f(x))$.
+\end{theorem}
+\begin{proof}
+	Let $f$ be continuous. Note that $f(x)\in B_\varepsilon  (f(x))$ clearly, and thus $f^{-1} (B_{\varepsilon } (f(x)))$ is open in $X$, since $f$ is continuous. We have $x$ in the preimage fairly trivially. Since this forms a basis, there exists an element of the basis $B_{\delta '}  (y)$ containing $x$ such that $B_\delta (y)\subseteq f^{-1} (B_\varepsilon (f(x)))$. Therefore, $d(x,y)<\delta '$. Take $\delta =\delta '-d(x,y)$. It follows from some messy juggling of the triangle inequality that $B_{\delta } (x)\subseteq B_{\delta '} (y)\subseteq f^{-1} (B_\varepsilon (x))$. We can apply $f$ on both sides to obtain $f(B_\delta (x))\subseteq B_\varepsilon (x)$.
+
+	Now for the converse. Let $U\subseteq Y$ be open. We wish to show $f^{-1} (U)$ is open in $X$. Let $x\in f^{-1} (U)$, and thus $f(x)\in U$. By propert of basis, there exists $B_{\varepsilon '} (y)$ such that $f(x)\in B_{\varepsilon } (y)\subseteq U$. Now consider the ball of radius $\varepsilon =\varepsilon '-d(y,f(x))$ centered at $f(x)$. Once again,
+	\[
+		B_{\varepsilon } (f(x))\subseteq B_{\varepsilon' } (y)\subseteq U
+	.\]
+	By assumption, we have that there exists $\delta >0$ such that $f(B_\delta (x))\subseteq B_\varepsilon (f(x))$. Equivalently, $B_\delta (x)\subseteq f^{-1} (B_{\varepsilon } (f(x)))$. This means for all $x\in f^{-1} (U)$, there exists a basis element that is a subset of the preimage containing $x$. Taking the union over all $x$ in the preimage gives us that $f^{-1} (U)$ is open.
+\end{proof}
+
+Another example of a metric space is given by the Hausdorff distance. Let $(X,d)$ be a metric space with $A,B\subseteq X$. The question is whether we can measure the distance between two \emph{subsets} of $X$. Define
+\[
+	d_H(A,B)=\inf \left\{ \varepsilon \mid A\subseteq B_{\varepsilon} (B),B\subseteq B_{\varepsilon } (A) \right\} 
+.\]
+In this case, the notation $B_{\varepsilon } (A)$ means
+\[
+	B_{\varepsilon } (A)=\left\{ x\in X\mid \exists a\in A\text{ s.t. } d(x,a)<\varepsilon  \right\} 
+.\]
+This can be thought of intuitively, albeit not precisely, as the distance from the edge of $A$. This is an $\varepsilon $-neighborhood of $A$.
