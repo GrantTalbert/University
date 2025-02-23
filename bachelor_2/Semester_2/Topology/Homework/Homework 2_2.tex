@@ -90,8 +90,12 @@ This proves the lemma.
 Let $f : X \to Y$ be continuous, and let $Y$ be Hausdorff. 
 
 \section*{Problem 6}
+For any subset $U\subseteq Y$, the preimate $f^{-1} (U)\subseteq X$ is a subset of $X$ by definition of $f$. Since $X$ has the discrete topology, all subsets of $X$ are open, and thus $f^{-1} (U)$ is open. Therefore, $f$ is continuous.
+
+
+
 \section*{Problem 7}
-I could not solve this without requiring that $f$ be continuous, and in fact I was able to construct what I belivee is a counterexample if we assumme $f$ is not continuous. I believe it was implied that $f$ was supposed to be continuous, and have done the problem under this assumption. I only used this fact for a single statement at the end of the proof.
+I could not solve this without requiring that $f$ be continuous, and in fact I was able to construct what I believe is a counterexample if we assumme $f$ is not continuous. I believe it was implied that $f$ was supposed to be continuous, and have done the problem under this assumption. I only used this fact for a single statement at the end of the proof.
 
 Let $\pi : \Graph(f) \to X$ be the canonical projection $(x,f(x))\mapsto x$, and consider the function $\pi ^{-1} : X \to \Graph(f)$ defined by $x\mapsto (x,f(x))$. Note that this map is well-defined because $f$ is well defined; that is, if $x=y$, then we must have $f(x)=f(y)$ because $f$ is a function, and thus $\pi ^{-1} (x)=(x,f(x))=(y,f(y))=\pi ^{-1} (y)$. Also note that this is clearly an inverse to $\pi $:
 \[

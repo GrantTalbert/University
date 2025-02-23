@@ -34,7 +34,7 @@ This can be visualized with the diagram:
 	M_1\arrow[ur, bend left, "M_2"]&&M_4\arrow[dl, bend left, "M_3"]\\
 				       &M_3\arrow[ul, bend left, "M_2"]
 \end{tikzcd}\]
-In some cases the operation is left-multiplication, and in others the operation is right-multiplication. The important thing to note is that if there exists some $i\in \left\{ 1, \ldots , 4 \right\} $ with $M_i\in I$, then it follows that $M_i\in I$ for all $i$, because $I$ is an ideal and thus has the absorbtion property. I will now show the ideal contains at least one of these.
+In some cases the operation is left-multiplication, and in others the operation is right-multiplication. The important thing to note is that if there exists some $i\in \left\{ 1, \ldots , 4 \right\} $ with $M_i\in I$, then it follows that $M_i\in I$ for all $i$, because $I$ is an ideal and thus has the absorbtion property, and all $M_i$ can be represented as a product in $R$ on a single $M_i$ by the above diagram. I will now show the ideal contains at least one of these.
 
 Let
 \[
@@ -47,7 +47,7 @@ be nonzero. Note that $A=aM_1+bM_2+cM_3+dM_4$. Since $A$ is nonzero, at least on
 \[
 	A=kM_i
 \]
-for some $i$. Since $I$ is an ideal and $\frac{1}{k} 1_R\in R$ for $1_R$ the identity matrix, we have $\frac{1}{k} 1_R A=\frac{k}{k} 1_RM_i=M_i$ is an element of the ideal.
+for some $i$. Since $I$ is an ideal, $A\in I$, and $\frac{1}{k} 1_R\in R$, we have $\frac{1}{k} 1_R A=\frac{k}{k} 1_RM_i=M_i$ is an element of the ideal.
 
 Now suppose that more than one coefficient is nonzero. In particular, we must have at least two coefficients are nonzero. Consider the following three cases:
 \begin{itemize}
@@ -57,9 +57,9 @@ Now suppose that more than one coefficient is nonzero. In particular, we must ha
 		.\]
 		Explicit computation shows that $M_1M_4=0$ and $M_2M_4=M_2$. It follows that
 		\[
-			AM_4=\left( aM_1+bM_2 \right) =aM_1M_4+bM_2M_4=bM_2
+			AM_4=\left( aM_1+bM_2 \right)M_4 =aM_1M_4+bM_2M_4=bM_2
 		.\]
-		Here, I use some facts about vector spaces, such as $a0=0$ for all scalars $a$. Since $I$ is an ideal and $a\in I$, we have $AM_4=bM_2\in I$. By the same logic, we also have
+		Here, I use some facts about vector spaces, such as $a0_R=0_{R}$ for all scalars $a$. Since $I$ is an ideal and $a\in I$, we have $AM_4=bM_2\in I$. By the same logic, we also have
 		\[
 			\frac{1}{b} 1_R\left( bM_2 \right) =1_RM_2=M_2\in I
 		.\]
@@ -94,7 +94,14 @@ Since $I$ is an ideal, it must be a subring, and thus closed under addition. We 
 	\end{pmatrix}=1_R\in I
 .\]
 Let $M\in \mathcal{M}_2(\mathbb{R} )$ be any matrix. Then since $1_R\in I$, and $I$ is an ideal, we have that $1_RM=M\in I$. Therefore, $\mathcal{M}_2(\mathbb{R} )\subseteq I$. Since $I$ is an ideal, we have $I\subseteq \mathcal{M}_2(\mathbb{R} )$, and thus $I=\mathcal{M}_2(\mathbb{R} )$.
+
+\[
+	i \hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\Psi (t)} =\mathbf{\hat{H} } \ket{\Psi (t)} 
+.\]
+
 \end{document}
+this can totally be reduced to two cases. if a != 0 or b != 0, then M1 A collapses. if only one, we're done, so assume 2. then take M1 A M3 = aM2. Also if a,b = 0 then M2 A = cM1 + dM2 so were back to the same thing as before
+
 M1M1=M1
 M1M2=M2
 M1M3,4=0
