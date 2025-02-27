@@ -36,15 +36,22 @@
 \DeclarePairedDelimiter\bra{\langle}{\rvert} %Bra
 \DeclarePairedDelimiter\ket{\lvert}{\rangle} %Ket
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2} %Bra-ket
-\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}} % from https://tex.stackexchange.com/questions/120029/how-to-typeset-a-primed-vector
-\newcommand{\hati}{\boldsymbol{\hat{\textbf{\i}}}}
-\newcommand{\hatj}{\boldsymbol{\hat{\textbf{\j}}}}
-\newcommand{\hatk}{\boldsymbol{\hat{\textbf{k}}}}
-\newcommand{\R}{\mathbb{R}}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\im}{im}
+\newcommand{\Rmod}[1]{#1\text{-}\mathsf{Mod}}
+\newcommand{\Vect}[1]{#1\text{-}\mathsf{Vect}}
+\newcommand{\Alg}[1]{#1\text{-}\mathsf{Alg}}
+\newcommand{\tildesim}{\mathbin{\sim}}
 \renewcommand{\mod}[1]{\;(\text{mod}\;#1)}
+\DeclareMathOperator{\Tr}{Tr}
 
 %theorems
 \usepackage{tikz}

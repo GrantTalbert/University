@@ -1,0 +1,55 @@
+\lecture{10}{Tue 25 Feb 2025 11:04}{More on Metric Spaces}
+
+Given a collection $\left\{ (X_i,d_i) \right\}_{i\in I} $ of metric spaces, we can define the product
+\[
+	X\coloneqq \prod_{i\in I} X_i
+.\]
+This space is a metric space under the metric
+\[
+	d=\sum_{i\in I} d_i
+.\]
+Suppose now that $I$ is contable, and let $x=(x_1,x_2, \ldots )$ and $y$ similarly defined by elements of $X$. Then
+\[
+	d(x,y)=\sum_{i=1}^{\infty} \frac{d_i(x_i,y_i)}{2^i \left( 1+d_i(x_i,y_i) \right) } 
+.\]
+We add the extra factor to ensure the sequence converges.
+\begin{definition}[Standard Bounded Metric]\label{dfn:3.3}
+	Let $(X,d)$ be a metric space. Then the \emph{standard bounded metric} $\overline{d} $ is the function
+	\[
+		\overline{d} (x,y)=\min \left\{ 1,d(x,y) \right\} 
+	.\]
+\end{definition}
+This is a metric on $X$ fairly trivially.
+
+Here's another example. Let $(X,d)$ be a metric space with $A\subseteq X$. Then there's a natural metric space given by the restriction $(A,d|_{A\times A} )$.
+
+We know that a metric induces a topology. However, is the converse true? Given a topologial space $(X,\mathcal{T} )$, is there an induced metric $d$ on $X$ such that the induced topology on $X$ is $\mathcal{T} $? In other terminology, is $X$ metrizable? There is a famous theorem that somewhat answers this. THe lemma is actually more important somehow.
+\begin{definition}[Normal]\label{dfn:3.4}
+	A topological space $X$ is normal if and only if for any two disjoint closed sets $A,B$, there exist disjoint neighborhoods $U,V$ of $A$ and $B$.
+\end{definition}
+
+\begin{lemma}[Urysohn]\label{lma:3.1}
+	Let $(X,\mathcal{T} )$ be a topological space. Then $X$ is normal if and only if any two disjoint closed sets can be separated by continuous functions. This means there exists a continuous function $f : X \to \mathbb{R} $ such that $f(A)\subseteq \left\{ 0 \right\} $ and $f(B)\subseteq \left\{ 1 \right\} $.
+\end{lemma}
+\begin{proof}
+	Start by supposing all closed $A$ and $B$ can be separated by continuous functions. Note that $U=f^{-1} (1/2,\infty )$ is open, and $V=f^{-1} (-\infty ,1/2)$ is also open. These intervals are disjoint, and we have $A\subseteq U$ and $B\subseteq V$ fairly easily. Therefore, $X$ is normal.
+
+	Now suppose $X$ is normal, and let $A,B$ be disjoint closed sets. Let $r=\frac{a}{2^n} $ for some $n\in\mathbb{N} $, and $1\leq a\leq 2^{n-1} $. We claim there exists an open set $U(r)\subseteq X$ and closed set $V(r)\subseteq X$ such that $A\subseteq U(r)\subseteq V(r)\subseteq B^{c} $, and that $V(r)\subseteq U\left(s \right) $ if $r<s$. We also claim that we can define $f : X \to \mathbb{R} $ such that
+	\[
+		x\mapsto \inf \left\{ r=\frac{a}{2^n}  \mid x\in U\left( r \right),a,n\in\mathbb{N}   \right\} 
+	.\]
+	Moreover, we claim $f$ is continuous and bounded below by $0$. I zoned out during this proof becuase it's going so slow and involves numbers.
+\end{proof}
+
+\begin{theorem}[Urysohn Metrization Theorem]\label{thm:3.1}
+	Let $(X,\mathcal{T} )$ be a topological space such that
+	\begin{itemize}
+		\item Singletons are closed;
+		\item For all $x\in X$ and $Y\subseteq X$ closed with $x\notin Y$, then there exist disjoint neighborhoods of $x$ and $Y$;
+		\item The topology admits a coubtable basis.
+	\end{itemize}
+	Then $(X,\mathcal{T} )$ is metrizable.
+\end{theorem}
+\begin{remark}
+	It in fact follows that if singletons are closed and points and closed sets have disjoint neighborhoods (1, 2 in last theorem) then the space is normal.
+\end{remark}

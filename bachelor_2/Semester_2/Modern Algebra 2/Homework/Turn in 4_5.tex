@@ -43,45 +43,24 @@ Let
 	c & d
 	\end{pmatrix}\in I
 \]
-be nonzero. Note that $A=aM_1+bM_2+cM_3+dM_4$. Since $A$ is nonzero, at least one element in $\left\{ a,b,c,d \right\} $ must be nonzero. If precisely one element is nonzero, then we have some coefficient $k\in\mathbb{R} $ such that
+Since $A\neq 0$, there exists at least one of $a,b,c,d$ which is nonzero. Explicit computation yields that
 \[
-	A=kM_i
+	M_1AM_1=aM_1;
 \]
-for some $i$. Since $I$ is an ideal, $A\in I$, and $\frac{1}{k} 1_R\in R$, we have $\frac{1}{k} 1_R A=\frac{k}{k} 1_RM_i=M_i$ is an element of the ideal.
-
-Now suppose that more than one coefficient is nonzero. In particular, we must have at least two coefficients are nonzero. Consider the following three cases:
-\begin{itemize}
-	\item \textbf{Case 1:} $a,b\neq 0$, and $c,d=0$. That is,
-		\[
-			A=aM_1+bM_2
-		.\]
-		Explicit computation shows that $M_1M_4=0$ and $M_2M_4=M_2$. It follows that
-		\[
-			AM_4=\left( aM_1+bM_2 \right)M_4 =aM_1M_4+bM_2M_4=bM_2
-		.\]
-		Here, I use some facts about vector spaces, such as $a0_R=0_{R}$ for all scalars $a$. Since $I$ is an ideal and $a\in I$, we have $AM_4=bM_2\in I$. By the same logic, we also have
-		\[
-			\frac{1}{b} 1_R\left( bM_2 \right) =1_RM_2=M_2\in I
-		.\]
-	\item \textbf{Case 2:} $c,d\neq 0$, and $a,b=0$. That is,
-		\[
-			A=cM_3+dM_4
-		.\]
-		Explicit computation yields that $M_3M_1=M_3$ and $M_4M_1=0$. Therefore, we have
-		\[
-			AM_1=\left( cM_3+dM_4 \right) M_1=cM_3M_1+dM_4M_1=cM_3
-		.\]
-		Since $A\in I$ and $I$ is an ideal, $AM_1=cM_3\in I$. Similarly,
-		\[
-			\frac{1}{c} 1_R\left( cM_3 \right) =M_3\in I
-		.\]
-	\item \textbf{Case 3:} Any other possible scenario. We must have either $a$, $b$, or both are nonzero. By explicit computation, we have
-		\[
-			M_1M_1=M_1,\quad M_1M_2=M_2,\quad M_1M_3,M_1M_4=0
-		.\]
-Since left multiplication fixes $M_1,M_2$ and annihilates $M_3,M_4$, we can take $c,d=0$. If only one of the coefficients $a,b$ are nonzero, then we have the corresponding $M_i\in I$ by previous logic. If both are nonzero, apply the same logic as in case 1.
-\end{itemize}
-These are the only cases, since $A\neq 0$. Therefore, $M_1,M_2,M_3,M_4\in I$.
+\[
+	M_2AM_2=cM_2;
+\]
+\[
+	M_3AM_3=bM_3;
+\]
+\[
+	M_4AM_4=dM_4
+.\]
+Since $A$ is in the (two-sided) ideal, and all of these are products of $A$, we find that $aM_1,cM_2,bM_3,dM_4\in I$. Since at least one of these scalar coefficients must be nonzero, we find that there exists at least one nonzero $kM_i\in I$ for some nonzero $k\in \left\{ a,b,c,d \right\} $. Since $kM_i\in I$, because $I$ is an ideal, and $\frac{1}{k} 1_R\in R$ because $k\neq 0$, we have
+\[
+	\frac{1}{k} 1_R kM_i=1_RM_i=M_i\in I
+.\]
+Therefore, there exists at least one $M_i\in I$ by the absorbtion property. By the above logic, all $M_i$ are thus in $I$.
 
 Since $I$ is an ideal, it must be a subring, and thus closed under addition. We thus have
 \[
@@ -95,25 +74,131 @@ Since $I$ is an ideal, it must be a subring, and thus closed under addition. We 
 .\]
 Let $M\in \mathcal{M}_2(\mathbb{R} )$ be any matrix. Then since $1_R\in I$, and $I$ is an ideal, we have that $1_RM=M\in I$. Therefore, $\mathcal{M}_2(\mathbb{R} )\subseteq I$. Since $I$ is an ideal, we have $I\subseteq \mathcal{M}_2(\mathbb{R} )$, and thus $I=\mathcal{M}_2(\mathbb{R} )$.
 
+\subsection*{Computation!}
 \[
-	i \hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\Psi (t)} =\mathbf{\hat{H} } \ket{\Psi (t)} 
+	M_1M_2=\begin{pmatrix}
+	1 & 0 \\
+	0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix},\qquad M_3M_2=\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 \\
+	0 & 1
+	\end{pmatrix},
+\]
+\[
+	M_4M_3=\begin{pmatrix}
+	0 & 0 \\
+	0 & 1
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix},\qquad M_2M_3=\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	1 & 0 \\
+	0 & 0
+	\end{pmatrix}
 .\]
-
+\[
+	M_1AM_1=\begin{pmatrix}
+	1 & 0 \\
+	0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	a & b \\
+	c & d
+	\end{pmatrix}\begin{pmatrix}
+	1 & 0 \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	a & b \\
+	0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	1 & 0 \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	a & 0 \\
+	0 & 0
+	\end{pmatrix}
+.\]
+\[
+	M_2AM_2=\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	a & b \\
+	c & d
+	\end{pmatrix}\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	c & d \\
+	0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & c \\
+	0 & 0
+	\end{pmatrix}
+.\]
+\[
+	M_3AM_3=\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}\begin{pmatrix}
+	a & b \\
+	c & d
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 \\
+	a & b
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 \\
+	b & 0
+	\end{pmatrix}
+.\]
+\[
+	M_4AM_4=\begin{pmatrix}
+	0 & 0 \\
+	0 & 1
+	\end{pmatrix}\begin{pmatrix}
+	a & b \\
+	c & d
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 \\
+	0 & 1
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 \\
+	c & d
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 \\
+	0 & 1
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 \\
+	0 & d
+	\end{pmatrix}
+.\]
 \end{document}
-this can totally be reduced to two cases. if a != 0 or b != 0, then M1 A collapses. if only one, we're done, so assume 2. then take M1 A M3 = aM2. Also if a,b = 0 then M2 A = cM1 + dM2 so were back to the same thing as before
-
-M1M1=M1
-M1M2=M2
-M1M3,4=0
-
-M2M1,2=0
-M2M3=M1
-M2M4=M2
-
-M3M1=M3
-M3M2=M4
-M3M3,4=0
-
-M4M1,2=0
-M4M3=M3
-M4M4=M4

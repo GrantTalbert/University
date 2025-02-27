@@ -1,0 +1,43 @@
+\lecture{13}{Wed 26 Feb 2025 13:26}{New Stuff}
+\begin{theorem}\label{thm:3.1}
+	In a PID, every irreducible element is prime.
+\end{theorem}
+\begin{proof}
+	Let $a\in D$ be irreducible in a PID. Suppose that $a|bc$, for $b,c\in D$. Let $I=\left\langle a,b \right\rangle $, and since $D$ is a PID, we have that $I=\left\langle d \right\rangle $ for some $d\in D$. Since $a\in I$, we have $a=dr$ for some $r\in D$. Since $a$ is irreducible, either $d$ or $r$ is a unit. If $d$ is a unit then $I=D$ trivially, and thus $1=ax+by$ for some $x,y\in D$, and thus $c=acx+bcy$. Since $a|bc$ and $a|ac$, it follows that $a|c$. If $r$ is instead the unit, then $\left\langle a \right\rangle =\left\langle d \right\rangle $, since any $ka=kdr$ and $kd=kar^{-1} $. Since $b\in I$, there is a $t\in D$ such that $at=b$, and thus $a|b$.
+\end{proof}
+\begin{corollary}\label{cor:3.1}
+	If $D$ is a PID, then $p\in D$ is prime if and only if it is irreducible.
+\end{corollary}
+\begin{corollary}\label{cor:3.2}
+	If there exists an irreducible $a\in D$ of a domain that is not prime, then $D$ is not a PID.
+\end{corollary}
+\begin{definition}[Unique Factorization Domain]\label{dfn:3.3}
+	An integral domain $D$ is a unique factorization domain (UFD) iff
+	\begin{itemize}
+		\item Every nonzero nonunit of $D$ is equivalent to a product of irreducibles in $D$.
+		\item This factorization is unique up to the order of the irreducibles and the associates.
+	\end{itemize}
+\end{definition}
+
+The integers are a UFD by the fundamental theorem of arithmetic.
+
+\begin{lemma}\label{lma:3.1}
+	If $D$ is a domain, then for all units $u\in D^*$, we have $\left\langle u \right\rangle =D$.
+\end{lemma}
+\begin{proof}
+	\[
+		uu^{-1} =1_D
+	.\]
+\end{proof}
+\begin{lemma}\label{lma:3.2}
+	Let $D$ be a domain. Then $a=bc$ for $b,c$ not units if and only if $\left\langle a \right\rangle \subsetneq \left\langle b \right\rangle $.
+\end{lemma}
+\begin{proof}
+	Since $a$ is a multiple of $b$, we have $\left\langle a \right\rangle \subseteq \left\langle b \right\rangle $. The containment is proper if $c$ is a non-unit trivially.
+\end{proof}
+
+This lemma implies we can have a sequence of proper inclusions
+\[
+	\left\langle a \right\rangle \subsetneq \left\langle b \right\rangle \subsetneq \cdots 
+\]
+which corresponds to factorization. The question is whether this chain terminates finitely.

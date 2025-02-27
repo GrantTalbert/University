@@ -1,0 +1,99 @@
+\lecture{10}{Tue 25 Feb 2025 14:01}{Wrapping up Time Dependent Hamiltonians}
+Because $\ket{+} ,\ket{-} $ is a basis, we can write any state as a linear combination of $\ket{+} $ and $\ket{-} $. So let
+\[
+	\ket{\psi } =C_1\ket{+} +C_2\ket{-} 
+.\]
+Now we plug into the Schrodinger equation:
+\[
+	i\hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi (t)} =H(t)\ket{\psi (t)} 
+.\]
+Using our Hamiltonian, we have
+\[
+	i\hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi (t)} =\frac{\hbar }{2} \begin{pmatrix}
+	\omega _0 & w_1 \exp (i\omega t) \\
+	\omega \exp (-i\omega t) & -\omega_0
+	\end{pmatrix}\begin{pmatrix}
+	C_1(t) \\
+	C_2(t)
+	\end{pmatrix}=\frac{\hbar }{2} \begin{pmatrix}
+	\omega _0 C_1(t)+\omega _1 \exp (-i\omega t)C_2(t) \\
+	\omega _1 \exp (i\omega t)C_1(t)-\omega _0C_2(t)
+	\end{pmatrix}
+.\]
+We can solve this differential equation but we're not going to because effort.
+
+We will choose the initial condition $C_1=1$ and $C_2=0$, meaning that the proton(s) is(are) spin up. Solving the d2ifferential equation wrt this initial condition yields
+\[
+	\left| C_2(t) \right|^2=\frac{\omega_1^2}{\omega_1^2+(\Delta \omega )^2} \sin ^2\left( t\frac{\sqrt{\omega ^2+(\Delta \omega )^2} }{2}  \right) 
+,\]
+\[
+	\left| C_1(t) \right| ^2=1-\left| C_2(t) \right| ^2
+.\]
+Here, $\Delta \omega =\omega -\omega _0$. We then have by explicit computation that
+\[
+	\left\langle S_z \right\rangle =\bra{\psi (t)} S_z\ket{\psi (t)} =\frac{\hbar }{2}\left( \left| C_1(t) \right| ^2-\left| C_2(t) \right| ^2\right)=\frac{\hbar }{2}\left(\frac{  (\Delta \omega )^2+\omega _1^2 \cos \left( t \sqrt{\omega _1^2+(\Delta \omega )^2}  \right)}{2}   \right) 
+.\]
+
+We have to take $\omega _1 \ll \omega _0$ in practice, since we want $\mathbf{B}_1$ to be small to avoid changing the starting point of the protons. If $\omega _1=0$, then the solution is just $\hbar /2$. If $\omega _1$ is very small, then although $\left\langle S_z \right\rangle $ isn't completely constant, it is dominant. What we need is $\Delta \omega $ to be small, so the \emph{other} term dominates. If we set $\Delta \omega =0$, we have
+\[
+	\left\langle S_z \right\rangle =\frac{\hbar }{2} \cos (t\omega _1)
+.\]
+We want $\left\langle S_z \right\rangle=0$ to get all of the particles to point in the $x$ direction, so we wait for
+\[
+	t=\frac{\pi }{2\omega _1} 
+.\]
+This will set
+\[
+	\left\langle S_z \right\rangle =\frac{\hbar }{2} \cos \left( \frac{\pi }{2\omega _1} \omega _1 \right) =0
+.\]
+This aligns all particles along the $x$-direction. Note that we didn't actually show this aligns them along $x$ instead of an orthogonal direction, but it can be shown with more explicit and messier computation.
+
+This is a special case of a more general class of common Hamiltonians. These are of the form
+\[
+	H=H_0+V(t),\qquad H_0=\diag (E_2,E_1)
+.\]
+We can write
+\[
+	H_0=\overline{E} \begin{pmatrix}
+	1 &  \\
+	 & 1
+	\end{pmatrix}+\frac{\hbar }{2} \begin{pmatrix}
+	\omega _0 &  \\
+	 & \omega _0
+	\end{pmatrix}
+,\]
+where $\overline{E} =\frac{E_1+E_2}{2} $ and $\hbar \omega _0=E_2-E_1$. In fact, it's always possible to pull out an ``average'' proportional to $1$. Let
+\[
+	\ket{\Psi (t)} =e^{-i \overline{E} t/\hbar } \ket{\psi (t)} 
+.\]
+Since these states only differ by a phase, we haven't changed anything. However, it has an effect on the Schrodinger equation:
+\[
+	i\hbar \frac{\mathrm{d}}{\mathrm{d}t} \left( e^{-i \overline{E} t/\hbar } \ket{\psi (t)}  \right) =H(t)\left( e^{-i \overline{E} t/\hbar } \ket{\psi (t)}  \right) 
+.\]
+We end up with
+\[
+	i\hbar \left(\frac{-i\overline{E} }{\hbar }  e^{-i \overline{E} t/\hbar } \ket{\psi (t)} +e^{-i \overline{E} t/\hbar } \ket{\psi (t)} \right)=H(t)\left( e^{-i \overline{E} t/\hbar } \ket{\psi (t)}  \right) 
+.\]
+We can cancel out the exponentials to get
+\[
+	i\hbar \left( \frac{-i \overline{E} }{\hbar } \ket{\psi (t)} +\frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi (t)}  \right) =H(t)\ket{\psi (t)} 
+.\]
+Multiplying out $i\hbar $, we get
+\[
+	\overline{E} \ket{\psi (t)} +\frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi (t)} =H(t)\ket{\psi (t)} 
+.\]
+We can shift the first term to the other side to obtain
+\[
+	i\hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi (t)} =\left( H(t)-\overline{E}1  \right) \ket{\psi (t)} 
+.\]
+We are thus always free to remove an average $\overline{H} $, as the result will remain the same. We are able to redefine our energies by a translation, as long as we shift them by the same amount. We also often see frequency reflected in Hamiltonians as well, since waves are everywhere.
+\chapter{Entanglement}
+Ok now we are defining the tensor product. Given two particles with basis states $\ket{+} _1,\ket{-}_1 $ and $\ket{+} _2,\ket{-}_2$, we can define a new basis in a joined Hilbert space with the tensor product:
+\[
+	\ket{+}_1\otimes \ket{+}_2,\quad \ket{+}_1\otimes \ket{-} _2,\quad \ket{-} _1\otimes \ket{+} _2 ,\quad \ket{-} _1\otimes \ket{-} _2
+.\]
+Entanglement is a linear combination in this basis. For example,
+\[
+	\ket{+}_1\otimes \ket{+} _2 + \ket{-} _1\otimes \ket{-} _2
+.\]
+

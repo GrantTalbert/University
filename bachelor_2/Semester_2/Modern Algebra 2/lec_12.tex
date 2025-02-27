@@ -1,0 +1,16 @@
+\chapter{Divisibility}
+\lecture{12}{Mon 24 Feb 2025 13:25}{Divisibility in Integral Domains}
+\begin{definition}\label{dfn:3.1}
+	Let $D$ be an integral domain. 
+	\begin{itemize}
+		\item Elements $a,b\in D$ are \emph{associates} if $a=ub$ for some $u\in D$.
+		\item A nonzero $a\in D$ is called \emph{prime} if $a$ is not a unit, and $a|bc$ implies $a|b$ or $a|c$.
+		\item A nonzero element $a\in D$ is \emph{irreducible} if $a$ is not a unit, and whemever $a=bx$ for $b,c\in D$, it follows that that $b,c$ are units.
+	\end{itemize}
+\end{definition}
+
+It's simple to show in a domain that prime $\implies $ irreducible. However, is the converse true? It turns out it is \emph{not}, and we can show this via counterexample. The counterexample took half of class so I zoned out.
+\begin{definition}[PID]\label{dfn:3.2}
+	An integral domain $R$ is called a Principle Ideal Domain (PID) if all ideals in $R$ are principal; that is, if $I$ is an ideal of $R$, then there exists $r\in R$ such that $I=\left\langle r \right\rangle $.
+\end{definition}
+

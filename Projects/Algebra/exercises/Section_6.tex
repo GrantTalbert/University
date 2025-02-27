@@ -56,8 +56,8 @@
 		\item $\mathfrak{gl}_n(\mathbb{R} )\coloneqq \mathcal{M}_n(\mathbb{R} )$;
 	\item $\mathfrak{sl}_n(\mathbb{R} )\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{R} )\mid \Tr M=0 \right\} $;
 	\item $\mathfrak{sl}_n(\mathbb{C} )\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{C} )\mid \Tr M=0 \right\} $;
-	\item $\mathfrak{so}_n(\mathbb{R} )\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{R} )\mid M+M^t=0 \right\} $;
-	\item $\mathfrak{su}(n)\coloneqq \left\{ M\in \mathfrak{gl}_n(\mathbb{C} )\mid M+M^\dagger=0 \right\} $.
+	\item $\mathfrak{so}_n(\mathbb{R} )\coloneqq \left\{ M\in \mathfrak{sl}_n(\mathbb{R} )\mid M+M^t=0 \right\} $;
+	\item $\mathfrak{su}(n)\coloneqq \left\{ M\in \mathfrak{sl}_n(\mathbb{C} )\mid M+M^\dagger=0 \right\} $.
 	\end{itemize}
 	Show these sets are $\mathbb{R} $-vector spaces, and compute their dimension.
 \end{exercise}
@@ -79,6 +79,12 @@
 	$\mathfrak{sl}_n(\mathbb{R} )$ is very difficult, but note that $\mathfrak{so}_n(\mathbb{R} )\subseteq \mathfrak{sl}_n(\mathbb{R} )\subseteq \mathfrak{gl}_n(\mathbb{R} )$,  so maybe that helps.
 
 	I think the basis for $\mathfrak{so}_n(\mathbb{R} )$ is basically one element per item $m_{ij} $ in the upper triangle (not counting main diagonal), put a 1 there, and put a $-1$ at $m_{ji} $. Then $M^t=-M$ for the basis set. I think this is the entire basis.
+
+	For $\mathfrak{so} _n(\mathbb{R} )$, we have $[m_ij]=-[m_ji]$, and thus the diagonal entries are all 0. It follows that we simply have
+	\[
+		\dim_{\mathbb{R} } \mathfrak{so}_n(\mathbb{R} )=\frac{n^2-n}{2} 
+	.\]
+	The $n^2$ is the number of entries in the matrix, the $-n$ removes the diagonal elements, and the division by 2 reduces it to only one of the remaining two triangles, since $m_{ij} =-m_{ji} $.
 \end{solution}
 \begin{exercise}
 	Prove $\mathfrak{su}(2)\cong \mathfrak{so}_3(\mathbb{R} )$ as $\mathbb{R} $-vector spaces. In particular these spaces can be viewed as the tangent spaces to $\operatorname{SU} (2)$ and $\operatorname{SO}_3(\mathbb{R} )$, so given the surjective homomorphism $I : \operatorname{SU} (2) \to \operatorname{SO}_3(\mathbb{R} )$ constructed in 2.8.9, there is an induced more meaningfull isomorphism.
@@ -156,7 +162,7 @@
 	
 	I think I can skip the next bullet point, since we have shown enough to show these sets are $\mathbb{R} $-algebras or $\mathbb{C} $-algebras, and this holds for all $k$-algebras.
 
-	This one is interesting.
+	We have already that $\mathfrak{so}_3(\mathbb{R} )\cong \mathfrak{su} (2)$ as $\mathbb{R} $-vector spaces, so we can simply show they are isomorphic as Lie algebras. Will complete after previous problem.
 \end{solution}
 \begin{exercise}
 	Let $R$ be an integral domain. Prove or disprove the following:
@@ -166,7 +172,7 @@
 	\end{itemize}
 \end{exercise}
 \begin{solution}
-	this looks easier
+	idk
 \end{solution}
 \begin{exercise}
 	Prove that if $k$ is a field and $V$ is a $k$-vector space, and $B$ is a minimal generating set for $V$, then $B$ is a basis for $V$.

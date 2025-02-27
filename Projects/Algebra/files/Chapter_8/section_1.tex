@@ -1,0 +1,323 @@
+\section{Preliminaries, Reprise}
+\subsection{Functors}
+Throughout this book, we have seen natural ways to go from one category to another, such as $\mathsf{Ring} $ to $\mathsf{Ab} $, or $\mathsf{Grp} $ to $\mathsf{Set} $, or $\mathsf{Fld}_k$ to $\Vect{k} $. However, we have not needed to formalize this notion until now. We will do this with functors.
+\begin{definition}[Functor]\label{dfn:8.1}
+	Let $\mathsf{C} ,\mathsf{D} $ be categories. A \emph{covariant} functor $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $ is an assignment of an object $\mathscr{F} (A)\in \Obj(\mathsf{D} ) $ for all $A\in \Obj(\mathsf{C} ) $, and of a function, also denoted $\mathscr{F} $:
+	\[
+		\mathscr{F} :\Hom_{\mathsf{C} }(A, B) \to \Hom_{\mathsf{D} }(\mathscr{F} (A), \mathscr{F} (B)) 
+	\]
+	for all objects $A,B\in \Obj(\mathsf{C} ) $, such that
+	\begin{itemize}
+		\item Identity maps are preserved:
+			\[
+				\mathscr{F} (1_A)=1_{\mathscr{F} (A)} 
+			.\]
+		\item Composition is preserved:
+			\[
+				\mathscr{F} (\beta \circ \alpha )=\mathscr{F} (\beta )\circ \mathscr{F} (\alpha )
+			.\]
+			
+	\end{itemize}
+	
+	A \emph{contravariant} functor $\mathscr{G} : \mathsf{C}  \to \mathsf{D} $ is a covariant functor $\mathsf{C} ^{op} \to \mathsf{D} $.
+\end{definition}
+
+The fact that contravariant functors still preserve morphisms means $\mathscr{G} (\alpha \circ \beta )=\mathscr{G} (\beta )\circ \mathscr{G} (\alpha )$. This all means that diagrams are preserved: a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&B\arrow[dr, "\beta "]\\
+	A\arrow[ur, "\alpha_1"]\arrow[rr, "\alpha _2"]\arrow[dr, "\alpha _3"]&&D\\
+									    &C\arrow[ur, "\gamma "]
+\end{tikzcd}\]
+is sent to a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&\mathscr{F} (B)\arrow[dr, "\mathscr{F} (\beta )"]\\
+	\mathscr{F} (A)\arrow[ur, "\mathscr{F} (\alpha_1)"]\arrow[rr, "\mathscr{F} (\alpha _2)"]\arrow[dr, "\mathscr{F} (\alpha _3)"]&&\mathscr{F} (D)\\
+									    &\mathscr{F} (C)\arrow[ur, "\mathscr{F} (\gamma )"]
+\end{tikzcd}\]
+and a contravariant functor sends it to a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&\mathscr{G} (B)\arrow[dl, "\alpha _1"]\\
+	\mathscr{G} (A)&&\mathscr{G} (D)\arrow[ll, "\mathscr{G} (\alpha _2)"]\arrow[ul, "\mathscr{G} (\beta )"]\arrow[dl, "\mathscr{G} (\gamma )"]\\
+		       &\mathscr{G} (C)\arrow[ul, "\mathscr{G} (\alpha_3)"]
+\end{tikzcd}\]
+In either case, commutative diagrams are sent to commutative diagrams.
+
+Contravariant functors are also often called \emph{presheaves}. A presheaf of sets on a category $\mathsf{C} $ is given by a contravariant functor $\mathsf{C}  \to \mathsf{Set} $. You can have similar structures as well; for example, a presheaf of abelian groups on a category $\mathsf{C} $ is a contravariant functor $\mathsf{C}  \to \mathsf{Ab} $.
+
+If the Hom-sets of a category carry more structure, we may ask that functors preserve this structure. For example, we have seen that $\Hom_{R}(-, -) $ is an abelian group, so we may ask that a functor $\mathscr{F} : \Rmod{R}  \to \Rmod{S} $ be an abelian group homomorphism
+\[
+	\Hom_{R}(A, B) \to \Hom_{S}(\mathscr{F} (A), \mathscr{F} (B)) 
+\]
+for all $R$-modules $A,B$. A functor preserving this specific structure in this way is called \emph{additive}.
+\subsection{Examples of Functors}
+There are many examples of functors that ``forget'' the structure of a category; for example, $\mathsf{Ring} \to \mathsf{Set} $ in the natural way. Such functors are called \emph{forgetful functors}.
+
+If $R$ is a ring, then we denote by $R^*$ the \emph{group of units} in $R$. Every ring homomorphism $R\to S$ also induces a group homomorphism $R^*\to S^*$, and this assignment is compatable with compositions (we say such an assignment is functorial). Thus, there is a covariant functor $\mathsf{Ring} \to \mathsf{Grp} $ defined in this way.
+
+We have previously defined the spectrum $\operatorname{Spec} (R)$ of a ring $R$ as the \emph{set} of prime ideals of $R$. If $R,S$ are rings and $\phi : R \to S$ is a ring homomorphism, then the inverse image $\phi ^{-1} (\mathfrak{p} )$ of a prime ideal is prime. Thus, $\phi $ induces the set function
+\[
+	\phi^* : \operatorname{Spec} (S) \to \operatorname{Spec} (R)
+.\]
+This is clearly a functorial assignment, so we can view the spectrum as a contravariant functor $\mathrm{Spec} : \mathsf{Ring}  \to \mathsf{Set} $.
+
+If $S$ is a set, recall that there exists a category $\mathsf{\hat{S} } $ who's objects are subsets of $S$, and who's morphisms $U\to V$ are inclusions $U\subseteq V$. A \emph{presheaf of sets} on $S$ is a contravariant functor $\mathsf{\hat{S} } \to \mathsf{Set} $. A more interesting variant of this occurs when considering a topological space $T$. One can then define a category in a similar way, where the objects are open sets in $T$, leading to the notion of a presheaf on a topological space. Standard constructions such as continuous complex-valued functions on open sets of $T$ can be viewed as a presheaf of abelian groups on $T$. Concrete examples such as this often satisfy additional hypotheses making them \emph{sheaves}, but this is a topic for a book on algebraic topology.
+
+An important class of functors is defined as follows. Let $\mathsf{C} $ be a category, and let $X$ be an object of $\mathsf{C} $. Then the maps
+\[
+	A\mapsto \Hom_{\mathsf{C} }(X, A) ,\qquad A\mapsto \Hom_{\mathsf{C} }(A, X) 
+\]
+define covariant and contavariant functors, respectively. These are denoted $\Hom_{C}(X, \_) $ and $\Hom_{\mathsf{C} }(\_, X) $, respectively. For example, if we have the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\arrow[r, "\alpha "]\arrow[dr, "\xi_A"']&B\arrow[r, "\beta "]\arrow[d, "\xi_B"]&C\arrow[dl, "\xi_C"]\\
+			     &X
+\end{tikzcd}\]
+then by requiring the diagram to commute, we clearly have a notion of a function $\Hom_{\mathsf{C} }(B, X) \to \Hom_{\mathsf{C} }(A, X) $ for every choice of $\alpha $ by mapping $\xi_B\mapsto  \xi _A$. The triangle on the right shows clearly that this assignment is contravariant. The functor $\Hom_{\mathsf{C} }(\_, X) $ is often denoted $h_X$ if the category is understood.
+
+Note that $h_X : \mathsf{C}  \to \mathsf{Set} $, so we have found that there exists an assignment for \emph{every} object of $\mathsf{C} $ a presheaf of sets on $\mathsf{C} $. The question then becomes \emph{when is a presheaf $\mathscr{F} $ of sets on $\mathsf{C} $ in fact equal to $h_X$ for some object $X$ in $\mathsf{C} $?} Additionally, \emph{when can the object $X$ be reconstructed from the presheaf $h_X$?} For example, if $p$ is the final object of $\mathsf{Top} $, that is, $p$ is the one-point topological space, then we have that $h_X(p)$ is nothing but $X$, when the single function $X\to p$ is viewed as a set. This is why geometric contexts often call $h_X(A)$ the set of $A$-points of $X$, and $h_X$ is the functor of points of $X$.
+
+\subsection{When are Two Categories `Equivalent'?}
+Every notion insofar of isomorphism has boiled down to ``structure-preserving bijection.'' It is not unexpected then that the notion of equivalence for two categories is very similar, although it is not exactly the same. Such a notion would be suprisingly restrictive. Every universal construction we have encountered is only defined up to isomorphism, so requiring solutions to match precisely between categories would be difficult. We instead want to attempt and match isomorphism classes, rather than individual objects.
+\begin{definition}[Faithful/Full]\label{dfn:8.2}
+	Let $\mathsf{C} ,\mathsf{D} $ be categories. A covariant functor $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $ is \emph{faithful} if for all objects $A,B$ of $\mathsf{C} $, the induced function
+	\[
+		\Hom_{\mathsf{C} }(A, B) \to \Hom_{\mathsf{D} }(\mathscr{F} (A), \mathscr{F} (B)) 
+	\]
+	is injective. A functor is \emph{full} if the function is \emph{surjective}. A fully faithful functor is one where the function is bijective.
+\end{definition}
+
+Morphisms are the most important information in a category, and fully faithful functors preserve morphisms. It is also easily shown that they preserve isomorphism classes, and thus a fully faithful functor can in general identify a category $\mathsf{C} $ with a full subcategory of $\mathsf{D} $. From here, we can construct our definition of an equivalence of categories.
+\begin{definition}[Equivalence of Categories]\label{dfn:8.3}
+	A covariant functor $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $ is an \emph{equivalence of categories} if it is fully faithful and \emph{essentially surjective}; that is, for all $Y\in \Obj(\mathsf{D} ) $, there exists $X\in \Obj(\mathsf{C} ) $ such that $\mathscr{F} \left(X \right) =Y$. We say $\mathsf{C} $ and $\mathsf{D} $ are \emph{equivalent}.
+\end{definition}
+
+It is not immediate, but equivalence of categories is in fact an equivalence relation. Additionally, an equivalence of categories $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $ has an inverse in a weaker sense; that is, there exists a functor $\mathsf{g} : \mathsf{D}  \to \mathsf{C} $ such that $\mathscr{F} \mathscr{G} $ and $\mathscr{G} \mathscr{F} $ are isomorphic in a natural way to the identity map. This fact will not be used in this book very extensively, so we do not prove it.
+
+For example, consider the category where objects are nonnegative integers, and let $\Hom(m, n) $ be the set of $n\times m$ matrices with entries in a field $k$, and with composition defined by product of matrices. The resulting category is equivalent in a natural way to the subcategory of $\Vect{k} $ consisting of finite-dimensional vector spaces. The functor is clearly fully faithful, and it is essentially surjective because all vector spaces are free, and are thus classified by dimensionality.
+
+\subsection{Limits and Colimits}
+The universal properties we have encountered throughout the book are all examples of the categorical notion of a limit.
+\begin{definition}[Limit]\label{dfn:8.4}
+	Let $\mathscr{F} : \mathsf{I}  \to \mathsf{C}$ be a covariant functor, where one thinks of $\mathsf{I} $ as a category of indicies. The \emph{limit} of $\mathscr{F} $, if it exists, is an object $L$ of $\mathsf{C} $, endowed with morphisms $\lambda_I : L \to \mathscr{F} (I)$ for all objects $I$ of $\mathsf{I} $, satisfying
+	\begin{itemize}
+		\item For any morphism $\alpha : I \to J$ in $\mathsf{I} $, then $\lambda_J =\mathscr{F} (\alpha)\circ \lambda_I$:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				&L\arrow[dl, "\lambda_I"']\arrow[dr, "\lambda _J"]\\
+				I\arrow[rr, "\mathscr{F} (\alpha )"']&&J
+			\end{tikzcd}\]
+		\item $L$ is final with respect to this property; that is, if $M$ is another object together with morphisms $\mu_I$ satisfying this property, then there exists a unique morphism $L\to M$ such that all relevant diagrams commute. In particular,
+			\[\begin{tikzcd}[row sep = 3em, column sep = 2em]
+				&L\arrow[ddl, bend right, "\lambda_I"']\arrow[ddr, bend left, "\lambda _J"],\arrow[d, dashed, "\phi "]\\
+				&M\arrow[dl, "\mu_I"']\arrow[dr, "\mu_J"]\\
+				I\arrow[rr, "\mathscr{F} (\alpha )"']&&J
+			\end{tikzcd}\]
+			must commute.
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	Any such $M$ together with morphisms $\mu_I$ is called a \emph{cone} for $\mathscr{F} $; a limit is then a final object in the category of cones of $\mathscr{F} $.
+\end{remark}
+
+The limit, denoted $\varprojlim \mathscr{F} $, is unique up to isomorphism if it exists, as are all constructions characterized by a universal property. The left pointing arrow is a reminder that $L$ comes ``before'' all objects indexed by $\mathscr{F} $, and projects outwards along the morphisms $\lambda_I$. This limit is also called a projective limit.
+
+For example, consider the universal property of products. Let $\mathsf{I} $ be the discrete category consisting of two objects $\left\{ 1,2 \right\} $ with only the identity morphisms, and let $\mathscr{A} : \mathsf{I}  \to \mathsf{C} $ be a functor such that $\mathscr{A} (1)=A_1$ and $\mathscr{A} (2)=A_2$, for $A_1,A_2$ objects in $\mathsf{C} $. Then since there exists no such $\alpha $ as described in the diagrams above, we have that for all objects $X$ of $\mathsf{C} $, the following commutes:
+\[\begin{tikzcd}[row sep = 2em, column sep = 3em]
+	&&A_1\\
+	X\arrow[urr, bend left, "f"]\arrow[drr, bend right, "g"]\arrow[r, dashed, "\phi "]&\varprojlim \mathscr{A} \arrow[ur, "\pi_{A_1} "]\arrow[dr, "\pi_{A_2} "]\\
+								&&A_2
+\end{tikzcd}\]
+That is, $\varprojlim \mathscr{A} $ is the \emph{product} $A_1\times A_2$, provided the limit exists. We can generalize this notion, and define a product of a possibly infinite collection of objects as the limit of a functor from the corresponding discrete category, provided it exists.
+
+The limits are more exciting if we give $\mathsf{I} $ more structure. Consider the category where the entirety of the morphisms are described by the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1\arrow[loop left]\arrow[r, bend left, "\alpha "]\arrow[r, bend right, "\beta "]&2\arrow[loop right]
+\end{tikzcd}\]
+A functor $\mathscr{K} : \mathsf{I}  \to \mathsf{C} $ then amounts to a choice of two objects of $\mathsf{C} $ and a choice of two parallel morphisms between them. Limits of such functors are called \emph{equalizers}. For example, given the category $\Rmod{R} $, we can let $\phi : A_2 \to A_1$ be a homomorphism and choose $\mathscr{K} (\alpha )=\phi $ and $\mathscr{K} (\beta )=0$. Then it will be shown that the limit of this functor, that is, the equalizer of $\phi $ and the 0 homomorphism, is simply $\ker \phi $.
+
+Another typical example is when $\mathsf{I} $ consists of an ordered set. For example, let the objects of $\mathsf{I} $ be all positive integers $\mathbb{Z} ^+$, and let there exist a unique morphism $i\to j$ if and only if $i\leq j$. A functor $\mathscr{F} : \mathsf{I}  \to \mathsf{C} $ then amounts to a choice of objects $A_i$ and morphisms $\phi_{ji} : A_i \to A_j$ for all $i\in\mathbb{Z} ^+$, with the requirement that $\phi_{ii} =1_{A_i} $ and $\phi_{kj} \phi _{ji} =\phi _{ki} $. This is the same as choosing a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \arrow[r, "\phi_{45} "]&A_4\arrow[r, "\phi_{34} "]&A_3\arrow[r, "\phi_{23} "]&A_2\arrow[r, "\phi_{12} "]&A_1
+\end{tikzcd}\]
+in $\mathsf{C} $, since all morphisms can be recovered from choices of morphisms $A_{i+1} \to A_i$. A limit $\varprojlim \mathscr{F} $, which may also be denoted
+\[
+	\varprojlim_{i}  A_i
+\]
+when the morphisms are clear from context, is an object $A$ with morphism $\phi_i : A \to A_i$ such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&&A\arrow[dll, "\ldots "']\arrow[dl, "\phi_4"]\arrow[d, "\phi_3"]\arrow[dr, "\phi _2"]\arrow[drr, "\phi _1"]\\
+	\cdots \arrow[r, "\phi_{45} "]&A_4\arrow[r, "\phi_{34} "]&A_3\arrow[r, "\phi_{23} "]&A_2\arrow[r, "\phi_{12} "]&A_1
+\end{tikzcd}\]
+commutes, and such that all other objects satisfying this property factor uniquely through $A$.
+
+\begin{claim}
+	The aforementioned limit $\varprojlim_i A_i$ exists in $\Rmod{R} $.
+\end{claim}
+This proof is done in the exercises.
+
+The dual notion to a limit of a functor $\mathscr{F} : \mathsf{I}  \to \mathsf{C} $ is a \emph{colimit}.
+\begin{definition}[Colimit]\label{dfn:8.5}
+	A \emph{colimit} of a functor $\mathscr{F} : \mathsf{I}  \to \mathsf{C} $ is an object $C$ of $\mathsf{C} $ endowed with morphisms $\gamma_I : \mathscr{F} (I) \to C$ for all objects $I$ of $\mathsf{I} $, such that
+	\begin{itemize}
+		\item For any morphism $\alpha  : I \to J$ in $\mathsf{I} $, we have $\gamma_I=\gamma_J \circ \mathscr{F} (\alpha )$. We then say $C$ is a \emph{co-cone} of $\mathscr{F} $.
+		\item $C$ is \emph{initial} with respect to this requirement. That is $C$ is initial with respect to co-cones of $\mathscr{F} $.
+	\end{itemize}
+\end{definition}
+The colimit of $\mathscr{F} $, if it exists, is denoted $\varinjlim \mathscr{F} $, and is also called the injective limit.
+
+We have already encountered many examples of colimits, similarly to limits. For example, the coproduct of $A_1,A_2$ in some category is simply the colimit of the functor from the discrete category with two objects. Cokernels are colimits, just as kernels are limits.
+
+We can once again consider an example with the totally ordered set $\mathsf{I} $, but with arrows reversed
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1\arrow[r]&2\arrow[r]&3\arrow[r]&4\arrow[r]&\cdots 
+\end{tikzcd}\]
+A functor then consists of a choice of elements and morphisms
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A_1\arrow[r, "\psi_{12} "]&A_2\arrow[r, "\psi _{23} "]&A_3\arrow[r, "\psi_{34} "]&A_4\arrow[r, "\psi_{45} "]&\cdots 
+\end{tikzcd}\]
+A colimit $\varinjlim_i A_i$ is then an object $A$ such that there exist morphisms $\psi_i$ such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A_1\arrow[drr,"\psi _1"]\arrow[r, "\psi_{12} "]&A_2\arrow[dr,"\psi _2"]\arrow[r, "\psi _{23} "]&A_3\arrow[d,"\psi _3"]\arrow[r, "\psi_{34} "]&A_4\arrow[dl,"\psi _4"]\arrow[r, "\psi_{45} "]&\cdots\arrow[dll,"\psi _5"]\\
+				  &&A
+\end{tikzcd}\]
+commutes, and $A$ is initial with respect to this.
+
+An example of this explicit construction is in the category $\mathsf{Set} $, where $\psi_{ji} $ is injective. We are then considering (up to isomorphism) a nested sequence
+\[
+	A_1\subseteq A_2\subseteq A_3\subseteq A_4\subseteq \cdots 
+.\]
+The direct limit is the infinite union $\bigcup_{i} A_i$. These constructions can be extended to posets without much difficulty, as will be done in the exercises. Colimits are used in many standard constructions, such as germs of functions, and stalks of sheaves.
+
+\subsection{Comparing Functors}
+Functors are introduced as morphisms between categories. Now we look at morphisms between functors as a way to compare two functors together.
+\begin{definition}[Natural Transformation]\label{dfn:8.6}
+	Let $\mathsf{C} ,\mathsf{D} $ be categories, and let $\mathscr{F} ,\mathscr{G} : \mathsf{C}  \to \mathsf{D}  $ be covariant functors. A natural transformation $\nu : \mathscr{F} \Rightarrow \mathscr{G} $ is given by a collection of morphisms $\nu_X : \mathscr{F} (X) \to \mathscr{G} (X)$ for all $X$ in $\mathsf{C} $ such that for all $\alpha : X \to Y$ in $\mathsf{C} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathscr{F} (X)\arrow[r, "\mathscr{F} (\alpha )"]\arrow[d, "\nu_X"']&\mathscr{F}(Y)\arrow[d, "\nu_Y"]\\
+		\mathscr{G} (X)\arrow[r, "\mathscr{G} (\alpha )"]&\mathscr{G} (Y)
+	\end{tikzcd}\]
+	commutes. A \emph{natural isomorphism} is a natural transformation $\nu $ such that every $\nu_X$ is an isomorphism.
+\end{definition}
+
+Natural transformations arise quite often. Whenever a morphism is referred to as \emph{canonical} or \emph{natural}, there is likely a natural transformation involved. The technical meaning of natural thus matches its use. A basic, but important, example is that of an adjoint functor.
+
+\begin{definition}[Adjoint Functors]\label{dfn:8.7}
+	Let $\mathsf{C} ,\mathsf{D} $ be categories, and let $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $, $\mathscr{G} : \mathsf{D}  \to \mathsf{C} $ be covariant functors. We say $\mathscr{F} $ is left-adjoint to $\mathscr{G} $, and likewise $\mathscr{G} $ is right-adjoint to $\mathscr{F} $, if for all $X$ in $\mathsf{C} $ and $Y$ in $\mathsf{D} $, there exist natural isomorpisms
+	\[
+		\Hom_{\mathsf{C} }(X, \mathscr{G} (Y)) \to \Hom_{\mathsf{D} }(\mathscr{F} (X), Y) 
+	.\]
+	We say a functor $\mathscr{F} $ is a left-adjoint functor if it has a right adjoint, and vice versa.
+\end{definition}
+
+For example, the free group on a given set is simply a group such that a set function from a set $A$ to a group $G$ is the same as a group homomorphism $F(A)\to G$. What this really means is that for all sets $A$ and groups $G$, there are natural identifications
+\[
+	\Hom_{\mathsf{Set} }(A, S(G)) \cong \Hom_{\mathsf{Grp} }(F(A), G) 
+,\]
+where $S : \mathsf{Grp}  \to \mathsf{Set} $ is the forgetful functor. That means the functor $F : \mathsf{Set}  \to \mathsf{Grp} $ which constructs free groups is left-adjoint to the forgetful functor $S$. In fact, this applies to any free construction we have in any category. As a rule, we say that the free functor is the left-adjoint to the forgetful functor.
+
+We can thus find interesting functors as adjoints to more simple looking functors. Knowing that a functor is left-adjoint or right-adjoint simplifies many proofs, so this is a remarkable fact. Here is one way in which this happens.
+\begin{lemma}\label{lma:8.1}
+	Right-adjoint functors commute with limits. That is, for $\mathscr{G} : \mathsf{D}  \to \mathsf{C} $ a functor with a left-adjoint $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $, and $\mathscr{A} : \mathsf{I}  \to \mathsf{D} $ a third functor, there exists a canonical isomorphism
+	\[
+		\mathscr{G} \left( \varprojlim \mathscr{A}  \right) \to \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) 
+	.\]
+\end{lemma}
+\begin{proof}
+Let $\mathscr{G} : \mathsf{D}  \to \mathsf{C} $ be right adjoint to $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $, and let $\mathscr{A} : \mathsf{I}  \to \mathsf{D} $ be a functor. Then recall that the limit is final with respect to cones
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 1.5em]
+	&\varprojlim \mathscr{A} \arrow[dl, "\lambda_I"']\arrow[dr, "\lambda_J"]\\
+	\mathscr{A} (I)\arrow[rr, "\alpha "']&&\mathscr{A} (J)
+\end{tikzcd}\]
+with evident notation. Then $\mathscr{G} $ induces commutative diagrams in $\mathsf{C} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 1.5em]
+	&\mathscr{G} (\varprojlim \mathscr{A}) \arrow[dl, "\mathscr{G} (\lambda_I)"']\arrow[dr, "\mathscr{G} (\lambda_J)"]\\
+	(\mathscr{G} \circ \mathscr{A}) (I)\arrow[rr, "\mathscr{G} (\alpha )"']&&(\mathscr{G} \circ \mathscr{A}) (J)
+\end{tikzcd}\]
+By the universal property of limits, we have that
+\[\begin{tikzcd}[row sep = 3em, column sep = 0em]
+	&\mathscr{G} (\varprojlim \mathscr{A}) \arrow[d, dashed]\arrow[ddr, bend left]\arrow[ddl, bend right]\\
+	&\varprojlim (\mathscr{G} \circ \mathscr{A} )\arrow[dl]\arrow[dr]\\
+	(\mathscr{G} \circ \mathscr{A}) (I)\arrow[rr]&&(\mathscr{G} \circ \mathscr{A}) (J)
+\end{tikzcd}\]
+commutes. Note here that there exists a unique morphism
+\[
+	\mathscr{G} \left( \varprojlim \mathscr{A}  \right)  \to \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) 
+.\]
+By adjunction, the morphisms $\varprojlim (\mathscr{G} \circ \mathscr{A} )\to \mathscr{G} \circ \mathscr{A} (I)$ determine morphisms in $\mathsf{D} $ by the map
+\[
+	\Hom_{\mathsf{C} }(X, \mathscr{G} (Y)) \to \Hom_{\mathsf{D} }(\mathscr{F} (X), Y) 
+.\]
+That is, each morphism determines a morphism
+\[
+	\mathscr{F} \left( \varprojlim (\mathscr{G} \circ \mathscr{A} ) \right) \to \mathscr{A} (I)
+.\]
+We then have the diagram in $\mathsf{C} $:
+\[\begin{tikzcd}[row sep = 3em, column sep = 0em]
+	&\mathscr{F} \left( \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right)  \right) \arrow[dr]\arrow[dl]\\
+	\mathscr{A} (I)\arrow[rr]&&\mathscr{A} (J)
+\end{tikzcd}\]
+By the universal property defining $\varprojlim \mathscr{A} $,
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+	&\mathscr{F} \left( \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right)  \right) \arrow[ddl, bend right]\arrow[ddr, bend left]\arrow[d, dashed]\\
+	&\varprojlim \mathscr{A} \arrow[dl]\arrow[dr]\\
+	\mathscr{A} \left( I \right)\arrow[rr] &&\mathscr{A} (J)
+\end{tikzcd}\]
+By the adjunction condition, we have
+\[
+	\Hom_{\mathsf{D} }(\mathscr{F} \left( \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right)  \right) , \varprojlim \mathscr{A} ) \cong \Hom_{\mathsf{c} }(\varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) , \mathscr{G} \left( \varprojlim \mathscr{A}  \right) ) 
+.\]
+Therefore, this morphism not only determines a morphism $\varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) \to \mathscr{G} \left( \varprojlim \mathscr{A}  \right) $, but this morphism remains unique. We thus have the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+	&\left( \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right)  \right) \arrow[ddl, bend right]\arrow[ddr, bend left]\arrow[d, dashed]\\
+	&\mathscr{G} \left(\varprojlim \mathscr{A} \right)\arrow[dl]\arrow[dr]\\
+	\mathscr{G} (\mathscr{A} \left( I \right))\arrow[rr] &&\mathscr{G} (\mathscr{A} (J))
+\end{tikzcd}\]
+Therefore, we have unique morphisms
+\[
+	\phi :\varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) \to \mathscr{G} \left( \varprojlim \mathscr{A}  \right) ,\qquad \psi :\mathscr{G} \left( \varprojlim \mathscr{A}  \right) \to \varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) 
+.\]
+Since these are unique, it follows fairly immediately that they are isomorphisms. We have
+\[
+	\phi \psi \phi =\phi ,\qquad \psi \phi \psi 
+\]
+by uniqueness, and therefore
+\[
+	\psi \phi =1_{\mathscr{G} \left( \varprojlim \mathscr{A}  \right) } ,\qquad \phi \psi =1_{\varprojlim \left( \mathscr{G} \circ \mathscr{A}  \right) } 
+.\]
+\end{proof}
+
+The book claims this outline does not verify that the needed diagrams commute, but I feel such verification is immediate from the fact that $\mathscr{F} ,\mathscr{G} ,\mathscr{A} $ are covariant functors and from the adjunction condition.
+
+The dual of this lemma, which is also true, is that left-adjoint functors commute with colimits:
+\[
+	\mathscr{F} \left( \varinjlim \mathscr{A}  \right) =\varinjlim \left( \mathscr{F} \circ \mathscr{A}  \right) 
+.\]
+
+This statement is fairly important, becauase it implies that right-adjoint functors preserve products and kernels and other constructions described by limits, provided they exist.
+
+Exact functors are functors that preserve exactness. Since we have only studied exactness in $\Rmod{R} $, let $R,S$ be rings, and let $\mathscr{F} : \Rmod{R}  \to \Rmod{S} $ be an additive functor; that is, the functions $\Hom_{R}(A, B) \to \Hom_{S}(\mathscr{F} (A), \mathscr{F} (B)) $ are abelian group homomorphisms. Let
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r, "\phi  "]&B\arrow[r, "\psi "]&C\arrow[r]&0
+\end{tikzcd}\]
+be exact. Then $\mathscr{F} $ is exact if and only if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\mathscr{F} (A)\arrow[r, "\mathscr{F} (\phi )"]&\mathscr{F} \left( B \right) \arrow[r, "\mathscr{F} (\psi )"]&\mathscr{F} (C)\arrow[r]&0
+\end{tikzcd}\]
+is exact (for all exact sequences).
+
+Functors are not always exact, but it can often be more interesting when they are not exact. An additive functor is called \emph{left-exact} if whenever
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r, "\phi  "]&B\arrow[r, "\psi "]&C
+\end{tikzcd}\]
+is exact, so is the induced complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\mathscr{F} (A)\arrow[r, "\mathscr{F} (\phi )"]&\mathscr{F} \left( B \right) \arrow[r, "\mathscr{F} (\psi )"]&\mathscr{F} (C)
+\end{tikzcd}\]
+Left-exact functors give rise to what are called \emph{derived functors}, which are studied in homological algebra, and will be introduced in the next chapter.
+
+It is fairly easily shown that right-adjoint additive functors are left-exact, since they preserve kernels. The dual statements hold as well; left-adjoint additive functors $\mathscr{G} $ are right-exact, meaning whenever
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\arrow[r, "\phi  "]&B\arrow[r, "\psi "]&C\arrow[r]&0
+\end{tikzcd}\]
+is exact, then so is
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathscr{G} (A)\arrow[r, "\mathscr{G} (\phi )"]&\mathscr{G} \left( B \right) \arrow[r, "\mathscr{G} (\psi )"]&\mathscr{G} (C)\arrow[r]&0
+\end{tikzcd}\]

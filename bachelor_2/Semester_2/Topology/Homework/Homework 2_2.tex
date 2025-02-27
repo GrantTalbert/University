@@ -33,7 +33,30 @@ By the inductive hypothesis, we have
 .\]
 By induction, the statement is proven.
 
-For a counter example, consider ---
+For a counterexample, let $X=\mathbb{R} $ with the standard topology, and let $A_i=\left\{ \frac{1}{n}  \right\} $ for $n\in\mathbb{N} $. Since $\mathbb{R} $ is Hausdorff, by the previous homework we have that $\left\{ x \right\} $ is closed for all $x\in \mathbb{R} $, and thus
+\[
+	\overline{\left\{ \frac{1}{n}  \right\} } =\left\{ \frac{1}{n}  \right\} 
+.\]
+It follows that
+\[
+	\bigcup_{n\in\mathbb{N} } \overline{\left\{ \frac{1}{n}  \right\} } 
+.\]
+Note that there exists no natural number $n$ such that $1/n=0$, since this would imply that $1=0$, which is clearly a contradiction. I will now show that $0$ is a limit point of the sequence $\left\{ 1/n \right\} $, and thus
+\[
+	0\in \overline{\bigcup_{n\in\mathbb{N} }\left\{ \frac{1}{n}  \right\}  } 
+.\]
+Note that we are showing it is a \emph{limit point} of the sequence, and not a point the sequence converges to. These notions are the same in $\mathbb{R} $ I believe, but I don't need to use this fact for the proof. It suffices to show that for all open balls $B_r(0)$, there exists $1/n\in B_r(0)$ for some $n\in\mathbb{N} $, since any open set containing $0$ must also contain one of these balls by definition of a basis, and must then contain $1/n$. With this understanding, let $r\in\mathbb{R} ^+$, and consider the open neighborhood $B_r(0)$. By the Archimedean property, there exists $n\in\mathbb{N} $ such that $\frac{1}{n} <r$. Therefore, there exists $n\in\mathbb{N} $ such that
+\[
+	\frac{1}{n} \in B_r(0) \cup \bigcup_{n\in\mathbb{N} } \left\{ \frac{1}{n}  \right\} 
+\]
+for all $r$. Since $1/n \neq 0$ for all $n\in\mathbb{N} $, we have that every open neighborhood of $0$ intersects the union at some point other than $0$. Therefore, it is a limit point of the neighborhood, and thus
+\[
+	0\in \overline{\bigcup_{n\in\mathbb{N} } \left\{ \frac{1}{n}  \right\} } 
+.\]
+Since $0$ is not in the other union,
+\[
+	\bigcup_{n\in\mathbb{N} } \overline{\left\{ \frac{1}{n}  \right\} } \neq \overline{\bigcup_{n\in\mathbb{N} } \left\{ \frac{1}{n}  \right\} } 
+.\]
 \section*{Problem 2}
 \begin{itemize}
 	\item Clearly $\Int(A) \cup \Int(B) \subseteq \Int(A\cup B) $, but the converse does not hold in general. Consider a space $X$ with nonempty subsets $A,B,U$ such that $U\subsetneq A\cup B$, but $U \cap A \neq U$ and $U \cap B\neq U$. That is, $U$ is partially contained by $A$ and $B$ individually, and fully contained by their union. Now consider the topology $\mathcal{T} =\left\{ \varnothing ,U,X \right\} $ on $X$. Note that this set is closed under union and intersection:
@@ -83,20 +106,137 @@ Therefore, $\bigcup_{i\in I} f^{-1} (U_i)\subseteq f^{-1} \left( \bigcup_{i\in I
 \[
 	x\in \bigcup_{i\in I} f^{-1} (U_i)
 .\]
-This proves the lemma.
+This proves the lemma. Since every open set in $\mathbb{R} $ can be represented as a union of basis elements, it suffices to show the preimage of a basis element is open, since then the preimage of the union would become a union of open sets, and thus open.
 
+Let $(f\times g) : \mathbb{R}  \to \mathbb{R} \times \mathbb{R} $ be the map $x\mapsto (f(x),g(x))$. Let $U,V$ be open in $\mathbb{R} $. Since $f$ and $g$ are continuous, $f^{-1} (U)$ and $g^{-1} (V)$ are open in $\mathbb{R} $. Note that $(f\times g)^{-1} (U\times V)$ is simply the set of all $x\in\mathbb{R} $ such that $f(x)\in U$ and $g(x)\in V$. That is,
+\[
+	(f\times g)^{-1} (U\times V)=f^{-1} (U)\cap g^{-1} (V)
+.\]
+Since this is an intersection of open sets, $(f\times g)^{-1} (U\times V)$ is open. Since $U\times V$ is a basis element for the product topology on $\mathbb{R} \times \mathbb{R} $, this sufficies to show $(f\times g)$ is continuous.
 
+Now let $h : \mathbb{R} \times \mathbb{R}  \to \mathbb{R} $ be the addition map $(x,y)\mapsto x+y$. Let $B_r(z)$ be an open set in $\mathbb{R} $. Note that the preimage
+\[
+	h^{-1} \left( B_r\left( z \right)  \right) =\left\{ (x,y)\in\mathbb{R} ^2\mid d(x+y,z)<r \right\} 
+.\]
+We wish to show this set is open. It suffices to show we can form an open ball about any point in $h^{-1} \left( B_r\left( z \right)  \right) $ which is a subset of $h^{-1} \left( B_r(z) \right) $, since we could then take the union over all such sets, as the union of open sets is open. Let $(x,y)\in B_r(z)$, and let
+\[
+	s\coloneqq \frac{r-d(x+y,z)}{2} 
+\]
+for simplicity. Consider the open set $B_s(x)\times B_s(y)$. Let $(a,b)\in B_s(x)\times B_s(y)$. It follows that
+\[
+	d(x,a),d(y,b)<s
+.\]
+Equivalently,
+\[
+	\left| x-a \right| +\left| y-b \right| <2s
+.\]
+By the triangle inequality,
+\[
+	\left| x+y-a-b \right| \leq \left| x-a \right| +\left| y-b \right| <2s
+.\]
+Therefore, $d(x+y,a+b)<2s$. By the triangle inequality once again,
+\[
+	d(a+b,z)\leq d(a+b,x+y)+d(x+y,z)<2s+d(x+y,z)=r-d(x+y,z)+d(x+y,z)=r
+.\]
+Therefore, $d(a+b,z)<r$, and thus $B_s(x)\times B_s(y)\subseteq h^{-1} \left( B_r(z) \right) $. By the previous logic, it follows that $h$ is continuous.
+
+Note that
+\[
+	(h\circ (f\times g))(x)=h(f(x),g(x))=f(x)+g(x)=(f+g)(x)
+.\]
+We showed in class that the composition of continuous functions is continuous. Therefore, $(f+g)$ is continuous.
+
+Now consider the function $k : \mathbb{R} ^2 \to \mathbb{R} ^2$ defined by $(x,y)\mapsto (x,-y)$. Note that this function is fairly trivially continuous. Let $U\times V$ be open in $\mathbb{R} ^2$. Then the preimage is $U\times (-V)$, where $-V\coloneqq \left\{ -x\mid x\in V \right\} $. Since $V$ is open, for all $x$ there exists a radius $r\in\mathbb{R} ^+$ such that $B_r(x)\subseteq V$. It follows basically immediately that $B_r(-x)\subseteq -V$:
+\[
+	y\in B_r(-x)\implies \left| y+x \right| <r \implies \left| -y-x \right| <r\implies -y\in B_r(x) \subseteq V \implies y\in -V
+.\]
+Therefore, $-V$ is open in $\mathbb{R} $ by previous logic. Also by previous logic, $k$ is continuous, since all basis sets have open preimages. Note that
+\[
+	(h\circ k\circ (f\times g))(x)=(h\circ k)(f(x),g(x))=h(f(x),-g(x))=f(x)-g(x)=(f-g)(x)
+.\]
+Once again, the composition of continuous functions is continuous, so $(f-g)(x)$ is continuous.
+
+Now let $m : \mathbb{R} ^2 \to \mathbb{R} $ be the multiplication map $(x,y)\mapsto xy$. Let $B_r(z)$ be an open ball in $\mathbb{R} $. We will show $m$ is continuous in the same way as previously; that is, we will show for all elements in the preimage, there exists a basis element containing it which is a proper subset of the preimage. For simplicity, let
+\[
+	s\coloneqq \frac{-(\left| x \right| +\left| y \right| )+\sqrt{\left( \left| x \right| ^2+\left| y \right| ^2+\left| 2xy \right|  \right) +4\left( r-\left| xy-z \right|  \right) } }{2} 
+.\]
+It follows that $s$ satisfies $s^2+\left( \left| x \right| +\left| y \right|  \right) s-(r-\left| xy-z \right| )=0$. It also follows that $s$ is positive, because since $\left| xy-z \right| =d(xy,z)<r$, we have that $4(r-\left| xy-z \right| )>0$, and thus the inside of the square root is greater than the square of $\left| x \right| +\left| y \right| $. Therefore, we can define the basis element of $\mathbb{R} ^2$
+\[
+	B_s(x)\times B_s(y)
+.\]
+Let $(a,b)\in B_s(x)\times B_s(y)$. It follows that $\left| a-x \right| ,\left| b-y \right| <s$, and thus
+\begin{align*}
+	&\qquad\;\;\;s^2+\left( \left| x \right| +\left| y \right|  \right) s=r-d(xy,z)\\
+	&\implies \left| a-x \right| \left| b-y \right| +\left| y \right| \left| a-x \right| +\left| x \right| \left| b-y \right| <r-d(xy,z)
+.\end{align*}
+By the triangle inequality and the fact that $\left| ab \right| =\left| a \right| \left| b \right| $,
+\begin{align*}
+	\left| a-x \right| \left| b-y \right| +\left| y \right| \left| a-x \right| +\left| x \right| \left| b-y \right| &\geq \left| \left( a-x \right) \left( b-y \right) +x(b-y)+y(a-x) \right| \\
+															&=\left| ab+xy-ay-bx+bx-xy+ay-xy \right| \\
+															&=\left| ab-xy \right| \\
+															&=d(ab,xy)
+.\end{align*}
+Therefore, $d(ab,xy)<r-d(xy,z)$. By the triangle inequality, we have
+\[
+	d(ab,z)\leq d(ab,xy)+d(xy,z)<r-d(xy,z)+d(xy,z)=r
+.\]
+Therefore, $ab\in B_r(z)$, and thus $(a,b)\in m ^{-1} \left( B_r(z) \right) $. Therefore,
+\[
+	B_s(x)\times B_s(y)\subseteq m ^{-1} \left( B_r(z) \right) 
+.\]
+Thus, $m$ is continuous. We have that
+\[
+	(m\circ (f\times g))(x)=m(f(x),g(x))=f(x)g(x)=(fg)(x)
+.\]
+Since composition of continuous functions is continuous, we have that $fg$ is continuous.
+
+Finally, suppose that $g(x)\neq 0$ for all $x\in\mathbb{R} $. Consider instead $g$ to be a map $\mathbb{R} \to g(\mathbb{R} )$. This is trivially still continuous, since $g$ is continuous. Now consider the map $\ell : \mathbb{R} \times g(\mathbb{R} ) \to \mathbb{R} \times \mathbb{R} $ defined by
+\[
+	(x,g(y))\mapsto \left( x,\frac{1}{g(y)}  \right) 
+.\]
+It should be clear that this is continuous if and only if $g(y)\mapsto \frac{1}{g(y)} $ i continuous, since we have shown the identity map is continuous. Let $B_r(z)$ be open in $\mathbb{R} $, and let $x\in \ell ^{-1} (B_r(z))$. I am abusing notation here because I don't feel like defining another function. Note that $x\in \ell ^{-1} \left( B_r(z) \right) $ if and only if $x\in g(\mathbb{R} )$ by definition of $\ell $. We wish to show we can construct an open ball $B_s(x)$ such that $B_s(x)\cap g(\mathbb{R} )$ is a subset of $\ell ^{-1} (B_r(z))$. I ran out of time to show this unfortunately because the homework is due in 10 minutes, so I will just assume it.
+
+Finally, we have
+\[
+	(m\circ \ell \circ (f\times g))=(m\circ \ell )(f(x),g(x))=m\left( f(x),\frac{1}{g(x)}  \right) =\frac{f(x)}{g(x)} =\left( \frac{f}{g}  \right) (x)
+.\]
+Since composition of continuous functions is continuous, $f/g$ is continuous.
 \section*{Problem 5}
-Let $f : X \to Y$ be continuous, and let $Y$ be Hausdorff. 
-
+We prove that $\Graph(f)^{c} $ is open, which is equivalent by definition of a closed set. For simplicity, let
+\[
+	K\coloneqq \Graph(f)^{c} =\left\{ (x,y)\in X\times Y\mid y\neq f(x) \right\} 
+.\]
+Let $(x,y)\in K$. Since $Y$ is Hausdorff, there exist disjoint neighborhoods $N_y,N_{f(x)} $ of $y$ and $f(x)$, respectively. Since $f$ is continuous, $f^{-1} \left( N_{f\left(x \right) }  \right) $ is open in $X$. Note that if $f^{-1} (y) \cap f^{-1} \left( N_{f(x)}  \right) \neq \varnothing $, then there exists at least one $y'\in f^{-1} \left( N_{f(x)}  \right) $ such that $f(y')=y$. It follows that $y\in N_{f(x)} $, a contradiction. Therefore, $f^{-1} (y)$ and $f^{-1} \left( N_{f(x)}  \right) $ are disjoint. Note that
+\[
+	f^{-1} \left( N_{f(x)}  \right) \times N_y
+\]
+is open in $X\times Y$ since $f^{-1} (N_{f(x)} )$ is open in $X$ and $N_y$ is open in $y$. Now let $(a,b)\in f^{-1} \left( N_{f(x)}  \right) \times N_y$. Note that $(a,b)\in \Graph(f)$ if and only if $b=f(a)$. However, $f(a)\in N_{f(x)} $, and $b\in N_y$. Since these sets are disjoint, we have that $b\neq f(a)$, and thus $(a,b)\in K$. Therefore, we have
+\[
+	f^{-1} \left( N_{f(x)}  \right) \times N_y \subseteq K
+\]
+for all $(x,y)\in K$. Now consider the union
+\[
+	\bigcup_{(x,y)\in K} f^{-1} \left( N_{f(x)}  \right) \times N_y
+,\]
+where once again we take $N_{f(x)} $ and $N_y$ to be disjoint open neighborhoods of $f(x)$ and $y$, which exist since $Y$ is Hausdorff. Note that since each set in the union is a subset of $K$, we have
+\[
+	\bigcup_{(x,y)\in K} f^{-1} \left( N_{f(x)}  \right) \times N_y \subseteq K
+.\]
+However, since $x\in f^{-1} \left( N_{f(x)}  \right) $ because $f(x)\in N_{f(x)} $, and since $y\in N_y$, we have $(x,y)\in f^{-1} \left( N_{f(x)}  \right) \times N_y$. Therefore, for all $(x,y)\in K$, there exists a set in the union containing $(x,y)$. Therefore,
+\[
+	K\subseteq \bigcup_{(x,y)\in K} f^{-1} \left( N_{f(x)}  \right) \times N_y
+.\]
+It follows that $K$ equals this union. Since this is a union of open sets, $K$ is open, and thus $K^{c} =\Graph(f)$ is closed.
 \section*{Problem 6}
-For any subset $U\subseteq Y$, the preimate $f^{-1} (U)\subseteq X$ is a subset of $X$ by definition of $f$. Since $X$ has the discrete topology, all subsets of $X$ are open, and thus $f^{-1} (U)$ is open. Therefore, $f$ is continuous.
+For any subset $U\subseteq Y$, the preimage $f^{-1} (U)\subseteq X$ is a subset of $X$ by definition of $f$. Since $X$ has the discrete topology, all subsets of $X$ are open, and thus $f^{-1} (U)$ is open. Therefore, $f$ is continuous.
 
-
+Let $(0,1)\in K$ be an open set in $X\times Y$. Since $K$ is open, there exist a collection of open sets $\left\{ U_i \right\}_{i\in I} $ in $X$, and a corresponding collection of open sets $\left\{ V_i \right\}_{i\in I} $ in $Y$, such that
+\[
+	K=\bigcup_{i\in I} U_i \times V_i
+.\]
+Since $(0,1)\in K$, there must exist a set $U_i\times V_i$ containing $(0,1)$ for some $i\in I$. It follows that $V_i$ must contain $1$. However, $V_i$ is also open in $Y$, and the only open set containing $1$ in $Y$ is $Y$. Therefore, $V_i=Y$, and thus $0\in V_i$. Since $0\in U_i$ as well, we have $(0,0)\in U_i\times V_i$, and thus $(0,0)\in K$. Therefore, any neighborhood of $(0,1)$ intersects $\Graph(f)$ at $(0,0)$. Since $(0,0)\neq (0,1)$, it follows that $(0,1)$ is a limit point of $\Graph(f)$, and thus is contained within the closure of $\Graph(f)$. However, since $f(0)=0\neq 1$, we have $(0,1)\notin \Graph(f)$, and thus we have the proper subset $\Graph(f)\subsetneq \overline{\Graph(f)} $. Therefore, $\Graph(f)$ is not closed.
 
 \section*{Problem 7}
-I could not solve this without requiring that $f$ be continuous, and in fact I was able to construct what I believe is a counterexample if we assumme $f$ is not continuous. I believe it was implied that $f$ was supposed to be continuous, and have done the problem under this assumption. I only used this fact for a single statement at the end of the proof.
-
 Let $\pi : \Graph(f) \to X$ be the canonical projection $(x,f(x))\mapsto x$, and consider the function $\pi ^{-1} : X \to \Graph(f)$ defined by $x\mapsto (x,f(x))$. Note that this map is well-defined because $f$ is well defined; that is, if $x=y$, then we must have $f(x)=f(y)$ because $f$ is a function, and thus $\pi ^{-1} (x)=(x,f(x))=(y,f(y))=\pi ^{-1} (y)$. Also note that this is clearly an inverse to $\pi $:
 \[
 	\left( \pi ^{-1} \pi  \right) (x,f(x))=\pi ^{-1} (x)=(x,f(x));
