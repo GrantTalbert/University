@@ -1,0 +1,19 @@
+\lecture{15}{Mon 03 Mar 2025 13:28}{Euclidean Domains}
+\begin{definition}[Euclidean Domain]\label{dfn:3.5}
+	An integral domain $D$ is called a Euclidean Domain if there exists a function $d : D^* \to \mathbb{N} $ such that
+	\begin{itemize}
+		\item $d(a)\leq d(ab)$ for all $a,b\in D^*$;
+		\item If $a,b\in D$ with $b\neq 0$, then there exist $q,r\in D$ such that $a=qb+r$ where either $r=0$ or $d(r)<d(b)$.
+	\end{itemize}
+\end{definition}
+
+A Euclidean domain is kind of between fields and PIDs, since there is a notion of division given by the division algorithm.
+
+For example, $F[x]$ with $d$ the degree function $\operatorname{deg} f$. $\mathbb{Z} $ is also trivially an example.
+
+\begin{theorem}\label{thm:3.4}
+	Every Euclidean Domain is a PID.
+\end{theorem}
+\begin{proof}
+	we just didn't do it.
+\end{proof}

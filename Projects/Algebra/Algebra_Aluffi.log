@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  26 FEB 2025 20:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  2 MAR 2025 00:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -841,7 +841,11 @@ File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 Package: titlepageBU 
 )
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 14.
- (./Algebra_Aluffi.aux)
+ (./Algebra_Aluffi.aux
+
+LaTeX Warning: Label `lma:8.3' multiply defined.
+
+)
 \openout1 = `Algebra_Aluffi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -937,7 +941,7 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
  on input line 14.
 
-<BU_Logo.png, id=55, 3854.4pt x 2168.1pt>
+<BU_Logo.png, id=67, 3854.4pt x 2168.1pt>
 File: BU_Logo.png Graphic file (type png)
 <use BU_Logo.png>
 Package pdftex.def Info: BU_Logo.png  used on input line 15.
@@ -1175,29 +1179,58 @@ Package mdframed Info: mdframed detected package amsthm
 
 [16]
 
-[17]) (./files/Chapter_8/section_3.tex) (./files/Chapter_8/section_4.tex) (./files/Chapter_8/section_5.tex) (./files/Chapter_8/section_6.tex))
+[17]) (./files/Chapter_8/section_3.tex
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 5.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 10.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 13.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 20.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 22.
 
-[18] (./Algebra_Aluffi.aux)
+
+[18]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 52.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 58.
+) (./files/Chapter_8/section_4.tex) (./files/Chapter_8/section_5.tex) (./files/Chapter_8/section_6.tex))
+
+[19] (./Algebra_Aluffi.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `Algebra_Aluffi.out' has not changed.
-(rerunfilecheck)             Checksum: A11268743CE87616C05162E6F850493F;2473.
+(rerunfilecheck)             Checksum: 34C9081A83DF50D4F6ABF9DDC97096F6;2914.
  ) 
 Here is how much of TeX's memory you used:
- 42511 strings out of 473330
- 1023012 string characters out of 5719768
- 1506575 words of memory out of 5000000
- 64882 multiletter control sequences out of 15000+600000
+ 42572 strings out of 473330
+ 1024358 string characters out of 5719768
+ 1506573 words of memory out of 5000000
+ 64935 multiletter control sequences out of 15000+600000
  575115 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,29n,104p,899b,1280s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on Algebra_Aluffi.pdf (20 pages, 514780 bytes).
+Output written on Algebra_Aluffi.pdf (21 pages, 522852 bytes).
 PDF statistics:
- 337 PDF objects out of 1000 (max. 8388607)
- 259 compressed objects within 3 object streams
- 60 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 360 PDF objects out of 1000 (max. 8388607)
+ 281 compressed objects within 3 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 138 words of extra memory for PDF output out of 10000 (max. 10000000)
 

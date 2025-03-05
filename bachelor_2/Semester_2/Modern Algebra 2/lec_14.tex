@@ -1,0 +1,45 @@
+\lecture{14}{Fri 28 Feb 2025 13:34}{Ascending Chains}
+\begin{definition}[ACC]\label{dfn:3.4}
+	Let $R$ be a cmmutative ring. We say the ascending chain condition holds if any chain of ideals
+	\[
+		I_1 \subseteq I_2\subseteq \ldots 
+	\]
+	there exists $r$ such that $I_{r-1} \subseteq I_r=I_{r+1} =\ldots  $. That is, the chain stabilizes.
+\end{definition}
+\begin{lemma}\label{lma:3.3}
+	Every PID satisfies ACC.
+\end{lemma}
+\begin{proof}
+	Let $I_\bullet $ be a chain in the PID $D$.  Let
+	\[
+		J=\bigcup_{\alpha \in \mathbb{N} } I_\alpha 
+	.\]
+	We can show $J$ is an ideal. If $x,y\in J$, then $x\in I_m$, $y\in I_n$. WLOG, let $m\leq n$. Thus, $x,y\in I_n$,  and thus $x-y\in I_n$. Note that for any $x\in J$, we have $x\in I_k$, and $ax\in I_k$ for all $a\in R$. Therefore, $J$ is an ideal. Since $J$ is an ideal, $J=\left\langle z \right\rangle $ for some $z\in D$. It follows that $z\in I_r$ for some $r$, so $\left\langle z \right\rangle \subseteq I_r$. Therefore, there exists an ideal in $I_\bullet $ which is the upper bound.
+\end{proof}
+\begin{theorem}\label{thm:3.2}
+	Let $D$ be a PID. Then $D$ is a UFD. In particular, the category of PIDs is a subcategory of the category of UFDs.
+\end{theorem}
+\begin{proof}
+	First, we will show every nonzero nonunit is divisible by at least one irreducible. Let $a\in D$. If $a$ is irreducible, then $a|a$. If it's not irreducible, then it's reducible, and thus there exist nonzero nonunits such that $a=x_1y_1$. It follows that $\left\langle a \right\rangle \subsetneq \left\langle x_1 \right\rangle $. If $x_1$ is not irreducible, then we have $\left\langle a \right\rangle \subsetneq \left\langle x_1 \right\rangle \subsetneq \left\langle x_2 \right\rangle $ for some $x_2$. By induction, we obtain a chain $x_\bullet $. Since $D$ is a PID, by lemma \ref{lmr:3.3} there exists $r$ such that $\left\langle x_r \right\rangle $ is maximal in this chain. Therefore, $x_r$ is irreducible, and divides $a$. Moreover, $a$ is the product of irreducibles.
+
+	Now let $p_1\ldots p_n$ and $q_1\ldots q_m$ be irreducible factorizations of $a$. Since $p_1$ is a factor of $a$,
+	\[
+		p_1|q_1\ldots q_m
+	.\]
+	Since $p_1$ is a prime by theorem \ref{thm:3.1}, $p_1$ divides some $q_i$. It follows that $q_i$ is not irreducible unless $p_1=q_1$, since they are not units. It follows fairly trivially that $D$ is a UFD.
+\end{proof}
+\begin{corollary}\label{cor:3.3}
+	Let $F$ be a field. Then $F[x]$ is a UFD.
+\end{corollary}
+\begin{proof}
+	Since $F[x]$ is a PID, this follows from theorem \ref{thm:3.2}.
+\end{proof}
+
+But is $\mathbb{Z} [x]$ a UFD? It's not a PID, but $\mathbb{Z} $ is a PID, so it is a UFD. We then have the following.
+\begin{theorem}\label{thm:3.3}
+	Let $R$ be a UFD. Then $R[x]$ is a UFD. By extension, $R[A]$ is a UFD for some (at least finite, maybe it can be infinite) set $A$.
+\end{theorem}
+\begin{proof}
+	we didnt do it lol
+\end{proof}
+

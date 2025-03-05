@@ -6,11 +6,11 @@
 \courseID{CAS MA 741}
 \college{College of Arts and Sciences}
 \department{Department of Mathematics and Statistics}
-\date{Winter Break, 2024/2025}
+\date{Spring 2025}
 \usepackage{tikz-cd}
 \DeclareMathOperator{\Stab}{Stab}
 \DeclareMathOperator{\rank}{rk}
-\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{x}
+\declaretheoremstyle[headfont=\bfseries\color{blue}, bodyfont=\normalfont, mdframed={linewidth = 1pt}]{x}
 \declaretheorem[numberwithin=section, style=x, name=Exercise]{exercise}
 \declaretheorem[numbered=no, style=proof, name=Solution]{solution}
 \begin{document}
@@ -24,6 +24,7 @@
 \stepcounter{chapter}
 \chapter{Linear Algebra, Reprise}
 \section{Functors}
+%ex:1
 \begin{exercise}
 	Let $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $ be a covariant functor, and let $\mathsf{C} $ and $\mathsf{D} $ have products. Show there exists a unique morphism $\mathscr{F} (A\times B)\to \mathscr{F} (A)\times \mathscr{F} (B)$ making the relevant diagram commute.
 
@@ -55,14 +56,47 @@
 	\end{tikzcd}\]
 	exists in $\mathsf{D} $ and commutes.
 \end{solution}
+%ex:2
 \begin{exercise}
 	Let $\mathscr{F} : \mathsf{C}  \to \mathsf{D} $ be a fully faithful functor. If $A,B$ are in $\mathsf{C} $, show that $A\cong B$ if and only if $\mathscr{F} (A)\cong \mathscr{F} (B)$.
 \end{exercise}
 \begin{solution}
-	trivial, do later
-\end{solution}
-% 1.3 trivial too, 1.4 idk what its asking yet
+	Let $A\cong B$. Since $\mathscr{F} $ is a functor, commutative diagrams are sent to commutative diagrams, and thus
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[r]\arrow[rr, bend left, "1_A"]\arrow[d, "\mathscr{F} "]&B\arrow[r]&A\arrow[d, "\mathscr{F} "]\\
+		\mathscr{F} (A)\arrow[r]&\mathscr{F} (B)\arrow[r]&\mathscr{F} (A)
+	\end{tikzcd}\]
+	commutes. It follows that the two morphisms in question under $\mathscr{F} $ still compose to $1_{\mathscr{F} \left( A \right) } $, and the same for $B$. Therefore, $\mathscr{F} (A)\cong \mathscr{F} (B)$.
 
+	Now the converse, let $\mathscr{F} (A)\cong \mathscr{F} \left( B \right) $. Since the morphism
+	\[
+		\Hom_{\mathsf{C} }(A, B) \to \Hom_{\mathsf{D} }(\mathscr{F} (A), \mathscr{F} (B)) 
+	\]
+	is a bijection, it follows that
+	\[
+		\mathscr{F} (\alpha \circ \beta )=\mathscr{F} (1_{\mathscr{F} (A)} )\implies \alpha \circ \beta =\mathscr{F} ^{-1} (1_{\mathscr{F} (A)} )=1_A
+	.\]
+	Therefore, $A\cong B$.
+\end{solution}
+%ex:3
+\begin{exercise}
+	Recall that a group $G$ may be thought of as a groupoid $\mathsf{G} $ with a single object $\left\{ * \right\} $. Prove that defining the action of a group $G$ on an object $A$ of a category $\mathsf{C} $ is the same as defining a functor $\mathsf{G} \to \mathsf{C} $.
+\end{exercise}
+\begin{solution}
+	Note that since $\mathsf{G} $ has one element, the action of a functor $\mathscr{F} : \mathsf{G}  \to \mathsf{C} $ amounts to determining a single object $A$ of $\mathsf{C} $ on which to map the single element. This is the same as choosing an object of $\mathsf{C} $ on which to act. Note also that a group action of $G$ on $A$ can be seen as determining an automorphism of $A$ for all elements of $G$ in a way compatable with the group operation (identity maps to identity, composition is the same as group multiplication). Since the elements of $G$ are viewed as morphisms in $\mathsf{G} $, and since functors preserve morphism composition and identities, we get that the structure of $\mathsf{G} $ is preserved for free.
+\end{solution}
+
+%ex:4
+\begin{exercise}
+	Let $R$ be a commutative ring, and let $S\subseteq R$ be a \emph{multiplicative subset} of $R$. Prove that localization is a functor; associating every $R$-module $M$ with the localization $S^{-1} M$ and with every $R$-module homomorphism $\phi : M \to N$ the naturally induced homomorphism $S^{-1} M\to S^{-1} N$ defines a covariant functor $\Rmod{R} \to \Rmod{S^{-1} R} $.
+\end{exercise}
+
+\begin{exercise}
+	For $F$ a field, denote by $F^*$ the multiplicative group of nonzero elements of $F$. The assignment $\mathsf{Fld} \to \mathsf{Grp} $ mapping $F\mapsto F^*$ and a homomorphism of fields $\phi : k \to F$ to the restriction $\phi|_{k^*}: k^* \to F^*$ is clearly a covariant functor. We can also consider the category $\mathsf{Fld}_k^f$ of finite extensions of a fixed field $k$. Prove that the assignment $F\mapsto F^*$, together with the assignment of an extension $F_1\subseteq F_2$ to the norm $N_{F_1\subseteq F_2} : F_2^* \to F_1^*$ is a contravariant functor $\mathsf{Fld}_k^f\to \mathsf{Grp} $. State and prove an analogous statement for the trace.
+\end{exercise}
+
+
+%ex:6
 \begin{exercise}
 	Formalize the notion of a presheaf of abelian groups on a topological space $T$. If $\mathscr{F} $ is a presheaf on $T$, elements of $\mathscr{F} (U)$ are called \emph{sections} of $\mathscr{F} $ on $U$. The homomorphism $\rho_{UV} : \mathscr{F} (U) \to \mathscr{F} (V)$ induced by an inclusion $V\subseteq U$ is called the \emph{restriction map}.
 
@@ -109,12 +143,60 @@
 		\begin{cases}
 			s_U(x),&x\in U\\
 			s_V(x),&x\in V
-		\end{cases}
-		
+		\end{cases}	
 	.\]
 	Note that this is well-defined because if $x\in U$ and $x\in V$, then $s_U(x)=s_V(x)$. Moreover, it is manifestly unique since it is uniquely determined by $s_U$ and $s_V$, and since they are continuous, $s$ is clearly continuous as well due to the fact that $s_U$ and $s_V$ agree on $U \cap V$. Therefore, $\mathscr{C} $ is a sheaf of abelian groups on $X$.
-\end{solution}	
+\end{solution}
 
+%ex:7
+\begin{exercise}
+	Define a topology on $\operatorname{Spec} R$ by declaring the closed sets to be $V(I)$ for $I\subseteq R$ an ideal, and $V(I)$ the set of prime ideals containing $I$. This is the Zariski topology on $\operatorname{Spec} R$.
+	\begin{itemize}
+		\item Verify that this is a topology on $\operatorname{Spec} R$.
+		\item Relate this to the Zariski topology as previously defined.
+		\item Prove that $\operatorname{Spec} (\_)$ is a contravariant functor $\mathsf{CRing} \to \mathsf{Top} $.
+	\end{itemize}
+\end{exercise}
+\begin{solution}
+	Note that for any ring $R$, the ideal $R$ is not prime. It follows that $V(R)=\varnothing $ and $V(0)=\operatorname{Spec} R$. Now let $\left\{ J_i \right\}_{i\in I} $ be a collection of ideals of $R$. Let
+	\[
+		L\coloneqq \bigcap_{i\in I} V(J_i)
+	.\]
+	Note that $\mathfrak{p} \in L$ if and only if $J_i \subseteq \mathfrak{p} $ for all $i\in I$. Define
+	\[
+		K\coloneqq \bigcup_{i\in I} J_i
+	.\]
+	It follows that $(K)\subseteq \mathfrak{p} $, since $(K)$ is the smallest ideal containing $K$. Also note that if $\mathfrak{p} \in V((K))$, then $J_i \subseteq K\subseteq (K)\subseteq \mathfrak{p} $ for all $i$, and thus $\mathfrak{p} \in V(L)$. Therefore, $V(L)=V((K))$. Therefore, closed sets are closed under intersection (and thus open sets are closed under union).
+\end{solution}
+
+%ex:8
+\begin{exercise}
+	$K$ alg closed field, something with $K$-$\mathsf{Aff} $ and $\mathbb{A}_K^0$.
+\end{exercise}
+
+\begin{exercise}
+	Let $\mathsf{C} $, $\mathsf{D} $ be categories, and assume $\mathsf{C} $ to be small. Define a functor category $\mathsf{D} ^{\mathsf{C} } $, whos objects are covariant functors $\mathsf{C}  \to \mathsf{D} $ and whos morphisms are natural transformations.
+
+	Prove that the assignment $X\mapsto h_X$ defines a covariant functor $\mathsf{C} \to \mathsf{Set} ^{\mathsf{C} ^{op} } $.
+\end{exercise}
+\begin{solution}
+	The construction $\mathsf{D} ^{\mathsf{C} } $ is clearly a category. The natural transformation $1_{\mathscr{F} } : \mathscr{F}  \Rightarrow \mathscr{F} $ can be defined as the collection of morphisms $\mathscr{F} (1_X)=1_{\mathscr{F} (X)} $ for $X$ in $\mathsf{C} $. Let $\mathscr{F} ,\mathscr{G} ,\mathscr{H} \in \Obj(\mathsf{D} ^{\mathsf{C} } ) $, and let $\eta : \mathscr{F}  \Rightarrow \mathscr{G} $, $\nu : \mathscr{G}  \Rightarrow \mathscr{H} $. Note that by definition of a natural transformation, the two squares
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathscr{F} (X)\arrow[r, "\eta_X"]\arrow[d, "\mathscr{F} (\alpha )"]&G(X)\arrow[r, "\nu_X"]\arrow[d, "\mathscr{G} (\alpha )"]&\mathscr{H}(X) \arrow[d, "\mathscr{H} (\alpha )"]\\
+		\mathscr{F} (Y)\arrow[r, "\eta_X"]&\mathscr{G} (Y)\arrow[r, "\nu _X"]&\mathscr{H} (Y)
+	\end{tikzcd}\]
+	commute. Therefore, we have a natural transformation $\nu \eta : \mathscr{F}  \Rightarrow \mathscr{H} $ defined in this way.
+
+	Definining morphisms in the second part is so hard wtf
+\end{solution}
+
+
+\begin{exercise}
+	Let $\mathsf{Z} $ be the empty category consisting of no objects and no morphisms. One can contemplate a functor $\mathscr{Z} : \mathsf{Z}  \to \mathsf{C} $. What is $\varprojlim \mathscr{Z} $, if such a category exists?
+\end{exercise}
+\begin{solution}
+	Note that a cone in this category is simply an object $L$, since there need not exist morphisms $\lambda _I : L \to \mathscr{Z} (I)$ since $\mathscr{Z} \left( I \right) $ does not exist. Thus, an object that is final in the category of cones is simply an object that is final in the category $\mathsf{C} $, and thus a limit is simply a final object.
+\end{solution}
 
 % 1.14
 \begin{exercise}

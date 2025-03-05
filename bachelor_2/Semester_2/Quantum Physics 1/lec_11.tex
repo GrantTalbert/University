@@ -1,0 +1,43 @@
+\lecture{11}{Tue 04 Mar 2025 14:01}{Tensors}
+How do we know a superposition of states, such as $1/\sqrt{2} (\ket{+} +\ket{-} )$ is \emph{actually} in a state lacking a well-defined $z$-spin? There is a famous experiment that can show an electron definitively does not have a well-defined spin, which uses entanglement. Consider two elections with spins $\ket{\pm}_1$, $\ket{\pm}_2$. The set of possible states throughout the system of 2 elections is
+\[
+	\left\{ \ket{+}_1 \otimes \ket{+}_2,\ket{+}_1 \otimes \ket{-}_2,\ket{-}_1\otimes \ket{+}_2,\ket{-} _1\otimes \ket{-} _2 \right\} 
+.\]
+This occurs in a tensor product of hilbert spaces $\mathcal{H} \otimes_{\mathbb{C} } \mathcal{H} $. A statevector can then be written as something along the lines of
+\[
+	\ket{\psi } =\frac{1}{\sqrt{2} } \left( \ket{+}_1 \otimes \ket{+}_2+\ket{-}_1 \otimes \ket{-}_2 \right) 
+.\]
+A state like this is called entangled, and it can definitively show quantum mechanical things exist that do not have classical analogues. These are the Bell experiments. Today we will discuss the CHSH game, which is one of these Bell experiments. The game has two players, and each person flips a coin. They can only see the result of their own flip. After they flip their coin, they choose a color, red or blue. They want to always choose the same color, \emph{unless} they both flip tails, in which case they want different colors. They can communicate a strategy ahead of time. The players should be far enough apart that light signals cannot pass between them during the time the game takes.
+
+In classical mechanics, the most optimal strategy is to always pick the same color. This gives a flat 75\% chance of winning the game. We can beat this using quantum entanglement. Recall our original entangled state $\ket{\psi } $. Measuring precisely one electron yields a 50\% chance of measuring spin up or down. However, note that \emph{if we measure} $\ket{+}_1$, then the state must collapse to the $\ket{+}_1 \otimes \ket{+}_2$ state. This is because there is \emph{no way} to rewrite this state as a tensor of two sums in each electron. This implies that information has somehow traveled faster than light as well, which is extremely strange. This actually cannot transmit information however, so it's simply wavefunction collapse.
+
+Here's how we complete the experiment. Player one measures either $S_z$ or $S_x$, and player two measures $S_{\pi /8} $ or $S_{-\pi /8} $. That is, player two measures $S_{\hat{n} } =\hat{n} \cdot \mathbf{S} $, where
+\[
+	\hat{n} =\left( \pm \sin \frac{\pi }{8} ,0,\cos \frac{\pi }{8}  \right) 
+.\]
+Our eigenstates are
+\[
+	\ket{+}_{\theta } =\cos \theta \ket{+} -\sin \theta \ket{-} ,
+\]
+\[
+	\ket{-}_\theta =-\sin \theta \ket{+} +\cos \theta \ket{-} 
+.\]
+The strategy is as follows: if player one sees heads, they measure $S_z$, and if they measure tails, they measure $S_x$. Player two measures $S_{\pi /8} $ and $S_{-\pi /8} $ if they see heads or tails, respectively. The probability of winning is
+\[
+	\cos ^2\frac{\pi }{8} \approx 85.3\%
+.\]
+Colors now correspond to the eigenvalues $\pm \hbar /2$. So if both players measure tails, they want to find different eigenvalues, and otherwise they want the same eigenvalues. Taking the probability of finding both in $+$ when measuring against the state $\ket{+_{\theta_1}}_1 \otimes \ket{+_{\theta _2} } _2$, we have
+\[
+	\mathcal{P}_{++} =\left| \bra{\psi } \left( \ket{+_{\theta_1 } }_1 \otimes \ket{+_{\theta_2 } }_2 \right)  \right| ^2=\left| \frac{\left( \bra{+}_1 \otimes \bra{+}_2+\bra{-}_1\otimes \bra{-}_2 \right) }{\sqrt{2} } \left( \ket{+_{\theta_1 } }_1 \otimes \ket{+_{\theta_2 } }_2 \right)  \right| ^2
+\]
+\[
+	=\left|  \frac{\left( \bra{+}_1 \otimes \bra{+}_2+\bra{-}_1\otimes \bra{-}_2 \right) }{\sqrt{2} }\left( \cos \theta)1 \ket{+}_1 +\sin \theta_1 \ket{+})1+\cos \theta_2 \ket{+}_2+\sin \theta_2 \ket{-}_2 \right) \right| ^2
+\]
+\[
+	=\left| \frac{1}{\sqrt{2} } \left( \cos \theta_1 \cos \theta_2+\sin \theta_1 \sin \theta_2 \right)  \right| ^2=\frac{1}{2} \cos^2 (\theta_1-\theta _2)
+.\]
+The other ones are all the same, except $\mathcal{P}_{- -} $ which is sin instead of cos. We can now plug in for $\theta _1,\theta _2$ given our setup:
+\[
+	\theta_z=0,\qquad \theta_x=\frac{\pi }{4} ,\qquad \theta_{\pi /8} =\frac{\pi}{8} 
+.\]
+

@@ -1,0 +1,120 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 5}
+\courseID{PY 451}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 5}
+\begin{enumerate}
+	\item 
+\[
+	\left( S_x^{(1)} \otimes S_y^{(2)}  \right) \left( \ket{+}_1\otimes \ket{+}_2 \right) =\left( S_x^{(1)} \ket{+}_1 \right) \otimes \left(S_y^{(2)} \ket{+}_2\right)=\frac{\hbar}{2} \ket{-}_1 \otimes \frac{i\hbar}{2} \ket{-}_2
+.\]
+\item The norm squared is
+	\[
+		\left( \frac{\hbar }{2} \bra{-}_1  \otimes \frac{-i\hbar }{2} \bra{-}_2   \right) \left( \frac{\hbar }{2} \ket{-}_1 \otimes \frac{i\hbar }{2} \ket{-}_2  \right) =\frac{\hbar ^2}{4} \braket{-}{-}_1 \cdot \frac{\hbar ^2}{4} \braket{-}{-}_2 =\frac{\hbar ^4}{16} 
+	.\]
+	Therefore, the norm is $\frac{\hbar ^2}{4} $.
+\end{enumerate}
+\section*{Problem 2}
+Incase I forget to delete this before submitting the assignment, I included this section to justify my logic to myself so that after we had the lecture on tensor products, I could rewrite it in whatever presentation of the Born rule we gave in lecture.
+
+The projector $P_a \otimes \mathbbm{1}$ maps a two particle state $\ket{\psi }=\ket{\psi}_1 \otimes \ket{\psi }_2 $ to the state $(P_a \otimes \mathbbm{1})\ket{\psi } =\ket{a}_1 \otimes \ket{\psi }_2$. The probability of measuring the state $\ket{a}_1 \otimes \ket{\psi }_2$ in some system $\ket{\phi } $, that is, measuring $\ket{a} $ in the first particle and the same state $\ket{\psi }_2$ in the second, is given by the Born rule
+\[
+	\left| \bra{\phi  }(\ket{a}_1 \otimes \ket{\psi }_2 \right|^2
+.\]
+This can be reframed as
+\[
+	\left| \bra{\phi } (P_a \otimes \mathbbm{1})\ket{\psi }  \right| ^2
+,\]
+since
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\ket{\psi }_1 \otimes \ket{\psi }_2 \arrow[r, "P_a \otimes \mathbbm{1}"]&\ket{a}_1 \otimes \ket{\psi }_2.
+\end{tikzcd}\]
+
+\begin{enumerate}
+	\item Note that \textbf{\LARGE NOTE THAT THERE IS EXTRA 2 ON LEFT} 
+		\[
+			\ket{\psi } =\frac{1}{\sqrt{2}} \left( \ket{+} +\ket{-}  \right)_1 \otimes 2\ket{+}_2  =\ket{+}_{x;1}  \otimes 2\ket{+}_2 
+		.\]
+		\[
+			\braket{\psi }{\psi } =(\braket{+_x}{+_x} )_1(4\braket{+}{+} )_2=4
+		.\]
+		To normalize the state, by bilinearity\footnote{Meaning for any scalar $c$, $c(\ket{x} \otimes \ket{y} )=c\ket{x} \otimes \ket{y} =\ket{x} \otimes c\ket{y} $.} of the tensor product we have to choose a singular state to multiply the normalizing factor into. Since the second electron is not normalized, we redefine
+		\[
+			\ket{\psi } =\ket{+}_{x;1}  \otimes \ket{+}_2
+		.\]
+		Measuring the first electron in $S_z \otimes 1$:
+		\begin{align*}
+			\mathcal{P}_+=\bra{\psi }(P_+ \otimes \mathbbm{1})\ket{\psi } &=\bra{\psi }\left( \ket{+}\bra{+}^{(1)}  \otimes 1^{(2)}  \right) \ket{\psi }\\
+			   &=\bra{\psi } \left( \ket{+}_1 \braket{+}{\psi }_1 \otimes \ket{\psi }   \right)\\
+			   &=\braket{\psi }{+}_1 \braket{+}{\psi }_1 \cdot \braket{\psi }{\psi }_2\\
+			   &=\frac{1}{\sqrt{2}^2}\cdot 1=\frac{1}{2} 
+		.\end{align*}
+		The normalized state is then simply $\ket{+}_1 \otimes \ket{+}_2$, since we have measured $\ket{+}_1$ and not modified the second electron state. We do not need to do the remainder of the calculations; the only other possible outcome of the measurement $S_z^{(1)} $ is $-\hbar /2$, and since the probabilites sum to 1, we must have that $\mathcal{P}_-=1/2$ as well. Moreover, by the same logic, the new normalized state is $\ket{-}_1 \otimes \ket{+}_2$.
+
+\textbf{\LARGE EVERYTHING ELSE IS WRONG} 
+	\item The state is not normalized, because the second electron state has a norm of 2:
+		\[
+			\left( \bra{+} +\bra{-}  \right) \left( \bra{+} +\bra{-}  \right) =\braket{+}{+} +\braket{-}{-} =2
+		.\]
+		Similarly, the first electron state has a norm of $1/2$:
+		\[
+			\frac{1}{4} \left( \bra{+} +\bra{-}  \right) \left( \bra{+} +\bra{-}  \right) =\frac{1}{4} \left( \braket{+}{+} +\braket{-}{-}  \right) =\frac{1}{2} 
+		.\]
+		We need to normalize each individual particle state for the tensor to make physical sense. It is obvious that the normalized state is
+		\[
+			\ket{\psi } =\frac{1}{\sqrt{2} } \left( \left( \ket{+}_1 +\ket{-} _1 \right) \otimes \left( \ket{+}_2 +\ket{-}_2 \right)  \right) =\ket{+}_{x;1} \otimes \ket{+}_{x;2} 
+		.\]
+		We then have
+		\begin{align*}
+			\mathcal{P}_+=\bra{\psi } \left( \ket{+}\bra{+}^{(1)} \otimes \mathbbm{1}^{(2)}  \right) \ket{\psi } &=\bra{\psi }  \left( \ket{+}_1 \braket{+}{\psi }_1 \otimes \mathbbm{1} ^{(2)}\ket{\psi }_2  \right) \\
+															     &=\left| \braket{+}{\psi }_1 \right|^2\cdot \braket{\psi }{\psi }_2\\
+															     &=\left| \braket{+}{+_x}_1 \right|^2\\
+															     &=\frac{1}{2}
+		.\end{align*}
+		By the same logic as the previous problem, our observed state is $\ket{+}_1 \otimes \ket{+}_{x;2} $. The probability $\mathcal{P}_-$ is also $1/2$, and the state would be $\ket{-}_1 \otimes \ket{+}_{x;2} $.
+	\item Note that
+		\[
+			\ket{\psi } =\frac{1}{\sqrt{2} } \left( \ket{+}_1 \otimes \ket{+}_2+\ket{-}_1\otimes \ket{-}_2 \right) =\frac{1}{\sqrt{2} } \left( \left( \ket{+}_1+\ket{-}_1 \right)\otimes \left( \ket{+}_2 +\ket{-}_2 \right)  \right) 
+		\]
+		\[
+			=\ket{+}_{x;1} +\sqrt{2}\ket{+}_{x;2} 
+		.\]
+		The last step follows by bilinearity of tensor products. We introduce a normalizing factor to the second electron state to obtain the state
+		\[
+			\ket{\psi} = \frac{1}{\sqrt{2} } \ket{+}_{x;1} +\frac{1}{\sqrt{2} } \ket{-}_{x;2} 
+		.\]
+		This is the same state as part 2, so the answers are the same.
+	\item The calculations here are all basically the same as before, so I will start with the table, and will do the calculations afterwards. I will show less work because once again, they are basically the same as before.
+
+		\hspace{-5em}\begin{tabular}{c|c|c|c|c}
+			&$\mathcal{P} \left( S_z^{(1)} =\frac{\hbar }{2} ,S_z^{(2)} =\frac{\hbar }{2}  \right) $&$\mathcal{P} \left( S_z^{(1)} =-\frac{\hbar }{2} ,S_z^{(2)} =\frac{\hbar }{2}  \right) $&$\mathcal{P} \left( S_z^{(1)} =\frac{\hbar }{2} ,S_z^{(2)} =-\frac{\hbar }{2}  \right) $&$\mathcal{P} \left( S_z^{(1)} =-\frac{\hbar }{2} ,S_z^{(2)} =-\frac{\hbar }{2}  \right) $\\
+			\hline
+			i&1/2&1/2&0&0\\
+			ii&1/4&1/4&1/4&1/4\\
+			ii&1/4&1/4&1/4&1/4\\
+		\end{tabular}
+		\begin{enumerate}
+			\item Recall the first normalized state after measurement was $\ket{\psi } =\ket{\pm}_1 \otimes \ket{+}_2$. Measuring again in $S_z^{(2)} $ gives
+				\begin{align*}
+					\mathcal{P}_{\pm,+} &=\bra{\psi } \left( \mathbbm{1}^{(1)} \otimes \ket{+} \bra{+}^{(2)}  \right) \ket{\psi } \\
+							  &=\braket{\psi }{\psi }_1 \cdot \left| \braket{\psi }{+}_2 \right| ^2\\
+							  &=\left| \braket{+}{+}_2 \right| ^2\\
+							  &=1
+				.\end{align*}
+				Multiplying this by the probability of already having measured a state $\ket{+}_1 $ or $\ket{-}_1$ gives probabilities $\mathcal{P}_{+,+}=\mathcal{P}_{-,+} =1/2$. We also find that the probability of measuring $\ket{-} $ is $0$, since probabilities sum to 1.
+			\item The normalized post-measurement states were $\ket{\pm}_1 \otimes \ket{+}_{x;2} $. Measuring again in $S_z^{(2)} $ gives
+				\begin{align*}
+					\mathcal{P}_{\pm,+} &=\bra{\psi } \left( \mathbbm{1}^{(1)} \otimes \ket{+} \bra{+}^{(2)}  \right) \ket{\psi } \\
+							    &=\braket{\psi }{\psi } \left| \braket{\psi }{+}_2 \right| ^2\\
+							    &=\left| \braket{+_x}{+}  \right| ^2\\
+							    &=\frac{1}{2} 
+				.\end{align*}
+				Multiplying through by the probability of measuring either $\ket{+}_1$ or $\ket{-}_1$ gives probabilities of $1/4$. Since probabilities sum to 1, we have $\mathcal{P}_{\pm,-}=1/2$, and by the same logic we have all other probabilities are $1/4$ as well.
+			\item Recall that the state here is the same as in problem 2. Therefore, the probabilities are the same as well.
+		\end{enumerate}
+\end{enumerate}
+\end{document}

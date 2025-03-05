@@ -1,0 +1,150 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../../../report.tex}
+\usepackage{titlepageBU}
+\title{Exam 1}
+\courseID{MA 542}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{itemize}
+	\item Clearly, the multiplicative identity of $\mathcal{P} (S)$ is $S$. For any $A\in \mathcal{P} (S)$, we have $A\subseteq S$, and thus $A \cap S =A$. The additive identity is also clearly the empty set. For any $A\in \mathcal{P} (S)$, we have
+		\[
+			A+\varnothing =(A \cup \varnothing )\setminus (A \cap \varnothing )=A \setminus \varnothing =A
+		.\]
+	\item Since $A+(-A)=0$, we have
+		\[
+			\left( A\cup (-A) \right) \setminus \left( A \cap (-A) \right) =\varnothing 
+		.\]
+		Note that letting $A=-A$ satisfies this requirement:
+		\[
+			A \cup A=A,\quad A \cap A=A,\quad \implies \quad \left( A \cup A \right) \setminus \left( A \cap A \right) =A\setminus A=\varnothing 
+		.\]
+		Therefore, $-A=A$.
+	\item Since $1_{\mathcal{P} (S)} =S$ and $S=-S$, we have $S+S=0$. Therefore, the additive order of the unital element is $2$, and $\operatorname{char} \mathcal{P} (S)=2$.
+	\item Note that the ring is clearly commutative for any $S$, as $A \cup B=B\cup A$ and likewise for the intersection, for any $A,B\subseteq S$. Moreover, $S\in \mathcal{P} (S)$ always exists, so the ring is always unital. Thus, the question of whether $\mathcal{P} (S)$ is an integral domain amounts to whether it has zero divisors.
+
+		If $S=\varnothing $, then $\mathcal{P} (S)=\left\{ \varnothing  \right\} $ is a singleton. It follows that $A,B\in \mathcal{P} (S)$ implies $A=B=S=0$. It follows that there exist no zero divisors, since there are no nonzero elements as $\mathcal{P} (S)$ is the trivial ring. Therefore, $\mathcal{P} (S)$ is an integral domain.
+
+		If $S=\left\{ * \right\} $ is a singleton, then $\mathcal{P} (S)=\left\{ \varnothing ,\left\{ * \right\}  \right\} $. The only nonzero element is $\left\{ * \right\} =S$, and since $S$ is the multiplicative identiy, we have $S\cdot S=S\neq 0$, and thus $S$ has no zero divisors. Therefore, $\mathcal{P} (S)$ is an integral domain.
+
+		If $\left| S \right| \geq 2$, then $S$ contains at least two distinct elements $\mathbf{1} ,\mathbf{2} \in S$. We then have $\left\{ \mathbf{1}  \right\} ,\left\{ \mathbf{2}  \right\} \in \mathcal{P} (S)$ are distinct sets. Since $\mathbf{1} \neq \mathbf{2} $, we have
+		\[
+			\left\{ \mathbf{1}  \right\} \cdot \left\{ \mathbf{2}  \right\} =\left\{ \mathbf{1}  \right\} \cap \left\{ \mathbf{2}  \right\} =\varnothing =0
+		.\]
+	Therefore, zero divisors exist, and $\mathcal{P} (S)$ is not an integral domain.	
+	Therefore, $\mathcal{P} (S)$ is an integral domain if and only if $S$ is empty or is a singleton.
+\end{itemize}
+\section*{Problem 2}
+Let $R$ be a finite commutative ring with unity, and let $\mathfrak{p} \subseteq R$ be a prime ideal. Since $\mathfrak{p} $ is prime, the quotient $R/\mathfrak{p} $ is an integral domain. Since $R/\mathfrak{p} $ is a quotient, there exists a natural projection $\pi : R \to R/\mathfrak{p} $ which is clearly surjective, as for any $r+\mathfrak{p} \in R/\mathfrak{p} $, there exists $r\in R$ such that $\pi (r)=r+\mathfrak{p} $. Since $\pi $ is surjective, the cardinalities must obey $\left| R/\mathfrak{p}  \right| \leq \left| R \right| $, and thus $R/\mathfrak{p} $ is finite. Since all finite integral domains are fields, we have that $R/\mathfrak{p} $ is a field. Since any quotient $R/I$ is a field if and only if $I$ is maximal in $R$, and $R/\mathfrak{p} $ is a field, we have that $\mathfrak{p} $ is maximal in $R$.
+\section*{Problem 3}
+Since $a^i\in R$ for all $i\in \left\{ 0, \ldots , n \right\} $, given that $a^0=1$, we have that
+\[
+	\sum_{i=0}^{n} a^i\in R
+.\]
+Consider the product of this element with the element $(1-a)$:
+\begin{align*}
+	(1-a)\left( \sum_{i=0}^{n} a^i \right) &=\sum_{i=0}^{n} a^i-a \sum_{i=0}^{n} a^i\\
+					       &=\sum_{i=0}^{n} a^i-\sum_{i=0}^{n} a^{i+1} \\
+					       &=\sum_{i=0}^{n} a^i-\sum_{i=1}^{n+1} a^i\\
+					       &=\left(1+\sum_{i=1}^{n} a^i\right)-\left( \sum_{i=1}^{n} a^i \right) -a^{n+1} \\
+					       &=1+\left( \sum_{i=1}^{n} a^i-\sum_{i=1}^{n} a^i \right) -a^{n+1} \\
+					       &=1-a^{n+1} \\
+					       &=1-a^{n} a\\
+					       &=1-0a\\
+					       &=1
+.\end{align*}
+\begin{align*}
+	\left( \sum_{i=0}^{n} a^i \right) (1-a)&=\sum_{i=0}^{n} a^i-\left( \sum_{i=0}^{n} a^i \right) a\\
+					       &=\sum_{i=0}^{n} a^i-\sum_{i=0}^{n} a^{i+1} \\
+					       &\text{(same math as above)} \\
+					       &=1
+.\end{align*}
+Therefore, the sum $\sum_{i=0}^{n} a^i$ is an inverse of $(1-a)$.
+\section*{Problem 4}
+Factorization into irreducibles in a UFD is unique up to associates and number of irreducibles. Note that since $2\in\mathbb{Z}_7[x]$ and $2(2x+5)\equiv 4x+3\mod{7}$, the polynomials $2x+5$ and $4x+3$ are associates. Additionally, $3,4,5\in\mathbb{Z}_7[x]$, and we have
+\[
+	3(2x+3)=6x+2,\quad 4(3x+2)=5x+1,\quad 5(3x+2)=x+3
+.\]
+Therefore, all elements on the left are associates of elements on the right. This means they are equivalent factorizations up to associates, and thus not in violation of the fact that $\mathbb{Z} _7[x]$ is a UFD.
+\section*{Problem 5}
+\begin{itemize}
+	\item Since $Q$ is prime, $ab\in Q$ implies that $a\in Q$ or $b\in Q$. Therefore, if $a,b\in R\setminus Q=S$, then $a,b\notin Q$, and thus $ab\notin Q$ by contrapositive. Since $ab\in R$, we have $ab\in S$.
+	\item Since $Q$ is a prime ideal, $Q\subsetneq R$. It follows that there exists $r\in S$, and since $0\in Q$ since $Q$ is an ideal and thus a subring, we have that $r\neq 0$. Since $R$ is a domain, there exists $1\in R$, and thus
+		\[
+			\frac{1}{x} \in R_Q
+		.\]
+		Therefore, $R_Q$ is nonempty. Note that it is also closed under subtraction: for all $x/y,a/b\in R_Q$,
+		\[
+			\frac{x}{y} -\frac{a}{b} =\frac{xb}{yb} -\frac{ya}{yb} =\frac{xb-ya}{yb} 
+		.\]
+		$xb-ya\in R$ obviously, since $R$ is a ring. Since $y,b\in S$, by part 1 we have that $yb\in S$. Therefore, the resulting fraction is an element of $R_Q$. This makes $R_Q$ into a group. Finally, $R_Q$ is closed under multiplication: for any $x/y,a/b\in I$,
+		\[
+			\frac{x}{y} \frac{a}{b} =\frac{xa}{yb} 
+		.\]
+		By the same logic, $xa\in R$ and $yb\in S$. It follows that $R_Q$ is a subring of $\operatorname{Frac} (R)$ by the subring test or whatever that theorem was called.
+	\item Since $Q$ is an ideal, it must be a subring, and thus $0\in Q$. It follows that for any $x\in S$, $0/x=0\in I$, and thus $I$ is nonempty. Now note that $I$ is closed under subtraction: for any $x/y,a/b\in I$,
+		\[
+			\frac{x}{y} -\frac{a}{b}=\frac{xb-ya}{yb} 
+		.\]
+		Since $y,b\in S$, by part 1 we have $yb\in S$. Since $x,a\in Q$, and since $Q$ is an ideal, we have $xb,ya\in Q$, and thus $xb-ya\in Q$ since it is a subring and thus closed under addition. Therefore, $I$ is closed under subtraction. Finally, let $x/y\in I$ and $a/b\in R_Q$. We have
+		\[
+			\frac{x}{y} \frac{a}{b} =\frac{xa}{yb} 
+		.\]
+		Since $y,b\in S$, we have $yb\in S$. Since $Q$ is an ideal and $x\in Q$, we have $xa\in Q$, and thus $xa/yb\in I$. Therefore, $I$ attains the absorbtion propery of ideals, and is automatically thus closed under multiplication. Therefore, $I$ is an ideal.
+	\item Let $I\subsetneq J$. Then there exists $ x/y\in J\setminus I$. Since $x/y\in R_Q\setminus I$, we have that $y\in S$ by definition of $R_Q$, and $x\in R\setminus Q=S$. Therefore, $x,y\in S$. Since $x\notin Q$, and $0\in Q$, we have $x\neq 0$. It follows that there exists $y/x\in R_Q$ since $x,y\in S\subseteq R$, and
+		\[
+			\frac{x}{y} \frac{y}{x} =1_{R_Q} 
+		.\]
+		Since $x/y\in J$, we have $1_{R_Q} \in J$. By logic that has been discussed at length previously, we have that $J=R_Q$. Therefore, $I$ is maximal.
+\end{itemize}
+\section*{Problem 6}
+\begin{itemize}
+	\item Clearly, the additive and multiplicative identities are $0 \mathbf{e} +0 \mathbf{g} +0 \mathbf{g} ^2$ and $1 \mathbf{e} +0 \mathbf{g} +0 \mathbf{g} ^2$, respectively. To show this, let $a \mathbf{e} +b \mathbf{g} +c \mathbf{g} ^2\in\mathbb{Z} [G]$. We have
+		\[
+			(a+0)\mathbf{e} +(b+0)\mathbf{g} +(c+0)\mathbf{g} ^2=a \mathbf{e} +b \mathbf{g} +c \mathbf{g} ^2
+		.\]
+		We also have 
+	\item Note that in any ring $R$, if $a$ is a unit and $\phi : R \to S$ is a ring homomorphism that preserves unity, then the images $\phi (a),\phi (a^{-1} )$ must also be units:
+		\[
+			\phi (a)\phi \left( a^{-1}  \right) =\phi \left( aa^{-1}  \right) =\phi (1_R)=\phi (1_S)\implies \phi \left( a^{-1}  \right) =\phi (a)^{-1} 
+		.\]
+	Note also that $\varepsilon $ preserves unity; that is,
+		\[
+			\varepsilon (1 \mathbf{e} )=1
+		.\]
+		Therefore, units in $\mathbb{Z} [G]$ must map to a unit in $\mathbb{Z} $. It is a well-known fact that the only units in $\mathbb{Z} $ are $\pm1$, so we must have $\varepsilon (a)=\pm 1$ if $a$ is to be a unit.
+	\item Let $\mathbf{a} \coloneqq a_0 \mathbf{e} +a_1 \mathbf{g} +a_2 \mathbf{g}^2$ and $\mathbf{b} \coloneqq b_0 \mathbf{e} +b_1 \mathbf{g} +b_2 \mathbf{g} ^2\in \mathbb{Z} [G]$. Then
+		\[
+			\varepsilon (\mathbf{a} )+\varepsilon (\mathbf{b} )=\left( a_0+a_1+a_2 \right) +(b_0+b_1+b_2)=(a_0+b_0)+(a_1+b_1)+(a_2+b_2)=\varepsilon (\mathbf{a} +\mathbf{b} )
+		.\]
+		\begin{align*}
+			\varepsilon (\mathbf{a} )\varepsilon (\mathbf{b} )&=\left( a_0+a_1+a_2 \right) \left( b_0+b_1+b_2 \right) \\
+									  &=(a_0b_0+a_0b_1+a_0b_2)+(a_1b_0+a_1b_1+a_2b_1)+(a_2b_0+a_2b_1+a_2b_2)\\
+									  &=(a_0b_0+a_1b_2+a_2b_1)+(a_0b_1+a_1b_0+a_2b_2)+(a_0b_2+a_1b_1+a_2b_0)\\
+									  &=\varepsilon (\mathbf{a} \mathbf{b} )
+		.\end{align*}
+		Therefore, $\varepsilon $ is a ring homomorphism.
+	\item Note that for all $n\in\mathbb{Z} $, $n \mathbf{e} \in \mathbb{Z} [G]$, and $\varepsilon (n \mathbf{e} )=n$. Therefore, $\varepsilon $ is surjective. By the first isomorphism theorem,
+		\[
+			\frac{\mathbb{Z} [G]}{\ker \varepsilon } \cong \im \varepsilon =\mathbb{Z} 
+		.\]
+	\item The polynomial in question is $f(x)=x^3-1$. This is fairly obvious, since we want $x^3=1$ in $\mathbb{Z} [G]$, so modding out by the relation gives the ring in question. The homomorphism $x\mapsto g$ also exists since $\mathbb{Z} [x]$ is free as a $\mathbb{Z} $-algebra.
+	\item 
+		\[
+			\left( \mathbf{e} +\mathbf{g} +\mathbf{g} ^2 \right) \left( \mathbf{e} -\mathbf{g}  \right) =(1-1)\mathbf{e} +(1-1)\mathbf{g} +(1-1)\mathbf{g} ^2=0
+		.\]
+		Since both of these are elements of $\mathbb{Z} [G]$, they are zero divisors, and thus $\mathbb{Z} [G]$ is not an integral domain, as it has zero divisors.
+	\item Note that there exists an inclusion map $D_3 \hookrightarrow \mathbb{Z} [D_3]$, given by mapping $x\mapsto 1x$. Note that $rs\neq sr$ in $D_3$ for $r$ the rotation and $s$ the reflection, as can be verified by explicit calculation.
+
+		I will prove a more general case, because I feel like it. Suppose that there exists any ideal $I\subseteq \mathbb{Z} [x]$ such that
+		\[
+			\frac{\mathbb{Z} [x]}{I} \cong \mathbb{Z} [D_3]
+		.\]
+		Suppose this isomorphism is given by a function $\phi $. Since $\mathbb{Z} [x]$ is commutative and since there exists a canonical projection $\mathbb{Z} \to \mathbb{Z} /I$ which is surjective, by properties of homomorphisms $\mathbb{Z} [x]/I$ is commutative. Since $\phi $ is an isomorphism, there exist unique $a,b\in \mathbb{Z} [x]/I$ such that $\phi (a)=r$, $\phi (b)=s$. We have
+		\[
+			rs=\phi (a)\phi (b)=\phi (ab)=\phi (ba)=\phi (b)\phi (a)=sr
+		.\]
+		This contradicts the fact that $rs\neq sr$. Therefore, there exists no quotient of $\mathbb{Z} [x]$ satisfying this isomorphism. This includes quotients by principal ideals.
+\end{itemize}
+\end{document}
