@@ -1,0 +1,231 @@
+\section{(Un)necssary Categorical Preliminaries}
+\subsection{Undesirable Features of Otherwise Reasonable Categories}
+We have encountered categories that have annoying features such as
+\begin{itemize}
+	\item A category may not have initial or final objects, and they may not be the same object.
+	\item Products and coproducts may not exist (for example, $\mathsf{Fld} $).
+	\item Kernels and cokernels may not exist for all morphisms.
+	\item Even if kernels and cokernels exist, monomorphisms need not be kernels, and epimorphisms need not be cokernels.
+	\item A morphism may be mono and epi without being an isomorphism.
+\end{itemize}
+Homological algebra deals almost entirely with kernels and cokernels, as it deals with complexes and exactness. We have already used this language in the category $\Rmod{R} $, in which none of these annoying properties were true. We can generalize these notions.
+
+\subsection{Additive Categories}
+\begin{definition}[Additive]\label{dfn:9.1}
+	A category $\mathsf{A} $ is \emph{additive} if it has a zero-object (an object that is both initial and final), finite products and coproducts, and $\Hom_{\mathsf{A} }(A, B) $ has an abelian group structure for all $A,B\in \Obj(\mathsf{A} ) $ such that the composition maps are bilinear. A functor $\mathscr{F} : \mathsf{A}  \to \mathsf{B} $ between additive categories is additive if it preserves the abelian group structure of the Hom-sets.
+\end{definition}
+
+Since Hom-sets are abelian groups, they have identity objects. We refer to these as zero-morphisms, denoted by $0$. We can also define addition and subtraction of morphisms, and we can define morphism equality: $\alpha =\beta $ if and only if $\alpha -\beta =0$. Using this language, we can define kernels and cokernels. In our previous definitions, we defined these as an object of our category, but the information in a kernel or cokernel is really carried by the injections and projections, respectively, that they carry. We thus give the definition for an arbitrary category as follows.
+
+\begin{definition}[Kernel/Cokernel]\label{dfn:9.2}
+	Let $\phi : A \to B$ be a morphism in an additive category $\mathsf{A} $. A morphism $\iota : K \to A$ is a \emph{kernel} of $\phi $ if $\phi \circ \iota =0$ and for all morphisms $\zeta : Z \to A$ such that $\phi \circ \zeta =0$, there is a unique $\widetilde{\zeta } $ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		Z\arrow[rr, bend left, "0"]\arrow[r, "\zeta "']\arrow[dr, dashed, " \widetilde{\zeta } "']&A\arrow[r, "\phi "']&B\\							&K\arrow[u, "\iota "]
+	\end{tikzcd}\]
+	commutes. A morphism $\pi : B \to C$ is a \emph{cokernel} of $\phi $ if $\pi \circ \phi =0$ and for all morphisms $\beta : B \to Z$, there exists a unique $\widetilde{\beta } : C \to Z$ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&C\arrow[dr, dashed, " \widetilde{\beta } "]\\
+		A\arrow[r, "\phi "]\arrow[rr, bend right, "0"]&B\arrow[u, "\pi "]\arrow[r, "\beta "]&Z
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+More succinctly, if $\phi \circ \zeta =0$, then $\zeta $ factors uniquely through $\ker \phi $, and if $\beta \circ \phi =0$, then $\beta $ factors uniquely through $\coker \phi $.
+
+It is also prudent to recall the definitions of monomorphism and epimorphism from chapter 1, all that time ago.
+\begin{definition}[Mono/Epi]\label{dfn:9.3}
+	A morphism $\phi A \to B$ is a monomorphism if for all $\zeta_1,\zeta _2: Z \to A$, if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		Z\arrow[r, "\zeta_1", shift left]\arrow[r, "\zeta _2"', shift right]&A\arrow[r, "\phi "]&B
+	\end{tikzcd}\]
+	commutes, then $\zeta _1=\zeta _2$. It is an epimorphism if for all $\beta _1\beta _2: B \to Z$, if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[r, "\phi "]&B\arrow[r, shift left, "\beta _1"]\arrow[r, shift right, "\beta _2"']&Z
+	\end{tikzcd}\]
+	commutes, then $\beta _1=\beta _2$.
+\end{definition}
+
+We can simplify this somewhat in abelian categories.
+\begin{lemma}\label{lma:9.1}
+	A morphism $\phi : A \to B$ in an additive category is a monomorphism if and only if for all $\zeta : Z \to A$,
+	\[
+		\phi \circ \zeta =0\implies \zeta =0
+	.\]
+	$\phi $ is an epimorphism if for all $\beta : B \to Z$,
+	\[
+		\beta \circ \phi =0\implies \beta =0
+	.\]
+	
+\end{lemma}
+\begin{proof}
+	We will prove this for monomorphisms, since the proof for epimorphisms is equivalent. First, let $\phi $ be mono. Since composition maps are bilinear, $\phi \circ -$ is linear, and thus a group homomorphism. Thus, $\phi \circ 0=0$, since identities map to identities. We then have $\phi \circ \zeta =\phi \circ 0$, and thus $\zeta =0$.
+
+	Now for the converse, let $\phi \circ \zeta =0$ imply $\zeta =0$ for all $\zeta : Z \to A$. Let $\alpha ,\beta : Z \to A$, and suppose that $\phi \circ \alpha =\phi \circ \beta $. Then $\phi \circ \alpha -\phi \circ \beta =0$, and since $\phi \circ -$ is bilinear, we have
+	\[
+		\phi \circ (\alpha -\beta )=\phi \circ \alpha -\phi \circ \beta 
+	.\]
+	It follows that $\alpha -\beta =0$, and thus $\alpha =\beta $.
+\end{proof}
+
+Moreover, we can show that kernels are monomorphisms, and cokernels are epimorphisms.
+
+\begin{lemma}\label{lma:9.2}
+	In an additive category, kernels are monomorphisms and cokernels are epimorphisms.
+\end{lemma}
+\begin{proof}
+	I will prove the statement for monomorphisms, since the statement for epimorphisms is the same as the statement for monomorphisms in the opposite category. This category is naturally an additive category as well, so it suffices to show only one side of the proof.
+
+	Let $\phi : A \to B$ be a morphism in an additive category, and let $\ker \phi : K \to B$ exist. If $\gamma : Z \to A$ is a morphism such that $\ker \phi \circ \gamma =0$, then $\phi \circ (\ker \phi \circ \gamma )=\phi \circ 0=0$, and thus $\gamma $ factors uniquely through $\ker \phi $:
+	\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+		Z\arrow[dr, bend left, "\gamma "]\arrow[dr, bend right, dashed]\arrow[r, "\ker \phi \circ \gamma =0"]&A\arrow[r, "\phi "]&B\\
+									       &K\arrow[u, "\ker \phi "']
+	\end{tikzcd}\]
+We thus have $\gamma \circ \ker \phi =0$, and we know that $0\circ \ker \phi =0$. Therefore, $\gamma =0$ by uniqueness, and $\phi $ is a monomorphism by the previous lemma.
+\end{proof}
+
+Kernels and cokernels may not exist. However, if a morphism has kernels and cokernels, then we can recover expected information from them. We can also guarentee the existance of some of them.
+
+\begin{lemma}\label{lma:9.3}
+	Let $\phi : A \to B$ be a morphism in an additive category. Then $\phi $ is a monomorphism if and only if $0\to A$ is its kernel, and $\phi$ is an epimorphism if and only if $B\to 0$ is its cokernel.
+\end{lemma}
+\begin{proof}
+	I will prove the statement for cokernels this time. Let $\phi : A \to B$ be an epimorphism, and let $\beta : B \to Z$ such that $\beta \circ \phi =0$. It follows that $\beta =0$ by lemma \ref{lma:9.1}, and thus
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[rr, bend left, "0"]\arrow[r, "\phi "']&B\arrow[r, "\beta "']\arrow[d, "0"]&Z\\
+				   &0\arrow[ur, dashed, "0"']
+	\end{tikzcd}\]
+	commutes for all $\beta $. Moreover, since $0: 0 \to Z$ is unique since $0$ is initial, we have that $0: B \to 0$ is a cokernel of $\phi $.
+
+	For the converse, suppose that $\coker \phi =0: B \to 0$. It follows that for all $\beta : B \to Z$ such that $\beta \circ \phi =0$, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[r, "\phi "']\arrow[rr, bend left,  "0"]&B\arrow[d, "0"]\arrow[r, "\beta "']&C\\
+							       &0\arrow[ur, dashed, "0"']
+	\end{tikzcd}\]
+	commutes, and thus $\beta =0\circ 0=0$. By lemma \ref{lma:9.1}, $\phi $ is an epimorphism.
+\end{proof}
+
+We can thus begin discussing exactness of sequences in the context of these modules, such as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r]&B,&A\arrow[r]&B\arrow[r]&0
+\end{tikzcd}\]
+for mono and epi, respectively. However, we cannot generalize exactness of sequences unless kernels and cokernels exist in general.
+
+We generally denote monomorphisms by $\rightarrowtail$ and epimorphisms by $\twoheadrightarrow$.
+
+\subsection{Abelian Categories}
+Abelian categories are obtained by simply taking the features we desire from additive categories, and explicity demanding them.
+\begin{definition}[Abelian Category]\label{dfn:9.4}
+	An additive category $\mathsf{A} $ is \emph{abelian} if kernels and cokernels exist for all morphisms in $\mathsf{A} $, every monomorphism is a kernel, and every epimorphism is a cokernel.
+\end{definition}
+
+We call these categories abelian because the most basic prototype is $\mathsf{Ab} $, however there is nothing particularly commutative about these categories. We have also seen that $\Rmod{R} $ is an abelian category. Moreover, by lemma \ref{lma:9.2}, we have found that in abelian categories, a morphism is mono if and only if it is a kernel, and it is epi if and only if it is a cokernel. We can thus obtain an intuitive understanding of monomorphisms $A\rightarrowtail B$ as identifying $A$ as a subobject of $B$, and conversely epimorphisms $A\twoheadrightarrow B$ as quotients; if $\phi : A \to B$ is a monomorphism, then $B/A$ can denote the target of $\coker \phi $.
+
+\begin{lemma}\label{lma:9.4}
+	In an abelian category $\mathsf{A} $, every kernel is the kernel of its cokernel, and every cokernel is the cokernel of its kernel.
+\end{lemma}
+\begin{proof}
+	First, let $\phi : A \to B$ be the kernel of a morphism $f:B\to Z$. Since $\mathsf{A} $ is abelian, there exists a cokernel $\pi : Z \to K$ of $\phi $, and since the composition $f\circ \phi :A\to B\to Z$ is $0$, the map $f:B\to Z$ factors uniquely through $\coker \phi $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&K\arrow[dr, dashed]\\
+		A\arrow[r, "\phi "]\arrow[rr, bend right, "0"]&B\arrow[u, "\pi "]\arrow[r, "f"]&Z
+	\end{tikzcd}\]
+	Now let $g : C \to A$ such that $g\circ \pi=0$. Then 
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&&K\arrow[dr, dashed]\\
+		A\arrow[rr, "\phi "]&&B\arrow[ur, "\pi "]\arrow[rr, "f"]&&Z\\
+				    &C\arrow[ur, "g"]
+	\end{tikzcd}\]
+	commutes, and thus $f\circ g=0$:
+	
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&&K\arrow[dr, dashed]\\
+		A\arrow[rr, "\phi "]&&B\arrow[ur, "\pi "]\arrow[rr, "f"]&&Z\\
+				    &C\arrow[ur, "g"]\arrow[urrr, dashed, bend right, "0"]
+	\end{tikzcd}\]
+	It follows that $g$ factors uniquely through $\ker f=\phi $, but we also have that $g$ factors uniquely through $\ker \pi $ by definition. Therefore, $\ker f$ satisfies the universal property for $\ker \pi $, and thus $\ker \coker \ker f=\ker f$.
+\end{proof}
+
+By these lemmas, we can recharacterize the definition of an abelian category $\mathsf{A} $ as simply an additive category with kernels and cokernels, such that
+\begin{itemize}
+	\item If $\phi : A \to B$ has $\ker \phi =0$, then $\phi=\ker \coker \phi $;
+	\item If $\psi : B \to C$ has $\coker \psi =0$, then $\psi=\coker \ker \psi $.
+\end{itemize}
+This definition immediately characterizes when a short sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r, "\phi "]&B\arrow[r, "\psi "]&C\arrow[r]&0
+\end{tikzcd}\]
+is exact. We must have $\psi =\coker \phi $, and $\ker \psi =\phi $. Either one of these is equivalent, since $\phi $ must be mono and $\psi $ must be epi, and thus if $\psi =\coker \phi $, then
+\[
+	\ker \psi =\ker \coker \phi =\phi 
+,\]
+and vice versa.
+
+We can also consider exact sequences
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r, two heads, tail, "\phi "]&B\arrow[r]&0.
+\end{tikzcd}\]
+For this to be exact, we must have $\ker \phi =0$ and $\coker \phi =0$, and thus $\phi $ is both mono and epi. In abelian categories, this implies $\phi $ is an isomorphism.
+
+\begin{lemma}\label{lma:9.5}
+	Let $\phi : A \to B$ be a monomorphism and an epimorphism. Then $\phi $ is an isomorphism.
+\end{lemma}
+\begin{proof}
+	We have
+	\begin{itemize}
+		\item $\ker \phi $ is $0\to A$;
+		\item $\coker \phi $ is $B\to 0$;
+		\item $\coker  0\to A$ is $\phi $;
+		\item $\ker B\to 0$ is $\phi $
+	\end{itemize}
+	by lemmas \ref{lma:9.3} and \ref{lma:9.4}. We then have
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&B\arrow[d, "1_B"]\\
+		0\arrow[r]&A\arrow[r, "\phi "]&B\arrow[r]&0
+	\end{tikzcd}\]
+	commutes, since clearly $B\to B\to 0$ is $0$. It thus factors uniquely through $\ker B\to 0$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&B\arrow[d, "1_B"]\arrow[dl, dashed, "\psi "]\\
+		0\arrow[r]&A\arrow[r, "\phi "']&B\arrow[r]&0
+	\end{tikzcd}\]
+	Since this diagram commutes, $\phi \circ \psi =1_B$, and thus $\phi $ has a right-inverse.
+
+	Now for the right inverse, consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&A\arrow[d, "1_A"]\arrow[r, "\phi"]&B\arrow[r]&0\\
+			  &A
+	\end{tikzcd}\]
+	Since $1_A \circ 0=0$ clearly, $1_A$ factors uniquely through $\coker 0\to A=\phi $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&A\arrow[d, "1_A"]\arrow[r, "\phi "]&\arrow[dl, dashed, "\eta  "]B\arrow[r]&0\\
+			  &A
+	\end{tikzcd}\]
+	Since this diagram commutes, we have $\eta  \circ \phi =1_A$, and thus $\phi $ has a left-inverse. By a proof done in chapter 1, it follows that this inverse is a unique two-sided inverse $\eta =\psi $, and thus $\phi $ is an isomorphism.
+\end{proof}
+
+\subsection{Products, Coproducts, and Direct Sums}
+In an abelian category $\mathsf{A} $, we will denote the product of $A$ and $B$ by $A\times B$, and we will denote the coproduct $A\amalg B$. These exist, since $\mathsf{A} $ is additive, and thus contains finite products and coproducts by definition. We will see later that we can substitute the notation $A\oplus B$ for both of these.
+
+The presence of products, coproducts, kernels, and cokernels allows us to consider fairly many important constructions. For example, pullbacks (also fibered products) exist in abelian categories. If
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&B\arrow[d, "\psi "]\\
+	A\arrow[r, "\phi "]&C
+\end{tikzcd}\]
+is a diagram in $\mathsf{A} $, then we can define the fibered product of $A$ and $B$ over $C$ as an object $A\times _C B$ that is final with respect to commutative diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\times _CB\arrow[r, "\psi '"]\arrow[d, "\phi '"']&B\arrow[d, "\psi "]\\
+	A\arrow[r, "\phi "']&C
+\end{tikzcd}\]
+That is,
+\[\begin{tikzcd}[row sep = 3em, column sep = 2em]
+	P\arrow[dr, dashed]\arrow[drr, bend left]\arrow[ddr, bend right]\\
+	&A\times _CB\arrow[r]\arrow[d]&B\arrow[d]\\
+	&A\arrow[r]&C
+\end{tikzcd}\]
+The pullback may be constructed explicitly as follows. Note that since $A\times B$ exists, there exist canonical projections $\rho_A,\rho _B : A\times B \to A,B$ respectively. We thus have compositions
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\times B\arrow[r, "\rho _A"]&A\arrow[r, "\phi "]&C,
+\end{tikzcd}\]
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\times B\arrow[r, "\rho _B"]&B\arrow[r, "\psi "]&C.
+\end{tikzcd}\]
+We will now show that we can construct a fibered product using the kernel of the difference of these morphisms. 

@@ -1,0 +1,100 @@
+\lecture{11}{Thu 06 Mar 2025 11:05}{Connected}
+\begin{lemma}\label{lma:3.2}
+	Let $X$ be a topological space. If $\forall x\in X$,
+	\begin{itemize}
+		\item $\left\{ x \right\} $ is open;
+		\item For all $Y\subseteq X$ with $x\notin Y$, there exist disjoint open sets $U,V$ such that $x\in U$, $Y\subseteq V$;
+		\item $X$ has a countable basis.
+	\end{itemize}
+	THen $X$ is \emph{normal}, meaning for any two closed disjoint subsets $A,B\subseteq X$, there exist disjoint open neighborhoods $U,V$ with $A\subseteq U$, $B\subseteq V$.
+\end{lemma}
+\begin{proof}
+	Let $A,B\subseteq X$ be closed. Fix $x\in A$. By assumption, there exist $U_x,V$ disjoint open sets containing $x$ and $B$. Now consider a collection $\left\{ U_x \right\}_{x\in A} $, and note that
+	\[
+		A\subseteq \bigcup_{x\in A} U_x \subseteq B^{c} 
+	.\]
+	This gives us an open neighborhood of $A$. Moreover, there exists a countable basis $\left\{ B_i \right\}_{i\in \mathbb{N} }$. We can replace each $U_x$ with a collection of basis elements, meaning there exists $I\subseteq \mathbb{N} $ and a collection $\left\{ B_i \right\}_{i\in I} $ such that the union above is equal to
+	\[
+		A\subseteq \bigcup_{i\in I} B_i
+	.\]
+	We can do the same procedure; that is, there exists another collection $\left\{ B_j \right\}_{j\in J} $ with
+	\[
+		B\subseteq \bigcup_{j\in J} B_j \subseteq A^{c} 
+	.\]
+	We now have two neighborhoods of $A$ and $B$ respectively. Let $\widetilde{U} $ be defined as the union
+	\[
+		\widetilde{U} \coloneqq \bigcup_{n\in\mathbb{N} } \left( B_n\setminus \bigcup_{j\in J} \overline{B} _j \right) 
+	.\]
+	Similarly, defined
+	\[
+		\widetilde{V} \coloneqq \bigcup_{n\in\mathbb{N} } \left( B_n\setminus \bigcup_{i\in I} \overline{B} _i \right) 
+	.\]
+	In this case, $B_n$ ranges over all basis elements. These are open, because setminus is an intersection with the compliment, which is open in this case, since this is a finite union of closed sets. We still have $A\subseteq \widetilde{U} $, since we are removing everything in the compliment of $A$. Similarly, $B\subseteq \widetilde{V} $. These sets are fairly obviously disjoint, so this concludes the proof of the Metrization theroem.
+\end{proof}
+
+\chapter{Connectedness and Compactness}
+\begin{definition}[Connected]\label{dfn:4.1}
+	Let $X$ be a topological space. We say $X$ is \emph{connected} if it does not have disjoint proper nonempty open sets $U,V\subsetneq X$ such that $U\cup V=X$.
+
+	If $X$ is not connected, we say $X$ is \emph{disconnected}. We say a subset $A\subseteq X$ is (dis)connected if it is (dis)connected with respect to the subspace topology.
+\end{definition}
+
+For example, $\mathbb{R} $ with the finite compliment topology is obviously connected, since there exist no disjoint nonempty open sets.
+
+\begin{proposition}\label{prp:4.1}
+	Let $X$ be connected, and let $A\subseteq X$ be nonempty, open, and closed. Then $A=X$.
+\end{proposition}
+\begin{proof}
+	Since $A$ is open and closed, $A^{c} $ is open. Note that $A\cup A^{c} =X$ is a union of open sets. However, since $X$ is connected, it follows that either $A$ or $A^{c} $ is not a proper subset of $X$ by contrapositive, and thus $A=X$ since $A\neq \varnothing $.
+\end{proof}
+\begin{theorem}\label{thm:4.1}
+	Let $X$be connected, and let $f : X \to Y$ be continuous. Then $f(X)$ is connected.
+\end{theorem}
+\begin{proof}
+	If there exist $U,V\subseteq Y$ disjoint open sets such that $U \cup V=f(X)$, then the preimage $f^{-1} (U),f^{-1} (V)$ are disjoint and open in $X$, and
+	\[
+		f^{-1} (U)\cup f^{-1} (V)=f^{-1} (U \cup V)=f^{-1} (f(X))=X
+	.\]
+	Since $X$ is connected, one must be the entirety of $X$. Without loss of generality, let $f^{-1} (U)=X$. Then $f(X)\subseteq U$, and $V=\varnothing $. Therefore, there do not exist \emph{proper empty} open sets $U,V\subseteq Y$ such that $U\cup V=f(X)$, and we are done.
+\end{proof}
+\begin{theorem}\label{thm:4.2}
+	Let $C\subseteq X$ with $C$ connected, and let $C\subseteq A\subseteq \overline{C} $. Then $A$ is connected. In particular, if $A$ is connected, then $\overline{A} $ is connected.
+\end{theorem}
+\begin{proof}
+	Let there exist disjoint $U_1,U_2$ open in $A$ such that $U_1 \cup U_2=A$.Then $C\subseteq U_1 \cup U_2 \subseteq \overline{C} $. Then either $C\subseteq U_1$ or $C\subseteq U_2$. Without loss of generality, let $C\subseteq U_1$. We want to show $A=U_1$. The closue is simply $C\cup C'$, for $C'$ the set of limit points of $C$, and thus $x\in A$ implies $x\in C$ or $x\in C'$. It suffices to show $C'\subseteq U$. Then for any $x\in C'$, for any open set $U_x$ of $x$, there exists $y$ such that $y\in C \cap U_1$. Therefore, such a $y$ exists with $y\in U_1 \cap U_2$, a contradiction. (idk)
+\end{proof}
+\begin{theorem}\label{thm:4.3}
+	Let $\left\{ C_{\alpha } \right\}_{\alpha \in A} $ be a collection of connected subsets of a topological space $X$ such that
+	\[
+		\bigcap_{\alpha \in A} C_\alpha \neq \varnothing 
+	.\]
+	Then
+	\[
+		\bigcup_{\alpha \in A} C_\alpha 
+	\]
+	is connected.
+\end{theorem}
+\begin{proof}
+	Suppose
+	\[
+		\bigcup_{\alpha \in A} C_\alpha =U_1 \cup U_2
+	\]
+	for $U_1,U_2$ open in $X$. Then for all $\alpha \in A$,
+	\[
+		C_\alpha \subseteq \bigcup_{\alpha \in A} C_\alpha \subseteq U_1 \cup U_2
+	.\]
+	Since
+	\[
+		C_\alpha =\left( C_\alpha \cap U_1 \right) \cup \left( C_\alpha \cap U_2 \right) 
+	,\]
+	and since $C_\alpha $ is connected, then either $C_\alpha \subseteq U_1$ or $C_\alpha \subseteq U_2$. WLOG, let $C_1 \subseteq U_1$. Since $\cap C_\alpha \neq \varnothing $, we have that
+	\[
+		\bigcap_{\alpha \in A} C_\alpha \subseteq C_\alpha \subseteq U_1
+	.\]
+	This can be done similarly for all $\alpha \in A$. If $U_2$ does not contain all $C_\alpha $, then there must be some $\alpha '$ with $C_{\alpha '} \subseteq  U_2$. However, since
+	\[
+		\bigcap_{\alpha \in A} C_\alpha \neq \varnothing 
+	,\]
+	there must exist $x\in C_1 \cap C_2$, a contradiction.
+\end{proof}
+

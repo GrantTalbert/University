@@ -1,0 +1,213 @@
+\section{Hom and Duals}
+\subsection{Adjunction Again}
+Most of what we know about the tensor product follows from the fact that it is left-adjoint. However, by the same logic $\Hom(X, -) $ is right-adjoint, so we should be able to glean a lot of information from it as well. However, it's more interesting to consider a contravariant flavor of this functor.
+\begin{proposition}\label{prp:8.5}
+	For every $R$-module $N$, the functor $h_X=\Hom_{R}(-, N) $ is right-adjoint to itself, when viewed as a contravariant functor in the two equivalent ways
+	\[
+		h_N : \Rmod{R} ^{op}  \to \Rmod{R} 
+	,\]
+	\[
+		h_N^{op}  : \Rmod{R}  \to \Rmod{R} ^{op} 
+	.\]
+\end{proposition}
+\begin{proof}
+	Let $L,M,N$ be $R$-modules. Note that $R$-bilinear maps $\phi : L\times M \to N$ can be identified with $R$-linear maps $L\to \Hom_{R}(M, N) $ by
+	\[
+		\ell \mapsto \phi (\ell ,-)
+	.\]
+	Equivalently, they can be identified with $R$-linear maps $H\to \Hom_{R}(L, N) $. It is fairly immediate to verify that from this, we have a canonical homomorphism
+	\[
+		\Hom_{R}(L, \Hom_{R}(M, N) ) \cong \Hom_{R}(M, \Hom_{R}(L, N) ) 
+	.\]
+	This is equivalent to saying that
+	\[
+		\Hom_{\Rmod{R} }(L, \Hom_{\Rmod{R} }(M, N) ) \cong \Hom_{\Rmod{R} ^{op} }(\Hom_{\Rmod{R} }(L, N) , M) 
+	.\]
+	note that $h_N(X)=\Hom_{R}(X, N) $ and $h_N^{op} \left(X \right) =\Hom_{\Rmod{R} ^{op} }(X, N) $. This concludes the proof.
+\end{proof}
+We have now established that $\Hom_{R}(N, -) $ is right-adjoint (to tensor) and $\Hom_{R}(-, N) $ is right-adjoint (to itself), and thus they both commute with limits. However, since products are limits in $\Rmod{R} $ and coproducts are colimits in $\Rmod{R}$, and thus limits in $\Rmod{R} ^{op} $, it follows that
+\[
+	\Hom_{R}\left( N,\prod_{i\in I} M_i \right) \cong \prod_{i\in I} \Hom_{R}(N, M_i) ,
+\]
+\[
+	\Hom_{R}\left( \bigoplus_{i\in I}M_i,N \right) \cong \prod_{i\in I} \Hom_{R}(M_i,N) 
+.\]
+This means of course that $\Hom_{R}(-, N) $ and $\Hom_{R}(N, -) $ are left-exact: if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\arrow[r]&B\arrow[r]&C\arrow[r]&0
+\end{tikzcd}\]
+is exact, then
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\Hom_{R}(A, N) \arrow[r]&\Hom_{R}(B, N) \arrow[r]&\Hom_{R}(C, N) 
+\end{tikzcd}\]
+is exact. The reversal of the arrows in the first diagram is due to the contravariant nature of $\Hom_{R}(-, N) $, since this diagram in $\Rmod{R} ^{op} $ looks like
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A&B\arrow[l]&C\arrow[l]&0\arrow[l].
+\end{tikzcd}\]
+Moreover, if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r]&B\arrow[r]&C
+\end{tikzcd}\]
+is exact, then
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\Hom_{R}(N, A) \arrow[r]&\Hom_{R}(N, B) \arrow[r]&\Hom_{R}(N, C) 
+\end{tikzcd}\]
+is exact.
+\subsection{Dual Modules}
+\begin{definition}[Dual Module]\label{dfn:8.20}
+	Let $M$ be an $R$-module. The dual $M^{\vee} $ of $M$ is the $R$-module $\Hom_{R}(M, R) $.
+\end{definition}
+\begin{proposition}\label{prp:8.6}
+	Let $M$ be an $R$-module, and let $F$ be a free $R$-module of finite rank. Then
+	\[
+		\Hom_{R}(M, F) \cong M^{\vee} \otimes _RF
+	.\]
+\end{proposition}
+\begin{proof}
+	By hypothesis, $F\cong R^{\oplus n} $, and thus
+	\begin{align*}
+		\Hom_{R}(M, F) &\cong \Hom_{R}(M, R^{\oplus n} ) \\
+			       &\cong \Hom_{R}(M, R) ^{\oplus n} \\
+			       &\cong \left( \Hom_{R}(M, R) \otimes_R R \right) ^{\oplus n} \\
+			       &\cong \Hom_{R}(M, R) \otimes_R R^{\oplus n} \\
+			       &\cong \Hom_{R}(M, R) \otimes_R F\\
+			       &\cong M^{\vee} \otimes_R F
+	.\end{align*}
+	The second step follows from commutativity of $\Hom$ with limits (and finite products are coproducts), and the fourth step follows since $M\otimes_R N\cong N\otimes_R M$, and since $-\otimes_R N$ is left-adjoint, and thus so is $N\otimes_R -$.
+\end{proof}
+
+There is also a natural ``evaluation map'' $\varepsilon : M^{\vee} \otimes _RN \to \Hom_{R}(M, N) $ given by $f\otimes n\mapsto f(-)n$. This is seen in the exercises to in fact be an isomorphism if $N$ is free and of finite rank.
+
+\subsection{Duals of Free Modules}
+The duality functor $M\mapsto M^{\vee} $ is a special case of the contravariant functor $h_X=\Hom_{R}(-, X) $ for $X=R$. Hence, it is contravariant, and commutes with limits.
+\begin{lemma}\label{lma:8.9}
+	Let $\left\{ M_i \right\}_{i\in I} $ be a collection of $R$-modules. Then
+	\[
+		\left( \bigoplus_{i\in I}M_i \right)^{\vee} \cong \prod_{i\in I} M_i^{\vee} 
+	.\]
+\end{lemma}
+\begin{proof}
+	By proposition \ref{prp:8.5}, $h_R : \Rmod{R} ^{op}  \to \Rmod{R} $ is right-adjoint, and thus commutes with limits.
+\end{proof}
+This classifies the dual for all free modules.
+\begin{corollary}\label{cor:8.6}
+	Let $R$ be a commutative ring. Then
+	\[
+		\left( R^{\oplus S}  \right) ^{\vee} \cong R^{S} 
+	.\]
+	In particular, $(R^n)^{\vee} \cong R^n$.
+\end{corollary}
+\begin{proof}
+	We have $\Hom_{R}(R^{\oplus S} , R) \cong \Hom_{R}(R, R)^S$ by lemma \ref{lma:8.9}. It's also easily shown that $\End_{R}(R) \cong R$, as $R\cong F^R(1)$, and thus an endomorphism of $R$ simply amounts to a choice of some $r\in R$ to map the single basis element to.
+\end{proof}
+\begin{remark}
+	If $S$ is infinite, then $R^S$ is the set of all functions $S\to R$, which is \emph{much} larger than $R^{\oplus S} $, since this retains only functions that are 0 for all but finitely many $s\in S$. Moreover, $S$ is not determined by the isomorphism class of $R^{\oplus S} $, but only the cardinality of $S$ is determined. Characterising this isomorphism in fact requires knowledge of $S$, and is basis-dependent. Thus, it is not canonical. A finite-rank free module is thus isomorphic to its dual, but not canonically.
+\end{remark}
+
+\begin{definition}[Dual Basis]\label{dfn:8.14}
+	Let $\left\{ \mathbf{e} _1, \ldots, \mathbf{e}_n  \right\} $ be the standard basis of $R^n$. The dual basis of $\left( R^n \right)^{\vee} \cong R^n$ is given by $\left\{ \mathbf{e}'_1, \ldots , \mathbf{e}_n' \right\} $, where
+	\[
+		\mathbf{e}_i'(\mathbf{e}_j) = \delta_{ij} 
+	,\]
+	for $\delta_{ij} $ the Kroenecker delta.
+\end{definition}
+
+This basis induces the isomorphism $\left( R^n \right)^{\vee} \cong R^n$ extremely obviously. The non-canonical nature of this isomorphism will be recovered into a canonical one by applying duality twice.
+
+\subsection{Duality and Exactness}
+We know already that duality is left-exact since Hom is left exact; that is, if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0&A\arrow[l]&B\arrow[l]&C\arrow[l]
+\end{tikzcd}\]
+is exact in $\Rmod{R} ^{op} $, then
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A^{\vee} \arrow[r]&B^{\vee} \arrow[r]&C^{\vee} 
+\end{tikzcd}\]
+is exact. For example, if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\mathbb{Z} \arrow[r, "2"]&\mathbb{Z} \arrow[r, "\pi "]&\mathbb{Z} /2\mathbb{Z} \arrow[r]&0
+\end{tikzcd}\]
+is an exact sequence of abelian groups, where $2: \mathbb{Z}  \to \mathbb{Z} $ is multiplication by 2, then the dual induces an exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&0\arrow[r]&\mathbb{Z} ^{\vee} \arrow[r, "\gamma "]&\mathbb{Z} ^{\vee} \arrow[r]&0
+\end{tikzcd}\]
+is exact, where $\gamma $ is the dual function of multiplication by 2. Note that the dual of $\mathbb{Z} /2\mathbb{Z} $ is 0 since $\Hom_{\mathbb{Z} }(\mathbb{Z} /2\mathbb{Z} , \mathbb{Z} ) =0$. This shows that duality is not in general fully exact, since $\mathbb{Z} ^{\vee} \to 0$ is not exact. Note that $\gamma $ is the function defined such that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathbb{Z} \arrow[r, "2"]\arrow[dr, "\gamma (f)"']&\mathbb{Z} \arrow[d, "f"]\\
+							 &\mathbb{Z} 
+\end{tikzcd}\]
+commutes for all $f\in \Hom_{\mathbb{Z} }(\mathbb{Z} , \mathbb{Z} ) $. However, we can make precise some situations in which duality is exact.
+\begin{proposition}\label{prp:8.7}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&M\arrow[r, "\mu "]&N\arrow[r, "\nu "]&P\arrow[r]&0
+	\end{tikzcd}\]
+	be an exact sequence of $R$-modules, where $P$ is free. Then the induced sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&P\arrow[r, "\nu^{\vee} "]&N\arrow[r, "\mu ^{\vee} "]&M\arrow[r]&0
+	\end{tikzcd}\]
+	is exact. In particular, duality is exact on vector spaces.
+\end{proposition}
+\begin{proof}
+	Since duality is left-exact, we have that the sequence is exact at $P$ and $N$ for free. It suffices to show then that $\mu ^{\vee} $ is surjective. That is, we wish to show every $R$-linear map $f : M \to R$ can be extended to an $R$-linear map $g : N \to R$ such that $f=g\mu $; that is, $f=\mu ^{\vee} (g)$.
+
+	Since $P$ is free, there exists a set $S$ such that $P \cong R^{\oplus S} $. Any choice for preimages of the standard basis vectors $\mathbf{e}_s$ of $R^{\oplus S} $ in $N$ gives a set function $S\to N$, and by the universal property of free modules, this induces an $R$-linear map $\rho : P \to N$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&M\arrow[r, "\mu "]&N\arrow[r, "\nu "]&P\arrow[l, bend left, "\rho "]\arrow[r]&0.
+	\end{tikzcd}\]
+	By construction, there exists a $\rho $ such that $\nu \rho =\mathrm{id}_P$. Let $n\in N$. Then
+	\[
+		0=n-n=\nu (n)-(\nu \rho \nu )(n)=\nu (n-\rho \nu (n))
+	.\]
+	Since $n-(\rho \nu )(n)\in \ker \nu $, by exactness of the sequence there exists a unique $m\in M$ such that $\mu (m)=n-(\rho \nu )(n)$, and we can define a map $g$ such that $g(n)\coloneqq f(m)$.
+\end{proof}
+
+\subsection{Duals and Matrices; Biduality}
+Even without full exactness, the computation of the dual can be reduced to matrix algebra. If
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	R^n\arrow[r, "\alpha "]&R^m\arrow[r]&M\arrow[r]&0
+\end{tikzcd}\]
+is a presentation of an $R$-module $M$, then since
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&M^{\vee} \arrow[r]&R^m\arrow[r, "\alpha ^{\vee} "]&R^n
+\end{tikzcd}\]
+is exact by corollary \ref{cor:8.6}, we can identify $M^{\vee} $ with $\ker \alpha ^{\vee}  $.
+\begin{lemma}\label{lma:8.10}
+	Let $\mathbf{A} $ be the matrix representing the linear map $\alpha : R^n \to R^m$ with respect to the standard bases. Then the dual map $\alpha ^{\vee} : R^m \to R^n$ is represented by the transpose $\mathbf{A}^{\top} $.
+\end{lemma}
+\begin{proof}
+	Done in the exercises. Follows from the fact that $\left( \coker \mathbf{A}  \right)^{\vee} =\ker \left( \mathbf{A} ^{\top}  \right) $.
+\end{proof}
+
+Left-exactness also imposes restructions on what modules may be duals of other modules.
+\begin{proposition}\label{prp:8.8}
+	Let $R$ be an integral domain, and let $M$ be an $R$-module. Then $M^{\vee} $ is torsion-free.
+\end{proposition}
+\begin{proof}
+	Theres is a surjection $R^{\oplus S} \twoheadrightarrow M$, and thus an exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		R^{\oplus T} \arrow[r]&R^{\oplus S} \arrow[r]&M\arrow[r]&0.
+	\end{tikzcd}\]
+	It follows that $M^{\vee} $ is (isomorphic to) the kernel of the induced map $R^S\to R^T$, and thus $M^{\vee} $ is a submodule of a product. Products have no torsion, so neither does $M^{\vee} $.
+\end{proof}
+
+However, arbitrary modules are canonically related to their double-dual. Let $\omega : M \to M^{\vee\vee} $ be defined as such. Consider the $R$-bilinear map
+\[
+	\phi :M^{\vee} \times M\to R,\qquad (f,m)\mapsto f(m)
+.\]
+This induces an $R$-linear map $\phi (-,m):M^{\vee} \to R$ for each fixed $m\in M$, given by $f\mapsto f(m)$. That is, $\phi (-,m)\in M^{\vee\vee} =\Hom_{R}(M^{\vee} , R) $. We can then define $\omega (m)=\phi (-,m)$. By the last proposition, $M^{\vee\vee} $ is torsion-free, and in fact the double dual is the standard way to remove torsion from a module.
+
+This homomorphism is obviously canonical, and makes no reference to any choice of basis. It is very odd that the composition of non-canonical isomorphisms $F\cong F^{\vee} \cong F^{\vee\vee} $ for $F$ free gives a canonical isomorphism $F\cong F^{\vee\vee} $, but interestingly this is true.
+\begin{mdframed}[linewidth=1pt]
+	Finite-rank free modules are noncanonically isomorphic to their duals, and canonically isomorphic to their double duals.
+\end{mdframed}
+
+\subsection{Duality on Vector Spaces}
+After all of these considerations, we can state a few precise notions for the dual $\Hom_{k}(V, k) $ of a $k$-vector space $V$. Let $V,W$ be $k$-vector spaces, for $k$ a field. Then
+\begin{itemize}
+	\item Duality is a contravariant, \emph{exact} functor $\Vect{k} \to \Vect{k} $.
+	\item $(V\oplus W)^{\vee} \cong V^{\vee} \oplus W^{\vee} $.
+	\item If $\dim V,\dim W<\infty $, then $\Hom_{k}(V, W) \cong V^{\vee} \otimes_kW$.
+	\item If $\dim_k V<\infty $, a choice of basis on $V$ determines an isomorphism $V\cong V^{\vee} $.
+	\item If $\dim_kV<\infty $, then the canonical map $\omega : V \to V^{\vee\vee} $ is an isomorphism.
+\end{itemize}

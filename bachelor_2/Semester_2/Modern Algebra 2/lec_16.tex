@@ -1,3 +1,4 @@
+\chapter{Field Extensions}
 \lecture{16}{Wed 05 Mar 2025 13:28}{Extension Fields}
 \begin{definition}[Field Extension]\label{dfn:4.1}
 	A field $E$ is an extension field of $F$ if $F\subseteq E$ and the inclusion $F\hookrightarrow E$ is a homomorphism.
@@ -5,4 +6,13 @@
 \begin{theorem}[Fundamental Theorem of Field Theory]\label{thm:4.1}
 	Let $F$ be a field and let $f(x)\in F[x]$. Then there is an extension field $E$ of $F$ containing a root of $f(x)$.
 \end{theorem}
+\begin{proof}
+	GIven $f(x)$, let $p(x)$ be an irreducible factor of $f(x)$, which exists because $F[x]$ is a UFD. Let
+	\[
+		E=\frac{F[x]}{\left\langle p(x) \right\rangle } 
+	.\]
+	This is a field because $p(x)$ is irreducible, and thus its ideal is maximal. We can view $E$ as an extension field of $F$ by the inclusion $F\hookrightarrow F[x]$ composed with the projection $F[x]\to E$.
+
+	Let $\alpha =x+\left\langle p(x) \right\rangle $, and consider $p(\alpha )$. This simplifies to $p(x)+\left\langle p(x) \right\rangle $, and thus $\left\langle p(x) \right\rangle $, and we have that $E$ contains a root of $p(x)$, which is a factor of $f(x)$.
+\end{proof}
 

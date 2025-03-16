@@ -1,0 +1,44 @@
+\lecture{12}{Thu 06 Mar 2025 14:01}{Entanglement Wrap Up}
+This is wrong: we should have $\mathcal{P}_{++} =\mathcal{P}_{ - -} $, and
+\[
+	\mathcal{P}_{+-} =\mathcal{P}_{-+} =\frac{1}{2} \sin ^2(\theta _1-\theta _2)
+.\]
+
+Suppose they get heads and heads. Then the probability of winning is equal to $\mathcal{P}_{++} +\mathcal{P} _{- -} $, which is $\cos^2\left( \theta _1-\theta _2 \right) $. If they both get heads, player 1 measures $\theta _1=0$ and player 2 measures $\theta_2 = \pi /8$, so we have
+\[
+	\mathcal{P}_{HH} =\cos ^2\left( \frac{\pi }{8}  \right) 
+.\]
+Here, we have used the fact that $\cos $ is an even function. We can also calculate $\mathcal{P}_{TT} $.
+\[
+	\mathcal{P}_{TT} =\mathcal{P}_{+-} +\mathcal{P}_{-+} =\sin ^2\left( \frac{3\pi }{8}  \right) =\cos ^2\left( \frac{\pi }{8}  \right) 
+.\]
+All other probabilities are $\cos ^2(\pi /8)$ as well. This gives an overall $\cos ^2(\pi /8)$ chance of winning the game.
+
+The reason we don't see macroscopic objects in superpositions is due to quantum \emph{decoherence}. Suppose we have a state
+\[
+	\frac{1}{\sqrt{2} } \left( \ket{+} + \ket{-} \right) \otimes \ket{\text{Cat} } 
+.\]
+At $t=0$, the state $\ket{A_i(0)} $ is the state encompassing all information. If we evolve $A_i$ over a very small time $t$, and measure $\ket{+} $, we have the state $\ket{A_i(t)} $, and if we measure $\ket{-} $, we have $\ket{A_i'(t)} $. In this case,
+\[
+	\ket{A_i(0)} \to
+	\begin{cases}
+		\ket{A_i(t)} &\text{happy cat} \\
+		\ket{A_i'(t)} &\text{kill the cat} 
+	\end{cases}
+.\]
+Such an $A_i$ exists for every atom in the system, so the total system is
+\[
+	\ket{\psi (t)} =\frac{1}{\sqrt{2} } \left( \bigotimes_{i=1}^N \ket{A_i(t)}  \right) +\frac{1}{\sqrt{2} } \left(\bigotimes_{i=1}^N \ket{A_it(t)} \right)
+.\]
+What is
+\[
+	\braket{A_i(t)}{A_i(t)} 
+\]
+for some $i$? Since $t$ is very small, we can approximate a Taylor expansion as $1-\varepsilon t$. Now we can ask what the overlap is between the two components of $\ket{\psi (t)} $. We can assume $\varepsilon $ is the same for all of them, since they are all small. This is
+\begin{align*}
+	\braket{\text{cat alive} }{\text{cat dead} } &=\prod_{i=1}^N \braket{A_i(t)}{A_i'(t)} \\
+						     &=\prod_{i=1}^{n} \left( 1-\varepsilon t \right) \\
+						     &=\left( 1-\varepsilon t \right)^N\\
+						     &\xlongrightarrow{N\to \infty }e^{-\varepsilon Nt} 
+.\end{align*}
+Since $N$ is always enourmous in a classical system, $\exp (-\varepsilon Nt)$ is insanely small, and overpowers $\varepsilon $ almost instantly. This means almost instantly, the disparity between cat states goes to 0, and we only observe a single state the instant we measure. So what consitutes a measurement is a decoherence into a big system with a lot of atoms. This also explains classical probability measurements, namely that if something has spin $\ket{+} $, then it has no $x$ spin, meaning $\bra{+} S_x \ket{+} =0$. This is because the off-diagonal elements (non orthogonal elements surrounding $S_x$) are killed by the massive cat states.

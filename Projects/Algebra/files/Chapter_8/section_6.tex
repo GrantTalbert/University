@@ -1,0 +1,234 @@
+\section{Projective and Injective Modules and the Ext Functors}
+We will study some conditions under which Hom is exact, similarly to flatness with tensor products. We measured the lack of flatness with the Tor functors, and we will similarly measure the lack of exactness of Hom with a family of functors known as the Ext funtors.
+
+\subsection{Projectives and Injectives}
+\begin{definition}[Projective/Injective]\label{dfn:8.22}
+	Let $R$ be a commutative ring. An $R$-module $P$ is \emph{projective} if the functor $\Hom_{R}(P, -) $ is exact. An $R$-module $Q$ is \emph{injective} if the functor $\Hom_{R}(-, Q) $ is exact.
+\end{definition}
+
+Since both Hom functors are left-exact, this can be reduced to the following straightforward lemma.
+\begin{lemma}\label{lma:8.11}
+	An $R$-module $P$ is projective if and only if for all epimorphisms $\mu : M \to N$ of $R$-modules, any $R$-linear map $p : P \to N$ lifts to an $R$-linear map $\hat{p} : P \to M$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&P\arrow[dl, "\exists  \hat{p} "']\arrow[d, "p"]\\
+		M\arrow[r, "\mu "']&N\arrow[r]&0
+	\end{tikzcd}\]
+	An $R$-module $Q$ is injective if and only if for all mononorphisms of $R$-modules $\lambda : L \to M$, any $R$-linear map $q : L \to Q$ extends to an $R$-linear map $\hat{q} : M \to Q$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&Q\\
+		0\arrow[r]&L\arrow[r, "\lambda "']\arrow[u, "q"]&M\arrow[ul, "\exists \hat{q} "']
+	\end{tikzcd}\]
+\end{lemma}
+\begin{proof}
+	First, consider the projective case. Note that since $\mu $ is an epimorphism, we have that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		M\arrow[r, "\mu "]&N\arrow[r]&0
+	\end{tikzcd}\]
+	is exact. Since $\Hom_{R}(P, -) $ is left-exact, it suffices to show $\Hom_{R}(P, -) $ is right-exact, meaning that the induced complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\Hom_{R}(P, M) \arrow[r, "\mu '"]&\Hom_{R}(P, N) \arrow[r]&0
+	\end{tikzcd}\]
+	is exact, where $\mu '$ is the homomorphism induced by $\mu $. Recall that the induced homomorphism is defined such that for all $R$-linear $\phi : P \to M$, we have
+	\[
+		\mu '(\phi )(x)=(\mu \phi )(x)
+	.\]
+	This works, because it is a map
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		P\arrow[r, "\phi "]&M\arrow[r, "\mu "]&N,
+	\end{tikzcd}\]
+	and thus $\mu \phi : P \to N$. This is the canonical definition, but I feel it is useful to refresh ourselves on the definitions since they are very important. For $\mu '$ to be surjective, and thus an epimorphism, we must have that for all $p : P \to N$, there exists $\hat{p} : P \to M$ such that $\mu '( \hat{p} )=p$; that is,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		P\arrow[dr, "p"]\arrow[d, " \exists \hat{p} "']\\
+		M\arrow[r, "\mu "]&N
+	\end{tikzcd}\]
+	commutes. This is precisely what is stated in the lemma.
+
+	Now the injective case. By the exact same logic, we wish to show if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&L\arrow[r, "\lambda "]&M
+	\end{tikzcd}\]
+	is exact, then the induced sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		M\arrow[r, "\lambda '"]\arrow[r]&L\arrow[r]&0
+	\end{tikzcd}\]
+	is exact. Note that a monomorphism in the opposite category is trivially an endomorphism, and vice versa. By the contravariant nature of $\Hom_{R}(-, P) $, we need only reverse the arrows and apply the same logic as for the projective case.
+\end{proof}
+
+For example, $R$ is projective since $R\cong \Hom_{R}(R, M) $ for all $R$-modules $M$ canonically, but since duality is not exact in general, it is not injective in general. A variation of this lemma which is slightly more useful is phrasing it in terms of splitting sequences. If $P$ is projective and
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&L\arrow[r, "\lambda "]&M\arrow[r, "\mu "]&P\arrow[r]&0
+\end{tikzcd}\], 
+is exact, then it splits. Indeed, since $P$ is projective and $\mu $ is manifestly surjective, the identity $P\to P$ lifts a homomorphism $\rho : P\to M$, and we can define $P'\coloneqq \rho (P)$. Note that $\mu \rho =\mathrm{id}_P$, and thus $\rho $ has a left-inverse, and is injective. It follows that $P \cong \rho (P)=P'$. Since $\lambda $ is injective, we also have that $L\cong \lambda (L)$. We thus have $L\oplus P \cong \lambda (L)\oplus \rho (P)$. It then suffices to show
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&L\arrow[r, "\lambda "]&M\arrow[r, "\mu "]&\rho (P)\arrow[r]&0
+\end{tikzcd}\]
+splits, which is immediate by the splitting lemma, since $\mu $ has a right-inverse $\rho $. By similar logic, if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&Q\arrow[r]&M\arrow[r]&N\arrow[r]&0
+\end{tikzcd}\]
+is exact and $Q$ is injective, then the sequence splits. It will be shown in the exercises that this is in fact an if and only if statement.
+
+\subsection{Projective Modules}
+\begin{proposition}\label{prp:8.9}
+	An $R$-module $P$ is projective if and only if there exists a free $R$-module $F$ and an $R$-module $K$ such that $F\cong P\oplus K$. That is, $P$ is a direct summand of a free module.
+\end{proposition}
+\begin{proof}
+	Let $P$ be projective, and let $S$ generate $P$. Then
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&\ker \pi \arrow[r, "i"]&R^{\oplus S} \arrow[r, "\pi "]&P\arrow[r]&0
+	\end{tikzcd}\]
+	splits since $P$ is projective, since $R^{\oplus S} $ surjects on $P$ by the map $\pi $. Therefore, $R^{\oplus S} \cong \ker \pi \oplus P$.
+
+	For the converse, let $K\oplus P \cong F$ for some $R$-module $K$ and free $R$-module $P$. Let $F=R^{\oplus S} $ for some set $S$. Let $\mu : M \to N$ be an epimorphism of $R$-modules, and let $f : F \to M$ be any $R$-linear map. For each $s\in S$, choose $\hat{f} (s)$ to be an arbitrary preimage of $f(s)$ under $\mu $, which exists by the Axiom of Choice. By the universal property of free modules, there exists a unique homomorphism $F\to M$ such that $s\mapsto \hat{f} (s)$ for each $s\in S$. Since $s$ generates $F$, and $\mu \hat{f} =f$ on the generating set $S$, we must have that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&F\arrow[dl, "\exists \hat{f} "]\arrow[d, "f"]\\
+		M\arrow[r, "\mu "]&N\arrow[r]&0
+	\end{tikzcd}\]
+	commutes. By the inclusion $P\hookrightarrow F$, this holds for $P$ as well.
+\end{proof}
+\begin{corollary}\label{cor:8.7}
+	Let $P_1,P_2$ be projective $R$-modules. Then $P_1\oplus P_2$ and $P_1\otimes _RP_2$ are projective. Specifically, projective modules are flat.
+\end{corollary}`
+\begin{proof}
+	The fact that $P_1\oplus P_2$ is projective is immediate. Let $P_1\oplus K_1$, $P_2\oplus K_2$ be free. Then
+	\[
+		\left( P_1\oplus K_1 \right) \otimes _R\left( P_2\oplus K_2 \right) =\left( P_1\otimes_R P_2 \right) \oplus \left( P_1 \otimes _RK_2 \right) \oplus \left( K_1\otimes _RP_2 \right) \oplus \left( K_1\otimes _RK_2 \right) 
+	\]
+	is free. By absorbing the right three summands into a single module, we see that $P_1\otimes _RP_2$ is projective. Since free modules are flat, we must have that
+	\[
+		\left( P_1 \oplus K \right) \otimes_R -=(P_1 \otimes _R -)\oplus (K\otimes _R-)
+	\]
+	is exact. It follows that projective modules are flat.
+\end{proof}
+
+Since free modules are projective, this means $\Rmod{R} $ has \emph{enough projectives}; that is, every $R$-modules $M$ admits a projective resolution
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \arrow[r]&P_3\arrow[r]&P_2\arrow[r]&P_1\arrow[r]&P_0\arrow[r]&M\arrow[r]&0
+\end{tikzcd}\]
+such that the complex $P_\bullet $ is exact and $P_i$ is projective $\forall i$. A free resolution is in fact a projective resolution, since free modules are projective. Homological algebra will allow us to use projective resolutions instead of free resolutions in many computations.
+
+\subsection{Injective Modules}
+Injective modules are suprisingly much more complex than projective modules. There is no easy way to descibe injective modules similarly to the statements we had for projective modules, and in faact examples of injective modules are very difficult. For example, $R$ is in general not an injective module. If $(r)\cong R$ is generated by a non-zero divisor, then
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&R\arrow[d]\arrow[r]&(r)\cong R\arrow[dl]\\
+		  &R
+\end{tikzcd}\]
+requires that $rs=1$, and thus $r$ must be a unit. We may however have $(r)\cong R$ without $1\in (r)$, so $R$ is in general not injective by this specific counterexample. Zorn's lemma gives us a characterization of projective modules.
+
+\begin{theorem}\label{thm:8.1}
+	An $R$-module $Q$ is projective if and only if every $R$-linear map $f : I \to Q$ with $I\subseteq R$ an ideal extends to an $R$-linear map $\hat{f} : R \to Q$.
+\end{theorem}
+\begin{proof}
+	Let $Q$ be projective. Then the inclusion $I\hookrightarrow R$ is mono, so for all maps $I\to Q$, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&I\arrow[d]\arrow[r]&R\arrow[dl, "\exists "]\\
+			  &Q
+	\end{tikzcd}\]
+	commutes by lemma \ref{lma:8.11}.
+
+	Now for the converse, let $Q$ satisfy the given extension criteria. Let $L\subseteq M$ be $R$-modules, and let $q : L \to Q$ be $r$-linear. We want to construct a map $\hat{q} : M \to R$ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&L\arrow[r, "\iota "]\arrow[d, "q"]&M\arrow[dl, " \hat{q} "]\\
+			  &Q
+	\end{tikzcd}\]
+	commutes. Consider the collection of pairs $\left( \widetilde{L} , \widetilde{q}  \right) $ where $\widetilde{L} $ ranges over submodules $L \subseteq \widetilde{L} \subseteq M$, and $\widetilde{q} : \widetilde{L}  \to Q$ extends $q$:
+	\[
+		\widetilde{q}|_L=q
+	.\]
+	There is a clear partial order $\preceq$ where $\left( \widetilde{L}, \widetilde{q}  \right) \preceq \left( \widetilde{L} ', \widetilde{q} ' \right) $ if $\widetilde{L} \subseteq \widetilde{L} '$ and $\widetilde{q} '$ extends $\widetilde{q} $. It is seen by taking the union over all chain elements that each chain has an upper bound, so there exists a maximal extension $\left( \widetilde{L} ,\widetilde{q}  \right) $. It suffices to show $\widetilde{L} =M$.
+
+	Suppose for contradiction that there exists $m\in M\setminus \widetilde{L} $, and note that $I=\left\{ r\in R\mid r m\in \widetilde{L}  \right\} $ is a proper ideal of $R$. This can be easily verified since $\widetilde{L} $ is an $R$-module. Define $f : I \to Q$ as the map $f(r)=\widetilde{q} (r m)$. This is easily seen to be $R$-linear. Since $I$ is a proper ideal of $R$, this extends to an $R$-linear map $\hat{f} : R \to Q$. Since $m\notin \widetilde{L} $, we have that $\widetilde{L} \subsetneq \widetilde{L} +\left\langle m \right\rangle $, which is an ideal, and we have a new map $\hat{q} : \widetilde{L} +\left\langle m \right\rangle  \to Q$ by $\hat{q} (\ell + r m)=\widetilde{q} (\ell )+\hat{f} (r)$ for $\ell \in \widetilde{L} $ and $r\in R$. This clearly extends $\widetilde{q} $, but then $(\widetilde{L} ,\widetilde{q} )\prec (\widetilde{L} +\left\langle m \right\rangle ,\hat{q} )$, a contradiction. Therefore, $\widetilde{L} =M$.
+\end{proof}
+
+\begin{proposition}\label{prp:8.10}
+	An $R$-module $D$ is injective if and only if it is \emph{divisible}, meaning for all non zero-divisors $r\in R$, we have $rD=D$. That is, we can divide every element of $D$ by every non zero-divisor of $R$.
+\end{proposition}
+\begin{proof}
+	Let $D$ be injective. Let $r\in R$ be a non zero divisor, and note that the map $f : D \to D$ given by $x\mapsto rx$ is clearly mono: if the actions $ra=rb$ for $a,b\in R$, then by properties of homomorphisms and since $r$ is not a zero divisor, we have $a=b$. It follows that the identity $\mathrm{id}_D : D \to D$ extends to a map $\hat{f} : D \to D$ such that $\mathrm{id}_D=\hat{f} f$. Since $\hat{f} $ has a right-inverse, it must be surjective as well, and thus an isomorphism. Therefore, $D=rD$.
+\end{proof}
+
+\begin{corollary}\label{cor:8.8}
+	Let $R$ be a PID. Then an $R$-module $Q$ is injective if and only if it is divisible.
+\end{corollary}
+
+We can extend this result somewhat to arbitrary $R$-modules using our functor $f^!: \Rmod{S}  \to \Rmod{R} $, given by $f^!(M)=\Hom_{S}(R, M) $, with the natural $(R,S)$-bimodule structure.
+\begin{lemma}\label{lma:8.12}
+	Let $f : S \to R$ be a ring homomorphism, abd let $Q$ be an injective $S$-module. Then $f^!(Q)$ is an injective $R$-module.
+\end{lemma}
+\begin{proof}
+	By adjunction of $f^!$ and the restriction of scalars map $f_*$,
+	\[
+		\Hom_{R}(-, f^!(Q)) \cong \Hom_{S}(f_*(-), Q) 
+	\]
+	as additive functors $\Rmod{R} \to \mathsf{Ab} $. That is, the sets are isomorphic as abelian groups for each $R$-module. Since $f_*$ is exact and by hypothesis, $\Hom_{S}(-, Q) $ is exact, we have that $\Hom_{S}(f_*(-), Q) $ is exact, and thus $\Hom_{R}(-, f^!(Q)) $ is exact. Therefore, $f^!(Q)$ is injective.
+\end{proof}
+\begin{corollary}\label{cor:8.9}
+	Let $R$ be a commutative ring, let $\iota $ be the unique ring homomorphism $\mathbb{Z} \to R$, and let $D$ be a divisible abelian group. Then $\iota ^!(D)=\Hom_{\mathbb{Z} }(R, D) $ is injective in $\Rmod{R} $.
+\end{corollary}
+\begin{proof}
+	Since $\mathbb{Z} $ is a PID, by corollary \ref{cor:8.8} we have that $D$ is injective in $\Rmod{\mathbb{Z} } $. By lemma \ref{lma:8.12}, $\iota ^!(D)$ is injective in $\Rmod{R} $.
+\end{proof}
+\begin{corollary}\label{cor:8.10}
+	Let $M$ be an $R$-module. Then $M$ can be identified with a submodule of an injective $R$-module.
+\end{corollary}
+\begin{proof}
+	Since $R$-linear maps are $\mathbb{Z} $-linear, then if there exist a divisible $\mathbb{Z} $-module $D$ such that $M\subseteq D$ as abelian groups, then
+	\[
+		M\cong \Hom_{R}(R, M) \hookrightarrow \Hom_{\mathbb{Z} }(R, M) \subseteq \Hom_{\mathbb{Z} }(R, D) 
+	.\]
+	Since $\Hom_{\mathbb{Z} }(R, D) $ is injective, it thus suffices to show $\Rmod{\mathbb{Z} } $ has enough injectives.
+
+	Let $A$ be an abelian group, and note that $\mathbb{Z} ^{\oplus A} $ surjects on $A$. We thus have
+	\[
+		A\cong \frac{\mathbb{Z} ^{\oplus A} }{K} 
+	\]
+	for $K$ the kernel of the canonical projection. It follows that there exists an embedding
+	\[
+		A\hookrightarrow \frac{\mathbb{Q} ^{\oplus A} }{K} 
+	.\]
+	This is trivially divisible since $n\mathbb{Q} =\mathbb{Q} $ for all $n\in\mathbb{Z} $, and thus by corollary \ref{cor:8.8} is injective. $A$ thus injects into an injective module.
+\end{proof}
+
+It follows immediately by repeated applications of this corollary that all $R$-modules $A$ admit injective resolutions $Q_\bullet $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&M\arrow[r]&Q_0\arrow[r]&Q_1\arrow[r]&Q_2\arrow[r]&\ldots 
+\end{tikzcd}\]
+for $Q_i$ injective. An explicit construction is realized by applying the corollary on $M$ to obtain $Q_0$, and then applying it once again to $\coker \left( M\to Q_0 \right) $, and so on. This fact is important in sheaf cohomology, which is used in algebraic geometry.
+
+\subsection{The Ext Functors}
+The final step here is to consider tools similar to $\Tor_{R}^{*}(M, N) $ for quantifying the failiure of $\Hom_{R}(M, -) $ and $\Hom_{R}(-, N) $ to be exact. We turn to the bifunctor $\operatorname{Ext}_R^i(-,-)$. The functors
+\[
+	\operatorname{Ext}_R^i(M,-),\qquad \operatorname{Ext}_R^i(-,N)
+\]
+are covariant and contravariant for all $i$, and $\operatorname{Ext}_R^0(M,N)=\Hom_{R}(M, N) $. Moreover, for every exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r]&B\arrow[r]&C\arrow[r]&0,
+\end{tikzcd}\]
+there exist long exact sequences
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\Hom_{R}(M, A) \arrow[r]&\Hom_{R}(M, B) \arrow[r]&\Hom_{R}(M, C) \arrow[d]\\
+		  &\operatorname{Ext}_R^1(M,C)\arrow[d]&\operatorname{Ext}_R^1(M,B)\arrow[l]&\operatorname{Ext}_R^1(M,A)\arrow[l]\\
+		  &\operatorname{Ext}_R^2(M,A)\arrow[r]&\operatorname{Ext}_R^2(M,B)\arrow[r]&\operatorname{Ext}_R^2(M,C)\arrow[r]&\ldots 
+\end{tikzcd}\]
+and
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&\Hom_{R}(C, N) \arrow[r]&\Hom_{R}(B, N) \arrow[r]&\Hom_{R}(A, N) \arrow[d]\\
+		  &\operatorname{Ext}_R^1(A,N)\arrow[d]&\operatorname{Ext}_R^1(B,N)\arrow[l]&\operatorname{Ext}_R^1(C,N)\arrow[l]\\
+		  &\operatorname{Ext}_R^2(C,N)\arrow[r]&\operatorname{Ext}_R^2(B,N)\arrow[r]&\operatorname{Ext}_R^2(A,N)\arrow[r]&\ldots 
+\end{tikzcd}\]
+We will prove this all in the next chapter. However, this lets us show that if $\operatorname{Ext}_R^1\left( ,-) \right) =0$, then $P$ is projective, and vice versa for injective modules. Moreover, exactness of the hom-functors follows from this definition above.
+
+Two definitions of the Ext functors exist. Given either a projective resolution $M_\bullet $ of $M$, we can define
+\[
+	\operatorname{Ext}_R^i(M,N)\coloneqq H^i\left( \Hom_{R}(M_\bullet , N)  \right) 
+.\]
+In this case, $H^i$ is the \emph{cohomology}, since indicies are increasing. We can also take an injective resolution $N_\bullet $ of $N$, and define
+\[
+	\operatorname{Ext}_R^i(M,N)\coloneqq H^i\left( \Hom_{R}(M, N)  \right) 
+.\]
+These will be shown to be equivalent in the final chapter. We can use these functors to perform computations, such as
+\begin{proposition}\label{prp:8.10}
+	An $R$-module $P$ is projective if and only if $\operatorname{Ext}_R^1\left( P,- \right) =0$ if and only if $\operatorname{Ext}_R^i(P,-)=0$ for all $i>0$. An $R$-module $Q$ is injective if and only if $\operatorname{Ext}_R^1(-,Q)=0$ if and only if $\operatorname{Ext}_R^i(-,0)$ for all $i>0$.
+\end{proposition}
+
+I believe these proofs are immediately obvious from the above assertions, but a proof can be found in the book if needed.

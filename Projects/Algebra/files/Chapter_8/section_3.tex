@@ -10,7 +10,7 @@ Tensor products satisfy an even stronger universal property than previously expl
 \end{definition}
 
 Defining such a notion with $G$ an $R$-module would make all bilinear maps $R$-balanced, as $\phi (r m,n)=r\phi (m,n)=\phi (m,rn)$ due to bilinearity. However, since $G$ is not an $R$-module, this is a more general case. It turns out $R$-balanced maps factor uniquely through the tensor product as well.
-\begin{lemma}\label{lma:8.3}
+\begin{lemma}\label{lma:8.4}
 	Let $R$ be a commutative ring, let $M,N$ be $R$-modules, and let $G$ be an abelian group. Then every $\mathbb{Z} $-bilinear, $R$-balanced map $\phi : M\times N \to G$ factors uniquely through $M\otimes_R N$; that is, there exists a unique group homomorphism $\overline{\phi } : M\otimes_R N \to G$ such that the diagram
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 		M\times N\arrow[r, "\phi "]\arrow[d, "\otimes "']&G\\
@@ -62,3 +62,113 @@ For example, every $R$-module is an $(R,R)$-bimodule for $R$ commutative. If $M$
 	s(m\otimes n)=m\otimes (sn)
 .\]
 We thus obtain an $(R,S)$-bimodule structure on $M\otimes _RN$.
+
+Additionally, if $N$ is an $(R,S)$-bimodule and $P$ is a $S$-module, then $\Hom_{S}(N, P) $ is an $(R,S)$-bimodule, where the $R$-module structure is given by $(r\alpha )(n)=\alpha (rn)$ for all $n\in N$, $r\in R$, and $\alpha \in \Hom_{S}(N, P) $.
+
+\begin{lemma}\label{lma:8.5}
+	Let $M$ be an $R$-module, $N$ be an $(R,S)$-bimodule, and $P$ be an $S$-module. Then there is a canonical isomorphism of abelian groups
+	\[
+		\Hom_{R}(M, \Hom_{S}(N, P) ) \cong \Hom_{S}(M\otimes_R N, P) 
+	.\]
+\end{lemma}
+\begin{proof}
+	Every $\alpha \in \Hom_{R}(M, \Hom_{S}(N, P) ) $ determines a map $\phi : M\times N \to P$ by the assignment
+	\[
+		\phi (m,-)=\alpha(m)
+	.\]
+	That is, $\phi (m,n)=(\alpha (m))(n)$. Therefore, $\phi $ is $R$-bilinear and $\mathbb{Z} $-bilinear. Moreover,
+	\[
+		\phi (r m,n)=\alpha (r m)(n)=r\alpha (m)(n)=\alpha (m)(rn)=\phi (m,rn)
+	.\]
+	This holds because $\alpha $ is $R$-linear, and $\Hom_{S}(N, P) $ is an $(R,S)$-bimodule in this way. Therefore, the map is $R$-balanced. By lemma \ref{lma:8.4}, there exists a unique group homomorphism $\overline{\phi } : M \otimes_R N \to P$ determined by $\phi $. We will show $\overline{\phi } $ is $S$-linear.
+
+	For all $s\in S$ and pure tensors $n \otimes p$,
+	\[
+		\overline{\phi } \left( s(m\otimes n) \right) =\overline{\phi } (m\otimes (sn))=\phi (m,sn)=\alpha (m)(sn)=s\alpha (m)(n)=s\phi (m,n)=s \overline{\phi } (m \otimes n)
+	.\]
+	This follows since $\overline{\phi } \otimes =\phi $. Therefore, $\overline{\phi } $ is $S$-linear, and
+	\[
+		\overline{\phi } \in \Hom_{S}(M\otimes_R N, P) 
+	.\]
+	The same arguments can be reversed to show the original statement.
+\end{proof}
+
+Note that in the case that $R=S$, we have the original adjunction relation of tensor. This allows us to use tensor to investigate functors $\Rmod{R} \to \Rmod{S} $.
+
+\subsection{Restriction and Extension of Scalars}
+We want to return to the idea of studying ring homomorphisms $f : R \to S$ using functors $\Rmod{R} \to \Rmod{S} $. We can now define three such functors, the \emph{restriction of scalars}, \emph{extension of scalars}, and another which extends scalars but we don't really have a name for.
+
+Let $f : R \to S$ be a ring homomorphism, and let $N$ be an $S$-module. That is, there is a ring homomorphism $\sigma : S \to \End_{\mathsf{Ab} }(N) $. This also gives us an action
+\[
+	\sigma \circ f : R \to S\to \End_{\mathsf{Ab} }(N) 
+.\]
+Therefore, $N$ attains an $R$-module structure as well, with the $R$-action given by $rn=f(r)n$. Since we choose $S$ to be commutative, this in fact determines an $(R,S)$-bimodule structure on $N$. Moreover, $S$-linear homomorphisms are $R$-linear as well fairly obviously, giving a covariant functor $\Rmod{S} \to \Rmod{R} $.
+
+If $f$ is injective, then we can view $R$ as a subring of $S$. $N$ is then viewed as a module using a restricted set of scalars in $S$. This is how complex vector spaces can also be viewed as real vector spaces, for example. We will denote by $f_*$ the functor $\Rmod{S} \to \Rmod{R} $ induced by $f$. Note that since morphisms are mapped to themselves, $f_*$ is fairly obviously exact. This turns out to be because $f_*$ has both left- and right-adjoints.
+
+Another functor can be defined from $f^*:\Rmod{R} \to \Rmod{S} $, by mapping $M\mapsto M\otimes _RS$. We have seen that this carries an $S$-module structure, since $S$ is an $(R,S)$-bimodule:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	R\arrow[r, "f"]&S\arrow[r]&\End_{\mathsf{Ab} }(S) 
+\end{tikzcd}\]
+This is clearly covariantly functorial, as has been explored previously. Additionally, since tensor is right-exact, then for any presentation
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	R^{\oplus A} \arrow[r]&R^{\oplus B} \arrow[r]&M\arrow[r]&0,
+\end{tikzcd}\]
+tensoring by $S$ gives a presentation
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	S^{\oplus A} \arrow[r]&S^{\oplus B} \arrow[r]&M\otimes _RS\arrow[r]&0.
+\end{tikzcd}\]
+Intuitively, this means $f^*(M)$ is defined by the same generators and relations as $M$, but instead taking scalars in $S$, rather than $R$. We say this functor is an \emph{extension of scalars}.
+
+The final functor, which will be denoted $f^!: \Rmod{R}  \to \Rmod{S} $, is given by
+\[
+	f^!(M)=\Hom_{R}(S, M) 
+.\]
+This can be given a natural $S$-module structure, as $S$ is an $(R,S)$-bimodule, and $M$ is an $R$-module, so $\Hom_{R}(S, M) $ is an $(R,S)$-bimodule, and thus attains an $S$-module structure by $(s\alpha )(x)=\alpha (sx)$. This is once again, evidently a functor.
+
+\begin{proposition}\label{prp:8.10}
+	Let $f : R \to S$ be a homomorphism of commutative rings. Then with notation as above, $f_*$ is left-adjoint to $f^!$ and right-adjoint to $f^*$.
+\end{proposition}
+\begin{proof}homS
+	Let $M,N$ be $R$- and $S$-modules, respectively. First, we will show $\Hom_{S}(S, N) \cong N$ as $S$-modules. Let
+	\[
+		\phi : \Hom_{S}(S, N)  \to N
+\]
+be the map $\alpha \mapsto \alpha (1_S)$. Note that this is clearly $S$-linear:
+\[
+	\phi (\alpha +\beta )=(\alpha +\beta )(1_S)=\alpha (1_S)+\beta (1_S)=\phi (\alpha )+\phi (\beta )
+;\]
+\[
+	\phi (s\alpha )=s\alpha (1_R)=s\phi (\alpha )
+.\]
+Additionally, note that every homomorphism is uniquely determined by its action on $1_S$. Let $\alpha (1_S)=\beta (1_S)$. It follows that for any $s\in S$,
+\[
+	\alpha (s)=\alpha (s1_S)=s\alpha (1_S)=s\beta (1_S)=\beta (s)
+.\]
+We have used the fact that $\alpha ,\beta $ are $S$-linear, and that $S$ attains $S$-algebra structure naturally within the $S$-module structure. This suffices to show injectivity, so we will show surjectivity of $\phi $. Let $n\in N$, and define $\alpha (1_S)=n$. Indeed, there exists a way to define $\alpha $ in such a way that it is $S$-linear. Let $\alpha (s)=s\alpha (1_S)$. Then
+\[
+	\alpha (r+s)=(r+s)n=rn+sn=\alpha (r)+\alpha (s);
+\]
+\[
+	\alpha (rs)=(rs)n=r(sn)=r\alpha (s)
+.\]
+Therefore, $\phi $ is an isomorphism of $S$-modules. This same argument applies to show that $\Hom_{S}(S, N) \cong f_*(N)$ as $R$-modules, since we can define $\psi (\alpha )=\alpha (f(1_R))=\alpha (1_S)$. This is injective and surjective by the same argument, and it is $R$-linear:
+\[
+	\phi (r\alpha )=(r\alpha )(1_S)=r(\alpha (1_S))=r\psi (\alpha (1_S))
+.\]
+Thus,
+\begin{align*}
+	\Hom_{R}(M, f_*(N)) &\cong \Hom_{R}(M, \Hom_{S}(S, N) ) \\
+			    &\cong \Hom_{S}(M\otimes_R S, N) \\
+			    &=\Hom_{S}(f^*(M), N) 
+.\end{align*}
+Note that we have used lemma \ref{lma:8.5} to state that $\Hom_{R}(M, \Hom_{S}(S, N) ) \cong \Hom_{S}(M\otimes _RS, N) $. Therefore, $f^*$ is left-adjoint to $f_*$.
+
+Similarly, $N\cong N\otimes_S S$, as $R$-modules, and thus $f_*(N)\cong N\otimes_SS$. Thus,
+\begin{align*}
+	\Hom_{R}(f_*(N), M) &\cong \Hom_{R}(N\otimes _SS, M) \\
+			    &\cong \Hom_{S}(N, \Hom_{R}(S, M) ) \\
+			    &=\Hom_{S}(N, f^!(M)) 
+.\end{align*}
+This again uses lemma \ref{lma:8.5}. Therefore, $f^!$ is right-adjoint to $f_*$.
+\end{proof}
