@@ -1,0 +1,49 @@
+\part{Finite Groups}
+\chapter{Representations of Finite Groups}
+\section{Definitions}
+\begin{definition}[Representation]\label{dfn:1.1}
+	A representation of a finite group $G$ on a finite-dimensional complex vector space $V$ is a group homomorphism $\rho : G \to \operatorname{GL} (V)$ from $G$ to the group $\operatorname{GL} (V)=\Aut_{\Vect{\mathbb{C} } }(V) $. When there is little ambiguity about $\rho $, we simply refer to $V$ as a representation of $G$, and we write $gv$ for $\rho (g)(v)$. We often call the dimension of $V$ the \emph{degree} of $\rho $. We say $\rho $ gives $V$ the structure of a $G$-module.
+\end{definition}
+
+If $V,W$ are representations of $G$, then a morphism of representations is a $\mathbb{C} $-linear map $\phi : V \to W$ such that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V\arrow[r, "\phi "]\arrow[d, "g"']&W\arrow[d, "g"]\\
+	V\arrow[r, "\phi "']&W
+\end{tikzcd}\]
+commutes for all $g\in G$. That is, $\phi (gv)=g\phi (v)$ for all $g\in G$ and $v\in V$. We call such a map $G$-linear. It follows immediately that $\ker \phi ,\im \phi ,\coker \phi $ are all $G$-modules.
+
+\begin{definition}[Subrepresentation]\label{dfn:1.2}
+	A subrepresentation $W$ of a representation $V$ is a subspace $W\subseteq V$ that is $G$-invariant; that is, $g$ is an automorphism of $W$ as well as $V$.
+\end{definition}
+
+Some common representations are the direct sum $V\oplus W$, given by $g(v,w)=(gv,gw)$, and the tensor product $V\otimes W$, given by $g(v\otimes w)=gv\otimes gw$. This generalizes to tensor powers $V^{\otimes n} $, and we can view the exterior power $\bigwedge^n(V)$ and the symmetric power $\operatorname{Sym}^n(V)$ as subrepresentations of it.
+
+The dual $V^*=\Hom(V, \mathbb{C} ) $ is also a representation. Let $\rho : G \to V$ be a representation, and $\rho ^*: G \to V^*$ be the dual. We want the representations to respect the natural map
+\[
+	\left\langle \rho ^*(g)(v^*),\rho (g)(v) \right\rangle 
+\]
+for all $g\in G$, $v\in V$, and $v^*\in V^*$. This definition forces us to define $gv^*$ as the map $(gv^*)(x)=v^*(g^{-1} x)$. The book denotes this as $^t\rho (g^{-1} )$.
+\begin{exercise}
+	Show that this definition of $\rho ^*$ satisfies the above relation.
+\end{exercise}
+\begin{proof}
+	The fact that the above relation is satisfied is immediate:
+	\[
+		\left\langle gv^*,gv \right\rangle =(gv^*)(gv)=v^*(g^{-1} gv)=v^*(v)
+	.\]
+	I feel we must also show $r^*$ is indeed a representation. First, we show $g$ is an automorphism of $V^*$. Surjectivity follows immediately. Let $v^*\in V^*$, and note that since $g$ is an automorphism on $V$, for every $v\in V$ there exists $w\in V$ such that $gw=v$. Therefore, $v^*(gw)=v^*(v)$, and thus the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		V\arrow[r, "g"]\arrow[rr, bend left, "v^*"]&V\arrow[r, "v^*"]&\mathbb{C} 
+	\end{tikzcd}\]
+	commutes. Since every $g$ is the inverse of some $g^{-1} \in G$, the given definition is surjective, since $g^{-1} v^*=v^*\circ g\in \Hom(V, \mathbb{C} ) $.
+
+	To show injectivity, we need only show $\ker g=0$ for all $g\in G$. Indeed, if $gv^*=0$, then $v^*(g^{-1} x)=0$ for all $x\in V$. Since $g^{-1} $ is an automorphism of $V$, it follows that $v^*(x)=0$ for all $x\in V$ by surjectivity, and thus $v^*=0$. Therefore, $\rho ^*: G \to \operatorname{GL} V^*$.
+
+	Finally, we show $\rho ^*$ is a group homomorphism. This is immediate; let $g,h\in G$. We have
+	\[
+		(gh)v^*(x)=v^*\left(\left( h^{-1} g^{-1}   \right) x\right)=(hv^*)\left( g^{-1} x \right) =g(h(v^*))(x)
+	.\]
+	Therefore, $g\circ h=gh$, and thus $\rho ^*(gh)=\rho ^*(g)\circ \rho ^*(h)$. Therefore, $V^*$ is a representation of $G$ under this definition.
+\end{proof}
+
+need to show $V^*\otimes W\cong \Hom_{\mathbb{C} }(V, W) $.

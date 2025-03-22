@@ -1,0 +1,282 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 6}
+\courseID{PY 451}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{enumerate}
+	\item This problem is solved by fully decomposing the given state $\ket{\psi _0} $. We have
+		\begin{align*}
+			\ket{\psi _0} &=\ket{+}_{\theta ;1} \otimes \ket{-}_{\theta ;2} +A\ket{-}_{\theta ;1} \otimes \ket{+}_{\theta ;2} \\
+				      &=\left( \cos \theta \ket{+}_1+\sin \theta \ket{-}_1 \right) \otimes \left( -\sin \theta \ket{+}_2+\cos \theta \ket{-}_2 \right) +A\left( -\sin \theta \ket{+}_1 + \cos \theta \ket{-}_1 \right) \\
+				      &\qquad\otimes \left( \cos \theta \ket{+}_2+\sin \theta \ket{-} _2 \right) \\
+				      &=-\cos \theta \sin \theta \left( \ket{+}_1 \otimes \ket{+}_2 \right) +\cos ^2\theta \left( \ket{+} _1\otimes \ket{-} _2 \right) -\sin ^2\theta \left( \ket{-}_1\otimes \ket{+} _2 \right) \\
+				      &\qquad +\sin \theta \cos \theta \left( \ket{-} _1\otimes \ket{-} _2 \right) -A \sin \theta \cos \theta \left( \ket{+} _1\otimes \ket{+} _2 \right) -A \sin^2 \theta \left( \ket{+}_1 \otimes \ket{-}_2 \right)\\
+				      &\qquad +A\cos ^2\theta \left( \ket{-} _1\otimes \ket{+} _2 \right) +A\cos \theta \sin \theta \left( \ket{-} _1 \otimes \ket{-} _2 \right) \\
+				      &=\left( -\cos \theta \sin \theta -A \cos \theta \sin \theta  \right) \ket{++}+\left( \cos ^2\theta -A \sin ^2\theta  \right) \ket{+-} +\left( -\sin ^2\theta +A\cos ^2\theta  \right) \ket{-+} \\
+				      &\qquad +\left( \cos \theta \sin \theta  +A \cos \theta \sin \theta  \right) \ket{- -}
+		.\end{align*}
+		Note that by setting $A=-1$, we have
+		\[
+			\ket{\psi _0} =0\ket{++} +\ket{+-} -\ket{-+} +0\ket{- - } =\ket{+-} -\ket{-+} 
+		.\]
+		Note that this is independent of $\theta $, so $A=-1$.
+	\item First, we compute $S_z\ket{\psi _0} $.
+		\begin{align*}
+			S_z\ket{\psi _0} &=\left( S_z^{(1)} \otimes \mathbbm{1}+\mathbbm{1}\otimes S_z^{(2)}   \right) \left( \ket{+}_1 \otimes \ket{-} _2-\ket{-} _1\otimes \ket{+} _2 \right)\\
+			&=\frac{\hbar }{2} \ket{+}_1 \otimes \ket{-}_2+\frac{\hbar }{2} \ket{-}_1 \otimes \ket{+} _2-\frac{\hbar }{2} \ket{+}_1 \otimes \ket{-} _2-\frac{\hbar }{2} \ket{-} _1\otimes \ket{+} _2\\
+			&=0
+		.\end{align*}
+		Next, we compute $S_x\ket{\psi _0} $.
+		\begin{align*}
+			S_x\ket{\psi _0} &=\left( S_x^{(1)} \otimes \mathbbm{1}+\mathbbm{1}\otimes S_x^{(2)}   \right) \left( \ket{+}_1 \otimes \ket{-} _2-\ket{-} _1\otimes \ket{+} _2 \right)\\
+			&=\frac{\hbar }{2} \ket{-} \otimes \ket{-} -\frac{\hbar }{2} \ket{+} _1 \otimes \ket{+} _2+\frac{\hbar }{2} \ket{+} _1\otimes \ket{+} _2-\frac{\hbar }{2} \ket{-} _1\otimes \ket{-} _2\\
+			&=0
+		.\end{align*}
+		Finally, we compute $S_y\ket{\psi _0} $. Since we don't often compute things in $S_y$, note that $S_y\ket{+} =\frac{i\hbar }{2} \ket{-} $, and $S_y\ket{-} =\frac{-i\hbar }{2} \ket{+} $.
+		\begin{align*}
+			S_y\ket{\psi _0} &=\left( S_y^{(1)} \otimes \mathbbm{1}+\mathbbm{1}\otimes S_y^{(2)}   \right) \left( \ket{+}_1 \otimes \ket{-} _2-\ket{-} _1\otimes \ket{+} _2 \right)\\
+			&=\frac{i\hbar }{2} \ket{-}_1 \otimes \ket{-}_2 +\frac{i\hbar }{2} \ket{+}_1 \otimes \ket{+}_2-\frac{i\hbar }{2} \ket{+}_1\otimes \ket{+} _2-\frac{i\hbar }{2} \ket{-} _1\otimes \ket{-} _2\\
+			&=0
+		.\end{align*}
+\end{enumerate}
+
+\section*{Problem 2}
+\begin{enumerate}
+	\item The Hamiltonian has two distinct terms, $-2JS_z^{(1)} \otimes S_z^{(2)} $, and $g\left( S_z^{(1)} +S_z^{(2)}  \right) $. By linearity of multiplication/inner product/whatever, we can calculate 
+		\[
+			H_{ij} =\bra{b_j} \left( -2J S_z^{(1)} \otimes S_z^{(2)}  \right) \ket{b_i} +g\bra{b_j} \left( S_x^{(1)} +S_x^{(2)}  \right) \ket{b_i}
+		\]
+		for $\ket{b_i} ,\ket{b_j} $ the $i$th and $j$th basis states, respectively. I will first do the calculations in the first term, since they are very simple. Let $\ket{a}_1 \otimes \ket{a}_j$ and $\ket{b}_1 \otimes \ket{b}_2$ represent arbitrary basis states. Then
+		\begin{align*}
+			-2J\left( \bra{a}_1 \otimes \bra{a}_2 \right) \left( S_z^{(1)} \otimes S_z^{(2)}  \right) \left( \ket{b}_1 \otimes \ket{b}_2 \right) &=-2J_1\bra{a}S_z^{(1)} \ket{b}_1\,_2\bra{a}S_z^{(2)} \ket{b}_2\\
+																			     &=-2Jb_1\,_1\braket{a}{b}_1b_2\,_2\braket{a}{b}_2
+		,\end{align*}
+		where $b_i$ is the eigenvalue of $S_z$ corresponding to $\ket{b}_i$, because each $\ket{a}_i,\ket{b}_i$ is either $\ket{+} $ or $\ket{-} $, which are eigenstates of $S_z$. Moreover, since these states are orthonormal,
+\[
+	-2Jb_1\,_1\braket{a}{b}_1b_2\,_2\braket{a}{b}_2=-2Jb_1b_2 \delta_{ab},
+\]
+where $\delta_{ab} $ is an abuse of notation on the Kroenecker delta to say if $\ket{a}_1 \otimes \ket{a_2} =\ket{b_1} \otimes \ket{b_2} $, then $\delta_{ab} =1$, and $0$ otherwise. Since $\ket{+} $ has eigenvalue $\hbar /2$ and $\ket{-} $ has an eigenvalue of $-\hbar /2$ on $S_z$, this part of the summation can easily be seen to be
+		\[
+			-\frac{\hbar^2 J}{2} \begin{pmatrix}
+			1 &  &  &  \\
+			 & -1 &  &  \\
+			 &  & -1 &  \\
+			 &  &  & 1
+			\end{pmatrix}
+		.\]
+
+		Now to compute the second term. I will show work for the $S_x^{(1)} $ term only, since the work for the $S_x^{(2)} $ term is basically equivalent. Let $\ket{a}_1 \otimes \ket{a}_2$ and $\ket{b} _1 \otimes \ket{b} _2$ be basis vectors, and note that
+		\[
+			\left( \bra{a}_1 \otimes \bra{a}_2 \right) S_x^{(1)} \left( \ket{b}_1 \otimes \ket{b}_2 \right) =\,_1\bra{a}S_x^{(1)} \ket{b}_1\,_2\braket{a}{b}_2
+		.\]
+Note that similarly to before, we must have $\ket{a}_2=\ket{b}_2$, however also note that
+\[
+	S_x \ket{+} =\frac{\hbar }{2} \ket{-} ,\qquad S_x \ket{-} =\frac{\hbar }{2} \ket{+} 
+.\]
+We must thus have $\ket{a}_1 \neq \ket{b}_1$ (since the only options are $\ket{+}$ and $\ket{-} $). We thus have
+\[
+	\,_1\bra{a} S_x^{(1)} \ket{b}_1\,_2\braket{a}{b} _2=
+	\begin{cases}
+		\hbar /2,&\ket{a}_1 \neq \ket{b}_1 \text{ and } \ket{a}_2=\ket{b} _2\\
+		0,&\text{otherwise.} 
+	\end{cases}
+\]
+A bit of playing with numbers yields that the matrix representing the $S_x^{(1)} $ term is given by
+\[
+	\frac{\hbar }{2} \begin{pmatrix}
+	&  & 1 &  \\
+	 &  &  & 1 \\
+	1 &  &  &  \\
+	 & 1 &  & 
+	\end{pmatrix}
+.\]
+Similar logic shows that the matrix representing the $S_x^{(2)} $ term is given by
+\[
+	\frac{\hbar }{2} \begin{pmatrix}
+	 & 1 &  &  \\
+	1 &  &  &  \\
+	 &  &  & 1 \\
+	 &  & 1 & 
+	\end{pmatrix}
+.\]
+Putting everything together, we have
+\[
+	H=-\frac{\hbar^2 J}{2} \begin{pmatrix}
+	1 &  &  &  \\
+	 & -1 &  &  \\
+	 &  & -1 &  \\
+	 &  &  & 1
+	\end{pmatrix}+\frac{\hbar g}{2} \left( \begin{pmatrix}
+	 & 1 &  &  \\
+	1 &  &  &  \\
+	 &  &  & 1 \\
+	 &  & 1 & 
+	\end{pmatrix}+\begin{pmatrix}
+	 &  & 1 &  \\
+	 &  &  & 1 \\
+	1 &  &  &  \\
+	 & 1 &  & 
+	\end{pmatrix} \right)
+\]
+\[
+	=-\frac{\hbar^2 J}{2} \begin{pmatrix}
+	1 &  &  &  \\
+	 & -1 &  &  \\
+	 &  & -1 &  \\
+	 &  &  & 1
+	\end{pmatrix}+\frac{\hbar g}{2} \begin{pmatrix}
+	 & 1 & 1 &  \\
+	1 &  &  & 1 \\
+	1 &  &  & 1 \\
+	 & 1 & 1 & 
+	\end{pmatrix}
+.\]
+We can verify that this is correct by noticing that we are representing our basis states using the Kronecker product, so we can represent the dual space in the same way and immediately compute that
+\[
+	H=-2J\frac{\hbar^2}{4}\begin{pmatrix}
+	S_z &  \\
+	 & -S_z
+	\end{pmatrix}+\frac{\hbar g}{2} \begin{pmatrix}
+	 & \mathbbm{1} \\
+	\mathbbm{1} & 
+	\end{pmatrix}+\frac{\hbar g}{2} \begin{pmatrix}
+	\sigma_x &  \\
+	 & \sigma_x
+	\end{pmatrix} 
+\]
+\[
+	=-\frac{\hbar^2 J}{2} \begin{pmatrix}
+	1 &  &  &  \\
+	 & -1 &  &  \\
+	 &  & -1 &  \\
+	 &  &  & 1
+	\end{pmatrix}+\frac{\hbar g}{2} \begin{pmatrix}
+	 & 1 & 1 &  \\
+	1 &  &  & 1 \\
+	1 &  &  & 1 \\
+	 & 1 & 1 & 
+	\end{pmatrix}
+.\]
+This is exactly what we obtained in our calculations.
+\item 
+	\begin{enumerate}
+		\item The characteristic polynomial factors into
+			\[
+				(1-x)(1+x)\left( \sqrt{4(g')^2+1} -x \right) \left( \sqrt{4(g')^2+1} +x \right) 
+			.\]
+			Since $g'$ is real, $(g')^2>0$, and thus $\sqrt{4(g')^2+1} >1$. Therefore,  $-\sqrt{4(g')^2+1} $ is the smallest nonzero eigenvalue of $H$.
+
+			For notational purposes, let
+			\[
+				\Omega \coloneqq \frac{1-\sqrt{4(g')^2+1} }{2g'} 
+			.\]
+			We have
+			\[
+				H=-\begin{pmatrix}
+				1 &  &  &  \\
+				 & -1 &  &  \\
+				 &  & -1 &  \\
+				 &  &  & 1
+				\end{pmatrix}+g'\begin{pmatrix}
+				 & 1 & 1 &  \\
+				1 &  &  & 1 \\
+				1 &  &  & 1 \\
+				 & 1 & 1 & 
+				\end{pmatrix}=\begin{pmatrix}
+				-1 & g' & g' & 0 \\
+				g' & 1 & 0 & g' \\
+				g' & 0 & 1 & g' \\
+				0 & g' & g' & -1
+				\end{pmatrix}
+			.\]
+			We also have
+			\[
+				\ket{\psi } =\begin{pmatrix}
+				1 \\
+				0 \\
+				0 \\
+				0
+				\end{pmatrix}+\begin{pmatrix}
+				0 \\
+				0 \\
+				0 \\
+				1
+				\end{pmatrix}+\Omega \left( \begin{pmatrix}
+				0 \\
+				1 \\
+				0 \\
+				0
+				\end{pmatrix}+\begin{pmatrix}
+				0 \\
+				0 \\
+				1 \\
+				0
+				\end{pmatrix} \right) =\begin{pmatrix}
+				1 \\
+				\Omega  \\
+				\Omega  \\
+				1
+				\end{pmatrix}
+			.\]
+			By explicit computation, we have
+			\[
+				H \ket{\psi } =\begin{pmatrix}
+				-1 & g' & g' & 0 \\
+				g' & 1 & 0 & g' \\
+				g' & 0 & 1 & g' \\
+				0 & g' & g' & -1
+				\end{pmatrix}\begin{pmatrix}
+				1 \\
+				\Omega  \\
+				\Omega  \\
+				1
+				\end{pmatrix}=\begin{pmatrix}
+				-1+2g'\Omega  \\
+				2g'+\Omega  \\
+				2g'+\Omega  \\
+				-1+2g'\Omega 
+				\end{pmatrix}
+			.\]
+			Note that our eigenvalue is $\lambda =-\sqrt{4(g')^2+1} $, which satisfies
+			\[
+				\Omega =\frac{1+\lambda }{2g'} \implies \lambda =2g'\Omega -1
+			.\]
+			This immediately checks the top and bottom entries of $H\ket{\psi } $, so it suffices to show $\lambda \Omega =2g'+\Omega $. We have
+			\begin{align*}
+				\left( -\sqrt{4(g')^2+1}  \right) \left( \frac{1-\sqrt{4(g')^2+1} }{2g'}  \right) &=\frac{4(g')^2+1-\sqrt{4(g')^2+1}}{2g'}  \\
+														  &=2g'+\frac{1-\sqrt{4(g')^2+1} }{2g'} \\
+														  &=2g'+\Omega 
+			.\end{align*}
+			Therefore, $H\ket{\psi } =\lambda \ket{\psi } $.
+		\item By our knowledge of limits as $g'\to \infty $,
+			\[
+				\lim_{g' \to \infty} \frac{1-\sqrt{1+4(g')^2} }{2g'} =\lim_{g' \to \infty} \frac{1-\sqrt{4(g')^2} }{2g'} =\lim_{g' \to \infty} \frac{1-2g'}{2g'} =\lim_{g' \to \infty} \frac{-2g'}{2g'} =-1
+			.\]
+			It follows that in the limit, we have
+			\begin{align*}
+				\ket{\psi } &=\left( \ket{+}_1 \otimes \ket{+}_2+\ket{-}_1 \otimes \ket{-}_2 \right) -\left( \ket{+}_1 \otimes \ket{-}_2+\ket{-}_1 \otimes \ket{+}_2 \right) \\
+					    &=\ket{+}_1 \otimes \left( \ket{+}_2  -\ket{-}_2 \right) +\ket{-}_1 \otimes \left( \ket{-}_2 -\ket{+}_2 \right) \\
+					    &=\ket{+}_1 \otimes \ket{-}_{x;2} +\ket{-}_1 \otimes (-\ket{-}_{x;2}) \\
+					    &=\ket{+}_1 \otimes \ket{-}_{x;2} -\ket{-}_1 \otimes \ket{-}_{x;2} \\
+					    &=\left( \ket{+}_1 -\ket{-}_1 \right) \otimes \ket{-}_{x;2} \\
+					    &=\ket{-}_{x;2} \otimes \ket{-}_{x;2}
+			.\end{align*}
+			If we let $g'\to 0$, then
+			\begin{align*}
+				\frac{1-\sqrt{1+4(g')^2} }{2g'} &=\frac{1-\sqrt{1+4(g')^2} }{2g'} \cdot \frac{1+\sqrt{1+4(g')^2} }{1+\sqrt{1+4(g')^2} } \\
+								&=\frac{1-1-4(g')^2}{2g'+2g'\sqrt{1+4(g')^2} } \\
+								&=\frac{2g'}{1+\sqrt{1+4(g')^2} } \\
+								&\xlongrightarrow{g'\to 0}\frac{0}{1+\sqrt{1} } \\
+								&=0
+			.\end{align*}
+			Therefore, in the limit we find
+			\[
+				\ket{\psi } =\ket{+}_1 \otimes \ket{+}_2 +\ket{-}_1 \otimes \ket{-}_2
+			.\]
+	\end{enumerate}
+\end{enumerate}
+\end{document}

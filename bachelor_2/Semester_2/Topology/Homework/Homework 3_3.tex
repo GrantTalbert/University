@@ -2,22 +2,178 @@
 \input{../../homework.tex}
 \usepackage{titlepageBU}
 \title{Homework 3}
-\courseID{MA 564}
-\courseSection{A1}
 \begin{document}
 \makeproblem
 \section*{Problem 1}
+Since $\mathbb{R} \mathbb{P} ^2$ identifies antipodal points with each other, removing a disc from $\mathbb{R} \mathbb{P} ^2$ is the same as removing two discs from the sphere, and identifying antipodal points on the resultant figure.
+\begin{figure}[ht]
+	\includegraphics[scale=0.15]{../figures/image1.jpg}
+	\centering
+\end{figure}
+
 \section*{Problem 2}
+Note that if $[(z,w)]\in\mathbb{C} \mathbb{P} ^1$ with $z\neq 0$, then $[(z,w)]=[(1,w/z)]$.  Thus, every such point with $z\neq 0$ can be represented of this form. If $z=0$, then we instead have $[(0,w)]=[(0,w/w)]=[(0,1)]$ since $(z,w)\neq (0,0)$. Any two points $[(1,w/z)],[(1,a/b)]$ are now distinct in $\mathbb{C} \mathbb{P} ^1$ if $w/z\neq a/b$, since multiplying through by a scaling factor would also shift the value of the $1$. We can thus view $\mathbb{C} \mathbb{P} ^1$ as $\mathbb{C} \cup \left\{ [(0,1)] \right\} $.
+
+Let $\phi : \mathbb{C} \mathbb{P}^1 \to S^2$ be the map $\phi (0,1)=(1,0,0)$, and
+\[
+	\phi (1,z)=\left( \frac{2 \operatorname{Re } z}{\left| z \right|^2+1} ,\frac{2 \operatorname{Im } z}{\left| z^2 \right| +1} ,\frac{\left| z \right| ^2-1}{\left| z^2 \right| +1}  \right) 
+.\]
+This map is well-defined by the logic I explained previously, identifying each element of $\mathbb{C} \mathbb{P} ^1 $ with an element of the form $[(1,z)]$ or $[(0,1)]$. Let $\psi : S^2 \to \mathbb{C} \mathbb{P} ^1$ be the map
+\[
+	\psi (x,y,z)=\left[ \left( 1,\frac{x+iy}{1-z}  \right)  \right] 
+,\]
+and $\psi (0,0,1)=[(0,1)]$. These maps are both obviously well-defined, and a lot of explicit computation shows they are in fact inverses. Therefore, they are bijections.
+
+Since $\phi $ is a composition of continuous functions (rationals, Re, Im, etc.), it is continuous on elements other than $(0,0,1)$.
+
+$\psi $ is seen to be continuous at points other than $(0,0,1)$ for the same reasons. As a point approaches $(0,0,1)$ on $S^2$, we have $x,y$ approaching $0$, and thus $\psi (x,y,z)$ approaches $[(0,1)]$. Therefore, $\psi $ is continuous.
 \section*{Problem 3}
+Let $A\subseteq X$, $B\subseteq Y$ be closed sets. Then $A=\overline{A} $, $B=\overline{B} $. We want to show $A\times B=\overline{A\times B} $. Let $(x,y)\in \overline{A\times B} $. Then every open set $U$ containing $(x,y)$ intersects $A\times B$ at some point. Note that the projection $\pi : X\times Y \to X$ given by $(x,y)\mapsto x$ is continuous, as I showed in the previous homework. Let $x\in V\subseteq X$ be open. Note that $(x,y)\mapsto x$, so $(x,y)\in \pi ^{-1}(V)$. Since every open set containing $(x,y)$ intersects $A\times B$, it follows that there exists $(x',y')\in \pi ^{-1}(V)\cap (A\times B)$. We thus have $\pi(x',y')=x'\in V \cap A$, and thus every open set containing $x$ intersects $A$ at some point $x'$. Therefore, $x\in \overline{A} =A$. By equivalent logic, $y\in B$.
+
+Thus, for all $(x,y)\in \overline{A\times B} $, we have $x\in A$ and $y\in B$, and thus $(x,y)\in A\times B$. Thus, $\overline{A\times B} \subseteq A\times B$. We also have $A\times B\subseteq \overline{A\times B} $ by definition, and thus $A\times B=\overline{A\times B} $. Thus, $A\times B$ is closed.
 \section*{Problem 4}
 \begin{itemize}
-	\item
-	\item 
-	\item By homework 1, it suffices to show any metric space is Hausdorff.
-	\item hi
+	\item If $d(\left\{ x \right\} ,A)=0$, then $\inf \left\{ d(x,a)\mid a\in A \right\} =0$. Therefore, for all $a\in A$, $d(x,a)\geq 0$. Suppose for contradiction that $d(x,a)>0$ for all $a\in A$. If there were to exist some $a\in A$ such that $d(x,a)$ were a lower bound for this, meaning $d(x,a)\leq d(x,b)$ for all $b\in A$, then we would have $d(x,a)=\inf \left\{ d(x,a)\mid a\in A \right\} $ by definition, and thus $d(x,a)=0$, a contradiction. Therrefore, there exists no lower bound $d(x,a)$ with $a\in A$, and we must have that for any $a\in A$, there exists some $a'\in A$ such that $d(x,a')<d(x,a)$. We must also have that for any $r<0$, there exists $a\in A$ such that $d(x,a)<r$ by definition of infimum. Therefore, for all $r\in\mathbb{R} ^+$, there exists some $B_s(x)$ with $s=d(x,a)<r$ for some $a\in A$, such that $x\in A$.
+
+		Since every open set containing $x$ must be a union of basis sets, by logic used in the previous homework we can reduce the question of all open sets containing $x$ to that of all basis sets containing $x$. Let $B_\ell \left( z \right) $ be an open ball containing $x$, and note that $B_{\ell -d(x,z)} (x)\subseteq B_\ell (z)$ by logic used extensively in the previous homework that I don't want to type back up. Since $\ell -d(x,z)\in\mathbb{R} ^+$, there exists some $a\in A$ such that $d(x,a)<\ell -d(x,z)$, and thus $a\in B_{\ell -d(x,z)} (x)$. Therefore, $B_\ell (z)$ contains $a$. Therefore, every open set containing $x$ intersects $A$ at some point, and $x\in \overline{A} $. Since $A$ is closed, $x\in A$. This contradicts our assumption that $d(x,a)>0$ for all $a\in A$, and thus there exists $a\in A$ such that $d(x,a)=0$. By definition of a metric, we have $x=a$, and thus $x\in A$.
+	\item Let $(a,b)=B_r(x)$ be an open interval in $\mathbb{R} $, and note that $a\notin (a,b)$. Suppose for contradiction that $\inf \left\{ d(a,y)\mid y\in B_r(x) \right\} >0$. It follows that there exists $y\in B_r(x)$ such that $d(a,y)>0$, and $d(a,z)\geq d(a,y)$ for all $z\in B_r(x)$. Since $a<x$, we must have $z<x$, otherwise $d(x,a)<d(z,a)$, which would be a contradiction. Define
+		\[
+			z\coloneqq x-\left( r-\frac{d(a,y)}{2}  \right) 
+		.\]
+		Note that
+		\[
+			d(a,x)=\left| x-x+r-\frac{d(a,y)}{2}  \right| =r-\left| \frac{d(a,y)}{2}  \right| <r
+		.\]
+		Therefore, $z\in B_r(x)$. Moreover, note that
+		\[
+			d(a,z)=\left| (x-r)-x+r-\frac{d(a,y)}{2}  \right| =\frac{d(a,y)}{2} <d(a,y)
+		.\]
+		Therefore, $d(a,z)<d(a,y)$, contradicting our assumption that $\inf \left\{ d(a,y)\mid y\in B_r(x) \right\} >0$.
+	\item Let $x,y\in X$ such that $x\neq y$. Let $d(x,y)=r$. Then $y\notin B_{r/2} (x)$, since $d(x,y)=r>r/2$, and similarly $x\notin B_{r/2} (y)$. Now let $a\in B_{r/2} (x)$. We must have $d(x,a)<r/2$, and thus
+		\[
+			d(x,y)\leq d(x,a)+d(a,y)\implies d(a,y)\geq d(x,y)+d(x,a)=r+d(x,a)>r
+		.\]
+		Since $d(y,a)>r>r/2$, we have that $a\notin B_{r/2} (y)$. By the same logic, for any $a\in B_{r/2} (y)$, we have $a\notin B_{r/2} (x)$. Therefore, $B_{r/2} (x) \cap B_{r/2} (y)=\varnothing $, and thus $X$ is Hausdorff.
+
+		By the first homework problem,
+		\[
+			\bigcap_{V} \overline{V} =\left\{ x \right\} 
+		,\]
+		where $V$ ranges over open sets containing $V$. Since this is an intersection of closed sets, we have that $\left\{ x \right\} $ is closed for all $x\in X$.
+	\item Let $Y\subseteq X$ be closed, and let $x\in X$ such that $x\notin Y$. By contrapositive of part 1, since $x \notin Y$, then either $Y$ is not closed, or $d(\left\{ x \right\} ,Y)\neq 0$. Since the first statement is false, we must have $d(\left\{ x \right\} ,Y)>0$. Define $d(\left\{ x \right\} ,Y) /2 \eqqcolon r$. Let $U\coloneqq B_r(x)$, and let
+		\[
+			V\coloneqq \bigcup_{y\in Y} B_r(y)
+		.\]
+		We clearly have that $x\in U$ and $Y\subseteq V$, so it suffices to show these sets are disjoint.
+
+		Let $a\in U$, and let $y\in Y$. We will show $a\notin B_r(y)$. We have
+		\[
+			d(x,y)\leq d(x,a)+d(a,y)\implies d(a,y)\geq d(x,y)-d(x,a)
+		.\]
+		Since $2r=\inf \left\{ d(x,y)\mid y\in Y \right\} $, it follows that $d(x,y)\geq 2r$ for all $y\in Y$. Thus,
+		\[
+			d(a,y)\geq d(x,y)-d(x,a)\geq 2r-d(x,y)>2r-r=r
+		.\]
+		Therefore, $d(a,y)>r$, and thus $a\notin B_r(y)$.
+
+		Now let $a\in V$. It follows that there exists some $B_r(y)$ in the union such that $a\in B_r(y)$. By the same logic, $d(x,y)\geq 2r$, and thus
+		\[
+			d(x,y)\leq d(x,a)+d(a,y)\implies d(x,a)\geq d(x,y)-d(a,y)\leq 2r-d(a,y)>2r-r=r
+		.\]
+		Therefore, $d(x,a)>r$, and $a\notin B_r(x)$. Therefore, $U \cap V=\varnothing $, and $X$ is $T_3$.
 \end{itemize}
 
 \section*{Problem 5}
+For notational purposes, let $\mathcal{B}$ be the metric basis, and let $\mathcal{B}_Y$ be the set in question $\left\{ B_r(y)\mid r\in\mathbb{Q} ,y\in Y \right\} $. I also don't remember us showing the following result in class, so I will show it here.
+\begin{lemma}\label{lma:1}
+	Let $Y\subseteq X$ be a dense subset of some topological space $X$. Then for all nonempty open sets $U\subseteq X$, there exists $y\in U \cap Y$. That is, every nonempty open set contains some element of $Y$.
+\end{lemma}
+\begin{proof}
+	Since $Y$ is dense, by definition $\overline{Y} =X$. Since $\overline{Y} =X$ is the smallest closed set containing $Y$, it follows that no proper closed subset $U\subsetneq X$ contains $Y$. Equivalently, if $U\subsetneq X$ is closed, then $Y\setminus U\neq \varnothing $.
+
+	If $Y \cap U=\varnothing $, then $U^{c} \subseteq Y$, and since $U\neq X$, we have $U^{c} =U^{c} \cap Y\neq \varnothing $, and we are done. If $U$ and $Y$ are \emph{not} disjoint, then $Y\setminus U\neq \varnothing $ since $U$ doesn't contain $Y$. By definition, this implies $Y \cap U^{c} \neq \varnothing $. Since $U^{c} $ is open, there exists $y\in Y \cap U^{c} $. Since every nonempty open set can be represented as $U^{c} $ for $U\subsetneq X$ closed, we have that every nonempty open set $U\subseteq X$ has some $y\in Y \cap U$.
+\end{proof}
+
+Let $a\in X$. Since the set of open balls forms a basis for the metric topology, there exists some $B_r(x)\in \mathcal{B} $ such that $a\in B_r(x)$. Since $Y$ is dense, there exists $y\in Y$ such that $y\in B_r(x)$. It follows that
+\[
+	d(a,y)\leq d(a,x)+d(a,y)<d(a,x)+r
+.\]
+Therefore,
+\[
+	a\in B_{d(a,x)+r} (y)
+.\]
+Thus, for all $x\in X$, there exist $y\in Y$ and $r\in\mathbb{R} $ such that $a\in B_r(y)$. Note that since $\mathbb{Q} $ is dense in $\mathbb{R} $, for all $r\in \mathbb{R} $ there exists some $q\in\mathbb{Q} $ such that $q>r$. We thus have $B_r(y)\subseteq B_q(y)$, and $B_q(y)\in \mathcal{B}_Y$.
+
+Now let $r,s\in\mathbb{Q} $ and $y_1,y_2\in Y$. Then $B_r(y_1),B_s(y_2)\in \mathcal{B} _Y$. Then since $\mathcal{B}_Y \subseteq \mathcal{B} $, these sets are open, and thus $B_r(y_1)\cap B_s(y_2)$ is open. Since $Y$ is dense, there exists $y\in Y$ such that $y\in B_r(y_1)\cap B_s(y_2)$. Define $\ell \coloneqq \min \left\{ r-d(y,y_1),s-d(y,y_2) \right\} $. Note that for all $a\in B_\ell (y)$, we have $d(a,y)<\ell $, and thus
+\[
+	d(a,y)<r-d(y,y_1)\implies d(a,y)+d(y,y_1)<r\implies d(a,y_1)\geq d(a,y)+d(y,y_1)<r
+.\]
+Therefore, $a\in B_r(y_1)$. Similarly,
+\[
+	d(a,y)<s-d(y,y_2)\implies d(a,y)+d(y,y_2)<s\implies d(a,y_2)\leq d(a,y)+d(y,y_2)<s
+.\]
+Therefore, $a\in B_s(y_2)$. Therefore, we have $B_\ell (y)\subseteq B_r(y_1)\cap B_s(y_2)$.
+
+If $\ell \in\mathbb{Q} $, then $B_\ell (y)\in \mathcal{B}_Y$, and we are done. If not, then since $d(y,a)<\ell $, the set $(d(y,a),\ell )$ is open in $\mathbb{R} $. Since $\mathbb{Q} $ is dense in $\mathbb{R} $, there exists $q\in (d(y,a),\ell )$ such that $q\in\mathbb{Q} $, and thus $a\in B_q(y)$. Moreover, since $q<\ell $, we have $B_q(y)\subseteq B_\ell (y)$. Since $q\in\mathbb{Q} $, we have $B_q(y)\in \mathcal{B}_Y$, and we are done.
 \section*{Problem 6}
+It suffices to show the identity map $\mathrm{id} : \left(B_X,d_H^{d_1} \right) \to \left( B_X,d_H^{d_2}  \right) $ is continuous, since the logic in both directions is the same, thus making $\mathrm{id} $ a homeomorphism, and thus $\mathrm{id} $ gives a bijection $\mathcal{T}_1 \to \mathcal{T}_2$. Since it is the identity map, we would then have $\mathcal{T}_1 =\mathcal{T} _2$.
+
+Let $A\in \mathcal{B}_1$, and fix $\varepsilon >0$. Note that for all $B\in B_\varepsilon^1(A)$, we must have that for all $b\in B$, there exists $a\in A$ such that $d_1(a,b)<\varepsilon $. Since the topologies induced by $d_1$ and $d_2$ are the same, $\mathrm{id} : (X,d_1) \to (X,d_2)$ is trivially a homeomorphism, and thus for every such $b$, there exists $\delta >0$ such that $B_\delta^{d_2} (b)\subseteq B_\varepsilon^{d_1} (a)$. Since $B_\varepsilon^{d_1} (A)$ is clearly equivalent to
+\[
+	B_\varepsilon^{d_1} (A)=\bigcup_{a\in A} B_\varepsilon^{d_1} (a)
+,\]
+it follows that for all $b\in B_\varepsilon^{d_1} (A)$, there exists $b\in B_\delta^{d_2} (b)\subseteq B_\varepsilon ^{d_1} (A)$. Fix $\delta_b$ to be the sup over all such $\delta $s,and we have that for all $b\in B$, there exists $a\in A$ such that $d_2(a,b)<\delta$.
+
+I got stuck here. I also don't fully understand what it means for a set to be bounded in the question; my understanding after looking some stuff up is that no points in the set are infinitely far away from each other under a specific metric. But it's not clear how we define bounded in this problem, since there are two metrics. I didn't get to the point of the problem where boundedness is important so this didn't impact my proof, but I didn't quite understand the problem due to this.
 \section*{Problem 7}
+Let $x\in X$. We have $\overline{d} (x,x)=\min \left\{ 0,1 \right\} =0$. Moreover, if $\overline{d} (x,y)=0$ for some $x,y\in X$, then $\min \left\{ d(x,y),1 \right\} =0$, and thus $d(x,y)=0$, and thus $x=y$. Therefore, $\overline{d} (x,y)=0$ if and only if $x=y$.
+
+Let $x,y\in X$. Since $d$ is a metric, $d(x,y)=d(y,x)$, and thus
+\[
+	\overline{d} (x,y)=\min \left\{ d(x,y),1 \right\} =\min \left\{ d(y,x),1 \right\} =\overline{d} (y,x)
+.\]
+Therefore, $\overline{d} (x,y)=\overline{d} (y,x)$.
+
+Finally, let $x,y,z\in X$. We have
+\[
+	\overline{d} (x,y)+\overline{d} (y,z)=\min \left\{ d(x,y),1 \right\} +\min \left\{ d(y,z),1 \right\} 
+.\]
+We will brute force this with four cases.
+\begin{itemize}
+	\item Suppose $d(x,y),d(y,z)<1$. Then since $d(x,y)+d(y,z)\geq d(x,z)$, we have $d(x,z)<1$, and thus
+		\[
+			\overline{d} (x,z)=d(x,z),\qquad \overline{d} (x,y)=d(x,y),\qquad \overline{d} (y,z)=d(y,z)
+		.\]
+		Therefore, $\overline{d} (x,z)\leq \overline{d} (x,y)+\overline{d} (y,z)$.
+	\item Suppose $d(x,y)\geq 1>d(y,z)$. Then
+		\[
+			d(x,y)+d(y,z)\geq 1+d(y,z)>1
+		.\]
+		Since $\overline{d} (x,z)\leq 1$ for all $x,z\in X$, we have that
+		\[
+			\overline{d} (x,y)+\overline{d} (y,z)\geq \overline{d} (x,z)
+		.\]
+	\item Suppose $d(y,z)\geq 1>d(x,y)$. By the same logic as previously, the result follows.
+	\item Suppose $d(x,y),d(y,z)\geq 1$. Then $\overline{d} (x,y)+\overline{d} (y,z)=2$. If $d(x,z)<1$, then $\overline{d} (x,z)=d(x,z)<1<2$. If not, then $\overline{d} (x,z)=1<2$. Therefore,
+		\[
+			\overline{d} (x,z)\leq \overline{d} (x,z)+\overline{d} (y,z)
+		.\]
+\end{itemize}
+Therefore, $\overline{d} $ is a metric on $X$.
+
+Note that the basis $\mathcal{B}_{\overline{d} } \subseteq \mathcal{B}_d$, so the topology induced by $\overline{d} $ is a subset of the topology induced by $d$. It thus suffices to show $\mathcal{B}_d \subseteq \mathcal{T}_{\overline{d} } $. Let $B_r^d(x)$ be an open ball in the metric $d$. If $r\leq 1$ we are done immediately by definition of $\overline{d} $, so suppose without loss of generality that $r>1$. Let $y\in B_r^d(x)$, and define $\ell \coloneqq r-d(x,y)$. For any $z\in B_\ell^d(y)$, we have
+\[
+	d(x,z)\leq d(x,y)+d(y,z)<d(x,y)+r-d(x,y)=r
+.\]
+Therefore, $z\in B_r^d(x)$, and $B_\ell ^d(y)\subseteq B_r^d(x)$.
+
+Using this same notation, note that $\overline{d}(x,y)\leq d(x,y)$ for all $x,y\in X$, since the only possibilities are that $d(x,y)=\overline{d} (x,y)$, or $\overline{d}(x,y)=1$ when $d(x,y)\geq 1$. We thus have
+\[
+	B^{\overline{d} }_{\ell_y} (y)\subseteq B_{\ell _y}^d(y)\subseteq B_r^d(x)
+\]
+for all $y\in B_r^d(x)$, where $\ell_y$ is the distance corresponding to $y$ as defined above. Consider the union
+\[
+	U\coloneqq \bigcup_{y\in B_r^{d} (x)} B_{\ell_y}^{\overline{d} } (y)
+.\]
+By logic we have used extensively in the past, since each $B_{\ell _y}^{\overline{d} } (y)\subseteq B_r^{d} (x)$, we have $U=B_r^d(x)$. Since this is a union of open sets, $B_r^d(x)$ is open in the topology induced by $\overline{d} $. Therefore, $\mathcal{T}_d \subseteq  \mathcal{T}_{\overline{d} } $, and they must induce the same topology.
 \end{document}

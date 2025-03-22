@@ -1,0 +1,44 @@
+\chapter{Wavefunctions}
+\lecture{13}{Tue 18 Mar 2025 14:01}{Wavefunctions}
+
+For the next few weeks, we will simplify the math to 1-dimensional space. We will build up to the Hydrogen atom at the end of the course.
+
+Since position is a continuous variable, we can take the state space $\mathcal{H} $ to be a function space. More precisely, $\mathcal{H} =L^2(\mathbb{C} )$, and the inner product is given by
+\[
+	\left\langle \psi \mid \phi  \right\rangle =\int_\mathbb{R} \overline{\psi } \phi  \,\mathrm{d} \mu 
+.\]
+We immediately have
+\[
+	\left\| \psi  \right\|^2 = \left\langle \psi \mid \psi  \right\rangle =\int_\mathbb{R} \left| \psi  \right|^2 \,\mathrm{d} \mu =\left\| \psi  \right\|_2^2
+.\]
+It may be the case that spacetime is discretized at the planck scale or something similar, in which case the integral becomes a sum instead:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\int_{\mathbb{R} } \overline{\psi } \phi  \,\mathrm{d} \mu \arrow[r]&\sum_{i=1}^{N} \left| f(x_i) \right|^2 \delta x
+\end{tikzcd}\]
+for $\delta x$ the width of whatever is discretized.
+
+We can constrain $\mathcal{H} =L^2(X)$ for $X$ some subset of our space, and we can constrain the bounds on our norm and stuff.
+
+We choose our basis states to be the dirac delta functions $\ket{x_i} =\delta(x-i)$. This is kind of needed, since we want to normalize our basis states. We can calculate
+\[
+	\int_\mathbb{R} \delta(x-i)\psi(x)  \,\mathrm{d} \mu =\psi (i)
+.\]
+This follows because $\delta $ is actually a measure, so even though the function is 0 except on a set of measure 0, stuff jsut works cuz $\int \delta  \,\mathrm{d} x=1$. Therefore, we can define wavefunctions as
+\[
+	\Psi (x)=\braket{x}{\psi } 
+.\]
+Recall here that $\ket{x} \coloneqq \delta_x$.
+
+Since position is an observable, it is a hermitian operator denoted $X$. Since we chose a position basis $\ket{x} $ of states with definite $X$-value (position), they must be eigenstates of the position operator. We can thus define the position as $\left| \Psi (x) \right|^2$. The position operator in this basis is thus $\mathbbm{1}$.
+
+Since the set of delta functions is orthormal, and they are eigenvalues of the identity operator, we have a completion relation
+\[
+	\int_\mathbb{R} \ket{x} \bra{x}  \,\mathrm{d} x=1_{\mathcal{H} } 
+.\]
+The probability of finding a particle in $[a,b]$ is
+\[
+	\int_{a}^{b} \left| \Psi (x) \right|^2 \,\mathrm{d} x
+.\]
+Here, $\Psi $ is the wave function $\Psi (x)=\braket{x}{\psi } $.
+
+Let $H$ be the Hamiltonian (energy operator), with eigenstates $H\ket{E_i} =E_i\ket{E_i} $.

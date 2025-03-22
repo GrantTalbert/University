@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  15 MAR 2025 21:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  20 MAR 2025 21:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -841,7 +841,11 @@ File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 Package: titlepageBU 
 )
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 14.
- (./Algebra_Aluffi.aux)
+ (./Algebra_Aluffi.aux
+
+LaTeX Warning: Label `lma:9.5' multiply defined.
+
+)
 \openout1 = `Algebra_Aluffi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -937,7 +941,7 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
  on input line 14.
 
-<BU_Logo.png, id=31, 3854.4pt x 2168.1pt>
+<BU_Logo.png, id=35, 3854.4pt x 2168.1pt>
 File: BU_Logo.png Graphic file (type png)
 <use BU_Logo.png>
 Package pdftex.def Info: BU_Logo.png  used on input line 15.
@@ -1076,29 +1080,75 @@ Package mdframed Info: Not enough space on this page on input line 203.
 Package mdframed Info: Not enough space on this page on input line 203.
 
 
-[7]) (./files/Chapter_9/section_2.tex) (./files/Chapter_9/section_3.tex) (./files/Chapter_9/section_4.tex) (./files/Chapter_9/section_5.tex) (./files/Chapter_9/section_6.tex) (./files/Chapter_9/section_7.tex) (./files/Chapter_9/section_8.tex))
+[7]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 235.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 237.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 239.
 
-[8] (./Algebra_Aluffi.aux)
+
+[8]
+
+[9]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 282.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 289.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 291.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 314.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 316.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 319.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 325.
+
+
+[10]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 327.
+) (./files/Chapter_9/section_2.tex) (./files/Chapter_9/section_3.tex) (./files/Chapter_9/section_4.tex) (./files/Chapter_9/section_5.tex) (./files/Chapter_9/section_6.tex) (./files/Chapter_9/section_7.tex) (./files/Chapter_9/section_8.tex))
+
+[11] (./Algebra_Aluffi.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `Algebra_Aluffi.out' has not changed.
-(rerunfilecheck)             Checksum: E18C6AA3C06BA42069A4D0C68A15750D;1319.
+(rerunfilecheck)             Checksum: 5F0D236E7BE485057C6A4C740D576671;1612.
  ) 
 Here is how much of TeX's memory you used:
- 40928 strings out of 473330
- 983045 string characters out of 5719768
- 1491575 words of memory out of 5000000
- 63328 multiletter control sequences out of 15000+600000
+ 41506 strings out of 473330
+ 997361 string characters out of 5719768
+ 1502575 words of memory out of 5000000
+ 63895 multiletter control sequences out of 15000+600000
  574407 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,16n,104p,783b,1311s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on Algebra_Aluffi.pdf (10 pages, 424114 bytes).
+Output written on Algebra_Aluffi.pdf (13 pages, 442552 bytes).
 PDF statistics:
- 236 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 265 PDF objects out of 1000 (max. 8388607)
+ 197 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

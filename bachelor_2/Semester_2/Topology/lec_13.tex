@@ -1,0 +1,58 @@
+\lecture{13}{Thu 20 Mar 2025 11:07}{Connected}
+\begin{theorem}\label{thm:4.5}
+	$\mathbb{R} $ is connected. In particular, any interval is connected.
+\end{theorem}
+\begin{corollary}\label{cor:4.1}
+	Any open set $U\subseteq \mathbb{R} $ is a disjoint union of open intervals.
+\end{corollary}
+\begin{corollary}\label{cor:4.2}
+	$\mathbb{R} ^n$ is connected.
+\end{corollary}
+\begin{corollary}\label{cor:4.3}
+	$S^2$ is connected by steregraphical projection. More precisely, $\mathbb{C} \mathbb{P} ^1\cong S^2\cong \mathbb{R} ^2$. Similarly, $S^1 \cong \mathbb{R} ^2\setminus \left\{ 0 \right\} \cong \mathbb{R}_{>0} $ are connected.
+\end{corollary}
+
+\begin{theorem}\label{thm:4.6}
+	Let $X$ be connected, and let $q : X \to Y$ be surjective and continuous. Then $Y$ is connected. More precisely, if $q : X \to Y$ and the decomposition $q : X \to \im q$ is continous, then $\im q$ is connected.
+\end{theorem}
+\begin{proof}
+	Recall that all surjections are quotients up to isomorphism.
+
+	Let $U \cup V=Y$ with $U \cap V=\varnothing $. Then since $q$ is continuous, $q^{-1} (U) \cup q^{-1} (V)=X$, but also $q^{-1} (U) \cap q^{-1} (V) = q^{-1} (U \cap V)=\varnothing $. Since $X$ is connected, we must have either $U$ or $V$ empty. Without loss of generality, suppose $U$ is empty. If $q^{-1} (U)$ is empty, then there exists no $x$ such that $q(x)\in U$. Since $q$ is surjective and $Y$ has the quotient topology, we mus have $U$ empty.
+\end{proof}
+
+As an example, since the torus $T^2$ can be viewed as $[0,1]\times [0,1]/\sim $ for some relation $\sim $, it is connected in the quotient topology.
+
+For the first time in topology, we can show spaces are \emph{not} homeomorphic. For example, $\mathbb{R} ^2$ is not homeomorphic to $\mathbb{R} $. Suppose for contradiction that $f : \mathbb{R} ^2 \to \mathbb{R} $ is a homeomorphism, and choose $x\in \mathbb{R} ^2$ such that $x\mapsto 0$. Then the restriction $\mathbb{R} ^2\setminus \left\{ x \right\} \to \mathbb{R} \setminus \left\{ 0 \right\} $ is still continuous, but clearly $\mathbb{R} \setminus \left\{ 0 \right\} $ is not connected, whereas $\mathbb{R} ^2\setminus \left\{ x \right\} $ is connected.
+
+\begin{theorem}[Intermediate Value Theorem]\label{thm:4.7}
+	Let $X$ be connected, and let $f : X \to \mathbb{R} $ be connected. If $a<c<b$ with $a,b\in f(X)$, then $c\in f(X)$.
+\end{theorem}
+\begin{proof}
+	Suppose for contradiction that $c\notin f(X)$. Then $\left( -\infty ,c \right) ,\left( c,\infty  \right) $ are open and contain $a,b$ respectively. These are open in $X$, and thus
+	\[
+		f^{-1} \left( -\infty ,c \right) \cup f^{-1} \left( c,\infty  \right) =X\setminus f^{-1} (c)=X
+	.\]
+	These sets are also trivially disjoint, and thus $X$ is connected, a contradiction.
+\end{proof}
+\begin{theorem}[Brower Fixed Point Theorem]\label{thm:4.8}
+	Let $f : [-1,1] \to [-1,1]$ be continuous. Then there exxiss $x\in [-1,1]$ such that $x=f(x)$.
+\end{theorem}
+\begin{proof}
+	If $f(-1)=-1$ or $f(1)=1$, then we are done. Otherwise, assume $f(-1)>-1$ and $f(1)<1$. Let $g(x)=f(x)-x$, which is continuous by composition of continuous maps. Then $g(-1)=f(-1)+1>0$, and similarly $g(1)=f(1)-1<0$. From the intermediate value theorem, there exists $x\in [-1,1]$ such that $g(x)=0$, and thus $f(x)=x$.
+\end{proof}
+
+\begin{definition}[Path Connectedness]\label{dfn:4.3}
+	A topological space $X$ is \emph{path connected} if for every $x,y\in X$, there exists a continous map $\phi :[0,1]\to X$ such that $\phi (0)=x$ and $\phi (1)=y$.
+\end{definition}
+\begin{lemma}\label{lma:4.2}
+	If $X$ is path connected, then $X$ is connected.
+\end{lemma}
+\begin{proof}
+	Let $U,V\subseteq X$ such that $U \cap V=\varnothing $ and $U \cup V=X$. Suppose for contradiction that these sets are nonempty. Then there exists $u\in U$, $v\in V$, and thus there exists $\phi : [0,1] \to X$ such that $\phi (0)=u$ and $\phi (1)=v$. Consider the preimages $\phi ^{-1} (U),\phi ^{-1} (V)$ as open sets in $[0,1]$, and note that
+	\[
+		\phi (U) \cup \phi ^{-1} (V)=[0,1],\qquad \phi ^{-1} (U) \cap \phi ^{-1} (V)=\varnothing 
+	.\]
+	Moreover, these sets are nonempty. Since $[0,1]$ is connected, this is a contradiction.
+\end{proof}
+

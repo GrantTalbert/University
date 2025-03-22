@@ -1,0 +1,92 @@
+\lecture{14}{Thu 20 Mar 2025 14:03}{Wavefunctions and Schrodingers Equation}
+One remark I had is that the ket $\ket{\psi } $ for spin was basically extracting the spin state from the overall state $\ket{\Psi } $, and similarly the wavefunction $\ket{\psi (x)} $ is the position state which is extracted from the overall state $\ket{\Psi } $, by $\psi (x)=\braket{x}{\Psi } $.
+
+We are going to solve the Schrodinger equation for the wavefunction by solving for the eigenstates of the hamiltonian. We will be discussing hamiltonians for a single particle with position $x\in\mathbb{R} $.
+
+Recall for a classical system, we have potential energy $V(x)$ and kinetic energy $\frac{1}{2} \frac{p^2}{m} $, so the hamiltonian is
+\[
+	H=\frac{1}{2} \frac{p^2}{m} +V(x)
+.\]
+The potential is related to a force applied to the system by
+\[
+	\frac{\mathrm{d}V(x)}{\mathrm{d}x} =-F
+.\]
+We will be studying potentials over the next few classes, and will start with a particle in a box. We will be studying time-independent potentials, because it's easier, and since many interesting potentials are time-independent.
+
+To make this quantum, we need to make $p$ an operator. Since $p$ is momentum, and thus an observable, we need it to be an operator. Similarly, we need $V(x)$ to be an operator. Since $V(x)$ is an operator, we can just do $V(X)$, where $X$ is the position operator. This is simple, since $V(X)\ket{x} =V(x)\ket{x} $, since $\ket{x}$ is an eigenstate of $X$ with eigenvalue $x$. We can thus evaluate $V\left( X \right) \ket{\psi } $ by writing $\ket{\psi } $ as a linear combination in $\ket{x} $:
+\[
+	\ket{\psi } =\int \psi (x)\ket{x}  \,\mathrm{d} x
+.\]
+
+For example,
+\[
+	V\left(x \right) =x^2
+.\]
+We then have
+\[
+	V(X)\ket{\psi } =X^2 \ket{\psi } =X^2 \int \psi (x)\ket{x}  \,\mathrm{d} x=x^2\ket{\psi } 
+.\]
+So for example,
+\[
+	\bra{\psi } X^2 \ket{\psi } =\int x^2 \left| \psi (x) \right|^2 \,\mathrm{d} x
+.\]
+
+Now the question is what to define $p$ as. We define
+\[
+	P \cong i \hbar \frac{\mathrm{d}}{\mathrm{d}x} 
+.\]
+Evaluating $\bra{\psi } P\ket{\psi } $ goes like this.
+\[
+	\bra{\psi } P \ket{\psi } =\int \psi^*(x)\left( -i\hbar \frac{\mathrm{d}}{\mathrm{d}x}  \right) \psi (x) \,\mathrm{d} x
+.\]
+We then have
+\[
+	\bra{x} P \ket{\psi } =-i\hbar \frac{\mathrm{d}}{\mathrm{d}x} \psi (x)
+.\]
+This is simply a definition. Since quantum is more fundamental than classical, we don't ``derive'' momentum as an operator, but rather we would show that this momentum operator behaves like classical momentum in the limit as quantum approaches classical.
+
+We thus have
+\begin{align*}
+	\bra{x} H \ket{\psi } &=H \psi (x)\\
+			      &=\left( \frac{\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} +V(x) \right) \psi (x)\\
+			      &=\frac{\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} \psi (x)+V(x)\psi (x)
+.\end{align*}
+By the Schrodinger equation, we have
+\begin{align*}
+	-i\hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi } &=H \ket{\psi } \\
+							   &=\left( \frac{1}{2m} P^2+V(X) \right) \ket{\psi } \\
+							   &=\left( \frac{\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} +V(X) \right) \ket{\psi } \\
+							   &=\frac{\hbar ^2}{2m} \psi (x)+V(x)\psi (x)
+.\end{align*}
+To solve the Schrodinger equation, we want to solve the eigenvalue problem for this $H$. This is a very deep fact. Since $H$ represents energy, and we only measure eigenstates, this means the only observable energy values $E$ satisfy
+\[
+	\frac{\hbar ^2}{2m}\frac{\mathrm{d}^2}{\mathrm{d}x^2} \psi (x)+V(x)\psi (x)=E \psi (x)
+.\]
+
+Now we will prove the pop culture version of the uncertainty principle. This is the canonical commutation relation
+\[
+	[X,P]=i \hbar 
+.\]
+We have
+\begin{align*}
+	\bra{\psi _1} [X,P]\ket{\psi _2} &=\bra{\psi _1} XP-PX\ket{\psi _2} \\
+					 &=\bra{\psi _1} XP \ket{\psi _2} -\bra{\psi _1} PX\ket{\psi _2} \\
+					 &=\int \psi_1^*(x) x\left( -i \hbar \frac{\mathrm{d}}{\mathrm{d}x}  \right) \psi_2(x) \,\mathrm{d} x-\int \psi_1^*(x)\left( -i \hbar \frac{\mathrm{d}}{\mathrm{d}x}  \right) x \psi _2(x) \,\mathrm{d} x\\
+					 &=\int \psi_1^*(x)x\left( -i \hbar \frac{\mathrm{d}\psi _2(x)}{\mathrm{d}x}  \right) -\psi_1^*(x)\left( -i \hbar  \right) \left( \frac{\psi _2(x)\mathrm{d}x}{\mathrm{d}x} +x \frac{\mathrm{d}\psi _2}{\mathrm{d}x}  \right)  \,\mathrm{d} x\\
+					 &=\text{stuff cancels} \\
+					 &=\int \psi _1^*(x)i\hbar \psi_2(x) \,\mathrm{d} x\\
+					 &=i\hbar \braket{\psi _1}{\psi _2} 
+.\end{align*}
+Using the uncertainty principle, we have
+\[
+	\Delta X\Delta P\geq \frac{1}{2} \left\langle \left| i \hbar  \right|  \right\rangle =\frac{\hbar }{2} 
+.\]
+Using this, we can show
+\[
+	\left\langle P \right\rangle =m \frac{\mathrm{d}}{\mathrm{d}t} \left\langle X \right\rangle 
+.\]
+This implies the classical definition
+\[
+	p=m \frac{\mathrm{d}x}{\mathrm{d}t} 
+.\]
+

@@ -228,4 +228,101 @@ The pullback may be constructed explicitly as follows. Note that since $A\times 
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	A\times B\arrow[r, "\rho _B"]&B\arrow[r, "\psi "]&C.
 \end{tikzcd}\]
-We will now show that we can construct a fibered product using the kernel of the difference of these morphisms. 
+It is shown in the exercises the kernel of the difference of these morphisms can construct a pullback. Moreover, fibered coproducts/pullouts can also be constructed as the dual of this statement.
+
+Such constructions in abelian categories are heavily simplified by the following fact, which is also true in additive categories.
+
+\begin{proposition}\label{prp:9.4}
+	Let $\mathsf{A} $ be an additive category. Then finite products and coproducts coencide; that is, $A\times B\cong A\amalg B$.
+\end{proposition}
+\begin{proof}
+	By the universal property of coproducts, and since zero-morphisms exist in additive categories, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3em]
+		A\arrow[drr, bend left, "\mathrm{id}"]\arrow[dr, "i_A"]\\
+		&A\amalg B\arrow[r, dashed, "\pi _A"]&A\\
+		B\arrow[ur, "i_B"]\arrow[urr, bend right, "0"]
+	\end{tikzcd}\]
+	commutes. By an equivalent construction into $B$, we have morphisms
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[dr, "i_A"]\arrow[rr, "1_A"]&&A\\
+				  &A\amalg B\arrow[ur, "\pi _A"]\arrow[dr, "\pi _B"]\\
+		B\arrow[ur, "i_B"]\arrow[rr, "1_B"]&&B
+	\end{tikzcd}\]
+	By the universal property of products, there exists a unique morphism $(\pi_A\times \pi _B): A\amalg B \to A\times B$ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3em]
+		&&A\\
+		A\amalg B\arrow[r, dashed, "(\pi_A\times \pi _B)"]\arrow[urr, bend left, "\pi _A"]\arrow[drr, bend right, "\pi _B"]&A\times B\arrow[ur]\arrow[dr]\\
+															     &&B
+	\end{tikzcd}\]
+	commutes. I will show that $A\amalg B$ satisfies the universal property of products, together with $\pi _A,\pi _B$.
+
+	Let $Z\to A,B$ be morphisms. Then the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&A\arrow[dr, "i_A"]\arrow[rr, "1_A"]&&A\\
+		Z\arrow[ru]\arrow[dr]&&A\amalg B\arrow[ur, "\pi _A"]\arrow[dr, "\pi_B"]\\
+				     &B\arrow[ur, "i_B"]\arrow[rr, "1_B"]&&B
+	\end{tikzcd}\]
+	commutes, due to the identity morphisms. I can't figure out how to conclude this purely arrow-theoretically without appealing to abelian categores, but it seems fairly obvious why it's true. I'll work on it later.
+\end{proof}
+
+We thus can adobt the notation $A\oplus B$ for both $A\times B$ and $A\amalg B$ in any abelian category, and we call it the direct sum of $A$ and $B$. It comes with natural morphisms
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A,B\arrow[r, tail]&A\oplus B\arrow[r, two heads]&A,B
+\end{tikzcd}\]
+satisfying all properties we would expect.
+
+\subsection{Images, Canonical Decomposition of Morphisms}
+
+Arrow-theoretical approaches allow us to define a canonical decomposition of morphisms in any abelian category. That is, we should be able to decompose any morphism into a monomorphism, an epimorphism, and a unique isomorphism. This result requires multiple lemmas, and will induce an intuitive definition of image. The statement we will prove is that any morphism $\phi : A \to B$ decomposes as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+		A\arrow[rrr, bend left, "\phi "]\arrow[r, two heads, "\coker \ker \phi "']&C\arrow[r, dashed, tail, two heads]&K\arrow[r, tail, "\ker \coker \phi "']&B.
+\end{tikzcd}\]
+We would assume that $\ker \coker \phi $ should play the role of $\im \phi $. We can formalize this notion somewhat. Note that in the context of sets, any subset $B'$ such that $\im \phi \subseteq B'\subseteq B$ has the property that the mapping $\phi : A \to B'$ factors uniquely through $\im \phi $. By replacing ``subobject'' with ``monomorphism'', we can thus see $\im \phi $ as initial with respect to being a monomorphism $\_\to B$ through which $\phi $ factors.
+
+\begin{lemma}\label{lma:9.5}
+	Let $\phi : A \to B$ be a morphism in an abelian category, and let $\iota  : K \to B$ be $\ker \coker \phi $. Then
+	\begin{itemize}
+		\item $\iota $ is a monomorphism;
+		\item $\phi $ factors through $\iota $;
+		\item $\iota $ is initial with respect to these properties.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	Since $\iota $ is a kernel in an abelian category, it is a monomorphism. Since the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[r, "\phi "]&B\arrow[r, "\coker \phi "]&L
+	\end{tikzcd}\]
+	is $0$ by definition of cokernel, $\phi $ factors uniquely through $\ker \coker \phi =\iota $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[r]\arrow[rr, bend left, "\phi "]&K\arrow[r, "\iota "]&B
+	\end{tikzcd}\]
+	This shows the first two properties. Now suppose $\lambda : L \to B$ is mono and factors through $\phi $. We want to show $\iota $ factors through $\lambda $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&L\arrow[dr, "\lambda "]\\
+		A\arrow[ur]\arrow[rr, bend right, "\phi "]\arrow[r]&K\arrow[u]\arrow[r, "\iota "]&B
+	\end{tikzcd}\]
+	
+	Since $\coker \lambda \circ \lambda =0$, we have $\coker \lambda \circ \phi =0$, and thus $\coker \lambda $ factors uniquely through $\coker \phi $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&L\arrow[dr, tail, "\lambda "]\\
+		A\arrow[ur]\arrow[r]\arrow[rr, bend right, "\phi "']&K\arrow[r, tail, "\iota "]&B\arrow[r, "\coker \phi  "]\arrow[dr, "\coker \lambda "']&\operatorname{Cok} \phi\arrow[d, dashed] \\
+								   &&&\operatorname{Cok} \lambda 
+	\end{tikzcd}\]
+	It follows fairly obviously that $\coker \lambda  \circ \iota =0$, and thus $\iota $ factors uniquely through $\ker \coker \lambda $. Since $\lambda $ is mono and $\mathsf{A} $ is abelian, $\ker \coker \lambda =\lambda $.
+\end{proof}
+This lemma motivates the following definition.
+\begin{definition}[Image/Coimage]\label{dfn:9.5}
+	Let $\phi : A \to B$ be a morphism in an abelian category. The image $\im \phi $ is defined as $\ker \coker \phi $, and the coimage $\operatorname{coim} \phi $ is defined as $\coker \ker \phi $.
+\end{definition}
+
+
+\begin{theorem}[Canonical Decomopsition]\label{thm:9.1}
+	Let $\phi : A \to B$ be a morphism in an abelian category. Then there exists a unique $\widetilde{\phi } $ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+		A\arrow[rrr, bend left, "\phi "]\arrow[r, two heads, "\coker \ker \phi "']&C\arrow[r, dashed, tail, two heads]&K\arrow[r, tail, "\ker \coker \phi "']&B
+	\end{tikzcd}\]
+	commutes.
+\end{theorem}
+\begin{proof}
+	a
+\end{proof}

@@ -1,0 +1,29 @@
+\lecture{17}{Mon 17 Mar 2025 13:27}{bro idfk}
+\begin{definition}[Derivative]\label{dfn:kjsdn}
+	Let $f(x)=a_\nu   x^\nu \in F[x]$. Define the derivative $f'(x)=\nu a_\nu   x^{\nu -1} $.
+\end{definition}
+\begin{theorem}[Separability]\label{thm:4.1}
+	Let $F$ be a field and let $f(x)\in F[x]$ be irreducible. If $\operatorname{char} F=0$, then $f(x)$ has no repeated roots in any splitting field. If $\operatorname{char} =p$ for $p\neq 0$, then $p$ is prime, and moreover $f(x)$ has multiple zeroes only if it is of the form $f(x)=g(x^p)$ for some $g(x)\in F[x]$.
+\end{theorem}
+
+\begin{definition}[Separable]\label{dfn:4.3}
+	A polynomial $f(x)\in F[x]$ is \emph{separable} if $f(x)$ has no repeated roots.
+\end{definition}
+\begin{definition}[Perfect]\label{dfn:4.4}
+	A field $F$ is \emph{perfect} if either $\operatorname{char} F=0$ or if $\operatorname{char} F=p$, then $F^p=\left\{ a^p\mid a\in F \right\} $.
+\end{definition}
+
+\begin{theorem}\label{thm:4.2}
+	Finite fields are perfect.
+\end{theorem}
+\begin{proof}
+	Let $F$ be a finite field. Then $\operatorname{char}F=p$ for some prime $p$. Let $\phi : F \to F$ be the Frobenius map $a\mapsto a^p$, and observe this is a ring homomorphism due to commutativity and by $\operatorname{char} F=p$. This is trivially injective, and since $F$ is finite, $\phi $ is a bijection. This factors
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		F\arrow[r, "\phi "]&F\arrow[r, "\mathrm{id}"]&F^p.
+	\end{tikzcd}\]
+\end{proof}
+
+\begin{theorem}\label{thm:4.3}
+	If $F$ is a perfect field, then all polynomials in $F[x]$ are separable.
+\end{theorem}
+
