@@ -1,0 +1,233 @@
+\section{Complexes and Homology, Again}
+By the Freyd-Mitchell theorem, little will be lost by interpeting the following statements as occuring in a category such as $\Rmod{R} $. I will do my best to keep the considerations as abstract as possible, however.
+
+\subsection{Reminder of Basic Definitions, General Strategy}
+A chain complex $(M_\bullet ,d_\bullet )$, or simply $M_\bullet $, is a sequence in an abelian category
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \arrow[r, "d_{i+2} "]&M_{i+1} \arrow[r, "d_{i+1} "]&M_i\arrow[r, "d_{i} "]&M_{i-1} \arrow[r, "d_{i-1} "]&\ldots 
+\end{tikzcd}\]
+such that $d_{i+1} \circ d_i=0$ for all $i$. A cochain complex $M^\bullet $ is a sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \arrow[r, "d^{i-2} "]&M^{i-1} \arrow[r, "d^{i-1} "]&M^i\arrow[r, "d^{i} "]&M^{i+1} \arrow[r, "d^{i+1} "]&\ldots 
+\end{tikzcd}\]
+is a chain complex with ascending indicies. There is no change in the mathematics, so our choice of which to use is largely asthetic. The morphisms $d$ are known as the \emph{differentials}, and we will often denote by $d^\bullet _{M^\bullet } $, or simply by $d^\bullet $, the collection of all morphisms in the complex $M^\bullet $. In this chapter, we will work with cochain complexes and cohomology.
+
+In categories with elements, we defined the homology
+\[
+	H^i(M^\bullet )\coloneqq \frac{\ker d^i}{\im d^{i-1} } 
+.\]
+However, this is not possible in the most general sense. To reconsile this definition, note that $\im d^{i-1} : I \to M^i$ factors uniquely through $\ker d^i$, giving a monomorphism $I\to \operatorname{Ker}_{d^i} $. Clearly, in a category with elements, the cokernel of this morphism gives us the cohomology, so we define it as such.
+\begin{definition}[(Co)Homology]\label{dfn:9.3.1}
+	Let $M^{\bullet } $ be a chain complex in an abelian category. Then the cohomology $H^i(M^{\bullet } )$ of $M^\bullet $ at $i$ is the target of the cokernel of the unique morphism $\phi $ making the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+		I\arrow[r, "\im d^{i-1} "]\ar[rr, bend left, "0"]\arrow[dr, dashed, "\phi "']&M^i\arrow[r, "d^{i} "]&M^{i+1} \\
+								    &\operatorname{Ker}_{d^i} \arrow[u, "\ker d^i"']
+	\end{tikzcd}\]
+	commute.
+\end{definition}
+
+I have sped forward slightly to also give a precise notion of resolution. A morphism $\alpha ^\bullet $ in the category $\mathsf{C} (\mathsf{A} )$ of chain complexes in $\mathsf{A} $ is a \emph{quasi-isomorphism} if it induces an isomorphism in the cohomologies.
+\begin{definition}[Resolution]\label{dfn:9.3.2}
+	A resolution of an object $A$ is a complex $M^{\bullet } $ which is quasi-isomorphic to $\iota (A)$, which is defined as the complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \arrow[r]&0\arrow[r, "d^1"]&A\arrow[r, "d^0"]&0\arrow[r]&\ldots 
+\end{tikzcd}\]
+\end{definition}
+This means all cohomologies are zero, except for $H^0(M^\bullet )$, which is (viewed as an $R$-module) isomorphic to $\coker d^{-1} $, or is (viewed categorically) the target of $\coker d^{-1} $.
+
+Resolutions become more useful if the $M^i$s become special, eg. flat, projective, free, injective, etc. These allow us to associate to mathematical objects certian cochain complexes, which we can then take the cohomology of. We have seen this in the case of Tor and Ext, and it has much broader applications. One of our main goals here will be to show the resultant cohomologies of this construction are generally invariant under choice of the type of ``special'' objects to use in the resolution.
+
+\subsection{The Category of Complexes}
+\begin{definition}[Category of Complexes]\label{dfn:9.3.2}
+	The category $\mathsf{C} (\mathsf{A} )$ of (co)chain complexes in $\mathsf{A} $ is defined as the category where
+	\begin{itemize}
+		\item $\Obj(\mathsf{C} (\mathsf{A} )) $ consists of all cochain complexes in $\mathsf{A} $;
+		\item Morphisms $\alpha ^\bullet : M^\bullet  \to N^\bullet $ are collections of morphisms $\alpha ^i : M^i \to N^i$ in $\mathsf{A} $ such that the diagram
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				\ldots\arrow[r, "d^{i-2} "] &M^{i-1} \arrow[d, "\alpha ^{i-1} "]\arrow[r, "d^{i-1} "]&M^i\arrow[d, "\alpha ^i"]\arrow[r, "d^i"]&M^{i+1} \arrow[d, "\alpha ^{i+1} "]\arrow[r, "d^{i+1} "]&\ldots \\
+				\ldots \arrow[r, "d^{i-2} "]&N^{i-1} \arrow[r, "d^{i-1} "]&N^i\arrow[r, "d^i"]&N^{i+1} \arrow[r, "d^{i+1} "]&\ldots 
+			\end{tikzcd}\]
+			commutes. That is,
+			\[
+				\forall i:\alpha ^{i+1} d_{M^\bullet }^i=d_{N^\bullet }^{i} \alpha ^i
+			.\]
+	\end{itemize}
+\end{definition}
+
+The fact that this is a category is immediate by the fact that $\mathsf{A} $ is a category, and the fact that the diagram commutes. However, we can also say the following.
+\begin{lemma}\label{lma:9.3.1}
+	$\mathsf{C} (\mathsf{A} )$ is an abelian category.
+\end{lemma}
+The proof is not difficult but is long, and will be done in the exercises. This is the natural place to study resolutions of objects, as the category itself is abelian and thus we can talk about exact sequences of complexes, canonical decompositions, etc. Complexes of complexes will be important later. The important things to note is that kernels and cokernels are suitably defined as the collections of kernels; that is, $\ker \alpha ^\bullet $ is simply the collection of maps $\ker \alpha ^i$, and similarly for cokernels.
+
+We will also use the following notation for various other categories:
+\begin{itemize}
+	\item $\mathsf{C} ^{+} (\mathsf{A} )$ for the full subcategory of complexes bounded below (there exists $n$ such that $L^i=0$ for all $i\leq n$);
+	\item $\mathsf{C}^-(\mathsf{A} ) $ for bounded above;
+	\item $\mathsf{C} ^{\geq 0} $ for complexes with $L^i=0$ for all $i<0$;
+	\item $\mathsf{C} ^{\leq 0} $;
+	\item and we will also use $\mathsf{P} $ and $\mathsf{I} $ for projective/injective objects in $\mathsf{A} $.
+\end{itemize}
+
+This new category gives us access to a few functors, such as $\iota _r : \mathsf{A}  \to \mathsf{C} (\mathsf{A} )$ which is defined for any $r\in\mathbb{Z} $, which maps $A$ to the complex of 0s, except for a single $A$ at the $r$th spot. We generally identify $\mathsf{A} $ inside of $\mathsf{C} (\mathsf{A} )$ with it's image $\iota_0(\mathsf{A} )$, which we simply denote $\iota $.
+
+We also have shift functors $\mathsf{C} (\mathsf{A} )\to \mathsf{C} (\mathsf{A} )$ defined by $M^\bullet \mapsto M[r]^\bullet $, where $M[r]^i\coloneqq M^{i+r} $ and $d^i_{M[r]^\bullet } \coloneqq (-1)^r d^{i+r}_{M^\bullet } $. Additionally. cohomology is a functor, and in fact an important one.
+
+\begin{lemma}\label{lma:9.3.2}
+	Cohomology $M^\bullet \mapsto H^i(M^\bullet )$ is an additive covariant functor $\mathsf{C} (\mathsf{A} )\to \mathsf{A} $.
+\end{lemma}
+\begin{proof}
+	This means that the functorial relation
+	\[
+		\Hom_{\mathsf{C} (\mathsf{A} )}(M^\bullet , N^\bullet ) \to \Hom_{\mathsf{A} }(H^i(M^\bullet ), H^i(N^\bullet )) 
+	\]
+	is also a homomorphism of abelian groups. The action on morphisms can be defined as follows. Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		M^{i-1} \arrow[r, "d^{i-1}"]\arrow[d, "\alpha ^{i-1} "]&M^i\arrow[d, "\alpha^i"]\arrow[r, "d^i"]&M^{i+1} \arrow[d, "\alpha ^{i-1} "]\\
+		N^{i-1} \arrow[r, "d^{i-1} "]&N^{i} \arrow[r, "d^{i} "]&N^{i+1} 
+	\end{tikzcd}\]
+	be a commutative subdiagram of the diagram induced by the morphism $\alpha ^\bullet : M^\bullet  \to N^\bullet $. Recall our definition of the homology as the cokernels:
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		\operatorname{Im}d_M^{i-1} \arrow[dr, "\im d^{i-1}_M ", tail]\arrow[r, dashed, "\phi _M"]&\operatorname{Ker} d^{i}_M \arrow[d, "\ker d^i_M", tail]\arrow[r, two heads, "\coker \phi _M"]&H^i(M^\bullet )\\
+		M^{i-1}\arrow[u, dashed, "\psi _M"] \arrow[r, "d^{i-1}_M"]\arrow[d, "\alpha ^{i-1} "]&M^i\arrow[d, "\alpha^i"]\arrow[r, "d^i_M"]&M^{i+1} \arrow[d, "\alpha ^{i-1} "]\\
+		N^{i-1}\arrow[d, dashed, "\psi _B"']\arrow[r, "d^{i-1}_N "]&N^{i} \arrow[r, "d^{i}_N "]&N^{i+1} \\
+		\operatorname{Im}d_N^{i-1} \arrow[r, dashed, "\phi _N"']\arrow[ur, tail, "\im d^{i-1}_N "]&\operatorname{Ker}d^i_N \arrow[u, "\ker d^i_N", tail]\arrow[r, two heads, "\coker \phi_N"']&H^i(N^\bullet )
+	\end{tikzcd}\]
+	By the universal properties of kernels, cokernels, and images, this diagram commutes. By commutivity of the diagram,
+	\[
+		d^i_N\circ \alpha ^i\circ \ker d^i_M=\alpha ^{i-1} \circ d_M^i\circ \ker d_M^i=0,
+	\]
+	and thus the composition $\alpha ^i\circ \ker d_M^i$ factors uniquely through $\ker d_N^i$ such that the diagram
+	\[\begin{tikzcd}[row sep =  3em, column sep = 3em]
+		\operatorname{Ker}d^i_M\arrow[dr, dashed, "\sigma "'] \arrow[r, "\alpha ^i \ker d^i_M"]\arrow[rr, bend left, "0"]&N^i\arrow[r, "d^i_N"]&N^{i+1} \\
+												&\operatorname{Ker}d_N^i \arrow[u, tail, "\ker d^i_N"']
+	\end{tikzcd}\]
+	commutes. We thus have an induced map $\sigma : \operatorname{Ker}d_M^i  \to \operatorname{Ker} d_N^i $. 
+
+	By lemma \ref{lma:9.7}, $\psi _A$ and $\psi _B$ are epi, since they are induced by the image. Note that with the addition of $\sigma $, by commutivity of the diagram we have
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		M^{i-1} \ar[r, "\psi_M ", two heads, dashed]\ar[d, "\alpha ^{i-1} "]&\operatorname{Im} d_M^{i-1} \ar[r, "\phi _A", dashed]&\operatorname{Ker} d_M^i\ar[r, "\ker d_M^i", tail]\ar[d, "\sigma ", dashed]&A_i\ar[r, "\alpha ^i"]&B_i\\
+		N^{i-1} \ar[r, "\psi _N", two heads, dashed]&\operatorname{Im} d_N^{i-1} \ar[r, "\phi _N", dashed]\ar[rr, bend right, "0"]&\operatorname{Ker} d_N^i\ar[urr, "\ker d_N^i"', tail]\ar[r, "\coker \phi_N"', two heads]&H^i(B^\bullet )
+	\end{tikzcd}\]
+	It follows that
+	\[
+		\coker \phi _N \circ \phi _N \circ \psi _N \circ \alpha ^{i-1} =0
+	.\]
+	By commutivity of the diagram,
+	\[
+		\coker \phi _N \circ \sigma \circ \phi _M \circ \psi _M=0
+	.\]
+	Since $\psi _M$ is epi, by lemma \ref{lma:9.1}, it follows that
+	\[
+		\coker \phi _N \circ \sigma \circ \phi _M=0
+	.\]
+	Therefore, $\coker \phi _N \circ \sigma $ factors uniquely through $\coker \phi _M$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\operatorname{Im} d_M^{i-1} \ar[r, "\phi _M"]\ar[rrr, bend left, "0"]&\operatorname{Ker} d_M^{i}\ar[d, two heads, "\coker \phi _A"'] \ar[r, "\sigma "]&\operatorname{Ker} d_N^i\ar[r, "\coker \phi _N"]&H^i(N^\bullet )\\
+										     &H^i(A^\bullet )\ar[urr, dashed, "H^i(\alpha ^\bullet )"']
+	\end{tikzcd}\]
+	commutes by the universal property of cokernels. Therefore, $H^i(-)$ uniquely induces a morphism $H^i(\alpha ^\bullet ): H^i(M^\bullet ) \to H^i(N^\bullet )$.
+
+	It is easily seen that this assignment is functorial by considering commutivity of the diagram induced by a chain of morphisms $L^\bullet \to M^\bullet \to N^\bullet $, and noting that $H^i(\beta ^\bullet )\circ H^i(\alpha ^\bullet )$ corresponds to doing this process to each subdiagram, which can be attached to each other by commutivity to create the equivalent morphism $H^i(\beta ^\bullet \alpha ^\bullet )$. Since this assignment is natural, apparently that means it's also an abelian group homomorphism.
+\end{proof}
+
+We can also view cohomology as a functor $\mathsf{C} (\mathsf{A} )\to \mathsf{C} (\mathsf{A} )$, by taking the cohomology $H^i(M^\bullet )$ and placing it at degree $i$. Since the resulting cohomology of this sequence is 0 except at $i$, where it is $H^i(M^\bullet )$ once again, we can form a new complex $H^\bullet (M^\bullet )$ with
+\[
+	H^\bullet (H^\bullet (M^\bullet ))=H^\bullet (M^\bullet )
+.\]
+\subsection{The Long Exact Cohomology Sequence}
+This allows us to reconsider the snake lemma \emph{again}. Written cohomologically, the snake lemma is the commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&L^0\arrow[r, "\alpha ^0"]&M^0\arrow[r, "\beta ^0"]&N^0\arrow[r]&0\\
+	0\arrow[r]&L^1\ar[u, "\lambda ^0"]\ar[r, "\alpha ^1"]&M^1\ar[u, "\mu ^0"]\ar[r, "\beta ^1"]&N^1\ar[r]\ar[u, "\nu ^0"]&0
+\end{tikzcd}\]
+with exact rows. We can view each column as a complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	L^\bullet :&\ldots \ar[r]&0\ar[r]&L^0\ar[r, "\lambda ^0"]&L^1\ar[r]&0\ar[r]&\ldots ,
+\end{tikzcd}\]
+and then the snake lemma is nothing more than the exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]&L^\bullet \ar[r]&M^\bullet \ar[r]&N^\bullet \ar[r]&0
+\end{tikzcd}\]
+in $\mathsf{C} (\mathsf{A} )$. The snake lemma then gives us an exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]&H^0(L^\bullet )\ar[r]&H^0(M^\bullet )\ar[r]&H^0(N^\bullet )\ar[dll]\\
+	       &H^1(L^\bullet )\ar[r]&H^1(M^\bullet )\ar[r]&H^1(N^\bullet )\ar[r]&0
+\end{tikzcd}\]
+This works since, for example, the image $0\to L^0$ is simply the 0 morphism, and factoring it through $\ker \lambda $ we get the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\operatorname{Im } 0\ar[r, dashed, "\phi "]\ar[dr, "\im 0"]&\operatorname{Ker}\lambda \ar[r, "\coker \phi "]\ar[d, "\ker \lambda "]&\operatorname{Ker} \lambda /0\\
+	0\ar[u, dashed]\ar[r, "0"]&L^0
+\end{tikzcd}\]
+It can be shown fairly easily that $\coker \phi $ is an isomorphism here. Similarly, we obtain the cokernel when taking $H^1(-)$, giving us the snake lemma.
+
+This can be very naturally generalized to any short exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	S^\bullet :&0\ar[r]&L^\bullet \ar[r, "\alpha^\bullet "]&M^\bullet \ar[r, "\beta ^\bullet "]&N^\bullet \ar[r]&0
+\end{tikzcd}\]
+in $\mathsf{C} (\mathsf{A} )$, where the sequences $L^\bullet ,M^\bullet ,N^\bullet $ are of arbitrary length. This can be viewed as a commutative diagram in $\mathsf{A} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&\vdots&\vdots&\vdots\\
+	0\ar[r]&L^{i+1} \ar[u]\ar[r]&M^{i+1} \ar[r]\ar[u]&N^{i+1} \ar[r]\ar[u]&0\\
+	0\ar[r]&L^{i} \ar[u]\ar[r]&M^{i} \ar[r]\ar[u]&N^{i} \ar[r]\ar[u]&0\\
+	0\ar[r]&L^{i-1} \ar[u]\ar[r]&M^{i-1} \ar[r]\ar[u]&N^{i-1} \ar[r]\ar[u]&0\\
+	       &\vdots\ar[u]&\vdots\ar[u]&\vdots\ar[u]\\
+\end{tikzcd}\]
+Rows are exact here, since $S^\bullet $ is exact. We can perform a similar construction as to the snaking homomorphism in the Snake lemma, which can be manipulated to induce a morphism $\delta ^i : H^i(N^\bullet ) \to H^{i+1} (L^\bullet )$ (ill show this later). Since each $H^i$ is a functor, there are natural morphisms $H^i(L^\bullet )\to H^i(M^\bullet )\to H^i(N^\bullet )$ for all $i$, and thus induces a long complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \ar[r]&H^{i-1} (N^\bullet )\ar[r, "\delta^{i-1} "]&H^i(L^\bullet )\ar[r]&H^i(M^\bullet )\ar[r]&H^i(N^\bullet )\ar[r]&\ldots
+\end{tikzcd}\]
+The following theorem shows that this sequence generalizes the snake lemma.
+\begin{theorem}\label{thm:9.3.1}
+	The above sequence is exact.
+\end{theorem}
+\begin{proof}
+	do later
+\end{proof}
+
+\subsection{Triangles}
+We can immediately connect $N^\bullet $ to $L^\bullet $ by the 0 morphism
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	N^\bullet \ar[r, "0"]&L^\bullet ,
+\end{tikzcd}\]
+and thus the exactness of the original short exact sequence is the same as the exactness of the sequences
+\[\begin{tikzcd}[row sep = 1em, column sep = 2.5em]
+	N^\bullet \ar[r, "0"]&L^\bullet \ar[r]&M^\bullet ,\\
+	M^\bullet \ar[r]&N^\bullet \ar[r, "0"]&L^\bullet ,\\
+	L^\bullet \ar[r]&M^\bullet \ar[r]&N^\bullet 
+\end{tikzcd}\]
+at their centers. We write this as an exact triangle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 1.5em]
+	&L^\bullet \ar[dr]\\
+	N^\bullet \ar[ur, "+1"]&&M^\bullet\ar[ll] 
+\end{tikzcd}\]
+and we view $N^\bullet \to L^\bullet $ as a morphism $N^\bullet \to L^\bullet [1]$. Another common notation is
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	L^\bullet \ar[r]&M^\bullet \ar[r]&N^\bullet \ar[r, "+1"]&{}
+\end{tikzcd}\]
+This is the same as the commutative diagram
+\[\begin{tikzcd}[row sep = 1em, column sep = 1.5em]
+	\,& {} &\, &&\, \\
+	  && L^{i+1}\ar[u, dash]\ar[drr] && \\
+	N^{i+1}\ar[uu, dash]\ar[uur, dash, "0"] && && M^{i+1}\ar[uu,  dash]  \\
+			     && L^{i}\ar[uu]\ar[drr] && \\
+	N^{i}\ar[uu]\ar[uuurr, "0"] && && M^{i}\ar[uu] \\
+			       && L^{i-1}\ar[uu]\ar[drr] && \\
+	N^{i-1}\ar[uuurr, "0"]\ar[uu] && &&M^{i-1}\ar[uu] \\
+	\,\ar[u] &{}\ar[uur, "0"]& \,\ar[uu] && \,\ar[u]
+	\arrow[from=7-5, to=7-1, crossing over]
+	\arrow[from=5-5, to=5-1, crossing over]
+	\arrow[from=3-5, to=3-1, crossing over]
+\end{tikzcd}\]
+where triangles are exact. Using theorem \ref{thm:1.2}, we can generalize this construction more naturally by taking the exact triangle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = .5em]
+	&H^\bullet (L^\bullet) \ar[dr]\\
+	H^\bullet (N^\bullet )\ar[ur, "+1"]&&H^\bullet (M^\bullet)\ar[ll] 
+\end{tikzcd}\]
+The stepping morphism is the connecting morphism explored earlier, and thus the long exact cohomology sequence actually sends the original exact triangle where the connecting morphism is 0, to the exact triangle of cohomologies:
+\[\begin{tikzcd}
+	&&L^\bullet \ar[ddr]&&&&H^\bullet (L^\bullet )\ar[ddr]\\
+	H^\bullet :&&&{}\ar[rr, mapsto]&&{} \\
+		   &N^\bullet \ar[uur, "+1"]&&M^\bullet \ar[ll]&&H^\bullet (N^\bullet )\ar[uur, "+1"]&&H^\bullet (M^\bullet )\ar[ll]
+\end{tikzcd}\]
+There is clearly something important here, however it is unclear why applying the cohomology functor should induce the connecting morphism. We will see later that ``distinguished'' (sometimes called exact, but not exact in the context of this conversation) triangles lead to long exact cohomological sequences more directly, and these triangles satisfy a number of axioms. This will lead to the exploration of the category $\mathsf{K} (\mathsf{A} )$, which will be a \emph{triangulated category}. Further explorations of this topic, however, are beyond the scope of this book.

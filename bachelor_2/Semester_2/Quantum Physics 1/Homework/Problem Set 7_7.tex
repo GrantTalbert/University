@@ -1,0 +1,225 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 7}
+\courseID{PY 451}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section{Practice with Kets and Wavefunctions}
+\begin{enumerate}
+	\item 
+		\begin{align*}
+			\braket{\psi }{\psi } &=\int_{\mathbb{R} } \left| \psi (x) \right| ^2 \,\mathrm{d} x\\
+					      &=\int_{-\infty }^{\infty } \left| A \right| ^2 \left| e^{-a|x-b|+ivx}  \right| ^2 \,\mathrm{d} x\\
+					      &=\left| A \right| ^2\int_{-\infty }^{\infty } \left| e^{-a\left| x-b \right| } e^{ivx}  \right| ^2 \,\mathrm{d} x\\
+					      &=\left| A \right| ^2\int_{-\infty }^{\infty } \left| e^{-a|x-b|}  \right| ^2\left| e^{ivx}  \right| ^2 \,\mathrm{d} x\\
+					      &=\left| A \right| ^2\int_{-\infty }^{\infty } \left( e^{-a|x-b|}  \right) ^21^2 \,\mathrm{d} x\\
+					      &=\left| A \right| ^2\left( \int_{-\infty }^{b} e^{2a(x-b)}  \,\mathrm{d} x+\int_{b }^{\infty } e^{-2a(x-b)}  \,\mathrm{d} x \right) 
+		.\end{align*}
+		This last step comes from the fact that
+		\[
+			\left| x-b \right| =
+			\begin{cases}
+				x-b,&x-b\geq 0\\
+				-(x-b),&x-b\leq 0
+			\end{cases}
+			=
+			\begin{cases}
+				x-b,&x\geq b\\
+				-(x-b),&b\geq x
+			\end{cases}
+		.\]
+		Continuing, we have
+		\begin{align*}
+			\braket{\psi }{\psi } &=\left| A \right| ^2\left( e^{-2ab} \int_{-\infty }^{b} e^{2ax}  \,\mathrm{d} x +e^{2ab} \int_{b}^{\infty } e^{-2ax}  \,\mathrm{d} x\right) \\
+					      &=\left| A \right| ^2\left( e^{-2ab} \frac{1}{2a} \left[ e^{2ax}  \right]_{-\infty }^b+e^{2ab} \frac{1}{-2a} \left[ e^{-2ax}  \right]_b^{\infty }  \right) \\
+					      &=\frac{\left| A \right| ^2}{2a} \left(e^{-2ab}  \left( e^{2ab} -0 \right) -e^{2ab} \left( 0-e^{-2ab} \right)  \right) \\
+					      &=\frac{\left| A \right| ^2}{2a} \left( e^{0} +e^{0}  \right) \\
+				      &=\frac{\left| A \right| ^2}{a} \\
+				      &\equiv 1
+		.\end{align*}
+		It follows that $A=\pm \sqrt{a} $.
+	\item 
+		\begin{align*}
+			\bra{\psi } P\ket{\psi } &=\int_{-\infty }^{\infty } \psi^*(x)\left( -i\hbar \frac{\mathrm{d}}{\mathrm{d}x}  \right) \psi (x) \,\mathrm{d} x\\
+						 &=a\int_{-\infty }^{\infty } e^{-a|x-b|-ivx} \left( -i\hbar \frac{\mathrm{d}}{\mathrm{d}x}  \right) e^{-a|x-b|+ivx}  \,\mathrm{d} x\\
+						 &=-i\hbar a\int_{-\infty }^{\infty } \left( e^{-a|x-b|-ivx}  \right) \left( e^{-a|x-b|+ivx}  \right) \left( -a \operatorname{sign} (x-b)+iv \right)  \,\mathrm{d} x\\
+						 &=-i\hbar a\int_{-\infty }^{\infty } \left( e^{-2a|x-b|}  \right) \left( -a \operatorname{sign} (x-b)+iv \right)  \,\mathrm{d} x\\
+						 &=-i\hbar a\left( \int_{-\infty }^{b} \left( e^{2a(x-b)} \left( a+iv \right)  \right)  \,\mathrm{d} x+\int_{b}^{\infty } \left( e^{-2a(x-b)}  \right) \left( -a+iv \right)  \,\mathrm{d} x \right) \\
+						 &=-i\hbar a\left( a+iv \right) \int_{-\infty }^{b} e^{2a(x-b)}  \,\mathrm{d} x-i\hbar a(-a+iv)\int_{b}^{\infty } e^{-2a(x-b)}  \,\mathrm{d} x\\
+						 &=\frac{-i\hbar a^2+\hbar av}{2a} \left[ e^{2a(x-b)} \right]_{-\infty }^{b} +\frac{i\hbar a^2+\hbar av}{-2a} \left[ e^{-2a(x-b)}  \right]_b^{\infty } \\
+						 &=\frac{-i\hbar a+\hbar v}{2} \left( 1-0 \right) -\frac{i\hbar a+\hbar v}{2} \left( 0-1 \right) \\
+						 &=\frac{-i\hbar a+\hbar v+i\hbar a+\hbar v}{2} \\
+						 &=\hbar v
+		.\end{align*}
+		\[
+			\frac{\mathrm{d}^2}{\mathrm{d}x^2} \psi (x)=\left( e^{-a|x-b|+ivx}  \right) \left( -a \operatorname{sign} (x-b)+iv \right)^2 +\left( e^{-a|x-b|+ivx}  \right) \left( -2a\delta (x-b) \right) 
+		.\]
+		We then obtain two integrals for $\bra{\psi } P^2\ket{\psi } $, corresponding to the two terms in the derivative. I will compute them in order, and add them together at the end.
+		\begin{align*}
+			\text{Int 1} &=-a\hbar ^2\int_{-\infty }^{\infty } \left( e^{-a|x-b|-ivx}  \right) \left( e^{-a|x-b|+ivx}  \right) \left( -a \operatorname{sign} (x-b)+iv \right) ^2 \,\mathrm{d} x\\
+				     &=-a\hbar ^2\int_{-\infty }^{\infty } \left( e^{-2a|x-b|}  \right) \left( a^2 \operatorname{sign} (x-b)^2-2aiv \operatorname{sign} (x-b)-v^2 \right)  \,\mathrm{d} x\\
+				     &=-a\hbar ^2\int_{-\infty }^{b} \left( e^{2a(x-b)}  \right) \left( a^2+2aiv-v^2 \right)  \,\mathrm{d} x-a\hbar ^2\int_{b}^{\infty } \left( e^{-2a(x-b)}  \right) \left( a^2-2aiv-v^2 \right)  \,\mathrm{d} x\\
+				     &=-a\hbar^2\left( a^2+2aiv-v^2 \right) \left[ \frac{1}{2a}e^{2a(x-b)}  \right]_{-\infty }^b+a\hbar ^2\left( a^2-2aiv-v^2 \right) \left[\frac{1}{2a}  e^{-2a(x-b)}  \right]_b^{\infty } \\
+				     &=-\frac{\hbar ^2}{2} \left( a^2+a^2+2aiv-2aiv-v^2-v^2 \right) \\
+				     &=\hbar ^2\left( v^2-a^2 \right) 
+		.\end{align*}
+		For the second integral:
+		\begin{align*}
+			\text{Int 2} &=-a\hbar ^2\int_{-\infty }^{\infty } \left( e^{-a|x-b|-ivx}  \right)\left( e^{-a|x-b|+ivx}  \right) \left( -2a\delta (x-b) \right)   \,\mathrm{d} x\\
+				     &=a^2\hbar ^2\int_{-\infty }^{\infty } e^{-2a|x-b|} 2\delta (x-b) \,\mathrm{d} x\\
+				     &=2a^2\hbar ^2e^{-2a|b-b|} =2a^2\hbar ^2
+		.\end{align*}
+		Adding these together, we get
+		\[
+			\bra{\psi } P^2\ket{\psi } =v^2\hbar ^2-a^2\hbar ^2+2a^2\hbar ^2=\hbar ^2\left( v^2+a^2 \right) 
+		.\]
+		
+	\item 
+		\begin{align*}
+			\bra{\psi } X\ket{\psi } &=\bra{\psi } \int_{-\infty }^{\infty } x\ket{x} \bra{x}  \,\mathrm{d} x\ket{\psi } \\
+						 &=\int_{-\infty }^{\infty } \braket{\psi }{x} x\braket{x}{\psi }  \,\mathrm{d} x\\
+						 &=\int_{-\infty }^{\infty }x \psi ^*(x)\psi (x) \,\mathrm{d} x\\
+						 &=a\int_{-\infty }^{\infty } xe^{-2a|x-b|} \,\mathrm{d} x
+		.\end{align*}
+		Let $u=x-b$. Then $x=u+b$. I will also later do the substitution $u=-u$, where I do not change the name of the variable because I simply do not want to.
+		\begin{align*}
+			a\int_{-\infty }^{\infty } xe^{-2a|x-b|}  \,\mathrm{d} x&=a\int_{-\infty }^{\infty } (u-b)e^{-2a|u|}  \,\mathrm{d} u\\
+										&=a\int_{-\infty }^{\infty } ue^{-2a|u|}  \,\mathrm{d} u+ab\int_{-\infty }^{\infty } e^{-2a|u|}  \,\mathrm{d} u\\
+										&=a\int_{-\infty }^{\infty } ue^{-2a|u|}  \,\mathrm{d} u+b\int_{-\infty }^{\infty } \left| \psi (x) \right| ^2 \,\mathrm{d} x\\
+										&=a\int_{-\infty }^{\infty } ue^{-2a|u|}  \,\mathrm{d} u+b\\
+										&=a\int_{-\infty }^{0} ue^{2au}  \,\mathrm{d} u+a\int_{0}^{\infty } ue^{-2au}  \,\mathrm{d} u+b\\
+										&=a\int_{\infty }^{0} -(-u)e^{2a(-u)}  \,\mathrm{d} u+a\int_{0}^{\infty } ue^{-2au}  \,\mathrm{d} u+b\\
+										&=-a\int_{0}^{\infty } ue^{-2au}  \,\mathrm{d} u+a\int_{0}^{\infty } ue^{-2au}  \,\mathrm{d} u+b\\
+										&=0+b\\
+										&=b
+		.\end{align*}
+		\begin{align*}
+			\bra{\psi } X^2\ket{\psi } &=a\int_{-\infty }^{\infty } x^2e^{-2a|x-b|}  \,\mathrm{d} x\\
+						   &=a\int_{-\infty }^{\infty } \left( u+b \right) ^2 e^{-2a|u|}  \,\mathrm{d} u\\
+						   &=a\left( b^2\int_{-\infty }^{\infty } e^{-2a|x-b|}  \,\mathrm{d} x+2b\int_{-\infty }^{\infty } ue^{-2a|u|}  \,\mathrm{d} u+\int_{-\infty }^{\infty } u^2e^{-2a|u|}  \,\mathrm{d} u \right) \\
+						   &=b^2+a\int_{-\infty }^{\infty } u^2e^{-2a|u|}  \,\mathrm{d} u\\
+						   &=b^2+2a\int_{0}^{\infty } u^2e^{-2au}  \,\mathrm{d} u\\
+						   &=b^2+2a\left( \left[ \frac{1}{-2a} u^2e^{-2au}  \right]_0^{\infty } -\int_{0}^{\infty } \frac{2}{-2a} ue^{-2au}  \,\mathrm{d}u  \right) \\
+						   &=b^2+2\left( \left[ \frac{1}{-2a} ue^{-2au}  \right]_0^{\infty } -\int_{0}^{\infty } \frac{1}{-2a} e^{-2au}  \,\mathrm{d} u \right) \\
+						   &=b^2+\frac{1}{a} \int_{0}^{\infty } e^{-2au}  \,\mathrm{d} u\\
+						   &=b^2+\frac{1}{-2a^2} \left[ e^{-2au}  \right]_0^{\infty } \\
+						   &=b^2-\frac{1}{2a^2} \left( 0-1 \right) \\
+						   &=b^2+\frac{1}{2a^2} 
+		.\end{align*}
+	\item 
+		\begin{align*}
+			\mathcal{P}_{(0,1)} &=\int_{0}^{1} \left| \psi (x) \right| ^2 \,\mathrm{d} x\\
+					    &=\int_{0}^{1} \left| \pm \sqrt{a}  \right| ^2 \left| e^{-a|x-b|} e^{ivx}  \right| ^2 \,\mathrm{d} x\\
+					    &=a\int_{0}^{1} \left| e^{-a|x-b|}  \right| ^2 \,\mathrm{d} x\\
+					    &=a\int_{0}^{1} e^{-2a|x-b|}  \,\mathrm{d} x
+		.\end{align*}
+		If $b\in (0,1)$, then the integral decomposes into
+		\begin{align*}
+			\mathcal{P}_{(0,1)} &=a\left(\int_{0}^{b} e^{2a(x-b)}  \,\mathrm{d} x+\int_{0}^{1} e^{-2a(x-b)}  \,\mathrm{d} x\right)\\
+					    &=a\left( e^{-2ab}\int_{0}^{b} e^{2ax}  \,\mathrm{d} x+e^{2ab} \int_{b}^{1} e^{-2ax}  \,\mathrm{d} x \right) \\
+					    &=a\left( \frac{e^{-2ab} }{2a} \left[ e^{2ax}  \right]_0^b + \frac{e^{2ab} }{-2a} \left[ e^{-2ax}  \right]_b^1 \right) \\
+					    &=\frac{1}{2} \left( e^{-2ab} \left( e^{2ab} -1 \right) -e^{2ab} \left( e^{-2a} -e^{-2ab}  \right)  \right) \\
+					    &=\frac{1}{2} \left( 1-e^{-2ab} -e^{2a(b-1)} +1 \right) \\
+					    &=1-\frac{1}{2} \left( e^{-2ab} +e^{2a(b-1)}  \right) 
+		.\end{align*}
+		If $b\geq 1$, then we can just integrate directly:
+		\begin{align*}
+			\mathcal{P}_{(0,1)} &=a\int_{0}^{1} e^{2a(x-b)}  \,\mathrm{d} x\\
+					    &=ae^{-2ab} \int_{0}^{1} e^{2ax}  \,\mathrm{d} x\\
+					    &=\frac{e^{-2ab} }{2} \left[ e^{2ax}  \right]_0^1\\
+					    &=\frac{e^{-2ab} }{2} \left( e^{2a} -1 \right) \\
+					    &=\frac{1}{2} \left( e^{2a(1-b)} -e^{-2ab}  \right) 
+		.\end{align*}
+		
+\end{enumerate}
+\section{Spectroscopy}
+I will use the approximation that $\hbar \approx 6.6\times 10^{-16} $eVs, because I don't want to write out a lot of decimal places because it looks less clean.
+\begin{enumerate}
+	\item Our definition of frequency was $\omega_{21} =\frac{E_2-E_1}{\hbar } $. The ``first'' frequency we can define, corresponding to $n=1$, would be $\omega_{21} $. We thus have
+		\[
+			E_2-E_1=E_2-0=\frac{\hbar }{1(1+1)} s ^{-1} =\frac{\hbar }{2} s ^{-1} \approx 3.3\times 10^{-16} \text{eV}
+		.\]
+	\item It follows extremely easily from mathematical indution that $\left| E_n-E_{n-1}  \right| =\hbar \omega_{n-1} $, and since
+		\[
+			\frac{E_n-E_{n-1} }{\hbar } =\omega_{n-1} \implies E_n=\hbar \omega_{n-1} +E_{n-1} 
+		.\]
+		Since the base case $E_2$ is positive and $\hbar \omega_n$ is always positive, by induction the sequence $\left\{ E_n \right\} $ is monotonically increasing. Therefore $E_n>E_{n-1} $, and $\left| E_n-E_{n-1}  \right| =E_n-E_{n-1} $. I will spell out the next induction proof since it is the main part of the computation. Note that $E_2=\hbar \omega _1=\hbar \sum_{1\leq i<2} \omega_i$, and suppose $E_n=\hbar \sum_{1\leq i<n} \omega_i$ for some $n$. Then
+		\[
+			E_{n+1} =\hbar \omega_n+E_n=\hbar \omega_n+\hbar \sum_{i=1}^{n-1} \omega_i=\hbar \sum_{i=1}^{n} \omega_i
+		.\]
+		By induction, the statement is proven. We thus have
+		\[
+			\lim_{n \to \infty} E_n=\hbar \sum_{i=1}^{\infty} \frac{1}{n(n+1)} 
+		.\]
+		Note that
+		\[
+			\frac{1}{n} -\frac{1}{n+1} =\frac{n+1}{n(n+1)} -\frac{n}{n(n+1)} =\frac{1}{n(n+1)} =\omega_n
+		.\]
+		Therefore,
+		\[
+			\hbar \sum_{i=1}^{\infty} \omega _i=\hbar \sum_{i=1}^{\infty} \frac{1}{n} -\frac{1}{n+1} 
+		.\]
+		It is immediately obvious this is a telescoping series, but I will prove this by induction once again. Note that
+		\[
+			\sum_{i=1}^{2} \omega_i=\frac{1}{1} -\frac{1}{2} +\frac{1}{2} -\frac{1}{3} =1-\frac{1}{2+1} 
+		.\]
+		Now suppose this statement holds for arbitrary $n$, and observe that
+		\[
+			\sum_{i=1}^{n+1} \omega_i=\frac{1}{n+1} -\frac{1}{n+2} +\sum_{i=1}^{n} \omega _i=\frac{1}{n+1} -\frac{1}{n+2} +1-\frac{1}{n+1} =1-\frac{1}{n+2} 
+		.\]
+		Therefore, the statement is proven. We thus have
+		\[
+			\hbar \sum_{i=1}^{\infty} \omega_i=\lim_{n \to \infty} \hbar \sum_{i=1}^{n} \frac{1}{n} -\frac{1}{n+1} =\hbar \lim_{n \to \infty} 1-\frac{1}{n+1} =\hbar 
+		.\]
+		Therefore, and factoring in the $s ^{-1} $ that I have omitted writing for the entirety of the problem,
+		\[
+			\lim_{n \to \infty} E_n=\hbar s ^{-1} \approx 6.6\cdot 10^{-16}\text{eV} 
+		.\]
+	\item 
+		\begin{enumerate}
+			\item We have
+				\begin{align*}
+					\braket{\psi }{\psi } &=A^2\left( \sum_{n=1}^{\infty} z^n \bra{E_n}  \right) \left( \sum_{m=1}^{\infty} z^m\ket{E_m}  \right) \\
+							      &=A^2 \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} z^nz^m\delta_{nm} \\
+							      &=A^2 \sum_{n=1}^{\infty} z^{2n} \\
+							      &\equiv 1
+				.\end{align*}
+				Note that
+				\[
+					\sum_{i=1}^{\infty} \left( z^2 \right) ^n
+				\]
+				is geometric, and as $\left| z \right| <1$, it converges to
+				\[
+					\frac{z^2}{1-z^2} 
+				.\]
+				We then define
+				\[
+					A\coloneqq \sqrt{\frac{1-z^2}{z^2} } 
+				.\]
+			\item i could have totally used einstein notation for this
+				\begin{align*}
+					\bra{\psi } H\ket{\psi } &=A^2\left( \sum_{n=1}^{\infty} z^n\bra{E_n}  \right) \left( \sum_{m=1}^{\infty} z^mH\ket{E_m}  \right) \\
+								 &=A^2 \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} z^{nm} E_m\delta_{nm} \\
+								 &=A^2 \sum_{n=1}^{\infty} \left( z^2 \right)^n E_n \\
+								 &=\hbar A^2 \sum_{n=1}^{\infty} \left( z^2 \right) ^n\left( 1 -\frac{1}{n}  \right) \\
+								 &=\hbar A^2\left( \frac{z^2}{1-z^2} +\ln (1-z^2) \right) \\
+								 &\approx 6.6\cdot 10^{-16} \cdot A^2\left( \frac{z^2}{1-z^2} +\ln \left( 1-z^2 \right)  \right) \text{eV} 
+				.\end{align*}
+				I'm bored heres a proof of the identity
+				\[
+					\sum_{n=0}^{\infty} x^n=\frac{1}{1-x} \implies \int \frac{1}{1-x}  \,\mathrm{d} x=\sum_{n=0}^{\infty} \int x^n \,\mathrm{d} x=\sum_{n=0}^{\infty} \frac{x^{n+1} }{n+1} =\sum_{n=1}^{\infty} \frac{x^n}{n} 
+				.\]
+				Also note that
+				\[
+					\int \frac{1}{1-x}  \,\mathrm{d} x=-\ln (1-x)
+				.\]
+				Therefore,
+				\[
+					-\ln (1-x)=\sum_{n=1}^{\infty} \frac{x^n}{n} 
+				.\]
+		\end{enumerate}
+		
+\end{enumerate}
+\end{document}

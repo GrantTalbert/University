@@ -1,0 +1,164 @@
+\section{Cones and Homotopies}
+If $\alpha ^{\bullet } $ is a morphism $M^\bullet \to N^\bullet $, it is natural to consider the induced morphism $H^\bullet (\alpha ^\bullet ): H^\bullet (M^\bullet ) \to H^\bullet (N^\bullet )$, where each $\alpha ^i$ is the morphism $H^i(M^\bullet )\to H^i(N^\bullet )$ described in the proof of lemma \ref{lma:9.10}. However, $H^\bullet $ is in general not exact, and this makes it difficult to describe the kernel and cokernel of $H^\bullet (\alpha ^\bullet )$ in terms of $\alpha ^\bullet $. We will use the long exact cohomology sequence to account for this, and will also begin exploring ``homotopies'', which are so important that we will end up creating a brand new homotopic category of complexes.
+
+\subsection{The Mapping Cone of a Morphism}
+Given a morphism $\alpha ^\bullet : M^\bullet  \to N^\bullet $, the mapping cone $MC(\alpha )^\bullet $ will recover $H^\bullet (\alpha ^\bullet )$ as the connecting morphism in the long cohomology sequence, will define the third vertex in a special triangle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&M^\bullet \ar[dr]\\
+	L[1]^\bullet \ar[ur, "0;+1"]&&MC(\alpha )^\bullet \ar[ll]
+\end{tikzcd}\]
+such that the triangle induced by cohomology
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+	&H^\bullet (M^\bullet )\ar[dr]\\
+	H^\bullet (L\text{[}1\text{]} ^\bullet )\ar[ur, "+1"]&&H^\bullet (MC(\alpha )^\bullet) \ar[ll]
+\end{tikzcd}\]
+will have the connecting morphisms given by $\alpha ^\bullet : H^\bullet (L[1]^\bullet ) \to H^\bullet (M^\bullet )$. That is, although morphisms induced by cohomology cannot be extended to exact sequences, they \emph{can} be extended to exact triangles by including the mapping cone.
+
+\begin{definition}[Mapping Cone]\label{dfn:9.4.1}
+	The mapping cone $MC(\alpha )^\bullet $ of a morphism $\alpha ^\bullet : M^\bullet  \to N^\bullet $ is defined as the complex consisting of objects
+	\[
+		MC(\alpha )^i\coloneqq L[1]^i \oplus M^i
+	,\]
+	and morphisms $L[1]^i\oplus M^i \to L[1]^{i+1} \oplus M^{i+1} $ are given by the unique morphism making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&L[1]^{i+1} \\
+		L[1]^{i} \oplus M^i\ar[urr, bend left, "-d_{\text{[} L\text{]} } ^i"]\ar[drr, bend right, "(\alpha ^{i+1} \circ \pi_{L\text{[} 1\text{]} ^i} )+d_M^i"']\ar[r, dashed, "d_{MC(\alpha )}^i "]&L[1]^{i+1} \oplus M^{i+1} \ar[ur, two heads, "\pi_{L\text{[} 1\text{]} }^{i+1}  "]\ar[dr, two heads, "\pi_{M^{i+1} } "]\\
+																				      &&M^{i+1} 
+	\end{tikzcd}\]
+	commute by the universal property of products.
+\end{definition}
+
+More conventionally, we would write
+\[
+	d_{MC(\alpha )} ^i\coloneqq \left( -d_{[L]}^i \right) \times \left( \left( \alpha ^{i+1} \circ \pi_{L[1]^i}  \right) +d_M^i \right) 
+.\]
+By definition, we have split exact sequences
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]&L[1]^i\ar[r]&L[1]^i\oplus M^i\ar[r]&M^i\ar[r]&0
+\end{tikzcd}\]
+for all $i$, and thus the sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]&L[1]^\bullet \ar[r]&MC(\alpha )^\bullet  \ar[r]&M^\bullet \ar[r]&0
+\end{tikzcd}\]
+is exact. Now we can show the mapping cone satisfies the properties described above.
+
+\begin{proposition}\label{prp:9.4.1}
+	There is an exact triangle
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+		&H^\bullet (M^\bullet )\ar[dr]\\
+		H^\bullet (L[1]^\bullet )\ar[ur, "+1"]&&H^\bullet (MC(\alpha )^\bullet )\ar[ll]
+	\end{tikzcd}\]
+	where the connecting morphism is $H^\bullet (\alpha ^\bullet )$.
+\end{proposition}
+\begin{proof}
+	The triangle exists by theorem \ref{thm:9.3.1}, and by our discussion above, rows centered at the mapping cone are exact. It suffices to show that the induced morphism is $\alpha $, since exactness follows in general from the theorem as well due to functorality of cohomology. By the logic of the snake lemma, it suffices to show the connecting morphism is $\alpha $. This is easily shown by the same proof as in the snake lemma.
+\end{proof}
+\begin{corollary}\label{cor:9.4.1}
+	Let $\alpha : M \to N$ be a morphism of cochain complexes. Then the induced morphism $H(M)\to H\left( L \right) $ is an isomorphism if and only if the mapping cone $MC(\alpha )$ is exact.
+\end{corollary}
+\subsection{Quasi-Isomorphisms and Derived Categories}
+\begin{definition}[Quasi-Isomorphism]\label{dfn:9.4.2}
+	A quasi-isomorphism $\alpha ^\bullet $ is a morphism $M^\bullet \to N^\bullet $ that induces an isomorphism $H^\bullet (M^\bullet )\to M^\bullet (N^\bullet )$ in cohomology.
+\end{definition}
+By the previous corrollary, this condition is equivalent to stating that $MC(\alpha ^\bullet )$ is exact. Recall that a resolution of an object $A$ is a complex $M^\bullet $ that is quasi-isomorphic to $\iota (A)$; that is, all cohomologies are 0, except for $H^0(M^\bullet )$. This setup is given by the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \ar[r]&M^{-1} \ar[r, "d^{-1} "]\ar[d]&M^0\ar[d]\ar[r, "d^{0} "]&M^{1} \ar[r, "d^{1} "]\ar[d]&\ldots \\
+	\ldots \ar[r]&0\ar[r]&A\ar[r]&0\ar[r]&\ldots 
+\end{tikzcd}\]
+and the only nontrivial vertical map must be defined as $\coker d^{-1} $. Quasi-isomorphisms are in this sense generalizations of resolutions.
+
+It would be nice if quasi-isomorphisms were invertible, since then the isomorphism classes of complexes would be encoded in their cohomology. This is in general not the case however, and they do not define an equivalence relation at all. However, identifying all chain complexes with an equivalence class and then quotienting is \emph{not} the main goal of quotients; the main goal is studying the factorizations of maps through these quotients: functions with the same action on elements. It is thus not our goal to identify all complexes linked by a quasi-isomorphism, but rather to move information through them. The natural place to do this is in a category where they \emph{are} invertible.
+
+To do this, we can study additive functors $\mathscr{F} : \mathsf{C} (\mathsf{A} ) \to \mathsf{D} $ such that $\mathscr{F} (\alpha ^\bullet )$ is an isomorphism for all quasi-isomorphisms $\alpha ^\bullet $. Clearly, cohomology is one such functor. It is most natural to phrase this as a universal problem, where we are looking for a category $\mathsf{D} (\mathsf{A} )$ satisfying
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathsf{C} \ar[r]\ar[d]&\mathsf{D} \\
+	\mathsf{D} (\mathsf{A} )\ar[ur, dashed]
+\end{tikzcd}\]
+Such a construction exists if localization can be carried out, but such constructions are beyond this book, and are best suited for a more advanced text. For this book, we will simply take this category to exist and will ignore the specifics. We call this the \emph{derived category}. We will be able to realize full definitions in some specific cases, however.
+
+The derived category is not abelian, but enough structure remains to do homological algebra. Objects in $\mathsf{D} (\mathsf{A} )$ have cohomology, and there exist ``distinguished triangles'', which abstract exact sequences and give long exact cohomology sequences. This makes it a \emph{triangulated category}. And of course, it has applications in fucking string theory of all things.
+
+To understand the abstract counterintuitive nature of $\mathsf{D} (\mathsf{A} )$, note that if $M^\bullet $ is exact, then $H^\bullet (M^\bullet )=0$, meaning the 0 morphism $0\to M^\bullet $ is a quasi-isomorphism, and thus invertible in $\mathsf{D} (\mathsf{A} )$. This means that nonzero complexes in $\mathsf{C} (\mathsf{A} )$ may become 0 in $\mathsf{D} (\mathsf{A} )$.
+
+\begin{lemma}\label{lma:9.4.1}
+	Let $\mathscr{F} : \mathsf{C} (\mathsf{A} ) \to \mathsf{D} $ be an additive functor that maps quasi-isomorphisms to isomorphisms.
+	\begin{itemize}
+		\item If $M^\bullet $ is exact, then $\mathscr{F} (M^\bullet )=0$.
+		\item If $\alpha ^\bullet : L^\bullet  \to M^\bullet $ admits a factorization
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+				L^\bullet \ar[rr, "\alpha ^\bullet "]\ar[dr]&&N^\bullet \\
+									    &M^\bullet \ar[ur]
+			\end{tikzcd}\]
+			in such a way that $M^\bullet $ is exact, then $\mathscr{F} (\alpha ^\bullet )=0$.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	It is obvious that the second statement follows from the first, as we must have $\mathscr{F} (M^\bullet )=0$ by the first, and thus
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+		\mathscr{F} (L^\bullet )\ar[rr, "\alpha ^\bullet "]\ar[dr]&&\mathscr{F} (N^\bullet )\\
+								   &0\ar[ur]
+	\end{tikzcd}\]
+	commutes.
+
+	For the first claim, note that since $\mathscr{F} $ is additive, $\mathscr{F} (0)=0$. It follows that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathscr{F} (M^\bullet )\ar[r, "\mathscr{F} (0)"]\ar[rr, bend left, "1_{\mathscr{F} (M^\bullet )} "]&\mathscr{F} (M^\bullet )\ar[r, "\mathscr{F} (0)^{-1} "]&\mathscr{F} (M^\bullet )
+	\end{tikzcd}\]
+	commutes, and thus $1_{\mathscr{F} (M^\bullet )} =0\circ 0=0$. We have that $\Hom_{\mathsf{D} }(\mathscr{F} (M^\bullet ), \mathscr{F} (M^\bullet )) $ must be a singleton by a generalization of the $0\neq 1$ in nontrivial rings proof to more general ring-like structures.
+\end{proof}
+
+Constructions of derived categories and triangulated categories are once again beyond the scope of this book, so we will simply assume they exist.
+
+\subsection{Homotopy}
+Quasi-isomorphisms seem difficult to work with, so we again take inspiration from topology and introduce the notion of homotopy in an algebraic setting.
+\begin{definition}[Homotopy]\label{dfn:9.4.3}
+	A homotopy between two morphisms $\alpha ^\bullet ,\beta ^\bullet : L^\bullet  \to M^\bullet $ is a collection of maps $h^i : L^i \to M^{i-1} $ such that for all $i$,
+	\[
+		\beta ^i-\alpha ^i=d_{M}^{i-1}h^i+h^{i+1} d_L^i
+	.\]
+	We say $\alpha ^\bullet $ is homotopic to $\beta ^\bullet $ and write $\alpha ^\bullet \sim \beta ^\bullet $.
+\end{definition}
+
+Since in general $h^\bullet $ does not form a morphism $L^\bullet \to M[-1]^\bullet $, the diagram formed by this relation is in general non-commutative, meaning homotopy is difficult to visualize.
+
+\begin{definition}[Homotopy Equivalence]\label{dfn:4.9.4}
+	A morphism $\alpha ^\bullet : L^\bullet  \to M^\bullet $ is a \emph{homotopy equivalence} if there exists $\beta ^\bullet : M^\bullet  \to L^\bullet $ such that $\alpha ^\bullet \beta ^\bullet \sim 1_{M^\bullet } $ and $\beta ^\bullet \alpha ^\bullet \sim 1_{L^\bullet } $. The complexes $L^\bullet ,M^\bullet $ are said to be homotopy equivalent if there exists a homotopy equivalence $M^\bullet \to L^\bullet $.
+\end{definition}
+
+It is immediately checked that $\sim $ and homotopy equivalence are equivalence relations.
+
+\begin{proposition}\label{prp:9.4.4}
+	If $\alpha^{\bullet}, \beta ^{\bullet} : L^{\bullet}  \to M^{\bullet} $ are homotopic morphisms of cochain complexes, then they induce the same morphism on cohomology; that is, $H^{\bullet} (\alpha ^{\bullet} )=H^{\bullet} (\beta ^{\bullet} )$.
+\end{proposition}
+\begin{proof}
+	Working through the arrow-theoretic version is hard and i may yield
+\end{proof}
+\begin{corollary}\label{cor:9.4.1}
+	Homotopy equivalent complexes have isomorphic cohomology.
+\end{corollary}
+\begin{proof}
+	Since $\alpha ^{\bullet} \circ \beta ^{\bullet} $ and $\beta ^{\bullet} \circ \alpha ^{\bullet} $ are homotopic to the identity, by proposition \ref{prp:9.4.4} they induce the same morphism as the identity in cohomology, and are thus inverses in cohomology.
+\end{proof}
+
+In general, homotopy equivalence is a stronger requirement than quasi-isomorphism, so this does not classify quasi-isomorphisms, although we clearly have that homotopy equivalent morphisms are quasi-isomorphisms.
+
+Homotopy is extremely important, as homotopic complexes mean that the cohomology is independent of the choice of morphism, paving the way for functors such as the Ext and Tor functors.
+
+\begin{lemma}\label{lma:9.4.2}
+	Let $\mathscr{F} : \mathsf{A}  \to \mathsf{B} $ be an additive functor between abelian categories, and let $\mathsf{C} (\mathscr{F} ): \mathsf{C} (\mathsf{A} ) \to \mathsf{C} (\mathsf{B} )$ be the induced functor. If $\alpha ^{\bullet} \sim \beta ^{\bullet} $ in $\mathsf{C} (\mathsf{A} )$, then $\mathsf{C} (\mathscr{F} )(\alpha ^{\bullet} )\sin \mathsf{C} (\mathscr{F} )(\beta ^{\bullet} )$ in $\mathsf{C} (\mathsf{D} )$, and if $L^{\bullet} $ and $M^{\bullet} $ are homotopy equivalent, then so are $\mathsf{C} (\mathscr{F} )(L^{\bullet} )$ and $\mathsf{C} (\mathscr{F} )(M^{\bullet} )$.
+\end{lemma}
+\begin{proof}
+	The second statement follows from the first. Since $\mathscr{F} $ is not just additive on $\mathsf{C} (\mathsf{A}) $ but also on $\mathsf{A} $, we have
+	$\mathscr{F} (\beta ^i)-\mathscr{F} (\alpha ^i)=\mathscr{F} (d^{i-1} _M)\mathscr{F} (h^i)+\mathscr{F} (h^{i+1} )\mathscr{F} (d_L^i)$. This satisfies the definition of a homotopy.
+\end{proof}
+\begin{theorem}\label{thm:9.4.1}
+	Let $\mathscr{F} : \mathsf{A}  \to \mathsf{B} $ be an additive functor. If $L^{\bullet} $ and $M^{\bullet} $ are homotopy equivalent, then there exists an isomorphism
+	\[
+		H^{\bullet} (\mathsf{C} (\mathscr{F} )(L^{\bullet} ))\cong H^{\bullet} (\mathsf{C} (\mathscr{F} )(M^{\bullet} ))
+	.\]
+\end{theorem}
+\begin{proof}
+	This is immediate after the previous results. By lemma \ref{lma:9.4.2}, $\mathsf{C} (\mathscr{F} )(L^{\bullet} )$ is homotopy equivalent to $\mathsf{C} (\mathscr{F} )(M^{\bullet} )$. By corollary \ref{cor:9.4.1}, they are thus isomorphic.
+\end{proof}
+
+The book allows this statement to be a theorem, since it shows that if a mechanism for producing cochain complexes can be defined \emph{up to homotopy}, then cohomology induces an interesting invariant.

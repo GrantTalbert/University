@@ -1,0 +1,141 @@
+\section{Working in Abelian Categories}
+\subsection{Exactness in Abelian Categories}
+We can now define what it means for a sequence to be exact in an abelian category. A sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r, "\phi "]&B\arrow[r, "\psi "]&C\arrow[r]&0
+\end{tikzcd}\]
+is exact at $B$ if $\psi \circ \phi =0$, and $\coker \phi \circ \ker \psi =0$. This first quality makes the sequence into a complex, and also tells us that $\phi $ factors through $\ker \psi $. Since $\ker \psi $ is a monomorphism, this yields a unique factorization of $\im \phi $ through $\ker \psi $. The second condition tells us that $\ker \psi $ factors through $\ker \coker \psi =\im \psi $, and thus we have $\im \phi =\ker \psi $. This recovers our definition of exactness in $\Rmod{R} $, and also recovers some basic statements such as
+\begin{itemize}
+	\item $\psi $ is mono if and only if $\phi =0$;
+	\item $\phi $ is epi if and only if $\psi =0$;
+	\item The sequence is exact if and only if $\psi =\ker \phi $ and $\psi =\coker \phi $;
+	\item The sequence $0\to A\to B\to 0$ is exact if and only if $A\to B$ is an isomorphism.
+\end{itemize}
+For example, the natural sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\arrow[r]&A\arrow[r]&A\oplus B\arrow[r]&B\arrow[r]&0
+\end{tikzcd}\]
+is exact. 
+\subsection{The Snake Lemma, Again}
+We can now prove the snake lemma, purely arrow-theoretically. First, we need the following result.
+\begin{lemma}\label{lma:9.8}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\times _CB\arrow[r, " \overline{\phi } "]\arrow[d, " \overline{\psi } "']&B\arrow[d, "\psi "]\\
+		A\arrow[r, "\phi "']&C
+	\end{tikzcd}\]
+	be a pullback in an abelian category, and let $\phi $ be epi. Then $\overline{\phi } $ is epi. Similarly, if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		C\arrow[r, "\psi "]\arrow[d, "\phi "']&B\arrow[d, " \overline{\phi } "]\\
+		A\arrow[r, " \overline{\psi } "']&A\amalg_C B
+	\end{tikzcd}\]
+	is a pushout, and $\psi $ is mono, then $\overline{\psi } $ is mono.
+\end{lemma}
+\begin{proof}
+	a
+\end{proof}
+\begin{proposition}[Snake Lemma]\label{prp:9.2}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+		0\arrow[r]&L_0\arrow[r, "\alpha _0"]&M_0\arrow[r, "\beta _0"]&N_0\arrow[r]&0
+	\end{tikzcd}\]
+	be a commutative diagram in an abelian category with exact rows. Then there exists an exact complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&\operatorname{Ker}_\lambda \arrow[r]&\operatorname{Ker} _\mu \arrow[r]&\operatorname{Ker} _\nu \arrow[r]&\operatorname{Cok}_\lambda \arrow[r]&\operatorname{Cok} _\mu \arrow[r]&\operatorname{Cok} _\nu \arrow[r]&0.
+	\end{tikzcd}\]
+\end{proposition}
+\begin{proof}
+	By assumption,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&0\arrow[d]&0\arrow[d]&0\arrow[d]\\
+		0\arrow[r]&\operatorname{Ker}_\lambda \arrow[d, tail, "\ker \lambda "]&\operatorname{Ker} _\mu \arrow[d, tail, "\ker \mu "]&\operatorname{Ker} _\nu \arrow[d, tail, "\ker \nu "]\\
+		0\arrow[r]&L_1\arrow[r, tail, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, two heads, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+		0\arrow[r]&L_0\arrow[d, two heads, "\coker \lambda "]\arrow[r, tail, "\alpha _0"]&M_0\arrow[d, two heads, "\coker \mu "]\arrow[r, two heads, "\beta _0"]&N_0\arrow[d, two heads, "\coker \nu "]\arrow[r]&0\\
+			  &\operatorname{Cok} _\lambda \arrow[d]&\operatorname{Cok} _\mu \arrow[d]&\operatorname{Cok} _\nu \arrow[d]\arrow[r]&0\\
+						     &0&0&0
+	\end{tikzcd}\]
+	commutes. Consider the subdiagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\operatorname{Ker} _\lambda \arrow[d, "\ker \lambda "]&\operatorname{Ker} _\mu \arrow[d, "\ker \mu "]\\
+		L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[d, "\mu "]\\
+		L_0\arrow[r, "\alpha _0"]&M_0
+	\end{tikzcd}\]
+	Since $\lambda \circ \ker \lambda =0$, it follows that $\alpha _0\circ \lambda \circ \ker \lambda =0$, and by commutivity we have $\mu \circ \alpha _1\circ \ker \lambda =0$. It follows by the universal property of kernels that $\alpha _1\circ \ker \lambda $ factors uniquely through $\ker \mu $ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\operatorname{Ker} _\lambda \arrow[r, "\alpha _1\circ \ker \lambda "]\arrow[dr, dashed]\arrow[rr, bend left, "0"]&M_1\arrow[r, "\mu "]&M_0\\
+																 &\operatorname{Ker}_\mu \arrow[u, "\ker \mu "]
+	\end{tikzcd}\]
+	commutes. Equivalent logic can be applied to find a unique morphism $\operatorname{Ker} _\mu \to \operatorname{Ker} _\nu $. Now consider the subdiagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		L_1\arrow[r, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[d, "\mu "]\\
+		L_0\arrow[r, "\alpha _0"]\arrow[d, "\coker \lambda "]&M_0\arrow[d, "\coker \mu "]\\
+		\operatorname{Cok} _\lambda &\operatorname{Cok} _\mu 
+	\end{tikzcd}\]
+	Since $\coker \mu \circ \mu =0$, it follows that $\coker \mu \circ \mu \circ \alpha _1=0$, and by commutivity of the diagram we have $\coker \mu \circ \alpha _0\circ \lambda =0$. It follows by the universal property of cokernels that $\coker \mu \circ \alpha _0$ factors uniquely through $\coker \lambda $ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		L_1\arrow[r, "\lambda "]\arrow[rr, bend left, "0"]&L_0\arrow[r, "\coker \mu \circ \alpha _0"]\arrow[d, "\coker \lambda "']&\operatorname{Cok} _\mu \\
+						       &\operatorname{Cok} _\lambda \arrow[ur, dashed]
+	\end{tikzcd}\]
+	commutes. By similar logic, we obtain a unique morphism $\operatorname{Cok} _\mu \to \operatorname{Cok} _\nu $ as well. Therefore, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&0\arrow[d]&0\arrow[d]&0\arrow[d]\\
+		0\arrow[r]&\operatorname{Ker}_\lambda \arrow[d, tail, "\ker \lambda "]\arrow[r, dashed]&\operatorname{Ker} _\mu \arrow[d, tail, "\ker \mu "]\arrow[r, dashed]&\operatorname{Ker} _\nu \arrow[d, tail, "\ker \nu "]\\
+		0\arrow[r]&L_1\arrow[r, tail, "\alpha _1"]\arrow[d, "\lambda "]&M_1\arrow[r, two heads, "\beta _1"]\arrow[d, "\mu "]&N_1\arrow[r]\arrow[d, "\nu "]&0\\
+		0\arrow[r]&L_0\arrow[d, two heads, "\coker \lambda "]\arrow[r, tail, "\alpha _0"]&M_0\arrow[d, two heads, "\coker \mu "]\arrow[r, two heads,"\beta _0"]&N_0\arrow[d, two heads, "\coker \nu "]\arrow[r]&0\\
+			  &\operatorname{Cok} _\lambda \arrow[d]\arrow[r, dashed]&\operatorname{Cok} _\mu \arrow[d]\arrow[r, dashed]&\operatorname{Cok} _\nu \arrow[d]\arrow[r]&0\\
+						     &0&0&0
+	\end{tikzcd}\]
+	commutes. We will show rows are exact later; first, we show a morphism $\operatorname{Ker} _\nu \to \operatorname{Cok} _\lambda $ exists.
+
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		M_1\times_{N_1} \operatorname{Ker} _\nu \arrow[r, two heads, " \overline{\beta}_1 "]\arrow[d]&\operatorname{Ker} _\nu \arrow[d, tail, "\ker \nu "]\\
+		M_1\arrow[r, two heads, "\beta _1"]&N_1
+	\end{tikzcd}\]
+	be a pullback, where $\overline{\beta } _1$ is epi by lemma \ref{lma:9.8}, and similarly let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		L_0\arrow[r, tail, "\alpha _0"]\arrow[d, two heads, "\coker \lambda "]&M_0\arrow[d]\\
+		\operatorname{Cok} _\lambda \arrow[r, tail, " \overline{\alpha } _0"]&\operatorname{Cok} _\lambda \amalg_{L_0} M_0
+	\end{tikzcd}\]
+	be a pushforward, where $\overline{\alpha } _0$ is mono by lemma \ref{lma:9.8}. Note that
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		L_1\arrow[r, "0"]\arrow[dr, "0"]\arrow[d, tail, "\alpha _1"]&\operatorname{Ker} _\nu \arrow[d, tail, "\ker \nu "]\\
+		M_1\arrow[r, two heads, "\beta _1"]&N_1
+	\end{tikzcd}\]
+	commutes by exactness of rows in the first diagram. Since the pullback is final with respect to this property, there exists a unique morphism $\sigma$ making the diagram
+	\[\begin{tikzcd}[row sep = 4.5em, column sep = 2em]
+		L_1\arrow[dr, dashed, "\sigma "]\arrow[ddr, tail, bend right, "\alpha _1"]\arrow[drr, bend left, "0"]\\
+		&M_1\times _{N_1} \operatorname{Ker} _\nu \arrow[r, two heads, " \overline{\beta }_1"]\arrow[d]&\operatorname{Ker} _\nu\arrow[d, tail, "\ker \nu "] \\
+		&M_1\arrow[r, two heads, "\beta _1"]&N_1
+	\end{tikzcd}\]
+	commute. Similarly, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		L_0\arrow[r, two heads, "\coker \lambda "]\arrow[d, tail, "\alpha _0"]\arrow[dr, "0"]&\operatorname{Cok} _\lambda \arrow[d, "0"]\\
+		M_0\arrow[r, two heads, "\beta _0"]&N_0
+	\end{tikzcd}\]
+	commutes by exactness of the first diagram, and since pushforwards are initial with respect to this property, there exists a unique morphism $\tau $ making the diagram
+	\[\begin{tikzcd}[row sep = 4.5em, column sep = 2em]
+		L_0\arrow[r, tail, "\alpha _0"]\arrow[d, two heads, "\coker \lambda "]&M_0\arrow[d]\arrow[ddr, bend left, two heads, "\beta _0"]\\
+		\operatorname{Cok} _\lambda \arrow[r, tail, " \overline{\alpha } _0"]\arrow[drr, bend right, "0"]&\operatorname{Cok} _\lambda \amalg_{L_0} M_0\arrow[dr, dashed, "\tau "]\\
+														 &&N_0
+	\end{tikzcd}\]
+	commute. It follows that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\arrow[r]&L_1\arrow[d, equals]\arrow[r, "\sigma "]&M_1\times _{N_1} \operatorname{Ker} _\nu\arrow[d] \arrow[r, two heads, " \overline{\beta }_1"]\arrow[ddd, bend left, "\varepsilon "]&\operatorname{Ker} _\nu \arrow[d, tail, "\ker \nu "]\arrow[r]&0\\
+		0\arrow[r]&L_1\arrow[d, "\lambda "]\arrow[r, tail, "\alpha _1"]&M_1\arrow[d, "\mu "]\arrow[r, two heads, "\beta _1"]&N_1\arrow[d, "\nu "]\arrow[r]&0\\
+		0\arrow[r]&L_0\arrow[r, tail, "\alpha _0"]\arrow[d, two heads, "\coker \lambda "]&M_0\arrow[r, two heads, "\beta _0"]\arrow[d]&N_0\arrow[d, equals]\arrow[r]&0\\
+		0\arrow[r]&\operatorname{Cok} _\lambda \arrow[r, tail, " \overline{\alpha } _0"]&\operatorname{Cok} _\lambda \amalg_{L_0} M_0\arrow[r, "\tau "]&N_0\arrow[r]&0
+	\end{tikzcd}\]
+	commute. Moreover, we will be able to show that rows are exact. Note that by commutivity of the diagram, since $\coker \lambda \circ \lambda =0$ and $\nu \circ \ker \nu =0$, it follows that $\varepsilon \circ \sigma =0$ and $\tau \circ \varepsilon =0$.
+
+	WTS: $\coker \sigma =\ker \nu $, since
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&\operatorname{Cok}_\sigma \arrow[dr, dashed]&\operatorname{Cok}_\varepsilon \arrow[dr, dashed]\\
+		L_1\arrow[r, "\sigma "]\arrow[dr, dashed]&M_1\times _{N_1} \operatorname{Ker} _\nu \arrow[r, "\varepsilon "]\arrow[dr, dashed]\arrow[u, "\coker \sigma "]&\operatorname{Cok} _\lambda \amalg_{L_0} M_0\arrow[u, "\coker \varepsilon "]\arrow[r, "\tau "]&N_0\\
+							 &\operatorname{Ker} _\varepsilon \arrow[u, "\ker \varepsilon "]&\operatorname{Ker}_\tau \arrow[u, "\ker \tau "']
+	\end{tikzcd}\]
+	commutes. Wait this implies $\ker \nu $ is iso, and that happens iff $\nu =0$ i think, so this no worky.
+\end{proof}
+\subsection{Working with `Elements' in a Small Abelian Category}
+will do later

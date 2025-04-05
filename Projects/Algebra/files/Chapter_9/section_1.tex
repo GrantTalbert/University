@@ -279,7 +279,7 @@ Arrow-theoretical approaches allow us to define a canonical decomposition of mor
 \end{tikzcd}\]
 We would assume that $\ker \coker \phi $ should play the role of $\im \phi $. We can formalize this notion somewhat. Note that in the context of sets, any subset $B'$ such that $\im \phi \subseteq B'\subseteq B$ has the property that the mapping $\phi : A \to B'$ factors uniquely through $\im \phi $. By replacing ``subobject'' with ``monomorphism'', we can thus see $\im \phi $ as initial with respect to being a monomorphism $\_\to B$ through which $\phi $ factors.
 
-\begin{lemma}\label{lma:9.5}
+\begin{lemma}\label{lma:9.6}
 	Let $\phi : A \to B$ be a morphism in an abelian category, and let $\iota  : K \to B$ be $\ker \coker \phi $. Then
 	\begin{itemize}
 		\item $\iota $ is a monomorphism;
@@ -315,14 +315,71 @@ This lemma motivates the following definition.
 	Let $\phi : A \to B$ be a morphism in an abelian category. The image $\im \phi $ is defined as $\ker \coker \phi $, and the coimage $\operatorname{coim} \phi $ is defined as $\coker \ker \phi $.
 \end{definition}
 
+To summarize, for any morphism $\phi : A \to B$, we have a decomposition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&&K\arrow[dr, bend left, tail, "\im \phi "]\\
+	A\arrow[rrr, "\phi "]\arrow[dr, bend right, two heads, "\operatorname{coim} \phi "]\arrow[urr, bend left, " \overline{\phi } "]&&&B\\
+			     &C\arrow[rru, bend right, " \underline{\phi }"]
+\end{tikzcd}\]
+Our intuition would suggest that $\overline{\phi } $ is epi and $\underline{\phi }$ is mono. This is indeed the case.
+\begin{lemma}\label{lma:9.7}
+	Let $\phi : A \to B$ be a morphism in an abelian category, and let $\im : K \to B$, $\operatorname{coim} : A \to C$. Then the induced morphisms $A\to K$ and $C\to B$ are epimorphisms and monomorphisms, respectively.
+\end{lemma}
+\begin{proof}
+	To show $\underline{\phi }: C \to B$ is a monomorphism, consider its coimage $C\to C'$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&C'\arrow[ddr, "\underline{\underline{\phi }}"]\\
+		&C\arrow[drr, "\underline{\phi }"]\arrow[ur, two heads, "\operatorname{coim} \underline{\phi }"]\\
+		A\arrow[rrr, "\phi "]\arrow[ur, two heads, "\operatorname{coim} \phi "]&&&B
+	\end{tikzcd}\]
+	We thus have a factorization
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\arrow[rrr, bend left, "\phi "]\arrow[r, two heads, "\operatorname{coim} \phi "']&C\arrow[r, two heads, "\operatorname{coim} \underline{\phi }"]\arrow[rr, bend right, "\underline{\phi }"']&C'\arrow[r]&B.
+	\end{tikzcd}\]
+	Since $\operatorname{coim} \phi $ is final with respect to factorizations such that the leading morphism is epi, there exists a unique morphism making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&C'\arrow[d, dashed, "\sigma "]\arrow[ddr, bend left, "\underline{\underline{\phi }}"]\\
+		&C\arrow[dr, "\underline{\phi }"]\\
+		A\arrow[rr, "\phi "']\arrow[ur, "\operatorname{coim} \phi "', two heads]\arrow[uur, bend left, two heads, "\operatorname{coim} \underline{\phi }\circ \operatorname{coim} \phi "]&&B
+	\end{tikzcd}\]
+	commute. It follows by commutativity of the diagram that
+	\[
+		\sigma \circ \operatorname{coim} \underline{\phi }\circ \operatorname{coim} \phi =1_C\circ \operatorname{coim} \phi 
+	.\]
+	We insert the $1_C$ to make the following statement. Since $\operatorname{coim} \phi $ is epi, by definition \ref{dfn:9.3} we must have $\sigma \circ \operatorname{coim} \underline{\phi }=1_C$. Therefore, $\operatorname{coim} \underline{\phi }$ has a left-inverse, and is thus mono. Since $\mathsf{A} $ is abelian, $\operatorname{coim} \underline{\phi }$ is an isomorphism by lemma \ref{lma:9.5}.
+
+	Note that since every kernel is the kernel of its cokernel,
+	\[
+		\ker \coker \ker \phi =\ker \phi \implies \ker \operatorname{coim} \underline{\phi }=\ker \underline{\phi }
+	.\]
+	Since $\underline{\phi }$ is an isomorphism,
+	\[
+		0=\ker \operatorname{coim} \underline{\phi }=\ker \underline{\phi }
+	.\]
+	By lemma \ref{lma:9.3}, $\underline{\phi }$ is a monomorphism. The statement for epimorphisms follows since $\mathsf{A} ^{op} $ is abelian.
+\end{proof}
+
+Our summary of the situation now becomes
+\[\begin{tikzcd}[row sep = 2em, column sep = 2.5em]
+	&&K\arrow[dr, bend left, tail, "\im \phi "]\\
+	A\arrow[rrr, "\phi "]\arrow[dr, bend right, two heads, "\operatorname{coim} \phi "]\arrow[urr, bend left, two heads, " \overline{\phi } "]&&&B.\\
+			     &C\arrow[rru, bend right, tail, " \underline{\phi }"]
+\end{tikzcd}\]
+Since the image and coimage are initial with respect to factorizations of this sort, the statement of our canonical decomposition becomesd the following.
 
 \begin{theorem}[Canonical Decomopsition]\label{thm:9.1}
 	Let $\phi : A \to B$ be a morphism in an abelian category. Then there exists a unique $\widetilde{\phi } $ such that
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
-		A\arrow[rrr, bend left, "\phi "]\arrow[r, two heads, "\coker \ker \phi "']&C\arrow[r, dashed, tail, two heads]&K\arrow[r, tail, "\ker \coker \phi "']&B
+		A\arrow[rrr, bend left, "\phi "]\arrow[r, two heads, "\operatorname{coim} \phi "']&C\arrow[r, dashed, tail, two heads, "\widetilde{\phi }"']&K\arrow[r, tail, "\im \phi "']&B
 	\end{tikzcd}\]
 	commutes.
 \end{theorem}
 \begin{proof}
-	a
+	It suffices to show the target of the cokernel is naturally isomorphic to the source of the kernel. By the universal properties of image and coimage, there exists a unique $\psi $ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&C\arrow[ddr, bend left, tail, "\underline{\phi }"]\\
+		&K\arrow[dr, tail, "\im \phi "]\arrow[u, dashed, "\psi"]\\
+		A\arrow[ur, two heads, " \overline{\phi } "]\arrow[uur, bend left, two heads, "\operatorname{coim} \phi "]\arrow[rr, "\phi "]&&B
+	\end{tikzcd}\]
+	commute. By exercise 1, if $\psi \circ \phi $ is epi, then $\psi $ is epi, and conversely if $\psi \circ \phi $ is mono, then $\phi $ is mono. Using this fact, note that $\psi \circ \overline{\phi } $ is epi, and thus $\psi $ is epi. Similarly, note that $\underline{\phi }\circ \psi $ is mono by commutativity, and thus so is $\psi $. By lemma \ref{lma:9.5}, $\psi $ is an isomorphism, and by definition admits a unique inverse. Letting $\widetilde{\psi } $ be the inverse of $\psi $ completes the proof.
 \end{proof}

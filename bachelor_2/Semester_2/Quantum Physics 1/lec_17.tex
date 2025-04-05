@@ -1,0 +1,91 @@
+\lecture{17}{Tue 01 Apr 2025 14:00}{Unbound States}
+The question is now how to deal with the unbound states. The simplest possible state has $V(x)=0$, so the eigenvalue equation becomes
+\[
+	-\frac{\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} \psi (x)=E\psi (x)
+.\]
+Setting
+\[
+	k\coloneqq \sqrt{\frac{2mE}{\hbar } } ,
+\]
+we find instantly that the solutions are $\exp (\pm ikx)$. We have
+\[
+	\psi (x)=Ae^{ikx} +Be^{-ikx} 
+.\]
+Our boundaries are now $\psi \to 0$ as $x\to \infty $. However, the magnitudes of exponentials are always 1, so the magnitude here will remain constant for all $x$, and cannot go to infinity. Writing the solutions in Euler's formula, we have
+\[
+	A \cos (kx)+iA \sin kx,\qquad B \cos kx-iB \sin kx
+.\]
+So we cannot in fact impose boundary conditions, since they just continuously oscillate. This allows any $A$ or $B$ to solve the equation, since there need not be bounds. We just require the wavefunction me normalized. We thus have translation symmetry as the origin is no longer important, so it's kinda like Affine space.
+
+Let's consider the difference between these two states. We will consider the action of the momentum operator on $\psi_+,\psi _-$. Note that $[H,P]=0$ in this case, so we can measure $P$ without changing the state. So let's find the eigenvalues of $P$, which will also be eigenvalues of $H$. That is, we want
+\[
+	P \ket{p} =p\ket{p} 
+.\]
+This is solved by exponentials:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}x}  e^{kx} = \frac{i\hbar }{p}e^{(i \hbar /p)x} 
+.\]
+Let $\psi_p(x)=A\exp (i \hbar x/p)$ for $A$ some normalization constant. Note that since $\psi (x)=\braket{x}{\psi } $, we have that $\psi _p(x)=\braket{x}{p} $. This is a fundamental fact that $\braket{x}{p} $ is an exponential.
+
+Going back to our solutions
+\[
+	\psi(x)=Ae^{ikx} +Be^{-ikx} ,
+\]
+we find that their momentums are $\hbar k$ and $-\hbar k$, respectively. The symmetry between the solutions is that they have opposite momenta. If we view the real part of an exponential as a wave, which has wavelength $\lambda =\frac{2\pi }{k} =\frac{2\pi \hbar }{p}$, this is called the De Broglie wavelength. This shows that for any free particle, the wavefunction behaves wavelike - and thus so does the probability distribution (i think). It has a wavelength $\frac{2\pi \hbar }{p} $.
+
+Now let's consider the normalization constant. Consider
+\[
+	\braket{p}{p'} =A_pA_{p'} \int_{-\infty }^{\infty } \psi ^*_p(x)\psi _{p'} (x) \,\mathrm{d} x=A_pA_{p'} \int_{-\infty }^{\infty } e^{i(p-p')x/\hbar }  \,\mathrm{d} x
+.\]
+This integral is $0$ (analytic) unless $p-p'=0$, when it goes to infinity. Doing stuff with power series and Fourier transforms shows that this integral is
+\[
+	A_pA_{p'} 2\pi \hbar \delta (p-p')
+.\]
+The $\hbar $ outside came from a change of variables. More generally,
+\[
+	\int_{-\infty }^{\infty } e^{ikx}  \,\mathrm{d} x=2\pi \delta (k)
+.\]
+This makes sense since these are eigenvectors. To normalize this, we are going to choose $\braket{p}{p'} =\delta (p-p')$, and thus we set
+\[
+	A_p\coloneqq \frac{1}{\sqrt{2\pi \hbar } } 
+.\]
+Our momentum eigenfunctions are thus
+\[
+	\braket{x}{p} =\frac{1}{\sqrt{2\pi \hbar } } e^{ipx/\hbar } =\psi_p(x)
+.\]
+
+Our next problem concerns the time evolution of these states. Let $\ket{\psi ,t=0} =\ket{\psi _p} $; that is, $\psi (x,0)=\psi _p(x)$. Using Schrodinger's equation, we have
+\[
+	i\hbar \frac{\partial }{\partial t} \psi (x,t)=E_p\psi (x,0)
+.\]
+Since this is already an eigenvalue, the solution is an exponential in time:
+\[
+	\frac{\partial \psi (x,t)}{\partial t} =\frac{E_p}{i\hbar } \psi (x,0)\implies \psi (x,t)=e^{-iE_pt/\hbar } \psi _p(x,0)
+.\]
+Plugging in, we have
+\[
+	\psi (x,t)=\frac{1}{\sqrt{2\pi \hbar } } e^{-iE_pt/\hbar } e^{ipx/\hbar } =\frac{1}{\sqrt{2} } \exp \left( ip(x-v_p^{(ph)} t) \right) ,
+\]
+where $v_p^{(ph)} =E_p/p=\frac{p^2}{2mp} =\frac{p}{2m} $. This is called the phase velocity. However, since $p=mv$, we would expect the velocity be $p/m$, not $p/2m$. This is called the \emph{phase velocity} because it's \emph{not} the velocity, but rather the speed at which the phase changes. Since the particle is spreading out according to the Schrodinger equation, and it is spread out over all space (since it is in an eigenstate), it can't really be moving. This can be brought back to the canonical commutation relation
+\[
+	\Delta x\Delta p\geq \frac{\hbar }{2} 
+.\]
+If we know $p$ with 100\% precision, then
+\[
+	\Delta x\geq \frac{\hbar }{2} \frac{1}{0} 
+.\]
+This makes no sense. That is, $\Delta x$ is unknowable. However, nothing is actually spread through out ALL space, so particles actually look like wave \emph{packets}, which are wavy gaussians. It would then have a fairly well-defined position and momentum. There is then a well-defined notion of velocity, since we can consider the speed of the bump in the particle.
+
+Recall the decomposition
+\[
+	\ket{\psi } =\int_{-\infty } ^{\infty }  \psi (x)\ket{x}  \,\mathrm{d} x
+.\]
+We can also decompose into momentum space:
+\[
+	\ket{\psi } =\mathbbm{1}\ket{\psi } =\int_{-\infty }^{\infty } \ket{p} \braket{p}{\psi }  \,\mathrm{d} p=\int_{-\infty }^{\infty } \psi(p)\ket{p}  \,\mathrm{d} p
+.\]
+The relation between position- and momentum-space wavefunctions is
+\[
+	\bra{p } \mathbbm{1}\ket{\psi } =\bra{p} \int_{-\infty }^{\infty } \ket{x} \bra{x}  \,\mathrm{d} x\ket{\psi } =\int_{-\infty }^{\infty } \braket{p}{x} \psi (x) \,\mathrm{d} x=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } e^{ipx/\hbar } \psi (x) \,\mathrm{d} x
+.\]
+This is a Fourier transform. The momentum space wavefunction is the fourier transform of the position-space wavefunction.

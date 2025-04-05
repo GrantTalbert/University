@@ -1,0 +1,201 @@
+\section{The Homotopic Category. Complexes of Projectives and Injectives}
+The moral of the previous section is that homotopy equivalent complexes have the same cohomology (as do any quasi-isomorphic complexes), and thus an important step towards undersanding the inversion of all quasi-isomorphisms will be the homotopic category, which inverts homotopy equivalences.
+\subsection{Homotopic Maps are Identified in the Derived Category}
+Do all additive functors $\mathscr{F} : \mathsf{C} (\mathsf{A} ) \to \mathsf{D} $ that invert quasi-isomorphisms identify homotopic morphisms, like cohomology?
+\begin{lemma}\label{lma:9.5.1}
+	Let $\mathscr{F} : \mathsf{C} (\mathsf{A} ) \to \mathsf{D} $ be an additive functor that inverts quasi-isomorphisms. Then for any homotopic morphisms $\alpha ^{\bullet} ,\beta ^{\bullet} : L^{\bullet}  \to M^{\bullet} $, we have $\mathscr{F} (\alpha ^{\bullet} )=\mathscr{F} (\beta ^{\bullet} )$.
+\end{lemma}
+\begin{proof}
+	It suffices to show if $a^{\bullet} \sim 0$, then $\mathscr{F} (\alpha ^{\bullet} )=0$. By a previous lemma, it suffices further to show $a^{\bullet} $ factors through an exact complex; we will use $MC(1_{L^{\bullet} })^{\bullet} $. Recall our definition of the morphisms in $MC(1_{L^{\bullet} } )^{\bullet} $ as
+	\[
+		d_{MC(1_{L^{\bullet} } )} ^i=\left( -d^i_{L[1]}  \right) \times \left( 1^{i+1}_{L^{\bullet} } \pi_{L[1]} +d_M^i \right) 
+	.\]
+	Since the identity is clearly a quasi-isomorphism, $MC(1_{L^{\bullet} } )^{\bullet} $ is exact. By the universal property of coproducts, there exists an injection $i^{\bullet} :L^{\bullet} \to L[1]^{\bullet} \oplus L^{\bullet} =MC(1_{L^{\bullet} } )^{\bullet} $. Before we can define a second map, recall that $\alpha^{\bullet} \sim 0 $, there exist maps $h^{\bullet} : L \to M[-1]$ such that
+	\[
+		\alpha^{\bullet} =d_{M}^{\bullet-1}h^{\bullet} +h^{\bullet+1}d_L^{\bullet}   
+	.\]
+
+	To define a second map $\pi ^{\bullet} : MC(1_{L^{\bullet} } )^{\bullet} \to M^{\bullet} $, let
+	\[
+		\pi^{\bullet} =h^{\bullet+1} \pi_{L[1]} +\alpha ^{\bullet} \pi_{L} ^{\bullet} 
+	.\]
+	Viewed as a diagram, this looks like the sum of the morphisms
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&L[1]^{\bullet} \ar[r, "h^{\bullet+1} "]&M^{\bullet} \\
+		L^{\bullet} \ar[r, dashed, "i^{\bullet} "]\ar[urr, bend left, "0"]\ar[drr, bend right, "1_{L^{\bullet} } "]&L[1]^{\bullet} \oplus L^{\bullet} \ar[ur, "\pi_{L\text{[} 1\text{]} }^{\bullet}  "]\ar[dr, "\pi_L^{\bullet} "]\\
+		&&L\ar[r, "\alpha ^{\bullet} "]&M^{\bullet} 
+	\end{tikzcd}\]
+	By the universal property of products, this diagram commutes, so it is clear that the composition $\pi ^{\bullet} i^{\bullet}=\alpha ^{\bullet} $. By lemma \ref{lma:9.4.1}, since $\alpha ^{\bullet} $ factors through an exact complex, $\mathscr{F} (\alpha ^{\bullet} )=0$.
+\end{proof}
+
+This tells us that every additive functor that identifies homotopic morphisms must factor through the category obtained by identifying these morphisms.
+
+\subsection{Definition of the Homotopic Category of Complexes}
+\begin{definition}[Homotopic Category]\label{dfn:5.5.1}
+	Let $\mathsf{A} $ be abelian. The homotopic category $\mathsf{K} (\mathsf{A} )$ of cochain complexes in $\mathsf{A} $ is the category where $\Obj(\mathsf{C} (\mathsf{A} )) =\Obj(\mathsf{K} (\mathsf{A} )) $, and
+	\[
+		\Hom_{\mathsf{K} (\mathsf{A} )}(A, B) =\Hom_{\mathsf{C} (\mathsf{A} )}(A, B) /\tildesim 
+	,\]
+	where $\sim $ is the homotopy relation.
+\end{definition}
+
+This is a category, since $\sim $ respects function composition as an equivalence relation. There also exist bounded version $\mathsf{K} ^+(\mathsf{A} )$, $\mathsf{K} ^-(\mathsf{A} )$, and other variants such as projective and injective variants. This category does not have abelian structure, since homotopy does not preserve kernels and cokernels, but we can at least say the following.
+\begin{lemma}\label{lma:5.5.2}
+	$\mathsf{K} (\mathsf{A} )$ is an additive category.
+\end{lemma}
+
+The motivation for the homotopic category is to invert homotopy equivalences. Indeed, there is a naturak identity functor $\mathsf{C} (\mathsf{A} )\to \mathsf{K} (\mathsf{A} )$ mapping morphisms to their homotopy class. This allows lemma \ref{lma:5.5.1} to be reinterpreted as saying $\mathsf{K} (\mathsf{A})$ is universal in the following way: any additive functor $\mathsf{C} (\mathsf{A} )\to \mathsf{D} $ that inverts quasi-isomorphisms factors uniquely through $\mathsf{K} (\mathsf{A} )$. This means that
+\begin{enumerate}
+	\item The derived category factors uniquely through $\mathsf{K} (\mathsf{A} )$;
+	\item Cohomology induces a functor $\mathsf{K} (\mathsf{A} )\to \mathsf{C} (\mathsf{A} )$.
+\end{enumerate}
+\subsection{Complexes of Projective and Injective Objects}
+We will now focus on objects for which there is little difference between homotopy and quasi-isomorphism.
+\begin{definition}[Projective/Injective]\label{dfn:5.5.3}
+	Let $\mathsf{A} $ be an abelian category. An object $P$ of $\mathsf{A} $ is projective if $\Hom_{\mathsf{A} }(P, -) $ is exact, and an object $I$ is injective if $\Hom_{\mathsf{A} }(-, I) $ is exact.
+\end{definition}
+
+In arbitrary categories, it suffices to show a statement is true for only projectives or injectives to show it is true for the other, as projectives become injectives in $\mathsf{A} ^{op} $, and vice versa. It is only in specialized categories such as $\Rmod{R} $ where this symmetry may break down.
+
+\begin{definition}[Enough Projectives/Injectives]\label{dfn:5.5.4}
+	A category has enough projectives if for every object $A\in \mathsf{A} $, there exists a projective object $P$ and an epimorphism $P\twoheadrightarrow A$. A category has enough injectives if $\forall A\in \mathsf{A} $, there exists $I\in \mathsf{A} $ and a monomorphism $I\rightarrowtail A$.
+\end{definition}
+
+A category does not in general have enough projectives and injectives, but some important ones do. For example, $\Rmod{R} $ with $R\in \mathsf{CRing} $, and the category of sheaves of abelian groups over a topological space all have enough projectives and injectives, the former of which we verified. However, counterexamples exist all over the place. For example, the abelian category of finite abelian groups has no nontrivial projectives and injectives, and $0$ is not mono or epi.
+
+\subsection{Homotopy Equivalence vs. Quasi-Isomorphisms in $\mathsf{K} (\mathsf{A} )$}
+We will herein prove that in $\mathsf{K} ^{-} (\mathsf{P} )$ and $\mathsf{K} ^{+} (\mathsf{I} )$ (where $\mathsf{K} ^{-} $ denotes a bdd above complex), quasi-isomorphisms are isomorphisms. This will be done by showing that for any quasi-isomorphism $\alpha ^{\bullet} : P_0^{\bullet}  \to P_1^{\bullet} $ for $P^{\bullet}_i$ bounded above complexes of projectives, or likewise bounded below complexes of injectives, the morphism $\alpha ^{\bullet} $ is a homotopy equivalence.
+
+One remark I want to clarify is that if $A^{\bullet} $ is exact, then $H^{\bullet} (A^{\bullet} )=0^{\bullet} $, and thus the identity map and $0$ should be identified with each other in cohomology. However, there exist examples where these maps are not \emph{homotopic}, so we need to specialize our assertion. First, I will rephrase some basic facts about projectives and injectives for general abelian categories. Note that since $\mathsf{A} ^{op} $ is abelian, the following statements suffice to show the dual statement as well.
+\begin{lemma}\label{lma:9.5.3}
+	The functor $\Hom_{\mathsf{A} }(X, -) : \mathsf{A}  \to \mathsf{Ab} $ is left-exact. Additionally, an object $P$ is projective if and only if for all objects $B,C$ and for all epimorphisms $\psi : B \to C$, if $\eta : P \to C$ is a morphism, then there exists a morphism $\zeta : P \to B$ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&P\ar[dl, "\zeta "']\ar[d, "\eta "]\\
+		B\ar[r, "\psi ", two heads]&C\ar[r, "0"]&0
+	\end{tikzcd}\]
+	commute.
+\end{lemma}
+\begin{proof}
+	Because $\mathsf{Ab} $ has elements, this can be proven immediately by appealing to elements. Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]&A\ar[r, "\phi "]&B\ar[r, "\psi "]&C\ar[r]&0
+	\end{tikzcd}\]
+	be exact in $\mathsf{A} $. Then $\phi $ is mono, so $\ker \phi $ viewed as a morphism $\Hom_{\mathsf{A} }(X, A) \to \Hom_{\mathsf{A} }(X, B) $ is trivial, since the action on morphisms is given by $\eta \mapsto \phi \eta $, and this equals $0$ iff $\eta =0$. Note immediately that since $\psi \phi =0$ in $\mathsf{A} $, we must have $\psi \phi \eta =0$ for all $\eta \in \Hom_{\mathsf{A} }(X, A) $, and thus $\im \phi \subseteq \ker \psi $. Now let $\zeta : X \to B$, and suppose $\psi \zeta =0$. Then $\zeta $ must factor uniquely through $\im \phi $ since $\ker \psi =\im \phi $ in $\mathsf{A} $. Since $\phi $ is mono, we have $\im \phi =\phi $, and thus the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X\ar[r, "\zeta "]\ar[dr, "\overline{\zeta }"']&B\ar[r, "\psi "]&C\\
+						  &A=\im \phi \ar[u, "\phi "']
+	\end{tikzcd}\]
+	commutes. Therefore, $\zeta $ is equivalent to a composition $\phi \overline{\zeta } $, and $\ker \psi \subseteq \im \phi $. Therefore, the complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]&\Hom_{\mathsf{A} }(X, A) \ar[r, "\phi "]&\Hom_{\mathsf{A} }(X, B) \ar[r, "\psi "]&\Hom_{\mathsf{A} }(X, C) 
+	\end{tikzcd}\]
+	is exact.
+
+	Now suppose $P$ is projective. It follows that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]&\Hom_{\mathsf{A} }(P, A) \ar[r, "\phi "]&\Hom_{\mathsf{A} }(P, B) \ar[r, "\psi "]&\Hom_{\mathsf{A} }(P, C) \ar[r]&0
+	\end{tikzcd}\]
+	is exact. It follows that the induced map $\psi $ must be epi, and thus surjective. It follows that for all maps $\eta :P\to C$, there exists a map $\zeta :P\to B$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&P\ar[dr, "\zeta "']\ar[d, "\eta "]\\
+		B\ar[r, "\psi "]&C\ar[r]&0
+	\end{tikzcd}\]
+	commutes.
+\end{proof}
+
+\begin{lemma}\label{lma:9.5.4}
+	Let $P^{\bullet} $ be a complex of projective objects with $P^i=0$ for all $i>0$, and let $L^{\bullet} $ be a complex satisfying $H^i(L^{\bullet} )=0$ for all $i<0$. Then for any morphism $\alpha ^{\bullet} : P^{\bullet}  \to L^{\bullet} $ which induces the 0 morphism in cohomology, it follows that $\alpha $ is homotopic to $0$.
+\end{lemma}
+\begin{proof}
+	We need to find morphisms $h^i : P^i \to L^{i-1} $ satisfying
+	\[
+		\alpha ^i=d_L^{i-1} h^i+h^{i+1} d_P^i
+	.\]
+	Note that $h^i=0$ for $i>0$, due to the bounds on $P^{\bullet} $. Note that since $L^1=0$, we must have $d_L^0=0$, and thus $L^0$ suffices as a kernel for $d_L^{-1} $. We thus have the diagram
+	\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+		P^{-1} \ar[r, "d_P^{-1} "]\ar[d, "\alpha ^{-1} "]&P^0\ar[r, "0"]\ar[d, "\alpha ^0"]&0\ar[d, "0"]\\
+		L^{-1} \ar[d, two heads, "\psi _L"]\ar[r, "d_L^{-1} "]&L^0\ar[r, "0"]&0\\
+		\operatorname{Im} d_L^{-1}\ar[r, tail, "\im d_L^{-1} "']\ar[ur, tail, "\im d_L^{-1} "]&\operatorname{Ker} d_L^0=L^0\ar[u, two heads, tail, "1_{L^0} "]\ar[r, two heads, "\coker \im d_L^{-1} "', two heads]&H^{0} (L^{\bullet} )
+	\end{tikzcd}\]
+	We also have the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		P^{-1} \ar[r, two heads]\ar[d, "\alpha ^{-1} "]&\operatorname{Im} d_P^{-1} \ar[r, tail]&\operatorname{Ker} d_P^{0}=P^0 \ar[d, "\sigma =\alpha _0"]\ar[r, two heads]&H^0(P^{\bullet} )\ar[d, "0"]\\
+		L^{-1} \ar[r, two heads, "\psi _L"']&\operatorname{Im} d_L^{-1} \ar[r, "\im d_L^{-1} "', tail]&\operatorname{Ker} d_L^{0} =L^0\ar[r, "\coker \im d_L^{-1} "', two heads]&H^0(L^{\bullet} )
+	\end{tikzcd}\]
+	Since $\operatorname{Im} d_L^{-1} \to \operatorname{Ker} d_L^0$ is mono, by commutivity of the diagram (in particular, the right square), We find that $\coker \im d_L^{-1} \sigma =0$, and thus $\sigma $ factors through $\ker \coker \im d_L^{-1} $, which is simply $\im d_L^{-1} $ since images are mono. Therefore, there is an induced map $ P^0 \to \operatorname{Im} d_L^{-1}  $ that makes the diagram commute. Since there exists an epimorphism $\psi_L : L^{-1}  \to \operatorname{Im} d_L^{-1} $, by lemma \ref{lma:9.5.3} the map $P^0\to \operatorname{Im} d_L^{-1} $ raises to a map $h^0: P^0 \to L^{-1} $ in such a way that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&P^0\ar[dll, "h^0"']\ar[d, "\alpha _{0} "]\\
+		L^{-1} \ar[rr, bend right, "d_L^{-1} "']\ar[r, "\psi_L"']&\operatorname{Im} d_L^{-1} \ar[r, "\im d_L^{-1} "]&L^0
+	\end{tikzcd}\]
+	commutes. Therefore, $\alpha _0 = d_L^{-1} h^0$, and since $h^1=0$, this satisfies the homotopy condition.
+
+	We continue inductively. Suppose $h^i$ and $h^{i+1} $ exist. Then we must have
+	\[
+		\alpha ^i=d_L^{i-1} h^i+h^{i+1} d_P^i\implies \alpha ^id_P^{i-1} =d_L^{i-1} h^id_P^{i-1} 
+	.\]
+	It follows that
+	\begin{align*}
+		d_L^{i-1} \left( \alpha ^{i-1} -h^id_P^{i-1}  \right) =d_L^{i-1} \alpha ^{i-1} -\alpha ^id_P^{i-1} 
+	.\end{align*}
+	Since $\alpha $ is a morphism of chain complexes, we must have $d_L^{i-1} \alpha ^{i-1} =\alpha ^{i} d_P^{i-1} $, and thus
+	\[
+		d_L^{i-1} \left( \alpha ^{i-1} -h^id_P^{i-1}  \right) =0
+	.\]
+	Therefore, $\alpha ^{i-1} -h^id_P^{i-1} $ factors through $\ker d_L^{i-1} $. Since $L^{\bullet} $ is exact here, since we have already handled all cases where it isn't exact, we have $\Im d_L^{i-2} =\Ker d_L^{i-1} $, and thus the diagram
+	\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+		\Im d_L^{i-2} =\Ker d_L^{i-1} \ar[dr, tail, "\ker d_L^{i-1} ", "\im d_L^{i-2} "']&P^{i-1} \ar[l, dashed]\ar[d, "\alpha ^{i-1} -h^id_P^{i-1} "]\ar[dr, bend left, "0"]\\
+		L^{i-2} \ar[u, two heads, dashed]\ar[r, "d_L^{i-2} "']&L^{i-1} \ar[r, "d_L^{i-1} "']&L^i
+	\end{tikzcd}\]
+	commutes. By lemma \ref{lma:9.5.3}, since $L^{i-2} \to \Im d_L^{i-2} $ is epi, the morphism $P^{i-1} \to \Ker d_L^{i-1} $ raises to a morphism $h^{i-1} : P^{i-1}  \to L^{i-2} $ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&P^{i-1} \ar[dl, "h^{i-1} "']\ar[d, "\alpha ^{i-1} -h^{i} d_P^{i-1} "]\\
+		L^{i-2} \ar[r, "d_L^{i-2} "']&L^{i-1} 
+	\end{tikzcd}\]
+	commutes, where we use commutivity of the above diagram to justify the morphism $d_L^{i-2} $. Therefore,
+	\[
+		\alpha ^{i-1} -h^id_P^{i-1} =d_L^{i-2} h^{i-1} \implies \alpha ^{i-1} =d_L^{i-2} h^{-i1} +h^{i} d_P^{i-1} 
+	.\]
+	This concludes the proof.
+\end{proof}
+\begin{corollary}\label{cor:9.5.1}
+	If $P^{\bullet} $ is a bounded above complex of projectives, and $L^{\bullet} $ is exact, then any morphism $P^{\bullet} \to L^{\bullet} $ is homotopic to $0$.
+\end{corollary}
+
+The dual is that for any complex in $\mathsf{C}^+(\mathsf{I} )$, all morphisms into the object are homotopic to 0. Moreover, any bounded above exact complex of projectives is easily shown to be homotopy equivalent to 0.
+\begin{corollary}\label{cor:9.5.2}
+	Let $P^{\bullet} $ be a bounded above exact chain complex of projectives. Then $P^{\bullet} $ is homotopy equivalent to 0.
+\end{corollary}
+
+\begin{lemma}\label{lma:5.9.5}
+	Let $\rho ^{\bullet} : L^{\bullet}  \to M^{\bullet} $ be a quasi-isomorphism in $\mathsf{C} (\mathsf{A} )$, and let $P^{\bullet} $ be a bounded above complex of projectives. Let $\alpha ^{\bullet} : P^{\bullet}  \to L^{\bullet} $ be a morphism such that $\rho ^{\bullet} \circ \alpha ^{\bullet} \sim 0$. Then $\alpha ^{\bullet} \sim  0$.
+\end{lemma}
+\begin{proof}
+	Let $h^{\bullet} $ give the homotopy $\rho ^{\bullet} \circ \alpha ^{\bullet} \sim 0$. Define it such that
+	\[
+		-\rho ^i\alpha ^i=d_M^{i-1} h^i+h^{i+1} d_P^{i} ,
+	\]
+	which is easily shown to be equivalent. Define $\beta ^i : P^i \to L^i\oplus M^{i-1} =MC(\rho )^{i-1} $ as the map satisfying
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&L^i\\
+		P^i\ar[r, dashed, "\beta ^i"]\ar[urr, bend left, "\alpha ^i"]\ar[drr, bend right, "h^i"]&MC(\rho )^{i-1} \ar[ur, "\pi_{L^i} ", two heads]\ar[dr, "\pi_{M^{i-1} } ", two heads]\\
+													&&M^{i-1} 
+	\end{tikzcd}\]
+	The claim is that $\beta ^{\bullet} $ is a cochain morphism $P^{\bullet} \to MC(\rho )[-1]^{\bullet} $, where we use the nonstandard maps $-d_{MC(\rho )}^{\bullet} $ for the morphisms in $MC(\rho )^{\bullet} $. The proof of this is really painful to do arrow theoretically and I refuse to copy down a proof that relies on Freyd-Mitchell. However, it is fairly intuitive why it works.
+
+	Since $\rho ^{\bullet} $ is a quasi-isomorphism, $MC(\rho )^{\bullet} $ is exact, and thus $\beta ^{\bullet} \sim 0$. Since $\alpha ^{\bullet} =\pi_{L}^{\bullet} \circ \beta ^{\bullet} $, we find that $\alpha ^{\bullet} \sim 0$. 
+\end{proof}
+
+\subsection{Proof of Theorem 5.9}
+\begin{proposition}\label{prp:9.5.1}
+	Let $\mathsf{A} $ be abelian, and let $L^{\bullet} $ be a commplex in $\mathsf{C} (\mathsf{A} )$. Let $P^{\bullet} $ in $\mathsf{C} ^-(\mathsf{P} )$, and let $\alpha ^{\bullet} : L^{\bullet}  \to P^{\bullet} $ be a quasi-isomorphism. Then there exists a morphism $\beta ^{\bullet} : P^{\bullet}  \to L^{\bullet} $ such that $\alpha ^{\bullet} \circ \beta ^{\bullet} \sim 1_{P^{\bullet} } $.
+\end{proposition}
+\begin{proof}
+	Since $\alpha ^{\bullet} $ is a quasi-isomorphism, its mapping cone is exact. Let $\rho ^{\bullet} : P^{\bullet}  \to L[1]^{\bullet} \oplus M^{\bullet} =MC(\alpha )^{\bullet} $ be the morphism $0\times 1_{P^{\bullet} } $. Since the mapping cone is exact, and $P^{\bullet} $ is bounded above, by corollary \ref{cor:9.5.2} $\rho ^{\bullet} $ is homotopic to 0. Honestly the rest of the proof is trivial -- you just unravel the induced homotopic maps.
+\end{proof}
+\begin{theorem}\label{thm:9.5.1}
+	Let $\mathsf{A} $ be an abelian category, and let $\alpha ^{\bullet} : P_0^{\bullet}  \to P_1^{\bullet} $ be a quasi-isomorphism between elements of $\mathsf{C} ^{-} (\mathsf{P} )$ (bounded above complexes in $\mathsf{P} $). Then $\alpha ^{\bullet} $ is a homotopy equivalence.
+\end{theorem}
+\begin{proof}
+	By proposition \ref{prp:9.5.1}, there exists a morphism $\beta ^{\bullet} : P^{\bullet}_1 \to P^{\bullet}_0$ such that $\alpha ^{\bullet} \circ \beta ^{\bullet} \sim 1_{P_1^{\bullet} } $. It follows that $H^{\bullet} (\alpha ^{\bullet} )\circ H^{\bullet} (\beta ^{\bullet} )=1$. Therefore, $\beta ^{\bullet} $ is a quasi-isomorphism, and thus by the proposition there again exists a morphism $\alpha ^{\bullet\prime}: P_0^{\bullet}  \to P_1^{\bullet} $ such that $\beta ^{\bullet} \alpha ^{\bullet} \sim 1_{P_0^{\bullet} } $. Since homotopy is an equivalence relation, it follows that $\beta ^{\bullet} \alpha ^{\bullet} \sim 1$, and $\alpha ^{\bullet} $ is a homotopy equivalence.
+\end{proof}
+

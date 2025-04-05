@@ -1,0 +1,219 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 8}
+\courseID{PY 451}
+\courseSection{A1}
+\usepackage{eucal}
+\begin{document}
+\makeproblem
+\section{Commutators and Position Space}
+\begin{enumerate}
+	\item 
+		\begin{enumerate}
+			\item By the canonical commutation relation, it follows that
+				\[
+					XP-PX=i\hbar\mathbbm{1} \implies PX=XP-i\hbar \mathbbm{1}
+				.\]
+				Since $\mathbbm{1}=X^0P^0$, this suffices as a solution.
+			\item 
+				\[
+					P^2X=P\left( XP-i\hbar \mathbbm{1} \right) =(PX)P-i\hbar P=\left( XP-i\hbar \mathbbm{1} \right) P-i\hbar P
+				\]
+				\[
+					=XP^2-2i\hbar P
+				.\]
+				Since $P=X^0P$, this suffices as a solution.
+			\item 
+				\begin{align*}
+					PXPX&=\left( XP-i\hbar \mathbbm{1} \right)PX \\
+					    &=XP^2X-i\hbar PX\\
+					    &=X\left( XP^2-2i\hbar P \right) -i\hbar (XP-i\hbar \mathbbm{1})\\
+					    &=X^2P^2-2i\hbar XP-i\hbar XP-\hbar^2 \mathbbm{1}\\
+					    &=X^2P^2-3i\hbar XP-\hbar^2 \mathbbm{1}
+				.\end{align*}
+		\end{enumerate}
+	\item 
+		\[
+			[P,H]=\left[ P,\frac{1}{2m} P^2 \right] +\left[ P,V(X) \right]=\left[ P,V(X) \right] 
+		.\]
+		Since $V(X)$ is a function of $X$, by identity,
+		\[
+			\left[ P,V\left( X \right)  \right] =-\left[ V(X),P \right] =-\frac{\mathrm{d}V}{\mathrm{d}X} \left[ X,P \right] =-i\hbar \frac{\mathrm{d}V}{\mathrm{d}X} 
+		.\]
+		In class, we showed that
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}t} \left\langle \mathcal{O}  \right\rangle =\frac{1}{i\hbar }\left< \left[ \mathcal{O} ,H \right] \right>
+		\]
+		for $\mathcal{O} $ any time-independent hermitian operator. Plugging in $P$ for $\mathcal{O} $ gives us
+		\[
+			\frac{\mathrm{d}}{\mathrm{d}t} \left\langle P \right\rangle =\left\langle -\frac{\mathrm{d}}{\mathrm{d}X} V(X) \right\rangle \coloneqq \left\langle F(X) \right\rangle 
+		.\]
+	\item In finite-dimensional space, a Hermitian operator was an operator that was it's own hermitian conjugate. This generalizes to any arbitrary dimensional Hilbert space $\mathcal{H} $ (and further to Banach spaces I believe) by defining a Hermitian operator as an operator that is self-adjoint. More precisely, the Hermitian adjoint $\mathcal{O} ^{\dagger} $ of an operator $\mathcal{O} $ is the unique operator satisfying $\left( \bra{v} \mathcal{O} ^{\dagger}  \right) \ket{w} =\bra{v} \left( \mathcal{O} \ket{w}  \right) $ for all $\ket{v} ,\ket{w} \in \mathcal{H} $. This is one of the few cases where I believe the math notation for inner product is more straightforward: $\left\langle \mathcal{O} v,w \right\rangle =\left\langle v,\mathcal{O} ^{\dagger} w \right\rangle $. A Hermitian operator is then any operator $\mathcal{O} \in \mathcal{H} ^*$ such that $\mathcal{O} =\mathcal{O} ^{\dagger} $.
+
+		To show that $P$ is a Hermitian operator, recall that every state $\ket{\psi _1} ,\ket{\psi _2} $ can be viewed in position space as a wavefunction $\psi _1(x),\psi _2(x)$. By definition of an adjoint,
+		\begin{align*}
+			\bra{\psi _1} P\ket{\psi _2} &=-i \hbar \int_{-\infty }^{\infty } \psi _1^*(x) \frac{\mathrm{d}}{\mathrm{d}x} \psi _2(x) \,\mathrm{d} x\\
+						     &=-i \hbar \left( \left[ \psi _1^*(x)\psi _2(x) \right]_{-\infty }^{\infty } -\int_{-\infty }^{\infty } \left( \frac{\mathrm{d}}{\mathrm{d}x} \psi _1^*(x) \right) \psi _2(x) \,\mathrm{d} x \right) \\
+						     &=-i\hbar \left[ \psi _1^*(x)\psi _2(x) \right]_{-\infty } ^{\infty } +\int_{-\infty }^{\infty } i\hbar \left(\frac{\mathrm{d}}{\mathrm{d}x} \psi _1^*(x)\right)\psi _2(x) \,\mathrm{d} x\\
+						     &=-i\hbar \left[ \psi_1^*(x)\psi _2(x) \right]_{-\infty } ^{\infty } +\int_{-\infty }^{\infty } \left( P^{\dagger} \psi _1(x) \right)^*\psi _2(x) \,\mathrm{d} x
+		.\end{align*}
+		Assume the boundary terms vanish at infinity for physically valid wavefunctions. For this equality to hold, we must have that $P^{\dagger} =-i\hbar \frac{\mathrm{d}}{\mathrm{d}x} =P$.
+	\item Since the adjoint distributes linearly,
+		\[
+			A^{\dagger} =P^{\dagger} +c^*W(X)^{\dagger} =P+c^*W(X)
+		.\]
+		We thus have
+		\begin{align*}
+			\left[ A^{\dagger} ,A \right] &=\left[ P+c^*W(X),A \right] \\
+						      &=\left[ P,A \right] +\left[ c^*W(X),A \right] \\
+						      &=\left[ P,P+cW(X) \right] +\left[ c^*W(X),P+cW(X) \right] \\
+						      &=\left[ P,P \right] +\left[ P,cW(X) \right] +\left[ c^*W(X),P \right] +\left[ c^*W(X),cW(X) \right] \\
+		.\end{align*}
+		I will compute each commutator individually.
+		\[
+			\left[ c^*W(X),cW(X) \right] =c^*cW(X)^2-cc^*W(X)^2=W\left( X \right)^2\left( \left| c \right| ^2-\left| c \right| ^2 \right) =0
+		.\]
+		\begin{align*}
+			\left[ P,cW(X) \right] +\left[ c^*W(X),P \right] &=cPW(X)-cW(X)P+c^*PW(X)-c^*W(X)P\\
+									 &=PW(X)\left( c+c^* \right) -W(X)P\left( c+c^* \right) \\
+									 &=(\operatorname{Re}c)\left( PW(X)-W(X)P \right) \\
+									 &=(\operatorname{Re}c)\left[ P,W(X) \right] 
+		.\end{align*}
+		Therefore,
+		\[
+			\left[ A^{\dagger} ,A \right] =(\operatorname{Re} c)\left[ P,W(X) \right] 
+		.\]
+		This can be computed further by recalling the identity $\left[ P,W(X) \right] =-\frac{\mathrm{d}W}{\mathrm{d}X} \left[ X,P \right] =-i\hbar \frac{\mathrm{d}W}{\mathrm{d}X} $. Therefore, we also have
+		\[
+			\left[ A^{\dagger} ,A \right] =-i\hbar (\operatorname{Re} c)\frac{\mathrm{d}W}{\mathrm{d}X} 
+		.\]
+\end{enumerate}
+\section{Infinite Square Well}
+\begin{enumerate}
+	\item Eigenfunctions of $H$ in the infinite square well take the form
+		\[
+			\psi _n(x)\sqrt{\frac{2}{L} } \sin \left( k_nx \right) ,
+		\]
+		where
+		\[
+			k_n=\frac{n\pi }{L} ,\qquad E_n=\frac{n^2\hbar ^2\pi ^2}{2mL^2} 
+		.\]
+		Therefore, there exists a collection $\left\{ C_n \right\}_{n=1}^{\infty } \subseteq \mathbb{R} $ satisfying
+		\[
+			\psi (x,0)=\sum_{n=1}^{\infty} C_n \psi _n(x)
+		.\]
+		Although the overall wavefunction $\psi (x,t)$ is not separable, each $\psi _n(x)$ \emph{is} separable, and thus we can write $\psi _n(x,t)=\phi_n(t)\psi _n(x)$ for some function $\psi (t)$. The Schrodinger equation gives
+		\[
+			i\hbar\psi_n(x) \frac{\partial \phi_n }{\partial t} =\frac{-\hbar ^2}{2m}\phi _n(t) \frac{\partial ^2\psi _n}{\partial x^2} 
+		\]
+		\[
+			\implies i\hbar \frac{1}{\phi_n (t)} \frac{\partial \phi _n}{\partial t} =-\frac{\hbar ^2}{2m} \frac{1}{\psi _n(x)} \frac{\partial ^2\psi _n}{\partial x^2} 
+		.\]
+		Solving the right side of the equation gives
+		\begin{align*}
+			-\frac{\hbar ^2}{2m} \frac{1}{\psi _n(x)} \frac{\partial ^2\psi _n}{\partial x^2} &=-\frac{\hbar ^2}{2m} \frac{1}{\sin \left( k_nx \right) } \left(-k_n^2 \sin \left( k_nx \right) \right)\\
+													  &=\frac{\hbar ^2k_n^2}{2m} =\frac{\hbar ^2n^2\pi ^2}{2mL^2} =E_n
+		.\end{align*}
+		Therefore,
+		\[
+			\frac{\partial \phi _n}{\partial t} =-\frac{i}{\hbar }  E_n\implies \phi _n(t)=\exp \left( -\frac{iE_nt}{\hbar } \right) 
+		.\]
+		We thus have
+		\[
+			\psi (x,t)=\sum_{n=1}^{\infty} C_n e^{-i E_nt/\hbar } \sin \left( k_nx \right) 
+		.\]
+		It thus suffices to solve for $C_n$ to complete the problem. It's well known that the $\psi _n$s are orthogonal, and moreover the time-dependence goes to 1 as $t$ goes to 0, so we obtain
+		\begin{align*}
+			\int_{0}^{L} \psi_m^*(x)\psi (x,0) \,\mathrm{d} x&=\int_{0}^{L} \psi _m^*\sum_{n=1}^{\infty} C_n\psi _n(x) \,\mathrm{d} x\\
+									 &=\sum_{n=1}^{\infty} \int_{0}^{L} C_n \psi_m^*(x)\psi_n(x) \,\mathrm{d} x\\
+									 &=\int_{0}^{L} C_n \left| \psi _m(x) \right| ^2 \,\mathrm{d} x\\
+									 &=C_n
+		.\end{align*}
+		We can explicitly compute each $C_n$, making heavy use of the fact that $\sin (k_nx)=0$ and $\psi (x,0)=0$ for $x=0$ or $L$ to make most boundary terms vanish.
+		\begin{align*}
+			C_n&=\int_{0}^{L} \psi _n^*(x)\psi (x,0) \,\mathrm{d} x\\
+			   &=\int_{0}^{L} \left( \sqrt{\frac{2}{L} } \sin (k_nx) \right) A\left( \left( \frac{x}{L}  \right)^3-\frac{3}{2} \left( \frac{x}{L}  \right) ^2+\frac{1}{2} \left( \frac{x}{L}  \right)  \right)  \,\mathrm{d} x\\
+			   &=\int_{0}^{L} \sqrt{\frac{2}{L} } \sin \left( k_nx \right) A\left( \frac{1}{L^3} x^3-\frac{3}{2L^2} x^2+\frac{1}{2L} x \right)  \,\mathrm{d} x\\
+			   &=\left[ \psi (x,0)\left( -\frac{1}{k_n} \sqrt{\frac{2}{L} } \cos \left( k_nx) \right)  \right)  \right]_{0}^{L} +\int_{0}^{L}\frac{A}{k_n} \sqrt{\frac{2}{L} } \cos \left( k_nx \right) \left( \frac{3}{L^3} x^2-\frac{6}{2L^2} x+\frac{1}{2L}  \right)   \,\mathrm{d} x\\
+			   &=\left[ \frac{A}{k_n^2} \left( \frac{3}{L^3} x^2-\frac{6}{2L^2} x+\frac{1}{2L}  \right) \psi_n(x) \right]_0^L-\int_{0}^{L} \frac{A}{k_n^2} \sqrt{\frac{2}{L} } \sin \left( k_nx \right) \left( \frac{6}{L^3} x-\frac{6}{2L^2}  \right)  \,\mathrm{d} x\\
+			   &=\left[ \frac{A}{k_n^3} \sqrt{\frac{2}{L} } \cos \left( k_nx \right) \left( \frac{6}{L^3} x-\frac{3}{L^2}  \right)  \right]_0^L-\int_{0}^{L} \frac{A}{k_n^3} \sqrt{\frac{2}{L} } \cos \left( k_nx \right) \left( \frac{6}{L^3}  \right)  \,\mathrm{d} x\\
+			   &=\left[ \frac{A}{k_n^3} \sqrt{\frac{2}{L} } \cos \left( k_nx \right) \left( \frac{6}{L^3} x-\frac{3}{L^2}  \right)  \right]_0^L-\frac{6A}{L^3k_n^4} \sqrt{\frac{2}{L} } \left[ \sin \left( k_nx \right)  \right]_0^L\\
+			   &=\left[ \frac{A}{k_n^3} \sqrt{\frac{2}{L} } \cos \left( k_nx \right) \left( \frac{6}{L^3} x-\frac{3}{L^2}  \right)  \right]_0^L\\
+			   &=\frac{A}{k_n^3} \sqrt{\frac{2}{L} } \left( \cos \left( n\pi  \right) \left( \frac{6}{L^2} -\frac{3}{L^2}  \right) -\left( -\frac{3}{L^2}  \right)  \right) \\
+			   &=\frac{A}{k_n^3} \sqrt{\frac{2}{L} } \left( \frac{3(-1)^n}{L^2} +\frac{3}{L^2}  \right) \\
+			   &=\frac{6A}{k_n^3L^2} \sqrt{\frac{2}{L} } ,\,n\text{ even} ;\qquad 0,\,n\text{ odd} 
+		.\end{align*}
+	\item By the previous problem, if $n$ is odd, then the probability is 0. For $n$ even, we compute
+		\begin{align*}
+			\left| \braket{E_n}{\psi(x,0)}  \right| ^2&\cong\left| \int_{0}^{L} \psi_n^*(x)\psi (x,0) \,\mathrm{d} x\right|^2\\
+			&=C_n^2\\
+			&=\frac{72A^2}{k_n^6L^5}\\
+			&=\frac{76A^2L}{n^6\pi ^6} 
+		.\end{align*}
+	\item The value of the summation came from google.
+		\begin{align*}
+			\bra{\psi} H\ket{\psi } &=\int_{0}^{L} \left( \sum_{n=1}^{\infty} C_n\psi_n(x) \right) \left( \sum_{m=1}^{\infty} C_mH\psi_m(x) \right)  \,\mathrm{d} x\\
+						&=\sum_{n=1}^{\infty} \sum_{m=1}^{\infty} \int_{0}^{L}C_nC_mE_m\psi_n^*(x)\psi _n(x)  \,\mathrm{d} x\\
+						&=\sum_{n=1}^{\infty} \sum_{m=1}^{\infty} C_nC_mE_m\delta_{nm} \\
+						&=\sum_{n=1}^{\infty} C_n^2E_n\\
+						&=\sum_{n=1}^{\infty} \frac{76A^2L}{(2n)^6\pi ^6} \frac{n^2\hbar ^2\pi ^2}{2mL} \\
+						&=\sum_{n=1}^{\infty} \frac{76A^2\hbar ^2}{2m(2n)^4\pi ^4} \\
+						&=\frac{76A^2\hbar ^2}{32m\pi ^4} \sum_{n=1}^{\infty} \frac{1}{n^4} \\
+						&=\frac{2A^2\hbar ^2}{\pi ^4m} \sum_{n=1}^{\infty} \frac{1}{n^4} \\
+						&=\frac{2A^2\hbar ^2}{\pi ^4m} \frac{\pi ^4}{90} \\
+						&=\frac{A^2\hbar ^2}{45m} 
+		.\end{align*}
+	\item The ground state of a square well is given by
+		\[
+			\psi_1(x)=\sqrt{\frac{2}{L} } \sin \left( \frac{\pi x}{L}  \right) 
+		.\]
+		The ground state of the new square well is given by
+		\[
+			\varphi_1(x)=\sqrt{\frac{2}{3L} }  \sin \left( \frac{\pi x}{3L}  \right) 
+		.\]
+		The first excited state of the new well is given by
+		\[
+			\varphi_2(x)=\sqrt{\frac{2}{3L} } \sin \left( \frac{2\pi x}{3L}  \right) 
+		.\]
+		The probability $\mathcal{P}_1$ of finding the ground state is computed as follows. Since $\psi _1(x)$ is $0$ outside of $(0,L)$, we only compute the integral over that interval.
+		\begin{align*}
+			\mathcal{P}_1 &=\left|\int_{0}^{L} \varphi_1^*(x)\psi_1(x) \,\mathrm{d} x\right|^2\\
+				      &=\left| \int_{0}^{L} \frac{2}{L\sqrt{3} } \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x \right| ^2\\
+				      &=\frac{4}{3L^2} \left| -\left[ \frac{3L}{\pi } \sin \left( \frac{\pi x}{L} \right) \cos \left( \frac{\pi x}{3L}   \right)  \right]_0^L+\int_{0}^{L} 3\cos \left( \frac{\pi x}{L}  \right) \cos \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x \right| ^2\\
+				      &=\frac{4}{3L^2} \left| \left[ \frac{9L}{\pi } \cos \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \right]_0^L+\int_{0}^{L} 9 \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x \right| ^2\\
+				      &=\frac{4}{3L^2} \left| -\frac{9L}{\pi }\frac{\sqrt{3} }{2}+\int_{0}^{L} 9 \sin \left( \frac{\pi x}{L} \sin \left( \frac{\pi x}{3L}  \right)  \right)  \,\mathrm{d} x \right| ^2\\
+				      &=\frac{4}{3L^2} \left(\left( -\frac{9L\sqrt{3} }{2\pi }  \right)^2+81\left| \int_{0}^{L} \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x \right| ^2-\frac{81L\sqrt{3} }{\pi } \int_{0}^{L} \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x\right)\\
+				      &=\frac{4}{3L^2} \left( \frac{243L^2}{4\pi ^2} -\frac{81L\sqrt{3} }{\pi } \int_{0}^{L} \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x \right) +81\mathcal{P}_1
+		.\end{align*}
+		It's easy to see from the work here that
+		\[
+			9\int_{0}^{L} \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x=\frac{9L\sqrt{3} }{2\pi } \implies \int_{0}^{L} \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{\pi x}{3L}  \right)  \,\mathrm{d} x=\frac{L\sqrt{3} }{2\pi } 
+		.\]
+		We thus have
+		\[
+			\mathcal{P}_1 = \frac{4}{240L^2} \left( \frac{243L^2}{2\pi ^2} -\frac{243L^2}{4\pi ^2}  \right) =\frac{243}{240\pi ^2} 
+		.\]
+		I refuse to simplify these numbers.
+
+		Calculating $\mathcal{P} _2$ is similar. I will do this integral in a smarter way that will probably prevent algebra errors. First, we compute the integral
+		\begin{align*}
+			\int_{0}^{L} \varphi_2^*(x)\psi _1(x) \,\mathrm{d} x&=\int_{0}^{L} \frac{2}{L\sqrt{3} } \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{2\pi x}{3L}  \right)  \,\mathrm{d} x\\
+									    &=\frac{2}{L\sqrt{3} } \left( -\left[ \frac{3L}{2\pi } \sin \left( \frac{\pi x}{L}  \right) \cos \left( \frac{2\pi x}{3L}  \right)  \right]_0^L+\int_{0}^{L} \frac{3}{2}\cos \left( \frac{\pi x}{L}  \right) \cos \left( \frac{2\pi x}{3L}  \right)  \,\mathrm{d} x \right) \\
+									    &=\frac{2}{L\sqrt{3} } \left( \left[ \frac{9L}{4\pi } \cos \left( \frac{\pi x}{L}  \right) \sin \left( \frac{2\pi x}{3L}  \right)  \right]_0^L+\frac{9}{4} \int_{0}^{L} \sin \left( \frac{\pi x}{L}  \right) \sin \left( \frac{2\pi x}{3L}  \right)  \,\mathrm{d} x \right) 
+		.\end{align*}
+		It follows that
+		\[
+			-\frac{5}{4} \int_{0}^{L} \varphi _2^*(x)\psi _1(x) \,\mathrm{d} x=\frac{2}{L\sqrt{3} } \left[ \frac{9L}{4\pi } \cos \left( \frac{\pi x}{L}  \right) \sin \left( \frac{2\pi x}{3L}  \right)  \right]_0^L=-\frac{2}{L\sqrt{3} } \frac{9L}{4\pi } \left( \frac{\sqrt{3} }{2}  \right) 
+		.\]
+		Therefore,
+		\[
+			\int_{0}^{L} \varphi _2^*(x)\psi_1 (x) \,\mathrm{d} x=\frac{9\sqrt{3} }{5\pi } 
+		.\]
+		The probability is the absolute value squared of this, so
+		\[
+			\mathcal{P}_2=\frac{243}{25\pi ^2} 
+		.\]
+\end{enumerate}
+
+\end{document}

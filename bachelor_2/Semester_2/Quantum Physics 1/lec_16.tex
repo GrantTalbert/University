@@ -1,0 +1,75 @@
+\lecture{16}{Thu 27 Mar 2025 14:00}{Solving Another Schrodinger Equation}
+
+In position space, this means there exist $\left\{ c_n \right\} \subseteq \mathbb{C} $ such that
+\[
+	\psi \left(x \right) =\sum_{n} c_n \psi _n(x)=\sum_{n} c_n \sqrt{\frac{2}{L} } \sin \left( \frac{n\pi }{L} x \right) 
+\]
+for any wavefunction $\psi $ (subject to this potential). This is a Fourier series because of course. One more thing to say is that
+\[
+	\sum_{n} \ket{E_n} \bra{E_n} =\mathbbm{1},
+\]
+and since $\ket{E_n} $ in position space is $\psi _n$, we have the statement.
+
+Now we will do something that can actually happen. We will do the finite square well
+\[
+	V(x)=
+	\begin{cases}
+		0,&-\frac{L}{2} <x<\frac{L}{2} \\
+		V_0,&\text{otherwise} 
+	\end{cases}
+.\]
+We will call $L/2\eqqcolon a$, and thus $L=2a$. The boundary condition is the hardest part to figure out. We will start by taking our solution for $x\in[-a,a]$, which was
+\[
+	\psi(x)=Ce^{ikx} +De^{-ikx} 
+.\]
+Recall that
+\[
+	-\frac{2mE}{\hbar ^2} =k^2
+.\]
+
+For $V(x)\neq 0$, we have the equation
+\[
+	-\frac{\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} \psi (x)=(E-V_0)\psi (x)
+.\]
+We then have
+\[
+	\frac{\mathrm{d}^2}{\mathrm{d}x^2} \psi (x)=\frac{(V_0-E)2m}{\hbar ^2} 
+.\]
+Define
+\[
+	q^2\coloneqq \frac{2m}{\hbar ^2} (V_0-E)
+.\]
+We then have
+\[
+	\psi (x)=Ae^{qx} +Be^{-qx} 
+.\]
+If $E<V_0$, then classically the particle wouldn't be able to leave the potential well. Note that this linear combination has to be different on both sides of the well; if the $Ae^{qx} $ term were nonzero on the right side, then it would go to infinity and be non-normalizable. We then have to take precisely one solution per side of the well.
+\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+	{}\ar[r, dash, "Ae^{qx} "]&{}\ar[d, dash]&{}\ar[d, dash]\ar[r, dash, "Be^{-qx} "]&{}\\
+				  &{}\ar[r, dash, "Ce^{ikx} +De^{-ikx} "]&{}
+\end{tikzcd}\]
+The thing to note is that these wavefunctions have a nonzero probability of leaving the box, even though their energy is not high enough. This is called quantum tunneling. However, note that the exponentials go down very quickly, so the probability is fairly small. This is non-relativistic physics, so we will ignore the possibility of going faster than light. This is reconsiled later with relativistic mechanics, which are way harder.
+
+The final step is to impose boundary conditions on our solutions. One of these conditions is that $\psi $ be continuous, and moreover the first derivative should be continuous, which can be shown with some manipulation and the Fundamental Theorem of Calculus. This doesn't hold for discontinuous potentials in general, however.
+
+Imposing continuity gives us
+\[
+	Ae^{-qa} =Ce^{-ika} +De^{ika} ,\qquad Be^{-qa} =Ce^{ika} +De^{-ika} 
+.\]
+Convering into sins and cosines, $\psi (x)=C \sin kx+D \cos kx$, we have
+\[
+	k\frac{D \sin ka+C \cos ka}{D \cos ka-C \sin ka} =q=k \frac{D \sin ka-C \cos ka}{D \cos ka+C \sin ka} 
+.\]
+Simplifying shows us that $CD=0$, so either $C$ or $D=0$. This gives us even solutions $D \cos kx$, and odd solutions $C \sin kx$. This gives us $q=k \tan ka$ if $C=0$, and $q=-k \cot ka$ for $D=0$. Our boundary conditions we already imposed were that as $x\to \pm \infty $, $\psi (x)\to 0$. Since $k$ and $q$ are not independent:
+\[
+	k^2=\frac{2mE}{\hbar ^2} ,\qquad q^2=\frac{2m}{\hbar ^2} (V_0-E),
+\]
+we have
+\[
+	q^2=\frac{2m}{\hbar ^2} V_0-k^2,
+\]
+and thus for even solutions
+\[
+	\sqrt{\frac{2m}{\hbar ^2} \left( V_0-E \right) } =\sqrt{\frac{2mE}{\hbar ^2} } \tan \left( a\sqrt{\frac{2mE}{\hbar ^2} }  \right) 
+.\]
+This is impossible to solve in general, but intuitively we know there will be finitely many solutions. After $E_n $ is high enough for the particle to leave the box, it will just leave the box.

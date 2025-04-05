@@ -1,0 +1,109 @@
+\lecture{15}{Tue 25 Mar 2025 14:04}{More Schrodinger Equation}
+Ok they are actually partial derivatives because $\psi (x,t)$ since $\psi $ has time dependence. We usually write it as a total derivative though, as we usually write the state as $\ket{\psi ,t} $ for some reason.
+
+To show
+\[
+	\left\langle P \right\rangle =m \frac{\mathrm{d}}{\mathrm{d}t} \left\langle X \right\rangle 
+,\]
+we write
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \bra{\psi } X \ket{\psi } =\frac{\mathrm{d}}{\mathrm{d}t} \bra{\psi } \int x \ket{x} \bra{x}  \,\mathrm{d} x \ket{\psi } =\frac{\mathrm{d}}{\mathrm{d}t} \int \braket{\psi }{x}x \braket{x}{\psi }  \,\mathrm{d} x=\frac{\mathrm{d}}{\mathrm{d}t} \int \psi ^*(x) x \psi (x) \,\mathrm{d} x
+.\]
+We write this as
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \bra{\psi ,t} X \ket{\psi ,t} 
+.\]
+The time dependence of states comes from the Schrodinger equation
+\[
+	i \hbar \frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi ,t} =H \ket{\psi ,t} =\frac{P^2}{2m} \ket{\psi ,t} +V(x)\ket{\psi ,t} 
+.\]
+Taking the Hermitian conjugate gives us
+\[
+	i \hbar \frac{\mathrm{d}}{\mathrm{d}t} \bra{\psi ,t} =-\bra{\psi ,t} H
+,\]
+because $H$ is Hermitian. Using our above equation, we have
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \bra{\psi ,t} X\ket{\psi ,t} =\left( \frac{\mathrm{d}}{\mathrm{d}t} \bra{\psi ,t}  \right) X\ket{\psi ,t} +\bra{\psi ,t} X\left( \frac{\mathrm{d}}{\mathrm{d}t} \ket{\psi ,t}  \right) 
+.\]
+Plugging this in, we obtain
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} \left\langle X \right\rangle =\frac{1}{i\hbar } \left( -\bra{\psi ,t} HX\ket{\psi ,t} +\bra{\psi ,t} XH\ket{\psi ,t}  \right) =-\frac{1}{i\hbar } \bra{\psi ,t} \left( -HX+XH \right) \ket{\psi ,t} =\frac{1}{i\hbar } \left\langle \left[ X,H \right]  \right\rangle 
+.\]
+This generalizes to any \emph{time-independent} operator $X$, not just position. This shows us that
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left\langle A \right\rangle =\frac{1}{i\hbar } \left\langle \left[ A,H \right] \right\rangle 
+.\]
+Note that $\left[ A,BC \right] =\left[ A,B \right] C+B\left[ A,C \right] $.
+\[
+	\left[ X,H \right] =\left[ X,\frac{p^2}{2m} +V(x) \right] =\left[ X,p^2/2m \right] +\left[ X,V\left( x \right)  \right] 
+.\]
+Recall that $\left[ X,p\right]=i\hbar  $. We have
+\[
+	\frac{1}{2m} \left(\left[ X,p \right] p+p\left[ X,p \right] \right)=\frac{1}{2m} \left(i\hbar p+i\hbar p\right)=\frac{i\hbar }{m} p
+.\]
+Additionally, $\left[ X,V(x) \right] =0$, since they share eigenstates. We can plug this back in to obtain
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \left\langle X \right\rangle =\frac{1}{i\hbar } \left\langle \left[ X,H \right]  \right\rangle =\frac{1}{i\hbar } \frac{i\hbar }{m} \left\langle p \right\rangle =\frac{1}{m} \left\langle p \right\rangle 
+.\]
+Therefore, $m\frac{\mathrm{d}X}{\mathrm{d}t} =P$. This satisfies the classical relation for position and momentum, so we have that the momentum operator behaves as expected.
+
+\section{Solving Schrodinger's Equation}
+We will take various potentials $V(x)$, and solve the Schrodinger equation in that potential. The simplest one is in fact the infinite square well:
+\[
+	V(x)=
+	\begin{cases}
+		0,&0<x<L\\
+		\infty ,&\text{otherwise} 
+	\end{cases}
+.\]
+We want to find all eigenvals/vecs of $H$ in this potential:
+\[
+	H=\frac{p^2}{2m}+ V(x)
+.\]
+We then have the eigenvalue problem
+\[
+	H\ket{\psi } \cong \left( -\frac{\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} +V(x) \right) \psi (x)=E\ket{\psi } 
+.\]
+Since $V$ goes to infinity outside of $(0,L)$, the wavefunction must be 0 in this interval, since the particle cannot go there. We can then impose boundary conditions on our equation. We will start by solving it in the region where $V(x)=0$:
+\[
+	-\frac{\hbar ^2}{2m} \frac{\mathrm{d}^2\psi }{\mathrm{d}x^2} =E\psi (x)\implies \frac{\mathrm{d}^2\psi }{\mathrm{d}x^2} =-\frac{2mE}{\hbar ^2} \psi (x)
+.\]
+Set $k=\sqrt{\frac{2mE}{\hbar ^2} } $. We then have
+\[
+	\psi (x)=\exp \left( \pm ikx \right) 
+.\]
+Our general solution is thus
+\[
+	\psi (x)=A'e^{ikx} +B'e^{-ikx} 
+.\]
+To identify $E$ from $k$, we impose the boundary conditions. We need to find the values of $k$ such that we oscillate precisely an integer number of times within the well, since otherwise it would be nonzero on the boundary (the wavefunction needs to be continuous).
+
+Our boundary conditions are that $\psi (0)=\psi (L)=0$. Plugging this in, we obtain
+\[
+	0=A'e^{0} +B'e^{0} =A'+B'
+.\]
+Therefore, $A'=-B'$. Plugging in $L$, we have
+\[
+	0=A'e^{ikL} +B'e^{-ikL} =A'e^{ikL} -A'e^{-ikL} 
+.\]
+This forces $e^{ikL} -e^{-ikL} =0$, and thus
+\[
+	\cos kL+i \sin kL-\cos (-kL)-i \sin (-kL)=2i \sin kL
+.\]
+This quantizes $k$ immediately, as $\psi (x)\neq 0$ since the particle exists, and thus
+\[
+	kL\in \pi\mathbb{Z} \implies \sqrt{\frac{2mE}{\hbar ^2} } L=\pi n\implies E=\frac{n^2}{L^2} \frac{\hbar ^2}{2m}\pi^2 =\frac{n^2\hbar ^2\pi^2 }{2Lm}  
+\]
+for any $n\in\mathbb{Z}^+ $. We cannot have $n<0$ for obvious reasons. Therefore, after normalization we have
+\[
+	\psi (x)=A \sin \left( \frac{n\pi x}{L}  \right) =A \sin \left( k_nx \right) ,\qquad k_n\coloneqq \frac{n\pi }{L} 
+.\]
+The sin instead of the exponential comes from the decomposition into $\sin $ we did earlier, but more general. The normalization $A'\to A$ is given by
+\[
+	1=\braket{\psi }{\psi } =\int_{\mathbb{R} }  \left| \psi (x) \right| ^2 \,\mathrm{d} x\implies \braket{\psi _n}{\psi _n} =\int_{0}^{L} \left| A \sin (k_nx) \right| ^2 \,\mathrm{d} x=\left| A \right| ^2\int_{0}^{L} \sin ^2(k_nx) \,\mathrm{d} x
+.\]
+This integral evaluates to $L/2$, giving the normalization factor for $A$. We then have $A=\sqrt{2/L} $, and each $\ket{\psi _n} $ has norm 1:
+\[
+	\psi _n(x)=\sqrt{\frac{2}{L} } \sin \left( k_nx \right)
+.\]
+These are the solutions to the Schrodinger equation. Since the energy levels grow like $E_n\propto n^2$, we have $E_n=n^2E_1$. Since these functions are all symmetric, the probability in the left/right halves of the box are 1/2.

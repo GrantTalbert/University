@@ -1,0 +1,133 @@
+\chapter{Compactness}
+\lecture{14}{Thu 27 Mar 2025 11:00}{Compact Spaces}
+\begin{definition}[Open Cover]\label{dfn:5.1}
+	Let $A\subseteq X$, and let $\mathcal{O} $ be a collection of open sets. Then $\mathcal{O} $ is an \emph{open cover} of $A$ if
+	\[
+		A\subseteq \bigcup_{O\in \mathcal{O} } O
+	.\]
+	If $\mathcal{O} '\subseteq \mathcal{O} $ is also an open cover of $A$, we call $\mathcal{O} '$ a subcover.
+\end{definition}
+\begin{definition}[Compact]\label{dfn:5.2}
+	A set $A\subseteq X$ is \emph{compact} if for any open cover $\mathcal{O} $ of $A$, there exists a finite subcover $\mathcal{O} '\subseteq \mathcal{O} $ of $A$.
+\end{definition}
+\begin{lemma}\label{lma:5.1}
+	A set $A\subseteq X$ is compact if and only if it is compact with respect to the subspace topology.
+\end{lemma}
+\begin{proposition}\label{prp:5.1}
+	Let $X$ be compact and $f : X \to Y$ be continuous. Then $f(X)$ is compact.
+\end{proposition}
+\begin{proof}
+	-
+\end{proof}
+
+\begin{proposition}\label{prp:5.2}
+	Let $X$ be compact, and let $A\subseteq X$. Then $A$ is compact.
+\end{proposition}
+\begin{proof}
+	-
+\end{proof}
+\begin{proposition}\label{prp:5.3}
+	Let $X$ be Hausdorff, and let $A\subseteq X$ be compact. Then $A$ is closed.
+\end{proposition}
+\begin{proof}
+	-
+\end{proof}
+\begin{proposition}\label{prp:5.4}
+	Let $X,Y$ be compact. Then $X\times Y$ is compact.
+\end{proposition}
+\begin{proof}
+	Note that for any $y\in Y$ and for any open cover $\left\{ \mathcal{U} _i \right\}_{i\in I} $ of $X\times Y$, we have
+	\[
+		X \cong X\times \left\{ y \right\} \subseteq X\times Y \subseteq \bigcup_{i\in I} \mathcal{U}_i
+	.\]
+	Therefore, $X\times \left\{ y \right\} $ is compact, and thus there exists a finite subcover
+	\[
+		X\times \left\{ y \right\} \subseteq \bigcup_{i=1}^N \mathcal{U} _i
+	.\]
+	Then for all $x\in X$, there exists a neighborhood $x\in U_x \subseteq X$, and an open neighborhood $y\in V_{x;y} \subseteq Y$ such that $(x,y)\in U_x\times V_{x;y} \subseteq \mathcal{U}_i$ for all $i$, by the definition of the basis and product topology. We then have an open cover
+	\[
+		X\times \left\{ y \right\} \subseteq \bigcup_{x\in X} U_x\times V_{x;y} 
+	.\]
+	Since this is compact, there exists a finite subcover
+	\[
+		X\times \left\{ y \right\} \subseteq \bigcup_{i=1}^N U_{x_i} \times V_{x_i;y} 
+	.\]
+	Each of these open covers is contained within some $\mathcal{U}_i$:
+	\[
+		U_{x_i} \times V_{x_i;y} \subseteq \mathcal{U}_{\sigma (i)} 
+	\]
+	for $\sigma $ the appropriate permutation (which I will stop writing WLOG). Then
+	\[
+		X\times \left( \bigcap_{i=1}^N V_{x_i;y}  \right) \subseteq \bigcup_{i=1}^N \mathcal{U}_{x_i} \times V_{x_i;y} 
+	.\]
+	This is a finite intersection of open sets, so it is open. This open cover then covers a neighborhood of $(x,y)$ as well. Therefore, there exists a finite subcover such that $X\times V_y\subseteq \bigcup_{i=1}^N \mathcal{U}_i$ for some $V_y\subseteq Y$ open. Therefore, there exists an open cover $\left\{ V_y \right\}_{y\in Y} $ of $Y$. Since $Y$ is compact, there exists a finite subcover $\left\{ V_i \right\}_{i=1}^M$. In particular,
+	\[
+		X\times Y \subseteq \bigcup_{i=1}^M X\times V_i,
+	\]
+	and each $X\times V_i$ falls inside some finite subcover
+	\[
+		X\times V_i \subseteq \bigcup_{j=1}^N \mathcal{U} _j
+	.\]
+	Therefore,
+	\[
+		X\times Y\subseteq \bigcup_{i=1}^M \bigcup_{j=1}^N \mathcal{U}_{ij} 
+	.\]
+	Therefore, there exists a finite subcover.
+\end{proof}
+
+We want to now show that $[0,1]$ is compact. This follows immediately from the following lemma.
+\begin{lemma}[Nested Interval Lemma]\label{lma:5.2}
+	Let $a_n<a_{n+1} <b_{n+1} <b_n$ for all $n\in N$ for some sequences $a_n,b_n$, then
+	\[
+		\bigcap_{n=1}^{\infty } [a_n,b_n]\neq \varnothing 
+	.\]
+\end{lemma}
+\begin{proof}
+	Since $a_{n+1} <b_n\leq b_1$ for all $n$, and since $a_1\leq a_{n+1} <b_n$ for all $n$, there exists $a\coloneqq \sup a_n$ and $b\coloneqq \inf b_n$. We claim $a\leq b$. Then $a_n\leq a\leq b\leq b_n$ for all $n$, and thus $[a,b]\subseteq [a_n,b_n]$ for all $n$, we have`
+	\[
+		[a,b]\subseteq \bigcap_{n=1}^{\infty } [a_n,b_n]
+	.\]
+	and $[a,b]$ is nonempty since it contains at least $a,b$. It then suffices to show the claim.
+
+	$\forall \varepsilon >0$, $\exists n$ such that $a_n\geq a-\varepsilon $. This follows since $a_n$ converges. It follows that $b_n>-a_n-\varepsilon $ for all $n$, and similarly $b+\varepsilon '\geq b_m$ for some $m$. There then exist $m,n$ such that
+	\[
+		b+\varepsilon '\geq b_m\geq a_n\geq a-\varepsilon 
+	.\]
+	This holds for any $\varepsilon ,\varepsilon '>0$. Therefore, $b\geq a$, and we are done.
+\end{proof}
+	The inclusion
+	\[
+		[a,b]\subseteq \bigcap_{n=1}^{\infty } [a_n,b_n]
+	\]
+	is really an equality, since $a,b$ are sup/inf for the sequences.
+\begin{proposition}\label{prp:5.5}
+	$[0,1]$ is compact.
+\end{proposition}
+\begin{proof}
+	Let $\left\{ \mathcal{O}_i \right\}_{i\in I} $ be an open subcover of $[0,1]$, and suppose for contradiction that there exists no finite subcover. We can cut the interval in half to obtain $[0,1/2]\cup [1/2,1]$, one of which must not have a finite subcover (as otherwise $[0,1]$ would have a finite subcover by union of both). Let $[a_1,b_1]$ be this set that does not admit a finite subcover, and repeat this same procedure. We then obtain at least one set $[a_2,b_2]$ that admits no finite subcover, and by induction, this generalizes. By lemma \ref{lma:5.2}, 
+	\[
+		\left\{ x_0 \right\} \coloneqq \bigcap_{n=1}^{\infty } [a_n,b_n]\neq \varnothing 
+	.\]
+	Since $\left\{ x_0 \right\} \subseteq \mathcal{O}_i$ for some $i$, since $\mathcal{O} $ is an open cover, and by definition of basis we can find an interval $(u,v)\subseteq \mathcal{O} _i$ containing $x_0$. We thus have $u<x_0<v$, and for $n$ large enough such that $1/2^n < \min \left\{ |x_0-u| ,|x_0 - v| \right\} $, by our previous constructions of $\left\{ a_n \right\} ,\left\{ b_n \right\} $, we have $[a_n,b_n]\subseteq (u,v)\subseteq \mathcal{O} _i$, a contradiction.
+\end{proof}
+A corollary of this is that the square $[0,1]\times [0,1]$ is compact by proposition \ref{prp:5.4}. This generalized as follows.
+
+\begin{proposition}\label{prp:5.6}
+	Let $A\subseteq \mathbb{R} ^n$. Then $A$ is compact if and only if it is closed and bounded.
+\end{proposition}
+\begin{proof}
+	If $A$ is compact, then it is closed since $\mathbb{R} ^n$ is Hausdorff by proposition \ref{prp:5.3}. Since $\left\{ B_n(0) \right\}_{n\in\mathbb{N} } $ is an open cover of $A\subseteq \mathbb{R} ^n$, there exists a finite subcover of $A$, and thus a maximal $n$ such that $A\subseteq B_n(0)$. Therefore, $A$ is bounded.
+
+	Now for the converse, suppose $A$ is closed and bounded. Since $A$ is bounded, we can construct some compact set
+	\[
+		A\subseteq \prod_{1\ldots n} [a_i,b_i]\implies \mathcal{R} 
+	.\]
+	This rectangle would simply contain the ball $A\subseteq B_R(0)$ guarenteed by boundedness. Since $A$ is closed and $A\subseteq \mathcal{R} $, and $\mathcal{R} $ is compact, by proposition \ref{prp:5.2}, $A$ is compact.
+\end{proof}
+\begin{proposition}\label{prp:5.7}
+	Let $X$ be a metric space and let $A\subseteq X$ be compact. Then every sequence in $A$ has a finite subsequence that converges in $A$.
+\end{proposition}
+\begin{proof}
+	Let $\left\{ x_n \right\}$ be a sequence in $A$. Suppose for contradiction that no subsequence converges in $A$. It follows that for all $a\in A$, there exists $r_a\in\mathbb{R} ^+$ such that $B_{r_a} (a)\setminus \left\{ a \right\}\cap \left\{ x_n \right\}  =\varnothing $. However, there must exist at least $a\in B_{r_a} (a)$, so these sets form an open cover of $A$. Since $A$ is compact, there exists a finite subcover, and each set can contain at most one element of $\left\{ x_n \right\} $ (since we subtracted a). However, this is finitely many points, however $x_n$ is an infinite sequence, implying we have finitely many distinct points in $x_n$ by the pidgeonhole principle, and we have our convergent subsequences, a contradiction.
+\end{proof}
+

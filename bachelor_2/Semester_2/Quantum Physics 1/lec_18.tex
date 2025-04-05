@@ -1,0 +1,56 @@
+\lecture{18}{Thu 03 Apr 2025 14:00}{}
+Recall: we identified momentum space eigenstates and eigenvalues $(p,\ket{p} )$, and we found
+\[
+	\braket{p}{x} =\frac{1}{\sqrt{2\pi \hbar } } e^{-ipx/\hbar } 
+.\]
+Using this, we found the wavefunction $\braket{p}{\psi } \coloneqq \widetilde{\psi }(p)$ in position space is given by the Fourier transform of $\psi (x)$:
+\[
+	\braket{p}{\psi } =\int_{-\infty }^{\infty } \braket{p }{x} \braket{x}{\psi }  \,\mathrm{d} x=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } e^{-ipx/\hbar } \psi (x) \,\mathrm{d} x
+.\]
+Similarly,
+\[
+	\psi(x)=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } e^{ipx/\hbar } \widetilde{\psi } \left( p \right)  \,\mathrm{d} p
+\]
+is the reverse Fourier transform.
+
+Now let's work with wavepackets. We never actually see position and momentum eigenstates, since we cannot do infinitely precise measurements, and since a particle cannot spread throughout the entire universe. A real particle is usually a wavepacket.
+
+To minimize $\Delta p\Delta x$, and this is minimized by Gaussians. Recall that the time dependence is given by $\exp \left( \frac{ip(x-v^{(ph)} t}{\hbar }  \right) $, for $v^{(ph)} =E_p/p=p/2m$.
+
+Taking the Schrodinger equation with $V(x)=0$, the eigenstates are momentum eigentates $\ket{p} $. We then set
+\[
+	\ket{\psi ,t } =\int_{-\infty }^{\infty } f(p)\ket{p}e^{-iE_pt/\hbar }  \,\mathrm{d} p
+.\]
+We then have
+\[
+	\psi (x)=\int_{-\infty }^{\infty } f(p)\braket{x}{p} e^{-iE_pt/\hbar }  \,\mathrm{d} p=\int_{-\infty }^{\infty } f(p)e^{-ipx/\hbar } e^{-iE_pt/\hbar }  \,\mathrm{d} p=\int_{-\infty }^{\infty } f(p)\exp \left( -\frac{ipx+iE_pt}{\hbar }  \right)  \,\mathrm{d} p
+.\]
+Now we really need to identify $f(p)$, the coefficient function. Since we expect the particle to be a wavepacket, we expect $\left| f(p) \right| ^2$ to appear to be a Gaussian. We Taylor expand $E_p$:
+\[
+	E_p=E_{p_0} +\frac{\mathrm{d}E_{p_0} }{\mathrm{d}p_0} (p-p_0)+\ldots 
+.\]
+Plugging in,
+\[
+	\psi (x)=\int_{-\infty }^{\infty } f(p)\exp \left( -i \frac{(E_{p_0} +(p-p_0)E'_{p_0} )t+ipx}{\hbar }  \right)  \,\mathrm{d} p
+.\]
+Now we pull out $p$-independent terms.
+\[
+	\psi (x,t)=\exp \left( \frac{i(p_0E'_{p_0} -E_{p_0} t}{\hbar }  \right) \int_{-\infty }^{\infty } \exp \left( \frac{ip(x-E'_{p_0} t}{\hbar }  \right) f(p) \,\mathrm{d} p
+.\]
+The front is a phase factor, so we can ignore it for now. The exponential inside the integral looks a lot like the Fourier transform of $f$:
+\[
+	\widetilde{f} (x)\propto \int_{-\infty }^{\infty } f(p)e^{ipx}  \,\mathrm{d} p
+.\]
+We can do the following substitution:
+\[
+	\widetilde{f} \left(\frac{x-E'_{p_0}t}{\hbar }\right)\propto\int_{-\infty }^{\infty } f(p)\exp \left( ipt\frac{x-E_{p_0} '}{\hbar }  \right)  \,\mathrm{d} p
+.\]
+Therefore,
+\[
+	\psi (x,t)=\varphi \widetilde{f} \left( \frac{x-E_{p} 't}{\hbar }  \right) 
+\]
+for $\varphi $ the phase factor. We find that the true velocity $v^{(g)} $ (known as the group velocity) is given by
+\[
+	\frac{\mathrm{d}E_p}{\mathrm{d}p} =\frac{p}{m} 
+.\]
+We substitute in $p=p_0$ for the initial state here.
