@@ -1,0 +1,236 @@
+\section{Projective and Injective Resolutions and the Derived Category}
+Theorem \ref{thm:9.5.1} is very important - it tells us that if we are willing to restrict our attention to complexes of projectives that are bounded above, or complexes of injectives that are bounded below, then quasi-isomorphisms become precisely homotopy equivalences. This is important, since homotopic maps are more well-behaved than quasi-isomorphisms in general. For example, any additive functor that inverts quasi-isomorphisms preserves homotopy, whereas quasi-isomorphisms are not. Also, homotopy and homotopy equivalence are equivalence relations, while quasi-isomorphism is not. We can apply this to study more general objects of $\mathsf{A} $ using projective and injective resolutions. This can only really be done if $\mathsf{A} $ has enough projectives/injectives.
+
+\subsection{Recovering $\mathsf{A} $}
+Recall that $\mathsf{A} $ can be embedded in $\mathsf{C} (\mathsf{A} )$ as the subcategory $\iota (\mathsf{A}) $. Composing with the inclusion $\mathsf{C} (\mathsf{A} )\to \mathsf{K} (\mathsf{A} )$ gives us an embedding of $\mathsf{A} $ into the homotopic category. But there's more copies of $\mathsf{A} $ in $\mathsf{K} (\mathsf{A} )$, which offer more insight.
+
+\begin{definition}[Resolution]\label{dfn:9.6.1}
+	A projective resolution of $A$ is a quasi-isomorphism $P^{\bullet} \to \iota (A)$ for $P^{\bullet} \in \mathsf{C} ^{\leq 0} (\mathsf{P} )$. An injective resolution of $A$ is a quasi-isomorphism $\iota (A)\to Q^{\bullet} $, for $Q^{\bullet} \in \mathsf{C} ^{\geq 0} (\mathsf{I} )$.
+\end{definition}
+
+Clearly, resolutions exist if a category has enough projectives/injectives, by the lemma characterizing them. Now consider the category of homotopy classes of quasi-isomorphisms with target $\iota (A)$. If projective resolutions exist, we will show they are initial in this category. Respectively, injective resolutions are final the category of homotopy classes of quasi-isomorphisms with source $\iota (A)$. This will show that in $\mathsf{K} (\mathsf{A} )$, projective resolutions will map uniquely to \emph{every} resolution of $A$.
+
+\begin{lemma}\label{lma:9.6.1}
+	Let $A$ be an object in an abelian category, and let $M^{\bullet} $ be a resolution of $A$. Let $P^{\bullet} \in \mathsf{C} ^{\leq 0} (\mathsf{P} )$, and let
+	\[
+		\varphi : H^0(P^{\bullet} ) \to H^0(M^{\bullet} )=A
+	.\]
+	Then
+	\begin{itemize}
+		\item There exist morphisms $\alpha ^{\bullet} : P^{\bullet}  \to M^{\bullet} $ that induce $\varphi $ in cohomology on the 0th degree;
+		\item Different morphisms satisfying this requirement are homotopy equivalent.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	First, we define $\alpha ^{\bullet} $. Since $P^i=0$ for $i>0$, we must have $\alpha ^i=0$ for $i>0$. It then suffices without loss of generality to consider the truncated version of $M^{\bullet} $. First, note that for any complex $A^{\bullet} $, there exists a projection $A^i \to H^i(A^{\bullet} )$, defined as follows:
+	\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+		A^{i-1}\ar[r, "d_A^{i-1} "]\ar[d, two heads]&P^{i} \ar[d, shift left, dashed, "\pi "]\ar[r, "d_A^{i} "]&A^{i+1} \\
+		\Im d_A^{i-1} \ar[ur, tail, "\im d_A^{i-1} "]\ar[r, "\phi "]&\Ker d_A^i\ar[r, "\coker \phi "]\ar[u, shift left, "\ker d_A^i"]\arrow[ur, "0"]&H^i(A^{\bullet} ) 
+	\end{tikzcd}\]
+	where $\pi $ exists by the universal property of kernels, and we define the projection as $\coker \phi \circ \pi $. We denote it simply by $\pi $.
+
+	We then have the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		P^{-2} \ar[r, "d_P^{-2} "]&P ^{-1} \ar[r, "d_P ^{-1} "]&P^0\ar[r, "\pi "]&H^0(P^{\bullet} )\ar[d, "\varphi "]\ar[r]&0\\
+		M^{-2} \ar[r, "d_M^{-2} "']&M^{-1} \ar[r, "\phi \psi "']&\Ker d_M^0\ar[r, "\mu "']&H^0(M^{\bullet} )\ar[r]&0
+	\end{tikzcd}\]
+	where the morphisms on the bottom complex are given by
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		M^{-1} \ar[r, "d_M^{-1} "]\ar[d, "\psi "', two heads]&M^0\\
+		\Im d_M^{-1} \ar[ur, tail, "\im d_M^{-1} "]\ar[r, "\phi "']&\Ker d_M^0\ar[u, tail]\ar[r, "\mu "]&\operatorname{Coker} \phi =H^0(M^{\bullet} )
+	\end{tikzcd}\]
+	The bottom complex is exact since $M^{\bullet} $ is exact except at $M^0$, but we have replaced $M^0$ with $\ker d_M^0$, after doing a short diagram chase. Since $P^0$ is projective, $\varphi $ lifts to a morphism
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\alpha ^0:P^0\ar[r]&\Ker d_M^0\ar[r, tail]&M^0.
+	\end{tikzcd}\]
+	Further note that by commutivity of the diagram in question,
+	\[
+		\mu \alpha ^0d_P{-1} =\varphi \pi d_P ^{-1} =0
+	\]
+	since rows are complexes. Therefore, $\alpha ^0d_P ^{-1} $ factors through $\ker \mu =\im d_M^{-1} $, and thus we have a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&P ^{-1} \ar[d, "\alpha ^0 d_P ^{-1} "]\\
+		M^{-1} \ar[r, two heads]&\Im d_M^{-1} 
+	\end{tikzcd}\]
+	which lifts to a morphism $\alpha ^{-1} : P ^{-1}  \to M^{-1} $. This generalizes inductively, and the construction ensures commutivity of the relevant diagrams. Therefore, $\alpha ^{\bullet} : P^{\bullet}  \to M^{\bullet} $ exists, and uniqueness up to homotopy follows as a corollary of lemma 9.16.
+\end{proof}
+
+An important, albeit immediate, corollary of this result is as follows:
+\begin{proposition}\label{prp:9.6.1}
+	Any projective/injective resolutions of an object are homotopy equivalent.
+\end{proposition}
+
+The idea behind this lemma is actually fairly strong - for any object $A$ of $\mathsf{A} $, we can associate an object $\mathsf{K}^{\leq 0} (\mathsf{P} )$ to $A$ (provided enough projectives exist), determined up to homotopy. This is in fact functorial.
+\begin{proposition}\label{prp:9.6.2}
+	Let $A_0,A_1$ be objects of an abelian category, and let $P_i^{\bullet} $ be a projective resolution of $A_i$. Then every morphism $\varphi : A_0 \to A_1$ is induced by a morphism $\alpha ^{\bullet} : P_0^{\bullet}  \to P_1^{\bullet} $, which is determined up to homotopy.
+\end{proposition}
+\begin{proof}
+	By hypothesis, $\varphi : H^0(P_0^{\bullet} ) \to H_0(P_1^{\bullet} )$. By lemma \ref{lma:9.6.1}, there exists $\alpha ^{\bullet} $ inducing the morphism $\varphi $, and it is unique up to homotopy.
+\end{proof}
+\subsection{From Objects to Complexes}
+This assignment is clearly covariant, as shown by previous proofs. This shows that objects with projective resolutions in $\mathsf{A} $ can be viewed as elements of $\mathsf{K} ^{-} (\mathsf{P} )$, and vice versa for injectives. This forms a full subcategory of $\mathsf{A} $ in the respective homotopic category, provided that $\mathsf{A} $ has enough injectives. It is also determined up to homotopy equivalence, which is inverted in the homotopy category.
+
+We can thus treat each object $A$ as its isomorphism class in $\mathsf{K} ^{-} (\mathsf{P} )$ of projective resolutions, and morphisms in $\mathsf{A} $ correspond to morphisms between projective resolutions. This preserves the structure of $\mathsf{A} $, and we can in fact sort of replace $\mathsf{A} $ with $\mathsf{K} ^{-} (\mathsf{P} )$.
+
+Since homotopy equivalent complexes have the same cohomology, and additive functors preserve homotopy equivalence, objects in this category carry cohomological information in the optimal way. We would think that $\mathsf{K} ^{-} (\mathsf{P} )$ and $\mathsf{K} ^{+} (\mathsf{I} )$ should satisfy the criterion for a derived category, if we are only considering something like $\mathsf{C} ^{+} (\mathsf{A} )$ for $\mathsf{A} $ having enough projectives. The following theorem will finalize this notion as far as we can in this book.
+\begin{theorem}\label{thm:9.6.1}
+	Let $\mathsf{A} $ be an abelian category with enough projectives, and let $L^{\bullet} $ be a complex in $\mathsf{C} ^{-} (\mathsf{A} )$. Then there exists a bounded above complex of projectives $P^{\bullet} $ and a quasi-isomorphism $P^{\bullet} \to L^{\bullet} $, and $P^{\bullet} $ is uniquely defined up to homotopy equivalence (isomorphism in the homotopic category). Further, every morphism $\alpha ^{\bullet} $ of complexes in $\mathsf{C} ^{-} (\mathsf{A} )$ lifts to a corresponding morphism of projective resolutions in $\mathsf{K} ^{-} (\mathsf{P} )$, also uniquely determined up to homotopy.
+\end{theorem}
+\begin{proof}
+	First, we construct $P^{\bullet} $. This will be done while inductively constructing $\lambda ^{\bullet} : P^{\bullet}  \to L^{\bullet} $, and will follows from the fact that $\mathsf{A} $ has enough projectives. Recall the explicit definition of a pullback, which exists in abelian categories: for any diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&X\ar[d, "f"]\\
+		Y\ar[r, "g"']&Z
+	\end{tikzcd}\]
+	in an abelian category, there exists a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X\times Y\ar[r, "\pi _X"]\ar[d, "\pi _Y"']&X\ar[d, "f"]\\
+		Y\ar[r, "g"']&Z
+	\end{tikzcd}\]
+	The kernel $P$ of the morphism $h\coloneqq f\circ \pi _X-g\pi _Y : X\times Y \to Z$, together with the morphisms $p_X\coloneqq \pi _X\circ  \ker h$, $p_Y\coloneqq \pi _Y \circ \ker h$ satisfies the universal property for pullbacks
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\ar[dr, dashed]\ar[drr, bend left]\ar[ddr, bend right]\\
+		&P\ar[r, "p_X"]\ar[d, "p_Y"']&X\ar[d, "f"]\\
+		&Y\ar[r, "g"']&Z
+	\end{tikzcd}\]
+	Suppose inductively that $\lambda ^{i+1} : P^{i+1}  \to L^{i+1} $ exists. Then there exists a pullback
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		L^i\times_{\Ker d_L^{i+1} } \Ker d_P^{i+1} \ar[r, "\pi "]\ar[d, two heads]&\Ker d_P^{i+1} \ar[d, " \hat{\lambda }^{i+1} ", two heads]\\
+		L^i\ar[r, " \overline{d}_L^{i} "']&\Ker d_L^{i+1} 
+	\end{tikzcd}\]
+	The morphism $\hat{\lambda }^{i+1} $ is epi by inductive hypothesis, and thus so is the projection from the pullback to $L^i$. The morphism $\overline{d} _L^i$ is the restriction of the target of $d_L^i$ -- in my notation, it would be $\phi_L^i\psi_L^i$.
+
+	Since $\mathsf{A} $ has enough projectives, there exists a projective $P^i$ and an epimorphism
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		P^i\ar[r, two heads]&L^i\times_{\Ker d_L^{i+1} } \Ker d_P^{i+1} 
+	\end{tikzcd}\]
+We can then immediately define $d_P^{i} $ as the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	P^i\ar[rrr, bend left, "d_P^i"]\ar[r, two heads]&L^i\times_{\Ker d_L^{i+1} } \Ker d_P^{i+1} \ar[r, "\pi "']&\Ker d_P^{i+1} \ar[r, tail, "\ker d_P^{i+1} "']&P^{i+1} ,
+\end{tikzcd}\]
+which trivially makes $P^{\bullet} $ into a complex inductively. By lemma \ref{lma:9.5.3}, since there exists an epimorphism from the pullback to $L^i$, and there exists a map from $P^i$ into the pullback, this lifts into a map $\lambda^i$ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+P^i\ar[dr, "\lambda^i"', two heads]\ar[rrr, bend left, "d_P^i"]\ar[r, two heads]&L^i\times_{\Ker d_L^{i+1} } \Ker d_P^{i+1}\ar[d, two heads] \ar[r, "\pi "']&\Ker d_P^{i+1} \ar[r, tail, "\ker d_P^{i+1} "']\ar[d, two heads, "\hat{\lambda }^{i+1} "]&P^{i+1} \\
+						      &L^i\ar[r, " \overline{d} _L^i"']&\Ker d_L^{i+1} 
+\end{tikzcd}\]
+commute. We find that $\lambda ^{i} $ is epi since it is a composition of epimorphisms. The final thing to prove is that the induced map $\hat{\lambda }^i$ is epi, which follows immediately.
+
+To show that $\lambda ^{\bullet} $ is inverted by cohomology, Note that $H^{i+1} (P^{\bullet} )$ and $H^{i+1} (L^{\bullet} )$ can be realized as the cokernels of $\pi $ and $\overline{d} _L^i$, respectively. Since $\hat{\lambda }^{i+1} $ is epi, we must then have the map $\overline{d} ^i_L \oplus -\hat{\lambda }^{i+1} $ is epi, and thus we find that the diagram is a pushout as well, by a previous exercise. This induces the isomorphism between cohomologies, by a previous exercise.
+
+Let $P^{\bullet} ,\overline{P} ^{\bullet} $ be bounded complexes of projectives, and let $\lambda ^{\bullet} , \overline{\lambda } ^{\bullet} $ be the corresponding quasi-isomorphisms into $L^{\bullet} $. We want to find a homotopy equivalence $\widetilde{\lambda } ^{\bullet} : \overline{P} ^{\bullet}  \to P^{\bullet} $.
+
+First, we construct such a morphism. Note tht $\widetilde{\lambda } ^{i} =0$ for $i>0$, so assume the inductive hypothesis. We have a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	P^i	&		 & L^i \times_{\Ker d_L^{i+1} } \Ker d_M^{i+1}	& &
+	\Ker d_P^{i+1}	&			& P^{i+1} \\
+		&		 & L^i						& &
+	\Ker d_L^{i+1}	&			& L^{i+1} \\
+		& \overline{P}^i &						& &
+			& \overline{P}^{i+1}	& 
+			\arrow[from=1-1, to=1-3, two heads]\arrow[from=1-3, to=1-5, "\pi "]\arrow[from=1-5, to=1-7, tail, "\ker d_P^{i+1} "]
+			\arrow[from=1-1, to=2-3, two heads, "\lambda^i"']
+			\arrow[from=1-3, to=2-3, two heads]
+			\arrow[from=1-5, to=2-5, two heads, "\hat{\lambda }^{i+1} "]
+			\arrow[from=1-7, to=2-7, two heads, "\lambda^{i+1} "]
+			\arrow[from=2-3, to=2-5, " \overline{d}_L^i"]\arrow[from=2-5, to=2-7, tail, "\ker d_L^{i+1} "]
+			\arrow[from=3-2, to=2-3, " \overline{\lambda }^i"]\arrow[from=3-2, to=3-6, "d_{\overline{P} }^{i} "]
+			\arrow[from=3-6, to=2-7, "\overline{\lambda }^{i+1} "]
+\end{tikzcd}\]
+Note that by inductive hypothesis, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	P^{i} \ar[r]&P^{i+1} \ar[r]&P^{i+2} \\
+	\overline{P} ^{i} \ar[rr, bend right, "0"']\ar[r]&\overline{P}^{i+1} \ar[r]\ar[u, "\lambda ^{i+1} "]&\overline{P}^{i+2} \ar[u, "\lambda ^{i+2} "]
+\end{tikzcd}\]
+commutes, and thus the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\overline{P} ^i\ar[r, "d_{\overline{P} }^i"']\ar[rrr, "0", bend left]&\overline{P} ^{i+1} \ar[r, "\lambda ^{i+1} "']&P^{i+1} \ar[r, "d_P^{i+1} "']&P^{i+2}
+\end{tikzcd}\]
+is 0. Therefore, it factors unqiuely through the kernel:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\overline{P} ^i\ar[drr, dashed, "\varepsilon "']\ar[r, "d_{\overline{P} }^i"]&\overline{P} ^{i+1} \ar[r, "\lambda ^{i+1} "]&P^{i+1} \ar[r, "d_P^{i+1} "]&P^{i+2}\\
+												     &&\Ker d_P^{i+1} \ar[u, tail, "d_P^{i+1} "]
+\end{tikzcd}\]
+By commutivity of the main diagram, this gives us the commutative square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\overline{P} ^{i} \ar[r, "\varepsilon "]\ar[d, " \overline{\lambda }^{i} "']&\Ker d_M^{i+1} \ar[d, two heads, "\hat{\lambda }^{i+1} "]\\
+	L^i\ar[r, " \overline{d} ^{i}_L"']&\Ker d_L^{i+1} 
+\end{tikzcd}\]
+Since the pullback is final with respect to these diagrams, there is an induced morphism making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 1em]
+	\overline{P} ^i\ar[drr, bend left, "\varepsilon "]\ar[ddr, bend right, " \overline{\lambda } ^i"']\ar[dr, dashed, "\sigma "]\\
+	&L^i\times_{\Ker d_L^{i+1} } \Ker d_M^{i+1} \ar[r]\ar[d, two heads]&\Ker d_M^{i+1} \ar[d, "\hat{\lambda }^{i+1} ", two heads]\\
+	&L^i\ar[r, " \overline{d} _L^i"']&\Ker d_L^{i+1} 
+\end{tikzcd}\]
+commute. Returning to the main diagram, we now have morphisms making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	P^i	&		 & L^i \times_{\Ker d_L^{i+1} } \Ker d_M^{i+1}	& &
+	\Ker d_P^{i+1}	&			& P^{i+1} \\
+		&		 & L^i						& &
+	\Ker d_L^{i+1}	&			& L^{i+1} \\
+		& \overline{P}^i &						& &
+			& \overline{P}^{i+1}	& 
+			\arrow[from=1-1, to=1-3, two heads]\arrow[from=1-3, to=1-5, "\pi "]\arrow[from=1-5, to=1-7, tail, "\ker d_P^{i+1} "]
+			\arrow[from=1-1, to=2-3, two heads, "\lambda^i"']
+			\arrow[from=1-3, to=2-3, two heads]
+			\arrow[from=1-5, to=2-5, two heads, "\hat{\lambda }^{i+1} "]
+			\arrow[from=1-7, to=2-7, two heads, "\lambda^{i+1} "]
+			\arrow[from=2-3, to=2-5, " \overline{d}_L^i"]\arrow[from=2-5, to=2-7, tail, "\ker d_L^{i+1} "]
+			\arrow[from=3-2, to=2-3, " \overline{\lambda }^i"]\arrow[from=3-2, to=3-6, "d_{\overline{P} }^{i} "]\arrow[from=3-2, to=1-3, crossing over, bend left, "\sigma "']\arrow[from=3-2, to=1-5, crossing over, bend right, "\varepsilon "]
+			\arrow[from=3-6, to=2-7, "\overline{\lambda }^{i+1} "]
+\end{tikzcd}\]
+commute. Since $\overline{P} ^{i} $ is projective, there is an induced morphism $\widetilde{\lambda } ^{i} $ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&\overline{P} ^{i} \ar[d, "\sigma "]\ar[dl, " \widetilde{\lambda }^i"']\\
+	P^i\ar[r, two heads]&L^i\times _{\Ker d_L^{i+1} } \Ker d_M^{i+1} 
+\end{tikzcd}\]
+commute. We thus have a diagram in $\mathsf{C} ^{-} (\mathsf{A} )$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&P^{\bullet} \ar[d, two heads, "\lambda ^{\bullet} "]\\
+	\overline{P}^{\bullet}  \ar[ur, " \tilde{\lambda }^{\bullet} "]\ar[r, " \overline{\lambda }^{\bullet} "']&L^{\bullet}
+\end{tikzcd}\]
+It follows that $\widetilde{\lambda } ^{\bullet} $ is a quasi-isomorphism, since the other two are. By theorem \ref{thm:9.5.1}, it must be a homotopy equivalence. Therefore, $P^{\bullet} $ is unique up to homotopy equivalence.
+
+By this argument, we also have that for any morphism $\alpha ^{\bullet} : \overline{P} ^{\bullet}  \to L^{\bullet} $, for $\overline{P} ^{\bullet} \in \mathsf{C} ^{-} (\mathsf{P} )$, then this lifts to a morphism $\overline{P} ^{\bullet} \to P^{\bullet} $ making the relevant diagram commute. In fact, for any $\overline{P} $ mapping quasi-isomorphically to $L^{\bullet} $, the morphism lifts up to homotopy to $P^{\bullet} $, since it must be homotopic to the previously constructed one. So suppose morphisms $\alpha _0^{\bullet} $ and $\alpha _1^{\bullet} $ lift $\alpha ^{\bullet} $ up to homotopy:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\overline{P} ^{\bullet} \ar[r, shift left, "\alpha _0^{\bullet} "]\ar[r, shift right, "\alpha _1^{\bullet} "']\ar[d]&P^{\bullet} \ar[d, "\lambda ^{\bullet} "]\\
+	\overline{L} ^{\bullet} \ar[r, "\alpha ^{\bullet} "']&L^{\bullet} 
+\end{tikzcd}\]
+Then $\lambda ^{\bullet} (\alpha _1^{\bullet} -\alpha _0^{\bullet} )\sim 0$, and thus $\alpha _1^{\bullet} -\alpha _0^{\bullet} \sim 0$ by a previous lemma. Therefore, $\alpha _1^{\bullet} \sim \alpha _0^{\bullet} $.
+\end{proof}
+
+\subsection{Poor Man's Derived Category}
+We can now close out on the important ideas we've been working towards. If $\mathsf{A} $ has enough projectives, then we can view $\mathsf{K} ^{-} (\mathsf{P} )$ as a partial solution to the universal problem of the derived category.
+\begin{theorem}\label{thm:9.6.2}
+	Let $\mathsf{A} $ be a category with enough projectives. Then by lemma \ref{lma:9.5.1}, the functor $\mathsf{C}^{-} (\mathsf{A} )\to \mathsf{D}^{-} (\mathsf{A} )$ factors through $\mathsf{K} ^{-} (\mathsf{A} )\to \mathsf{D} ^{-} (\mathsf{A} )$. This induces an equivalence of categories $\mathsf{K} ^{-} (\mathsf{P} )\to \mathsf{D} ^{-} (\mathsf{A} )$. Similarly, if $\mathsf{A} $ has enough injective, then $\mathsf{K} ^{+}(\mathsf{I} )\to \mathsf{D} ^{+} (\mathsf{A} )$ is an equivalence of categories.
+\end{theorem}
+
+We cannot prove this since we have not precisely defined the derived category, nor have we defined methods of proving universal problems between categories. However, we can appreciate \emph{why} it should be true.
+
+Suppose $\mathsf{A} $ has enough projectives. Let $\mathscr{P} : \mathsf{C} ^{-} (\mathsf{A} ) \to \mathsf{K} ^{-} (\mathsf{A} )$ be the functor mapping $L^{\bullet} $ to some projective resolution, which exists by theorem \ref{thm:9.6.1}, with every morphism $\alpha ^{\bullet} : L^{\bullet}  \to M^{\bullet} $ mapping to the morphism in $\mathsf{K} ^{-} (\mathsf{P}) $ that lifts $\alpha ^{\bullet} $.
+
+Since we have shown any two lifts are homotopic, $\mathscr{P} (\alpha ^{\bullet} )$ is well-defined and is thus easily shown to be a functor. Additionally, since $P^{\bullet} $ is well-defined up to homotopy equivalence, we have that each $L^{\bullet} $ maps to some element of an isomorphism class, and is well-defined up to isomorphism.
+
+This can be rephrased by saying that any two choices of functor $\mathscr{P} _1,\mathscr{P} _2$ are naturally isomorphic; there exists a natural isomorphism $\eta : \mathscr{P} _1 \Rightarrow \mathscr{P} _2$.
+
+Choose $\mathscr{P} $. The claim is that this functor solves the universal problem. The following theorem is our best way of stating this without going more into the theory.
+\begin{theorem}\label{thm:9.6.3}
+	With notation as above, we have the following.
+	\begin{itemize}
+		\item If $\rho \circ $ is a quasi-isomorphism in $\mathsf{C} ^{-} (\mathsf{A} )$, then $\mathscr{P} (\rho ^{\bullet} )$ is an isomorphism in $\mathsf{K}^{-} (\mathsf{P} )$.
+		\item Let $\mathscr{F} : \mathsf{C} ^{-} (\mathsf{A} ) \to \mathsf{D} $ be an additive functor that inverts quasi-isomorphisms. Then there exists $\widetilde{\mathscr{F} } : \mathsf{K} ^{-} (\mathsf{P} ) \to \mathsf{D} $ making the diagram
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				\mathsf{C} ^{-} (\mathsf{A} )\ar[r, "\mathscr{F} "]\ar[d, "\mathscr{P} "']&\mathsf{D} \\
+				\mathsf{K} ^{-} (\mathsf{P} )\ar[ur, "\widetilde{\mathscr{F}} "']
+			\end{tikzcd}\]
+			commute up to isomorphism. That is, there exists a natural transformation $\nu : \widetilde{\mathscr{F} } \circ \mathscr{P}  \Rightarrow \mathscr{F} $ such that
+			\[
+				\nu_{L^{\bullet} } : \widetilde{\mathscr{F} } \circ \mathscr{P}(L^{\bullet} )  \to \mathscr{F} (L^{\bullet} )
+			\]
+			is an isomorphism for all $L^{\bullet} $. Moreover, $\widetilde{\mathscr{F} } $ is unique up to natural isomorphism.
+	\end{itemize}
+\end{theorem}
+The noncommutivity of the diagram (not up to isomorphism) is due to the fact that this is ``only'' an equivalence of categories, not a categorical isomorphism.
+\begin{proof}
+	a
+\end{proof}
+
