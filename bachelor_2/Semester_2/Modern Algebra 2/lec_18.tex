@@ -1,0 +1,43 @@
+\lecture{18}{Mon 07 Apr 2025 13:22}{Galoiiis}
+Here is what we want to prove. Let $F$ be a perfect field and $E$ a splitting field over $F$ of some polynomial in $F[x]$. The mapping from the set of subfields of $E$ containing $F$ to the set of subgroups of $\operatorname{Gal} (E/F)$ given by $K\mapsto \operatorname{Gal} (E/K)$ is a bijection, and is inverted by mapping $H$ to the fixed field of $H$. Furthermore, for any $F\subseteq K\subseteq E$,
+\begin{enumerate}
+	\item $\left[ E:K \right] =\left| \operatorname{Gal} (E/K) \right| $ and $\left[ K:F \right] =\left[ \operatorname{Gal} (E/F): \operatorname{Gal} (E/K) \right] $;
+	\item $K=E_{\operatorname{Gal} (E/K)} $;
+	\item If $H\subseteq \operatorname{Gal} (E/F)$ is a group, then $H=\operatorname{Gal} (E/E_H)$;
+	\item If $K$ is a splitting field of some $f(x)\in F[x]$, then $\operatorname{Gal} (E/K)$ is a normal subgroup of $\operatorname{Gal} (E/F)$ and $\operatorname{Gal} (K/F)\cong \operatorname{Gal} (E/F) / \operatorname{Gal} (E/K)$.
+\end{enumerate}
+
+\begin{lemma}\label{lma:owo}
+	Let $F$ be a field and $p(x)\in F[x]$ be irreducible over $F$, and let $\alpha $ be a zero of $p(x)$ in some extension of $F$. If $\phi : F \to F'$ is an isomorphism of fields and $\beta $ is a zero of $\phi (p(x))\in F'[x]$ in some extension $F'$, then there is an isomorphism $F(\alpha )\to F'(\beta )$ that agrees with $\phi $ on $F$, and maps $\alpha \mapsto \beta $.
+\end{lemma}
+\begin{proof}
+	If $p$ is irreducible, then $\phi p$ must also be irreducible, since if it factors the homomorphism condition pulls the factorization back into $F$. We thus have an isomorphism
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		F(\alpha )\ar[r, "\tau "]&F[x]/\left\langle p(x) \right\rangle \ar[r, " \overline{\phi } "]&F'[x]/\left\langle \phi (p(x)) \right\rangle \ar[r, "\sigma "]&F'(\beta ),
+	\end{tikzcd}\]
+	where $\overline{\phi } $ is defined as $f\mapsto \phi f$. This is trivially an isomorphism, since $\phi $ is an isomorphism. More precisely,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		F(\alpha )\ar[r]\ar[dr]&F[x]/\left\langle p\left( x \right)  \right\rangle \ar[r]&F'[x]/\left\langle \phi (p(x)) \right\rangle \ar[r]&F'(\beta )\\
+				       &F\ar[r]\ar[u, two heads]&F'\ar[u, two heads]\ar[ur]
+	\end{tikzcd}\]
+	commutes (?).
+\end{proof}
+
+\begin{theorem}[Isomorphism Extension]\label{thm:1}
+	Let $\phi : F \to F'$ be an isomorphism, and let $f(x)\in F[x]$. If $E$ is the splitting field of $f$ over $F$, and $E'$ is a splitting field of $\phi f$ over $F'$, then there exists a natural isomorphism $E\to E'$ that maps $c\mapsto \phi (c)$ for all $c\in F$.
+\end{theorem}
+\begin{proof}
+	Induct on the previous lemma.
+\end{proof}
+
+\begin{theorem}\label{thm:ksjdn}
+	Let $p\in F[x]$ be an irreudcible polynomial with splitting field $E/F$, and let $\beta \in E$ be a root of some $g\in F[x]$. THen if $\widetilde{\beta} $ is a root of $g$, then $\widetilde{\beta } \in E$.
+\end{theorem}
+\begin{proof}
+	akjwnks
+\end{proof}
+
+\begin{theorem}[huge]\label{thm:kjsdb}
+	Let $E$ be a splitting field for some $f(x)\in F[x]$. Then $\left| Gal(E/F) \right| =\left[ E:F \right] $.
+\end{theorem}
+
