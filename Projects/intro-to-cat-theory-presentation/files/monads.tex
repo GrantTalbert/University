@@ -1,0 +1,101 @@
+\section{Monads}
+
+\subsection{A Monad is a Monoid in the Category of Endofunctors}
+The first sentence on the Wikipedia page for monads used to say (roughly) ``A monad is a monoid in the category of endofunctors''. Although technically true, this is not really what a person trying to learn about monads wants to be the first definition they read, and as such the sentence became a minor meme for some time. In this penultimate section, we will unpack what a monad is, and in the final section, we will learn what a monoid is, and will show that, indeed, a monad is a monoid in the category of endofunctors.
+
+Let's begin with some preliminaries. An endomorphism is a morphism $X\to X$; that is, a morphism from an object to itself. In the same vein, we call a functor $\mathcal{T} : \mathcal{C}  \to \mathcal{C} $ from a category to itself an \emph{endofunctor}. We can then consider the composition
+\[
+	\mathcal{T} ^2 =  \mathcal{T} \circ \mathcal{T} : \mathcal{C}  \to \mathcal{C} 
+.\]
+Similarly, we can consider the composition
+\[
+	\mathcal{T} ^3=\mathcal{T} ^2\circ \mathcal{T} : \mathcal{C}  \to \mathcal{C} 
+.\]
+
+If $\mu : \mathcal{T} ^2 \Rightarrow \mathcal{T} $ is a natural transformation with components $\mu_X : \mathcal{T} ^2(X) \to \mathcal{T} (X)$ for any $X\in \mathcal{C} $, then we can consider the two \emph{new} natural transformations $\mathcal{T} \mu $ and $\mu \mathcal{T} $, both of which go $\mathcal{T} ^3 \Rightarrow \mathcal{T} ^2$. We define these natural transformations as having components
+\[
+	\left(\mathcal{T} \mu\right)_X : \mathcal{T} ^3(x) \to \mathcal{T} ^2(x),
+\]
+and
+\[
+	\left( \mu \mathcal{T}  \right)_X = \mu_{\mathcal{T} (X)} 
+.\]
+Now that we understand this notation, we can present the definition of a monad.
+
+\begin{definition}[Monad]\label{dfn:10}
+	A monad is a category $\mathcal{C} $, together with an endofunctor $\mathcal{T} : \mathcal{C}  \to \mathcal{C} $ and two natural transformations
+	\[
+		\eta : 1_{\mathcal{C} }  \Rightarrow \mathcal{T} ,\qquad \mu : \mathcal{T} ^2 \Rightarrow \mathcal{T} ,
+	\]
+	such that
+	\[
+		\mu \circ \mathcal{T} \mu =\mu \circ \mu \mathcal{T} ,
+	\]
+	\[
+		\mu \circ \mathcal{T} \eta =\mu \circ \eta \mathcal{T} =1_{\mathcal{T} } 
+	.\]
+	Equivalently, the diagrams
+	\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+	\mathcal{T} ^3\ar[" \mathcal{T} \mu  ", r] \ar[" \mu \mathcal{T}  "', d]  & \mathcal{T} ^2\ar[" \mu  ", d]  & \mathcal{T} \ar[" \eta \mathcal{T}  ", r] \ar[" 1_{\mathcal{T} }  "', dr]  & \mathcal{T} ^2\ar[" \mu  ", d]  & \mathcal{T} \ar[" \mathcal{T} \eta  "', l] \ar[" 1_{\mathcal{T} }  ", dl]  \\
+	\mathcal{T} ^2\ar[" \mu  "', r]  & \mathcal{T}  &  & \mathcal{T}  & 
+	\end{tikzcd}\]
+	commute.
+\end{definition}
+
+Let's unpack this definition. To do this, we need to introduce the \emph{classical} notion of a monoid. We will revisit monoids from a categorical perspective soon, but for now the following definition will suffice. Let $M$ be a set, and let $\cdot : M\times M \to M$ be an operation known as \emph{multiplication}; if $m,n\in M$, we denote their product as $m\cdot n$ or $mn$. Multiplication must be associative:
+\[
+	(mn)p=m(np)
+\]
+and there must exist $1\in M$ such that for all $m\in M$,
+\[
+	m1=1m=m
+.\]
+That is, $1$ is an identity element. For the algebraists here, a monoid is a group that need not have inverses.
+
+We can view a monad as a type of monoid, but with a key distinction that makes this definition much more abstract. In a regular monoid, we have multiplication defined between two elements $x,y\in M$. This means that multiplication takes a pair $(x,y)$, and maps it to the element $xy$. Hence, $\cdot $ is a function $M\times M\to M$. The key thing to note here is that we are using the \emph{cartesian product} of $M$ to define multiplication. However, we could also try defining multiplication as a function from the \emph{tensor product} of two modules $M\otimes M\to M$, or from the \emph{direct sum} of two abelian groups $M\oplus M\to M$, or other such ``product-like'' operations. These multiplication definitions would be very different from what we're used to, since there may be no meaningful way to multiply \emph{any} arbitrary elements $x,y\in M$, depending on what the structure of the product.
+
+In a monad, instead of having a set $M$, we instead have an \emph{endofunctor} $\mathcal{T} : \mathcal{C}  \to \mathcal{C} $, which means that we probably need to try one of these new products. We use \emph{morphism composition} between functors as the product, meaning that instead of having something like $\mathcal{T} \times \mathcal{T} $, we instead use $\mathcal{T} \circ \mathcal{T} $. How is it then possible to define multiplication of elements in a monad?
+
+First, recall that multiplication is given by a morphism. Since our object is a functor, we need a morphism $\mu : \mathcal{T} \circ \mathcal{T}  \to \mathcal{T} $ to give multiplication. In other words, $\mu $ is a \emph{natural transformation}. Also recall that general categories need not have a meanigful notion of elements, and thus instead of describing how to multiply elements of $M$, it suffices to describe the action of multiplication on the object $M$; or in this case, $\mathcal{T} $. This is done by the first commutative diagram, which essentially states that multiplication should be associative.
+
+Finally, a monoid has a unit element. In a classical monoid, this can be described by finding an object $I\in \Set $ which is an \emph{identity} with respect to the cartesian product $\times $ (a singleton), and considering a morphism $I\to M$. Since $I$ is a singleton, it's image in $M$ defines the identity element. This means the information in the identity can \emph{also} be encoded by a morphism, so long as we have an identity $I$ for the arbitrary product $\otimes $ we are working with. In this case, the product is composition, so the \emph{identity functor} $1_{\mathcal{C} } $ is an identity by definition. Therefore, an identity element of the \emph{monad} is simply a morphism $\eta : 1_{\mathcal{C} }  \to \mathcal{T} $; once again, $\eta $ must be a natural transformation. The final diagram just defines left- and right-unital laws.
+
+\subsection{Monads via Adjunction}
+
+Every adjunction gives rise to a monad. To see this, let $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ and $\mathcal{U} : \mathcal{D}  \to \mathcal{C} $ have $\mathcal{F} \dashv \mathcal{U} $. For now, we omit the $\circ $ in function composition for simplicity. The adjunction induces an endomorphism $\mathcal{UF} : \mathcal{C}  \to \mathcal{C} $, and they also induce the unit $\eta : 1_\mathcal{C}  \to \mathcal{U} \mathcal{F} $, and the counit $\varepsilon : \mathcal{F} \mathcal{U}  \to 1_\mathcal{D} $. We can clearly view the unit $\eta $ as the identity in the monad $\mathcal{U} \mathcal{F} $, but defining multiplication is less straightforward.
+
+Consider the natural transformation $\mu =\mathcal{U} \varepsilon \mathcal{F} $. Since $\varepsilon : \mathcal{F} \mathcal{U}  \to 1_{\mathcal{D} } $, we have
+\[
+	\mu : \mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F}  \to \mathcal{U} \mathcal{F} 
+.\]
+This can be seen explicitly by constructing each component $\varepsilon_X$ as $\mathcal{U} (\varepsilon_{\mathcal{F} (X)} )$, noting that $\mathcal{F} (X)\in \mathcal{D} $, and thus $\mathcal{U} (\varepsilon_{\mathcal{F} (X)} )\in \mathcal{C} $. This suffices as a definition for multiplication, since associativity is equivalent to commutivity of the absurd looking diagram
+\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+\mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F} \ar[" \mathcal{U} \mathcal{F} \mathcal{U} \varepsilon \mathcal{F}  ", r] \ar[" \mathcal{U} \varepsilon \mathcal{F} \mathcal{U} \mathcal{F}  "', d]  & \mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F} \ar[" \mathcal{U} \varepsilon \mathcal{F}  ", d]  \\
+\mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F} \ar[" \mathcal{U} \varepsilon \mathcal{F}  "', r]  & \mathcal{U} \mathcal{F} 
+\end{tikzcd}\]
+This diagram is induced by the slightly more general diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{F} \mathcal{U} \mathcal{F} \mathcal{U} \ar[" \mathcal{F} \mathcal{U} \varepsilon  ", r] \ar[" \varepsilon \mathcal{F} \mathcal{U}  "', d]  & \mathcal{F} \mathcal{U} \ar[" \varepsilon  ", d]  \\
+\mathcal{F} \mathcal{U} \ar[" \varepsilon  "', r]  & 1_{\mathcal{D}} 
+\end{tikzcd}\]
+We have not yet built the machinery to precisely formulate \emph{why} this diagram commutes. If you are already familiar with \emph{horizontal composition}, try showing that the horizontal composite $\varepsilon \varepsilon =\varepsilon (\mathcal{F} \mathcal{U} \varepsilon )=(\varepsilon \mathcal{F} \mathcal{U} )\varepsilon $.
+
+The left and right unit laws
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{U} \mathcal{F} \ar[" \eta \mathcal{U} \mathcal{F}  ", r] \ar[" \mathcal{U} \mathcal{F} \eta  "', d] \ar[" 1_{\mathcal{U} \mathcal{F} } ", dr]  & \mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F} \ar[" \mathcal{U} \varepsilon \mathcal{F}  ", d]  \\
+\mathcal{U} \mathcal{F} \mathcal{U} \mathcal{F} \ar[" \mathcal{U} \varepsilon \mathcal{F}  "', r]  & \mathcal{U} \mathcal{F} 
+\end{tikzcd}\]
+amount to the triangular identities $\mathcal{U} \varepsilon \circ \eta \mathcal{U} =1$ and $\varepsilon \mathcal{F} \circ \mathcal{F} \eta =1$. I leave rigorizing this as an exercise. Every adjunction thus induces a monad. The converse is also true, and I encourage the enterprising reader to explore it on their own.
+
+\subsection{Comonads}
+
+As is always the case in categorical constructions, there is indeed a dual notion to a monad, being that of a comonad. As usual, this is a monad in the opposite category, and thus flipping all the arrows suffices. Given a category $\mathcal{C} $ and an endofunctor $\mathcal{L} $ on $\mathcal{C} $, a natural transformation $\varepsilon : \mathcal{L}  \Rightarrow 1_{\mathcal{C} } $, and another natural transforation $\delta : \mathcal{L}  \Rightarrow \mathcal{L} ^2$, we say that $(\mathcal{L} ,\varepsilon ,\delta )$ forms a \emph{comonad} if the diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{L} \ar[" \delta  ", r] \ar[" \delta  "', d]  & \mathcal{L} ^2\ar[" \mathcal{L} \delta  ", d]  & \mathcal{L} \ar[" \delta  ", r] \ar[" \delta  "', d]  \ar[" 1_\mathcal{L}  ", dr]& \mathcal{L} ^2\ar[" \mathcal{L} \varepsilon  ", d]  \\
+\mathcal{L} ^2\ar[" \delta \mathcal{L}  "', r]  & \mathcal{L} ^3 & \mathcal{L} ^2\ar[" \varepsilon \mathcal{L}  "', r]  & \mathcal{L} 
+\end{tikzcd}\]
+commute. Any adjunction
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{C} \ar[" \mathcal{F}  ", shift left, r]  & \mathcal{D} \ar[" \mathcal{U}  ", shift left, l] 
+\end{tikzcd}\]
+with $\mathcal{F} \dashv \mathcal{U} $ defines a comonad in $\mathcal{D} $.

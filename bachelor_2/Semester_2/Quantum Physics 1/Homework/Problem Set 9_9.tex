@@ -1,0 +1,170 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 9}
+\courseID{PY 451}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section{Wavefunction Spreading}
+
+\begin{enumerate}
+	\item Since the wavefunction in momentum space $\psi (p)$ is the fourier transform of the wavefunction $\psi (x)$ in position space (where I mildly abuse notation and use $\psi $ for both functions),
+		\[
+			\psi (p)=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } e^{-ipx/\hbar } \psi (x) \,\mathrm{d} x=\frac{1}{\sqrt{2\pi \hbar } } 
+		.\]
+		Also recall the decomposition
+		\[
+			\ket{\psi ,t=0} =\mathbbm{1}\ket{\psi ,t=0} =\int_{-\infty }^{\infty } \ket{p} \braket{p}{\psi ,t=0}  \,\mathrm{d} p=\int_{-\infty }^{\infty } \psi (p)\ket{p}  \,\mathrm{d} p
+		.\]
+		Therefore,
+		\[
+			\ket{\psi ,t=0} =\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } \ket{p}  \,\mathrm{d} p
+		.\]
+	\item We first find the time evolution for an eigenstate. Assume $\ket{p,t} $ is separable; that is, $\ket{p,t}=\phi (t)\ket{p}  $ for some time evolution $\phi (t)$. We then have
+		\begin{align*}
+			i\hbar \frac{\partial }{\partial t} \ket{p,t} =H\ket{p,t} &\implies i\hbar \frac{\partial }{\partial t} f(t)\ket{p} =f(t) \frac{P^2}{2m} \ket{p} \\
+										  &\implies \left( \frac{\partial }{\partial t} f(t) \right) \ket{p} =\frac{f(t)}{i\hbar } \frac{p^2}{2m} \ket{p} \\
+										  &\implies \frac{\partial }{\partial t} f(t)=-\frac{ip^2}{2m\hbar } f(t)\\
+										  &\implies f(t)=\exp \left( -i\frac{p^2}{2m\hbar }t  \right) =\exp \left( -\frac{iE_p}{\hbar }t  \right) ,
+		\end{align*}
+		where we have set $E_p=p^2/2m$. Applying this time evolution to the $\ket{p} $ states in our original equation, we have
+		\[
+			\ket{\psi ,t} =\int_{-\infty }^{\infty } \psi (p,0)\ket{p,t}  \,\mathrm{d} p=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } e^{-iE_pt/\hbar } \ket{p}  \,\mathrm{d} p
+		.\]
+		We can set $\psi (p,t)$ equal to $\psi (p,0)$ times the time evolution in the previous problem, and thus we obtain
+		\[
+			\psi (p,t)=\frac{1}{\sqrt{2\pi \hbar } } e^{-iE_pt/\hbar } 
+		.\]
+	\item Fourier transforming back gives gives
+		\begin{align*}
+			\psi (x,t)&=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar } } e^{ipx/\hbar } \psi (p,t) \,\mathrm{d} p\\
+				  &=\int_{-\infty }^{\infty } \frac{1}{2\pi \hbar } e^{-iE_pt/\hbar } e^{ipx/\hbar }  \,\mathrm{d} p\\
+				  &=\frac{1}{2\pi \hbar } \int_{-\infty }^{\infty } \exp \left( -\frac{i}{\hbar } \left( \frac{p^2}{2m}t-px  \right)  \right)  \,\mathrm{d} p\\
+				  &=\frac{1}{2\pi \hbar } \int_{-\infty }^{\infty } \exp \left( -\frac{i}{\hbar } \left( \frac{t}{2m} p^2-xp+\frac{x^2m}{2t} -\frac{x^2m}{2t}  \right)  \right)  \,\mathrm{d} p\\
+				  &=\frac{1}{2\pi \hbar } \int_{-\infty }^{\infty } \exp \left( -\frac{i}{\hbar } \left( \left( \sqrt{\frac{t}{2m}} p-\frac{x}{2} \sqrt{\frac{2m}{t} }  \right) ^2-\frac{x^2m}{2t}  \right)  \right)  \,\mathrm{d} p\\
+				  &=\frac{1}{2\pi \hbar } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \int_{-\infty }^{\infty } \exp \left( -\frac{i}{\hbar } \left( \sqrt{\frac{t}{2m}} p-\frac{x}{2} \sqrt{\frac{2m}{t} }   \right) ^2 \right)  \,\mathrm{d} p\\
+				  &\text{Let } u=\sqrt{\frac{t}{2m} } p-\frac{x}{2} \sqrt{\frac{2m}{t} } \\
+				  &=\frac{1}{2\pi \hbar } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \int_{-\infty }^{\infty } \exp \left( -\frac{i}{\hbar } u^2 \right) \sqrt{\frac{2m}{t} }  \,\mathrm{d} u\\
+				  &=\frac{1}{2\pi \hbar } \sqrt{\frac{2m}{t} } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \int_{-\infty }^{\infty } e^{-iu^2/\hbar }  \,\mathrm{d} u\\
+				  &\text{Let } v=\sqrt{\frac{i}{\hbar } } u\\
+				  &=\frac{1}{2\pi \hbar } \sqrt{\frac{2m}{t} } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \int_{-\infty }^{\infty } \sqrt{\frac{\hbar }{i} } e^{-v^2}  \,\mathrm{d} v\\
+				  &=\frac{1}{2\pi \hbar } \sqrt{\frac{2m}{t} } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \sqrt{-i\hbar } \sqrt{\pi } \\
+				  &=\frac{1}{2\pi \hbar } \sqrt{-\frac{i2\pi m\hbar }{t} } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \\
+				  &=\sqrt{-\frac{i2\pi m\hbar }{4\pi ^2\hbar ^2t} } \exp \left( \frac{ix^2m}{2t\hbar }  \right) \\
+				  &=\sqrt{-\frac{i m}{2\pi \hbar t} } \exp \left( \frac{ix^2m}{2t\hbar }  \right) 
+		,\end{align*}
+		where I have used the well-known value of the Gaussian integral to complete the problem. There is an important step that must be explained, however. When I make the substitution $v=\sqrt{\frac{i}{\hbar } } u$, the integral becomes a contour integral along the straight line $C$ in the complex plane passing through the origin at an angle of $\pi /2$. However, since the integrand is holomorphic everywhere and thus has no singularities, and since the path $C$ is clearly homotopic to $\mathbb{R} $ when raised to the surface defined by the integrand (i.e. a continuous deformation $C \to \mathbb{R} $ exists without passing singularities, since there are none), it follows that integrating over $\mathbb{R} $ rather than $C$ will preserve the value of the integral. Hence, keeping the bounds at $\pm \infty $ is justified.
+	\item First, we compute $\left\langle X \right\rangle $.
+		\begin{align*}
+			\bra{\psi ,t} X\ket{\psi ,t} &=\int_{-\infty }^{\infty } x \braket{\psi ,t}{x} \braket{x}{\psi ,t}  \,\mathrm{d} x\\
+						     &=\int_{-\infty }^{\infty } x\left| \psi (x,t) \right| ^2 \,\mathrm{d} x\\
+						     &=\int_{-\infty }^{\infty } x\left| \sqrt{-i}  \right| ^2\left| \sqrt{\frac{m}{2\pi \hbar t} }  \right| ^2\left| \exp \left( \frac{ix^2m}{2t\hbar }  \right)  \right| ^2 \,\mathrm{d} x\\
+						     &=\int_{-\infty }^{\infty } x\left| i\cdot e^{i\pi /4}  \right| ^2\frac{m}{2\pi \hbar t}  \,\mathrm{d} x
+		.\end{align*}
+		This is an odd integral, so it equals 0. Now we compute $\left\langle X^2 \right\rangle $.
+		\begin{align*}
+			\bra{\psi ,t} X^2\ket{\psi ,t} &=\bra{\psi ,t} \int_{-\infty }^{\infty } xX\ket{x} \bra{x}  \,\mathrm{d} x\ket{\psi ,t} \\
+						       &=\int_{-\infty }^{\infty } x^2\braket{\psi ,t}{x} \braket{x}{\psi ,t}  \,\mathrm{d} x\\
+						       &=\int_{-\infty }^{\infty } x^2 \left| \psi (x,t) \right| ^2 \,\mathrm{d} x\\
+						       &=\frac{x^3m}{6\pi \hbar t}\bigg|_{-\infty }^{\infty } 
+		.\end{align*}
+		If $t\neq 0$, then clearly $\left\langle X^2 \right\rangle \to \infty $. Therefore, $(\Delta x)^2\to \infty $ for all $t>0$, and consequently the same for $\Delta x$. When $t=0$, the particle's location is precisely defined to be $0$, so there cannot be any deviation. Thus,
+		\[
+			\Delta x=
+			\begin{cases}
+				0,&t=0\\
+				\infty ,&t>0
+			\end{cases}
+		.\]
+\end{enumerate}
+
+
+\section{Finite Potential Well and Scattering}
+
+\begin{enumerate}
+	\item For all particles to be transmitted, from our notes we must have $\xi =0$, and thus $k_2=n\pi/a $ for some $n\in\mathbb{Z} $. Recall that
+		\[
+			k_2=\sqrt{ \frac{2m}{\hbar ^2} (E+V_0)}
+		.\]
+		Setting $E=11$eV and $V_0=8$eV, we find
+		\[
+			\frac{n\pi }{a} =\sqrt{\frac{38m}{\hbar ^2} } \implies a=\frac{n\pi \hbar }{\sqrt{38m} } 
+		.\]
+		We now need to find the proper $n$, using the condition on the number of bound states. Recalling our solutions to finite potential wells, recall that bound states with energy $E$ must satisfy
+		\[
+			k_1=k_2 \tan k_2a,\qquad \text{or} \qquad k_1=-k_2 \cot k_2a
+		.\]
+		More explicitly,
+		\[
+			k_1=\sqrt{\frac{2mE}{\hbar ^2} } ,\qquad k_2=\sqrt{\frac{2m(E+8)}{\hbar ^2} } 
+		.\]
+		We end up with
+		\[
+			\sqrt{\frac{2mE}{\hbar ^2} } =\sqrt{\frac{2m(E+8) }{\hbar ^2}} \tan \left( \frac{n\pi \hbar }{\sqrt{38m} } \sqrt{\frac{2m(E+8)}{\hbar ^2} }  \right) ,
+		\]
+		\[
+			\sqrt{\frac{2mE}{\hbar ^2} } =-\sqrt{\frac{2m(E+8)}{\hbar ^2} } \cot \left( \frac{n\pi \hbar }{\sqrt{38m} } \sqrt{\frac{2m(E+8)}{\hbar ^2} }  \right) 
+		.\]
+		I plugged these into Mathematica with the following code. It iterates $n$ over $\left\{ 1, \ldots , 12 \right\} $, and plots $k_1$ minus both the even and odd parity functions.
+		\begin{lstlisting}[language=Mathematica]
+hbar   = 1.054571817*10^-34;      (* Js *)
+m      = 9.10938356*10^-31;       (* kg *)
+eV     = 1.602176634*10^-19;      (* J/eV *)
+V0     = 8*eV;                    (* well depth (J) *)
+Eres   = 11*eV;                   (* resonance energy (J) *)
+
+k1[x_]:=Sqrt[2 m x]/hbar
+k2[x_]:=Sqrt[2 m (x+V0)]/hbar
+a[n_]:=(n*Pi*hbar)/(Sqrt[2*(V0+Eres)*m])
+
+fEven[x_,n_]:=k1[x]-(k2[x]*Tan[a[n]*k2[x]])
+fOdd[x_,n_]:=k1[x]+(k2[x]*Cot[a[n]*k2[x]])
+
+Do[
+  Print[
+    Plot[
+      {fEven[x, n], fOdd[x, n], 0},
+      {x, 0, V0},
+      Exclusions      -> {Tan[_], Cot[_]},
+      ExclusionsStyle -> None,
+      PlotRange       -> {{0, V0}, Automatic},
+      PlotStyle       -> {Blue, Red, Gray},
+      PlotLegends     -> {"even (tan)", "odd (cot)", "zero"},
+      PlotLabel       -> Row[{"n = ", n}],
+      AxesLabel       -> {"e (eV)", "f(e)"}
+    ]
+  ],
+  {n, 1, 12}
+]
+		Manual inspection of the roots of the plots shows that $n\in \left\{ 9,10,11 \right\} $ yield 5 bound states.
+	\end{lstlisting}
+	This uses the mass of an electron for this calculation. Unit independence should make this immaterial. I also set $\hbar =m=1$ and found the same thing, but my units for $V_0$ felt off, so I redid it. Manual inspection of the plots shows there are 5 roots for $n\in\left\{ 9,10,11 \right\} $, so we can take $n=9$ to be the smallest value. An image of the output is included on the next page. Plugging in, we have
+	\[
+		L=2a=\frac{9\pi \hbar }{\sqrt{19m} } \approx 2.53\cdot 10^{-9} 
+	.\]
+	\newpage
+	\begin{figure}[ht]
+		\includegraphics[scale=0.5]{~/Documents/University/bachelor_2/Semester_2/Quantum Physics 1/figures/math-output.png}
+		\centering
+		\caption{Mathematica Output}
+		\label{fig:1}
+		\centering
+	\end{figure}
+	
+	\item This occurs when $k_2=n\pi /a$. More precisely,
+		\[
+			\sqrt{\frac{2m(E_n+V_0)}{\hbar ^2} } =\frac{n\pi }{\frac{9\pi \hbar }{\sqrt{38m} } } =\frac{n\sqrt{38m} }{9\hbar } 
+		.\]
+		Simplifying and setting $V_0=8$, we have
+		\[
+			\sqrt{E_n+8} =\frac{n\sqrt{19} }{9} 
+		.\]
+		Solving for $E_n$ gives us
+		\[
+			E_n=\frac{19n^2}{81} -8
+		.\]
+		All $E_n$s will be transmitted with unit probability, since they imply $\xi =0$ and thus $T=1$. Note that choosing $n=9$ recovers $E_9=11$. 
+\end{enumerate}
+
+\end{document}

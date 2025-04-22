@@ -1,0 +1,680 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../report.tex}
+\title{A Friendly Introduction to Abstract Nonsense}
+\usepackage{titlepageBU}
+\college{College of Arts and Sciences}
+\department{Department of Mathematics and Statistics}
+\date{Spring 2025}
+\usepackage{tikz-cd}
+\usepackage{eucal}
+\usepackage{csquotes}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name=Diagram]{diagram}
+
+
+\newcommand{\Set}{\mathcal{S}\mathrm{et}}
+\newcommand{\Grp}{\mathcal{G}\mathrm{rp}}
+\newcommand{\Ring}{\mathcal{R}\mathrm{ing}}
+\newcommand{\Top}{\mathcal{T}\mathrm{op}}
+\newcommand{\Cat}{\mathcal{C}\mathrm{at}}
+\newcommand{\Fld}{\mathcal{F}\mathrm{ld}}
+\renewcommand{\Vect}[1]{#1\text{-}\mathcal{V}\mathrm{ect}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+
+
+\section{Introduction}
+
+Today, I want to introduce category theory. Category theory is often described as one of the most abstract parts of math, which is why it's also one of the best parts of math obviously. Category theory is kinda like taking a bird's eye view to mathematics. Today I want to discuss what this means, and why category theory is important.
+
+Categories are best motivated (imo) by algebra or topology. So some of my examples will be in these subjects. BUT. I don't really wanna assume background knowledge in these subject areas, so most of the examples I give will not really require much background knowledge. It'll basically be stuff like ``what is a function'' and ``what is a set''.
+
+This talk will be structured into three parts.
+\begin{enumerate}
+	\item Motivation, and what category theory is all about.
+	\item Definition of a category, what it means, and some related definitions.
+	\item Basic yet fundamental results in category theory, and some exposure to more advanced concepts.
+\end{enumerate}
+At the end of the presentation, I will also suggest some further readings for anyone who's interested in learning more.
+
+
+
+\section{Motivation}
+
+The beginning of this presentation will feel somewhat unmotivated. I'm going to present some seemingly random examples that are later going to help me motivate the introduction of categories, and will clarify what it means to take a ``bird's eye view'' to mathematics.
+
+\subsection{Functions}
+
+I want to start by considering some simple properties of functions. A function $f : A \to B$ is just a way of taking things from one set $A$, and shoving them into another set $B$. There's many different types of functions that are important, like continuous functions and differentiable functions. If you've taken linear algebra, you've seen linear transformations. These are just a specific type of function that goes from one vector space to another.
+
+The types of functions I want to focus on are injective, surjective, and bijective functions.
+\begin{definition}\label{dfn:1}
+	An injective function is a function $f : A \to B$ such that if $a,b\in A$ and $a\neq b$, then $f(a)\neq f(b)$.
+
+	A surjective function is a function $f : A \to B$ such that for all $b\in B$, there exists $a\in A$ such that $f(a)=b$.
+
+	A bijective function is a function that is injective and surjective.
+\end{definition}
+
+These definitions should be parsed like this. For some functions, you can have multiple $x$ values sent to the same $y$ value. For example, if $f(x)=x^2$, then $x=2$ and $x=-2$ both give $f(x)=4$. An injective function is a function where this is not the case. If you have two different input values, like $2$ and $-2$, then they \emph{have} to have different output values. They can't be sent to the same thing.
+
+Surjective functions are functions that ``use up'' the entire codomain. Let's go back to our function $f(x)=x^2$. We would say that this function goes from the real numbers to the real numbers, or $f : \mathbb{R}  \to \mathbb{R} $. However, there is obviously no real number $x$ such that $f(x)=-1$. But $-1$ is also a real number. What this means is that this function doesn't ``use up'' the entire codomain. In other words, there are real numbers that don't get anything sent to them by $f$. A surjective function is a function where this isn't the case. A surjective function ``uses up'' the entire codomain, making sure something is sent to every single element.
+
+However, there's another way to characterize injective and surjective functions.
+
+\begin{lemma}\label{lma:1}
+	A function $f$ is injective if and only if it has a left-inverse. A function $f$ is surjective if and only if it has a right-inverse.
+\end{lemma}
+I'm not going to prove this here. The proof is not too difficult, but it gets a little messy and we do not have time unfortunately. However, i think it's good to explain what this statement means. The identity function $\mathrm{id}_X$ is a function $X \to X$, that sends every element to itself. In otherwords, $\mathrm{id}_X(x)=x$. Two functions $f,g$ are \emph{inverses} if $f\circ g=\mathrm{id} $ and $g\circ f=\mathrm{id} $. Here, $\circ $ denotes function composition.
+
+It is possible, however, to have functions that are only one-sided inverses. That is, $f\circ g=\mathrm{id} $, but $g\circ f\neq \mathrm{id} $. A function $f$ has a \emph{left-inverse} if there exists some $g$ such that $g\circ f=\mathrm{id} $, and likewise it has a \emph{right-inverse} if $f\circ g=\mathrm{id} $. So our lemma means that the \emph{only functions with left inverses are injective maps}, and similarly \emph{the only functions with right inverses are surjective maps}.
+
+There is one final way to characterize injections and surjections. This statement is a bit more convoluded, and more difficult to explain intuitively, so I will simply explain it mathematically.
+
+\begin{proposition}\label{prp:1}
+	A function $f : X \to Y$ is injective \emph{if and only if} for all $\alpha ,\beta : A \to X$, if
+	\[
+		f\circ \alpha =f\circ \beta ,
+	\]
+	then $\alpha =\beta $. Similarly, a function $f: X \to Y$ is surjective \emph{if and only if} for all $\alpha ,\beta : Y \to A$, if
+	\[
+		\alpha \circ f=\beta \circ f
+	,\]
+	then $\alpha =\beta $.
+\end{proposition}
+\begin{proof}
+	We can prove one direction of this statement. The other direction is more complex, so I leave it as an exercise. Let's say $f$ is injective, and $f\circ \alpha =f\circ \beta $. By lemma 1, there exists a left-inverse $g$ of $f$, and thus we have
+	\[
+		g\circ f\circ \alpha =g\circ f\circ \beta 
+	.\]
+	Since $g\circ f=\mathrm{id} $, it follows that
+	\[
+		\mathrm{id} \circ \alpha =\mathrm{id} \circ \beta 
+	.\]
+	It's fairly easy to show that $\mathrm{id} \circ \alpha =\alpha $ for any function, so we end up with $\alpha =\beta $. The proof for surjective functions is analogous.
+\end{proof}
+
+The statement of this proposition isn't meant to be simple to understand, but that's okay, as I only want to point out one important aspect of it. I want everyone to notice that in the first definition I gave of injections and surjections, that we explicitly described how the function operates on the elements of it's domain. However, in our last two statements, we were able to describe the function \emph{purely in terms of other functions}. In other words, we don't need to know anything about the domain and codomain of a function to determine it's injectivity or surjectivity; we only need to consider how it interacts with other functions.
+
+\subsection{The Cartesian Product}
+
+Now I want to introduce a construction we are all familiar with, even if we don't realize it. The cartesian product $A\times B$ of two sets $A,B$ is defined as the set of all ordered pairs $(a,b)$, where $a\in A$ and $b\in B$. For example, I'm sure you've all drawn the coordinate plane before. Every point on the coordinate plane is a pair $(x,y)$, where $x$ and $y$ are both real numbers, This means that the coordinate plane is really the cartesian product $\mathbb{R} \times \mathbb{R} $.
+
+Now let's consider an arbitrary cartesian product $A\times B$. There are two important functions I want to consider. Let $\pi _A : A\times B \to A$ be the function $\pi_A(a,b)=a$, and let $\pi _B : A\times B \to B$ be the function $\pi _B(a,b)=b$. We call these the \emph{natural projections} or \emph{canonical projections} onto $A$ and $B$. We will see that these are extremely important functions in this section. In fact, as we will see later, these functions characterize cartesian products ``up to isomorpism.'' I will explain what the second part of the statement means later in the presentation, but for now, you can simply interpret that as meaning ``essentially the same thing''. consider the following proposition.
+
+\begin{proposition}\label{prp:2}
+	Let $X,Y,Z$ be sets, and let $\pi _X,\pi _Y$ be the natural projections of $X\times Y$ onto $X$ and $Y$, respectively. Let $f : Z \to X$ and $g : Z \to Y$ be any functions. Then there exists a unique function $\varphi : Z \to X\times Y$ such that
+	\[
+		f=\pi_X \circ \varphi \qquad \text{and} \qquad g=\pi _Y \circ \varphi 
+	.\]
+	In other words, the diagram
+	\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&X\\
+		Z\ar[r, dashed, "\varphi "]\ar[urr, bend left, "f"]\ar[drr, bend right, "g"']&X\times Y\ar[ur, "\pi _X"']\ar[dr, "\pi _Y"]\\
+											    &&Y
+	\end{tikzcd}\]
+	\caption{Universality of Product}\label{dgm:1}
+	\end{diagram}\\
+	commutes.
+\end{proposition}
+Before we prove this statement, I want to explain what the frick it means for a diagram to ``commute''. Consider the much simpler diagram
+\begin{diagram}[ht]
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\ar[r, "f"]\ar[dr, "h"']&B\ar[d, "g"]\\
+				       &C
+\end{tikzcd}\]
+\caption{Simple Diagram}\label{dgm:2}
+\end{diagram}\\
+A diagram is a drawing like this, with letters and arrows. The letters represent sets, and the arrows represent functions between these sets. So the arrow labeled $f$ in the smaller diagram represents a function $f : A \to B$. We then say a diagram \emph{commutes} if any two ways of traversing it are the same. In this smaller diagram, there are two ways to traverse it: we can take the function $f$ from $A$ to $B$, then take the function $g$ from $B$ to $C$. Alternatively, we can take the function $h$ straight from $A$ to $C$. In this case, the diagram will commute if $h=g\circ f$, meaning both paths are the same.
+
+Now back to our bigger diagram (diagram \ref{dgm:1}). It's a little less apparent what it means for this to commute, since there are now two endpoints. For a bigger diagram, we say it commutes if \emph{every smaller diagram inside of it commutes}. So for example, consider the smaller diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&X\\
+	Z\ar[ur, "f"]\ar[r, dashed, "\varphi "']&X\times Y\ar[u, "\pi _X"']
+\end{tikzcd}\]
+This will commute if
+\[
+	\pi_X \circ \varphi =f
+.\]
+This means that for our main diagram \ref{dgm:1} to commute, we must have
+\[
+	\pi _X \circ \varphi =f\qquad \text{and} \qquad \pi _Y \circ \varphi =g
+.\]
+This is precisely the statement of the proposition.
+\begin{proof}
+	Now we will prove the theorem. Consider some $z\in Z$. If we want the diagram to commute, we need $\pi _X(\varphi (z))=f(z)$. Let's say that $\varphi (z)=(x,y)$. Then we have $\pi _X(x,y)=x$. For the diagram to commute, this means that $x=f(z)$, and thus $\varphi (z)=(f(z),y)$. Similarly, we need $\pi _Y(\varphi (z))=g(z)$, and thus $y=g(z)$. Therefore, we must have $\varphi (z)=(f(z),g(z))$. This is clearly a function, and the definition of the function forces uniqueness manifestly.
+\end{proof}
+
+The proof may be a little difficult to parse, especially since the statement of the proposition itself is fairly difficult to understand. However, I want to focus on the following idea. We are able to view the cartesian product purely in terms of functions, specifically using the natural projections, and how other functions behave with them.
+
+\subsection{Advanced Examples: Groups, Rings, Topological Spaces}
+
+For those with more advanced knowledge, I would like to give some stronger motivation. I will focus on algebra and topology, since I think that's what our audience has the strongest (relevant) background in. I claim, but will not prove, that the statement I just made about cartesian products generalizes. If you replace the word ``function'' with the word ``group homomorphism'', then a direct product of groups is a group that makes the diagram commute. If you instead use the word ``ring homomorphism'', then you get a product of rings. If you use ``continuous function'', you get a product of topological spaces.
+
+The key point here is twofold. Many disciplines of math, especially algebraic ones that study specific constructions, have many different similarities. The first one is that they all have a specific notion of function that they employ to study these objects to greater depth, and the second is that many key results and propositions generalize across entire disciplines, like my construction of the cartesian product or the first isomorphism theorem. This hints at very deep relationships between different areas of mathematics. This is one of the main goals of category theory. We would expect that there should be some unifying framework that explains this in a natural way, and this is what it gives us.
+
+\section{Categories}
+
+\subsection{Viewpoint Shift}
+
+One common theme so far in this talk has been functions. I started off by discussing some properties of functions, and I continued by showing that the Cartesian Product can be characterized pretty much only using functions. For the more advanced attendees, I said that these definitions in fact \emph{generalize} to other areas in mathematics.
+
+Many of you may be wondering why I'm putting so much emphasis on functions, but to that I would respond with ``why not?'' Functions are some of the most important things in mathematics. We spend multiple years in high school studying \emph{functions}. Calculus is nothing more than the study of the derivative and integral of \emph{functions}. When we get to higher level math, we want to study groups and rings and fields and topologies and vector spaces and modules and manifolds and all these different constructions using \emph{functions}.
+
+However, this viewpoint can only take us so far. When we study more advanced objects, or even when we study calculus, we aren't concerned with \emph{all} functions, we only care about differentiable and integrable functions. When we study groups, we are only concerned with group homomorphisms. What we \emph{need} if we are to take this viewpoint seriously is an \emph{abstraction} of the idea of a function.
+
+Abstractions are very common in advanced mathematics. We take an important object, and make a list of the most important properties of it. We then ask the following question:
+\begin{displayquote}
+	If we forget about the original object and start considering \emph{all} objects that satisfy this list of properties, can we find any new and interesting ideas?
+\end{displayquote}
+Category theory is this idea, but applied to mathematics itself. Much of advanced mathematics is taking a type of object, like a set or a group, and a certian type of function between these objects, like a homomorphism or a differentiable function, and then trying to learn as much as we can about these two things. Category theory abstracts the very idea of functions and objects.
+
+\subsection{Definition}
+
+The precise definition is \emph{not} simple and can be overwhelming, so I will start slowly. A category $\mathcal{C} $ has two different types of information. The first one, denoted $\Obj(\mathcal{C} ) $, is called the \emph{objects} of $\mathcal{C} $. These are things like sets or groups. The second type of information in a category is called it's morphisms. If $A,B\in \Obj(\mathcal{C} ) $, then there is a collection $\Hom_{\mathcal{C} }(A, B) $ of morphisms.
+
+Morphisms are our more abstract versions of functions. If $f\in \Hom_{\mathcal{C} }(A, B) $ is a morphism, we usually say ``$f$ is a morphism from $A$ to $B$'', and write $f : A \to B$. We can also represent $f$ in a diagram as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\ar[r, "f"]&B.
+\end{tikzcd}\]
+But how exactly do we abstract a function? If we recall what I said about a minute ago, we need to first identify the most important properties of functions. Then, we need to say ``morphisms are things that obey these properties.''
+
+The most important thing that functions give us is function composition. If I have a function $f : A \to B$, and another function $g : B \to C$, I can start by taking $f$ and then take $g$, and that will give me another function, called $g\circ f$.
+
+Morphisms will be the same. If we have a morphism $f : A \to B$, and another morphism $g : B \to C$, then we want there to exist a way to ``compose'' these morphisms into a new morphism $g\circ f : A \to C$. So we will demand that such a composition exists.
+
+We will also demand that this composition be associative. That is, $h\circ (g\circ f)=(h\circ g)\circ f$. This is a very reasonable request to make, as most things in math are associative.
+
+We have one more request to make. One of the things we considered earlier is that functions can have \emph{inverses}; meaning two functions $g,f$ can compose to the identity function. We want morphisms to also have inverses, for reasons that will become clear later. However, for morphisms to have inverses (some of the time), we first need there to be an identity morphism. So we will demand that for every object $A\in \Obj(\mathcal{C} ) $, there will exist an identity morphism $1_A$ (also denoted $\mathrm{id} _A$), such that $f\circ 1_A=f$ and $1_A\circ g=g$ for all morphisms $f : A \to Z$ and $g : Z \to A$. These requests lead us to the definition of a category.
+
+\begin{definition}\label{dfn:2}
+	A \emph{category} $\mathcal{C} $ consists of two different things:
+	\begin{enumerate}
+		\item A class $\Obj(\mathcal{C} ) $ of objects;
+		\item For any two objects $A,B\in\Obj(\mathcal{C} ) $, a class $\Hom_{\mathcal{C} }(A, B) $ of morphisms. 
+	\end{enumerate}
+	These collections must satisfy the following axioms.
+	\begin{enumerate}
+		\item For any two morphisms $f : A \to B$, $g : B \to C$, there is a way to compose the morphisms into a new morphism $g\circ f : A \to C$;
+		\item This morphism composition operation is associative;
+		\item Every object $A\in \Obj(\mathcal{C} ) $ has an identity morphism $1_{A} $, which is an identity with respect to morphism composition:
+			\[
+				1_A \circ f=f,\qquad g\circ 1_A=g
+			.\]
+	\end{enumerate}
+\end{definition}
+
+\subsection{Examples}
+
+The key questions that I'm sure at least some of you have after this definition is ``what exactly are objects'', and more importantly,
+\begin{displayquote}
+	What exactly are morphisms?
+\end{displayquote}
+You will not like the answer. Category theory offers us powerful tools for uniting mathematics across diciplines, and for viewing mathematics in a new, modern, and powerful light. However, this doesn't come without a price. We will see soon exactly what that price is, but for now know that such powerful abstraction does not come for free. We will see this in our examples, which will show us what morphisms and objects can be.
+
+The first example I want to give is the category $\Set $. The objects in $\Set $ are sets, and the morphisms are functions. This is the canonical example of a category, since we literally built categories as an abstraction of the idea of sets and functions, so we better hope that $\Set $ satisfies the category axioms. And indeed, function composition and identity functions exist, so it does.
+
+For the more advanced attendees, you will be unsuprised to learn that the following are also categories:
+\begin{itemize}
+	\item $\Grp $ - objects are groups and morphisms are group homomorphisms;
+	\item $\Ring $ - objects are rings and morphisms are ring homomorphisms;
+	\item $\Fld$ - objects are fields and morphsisms are unity-preserving ring homomorphisms;
+	\item $\Top $ - objects are topological spaces and morphisms are continuous functions;
+\end{itemize}
+and so on. Most important objects of study in math form a category in some way or another.
+
+I want to focus on two more interesting examples. The first one will be a little bit difficult to parse, but will be important when we consider universal properties. The second will illuminate just how general our definition of a morphism is.
+
+For our first example, let $\mathcal{C} $ be a category, and let $A\in \Obj(\mathcal{C} ) $ be some object. We will define a new category, which I will denote $\mathcal{C} /A$. The objects in this category will consist of any morphism $f : X \to A$, where $X$ is any object of $\mathcal{C} $. Morphisms in $\mathcal{C} /A$ will look as follows. Consider two morphisms $f_1 : X_1 \to A$ and $f_2: X_2 \to A$. We can represent this with a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_1\ar[dr, "f_1"']&&X_2\ar[dl, "f_2"]\\
+				 &A
+\end{tikzcd}\]
+A morphism $f_1\to f_2$ in this category looks like a morphism $g : X_1 \to X_2$ in $\mathcal{C} $ such that the diagram
+\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X_1\ar[dr, "f_1"']\ar[rr, "g"]&&X_2\ar[dl, "f_2"]\\
+					      &A
+	\end{tikzcd}\]
+	\caption{Morphisms in $\mathcal{C} /A$}\label{dgm:3}
+\end{diagram}\\
+commutes. This means that
+\[
+	f_1=f_2\circ g
+.\]
+I unfortunately do not have time to get into the precise proof that this satisfies the category axioms, so I will simply highlight what the identity morphism and morphism composition look like, and leave the rest to the enterprising reader. Note that if $f : X \to A$ is a morphism in $\mathcal{C} $, then the identity morphism
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\ar[rr, "1_X"]\ar[dr, "f"']&&X\ar[dl, "f"]\\
+				    &A
+\end{tikzcd}\]
+is a morphism in $\mathcal{C} /A$ as well. This will form the identity morphism $1_f$ in $\mathcal{C} /A$. Morphism can also be described as follows: suppose $X_1,X_2,X_3$ are objects in $\mathcal{C} $, and $f_1,f_2,f_3$ are morphisms $f_i : X_i \to A$. Suppose that $g : f_1 \to f_2$ and $h : f_2 \to f_3$ are morphisms in $\mathcal{C} /A$. That is, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_1\ar[r, "g"]\ar[dr, "f_1"']&X_2\ar[r, "h"]\ar[d, "f_2"]&X_3\ar[dl, "f_3"]\\
+				     &A
+\end{tikzcd}\]
+commutes. Then since $\mathcal{C} $ is a category, we can compose $h$ and $g$ to obtain a new morphism $h\circ g$, and then we have the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_1\ar[rr, "h\circ g"]\ar[dr, "f_1"']&&X_3\ar[dl, "f_3"]\\
+					     &A
+\end{tikzcd}\]
+We thus have $h\circ g : f_1 \to f_3$. This type of category is called a slice category, and it is a special case of a more general construction known as a comma category.
+
+The final example I want to give is going to illuminate something disturbing. Let's try a more grounded example. Let $\Obj(\mathcal{C} ) $ be the integers $\mathbb{Z} $. Define morphisms as follows: if $a,b\in\mathbb{Z} $ and $a\leq b$, then we say there is exactly one morphism $a\to b$. If $a>b$, then there \emph{is no morphism} $a\to b$. This means that the morphisms in this category are simply the relation $\leq $. This is a very abstract idea, and I will unravel exactly what it implies after we show that it is a category.
+
+First, note that there is precisely one morphism $a\to a$, because $a\leq a$. Also note that if $a\leq b$ and $b\leq c$, then clearly $a\leq c$, so we get morphism composition in this way. Finally, note that $a\leq a\leq b$ can be viewed as the morphisms $a\to a\to b$. That is, the morphism $a\leq b$ composed with the identity. Composing these gives us a morphism $a\to b$. However, there is only one morphism $a\to b$, meaning that composing with the identity has given us back our original morphism, and thus it is in fact an identity.
+
+This example illuminates something disturbing. In set theory, functions acted on elements of our sets. We could understand how a function worked by analyzing how it acted on the elements of our set. However, what we have described here is not a function, and it does not go between sets. It is a relation between numbers, and yet it forms a category. Morphisms do not act on elements, because all they are is a relation. This leads us to an uncomfortable truth:
+\begin{displayquote}
+	Objects of a category need not have elements, with respect to morphisms.
+\end{displayquote}
+This is something that I personally say, because I think it is more illuminating than what is generally said. The idea is that the objects of your category are allowed to have elements, in fact I can't off-handedly think of a category where this is not true. However, the \emph{morphisms} in your category \emph{do not have to act on these elements}. They don't have to take elements from one object and send them to another. Once we enter more general category theory, we can no longer rely on this seemingly \emph{fundamental} aspect of functions. And this is the scariest and most difficult part of category theory for most people to understand. Morphisms are indeed an \emph{abstraction} of a function, and this means that in general, they are not functions.
+
+This is, in fact, why people say category theory is like taking a bird's eye view to mathematics. Up close, math looks like sets filled with elements, and then functions between the sets look like a lot of little arrows, sending each object to something else. But if we zoom out far enough, we can no longer make out the fine detail. The sets become pointlike objects; as far as we can tell, they don't necessarily have elements. Instead of calling them sets, we call them objects. The functions go from many tiny arrows between elements, to one big arrow between objects. Instead of calling them functions, we call them morphisms. And as far as we are concerned, all they are is a single arrow.
+
+\subsection{Universal Properties, Functors}
+
+The next big question is obvious:
+\begin{displayquote}
+	If morphisms are not functions, and are nothing more than arrows, how do we extract \emph{any} information from them? How do we use them to study objects?
+\end{displayquote}
+Believe it or not, this is where category theory shines. The level of abstraction we go to, although frightening, reveals that math is not so much about the \emph{composition} of objects, but more about the \emph{relationships between them}. To explore what this means properly, we need to start by introducing the notion of intial and terminal objects.
+\begin{definition}\label{dfn:3}
+	We say an object $I$ in a category $\mathcal{C} $ is \emph{initial} if for all $A\in \Obj(\mathcal{C} ) $, there exists a unique morphism $I\to A$. That is, the set $\Hom_{\mathcal{C} }(I, A) $ has one element. Similarly, we say an object $F$ is \emph{final} or \emph{terminal} $\Hom_{\mathcal{C} }(A, F) $ has one element for all $A$.
+\end{definition}
+
+For the purposes of this talk, I will use ``terminal'' as an all-encompassing term to mean either initial or final, and will use either initial or final when the specific relation is important. This is nonstandard as far as I am aware, but it's easier to say ``terminal'' than ``initial or final''.
+
+Terminal objects are very important, but to see why, we need to introduce one more definition.
+
+\begin{definition}[Isomorphism]\label{dfn:4}
+	Let $\mathcal{C} $ be a category. A morphism $f : A \to B$ is called an \emph{isomorphism} if it has a two-sided inverse. In other words, there exists some $f^{-1} : B \to A$ such that
+	\[
+		f\circ f^{-1} =1_B,\qquad f^{-1} \circ f=1_A
+	.\]
+	If there is an isomorphism from $A$ to $B$, we say $A$ and $B$ are \emph{isomorphic}, and write $A\cong B$.
+\end{definition}
+
+The way to think about isomorphic objects in a category is that they are ``essentially the same thing'', or at least, the same as far as morphisms are concerned. For example, isomorphisms in $\Set $ are simply bijections, meaning isomorphic sets are sets that have the same size. It may not be clear why these sets are ``essentially the same'', so consider the following two sets:
+\[
+	\left\{ a,b,c \right\} ,\qquad \left\{ 1,2,3 \right\} 
+.\]
+These sets are clearly different, but I can make them into the same thing by swapping $a$ for $1$, $b$ for $2$, and $c$ for $3$. Then the set on the left becomes the same as the one on the right. So essentially they are the same thing, just with a different coat of paint. This means if I want to consider a function $\left\{ a,b,c \right\} \to X$, then that is the same thing as considering a function $\left\{ 1,2,3 \right\} \to X$, but with an intermediate step where I swap the 1, 2, and 3 for $a$, $b$, and $c$. So as far as functions are concerned, isomorphic sets are the same thing.
+
+The true meaning of isomorphism is thus carried by what we choose to define our morphisms as. Because of this, we usually try to choose our definition of morphisms so that morphisms convey meaningful information about the objects we are trying to study. For example, we choose morphisms in the category $\Grp $ to be group homomorphisms because they preserve group structure; this means isomorphisms identify two groups with the exact same group structure. Since the purpose of group theory is to study this very structure, this is clearly a good definition of morphisms in $\Grp $.
+
+And now we can prove an extremely important result.
+\begin{theorem}\label{thm:1}
+	Let $I_1,I_2$ be initial objects in a category $\mathcal{C} $. Then $I_1 \cong I_2$. Similarly, if $F_1,F_2$ are final objects, then $F_1\cong F_2$.
+\end{theorem}
+\begin{proof}
+	Since $I_1$ is initial, there is exactly one morphism going out of it for any object in $\mathcal{C} $. This means there is a unique morphism $f : I_1 \to I_2$. By the same logic, since $I_2$ is initial, there is a unique morphism $g : I_2 \to I_1$. If we compose these, we get that $g\circ f: I_1 \to I_1$ is a morphism. However, since $I_1$ is initial, there must be exactly one morphism $I_1\to I_1$, and by the definition of a category, this must be the identity morphism. Therefore, $g\circ f=1_{I_1} $. By the same logic, $f\circ g=1_{I_2} $, and thus $f,g$ are isomorphisms.
+\end{proof}
+
+I leave the proof for final objects as an exercise, but it is essentially the exact same. The reason terminal objects are so important is because they give rise to \emph{universal properties}, which are ways of characterizing certain constructions up to isomorphism. These are confusing, and are best illustrated with an example.
+
+Let's go back to our cartesian product example. In that example, the set $X\times Y$ satisfied the following property: it had two functions (which we called ``natural projections''): $\pi_X : X\times Y \to X$, and $\pi _Y : X\times Y \to Y$. Let's construct a new category, which I will call $\operatorname{Cone} (X,Y)$. The objects in this category will be sets that satisfy this property; meaning objects will be some set $Z$, together with functions $f : Z \to X$ and $f : Z \to Y$. So objects in this category will look like diagrams
+\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&X\\
+		Z\ar[ur, "f"']\ar[dr, "g"]\\
+		&Y
+	\end{tikzcd}\]
+	\caption{Objects in $\operatorname{Cone} (X,Y)$}\label{dgm:4}
+\end{diagram}\\
+What would morphisms be in this category? In our previous example of the slice category, we wanted diagram \ref{dgm:3} to commute. So let's impose the same idea here. A morphism $(Z_1,f_1,g_1)\to (Z_2,f_2,g_2)$ would be a morphism $\varphi : Z_1 \to Z_2$ in $\operatorname{Cone} (X,Y)$, such that the diagram
+\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&&X\\
+		Z_1\ar[r, "\varphi "]\ar[urr, bend left, "f_1"]\ar[drr, bend right, "g_1"']&Z_2\ar[ur, "f_2"']\ar[dr, "g_2"]\\
+												  &&Y
+	\end{tikzcd}\]
+	\caption{Morphisms in $\operatorname{Cone} (X,Y)$}\label{dgm:5}
+\end{diagram}\\
+commutes.
+
+If we look back at proposition \ref{prp:2}, we showed that the cartesian product $X\times Y$ made the exact same diagram commute. The only difference is that the morphism $\varphi $ in this case was \emph{unique}. This means that for any set, together with two functions, there was a \emph{unique morphism} making the diagram commute. In other words, the product is \emph{final} in this category. This is precisely the definition of a product in general category theory.
+
+\begin{definition}[Product]\label{dfn:5}
+	Let $\mathcal{C} $ be a category, and let $X,Y\in \Obj(\mathcal{C} ) $. The \emph{product} of $X$ and $Y$ is the object $X\times Y$, together with morphisms $\pi_X : X\times Y \to X$ and $\pi _Y : X\times Y \to Y$, called the \emph{natural projections}, such that $(X\times Y,\pi _X,\pi _Y)$ is final in the category discussed above.
+\end{definition}
+
+And this is what we call a universal property. We consider a construction, such as a product, which satisfies some property. Perhaps this property is the existence of two morphisms, perhaps it is something different altogether. We then construct a category consisting of the objects satisfying this property, like we did with $\operatorname{Cone} (X,Y)$ in the catesian product example. Finally, we look for either intitial or terminal objects in this category. If they exist, we say these objects are \emph{universal} with respect to the property we cared about.
+
+Many important constructions in math, such as products, quotients, kernels, and others, satisfy a useful universal property. In fact we usually \emph{define} constructions based on their universal property, like I have done with products here. However, two different objects are allowed to satisfy the same universal property, which means defining constructions in this way does not guarentee the \emph{uniqueness} of that specific construction.
+
+But recall earlier that we don't really care about when two objects or morphisms are \emph{equal} to each other, we will only really care about if they are \emph{isomorphic}. And all initial and final objects are indeed isomorphic to each other, as we showed. Hence, we say that definitions based on universal properties are \emph{well-defined up to isomorphism}, and in category theory that's usually enough. The takeaway of this is as follows:
+\begin{displayquote}
+	Universal properties are \emph{blueprints} for specific constructions. Any two objects that satisfy a universal property have to behave the same way
+\end{displayquote}
+
+And this is what sets category theory apart from set theory. We don't make our definitions based on the \emph{content} of a set, we make them based on their relationships with morphisms. We don't care about when two sets are the \emph{same}, we care about when they are \emph{isomorphic}. We don't study an object by considering it's internal structure, we study it by considering it's relationships with morphisms. And we don't study morphisms by the way they act on elements, but instead we study how they interact with \emph{other morphisms}. In this way, category theory is all about the relationships of objects and morphisms with other objects and morphisms, and not so much about their internal content.
+
+I want to close this section out with a very brief discussion of functors, before wrapping this all up. One more natural question is how to study categories themselves? Given our discussion of how category theory is all about morphisms, this question becomes ``if we have two categories $\mathcal{C} $ and $\mathcal{D} $, how do I define a morphism $\mathcal{C} \to \mathcal{D} $?'' The answer is functors. Recall that categories have two different types of information: objects and morphisms. We want our functors to know about both types of information, and recall that we also want them to be \emph{meaningful}. We want the existence of a functor to be interesting, and to hint at related structures. This motivates the following definition.
+
+\begin{definition}[Functor]\label{dfn:6}
+	A functor $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ is a ``function'' that takes every object $A\in \Obj(\mathcal{C} ) $, and sends it to a corresponding object $\mathcal{F} (A)\in \mathcal{D} $. A functor also does the following: for all objects $A,B\in \Obj(\mathcal{C} ) $, there is a ``function'' which is usually just denoted $\mathcal{F} $, which goes
+	\[
+		\mathcal{F} : \Hom_{\mathcal{C} }(A, B)  \to \Hom_{\mathcal{D} }(\mathcal{F} (A), \mathcal{F} (B)) 
+	.\]
+	Finally, these ``functions'' must preserve morphism composition. That is, if $\alpha : A \to B$ and $\beta : B \to C$ are morphisms, then $\mathcal{F} (\beta )\circ \mathcal{F} (\alpha )=\mathcal{F} (\beta \circ \alpha )$.
+\end{definition}
+
+Functors are a way of transmitting information between categories, and are a very natural and very important next generalization. In the final section on further topics, I will discuss functors further.
+
+
+
+\section{Advanced Topics}
+
+\subsection{Categories, ZFC, and Russell's Paradox}
+
+I want to run it back to some terminology I used previously. I defined $\Obj(\mathcal{C} ) $ and $\Hom_{\mathcal{C} }(A, B) $ as \emph{classes}. I use this word instead of the word ``set'' for good reason. For those familiar with the axiomatical approach to set theory, you will know that there cannot be a ``set of all sets''. It's just too big. Allowing sets to be this big leads to paradoxes such as the famous Russell's Paradox.
+
+Russell's Paradox goes as such: consider the set $X\coloneqq \left\{ x\mid x\notin x \right\} $. That is, the set of all sets that don't contain themselves. Here's the question: does $X$ contain itself? If it does, then $X\in X$, and thus $X$ doesn't satisfy the property $X\notin X$. Therefore, $X\notin X$. So if $X\in X$, then $X\notin X$. Moreover, if $X\notin X$, then clearly $X$ satisfies the property $X\notin X$, and thus $X\in X$. It doesn't make any sense.
+
+Stuff like this happens when you allow sets to grow too large, which is why modern set theory restricts the size of sets with the \emph{restricted axiom of comprehension}. So how do we construct \emph{categories} of this size?
+
+One popular approach extends the axioms of ZFC to include the existence of a Universe, or a Grothendieck Universe. Normal ZFC defines the existence of any set that can be constructed within the axioms. We can extend the axioms of ZFC by letting there exist a universe $\mathcal{U} $, satisfying a couple basic properties:
+\begin{itemize}
+	\item If $x\in y\in \mathcal{U} $, then $x\in \mathcal{U} $;
+	\item If $x,y\in \mathcal{U} $, then $\left\{ x,y \right\} \in \mathcal{U} $;
+	\item If $x\in \mathcal{U} $, then $\mathscr{P} (x)\in \mathcal{U} $ for $\mathscr{P} $ the power set;
+	\item If $\left\{ x_\alpha  \right\}_{\alpha \in A} $ is a collection of sets in $\mathcal{U} $ and $A\in \mathcal{U} $, then $\bigcup_{\alpha \in A} x_\alpha \in \mathcal{U} $.
+\end{itemize}
+We can axiomatize the existence of a universe $\mathcal{U} $ in addition to ZFC, in such a way that all sets $x$ guarenteed by ZFC become elements of $\mathcal{U} $. We can then introduce some additional axioms that prevent contradictions. For example, if $\mathcal{U} \in \mathcal{U} $, then this would contradict the axiom of regularity.
+
+We then define a class as any subset $X\subseteq \mathcal{U} $. It's easy to show that any set is also a class, but we also have the existence of so called ``proper classes''; classes that are not sets. For example, clearly $\mathcal{U} \subseteq \mathcal{U} $, but we just said $\mathcal{U} $ does not contain itself, and thus it wouldn't be a set in the usual sense of ZFC. We instead call it a proper class.
+
+The class of objects in most useful categories is a proper class; for example, $\Obj(\Set ) =\mathcal{U} $ in our formulation. The class of objects in the categories $\Grp $, $\Top $, $\Ring $, $\Fld$, $k$-$\mathcal{V}\mathrm{ect} $, and others form proper classes as well. We call a category who's objects form a proper class a \emph{large category}. A category who's objects are a set is called a \emph{small category}. These size restrictions allow us to work comfortably with many important large categories.
+
+In the same way, the class $\Hom_{\mathcal{C} }(A, B) $ may indeed be a proper class. However, in most interesting categories, such as $\Set $, the class $\Hom_{\mathcal{C} }(A, B) $ is in fact a \emph{set}. When every hom-class forms a set, we call a category \emph{locally small}, and we call the hom-classes \emph{hom-sets}.
+
+There are other approaches to axiomatizing category theory, and even for the approach I have introduced it is possible to go much further indepth. I have further reading at the end for anyone interested in these foundational principles.
+
+\subsection{The Yoneda Lemma}
+
+Now we will return to our discussion of functors. In our initial definition of a functor, we said that if $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ is a functor, $A,B\in \Obj(\mathcal{C} ) $, and $f : A \to B$ is a morphism, then there is a morphism $\mathcal{F} (f): \mathcal{F} (A) \to \mathcal{F} (B)$ in $\mathcal{D} $. We call such a functor a \emph{covariant functor}.
+
+However, there is another type of functor. A \emph{contravariant} functor $\mathcal{G} : \mathcal{C}  \to \mathcal{D} $ is a functor that satisfies all the usual properties of a functor, except for the following fact: if $f : A \to B$ is a morphism in $\mathcal{C} $, then $\mathcal{G} (f)$ is a morphism $\mathcal{G} (B)\to \mathcal{G} (A)$. In essence, a contravariant functor ``flips all the arrows'', as illustrated in the diagram:
+\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\ar[r, "f"{name=f}]&B\\
+		\mathcal{G} (A)&\mathcal{G} (B)\ar[l, "\mathcal{G} (f)"{name=gf}]
+		\arrow[from=f, to=gf, "\mathcal{G} ", shorten=10pt]
+	\end{tikzcd}\]
+	\caption{Contravariant Functor}\label{dgm:6}
+\end{diagram}
+
+Another name for a contravariant functor $\mathcal{C} \to \mathcal{D} $ is a \emph{presheaf} of $\mathcal{D} $ on $\mathcal{C} $. For those curious, this can be reconsiled with the usual topological notion of a presheaf by taking the category $\mathcal{T} $ to consist of all open sets in a given topology, where the hom-sets look as follows:
+\[
+	\Hom_{\mathcal{T} }(U, V) =
+	\begin{cases}
+		\left\{ * \right\} ,&U\subseteq V\\
+		\varnothing ,&U\not\subseteq V
+	\end{cases}
+.\]
+That is, there is a single morphism if $U\subseteq V$, and none otherwise. This is similar to our previous consideration of $\mathbb{Z} $, where morphisms were the relation $\leq $; we have just generalized our definition to the poset of open sets under the inclusion relation. I leave it as an exercise to show that this definition of $\mathcal{T} $ and this definition of a presheaf as a contravariant functor $\mathcal{T} \to \mathcal{C} $ recovers the usual notion of a presheaf, especially when $\mathcal{C} =\Set $ or $\mathcal{C} =\mathcal{A} \mathrm{b} $.
+
+One classical functor is Hom itself. Let $\mathcal{C} $ be a locally small category, so we can consider hom-set, and let $\Hom_{\mathcal{C} }(A, -) : \mathcal{C}  \to \Set $ be the functor $X\mapsto \Hom_{\mathcal{C} }(A, X) $. The action on morphisms is defined as follows: if $f : X \to Y$ is a morphism in $\mathcal{C} $, then we can extend it to a \emph{function} $\Hom_{\mathcal{C} }(A, X) \to \Hom_{\mathcal{C} }(A, Y) $ by mapping
+\[
+	\varphi \mapsto f\circ \varphi ,
+\]
+for all $\varphi \in \Hom_{\mathcal{C} }(A, X) $. Since $\varphi : X \to Y$, the composition is a morphism $A\to Y$, and thus $f\circ \varphi \in \Hom_{\mathcal{C} }(A, Y) $.
+
+Now let $\mathcal{C} $ and $\mathcal{D} $ be categories. We can construct a ``functor category'' $\mathcal{D} ^{\mathcal{C} } $. The objects are functors $\mathcal{C} \to \mathcal{D} $, but what are the morphisms in this category? We call them \emph{natural transformations}.
+\begin{definition}[Natural Transformation]\label{dfn:7}
+	Let $\mathcal{F} ,\mathcal{G} : \mathcal{C}  \to \mathcal{D} $ be functors. A natural transformation $\eta $ from $\mathcal{F} $ to $\mathcal{G} $, written $\eta : \mathcal{F}  \Rightarrow \mathcal{G} $, is a collection of morphisms in $\mathcal{D} $ such that
+	\begin{enumerate}
+		\item For all $X\in \Obj(\mathcal{C} ) $, there exists a morphism $\eta _X : \mathcal{F} (X) \to \mathcal{G} (X)$ in $\mathcal{D} $;
+		\item For any morphism $f : X \to Y$ in $\mathcal{C} $, these morphisms $\eta $ must satisfy the following rule:
+			\[
+				\eta_Y \circ \mathcal{F} (f)=\mathcal{G} (f)\circ \eta_X
+			.\]
+			In other words, the diagram
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				\mathcal{F} (X)\ar[r, "\mathcal{F} (f)"]\ar[d, "\eta_X"']&\mathcal{F} (Y)\ar[d, "\eta _Y"]\\
+				\mathcal{G} (X)\ar[r, "\mathcal{G} (f)"']&\mathcal{G} (Y)
+			\end{tikzcd}\]
+			commutes. The set of natural transformations $\mathcal{F}  \Rightarrow \mathcal{G} $ is sometimes denoteed $\operatorname{Nat}(\mathcal{F} ,\mathcal{G} )$.
+	\end{enumerate}
+\end{definition}
+
+There is a fascinating result in category theory known as the Yoneda Lemma, or the Yoneda Embedding, which states the following.
+
+\begin{lemma}[Yoneda]\label{lma:1}
+	Let $\mathcal{C} $ be a locally small category, and let $\mathcal{F} : \mathcal{C}  \to \Set $ be any covariant functor. Then for all objects in $C$, there is a natural isomorphism
+	\[
+		\operatorname{Nat} \left( \Hom_{\mathcal{C} }(C, -) ,\mathcal{F}  \right) \cong \mathcal{F} (C)
+	.\]
+	Similarly, if $\mathcal{G} : \mathcal{C}  \to \Set $ is any contravariant functor, then there is a natural isomorphism
+	\[
+		\operatorname{Nat} \left( \Hom_{\mathcal{C} }(-, C) ,\mathcal{G}  \right) \cong \mathcal{G} (C)
+	.\]
+\end{lemma}
+
+The proof of the Yoneda lemma is beyond this presentation, but I would like to unpack what it actually says. First of all, note that for any object $C\in \Obj(\mathcal{C} ) $, we can define the covariant functor $\Hom_{\mathcal{C} }(C, -) $, and thus we can in fact define a functor $\mathcal{C} \to \Set ^{\mathcal{C} } $ given by mapping
+\[
+	C\mapsto \Hom_{\mathcal{C} }(C, -) 
+.\]
+This means we can take $\mathcal{C} $, and embed it into the functor category from $\mathcal{C} $ to $\Set $. Now the Yoneda lemma tells us the following. Let $C,D\in \Obj(\mathcal{C} ) $, and consider the functor $\Hom_{\mathcal{C} }(C, -) $. Note that if we evaluate this functor at $D$, then we get $\Hom_{\mathcal{C} }(C, D) $. The Yoneda lemma tells us that since $D$ is an object in $\mathcal{C} $, then for any covariant functor $\mathcal{F} : \mathcal{C}  \to \Set $, there is an isomorphism
+\[
+	\operatorname{Nat} \left( \Hom_{\mathcal{C} }(D, -) ,\mathcal{F}  \right) \cong \mathcal{F} (D)
+.\]
+However, $\Hom_{\mathcal{C} }(C, -) $ is a covariant functor $\mathcal{C} \to \Set $, so we can plug that in for $\mathcal{F} $, and obtain the expression
+\[
+	\operatorname{Nat} \left( \Hom_{\mathcal{C} }(D, -) ,\Hom_{\mathcal{C} }(C, -)  \right) \cong \Hom_{\mathcal{C} }(C, D) 
+.\]
+This means that if we embed $C$ and $D$ into the functor category by sending them to their hom-functors, then the natural transformations between them are the \emph{exact same} as their morphisms in $\mathcal{C} $, but with the direction reversed. If we use the contravariant flavor of the lemma, we come up with the more direct result
+\[
+	\operatorname{Nat} \left( \Hom_{\mathcal{C} }(-, C) ,\Hom_{\mathcal{C} }(-, D)  \right) \cong \Hom_{\mathcal{C} }(C, D) 
+.\]
+
+This means that we can take our category, and embed it into the functor category $\Set ^{\mathcal{C} } $, and not only does it preserve all objects, but in fact it \emph{preserves all morphisms and structure}. We call such an embedding \emph{fully faithful}. The true message of the Yoneda lemma, however, is as follows:
+\begin{displayquote}
+	Objects can be fully represented by how they interact with everything else.
+\end{displayquote}
+Even though this is a basic result in category theory, it's philosophical implications summarize the subject area so well in my opinion.
+
+\subsection{Duality}
+
+One of the most important and profound concepts in category theory is the notion of duality. The idea of duality is as follows.
+
+\begin{definition}[Opposite Category]\label{dfn:9}
+	Let $\mathcal{C} $ be a category. Define $\mathcal{C} ^{\mathrm{op} } $ as the category where $\Obj(\mathcal{C} ^{\mathrm{op} } ) =\Obj(\mathcal{C} ) $, and for any $A,B\in \Obj(\mathcal{C} ^{\mathrm{op} } ) $,
+	\[
+		\Hom_{\mathcal{C} ^{\mathrm{op} } }(A, B) =\Hom_{\mathcal{C} }(B, A) 
+	.\]
+\end{definition}
+
+That is, the opposite category ``flips'' all the arrows in $\mathcal{C} $. If $f : A \to B$ is a morphism in $\mathcal{C} $, then $f : B \to A$ is the corresponding morphism in $\mathcal{C} ^{\mathrm{op} } $. The concept of duality can then be thought of as ``what happens if we flip all of the arrows?''
+
+For example, recall that the product of two objects satisfies the universal property
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&Z\ar[dr, "g"]\ar[dl, "f"']\ar[d, dashed]\\
+	X&X\times Y\ar[l, "\pi _X"]\ar[r, "\pi _Y"']&Y
+\end{tikzcd}\]
+What happens if we flip all the arrows? We then get a new universal property, for a brand new object, which we call $A\amalg B$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&Z\\
+	X\ar[ur, "f"]\ar[r]&X\amalg Y\ar[u, dashed]&Y\ar[l]\ar[ul]
+\end{tikzcd}\]
+This is called a \emph{coproduct}. Every universal construction has a dual, obtained by flipping all of the arrows, and that dual satisfies it's own universal property. We usually append the prefix ``co'' to the name of the construction to indicate that it is a dual. For example, kernel vs \emph{co}kernel, image vs \emph{co}image, etc. A product is then a coproduct in the opposite category, and a coproduct is a product in the opposite category, and so on.
+
+One important classification of morphisms which I have declined to introduce until now fits well with the duality principle. Recall that in proposition \ref{prp:1}, we showed that injective functions are precisely the functions $f : A \to B$ such that if $\alpha ,\beta : Z \to A$ and $f\circ \alpha =f\circ \beta $, then $\alpha =\beta $. This is the definition we use to generalize the notion of injectivity to arbitrary categories.
+
+\begin{definition}[Monomorphism]\label{dfn:9}
+	A \emph{monomorphism} $f : A \to B$ is a morphism such that if $\alpha ,\beta : Z \to A$ are morphisms such that $f\circ \alpha =f\circ \beta $, then $\alpha =\beta $.
+\end{definition}
+
+Keeping with the theme of duality, we would expect that there be a dual notion of these \emph{monomorphisms}, and indeed such a notion exists. Recall the other part of proposition \ref{prp:1}: surjections are precisely the functions $f : A \to B$ such that if $\alpha ,\beta : B \to Z$ and $\alpha \circ f=\beta \circ f$, then $\alpha =\beta $. This generalizes categorically as well.
+
+\begin{definition}[Epimorphism]\label{dfn:10}
+	An \emph{epimorphism} $f : A \to B$ is a morphism such that if $\alpha ,\beta : B \to Z$ are morphisms such that $\alpha \circ f=\beta \circ f$, then $\alpha =\beta $.
+\end{definition}
+
+We can realize these as dual constructions by looking at them diagramatically.\newpage
+\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		Z\ar[r, "\alpha ", shift left]\ar[r, "\beta "', shift right]&A\ar[r, "f"]&B
+	\end{tikzcd}\]
+	\caption{Monomorphism}\label{dgm:7}
+\end{diagram}
+The idea of a monomorphism is that if such a diagram commutes, then necessarily $\alpha =\beta $. If we \emph{flip} all the arrows, we obtain the diagram
+\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		Z&A\ar[l, shift left, "\beta "]\ar[l, shift right, "\alpha "']&B\ar[l, "f"]
+	\end{tikzcd}\]
+	\caption{Epimorphism}\label{dgm:8}
+\end{diagram}\\
+Applying the same idea to this diagram gives an epimorphism; if the diagram commutes, then $\alpha =\beta $ necessarily. This means that monomorphisms and epimorphisms are dual constructions. Monomorphisms and epimorphisms are important in many areas of mathematics, just like injective and surjective functions, and I regret not spending more time on them in this talk.
+
+\subsection{Adjunction}
+
+No introduction to category theory would be complete without mention of adjunction. I will use vector spaces extensively as an example, since this is one of the first structures a mathematician is introduced to, and thus is likely to be understood by the most people here. We will consider real vector spaces, although for those of you who are familiar with algebra, this generalizes to arbitrary fields, and in fact generalizes to modules over an arbitrary ring.
+
+Part of the information of a vector space consists of a set $V$ of \emph{vectors}. The fact that this is a set means we can contemplate a functor $U :\Vect{\mathbb{R}} \to \Set $, where $\Vect{\mathbb{R} } $ is the category of real vector spaces, with morphisms given by linear transformations. The way we define this is by taking a vector space $V$ and sending it to itself, but viewed as a set instead of as a vector space. We can define action on morphisms similarly; we map a linear transformation to itself, but view it as a function instead of as a linear transformation. The functor $U $ ``forgets'' the vector space structure of $V$, so we call it a \emph{forgetful functor}.
+
+We can now define a second type of functor $F : \Set  \to \Vect{\mathbb{R} } $. This functor will be the opposite of $U$ in a sense; it will take a set, and give it the most general possible vector space structure. Here's how we construct it. Given a set $X$, we define the vector space $F(X)$ as the vector space who's basis is $X$,  and who's elements are every possible linear combination in $X$. We call this the free vector space on $X$, and we call $F$ the free functor.
+
+An interesting aside for those of you who know some algebra. You can construct a free functor on modules as well, and in fact we \emph{define} the basis of a module $M$ (or vector space) to be any subset $X\subseteq M$ such that $F(X)\cong M$. In this way, the only modules with bases are free modules, and since all vector spaces have bases, it follows that all vector spaces are free.
+
+I've hinted that there is a connection here between the forgetful functor and the free functor; in fact this relationship turns out to be \emph{natural}. We call it an adjunction relation.
+
+\begin{definition}[Adjunction]\label{dfn:12}
+	Let $\mathcal{A} $ and $\mathcal{X} $ be categories. An adjunction from $\mathcal{X} $ to $\mathcal{A} $ is a pair of functors $\mathcal{F} : \mathcal{X}  \to \mathcal{A} $ and $\mathcal{G} : \mathcal{A}  \to \mathcal{X} $, such that there exist natural isomorphisms of sets
+	\[
+		\Hom_{\mathcal{A} }(\mathcal{F} (X), A) \cong \Hom_{\mathcal{X} }(X, \mathcal{G} (A)) 
+	\]
+	for all $X\in \Obj(\mathcal{X} ) $ and $A\in \Obj(\mathcal{A} ) $. We say $\mathcal{F} $ is left-adjoint to $\mathcal{G} $, and $\mathcal{G} $ is right-adjoint to $\mathcal{F} $, and write $\mathcal{F} \dashv \mathcal{G} $.
+\end{definition}
+
+The fact that these isomorphisms of sets are \emph{natural} means that they are induced by a \emph{natural transformation}. In fact, an adjunction gives rise to \emph{two} important natural transformations, the unit $\eta $ and the counit $\varepsilon $.
+
+The unit $\eta $ is a natural transformation $ 1_{\mathcal{X} }  \Rightarrow \mathcal{G} \circ \mathcal{F} $, where $1_{\mathcal{X} } $ is the identity functor on $\mathcal{X} $. This means that for every $X\in \Obj(\mathcal{X} ) $, there is a morphism $\eta_X : X \to \mathcal{G} (\mathcal{F} (X))$ in such a way that the relevant diagram commutes.
+
+The counit $\varepsilon $ is the dual notion of the unit; it's a natural transformation $ \mathcal{F} \circ \mathcal{G}  \Rightarrow 1_{\mathcal{A} } $. These natural transformations are not arbitrarily chosen; instead they have to satisfy the \emph{triangle identities}:
+\[
+	\varepsilon_{\mathcal{F} (X)} \circ \mathcal{F} (\eta_X)=1_{\mathcal{F} (X)} ,\qquad \mathcal{G} (\varepsilon _A)\circ \eta_{\mathcal{G} (A)} =1_{\mathcal{G} (A)} 
+\]
+for all $X \in \mathcal{X} $ and $a\in \mathcal{A} $. That is, the diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{G} \ar[r, "\eta \mathcal{G} "']\ar[rr, bend left, "1_{\mathcal{G} } "]&\mathcal{G} \circ \mathcal{F} \circ \mathcal{G} \ar[r, "\mathcal{G} \varepsilon "']&\mathcal{G} \\
+	\mathcal{F} \ar[r, "\mathcal{F} \eta "']\ar[rr, bend left, "1_{\mathcal{F} } "]&\mathcal{F}\circ  \mathcal{G}\circ  \mathcal{F} \ar[r, "\varepsilon \mathcal{F}  "']&\mathcal{F} 
+\end{tikzcd}\]
+commute. In this diagram, $\eta \mathcal{G} $ denotes the component of $\eta $ at some arbitrary $\mathcal{G} (A)$, and $\mathcal{G} \varepsilon $ denotes $\mathcal{G} $ applied to the component of $\varepsilon $ at the same arbitrary $A$. The same notation holds for $\mathcal{F} $.
+
+Adjunction is an advanced topic, but it is of fundamental importance to the theory of categories. At the beginning of this section, I considered the free functor $F : \Set  \to \Vect{\mathbb{R} } $, and the forgetful functor $U : \Vect{\mathbb{R} }  \to \Set $. These vectors are in fact adjunct, but this holds more generally than for just vector spaces. In most cases, if you have a free functor and a forgetful functor, they are adjoint, and more precisely if you have adjoint functors then one can be viewed as a free functor, and one can be seen as forgetful.
+
+Every adjunction also gives rise to a monad, which is an object central to the development of category theory, although it is beyond the scope of this presentation. There are a number of other important facts about adjoint functors that can be shown. A famous quote from MacLane, one of the founders of category theory, is ``adjoint functors arise everywhere''.
+
+\subsection{Higher Category Theory}
+This final concept is by far the most advanced that I'm going to include, and is completely out of place in an introductory talk. However, for those like me who appreciate abstract nonsense, this may peak your interest. To approach it, we first need to consider the category $\Cat$.
+
+Let $\mathcal{C} $, $\mathcal{D} $ be categories. Recall in the section on the Yoneda lemma, we were able to define a functor category $\mathcal{D} ^{\mathcal{C} } $, where functors were objects, and \emph{natural transformations} were morphisms.
+
+As we discussed in the section on ZFC formalism, when we let sets get too big, stuff breaks. For this reason, there is no ``set of all sets.'' The same is true for categories. There is no ``category of all categories'', so we instead go for the next best thing. The category $\Cat$ is defined as the category of all \emph{small categories}. A small category is a category $\mathcal{C} $ where $\Obj(\mathcal{C} ) $ is a set, not a proper class.
+
+However, there is a very natural realization we can make at this point. In this category, our objects are categories and our morphisms are functors. However, we have also found a way to create morphisms \emph{between functors}, using natural transformations. The natural question is then to ask ``what if we include natural transformations in $\Cat$?'' We would then have three types of information:
+\begin{itemize}
+	\item Objects (categories);
+	\item Morphisms (functors), which we call ``1-morphisms'';
+	\item Morphisms of morphisms (natural transformations), which we call ``2-morphisms''.
+\end{itemize}
+A category consisting of objects, 1-morphisms, and 2-morphisms is called a 2-category. It is then natural to ask ``can we generalize this? Can we consider 3-morphisms, and 4-morphisms, and $n$-morphisms?'' To do this well, we first need to more precisely define a 2-category. The most precise way of doing this will be to consider ``enriched categories'', but this is complex and I will introduce it at the end purely for further motivation.
+
+\begin{definition}[(strict) 2-Category]\label{dfn:8}
+	A 2-category $\mathcal{C} $ consists of three types of information:
+	\begin{itemize}
+		\item A class $\Obj(\mathcal{C} ) $ of objects;
+		\item For any two objects $A,B\in \Obj(\mathcal{C} ) $, a class $\Hom_{\mathcal{C} }(A, B) $ of 1-morphisms $A\to B$;
+		\item For any two 1-morphisms $f,g\in \Hom_{\mathcal{C} }(A, B) $, a class $\Hom_{\mathcal{C} }(f, g) $ of 2-morphisms $f \Rightarrow g$.
+	\end{itemize}
+	These collections need to satisfy the following axioms.
+	\begin{enumerate}
+		\item There is a composition operation $\circ $ on 1-morphisms which is associative;
+		\item For all objects $A\in \Obj(\mathcal{C} ) $, there is an identity 1-morphism $1_A$ which is an identity with respect to 1-morphism composition;
+		\item For all morphisms $f : A \to B$, there is an identity 2-morphism $1_f$;
+		\item There is a way to compose 2-morphisms; meaning if $\mu : f \Rightarrow g$ and $\nu : g \Rightarrow h$ are 2-morphisms, then there exists a 2-morphism $\nu \circ \mu : f \Rightarrow h$. This is summarized by the diagram
+			\begin{diagram}[ht]
+				\[\begin{tikzcd}[column sep=8em]
+    				A
+     				\arrow[r, bend left=65, "f"{name=F}]
+     				\arrow[r, "g"{inner sep=0,fill=white,anchor=center,name=G}]
+     				\arrow[r, bend right=65, "h"{name=H, swap}]
+     				\arrow[from=F.south-|G,to=G,Rightarrow,shorten=5pt,"\nu "] 
+     				\arrow[from=G,to=H.north-|G,Rightarrow,shorten=5pt,"\mu "] &
+   				B.
+				\end{tikzcd}\]
+				\caption{Vertical Composition}\label{dgm:9}
+			\end{diagram}\\
+			We call this \emph{vertical composition};
+		\item 2-morphism composition is associative and the identity 2-morphism is an identity with respect to composition;
+		\item 1-morphism composition has to satisfy the following condition: if $f_1,g_1: A \to B$ and $f_2,g_2: B \to C$ are 1-morphisms, and $\eta _1 : f_1 \Rightarrow g_1$, $\eta _2 : f_2 \Rightarrow g_2$ are 2-morphisms, then $\eta _2 \circ \eta _1 : f_2 \circ f_1 \to g_2 \circ g_1$ is a 2-morphism. This is summarized by the following diagrams. If
+			\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+				A\ar[r, bend left, "f_1"{name=f1}]\ar[r, bend right, "g_1"'{name=g1}]&B\ar[r, bend left, "f_2"{name=f2}]\ar[r, bend right, "g_2"'{name=g2}]&C
+				\arrow[from=f1, to=g1, shorten=5px, Rightarrow, "\eta _1"]\arrow[from=f2, to=g2, shorten=5px, Rightarrow, "\eta _2"]
+			\end{tikzcd}\]
+			is a diagram in $\mathcal{C} $, then so is\newpage
+			\begin{diagram}[ht]
+			\[\begin{tikzcd}[row sep = 5em, column sep = 7em]
+				A\ar[r, bend left, "f_2\circ f_1"{name=f}]\ar[r, bend right, "g_2\circ g_1"'{name=g}]&C
+				\arrow[from=f, to=g, Rightarrow, shorten=5px, "\eta _2\circ \eta _1"]
+			\end{tikzcd}\]
+			\caption{Horizontal Composition}\label{dgm:10}
+			\end{diagram}
+			We call this \emph{horizontal composition}.
+	\end{enumerate}
+\end{definition}
+
+This is a lot of information. If we are to make sense of this definition, and especially if we are to generalize it to $n$-categories, we need to break it down into something more manageable. I don't have time to get into the details, but there is a more natural way to view this information.
+
+A monoidal category $\mathcal{V} $ is a category that has a ``monoidal product'', also called a ``tensor product'', and denoted $\otimes $. We want it to work as follows:
+\begin{itemize}
+	\item If $A,B\in \Obj(\mathcal{V} ) $, then $A\otimes B\in \Obj(\mathcal{V} ) $;
+	\item If $f : A_1 \to B_1$ and $g : A_2 \to B_2$, then $f\otimes g : A_1\otimes A_2 \to B_1\otimes B_2$;
+	\item There is some unital element $1\in \Obj(\mathcal{V} ) $ which behaves like the identity under tensor.
+\end{itemize}
+There's a bit more machinery; for example we want natural isomorphisms that induce associativity of the operation and unity of 1. However, if we have a monoidal category, then we can ``enrich'' categories over it. A category $\mathcal{C} $ is a $\mathcal{V} $-enriched category if
+\begin{itemize}
+	\item For every pair of objects $A,B\in \Obj(\mathcal{C} ) $, there is an object $\mathcal{V} (A,B)$ in $\mathcal{V} $.
+	\item The collection $\Hom_{\mathcal{C} }(A, B) $ is defined as the collection of all morphisms $\Hom_{\mathcal{V} }(1, \mathcal{V} (A,B)) $ in $\mathcal{V} $;
+	\item This definition satisfies the usual category axioms.
+\end{itemize}
+
+This is very abstract, and it's not immediately clear what is happening. However, I claim that a (strict) 2-category is the same as a category $\mathcal{C} $ enriched over $\Cat$. I leave the details of this definition to the reader. In this manner, we can thus construct a category $2$-$\Cat$, where objects are small (strict) 2-categories, 1-morphisms are functors, and 2-morphisms are natural transformations. We can then define a (strict) 3-category as a category enriched over $2$-$\Cat$, which has 3-morphisms between 2-morphisms, and then a 4-category in the same way, and in general an $n$-category becomes a category enriched over $(n-1)$-$\Cat$.
+
+There are two final comments in this section. First is that what I have defined are strict $n$-categories. However, recall that we don't usually want to ask that two objects or morphisms or categories or whatever be \emph{exactly equal}; instead it is better to ask that they be \emph{isomorphic}. The \emph{horizontal} associativity condition require that the composition of some morphisms be \emph{exactly equal}. In general, we don't always want to do this.
+
+Weak $2$-categories are defined as our usual 2-categories, but where horizontal associativity only holds up to a specific natural isomorphism. Such categories are often called bicategories, or simply 2-categories. This generalizes to weak $n$-categories. These are very important structures, and in general are more important that strict $n$-categories. I introduced strict $n$-categories since they are more intuitive, but weak $n$-categories are usually more interesting.
+
+The final comment is that we can indeed consider $\infty $-categories, where there is an entire tower of $n$-morphisms. There are $n$-morphisms, $(n+1)$-morphisms, $(n+2)$-morphisms, and so on forever. Additionally, I said that in weak $n$-categories, associativity was only required to hold up to a specific isomorphism. $\infty $-categories link together the relationships between these isomorphims at every level of morphism.
+
+
+\section{Further Reading}
+
+There's some natural questions that follow from this section. When we discussed the Yoneda lemma, we showed that every object is representable by the way it interacts with everything else. However, I made a critical assumption: I assumed our category is locally small. What happens if the hom-sets are proper classes?
+
+Another example: I stated that there was a need to reconcile categorical definitions with ZFC, but how exactly do we do this?
+
+Another example: I gave the definition of a $2$-category, and then explained how it can be generalized to $n$-categories and $\infty $-categories. But what are the more precise definitions? And do standard category-theoretical results generalize to them, like the Yoneda lemma?
+
+And probably the best question of them all:
+\begin{displayquote}
+	Does any of this stuff actually have any applications to actual mathematics???
+\end{displayquote}
+
+I guarentee you that this stuff \emph{does} indeed have applications, but to uncover these applications requires more background, and I do not have time to get into all of the details. However, for those interested in learning more, I have a couple recommendations. Many of these texts require at least some knowledge in abstract algebra, since category theory is at it's heart an algebraic topic.
+
+For those interested in textbooks, \href{https://math.mit.edu/~hrm/palestine/maclane-categories.pdf}{\emph{Categories for the Working Mathematician}} by MacLane is a classic. It's a more advanced text and may be difficult to approach without at least a solid foundation in undergraduate level mathematics and a good amount of mathematical maturity, but it's concise, precise, and very well-rounded. There is a free PDF online which I have linked to, but it's not the greatest PDF, and you may be interested in purchasing the book. It's fairly pricy at \$50 for such a short book, however.
+
+A wonderful free resource, which is recommended quite often, is \href{https://math.jhu.edu/~eriehl/context.pdf}{\emph{Category Theory in Context}}, by Riehl. These are free lecture notes covering similar material to MacLane, but I think MacLane may cover slightly more. It's less dense than MacLane in my opinion, and slightly easier to read. It still requires an undergraduate education and some mathematical maturity, however.
+
+Another free resource is \href{https://arxiv.org/pdf/1612.09375}{\emph{Basic Category Theory}} by Leinster. The book covers less material than MacLane and Riehl, and still requires a solid undergraduate level education to seriously read in my opinion. However, it's definitely gentler than MacLane's introduction for those who are less familiar with reading advanced texts. I'm not sure if it's easier or harder than Riehl, but they're both totally free, which means whichever text you choose to read, you can use Leinster and/or Riehl as a reference. Riehl is generally recommended more often, but both get recommedned as far as I can tell.
+
+A final resource which is more on the applied side is \href{https://agorism.dev/book/math/alg/algebra_chapter-0_paolo-aluffi.pdf}{\emph{Algebra: Chapter 0}} by Aluffi, which is very hard to find for free but wow a free version just popped up online you should totally download it!!! Aluffi is definitely an algebra text, not a category theory text, but it is unique in that it presents category theory in a very understandable way, and then uses it to study introductory graduate level algebra. This is a great read before reading a more advanced category theory book, as you will have \emph{some} context for category theory, as well as context for many of the algebraic concepts that appear frequently in other books as examples or points of study. It's a much longer book, but it's a great read.
+\end{document}

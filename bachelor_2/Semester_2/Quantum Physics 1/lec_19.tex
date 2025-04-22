@@ -1,0 +1,80 @@
+\lecture{19}{Tue 08 Apr 2025 13:59}{Scawattering}
+We will start with fixed-target scattering. A beam of particles goes towards some target and then it goes off in some direction. %pew pew
+We try to predict stuff like what angle the particles bounce in. We will simplify it to 1 dimension. Suppose a beam of particles is zooming towards a target. The beam can now either go through the target, or bounce off of it. Our goal is to predict the result: how much goes forward (transmitted across), and how much goes backwards (reflected). This is summarized by the transmission coefficient $T$: the fraction of particles transmitted across, and $R$: the fraction of particles reflected.
+
+Consider a finite potential well $V=V_0$, and consider a hamiltonian $H$. Recall we can shift all energies without modifying the system, so consider $H-V_0\mathbbm{1}$ for some constant $V_0$. This makes the energies at $\pm \infty $ go to 0, which is nice. This makes the potential nonzero in the well however; it becomes $-V_0$. For the region inside the well, we have
+\[
+	\left( \frac{-\hbar ^2}{2m} \frac{\mathrm{d}^2}{\mathrm{d}x^2} -V_0 \right) \psi (x)=E\psi(x)
+.\]
+It follows that
+\[
+	\frac{-\hbar ^2}{2m} \frac{\mathrm{d}^2\psi }{\mathrm{d}x^2} =(E+V_0)\psi (x)
+\]
+\[
+	\frac{\mathrm{d}^2\psi }{\mathrm{d}x^2} =-\frac{2m(E+V_0)}{\hbar ^2} \psi (x)
+.\]
+Setting this equal to $k^2\psi (x)$, the solutions are $\exp (\pm ikx)$.
+
+For the regions outside the well, we have our solutions $k^2 \exp (\pm i\ell x)$, where
+\[
+	\ell^2 =\frac{2mE}{\hbar^2} 
+.\]
+We thus have the solutions
+\[
+	\psi (x)=Ae^{ikx} +Be^{-ikx} ,\qquad x\in(-a,a)
+.\]
+\[
+	\psi (x)=A'e^{i\ell x}+B'e^{-i\ell x}  ,\qquad x>a
+.\]
+\[
+	\psi =A''e^{i\ell x}+B''e^{-i\ell x} ,\qquad x<-a
+.\]
+
+Let's return to our original question. We have electrons being shot at the potential, and they can either be transmitted or reflected. There is a particle gun on the left. % pew pew
+That means particles are all moving in the $+x$ direction. This removes the $B'e^{-i\ell x} $ term for $x>0$, since no particules come from that direction. This is fine since these are complex exponentials, so their magnitude is always 1.
+
+The bigger our $A''$ coefficient is, the more particles we have coming in. The bigger $A'$ is, the more particles we have going out. So we define
+\[
+	T\coloneqq \left| \frac{A'}{A''}  \right| ^2
+.\]
+This is the probability of a particle going through the target, calculated with Born's rule. Similarly, the probability of reflection is
+\[
+	R\coloneqq \left| \frac{B''}{A''}  \right| ^2
+.\]
+This is because $B''$ is the particles traveling back towards the shooter, meaning they've been reflected.
+
+What happens inside the potential well doesn't matter, because our variables are now dependent on $A''$, which we control - its the amount of particles being shot.
+
+We need to show that $T+R=1$, to maintain the fact that these are in fact probabilities.
+
+Intereting aside: this whole class is a nonrelativistic approximation where $c=\infty $ and the number of particles is conserved.
+
+Define the probability current
+\[
+	j(x,t)=\frac{\hbar }{2im} \left( \psi ^*(x,t)\left(\frac{\partial }{\partial x} \psi (x,t)\right)-\left(\frac{\partial }{\partial x} \psi ^*(x,t)\right)\psi (x,t) \right) 
+.\]
+We will show this satisfies a conservation condition
+\[
+	\frac{\partial }{\partial t} \left| \psi (x,t) \right| ^2=\frac{\partial }{\partial x} j(x,t)
+.\]
+To prove this, note that
+\[
+	\frac{\partial }{\partial x} j(x,t)=\frac{\hbar }{2im} \left( \frac{\partial \psi ^*}{\partial x} \frac{\partial \psi }{\partial x} +\psi ^*(x)\frac{\partial ^2\psi }{\partial x^2} -\frac{\partial ^2\psi ^*}{\partial x^2} \psi (x)-\frac{\partial \psi ^*}{\partial x} \frac{\partial \psi }{\partial x}  \right) 
+.\]
+Simplifying, we have
+\[
+	\frac{\partial j}{\partial x} =\frac{\hbar }{2im} \left( \psi ^*(x,t)\frac{\partial ^2\psi }{\partial x^2} -\frac{\partial ^2\psi ^*}{\partial x^2} \psi (x,t) \right) 
+.\]
+The schrodinger equation says
+\[
+	i\hbar \frac{\mathrm{d}}{\mathrm{d}t} \psi (x,t)=-\frac{\hbar ^2}{2m} \frac{\partial ^2\psi }{\partial x^2} 
+.\]
+Some manipulation of this gives
+\[
+	\frac{\partial ^2\psi }{\partial x^2} =\frac{2m}{\hbar ^2} i\hbar \frac{\partial \psi }{\partial t} 
+.\]
+Taking the complex conjugate gives something like
+\[
+	\frac{\partial ^2\psi ^*}{\partial x^2} =\frac{2m}{-i\hbar } \frac{\partial \psi ^*}{\partial t} 
+.\]
+Plugging this into our previous equation, we do some painful simplifications and arrive at our relation. fucking friend removed me on social media as a *joke* and i totally zoned out for the rest of the lecture dealing with that now i have to fucking learn this on my own kms

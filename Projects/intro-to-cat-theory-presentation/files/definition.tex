@@ -1,0 +1,41 @@
+\section{Definition}
+
+\subsection{Viewpoint Shift}
+
+One common theme so far in this talk has been functions. I started off by discussing some properties of functions, and I continued by showing that the Cartesian Product can be characterized pretty much only using functions. I then worked with the first isomorphism theorem and constructions like the cartesian product in vastly different areas of math, all of which heavily utilize \emph{functions}.
+
+Many of you may be wondering why I'm putting so much emphasis on functions, but to that I would respond with ``why not?'' Functions are some of the most important things in mathematics. We spend multiple years in high school studying \emph{functions}. Calculus is nothing more than the study of the derivative and integral of \emph{functions}. When we get to higher level math, we want to study groups and rings and fields and topologies and vector spaces and modules and manifolds and all these different constructions using \emph{functions}.
+
+However, this viewpoint can only take us so far. When we study more advanced objects, or even when we study calculus, we aren't concerned with \emph{all} functions, we only care about differentiable and integrable functions. When we study groups, we are only concerned with group homomorphisms. What we \emph{need} if we are to take this viewpoint seriously is an \emph{abstraction} of the idea of a function.
+
+Abstractions are common in advanced mathematics. We take an important object, figure out all the important properties of that object, then ask ``what happens if we look at \emph{all objects} that satisfy these important properties? Can we find anything new?''
+
+Category theory is this idea applied to mathematics itself. Much of math is taking a type of object, and a type of function, and studying it. Category theory abstracts the very idea of an object and a function.
+
+\subsection{Definition}
+
+So how do we abstract a function? We first need to identify the important properties of a function. I claim the most important thing functions give us is function composition. If you have a function $f : X \to Y$ and $g : Y \to Z$, you can always compose them into a function $g\circ f : X \to Z$. So we want there to be composition. We will also see later that the idea of inverse functions is indeed very important, but for there to be an inverse function, we must first have the identity function. So we also want an identity function to exist. Finally, we will ask that function composition be associative, since that is a very reasonable request to make. These are the three properties we will require our abstraction of functions to have. We call our abstraction of a function a \emph{morphism}. This leads us to the definition of a category.
+
+\begin{definition}[Category]\label{dfn:1}
+	A category $\mathcal{C} $ consists of two types of information:
+	\begin{itemize}
+		\item A class $\Obj(\mathcal{C} ) $ of \emph{objects};
+		\item For any two objects $X$ and $Y$ in $\mathcal{C} $, there is a class $\Hom_{\mathcal{C} }(X, Y) $ of \emph{morphisms}; we say a morphism $f\in \Hom_{\mathcal{C} }(X, Y) $ is \emph{a morphism from $X$ to $Y$}, and write $f : X \to Y$. We call $\Hom_{\mathcal{C} }(X, Y) $ a hom-class.
+	\end{itemize}
+	The objects and morphisms are required to satisfy the following properties:
+	\begin{enumerate}
+		\item For all $f : X \to Y$ and $g : Y \to Z$, we can compose $f$ and $g$ into a morphism $g\circ f : X \to Z$, called the \emph{composite} of $f$ and $g$;
+		\item The operation $\circ $ of morphism composition is associative, meaning $h\circ (g\circ f)=(h\circ g)\circ f$;
+		\item For all objects $X\in \Obj(\mathcal{C} ) $, there is an identity morphism $1_X : X \to X$;
+		\item The identity morphism is an identity with respect to composition, meaning for any $f : Z \to X$ and $g : X \to Z$,
+			\[
+				1_X\circ f=f\qquad \text{and} \qquad g\circ 1_X=g
+			.\]
+	\end{enumerate}
+\end{definition}
+
+It is common to simply write $X\in\mathcal{C} $ to indicate that $X$ is an object of $\mathcal{C} $, rather than writing $X\in \Obj(\mathcal{C} ) $. I will use this convention. It is not uncommon to write $\Hom(X, Y) $, omitting the subscript $\mathcal{C}$ when the category is understood. Another common notation for $\Hom_{\mathcal{C} }(X, Y) $ is $\mathcal{C} (X,Y)$. I will be using the notation $\Hom_{\mathcal{C} }(X, Y) $. Another common notation for identity morphisms is $\mathrm{id} _X$. I will use the slightly less common notation $1_X$ instead.
+
+The reason I use the word ``class'' instead of ``set'' is because we want to be able to discuss the \emph{category of all sets}, or the \emph{category of all groups}, and similar contructions. However, the collection of all sets, for example, is too big to be a set. If we allow it to be a set, we inevitably get horrible contradictions. The same is true for groups. Classes are things that are like sets, but are allowed to grow bigger than a set is. All sets are also classes, but smaller. A class that is too big to be a set is called a proper class. In order to talk about many of the categories we \emph{want} to talk about, we have to allow $\mathcal{C} $ to form a proper class of objects. We call a category whose class of objects is not a set a \emph{large} category. A category whose collection of objects is indeed a set is a \emph{small} category.
+
+Similarly, the hom-classes can indeed be proper classes. However, in most important categories, the hom-classes form sets, whereas the overall collection of objects forms a proper class. We call a category whose hom-classes form sets a \emph{locally small} category, and we instead use the terminology \emph{hom-set}.

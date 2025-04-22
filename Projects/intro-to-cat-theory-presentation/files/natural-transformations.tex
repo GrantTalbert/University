@@ -1,0 +1,69 @@
+\section{Natural Transformations}
+
+\subsection{Definition}
+
+The next step may feel unmotivated at the moment, but the motivation will become clear at the end of the section.
+
+If $\mathcal{C} $ and $\mathcal{D} $ are categories, we can contemplate a \emph{functor category}, where objects are functors $\mathcal{C} \to \mathcal{D} $. We often denote this as $\mathcal{D} ^{\mathcal{C} } $ or $\Fun(\mathcal{C} ,\mathcal{D} )$. I prefer the former, but I will use the latter for these notes, as I think it's clearer. In order for this to be a category, we need a way of defining morphisms between functors. This means given two functors $\mathcal{F},\mathcal{G} : \mathcal{C}  \to \mathcal{D}  $, we need a way of transforming $\mathcal{F} $ into $\mathcal{G} $, or vice versa. We call this a \emph{natural transformation}.
+
+\begin{definition}[Natural Transformation]\label{dfn:3}
+	Let $\mathcal{F} ,\mathcal{G} \in \Fun(\mathcal{C} ,\mathcal{D} )$. A natural transformation $\eta $ from $\mathcal{F} $ to $\mathcal{G} $, denoted $\eta : \mathcal{F}  \Rightarrow \mathcal{G} $, consists of a collection of morphisms $\eta _X : \mathcal{F} (X) \to \mathcal{G} (X)$ \emph{for every} $X\in \mathcal{C} $, such that for all $f : X \to Y$ in $\mathcal{C} $,
+	\[
+		\eta _Y\circ \mathcal{F} (f)=\mathcal{G} (f)\circ \eta _X
+	.\]
+	In other words, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{F} (X)\ar[r, "\mathcal{F} (f)"]\ar[d, "\eta_X"']&\mathcal{F} (Y)\ar[d, "\eta _Y"]\\
+		\mathcal{G} (X)\ar[r, "\mathcal{G} (f)"']&\mathcal{G} (Y)
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+We call $\eta _X$ the \emph{component} of $\eta $ at $X$, and we say $\eta _X$ is \emph{natural} in $X$. We often denote the set of natural transformations from $\mathcal{F} $ to $\mathcal{G} $ as $\operatorname{Nat} (\mathcal{F} ,\mathcal{G} )$.
+
+\subsection{Yoneda}
+
+Now that we have introduced natural transformations, we can introduce one of the most important results in category theory, even if it's also one of the simplest. This result is known as the \emph{Yoneda lemma}.
+
+\begin{lemma}[Yoneda]\label{lma:1}
+	Let $\mathcal{C} $ be a locally small category, and let $\mathcal{F} : \mathcal{C}  \to \Set  $ be any covariant functor, and let $C\in \mathcal{C} $. Then there is a \emph{natural isomorphism of sets} (a bijection)
+	\[
+		\operatorname{Nat} \left( \Hom_{\mathcal{C} }(C, -) ,\mathcal{F}  \right) \cong \mathcal{F} (C)
+	.\]
+	Similarly, if $\mathcal{G} : \mathcal{C}  \to \Set $ is any contravariant functor, and $C\in \mathcal{C} $, then there is a natural isomorphism
+	\[
+		\operatorname{Nat} \left( \Hom_{\mathcal{C} }(-, C) ,\mathcal{G}  \right)\cong  \mathcal{G} (C)
+	.\]
+\end{lemma}
+
+The proof of the Yoneda lemma is beyond these notes, but it's a good idea to unpack the implications of it. Let $C,D\in \mathcal{C} $, and note that $\Hom_{\mathcal{C} }(D, -) $ is covariant. This means we can plug in $\Hom_{\mathcal{C} }(D, -) $ for $\mathcal{F} $ in the Yoneda lemma to get
+\[
+	\operatorname{Nat} \left( \Hom_{\mathcal{C} }(C, -) ,\Hom_{\mathcal{C} }(D, -)  \right) \cong \Hom_{\mathcal{C} }(D, C) 
+.\]
+This means that the natural transformations between $\Hom_{\mathcal{C} }(C, -) $ and $\Hom_{\mathcal{C} }(D, -) $ are exactly the same as the morphisms from $D$ to $C$. Although this is extrmely interesting, it turns out that the contravariant flavor of the lemma is more important. Since $\Hom_{\mathcal{C} }(-, D) $ is contravariant, the Yoneda lemma also gives us
+\[
+	\operatorname{Nat} \left( \Hom_{\mathcal{C} }(-, C) ,\Hom_{\mathcal{C} }(-, D)  \right) \cong \Hom_{\mathcal{C} }(C, D) 
+.\]
+What we have seen is that although this is the contravariant flavor of the lemma, it seems more ``covariant'', because now our natural transformations are the same as the morphisms $C\to D$. The arrows are no longer being flipped. This result allows us to define an important \emph{new} functor $\mathcal{Y} $\footnote{The Yoneda embedding is sometimes denoted \yo. I've never actually seen this used but I just think it's interesting.}, known as the \emph{Yoneda Embedding.}
+
+For simplicity of notation, let $h_X$ denote the contravariant functor $\Hom_{\mathcal{C} }(-, X) $. Let
+\[
+	y_{C,D}  : \operatorname{Nat} \left( h_C,h_D \right)  \to \Hom_{\mathcal{C} }(C, D) 
+\]
+be the natural bijection given by the Yoneda lemma, and let $y_{C,D} ^{-1} $ be it's inverse. Let
+\[
+	\mathcal{Y} : \mathcal{C}  \to \Fun(\mathcal{C} ,\Set )
+\]
+be the functor $X\mapsto \Hom_{\mathcal{C} }(-, X) =h_X$. Since the morphisms in $\mathcal{C} $ from $C$ to $D$ are \emph{exactly the same} as the morphisms from $h_C$ to $h_D$ in $\Fun(\mathcal{C} ,\Set )$, for any morphism $f : C \to D$ in $\mathcal{C} $, we can define
+\[
+	\mathcal{Y} (f) = y_{C,D} ^{-1} (f)
+.\]
+Since the Yoneda lemma tells us that this is a natural isomorphism, this is clearly a functorial assignment. Moreover, the hom-sets in this new functor category are \emph{exactly the same} as the hom-sets in $\mathcal{C} $, because $\mathcal{Y} $ is defined by an \emph{isomorphism}. This means that $\mathcal{Y} $ in a sense ``embeds'' $\mathcal{C} $ into the functor category $\Fun(\mathcal{C} ,\Set )$, but this embedding \emph{preserves all structure in $\mathcal{C} $} by preserving all morphisms. We call such an embedding \emph{fully faithful}.
+
+This means that if $C$ is an object in a category, we can identity it with it's hom-functor $\Hom_{\mathcal{C} }(-, C) $ in such a way that \emph{no structure is lost}. The identification $C\mapsto \Hom_{\mathcal{C} }(-, C) $ gives the \emph{exact same category}. Thus, the true implications of the Yoneda lemma are as such:
+\begin{displayquote}
+	Any object in any (locally small) category can be fully represented by how it interacts with every other object in the category. In other words, everything about objects can be fully explained by their relations with other objects.
+\end{displayquote}
+We will use these philosophical implications in full in the next section. In the next section, we will also clarify a slight bit of machinery I skipped over in this section. I only defined natural transformations between \emph{covariant functors}, but the Yoneda embedding involves \emph{contravariant} functors. Reconciling this is not difficult, but it involves viewing contravariant functors as covariant functors from the \emph{opposite category}, a topic that will be explored in the next section.
+
+One of the most fascinating things is that the Yoneda embedding arises in a natural way. Recall that the bijection of hom-set to natural transformations was \emph{natural}, meaning it can be viewed as a natural transformation itself. Doing this is more complex, but I encourage the reader to try and figure it out on their own, or to have fun going down the relevant Wikipedia/ChatGPT rabbit hole.

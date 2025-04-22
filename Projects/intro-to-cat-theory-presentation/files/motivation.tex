@@ -1,0 +1,90 @@
+\part{The Basics of Categories}
+\section{Motivation}
+
+\subsection{The Cartesian Product}
+
+Now I want to introduce a construction we are all familiar with, even if we don't realize it. The cartesian product $A\times B$ of two sets $A,B$ is defined as the set of all ordered pairs $(a,b)$, where $a\in A$ and $b\in B$. For example, I'm sure you've all drawn the coordinate plane before. Every point on the coordinate plane is a pair $(x,y)$, where $x$ and $y$ are both real numbers, This means that the coordinate plane is really the cartesian product $\mathbb{R} \times \mathbb{R} $.
+
+Now let's consider an arbitrary cartesian product $A\times B$. There are two important functions I want to consider. Let $\pi _A : A\times B \to A$ be the function $\pi_A(a,b)=a$, and let $\pi _B : A\times B \to B$ be the function $\pi _B(a,b)=b$. We call these the \emph{natural projections} or \emph{canonical projections} onto $A$ and $B$. We will see that these are extremely important functions in this section. In fact, as we will see later, these functions characterize cartesian products ``up to isomorpism.''
+
+\begin{proposition}\label{prp:2}
+	Let $X,Y,Z$ be sets, and let $\pi _X,\pi _Y$ be the natural projections of $X\times Y$ onto $X$ and $Y$, respectively. Let $f : Z \to X$ and $g : Z \to Y$ be any functions. Then there exists a unique function $\varphi : Z \to X\times Y$ such that
+	\[
+		f=\pi_X \circ \varphi \qquad \text{and} \qquad g=\pi _Y \circ \varphi 
+	.\]
+	In other words, the diagram\newpage
+	\begin{diagram}[ht]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		&X\\
+		Z\ar[r, dashed, "\varphi "]\ar[ur, "f"]\ar[dr, "g"']&X\times Y\ar[u, "\pi _X"']\ar[d, "\pi _Y"]\\
+											    &Y
+	\end{tikzcd}\]
+	\caption{Universality of Product}\label{dgm:1}
+	\end{diagram}
+	commutes.
+\end{proposition}
+To understand this statement, we need to understand what it means for a diagram to ``commute''. Consider the much simpler diagram
+\begin{diagram}[ht]
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\ar[r, "f"]\ar[dr, "h"']&B\ar[d, "g"]\\
+				       &C
+\end{tikzcd}\]
+\caption{Simple Diagram}\label{dgm:2}
+\end{diagram}\\
+A diagram is a drawing like this, with letters and arrows. The letters represent sets, and the arrows represent functions between these sets. So the arrow labeled $f$ in the smaller diagram represents a function $f : A \to B$. We then say a diagram \emph{commutes} if any possible way of getting from one point to another are the same. For example, in this smaller diagram, there are two ways to go from $A$ to $C$: we can take the function $f$ from $A$ to $B$, then take the function $g$ from $B$ to $C$. Alternatively, we can take the function $h$ straight from $A$ to $C$. In this case, the diagram will commute if $h=g\circ f$, meaning both paths are the same.
+
+Now back to our bigger diagram (diagram \ref{dgm:1}). It's a little less apparent what it means for this to commute, since there are now two endpoints. It's often easier to break a bigger diagram up into smaller diagrams. So for example, consider the smaller ``subdiagram''
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	&X\\
+	Z\ar[ur, "f"]\ar[r, dashed, "\varphi "']&X\times Y\ar[u, "\pi _X"']
+\end{tikzcd}\]
+This will commute if
+\[
+	\pi_X \circ \varphi =f
+.\]
+This means that for our main diagram \ref{dgm:1} to commute, we must have
+\[
+	\pi _X \circ \varphi =f\qquad \text{and} \qquad \pi _Y \circ \varphi =g
+.\]
+This is precisely the statement of the proposition.
+
+The proof of the proposition is very simple, and I leave it as an exercise. The map $\varphi $ is defined as $\varphi (z)=(f(z),g(z))$. Uniqueness is manifestly satisfied, so simply showing that the diagram commutes is sufficient.
+
+Even after all this, the statement of the proposition may be fairly difficult to parse. However, I want to focus on the following idea. We are able to view the cartesian product purely in terms of functions, specifically using the natural projections, and how other functions behave with them. Later, we will see that this viewpoint actually \emph{defines} the cartesian product \emph{up to isomorphism}, meaning any two sets that satisfy this property behave the exact same way (at least, as far as functions are concerned).
+
+\subsection{Fundamental Symmetries}
+
+Now for some higher level motivation. For those who have taken algebra, you have seen the \emph{first isomorphism theorem}. And you likely know that this theorem applies not only to groups, but also to \emph{rings}. However, there's even more than that. Given a vector space $V$ with a subspace $U\subseteq V$, you can define a \emph{quotient space} $V/U$. Since a vector space is nothing more than an abelian group with some extra structure, which we call \emph{scalar multiplication}, you can just consider the quotient \emph{group} $V/U$, and define scalar multiplication on this new abelian group in the most obvious way. I leave rigorizing this definition as an exercise to the reader, but it should be clear that it is possible.
+
+Additionally, note that if $T : V \to W$ is any linear transformation, then $\ker T$ is a subspace of $V$. This means that we can consider the quotient $V/\ker T$. The natural question is whether the first isomorphism theorem applies, and indeed, it does.
+\begin{theorem}[First Isomorphism Theorem]\label{thm:1}
+	Let $T : V \to W$ be a linear transformation. Then $V/\ker T\cong \im T$. In particular, there is a unique \emph{isomorphism} of vector spaces $\phi $ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V\ar[" \pi  "', d] \ar[" T ", r]  & \im T \\
+	V/\ker T \ar[" \phi  "', dashed, ur]  & 
+	\end{tikzcd}\]
+	commute.
+\end{theorem}
+
+In this case, the linear transformation $\pi $ is the natural projection onto the quotient, defined by $v\mapsto v+\ker T$. Why does the first isomorphism theorem apply in so many areas of algebra?
+
+We're actually not done. There is a ``first isomorphism theorem'' for regular functions as well. Another way to rephrase the first isomorphism theorem is that for any linear transformation $T$, we can break it down into a surjection $\pi : V \to V/\ker T$, an isomorphism $V/\ker T\to \im T$, and then an inclusion map $\im T\hookrightarrow  W$. An inclusion map is where you take a set $\im T$ which is a subset of a bigger set $W$, and define a map $\im T\to W$ by mapping $x\mapsto x$. You ``inject'' $\im T$ into the bigger set $W$. You will not be surpised to hear inclusion maps are injective, and thus we can break any linear transformation into a surjection, isomorphism, and then an injection:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V \ar[bend left, " T ", rrr] \ar[" \pi  ", two heads, r]  & V/\ker T\ar[dashed, " \phi  "', r]  & \im T \ar[hook, " i "', r] & W.
+\end{tikzcd}\]
+
+However, we can actually do this for any function. Given a set $X$ with an equivalence rlation $\sim $, we can define the quotient set $X/\sim $ as the set of all equivalence classes $[x]_\sim $ in $X$ under $\sim $. If $f : X \to Y$ is a function, then consider the following equivalence relation in $X$:
+\[
+	x\sim y \iff f(x)=f(y)
+.\]
+I leave it as an exercise to prove that this is an equivalence relation. This means that for each equivalence class $[x]_\sim $, we must have $f(x)=f(y)$ for all $x,y\in [x]_\sim $, and thus $f[x]_\sim =f(x)$. In other words, the entire equivalence class corresponds to one element of the image of $f$. It is then natural to think that $X/\sim $ may be in correspondence with $\im f$, and indeed this is the case; there is a bijection $X/\sim \to \im f$ defined as $[x]_\sim \mapsto f\left( x \right) $. This is well-defined by the definition of $\sim $.
+
+There then exists a quotient function $\pi $ defined as $x\mapsto [x]_\sim $, which is manifestly surjective, and then we indeed have that $f$ decomposes as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X \ar[bend left, " f ", rrr] \ar[" \pi  ", two heads, r]  & X/\sim \ar[dashed, " \phi  "', r]  & \im f \ar[hook, " i "', r] & Y.
+\end{tikzcd}\]
+This is often called the \emph{canonical factorization} of a function.
+
+And there are more symmetries than just this. The definition I gave of a product in section 2.1 generalizes as well. If you replace ``function'' with ``group homomorphism'' and ``set'' with ``group'', then I claim the exact same definition gives you a definition of direct product of groups, which is well-defined up to group isomorphism. Similarly, if you use ``ring'' and ``ring homomorphism'', you get a direct product of rings. If you use ``continuous map'' and ``topological space'', you get a product topology. If you use ``vector space'' and ``linear transformation'', you get a product of vector spaces. And there are other, similar constructions for the \emph{kernel}, the \emph{image of a function}, the \emph{quotient}, and more. In a sense, these constructions are ``universal'', they are always defined the same way, and if they exist, they are always defined up to isomorphism.
+
+Given the uncanny symmmetry between vastly different areas of mathematics, we would expect that there should be some ``unifying language'' of mathematics, that would explain these symmetries in a natural way. This is \emph{precisely} what category theory offers us.

@@ -1,0 +1,317 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 8}
+\courseID{PY 355}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{enumerate}
+	\item 
+		\[
+			\begin{pmatrix}
+			1 & a \\
+			0 & 1
+			\end{pmatrix}\begin{pmatrix}
+			1 & b \\
+			0 & 1
+			\end{pmatrix}=\begin{pmatrix}
+			1 & b+a \\
+			0 & 1
+			\end{pmatrix}
+		.\]
+	\item 
+		\[
+			\det \begin{pmatrix}
+			1 & a \\
+			0 & 1
+			\end{pmatrix}=1
+		.\]
+		\[
+			\begin{pmatrix}
+			1 & a \\
+			0 & 1
+			\end{pmatrix}^{-1} =\frac{1}{1} \begin{pmatrix}
+			1 & -a \\
+			-0 & 1
+			\end{pmatrix}=\begin{pmatrix}
+			1 & -a \\
+			0 & 1
+			\end{pmatrix}
+		.\]
+	\item 
+		\[
+			\left[ M_a,M_b \right] =M_aM_b-M_bM_a=\begin{pmatrix}
+			1 & a+b \\
+			0 & 1
+			\end{pmatrix}-\begin{pmatrix}
+			1 & b+a \\
+			0 & 1
+			\end{pmatrix}=0
+		.\]
+	\item Inducting on part 1 gives
+		\[
+			\prod_{n=0}^{N} M_{2^n} =\begin{pmatrix}
+			1 & \sum_{n=0}^{N} 2^n \\
+			0 & 1
+			\end{pmatrix}
+		.\]
+		The series is geometric, and finite geometric series satisfy
+		\[
+			\sum_{n=1}^{N} ar^n=a\left( \frac{1-r^N}{1-r}  \right) 
+		.\]
+		It follows that
+		\[
+			\sum_{n=0}^{N} 2^n =\sum_{n=1}^{N+1} 2^{n-1}  =\frac{1}{2} \sum_{n=1}^{N+1} 2^{n}  =\frac{1}{2} \cdot 2\left( \frac{1-2^{N+1} }{1-2}  \right) =2^{N+1} -1
+		.\]
+		Therefore,
+		\[
+			\prod_{n=0}^{N} M_{2^n} =\begin{pmatrix}
+			1 & 2^{N+1} -1 \\
+			0 & 1
+			\end{pmatrix}
+		.\]
+\end{enumerate}
+
+\section*{Problem 2}
+\begin{enumerate}
+	\item I have absolutely no idea what the $\epsilon $ is supposed to be.
+
+		ok a quick google search shows that $\epsilon_{ijk} $ is the Levi-Civita symbol, which can be intuitively understood to behave like a wedge product or an alternating tensor, in that $\epsilon_{ijk} =1$ if $ijk=123$, and is alternating in that each transposition induces a factor of $-1$, and this anticommutativity necessarily implies $\epsilon_{ijk} =0$ if $i=j$, $j=k$, or $k=i$. Due to this, the identity claims that $\sigma_i\sigma_i=0+\delta_{ii}1=1 $, so we verify this:
+		\[
+			\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}=\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+			\end{pmatrix},
+		\]
+		\[
+			\begin{pmatrix}
+			0 & -i \\
+			i & 0
+			\end{pmatrix}\begin{pmatrix}
+			0 & -i \\
+			i & 0
+			\end{pmatrix}=\begin{pmatrix}
+			-i^2 & 0 \\
+			0 & -i^2
+			\end{pmatrix}=\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+			\end{pmatrix}
+		,\]
+		\[
+			\begin{pmatrix}
+			1 & 0 \\
+			0 & -1
+			\end{pmatrix}\begin{pmatrix}
+			1 & 0 \\
+			0 & -1
+			\end{pmatrix}=\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+			\end{pmatrix}
+		.\]
+		This verifies the identity for $i=j$. Moreover, we now have
+		\[
+			\sigma_i\sigma_j+\sigma_j\sigma _i=2\delta_{ij} 1
+		.\]
+		Note that
+		\begin{align*}
+			\sigma _i\sigma _j&=\sigma _i\sigma _j+\frac{1}{2} \sigma _j\sigma _i-\frac{1}{2} \sigma _j\sigma _i\\
+					  &=\frac{1}{2} \left( \sigma _i\sigma _j-\sigma _j\sigma _i \right) +\frac{1}{2} \left( \sigma _i\sigma _j+\sigma _j\sigma _i \right)\\
+					  &=\frac{1}{2} \left[ \sigma _i,\sigma _j \right] +\frac{1}{2} 2\delta_{ij} 1\\
+					  &=\frac{1}{2} \left[ \sigma _i,\sigma _j \right] +\delta_{ij} 1
+		.\end{align*}
+		It thus suffices to show $1/2 \left[ \sigma _i,\sigma _j \right] =ie_{ijk} \sigma _k$. If we can show that $\left[ \sigma_1,\sigma _2 \right] $, $\left[ \sigma _2,\sigma _3 \right] $, and $\left[ \sigma _3,\sigma _1 \right] $ are equal to $2i\sigma_k$ for $k$ the indicie not appearing, then this suffices as a proof, since anticommutivity of the commutator is trivially equivalent to the alternating nature of the Levi-Citiva symbol. These computations are simple and can be brute forced.
+		\[
+			\left[ \sigma _1,\sigma _2 \right] =\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}\begin{pmatrix}
+			0 & -i \\
+			i & 0
+			\end{pmatrix}-\begin{pmatrix}
+			0 & -i \\
+			i & 0
+			\end{pmatrix}\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}=\begin{pmatrix}
+			i & 0 \\
+			0 & -i
+			\end{pmatrix}-\begin{pmatrix}
+			-i & 0 \\
+			0 & i
+			\end{pmatrix}=2i\sigma_3
+		.\]
+		\[
+			\left[ \sigma _2,\sigma _3 \right] =\begin{pmatrix}
+			0 & -i \\
+			i & 0
+			\end{pmatrix}\begin{pmatrix}
+			1 & 0 \\
+			0 & -1
+			\end{pmatrix}-\begin{pmatrix}
+			1 & 0 \\
+			0 & -1
+			\end{pmatrix}\begin{pmatrix}
+			0 & -i \\
+			i & 0
+			\end{pmatrix}=\begin{pmatrix}
+			0 & i \\
+			i & 0
+			\end{pmatrix}-\begin{pmatrix}
+			0 & -i \\
+			-i & 0
+			\end{pmatrix}=2i\sigma_1
+		.\]
+		\[
+			\left[ \sigma _3,\sigma _1 \right] =\begin{pmatrix}
+			1 & 0 \\
+			0 & -1
+			\end{pmatrix}\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}-\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}\begin{pmatrix}
+			1 & 0 \\
+			0 & -1
+			\end{pmatrix}=\begin{pmatrix}
+			0 & 1 \\
+			-1 & 0
+			\end{pmatrix}-\begin{pmatrix}
+			0 & -1 \\
+			1 & 0
+			\end{pmatrix}=\begin{pmatrix}
+			0 & 2 \\
+			-2 & 0
+			\end{pmatrix}=2i\sigma_2
+		.\]
+		Therefore,
+		\[
+			\sigma _i\sigma _j=i\epsilon_{ijk} \sigma _k+\delta_{ij} 1
+		.\]
+	\item We have
+		\[
+			\left( \sigma\cdot p \right) ^2=\left( \sigma_i p_i \right) ^2=\sigma _ip_i\sigma _jp_j=p_ip_j\sigma _i\sigma _j
+		.\]
+		Using our previous result, we have
+		\[
+			p_ip_j\left( i \epsilon_{ijk}\sigma_k+\delta_{ij} 1 \right) 
+		.\]
+		Evaluating the term on the right, we have
+		\[
+			p_ip_j\delta_{ij}1 =p_ip_i1=p_i^21=\left| p \right| ^21
+		.\]
+		Evaluating the term on the left, we have
+		\[
+			ip_ip_j\epsilon_{ijk} \sigma _k
+		.\]
+		Note that for each term $(i,j)$, there is a corresponding term $(j,i)$, and the anticommutivity induced by the alternating Levi-Citiva term causes these off-diagonal terms to vanish. Similarly, by anticommutivity once again, the diagonal terms also vanish, and thus
+		\[
+			ip_ip_j\epsilon_{ijk} \sigma _k=0
+		.\]
+		Therefore,
+		\[
+			\left( \sigma \cdot p \right) =\left| p \right| ^21
+		.\]
+\end{enumerate}
+
+\section*{Problem 3}
+
+Let $A^2=0$. Then
+\[
+	\begin{pmatrix}
+	a & b \\
+	c & d
+	\end{pmatrix}\begin{pmatrix}
+	a & b \\
+	c & d
+	\end{pmatrix}=\begin{pmatrix}
+	a^2+bc & ab+bd \\
+	ac+cd & bc+d^2
+	\end{pmatrix}=0
+.\]
+If $b=c=0$, then clearly $A=0$, so we can without loss of generality ignore this case. We have
+\[
+	b(a+d)=c(a+d)=0
+.\]
+Since we take at least one of $\left\{ b,c \right\} $ to be nonzero, we must have $a+d=0$. The matrix becomes
+\[
+	A=\begin{pmatrix}
+	a & b \\
+	c & -a
+	\end{pmatrix},\qquad A^2=\begin{pmatrix}
+	a^2+bc & ab-ab \\
+	ac-ac & a^2+bc
+	\end{pmatrix}=\begin{pmatrix}
+	a^2+bc & 0 \\
+	0 & a^2+bc
+	\end{pmatrix}
+.\]
+Now we re-parameterize with $x$ and $y$. Choose $y\in\mathbb{C} $ such that $b=y^2$. Define $x\coloneqq a/y$, to enforce that $a=xy$. We then have
+\[
+	\left( xy \right)^2+y^2c=y^2\left( x^2+c \right) =0
+.\]
+It follows that $c=-x^2$, since $b\neq 0$ by assumption. Therefore, our matrix becomes
+\[
+	A=\begin{pmatrix}
+	xy & y^2 \\
+	-x^2 & -xy
+	\end{pmatrix}
+.\]
+This differs from the matrix in the problem only in notation.
+
+\section*{Problem 4}
+\begin{enumerate}
+	\item 
+		\[
+			\det \begin{pmatrix}
+			1 & 1 & 1 \\
+			0 & 1 & 0 \\
+			1 & 0 & 0
+			\end{pmatrix}=\det \begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+			\end{pmatrix}=-1
+		.\]
+	\item 
+		\[
+			\det \begin{pmatrix}
+			1 & 2 \\
+			3 & 1
+			\end{pmatrix}=1^2-6=-5
+		.\]
+	\item 
+		\[
+			\det \begin{pmatrix}
+			0 & \sqrt{2}  & 0 & 0 \\
+			\sqrt{2}  & 0 & 3 & 0 \\
+			0 & 3 & 0 & \sqrt{2}  \\
+			0 & 0 & \sqrt{2}  & 0
+			\end{pmatrix}=-\det \begin{pmatrix}
+			\sqrt{2}  & 3 & 0 \\
+			0 & 0 & \sqrt{2}  \\
+			0 & \sqrt{2}  & 0
+			\end{pmatrix}=\sqrt{2} \det \begin{pmatrix}
+			0 & \sqrt{2}  \\
+			\sqrt{2}  & 0
+			\end{pmatrix}=2\sqrt{2} 
+		.\]
+\end{enumerate}
+
+\section*{Problem 5}
+Determinants of triangular matrices are simply the product of the diagonal entries, and $\det AB=\det A \det B$. We have
+\[
+	\det A=\left( 14\cdot 3 \right) \left( -8 \right) =-42\cdot 8=-336
+.\]
+\end{document}

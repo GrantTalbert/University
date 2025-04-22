@@ -1,0 +1,127 @@
+\section{Limits and Colimits}
+
+\subsection{Definition, Cones}
+
+Another useful notion, and indeed yet \emph{another} way of characterizing universal properties, is with the notion of the \emph{limit} or \emph{colimit} of a functor. These admit simple descriptions using universal arrows, but we will spell out their definitions in full after.
+
+Earlier, we defined the diagonal functor $\Delta : \mathcal{C}  \to \mathcal{C} \times \mathcal{C} $. If $\mathcal{J} $ is also a category, we can also define a diagonal functor $\Delta : \mathcal{C}  \to \Fun(\mathcal{J} ,\mathcal{C} )$. For all $C\in \mathcal{C} $, the image $\Delta (C)$ is a functor $\mathcal{J}  \to \mathcal{C} $. Specifically, $\Delta (C)$ is the \emph{constant functor}, which maps $J\mapsto C$ for all $J\in \mathcal{J} $, and each morphism to $1_C$. Each morphism $f : C \to D$ in $\mathcal{C} $ is mapped to the natural transformation $\Delta (f): \Delta (C) \Rightarrow \Delta (D)$, where each component $\Delta (f)_J : C \to D$ is just defined to be $f$ for all $J\in \mathcal{J} $. I leave it as an exercise to reconcile this definition with our earlier definition of a diagonal functor.
+
+\begin{definition}[Limit/Colimit]\label{dfn:9}
+	Let $\mathcal{F} : \mathcal{J}  \to \mathcal{C} $ be a functor. With notation as above, the \emph{limit} of $\mathcal{F} $, denoted $\varprojlim \mathcal{F} $, is a \emph{universal arrow} from $\Delta  $ to $\mathcal{F} $. The \emph{colimit} of $\mathcal{F} $ is a universal arrow from $\mathcal{F} $ to $\Delta $.
+\end{definition}
+
+Let's unpack this definition. Typically the category $\mathcal{J} $ is a indexing category, and usually $\mathcal{J} $ is finite, or at least small. Let's consider a \emph{limit} of the functor $\mathcal{F} : \mathcal{J}  \to \mathcal{C} $. Per our definition, this would be a universal arrow $\Delta \to \mathcal{F} $. Since $\Delta $ is a functor $\mathcal{C} \to \Fun(\mathcal{J} ,\mathcal{C} )$, a universal arrow would be an object $L\in \mathcal{C} $ and a \emph{natural transformation} $\eta : \Delta (L)  \Rightarrow \mathcal{F} $. The universality of the arrow tells us that for any $Z\in \mathcal{C} $ and any natural transformation $\mu :\Delta (Z)\Rightarrow \mathcal{F} $, there is a unique morphism $f:Z\to L$ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{F}  & \Delta (L)\ar[" \eta  "', l]  & L \\
+ & \Delta (Z)\ar[dashed, u, " \Delta (f) "'] \ar[ul, " \mu  "]  & Z\ar[dashed, u, " f "] 
+\end{tikzcd}\]
+commute.
+
+Recall that a natural transformation $\eta : \Delta (L) \Rightarrow \mathcal{F} $ is just a family of morphisms $\eta _J : \Delta (L)(J) \to \mathcal{F} (J)$ for each $J\in \mathcal{J} $, satisfying a certain property. However, $\Delta (L)$ is the \emph{constant} functor, meanining $\Delta (L)(J)$ is always $L$. This means that $\eta $ defines a family of morphisms $\eta _J : L \to \mathcal{F} (J)$. Additionally, we defined $\Delta (L)(f)=1_L$ for any morphism $f$ in $\mathcal{J} $.
+
+Since $\eta $ is a natural transformation, we must have that for any $\varphi  : J_1 \to J_2$ in $\mathcal{J} $, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	L\ar[" 1_L ", r] \ar[" \eta_{1}  "', d]  & L\ar[" \eta _{2}  ", d]  \\
+\mathcal{F} (J_1)\ar[" \mathcal{F} (f) "', r]  & \mathcal{F} (J_2)
+\end{tikzcd}\]
+commutes. Recall here that $\Delta (L)(J)=L$ and $\Delta (L)(\varphi )=1_L$. This can be simplified to just saying that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0.5em]
+ & L\ar[" \eta_{1} "', dl] \ar[" \eta_{2}  ", dr]  &  \\
+\mathcal{F} (J_1)\ar[" \mathcal{F} (\varphi ) "', rr]  &  & \mathcal{F} (J_2)
+\end{tikzcd}\]
+commutes for all $J_1,J_2\in \mathcal{J} $ and all $\varphi  : J_1 \to J_2$. We say an object $L$, together with a family of morphisms $\eta_i$ for each $J_i\in \mathcal{J} $ is a \emph{cone} of $\mathcal{F} $.
+
+The universality condition says that if we have another natural transformation $\mu : \Delta (Z) \Rightarrow \mathcal{F} $; that is, another \emph{cone} for $\mathcal{F} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0.5em]
+ & Z\ar[" \mu _{1} "', dl] \ar[" \mu _{2}  ", dr]  &  \\
+\mathcal{F} (J_1)\ar[" \mathcal{F} (\varphi ) "', rr]  &  & \mathcal{F} (J_2)
+\end{tikzcd}\]
+then there is a unique morphism $f : Z \to L$ such that each $\mu_i=\eta_i\circ f$. In other words, making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 1.5em]
+ & Z\ar[bend right, " \mu_1 "', ddl] \ar[bend left, " \mu _2 ", ddr] \ar[dashed, " f ", d]  &  \\
+ & L\ar[" \eta _1 ", dl] \ar[" \eta _2 "', dr]  &  \\
+\mathcal{F} (J_1)\ar[" \mathcal{F} (\varphi ) "', rr]  &  & \mathcal{F} (J_2)
+\end{tikzcd}\]
+commute for any $\varphi : J_1 \to J_2$ in $\mathcal{J} $.
+
+This means that the criteria for being a universal arrow $\Delta \to \mathcal{F} $, and thus a limit of a functor, is to be \emph{terminal with respect to cones}. In this example, $\varprojlim \mathcal{F} =L$ is the limit of $\mathcal{F} $. Colimits arise analogously as initial objects with respect to \emph{co-cones}. I encourage the reader to make precise what a ``co-cone'' is, and make precise this statement.
+
+\subsection{Products as Limits}
+
+We now return to our universal property of products to give an example of a statement made previously, which is that \emph{all universal properties are limits or colimits}. Let $\mathcal{J} $ be the category with 2 objects $\left\{ \mathbf{1} ,\mathbf{2}  \right\} $, and two morphisms, which are the identity morphisms:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0.5em]
+\mathbf{1} \ar[loop left, "1_{\mathbf{1} } "]  & \mathbf{2} \ar[" 1_{\mathbf{2} }  ", loop right] 
+\end{tikzcd}\]
+Since any functor $\mathcal{F} : \mathcal{J}  \to \mathcal{C} $ must preserve identity morphisms, defining $\mathcal{F} $ simply amounts to choosing two elements $X_1,X_2\in \mathcal{C} $ such that $\mathcal{F} (\mathbf{1} )=X_1$, $\mathcal{F} (\mathbf{2} )=X_2$.
+
+A limit $\varprojlim \mathcal{F} $, if it exists, would then come with two morphisms, $\eta _1: \varprojlim \mathcal{F}  \to X_1$ and $\eta _2: \varprojlim \mathcal{F}  \to X_2$. As a diagram, this looks like
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 0.5em]
+ & \varprojlim \mathcal{F} \ar[" \eta _1 "', dl] \ar[" \eta _2 ", dr] & \\
+X_1 &  & X_2
+\end{tikzcd}\]
+Since there is no morphism $\mathbf{1} \to \mathbf{2} $, there is no \emph{relevant} morphism $X_1\to X_2$. The fact that the limit is terminal simply means that if $Z,\mu _1,\mu _2$ is any other cone, then the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & Z\ar[dashed, " \varphi  ", d] \ar[bend right, " \mu _1 "', ddl] \ar[bend left, " \mu _2 ", ddr]  &  \\
+ & \varprojlim \mathcal{F} \ar[" \eta _1 "', dl] \ar[" \eta _2 ", dr]  &  \\
+X_1 &  & X_2
+\end{tikzcd}\]
+commutes. We can rewrite this as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & Z\ar[" \mu _1 "', dl] \ar[" \mu _2 ", dr] \ar[" \varphi  ", dashed, d]  &  \\
+X_1 & \varprojlim \mathcal{F} \ar[" \eta _1 ", l] \ar[" \eta _2 "', r]  & X_2
+\end{tikzcd}\]
+Note that this is exactly the same as the universal property of products:
+\[\begin{tikzcd}[row sep =  2.5em, column sep = 2.5em]
+ & Z\ar[" \mu _1 "', dl] \ar[" \mu _2 ", dr] \ar[" \varphi  ", dashed, d] &  \\
+X_1 & X_1\times X_2\ar[" \pi _1 ", l] \ar[" \pi _2 "', r]  & X_2
+\end{tikzcd}\]
+This means that
+\[
+	\varprojlim \mathcal{F} \cong X_1\times X_2
+.\]
+And thus, the universal property of products is simply the limit of a functor $\mathcal{F} : \mathcal{J}  \to \mathcal{C} $.
+
+\subsection{Preservation of Limits}
+
+\begin{theorem}\label{thm:2}
+	Let $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ be a left-adjoint functor. Then $\mathcal{F} $ preserves colimits, meaning for any functor $\mathcal{G} $, one has
+	\[
+		\mathcal{F} \left( \varinjlim \mathcal{G}  \right) \cong \varinjlim \left( \mathcal{F} \circ \mathcal{G}  \right) 
+	.\]
+	Similarly, a right-adjoint functor preserves limits, meaning if $\mathcal{U} $ is right-adjoint functor, then
+	\[
+		\mathcal{U} \left( \varprojlim \mathcal{G}  \right) \cong \varprojlim \left( \mathcal{U} \circ \mathcal{G}  \right) 
+	.\]
+\end{theorem}
+
+Theorem 2 is a classical theorem in category theory, and it's one of the many reasons adjoint functors are important, and also one of the reasons limits are useful. For example, here's a fun application of this theorem. In the category $\Vect{k} $ of $k$-vector spaces, and more generally the category $R$-$\mathcal{M} \mathrm{od} $ of $R$-modules, the product $A\times B$ and coproduct $A\amalg B$ are isomorphic. Because of this, we instead call it the \emph{direct sum}, and denote it $A\oplus B$. Since the product is a limit, and the coproduct is a \emph{colimit}, any adjoint functor will preserve it. Let's work with vector spaces, that way any finite-dimensional $k$-vector space $V$ is isomorphic to $k^n$ for some $n$.
+
+Recall that I previously stated that the tensor product $X\otimes_k-$ is left-adjoint to Hom, and is thus a left-adjoint functor. By theorem 2, if $U,V,W$ are vector spaces, then
+\[
+	\left( V\oplus W \right) \otimes U\cong \left( V\otimes U \right) \oplus \left( W\otimes U \right) 
+.\]
+Induction then gives us
+\[
+	\left(\bigoplus_{i\in I} V_i\right)\otimes U\cong \bigoplus_{i\in I} \left( V_i\otimes U \right) 
+.\]
+Question: what is the dimension of $U\otimes V$? Since $U,V$ are vector spaces, we can write them as $k^{n} $ and $k^{m}$, respectively. We then have
+\[
+	k^{n} \otimes k^{m} =\left( \bigoplus_{i=1}^n k \right) \otimes \left( \bigoplus_{j=1}^m k \right) \cong \bigoplus_{i=1}^n \left( k\otimes \bigoplus_{j=1}^m k \right) \cong \bigoplus_{i=1}^n \bigoplus_{j=1}^m \left( k\otimes k \right) 
+.\]
+It's easily shown that $k\otimes k\cong k$, and thus we have
+\[
+	\bigoplus_{i=1}^n \bigoplus_{j=1}^m \left( k\otimes k \right)\cong \bigoplus_{i=1}^{mn} k=k^{mn} 
+.\]
+Therefore,
+\[
+	k^{n} \otimes k^{m} \cong k^{mn} ,
+\]
+and thus
+\[
+	\dim \left( k^{n}  \otimes k^{m}\right) =mn
+.\]
+
+\begin{remark}
+	Just like universal products, a category need not have a (co)limit for every functor. If the category has all \emph{small} limits, meaning all limits where the indexing category $\mathcal{J} $ is small, then we say it is \emph{complete}. Similarly, if the category has all small \emph{colimits}, we say it is \emph{cocomplete}.
+\end{remark}
+

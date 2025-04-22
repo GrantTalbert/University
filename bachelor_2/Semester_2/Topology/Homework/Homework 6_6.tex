@@ -1,0 +1,177 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Homework 6}
+\courseID{MA 564}
+\courseSection{A1}
+\usepackage{eucal}
+\DeclareMathOperator{\im}{im}
+
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+Let $\pi_1(X)\cong 0$, and let $f : S^1 \to X$ be continuous. WTS $\exists f^*: D^2 \to X$ s.t. $f^*(S^1)=f(S^1)$.  
+\section*{Problem 2}
+\section*{Problem 3}
+The first two parts are just proving functorality of $\pi_1 : \mathbf{Top}_*  \to \mathbf{Grp} $. First, we show homotopy is preserved by continuity. Let $\phi ,\psi $ be homotopic paths in $X$, and let $f : X \to Y$ be a base-preserving continuous map. Let $\Phi : [0,1]\times [0,1] \to X$ be the homotopy $\phi \to \psi $, meaning $\phi =\Phi (0,-)$ and $\psi =\Phi (1,-)$. We thus have $f\circ \phi =f\circ \Phi (0,-)$ and $f\circ \psi =f\circ \Phi (1,-)$, and thus $f\circ \Phi $ clearly induces a homotopy of $f\circ \phi $ and $f\circ \psi $, since composition of continuous maps are continuous. Therefore, homotopy is invariant under continuity.
+
+Note that $\pi _1(f): \pi _1(X) \to \pi _1(Y)$ will be the map $\pi _1(f)[\phi ]=[f\circ \phi ]$. We want to show that $\pi _1(f\circ g)=\pi _1(f)\circ \pi _1(g)$. We have
+\[
+	\pi_1(f)\circ \pi _1(g)[\phi ]=\pi _1(f)[g\circ \phi ]=[f\circ g\circ \phi ]=\pi _1(f\circ g)[\phi ]
+.\]
+Therefore, $\pi _1$ preserves morphism composition.
+
+[identity proof]
+
+Since $\pi _1$ is a functor, if $f : X \to Y$ is a homeomorphism, then it has a two-sided continuous inverse $f^{-1} : Y \to X$. We thus have
+\[
+	\pi_1(f)\circ \pi _1(f^{-1} )=\pi _1(f\circ f^{-1} )=\pi _1(\mathrm{id}_Y)=\mathrm{id}_{\pi _1(Y)} 
+.\]
+The same logic shows $\pi _1(f)$ and $\pi _1(f^{-1} )$ are inverses in $\mathbf{Grp} $. Therefore, $\pi _1(X)\cong \pi _1(Y)$. 
+\section*{Problem 4}
+The idea is going to be that $\pi_1(S^1)=\mathbb{Z} $, but more precisely every time the path fully winds around $S^n$, it  changes. Or at the very least if the map is not surjective, it cannot induce any maps (paths) that go all the way around, and thus any path is null-homotopic.
+
+Let $f : X \to S^n$ be continuous, but not surjective. Let $a\in \im f$. We want to show there exists a homotopy $\Phi : f \to  a$ (viewing as a 2-morphism in $\mathbf{Top} $). 
+\section{testing}
+I could do this the normal way, but where's the fun in that? Consider the category $\mathbf{Top} _*$ of pointed topological spaces, where morphisms are continuous maps preserving the base point. We need to show we can define the homotopic category $\mathbf{Toph}_*$ as the quotient category $\mathbf{Top}_*/\sim $, where $\sim $ is homtopy. That is, we need to show there exists horizontal composition of homotopy.
+
+I omit mention of the base points for now to avoid notational clutter. It is not difficult to show all definitions and arguments I make are invariant under choice of base points, so any mention of such for now is immaterial. Let $f_1,g_1: X \to Y$ and $f_2,g_2: Y \to Z$ be morphisms in $\mathbf{Top}_*$, and let $\Phi : f_1 \Rightarrow g_1$, $\Psi : f_2 \Rightarrow g_2$ be homotopies. We want to show there exists a homotopy $\Psi \Phi : f_2\circ f_1 \Rightarrow g_2\circ g_1$. Define $\Psi \Phi : [0,1]\times X \to Z$ as the map $\Psi \Phi (x,y)\coloneqq \Psi (x,\Phi (x,y))$. For now, it suffices to show this is a homotopy. Indeed,
+\[
+	\Psi (0,\Phi (0,-))=\Phi (0,-)\circ\Phi (0,-)=f_2\circ f_1,
+\]
+and similarly for $g$. Moreover, this is clearly continuous, as this can be viewed as the induced morphism by the universal property of products:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & \left[ 0,1 \right] \times X\ar[" \Phi  ", dr] \ar[" \mathrm{id}  "', dl]\ar[dashed, d, "\zeta "]   &  \\
+\left[ 0,1 \right]  & \left[ 0,1 \right] \times Y\ar[l] \ar[r]\ar[d, " \Psi  ", ]   & Y\\
+		    &Z
+\end{tikzcd}\]
+We can equivalently view $\Psi \Phi $ as $\Psi \circ \zeta $. The fact that $\zeta $ is continuous follows from something I proved quite a few homeworks ago and have been using since, and commutivity of the diagram is an easy consequence of this. Since this is continuous, and satisfies $\Psi \Phi (0,-)=f_2\circ f_1$ and $\Psi \Phi (1,-)=g_2\circ g_1$, this is a homotopy $ f_2\circ f_1 \Rightarrow g_2\circ g_1$. Therefore, morphism composition respects homotopy equivalence, and we can define the quotient category $\mathbf{Toph}_*\coloneqq \mathbf{Top}_*/\sim $. That is, $\Hom_{\mathbf{Toph}_*}(X, Y) =\Hom_{\mathbf{Top} _*}(X, Y) /\sim $.
+
+Now we show that the assignment $\pi _1$ factors through $\mathbf{Toph}_*$ in such a way that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathbf{Top}_*\ar[" \pi _1 ", r]\ar[" \pi  "', d]  & \mathbf{Grp}  \\
+\mathbf{Toph}_* \ar[" \Hom(S^1\text{,} -)  "', ur] 
+\end{tikzcd}\]
+commutes up to isomorphism. It thus suffices to show $\pi $ and $\Hom(S^1, -) $ are functors, and that $\pi _1\cong \pi \circ \Hom(S^1, -) $, since composites of functors are functors. The functor $\pi $ is the natural projection onto the quotient group, and is defined by $X\mapsto X$ and $f\mapsto [f]_\sim $, for $X$ any topological space, $f$ any morphism, and $\sim $ the homotopy relation.
+
+To show $\pi $ is a functor, we first have to actually consider the definition of morphisms in the homotopic category. Let $f : X \to Y$ and $g : Y \to Z$ be morphisms in $\mathbf{Top}_*$. We define the composition $[g]_\sim \circ [f]_\sim $ in $\mathbf{Toph}_*$ as $[g\circ f]_\sim $. This is well-defined, since we already showed horizontal composition of homotopies is well-defined up to homotopy; that is, if $f\sim \phi $ and $g\sim \psi $ is given by the diagram
+\[\begin{tikzcd}[row sep = 5em, column sep = 7em]
+	X\ar[r, bend left, "f"{name=f1}]\ar[r, bend right, "\phi "'{name=g1}]&Y\ar[r, bend left, "g"{name=f2}]\ar[r, bend right, "\psi "'{name=g2}]&Z,
+	\arrow[from=f1, to=g1, shorten=5px, Rightarrow, "\mu "]\arrow[from=f2, to=g2, shorten=5px, Rightarrow, "\nu "]
+\end{tikzcd}\]
+then $g\circ f\sim \psi \circ \phi $ by horizontal composition:
+\[\begin{tikzcd}[row sep = 5em, column sep = 7em]
+	X\ar[r, bend left, "g\circ f"{name=f}]\ar[r, bend right, "\psi \circ \phi "'{name=g}]&Z.
+	\arrow[from=f, to=g, Rightarrow, shorten=5px, "\nu \circ \mu "]
+\end{tikzcd}\]
+It is then clear by definition of $\mathbf{Toph}_*$ that $\pi $ is functorial:
+\[
+	\pi (g\circ f)=[g\circ f]_\sim =[g]_\sim \circ [f]_\sim =\pi (g)\circ \pi (f),
+\]
+and for any $f : Z \to X$ and $g : X \to Z$,
+\[
+	[1_X]_\sim \circ [f]_\sim =[1_X\circ f]_\sim =[f]_\sim ,
+\]
+\[
+	[g]_\sim \circ [1_X]_\sim =[g\circ 1_X]_\sim =[g]_\sim 
+\]
+since $1_X$ is an identity in $\mathbf{Top} _*$.
+
+Next, we show that $\Hom_{\mathbf{Toph}_*}(S^1, -) : \mathbf{Toph} _* \to \mathbf{Grp} $ is a functor; that is, we show there is a group structure on $\Hom_{\mathbf{Toph} _*}((S^1,s), (X,x_0)) $ for all $(X,x_0)\in \mathbf{Toph} _*$, and that the induced morphisms are group homomorphisms. The structure in question is clear; for any two morphisms $[\phi _1]_\sim ,[\phi _2]_\sim  : (S^1,s) \to (X,x_0)$, we define the concatenation $[\phi _2]_\sim \cdot [\phi _1]_\sim $ the same as we did for loops. Since $S^1$ is parametrized by $(\cos \theta,\sin \theta )$, we can write $\phi _2,\phi _1$ as functions of $\theta $, and define
+\[
+	\phi _2\cdot \phi _1\coloneqq 
+	\begin{cases}
+		\phi _1(2\theta ),&0\leq \theta <\pi ,\\
+		\phi _2(2\theta ),&\pi \leq \theta <2\pi 
+	\end{cases}
+.\]
+Both $\phi_i(2\theta )$-s are continuous by previous arguments, as they are a composition of $\phi_i$ and multiplication by 2.
+
+Concatenation is well-defined up to homotopy by the exact same proof as done in class, except substituting $S^1$ for $[0,1]$, and thus getting rid of the requirement that $\phi (0)=\phi (1)$, since continuity requires that in the limit as $x\to s$ from either direction, $\phi (x)\to \phi (s)$ from both directions. Moreover, $\Hom_{\mathbf{Toph} _*}((S^1,s), (X,x_0)) $ is then manifestly closed under concatenation. Concatenation is also associative up to homotopy, since associativity clearly amounts to a reparametarization of $S^1$, and as shown in class reparamaterizations are homotopic. The proof we did for $[0,1]$ generalizes immediately to $S^1$.
+
+Now we show the homotopy class of the constant map $x\mapsto x_0$ is the identity. 
+
+
+
+
+
+
+Finally, we show this is the same as $\pi _1$. First, we show that $\Hom_{\mathbf{Top}_*}((S^1,s), (X,x_0)) $ is precisely the set of loops in $X$ at $x_0$. Consider the map $\alpha : \operatorname{Loop} (X,x_0) \to \Hom((S^1,s), (X,x_0)) $ given by $\phi (x)\mapsto (\cos (2\pi \phi (x)),\sin (2\pi \phi (x))$. 
+
+
+the plan here is going to be to consider the quotient (sets) by $0\sim 1$, which allows us to inuqely identify loops with morphisms. we can attempt to define an inverse map and show it is well-defined
+
+
+\begin{itemize}
+	\item Show that every loop factors uniquely through it in such a way that the induced map is continuous;
+	\item Show that the map is invertible;
+	\item Conclude that the set of loops is isomorphic to the set of morphisms.
+\end{itemize}
+Finally, we show that this is indeed a group \emph{isomorphism}, concluding that the diagram commutes up to natural isomorphism.
+
+To conclude the proof, we can recover functorality of $\pi _1$ from the natural isomorphism.
+
+\begin{lemma}\label{lma:1}
+	Let $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ be a functor, and let $\mathcal{G} : \mathcal{C}  \to \mathcal{D} $ be an assignment $\Obj(\mathcal{C} ) \to \Obj(\mathcal{D} ) $ and $\Hom_{\mathcal{C} }(A, B) \to \Hom_{\mathcal{C} }(\mathcal{G} (A), \mathcal{G} (B)) $ for all $A,B\in \mathcal{C} $. Let $\eta : \mathcal{F}  \Rightarrow \mathcal{G} $ be a natural isomorphism, in the sense that for all $A,B\in \mathcal{C} $, and for all $f : A \to B$ in $\mathcal{C} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{F} (A)\ar[" \eta _A "', d] \ar[" \mathcal{F} (f) ", r]  & \mathcal{F} (B)\ar[" \eta _B ", d]  \\
+	\mathcal{G} (A)\ar[" \mathcal{G} (f) "', r]  & \mathcal{G} (B)
+	\end{tikzcd}\]
+	commutes, and each $\eta _A$ is an isomorphism. Then $\mathcal{G} $ is a functor.
+\end{lemma}
+\begin{proof}
+	First, let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\ar[" f ", r]  & Y\ar[" g ", r]  & Z
+	\end{tikzcd}\]
+	be morphisms in $\mathcal{C} $. By assumption, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{F} (X)\ar[" \eta _X "', d] \ar[" \mathcal{F} (f) "', r] \ar[bend left, " \mathcal{F} (g\circ f) ", rr]  & \mathcal{F} (Y)\ar[" \eta _Y "', d] \ar[" \mathcal{F} (g) "', r]  & Z\ar[" \eta _Z "', d]  \\
+	\mathcal{G} (X)\ar[" \mathcal{G} (f) "', r]  & \mathcal{G} (Y)\ar[" \mathcal{G} (g) "', r]  & \mathcal{G} (Z)
+	\end{tikzcd}\]
+	commutes in $\mathcal{D} $. Additionally,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{F} (X)\ar[" \eta _X "', d] \ar[" \mathcal{F} (g\circ f) ", r]  & \mathcal{F} (Z)\ar[" \eta _Z "', d]  \\
+	\mathcal{G} (X)\ar[" \mathcal{G} (g\circ f) "', r]  & \mathcal{G} (Z)
+	\end{tikzcd}\]
+	commutes. We thus have
+	\[
+		\eta _Z\circ \mathcal{F} (g\circ f)\circ=\mathcal{G} (g\circ f)\circ \eta _X
+	.\]
+	By commutivity of the first diagram,
+	\[
+		\eta _Z\circ \mathcal{F} (g\circ f)=\eta _Z\circ \mathcal{F} (g)\circ \mathcal{F} (f)=\mathcal{G} (g)\circ \mathcal{G} (f)\circ \eta _X
+	.\]
+	Therefore,
+	\[
+		\mathcal{G} (g)\circ \mathcal{G} (f)\circ \eta _X=\mathcal{G} (g\circ f)\circ \eta _X
+	.\]
+	Since $\eta _X$ is an isomorphism, there exists an inverse morphism $\eta_X ^{-1} $ such that $\eta_X \circ \eta ^{-1} _X=1_{\mathcal{G} (X)} $, and thus
+	\[
+		\mathcal{G} (g\circ f)\circ 1_{\mathcal{G} (X)} =\mathcal{G} (g)\circ \mathcal{G} (f)\circ 1_{\mathcal{G} (X)} 
+	.\]
+	Since identity morphisms are identities with respect to composition, we have
+	\[
+		\mathcal{G} (g\circ f)=\mathcal{G} (g)\circ \mathcal{G} (f)
+	.\]
+	
+	To show identities are preserved, note that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{F} (X)\ar[" \eta _X "', d] \ar[" \mathcal{F} (1_X) ", r]  & \mathcal{F} (X)\ar[" \eta _X "', d]  \\
+	\mathcal{G} (X)\ar[" \mathcal{G} (1_X) "', r]  & \mathcal{G} (X)
+	\end{tikzcd}\]
+	commutes. Since $\mathcal{F} $ is a functor, $\mathcal{F} (1_X)=1_{\mathcal{F} (X)} $, and by commutivity we have
+	\[
+		\eta _X\circ 1_{\mathcal{F} (X)} =\mathcal{G} (1_X)\circ \eta _X
+	.\]
+	Since identity morphisms are identities with respect to composition, and since $\eta _X$ has an inverse, we have
+	\begin{align*}
+		&\qquad\;\;\eta _X=\mathcal{G} (1_X)\circ \eta _X\\
+		&\implies \eta _X\circ \eta ^{-1} _X=\mathcal{G} (1_X)\circ \eta _X \circ \eta ^{-1} _X\\
+		&\implies 1_{\mathcal{G} (X)} =\mathcal{G} (1_X)\circ 1_{\mathcal{G} (X)} \\
+		&\implies 1_{\mathcal{G} (X)} =\mathcal{G} (1_X)
+	.\end{align*}
+	Therefore, $\mathcal{G} $ is a functor.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,42 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Turn in 7}
+\courseID{MA 542}
+\courseSection{A1}
+\usepackage{eucal}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+Clearly, $\alpha ^2\in F(\alpha )$. Since $F(\alpha )$ has odd degree over $F$, it necessarily has finite degree over $F$, and thus $F(\alpha )$ is a finite extension of $F$. Since every finite extension is algebriac, $F(\alpha )$ is algebraic, and thus all elements of $F(\alpha )$ are algebraic over $F$. Since $\alpha ^2\in F(\alpha )$, it's algebraic over $F$.
+
+Since $\alpha ^2\in F(\alpha )$, clearly $F(\alpha ^2)\subseteq F(\alpha )$. For the converse, consider the polynomial $x^2-\alpha ^2\in F(\alpha ^2)$. Clearly this splits into $(x-\alpha )(x+\alpha )$. Suppose for contradiction that $\alpha \notin F(\alpha ^2)$. Then this polynomial does \emph{not} split over $F(\alpha^2 )$, and is thus clearly irreducible. It follows that $x^2-\alpha ^2$ is the minimal polynomial of $\alpha$ in $F(\alpha ^2)$, and thus it's splitting field $F(\alpha ,\alpha ^2)$ over $F(\alpha )$ has
+\[
+	\left[ F(\alpha ,\alpha ^2):F(\alpha ^2) \right] =\operatorname{deg} (x^2-\alpha ^2)=2
+.\]
+However, since $\alpha \in F(\alpha )$, we have $F(\alpha ,\alpha ^2)=F(\alpha )$, and thus $\left[ F(\alpha ),F(\alpha ^2) \right] =2$.
+
+Now note that
+\[
+	\left[ F(\alpha ):F \right] =\left[ F(\alpha ):F(\alpha ^2) \right] \left[ F(\alpha ^2):F \right] =2\left[ F(\alpha ^2):F \right] 
+.\]
+Since this is clearly an even number and not an odd number, this is a contradiction, and thus $\alpha \in F(\alpha ^2)$. Therefore, we easily obtain $F(\alpha )\subseteq F(\alpha ^2)$, and the fields are equal.
+
+\section*{Problem 2}
+Let $x=\sqrt{3-\sqrt{6} } $. Then $-x^2+3=\sqrt{6} $, and thus $x^4-6x^2+9=6$. I claim the minimal polynomial is thus $p(x)=x^4-6x^2+3$. To verify irreducibility, note that clearly no roots of $p$ exist in $\mathbb{Q} $. Extensive algebra that I do not feel like typing up shows that no such quadratic factorization exists either.
+
+Solving for the roots of $p(x)$ gives
+\begin{align*}
+	&\qquad\;\; x^4-6x^2+3=0\\
+	&\implies x^4-6x^2+9=6\\
+	&\implies \left(-x^2+3\right)^2=6\\
+	&\implies -x^2+3=\pm\sqrt{6} \\
+	&\implies x^2=3\pm\sqrt{6} \\
+	&\implies x=\pm\sqrt{3\pm\sqrt{6} } 
+.\end{align*}
+We thus have roots
+\[
+	\left\{ \sqrt{3+\sqrt{6} } ,-\sqrt{3+\sqrt{6} } ,\sqrt{3-\sqrt{6} } ,-\sqrt{3-\sqrt{6}}  \right\} 
+.\]
+Clearly you cannot construct $\sqrt{3+\sqrt{6} } $ using the elements of $\mathbb{Q} (\alpha)$, and so $p(x)$ does not split in $\mathbb{Q} (\alpha )$.
+\end{document}

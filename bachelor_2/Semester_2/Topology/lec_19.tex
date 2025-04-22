@@ -1,0 +1,49 @@
+\lecture{19}{Tue 15 Apr 2025 11:08}{Homotopy and Fund Groups}
+\begin{definition}[Simply Connected]\label{dfn:owo}
+	A path-connected topological space $X$ is \emph{simply connected} if $\pi _1(X)=0$ is trivial.
+\end{definition}
+
+\begin{proposition}\label{prp:idk}
+	$X$ is simply connected if and only if any two paths with the same starting/ending points are homotopic.
+\end{proposition}
+\begin{proof}
+	If $X$ is simply connected, then every loop is null-homotopic. Let $\phi _1,\phi _2$ be paths $x\to y$. Note that the concatenation $\phi _2^{-1} \circ \phi _1$\footnote{this $\circ $ means loop concatenation here} is a loop based at $x$, and thus $\left[ \phi _2^{-1} \circ \phi _1 \right] \in \pi _1(X)$, and thus $\phi _2^{-1} \circ \phi _1$ is null-homotopic. We can concatenate $\phi _2$ to obtain $\phi _2 \circ \phi _2^{-1} \circ \phi _1 \sim \phi _2 \circ 1\sim \phi _2$, for $1$ the null-homotopy at $x$. Moreover, $\phi _2\circ \phi _2^{-1} \circ \phi _1\sim \phi _1$.
+
+	For the converse, Let $\phi $ be a loop at $x_0$. We can let $\phi _1$ be the path along $\phi $ that send $\phi (0)\to \phi (1/2)$, and similarly $\phi _2$ will complete the loop, going $\phi (1/2)\to \phi (1)$. By assumption $\phi _1$ is homotopic to $\phi _2^{-1} $, and we know $\phi =\phi _2\circ \phi _1$ (concatenation).
+\end{proof}
+
+\begin{theorem}\label{thm:kjsd}
+	\[
+		\pi _1(S^1)\cong \mathbb{Z} 
+	.\]
+\end{theorem}
+\begin{proof}
+	This is clear from looking at it. Let's prove it! Let $\mathbb{Z} \to \pi _1(S^1,0)$ be the map
+	\[
+		n\mapsto (\cos (2\pi nt),\sin (2\pi nt))
+	.\]
+	Define $\omega _n$ as this loop. We then have that $\omega _n$ raises
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & \mathbb{R} ^1 \ar[" \pi  ", d]  \\
+		\left[0,1\right]\ar[ur, dashed, " \widetilde{\omega}_n "] \ar[" \omega _n "', r]  & S^1
+	\end{tikzcd}\]
+	In this case, $\pi $ is the quotient map $\mathbb{R} ^1\to \mathbb{R} ^1/\mathbb{Z} \cong S^1$. In this lifting, $\widetilde{\omega } _n$ is a path from $0\to 2\pi n$. Since $\mathbb{R} $ is simply connected, this is homotopic to any other path $\widetilde{\omega } _n'$ from $0\to 2\pi n$ by the previous proposition. We thus have $\pi \circ \widetilde{\omega } _n \sim \pi \circ \widetilde{\omega } _n'$.
+
+	Now we show $h:n\mapsto \omega _n$ is a group homomorphism. We thus have $h(n)h(m)=[\omega _n]\cdot [\omega _m]=[\omega _n \cdot \omega _m]$. The other side is simply $h(n+m)=[\omega_{n+m} ]$. The loop $\omega _n \circ \omega _m$ lifts to $\mathbb{R} $, and it's starting point is $0$ and it's ending point is $2\pi (n+m)$ since it goes $0\to m\to m+n$. Therefore, this is homotopic to $\omega_{n+m} $, and $h$ is a group homomorphism.
+
+	Now injectivity and surjectivity. For any loop $\phi $ in $S^1$, there exists a lift $\widetilde{\phi } $ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & \mathbb{R} \ar[" \pi  ", d]  \\
+		\left[ 0,1 \right] \ar[" \widetilde{\phi }  ", ur] \ar[" \phi  "', r]  & S^1
+	\end{tikzcd}\]
+	commutes. In particular, $\widetilde{\phi } (1)\in \pi ^{-1} (x_0)=\mathbb{Z} \subseteq \mathbb{R} $, i.e. $\widetilde{\phi } (1)=n$ for some $n\in\mathbb{Z} $.
+
+	For any $x\in S^1$, there exists a neighborhood $U$ of $x$ in $S^1$ such that
+	\[
+		\pi ^{-1} (U)=\coprod_{n\in\mathbb{Z} } \mathcal{U}_n
+	\]
+	for $\mathcal{U}_n$ open, disjoint subsets, and $\mathcal{U}_n \cong U$ by $\pi $. This argument generalizes to what are called covering spaces. Let $\mathcal{U} _0$ contain $0$. The preimage $\phi ^{-1} (\mathcal{U} _0)$ is also open, so this contains $0$. I have no idea how this proof is going to conclude.
+\end{proof}
+
+Intuition for the above argument - take $\mathbb{R} $, wrap it into a helix, and project it down into $S^1$. That's $\pi $.
+ 

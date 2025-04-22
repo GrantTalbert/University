@@ -1,0 +1,154 @@
+\chapter{Categories, Functors, and Natural Transformations}
+
+\section{Axioms for Categories}
+We start by describing categories using \emph{metagraphs}, which do not employ the use of set theory. A metagraph consists of objects, arrows, and two operatons:
+\begin{itemize}
+	\item Domain, which maps arrows to an object $\operatorname{dom} f=a$;
+	\item Codomain, which maps arrows to an object $\operatorname{cod} f=b$.
+\end{itemize}
+We write $f : a \to b$ to indicate $f$ is an arrow with $\operatorname{dom} f=a$ and $\operatorname{cod} f=b$.
+
+A \emph{metacategory} is a metagraph together with two additional operations:
+\begin{itemize}
+	\item Identity, assigning each item $a$ an arrow $1_a$;
+	\item Composite, assigning each pair $(f,g)$ of arrows with $\operatorname{dom} g=\operatorname{cod} f$, an arrow $g\circ f : \operatorname{dom} f \to \operatorname{cod} g$ called their composite;
+\end{itemize}
+such that composition is associative and the identity arrows $1_a$ are identities with respect to composition. Alternative notations for the identity $1_a$ include $\mathrm{id} _a$, and simply $a$ itself. Examples of metacategories include the usual category $\Set $ of sets and $\Grp $ of groups, topological spaces with continuous maps as arrows, and compact Hausdorff spaces with the same as arrows.
+
+Since identity arrows are uniquely determined for each object, it's possible to dispense entirely of the objects in a metacategory and define an arrows-only metacategory $C$. There exist a collection of arrows, for which some pairs $(f,g)$ of arrows are called \emph{composable}. For any composable arrows, we say the composition $g\circ f$ is defined, and we can then define an identity arrow to be any arrow $u$ satisfying $f\circ u=f$ and $u\circ g=u$ for any $f,g$ such that the composition is defined. The data must then satisfy the axioms
+\begin{itemize}
+	\item $(k\circ g)\circ f$ is defined iff $k\circ (g\circ f)$ is defined, and they are equal;
+	\item The composite $kgf$ is defined if and only if the composites $kg$ and $gf$ are defined;
+	\item For each arrow $g$ of $C$, there exist identity arrows $u,u'$ such that $gu$ and $u'g$ are defined.
+\end{itemize}
+
+The final axiom indeed shows that identity arrows are unique in this regard, and allows defining of a domain and codomain for the arrow $g$. An arrows-only metacategory thus satisfies the usual metacategory axioms, if identity arrows are taken as objects.
+
+\section{Categories}
+
+\begin{definition}[Directed Graph]\label{dfn:1.1}
+	A directed graph is a set $O$ of objects, a set $A$ of arrows, and two functions
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		A\ar[r, shift left, "\text{dom} "]\ar[r, shift right, "\text{cod} "']&O
+	\end{tikzcd}\]
+	where the set of composable pairs is the set
+	\[
+		A\times_OA=\left\{ (g,f)\mid g,f\in A,\operatorname{dom} g=\operatorname{cod} f \right\} 
+	.\]
+\end{definition}
+
+\begin{definition}[Category]\label{dfn:1.2}
+	A category is a directed graph with two additional functions
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		O\ar[r, "\mathrm{id} "]&A,&A\times _OA\ar[r, "\circ "]&A,\\
+		c\ar[r, mapsto]&1_c,&(g,f)\ar[r, mapsto]&g\circ f,
+	\end{tikzcd}\]
+	where $g\circ f$ is usually written $gf$, such that
+	\[
+		\operatorname{dom} 1_a=\operatorname{cod} 1_a,\qquad \operatorname{dom} gf=\operatorname{dom} f,\qquad \operatorname{cod} gf=\operatorname{cod} g
+	.\]
+	for all $a\in O$ and $(g,f)\in A\times _OA$, such that a metacategory is formed.
+\end{definition}
+
+That is, a category is an interpretation of a metacategory within set theory. If $C$ is a category, we usually write $a\in C$ or $f\in C$ to say $a$ is an object of $C$, or $f$ is an arrow of $C$. We also write
+\[
+	\Hom(b, c) =\left\{ f\in C\mid \operatorname{dom} f=b,\operatorname{cod} f=c \right\} 
+\]
+for the set of arrows $b \to c$. We will show later that this definition of a category is the same as saying a category is a monoid for the product $\times_O$.
+
+Examples of categories include
+\begin{itemize}
+	\item $\mathbf{0} $, the empty category;
+	\item $\mathbf{1} $, the category with one object and one arrow;
+	\item $\mathbf{2} $, the category with two objects and precisely one non-identity arrow $a\to b$;
+	\item $\mathbf{3} $, the category with three objects whose non-identity arrows form a triangle
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			&\bullet\ar[dr] \\
+			\bullet \ar[ur] &&\bullet \ar[ll] 
+		\end{tikzcd}\]
+	\item $\downdownarrows$, the category with two objects and two non-identity arrows $a\rightrightarrows b$; we call such arrows \emph{parallel arrows}.
+\end{itemize}
+
+A category is called \emph{discrete} when all arrows are identities. Any set forms a discrete category, and any discrete category is completely determined by it's arrows.
+
+A \emph{monoid} is a category with one object. A monoid is thus fully described by it's arrows, and it's composition operation. A monoid can thus be described as a set $M$ (of arrows) together with a binary operation $M\times M\to M$ and an identity element; such an object is precisely a semigroup with unity. Thus, for any category $C$ and any object $a\in C$, the category $\Hom(a, a) $ forms a monoid. In this vein of thought, a group is thus a category where every arrow has a two-sided inverse.
+
+Given a set $V$ of sets, the category $\mathbf{Ens}_V$ takes $V$ as the objects, and morphisms as any regular functions between sets in $V$. $\mathbf{Ens} $ refers to an arbitrary category of this type.
+
+An ordinal number $n$ can be seen as the set $\left\{ 0, \ldots , n-1 \right\} $, and hence each ordinal is a category when viewed as a preorder. We can also consider the category $\omega $, the first infinite cardinal, which when viewed as a category looks like
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r] &1\ar[r] &2\ar[r] &3\ar[r] &\ldots 
+\end{tikzcd}\]
+
+The category $\Delta $ takes all finite ordinals as objects and all order-preserving functions $f : m \to n$ as arrows. This category is generally called the \emph{simplical category}, and it is extremely important.
+
+We want an actual category $\Set $, which is clearly not a set itself. We will circumvent this by allowing there to exist a ``universe'' $\mathcal{U} $, and will call a set ``small'' if it belongs to the universe. We will construct this explicitly later (and I will be calling small sets ``sets'' and large sets ``classes'' like a normal fucking person). This allows us to construct
+\begin{itemize}
+	\item $\Set $, objects are sets and morphisms are functions;
+	\item $\Set_*$, objects are sets with a selected point, and morphisms are functions preserving these points;
+	\item $\mathbf{Ens} $, category of all classes and functions within a variable set $V$;
+	\item $\mathbf{Cat} $, category of small categories and morphisms as functors;
+	\item $\Grp $, category of groups and morphisms as group homomorphisms;
+	\item $\mathbf{Ab} $, category of abelian groups;
+	\item $\mathbf{Mon} $, category of (small) monoids;
+	\item $\Ring $, category of rings;
+	\item $\mathbf{CRing} $, category of commutative rings;
+	\item $R$-$\mathbf{Mod} $, category of left $R$-modules;
+	\item $\mathbf{Mod}$-$R$, category of right $R$-modules;
+	\item $\mathbf{Top} $, category of topological spaces;
+	\item $\mathbf{Toph} $, category of topological spaces with morphisms as homotopy classes of maps;
+	\item $\mathbf{Top}_*$, category of topological spaces with a distinguised base point; base preserving continuous maps.
+\end{itemize}
+
+\section{Functors}
+
+\begin{definition}[Functor]\label{dfn:1.3}
+	Let $C,D$ be categories. A functor $T : C \to D$ consists of an object function $T$ mapping each $c\in C$ to some $Tc\in D$, and an arrow function mapping each $f : c \to c'$ in $C$ to $Tf : Tc \to Tc'$ in $D$, in such a way that
+	\[
+		T1_c=1_{Tc} ,\qquad T(g\circ f)=T(g)\circ T(f)
+	\]
+	whenever the composite $g\circ f$ is defined in $C$.
+\end{definition}
+
+For example, the power set functor $\mathscr{P} : \Set  \to \Set $, defined such that for any $f : A \to B$, the new map $\mathscr{P} f : \mathscr{P} A \to \mathscr{P} B$ is such that for any $S\subseteq A$, $\mathscr{P} f(S)=f(S)$.
+
+Functors first arose in algebraic topology. For any $n$, a topological space $X$ can be assigned an abelian group $H_n(X)$ called the $n$-th homology group of $X$. However, for any $: X \to Y$, there exists an induced $H_n(f): H_n(X) \to H_n(Y)$ morphism of groups, and thus $H_n$ becomes a functor $\Top \to \mathbf{Ab} $. We can in fact show homologygroups are invariant under homotopy, and so we can equally define a functor $\mathbf{Toph} \to \Grp $. The homotopy groups $\pi _n$ are also functors; since they depend on a base point they define a functor $\Top_* \to \Grp $.
+
+A functor which ``forgets'' underlying structure of an object is called a \emph{forgetful functor}. For example, there is an apparent forgetful functor $U : \Grp  \to \Set $, another $U : \Ring  \to \mathbf{Ab}  $, and so on.
+
+Clearly functors may be composed, and moreover there is an identity functor $1_C$ for any category $C$. We may thus consider the metacategory of all categories, or the category $\mathbf{Cat} $ of all small categories.
+
+A functor is called an \emph{isomorphism} if it is two-sided invertible; in general isomorphism is too strong a condition, and weaker conditions are more useful. A functor is \emph{full} if for every $c,c'\in C$ and every arrow $g : Tc \to Tc'$ in $D$, there exists $f : c \to c'$ in $C$ such that $g=Tf$. A functor is \emph{faithful}, or an embedding, if for all $c_1,c_2\in C$ and parallel arrows $f_1,f_2: c_1 \to c_2$ such that $Tf_1=Tf_2$, we have $f_1=f_2$.
+
+These properties can be realized more intuitively. A functor defines functions $T : \Hom(c, c')  \to \Hom(Tc, Tc') $. A functor is full when these functions are surjective; it is faithful when they are injective. A fully faithful functor is then a functor where these functions are bijections.
+
+A subcategory $S$ of a category $C$ is a subset of the objects and arrows in $C$ in such a way that $S$ forms a category. There is automatically a faithful inclusion functor $S\hookrightarrow C$; we say a subcategory is \emph{full} when the inclusion functor is full. Intuitively, $S$ contains all arrows in $C$ for the specified subcollection of objects.
+
+\section{Natural Transformations}
+\begin{definition}[Natural Transformation]\label{dfn:1.4}
+	Let $T,S : C \to D$ be functors. A natural transformation $\tau : S \Rightarrow T$ is a function which assigns to each $c\in C$ an arrow $\tau _c=\tau c : Sc \to Tc$ of $D$, called the \emph{component of $\tau $ at $c$}, such that for all $f : c \to c'$ in $C$, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		Sc\ar[" \tau c ", r] \ar[" Sf "', d] &Tc\ar[" Tf ", d] \\
+		Sc'\ar[" \tau c' ", r] &Tc'
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+We say any component $\tau c : Sc \to Tc$ is \emph{natural} in $c$. We can think of a natural transformation $\tau : S \Rightarrow T$ as a way of transforming the image of a functor $S$ into that of a functor $T$. For example, given a triangle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" f ", dr] \ar[" h "', dd] \\
+	&b \ar[" g ", dl] \\
+	c
+\end{tikzcd}\]
+we would expect the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	Sa\ar[" \tau a ", rrr] \ar[" Sf ", dr] \ar[" Sh ", dd] &&&Ta\ar[" Tf ", dr] \ar[" Th ", dd] \\
+							       &Sb \ar[" Sg ", dl] &&&Tb \ar[" Tg ", dl] \\
+	Sc\ar[" \tau c "', rrr] &&&Tc
+	\arrow[from=2-2, to=2-5, crossing over]
+\end{tikzcd}\]
+commute. Indeed, it does.
+
+Natural transformations define \emph{morphisms of functors}. If a natural transformation has every component invertible, we call it a \emph{natural isomorphism} and write $S\cong T$.
+
+For example, the determinant is a natural transformation $\det_K : \operatorname{GL}_n \Rightarrow \left(  \right) ^*$, where $K\mapsto K^*$ maps a ring to it's group of units. These are clearly two functors 

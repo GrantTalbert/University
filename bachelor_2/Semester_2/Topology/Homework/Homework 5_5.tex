@@ -4,25 +4,120 @@
 \title{Homework 5}
 \courseID{MA 564}
 \courseSection{A1}
+\usepackage{eucal}
 \begin{document}
 \makeproblem
 \section*{Problem 1}
-\section*{Problem 2}
-rigorizing will be messy, but just note that the subspace topology is still just the cofinite topology, so if i have a set that doesnt fully cover it, but i have a full cover, then there are at most finitely many sets required in the cover to cover the rest after that first set, sicne its compliment is finite
-\section*{Problem 3}
-Let $\mathcal{O} $ be an open cover of $A$. Then
+Since $f$ is continuous, for all $\varepsilon >0$ and for all $x\in X$, there exists $\delta_x>0$ such that $d_X(x,y)<\delta_x $ implies $d_Y(f(x),f(y))<\varepsilon $. In particular, we can without loss of generality take $\delta_x$ such that $d_Y(f(x),f(y))<\varepsilon /2$. It also follows that
 \[
-	A=\bigcup_{O\in \mathcal{O} } \left( O \cap A \right) =\left( \bigcup_{O\in \mathcal{O} } O \right) \cap A
-.\]
-Since $A$ is compact, it admits a finite subcover $\mathcal{O} '$, and thus
-\[
-	A=\left( \bigcup_{O\in \mathcal{O} '} O \right) \cap A=\bigcup_{O\in \mathcal{O} '} \left( O \cap A \right)
-.\]
-Therefore, any open cover in the subspace topology admits a finite subcover in the subspace topology.
+	\bigcup_{x\in X} B_{\delta _x/2} (x)=X
+,\]
+and thus $\left\{ B_{\delta _x/2}  \right\}_{x\in X} $ is an open cover of $X$. Since $X$ is compact, there exists a finite subcover $\left\{ B_{\delta_i/2}(x_i)  \right\}_{i=1}^n$.
 
-[converse is harder]
+Let $\delta \coloneqq \min \left\{ \frac{\delta _i}{2} \right\}_{i=1}^n$, and note that since the subcover is finite, necessarily $\delta >0$. Let $x,y\in X$ such that $d_X(x,y)<\delta $. Since $\left\{ B_{\delta_i/2} (x_i) \right\}_{i=1}^n$ is a cover of $X$, we have that $x\in B_{\delta _i/2} (x_i)$ for some $i$. That is, $d_X(x,x_i)<\delta_i/2$. It follows that
+\begin{align*}
+	d_X(y,x_i)&\leq d_X(y,x)+d_X(x,x_i)\\
+		  &\leq \delta +\frac{\delta_i}{2} \\
+		  &\leq \frac{\delta_i}{2} +\frac{\delta _i}{2} \\
+		  &=\delta _i
+.\end{align*}
+Therefore, $x,y\in B_{\delta _i} (x_i)$, and by our choice of $\delta_i$, we have
+\[
+	d_Y(f(x),f(x_i))\leq \frac{\varepsilon }{2} ,\qquad d_Y(f(y),f(x_i))\leq \frac{\varepsilon }{2} 
+.\]
+By the triangle inequality once again, we have
+\[
+	d_Y(f(x),f(y))\leq d_Y(f(x),f(x_i))+d_Y(f(y),f(x_i))\leq \frac{\varepsilon }{2} =\varepsilon 
+.\]
+Therefore, for all $\varepsilon $, there exists $\delta $ such that for any $x,y$ satisfying $d_X(x,y)<\delta $, we have $d_Y(f(x),f(y))<\varepsilon $, and $f$ is uniformly continuous.
+\section*{Problem 2}
+Let $X$ have the finite compliment topology, and let $\mathcal{U} \coloneqq \left\{ U_\alpha  \right\}_{\alpha \in A} $ be an open cover of $X$. Choose some set, denoted $V_0 \in \mathcal{U} $. Since $\mathcal{U} $ is an open cover, for all $x\in V_0^{c} $, there exists $\alpha $ such that $x\in U_{\alpha } $. For each such $x\in V_0^{c} $, choose precisely one $V_x$ such that $x\in V_x\in \mathcal{U} $. This gives us a new collection $\mathcal{V} \coloneqq \left\{ V_x \right\}_{x\in V_0^{c} }\cup \{V_0\}$. Clearly this collection is finite; we have at most one $V_x$ for each $x\in V_0^{c} $ which is finite, and thus $\left| \mathcal{V}  \right| =\left| V_0^{c}  \right| +1<\infty $.
+
+Note that for any $x\in X$, we either have $x\in V_0\in \mathcal{V} $, or $x\notin V_0$. In the case of the latter, by definition there exists $x\in V_x\in \mathcal{V} $. Therefore, $\mathcal{V} $ is a finite cover of $X$. Since $V_x\in \mathcal{U} $ for all $x$, it is indeed a finite subcover of $X$, and $X$ is compact.
+
+Consider $\mathbb{N} $ with the finite compliment topology, and consider the subset $\mathbb{N} \setminus \left\{ 0 \right\} $. Clearly this space is not closed, and sets are compact if and only if they are compact with respect to the subspace topology. By our previous result, it thus suffices to show $\mathbb{N} \setminus \left\{ 0 \right\} $ has the finite compliment topology. Indeed, let $U\subseteq \mathbb{N}\setminus \left\{ 0 \right\}  $ be open. Then there exists some $U'$ open in $\mathbb{N} $ such that
+\[
+	U=U' \cap \left( \mathbb{N} \setminus \left\{ 0 \right\}  \right) =U'\setminus \left\{ 0 \right\} 
+.\]
+If $0\notin U'$, then the compliment of $U$ is simply $U^{\prime c} \setminus \left\{ 0 \right\} $. If $0\in U'$, then $U^{c} =U^{\prime c} $. Since $U^{\prime c} $ is finite, both of these sets are clearly finite, and thus all open sets in $\mathbb{N} \setminus \left\{ 0 \right\} $ have finite compliment.
+
+For the converse, let $U\subseteq \mathbb{N} \setminus \left\{ 0 \right\} $ have finite compliment. Then $U=U \cap \mathbb{N} $, and since $U$ has finite compliment in $\mathbb{N} \setminus \left\{ 0 \right\} $, it's compliment in $\mathbb{N} $ is also clearly finite. Therefore, $U$ is open, and $\mathbb{N} \setminus \left\{ 0 \right\} $ inherits the finite compliment topology.
+\section*{Problem 3}
+I was wayyyy too tired when I wrote this one so it's hard to read and lowkey I don't know how to fix it sorry
+
+Let $A\subseteq X$ be compact in $X$, and let $\mathcal{O} $ be an open cover of $A$ in the subspace topology. Then there exists a corresponding set $\mathcal{O} '$ of open sets in $X$ such that for all $O\in \mathcal{O} $,
+\[
+	O=O' \cap A
+\]
+for some $O'\in \mathcal{O} '$. Thus,
+\[
+	\bigcup_{O'\in \mathcal{O}'} \left( O' \cap A \right) =\left( \bigcup_{O\in \mathcal{O} } O \right)=A
+.\]
+Therefore, $\mathcal{O} '$ forms an open cover of $A$. Since $A$ is compact, it admits a finite subcover $\hat{\mathcal{O}}\subseteq \mathcal{O} '$, and thus
+\[
+	A=\left( \bigcup_{\hat{O}\in \hat{\mathcal{O}}} \hat{O} \right) \cap A=\bigcup_{\hat{O}\in \hat{\mathcal{O}}} \left( \hat{O} \cap A \right)
+.\]
+By definition, each $\hat{O} \cap A$ is open in the subspace topology, and moreover this collection is a \emph{finite} subcollection of $\mathcal{O} $. Thus any open cover in the subspace topology admits a finite subcover in the subspace topology.
+
+Now let $A$ be compact with respect to the subspace topology. Let $\mathcal{O} $ be an open cover of $A$ in $X$. It follows that
+\[
+	A=\left(\bigcup_{O\in \mathcal{O} }O \right)\cap A=\bigcup_{O\in \mathcal{O} } \left( O \cap A \right) 
+.\]
+Therefore, this is an open cover in the subspace topology of elements of the form $O \cap A$, and thus it admits a finite subcover $\mathcal{O} '$ of elements of this form. We can take $\hat{\mathcal{O} }\subseteq \mathcal{O} $ to be this collection of open sets $O\in \mathcal{O} $ such that each $O'=\hat{O} \cap A$ for $O'\in \mathcal{O}'$. Since $\left| \hat{\mathcal{O}} \right| =\left| \mathcal{O} ' \right| $, and $\mathcal{O} '$ is finite, this is still a finite cover.
+\[
+	A=\bigcup_{\hat{O}\in \hat{\mathcal{O} }} \left( \hat{O}\cap A \right) =\left( \bigcup_{\hat{O}\in \hat{\mathcal{O} }} \hat{O} \right) \cap A
+.\]
+Therefore, $\hat{\mathcal{O} }\subseteq \mathcal{O} $ is an finite subcover of $A$ in $X$.
 \section*{Problem 4}
+Let $\left\{ O \right\}_{i\in I} $ be an open cover of $X$. Let $y\in Y$. Since this is also a cover of $f^{-1} (y)$, by compactness there exists a finite subcover $\left\{ O_{y,i}  \right\}_{i=1}^n$ of $f^{-1} (y)$. Since $\mathcal{O}_y\coloneqq \bigcup_{i=1}^n O_{y,i}  $ is a union of open sets, it's open in $X$, and thus $\mathcal{O}_y^{c} $ is closed. Since $f$ is a closed map, $f\left( \mathcal{O}_y^{c}  \right) \subseteq Y$ is closed, and thus $f\left( \mathcal{O}_y^{c}  \right) ^{c} $ is open in $Y$. Trivially, $y\in f\left( \mathcal{O}_y^{c}  \right) ^{c} $, as $f^{-1} (y)\cap \mathcal{O}_y ^{c} =\varnothing $. Let $V_y \coloneqq f\left( \mathcal{O}_y^{c}  \right) ^{c} $, and consider the preimage $f^{-1} (V_y)$. Note that for all $x\in f^{-1} (V_y)$, we must have $f(x)\in f(\mathcal{O}_y^{c} )^{c} $, and thus $x\notin \mathcal{O}_y ^{c} $, and thus $x\in \mathcal{O}_y$. Therefore, $f^{-1} (V_y)\subseteq \mathcal{O}_y$, and thus $\left\{ O_{y,i}  \right\}_{i=1}^n$ is a finite cover of $f^{-1} (V_y)$. Moreover, since $y\in V_y$, the neighborhood is nonempty, so we have that
+\[
+	Y=\bigcup_{y\in Y} V_y
+,\]
+with notation as before. Since $Y$ is compact, there exists a finite subcover $\left\{ V_{y_j}  \right\}_{j=1}^m$, and thus
+\[
+	X=f^{-1} (Y)=f^{-1} \left( \bigcup_{j=1}^m V_{y_j}  \right) =\bigcup_{j=1} ^m f^{-1} (V_{y_j} )
+.\]
+Note that for each $f^{-1} (V_{y_j} )$, there exists a finite subcover $\left\{ O_{y_{j_i} }  \right\}_{i=1}^n\subseteq \left\{ O_i \right\}_{i\in I}  $, and thus
+\[
+	X=\bigcup_{j=1}^m \bigcup_{i=1}^n O_{y_{j_i} } 
+.\]
+Since this is a finite subcover of $\left\{ O_i \right\}_{i\in I} $, we have that $X$ is compact.
 \section*{Problem 5}
+Note that since $X,Y$ are compact and Hausdorff, then so is $X\times Y$. Suppose that $F$ is closed in $X\times Y$. Since it's closed, and $X\times Y$ is compact, $F$ must also be compact. Now consider the restriction $\pi_X|_F : F \to X$ of the natural projection $\pi_X : X\times Y \to X$. I will simply denote $\pi_X|_F$ as $\pi $ for simplicity of notation. It is clear that $\pi $ is a bijection since $f$ is well-defined, and it's also clear that it is continuous; for any open set $U\subseteq X$, the preimage in $F$ can be seen as $\left( U \times Y \right) \cap F$, which is clearly open with respect to the subspace topology.
+
+Let $U\subseteq Y$ be open. Note that $U\times X$ is open in $X\times Y$, and thus $V\coloneqq \left( X \times U \right) \cap F$ is open in $F$. However, note that since $F=\left\{ (x,f(x)\mid x\in X \right\} $, the set $V$ is equivalent to
+\[
+	\left\{ (x,u)\mid u\in U,x\in f^{-1} (u) \right\} 
+.\]
+It follows that $\pi (V)=f^{-1} (U)$. If $\pi $ is a homeomorphism, then $\pi (V)$ will be open in $X$, and thus $f^{-1} (U)$ will be open in $X$ for all $U\subseteq Y$ open. It thus suffices to show $\pi $ is a homeomorphism, which is shown by the following lemma since $\pi $ is continuous and bijective. I admit I got stuck on the problem and asked ChatGPT for help, and it suggested this lemma. I specifically requested it to not offer any additional advice, and as such the rest of the writeup is my own, as is the proof of the lemma (in fact I proved this last year and just forgot it existed lol).
+
+\begin{lemma}\label{lma:1}
+	Let $X$ be compact, $Y$ be Hausdorff, and let $f : X \to Y$ be continuous and bijective. Then $f$ is a homeomorphism.
+\end{lemma}
+\begin{proof}
+	First, we show that a bijection $f : X \to Y$ is continuous if and only if the preimage of every closed set is closed. Let $f$ be continuous, and let $C\subseteq Y$ be closed. Then $C^{c} $ is open, and thus $f^{-1} (C^{c} )$ is open. Since $f^{-1} $ is a bijection, $f^{-1} (C)\cup f^{-1} (C^{c} )=X$, and thus $f^{-1} (C^{c} )=f^{-1} (C)^{c} $. Therefore, $f^{-1} (C)^{c} $ is open, and thus $f^{-1} (C)$ is closed.
+
+	For the converse, let $f$ be a bijection such that the preimage of every closed set is closed. Let $U\subseteq Y$ be open, and note that by the same logic as before, $f^{-1} (U^{c} )=f^{-1} (U)^{c} $ is closed. Therefore, $f^{-1} (U)$ is open in $X$, and $f$ is continuous.
+
+	Finally, let $C$ be closed in $X$. Since $X$ is compact and $C$ is closed, we have that $C$ is compact. It's easily shown using previous logic that the restriction $f|_C$ of a continuous function $f$ to a subspace $C$ is still continuous with respect to the subspace topology. Thus, $f|_C : C \to Y$ is continuous, and thus $f|_C(C)=f(C)$ is compact in $Y$. Since $Y$ is Hausdorff, we have that $f(C)$ is closed in $Y$, and thus $f^{-1} $ is continuous by our above argument.
+\end{proof}
+
 \section*{Problem 6}
+Since $X$ is Hausdorff, $A,B$ are closed. Therefore, $A \cap B$ is closed in $X$. It follows that $\left( A \cap B \right) ^{c} $ is open in $X$, and thus $\left( A \cap B \right) ^{c} \cap A$ is open in $A$. It follows that $A \cap B$ is closed in $A$. Recall that a set $A$ is compact if and only if it is compact with respect to the subspace topology, and thus $A$ is compact as a subspace. Finally, note that for any compact space $A$, any closed subset is compact. Since $A \cap B$ is closed in $A$, we have that $A \cap B$ is compact in $A$. It follows that $A \cap B$ is compact with respect to the subspace topology induced by the subspace topology on $A$. Since this consists of sets of the form
+\[
+	U \cap A \cap \left( A \cap B \right) =U \cap \left( A \cap B \right) 
+\]
+for $U$ any open set in $X$, we have that $A \cap B$ is compact with respect to the subspace topology induced by $X$. Therefore, $A \cap B$ is compact in $X$.
 \section*{Problem 7}
+Let $a\in A$, and note that for all $b\in B$, there exist disjoint neighborhoods $U_{a,b} ,V_b$ of $x$ and $b$, respectively. It follows that $\left\{ V_b \right\}_{b\in B} $ forms an open cover of $B$, with notation as before. Since $B$ is compact, there exists a finite subcover $\left\{ V_{b_i}  \right\}_{i=1}^n$, and thus we can consider the set
+\[
+	\mathcal{U}_a \coloneqq \bigcap_{i=1}^n U_{a,b_i} 
+.\]
+Since this is a finite intersection of open sets, $\mathcal{U}_a$ is open. Moreover, since $U_{a,b_i} \cap V_{b_i} =\varnothing $, and since $\left\{ V_{b_i}  \right\}_{i=1}^n$ is an open cover of $B$, it follows that $\mathcal{U}_a \cap B=\varnothing $. Define
+\[
+	U\coloneqq \bigcup_{a\in A} \mathcal{U}_a
+.\]
+Clearly $U \cap B=\varnothing $.
+
+The remainder of the proof is a repeat of the above. Note that we only required $A$ be compact and $A \cap B=\varnothing $ to find an open set $U$ containing $A$ that is disjoint from $B$. By the same logic, since $B$ is compact and $B \cap U=\varnothing $, we can find an open set $V$ containing $B$ that is disjoint from $U$ in the exact same way. This concludes the proof.
 \end{document}

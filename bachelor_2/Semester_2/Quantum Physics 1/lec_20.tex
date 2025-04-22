@@ -1,0 +1,114 @@
+\lecture{20}{Tue 15 Apr 2025 14:00}{Finishing Scattering}
+Ok recall the scenario. We have a potential well, and we set the boundaries $V\to \pm \infty $ to $0$, and the potential becomes $-V_0$ for $x\in (-a,a)$. The most general solution to Schrodinger's equation in this case is
+\[
+	\psi (x)=Ae^{ik_1x} +Be^{-ik_1x} ,\qquad x<-a,
+\]
+\[
+	\psi (x)=Ce^{ik_2x} +De^{-ik_2x} ,\qquad -a<x<a,
+\]
+\[
+	\psi (x)=Fe^{ik_1x} 
+.\]
+The final term goes away because particles that make it past the well HAVE to be going in the opposite direction of our particle shooter. We also have
+\[
+	k_1^2=\frac{2m}{\hbar ^2} E,\qquad k_2^2=\frac{2m}{\hbar ^2} \left( E+V_0 \right) 
+.\]
+This all follows from the Schrodinger equation. Our boundary conditions will be that the solutions must match across the boundary, and the derivative must also match since the derivative is continuous. That is, our boundary conditions are that $\psi ,\psi '$ are continuous. Computing the solution in the first region,
+\[
+	\psi (-a)=Ae^{-ik_1a} +Be^{ik_1a} 
+.\]
+In the second region,
+\[
+	\psi (-a)=Ce^{-ik_2a} +De^{ik_2a} 
+.\]
+These must be equal. We also have
+\[
+	Ce^{ik_2a} +De^{-ik_2a} =Fe^{ik_1a} 
+\]
+by continuity at $a$. We also have these same conditions with the derivatives:
+\[
+	ik_2Ce^{ik_2a} -ik_2De^{-ik_2a} =ik_1Fe^{ik_1a} ,
+\]
+\[
+	ik_1Ae^{-ik_1a} -ik_1Be^{ik_1a} =ik_2Ce^{-ik_2a} -ik_2De^{ik_2a} 
+.\]
+
+Since $A$ corresponds to particles coming out of the gun, we can choose $A$. This reduces this to a system of 4 equations with 4 variables, which is solvable. We also define
+\[
+	T\coloneqq \left| \frac{F}{A}  \right| ^2,\qquad R=\left| \frac{B}{A}  \right| ^2
+.\]
+These are the transmission and reflection coefficients, respectively. These are the probability that a particle is transmitted (goes out in $F$ direction) or reflected (returns along $B$ term), divided by $A$ (magnitude of particles shot). We have that $T+R \equiv 1$ due to probabilities.
+
+If we plug this into mathematica (or do a lot of manual computation), we obtain
+\[
+	T=\frac{1}{1+\xi} ,\qquad R=\frac{1}{1+\xi^{-1}  } ,\qquad \xi \coloneqq \frac{\left( k_1^2-k_2^2 \right) ^2 \sin ^2(2k_2a)}{4k_1^2k_2^2} 
+.\]
+
+If $k_2$ is $\pi n/a$ for $n\in\mathbb{Z} $, then $\xi $ goes to $0$, and $T\to 1$. So if $k_2=\pi n/a$, then all particles are transmitted.
+
+Now let's do a potential bump. Our potential changes to be
+\[
+	V(x)=V_0,\; -a<x<a
+.\]
+In essence, the new $V(x)$ is the negative of the old potential. We can reuse our old solutions and just flip a sign in $k_2^2$ to reflect this:
+\[
+	k_2^2 = \frac{2m}{\hbar } \left( E-V_0 \right) 
+.\]
+However, if $V_0$ becomes bigger than $E$, then $k_2$ becomes imaginary. Let
+\[
+	q^2\coloneqq \frac{2m}{\hbar } \left( V_0-E \right) ,
+\]
+which is real. Moreover, $q=i^2k_2$ when $k_2$ is real, so we simply have
+\[
+	\psi (x)=Ce^{qx} +De^{-qx} 
+.\]
+Showing this is not difficult, it just amounts to solving the Schrodinger equation. The new $\xi $ is just
+\[
+	\xi =\frac{\left( k_1^2-(iq)^2 \right) ^2 \sin ^2\left( 2(iq)a \right) }{4k_1^2(iq)^2} =\frac{\left( k_1^2+q^2 \right) ^2 \sin ^2\left( 2iqa \right) }{-4k_1^2q^2} =\frac{\left( k_1^2+q^2 \right) ^2 \sinh^2\left( 2qa \right) }{4k_1^2q^2} 
+.\]
+Note here that we used the identity
+\[
+	\sin (ix)=\frac{e^{-i(ix)} -e^{i(ix)} }{2i} =\frac{e^{-x} -e^{x} }{2i} =i \sinh(x)
+.\]
+Traversing the bump then amounts to quantum tunneling. The fact that the decay inside the bump is exponetial, we can make very precise measurement tools that are very sensitive to the distance the particles have to tunnel over.
+
+\chapter{Three Dimensional Systems}
+We now have wavefunctions $\psi (x,y,z)$. To define this, let $X\ket{x,y,z} =x\ket{x,y,z} $, $Y\ket{x,y,z}=y\ket{x,y,z} $, and $Z\ket{x,y,z} =z\ket{x,y,z} $. These are position operators in the $x,y,z$ directions. We usually write $\mathbf{r} $ for $(x,y,z)$, and write $\mathbf{R} =(X,Y,Z)$. We write $r_i$ or $R_i$ for the $i$th component. We then define
+\[
+	\psi (x,y,z)\coloneqq \braket{x,y,z}{\psi } 
+.\]
+More simply,
+\[
+	\psi (r)=\braket{r}{\psi } 
+.\]
+Oh yeah I'm too lazy to keep dragging the mathbf around. The old hamiltonian was
+\[
+	H=\frac{P^2}{2m} +V(X)
+.\]
+Our new one is then just
+\[
+	H=\frac{P^2}{2m} +V(R),
+\]
+where
+\[
+	\mathbf{P} =i\hbar \nabla 
+.\]
+Issue: how do we square vectors? When we write $\mathbf{v} ^2$, we mean $\mathbf{v} \cdot \mathbf{v} $. So $\mathbf{P} ^2=-\hbar^2 \nabla \cdot \nabla =-\hbar^2 \Delta $, for $\Delta $ the Lapalacian. I actually think I prefer the notation $\nabla ^2$. Our new hamiltonian is this
+\[
+	H=\frac{-\hbar ^2}{2m} \nabla ^2 +V(R)
+.\]
+This preserves our 1-dimensional magnitudes
+\[
+	P_j = -i \hbar \frac{\partial }{\partial j} 
+.\]
+The commutators all still have $\left[ R_i,P_j \right] =i\hbar $. The energy eigenvalue equation becomes
+\[
+	\left(-\frac{\hbar ^2}{2m} \nabla ^2 +V(R)\right)\psi (r)=E\psi (r)
+.\]
+Because this is a PDE, it's basically unsolvable for most potentials $V(r)$. However, we \emph{can} solve it for the \emph{hydrogen atom}.
+
+The hydrogen atom has various symmetries. The hydrogen atom has one proton and one electron. We thus have a wavefunction $\psi (r_e,r_p)$ which is 6-dimensional wtf that's terrifying. What is the potential $V(r_e,r_p)$? They have a Coulomb force between them, which is given by
+\[
+	V=-\left( 4\pi \varepsilon _0 \right) \frac{e^2}{\left| r_e-r_p \right| } 
+.\]
+The potential is translation invariant, as it only depends on relative distance. I think we will be able to WLOG set $r_p=0$, and set it to a 3d function. We will see next class.

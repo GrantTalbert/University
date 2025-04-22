@@ -1,0 +1,188 @@
+\part{Special Topics}
+\section{Adjunction}
+
+\subsection{Universal Arrows}
+
+This notion of a ``universal property'' is useful, but we haven't given a \emph{precise definition} of what it is. We just said ``view an object as universal in some category''. How do we make this notion precise? One way to do this is to first make precise the notion of a universal arrow.
+
+\begin{definition}[Universal Arrow]\label{dfn:7}
+	Let $\mathcal{U} : \mathcal{C}  \to \mathcal{D} $ be a functor, and let $D\in \mathcal{D} $ be an object. A universal arrow (also called a universal morphism) from $D$ to $\mathcal{U} $ is an object $C\in \mathcal{C} $, together with a morphism $\eta : D \to \mathcal{U} (C)$, such that for every $Z\in \mathcal{C} $ and every morphism $f : D \to \mathcal{U} (Z)$, there is a unique morphism $f^*: C \to Z$ such that
+	\[
+		\mathcal{U} (f^*)\circ \eta =f
+	.\]
+	In other words, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	D\ar[" \eta  ", r] \ar[" f "', dr]  & \mathcal{U} (C)\ar[" \mathcal{U} (f^*) ", dashed, d]  & C\ar[" f^* ", dashed, d]  \\
+	 & \mathcal{U} (Z) & Z
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+It is important to recap that in this definition, the universal arrow $D\to \mathcal{U} $ is the pair $(C,\eta )$. We can also contemplate the \emph{dual} notion: a universal arrow $\mathcal{U} \to D$ can also be a pair $(C,\eta : \mathcal{U} (C) \to D)$ such that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+D & \mathcal{U} (C)\ar[" \eta  "', l]  & C \\
+ & \mathcal{U} (Z)\ar[dashed, " \mathcal{U} (f^*) "', u] \ar[" f ", ul]  & Z\ar[dashed, " f^* "', u] 
+\end{tikzcd}\]
+commutes, with notation as above.
+
+\subsection{Products as Universal Arrows}
+
+Let's recover universal properties from this notion of a universal arrow. We will start with the universal property of product, which we have seen extensively thus far. Let $\mathcal{C} $ be a category where for any $X,Y\in \mathcal{C} $, we also have $X\times Y\in \mathcal{C} $ (we say such a category \emph{has finite products}). Given a category, we can define an \emph{product category} $\mathcal{C} \times \mathcal{C} $, where objects are pairs $(X,Y)$ with $X,Y\in \mathcal{C} $, and morphisms $(X_1,X_2)\to (Y_1,Y_2)$ are also pairs $(f_1,f_2)$, where
+\[
+	f_1: X_1 \to Y_1,\qquad f_2: X_2 \to Y_2
+.\]
+Morphism composition is defined componentwise, meaning
+\[
+	(f_2,g_2)\circ (f_1,g_1)=(f_2\circ f_1,g_2\circ g_1)
+.\]
+Identity morphisms are $1_{(A,B)} =(1_A,1_B)$. It's a good exercise to show this satisfies the category axioms.
+
+Let $\Delta : \mathcal{C}  \to \mathcal{C} \times \mathcal{C} $ be the functor $X\mapsto (X,X)$ and $f\mapsto (f,f)$, for $X\in \mathcal{C} $ and $f$ any morphism in $\mathcal{C} $. This functor is known as the (binary) \emph{diagonal functor}.
+
+Let $X,Y\in \mathcal{C} $. Since $\mathcal{C} $ has products, we also have the product $X\times Y$, together with natural projections $\pi _X,\pi _Y$. Let's construct a universal arrow using the product. We will be using the dual construction, since the product is terminal and the dual construction defines terminal universal objects.
+
+Let's construct the universal arrow $\Delta \to (X,Y)$. To do this, we need an object $C\in \mathcal{C} $ and a morphism $\eta : \Delta (C) \to D$ in $\mathcal{C} \times \mathcal{C} $ satisfying the above requiremenets. The natural definition is to simply set
+\[
+	C=X\times Y,\qquad \eta =(\pi _X,\pi _Y)
+.\]
+This can be seen using the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\times Y\ar[" \Delta  ", r]  & (X\times Y,X\times Y)\ar[" \pi _X ", shift left, r] \ar[" \pi _Y "', shift right, r] & (X,Y).
+\end{tikzcd}\]
+
+Is this indeed a univeral arrow? Let $Z\in \mathcal{C} $, and consider any morphism $(f,g): (Z,Z) \to (X,Y)$ in $\mathcal{C} \times \mathcal{C} $. Since $f,g$ are morphisms in $\mathcal{C} $, and we must have $f : Z \to X$ and $g : Z \to Y$, by the universal property there exists a unique morphism $\varphi $ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & Z\ar[" f "', dl] \ar[" g ", dr]\ar[dashed, " \varphi  ", d]  &  \\
+X & X\times Y\ar[" \pi _X ", l] \ar[" \pi _Y "', r]  & Y
+\end{tikzcd}\]
+commute. We can then consider $\Delta (\varphi ): \Delta (Z) \to \Delta (X\times Y)$ to construct the diagram
+\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+(X,Y) & \Delta (X\times Y)\ar[" (\pi _X\text{,}\pi _Y) "', l]  & X\times Y \\
+ & \Delta (Z)\ar[" (f\text{,}g) ", ul] \ar[" \Delta (\varphi ) "', dashed, u]  & Z\ar[" \varphi  "', dashed, u] 
+\end{tikzcd}\]
+Indeed, if we look back at the diagram for universal arrows, we will see that this satisfies the property of universal arrows, and thus $(X\times Y,(\pi _X,\pi _Y))$ defines a universal arrow $\Delta \to (X,Y)$.
+
+Therefore, the universal property of products induces a universal arrow, but it is simple to show the converse is also true. When we defined universal properties, we found that universal objects are always isomorphic. The same is true here: if $(A,\mu )$ and $(B,\nu )$ are both universal arrows $D\to \mathcal{U} $ (or $\mathcal{U} \to D$) for some functor $\mathcal{U} $ and object $D$, then we necessarily have $A\cong B$. This is a great exercise to do on your own. Therefore, each universal arrow induces a universal property, and the challenge is simply to show that each universal property can be encoded as a universal arrow. This is indeed possible, as we saw in the product example, but is more difficult to do in generality.
+
+\subsection{Adjoint Functors}
+
+Universal properties arise as special cases, or are characterized by, many different constructions. For example, one can view universal properties as initial or terminal objects, which is the most simple definition. Additionally, they can be seen as limits or colimits of functors\footnote{Discussed later.}, representable functors, Kan extensions, universal  arrows, and many other generalizations of categorical notions. One of the most important things, however, is \emph{adjoint functors}.
+
+We discussed earlier the idea of a \emph{forgetful functor} $\Grp \to \Set $, which ``forgets'' information about a group. For those without an algebra background, consider the category $\Set _*$ of \emph{pointed sets}. Objects are pairs $(S,s)$, where $s$ is just an element of the set $S$. Morphisms $(S,s)\to (T,t)$ are functions $f : S \to T$ that \emph{preserve base points}, meaning $f(s)=t$. Basically, we have added some ``extra structure'' to the category $\Set $. We can define what's called a \emph{forgetful functor} $\mathcal{U} : \Set _* \to \Set $ by \emph{forgetting} this structure. The extra structure here is the ``base point'', so we just forget about the base point. $\mathcal{U} $ is then defined as $(S,s)\mapsto S$, and it's action on morphisms is just $f\mapsto f$.
+
+Forgetful functors are generally notated with $U$ or $\mathcal{U} $, as I have done here. However, when I introduced universal arrows, I also used $\mathcal{U} $ for the functor in that definition. This is not a coincidence; the notion of \emph{adjunction} arises naturally from universal arrows, and as we will see, forgetful functors usually arise as part of an adjunction relation.
+
+Let $\mathcal{U} : \mathcal{C}  \to \mathcal{D} $ be a functor. Let $(A_1,u_1)$ be a universal morphism $X_1\to \mathcal{U} $, and let $(A_2,u_2)$ be a universal morphism $X_2\to \mathcal{U} $. This means $X_1,X_2\in \mathcal{D} $ and $A_1,A_2\in \mathcal{C} $. By the universal property of universal morphisms, any morphism $f : X_1 \to X_2$ induces a unique morphism $g:A_1\to A_2$ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X_1\ar[" f "', d]\ar[" u_1 ", r]   & \mathcal{U} (A_1)\ar[" \mathcal{U} (g) ",dashed, d]  & A_1 \ar[" g ", dashed, d]  \\
+X_2\ar[" u_2 "', r]  & \mathcal{U} (A_2) & A_2
+\end{tikzcd}\]
+commute. This follows due to the fact that $u_2\circ f$ is a morphism $X_1\to \mathcal{U} (A_2)$, so there is an induced morphism by the universal property.
+
+Suppose that \emph{every} object $X_i$ in $\mathcal{D} $ admits a universal arrow $(A_i,u_i): D_i \to \mathcal{U} $. This means that we can assign every object $D_i$ to it's corresponding arrow $A_i$, which is an assignment $\mathcal{D} \to \mathcal{C} $. We want to turn this into a functor, but to do so we must define action on morphisms. As seen in the diagram above, for every morphism $f : X_i \to X_j$, by the universal property of universal arrows, there is a unique induced morphism $g : A_i \to A_j$. We can then simply map $f\mapsto g$, and this defines a functor. Denote this functor by $\mathcal{F} : \mathcal{D}  \to \mathcal{C} $. We now have a pair of functors:
+\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	\mathcal{F} : & \mathcal{D} \ar[r] & \mathcal{C}  \\
+	\mathcal{U} : & \mathcal{C}  \ar[r] & \mathcal{D} 
+\end{tikzcd}\]
+
+These are very special functors. Specifically, they are \emph{adjoint} functors. To proprly define adjoint functors, we need to first explore some of the properties of the functors $\mathcal{F} $ and $\mathcal{U} $. 
+
+Let $C\in \mathcal{C} $ and $D\in \mathcal{D} $. Since $D$ admits a universal arrow $A_i$ to $\mathcal{U} $, we know that every morphism $D\to \mathcal{U} (C)$ induces a unique morphism $A_i\to C$, and moreover $A_i=\mathcal{F} (D)$. So we have that every morphism $D\to \mathcal{U} (C)$ induces a morphism $\mathcal{F} (D)\to C$. In other words, we have a function
+\[
+	\Hom_{\mathcal{D} }(D, \mathcal{U} (C)) \to \Hom_{\mathcal{C} }(\mathcal{F} (D), C) 
+.\]
+Since the arrow is unique, this function is injective. However, we can show that this function is also \emph{surjective}. Let $f : \mathcal{F} (D) \to C$. Recall that $\mathcal{F} (D)=A_i$, so we have
+\[
+	(\mathcal{U} \circ \mathcal{F} )(D)=\mathcal{U} (A_i)
+.\]
+In other words, this raises to a morphism
+\[
+	\mathcal{U} (f): \mathcal{U} (A_i) \to \mathcal{U} (C)
+.\]
+Since there is a morphism $u : D \to \mathcal{U} (A_i)$, there is a composition of morphisms
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+D\ar[" \mathcal{U} (f)\circ u "', dr] \ar[" u ", r]  & \mathcal{U} (A_i)\ar[" \mathcal{U} (f) ", d]  \\
+ & \mathcal{U} (C)
+\end{tikzcd}\]
+Therefore, for each $f : \mathcal{F} (D) \to C$, there is a morphism $\mathcal{U} (f)\circ u : D \to \mathcal{U} (C)$. The universal property of universal arrows says it's unique, and thus we have that the morphism $\mathcal{U} (f)\circ u : D \to \mathcal{U} (C)$ induces the morphism $f : \mathcal{F} (D) \to C$. Since this is precisely how our function was defined, we have that the function
+\[
+	\Hom_{\mathcal{D} }(D, \mathcal{U} (C)) \to \Hom_{\mathcal{C} }(\mathcal{F} (D), C) 
+\]
+is bijective, and thus
+\[
+	\Hom_{\mathcal{C} }(\mathcal{F} (D), C) \cong \Hom_{\mathcal{D} }(D, \mathcal{U} (C)) 
+.\]
+This is called an \emph{adjunction}.
+
+\begin{definition}[Adjunction]\label{dfn:8}
+	Let $\mathcal{C} ,\mathcal{D} $ be categories, let $\mathcal{F} : \mathcal{D}  \to \mathcal{C} $ and $\mathcal{U} : \mathcal{C}  \to \mathcal{D} $ be functors. If for all $C\in \mathcal{C} $ and $D\in \mathcal{D} $, there is an isomorphism
+	\[
+		\varphi_{D,C} : \Hom_{\mathcal{C} }(\mathcal{F} (D), C) \cong \Hom_{\mathcal{D} }(D, \mathcal{U} (C)) 
+	\]
+	which is natural in $C$ and $D$, then we say $\mathcal{F} $ and $\mathcal{U} $ are \emph{adjoint functors}.
+\end{definition}
+
+Since $\mathcal{F} $ appears on the \emph{left} side of Hom, we say it is \emph{left-adjoint} to $\mathcal{U} $, and call it a \emph{left-adjoint functor}. Similarly, since $\mathcal{U} $ appears on the \emph{righ} slot of Hom, we say it is \emph{right-adjoint} to $\mathcal{F} $, and call it a \emph{right-adjoint functor}. We write $\mathcal{F} \dashv \mathcal{U} $ to say that $\mathcal{F} $ is left-adjoint to $\mathcal{U} $, and $\mathcal{U} $ is right-adjoint to $\mathcal{F} $.
+
+Adjoint functors are extremely important. MacLane, one of the founders of category theory, famously said ``adjoint functors arise everywhere.'' One example for those with some algebra knowledge is Hom and tensor. Given a commutative ring $R$, we can define the functor $X\otimes _R-: R\text{-} \mathcal{M} \mathrm{od}  \to R\text{-} \mathcal{M} \mathrm{od} $ for any $R$-module $X$. It turns out that for any $R$-modules $Y,Z$, there is an isomorphism
+\[
+	\Hom_{R}(X\otimes _RY, Z) \cong \Hom_{R}(Y, \Hom_{R}(X, Z) ) ,
+\]
+where $\Hom_{R}(Y, Z) $ is viewed as an $R$-module by taking addition to be pointwise addition, and defining scalar multiplication in the natural way. In other words,
+\[
+	X\otimes_R-\dashv \Hom_{R}(X, -) 
+.\]
+
+In general, forgetful functors are right-adjoint functors, and their left-adjoints are usually called \emph{free functors}. For example, the forgetful functor $\mathcal{U} : \Grp  \to \Set$ has a left-adjoint $\mathcal{F} : \Set  \to \Grp $ called the \emph{free} functor, which assigns each set $X$ to the \emph{free group} $\mathcal{F} (X)$ on $X$. For those who know linear algebra, the forgetful functor $\mathcal{U} : \Vect{k}  \to \Set $ is right-adjoint, and it's left-adjoint $\mathcal{F} : \Set  \to \Vect{k}$ is also a free functor. The vector space $\mathcal{F} (X)$ for $X$ a set is defined as \emph{all possible $k$-linear combinations in $X$}. This is called the \emph{free} vector space on $X$, and it has $X$ as it's basis. Interestingly, all vector spaces are free, since being free simply means a space has a basis. This free functor is more interesting when we consider modules over an arbitrary ring, since modules need not be free.
+
+\begin{remark}
+	Right-adjoint functors here arose as a family of universal morphisms $X_i\to \mathcal{U} $ for all $X_i\in \mathcal{D} $. Similarly, left-adjoint functors arise from the dual construction; meaning there is a family of universal morphisms $\mathcal{F} \to A_i$ for all $A_i\in \mathcal{C} $. Left- and right-adjoints can in fact be \emph{defined} in this way, but we generally opt for the more traditional definition \ref{dfn:8}.
+\end{remark}
+
+\subsection{Naturality}
+
+I said that the isomorphism in adjunction relations is \emph{natural} in both elements. Unpacking this means that if $\mathcal{U} : \mathcal{C}  \to \mathcal{D} $ and $\mathcal{F} : \mathcal{D}  \to \mathcal{C} $ are adjoint, and $Y_1,Y_2\in \mathcal{C} $, $X_1,X_2\in \mathcal{D} $, then the isomorphisms
+\[
+	\varphi_{X_1,Y_1} : \Hom_{\mathcal{C} }(\mathcal{F} (X_1), Y_1) \cong \Hom_{\mathcal{D} }(X_1, \mathcal{U} (Y_1)) 
+,\]
+and similarly  for $\varphi_{X_2,Y_2} $, must be such that the diagram
+\[\begin{tikzcd}[row sep = 6em, column sep = 6em]
+\Hom_{\mathcal{C} }(\mathcal{F} (X_1), Y_1) \ar[" \Hom_{\mathcal{C} }(\mathcal{F} (f)\text{,} g)  ", r] \ar[" \varphi_{X_1\text{,}Y_1}  "', d]  & \Hom_{\mathcal{C} }(\mathcal{F} (X_2), Y_2) \ar[" \varphi_{X_2\text{,}Y_2}  ", d]  \\
+\Hom_{\mathcal{D} }(X_1, \mathcal{U} (Y_1)) \ar[" \Hom_{\mathcal{D} }(f\text{,} \mathcal{U} (g))  "', r]  & \Hom_{\mathcal{D} }(X_2, \mathcal{U} (Y_2)) 
+\end{tikzcd}\]
+commutes for all morphisms
+\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+X_1\ar[" f ", r]  & Y_1 \\
+Y_1\ar[" g ", r]  & Y_2
+\end{tikzcd},\]
+in $\mathcal{D} $ and $\mathcal{C} $, respectively.
+
+This is a terrible way of seeing naturality, since it requires understanding $\Hom_{\mathcal{C} }(\mathcal{F} (-), -) $, and similarly $\Hom_{\mathcal{D} }(-, \mathcal{U} (-)) $ as \emph{bifunctors} 
+\[\begin{tikzcd}[row sep = 0.5em, column sep = 5em]
+\mathcal{D} ^{\mathrm{op} } \times \mathcal{C} \ar[" \mathcal{F} ^{\mathrm{op} } \times 1_{\mathcal{C} }  ", r]  & \mathcal{C} ^{\mathrm{op} } \times \mathcal{C} \ar[" \Hom_{\mathcal{C} }(-\text{,} -)  ", r]  & \Set  \\
+\mathcal{D} ^{\mathrm{op} } \times \mathcal{C} \ar[" 1_{\mathcal{D} } \times \mathcal{U} ^{\mathrm{op} }  "', r]   & \mathcal{D} ^{\mathrm{op} } \times \mathcal{D} \ar[" \Hom_{\mathcal{D} }(-\text{,} -)  "', r]  & \Set 
+\end{tikzcd}.\]
+It is much better to see the naturality of adjunction via units and counits. Unfortunately, these notes are long enough and we do not have sufficient time to get into the weeds. I encourage the reader to pick up a text and explore this further on their own, as adjunction is extremely important. I will however present the unit and counit definition, but will not show how this definition flows from the adjunction relation.
+
+Given an adjunction $\mathcal{F} \dashv \mathcal{U} $, one can define two natural transformations. The first is the \emph{unit}, often denoted $\eta : 1_{\mathcal{D} }  \Rightarrow \mathcal{U} \circ \mathcal{F} $, in which all components $\eta_X$ are \emph{universal arrows}. The second natural transformation is the \emph{counit}, often denoted $\varepsilon : \mathcal{F} \circ \mathcal{U}  \Rightarrow 1_{\mathcal{C} } $, in which once again all components $\varepsilon_X$ are \emph{universal arrows}. These natural transformations also satisfy the following property: for all $X\in \mathcal{C} $, we have that
+\[
+	1_{\mathcal{F}(X)} =\varepsilon_{\mathcal{F} (X)} \circ \mathcal{F} (\eta_{X} ),
+\]
+\[
+	1_{\mathcal{U} (X)} =\mathcal{U} (\varepsilon_{X} )\circ \eta_{\mathcal{U} (X)} 
+.\]
+This is usually summarized as
+\[
+	1_{\mathcal{F} } =\varepsilon \mathcal{F} \circ \mathcal{F} \eta ,
+\]
+\[
+	1_{\mathcal{U} } =\mathcal{U} \varepsilon \circ \eta \mathcal{U} 
+.\]
+We interpret the notation $\varepsilon \mathcal{F} $ as the natural transformation whose components look like $\varepsilon_{\mathcal{F} (X)} $, and similarly $\mathcal{F} \eta $ is intepreted as the natural transformation whose components look like $\mathcal{F} (\eta _X)$. Diagramatically, we write these as the commutative diagrams
+\[\begin{tikzcd}[row sep = 1em, column sep = 2.5em]
+\mathcal{F} \ar[" \mathcal{F} \eta  "', Rightarrow, r]\ar[" 1_{\mathcal{F} }  ", Rightarrow, bend left, rr]   & \mathcal{F} \circ \mathcal{U} \circ \mathcal{F} \ar[" \varepsilon \mathcal{F}  "', Rightarrow, r]  & \mathcal{F}  \\
+\mathcal{U} \ar[" 1_{\mathcal{U} }  "', Rightarrow, bend right, rr] \ar[" \eta \mathcal{U}  ", Rightarrow, r]  & \mathcal{U} \circ \mathcal{F} \circ \mathcal{F} \ar[" \mathcal{U} \varepsilon  ", Rightarrow, r]  & \mathcal{U} 
+\end{tikzcd}\]
+Most authors use single arrows $\to $ instead of double arrows $\Rightarrow$, as natural transformations in this diagram are 1-morphisms and double arrows generally denote 2-moprhisms. I wanted to clarify that the arrows were natural transformations, so I opted fo that notation instead.
+
+Adjunction is an extremely important phenomenon in category theory. Fully understanding it and it's implications is \emph{not} a simple task, and I encourage the reader to explore further on their own.

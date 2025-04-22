@@ -1,0 +1,67 @@
+\section{Functors}
+
+\subsection{Covariance}
+
+Pausing our quest to understand morphisms for a short while, we come to a very natural question. In set theory, there are functions between sets. In group theory, there are group homomorphisms between groups. In topology, there are continuous maps between topological spaces. How, then, do we go from one category to another? The answer is with \emph{functors}.
+
+\begin{definition}[Functor]\label{dfn:2}
+	Let $\mathcal{C} $ and $\mathcal{D} $ be categories. A functor $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ consists of
+	\begin{itemize}
+		\item A function $\mathcal{F} : \Obj(\mathcal{C} ) \to  \Obj(\mathcal{D} ) $;
+		\item For every $X,Y\in \mathcal{C} $, a function $\mathcal{F} : \Hom_{\mathcal{C} }(X, Y)  \to \Hom_{\mathcal{D} }(\mathcal{F} (X), \mathcal{F} (Y)) $. In other words, for every morphism $f : X \to Y$, a morphism $\mathcal{F} (f): \mathcal{F} (X) \to \mathcal{F} (Y)$.
+	\end{itemize}
+	These functions must satisfy the following axioms.
+	\begin{enumerate}
+		\item For every identity morphism $1_X$, we must have $\mathcal{F} (1_X)$ be the identity morphism of $\mathcal{F} (X)$. In other words,
+			\[
+				\mathcal{F} (1_X)=1_{\mathcal{F} (X)} 
+			.\]
+		\item For every $f : X \to Y$ and $g : Y \to Z$, we must have
+			\[
+				\mathcal{F} (g\circ f)=\mathcal{F} (g)\circ \mathcal{F} (f)
+			.\]
+	\end{enumerate}
+\end{definition}
+
+In this case, a diagram commuting means the same thing as it did before, except letters now represent objects, and arrows represent morphisms.
+
+Functors are how we choose to define morphisms between categories. They carry meaningful information about the internal contents of a category, so they are a very natural definition.
+
+For example, consider the functor $\mathcal{U} : \Grp  \to \Set $. Since every group is just a set with some extra structure, and every group homomorphism is just a function with some special properties, we can send a group to it's underlying set and a function to it's underlying function, and this relation is clearly functorial. We ``forget'' the extra structure of $\Grp $, and for this reason $\mathcal{U} $ is called an \emph{forgetful functor}. Similarly, we have forgetful functors for vector spaces, modules rings, topological spaces, etc. Forgetful functors will show up later due to their presence in adjunction relations.
+
+For those who have taken topology, the first fundamental group $\pi _1$ is a functor from the category $\Top_*$ of \emph{pointed topological spaces}, meaning a topological space $X$ plus a distinguished base point $x_0$. to the category $\Grp $.
+
+A classical example of a functor is the functor $\Hom$. Let $\mathcal{C} $ be a category, and let $X\in \mathcal{C} $. Define the functor $\Hom_{\mathcal{C} }(X, -) $ as
+\[
+	A\mapsto \Hom_{\mathcal{C} }(X, A) 
+.\]
+That is, we take an object $A\in \mathcal{A} $, and map it to the set $\Hom_{\mathcal{C} }(X, A) $. In this way, Hom defines a functor $\mathcal{C} \to \Set $, called the hom-functor.
+
+But wait, how does Hom act on morphisms? Let $\varphi : A \to B$ be a morphism. What is $\Hom_{\mathcal{C} }(X, \varphi) $ defined as? For notational purposes, denote the induced morphism as $\varphi ^*$. Since $\varphi ^*$ is a function between \emph{sets}, we can define it's action on elements. Let $f : X \to A$ be a morphism. We need to send it to a morphism $X\to B$. Since $\varphi $ is a morphism from $A\to B$, we can just consider the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X\ar[" f ", r]  & A\ar[" \varphi  ", r]  & B.
+\end{tikzcd}\]
+We thus define $\varphi ^*(f)=\varphi \circ f$. Showing that this relation is functorial is a great exercise, and I encourage you all to do it.
+
+\subsection{Contravariance}
+
+A natural question at this point is ``what about $\Hom_{\mathcal{C} }(-, X) $?'' Indeed, this also forms a functor, but not in the way we have discussed. The functors I have described herein are also known as \emph{covariant functors}. However, there's another ``type''\footnote{We will see later in the section on duality that all functors are indeed covariant.} of functor, known as a \emph{contravariant} functor.
+
+If $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ is a covariant functor and $f : A \to B$ is a morphism in $\mathcal{C} $, then we saw that $\mathcal{F} (f): \mathcal{F} (A) \to \mathcal{F} (B)$ is a morphism in $\mathcal{D} $.
+
+Contravariant functors satisfy all the usual axioms of a functor, except they \emph{flip} the arrows. So if $\mathcal{G} : \mathcal{C}  \to \mathcal{D} $ is a contravariant functor and $f : A \to B$ in $\mathcal{C} $, then $\mathcal{G} (f): \mathcal{G} (B) \to \mathcal{G} (A)$ is a morphism in $\mathcal{D} $. This is more easily seen in a diagram:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\ar[r, "f"{name=f}]&B\\
+	\mathcal{G} (A)&\mathcal{G} (B)\ar[l, "\mathcal{G} (f)"{name=gf}]
+	\arrow[from=f, to=gf, "\mathcal{G} ", shorten=10pt]
+\end{tikzcd}\]
+
+It turns out that although $\Hom_{\mathcal{C} }(X, -) $ is covariant, the functor $\Hom_{\mathcal{C} }(-, X) $ is actually \emph{contravariant}. To show this, consider the action it has on morphisms. Let $\varphi : A \to B$ be a morphism in $\mathcal{C} $, and let $\varphi _*$ be the induced morphism under this contravariant flavor of Hom. If we define it in the same way, then we would need to compose on the \emph{right} this time, to make sure the codomain of the composition is $X$. Which means we're going to have a morphism
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\ar[" \varphi  ", r]  & B \ar[r] &X.
+\end{tikzcd}\]
+This means that in order for $\varphi _*$ to be defined in a similar way, we must necessarily view it as a function
+\[
+	\varphi _*: \Hom_{\mathcal{C} }(B, X)  \to \Hom_{\mathcal{C} }(A, X) 
+.\]
+In other words, the arrow has \emph{flipped}. So indeed, $\Hom_{\mathcal{C} }(-, X) $ is contravariant.

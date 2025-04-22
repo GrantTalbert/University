@@ -1,0 +1,130 @@
+\section{Universality}
+
+\subsection{Duality}
+
+After this lengthy detour into the Yoneda lemma, we are ready to come back to our original question: how exactly do we study objects and morphisms in arbitrary categories? We already know the answer will be ``through relationships with other morphisms'', but what exactly does this mean? The first answer to this question will come via universal properties. In order to define these, we need to cover a few final definitions in category theory, which are of fundamental importance to the field. The first definition will be that of the opposite category, and the notion of duality.
+
+\begin{definition}[Opposite Category]\label{dfn:1}
+	Let $\mathcal{C} $ be a category. The \emph{opposite category} $\mathcal{C} ^{\mathrm{op} } $ is the category where
+	\[
+		\Obj(\mathcal{C}^{\mathrm{op} }) =\Obj(\mathcal{C} ) ,
+	\]
+	and for all $A,B\in \mathcal{C} $,
+	\[
+		\Hom_{\mathcal{C} ^{\mathrm{op} } }(A, B) =\Hom_{\mathcal{C} }(B, A) 
+	.\]
+\end{definition}
+In other words, if $f : A \to B$ in $\mathcal{C} $, then $f : B \to A$ in $\mathcal{C} ^{\mathrm{op} } $. All we do is ``flip the arrows'', in the same exact way we flipped the arrows in a contravariant functor. In fact, any contravariant functor $\mathcal{G} : \mathcal{C}  \to \mathcal{D} $ is actually the same as a \emph{covariant} functor $\mathcal{G} : \mathcal{C} ^{\mathrm{op} }  \to \mathcal{D} $. I leave it to the reader to make this notion precise, and to use this notion to precisely recover the Yoneda Embedding from this definition.
+
+I want to note here that there appears to be a sort of correspondence between covariant and contravariant functors. They are really the same thing, except one goes through $\mathcal{C} $, and one goes through the opposite category. This notion of a corespondence between $\mathcal{C} $ and $\mathcal{C} ^{\mathrm{op} } $ is called \emph{duality}, and as we will see in this section, it generalizes much further than to just functors.
+
+\subsection{Isomorhisms, Initial \& Terminal Objects}
+
+Back when we defined a category, we required that identity morphisms exist, that way we might have a meaningful notion of an inverse morphism. It's finally time to use this axiom to it's fullest, and define one of the most fundamental concepts in category theory.
+
+\begin{definition}[Isomorphism]\label{dfn:5}
+	Let $f : A \to B$ be a morphism. We say $f$ is an \emph{isomorphism} if there exists an \emph{inverse morphism} $f^{-1} : B \to A$ such that
+	\[
+		f\circ f^{-1} =1_B\qquad \text{and} \qquad f^{-1} \circ f=1_A
+	.\]
+	If there is an isomorphism $f : A \to B$, we say $A$ is \emph{isomorphic} to $B$, and write $A\cong B$.
+\end{definition}
+
+This is the same as our definition of an isomorphism of \emph{sets} as an invertible function. Isomorphisms actually answer an important question that I haven't yet addressed. When we define a category, we have to choose what our morphisms are going to be. This choice feels very arbitrary, and it's not necessarily always clear why we might choose one type of morphisms over another. The arbitrariness of this choice vanishes once we introduce isomorphisms.
+
+If $A\cong B$ are isomorphic, then they are \emph{exactly the same} as far as morphisms are concerned. To make this precise, let $\varphi $ be an isomorphism $A\to B$. It's not difficult to show that if $\mathcal{F} $ is any functor, and $\varphi $ is an isomorphism, then $\mathcal{F} (\varphi )$ is an isomorphism. Consider the functor $\Hom_{\mathcal{C} }(-, Z) $, where $Z$ is any object in $\mathcal{C} $. Then we have an isomorphism
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Hom_{\mathcal{C} }(A, Z) \ar[" \varphi  ", r]  & \Hom_{\mathcal{C} }(B, Z) 
+\end{tikzcd}\]
+This is an isomorphism of sets, meaning that $\Hom_{\mathcal{C} }(A, Z) $ and $\Hom_{\mathcal{C} }(B, Z)$ are essentially the same. Every morphism $f : A \to Z$ can be turned into a morphism $f': B \to Z$ and vice versa, and this can all be done without effecting any other morphisms in $\mathcal{C} $. The reverse direction concerning morphisms $Z\to A,B$ is also easily shown using the covariant flavor of Hom.
+
+In this sense, we can now make the choice of morphisms less arbitrary. Let's say we have a certain type of object we want to study. For example, a group. When we study groups, we care about the \emph{structure} of a group. We want isomorphic groups to be ``essentially the same group'', so what we need is a definition of morphisms in such a way that isomorphic groups have the exact same group structure. Group homomorphisms are the proper choice for this. A group homomorphism $\varphi : G \to H$ basically identifies the group structure of $G$ with $H$ in some way. If two groups are \emph{isomorphic}, then their structure must identify with \emph{every other group} in \emph{exactly the same way}. We can immediately conclude that they must then have the same structure.
+
+And this is usually how we choose our morphisms. We figure out what it is that we want to study, and we choose morphisms in such a way that isomorphic objects have \emph{exactly the same properties}, as far as we are concerned.\footnote{There are other ways we may choose morphisms, for example as an intermediary step in a proof we may need to define a new category in a certain way. These definitions are often natural and do not require arbitrary choices, so they are not of concern here.}
+
+\begin{definition}[Initial/Terminal Objects]\label{dfn:6}
+	Let $\mathcal{C} $ be a category. An object $I\in \mathcal{C} $ is \emph{initial} if for all $X\in \mathcal{C} $, there is exactly \emph{one morphism} $I\to X$. Equivalently, $\Hom_{\mathcal{C} }(I, X) =\left\{ * \right\} $ for all $X$. Similarly, an object $T\in \mathcal{C} $ is \emph{terminal} if $\Hom_{\mathcal{C} }(X, T) =\left\{ * \right\} $ for all $X\in \mathcal{C} $, meaning there is a unique morphism $X\to T$.
+\end{definition}
+
+Initial and terminal objects are of fundamental importance, almost due to the following basic, yet important result.
+
+\begin{proposition}\label{prp:2}
+	Let $I,J\in \mathcal{C} $ be initial objects. Then $I\cong J$. Similarly, if $S,T\in \mathcal{C} $ are terminal, then $S\cong T$.
+\end{proposition}
+\begin{proof}
+	Since $I$ is initial, there is a unique morphism $f : I \to J$. Since $J$ is initial, there is a unique morphism $g : J \to I$. These can be composed into a morphism $g\circ f : I \to I$. However, since $I$ is initial, there is only one morphism $I\to I$, and by the category axioms, it must be the identity morphism $1_I$. Therefore, $g\circ f=1_I$. By the same logic, $f\circ g=1_J$. The proof for final objects is done the exact same way.
+\end{proof}
+
+Interestingly, note that if an object is initial in $\mathcal{C} $, it must be terminal in $\mathcal{C} ^{\mathrm{op} } $, and vice versa. This is one way that duality arises. If we have an initial object in $\mathcal{C} $, then we can usually define a \emph{dual} version of it by flipping the arrows, and it will be initial in $\mathcal{C} ^{\mathrm{op} } $, and thus terminal in $\mathcal{C} $. This idea of duality is of fundamental importance, and we will see as much in this next section.
+
+\subsection{Universal Properties}
+
+Universal properties summarize everything we have done so far in a beautiful way, and they are an extremely important concept in category theory, algebra, topology, and beyond. Universal properties bleed unequivically into adjunction relations, which are a special topic I will cover at the end. For now, I will introduce them in a less precise manner, although this will make it more clear what a universal property actually is.
+
+Put simply, an object $X$ is \emph{universal} if it is initial or terminal in some category. The issue is, categories like $\Set $ and $\Grp $ may indeed have interesting intitial and terminal objects, but they are not interesting in the sense that we are currently looking for. Universal properties often require creating an entire new category on the spot, just so that you can view $X$ as initial or final in that category.
+
+Usually, the objects of this new category all satisfy a specific property that we are concerned with. We then say any initial or final object of that category is \emph{universal} with respect to that property. Before we unpack the significance of such a construction, it's prudent to consider an example.
+
+Back in the beginning of these notes, we said that the cartesian product $A\times B$ of two sets comes with natural projections, $\pi_A $ and $\pi _B$. The cartesian product thus satisfies the following property: it has a function going to $A$, and a function going to $B$. Let's create a new category $\mathcal{C} $, where objects are simply sets $X$, together with functions $f : X \to A$ and $g : X \to B$. In other words, objects are things that satisfy the property we are concerned about. Objects thus look like the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & X\ar[" f "', dl] \ar[" g ", dr]  &  \\
+A &  & B
+\end{tikzcd}\]
+The way we define morphisms in $\mathcal{C} $ is as follows: consider two objects, $(X,f,g)$ and $(Y,\phi ,\psi )$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & X\ar[" f "', dl] \ar[" g ", dr]  &  &  &  & Y\ar[" \phi  "', dl] \ar[" \psi  ", dr]  &  \\
+A &  & B &  & A &  & B
+\end{tikzcd}\]
+A morphism $(X,f,g)\to (Y,\phi ,\psi )$ looks like a function $\alpha : X \to Y$ such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & X\ar[" f "', dl] \ar[" g ", dr] \ar[" \alpha  ", d]  &  \\
+A & Y\ar[" \phi  ", l] \ar[" \psi  "', r]  & B
+\end{tikzcd}\]
+commutes.
+
+For those who remember proposition 1, this diagram may look familiar. We said that if we put the cartesian product $A\times B$, together with the natural projections $\pi _A,\pi _B$ into the diagram, then the function $\alpha $ becomes unique:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & X\ar[" f "', dl] \ar[" g ", dr] \ar[" \alpha  ", dashed, d]  &  \\
+A & A\times B\ar["\pi _A", l] \ar["\pi _B"', r]  & B
+\end{tikzcd}\]
+In other words, for all objects $(X,f,g)$ in $\mathcal{C} $, there is \emph{exactly one morphism} $\alpha : (X,f,g) \to (A\times B,\pi _A,\pi _B)$ in $\mathcal{C} $. In other words, the cartesian product is \emph{final} in $\mathcal{C} $.
+
+Since the category was built out of objects satisfying a specific property, we say that the cartesian product is \emph{universal} with respect to this property. That is, $A\times B$ is \emph{universal} with respect to the property of having a function going to $A$, and another going to $B$. In other words, the cartesian product \emph{satisfies a universal property}.
+
+Universal properties are more significant than you likely think. If two objects satisfy the same universal property, then they must both be either initial or terminal in the same category, and thus they are \emph{isomorphic}. This means that we can actually \emph{define} the cartesian product of two sets as any set $X$ together with natural projections, which satisfy the universal property of the cartesian product. This definition is \emph{well-defined up to isomorphism}, meaning if two sets satisfy the universal property (and thus would be cartesian products in this new definition), they would have to be isomorphic.
+
+Although having multiple objects satisfying the same definition may seem strange, the isomorphism condition means that the objects behave in the \emph{exact same way}, as far as our category is concerned. The universal property an object satisfies is also usually more useful than any precise definition of the object, since the universal property usually tells us \emph{exactly} how important morphisms work, and how they are related to each other. Since the categorical perspective is to use morphisms rather than elements to study objects, once we start viewing things from the lens of category theory, it's perfectly fine to define things based on the universal property they satisfy. In fact, the Yoneda lemma seems to tell us that this is fine as well, since objects are fully described by their morphisms. This notion can be made precise, and we will do that in the section on adjunction.
+
+For now, I want to wrap up universal properties by giving some powerful examples. The universal property of the cartesian product can actually be extended to \emph{any category}. If we have a category $\mathcal{C} $, with objects $X,Y\in \mathcal{C} $, we can just define the object $X\times Y$ as the object, together with morphisms $\pi_X,\pi _Y$ satisfying the same universal property as the cartesian product:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & Z\ar[" f "', dl] \ar[" g ", dr] \ar[" \alpha  ", dashed, d]  &  \\
+X & X\times Y\ar["\pi _X", l] \ar["\pi _Y"', r]  & Y
+\end{tikzcd}\]
+This is indeed how we define a product of two elements in any arbitrary category. It's important to note that the product doesn't necessarily exist, as categories don't necessarily have to have initial or terminal objects.
+
+Another useful universal property is the kernel. This shows up oftentimes in algebraic contexts, and it requires two things. First, we need to have what's called a zero-morphism. The intuitive way to think about it is if you have two functions $f,g$, then $f(x)+g(x)=f(x)$. In other words, $g(x)=0$ for all $x$. In group theory, $0$ should be interpreted as the identity of the group. The precise definition is as follows: a zero-morphism is a morphism $0: X \to Y$ such that for all $f,g : Z \to X$, $0\circ f=0\circ g$; and for all $f,g : Y \to Z$, $f\circ 0=g\circ 0$.
+
+This allows us to define kernels. Let $\varphi  : X \to Y$ be any morphism in a category with zero-morphisms. The kernel is an object $\Ker \varphi  $, together with a morphism $\ker \varphi $ (I use lowercase k for the morphism to distinguish them), such that for any morphism $f : Z \to X$ such that $\varphi \circ f =0$, there exists a unique morphism $\overline{\varphi } : Z \to \Ker \varphi $ such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+Z\ar[bend left, " 0 ", rr] \ar[" f  "', r] \ar[dashed, " \overline{\varphi }  "', dr]  & X\ar[" \varphi "', r]  & Y \\
+ & \Ker\varphi \ar[" \ker \varphi  "', u]  & 
+\end{tikzcd}\]
+commutes. This is typically phrased as ``any morphism $f$ such that $\varphi \circ f=0$ factors uniquely through the kernel.'' I leave it as an exercise to show that the usual definitions of kernel in $\Grp ,\Ring ,\mathcal{A} \mathrm{b} ,\Vect{k} $ satisfy this universal property. Alternatively, the kernel is the equalizer of $\varphi $ and 0, but I don't have time to get into this definition unfortunately.
+
+There are many more important universal properties, more than I have time to show here. However, for each intial object, there is a terminal object in the opposite category, and vice versa. This means that if we have a universal property, we can flip all the arrows and obtain a \emph{new} universal property, called the \emph{dual construction}. These dual properties are usually given the prefix ``co''. For example, the \emph{coproduct}  $X\amalg Y$ of $X$ and $Y$ is the object, together with natural \emph{injections} $i_X : X \to X\amalg Y$ and $i_Y : Y \to X\amalg Y$, which is \emph{initial} with respect to this property. That is, for any set $Z$ with functions $f : X \to Z$ and $g : X \to Z$, there exists a unique morphism $\varphi $ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & Z &  \\
+X\ar[" i_X "', r] \ar[" f ", ur]  & X\amalg Y \ar[dashed, " \varphi  "', u]  & Y\ar[" i_Y ", l] \ar[" g "', ul] 
+\end{tikzcd}\]
+commute. In $\Set $, the coproduct is the \emph{disjoint union}. Aka, you take two sets $X,Y$, and forcibly make them disjoint. For example, you do $X\times \left\{ 0 \right\} $ and $Y\times \left\{ 1 \right\} $, making new sets which are isomorphic to the originals, but disjoint. You then take the union of these \emph{new} sets.
+
+One interesting remark is that in $\Grp $, the coproduct is the \emph{free product} of two groups. However, in the subcategory $\mathcal{A} \mathrm{b} $ of $\Grp $, the (finite) coproduct is the \emph{same as the product}. When (finite) products and coproducts coencide, we call them the \emph{direct sum}, and denote them by $\oplus$. This shows that subcategories need not have the same universal objects as their parent categories, since the product does \emph{not} satisfy the universal property of coproducts in $\Grp $.
+
+Another example is the \emph{cokernel}. This is obtained by reversing the diagram for kernels:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & \operatorname{Coker} \varphi \ar[" \overline{\varphi }  ", dashed, dr]  &  \\
+X\ar[bend right, " 0 "', rr] \ar[" \varphi  ", r]  & Y\ar[" f ", r] \ar[" \coker \varphi  ", u]  & Z
+\end{tikzcd}\]
+I leave it as an exercise to make precise the universal property the cokernel satisfies. In the category $\Grp $, the cokernel can be realized explicitly as the group $\operatorname{Coker} \varphi \cong Y/\im \varphi $, and the morphism $\coker \varphi $ can be seen as the quotient morphism $\pi : Y \to Y/\im \varphi $. Quotients indeed satisfy their own universal property, and it involves the quotient morphism, and I encourage the reader to dig into this.
+
+Universal properties are kind of like blueprints for building important objects. The important thing is that they are indeed ``universal'' in the truest sense of the word. No matter what category you are working in, or what you're doing, you can always look for something that satisfies a certain universal property. It may not exist, but you can always look.

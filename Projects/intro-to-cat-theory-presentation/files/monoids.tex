@@ -1,0 +1,108 @@
+\section{Monoids}
+
+\subsection{Monoidal Categories}
+
+We saw in the last section that monads arise from adjunction. In fact, monads can be used to study adjunctions, and vice versa. Monads also served as a sort of abstraction of monoids, so a more thorough abstraction of monoids is in order to provide some extra framework for the study of monads.
+
+In order to define monoids, we first need a suitable category for them to live in. Recall when we defined monads, we replaced $\times $ with $\circ $ for our definition of multiplication. We thus need a category $\mathcal{C} $, equipped with a suitable product $\otimes $ often called the \emph{tensor product}, that serves as a generalization of the cartesian product construction.
+
+We would expect that a monoidal category be a category $\mathcal{C} $, a functor $\otimes : \mathcal{C} \times \mathcal{C}  \to \mathcal{C} $ which is \emph{associative}, meaning we have an equality of functors
+\[
+	\otimes (-,\otimes (-,-))=\otimes (\otimes (-,-),-): \mathcal{C} \times \mathcal{C} \times \mathcal{C}  \to \mathcal{C} 
+.\]
+In more conventional notation, this implies that for any $X,Y,Z\in \mathcal{C} $, we have an equality
+\[
+	(X\otimes Y)\otimes Z=X\otimes (Y\otimes Z)
+.\]
+Since monoids in the classical sense have identity elements, we would also expect that there exists $I\in \mathcal{C} $ such that $I\otimes X=X$ and $X\otimes I=X$ for all $X\in \mathcal{C} $.
+
+Although this is the intuitive definition, it is also fairly naive. As has likely become apparent by now, in category theory we rarely want to ask that two objects be preciely equals to each other. This is an extremely strong requirement, and we are also often more concerned with when they are \emph{isomorphic}. This is especially true for categorical constructions such as functors. In our definition, we required an \emph{equality} of functors
+\[
+	\otimes (-,\otimes (-,-))=\otimes (\otimes (-,-),-),
+\]
+and an \emph{equality}
+\[
+	I\otimes X=X\otimes I=X
+.\]
+It is much more natural to ask that these \emph{not} be equal, but instead be \emph{naturally isomorphic} by a given natural isomorphism. More explicitly, there is a natural isomorphism $\alpha : \otimes (1_{\mathcal{C} }\times \otimes ) \Rightarrow \otimes (\otimes \times 1_{\mathcal{C} })$, which induces isomorphisms
+\[
+	\alpha_{A,B,C} : A\otimes (B\otimes C)\cong (A\otimes B)\otimes C
+\]
+for all $A,B,C\in \mathcal{C} $. We also expect that there be two more natural isomorphisms $\lambda : I\otimes - \Rightarrow 1_{\mathcal{C} } $ and $\rho : - \otimes I \Rightarrow 1_{\mathcal{C} } $, meaning that for any $A\in \mathcal{C} $, there are induced morphisms
+\[
+	\lambda_A : I\otimes A\cong A,\qquad \rho _A : A\times I\cong A
+.\]
+In this sense, $\otimes $ is associative \emph{up to natural isomorphism}, and $I$ is a unit \emph{up to natural isomorphism}. This is indeed the definition of a monoidal category.
+
+\begin{definition}[Monoidal Category]\label{dfn:11}
+	Let $\mathcal{C} $ be a category, let $\otimes : \mathcal{C} \times \mathcal{C}  \to \mathcal{C} $ be a bifunctor, let $I\in \mathcal{C} $ be an object, and let there exist natural transformations
+	\[
+		\alpha : \otimes (-,\otimes (-,-)) \Rightarrow \otimes (\otimes (-,-),-),
+	\]
+	\[
+		\lambda : -\otimes I \Rightarrow 1_{\mathcal{C} } ,\qquad \rho : I\otimes - \Rightarrow 1_{\mathcal{C} } 
+	.\]
+	Then $(\mathcal{C} ,\otimes ,I,\alpha ,\lambda ,\rho )$ is a \emph{monoidal category} if for all $A,B,C,D\in \mathcal{C} $, the \emph{pentagon diagram}
+	\[\begin{tikzcd}[row sep = 4em, column sep = -2em]
+	 &  & (A\otimes B)\otimes (C\otimes D)\ar[" \alpha  ", drr]  &  &  \\
+	A\otimes (B\otimes (C\otimes D))\ar[" \alpha  ", urr] \ar[" 1\otimes \alpha  "', dr]  &  &  &  & ((A\otimes B)\otimes C)\otimes D \\
+	 & A\otimes ((B\otimes C)\otimes D)\ar[" \alpha  "', rr]  &  & (A\otimes (B\otimes C))\otimes D\ar[" \alpha \otimes 1 "', ur]  & 
+	\end{tikzcd}\]
+	commutes, and the triangular diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\otimes (I\otimes C)\ar[" \alpha  ", r] \ar[" 1\otimes \lambda  "', dr]  & (A\otimes I)\otimes C\ar[" \rho \otimes 1 ", d]  \\
+	 & A\otimes C
+	\end{tikzcd}\]
+	commutes, with components of the natural transformations as is evident.
+\end{definition}
+
+The pentagon and triangle diagrams are \emph{coherence conditions}, which simply ensure that although associativity and unity are only defined up to isomorphism, things still behave as we would expect.
+
+\begin{remark}
+	We generally call $\alpha $ the associator, and we call $\lambda $ and $\rho $ the left- and right-unitors, respectively.
+\end{remark}
+
+
+\subsection{Monoids}
+
+Monoidal categories can be thought of as a ``good place to define monoids in''.  They show up in other important areas of category theory; for example one can define an ``enriched'' category $\mathcal{C} $ over a monoidal category, wherein hom-sets in $\mathcal{C} $ are actually \emph{objects} in the monoidal category. Although this is an interesting aside and illustrates that monoidal categories have widespead applications, it is indeed a topic for another discussion. Instead, we turn our attention to monoids themselves.
+
+\begin{definition}[Monoid]\label{dfn:12}
+	Let $(\mathcal{C},\otimes ,I,\alpha ,\lambda ,\rho ) $ be a monoidal category. A \emph{monoid} $M$ in $\mathcal{C} $ is an object $M\in \mathcal{C} $ and two morphisms
+	\[
+		\mu : C\otimes C \to C,\qquad \eta : I \to C
+	\]
+	such that the diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C\otimes (C\otimes C)\ar[" \alpha  ", r] \ar[" 1\otimes \mu  "', d]  & (C\otimes C)\otimes C\ar[" \mu \otimes 1 ", r]  & C\otimes C\ar[" \mu  ", d]  \\
+	C\otimes C\ar[" \mu  "', rr]  &  & C
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	I\otimes C\ar[" \eta \otimes 1 ", r] \ar[" \lambda  "', dr]  & C\otimes C\ar[" \mu  ", d]  & C\otimes I\ar[" 1\otimes \eta  "', l]\ar[" \rho  ", dl]   \\
+	 & C & 
+	\end{tikzcd}\]
+	commute.
+\end{definition}
+\newpage
+\subsection{A Monad is a Monoid in the Category of Endofunctors}
+
+\begin{theorem}[A Monad is a Monoid in the Category of Endofunctors]\label{thm:3}
+	A monad is a monoid in the category of endofunctors.
+\end{theorem}
+\begin{proof}
+	First, we must show that the category $\End(\mathcal{C} ) $ of endofunctors $\mathcal{C} \to \mathcal{C} $ is indeed a monoidal category, as defined for monads. We take the tensor product to be composition of functors $\circ $, which is associative by definition of a morphism. Thus, we can define the associator $\alpha $ as the identity natura transformation $1$, and the pentagon diagram commutes manifestly.
+
+	Moreover, note that since identity morphisms are identities with respect to morphism composition, we have $\mathcal{T} \circ 1_{\mathcal{C} } =1_{\mathcal{C} } \circ \mathcal{T} =\mathcal{T} $ for any $\mathcal{T} \in \End(\mathcal{C} ) $. Thus, the left and right unitors can be defined as the identity natural transformations, and the triangular diagram commutes manifestly once again. Thus, $(\End(\mathcal{C} ) ,\circ ,1_\mathcal{C} )$ is a monoidal category.
+
+	Now let $(\End(\mathcal{C} ) ,\mathcal{T} ,\mu ,\eta )$ be a monad. We want to show it is a monoid. Since the alternator and unitors in $\End(\mathcal{C} ) $ are the identities, we can reduce the diagrams in definition \ref{dfn:12} to
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{T} \circ \mathcal{T} \circ \mathcal{T}\ar[" \mu \circ 1_{\mathcal{T} } ", r] \ar[" 1_{\mathcal{T} }\circ \mu  "', d]  & \mathcal{T} \circ \mathcal{T} \ar[" \mu  ", d]  \\
+	\mathcal{T} \circ \mathcal{T} \ar[" \mu  "', r]  & \mathcal{T} 
+	\end{tikzcd}\]
+	and
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1_{\mathcal{C} } \circ \mathcal{T} \ar[" \eta \circ 1_{\mathcal{T} } ", r] \ar[" 1_{\mathcal{T} }  "', dr]  & \mathcal{T} \circ \mathcal{T} \ar[" \mu  ", d]  & \mathcal{T} \circ 1_{\mathcal{C} } \ar[" 1_{\mathcal{T} }\circ \eta  "', l] \ar[" 1_{\mathcal{T} }  ", dl] \\
+	 & \mathcal{T}  & 
+	\end{tikzcd}\]
+	In this case, the action of $\circ $ on morphisms of $\End(\mathcal{C} ) $ (aka composition of natural transformations) is \emph{horizontal composition}
+\end{proof}

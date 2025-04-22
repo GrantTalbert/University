@@ -1,0 +1,53 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../report.tex}
+\title{A Friendly Introduction to Abstract Nonsense}
+\usepackage{titlepageBU}
+\college{College of Arts and Sciences}
+\department{Department of Mathematics and Statistics}
+\date{Spring 2025}
+\usepackage{tikz-cd}
+\usepackage{eucal}
+\usepackage{csquotes}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name=Diagram]{diagram}
+
+
+\newcommand{\Set}{\mathcal{S}\mathrm{et}}
+\newcommand{\Grp}{\mathcal{G}\mathrm{rp}}
+\newcommand{\Ring}{\mathcal{R}\mathrm{ing}}
+\newcommand{\Top}{\mathcal{T}\mathrm{op}}
+\newcommand{\Cat}{\mathcal{C}\mathrm{at}}
+\newcommand{\Fld}{\mathcal{F}\mathrm{ld}}
+\renewcommand{\Vect}[1]{#1\text{-}\mathcal{V}\mathrm{ect}}
+
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareFontFamily{U}{dmjhira}{}
+\DeclareFontShape{U}{dmjhira}{m}{n}{
+  <-> dmjhira
+}{}
+\DeclareFontSubstitution{U}{dmjhira}{m}{n}
+\newcommand{\yo}{{\usefont{U}{dmjhira}{m}{n}\symbol{"48}}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\input{./files/introduction.tex}
+\input{./files/motivation.tex}
+\input{./files/definition.tex}
+\input{./files/examples.tex}
+\input{./files/functors.tex}
+\input{./files/natural-transformations.tex}
+\input{./files/universality.tex}
+\input{./files/adjunction.tex}
+\input{./files/limits.tex}
+\input{./files/monads.tex}
+\input{./files/monoids.tex}
+
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

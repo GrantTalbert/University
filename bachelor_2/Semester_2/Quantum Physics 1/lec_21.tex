@@ -1,0 +1,92 @@
+\lecture{21}{Thu 17 Apr 2025 14:02}{Hydrogen Atom Work}
+Recall we are working with the hydrogen atom, with an electron $r_e$ and a proton $r_p$. The Coulomb potential is translation invariant
+\[
+	V=- \frac{e^2}{4\pi \varepsilon _0\left| r_e-r_p \right| } 
+.\]
+That is, moving the \emph{entire wavefunction} somewhere else preserves physics. The Schrodinger equation is given in the sum of the energies
+\[
+	H=\frac{P^2_p}{2m_p} +\frac{P^2_e}{2m_e} +V(|R_e-R_p|)
+.\]
+We can do a change of basis to write $\psi (r_e,r_p)$ in 3 coordinates. We write $\psi $ in terms of the relative position $R_{\text{rel} } =R_e-R_p$. However, since $R_{\text{rel} } $ only has 3 variables, we need 3 more for $\psi $. We use the center of mass $R_{\text{cm} } $:
+\[
+	R_{\text{cm} } =\frac{m_eR_e+m_pR_p}{m_e+m_p} 
+.\]
+Remark: $\ket{r_e,r_p} $ is indeed a tensor product $\ket{r_e} \otimes \ket{r_p} $, which is necessary since we are working in 2 particles. So $P_p$ is like $1\otimes P$, and vice versa for $P_e$.
+
+We should be able to write $H$ as $H_{\text{cm} } +H_{\text{rel} } $, since we should be able to write it as a hamiltonian for the entire atom (center of mass), and a hamiltonian for the internal structure (relative position).
+
+We have $P_{\text{cm} } =P_e+P_p$, which can be verified easily by showing $\left[ X_{\text{cm} } ,P_{\text{cm} }  \right] =i\hbar $ in this definition, where
+\[
+	P_{x,\text{cm} } =-i\hbar \left( \frac{\partial }{\partial x_e} +\frac{\partial }{\partial x_p}  \right) 
+.\]
+
+The relative momentum is given by
+\[
+	P_{\text{rel} } =\frac{m_eP_e-m_pP_p}{m_e+m_p} 
+.\]
+This gives a change of variables $\nabla_e,\nabla _p \to \nabla_{\text{cm} } ,\nabla_{\text{rel} } $. This definition of $P_{\text{rel} } $ ensures this satisfies the chain rule; in that $P_{\text{rel} } =-i\hbar \nabla_{\text{rel} } $.
+
+Returning to our original hamiltonian
+\[
+	H=\frac{P^2_p}{2m_p} +\frac{P^2_e}{2m_e} +V\left( R_{\text{rel} }  \right) ,
+\]
+this turns into
+\[
+	H=\frac{P^2_{\text{cm} } }{2M} +\frac{P^2_{\text{rel} } }{2\mu } +V\left( R_{\text{rel} }  \right) ,
+\]
+where the reduced mass $\mu $ is
+\[
+	\frac{1}{\frac{1}{m_e} +\frac{1}{m_p} } 
+.\]
+This can be brute forced by plugging in the substitution. The hamiltonian now becomes two parts, the center of mass hamiltonian $P^2_{\text{cm} } /2M$, and the relative motion part which is the rest. The hamiltonians commute, so they can be diagonalized independently. WLOG, we can thus write $\psi (r_{\text{rel} } ,r_{\text{cm} } )$, which can be further written as $\psi_{\text{rel} } (r_{\text{rel} } )\otimes \psi _{\text{cm} } (r_{\text{cm} } )$. The tensor product then collapses to
+\[
+	H\ket{\psi } =\left( 1\otimes H_{\text{cm} }+H_{\text{rel} } \otimes 1  \right) )\left( \ket{\psi_{\text{cm} }  }\otimes \ket{\psi _{\text{rel} } }  \right) =\left( E_{\text{cm} } +E_{\text{rel} }  \right) \left( \ket{\psi _{\text{cm} } } \otimes \ket{\psi _{\text{rel} } }  \right) 
+.\]
+Solving the first equation
+\[
+	H_{\text{cm} } \ket{\psi _{\text{cm} } } =E_{\text{cm} } \ket{\psi _{\text{cm} } } ,
+\]
+we write
+\[
+\left( \frac{-\hbar ^2}{2m} \nabla ^2_{\text{cm} }  \right) \psi_{\text{cm}} (r_{\text{cm} }  )=E_{\text{cm} } \psi _{\text{cm} } (r_{\text{cm} } )
+.\]
+If we assume separability, this is solved by exponentials. This can be shown to be solved by
+\[
+	\frac{1}{\left( \sqrt{2\pi \hbar }  \right) ^3} \exp \left( \frac{i}{\hbar } \left( p_xx+p_yy+p_zz \right)  \right) =\frac{1}{\left( \sqrt{2\pi \hbar }  \right) ^3} \exp\left( \frac{i \mathbf{p} \cdot \mathbf{r} }{\hbar } \right)
+,\]
+where the solutions to the separable equations are
+\[
+	\frac{1}{\sqrt{2\pi \hbar } } e^{ip_{x_i} x_i} 
+.\]
+
+We've solved $\ket{\psi_{\text{cm} } } $, and now we have to real with the relative motion. Let
+\[
+	H_{\text{rel} } \ket{\psi _{\text{rel} } } =E_{\text{rel} } \ket{\psi _{\text{rel} } } 
+.\]
+In position space, this looks like
+\[
+	\left(\frac{\hbar ^2}{2\mu } \nabla_{\text{rel} }^2+V(R_{\text{rel}}) \right)\psi _{\text{rel} }(r_{\text{rel}} ) =E_{\text{rel} } \psi _{\text{rel} }(r_{rel} )
+.\]
+We will drop the ``rel'' subscripts, since this is the final equation we will solve this semester.
+
+To solve this, we need to use spherical harmonics, since there is also going to be spherical symmetry. We need to take $(x,y,z)$ and map it to $(r,\theta ,\phi )$. The change of variables is
+\[
+	x=r \sin \theta \cos \phi ,
+\]
+\[
+	y=r \sin \theta \sin \phi ,
+\]
+\[
+	z=r \cos \theta 
+.\]
+This will allow us to separate it into a solution depending on $r$, and a solution depending on $(\theta ,\phi )$, allowing it to be solved.
+
+First: what is $\nabla ^2$ in spherical coordinates? We have
+\[
+	\nabla ^2=\frac{1}{r^2} \left( \frac{\partial }{\partial r} \left( r^2 \frac{\partial }{\partial r}  \right) +\frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) +\frac{1}{\sin ^2\theta } \frac{\partial ^2}{\partial \phi ^2}  \right) 
+.\]
+Let's define
+\[
+	\hat{\nabla}^2 \coloneqq \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) +\frac{1}{\sin ^2\theta } \frac{\partial ^2}{\partial \phi ^2} 
+.\]
+This is called the Laplacian on the sphere. For the $\theta ,\phi $ part there is no potential, so it may be more simple than the $r$ part. Our goal is to find eigenfunctions $Y(\theta ,\phi )$ of $\hat{\nabla }^2$, and we can just factor in the $1/r^2$ later. These eigenfunctions are called the \emph{spherical harmonics}.

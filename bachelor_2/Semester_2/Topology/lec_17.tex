@@ -1,0 +1,22 @@
+\lecture{17}{Tue 08 Apr 2025 11:03}{Fundamental Groups}
+To understand topological spaces, we want to associate an algebraic structure to each topological space. We want to find a functor $\mathscr{F} :\mathsf{Top} \to \mathsf{Grp} $. That is, for all $f\in \Hom_{\mathbf{Top} }(X, Y) $, there exists $\mathscr{F} (f)\in \Hom_{\mathbf{Grp} }(\mathscr{F} (X), \mathscr{F} (Y)) $ such that $\mathscr{F} (gf)=\mathscr{F} (g)\mathscr{F} (f)$. If such a functor exists, we say $\mathscr{F} (X)$ is an invariant of $X$. This is central to algebraic topology - given a topological space, we find a functorial relation with an algebraic structure, and use it to study topological spaces.
+
+The reason this is important is because for any $X\cong Y$, we must have $\mathscr{F} (X)\cong \mathscr{F} (Y)$. The contrapositive of this looks useful.
+
+Recall the definition of a homotopy: two paths $\phi _1,\phi _2$ from $x$ to $y$ in $X$ are homotopic if there exists $\Phi : [0,1]^2 \to X$ such that $\Phi (0,-)=\phi _1$ and $\Phi (1,-)=\phi _2$. Recall that this is trivially an equivalence relation.
+
+\begin{definition}[Loop]\label{dfn:6.2}
+	A loop based at $x_0$ is a path $\varphi $ connecting $x_0$ to $x_0$. I.e. $\varphi : [0,1] \to X$ is continuous with $\varphi (0)=\varphi (1)=x_0$.
+\end{definition}
+\begin{definition}[First Fundamental Group]\label{dfn:6.3}
+	The first fundamental group $\pi _1(X)$ of $X$ (based at $x_0$, so often we use the notation $\pi _1(X,x_0)$) is the set of all loops $\varphi $ based at $x_0$, quotiented by the homotopy relation, such that $[\varphi _1] [ \varphi _2]$ is defined as the new class $[\varphi _1\varphi _2]$ given by the equivalence class of
+	\[
+		\varphi '\coloneqq \begin{cases}
+			\varphi _1(2t),&t\in [0,1/2]\\
+			\varphi _2(2t),&t\in [1/2,1]
+		\end{cases}
+	.\]
+	That is, we adjoin the maps and they go ``twice as fast''.
+\end{definition}
+
+This is obviously a group. We spent the entire class proving it though. The identity is the constant map. 

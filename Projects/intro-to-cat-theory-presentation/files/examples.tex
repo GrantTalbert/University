@@ -1,0 +1,38 @@
+\section{Examples}
+
+\subsection{Simple Examples}
+
+This definition is not easy to parse. Note that in definition 1, we spent most of our time discussing morphisms, and how morphisms behave. There is clearly an emphasis on morphisms, which is not unexpected given our extensive discussion of functions. However, this makes understanding morphisms crucial to continued understanding of category theory. To this end, we ask the question:
+\begin{center}
+	What is a morphism?
+\end{center}
+
+You will not like the answer. Before we can see why this is, let's explore some tame examples of categories. Consider the category $\Set $, where $\Obj(\Set ) $ is the class of all sets, and $\Hom_{\Set }(X, Y) $ is the set of all functions $f: X \to Y$. Verifying that $\Set $ is a category is straightforward, as we explicitly built categories as an abstraction of the idea of $\Set $. Other common categories include
+\begin{itemize}
+	\item $\Grp $: objects are groups and morphisms are group homomorphisms;
+	\item $\mathcal{A} \mathrm{b} $: objects are abelian groups and morphisms are group homomorphisms;
+	\item $\Ring $: objects are (usually unital) rings and morphisms are (usually unital) ring homomorphisms;
+	\item $\Vect{k} $: objects are $k$-vector spaces and morphisms are $k$-linear transformations;
+	\item $R$-$\mathcal{M}\mathrm{od}$: objects are $R$-modules and morphisms are $R$-linear maps;
+	\item $\Top $: objects are topological spaces and morphisms are continuous maps;
+	\item $\mathcal{M}\mathrm{an} $: objects are smooth manifolds and morphisms are smooth maps;
+	\item $\mathcal{C}\mathrm{h}(R)$: objects are chain complexes in $R$-$\mathcal{M} \mathrm{od} $ and morphisms are chain complex morphisms.
+\end{itemize}
+
+However, the definition of a category is exceedingly general, so there are many more categories we can define. The following category shows just how general these definitions are.
+
+\subsection{The Poset $\mathbb{Z} $}
+
+Let $\mathcal{C} $ be the category where $\Obj(\mathcal{C} ) =\mathbb{Z} $, where $\mathbb{Z} $ is the set of integers. Morphisms will be defined as follows: for any $n,m\in \mathcal{C} $, if $n\leq m$, then there is \emph{exactly one morphism} $n\to m$; if $n>m$, then there is \emph{no morphism} $n\to m$. This is an exceedingly strange and abstract definition, and we will parse it fully after we show this construction satisfies the category axioms.
+
+First, note that if $f : n \to m$ and $g : m \to p$ are morphisms, then $n\leq m\leq p$, and thus there isa  morphism $h : n \to p$. We can define $g\circ f\coloneqq h$, and this gives us composition. This composition is clearly associative. Moreover, since $n\leq n$, there is precisely one morphism $1_n : n \to n$. Consider the morphism $f : n \to m $. This can be composed into a morphism $f\circ 1_n : n \to m$. However, the only morphism $n\to m$ is $f$, so we must have $f\circ 1_n=f$. The morphism $1_n$ is shown to be a left-identity in the same way. Therefore, $\mathcal{C} $ is a category.
+
+It may not be clear what is happening in this example. We have defined morphisms to be the exact same thing as the $\leq $ relation. However, we want to intuitively think of morphisms as functions, but $\leq $ is definitely not a function. When we write $n\to m$, we think of something going from $n$ to $m$, but this morphism absolutely does not do that. All a morphism $n\to m$ does is say $n\leq m$. It's unclear why we even write these morphisms as arrows at all. These morphisms are absolutely nothing like functions.
+
+However, this definition, as confusing as it may be, does indeed form a category. And this is the uncomfortable truth of category theory. Some people say ``objects don't have to have elements'', but I feel this is a misnomer. It's difficult to think of objects that don't have elements. Instead, think about it like this:
+\begin{displayquote}
+	In category theory, morphisms need not act on elements. Objects are understood only via their relationships (morphisms/arrows) to one another.
+	\centering
+\end{displayquote}
+
+It is with this in mind that we must part ways with our set-theoretic roots in some senses. In classical set theory, we learn about functions and sets by considering their elements, and their action on elements. In category theory, we cannot rely on morphisms acting on elements. All we can do is rely on the relationships between morphisms with \emph{other morphisms}. This may seem very convoluded at the moment, but after we develop functors and natural transformations, we will see that although it's convoluded, it's also natural in a sense.
