@@ -1,0 +1,42 @@
+# chatgpt code
+# LaTeX intermediate files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.fls
+*.fdb_latexmk
+*.snm
+*.synctex.gz
+*.nav
+*.xdv
+*.dvi
+
+# latexmk / arara / other tool directories
+.latexmkrc
+.arara.yaml
+build/
+
+# PDF and other outputs
+*.pdf
+*.ps
+*.eps
+
+# Editors/IDE
+*.swp
+*.swo
+.vscode/
+.idea/
