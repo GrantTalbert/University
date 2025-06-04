@@ -1,0 +1,104 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 9}
+\courseID{PY 355}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+\begin{itemize}
+	\item hi
+		\[
+			\det \begin{pmatrix}
+			1 & z_1 \\
+			1 & z_2
+			\end{pmatrix}=1z_2-1z_1=z_2-z_1
+		.\]
+	\item ok
+		\[
+			\begin{pmatrix}
+			1 & z_1-1z_1 & z_1^2-z_1z_1 & \ldots  & z_1^{n-1} -z_1z_1^{n-2}  \\
+			1 & z_2-1z_1 & z_2^2-z_1z_2 & \ldots  & z_2^{n-1}- z_1z_2^{n-2}  \\
+			\vdots & \vdots & \vdots & \ddots &  \vdots\\
+			1 & z_n-1z_1 & z_n^2-z_1z_n & \ldots  & z_n^{n-1} -z_1z_n^{n-2} 
+			\end{pmatrix}=\begin{pmatrix}
+			1 & 0 & 0 & \ldots  & 0  \\
+			1 & z_2-z_1 & z_2^2-z_1z_2 & \ldots  & z_2^{n-1}- z_1z_2^{n-2}  \\
+			\vdots & \vdots & \vdots & \ddots &  \vdots\\
+			1 & z_n-z_1 & z_n^2-z_1z_n & \ldots  & z_n^{n-1} -z_1z_n^{n-2} 
+			\end{pmatrix}
+		.\]
+	\item you can just use cofactor expansion and because the top row is all 0s you immediately have
+		\[
+			\det V'=\det \begin{pmatrix}
+			z_2-z_1 & z_2^2-z_1z_2 & \ldots  & z_2^{n-1} -z_1z_2^{n-2}  \\
+			\vdots & \vdots & \ddots & \vdots \\
+			z_n-z_1 & z_n^2-z_1z_n & \ldots  & z_n^{n-1} -z_1z_n^{n-2} 
+			\end{pmatrix}
+		.\]
+	\item i dont feel like finishing this problem
+\end{itemize}
+
+\section*{Problem 2}
+Since the Hermitian conjugate is the complex conjugate and the transpose, both of which are linear, the Hermitian conjugate must also be linear. Since $A,B$ are Hermitian, we have
+\[
+	\left( A+B \right) ^{\dagger} =A^{\dagger} +B^{\dagger} =A+B
+.\]
+We also have that $(AB)^{\dagger} =B^{\dagger} A^{\dagger} $ from properties of the transpose, and the fact that the complex conjugate distributes over multiplication. It follows that
+\[
+	\left( AB+BA \right) ^{\dagger} =\left( AB \right) ^{\dagger} +\left( BA \right) ^{\dagger} =B^{\dagger} A^{\dagger} +A^{\dagger} B^{\dagger} =BA+AB=AB+BA
+.\]
+Finally,
+\[
+	\left( i\left[ A,B \right]  \right) ^{\dagger}=\left( iAB-iBA \right) ^{\dagger} =i^* B^{\dagger} A^{\dagger} -i^*A^{\dagger} B^{\dagger} =-iBA+iAB=i\left( AB-BA \right) =i\left[ A,B \right] 
+.\]
+\section*{Problem 3}
+Let $S=\left\{ \vec{v}_{i} \right\}_{i\in I} \subseteq V$ be a linearly independent subset of a $\mathbb{C} $-vector space $V$. First, suppose that for any $\vec{v}_i\in S$, there exists no linear combination in $S\setminus \left\{ v_i \right\} $ that equals to $v_i$. Let $A=\left\{ a_i \right\}_{i\in I} \subseteq \mathbb{C} $ such that
+\[
+	\sum_{i\in I} a_i \vec{v} _i=0
+.\]
+Suppose for contradiction that there exists at least one $a_j\in A$ that is nonzero. We have
+\[
+	\sum_{i\in I\setminus \left\{ j \right\} } a_i \vec{v} _i=-a_j \vec{v}_j
+.\]
+Because $\mathbb{C} $ is a field and since $-a_j\neq 0$, we have that for any $a_i\in A$, the number $-a_i/a_j\in\mathbb{C} $ is also a scalar, and thus
+\[
+	\sum_{i\in I\setminus \left\{ j \right\} } -\frac{a_i}{a_j} \vec{v} _i=\vec{v} _j
+\]
+is a linear combination in $S$ that equals a different element of $S$, a contradiction. Therefore, we must have $a_i=0$ for all $i\in I$.
+
+For the converse, suppose the only collection $\left\{ a_i \right\}_{i\in I} \subseteq \mathbb{C} $ solving the equation
+\[
+	\sum_{i\in I} a_i \vec{v} _i=0
+\]
+is $a_i=0$ for all $i$. Suppose for contradiction that $S$ is not linearly independent; that is, there exists at least one $\vec{v} _j\in S$ such that there exists at least one collection $\left\{ a_i \right\}_{i\in I\setminus \left\{ j \right\} } \subseteq \mathbb{C} $ such that
+\[
+	\sum_{i\in I\setminus \left\{ j \right\} } a_i \vec{v} _i=\vec{v} _j
+.\]
+If we define $a_j=1$, we can write
+\[
+	\sum_{i\in I\setminus \left\{ j \right\} } a_i \vec{v} _i=a_j\vec{v} _j
+.\]
+By subtracting $a_j \vec{v} _j$ from both sides, we have
+\[
+	\sum_{i\in I} a_i \vec{v} _i=0
+.\]
+However, we have $a_j=1\neq 0$, and thus there exists $j\in I$ such that $a_j\neq 0$, a contradiction. Therefore, $S$ is linearly independent.
+\section*{Problem 4}
+Let the vector $\mathbf{b}_i$ represent the $i$th column of $B$. If $\det B\neq 0$, then $B$ is invertible, and thus
+\[
+	B \mathbf{v} =0 \iff \mathbf{v} =B^{-1} 0=0
+.\]
+If $v^i$ is the $i$th component of $\mathbf{v} $, we then have
+\[
+	v^i \mathbf{b}_i=0 \iff \mathbf{v} =0,
+\]
+using Einstein's notation. Therefore, the columns of $B$ are linearly independent.
+
+Conversely, if $\mathbf{b} _i$ are not linearly independent, then there exists a nonzero collection of scalars $\left\{ v^i \right\} $ such that $v^i \mathbf{b} _i =0$. We then have
+\[
+	v^i \mathbf{b}_i = B \mathbf{v} =0
+\]
+for $\mathbf{v} \neq 0$, and thus $B$ is not invertible, and thus $\det B=0$.
+\end{document}

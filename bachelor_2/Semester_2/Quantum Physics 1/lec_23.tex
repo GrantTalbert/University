@@ -1,0 +1,111 @@
+\lecture{23}{Thu 24 Apr 2025 14:02}{Spherical Harmonics: Algebraic Approach}
+For a fixed $\ell $, a rotation $Y_{\ell m} $ becomes a linear combination of valid $Y_{\ell m} $s, with $\ell $ fixed and $m$ varying. This means that each $Y_{\ell m} $ induces a representation of the rotation group.
+
+We are concerned with the angular momentum operators $\mathbf{L} =\mathbf{R} \times \mathbf{P} $, with $\mathbf{R} $ the tensor of position operators and $\mathbf{P} $ the tensor of momentum operators. Explicitly,
+\[
+	L_x=YP_z-ZP_y,\qquad L_y=ZP_x-XP_z,\qquad L_z=XP_y-YP_x
+.\]
+An example of an explicit representation in position space is
+\[
+	L_x=-i\hbar y \frac{\partial }{\partial z} +i\hbar z \frac{\partial }{\partial y} 
+.\]
+Recall that the commutators of the angular momentum operators are
+\[
+	\left[ P_i,P_j \right] =i\hbar \delta_{ij} 
+.\]
+To show this, recall that
+\[
+	[R_k,P_k]=i\hbar 
+\]
+for $R_k$ a position space operator, and
+\[
+	\left[ R_j,R_k \right] =0,\qquad \left[ R_j,P_k \right] =\delta_{jk} i\hbar ,\qquad \left[ P_j,P_k \right] =0
+.\]
+We do not necessarily require $j\neq k$ here. To compute angular momenta commutators, we then have
+\begin{align*}
+	\left[ L_x,L_y \right] &=\left[ YP_z-ZP_y,ZP_x-XP_z \right] \\
+			       &=\left[ YP_z,ZP_x \right] -\left[ ZP_y,ZP_x \right] -\left[ YP_z,XP_z \right] +\left[ ZP_y,XP_z \right] \\
+			       &=\left[ YP_z,ZP_x \right] +\left[ ZP_y,XP_z \right] \\
+			       &=Y\left[ P_z,Z \right] P_x+X\left[ Z,P_z \right] P_y\\
+			       &=-i\hbar YP_x+i\hbar XP_y\\
+			       &=i\hbar L_z
+.\end{align*}
+In the third step, we removed commutators where all operators commute with each other. The fourth step follows from $\left[ A,BC \right] =B\left[ A,C \right] +\left[ A,B \right] C$. The other commutators are calcuated in the same. This is called the \emph{algebra} of 3d rotations $\mathfrak{so} (3)$. This is the same algebra as the spin operators, because they describe intrinsic angular momentum of particles.
+
+Recall that $\hat{\nabla }^2$ had eigenvalues $\ell (\ell +1)$. To compute this, we need to find a rotational invariant. Given a vector $\mathbf{r} $, the inner product $\mathbf{r} \cdot \mathbf{r} $ is invariant under rotation operators. It follows that $\mathbf{L} \cdot \mathbf{L} =\mathbf{L}^2$ is invariant under action by $\operatorname{SO} (3)$. Also note that the commutator $\left[ A,L_x \right] $ with any operator $A$ should be viewed as a rotation around the $x$-axis. By this logic,
+\[
+	\left[ \mathbf{L}^2 ,L_x \right] =0
+.\]
+This holds for any $L_i$ obviously. We can then assume WLOG the can simultaneously diagonalize $\mathbf{L} ^2$ and any $L_i$.
+
+What is $\mathbf{L} ^2$ in position space? Since it is rotationally invariant, and since each term looks like double derivatives if we expand it out, we can actually show (fairly easily but tediously) that
+\[
+	\mathbf{L} ^2= \hbar ^2 \hat{\nabla }^2
+.\]
+Let's show it. First, we go to spherical coordinates. We have
+\[
+	z=\cos \theta ,\qquad x=r \sin \theta \cos \varphi ,\qquad y=r \sin \theta \sin \varphi 
+.\]
+The derivative (wrt x) is
+\[
+	\frac{\partial }{\partial x} =\sin \theta \cos \varphi \frac{\partial }{\partial r} + \frac{\cos \theta \cos \varphi }{r} \frac{\partial }{\partial \theta } -\frac{\sin \varphi }{rsin\theta } \frac{\partial }{\partial \varphi } 
+.\]
+Plugging in and doing a lot of algebra, we have that
+\[
+	L_z = -i \hbar \frac{\partial }{\partial \varphi } 
+.\]
+It's easier to compute $L_x$ and $L_y$ as $L_{\pm} \coloneqq L_x \pm i L_y$. Doing a lot of tedious algebra, we obtain
+\[
+	L_{\pm} =\hbar e^{\pm i\varphi } \left( \pm \frac{\partial }{\partial \theta } +i \cos \theta \frac{\partial }{\partial \varphi }  \right) 
+.\]
+We then have
+\[
+	L_+L_-=\left(L_x+iL_y\right)(L_x-iL_y)=L_x^2+L_y^2+i\left[ L_y,L_z \right] 
+.\]
+Since the commutator is $-i\hbar L_z$, the right term simplifies to $\hbar L_z$. We then have
+\[
+	\mathbf{L} ^2=L_x^2+L_y^2+L_z^2=L_+L_- -\hbar L_z+L_z^2
+.\]
+Plugging in gives us
+\[
+	\mathbf{L} ^2=-\hbar ^2\left( \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) +\frac{1}{\sin ^2 \theta } \frac{\partial ^2}{\partial \varphi ^2}  \right) =-\hbar ^2 \hat{\nabla }^2
+.\]
+
+How can we find eigenstates of $\mathbf{L} ^2$? Let
+\[
+	 \mathbf{L} \ket{\psi } =-\hbar ^2\lambda \ket{\psi } 
+.\]
+Since $\mathbf{L} ^2$ and $L_z$ commute, we take $\ket{\psi } $ to be an eigenstate of $L_z$. Let $L_z\ket{\psi } =m\hbar \ket{\psi } $, and rename the state $\ket{\psi } $ to $\ket{\ell ,m} $.
+
+Consider the commutator
+\[
+	\left[ L_+,L_- \right] =\left[ L_x+iL_y,L_x-iL_y \right] =-2i\left[ L_x,L_y \right] =2\hbar L_z
+.\]
+We also ahve
+\[
+	\left[ L_z,L_{\pm}  \right] =\left[ L_z,L_x \right] +i\left[ L_z,L_y \right] =i\hbar L_y-i^2\hbar L_x=\pm \hbar L_{\pm} 
+.\]
+Finally,
+\[
+	\left[ \mathbf{L} ^2,L_{\pm}  \right] =0
+.\]
+
+Note that in the second commutator, we have a relation that looks like $\left[ A,B \right] =\lambda B$. This implies that $B$ changes the $A$ eigenvalue by $\lambda $:
+\[
+	A\ket{a} =a\ket{a} \implies AB\ket{a} =([A,B]+BA)\ket{a} =\left( \lambda B+Ba \right) \ket{a} =(a+\lambda )B\ket{a} 
+.\]
+In other words, $B\ket{a} $ has an eigenvalue $AB\ket{a} =(a+\lambda )B\ket{a} $.
+
+This means that $L_+$ changes the eigenvalues of $L_z$ by $\hbar $. So we have
+\[
+	L_z\ket{\ell ,m} =m\hbar \ket{\ell ,m} \implies L_zL_+\ket{\ell ,m} =(m+1)\hbar \ket{\ell ,m} 
+.\]
+Similarly for $L_-$. We can then say $L_+\ket{\ell ,m} \propto \ket{\ell ,m+1} $. We also somehow obtained that
+\[
+	\mathbf{L} ^2\ket{\ell ,m} =\hbar ^2 \ell (\ell +1)\ket{\ell ,m} 
+.\]
+This means that $L_+$ and $L_-$ can move up and down in $m$ without changing the overall eigenvalue of $\mathbf{L} ^2$. This means that
+\[
+	L_+ Y_{\ell m} =Y_{\ell ,m+1} 
+.\]
+Additionally, we can then show that hitting a lowest-weight or highest-weight state gives you 0. 

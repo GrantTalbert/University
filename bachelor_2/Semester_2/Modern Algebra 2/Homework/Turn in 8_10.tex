@@ -1,0 +1,42 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Turn in 8}
+\courseID{MA 542}
+\courseSection{A1}
+\usepackage{eucal}
+\begin{document}
+\makeproblem
+
+Let $\mathcal{A} \subseteq \mathbb{C} $ denote the set of algebraic integers. We trivially have $0,1\in \mathcal{A} $ since $x,x-1\in \mathbb{Z} [x]$. Let $\alpha \in \mathcal{A} $. It follows that $\alpha $ is the root of some monic $f(x)=x^n+\cdots +a_0$ in $\mathbb{Z} [x]$. Now consider the polynomial
+\[
+	g(x)\coloneqq f(-x)=\sum_{i=0}^{n} a_i(-x)^i=\sum_{i=0}^{n} (-1)^i a_i x^i\in\mathbb{Z} [x]
+.\]
+If $n$ is even, then $g(x)$ is monic, and moreover
+\[
+	g(-\alpha )=f(-(-\alpha ))=f(\alpha )=0
+.\]
+If $n$ is odd, then the polynomial $-g(x)$ is monic, and we have
+\[
+	-g(-\alpha )=-f(-(\alpha ))=-0=0
+.\]
+Moreover, since $g\in\mathbb{Z} [x]$, by closure we must have $-g\in\mathbb{Z} [x]$. Therefore, for any $\alpha \in\mathcal{A} $, we must have $-\alpha \in \mathcal{A} $.
+
+I have absolutely no idea how you wanted us to show closure. Here's an approach I know of that works though.
+
+Let $f,g\in\mathbb{Z} [x]$ be defined as
+\[
+	f(x)=\prod_{i=1}^{n} (x-\alpha _i),\qquad g(x)=\prod_{j=1}^{m} (x-\beta _j),
+\]
+respectively. In particular, let $\alpha _1=\alpha $ and $\beta _1=\beta $, that way $\alpha $ and $\beta $ are roots for $f$ and $g$, respectively. We can then define a polynomial
+\[
+	P(x)=\prod_{i=1}^{n} \prod_{j=1}^{m} \left( x-(\alpha _i+\beta _j) \right) ,
+\]
+which clealy has a root of $(\alpha +\beta )$ in the term $i=j=1$. Moreover, it is clearly still monic. Similarly, we can define
+\[
+	M(x)=\prod_{i=1}^{n} \prod_{j=1}^{m} \left( x-\alpha _i\beta _j \right) ,
+\]
+which has a root of $\alpha \beta $ at $i=j=1$ as well, and is also still clearly monic. Because of the intrinsic symmetry of the polynomials, you clearly have that $P,M\in\mathbb{Z} [x]$, and thus $\alpha\beta ,\alpha +\beta \in \mathcal{A} $.
+
+Since $\mathcal{A} $ is closed under addition, multiplication, negation, and is nonempty, we have that $\alpha -\beta \in \mathcal{A} $ and $\alpha \beta \in \mathcal{A} $ for any $\alpha ,\beta \in \mathcal{A} $. By the subring test, $\mathcal{A} $ is a subring of $\mathbb{C} $.
+\end{document}

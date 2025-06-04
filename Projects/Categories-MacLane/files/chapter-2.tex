@@ -1,0 +1,348 @@
+\chapter{Constructions on Categories}
+
+\section{Duality}
+
+Duality is the process of reversing the arrows. In this section, we will describe duality axiomatically, independent of sets and functions.
+
+The elementary theory of an abstract category (ETAC) consists of statements $\Sigma $ with letters $a,b,c\ldots $ for objects and letters $f,g,h\ldots $ for arrows. \emph{Atomic} statements consist of statements of the form
+\begin{itemize}
+	\item $a$ is the (co)domain of $f$;
+	\item $i$ is the identity arrow of $a$;
+	\item $a=b$;
+	\item $f=g$;
+	\item $f=g\circ h$.
+\end{itemize}
+A statement $\Sigma $ is any well-defined formula that can be constructed from atomic statements using standard logical operators and quantifiers. For example, the statement $f : a \to b$, which is a shorthand for ``$a$ is the domain of $f$ \emph{and} $b$ is the codomain of $f$'', is a statement $\Sigma $.
+
+Duals of statements in ETAC are formed by making the following (somewhat redundant) replacements:
+\begin{center}\begin{tabular}{c|c}
+	Statement $\Sigma $&Dual statement $\Sigma^*$\\
+	\hline
+	$f : a \to b$&$f : b \to a$\\
+	$a=\operatorname{dom} f$&$a=\operatorname{cod} f$\\
+	$b=\operatorname{cod} f$&$b=\operatorname{dom} f$\\
+	$h=g\circ f$&$h=f\circ g$\\
+	$f$ is monic&$f$ is epi\\
+	$u$ is a right-inverse of $f$&$u$ is a left-inverse of $f$\\
+	$t$ is terminal&$t$ is initial
+\end{tabular}\end{center}
+
+If a statement involves a diagram, the dual of that statement is the diagram given by reversing all arrows.
+
+The dual of each axiom of a category is also an axiom, and thus replacing a proof with it's dual gives a valid proof for the dual statement. This is known as \emph{duality}: given a statement $\Sigma $ which follows from the axioms of a category, it's dual $\Sigma ^*$ also follows.
+
+Duality also applies to statements about several categories and functors between them. This does \emph{not} reverse the direction of the functor, it simply reverses the direction of the arrows in the categories.
+
+\section{Contravariance and Opposites}
+
+We consider the opposite category $C^{\mathrm{op} } $, which flips all the arrows. It is easily shown a statement is true in $C$ if and only if it's dual is true in $C^{\mathrm{op} } $, and thus $C^{\mathrm{op} } $ can be viewed as a manifestation of the principle of duality.
+
+We can also consider opposite functors; for any functor $F : C \to D$, the assignment $F^{\mathrm{op} } : C^{\mathrm{op} }  \to D^{\mathrm{op} } $ given by $x\mapsto F(x)$ and $f^{\mathrm{op} } \mapsto F(f)^{\mathrm{op} } $ is also clearly covariantly functorial. This means there is an assignment $C\mapsto C^{\mathrm{op} } $ and $F\mapsto F^{\mathrm{op} } $, which is in fact functorial, and defines a (covariant) functor $\Cat \to \Cat $.
+
+We can also consider contravariant functors $G : C \to D$, where if $f : a \to b$ in $C$, then $G(f): G(b) \to G(a)$. That is, contravariant functors flip the direction of arrows. They can equivalently be viewed as covariant functors $G : C^{\mathrm{op} }  \to D$, which this text and my notes will do throughout.
+
+Hom-sets provide important examples of co- and contravariant functors. For each $a\in C$, the assignment $x\mapsto C(a,x)$ gives a covariant functor $C\to \Set $ by mapping morphisms as follows: for any $f : x \to y$, the induced morphism is given by
+\[
+	C(a,f): C(a,x) \to C(a,y),\qquad \varphi \mapsto f\circ \varphi 
+.\]
+This works since $\varphi : a \to x$, so $f\circ \varphi : a \to x \to y$. This is easily shown to be functorial.
+
+Similarly, the contravariant hom-functor $x\mapsto C(x,a)$, written as $C(-,a): C^{\mathrm{op} }  \to \Set $, has action on morphisms given by
+\[
+	C(f,a): C(y,a) \to C(x,a),\qquad \varphi \mapsto \varphi \circ f
+.\]
+This works since $\varphi : y \to a$, so $\varphi \circ f : x \to y \to a$.
+
+Another example is the \emph{sheaf of germs of continuous functions on $X$}, for $X$ a topological space. Let $\mathbf{Open} (X)$ be the poset category given by all open subsets of $X$ under the partial order $\subseteq $. Let $\overline{C} (U)$ denote the set of all continuous functors $f : U \to \mathbb{R} $. The restriction assignment $f\mapsto f|_V$ is a function $\overline{C} (U)\to \overline{C} (V)$ for all $V\subseteq U$. This makes $\overline{C} $ a contravariant functor $\mathbf{Open} (X)\to \Set $.
+
+Another example is the assignment $\Ring \to \CAT$ given by $R\mapsto \mathbf{Mod} $-$R$. For any ring homomorphism $\rho : R \to S$, the functor $\mathbf{Mod} $-$\rho $ is given by mapping $S$-modules $M$ to $R$-modules $M$, with $R$-action $m\cdot r$ given by $m\cdot \rho (r)$.
+
+\section{Products of Categories}
+
+\begin{definition}[Product Category]\label{dfn:2.1}
+	Let $C,D$ be categories. Define the \emph{product category} $C\times D$ as the category where
+	\[
+		\Obj(C\times D) =\left\{ (c,d)\mid c\in C,d\in D \right\} ,
+	\]
+	and morphisms $(c_1,d_1)\to (c_2,d_2)$ are given by pairs $(f,g)$, where
+	\[
+		f : c_1 \to c_2,\qquad g : d_1 \to d_2
+	\]
+	in $C$ and $D$, respectively. Composition is defined pointwise.
+\end{definition}
+
+Product categories come woth projections $\pi_C : C\times D \to C$ and $\pi _D : C\times D \to D$ satisfying the universal property of products:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & Z\ar[" F "', dl] \ar[" G ", dr]  \ar[dashed, d]&  \\
+C & C\times D\ar[" \pi _C ", l] \ar[" \pi _D "', r]  & D
+\end{tikzcd}\]
+
+Two functors $U : C \to C'$ and $V : D \to D'$ also have a product $U\times V : C\times C' \to D\times D'$, given by
+\[
+	(U\times V)(x,y)=(U(x),V(y));\qquad (U\times V)(f,g)=(U(f),V(g))
+.\]
+This is equivalently the unique arrow in the diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+ & C\times D\ar[" U\circ \pi_C "', dl] \ar[" V\circ \pi _D ", dr] \ar[" U\times V ", dashed, d]  &  \\
+C' & C'\times D'\ar[l] \ar[r]  & D'
+\end{tikzcd}\]
+One clearly also has that you can compose products of functors pointwise, by a simple diagram chase, so product is infact a functor
+\[
+	\times : \Cat \times \Cat  \to \Cat 
+.\]
+Similar functors exist $\Grp \times \Grp \to \Grp $, $\Top \times \Top \to \Top $, and many more. Functors from a product category to a regular category are called \emph{bifunctors}. Bifunctors satisfy the property that if one of the arguments is held fixed and the other is allowed to vary, this induces a functor as well.
+
+\begin{proposition}\label{prp:2.1}
+	Let $B,C,D$ be categories. For all $b\in B$ and $c\in C$, let $L_c : B \to D$ and $M_b : C \to D$ be functors such that $M_b(c)=L_c(b)$ for all $b$ and $c$. There exists a bifunctor $X : B\times C \to D$ with $S(-,c)=L_c$ and $S(b,-)=M_b$ for all $b$ and $c$, if and only if for all $f : b \to b'$ and $g : c \to c'$, we have
+	\[
+		M_{b'} (g)\circ L_c(f)=L_{c'} (f) \circ M_b(g)
+	.\]
+	These equal arrows are then the value $S(f,g)$.
+\end{proposition}
+\begin{proof}
+	First, let $S$ be a bifunctor. Let $f : c \to \overline{c} $ and $g : b \to \overline{b} $. Then since $L_c(b)=M_b(c)$ for all pairs $(b,c)$, we have the equalities
+	\[
+		M_b(c)=L_c(b),\qquad L_c(\overline{b} )=M_{\overline{b} } (c),\qquad M_b(\overline{c} )=L_{\overline{c} } (b),\qquad M_{\overline{b} } (\overline{c} )=L_{\overline{c} } (\overline{b} )
+	.\]
+	Functorality of $M$ and $L$ then gives us the commutative diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	L_c(b)\ar[equals, d] \ar[" L_c(g) ", r]  & L_c(\overline{b} )=M_{\overline{b} } (c)\ar[" M_{\overline{b} } (f) ", r]  & M_{\overline{b} } (\overline{c} )\ar[equals, d]  \\
+	M_b(c)\ar[" M_b(f) "', r]  & M_b(\overline{c} )=L_{\overline{c} } (b)\ar[" L_{\overline{c} } (g) "', r]  & L_{\overline{c} } (\overline{b} )
+	\end{tikzcd}\]
+	This gives us the desired equality. The converse gives us this equality, allowing $S$ to be well-defined, and functoriality is then manifest from functorality of $M$ and $L$.
+\end{proof}
+
+Hom also gives an example of a bifunctor; if $C$ is locally small, then Hom is a bifunctor $\Hom : C^{\mathrm{op} } \times C \to \Set $. There is also an isomorphism $(B\times C)^{\mathrm{op} } \cong B^{\mathrm{op} } \times C^{\mathrm{op} } $.
+
+Natural transformations between bifunctors $\alpha : S \Rightarrow S'$ are viewed as follows. $\alpha $ is a function which assigns to each pair $(b,c)\in B\times C$, an arrow $\alpha (b,c): S(b,c) \to S'(b,c)$ (the component of the natural transformation at $(b,c)$) satisfying the naturality condition.
+
+We call $\alpha $ \emph{natural in $b$ for each $c\in C$}  if the components define another natural transformation
+\[
+	\alpha (-,c): S(-,c) \Rightarrow S'(-,c)
+\]
+for each $c\in C$.
+
+\begin{proposition}\label{prp:2.2}
+	Let $S,\overline{S} : B\times C \to D$ be bifunctors. A function $\alpha $ is a natural transformation $\alpha : S \Rightarrow \overline{S} $ if and only if $\alpha (b,c)$ is natural in $b$ for each $c$, and natural in $c$ for each $b$.
+\end{proposition}
+\begin{proof}
+	First, let $\alpha : S \Rightarrow \overline{S} $. Since this defines a naturality condition between \emph{all} pairs $(b,c)$, simply fixing a given $c$ and letting $b$ vary still induces a naturality condition, since action on morphisms can be viewed as pairs $(f,1_c)$. For the converse, I will denote by $\alpha (b,-)_c$ the component of $\alpha (b,-)$ at $c$, and likewise for $\alpha (-,c)$. Note that $\alpha (b,-)_c=\alpha (b,c)=\alpha (-,c)_b$. Let $(f,g): (b,c) \to (\overline{b} ,\overline{c} )$. This gives us the commutative diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		S(b,c)\ar[" S(1_b\text{,} g) ", r] \ar[" S(f\text{,} g) ", bend left, rrr] \ar[" \alpha (b\text{,} -)_c "', d]  & S(b,\overline{c} )\ar[equals, r] \ar[" \alpha (b\text{,} -)_{\overline{c} }  "{name=nt1}, d]  & S(b,\overline{c} )\ar[" \alpha (-\text{,} \overline{c} )_{b}  "'{name=nt2}, d] \ar[" S(f\text{,} 1_{\overline{c} } ) ", r]  & S(\overline{b} ,\overline{c} )\ar[" \alpha (-\text{,} \overline{c} )_{\overline{b} }  ", d]  \\
+	\overline{S} (b,c)\ar[" \overline{S} (1_b\text{,} g) "', r] \ar[" \overline{S} (f\text{,} g) "', bend right, rrr]  & \overline{S} (b,\overline{c} )\ar[equals, r]  & \overline{S}(b,\overline{c} )\ar[" \overline{S} (f\text{,} 1_{\overline{c} } ) "', r]  & \overline{S} (\overline{b} ,\overline{c} )
+	\arrow[from=nt1, to=nt2, equals]
+	\end{tikzcd}\]
+	By commutivity, we have that $\alpha : S \Rightarrow \overline{S} $.
+\end{proof}
+
+\section{Functor Categories}
+
+Let $F,G,H : C \to D$ be functors, and let $\sigma : F \Rightarrow G$, $\tau : G \Rightarrow H$ be natural transformations. We can compose natural transformations to obtain a natural transformation $\tau \cdot \sigma : F \Rightarrow H $, given by $(\tau \cdot \sigma )_c=\tau _c\circ \sigma _c$. Diagramatically, this is given by the commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(c)\ar[" F(f) ", r]\ar[" \sigma_c ", d] \ar[" (\tau \cdot \sigma )_c "', bend right, dd]   & F(d)\ar[" \sigma _d "', d] \ar[" (\tau \cdot \sigma )_d ", bend left, dd]  \\
+G(c)\ar[" G(f) ", r] \ar[" \tau _c ", d]  & G(d)\ar[" \tau _d "', d]  \\
+H(c)\ar[" H(f) "', r]  & H(d)
+\end{tikzcd}\]
+
+Composition in this manner is manifestly associative, and it also has as an identity the identity transformation $1_F : F \Rightarrow F$, where each component is an identity morphism. This allows us to define the functor category.
+
+\begin{definition}[Functor Category]\label{dfn:2.3}
+	Let $C,D$ be categories. The \emph{functor category} $\operatorname{Fun} (C,D)$ takes as objects all functors $C\to D$, and as morphisms natural transformations. We often write
+	\[
+		\operatorname{Nat} (F,G)=\Hom_{\operatorname{Fun} (C,D)}(F, G) 
+	.\]
+\end{definition}
+ 
+Hom-sets in this category need not be small, and moreover functor categories need not be classes. They can be large sets which are not classes.
+
+\section{The Category of All Categories}
+
+We have defined what we call \emph{vertical composition} of natural transformations, where we compose them along functors. There is, however, another way to compose natural transformations, known as \emph{horizontal composition}. Let $A,B,C$ be categories, and let
+\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+	A\ar[" F_1 "{name=F1}, bend left, r] \ar[" G_1 "'{name=G1}, bend right, r]  & B \ar[" F_2 "{name=F2}, bend left, r] \ar[" G_2 "'{name=G2}, bend right, r]  & C
+	\arrow[from=F1, to=G1, Rightarrow, " \sigma  ", shorten=5pt]
+	\arrow[from=F2, to=G2, Rightarrow, " \tau  ", shorten=5pt]
+\end{tikzcd}\]
+commute. That is, $F_1,G_1: A \to B$ and $F_2,G_2: B \to C$ are functors, and $\sigma : F_1 \Rightarrow G_1$, $\tau : F_2 \Rightarrow G_2$ are natural transformations. We want to compose these natural transformations.
+
+To do this, first form the composite functors $F_2\circ F_1$ and $G_2\circ G_1$. From hereon out, using components of natural transformations as subscripts will become impractical, so I will swap to the book's function notation, where $\sigma (c)$ is the component of $\sigma $ at $c$.
+
+Note that $\sigma (c): F_1(c) \to G_1(c)$, and thus
+\[
+	F_2(\sigma (c)): (F_2\circ F_1)(c) \to (F_2\circ G_1)(c)
+.\]
+Similarly, we have
+\[
+	G_2(\sigma (c)): (G_2\circ F_1)(c) \to (G_2\circ G_1)(c)
+.\]
+Since $\tau $ is a natural transformation $ F_2 \Rightarrow G_2$, it has components at $F_1(c)$ and $G_1(c)$, and thus by the naturality condition the square
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	(F_2\circ F_1)(c)\ar[" \tau (F_1(c)) ", r] \ar[" F_2(\sigma (c)) "', d]  & (G_2\circ F_1)(c)\ar[" G_2(\sigma (c)) ", d]  \\
+	(F_2\circ G_1)(c)\ar[" \tau (G_1(c)) "', r]  & (G_2\circ G_1)(c)
+\end{tikzcd}\]
+commutes. Define \emph{horizontal composition} as the diagonal of this square, meaning
+\[
+	(\tau \circ \sigma )(c)=G_2(\sigma (c))\circ \tau (F_1(c))=\tau (G_1(c))\circ F_2(\sigma (c))
+.\]
+
+To show naturality of $\tau \circ \sigma $, consider the commutative diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	(F_2\circ F_1)(c)\ar[" F_2(\sigma (c)) ", r] \ar[" (F_2\circ F_1)(c) "', d] & (F_2\circ G_1)(c)\ar[" \tau (G_1(c)) ", r] \ar[" (F_2\circ G_1)(f) "', d]  & (G_2\circ G_1)(c)\ar[" (G_2\circ G_1)(f) ", d]  \\
+(F_2\circ F_1)(d)\ar[" F_2(\sigma (d))"', r]  & (F_2\circ G_1)(c)\ar[" \tau (G_1(d)) "', r]  & (G_2\circ G_1)(d)
+\end{tikzcd}\]
+The right square commutes by naturality of $\tau $, and the left square commutes by naturality of $\sigma $ and functorality of $F_2$. Thus, the diagram commutes. Note that the horizontal composites are precisely the components $(\tau \circ \sigma )(c)$ and $(\tau \circ \sigma )(d)$. Therefore, $\tau \circ \sigma : F_2\circ F_1 \Rightarrow G_2\circ G_1$ is natural.
+
+Horizontal composition is once again manifestly associative, and moreover the identity natural transformation on the identity functor is an identity for horizontal composition. The book at this point adopts the notation of using $F$ not only to denote a functor, but also to denote the identity natural transformation $1_F$. I will not use this notation.
+
+With notation as above, we also have that there are natural transformations
+\[
+	1_{F_2} \circ \sigma  : F_2\circ F_1 \Rightarrow F_2\circ G_1,\qquad \tau \circ 1_{G_1} : F_2\circ G_1 \Rightarrow G_2\circ G_1
+.\]
+We can then redefine horizontal composition in generality as
+\[
+	\tau \circ \sigma =(1_{G_2} \circ \sigma )\cdot (\tau \circ 1_{F_1} )=(\tau \circ 1_{G_1} )\cdot (1_{F_2} \circ \sigma )
+.\]
+
+One may see by virtue of a short diagram chase (which I did on my whiteboard and do not wish to type) that given the situation
+\[\begin{tikzcd}[row sep = 5em, column sep = 10em]
+	A\ar[bend left=70, " F_1 "{name=F1}, r] \ar[" F_2 "{name=F2}, r] \ar[bend right=70, " F_3 "{name=F3}, r]  & B \ar[" G_1 "{name=G1}, bend left=70, r] \ar[" G_2 "{name=G2}, r] \ar[" G_3 "'{name=G3}, bend right=70, r]  & C
+	\arrow[from=F1, to=F2, Rightarrow, " \sigma_F ", shorten=5pt]
+	\arrow[from=F2, to=F3, Rightarrow, " \tau_F ", shorten=5pt]
+	\arrow[from=G1, to=G2, Rightarrow, " \sigma_G ", shorten=5pt]
+	\arrow[from=G2, to=G3, Rightarrow, " \tau _G ", shorten=5pt]
+\end{tikzcd}\]
+we have the equality
+\[
+	(\tau _G \cdot \sigma _G)\circ (\tau _F\cdot \sigma _F)=(\tau _G\circ \tau _F)\cdot (\sigma _G\circ \sigma _F)
+.\]
+This is known as the \emph{interchange law}, which turns out to somewhat classify natural transformations (for small categories):
+
+\begin{theorem}\label{thm:1}
+	The collection of all natural transformations is the set of arrows of two different categories under two different operations of composition, $\cdot $ and $\circ $, which satisfy the interchange law. Moreover, any identity for $\circ $ is an identity for $\cdot $.
+\end{theorem}
+
+We often omit the $\circ $ when composing along categories, similarly to how we often omit $\circ $ when composing functors or morphisms. To make the distinction clear, we will generally retain the $\cdot $ for vertical composition.
+
+A double category is a categpry which has arrows with two different compositions, composable along morphisms and objects, which satisfy the interchange law. A 2-category is a double category for which identities for $\circ $ are also identities for $\cdot $.
+
+\section{Comma Categories}
+
+Comma categories are categories where objects are certain kinds of arrows. For example, given an object $b\in C$, the category $(b\downarrow C)$ of objects \emph{under} $b$, wherein objects are pairs $(f,c)$ with $c\in C$ and $f : b \to c$; morphisms $(f,c)\to (g,d)$ are morphisms $\varphi : c \to d$ in $C$, such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & b \ar[" f "', dl] \ar[" g ", dr]  &  \\
+c\ar[" \varphi  "', rr]  &  & d
+\end{tikzcd}\]
+commutes.
+
+A similar example is the category $(C\downarrow a)$ of objects \emph{over} $a$, where objects are pairs $(f,c)$ with $f : c \to a$, and morphisms $(f,c)\to (g,d)$ are commutative triangles
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+c\ar[" \varphi  ", rr] \ar[" f "', dr]  &  & d\ar[" g ", dl]  \\
+ & a & 
+\end{tikzcd}\]
+in $C$. For example, $\left\{ * \right\} $ is terminal in $\Set $, so there is always a unique map $X\to \left\{ * \right\} $, and thus $(\Set \downarrow \left\{ * \right\} )$ is isomorphic to $\Set $.
+
+Let $F : C \to D$ and $b\in D$. The category $(b\downarrow S)$ of objects $S$-under $b$, is formed of pairs $(f,c)$ with $c\in C$ and $f : b \to F(c)$. Morphisms $(c,f)\to (d,g)$ in $(b\downarrow S)$ are morphisms $\varphi : c \to d$ in $C$, such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & b \ar[" g ", dr] \ar[" f "', dl]  &  \\
+F(c)\ar[" F(\varphi ) "', rr]  &  & F(d)
+\end{tikzcd}\]
+commutes. The category $(S\downarrow b)$ of objects $S$-over $b$ is constructed analogously.
+
+For example, let $U : \Grp  \to \Set $ be the forgetful functor. For some $x\in \Set $, the category $(x\downarrow U)$ is given by functions $x\to U(g)$ for $g$ a group; for example the function mapping $x$ into the free group on $x$ is one such object. Clearly this object is of some importance, and will be treated extensively later.
+
+Here is the general construction of a comma category. Let $A,B,C$ be categories, and let
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+A\ar[" F ", r]  & C & B \ar[" G "', l] 
+\end{tikzcd}\]
+be functors. The comma category $(F\downarrow G)$ takes triples $(a,b,f)$ as objects with $a\in A$, $b\in B$, and $f : F(a) \to G(b)$. Arrows $(a_1,b_1,f_1)\to (a_2,b_2,f_2)$ are pairs $(k,h)$ of arrows $k : a_1 \to a_2$ and $h : b_1 \to b_2$, such that
+\[
+	f_2 \circ F(k)=G(h)\circ f_1
+.\]
+Equivalently, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(a_1)\ar[" F(k) ", r] \ar[" f_1 "', d]  & F(a_2)\ar[" f_2 ", d]  \\
+G(b_1)\ar[" G(h) "', r]  & G(b_2)
+\end{tikzcd}\]
+must commute. Composition of morphisms is done pointwise.
+
+One recovers all of the previous examples by replacing objects $b$ with functors $\mathbf{1} \to C$ mapping $1\mapsto b$, and by replacing categories $C$ with identity functors $1_C$. Many categorical constructions can be recovered using comma categories. For example, we can consider $(a\downarrow b)$ for some $a,b\in C$, which takes as objects pairs $(a,b,f)$, where $f : a \to b$. Equivalently, $\Obj(a\downarrow b) \cong \Hom_{C}(a, b) $. Since $\mathbf{1} $ has no non-identity morphisms, there are no non-identity morphisms in this category, and it is thus a discrete category.
+
+\section{Graphs and Free Categories}
+
+Recall the construction of the free monoid $F(X)$ on the set $X$, which is formed by all finite strings in $X$, has multiplication given by juxtaposition, and for which any set-function $X\to M$ with $M$ any monoid extends to a unique morphism of monoids $F(X)\to M$. To construct a free \emph{category}, we replace a set with a directed graph.
+
+Recall that a directed graph $G$ is a pair $\left( O,A \right) $ of sets of objects and arrows, together with functions $\operatorname{dom} ,\operatorname{cod} : A \to O$. Morphisms $G\to G'$ are a pair of functions $D_O : O \to O'$ and $D_A : A \to A'$ such that
+\[
+	D_O \operatorname{dom} f = \operatorname{dom} D_A f,\qquad D_O \operatorname{cod} f=\operatorname{cod} D_A f
+\]
+for all $f\in A$. The category $\mathbf{Grph} $ takes as objects all small graphs, as morphisms all morphisms of graphs, and has a forgetful functor $U : \Cat  \to \mathbf{Grph} $.
+
+An $O$-graph is any graph for which $O$ is the set of objects, and morphisms of $O$-graphs are morphisms of graphs for which $D_O$ is the identity. We define the product over $O$ of two $O$-graphs $A,B$ to be
+\[
+	A\times _OB=\left\{ (g,f)\mid \operatorname{dom} g=\operatorname{cod} f,g\in A,f\in B \right\} 
+;\]
+the set of composable pairs. We then define $\operatorname{dom} (g,f)=\operatorname{dom} f$, and $\operatorname{cod} (g,f)=\operatorname{cod} g$. This product is associative, and the $O$-graph $O$, which takes dom and cod the identity functions, is a unit for $\times _O$. A category with $\Obj(C) =O$ is then an $O$-graph together with functions $c,i$ (composition and identity), satisfying the necessary coherence diagrams to ensure associativity of $c$ and unity of $i$ with respect to $c$.
+
+In this sense, categories are similar to monoids, with $\times _O$ the product. $O$-graphs can then be used to generate free categories, similarly to monoids.
+
+\begin{theorem}\label{thm:2.2}
+	Let $G=\left\{ A\rightrightarrows O \right\} $ be a small graph. There is a small category $C=C_G$ with $\Obj(C) =O$ and a morphism $P : G \to U(C)$ of graphs, for $U : \Cat  \to \mathbf{Grph} $ the forgetful functor, such that for any category $Z$ and any morphism $D : G \to U(Z)$ of graphs, there is a unique functor $D': C \to Z$ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	G\ar[" P ", r] \ar[" D "', dr]  & C\ar[" D' ", dashed, d]  \\
+	 & Z
+	\end{tikzcd}\]
+	commute (with the obvious regards as to forgetful functors and the like). In particular, if $U(Z)$ is an $O$-graph, then $D'$ is the identity on objects.
+\end{theorem}
+\begin{proof}
+	Note that the comma category $(G\downarrow U)$ takes as objects pairs $(C,F)$, where $F : G \to U(C)$ is a morphism of graphs, and $C$ is a category. Morphisms $\varphi : (C,F_C) \to (D,F_D)$ are thus functors $\varphi : C \to D$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & G\ar[" F_C "', dl] \ar[" F_D ", dr]  &  \\
+	U(C)\ar[" U(\varphi ) "', rr]  &  & U(D)
+	\end{tikzcd}\]
+	commutes. It thus follows that the free category $C_G$ must be initial in the comma category $(G\downarrow U)$.
+
+To define $C$, take $\Obj(C) =O$ and arrows of $C$ to be finite paths
+\[
+	a_1 \to a_2 \to \cdots \to a_{n-1} \to a_n
+.\]
+Since composition is not necessarily defined in a graph, this is formalized as a pair $(a_1,f_1, \ldots ,a_n)$. We take each pair $(a_1,f_1, \ldots ,a_n)$ to be a morphism $a_1\to a_n$ in $C$. Composition is defined via concatenation, meaning
+\[
+	(a_1,f_1, \ldots ,a_m)\circ (a_1,f_1, \ldots ,a_n)=(a_1,f_1, \ldots ,a_{n+m}): a_1 \to a_{n+m} 
+.\]
+The morphism $P$ of graphs simply maps arrows $f : a_1 \to a_2$ to the string $(a_1,f,a_2)$. Showing the existence of $D'$ is fairly simple; the definition of $D'$ is just $(a_1,f,a_2)\mapsto f$ for the smallest arrows, given by composition otherwise, and agrees with $D$ on object mappings. The uniqueness and commutivity of the diagram is manifest/forced.
+\end{proof}
+
+When $O$ is a singleton, the graph reduces to a set $X$ of arrows, and the theorem provides for us the construction of a free monoid.
+
+\begin{corollary}\label{cor:2.1}
+	For any set $X$, there is a monoid $M$ and a function $p : X \to U(M)$, with $U$ the forgetful functor, satisfying the universal property of free monoids.
+\end{corollary}
+
+Graphs can be used to describe diagrams. For any graph $G$, a diagram in the shape of $G$ in the category $B$ is a morphism $D : G \to B$ of graphs. This corresponds to a functor $D': C_G \to B$ via the bijection $D'\mapsto D=U(D')\circ P$. This bijection
+\[
+	\Cat (C_G,B)\cong \mathbf{Grph} (G,U(B))
+\]
+arises from an adjunction relation between $F$ and $U$.
+
+\section{Quotient Categories}
+
+\begin{proposition}\label{prp:2.3}
+	Let $C$ be a category, and let $R$ be a function mapping each pair $(a,b)$ in $C$ to a binary relation $R_{a,b} $ on $C(a,b)$. Then there exists a category $C/R$ and a functor $\pi : C \to C/R$ such that
+	\begin{itemize}
+		\item If $fR_{a,b} f'$ in $C$, then $\pi (f)=\pi (f')$;
+		\item If $H : C \to D$ is any functor such that $fR_{a,b} f'$ implies $H(f)=H(f')$, then there is a unique functor $H': C/R \to D$ such that $H=H'\circ \pi $ - in other words, $\pi $ is universal with respect to this property. The unique functor is a bijection on objects.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	$R$ is a congruence if
+	\begin{itemize}
+		\item $R_{a,b} $ is an equivalence relation for all pairs;
+		\item If $f,f': a \to b$ have $fR_{a,b} f'$, then for all $g : a \to a'$ and all $h : b \to b'$, the compositions satisfy $(h\circ f\circ g)R_{a',b'} (h\circ f'\circ g)$ (composition preserves $R$).
+	\end{itemize}
+	There exists a minimal congruence $R'$ containing $R$ (which I refuse to prove), so we define $C/R$ as the category where $\Obj(C/R) =\Obj(C) $, and $C/R(x,y)=C(x,y) /R'$. After this, anyone who has done proofs about universality of quotients can do this with their eyes closed, and it would be a waste of time to type it up instead of doing exercises.
+\end{proof}
+
+\begin{remark}
+	Any relation that is already a congruence, such as homotopy, can be directly quotiented by without finding the minimal containing congruence. Additionally, in a similar but not equivalent vein to group presentations, if $C$ is generated by graph $G$ as a free category, we call $C/R$ the group with generators $G$ and relations $R$.
+\end{remark}
+

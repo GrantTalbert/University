@@ -1,0 +1,11 @@
+\lecture{21}{Tue 22 Apr 2025 11:02}{More Algebraic Topology}
+\begin{definition}[Homotopy]\label{dfn:owo}
+	Let $f,g : X \to Y$ be continuous. Then $f$ is homotopic to $g$ if there exists $F : [0,1] \times X\to Y$ such that $F(0,-)=f$ and $F(1,-)=g$.
+\end{definition}
+\begin{definition}[Deformation Retract]\label{dfn:ouwu}
+	Let $A\subseteq X$, and $\iota : A \hookrightarrow X$ the inclusion. Then a deformation retract is a map $F : [0,1]\times X \to X$ such that $F(0,-)=1_X$ and $F(1,X)\subseteq A$. In other words, it is a homotopy $1_X \Rightarrow F(1,-) $.
+\end{definition}
+\begin{definition}[Homotopy Equivalence]\label{dfn:kkk}
+	A map $f : X \to Y$ is a \emph{homotopy equivalence} if there exists $g : Y \to X$ such that $g\circ f\sim 1_X$ and $f\circ g\sim 1_Y$. In other words, they are inverted under homotopy.
+\end{definition}
+

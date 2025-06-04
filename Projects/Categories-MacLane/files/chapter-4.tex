@@ -1,0 +1,299 @@
+\chapter{Adjoints}
+
+\section{Adjunctions}
+The following notation appears to be fairly dated, but I will use it over the course of this book since Mac Lane uses it.
+\begin{definition}[Adjunction]\label{dfn:4.1}
+	Let $C,D$ be categories. An adjunction from $C$ to $D$ is a triple $(F,G,\varphi ) : D \rightharpoonup C$ where $F$ and $G$ are functors
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C\ar[" F ", shift left, r] & D\ar[" G ", shift left, l],
+	\end{tikzcd}\]
+	and $\varphi $ is a function which maps pairs $(c,d)\in C\times D$ to an isomorphism
+	\[
+		\varphi_{(c,d)} : D(F(c),d)\cong C(c,G(d))
+	,\]
+	which is natural in $c$ and $d$.
+\end{definition}
+
+The naturality condition in $\varphi $ asserts that $\varphi $ is a natural isomorphism between the compositions of bifunctors
+\[
+	\varphi : D(-,-)\circ (F^{\mathrm{op} }\times 1_D) \Rightarrow C(-,-)\circ (1_{C^{\mathrm{op} } }\times G)
+,\]
+where we recall that $F^{\mathrm{op} } : C^{\mathrm{op} }  \to D^{\mathrm{op} } $. This is necessary due to how the hom functors work, as we well know. More concisely,
+\[
+	\varphi : D(F(-),-) \Rightarrow C(-,G(-))
+.\]
+The naturality condition thus asserts that for all $f : c \to c'$ and $g : d \to d'$, the diagram
+\[\begin{tikzcd}[row sep = 4.5em, column sep = 4.5em]
+D(F(c),d)\ar[" \varphi_{(c\text{,} d)}  ", r] \ar[" D(F(f)\text{,}g) "', d]  & C(c,G(d))\ar[" C(f\text{,} G(g)) ", d]  \\
+D(F(c'),d')\ar[" \varphi_{(c'\text{,} d')}  "', r]  & C(c',G(d'))
+\end{tikzcd}\]
+commutes. This is equivalently viewed as the book presents it, where we have the commutivity of 2 diagrams, one only considering $f$ and one only considering $g$. As is, the morphism $C(F(f),g)$ is the map $\varphi \mapsto g\circ \varphi \circ F(f)$, and $D(f,G(g))$ is similar.
+
+With notation as above, we say $F$ is \emph{left-adjoint} to $G$, and $G$ is \emph{right-adjoint} to $F$, since $F$ appears on the left and $G$ appears on the right in the hom-sets. We also call $F$ a \emph{left-adjoint functor}, and $G$ a \emph{right-adjoint functor}. We write $F\dashv G$.
+
+Each adjunction gives rise to universal arrows. Let $d=F(c)$. Then the natural isomorphism $\varphi_{(c,d)} $ gives
+\[
+	D(F(c),F(c))\cong C(c,G(F(c)))
+.\]
+We then have $1_{F(c)} \in D(F(c),F(c))$, so define $\eta_c = 1_{F(c)} $. By proposition \ref{prp:3.1}, we thus have that $(\eta _c,F(c))$ is universal from $c$ to $G$ (since each map $c\to G(d)$ is in bijection with a map $F(c)\to d$), and thus we have an assignment $c\mapsto \eta _c$ to universal arrows \emph{for all} $c\in C$. Moreover, this assignment $c\mapsto \eta _c$ is natural $1_C\Rightarrow G\circ F$, since naturality of $\varphi $ guarentees that the diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+c' \ar[" \eta_{c'}  ", r] \ar[" h "', d]  & G(F(x'))\ar[" G(F(h)) ", d]  \\
+c\ar[" \eta_c "', r]  & G(F(c))
+\end{tikzcd}\]
+since $\eta_c = \varphi (1_{F(c)} )$. By proposition \ref{prp:3.1}, we have that the bijection $\varphi $ can be given by
+\[
+	\varphi_{(c,d)} (f)=G(f)\circ \eta _x
+.\]
+I think it's good to show this explicitly here. By naturality of $\varphi $, for each $f : F(c) \to d$, the diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+D(F(c),F(c))\ar[" \varphi ", r] \ar[" D(F(c)\text{,} f) "', d]  & C(c,GF(c))\ar[" C(c\text{,} G(f)) ", d]  \\
+D(F(c),d)\ar[" \varphi  "', r]  & C(c,G(d))
+\end{tikzcd}\]
+commutes. Chasing the arrow $1_{F(c)} $ around the diagram gives
+\[
+	G(f)\circ \varphi(1_{F(c)}) =\varphi(f\circ D(F(c),1_{F(c)} )
+.\]
+By functorality, the left simplifies to $\varphi (f\circ 1_{F(c)} )=\varphi (f)$, and the right is defined as $G(f)\circ \eta_c$. This gives us this equality.
+
+This all follows as well for $F$. Consider the bijection with $c=G(d)$:
+\[
+	\varphi : D(FG(d),d)\cong C(G(d),G(d))
+.\]
+Define by $\varepsilon_d$ the image $\varphi ^{-1} (1_{G(d)} )$, and by much the same arguments, we have that $(\varepsilon _d,G(d))$ is universal from $F$ to $d$, which is essentially the same as the statement that
+\[
+	\varphi ^{-1} (f)=\varepsilon _d \circ F(f),\qquad f : c \to G(d)
+.\]
+Finally, the map $d\mapsto \varepsilon _d$ is natural $\varepsilon : FG \Rightarrow 1_D$.
+
+Consider the map $1_{G(d)} : G(d) \to G(d)$. We have by the previous equality that
+\[
+	\varphi ^{-1} (1_{G(d)} )=\varepsilon \circ \varepsilon_d \circ F(1_{G(d)} )=\varepsilon _d\circ 1_{FG(d)} =\varepsilon _d
+.\]
+We thus have
+\[
+	1_{G(d)} =(\varphi \circ \varphi ^{-1} )(1_{G(d)} )=\varphi (\varepsilon_d)
+.\]
+Since $\varepsilon _d : FG(d) \to d$, we have that
+\[
+	\varphi (\varepsilon _d)=G(\varepsilon _d)\circ \eta_{G(d)} 
+.\]
+We typically write this condition diagrammatically as the commutivity of the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+G\ar[" \eta G "', r] \ar[" 1_G ", bend left, rr]  & GFG \ar[" G\varepsilon  "', r]  & G.
+\end{tikzcd}\]
+By duality, the entirety of the following statement follows.
+
+\begin{theorem}\label{thm:4.1}
+	An adjunction $(F,G,\varphi ) : D \leftharpoonup C$ determines
+	\begin{enumerate}
+		\item A natural transformation $\eta : 1_C \Rightarrow GF$ such that each component $\eta_c$ is universal from $c$ to $G$, and such that for all $f : F(c) \to d$,
+			\[
+				\varphi (f)=G(f)\circ \eta_c
+			.\]
+		\item A natural transformation $\eta : FG \Rightarrow 1_D$ such that each component $\varepsilon_d$ is universal from $F$ to $d$, and such that for all $g : c \to G(d)$,
+			\[
+				\varphi^{-1} (g)=\varepsilon _d\circ F(g)
+			.\]
+		\item The following composites are the identity natural transformations:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			G\ar[" \eta G ", r]  & GFG\ar[" G\varepsilon  ", r]  & G \\
+			F\ar[" F\eta  ", r]  & FGF\ar[" \varepsilon F ", r]  & F
+			\end{tikzcd}\]
+	\end{enumerate}
+\end{theorem}
+
+We call $\eta$ the \emph{unit} and $\varepsilon $ the \emph{counit} of the adjunction. The results of this theorem are in fact shown to determine adjunctions in various ways. This is summarized by the following theorem.
+
+\begin{theorem}\label{thm:4.2}
+	Each adjunction $(F,G,\varphi ) : C \leftharpoonup D$ is completely determined by any of the following.
+	\begin{enumerate}
+		\item Functors $F,G$ and a natural transformation $\eta : 1_C \Rightarrow GF$ such that each $\eta _x : c \to GF(c)$ is universal from $c$ to $G$;
+		\item The functor $G : D \to C$, an object function $F_0 : X \to A$, and a universal arrow $\eta_c : c \to GF_0(c)$ for all $c\in C$;
+		\item Functors $F,G$ and a natural transformation $\varepsilon : FG \to 1_D$ such that each $\varepsilon _d : FG(d) \to d$ is universal from $F$ to $d$;
+		\item The functor $F : C \to D$, an object function $G_0: D \to C$, and a universal arrow $\varepsilon _d : FG(d) \to d$ for each $d\in D$;
+		\item Functors $F,G$ and natural transformations $\eta : 1_C \Rightarrow GF$ and $\varepsilon : FG \Rightarrow 1_D$ such that the composites $G\varepsilon \circ \eta G$ and $\varepsilon F\circ F\eta $ are the identity natural transformations.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Assume (1). Choose $c\in C$ and $d\in D$, and define the bijection $\varphi_{(c,d)}  : D(F(c),d) \to C(c,G(d))$ via the previous identification
+	\[
+		\varphi_{(c,d)} (f)=G(f)\circ \eta_c
+	.\]
+	Each pair $(\eta _c,F(c))$ is universal from $c$ to $G$, so proposition \ref{prp:3.1} gives the bijections
+	\[
+		D(F(c),d)\cong C(c,G(d))
+	\]
+	for any $d\in D$, natural in $d$. For the converse, let $f : c \to c'$, and consider the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	D(F(c),d)\ar[" \varphi ", r] \ar[" D(F(c)\text{,} f) "', d]  & C(c,G(d))\ar[" C(c\text{,} G(f)) ", d]  \\
+	D(F(c'),d)\ar[" \varphi  "', r]  & C(c',G(d))
+	\end{tikzcd}\]
+	The definition of $\varphi $ gives
+	\[
+		f\circ G(g)\circ \eta _c=GF(f)\circ G(g)\circ \eta _c
+	\]
+	for any $g : F(c) \to d$. idk chase soemthign in the diagram ig?
+
+	Assume (2), we show (1). We simply show there exists a unique way to make $F_0$ into a functor for which $\eta $ will be natural. Let $h : c \to c'$; universality of $\eta _c$ guarentees there exists a unique arrow $h':F_0(c)\to F_0(c')$ making the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	c\ar[" \eta _c ", r] \ar[" h "', d]  & GF_0(c)\ar[" G(h') ", dashed, d]  \\
+	c'\ar[" \eta_{c'}  "', r]  & GF_0(c')
+	\end{tikzcd}\]
+	commute. Thus, $\eta $ is natural if we define $F(h)=h'$, and this is clearly functorial by universality.
+
+	(3,4) are dual to (1,2).
+
+	Assume (5); define $\varphi $ by
+	\[
+		\varphi (f)=G(f)\circ \eta _x,\qquad f : F(c) \to d,
+	\]
+	\[
+		\varphi ^{-1} (g)=\varepsilon _d \circ F(g),\qquad g : c \to G(d)
+	.\]
+	Since $G$ is a functor and $\eta $ is natural,
+	\[
+		(\varphi \circ \varphi ^{-1} )(g)=\varphi (\varepsilon _d \circ F(g))=G(\varepsilon _d)\circ GF(g)\circ \eta _c=G(\varepsilon _d)\circ \eta_{G(d)} \circ g=g
+	.\]
+	Therefore, $\varphi $ is a bijection of hom-sets. It is moreover clearly natural.
+\end{proof}
+
+This theorem is useful, since it allows us to construct adjunctions any time we have a universal arrow from/to every object in a category to/from the same functor. For example, let $C$ have finite products. Then there is a universal arrow from $c\in C$ to $\Delta $ for all $c\in C$, and thus the function $(a,b)\mapsto a\times b$ is in fact a functor $C\times C\to C$ by the previous theorem, and $\Delta \dashv \times $. We thus have
+\[
+	(C\times C)(\Delta (c),(a,b))\cong C(c,a\times b)\implies C(c,a)\times C(c,b)\cong C(c,a\times b)
+.\]
+Similarly, a category with coproducts admits a coproduct functor which is left-adjoint to $\Delta $. Any limit that can be constructed and always exists is adjoint to some diagonal functor, and it should be clear that proving universality is a simple way of showing the existence of an adjoint.
+
+The final condition makes discussion of adjoints easy, since manipulation of these simple identities, known as the \emph{triangle identities}, is very simple in comparison to some of the alternatives.
+
+\begin{corollary}\label{cor:4.1}
+	Left-adjoints $F$ of a functor $G$ are unique up to isomorphism.
+\end{corollary}
+\begin{proof}
+	Adjunctions $F\dashv G$ and $F'\dashv$ give universal arrows $x\to GF(x)$ and $x\to GF(x')$, which must be isomorphic by universality. The proof from her is obvious.
+\end{proof}
+\begin{corollary}\label{cor:4.2}
+	A functor $G : D \to C$ has a left adjoint if and only if for all $c\in C$, the functor $C(c,G(d))$ is representable as a functor of $d\in D$.
+\end{corollary}
+\begin{proof}
+	This is a restatement of (2) from theorem \ref{thm:4.2}. A representation would in this case be a natural isomorphism
+	\[
+		\varphi : C(c,G(d))\cong D(F_0(x),a)
+	\]
+	for an object function $F_0$.
+\end{proof}
+
+\begin{theorem}\label{thm:4.3}
+	If $G : D \to C$ is additive between $Ab$-categories, and admits a left-adjoint $F : C \to D$, then $F$ is additive, and the adjunction is an isomorphism of abelian groups.
+\end{theorem}
+\begin{proof}
+	If $\eta $ is the unit of the adjunction, then $\varphi (f)=G(f)\circ \eta _c$ for any $f : F(c) \to d$. Additivity gives
+	\[
+		\varphi (f+f')=G(f+f')\circ \eta _c=G(f)\eta _c + G(f)\eta _c=\varphi (f)+\varphi (f')
+	.\]
+	Next, we have
+	\[
+		GF(g+g')\circ p\eta _c=\eta _{c'} (g+g')
+	\]
+	by naturality of $\eta $, and thus additivity of $F$ follows easily from that of $G$.
+\end{proof}
+
+\section{Examples of Adjoints}
+
+\begin{tabular}{ccc}
+	\emph{Forgetful Functor} & \emph{Left Adjoint} $F$ & \emph{Unit of Adjunction} \\
+	$U : \Rmod{R}  \to \Set $ & Free $R$-modules & insertion of generators $j : X \to UF(X)$ \\
+	$U : \Cat  \to \mathbf{Grph} $ & Free category & insertion of generators $G\to U(C(G))$\\
+	$U : \Grp  \to \Set $ & Free groups & insertion of generators \\
+	$U : \Ab \to \Set $ & Free abelian groups & insertion of generators \\
+	$U : \Ab \to \Grp $ & Quotient by the center $G\mapsto G/Z(G)$ & projection onto the quotient $\pi : G \to G/Z(G)$\\
+	$U : \Rmod{R}  \to \Ab$ & $A\mapsto R\otimes A$ & $A\to U(R\otimes A)$ by $a\mapsto 1\otimes a$\\
+\end{tabular}
+A completion of this table, and a similar table for (co)limits, can be found on pages 87/88. I do not feel the need to copy down reference material, I would rather compute it myself.
+
+\section{Reflexive Subcategories}
+
+For many forgetful functors, the counit $\eta : FU \Rightarrow 1_A$ maps $a\mapsto \eta _a : F(U(a))\to a$, which turns out to also be an epimorphism. This is a fact, and the proof requires the following lemma.
+
+\begin{lemma}\label{lma:4.1}
+	Let $f^* : A(a,-) \Rightarrow A(b,-)$ be the natural transformation induced by an arrow $f : b \to a$ in $A$. Then $f^*$ is monic if and only if $f$ is epi, and $f^*$ is epi if and only if $f$ is a \emph{split} monic.
+\end{lemma}
+\begin{proof}
+	By the Yoneda lemma, $f^* \mapsto f$ is a natural bijection, and by a previous exercise a natural transformation is monic/epi if and only if every component is monic/epi.
+
+	For $f\in A(a,c)$, by definition $f^*(h)=h\circ f$. Since $f^*$ is a function, assume it is injective, since that is equivalent to monic. We thus have $f^*(h)=f^*(k)$ implies $h=k$, and rewriting this as above gives
+	\[
+		h\circ f=k\circ f \implies h=k
+	.\]
+	Thus, $f$ is epi, and the converse is the same. This proves the first statement, so now assume $f^*$ is epi. It is thus true that each component is epi, and thus the map $f^* : A(a,b) \to A(b,b)$ is surjective. There thus exists $h_0 : a \to b$ such that $f^*(h_0)=1_b$. Expanding this gives $h_0 \circ f=1_b$, and $f$ has a left-inverse. The converse is trivial.
+\end{proof}
+
+\begin{theorem}\label{thm:4.3}
+	Let $(F,G,\eta ,\varepsilon ) : X \rightharpoonup A$ be an adjunction.
+	\begin{enumerate}
+		\item $G$ is faithful if and only if every component $\varepsilon _a$ is epi;
+		\item $G$ is full if and only if every component $\varepsilon _a$ is a split monic.
+	\end{enumerate}
+	Hence $G$ is fully faithful if and only if each $\varepsilon _a$ is an isomorphism $FG(a)\cong a$.
+\end{theorem}
+\begin{proof}
+	Note that the arrow function $G_{a,c} : A(a,c) \to X(G(a),G(c))$ turns into a natural transformation by the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A(a,c)\ar[" G_{a\text{,} c}  ", r]  & X(G(a),G(c))\ar[" \varphi  ", r]  & A(FG(a),c).
+	\end{tikzcd}\]
+	By the Yoneda lemma, this component of the natural transformation is fully determined by $G(1_a)$ (easily seen by setting $c=a$). This is precisely $\eta _a$. Since $\varphi $ is an isomorphism, this composition is epi if and only if $G_{a,c} $ is epi, and vice versa for mono. This is viewed again as injective vs surjective, hence faithful vs full. Note that we can view this as precomposition by $G_{a,c} $, and thus the proof follows from lemma \ref{lma:4.1}.
+\end{proof}
+
+\begin{definition}[Reflective Subcategory]\label{dfn:4.2}
+	A subcategory $A$ of $B$ is \emph{reflective} if the inclusion functor $i : A \hookrightarrow B$ admits a left-adjoint $F : B \to A$, called the \emph{reflector}. The adjunction $(F,i,\eta ,\varepsilon )$ is called a \emph{reflection}. Dually, $A$ is \emph{coreflective} if $i$ has a right-adjoint.
+\end{definition}
+
+Since the inclusion functor is really an identity, this can be described more succinctly as a functor $R=KF : B \to B$ such that we have a bijection
+\[
+	A(R(b),a)\cong B(b,a)
+.\]
+Since the inclusion is always faithful, the counit $\varepsilon$ is \emph{always} epi. For example, $\Ab$ is reflective in $\Grp $.
+
+\section{Equivalence of Categories}
+
+Categories are isomorphic iff there exist invertible functors between them. In this case, there is an adjunction $(F,G,1_F,1_G)$ with $F\circ G=1$ and $G\circ F=1$. This is a very strict notion, and it is in fact often more useful to work in a more general notion.
+
+\begin{definition}[Equivalence of Categories]\label{dfn:4.3}
+	A functor $F : C \to D$ is an \emph{equivalence of categories} when there exists a functor $G : D \to C$ with $FG\cong 1_D$ and $GF\cong 1_C$; that is, they are invertible up to isomorphism. $G$ is also an equivalence of categories here.
+\end{definition}
+
+An example arises in the following useful definition.
+
+\begin{definition}[Skeleton]\label{dfn:4.4}
+	A \emph{skeleton} of a category $C$ is any full subcategory $A$ such that each object in $C$ is isomorphic to \emph{exactly one} object in $A$; in other words, $A$ contains precisely one element from all equivalence classes of $C$.
+\end{definition}
+
+It is easily shown that given a skeleton $A\subseteq C$, the inclusion is an equivalence of categories. For each $c\in C$, let $a_c\in A$ have $a_c\cong c$. Define $F : C \to A$ by $c\mapsto a_c$. Since they are isomorphic, by the Yoneda lemma they have a bijection of hom-sets, so there is an apparent way to define action on morphisms as well, although I do not feel like typing up the diagram. Then clearly we have that for any $a\in A$, $F(i(a))=a\cong a$, and for any $c\in C$, $i(F(c))=a_c\cong c$.
+
+An \emph{adjoint equivalence} of categories is an adjunction $(F,G,\eta ,\varepsilon )$ in which both the unit and counit are natural isomorphisms. It's not hard to show by pulling out the natural isomorphism in adjunctions that you then get the composition $G\eta ^{-1} \circ \varepsilon ^{-1} G=1$, and similarly for $F$, giving a reverse adjunction $(G,F,\varepsilon ^{-1} ,\eta ^{-1} )$. Thus, $F$ is both the left- and right-adjoint of $G$ simultaneously, and vice versa.
+
+\begin{theorem}\label{thm:5.4}
+	Let $G : C \to A$. The following are equivalent:
+	\begin{enumerate}
+		\item $G$ is an equivalence of categories;
+		\item $G$ is part of an adjoint equivalence;
+		\item $G$ is fully faithful, and each $c\in C$ is isomorphic to $F(a)$ for some $a\in A$;
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(2) implies (1) by definition, since the unit $\eta : 1_C \Rightarrow GF$ and $\varepsilon : FG \Rightarrow 1_A$ need to be isomorphisms.
+
+	(1) implies (3) fairly easily; since $GF\cong 1_C$ by some natural transformation $\alpha $, we have that each $GF(c)\cong c$ by $\alpha $ for all $c\in C$. Set $a=F(c)\in A$. To show $G$ is fully faithful, $\alpha $ gives a commutative square
+	\[\begin{tikzcd}[row sep = 4.5em, column sep = 4.5em]
+	FG(a)\ar[" \alpha _a ", r] \ar[" FG(f) "', d]  & a\ar[" f ", d]  \\
+	FG(a')\ar[" \alpha _{a'}  "', r]  & a'
+	\end{tikzcd}\]
+	for all $f : a \to a'$ in $A$; hence we have
+	\[
+		f\circ \alpha_a = \alpha_{a'} \circ FG(f) \implies f=\alpha_{a'} \circ FG(f)\circ \alpha_{a'} ^{-1} 
+	.\]
+	Apparently this shows $G$ is faithfull, I don't fully see it but sure. This proves $T$ is faithful by symmetry. By commutivity of the above square and the fact that $G$ is faithful, the fact that $G$ is fulll follows very easily.
+
+	To show (3) implies (2), we construct from $G$ a left-adjoint $F$. By theorem \ref{thm:4.4}, we have that $\varepsilon $ is a natural isomorphism. I'll maybe finish this tomorrow.
+\end{proof}
+
+An interesting result is that any full subcategory $A\subseteq C$ satisfying $\forall c\in C \exists a\in A$ such that $c\cong a$ is reflective. This is unsuprising; it amounts to simply saying any full subcategory containing a skeleton is equivalent to $C$.

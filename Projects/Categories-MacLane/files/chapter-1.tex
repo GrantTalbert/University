@@ -151,4 +151,142 @@ commute. Indeed, it does.
 
 Natural transformations define \emph{morphisms of functors}. If a natural transformation has every component invertible, we call it a \emph{natural isomorphism} and write $S\cong T$.
 
-For example, the determinant is a natural transformation $\det_K : \operatorname{GL}_n \Rightarrow \left(  \right) ^*$, where $K\mapsto K^*$ maps a ring to it's group of units. These are clearly two functors 
+For example, the determinant is a natural transformation $\det_K : \operatorname{GL}_n \Rightarrow \left(  \right) ^*$, where $K\mapsto K^*$ maps a ring to it's group of units. These are clearly two functors, both maps $\mathbf{C}\Ring \to \Grp $, and it's not that difficult to see.
+
+\begin{definition}[Equivalent of Categories]\label{dfn:4}
+	An equivalence of categories $\mathcal{C} ,\mathcal{D} $ is a pair of functors $F : \mathcal{C}  \to \mathcal{D} $ and $G : \mathcal{D}  \to \mathcal{C} $, which are inverses up to natural isomorphism; meaning there exist natural isomorphisms
+	\[
+		1_\mathcal{C} \cong G\circ F,\qquad 1_\mathcal{D} \cong  F\circ G
+	.\]
+\end{definition}
+
+\section{Monics, Epis, and Zeros}
+
+This section formalizes some familiar notions category-theoretically. Isomorphisms are defined as invertible arrows.
+
+\begin{definition}[Monic/Epi]\label{dfn:1.6}
+	A morphism $f : a \to b$ is monic if for all morphisms $g_1,g_2 : z \to a$, if $f\circ g_1=f\circ g_2$, then $g_1=g_2$. In other words, monic morphisms (monomorphisms) are left-cancellable. Similarly, epimorphisms are right-cancellable; if $f : a \to b$ and $g_1,g_2: b \to z$, then $f$ is epi iff $g_1\circ f=g_2\circ f$ implies $g_1=g_2$.
+\end{definition}
+
+In $\Set $, monomorphisms are precisely injections, and epimorphisms are precisely surjections. Monics and epis need not have left/right inverses, but if a morphism has a left/right inverse, it is necessarily monic/epi.
+
+\begin{definition}[Section/Retraction]\label{dfn:1.7}
+	A right-inverse of a morphism $f$ is a morphism $g$ such that $gf=1$, and a left-inverse is a morphism $h$ such that $fh=1$. Right-inverses of $f$ are called \emph{sections} of $f$, and left-inverses are called \emph{retractions} of $f$. If $f$ has a left-inverse, we say it is a \emph{split} monic, and if it has a right inverse, it is a \emph{split} epi.
+\end{definition}
+
+Idempotent arrows are endomorphisms $f$ such that $f^2=f$, and split idempotent morphisms are idempotent morphisms $f$ such that $f=hg$, and $gh=1$.
+
+\begin{definition}[Initial/Terminal]\label{dfn:1.8}
+	An initial object $I$ is an object such that there is a unique arrow $I\to x$ for all objects $x$, and a terminal object $T$ is an object such that there is a unique arrow $x\to T$ for all $x$. An object that is initial and terminal is called a null object or a 0 object, and the unique arrows are called zero-morphisms.
+\end{definition}
+
+Any two initial objects are easily isomorphic, and the same with terminal objects. Any composition with a zero morphism is easily a zero morphism.
+
+\begin{definition}[Groupoid]\label{dfn:1.9}
+	A groupoid is a category where every morphism is an isomorphism. A group is then a groupoid with one element.
+\end{definition}
+
+A typical example of a groupoid is the fundamental groupoid $\pi \left( X \right) $ of a topological space $X$. Objects are points in $X$, and morphisms are homotopy classes of paths between points. Since every arrow is invertible, endomorphism sets $\End_{G}(x) $ are groups for any groupoid $G$. The first fundamental group $\pi _1(X,x)$ can then be defined as $\End_{\pi (X)}(x) $.
+
+\section{Foundations}
+
+Herein, we have assumed the existence of many classes, such as the class of all groups, all sets, etc. For example, consider the class of all groups. Let $\varphi $ be the property that a set $x$ is a group. Then the way we describe $\Obj(\Grp ) $ is given by $\left\{ x\mid \varphi (x) \right\} $. This amounts to the axiom of comprehension, which cannot be adopted in generality due to paradoxes such as Russel's paradox, $\left\{ x\mid x\notin x \right\} $. ZFC assumes the axiom of restricted comprehension, which requires that the set-builder notation for constucting sets be defined as a subset of some other set, such as $\left\{ x\in X\mid \varphi (x) \right\} $. However, there can be no set of all sets, for similar reasons, so this makes it impossible to construct $\Obj(\Set ) $, or $\Obj(\Grp ) $.
+
+To avoid these paradoxes, we assume in addition to ZFC the existence of a \emph{universe}, sometimes known as a Grothendieck universe.
+
+\begin{definition}[Universe]\label{dfn:1.10}
+	A universe $U$ is a set such that
+	\begin{enumerate}
+		\item $x\in u\in U$ implies that $x\in U$;
+		\item $u,v\in U$ implies that $\left\{ u,v \right\} \in U$, $(u,v)\in U$, and $u\times v\in U$;
+		\item $x\in U$ implies that $\mathscr{P} (x)\in U$ and $\cup x\in U$ ($\cup x$ is the union over all elements of $x$);
+		\item $\omega \in U$ for $\omega $ the set of all finite ordinals;
+		\item if $f : a \to b$ is surjective with $a\in U$, then $b\in U$.
+	\end{enumerate}
+	Some of these properties are clearly redundant.
+\end{definition}
+
+These properties ensure that $U$ remains closed under the standard operations of set theory, and thus we can safely perform set theory within $U$, and thus, all of ordinary mathematics can be performed safely within $U$, since $\mathbb{Z} ,\mathbb{Q} ,\mathbb{R} ,\mathbb{C} $ can all be derived from $\omega \cong \mathbb{N} $.
+
+This means that we can only consider sets within the universe when performing math, and thus simply write $\Obj(\Grp ) =\left\{ x\in U\mid \varphi (x) \right\} $. Usually we will not write $x\in U$, since it becomes repetitive. Moreover, we choose $\Obj(\Set )=U$. In other words, we think as if the only sets that exist are elements of $U$.
+
+This leads us to some terminology. Small sets are sets that are contained within $U$; i.e. $x$ is a small set iff $x\in U$; and large sets are sets that are not elements of $U$. This includes $U$ itself; we often call large sets \emph{proper classes}. We use the word \emph{class} to denote any subset of $U$, and all small sets are easily shown to be classes. Functions between small sets can also be regarded as small sets; we call them \emph{small functions}. For my notes, I reserve the word ``set'' to mean exclusively ``small set'', and will write ``proper class'' instead of ``large set'' when possible, since this appears to be more modern terminology.
+
+We can then similarly append the word ``small'' and ``large'' to various other constructs, considering for example \emph{small groups} and \emph{small rings}, although I will simply call these structures by their standard name, unless a distinction needs to be made. Distinctions are usually made for categories, since it is often important to discuss when a category is small vs when one is large. Note that $U\notin U$, so $\Set $ is not a small category, as this would contradict the axiom of regularity. Similarly, it can be shown that $\Grp $ is not small.
+
+It seems prudent at this point to make precise what list of axioms we are using. The axioms of ZFC on a membership relation $\in$ guarentee
+\begin{itemize}
+	\item the set $\varnothing $ exists;
+	\item for any sets $u,v$, the sets $\left\{ u,v \right\} ,u\times v,\mathscr{P} (u),\cup u,(u,v)$ exist;
+	\item sets with the same elements are equal (Extensionality);
+	\item there exists an inductive set (Infinity);
+	\item choice functions exist (Choice)
+	\item there are no infinite chains $\cdots x_n\in \cdots \in x_0$, and no set contains itself (Regularity);
+	\item the image of a function is a set (Replacement).
+\end{itemize}
+
+We will on occasion need to consider large sets which are not classes, such as the category $\mathbf{Cls} $ of all classes, defined as $\Obj(\mathbf{Cls} ) =\mathscr{P} (U)$. We will make distiction between classes and large sets at such a time, if necessary.
+
+This allows discussion of all categories, but not all metacategories. Attempting to describe all of these leads to some strange issues, and as such there has been discussion as to whether set theory is the proper foundational device for category theory, and in some cases, mathematics itself.
+
+\section{Large Categories}
+
+We just list a lot of large categories I am already familiar with, and their monics. Since I know all of them already, I will simply list the relevant information given. All of these are assumed to contain all objects of the given type which can be formed from sets.
+\begin{itemize}
+	\item $\mathbf{Ab} $: monics are injectives, epis are surjectives;
+	\item $\Ring $: monics are injectives, and surjectives are epis, but not the converse. $\mathbb{Z} $ is initial and $0$ is terminal;
+	\item $\Top $: monics are injections and epis are surjections, the singleton is terminal and the empty space is initial;
+	\item $\mathbf{Toph} $: homotopy classes of injectives \emph{need not be monics};
+	\item $\Set _*$: the singleton is initial and terminal (zero object), monics are left-invertible maps, epis are right-invertible maps, and isomorphisms are precisely those maps that are monic and epi;
+	\item $\Top _*$: no information given as to the monics;
+	\item $\mathbf{Rel}  $: the category of relations; $\Obj(\mathbf{Rel} ) =U$, and morphisms are given by relations:
+		\[
+			\Hom(X, Y) =\left\{ R\subseteq X\times Y \right\}
+		.\]
+		Composition $S\circ R$ for $S : Y \to Z$ and $R : X \to Y$ is given by
+		\[
+			S\circ R=\left\{ (x,z)\mid (x,y)\in R \land (y,z)\in S \right\} 
+		.\]
+		The identity arrow is the identity relation, and $\mathbf{Rel} $ holds $\Set $ as a subcategory.
+\end{itemize}
+
+\begin{definition}[Concrete Category]\label{dfn:1.11}
+	A \emph{concrete category} is a pair $(C,U)$ with $C$ a category and $U$ a forgetful functor $U : C \to \Set $. This is understood intuitively as being a category where each object has an underlying set, and morphisms are functions between these sets.
+\end{definition}
+
+All of the above categories, except $\mathbf{Toph} $ and $\mathbf{Rel} $, are concrete categories. Many categories we will encounter are concrete, but many are not. This makes our notion of a category more ``abstract'' than that of a concrete category.
+
+\section{Hom-Sets}
+
+Recall that $\Hom_{C}(x, y) =\left\{ f\in \operatorname{Mor} (C)\mid f : x \to y \right\} $. This is often also written as $\operatorname{hom}_C(x,y)$, $C(x,y)$, or $\Hom(x, y) $. These are called the hom-sets, and as we have seen before, categories can be defined entirely via their hom-sets. In this definition (of small categories), composition is given by functions $\circ : \Hom(b, c) \times \Hom(a, b) \to \Hom(a, c) $ for each triple $(a,b,c)$. Associativity is then described by the commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Hom(c, d) \times \Hom(b, c) \times \Hom(a, b) \ar[rr] \ar[d]  &  & \Hom(b, d) \times \Hom(a, b) \ar[d]  \\
+\Hom(c, d) \times \Hom(a, c) \ar[rr]  &  & \Hom(a, d) 
+\end{tikzcd}\]
+Functors and natural transformations can be formulated similarly.
+
+An important thing to note is that oftentimes the hom-sets can have additional structure. One simple case (that I've already seen) is where hom-sets are abelian groups; we call such a category an $\mathbf{Ab} $-category or a \emph{preadditive} category. In these categories, hom-sets come with an abelian addition operation, and composition is bilinear with respect to addition, meaning
+\[
+	f\circ (g+h)=(f\circ g)+(f\circ h),
+\]
+and likewise for the other side.
+
+Since composition in an $\mathbf{Ab} $-category $A$ is bilinear
+\[
+	A(b,c)\times A(a,b)\to A(a,c),
+\]
+it can be written with a tensor product as a linear map
+\[
+	A(b,c)\otimes _\mathbb{Z} A(a,b)\to A(a,c)
+.\]
+We can thus describe an $\mathbf{Ab} $-category as
+\begin{itemize}
+	\item A collection of objects $\Obj(A) $;
+	\item A function which assigns pairs to abelian groups $(a,b)\mapsto A(a,b)$;
+	\item For each triple $(a,b,c)$, a linear morphism of abelian groups $A(b,c)\otimes _\mathbb{Z} A(a,b)\to A(a,c)$;
+\end{itemize}
+such that the associative and unit laws are satisfied. The definition of a preadditive category is the same as that of a category, except $\times $ is replaced with $\otimes _\mathbb{Z} $, and the singleton is replaced with $\mathbb{Z} $ as the unit under tensor.
+
+This evidently generalizes; given a category $M$ with a kind of tensor product $\otimes $ and a unit $I$, we may be able to view hom-sets in a category $A$ as objects in $M$. Such categories are called $M$-enriched categories, and we will see later how to formalize this notion.
+
+Finally, additive functors are functors $F : A \to B$ which determine for each abelian group $A(a,b)$ and $B(F(a),F(b))$, an abelian group homomorphism $F : A(a,b) \to B(F(a),F(b))$. Denote by $\mathbf{Ab} $-$\mathbf{cat} $ the category of all small $\mathbf{Ab} $-categories, with morphisms as additive functors.

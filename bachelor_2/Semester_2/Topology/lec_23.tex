@@ -1,0 +1,27 @@
+\lecture{23}{Tue 29 Apr 2025 11:03}{idk covering spaces?}
+\begin{definition}[Covering Space]\label{dfn:laalal}
+	A continuous map $\varphi : \widetilde{X}  \to X$ is a covering of $X$, and $\widetilde{X} $ is a covering space of $X$, if for all $x\in X$, there exists a neighborhood $U$ of $x$ such that $U_i \cap U_j=\varnothing $ iff $i\neq j$, and
+	\[
+		\varphi ^{-1} (U)=\coprod_{i\in I}U_i,
+	\]
+	and
+	\[
+		\varphi|_{U_i} : U_i \to U
+	\]
+	is a homeomorphism. We call each $U_i$ a sheet.
+\end{definition}
+
+An example is the natural projection $\mathbb{R} \to S^1$. Covering spaces in general loopsen loops, but gain symmetries.
+
+\begin{lemma}\label{lma:aaaa}
+	Let $X$ be a topological space with covering $p : \widetilde{X}  \to X$. Let $\varphi : [0,1] \to X$ be a path with a fixed basepoint. Then this lifts to a unique map $\widetilde{\varphi } $ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & \widetilde{X} \ar[" p ", d]  \\
+	\left[ 0,1 \right]\ar[" \varphi  "', r] \ar[" \widetilde{\varphi }  ", ur]  & X
+	\end{tikzcd}\]
+	commutes.
+\end{lemma}
+\begin{lemma}\label{lma:hlifting}
+	If $\phi ,\psi $ are homotopic, and lift by the previous theorem, then so does their homotopy.
+\end{lemma}
+

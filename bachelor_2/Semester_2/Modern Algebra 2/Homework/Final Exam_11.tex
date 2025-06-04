@@ -1,0 +1,236 @@
+\documentclass[11pt, letterpaper]{article}
+\input{../../homework.tex}
+\usepackage{titlepageBU}
+\title{Final Exam}
+\courseID{MA 542}
+\courseSection{A1}
+\begin{document}
+\makeproblem
+\section*{Problem 1}
+Let $X\coloneqq \left\{ \sigma (g)\mid \sigma \in G \right\} $. Since $\left| \operatorname{Gal} (E/F) \right| =\left[ E:\mathbb{Q}  \right]=6 $, we immediately have that $\left| X  \right| = 6$, provided that all such $\sigma (g)$ are distinct, and thus it suffices to show linear independence of $\left\{ \sigma (g)\mid \sigma \in G \right\} $ (and that they are indeed distinct). Note that
+\[
+	0=\zeta ^3-1=(\zeta -1)(\zeta ^2+\zeta +1)
+.\]
+Since $\zeta \neq 0$, we have that $\zeta ^2+\zeta +1=0$. Using this explicit computatio gives
+\begin{align*}
+	1(\theta )&=\theta \\
+	x(\theta )&=1+\zeta \sqrt[3]{2} +\zeta ^2\sqrt[3]{2}^2 +\zeta +\zeta ^2\sqrt[3]{2} +\zeta ^3\sqrt[3]{2} ^2\\
+		  &=1+\zeta \sqrt[3]{2} -(1+\zeta )\sqrt[3]{2}^2 +\zeta -(1+\zeta )\sqrt[3]{2} +\sqrt[3]{2} ^2\\
+		  &=1-\sqrt[3]{2} +\zeta -\zeta \sqrt[3]{2} ^2\\
+	x^2(\theta )&=1-\zeta \sqrt[3]{2} +\zeta -\zeta ^3\sqrt[3]{2}^2 \\
+		    &=1-\sqrt[3]{2}^2 +\zeta -\zeta \sqrt[3]{2} \\
+	t(\theta )&=1+\sqrt[3]{2} +\sqrt[3]{2} ^2-(\zeta +1)-(\zeta +1)\sqrt[3]{2} -(\zeta +1)\sqrt[3]{2} ^2\\
+		  &=-\zeta -\zeta \sqrt[3]{2} -\zeta \sqrt[3]{2} ^2\\
+	tx(\theta )&=t\left( 1-\sqrt[3]{2} +\zeta -\zeta \sqrt[3]{2} ^2 \right) \\
+		   &=1-\sqrt[3]{2} -(\zeta +1)+(\zeta +1)\sqrt[3]{2} ^2\\
+		   &=-\zeta -\sqrt[3]{2}+\sqrt[3]{2} ^2+\zeta \sqrt[3]{2} ^2 \\
+	tx^2(\theta )&=t\left( 1+\zeta -\zeta \sqrt[3]{2} -\sqrt[3]{2} ^2 \right) \\
+		     &=1-(\zeta +1)+(\zeta +1)\sqrt[3]{2} -\sqrt[3]{2} ^2\\
+		     &=-\zeta +\zeta \sqrt[3]{2} +\sqrt[3]{2} -\sqrt[3]{2} ^2
+.\end{align*}
+We trivally have that
+\[
+	\mathcal{B} \coloneqq \left\{ 1,\sqrt[3]{2} ,\sqrt[3]{2} ^2,\zeta ,\zeta \sqrt[3]{2} ,\zeta \sqrt[3]{2} ^2 \right\} 
+\]
+spans the space, and since we are given the space is 6-dimensional, we immediately have that this set is linearly independent, and thus a basis. We can form the matrix
+\[
+	A\coloneqq \begin{pmatrix}
+	\theta  & x(\theta ) & x^2(\theta ) & t(\theta ) & tx(\theta ) & tx^2(\theta )
+	\end{pmatrix}=\begin{pmatrix}
+	1 & 1 & 1 & 0 & 0 & 0 \\
+	1 & -1 & 0 & 0 & -1 & 1 \\
+	1 & 0 & -1 & 0 & 1 & -1 \\
+	1 & 1 & 1 & -1 & -1 & -1 \\
+	1 & 0 & -1 & -1 & 0 & 1 \\
+	1 & -1 & 0 & -1 & 1 & 0
+	\end{pmatrix}
+\]
+in the basis $\mathcal{B} $ (with ordering of elements as in our description of the set), and we know from linear algebra that since $\mathcal{B} $ is a basis, we will have that $X$ is a basis if and only if $A$ is $\mathbb{Q} $-invertible. Since $\mathbb{Q} $ is a field, it suffices to compute the determinant of $A$.
+\begin{lstlisting}[language=Python]
+#!/bin/python3
+
+import numpy as np
+
+a = np.array([[1,1,1,0,0,0],
+              [1,-1,0,0,-1,1],
+              [1,0,-1,0,1,-1],
+              [1,1,1,-1,-1,-1],
+              [1,0,-1,-1,0,1],
+              [1,-1,0,-1,1,0]])
+det = np.linalg.det(a)
+print(det)
+\end{lstlisting}
+\begin{lstlisting}[language=Bash]
+~/Documents/code_projects > ./deter.py 
+>>> 27.0
+\end{lstlisting}
+Since $27\neq 0$, $A$ is invertible, and $X$ is a basis for $E/\mathbb{Q} $.
+
+\section*{Problem 2}
+\begin{enumerate}
+	\item By the Galois correspondence, there exists a subgroup $H\subseteq \operatorname{Gal} (\mathbb{Q} (\zeta _n) /\mathbb{Q} )$ which is the group that fixes $\mathbb{Q} (\zeta _n+\overline{\zeta } _n)$. One easily shows that the fixed field of $\left\langle c \right\rangle $, for $c$ the element corresponding to complex conjugation, is $\mathbb{Q} $ adjoined with any element fixed by $c$. Since complex conjugation now fixes both $\mathbb{Q} $, $\zeta _n \overline{\zeta } _n$, and $\zeta_n+\overline{\zeta } _n$, all of which live in $\mathbb{Q} (\zeta _n+\overline{\zeta } _n)$, we have $H=\left\langle c \right\rangle $. Since $\overline{\overline{z} } _n=z$ for all $z\in\mathbb{C} $, we know $\left| c \right| =2$, and thus $\left| \left\langle c \right\rangle  \right| =2$. Finally, we know that
+		\[
+			\left[ \mathbb{Q} (\zeta_n ):\mathbb{Q} (\zeta _n+\overline{\zeta } _n) \right] =\left| H \right| =2
+		.\]
+	\item We are given that $\mathbb{Q} (\zeta _n)$ extends $\mathbb{Q}(\zeta _n+ \overline{\zeta } _n)$; in particular, $\mathbb{Q} (\zeta _n + \overline{\zeta } _n)\subseteq \mathbb{Q} (\zeta _n)$. We also have $\mathbb{Q} \subseteq \mathbb{R} $, and by our understanding of complex conjugates, $\zeta_n+\overline{\zeta } _n\in\mathbb{R} $. Therefore, $\mathbb{Q} (\zeta +\overline{\zeta } _n)\subseteq \mathbb{R} $, and we have $\mathbb{Q} (\zeta +\overline{\zeta } _n)\subseteq \mathbb{Q} (\zeta _n)\cap \mathbb{R} $. It suffices to prove the converse.
+
+		For any $x\in\mathbb{Q} (\zeta _n)\cap \mathbb{R} $, we have that the conjugate $\overline{x} =x$, since $x\in\mathbb{R} $. It follows that $x$ is an element of the fixed field of the complex conjugate, which we found to be $\mathbb{Q} (\zeta _n+\overline{\zeta } _n)$ in the previous problem. Therefore, $\mathbb{Q} (\zeta _n)\cap \mathbb{R} \subseteq \mathbb{Q} (\zeta _n+\overline{\zeta } _n)$.
+	\item The minimal polynomial of $\mathbb{Q} (\zeta _n)$ is the $n$th cyclotomic polynomial, which takes as it's roots all $n$th primitive roots of unity, which are of the form
+		\[
+			e^{i2\pi k/n} ,\qquad k\in\mathbb{Z} \setminus n\mathbb{Z} 
+		.\]
+		It follows that for all $k\notin n\mathbb{Z} $, we have $-k\notin n\mathbb{Z} $, and thus 
+		\[
+			\overline{\zeta_n^k } =\overline{e^{i2\pi k/n} } =e^{-i2\pi k/ n} 
+		.\]
+		Therefore, for any primitive $n$th root of unity $\zeta_n^k$ (and thus a root of the minimal polynomial), the complex conjugate is still a primitive $n$th root of unity, and thus also a root of the minimal polynomial. Therefore, complex conjugation permutes the roots of the minimal polynomial, and is thus an element of the Galois group.
+	\item  Note that for all $z\in\mathbb{C} $, we know $z \overline{z} =\left| z \right| ^2$. Also note that $\left| e^{i\theta }  \right| =1$ for all $\theta \in\mathbb{R} $. Since $\zeta _n$ takes this form, we have that
+		\[
+			\zeta _n \overline{\zeta } _n = \left| \zeta _n \right| ^2 = 1^2=1
+		.\]
+		Therefore, $\overline{\zeta } _n=\zeta^{-1} _n$. We know that $\sigma_k \in \operatorname{Gal} (\mathbb{Q} (\zeta _n) / \mathbb{Q} )$ if and only if $\sigma (\zeta _n)=\zeta_n ^k$ for some $k$. We can then simply identify $\sigma _k$ with $[k]\in U(n)$, and we find that since $\overline{\zeta } _n=\zeta ^{-1} _n$, we must have $[-1]\in U(n)=n-1 \mod{n}$ is the element corresponding to complex conjugation.
+\end{enumerate}
+
+\section*{Problem 3}
+We prove that there exists a normal subgroup which is solvable, whose quotient is also solvable. This suffices to prove that the group is solvable by an in-class result.
+
+Let $\left| G \right| =p_1p_2p_3$, and let $n_i$ denote the number of Sylow $p_i$-subgroups. First, we want to show there exists a normal subgroup of $G$. Suppose for contradiction that $n_1,n_2,n_3>1$. By Sylow's theorem, $n_3|p_1p_2$, and thus $n_3\in \left\{ 1,p_1,p_2,p_1p_2 \right\} $. By assumption, $n_3\neq 1$. By Sylow's theorem, $n_3 \equiv 1\mod{p_3}$, and since $p_1,p_2<p_3$ by assumption, we have
+\[
+	p_1 \equiv p_1 \mod{p_3},\qquad p_2 \equiv p_3\mod{p_3}
+.\]
+Since $p_1,p_2$ are prime, $p_1,p_2\neq 1$, and thus $n_3 \neq p_1,p_2$. We thus have that $n_3=p_1p_2$ is forced.
+
+Similarly, we have by Sylow's theorem that $n_2|p_1p_3$, and thus $n_2\in \left\{ 1,p_1,p_3,p_1p_3 \right\} $. Since $p_1<p_2$, for the same reason we have $n_2\neq p_1$. By assumption, $n_2\neq 1$. Thus, $n_2\in \left\{ p_3,p_1p_3 \right\} $ is forced, and thus $n_2 \geq p_3$. By the same logic, we find that $n_1\in \left\{ p_2,p_3,p_2p_3 \right\} $, and thus $n_1\geq p_2$.
+
+Note that all non-identity elements of the Sylow $p_3$-subgroups have order $p_3$, and similarly for Sylow $p_1$- and $p_2$-subgroups. Since $p_1\neq p_2\neq p_3$, it follows that that these elements must all be distinct from each other. Moreover, each Sylow $p_i$-subgroup must be disjoint from any other Sylow $p_i$-subgroup except for the identity, since every non-identity element is a generator.
+
+Since there are $p_1p_2$ Sylow $p_3$-subgroups, and since each one has at least $p_3-1$ unique elements, we have that there are at least $(p_1p_2)(p_3-1)$ unique (aka non-identity) elements given by Sylow $p_3$-subgroups. Similarly, we have at least$p_2(p_1-1)$ unique elements in Sylow $p_1$-subgroups, and at least $p_3(p_2-1)$ Sylow $p_2$-subgroups. We thus have
+\[
+	p_1p_2p_3-n_3(p_3-1)-n_2(p_2-1)-n_1(p_1-1)-1\geq p_1p_2p_3-(p_1p_2)(p_3-1)-p_3(p_2-1)-p_2(p_1-1)-1\geq 0,
+\]
+where the $-1$ represents the identity. Distributing we have
+\begin{align*}
+	&=p_1p_2p_3-p_1p_2p_3+p_1p_2-p_3p_2+p_3-p_2p_2+p_2-1\\
+	&=p_3+p_2-p_3p_2-1\\
+	&=(p_3-1)(1-p_2)
+.\end{align*}
+Since $p_3,p_2>1$, we have $p_3-1>0$ and $1-p_2<0$, and thus $(p_3-1)(1-p_2)<0$, meaning the group has a negative amount of elements a contradiction. Therefore, there exists some $i$ such that $n_i=1$. By Sylow's theorem, this group must be normal.
+
+Let $H\lhd G$ be a normal Sylow $p_i$-subgroup. Since $H$ has order $p_i$ for some $i$, it has prime order, and is thus cyclic, and is thus abelian. Therefore, it is solvable. It thus suffices to show that $G/H$ is solvable. Note that $G/H$ has order
+\[
+	\left| \frac{G}{H}  \right| =\frac{\left| G \right| }{\left| H \right| } =\frac{p_1p_2p_3}{p_i} =p_ap_b
+\]
+for some $a,b\neq i$, and thus it suffices to show groups with order $\left| A \right| =p_ap_b$ are solvable for any primes $p_a,p_b$.
+
+Let $A$ be a group of order $p_ap_b$. By Lagrange's theorem, any proper nontrivial subgroup has order $p_a$ or $p_b$, and thus any proper nontrivial subgroup has prime order, and is thus cyclic, and is thus abelian, and is thus solvable. Moreover, by Cauchy's theorem, for any prime divisor $p$ of $\left| A \right| $, there exists an element of order $p$, and thus a cyclic subgroup of order $p$. We thus have that there exist subgroups of order $p_a$ and $p_b$ in $A$.
+
+Let $N\subseteq A$ be one such subgroup, and without loss of generality let $p_b > p_a$, and fix $\left| N \right| =p_b$. By Sylow's theorem, the number of Sylow $p_b$-subgroups $n_b$ satisfies $n_b \equiv 1\mod{p_b}$ and $n_b|p_a$. The first criterion forces $n_b =n p_b + 1$, and since $p_b > p_a$, the second criterion forces $n=0$, and $n_b=1$. Therefore, $N$ is normal in $A$.
+
+We can thus quotient by $N$, and obtain a group of order
+\[
+	\left| \frac{A}{N}  \right|=\frac{\left| A \right| }{\left| N \right| } =\frac{p_ap_b}{p_b} =p_a
+.\]
+Since this is a group of prime order, it is cyclic, and thus abelian, and thus solvable. Therefore, $A$ is solvable, concluding the proof.
+
+In general, $G$ need not be abelian. Dihedral groups are solvable, but $D_{15} $ has order $30=2\cdot 3\cdot 5$, and is not abelian.
+\section*{Problem 4}
+\subsection*{4.1}
+Let $\alpha \in E$. Note that the fixed field $F^G$ by $G$ is simply $F$, and we have $x\in F$ if and only if $x$ is fixed by all elements of $G$. Let $\sigma \in G$, and since $\sigma $ is a ring homomorphism, composition distributes over addition, and we have
+\[
+	\sigma \left( T(\alpha ) \right) =\sigma \left( \sum_{g\in G} g(\alpha ) \right) =\sum_{g\in G} (\sigma \circ g)(\alpha )
+.\]
+Note that $\sigma \circ g$ is left-multiplication by an element of $G$, and by Cayley's theorem, every group acts transitively on itself by left-multiplication. Equivalently, left multication by $\sigma $ is a bijection on $G$, and thus composing on the left by $\sigma $ simply amounts to a permutation of the order of the summation. We thus have
+\[
+	\sum_{g\in G} (\sigma \circ g)(\alpha )=\sum_{g\in G} g(\alpha )
+.\]
+Therefore, $\sigma $ fixes $T(\alpha )$ for all $\sigma \in G$, we have that $T(\alpha )\in F$. Note that since $\sigma $ also distributes over multiplication, since it is a ring homomorphism, the exact same proof suffices for $N(\alpha )$ since multiplication is commutative in fields, and the permutation of the ordering is once again immaterial.
+
+For surjectivity, let $\alpha \in F$. Note that since $F$ is a field, it is closed under addition, multiplication, and inverses, and since $\operatorname{char} F $ does not divide $\left| G \right| $, we have that $\sum_{\left| G \right| } 1\neq 0$, and thus
+\[
+	\beta \coloneqq \left( \sum_{\left| G \right| } 1 \right) ^{-1} \alpha \in F
+.\]
+Since $\beta \in F$, it is fixed by all $g\in G$, and thus
+\[
+	T(\beta )=\sum_{g\in G} g(\beta )=\sum_{g\in G} \beta =\sum_{\left| G \right| } \left( \left(\sum_{\left| G \right| } 1 \right) ^{-1} \alpha\right) =\left( \sum_{\left| G \right| } 1 \right) ^{-1} \left( \sum_{\left| G \right| } 1 \right) \alpha =\alpha 
+.\]
+Therefore, there exists an element $\beta \in F\subseteq E$ such that $T(\beta )=\alpha $, and $T$ is surjective.
+
+\subsection*{4.2}
+Let $E=F(\alpha )$, and let $q(x)\in F[x]$ be the polynomial
+\[
+	q(x)=\sum_{i=0}^{n} a_ix^i,\qquad a_n=1
+.\]
+Suppose $q$ splits in $E$. We can then write
+\[
+	q(x)= \prod_{i=1}^{n} (x-r_i)
+\]
+for $\left\{ r_i \right\}_{i=1}^n$ the collection of roots of $q$. Since $E$ is Galois, the Galois group acts transitively on the roots of $q$. In particular, given the fixed root $\alpha $, for all $r_i$ there exists $g_i\in \operatorname{Gal} (E/F)$ such that $r_i=g_i(\alpha )$. Moreover, since $q$ is the minimal polynomial of $E$, we have $\left| \operatorname{Gal} (E/F) \right| =\operatorname{deg} q=n$. It follows that
+\[
+	q(x)=\prod_{i=1}^{n} (x-g_i(\alpha ))
+.\]
+It is clear that the constant term $a_0$ is thus
+\[
+	a_0 = \prod_{i=1}^{n} -g_i(\alpha )=(-1)^n \prod_{g\in G} g(\alpha )=(-1)^n N(\alpha )
+.\]
+Since $(-1)^n$ is either $-1$ or $1$, it is it's own inverse, and thus moving it over to the other side gives $N(\alpha )=(-1)^n a_0$.
+
+Similarly, the $x^{n-1} $ term easily seen to be given by the sum over the product of $x^{n-1} $ with each $g(\alpha )$:
+\[
+	a_{n-1} x^{n-1} =\sum_{g\in G} -g(\alpha )x^{n-1} \implies \alpha _{n-1} =-\sum_{g\in G} g(\alpha )=-T(\alpha )
+.\]
+Thus, $T(\alpha )=-a_{n-1} $.
+
+\subsection*{4.3}
+Since $g$ is a field automorphism for all $g\in G$, we have
+\[
+	T(x)=\sum_{g\in G} g\left( y-\sigma (y) \right) =\sum_{g\in G} g(y)-g(\sigma (y))=\sum_{g\in G} g(y)-\sum_{i} 
+.\]
+By Cayley's theorem, every group acts transitively on itself by right multiplication, and thus composing on the right with $\sigma $ is once again a bijection, and amounts to a reordering of the summation terms. We thus have that the above summation simply equals
+\[
+	\sum_{g\in G} g(y)-\sum_{g\in G} g(y)=0
+.\]
+Therefore, $T(x)=0$.
+\subsection*{4.4}
+
+Since $g$ is a ring automorphism for all $g\in G$, it preserves multiplication as well. By Cayley's theorem, right composition by $\sigma $ is a bijection. Since multipication is commutative, inversion distributes over multiplication. Using all of these facts, we obtain
+\[
+	N(x)=\prod_{g\in G} g\left( y(\sigma (y))^{-1}  \right) =\prod_{g\in G} g(y)g(\sigma (y))^{-1}=\left( \prod_{g\in G} g(y) \right) \left( \prod_{g\in G} (g\circ \sigma )(y)^{-1}  \right) 
+\]
+\[
+	=\left( \prod_{g\in G} g(y) \right) \left( \prod_{g\in G} g(y)^{-1}  \right) =\left( \prod_{g\in G} g(y) \right) \left( \prod_{g\in G} g(y) \right) ^{-1} =1
+.\]
+Therefore, $N(x)=1$.
+
+\subsection*{4.5}
+Since $\mathbb{Q} (i)$ is 2-dimensional as a vector space over $\mathbb{Q} $, the Galois group must have order 2. Moreover, note that complex conjugation is trivially an element of the Galois group, and thus $\sigma $ is complex conjugation.
+
+We have
+\begin{align*}
+	x&=\frac{y}{\overline{y} } \\
+	 &=\frac{c+di}{c-di} \\
+	 &=\frac{c+di}{c-di} \cdot \frac{c+di}{c+di} \\
+	 &=\frac{\left( c+di \right) \left( c+di \right) }{\left( c+di \right) \left( c-di \right) } \\
+	 &=\frac{c^2+2cdi-d^2}{c^2+d^2} \\
+	 &=\frac{c^2-d^2}{c^2+d^2} +\frac{2cd}{c^2+d^2} i
+.\end{align*}
+We thus have
+\[
+	a=\operatorname{Re} x=\frac{c^2-d^2}{c^2+d^2} ,\qquad b=\operatorname{Im} x=\frac{2cd}{c^2+d^2} 
+.\]
+\subsection*{4.6}
+By our previous result, we have
+\[
+	x=\frac{A+Bi}{C} 
+.\]
+Applying the fact that $N(x)=1$, we have
+\begin{align*}
+	1&= x\cdot \overline{x} \\
+	 &=\frac{A+Bi}{C} \cdot \frac{A-Bi}{C} \\
+	 &=\frac{A^2+B^2}{C^2} \\
+	\implies C^2 &=A^2+B^2
+.\end{align*}
+
+\end{document}
+
+
+% for p3, its immediate that k=1 is solvable, and for k=2, all subgroups are prime order and thus abelian, so it should also be immediate. possibly useful

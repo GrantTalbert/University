@@ -1,0 +1,55 @@
+\lecture{24}{Tue 29 Apr 2025 14:00}{Angular Momentum and Spherical Harmonics}
+Recall we represented
+\[
+	L_z=-i\hbar \frac{\partial }{\partial \varphi } 
+.\]
+We will show that
+\[
+	e^{i\alpha L_z/\hbar } 
+\]
+is a rotation. Consider
+\[
+	e^{i\alpha L_z/\hbar } f(\varphi )=\sum_{n=0}^{\infty} \frac{(i\alpha L_z)^n}{\hbar ^n n!} f(\varphi )=\sum_{n=0}^{\infty} \frac{1}{n!} \left( \alpha \frac{\partial }{\partial \varphi }  \right) ^n f(\varphi )=\sum_{n=0}^{\infty} \frac{\alpha ^n}{n!} \frac{\partial ^n}{\partial \varphi ^n} f(\varphi )
+.\]
+Note that the taylor series of $f(\varphi )$ at $\alpha $, meaning $f(\varphi +\alpha )$, is precisely this series. This means we have increased $\varphi $, or we have rotated $f$ by an angle $\alpha $. Thus, $L_z$ rotates things in a sense.
+
+The important commutator relations we had are
+\[
+	\left[ \mathbf{L} ^2,L_{\pm}  \right] =\left[ \mathbf{L} ^2,L_z \right] =0,\qquad \left[ L_z,L_{\pm}  \right] =\pm \hbar L_{\pm} 
+.\]
+This means we can diagonalize $\mathbf{L} ^2$ and $L_z$ simultaneously, and we have
+\[
+	\mathbf{L} ^2\ket{\ell ,m} =\hbar ^2\ell (\ell +1)\ket{\ell ,m} ,\qquad L_z\ket{\ell ,m} =\hbar m\ket{\ell ,m} 
+.\]
+The relation $\left[ \mathbf{L} ^2,L_{\pm}  \right] $ tells us that given an $\mathbf{L} ^2$-eigenvector, $L_{\pm} $ gives a new eigenvector with the same eigenvalue. The relation on the right tells us that $L_{\pm} $ acting on an $L_z$-eigenvector gives a new eigenvector of $L_z$ with eval shifted by $\pm \hbar $.
+
+This means
+\[
+	L_+\ket{\ell ,m}\propto \ket{\ell ,m+1} ,
+\]
+\[
+	L_-\ket{\ell ,m} \propto \ket{\ell ,m-1} 
+.\]
+Also recall that
+\[
+	L_+^{\dagger} =L_-,
+\]
+and thus they are not hermitian.
+
+Since eigenstates are taken to be normalized WLOG, consider
+\[
+	\left| L_+ \ket{\ell ,m} ^2 \right| =\bra{\ell ,m} L_+^{\dagger} L_+\ket{\ell ,m} =\bra{\ell ,m} L_-L_+\ket{\ell ,m} =\bra{\ell ,m} \left( \mathbf{L} ^2-L_z^2-\hbar L_z \right) \ket{\ell ,m} 
+.\]
+This last step follows from an identity
+\[
+	L_{\mp} L_{\pm} =\mathbf{L} ^2-L_z^2\mp \hbar L_z
+.\]
+Continuing:
+\[
+	\bra{\ell ,m} \left( \hbar ^2\ell (\ell +1)-\hbar ^2m^2-\hbar ^2m \right) \ket{\ell ,m}=\hbar ^2\left( \ell (\ell +1)-m(m+1) \right)
+.\]
+This must be nonnegative. We thus have $\ell \geq m$. Also note that when $\ell =m$, it goes to 0, so this is consistent with stepping with $L_{\pm} $. To compute spherical harmonics, we just use the minimum $m$. For example,
+\[
+	L_- Y_{2,-2} =0\implies -\hbar e^{-i\varphi } \left( \frac{\partial }{\partial \theta } +i \cot \theta \frac{\partial }{\partial \varphi }  \right) Y_{2,-2} =0
+.\]
+We know the phi dependence is exponntial cuz eigenvectors so we get some trig crap

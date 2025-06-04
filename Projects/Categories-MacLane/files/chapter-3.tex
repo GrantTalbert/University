@@ -1,0 +1,405 @@
+\chapter{Universals and Limits}
+
+\section{Universal Arrows}
+
+We showed that the arrow $G\to U(C)$ from the graph into the free category formed on that graph is a \emph{universal} arrow. This section makes precise universality in generality.
+
+\begin{definition}[Universal Arrow]\label{dfn:3.1}
+	If $F : D \to C$ is a functor and $c\in C$, a universal arrow from $c$ to $F$ is a pair $(r,u)$ with $r\in D$ and $u : c \to F(r)$, such that for all other pairs $(d,f)$ with $d\in D$ and $f : c \to F(d)$, there is a unique arrow $f': r \to d$ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c\ar[" u ", r] \ar[" f "', dr]  & F(r)\ar[" F(f') ", dashed, d]  & r\ar[" f' ", dashed, d]  \\
+	 & F(d) & d
+	\end{tikzcd}\]
+	commute. That is, all other pairs $(d,f)$ factor uniquely through the universal arrow under $F$.
+\end{definition}
+
+Another way to view universal arrows from $c$ to $F$ is as initial objects in the comma category $(c\downarrow F)$: recall that objects are pairs $(d,f)$ with $d\in D$ and arrows $f : c \to F(d)$ in $C$, and morphisms $(d_1,f_1)\to (d_2,f_2)$ are arrows $\varphi : d_1 \to d_2$ in $D$ such that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+c\ar[" f_1 "', d] \ar[" f_2 ", dr]  &  \\
+d_1\ar[" F(\varphi ) "', r]  & d_2
+\end{tikzcd}\]
+commutes. It then becomes clear that an initial object generates the same diagram as in definition \ref{dfn:3.1}.
+
+An example of universal arrows arises in any situation with a free object and a forgetful functor. For the purposes of formalism, I will use the fact that free objects give rise to the free functor. Let $F : C \to D$ be a free functor with $U : D \to C$ a forgetful functor, and let $x\in C$. The free object $F(x)$ on $x$ satisies the universal property of free objects:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+x\ar[" i ", r] \ar[" f "', dr]  & U(F(x))\ar[" U(f')", dashed, d] & x\ar[" f' ", dashed, d]  \\
+ & U(z) & z
+\end{tikzcd}\]
+Note that this is precisely the same as the statement that $(F(x),i)$ is a universal arrow from $x$ to $U$.
+
+Another example is with quotients. The universal property of quotients states that the quotient of a set $S$ by a relation $R$ satisfies the property
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+S\ar[" \pi  "', d] \ar[" f ", r]  & Z \\
+S/R\ar[" f' "', dashed, ur]  & 
+\end{tikzcd}\]
+We can view this as a universal arrow as well. Let $H : \Set  \to \Set $ be the functor mapping sets $X$ to the subset of $\Hom_{\Set }(S, X) $ consisting of functions $f : S \to X$ for which $sRs'$ implies $fs=fs'$. The quotient $(S/R,\pi )$ is then immediately seen to be a universal arrow from $S$ to $H$. This process works in other categories as well. This universal property is quite useful; for example in $\Grp $, all isomorphism theorems and other properties of quotient groups follow easily without so much as mention of cosets.
+
+This characterization allows for construction of universal objects which are initial with respect to some property, but the duality of universal arrows allows for the construction of terminal objects as well.
+
+\begin{definition}[Universal Arrows, Again]\label{dfn:3.2}
+	Let $F : D \to C$ be a functor, with $c\in C$. A universal arrow from $F$ to $c$ is a pair $(r,v)$ with $r\in D$ and $v : F(r) \to c$, which is terminal with respect to this property: for each pair $(f,d)$ with $d\in D$ and $f : F(d) \to c$, there is a unique morphism $f': d \to r$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(d)\ar[" f ", r] \ar[" F(f') "', dashed, d]  & c & d\ar[" f' ", dashed, d]  \\
+	F(r)\ar[" v "', ur]  &  & r
+	\end{tikzcd}\]
+	commutes. Equivalently, a universal arrow from $F$ to $c$ is a terminal object in $(F\downarrow c)$.
+\end{definition}
+
+An important example of a universal arrow in this regard is a product. Let $C$ be a category with finite products, and let $x,y\in C$. The product is well-known to satisfy the universal property
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & z\ar[" f "', dl] \ar[" g ", dr] \ar[dashed, d]  &  \\
+x & x\times y\ar[" \pi _x ", l] \ar[" \pi _y "', r]  & y
+\end{tikzcd}\]
+To view this as a universal arrow, let $\Delta : C \to C\times C$ be the diagonal functor
+\[
+	x\mapsto (x,x),\qquad f\mapsto (f,f)
+.\]
+This is manifestly functorial. Let $r\in C$ and $p : r \to x$, $q : r \to y$ be morphisms in $C$. Then we have that $(p,q): (r,r) \to (x,y)$. Let $(r,(p,q))$ be a universal arrow from $\Delta $ to $(x,y)$. We then have that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	(r,r)\ar[" (p \text{,} q) ", r] \ar["(f'\text{,}f')"', dashed, d]  & (x,y) & r\ar[" f' ", dashed, d]  \\
+	(z,z)\ar[" (f\text{,}g) "', ur]  &  & z
+\end{tikzcd}\]
+commutes for all $z\in C$ and for all pairs $f : z \to x$ and $g : z \to y$. Using our knowledge of product categories, the universal property of products follows immediately, and thus $(r,(p,q))$ satisfy the universal property of products.
+
+\section{The Yoneda Lemma}
+
+\begin{proposition}\label{prp:3.1}
+	Let $F : D \to C$ be a functor. A pair $(r,u : c \to F(r))$ is universal from $c$ to $F$ if and only if for each pair $(d,f)$, the function mapping the induced morphism $f'$ to the composition $F(f')\circ u : c \to F(d)$ is a bijection of hom-sets
+	\[
+		D(r,d)\cong C(c,F(d))
+	.\]
+	This bijection is natural in $d$, meaning the function is a natural isomorphism. Conversely, any natural isomorphism $D(r,d)\cong C(s,F(d))$ in $d$ is determined by a universal arrow $u : c \to F(r)$.
+\end{proposition}
+\begin{proof}
+	Universality immediately guarentees that the function is a bijection. Let $f,g$ both have $f'$ as the induced morphism. By commutivity of the relevant diagram, $F(f')\circ u=f$ and $F(f')\circ u=g$, and thus $f=g$. Thus, the function is injective, and surjectivity follows by definition, as for any morphism $g : c \to F(d)$, universality says there exists a morphism $g': r \to d$ which maps to $g$ under this function. For the converse direction, surjectivity guarentees that such a morphism $f'$ always exists, and from this injectivity guarentees universality in much the same way.
+
+	Naturality of the function in $d$, which I will denote by $\nu $, means that
+	\[
+		\nu : D(r,-) \Rightarrow C(c,-)\circ F=C(c,F(-))
+	.\]
+	Proof of this amounts to a proof that for all $\varphi : d \to d'$, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	D(r,d)\ar[" D(r\text{,}\varphi ) ", r] \ar[" \nu (d) "', d]  & D(r,d')\ar[" \nu (d') ", d]  \\
+	C(r,F(d))\ar[" C(r\text{,}F(\varphi )) "', r]  & C(r,F(d'))
+	\end{tikzcd}\]
+	commutes. Working elementwise, we have that the following must be equivalent:
+	\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	f'\ar[mapsto, r]  & \varphi \circ f'\ar[mapsto, r]  & F(\varphi \circ f)\circ u \\
+	f'\ar[mapsto, r]  & F(f')\circ u\ar[mapsto, r]  & F(\varphi ) \circ F(f')\circ u
+	\end{tikzcd}\]
+	This follows from functorality of $F$, and thus $\nu $ is natural in $d$.
+
+	For the converse, let $f': r \to d$. Naturality of $\nu $ guarentees commutivity of the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	D(r,r)\ar[" \nu (r) ", r] \ar[" D(r\text{,} f') "', d]  & C(c,F(r))\ar[" C(c\text{,} F(f')) ", d]  \\
+	D(r,d)\ar[" \nu (d) "', r]  & C(c,F(d))
+	\end{tikzcd}\]
+Consider in particular the image of $1_r$ under both of these paths. Define $u\coloneqq \nu (r)(1_r)$. We have
+	\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	1_r\ar[" \nu (r) ", mapsto, r]  & u\ar[" C(c\text{,} F(f'))", r, mapsto]  & F(f')\circ u \\
+	1_r\ar[" D(r\text{,} f')"', r, mapsto]  & f'\ar[" \nu (d) "', mapsto, r]  & \nu (d)(f')
+	\end{tikzcd}\]
+	We thus have that $\nu (d)(f')=F(f')\circ u$. Since $\nu (d)$ is a bijection for all $d$,  it follows that $f'$ is necessarily unique (which is equivalent here to the fact that $f$ is unique), and thus $(r,u)$ is universal.
+\end{proof}
+
+If $C$ and $D$ are locally small, it follows that the functor $C(c,-)\circ F$ is naturally isomorphic to a hom-functor $D(r,-)$. This is known as a representation.
+
+\begin{definition}[Representation]\label{dfn:3.3}
+	Let $D$ be locally small. A representation of a functor $F:D\to \Set $ is a pair $(r,\psi )$ with $r\in D$ and $\psi $ a natural isomorphism
+	\[
+		\psi : D(r,-)\cong F
+	.\] 
+	The object $r$ is called the representing object, and the functor $F$ is said to be \emph{representable} if a representation exists.
+\end{definition}
+
+Representable functions are just hom-functors up to isomorphism. They can be connected to universal arrows through the following result.
+
+\begin{proposition}\label{prp:1.2}
+	Let $*$ denote a singleton, and let $D$ be locally small. If $(r,u : * \to F(r))$ is universal from $*$ to $F : D \to \Set $, then the function $\psi : f' \mapsto F(f')(u(*))\in F(d)$ is a representation of $F$, with $r$ the representing object. Every representation of $F$ is obtained in this way from exactly one such universal arrow.
+\end{proposition}
+\begin{proof}
+	I will begin by making clear what the proposition says. $u$ is universal from $*$ to $F$, and the object obtained by evaluating $F(f')\circ u$ at $*$ is the representing object.
+
+	Since functions $f : * \to X$ are fully determined by $f(*)$, there is a bijection $\Hom_{\Set }(*, X) \to X$ given by $f\mapsto f(*)$. This is clearly a natural isomorphism $\alpha \Hom_{\Set }(*, -) \cong 1_{\Set } $, so composing with $F$ gives a natural isomorphism $\Hom_{\Set }(*, F(-)) \cong F$ by horizontal composition $\alpha \circ 1_F$. By proposition \ref{prp:3.1}, we also have $\varphi :\Hom_{\Set }(*, F(-)) \cong C(r,-)$, and thus vertical composition $\varphi \cdot \alpha $ gives a natural isomorphism $F(-)\cong C(r,-)$.
+\end{proof}
+
+Note that a universal arrow from $c$ to $F : D \to C$ amounts to an isomorphism $D(r,d)\cong C(c,F(d))$, and hence a representation $D(r,-)\cong C(c,F(-))$, or equally a universal element of the functor. This discussion now leads us naturally to the Yoneda lemma, a result of fundamental importance in category theory.
+
+\begin{lemma}[Yoneda]\label{lma:3.1}
+	Let $C$ be locally small, $F : C \to \Set $ be a functor, and let $c\in C$. Then there is a bijection
+	\[
+		y: \operatorname{Nat} (C(c,-),F)\cong F(c)
+	\]
+	given by mapping natural transformations $\alpha : C(c,-) \Rightarrow F$ to $\alpha_c(1_c)$.
+\end{lemma}
+\begin{proof}
+	The map is well-defined; if $\alpha=\alpha '$, then clearly $\alpha _c=\alpha '_c$, and thus $\alpha _c(1_c)=\alpha '_c(1_c)$.
+
+	Let $\alpha : C(c,-) \Rightarrow F$. Then for each morphism $f : c \to d$, there is a commutative diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	C(c,c)\ar[" \alpha _c ", r] \ar[" C(c\text{,} f) "', d]  & F(c)\ar[" F(f) ", d]  \\
+	C(c,d)\ar[" \alpha _d "', r]  & F(d)
+	\end{tikzcd}\]
+	Denote $\alpha _c(1_c)$ by $u$. Then by commutivity of the diagram, we have the equality
+	\[
+		F(f)(u)=\alpha _d(f)
+	.\]
+	Thus, each component $\alpha _d$ is determined by the value of $u$. This shows injectivity, as if $u=u'$, then the corresponding natural transformations $\alpha ,\alpha '$ are necessarily equal, since for each $d$, for each $f : c \to d$, the value $\alpha _d(f)=F(f)(u)=F(f)(u')=\alpha '_d(f)$.
+
+	Finally, to show surjectivity, let $u\in F(c)$. Suppose there is a function $\alpha $ defined such that $\alpha _c(1_c)=u$, and for all $f : c \to d$, we have $\alpha _d(f)=F(f)(u)$. This makes the above diagram commute, and thus $\alpha $ is natural, concluding the proof.
+\end{proof}
+
+\begin{corollary}\label{cor:3.2}
+	For all $r,s\in C$, there exists a unique arrow $u : s \to r$ such that each natural transformation $\alpha : C(r,-) \Rightarrow C(s,-)$ is given by $C(u,-)$.
+\end{corollary}
+\begin{proof}
+	First, I will break down the meaning of this corollary. The natural transformation $\alpha : C(r,-) \Rightarrow C(s,-)$ has components $\alpha _x : C(r,x) \to C(s,x)$ given by $f\mapsto f\circ u$.
+
+	By the Yoneda lemma,
+	\[
+		\operatorname{Nat} (C(r,-),C(s,-))\cong C(s,r)
+	.\]
+	Thus, for each $\alpha $, there exists a unique morphism $h : s \to r$ such that for each $f : c \to x$, we define $\alpha _x(f)=C(s,f)(h)=f\circ h$, where $h$ is the element $\alpha _r(1_r)$ which uniquely determines $\alpha $. Thus, each $\alpha _x$ is simply given by composing on the right with $h$, or thus $\alpha _x=C(x,h)$, and thus $\alpha =C(-,h)$.
+\end{proof}
+
+The isomorphism $y$ is natural in both $F$ and $c$, which is done by viewing $y$ as a natural transformation bewteen the evaluation functor $(F,c)\mapsto F(c)$ and the functor $N(F,c)=\operatorname{Nat} (C(c,-),F)$. This is done by viewing them both as functors $\operatorname{Fun} (C,\Set )\to \Set $.
+
+\begin{lemma}[Yoneda]\label{lma:3.2}
+	With notation as previously, the bijections $y$ give a natural transformation $y : N \Rightarrow E$.
+\end{lemma}
+
+This lemma is easily enough proven. Note that we thus have a fully faithful functor $Y : C^{\mathrm{op} }  \to \operatorname{Fun} (C,\Set )$ given by $r\mapsto C(r,-)$. It's dual is another functor $Y': D \to \operatorname{Fun} (D^{\mathrm{op} } ,\Set )$, also fully faithful, and often known as the \emph{Yoneda Embedding}.
+
+If $C$ is not locally small, these restrictions can be bypassed by instead considering the category $\mathbf{Ens} $ whose objects at least contain the hom-sets of $C$, and whose morphisms are functions between those hom-sets.
+
+\section{Coproducts and Colimits}
+
+Colimits will be introduced with a collection of special cases, which will all be universal constrictions.
+
+Let $\Delta : C \to C\times C$ be the diagonal functor $x\mapsto (x,x)$ and $f\mapsto (f,f)$. A universal arrow from an object $(a,b)$ to $\Delta $ is a \emph{coproduct diagram}. This universal arrow consists of an object $c\in C$, and arrows $i_a : a \to c$ and $i_b : b \to c$ in $C$; that is, an arrow $(i_a,i_b): (a,b) \to \Delta (c)$; satisfying the universal property that for any object $z\in C$ and any morphism $(f,g): (a,b) \to (x,y)$, there exists a unique arrow $h : c \to z$ in $C$ making the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+(a,b)\ar[" (i_a\text{,} i_b) ", r] \ar[" (f\text{,} g) "', dr]  & (c,c)\ar[" (h\text{,}h) ", dashed, d]  & c\ar[" h ", dashed, d]  \\
+ & (z,z) & z
+\end{tikzcd}\]
+commute. We call the object $c$ the \emph{coproduct} of $a$ and $b$, and write it as $a\amalg b$. We can also write the universal property as a diagram in $C$ rather than in $C\times C$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+a\ar[" i_a ", r] \ar[" f "', dr]  & a\amalg b \ar[" h ", dashed, d]  & b \ar[" i_b "', l] \ar[" g ", dl]  \\
+ & z & 
+\end{tikzcd}\]
+This gives us the familiar universal property of coproducts. We also sometimes write the morphism $h$ as $f\amalg g$. If the coproducts exists, it are necessarily unique up to isomorphism, and thus the assignment $(f,g)\mapsto f\amalg g$ becomes a bijection
+\[
+	C(a,z)\times C(b,z)\cong C(a\amalg b,z),
+\]
+which is natural in $z$. If all coproducts exist in $C$, then $\amalg$ becomes a bifunctor $C\times C \to C$. In a preorder, the coproduct of two elements $a,b$ is any least upper bound $\inf (a,b)$ in the preorder.
+
+Infinite coproducts are similar. We can view a finite coproduct as a universal arrow to the diagonal functor into $C\times C=C^2$. Given an infinite coproduct indexed over a set $X$, we can take $X$ to define a discrete category and consider a diagonal functor to the functor category $C^X$, which can be viewed as the category of $X$-indexed families of objects in $C$. The $X$-ary diagonal functor $\Delta : C \to C^X$ maps objects $c$ to the constant functor $x\mapsto c$ for all $x\in X$, which is viewed as the constant family $c_x=c$ for all $x\in X$. The action of the constant functor on morphisms is to map $f\mapsto 1_c$ for all $f$, and thus we can define constant natural transformations $f : c \to d$ where each component $f_x=f$. This is the action of $\Delta $ on morphisms, and we can view them as $X$-indexed families of morphisms. A coproduct
+\[
+	c=\coprod_{x\in X}c_x
+\]
+is then a universal arrow $(c,\left\{ i_x \right\}_{x\in X} )$ from $\left\{ c_x \right\} _{x\in X} $ to $\Delta $. The universal property gives that the assignment $f\mapsto \left\{ f\circ i_x \right\}_{x\in X} $ is a bijection
+\[
+	C\left( \coprod_{x\in X}c_x,z \right) \cong \prod_{x\in X} C\left( c_x,z \right) ,
+\]
+natural in $z$.
+
+If the entries in a coproduct are constant; that is $c_x=c$ for all $x$, then we call it a \emph{copower} and write it as $X\cdot c$, so that
+\[
+	C(X\cdot c,z)\cong C(c,z)^X
+.\]
+For example, in $\Set $, the copower is the cartesian product $X\cdot Y=X\times Y$.
+
+Coequalizers are a generalization of cokernels in categories where zero objects may not exist. Given a pair $f,g : a \to b$ of objects, a coequalizer $\operatorname{coeq} (a,b)$ of $a$ and $b$ is a pair $(e,u : b \to e)$ such that $uf=ug$, and $u$ is universal with respect to this propery:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+a\ar[" f ", shift left, r] \ar[" g "', shift right, r]  & b \ar[" u ", r] \ar[" h "', dr]  & e\ar[" h' ", dashed, d]  \\
+ &  & c,
+\end{tikzcd}\]
+which commutes with the standard rules (meaning it is not implied that $f=g$).
+
+We can view coequalizers as univeral arrows as follows. Let $\downdownarrows$ denote the category
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+1\ar[" f ", shift left, r] \ar[" g "', shift right, r]  & 2.
+\end{tikzcd}\]
+A functor $\downdownarrows \to C$ is then a choice of two elemets, and two parallel arrows. Morphisms in the category $C^{\downdownarrows} $ (natural transformations between these functors) then simply become pairs $(h,k)$ which commute the two diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+a\ar[" f ", shift left, r] \ar[" g "', shift right, r] \ar[" h "', d]  & b \ar[" k ", d]  \\
+a'\ar[" f' ", shift left, r] \ar[" g' "', shift right, r]  & b'
+\end{tikzcd}\]
+where the images of the two implicit functors are as implied.
+
+Define the $\downdownarrows$-ary diagonal functor $\Delta : C \to C^{\downdownarrows} $ once again as mapping objects to the constant functor, and morphisms to the constant natural transformations between these functors:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c\ar[" f "{name=fo}, d]  & c\ar[" 1 ", shift left, r] \ar[" 1 "', shift right, r] \ar[" f "'{name=lo}, d]  & c\ar[" f ", d]  \\
+c' & c'\ar[" 1 ", shift left, r] \ar[" 1 "', shift right, r]  & c'
+\arrow[from=fo, to=lo, shorten=3pt, mapsto]
+\end{tikzcd}\]
+Now return to the pair $f,g : a \to b$. An arrow $h$ with $hf=hg$ is the same as an arrow $(hf=hg,h): (f,g) \to (1_c,1_c)$ in the functor category:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+a\ar[" f ", shift left, r] \ar[" g "', shift right, r] \ar[" hf "', d]  & b \ar[" h ", d]  \\
+c\ar[" 1 ", shift left, r] \ar[" 1 "', shift right, r]  & c
+\end{tikzcd}\]
+A coequalizer is just universal with respect to this, so a coequalizer is simply a univeersal arrow $(e,u)$ from the functor identifying $(f,g)$ to the functor $\Delta $.
+
+Given a pair of arrows $f,g : a \to b,c$ with common domain, a pushout of $(f,g)$ is a triple $(u,v,r)$, which is universal with respect to commutative squares:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+a\ar[" f ", r] \ar[" g "', d]  & b \ar[" u ", d] \ar[" h ", bend left, ddr]  &  \\
+c\ar[" v "', r] \ar[" k "', bend right, drr]  & r \ar[dashed, dr]  &  \\
+ &  & z
+\end{tikzcd}\]
+
+We usually write $b\amalg_a c$ or $b\amalg_{(f,g)} c$ for $r$, and also call it the \emph{fibered sum}. Let $\cdot \leftarrow \cdot \to \cdot $ be a category, and let the diagonal functor be exactly what intuition dictates. The pushout is then a universal arrow from $(f,g)$ to $\Delta $.
+
+All of these constructions involve a universal arrow to some diagonal functor. Now is time to define colimits in generality. For any categories $C,J$, let $\Delta : C \to C^J$ be the diagonal functor, where $\Delta (c)$ is the constant functor $j\mapsto c$ for all $j\in J$, and $f : i \to j$ maps to $1_c : c \to c$. This allows us to define, for all $g : c \to d$ in $C$, the constant natural transformation $\Delta (g): \Delta (c) \Rightarrow \Delta (d)$, where each component $\Delta (g)_j=g$.
+
+\begin{definition}[Colimit]\label{dfn:3.4}
+	With notation as above, the colimit of a functor $F : J \to C$ is a universal arrow $(r,u)$ from $F$ to $\Delta $, usually written as $r=\varinjlim F$.
+\end{definition}
+
+Recall that this implies $u$ is a natural transformation from $F$ to $\Delta (r)$, such that for all $c\in C$ and all natural transformations $\alpha : F \Rightarrow \Delta (c)$, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F\ar[" u ", r] \ar[" \alpha  "', dr]  & \Delta (r)\ar[" \Delta (\alpha ' )", dashed, d]  \\
+ & \Delta (c)
+\end{tikzcd}\]
+commutes.
+
+Looking only at the fact that there is a natural transformation $u : F \Rightarrow \Delta (r)$, we have that for any morphism $f : i \to j$ in $J$, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(i)\ar[" F(f) ", r] \ar[" u_i "', d]  & F(j)\ar[" u_j ", d]  \\
+\Delta (r)(i)\ar[" \Delta (r)(f) "', r]  & \Delta (r)(j)
+\end{tikzcd}\]
+commutes. Of course, $\Delta (r)(-)=r$ and $\Delta (r)(f)=1_r$, so this reduces to the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(i)\ar[" F(f) ", r] \ar[" u_i "', d]  & F(j)\ar[" u_j ", d]  \\
+r\ar[equals, r]  & r
+\end{tikzcd}\]
+This is typically rewritten as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(i)\ar[" F(f) ", rr] \ar[" u_i "', dr]  &  & F(j)\ar[" u_j ", dl]  \\
+ & r & 
+\end{tikzcd}\]
+commuting for all $f : i \to j$ in $J$. Such an object $r$, together with a natural transformation $u$, is knwon as an \emph{co-cone} for $F$. The universality of $r$ and $u$ means that for any other co-cone $(c,\alpha )$ for $F$, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(i)\ar[" F(f) ", rr] \ar[" u_i "', dr] \ar[" \alpha _i "', bend right, ddr]  &  & F(j)\ar[" u_j ", dl] \ar[" \alpha _j ", bend left, ddl]  \\
+ & r=\varinjlim F \ar[" \alpha ' ", dashed, d]  &  \\
+ & c & 
+\end{tikzcd}\]
+commutes for any $f : i \to j$ in $J$.
+
+\section{Products and Limits}
+
+\begin{definition}[Limit]\label{dfn:3.5}
+	Let $F : J \to C$ be a functor. A limit of $F$ is a universal arrow $(\varprojlim F,u)$ from the diagonal functor $\Delta : C \to C^J$ to $F$. Equivalently, it is a \emph{cone} which is universal with respect to cones, where a cone is the dual of a co-cone.
+\end{definition}
+More explicitly, a cone is a pair $(r,u : \Delta (r) \Rightarrow F$, meaning that for all $f : i \to j$ in $J$, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & r\ar[" u_j ", dr] \ar[" u_i "', dl]  &  \\
+F(i)\ar[" F(f) "', rr]  &  & F(j)
+\end{tikzcd}\]
+commutes. As with any universals, if they exist, limits, colimits, and the limiting (co-)cones are uniquely determined up to isomorphism by $F$.
+
+When limits exist, there are natural isomorphisms
+\[
+	C(c,\varprojlim F)\cong \operatorname{Nat} (\Delta (c),F)=\operatorname{Cone} (c,F);
+\]
+\[
+	\operatorname{Cone} (F,c)=\operatorname{Nat} (F,\Delta (c))\cong C(\varinjlim F,c)
+.\]
+
+Examples of limits include duals to all the constructions mentioned in section 3.3, and more that were not mentioned. Examples include products, kernels, pullbacks, and equalizers.
+
+\section{Categories with Finite Products}
+
+A category has \emph{finite products} if for all finite collections of objects (and by induction, all pairs of objects), there exists a product diagram with a product object and projections. In particular, $C$ has a product of \emph{no} objects, which would be the limit of the null functor, and thus simply a terminal object. Define the diagonal map $\delta _c : c \to c\times c$ as the induced morphism in the product diagram $1_c \times 1_c$; meaning $\pi_1 \delta _c = \pi _1 \delta _c = 1_c$.
+
+\begin{proposition}\label{prp:3.3}
+	If a category $C$ has a terminal object $t$ and a product diagram for any pair of objects, then it has finite products. The diagrams provide a bifunctor $\times : C\times C \to C$. For any $a,b,c\in C$, there is an isomorphism $\alpha_{a,b,c} : a\times (b\times c) \to (a\times b)\times c$ called the \emph{associator}, natural in $a,b,c$. Equivalently, this is a natural isomorphism $\times \circ (1_C\otimes \times )\Rightarrow \times \circ (\times \otimes 1_C)$. I have here denoted by $\otimes $ the product of functors, simply for clarity of notation. Additionally, for all $a\in C$ there are natural isomorphisms
+	\[
+		\lambda_a : t\times a \cong a,\qquad \rho _a : a\times t \cong t
+	\]
+	called the \emph{left}- and \emph{right-unitors}, respectively. These are equivalently viewed as natural isomorphisms
+	\[
+		\lambda : t\times - \Rightarrow 1_C,\qquad \rho : -\times t \Rightarrow 1_C
+	.\]
+\end{proposition}
+\begin{proof}
+	Existence of products is immediate by induction, and the existence of the morphisms is easily shown via a short diagram chase. I decline to include the proof in these notes to avoid drawing many diagrams.
+\end{proof}
+
+If a category $C$ has both finite products and coproducts, then the arrow
+\[
+	\coprod_{i\in [m]}a_i \to \prod_{j\in [n]} b_j
+\]
+is determined uniquely by an $m\times n$ matrix of arrows $f_{jk} =p_kfi_j : a_j \to b_k$, with $j$ ranging over $[m]$ and $k$ ranging over $[n]$. In categories of finite dimensional vector spaces, coproducts and products coencide, and thus this is a usual matrix for a change of basis.
+
+More generally, if $C$ has a zero object $0$, then there is a \emph{canonical} arrow
+\[
+	\coprod_{i}a_i \to \prod_{i} a_i
+.\]
+
+\section{Groups in Categories}
+
+Given a category with finite products with $t$ the terminal object, a monoid (this definition will be upgraded later) is a triple $(c,\mu ,\eta )$ with $\mu : c\times c \to c$ and $\eta : t \to c$, such that the diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+c\times (c\times c)\ar[" \alpha  ", r] \ar[" 1\times \mu  "', d]  & (c\times c)\times c\ar[" \mu \times 1 ", r]  & c\times c\ar[" \mu  ", d]  \\
+c\times c\ar[" \mu  "', rr]  & & c,
+\end{tikzcd}\]
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+t\times c\ar[" \lambda  "', dr] \ar[" \eta \times 1 ", r]  & c\times c\ar[" \mu  ", d]  & c\times t \ar[" 1\times \eta  "', l] \ar[" \rho  ", dl]  \\
+ & c & 
+\end{tikzcd}\]
+commute. Here, $\alpha $ is the associator, $\lambda $ is the left unitor, and $\rho $  is the right unitor, as given in proposition \ref{prp:3.3}. By viewing $\mu $ as multiplication in the monoid, and by viewing $\eta $ as the unitor morphism taking the place of the identity element of a monoid, this definition makes perfect sense. Taking $\delta _c$ to once again be the diagonal morphism $c\to c\times c$, given by the product $1_c\times 1_c$, we can extend this definition to encompass that of a group by introducting an ``inversion'' morphism $i : c \to c$ (the book uses $\zeta $, I think thats stupid).
+
+\begin{definition}[Group Object]\label{dfn:3.6}
+	A group object in a category $C$ with finite products is a pair $(c,\mu ,\eta ,i)$ such that $(c,\mu ,\eta )$ form a monoid with respect to the induced monoidal structure by $\times $ (a monoid as described above), and such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c\ar[" \delta _c ", r] \ar[dashed, d]  & c\times c\ar[" 1\times i ", r]  & c\times c\ar[" \mu  ", d]  \\
+	t\ar[" \eta  "', rr]  &  & c
+	\end{tikzcd}\]
+	commutes. We call $\mu $ multiplication, $\eta $ the unitor, and $i$ inversion.
+\end{definition}
+
+A group object in $\Set $ is easily shown to simply be a group, if we take $\mu $ is the standard multiplication, the image $\eta (*)$ to be the identity (since in $\Set $ $t=*$ is the singleton), and $i$ to be the map $c\mapsto c$. It is easily shown that given a group object, these definitions satisfy the group axioms.
+
+It is easily shown that given any group $G$ and any set $X$, the set $G^X=\Hom_{\Set }(X, G) $ has a group structure given by pointwise multiplication. This generalizes via the Yoneda lemma.
+
+\begin{proposition}\label{prp:3.4}
+	Let $C$ be a category with finite products. Then an object $c$ is a group object if and only if the hom-functor $\Hom(-, c) $ is a group in the functor category $\Set ^{C^{\mathrm{op} } } $.
+\end{proposition}
+\begin{proof}
+	Recall that by universality of product, for any $f : z \to a\times b$, by proposition \ref{prp:3.1} there is a natural bijection $C(z,a)\times C(z,b)\cong C(z,a\times b)$ given by $(\pi _af,\pi_bf)\mapsto h$, and vice versa. We thus have that multiplication $\mu : c\times c \to c$ induces a multiplication $\overline{\mu } $ on $C(-,c)\times C(-,c)$ by the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C(-,c)\times C(-,c)\ar[r]  & C(-,c\times c)\ar[" C(-\text{,}\mu ) ", r]  & C(-,c),
+	\end{tikzcd}\]
+	which for any pair $(f : a \to c,g : b \to c)$ maps
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(f,g)\ar[mapsto, r]  & f\times g\ar[mapsto, r]  & \mu \circ (f\times g).
+	\end{tikzcd}\]
+	I don't feel like finishing this proof.
+\end{proof}
+
+\section{Colimits of Representable Functors}
+
+\begin{theorem}\label{thm:3.2}
+	Let $F : C \to \Set $ with $D$ small. Then $F$ can be represented canonically as a colimit of a diagram of representable functors $C\to \Set $.
+\end{theorem}
+\begin{proof}
+	Let $J=(1\downarrow F)$, where we remark that $1$ is a singleton (so we are changing notation from $*$ to $1$). Since morphisms $1\to z$ identify elements of $z$, the category $J$ is thus the category of elements of $F$, meaning objects are pairs $(d,x)$ for $x\in F(d)$ and $d\in C$, and morphisms $(d,x)\to (d',x')$ are arrows $f : d \to d'$ such that $F(f)(x)=x'$.
+
+	Let $M : J^{\mathrm{op} }  \to \Set ^C$ be the functor given by $(x,d)\mapsto C(d,-)$; and each arrow $f : d \to d'$ mapped to the precomposition $D(f,-) : g \mapsto g\circ f$. We will write $D(f,-)$ as $f^*$ for the purposes of this proof. This is basically the Yoneda embedding, but applied over the category of elements of $F$, so we would expect the proof may fall out of the Yoneda lemma. Indeed, the inverse Yoneda isomorphism
+	\[
+		y^{-1}_d : F(d) \to \Nat(C(d,-),F),\qquad u\mapsto \alpha^u
+	\]
+	where $\alpha ^u_c : D(d,c) \to F(c)$ is the function $g\mapsto F(g)(c)$. We claim this yields a universal co-cone for $M$ over $\Set ^D$ with $F$ as the colimit, given by maps $\mu : M(d,x) \to F$ given by $\mu _d^x = y^{-1}_d(x)$.
+
+	To show this, let $F(f) : (d,x) \to (d',x')$, and thus the image under $M$ is
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C(d,-)\ar[" f^* ", r]  & C(d',-).
+	\end{tikzcd}\]
+	Naturality of the Yoneda isomorphism in $d$ gives that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C(d,-)\ar[" f^* ", r] \ar[" y_d^{-1}  "', d]  & C(d',-)\ar[" y_{d'} ^{-1}  ", d]  \\
+	F\ar[equals, r]  & F
+	\end{tikzcd}\]
+	I don't think this works but I give up this proof is aids.
+\end{proof}
+
+Contravariant functors $F : C^{\mathrm{op} }  \to \Set $ are often called \emph{presheaves}; the functor category $\Set ^{C^{\mathrm{op} } } $ is often written as $\hat{C} $ to indicate this. The intuition comes from the topological definition of a presheaf falling out when applied to the poset category of open sets of a topological space.

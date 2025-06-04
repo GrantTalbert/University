@@ -1,0 +1,61 @@
+\lecture{24}{Thu 01 May 2025 11:06}{More Covering Spaces}
+\begin{corollary}
+	If $p : \widetilde{X}  \to X$ is a covering of $X$, then $\pi _1(p)$ is injective.
+\end{corollary}
+In particular, $p(\pi _1( \widetilde{X} ,p(x_0)))\subseteq \pi _1(X,x_0)$ is a subgroup.
+\begin{proposition}\label{prp:dududu}
+	Let $p : \widetilde{X}  \to X$ be a covering, let $f : Y \to X$. Then there exists a lift
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & \widetilde{X} \ar[" p ", d]  \\
+	X\ar[" f ", r] \ar[" \widetilde{f}  ", ur]  & X
+	\end{tikzcd}\]
+	if and only if
+	\[
+		f_*(\pi _1(Y,y_0))\subseteq p_*(\pi _1( \widetilde{X} , \widetilde{x} _0))
+	.\]
+\end{proposition}
+\begin{proof}
+	We have already proven one direction. the other direction is bla bla bla with loops
+\end{proof}
+\begin{definition}[Universal Cover]\label{dfn:uni}
+	The universal cover $p : \widetilde{X}  \to X$ is the covering which is initial with respect to coverings; for all covers $\alpha : E \to X$, there is a unique morphism $\widetilde{X} \to E$ making the diagram commute. In particular, $\pi _1(\widetilde{X} )=0$.
+\end{definition}
+
+\begin{definition}[Semi-locally simply connected]\label{dfn:j}
+	A semi-locally simply connected space $X$ is a space such that for all $x\in V\subseteq  X$, there exists a neighborhood $x\in U\subseteq V\subseteq X$ of $x$ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\pi _1(U,x)\ar[dr] \ar[rr]  &  & \pi _1(X,x) \\
+	 & 0\ar[ur]  & 
+	\end{tikzcd}\]
+	commutes, with the one morphism the inclusion.
+\end{definition}
+
+\begin{theorem}\label{thm:a}
+	Let $X$ be path connected, and \emph{semi-locally simply connected}, and locally path connected. Then $\exists $ a universal cover.
+\end{theorem}
+\begin{proof}
+	Fix $x_0\in X$, and define $\widetilde{X} \coloneqq \left\{ \varphi \in \operatorname{Path} (X)\mid \varphi (0)=x_0 \right\} /\tildesim$, where
+	\[
+		\varphi \sim \varphi ' \iff \varphi (1)=\varphi' (1)\text{ and } \exists \Phi : \varphi  \Rightarrow \varphi '
+	.\]
+	We claim $\widetilde{X} $ is universal with respect to covers. For all $x\in X$, there exists $x\in U\subseteq X$ open such that
+	\[
+		\pi _1(U,x)\to \left\{ 0 \right\} \subseteq \pi_1(X,x)
+	.\]
+	For all $x'\in U$, choose a path $\gamma _{x'} $ from $x$ to $x'$ in $U$. Let $\varphi $ be a path from $x_0$ to $x$. We can concatenate them to form a set
+	\[
+		\widetilde{U} \coloneqq \left\{ \left[ \varphi \bullet \gamma_{x'} \right] \mid x' \in U \right\} 
+	.\]
+	We can define a map
+	\[
+		P : \widetilde{U}  \to U,\qquad [\varphi \bullet \gamma_{x'} ]\mapsto \varphi \bullet \gamma_{x'} (1)=x'
+	.\]
+	THis is well-defined, because the semi-locally simply connected condition impliess all loops $\gamma_{x'} ,\gamma'_{x'} $ are homotopic. This $P$ is bijective. We claim that open sets of the form $\widetilde{U} $ form a basis.
+
+	Let $[\varphi ]\in \widetilde{U}_1 \cap \widetilde{U} _2\to U_1 \cap U_2 \ni x=\varphi (1)$.  Doing the entire process again gives an open set contained within it contianing the thing. I'm done. The professor's proofs are so hard to follow. Too messy.
+\end{proof}
+\begin{corollary}\label{cor:}
+	Every compact oriented surface admits a metric with constant \emph{scalar curvature}.
+\end{corollary}
+
+The universal cover of the torus is $\mathbb{R} ^2$, and the universal covers of higher genus surfaces are always Poincare disks.

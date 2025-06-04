@@ -1,0 +1,95 @@
+\lecture{22}{Tue 22 Apr 2025 14:03}{Spherical Harmonics Day 1}
+Recall the Laplacian on the sphere:
+\[
+	\hat{\nabla }^2=\frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) +\frac{1}{\sin ^2\theta } \frac{\partial ^2}{\partial \varphi  ^2} 
+.\]
+We want functions $Y(\theta ,\varphi )$ which are eigenfunctions of $\hat{\nabla }^2$. In this case, $\varphi $ cycles through $2\pi $ and $\theta $ is the angle that runs through $\pi $. Let
+\[
+	\hat{\nabla }^2 Y(\theta ,\varphi )=\lambda f(\theta ,\varphi )
+.\]
+Our Schrodinger equation is
+\[
+	H\psi (r,\theta ,\varphi )=\left(\frac{P^2}{2\mu } +V(r)\right)\psi (r,\theta ,\varphi _=\left(-\frac{\hbar ^2}{2\mu } \nabla ^2-\frac{e^2}{4\pi \varepsilon _0r} \right)\psi (r,\theta ,\varphi )
+.\]
+We set
+\[
+	\psi (r,\theta ,\varphi )=\sum_{i} R_i(r)Y_i(\theta ,\varphi )
+.\]
+Note that
+\[
+	\nabla ^2=\frac{1}{r^2} \left( \frac{\partial }{\partial r} \left( r^2 \frac{\partial }{\partial r}  \right) +\hat{\nabla }^2 \right) 
+.\]
+We then have by eigenfunctions that
+\[
+	\left( -\frac{\hbar ^2}{2\mu } \frac{1}{r^2} \left( \frac{\partial }{\partial r} \left( r^2 \frac{\partial }{\partial r}  \right) +\lambda  \right)  \right) R_i(r)Y_i(\theta ,\varphi )=ER_i(r)Y_i(\theta ,\varphi )
+.\]
+We can divide out by $Y_i(\theta ,\varphi )$ to get an equation for the radial piece. This is why we need to solve for the spherical harmonics. After that, solving the radial equation gives us the eigenvalues. We sometimes use two indicies for these, and denote them $Y_{\ell m} $. We will find that
+\[
+	Y_{\ell m} =A_{\ell m} (-1)^mP_{\ell }^{\left| m \right| } (\cos \theta )e^{im \varphi } 
+\]
+for $A$ a normalization constant and $P$ an Associated Legendre Polynomial; meaning $P(\cos \theta )$ denotes a polynomial in $\cos \theta $. We also require $\ell \in\mathbb{Z}_{\geq 0}  $ and $m$ an integer such that $-\ell \leq m\leq \ell $.
+
+Our goal right now is to solve
+\[
+	\left( \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) +\frac{1}{\sin ^2\theta } \frac{\partial ^2}{\partial \varphi ^2}  \right) Y_{\ell m} (\theta ,\varphi )=\lambda Y_{\ell m} (\theta ,\varphi )
+.\]
+We use separation of variables to write $Y(\theta ,\varphi )=\Theta (\theta )\Phi (\varphi )$. We can use the same trick to get rid of the $\Theta (\theta )$ piece. We set
+\[
+	\frac{\partial ^2}{\partial \varphi } \Phi (\varphi )=-\eta \Phi (\varphi )
+.\]
+If we can solve this, we would have
+\[
+	\left( \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) -\frac{1}{\sin ^2\theta } \eta   \right) \Theta (\theta )\Phi (\varphi ) =\lambda \Theta (\theta )\Phi (\varphi )
+.\]
+
+This is trivial, we have
+\[
+	\Phi (\varphi )=e^{\pm i\varphi \sqrt{\eta }} 
+.\]
+The $i$ makes this a function of the sphere. This means that we can impose the condition that $\Phi (\varphi )=\Phi (\varphi +2\pi )$, constraining what $\eta $ can be:
+\[
+	\exp \left( \pm i\varphi\sqrt{\eta }  \pm i2\pi  \sqrt{\eta } \right) =\exp \left(\pm i\varphi \sqrt{\eta }  \right) 
+.\]
+We have
+\[
+	\exp \left(\pm i2\pi \sqrt{\eta }  \right) =1 \implies \sqrt{\eta } \in \mathbb{Z} 
+.\]
+Therefore,
+\[
+	\eta =m^2,m\in\mathbb{Z} 
+.\]
+We now have eigenvalue/function pairs $(\eta_m,\Phi_m (\varphi ))=(m^2,e^{\im  \varphi} )$. The $-$ sign gets included by letting $m$ be negative.
+
+Now we have
+\[
+	\frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) \Theta (\theta )\Phi (\varphi )-\frac{\eta }{\sin ^2\theta } \Theta (\theta )\Phi (\varphi )=\lambda \Theta (\theta )\Phi (\varphi )
+.\]
+Cancelling,
+\[
+	\frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( \sin \theta \frac{\partial }{\partial \theta }  \right) \Theta (\theta )-\frac{\eta }{\sin ^2\theta } \boldsymbol{\Theta} (\theta )=\lambda \Theta (\theta )
+.\]
+The solution has to be sines and cosines because it always is. We thus have two cases: whether $\boldsymbol{\Theta} $ is even or odd. We guess $\Theta $ is a polynomial in $\sin $ and $\cos $, meaning each term looks like $\sin ^n\theta \cos ^m\theta $. If $\Theta $ is even, we must have $n$ even, and substitute in $2n$:
+\[
+	\sin ^{2n} \theta \cos ^m\theta =\left( \sin ^2\theta  \right)^n \cos ^m\theta =\left( 1-\cos ^2\theta  \right)^n \cos ^m\theta 
+.\]
+We can thus take even cases fully in terms of cosines. We then have that $\Theta (\theta )=a_j(\cos \theta )^j$ in Einstein notation. Plugging this into the eigenproblem is tedious but possible at this stage, and gives us
+\[
+	\sum_{j=1}^{\ell } a_j\left( j(j-1)\cos ^j\theta -(2j^2+m^2+\lambda )\cos^{2+j} \theta +(j(j+1)+\lambda)\cos ^{4+j} \theta   \right) =0
+.\]
+The highest order term in the sum is
+\[
+	(\ell (\ell +1)+\lambda )\cos ^{\ell +4} \theta 
+.\]
+This means that none of the cosines can cancel this term. This term thus \emph{has} to go to 0, and thus
+\[
+	\lambda =-\ell (\ell +1)
+.\]
+We must have the coefficients of each linearly independent term vanish, so for any $j+4\leq \ell $, we end up with a relation between the coefficients:
+\[
+	a_{j} (j+4)(j+3)-a_{j-2}(2(j+2)^2+m^2-\ell (\ell +1))+a_{j-4}(j(j+1)-\ell (\ell +1))=0
+.\]
+This gives us an inductive relation. We can choose $a_\ell =1$ to set the normalization, and choose all $a_{j} $ with $j>\ell $ equal to 0. We inductively derive all other $a_j$s. It can be shown that $a_{-j} =0$ if $\ell $ is non-negative. We will show this when we do the \emph{algebraic} approach tomorrow. Normalizing gives
+\[
+	\braket{Y_1}{Y_2} =\int_{0}^{2\pi }\int_{0}^{\pi } Y_1^*Y_2 \sin \theta  \,\mathrm{d} \theta  \mathrm{d} \varphi 
+.\]
+To compute $A_{\ell m} $, we demand that $\braket{Y_1}{Y_2} \equiv 1$.

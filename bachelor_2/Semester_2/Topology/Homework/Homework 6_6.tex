@@ -2,176 +2,449 @@
 \input{../../homework.tex}
 \usepackage{titlepageBU}
 \title{Homework 6}
-\courseID{MA 564}
-\courseSection{A1}
 \usepackage{eucal}
 \DeclareMathOperator{\im}{im}
-
+\newcommand{\tildesim}{\mathbin{\sim}}
+\date{}
 \begin{document}
 \makeproblem
+
+\begin{note}
+	I frequently use the notation $f\Rightarrow g$ to denote a homotopy from $f$ to $g$, because homotopy is close enough to a 2-morphism that I feel it's okay to use the notation. Also I think it can be viewed as a 2-morphism in an $(\infty ,1)$-category, but that's beyond me at the moment. Also note that in a previous homework, I essentially proved the universal property of products in $\mathbf{Top} $, and I have been quietly referencing it throughout the semester. I cannot be asked to continuously say ``this was proven in a previous homework'' every time, so I will be assuming it throughout. I also assume the universal property of quotients in $\mathbf{Top} $, because it's easy to show.
+\end{note}
+
+\begin{notation}
+	If $f : A \to X$ and $g : A \to Y$ are morphisms, then the morphism $f\times g$ will denote the morphism induced by the universal property of products. If $f : A \to X$ and $g : B \to Y$ are morphisms now with \emph{different} domains, then the morphism $f\times g$ is the morphism induced by the product bifunctor; equivalently, it is the induced morphism in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & A\times B \ar[" f\circ \pi _A "', dl] \ar[" g\circ \pi _B ", dr]\ar[" f\times g ", dashed, d]  &  \\
+	X & X\times Y\ar[" \pi_X ", l] \ar[" \pi _Y "', r]  & Y
+	\end{tikzcd}\]
+\end{notation}
+
+
 \section*{Problem 1}
-Let $\pi_1(X)\cong 0$, and let $f : S^1 \to X$ be continuous. WTS $\exists f^*: D^2 \to X$ s.t. $f^*(S^1)=f(S^1)$.  
-\section*{Problem 2}
-\section*{Problem 3}
-The first two parts are just proving functorality of $\pi_1 : \mathbf{Top}_*  \to \mathbf{Grp} $. First, we show homotopy is preserved by continuity. Let $\phi ,\psi $ be homotopic paths in $X$, and let $f : X \to Y$ be a base-preserving continuous map. Let $\Phi : [0,1]\times [0,1] \to X$ be the homotopy $\phi \to \psi $, meaning $\phi =\Phi (0,-)$ and $\psi =\Phi (1,-)$. We thus have $f\circ \phi =f\circ \Phi (0,-)$ and $f\circ \psi =f\circ \Phi (1,-)$, and thus $f\circ \Phi $ clearly induces a homotopy of $f\circ \phi $ and $f\circ \psi $, since composition of continuous maps are continuous. Therefore, homotopy is invariant under continuity.
+Due to the notation used in the problem statement, I will assume $X$ is path-connected since $\pi _1$ was stated without specifying a base point. This, together with the fact that $D^2$ is path-connected, makes almost all mention of base points immaterial in this problem. At some points when using constant maps it can be implicitly assumed what the base point is.
 
-Note that $\pi _1(f): \pi _1(X) \to \pi _1(Y)$ will be the map $\pi _1(f)[\phi ]=[f\circ \phi ]$. We want to show that $\pi _1(f\circ g)=\pi _1(f)\circ \pi _1(g)$. We have
+First, note that loops in $X$ can be equivalently viewed as morphisms $S^1\to X$. To see this explicitly, note that every loop $\varphi : [0,1] \to X$ has $\varphi (0)=\varphi (1)$, and thus it factors uniquely through the quotient
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\left[ 0,1 \right] \ar[" \varphi  ", r] \ar[" \pi  "', d]  & X \\
+\left[ 0,1 \right] /\tildesim \ar[" \overline{\varphi }  "', dashed, ur]  & 
+\end{tikzcd}\]
+for $\pi $ the canonical projection, where $\sim $ is the relation $0\sim 1$. It's clear that $\left[ 0,1 \right] /\tildesim \cong S^1$, so every loop $\varphi $ can be equivalently viewed as a continuous map $\overline{\varphi } : S^1 \to X$. To fully formalize this idea up as far as will be needed for this problem, consider the following lemma, which will implicitly be invoked throughout the problem.
+\begin{lemma}\label{lma:1}
+	With notation as above, $\varphi $ is null-homotopic if and only if $\overline{\varphi } $ is null-homotopic.
+\end{lemma}
+\begin{proof}
+	First, let $\varphi $ be null-homotopic to the constant map $x_0$. Since $\varphi $ is a loop, $\varphi (0)=\varphi (1)$. Let $\Phi : \varphi  \Rightarrow x_0$ be the homotopy in question, and define the map
+	\[
+		\Psi \coloneqq \Phi (x)
+	.\]
+	This is well defined; that is, for any $x\in[0,1]$, we can take $\Phi (x,0)=\Phi (x,1)$ without loss of generality. This assumption follows from the fact that for any $x$, we can simply concatenate on the left and right by paths that flow from some equivalent start and end points to the start and end points of $\Phi (x,-)$. With this definition, it is exceedingly clear that $\Phi $ now defines a homotopy $\overline{\varphi } \Rightarrow x_0$.
+
+	For the converse, let $\overline{\varphi } $ be null-homotopic to the constant map $x_0$. Since $\pi $ is homotopic to itself by the identity homotopy $1_\pi $, we have a diagram
+	\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+		\left[ 0,1 \right] \ar[" \pi  "{name=p1}, bend left, r] \ar[" \pi  "'{name=p2}, bend right, r]  & \left[ 0,1 \right] /\tildesim \ar[" \overline{\varphi }  "{name=vp}, bend left, r] \ar[" x_0 "'{name=x0}, bend right, r]  & X.
+		\arrow[from=p1, to=p2, Rightarrow, shorten=4px]
+		\arrow[from=vp, to=x0, Rightarrow, shorten=4px]
+	\end{tikzcd}\]
+	By lemma \ref{lma:2} (yes, I presented the results out of order. Cope), there is an induced homotopy
+	\[
+		\varphi =\overline{\varphi } \circ \pi \Rightarrow x_0 \circ \pi =x_0,
+	\]
+	and thus $\varphi $ is null-homotopic.
+\end{proof}
+
+
+Suppose that every morphism $f : S^1 \to X$ extends to a morphism $ \overline{f} : D^2 \to X$; in other words, the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+D^2\ar[" \overline{f}  ", r]  & X \\
+S^1 \ar[" \iota  ", hook, u] \ar[" f "', ur]  & 
+\end{tikzcd}\]
+commutes, with $\iota $ the inclusion $S^1 \hookrightarrow D^2$. This means that every loop $f$ can be viewed as the composition $\overline{f} \circ \iota $. However, note that $\iota $ is a morphism $S^1\to D^2$, and thus a loop in $D^2$. Using the fact that $\pi _1(D^2)=0$, we have that all loops in $D^2$ are null-homotopic, and thus there is a homotopy $\Phi : \left[ 0,1 \right] \times S^1 \to D^2$ with $\Phi (0,-)=\iota $ and $\Phi (1,-)=x_0$, for some fixed $x_0\in D^2$. Additionally, note that $\overline{f} $ is homotopic to itself by the identity homotopy $1_{\overline{f} } : [0,1]\times D^2 \to X$, defined as $1_{\overline{f} }(x,-)= \overline{f} $ for all $x\in D^2$. We thus have homotopies
+\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+	S^1 \ar[bend left, " \iota  "{name=i}, r] \ar[bend right, " x_0 "'{name=x0}, r]  & D^2 \ar[bend left, " \overline{f}  "{name=f1}, r] \ar[bend right, " \overline{f}  "'{name=f2}, r]  & X
+	\arrow[Rightarrow, from=i, to=x0, shorten=5px]\arrow[Rightarrow, from=f1, to=f2, shorten=5px]
+\end{tikzcd}\]
+Consider the following lemma.
+
+\begin{lemma}\label{lma:2}
+	Homotopies $\Phi_1 : f_1 \Rightarrow g_1$ and $\Phi _2 : f_2 \Rightarrow g_2$ can be composed horizontally; that is, if $g_1 \sim f_1$ and $g_2\sim f_2$ for $\sim$ the homotopy relation, then $g_2\circ g_1\sim f_2\circ f_1$.
+\end{lemma}
+\begin{proof}
+	Let
+	\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	X\ar[" f_1 ", r]  & Y\ar[" g_1 ", r]  & Z, \\
+	X\ar[" f_2 "', r]  & Y\ar[" g_2 "', r]  & Z
+	\end{tikzcd}\]
+	be morphisms, and let $\Phi _1 : [0,1]\times X \to Y$ and $\Phi _2 : [0,1]\times Y \to Z$ be homotopies $f_1 \Rightarrow g_1$ and $f_2 \Rightarrow g_2$, respectively. Define the horizontal composite $\Phi _2 \cdot \Phi _1 : [0,1]\times X \to Z$ as
+	\[
+		(\Phi _2 \cdot \Phi _1)(x,-)=\Phi _2(x,\Phi _1(x,-))
+	.\]
+	To show that this is a homotopy $f_2\circ f_1 \Rightarrow g_2\circ g_1$, first note that
+	\[
+		\Phi _2(0,\Phi _1(0,-))=\Phi _2(0,f_1(-))=f_2(f_1(-))=f_2\circ f_1,	
+	\]
+	by definition of $\Phi _1$ and $\Phi _2$. Similarly,
+	\[
+		\Phi _2(1,\Phi _1(1,-))=\Phi _2(1,g_1(-))=g_2\circ g_1
+	.\]
+	Finally, to show $\Phi _2\cdot \Phi _1$ is continuous, note that we can view $\Phi _2\cdot \Phi _1$ as the composition $\Phi _2 \circ (\pi \times \Phi _1)$, where $\pi $ is the natural projection $\left[ 0,1 \right] \times X\to [0,1]$, and $\pi \times \Phi _1$ is the map induced by the universal property of products
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & \left[ 0,1 \right] \times X \ar[" \pi  "', dl] \ar[" \Phi _1 ", dr] \ar[dashed, " \pi \times \Phi _1 ", d] &  \\
+	\left[ 0,1 \right]  & \left[ 0,1 \right] \times Y\ar[l] \ar[r]  & Y
+	\end{tikzcd}\]
+	Proof of this is immediate:
+	\[
+		(\Phi _2\circ (\pi \times \Phi _1))(x,-)=\Phi _2(x,\Phi _1(x,-))=\left( \Phi _2\cdot \Phi _1 \right) (x,-)
+	.\]
+	Since $\pi $ and $\Phi _1$ are continuous, so is $\pi \times \Phi _1$, and thus so is $\Phi _2\circ (\pi \times \Phi _1)=\Phi _2\cdot \Phi _1$. Therefore, horizontal composition of homotopies holds, and $f_2\circ f_1\sim g_2\circ g_1$.
+\end{proof}
+
+By lemma \ref{lma:2}, there is a homotopy $\overline{f} \circ \iota \Rightarrow \overline{f} \circ x_0$. Since the composition $\overline{f} \circ x_0$ is clearly still a constant map $x\mapsto \overline{f} (x_0)$, and since $\overline{f} \circ \iota $ is homotopic to $\overline{f} \circ x_0$, we have that $\overline{f} \circ \iota $ is null-homotopic. Since any loop $f$ is equal to such a composition $\overline{f} \circ \iota $ by assumption, we have that every loop $f$ is null-homotopic, and thus $\pi _1(X)\cong 0$.
+
+Now for the converse, let $\pi _1(X)\cong 0$, and let $f : S^1 \to X$ be continuous. Since $f$ can be viewed as a loop, it is necessarily null-homotopic $\Phi :f\Rightarrow x_0$ for $x_0$ the constant map $x\mapsto x_0$ with $x_0$ fixed.
+
+Let $(x_1,y_1)\sim (x_2,y_2)$ iff $x_1=x_2=1$ be a relation on $[0,1]\times S^1$, and note that since $\Phi (1,-)=x_0$, by the universal property of quotients it factors uniquely through the quotient:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\left[ 0,1 \right] \times S^1\ar[" \Phi  ", r]\ar[d]  & X \\
+\left[ 0,1 \right] \times S^1/\tildesim \ar[dashed, ur]  & 
+\end{tikzcd}\]
+For simplicity, define $A\coloneqq [0,1]\times S^1/\tildesim $. We claim that $A\cong D^2$. Note that every element of $A$ is of the form $(x,\cos \theta ,\sin \theta )$ for some $x\in [0,1]$ and $\theta \in [0,2\pi )$. Let $\psi : [0,1]\times S^1 \to D^2$ be the map
 \[
-	\pi_1(f)\circ \pi _1(g)[\phi ]=\pi _1(f)[g\circ \phi ]=[f\circ g\circ \phi ]=\pi _1(f\circ g)[\phi ]
+	(x,\cos \theta ,\sin \theta )\mapsto (1-x)(\cos \theta ,\sin \theta )
 .\]
-Therefore, $\pi _1$ preserves morphism composition.
+Since $\psi (1,x,y)=0$, this map identifies all points with $x=1$, it also factors through $A$ and induces a continuous map $\overline{\psi } : A \to D^2$ by mapping $[a]\mapsto \psi (a)$.
 
-[identity proof]
+Now we show that $\psi $ (not $\overline{\psi } $) is surjective. Given $r(\cos \theta ,\sin \theta )\in D^2$, we have that since $r\in [0,1]$, it can be viewed as $(1-x)$ for some $x\in [0,1]$. It is then manifestly surjective, as for every such $x$, there exists $(x,\cos \theta ,\sin \theta )\in [0,1]\times S^1$. Also note that the map is not injective. However, for any $(x,\cos \theta ,\sin \theta )\neq (y,\cos \phi ,\sin \phi )$, it can easily be shown that
+\[
+	(1-x)(\cos \theta ,\sin \theta )=(1-y)(\cos \phi ,\sin \phi )\implies x=y=1
+\]
+simply by our knowledge of $S^1$ and $D^2$. Therefore, $\psi (x,\cos \theta ,\sin \theta )=\psi (y,\cos \phi ,\sin \phi )$ if and only if $x=y=1$. The quotienting relation $\sim $ defining $A$ is thus equivalent to the relation $x\sim y$ iff $\psi (x)=\psi (y)$. The canonical factorization of $\psi $ is precisely it's factorization through $A$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left[ 0,1 \right] \times S^1\ar[" \psi  ", bend left, rrr] \ar[" \pi  "', two heads, r]  & A\ar[" \overline{\psi }  "', dashed, r]  & \im \psi \ar[equals, r] &D^2,
+\end{tikzcd}\]
+where the fact that $\im \psi = D^2$ follows from the surjectivity of $\psi $, and thus $\overline{\psi } $ is a bijection $A\to D^2$. Consider the following lemma.
+
+\begin{lemma}\label{lma:3}
+	Let $X$ be compact. Then the quotient $X/\sim $ is compact for any relation $\sim $.
+\end{lemma}
+\begin{proof}
+	Let $\left\{ U_{\alpha }  \right\}_{\alpha \in A} $ be an open cover of $X/\sim $. Since the quotient topology is defined such that the canonical projection $\pi : X \to X/\sim $ is continuous, we have that $\pi ^{-1} (U_\alpha )$ is open in $X$ for all $\alpha $, and thus
+	\[
+		\bigcup_{\alpha \in A} \pi ^{-1} (U)=X
+	\]
+	is an open cover. Since $X$ is compact, this admits a finite subcover
+	\[
+		\bigcup_{i=1} ^n \pi ^{-1} (U_i)=X,
+	\]
+	and since $\pi $ is manifestly surjective, we have
+	\[
+		X/\sim =\pi (X)=\pi \left( \bigcup_{i=1}^n \pi ^{-1} (U_i) \right) =\bigcup_{i=1}^n \pi (\pi ^{-1} (U_i))=\bigcup_{i=1}^n U_i
+	.\]
+	Therefore, $X/\sim $ is compact.
+\end{proof}
+
+By lemma \ref{lma:3}, $A$ is compact. Since $D^2$ is Hausdorff, we have that $\overline{\psi }$ is a continuous bijection from a compact space to a Hausdorff space. By a result I proved in the last homework, $\overline{\psi } $ is thus a homeomorphism, and $A\cong D^2$.
+
+Returning to our discussion of the homotopy $\Phi$, we thus have that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\left[ 0,1 \right] \times S^1\ar[" \Phi  ", r] \ar[d]  & X \\
+D^2\ar[dashed," \varphi "',  ur]  & 
+\end{tikzcd}\]
+commutes. We claim that $\varphi $ is an extension of $f$ to $D^2$. For this to be true, we would need the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+D^2\ar[" \varphi  ", dr]  &  \\
+S^1\ar[" \iota  ", u] \ar[" f "', r]  & X
+\end{tikzcd}\]
+to commute. Note that $\Phi (0,-)=f$ since $\Phi $ is a homotopy $f\Rightarrow x_0$. Also note that due to the definition of the homeomorphism $\overline{\psi } $, points $(0,x)\in [0,1]\times S^1$ are identified with the boundary of $D^2$. In other words, the equivalence class of $(0,\cos \theta ,\sin \theta )$ corresponds to $(\cos \theta ,\sin \theta )$. We thus have that any point $x\in D^2$ with radius $1$ must have
+\[
+	\varphi (x)=\Phi (0,[x])=\Phi (0,x)=f(x)
+.\]
+Since $\iota (x)$ has radius 1 for any $x\in S^1$, we have
+\[
+	(\varphi \circ \iota )(x)=f(x),
+\]
+and thus $\varphi \circ \iota =f$. Therefore, the diagram commutes, and the statement is proven.\hfill$\blacksquare$
+\section*{Problem 2}
+\begin{notation}
+In this problem, $\bullet$ will denote loop concatenation, $\circ $ will denote function composition, and juxtaposition of functions will denote pointwise group multiplication. In general, $1_X$ denotes an identity morphism on $X$, and $e_G$ denotes the identity of a group $G$.
+\end{notation}
+
+
+Let $G$ be a path connected topological group, and since $\pi _1$ is invariant under choice of base point for path connected spaces, we can choose $\pi _1(G)$ to denote $\pi _1(G,e_G)$ without loss of generality.
+
+Let $\alpha ,\beta $ be loops based at $e_G$. We will first show $\alpha \beta $ is a loop. Let $\Delta : [0,1] \to [0,1]\times [0,1]$ be the map $x\mapsto (x,x)$, and let $\mu : G\times G \to G$ be group multiplication. We are given that $\mu $ is continuous, and obviously $\Delta =1_{\left[ 0,1 \right] } \times 1_{\left[ 0,1 \right] } $, so $\Delta $ is also continuous. The identity function $1_G$ is clearly continuous, as it is the identity morphism in both $\mathbf{Top} $ and $\mathbf{Grp} $, and thus we have that $\alpha \times 1_{\left[ 0,1 \right] } $ and $1_{G} \times \beta $ are continuous. Therefore, we can represent the function $\alpha \beta $ as the composition of continuous functions (where $1$ is a shorthand for the relevant identity)
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\left[ 0,1 \right] \ar[" \Delta  ", r]\ar[bend left, " \alpha \beta  ", rrrr]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" \alpha \times 1 ", r]  & G \times \left[ 0,1 \right] \ar[" 1\times \beta  ", r]  & G\times G\ar[" \mu  ", r]  & G,
+\end{tikzcd}\]
+and thus $\alpha \beta : [0,1] \to G$ is continuous.
+
+Next, note that since $\alpha ,\beta $ are both loops based at $e_G$, we have that
+\[
+	\alpha(0)\beta (0)=e_G^2=e_G,\qquad \alpha (1)\beta (1)=e_G^2=e_G
+\]
+Therefore, $\alpha \beta $ is also a loop based at $e_G$.
+
+Let $\alpha _1,\alpha _2,\beta _1,\beta _2$ be loops based at $e_G$. Note that for all $0\leq x\leq 1/2$, we have
+\[
+	(\alpha _1\bullet \beta _1)(x)\cdot (\alpha _2\bullet \beta _2)(x)=\alpha _1(2x)\cdot \beta _1(2x)
+.\]
+Similarly, for $1/2\leq x\leq 1$, we have
+\[
+	(\alpha _1\bullet \beta _1)(x)\cdot (\alpha _2\bullet \beta _2)(x)=\alpha _2(2x-1)\cdot \beta _2(2x-1)
+.\]
+Note also that for $0\leq x\leq 1/2$, we have
+\[
+	(\alpha _1\beta _1)\bullet (\alpha _2\beta _2)(2x)=(\alpha _1\beta _1)(x)=\alpha _1(2x)\beta _1(2x),
+\]
+and for $1/2\leq x\leq 1$, we have
+\[
+	(\alpha _1\beta _1)\bullet (\alpha _2\beta _2)(2x)=(\alpha _2\beta _2)(x)=\alpha _2(2x-1)\beta _2(2x-1),
+.\]
+Since $\alpha _i\beta _i$ is a loop for all $i$, we thus have
+\[
+	(\alpha _1\bullet\beta _1)(\alpha _2\bullet \beta _2)=(\alpha _1\beta _1)\bullet(\alpha _2\beta _2).
+\]
+In particular,
+\[
+	(\alpha \bullet e )(e \bullet \beta )=(\alpha e )\bullet (e \beta ),
+\]
+where $e$ in this case denotes the constant loop at $e_G$. We trivially have
+\[
+	(\alpha e)\bullet (e\beta )=\alpha \bullet \beta ,
+\]
+and we also trivially have that
+\[
+	\alpha \bullet e\sim \alpha ,\qquad e\bullet \beta \sim \beta 
+\]
+for $\sim $ homotopy, since we already have $e$ is an identity up to homotopy with respect to loop concatenation, simply by our investigtation of $\pi _1$.
+
+Next, note that since we have homotopies
+\[
+	\alpha \bullet e\Rightarrow \alpha ,\qquad e\bullet \beta \Rightarrow \beta ,
+\]
+and we have a similar decomposition (where once again $1$ is a shorthand for the relevant identity)
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left[ 0,1 \right] \ar[" \Delta  ", r] \ar[bend left, " \alpha\bullet \beta  ", rrrr]\ar[bend right, " (\alpha \bullet e)(e\bullet \beta ) "', rrrr]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" (\alpha \bullet e)\times 1 ", r]  & G\times \left[ 0,1 \right] \ar[" 1\times (\beta \bullet e) ", r]  & G\times G\ar[" \mu  ", r]  & G.
+\end{tikzcd}\]
+\begin{lemma}\label{lma:4}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & X\ar[" f_1 "', shift right, dl] \ar[" g_1 ", shift left, dl] \ar[" f_2 ", shift left, dr] \ar[" g_2 "', shift right, dr]  &  \\
+	Y &  & Z
+	\end{tikzcd}\]
+	be continuous maps, and let
+	\[
+		\Phi _1 : f_1 \Rightarrow g_1, \qquad \Phi _2 : f_2 \Rightarrow g_2
+	\]
+	be homotopies. Then there is an induced homotopy
+	\[
+		\Phi : f_1\times f_2 \Rightarrow g_1\times g_2
+	.\]
+\end{lemma}
+\begin{proof}
+	This is equivalent to showing there exists a homotopy $\Phi $ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  & X\ar[" f_2 "'{name=f2}, bend left, drr] \ar[" f_1 "'{name=f1}, bend right, dddddll] \ar[" f_1\times f_2 "{name=ff}, dashed, ddd] &  &  &  &  &  & X \ar[" g_2 "'{name=g2}, bend left, drr]\\
+	 &  &  &  & Z\ar[equals, rrrrrr]  &  &  &  &  &  & Z \\
+	 &  &  &  &  &  &  &  &  \\
+	 &  & Y\times Z\ar[equals, rrrrrr]\ar[" \pi _Y ", two heads, ddll]\ar[" \pi _Z "', two heads, uurr] &  &  &  &  &  & Y\times Z\ar[" \pi _Y ", two heads, ddll] \ar[" \pi _Z "', two heads, uurr] \\
+	 &  &  &  &  &  &  &  &  \\
+	Y\ar[equals, rrrrrr]  &  &  &  &  &  & Y &  & 
+	\arrow[from=f2, to=g2, Rightarrow, color=red, shorten=20pt, " \Phi_2 "']
+	\arrow[from=1-3, to=1-9, crossing over, equals]
+	\arrow[from=1-9, to=4-9, dashed, " g_1\times g_2 "{name=gg}, crossing over]
+	\arrow[from=ff, to=gg, " \Phi  ", Rightarrow, shorten=20pt, color=red, crossing over]
+	\arrow[from=1-9, to=6-7, " g_1 "'{name=g1}, bend right, crossing over]
+	\arrow[from=f1, to=g1, Rightarrow, color=red, crossing over, shorten=20pt, " \Phi_1 "]
+	\end{tikzcd}\]
+	commute up to the given homotopies. This diagram does not help the proof at all I just though it looked cool. Since the homotopies are morphisms
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]
+	 & \left[ 0,1 \right] \times X\ar[" \Phi _2 ", dr] \ar[" \Phi _1 "', dl]  &  \\
+	Y &  & Z
+	\end{tikzcd},\]
+	we can consider the product $\Phi _1\times \Phi _2: [0,1]\times X\times [0,1]\times X \to Y\times Z$, defined as
+	\[
+		(\Phi _1\times \Phi _2)(t_1,x,t_2,y)=(\Phi _1(t_1,x),\Phi _2(t_2,x))
+	.\]
+	Define $\Phi : [0,1]\times X\times X \to Y\times Z$ as the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
+		\left[ 0,1 \right] \times X\times X\ar[bend left, " \Phi  ", rrr]\ar[" \Delta\times 1_X\times 1_X ", r]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \times X\times X\ar[" \gamma  ", r]  & \left[ 0,1 \right] \times X\times \left[ 0,1 \right] \times X\ar[" \Phi _1\times \Phi _2 ", r] & Y\times Z,
+	\end{tikzcd}\]
+	where $\Delta : \left[ 0,1 \right]  \to \left[ 0,1 \right] \times \left[ 0,1 \right] $ is still the map $t\mapsto (t,t)$, and $\gamma$ is the commutator
+	\[
+		\gamma (t_1,t_2,x,y)=(t_1,x,t_2,y)
+	.\]
+	More precisely, $\gamma $ is the relevant component of the natural isomorphism $\_\times \_\Rightarrow \_\times \_$ which gives commutivity of products.
+
+	Since $\Phi _1\times \Phi _2$ is the product of continuous functions, it is continuous. Similarly, $\Delta \times 1_X\times 1_X$ is continuous. Finally, $\gamma $ is trivially shown to be continuous, so we have that $\Phi $ is a composition of continuous functions, and thus continuous. It suffices to show $\Phi $ determines a homotopy $f_1\times f_2\Rightarrow g_1\times g_2$. Note that we can explicitly describe $\Phi(t,x,y) $ as
+	\begin{align*}
+		\left( \left( \Phi _1\times \Phi _2 \right) \circ \gamma \circ \left( \Delta \times 1_X\times 1_X \right)  \right) (t,x,y)&=\left( \left( \Phi _1\times \Phi _2 \right) \circ \gamma  \right) (t,t,x,y)\\
+																	  &=\left( \Phi _1\times \Phi _2 \right) (t,x,t,y)\\
+																	  &=(\Phi _1(t,x),\Phi _2(t,y))
+	.\end{align*}
+	We thus have
+	\[
+		\Phi (0,x,y)=\left( \Phi _1(0,x),\Phi _2(0,y) \right) =(f_1(x),f_2(y))=(f_1\times f_2)(x,y)
+	.\]
+	Similarly,
+	\[
+		\Phi (1,x,y)=\left( \Phi _1(1,x),\Phi _2(1,y) \right) =\left( g_1(x),g_2(y) \right) =\left( g_1\times g_2 \right) (x,y)
+	.\]
+	Therefore, there exists a homotopy $\Phi : f_1\times f_2 \Rightarrow g_1\times g_2$.
+\end{proof}
+
+Recall that there exist homotopies
+\[
+	\alpha \bullet e\Rightarrow \alpha ,\qquad e\bullet \beta \Rightarrow \beta 
+.\]
+Since there exists an identity homotopy $1_{1_{[0,1]} }  : 1_{[0,1]}  \Rightarrow 1_{[0,1]} $, by lemma \ref{lma:4}, there exist homotopies
+\[
+	\Phi_\alpha  : (\alpha \bullet e)\times 1_{\left[ 0,1 \right] } \Rightarrow \alpha \times 1_{\left[ 0,1 \right] } ,\qquad \Phi _\beta : 1_{[0,1]} \times \left( e\bullet \beta  \right)\Rightarrow 1_{[0,1]} \times \beta 
+.\]
+Since there also exist identity homotopies $1_\Delta : \Delta  \Rightarrow \Delta $ and $1_\mu : \mu  \Rightarrow \mu $, it follows that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left[ 0,1 \right] \ar[" \alpha \bullet \beta  ", bend left, rrrr] \ar[equals, d] \ar[" \Delta  "{name=d1}, r]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" (\alpha \bullet e)\times 1 "{name=a1}, r] \ar[equals, d]  & G\times \left[ 0,1 \right] \ar[" 1\times (\beta \bullet e) "{name=b1}, r] \ar[equals, d]  & G\times G\ar[" \mu  "{name=m1}, r] \ar[equals, d]  & G\ar[equals, d] \\
+	\left[ 0,1 \right] \ar[" \Delta  "'{name=d2}, r] \ar[" \alpha \beta  "', bend right, rrrr]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" \alpha \times 1 "'{name=a2}, r]  & G\times \left[ 0,1 \right] \ar[" 1\times \beta  "'{name=b2}, r]  & G\times G\ar[" \mu  "'{name=m2}, r]  & G
+	\arrow[from=d1, to=d2, " 1_{\Delta } ", Rightarrow, shorten=10pt]
+	\arrow[from=a1, to=a2, " \Phi_\alpha  ", Rightarrow, shorten=10pt]
+	\arrow[from=b1, to=b2, " \Phi_\beta  ", Rightarrow, shorten=10pt]
+	\arrow[from=m1, to=m2, " 1_{\mu } ", Rightarrow, shorten=10pt]
+\end{tikzcd}\]
+commutes up to the given homotopies, where once again 1 is a shorthand for $1_{\left[ 0,1 \right] } $. By repeated applications of lemma \ref{lma:2}, there exists a homotopy
+\[
+	\alpha \bullet \beta \Rightarrow \alpha \beta 
+.\]
+Since homotopies are invertible, loop concatenation in $G$ is precisely group multiplication of loops in $G$, up to homotopy, and thus
+\[
+	[\alpha]\cdot [\beta ]=[\alpha \bullet \beta ]=[\alpha \beta ]
+\]
+in $\pi _1(G)$.
+
+This whole mess will be useful soon. For now, consider the map
+\[
+	H : [0,1]\times [0,1] \to G,\qquad (x,y)\mapsto \alpha (x)\beta (y)
+.\]
+Since multiplication is continuous, and since $\alpha ,\beta $ are continuous, using past results (aka easily generalized from a past homework) we have that their product is continuous, and thus $H$ is continuous. Note that since $\alpha ,\beta $ are based at $e$,
+\[
+	H(0,-)=H(1,-)=\beta ,\qquad H(-,0)=H(-,1)=\alpha 
+.\]
+By our knowledge of loops, we thus have
+\[
+	H(0,1-x)=H(1,1-x)=\beta ^{-1}(x) ,\qquad H(1-x,0)=H(1-x,1)=\alpha ^{-1} (x),
+\]
+where $\alpha ^{-1},\beta ^{-1} $ is an abuse of notation denoting an element of the inverse homotopy class under concatenation $[\alpha ]^{-1} $. We can thus describe the loop
+\[
+	\varphi \coloneqq \alpha \beta\alpha ^{-1} \beta ^{-1} =H(x,0)H(1,x)H(1-x,1)H(0,1-x)
+.\]
+Since group multiplication is homotopic to concatenation, we have that $\varphi $ is homotopic to the concatenation of each relevant loop described by $H$. We claim this is equivalent (up to homotopy, as loop concatenation is only associative up to homotopy) to the map $F : [0,1] \to G$ given by the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\left[ 0,1 \right] \ar[" d ", r] \ar[" F ", bend left, rr]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" H ", r]  & G,
+\end{tikzcd}\]
+where the map $d $ traces out the boundary:
+\[
+	d(x)=
+	\begin{cases}
+		(4x,0),&0\leq x\leq \frac{1}{4} \\
+		(1,4(x-1/4)),&\frac{1}{4} \leq x\leq \frac{1}{2} \\
+		(1-4(x-1/2),1),&\frac{1}{2} \leq x\leq \frac{3}{4} \\
+		(0,1-4(x-3/4)),&\frac{3}{4} \leq x\leq 1
+	\end{cases}
+.\]
+More intuitively, $d$ is the concatentation of the paths
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	(0,0)\ar[r]  & (1,0)\ar[r]  & (1,1)\ar[r]  & (0,1)\ar[r] & (0,0)
+\end{tikzcd}\]
+along the boundary of the unit square $\partial( \left[ 0,1 \right] \times \left[ 0,1 \right] )$. Seeing the equivalence of the concatenation of the various $H$-loops and the map $F$ amounts to an explicit description of the concatenation of the $H$-loops, and is exceedingly obvious once such a description is produced.
+
+Note that $d$ is clearly continuous, and although this makes $F$ continuous as it is then a composition of continuous maps, it is more important to note that the continuity of $d$ makes it a loop in $[0,1]\times [0,1]$. The loop is in fact null-homotopic, as can be seen by explicit construction of the homotopy
+\[
+	\Phi : [0,1]\times [0,1] \to [0,1]\times [0,1],
+\]
+\[
+	\Phi (x,y)=xd(y)
+.\]
+We then have
+\[
+	\Phi (0,-)=0d(-)=0,\qquad \Phi (1,-)=1d(-)=d
+.\]
+Moreover, multiplication of continuous maps in $\mathbb{R}^n $ is continuous (proven in a previous homework for $\mathbb{R} $ and the proof generalizes easily since $\mathbb{R} ^n$ forms a topological monoid), and thus continuous with respect to the subspace topology. Therefore, $\Phi $ is a homotopy, and $d$ is null-homotopic $\Phi : d \Rightarrow 0$; here $0$ denotes the constant map $x\mapsto (0,0)$.
+
+Note that $H(0,0)=\alpha (0)=e_G$, and thus $H\circ 0=e$. Since $H$ is homotopic to itself by the identity homotopy, we once again have a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left[ 0,1 \right] \ar[" d "{name=the}, r] \ar[" F ", bend left, rr] \ar[equals, d]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" H "{name=h1}, r] \ar[equals, d]  & G\ar[equals, d]  \\
+	\left[ 0,1 \right] \ar[" 0 "'{name=a}, r] \ar[" e "', bend right, rr]  & \left[ 0,1 \right] \times \left[ 0,1 \right] \ar[" H "'{name=h2}, r]  & G
+	\arrow[from=the, to=a, Rightarrow, " \Phi  ", shorten=10px]
+	\arrow[from=h1, to=h2, Rightarrow, " 1_H ", shorten=10px]
+\end{tikzcd}\]
+which commutes up to the given homotopies. By lemma \ref{lma:2}, there is an induced homotopy
+\[
+	\Psi : F \Rightarrow e
+.\]
+We thus have that $\varphi $ is homotopic to $F$, which is null-homotopic. Since homotopy is an equivalence relation, we have that $\varphi $ is null-homotopic, and thus
+\[
+	\alpha \beta \alpha ^{-1} \beta ^{-1} \sim e
+.\]
+Since $\alpha \beta \alpha ^{-1} \beta ^{-1} $ is homotopic to $\alpha \bullet \beta \bullet \alpha ^{-1} \bullet \beta ^{-1} $, we can pull it into $\pi _1(G)$ to observe that
+\[
+	[\alpha ][\beta ][\alpha ]^{-1} [\beta ]^{-1} =[e]=e_{\pi _1(G)} \implies [\alpha ][\beta ]=[\beta ][\alpha ]
+\]
+by our knowledge of group theory. Therefore, $\pi _1(G)$ is abelian.\hfill$\blacksquare$
+
+\section*{Problem 3}
+Given a morphism $f:(X,x_0)\to (Y,y_0)$, define the induced morphism $f_*\coloneqq \pi _1(f)$. let $\mathrm{id} _X : (X,x_0) \to (X,x_0)$ be the identity morphism, and note that due to our prior knowledge of the category $\mathbf{Grp} $, the identity morphism $\mathrm{id} _G$ on any group $G$ is the map $g\mapsto g$. It thus suffices to show $\mathrm{id}_{X*} $ is the map $\left[ \varphi  \right] \mapsto \left[ \varphi \right] $. By definition,
+\[
+	\mathrm{id}_{X*} [\varphi ]=\left[ \mathrm{id}_X \circ \varphi  \right] =\left[ \varphi  \right] ,
+\]
+since $\mathrm{id}_X$ is an identity morphism in $\mathbf{Top} _*$, and the homotopy class of $\varphi $ consists entirely of morphisms in $\mathbf{Top} _*$. Therefore, $\mathrm{id}_{X*} $ is the identity morphism $\mathrm{id}_{\pi _1(X,x_0)} $.
+
+Let
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X\ar[" f ", r]  & Y\ar[" g ", r]  & Z
+\end{tikzcd}\]
+be morphisms in $\mathbf{Top}$, for $X,Y,Z$ path-connected spaces (such that $\pi _1$ is well-defined up to isomorphism for any choice of base point). We have
+\[
+	(g_*\circ f_*)[\varphi ]=g_*[f\circ \varphi ]=[g\circ (f\circ \phi) ]=[(g\circ f)\circ \varphi ]=(g\circ f)_*[\varphi ]
+.\]
+Therefore, $\pi _1$ preserves morphism composition, and thus $\pi _1$ is a functor (if we restrict $\mathbf{Top} $ to path connected spaces; I'm pretty sure the proof for functorality $\mathbf{Top} _*\to \mathbf{Grp} $ is the same but that wasn't the problem sooooooo).
 
 Since $\pi _1$ is a functor, if $f : X \to Y$ is a homeomorphism, then it has a two-sided continuous inverse $f^{-1} : Y \to X$. We thus have
 \[
 	\pi_1(f)\circ \pi _1(f^{-1} )=\pi _1(f\circ f^{-1} )=\pi _1(\mathrm{id}_Y)=\mathrm{id}_{\pi _1(Y)} 
-.\]
-The same logic shows $\pi _1(f)$ and $\pi _1(f^{-1} )$ are inverses in $\mathbf{Grp} $. Therefore, $\pi _1(X)\cong \pi _1(Y)$. 
+,\]
+and similarly $\pi _1(f^{-1} )\circ \pi _1(f)=\mathrm{id}_{\pi _1(X)} $. Therefore, $\pi _1(X)\cong \pi _1(Y)$.\hfill$\blacksquare$
 \section*{Problem 4}
-The idea is going to be that $\pi_1(S^1)=\mathbb{Z} $, but more precisely every time the path fully winds around $S^n$, it  changes. Or at the very least if the map is not surjective, it cannot induce any maps (paths) that go all the way around, and thus any path is null-homotopic.
-
-Let $f : X \to S^n$ be continuous, but not surjective. Let $a\in \im f$. We want to show there exists a homotopy $\Phi : f \to  a$ (viewing as a 2-morphism in $\mathbf{Top} $). 
-\section{testing}
-I could do this the normal way, but where's the fun in that? Consider the category $\mathbf{Top} _*$ of pointed topological spaces, where morphisms are continuous maps preserving the base point. We need to show we can define the homotopic category $\mathbf{Toph}_*$ as the quotient category $\mathbf{Top}_*/\sim $, where $\sim $ is homtopy. That is, we need to show there exists horizontal composition of homotopy.
-
-I omit mention of the base points for now to avoid notational clutter. It is not difficult to show all definitions and arguments I make are invariant under choice of base points, so any mention of such for now is immaterial. Let $f_1,g_1: X \to Y$ and $f_2,g_2: Y \to Z$ be morphisms in $\mathbf{Top}_*$, and let $\Phi : f_1 \Rightarrow g_1$, $\Psi : f_2 \Rightarrow g_2$ be homotopies. We want to show there exists a homotopy $\Psi \Phi : f_2\circ f_1 \Rightarrow g_2\circ g_1$. Define $\Psi \Phi : [0,1]\times X \to Z$ as the map $\Psi \Phi (x,y)\coloneqq \Psi (x,\Phi (x,y))$. For now, it suffices to show this is a homotopy. Indeed,
-\[
-	\Psi (0,\Phi (0,-))=\Phi (0,-)\circ\Phi (0,-)=f_2\circ f_1,
-\]
-and similarly for $g$. Moreover, this is clearly continuous, as this can be viewed as the induced morphism by the universal property of products:
+We showed in class that $S^n\setminus \left\{ * \right\} \cong \mathbb{R} ^n$ by stereographic projection. Let $f : X \to S^n$ be a non-surjective continuous map. It follows that there exists $*\in S^n\setminus \im f$. Composing with the stereographic projection $s : S^n\setminus \left\{ * \right\}  \to \mathbb{R} ^n$, we have a continuous map
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
- & \left[ 0,1 \right] \times X\ar[" \Phi  ", dr] \ar[" \mathrm{id}  "', dl]\ar[dashed, d, "\zeta "]   &  \\
-\left[ 0,1 \right]  & \left[ 0,1 \right] \times Y\ar[l] \ar[r]\ar[d, " \Psi  ", ]   & Y\\
-		    &Z
+	F:&X\ar[" f|_{\im f} ", r]  & \im f\ar[" \iota  ", hook, r]  & S^n\setminus \left\{ * \right\} \ar[" s ", r]  & \mathbb{R} ^n,
 \end{tikzcd}\]
-We can equivalently view $\Psi \Phi $ as $\Psi \circ \zeta $. The fact that $\zeta $ is continuous follows from something I proved quite a few homeworks ago and have been using since, and commutivity of the diagram is an easy consequence of this. Since this is continuous, and satisfies $\Psi \Phi (0,-)=f_2\circ f_1$ and $\Psi \Phi (1,-)=g_2\circ g_1$, this is a homotopy $ f_2\circ f_1 \Rightarrow g_2\circ g_1$. Therefore, morphism composition respects homotopy equivalence, and we can define the quotient category $\mathbf{Toph}_*\coloneqq \mathbf{Top}_*/\sim $. That is, $\Hom_{\mathbf{Toph}_*}(X, Y) =\Hom_{\mathbf{Top} _*}(X, Y) /\sim $.
-
-Now we show that the assignment $\pi _1$ factors through $\mathbf{Toph}_*$ in such a way that the diagram
-\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-\mathbf{Top}_*\ar[" \pi _1 ", r]\ar[" \pi  "', d]  & \mathbf{Grp}  \\
-\mathbf{Toph}_* \ar[" \Hom(S^1\text{,} -)  "', ur] 
-\end{tikzcd}\]
-commutes up to isomorphism. It thus suffices to show $\pi $ and $\Hom(S^1, -) $ are functors, and that $\pi _1\cong \pi \circ \Hom(S^1, -) $, since composites of functors are functors. The functor $\pi $ is the natural projection onto the quotient group, and is defined by $X\mapsto X$ and $f\mapsto [f]_\sim $, for $X$ any topological space, $f$ any morphism, and $\sim $ the homotopy relation.
-
-To show $\pi $ is a functor, we first have to actually consider the definition of morphisms in the homotopic category. Let $f : X \to Y$ and $g : Y \to Z$ be morphisms in $\mathbf{Top}_*$. We define the composition $[g]_\sim \circ [f]_\sim $ in $\mathbf{Toph}_*$ as $[g\circ f]_\sim $. This is well-defined, since we already showed horizontal composition of homotopies is well-defined up to homotopy; that is, if $f\sim \phi $ and $g\sim \psi $ is given by the diagram
-\[\begin{tikzcd}[row sep = 5em, column sep = 7em]
-	X\ar[r, bend left, "f"{name=f1}]\ar[r, bend right, "\phi "'{name=g1}]&Y\ar[r, bend left, "g"{name=f2}]\ar[r, bend right, "\psi "'{name=g2}]&Z,
-	\arrow[from=f1, to=g1, shorten=5px, Rightarrow, "\mu "]\arrow[from=f2, to=g2, shorten=5px, Rightarrow, "\nu "]
-\end{tikzcd}\]
-then $g\circ f\sim \psi \circ \phi $ by horizontal composition:
-\[\begin{tikzcd}[row sep = 5em, column sep = 7em]
-	X\ar[r, bend left, "g\circ f"{name=f}]\ar[r, bend right, "\psi \circ \phi "'{name=g}]&Z.
-	\arrow[from=f, to=g, Rightarrow, shorten=5px, "\nu \circ \mu "]
-\end{tikzcd}\]
-It is then clear by definition of $\mathbf{Toph}_*$ that $\pi $ is functorial:
+where $\iota $ is the inclusion map. Note that we can define a homotopy
 \[
-	\pi (g\circ f)=[g\circ f]_\sim =[g]_\sim \circ [f]_\sim =\pi (g)\circ \pi (f),
-\]
-and for any $f : Z \to X$ and $g : X \to Z$,
-\[
-	[1_X]_\sim \circ [f]_\sim =[1_X\circ f]_\sim =[f]_\sim ,
-\]
-\[
-	[g]_\sim \circ [1_X]_\sim =[g\circ 1_X]_\sim =[g]_\sim 
-\]
-since $1_X$ is an identity in $\mathbf{Top} _*$.
-
-Next, we show that $\Hom_{\mathbf{Toph}_*}(S^1, -) : \mathbf{Toph} _* \to \mathbf{Grp} $ is a functor; that is, we show there is a group structure on $\Hom_{\mathbf{Toph} _*}((S^1,s), (X,x_0)) $ for all $(X,x_0)\in \mathbf{Toph} _*$, and that the induced morphisms are group homomorphisms. The structure in question is clear; for any two morphisms $[\phi _1]_\sim ,[\phi _2]_\sim  : (S^1,s) \to (X,x_0)$, we define the concatenation $[\phi _2]_\sim \cdot [\phi _1]_\sim $ the same as we did for loops. Since $S^1$ is parametrized by $(\cos \theta,\sin \theta )$, we can write $\phi _2,\phi _1$ as functions of $\theta $, and define
-\[
-	\phi _2\cdot \phi _1\coloneqq 
-	\begin{cases}
-		\phi _1(2\theta ),&0\leq \theta <\pi ,\\
-		\phi _2(2\theta ),&\pi \leq \theta <2\pi 
-	\end{cases}
+	\Phi : [0,1]\times X \to \mathbb{R} ,\qquad (t,x)\mapsto tF(x)
 .\]
-Both $\phi_i(2\theta )$-s are continuous by previous arguments, as they are a composition of $\phi_i$ and multiplication by 2.
-
-Concatenation is well-defined up to homotopy by the exact same proof as done in class, except substituting $S^1$ for $[0,1]$, and thus getting rid of the requirement that $\phi (0)=\phi (1)$, since continuity requires that in the limit as $x\to s$ from either direction, $\phi (x)\to \phi (s)$ from both directions. Moreover, $\Hom_{\mathbf{Toph} _*}((S^1,s), (X,x_0)) $ is then manifestly closed under concatenation. Concatenation is also associative up to homotopy, since associativity clearly amounts to a reparametarization of $S^1$, and as shown in class reparamaterizations are homotopic. The proof we did for $[0,1]$ generalizes immediately to $S^1$.
-
-Now we show the homotopy class of the constant map $x\mapsto x_0$ is the identity. 
-
-
-
-
-
-
-Finally, we show this is the same as $\pi _1$. First, we show that $\Hom_{\mathbf{Top}_*}((S^1,s), (X,x_0)) $ is precisely the set of loops in $X$ at $x_0$. Consider the map $\alpha : \operatorname{Loop} (X,x_0) \to \Hom((S^1,s), (X,x_0)) $ given by $\phi (x)\mapsto (\cos (2\pi \phi (x)),\sin (2\pi \phi (x))$. 
-
-
-the plan here is going to be to consider the quotient (sets) by $0\sim 1$, which allows us to inuqely identify loops with morphisms. we can attempt to define an inverse map and show it is well-defined
-
-
-\begin{itemize}
-	\item Show that every loop factors uniquely through it in such a way that the induced map is continuous;
-	\item Show that the map is invertible;
-	\item Conclude that the set of loops is isomorphic to the set of morphisms.
-\end{itemize}
-Finally, we show that this is indeed a group \emph{isomorphism}, concluding that the diagram commutes up to natural isomorphism.
-
-To conclude the proof, we can recover functorality of $\pi _1$ from the natural isomorphism.
-
-\begin{lemma}\label{lma:1}
-	Let $\mathcal{F} : \mathcal{C}  \to \mathcal{D} $ be a functor, and let $\mathcal{G} : \mathcal{C}  \to \mathcal{D} $ be an assignment $\Obj(\mathcal{C} ) \to \Obj(\mathcal{D} ) $ and $\Hom_{\mathcal{C} }(A, B) \to \Hom_{\mathcal{C} }(\mathcal{G} (A), \mathcal{G} (B)) $ for all $A,B\in \mathcal{C} $. Let $\eta : \mathcal{F}  \Rightarrow \mathcal{G} $ be a natural isomorphism, in the sense that for all $A,B\in \mathcal{C} $, and for all $f : A \to B$ in $\mathcal{C} $, the diagram
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\mathcal{F} (A)\ar[" \eta _A "', d] \ar[" \mathcal{F} (f) ", r]  & \mathcal{F} (B)\ar[" \eta _B ", d]  \\
-	\mathcal{G} (A)\ar[" \mathcal{G} (f) "', r]  & \mathcal{G} (B)
-	\end{tikzcd}\]
-	commutes, and each $\eta _A$ is an isomorphism. Then $\mathcal{G} $ is a functor.
-\end{lemma}
-\begin{proof}
-	First, let
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	X\ar[" f ", r]  & Y\ar[" g ", r]  & Z
-	\end{tikzcd}\]
-	be morphisms in $\mathcal{C} $. By assumption, the diagram
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\mathcal{F} (X)\ar[" \eta _X "', d] \ar[" \mathcal{F} (f) "', r] \ar[bend left, " \mathcal{F} (g\circ f) ", rr]  & \mathcal{F} (Y)\ar[" \eta _Y "', d] \ar[" \mathcal{F} (g) "', r]  & Z\ar[" \eta _Z "', d]  \\
-	\mathcal{G} (X)\ar[" \mathcal{G} (f) "', r]  & \mathcal{G} (Y)\ar[" \mathcal{G} (g) "', r]  & \mathcal{G} (Z)
-	\end{tikzcd}\]
-	commutes in $\mathcal{D} $. Additionally,
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\mathcal{F} (X)\ar[" \eta _X "', d] \ar[" \mathcal{F} (g\circ f) ", r]  & \mathcal{F} (Z)\ar[" \eta _Z "', d]  \\
-	\mathcal{G} (X)\ar[" \mathcal{G} (g\circ f) "', r]  & \mathcal{G} (Z)
-	\end{tikzcd}\]
-	commutes. We thus have
-	\[
-		\eta _Z\circ \mathcal{F} (g\circ f)\circ=\mathcal{G} (g\circ f)\circ \eta _X
-	.\]
-	By commutivity of the first diagram,
-	\[
-		\eta _Z\circ \mathcal{F} (g\circ f)=\eta _Z\circ \mathcal{F} (g)\circ \mathcal{F} (f)=\mathcal{G} (g)\circ \mathcal{G} (f)\circ \eta _X
-	.\]
-	Therefore,
-	\[
-		\mathcal{G} (g)\circ \mathcal{G} (f)\circ \eta _X=\mathcal{G} (g\circ f)\circ \eta _X
-	.\]
-	Since $\eta _X$ is an isomorphism, there exists an inverse morphism $\eta_X ^{-1} $ such that $\eta_X \circ \eta ^{-1} _X=1_{\mathcal{G} (X)} $, and thus
-	\[
-		\mathcal{G} (g\circ f)\circ 1_{\mathcal{G} (X)} =\mathcal{G} (g)\circ \mathcal{G} (f)\circ 1_{\mathcal{G} (X)} 
-	.\]
-	Since identity morphisms are identities with respect to composition, we have
-	\[
-		\mathcal{G} (g\circ f)=\mathcal{G} (g)\circ \mathcal{G} (f)
-	.\]
-	
-	To show identities are preserved, note that the diagram
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\mathcal{F} (X)\ar[" \eta _X "', d] \ar[" \mathcal{F} (1_X) ", r]  & \mathcal{F} (X)\ar[" \eta _X "', d]  \\
-	\mathcal{G} (X)\ar[" \mathcal{G} (1_X) "', r]  & \mathcal{G} (X)
-	\end{tikzcd}\]
-	commutes. Since $\mathcal{F} $ is a functor, $\mathcal{F} (1_X)=1_{\mathcal{F} (X)} $, and by commutivity we have
-	\[
-		\eta _X\circ 1_{\mathcal{F} (X)} =\mathcal{G} (1_X)\circ \eta _X
-	.\]
-	Since identity morphisms are identities with respect to composition, and since $\eta _X$ has an inverse, we have
-	\begin{align*}
-		&\qquad\;\;\eta _X=\mathcal{G} (1_X)\circ \eta _X\\
-		&\implies \eta _X\circ \eta ^{-1} _X=\mathcal{G} (1_X)\circ \eta _X \circ \eta ^{-1} _X\\
-		&\implies 1_{\mathcal{G} (X)} =\mathcal{G} (1_X)\circ 1_{\mathcal{G} (X)} \\
-		&\implies 1_{\mathcal{G} (X)} =\mathcal{G} (1_X)
-	.\end{align*}
-	Therefore, $\mathcal{G} $ is a functor.
-\end{proof}
-
+We clearly have $\Phi (0,-)=0$ and $\Phi (1,-)=F$. Moreover, since this is a product of continuous functions, it is indeed continuous by an immediate generalization of a proof given in a previous homework, and thus $\Phi $ is indeed a homotopy $0\Rightarrow F$. Thus, $F$ is null-homotopic. Note that since $s$ is a homeomorphism, it has an inverse $s ^{-1} $, and by definition of $F$, we have
+\[
+	s ^{-1} \circ F=\iota \circ f|_{\im f} 
+.\]
+Composing with the inclusion $\iota_S : S^n\setminus \left\{ * \right\} \hookrightarrow S^n$ gives us
+\[
+	\iota _S\circ \iota \circ f|_{\im f} =f
+.\]
+Also that
+\[
+	(\iota_S \circ s ^{-1} \circ 0)(x)=(\iota _S \circ s ^{-1} )(0)
+\]
+is clearly still a constant map. We will abuse notation slightly and call the composition map 0 as well. Since $\iota _S$ and $s ^{-1} $ are homotopic to themselves by the identity homotopies, we have the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\ar[" F "{name=F}, r] \ar[" f ", bend left, rrr] \ar[equals, d]  & \mathbb{R} ^n\ar[" s ^{-1}  "{name=s1}, r] \ar[equals, d]  & S^n\setminus \left\{ * \right\} \ar[" \iota _S "{name=i1}, hook, r] \ar[equals, d]  & S^n\ar[equals, d] \\
+	X\ar[" 0 "'{name=owo}, r] \ar[" 0 "', bend right, rrr]  & \mathbb{R} ^n\ar[" s ^{-1}  "'{name=s2}, r]  & S^n\setminus \left\{ * \right\} \ar[" \iota _S "'{name=i2}, r]  & S^n
+	\arrow[from=F, to=owo, Rightarrow, " \Phi  ", shorten=10px]
+	\arrow[from=s1, to=s2, Rightarrow, " 1_{s ^{-1} }  ", shorten=10px]
+	\arrow[from=i1, to=i2, Rightarrow, " 1_{\iota _S}  ", shorten=10px]
+\end{tikzcd}\]
+commutes up to the given homotopies. By repeated applications of lemma \ref{lma:2}, there is an induced homotopy
+\[
+	f\Rightarrow 0
+.\]
+Therefore, $f$ is null-homotopic.\hfill$\blacksquare$
 \end{document}
