@@ -1,0 +1,295 @@
+\chapter{Limits}
+
+\section{Creation of Limits}
+
+\begin{definition}[Complete]\label{dfn:5.1}
+	A \emph{complete} category (sometimes \emph{small-complete}) is a category $C$ for which all small limits exist, meaning for all small $J$ and all functors $F : J \to C$, $\varprojlim F$ exists.
+\end{definition}
+
+We will soon show some important categories, such as $\Set $, $\Grp $, and $\Ab$ are complete. We will illustrate the process with an example. Consider the poset category $\omega $ of finite ordinals. Note that any for any $F : \omega ^{\mathrm{op} }  \to \Set $, any limiting cone $\mu : \Delta (\varprojlim F) \Rightarrow F$ satisfies
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ &  & \varprojlim F \ar[" \mu _3 "', dl] \ar[" \mu _2 "', d] \ar[" \mu _1 ", dr] \ar[" \mu _0 ", drr]  &  &  \\
+\ldots \ar[" f_3 "', r]  & F(3)\ar[" f_2 "', r]  & F(2)\ar[" f_1"', r]  & F(1)\ar[" f_0 "', r]  & F(0)
+\end{tikzcd}\]
+In this case, we can take $\left\{ F(n) \right\}_{n=0}^\infty $ to simply be an ordered sequence of sets, with functions $f_n : F_{n+1}  \to F_n$. Note that if we removed the functions $f_n$, then the product $\prod_{n=0}^{\infty } F_n$ would be a limit of $F$. However, the projections $\pi _n$ need not satisfty $\pi_n=f_n \pi _{n+1} $; that is, the diagram need not commute.
+ 
+Note that elements of the product can be viewed as sequences $\left\{ x_n \right\}_{n=0} ^\infty $. For this portion of my notes, to make notation clear, denote by $\mathbf{x} $ the sequence $\left\{ x_n \right\}_{n=0} ^\infty $.
+
+To fix the commutivity issue, take $L$ to be the subset of the product such that for all $\mathbf{x} \in L$, we have $f_n(x_{n+1} )=x_{n} $. Then define functions $\mu _n : L \to F_n$ such that $\mu (\mathbf{x} )=x_n$; that is, $\mu _n = \pi _n|_V$. We then have for all $n$,
+\[
+	(f_n \circ \mu_{n+1} )(\mathbf{x} )=f_n(x_n)=x_{n-1} =\mu_{n-1} (\mathbf{x} )
+.\]
+Therefore, $\mu : \Delta (L) \Rightarrow F$ is a cone for $F$. To show universality, let $\tau : \Delta (M) \Rightarrow F$ be another cone for $F$, for each $\mathbf{m} \in M$ there exists a sequence $\left\{ \tau_n(\mathbf{m} ) \right\}_{n=0} ^\infty$ (denoted here by $\tau (\mathbf{m} )$) which satisfies $f_n(\tau_{n+1} (\mathbf{m} ))=\tau _n(\mathbf{m} )$; that is, the sequence $\tau (\mathbf{m} )$ matches. Thus, $\tau (\mathbf{m} )\in L$, and thus we have a function $\mathbf{m} \mapsto \tau (\mathbf{m} )$ from $M\to L$. Uniqueness is manifest, and commutivity of the diagram is trivial. Therefore, $L\cong \varprojlim F$.
+
+A sequence $\mathbf{x} $ that ``matches'' can also be viewed as a cone $\mathbf{x} : \Delta (*) \Rightarrow F$, since functions $\mathbf{x} _n$ amount to identifying elements $x_n\in F_n$, so commutivity of the cone is equivalent to ``matching''. We can then view $L$ as the set $\operatorname{Cone} (*,F)$ of all cones $*\Rightarrow F$. In fact, this construction is independent of the domain of $F$.
+
+\begin{theorem}[Completeness of $\Set$]\label{thm:5.1}
+	Let $J$ be a small category, and $F : J \to \Set $ any functor. Then $\varprojlim F$ exists, and moreover the set $\operatorname{Cone} (*,F)$ of cones $\sigma :*\Rightarrow F$ are a limit for $F$, with the limiting cone $\nu : \operatorname{Cone} (*,F) \Rightarrow F$ given by
+	\[
+		\nu _j : \operatorname{Cone} (*,F) \to F_j,\qquad \sigma \mapsto \sigma _j
+	.\]
+\end{theorem}
+\begin{proof}
+	Since $J$ is small, $\operatorname{Cone} (*,F)$ is a small set. Let $f : j \to k$ in $J$, and let $\sigma $ a cone $*\Rightarrow F$. Then since $\sigma $ is a cone, we have $\sigma _k = F(f)\sigma _j$. We thus have
+	\[
+		(F(f)\circ \nu _j)(\sigma )=F(f)(\sigma _j)=F(f)\circ \sigma _j=\sigma_k=\nu _k(\sigma )
+	.\]
+	Therefore, $\nu $ is a cone for $F$. To show universality, let $\mu : \Delta (X) \Rightarrow F$ be a cone. Then for each $x\in X$, there exists a map $x\mapsto \left\{ \mu_j(x) \right\}_{j\in J} $, and each $\mu _j(x)$ corresponds to a function $*\to \mu _j(x)$. The collection of all these functions forms a cone by the same logic as the above discussion, so we have that there exists a function $X\to \operatorname{Cone} (*,F)$ given by $x\mapsto \left\{ \mu (x) \right\} $. Uniqueness and commutivity of the diagram are trivial, concluding the proof.
+\end{proof}
+
+By univerality of the limit, we have a natural isomorphism $\operatorname{Cone} (X,F)\cong \Set (X,\operatorname{Cone} (*,F))$ given by $\mu \mapsto (x\mapsto \left\{ \mu (x) \right\} )$. Since a cone itself is a natural transformation $\Delta (*)\Rightarrow F$, this is equivalently written as
+\[
+	\Nat(\Delta (X),F)\cong \Set (X,\operatorname{Cone} (*,F))
+.\]
+This is thus an adjunction $\Delta \dashv \operatorname{Cone} (*,-)=\Nat(\Delta (*),-)$ to a representable functor. This is the most interesting part of the proof. This proves in fact that $\operatorname{Cone} (*,F)$ is a limit for $F$ using the universal arrow definition of limit.
+
+Limits in $\Grp $ and other categories are constructed similarly.
+
+\begin{theorem}\label{thm:5.2}
+	Let $U : \Set  \to \Grp $ be the forgetful functor, and let $H : J \to \Grp $ with $J$ small such that $HU$ has a limit $L$, and $\nu : L \Rightarrow UH$ the limiting cone. Then there is exactly one group structure on $L$ such that morphisms $\nu _j : L \to H(j)$ are group homomorphisms, and $L$ is a limit for $H$ with $\nu $ the limiting cone.
+\end{theorem}
+\begin{proof}
+	By theorem \ref{thm:5.1}, take $L=\operatorname{Cone} (*,UH)$.  Let $\sigma ,\tau \in \operatorname{Cone} (*,UH)$ be cones, and define the product $\sigma \tau $ of these cones to have components $(\sigma \tau )_j=\sigma _j\tau _j$ (the pointwise product in $H_j$, aka the product of the elements picked out by the arrows) and the inverse $(\sigma _j)^{-1} =\sigma _j^{-1} $ (the inverse in $H_j$). Viewing each function as an element of $H_j$, this defines the subgroup of $\prod_{j}H_j$ generated by $L$. Then $\nu $ simply becomes the restriction of the projections $\pi_j|_L$, and thus it satisfies the homomorphism condition. Since it's domain is also a group, each $\nu _j$ is a group homomorphism. Moreover, requiring that $\nu _j$ be a group homomorphism forces this definition of $(\sigma \tau )_j$, showing uniqueness.
+
+	For some reason the text fully spells out the obvious fact that any other cone is also a cone in $\Set $, so universality follows by universality under $U$ and functorality of $U$; equivalently, universality in $\Set $.
+\end{proof}
+
+We can thus construct limits in $\Grp $ from limits in $\Set $ in a unique way. This same argument handles many categories with forgetful functors to set, such as $\Ab$, $\Ring $, $\Rmod{R}$. This gives the following definition.
+
+\begin{definition}[Creates Limits]\label{dfn:5.2}
+	A functor $V : A \to X$ \emph{creates limits} for a functor $F : J \to A$ if
+	\begin{enumerate}
+		\item For every limiting cone $\tau : x \Rightarrow VF$ in $X$, there is exactly one pair $(a,\sigma )$ with $a\in A$, $V(a)=x$, and $\sigma : a \Rightarrow F$ a cone with $V(\sigma) =\tau $;
+		\item This cone $\sigma $ is a limiting cone in $A$.
+	\end{enumerate}
+\end{definition}
+
+Similarly, we may define functors to ``create products'', ``create finite limits'', ``create colimits'', etc. Note that a limit is only created in $A$ when the limit of the composite exists in $X$. Theorem \ref{thm:5.2} can thus be restated as the forgetful functor $U$ creates limits (for all small functors).
+
+\section{Limits by Products and Equalizers}
+
+There is a subtle yet fundamental fact hiding in this discussion of limits. Each limit $F : J \to \Set $ is given by the set $\operatorname{Cone} (*,F)\subseteq \prod_{j} F_j$. This can be broken into two steps:
+\begin{enumerate}
+	\item Construct the product $\prod_{j} F_j$;
+	\item Requiring that the elements be a cone is equivalent to requiring that for all $f : j \to k$ in $J$, $F(f)(x_j)=x_k$. This amounts to saying that $x\in \operatorname{eq} (F(f)\circ \pi _j,\pi _k)$ is an element of the equalizer.
+\end{enumerate}
+
+It may be prudent to recall the universal property of equalizers:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+E \ar[" \mathrm{eq}  ", r]  & \prod_{j} F_j \ar[" F(f)\circ \pi _j ", shift left, r] \ar[" \pi _k "', shift right, r]  & F_k \\
+Z\ar[dashed, u] \ar[ur]  &  & 
+\end{tikzcd}\]
+More precisely, we require that $x\in \mathrm{eq} (E)$. This construction in fact generalises to arbitrary categories, giving us limits via only products and equalizers.
+
+\begin{theorem}\label{thm:5.3}
+	Let $J$ and $C$ be categories. If $C$ has equalizers of all pairs of arrows, and all products indexed by $\Obj(J) $ and $\operatorname{Mor} (J)$, then $C$ has a limit for all functors $F : J \to C$.
+\end{theorem}
+\begin{proof}
+	By assumption, the products
+	\[
+		\prod_{i\in J} F_i,\qquad \prod_{\alpha \in \operatorname{Mor} (J)} F_{\operatorname{cod} \alpha } 
+	\]
+	exist. Since for each $u\in \operatorname{Mor} (J)$, we have $\operatorname{cod} u\in J$, there exists a projection $\pi_{\operatorname{cod} u} : \prod_{i\in J} F_i \to F_{\operatorname{cod} u} $, and thus for each entry in the second product, we have
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\prod_{i\in J} F_i }\ar[" \pi_{\operatorname{cod} u}  ", r]  & F_{\operatorname{cod} u}  \\
+\displaystyle{\prod_{\alpha \in \operatorname{Mor} \alpha } } \ar[" \pi_{\operatorname{cod} u}  "', ur] & 
+	\end{tikzcd}\]
+	By the universal property of products, there is a unique morphism $f : \prod F_i \to \prod F_{\operatorname{cod} \alpha } $ making each diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	F_{\operatorname{cod} u} &  \\
+	\displaystyle{\prod_{\alpha \in \operatorname{Mor} (J)} }\ar[" \pi_{\operatorname{cod} u}  ", u]  & \displaystyle{\prod_{i\in J} F_i} \ar[" \pi_{\operatorname{cod} u}  "', ul]  \ar[" f ", dashed, l]
+	\end{tikzcd}\]
+	commute. There also exists a composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\prod_{i\in J}F_i}\ar[" \pi_{\operatorname{dom} u}  ", r]   & F_{\operatorname{dom} u} \ar[" F(u) ", r]  & F_{\operatorname{cod} u} ,
+	\end{tikzcd}\]
+	and thus there exists a unique morphism $g : \prod F_i \to \prod F_{\operatorname{cod} u} $ making the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	F_{\operatorname{cod} u} & F_{\operatorname{dom} u} \ar[" F(u) ", l]  \\
+	\displaystyle{\prod_{\alpha \in \operatorname{Mor} (J)} }\ar[" \pi_{\operatorname{cod} u}  ", u]  & \displaystyle{\prod_{i\in J} F_i} \ar[" \pi_{\operatorname{dom} u}  "', u]  \ar[" g ", dashed, l]
+	\end{tikzcd}\]
+	commute. By assumption, there exists an equalizer
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\operatorname{Eq} (f,g)\ar[" e ", r]  & \displaystyle{\prod_{i\in J} F_i}\ar[" f ", shift left, r] \ar[" g "', shift right, r]  & \displaystyle{\prod_{\alpha \in \operatorname{Mor} (J)} F_{\operatorname{cod} \alpha } }.
+	\end{tikzcd}\]
+	Therefore, the diagram
+	\[\begin{tikzcd}[row sep = 4.5em, column sep = 4.5em]
+	F_{\operatorname{cod} u}  & &  \\
+	\displaystyle{\prod_{\alpha \in \operatorname{Mor} (J)} F_{\operatorname{cod} \alpha } }\ar[" \pi_{\operatorname{cod} u}  ", u] \ar[" \pi_{\operatorname{cod} u}  "', d]  & \displaystyle{\prod_{i\in J} F_i}\ar[" \pi_{\operatorname{cod} u}  "', ul] \ar[" \pi _{\operatorname{dom} u}  ", d] \ar[" f "', shift right, l] \ar[" g ", shift left, l] & \operatorname{Eq} (f,g)\ar[" e "', l]  \\
+	F_{\operatorname{cod} u}  & F_{\operatorname{dom} u} \ar[" F(u) ", l]  & 
+	\end{tikzcd}\]
+	commutes. The claim is that $\operatorname{Eq} (f,g)\cong \varprojlim F$ by the limiting cone $\nu : \mathrm{Eq} (f,g) \Rightarrow F$ given by $\nu_j=\pi_j e$. Let $\mu : M \Rightarrow F$ be a cone. Since $\mu $ has a map to each $F_i$, there exists a unique induced map
+	\[
+		\prod_{i\in J} \sigma_i : M \to \prod_{i\in J} F_i
+	.\]
+	Call this map $\mu $ for simplicity. Since $\mu_j = \pi _j \mu $, we have that $\mu $ factors through the product, and thus the diagram
+	\[\begin{tikzcd}[row sep = 4.5em, column sep = 4.5em]
+	F_{\operatorname{cod} u}  & &  \\
+	\displaystyle{\prod_{\alpha \in \operatorname{Mor} (J)} F_{\operatorname{cod} \alpha } }\ar[" \pi_{\operatorname{cod} u}  ", u] \ar[" \pi_{\operatorname{cod} u}  "', d]  & \displaystyle{\prod_{i\in J} F_i}\ar[" \pi_{\operatorname{cod} u}  "', ul] \ar[" \pi _{\operatorname{dom} u}  ", d] \ar[" f "', shift right, l] \ar[" g ", shift left, l] & M\ar[" \mu "', l]  \\
+	F_{\operatorname{cod} u}  & F_{\operatorname{dom} u} \ar[" F(u) ", l]  & 
+	\end{tikzcd}\]
+	commutes once again since $\mu $ is a cone. Since the equalizer is terminal with respect to this property, there exists a unique morphism $M\to \mathrm{Eq} (f,g)$ making the relevant diagram commute, and thus the equalizer together with $\nu $ is a limiting cone.
+\end{proof}
+
+Using the details from the proof, we can classify limits.
+
+\begin{theorem}\label{thm:5.4}
+	The limit of $F : J \to C$ is the equalizer of the morphisms $f,g : \prod_{i\in J} F_i \to \prod_{\alpha \in \operatorname{Mor} (J)} F_{\operatorname{cod} \alpha } $, where
+	\[
+		\pi_{\operatorname{cod} u}\circ  f=\pi_{\operatorname{cod} u} ,\qquad \pi_{\operatorname{cod} u} \circ g=F(u)\circ \pi _{\operatorname{dom} u} 
+	.\]
+	The limiting cone $\nu $ is $\nu _j=\pi _j e$, for $e : \operatorname{Eq} (f,g) \to \prod_{i} F_i$ the equalizing morphism.
+\end{theorem}
+
+\begin{corollary}\label{cor:5.1}
+	If $C$ has a terminal object, products of all pairs (finite products), and equalizers of all pairs, then $C$ has finite limits.
+\end{corollary}
+\begin{corollary}\label{cor:5.2}
+	If $C$ has small products and equalizers of all pairs, then $C$ is complete.
+\end{corollary}
+
+This second corollary gives another proof that $\Set $ is complete, and also proves the completeness of quite a few categories. Another important theorem classifies small complete categories.
+
+\begin{proposition}[Freyd]\label{prp:5.1}
+	Let $C$ be a small category. If $C$ is complete, then $C$ is a preorder for which upper bounds exist for all subsets of elements.
+\end{proposition}
+\begin{proof}
+	Suppose for contradiction that $C$ is not a preorder. Then there exist parallel arrows $f,g : a \to b$ with $f\neq g$. Form the product $b^J=\prod_{j\in J} b$ with all entries $b$. Since there are $2^J$ ways to map $a$ to each entry in the product, and each is unique, there are at least $2^J=\left| \mathcal{P} (J) \right| $ arrows from $a$ to $b^J$. If $\left| J \right| \geq \left| \operatorname{Mor} (C) \right| $, then there exists no bijection $\operatorname{Mor} (C)$ to $\mathcal{P} (J)$. Since $C$ is small, so is $\operatorname{Mor} (C)$, so take $J=\operatorname{Mor} (C)$, a contradiction since $\operatorname{Mor} (C)$ must contain at least $\left| \mathcal{P} (\operatorname{Mor} (C)) \right| $ arrows.
+\end{proof}
+
+\section{Limits with Parameters}
+
+Let $T : J\times P \to X$ be a bifunctor, where we think of the category $P$ as a parameter category, like we might parameterize a function over the unit interval. Suppose for each $p\in P$ that $T(-,p): J \to X$ has a limit. Then the object function $p\mapsto \varprojlim T(-,p)$ defines a functor. We will prove this by considering the functor category $X^P$, and the adjoint $S : J \to X^P$ of $T$ giving the isomorphism
+\[
+	\Cat (J\times P,X)\cong \Cat (J,X^P)
+.\]
+Recall for all $p\in P$ there is a functor $E_p : X^P \to X$ given by $F\mapsto F(p)$, with action on natural transformations given by $E_p(\sigma )=\sigma _p$.
+
+\begin{theorem}\label{thm:5.5}
+	If $S : J \to P^X$ is such that for all $p\in P$, the composite $E_pS$ has a limit $L_p$ with limiting cone $\tau _p : L_p \Rightarrow E_pS$, then there is a unique functor $L : P \to X$ with object function $p\mapsto L_p$ such that $p\mapsto \tau _p$ is a limiting cone
+	\[
+		\tau : \Delta (L) \Rightarrow S
+	.\]
+\end{theorem}
+\begin{proof}
+	Let $h : p \to q$ in $P$. We write $S_p$ to denote $E_pS$. Taking $\tau _p$ and $\tau _q$ to be the given cones, let $h : j \to k$ in $J$. We thus have the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  & L_p \ar[dashed, d] \ar[" \tau _pk ", ddddrr] \ar[" \tau _pj "', ddddll]  &  &  \\
+	 &  & L_q \ar[" \tau _qk ", ddr] \ar[" \tau _qj "', ddl]  &  &  \\
+	 &  &  &  &  \\
+	 & S_q(j)\ar[" S_q(u) "', rr]  &  & S_q(k) &  \\
+	S_p(j)\ar[" S_p(u) "', rrrr] \ar[" S(h)(j) "', ur]  &  &  &  & S_p(k)\ar[" S(h)(k) ", ul] 
+	\end{tikzcd}\]
+	The diagram commutes by functorality and by cone-ness. The proof from here is obvious.
+\end{proof}
+
+The conclusion can be restated as
+\[
+	E_p\left( \varprojlim S \right) =\varprojlim \left( E_pS \right) 
+.\]
+This means in functor categories, limits may be calculated pointwise.
+
+\begin{corollary}\label{cor:5.3}
+	If $X$ is complete, then so is every functor category $\Fun(-,X)$.
+\end{corollary}
+Apparently we then have this.
+\begin{theorem}\label{thm:5.6}
+	Write $\left| P \right| $ for the discrete category on $P$. Then the inclusion functor $i : \left| P \right|  \to P$ induces the functor $i^* : X^P \to X^{\left| P \right| } $ which creates limits.
+\end{theorem}
+
+\section{Preservation of Limits}
+
+\begin{definition}[Continuous]\label{dfn:5.3}
+	A functor $H : C \to D$ is said to \emph{preserve the limits} of functors $F : J \to C$ if for all limiting cones $\nu : L \Rightarrow F$ yield by composition a limit cone $H\nu : H(L) \Rightarrow HF$. Note that composition must preserve both the limit and the limiting cone. A functor is called \emph{continuous} if it preserves all small limits.
+\end{definition}
+
+\begin{theorem}\label{thm:5.7}
+	Let $C$ be locally small. Then the hom-functors $C(c,-): C \to \Set $ preserve limits.
+\end{theorem}
+\begin{proof}
+	Let $F : J \to C$ a functor with limiting cone $\nu : \varprojlim F \Rightarrow F$. Applying $C(c,-)$ gives a cone $\nu _*$ by postcomposition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C(c,\varprojlim F)\ar["\nu_{*i}  ", r]  & C(c,F(i)) \\
+	X\ar[" k ", dashed, u] \ar[" \tau _i "', ur]  & 
+	\end{tikzcd}\]
+	in $\Set $, with $i\in J$.  For any cone $\tau : X \Rightarrow F$, each $x\in X$ gives a cone $\tau _i(x): c \to F_i$ in $C$, and by universality of $\nu $ the proof can be concluded easily from here.
+\end{proof}
+
+An alternative proof is as follows. Recall that $\operatorname{Cone} (X,-)\cong \Set (X,\operatorname{Cone} (*,-))$. This gives us
+\begin{align*}
+	\operatorname{Cone} (X,C(c,F(-)))&\cong \Set (X,\operatorname{Cone} (*,C(c,F(-))))\\
+					 &\cong \Set (X,\operatorname{Cone} (c,F))\\
+					 &\cong \Set (X,C(c,\varprojlim F))
+.\end{align*}
+The adjunction then gives us
+\[
+	\varprojlim C(c,F(-))\cong C(c,\varprojlim F)
+.\]
+The theorem also gives us that the contravariant hom functor maps colimits to the corresponding limits in $\Set $. This gives us
+\[
+	C(\varinjlim F,c)\cong \varprojlim C(F(-),c)
+.\]
+
+Creation and preservation are related.
+
+\begin{theorem}\label{thm:5.8}
+	If $V : A \to X$ creates limits for $F : J \to A$ and the composite $VF : J \to X$ has a limit, then $V$ preserves the limit of $F$. In particular, if $V$ creates all small limits and $X$ is complete, then $A$ is complete and $V$ is continuous.
+\end{theorem}
+\begin{proof}
+	Let $\tau : a \Rightarrow F$ and $\sigma : x \Rightarrow VF$ be limiting cones. Since $V$ creates limits, there is a unique limiting cone $\rho : b \Rightarrow F$ in $X$ such that $V(\rho )=\sigma $ and $V(b)=x$. Since limits are unique up to isomorphism, there exists $\theta : b\cong a$ with $\tau \theta =\rho $ (vertical composition). Thus $V\theta : V(b)=x \cong V(a)$, and $V\tau \circ V\theta =V\rho =\sigma $ by functorality, so $V$ preserves the limit.
+\end{proof}
+
+\begin{definition}[Projective/Injective]\label{dfn:5.4}
+	An object $p$ in a category $C$ is \emph{projective} if every arrow $h : p \to c$ factors uniquely through an epi $g : b \to c$, meaning the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & p\ar[" h ", d] \ar[" h' "', dashed, dl]  \\
+	b \ar[" g "', r]  & c
+	\end{tikzcd}\]
+	commutes. Dually, an object is \emph{injective} if the opposite diagram commutes, with epi replaced by mono.
+\end{definition}
+
+These requirements are equivalent to the requirement that
+\begin{itemize}
+	\item $p$ is projective if and only if for all epi $g$, $\Hom(p, g) : \Hom(p, b) \to \Hom(p, c)$ is epi in $\Set $. That is, $\Hom(p, -) $ preserves epis.
+	\item $i$ is injective if and only if $\Hom(-, q) $ maps monics to epis.
+\end{itemize}
+Why have we defined this here? Absolutely no idea.
+
+\section{Adjoints on Limits}
+
+One fact that we somewhat glanced over, but shines new light on our earlier findings that there is an adjunction $\Delta \dashv \operatorname{Cone} (*,-)=\varprojlim$ in $\Set $. I want to show that $\Delta $ is left-adjoint to $\varprojlim $, provided that ($J$-ary) limits exist. Any natural transformation $\Delta (c)\Rightarrow F$ is by definition a cone for $F$, and each cone determines precisely one morphism $c\to \varprojlim F$. Conversely, every morphism $c\to \varprojlim F$ can factor through the limiting cone to produce a cone $\Delta (c)\Rightarrow F$, proving that
+\[
+	C^J(\Delta (c),F)\cong C(c,\varprojlim F)
+.\]
+Thus, $\Delta \dashv \varprojlim $ in arbitrary categories. This fact is used in an alternative proof of the following theorem. I present neither proof, since I have done the proof before and know how to do it, and also since one of the proofs uses music symbols that I have no idea how to typset. Nevertheless, the following is a fundamental result, and I present the dual as well to highlight this fact.
+
+\begin{theorem}\label{thm:5.9}
+	If a functor $G : A \to X$ is a right-adjoint functor, then it preserves limits. Dually, if $F : X \to A$ is a left-adjoint functor, it preserves all colimits.
+\end{theorem}
+
+\section{Freyd's Adjoint Functor Theorem}
+
+\begin{theorem}[Existence of Initial Object]\label{thm:5.10}
+	Let $D$ be a complete locally small category. Then $D$ has an initial object if and only if there exists a collection $\left\{ k_i \right\}_{i\in I} \subseteq D$ of objects (for $I$ a small set) such that for all $d\in D$ there exists an $i\in I$ and an arrow $k_i\to d$.
+\end{theorem}
+\begin{proof}
+	If there exists an initial object $1$, then the singleton $\left\{ 1 \right\} $ satisfies this property.
+
+	Conversely, since $D$ is complete, there exists $w\coloneqq \prod_{i} k_i$. By composing the existing morphisms with projections, for all $d\in D$ there exists a morphism $w\to d$. By assumption, $D(w,w)$ is small and $D$ is complete, so we can construct the equalizer $e : v \to w$ of the entire set $D(w,w)$. We thus have for all $d\in D$, a morphism $v\to d$.
+
+	Suppose $f,g : v \to d$. Let $e_1 : u \to v$ be the equalizer of $f,g$, forming the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	u\ar[" e_1 ", r] & v\ar[" e ", d] \ar[" f ", shift left, r] \ar[" g "', shift right, r]  & d \\
+	w\ar[" e\circ e_1\circ s "', r]  \ar[" s ", dashed, u] & w\ar[" \pi _i "', r]  & k_i \ar[u] 
+	\end{tikzcd}\]
+	The morphism $s$ is induced by commutivity of the right square and the universality of the equalizer. Since $e$ equalizes all endomorphisms of $w$, we have
+	\[
+		ee_1se=1_we=e1_v
+	.\]
+	Since $e$ is an equalizer, it is monic (easily shown), and thus $e_1se=1_v$. Thus, we have
+	\[
+		fe_1=ge_1 \implies fe_1se=ge_1se\implies f=g
+	.\]
+	Thus, the arrow $v\to d$ is unique.
+\end{proof}
+

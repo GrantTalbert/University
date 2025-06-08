@@ -297,3 +297,126 @@ An \emph{adjoint equivalence} of categories is an adjunction $(F,G,\eta ,\vareps
 \end{proof}
 
 An interesting result is that any full subcategory $A\subseteq C$ satisfying $\forall c\in C \exists a\in A$ such that $c\cong a$ is reflective. This is unsuprising; it amounts to simply saying any full subcategory containing a skeleton is equivalent to $C$.
+
+\section{Adjoints for Preorders}
+
+\begin{theorem}[Galois Connections are Adjoint Pairs]\label{thm:4.6}
+	Let $P,Q$ be preorders and $L : P \to Q^{\mathrm{op} } $, $R : L^{\mathrm{op} }  \to Q$ two order-preserving functions (functors). Then $L\dashv R$ if and only if for all $p\in P$ and $q\in Q$,
+	\[
+		L(p)\geq q \qquad \iff  \qquad p\leq R(q)
+	.\]
+	In this case, there is precisely one adjunction $\varphi $, and we have
+	\[
+		p\leq RL(p),\qquad LR(q)\geq q,\qquad L(p)\geq LRL(p)\geq L(p),
+	\]
+	and the same for $q$.
+\end{theorem}
+\begin{proof}
+	The statement that $L(q)\geq p \iff p\leq R(q)$ is equivalent to the existence of single morphisms
+	\[
+		q\to L(p),\qquad p\to R(q)
+	.\]
+	We thus have the isomorphism
+	\[
+		\varphi : Q^{\mathrm{op} } (L(p),q) \cong P(p,R(q))
+	.\]
+	Naturality of $\varphi $ is trivial. I don't care to show it but the unit is $p\leq RL(p)$ and the counit is the dual, concluding the proof.
+\end{proof}
+
+Pairs of order preserving functions $L,R$ satisfying this condition are known as \emph{Galois Connections} from $P$ to $Q$. The book discusses how there are galois connections in group actions, and thus Galois theory; and also in logic. I could not care less SKIP
+
+\section{Cartesian Closed Categories}
+
+Much of category theory involves categories with additional structure, such as \emph{closed} categories. We will here define a certain important type of those, and they will be defined in generality later.
+
+\begin{definition}[Cartesian Closed Category]\label{dfn:4.5}
+	A Cartesian Closed Category is a category $C$ with finite products, such that $\Delta : C \to C\times C$ has a specified right-adjoint $(a,b)\mapsto a\times b$ (that is, a choice for product), and any functor $C\to \mathbf{1} $ and $-\times b : C\to C$ has a right-adjoint $0\mapsto t$ and $c\mapsto c^b$, respectively, where $t$ is terminal and $c^b$ is notation for some object satisfying
+	\[
+		\Hom(a\times b, c) \cong \Hom(a, b^c) 
+	\]
+	by the adjunction condition.
+\end{definition}
+
+It will be shown shortly that  $(b,c)\mapsto c^b$ is the object function of a bifunctor, and thus specifying the adjunction amounts to specifying an arrow $e : c^b \times b \to c$ which is natural in $c$ and universal $-\times b$ to $c$, called the \emph{evaluation map}. This is since in the categories $\Set $ or $\Cat $ with $c^b$ given by $\Hom(b, c) $ or $\Fun(b,c)$ respectively, the evaluation map is simply the evaluation $f\mapsto f(x)$.
+
+\section{Transformation of Adjoints}
+
+Let $(F,G,\varphi  ,\eta ,\varepsilon )$ and $(F',G',\varphi ',\eta ',\varepsilon ') $ be adjunctions $X\rightharpoonup A$. A \emph{map} of adjunctions from the first to the second is a pair $(K,L)$ of functors $K : A \to A'$ and $L : X \to X'$ such that the diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+A\ar[" G ", r] \ar[" K "', d]  & X\ar[" F ", r] \ar[" L "', d]  & A\ar[" K ", d]  \\
+A'\ar[" G' "', r]  & X'\ar[" F' "', r]  & A'
+\end{tikzcd}\]
+commutes, and such that the diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+A(F(x),a)\ar[" \varphi  ", r] \ar[" K "', d]  & X(x,G(a))\ar[" L ", d]  \\
+A'(KF(x),K(a))\ar[equals, d]  & X'(L(x),LG(a))\ar[equals, d]  \\
+A'(F'L(x),K(a))\ar[" \varphi ' "', r]  & X'(L(x),G'K(a))
+\end{tikzcd}\]
+commutes. Here the arrows given by $K$ and $L$ are the morphism functions those functors induce.
+
+\begin{proposition}\label{prp:4.5}
+	Given adjunctions as above, and functors $K,L$ satisfying the first diagram, the second is equivalent to the condition that
+	\[
+		L\eta =\eta 'L\qquad \text{and} K\varepsilon =\varepsilon 'K
+	.\]
+\end{proposition}
+\begin{proof}
+	Let the third diagram commute. Set $a=F(x)$, and chase $1_a$ around the diagram:
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	1_a \ar[" \varphi  ", r] \ar[" K "', d]  & \eta_a \ar[" L ", d]  \\
+	1_{K(a)} \ar[equals, d]  & \ar[equals, d] L(\eta_a) \\
+	1_{F'L(x)} \ar[" \varphi ' "', r]  & \eta_{L(x)}' =
+	\end{tikzcd}\]
+	This should probably show the converse as well.
+\end{proof}
+
+\section{Composition of Adjoints}
+
+\begin{theorem}\label{thm:4.7}
+	Let $(F,G,\eta ,\varepsilon )$ be an adjunction from $X$ to $A$, and $(\overline{F} ,\overline{G} ,\overline{\eta } ,\overline{\varepsilon } )$ an adjunction from $A$ to $D$. Then there is an adjunction
+	\[
+		(\overline{F} F, G \overline{G} , G \overline{\eta } F\cdot \eta , \overline{\varepsilon } \cdot \overline{F} \varepsilon \overline{G} )
+	\]
+	from $X$ to $D$, with $\cdot $ vertical composition.
+\end{theorem}
+
+Using this composition, we define the category $\mathbf{Adj}$ with objects small categories, and morphisms adjunctions. We can also take $\mathbf{Adj} (X,A)$ to be a category using conjugate pairs, which I am too lazy to copy down.
+
+\section{Subsets and Characteristic Functions}
+
+The characteristic function $\mathbbm{1}_{S} $ of a subset $S\subseteq X$ is the function
+\[
+	\mathbbm{1}_{S}(x) = 0 \iff x\in S,\qquad \mathbbm{1}_{S} (x)=1 \iff x\in X\setminus S
+.\]
+This means that the portion of $X$ that maps into $\left\{ 0 \right\} $ represents the subset $S$, and there exists a squrae
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+S\ar[r] \ar[d]  & \left\{ 0 \right\} \ar[d]  \\
+X\ar[r]  & \left\{ 0,1 \right\} 
+\end{tikzcd}\]
+This classifies subobjects. We generalize this.
+
+\begin{definition}[Subobject Classifier]\label{dfn:4.6}
+	Let $C$ be a category with terminal object $1$. A \emph{subobject classifier} for $C$ is a monomorphism $t: 1\to \Omega $ such that every monomorphism $m : S \to X$ is a pullback of $t$ in a unique way; such that the square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	S\ar[r] \ar[tail, " m "', d]  & 1\ar[" t ", tail, d]  \\
+	X\ar[r]  & \Omega 
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+
+\section{Categories Like $\Set $}
+\begin{definition}[Elementary Topos]\label{dfn:4.7}
+	An elementary \textbf{topos} is a category $E$ for which
+	\begin{enumerate}
+		\item $E$ has all finite limits;
+		\item $E$ has a subobject classifier;
+		\item $E$ is cartesian closed.
+	\end{enumerate}
+\end{definition}
+
+Recall this implies that an elementary topos has all exponentials; all functors $-\times b$ have a right-adjoint $c\mapsto c^b$, meaning
+\[
+	\Hom_{E}(a\times b, c) \cong \Hom_{E}(a, c^b) 
+.\]
+The category $\Set $ is a topos, but more intetestingly for any $C$, the category $\Fun(C^{\mathrm{op} } ,\Set )$ is a topos. That is, the category of $C$-valued preasheaves on $\Set $ is a topos. Topoi are extremely important in topological fields.
