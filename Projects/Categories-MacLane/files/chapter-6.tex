@@ -1,0 +1,408 @@
+\chapter{Monads and Algebras}
+
+\section{Monads in a Category}
+
+Any endofunctor $T : X \to X$ has composites $T^2\coloneqq T\circ T : X \to X$, and similarly $T^3=T^2\circ T$. If $\mu : T^2 \Rightarrow T$ is a natural transformation with components $\mu_x : T^2(x) \to T(x)$, then there is a natural transformation $T\mu : T^3 \Rightarrow T^2$ with components $(T\mu)_x =T(\mu_x): T^3(x) \to T^2(x)$ by functorality. Similarly, $\mu T : T^3 \Rightarrow T^2$ is also natural with $(\mu T)_x=\mu_{T(x)}$.
+
+\begin{definition}[Monad]\label{dfn:6.1}
+	A \emph{monad} $T=(T,\eta,\mu)$ in a category $X$ is an endofunctor $T : X \to X$ and two natural transformations
+	\[
+		\eta : 1_X \Rightarrow T,\qquad \mu : T^2 \Rightarrow T
+	\]
+	such that the diagrams
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	T^3 \ar[" T\mu ", r] \ar[" \mu T "', d]  & T^2 \ar[" \mu ", d]  & 1_X T \ar[" \eta T ", r] \ar[dr, equals]  & T^2 \ar["\mu  ", d]  & T 1_X \ar[" T\eta "', l] \ar[equals, dl]  \\
+	T^2 \ar[" \mu "', r]  & T &  & T & 
+	\end{tikzcd}\]
+	commute.
+\end{definition}
+
+The definition of a monad is basically that of a monoid, but we have replaced sets with functors and $\times $ with $\circ $. We thus call $\eta$ the \emph{unit} of the monad, and $\mu$ the \emph{multiplication} of the monad; the first commutative diagram is then assocaitivity of $\mu$, and the second is the left- and right-unit laws.
+
+Every adjunction gives a monad. Let $(F,G,\eta,\varepsilon )$ be an adjunction from $X$ to $A$. We have that $GF$ is an endofunctor $X\to X$, the unit a natural transformation $\eta : 1_X \Rightarrow GF$, and the counit $\varepsilon : FG \Rightarrow 1_X$ yields a natural transformation $\mu = G\varepsilon F : GFGF \Rightarrow GF$. We thus have that the associative law becomes
+\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+GFGFGF \ar[" GFG\varepsilon F ", r] \ar[" G\varepsilon FGF "', d]  & GFGF\ar[" G\varepsilon F ", d]  \\
+GFGF\ar[" G\varepsilon F "', r]  & GF
+\end{tikzcd}\]
+This reduces by dropping the leading $G$ and the trailing $F$ to the diagram
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+FGFG \ar[" FG\varepsilon  ", r] \ar[" \varepsilon FG "', d]  & FG \ar[" \varepsilon  ", d]  \\
+FG\ar[" \varepsilon  "', r]  & 1_A,
+\end{tikzcd}\]
+which commutes by the interchange law for horizontal composition. The unit law becomes
+\[
+	G\varepsilon F\circ \eta GF = 1_{GF} ,
+\]
+and similarly for the other side. These are essentially the triangular identities, so this is indeed a mobnad. We call this the \emph{monad defined by the adjunction} given above. It may be useful to note here that $T\mu = 1_T \mu$.
+
+Dually, a comonad consists of a functor $L : A \to A$ and transformations $\varepsilon : L \Rightarrow 1_A$, $\delta : L \Rightarrow L^2$ satisfying the opposite diagrams. Each adjunction also determines a comonad $(FG,\varepsilon ,F\eta G)$ in $A$.
+
+A morphism of monads $f : (T,\eta,\mu) \to (T',\eta',\mu')$ is a natural transformation $f : T \Rightarrow T'$ that preserves the unity and multiplication, meaning $f\circ\eta = \eta'$, and $f\circ \mu = \mu' \circ ff$, where $\circ $ is vertical composition and juxtaposition is horizontal composition. This then gives the category $\mathbf{Mnd} (X)$ of monads on a category $X$. This notation may change when I figure out what notation the book will use.\
+
+\section{Algebras for a Monad}
+
+Indeed, the converse of the above discussion is true: every monad is induced by a suitable adjunction. There are in fact two known answers; the first constructs from a monad $T$ in $X$ a category $X^T$ of $T$-algebras, for which an adjunction $X\rightharpoonup X^T$ is then constructed to induce $T$ in $X$.
+
+\begin{definition}[$T$-Algebra]\label{dfn:6.2}
+	Let $T=(T,\eta,\mu)$ be a monad in $X$. A $T$-algebra is a pair $(x,h)$ with $x\in X$ and $h : T(x) \to x$, such that the diagrams
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	T^2(x)\ar[" T(h) ", r] \ar[" \mu_x "', d]  & T(x)\ar[" h ", d]  & x\ar[" \eta_x ", r] \ar[" 1_x "', dr]  & T(x)\ar[" h ", d]  \\
+	T(x)\ar[" h "', r]  & x &  & x
+	\end{tikzcd}\]
+	commute. We say $x$ is the underlying object and $h$ is the structure map of the $T$-algebra. A morphism $f : (x,h) \to (x',h')$ of $T$-algberas is an arrow $f : x \to x'$ in $X$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[" f "', d]  & T(x)\ar[" h "', l] \ar[" T(f) ", d]  \\
+	x' & T(x')\ar[" h' ", l] 
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+\begin{theorem}\label{thm:6.1}
+	Let $(T,\eta,\mu)$ be a monad in $X$. Then there is an adjunction $(F^T,G^T,\eta^T,\varepsilon ^T): X\rightharpoonup X^T$ given by
+	\[
+		G : (x,h)\mapsto x,\qquad F : x\mapsto (T(x),\mu_x)
+	\]
+	\[
+		f : (x,h) \to (x',h')\mapsto f : x \to x',\qquad f : x\to x' \mapsto f : (T(x),\mu_x) \to (T(x'),\mu_{x'} )
+	;\]
+	\[
+		\eta^T=\eta,\qquad \varepsilon ^T_{(x,h)} =h,
+	\]
+	where $\eta$ is once again given as the unit of the monad. Moreover, the monad $(T,\eta,\mu)$ is precisely the monad induced by this adjunction.
+\end{theorem}
+\begin{proof}
+	First, we show these maps are indeed functorial. Clearly, $G$ is functorial as it is simply the forgetful functor $X^T \to X$. To show $F$ is functorial, we first show it indeed defines a $T$-algebra. Taking $x=T(x)$ in definition \ref{dfn:6.2} gives the requirement that the diagrams
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	T^3(x)\ar[" T\mu_x ", r] \ar[" \mu_xT "', d]  & T^2(x))\ar[" \mu_x ", d]  & T(x)\ar[" \eta_xT ", r]  \ar[" 1_{T(x)}  "', dr]& T^2(x))\ar[" \mu_x ", d]  \\
+	T^2(x))\ar[" \mu_x "', r]  & T(x) &  & T(x)
+	\end{tikzcd}\]
+	commute, which follow from the fact that $T$ is a monad. Functorality then follows by naturality of $\eta$ and $\mu$.
+
+	Next, we show $F$ and $G$ indeed define an adjunction, as described. Note that $G^TF^T(x)=G^T(T(x),\mu_x)=T(x)$, and the same for arrows. Thus, $\eta : 1_X \Rightarrow G^TF^T$ is clearly natural. Conversely, $F^TG^T(x,h)=F^T(x)=(T(x),\mu_x)$. Commutivity of the first square in definition \ref{dfn:6.2} gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T(T(x))\ar[" \mu_x ", r] \ar[" T(h) "', d]  & T(x)\ar[" h ", d]  \\
+	T(x)\ar[" h "', r]  & x
+	\end{tikzcd}\]
+	and thus $h$ is a morphism of $T$-algebras $(T(x),\mu_x) \to (x,h)$. We thus have a natural transformation
+	\[
+		\varepsilon^T_{(x,h)} =h : F^TG^T(x,h) \to (x,h)
+	,\]
+	which is natural by definition of a morphism of $T$-algebras. It at this point suffices to prove the triangle identities
+	\[
+		G^T\varepsilon^T \circ \eta ^TG^T=1_{G^T} ,\qquad \varepsilon ^TF^T\circ F^T\eta ^T= 1_{F^T} 
+	.\]
+	Let $(x,h)$ be a $T$-algebra. We compute
+	\[
+		(G^T\varepsilon^T \circ \eta^T G^T)(x,h)=G^T(\varepsilon^T_{(x,h)}) \circ \eta^T_{G^T(x,h)} =G^T(h)\circ \eta^T_x=h\circ \eta_x
+	.\]
+	We also have
+	\[
+		(\varepsilon ^T F^T\circ F^T\eta^T)(x)=\varepsilon ^T_{F(x)} \circ F^T(\eta^T_x)=\varepsilon^T_{(T(x),\mu_x)} \circ F(\eta_x)=\mu_x \circ T(\eta_x)
+	.\]
+	Diagramattically, this amounts to commutivity of the diagrams
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	x\ar[" \eta_x ", r] \ar[equals, dr]  & T(x)\ar[" h ", d]  & T^2(x)\ar[" \mu_x "', d]  & T(x)\ar[" T\eta_x "', l] \ar[equals, dl]  \\
+	 & x & T(x) & 
+	\end{tikzcd}\]
+	The one on the left commutes by definition of a $T$-algebra (commutative triangle in dfn \ref{dfn:6.2}), and commutivity of the triangle on the right amounts to the right-unit law in definition \ref{dfn:6.1}. Thus, the triangle inequalities are satisfied, and $(F^T,G^T,\eta^T,\varepsilon ^T)$ is indeed an adjunction.
+
+	Finally, we show the induced monad is the monad $(T,\eta,\mu)$. Recall the induced monad takes the form $(G^TF^T,\eta^T,G^T\varepsilon ^TF^T)$. By definition, $\eta^T=\eta$, and moreover
+	\[
+		G^TF^T(x)=G^T(T(x),\mu_x)=T(x),\qquad G^TF^T(f)=G^T(T(f))=T(f)
+	.\]
+	Thus, $G^TF^T=T$. Finally, note that
+	\[
+		\left( G^T\varepsilon ^TF^T \right)_x = G^T(\varepsilon^T_{F^T(x)} )=G^T(\varepsilon^T_{(T(x),\mu_x)} )=G^T(\mu_x)=\mu_x
+	.\]
+	Therefore, $G^T\varepsilon ^TF^T=\mu$.
+\end{proof}
+
+Here's an example. Given a preorder $P$, a monad is a closure operation $T : P \to P$ whereby $x\leq T(x)$ for all $x\in P$. A $T$-algebra is $x\in P$ with a structure map $T(x)\to x$, which must be given by $T(x)\leq x$. Thus, $T$-algebras in a preorder are simply elements with $x\leq T(x)\leq x$; if $\leq $ is a partial order, we have $T(x)=x$.
+
+Let $G\in \Grp $. Then if $X$ is any set, there is a monad in $\Set $ given by
+\[
+	T(X) = G\times X,
+\]
+\[
+	\eta_x : X \to G\times X,\qquad x\mapsto (e_G,x).
+\]
+\[
+	\mu_x : G\times G\times X \to G\times X,\qquad (g_1,(g_2,x))\mapsto (g_1g_2,x)
+.\]
+A $T$-algebra then becomes a set $X$ together with a structure map $h:G\times X\to X$ satisfying
+\[
+	h(\eta_x(x))=h(e_G,x)=x,\qquad h(g_1g_2,x)=h(g_1,h(g_2,x))
+.\]
+Write $g\cdot x$ for $h(g,x)$. These then become
+\[
+	e_G\cdot x=x,\qquad (g_1g_2)\cdot x=g_1\cdot (g_2\cdot x)
+.\]
+In other words, $h$ is a group action $h : G \to \Aut_{\Set }(X) $.
+
+Finally, take $T=R\otimes _\mathbb{Z} -: \Ab \to \Ab$ for some fixed ring $R$. Define the unit $A\to T(A)=R\otimes A$ by $a\mapsto 1_R \otimes a$, and define multiplication $R\otimes (R\otimes A)\to R\otimes A$ by $r_1 \otimes (r_2 \otimes a)\mapsto r_1r_2\otimes a$. $T$-algebras then give the standard definition of a left $R$-module.
+
+\section{The Comparison with Algebras}
+
+Given an adjunction $X\rightharpoonup A$, we can now construct a monad $T$ in $X$, and the corresponding $T$-algebras $X^T$. We can also use this fact to learn about adjunctions, and the category $A$.
+
+\begin{theorem}[Comparison of Adjoints with Algebras]\label{thm:6.2}
+	Let $(F,G,\eta,\varepsilon )$ be an adjunction from $X$ to $A$, and let $T=(GF,\eta,G\varepsilon F)$ be the induced monad. Then there is a unique functor $K : A \to X^T$ with
+	\[
+		G^TK=G,\qquad KF=F^T
+	,\]
+	with notation as in theorem \ref{thm:6.1}.
+\end{theorem}
+\begin{proof}
+	The conclusion amounts to the commutivity of the diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\ar[" G "', dr] \ar[" K ", dashed, r]  & X^T \ar[" G^T ", d]  & X^T & A\ar[" K "', dashed, l]  \\
+	 & A & X \ar[" F^T ", u] \ar[" F "', ur]  & 
+	\end{tikzcd}\]
+	The claim is that $K(a)=(G(a),G\varepsilon _a)$ and $K(f)=G(f)$. Verifying this first requires the verification that $(G(a),G\varepsilon _a)$ is indeed a $T$-algebra. Note that $G\varepsilon _a : GFG(a) \to G(a)$ since $\varepsilon : FG \Rightarrow 1_A$, and note that $T=GF$. We thus require that the diagrams
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	GFGFG(a)\ar[" GFG\varepsilon _a ", r] \ar[" G\varepsilon _aF "', d]  & GFG(a)\ar[" G\varepsilon _a ", d]  & G(a)\ar[" \eta G(a) ", r] \ar[" 1_{G(a)}  "', dr]  & GFG(a)\ar[" G\varepsilon _a ", d]  \\
+	GFG(a)\ar[" G\varepsilon _a "', r]  & G(a) &  & G(a)
+	\end{tikzcd}\]
+	commute. The diagram on the right is simply the triangular identity
+	\[
+		\eta G \circ G\varepsilon =1_G,
+	\]
+	and the diagram on the left is easily shown to be $G\varepsilon \varepsilon $ on both sides.
+
+	Since $\varepsilon $ is natural, $K(f)=G(f)$ commutes with $G\varepsilon $, and thus is a morphism of $T$-algebras. Verifying the equalities and functorality amount to simple enough computations, do we focus on showing uniqueness.
+
+	The requirement that $G^TK=G$ forces the underlying object to be $G(a)$ for some $a$. This then immediately gives the definition $K(f)=G(f)$, and thus it remains only to show the structure map is forced. Since we now have two adjunctions with the same unit $(F,G,\eta,\varepsilon )$ and $(F^T,G^T,\eta^T,\varepsilon ^T)$, $K$ along with the identity functor $1_X$ define a map of adjunctions. It follows that $K\varepsilon =\varepsilon ^TK$, and thus $K\varepsilon =G\varepsilon $ on arrows. We have by definition of $\varepsilon ^T$ that
+	\[
+		\varepsilon ^TK(a)=\varepsilon ^T(G(a),h)=h
+	.\]
+	Thus $G\varepsilon _a=\varepsilon ^TK(a)=h$ implies that $h=G(\varepsilon _a)$, concluding the proof.
+\end{proof}
+
+\section{Words and Free Semigroups}
+
+For some reason, there's an entire section dedicated to investigating a special case of the comparison functor on semigroups. A semigroup is a set $S$ with an associative binary operation $\cdot $. The free semigroup $W(X)$ on $X$ is the set of all words on $X$ of \emph{positive integer length} (meaning no empty word), with multiplication given by juxtaposition. There is thus a free functor $F(X)=W(X)$, where
+\[
+	W(X)\coloneqq \coprod_{n=1}^\infty X^n
+.\]
+If $G : \mathbf{Smg}  \to \Set $ is the forgetful functor, then $\eta_X(x)=x$ and $\varepsilon_S(s_1, \ldots ,s_n)=s_1 \cdot \ldots \cdot s_n$ define an adjunction $(F,G,\eta,\varepsilon )$.
+
+
+The monad induced here is given by $W=(W,\eta,\mu)$ where
+\[
+	W(X)=\coprod_{n=1}^\infty X^n,
+\]
+and $\mu$ maps any $n$-tuple of strings to their ordered concatenation. $W$-algebras then have the form $(S,\nu_1, \ldots )$; that is, sets $S$ with a $n$-ary operation $\nu_n : S^n \to S$ for each $n\in\mathbb{Z}^+ $. The interesting part, however, is that the $n$-ary operations must take the form
+\[
+	\nu_1 = 1_S,\qquad \nu_2 : S^2 \to S,\qquad \nu_{n+1} =\nu_2(\nu_n \times 1_S) : S^{n+1}  \to S
+\]
+with $n\geq 2$, where $\nu_2$ is an associative binary operation. This clearly gives that the $W$-algebras are precisely the same semigroups, but with iterated multiplication $\nu_2$ viewed as an operation $\nu_n$. Similar constructions apply to more familiar monads.
+
+\section{Free Algberas for a Monad}
+
+Let $(F,G,\varphi) : X\rightharpoonup A$ be an adjunction, with $B\subseteq A$ a full subcategory such that $F(X)\subseteq B$. Then there is another adjunction $(F_B,G_B,\varphi_B) : X\rightharpoonup B$ by restricting the codomain of $F$ and the domain of $G$, without changing $\varphi$ beyond the obvious. This is seen by the fact that for any $x\in X$ and $b\in B$,
+\[
+	B(F_B(x),b)=A(F(x),b)\cong X(x,G(b))=X(x,G_B(b))
+.\]
+In particular, the induced monad by these adjunctions are \emph{precisely the same}. This means a monad can be induced by many adjunctions, with the ``smallest'' given by $F(X)=B$. Using our knowledge of free objects, we would expect that we can also do this construction in reverse; for any monad we should be able to construct $F(X)$ directly.
+
+\begin{theorem}[Kleisi Category for a Monad]\label{thm:6.3}
+	Let $(T,\eta,\mu)$ be a monad in $X$. For each $x\in X$, define the object $x_T$, and for each $f : x \to T(y)$, define the arrow $f_T : x_T \to y_T$. Then these objects and morphisms constitute a category $X_T$ with composition $f_T : x_T \to y_T$ and $g_T : y_T \to z_T$ given by
+	\[
+		g_T \circ f_T = (\mu_z \circ T(g)\circ f)_T,
+	\]
+	and there exist functors $F_T : X \to X_T$ and $G_T : X_T \to X$ given by
+	\[
+		F_T(f : x \to y)=(\eta_y \circ k)_T : x_T \to y_T,
+	\]
+	\[
+		G_T(f_T : x_T \to y_T)=\mu_y \circ T(f): T(x) \to T^2(y)\to T(y)
+	.\]
+	Then $\varphi_T : f \mapsto f_T$ gives the adjunction $(F_T,G_T,\varphi_T) : X \rightharpoonup X_T$, and the induced monad is precisely $T$.
+\end{theorem}
+
+Not proving this bullshit. Nor am I proving the next theorem, and the third follows by some details in the proof of the second. How did Kleisi come up with this wtf
+
+\begin{theorem}[Kleisi Comparison Theorem]\label{thm:6.4}
+	Let $(F,G,\eta,\varepsilon ) : X\rightharpoonup A$ be an adjunction and $T$ the induced monad in $X$. Then there is a unique functor $L : X_T \to A$ with $GL=G_T$ and $LF_T=F$.
+\end{theorem}
+\begin{theorem}\label{thm:6.5}
+	Given a monad $(T,\eta,\mu)$ in $X$, the category of adjunctions $(F,G,\eta,\nu)$ which induce the monad $T$, whereby morphsisms are maps of adjunctions that are the identity on $X$, has the Kleisi construction on $X^T$ as an initial object and $(F^T,G^T,\eta,\varepsilon ^T)$ a terminal object, where
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_T \ar[" L ", dashed, r]  & A\ar[" K ", dashed, r]  & X^T
+	\end{tikzcd}\]
+	for any $A$.
+\end{theorem}
+
+\section{Split Coequalizers}
+
+\begin{definition}[Fork/Absolute Coequalizer]\label{dfn:6.3}
+	Let $C$ be a category. A \emph{fork} in $C$ is a commutative diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\ar[" \partial _0 ", shift left, r] \ar[" \partial _1 "', shift right, r]  & b \ar[" e ", r]  & c.
+	\end{tikzcd}\]
+	Equivalently, a fork is a cone from $a\rightrightarrows b$ to $c$, with a coequalizer an initial fork. An \emph{absolute coequalizer} is a coequalizer $e$ which is preserved by all functors, meaning for any $F : C \to X$, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(a)\ar[" F(\partial _0) ", shift left, r] \ar[" F(\partial _1) "', shift right, r]  & F(b)\ar[" F(e) ", r]  & F(c)
+	\end{tikzcd}\]
+	is still a coequalizer.
+\end{definition}
+
+\begin{definition}[Split Fork]\label{dfn:6.4}
+	A \emph{split fork} in a category $C$ is a fork
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" \partial _0 ", shift left, r] \ar[" \partial _1 "', shift right, r]  & b \ar[" e ", r]  & c
+	\end{tikzcd}\]
+	together with two additional arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" s ", r]  & b \ar[" t ", r]  & a
+	\end{tikzcd}\]
+	such that
+	\[
+		e\circ s=1_c,\qquad \partial _0\circ t=1_b,\qquad \partial _1 t = s\circ e
+	.\]
+	We say that $s$ and $t$ \emph{split} the fork.
+\end{definition}
+
+These conditions on a split fork give us that $e$ is a split epi, and $s$ a right-inverse of $e$. A split fork is equivalently a commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+b \ar[" t ", r] \ar[" 1_b ", bend left, rr] \ar[" e "', d]  & a\ar[" \partial _0 ", r] \ar[" \partial _1 "', d]  & b \ar[" e ", d]  \\
+c\ar[" s "', r]  \ar[" 1_c "', bend right, rr] & b \ar[" e "', r]  & c.
+\end{tikzcd}\]
+Yet another characterization is taking $\partial _1$ and $e$ as arrows in the functor category $C^\mathbf{2} $, and $(\partial _0,e): \partial _1 \to e$ a morphism for which there exists a right-inverse $(t,s)\circ (\partial _0,e)=(1,1)$.
+
+\begin{lemma}\label{lma:6.1}
+	In any split fork (with notation as above), $e$ is the coequalizer of $\partial _0$ and $\partial _1$.
+\end{lemma}
+\begin{proof}
+	Let $f : b \to d$ equalize the parallel arrows. Then we have
+	\[
+		fse=f \partial _1t=f \partial _0 t=f1=f
+	.\]
+	Thus, $f$ factors through $e$ via $fs$. To show uniqueness, take $f=ke$ for $k : c \to d$, and thus $fs=kes=k$.
+\end{proof}
+
+By \emph{split coequalizer}, we now generally refer to the arrow $e$ of the split fork. Since a split fork is defined by equations involving only composites and identities, they are preserved by functors.
+
+\begin{corollary}\label{cor:6.1}
+	Every split fork $e$ is an absolute coequalizer.
+\end{corollary}
+
+Here's a fun example in $\Cat $. Let $C$ be a category, and let $\partial _0=\operatorname{dom} $, $\partial _1=\mathrm{cod} $. Let $e : C \to \mathbf{1} $. If $C$ has a terminal object $a_0$, then $s : \mathbf{1}  \to C$ given by $0\mapsto a_0$ is a right-inverse for $e$. This fork is then split by $s$ and the functor $t$ which maps $c\in C$ to the unique arrow $c\to a_0$.
+
+\section{Beck's Theorem}
+
+Beck's theorem characterizes the categories of $T$-algebras for which the right-adjunct (forgetful functor) creates suitable coequalizers. Recall that a functor $G : A \to X$ \emph{creates} coequalizers when coequalizers under $G$ in $X$ uniquely induce the corresonding coequalizer in $A$.
+
+\begin{theorem}[Beck]\label{thm:6.4}
+	Let $(F,G,\eta,\varepsilon ) : X\rightharpoonup A$ be an adjunction, $(T,\eta,\mu)$ the induced monad, $X^T$ the category of $T$-algebras, and $(F^T,G^T,\eta^T,\varepsilon ^T)$ the corresponding adjunction. Then the following are equivalent.
+	\begin{enumerate}
+		\item The comparison functor $K : A \to X^T$ is an isomorphism;
+		\item The functor $G : A \to X$ creates coequalizers for all parallel pairs $f,g$ in $A$ for which $G(f),G(a)$ have an absolute coequalizer in $X$;
+		\item The functor $G : A \to X$ creates coequalizers for all parallel pairs $f,g$ in $A$ for which $G(f),G(a)$ have a split coequalizer in $X$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	By corollary \ref{cor:6.1}, (2) implies (3). It suffices to show $(1\implies 2)$ and $(3\implies 1)$.
+
+	First, we show $(1\implies 2)$. Let $d_0,d_1 : (x,h) \to (y,k)$ be parallel morphisms for which in $X$ there exists an absolute coequalizer
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[" d_0 ", shift left, r] \ar[" d_1 "', shift right, r]  & y\ar[" e ", r]  & z.
+	\end{tikzcd}\]
+	Since $K : A \cong X^T$, it suffices to show there exists a suitable $T$-algbera structure for $z$ in $X^T$ for which $e$ forms a coequalizer for $d_0,d_1$, and that this structure is indeed unqiue in the relevant sense. Let $m : T(z) \to z$ be the structure map, and consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T(x) \ar[" T(d_0) ", shift left, r] \ar[" T(d_1) "', shift right, r] \ar[" h "', d]  & T(y)\ar[" T(e) ", r] \ar[" k "', d]  & T(z)\ar[" m ", dashed, d]  \\
+	x \ar[" d_0 ", shift left, r] \ar[" d_1 "', shift right, r]  & y\ar[" e "', r]  & z.
+	\end{tikzcd}\]
+	Both the $d_0$ and the $d_1$ squares on the left commute since $d_0$ and $d_1$ are morphisms of $T$-algebras (definition \ref{dfn:6.2}), both parallel pairs ar equalized by functorality of $T$ and the fact that $e$ is a coequalizer, and finally since $e$ is an absolute coequalizer, $T(e)$ is also a coequalizer (still in $X$), and thus there is a unique induced map $m$ making the diagram commute in $X$. Take this map to be the structure map, which is shown to induce a $T$-algebra structure by a short diagram chase. This $T$-algebra structure is indeed unique in the required sense, so we need only show $e$ is an equalizer in $X^T$. Let $f : (y,k) \to (w,n)$ be any other morphism of $T$-algebras that equalizes $d_0$ and $d_1$. Then $f : y \to w$ in $X$ also equalizes the maps, and thus factors uniquely through the coequalizer $e$. Hence, $e$ is also a coequalizer in $X^T$ (pending a short verification that the factorization map is a $T$-algebra morphism).
+
+	Now we show $(3\implies 1)$. The conditions that $(x,h)$ be a $T$-algebra are precisely that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T^2(x) \ar[" T(h) ", shift left, r] \ar[" \mu_x "', shift right, r]  & T(x) \ar[" h ", r]  & x
+	\end{tikzcd}\]
+	be a fork in $X$ split by
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" \eta_x ", r]  & T(x) \ar[" \eta_{T(x)}  ", r]  & T^2(x).
+	\end{tikzcd}\]
+	This is seen immediately by looking at the diagrams in definition \ref{dfn:6.2}. Additionally, for all $a\in A$, the adjunction $(F,G,\eta,\varepsilon )$ gives a fork
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	FGFG \ar[" \varepsilon _{FG(a)}  ", shift left, r] \ar[" FG(\varepsilon _a) "', shift right, r]  & FG(a)\ar[" \varepsilon _a ", r]  & a
+	\end{tikzcd}\]
+	by naturality (simple proof), which we call the \emph{canonical presentation of} $a$. By functorality, applying $G$ to the fork gives a split fork.
+
+	Take any other adjunction $(F',G',\eta',\varepsilon ') : X\rightharpoonup A$ which induces the same monad, and consider a comparison $M : A' \to A$ which satisfies
+	\[
+		MF'=F,\qquad GF=G'
+	.\]
+	Such a comparison is a morphism of adjunctions and thus satisfies $M\varepsilon '=\varepsilon M$. Applying $M$ to the canonical presentation of $a'$ gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+	MF'G'F'G'(a') \ar[" M\varepsilon'_{F'G'(a')}  ", shift left, r] \ar[" MF'G'(\varepsilon '_a) "', shift right, r]  & MF'G'(a') \ar[" M(\varepsilon' _a) ", r]  & M(a').
+	\end{tikzcd}\]
+	We have $FGM=MF'G'$ and $MF'=F$. Applying this gives
+	\[
+		MF'G'F'G'=FGMF'G'=FGFG'
+	.\]
+	Since $M\varepsilon '=\varepsilon M$, applying this gives
+	\[
+		M\varepsilon '_{F'G'(a')} =\varepsilon_{MF'G'(a')} =\varepsilon_{FG'(a')} 
+	.\]
+	We also have
+	\[
+		MF'G'(\varepsilon '_{a} )=FG'(\varepsilon '_a)
+	.\]
+	Finally, $MF'G'(a')=FG'(a')$, giving the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+	FGFG'(a') \ar[" \varepsilon_{FG'(a')}  ", shift left, r] \ar[" FG'(\varepsilon'_a) "', shift right, r]  & FG'(a') \ar[" M(\varepsilon '_a) ", r]  & M(a').
+	\end{tikzcd}\]
+	Here, the final arrow satisfies $M(\varepsilon '_a)=\varepsilon_{M(a)} $. Functorality by $G$ gives the fork
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+	GFGFG'(a') \ar[" G(\varepsilon_{FG'(a'))}  ", shift left, r] \ar[" GFG'(\varepsilon'_a) "', shift right, r]  & GFG'(a') \ar[" GM(\varepsilon '_a) ", r]  & GM(a').
+	\end{tikzcd}\]
+	Once again applying the fact that $GM=G'$ and $GF=T$, along with some rewriting, gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+	T^2G'(a') \ar[" (G\varepsilon F)_{G'(a'))}  ", shift left, r] \ar[" TG'(\varepsilon'_a) "', shift right, r]  & TG'(a') \ar[" G'(\varepsilon '_a) ", r]  & G'(a'),
+	\end{tikzcd}\]
+	a fork in $X$. Recall that forks in $X$ of the form
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T^2(x)\ar[" T(h) ", shift left, r] \ar[" \mu_x "', shift right, r]  & T(x)\ar[" h ", r]  & x
+	\end{tikzcd}\]
+	split via $\eta_x$ and $T\eta_x$. Note that this fork is a special case of the split fork via the assignments $x=G'(a')$ and $h=G'(\varepsilon '_a)$. Since it splits, it is a coequalizer, and by hypothesis $G$ creates coequalizers in this case. Thus, $M(\varepsilon_a)$ and $M(a')$ are uniquely determined, and thus $M$ is unique if it exists. An existence proof follows immediately by universality of the coequalizers created by $G$. This argument gives both comparisons $X^T\to A$ and $A\to X^T$, which are inverses.
+\end{proof}
+
+\begin{definition}[Reflection]\label{dfn:6.4}
+	A functor $G : A \to X$ reflects colimits of $T : J \to A$ when every cone $\lambda : T \Rightarrow \Delta(a)$ for which $G(\lambda) : GT \Rightarrow G\Delta(a)$ is colimiting in $X$ is then colimiting in $A$.
+\end{definition}
+
+Similarly, we may define reflection of limits, coequalizers, etc.
+
+\section{Algebras are $T$-Algebras}
+
+For semigroups, rings, monoids, we already know that the the comparison functor is an isomorphism. This result is in fact exceedingly general, and we generalize it here.
+
+\begin{theorem}[Algebras are $T$-algebras]\label{thm:6.7}
+	Let $\Omega$ be a set of operators and $E$ a set of identities on $\Omega$. Let $G : (\Omega,E)\text{-} \mathbf{Alg}  \to \Set $ the forgetful functor, and $T$ the resulting monad in $\Set $. Then $K : (\Omega,E)\text{-} \mathbf{Alg}  \to \Set ^T$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+	Let $f,g : A \to B$ morphisms of $(\Omega,E)$-algebras for which the underlying functions have absolute coequalizer $e$. Let $\omega\in\Omega$ and $n$-ary operator with actions $\omega_A,\omega_B$ on $A,B$, respectively. The diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A^n \ar[" f^n ", shift left, r] \ar[" g^n "', shift right, r]\ar[" \omega_A "', d] & B^n \ar[" e^n ", r]  \ar[" \omega_B ", d] & X^n \ar[" \omega_X ", dashed, d]  \\
+	A \ar[" f ", shift left, r] \ar[" g "', shift right, r]  & B \ar[" e "', r]  & X
+	\end{tikzcd}\]
+	commute since $f,g$ are $(\Omega,E)$-algebra morphisms, and since $e$ is an absolute coequalizer, meaning $e^n$ is also a coequalizer, inducing a map $\omega_X$. It then follows by commutivity of the diagram that $e$ is a morphism of $(\Omega,E)$-algebras.
+
+	Now we show $e$ is a coequalizer of $(\Omega,E)$-algebras. Let $h : B \to C$ any morphism of $(\Omega,E)$-algebras which coequalizes $f$ and $g$. Functorality of $G$ gives $hf=hg$ in $\Set $, so $h$ factors uniquely as $h=h'e$ by universality. We want to show the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X^n \ar[" h^{\prime n}  ", r] \ar[" \omega_X "', d]  & C^n \ar[" \omega_C ", d]  \\
+	X\ar[" h' "', r]  & C
+	\end{tikzcd}\]
+	commutes. Indeed,
+	\[
+		h'\omega_X e^n = h' e\omega_B = h\omega_B=\omega_Ch^n=\omega_C h^{\prime n} e^n
+	\]
+	since $h$ is a morphism of $(\Omega,E)$-algebras, and by commutivity of a previous diagram. Since $e^n$ is a coequalizer, it is epi, and we have $h'\omega_X=\omega_C h^{\prime n} $. Thus, $G$ creates coequalizers for absolute coequalizers, and by Beck's theorem, the comparison functor is an isomorphism.
+\end{proof}
+
+\section{Compact Hausdorff Spaces}
+
+\begin{theorem}\label{thm:6.8}
+	The standard forgetful functor $G : \mathbf{Cmpt} \, \mathbf{Haus}  \to \Set $ is monadic, meaning it has a left-adjoint, and the comparison functor $\mathbf{Cmpt} \,\mathbf{Haus} \to \Set^T$ is an isomorphism, for $T$ the monad induced by the adjunction.
+\end{theorem}
+

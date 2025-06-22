@@ -270,7 +270,9 @@ Thus, $\Delta \dashv \varprojlim $ in arbitrary categories. This fact is used in
 \section{Freyd's Adjoint Functor Theorem}
 
 \begin{theorem}[Existence of Initial Object]\label{thm:5.10}
-	Let $D$ be a complete locally small category. Then $D$ has an initial object if and only if there exists a collection $\left\{ k_i \right\}_{i\in I} \subseteq D$ of objects (for $I$ a small set) such that for all $d\in D$ there exists an $i\in I$ and an arrow $k_i\to d$.
+	Let $D$ be a complete locally small category. Then $D$ has an initial object if and only if the following property is satisfied.
+
+	Solution Set Condition: there exists a collection $\left\{ k_i \right\}_{i\in I} \subseteq D$ of objects (for $I$ a small set) such that for all $d\in D$ there exists an $i\in I$ and an arrow $k_i\to d$.
 \end{theorem}
 \begin{proof}
 	If there exists an initial object $1$, then the singleton $\left\{ 1 \right\} $ satisfies this property.
@@ -292,4 +294,165 @@ Thus, $\Delta \dashv \varprojlim $ in arbitrary categories. This fact is used in
 	.\]
 	Thus, the arrow $v\to d$ is unique.
 \end{proof}
+
+\begin{theorem}[Freyd Adjoint Functor Theorem]\label{thm:5.11}
+	Given a locally small, complete category $A$, a functor $G : A \to X$ has a left-adjoint if and only if it preserves all small limits and satisfies the following property.
+
+	Solution Set Condition: For each $x\in X$, there is a small set $I$ and a family of arrows $\left\{ f_i : x \to G(a_i) \right\}_{i\in I} $ such that any arrow $h : x \to G(a)$ can be written as a composite $h=G(t)\circ f_i$, for some $i\in I$ and some $t : a_i \to a$.
+\end{theorem}
+\begin{proof}
+	If $G$ has a left-adjoint $F$, then by theorem \ref{thm:5.9} it preserves all limits. Let $x\in X$. The unit $\eta$ of the adjunction gives $\eta_x : x \to GF(x)$ which is universal from $x$ to $G$, so for any $h : x \to G(a)$, there exists a unique $t : F(x) \to a$ such that $h=G(t)\circ \eta_x$ by definition of a universal arrow. Take $I=\left\{ \eta_x \right\} $.
+
+	Conversely, it suffices to show for all $x\in X$, there exists an arrow $x \to G(a)$ universal from $x$ to $G$, by pointwise construction of adjoints ($F(x)=a$, morphisms $x\to G(z)$ map to the unique morphisms $F(x)\to z$). These universal arrows would be initial in the comma category $(x\downarrow G)\eqqcolon D$, so it suffices to show theorem \ref{thm:5.10} applies. By assumption, since $A$ has small hom-sets, so must $D$ since hom-sets there are arrows in $A$ satisfying commutivity conditions. Recall by definition of the comma category that objects are pairs $(a,f)$ with $f : x \to G(a)$, and morphisms $(a,f)\to (a',f')$ are arrows $k : a \to a'$ in $A$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & x\ar[" f "', dl] \ar[" f' ", dr]  &  \\
+	G(a)\ar[" G(k) "', rr]  &  & G(a')
+	\end{tikzcd}\]
+	commutes. The solution set condition here states that for any object $(a,h)$, there exists some $i\in I$ and an arrow $t : (a_i,f_i)\to (a,h)$. Since $I$ is small, this is equivalent to the solution set condition from theorem \ref{thm:5.10}, so it suffices to show $(x\downarrow G)$ is complete. By corollary \ref{cor:5.2}, it suffices to show small products and equalizers of pairs exist. This is proven by using the fact that $G$ preserves small limits to apply the following lemma to the fact that $A$ is complete.
+\end{proof}
+
+\begin{lemma}\label{lma:5.1}
+	If $G : A \to X$ preserves small products (or equalizers), then for each $x\in X$ the projection $Q : (x\downarrow G) \to A$ given by $(s : x \to G(a))\mapsto a$ creates all small products (or equalizers).
+\end{lemma}
+\begin{proof}
+	Let $J$ be a small discrete category, and $\left\{ f_j : x \to G(a_j) \right\}_{j\in J} $ a family for which the product diagram
+	\[
+		\pi_j : \prod_{i\in J} a_i \to a_j
+	\]
+	exists in $A$. Since $G$ preserves products, the product diagram
+	\[
+		G(\pi_j): G\left( \prod_{i\in J} a_i \right)  \to G(a_j)
+	\]
+	exists in $X$. There thus exists an arrow $f : x \to \prod_{i} a_i$ such that $\pi_j f=f_j$. We thus have that $\pi_j : f \to f_j$ is a cone in $(x\downarrow G)$, and moreover the projection under $Q$ yields the product diagram $\prod_{i} a_i \to a_j$. It thus suffices to show $\pi_j : f \to f_j$ is a product diagram, which is easy enough. Thus, $Q$ creates small products.
+
+	To show $Q$ creaates equalizers, let $s,t : (a,f) \to (b,g)$ be morphisms in $(x\downarrow G)$, and let $e$ equalize them under $Q$, where they are viewed as arrows in $A$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	d\ar[" r ", dr] \ar[" r' "', dashed, d]  &  &  \\
+	\mathrm{Eq} \ar[" e "', r]  & a \ar[" s ", shift left, r] \ar[" t "', shift right, r]  & b \\
+	\end{tikzcd}\]
+	Since $G$ preserves equalizers, $G(e)$ is the equalizer of $G(s)$ and $G(t)$. But since $s,t : f \to g$, we have that $G(s)\circ f=g=G(t)\circ f$ by definition of the comma category, meaning $f$ equalizes $G(s)$ and $G(t)$. By universality of equalizer, we have that there exists a unique $h : x \to G(\mathrm{Eq} )$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[" f ", dr] \ar[" h "', dashed, d]\ar[" g ", bend left, drr]  &  &  \\
+	G(\mathrm{Eq}) \ar[" G(e) "', r]  & G(a) \ar[" G(s) ", shift left, r] \ar[" G(t) "', shift right, r]  & G(b) \\
+	\end{tikzcd}\]
+	commutes. We thus have that $e : h \to f$ in $(x\downarrow G)$, in such a way that $e$ is the unique arrow with $Q$-projection $e : \mathrm{Eq}  \to a$.
+
+	From here, it suffices to show $e$ is the equalizer of $s,t$ in $(x\downarrow G)$. We know it equalizes it, so we need only show it is universal. Let $k : x \to G(d)$ be an object in $(x\downarrow G)$, and let $r : k \to f$ equalize $s,t$. Then $r$ equalizes $s,t$ in $A$, and from here the proof is obvious.
+\end{proof}
+
+\begin{theorem}[The Representability Theorem]\label{thm:5.12}
+	Let $D$ be locally small and complete. A functor $K : D \to \Set $ is representable if and only if it preserves all small limits and satisfies the following property.
+
+	Solution Set Condition: There exists a (small) set $S\subseteq D$ such that for all $d\in D$ and $x\in K(d)$, there is an $s\in S$ and $y\in K(s)$ and an arrow $f : s \to d$ with $K(f)(y)=x$.
+\end{theorem}
+\begin{proof}
+	Recall that a representation of a functor $K$ is a universal arrow from the singleton to $K$, and hence an initial object in $(*\downarrow K)$. Since $K$ is assumed continuous, by lemma \ref{lma:5.1} the category $(*\downarrow K)$ is complete. The solution set condition is a reformulation of that in theorem \ref{thm:5.10}, and thus an initial object exists.
+\end{proof}
+
+The adjoint functor theorem gives us adjoints to forgetful functors for many types of algebras, without resorting to explicit constructions. Let $\Omega$ be a set of operators, hence a graded set for which each $\omega\in\Omega$ has associated a natural number $n$ called the \emph{arity} of $\omega$. Let $E$ be the set of ``identities'', such as the rules governing associativity or commutivity or unity. For many $(E,\Omega)$-algebra, the adjoint functor theorem yields a left-adjoint for the forgetful functor.
+
+\section{Subobjects and Generators}
+
+We define subobjects in general categories our best generalization of the inclusion functions. Let $A$ a category, and define the preorder $u\leq v$ on monics if and only if $u$ factors through $v$; i.e. $u=vh$ for some $h$. If $u\leq v$ and $v\leq u$, write $u\equiv v$. This forms an equivalence class, so for any $a\in A$ define the subobjects of $a$ as the set of equivalence classes of morphisms into $a$ under $\equiv $. This definition agrees with our general definitions in many categories, such as $\Ring $, $\Ab$, $\Grp $, and $\Rmod{R} $. However, it does not agree in all categories, such as $\Top $.
+
+\begin{lemma}\label{lma:5.2}
+	In any pullback
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	p\ar[" f' ", r] \ar[" g' "', d]  & t\ar[" g ", d]  \\
+	s\ar[" f "', r]  & a,
+	\end{tikzcd}\]
+	$f$ monic implies $f'$ monic, and the same for $g$.
+\end{lemma}
+\begin{proof}
+	Let $h,k : z \to p$ be parallel morphisms such that $f'h=f'k$. Then $gf'h=gf'k$, and by commutivity, $fg'h=fg'k$. If $f$ is monic, then $g'h=g'k$ and $f'h=f'k$. Since $p$ is a pullback, this induces equivalent product diagrams for $h$ and $k$, and thus $h=k$. Therefore, $f'$ is monic. The same logic shows the same is true for $g$ and $g'$.
+\end{proof}
+
+The set of all subjects is moreover partially ordered by $\leq $. If $u : s \to a$ and $v : t \to a$ and $a$ has pullbacks, then the pullback gives (as above) another monic $w : p \to a$ such that $w\leq u,v$. Intuitively this would be the \emph{intersection} of the subobjects, the \emph{greatest lower bound} of $u$ and $v$ under $p$.
+
+Dually, epis $r,s : a \to -$ are equivalent when $r=\theta s$ for some invertible $\theta$. We call equivalence classes of epis the \emph{quotient objects} of $a$, once again partially ordered by factoring $r\leq s$ if $r=r's$. This definition agrees with the normal definitions of quotients in categories where epis are surjective.
+
+\begin{definition}[Generating Set]\label{dfn:5.5}
+	A set $S\subseteq C$ in a category $C$ is said to \emph{generate} $C$ when for any parallel morphisms $h,h': c \to d$ with $h\neq h'$, there exists $s\in S$ and an arrow $f : s \to c$ with $hf\neq h'f$.
+
+	Dually, a set $Q\subseteq C$ is a \emph{cogenerating set} when for any pair $h\neq h': a \to b$, there is some $q\in Q$ and an arrow $g : b \to q$ such that $qh\neq qh'$. A single object is a (co)generator when it's singleton forms a (co)generating set.
+\end{definition}
+
+
+Given a functor $G : A \to X$, an arrow $f : x \to G(a)$ is said to \emph{span} $a$ when there is no proper monomorphism $s\to a$ in $A$ for which $f$ factors through $G(s)\to G(a)$.
+
+\begin{lemma}\label{lma:5.3}
+	In a category $A$, suppose that every set of subobjects of some $a\in A$ has a pullback. Then if $G : X \to A$ preserves these pullbacks, every arrow $h : x \to G(a)$ factors through an arrow $f : x \to G(b)$ which spans $b$.
+\end{lemma}
+\begin{proof}
+	Let $\left\{ u_j : s_j \to a \right\}_{j\in J} $ be the set of subobjects of $a$, such that the given $h$ factors as $h=G(u_j)\circ h_j$. Take the pullback $v : b \to a$ of the $u_j$. Since $G$ preserves pullbacks, it follows that there exists $f : x \to G(b)$, which spans $b$.
+\end{proof}
+
+\section{The Special Adjoint Functor Theorem}
+
+\begin{theorem}[Special Initial Object Theorem]\label{thm:5.13}
+	Let $D$ be complete, locally small, and have a cogenerating set $Q$. Then if for all $d\in D$, all subobjects of $d$ have intersections (pullbacks), then $D$ has an initial object.
+\end{theorem}
+\begin{proof}
+	Let $q_0\coloneqq \prod_{q\in Q} q$ be the product over $Q$, and take the intersection $r$ of all subobjects of $q_0$. For any $d\in D$, there is at most one morphism $d\to r$, otherwise their equalizer would give a proper monic to $r$.
+
+	To show $r$ initial, we must construct a unique arrow $r\to d$ for each $d$. Let $H$ be the set of arrows $h : d \to q\in Q$, and take the small product $\prod_{H} q$. Let $j : d \to \prod_{H} q$ be the arrow with components $h$ ($\pi_h \circ j=h$). Since $Q$ cogenerates, $j$ is monic, odl tje rest os witchcraft.
+\end{proof}
+
+\begin{lemma}\label{lma:5.4}
+	Let $G : A \to X$ preserve small limits and pullbacks of families of monics, and $x\in X$. An arrow $h : (f,a) \to (f',a)$ in the comma category $(x\downarrow G)$ is monic if and only if $h : a \to a'$ is monic in $A$.
+\end{lemma}
+\begin{proof}
+	Trivially, if $h : a \to a'$ is monic, then so is $h : f \to f'$. For the converse, consider the pullback of $h$ with $h$. Note that since $h$ is monic, for any $f,g : z \to x$, if $hf=gh$, then $f=g$. In other words, if the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	z\ar[" f ", r] \ar[" g "', d]  & a\ar[" h ", d]  \\
+	a\ar[" h "', r]  & a'
+	\end{tikzcd}\]
+	commutes, then we have $f=g$, and thus there is a unique morphism making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	z\ar[" f ", bend left, drr] \ar[" g "', bend right, ddr] \ar[" f=g ", dashed, dr] &  &  \\
+	 & a\ar[" 1_a ", r] \ar[" 1_a "', d]  & a\ar[" h ", d]  \\
+	 & a \ar[" h "', r] & a'
+	\end{tikzcd}\]
+	commute. Thus, monic is equivalent to the condition that identities are the pullback of a monic with itself. Recall that by lemma \ref{lma:5.1}, the projection $(x\downarrow G)\to A$ creates limits, and in particular creates these pullbacks. Therefore, the projection preserves these pullbacks as well.
+\end{proof}
+
+\begin{theorem}[The Special Adjoint Functor Theorem]\label{thm:5.14}
+	Let $A$ be complete, locally small, and have a small cogenerating set $Q$. Let every set of subobjects of any $a\in A$ have a pullback (intersection), and let $X$ be locally small. Then a functor $G : A \to X$ is right-adjoint if and only if $G$ preserves all small limits and all pullbacks of families of monics.
+\end{theorem}
+\begin{proof}
+	IF $G$ is right-adjoint, then it indeed preserves limits, and in particular pullbacks of monics. For the converse, it suffices to show once again that for all $x\in X$, there is an initial object in $(x\downarrow G)$. Since $X$ is locally small, the set $Q'$ of all objects $k : x \to G(q)$ with $q\in Q$ is small, and thus cogenerating in $(x\downarrow G)$ fairly obviously: given $s\neq t : (f,a) \to (f',a')$ in $(x\downarrow G)$, there is $q_0$ and an arrow $h: a\to q_0$ with $hs\neq ht$, and we can regard $h$ as an arrow $(f',a')\to (G(h)\circ f,q_0)$.
+
+	Since $A$ complete and $G$ continuous imply $(x\downarrow G)$ is complete by application of lemma \ref{lma:5.1} (projection generates limits), by theorem \ref{thm:5.13} it suffices to construct an intersection for any set of subobjects of any object. Let $J$ index subobjects $h_i : (f_i,a_i) \to (f,a)$ of $(f,a)$. By lemma \ref{lma:5.4}, each $h_i$ is also a monic $h_i : a_i \to a$ in $A$, and by hypothesis they have a pullback $h : b \to a$ in $A$ given by the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & a_i \ar[" h_i ", dr]  &  \\
+	b \ar[" s_i ", ur] \ar[" h "', rr]  &  & a
+	\end{tikzcd}\]
+	Since $G$ preserves pullbacks, $G(h): G(b) \to G(a)$ is a pullback of the family $G(h_i)$ in $X$. Since each $h_i : f_i \to f$ in $(x\downarrow G)$, we have $G(h_i)\circ f_i=f$ for all $i\in J$, and by universality of pullbacks there is a unique arrow $f_0: x \to G(b)$ with $G(s_i)\circ f_0=f_i$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[" f_0 "', dashed, d] \ar[equals, r]  & x\ar[" f_i "', d] \ar[equals, r]  & x\ar[" f ", d]  \\
+	G(b)\ar[" G(s_i) "', r]  & G(a_i)\ar[" G(h_i) "', r]  & G(a)
+	\end{tikzcd}\]
+	Since the projection creates pullbacks, the arrow $h : (f_0,b) \to (f,a)$ is a pullback of the family $\left\{ h_i \right\}_{i\in J} $, and thus the intersection.
+\end{proof}
+
+\begin{definition}[Well-Powered]\label{dfn:5.6}
+	A category $A$ is \emph{well-powered} if the set of subobjects of any $a\in A$ is small; a category is \emph{co-well-powered} when it's set of quotient objects is small.
+\end{definition}
+\begin{corollary}\label{cor:5.4}
+	If $A$ is complete, well-powered, locally small, and has a small cogenerating set, and $X$ is locally small, then a functor $G : A \to X$ is right-adjoint if and only if it is continuous. In particular, any continuous $K : A \to \Set $ is representable.
+\end{corollary}
+
+\section{Adjoints in Topology}
+
+The forgetful functor $U : \Top  \to \Set $ has a left-adjoint $D$, which assigns each set $S$ the discrete topology $\mathcal{P} (S)$. Thus, $G$ preserves all limits (this is why the underlying set of the product space is a cartesian product). I don't feel like copying this down here's two propositions.
+
+\begin{proposition}\label{prp:5.2}
+	If $G : C \to D$ is faithful, $D$ has equalizers, and if for each $x\in C$, $(G\downarrow x): (C\downarrow x) \to (D\downarrow G(x))$ has a right-adjoint-right-inverse $L$, then $C$ has equalizers.
+\end{proposition}
+
+$\Top $ is well-known to be complete. We can also show more for $\mathbf{Haus} $.
+
+\begin{proposition}\label{prp:5.3}
+	$\mathbf{Haus} $, the full subcategory of Hausdorff spaces, is complete and cocomplete. The inclusion $\mathbf{Haus} \hookrightarrow \Top $ has a left-adjoint $H$, and so does the forgetful functor $\mathbf{Haus}  \to \Set $.
+\end{proposition}
 

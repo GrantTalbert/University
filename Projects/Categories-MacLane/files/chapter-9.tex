@@ -1,0 +1,458 @@
+\chapter{Special Limits}
+
+\section{Filtered Limits}
+
+Recall a partial order is a preorder for which $a\leq b$ and $b\leq a$ implies $b=a$. A preorder does not have this quality. A preorder $P$ is \emph{directed} when any $p,q\in P$ have an upper bound in $P$, meaning there is some $r$ with $p,q\leq r$. Induction guarentees that the same holds for finite sets. A directed preorder is often called a \emph{directed set} or a \emph{filtered set}. Using some inspiration from poset categories, we can generalize this notion to \emph{any} category.
+
+\begin{definition}[Filtered Category]\label{dfn:9.1}
+	A \emph{filtered} category is a category $J$ such that for all $j,j'\in J$, there exists $k\in J$ and arrows $j\to k$ and $j'\to k$. 
+	\begin{enumerate}
+		\item for all $j,'j\in J$, there exists $k\in J$ and arrows $j\to k$ and $j'\to k$;
+		\item for any parallel arrows $u,v : i \to j$ in $J$, there is $k\in J$ and an arrow $w : j \to k$ such that $wu=wv$:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			i \ar[" u ", shift left, r] \ar["  v "', shift right, r]  & j \ar[" w ", r]  & k
+			\end{tikzcd}\]
+			In other words, all parallel arrows have arrows that equalize them (but not universaly; this does not guarentee equalizers exist).
+	\end{enumerate}
+\end{definition}
+
+These conditions state that the set $\left\{ j,j' \right\} $, viewed as a discrete category, always has a co-cone with vertex $k$, and that any diagram $i\rightrightarrows j$ also always has a cone $k$. Any finite diagram in a filtered category is thus the base of at least one cone. Some authors (including the author himself in another text) call this ``cofiltered''. The terminology varies.
+
+A \emph{filtered colimit} is the colimit of a functor $F : J \to C$ with $J$ filtered. A filtered limit is likewise a limit over a filtered category. There are some important theorems attached to filtered (co)limits, and we explore them here.
+
+\begin{theorem}\label{thm:9.1}
+	A category $C$ with finite coproducts and all small colimits over \emph{directed preorders} has all small coproducts.
+\end{theorem}
+\begin{proof}
+	Given a set $J$, we want to show $\varinjlim F$ exists for any functor $F : J \to C$. Let $J^+$ be the preorder with objects all \emph{finite} subsets $S\subseteq J$. To show $J^+$ is filtered, note that if $A,B\subseteq J$ are finite, then $A \cup B\subseteq J$ is finite with $A,B\subseteq A\cup B$. Define $F^+: J^+ \to C$ as the map
+	\[
+		S\mapsto \coprod_{s\in S} F(s)
+	.\]
+	We define the map on morphisms as follows. Let $u:S\subseteq T$; define $F^+(u)$ as the unique arrow
+	\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+		\displaystyle{F^+(S)=\coprod_{s\in S} F(s)}\ar[dashed, r]  & \displaystyle{\coprod_{t\in T} F(t)=F^+(T)} \\
+	F(s)\ar[" i_s ", u] \ar[equals, r]  & F(s)\ar[" i'_s "', u] 
+	\end{tikzcd}\]
+	induced by universality of the coproduct over $S$, since $F^+(T)$ has inclusions for all $F(s)$. Universality makes $F^+$ functorial. There exists an inclusion $J\hookrightarrow J^+$ given by $j\mapsto \left\{ j \right\} $, and since $\coprod \left\{ j \right\} =j $ is simply the limit over $\mathbf{1} $, we have that $F^+$ agrees with $F$ on $J$.
+
+	Let $\theta : F^+ \Rightarrow G$ be a natural transformation to any functor $G : J^+ \to C$. Since $\left\{ s \right\} \subseteq S$ for all $s\in S$, we obtain arrows
+	\[
+		G(\left\{ s \right\} \subseteq S): G\left\{ s \right\}  \to G(S)
+	\]
+	for all $s\in S\in J^+$. Naturality of $\theta$ gives
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		\displaystyle{\coprod_{s\in S} F(s)}\ar[" \theta_S ", r]  & G(S) \\
+	F(s)\ar[" i_s ", u] \ar[" \theta_s "', r]  & G\left\{ s \right\} \ar[" G(\left\{ s \right\} \subseteq S) "', u] 
+	\end{tikzcd}\]
+	since $F^+(\left\{ s \right\} \subseteq S)$ is immediately found to be the injection. By universality of coproduct, $\theta_S$ is uniquely determined by the values of $\theta_s$. In particular, any cocone $\nu^+ : F^+ \Rightarrow \Delta(c)$ is determined entirely by it's values $\nu^+(j) : F(j) \to c$ for $j\in J$, and the collection of all values $\nu^+(j)$ form a cocone $\nu^+|_J \eqqcolon \nu : F \Rightarrow \Delta(c)$. Since $J^+$ is a finite directed preorder, by hypothesis $\varinjlim F^+$ exists, so it suffices to show $\nu$ is limiting if and only if $\nu^+$ is limiting. This is immediate for components of a natural transformation of cones over $J^+$ on non-singletons are unique by universality of coproduct, so uniqueness of the morphism of cocones is equivalent to uniqueness of the natural transformation on objects $j\in J$; this is precisely the uniqueness of the morphisms of cocones over $J$.
+\end{proof}
+
+This proof allows us to prove that a category is (co)complete by proving only that finite (co)products, small (co)equalizers, and small (co)limits over directed preorders exist. Note here that directed preorders are indeed a class of filtered categories. The book continues by proving $\Grp $ is cocomplete via showing the forgetful functor creates filtered colimits. I decided not to type this up, although as usual I still worked through it independently.
+
+\section{Interchange of Limits}
+
+We have seen previously that a bifunctor $F : P\times J \to X$ with $X$ cocomplete defines functors $p\mapsto \varinjlim F(p,-)$ such that the limiting cocones $\mu_p : F(p,-) \Rightarrow \varinjlim F(p,-)$ are natural in $p$. One can then prove rather easily that
+\[
+	\varinjlim_J \varinjlim_P F \cong \varinjlim _P \varinjlim _J F
+.\]
+Here, we define the colimit over $P$ of $F$ as the limit of $F(-,j)$ for some fixed $j\in J$. This necessitates a choice of $j$, which is clarified by taking the limit over $j$ of the functor $j\mapsto \varinjlim F(-,j)$.
+
+Dually, limits commute. What is not so easily shown is commutivity of limits with colimits. For any choice of $(p,j)$, there is a commutative diagram
+\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+F \ar[" \mu_{p,j}  "', d]  & \varprojlim_P F(-,j)\ar[" \nu_{p,j}  "', l] \ar[" \mu_j ", r] \ar[" \alpha_j ", dashed, d]  & \varinjlim_J \varprojlim_P F \ar[" \kappa ", dashed, d]  \\
+\varinjlim_J F(p,-)\ar[" \nu_p "', r]  & \varprojlim_P \varinjlim_J F \ar[equals, r]  & \varprojlim_P \varinjlim_J F
+\end{tikzcd}\]
+We call $\kappa : \varinjlim _J \varprojlim _P F \to \varprojlim _P \varinjlim _J F$ the canonical morphism. It is not necessarily an isomorphism, but we have some criteria for when it is.
+
+\begin{theorem}\label{thm:9.2}
+	If $P$ is finite and $J$ is small and filtered, and $F : P\times J \to \Set $, then the canonical arrow is an isomorphism.
+\end{theorem}
+
+\section{Final Functors}
+
+Often we can compute limits over subcategories. Given a subcategory $I\subseteq J$ and a functor $F : J \to C$, we can compute the limit of the restriction $F|_I : I \to C$. This idea gives rise to the notion of a final functor.
+
+\begin{definition}[Final Functor]\label{dfn:9.2}
+	A functor $L : J' \to J$ is \emph{final} if for each $k\in J$, the comma category $(k\downarrow L)$ is nonempty and connected.
+\end{definition}
+Here a connected category means for any $a,b\in X$, there is a zigzag from $a$ to $b$. A zigzag is a finite chain of objects $\left\{ x_i \right\} $ such that there is a morphism between each $x_i$ and $x_{i+1} $ (the morphism can go either direction). A subcategory is final when the inclusion is final.
+
+Let $L : J' \to J$ final and $F : J \to X$. Suppose that the colimits $\varinjlim F$ and $\varinjlim FL$ exist. If $\mu' : FL \Rightarrow \varinjlim FL$ and $\mu$ are the colimiting cones, then since $L(J')\subseteq J$, we have that there is some $\mu_{L(j')} $ for all $j'\in J'$. Thus, $\varinjlim F$ is also a cone for $FL$, and by universality of colimit there is a unique morphism $h : \varinjlim FL \to \varinjlim F$ with $h\mu'_{j'}=\mu_{L(j')} $ for all $j'\in J'$.
+
+\begin{theorem}\label{thm:9.3}
+	If $L : J' \to J$ is final, and $F : J \to X$ is a functor such that $x=\varinjlim FL$ exists, then $\varinjlim F$ exists, and $h$ (as described above) is an isomorphism.
+\end{theorem}
+\begin{proof}
+Let $\mu : FL \Rightarrow \varinjlim FL$ be a colimiting cone. For each $k\in J$, choose an arrow $u : k \to L(j')$ and define $\tau_k = F(u)\circ \mu_{j'} $ for some $j'\in J'$. Since $\mu$ is a cone and $(k\downarrow L)$ is connected, this definiton is independent of choice. It follows that $\tau : F \Rightarrow x$ is a cone with base $F$, and universality of $\mu$ shows that $\tau$ is also limiting. Thus, $x=\varinjlim F$; $h$ is obviously an isomorphism.
+\end{proof}
+
+The dual of a final functor is an inital functor, and the dual of theorem \ref{thm:9.3} is useful for limits.
+\section{Diagonal Naturality}
+
+\begin{definition}[Dinatural]\label{dfn:9.3}
+	Let $C,B$ be categories and $S,T : C^{\mathrm{op} } \times C \to B$ functors. A dinatural transformation $\alpha : S \dot{\to} T$ is a function $\alpha$ which assigns to each $c\in C$ a morphism $\alpha_c : S(c,c) \to T(c,c)$ called the \emph{component} of $\alpha$ at $c$, such that for all $f : c \to c'$ in $C$, the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	 & S(c,c)\ar[" \alpha_c ", r]  & T(c,c)\ar[" T(1\text{,} f) ", dr]  & \\
+	S(c',c)\ar[" S(f\text{,} 1) ", ur] \ar[" S(1\text{,} f) "', dr]  &  &  & T(c,c')  \\
+	 & S(c',c')\ar[" \alpha_{c'}  "', r]  & T(c',c')\ar[" T(f\text{,} 1) "', ur] & 
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+Intuitively, a dinatural transformation is naturality on the diagonal. The commutative hexagon gives a sort of naturality condition for the diagonal element $(f,f)$. Defining naturality directly on the diagonal morphisms wouldn't work due to the contravariance of the left entry, meaning we would no longer be working with only the diagonal objects. The commutative hexagon is our alternative definition.
+
+Clearly any natural transformation $\tau : S \Rightarrow T$ gives rise to a dinatural transformation in the obvious way, by taking the diagonal elements $\alpha_c \coloneqq \tau_{c,c} $. We can also consider functors $T$ which are dummy in one variable, meaning $T$ is a composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+T: C^{\mathrm{op} } \times C\ar[" \pi_C ", r]  & C\ar[" T_0 ", r]  & T
+\end{tikzcd}\]
+for $\pi_C$ the projection, and $T_0$ some functor. More precisely, any functor $T_0: C \to B$ may be viewed as a bifunctor dummy in one variable by precomposition with the relevant projection. A functor dummy in both variables would then just be a constant object.
+
+Consider $S$ dummy in the second variable and $T$ dummy in the first. A dinatural transformation $\alpha : S \dot{\to } T$ is given by
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+ & S(c,c)=S_0(c)\ar[" \alpha_c ", r]  & T_0(c)=T(c,c)\ar[" T(1\text{,} f)=T_0(f) ", dr]  &  \\
+S(c',c)=S_0(c')\ar[" S(f\text{,} 1)=S_0(f) ", ur] \ar[" S(1\text{,} f)=S_0(1) "', dr]  &  &  & T_0(c')=T(c,c') \\
+ & S(c',c')=S_0(c')\ar[" \alpha_{c'}  "', r]  & T_0(c')=T(c',c')\ar[" T(f\text{,} 1)=T_0(1) "', ur]  & 
+\end{tikzcd}\]
+Dropping the identity morphisms, this simply becomes a generalization of the naturality condition from contravariant $S$ to covariant $T$:
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+S_0(c')\ar[" S_0(f) ", r] \ar[" \alpha_{c'}  "', d]  & S_0(c)\ar[" \alpha_c ", d]  \\
+T_0(c') & T_0(c)\ar[" T_0(f) ", l] 
+\end{tikzcd}\]
+We call $\alpha$ a natural transformation from contravariant to covariant, dually covariant to contravariant. One can also construct regular natural transformations between covariant and contravariant functors by taking them \emph{both} to be dummy in the first or second entries, respectively.
+
+If $T=b$ is dummy in both variables $(c,d)\mapsto b$, a dinatural transformation $\alpha : S \dot{\to} b$ becomes
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+S(c',c)\ar[" S(f\text{,} 1) ", r] \ar[" S(1\text{,} f) "', d]  & S(c,c)\ar[" \alpha_c ", d]  \\
+S(c',c')\ar[" \alpha_{c'}  "', r]  & b
+\end{tikzcd}\]
+for each $f : c \to c'$ in $C$. Dinatural transformations $\alpha : S \dot{\to } b$ are called \emph{extranatural} transformations, \emph{wedges}, or sometimes \emph{supernatural} transformations. Extranaturality generalizes beyond this, but not in this text (or at least this part). Generally a wedge refers to the exact diagram given here.
+
+Evaluation is an example. Fix some set $A$. Let $X$ a set, and define $V_X : \Hom(X, A) \times X \to A$ be the evaluation function $(f,x)\mapsto f(x)$. Note here that $\Hom(-, A) \times -$ is a functor $\Set ^{\mathrm{op} } \times \Set \to \Set $, and $(gf)(x)=g(f(x))$ implies that the extranaturality square commutes, making $V$ an extranatural transformation
+\[
+	V : \Hom(-, A) \times - \dot{\to } A
+.\]
+Since $V$ is also natural in $A$, we say $V$ is \emph{dinatural} in $X$ and \emph{natural} in $A$.
+
+We use the various types of dinatural transformations together, and frequently drop the ``di''. Thus for $S : C^{\mathrm{op} } \times C\times A \to B$ and $T : A\times D^{\mathrm{op} } \times D \to B$ functors, a natural transformation $\gamma : S \dot{\to } T$ is a function mapping each triple $(c,a,d)\in C\times A\times D$ to a morphism
+\[
+	\gamma(c,a,d): S(c,c,a) \to T(a,d,d)
+\]
+such that $\gamma$ is natural in $a$, and dinatural in $c$ and $d$.
+
+Compositions of dinatural transformations need not be dinatural, but composing on the left and right with natural transformations preserves dinaturaliy. If $\alpha : S \dot{\to } T$ is dinatural, $\sigma : S' \Rightarrow S$ is natural, and $\tau : T \Rightarrow T'$ is natural, then there is a dinatural transformation $S' \dot{\to } T'$ with arrows given by the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+S'(c,c)\ar[" \sigma_{c,c}  ", r]  & S(c,c)\ar[" \alpha_c ", r]  & T(c,c)\ar[" \tau_{c,c}  ", r]  & T'(c,c).
+\end{tikzcd}\]
+Here's another case.
+
+\begin{proposition}\label{prp:9.1}
+	Let $R : C \to B$, $S : C\times C^{\mathrm{op} } \times C \to B$, and $T : C \to B$ be functors. Let $\rho$ and $\sigma$ be functions defined for all $c,d\in C$ as arrows
+	\[
+		\rho(c,d): R(c) \to S(c,d,d),\qquad \sigma(d,c): S(d,d,c) \to T(c),
+	\]
+	natural in $c$ and dinatural in $d$. Then the composition $\alpha_c = \sigma(c,c)\circ \rho(c,c)$ is natural $R\Rightarrow T$.
+\end{proposition}
+\begin{proof}
+	Naturality in $c$ gives us that the vertical composition $\sigma(d,-)\circ \rho(-,d)$ is natural $R\Rightarrow T$ for any fixed $d\in C$. Dinaturality allows $d$ to vary with the restriction that $d$ be equivalent to the other component; meaning we can define $\sigma(c,c)\circ \rho(c,c)$ as the natural transformation.
+\end{proof}
+
+\section{Ends}
+
+\begin{definition}[End]\label{dfn:9.4}
+	An \emph{end} of a functor $S : C^{\mathrm{op} } \times C \to X$ is a universal dinatural transformation from a constant $e$ to $S$. That is, an end is a pair $(e,\omega)$ with $e\in X$ and $\omega : e \dot{\to } S$ a wedge with the property that for any wedge $\beta : x \dot{\to } S$, there is a unique arrow $h : x \to e$ in $X$ such that $\beta_a = \omega_ah$ for all $a\in C$. By common abuse of language, we generally refer to the object $e$ as the end of $S$, and we write it with integral notation
+	\[
+		e= \int_c S(c,c) = \int_{c\in C} S(c,c) = \int_{C} S
+	.\]
+\end{definition}
+
+By definition of a wedge, with notation as above this implies for all $f: b \to c$ in $C$, there is a commutative diagram
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+ & x \ar[" \beta_c ", bend left, ddr] \ar[" \beta_b "', bend right, ddl] \ar[" h ", dashed, d]  &  \\
+ & \displaystyle{\int_{c\in C} S(c,c)} \ar[" \omega_c ", dr] \ar[" \omega_b "', dl]  &  \\
+S(b,b)\ar[" S(1\text{,}f) "', dr]  &  & S(c,c)\ar[" S(f\text{,} 1) ", dl]  \\
+ & S(b,c) & 
+\end{tikzcd}\]
+Ends are a particularly important class of limit, and just from looking at the diagram it's apparent they show some similarity with pullbacks. We call $\omega$ the ending wedge or the universal wedge. As always, any two ends are isomorphic.
+
+Natural transformations give examples of ends. Let $U,V : C \to X$. We thus end up with a composition
+\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+\Hom(U(-), V(-)) : C^{\mathrm{op} } \times C \ar[" U^{\mathrm{op} } \times V ", r]  & X^{\mathrm{op} } \times X \ar[" \Hom(-\text{,} -)  ", r]  & \Set .
+\end{tikzcd}\]
+A wedge $\tau : Y \dot{\to } \Hom(U(-), V(-)) $ for $Y\in \Set $ induces for any $f : b \to c$ the commutative diagram
+\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+	Y \ar[" \tau_b ", r] \ar[" \tau_c "', d]  & \Hom(U(b), V(b)) \ar[" V(f)^* ", d]  \\
+\Hom(U(c), V(c)) \ar[" U(f)_* "', r]  & \Hom(U(b), V(c)) 
+\end{tikzcd}\]
+where $U(f)_*$ is precomposition by $U(f)$, and likewise for $V(f)^*$. This states that for each $y\in Y$, there is an equivalence
+\[
+	V(f)\circ \tau_b(y)=\tau_c(y)\circ U(f)
+.\]
+Diagramatically, this gives
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+U(b)\ar[" \tau_b(y) ", r] \ar[" U(f) "', d]  & V(b)\ar[" V(f) ", d]  \\
+U(c)\ar[" \tau_c(y) "', r]  & V(c)
+\end{tikzcd}\]
+which implies that $\tau_{(-)} (y): U \Rightarrow V$ is natural for any fixed $y\in Y$. We thus have an assignment $y\mapsto \tau_{(-)} (y)$ which gives a function $\eta:Y \to \Nat(U,V)$. Moreover, we have an assignment $\omega : \Nat(U,V) \dot{\to } \Hom(U(-), V(-)) $ given by $\omega_c(\lambda)=\lambda_c$. I will show this is a wedge in a second. For now, note that $\omega_c(\eta(y))=\tau_c(y)$, and thus the diagram
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+Y \ar[" \tau_c ", r] \ar[" \eta "', d]  & \Hom(U(c), V(c)) \ar[" 1 ", d]  \\
+\Nat(U,V)\ar[" \omega_c "', r]  & \Hom(U(c), V(c)) 
+\end{tikzcd}\]
+commutes for each $c$. Moreover, this definition of $\eta$ is manifestly unique, meaning that with the assumption that $\omega$ is an end, we have found that
+\[
+	\Nat(U,V)=\int_{c\in C} \Hom(U(c), V(c)) 
+.\]
+Finally, to show $\omega$ is a wedge, chase a natural transformation $\lambda$ around the square
+\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+\Nat(U,V)\ar[" \omega_b ", r] \ar[" \omega_c "', d]  & \Hom(U(b), V(b)) \ar[" V(f)^* ", d]  & \lambda \ar[" \omega_b ", mapsto, r] \ar[" \omega_c "', mapsto, d]  & \lambda_b \ar[" V(f)^* ", mapsto, d]  \\
+\Hom(U(c), V(c)) \ar[" U(f)_* "', r]  & \Hom(U(b), V(c))  & \lambda_c \ar[" U(f)_* "', mapsto, r]  & V(f)\circ \lambda_b = \lambda_c \circ U(f)
+\end{tikzcd}\]
+Since $f : b \to c$, this is precisely the naturality condition, and thus $\omega$ is indeed a wedge.
+
+Ends are manifestly limits. We offer an explicit limitting construction for completeness. Let $C$ be a category, and define the category $\mathcal{C} $ to have as objects not only all objects of $C$, but also all \emph{morphisms} of $C$. Given an object/arrow $z$ in $C$, we denote it's correspondence in $\mathcal{C} $ by $\overline{z} $. Arrows in $\mathcal{C} $ are defined as follows. For each non-identity $f : a \to b$ in $C$, there are two arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\overline{a} \ar[r]  & \overline{f}  & \overline{b}  \ar[l] 
+\end{tikzcd}\]
+in $\mathcal{C} $. Identities also exist. It's impossible to compose two non-identity arrows in $\mathcal{C} $.
+
+Given a functor $S : C^{\mathrm{op} } \times C \to X$, there exists a functor $\overline{S} : \mathcal{C}  \to X$ given by
+\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\overline{b} \ar[""'{name=b}, r] \ar[mapsto, d]  & \overline{f} \ar[mapsto, d]  & \overline{c}  \ar[""{name=c}, l] \ar[mapsto, d]  \\
+S(b,b)\ar[" S(1_b\text{,} f) "'{name=Sb}, r]  & S(b,c) & S(c,c)\ar[" S(f\text{,} 1_c) "{name=Sc}, l] 
+\arrow[from=b, to=Sb, shorten=5pt, mapsto]
+\arrow[from=c, to=Sc, shorten=5pt, mapsto]
+\end{tikzcd}\]
+
+\begin{proposition}\label{prp:9.2}
+	With notation as above, the limit of $\overline{S} $ exists if and only if the end of $S$ exists, and there is an isomorphism
+	\[
+		\theta : \int_{c\in C} S(c,c) \cong \varprojlim \overline{S} ,
+	\]
+	which is unique in the sense that the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+		\displaystyle{\int_{c\in C} S(c,c)}\ar[" \omega_c ", r] \ar[" \theta "', dashed, d]  & S(c,c) \\
+	\varprojlim \overline{S} \ar[" \lambda_c "', ur]  & 
+	\end{tikzcd}\]
+	commutes for all $c\in C$, for $\lambda$ the limiting cone and $\omega$ the universal wedge.
+\end{proposition}
+\begin{proof}
+	The cone condition of limit gives for any $f : b \to c$ in $C$ the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	 & \varprojlim \overline{S} \ar[" \lambda_{c}  ", dr] \ar[" \lambda_b "', dl] \ar[" \lambda_{b,c}  ", d]  &  \\
+	S(b,b)\ar[" S(1\text{,} f) "', r]  & S(b,c) & S(c,c)\ar[" S(f\text{,} 1) ", l] 
+	\end{tikzcd}\]
+	Here the morphism $\lambda_{b,c} $ is forced by commutivity of the diagram to simply be the diagonal element of the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\varprojlim \overline{S} \ar[" \lambda_b ", r] \ar[" \lambda_c "', d]  & S(b,b)\ar[" S(1\text{,} f) ", d]  \\
+	S(c,c)\ar[" S(f\text{,} 1) "', r]  & S(b,c)
+	\end{tikzcd}\]
+	which is precisely the requirement that $\lambda$ be a wedge. Universality of limit is then equivalent to universality of wedge, and also by universality, $\theta$ exists and is unique for any universal wedge $\omega$.
+\end{proof}
+
+\begin{corollary}\label{cor:9.1}
+	If $C$ is small and $X$ is complete, every functor $S : C^{\mathrm{op} } \times C \to X$ has an end in $X$.
+\end{corollary}
+
+The converse is also true; not only can we reduce ends to limits, but we can also reduce limits to ends.
+
+\begin{proposition}\label{prp:9.3}
+	Let $T : C \to X$ be a functor. Define by $S$ the composition functor
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C^{\mathrm{op} } \times C \ar[" \pi_C ", r]  & C \ar[" T ", r]  & X
+	\end{tikzcd}\]
+	for $\pi_C$ the projection. Then $(e,\tau : e \Rightarrow T)$ is a limit of $T$ if and only if $(e,\tau : e \ddot{\to} S)$ is an end of $S$.
+\end{proposition}
+\begin{proof}
+	I prove universal wedges are limits; the proof is the exact same in the converse direction. Let the end of $S$ exist. Let $\tau: e \ddot{\to} S$ be the universal wedge, giving for all $f : b \to c$ in $C$ the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	e \ar[" \tau_b ", r] \ar[" \tau_c "', d]  & S(b,b)\ar[" S(1\text{,} f) ", d]  \\
+	S(c,c)\ar[" S(f\text{,} 1) "', r]  & S(b,c).
+	\end{tikzcd}\]
+	Applying the fact that $S(x,y)=T(y)$ by definition, commutivity of this diagram is equivalent to the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	e \ar[" \tau_b ", r] \ar[" \tau_c "', d]  & T(b)\ar[" T(f) ", d]  \\
+	T(c)\ar[" T(1)=1 "', r]  & T(c)
+	\end{tikzcd}\]
+	commuting. Dropping the identity morphism and rewriting in a more conventional way, this diagram reads
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	 & e \ar[" \tau_c ", dr] \ar[" \tau_b "', dl]  &  \\
+	T(b)\ar[" T(f) "', rr]  &  & T(c)
+	\end{tikzcd}\]
+	which commutes for all $f : b \to c$. This is precisely the condition that $e$ be a cone. Thus, cones for $T$ are precisely wedges for $S$, and thus universality of $\tau$ as a cone is equivalent to universality of $\tau$ as a wedge.
+\end{proof}
+
+The conclusion gives us
+\[
+	\int_{c\in C} S(c,c)\cong \varprojlim T
+.\]
+We write
+\[
+	\int_{c\in C} T(c) \cong \int_{c\in C} S(c,c) \cong \varprojlim T,
+\]
+and leave the dummy variable implicit. Ends are thus another characterization of limits, and quite a powerful one.
+
+Some terminology that is likely expected. A functor $H : X \to Y$ \emph{preserves the end} of a functor $S : C^{\mathrm{op}} \times C \to X$ when for any end $\omega: e \ddot{\to} S$, $H\omega : H(e) \ddot{\to} HS$ is an end; more commonly this is written
+\[
+	H\left( \int_{c\in C} S(c,c) \right) \cong \int_{c\in C} HS(c,c)
+.\]
+Similarly, $H$ \emph{creates} the end of $S$ when to each end $\nu : y \ddot{\to} HS$ in $Y$, there is a unique wedge $\omega: e \ddot{\to} S$ with $H\omega=\nu$ such that $\omega$ is an end. Since ends are precisely limits, all our preservation and creation theorems necessarily apply. For example, right-adjoint functors and hom-functors preserve ends.
+
+\section{Coends}
+
+\begin{definition}[Coend]\label{dfn:9.5}
+	Dual to the notion of an end is that of a coend. A coend of a functor $S : C^{\mathrm{op}} \times C \to X$ is a pair $(d,\zeta)$ such that $d\in X$ and $\zeta$ is a universal wedge $\zeta : S \ddot{\to} d$. We write
+	\[
+		d= \int^{c\in C} S(c,c)
+	\]
+	for the ending object, and refer to $d$ simply as the coend of $S$.
+\end{definition}
+
+An example of coends is tensor products. Take $R$ to be an $Ab$-category with one element, otherwise known as a ring. A \emph{left} $R$-module $B$ is an additive functor $K : R \to \Ab$ mapping $*\mapsto B$; scalar multiplication by $r\in R$ is defined as $b\mapsto K(r)(b)$. A right $R$-module $A$ is then an additive functor $R^{\mathrm{op}} \to \Ab$ mapping $*\mapsto A$. With $\otimes $ the tensor product of abelian groups, then $R\mapsto A\otimes B$ is a bifunctor $R^{\mathrm{op}} \times R\to \Ab$, and the coend is precisely the tensor product over $R$:
+\[
+	\int^{r\in R} A\otimes B \cong A\otimes _RB
+.\]
+Indeed, the wedge condition for $\zeta$ is that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+A\otimes B \ar[" 1_A \otimes r ", r] \ar[" r \otimes 1_B "', d]  & A\otimes B \ar[" \zeta ", d]  \\
+A \otimes B \ar[" \zeta "', r]  & A\otimes _RB
+\end{tikzcd}\]
+commutes for all $r$; this is precisely the requirement that $\zeta(ar\otimes b)=\zeta(a\otimes rb)$.
+
+The purpose of this is to point out a more general construction. Let $(B,\otimes ,e,\alpha,\lambda,\rho)$ be a monoidal category, and let $S : P \to B$ and $T : P^{\mathrm{op}}  \to B$ be functors. Then there is a ``tensor product'' of functors
+\[
+	T \otimes _PS \coloneqq \int^{p\in P} T(p) \otimes S(p)
+.\]
+The tensor product is an object of $B$. An example is given by the simplicial category. Take the functor $\Delta : \boldsymbol{\Delta}  \to \Top $ given by $[n]\mapsto \Delta^n$; recall that simplicial sets are precisely functors $S : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Set $. The copower $S\cdot X$ given by
+\[
+	\coprod_{s\in S} X
+.\]
+Since $\Top$ has small coproducts, the assignment $([n],[m])\mapsto S[n]\cdot \Delta^m$ is a functor $\boldsymbol{\Delta} ^{\mathrm{op}} \times \boldsymbol{\Delta} \to \Top $, and the coend
+\[
+	\int^{[n]\in \boldsymbol{\Delta} } S[n]\cdot \Delta^n
+\]
+is the usual geometric realization of the simplicial set $S$, given by pasting $n$-simplicies according to face and degeneracy operators.
+
+\section{Ends with Parameters}
+
+\begin{proposition}[End/Limit of a Natural Transformation]\label{prp:9.4}
+	Let $\gamma : S \Rightarrow S'$ be a natural transformation with $S,S' : C^{\mathrm{op}} \times C \to X$, such that there exist ends $(e,\omega)$ and $(e',\omega')$ for $S$ and $S'$, respectively. Then there is a unique arrow $e\to e'$ in $X$, denoted $\int_{c\in C} \gamma_{c,c} $, such that for all $c\in C$, the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+		\displaystyle{\int_{c\in C} S(c,c)}\ar[" \omega_c ", r] \ar[" \int_{c\in C} \gamma_{c\text{,} c}  "', dashed, d]  & S(c,c)\ar[" \gamma_{c\text{,} c}  ", d]  \\
+		\displaystyle{\int_{c\in C} S'(c,c)}\ar[" \omega'_c "', r]  & S'(c,c)
+	\end{tikzcd}\]
+	commutes.
+\end{proposition}
+\begin{proof}
+	It suffices to show the composition $\gamma_{c,c} \circ \omega_c$ is a wedge $ \int_{c\in C} S(c,c) \ddot{\to} S'(c,c)$; the existence of the unique morphism then follows by universality of $\omega'$ with respect to wedges for $S'$. Indeed, recall composing a dinatural transformation with a natural transformation in this manner yields another dinatural transformation, so the composition yields a dinatural transformation $\gamma \circ \omega : \int_{c\in C} S(c,c) \ddot{\to} S'$, and since the end is simply an object in $X$, this is precisely the definition of a wedge with base $S'$ and vertex $\int_{c\in C} S(c,c)$.
+\end{proof}
+
+We call the arrow $\int_{c} \gamma_{c,c} $ the \emph{end} of the natural transformation $\gamma$. Universality of wedges gives the following identity for composition with another natural transformation $\gamma' : S' \Rightarrow S''$:
+\[
+	\int_{c\in C} (\gamma' \circ \gamma)_{c,c} = \left( \int_{c\in C} \gamma'_{c,c}  \right) \circ \left( \int_{c\in C} \gamma_{c,c}  \right) 
+.\]
+This rule allows us to show that an end/limit involving a parameter $p\in P$ is a functor of that parameter in a certain sense.
+
+\begin{theorem}[Parameter Theorem for Ends and Limits]\label{thm:9.4}
+	Let $T : P\times C^{\mathrm{op}} \times C \to X$ be a functor such that $T(p,-,-)$ has an end $\omega^p: \int_{c\in C} T(p,c,c) \ddot{\to} T(p,-,-)$ for each $p\in P$. Then there is a unique functor $U : P \to X$ such that $U(p)=\int_{c\in C} T(p,c,c)$, such that the components of the wedge $\omega^p$ define for each $c\in C$ a transformation $\omega_c^p : U(p) \to T(p,c,c)$ natural in $p$, meanining
+	\[
+		\omega_c^{(-)} : U \Rightarrow T(-,c,c)
+	.\]
+\end{theorem}
+\begin{proof}
+	Functorality gives that any $s : p \to q$ in $P$ induces a natural transformation $T(s,-,-): T(p,-,-) \Rightarrow T(q,-,-)$. The arrow function of $U$ must then be
+\[s\mapsto \int_{c\in C} T(s,c,c),\]
+as defined in proposition \ref{prp:9.4}. The composition rule shows that $U$ is functorial, and the uniqueness of the arrow shows $U$ is unique.
+\end{proof}
+
+We write the functor $U$ as
+\[
+	U=\int_{c\in C} T(-,c,c)
+.\]
+This makes sense given our previous notation:
+\[
+	p\mapsto \int_{c\in C} T(p,c,c),\qquad s\mapsto \int_{c\in C} T(s,c,c)
+.\]
+Note here the $c,c$ in the natural transformation denotes the component at $(c,c)$. This notation suggests that $U$ itself is an end, and indeed it is if we view it as an object in $X^P$. Given the functor $T : P\times C^{\mathrm{op}} \times C \to X$, define the functor $T^\# : C^{\mathrm{op}} \times C \to X^P$ by $(x,y)\mapsto T(-,x,y)$, for both objects and morphisms.
+\begin{theorem}[Parameter Theorem Continued]\label{thm:9.5}
+	With notation as above, and under the same hypotheses for $T$ as theorem \ref{thm:9.4}, the functor $T^\#$ has the end
+	\[
+		\omega^\# : \int_{c\in C} T(-,c,c) \ddot{\to} T^\#,
+	\]
+	where $(\omega^\#_c)_p=\omega_c^p$ for all $p\in P$ and $c\in C$.
+\end{theorem}
+\begin{proof}
+	By the previous theorem, since $\omega$ was natural in $p$, there is for each $c\in C$ an arrow (natural transformation) of $X^P$
+	\[
+		\omega^\#_c : \int_{c\in C} T(-,c,c) \Rightarrow T(-,c,c)
+	\]
+	with component at $p$ given by $\omega_c^p$. $\omega^\#$ is a wedge, and is universal since each component is universal.
+\end{proof}
+
+\section{Iterated Ends and Limits}
+
+\begin{proposition}\label{prp:9.5}
+	Let $S : P^{\mathrm{op}} \times P\times C^{\mathrm{op}} \times C \to X$ be a functor such that each functor $S(p,q,-,-)$ has an end $\int_{c\in C} S(p,q,c,c)$, where $p,q\in P$. By the parameter theorems, regard these ends as a bifunctor $P^{\mathrm{op}} \times P\to X$, and $S$ as a bifunctor $S : (P\times C)^{\mathrm{op}} \times (P\times C) \to X$. Then there is an isomorphism
+	\[
+		\theta : \int_{(p,c)\in P\times C} S(p,c,p,c) \cong \int_{p\in P} \left( \int_{c\in C} S(p,p,c,c) \right) 
+	.\]
+	Moreover, the double end on the left exists if and only if the end over $P$ on the right exists.
+\end{proposition}
+\begin{proof}
+	For each $p,q\in P$, there is an end
+	\[
+		\omega_{p,q} : \int_{c\in C} S(p,q,c,c) \ddot{\to} S(p,q,-,-)
+	.\]
+	Fix $x\in X$, and consider a $P$-indexed family of morphisms
+	\[
+		\left\{ \rho_p : x \to \int_{c\in C} S(p,p,c,c) \right\}_{p\in P} 
+	.\]
+	The wedges $\omega_{p,q} $ give a $P\times C$-indexed family $\left\{ \xi_{p,c}  \right\}_{(p,c)\in P\times C} $ defined by the composition
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+		\xi_{p,c} : x \ar[" \rho_p ", r]  & \displaystyle{\int_{c\in C} S(p,p,c,c)} \ar[" \left( \omega_{p \text{,} p}  \right)_c ", r]  & S(p,p,c,c).
+	\end{tikzcd}\]
+	We then have that for any $f : c \to c'$ in $C$, the diagram
+	\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+	x \ar[" \xi_{p \text{,} c}  ", bend left, drr] \ar[" \xi_{p \text{,} c'}  "', bend right, ddr] \ar[" \rho_p ", dr]  &  &  \\
+	& \displaystyle{\int_{c\in C} S(p,p,c,c)}\ar[" \left( \omega_{p \text{,} p}  \right)_c ", r] \ar[" \left( \omega_{p \text{,} p}  \right)_{c'}  "', d]  & S(p,p,c,c)\ar[" S(p \text{,} p \text{,} 1_c \text{,} f) ", d]  \\
+	 & S(p,p,c',c') \ar[" S(p \text{,} p \text{,} f \text{,} 1_{c'} ) "', r]  & S(p,p,c,c')
+	\end{tikzcd}\]
+	commutes since $\omega_{p,p} $ is a wedge. Since $\omega_{p,p} $ is universal, every such $\left( P\times C \right) $-indexed family is such a composite for a unique family $\rho$. Now $\rho$ or $\xi_{-,c} $ are extranatural in $p$ (here we fix some $c\in C$ for $\xi$) if and only if one of the squares
+	\[\begin{tikzcd}[row sep = 4em, column sep = 5em]
+		x \ar[" \rho_q "', d] \ar[" \rho_p ", r] & \displaystyle{\int_{c\in C} S(p,p,c,c)} \ar[" \int_{c\in C} S(1_p \text{,} s\text{,} c\text{,} c) ", d] & x \ar[" \xi_{p \text{,} c}  ", r] \ar[" \xi_{q\text{,} c}  "', d] & S(p,p,c,c)\ar[" S(1_p \text{,} s\text{,} c\text{,} c) ", d]  \\
+		\displaystyle{\int_{c\in C} S(q,q,c,c)}\ar[" \int_{c\in C} S(s\text{,} 1_q\text{,} c\text{,} c) "', r]  & \displaystyle{\int_{c\in C} S(p,q,c,c)} & S(q,q,c,c)\ar[" S(s\text{,} 1_q\text{,} c\text{,} c) "', r]  & S(p,q,c,c)
+	\end{tikzcd}\]
+	commutes for each $s : p \to q$ in $P$. Consider the cube obtained by gluing these squares with the relevant component of $\omega$:
+\[\begin{tikzcd}
+                                                                                                                       &  & x \arrow[rrrr, "{\xi_{p \text{,} c}}"] \arrow[dddd, "{\xi_{q\text{,} c}}"'] &  &                                                                           &  & {S(p,p,c,c)} \arrow[dddd, "{S(1_p\text{,} s\text{,} c\text{,} c)}"] \\
+                                                                                                                       &  &                                                            &  &                                                                           &  &                                             \\
+x \arrow[rruu, equals] \arrow[dddd, "\rho_q"']                                                            &  &                                                            &  & {\displaystyle{\int_{c\in C}S(p,p,c,c)}} \arrow[rruu, "{\omega_{p \text{,} p \text{,} c}}"] &  &                                             \\
+                                                                                                                       &  &                                                            &  &                                                                           &  &                                             \\
+                                                                                                                       &  & {S(q,q,c,c)} \arrow[rrrr, "{S(s\text{,} 1_q\text{,} c\text{,} c)}"']               &  &                                                                           &  & {S(p \text{,} q\text{,} c\text{,} c)}                                \\
+                                                                                                                       &  &                                                            &  &                                                                           &  &                                             \\
+{\displaystyle{\int_{c\in C}S(q,q,c,c)}} \arrow[rrrr, "{\int_{c\in C}S(s\text{,} 1_q\text{,} c\text{,} c)}"'] \arrow[rruu, "{\omega_{q\text{,} q\text{,} c}}"] &  &                                                            &  & {\displaystyle{\int_{c\in C}S(p,q,c,c)}} \arrow[rruu, "{\omega_{p,q,c}}"] &  &                                            
+\arrow[from=3-1, to=3-5, crossing over, " \rho_p "']
+\arrow[from=3-5, to=7-5, crossing over, "\int_{c\in C} S(1_p\text{,} s\text{,} c\text{,} c)"] 
+\end{tikzcd}\]
+The side squares all commute by various results: the ones with ends of natural transformations commute by proposition \ref{prp:9.4} since $\omega_{p,p} $ is an end for $S(p,p,-,-)$ and $\omega_{p,q} $ is an end for $S(p,q,-,-)$; on the left square $\rho$ is blocking the name of the vertical arrow, but the square reads $\xi_{q,c} =\omega_{q,q,c} \circ \rho_q$, which is true by definition; the top square commutes by the same logic. Thus, the front square commutes if and only if the back square commutes. Thus $\rho_p$ is a wedge in $p$ if and only if $\xi$ is a wedge in $(p,c)$. In particular, wedges $x \ddot{\to} \int_{p\in P} S(-,-,c,c)$ correspond precisely to wedges $x \ddot{\to} S$, and commutivity of the cube preserves universality. Thus the double end exists if and only if the end over $P$ exists, and then universality guarentees equivalence up to isomorphism. In particular, the isomorphism is the unique arrow making the diagram
+\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	\displaystyle{\int_{(p,c)\in P\times C} S(p,p,c,c)}\ar[" \xi_{p \text{,} c}  ", bend left, drr]\ar[" \theta "', dashed, d]  &  &  \\
+	\displaystyle{\int_{p\in P} \left( \int_{c\in C} S(p,p,c,c) \right) } \ar[" \rho_p "', r]  & \displaystyle{\int_{c\in C} S(p,p,c,c)} \ar[" \omega_{p \text{,} p \text{,} c}  "', r]  & S(p,p,c,c)
+\end{tikzcd}\]
+commute by universality.
+\end{proof}
+\begin{remark}
+	This reduces the problem of a double end to that of iterated ends, but IF AND ONLY IF \emph{all} pairs $(p,q)$ have an end for $S(p,q,-,-)$.
+\end{remark}
+
+\begin{corollary}[Fubini's Theorem for Ends]\label{cor:9.2}
+	Let $S : P^{\mathrm{op}} \times P\times C^{\mathrm{op}} \times C \to X$ be a functor such that the ends $\int_{c\in C} S(p,q,c,c)$ and $\int_{p\in P} S(p,p,b,c)$ exist for all $b,c\in C$ and $p,q\in P$. By the parameter theorems, regard $S$ as a bifunctor in $p,q$ or $b,c$, respectively; then there is an isomorphism
+	\[
+		\theta : \int_{p\in P} \left( \int_{c\in C} S(p,p,c,c) \right) \cong \int_{c\in C} \left( \int_{p\in P} S(p,p,c,c) \right) 
+	.\]
+	The exterior ends exist if and only if the other exists, and the isomorphism is as described in proposition \ref{prp:9.5}.
+\end{corollary}
+
+This theorem was not proven by Fubini, to noone's subprise. This proposition proves by proposition \ref{prp:9.3} the same fact for limits:
+\[
+	\varprojlim_P \varprojlim _C F(p,c) \cong \varprojlim_{P\times C} F(p,c) \cong \varprojlim_C \varprojlim _P F(p,c)
+.\]
+Duality guarentees the same for colimits and coends.

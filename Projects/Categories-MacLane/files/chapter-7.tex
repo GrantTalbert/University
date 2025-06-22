@@ -1,0 +1,372 @@
+\chapter{Monoids}
+\section{Monoidal Categories}
+A monoidal category is a ``good place to define monoids in''. It's a category that has some notion of multiplication, which the book denotes as $\square$, and I will denote $\otimes $. This multiplication should be a bifunctor $\otimes : B\times B \to B$, and should have an identity $e$. A \emph{strict} monoidal category is where $\otimes $ is strictly associative and $e$ is strictly unital, but this is often too general and we prefer to only require unity and associativity up to isomorphism.
+
+\begin{definition}[Monoidal Category]\label{dfn:7.1}
+	A monoidal category $B=(B,\otimes ,e,\alpha,\lambda,\rho)$ is a category $B$, a bifunctor $\otimes : B\times B \to B$, an object $e\in B$, and three natural isomorphisms
+	\[
+		\alpha : \otimes \circ (1_B \times \otimes ) \cong \otimes \circ (\otimes \times 1_B),\qquad \alpha_{a,b,c} : a\otimes (b\otimes c)\cong (a\otimes b)\otimes c;
+	\]
+	\[
+		\lambda : e\otimes - \cong 1_B,\qquad \lambda_a : e\otimes a\cong a;
+	\]
+	\[
+		\rho : - \otimes e \cong 1_B,\qquad \rho_a : a\otimes e \cong a;
+	\]
+	such that for all $a,b,c,d\in B$, the pentagon diagram
+	\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+	a\otimes (b\otimes (c\otimes d)) \ar[" \alpha ", r] \ar[" 1 \otimes \alpha "', d]  & (a\otimes b)\otimes (c\otimes d) \ar[" \alpha ", r]  & (a\otimes b)\otimes c)\otimes d \ar[" \alpha \otimes 1 ", d]  \\
+	a \otimes ((b\otimes c)\otimes d)\ar[" \alpha "', rr]  &  & (a\otimes (b\otimes c))\otimes d
+	\end{tikzcd}\]
+	and the triangle diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	a\otimes (e\otimes c)\ar[" \alpha ", rr] \ar[" 1\otimes \lambda "', dr]  &  & (a\otimes e)\otimes c \ar[" \rho \otimes 1 ", dl]  \\
+	 & a\otimes c & 
+	\end{tikzcd}\]
+	commute. Additionally,
+	\[
+		\lambda_e = \rho_e : e\otimes e \cong e
+	.\]
+\end{definition}
+We call the commutivity of these diagrams ``coherence conditions'', and we will see in the next section that they imply all diagrams of these types commute, as we explore coherence more precisely. One remark to make is that since $\otimes $ is a bifunctor, whenever $(ff'\otimes gg')$ is defined, then there is an equality
+\[
+	(ff' \otimes gg')=(f\otimes g)(f'\otimes g')
+.\]
+
+A category $C$ with finite products forms a monoidal category by taking $\otimes $ to be the product bifunctor $\times : C\times C \to C$, taking the unit $e$ to be the terminal object $t$, and taking the natural isomorphisms to be the obvious isomorphisms. When a category with finite products is viewed as monoidal under $\times $, we call it an \emph{cartesian monoidal category}, or simply a \emph{cartesian category}.
+
+Tensor products (as is likely obvious given the choice of notation) also form monoidal categories; very clearly $R$ is a unit for $\otimes _R$, with natural isomorphisms very well-known, so we also have $(\Rmod{R} ,\otimes _R,R,\alpha,\lambda,\rho)$. The same holds for graded $R$-modules, $R$-algebras, $(R,R)$-bimodules, and more.
+
+\begin{definition}[Strict Morphisms]\label{dfn:7.2}
+	A \emph{strict morphism} of monoidal categories $T : (B,\otimes ,e,\alpha,\lambda,\rho) \to (B',\otimes ',e',\alpha',\lambda',\rho')$ is a functor $T : B \to B'$ which preserves $\otimes $, $\alpha$, $\lambda$, and $\rho$: for any objects $a,b,c\in B$ and morphisms $f,g\in \operatorname{Mor} (B)$,
+	\[
+		T(a\otimes b)=T(a)\otimes 'T(b),\qquad T(f\otimes g)=T(f)\otimes 'T(g),
+	\]
+	\[
+		T\alpha = \alpha'T,\qquad T\lambda = \lambda'T,\qquad T\rho = \rho'T,\qquad T(e)=e'
+	.\]
+\end{definition}
+There is then a category $\mathbf{Moncat} $ of monoidal categories, with morphisms given by strict morphisms of monoidal categories.
+
+We call (strict) morphisms of monoidal categories ``(strict) monoidal functors''. Often we will want to relax the definition and require only that there exist a specified natural isomorphism giving $T(a\otimes b)\cong T(a)\otimes 'T(b)$, and sometimes we will want to relax this even further. Perhaps the book will investigate this later; otherwise I will investigate later.
+
+\section{Coherence}
+
+A coherence theorem states that all diagrams of a given class commute. Currently, we're concerned with commutivity of diagrams involving $\alpha,\lambda,\rho$. We can prove that every ``formal'' diagram commutes. A formal diagram consists of ``binary words'', which are $\otimes $-composites which are defined recursively. A binary word of length $0$ is the empty word $e_0$, a binary word of length $1$ is a variable placeholder $(-)$, and given binary words $v,w$ of length $m,n$, respectively, the word $v\otimes w$ has length $m+n$. As an example, $((-\otimes -)\otimes e_0)\otimes -$ is a binary word of length 3, since there are three $(-)$s each having length 1, and one $e_0$ having length 0.
+
+For each pair of binary words $v,w$ with the same length, define an arrow $v\to w$. We then define the category $W$ of binary words, which is a preorder and a groupoid. Multiplication $(v,w)\mapsto v\otimes w$ makes $W$ a monoidal category, with $e_0$ as the unit, and $\alpha,\lambda,\rho$ uniquely determined. By construction, every diagram in $W$ commutes, and thus morphisms $W\to B$ with $B$ monoidal then give the desired commutitive diagrams in $B$. These morphisms are given by the following theorem, which asserts that $W$ is the free monoidal category on one generator.
+
+\begin{theorem}\label{thm:7.1}
+	For any monoidal category $B$ and any $b\in B$, there is a unique morphism $W\to B$ such that $(-)\mapsto b$.
+\end{theorem}
+\begin{proof}
+	Let $T$ be the monoidal functor in question. Definition \ref{dfn:7.2} forces $T(e_0)=e$, and otherwise we define the action on elements by substituting $b$ for $(-)$. Given a word $v$ in $W$, we write $v_b$ to indicate it's image under $T$. We also set $(v\otimes w)_b=v_b \otimes w_b$, and define recursively from here. These definitions are uniquely determined by $b$.
+
+	To show this recipe preserves the associativity arrows, we construct a graph $G_n$. Take the vertices of $G_n$ to be all words of length $n$ that do not include $e_n$, and edges are ``basic'' arrows. These basic arrows are defined as any arrows that correspond with $\alpha$ in $B$, all identity arrows, and any tensor of already basic arrows with identity arrows. Intuitively, basic arrows are tensors over any chain of arrows, all of which are identities except exactly one, which must be either $\alpha$ or $\alpha ^{-1} $. Paths $v\to w$ in $G_n$ are thus composable arrows $v_b \to w_b$ of basic arrows in $B$. Write ``directed'' for arrows involving $\alpha$, and ``antidirected'' for arrows involving $\alpha ^{-1} $. Idk the proof is weird read the book if ur interested.
+\end{proof}
+\begin{corollary}\label{cor:7.1}
+	Let $B$ be a monoidal category. Then there is a function $\mathrm{can} _B$ which maps pairs of words $(v,w)$ of the same length $n$ to a natural isomorphism $v_B\Rightarrow w_B : B^n \to B$, called the \emph{canonical map} from $v_B$ to $w_B$. These maps are in such a way that the identity arrow $1_e$ is canonical, and so are $\alpha,\lambda,\rho$, and their inverses.
+\end{corollary}
+
+\section{Monoids}
+
+\begin{definition}[Monoid]\label{dfn:7.3}
+	Let $(B,\otimes ,e,\alpha,\lambda,\rho)$ be a monoidal category. A monoid $c$ in $B$ is a triple $(c,\mu,\eta)$ with $c\in B$, and morphisms
+	\[
+		\mu : c\times c\to c,\qquad \eta : e \to c
+	\]
+	such that the diagrams
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	c\otimes (c\otimes c)\ar[" \alpha ", r] \ar[" 1_c\otimes \mu "', d]  & (c\otimes c)\otimes c \ar[" \mu \otimes 1_c ", r]  & c\times c \ar[" \mu ", d]  \\
+	c\otimes c \ar[" \mu "', rr]  &  & c
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	e\otimes c \ar[" \eta \otimes 1_c ", r] \ar[" \lambda_c "', dr]  &c\otimes c \ar[" \mu ", d]  & c\otimes e \ar[" 1_c \otimes \eta "', l] \ar[" \rho_c ", dl]  \\
+	 & c & 
+	\end{tikzcd}\]
+	commute. A morphism $f : (c,\mu,\eta) \to (c',\mu',\eta')$ is a morphism $f : c \to c'$ in $B$ such that $f\eta = \eta'$, and
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c\otimes c \ar[" \mu ", r] \ar[" f\otimes f "', d]  & c \ar[" f ", d]  \\
+	c' \otimes c' \ar[" \mu' "', r]  & c'
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+
+It should at this point in the book be clear what this definition entails. There is a category $\mathbf{Mon} _B$ of monoids in a monoidal category $B$. Here are some examples.
+
+\begin{center}
+\begin{tabular}{ccc}
+	Monoidal Category & & Monoids Therein\\
+	$(\Set ,\times ,1)$&&regular monoids\\
+	$(\Top ,\times ,*)$&&topological monoids\\
+	$(C^C,\circ ,1_C)$&&monads\\
+	$(\Ab,\otimes ,\mathbb{Z} )$&&rings\\
+	$(\Rmod{R} ,\otimes _R,R)$&&$R$-algebras\\
+	graded modules&&graded algebras\\
+	$(B^{\mathrm{op} } ,\otimes ^{\mathrm{op} } , e)$&&comonoids in $B$\\
+	$(\Rmod{R} ^{\mathrm{op} } ,\otimes_R^{\mathrm{op} } ,R)$&&$R$-coalgebras\\
+	$(\Cat ,\times ,\mathbf{1} )$&&strict monoidal categories\\
+	$(O\text{-} \mathbf{Grph} ,\times _O,O\to O)$&&Categories
+\end{tabular}
+\end{center}
+
+\begin{proposition}[General Associative Law]\label{prp:7.1}
+	For $(C,\mu,\eta)$ a monoid in $B$, the iterated products $\mu_v$ and $\mu_w$ for words $v$ and $w$ of the same length satisfy
+	\[
+		\mu_w\circ \mathrm{can} _c(v,w)=\mu_v : v_c \to c
+	.\]
+\end{proposition}
+\begin{proof}
+	induct on the axioms
+\end{proof}
+
+\begin{theorem}[Free Monoids]\label{thm:7.2}
+	If a monoidal category $B$ has countable coproducts, and if for all $a\in B$, the functors $-\otimes a$ and $a\otimes -$ preserve coproducts, then the forgetful functor $U:\mathbf{Mon} _B \to B$ has a left-adjoint.
+\end{theorem}
+\begin{proof}
+	Preservation of coproducts means that
+	\[
+		\coprod_n (a\otimes b_n)\cong a\otimes \coprod_n b_n
+	\]
+	for any countable $\left\{ b_n \right\}_{n\in\mathbb{N} } \subseteq B$. Construct the set $\left\{ b_n \right\} $ by
+	\[
+		b_n \coloneqq a^n \coloneqq \bigotimes_{i=1}^n a
+	.\]
+	Note that there is an injection $j_{m,n} $
+	\[
+		a^m \otimes a^n \to \coprod_{m,n} (a^m \otimes a^n)
+	.\]
+	Since for any $m, n,$ the canonical map gives an isomorphism $\mathrm{can} : a^m \otimes a^n \to a^{m+n} $, which injects
+	\[
+		i_{n+m} : a^{m+n}  \to \coprod_ka^nk
+	,\]
+	the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\coprod_{m,n} (a^m \otimes a^n)}\ar[" \varphi "', dashed, d]  & a^m \otimes a^n \ar[" j_{m,n}  "', l] \ar[" \mathrm{can}  ", d]  \\
+		\displaystyle{\coprod_{k} a^k} & a^{m+n} \ar[" i_{m+n}  ", l] 
+	\end{tikzcd}\]
+	commutes, with the dashed arrow via universality of coproduct. We also have by left- and right-preservation of coproduct that there is an isomorphism
+	\[
+		\theta : \left( \coprod_n a^n \right) \otimes \left( \coprod_{m} a^m \right)  \to \coprod_{n,m} (a^n \otimes a^m)
+	.\]
+	This gives the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\left( \coprod_m a^m \right) \otimes \left( \coprod_n a^n \right) }\ar[r] \ar[" \mu "', dashed, dr] &\displaystyle{\coprod_{m,n} (a^m \otimes a^n)}\ar[" \varphi "', dashed, d]  & a^m \otimes a^n \ar[" j_{m,n}  "', l] \ar[" \mathrm{can}  ", d]  \\
+																  &\displaystyle{\coprod_{k} a^k} & a^{m+n} \ar[" i_{m+n}  ", l] 
+	\end{tikzcd}\]
+	where $\mu$ is simply the composition of $\varphi$ with the associativity isomorphism. An \emph{annoying} diagram chase that I am NOT typing up shows $\mu$ satisfies the associativity axiom of definition \ref{dfn:7.3}, and defining $\eta_a : e \to \coprod_n a^n$ is simply given by $\eta_a = i_0 : a^0 e \to \coprod_na^n$. These definitions give a monoid, and $i_1 : a \to U(\coprod_n a^n,\mu,\eta)$ is universal from $a$ to $U$. By pointwise construction of an adjoint, we are done.
+\end{proof}
+
+\section{Actions}
+
+\begin{definition}[Action]\label{dfn:7.4}
+	A (left) action of a monoid $(c,\mu,\eta)$ on an object $a$ in the same monoidal category $B$ is an arrow $\nu : c\otimes a \to a$ such that the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	c\otimes (c\otimes a)\ar[" \alpha ", r] \ar[" 1_c \otimes \nu "', d]  & (c\otimes c)\otimes a \ar[" \mu \otimes 1_a ", r]  & c\otimes a \ar[" \nu ", d]  & e\otimes a \ar[" \eta \otimes 1_a "', l] \ar[" \lambda_a ", dl]  \\
+	c\otimes a \ar[" \nu "', rr]  &  & a & 
+	\end{tikzcd}\]
+	commutes. A morphism $f : \nu \to \nu'$ of actions on $a$ and $a'$, respectively, is an arrow $f : a \to a'$ such that $\nu'(1_c \otimes f)=f\nu$. These definitions form the category $\mathbf{Lact}_c $ of left-actions from $c$ to objects in $B$.
+\end{definition}
+Right-actions are defined similarly. There is a forgetful functor $\mathbf{Lact} _c \to B$ given by $(\nu : c \to a)\mapsto a$ and $f\mapsto f$.
+
+\section{The Simplicial Category}
+
+\begin{definition}[The Simplicial Category]\label{dfn:7.5}
+	The simplicial category $\boldsymbol{\Delta} $ takes as objects finite ordinals $[n-1]\eqqcolon n=\left\{ 0, \ldots ,n-1 \right\} $, and as morphisms weakly monotonic functions, meanining functions $f : n \to m$ such that $i\leq j$ implies $f(i)\leq f(j)$.
+\end{definition}
+
+The simplicial category is very important, hence why I dedicate an entire definition to it. Regular addition is turned into a bifunctor $+: \boldsymbol{\Delta} \times \boldsymbol{\Delta}  \to \boldsymbol{\Delta} $ via the following identification on arrows. Take $f : n \to n'$ and $g : m \to m'$. Define $f+g : m+n \to m'+n'$ as the map
+\[
+	(f+g)(x)=
+	\begin{cases}
+		f(x),&0\leq x<m\\
+		g(x)-(m-1),&m\leq x<n
+	\end{cases}
+.\]
+That is, we kind of just place $f$ and $g$ side by side. We then have that $(\boldsymbol{\Delta} ,+,0)$ is a \emph{strict} monoidal category, and since $1$ is terminal, there is a monoid $(1,\mu,\eta)$ defined in the only possible way; all diagrams commute manifestly since $1$ is terminal. This monoid is universal in the following sense.
+
+\begin{proposition}\label{prp:7.2}
+	Let $(c,\mu',\eta')$ be a monoid in a \emph{strict} monoidal category $(B,\otimes ,e)$. Then there is a unique monoidal functor $F : (\boldsymbol{\Delta} ,+,0) \to (B,\otimes ,e)$ such that $F(1)=c$, $F\mu=\mu'$, and $F\eta=\eta'$.
+\end{proposition}
+\begin{proof}
+	Write $\mu^{(k)} $ for the unique arrow $k\to 1$, and note that $\mu^{(0)} =\eta$, $\mu^{(1)}= 1_1$, and $\mu^{(2)} =\mu$. This continues:
+	\[
+		\mu^{(3)} =\mu(\mu+1)=\mu(1+\mu)
+	.\]
+	Commutivity (and associativity) here follow since $1$ is terminal. We thus obtain
+	\[
+		\mu^{(n)} \left( \sum_{i} \mu^{(k_1)}  \right) =\mu ^{(\sum_{i} k_i)} 
+	.\]
+	Moreover, given any $f : m \to n$, we can define $m_i$ as the ordinal number pf the subset $f^{-1} (i)$ in $m$. We then very simply have
+	\[
+		f=\sum_{i=0}^{n-1} \mu ^{(m_i)} ,\qquad \sum_{i=0}^{n-1} m_i=m
+	.\]
+	
+	Now consider the functor $F : \boldsymbol{\Delta}  \to B$. Requiring $F(1)=c$ and $F(0)=e$ uniquely determines the object function. Using the same representation as the earlier part I didn't copy, wehre $\mu ^{(n)} $ in a monoidal category means the $n$-fold multiplication with parethenases all at the front, we have that requiring $F\mu=\mu'$ and $F\eta=\eta'$ implies $F(\mu^{(n)} )=\mu^{\prime(n)} $. Since compositions in $\boldsymbol{\Delta} $ correspond to associativity under $+$, $F$ is a functor by associativity of $\otimes $.
+\end{proof}
+
+This gives a complete characterization of $\boldsymbol{\Delta} $; it's objects are the free monoid (in $\Set $) under $+$, and it's arrows are compositions and associations of $\eta$ and $\mu$. There is another characterization though, which is extremely important.
+
+\begin{definition}\label{dfn:7.6}
+	Let $i\in n$, and let $\delta_i^n : n \to n+1$ be the unique injective monotone map $n\to n+1$ that \emph{does not} map to $i$:
+	\[
+		\delta_n^i(x)=
+		\begin{cases}
+			x,&x<i\\
+			x+1,&x\geq i
+		\end{cases}
+	.\]
+	Also let $\sigma_n^i : n+1 \to n$ be the unique surjective monotone function $n+1\to n$ that double counts $i$:
+	\[
+		\sigma_n^i(x)=
+		\begin{cases}
+			x,&x\leq i\\
+			x-1,&x>i
+		\end{cases}
+	.\]
+\end{definition}
+These are often referred to as face maps $\delta$ and degeneracy maps $\sigma$, or sometimes these names are only attached to the induced maps in a simplicial set or object. Often the $n$ is omitted and is inferred from context. Notation for these maps varies, and a more common notation is $d^i$ and $s^i$ for $\delta^i$ and $\sigma^i$, respectively.
+
+Clearly, any monic factors via $\delta$ maps, and any epi factors via $\sigma$ maps, and any monotone map $f : n \to n'$ factors as $f=hg$ for $h$ epi $n''\to n'$ and $g$ mono $n\to n'$. This gives a description of all maps in $\boldsymbol{\Delta} $ as composites of $\delta$s and $\sigma$s. We make precise this fact.
+
+\begin{lemma}\label{lma:7.1}
+	Any arrow $f : n \to n'$ in $\boldsymbol{\Delta} $ has a unique representation as
+	\[
+		f=\delta_{i_1} \circ \cdots \circ \delta_{i_k} \circ \sigma_{j_1} \circ \cdots \circ \sigma_{j_h} 
+	,\]
+	where $n-h+k=n'$, and
+	\[
+		n'>i_1 > \cdots > i_k \geq 0,\qquad 0\leq j_1<\cdots<j_h<n-1
+	.\]
+\end{lemma}
+\begin{proof}
+	Any monotone function is obviously uniquely determined by it's image, and hence the elements it ``skips'', and the elements it counts multiple times.
+\end{proof}
+
+In particular, any composite of $\delta$ and $\sigma$ may be put in this form. Some (simple to verify) identities are
+\[
+	\delta_i\delta_j = \delta_{j+1} \delta_i,\qquad i\leq j
+;\]
+\[
+	\sigma_j\sigma_i = \sigma_i\sigma_{j+1} ,\qquad i\leq j;
+\]
+\[
+	\sigma_j\delta_i =
+	\begin{cases}
+		\delta_i\sigma_{j-1} ,&i<j\\
+		1,&j\leq i\leq j+1\\
+		\delta_{i-1} \sigma_j,&i>j+1
+	\end{cases}.
+\]
+These relations in particular suffice to put any composite of $\delta$s and $\sigma$s into that of lemma \ref{lma:7.1}. The book dedicates a proposition to this fact.
+
+The category $\boldsymbol{\Delta} $ can be interpreted geometrically via affine simplicies, giving a (faithful) functor $\Delta : \boldsymbol{\Delta}  \to \Top $ representing $\boldsymbol{\Delta} $ as a subcategory of $\Top $. We define this functor as such. Take $\Delta(0)=\varnothing $ viewed as a topological space, and take $\Delta(n+1)$ to be the standard $n$-simplex
+\[
+	\Delta(n+1)=\left\{ (t_0, \ldots ,t_n)\mid t_i\geq 0\forall i,\; \sum_{i=0}^n t_i=1 \right\} 
+.\]
+We generally write $\Delta_{n} $ instead of $\Delta(n)$. A more common and more modern notation is to write $\Delta^n$ for the standard $n$-simplex and to write $[n]$ instead of $n+1$ for the object of $\boldsymbol{\Delta} $. Action on morphisms $f : [n] \to [m]$ is given by $\Delta(f): \Delta^n \to \Delta^m$:
+\[
+	\Delta(f)(t_0, \ldots ,t_n)=(s_0, \ldots ,s_m),\qquad s_j = \sum_{f(i)=j} t_i
+.\]
+In this notation, $\Delta_{n+1} =\Delta^n$ has dimension $n$ and $n+1$ vertices, and $\Delta(f)$ is the unique affine map that sends the vertex $i$ (given by $\mathbf{t}^i=1,\mathbf{t}^{j\neq i} =0$) of $\Delta^n$ to the vertex $f(i)$ of $\Delta^m$. It can be verified this is functorial with basic affine geometry, which I do not know.
+
+Of particular importance is the category $\boldsymbol{\Delta} ^+$, which is the full subcategory of $\boldsymbol{\Delta} $ which omits $0$. Topologists often work in $\boldsymbol{\Delta} ^+$ instead of $\boldsymbol{\Delta} $, and cycle notation so $0=\left\{ 0 \right\} $; in general $n=[n]$. This is often a much more convenient place to work with simplicial objects, but we distinguish $\boldsymbol{\Delta} $ from $\boldsymbol{\Delta} ^+$ in this for various categorical reasons, even though it is nonstandard.
+
+\begin{definition}[Simplicial Object]\label{dfn:7.7}
+	A simplicial object $S$ in a category $X$ is a contravariant functor $S : \left( \boldsymbol{\Delta}^+ \right)^{\mathrm{op} }  \to X$, and a \emph{morphism} of simplicial objects $S\to S'$ in $X$ is a natural transformation $\theta : S \Rightarrow S'$. Simplicial objects in $\Set $ are called \emph{simplicial sets}, and the category of simplicial sets is denoted $\mathbf{sSet}$.
+\end{definition}
+
+When considering a simplicial object $S$ in $X$, we generally use the notation $[n]\mapsto S_n$, $\delta_i \mapsto d_i$, and $\sigma_i \mapsto s_i$. This gives the more traditional description of a simplicial object, being a list $\left\{ S_i \right\}_{i\in\mathbb{N} } $ of objects of $X$, together with collections of arrows $d_i : S_n \to S_{n-1} $ and $s_i : S_n \to S_{n+1} $ for $i\in[n]$, called the \emph{face} and \emph{degeneracy} maps, respectively. These maps must also satisfy the relations dual to those explored earlier; in particular,
+\[
+	d_id_{j+1} =d_jd_i,\qquad i\leq j
+;\]
+\[
+	s_{j+1}s_{i} =s_is_j,\qquad i\leq j;
+\]
+\[
+	d_is_j=
+	\begin{cases}
+		s_{j-1} d_i,&i<j\\
+		1,&j\leq 1\leq j+1\\
+		s_jd_{i-1} ,&i>j+1
+	\end{cases}
+.\]
+We call $S_n$ the object of $n$-simplicies.
+
+For example, if $Y$ is an affine simplex with linearly ordered vertices, then $d_i(Y)$ is the $i$th face, which is (defined as) the face that does not include the $i$th vertex. Similarly, $s_i(Y)$ is the degenerate simplex with the vertex $i$ doubled.
+
+An \emph{augmented} simplicial object in $X$ is a contravariant functor $S': \boldsymbol{\Delta}^{\mathrm{op} }   \to X$ (note here we use $\boldsymbol{\Delta} $ instead of $\boldsymbol{\Delta} ^+$). An \emph{augmentation} of a simplicial object $S$ is an object $S_{-1} \in X$ and an arrow $\varepsilon : S_0 \to S_{-1} $ in $X$ with $\varepsilon d_0=\varepsilon d_1: S_1 \to S_{-1} $; thus we may extend $S$ to an augmented simplicial object $S'$ with $S'(\delta_0)=\varepsilon $ and $S'(0)=S_{-1} $.
+
+Given a simplicial object $S$ in an abelian category $A$, We can construct a chain complex $(S_{\bullet} ,\partial _{\bullet} )$ with the boundary morphisms given by
+\[
+	\partial_n=\sum_{i=0}^{n} (-1)^i d_i : S_n \to S_{n-1} 
+.\]
+The identity $d_id_{j+1} =d_jd_i$ for $i\leq j$ gives $\partial_{n-1} \partial _n=0$ after some annoying expansions. We can then compute the homologies
+\[
+	H_n(S_{\bullet} )=\frac{\Ker \partial _n}{\Im \partial _{n-1} } 
+.\]
+Note that $\Ker \partial _0=S_0$, since $\partial _0 : S_0 \to S_{-1} =0$, giving us
+\[
+	H_0(S_{\bullet} )=S_0/\Im \partial_1
+.\]
+
+Consider the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+	S:&\boldsymbol{\Delta} ^{\mathrm{op} } \times \Top \ar[" \Hom(\Delta(-)\text{,} -)  ", r]  & \Set \ar[" F^{\mathbb{Z} }  ", r]  & \Ab,
+\end{tikzcd}\]
+where $F^{\mathbb{Z} } $ (or $F$ for simplicity) is the free abelian group, viewed as a functor. Thus for each topological space $X$ there exists an augmented simplicial object $S(-,X)$ in $\Ab$. Since arrows in $\Hom(\Delta^n, X) $ are singular $n$-simplicies (whatever that means), so $S(X)_{n+1} =F(\Hom(\Delta^n, X) )$ is the free abelian group generated by singular $n$-simplicies. The associated chain complex is called the \emph{singular chain complex}, and the homolohies are the \emph{singular homology} of $X$. This construction works for any concrete abelian category $A$ for which there exists a free functor $F : \Set  \to A$, but $\Ab$ is the obvious choice to use here.
+
+To summarize,
+\begin{itemize}
+	\item $\boldsymbol{\Delta} $ is the category with objects finite ordinals, and arrows weakly order-preserving functions;
+	\item $\boldsymbol{\Delta} $ is a full subcategory of $\Cat $, when viewing ordinals as poset categories, since monotonic functions then become functors;
+	\item $\boldsymbol{\Delta} $ is a strictly monoidal category and contains the universal monoid $(1,\mu : 2 \to 1,\eta : 0 \to 1)$, and it's arrows are iterated multiplications $\mu^{(m_0)} + \cdots \mu^{(m_{n-1} )} $;
+	\item $\boldsymbol{\Delta} $ is a subcategory of $\Top $ when viewing $n+1=[n]$ as the standard $n$-simplex $\Delta^n$.
+\end{itemize}
+Simplicial objects are extremely important in algebraic topology.
+
+\section{Monads and Homology}
+
+Let $L=(L,\varepsilon ,\delta)$ be a comonad, meaning $L : A \to A$, $\varepsilon : L \to 1_A$, and $\delta : L \to L^2$ satisfy
+\[
+	(\delta L)\circ \delta = (L\delta)\circ \delta,\qquad (\varepsilon L)\circ \delta = 1_L = (L\varepsilon )\circ \delta
+.\]
+$\boldsymbol{\Delta} ^{\mathrm{op} } $ contains the universal comonoid, and since $A^A$ is a strict monoidal category, there is a unique monoidal functor $\boldsymbol{\Delta} ^{\mathrm{op} } \to A^A$ mapping $(1,1\to 2,1\to 0)\mapsto (L,\varepsilon ,\delta)$. Note in particular that this is an augmented simplicial object in $A^A$, with $\delta=s_0$ the degeneracy arrow, $\varepsilon $ the augmentation, and $n\mapsto L^n$ the object function. Faces and degenerates are given by
+\[
+	d_i^n = L^i \varepsilon L^{n-1} ,\qquad s_i^n = L^i\delta L^{n-i-1} 
+.\]
+Assuming that $A$ is an $Ab$-category gives us that we have a chain complex $L^{\bullet} (a)$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+L(a) & L^2(a)\ar[" \partial_2 "', l]  & L^3(a)\ar[" \partial _3 "', l]  & \cdots \ar[" \partial _4 "', l] 
+\end{tikzcd}\]
+with the augmentation $\varepsilon _a : L(a) \to a$ giving a resolution of $a$, for any $a\in A$. The book now gives a very long example considering cohomologies of some group $\Pi$.
+
+\section{Closed Categories}
+
+\begin{definition}[Symmetric]\label{dfn:7.8}
+	A monoidal category $B$ is \emph{symmetric} when there exists a natural isomorphism $\gamma_{a,b} : a\otimes b \to b\otimes a$ such that
+	\[
+		\gamma_{a,b} \circ \gamma_{b,a} =1,\qquad \rho_b = \lambda_b \circ \gamma_{b,e} : b\otimes e \cong b,
+	\]
+	and such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\otimes (b\otimes c)\ar[" \alpha ", r] \ar[" 1\otimes \gamma "', d]  & (a\otimes b)\otimes c \ar[" \gamma ", r]  & c\otimes (a\otimes b)\ar[" \alpha ", d]  \\
+	a\otimes (c\otimes b)\ar[" \alpha "', r]  & (a\otimes c)\otimes b \ar[" \gamma \otimes 1 "', r]  & (c\otimes a)\otimes b1
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+This condition is a coherence condition; a symmetric monoidal category is then a monoidal category for which $\otimes $ is commutative up to natural isomorphism. Note that cartesian monoidal categories, in particular, are symmetric.
+
+\begin{definition}[Closed Category]\label{dfn:7.9}
+	An \emph{closed category} $V$ is a symmetric monoidal category for which each functor $-\otimes b : V \to V$ has a specified right-adjoint $(-)^b : V \to V$; we call $(-)^b$ the internal hom-functor.
+\end{definition}
+Alternative notations for $(-)^b$ include $[b,-]$. An example is $(\Ab,\otimes ,-)$ with $(-)^B\coloneqq \Hom(B, -) $; this in fact holds in general $R$-modules.
+
+We have seen already that $Ab$-categories are categories for which hom-sets are abelian groups. We can generalize this further; for a monoidal category $V$, a $V$-category $R$ is a collection of objects; for each pair $r,s\in R$ an \emph{object} $R(r,s)\in V$; to each triple $r,s,t\in R$ an arrow known as composition
+\[
+	\circ : R(s,t)\otimes R(r,s) \to R(r,t)
+;\]
+to each $r\in R$ an arrow $e\to R(r,r)$. These are subject to the usual unital and associative axioms for categories. Note that this does not define morphisms in the usual way; although we obtain hom-objects this does not actually give us arrows. The way we obtain arrows is by defining a functor $U : V \to \Set $, and taking the hom-sets to be $U(R(-,-))$. In particular, we take $U=V(e,-)$. We then say that $R$ is a $V$-enriched category. Since $\Ab(\mathbb{Z} ,A)\cong A$, this recovers the usual notion of $Ab$-categories as $Ab$-enriched categories.
+
+If the enriching category $V$ is \emph{closed}, basically all of basic category theory applies to it's enriched categories.
