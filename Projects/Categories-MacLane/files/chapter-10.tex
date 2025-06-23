@@ -1,0 +1,303 @@
+\chapter{Kan Extensions}
+
+This section was heavily supplimented with \href{https://math.jhu.edu/~eriehl/161/context.pdf}{Riehl's \emph{Category Theory in Context}} since I was not a massive fan of Mac Lane's presentation of the Kan extension.
+
+\section{Adjoints and Limits}
+
+If $C$ is a category which is $J$-complete or cocomplete, then limit or colimit provides a right or left adjoint for $\Delta : C \to C^J$, respectively:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+C \ar[" \Delta ", d]  \\
+C^J \ar[" \varprojlim  "', shift right=6, u] \ar[" \varinjlim  ", shift left=6, u] 
+\end{tikzcd}\]
+This notion as a converse; left-adjoints can be interpreted as limits. For $\mathbf{0} $ the empty category, an initial object $0$ is precisely
+\[
+	0=\varinjlim (\mathbf{0} \to C) = \varprojlim (1_C : C \to C)
+.\]
+The equality on the right is a little new. Although it's not too difficult to work out, it's easier seen as a special case of this lemma.
+
+\begin{lemma}\label{lma:10.1}
+	If $\lambda : d \Rightarrow 1_C$ is a cone and $F : J \to C$ is a functor such that $\lambda F : d \Rightarrow F$ is a limiting cone for $F$, then $d$ is initial in $C$.
+\end{lemma}
+\begin{proof}
+	First, I think it's useful to reconcile the theorem statement. Note that $\lambda F$ is the horizontal composition $\lambda \cdot 1_F$ given by composing along the diagram
+	\[\begin{tikzcd}[row sep = 5em, column sep = 5em]
+		J\ar[r, bend left, "F"{name=f1}]\ar[r, bend right, "F"'{name=g1}]&C\ar[r, bend left, "\Delta(d)"{name=f2}]\ar[r, bend right, "1_C"'{name=g2}]&C.
+		\arrow[from=f1, to=g1, shorten=5px, Rightarrow, "1_F"]\arrow[from=f2, to=g2, shorten=5px, Rightarrow, "\lambda"]
+	\end{tikzcd}\]
+	This gives us that
+	\[
+		\lambda F : \Delta(d) \circ F \to 1_C \circ F
+	.\]
+	Clearly, the composite $1_C \circ F=F$, but the theorem assumes $\Delta(d)\circ F=\Delta(d)$. Indeed, $\Delta(d)(x)=d$ and $\Delta(d)(f)=1_d$ implies that
+	\[
+		(\Delta(d)\circ F)(x)=\Delta(d)(F(x))=d,\qquad (\Delta(d)\circ F)(f)=\Delta(d)(F(f))=1_d
+	.\]
+	
+	Since $\lambda$ is a cone, for each $f : d \to c$ in $C$, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 1em]
+	 & d \ar[" \lambda_c ", dr] \ar[" \lambda_d "', dl]  &  \\
+	d \ar[" f "', rr]  &  & c
+	\end{tikzcd}\]
+	commutes. Similarly, since $\lambda F$ is a cone, there exists an arrow $\lambda_{F(i)} : d \to F(i)$ for each $i\in J$, and thus the diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 1em]
+	 & d \ar[" \lambda_{F(i)}  ", dr] \ar[" 1_d "', dl]  &  &  & d \ar[" \lambda_{F(i)}  ", dr] \ar[" \lambda_d "', dl]  &  \\
+	d \ar[" \lambda_{F(i)}  "', rr]  &  & F(i) & d \ar[" \lambda_{F(i)}  "', rr]  &  & F(i)
+	\end{tikzcd}\]
+	commute since $\lambda$ is a cone. Since $\lambda F$ is limiting, the bottom two triangles give $\lambda_d = 1_d$, and thus the top triangle gives $f=\lambda_c$. Thus each arrow $f : d \to c$ in $C$ is equal to the unique arrow $\lambda_c : d \to c$, and thus $d$ is initial.
+\end{proof}
+
+This reduces initial objects to limits, and recall that a functor $G : A \to X$ that preserves limits has a left-adjoint precisely when each $x\in X$ gives a comma category $(x\downarrow G)$ with an initial object.
+
+\begin{theorem}[Criterion for Existence of an Adjoint]\label{thm:10.1}
+	A functor $F : A \to X$ has a left-adjoint if and only if
+	\begin{enumerate}
+		\item $G$ preserves all limits;
+		\item For each $x\in X$, the limit $\varprojlim (\Pi_A^x : (x\downarrow G) \to A)$ exists in $A$.
+	\end{enumerate}
+	The left adjoint is then constructed pointwise as
+	\[
+		F(x)=\varprojlim (\Pi_A^x)
+	.\]
+\end{theorem}
+\begin{proof}
+	If $G$ is adjoint, the comma category has an initial object $\eta_x : x \to GF(x)$, and thus the limit exists. For the converse, the projection creates the relevant limits, so by lemma \ref{lma:10.1}, this is equivalent to Freyd's adjoint functor theorem.
+\end{proof}
+
+\section{Weak Universality}
+
+\begin{definition}[Weakly Universal]\label{dfn:10.1}
+	An arrow is \emph{weakly universal} if the induced arrow is not unique. Explicitly, Given a functor $G : A \to X$ and an object $x\in X$, a weakly universal arrow from $x$ to $G$ is a pair $(r,w : x \to G(r))$ with $r\in A$ and $w$ an arrow in $X$, such that for all $f : x \to G(a)$, there exists a (not necessarily unique) arrow $f': r \to a$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" w ", r] \ar[" f "', dr]  & G(r)\ar[" \exists f' ", d]  & r \ar[" \exists f' ", d]  \\
+	 & G(a) & a
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+We can thus define weak limits, weak (co)products, and so on. The book offers an application by reframing Freyd's theorem for the existence of an initial object as follows:
+
+\begin{proposition}\label{prp:10.1}
+	A locally small, complete category $D$ has an initial object if and only if it has a (small) set $S\subseteq D$ which is weaky initial: for all $d\in D$ there is $s\in S$ and an arrow $s\to d$.
+\end{proposition}
+The book offers a refinement of the previous proof.
+
+\section{The Kan Extension}
+
+\begin{definition}[Kan Extension]\label{dfn:10.2}
+	Given functors $F : C \to E$ and $K : C \to D$, a \emph{left Kan extension} of $F$ along $K$ is a functor $\mathrm{Lan} _KF : D \to E$ and a natural transformation $\eta : F \Rightarrow \mathrm{Lan} _KF \circ K$ which is initial with respect to this property; hence for any other pair $G : D \to E$ and $\gamma : F \Rightarrow G\circ K$, the natural transformation $\gamma$ factors uniquely through $\eta$ as the horizontal composite indicated in the third diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		C \ar[" F "{name=F}, rr] \ar[" K "', dr]  &  & E \\
+	 & D\ar[" \mathrm{Lan} _KF "', dashed, ur]  & 
+	 \arrow[from=F, to=2-2, Rightarrow, " \eta ", shorten=5pt] 
+	\end{tikzcd}
+\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C \ar[" F "{name=F}, rr] \ar[" K "', dr]  &  & E \\
+ & D \ar[" G "', ur]  & 
+ \arrow[from=F, to=2-2, Rightarrow, " \gamma ", shorten=5pt] 
+\end{tikzcd}
+=
+\begin{tikzcd}
+	C &&&& E \\
+	\\
+	&& D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", from=1-1, to=1-5]
+	\arrow["K"', from=1-1, to=3-3]
+	\arrow["{\mathrm{Lan}_KF}"{name=1, anchor=center, inner sep=0}, bend left, from=3-3, to=1-5]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "G"', bend right, from=3-3, to=1-5]
+	\arrow["\eta"', shorten <=7pt, shorten >=7pt, Rightarrow, from=0, to=3-3]
+	\arrow["{\exists!}"', shorten <=8pt, shorten >=6pt, Rightarrow, from=1, to=2]
+\end{tikzcd}
+\]
+Dually, a \emph{right Kan extension} of $F$ along $K$ is one where the natural transformation $\varepsilon $ points in the opposite direction, such that $\varepsilon $ is final with respect to diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C \ar[" F "{name=F}, rr] \ar[" K "', dr]  &  & E \\
+ & D \ar[" \mathrm{Ran} _KF "', dashed, ur]  & 
+ \arrow[from=2-2, to=F, Rightarrow, " \varepsilon  "', shorten=5pt] 
+\end{tikzcd}\]
+\end{definition}
+
+If $K : C \to D$ embeds $C$ as a full subcategory of $D$, then the left and right Kan extensions become more intuitive, since $F$ does indeed extend along $K$ to a larger category in a universal way. I indicate the extension functor with a dashed arrow since universality of the transformation determines the functor uniquely up to (natural) isomorphism, as is always the case with universals. More precisely, there is a natural isomorphism
+\[
+	\Nat(F,-\circ K)\cong\Nat(\mathrm{Lan}_KF,-)
+.\]
+
+One can also think of a Kan extension of $F$ along $K$ as the closest approximation of $F$ as a composition beginning with $K$, in that it may only differ by a universal natural transformation. These definitions can be restated in any 2-category, and we generally drop the prefix ``Kan'' when working outside of $\Cat $. The Kan extension problem is closely related to that of adjoints for functors.
+
+\begin{proposition}\label{prp:10.2}
+	Fix $K : C \to D$ and a category $E$. If the left and right Kan extensions of all functors $F : C \to E$ along $K$ exist, then these define left- and right-adjoints to the precomposition functor $K^* : E^D \to E^C$:
+	\[
+		E^D(\mathrm{Lan} _KF,-)\cong E^C(F,(-)\circ K),\qquad E^C((-)\circ K,F)\cong E^D(-,\mathrm{Ran} _KF)
+	.\]
+\end{proposition}
+\begin{proof}
+	The natural transformation in a right Kan extension is universal from $K^*$ to $F$, and we already know that if all objects in a category have universal arrows from $K^*$ to them then the arrows constitute a left-adjoint to $K^*$. Duality of this fact gives us the right adjoint, and so we have $\mathrm{Lan} _K(-)\dashv K^* \dashv \mathrm{Ran} _K(-)$.
+\end{proof}
+
+\begin{theorem}[Pointwise Construction]\label{thm:10.2}
+	Given functors $F : C \to E$ and $K : C \to D$, if for every $d\in D$ the colimit of $F\circ \Pi^d$ exists, for $\Pi^d : (K\downarrow d) \to C$ the projection of the comma category, then $F$ has a left Kan extension given pointwise by
+	\[
+		\mathrm{Lan} _KF \coloneqq \varinjlim \left( F\circ \Pi^d \right) 
+	.\]
+	Dually, for $\Pi_d : (d\downarrow K) \to C$ the projection, if the limits exist then the right Kan extension is given pointwise as
+	\[
+		\mathrm{Ran} _KF(d)\coloneqq \varprojlim \left( F\circ \Pi_d \right) 
+	.\]
+	In both case, action given on morphisms $g : d \to d'$ is given by the unique arrow $\varinjlim F\Pi^d \to \varinjlim F\Pi^{d'} $ that commutes with the limiting cones; respectively the limit and $\Pi_d$ for the right Kan extension.
+\end{theorem}
+\begin{proof}
+	First, we show the arrow can be defined as such. Any morphism $g : d \to d'$ in $D$ induces a functor $g_* : (K\downarrow d) \to (K\downarrow d)$ by postcomposition; since postcomposition doesn't change the starting objects this commutes with the projections:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(K\downarrow d) \ar[" g_* ", rr] \ar[" \Pi^d "', dr] &  & (K\downarrow d') \ar[" \Pi^{d'}  ", dl] \\
+	 & C & 
+	\end{tikzcd}\]
+	Take $\lambda^{d'} : F\Pi^{d'}  \Rightarrow \varinjlim F\Pi^d$ to be the colimiting cone; by commutivity of the diagram above this gives a cocone $\lambda^{d'}  g_*$ for $F\Pi^{d'} g=F\Pi^d$. More precisely, we get a cocone
+	\[
+		\lambda^{d'} g_* : F\Pi^d \Rightarrow \Delta\left( \varinjlim F\Pi^d \right) \circ g_* = \Delta\left( \varinjlim F\Pi^d \right) ,
+	\]
+	where I have explicitly mentioned the diagonal functor to motivate the equality. Since $\varinjlim F\Pi^d$ is intial with respect to cocones for $F\Pi^d$, there is a unique morphism
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F\Pi^d(f)\ar[" F\Pi^d(\varphi )", rr] \ar[" \lambda^{d}_{f} "', dr] \ar[" \lambda^{d'}_{gf} "', bend right, ddr]  &  & F\Pi^d(h) \ar[" \lambda^{d}_h ", dl] \ar[" \lambda^{d'}_{gh}  ", bend left, ddl]  \\
+	 & \mathrm{Lan}_KF(d) \ar[" \mathrm{Lan} _KF(g) ", dashed, d]  &  \\
+	 & \mathrm{Lan}_KF(d') & 
+	\end{tikzcd}\]
+	where I have replaced the colimits with the images under $\mathrm{Lan} _KF$ as defined. Uniqueness implies functorality.
+
+	To complete the proof, it suffices to show $\mathrm{Lan} _KF$ is \emph{indeed} a Kan extension, meaning we must recover the unit $\eta : F \Rightarrow \mathrm{Lan} _KF\circ K$ from the colimiting cocones. Define the component $\eta_c : F(c) \to \mathrm{Lan} _KFK(c)$ by
+	\[
+		\eta_c \coloneqq \lambda^{K(c)} _{1_{K(c)} } : F(c) \to \left( \mathrm{Lan} _KF\circ K \right) (c)
+	.\]
+	To show naturality, let $h : c \to c'$ in $C$. Construct the comma category $(K\downarrow K(c'))$, and consider the objects
+	\[\begin{tikzcd}[row sep = 0.5em, column sep = 2.5em]
+		(c,K(h)): & K(c)\ar[" K(h) ", r]  & K(c') \\
+	(c',1_{K(c')} ): & K(c')\ar[" 1_{K(c')}  ", r]  & K(c').
+	\end{tikzcd}\]
+	Since the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 1em]
+	K(c)\ar[" K(h) ", rr] \ar[" K(h) "', dr]  &  & K(c')\ar[" 1_{K(c')}  ", dl]  \\
+	 & K(c') & 
+	\end{tikzcd}\]
+	commutes, we have that $h : (c,K(h)) \to (c',1_{K(c')} )$. The cone $\lambda^{K(c')} $ then gives the diagram
+	\[\begin{tikzcd}[row sep = 4em, column sep = 2.5em]
+	F\Pi^{K(c')} (c,K(h))=F(c) \ar[" F\Pi^{K(c')} (K(h))=F(h) ", rr] \ar[" \lambda^{K(c')}_{K(h)}  "', dr]  &  & F(c')=F\Pi^{K(c')} (c',1_{K(c')} )\ar[" \lambda_{1_{K(c')} } ^{K(c')}  ", dl]  \\
+	 & \varinjlim F\Pi^{K(c')} =\mathrm{Lan}_{K} F(c'). & 
+	\end{tikzcd}\]
+	The rightmost triangle of a previous diagram gives for any $g : d \to d'$, for all objects $(c,f)\in(K\downarrow d)$, the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 2em]
+	 & F\Pi^d(c,f)=F(c) \ar[" \lambda^{d'}_{gf}  ", dr] \ar[" \lambda^d_f "', dl]  &  \\
+	\mathrm{Lan}_KF(d)\ar[" \mathrm{Lan} _KF(g) "', dashed, rr]  &  & \mathrm{Lan} _KF(d')
+	\end{tikzcd}\]
+	commutes. Take $d=K(c)$, $g=K(h) $, and $(c,1_{K(c)} )\in (K\downarrow K(c))$. Since $K(h)\circ 1_{K(c)} =K(h)$, the diagram then reads
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+	 & F(c)\ar[" \lambda^{K(c')}_{K(h)}  ", dr] \ar[" \lambda^d_{1_{K(c)} }  "', dl]  &  \\
+	\mathrm{Lan} _KF(K(c))\ar[" \mathrm{Lan} _KF(h) "', dashed, rr]  &  & \mathrm{Lan} _KF(K(c')).
+	\end{tikzcd}\]
+	Combining this diagram with a previous one along the diagonal gives
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 4em]
+	F(c)\ar[" F(h) ", r] \ar["\eta_c=\lambda_{1_{K(c)} } ^{K(c)}  "', d] \ar[" \lambda_{K(h)}^{K(c')}  ", dr]  & F(c')\ar[" \lambda_{1_{K(c')} } ^{K(c')}=\eta_{c'}  ", d]  \\
+	\mathrm{Lan} _KF(K(c))\ar[" \mathrm{Lan} _KF(K(h)) "', r]  & \mathrm{Lan} _KF(K(c')).
+	\end{tikzcd}\]
+	This gives that $\eta : F \Rightarrow \mathrm{Lan} _KF\circ K$ is natural.
+
+	Finally, we show $\eta$ is universal. Let $(G,\gamma)$ satisfy the extension criterion. Note that for all $f : K(c) \to d$ in $D$, there is an arrow $\lambda_{f} ^d : F(c) \to \mathrm{Lan} _KF(d)$. Note also that there is an arrow
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(c)\ar[" \gamma_c ", r]  & GK(c)\ar[" G(f) ", r]  & G(d).
+	\end{tikzcd}\]
+	Notably, $G(-)\circ\gamma_{(-)} $ is a co-cone, and by universality there exists $\alpha_d$ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(c)\ar[" \lambda_{f} ^{d}  ", r] \ar[" \gamma_c "', d]  & \mathrm{Lan} _KF(d)\ar[" \alpha_d ", dashed, d]  \\
+	GK(c)\ar[" G(f) "', r]  & G(d)
+	\end{tikzcd}\]
+	commute. Here, we assume there exists some $c\in C$ and some $f : K(c) \to d$ for each $d\in D$; if there exists some $d$ for which there exist no such $f$, then $K\downarrow d)=\mathbf{0} $ is the empty category, and $\mathrm{Lan}_KF(d)=\varinjlim (\mathbf{0} \to E)$ is the colimit of the empty functor, and hence an initial object, meaning $\alpha_d : \mathrm{Lan} _KF(d) \to G(d)$ is unique by universality in $E$.
+
+	To show $\alpha$ is natural $\mathrm{Lan}_KF\Rightarrow G$, let $g : d \to d'$ in $D$, and consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & F(c)\ar[" \lambda^{d'}_{gf}  ", dr] \ar[" \lambda_f^d "', dl]  &  \\
+	\mathrm{Lan} _KF(d)\ar[" \mathrm{Lan} _KF(g) ", rr] \ar[" \alpha_d "', d]  &  & \mathrm{Lan} _KF(d')\ar[" \alpha_{d'}  ", d]  \\
+	G(d)\ar[" G(g) "', rr]  &  & G(d').
+	\end{tikzcd}\]
+	Here we once again assume such an $f$ exists; if no such $f$ exists then the diagram commutes immediately simply by uniqueness. Otherwise, note by definition that $\alpha_d \circ \lambda_f^d = G(f)\circ \gamma_c$, and also that $\alpha_{d'} \circ \lambda_{gf} ^{d'} =G(gf)\circ \gamma_c = G(g)\circ G(f)\circ \gamma_c$. Expanding the pentagon along these equalities gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(c)\ar[equals, r] \ar[" \gamma_c "', d]  & F(c)\ar[" \gamma_c ", d]  \\
+	GK(c)\ar[" G(f) "', d]  & GK(c)\ar[" G(f) ", d]  \\
+	G(d)\ar[equals, d]  & G(d)\ar[" G(g) ", d]  \\
+	G(d)\ar[" G(g) "', r]  & G(d').
+	\end{tikzcd}\]
+	Since this commutes, so does the outer pentagon, and since the top triangle commutes by definition, the pentagon diagram commutes fully, rendering $\alpha$ natural. The commutivity of this square in fact forces $\alpha$ to be defined in this way, making it unique.
+
+	Finally, it remains to be shown $\alpha K \circ \eta=\gamma$. This is in fact a special case of the definition of $\alpha$; for each $c\in C$, consider the object $(c,1_{K(c)} )\in (K\downarrow K(c))$. This gives the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(c)\ar[" \lambda_{1_{K(c)} } ^{K(c)}  ", r] \ar[" \eqqcolon \eta_c "', draw=none, r] \ar[" \gamma_c "', d]  & \mathrm{Lan} _KF(K(c))\ar[" \alpha_{K(c)}  ", d]  \\
+	GK(c)\ar[" G(1_{K(c)} ) "', equals, r]  & GK(c)
+	\end{tikzcd}\]
+	which commutes as previously stated.
+\end{proof}
+\begin{corollary}\label{cor:10.1}
+	If $C$ is small and $D$ is locally small, then
+	\begin{itemize}
+		\item if $E$ is complete, any left Kan extension along any $K : C \to D$ exists;
+		\item If $E$ is cocomplete, any right Kan extension along any $K : C \to D$ exists.
+	\end{itemize}
+\end{corollary}
+\begin{corollary}\label{cor:10.2}
+	If $K : C \to D$ is fully faithful, then the (co)unit $\varepsilon : \mathrm{Lan} _KF\circ K \cong F$ is an isomorphism.
+\end{corollary}
+\begin{proof}
+	If $c\in C$, $\mathrm{Lan}_KF(c)$ is a limit over the comma category $(K\downarrow K(c))$. Since $K$ is fully faithful, each $f : K(d) \to K(c)$ can be written as some $f=K(h)$ for a unique $h : d \to c$. Thus $1: K(c) \to K(c)$ is initial in this category, we have
+	\[
+		\mathrm{Lan} _LF(K(c))=\varinjlim F\Pi^{K(c)} =F\Pi^{K(c)}(c,1_{K(c)} )=F(c)
+	.\]
+	Hence $\eta=1$.
+\end{proof}
+
+\section{Kan Extensions as Coends}
+
+\begin{theorem}[Kan Extensions as Coends]\label{thm:10.3}
+	Let $F : C \to E$ and $K : C \to D$ be functors such that for all $c,c'\in C$ and all $d\in D$, the copowers $\Hom_{C}(K(c'), d) \cdot T(c)$ in $E$. Then if for all $d\in D$ the following coend exists, then $F$ has a left Kan extension, with object function given by
+	\[
+		\mathrm{Lan} _KF(d)=\int^{c\in C} \Hom_{C}(K(c), d) \cdot F(c)
+	.\]
+\end{theorem}
+\begin{proof}
+	By universality, it suffices to show there is a natural isomorphism of sets $\Nat(\mathrm{Lan} _KF,-)\cong\Nat(F,(-)\circ K)$. By the parameter theorem, there is indeed a functor
+	\[
+		d\mapsto \int^{c\in C} \Hom_{C}(K(c), d) \cdot F(d)
+	.\]
+	We compare it with another functor $G : D \to E$. Recall that for any $U,V : C \to D$, we have
+	\[
+		\Nat(U,V)=\int_{c\in C} \Hom_{D}(U(c), V(c)) 
+	.\]
+	Applying this here, along with the Yoneda lemma, gives natural isomorphsms
+	\begin{align*}
+		\Hom_{E}(F(c), SK(c)) &\cong \Nat(\Hom_{D}(K(c), -) ,\Hom_{E}(F(c), S(-)) \\
+				      &\cong \int_{d\in D} \Hom_{\Set }(\Hom_{C}(K(c), d) , \Hom_{E}(F(c), S(d)) ) 
+	.\end{align*}
+	Here we must take $\Set $ sufficiently large to avoid foundational problems; I discard the special notation because I don't feel like writing it. This will be important later.
+
+	For now, we have the following sequence of isomorphisms:
+	\begin{align*}
+		\Nat(\mathrm{Lan} _KF,S)&\cong \int_{d\in D} \Hom_{E}(\mathrm{Lan} _KF(d), S(d)) \\
+					&\cong \int_{d\in D} \Hom_{E} \left( \int^{c\in C} \Hom_{C}(K(c), d) \cdot F(c), S(d) \right) \\
+					&\cong \int_{d\in D} \int_{c\in C} \Hom_{E}(\Hom_{C}(K(c), d)\cdot F(c) , S(d)) \\
+					&\cong \int_{d\in D} \int_{c\in C} \Hom_{\Set }(\Hom_{D}(K(c), d) , \Hom_{E}(F(c), S(d)) ) \\
+					&\cong \int_{c\in C} \int_{d\in D} \Hom_{\Set }(\Hom_{D}(K(c), d) , \Hom_{E}(F(c), S(d)) ) \\
+					&\cong \int_{c\in C} \Hom_{E}(F(c), SK(c)) \\
+					&\cong \Nat(F,SK)
+	.\end{align*}
+	Some explanation of the various steps is in order. The first isomorphism is the above definition of $\Nat$ via ends; the second is the definition of $\mathrm{Lan} _KF$; the third is by continuity of $\Hom(-, X) $; the fourth will be explained later; the fifth is fubini, which applies since both ends exist; the sixth follows by our earlier discussion, and the final step is once again the definition of $\Nat$ via ends. Note all of these steps are natural in $S$, which suffices to prove the theorem.
+
+	It now suffices to show the fourth isomorphism. Explicitly writing the copower as a coproduct for clarity gives, by continuity of Hom,
+	\[
+		\Hom_{E}\left( \coprod_{\Hom_{C}(K(c), d) } F(c),S(d) \right) \cong \prod_{\Hom_{C}(K(c), d) } \Hom_{E}(F(c), S(d))
+	.\]
+	Recall that repeated products in $\Set $ are defined (for finite products, up to isomorphism) as exponentials, equivalently as hom-sets,
+	\[
+		\prod_{\Hom_{C}(K(c), d) } \Hom_{E}(F(c), S(d)) \coloneqq \Hom_{\Set }(\Hom_{C}(K(c), d) , \Hom_{E}(F(c), S(d)) ) 
+	.\]
+	This shows the given isomorphism.
+\end{proof}
+
+The dual statement gives
+\[
+	\mathrm{Ran} _KF(d)=\int_{c\in C} F(c)^{\Hom_{C}(L(c), d) } 
+\]
+valid when powers (repeated products) and the end exist.
