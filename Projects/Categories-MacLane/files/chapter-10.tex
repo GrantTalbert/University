@@ -296,8 +296,282 @@ One can also think of a Kan extension of $F$ along $K$ as the closest approximat
 	This shows the given isomorphism.
 \end{proof}
 
+The proof also gives us that the arrow $\eta : F \Rightarrow \mathrm{Lan} _KF\circ K$ is given by the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\eta_c : F(c)\ar[" i_{1_{K(c)} }  ", r]  & \Hom_{D}(K(c), K(c)) \cdot T(c)\ar[" \omega_{c}  ", r]  & \displaystyle{\int^{c'\in C} \Hom_{D}(K(c'), K(c)) \cdot T(c)=\mathrm{Lan} _KF(K(c)).}
+\end{tikzcd}\]
+Here, $i_{1_{K(c)} } $ is the injection into the copower along the object indexed by $1_{K(c)} \in \Hom_{D}(K(c), K(c)) $, and $\omega_{c} $ is the component of the ending wedge at $c$.
+
 The dual statement gives
 \[
 	\mathrm{Ran} _KF(d)=\int_{c\in C} F(c)^{\Hom_{C}(L(c), d) } 
 \]
-valid when powers (repeated products) and the end exist.
+valid when powers (repeated products) and the end exist. The universal arrow is the reverse of the above diagram, where copower injection is swapped with exponential projection.
+
+For an example, let $F : C \to E$ and $K : C \to D$ be additive functors on $Ab$-categories. A right $Ab$-Kan extension of $F$ along $K$ is then an additive functor $\mathrm{Ran} _KF : D \to E$ final with respect to \emph{additive} functors; equivalently the relevant bijection is natural in additive functors. Note that this not be a Kan extension among general functors. However, the $Ab$-Kan extension can still be computed as an end, provided that for $a,b\in E$ and $x\in\Ab$, the relevant adjunction
+\[
+	\Hom_{E}(b, c^x) \cong \Hom_{\Ab}(x, \Hom_{E}(b, c) ) 
+\]
+natural in $c$, involve a \emph{cotensor} $c^x$ instead of the usual exponential. For example with $E=\Rmod{R} $, this is given by $c^x=\Ab(x,c)$ with $R$-module structure inherited from $c\in E$.
+
+Derived functors also have a treatment via Kan extensions. This section is entirely taken from Riehl's texts \emph{Category Theory in Context} (6.3) and \emph{Categorical Homotopy Theory} (2.1).
+
+\begin{definition}[Homotopic Category]\label{dfn:10.3}
+	A class of \emph{weak equivalences} $\mathcal{W} $ is a class of morphisms in a category that satisfies the \emph{2-of-6 property}: for any composable triple $(f,g,h)\mapsto hgf$ of arrows, if $hg$ and $gf$ are in $\mathcal{W} $, then so are $f,g,h,$ and $hgf$.
+
+	A \emph{homotopical category} is a category $\mathcal{C} $ equipped with a class of weak equivalences $\mathcal{W} $. A functor $F : \mathcal{C}  \to \mathcal{D} $ between homotopical categories is \emph{homotopical} if it preserves weak equivalences.
+\end{definition}
+
+Note that if a class of weak equivalences $\mathcal{W} $ contains all identities, then it contains all isomorphisms necessarily. This is easily shown: let $f : a \to b$ and $g : b \to a$ be inverses. Then $fgf$ is a composable pair with $fg=1_b$ and $gf=1_a$. Since $\mathcal{W} $ contains identities, $fg,gf\in \mathcal{W} $. By the 2-of-6 property, $f,g\in \mathcal{W} $.
+
+To each homotopical category $\mathcal{C} $ is associated a \emph{homotopy category} $\mathrm{Ho} \mathcal{C} $ and the \emph{localization functor} $\gamma : \mathcal{C}  \to \mathrm{Ho} \mathcal{C} $ which sends weak equivalences to isomorphisms, and is universal among such functors in the sense that precomposition by $\gamma$ induces a bijection from functors $\mathcal{C} \to \mathcal{D} $ and functors $\mathrm{Ho} \mathcal{C} \to \mathcal{D} $ that invert the weak equivalences.
+
+Explicit construction of $\mathrm{Ho} \mathcal{C} $ is given by taking $\mathrm{Ho} \mathcal{C} $ to have the same objects as $\mathcal{C} $, and taking morphisms to be equivalence classes of finite zigzags (recall zigzags are paths of arrows that can be pointing forwards \emph{or} backwards), where \emph{only arrows in $\mathcal{W} $ are permitted to go backwards}, subject to the relations
+\begin{itemize}
+	\item adjacent arrows pointing in the same direction may be composed;
+	\item adjacent pairs of arrows in $\mathcal{W} $ pointing in opposite directions may be removed;
+	\item identities pointing any direction may be removed.
+\end{itemize}
+This gives a formal inversion of all weak equivalences. It is generally not the case however that all arrows inverted by this process are weak equivalences. When this is true, $\mathcal{C} $ is called \emph{saturated}. Quillen showed all model categories are saturated. Unless otherwise specified, all categories are assumed to have the \emph{minimal homotopic structure}, which takes the weak equivalences to be precisely the isomorphisms, and the localization functor is $1$.
+
+\begin{definition}[Total Derived Functors]\label{dfn:10.4}
+	Let $F : \mathcal{C}  \to \mathcal{D} $ be a functor between homotopic category, with $\gamma : \mathcal{C}  \to \mathrm{Ho} \mathcal{C} $ and $\delta : \mathcal{D}  \to \mathrm{Ho} \mathcal{D} $ the localization functors. If the \emph{right} Kan extension
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[" F "{name=F}, r] \ar[" \gamma "', d]  & \mathcal{D} \ar[" \delta ", d]  \\
+		\mathrm{Ho} \mathcal{C} \ar[" \mathbf{L} F "'{name=LF}, r]  & \mathrm{Ho} \mathcal{D} 
+		\arrow[from=LF, to=F, Rightarrow, shorten=5pt] 
+	\end{tikzcd}\]
+	exists, we call it the \emph{total left derived functor} $\mathbf{L} F$ of $F$. If the \emph{left} Kan extension
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[" F "{name=F}, r] \ar[" \gamma "', d]  & \mathcal{D} \ar[" \delta ", d]  \\
+		\mathrm{Ho} \mathcal{C} \ar[" \mathbf{R} F "'{name=RF}, r]  & \mathrm{Ho} \mathcal{D} 
+		\arrow[from=F, to=RF, Rightarrow, shorten=5pt] 
+	\end{tikzcd}\]
+	exists, we call it the \emph{total right derived functor} $\mathbf{R} F$ of $F$.
+\end{definition}
+
+By universality of $\gamma$, left derived functors are equivalently homotopical functors $\mathbf{L} F : \mathcal{C}  \to \mathrm{Ho} \mathcal{D} $, and the same for right derived functors. These are often simply called the left-derived functors, but we reserve that term for the following notion. A \emph{left derived functor} of $F : \mathcal{C}  \to \mathcal{D} $ is a homotopical functor $\mathbb{L} F : \mathcal{C}  \to \mathcal{D} $ and a natural transformation $\lambda : \mathbb{L} F \Rightarrow F$ such that $\delta\lambda : \delta\mathbb{L} F \Rightarrow \delta F$ is a total left derived functor of $F$; here by universality of $\gamma$ we view $\delta\mathbb{L} F : \mathcal{C}  \to \mathrm{Ho} \mathcal{D} $ as the equivalent functor under the bijection $\delta\mathbb{L} F : \mathrm{Ho} \mathcal{C}  \to \mathrm{Ho} \mathcal{D} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
+	\mathcal{C} \ar[" F "{name=F}, bend left, r] \ar[" \mathbb{L} F "'{name=LF}, bend right, r]  & \mathcal{D} \ar[" \delta ", r]  & \mathrm{Ho} \mathcal{D} 
+	\arrow[from=LF, to=F, Rightarrow, " \lambda "', shorten=5pt] 
+\end{tikzcd}\]
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} \ar[" F "{name=F}, r] \ar[" \gamma "', d]  & \mathcal{D} \ar[" \delta ", d]  \\
+\mathrm{Ho} \mathcal{C} \ar[" \delta\mathbb{L} F "'{name=dLf}, r]  & \mathrm{Ho} \mathcal{D} 
+\arrow[from=dLf, to=F, " \delta\lambda "', Rightarrow, shorten=5pt]
+\end{tikzcd}\]
+A right derived functor $\mathbb{R} F$ is then a functor $\mathbb{R} F : \mathcal{C}  \to \mathcal{D} $ and a natural transformation $\rho : F \Rightarrow \mathbb{R} F$ satisfying the dual property. Theres another important definition, which is that of a deformation. A \emph{left deformation} on a homotopical category $\mathcal{C} $ is a pair $(Q,q)$ where $Q$ is an endofunctor and $q : Q \Rightarrow 1_\mathcal{C} $ is a \emph{natural weak equivalence}, meaning a natural transformation for which each component is a weak equivalence. Right deformations are the dual notion $r : 1_{\mathcal{C} }  \Rightarrow R$. A left deformation for a functor $F : \mathcal{C}  \to \mathcal{D} $ between homotopic categories is a left deformation $(Q,q)$ of $\mathcal{C} $ such that $F$ preserves all weak equivalences of some full subcategory $\mathcal{Z}$ containing the image $Q(\mathcal{C} )\subseteq \mathcal{Z} \subseteq \mathcal{C} $. Right deformations are analogous.
+
+\begin{proposition}\label{prp:10.3}
+	If $F : \mathcal{C}  \to \mathcal{D} $ has a left deformation $q : Q \Rightarrow 1_\mathcal{C} $, then $\mathbb{L} F=FQ$ and $Fq : \mathbb{L} F \Rightarrow F$ is a derived functor of $F$.
+\end{proposition}
+\begin{proof}
+	Let $\delta : \mathcal{D}  \to \mathrm{Ho} \mathcal{D} $ be the localization functor. We must show that $\delta FQ$ and $\delta Fq : \delta FQ \Rightarrow \delta F$ define a right Kan extension $\mathrm{Ran}_{\gamma} \delta F$. Let $G : \mathcal{C}  \to \mathrm{Ho} \mathcal{D} $ be homotopical, and consider some $\alpha : G \Rightarrow \delta F$. Since $G$ is homotopical and $q : Q \Rightarrow 1_{\mathcal{C} } $ is a natural weak equivalence, $Gq : GQ \Rightarrow G$ is a natural isomorphism	since weak equivalences are inverted in $\mathrm{Ho} \mathcal{D} $. Although this does not apply the existance  of $q^{-1} $, by abuse of notation the following diagram makes it clear that $\alpha$ factors through $\delta Fq$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[" 1_\mathcal{C}  "{name=1C1}, r] \ar[equals, d]  & \mathcal{C}\ar[" G "{name=G1}, r] \ar[equals, d]   & \mathrm{Ho} \mathcal{D} \ar[equals, d]  \\
+		\mathcal{C} \ar[" Q "{name=Q1}, r] \ar[equals, d]  & \mathcal{C} \ar[" G "{name=G2}, r] \ar[equals, d]  & \mathrm{Ho} \mathcal{D} \ar[equals, d]  \\
+		\mathcal{C} \ar[" Q  "{name=Q2}, r]\ar[equals, d]  & \mathcal{C} \ar[" \delta F "{name=dF1}, r]\ar[equals, d]   & \mathrm{Ho} \mathcal{D}\ar[equals, d] \\
+		\mathcal{C} \ar[" 1_{\mathcal{C} }  "'{name=1C2}, r] & \mathcal{C} \ar[" \delta F "'{name=dF2}, r] & \mathrm{Ho} \mathcal{D} 
+		\arrow[from=1C1, to=Q1, Rightarrow, " q^{-1}  ", shorten=5pt] \arrow[from=Q1, to=Q2, equals, shorten=5pt] \arrow[from=Q2, to=1C2, " q ", Rightarrow, shorten=5pt]
+		\arrow[from=G1, to=G2, equals, shorten=5pt] \arrow[from=G2, to=dF1, Rightarrow, " \alpha ", shorten=5pt] \arrow[from=dF1, to=dF2, equals, shorten=5pt] 
+	\end{tikzcd}\]
+	Note the composition on the left is 1, and the composition on the right is $\alpha$. This is not technically correct, but the interchange law reconciles the equality
+	\[
+		\alpha = (\delta Fq)\circ (\alpha Q)\circ (Gq)^{-1} 
+	.\]
+	
+	To prove this factorization is unique, let $\alpha = \delta Fq \circ \beta$ be a factorization. Naturality of $\beta$ gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	GQ \ar[" \beta Q ", r] \ar[" Gq "', d]  & \delta FQ^2 \ar[" \delta FQq ", d]  \\
+	G \ar[" \beta "', r]  & \delta FQ
+	\end{tikzcd}\]
+	Since $G$ and $\delta FQ$ are homotopical, the vertical arrows are natural isomorphisms, so $\beta$ is determined by $\beta Q$. Since $F$ is homotopical on this subcategory, $FqQ$ is a natural weak equivalence, and $\delta FqQ$ is an isomorphism, so $\beta_Q$ is equal to $\alpha_Q$.
+\end{proof}
+
+Note that functors preserve isomorphisms, so any functor $H : \mathrm{Ho} \mathcal{D}  \to \mathcal{E} $ will have $(Q,q)$ be a deformation for $H\delta F$, and thus $(H\delta FQ,H\delta Fq)$ is a right Kan extension. This gives that total derived functors \emph{of left deformable functors} are in fact \emph{absolute Kan extension}, meaning they are preserved by all functors.
+
+\section{Pointwise Kan Extensions}
+
+\begin{definition}[Preserves Kans]\label{dfn:10.5}
+	A functor $L : \mathcal{E}  \to \mathcal{F} $ \emph{preserves} a left Kan extension $(\mathrm{Lan} _KF,\eta)$ if $(L\mathrm{Lan} _KF,L\eta)$ is the left Kan extension of $LF$ along $K$:
+	\[
+		L\mathrm{Lan} _KF=\mathrm{Lan} _KLF
+	.\]
+\end{definition}
+
+\begin{lemma}\label{lma:10.2}
+	Left adjoints preserve left Kan extensions, and likewise right adjoints preserve right Kan extensions.
+\end{lemma}
+\begin{proof}
+	Let $(\mathrm{Lan} _KF,\eta)$ be a left Kan with codomain $\mathcal{E} $, and let $L : \mathcal{E}  \to \mathcal{F} $ have a right adjoint $R$ with unit $\nu : 1_\mathcal{E}  \Rightarrow RL$ and counit $\varepsilon : LR \Rightarrow 1_\mathcal{F} $. Promoting the adjunctions to functor categories, we have by the adjunction given by the left Kan,
+	\[
+		\mathcal{F} ^{\mathcal{D} } (L\mathrm{Lan}_KF,H)\cong \mathcal{E} ^{\mathcal{D} } (\mathrm{Lan} _KF,RH)\cong \mathcal{E} ^{\mathcal{C}} (F,RHK)\cong \mathcal{F} ^{\mathcal{C}} (LF,HK)
+	.\]
+	This gives that arrows $L\mathrm{Lan} _KF\Rightarrow H$ are in natural bijection with those $LF\Rightarrow HK$, and thus by universality we must have $\mathrm{Lan} _K LF \cong L\mathrm{Lan} _KF$. Chasing the identity of the extension along the isomorphism gives the required arrow to conclude the proof.
+\end{proof}
+
+Since $\Hom(a, -) $ is left-adjoint to copower $X\mapsto X\cdot a$, it follows that if $\mathcal{E} $ is locally small and has small copowers, $A(a,\mathrm{Ran}_KF(-))$ is the right Kan extension of $A(a,F(-))$. In fact, hom-sets preserving Kan extensions is an important idea.
+
+\begin{definition}[Pointwise Kan]\label{dfn:10.6}
+	When $\mathcal{E} $ is locally small, a \emph{pointwise} right Kan extension is a Kan extension that is preserved by all representable functors $\mathcal{E} (e,-)$. A \emph{left pointwise} Kan extension is a left Kan extension whose corresponding right Kan extension is pointwise, meaning if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[" F "{name=F}, rr] \ar[" K "', dr]  &  & \mathcal{E}  \\
+	 & \mathcal{D} \ar[" \mathrm{Lan} _KF "', ur]  & 
+	 \arrow[from=F, to=2-2, Rightarrow, " \eta ", shorten=5pt] 
+	\end{tikzcd}\]
+	is a left Kan extension, then
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} ^{\mathrm{op}} \ar[" F^{\mathrm{op}}  "{name=F}, rr] \ar[" K^{\mathrm{op}}  "', dr]  &  & \mathcal{E} ^{\mathrm{op}} \ar[" \mathcal{E} (-\text{,} e) ", r]  & \Set  \\
+	 & \mathcal{D} ^{\mathrm{op}} \ar[" \mathrm{Lan} _KF^{\mathrm{op}}  "', ur]  &  & 
+	 \arrow[to=F, from=2-2, Rightarrow, " \eta^{\mathrm{op}}  ", shorten=5pt] 
+	\end{tikzcd}\]
+	is a right Kan extension.
+\end{definition}
+
+Since covariant hom preserves limits, clearly right Kan extensions that can be constructed via limits or ends are pointwise, and dually those given by colimits and coends are as well. The following theorem shows the converse indeed holds, justifying the terminology.
+
+\begin{theorem}\label{thm:10.4}
+	If $\mathcal{D} $ and $\mathcal{E} $ are locally small, a right Kan extension of $F : \mathcal{C}  \to \mathcal{E} $ along $K : \mathcal{C}  \to \mathcal{D} $ is pointwise if and only if it can be computed via the limit
+	\[
+		\mathrm{Ran} _KF(d) = \varprojlim (F\circ \Pi_d)
+	.\]
+	Dually, a left Kan extension is pointwise if and only if it is computed as
+	\[
+		\varinjlim \left( F\circ \Pi^d \right) 
+	.\]
+\end{theorem}
+\begin{proof}
+	The locally smallness of $\mathcal{D} $ is to allow us to invoke the Yoneda lemma, but the proof works fine with classes via annoying set theory. As explained above, one direction is obvious, so let $\mathrm{Ran} _KF$ be pointwise. We thus have by definition that $\mathcal{E} (e,\mathrm{Ran} _KF)=\mathrm{Ran} _K \mathcal{E} (e,F(-))$. We thus have a chain of natural isomorphisms
+	\begin{align*}
+		\mathcal{E} (e,\mathrm{Ran} _KF(d))&\cong \mathcal{S} \mathrm{et} ^{\mathcal{D} } (\mathcal{D} (d,-),\mathcal{E} (e,\mathrm{Ran} _KF))\\
+						   &\cong \mathcal{S} \mathrm{et} ^{\mathcal{C} } (D(d,K(-)),E(e,F(-))\\
+						   &\cong \operatorname{Cone} (e,F\Pi_d),
+	\end{align*}
+	where the first isomorphism is the Yoneda lemma, the second is universality of the right Kan extension, and the last is given by the following lemma. Because $\operatorname{Cone} (e,F\Pi_d)$ is representable, the isomorphism gives
+	\[
+		\mathrm{Ran} _KF(d)=\varprojlim (F\circ \Pi_d)
+	.\]
+\end{proof}
+\begin{lemma}\label{lma:10.3}
+	With the situation as above, for each $d\in D$ there is a natural isomorphism
+	\[
+		\operatorname{Cone} (e,F\Pi_d)\cong \mathcal{S} \mathrm{et} ^\mathcal{C} (\mathcal{D} (d,K(-)),\mathcal{E} (e,F(-))
+	.\]
+\end{lemma}
+\begin{proof}
+	A cone $\tau : e \Rightarrow F\Pi_d$ assigns to each $f : d \to K(c)$ some arrow $\tau(f,c): e \to F(c)$ such that for each $h : c \to c'$,
+	\[
+		\tau(K(h)\circ f,c')=F(h)\circ \tau(f,c)
+	.\]
+	A natural transformation $\beta : \mathcal{D} (d,K(-)) \Rightarrow \mathcal{E} (e,F(-))$ assigns to each $c\in C$ and to each $f : d \to K(c)$ an arrow $\beta_c f : e \to F(c)$, such that for each $h : c' \to c$,
+	\[
+		\beta_{c}(K(h)\circ f)=F(h)\circ \beta_{c} f
+	.\]
+	The bijection is obvious.
+\end{proof}
+
+\begin{corollary}\label{cor:10.2}
+	If $K$ is fully faithful, then the counit of any pointwise right Kan extension is a natural isomorphism $\mathrm{Ran} _KF\circ K \cong F$, and dually the same for left Kan extensions.
+\end{corollary}
+\begin{proof}
+	If $K$ is fully faithful, then for any $c\in \mathcal{C} $, the functor $(\mathcal{C} \downarrow c)\to (K\downarrow K(c))$ is an isomorphism of categories, and the isomorphism commutes with the projections to $\mathcal{C} $. Since the extension is pointwise, by theorem \ref{thm:10.4} we have
+	\[
+		\mathrm{Lan} _KF(K(c))=\varinjlim ((\mathcal{C} \downarrow c)\xrightarrow{\Pi}\mathcal{C} \xrightarrow{F}\mathcal{E} )
+	.\]
+	Since $(\mathcal{C} \downarrow c)$ has terminal object $1_c$, the colimit is evaluated by computing at the terminal object, which computes as $F(c)$.
+\end{proof}
+
+\section{All Concepts are Kan Extensions}
+
+``The notion of Kan extensions subsumes all the other fundamental concepts of category theorty''.
+
+\begin{theorem}[(Co)Limits]\label{thm:10.5}
+	A functor $F : \mathcal{C}  \to \mathcal{D} $ has a ccolimit of and only if it has a left Kan extension along the unique functor $!: \mathcal{C}  \to \mathbf{1} $, in which case
+	\[
+		\varinjlim F=\mathrm{Lan} _!F(0)
+	.\]
+	Dually, $\mathrm{Ran} _!F$ is the limit of $F$.
+\end{theorem}
+\begin{proof}
+	Note that for any pair $(G,\nu)$ satisfying the extension condition, $\nu : F \Rightarrow G\circ !$ means that for all $c\in \mathcal{C} $,
+	\[
+		\nu_c : F(c) \to (G\circ !)(c)=G(0)
+	.\]
+	Moreover, note that for any $f : c \to c'$ in $\mathcal{C} $, naturality of $\nu$ gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(c)\ar[" F(f) ", r] \ar[" \nu_c "', d]  & F(c')\ar[" \nu_{c'}  ", d]  \\
+	\mathrm{Lan} _!F(0)\ar[equals, r]  & \mathrm{Lan} _!F(0)
+	\end{tikzcd}\]
+	Therefore, natural transformations $\nu$ are cones for $F$. Since we can choose $G(0)=d$ for any $d\in \mathcal{D} $, the converse hols as well. Since the left Kan extension $(\mathrm{Lan} _!F,\eta)$ is initial with respect to this fact, meaning all such $\nu $ factor uniquely through it, we conclude that $\eta$ is a colimiting cone for $F$ with base $\mathrm{Lan}_!F(0)$. Conversely, if the limit exists, it defines such a cone and thus such an extension.
+\end{proof}
+
+\begin{theorem}[Adjunctions]\label{thm:10.6}
+	If $(F,G,\eta,\varepsilon )$ is an adjunction, then $(G,\eta)$ is a left Kan extension  of the identity along $F$, and $F$ is a right Kan extension of the identity along $G$:
+	\[
+		G\cong \mathrm{Lan} _F1_\mathcal{C} ,\qquad F\cong \mathrm{Ran} _G1_\mathcal{D} 
+	.\]
+	In particular, these Kan extensions are absolute. Conversely, if $(G,\eta)=\mathrm{Lan} _F1_\mathcal{C} $ is the left Kan extension of the identity along $F$, or dually if $F$ is $\mathrm{Ran} _G1_\mathcal{D} $, then $F\dashv G$ with unit $\eta$.
+\end{theorem}
+\begin{proof}
+	First, let $G$ be right-adjoint to $F$. This raises via Yoneda to an adjunction of precomposition $G^* \dashv F^*$ with
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{Z} ^{\mathcal{D} } \ar[" F^* ", shift left, r]  & \mathcal{Z} ^{\mathcal{C} } \ar[" G ", shift left, l] 
+	\end{tikzcd}\]
+	for any category $\mathcal{Z} $. Choose $\mathcal{Z} =\mathcal{C} $, giving an adjunction $\mathcal{C} ^\mathcal{C} \to \mathcal{C} ^\mathcal{D} $. Recall that precomposition by some $K$ is right-adjoint to the left Kan extension along $K$, giving $\mathrm{Lan}_F(-)\dashv F^*$. By uniqueness of adjoints, $G^*\cong \mathrm{Lan} _F(-)$ is the left Kan extension, with the unit of this kan extension giving the unit for the left Kan extension. In particular,
+	\[
+		\mathrm{Lan} _F1_\mathcal{C} \cong G^*(1_\mathcal{C} )=1_\mathcal{C} \circ G=G
+	.\]
+	Since $1_\mathcal{C} $ preserves $\eta$, this gives the first direction.
+
+	For the converse, let $(G,\eta)$ be the left Kan extension of $1_\mathcal{C} $ along $F$. By assumption, $F$ preserves the Kan extension, meaning $(FG,F\eta)$ is a left Kan extension of $F$ along $F$. Note that $1_F : F \Rightarrow 1_\mathcal{D} \circ F$ also satisfies the extension property, giving a unique factorization
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[equals, rr, ""{name=eq1}] \ar[" F "', dr]  &  & \mathcal{C} \ar[" F ", r]  & \mathcal{D}  \\
+									   & \mathcal{D} \ar[" G ", ur] \ar[equals, bend right, urr, ""{name=eq2}]  &  & 
+									   \arrow[from=eq1, to=2-2, Rightarrow, " \eta ", shorten=5pt] \arrow[from=1-3, to=eq2, Rightarrow, " \exists ! \varepsilon  ", shorten=3pt] 
+	\end{tikzcd}\]
+	which immediately gives $1_F = \varepsilon F \circ F\eta$. We need only prove the second triangle identity now. Clearly, $1_G : G \Rightarrow G$ is a factorization of $\eta$ through itself, so it suffices to show that so is $G\varepsilon \circ \eta G : G \Rightarrow G$. Consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[equals, rr, ""{name=eq1}] \ar[" F "', dr]  &  & \mathcal{C} \ar[equals, rr, ""{name=eq3}] \ar[" F "', dr]  &  & \mathcal{C}  \\
+									   & \mathcal{D} \ar[" G "', ur] \ar[equals, rr, ""{name=eq2}]  &  & \mathcal{D} \ar[" G "', ur]  & 
+									   \arrow[from=eq1, to=2-2, " \eta ", Rightarrow, shorten=5pt] \arrow[from=1-3, to=eq2, Rightarrow, " \varepsilon  ", shorten=5pt] \arrow[from=eq3, to=2-4, Rightarrow, " \eta ", shorten=5pt] 
+	\end{tikzcd}\]
+	The right two pasting diagrams are given by the composite $G\varepsilon \circ \eta G : G \Rightarrow G$. Note also that this composition $(GFG,GF\eta \circ G\varepsilon F \circ GF\eta)$ is a Kan extension of $1_\mathcal{C} $ along $F$. To show this, let $K : \mathcal{D}  \to \mathcal{C} $ be another extension. We thus have a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \ar[equals, rr, ""{name=eq1}] \ar[" F "', dr]  &  & \mathcal{C} \ar[equals, rr, ""{name=eq3}] \ar[" F "', dr]  &  & \mathcal{C}  \\
+									   & \mathcal{D} \ar[" G "', ur] \ar[equals, rr, ""{name=eq2}]  &  & \mathcal{D} \ar[" G "', ur] \ar[" K "', bend right, ur]  & 
+									   \arrow[from=eq1, to=2-2, " \eta ", Rightarrow, shorten=5pt] \arrow[from=1-3, to=eq2, Rightarrow, " \varepsilon  ", shorten=5pt] \arrow[from=eq3, to=2-4, Rightarrow, " \eta ", shorten=5pt] 
+	\end{tikzcd}\]
+	Since the right diagram is a Kan extension, we get a unique morphism, as needed. Finally, note that $1_G : G \Rightarrow G$ is also a kan extension of $1_\mathcal{C} $ along $F$ by hypothesis, and uniqueness of the Kan extension thus gives $G\varepsilon \circ \eta G =1_G$.
+\end{proof}
+
+\begin{theorem}[Yoneda Lemma]\label{thm:10.7}
+	Let $F : \mathcal{C}  \to \mathcal{S} \mathrm{et} $ with $\mathcal{C} $ locally small. Then $F$ has a right Kan extension along $1_\mathcal{C} $, and $F(c)\cong \Nat(\mathcal{C} (c,-),F)$.
+\end{theorem}
+\begin{proof}
+	By theorem \ref{thm:10.3}, for all $c'\in \mathcal{C} $,
+	\[
+		\mathrm{Ran}_{1_\mathcal{C} } F(c')= \int_{c\in \mathcal{C} } F(c)^{\Hom_{\mathcal{C} }(c', 1_{\mathcal{C} } (c))}=\int_{c\in \mathcal{C} } F(c)^{\Hom_{\mathcal{C} }(c', c)} 
+	.\]
+	Recall that in $\mathcal{S} \mathrm{et} $, $X^Y=\Hom_{\mathcal{S} \mathrm{et} }(Y, X) $, giving
+	\[
+		\mathrm{Ran}_{1_{\mathcal{C} } } F(c')=\int_{c\in \mathcal{C} } \Hom_{\mathcal{S} \mathrm{et} }(\Hom_{\mathcal{C} }(c', c) , F(c)) 
+	.\]
+	Recall that
+	\[
+		\Nat(U,V)\cong \int_{c\in \mathcal{C} } \Hom_{\mathcal{D} }(U(c), V(c)) 
+	.\]
+	Thus,
+	\[
+		\Nat(\Hom_{\mathcal{C} }(c', -) ,F)\cong \int_{c\in \mathcal{C} } \Hom_{\mathcal{S} \mathrm{et} }(\Hom_{\mathcal{C} }(c', c) , F(c)) =\mathrm{Ran}_{1_\mathcal{C} } F(c')
+	.\]
+	Note that $1_\mathcal{C} $ is a right Kan extension of $F$ along $1_\mathcal{C} $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} \ar[" F ", rr] \ar[equals, dr]  &  & \mathcal{D}  \\
+	 & \mathcal{C} \ar[" F "', ur]  & 
+	\end{tikzcd}\]
+	By universality, $\mathrm{Ran} _{1_\mathcal{C} } F(c')=F(c')$. This gives the Yoneda lemma,
+	\[
+		\Nat(\Hom_{\mathcal{C} }(c', -) ,F)\cong F(c')
+	.\]
+\end{proof}
+
