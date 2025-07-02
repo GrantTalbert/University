@@ -1,0 +1,217 @@
+\chapter{Derived functors via deforamtions}
+
+I have some familiarity with the beginning material in this section, and will read those parts rather quickly compared to the other parts.
+
+\section{Homotopical categories and derived functors}
+
+The ideas here were introduced around 20 years ago, but we depart slightly from the original terminology. I feel this is important to note to avoid confusions with the literature on the topic.
+
+\begin{definition}[Homotopical Category]\label{dfn:2.1}
+	A \emph{homotopical category} is a category $\mathcal{M} $ together with a wide subcategory $\mathcal{W} $ (wide meaning containing all objects) such that for any composable triple $f,g,h$ of arrows, if $hg$ and $gf$ are in $\mathcal{W} $, then $f,g,h,hgf\in \mathcal{W} $. We call arrows in $\mathcal{W} $ \emph{weak equivalences}, and this property is called the 2-of-6 property.
+\end{definition}
+\begin{remark}
+	Weak equivalences in a model category satisfy the 2-of-6 property, so this construction is more general than model categories. However, the construction is not as general as the 2-of-3 property: if two of $f,g,gf$ are in $\mathcal{W} $, then so is the third. This property required for a category to have weak equivalences, and some use this notion to be precisely the same as that of a homotopical category. We distinguish between them and choose to work in categories which satisfy the stronger 2-of-6 property.
+\end{remark}
+
+Homotopical categories always include all isomorphisms. This is easily proven. Since $\mathcal{W} $ is a subcategory including all objects, it equivalently includes all identities. Consider inverse morphisms $f : a \to b$ and $g : b \to a$, and consider the composable triple $(f,g,f)$. Note $fg=1_b\in \mathcal{W} $ and $gf=1_a\in \mathcal{W} $, so we must have $f,g,f,fgf=f,g\in \mathcal{W} $. Conversely, every category admits a minimal collection of weak equivalences whereby it may form a homotopical category, given by the set of isomorphisms in $\mathcal{M} $. In absense of another obvious notion of weak equivalence, we assume the minimal homotopical structure.
+
+\begin{definition}[Homotopy Category]\label{dfn:2.2}
+	The homotopy category $\Ho \mathcal{M} $ of a homotopical category $(\mathcal{M} ,\mathcal{W} )$ is the formal localization of $\mathcal{M} $ at $\mathcal{W} $.
+\end{definition}
+
+An explicit construction can be given by taking $\Obj(\Ho \mathcal{M} ) =\Obj(\mathcal{M} ) $, and morphisms to be equivalence classes of zig-zags in $\mathcal{M} $\footnote{Recall zig-zags are chains of morphisms not necessarily in the composable direction, meaning some are permitted to go backwards} with only those in $\mathcal{W} $ permitted to go backwards, quotiented by the relations
+\begin{itemize}
+	\item adjacent arrows pointing in the same direction are equal to their composition;
+	\item adjacent pairs $\overset{w}{\leftarrow}\overset{w}{\rightarrow}$ and $\overset{w}{\rightarrow}\overset{w}{\leftarrow}$ may be removed;
+	\item identities may be removed.
+\end{itemize}
+This defines for each $w\in \mathcal{W} $ a formal inverse $w^{-1} $ which behaves in the expected way. For example, with $\mathcal{W} \subseteq \Top $ the set of homotopy equivalences, we obtain that for $fg\sim 1$, $g\in [f^{-1} ]$.
+
+There is a canonical localization functor $\gamma : \mathcal{M}  \to \Ho \mathcal{M} $ mapping $x\mapsto x$ and $f\mapsto [f]$, and it is universal with respect to functors which invert weak equivalences. Hence, precomposition with $\gamma$ is a bijection between functors $\mathcal{M} \to \mathcal{N} $ which invert weak equivalences and functors $\Ho \mathcal{M} \to \mathcal{N} $.
+
+The homotopy category of the minimal homotopical category is isomorphic to the original category. For another example, a \emph{weak homotopy equivalence} in $\Top $ is a continuous function $f : X \to Y$ which is an isomorphism of sets of paths, meaning for $U : \mathcal{G} \mathrm{rpoid}  \to \Set $ the forgetful functor $\mathcal{G} \mapsto \Obj(\mathcal{G}) $, we have
+\[
+	(U\pi_0)(f) : (U\pi_0)(X)\cong (U\pi_0)(Y)
+.\]
+Taking weak homotopy equivalences to be weak equivalences, the homotopy category thereof is \emph{equivalent} to the category of CW complexes and homotopy classes of maps.
+
+\begin{remark}
+	In general, not all arrows inverted by localization are weak equivalences. A category for which those arrows inverted are precisely weak equivalences is called \emph{saturated}. Quillen showed all model categories are saturated. We can say slightly more.
+\end{remark}
+\begin{lemma}\label{lma:2.1}
+	If $\mathcal{M} $ is a category with a collection of arrows $\mathcal{W} $ with a saturated localization, then $(\mathcal{M} ,\mathcal{W} )$ is homotopical.
+\end{lemma}
+\begin{proof}
+	Saturated means weak equivalences in $\mathcal{M} $ are precisely isomorphisms in $\Ho \mathcal{M} $. Since isomorphisms satisfy the 2-of-6 property, so must the weak equivalences.
+\end{proof}
+
+Annoyingly, homotopy categories need not be locally small. Quillen proved model categories induce locally small localizations, but in the more general setting it is preferable to avoid working directly in the homotopy category to avoid these issues.
+
+\begin{definition}[Homotopical Functor]\label{dfn:2.3}
+	A homotopical functor $F : \mathcal{M}  \to \mathcal{N} $ between homotopical categories is a functor which preserves weak equivalences.
+\end{definition}
+
+By univeraslity, homotopical functors induce unique functors
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{M} \ar[" F ", r] \ar[" \gamma "', d]  & \mathcal{N} \ar[" \delta ", d]  \\
+\Ho \mathcal{M} \ar[" F "', dashed, r]  & \Ho \mathcal{N} 
+\end{tikzcd}\]
+Since we often without loss of generality call both functors $F$, we say that $F$ commutes with the localizations.
+
+\begin{remark}
+	Let $\mathcal{N} $ be a minimal homotopic category. Universality of localization $\gamma : \mathcal{M}  \to \Ho \mathcal{M} $ here is 2-categorical: natural transformations between \emph{homotopical} functors $\mathcal{M} \to \mathcal{N} $ are bijective with natural transformations $\Ho \mathcal{M} \to \mathcal{N} $. If $\mathcal{N} $ is not minimal, we must distinguish between $\Ho \mathcal{N} $ and $\mathcal{N} $. For $\delta$ the localization functor, each natural transformation $\alpha$ between functors $\mathcal{M} \to \mathcal{N} $ lowers uniquely to a natural transformation $\delta\alpha$ between functors $\Ho\mathcal{M} \to \Ho \mathcal{N} $ (since $\Ho \mathcal{N} $ inverts weak equivalences and our functors are homotopical). Although this relation is unique, it is not necessarily bijective, and transformations between functors $\Ho \mathcal{M} \to \Ho \mathcal{N} $ can always raise to one between functors $\mathcal{M} \to \Ho \mathcal{N} $, but we may not be able to lift it along $\delta.$
+\end{remark}
+
+\begin{example}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be a (not necessarily exact) additive functor between abelian categories. Denote by $\Ch_{\geq 0} (\mathcal{A} )$ and $\Ch_{\geq 0} (\mathcal{B} )$ the categories of chain complexes bounded below at $0$. The induced functor $F_{\bullet} : \Ch_{\geq 0} (\mathcal{A} ) \to \Ch_{\geq 0} (\mathcal{B} )$ is then homotopical if we take weak equivalences to be \emph{chain complex homotopy equivalences}, but not necessarily if we take them to be quasi-isomorphisms. For example, consider a quasi-isomorphism $f_{\bullet} : A_{\bullet}  \to B_{\bullet} $ with $\mathcal{A} =\mathcal{B} =\Ab$, given by
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \ar[r]  & \mathbb{Z} /2\mathbb{Z} \ar[d] \ar[tail, r]  & \mathbb{Z} /4\mathbb{Z}  \ar[two heads, d] \ar[" 0 ", r]  & \mathbb{Z} /2\mathbb{Z} \ar[tail, r] \ar[d]  & \mathbb{Z} /4\mathbb{Z} \ar[r] \ar[two heads, d]  & 0 \\
+	\ldots \ar[r]  & 0\ar[r]  & \mathbb{Z} /2\mathbb{Z} \ar[r]  & 0\ar[r]  & \mathbb{Z} /2\mathbb{Z} \ar[r]  & 0
+	\end{tikzcd}\]
+	This is shown to be a quasi-isomorphism by computing the cohomologies. The computation is not difficult, but takes enough space to type out to make it annoying. We can apply the hom-functor $\Hom_{\mathbb{Z} }(\mathbb{Z} /2\mathbb{Z} , -) $, and we compute
+	\[
+		\Hom_{\mathbb{Z} }(\mathbb{Z} /2\mathbb{Z} , 0) =0,\qquad \Hom_{\mathbb{Z} }(\mathbb{Z} /2\mathbb{Z} , \mathbb{Z} /2\mathbb{Z} ) =\left\{ 0,1 \right\} =\mathbb{Z} /2\mathbb{Z} 
+	,\]
+	\[
+		\Hom_{\mathbb{Z} }(\mathbb{Z} /2\mathbb{Z} , \mathbb{Z} /4\mathbb{Z} ) =\left\{ 0,(0,1)\mapsto (0,2) \right\} =\mathbb{Z} /2\mathbb{Z} 
+	.\]
+	Hence we obtain
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\ldots \ar[r]  & \mathbb{Z} /2\mathbb{Z} z\ar[" \cong ", r] \ar[d]  & \mathbb{Z} /2\mathbb{Z} \ar[" 0 ", r] \ar[" 0 ", d]  & \mathbb{Z}/2\mathbb{Z} \ar[" \cong ", r] \ar[d]  & \mathbb{Z} /2\mathbb{Z} \ar[" 0 ", r] \ar[" 0 ", d]  & 0 \\
+	\ldots \ar[r]  & 0\ar[r]  & \mathbb{Z} /2\mathbb{Z} \ar[r]  & 0\ar[r]  & \mathbb{Z} /2\mathbb{Z} \ar[r]  & 0.
+	\end{tikzcd}\]
+	The top row is exact, but note that the homology of the bottom complex at any $\mathbb{Z} /2\mathbb{Z} $ is
+	\[
+		\frac{\Ker (\mathbb{Z} /2\mathbb{Z} \to 0)}{\Im(0\to \mathbb{Z} /2\mathbb{Z} )} =\frac{\mathbb{Z} /2\mathbb{Z} }{0} =\mathbb{Z} /2\mathbb{Z} \neq 0
+	.\]
+	Hence, $\Hom_{\mathbb{Z} }(\mathbb{Z} /2\mathbb{Z} , f) _{\bullet} $ is not a quasi-isomorphism, and additive functors need not be homotopic for this class of weak equivalences.
+\end{example}
+
+Many other examples show there are interesting non-homotopical functors. One such class is that of \emph{derived functors}, which are in some sense the closest approximation to homotopical.
+
+\begin{definition}[Total Derived Functor]\label{dfn:2.4}
+	A \emph{total left derived functor} $\mathbf{L} F$ of some functor $F : \mathcal{M}  \to \mathcal{N} $ for $\mathcal{M} ,\mathcal{N} $ homotopic is a \emph{right} Kan extension $\Ran_\gamma\delta F$
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{M} \ar[" F "{name=F}, r] \ar[" \gamma "', d]  & \mathcal{N} \ar[" \delta ", d]  \\
+	\Ho \mathcal{M} \ar[" \mathbf{L} F "'{name=LF}, dashed, r] & \Ho \mathcal{N} 
+	\arrow[from=LF, to=F, shorten=10pt, Rightarrow] 
+	\end{tikzcd}\]
+	with $\gamma,\delta$ localization functors. Dually, a \emph{right} derived functor $\mathbf{R} F$ is a \emph{left} Kan extension $\Lan_\gamma\delta F$.
+\end{definition}
+
+Universality tells us that total derived functors are equivalently homotopical functors $\mathcal{M} \to \Ho \mathcal{N} $, which are often called ``derived functors''. We reserve that terminology for a special case in which this correspondence is a lift along $\delta$. Sometimes these are called point-set derived functors.
+
+\begin{definition}[Derived Functor]\label{dfn:2.5}
+	A \emph{left derived functor} of $F : \mathcal{M}  \to \mathcal{N} $ is a homotopical functor $\mathbb{L} F : \mathcal{M}  \to \mathcal{N} $ and a natural transformation $\lambda : \mathbb{L} F \Rightarrow F$ such that $\delta\cdot \lambda : \delta\circ \mathbb{L} F \to \delta \circ F$ is a total left derived functor of $F$ (in the sense that it is equal to the Kan extension precomposed with $\gamma$). Right derived functors are defined the same.
+\end{definition}
+
+\section{Derived functors via deformations}
+
+\begin{definition}[Deformation]\label{dfn:2.6}
+	A \emph{left deformation} on a homotopical category $\mathcal{M} $ consists of an endofunctor $Q$ and a natural weak equivalence $q : Q \Rightarrow 1_\mathcal{M} $. Dually, a right deformation is a natural weak equivalence $q : 1_\mathcal{M}  \Rightarrow Q$.
+\end{definition}
+
+Here, that $q$ is a natural weak equivalence means that each component $q_m$ for $m\in \mathcal{M} $ is itself a weak equivalence. Deformations axiomatize a convenient setting in which derived functors exist, and are constructed rather easily. Necessarily $Q$ is homotopical. This is easily shown. Let $w : a \to b$ be a weak equivalence. We then have that $q_b \circ Q(w)=w\circ q_a$. Note that since $w$ and $q_a$ are weak equivalences, their composition must also be a weak equivalence by the 2-of-3 property, which is implied by the 2-of-6 property. Hence, $q_b \circ Q(w)$ is a weak equivalence, and again by the 2-of-3 property we have that $Q(w)$ is a weak equivalence. Now let $\mathcal{M}_Q$ be any full subcategory containing the image of $Q$. The inclusion $\mathcal{M} _Q\hookrightarrow \mathcal{M} $ and $Q$ define an equivalence of categories between $\Ho \mathcal{M} $ and $\Ho \mathcal{M} _Q$. The book calls $\mathcal{M} _Q$ the subcategory of \emph{cofibrant objects}, and specifies they use the term to mean something different than Quillen's definition in model categories. I will try to abide by another convention and call it a \emph{left deformation retract}.
+
+\begin{definition}[Deformation for Functors]\label{dfn:2.7}
+	A \emph{left deformation} for a functor $F : \mathcal{M}  \to \mathcal{N} $ between homotopical categories is a left deformation $Q$ for $\mathcal{M} $ such that $F$ is homotopical on a left deforamtion retract $\mathcal{M} _Q\subseteq \mathcal{M} $. We say $F$ is \emph{left deformable} when it admits a left deformation.
+\end{definition}
+
+In the context of model categories, Ken Brown's lemma shows that a left Quillen functor (a cocontinuous\footnote{Conventions appear to vary, this book usees cocontinuous and says some texts require only that (trivial) cofibrations be preserved, but other sources I can find require that it be a left adjoint functor, strengthening the hypothesis.} functor preserving cofibrations and trivial cofibrations) will preserve weak equivalences between cofibrant objects (objects where the unique morphism from the intitial object are cofibrations). We prove this lemma later in the text.
+
+As we continue, when we specify a left deformation for a category $\mathcal{M} $, we implicitly choose a left deformation retract.
+
+\begin{theorem}\label{thm:2.1}
+	If $F : \mathcal{M}  \to \mathcal{N} $ has a left deformation $q : Q \Rightarrow 1_\mathcal{M} $, then $\mathbb{L} F=F\circ Q$ is a left derived functor of $F$.
+\end{theorem}
+\begin{proof}
+	Let $\delta : \mathcal{N}  \to \Ho \mathcal{N} $ the localization. By \cref{dfn:2.5}, we must show $\delta FQ$ and $\delta Fq : \delta FQ \Rightarrow \delta F$ form a left Kan extension of $\delta F$ along $\gamma$. Equivalently, we show it satisfies the relevant universal property in $\Fun(\mathcal{M} ,\Ho\mathcal{N} )$. Let $H : \mathcal{M}  \to \Ho \mathcal{N} $ be homotopical (hence meaning it inverts weak equivalences), and $\alpha : G \Rightarrow \delta F$ the relevant natural transformation. Since $G$ is homotopical and $q$ is a natural weak equivalence, $Gq : GQ \Rightarrow G$ is a natural isomorphism. Naturality of $\alpha$ gives that
+	\[
+		\delta Fq\circ \alpha Q\circ (Gq)^{-1} =(\delta F\circ \alpha)(q\circ Q)\circ (Gq)^{-1} =\alpha q \circ (Gq)^{-1} =\alpha
+	.\]
+	Hence, $\alpha$ factors through $\delta Fq$. To prove uniqueness, first note that since $Q$ is homotopical, $qQ$ is a natural weak equivalence. Since $Q$ is a deformation of $F$, we have that $FqQ$ is a natural weak equivalence, and thus $\delta FqQ$ is a natural isomorphism. Let $\alpha'$ be another factorization of $\alpha$ through $\delta Fq$. We then obtain
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	GQ \ar[" \alpha' Q", r] \ar[" Gq "', d]  & \delta FQ^2 \ar[" \delta FQq ", d]  \\
+	G\ar[" \alpha' "', r]  & \delta FQ
+	\end{tikzcd}\]
+	This indeed commutes since $Gq$ is still invertible, so flipping that arrow gives the same equality as above. This indeed also shows the required uniqueness.
+\end{proof}
+
+Hence for $r : 1 \Rightarrow R$ a right deformation and $\mathcal{M} _R$ a right deformation retract, we have also that $\mathbb{R} F=FR$.
+
+Denote by $\mathcal{L} \mathcal{D} \mathrm{ef} $ the 2-category of homotopical categories equipped with specified left deformations and left deformation retracts, morphisms given by functors that restrict to homotopical functors on the deformation retracts (left deformable functors with respect to the specified deformation), and 2-morphisms as natural transformations. Note here that a \emph{pseudofunctor} is a functor $\mathcal{Z} \to \Cat $ which only preserves identities and composition up to coherent natural isomorphism.
+
+\begin{theorem}\label{thm:2.2}
+	There is a pseudofunctor $\mathbf{L} :\mathcal{L} \mathcal{D} \mathrm{ef} \to \Cat $ mapping homotopical categories to their homotopy category, left deformable functors to their total left derived functor, and natural transformations to the derived natural transformations.
+\end{theorem}
+
+The proof of this theorem (which I omit :3) depends on our construction in \cref{thm:2.1}, and it does not hold in generality that the composite of total derived functors is total derived for the composite.
+
+\begin{definition}[Deformable Adjunction]\label{dfn:2.8}
+	An adjunction $F\dashv G$ is a \emph{deformable adjunction} if the left adjunct $F$ is left deformable, and the right adjunct $G$ is right deformable.
+\end{definition}
+\begin{theorem}\label{thm:2.3}
+	If
+\[\begin{tikzcd}
+	{\mathcal{M}} & {\mathcal{N}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", shift left=2, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G", shift left=2, from=1-2, to=1-1]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+\end{tikzcd}\]
+is a deformable adjunction, then so is
+\[\begin{tikzcd}
+	{\mathbf{L}F:} & {\Ho\mathcal{M}} & {\Ho\mathcal{N}} & {:\mathbf{R}G}.
+	\arrow[""{name=0, anchor=center, inner sep=0}, shift left=2, from=1-2, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, shift left=2, from=1-3, to=1-2]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+\end{tikzcd}\]
+Furthermore, the total derived adjunction $\mathbf{L} F\dashv \mathbf{R}G $ is the unique adjunction compatable with the adjunctions in the sense that
+\[\begin{tikzcd}
+	{\mathcal{N}(F(m), n)} & {\mathcal{M}(m,G(n))} \\
+	{\Ho\mathcal{M}(F(m),n)} & {\Ho\mathcal{N}(m,G(n))} \\
+	{\Ho\mathcal{N}(\mathbf{L}F(m),n)} & {\Ho\mathcal{M}(m,\mathbf{R}G(n))}
+	\arrow["\cong", draw=none, from=1-1, to=1-2]
+	\arrow["\delta"', from=1-1, to=2-1]
+	\arrow["\gamma", from=1-2, to=2-2]
+	\arrow["{Fq^*}"', from=2-1, to=3-1]
+	\arrow["{Gr_*}", from=2-2, to=3-2]
+	\arrow["\cong", draw=none, from=3-1, to=3-2]
+\end{tikzcd}\]
+commutes for each $m\in \mathcal{M} $ and $n\in \mathcal{N} $.
+\end{theorem}
+
+The proofs of this fact are very complex, and was omitted from the text. I am not going to go chase after a proof. Instead, I choose to make sense of the statement itself. The only point of confusion is the precomposition by $Fq$ and postcomposition by $Gr$, but indeed by \cref{thm:2.2} this gives the total derived functor.
+
+\begin{proposition}\label{prp:2.1}
+	The total left derived functor of a left deformable functor is an absolute Kan extension; in particular, a pointwise right Kan extension.
+\end{proposition}
+\begin{proof}
+	Let $(\delta FQ,\delta Fq)$ be the total left derived functor given by the deformation $(Q,q)$ and \cref{thm:2.2}. Let $H : \Ho \mathcal{N}  \to \mathcal{E} $. We must show that $H$ preserves the Kan extension $\mathbf{L} F$. To use our construction of $\mathbf{L} F$, we must transfer the universal property to $\mathcal{E} ^{\mathcal{M} } $. Let $G : \mathcal{M}  \to \mathcal{E} $ homotopical and $\alpha : G \Rightarrow H\delta F$. It suffices to show it factors uniquely though $H\delta Fq$. Similarly to the last proof, $\alpha$ factors as the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		G\ar[" (Gq)^{-1}  ", Rightarrow, r]  & GQ \ar[" \alpha Q ", Rightarrow, r]  & H\delta FQ \ar[" H\delta Fq ", Rightarrow, r] & H\delta F.
+	\end{tikzcd}\]
+	By the same logic as the above proof, this factorization is unique as well.
+\end{proof}
+
+\begin{exercise}
+	Let $F\dashv G$ and let $\mathbf{L} F$ and $\mathbf{R} G$ be absolute Kan extensions. Show that $\mathbf{L} F\dashv \mathbf{R} G$.
+\end{exercise}
+\begin{proof}
+	Let $\eta : 1_\mathcal{M}  \Rightarrow GF$ be the unit and $\varepsilon : FG \Rightarrow 1_\mathcal{N} $ the counit of the adjunction $F\dashv G$. Let $\gamma : \mathcal{M}  \to \Ho \mathcal{M} $ and $\delta : \mathcal{N}  \to \Ho\mathcal{N} $ the localization functors. Let $\beta : \delta G \Rightarrow \mathbf{R} G$ and $\alpha : \mathbf{L} F \Rightarrow \delta F$ the derived natural transformations. 
+\end{proof}
+
+A double category $\mathcal{D} \mathrm{er} $ with objects \emph{deformable categories} (homotopical categories with both left and right deformations, such that either $R$ preserves $\mathcal{M} _Q$ or vice versa), horizontal 1-cells right deformable functors preserving fibrant objects, vertical 1-cells left deformable functors preserving cofibrant objects, and 2-cells appropriate natural transformations. There is then a double pseudofunctor $\mathcal{D} \to \Cat $ given by $\mathcal{C} \mapsto \Ho \mathcal{C} $ and $F\mapsto \mathbf{L} F$; here $\Cat $ is the double category of categories, functors, and natural transformations. No way in hell I'm proving that.
+
+\section{Classical derived functors between abelian categories}
+
+Recall that $\Rmod_R$ has enough projectives, meaning for any $A$ there is a bounded below complex of projectives $P_{\bullet} $ quasi-isomorphic to $\iota(A)$ (a projective resolution of $A$). Careful choice of projective resolutions is functorial $Q : \Ch_{\geq 0} (R) \to \Ch_{\geq 0} (R)$ with a natural quasi-isomorphism $q : Q \Rightarrow 1$. Dually, modules admit injective resolutions which give a right deformation $r : 1 \Rightarrow (R : \Ch^{\geq 0} (R) \to \Ch^{\geq 0} (R))$ on the category of bounded below cochain complexes.
+
+Additive functors $F : \Rmod_R \to \Rmod_S$ induce functors $F_{\bullet} : \Ch_{\geq 0} (R) \to \Ch_{\geq 0} (S)$ andd $F^{\bullet} : \Ch^{\leq 0} (R) \to \Ch^{\leq 0} (S)$ preserving chain homotopies. When working with projective/injective resolutions, the quasi-isomorphisms become homotopy equivalences, and are thus preserved by $F_{\bullet} $ and $F^{\bullet} $. Hence, with respect to quasi-isomorphisms, $F^{\bullet} $ has a right derived functor and $F_{\bullet} $ has a left derived functor, as described herein. The functor that we classically refer to as the left derived functor of $F : \Rmod_R \to \Rmod_S$ in homological algebra is the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Rmod_R \ar[" \iota ", r]  & \Ch_{\geq 0} (R)\ar[" \mathbb{L} F_{\bullet}  ", r]  & \Ch_{\geq 0} (S)\ar[" H_0 ", r]  & \Rmod_S.
+\end{tikzcd}\]
+One can also take the other derived functors, but the derivations we chose induce long exact sequences, so we prefer those.
+
+\section{Preview of homotopy limits and colimits}
+
+Let $\mathcal{M} $ a complete and cocomplete homotopical category, and $\mathcal{D} $ a category indexing some small diagram. The colimit and limit functors $\varprojlim ,\varinjlim : \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} $ need not be homotopical with respect to pointwise weak equivalences in $\mathcal{M} ^{\mathcal{D} } $ (I assume meaning natural weak equivalences). However, since the functors are continuous, their respective Kan extensions exist, so we would want to define a left derived functor of $\varinjlim $ and a right derived functor of $\varprojlim $, called hocolim and holim, respectively. Unfortunately, even if $\mathcal{M} $ is a model category, $\mathcal{M} ^{\mathcal{D} } $ may not have a model structure such that $\varinjlim $ and $\varprojlim $ are Quillen. Hence the theory of deformations exists for construction derived functors without invoking model structures.

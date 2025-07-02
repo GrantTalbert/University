@@ -1,0 +1,148 @@
+\chapter{All concepts are Kan extensions}
+
+I already know Kan extensions so I will breeze through this chapter.
+
+\section{Kan Extensions}
+
+\begin{definition}[Lan Extension]\label{dfn:1.1}
+	Given functors $F : \mathcal{C}  \to \mathcal{E} $ and $K : \mathcal{C}  \to \mathcal{D} $, a \emph{left Kan extension} of $F$ along $K$ is a functor $\Lan_KF : \mathcal{D}  \to \mathcal{E} $ and a natural transformation $\eta : F \Rightarrow \Lan_KF\circ K$ (a pasting diagram) which is initial with respect to this property; for any other extension $G : \mathcal{D}  \to \mathcal{E} $ and $\gamma : F \Rightarrow G\circ K$, there is a unique natural transformation $\nu : \Lan_KF \Rightarrow G$ such that $\gamma \cdot 1_K = (\nu \cdot  1_F)\circ \eta$. Dually, a right Kan extension is terminal with respect to natural transformations $\varepsilon : \Ran_KF \circ K \Rightarrow F$.
+\end{definition}
+
+\begin{remark}
+These definitions generalize to any 2-category. We usually specialize in the 2-category $\Cat $ for obvious reasons, so we reserve the term ``Kan extension'' for $\Cat $. When working in $\Cat $, I use ``extension'' to mean a pair $(G,\gamma)$ satisfying the extension property, but not necessarily universally.
+\end{remark}
+
+In unenriched category theory, universal properties (in this text) are representations of functors. A left Kan extension $\Lan_KF$ with notation as above is a representation for
+\[
+	\mathcal{E} ^{\mathcal{C} } (F,-\circ K) : \mathcal{E} ^{\mathcal{C} }  \to \Set 
+.\]
+To justify this, recall here that universality gives for any $G$,
+\[
+	\mathcal{E} ^{\mathcal{C} } (F,G\circ K)\cong \mathcal{E} ^{\mathcal{D} } (\Lan_KF,G)
+.\]
+Hence, $\Lan_KF$ is a representation as the universal object. Alternatively, the Yoneda lemma promotes any extension $\gamma : F \Rightarrow G\circ K$ to a natural transformation
+\[
+	\gamma : \mathcal{E} ^{\mathcal{C} } (G\circ K,-) \Rightarrow \mathcal{E} ^{\mathcal{C} } (F,-)
+.\]
+Precomposing by $1 \times K$ gives
+\[
+	\gamma \cdot 1 : \mathcal{E} ^{\mathcal{C} } (G\circ K,-\circ K)=\mathcal{E} ^{\mathcal{D} } (G,-) \Rightarrow \mathcal{E} ^{\mathcal{C} } (F,-\circ K)
+.\]
+Universality is then equivalent to that the natural transformation
+\[
+	\eta : \mathcal{E} ^{\mathcal{D} } (\Lan_KF,-) \Rightarrow \mathcal{E} ^{\mathcal{C} } (F,-\circ K)
+\]
+be an isomorphism.
+
+By universality, $\Lan_K-$ is functorial provided it always exists, so this gives an adjunction for precomopsition $K^*$:
+\[
+	\mathcal{E} ^{\mathcal{D} } (\Lan_KF,G)\cong \mathcal{E} ^{\mathcal{C} } (F,G\circ K) \qquad \Lan_K\dashv K^*\dashv\Ran_K.
+\]
+
+\section{A formula}
+
+\begin{theorem}\label{thm:1.1}
+	Let $\mathcal{C} $ small, $\mathcal{D} $ locally small, and $\mathcal{E} $ cocomplete. Then any $F : \mathcal{C}  \to \mathcal{E} $ has an extension along any $K : \mathcal{C}  \to \mathcal{D} $ given pointwise by
+	\[
+		\mathrm{Lan} _KF(d)=\int^{c\in \mathcal{C} } \mathcal{D} (K(c),d)\cdot F(c)
+	\]
+	for $\cdot $ the copower/tensor and $d\in D$. Dually,
+	\[
+		\Ran_KF(d)=\int_{c\in \mathcal{C} } F(c)^{\mathcal{D} (K(c),d)} 
+	.\]
+	Here, exponentiation is the power/cotensor.
+\end{theorem}
+\begin{proof}
+	See my notes for Mac Lane.
+\end{proof}
+\begin{theorem}\label{thm:1.2}
+	With notation as in \ref{thm:1.1}, we also have
+	\[
+	\Lan_KF(d)=\varinjlim \left( F\circ \Pi^d \right) ,\qquad \Pi^d : (K\downarrow d) \to \mathcal{C} 
+	,\]
+for $\Pi^d$ the comma category projection. We will prove these formulas again in the context of weighted limits later. Dually,
+\[
+	 \Ran_KF(d)=\varprojlim \left( (d\downarrow K) \xlongrightarrow{\Pi_d} \mathcal{C} \xlongrightarrow{F} \mathcal{E}  \right)  
+.\]
+\end{theorem}
+
+\section{Pointwise Kan extensions}
+
+\begin{definition}[Preserves]\label{dfn:1.2}
+	A functor $L : \mathcal{E}  \to \mathcal{F} $ preserves left Kan extensions if $(L\Lan_KF,L\eta)$ is the left Kan extension $\Lan_KLF$.
+\end{definition}
+
+The following holds even when coends and colimits don't exist. Again, see my notes on Mac Lane for the (simple) proof.
+\begin{lemma}\label{lma:1.1}
+	Left adjoints preserve left Kan extensions. Right adjoints preserve right Kan extensions.
+\end{lemma}
+
+It has generally been decided that Kan extensions in full generality are not nearly as important as the following special case, and the acompanying theorem which reconsiles the terminology.
+
+\begin{definition}[Pointwise Kan extensions]\label{dfn:1.3}
+	If $\mathcal{E} $ is locally small, a pointwise right Kan extension is one preserved by all representable functors $\mathcal{E} (e,-)$. By contravariance, a pointwise left Kan extension is one such that postcomposition by $\mathcal{E} (-,e)$ with the opposite (right) Kan extension gives a right Kan extension.
+\end{definition}
+\begin{theorem}\label{thm:1.3}
+	A right Kan extension is pointwise if and only if it is computed by limits as described in theorem \ref{thm:1.2}. A left Kan extension is pointwise if and only if it is computed by colimits as in theorem \ref{thm:1.2}.
+\end{theorem}
+
+\section{All concepts}
+
+The notion of Kan extensions subsumes all the other fundamental concepts of category theory.
+
+\begin{theorem}\label{thm:1.4}
+	Let $F : \mathcal{C}  \to \mathcal{E} $. A limit of $F$ is precisely a right Kan extension of $F$ along the terminal functor $! : \mathcal{C} \to \mathbf{1} $. A left Kan extension along the terminal functor is nprecisely a colimit.
+\end{theorem}
+\begin{theorem}\label{thm:1.5}
+	Adjunctions $(F,G,\eta,\varepsilon )$ are precisely left Kan extensions $(G,\eta)$ of $1$ along $F$ such that $F$ preserves the Kan extension.
+\end{theorem}
+
+Kan extensions also give the Yoneda lemma. For $F : \mathcal{C}  \to \Set $,
+\[
+	F(c)\cong \mathrm{Ran} _{1_\mathcal{C} } F(c)\cong \int_{x\in \mathcal{C} } F(x)^{\mathcal{C} (c,x)} \cong \int_{x\in \mathcal{C} } \Set (\mathcal{C} (c,x),F(x))\cong \Set ^{\mathcal{C} } (\mathcal{C} (c,-),F)
+.\]
+The first isomorphism is kind of just obvious, the second is the pointwise construction via ends, the third is definition of exponentials in $\Set $, and the fourth is an identity I proved in my notes on Mac Lane. This also gives us the coYoneda lemma:
+\[
+	F(c)\cong \int^{x\in \mathcal{C} } \mathcal{C} (x,c)\cdot F(x)
+.\]
+Finally, if $\mathcal{E} $ is complete and $K$ is fully faithful, then the counit is an isomorphism $\mathrm{Ran} _KF\circ K\cong F$.
+
+\section{Adjunctions involving simplicial sets}
+
+We denote by $\sSet $ the functor category $\Fun(\boldsymbol{\Delta}^{\mathrm{op}} ,\Set )$, where $\boldsymbol{\Delta} $ is the simplex category, and $\boldsymbol{\Delta} _+$ is the augmented simplex category which includes $[-1]$. $\sSet$ is the free colimit completion of $\boldsymbol{\Delta} $, although this is not unique to $\boldsymbol{\Delta} $ and holds for any small category.
+
+Let $\mathcal{E}$ be cocomplete and locally small, and let $\Delta ^{\bullet} : \boldsymbol{\Delta}  \to \mathcal{E} $ be covariant. Write $\Delta^n$ for the image $\Delta^{\bullet} [n]$; similarly for $X\in\sSet$, write $X_n$ for the set $X[n]$ of $n$-\emph{simplices} and $X_{\bullet} : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Set $ when we wish to emphasize it's functorial role, rather than its role as an assignment of sets. Define $L=\Lan_y\boldsymbol{\Delta} ^{\bullet} $ as the left Kan extension of $\Delta^{\bullet} $ along the Yoneda embedding $y$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\boldsymbol{\Delta} \ar[" \Delta^{\bullet}  "{name=long}, rr] \ar[" y "', dr]  &  & \mathcal{E}  \\
+ & \sSet \ar[" L "', dashed, ur]  & 
+ \arrow[from=long, to=2-2, Rightarrow, shorten=10pt, " \cong "] 
+\end{tikzcd}\]
+Since the Yoneda embedding is fully faithful and $\mathcal{E} $ is locally small and cocomplete, the unit is an isomorphism by the dual of the above statement. The functor $L$ is then defined via theorem \ref{thm:1.1} as
+\[
+	L(X)\coloneqq \int^{n\in \boldsymbol{\Delta} } \sSet(y(n),X)\cdot \Delta^n\cong \int^{n\in\boldsymbol{\Delta} } X_n \cdot \Delta^n
+.\]
+The first isomorpohism is once again theorem \ref{thm:1.1}, and the second is the Yoneda lemma since $y(n)= \boldsymbol{\Delta}(-,n)$ and indeed $\Nat(\boldsymbol{\Delta} (-,n),X)\cong X(n)=X_n$. Since coends are colimits, which are characterized by coproducts and coequalizers, we obtain an explicit description as
+\[
+	L(X)=\operatorname{coeq} \left( \coprod_{f\in \operatorname{Mor} (\boldsymbol{\Delta} )} X_{\operatorname{cod}f} \cdot \Delta^{\operatorname{dom} f} \rightrightarrows \coprod_{[n]\in \boldsymbol{\Delta} } X_n \cdot \Delta^n \right) 
+.\]
+The definition of $L$ on the arrows is given by universality. We usually choose to denote by $\Delta^n$ the simplicial set $y[n]$, and by cocompleteness we have
+\[
+	(L\circ y)[n]=\Delta^n,
+\]
+somewhat justifying this different notation we have used here.
+
+Since colimits commute, $L$ preserves colimits, so the adjoint functor theorem gives an adjoint $R : \mathcal{E}  \to \sSet$, which has for any $e\in \mathcal{E} $,
+\[
+	R(e)_n\cong\sSet(y[n],R(e))\cong \mathcal{E} (Ly[n],e)\cong \mathcal{E} (\Delta^n,e)
+.\]
+The first isomorphism is Yoneda, the second is the adjunction relation, and the third is our above discussion. Thus, $n$-simplices of $R(e)$ can be defined as the set of maps from $\Delta^n\to e$ in $\mathcal{E} $, making $R=\mathcal{E} (\Delta^{\bullet} ,-)$ with a mild abuse of notation. Face and degeneracy maps for the simplicial set $R(e)$ are also thus given by precomposition by the appropriate maps to $\Delta^n$ (called a cosimplicial object since it is covariant). Levelwise postcomposition makes $R$ functorial.
+
+The geometric realization of general simplicial sets is as follows. There is a natural functor $\boldsymbol{\Delta} \to \Top $ given by $[n]\mapsto \Delta^n$ for $\Delta^n$ the standard $n$-simplex. It has both left- and right-adjoints. Since $\Top $ is cocomplete and locally small, plugging in $\Top $ for $\mathcal{E} $ in the previous discussion gives an adjunction $L\dashv R$ with $L : \sSet \to \Top $ the left Kan extension, and $R : \Top  \to \sSet$ it's right adjoint. $R$ is called the \emph{total singular complex functor}, denoted usually by $S$, and $L$ is the \emph{geometric realization}, denoted usually by $\left| - \right| $. It's computed as
+\[
+	\left| X \right| =\int^{n\in \boldsymbol{\Delta} } X_n \times  \Delta^n=\operatorname{coeq} \left( \coprod_{f\in \operatorname{Mor} (\boldsymbol{\Delta} )} X_{\operatorname{cod}f} \cdot \Delta^{\operatorname{dom} f} \rightrightarrows \coprod_{[n]\in \boldsymbol{\Delta} } X_n \cdot \Delta^n \right) 
+.\]
+Here we note that copower is isomorphic to cartesian proeuct in $\Top $. This gives $\left| y(n)=\Delta^n \right| =\Delta^n$, once again justifying the annoying notation.
+
+Let $\Delta^{\bullet} : \boldsymbol{\Delta}  \to \Cat $ now be the functor mapping $[n]$ to the poset category $n+1$ and maps to functors. Indeed, $\Delta^{\bullet} $ is a full embedding $\boldsymbol{\Delta} \hookrightarrow \Cat $. It's right adjoint this time is the \emph{nerve} functor $N : \Cat  \to \sSet$. Recall that $N(\mathcal{C} )$ is a simplicial set with an $n$-simplex given by a string of $n$ composable arrows in $\mathcal{C} $, or equivalently any functor $[n]\to \mathcal{C} $. The th degeneracy maps insert the identity arrow, and the $i$th face map composes $i$ and $i+1$, unless $i=0$ or $n$, in which case the arrow is dropped.
+
+The left adjoint $h : \sSet \to \Cat $ maps a simplicial set to its homotopy category $hX$. The objects are 0-simplices (also called vertexes) of $X$, and it's arrows are freely generated on 1-simplices with respect to relations governed by 2-simpices.
