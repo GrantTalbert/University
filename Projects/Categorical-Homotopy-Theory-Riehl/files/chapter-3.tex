@@ -1,2 +1,511 @@
 \chapter{Basic concepts of enriched category theory}
 
+There are many reasons to consider enrichments, but one notable one for this text is the desire for a ``homotopy product'', which would be a product diagram that only commutes \emph{up to homotopy}. In order to have some notion of homotopy for which this makes sense, we can assume hom-sets are equipped with topologies, and then homotopies between arrows would become paths in the underlying space. A homotopy product can then be equipped with a natural weak homotopy equivalence.
+
+Since we have not defined a class of weak equivalences, the homotopy category $h\mathcal{M} $ is different from the ones we worked with earlier. Denoting by $\underline{\mathcal{M} }(a,b)$ the space assigned to $\mathcal{M} (a,b)$, we define $h\mathcal{M} (a,b)\coloneqq \pi_0 \underline{\mathcal{M} }(a,b)$. Here note that $\pi_0$ is the functor $\Top \to \Set $ assigning to each space it's path components; hence taking a space $X$ and quotienting in $\Set $ via the relation $x\sim y$ iff there is a path from $x$ to $y$.
+
+\section{A first example}
+
+Let $\Rmod_R$ be the category of left $R$-modules. We well know that the set $\Rmod_R(A,B)$ admits an abelian group structure via pointwise addition, which we will denote by $\underline{\Rmod_R}(A,B)$. Moreover, composition
+\[
+	\circ :\Rmod_R(B,C)\times \Rmod_R(A,B) \to \Rmod_R(A,C)
+\]
+distributes over addition, and hence is $\mathbb{Z} $-bilinear. Thus it factors through $\otimes _\mathbb{Z} $, inducing an abelian group homomorphism
+\[
+	\underline{\Rmod_R}(B,C)\otimes_\mathbb{Z}  \underline{\Rmod_R}(A,B) \to \underline{\Rmod_R}(A,C)
+\]
+in the category $\Ab$.
+
+Note also that since any abelian group $a$ has $\Ab(\mathbb{Z} ,a)\cong a$, we can represent the identity morphism of $A$ as an abelian group homomorphism
+\[
+	1_A : \mathbb{Z}  \to \underline{\Rmod}_R(A,A)
+.\]
+Moreover, $\mathbb{Z} $ is a unit for the monoidal product $\otimes _\mathbb{Z} : \Ab\times \Ab \to \Ab$ via left and right natural isomorphisms. This allopws us to encode the usual composition axioms via diagrams in $\Ab$. These facts show that $\Rmod_R$ admits the structure of a category enriched over $(\Ab,\otimes _\mathbb{Z} ,\mathbb{Z} )$.
+
+\section{The base for enrichment}
+
+A symmetric monoidal category $(\mathcal{V} ,\times ,*)$ is a category with a bifunctor $-\times -: \mathcal{V} \times \mathcal{V}  \to \mathcal{V} $ called the monoidal product, and an element $*\in \mathcal{V} $ called the unit, together with specified natural isomorphisms
+\[
+	v\times w\cong w\times v,\qquad u\times (v\times w)\cong (u\times v)\times w,\qquad *\times v\cong v\cong v\times *
+\]
+satisfying coherence criteria. Any category with finite products is symmetric monoidal with terminal object the unit; we call a category with such a monoidal structure \emph{cartesian monoidal}. In most relevant examples, $\mathcal{V} $ is complete and cocomplete, so we will generally assume this.
+
+\section{Enriched categories}
+
+\begin{definition}[Enriched Category]\label{dfn:3.1}
+	Let $\mathcal{V} $ be a symmetric\footnote{We are using symmetric monoidal categories here, but the symmetric hypothesis can be dropped for general enrichments. We require it for some results, however. I will assume we only enrich over symmetric monoidal categories unless the text specifies otherwise.} monoidal category. A $\mathcal{V} $-category $\underline{\mathcal{D} }$ is
+	\begin{itemize}
+		\item A collection of objects $x,y,z\in \underline{\mathcal{D}} $;
+		\item For each pair $x,y\in \underline{\mathcal{D} }$, a hom-\emph{object} $\underline{\mathcal{D} }(x,y)\in \mathcal{V} $;
+		\item For each $x\in\underline{\mathcal{D} }$, a morphism $\mathrm{id}_x : * \to \underline{\mathcal{D} }(x,x)$ in $\mathcal{V} $;
+		\item For each triple $x,y,z\in\underline{\mathcal{D} }$, a morphism $\circ : \underline{\mathcal{D} }(y,z)\otimes \underline{\mathcal{D} }(xy) \to \underline{\mathcal{D} }(x,z)$ in $\mathcal{V} $;
+	\end{itemize}
+	such that for all $w,x,y,z\in\underline{\mathcal{D} }$, the diagrams
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		\underline{\mathcal{D} }(z,y)\otimes \underline{\mathcal{D} }(x,y)\otimes \underline{\mathcal{D} }(w,x)\ar[" 1\otimes \circ  ", r] \ar[" \circ \otimes 1 "', d]  & \underline{\mathcal{D} }(z,y)\otimes \underline{\mathcal{D} }(x,z)\ar[" \circ  ", d]  \\
+		\underline{\mathcal{D} }(y,w)\otimes \underline{\mathcal{D} }(w,x)\ar[" \circ  "', r]  & \underline{\mathcal{D} }(w,z)
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		\underline{\mathcal{D} }(x,y)\otimes *\ar[" 1\otimes \mathrm{id}_x ", r] \ar[" \cong "', dr]  & \underline{\mathcal{D} }(x,y)\otimes \underline{\mathcal{D} }(x,x)\ar[" \circ  ", d]  & \underline{\mathcal{D} }(y,y)\otimes \underline{\mathcal{D} }(x,y)\ar[" \circ  ", d]  & *\otimes \underline{\mathcal{D} }(x,y)\ar[" \mathrm{id} _y \otimes 1 "', l] \ar[" \cong ", dl]  \\
+													      & \underline{\mathcal{D} }(x,y) & \underline{\mathcal{D} }(x,y) & 
+	\end{tikzcd}\]
+	commute in $\mathcal{V}$.
+\end{definition}
+
+We omit a relevant associativity morphism in the first diagram because the text did it too and I only realized after copying it all down and I'm NOT editing it.
+
+We already know of a plethora of examples. For example, a ring is an $\Ab$-category with a singleton for objects. A more interesting example is that topological spaces are \emph{naturally} enriched over groupoids. Define $\underline{\Top }(X,Y)$ to be the groupoid with objects as continuous maps $X\to Y$ and morphisms as homotopy classes of homotopies between these maps.
+
+If $\mathcal{V} $ has copowers of the unit that are preserved by tensor in the following sense, then any unenriched $\mathcal{C} $ has a free $\mathcal{V} $-category with objects the same as $\mathcal{C} $. Hom-objects from $a$ to $b$ are given by the copower $\coprod_{\mathcal{C} (a,b)} *$. Identity morphisms $\mathrm{id} _a$ are given by the inclusion of $*$ into the copower $\coprod_{\mathcal{C} (a,a)} *$ at the identity $1_a$. Since tensor preserves the relevant copower, we obtain
+\[
+	\left( \coprod_{\mathcal{C} (b,c)} *  \right) \otimes \left( \coprod_{\mathcal{C} (a,b)} * \right) \cong \coprod_{\mathcal{C} (b,c)} \left( *\otimes \left( \coprod_{\mathcal{C} (a,b)} * \right)  \right) \cong \coprod_{\mathcal{C} (b,c)} \left( \coprod_{\mathcal{C} (a,b)} \left( *\otimes * \right)  \right) \cong \coprod_{\mathcal{C} (b,c)} \coprod_{\mathcal{C} (a,b)} *\cong \coprod_{\mathcal{C} (b,c)\times \mathcal{C} (a,b)} *
+.\]
+Since there is a composition function $\mathcal{C} (b,c)\times \mathcal{C} (a,b)$, composition in the free $\mathcal{V} $-category simply reindexes along this arrow.
+
+\begin{definition}[Closed Monoidal Category]\label{dfn:3.2}
+	Let $\mathcal{V} $ be a symmetric monoidal category. If each functor $-\otimes v : \mathcal{V}  \to \mathcal{V} $ has a right adjoint, denoted $\underline{\mathcal{V} }(v,-)$, the right adjoints assemble uniquely into a bifunctor
+	\[
+		\underline{\mathcal{V} }(-,-): \mathcal{V} ^{\mathrm{op}} \times  \mathcal{V}  \to \mathcal{V} 
+	\]
+	such that for all $u,v,w\in \mathcal{V} $,
+	\[
+		\mathcal{V} (u\times v,w)\cong \mathcal{V} (u,\underline{\mathcal{V} }(v,w))
+	\]
+	natural in $u,v,w$.
+
+	We call $\underline{\mathcal{V} }(-,-)$ the \emph{internal hom}, and $\mathcal{V} $ is enriched over itself with composition
+	\[
+		\underline{\mathcal{V} }(v,w)\otimes \underline{\mathcal{V} }(u,v)\to \underline{\mathcal{V} }(u,w)
+	\]
+	given as follows. Note the adjunction $-\otimes u\dashv \underline{\mathcal{V} }(u,-)$ gives the counit
+	\[
+		\varepsilon^u : (-\otimes u)\circ \underline{\mathcal{V} }(u,-)=\underline{\mathcal{V} }(u,-)\otimes u \Rightarrow 1
+	.\]
+	Thus the adjunctions give a composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\underline{\mathcal{V} }(v,w)\otimes \underline{\mathcal{V} }(u,v)\otimes u\ar[" 1\otimes \varepsilon _v^u ", r]  & \underline{\mathcal{V} }(v,w)\otimes v\ar[" \varepsilon _w^v ", r]  & w.
+	\end{tikzcd}\]
+	Hence we have
+	\[
+		\varepsilon _w^v\circ (\varepsilon _v^u \otimes 1)\in \mathcal{V} \left( \underline{\mathcal{V} }(v,w)\otimes \underline{\mathcal{V} }(u,v)\otimes u,w \right) \cong \mathcal{V} \left( \underline{\mathcal{V} }(v,w)\otimes \underline{\mathcal{V} }(u,v),\underline{\mathcal{V} }(u,w) \right) 
+	.\]
+	The isomorphism follows by applying symmetry to the adjunction. We thus define composition as the adjunct of the relevant composition. The identity morphisms are defined as follows. The natural isomorphism $\lambda_v : *\otimes v \cong v$ is adjunct under the same adjunction to the identity $\mathrm{id}_v$:
+	\[
+		\lambda\in \mathcal{V} (*\otimes v,v)\cong \mathcal{V} (*,\underline{\mathcal{V} }(v,v))
+	.\]
+	Such a triple $(\mathcal{V} ,\otimes,*)$ is a \emph{closed symmetric monoidal category}.
+\end{definition}
+
+When $\mathcal{V} $ is cartesian monoidal, we call it \emph{cartesian closed}. An example is $\sSet$. The product is the usual product of functors, and we desire an adjunction
+\[
+	\sSet(X\times Y,Z)\cong\sSet(X,Z^Y)
+.\]
+Here, we use exponential notation $\underline{\sSet}(X,Y)\eqqcolon Y^X$. If $X$ is representable $\boldsymbol{\Delta} (-,[n])$, which we write as $\Delta^n$, then Yoneda gives
+\[
+	(Z^Y)_n\cong\sSet(\Delta^n, Z^Y)\cong\sSet(\Delta^n\times Y,Z)
+.\]
+Hence we obtain a valid definition of $Z^Y$ by setting the $n$-simplices as the set of maps $\Delta^n\times Y\to Z$. Hence $-\times Y\dashv (-)^Y$ for each simplicial set $Y$, giving that $\sSet$ is a closed cartesian monoidal category.
+
+The category $\Cat $ is cartesian closed, since functors and natural transformations between 2 fixed categories form another category. The precise definition of a 2-category is a category enriched over $\Cat $. Objects are 0-cells, the 1-cells are the objects of the hom-categories, and the 2-cells are the morphisms in the hom-categories. This interpretation gives us a notion of arrows in the enriched category, compatable with the notion of composition given in \cref{dfn:3.2}. Equivalently, we can take 1-cells to be the arrows of the \emph{underlying category}, defined later.
+
+The category $\Top $ is \emph{not} cartesian closed, but several large convenient subcategories are, such as $\mathcal{C} \mathcal{G} \mathcal{H} \mathrm{aus} $. For now, $\Top $ will denote one of these convenient categories, and we will make precise which categories we concern ourselves with later in the text.
+
+We provide the following construction. Let $(\mathcal{V} ,\times ,*)$ be a cartesian closed symmetric monoidal category, which we also assume to be complete and cocomplete. There is a general procedure for producing a closed symmetric monoidal category $(\mathcal{V} _*,\wedge,S^0)$ of \emph{pointed objects} or \emph{based objects}, equivalently the slice category $(*\downarrow \mathcal{V} )\eqqcolon \mathcal{V} _*$. We define $S^0\coloneqq *\amalg *$ (the coproduct in $\mathcal{V}$). Note that for each $v,w$, we can define a map $v\to w$ by factoring through the terminal object $v\to *\to w$ via the basepoint on $w$. This gives maps $v,w\to v\times w$, and universality of coproduct gives a canonical map $f:v\amalg w \to v\times w$.We then define the \emph{smash product} $\wedge$ to be the pushout in $\mathcal{V} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+v\amalg w\ar["f", r] \ar[d]  & v\times w\ar[d] \ar[bend left, ddr]  &  \\
+*\ar[r] \ar[bend right, drr]  & v\wedge w \ar[dashed, dr] &  \\
+ &  & z.
+\end{tikzcd}\]
+We then define the hom-objects $\underline{\mathcal{V} }_*$ in $\mathcal{V} _*$ to be pullbacks of internal homs in $\mathcal{V} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+z\ar[bend left, drr] \ar[bend right, ddr] \ar[dashed, dr]  &  &  \\
+							   & \underline{\mathcal{V} }_*(v,w)\ar[r] \ar[d]  & \underline{\mathcal{V} }(v,w)\ar[d]  \\
+							   & \underline{\mathcal{V} }(*,*)\ar[r]  & \underline{\mathcal{V} }(*,w).
+\end{tikzcd}\]
+The bottom map is postcomposition by the base map $*\to w$, and the downwards map is precomposition by the basepoint $*\to v$. This does not have a precise definition yet, but intuitively it makes sense, since hom-objects in cartesian monoidal categories are intuitively similar to hom-sets. There is then a forgetful functor $U : \mathcal{V} _* \to \mathcal{V} $ forgetting the basepoint, which is left adjoint to the functor $(-)_+ : \mathcal{V}  \to \mathcal{V}_+ $ given by computing the coproduct with the terminal object.
+
+\begin{lemma}\label{lma:3.1}
+	When $\mathcal{V} $ is a cartesian closed symmetric monoidal category, the functor $(-)_+ : \mathcal{V}  \to \mathcal{V} _*$ is \emph{strong monoidal}, meaning
+	\[
+		S^0\cong(*)_+,\qquad v_+\wedge w_+\cong(v\times w)_+
+	\]
+	with these isomorphisms natural, and appropriately commuting with associators and unitors.
+\end{lemma}
+\begin{proof}
+	The unit isomorphism is by definition of $S^0$. By definition, the object $v_+\wedge w_+$ is given by the cofiber (the opposite arrow in the pushforward diagram) of
+	\[
+	v_+\amalg w_+ \to v_+\times w_+=(v\amalg *)\times (w\amalg *)
+	.\]
+	Since $\mathcal{V} $ is cartesian closed and symmetric, $v\times -$ and $-\times v$ are left-adjoint and thus preserve colimits, and thus preserve coproducts. Thus, $\times $ distributes over $\amalg,$ and we obtain
+	\[
+		(v\amalg *)\times (w\amalg *)\cong (v\times (w\amalg *))\amalg(*\times(w\amalg*))\cong((v\times w)\amalg(v\times *))\amalg((*\times w)\amalg(*\times *))
+	.\]
+	Dropping the unnecessary parenthases due to associativity of $\amalg$, we also have
+	\[
+		(v\times w)\amalg(v\times *)\amalg(*\times w)\amalg(*\times *)\cong(v\times w)\amalg v\amalg w\amalg *
+	\]
+	since the terminal object $*$ is a unit for $\times $. Universality of coproduct gives an arrow
+	\[
+		v_+\amalg w_+ \to v\amalg w\amalg*
+	\]
+	which the canonical arrow $v_+\amalg w_+\to v_+\times w_+$ factors through by uniqueness. Hence we obtain a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	v_+\amalg w_+\ar[two heads, r] \ar[d]  & v\amalg w\amalg *\ar[r]  & v\times w\amalg v\amalg w\amalg *\ar[d]  \\
+	*\ar[r]  & *\ar[r]  & v\times w\amalg *=(v\times w)_+
+	\end{tikzcd}\]
+	since the canonical map doesn't act on $v\times w$, which is a double pushout, since the top left arrow is epi.
+\end{proof}
+
+A convenient category $\Top $ of spaces gives a closed symmetric monoidal category $(\Top _*,\wedge,S^0)$. So does $(\sSet_*,\wedge,\partial \Delta^1)$.
+
+\section{Underlying categories of enriched categories}
+
+Here is some motivation which I'm copying down less for the motivation, and more because I think the new concepts are cool. Fix a group $G$ to which the discrete topology has been associated, and take $\Top $ some well-behaved category of topological spaces. The functor category $\Top ^G$ has as objects $G$-spaces and as morphisms $G$-equivariant maps. Unpacking this quickly, a functor is a group action of $G$ on a topological space, meaning a choice of continuous automorphisms of a space that respect the group operation. Morphisms of $G$-spaces are natural transformations, but since grououps are singletons, this amounts to a single continuous map that preserves the group action, called $G$-equivariant.
+
+This category admits two natural enrichments. First, the set of $G$-equivariant maps can be viewed as a subspace $\underline{\Top }^G(X,Y)\subseteq \underline{\Top }(X,Y)$, where the latter has the \emph{compact-open topology} generated by sets
+\[
+	V(K,U)\coloneqq \left\{ f\in \Top (X,Y) \mid f(K)\subseteq U \right\} ,\qquad K\subseteq X\text{ compact} ,\qquad U\subseteq Y\text{ open} 
+.\]
+This gives a topological enrichment.
+
+Additionally, $\Top ^G$ is symmetric cartesian monoidal, with product given by the standard cartesian product together with the diagonal action $(g,h)(x,y)=(gx,hy)$. The singleton with the trivial action is a unit thereof. The space $\underline{\Top }(X,Y)$ has a canonical $G$-action
+\[
+	g\cdot f(x)=gf(g^{-1} x)
+.\]
+This gives an enrichment over $\Top ^G$, and we write $\underline{\Top }_G(X,Y)$ for this space to distinguish from the other enrichment. With this definition $\Top ^G$ is cartesian closed.
+
+We think of $\Top ^G$ as the underlying (unenriched) category for both categories, but this intuition is difficult to formalize in full generality. However, generality in this case helps extract the full definition.
+
+To define an underlying category, we first need a way to construct underlying sets, and hence a functor $\mathcal{V}\to \Set $. For example, in $\Ab$, $\sSet$, $\Top $, $\Cat $, and more, the underlying set functor is simply the representable functor $\mathcal{V} (*,-): \mathcal{V}  \to \Set $, since $*$ is a singleton. Since this is the unit for the cartesian monoidal structures of these categories, we might generalize this to any symmetric monoidal category with $*$ as the unit. This is on the right track, but we need a bit more.
+\begin{definition}[Lax Monoidal]\label{dfn:3.3}
+	A functor $F : \mathcal{V}  \to \mathcal{U} $ between symmetric monoidal categories $(\mathcal{V} ,\otimes ,*)$ and $(\mathcal{U} , \Box,1)$ is \emph{lax monoidal} if there are natural transformations (NOT ISOMORPHISMS)
+	\[
+		F(v)\otimes F(v')\to F(v\,\Box \,v'),\qquad 1\to F(*)
+	.\]
+\end{definition}
+Clearly all strong monoidal functors are lax, with natural transformations as isomorphisms. 
+
+\begin{lemma}[Change of Base]\label{lma:3.2}
+	Let $F : \mathcal{V}  \to \mathcal{U} $ be lax monoidal. Then any $\mathcal{V} $-category has an associated $\mathcal{U} $-category with the same objects.
+\end{lemma}
+\begin{proof}
+	Let $\underline{\mathcal{D} }_\mathcal{V} $ be a $\mathcal{V} $-category. Define a $\mathcal{U} $-category $\underline{\mathcal{D} } _\mathcal{U} $ with the same objects, and with hom-objects $\underline{\mathcal{D} } _\mathcal{U}(x,y) \coloneqq F\underline{\mathcal{D} } _\mathcal{V} (x,y)$. The lax monoidal structure of $F$ gives composition and unit maps
+	\[
+		F\underline{\mathcal{D} } _\mathcal{V} (y,z)\,\Box\, F\underline{\mathcal{D} } _\mathcal{V} (x,y)\to F\left( \underline{\mathcal{D} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{D} }_\mathcal{V} (x,y) \right) \xlongrightarrow{F(\circ )}F\underline{\mathcal{D} } _\mathcal{V} (x,z)=\underline{\mathcal{D} } _\mathcal{U} (x,z);
+	\]
+	\[
+		1\to F(*)\xlongrightarrow{F(\mathrm{id}_x)} F\underline{\mathcal{D} } _\mathcal{V} (x,x)=\underline{\mathcal{D} } _\mathcal{U} (x,x)
+	.\]
+\end{proof}
+
+The point is that $\mathcal{V} (*,-)$ is lax monoidal. Let $v,w\in \mathcal{V} $. Then the bifunctor $\otimes $ gives for any pair $*\to v$ and $*\to w$ a map $*\otimes * \to v\otimes w$. Precomposing with the $\otimes $-diagonal map, indeed an isomorphism here, gives rise to a function
+\[
+	\mathcal{V} (*,v)\times \mathcal{V} (*,w)\to \mathcal{V} (*,v\otimes w)
+\]
+natural in $v$ and $w$, and hence $\mathcal{V} (*,-)$ is lax functorial. We then apply \cref{lma:3.2} to change the base for the enrichment from $\mathcal{V} $ to $\Set $.
+
+\begin{definition}[Underlying Category]\label{dfn:3.4}
+	Given a $\mathcal{V} $-category $\underline{\mathcal{C} } $, the underlying category $\mathcal{C} _0$ has the same objects, and as hom-sets
+	\[
+		\mathcal{C} _0(x,y)\coloneqq \mathcal{V} (*,\underline{\mathcal{C} } (x,y))
+	.\]
+	Definitions are as in \cref{lma:3.2}: $1_x=\mathrm{id} _x\in \mathcal{V} (*,\underline{\mathcal{C} } (x,x))$ and
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	\mathcal{C} _0(y,z)\times \mathcal{C} (x,y)\ar[" \circ  ", dashed, rr] \ar[equals, d]  &  & \mathcal{C} _0(x,z)\ar[equals, d]  \\
+	\mathcal{V} (*,\underline{\mathcal{C} } (y,z))\times \mathcal{V} (*,\underline{\mathcal{C} } (x,y))\ar[" \otimes  "', r]  & \mathcal{V} (*,\underline{\mathcal{C} } (y,z)\otimes \underline{\mathcal{C} } (x,y))\ar[" \mathcal{V} (*\text{,} \circ ) "', r]  & \mathcal{V} (*,\underline{\mathcal{C} } (x,z)).
+	\end{tikzcd}\]
+\end{definition}
+
+Reconsiling our previous example, first consider the $\Top $-enriched category $\underline{\Top } ^G$. The hom-sets of the underling category are $\Top (*,\underline{\Top } ^G(X,Y))$, equivalently the set of points in $\underline{\Top } ^G(X,Y)$, equivalently all $G$-equivariant maps $X\to Y$. Hence the underlying category is $\Top ^G$. Similarly, the hom-sets of the underlying category of the $\Top ^G$-enriched category $\underline{\Top } _G$ are given by $\Top ^G(*,\underline{\Top } _G(X,Y))$. Since $*$ is the trivial group action, $G$-equivariant maps $*\to \underline{\Top } _G(X,Y)$ are $G$-fixed points. Note that fixed points for the conjugation action are precisely $G$-equivariant maps:
+\[
+	g\cdot f(x)=gf(g^{-1} x)=gg^{-1} f(x)=f(x)
+.\]
+Hence, the underlying category is once again $\Top ^G$.
+
+These considerations with group actions generalize. For $\mathcal{V} $ a complete and cocomplete closed symmetric monoidal category, $\mathcal{V} ^G$ inherits a canonical closed symmetrical monoidal structure such that the forgetful functor $U : \mathcal{V} ^G \to \mathcal{V} $ preserves the unit, tensor, and internal homs. The hom-object $\underline{\mathcal{V} } ^G(c,d)$ agrees with $\underline{\mathcal{V} } (c,d)$, and the underlying category is again the original $\mathcal{V} ^G$. The discussion also generalizes in another way.
+
+\begin{lemma}\label{lma:3.3}
+	If $(V,\otimes ,*)$ is a closed symmetric monoidal category, the underlying category of the $\mathcal{V} $-category $\underline{\mathcal{V} } $ is $\mathcal{V} $.
+\end{lemma}
+\begin{proof}
+	Internal homs give the adjunction
+	\[
+		\mathcal{V} (*,\underline{\mathcal{V} } (x,y))\cong \mathcal{V} (*\otimes x,y)\cong \mathcal{V} (x,y)
+	,\]
+	with the second isomorphism the unitor. Hence, hom-sets of the underlying category agree with $\mathcal{V} $. We now need to show identities and composition agree. The first one is handled by functorality of $\mathcal{V} (*,-)$, so now we need only show composition agrees.
+
+	Using this above isomorphism, we take $f : x \to y$ in $\mathcal{V} $ and the morphism $f : * \to \underline{\mathcal{V} } (x,y)$ to be equivalent, hence we use the same label. Let $\varepsilon _y^x : \underline{\mathcal{V} } (x,y)\otimes x \to y$ be the relevant counit of the relevant adjunction. Following the isomorphism gives a precise definition of $f : x \to y$ in terms of $f : * \to \underline{\mathcal{V} } (x,y)$ as the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x\cong *\otimes x \ar[" f\otimes 1 ", r]  & \underline{\mathcal{V} } (x,y)\otimes x\ar[" \varepsilon _y^x ", r]  & y.
+	\end{tikzcd}\]
+	Now we follow composition as in \cref{dfn:3.4}. The composition in $\underline{\mathcal{V} } $ is defined as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	*\cong *\otimes *\ar[" g\otimes f ", r]  & \underline{\mathcal{V} } (y,z)\otimes \underline{\mathcal{V} } (x,y)\ar[" \circ  ", r]  & \underline{\mathcal{V} } (x,z).
+	\end{tikzcd}\]
+	Recall composition was adjunct to
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\underline{\mathcal{V} } (y,z)\otimes \underline{\mathcal{V} } (x,y)\otimes x\ar[" 1\otimes \varepsilon _y^x ", r]&  \underline{\mathcal{V} } (y,z)\otimes y\ar[" \varepsilon _z^y ", r]  & z .
+	\end{tikzcd}\]
+	Naturality and precomposition with a unitor gives that our definition of composition in its entirety is adjunct to
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	*\otimes x\cong *\otimes *\otimes x\ar[" g\otimes f\otimes 1 ", r]  & \underline{\mathcal{V} } (y,z)\otimes \underline{\mathcal{V} } (x,y)\otimes x\ar[" 1\otimes \varepsilon _y^x ", r]  & \underline{\mathcal{V} } (y,z)\otimes y\ar[" \varepsilon _z^y ", r]  & z.
+	\end{tikzcd}\]
+	Functorality and another unitor gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\cong *\otimes *\otimes x\ar[" g\otimes 1\otimes 1 ", r]  & \underline{\mathcal{V} } (y,z)\otimes *\otimes x\ar[" 1\otimes f\otimes 1 ", r]  & \underline{\mathcal{V} } (y,z)\otimes \underline{\mathcal{V} } (x,y)\otimes x\ar["1\otimes  \varepsilon _y^x ", r]  & \underline{\mathcal{V} } (y,z)\otimes y\ar[" \varepsilon _z^y ", r]  & z.
+	\end{tikzcd}\]
+	By functorality of tensor, we can replace the part of the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	*\otimes x\ar[" f \otimes 1", r]  & \underline{\mathcal{V} } (x,y)\otimes x\ar[" \varepsilon _y^x ", r]  & y
+	\end{tikzcd}\]
+	with the definition of $f : x \to y$ in $\mathcal{V} $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\cong *\otimes x\ar[" g\otimes 1 ", r]  & \underline{\mathcal{V} } (y,z)\otimes x\ar[" 1\otimes f ", r]  & \underline{\mathcal{V} } (y,z)\otimes y\ar[" \varepsilon _z^y ", r]  & z.
+	\end{tikzcd}\]
+	Functorality of $\otimes $ gives that this composition is equivalent to
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[" f ", r]  & y\cong *\otimes y\ar[" g\otimes 1 ", r]  & \underline{\mathcal{V} } (y,z)\otimes y\ar[" \varepsilon _z^y ", r]  & z.
+	\end{tikzcd}\]
+	The tail of this composition is precisely the definition of $g$ as an arrow in the underlying category, hence this is the composition $g\circ f$.
+\end{proof}
+
+\begin{exercise}
+	Let $\underline{\mathcal{D} } $ be a $\mathcal{V} $-category and $g : * \to \underline{\mathcal{D} } (y,z)$ an arrow in $\mathcal{D} _0$. Define for any $x\in \underline{\mathcal{D} } $ postcomposition:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	g_*: \underline{\mathcal{D} } (x,y)\cong *\otimes \underline{\mathcal{D} } (x,y)\ar[" g\otimes 1 ", r]  & \underline{\mathcal{D} } (y,z)\otimes \underline{\mathcal{D} } (x,y)\ar[" \circ ", r]  & \underline{\mathcal{D} } (x,z).
+	\end{tikzcd}\]
+	Precomposition is defined similarly. This definition gives an (unenriched) functor
+	\[
+		\underline{\mathcal{D} } (x,-): \mathcal{D} _0 \to \mathcal{V} ,\qquad y\mapsto \underline{\mathcal{D} } (x,y),\qquad g\mapsto g_*
+	.\]
+	Show that the composition with the underlying set functor $\mathcal{V} (*,-)\circ \underline{\mathcal{D} } (x,-)$ is the representable functor $\mathcal{D} _0(x,-): \mathcal{D} _0 \to \Set $.
+\end{exercise}
+\begin{proof}
+	By \cref{dfn:3.4}, $\mathcal{V} (*,\underline{\mathcal{D} } (x,-))\eqqcolon \mathcal{D} _0(x,-)$. Hence, the definitions agree on objects. We also have that $\mathcal{D} _0(x,g)=g_*$ in the conventional sense of the notation, and by definition $\underline{\mathcal{D} } (x,g)=g_*$ in the sense of the notation as above. We also have that for a morphism $f$ in $\mathcal{V} $, $\mathcal{V} (x,f)$ is also precomposition in the conventional sense. Note that $\mathcal{V} (*,\underline{\mathcal{D} } (x,g))=\mathcal{V} (*,g_*)$.
+
+	Let $f : x \to y$ in $\mathcal{D} _0$, and equivalently $f : * \to \underline{\mathcal{D} } (x,y)$ in $\mathcal{V} $. We must show that evaluating $\mathcal{V} (*,g_*)(f)$ is precisely the same as $\mathcal{D} _0(x,g)(f)$. Since $g_*$ is defined as an arrow in $\mathcal{V} $, the former is given as $g_*\circ f$ with composition as defined for $\mathcal{V} $. The latter is given as $g\circ f$, with composition as defined in $\mathcal{D} _0$. Writing out the composition $g_*\circ f$ as defined above gives the composition
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	*\ar[" f ", r]  & \underline{\mathcal{D} } (x,y)\cong *\otimes \underline{\mathcal{D} } (x,y)\ar[" g\otimes 1 ", r]  & \underline{\mathcal{D} } (y,z)\otimes \underline{\mathcal{D} } (x,y)\ar[" \circ  ", r]  & \underline{\mathcal{D} } (x,z)
+	\end{tikzcd}\]
+	with composition as in $\underline{\mathcal{D} } $. Functorality simplifies this to
+	\[\begin{tikzcd}[row sep = 3em, column sep = 2.5em]
+	*\cong *\otimes *\ar[" g\otimes f ", r]  & \underline{\mathcal{D} } (y,z)\otimes \underline{\mathcal{D} } (x,y)\ar[" \circ  ", r]  & \underline{\mathcal{D} } (x,z).
+	\end{tikzcd}\]
+	By \cref{dfn:3.4}, this is precisely the same as the definition of $g\circ f$ in $\mathcal{D} _0$. Thus, $\mathcal{V} (*,\underline{\mathcal{D} } (x,-))=\mathcal{D} _0(x,-)$.
+\end{proof}
+
+Hence we have a good notion of precomposition and postcomposition. Importantly, pre- and postcomposition are continuous in topological categories, but we can indeed show more. These representable functors are $\mathcal{V} $-functors.
+
+\section{Enriched functors and enriched natural transformations}
+
+Small $\mathcal{V} $-categories can form a 2-category (if $\mathcal{V} $ is allowed to be symmetric). To make precise this notion we require the notion of a $\mathcal{V} $-functor.
+
+\begin{definition}[$\mathcal{V}$-Functor]\label{dfn:3.5}
+	A $\mathcal{V} $-functor $F : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ between $\mathcal{V} $-categories is an object map $x\mapsto F(x)$ from $\underline{\mathcal{C} } $ to $\underline{\mathcal{D} } $, together with morphisms
+	\[
+		F_{x,y} : \underline{\mathcal{C} } (x,y) \to \underline{\mathcal{D} } (x,y)
+	\]
+	in $\mathcal{V} $ for each pair $x,y\in \underline{\mathcal{C} } $, such that the following diagrams commute for all $x,y,z\in \underline{\mathcal{C} } $:
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\underline{\mathcal{C} } (y,z)\otimes \underline{\mathcal{C} } (x,y)\ar[" \circ  ", r] \ar[" F_{y\text{,} z} \otimes F_{x\text{,} y}  "', d]  & \underline{\mathcal{C} } (x,y)\ar[" F_{x\text{,} z}  ", d]  & *\ar[" \mathrm{id} _x ", r] \ar[" \mathrm{id} _{F(x)}  "', dr]  & \underline{\mathcal{C} } (x,x)\ar[" F_{x\text{,} x}  ", d] \\
+	\underline{\mathcal{D} } (F(y),F(z))\otimes \underline{\mathcal{D} } (F(x),F(y))\ar[" \circ  "', r]  & \underline{\mathcal{D} } (F(x),F(z)) &  & \underline{\mathcal{D} } (F(x),F(x)).
+	\end{tikzcd}\]
+\end{definition}
+
+For a regular category, hence a $\Set $-category, these diagrams demand that $F(-\circ -)=F(-)\circ F(-)$ and $F(1_{(-)} )=1_{F(-)} $. More importantly, a topological functor between $\Top $-categories consists of continuous maps between hom-spaces. $\Top $-functors are frequently called \emph{continuous} functors in the literature, an unfortunate conflict of terminology from the uncommon, but still used, notion of a continuous functor being one which preserves small limits.
+
+A simplicial functor between $\sSet$-categories consists of maps between the $n$-simplices of the appropriate hom-spaces. A 2-functor between $\Cat $-categories, equivalently 2-categories, is a map of objects, morphisms, and 2-cells that preserves domains, codomains, composition, and identities at all levels. Going back to a definition we explored earlier, a covariant $\Ab$-functor from a singleton $\Ab$-category $R$ to $\underline{\Ab} $ is a left $R$-module; a contravariant $\Ab$-functor is a right $R$-module.
+
+\begin{exercise}
+	Extend \cref{dfn:3.4} to define the underlying functor of $\mathcal{V} $-functors and show that your definition is functorial, i.e., defines a functor $(-)_0: \mathcal{V} \text{-}\Cat  \to \Cat $.
+\end{exercise}
+\begin{proof}
+	Given a $\mathcal{V} $-functor $F : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $, define $F_0: \mathcal{C} _0 \to \mathcal{D} _0$ to be the same as $F$ on objects, and on morphisms is simply given by the relevant postcomposition in $\mathcal{V} $. More precisely, for $f : x \to y$ in $\mathcal{C} _0$, we have $f : * \to \underline{\mathcal{C} } (x,y)$ in $\mathcal{V} $, and we then define
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F_0(f)\coloneqq *\ar[" f ", r]  & \underline{\mathcal{C} } (x,y)\ar[" F_{x\text{,} y}  ", r]  & \underline{\mathcal{D} } (x,y).
+	\end{tikzcd}\]
+	Hence $F(f)\in \mathcal{V} (*,\underline{\mathcal{D} } (x,y))\eqqcolon \mathcal{D} _0(x,y)$. The fact that $F$ commutes with $\circ $ in $\mathcal{V}$ and that it preserves identities makes it functorial. These are fairly easy to check, but since this is an exercise I will spell it out in completeness. Let $g : y \to z$ and $f : x \to y$ in $\mathcal{C} _0$. We obtain the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		*\otimes *\ar[" g\otimes f ", r] &\underline{\mathcal{C} } (y,z)\otimes \underline{\mathcal{C} } (x,y)\ar[" \circ  ", r] \ar[" F_{y\text{,} z} \otimes F_{x\text{,} y}  "', d]  & \underline{\mathcal{C} } (x,y)\ar[" F_{x\text{,} z}  ", d]  \\
+						 &\underline{\mathcal{D} } (F(y),F(z))\otimes \underline{\mathcal{D} } (F(x),F(y))\ar[" \circ  "', r]  & \underline{\mathcal{D} } (F(x),F(z)) .
+	\end{tikzcd}\]
+	This expresses the equality
+	\[
+		\circ_\mathcal{D}  \circ (F_{y,z} \otimes F_{x,y} )\circ (g\otimes f)=F_{x,z} \circ \circ_\mathcal{C}  \circ (g\otimes f)
+	.\]
+	Functorality of $\otimes $ gives on the left
+	\[
+		\circ_\mathcal{D}  \circ  (F_{y,z} \otimes F_{x,y} )\circ  (g\otimes f)=\circ_\mathcal{D} \circ ((F_{y,z} \circ g)\otimes (F_{x,y} \circ f))
+	.\]
+	We thus obtain by definition of $F_0$ and of composition in $\mathcal{C} _0$ that
+	\[
+		F_0(g)\circ F_0(f)=F_0(g\circ f)
+	.\]
+	The identity is manifestly preserved. Thus, $F_0$ is functorial.
+
+	Now for the functor $(-)_0$. We wish to show the assignment
+	\[
+		\underline{\mathcal{C} } \mapsto \mathcal{C} _0,\qquad F\mapsto F_0
+	\]
+	is functorial. This is fairly simple. Let $F : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ and $G : \underline{\mathcal{D} }  \to \underline{\mathcal{E} } $ be $\mathcal{V} $-functors. Then by definition of functor composition, we have
+	\[
+		(G\circ F)_0(f)=(G\circ F)_{x,y} \circ f = G_{x,y} \circ F_{x,y} \circ f=(G_0\circ F_0)(f)
+	.\]
+	Thus the assignment is indeed functorial.
+\end{proof}
+
+When $\underline{\mathcal{V} } $ is a closed $\mathcal{V} $-category, there is for any $\underline{\mathcal{C} } $ a \emph{representable functor} $\underline{\mathcal{C} } (c,-): \underline{\mathcal{C} }  \to \underline{\mathcal{V} } $ whose underlying functor is the representable functor $\underline{\mathcal{C} } (c,-): \mathcal{C} _0 \to \mathcal{V} $ as constructed earlier. The object map is merely $x\mapsto \underline{\mathcal{C} } (c,x)$; the morphisms
+\[
+	\underline{\mathcal{C} } (c,-)_{x,y} : \underline{\mathcal{C} } (x,y) \to \underline{\mathcal{V} } (\underline{\mathcal{C} } (c,x),\underline{\mathcal{C} } (c,y))
+\]
+are the adjuncts of composition. More precisely, since $\underline{\mathcal{V} } $ is closed, composition
+\[
+	\circ : \underline{\mathcal{C} } (x,y)\otimes \underline{\mathcal{C} } (c,x) \to \underline{\mathcal{C} }(c,y)
+\]
+has an adjunct under \cref{dfn:3.2} to
+\[
+	\underline{\mathcal{C} } (x,y)\to \underline{\mathcal{V} } (\underline{\mathcal{C} } (c,x),\underline{\mathcal{C} } (c,y))
+.\]
+The definition of composition in the underlying category recovers $g\mapsto g_*$ for the underlying functor.
+
+Suppose still that $\mathcal{V} $ is closed monoidal. Recall an unenriched category $\mathcal{C} $ admits a free $\mathcal{V} $-categorical structure with objects the same as $\mathcal{C} $, and hom-objects given by
+\[
+	\underline{\mathcal{C} } (a,b)\coloneqq \mathcal{C} (a,b)\cdot * = \coprod_{\mathcal{C} (a,b)} *
+.\]
+A functor $F$ from the free $\mathcal{V} $-category on $\mathcal{C} $ to a $\mathcal{V} $-category $\underline{\mathcal{D} } $ consists of an object function $c\mapsto F(c)$, together with morphisms
+\[
+	F_{x,y} :\coprod_{\mathcal{C} (x,y)} * \to \underline{\mathcal{D} } (F(x),F(y))
+.\]
+Universality of coproduct gives that $F_{x,y} $ is completely determined by some family of morphisms $X\coloneqq \left\{ \varphi_f : * \to \underline{\mathcal{D} } (F(x),F(y)) \right\}_{f\in \mathcal{C} (x,y)} $. Since
+\[
+	X\subseteq \mathcal{V} (*,\underline{\mathcal{D} } (F(x),F(y)))\eqqcolon \mathcal{D} _0(F(x),F(y)),
+,\]
+we have that $F_{x,y} $ is equivalently an assignment $\mathcal{C} (x,y)\to \mathcal{D} _0(F(x),F(y))$. Assigning the notation $F^V(\mathcal{C} )$ to the free $\mathcal{V} $-category on $\mathcal{C} $ (this notation will never be used again and is simply here to write down precisely my point), we have that functors $F : F^V(\mathcal{C} ) \to \underline{\mathcal{D} } $ are precisely functors $F : \mathcal{C}  \to \mathcal{D} _0$. Hence, there is an isomorphism
+\[
+	\mathcal{V} \text{-} \Cat (F^V(\mathcal{C} ),\underline{\mathcal{D} } )\cong \Cat (\mathcal{C} ,\mathcal{D} _0)
+\]
+natural in both entries by universality of coproduct. Thus there is an adjunction $F^V\dashv (-)_0$, and for this reason we will never again use the notation $F^V$, since functors $F^V(\mathcal{C} )\to \underline{\mathcal{D} } $ are simply functors $\mathcal{C} \to \mathcal{D} _0$.
+
+Recall that $\sSet$ admits a closed enrichment via $\underline{\sSet} (X,Y)_n=\sSet(\Delta^n\times X,Y)$. The terminal simplicial set $\Delta^0 = \boldsymbol{\Delta} (-,[0])$ in an unenriched sense also represents the functor $(-): \sSet \to \Set $, which takes a simplicial set $X$ to it's set $X_0$ of vertices. However viewing $\sSet$ as self-enriched, the represented functor $\underline{\sSet} (\Delta^0,-)$ becomes the identity on $\sSet$:
+\[
+	\underline{\sSet} (\Delta^0,X)_n=\sSet(\Delta^n \times \Delta^0,X)\cong\sSet(\Delta^n,X)\cong X_n
+.\]
+The equality is definition, the first isomorphism is that $\Delta^0$ is terminal, and the second is Yoneda.
+
+The next natural definition is that of a $\mathcal{V} $-natural transformation. However, we need to recall that there are no morphisms to act on, so the natural way to reproduce the naturality square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(x)\ar[" F(f) ", r] \ar[" \alpha_x "', d]  & F(y)\ar[" \alpha_y ", d]  \\
+G(x)\ar[" G(f) "', r]  & G(y)
+\end{tikzcd}\]
+is via pre- and post-composition with components of $\alpha$.
+
+\begin{definition}[$\mathcal{V} $-Natural Transformation]\label{dfn:3.6}
+	A $\mathcal{V} $-natural transformation $\alpha : F \Rightarrow G$ between $\mathcal{V} $-functors $F,G : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ is a morphism $\alpha_x : * \to \underline{\mathcal{D} } (F(x),G(x))$ in $\mathcal{V} $ for each $x\in \underline{\mathcal{C} } $, such that for all $x,y\in \underline{\mathcal{C} } $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\underline{\mathcal{C} } (x,y)\ar[" F_{x\text{,} y}  ", r] \ar[" G_{x\text{,} y}  "', d]  & \underline{\mathcal{D} } (F(x),F(y))\ar[" (\alpha_y)_* ", d]  \\
+	\underline{\mathcal{D} } (G(x),G(y))\ar[" (\alpha_x)^* "', r]  & \underline{\mathcal{D} } (F(x),G(y))
+	\end{tikzcd}\]
+	with precomposition $(\alpha_x)^*$ and postcomposition $(\alpha_y)_*$ defined as earlier.
+\end{definition}
+
+The intuitive understanding of this in unenriched categories is that on the top right path, morphisms $f : x \to y$ in $\mathcal{C} $ should be carried to morphisms $F(f): F(x) \to F(y)$ in $\mathcal{D} $, and then postcomposed with $\alpha_y$. The bottom left path says that this shouldbe equal to taking your morphism and applying $G$ to obtain $G(f): G(x) \to G(y)$, then precompositing with $\alpha_x$, giving an equality
+\[
+	\alpha_y \circ F(f)=G(f)\circ \alpha_x
+.\]
+This is precisely the naturality condition.
+
+\begin{example}
+	An $\Ab$-natural transformation between two left $R$-modules $A,B : R \to \Ab$ is a single arrow $\alpha_* : * \to \Ab(A,B)$ in $\Ab$, and hence a group homomorphism, that must commute with scalar multiplication by our above discussion. Hence $\Ab$-natural transformations here are $R$-module homomorphisms, and thus $\Ab\text{-} \Fun(R,\Ab)\cong\Rmod_R$.
+\end{example}
+
+The addition of $\mathcal{V} $-natural transformations assembles $\mathcal{V} \text{-} \Cat $ into a 2-category. We've shown already that the underlying set functor $(-)_0$ extends to $\mathcal{V} $-functors, making it a functor $\mathcal{V} \text{-} \Cat \to \Cat $. We now claim we can use it to define underlying $\mathcal{V} $-natural transformations.
+
+\begin{proposition}\label{prp:3.1}
+	Underlying $(-)_0$ is a $2$-functor $\mathcal{V} \text{-} \Cat \to \Cat $. Additionally, lax monoidal functors $F : \mathcal{V}  \to \mathcal{U}$ induce 2-functors $\mathcal{V} \text{-} \Cat \to \mathcal{U} \text{-} \Cat$.
+\end{proposition}
+\begin{proof}
+	We prove the second statement first. By \cref{lma:3.2}, we already have an object function by mapping some $\mathcal{V} $-category $\underline{\mathcal{D} } _\mathcal{V} $ to the $\mathcal{U} $-category $\underline{\mathcal{D} } _\mathcal{U} $ with the same objects, and hom-objects
+	\[
+		\underline{\mathcal{D} } _\mathcal{U} (x,y)\coloneqq F\left( \underline{\mathcal{D} } _\mathcal{V} (x,y) \right) 
+	.\]
+	Let $G : \underline{\mathcal{C} }_\mathcal{V}  \to \underline{\mathcal{D} } _\mathcal{V} $ be a $\mathcal{V} $-functor. Define a new functor $F(G)$ by $F(G)=G$ on objects, and
+	\[
+		(F(G))_{x,y} =F(G_{x,y} )
+	.\]
+	Since $G$ is $\mathcal{V} $-functorial, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\underline{\mathcal{C} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,y)\ar[" \circ  ", r] \ar[" G_{y\text{,} z} \otimes G_{x\text{,} y}  "', d]  & \underline{\mathcal{C} } _\mathcal{V} (x,z)\ar[" G_{x\text{,} z}  ", d]  \\
+	\underline{\mathcal{D} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{D} } _\mathcal{V} (x,y)\ar[" \circ  "', r]  & \underline{\mathcal{D} } _\mathcal{V} (x,z)
+	\end{tikzcd}\]
+	commutes in $\mathcal{V} $. Hence by functorality of $F$, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	F(\underline{\mathcal{C} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,y))\ar[" F(\circ ) ", r] \ar[" F(G_{y\text{,} z} \otimes G_{x\text{,} y} ) "', d]  & \underline{\mathcal{C} } _\mathcal{U} (x,z)\ar[" F(G_{x\text{,} z} ) ", d]  \\
+	F(\underline{\mathcal{D} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{D} } _\mathcal{V} (x,y))\ar[" F(\circ ) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (x,z)
+	\end{tikzcd}\]
+	commutes in $\mathcal{U} $, where we have swapped for the $\mathcal{U} $-categories where possible. Recall since $F$ is lax monoidal, there is a natural transformation
+	\[
+		F(v)\otimes F(v')\to F(v\otimes v')
+	.\]
+	More precisely, there is a natural transformation
+	\[
+		F(-)\otimes F(-)\Rightarrow F(-\otimes -)
+	.\]
+	Denote this natural transformation by $\lambda$. Since precomposing in the corner preserves commutivity, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\underline{\mathcal{C} } _\mathcal{U} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{U} (x,y)\ar[" \lambda ", r] & F(\underline{\mathcal{C} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,y))\ar[" F(\circ ) ", r] \ar[" F(G_{y\text{,} z} \otimes G_{x\text{,} y} ) "', d]  & \underline{\mathcal{C} } _\mathcal{U} (x,z)\ar[" F(G_{x\text{,} z} ) ", d]  \\
+	& F(\underline{\mathcal{D} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{D} } _\mathcal{V} (x,y))\ar[" F(\circ ) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (x,z)
+	\end{tikzcd}\]
+	commutes in $\mathcal{U} $. Thus, by naturality of $\lambda$, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\underline{\mathcal{C} } _\mathcal{U} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{U} (x,y)\ar[" \lambda ", r] \ar[" F(G_{y\text{,} z} )\otimes F(G_{x\text{,} y} ) "', d] & F(\underline{\mathcal{C} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,y))\ar[" F(\circ ) ", r] \ar[" F(G_{y\text{,} z} \otimes G_{x\text{,} y} ) "', d]  & \underline{\mathcal{C} } _\mathcal{U} (x,z)\ar[" F(G_{x\text{,} z} ) ", d]  \\
+	\underline{\mathcal{D} } _\mathcal{U} (y,z)\otimes \underline{\mathcal{D} } _\mathcal{U} (x,y)\ar[" \lambda "', r] & F(\underline{\mathcal{D} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{D} } _\mathcal{V} (x,y))\ar[" F(\circ ) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (x,z)
+	\end{tikzcd}\]
+	commutes as well. Recall by \cref{lma:3.2} that composition is given in the $\mathcal{U} $-categories via
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+		\underline{\mathcal{C} } _\mathcal{U} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{U} (x,y)\ar[" \lambda ", r] & F\left( \underline{\mathcal{C} } _\mathcal{V} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,y) \right) \ar[" F(\circ  )", r] & \underline{\mathcal{C} } _\mathcal{U} (x,z).
+	\end{tikzcd}\]
+	Note that this is the top and bottom compositions of the above diagram, so simplifying we obtain the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\underline{\mathcal{C} } _\mathcal{U} (y,z)\otimes \underline{\mathcal{C} } _\mathcal{U} (x,y)\ar[" F(G_{y\text{,} z} )\otimes F(G_{x\text{,} y} ) "', d] \ar[" \circ  ", r]  & \underline{\mathcal{C} }_\mathcal{U} (x,z)\ar[" F(G_{x\text{,} z} ) ", d]   \\
+	\underline{\mathcal{D} } _\mathcal{U} (y,z)\otimes \underline{\mathcal{D} } _\mathcal{U} (x,y)\ar[" \circ  "', r]  & \underline{\mathcal{D} } _\mathcal{U} (x,z).
+	\end{tikzcd}\]
+	Thus, $F(G)$ preserves composition.
+
+	To show $F(G)$ preserves identities, recall by \cref{dfn:3.5} that since $G$ is $\mathcal{V} $-functorial, for any $x$ the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	*\ar[" \mathrm{id} _x ", r] \ar[" \mathrm{id} _{G\left(x \right) }  "', dr]  & \underline{\mathcal{C} } _\mathcal{V} (x,x)\ar[" G_{x\text{,} x}  ", d]  \\
+	 & \underline{\mathcal{D} } _\mathcal{V} (G(x),G(x))
+	\end{tikzcd}\]
+	commutes. Functorality of $F$ gives that the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	F(*)\ar[" F(\mathrm{id} _x) ", r] \ar[" F(\mathrm{id} _{G(x)}  )"', dr]  & \underline{\mathcal{C} } _\mathcal{U} (x,x)\ar[" F(G_{x\text{,} x} ) ", d]  \\
+	 & \underline{\mathcal{D} } _\mathcal{U} (G(x),G(x))
+	\end{tikzcd}\]
+	commutes. To avoid confusion, denote by $1$ the unit in $\mathcal{U} $. Since $F$ is lax monoidal, there is a natural transformation $1\to F(*)$, giving that
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		1\ar[r] & F(*)\ar[" F(\mathrm{id} _x) ", r] \ar[" F(\mathrm{id} _{G(x)}  )"', dr]  & \underline{\mathcal{C} } _\mathcal{U} (x,x)\ar[" F(G_{x\text{,} x} ) ", d]  \\
+			& & \underline{\mathcal{D} } _\mathcal{U} (G(x),G(x))
+	\end{tikzcd}\]
+	commutes. Recall also that \cref{lma:3.2} defines the identity as the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+	\mathrm{id} _x : 1\ar[r]  & F(*)\ar[" F(\mathrm{id} _x) ", r]  & \underline{\mathcal{D} } _\mathcal{U} (x,x).
+	\end{tikzcd}\]
+	Note this is the top composition on the above diagram, and thus it suffices to show that $F(\mathrm{id} _{G(x)} )\circ (1\to F(*))=\mathrm{id} _{F(G(x))} $. Note that $F(G(x))=G(x)$, and thus $\mathrm{id} _{F(G(x))} =\mathrm{id} _{G(x)} $. It thus suffices to show $F$ fixes identities. Recall from \cref{dfn:3.1} that the identity must satisfy coherence conditions
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		\underline{\mathcal{C} }_\mathcal{V} (x,y)\otimes *\ar[" 1\otimes \mathrm{id}_x ", r] \ar[" \cong "', dr]  & \underline{\mathcal{C} }_\mathcal{V} (x,y)\otimes \underline{\mathcal{C} }_\mathcal{V} (x,x)\ar[" \circ  ", d]  & \underline{\mathcal{C} }_\mathcal{V} (y,y)\otimes \underline{\mathcal{C} }_\mathcal{V} (x,y)\ar[" \circ  ", d]  & *\otimes \underline{\mathcal{C} }_\mathcal{V} (x,y)\ar[" \mathrm{id} _y \otimes 1 "', l] \ar[" \cong ", dl]  \\
+													      & \underline{\mathcal{C} }_\mathcal{V} (x,y) & \underline{\mathcal{c} }_\mathcal{V} (x,y) & 
+	\end{tikzcd}\]
+	and the same for $\underline{\mathcal{D} } _\mathcal{V} $. The proof will be the same for both diagrams, so we prove only the left diagram. Functorality of $F$ gives that the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes * \right) \ar[" \cong "', dr] \ar[" F(1\otimes \mathrm{id} _x) ", r]  & F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,x) \right) \ar[" F(\circ)  ", d]  \\
+	 & \underline{\mathcal{C} } _\mathcal{U} (x,y)
+	\end{tikzcd}\]
+	commutes. By naturality of $\lambda$ and the fact that $F(1)=1$, it follows that
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\underline{\mathcal{C} } _\mathcal{U}(x,y)\otimes F(*)\ar[" 1\otimes F(\mathrm{id} _x) ", r] \ar[" \lambda "', d]  & \underline{\mathcal{C} } _\mathcal{U} (x,y)\otimes \underline{\mathcal{C} } _\mathcal{U} (x,x)\ar[" \lambda ", d]  \\
+	F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes * \right) \ar[" F(1\otimes \mathrm{id} _x) ", r] \ar[" \cong "', dr]  & F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,x) \right) \ar[" F(\circ ) ", d]  \\
+	 & \underline{\mathcal{C} } _\mathcal{U} (x,y)
+	\end{tikzcd}\]
+	commutes. am on the wrong track, apply coherence diagrams before naturality to try to get rid of the stupid
+\end{proof}
+
