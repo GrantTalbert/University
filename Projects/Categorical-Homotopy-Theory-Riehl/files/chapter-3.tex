@@ -424,6 +424,8 @@ The addition of $\mathcal{V} $-natural transformations assembles $\mathcal{V} \t
 	Underlying $(-)_0$ is a $2$-functor $\mathcal{V} \text{-} \Cat \to \Cat $. Additionally, lax monoidal functors $F : \mathcal{V}  \to \mathcal{U}$ induce 2-functors $\mathcal{V} \text{-} \Cat \to \mathcal{U} \text{-} \Cat$.
 \end{proposition}
 \begin{proof}
+	The statement is obvious, yet the proof is messy. Let $(\mathcal{V} ,\otimes ,*)$ and $(\mathcal{U} ,\otimes ,1)$ be monoidal, and let $F : \mathcal{V}  \to \mathcal{U} $ be lax monoidal. Let $\lambda : F(x)\otimes F(x)\to F(x\otimes x)$ be the natural transformation, and let $\varphi : 1 \to F(*)$ be the other arrow.
+
 	We prove the second statement first. By \cref{lma:3.2}, we already have an object function by mapping some $\mathcal{V} $-category $\underline{\mathcal{D} } _\mathcal{V} $ to the $\mathcal{U} $-category $\underline{\mathcal{D} } _\mathcal{U} $ with the same objects, and hom-objects
 	\[
 		\underline{\mathcal{D} } _\mathcal{U} (x,y)\coloneqq F\left( \underline{\mathcal{D} } _\mathcal{V} (x,y) \right) 
@@ -490,22 +492,90 @@ The addition of $\mathcal{V} $-natural transformations assembles $\mathcal{V} \t
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
 	\mathrm{id} _x : 1\ar[r]  & F(*)\ar[" F(\mathrm{id} _x) ", r]  & \underline{\mathcal{D} } _\mathcal{U} (x,x).
 	\end{tikzcd}\]
-	Note this is the top composition on the above diagram, and thus it suffices to show that $F(\mathrm{id} _{G(x)} )\circ (1\to F(*))=\mathrm{id} _{F(G(x))} $. Note that $F(G(x))=G(x)$, and thus $\mathrm{id} _{F(G(x))} =\mathrm{id} _{G(x)} $. It thus suffices to show $F$ fixes identities. Recall from \cref{dfn:3.1} that the identity must satisfy coherence conditions
+	Note this is the top composition on the above diagram, and also note that we have by the same result that
 	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
-		\underline{\mathcal{C} }_\mathcal{V} (x,y)\otimes *\ar[" 1\otimes \mathrm{id}_x ", r] \ar[" \cong "', dr]  & \underline{\mathcal{C} }_\mathcal{V} (x,y)\otimes \underline{\mathcal{C} }_\mathcal{V} (x,x)\ar[" \circ  ", d]  & \underline{\mathcal{C} }_\mathcal{V} (y,y)\otimes \underline{\mathcal{C} }_\mathcal{V} (x,y)\ar[" \circ  ", d]  & *\otimes \underline{\mathcal{C} }_\mathcal{V} (x,y)\ar[" \mathrm{id} _y \otimes 1 "', l] \ar[" \cong ", dl]  \\
-													      & \underline{\mathcal{C} }_\mathcal{V} (x,y) & \underline{\mathcal{c} }_\mathcal{V} (x,y) & 
+	\mathrm{id}_{G(x)} : 1 \ar[r]  & F(*)\ar[" F(\mathrm{id} _{G(x)} ) ", r]  & \underline{\mathcal{D} } _\mathcal{U} (G(x),G(x)).
 	\end{tikzcd}\]
-	and the same for $\underline{\mathcal{D} } _\mathcal{V} $. The proof will be the same for both diagrams, so we prove only the left diagram. Functorality of $F$ gives that the diagram
+	Note that this is the other side of the diagram. Thus, the diagram is equivalent to
 	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
-	F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes * \right) \ar[" \cong "', dr] \ar[" F(1\otimes \mathrm{id} _x) ", r]  & F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,x) \right) \ar[" F(\circ)  ", d]  \\
-	 & \underline{\mathcal{C} } _\mathcal{U} (x,y)
+	1\ar[" \mathrm{id}_x ", r] \ar[" \mathrm{id}_{G(x)}  "', dr]  & \underline{\mathcal{C} } _\mathcal{U} (x,x)\ar[" F(G_{x\text{,} x} ) ", d]  \\
+	 & \underline{\mathcal{D} } _\mathcal{U} (G(x),G(x)).
 	\end{tikzcd}\]
-	commutes. By naturality of $\lambda$ and the fact that $F(1)=1$, it follows that
+	Thus, $F(G)$ is a $\mathcal{U} $-functor, and $F$ is a functor.
+
+	Finally, we must show $F$ is a 2-functor by showing it preserves domain, codomain, identity, and composition of natural transformations both horizontally and vertically. Let $G,H : \underline{\mathcal{C} } _\mathcal{V}  \to \underline{\mathcal{D} } _\mathcal{V} $ be $\mathcal{V} $-functors, and let $\alpha : G \Rightarrow H$ be a $\mathcal{V} $-natural transformation. Let $\varphi : 1 \to F(*)$ be the relevant lax monoidal arrow. Since the components $\alpha_x$ are morphisms in $\mathcal{V} $, define $F(\alpha)$ componentwise as $F(\alpha)_x=F(\alpha_x)\circ \varphi$. This is indeed an arrow $1\to \underline{\mathcal{D} } _\mathcal{U} (G(x),H(x))$ by definition of $\underline{\mathcal{D} } _\mathcal{U} $. By \cref{dfn:3.6}, the square
 	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
-	\underline{\mathcal{C} } _\mathcal{U}(x,y)\otimes F(*)\ar[" 1\otimes F(\mathrm{id} _x) ", r] \ar[" \lambda "', d]  & \underline{\mathcal{C} } _\mathcal{U} (x,y)\otimes \underline{\mathcal{C} } _\mathcal{U} (x,x)\ar[" \lambda ", d]  \\
-	F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes * \right) \ar[" F(1\otimes \mathrm{id} _x) ", r] \ar[" \cong "', dr]  & F\left( \underline{\mathcal{C} } _\mathcal{V} (x,y)\otimes \underline{\mathcal{C} } _\mathcal{V} (x,x) \right) \ar[" F(\circ ) ", d]  \\
-	 & \underline{\mathcal{C} } _\mathcal{U} (x,y)
+	\underline{\mathcal{C} } _\mathcal{V} (x,y)\ar[" G_{x\text{,} y}  ", r] \ar[" H_{x\text{,} y}  "', d]  & \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))\ar[" (\alpha_y)_* ", d]  \\
+	\underline{\mathcal{D} } _\mathcal{V} (H(x),H(y))\ar[" (\alpha_x)^* "', r]  & \underline{\mathcal{D} } _\mathcal{V} (G(x),H(y))
 	\end{tikzcd}\]
-	commutes. am on the wrong track, apply coherence diagrams before naturality to try to get rid of the stupid
+	commutes. Functorality of $F$ gives that the square
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+		\underline{\mathcal{C} }_\mathcal{U} (x,y)\ar[" F(G_{x\text{,} y})  ", r] \ar[" F(H_{x\text{,} y})  "', d]  & \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" F((\alpha_y)_*) ", d]  \\
+	\underline{\mathcal{D} }_\mathcal{U}  (H(x),H(y))\ar[" F((\alpha_x)^*) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (G(x),H(y))
+	\end{tikzcd}\]
+	commutes. Recall that postcomposition is given by the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(\alpha_y)_* : *\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))\ar[" \alpha_y \otimes 1", r] & \underline{\mathcal{D} } _\mathcal{V} (G(x),H(y))\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))\ar[" \circ  ", r]  & \underline{\mathcal{D} } _\mathcal{V} (G(x),H(y)).
+	\end{tikzcd}\]
+	Applying $F$ and naturality of the lax functorial arrow $\lambda$ gives the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	F(*\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))) \ar[" F(\alpha_y\otimes 1) ", r] & F(\underline{\mathcal{D} } _\mathcal{V} (G(y),H(y))\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))\ar[" F(\circ ) ", r]  & \underline{\mathcal{D} } _\mathcal{U} (G(x),H(y)) \\
+	F(*)\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y)) \ar[" \lambda ", u] \ar[" F(\alpha_y)\otimes 1 "', r] & \underline{\mathcal{D} } _\mathcal{U} (G(y),H(y))\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" \lambda "', u]  & 
+	\end{tikzcd}\]
+	commuting. Applying this to the side of the above diagram gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 0.5em]
+		\underline{\mathcal{C} }_\mathcal{U} (x,y)\ar[" F(G_{x\text{,} y})  ", r] \ar[" F(H_{x\text{,} y})  "', ddd]  & \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" F(\ell _\mathcal{V} ^{-1}) ", d]  \\
+															     & F\left( *\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y)) \right) \ar[" F(\alpha_y \otimes 1) ", d] & F(*)\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" F(\alpha_y)\otimes 1 ", d] \ar[" \lambda ", l] \\
+															     & F\left( \underline{\mathcal{D} } _\mathcal{V} (G(y),H(y))\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y)) \right) \ar[" F(\circ ) ", d] & \underline{\mathcal{D} } _\mathcal{U} (G(y),H(y))\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" \lambda ", l] \\
+	\underline{\mathcal{D} }_\mathcal{U}  (H(x),H(y))\ar[" F((\alpha_x)^*) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (G(x),H(y))
+	\end{tikzcd}\]
+	which commutes for $\ell _\mathcal{V} $ the left unitor in $\mathcal{V} $. One of the coherence conditions for lax monoidal functors states that, for $\varphi : 1 \to F(*)$ the unit arrow for the lax monoidal functor and for $\ell _\mathcal{U} $ the left unitor in $\mathcal{U} $, for any $x\in \mathcal{V} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1\otimes F(x)\ar[" \varphi \otimes 1", r] \ar[" \ell _\mathcal{U}  "', d]  & F(*)\otimes F(x)\ar[" \lambda ", d]  \\
+	F(x) & F(*\otimes x)\ar[" F(\ell _\mathcal{V} ) ", l] 
+	\end{tikzcd}\]
+	commutes. Postcomposing with $F(\ell _\mathcal{V} ^{-1} )=F(\ell _\mathcal{V} )^{-1} $ and precomposing with $\ell _\mathcal{U} ^{-1} $ give the equalities
+	\[
+		F(\ell _\mathcal{V} ^{-1} )\circ \ell _\mathcal{U} =\lambda \circ (\varphi \otimes 1) \implies F(\ell _\mathcal{V} ^{-1} )=\lambda \circ (\varphi \otimes 1)\circ \lambda_\mathcal{U} ^{-1} 
+	.\]
+	Plugging in $x=\underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))$ and applying this equality gives the commutative square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" \varphi \otimes 1", r]  & F(*)\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" \lambda ", d]  \\
+	\underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" F(\ell _\mathcal{V} ^{-1} ) "', r] \ar[" \ell _\mathcal{U}^{-1}   "', u]  & F(*\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))).
+	\end{tikzcd}\]
+	Rotating 90 degrees clockwise allows us to plug this into the top right corner of the above diagram, giving the commutative diagram (left side omitted for simplicity)
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" F(\ell _\mathcal{V} ^{-1}) ", d]\ar[" \ell _\mathcal{U} ^{-1}  ", r] & 1\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" \varphi \otimes 1", d]  \\
+		F\left( *\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y)) \right) \ar[" F(\alpha_y \otimes 1) ", d] & F(*)\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" F(\alpha_y)\otimes 1 ", d] \ar[" \lambda ", l] \\
+		F\left( \underline{\mathcal{D} } _\mathcal{V} (G(y),H(y))\otimes \underline{\mathcal{D} } _\mathcal{V} (G(x),G(y)) \right) \ar[" F(\circ ) ", d] & \underline{\mathcal{D} } _\mathcal{U} (G(y),H(y))\otimes \underline{\mathcal{D} } _\mathcal{U} (G(x),G(y))\ar[" \lambda ", l] \\
+	\underline{\mathcal{D} } _\mathcal{U} (G(x),H(y)).
+	\end{tikzcd}\]
+	This finally gives an expression for $F((\alpha_y)_*)$ as the composition (here recognizing that $\circ \coloneqq F(\circ )\circ \lambda$ in $\underline{\mathcal{D} } _\mathcal{U} $)
+	\[
+		F((\alpha_y)_*)=F(\circ )\circ \lambda\circ F(\alpha_y)\otimes 1 \circ (\varphi \otimes 1)\circ \ell _\mathcal{U} ^{-1} 
+	.\]
+	This is precisely the definition of $(F(\alpha_y)\circ \varphi)_*=(F(\alpha_y))_*$. Verification of precomposition is the exact same, since $\varphi$ moves with the morphism to the other side of the monoidal product. Therefore, $F(\alpha): F(G) \to F(H)$ is $\mathcal{U} $-natural. In particular, domain and codomain are preserved.
+
+	Note that the identity $\mathcal{V} $-natural transformation $1_G : G \Rightarrow G$ is obviously given by $(1_G)_x = \mathrm{id}^{\mathcal{V} }_{G(x)} $. By definition, $F(1_G)_x=F(\mathrm{id}^{\mathcal{V} }_{G(x)} )\circ \varphi$. Recall that we have by definition
+	\[
+		F(\mathrm{id}^{\mathcal{V} } _{G(x)} )\circ \varphi = \mathrm{id} ^{\mathcal{U} } _{G(x)} 
+	.\]
+	Moreover, $F(G(x))=G(x)$, and thus $(1_{F(G)} )_x=\mathrm{id} _{G(x)} $. Therefore, $F(1_G)=1_{F(G)} $ preserves identities.
+
+	It thus suffices to show $F$ preserves horizontal and vertical composition. First, we show vertical composition. given by $(\beta\circ \alpha)_x=\beta_x \circ_{\underline{\mathcal{D} } _\mathcal{U} } \alpha_x$. Now let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
+	\underline{\mathcal{C}}_{\mathcal{V}} & \underline{\mathcal{D}}_{\mathcal{V}} & \underline{\mathcal{E}}_{\mathcal{V}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{G^1}", bend left=30, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{H^1}"', bend right=30, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{G^2}", bend left=30, from=1-2, to=1-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{H^2}"', bend right=30, from=1-2, to=1-3]
+	\arrow["\alpha", shorten <=3pt, shorten >=3pt, Rightarrow, from=0, to=1]
+	\arrow["\beta", shorten <=3pt, shorten >=3pt, Rightarrow, from=2, to=3]
+\end{tikzcd}\]
+	be a diagram of $\mathcal{V} $-natural transformations between $\mathcal{V} $-functors. Recall the horizontal composite $\beta \cdot \alpha$ is defined componentwise as
+	\[
+		(\beta\cdot \alpha)_x=(\beta_{H^1(x)} )\circ \left( G^2_{G^1(x),H^1(x)} \circ\alpha_x \right) 
+	.\]
+	for both of these because ntf components come from units, the composition between them is in fact composition in $\underline{\mathcal{D} } _\mathcal{U} $.
 \end{proof}
 
