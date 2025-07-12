@@ -536,7 +536,7 @@ The addition of $\mathcal{V} $-natural transformations assembles $\mathcal{V} \t
 	\end{tikzcd}\]
 	commutes. Postcomposing with $F(\ell _\mathcal{V} ^{-1} )=F(\ell _\mathcal{V} )^{-1} $ and precomposing with $\ell _\mathcal{U} ^{-1} $ give the equalities
 	\[
-		F(\ell _\mathcal{V} ^{-1} )\circ \ell _\mathcal{U} =\lambda \circ (\varphi \otimes 1) \implies F(\ell _\mathcal{V} ^{-1} )=\lambda \circ (\varphi \otimes 1)\circ \lambda_\mathcal{U} ^{-1} 
+		F(\ell _\mathcal{V} ^{-1} )\circ \ell _\mathcal{U} =\lambda \circ (\varphi \otimes 1) \implies F(\ell _\mathcal{V} ^{-1} )=\lambda \circ (\varphi \otimes 1)\circ \ell_\mathcal{U} ^{-1} 
 	.\]
 	Plugging in $x=\underline{\mathcal{D} } _\mathcal{V} (G(x),G(y))$ and applying this equality gives the commutative square
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
@@ -562,7 +562,57 @@ The addition of $\mathcal{V} $-natural transformations assembles $\mathcal{V} \t
 	.\]
 	Moreover, $F(G(x))=G(x)$, and thus $(1_{F(G)} )_x=\mathrm{id} _{G(x)} $. Therefore, $F(1_G)=1_{F(G)} $ preserves identities.
 
-	It thus suffices to show $F$ preserves horizontal and vertical composition. First, we show vertical composition. given by $(\beta\circ \alpha)_x=\beta_x \circ_{\underline{\mathcal{D} } _\mathcal{U} } \alpha_x$. Now let
+	It thus suffices to show $F$ preserves horizontal and vertical composition. First, we show vertical composition. Let $G,H,I : \underline{\mathcal{C} } _\mathcal{V}  \to \underline{\mathcal{D} } _\mathcal{V} $ be $\mathcal{V} $-functors, and let $\alpha : G \Rightarrow H$ and $\beta : H \Rightarrow I$ be $\mathcal{V} $-natural transformations. Define the horizontal composite $(\beta\circ \alpha)$ componentwise by composing in the underlying category as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(\beta\circ \alpha)_x : *\ar[" \ell_\mathcal{V}^{-1}   ", r]  & *\otimes *\ar[" \beta_x\otimes \alpha_x ", r]  & \underline{\mathcal{D} } _\mathcal{V} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{V} (H(x),G(x))\ar[" \circ  ", r] & \underline{\mathcal{D} } _\mathcal{V} (I(x),G(x)).
+	\end{tikzcd}\]
+	It suffices to show $F(\beta\circ \alpha)_x=F(\beta)_x\circ F(\alpha)_x$. We defined
+	\[
+		F(\beta\circ \alpha)_x=F((\beta\circ \alpha)_x)\circ \varphi
+	.\]
+	This is viewed by functoriality of $F$ on the above composition as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+	1\ar[" \varphi ", r]  & F(*)\ar[" F(\ell _\mathcal{V}^{-1}  ) ", r]  & F(*\otimes *)\ar[" F(\beta_x\otimes \alpha_x) ", r]  & F\left( \underline{\mathcal{D} } _\mathcal{V} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{V} (H(x),G(x)) \right) \ar[" F(\circ ) ", r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),G(x)).
+	\end{tikzcd}\]
+	By naturality of $\lambda$, it follows that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+		&& F(*)\otimes F(*)\ar[" F(\beta_x)\otimes F(\alpha_x) ", r] \ar[" \lambda "', d] & \underline{\mathcal{D} } _\mathcal{U} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{U} (H(x),G(x))\ar[" \lambda ", d] \\
+	1\ar[" \varphi "', r]  & F(*)\ar[" F(\ell _\mathcal{V}^{-1}  ) "', r]  & F(*\otimes *)\ar[" F(\beta_x\otimes \alpha_x) "', r]  & F\left( \underline{\mathcal{D} } _\mathcal{V} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{V} (H(x),G(x)) \right) \ar[" F(\circ ) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),G(x))
+	\end{tikzcd}\]
+	commutes. Applying the coherence condition for the left unitor as we did before, we obtain that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+		& 1\otimes F(*)\ar[" \varphi \otimes 1", r] & F(*)\otimes F(*)\ar[" F(\beta_x)\otimes F(\alpha_x) ", r] \ar[" \lambda "', d] & \underline{\mathcal{D} } _\mathcal{U} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{U} (H(x),G(x))\ar[" \lambda ", d] \\
+	1\ar[" \varphi "', r]  & F(*)\ar[" F(\ell _\mathcal{V}^{-1}  ) "', r] \ar[" \ell _\mathcal{U} ^{-1}  ", u] & F(*\otimes *)\ar[" F(\beta_x\otimes \alpha_x) "', r]  & F\left( \underline{\mathcal{D} } _\mathcal{V} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{V} (H(x),G(x)) \right) \ar[" F(\circ ) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),G(x))
+	\end{tikzcd}\]
+	also commutes. Note that since $\ell _\mathcal{U} : *\otimes - \Rightarrow 1_\mathcal{U} $, is natural, we also have that $\ell _\mathcal{U} ^{-1} : 1 \Rightarrow *\otimes -$ is natural. Hence by naturality of $\ell _\mathcal{U} ^{-1} $,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1\ar[" \varphi ", r] \ar[" \ell _\mathcal{U} ^{-1}  "', d]  & F(*)\ar[" \ell _\mathcal{U} ^{-1}  ", d]  \\
+	1\otimes 1\ar[" 1\otimes \varphi "', r]  & 1\otimes F(*)
+	\end{tikzcd}\]
+	commutes. Gluing this into the top left of our above diagram gives the commuative diagram gives us that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+		1\otimes 1\ar[" 1\otimes \varphi ", r]  & 1\otimes F(*)\ar[" \varphi \otimes 1", r] & F(*)\otimes F(*)\ar[" F(\beta_x)\otimes F(\alpha_x) ", r] \ar[" \lambda "', d] & \underline{\mathcal{D} } _\mathcal{U} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{U} (H(x),G(x))\ar[" \lambda ", d] \\
+	1\ar[" \varphi "', r] \ar[" \ell _\mathcal{U} ^{-1}  "', u] & F(*)\ar[" F(\ell _\mathcal{V}^{-1}  ) "', r] \ar[" \ell _\mathcal{U} ^{-1}  ", u] & F(*\otimes *)\ar[" F(\beta_x\otimes \alpha_x) "', r]  & F\left( \underline{\mathcal{D} } _\mathcal{V} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{V} (H(x),G(x)) \right) \ar[" F(\circ ) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),G(x))
+	\end{tikzcd}\]
+	commutes. Note once again that as defined in \cref{lma:3.2}, $\lambda\circ F(\circ )$ is simply composition in $\underline{\mathcal{D} } _\mathcal{U} $, and since $(\varphi\otimes 1)\circ (1\otimes \varphi)=\varphi\otimes\varphi$ by functorality, this gives us the equality
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1\ar[" \ell _\mathcal{U} ^{-1}  "', r] \ar[" F(\beta\circ \alpha)_x ", bend left, rrrr]  & F(*)\otimes F(*)\ar[" \varphi \otimes \varphi"', r]  & F(*)\otimes F(*)\ar[" F(\beta_x)\otimes F(\alpha_x) "', r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{U} (H(x),G(x))\ar[" \circ  "', r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),G(x)),
+	\end{tikzcd}\]
+	where we have recalled that the bottom row above is the expanded version of $F(\beta\circ \alpha)_x=F(\beta_x\circ \alpha_x)\circ \varphi$. Functorality of $\otimes $ once again gives that
+	\[
+		(F(\beta_x)\otimes F(\alpha_x))\circ (\varphi\otimes \varphi)=(F(\beta_x)\circ \varphi)\otimes (F(\alpha_x)\circ \varphi)=F(\beta)_x\otimes F(\alpha)_x
+	.\]
+	Applying this to the above diagram gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		1\ar[" \ell _\mathcal{U} ^{-1}  "', r] \ar[" F(\beta\circ\alpha)_x ", bend left, rrr]  & F(*)\otimes F(*)\ar[" F(\beta)_x\otimes F(\alpha)_x "', r]  & \underline{\mathcal{D} } _\mathcal{U} (I(x),H(x))\otimes \underline{\mathcal{D} } _\mathcal{U} (H(x),G(x))\ar[" \circ  "', r] & \underline{\mathcal{D} } _\mathcal{U} (I(x),G(x)).
+	\end{tikzcd}\]
+	Note that this is precisely the definition of composition $F(\beta)_x\circ F(\alpha)_x$ in $\underline{\mathcal{D} } _\mathcal{U} $. Thus, the diagram expresses the equaltiy
+	\[
+		F(\beta\circ \alpha)_x=F(\beta)_x\circ F(\alpha)_x
+	.\]
+	Therefore, $F$ preserves vertical composition of $\mathcal{V} $-natural transformastions.
+
+	Finally, let
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
 	\underline{\mathcal{C}}_{\mathcal{V}} & \underline{\mathcal{D}}_{\mathcal{V}} & \underline{\mathcal{E}}_{\mathcal{V}}
 	\arrow[""{name=0, anchor=center, inner sep=0}, "{G^1}", bend left=30, from=1-1, to=1-2]
@@ -575,7 +625,138 @@ The addition of $\mathcal{V} $-natural transformations assembles $\mathcal{V} \t
 	be a diagram of $\mathcal{V} $-natural transformations between $\mathcal{V} $-functors. Recall the horizontal composite $\beta \cdot \alpha$ is defined componentwise as
 	\[
 		(\beta\cdot \alpha)_x=(\beta_{H^1(x)} )\circ \left( G^2_{G^1(x),H^1(x)} \circ\alpha_x \right) 
+	\]
+	where the center composition $\circ $ is componentwise vertical composition of $\mathcal{V} $-natural transformations, and the right composition is composition in $\mathcal{V} $. We need to show $F(\beta\cdot \alpha)=F(\beta)\cdot F(\alpha)$. By definition,
+	\[
+		F(\beta\cdot \alpha)_x=F\left( \beta_{H^1(x)} \circ \left( G^2_{G^1(x),H^1(x)} \circ \alpha_x \right)  \right) \circ \varphi
 	.\]
-	for both of these because ntf components come from units, the composition between them is in fact composition in $\underline{\mathcal{D} } _\mathcal{U} $.
+	Since $F$ preserves vertical composition, we have
+	\[
+		F\left( \beta_{H^1(x)} \circ \left( G^2_{G^1(x),H^1(x)} \circ \alpha_x \right)  \right) \circ \varphi = F(\beta_{H^1(x)} ) \circ  F\left( G^2_{G^1(x),H^1(x)} \circ \alpha_x \right) \circ \varphi
+	.\]
+	Expanding out $F(\beta)_x\cdot F(\alpha)_x$ similarly gives
+	\begin{align*}
+		F(\beta_x)\circ F(\alpha)_x&=F(\beta)_{F(H^1)(x)} \circ \left( F\left(G^2\right)_{G^1(x),H^1(x)} \circ F(\alpha)_x \right) \\
+					   &=F(\beta)_{H^1(x)} \circ \left( F\left( G^2_{G^1(x),H^1(x)} \right) \circ F(\alpha)_x \right) \\
+					   &=(F(\beta_{H^1(x)} )\circ \varphi) \circ \left( F\left( G^2_{G^1(x),H^1(x)} \right) \circ F(\alpha_x)\circ \varphi \right)
+	.\end{align*}
+	At this point the diagrams become to large to fit on the screen, so we trust the reader to use the definition of the horizonal composite (and the equalities induced when $F$ preserves it) and to reference the large diagram used in the proof of the vertical composite being preserved, in order to see that these two equations are indeed equal. Therefore, $F : \mathcal{V} \text{-} \Cat  \to \mathcal{U} \text{-} \Cat $ is a 2-functor.
+
+	Note that $(-)_0$ is simply the functor $\mathcal{V} (*,-): \mathcal{V}  \to \Set $. Since $\Set \text{-} \Cat =\Cat $ by definition, it suffices to show $(-)_0$ is lax monoidal with $\Set $ endowed with the cartesian monoidal structure. First, let $\lambda : \mathcal{V} (*,-)\times \mathcal{V} (*,-) \Rightarrow \mathcal{V} (*,-\otimes -)$ be given by tensoring and precomposing with $\ell_\mathcal{V} ^{-1} $:
+	\[
+		(u,v)\mapsto (u\otimes v)\circ \ell _\mathcal{V} ^{-1} 
+	.\]
+	Note that this is indeed well-defined, since $u : * \to a$ and $v : * \to b$ means that we obtain the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		*\ar[" \ell _\mathcal{V} ^{-1}  ", r]  & * \otimes * \ar[" u\otimes v ", r] & a \otimes b.
+	\end{tikzcd}\]
+	Now we show $\lambda$ is natural. That is, for any pair $(f,g)$ with $f : a \to c$ and $g : b \to d$ in $\mathcal{V} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{V} (*,a)\times \mathcal{V} (*,b)\ar[" f_*\times g_* ", r] \ar[" \lambda_{a,b}  "', d]  & \mathcal{V} (*,c)\times \mathcal{V} (*,d)\ar[" \lambda_{c,d}  ", d]  \\
+	\mathcal{V} (*,a\otimes b)\ar[" (f\otimes g)_* "', r]  & \mathcal{V} (*,c\otimes d)
+	\end{tikzcd}\]
+	should commute. Indeed, the diagram expresses the equality
+	\[
+		(f\otimes g)\circ (u\otimes v)\circ \ell _\mathcal{V} ^{-1} =((f\circ u)\otimes (g\circ v))\circ \ell _\mathcal{V} ^{-1} ,
+	\]
+	which follows simply by functoriality of the monoidal product. Next, we need to show there is an arrow $1\to \mathcal{V} (*,*)$, where $1$ denotes the singleton. To choose this canonically, let $\varphi=\mathrm{id} _*$. Thus, a canonical arrow exists, and therefore, $(-)_)=\mathcal{V} (*,-)$ is a 2-functor $\mathcal{V} \text{-} \Cat \to \Cat $.
 \end{proof}
 
+We now modify our notation by dropping the subscript 0. For a $\mathcal{V} $-category $\underline{\mathcal{C} } $, we denote by $\mathcal{C} $ the underlying category, and other underlying structures may be inferred from context. We also obtain from this proof an explicit description of the notion of the underlying natural transformation. Let $\underline{ \alpha }: F \Rightarrow G$ be $\mathcal{V} $-natural, and define the underlying natural transformation $\alpha$ componentwise via
+\[
+	\alpha_x = \mathcal{V} (*,\underline{\alpha} _x)\circ \mathrm{id}_* = (\alpha_x)_*
+.\]
+
+\begin{lemma}\label{lma:3.5}
+	Let $\mathcal{V} $ be closed, and let $\underline{\mathcal{C} } $ be a $\mathcal{V} $-category. The following are equivalent:
+	\begin{enumerate}
+		\item $x,y\in\underline{\mathcal{C} } $ are isomorphic as objects in $\mathcal{C} $;
+		\item The functors $\mathcal{C} (x,-),\mathcal{C} (y,-): \mathcal{C}  \to \Set $ are naturally isomorphic;
+		\item The unenriched functors $\underline{\mathcal{C} } (x,-),\underline{\mathcal{C} } (y,-): \mathcal{C}  \to \mathcal{V} $ are naturally isomorphic;
+		\item The $\mathcal{V} $-functors $\underline{\mathcal{C} } (x,-),\underline{\mathcal{C}} (y,-): \underline{\mathcal{C} }  \to \underline{\mathcal{V} } $ are $\mathcal{V} $-isomorphic.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	By \cref{prp:3.1}, underlying is a functor, and hence (4) implies (3). Recall by definition and a previous exercise that $\mathcal{C} (x,-)=\mathcal{V} (*,-)\circ \underline{\mathcal{C} } (x,-)$, and thus (3) implies (2) via horizontal composition of the natural isomorphism with the identity for the underlying functor. By the Yoneda lemma, (2) implies (1). Finally, (1) implies (4) via the following direct construction.
+
+	Let $x,y\in \underline{\mathcal{C} } $ be isomorphic in $\mathcal{C} $. Recall a $\mathcal{V} $-natural transformation $\alpha : \underline{\mathcal{C} } (x,-) \Rightarrow \underline{\mathcal{C} } (y,-)$ is a collection of arrows in $\mathcal{V} $ such that for all $a,b\in\underline{\mathcal{C} } $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\underline{\mathcal{C} } (a,b)\ar[" \underline{\mathcal{C} } (x\text{,} -) ", r] \ar[" \underline{\mathcal{C} } (y\text{,} -) "', d]  & \underline{\mathcal{V} } (\underline{\mathcal{C} } (x,a),\underline{\mathcal{C} } (x,b))\ar[" (\alpha_b)_* ", d]  \\
+	\underline{\mathcal{V} } (\underline{\mathcal{C} } (y,a),\underline{\mathcal{C} } (y,b))\ar[" (\alpha_a)^* "', r]  & \underline{\mathcal{V} } (\underline{\mathcal{C} } (x,a),\underline{\mathcal{C} } (y,b))
+	\end{tikzcd}\]
+	commutes. Let $f : y \to x$ be the isomorphism in question, and equivalently $f : * \to \underline{\mathcal{C} } (y,x)$ in $\mathcal{V} $. Since precomposition $f^*$ is an arrow $\underline{\mathcal{C} } (x,-)\to \underline{\mathcal{C} } (y,-)$, define $f_a^*$ as precomposition $\underline{\mathcal{C} } (x,a)\to \underline{\mathcal{C} } (y,a)$. Hence we obtain since $\mathcal{V} $ is closed the adjunction
+	\[
+		f^*_a\in \mathcal{V}(*\otimes \underline{\mathcal{C} } (x,a),\underline{\mathcal{C} } (y,a))\cong \mathcal{V} (*,\underline{\mathcal{V} } (\underline{\mathcal{C} } (x,a),\underline{\mathcal{C} } (y,a)))
+	.\]
+	Here we abuse notation and write $f_*^a$ for $f_*^a\circ \lambda_{\underline{\mathcal{C} } (x,a)} $, for $\lambda$ the left unitor. This remark will be important later. Define $\alpha_a$ as the adjunct of $f^*_a$ above. Let $g=f^{-1} $, and define $\beta_a$ as the adjunct of $g_a^*$, forming another transformation $\beta : \underline{\mathcal{C} } (y,-) \Rightarrow \underline{\mathcal{C} } (x,-)$. The claim is that the horizontal composites $\beta\circ \alpha=1$ and $\alpha\circ \beta=1$.
+
+	Recall the horizontal composite is defined pointwise as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(\beta\circ \alpha)_a : * \ar[" \lambda_* ", r]  & *\otimes *\ar[" \beta_a \otimes \alpha_a ", r]  & \underline{\mathcal{V} } (\underline{\mathcal{C} } (y,a),\underline{\mathcal{C} } (x,a))\otimes \underline{\mathcal{V} } (\underline{\mathcal{C} } (x,a),\underline{\mathcal{C} } (y,a))\ar[" \circ  ", r]  & \underline{\mathcal{V} } (\underline{\mathcal{C} } (x,a),\underline{\mathcal{C} } (x,a)).
+	\end{tikzcd}\]
+	An annoying expansion of the precompositions shows that this composite is $\mathrm{id}_{\underline{\mathcal{C} } (x,a)} $. It remains to be shown that these defintions are indeed natural, which is fairly trivial.
+\end{proof}
+
+Adjunctions and equivalences can be defined in any 2-category. We use this fact to define them in the 2-categories $\mathcal{V} \text{-} \Cat $, and indeed these lead to the correct notions.
+\begin{definition}[$\mathcal{V}$-equivalence]\label{dfn:3.7}
+	A $\mathcal{V} $-equivalence of categories is a $\mathcal{V} $-functor $F : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ that is
+	\begin{itemize}
+		\item \emph{essentially surjective}: every $d\in\underline{\mathcal{D} } $ is isomorphic in $\mathcal{D} $ to some object $F(c)$;
+		\item $\mathcal{V} $-fully faithful: for each $c,c'\in \underline{\mathcal{C} } $, the arrow $F_{c,c'} $ is an isomorphism in $\mathcal{V} $.
+	\end{itemize}
+	The usual proof shows that this is precisely the same as the other definition; that is a $\mathcal{V} $-equivalence of categories $F : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ is a $\mathcal{V} $-functor such that there exists a $\mathcal{V} $-functor $G : \underline{\mathcal{D} }  \to \underline{\mathcal{C} } $ which is an inverse up to isomorphism:
+	\[
+		F\circ G=1_{\underline{\mathcal{D} } } ,\qquad G\circ F=1_{\underline{\mathcal{C} } } 
+	.\]
+\end{definition}
+
+\begin{definition}[$\mathcal{V}$-adjunction]\label{dfn:3.8}
+	A $\mathcal{V} $-adjunction consists of $\mathcal{V} $-functors
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\underline{\mathcal{C} } \ar[" F ", shift left, r]  & \underline{\mathcal{D} } \ar[" G ", shift left, l] 
+	\end{tikzcd}\]
+	together with either of the following equivalent criteria:
+	\begin{itemize}
+		\item $\mathcal{V} $-natural isomorphisms $\underline{\mathcal{D} } (F(c),d)\cong \underline{\mathcal{C} } (c,G(d))$ in $\mathcal{V} $;
+		\item $\mathcal{V} $-natural transformations $\eta : 1 \Rightarrow GF$ and $\varepsilon : FG \Rightarrow 1$ satisfying the triangle identities
+			\[
+				G\varepsilon \circ \eta G=1_G,\qquad \varepsilon F\circ F\eta = 1_F
+			.\]
+	\end{itemize}
+\end{definition}
+
+One example is as follows: we will see later that the localization $\sSet\to \Ho(\sSet\eqqcolon \mathcal{H} $ is lax monoidal, and hence there is a functor $\sSet\text{-} \Cat \to \mathcal{H} \text{-} \Cat $. An equivalence of simplicially enriched categories (called a DK-equivalence for Dwyer and Kan) is a simplicial functor where the corresponding $\mathcal{H} $-functor is a $\mathcal{H} $-equivalence.
+
+\section{Simplicial Categories}
+
+We explore simplicial categories as an example of these notions with important applications to homotopy theory. A simplicial category $\underline{\mathcal{C} } $ induces a simplicial object in $\Cat $, denoted $\mathcal{C} _{\bullet} : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Cat $ and defined as follows. The category $\mathcal{C} _n$ takes as objects the same as $\underline{\mathcal{C} } $, and as arrows is defined as
+\[
+	\mathcal{C} _n(x,y)\coloneqq \underline{\mathcal{C} } (x,y)_n
+.\]
+Hence, arrows $x\to y$ in $\mathcal{C} _n$ are $n$-simplicies in the hom-space $\underline{\mathcal{C} } (x,y)$. The induced actions of the morphisms in $\boldsymbol{\Delta} $ on the hom-spaces define functors which are identities on objects. Also note that the category $\mathcal{C} _0$ is the underlying category of $\underline{\mathcal{C} } $.
+
+For example, recall that $\sSet$ is closed cartesian via the definition $\underline{\sSet} (X,Y)_n\coloneqq \sSet(\Delta^n \times Y,X)$. Hence $\underline{\sSet} $ is a simplicial object in (large) categories. Objects of each category are simplicial sets, and morphisms $X\to Y$ in the $n$th category are morphisms $\underline{\sSet} (X,Y)_n$ of simplicial sets with our previous definition. The face and degeneracy operators act by precomposition on the representable part of the domain.
+
+As a fairly obvious partial converse, any simplicial object $\mathcal{C} _{\bullet} : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Cat$ with functors $d_i : \mathcal{C} _n \to \mathcal{C} _{n-1} $, $s_i : \mathcal{C} _n \to \mathcal{C} _{n+1} $ identities on objects corresponds to a simplicial category, with $\underline{\mathcal{C} } (x,y)_n\coloneqq \mathcal{C}_n(x,y)$. The face and degeneracy functors specify the simplicial actions.
+
+Simplicial functors $F : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ are collections of functors $F_n : \mathcal{C} _n \to \mathcal{D} _n$ that \emph{commute with the simplicial operator functors}, hence having the same underlying object functions. For example, $F : \underline{\mathcal{C} }  \to \underline{\sSet} $ gives a simplicial set $F(x)$ for each $x\in\underline{\mathcal{C} } $, and a morphism $F_{x,y} : \underline{\mathcal{C} } (x,y) \to \underline{\sSet} (x,y)$ for each $x,y$; equivalently a \emph{function} mapping each $n$-simplex in $\underline{\mathcal{C} } (x,y)$ to a map $\Delta^n \times F(x)\to F(y)$ natural in $n$, meaning that face adn degeneracies of the map correspond to the faces and degeneracies of the $n$-simplex.
+
+A simplicial natural transformation between simplicial functors $F,G : \underline{\mathcal{C} }  \to \underline{\mathcal{D} } $ is a collection of arrows in the underlying catergory $\mathcal{D} $ for each object of $\underline{\mathcal{C} } $, satisfying the enriched naturality condition. Here, that enriched naturality condition says that the underlying natural transformation is natural between the underlying functors, but also that the degenerate images form natural transformations. For example, the collection of images $s_0(\alpha_x)\in \mathcal{D} _1(F(x),G(x))$ forms a natural transformation $F_1\Rightarrow G_1$; and in general the unique degeneracy operator $[n]\to [0]$ forms a natural transformation $F_n\Rightarrow G_n$.
+
+\section{Tensors and Cotensors}
+
+We will now prove a statement that was stated earlier. The proof was delegated to this section for pedagogical purposes. Given $(\mathcal{V} ,\times ,*)$ closed monoidal\footnote{Here I adhere to the book's convention of using $\times $ instead of $\otimes $ for the monoidal product. This means $\times $ does not denote the product, but a monoidal product.}, we need to show that $\underline{\mathcal{V} } (u\times v,w)\cong \underline{\mathcal{V} } (u,\underline{\mathcal{V} } (v,w))$. Note for any $x\in \mathcal{V} $ that there is a sequence of natural isomorphisms
+\[
+	\mathcal{V} (x,\underline{\mathcal{V} } (u\times v,w))\cong \mathcal{V} (x\times u\times v,w)\cong\mathcal{V} (x\times u,\underline{\mathcal{V} } (v,w))\cong \mathcal{V} (x,\underline{\mathcal{V} } (u,\underline{\mathcal{V} } (v,w)))
+\]
+where we have used various results discussed previously. Hence, these two elements represent the same functor, and by the Yoneda lemma they are isomorphic. We also have from our previous discussion that for any $v\in \mathcal{V} $, the represented functor $\underline{\mathcal{V} } (v,-): \mathcal{V} \to \mathcal{V}  $ is a $\mathcal{V}$-functor (as viewed as a functor between the enriched structures). It follows that the left adjoint $-\times v : \mathcal{V}  \to \mathcal{V} $ also inherits $\mathcal{V} $-functor structure. Given $\eta^v$ the unit of the adjunction at $v$, we very simply have
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\underline{\mathcal{V} } (u,w)\ar[" (\eta_w^v)_* ", r]  & \underline{\mathcal{V} } (u,\underline{\mathcal{V} } (v,w\times v))\cong \underline{\mathcal{V} }(u\times v,w\times v).
+\end{tikzcd}\]
+Define the required action on hom-objects as this composition.
+
+This generalizes. Let $\underline{\mathcal{M} } $ and $\underline{\mathcal{N} } $ be $\mathcal{V} $-categories with $F\dashv G$ an adjunction between the underlying categories
+\[
+	\mathcal{N} (F(m),n)\cong \mathcal{M} (m,G(n))
+.\]
+We can try to enrich this adjunction to an isomorphism in $\mathcal{V} $
