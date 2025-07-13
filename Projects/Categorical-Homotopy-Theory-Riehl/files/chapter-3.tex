@@ -667,7 +667,7 @@ We now modify our notation by dropping the subscript 0. For a $\mathcal{V} $-cat
 	\alpha_x = \mathcal{V} (*,\underline{\alpha} _x)\circ \mathrm{id}_* = (\alpha_x)_*
 .\]
 
-\begin{lemma}\label{lma:3.5}
+\begin{lemma}\label{lma:3.4}
 	Let $\mathcal{V} $ be closed, and let $\underline{\mathcal{C} } $ be a $\mathcal{V} $-category. The following are equivalent:
 	\begin{enumerate}
 		\item $x,y\in\underline{\mathcal{C} } $ are isomorphic as objects in $\mathcal{C} $;
@@ -759,4 +759,246 @@ This generalizes. Let $\underline{\mathcal{M} } $ and $\underline{\mathcal{N} } 
 \[
 	\mathcal{N} (F(m),n)\cong \mathcal{M} (m,G(n))
 .\]
-We can try to enrich this adjunction to an isomorphism in $\mathcal{V} $
+We can try to enrich this adjunction to an isomorphism in $\mathcal{V} $. If we want to use the same idea as previously, meaning we want $\underline{\mathcal{N} } (F(m),n)$ and $\underline{\mathcal{M} } (m,G(n))$ to represent the same functor, leads us to consider $\mathcal{V} (v,\underline{\mathcal{M} } (m,G(n)))$. However there's not a clear way to proceed from here, and we require some special adjunction conditions. We can prove this if each $\underline{\mathcal{M} } (m,-)$ and $\underline{\mathcal{N} } (n,-)$ has a left adjoint preserved by $F$, or dually if the contravariant hom-functors have right adjoints preserved by $G$. We will return to this situation shortly after working through the definitions this motivates.
+
+\begin{definition}[Tensored]\label{dfn:3.9}
+	A $\mathcal{V} $-category $\underline{\mathcal{M} } $ is \emph{tensored} if for each $v\in \mathcal{V} $ and $m\in \mathcal{M} $, there is an object $v\otimes m\in \mathcal{M} $ and isomorphisms
+	\[
+		\underline{\mathcal{M} } (v\otimes m,n)\cong \underline{\mathcal{V} } (v,\underline{\mathcal{M} } (m,n))
+	.\]
+\end{definition}
+
+By Yoneda, there is a unique way to make $\otimes : \mathcal{V} \times \mathcal{M}  \to \mathcal{M} $ a bifunctor natural in all three variables. Hence each $\mathcal{M} (m,-)$ admits a left $\mathcal{V} $-adjoint $-\otimes m$.
+
+\begin{definition}[Cotensored]\label{dfn:3.10}
+	A $\mathcal{V} $-category $\underline{\mathcal{M} } $ is \emph{cotensored} if for each $v\in \mathcal{V} $ and $m\in \mathcal{M} $, there is an object $n^v$ and isomorphisms
+	\[
+		\underline{\mathcal{M} } (m,n^v)\cong \underline{\mathcal{V} } (v,\underline{\mathcal{M} } (m,n))
+	.\]
+\end{definition}
+The dual statements are true: there is a unique bifunctor $(-)^-: \mathcal{V} ^{\mathrm{op}} \times \mathcal{M}  \to \mathcal{M} $ with isomorphisms natural in all variables, and each $\underline{\mathcal{M} } (-,n)$ has a right $\mathcal{V} $-adjoint $n^-$.
+
+For example, a closed $\mathcal{V} $-category is a monoidal category which is tensored, with $\otimes=\times $ simply the monoidal product, and which is cotensored with $\underline{\mathcal{V} }(u,v)=v^u$. Hence any locally small category with products and coproducts is enriched, tensored, and cotensored over $\Set $ with the usual cartesian monoidal structure: the cotensore is the copower, and the tensor is the power.
+
+\begin{lemma}\label{lma:3.5}
+	Let $(\mathcal{V} ,\times ,*)$ be closed symmetric monoidal, and let $\mathcal{M} $ be a tensored $\mathcal{V} $-category. Then tensor product is unital and associative.
+\end{lemma}
+\begin{proof}
+	Recall that we have natural isomorphisms
+	\[
+		\mathcal{V} (w,\underline{\mathcal{V} } (*,v))\cong \mathcal{V} (w\times *,v)\cong \mathcal{V} (w,v)
+	.\]
+	Thus $\mathcal{V} (*,v)$ and $v$ represent the same functor, and are thus isomorphic by the Yoneda lemma. Thus we obtain
+	\[
+		\underline{\mathcal{M} } (*\otimes m,n)\cong \underline{\mathcal{V} } (*,\underline{\mathcal{M} } (m,n))\cong \underline{\mathcal{M} } (m,n)
+	.\]
+	Therefore, $*\otimes m$ and $m$ represent the same $\mathcal{V} $-functor, so by \cref{lma:3.4} we have $*\otimes m\cong m$. Sincew these isomorphisms are natural, we have that there is a natural isomorphism $*\otimes -\cong 1$, hence $\otimes $ is unital.
+
+	Similarly we obtain
+	\[
+		\mathcal{M} ((v\times w)\otimes m,n)\cong \mathcal{V} (v\times w,\underline{\mathcal{M} } (m,n))\cong \mathcal{V} (v,\underline{\mathcal{V} } (w,\underline{\mathcal{M} } (m,n)))\cong \mathcal{V} (v,\underline{\mathcal{M} } (w\otimes m,n))\cong \mathcal{M} (v\otimes (w\otimes m),n)
+	.\]
+	This proves the associativity property
+	\[
+		(v\times w)\otimes m\cong v\otimes (w\otimes m)
+	.\]
+\end{proof}
+
+\begin{proposition}\label{prp:3.2}
+	Let $\underline{\mathcal{M} } ,\underline{\mathcal{N} } $ be tensored and cotensored $\mathcal{V} $-categories and $F : \mathcal{M} \rightleftarrows \mathcal{N} : G$ an adjunction between the underlying categories. Then any of the following determines the others:
+	\begin{itemize}
+		\item A $\mathcal{V} $-adjunction $\underline{\mathcal{N} } (F(m),n)\cong \underline{\mathcal{M} } (m,G(n))$;
+		\item A $\mathcal{V} $-functor $F$ and natural isomorphisms $F(v\otimes m)\cong v\otimes F(m)$;
+		\item A $\mathcal{V} $-functor $G$ and natural isomorphisms $G(n^v)\cong G(n)^v$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	Left as an exercise. It suffices to show they are equivalent criteria. First we show 1 implies 2. Let $F\dashv G$ induce a $\mathcal{V} $-adjunction. We want to show $F(v\otimes m)\cong v\otimes F(m)$. By the $\mathcal{V} $-adjunction, we have
+	\[
+		\underline{\mathcal{N} } (F(v\otimes m),n)\cong \mathcal{M} (v\otimes m,G(n))
+	.\]
+	By definition of a tensored category, we have
+	\[
+		\underline{\mathcal{M} } (v\otimes m,G(n))\cong \underline{\mathcal{V} } (v,\underline{\mathcal{M} } (m,G(n)))
+	.\]
+	By \cref{lma:3.4}, since $\underline{\mathcal{M} } (m,G(n))\cong \underline{\mathcal{N} } (F(m),n)$ are isomorphic, they represent the same $\mathcal{V} $-functor, hence
+	\[
+		\underline{\mathcal{V} } (v,\underline{\mathcal{M} } (m,G(n)))\cong \underline{\mathcal{V} } (v,\underline{\mathcal{N} } (F(m),n))\cong \underline{\mathcal{V} } (v\otimes F(m),n),
+	\]
+	where the last isomorphism once again follows by definition of the tensor. Thus, $F(v\otimes m)$ and $v\otimes F(m)$ represent the same $\mathcal{V} $-functor, so by \cref{lma:3.4} they are isomorphic. Sinec all the isomorphisms here were natural, so is that isomorphism.
+
+	Now we show 2 implies 3. Since $\mathcal{M} $ is tensored and cotensored,
+	\[
+		\underline{\mathcal{M} } (v\otimes m,n)\cong \underline{\mathcal{V} } (v,\underline{\mathcal{M} } (m,n))\cong \underline{\mathcal{M} } (m,n^v)
+	.\]
+	The same is true for $\mathcal{N} $. The following sequence of isomorphisms makes heavy use of this fact, and makes use of 2-functorality of the underlying object functor to lower these $\mathcal{V} $-adjunctions to regular adjunctions. We have
+	\begin{align*}
+		\mathcal{N} (F(v\otimes m),n)&\cong \mathcal{N} (v\otimes F(m),n)\\
+					     &\cong \mathcal{V} (v,\underline{\mathcal{N} } (F(m),n))\\
+					     &\cong \mathcal{V} (v,\underline{\mathcal{M} } (m,G(n))\\
+					     &\cong \mathcal{M} (m,G(n)^v)\\
+		\mathcal{V} (v,\underline{\mathcal{N} } (F(m),n))&\cong \mathcal{N} (F(m),n^v)\\
+								 &\cong \mathcal{M} (m,G(n^v))
+	.\end{align*}
+	By the same logic as before, we have the isomorphism, as required.
+
+	Now we show 3 implies 1. Since $G(n^v)\cong G(n)^v$, we have
+	\[
+		\mathcal{M} (m,G(n^v))\cong \mathcal{M} (m,G(n)^v)\cong \mathcal{V} (v,\underline{\mathcal{M} } (m,G(n)))
+	.\]
+	We also have since $F\dashv G$
+	\[
+		\mathcal{M} (m,G(n^v))\cong \mathcal{N} (F(m),n^v)\cong \mathcal{V} (v,\underline{\mathcal{N} } (F(m),n))
+	.\]
+	By the same logic as previously, we are done.
+\end{proof}
+
+\begin{theorem}\label{thm:3.1}
+	Let $F : \mathcal{V} \rightleftarrows \mathcal{U} : G$ be an adjunction between closed symmetric monoidal categories such that $F$ is strong monoidal. Then any tensored, cotensored, and enriched $\mathcal{U} $-category can be canonically enriched, tensored, and cotensored over $\mathcal{V} $.
+\end{theorem}
+\begin{proof}
+	Some paper from 1974 shows that $F$ strong monoidal implies $G$ is lax monoidal, and hence by the change of base theorem, or more generally \cref{prp:3.1}, we can change the base of enrichment from $\mathcal{U}$ to $\mathcal{V}$. Given that $\mathcal{M} $ is a tensored and cotensored $\mathcal{U} $-category
+	\[
+		\underline{\mathcal{M} } _\mathcal{U} (u\otimes m,n)\cong \underline{\mathcal{U} } (u,\underline{\mathcal{M} } _\mathcal{U} (m,n))\cong \underline{\mathcal{M} } _\mathcal{U} (m,n^u),
+	\]
+	we define the tensor $-\star -: \mathcal{V} \times \mathcal{M}  \to \mathcal{M} $, cotensor $-\pitchfork- : \mathcal{V} ^{\mathrm{op}} \times \mathcal{M}  \to \mathcal{M} $, and internal hom $\underline{\mathcal{M} } _\mathcal{V} (-,-): \mathcal{M} ^{\mathrm{op}} \times \mathcal{M}  \to \mathcal{V} $ by
+	\[
+		v\star m \coloneqq F(v)\otimes m,\qquad v\pitchfork m\coloneqq  m^{F(v)} ,\qquad \underline{\mathcal{M} } _\mathcal{V} (m,n)\coloneqq G\underline{\mathcal{M} } _\mathcal{U} (m,n)
+	.\]
+	We will show the required natural isomorphism
+	\[
+		\underline{\mathcal{M} } _\mathcal{V} (v\star m,n)\cong \underline{\mathcal{V} } (v,\underline{\mathcal{M} } _\mathcal{V} (m,n))\cong \underline{\mathcal{M} } (m,v\pitchfork n )
+	\]
+	in the same way as before, by showing they represent the same functor $\mathcal{V} ^{\mathrm{op}} \to \Set $. The first isomorphism is given as
+	\begin{align*}
+		\mathcal{V} (x,\underline{\mathcal{M} } _\mathcal{V} (v\star m,n))&=\mathcal{V} (x,G\underline{\mathcal{M} } _\mathcal{U} (F(v)\otimes m,n))\\
+										  &\cong \mathcal{U} (F(x),\underline{\mathcal{M} } _\mathcal{U} (F(v)\otimes m,n))\\
+										  &\cong \mathcal{M} (F(x)\otimes (F(v)\otimes m),n)\\
+										  &\cong \mathcal{M} ((F(x)\times F(v))\otimes m,n)\\
+										  &\cong \mathcal{U} (F(x)\times F(v),\underline{\mathcal{M} } _\mathcal{U} (m,n))\\
+										  &\cong \mathcal{U} (F(x\times v),\underline{\mathcal{M} } _\mathcal{U} (m,n))\\
+										  &\cong \mathcal{V} (x\times v,G\underline{\mathcal{M} } _\mathcal{U} (m,n))\\
+										  &=\mathcal{V} (x\times v,\underline{\mathcal{M} } _\mathcal{V} (m,n))\\
+										  &\cong \mathcal{V} (x,\underline{\mathcal{V} } (v,\underline{\mathcal{M} } _{\mathcal{V} } (m,n)))
+	.\end{align*}
+	The second isomorphism is given by going the reverse direction. Note that dualizing associativity of the tensor gives the property
+	\[
+		n^{u\times v} \cong (n^u)^v
+	.\]
+	Hence we obtain
+	\begin{align*}
+		\mathcal{V} (x,\underline{\mathcal{V} } (v,\underline{\mathcal{M} } _\mathcal{V} (m,n)))&\cong \mathcal{V} (x\times v,\underline{\mathcal{M} } _\mathcal{V} (m,n))\\
+												      &= \mathcal{V} (x\times v,G\underline{\mathcal{M} } _\mathcal{U} (m,n))\\
+												      &\cong \mathcal{U} (F(x\times v),\underline{\mathcal{M} } _\mathcal{U} (m,n))\\
+												      &\cong \mathcal{U} (F(x)\times F(v),\underline{\mathcal{M} } _\mathcal{U} (m,n))\\
+												      &\cong \mathcal{M} (m,n^{F(x)\times F(v)} )\\
+												      &\cong \mathcal{M} (m,n^{F(v)\times F(x)} )\\
+												      &\cong \mathcal{M} (m,( n^{F(v)})^{F(x)})\\
+												      &=\mathcal{M} (m,(v\pitchfork n)^{F(x)} )\\
+												      &\cong \mathcal{U} (F(x),\underline{\mathcal{M} } _\mathcal{U} (m,v\pitchfork n))\\
+												      &\cong \mathcal{V} (x,G\underline{\mathcal{M} } _\mathcal{U} (m,v\pitchfork n))\\
+												      &=\mathcal{V} (x,\underline{\mathcal{M} } _\mathcal{V} (m,v\pitchfork n))
+.\end{align*}
+\end{proof}
+
+\begin{corollary}\label{cor:3.1}
+	The adjunction $F\dashv G$ of the previous \cref{thm:3.6}, hereafter called a \emph{strong monoidal adjunction}, is a $\mathcal{V} $-adjunction with respect to the $\mathcal{V} $-structure induced on $\mathcal{U} $.
+\end{corollary}
+\begin{proof}
+	By the yoneda lemma and the definitions above,
+	\begin{align*}
+		\mathcal{V} (w,\underline{\mathcal{U} } _\mathcal{V} (F(v),u))&\cong \mathcal{V} (w, G\underline{\mathcal{U} } _\mathcal{U} (F(v),u))\cong \mathcal{U} (F(w),\underline{\mathcal{U}}_\mathcal{U} (F(v),u)\cong \mathcal{U} (F(w)\times F(v),u)\\
+									      &\cong\mathcal{U} (F(w\times v),u)\cong \mathcal{V} (w\times v,G(u))\cong \mathcal{V} (w,\underline{\mathcal{V} } (v,G(u)))
+	.\end{align*}
+\end{proof}
+
+Results following from this show that the categories of based simplicial sets and based topological spaces are enriched, tensored, and cotensored. For example, the cotensor $Y^K$ in $\underline{\sSet} _*$ is $\underline{\sSet} _*(K_+,Y)$.
+
+More interestingly, we will show later that the geometric realization is a strong monoidal left adjoint $\left| - \right| \dashv S$. Because the convenient category of topological spaces $\Top $ is closed monoidal, it is thus tensored, cotensored, and enriched over simplicial sets with definitions as $K\otimes X\coloneqq \left| K \right| \times X$ and $X^K\coloneqq \underline{\Top } (\left| K \right| ,X)$. The simplicial enrichment has as hom-objects $S\left( \underline{\Top } (X,Y) \right) $. Hence this is a simplicial adjunction.
+
+\begin{exercise}
+	Let $\mathcal{M} $ be cocomplete. Show that $\mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } $, the category of simplicial objects in $\mathcal{M} $, is simplicially enriched and tensored, with $(K\otimes X)_n\coloneqq K_n\cdot X_n$ the copower.
+\end{exercise}
+\begin{proof}
+	The proof is messy and I don't want to copy it down. The internal hom is defined the same way as the closed structure on $\sSet$, as one would expect:
+	\[
+		\underline{\mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } } (X,Y)_n\coloneqq \mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } (\Delta^n \otimes X,Y)
+	.\]
+	Simplicial maps are induced in the expected way via precomposition. Since a closed structure is the monoidal product also being a tensor, this definition agrees with the definition for the closed monoidal structure on $\sSet$.
+\end{proof}
+
+For example, an unenriched adjunction $F : \mathcal{M} \rightleftarrows \mathcal{N}  : G$ promotes to an adjunction given by levelwise postcomposition
+\[
+	F_* : \mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } \rightleftarrows \mathcal{N} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } : G_*
+.\]
+Since $F_*$ is left adjoint, it preserves coproducts, and thus tensors. By \cref{prp:3.2}, $F_*\dashv G_*$ is thus a simplicial adjunction.
+
+Another interesting result is the Dold-Kan correspondence: there is an equivalence of categories $\Ab^{\boldsymbol{\Delta} ^{\mathrm{op}} } \rightleftarrows \Ch_{\geq 0} (\mathbb{Z} )$.
+
+\section{Simplicial homotopy and simplicial model categories}
+
+If $\underline{\mathcal{M} } $ is a simplicial category, we obtain a canonical notion of homotopy in the underlying category $\mathcal{M} $. Recall that $\Delta^0$ is the unit for the monoidal product in $\sSet$. A \emph{homotopy} between morphisms $f,g : m \to n$ is given as the commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Delta^0\ar[" f ", dr]\ar[" d^1 "', d]  &  \\
+\Delta^1 \ar[" H ", r]  & \underline{\mathcal{M} } (m,n) \\
+\Delta^0\ar[" d^0 ", u] \ar[" g "', ur]  & 
+\end{tikzcd}\]
+If $\underline{\mathcal{M} } $ is tensored, then we can realize the homotopy as a homotopy in the underlying category by recalling that we have an isomorphism
+\[
+	\sSet(-,\underline{\mathcal{M} } (m,n))\cong \mathcal{M} (-\otimes m,n)
+.\]
+Thus the diagram transposes as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Delta^0 \otimes m\cong m\ar[" f ", dr] \ar[" d^1\otimes 1 "', d]  &  \\
+\Delta^1\otimes m\ar[" H ", r]  & n \\
+\Delta^0\otimes m\cong m \ar[" d^0 \otimes 1 ", u] \ar[" g "', ur]  & 
+\end{tikzcd}\]
+Similarly, if $\mathcal{M} $ is cotensored, then we obtain a homotopy in $\mathcal{M} $ as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & n\cong n^{\Delta^0}  \\
+m\ar[" f ", ur] \ar[" H ", r] \ar[" g "', dr]  & n^{\Delta^1} \ar[" n^{d^1}  "', u] \ar[" n^{d^0}  ", d]  \\
+ & n\cong n^{\Delta^0} 
+\end{tikzcd}\]
+Thus we obtain a notion of a simplicial homotopy equivalence if $\mathcal{M}$ is either tensored or cotensored over simplicial sets.
+
+\begin{definition}[Geometric Realization]\label{dfn:3.11}
+	If $\mathcal{M} $ is simplicially enriched, tensored, and cocomplete, the \emph{geometric realization} of a simplicial object $X_{\bullet} $ in $\mathcal{M} $ is
+	\[
+		\left| X_{\bullet}  \right| \coloneqq \int^{n\in\boldsymbol{\Delta} } \Delta^n\otimes X_n
+	.\]
+	These coends define a functor $\left| - \right| : \mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}}}  \to \mathcal{M} $.
+\end{definition}
+
+If $\mathcal{M} $ is simplicially tensored, there are two reasonable definitions for simplicial tensors on $\mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } $. One can define tensors pointwise for any diagram category $\mathcal{M} ^{\mathcal{D} } $: given $K\in\sSet$ and $X : \mathcal{D}  \to \mathcal{M} $, define $K\otimes X$ as the functor $d\mapsto K\otimes X(d)$. The category of simplicial objects is then a special case thereof. However, we prefer to define tensores as done earlier, via $(K\otimes X)_n\coloneqq K_n\cdot X_n$.
+
+\begin{lemma}\label{lma:3.2}
+	Let $\mathcal{M} $ be simplicially enriched, tensored, cotensored, and admits geometric realizations. Then geometric realization preserves tensors.
+\end{lemma}
+Will be proven later. The key is that tensor admits pointwise right adjoints, and thus preserves colimits in both variables. We present this result now due to the following corollary.
+
+\begin{corollary}\label{cor:3.2}
+	If $\mathcal{M} $ is simplicially enriched, tensored, and cotensored, then geometric realization preserves simplicial homotopy equivalences.
+\end{corollary}
+\begin{proof}
+	Given a simplicial homotopy equivalence $fg,gf\sim 1$ between simplicial objects $X_{\bullet} ,Y_{\bullet} $ in $\mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } $, since geometric realization preserves tensors, geometric realization produces simplicial homotopy equivalences in $\mathcal{M} $ between the geometric realizations of the simplicial objects.
+\end{proof}
+
+The chapter is ended with the motivation we sought at the end of the previous chapter. The following lemma defines some properties of simplicial model categories, which will be properly introduced later. This result suffices as a working understanding for now.
+
+\begin{lemma}\label{lma:3.3}
+	A simplicial model category
+	\begin{itemize}
+		\item is complete and cocomplete;
+		\item is tensored, cotensored, and enriched over simplicial sets;
+		\item has subcategories of \emph{cofibrant} and \emph{fibrant} objects preserved by tensoring and cotensoring, respectively, with any simplicial set;
+		\item admits a left deformation $Q$ into the cofibrant objects and a right deformation $R$ into the fibrant objects;
+		\item is a saturated homotopical category;
+		\item has simplicial homotopy equivalences among the weak equivalences;
+		\item has the property that the internal hom preserves weak equivalences between cofibrant objects in its first variable provided the second variable is fibrant, and preserves weak equivalences between fibrant objects in its second variable provided the first is cofibrant.
+	\end{itemize}
+\end{lemma}
+Examples include $\sSet,\sSet_*,\Top ,\Top _*$. There are analogous definitions of $\mathcal{V} $-model categopries, which are tensored, cotensored, and enriched over $\mathcal{V} $ instead of $\sSet$. A homotopical version of \cref{thm:3.1} says that if the strong monoidal adjunction is Quillen, then any $\mathcal{U} $-model category is a $\mathcal{V} $-model category. The adjunctions
+\[
+	(-)_+ : \sSet\rightleftarrows \sSet_* : U,\qquad \left| - \right| : \sSet \rightleftarrows \Top : S
+\]
+are strong monoidal and Quillen, provided $\Top $ is once again a convenient category. Hence, any based simplicial or topological model category is a simplicial model cateogry. The converse is not always true however. We determine that simplicial model categories are an appropriate place to define homotopy limits and colimits.
