@@ -1,1 +1,262 @@
+\chapter{The unreasonably effective (co)bar construction}
 
+The bar originated from Eilenberg and Mac Lane in homological algebra as a tool for constructing resolutions. We present a version of it at the right level of generality for this text, although it generalizes further. We will choose our notation to reflect the fact that the bar construction generalizes to enriched contexts, but for this section we will focus on simplicial categories. Thus, $\mathcal{V} $ should be interpreted in general as $\sSet$, and $\mathcal{M} $ should represent a simplicially enriched, tensored, and cotensored category. The enrichment is not as important as is the notion of a simplicial homotopy.
+
+\section{Functor tensor products}
+
+\begin{definition}[Functor Tensor Product]\label{dfn:4.1}
+	Let $-\otimes -: \mathcal{V} \times \mathcal{M}  \to \mathcal{M} $ be any bifunctor, and let $F : \mathcal{D}  \to \mathcal{M} $ and $G : \mathcal{D} ^{\mathrm{op}}  \to \mathcal{M} $ be functors. The functor tensor product $G\otimes _\mathcal{D} F$ is defined as the coend
+	\[
+		G\otimes _\mathcal{D} F\coloneqq \int^{\mathcal{D} } G\otimes F
+	.\]
+\end{definition}
+
+The codomain is allowed to be a category other than $\mathcal{M} $, but we don't need this level of generalization. Usually, $\otimes $ will be the tensor in some tensored $\mathcal{V} $-category.
+
+There are many examples. For example, given a right $R$-module $A : R^{\mathrm{op}}  \to \underline{\Ab} $ and a left $R$-module $B : R \to \underline{\Ab} $, the usual tensor product of $R$-modules is the functor tensor product
+\[
+	A\otimes _RB=\int^{R} A\otimes _\mathbb{Z} B
+.\]
+Another example is that if $*: \mathcal{D} ^{\mathrm{op}}  \to \sSet$ is the constant functor at the terminal object, then for any $F : \mathcal{D}  \to \sSet$,
+\[
+	*\otimes _\mathcal{D} F=\int^{\mathcal{D} } *\times F\cong \int^{\mathcal{D} } F\cong \varinjlim F
+.\]
+
+Recall that pointwise Kan extensions are computed as
+\[
+	\Lan_{K} F(d)=\int^{c\in \mathcal{C} } \mathcal{D} (K(c),d)\cdot F(c)=\mathcal{D} (K(-),d)\otimes _\mathcal{C} F
+.\]
+In particular, taking $\Delta^{\bullet} : \boldsymbol{\Delta}  \to \Top $ as the functor mapping to the standard $n$-simplex, the yoneda lemma gives the geometric realization of a simplicial set as
+\[
+	\left| X \right| =\int^{n\in\boldsymbol{\Delta} } \sSet(\Delta^n,X)\cdot X_n\cong \sSet(\Delta^{\bullet} ,X)\otimes_{\boldsymbol{\Delta}} \Delta^{\bullet} \cong X_{\bullet} \otimes_{\boldsymbol{\Delta}} \Delta^{\bullet} 
+.\]
+For the geometric realization of simplicial objects in a category tensored over simplicial sets, as given in \cref{dfn:3.11}, we have
+\[
+	\left| X \right| \coloneqq \Delta^{\bullet} \otimes _{\boldsymbol{\Delta} ^{\mathrm{op}} } X_{\bullet} 
+.\]
+Here $\Delta^{\bullet} $ is the Yoneda embedding $\boldsymbol{\Delta} \to \sSet$ for simplicial categories. We always use this except when $X$ is a simplicial set, in which case convention dictates that the tensor is the copower, which ends up returning the simplicial set $X$ itself. We instead define $\left| X \right| $ as a topological space, as above.
+
+\section{The bar construction}
+
+Let $\mathcal{M} $ be simplicially enriched, tensored, and cotensored, and let $G : \mathcal{D} ^{\mathrm{op}}  \to \sSet$ and $F : \mathcal{D}  \to \mathcal{M} $.
+
+\begin{definition}[Bar]\label{dfn:4.2}
+	The two-sided simplicial bar construction is a simplicial object $B_{\bullet} (G,\mathcal{D} ,F)$ in $\mathcal{M} $ whose $n$-simplices are defined by the coproduct
+	\[
+		B_n(G,\mathcal{D} ,F)\coloneqq \coprod_{\vec{d} : [n] \to \mathcal{D} } G(d_n)\otimes F(d_0),
+	\]
+	where $\vec{d} $ is a shorthand for a sequence $d_0\to d_1\to \ldots \to d_n$ of composable arrows in $\mathcal{D} $.
+\end{definition}
+
+\begin{remark}
+	This is a very important remark. Note that we are taking the coproduct along all possible chains of length $n$ from an object $d_0$ to an object $d_n$. Fix some list of objects $(d_0, \ldots ,d_n)$. We then obtain that the number of times $G(d_n)\otimes F(d_0)$ factors into the coproduct as a result of this chain is equivalent to the number of possible paths along this fixed path; equivalently the product
+	\[
+		\prod_{i=0}^{n-1} \mathcal{D} (d_i,d_{i+1} )
+	.\]
+	Hence we represent the above coproduct equivalently as
+	\[
+		B_n(G,\mathcal{D} ,F)=\coprod_{(d_0, \ldots ,d_n)} \left( \prod_{i=0}^{n-1} \mathcal{D}(d_i,d_{i+1} ) \right) \cdot (G(d_n)\otimes F(d_0)),
+	\]
+	where the coproduct now only runs along distinct paths of \emph{objects}, instead of distinct paths of arrows. View the hom-sets as discrete simplicial sets (see explanation/definition in below exercise). Then (also with explanation as below), the tensor can be viewed as a product, which is isomorphic to the copower. By uniqueness of adjunction, we then obtain the representation via tensors
+	\[
+		B_n(G,\mathcal{D} ,F)=\coprod_{(d_0, \ldots ,d_n)} \left( \bigotimes_{i=0} ^n \mathcal{D} (d_i,d_{i+1} ) \right) \otimes G(d_n)\otimes F(d_0)
+	.\]
+	These are all other common and useful expressions of the simplicial two-sided bar construction.
+\end{remark}
+
+
+The diagram $\vec{d} $ is simply an $n$-simplex in the nerve $N(\mathcal{D})$. Thus, we define the degeneracy and face maps as reindexing the coproduct according to the degeneracy and face maps in $N(\mathcal{D} )$. The $n$th face map is defined by applying $G$ to $d_{n-1} \to d_n$ to obtain a map $G(d_n)\otimes F(d_0)\to G(d_{n-1} )\otimes F(d_0)$ and includes this at the restruction of $\vec{d} $ along $d^n$. The 0th face map is defined similarly. We will see later that the two-sided bar is a weighted colimit.
+
+\begin{definition}[Bar]\label{dfn:4.3}
+	The \emph{bar construction} is the geometric realization of the simplicial bar construction
+	\[
+		B(G,\mathcal{D} ,F)=\left| B_{\bullet} (G,\mathcal{D} ,F) \right| =\Delta^{\bullet} \otimes _{\boldsymbol{\Delta} ^{\mathrm{op}} } B_{\bullet} (G,\mathcal{D} ,F)=\int^{n\in \boldsymbol{\Delta} ^{\mathrm{op}} } \Delta^n \otimes B_n(G,\mathcal{D} ,F)
+	.\]
+\end{definition}
+Note here that since $B_{\bullet} (G,\mathcal{D} ,F): \boldsymbol{\Delta} ^{\mathrm{op}}  \to \mathcal{M} $, and since $\Delta^{\bullet} $ is the standard simplicial set given by Yoneda, the tensor product is simply the tensor in $\mathcal{M} $.
+
+Some examples. If $F,G$ are the constant functors mapping to the terminal object, then $B_{\bullet} (*,\mathcal{D} ,*)=N(\mathcal{D} )$. We are particularly interested in the case when $G$ is a representable functor $G=\mathcal{D} (-,d)$. This follows since
+\[
+	\mathcal{D} (-,d)\otimes _\mathcal{D} F\cong F(d),\qquad G\otimes _\mathcal{D} \mathcal{D} (d,-)\cong G(d)
+\]
+which is true for general functor tensor products, by the coYoneda lemma. By the Yoneda lemma, the assignment
+\[
+	d\mapsto B(\mathcal{D} (-,d),\mathcal{D} ,F)
+\]
+is functorial, and we write $B(\mathcal{D} ,\mathcal{D} ,F): \mathcal{D}  \to \mathcal{M} $ for this functor. Allowing $F$ to vary over this also gives a functor $B(\mathcal{D} ,\mathcal{D} ,-): \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} ^{\mathcal{D} } $.
+
+ \begin{exercise}
+ 	Let $\mathcal{M} =\Set $. Show that $B_{\bullet} (\mathcal{D} (-,d),\mathcal{D} ,*)\cong N(\mathcal{D} /d)$, so that $B_{\bullet} (\mathcal{D} ,\mathcal{D} ,*)$ is naturally isomorphic to $N(\mathcal{D} /-): \mathcal{D}  \to \sSet$.
+ \end{exercise}
+ \begin{proof}
+	 Recall the slice category $\mathcal{D} /d=(\mathcal{D} \downarrow d)$. Note also that we view $\Set $ as enriched over $\sSet$ by taking hom-sets to be \emph{discrete simplicial sets}, meaning face and degeneracies are all 1, and $X_n=X_0$ for all $n$. By this same logic, we can view $\mathcal{D} (-,d)$ as a functor to $\sSet$ instead of $\Set $. Under this definition, a tensor product $-\otimes -: \sSet\times \Set  \to \Set $ must be left-adjoint to the internal hom of $\Set $, so by \cref{lma:3.4} we need only show tensor is left adjoint to regular hom, since the underlying functor of the discrete simplicial set representing hom is hom. Indeed, this is simply the standard cartesian monoidal structure on $\Set $, so we obtain that tensor can be defined as
+	 \[
+	 	K\otimes X\coloneqq K_0 \times X
+	 .\]
+	 Thus, we obtain
+	\[
+		B_{n} =\coprod_{\vec{d} : [n] \to \mathcal{D} } \mathcal{D} (d_n,d) \times 1\cong \coprod_{\vec{d} : [n] \to \mathcal{D} } \mathcal{D} (d_n,d)=\coprod_{(d_0, \ldots ,d_n)} \left(\prod_{i=0}^{n-1} \mathcal{D} (d_{i} ,d_{i+1} )\right)\times \mathcal{D} (d_n,d)
+	.\]
+	$n$-simplicies of the two-sided simplicial bar are thus paths $d_0\to d_n$, appended with a morphism $d_n\to d$. This determines an $n$-simplex in the nerve $N(\mathcal{D} \downarrow d)$ as follows: let $f_i : d_i \to d_{i+1} $ and $g : d_n \to d$ together constitute an $n$-simplex in $B_{\bullet} $. For each $0\leq i\leq n$, define an object $\alpha_i : d_i \to d$ in the slice category as the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\alpha_i : d_i\ar[" f_i ", r]  & d_{i+1} \ar[" f_{i+1}  ", r]  & \ldots \ar[" f_{n-1}  ", r]  & d_n\ar[" g ", r] & d.
+	\end{tikzcd}\]
+	We then obtain that each $f_i$ is a morphism $\alpha_i \to  \alpha_{i+1} $ in the slice category by definition, since we can rewrite the above definition as an inductive definition given by
+	\[
+		\alpha_i = \alpha_{i+1} \circ f_i,\qquad \alpha_n = g
+	.\]
+	Hence, $f_{\bullet} $ is a chain of morphisms in $(\mathcal{D} \downarrow d)$, and thus an $n$-simplex in the nerve. Hence we obtain an obvious map by dropping $g$. It is easiest from here to note that the map is manifestly surjective, and it is injective obviously along $i<n$, but also for $\alpha_n$ since different choices of $g$ give a different object here. Hence we have the set isomorphism, as needed.
+
+	Raising the isomorphism to that of simplicial sets requires showing the isomorphism commutes with the face and degeneracy operators. We must here recall the definition of the face and degeneracy operators for the nerve and the bar. Recall that in the nerve, face operators $d^i : N(\mathcal{D} \downarrow d)_n \to N(\mathcal{D} \downarrow d)_{n-1} $ are given by removing the $i$th object and composing the adjacent morphisms. That is, given an $n$-simplex $\sigma = (f_0, \ldots ,f_{n-1} )$, we define
+	\[
+		d^i(\sigma)_j =
+		\begin{cases}
+			\sigma_j,& 0\leq j<i-1\\
+			\sigma_i\circ \sigma_{i-1} ,&j=i-1\\
+			\sigma_{j+1} ,&j\geq i
+		\end{cases}
+	.\]
+	This of course does not cover the edge cases $i=0,n$; those are solved more simply by simply removing the trailing object and the trailing arrow. Face maps $s^i : N(\mathcal{D} \downarrow d)_n \to N(\mathcal{D} \downarrow d)_{n+1} $ are defined more simply by replacing the $i$th object with two adjacent copies of it, with the arrow between them the identity morphism. The $n$-simplicies of the two sided simplicial bar can be seen as indexed over the $n$-simplicies of the nerve, so it becomes reindexed in accordance to applying the face and degeneracy operators of the nerve. This makes the fact that they commute with the given isomorphism fairly obvious.
+ \end{proof}
+
+ Dually, $B_{\bullet} (*,\mathcal{D} ,\mathcal{D} (d,-))\cong N(d\downarrow \mathcal{D} )$ and hence $B_{\bullet} (*,\mathcal{D} ,\mathcal{D} ) : \mathcal{D} ^{\mathrm{op}}  \to \sSet $.
+
+ \section{The cobar construction}
+
+We now spend some time explaining in depth the dual notion to the two sided simplicial bar construction. Let $F,G : \mathcal{D}  \to \mathcal{M} $. Recall from previously that we have the natural isomorphism
+\[
+	\Nat(G,F)\cong \int_{d\in \mathcal{D} } \mathcal{M} (G(d),F(d))
+.\]
+In the presence of a bifunctor $\left\{ -,- \right\} : \mathcal{V} ^{\mathrm{op}} \times \mathcal{M}  \to \mathcal{M} $, we can define the \emph{functor cotensor product} (sometimes \emph{functor hom} for some reason) in the expected way for $G : \mathcal{D}  \to \mathcal{V} $ and $F : \mathcal{D}  \to \mathcal{M} $:
+\[
+	\left\{ G,F \right\} ^{\mathcal{D} } \coloneqq \int_{d\in \mathcal{D} } \left\{ G(d),F(d) \right\} 
+.\]
+Often, $\left\{ -,- \right\} $ will be a cotensor, copower, or oftentimes if $\mathcal{V} =\mathcal{M} $ we just use hom.
+
+If $\mathcal{M} $ is cotensored over $\sSet$, dual to the notion of a geometric realization of a simplicial object $ X_{\bullet} \otimes_{\boldsymbol{\Delta^{\mathrm{op}} }}\Delta^{\bullet} $ is the \emph{totalization} of a cosimplicial object $X^{\bullet} : \boldsymbol{\Delta}  \to \mathcal{M} $, given as
+\[
+	\operatorname{Tot} X^{\bullet} \coloneqq \left\{ \Delta^{\bullet} ,X^{\bullet}  \right\}^{\boldsymbol{\Delta} }
+.\]
+Here, $\Delta^{\bullet} $ denotes the covariant Yoneda embedding $\boldsymbol{\Delta} \to \sSet$.
+
+\begin{definition}[Cosimplicial cobar]\label{dfn:4.4}
+	The \emph{cosimplicial cobar construction} $C^{\bullet} (G,\mathcal{D} ,F)$ is a cosimplicial object in $\mathcal{M} $ given by
+	\[
+		C^n(G,\mathcal{D} ,F)\coloneqq \prod_{\vec{d} : [n] \to \mathcal{D} } F(d_n)^{G(d_0)} 
+	.\]
+	Here, exponential notation denotes the cotensor in $\mathcal{M} $.
+\end{definition}
+
+Cosimplicial degeneracies and (inner) faces are once again indexed by the corresponding maps in the nerve $N(\mathcal{D} )$. The 0th face map uses $G(d_0)\to G(d_1)$ in $\mathcal{V} $ to define $F(d_n)^{G(d_1)} \to F(d_n)^{G(d_0)} $ by contravariance in the first slot of cotensor. One first projects along the components of the product indexed by the face map (drops the one the face map drops), and then postcomposes by this map. The $n$th face map is defined similarly. We then have
+
+\begin{definition}[Cobar]\label{dfn:4.5}
+	The \emph{cobar construction} $C(G,\mathcal{D} ,F)$ is the totalization of the cosimplicial cobar construction
+	\[
+		C(G,\mathcal{D} ,F)\coloneqq \operatorname{Tot} C^{\bullet} (G,\mathcal{D} ,F)=\left\{ \Delta^{\bullet} ,C^{\bullet} (G,\mathcal{D} ,F) \right\} ^{\boldsymbol{\Delta} } =\int_{n\in\boldsymbol{\Delta} } \left\{ \Delta^n,C^n(G,\mathcal{D} ,F) \right\} 
+	.\]
+\end{definition}
+
+\section{Simplicial replacements and colimits}
+
+An explanation of the applications of these constructions to homotopy theory is in order. Let $F : \mathcal{D}  \to \mathcal{M} $ be a diagram. We know already how to compute it's colimit as a coequalizer of arrows between coproducts, but we also know that $\varinjlim _\mathcal{D} $ need not be homotopical. We will see in the next chapter that a ``fattened up colimit'' will preserve pointwise weak equivalences\footnote{A pointwise weak equivalence is a natural way to induce a homotopical structure on a functor category, by taking as weak equivalences all natural weak equivalences.} between diagrams.
+
+Let $\mathcal{D} \coloneqq \boldsymbol{\Delta} ^{\mathrm{op}} $ and $\mathcal{M} $ simplicial and tensored. Then one way to achieve this is via its geometric realization\footnote{The geometric realization of a simplicial object is not in general it's homotopy colimit}, as defined previously. One might then try to replace diagrams $F : \mathcal{D}  \to \mathcal{M} $ with simplicial objects which have the same colimit. To each small $\mathcal{D} $, we have the simplicial set $N(\mathcal{D} )$. The data of a simplicial set $X$ can be encoded into the \emph{category of simplicies} $\mathbf{el} X$ taking smplicies $\sigma\in X_n$ as objects. Morphisms $\alpha : \sigma \to \sigma'$ are simplicial operators $\alpha : [n] \to [m]$ such that $X(\alpha)(\sigma')=\sigma$. Note the similarity to the category of elements for a general functor\footnote{Indeed this can be expressed as the comma category $(\Delta^{\bullet} \downarrow X)$ for $\Delta$ the Yoneda embedding}, and note the forgetful functor $\mathbf{el} X\to \boldsymbol{\Delta} $ given by mapping $n$-simplicies to $[n]$, and the similar expected map on faces and degeneracies.
+
+Putting these ideas together suggests we consider $\mathbf{el} N(\mathcal{D} )$. This is given by the category of finite composable strings in $\mathcal{D} $. Note that since morphisms are somewhat ``reversed'' in this category, faces can be seen as \emph{factoring} composites or \emph{appending} strings to the end, and similarly degeneracies can be seen as \emph{deleting} identities. This is somewhat the opposite of their action in the nerve. We denote the forgetful functor $\Sigma : \mathbf{el} N(\mathcal{D} ) \to \boldsymbol{\Delta} $.
+
+Note also there is a functor $S : \mathbf{el} N(\mathcal{D} ) \to \mathcal{D} ^{\mathrm{op}} $ given by projecting on the source of the string of arrows onto the source, and with the relevant induced action by the morphisms. Taking opposite categories, we might want to consider precomposing our original diagram $F : \mathcal{D}  \to \mathcal{M} $ by $S$, and then taking the left Kan extension
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & \boldsymbol{\Delta} ^{\mathrm{op}} \ar[" \Lan_\Sigma S ", dashed, dr]  &  \\
+	(\mathbf{el} N(\mathcal{D} ))^{\mathrm{op}} \ar[" \Sigma ", ur] \ar[" F\circ S "'{name=S}, rr]  &  & \mathcal{M}
+	\arrow[from=S, to=1-2, Rightarrow, shorten=5pt] 
+\end{tikzcd}\]
+This gives us a simplicial object in $\mathcal{M} $ associated to $F$. Note that precomposition $S^*: \mathcal{M} ^\mathcal{D}  \to \mathcal{M} ^{(\mathbf{el} N(\mathcal{D} )^{\mathrm{op}} } $ is fully faithful, and thus the counit of the adjunction $\Lan_S\dashv S^*$ is an isomorphism, hence so is the natural transformation above. Next, letting $\Delta(-)$ denote the constant functor at $-$, we have by universality of colimit and Kan extension
+\[
+	\mathcal{M} (\varinjlim_\mathcal{E} \Lan_KF,m)\cong \mathcal{M} ^{\mathcal{E} } (\Lan_KF,\Delta(m))\cong \mathcal{M} ^{\mathcal{D} } (F,\Delta(m))\cong \mathcal{M}  (\varinjlim _\mathcal{D} F,m)
+.\]
+ Hence, we obtain the colimit of $F$ as
+ \[
+ 	\varinjlim _\mathcal{D} F\cong \varinjlim_\mathcal{D} \Lan_S(F\circ S)\cong \varinjlim_{\mathbf{el} N(\mathcal{D} )^{\mathrm{op}} } (F\circ S)\cong \varinjlim_{\boldsymbol{\Delta} ^{\mathrm{op}} } \Lan_\Sigma (F\circ S)
+ .\]
+ We can construct this via our earlier pointwise construction via
+ \[
+ 	\Lan_\Sigma(F\circ S)_n=\varinjlim \left( 
+	\begin{tikzcd}
+		(\Sigma\downarrow[n])\ar[" U ", r] &(\mathbf{el} N(\mathcal{D} ))^{\mathrm{op}} \ar[" S ", r] & \mathcal{D} \ar[" F ", r] & \mathcal{M} 
+	\end{tikzcd}
+	\right) 
+ .\]
+ More explicitly, objects in the slice category $(\Sigma\downarrow[n])$ are sequences $\vec{d} : [m] \to \mathcal{D} $ together with morphisms $[n]\to [m]=\Sigma(\vec{d})$ in $\boldsymbol{\Delta} $. One obtains a terminal object in the comma category via an identity map, and the category can be shown to simply be given as a disjoint union of categories fully determined by this terminal object. The colimit of a functor over a category with a terminal object is simply evaluating at that terminal object. Computing further, the forgetful functor simply returns the composable string $\vec{d} $, and composing with $S$ returns the starting point $d_0$, so we obtain that the colimit is computed as a coproduct
+ \[
+	 (\Lan_\Sigma(F\circ S))_n=\coprod_{\vec{d} : [n] \to \mathcal{D} } F(d_0)=B_n(*,\mathcal{D} ,F)
+ .\]
+ \begin{lemma}\label{lma:4.1}
+	 To each diagram $F : \mathcal{D}  \to \mathcal{M} $, there is a simplicial object $B_{\bullet} (*,\mathcal{D} ,F)$ and a cosimplicial object $C^{\bullet} (*,\mathcal{D} ,F)$ such that
+	 \[
+	 	\varinjlim _\mathcal{D} F\cong\varinjlim _{\boldsymbol{\Delta} ^{\mathrm{op}} } B_{\bullet} (*,\mathcal{D} ,F),\qquad \varprojlim _\mathcal{D} F\cong \varprojlim _{\boldsymbol{\Delta} } C^{\bullet} (*,\mathcal{D} ,F)
+	 .\]
+ \end{lemma}
+ \begin{remark}
+ 	The proof that the colimit of a Kan extension is isomorphic to the colimit of the original diagram extends to weighted colimits, in particular functor tensor products, in particular geometric realizations. Let $\mathcal{M} $ be cocomplete and tensored over simplicial sets. A simplicial object $X_{\bullet} : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \mathcal{M} $ is $n$-\emph{skeletal} if it is isomorphic to the left Kan extension of its $n$-truncation $X_{\leq n} $
+	\[\begin{tikzcd}
+	{\mathcal{M}^{\boldsymbol{\Delta}^{\mathrm{op}}}} & {\mathcal{M}^{\boldsymbol{\Delta}_{\leq n}^{\mathrm{op}}}}.
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\mathrm{res}_{\leq n}}"', bend right=12, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\mathrm{Lan}}"', bend right=12, from=1-2, to=1-1]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+\end{tikzcd}\]
+This has the following application for computing geometric realizations.
+ \end{remark}
+ 
+ \begin{lemma}\label{lma:4.2}
+ 	If $X$ is $n$-skeletal, then
+	\[
+		\left| X \right| \cong\Delta^{\bullet} \otimes _{\boldsymbol{\Delta} ^{\mathrm{op}} } X_{\bullet} \cong\Delta^{\bullet} \otimes _{\boldsymbol{\Delta} ^{\mathrm{op}} } \Lan X_{\leq n} \cong \Delta^{\bullet}_{\leq n} \otimes _{\boldsymbol{\Delta} ^{\mathrm{op}} _{\leq n} } X_{\leq n} ,
+	\]
+	where the Kan extension is computed along the inclusion functor. In other words, it is isomorphic to it's $n$-truncation tensored with the restricted Yoneda embedding.
+ \end{lemma}
+ 
+ \section{Augmented simplicial objects and extra degeneracies}
+
+ Now we consider the computation of something called ``the homotopy type'' of the geometric realization of a simplicial object in a tensored, cotensored, and simplicially enriched category $\mathcal{M} $. Recall an augmented simplicial object includes also the empty ordinal $0=[-1]$, meaning it is a simplicial object $X$ and an object $X_{-1} $, together with a map $d_0: X_0 \to X_{-1} $ such that the two maps $X_1\rightrightarrows X_0\to X_{-1} $ agree.
+
+In a complete category $\mathcal{M} $, any simplicial object obtains an augmentation via the unique map to the terminal object. More explicitly, we define $X_{-1} =*$, and the two maps manifestly agree by universality. We can also take $*$ as the constant simplicial set, and ask when the map $X\to *$ is a simplicial homotopy equivalence.
+
+For our expository discussion, we take $\mathcal{M} =\Set $ for simplicity. Exploring this requires us to consider the notion of a contracting homotopy $X\to *$, which roughly is a method to deform each simplex of $X$ down to a point. As an example, we could express this as
+\begin{itemize}
+	\item a vertex $*\in X_0$;
+	\item for each $x\in X_0$, a 1-simplex from $*$ to $x_0$;
+	\item for each $f\in X_1$, a 2-simplex whose initial vertex is $*$, whose 0th face is $f$, and whose other faces are the previous 1-simplicies;
+	\item for each $\sigma\in X_n$, an $n+1$-simplex whose initial vertex is $*$, whose 0th face is $\sigma$, and whose other faces are the previously specified $n$-simplicies.
+\end{itemize}
+Note here that the way we define a 1-simplex \emph{between} 0-simplicies is via the face maps. In other words, a \emph{contracting homotopy} is a set of maps $s_{-1} : X_n \to X_{n+1} $ for each $n>-1$ which are left-inverses (hereafter sections) of the 0th face maps $d_0: X_{n+1}  \to X_{n} $ and satisfy the relevant simplicial identities.
+
+This extends to augmented simplicial objects by taking $s_{-1} : X_{-1}  \to X_0$ to be a section of $d_0: X_0 \to X_{-1} $. Sometimes these are called ``backwards'' contracting homotopies, and the forwards variant is given by taking the opposite simplicial object given by reversing the ordering of each set $[n]$. The maps of a forwards contracting homotopy are usually called $s_{n+1} : X_n \to X_{n+1} $. Contracting homotopies of all types are often called \emph{extra degeneracies}. We now reconsile this notion with that of homotopy.
+
+\begin{lemma}\label{lma:4.3}
+	An augmentation and extra degeneracies for a simplicial object $X$ in a cocomplete category $\mathcal{M} $ is equivalent to specifying an object $X_{-1} \in \mathcal{M} $ and a retract diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_{-1} \ar[" s_{-1}  ", r]  & X_0\ar[" d_{0}  ", r]  & X_{-1} 
+	\end{tikzcd}\]
+	whose maps define a simplicial homotopy equivalence between $X$ and the constant simplicial object $X_{-1} $.
+\end{lemma}
+The proof uses the previous exercise which shows that for $\mathcal{M} $ cocomplete, $\mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } $ is simplicially enriched and tensored, with tensor given by levelwise copower. Here note that we say there is a simplicial homotopy equivalence between these objects means there are morphisms $X\rightleftarrows X_{-1} $ which are a simplicial homotopy equivalence (in this case, they are given above). If $\mathcal{M} $ is a simplicial model category, \cref{lma:3.7} implies this map is a weak equivalence.
+
+\begin{corollary}\label{cor:4.1}
+	If an augmented simplicial object $X\to X_{-1} $ in a simplicial model category admits either a forwards or backwards contracting homotopy, then the natural map $\left| X \right| \to X_{-1} $ is a weak equivalence.
+\end{corollary}
+
+\begin{remark}
+	It is not in general true that the homotopy colimit and the geometric realization of a simplical object coencide. However, given a simplicial object which admits an augmentation and contracting homotopy, the homotopy colimit is always weakly equivalent to its augmentation. This is proven in a few chapters.
+\end{remark}
+
+For example, let $G$ be a group, and write $EG=B(G,G,*)$. Here the notation indicates that $*$ identifies the terminal set, the functor $G$ identifies the constant simplicial set at $G$, and the tensor product is given as before via $K\otimes X=K_0\times X$. We then obtain
+\[
+	B_n(G,G,*)=\coprod_{\vec{d} : [n] \to G} G(d_n)\otimes *\cong \coprod_{\vec{d} : [n] \to G} G\cong \coprod_{*} \prod_{i=0}^{n-1} G(*,*)=G^n,
+\]
+where we view $G$ as a group in the classical way at the end. This simplicial set is augmented by the singleton $*$ and admits a backwards contracting homotopy that inserts identities into the left-most group in each product. Hence $EG=\left| B_{\bullet} (G,G,*) \right| $ is a contractible $G$-space. Recall from topology contractible spaces are those for which the identity is null-homotopic. By \cref{cor:4.1}, we have that $EG$ is weakly equivalent in a suitable simplicial model structure to the singleton, which is the categorical translation of ``null homotopic''. Hence the term ``contractible $G$-space''.
+
+A more important example is as follows. Recall $B(\mathcal{D} ,\mathcal{D} ,F)$ is shorthand for the functor $d\mapsto B(\mathcal{D} (-,d),\mathcal{D} ,F)$. The above example can be viewed this way since $*\mapsto G(*,*)$ is the only hom-set, so we provide the following generalization. The simplicial object $B_{\bullet} (\mathcal{D} (-,d),\mathcal{D} ,F)$ admits an augmentation and an extra degeneracy. The augmentation
+\[
+	\coprod_{d'\in \mathcal{D} } \mathcal{D} (d',d)\otimes F(d')\to F(d)
+\]
+is by composition. More explicitly, tensor here is given by the copower, so we obtain a copower of $F(d')$ indexed by maps $f\in \mathcal{D} (d',d)$. Applying $F$ to each of these maps gives a collection of arrows $F(f): F(d') \to F(d)$, so universality of coproduct gives a unique map as seen above. As a consequence, this process is natural in $d$. THe extra degeneracies, which insert the identity at $1_d$, are \emph{not} natural in $d$. However, \cref{lma:4.3} still gives that the natural map $\varepsilon : B(\mathcal{D} ,\mathcal{D} ,F) \Rightarrow F$ via the augmentation admits pointwise homotopy inverses; aka each $\varepsilon _d$ is a homotopy equivalence.

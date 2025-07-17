@@ -1,1 +1,57 @@
+\chapter{Homotopy limits and colimits: the theory}
+
+Recall that since $\varprojlim $ and $\varinjlim $ are not necessarily homotopic $\mathcal{M} ^{\mathcal{D} } \to \mathcal{M} $, we want to compute their derived functors. Since colimits are left adjoints, we try to compute $\mathbb{L} \varinjlim $; respectively, $\mathbb{R} \varprojlim $. The choice of derived functor does not matter if $\mathcal{M} $ is saturated (the localization inverts precisely those maps which are weak equivalences), which it always is in practice (for example, in all model categories).
+
+We will see later in the text that our current method is not the only answer; there are approaches via finding a Reedy categorical structure on $\mathcal{D} $, or by taking $\mathcal{M} $ to be a cofibrantly generated or combinatorial model category. The former are fairly specialized, and the latter are computationally difficult, so we specialize instead in simplicial model categories $\mathcal{M} $ by producing deformations from the bar and cobar constructions. We use the properties axiomatized by \cref{lma:3.7} to do this. Next chapter explores examples of interesting simplicial model categories, and later we explore ``local'' universality onditions of the homotopy (co)limit.
+
+\section{The homotopy limit and colimit functors}
+
+We write $\hocolim : \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} $ for the left derived functor of $\varinjlim $, and $\holim $ for the right derived functor of $\varprojlim $. We start by fixing at least one construction satisfying this property on the point-set level. This chapter will be dedicated to showing the following theorems, which define a specific construction of homotopy (co)limits. We first prove the relevant corollary, since the theorem is rather long.
+
+\begin{theorem}\label{thm:5.1}
+	Let $\mathcal{M} $ be a simplicial model category with cofibrant replacement $Q$ and fibrant replacement $R$\footnote{Every arrow admits a factorization as a weak equivalence followed by a fibration; in particular, if this fibration is to the terminal object, we find that the object is weakly equivalent to a fibrant object. Since model categories in particular have this factorization be functorial, we obtain a fibrant replacement functor $R : \mathcal{M}  \to \mathcal{M} $ replacing objects with their fibrant replacement. Dually, we obtain a cofibrant replacement. Source: Hovey, $n$Lab}. The pair
+	\[
+		B(\mathcal{D} ,\mathcal{D} ,Q\circ -): \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} ^{\mathcal{D} } \qquad
+		\begin{tikzcd}
+			B(\mathcal{D} ,\mathcal{D} ,Q\circ -)\ar[" \varepsilon _Q ", Rightarrow, r] & Q\ar[" q ", Rightarrow, r] & 1
+		\end{tikzcd}
+	\]
+	is a left deformation for $\varinjlim : \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} $, where we recall our notation gives the functor
+	\[
+		F\mapsto B(\mathcal{D} ,\mathcal{D} ,Q\circ F)
+	.\]
+	Dually,
+	\[
+		C(\mathcal{D} ,\mathcal{D} ,R\circ -): \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} ^{\mathcal{D} } \qquad
+		\begin{tikzcd}
+			1\ar[" r ", Rightarrow, r] & R\ar[" \eta_R ", Rightarrow, r] & C(\mathcal{D} ,\mathcal{D} ,R\circ -)
+		\end{tikzcd}
+	\]
+	is a right deformation for $\varprojlim : \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} $.
+\end{theorem}
+\begin{corollary}\label{cor:5.1}
+	If $\mathcal{M} $ is a simplicial model category and $\mathcal{D} $ is any small category, then the functors $\varinjlim ,\varprojlim : \mathcal{M} ^{\mathcal{D} }  \to \mathcal{M} $ admit left and derived functors, called $\hocolim $ and $\holim $, respectively, defined by
+	\[
+		\hocolim_\mathcal{D}  \coloneqq \mathbb{L} \varinjlim_\mathcal{D} \cong B(*,\mathcal{D} ,Q\circ -)\qquad \text{and} \qquad \holim_\mathcal{D} \coloneqq \mathbb{R} \varprojlim _\mathcal{D} \cong C(*,\mathcal{D} ,R\circ -)
+	.\]
+\end{corollary}
+\begin{proof}
+	Note here that $*$ denotes the constant functor at the terminal object in $\sSet$, so recall that
+	\[
+		*\otimes _\mathcal{D} - \coloneqq \int^{d\in \mathcal{D} } *\otimes -\cong \int^{d\in \mathcal{D} } -\cong \varinjlim -
+	\]
+	since $\Delta^0$ is also the unit for the monoidal (cartesian) product in $\sSet$. By \cref{thm:5.1}, the left derived functor of colim exists, and by \cref{thm:2.1} it is given as precomposing by the left deformation
+	\[
+		\mathbb{L} \varinjlim _\mathcal{D} (-)\cong \varinjlim_\mathcal{D} (-)\circ B(\mathcal{D} ,\mathcal{D} ,Q\circ -)=\varinjlim _\mathcal{D} B(\mathcal{D} ,\mathcal{D} ,Q\circ -)\cong *\otimes _\mathcal{D} B(\mathcal{D} ,\mathcal{D} ,Q\circ -)
+	.\]
+	Fubini's theorem for ends\footnote{this is imo the best name for a theorem in basic category theory, shoutout my man mac lane} gives us that functor tensor products commute past either variable in the two-sided bar construction. In particular,
+	\begin{align*}
+		*\otimes _\mathcal{D} B(\mathcal{D} ,\mathcal{D} ,Q\circ -)&=\int^{d\in \mathcal{D} } *\otimes B(\mathcal{D} (-,d),\mathcal{D} ,Q\circ -)\\
+									   &=\int^{d\in \mathcal{D} } *\otimes \int^{[n]\in \boldsymbol{\Delta}} \Delta^n \otimes B_n(\mathcal{D} ,(-,d),\mathcal{D} ,Q\circ -)\\
+									   &\cong\int^{d\in \mathcal{D} } \int^{[n]\in \boldsymbol{\Delta} } *\otimes \Delta^n \otimes B_n(\mathcal{D} (-,d),\mathcal{D} ,Q\circ -)\\
+									   &\cong \int^{[n]\in \boldsymbol{\Delta} } \int^{d\in \mathcal{D} } *\otimes \Delta^n \otimes B_n(\mathcal{D} (-,d),\mathcal{D} ,Q\circ -)\\
+									   &\cong \int^{[n]\in \boldsymbol{\Delta} } \text{need to investigate the tensors to try and pull it into the bar}
+	.\end{align*}
+	
+\end{proof}
 

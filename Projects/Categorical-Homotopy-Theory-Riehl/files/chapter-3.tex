@@ -961,6 +961,10 @@ m\ar[" f ", ur] \ar[" H ", r] \ar[" g "', dr]  & n^{\Delta^1} \ar[" n^{d^1}  "',
 \end{tikzcd}\]
 Thus we obtain a notion of a simplicial homotopy equivalence if $\mathcal{M}$ is either tensored or cotensored over simplicial sets.
 
+\begin{remark}
+	Some explanation of why this definition of homotopy makes sense. The diagram says that the composition $H\circ d^1=f$ and $H\circ d^0=g$. Recall that $d_i$ is the face operator which skips $i$. Thus $d^i$ here is postcomposition by the relevant face operator, and thus we can think of $f$ as being inserted into $\Delta^1$ at $0$, and $g$ inserted at $1$. Thus a homotopy is a morphism which agrees with $f$ when restricted to $0$ and agrees with $g$ when restricted to $1$, similar to the topological notion. Tensoring/cotensoring then simply recovers the definition in the underlying category.
+\end{remark}
+
 \begin{definition}[Geometric Realization]\label{dfn:3.11}
 	If $\mathcal{M} $ is simplicially enriched, tensored, and cocomplete, the \emph{geometric realization} of a simplicial object $X_{\bullet} $ in $\mathcal{M} $ is
 	\[
@@ -971,7 +975,7 @@ Thus we obtain a notion of a simplicial homotopy equivalence if $\mathcal{M}$ is
 
 If $\mathcal{M} $ is simplicially tensored, there are two reasonable definitions for simplicial tensors on $\mathcal{M} ^{\boldsymbol{\Delta} ^{\mathrm{op}} } $. One can define tensors pointwise for any diagram category $\mathcal{M} ^{\mathcal{D} } $: given $K\in\sSet$ and $X : \mathcal{D}  \to \mathcal{M} $, define $K\otimes X$ as the functor $d\mapsto K\otimes X(d)$. The category of simplicial objects is then a special case thereof. However, we prefer to define tensores as done earlier, via $(K\otimes X)_n\coloneqq K_n\cdot X_n$.
 
-\begin{lemma}\label{lma:3.2}
+\begin{lemma}\label{lma:3.6}
 	Let $\mathcal{M} $ be simplicially enriched, tensored, cotensored, and admits geometric realizations. Then geometric realization preserves tensors.
 \end{lemma}
 Will be proven later. The key is that tensor admits pointwise right adjoints, and thus preserves colimits in both variables. We present this result now due to the following corollary.
@@ -985,7 +989,7 @@ Will be proven later. The key is that tensor admits pointwise right adjoints, an
 
 The chapter is ended with the motivation we sought at the end of the previous chapter. The following lemma defines some properties of simplicial model categories, which will be properly introduced later. This result suffices as a working understanding for now.
 
-\begin{lemma}\label{lma:3.3}
+\begin{lemma}\label{lma:3.7}
 	A simplicial model category
 	\begin{itemize}
 		\item is complete and cocomplete;
