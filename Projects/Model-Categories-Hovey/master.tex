@@ -1,0 +1,34 @@
+\documentclass[11pt, letterpaper]{report}
+\input{./preamble.tex}
+\title{Model Categories - Self Study}
+\usepackage{titlepageBU}
+\date{Summer, 2025}
+\author{Grant Talbert}
+\usepackage{xparse}
+
+\DeclareMathOperator{\Ho}{Ho}
+\newcommand{\Ch}{\mathcal{C}\mathrm{h}}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries\color{accentblue}\centering}{Chapter \thechapter}{10pt}{\Large}
+\titleformat{\section}{\normalfont\large\bfseries\color{accentblue}\centering}{\thesection}{1em}{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+	This text contains my notes on model category theory. These notes were synthesized from a combination of Mark Hovey's \emph{Model Categories}, and Emily Riehl's \emph{Categorical Homotopy Theory}. The sections of my notes on Riehl's text can also be found in my full notes for her text; I made these notes since I am using both texts simultaneously, so it felt wrong to include them in those notes.
+
+	I wrote these notes during the summer between my Sophomore and Junior years. My goal was to obtain rigorous understanding of basic model category theory, and to explore the model structure on $\sSet$, such that I could begin exploring quasi-categories.
+\end{abstract}
+\tableofcontents
+% files begin
+\input{./files/chapter-1.tex} % hovey 1.1 - 1.2
+\input{./files/chapter-2.tex} % riehl 11.1, 11.2, 11.3
+\input{./files/chapter-3.tex} % quillen functors; finish riehl 11.3 and do hovey 1.3
+\input{./files/chapter-4.tex} % riehl 12.1, 12.2, as much of 14 as I can
+\input{./files/chapter-5.tex} % hovey 3
+\input{./files/chapter-6.tex} % consolidation - basically write a few pages on what i learned to ensure i get it
+\input{./files/chapter-7.tex} % hovey 2.2, 2.3, 2.4
+\input{./files/chapter-8.tex} % should be returning to riehl for ch15
+% files end
+\end{document}

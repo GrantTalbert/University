@@ -83,7 +83,7 @@ We have now lost all use for the category $\Top $, and for the purposes of this 
 \section{Warnings and simplifications}
 
 \begin{remark}
-	Given $\mathcal{M} $ homotopical, we always define the weak equivalences in $\mathcal{M} ^{\mathcal{D} } $ to be defined pointwise; hence weak equivalences are pointwise natural weak equivalences. I swap notation briefly to $\Fun$ instead of exponential to make the following diagram more clear. Universality of localization gives a map
+	Given $\mathcal{M} $ homotopical, we always define the weak equivalences in $\mathcal{M} ^{\mathcal{D} } $ to be defined pointwise; hence weak equivalences are pointwise natural weak equivalences. I swap notation briefly to $\Fun(-,-)$ instead of exponential to make the following diagram more clear. Universality of localization gives a map
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	\Fun(\mathcal{D} ,\mathcal{M} )\ar[" \Fun(\mathcal{D} \text{,} \gamma) ", r] \ar[" \gamma "', d]  & \Fun(\mathcal{D} ,\Ho \mathcal{M} ) \\
 	\Ho (\Fun(\mathcal{D} ,\mathcal{M} ))\ar[dashed, ur]  & 
@@ -105,4 +105,412 @@ We provide the following simpliciation in most cases. By \cref{cor:5.1}, any $F 
 	In $\Top $, viewed as a simplicial model cateogry, not all objects are cofibrant. They are all fibrant, so we can always compute the homotopy limit without the correction, but ``a folklore result'' shows that we can also compute homotopy colimits without correction as well. We will produce this proof later, after considering Reedy category theory more rigorously.
 \end{remark}
 
-\section{Sasmple homotopy colimits}
+\section{Sample homotopy colimits}
+
+\begin{remark}
+	I think it should be useful to offer an explicit description of the simplicial model structure on $\Top $. Since $\left| X\times Y \right| \cong \left| X \right| \times  \left| Y \right| $, we have that geometric realization is strong monoidal, so the right adjoint $\left| - \right| \dashv S$ is lax monoidal, and we obtain that $\underline{\Top }_{\sSet}  (X,Y)=S(\underline{\Top }_{\Top } (X,Y))$. Recall that the functor $S$, called the \emph{total singular complex functor}, or the \emph{singular set functor}\footnote{This functor may also be referred to as $\mathrm{Sing} (X)$ instead of $S(X)$. In particular, I believe Lurie adopts this notation in HTT.}, is defined by taking the $n$-simplicies of $S(X)$ to be the hom-set $\Top (\Delta^n,X)$, where here $\Delta^n$ is the standard $n$-simplex. Faces and degeneracies are precomposition by the appropriate maps to a standard simplex. More precisely, $d_i : S(X)_n\to S(X)_{n-1}$ is given by precomposing each $n$-simplex with the inclusion of the $i$th face $\delta^i : \Delta^{n-1} \hookrightarrow \Delta^n$. Degeneracy maps are the same idea. The action on morphisms is that of levelwise postcomposition.
+
+	Putting this together, we define
+	\[
+		\underline{\Top }_{\sSet} (X,Y)_n=\Top\left(\Delta^n,\underline{\Top }_{\Top }(X,Y) \right) 
+	.\]
+	This suffices as a construction of the monoidal structure by \cref{prp:3.1}. Recall that \cref{thm:3.1} extends this conclusion by tensoring and cotensoring the category. Since our convenient category of spaces is cartesian closed, we obtain $\times $ as the tensor and the internal hom as the cotensor. This defines a simplicial tensor and cotensor by, for any simplicial set $K$ and topological space $X$,
+	\[
+		K\otimes X\coloneqq \left| K \right| \times X,\qquad K\pitchfork X \coloneqq \underline{\Top }_{\Top } (\left| K \right| ,X)
+	.\]
+	
+	One final remark. The adjunction $\left| - \right| \dashv S$ is Quillen, but in particular it is a Quillen equivalence. We do not yet have the necessary machinery to explore in precise terms what this means for the model structures of these categories, but we do know enough to say that this means the homotopy theories given by simplicial sets and topological spaces are precisely the same, which is a profound fact of algebraic topology.
+\end{remark}
+
+We now make full use of \cref{cor:5.1} to give some examples of homotopy colimits. We start simple. Let $f : 2 \to \Top $ be a functor, which carries the information of an arrow $f : X \to Y$ in $\Top $. Since $2$ only has one non-identity arrow, $N(2)$ is $1$-skeletal (it is isomorphic to it's 1-truncation). It's easily shown that degenerate simplicies in the nerve $N(2)$ correspond to degenerate simplicies in $B_{\bullet} (*,2,f)$, and hence the two-sided simplicial bar is 1-skeletal. Recall by \cref{lma:4.2} we have
+\[
+	\left| B_{\bullet} (*,2,f) \right| \cong \Delta^{\bullet} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} } B_{\bullet} (*,2,f)\cong \Delta^{\bullet} _{\leq 1} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} _{\leq 1} } B_{\leq 1} (*,2,f)
+.\]
+By definition of the simplicial bar,
+\[
+	B_0(*,2,f)=\coprod_{\vec{d} : [0] \to 2} * \otimes f(d_0)\cong X\amalg Y
+.\]
+We then have
+\[
+	B_1(*,2,f)=\coprod_{\vec{d} : [1] \to 2} *\otimes f(d_0)\cong \coprod_{\vec{d} : [1] \to 2} f(d_0)=f(\operatorname{dom} 1_0)\amalg f(\operatorname{dom} 1_f)\amalg f(\operatorname{dom} 1_1)=X\amalg X\amalg Y
+.\]
+Hence by \cref{cor:5.1},
+\[
+	\hocolim f=B(*,2,f)=\Delta^{\bullet} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} } B_{\bullet} (*,2,f)\cong\Delta^{\bullet} _{\leq 1} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} _{\leq 1} } B_{\leq 1} (*,2,f),
+\]
+where we drop the $Q$ and truncate as discussed earlier.
+
+To compute this functor tensor product, we compute the coend
+\[
+	\int^{[n]\in \boldsymbol{\Delta}_{\leq 1}} \Delta^{n} \otimes B_n(*,2,f)=\int^{[n]\in\boldsymbol{\Delta}_{\leq 1}  } \left| \Delta^n \right| \times B_n(*,2,f)
+.\]
+Here, note that the geometric realization of $\Delta^1$ is the standard 1-simplex, which is homeomorphic to the unit interval $I\coloneqq [0,1]\subset\mathbb{R}$. Note that $\boldsymbol{\Delta} _{\leq 1} $ admits the explicit description as the diagram
+\[\begin{tikzcd}[column sep=4em]
+	{[0]} & {[1].}
+	\arrow["{\delta^1}"{description}, from=1-1, to=1-2]
+	\arrow["{\delta^0}", shift left=3, from=1-1, to=1-2]
+	\arrow["{\sigma^0}", shift left=3, from=1-2, to=1-1]
+\end{tikzcd}\]
+Since $\Delta^{\bullet} $ is a cosimplicial object in $\sSet$ (and thus the coend should really be taken over $\boldsymbol{\Delta} ^{\mathrm{op}} $... oops), the coend is universal with respect to the dotted lines as indicated exist making each square in the diagram
+\[\begin{tikzcd}[row sep=2em, column sep=0em]
+	& {X\amalg X\amalg Y} && {I\times(X\amalg Y)} \\
+	\\
+	{I\times(X\amalg X\amalg Y)} &&&& {X\amalg Y} \\
+	&& {\displaystyle{\int^{[n]\in\boldsymbol{\Delta}_{\leq 1} }}\left|\Delta^n\right|\times B_n(*,2,f)}
+	\arrow["{d^0}"', shift right, from=1-2, to=3-1]
+	\arrow["{d^1}", shift left, from=1-2, to=3-1]
+	\arrow["{d_0}", shift left, from=1-2, to=3-5]
+	\arrow["{d_1}"', shift right, from=1-2, to=3-5]
+	\arrow["{s_0}"', from=1-4, to=3-1]
+	\arrow["{s^0}", from=1-4, to=3-5]
+	\arrow[dotted, from=3-1, to=4-3]
+	\arrow[dotted, from=3-5, to=4-3]
+\end{tikzcd}\]
+commute. Note that the fact that each \emph{square} commutes means that the diagram, as given, need not commute. In particular, parallel arrows need not be equalized. Here we note that product is a left adjoint functor, in particular left adjoint to the internal hom, so we obtain that the disjoint union distributes over the product:
+\[
+	I\times (X\amalg Y)\cong (I\times X)\amalg (I\times Y),
+\]
+and the same for the other. We note also in the above computations that $\left| \Delta^0 \right| =*$ is a unit for product. To compute the colimit of the above diagram, we first take the disjoint union over the images
+\[
+	(X\amalg Y)\amalg ((X^0\times I)\amalg (X^f\times I)\amalg (Y^1\times I))
+.\]
+Here I have noted for each topological set which map indexes it in the coproduct, with 0 and 1 representing the identities. We then identify any two points that appear in the images of any pair of corresponding maps, meaning any two points in the images of $s_0$ and $s^0$ or $d_i$ and $d^i$. In particular, $s_0$ includes $X^0\times I$ into the left of the coproduct
+\[
+	(X\times I)\amalg (Y\times I)\to (X^0\times I)\amalg (X^f\times I)\amalg (Y^1\times I)
+.\]
+It fixes $Y\times I$ by mapping to $Y^1\times I$. The other map projects each product $-\times I$ onto its left component, so it projects
+\[
+	I\times X\to X,\qquad I\times Y\to Y,\qquad I\times (X\amalg Y)\to X\amalg Y
+.\]
+We identify the images of each component under each map, meaning we identify $X^0\times I$ with $X$ and $Y^1\times I$ with $Y$, giving the result
+\[
+	X\amalg (X^f\times I)\amalg Y
+.\]
+Note here that ``identifying the images'' indeed removes the extra terms from the coproducts, since quotienting both sets them equal, and also collapses each class to one point. It remains to identify the images of the face operators.
+
+The images of $X^0$ and $Y^1$ under the faces have already been identified by the degeneracy quotient. The image of $X^f$ under $d_1$ is $X$ since it just maps to the domain. The image of $X^f$ under $d^1$ is $X\times \left\{ 0 \right\} \subseteq X^f\times I$, since we are inserting the $1$st face of the 1-simplex, hence the point $0$. Thus, the zeroth face of this cylinder is glued to $X$. The image of $X^f$ under $d_0$ is $f(X)\subseteq Y$, since we are composing along the indexing map, and the image of $X_f$ under $d^0$ is $X\times \left\{ 1 \right\} \subseteq X^f\times I$ by the same logic. Thus we glue $(x,1)$ to $f(x)$. This gives us the standard mapping cylinder
+\[
+	\hocolim f=(X\times I)\amalg Y/(x,1)\sim f(x)=Mf
+.\]
+I believe the book made an error here, since Riehl flips the superscripts and subscripts for the faces in only this paragraph. Very weird.
+
+The homotopy colimit of a diagram $X\xlongleftarrow{f}A\xlongrightarrow{g}$, calculated similarly, is
+\[
+	X\amalg (A\times I)\amalg A\amalg (A\times I)\amalg Y/\left\langle f(a)\sim (a,0),(a,1)\sim a\sim (a,0),(a,1)\sim g(a) \right\rangle 
+.\]
+Hence $f(A)$ is identified with $A\times \left\{ 0 \right\} $, glues the ends of the two cylinders together, and identifies the other face with $g(A)$. This is obviously homeomorphic to the double mapping cylinder
+\[
+	X\amalg (A\times I)\amalg Y/\left\langle f(a)\sim (a,0),(a,1)\sim g(a) \right\rangle 
+.\]
+This is also known as the \emph{homotopy pushout}, for obvious reasons. A special case is the \emph{suspension} of $X$, calculated as the homotopy pushout of the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* & X\ar[l] \ar[r]  & *
+\end{tikzcd}\]
+in $\Top $. The homotopy pushout in $\Top _*$ is the \emph{reduced suspension} of $X$.
+
+The book here remarks that the suspension of $S^{n-1} $ was equal to the homotopy pushout of $D^n\leftarrow S^{n-1} \rightarrow D^n$, which is homeomorphic to $S^n$. The book also claims that given a diagram with vertical arrows as weak equivalences
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X\ar[" \sim  "', d]  & A\ar[l] \ar[r] \ar[" \sim  "', d]  & Y\ar[" \sim  ", d]  \\
+X' & A'\ar[l] \ar[r]  & Y'
+\end{tikzcd}\]
+the induced map between the homotopy pushouts is also a weak homotopy equivalence. This follows since hocolim is a derived functor, but the book checks this for fun. I'm hungry and want to eat, so I will stop here and resume with the following exercise.
+
+\begin{exercise}
+	Show that the homotopy colimit of $Y\xlongleftarrow{f}X\longrightarrow*$ in $\Top_*$ is the reduced mapping cone $C_f$ of the based map $f$, also called the \emph{homotopy cofiber}. Writing $\mathcal{H} _*$ for the homotopy category of based spaces, show using either formal or classical arguments that the cofiber sequence $X\to Y\to C_f$ induces an exact sequence of based sets $\mathcal{H} _*(C_f,Z)\to \mathcal{H} _*(Y,Z)\to \mathcal{H} _*(X,Z)$. That is, show the image of the first map is the kernel of the second. Homotopy invariance says that if we replace $f$ by a homotopy equivalent diagram $X'\xlongrightarrow{f'}Y'$ then the induced map between homotopy cofibers is a homotopy equivalence.
+\end{exercise}
+\begin{proof}
+	Yo wtf is this exercise okay we construct the coend in the same way as previously, by quotienting the relevant coproduct by the relation that pairs of maps are identified, producing a coequalizer of the relevant pair of maps, which is the coend by the colimits-by-coproducts-and-coequalizers theorem. Note the reduced mapping cone is a pointed variant of the mapping cone, defined by quotienting $Y\amalg (X\times I)$ by
+	\begin{itemize}
+		\item Identifying $X\times \left\{ 0 \right\} $ with $f(X)$ by $(x,0)\sim f(x)$;
+		\item Identifying the top face $X\times \left\{ 1 \right\} $ of the cylinder by $(x,1)\sim (x',1)$;
+		\item Collapsing the fiber at $x_0$ by $(x_0,t)\sim (x_0,t')$ for $t,t'\in I$ and $x_0$ the base of $X$.
+	\end{itemize}
+	Note that we obtain a basepoint identification since $(x_0,0)\sim f(x_0)=y_0$ since $f$ is basepoint preserving. This can be viewed equivalently as quotienting the mapping cone by making it into a cylinder, and then applying a ``coherence check'' to ensure the basepoint admits a definition.
+
+	To compute the homotopy colimit, let $F : \mathcal{D}  \to \Top $ pick out the relevant diagram, and note that $N(\mathcal{D} )$ is once again 1-skeletal, since there are no possible compositions of length greater than 1 that do not include identities. Hence every $n$-simplex for $n>1$ is degenerate, and we obtain one again that $B_{\bullet} (*,\mathcal{D} ,F)$ is 1-skeletal. Thus the coend reduces to the coend over the truncated simplex category
+	\[
+		\Delta^{\bullet} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} } B_{\bullet} (*,\mathcal{D} ,F)\cong \Delta^{\leq 1} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} _{\leq 1} } B_{\leq 1} (*,\mathcal{D} ,F)=\int^{[n]\in\boldsymbol{\Delta} ^{\mathrm{op}}_{\leq 1}  } \left| \Delta^n \right| \wedge B_n(*,\mathcal{D} ,F)
+	.\]
+	We compute the coproducts in the simplicial bar: the 0-simplicies are given as
+	\[
+		\coprod_{x\in \mathcal{D} } F(x)=X\vee Y\vee*
+	.\]
+	Here note that the coproduct in $\Top _*$ is clearly the wedge sum, given by quotienting the disjoint union by identifying the basepoints, and the monoidal product is the smash product. It is unclear at this stage of the proof whether we should get rid of the singleton, since even though it is the unit for the smash product, it may be important to consider under the simplicial operators. The 1-simplicies are computed as
+	\[
+		\coprod_{\vec{d} : [1] \to \mathcal{D} } F(d_0)=\coprod_{f\in \operatorname{Mor} \mathcal{D} } F(\operatorname{dom} f)=X^0\vee X^f \vee Y^1 \vee X^* \vee *^2
+	.\]
+	We index the coproduct terms once again as we did before to make understanding the simplicial operators more simple. Since the skeleta are the same, we now have the same diagram as in the above example, but with different entries:
+\[\begin{tikzcd}[row sep=2em, column sep=-4em]
+	& {X^0\vee X^f\vee Y^1\vee X^*\vee X^2} && {I\wedge(X\vee Y\vee*)} \\
+	\\
+	{I\wedge(X^0\vee X^f\vee Y^1\vee X^* \vee*^2)} &&&& {X\vee Y \vee *} \\
+	&& {\displaystyle{\int^{[n]\in\boldsymbol{\Delta}_{\leq 1}^{\mathrm{op}} }}\left|\Delta^n\right|\wedge B_n(*,\mathcal{D} ,F)}
+	\arrow["{d^0}"', shift right, from=1-2, to=3-1]
+	\arrow["{d^1}", shift left, from=1-2, to=3-1]
+	\arrow["{d_0}", shift left, from=1-2, to=3-5]
+	\arrow["{d_1}"', shift right, from=1-2, to=3-5]
+	\arrow["{s_0}"', from=1-4, to=3-1]
+	\arrow["{s^0}", from=1-4, to=3-5]
+	\arrow[dotted, from=3-1, to=4-3]
+	\arrow[dotted, from=3-5, to=4-3]
+\end{tikzcd}\]
+	Wow, this really is a similar calculation. We quotient by setting the pairs of maps equal to each other, since this is a concrete category, and quotienting by this produces a universal morphism with respect to setting the maps equal to each other by universality of quotient, which in this case is precisely a coequalizer.
+
+	To begin this process, we consider the action of the face and coface maps. First, recall that since $\Top _*$ is closed with monoidal product given by the smash product, it distributes over coporoducts since it is necessarily a left adjoint:
+	\[
+		I\wedge(X\vee Y\vee*)\cong (X\wedge I)\vee(Y\wedge I)\vee(*\wedge I)
+	.\]
+	The $0$th codegeneracy map collapses $I$ to a point, hence mapping $X\wedge I\to X$, and $Y\wedge I\to Y$, and $I\wedge *\to *$. The 0th degeneracy map on the nerve inserts identities, hence the reindexing of the coproduct maps the cylinders to those indexed by the identities:
+	\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	X\wedge I\ar[r]  & X^0\wedge I \\
+	Y\wedge I\ar[r]  & Y^1\wedge I \\
+	*\wedge I\ar[r]  & *^2\wedge I
+	\end{tikzcd}\]
+	We thus identify $X$, $Y$, and $*$ with $X^0\wedge I$, $Y^1\wedge I$, and $*^2\wedge I$, respectively. This gives the intermediate result
+	\[
+		 X\vee \left( X^f\wedge I \right) \vee Y \vee \left( X^*\wedge I \right) \vee *
+	.\]
+	The faces remain to be equalized.
+
+	The action of the faces on $X^0$, $Y^1$, and $*^2$ are, as above, already accounted for by the degeneracy maps. This is easily shown by noting the coface identifies one face of the relevant cylinder, and the face glues that to the image of the identity on the relevant set, hence identifying, for example, $X^0\times \left\{ 0 \right\} $ with $X$. Since the former is a subset of a cylinder already identified with $X$, this is irrelevant.
+
+	We begin by considering the action of the coface maps. It is fairly clear that $d^i(X^{(-)} )=X\times \left\{ j \right\} $ where $j\neq i$ is the other number out of $\left\{ 0,1 \right\} $. The 1st face map identifies each $X^f$ and $X^*$ with the domain of the function, which is always $X$. Thus, we glue $X$ to $X^f\times \left\{ 0 \right\} $ and $X^*\times \left\{ 0 \right\} $ to obtain $(x,0)^f\sim x\sim (x,0)^*$. The 0th face map composes along the relevant function, so we have $d_0(X^f)=f(X)\subseteq Y$ and $d_0(X^*)=*$. Thus we obtain the relations $f(x)\sim (x,1)^f$ by gluing $f(X)$ to $X^f\times \left\{ 1 \right\} $, and similarly we obtain $(x,1)^*\sim *$. Thus, we have that the homotopy colimit is computed as
+	\[
+		\hocolim F=X\vee\left( X\wedge I \right) \vee Y\vee \left( X\wedge I \right) / \left\langle f(x)\sim (x,1),(x,0)\sim x\sim (x,0),(x,1)\sim (x_0,1) \right\rangle 
+	.\]
+	Note this is precisely the unsimplified homotopy pullback as given above but for the pointed case, verifying the validity of the calculation. For $A\subseteq X$, denote by $X/A$ the quotient space of $X$ formed by identifying points of $A$. The smash product admits a description as
+	\[
+		X\wedge Y \coloneqq \frac{X\times Y}{X\vee Y} 
+	.\]
+	Hence our space, before quotienting out, admits a description as
+	\[
+		X\vee \frac{X\times I}{X\vee I} \vee Y \vee \frac{X\times I}{X\vee I} 
+	.\]
+	The wedge sum further decomposes as a coproduct then identifying base points, and the homeomorphism follows\footnote{this means i am too lazy to finish this part}.
+
+	Now we prove that the sequence $\mathcal{H} _*(C_f,-)\to \mathcal{H}_*(Y,-)\to \mathcal{H} _*(X,-)$ is exact. We first define the cofiber sequence using the inclusion of $Y$ into the homotopy colimit. Recall that the homotopy pushforward is isomorphic to the reduced mapping cone, which admits a description as
+	\[
+		C_f=Y\amalg (X\times I) / \left\langle (x,1)\sim (x',1),(x,0)\sim f(x),(x_0,t)\sim (x_0,t') \right\rangle 
+	.\]
+	Hence we may include it via the coproduct, rather than the wedge sum, as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\ar[" f ", r]  & Y\ar[" i ", r]  & Y\amalg (X\times I) / \tildesim .
+	\end{tikzcd}\]
+	Since the hom-functor $\mathcal{H} _*(-,Z)$ is contravariant and admits a basepoint via the null-homotopy class, we may define kernels as the set which is mapped to the basepoint. Hence we must prove for any class of maps $[h]$ such that precomposition $f^*(h)=h\circ f$ is null-homotopic, we necessarily have $h\in\im(i^*)$, and the converse. For reference, we restate the complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{H}_* (Y\amalg (X\times I) /\sim ,Z)\ar[" i^* ", r]  & \mathcal{H} _*(Y,Z)\ar[" f^* ", r]  & \mathcal{H} _*(X,Z).
+	\end{tikzcd}\]
+
+	Let $h\circ f$ be null homotopic. Thus there is a homotopy $H : X\times I \to Z$ which gives $h\circ f\Rightarrow z_0$. We want to show there is some $g : C_f \to Z$ such that $g\circ i=h$. By universality of coproduct, maps $Y\amalg (X\times I) \to A$ are in correspondence with pairs of maps $X\times I\to A$ and $Y\to A$. Hence, the quotient functor $\pi : Y\amalg (X\times I) \to Y\amalg (X\times I) /\tildesim$ induces a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\times I\ar[" i "', d] \ar[" \pi\circ i ", dr]  & \\
+	Y\amalg (X\times I)\ar[" \pi ", dashed, r] & Y\amalg (X\times I) /\tildesim & \\
+	Y\ar[" i ", u] \ar[" \pi\circ i "', ur]  &
+	\end{tikzcd}\]
+	One then obtains that any map $Y\amalg (X\times I) /\tildesim\to Z $ which identifies points related by $\sim $ factors uniquely through $\pi$, inducing a unique map $Y\to Z$ and $X\times I\to Z$ making the relevant extension of the above diagram commute. Now consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\times I\ar[" i_X "', d] \ar[" H ", dr]  &  \\
+	Y\amalg (X\times I)\ar[" \alpha ", dashed, r]  & Z \\
+	Y\ar[" i_Y ", u] \ar[" h "', ur]  & 
+	\end{tikzcd}\]
+	We can appeal to the known definition of the disjoint union to note that if $x\in X\times I\subseteq Y\amalg (X\times I)$, then $x\in\im i_X$. Hence we obtain that the restriction obeys $\alpha|_{X\times I}=H$, and similarly for $Y$. By definition, $H(-,0)=h\circ f$ and $H(-,1)=z_0$; hence $H$ identifies $(x,1)\sim (x',1)$, and so must $\alpha$. It also defines $H(x,0)=(h\circ f)(x)$, and we also have that for each $f(x)\in Y$, the other side of the map is $h(f(x))$. Hence $f(x)\in Y$ is necessarily set equal to $(x,0)\in X\times I$. Finally, a based homotopy satisfies $H(x_0,-)=z_0$. Hence, there is a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	Y\amalg (X\times I)\ar[" \pi "', d] \ar[" \alpha ", r]  & Z \\
+	 Y\amalg (X\times I) /\tildesim \ar[" g "', dashed, ur] & 
+	\end{tikzcd}\]
+	by universality of quotient, inducing a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\times I\ar[" i "', d] \ar[" \pi\circ i ", dr]\ar[bend left, drr]   & \\
+	Y\amalg (X\times I)\ar[" \pi ", dashed, r] & Y\amalg (X\times I) /\tildesim \ar[" g ", dashed, r] & Z\\
+	Y\ar[" i ", u] \ar[" \pi\circ i "', ur] \ar[" h "', bend right, urr] &
+	\end{tikzcd}\]
+	Note that by $i^*$ we really mean postcomposition by the inclusion composed with the natural projection onto the quotient, so we obtain indeed that $h=g\circ i$.
+
+	For the converse, let $g : C_f \to Z$. We must show there is a homotopy $g\circ i\circ f\Rightarrow z_0$. We obtain immediately a map $g\circ \pi\circ i_X \eqqcolon H : X\times I \to Z$ given by composing along the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\times I\ar[" i_X "', d] \ar[" \pi \circ i_X ", dr]  &  &  \\
+	Y\amalg (X\times I)\ar[" \pi ", dashed, r]  & Y\amalg (X\times I) /\tildesim \ar[" g ", r] & Z \\
+	Y\ar[" i_Y ", u] \ar[" \pi \circ i_Y "', ur]  &  & 
+	\end{tikzcd}\]
+	By definition of $H$, we have that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		H(x,0) : (x,0)\ar[" i_X ", mapsto, r]  & (x,0)\ar[" \pi ", mapsto, r]  & (x,0)=f(x)\ar[" g ", mapsto, r] & g(f(x))=(g\circ i\circ f)(x),
+	\end{tikzcd}\]
+	and the fact that it respects $(x,1)\sim (x',1)$ makes $H(-,1)=z_0$. The last relation makes it a pointed homotopy. Thus, $g\circ f\circ i$ is null-homotopic, concluding the proof that the sequence is exact.
+\end{proof}
+
+Let $F : 3 \to \Top $ be the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X\ar[" f ", r]  & Y\ar[" g ", r]  & Z.
+\end{tikzcd}\]
+We naively might try to extend our above computations and note that the 1-truncation of the simplicial bar glues the mapping cylinders $Mf,Mg,Mgf$ along $X$, $Y$, and $Z$. However, the homotopy colimit should be homotopy equivalent to $Z$, which this is not. This is proof that the ``higher homotopies'' indeed are relevant. Since $N(3)$ is 2-skeletal, so is the bar. The non-degenerate 2-simplex glues $X\times \left| \Delta^2 \right| $ to the three cylinders. This simplifies as
+\[
+	(X\times I)\amalg (Y\times I)\amalg Z / \left\langle (x,1)\sim (f(x),0),(y,1)\sim g(y) \right\rangle 
+.\]
+We can inductively continue this, obtaining the \emph{mapping telescope} as the homotopy colimit of a sequence of spaces
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X_1\ar[r]  & X_2\ar[r]  & X_3\ar[r]  & \ldots 
+\end{tikzcd}\]
+We will compute this much later in the text.
+
+The homotopy colimit of the constant diagram at the terminal object is $B(*,\mathcal{D} ,*)$, which as we have seen already is the geometric realization of $N(\mathcal{D} )$. If $\mathcal{D} $ is a group, then
+\[
+	BG\coloneqq B(*,G,*)\cong B(*\otimes _GG,G,*)\cong *\otimes _GB(G,G,*)\cong \varinjlim _GEG
+\]
+is the \emph{classifying space} of $G$. More generally, $B(*,\mathcal{D} ,*)$ is the \emph{classifying space} of the category $\mathcal{D} $. This gives a concrete model for $BG$ as a CW complex.
+
+\section{Sample homotopy limits}
+
+Homotopy limits are more tricky, so we will dualize some of our previous examples. Somehow I missed the following example while reading. Let $X_\alpha$ denote a collection of objects in a simplicial model category $\mathcal{M} $ indexed by $I$. The nerve $N(I)$ is 0-skeletal since $I$ is discrete, so the homotopy limit is simply the geometric realization of the 0-simplex
+\[
+	\holim X\cong \int_{0\in \left\{ 0 \right\} } \Delta^0 \otimes  C^0(*,I,R(X))= \varprojlim \left(0\mapsto \prod_{\alpha\in I} R(X_\alpha)\right)=\prod_{\alpha\in I} R(X_\alpha)
+.\]
+Here we note that $\Delta_{\leq 0} =\left\{ 0 \right\} $ is discrete, so the end over it is the same as the limit; $\Delta^0$ is the unit for the monoidal product in $\sSet$, and is thus the unit for the tensor product in $\mathcal{M} $; thus the functor described by the end is precisely the map of 0 to the 0-simplex of the cosimplicial object, and thus the limit over it is just the product over one element, aka that element. Either by the same argument, or by duality, the homotopy colimit is the coproduct over $Q(X_\alpha)$. Note that in $\Top $ we may drop the $R$ and $Q$ up to weak equivalence. The main idea of a homotopy limit is to be a limit up to weak equivalence, so this is fine.
+
+First, let $f : 2 \to \Top $ be the same functor as our oroginal functor. The homotopy limit $\holim f$ is the \emph{mapping path space}. By the dual of \cref{lma:4.2}, since the nerve of 2 is 1-skeletal we need only compute the totalization of the 1-truncated cosimplicial object
+\[
+	C^0=X\times Y,\qquad C^1=X\times Y\times Y
+.\]
+We write $Y^X$ to denote the topologically enriched set $\underline{\Top } (X,Y)$ for asthetics. Recall that the cotensor is given as
+\[
+	K\pitchfork X \coloneqq X^{\left| K \right| } 
+.\]
+Note that even though $\Top $ is simplicially enriched, the change of base means the cotensor is given by the topologically enriched hom, since we need an object of $\Top $ as the input. Hence, the cotensor $\Delta^1\pitchfork X$ is the $k$-ification of the path space $X^I$ of $X$. Since $(-)^I$ is right adjoint, it distributes over products. We thus need to take the limit over the diagram (here recall we are precomposing and postcomposing where possible, not necessarily expressing the simplicial structure)
+\[\begin{tikzcd}
+	{X\times Y\times Y} &&& {X^I\times Y^I} \\
+	\\
+	{X^I\times Y^I\times Y^I} &&& {X\times Y}
+	\arrow["{d^1}", shift left, from=3-1, to=1-1]
+	\arrow["{d^0}"', shift right, from=3-1, to=1-1]
+	\arrow["{s^0}"', from=3-1, to=1-4]
+	\arrow["{d^1}", shift left, from=3-4, to=1-1]
+	\arrow["{d^0}"', shift right, from=3-4, to=1-1]
+	\arrow["{s^0}"', from=3-4, to=1-4]
+\end{tikzcd}\]
+The book uses the fact that limits commute to pull back along degeneracies to obtain that we need to compute the limit over
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X\times Y\ar[" d^0 ", shift left, r] \ar[" d^1 "', shift right, r]  & X\times Y\times Y & X\times Y^I\times Y\ar[" d^1 ", shift left, l] \ar[" d^0 "', shift right, l] .
+\end{tikzcd}\]
+I don't really understand, but I'm sure I could work through equalizing by quotienting out pointwise. I choose not to care. The action of $d^0: X\times Y \to X\times Y\times Y$ is obvious, and the other face map evaluates each path in $Y^I$ at the endpoint. So by the interchange of limits we take the limit over just those arrows, which identifies $X\times Y$ with $X\times Y^I$. The limitting diagram is now simply a pullback, so we end up with the pullback square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\holim f\cong Nf\ar[r] \ar[d]  & Y^I \ar[" d^1=\mathrm{ev}_0 ", d]  \\
+X\ar[" d^1=f "', r]  & Y
+\end{tikzcd}\]
+which defines the mapping path space $Nf$.
+
+Now consider the diagram $p,q : * \to X$ in $\Top $. If $p\neq q$, the limit is empty, and if $p=q$ it is the singleton. Denote by $F : \mathcal{D}  \to \Top $ the diagram. The nerve $N(\mathcal{D} )$ is 1-skeletal, so the homotopy limit will be a subspace of $C^0\times (C^1)^{\Delta^1} $. We use subscripts to denote which objects are indexed by which arrows. We have
+\[
+	C^0=*\times X,\qquad (C^1)^{\Delta^1} =*_0^{\Delta^1} \times X_p^{\Delta^1} \times X_q^{\Delta^1} \times X_1^{\Delta^1}
+.\]
+Recall the cotensor $X^K$ is the $k$-ification of the topological space $\underline{\Top } (\left| K \right| ,X)$. The image of $s^0 : C^1 \to C^0$ is going to be given by sending an object to its domain\footnote{Referenced Mac Lane here. Recall limits via products and equalizers is the equalizer of: the projections (hence the identities) of the product onto each codomain, indexed by the number of arrows with that codomain; and the projections onto each domain, followed by the functor evaluated at that arrow.}, aka $X$, so its image is $X$. The image of $s^0 : C^1 \to (C^1)^{\Delta^1} $ is given by precomposition, hence we obtain that the image is just the constant path spaces. Since we are consdiering the \emph{equalizer}, we need to identify \emph{preimages}. Hence we identify constant paths in $X_1^I$ with objects in $X\cong C^0$. Also getting rid of the singleton $*^I\cong *$ in the product, we obtain the intermediate step
+\[
+	X\times X_p^I \times X_q^I
+.\]
+OMG FINALLY i was stuck on this for a while cuz i kept trying to quotient the IMAGES, and only put 2 and 2 together when I finally realized the codomains werent even in the main product!!!!!
+
+To continue the computation, we note that the cofaces $d^1$ will map $X\to X_p\times X_q\times X_1$ by $x\mapsto (p,q,x)$ since it is mapping onto the domain of the relevant arrow and evaluating $F$, and $p,q$ pick out points $p,q\in X$. Since $d^1 : X_p^I \times X_q^I \times X_1^I \to X_p\times X_q\times X_1$ will be given by precomposition by $d^1$, hence evaluating paths at 0, we obtain that we must identify the paths which start at $p$ and the paths which start at $q$ with their path in $(C^1)^{\Delta^1} $. The \emph{set of paths in $Z$ that take value $z$ when evaluated at $r$} admits a description as a pullback; the relevant one here is
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Gamma(X,p)\ar[r] \ar[d]  & *\ar[" p ", d]  \\
+X^{\Delta^1} \ar[" d^1=\mathrm{ev} _0 "', r]  & X,
+\end{tikzcd}\]
+and the same for $\Gamma(X,q)$. Hence we can replace the spaces $X^{\Delta^1}_p$ and $X^{\Delta^1} _q$ in the product with these spaces:
+\[
+	\Gamma(X,p)\times \Gamma(X,q)\times X
+.\]
+Now we finally only need to consider the limit condition of $d^0$. Evaluating as $d^0 : C^0 \to C^1$ is simply the codomain and applying the functor, we obtain the diagonal map $x\mapsto (x,x,x)$. The other $d^1$, to no suprise to anyone, is evaluation at $0$. Hence we are identifying all paths in $\Gamma(X,p),\Gamma(X,q)$ with a point in $x$, getting rid of the extra term in $X$. In particular, we also identify paths in these two path-spaces which have coenciding endpoints. This is apparently homeomorphic to the subspace of $X^{I} $ of paths from $p$ to $q$ in $X$. If $p=q$, then this becomes the loop space $\Omega(X,p)$.
+
+\begin{exercise}
+	Dualize the notion of a homotopy pushforward to show that the homotopy limit of $p : Y \to X$ and $q : Z \to X$ is the subspace of $X^I \times Y\times Z$ of triples $(f,y,z)$ with $p(y)=f(0)$ and $q(z)=f(1)$. This is the \emph{homotopy pullback}.
+\end{exercise}
+\begin{proof}
+	Let $F : \mathcal{D}  \to \Top $ denote this diagram. At this point it is obvious that the cobar will be 1-skeletal, and we should compute it as we have done previously. I don't know what to call the elements of the sets of the cosimplicial objects, so for now I will call them $n$-cosimplicies. Maybe Goerss and Jardine will have something, I'll look later.
+
+	We compute the $0$- and $1$-cosimplicies (note here we are taking $F$ of the \emph{end} of the composable string):
+	\[
+		C^0(*,\mathcal{D} ,F)^{\Delta^0} =Y\times X\times Z,\qquad C^1(*,\mathcal{D} ,F)^{\Delta^1}=X_0^I \times Y_1^I \times Z_2^I \times X_p^I \times X_q^I
+	.\]
+	Here we keep indexing notation consistent with above for the 1-cosimplex. Since this is an end, and not a coend, the relevant arrows are flipped. Also note that since the cotensor is \emph{contravariant} in its first argument $-\pitchfork-: \boldsymbol{\Delta}^{\mathrm{op}} \times \boldsymbol{\Delta}  \to \Top $, the fact that both Yoneda and cosimplicial objects are covariant is fine. The contravariance of cotensor also flips the directions of the cosimplicial operators in the Yoneda embedding, so this gives us that we must compute the limit over
+\[\begin{tikzcd}
+	{X^I\times Y^I\times Z^I} && {X_0\times Y_1\times Z_2 \times X_p \times X_q} \\
+	\\
+	{X\times Y\times Z} && {X_0^I \times Y_1^I \times Z_2^I \times X_p^I \times X_q^I}
+	\arrow["{s_0}", from=3-1, to=1-1]
+	\arrow["{d^0}", shift left, from=3-1, to=1-3]
+	\arrow["{d^1}"', shift right, from=3-1, to=1-3]
+	\arrow["{s^0}"', from=3-3, to=1-1]
+	\arrow["{d_0}", shift left, from=3-3, to=1-3]
+	\arrow["{d_1}"', shift right, from=3-3, to=1-3]
+\end{tikzcd}\]
+This finally puts some intuition to the arrows we've been using. Recall from how ends are defined that the cosimplicial operators with ``covariance'' are really $f^{(-)} $, for $f$ the original simplicial operator; conversely the ones with the opposite variance are $(-)^f$.
+
+One more note. Quotients are initial. They don't work for equalizers. The dual to that is basically only taking the points that agree and getting rid of the rest, and treating that as a subspace. Now that I finally have SOME intuition for what's happening with homotopy limits, let me write this down somewhere then we'll begin the computation.
+
+Okay let's start with the degeneracies. We start by understanding the contravariant version. The Yoneda embedding of $s^0$ is postcomposition $f\mapsto s^0\circ f$, which defines an arrow $\Delta^1\to\Delta^0$. The cotensor makes this an arrow $\Top (\Delta^0,-)\to\Top(\Delta^1,-)$ by the enriched Yoneda embedding, given by precomposing by postcomposition. Hence, for $g : \Delta^0 \to X$, we have $s_0(g)=g\circ s^0 : \Delta^1 \to X$. The action of $s_0$ turns arrows $[n]\to [1]$ into arrows $[n]\to [0]$, allowing $g$ to act on them.
+
+Now we can compute the image of this degeneracy. Using this intuition, an arrow in $X^*$ is a point, and the degeneracy collapses $I$ to this point. Hence, it represents a constant path, so $s_0$ maps points in $X\times Y\times Z$ to the constant paths at those points.
+
+Now let's look at the codegeneracy, which is more simple. The action of this one follows from its action in the nerve. See my personal notes for understanding more precisely how this works, but to summarize we basically project along precisely those entries in the product which are indexed by $s_0(x)$ for $x$ some 0-simplex in $N(\mathcal{D} )$. This, of course, is precisely the identity arrows, so we project along those objects indexed by identities, dropping $X_p$ and $X_q$. Thus, the image of a triple of paths $(\gamma_X^1,\gamma_Y,\gamma_Z,\gamma_X^2,\gamma_X^3)$ is the first three paths.
+
+We obtain that the images only agree when the first three paths are constant. Thus we only keep tuples $(x,y,z,\gamma_X^1,\gamma_Y,\gamma_Z,\gamma_X^2,\gamma_X^3)$ for which the paths $\gamma_X^1,\gamma_Y,\gamma_Z$ are constant at $x$, $y$, and $z$. This is equivalent to replacing the path spaces with $X\times Y\times Z$ and requiring that we only keep tuples of the form $(x,y,z,x,y,z,\gamma_X^2,\gamma_X^3)$, which reduces to
+\[
+	X\times Y\times Z\times X_p^I\times X_q^I
+.\]
+
+Now we consider the cofaces. Since both are outer cofaces, they do not admit descriptions as simple as the codegeneracy. Again, see my personal notes for a more precise description, but we note that for each $1$-simplex in $N(\mathcal{D} )$, the map $d_0\to d_1$ induces $F(d_n)^{G(d_1)} \to F(d_n)^{G(d_0)} $ by cotensoring with 1. We regard $d_1$ as a 0-simplex, and thus we have that to each $1$-simplex there is an arrow from a 0-simplex. Note that all these arrows are identities since $G=*$, and the actual arrow in the 1-simplex only serves to reindex. So we assemble these arrows into a map $d^0 : C^0 \to C^1$ by universality of product. Explicitly, this is the map $(x,y,z)\mapsto (x,y,z,x,x)$.
+
+The other coface admits a similar description, but we take the arrow $d_0 \to d_1$ through $F$ instead of $G$. More explicitly, we obtain an arrow $F(d_0)\to F(d_1)$ by taking $F$ of the arrow in the 1-simplex. We regard $d_0$ as a 0-simplex, and note that this defines a map to each $1$-simplex. Universality of product assembles these into an arrow $d^1 : C^0 \to C^1$ by composing along the relevant arrow; since the only non-identity arrows are $p$ and $q$, we obtain the map $(x,y,z)\mapsto (x,y,z,p(y),q(z))$.
+
+Now we describe the faces. These admit fairly trivial descriptions; $d_0$ evaluates the path at $1$ and $d_1$ evaluates at $0$. The identification on $X_0^I,Y_1^I,Z_2^I$ is less powerful than the identification we already had, since it only identifies paths with their beginning and end; we have already only taken constant paths so that is already done. The more interesting identification is in the path spaces $X_p^I$ and $X_q^I$. The definition of $d^0$ and $d^1$ says that any pair of paths $(\gamma_p,\gamma_q)$ must share a beginning $x$, and the endpoint of $\gamma_p$ must be $p(y)$, and similarly for $\gamma_q(1)=q(z)$, where $(x,y,z)$ are in the same tuple.
+
+Thus we may reduce our space to tuples $(x,y,z,\gamma_p,\gamma_q)$ satisfying $\gamma_p(0)=\gamma_q(0)=x$, $\gamma_p(1)=p(y)$, and $\gamma_q(1)=q(z)$. The source $x$ is stored in the datum of the paths, so we may drop the $X$ component of the product up to homeomorphism. We then run $\gamma_p$ in reverse and concatenate with $\gamma_q$ to obtain a homotopy equivalence to the space given in the problem: a subspace of $X^I\times Y\times Z$ where $f$ is a path from $p(y)$ to $q(z)$. Since homotopy (co)limits are unique up to weak equivalence, this concludes the proof.
+\end{proof}
+
+\begin{remark}
+	I spent multiple days on the above proof. I realized I did not actually understand the simplicial operators in the bar and cobar, and had trouble finding an \emph{accessible} resource that told me how they actually worked in full detail. Eventually I got tired of looking, took the book's sparse commentary on how they worked, and wrote out in full detail in a separate document how they work. In retrospect I should have done this last week. The document is somewhere on my Github.
+\end{remark}
+
+\begin{lemma}\label{lma:6.3}
+	Let $F : \mathcal{D}  \to \mathcal{M} _*$ be a diagram, with $\mathcal{M} $ either $\sSet$ or $\Top $. Then the underlying space of the homotopy limit of $F$ is the homotopy limit of the composite of $F$ with the forgetful functor $\mathcal{M} _*\to \mathcal{M} $.
+\end{lemma}
+\begin{proof}
+	ANOTHER one left to the reader. I'm going to assume the fact that $\left| - \right| \dashv S$ is a Quillen equivalence implies that I only have to prove it for $\Top $; if this turns out to be wrong once I learn about Quillen equivalences then oh well. I'm also going to assume right Quillen functors preserve homotopy limits, since that sounds about right. One then needs to show only that $(-)_+\dashv U$ is a Quillen adjunction, which I don't feel like proving but it sounds correct.
+\end{proof}
+
+One final example, Let $X : G \to \Top $ be a $G$-space, and denote by $X^G$ the space of fixed points. This space is precisely the limit of $X$. The \emph{homotopy} limit is the \emph{homotopy fixed point} space $X^{hG} $ computed by $\underline{\Top }  ^G(EG,X)$. Precomposition with the contraction homotopy $EG\to *$ gives a map $X^G\to X^{hG} $, which is not generally an equivalence.
+
+\section{Homotopy colimits as weighted colimits}
+
+\begin{theorem}\label{thm:6.4}
+	Let $F : \mathcal{D}  \to \mathcal{M} $ be any diagram in a complete and cocomplete, tensored, cotensored, simplicially enriched category $\mathcal{M} $. Then there are natural isomorphisms
+	\[
+		B(*,\mathcal{D} ,F)\cong N(-\downarrow \mathcal{D} )\otimes _\mathcal{D} F,\qquad C(*,\mathcal{D} ,F)\cong N(\mathcal{D} \downarrow -)\pitchfork_\mathcal{D} F
+	.\]
+	In particular, homotopy colimits between pointwise cofibrant diagrams may be computed as the above functor tensor product, and dually for limits.
+\end{theorem}
+\begin{proof}
+	The Yoneda lemma $\mathcal{D} ^{\mathrm{op}} \to \sSet^{\mathcal{D} } $ is a functor taking values in discrete simplicial sets, since $\mathcal{D} $ is not enriched. By an exercise I already did, $B_{\bullet} (*,\mathcal{D} ,\mathcal{D} )$ is $N(-\downarrow \mathcal{D} )$. The coYoneda lemma gives that  $B(*,\mathcal{D} ,\mathcal{D} )\cong N(-\downarrow \mathcal{D} )$, and we conclude by
+	\[
+		N(-\downarrow \mathcal{D} )\otimes_\mathcal{D} F\cong B(*,\mathcal{D} ,\mathcal{D} )\otimes _\mathcal{D} F\cong B(*,\mathcal{D} ,\mathcal{D} \otimes _\mathcal{D} F)\cong B(*,\mathcal{D} ,F)
+	.\]
+\end{proof}
+
+The book offers details further how the theorem is proven. Luckily I worked through all of this myself a long time ago because I didn't trust the steps the book took to prove this, so I already know how it goes. Instead I jump forward to the following interesting application.
+
+Let $X : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \sSet$ be a bisimplicial set. Then $\hocolim X \cong N(\boldsymbol{\Delta} \downarrow -)^{\mathrm{op}} \otimes_{\boldsymbol{\Delta} ^{\mathrm{op}} } X$ since $d\downarrow \mathcal{D} ^{\mathrm{op}} \cong (\mathcal{D} \downarrow d)^{\mathrm{op}} $. There is a canonical weak equivalence of simplicial sets $\hocolim X \simeq \left| X \right| $, although in general the homotopy colimit is larger than the geometric realization. This chapter is almost done I don't have the time to work through the proofs because I've been procrastinating for like a week so here are the remaining few results so I can jump forward to model cats.
+
+\begin{theorem}\label{thm:6.5}
+	Let $F : \mathcal{D}  \to \sSet_*$ be a diagram and let $U : \sSet_* \to \sSet$ be the forgetful functor. Then there is a sequence of cofibrations
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		B(*,\mathcal{D} ,*)\ar[r]  & \hocolim UF\ar[r]  & U\hocolim F.
+	\end{tikzcd}\]
+	Similarly, if $F : \mathcal{D}  \to \Top _*$ with non-degenerately based spaces, then we have the same cofiber sequence.
+\end{theorem}
+\begin{theorem}\label{thm:6.6}
+	Let $F : \mathcal{D}  \to \Top _*$ be a diagram and let $U : \Top _* \to \Top $ be the forgetful functor. There is a pushout in $\Top $
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	N(-\downarrow \mathcal{D} )\otimes _\mathcal{D} *\ar[r] \ar[d] & N(-\downarrow \mathcal{D} )\otimes _\mathcal{D} UF\ar[d] \\
+	*\ar[r]  & U(N(-\downarrow \mathcal{D} )\otimes _\mathcal{D} F)
+	\end{tikzcd}\]
+\end{theorem}
+
+This theorem asserts that homotopy (co)limits are special cases of \emph{weighted (co)limits}, when we do not need to worry about fibrant and cofibrant replacements. The book is about to introduce them, but I am going to skip forward to model categories and come back later.

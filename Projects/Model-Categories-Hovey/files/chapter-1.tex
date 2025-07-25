@@ -1,0 +1,378 @@
+\chapter{Model Categories (Hovey 1)}
+
+We begin with an initial exploration of model categories following Hovey's more classical perspective, which builds atop that of Quillen. What Quillen originally described as \emph{closed} model categories have been determined to be the more important class of examples, so they have come to be known as model categories in the modern literature. The goal is to provide for a homotopical category some extra structure, in the form of specified classes of morphisms known as fibrations and cofibrations, to make the homotopy category better behaved and less difficult to work with.
+
+Conventions vary mildly on model categorical definitions. Hovey states that we will require functorial factorizations be part of the structure of a model category, which more classical texts did not. I do not yet know Riehl's perspective on this, but either way this distinction, and others like it, are immaterial since in practice all relevant model categories satisfy all definitions.
+
+\section{The definition of a model category}
+
+Given a category $\mathcal{C} $, define by $\Map \mathcal{C} $ the category whose objects are morphisms in $\mathcal{C} $, and whose morphisms are commutative squares; meaning for objects $f : a \to b$ and $g : c \to d$, a morphism $f\to g$ is a pair $(h,k)$ such that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+a\ar[" f "', d] \ar[" h ", r]  & c\ar[" g ", d]  \\
+b \ar[" k "', r]  & d
+\end{tikzcd}\]
+commutes. One also notes that this is equivalent to the comma category $\Map \mathcal{C} =(\mathcal{C} \downarrow \mathcal{C} )$. The operations of domain and codomain promote to functors $\operatorname{dom} ,\operatorname{cod} : \Map \mathcal{C}  \to \mathcal{C} $, defined by $f\mapsto \operatorname{dom} f$ and $(h,k)\mapsto h$; this works because $h : \operatorname{dom} f \to \operatorname{dom} g$. Codomain is defined similarly. The fact that this is functorial is a subtle yet important nuance in the following definition:
+
+\begin{definition}[Retract/Functorial Factorization]\label{1.1.1}
+	Let $\mathcal{C} $ be a category. A map $f : a \to b$ in $\mathcal{C} $ is a \emph{retract} of a map $g : c \to d$ in $\mathcal{C} $ if $f$ is a retract of $g$ as objects of $\Map \mathcal{C} $. More precisely, $f$ is a retract of $g$ if there is a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\ar[" f "', d] \ar[" 1 ", bend left, rr] \ar[r]  & c\ar[" g "', d] \ar[r]  & a\ar[" f ", d]  \\
+	b \ar[" 1 "', bend right, rr] \ar[r]  & d \ar[r]  & b
+	\end{tikzcd}\]
+	
+	A \emph{functorial factorization} is a pair $(\alpha,\beta)$ of endofunctors $\Map \mathcal{C} \to \Map \mathcal{C} $ such that $f=\beta(f)\circ \alpha(f)$ for all $f\in \Map \mathcal{C} $, and also such that
+	\begin{itemize}
+		\item $\operatorname{dom} \circ \alpha = \operatorname{dom} $;
+		\item $\operatorname{cod} \circ \alpha = \operatorname{dom} \circ \beta$;
+		\item $\operatorname{cod} \circ \beta=\operatorname{cod} $.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}\label{1.1.2}
+	Further commentary on the definition of a functorial factorization is beneficial. Note first that the composition $\beta(f)\circ \alpha(f)$ is composition in $\mathcal{C} $, since $f$ is an object of $\Map \mathcal{C} $. We thus obtain the following remarks from this definition:
+	\begin{enumerate}
+		\item Every arrow $f$ admits a factorization into two components, denoted as $\beta(f)$ and $\alpha(f)$;
+		\item If one only considers the action of dom and cod on objects, the information in the three bullet points is not anything more powerful than the condition that $\beta(f)\circ \alpha(f)$ be well-defined. However, when once considers the action on morphisms, we obtain that for a morphism $(h,k): f \to g$ in $\Map \mathcal{C} $,
+			\[
+				\alpha(k)=(\operatorname{cod} \circ \alpha)(h,k)=(\operatorname{dom} \circ \beta)(h,k)=\beta(h)
+			.\]
+			Here I use a minor abuse of notation and denote by $\alpha(k)$ the arrow $(\operatorname{dom} \circ \alpha)(h,k)$that replaces $k$ in the square diagram, and similarly for $\beta(h)$. We also obtain that $\alpha(h)=h$ and $\beta(k)=k$. Thus the diagrams
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			a\ar[" \alpha(f) "', d] \ar[" h ", r]  & c\ar[" \alpha(g) "', d]  & a\ar[" \beta(f) ", d] \ar[" \beta(h) ", r]  & c\ar[" \beta(g) ", d] \\
+			b \ar[" \alpha(k) "', r] & d & b \ar[" k "', r] & d
+			\end{tikzcd}\]
+			glue together to form the diagram
+			\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+			a\ar[" h ", r] \ar[" \alpha(f) ", d] \ar[" f "', bend right, dd]  & b \ar[" \alpha(g) "', d] \ar[" g ", bend left, dd]  \\
+			e_f \ar[" \alpha(k)=\beta(f) ", r] \ar[" \beta(f) ", d]  & e_g \ar[" \beta(g) "', d]  \\
+			b \ar[" k "', r] & d
+			\end{tikzcd}\]
+		\item By the above diagram, functorial factorizatrions preserve retracts;
+		\item Note also that if
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			f\ar[" \phi ", r]  & g\ar[" \psi ", r]  & f
+			\end{tikzcd}\]
+			is a retract, then $\psi\circ \phi=1$, and thus $\phi$ is mono and $\psi$ is epi.
+	\end{enumerate}
+	Also note that the definition as given in Hovey does not make precise that domain and codomain should be viewed as functors; this is clarified in an errata that can be found \href{https://ncatlab.org/nlab/files/Hovey-ModelCategories-Errata.pdf}{on the $n$Lab.}
+\end{remark}
+
+\begin{definition}[Lifting Property]\label{1.1.3}
+	Let $i : a \to b$ and $p : x \to y$ be maps in $\mathcal{C} $. Then $i$ has the \emph{left lifting property with respect to} $p$ and $p$ has the \emph{right lifting property with respect to} $i$ if, for every commutative diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\ar[" f ", r] \ar[" i "', d]  & x\ar[" p ", d]  \\
+	b \ar[" g "', r] \ar[" h ", dotted, ur]  & y
+	\end{tikzcd}\]
+	there exists a dotted arrow as indicated rendering the diagram commutative.
+\end{definition}
+
+\begin{remark}\label{1.1.4}
+	Note that the diagram of solid arrows is the datum of a morphism $(f,g): i \to p$ in $\Map \mathcal{C} $; a lift $h$ can then be viewed as an arrow in $\mathcal{C} $ such that $(f,h): i \to 1_x$ and $(h,g): 1_b \to p$.
+\end{remark}
+
+\begin{definition}[Model Structure]\label{1.1.5}
+	A \emph{model structure} on a category $\mathcal{C} $ is three \emph{subcategories} of $\mathcal{C} $ called the weak equivalences, fibrations, and cofibrations, together with two functorial factorizations $(\alpha,\beta)$ and $(\gamma,\delta)$ satisfying the following properties:
+	\begin{enumerate}
+		\item (2-out-of-3) If $f,g$ are composable arrows in $\mathcal{C} $ such that two of $f$, $g$, and $gf$ are weak equivalences, then so is the third;
+		\item (Retracts) If $f,g$ are morphisms in $\mathcal{C} $ such that $f$ is a retract of $g$ and $g$ is either weak equivalence, fibration, or cofibration, then so is $f$;
+		\item (Lifting) A map is an \emph{trivial cofibration} if it is both a cofibration and a weak equivalence, and the same for \emph{trivial fibrations}. Then trivial cofibrations have the left lifitng property with respect to fibrations, and cofibrations have the left lifting property with respect to trivial fibrations;
+		\item (Factorization) For any morphism $f$, $\alpha(f)$ is a cofibration, $\beta(f)$ is a trivial fibration, $\gamma(f)$ is a trivial cofibration, and $\delta(f)$ is a fibration.
+	\end{enumerate}
+\end{definition}
+\begin{definition}[Model Category]\label{1.1.6}
+	A \emph{model category} $\mathcal{C} $ is a complete and cocomplete category with a specified model structure.
+\end{definition}
+
+\begin{remark}\label{1.1.7}
+	For the naive reader, note that referring to maps as \emph{weak equivalences}, \emph{fibrations}, or \emph{cofibrations} simply means that those maps are in the relevant subcategory of $\mathcal{C} $.
+
+	Of course, the intuition for weak equivalences is most easily viewed via homotopy equivalences. Given homotopy equivalences $f$ and $g$, one immediately has that $gf$ is a homotopy equivalence; conversely given $gf$ and $f$ homotopy equivalences, one may construct a homotopy inverse for $g$ making $g$ a homotopy equivalence, and the same for $f$. As we well know, the idea of formally inverting a specified class of morphisms is very prominent in mathematics, with the inversion of homotopy equivalences in $\Top $ closely tied to quotienting by homotopy, and the inversion of quasi-isomorphisms in $\Ch(\mathcal{A} )$ giving rise to the derived category $\mathcal{D} (\mathcal{A} )$, a central topic in homological algebra. Due to my lacking background in algebraic topology, I lack the natural intuition for what fibrations and cofibrations should be, which gives me an opportunity to develop a uniquely categorical intuition before I end up reading on algebraic topology.
+
+	With the 2-out-of-3 property thoroughly motivated, we give some more detailed explanation for the other properties.
+	\begin{itemize}
+		\item (Retracts) This property simply says that fibrations, cofibrations, and weak equivalences are closed under retracts.
+		\item (Lifting) It is not detailed thoroughly in this text, but for a collection $\mathcal{L}$ of maps to have the left lifting property against another collection $\mathcal{R} $ of maps, we must have that \emph{every} map in $\mathcal{L} $ has the left lifting property with respect to \emph{every} map in $\mathcal{R} $.
+		\item (Factorization) This property says that each map admits a factorization into a trivial cofibration and a fibration, and a cofibration and a trivial fibration, in the sense of \cref{1.1.1} and \cref{1.1.2}.
+	\end{itemize}
+\end{remark}
+
+\begin{remark}\label{1.1.8}
+	Emily Riehl in \emph{Categorical Homotopy Theory} requires that model categories satisfy a stronger 2-of-6 property, instead of the 2-out-of-3 property. It's proven in her text that in the case of model categories, these properties become equivalent; I will prove this when I read her discussion of model categories. The more important distinction she makes in her text is that the class of weak equivalences needs to be \emph{wide}, meaning it contains all objects. This is a simple way of saying it contains all identities, and thus by a very simple proof it contains all isomorphisms. Hovey does not specify this, but it would still make sense for a model category's class of weak equivalences to contain all isomorphisms. This is reconsiled by a result we will not see until later. The lifting axiom will later be shown to \emph{characterize} trivial (co)fibrations, meaning we will show maps are trivial cofibrations \emph{if and only if} they have the left lifting property with respect to fibrations, and similarly for the dual statement. Note that isomorphisms admit a lift for any diagram: let $f$ and $g$ be inverses. Then
+	\[\begin{tikzcd}[row sep = 1.5em, column sep = 1.5em]
+	x\ar[" f "', dd] \ar[" h ", rr]  &  & a\ar[" p ", dd]  \\
+	 & x \ar[" h ", dotted, ur]  &  \\
+	y \ar[" g ", dotted, ur] \ar[" k "', rr]  &  & b
+	\end{tikzcd}\]
+	commutes, since $hgf=h$ gives the commutivity of the top triangle, and since the outer square commutes by hypothesis, $kf=ph \implies k=phg$ as required for the bottom triangle. Thus $f$ has the left lifting property against all arrows; in particular fibrations. Thus $f$, as will be shown in \cref{1.1.18}, must be a trivial cofibration, and thus it is by definition a weak equivalence.
+\end{remark}
+
+We assume small limits and colimits exist largely for convenience, since most model categories in practice admit all small limits. This differs from Quillen's original requirement that only finite limits exist. We also assume the stronger convention that factorizations be functorial, since once again they generally are in practice. We also assume the functorial factorizations are \emph{part of the structure}, which is a subtle difference and ensures that some maps will be natural going forward. We always leave the model structure implicit and refer to a model category $\mathcal{C} $, because oh my god can you imagine having to write out like $(\mathcal{C} ,(\alpha,\beta),(\gamma,\delta),\mathcal{F} ,\mathcal{Q} ,\mathcal{W} )$ every time you wanted to refer to a model category? That would be so aids lmfao
+
+\begin{example}\label{1.1.9}
+	Any complete and cocomplete category $\mathcal{C} $ can be given three different model structures by choosing one of the subcategories to be isomorphisms, and the other two subcategories to be all of $\mathcal{C} $. The only nontrivial things to be shown are that
+	\begin{enumerate}
+		\item retracts of isomorphisms are isomorphisms;
+		\item the lifting axiom holds;
+		\item functorial factorizations admit a definition.
+	\end{enumerate}
+	Proving (1) is not incredibly difficult. Let $g : x \to y$ be an isomorphism, and let $f : a \to b$ be a retract of $g$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" h ", r] \ar[" f "', d]  & x \ar[" h' ", r] \ar[" g "', d]  & a \ar[" f ", d]  \\
+	b \ar[" k "', r]  & y \ar[" k' "', r]  & b
+	\end{tikzcd}\]
+	By commutivity of the diagram, we have that $k'g=fh'$, and thus $k'=fh'g^{-1} $. We thus construct the diagram
+	\[\begin{tikzcd}[row sep = 3em, column sep = 3em]
+	a \ar[" h ", r] \ar[" f "', d]  & x \ar[" h' ", r] \ar[" g "', d]  & a \ar[" f ", d]  \\
+	b \ar[" k "', r] \ar[" g^{-1} k "', dr] & y \ar[" k' "', r] \ar[" g^{-1}  "', d]  & b\\
+	& x \ar[" fh' "', ur] 
+	\end{tikzcd}\]
+	Since the composition along the lower row is the identity, we obtain that $fh'g^{-1} k=1$, and thus $h'g^{-1} k$ is a right inverse for $f$. Showing that it is a left inverse is more simple; by commutivity of the left square we have
+	\[
+		gh=kf \implies h=g^{-1} kf \implies 1=h'g^{-1} kf,
+	\]
+	where we have used the fact that $h'h=1$. Thus, we have constructed a two-sided inverse for $f$, and $f$ must be an isomorphism.
+
+	Now we prove (2) for each case. We will show extremely soon that model categories are dualizable, so we need only show it for one of the cofibrations or fibrations.
+	\begin{enumerate}
+		\item Start by taking weak equivalences to be precisely isomorphisms. Thus trivial cofibrations and trivial fibrations are precisely isomorphisms, which we showed in \cref{1.1.8} to have the left lifting property with respect to all maps; the same proof shows they have the right lifting property as well (with notation as in the problem, the diagonal arrow is $gk$. Thus trivial (co)fibrations have the left \emph{and} right lifting properties with respect to all maps, and thus (co)fibrations. This proves the statement.
+		\item Now take cofibrations to be isomorphisms. All arrows are trivial fibrations, and all cofibrations are trivial cofibrations. Since trivial cofibrations are in particular isomorphisms, they have the left lifting property with respect to all maps, and thus fibrations. Note also that all cofibrations are isomorphisms, and thus have the left lifting property with respect to all maps, in particular trivial fibrations.
+	\end{enumerate}
+	
+	Now we prove (3). We once again work case-by-case.
+	\begin{enumerate}
+		\item Take weak equivalences to be isomorphisms. Then one defines $\alpha(f)=f$ and $\beta(f)=1_{\operatorname{cod} f} $, similarly $\gamma(f)=1_{\operatorname{dom} f} $ and $\delta(f)=f$. The functorial factorization condition forces the action on a morphism $(h,k): f \to g$ to satisfy
+			\[
+				(\operatorname{dom} \circ \alpha)(h,k)=(\operatorname{dom} \circ \gamma)(h,k)=h,\qquad (\operatorname{cod} \circ \beta)(h,k)=(\operatorname{cod} \circ \delta)(h,k)=k
+			.\]
+			One defines $(\operatorname{cod} \circ \alpha)(h,k)=k$ and $(\operatorname{cod} \circ \gamma)(h,k)=h$, and the corresponding definition for $\beta,\delta$. This is indeed functorial, since all the factorization $(\alpha,\beta)$ does is attach a square to the bottom:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			x\ar[" f "', d] \ar[" h ", r]  & a\ar[" g ", d]  \\
+			y\ar[" 1 "', d] \ar[" k "', r]  & b \ar[" 1 ", d]  \\
+			y \ar[" k "', r]  & b
+			\end{tikzcd}\]
+			and similarly for $(\gamma,\delta)$. Note that in this case, we find that $\alpha,\delta$ are the identity and $\beta,\gamma$ can be described as the identity on the codomain.
+		\item I will not go into as much detail for this case since the proof is basically the same, but with some things switched around. Also because this stuff is kinda trivial. Let isomorphisms be cofibrations. Since identities are cofibrations, we decompose every map as itself composed with 1; this produces both functorial factorizations, since all cofibrations are trivial and all fibrations are trivial.
+	\end{enumerate}
+\end{example}
+
+\begin{example}[Product Model Structure]\label{1.1.10}
+	Let $\mathcal{C} $ and $\mathcal{D} $ be model categories. One defines the \emph{product model structure} on $\mathcal{C} \times \mathcal{D} $ by taking maps $(f,g)$ to be cofibrations (respectively fibrations, weak equivalences) if and only if both $f$ and $g$ are cofibrations (respectively fibrations, weak equivalences). The verification of all of the axioms is kind of trivial, since everything just decomposes into noting that the axioms hold in both categories, so it holds for the pairs by definition of the product category. The functorial factorizations are defined as the product; for example
+	\[
+		\alpha_\mathcal{C} \times \alpha_\mathcal{D} : \Map \mathcal{C} \times \Map \mathcal{D}  \to \Map \mathcal{C} \times \Map \mathcal{D} 
+	,\]
+	where we note that $\Map \mathcal{C} \times \Map \mathcal{D} \cong \Map (\mathcal{C} \times \mathcal{D} )$.
+\end{example}
+
+\begin{remark}\label{1.1.11}
+	Model category axioms are self-dual, meaning if $\mathcal{C} $ is a model category, $\mathcal{C} ^{\mathrm{op}} $ inherits a corresponding model structure by taking cofibrations in $\mathcal{C} ^{\mathrm{op}} $ to be fibrations in $\mathcal{C} $; fibrations in $\mathcal{C} ^{\mathrm{op}} $ to be cofibrations in $\mathcal{C} $; and weak equivalences stay the same. The functorial factorizations are inverted: denote by $(-)'$ the corresponding functor for $\mathcal{C} ^{\mathrm{op}} $. Then
+	\begin{itemize}
+		\item $\alpha' = \delta^{\mathrm{op}} $;
+		\item $\beta' = \gamma^{\mathrm{op}} $;
+		\item $\gamma'=\beta^{\mathrm{op}} $;
+		\item $\delta'=\alpha^{\mathrm{op}} $.
+	\end{itemize}
+	We denote by $D\mathcal{C} $ the opposite model category of $\mathcal{C} $ with this model structure, and call it the \emph{dual model category} of $\mathcal{C} $. Note that $D^2\mathcal{C} =\mathcal{C} $. Of course this means we need only prove a statement about cofibrations to prove the dual for fibrations, and vice versa.
+\end{remark}
+
+\begin{terminology}\label{trm:1.1.12}
+	Since model categories are complete and cocomplete, they have initial and terminal objects. We denote by $0$ the initial object, and $1$ or $*$ the terminal object. An object $x\in\mathcal{C} $ is \emph{cofibrant} if the arrow $0\to x$ is a cofibration, and is called \emph{fibrant} if the arrow $x\to *$ is a fibration. A model category is \emph{pointed} when the map $0\to *$ is an isomorphism.
+\end{terminology}
+
+\begin{construction}\label{1.1.13}
+	Let $\mathcal{C} $ be a model category. Define by $\mathcal{C} _*$ the category $(*\downarrow \mathcal{C} )$ under the terminal object. Recall this is the usual definition of a based category, as objects are arrows $f : *\to x$, which are intuitively though of as selecting a basepoint $f$ for $x$. Recall morphisms are basepoint-preserving maps, so maps $\varphi : (x,f) \to (y,g)$ such that $g=\varphi \circ f$.
+
+	Note the obvious functor $(-)_+ : \mathcal{C}  \to \mathcal{C} _*$ given by $x\mapsto x\amalg * \eqqcolon x_+$, with the obvious basepoint. This is clearly an adjunction $(-)_+ \dashv U$ for $U : \mathcal{C} _* \to \mathcal{C} $ the forgetful functor, and thus $(-)_+$ preserves colimits. Thus, $\mathcal{C} _*$ is cocomplete. One also shows fairly easily that $\mathcal{C} _*$ is complete with limits in $\mathcal{C} _*$ the same as the underlying object in $\mathcal{C} $. One typically denotes by $x\vee y$ the coproduct in $\mathcal{C} _*$, analogous to the wedge product in $\Top _*$.
+
+	We construct a model structure on $\mathcal{C} _*$ by defining maps $f$ in $\mathcal{C} _*$ to be cofibrations (fibrations, weak equivalences) precisely when the underlying function $U(f)$ is a cofibration (fibration, weak equivalence).
+\end{construction}
+\begin{proposition}\label{1.1.14}
+	With definitions as in \cref{1.1.13}, $\mathcal{C} _*$ is a model category.
+\end{proposition}
+\begin{proof}
+	This is really not a hard proof. Composition preserves the underlying function, so the 2-out-of-3 property holds. To show the subcategories are closed under retracts, we need only show that the underlying objects also form a retract. Indeed, this follows by functorality of the forgetful functor, so this follows. We will now consider the factorization axiom, and will come back to lifting.
+
+	We may lift the functorial factorizations to $\mathcal{C} _*$ mostly for free: the functorial factorization condition guarentees the domain of $\alpha(h,k)$ is $h$, the codomain of $\beta(h,k)$ is $k$, and given a morphism $f\to g$ in $\Map \mathcal{C}_*$ we would already have that these are basepoint preserving. The only work that needs to be done is to come up with a basepoint for $e_f$ and $e_g$, the midpoint of $\beta(f)\circ \alpha(f)$, such that the maps are basepoint preserving. The correct definition manifests from the following diagrams: an arrow $f : (x,u) \to (y,v)$ in $\mathcal{C} _*$ can be viewed as a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & x \ar[" f ", dd]  \\
+	*\ar[" u ", ur] \ar[" v "', dr]  &  \\
+	 & y
+	\end{tikzcd}\]
+	in $\mathcal{C} $. Since $\alpha$ and $\beta$ are a factorization in $\mathcal{C} $, we obtain the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & x \ar[" f ", dd] \ar[" \alpha(f) ", dr]  &  \\
+	* \ar[" u ", ur] \ar[" v "', dr]  &  & e_f \ar[" \beta(f) ", dl]  \\
+	 & y & 
+	\end{tikzcd}\]
+	in $\mathcal{C} $. Hence we may define the basepoint of $e_f$ as $\alpha(f)\circ u : * \to e_f$, and it holds manifestly that the relevant diagram in $\mathcal{C} _*$ commutes, since it commutes in $\mathcal{C} $. All one has to do in order to realize this is to draw the diagram with and without the endpoints, look at it for 10 seconds, say ``oh thats obvious'', and move on. The fact that these factor into cofibrations and trivial fibrations is immediate by the definition of the model structure. The definitions of $\gamma$ and $\delta$ follow in the same way.
+
+	Finally, we concern ourselves with the lifting properties. Suppose we have a lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(x,u)\ar[" p "', d] \ar[" \mu ", r]  & (a,w)\ar[" i ", d]  \\
+		(y,v)\ar[" \nu "', r]  & (b,z)
+	\end{tikzcd}\]
+	in $\mathcal{C} _*$, with $p$ a cofibration and $i$ a trivial fibration. Functoriality of $U$ gives the lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[" \mu ", r] \ar[" p "', d]  & a \ar[" i ", d]  \\
+	y \ar[" \nu  "', r] \ar[" h ", dotted, ur]  & b
+	\end{tikzcd}\]
+	with the solution $h$ as indicated, since $\mathcal{C} $ is a model category. Since the diagram without $h$ commutes in $\mathcal{C} _*$, the outer arrows are basepoint preserving, meaning the diagram
+	\[\begin{tikzcd}
+	& x && a \\
+	{*} \\
+	& y && b
+	\arrow["\mu"', from=1-2, to=1-4]
+	\arrow["p", from=1-2, to=3-2]
+	\arrow["i", from=1-4, to=3-4]
+	\arrow["u"', from=2-1, to=1-2]
+	\arrow["w", bend left=50, from=2-1, to=1-4]
+	\arrow["v", from=2-1, to=3-2]
+	\arrow["z"', bend right=50, from=2-1, to=3-4]
+	\arrow["h", dotted, from=3-2, to=1-4]
+	\arrow["\nu", from=3-2, to=3-4]
+\end{tikzcd}\]
+must also commute by basepoint preservation. To show that $h$ solves the lifting problem in $\mathcal{C} _*$, it suffices to show it preserves basepoints, since we already know the diagram will commute. Thus, we must show $hv=w$. This follows immediately from commutivity of the diagram. The dual statements for trivial cofibrations and fibrations once again follow from \cref{1.1.11}. Thus, $\mathcal{C} _*$ is a model category.
+\end{proof}
+
+\begin{remark}\label{1.1.15}
+	The proof of \cref{1.1.14} did not rely on the universality of $*$ at all, meaning one can generate for any object $a\in \mathcal{C} $ a model category structure on $\mathcal{C} _a \coloneqq (a\downarrow \mathcal{C} )$ via the same assignments. Dualizing this gives us that the category $(\mathcal{C} \downarrow a)$ is also a model category.
+\end{remark}
+
+\begin{remark}\label{1.1.16}
+	Note that for any object $x\in \mathcal{C} $, the unique arrow $f:0\to x$ decomposes as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[" \alpha(f) ", r]  & Q(x)\ar[" \beta(f) ", r]  & x,
+	\end{tikzcd}\]
+	where the reason for calling the in-between object $Q(x)$ will become clear soon. By \cref{1.1.5}, the arrow $\alpha(f)$ is a cofibration, so we have that the object $Q(x)$ is cofibrant. We thus obtain that the functor $Q=\operatorname{cod} \circ \alpha$ maps objects $x$ to \emph{cofibrant objects} $Q(x)$. We call $Q$ the \emph{cofibrant replacement functor} of $\mathcal{C} $. We also obtain a natural transformation $q : Q \Rightarrow 1_\mathcal{C} $ with components given by $q_x = \beta(0\to x)$, wherein each component is a trivial fibration. The fact that this is natural comes from the fact that the functorial factorization defines, for each $f : x \to y$, a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[equals, d] \ar[" \alpha(0\to x) ", r]  & Q(x)\ar[" \beta(0\to x) ", r] \ar[" \operatorname{cod} \alpha(1\text{,} f) "', d]  & x \ar[" f ", d]  \\
+	0 \ar[" \alpha(0\to y) "', r]  & Q(y) \ar[" \beta(0\to y) "', r]  & y
+	\end{tikzcd}\]
+	First note that the outside square commutes since $0$ is initial, and thus both inner squares commute since $(\alpha,\beta)$ is a functorial factorization. Note that $\operatorname{cod} \alpha(1,f)=Q(f)$, so the right square expresses the naturality condition as desired. Dually, we have that $\operatorname{dom} \circ \delta$ is an \emph{fibrant replacement}, usually denoted $R : \mathcal{C}  \to \mathcal{C} $, and there is a natural trivial cofibration\footnote{The terminology ``natural [class of map]'' means there is a natural transformation, and each component belongs to the specified type of map. These are also called ``pointwise [class of map] natural transformations''.} $r : 1_\mathcal{C}  \Rightarrow R$ with components given by $r_x = \gamma(0\to x)$.
+\end{remark}
+
+\begin{lemma}[The Retract Argument]\label{1.1.17}
+	Suppose one has the factorization $f=p\circ i$ in $\mathcal{C} $, and suppose that $f$ has the left lifting property with respect to $p$. Then $f$ is a retract of $i$. Dually, if $f$ has the right lifting property with respect to $i$, then $f$ is a retract of $p$.
+\end{lemma}
+\begin{proof}
+	Define the domains via
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" i ", r] \ar[" f ", bend left, rr]  & z \ar[" p ", r]  & y.
+	\end{tikzcd}\]
+	Suppose $f$ has the left lifting property with respect to $p$. Note that since $f=pi$, the following diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" f "', d] \ar[" i ", , r]  & z\ar[" p ", d]  \\
+	y \ar[equals, r] \ar[" r ", dotted, ur]  & y
+	\end{tikzcd}\]
+	commutes, and thus there is a dotted arrow $r$ as indicated rendering the diagram commutative. This expresses the equality $i=rf$, and thus the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[equals, r] \ar[" f "', d]  & x \ar[equals, r] \ar[" i "', d]  & x \ar[" f ", d]  \\
+	y \ar[" r "', r]  & z \ar[" p "', r]  & y
+	\end{tikzcd}\]
+	commutes, since the equality expressed by the square on the right is simply $f=pi$. Note also by the diagram that $pr=1$, and thus $f$ is a retract of $i$. The other argument follows by duality.
+\end{proof}
+
+\begin{lemma}\label{1.1.18}
+	Let $\mathcal{C} $ be a model category. Then a map is a (trivial) cofibration \emph{if and only if} it has the left lifting property with respect to all fibrations (trivial fibraitons). Dually, a map is a fibraiton (a trivial fibration) \emph{if and only if} it ha the right lifting property with respect to all trivial cofibrations (cofibrations).
+\end{lemma}
+\begin{proof}
+	The model category axioms guarentee that (trivial) cofibrations lift against fibrations (trivial fibrations), so we need only show the converse. Let $f$ have the left lifting property with respect to all trivial fibrations. Note that $f=\beta(f)\circ \alpha(f)$, and $\beta(f)$ is a trivial fibration. By assumption, $f$ thus has the left lifting property with respect to $\beta(f)$, and by \cref{1.1.17} $f$ is a retract of $\alpha(f)$. Since $\alpha(f)$ is a cofibration and cofibrations are closed under retracts, we have that $f$ is a cofibration.
+
+	Next, let $f$ have the left lifting property with respect to all fibrations, and note that $f=\delta(f)\circ \gamma(f)$, where $\delta(f)$ is a fibration. By assumption, $f$ has the left lifting property with respect to $\delta(f)$, and by \cref{1.1.17} $f$ is a retract of $\gamma(f)$. Since $\gamma(f)$ is a trivial cofibration, it is a weak equivalence and a cofibration, both of which are closed under retracts. Therefore, $f$ is a trivial cofibration. The other statements follow by duality.
+\end{proof}
+
+\begin{remark}\label{1.1.19}
+	This suffices to prove \cref{1.1.8}, in particular that all isomorphisms are weak equivalences. In particular, isomorphisms are trivial cofibrations \emph{and} trivial fibrations, since they have the retract argument against all maps (again, see \cref{1.1.8}).
+\end{remark}
+
+\begin{corollary}\label{1.1.20}
+	Let $\mathcal{C} $ be a model category. Then cofibrations (trivial cofibrations) are closed under pushouts in the sene that if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[r] \ar[" f "', d]  & c \ar[" g ", d]  \\
+	b \ar[r]  & d
+	\end{tikzcd}\]
+	is a pushout square and $f$ is a cofibration (trivial cofibration), then so is $g$. Dually, fibrations are closed under pullbacks in the sense that if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[r] \ar[" g "', d]  & c \ar[" f ", d]  \\
+	b \ar[r]  & d
+	\end{tikzcd}\]
+	is a pullback and $f$ is a fibration (trivial fibration), then so is $g$.
+\end{corollary}
+\begin{proof}
+	Consider the pushout case. Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" \ell _1 ", r] \ar[" f "', d]  & c \ar[" g ", d]  \\
+	b \ar[" k_1 "', r]  & d
+	\end{tikzcd}\]
+	be the pushout square, and consider a lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \ell _2 ", r] \ar[" g "', d]  & x \ar[" h ", d]  \\
+	d \ar[" k_2 "', r]  & y.
+	\end{tikzcd}\]
+	Attaching the pushout square gives the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" \ell _1 ", r] \ar[" f "', d]  & c \ar[" \ell_2 ", r] \ar[" g "', d]  & x\ar[" h ", d]  \\
+	b \ar[" k_1 "', r]  & d\ar[" k_2 "', r]  & y.
+	\end{tikzcd}\]
+	If $f$ has the left lifting property with respect to $h$, then there is a lift
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" \ell _1 ", r] \ar[" f "', d]  & c \ar[" \ell_2 ", r]  & x\ar[" h ", d]  \\
+	b \ar[" k_1 "', r] \ar[" r ", dotted, urr]  & d\ar[" k_2 "', r]  & y.
+	\end{tikzcd}\]
+	indicated by the dotted line. Commutivity of these diagrams gives the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" \ell _1 ", r] \ar[" f "', d]  & c \ar[" g ", d] \ar[" \ell _2 ", bend left, ddr]  &  \\
+	b \ar[" k_1 "', r] \ar[" r "', bend right, drr]  & d \ar[" r' ", dashed, dr]  &  \\
+	 &  & x
+	\end{tikzcd}\]
+	and by unversality of pushout, there is a unique dashed arrow $r'$ rendering the diagram commutative. We thus obtain that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \ell _2 ", r] \ar[" g "', d]  & x  \\
+	d \ar[" r' "', ur]  & 
+	\end{tikzcd}\]
+	commutes. To show the full relevant diagram commutes, note that composing in the bottom right of the pushout diagram by $h$ gives a unique arrow $hr'k_1 = hr$, and since $hr=k_1k_2$, we have $hr'k_1=k_2k_1$. By uniqueness of the arrow $hr'$, we have tht $hr'=k_2$, and thus we may fill in our diagram to obtain the commutative diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \ell _2 ", r] \ar[" g "', d]  & x\ar[" h ", d]   \\
+	d \ar[" r' "', ur] \ar[" k_2 "', r]  & y
+	\end{tikzcd}\]
+	Thus, if $f$ has the left lifting property with respect to any arrow $h$, then so does $g$. The statement of the corollary then follows by \cref{1.1.19}.
+\end{proof}
+
+\begin{lemma}[Ken Brown's Lemma]\label{1.1.21}
+	Let $\mathcal{C} $ be a model category and $\mathcal{D} $ a homotopic category\footnote{A category which has a specified class of weak equivalences which satisfy the 2-out-of-3 axiom. This differs from Riehl's definition, but in particular the 2-out-of-6 axiom implies the 2-out-of-3 axiom, so Ken Brown's lemma applies to her notion of a homotopic category as well.}. Let $F : \mathcal{C}  \to \mathcal{D} $ be a functor which takes trivial cofibrations between cofibrant objects to weak equivalences. Then $F$ takes all weak equivalences between cofibrant objects to weak equivalences. Dually, if $F$ takes tivial fibrations between fibrant objects to weak equivalences, then $F$ takes all weak equivalences between fibrant objects to weak equivalences.
+\end{lemma}
+\begin{proof}
+	Let $f : a \to b$ is a weak equivalence between cofibrant objects. The map $(f,1_b): a\amalg b \to b$ factors via $(\alpha,\beta)$ into a cofibration $q : a\amalg b \to c$ and a trivial fibration $p : c \to b$. Since $0$ is initial,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[r]\ar[d]  & a\ar[d]  \\
+	b \ar[r]  & a\amalg b
+	\end{tikzcd}\]
+	is a pushout. Since $a$ and $b$ are cofibrant objects, \cref{1.1.20} shows that the inclusions $i_a : a \to a\amalg b$ and $i_b : b \to a\amalg b$ are cofibrations. Note that by definition of the coproduct, $pqi_a=f$ and $pqi_b=1_b$. Since $p$ is also a weak equivalence, since it is a trivial fibration, we have by the 2-out-of-3 axiom that $qi_a$ and $qi_b$ are weak equivalences, and thus trivial cofibrations. In particular, they are trivial cofibrations $b\to c$ and $a\to c$. Note also that the composition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0 \ar[r]  & a\ar[" i_a ", r]  & a\amalg b \ar[" q ", r] & c
+	\end{tikzcd}\]
+	is a composition of cofibrations, and thus $c$ is cofibrant. Therefore, $qi_a$ and $qi_b$ are trivial cofibrations between cofibrant objects. By hypothesis, $F(qi_a)$ and $F(qi_b)$ are weak equivalences. Since $F(pqi_b)=F(1_b)$ is also a weak equivalence, by the 2-out-of-3 property $F(p)$ is a weak equivalence. By the 2-out-of-3 property, $F(p\circ q\circ i_1)=F(f)$ is a weak equivalence.
+\end{proof}
+
+\begin{intuition}\label{1.1.22}
+	Ken Brown's lemma says if a functor preserves trivial cofibrations between cofibrant objects, then we can expand it to all weak equivalences, and vice versa for fibrants.
+\end{intuition}
+
+\section{The homotopy category}
+
+In this section, we follow Quillen's original approach with few modifications to construct the homotopy category $\Ho \mathcal{C} $ by formally inverting all weak equivalences in $\mathcal{C} $. The main result is that the quotient category $\mathcal{C} _{cf} /\tildesim$ obtained by quotienting cofibrant and fibrant objects by the homotopy relation is equivalent as a category to $\Ho \mathcal{C} $. We will see what this means soon.
+
+\begin{definition}[Homotopy Category]\label{1.2.1}
+Let $\mathcal{C}$ be a homotopic category with weak equivalences $\mathcal{W} $. The \emph{homotopy category} $\Ho \mathcal{C} $ is given as follows: Take the free category $F(\mathcal{C} ,\mathcal{W} ^{-1} )$ on $\mathcal{C} $ and $\mathcal{W} ^{-1} $, where the latter is the formal inversion of $\mathcal{W} $. Objects are objects of $\mathcal{C} $, and morphisms are chains of composable pairs $(f_1, \ldots ,f_n)$ where each $f_i$ is either an arrow in $\mathcal{C} $ or the formal reversal $w^{-1} _i$ of an arrow in $\mathcal{W} $. Composition is string concatenation, and the identities are empty strings. Quotient by the relations $1_a=(1_a)$ for all $a\in \mathcal{C} $, $(f,g)=(g\circ f)$ for all composable pairs $(f,g)$, and $1_{\operatorname{dom} w} =(w,w^{-1} )$ and $1_{\operatorname{cod} w} =(w^{-1} ,w)$ for all $w\in \mathcal{W} $. The resultant category  is $\Ho \mathcal{C} $.
+\end{definition}
+
+\begin{intuition}\label{1.2.2}
+	The way to view these relations is that we may freely remove identities from strings without changing their value, we may freely compose arrows without changing their value, and this composition assigns for each $w\in \mathcal{W} $ an inverse $w^{-1}$.
+\end{intuition}
+
+\begin{remark}\label{1.2.3}
+	The category $\Ho \mathcal{C} $ is also sometimes denoted by $\mathcal{C} [\mathcal{W} ^{-1} ]$, since it is the localization of $\mathcal{C} $ at $\mathcal{W}$. Also note that hom-sets may not in general be sets in $\Ho \mathcal{C} $, so we must implicitly pass to a higher universe in general. We will show soon that this is not necessary in the context of model categories.
+\end{remark}
+
+\begin{remark}
+	It is clear from the definition that $\Ho D\mathcal{C} =(\Ho \mathcal{C} )^{\mathrm{op}} $ if $\mathcal{C} $ is a model category. We can also show that given model categories $\mathcal{C} $ and $\mathcal{D} $, $\Ho (\mathcal{C} \times \mathcal{D} )\cong \Ho \mathcal{C} \times \Ho \mathcal{D} $.
+\end{remark}
