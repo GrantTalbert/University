@@ -36,7 +36,7 @@ commutes. One also notes that this is equivalent to the comma category $\Map \ma
 			\[
 				\alpha(k)=(\operatorname{cod} \circ \alpha)(h,k)=(\operatorname{dom} \circ \beta)(h,k)=\beta(h)
 			.\]
-			Here I use a minor abuse of notation and denote by $\alpha(k)$ the arrow $(\operatorname{dom} \circ \alpha)(h,k)$that replaces $k$ in the square diagram, and similarly for $\beta(h)$. We also obtain that $\alpha(h)=h$ and $\beta(k)=k$. Thus the diagrams
+			Here I use a minor abuse of notation and denote by $\alpha(k)$ the arrow $(\operatorname{cod} \circ \alpha)(h,k)$that replaces $k$ in the square diagram, and similarly for $\beta(h)$. We also obtain that $\alpha(h)=h$ and $\beta(k)=k$. Thus the diagrams
 			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 			a\ar[" \alpha(f) "', d] \ar[" h ", r]  & c\ar[" \alpha(g) "', d]  & a\ar[" \beta(f) ", d] \ar[" \beta(h) ", r]  & c\ar[" \beta(g) ", d] \\
 			b \ar[" \alpha(k) "', r] & d & b \ar[" k "', r] & d
@@ -418,11 +418,11 @@ One notes that we should intuitively think of $\Ho \mathcal{C} $ as the ``quotie
 	Vertical composition of natural transformations is preserved manifestly, and horizontal composition is a nonfactor since this is a functor category. 
 \end{proof}
 
-\begin{remark}
+\begin{remark}\label{1.2.5}
 	After working through the algebra for (3) and recalling a proof I did in enriched categories, I am beginning to think that if one has an isomorphism, commutivity of any diagram is preserved by swapping an arrow with its isomorphism. Although I don't see how to prove this in the general case, and as such it may not hold in the general case, I can see an obvious proof if the isomorphism is on the ``end'' of the diagram, meaning there are either no arrows postcomposing with it, or no arrows precomposing with it. One then simply notes that if they wrote out the algebraic expressions the diagram represents, the isomorphism is always either on the front or back of the equation, and one can simply compose on the relevant side with the inverse.
 \end{remark}
 
-\begin{proposition}\label{1.2.5}
+\begin{proposition}\label{1.2.6}
 	Let $\mathcal{C} $ be a model category, and write $\mathcal{C} _c$, $\mathcal{C} _f$, and $\mathcal{C} _{cf} $ for the full subcategories of cofibrant, fibrant, and cofibrant and fibrant objects of $\mathcal{C} $. Then the inclusion functors induce equivalences of categories $\Ho \mathcal{C} _{cf} \to \Ho \mathcal{C} _c\to \Ho \mathcal{C} $ and $\Ho \mathcal{C} _{cf} \to \Ho \mathcal{C} _f\to \Ho \mathcal{C} $.
 \end{proposition}
 \begin{proof}
@@ -697,38 +697,38 @@ One immediately considers the applications of the functorial factorizations to t
 	since $Hi_1=g$ and $si_1=1$. Thus the restriction along $p_0$ is $f$ and the restriction along $p_1$ is $g$, and $Ji_1$ is a homotopy, as required.
 \end{proof}
 
-\begin{corollary}\label{1.2.12}
+\begin{corollary}\label{1.2.13}
 	Let $\mathcal{C} $ be a model category. If $b$ is cofibrant and $x$ is fibrant, then the left and right homotopy relations coencide, and are equivalence relations on $\mathcal{C} (b,x)$. Moreover, if $f\sim g : b \to x$, then there is a left homotopy $H : b' \to x$ from $f$ to $g$ using any cylinder object $b'$ for $b$. Dually, there is a right homotopy $k : b \to x'$ from $f$ to $h$ using any path object $x'$ for $b$.
 \end{corollary}
 \begin{proof}
-	Indeed, that the relations coencide follows by \cref{1.2.11} (5), the fact that they are equivalence relations follows from (4), and the invariance under cylinder/path objects is (5) once again.
+	Indeed, that the relations coencide follows by \cref{1.2.12} (5), the fact that they are equivalence relations follows from (4), and the invariance under cylinder/path objects is (5) once again.
 \end{proof}
-\begin{corollary}\label{1.2.13}
+\begin{corollary}\label{1.2.14}
 	The homotopy relation on the morphisms of $\mathcal{C} _{cf} $ is an equivalence relation and is compatible with composition. Hence the category $\mathcal{C} _{cf} /\tildesim $ exists.
 \end{corollary}
 
-\begin{remark}\label{1.2.14}
-	From our proof to \cref{1.2.11} (3), we saw that if $b$ is cofibrant, than the inclusions $b\to b\amalg b$ are cofibrations, and thus the arrows $i_0,i_1 : b \to b'$ are trivial cofibrations. Dually, the arrows $p_0,p_1 : x' \to x$ are trivial fibrations when $x$ is fibrant.
+\begin{remark}\label{1.2.15}
+	From our proof to \cref{1.2.12} (3), we saw that if $b$ is cofibrant, than the inclusions $b\to b\amalg b$ are cofibrations, and thus the arrows $i_0,i_1 : b \to b'$ are trivial cofibrations. Dually, the arrows $p_0,p_1 : x' \to x$ are trivial fibrations when $x$ is fibrant.
 \end{remark}
 
 Recall our result from \cref{1.2.6} that $\Ho \mathcal{C} _{cf} \simeq \Ho \mathcal{C} $. It would definitely be nice to show that the quotient category by the homotopy relation is equivalent to $\Ho \mathcal{C} _{cf} $, and thus to $\Ho \mathcal{C} $, since this branch of math is literally called \emph{homotopy theory}. Our first step in proving this would be to show that $\mathcal{C} _{cf} /\tildesim$ inverts weak equivalences, thus at least getting us a functor $\Ho \mathcal{C} _{cf} \to \mathcal{C} _{cf} /\tildesim$ by universality of localization. We accomplish this in the following proposition.
 
-\begin{proposition}\label{1.2.15}
+\begin{proposition}\label{1.2.16}
 	Let $\mathcal{C} $ be a model category. Then a map in $\mathcal{C} _{cf} $ is a weak equivalence if and only if it is a homotopy equivalence. In particular, quotienting by homotopy inverts weak equivalences.
 \end{proposition}
 \begin{proof}
-	First let $f : a \to b$ be a weak equivalence of cofibrant and fibrant objects. By \cref{1.2.20}, we have a natural isomorphism $f_* : (\mathcal{C} _{cf} /\tildesim)(x,a) \to (\mathcal{C} _{cf} /\tildesim )(x,b)$ for any fibrant and cofibrant $x$. Choose $x=b$; there then necessarily exists a map $g : b \to a$ which maps by postcomposition by $f$ to $1_b$; hence $fg\sim 1_b$. By \cref{1.2.20}, we then have $fgf\sim f$, so taking $x=a$ now gives $fgf\sim f$ in the codomain, and thus there is some $k$ such that postcomposition $f k \sim fgf \sim f$. Necessarily by injectivity, $k$ admits a definition as both $gf$ and $1$, and thus $gf\sim 1$. Thus, $f$ is a homotopy equivalence.
+	First let $f : a \to b$ be a weak equivalence of cofibrant and fibrant objects. By \cref{1.2.12}, we have a natural isomorphism $f_* : (\mathcal{C} _{cf} /\tildesim)(x,a) \to (\mathcal{C} _{cf} /\tildesim )(x,b)$ for any fibrant and cofibrant $x$. Choose $x=b$; there then necessarily exists a map $g : b \to a$ which maps by postcomposition by $f$ to $1_b$; hence $fg\sim 1_b$. By \cref{1.2.12}, we then have $fgf\sim f$, so taking $x=a$ now gives $fgf\sim f$ in the codomain, and thus there is some $k$ such that postcomposition $f k \sim fgf \sim f$. Necessarily by injectivity, $k$ admits a definition as both $gf$ and $1$, and thus $gf\sim 1$. Thus, $f$ is a homotopy equivalence.
 
 	The converse is more involved. Let $f$ be a homotopy equivalence between cofibrant and fibrant objects. Factor $f$ into a trivial cofibration $g : a \to c$ and a fibration $p : c \to b$. Clearly $c$ is cofibrant, since the unique arrow from $0\to c$ factors as $g\circ (0\to a)$, which is a composition of cofibrations. Similarly, $(b\to *)\circ p$ is a composition of fibrations, so $c$ is cofibrant and fibrant. By the proof of the other direction, since $g$ is a trivial cofibration and in particular a weak equivalence, it is a homotopy equivalence. By the 2-out-of-3 property, it suffices to show $p$ is a weak equivalence. Let $f': b \to a$ be a homotopy inverse to $f$, and let $H : b' \to b$ be the left homotopy $ff' \sim 1_b$. Since $f=pg$, one factors $ff'=pgf'=Hi_0$, and constructs the commutative diagram of solid arrows:
 	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
 	b \ar[" gf' ", r] \ar[" i_0 "', d]  & c \ar[" p ", d]  \\
 	b' \ar[" H "', r] \ar[" H' ", dotted, ur] & b
 	\end{tikzcd}\]
-	Since $b$ is cofibrant, by \cref{1.2.14} $i_0$ is a trivial cofibration, and since $p$ is a fibration, there is a dotted arrow as indicated rendering the diagram commutative. Define $q=H'i_1$, and note that $pH'=H$ implies that $pq=1_b$, since $H$ is a homotopy $ff'\sim 1_b$. Note also that since $H'i_0=gf'$, we have that $H'$ is a homotopy from $gf'$ to $q$. Since we found earlier that $g$ was a homotopy equivalence, let $g'$ be a homotopy inverse for $g$. Then $p\sim pgg'\sim fg'$. We thus conclude that
+	Since $b$ is cofibrant, by \cref{1.2.15} $i_0$ is a trivial cofibration, and since $p$ is a fibration, there is a dotted arrow as indicated rendering the diagram commutative. Define $q=H'i_1$, and note that $pH'=H$ implies that $pq=1_b$, since $H$ is a homotopy $ff'\sim 1_b$. Note also that since $H'i_0=gf'$, we have that $H'$ is a homotopy from $gf'$ to $q$. Since we found earlier that $g$ was a homotopy equivalence, let $g'$ be a homotopy inverse for $g$. Then $p\sim pgg'\sim fg'$. We thus conclude that
 	\[
 		qp\sim (gf')(fg')\sim 1_c
 	.\]
-	Let $K : c' \to c$ be a left homotopy from $1_c$ to $qp$, and note that $Ki_0=1_c$ is a weak equivalence since it is an isomorphism. By \cref{1.2.14}, $i_0$ is a weak equivalence, and by the 2-out-of-3 property, so is $K$. Since $i_1$ is a weak equivalence by the same remark, we thus have that $Ki_1=qp$ is also a weak equivalence. Recalling that $pq=1_b$, we have that the diagram
+	Let $K : c' \to c$ be a left homotopy from $1_c$ to $qp$, and note that $Ki_0=1_c$ is a weak equivalence since it is an isomorphism. By \cref{1.2.15}, $i_0$ is a weak equivalence, and by the 2-out-of-3 property, so is $K$. Since $i_1$ is a weak equivalence by the same remark, we thus have that $Ki_1=qp$ is also a weak equivalence. Recalling that $pq=1_b$, we have that the diagram
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	c \ar[equals, r] \ar[" p "', d]  & c \ar[equals, r] \ar[" qp "', d]  & c\ar[" p ", d]  \\
 	b \ar[" q "', r]  & c \ar[" p "', r]  & b
@@ -736,11 +736,11 @@ Recall our result from \cref{1.2.6} that $\Ho \mathcal{C} _{cf} \simeq \Ho \math
 	commutes. We also have that the top and bottom rows are the identity, and thus $p$ is a retract of $qp$. By the retract axiom, $p$ is a weak equivalence.
 \end{proof}
 
-\begin{corollary}\label{1.2.16}
+\begin{corollary}\label{1.2.17}
 	Let $\mathcal{C} $ be a model category, and let $\gamma : \mathcal{C} _{cf}  \to \Ho \mathcal{C} _{cf} $ and $\delta : \mathcal{C} _{cf}  \to \mathcal{C} _{cf} /\tildesim $ be the canonical functors. Then there is a unique isomorphism $j : \mathcal{C} _{cf} /\tildesim \cong \Ho \mathcal{C} _{cf} $ such that $j\delta=\gamma$. In particular, $j$ is the identity on objects.
 \end{corollary}
 \begin{proof}
-	By universality, it suffices to show $\mathcal{C}_{cf}  /\tildesim $ has the same universal property as described in \cref{1.2.4}. We know already that $\delta$ inverts weak equivalences by \cref{1.2.15}. Let $F : \mathcal{C} _{cf}  \to \mathcal{D} $ be a functor which inverts weak equivalences. Let
+	By universality, it suffices to show $\mathcal{C}_{cf}  /\tildesim $ has the same universal property as described in \cref{1.2.4}. We know already that $\delta$ inverts weak equivalences by \cref{1.2.16}. Let $F : \mathcal{C} _{cf}  \to \mathcal{D} $ be a functor which inverts weak equivalences. Let
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	a\amalg a \ar[" i_0+i_1 ", r]  & a'\ar[" s ", r]  & a
 	\end{tikzcd}\]
@@ -754,10 +754,10 @@ Recall our result from \cref{1.2.6} that $\Ho \mathcal{C} _{cf} \simeq \Ho \math
 	.\]
 	Thus, $F$ identifies homotopic maps. By universality of quotient categories, there is a unique functor $\mathcal{C} _{cf} /\tildesim \to \mathcal{D} $ as required.
 
-	Note that we did not show $a'$ was cofibrant and fibrant. We need not show this for $a\amalg a$, since we did not compute a functor on an arrow with $a\amalg a$ as domain or codomain. We define $a'$ by a functorial factorization, and by \cref{1.2.11} it does not matter which cylinder object we choose, so this is fine. By \cref{1.2.14} the arrow $i_0 : a \to a'$ is a cofibration, and since $0\to a \to a'$ is a composition of cofibrations, $a'$ is cofibrant. Since $a$ is fibrant, and $a'\to a$ is a fibration, we have that $a'$ is fibrant as well, concluding the proof.
+	Note that we did not show $a'$ was cofibrant and fibrant. We need not show this for $a\amalg a$, since we did not compute a functor on an arrow with $a\amalg a$ as domain or codomain. We define $a'$ by a functorial factorization, and by \cref{1.2.12} it does not matter which cylinder object we choose, so this is fine. By \cref{1.2.15} the arrow $i_0 : a \to a'$ is a cofibration, and since $0\to a \to a'$ is a composition of cofibrations, $a'$ is cofibrant. Since $a$ is fibrant, and $a'\to a$ is a fibration, we have that $a'$ is fibrant as well, concluding the proof.
 \end{proof}
 
-\begin{theorem}\label{1.2.17}
+\begin{theorem}\label{1.2.18}
 	Let $\mathcal{C} $ be a model category. Let $\gamma : \mathcal{C}  \to \Ho \mathcal{C} $ be the localization functor, and let $Q$ and $R$ denote the cofibrant and fibrant replacements of $\mathcal{C} $, respectively, as defined in \cref{1.1.16}.
 	\begin{enumerate}
 		\item The inclusion $\mathcal{C} _{cf} \to \mathcal{C} $ induces an equivalence of categories
@@ -782,7 +782,7 @@ Recall our result from \cref{1.2.6} that $\Ho \mathcal{C} _{cf} \simeq \Ho \math
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
-	(1) follows by \cref{1.2.16} and \cref{1.2.6}. Investigation of the inverses as noted in \cref{1.2.6} gives the natural isomorphisms of (2). The rest of (2) follows from the natural weak equivalences $Q\Rightarrow 1\Rightarrow R$ as noted in \cref{1.1.16}, and invoking \cref{1.2.11} (3,5). Part (3) is subsumed by \cref{1.2.16}. For (4), let $f : a \to b$ be a map in $\mathcal{C} $ which is inverted by $\gamma$. Then $QR(f)$ is an isomorphism in $\mathcal{C} _{cf} /\tildesim$, and thus $QR(f)$ is necessarily a homotopy equivalence. By \cref{1.2.16}, $QR(f)$ is a weak equivalence. Since $Q\Rightarrow 1$ is a natural weak equivalence,
+	(1) follows by \cref{1.2.17} and \cref{1.2.6}. Investigation of the inverses as noted in \cref{1.2.6} gives the natural isomorphisms of (2). The rest of (2) follows from the natural weak equivalences $Q\Rightarrow 1\Rightarrow R$ as noted in \cref{1.1.16}, and invoking \cref{1.2.12} (3,5). Part (3) is subsumed by \cref{1.2.17}. For (4), let $f : a \to b$ be a map in $\mathcal{C} $ which is inverted by $\gamma$. Then $QR(f)$ is an isomorphism in $\mathcal{C} _{cf} /\tildesim$, and thus $QR(f)$ is necessarily a homotopy equivalence. By \cref{1.2.17}, $QR(f)$ is a weak equivalence. Since $Q\Rightarrow 1$ is a natural weak equivalence,
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	QR(a)\ar[" QR(f) "', d] \ar[" q_{R(a)}  ", r]  & R(a)\ar[" R(f) ", d]  \\
 	QR(b)\ar[" q_{R(b)}  "', r]  & R(b)

@@ -1,1 +1,208 @@
+\chapter{Weak factorization systems in model categories (Riehl 11)}
+
+We now turn to a more modern exposition on model categories from Emily Riehl's \emph{Categorical Homotopy Theory}. The presentation will be more terse, since the theory is already well documented in Hovey, but it provides a new viewpoint based on weak factorization systems.
+
+\section{Lifting problems and lifting properties}
+
+A \emph{lifting problem} between arrows $i$ and $f$ in $\mathcal{M} $ is a commutative diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdot \ar[" u ", r] \ar[" i "', d]  & \cdot \ar[" f ", d]  \\
+\cdot  \ar[" v "', r] \ar[dotted, ur]  & \cdot 
+\end{tikzcd}\]
+A \emph{lift} or \emph{solution} is a dotted arrow as indicated, rendering the diagram commutative. If all lifting problems between $i$ and $f$ admit solutions, we say $i$ has the left lifting property with respect to $f$, and $f$ has the right lifting property with respect to $i$. I will write $i\boxtimes f$ to denote this. Riehl manages to get a box with a slash in it, which I have no idea how to typeset since \verb|\boxslash| is not a command. If $\mathcal{L} $ is a class of maps in $\mathcal{M} $, we write $\mathcal{L} ^{\boxtimes} $ for the class of arrows that have the \emph{right lifting property} with respect to all arrows in $\mathcal{L} $, and similarly we write ${}^{\boxtimes} \mathcal{R} $ for the set of all arrows that have the left lifting property with respect to all morphisms in $\mathcal{R} $.
+
+For example, consider the diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\varnothing \ar[r] \ar[d]  & x \ar[" f ", d]  \\
+* \ar[r] \ar[dotted, ur] & y
+\end{tikzcd}\]
+in $\Set $. This commutes manifestly by universality of $\varnothing $. A lift would also make the left triangle commute manifestly, so consider only the right triangle. The arrow $*\to y$ selects an element of $y$, and the composition $*\to x\to y$ selects an element in the image of $f$. Thus, for the diagram to commute, the element selected by $*\to y$ must be in the image of $f$. In particular, for $f$ to have the right lifting property against $\varnothing \to *$, it must be surjective, and thus epi.
+
+ We can also consider the diagram of solid arrows
+ \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ *\amalg *\ar[r] \ar[d]  & x\ar[" f ", d]  \\
+ *\ar[r] \ar[dotted, ur]  & y
+ \end{tikzcd}\]
+ for some $f : x \to y$. Note that the map $*\amalg *\to x$ selects two points in $x$, and $*\to y$ selects one point in $y$. For the diagram to commute, these points must be identified with each other. A lift $*\to x$ selects an element of $x$, so for the diagram to commute with a lift, any two points selected by $*\amalg *\to *$ must be equal to the element $*\to x$. Thus, $f$ has the right lifting property wrt $*\amalg *\to *$ precisely when it only identifies points if they are equal, hence $f$ is injective and mono.
+
+ \begin{example}\label{2.1.1}
+	 A more interesting example is the Hurewicz (co)fibrations. Writing $I$ for the unit interval, write $i_0$ for the inclusion $A\to A\times I$ at $0\in I$, and write $p_0$ for the projection $A^I\to A$ at $0\in I$. We define the \emph{Hurewicz fibrations} as the set of maps $\left\{ i_0 : A \to A\times I \mid A\in \Top  \right\}^{\boxtimes} $ with the right lifting property thereof, and similarly we define the Hurewicz cofibrations as ${}^{\boxtimes} \left\{ p_0 : A^I \to A\mid A\in \Top  \right\} $. Note these are not in general sets, but they do indeed form classes, which is sufficient. Restricting only to disks gives the class of \emph{Serre fibrations} $\left\{ i_0 : D^n \to D^n\times I\mid n\in\mathbb{N}  \right\}^{\boxtimes} $.
+ \end{example}
+ 
+ \begin{lemma}\label{2.1.2}
+	 Any class of arrows of the form ${}^{\boxtimes} \mathcal{R} $ is closed under coproducts, pushouts, transfinite composition, retracts, and contains the isomorphisms. We call such a class \emph{weakly saturated}.
+ \end{lemma}
+ \begin{proof}
+ 	Let $i$ have the left lifting property with respect to $\mathcal{R} $, and let $j$ be an arrow admitting a retract
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdot \ar[" 1 ", bend left, rr] \ar[" j "', d] \ar[" s_1 ", r]  & \cdot \ar[" i ", d] \ar[" r_1 ", r]  & \cdot \ar[" j ", d]  \\
+	\cdot \ar[" s_2 "', r] \ar[" 1 "', bend right, rr]  & \cdot \ar[" r_2 "', r]  & \cdot 
+	\end{tikzcd}\]
+	and let $r\in \mathcal{R} $. One must show that $j$ admits a lift against all arrows in $\mathcal{R} $, so let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdot \ar[" u ", r] \ar[" j "', d]  & \cdot \ar[" r ", d]  \\
+	\cdot \ar[" v "', r]  & \cdot 
+	\end{tikzcd}\]
+	be a lifting problem with $r\in\mathcal{R} $. Gluing this to the retract gives the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdot \ar[" s_1 ", r] \ar[" 1 ", bend left, rr] \ar[" j "', d]  & \cdot \ar[" r_1 ", r] \ar[" i "', d]  & \cdot \ar[" u ", r] \ar[" j "', d]  & \cdot \ar[" r ", d]  \\
+	\cdot \ar[" s_2 "', r] \ar[" 1 "', bend right, rr]  & \cdot \ar[" r_2 "', r] \ar[" h "', dotted, urr]  & \cdot \ar[" v "', r]  & \cdot 
+	\end{tikzcd}\]
+	Since $i$ has the left lifting property with respect to $r$, there is a dotted arrow as indicated rendering the diagram commutative. Note that one has by commutivity that
+	\[
+		hs_2j=ur_1s_1=u,
+	\]
+	and thus we might hope $hs_2$ is a solution to the original lifting problem. We need only show $rhs_2=v$, and indeed, by commutivity we have
+	\[
+		rhs_2=vr_2s_2=v
+	.\]
+	Thus, $j$ has the left lifting property with respect to $r$, and ${}^{\boxtimes} \mathcal{R} $ is closed under retracts. The others have already been proven, or I don't feel like proving them.
+ \end{proof}
+ 
+ \begin{remark}\label{2.1.3}
+	 The dual statement of \cref{2.1.2} is that maps in $\mathcal{L} ^{\boxtimes} $ are closed under products, pullbacks, transfinite composition, retracts, and contain th e isomorphisms.
+ \end{remark}
+ 
+ \begin{notation}\label{2.1.4}
+	 If $\mathcal{L} ,\mathcal{R} $ are classes of maps, we write $\mathcal{L} \boxtimes \mathcal{R} $ to denote that $\mathcal{L} \subseteq ^{\boxtimes} \mathcal{R} $ and $\mathcal{R} \subseteq \mathcal{L} ^{\boxtimes} $. Obvserve that $(-)^{\boxtimes} $ and ${}^{\boxtimes} (-)$ form a Galois connection with respect to inclusion, which is a case of an adjunction and is kinda like adjunctions with subset-like functors.
+ \end{notation}
+ 
+ \begin{lemma}\label{2.1.5}
+ 	Let $F : \mathcal{M}  \rightleftarrows \mathcal{N}  : U$ be an adjunction and let $\mathcal{A} $ be a class of arrows in $\mathcal{M} $, and $\mathcal{B} $ a class of arrows in $\mathcal{N} $. Then $F(\mathcal{A} )\boxtimes \mathcal{B} $ if and only if $\mathcal{A} \boxtimes U(\mathcal{B} )$.
+ \end{lemma}
+ \begin{proof}
+ 	Adjunctions $F\dashv U$ raise to adjunctions $F : \Map \mathcal{M} \rightleftarrows \mathcal{N} : U$ between the arrow categories. Lifting problems are identified by transposing under this adjunction, and naturality guarentees that transposing a solution gives a solution.
+ \end{proof}
+ 
+ \begin{construction}[Leibniz]\label{2.1.6}
+ 	Consider a two-variable adjunction, which is a collection of functors
+	\[
+		-\otimes -: \mathcal{M} \times \mathcal{N}  \to \mathcal{P} ,\qquad -\pitchfork- : \mathcal{M} ^{\mathrm{op}} \times \mathcal{P}  \to \mathcal{N} ,\qquad \underline{\operatorname{hom}} (-,-) : \mathcal{N} ^{\mathrm{op}} \times \mathcal{P}  \to \mathcal{M} 
+	\]
+	satisfying the adjunction relations
+	\[
+		\mathcal{P} (m\otimes n,p)\cong \mathcal{N} (n, m\pitchfork p )\cong \mathcal{M} (m,\underline{\operatorname{hom} } (n,p))
+	.\]
+	Suppose that $\mathcal{P} $ has pushouts and $\mathcal{M} ,\mathcal{N} $ have pullbacks. The Leibniz construction then provides us a two-variable adjunction
+	\[
+		-\widehat{\otimes }-: \mathcal{M} ^2\times \mathcal{N} ^2 \to \mathcal{P} ^2,\qquad -\widehat{\pitchfork}-: \left( \mathcal{M} ^2 \right) ^{\mathrm{op}} \times \mathcal{P} ^2 \to \mathcal{N} ^2,\qquad \widehat{\underline{\operatorname{hom} } }(-,-): \left( \mathcal{N} ^{2}  \right) ^{\mathrm{op}} \times \mathcal{P} ^2 \to \mathcal{M} ^2
+	\]
+	between the arrow categories $(-)^2\cong \Map (-)\cong (1_{(-)} \downarrow 1_{(-)} )$. They are defined as follows: let $i : m \to m'$ be an arrow in $\mathcal{M} ^2$, and let $j : n \to n'$ an arrow in $\mathcal{N} ^2$. The \emph{Leibniz tensor}, also called the \emph{pushout-product}, is defined by the unique dashed arrow in the pushout diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	m\otimes n \ar[" i\otimes 1 ", r] \ar[" 1\otimes j "', d]  & m'\otimes n \ar[" 1\otimes j ", bend left, ddr] \ar[d] &  \\
+	m\otimes n' \ar[r] \ar[" i\otimes 1 "', bend right, drr]  & \cdot \ar[" i\widehat{\otimes }j ", dashed, dr]  &  \\
+	 &  & m'\otimes n'
+	\end{tikzcd}\]
+	Similarly, the Leibniz cotensor and Leibniz hom, also known as the pullback-cotensor and pullback-hom, are given by pullbacks in $\mathcal{M} $ and $\mathcal{N} $ Let $f : p \to p'$ in $\mathcal{P} $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		m'\pitchfork p \ar[" i\pitchfork 1 ", bend left, drr] \ar[" 1\pitchfork f "', bend right, ddr] \ar[" i\widehat{\pitchfork}f ", dashed, dr]  &  &  & \underline{\operatorname{hom} }(n',p)\ar[" \widehat{\underline{\operatorname{hom} } }(j\text{,} f) ", dashed, dr] \ar[" \underline{\operatorname{hom} } (j\text{,} 1) ", bend left, drr] \ar[" \underline{\operatorname{hom} } (1\text{,} f) "', bend right, ddr]  &  &  \\
+	 & \cdot \ar[r] \ar[d]  & m\pitchfork p \ar[" 1\pitchfork f ", d] &  & \cdot \ar[r] \ar[d]  & \underline{\operatorname{hom} } (n,p)\ar[" \underline{\operatorname{hom} } (1\text{,} f) ", d]  \\
+	 & m'\pitchfork p' \ar[" i\pitchfork 1 "', r]  & m\pitchfork p' &  & \underline{\operatorname{hom} } (n',p')\ar[" \underline{\operatorname{hom} } (j\text{,} 1) "', r]  & \underline{\operatorname{hom} } (n,p')
+	\end{tikzcd}\]
+\end{construction}
+
+\begin{lemma}\label{2.1.7}
+	Let $\mathcal{A} ,\mathcal{B} ,\mathcal{C} $ be classes of maps in $\mathcal{M} ,\mathcal{N} ,\mathcal{P} $, respectively. Then
+	\[
+		\mathcal{A} \widehat{\otimes }\mathcal{B} \boxtimes \mathcal{C} \iff \mathcal{B} \boxtimes \mathcal{A} \widehat{\pitchfork}\mathcal{C} \iff \mathcal{A} \boxtimes \widehat{\underline{\operatorname{hom} } }(\mathcal{B} ,\mathcal{C} )
+	.\]
+\end{lemma}
+\begin{proof}
+	Once again, lifting problems transpose into other lifting problems, and so do solutions.
+\end{proof}
+
+\section{Weak factorization systems}
+
+\begin{definition}[Weak Factorization System]\label{2.2.1}
+	A \emph{weak factorization system} on a category is a pair $(\mathcal{L} ,\mathcal{R} )$ of morphisms such that
+	\begin{enumerate}
+		\item (factorization) every arrow admits a factorization as an arrow of $\mathcal{L} $ followed by an arrow of $\mathcal{R} $;
+		\item (lifting) $\mathcal{L} \boxtimes \mathcal{R} $;
+		\item (closure) $\mathcal{L} =^{\boxtimes} \mathcal{R} $ and $\mathcal{R} =\mathcal{L} ^{\boxtimes} $.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}\label{2.2.2}
+	The third axiom obviously subsumes the second, and it means that any class in a weak factorization system determines the other. Weak factorization systems lay the groujndwork for a more modern view of model category theory, with a greater focus on the factorizations maps admit into cofibrations and fibrations.
+\end{remark}
+
+\begin{lemma}\label{2.2.3}
+	In the presence of the first two axioms, one can replace the closure axiom by (closure'): \emph{the classes $\mathcal{L} $ and $\mathcal{R} $ are closed under retracts}.
+\end{lemma}
+\begin{proof}
+	\cref{2.1.2} proves that closure implies closure'. For the converse, note that any $k\in ^{\boxtimes} \mathcal{R} $ factors as $r\ell $ for $r\in \mathcal{R} $ and $\ell \in \mathcal{L} $. By definition, $k$ has the left lifting property with respect to $r$, and by \cref{1.1.17} $k$ is a retract of $\ell $. Since $\mathcal{L} $ is closed under retracts, $k\in \mathcal{L} $. Thus, $\mathcal{L} \subseteq ^{\boxtimes} \mathcal{R} $, and the converse inclusion follows by the second axiom (lifting).
+\end{proof}
+
+\begin{remark}\label{2.2.4}
+	Oftentimes one has that a weak factorization system is generated from a set $\mathcal{J} $ by taking the right class to be $\mathcal{J}^{\boxtimes} $ and the left class to be ${}^{\boxtimes} (\mathcal{J} ^{\boxtimes} )$. Indeed $(^\boxtimes(\mathcal{J} ^\boxtimes))^\boxtimes=\mathcal{J} ^\boxtimes$. We will see that if the category is subject to the small object argument, then the factorizations produced are appropriate for a model category. We call the category \emph{cofibrantly generated} in that case.
+\end{remark}
+
+\section{Model categories and Quillen functors}
+
+Riehl presents the following alternative to \cref{1.1.5}, and we spend a large portion of this section dedicated to proving the equivalence of these definitions. The book continues by giving a lot of examples, but since I will cover some these examples much more indepth in Hovey after reading about Quillen functors, I will pass on them for now.
+
+\begin{definition}[Model Structure]\label{2.3.1}
+	A \emph{model structure} on a complete and cocomplete homotopical category $(\mathcal{M} ,\mathcal{W} )$ is two classes of morphisms $\mathcal{C} ,\mathcal{F} $ such that $(\mathcal{C} \cap \mathcal{W} ,\mathcal{F} )$ and $(\mathcal{C} ,\mathcal{W} \cap \mathcal{F} )$ are weak factorization systems. Maps in $\mathcal{C} $ are called \emph{cofibrations} and maps in $\mathcal{F} $ are called \emph{fibrations}.
+\end{definition}
+
+\begin{remark}\label{2.3.2}
+	Riehl requires homotopical categories to satisfy the 2-out-of-6 axiom, which is stronger than the 2-out-of-3 axiom, and says for any composable triple $(f,g,h)$, if $hg$ and $gf$ are weak equivalences, then all of $f,g,h,hgf$ also are. By \cref{1.2.18} (4), model categories are saturated, meaning the maps inverted by localization are precisely the weak equivalences. Riehl shows that \emph{any} collection of arrows $\mathcal{W} $ for which the localization is saturated necessarily satisfies the 2-out-of-6 property. The proof is fairly simple; since the category is saturated, isomorphisms in $\Ho \mathcal{M} $ are precisely the weak equivalences, and since isomorphisms are easily shown to satisfy the 2-out-of-6 property, the weak equivalences necessarily do as well.
+\end{remark}
+
+\begin{remark}\label{2.3.3}
+	By \cref{2.2.3}, cofibrations and fibrations are closed under retracts. Since the 2-out-of-6 axiom is stronger, the 2-out-of-3 axiom is satisfied. Definition \ref{2.2.1} gives that every cofibration has the left lifting property against trivial fibrations, and every trivial cofibration has the left lifting property against fibrations. We can also show that weak factorization systems are functorial factorizations: let $(\mathcal{L} ,\mathcal{R} )$ be a weak factorization system for some category $\mathcal{C} $, and let $(u,v): f \to g$ in $\Map \mathcal{C} $. Factoring $f=r_f\ell _f$ and $g=r_g\ell _g$ gives a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" \ell _f "', d] \ar[" u ", r]  & a \ar[" \ell _g ", d]  \\
+	e_f \ar[" r_f "', d]  & e_g \ar[" r_g ", d]  \\
+	y \ar[" v "', r]  & b
+	\end{tikzcd}\]
+	which rearranges to the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" u ", r] \ar[" \ell _f "', d]  & a \ar[" \ell _g ", r]  & e_g \ar[" r_g ", d]  \\
+	e_f \ar[" r_f "', r] \ar[dotted, ur]  & y \ar[" v "', r]  & b
+	\end{tikzcd}\]
+	Since $\ell _f\in \mathcal{L} $ has the left lifting property with respect to all elements of $\mathcal{R} $, and since $r_g\in \mathcal{R} $, the dotted arrow as indicated exists, rendering the diagram commutative. Since the factorization also held $u$ and $v$ fixed, one can indeed view this factorization as a functorial factorization in the sense of \cref{1.1.1}. Clearly, a full model category also admits weak factorization systems, as described, via its functorial factorizations. It remains only to be shown that $\mathcal{W} $ is closed under retracts.
+\end{remark}
+
+\begin{lemma}\label{2.3.4}
+	Let $(\mathcal{C} \cap \mathcal{W} ,\mathcal{F} )$ and $(\mathcal{C} ,\mathcal{F} \cap \mathcal{W} )$ be weak factorization systems on a complete and cocomplete category $\mathcal{M} $, and let $\mathcal{W} \subseteq \mathcal{M} $ satisfy the 2-out-of-3 property. Then $\mathcal{W} $ is closed under retracts.
+\end{lemma}
+\begin{proof}
+	Let $f : x \to y$ be a retract of some weak equivalence $w : a \to b$. Factor $f$ as $hg$ with $g$ a trivial cofibration. The retract diagram then becomes
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" 1 ", bend left, rr] \ar[" h_1 ", r] \ar[" g "', d]  & a \ar[" k_1 ", r] \ar[" w "', dd]  & x \ar[" g ", d]  \\
+	e_f \ar[" h "', d]  &  & e_f \ar[" h ", d]  \\
+	y \ar[" 1 "', bend right, rr] \ar[" h_2 "', r]  & b \ar[" k_2 "', r]  & y
+	\end{tikzcd}\]
+	Pushout along the left corner of the diagram $e_f \xlongleftarrow{g} x \xlongrightarrow{h_1} a$ to obtain the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" 1 ", bend left, rr] \ar[" h_1 ", r] \ar[" g "', d]  & a \ar[" k_1 ", r] \ar[" w ", bend left=50, dd] \ar[" i "', d] & x \ar[" g ", d]  \\
+	e_f \ar[" h "', d] \ar[r]  & e_f \times_xa \ar[dashed, " j "', d] & e_f \ar[" h ", d]  \\
+	y \ar[" 1 "', bend right, rr] \ar[" h_2 "', r]  & b \ar[" k_2 "', r]  & y
+	\end{tikzcd}\]
+	Note that since $w$ has domain $a$ and $sh$ has domain $e_f$, and since they both have the same codomain, they form a cone for the pushout diagram. Hence by universality there is a unique dashed arrow as indicated, rendering the diagram commutative. Note by \cref{2.1.2} that since $g$ is a trivial cofibration, so is $i$. In particular, $i\in \mathcal{W} $. Since $w\in \mathcal{W} $ as well, and $ji=w$, by the 2-of-3 property $j$ is a weak equivalence. Note that we also have $gr$ and $1_{e_f} $ form a cone for the pushout as well, so the dashed arrow $\ell $ in the below diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" 1 ", bend left, rr] \ar[" h_1 ", r] \ar[" g "', d]  & a \ar[" k_1 ", r]  \ar[" i "', d] & x \ar[" g ", d]  \\
+	e_f \ar[" h "', d] \ar[" m "', r]  & e_f \times_xa \ar[dashed, " j "', d] \ar[" \ell  "', dashed, r] & e_f \ar[" h ", d]  \\
+	y \ar[" 1 "', bend right, rr] \ar[" h_2 "', r]  & b \ar[" k_2 "', r]  & y
+	\end{tikzcd}\]
+	exists, and by universality the diagram commutes (one could also construct a cone to $b$ in the bottom right corner, and then universality guarentees commutivity much more obviously, but this is unnecessary). One notes also by commutivity of the relevant pushout diagram, in particular in the triangle formed by the identity, that we obtain $\ell m=1$; thus the lower two rows show that $h$ is a retract of $j$. If we can show $h$ is a weak equivalence, then since $g$ is also a weak qeuivalence, $f=hg$ is also a weak equivalence. Thus it suffices to show $h$ is a weak equivalence. Recall that $h$ is a fibration, and that we have shown $j$ is a weak equivalence. It thus suffices to show if a retract of a weak equivalence is a fibration, then it is a weak equivalence.
+
+	Let $f$ be a fibration, and let $f$ be a retract of some weak equivalence $w$. Factor $w=vu$ by any weak factorization, and note that by 2-of-3, both $v$ and $u$ are weak equivalences. We thus have the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" 1 ", bend left, rr] \ar[" f "', dd] \ar[r] \ar[" uh "', ]  & a \ar[" u "', d] \ar[" h ", r]  & x \ar[" f ", dd]  \\
+	 & \cdot \ar[" t "', dotted, ur]  &  \\
+	y \ar[r] \ar[" 1 "', bend right, rr]  & b \ar[" k "', r]  & y
+	\end{tikzcd}\]
+	Note that by viewing $kv$ as the bottom of a lifting problem, we have that since $u$ is a trivial cofibration and $f$ is a fibration, the dotted arrow $t$ as indicated exists, rendering the diagram commutative. By commutativity, $ts=1$, and thus $f$ is a retract of $v$. Since $v$ is a trivial cofibration, by \cref{2.3.2} so is $f$. Thus the statement is proven.
+\end{proof}
+
+\begin{example}\label{2.3.5}
+	Although I have chosen to pass on the examples given here in order to pursue them more indepth in Hovey, I think the following example is interesting enough to warrant writing down. The category $\Cat $ admits a model structure, where weak equivalences are categorical equivalences, cofibrations are functors which are injective on objects, and fibrations are \emph{isofibrations}, which are functors that have the right lifting property with respect to any inclusion into the \emph{free standing isomorphism}. This is an object in $\Cat $ defined as the groupoid $\mathcal{I} =\left\{ 0\leftrightarrows 1 \right\} $. A functor $\mathcal{I} \to \mathcal{C} $ is thus just a choice of an isomorphism in $\mathcal{C} $. Investigating what this implies, consider an isofibration $F : \mathcal{C}  \to \mathcal{D} $, and a lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	* \ar[" c_0 ", r] \ar[" 0 "', d]  & \mathcal{C} \ar[" F ", d]  \\
+	\mathcal{I} \ar[dotted, ur] \ar[" d_0\cong d_1 "', r]  & \mathcal{D} 
+	\end{tikzcd}\]
+	where the notation of the diagram should make clear what is happening, but I will explain it anyways. We without loss of generality take the inclusion $*\hookrightarrow \mathcal{I} $ to select the object 0, and we note that the arrow $*\to \mathcal{C} $ selects an element $c_0$ of $\mathcal{C} $. For a lift to exist, we simply require there be a map $I\to \mathcal{C} $ such that $0\mapsto c_0$; indeed since $c_0\cong c_0$ we always have such a map. Thus the left triangle tells us nothing interesting. The functor $\mathcal{I} \to \mathcal{D} $ maps $(0,1)\mapsto (d_0,d_1)$, as should be obvious by the notation. Thus the lifting problem gives us that $F(c_0)=d_0$. For a lift to exist, we must have an arrow $\ell : \mathcal{I}  \to \mathcal{C} $ as indicated by the dotted line; equivalently an isomorphism $c_0\cong c_1$ in $\mathcal{C} $, such that $F(c_1)=d_1$. Thus a lift exists whenever every $d_1$ isomorphic to $d_0\in F(\mathcal{C} )$ has at least one preimage under $F$ which is isomorphic to at least one preimage of $d_0$ under $F$. Thus an isofibration is simply a functor $F$ for which every isomorphism $d\cong F(c)$ for some $c\in \mathcal{C} $ lifts to an isomorphism $c'\cong c$ in $\mathcal{C} $.
+\end{example}
 
