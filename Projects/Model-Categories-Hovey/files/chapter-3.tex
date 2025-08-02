@@ -1,1 +1,552 @@
+\chapter{Quillen functors and derived functors (Hovey 1.3)}
+
+We now introduce Quillen functors, the natural notion of morphisms between model categories. One would assume that a morphism of model categories should preserve cofibrations, fibrations, and weak equivlances, but in practice this is generally too strict of a requirement. The reasoning for which is more easily described after we have seen \cref{3.1.1} and have proven \cref{3.1.4}, so explanation of this reasoning has been delegated to \cref{3.1.6}.
+
+We will additionally see that Quillen functors associate an \emph{derived functor} to the homotopy category, and the process of associating Quillen functors to derived functors is functorial up to natural isomorphism; it is thus a weak 2-functor. When this derived functor is an equivalence of categories, we call the corresponding Quillen functors \emph{Quillen equivalences}, for reasons which are already fairly clear, but will be detailed in [link].
+
+\section{Quillen functors}
+
+\begin{definition}[Quillen Functor]\label{3.1.1}
+	Let $\mathcal{C} $ and $\mathcal{D} $ be model categories.
+	\begin{enumerate}
+		\item A functor $F : \mathcal{C}  \to \mathcal{D} $ is a \emph{left Quillen functor} if $F$ is left adjoint, and preserves cofibrations and trivial cofibrations;
+		\item Dually, a functor $U : \mathcal{D}  \to \mathcal{C} $ is a \emph{right Quillen functor} if $U$ is right adjoint, and preserves fibrations and trivial fibrations;
+		\item An adjunction $F : \mathcal{C} \rightleftarrows \mathcal{D}  : U$ is a \emph{Quillen adjunction} if $F$ is a left Quillen functor.
+	\end{enumerate}
+\end{definition}
+\begin{remark}\label{3.1.2}
+	By Ken Brown's \cref{1.1.21}, left Quillen functors preserve weak equivalences between cofibrant objects, and right Quillen functors preserve weak equivalences between fibrant objects. Hovey notes that most of the results in this section require only that left Quillen functors preserve cofibrant objects and weak equivalences between them, but he also notes that not much is gained by this generality, implying not many functors in practice that satisfy such a property are not Quillen. Note also that the definition of a Quillen adjunction requires only that $F$ be left Quillen; this is reconsiled in \cref{3.1.4}.
+\end{remark}
+
+\begin{notation}\label{3.1.3}
+	A Quillen adjunction $F : \mathcal{C} \rightleftarrows : U$ is often referred to only by mentioning one of the adjoint functors. We write $\varphi$ for the adjunct map, $\eta : 1_\mathcal{C}  \Rightarrow UF$ for the unit, and $\varepsilon : FU \Rightarrow 1_\mathcal{D} $ for the counit of the adjunction. We prefer to refer to adjunctions either by $(F,U,\varphi)$ or by $(F,U,\eta,\varepsilon )$, especially when the domains and codomains of $F$ and $U$ can be understood. We will often say $(F,U,\varphi)$ \emph{is an adjunction from $\mathcal{C} $ to $\mathcal{D} $} and will write $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ to indicate that $F : \mathcal{C}  \to \mathcal{D} $ and $U : \mathcal{D}  \to \mathcal{C} $. We will also, of course, write $F\dashv U$ when specifying any of $\varphi,\eta,\varepsilon $ is not necessary.
+\end{notation}
+
+\begin{lemma}\label{3.1.4}
+	Let $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ be an adjunction between model categories. Then $(F,U,\varphi)$ is Quillen if and only if $U$ is right Quillen. In particular, $F$ is left Quillen if and only if $U$ is right Quillen.
+\end{lemma}
+\begin{proof}
+	First, we show $F(f)$ has the left lifting property with respect to $p$ if and only if $f$ has the left lifting property with respect to $U(p)$. We then specialize to cofibrations and fibrations, and apply \cref{1.1.18}.
+
+	Let $f : c \to c'$ in $\mathcal{C} $ and let $p : d \to d'$ in $\mathcal{D} $. Let $F(f)$ have the left lifting property with respect to $p$, and let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" f "', d] \ar[" h ", r]  & U(d)\ar[" U(p) ", d]  \\
+	c' \ar[" k "', r]  & U(d')
+	\end{tikzcd}\]
+	be a lifting problem. By functoriality of $F$, the left square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		F(c)\ar[" F(f) "', d] \ar[" F(h) ", r]  & FU(d)\ar[" FU(p) ", d]\ar[" \varepsilon_d ", r]  & d\ar[" p ", d] \\
+		F(c')\ar[" F(k) "', r]  \ar[dotted, urr] & FU(d') \ar[" \varepsilon_{d'}  "', r] & d'
+	\end{tikzcd}\]
+	commutes, and by naturality of $\varepsilon : FU \Rightarrow 1_\mathcal{D} $, the diagram on the right commutes. Denote the dotted arrow by $\ell $. Since $F(f)$ has the left lifting property with respect to $p$, there exists a dotted arrow as indicated rendering the diagram commutative. By functoriality of $U$, the right two squares in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \eta_c ", r] \ar[" f "', d]  & UF(c)\ar[" UF(h) ", r] \ar[" UF(f) "', d]  & UFU(d)\ar[" U(\varepsilon_d) ", r] \ar[" UFU(p) "', d]  & U(d)\ar[" p ", d]  \\
+	c'\ar[" \eta_{c'}  "', r]  & UF(c')\ar[" UF(k) "', r]\ar[dotted, urr]  & UFU(d')\ar[" U(\varepsilon_{d'})  "', r]  & U(d')
+	\end{tikzcd}\]
+	commute, and by naturality of $\eta : 1_{\mathcal{C} }  \Rightarrow UF$, the square on the left commutes. It would be helpful to show that the composites along the top and bottom rows simplified to $h$ and $k$. Consider the square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \eta_c ", r] \ar[" h "', d]  & UF(c)\ar[" UF(h) ", d]  \\
+	U(d)\ar[" \eta_{U(d)}  "', r]  & UFU(d)
+	\end{tikzcd}\]
+	which commutes by naturality of $\eta$. Recall also that $U\varepsilon \circ \eta U=1$, and thus $U(\varepsilon_d)\circ \eta_{U(d)} =1$. Thus, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		& U(d)\ar[" \eta_{U(d)}  ", dr] \ar[" 1 ", bend left, drr] \\
+	c \ar[" h ", ur]\ar[" \eta_c ", r] \ar[" f "', d]  & UF(c)\ar[" UF(h) ", r]   & UFU(d)\ar[" U(\varepsilon_d) ", r]   & U(d)\ar[" p ", d]  \\
+	c'\ar[" \eta_{c'}  "', r]  & UF(c')\ar[" UF(k) "', r]\ar[" U(\ell)", dotted, urr]  & UFU(d')\ar[" U(\varepsilon_{d'})  "', r]  & U(d')
+	\end{tikzcd}\]
+	commutes as well, and the top row simplifies to $h$. Note that we have dropped the middle arrows for simplicity. By a similar argument, the bottom row simplifies to $k$: by naturality of $\eta$, the square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c' \ar[" \eta_{c'}  ", r] \ar[" k "', d]  & UF(c')\ar[" UF(k) ", d]  \\
+	U(d')\ar[" \eta_{U(d')}  "', r]  & UFU(d')
+	\end{tikzcd}\]
+	commutes, and thus the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" h ", rrr] \ar[" f "', d]  &&& U(d)\ar[" p ", d]  \\
+	c'\ar[" \eta_{c'}  "', r] \ar[" k "', dr] \ar[" U(\ell )\circ \eta_{c'}  ", dotted, urrr] & UF(c')\ar[" UF(k) "', r]\ar[" U(\ell ) "', dotted, urr]  & UFU(d')\ar[" U(\varepsilon_{d'})  "', r]  & U(d')\\
+				   & U(d')\ar[" \eta_{U(d')}  "', ur] \ar[" 1 "', bend right, urr] 
+	\end{tikzcd}\]
+	also commutes. Note that I have also composed $U(\ell )\circ \eta_{c'} $ to obtain a lift over the main square, so simplifying the diagram gives that the square
+	\[\begin{tikzcd}[row sep = 4.5em, column sep = 4.5em]
+	c \ar[" f "', d] \ar[" h ", r]  & U(d)\ar[" U(p) ", d]  \\
+	c' \ar[" U(\ell) \circ \eta_{c'}  ", dotted, ur] \ar[" k "', r]  & U(d')
+	\end{tikzcd}\]
+	commutes. Thus, $f$ has the left lifting property with respect to $U(p)$. The converse proof is extremely similar.
+
+	Now we conclude the proof with repeated references to \cref{1.1.18}.
+	\begin{enumerate}
+		\item ($\implies $)
+			\begin{enumerate}
+				\item Let $F$ be left Quillen. Then $F$ preserves all cofibrations. Let $p$ be a trivial fibration and let $f$ be a cofibration. Since $F$ preserves cofibrations, we have that $F(f)$ is a cofibation. Thus, $F(f)$ has the left lifting property with respect to $p$, and by the first part of the proof, $f$ has the left lifting property with respect to $U(p)$. Thus, $U(p)$ has the right lifting property with respect to all cofibrations, and by \cref{1.1.18}, $U(p)$ is a trivial fibration.
+				\item Let $F$ be left Quillen. Then $F$ preserves all trivial cofibraitons. Let $p$ be a cofibration and let $f$ be a trivial cofibration. Since $F$ preserves trivial cofibrations, we have that $F(f)$ is a trivial cofibration. Thus, $F(f)$ has the left lifting property with respect to $p$, and by the first part of the proof, $f$ has the left lifting property with respect to $U(p)$. Thus, $U(p)$ has the right lifting property with respect to all trivial cofibrations, and by \cref{1.1.18}, $U(p)$ is a fibration.
+			\end{enumerate}
+		\item ($\impliedby $)
+			\begin{enumerate}
+				\item Let $U$ be right Quillen. Then $U$ preserves all fibrations. Let $f$ be a trivial cofibration and let $p$ be a fibration. Since $U$ preserves fibrations, we have that $U(p)$ is a fibration. Thus, $f$ has the left lifting property with respect to $U(p)$, and by the first part of the proof, $F(f)$ has the left lifting property with respect to $p$. Thus, $F(f)$ has the left lifting property with respect to all fibrations, and by \cref{1.1.18}, $F(f)$ is a trivial cofibration.
+				\item Let $U$ be right Quillen. Then $U$ preserves all trivial fibrations. Let $f$ be a cofibration and let $p$ be a trivial fibration. Since $U$ preserves trivial fibrations, we have that $U(p)$ is a trivial fibration. Thus, $f$ has the left lifting property with respect to $U(p)$, and by the first part of the proof, $F(f)$ has the left lifting property with respect to $p$. Thus, $F(f)$ has the left lifting property with respect to all trivial fibraitons, and by \cref{1.1.18}, $F(f)$ is a cofibration.
+			\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}\label{3.1.5}
+	This implies that all adjunctions preserve lifts. We spell out the explicit formula incase it is needed in the future. In what follows, let $(F,U,\eta,\varepsilon ): \mathcal{C}  \to \mathcal{D} $ be any adjunction (not necessarily between model categories), let $f : c \to c'$ in $\mathcal{C} $, and let $p : d \to d'$ in $\mathcal{D} $.
+	\begin{enumerate}
+		\item Let $F(f)$ have the left lifting property with respect to $p$, and let $\ell : F(c') \to d$ be a lift. Then $f$ has the left lifting property with respect to $U(p)$, and the lift $\ell $ corresponds to a lift $U(\ell )\circ \eta_{c'} $.
+		\item Let $f$ have the left lifting property with respect to $U(p)$, and let $\ell : c' \to U(d)$ be a lift. Then $F(f)$ has the left lifting property with respect to $p$, and the lift $\ell $ corresponds to a lift $\varepsilon_d \circ F(\ell )$.
+	\end{enumerate}	
+\end{remark}
+
+\begin{remark}\label{3.1.6}
+	\Cref{3.1.4} explains why we only defined left and right variants of Quillen functors, instead of considering a functor that preserves all cofibrations, fibrations, and weak equivalences. Since left and right Quillen functors always come in adjunctions, by \cref{3.1.4}, any Quillen functor necessarily has a corresponding adjoint Quillen functor, and thus requiring a functor to be left \emph{and} right Quillen implies that this functor has left and right adjoints, both of which are necessarily Quillen. This is a lot to ask for, and for that reason we rarely see functors that are left and right Quillen. Thus, it is much more natural to define two flavors of Quillen functors.
+\end{remark}
+
+\begin{remark}\label{3.1.7}
+	It is likely that \cref{3.1.4} can be proven in another way. To simplify notation, note that the arrow category $\Map \mathcal{C} $ is the same as the functor category $\mathcal{C} ^2$, where $2$ here denotes the obvious poset category. Recall that a lift is really a factorization of a morphism $(h,k): f \to U(p)$ in $\Map \mathcal{C} $ as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	p \ar[" (h\text{,} 1) ", r]  & \ell \ar[" (1\text{,} k) ", r]  & k,
+	\end{tikzcd}\]
+	where the intermediate object $\ell $ is the solution to the lifting problem. If one could promote the adjunction $F\dashv U : \mathcal{C}  \to \mathcal{D} $ to an adjunction between the arrow categories $F^2 \dashv U^2 : \mathcal{C}^2 \to \mathcal{D}^2$, then one obtains an isomorphism $\mathcal{D}^2 (F^2(f), p)\cong \mathcal{C} ^2(f,U^2(p))$ natural in $f$ and $p$. I am not fully sure where to go from here, although I think one can make use of the factorization by constructing the relevant naturality square where the arrow $\mathcal{C} ^2(F^2(f),\ell )\to \mathcal{C} ^2(F^2(f),p)$ is given by postcomposing with $(1,k)$, and assuming $(h,1)\in \mathcal{C} ^2(F^2(f),\ell )$ since $F(f)$ has the left lifting property with respect to $p$. We then follow $(h,1)$ around the naturality square, and consider whether or not the image is $(h,k)$. I am not sure if this proves the statement, and one would have to do some dirty work with adjunctions, but there should at least be a way to approach the problem from the viewpoint of promoting the adjunctions, even if I am not approaching it properly.
+\end{remark}
+
+
+\begin{example}\label{3.1.8}
+	Let $\mathcal{C} $ be a model category, $I\in \Set $, and let $\mathcal{C} ^I$ denote the $I$-indexed product. The product functor $\times ^I : \mathcal{C} ^I\to \mathcal{C} $ is of course right-adjoint to the diagonal functor $\Delta:\mathcal{C} \to \mathcal{C} ^I$, and by definition of the product model structure as seen in \cref{1.1.10}, clearly $\Delta$ preserves cofibrations and trivial cofibrations. Thus, $\Delta\dashv\times^I $ is a Quillen adjunction.
+\end{example}
+
+\begin{example}\label{3.1.9}
+	Recall that given a model category $\mathcal{C} $, \cref{1.1.13} gives a model structure for the category $\mathcal{C}_*=(*\downarrow \mathcal{C} )$. Since we defined arrows as cofibrations, fibrations, or weak equivalences precisely when their underlying arrows are, the forgetful functor $U : \mathcal{C} _* \to \mathcal{C} $ obviously preserves these properties. Since $(-)_+\dashv U$, we have that $U$ is right Quillen. As noted in \cref{1.1.15}, the category $(x\downarrow \mathcal{C} )$ is a model category for \emph{any} $x\in \mathcal{C} $, and thus the forgetful functor $U : \mathcal{C} _x \to \mathcal{C} $ is always right Quillen, provided a left adjoint exists. The left adjoint should be defined as $a\mapsto a\amalg x$, but I am not fully confident this produces an adjunction in the same way $x\mapsto x\amalg *$ does, and would have to investigate further. If I ever need a slice or coslice category of this form, I will check this.
+\end{example}
+
+
+\begin{construction}[Category of Model Categories]\label{3.1.10}
+	Since Quillen functors come in two flavors, and are always packaged into Quillen adjunctions, it would be most natural to consider the adjunction itself as a morphism between model categories. We review the construction of the 2-category $\mathcal{A} \mathrm{dj} $ whose morphisms are adjunctions, in order to naturally introduce the 2-category $\mathcal{M} \mathrm{od} $ of model categories, Quillen adjunctions, and natural transformations. Let $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ and $(F',U',\varphi'): \mathcal{D}  \to \mathcal{E} $ be adjunctions. Define the composition adjunction by
+	\[
+		(F'\circ F,U\circ U'\varphi \circ \varphi'): \mathcal{C}  \to \mathcal{E} ,
+	\]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\varphi \circ \varphi' : \mathcal{E} (F'F(a),b)\ar[" \varphi' ", r] ` & \mathcal{D} (F(a),U'(b))\ar[" \varphi ", r]  & \mathcal{E} (a,UU'(b)).
+	\end{tikzcd}\]
+	Composition of adjunctions is manifestly associative, since functor composition and vertical composition of natural transformations are associative. The identity adjunction $(1,1,1_1)$ is clearly an identity for composition. Now given two adjunctions with the same domain and codomain $F\dashv U,F'\dashv U' : \mathcal{C}  \to \mathcal{D} $, define the 2-cells as a pair of natural transformations $\alpha : F \Rightarrow F'$ and $\beta : U' \Rightarrow U$, such that $\alpha$ and $\beta$ are \emph{mates}. The mate condition states that given $\alpha$, $\beta$ must be defined as the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\beta : U' \ar[" \eta U' ", r]  & UFU' \ar[" U\alpha U' ", r]  & UF'U' \ar[" U\varepsilon' ", r]  & U.
+	\end{tikzcd}\]
+	One may also define $\alpha$ via $\beta$ by the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\alpha : F \ar[" F\eta' ", r]  & FU'F' \ar[" F\beta F' ", r]  & FUF' \ar[" \varepsilon F'", r]  & F'.
+	\end{tikzcd}\]
+	I am only 70\% confident the second formula is correct, so I will attempt to (if it is ever needed) always construct $\beta$ from $\alpha$. If a time comes that I cannot do this, I will add a remark detailing how these compositions arise to ensure the bottom composite is correct\footnote{The enterprising reader can look to Hovey 1.4 to see the rule determining the first composite, and can work through the algebra to determine the second composite.}. Since one mate determines the other, usually only one is specified. Vertical composition is standard vertical composition, and similarly horizontal composites are given by standard horizontal composition.
+
+	Now we specialize to model categories and Quillen functors. It is fairly clear that composing left (right) Quillen functors gives a left (right) Quillen functor, so we define the category $\mathcal{M} \mathrm{od} $ of model categories by taking objects to be model categories, morphisms to be Quillen adjunctions, and 2-morphisms to be mate-pairs of natural transformations, as described above.
+\end{construction}
+
+\begin{remark}\label{3.1.11}
+	\Cref{3.1.10} was originally written with the assumption that $\mathcal{M} \mathrm{od} $ would denote the category of \emph{small} model categories. However, after reading the following section in Hovey's text, he notes a problem I did not consider: there are \emph{no nontrivial small model categories}, because \emph{model categories need be complete and cocomplete}. The solution to this foundational problem is apparently constructing $\mathcal{M} \mathrm{od} $ as a 2-category, allowing one to take the collection of objects to form a ``superclass'', the collection of 1-morphisms to form a class, and the collection of 2-morphisms to also form a class. I have no idea what a superclass is formally, and Hovey only informally states that it is ``to a class as a class is to a set''. I will thus disregard the foundational problem and assume either someone else has solved it, or ZFC is trash and we should replace it :3
+\end{remark}
+
+\begin{remark}\label{3.1.12}
+	If $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ is a Quillen adjunction, then
+	\[
+		D(F,U,\varphi)\coloneqq (U,F,\varphi ^{-1} ): D\mathcal{D}  \to D\mathcal{C} 
+	\]
+	is also a Quillen adjunction between the dual categories. $D$ is indeed contravariantly functorial, and is a self-inverse.
+\end{remark}
+
+\begin{proposition}\label{3.1.13}
+	With notation as in \cref{1.1.13}, a Quillen adjunction $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ induces a Quillen ajunction $(F_*,U_*,\varphi_*): \mathcal{C} _* \to \mathcal{D}_* $. Moreover, there are isomorphisms $F_*(x_+)\cong (F(x))_+$ natural in $x$. The correpsondence $(F,U,\varphi)\mapsto (F_*,U_*,\varphi_*)$ is functorial up to natural isomorphism.
+\end{proposition}
+\begin{proof}
+	Define $U_*(x,u)=(U(x),U(u))$. Since $U$ is right adjoint, it preserves the terminal object, and thus $U(u): U(x) \to *$; thus $U_*$ is well-defined on objects. The action on morphisms is even more obvious. Let $f : (x,u) \to (y,v)$, meaning in particular that $v=fu$. Define $U_*(f)=U(f)$, and note that $U(f): U(x) \to U(y)$, and by functoriality, $U(v)=U(fu)=U(f)U(u)$. Thus, $U(f): (U(x),U(u)) \to (U(y),U(v))$ is well-defined as well. Since $U_*=U$ on morphisms, we immediately have by definition of the model structure on $\mathcal{C} _*$ that $U$ preserves fibrations and trivial fibrations. It thus suffices to construct a left adjoint.
+
+	The left adjoint is constructed by pushout diagrams as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(*)\ar[" F(u) ", r] \ar[d]  & F(x)\ar[d]  \\
+	* \ar[r]  & F_*(x,u)
+	\end{tikzcd}\]
+	Let $f : (x,u) \to (y,v)$ in $\mathcal{C} $. Note that $F(f)\circ F(u)=F(v)$. Factoring the pushout square for $F_*(y,v)$ along this composite, one obtains by universality of pushout, given the commutative diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(*)\ar[d] \ar[" F(u) ", r]  & F(x)\ar[" F(f) ", r] \ar[d] & F(y) \ar[d] \\
+	* \ar[r] \ar[bend right, rr]  & F_*(x,u)\ar[" k "', dashed, r] & F_*(y,v) \\
+	\end{tikzcd}\]
+	there is a unique dashed arrow rendering the diagram commutative. We define $F_*(f)$ as the dashed arrow $k$.
+
+	Let $f : F_*(x,u) \to (y,v)$ in $\mathcal{D} _*$. By universality of pushout (aka by precomposing along the relevant arrows), the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(*)\ar[" F(u) ", r] \ar[d]  & F(x)\ar[d] \ar[" k ", bend left, ddr]  &  \\
+	*\ar[r] \ar[bend right, drr]  & F_*(x,u)\ar[" f ", dr]  &  \\
+	 &  & (y,v)
+	\end{tikzcd}\]
+	commutes. Universality guarentees that the arrow $k$ is defined uniquely by this choice of $f$. The composite $k\circ F(u): F(*) \to (y,v)$ transposes under $U$ to an arrow $\ell : * \to U(y)$. Some work with adjunctions shows that $\ell =v$, and so by commutivity of the diagram $k$ transposes under $F\dashv U$ to an arrow $(x,u)\to U_*(y,v)$. Everything else is obvious from here (aka I didn't feel like working through the rest of this proof since I already see how it goes).
+\end{proof}
+
+\section{Derived functors and naturality}
+
+\begin{definition}[Derived Functors]\label{3.2.1}
+	 Let $\mathcal{C} $ and $\mathcal{D} $ be model categories, and let $Q$ and $R$ be the cofibrant and fibrant replacements, respectively, as defined in \cref{1.1.16}.
+	\begin{enumerate}
+		\item If $F : \mathcal{C}  \to \mathcal{D} $ is left Quillen, define the \emph{total left derived functor} $\mathbf{L} F : \Ho \mathcal{C}  \to \Ho \mathcal{D} $ as the composite
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\Ho \mathcal{C} \ar[" \Ho Q ", r]  & \Ho \mathcal{C} _c \ar[" \Ho F ", r]  & \Ho \mathcal{D} .
+			\end{tikzcd}\]
+			Given a natural transformation $\tau : F \Rightarrow F'$ of left Quillen functors, define the \emph{total derived natural transformation} $\mathbf{L} \tau$ as $\Ho \tau \circ \Ho Q$, which we recall is defined as $(\mathbf{L} \tau)_x = \tau_{Q(x)} $.
+		\item If $U : \mathcal{D}  \to \mathcal{C} $ is right Quillen, define the \emph{total right derived functor} $\mathbf{R} U : \Ho \mathcal{D}  \to \Ho \mathcal{C} $ of $U$ to be the composite
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\Ho \mathcal{D} \ar[" \Ho R ", r]  & \Ho \mathcal{D} _f \ar[" \Ho U ", r]  & \Ho \mathcal{C} . 
+			\end{tikzcd}\]
+			Given a natural transformation $\tau : U \Rightarrow U'$ of right Quillen functors, define the \emph{total derived natural transformation} $\mathbf{R} \tau$ as $\Ho \tau\circ \Ho R$, which we recall is defined as $(\mathbf{R} \tau)_x=\tau_{R(x)} $.
+	\end{enumerate}
+\end{definition}
+
+\begin{terminology}\label{3.2.2}
+	A functor in practice is almost never left and right Quillen, so we generally leave the left/right implicit and refer only to the functor's total derived functor.
+\end{terminology}
+
+\begin{remark}\label{3.2.3}
+	Note that even if $F : \mathcal{C}  \to \mathcal{D} $ is not left Quillen, provided it preserves weak equivalences between cofibrant objects, or by Ken Brown's \cref{1.1.21} provided that it preserves trivial cofibrations betwen cofibrant objects, we still obtain a defintion of $\Ho F$ by universality of $\Ho \mathcal{C} _c$, and thus can still define $\mathbf{L} F$. The dual, of course, applies to total right derived functors.
+\end{remark}
+
+\begin{remark}\label{3.2.4}
+	Riehl defines total left derived functors between general homotopic categories as the Kan extension $\Lan_\gamma (\delta F)$, where $\delta : \mathcal{D}  \to \Ho \mathcal{D} $ and $\gamma : \mathcal{C}  \to \Ho \mathcal{C} $ are the localization functors. An immediate thought is then to consider whether or not these definitions are equivalent. I see no obvious way to prove this is true, but I am sure it is. Most likely the proof is fairly complex, so I will return to it later in the text when I have sufficient time.
+\end{remark}
+
+\begin{remark}\label{3.2.5}
+	Derivation is functorial on functor categories. In other words, given $\tau',\tau : F \Rightarrow G$, we have
+	\[
+		\mathbf{L} (\tau'\circ \tau)_x=(\tau'\circ \tau)_{Q(x)} =\tau'_{Q(x)} \circ \tau_{Q(x)} =(\mathbf{L} \tau')_x\circ (\mathbf{L} \tau)_x
+	\]
+	by unraveling definitions. Thus, $\mathbf{L} (\tau'\circ \tau)=\mathbf{L} \tau' \circ \mathbf{L} \tau$, and similarly for $\mathbf{R} $. We also see that $\mathbf{L}1_{F} =1_{\mathbf{L} F} $, and thus $\mathbf{L} $ and $\mathbf{R} $ are functorial on functor categories $\mathbf{L} ,\mathbf{R} :\mathcal{D} ^\mathcal{C} \to \Ho \mathcal{D} ^{\Ho \mathcal{C} } $.
+
+	However, functoriality falls apart when considering functors as arrows, rather than objects. Note that $\mathbf{L} (1_\mathcal{C} )=\Ho Q\neq 1$, and there are similar discrepancies that arise. However, passing to a bicategorical structure shows that $\mathbf{L} $ and $\mathbf{R} $ can be viewed as pseudofunctor.
+\end{remark}
+
+\begin{theorem}\label{3.2.6}
+	Let $\mathcal{C} $ be a model category. Then there is a natural isomorphism $\alpha : L(1_\mathcal{C} ) \cong 1_{\Ho \mathcal{C} } $. Additionally, for any pair of left Quillen functors $F : \mathcal{C}  \to \mathcal{D} $ and $F': \mathcal{D}  \to \mathcal{E} $, there is a natural isomorphism
+	\[
+		m=m_{F',F} : \mathbf{L} F'\circ \mathbf{L} F\cong \mathbf{L} (F'\circ F)
+	.\]
+	These natural isomorphisms satisfy the following coherence properties.
+	\begin{enumerate}
+		\item Given $F : \mathcal{C}  \to \mathcal{C} '$, $F': \mathcal{C} ' \to \mathcal{C}''$, and $F'': \mathcal{C} '' \to \mathcal{C} '''$ left Quillen, the following associativity diagram commutes:
+			\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+				(\mathbf{L} F''\circ \mathbf{L} F')\circ \mathbf{L} F \ar[" m_{F''\text{,} F'}\mathbf{L} F ", r]  \ar[equals, d] & \mathbf{L} (F''\circ F')\circ \mathbf{L} F \ar[" m_{(F''\circ F')\text{,} F}  ", r]  & \mathbf{L} ((F''\circ F')\circ F)\ar[equals, d]  \\
+			\mathbf{L} F''\circ (\mathbf{L} F'\circ \mathbf{L} F)\ar[" \mathbf{L} F'' m_{F'\text{,} F}  "', r]  & \mathbf{L} F''\circ \mathbf{L} (F'\circ F)\ar[" m_{F''\text{,} (F'\circ F)}  "', r]  & \mathbf{L} (F''\circ (F'\circ F))
+			\end{tikzcd}\]
+		\item If $F : \mathcal{C}  \to \mathcal{D} $ is left Quillen, the following left unit coherence diagram commutes.
+			\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+			\mathbf{L} 1_\mathcal{D}\circ \mathbf{L} F\ar[" m ", r] \ar[" \alpha \mathbf{L} F"', d]   & \mathbf{L} (1_\mathcal{D} \circ F) \ar[equals, d]  \\
+			1_{\Ho \mathcal{D} } \circ \mathbf{L} F \ar[equals, r]  & \mathbf{L} F
+			\end{tikzcd}\]
+		\item If $F : \mathcal{C}  \to \mathcal{D} $ is left Quillen, the following right unit coherence diagram commutes.
+			\[\begin{tikzcd}[row sep = 4em, column sep = 4em]
+			\mathbf{L} F\circ \mathbf{L} 1_{\mathcal{C} } \ar[" m ", r] \ar[" \mathbf{L} F\alpha "', d]  & \mathbf{L} (F\circ 1_{\mathcal{C} } )\ar[equals, d]  \\
+			\mathbf{L} F\circ 1_{\Ho \mathcal{C} } \ar[equals, r]  & \mathbf{L} F
+			\end{tikzcd}\]
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	I hate coherence checks. Define $\alpha : \mathbf{L} (1_\mathcal{C} ) \Rightarrow 1_{\Ho \mathcal{C} } $ as $\Ho q$, where we recall from \ref{1.1.16} that $q : Q \Rightarrow 1_\mathcal{C} $ is a natural trivial fibration, and the homotopy category inverts components of $q$, making $\Ho q$ is a natural isomorphism. Define $m$ as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+	m_{F'\text{,} F} : (\mathbf{L} F'\circ \mathbf{L} F)(x)=F'QFQ(x)\ar[" F'qFQ(x) ", r]  & F'FQ(x)=\mathbf{L} (F'F)(x).
+	\end{tikzcd}\]
+	Thus $m_{F',F} $ is natural in $x$ by definition. Note that this definition involves a serious abuse of notation, since the total derived functor is not $FQ$, but $\Ho F\Ho Q$. They are, however, equivalent on objects, so we can simply lower $m$ to the homotopy categories. Since $Q(x)$ is cofibrant, and since $F,F',Q$ preserve cofibrant objects, we have that $F'qFQ(x)$ is an arrow between cofibrant objects. Note by \cref{3.2.7} that $Q$ preserves weak equivalences, and thus both the source and target of $m_{F',F} $ preserve weak equivalences. Thus, $m_{F',F} $ lowers to a natural transformation in $\Ho \mathcal{C} $ by universality. Since $q$ is a trivial fibration, and in particular a weak equivalence, and since $F$ preserves cofibrant objects, we have that $q_{FQ(x)} : QFQ(x) \to FQ(x)$ is a weak equivalence between cofibrant objects. By Ken Brown's \cref{1.1.21}, since $F'$ preserves trivial cofibrations between cofibrant objects, it necessarily preserves weak equivalences between them, and thus $(m_{F',F})_x=F'(q_{FQ(x)} )$ is a weak equivalence. Thus, this lowers to an isomorphism in $\Ho \mathcal{C} $.
+
+	Now we show the associativity coherence diagram commutes. It suffices to show
+	\[
+		(F''F'q_{FQ(x)} )c\circ (F''q_{F'QFQ(x)} )=(F''q_{F'FQ(x)} )\circ (F''QF'q_{FQ(x)} )
+	\]
+	as maps $F''QF'QFQ(x)\Rightarrow F''F'FQ(x)$\footnote{$FQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQFQ$}. ``This follows by naturality of $q$.'' I don't like coherence checks so I agree! Note that the left unit coherence diagram expresses the equality
+	\[
+		1_{\mathcal{D} } qFQ =qFQ,
+	\]
+	where we once again drop the $\Ho $ and write $\mathbf{L} F$ as $FQ$, with the understanding that mapping under $\Ho $ gives us the proper definition between the homotopy categories.
+
+	The right coherence diagram depicts the equality
+	\[
+		FqQ = FQq : FQQ \Rightarrow FQ,
+	\]
+	which does not hold in $\mathcal{C} $ in general. We must thus transfer to $\Ho \mathcal{C} $ to show this statement. To do this, we show the components are equal at components $x$ for $x$ cofibrant, since all objects in $\Ho \mathcal{C} $ are isomorphic to a cofibrant object (\cref{1.2.18}). Naturality implies $q_x\circ q_{Q(x)} =q_x\circ Q(q_x)$. Since $q_x$ is a weak equivalence between cofibrant objects, since $x$ is cofibrant, $F(q_x)$ is also a weak equivalence. Thus, $F(q_{Q(x)} )==FQ(q_x)$ in $\Ho \mathcal{C} $, since one can take $F$ on both sides of the above equality then cancel $F(q_x)$, since it is inverted in $\Ho \mathcal{C} $.
+\end{proof}
+
+\begin{remark}\label{3.2.7}
+	We still have to show $Q$ preserves weak equivalences, and dually so does $R$. I'm suprised I haven't shown this earlier in my notes. Recall $Q(x)$ is defined via the functorial factorization
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[" \alpha(0\to x) ", r]  & Q(x)\ar[" \beta(0\to x) ", r]  & x,
+	\end{tikzcd}\]
+	where as usual $(\alpha,\beta)$ denotes our cofibration/trivial fibration factorization. Given a weak equivalence $f:x\to y$, \cref{1.1.2} factors the diagram as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[equals, d] \ar[" \alpha(0\to x) ", r]  & Q(x) \ar[" Q(f) "', d] \ar[" \beta(0\to x) ", r] & x\ar[" f ", d]  \\
+	0 \ar[" \alpha(0\to y) "', r]  & Q(y)\ar[" \beta(0\to y) "', r]  & y
+	\end{tikzcd}\]
+	Note that since $\beta(0\to x)$ is a trivial fibration, and since $f$ is a weak equivalence, their composite $f\circ \beta(0\to x)$ is a weak equivalence. By commutivity, the composite $\beta(0\to y)\circ Q(f)$ is a weak equivalence, and since $\beta(0\to y)$ is a trivial fibration, by 2-out-of-3 we have that $Q(f)$ is a weak equivalence.
+\end{remark}
+
+\begin{lemma}\label{3.2.8}
+	Let $\sigma : F \Rightarrow G $ be a natural transformation of weak left Quillen functors $\mathcal{C} \to \mathcal{D} $, and let $\tau : F' \Rightarrow G'$ be a natural transformation of weak left Quillen functors $\mathcal{D} \to \mathcal{E} $. Let $m$ be as defined in \cref{3.2.6}. Then the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\mathbf{L} F' \circ \mathbf{L} F\ar[" m ", r] \ar[" \mathbf{L} \tau \cdot \mathbf{L} \sigma "', d]  & \mathbf{L} (F'\circ F)\ar[" \mathbf{L} (\tau\cdot \sigma) ", d]  \\
+	\mathbf{L} G'\circ \mathbf{L} G \ar[" m "', r]  & \mathbf{L} (G'\circ G)
+	\end{tikzcd}\]
+	where we denote horizontal composition by $\cdot $ for emphasis. In particular, $\mathbf{L} $ preserves horizontal composites up to isomorphism.
+\end{lemma}
+\begin{proof}
+	Recall the horizontal composite is defined via
+	\[
+		(\tau\cdot \sigma)_x=\tau_{G(x)} \circ F'(\sigma_x)=G'(\sigma_x)\circ \tau_{F(x)} 
+	.\]
+	Unraveling definitions,
+	\[
+		\mathbf{L} (\tau\cdot \sigma)_x\circ m=\tau_{GQ(x)} \circ F'(\sigma_{Q(x)} ,
+	\]
+	where we continue to not specify the $\Ho $ for simplicity, since the definition of $\Ho $ on natural transformations is so similar. Naturality of $q$ rewrites this composite as $\tau_{GQ(x)} \circ F'(q_{GQ(x)} )\circ F'Q(\sigma_{Q(x)} )$. Naturality of $\tau$ then rewrites this composite as $G'(q_{GQ(x)} )\circ \tau_{QGQ(x)} \circ F'Q(\sigma_{Q(x)} )$, which is the definition of $m\circ (\mathbf{L} \tau \cdot \mathbf{L} \sigma)$.
+\end{proof}
+
+\begin{remark}\label{3.2.9}
+	The theory here is fairly dry, we are just kind of proving some basic things work and are functors, so I hope any reader will forgive me for skipping over some steps and at times basically just paraphrasing Hovey.
+\end{remark}
+
+\begin{remark}\label{3.2.10}
+	The statements of \cref{3.2.8} and \cref{3.2.6} can be summarized as stating that $\mathbf{L} $ is a psuedofunctor from the 2-category of model categories with morphisms given by \emph{left Quillen functors} to the 2-category $\Cat $. Of course the dual of this is that $\mathbf{R} $ is a pseudofunctor from the 2-category of model categories with morphisms as \emph{right} Quillen functors to $\Cat $. These definitions differ from our definition of $\mathcal{M} \mathrm{od} $ in \cref{3.1.10}, so we would like a way to make the same claim for adjuntions. To do this, we introduce the notion of a \emph{derived adjunction}.
+\end{remark}
+
+\begin{lemma}\label{3.2.11}
+	Let $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ be a Quillen adjunction. Then $\mathbf{L} F$ and $\mathbf{R} U$ assemble into an adjunction $\mathbf{L} (F,U,\varphi)\coloneqq (\mathbf{L} F,\mathbf{R} U,\mathbf{R} \varphi)$, called the \emph{derived adjunction}.
+\end{lemma}
+\begin{proof}
+	It suffices to construct $\mathbf{R} \varphi$ as an isomorphism natural in $x$ and $y$. Recall by \cref{1.2.18} that there is a natural isomorphism $\Ho \mathcal{D} (FQ(x),y)\cong \mathcal{D}(FQ(x),R(y)) / \tildesim $, since $Q(x)$ is cofibrant. Although this is not explicitly stated, applying only the natural transformation $1\Rightarrow R$ in the proof easily shows this to be the case. Similarly, we have a natural isomorphism $\Ho \mathcal{C} (x,UR(y))\cong \mathcal{C} (Q(x),UR(y)) / \tildesim $. Since the object function of $\mathbf{L} F$ and $\mathbf{R} U$ are the same as $FQ$ and $UR$, it suffices to show the middle isomorphism (marked with a ?) in the chain
+	\[
+		\Ho \mathcal{C} (x,UR(y))\cong \mathcal{C} (Q(x),UR(y)) / \tildesim \overset{?}{\cong} \mathcal{D} (FQ(x),R(y)) / \tildesim \cong \Ho \mathcal{D} (FQ(x),y)
+	\]
+	indeed exists, and is natural. Without the quotients, this isomorphism is just a special case of $\varphi$, so we need only show $\varphi$ respects the isomorphism relation, and then to define $\mathbf{R} \varphi$ by composing along the given isomorphisms.
+
+	Since $Q(x)$ and $R(y)$ are in particular cofibrant and fibrant, respectively, we show that $\varphi$ respects homotopy between cofibrant and fibrant objects. Let $f,g : F(a) \to b$ be homotopic maps with $a$ cofibrant and $b$ fibrant. Let $b'$ be a path object for $b$, and $H : F(a) \to b'$ a right homotopy from $f$ to $g$. Since $U$ is right Quillen, it preserves products, fibrations, and weak equivalences between fibrant objects. In particular, $U(b')$ is a path object for $U(b)$, since the product, weak equivalence, and fibration are preserved. To illustrate this in more precision, $U$ applied to the path object gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	U(b)\ar[r]  & U(b')\ar[r]  & U(b\times b).
+	\end{tikzcd}\]
+	The left arrow is a weak equivalence because $b$ is fibrant, and we can choose $b'$ to be fibrant by \cref{1.2.12} allowing arbitrary choices of path objects, and \cref{1.2.11} giving the relevant path object; $U$ then preserves weak equivaleces between fibrant objects. The right arrow is a fibration since $U$ preserves them, and since products are preserved, $U(b\times b)\cong U(b)\times U(b)$; isomorphisms are trivial fibrations so we thus keep our path object.
+
+	The homotopy diagram is given as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  & b \\
+	F(a)\ar[" f ", bend left, urr] \ar[" g "', bend right, drr] \ar[" H ", r]  & b' \ar[" (p_0\text{,} p_1) ", r] \ar[" p_0 ", ur] \ar[" p_1 "', dr]  & b\times b \ar[u] \ar[d]  \\
+	 &  & b
+	\end{tikzcd}\]
+	Note here that postcomposing $H$ by $p_0$ can be viewed as $\mathcal{D} (F(1_a),p_0)(H)$. Naturality of $\varphi$ gives the outer square
+	\[\begin{tikzcd}
+	{\mathcal{D}(F(a),b')} &&& {\mathcal{C}(a,U(b'))} \\
+	& H & {\varphi(H)} \\
+	& {p_0H=f} & {\varphi(f)=U(p_0)\varphi(H)} \\
+	{\mathcal{D}(F(a),b)} &&& {\mathcal{C}(a,U(b))}
+	\arrow["{\varphi_{a,b'}}", from=1-1, to=1-4]
+	\arrow["{\mathcal{D}(F(1_a),p_0)}"', " (p_0)_* ",  from=1-1, to=4-1]
+	\arrow["{\mathcal{C}(1_a,U(p_0))}", " U(p_0)_* "', from=1-4, to=4-4]
+	\arrow[maps to, from=2-2, to=2-3]
+	\arrow[maps to, from=2-2, to=3-2]
+	\arrow[maps to, from=2-3, to=3-3]
+	\arrow[maps to, from=3-2, to=3-3]
+	\arrow["{\varphi_{a,b}}"', from=4-1, to=4-4]
+	\end{tikzcd}\]
+	Following $H$ around the outer square, as indicated by the inner square, expresses the equality $\varphi(f)=U(p_0)\varphi(H)$. Replacing $p_0$ with $p_1$ gives the equality $\varphi(g)=U(p_1)\varphi(H)$. Thus we obtain that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 5em]
+	 &  & U(b) \\
+	a \ar[" \varphi(H) ", r] \ar[" \varphi (f)", bend left, urr] \ar[" \varphi (g)"', bend right, drr]  & U(b')\ar[" U(p_0) ", ur] \ar[" U(p_1) "', dr] \ar[" U(p_0\text{,} p_1) ", " (U(p_0)\text{,} U(p_1)) "', r]  & U(b\times b)\cong U(b)\times U(b)\ar[u] \ar[d]  \\
+	 &  & U(b)
+	\end{tikzcd}\]
+	commutes. Since $U(b')$ is a path object for $U(b)$, we have that $\varphi(H)$ is a (right) homotopy from $\varphi(f)$ to $\varphi(g)$. Since $b$ is fibrant and $U$ is right Quillen, so is $U(b)$. Since $a$ is cofibrant, by \cref{1.2.12} gives us $\varphi(f)\sim \varphi(g)$.
+
+	We must also show the converse; that is, we must also show $\varphi ^{-1} $ respects homotopy. Let $f,g : a \to U(b)$ be morphisms with $a$ cofibrant and $b$ fibrant; let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a\amalg a \ar[" i_0+i_1 ", r]  & a' \ar[r]  & a
+	\end{tikzcd}\]
+	be a cylinder object for $a$, where we once again choose $a'$ cofibrant by \cref{1.2.11} and \cref{1.2.12}; and let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[d] \ar[" i_0 ", dr] \ar[" f ", bend left, drr]  &  &  \\
+	a\amalg a \ar[" i_0+i_1 ", r]  & a' \ar[" H ", r]  & U(b) \\
+	a \ar[u] \ar[" i_1 "', ur] \ar[" g "', bend right, urr]  &  & 
+	\end{tikzcd}\]
+	be a left homotopy $f\sim g$. Naturality of $\varphi ^{-1} $ gives the outer square
+	\[\begin{tikzcd}
+	{\mathcal{C}(a',U(b))} &&& {\mathcal{D}(F(a'),b)} \\
+	& H & {\varphi^{-1}(H)} \\
+	& {Hi_0=f} & {\varphi^{-1}(f)=\varphi^{-1}(H)F(i_0)} \\
+	{\mathcal{C}(a,U(b))} &&& {\mathcal{D}(F(a),b)}
+	\arrow["{\varphi^{-1}_{a',b}}", from=1-1, to=1-4]
+	\arrow["{\mathcal{C}(i_0,U(1_b))}"', " (i_0)^* ", from=1-1, to=4-1]
+	\arrow["{\mathcal{D}(F(i_0),1_b)}", " F(i_0)^* "', from=1-4, to=4-4]
+	\arrow[maps to, from=2-2, to=2-3]
+	\arrow[maps to, from=2-2, to=3-2]
+	\arrow[maps to, from=2-3, to=3-3]
+	\arrow[maps to, from=3-2, to=3-3]
+	\arrow["{\varphi^{-1}_{a,b}}"', from=4-1, to=4-4]
+	\end{tikzcd}\]
+	Once again, tracing $H$ along the outer square, as indicated by the inner square, depicts the equality $\varphi^{-1} (f)=\varphi^{-1} (H)F(i_0)$, and constructing the same square for $g$ gives the equality $\varphi^{-1} (g)=\varphi^{-1} (H)F(i_1)$. We thus obtain that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(a)\ar[d] \ar[" F(i_0) ", dr] \ar[" \varphi ^{-1} (f)", bend left, drr]  &  &  \\
+	F(a)\amalg F(a) \ar[" F(i_0)+F(i_1) ", r]  & F(a')\ar[" \varphi^{-1} (H)", r]  & b \\
+	F(a)\ar[u] \ar[" F(i_1) "', ur] \ar[" \varphi ^{-1} (g)"', bend right, urr]  &  & 
+	\end{tikzcd}\]
+	commutes by definition of coproduct. It thus suffices to show
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 5em]
+	F(a)\amalg F(a)\cong F(a\amalg a)\ar[r]  & F(a')\ar[r]  & F(a)
+	\end{tikzcd}\]
+	is a cylinder object for $F(a)$, and indeed since we chose $a'$ cofibrant, the weak equivalence $F(a')\to F(a)$ is preserved by Ken Brown's \cref{1.1.21}, the isomorphism indicated on the left exists, and $F(i_0+i_1)\cong F(i_0)+F(i_1)$ is a cofibration since $F$ is left Quillen.
+\end{proof}
+
+\begin{example}\label{3.2.12}
+	Let $I$ be a set, and $\mathcal{C} $ a model category. We saw in \cref{3.1.8} that there is a Quillen adjunction $\Delta\dashv \times ^I : \mathcal{C}  \to \mathcal{C} ^I$, where $\times ^I$ is the $I$-ary product multifunctor, for lack of a better notation\footnote{I thought for a short time that this was the \emph{iterated} product, which could be denoted by exponentiation, and I don't know why I thought this since there are about 30 reasons it isn't that. For example, exponentiation is a functor $\mathcal{C} \to \mathcal{C} $, so domains don't match.}. Since $\mathbf{L} \Delta(x) = \Delta Q(x)$, under the isomorphism $\Ho \mathcal{C} ^I\cong (\Ho \mathcal{C} )^I$ we obtain that $\mathbf{L} \Delta$ is naturally isomorphic to the diagonal functor $\Delta : \Ho \mathcal{C}  \to (\Ho \mathcal{C} )^I$. Thus, the total right derived functor of a product functor on $\mathcal{C} $ is a product functor on $\Ho \mathcal{C} $. Similarly, we obtain the total left derived functor of a coproduct functor is a coproduct functor. One obtains from this that $\Ho \mathcal{C} $ has small products and coproducts, but we will show even more throughout the text. This is yet another sign that the homotopy category of a model category is fantastically well-behaved.
+\end{example}
+
+This was the dullest section of the book I've read, I can't want for Quillen equivalences they look so much cooler. Also why do I keep thinking the plural of equivalences is equivali?
+
+\section{Quillen equivalences}
+
+The goal of Quillen equivalences is to establish a condition weaker than that of isomorphism, wherein one may consider two different categories to have the same homotopy theory. Since the homotopy category $\Ho \mathcal{C} $ encodes a lot of the homotopic data of a model category, one is naturally lead to consider Quillen adjunctions $F\dashv U$ where the derived adjunction is an equivalence of categories.
+
+\begin{definition}[Quillen Equivalence]\label{3.3.1}
+	A Quillen adjunction $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ is a \emph{Quillen equivalence} if and only if for all cofibrant $x\in \mathcal{C} $ and all fibrant $y\in \mathcal{D} $, a morphism $f : F(x) \to y$ is a weak equivalence in $\mathcal{D} $ if and only if $\varphi(f): x \to U(y)$ is a weak equivalence in $\mathcal{C} $. More concisely, the adjunction $\varphi$ preserves weak equivalences, and so does its inverse.
+\end{definition}
+\begin{proposition}\label{3.3.2}
+	Let $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ be a Quillen adjunction. Then the following conditions are equivalence.
+	\begin{enumerate}
+		\item $(F,U,\varphi)$ is a Quillen equivalence as defined in \cref{3.3.1};
+		\item The composition $x\xlongrightarrow{\eta}UF(x)\xlongrightarrow{U(r_{F(x)})}URF(x)$ is a weak equivalence for all cofibrant $x$, and the composition $FQU(x)\xlongrightarrow{F(q_{U(x)} )}FQ(x)\xlongrightarrow{\varepsilon }x$ is a weak equivalence for all fibrant $x$;
+		\item $\mathbf{L} (F,U,\varphi)$ as defined in \cref{3.2.11} is an adjoint equivalence of categories.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	I'm going to start indicating when I've done a proof largely by myself, or when it follows the proof of some other source. This proof is longer, so we follow Hovey's Proposition 1.3.13 for the proof, but of course adding in extra details where needed.
+
+	$(1\implies 2)$ Let $(F,U,\varphi)$ be a Quillen equivalence, and let $x$ be cofibrant. Note that $U$ preserves fibrant objects and $RF(x)$ is fibrant by \cref{1.1.16}, and thus $RF(x)$ is fibrant. Note that $r_{F(x)} : F(x) \to RF(x)$ is a trivial fibration by \cref{1.1.16}; in particular it is a weak equivalence. Applying \cref{3.3.1} shows that $\varphi$ preserves weak equivalences of this form, giving us that $\varphi(r_{F(x)} ): x \to URF(x)$ is a weak equivalence. It suffices to show $\varphi(r_{F(x)} )=U(r_{F(x)} )\circ \eta_x$.
+
+	Note that $\mathcal{D} (F(1_x),r_{F(x)})=(r_{F(x)})_*$ is just postcomposition, and similarly $\mathcal{C} (1_x,U(r_{F(x)} ))=U(r_{F(x)} )_*$ is also just postcomposition. Thus, naturality of $\varphi$ gives that the left diagram
+	\[\begin{tikzcd}
+	{\mathcal{D}(F(x),F(x))} & {\mathcal{C}(x,UF(x))} & {1_{F(x)}} & {\eta_x} \\
+	{\mathcal{D}(F(x),RF(x))} & {\mathcal{C}(x,URF(x))} & {r_{F(x)}} & {\varphi(r_{F(x)})=U(r_{F(x)})\circ\eta_x}
+	\arrow["\varphi", from=1-1, to=1-2]
+	\arrow["{(r_{F(x)})_*}"', from=1-1, to=2-1]
+	\arrow["{U(r_{F(x)})_*}", from=1-2, to=2-2]
+	\arrow[maps to, from=1-3, to=1-4]
+	\arrow[maps to, from=1-3, to=2-3]
+	\arrow[maps to, from=1-4, to=2-4]
+	\arrow["\varphi"', from=2-1, to=2-2]
+	\arrow[maps to, from=2-3, to=2-4]
+	\end{tikzcd}\]
+	commutes. Recall that $\eta_x$ is defined as $\varphi(1_{F(x)} )$. Tracing $1_{F(x)} $ around the left square, as indicated by the right square, yields the equality $U(r_{F(x)} )\circ \eta_x=\varphi(r_{F(x)} )$. We showed above that $\varphi(r_{F(x)} )$ is a weak equivalence, and thus $U(r_{F(x)} )\circ \eta_x$ is a weak equivalence. The statement for $F$, fibrant objects, and $\varepsilon $ is proven analogously.
+
+	$(2\implies 1)$ For the converse, let $f : F(x) \to y$ be a weak equivalence with $x$ cofibrant and $y$ fibrant. We see by examining the above proof, as indicated more clearly in \cref{3.3.3}, that $\varphi(f)=U(f)\circ \eta_x$. Naturality of $r : 1 \Rightarrow R$ and functoriality of $U$ give the commutative square on the left of the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+	x \ar[" \eta_x ", r] \ar[equals, d]  & UF(x)\ar[" U(f) ", r] \ar[" U(r_{F(x)} ) "', d]  & U(y)\ar[" U(r_y) ", d]  \\
+	x \ar[" U(r_{F(x)} )\eta_x "', r]  & URF(x)\ar[" UR(f) "', r]  & UR(y)
+	\end{tikzcd}\]
+	commutes, and the square on the right commutes manifestly. By \cref{3.2.7}, $R$ preserves weak equivalences, and thus $R(f)$ is a weak equivalence. Since $U$ is right Quillen, by Ken Brown's \cref{1.1.21} it preserves weak equivalences between fibrant objects, and since $RF(x),R(y)$ are fibrant, $UR(f)$ is a weak equivalence. By hypothesis, $U(r_{F(x)} )\circ \eta_x$ is a weak equivalence, and thus the entire bottom composite is a weak equivalence. Since $r_y : y \to R(y)$ is a trivial cofibration between fibrant objects, $U(r_y)$ is a weak equivalence. Thus, $U(r_y)\circ U(f)\circ \eta$ is a weak equivalence by commutivity of the diagram, and by the 2-out-of-3 property, $U(f)\circ \eta_x=\varphi(f)$ is a weak equivalence. The converse direction is once again the same proof, but using the decomposition $\varphi ^{-1} (f)=\varepsilon _x \circ F(f)$, and substituting $\varphi(f)$ for $f$.
+
+	$(2\iff 3)$ Recall that an adjoint equivalence of categories is an adjunction where the unit and counit are isomorphisms. Thus, it suffices to show each $\mathbf{R} \eta_x$ and $\mathbf{R} \varepsilon _x$ has an inverse if and only if (2) holds. Investigation of \cref{1.2.18} gives that the unit of the derived adjunction is given by the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x \ar[" q_x^{-1}  ", r]  & Q(x)\ar[" \eta_x ", r]  & UFQ(x)\ar[" U(r_{FQ(x)} ) ", r] & URFQ(x).
+	\end{tikzcd}\]
+	 Since $q_x^{-1} $ is an isomorphism, we have that the unit is an isomorphism if and only if $U(r_{FQ(x)}) \circ \eta_x$ is an isomorphism. It suffices to show this is true if and only if $U(r_{F(x)} )\circ \eta_x$ is a weak equivalence for all cofibrant $x$. In the below diagram, the left square commutes by naturality of $\eta$. The right square commutes by functoriality of $U$ and naturality of $r$.
+	 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 Q(x)\ar[" \eta_{Q(x)}  ", r] \ar[" q_x "', d]  & UFQ(x)\ar[" UF(q_x) "', d] \ar[" U(r_{FQ(x)} ) ", r]  & URFQ(x)\ar[" URF(q_x) ", d]  \\
+	 x \ar[" \eta_x "', r]  & UF(x)\ar[" U(r_x) "', r]  & URF(x)
+	 \end{tikzcd}\]
+	 Hence we are showing the top composite is an isomorphism if and only if the bottom is a weak equivalence. Since it should be an isomorphism in the homtopy category, that would mean showing it is a weak equivalence. Indeed, $q_x$ is a weak equivalence, $F$ preserves weak equivalences between the cofibrant objects $Q(x)$ and $x$, $R$ preserves weak equivalences, and then $U$ preserves weak equivalences between fibrant objects. Thus $URF(q_x)$ is a weak equivalence, and the 2-out-of-3 axiom gives the required iff condition. The converse direction is just the opposite proof.
+\end{proof}
+
+\begin{remark}\label{3.3.3}
+	We see from the first part of the proof of \cref{3.3.2} that for any $f : F(x) \to y$, we have $\varphi(f)=U(f)\circ \eta_x$. Indeed, consider the naturality diagram for $\varphi$ given by
+	\[\begin{tikzcd}
+	{\mathcal{D}(F(x),F(x))} & {\mathcal{C}(x,UF(x))} & {1_{F(x)}} & {\eta_x} \\
+	{\mathcal{D}(F(x),y)} & {\mathcal{C}(x,U(y))} & {f} & {\varphi(f)=U(f)\circ\eta_x}
+	\arrow["\varphi", from=1-1, to=1-2]
+	\arrow["f_*", " \mathcal{D} (F(1_x)\text{,} f) "', from=1-1, to=2-1]
+	\arrow["U(f)_*"', " \mathcal{C} (1_x\text{,} U(f)) ", from=1-2, to=2-2]
+	\arrow[maps to, from=1-3, to=1-4]
+	\arrow[maps to, from=1-3, to=2-3]
+	\arrow[maps to, from=1-4, to=2-4]
+	\arrow["\varphi"', from=2-1, to=2-2]
+	\arrow[maps to, from=2-3, to=2-4]
+	\end{tikzcd}\]
+	where we have simply replaced $r_{F(x)} $ by $f$ in the relevant diagram in the above proof. The right square indicates the equality given by following $1_{F(x)} $ around the diagram. We see also by duality that any $f : x \to U(y)$ has $\varphi^{-1} (f)=\varepsilon_x \circ F(f)$.
+\end{remark}
+
+\begin{corollary}\label{3.3.4}
+	If $(F,U,\varphi)$ and $(F,U',\varphi')$ are Quillen adjunctions $\mathcal{C} \to \mathcal{D} $, then $(F,U,\varphi)$ is a Quillen equivalence if and only if $(F,U',\varphi')$ is a Quillen equivalence. Dually, if $(F',U,\varphi'')$ is another Quillen adjunction, then $(F,U,\varphi)$ is a Quillen equivalence if and only if $(F',U,\varphi'')$ is.
+\end{corollary}
+\begin{proof}
+	By \cref{3.3.2}, $(F,U,\varphi)$ is a Quillen equivalence if and only if the derived adjunction $\mathbf{L} (F,U,\varphi)$ is an equivalence of categories, which holds if and only if $\mathbf{L} F$ is an equivalence of categories $\Ho \mathcal{D} \simeq\Ho \mathcal{C} $. This solves the proof, since the implication is bidirectional: adjoint equivalence implies $\mathbf{L} F$ equivalence of categories implies any adjunction containing $\mathbf{L} F$ as the left adjoint is an adjoint equivalence. The other direction is the same.
+\end{proof}
+
+\begin{terminology}\label{3.3.5}
+	By \cref{3.3.4}, we often refer to a Quillen equivalence $F\dashv U$ by simply naming one functor in the adjunction.
+\end{terminology}
+
+
+\begin{corollary}\label{3.3.6}
+	Let $F : \mathcal{C}  \to \mathcal{D} $ and $G : \mathcal{D}  \to \mathcal{E} $ be either both left, or both right Quillen functors. Then if two out of the three $F,G,GF$ are Quillen equivalences, so is th third. In particular, left and right Quillen functors satisfy the 2-out-of-3 rule.
+\end{corollary}
+\begin{proof}
+	$\mathbf{L} (GF)$ is naturally isomorphic to $\mathbf{L} G\circ \mathbf{L} F$ by the annoying coherence check proof \cref{3.2.6}. It is at this point clear how the theroem concludes: since adjunctions can be composed in the style of \cref{3.1.10}, since an adjunction is an adjoint equivalence if and only if an adjoint functor is an equivalence of categories, it suffices to show equivalences of categories satisfy the 2-out-of-3 rule. This is a simple check; it's extemely similar to the familiar proof that isomorphisms have a unique inverse, but with some extra horizontal compositions thrown in to keep track of (because the inverse of an equivalence of categories is only unique up to isomorphism).
+\end{proof}
+
+\begin{remark}\label{3.3.7}
+	\Cref{3.3.6} clearly implies the 2-of-3 property holds for $\mathcal{M} \mathrm{od} $ as constructed in \cref{3.1.10} with adjunctions as morphisms. The obvious next idea is whether we can construct a model structure on $\mathcal{M} \mathrm{od} $. By the time of Hovey's book, this had not yet been accomplished. I have been unable to find such a model structure in the modern literature, but I did find an expository paper on homotopy limits over diagrams of model categories (\href{https://arxiv.org/abs/2411.18546}{arXiv:2411.18546}, by Julia E Bergner). The paper states ``there is no known `model category of model categories'''. Although the paper doesn't have citations and I'm not familiar with the researcher, it's published so I don't really doubt it, and I also doubt that if a suitable model structure existed, a reseacher who's been working in the field for two decades would write an expository paper on homotopy limits of model categories \emph{without} figuring out the model structure exists.
+
+	Much of this is irrelevant, however. The modern understanding of model categories is as a presentation for $(\infty ,1)$-categories (usually just called $\infty $-categories), a much more suitable environment for homotopy theory. An $\infty $-category of $\infty $-categories $\Cat_\infty $ does indeed exist, and the construction can be readily found in the modern literature. For example, see \href{https://www.math.ias.edu/~lurie/papers/HTT.pdf#page805}{HTT Defintion 3.0.0.1} (by Jacob Lurie, of course). I'm sure \emph{some} nontrivial model structure exists, in fact I think I could probably brute force one given a few days. However, the question is not whether a model structure exists, but whether it is the \emph{proper} model structure, in that the homotopy theory it generates behaves as expected. In this regard, the $\infty $-categorical approach is better behaved and better suited for the job.
+\end{remark}
+
+\begin{remark}\label{3.3.8}
+	A functor $F : \mathcal{C}  \to \mathcal{D} $ \emph{reflects} a property $P$ of morphisms if for all $f : x \to y$ in $\mathcal{C} $, $P(F(f))\implies P(f)$. In particular, $F$ reflects weak equivalences between cofibrant objects if for all $f : x \to y$ between cofibrant objects, whenever $F(f)$ is a weak equivalence, so is $f$.
+\end{remark}
+
+\begin{corollary}\label{3.3.9}
+	Let $(F,U,\varphi): \mathcal{C}  \to \mathcal{D} $ be a Quillen adjunction. The following are equivalence.
+	\begin{enumerate}
+		\item $(F,U,\varphi)$ is a Quillen equivalence.
+		\item $F$ reflects weak equivalences betwen cofibrant objects and, for every fibrant $y$, the map $FQU(y)\to y$ is a weak equivalence.
+		\item $U$ reflects weak equivalences between fibrant objects and, for every cofibrant $x$, the map $x\to URF(x)$ is a weak equivalence.
+	\end{enumerate}
+	The arrows of (2,3) are defined as the composites in \cref{3.3.2} (2).
+\end{corollary}
+\begin{proof}
+	We follow the proof of Hovey's corollary 1.3.16. Note errata 6 \href{https://ncatlab.org/nlab/files/Hovey-ModelCategories-Errata.pdf}{on the $n$Lab}.
+
+	$(1\implies 2,3)$ Let $F$ be a Quillen equivalence. By \cref{3.3.2} the map $x\to URF(x)$ is a weak equivalence for all cofibrant $x$ and the map $FQU(y)\to y$ is a weak equivalence for all fibrant $y$. Suppose $f : x \to y$ is a map between cofibrant objects and $F(f)$ is a weak equivalence. Naturality of $q : Q \Rightarrow 1$ gives the commutative diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	Q(x)\ar[" q_x ", r] \ar[" Q(f) "', d]  & x \ar[" f ", d]  \\
+	Q(y)\ar[" q_y "', r]  & y
+	\end{tikzcd}\]
+	Note here that all objects in the diagram are cofibrant, and since components of $q$ are weak equivalences, by Ken Brown's \cref{1.1.21} $F$ preserves the weak equivalences $q_x,q_y$. In particular, in the commutative diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	FQ(x)\ar[" F(q_x) ", r] \ar[" FQ(f) "', d]  & F(x)\ar[" F(f) ", d]  \\
+	FQ(y)\ar[" F(q_y) "', r]  & F(y)
+	\end{tikzcd}\]
+	the rows are weak equivalences, and by assumption $F(f)$ is a weak equivalence. By the 2-out-of-3 rule, $FQ(f)$ is a weak equivalence. Lowering to the homotopy category, $\mathbf{L} F(f)$ is thus an isomorphism. Since $\mathbf{L} F$ is an equivalence of categories by \cref{3.3.2}, it is easily shown that $f$ is an isomorphism in the homotopy category, and by \cref{1.2.18} $f$ is a weak equivalence. The dual argument proves $U$ reflects weak equivalences between fibrant objects, so we have $(1\implies 2,3)$.
+
+	$(2\implies 1)$ By \cref{3.3.2}, it suffices to show $\mathbf{L} (F,U,\varphi)$ is an equivalence of categories. I didn't feel like typing this part up lmfao
+\end{proof}
+
+\begin{proposition}\label{3.3.10}
+	Let $F : \mathcal{C}  \to \mathcal{D}$ be a Quillen equivalence, and suppose the terminal object $*\in \mathcal{C} $ is cofibrant and that $F$ preserves the terminal object. Then $F_*: \mathcal{C} _* \to \mathcal{D} _*$ as constructed in \cref{3.1.13} is a Quillen equivalence.
+\end{proposition}
+\begin{proof}
+	Let $F\dashv U$, and recall $U(x,v)=(U(x),U(v))$ and $U_*(f)=U(f)$. By \cref{3.3.9}, since $U$ reflects weak equivalences between fibrant objects, very clearly so does $U_*$. By \cref{3.3.9}, it suffices to show for any cofibrant $(x,v)\in \mathcal{C} _*$, the map $U(r_{F(x)} )\circ \eta_{(x,v)}  : (x,v) \to U_*RF_*(x,v)$ is a weak equivalence. Note that $(*,1)$ is initial in $\mathcal{C} _*$, since $u : (*,1) \to (x,v)$ must preserve basepoints, and thus $u=v$. Thus by \cref{1.1.13}, $(x,v)$ is cofibrant if and only if $v : * \to x$ is a cofibration in $\mathcal{C} $.
+
+	Let $(x,v)$ be cofibrant. Then since $0\to *$ is a cofibration and $*\to x$ is a cofibration, the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[bend left, rr] \ar[r]  & *\ar[r]  & x
+	\end{tikzcd}\]
+	is a cofibration. Thus, $x$ is cofibrant as an object of $\mathcal{C} $. Let $V : \mathcal{C} _* \to \mathcal{C} $ denote the forgetful functor. Since $VU_*=UV$, and since $V$ preserves weak equivalences, it suffices to show the map $x\to VU_*RF_*(x)=UVRF_*(x,v)$ is a weak equivalence, since $U$ reflects weak equivalences. The fibrant replacement $R$ on $\mathcal{D} _*$ is the fibrant replacement of $\mathcal{D} $ together with the included basepoint, so $UVRF_*(x,v)=URVF_*(x)$. Since $F(*)\cong *$, investigation of the relevant pushout diagram gives $F_*(x,v)\cong (F(x),F(v))$. A diagram chase I am not interested in doing gives the result.
+\end{proof}
+
+\begin{remark}\label{3.3.11}
+	I have struggled to get through this section in a timely manner due to other responsibilities, which is burning me out slightly and I am not interested in completing the proofs with full rigor. Luckily we are at the end of the section, so I hope the reader will forgive me. Tomorrow we move on to a new topic, which may be more interesting.
+\end{remark}
+
+\begin{lemma}\label{3.3.12}
+	If $\tau : F \Rightarrow G$ is a natural transformation of left (right) Quillen functors, then $\mathbf{L} \tau$ ($\mathbf{R}  \tau$) is a natural isomorphism if and only if $\tau_x$ is a weak equivalence for all cofibrant (fibrant) $x$.
+\end{lemma}
+\begin{proof}
+	Follows directly from definition of $\tau$ and \cref{1.2.18}.
+\end{proof}
+
+\begin{remark}\label{3.3.13}
+	If we modify our notation to use $\Ho (F,U,\varphi)$ for the derived adjunction, and $\Ho \tau$ for the derived natural transformation, then we may restate some above results as noting that $\Ho : \mathcal{M} \mathrm{od}  \to \mathcal{A} \mathrm{dj} $ is a pseudofunctor which commutes with the duality 2-functor $D$. We then note that a Quillen adjunction $(F,U,\varphi)$ is a Quillen equivalence if and only if $D(F,U,\varphi)$ is.
+\end{remark}
 
