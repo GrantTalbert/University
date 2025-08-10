@@ -1,0 +1,92 @@
+Mac Lane, one of the originators of category theory, is famously quoted in \cite{ml} as saying ``adjoint functors arise everywhere.'' Indeed, the notion of adjunction is ever present in category theory and beyond, and we require our reader to be familiar with the concept. In this section, we give the equivalent definitions via hom-sets and unit-counits, and we introduce some basic results about adjoint functors, such as preservation of limits and pointwise construction from comma categories or universal arrows. We do not prove these results; the reader interested in a more rigorous approach should consult \cite{ctx}, \cite{lein}, or \cite{ml}. Most of our presentation follows that of \cite{ml}.
+
+\begin{definition}\label{A.4.1}
+    Let $F : \C\to\D$ and $U:\D\to\C$ be functors. An \emph{adjunction} between $F$ and $U$ is an isomorphism
+    \[
+    \varphi_{c,d} : \D(F(c),d)\cong \C(c,U(d))
+    \]
+    for each $c\in\C$ and $d\in\D$, natural in both variables.
+\end{definition}
+
+\begin{notation}\label{A.4.2}
+    There are a lot of important notations concerning adjoint functors, and different authors will use various different notations. If $\varphi$ is an adjunction
+    \[
+    \varphi_{c,d} : \D(F(c),d)\cong \C(c,U(d)),
+    \]
+    then we say $F$ is \emph{left adjoint} to $U$, and $U$ is \emph{right adjoint} to $F$, since $F$ shows up on the left slot of the hom-set, and $U$ shows up on the right. We write $F\dashv U : \C\to\D$ to denote that $F$ is left adjoint to $U$, and that $F:\C\to\D$ and $U:\D\to\C$. When the categories can be inferred from context, or when writing them is unnecessary, we drop the categories and write only $F\dashv U$. We also write $(F,U,\varphi):\C\to\D$ to denote that $\varphi$ is an adjunction $F\dashv U$, where $F : \C\to\D$ and $U:\D\to\C$. Once again, if the categories can be inferred from context, or if writing them is unnecessary, we drop the categories and instead write $(F,U,\varphi)$. If $F\dashv U$ is an adjunction, we say $F$ is a \emph{left adjoint functor}, and $U$ is a \emph{right adjoint functor}, since $F$ is left adjoint to $U$, and vice versa. If we say ``$F : \C \rightleftarrows \D : U$ is an adjunction'', we always take $F$ to be left adjoint to $U$. We may also write
+    \[\begin{tikzcd}
+	\C & \D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", shift left=2, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "U", shift left=2, from=1-2, to=1-1]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+\end{tikzcd}\]
+    to denote that $F\dashv U$. When we say the isomorphism $\varphi$ is \emph{natural in both variables}, we mean that $\varphi$ is a natural isomorphism
+    \[
+    \varphi:\D(F(-),-)\cong \C(-,U(-)).
+    \]
+\end{notation}
+
+\begin{proposition}\label{A.4.3}
+    The definition of an adjunction as given in \cref{A.4.1} is equivalent to the following definition: two functors $F : \C\to\D$ and $U:\D\to\C$ are \emph{adjoint} if there is a natural transformation $\eta : 1_\C\Rightarrow UF$ called the \emph{unit of the adjunction}, and a natural transformation $\varepsilon : FU\Rightarrow 1_\D$ called the \emph{counit of the adjunction}, such that the the diagrams
+    \[\begin{tikzcd}
+	U & UFU & FUF & F \\
+	& U & F
+	\arrow["{\eta U}", from=1-1, to=1-2]
+	\arrow[equals, from=1-1, to=2-2]
+	\arrow["{U\varepsilon }", from=1-2, to=2-2]
+	\arrow["{\varepsilon F}"', from=1-3, to=2-3]
+	\arrow["{F\eta }"', from=1-4, to=1-3]
+	\arrow[equals, from=1-4, to=2-3]
+    \end{tikzcd}\]
+    commute. These are known as the \emph{triangle identities}, and they are equivalently written as
+    \[
+    1_F = \varepsilon F\circ F\eta,\qquad 1_U = U\varepsilon\circ\eta U.
+    \]
+    For any $c\in\C$ and $d\in\D$, the components $\eta_c$ and $\varepsilon_d$ of the unit and counit are given as
+    \[
+    \eta_c = \varphi(1_{F(c)}),\qquad \varepsilon(d)=\varphi^{-1}(1_{U(d)}),
+    \]
+    where $\varphi$ is the adjunction as given in \cref{A.4.1}. This provides a way to construct the unit and counit given an adjunction $(F,U,\varphi):\C\to\D$, or a way to construct the adjunction $\varphi$ given a unit $\eta$ and a counit $\varepsilon$. It is also shown in \cite{ml} that each $(\eta_c,F(c))$ is a universal arrow from $c$ to $U$, and each $(\varepsilon_d,U(d))$ is a universal arrow from $F$ to $d$. We do not require the reader to know what this means, but it is an interesting aside.
+\end{proposition}
+
+\begin{notation}\label{A.4.4}
+    We write $(F,U,\eta,\varepsilon) : \C\to\D$ to denote that there is an adjunction $F\dashv U$ with $\eta$ the unit and $\varepsilon$ the counit of the adjunction. When the categories can be inferred from context, or when it is unnecessary to write them, we instead write $(F,U,\eta,\varepsilon)$.
+\end{notation}
+
+\begin{proposition}\label{A.4.5}
+    If $F$ is a left adjoint functor, then it preserves colimits. If $U$ is a right adjoint functor, then it preserves limits. More precisely, if $F\dashv U : \C\to\D$ is an adjunction, and $G:\J\to\C$ and $H:\J\to\D$ are diagrams (with $\J$ not necessarily small), then
+    \[
+    F(\colim G)\cong \colim (F\circ G),\qquad U(\lim H)\cong \lim(U\circ H).
+    \]
+\end{proposition}
+
+\begin{remark}\label{A.4.6}
+    Let $U:\D\to\C$ be a functor such that for all $c\in\C$, the comma category $(c\downarrow U)$ has an initial object $u : c\to U(r)$. This means for any $f : c\to U(x)$, there is a unique morphism $r\to x$ in $\D$ such that the diagram
+    \[\begin{tikzcd}
+	c & {U(r)} & r \\
+	& {U(x)} & x
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["{U(g)}", dashed, from=1-2, to=2-2]
+	\arrow["g", dashed, from=1-3, to=2-3]
+    \end{tikzcd}\]
+    commutes. An interesting aside is that this means $(r,u)$ is a universal arrow from $c$ to $U$. We construct a functor $F:\C\to\D$ as follows:
+    \begin{enumerate}
+    \item Let $c\in\C$, and let $u:c\to U(r)$ be the initial object in $(c\downarrow U)$. Define the object function of $F$ by mapping $c\mapsto r$. One might argue this is ill-defined, since $U$ need not be injective, but objects in the comma category are actually pairs $(u,r)$, not $(u,U(r))$, so the datum of an object in the comma category includes the specific preimage under $U$ we are considering. One then needs to only make a specific choice of which initial object to choose, which follows by invoking the Axiom of Choice.
+        \item Let $c_1,c_2\in C$, and let $f : c_1\to c_2$. We define the morphism function of $F$ as follows. Let $u_1 : c_1\to U(r_1)$ be the initial object in $(c_1\downarrow U)$, and likewise $u_2:c_2\to U(r_2)$ the initial object in $(c_2\downarrow U)$. The composite $u_2\circ f : c_1\to U(r_2)$ induces a diagram of solid arrows
+        \[\begin{tikzcd}
+	{c_1} & {U(r_1)} & {r_1} \\
+	{c_2} & {U(r_2)} & {r_2}
+	\arrow["{u_1}", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{U(g)}", dashed, from=1-2, to=2-2]
+	\arrow["g", dashed, from=1-3, to=2-3]
+	\arrow["{u_2}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    Since $u_2\circ f : c_1\to U(r_2)$ is an object in $(c_1\downarrow U)$, and since $u_1 : c_1\to U(r_1)$ is initial in this category, there exists a dashed arrow $g : r_1\to r_2$ rendering the diagram commutative. Define the morphism function of $F$ as $f\mapsto g$. This is indeed well-defined by uniqueness of $g$, and functoriality follows easily from universality.
+    \end{enumerate}
+\end{remark}
+
+\begin{proposition}\label{A.4.7}
+    The functor $F$ constructed in \cref{A.4.6} is left adjoint to $U$. Dually, if we are given $F:\C\to\D$ and each $(F\downarrow d)$ has a terminal object, one may assemble a functor $U:\D\to\C$ which is right adjoint to $F$ in the same manner.
+\end{proposition}

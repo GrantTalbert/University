@@ -1,0 +1,34 @@
+\documentclass[A4, 11pt]{report}
+\input{./preamble.tex}
+
+\title{Higher Topos Theory - Self Study}
+\date{Summer 2025-Winter 2025}
+
+
+% for some reason no worky in preamble when i tried, fix later
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries\color{accentblue}\centering}{Chapter \thechapter}{10pt}{\Large}
+\titleformat{\section}{\normalfont\large\bfseries\color{accentblue}\centering}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+	I am currently reading Higher Topos Theory to understand the theory of quasi-categories and basic $\infty $-category theory. My goal is to understand the generalizations of basic 1-categorical concepts to the $\infty $-categorical setting, such as (co)limits, adjunctions, and Yoneda's lemma. I'm also interested in more advanced topics in higher category theory, most of which require a basic understanding of the theory of $\infty $-categories as a prerequisite.
+
+	I began reading this text on August 8th, 2025, at 11:06 PM, as an independent project. I am hoping to be able to find a professor who is willing to support my readings, but I am unsure that will happen. Nevertheless, I intend to gain a working understanding of $\infty $-categories over the next few months, and a more advanced understanding come the spring semester. Since this text is quite advanced and is not meant as a textbook, but rather as a reference, I will be taking extremely detailed and extensive notes on the text. I will also be referencing supplementary resources throughout my reading, so I have decided it worthwhile to maintain a bibliography for these notes. Any notes not credited to a bibliography source are either from \cite{htt}, or directly from me.
+\end{abstract}
+
+% FILES START
+
+\input{./files/chapter-1.tex}
+
+% FILES END
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}
+

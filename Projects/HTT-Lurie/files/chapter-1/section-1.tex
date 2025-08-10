@@ -1,0 +1,163 @@
+\section{Foundations of Higher Category Theory}\label{sec1.1}
+
+\begin{terminology}\label{1.1.0.1}
+	Throuhgout this paper, the term \emph{space} is short for a topological space, and almost always a compactly generated topological space. The \emph{homotopy type} of a topological space is a choice of a weak homotopy equivalent topological space, or equivalently the collection of weak homotopy equivalent spaces.
+\end{terminology}
+
+\subsection{Goals and Obstacles}\label{sec1.1.1}
+
+The theory of $\infty $-categories finds natural motivation in the fundamental $n$-groupoids of a topological space $X$. Define $\Pi_n(X)$ to take points $x\in X$ as objects, paths from $x$ to $y$ as 1-morphisms, homotopies of paths as 2-morphisms, and so on until $n$. Since vertical composition of homotopies is only associative up to higher homotopy, we are forced to take $n$-morphisms to be \emph{homotopy classes}, rather than simply homotopies. Of course $\Pi_n(X)$ is a groupoid because all paths and homotopies admit inverses.
+
+One might hope that we can fix this problem by considering an $\infty $-groupoid, or an $(\infty ,0)$-category, which would not take homotopies as $n$-morphisms for all $n\geq 2$. Interestingly, the $\infty $-groupoid $\Pi_\infty (X)$ of a space $X$ encodes the homotopy type of $X$, meaning the study of $\infty $-groupoids simplifies to the study of spaces in classical homotopy theory, and we have many ways of describing homotopy types of spaces. It is also a commonly accepted principle of higher category theory that all $(\infty ,0)$-categories are of the form $\Pi_\infty (X)$ for some space $X$. This principle is profound, since it gives us a place to begin our work in higher category theory.
+
+In general, an $n$-category should be a category enriched over $(n-1)$-categories. However, for finite $n$, this process produces the notion of a \emph{strict} $n$-category, and $n$-category theory is more naturally viewed via the theory of \emph{weak} $n$-categories. These issues make the theory of $n$-categories fairly difficult to work with, but they vanish when one passes to $\infty $-categories. An $(\infty ,n)$-category can indeed be viewed as a category enriched over $(\infty ,n-1)$-categories. This discussion suggests a definition (or more precisely, a blueprint) for $\infty $-categories. An $\infty $-category $\mathcal{C} $ should consist of objects $\Obj(\mathcal{C} ) $, and for each $x,y\in\mathcal{C} $, a $\infty $-groupoid $\Map _\mathcal{C} (x,y)$ with an associative composition law. The theory of $\infty $-categories does not care whether this law be strictly associative or only associative up to coherent homotopy, since any $\infty $-category with coherently associative multiplication is equivalent to one with strictly associative multiplication.
+
+\begin{definition}\label{1.1.1.1}
+	A \emph{topological category} is a category enriched over $\mathcal{C} \mathcal{G} $, the category of compactly generated spaces. The category of topological spaces will be denoted by $\Cat _{\text{top} } $.
+\end{definition}
+
+We recall from our knowledge of enriched category theory that this implies a topological category $\mathcal{C} $ has topological spaces $\Map _\mathcal{C} (x,y)$ for each pair $x,y\in\mathcal{C} $, with an associative composotion law
+\[
+	\Map_\mathcal{C} (y,z)\times \Map_\mathcal{C} (x,y)\to \Map (x,z),
+\]
+where the product is computed in $\mathcal{C} \mathcal{G} $.
+
+\begin{remark}\label{1.1.1.2}
+	As is often the case, working in $\mathcal{C} \mathcal{G} $ is done largely as a technical point which can be ignored.
+\end{remark}
+
+\subsection{$\infty $-Categories}\label{sec1.1.2}
+
+\Cref{1.1.1.1} is the most obvious definition of an $\infty $-category, but it is also one of the hardest to actually work with. Our use of topological categories in this book will be more as a ``benchmark'' of sorts. Any model for $\infty $-categories which is equivalent to that of topological categories must necessarily be a good one. Many better models exist, and in this text we choose to use the theory of \emph{weak Kan complexes}. These were first introduced by Boardman and Vogt in \cite{BV73}, and were more recently and more extensively studied by Andr\'e Joyal in \cite{joyal08a,joyal08b}, who instead called them \emph{quasi-categories}, which the modern literature now uses. However, Lurie's book almost exclusively uses quasi-categories as our model for $\infty $-categories, so for the purposes of these notes we will use the terms ``quasi-category'' and ``$\infty $-category'' more or less interchangeably.
+
+Quasi-categories are built atop the theory of \emph{simplicial sets}, and any readers of HTT (or these notes) should have at least an elementary understanding of the subject. I recommend my own exposition \cite{ssets}, which builds the abstract theory of simplicial sets without forsaking geometric intuition, but also without dwelling excessively on the topological impliciations of the theory. We also recommend \cite{riehlssets,friedmanssets}. The former should prepare the reader for much of the theory in this paper, the rest of which can be picked up along the way, although we feel Riehl strays too far from the geometric intuition of simplices. Conversely, Friedman's introduction is well-liked for the geometric intuition it provides, but we feel it focuses too much on topological aspects of the theory to be the best preparation for the material covered in HTT.
+
+The theory of simplicial sets is of importance due to the homotopic aspects of the theory. Recall from our discussion in \cref{sec1.1.1} that the $\infty $-groupoid $\Pi_\infty (X)$ of a space $X$ captures the homotopy type of $X$. We also know from \cite{quillen67} that since $\left| - \right| \dashv\Sing$ is a Quillen equivalence, where $\Sing$ is the singular complex functor. This means in particular that the unit and counit of the adjunction are natural weak homotopy equivalences, meaning spaces are determined by their singular sets up to homotopy type. Thus, if we are only interested in the study of spaces up to weak homotopy equivalence, we might as well work in the category of simplicial sets. We might also think that $\infty $-groupoids should be able to be modeled by singular sets, since they both encode the homotopy type of a space. Indeed this is possible, but we prefer to work slightly more generally. Singular sets satsify the following important property.
+
+\begin{definition}\label{1.1.2.1}
+	Let $K$ be a simplicial set. We say $K$ is an \emph{Kan complex} if, for all $n\geq 0$ and for all $0\leq i\leq n$, any diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda_i^n\ar[r] \ar[hook, d]  & X \\
+	\Delta^n \ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	admits a (not necessarily unique) dotted arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+Recall here that $\Lambda_i^n\subseteq \Delta^n$ represents the $i$th horn of the standard $n$-simplex; we defer the reader to \cite[\S3.4]{ssets} for a rigorous definition.
+
+\begin{remark}\label{1.1.2.2}
+	The singular complex of a topological space is a Kan complex. Showing this first involves showing that $\left| \Lambda_i^n \right| $ is a retract of $\left| \Delta^n \right| $ in $\Top $. There also exist combinatorial approaches to extracting homotopy groups from any Kan complex $K$, which agree with the homotopy groups on $\left| K \right| $. Thus, Kan complexes behave like the homotopy type of a space.
+\end{remark}
+
+Simplicial sets, and in particular Kan complexes, thus should form a model for $\infty $-groupoids, which we note are an important special case of $\infty $-categories. Indeed, Kan complexes are a common model for $\infty $-groupoids, which we will explore later. However, another special case of $\infty $-categories that our definition must reflect is the notion of a basic 1-category. If an $\infty $-category $\mathcal{C} $ has no nontrivial $n$-morphisms for $n>1$, then clearly $\mathcal{C} $ can be regarded as a 1-category. Luckily, simplicial sets are also closely related to category theory. Recall the nerve $N(\mathcal{C} )$ of a category is a simplicial set whose $n$-simplices are functors $[n]\to \mathcal{C} $, which carry the data of an $n$-tuple of composable morphisms.
+
+
+\begin{remark}\label{1.1.2.3}
+The nerve encodes the full information of a category, and we can in fact recover the initial category $\mathcal{C} $ from the nerve $N(\mathcal{C} )$ with the following list of observations.
+\begin{enumerate}
+	\item The $0$-simplices $N(\mathcal{C} )_0$ are the objects, so we define $\Obj(\mathcal{C} ) =N(\mathcal{C} )_0$.
+	\item The $1$-simplices $N(\mathcal{C} )_1$ are simply morphisms, so we define $\operatorname{Mor} (\mathcal{C} )=N(\mathcal{C} )_1$.
+	\item Given an object $x\in \mathcal{C} $, the degeneracy $s_0: N(\mathcal{C} )_0 \to N(\mathcal{C} )_1$ maps to the identity $x\mapsto 1_x$. Thus, the identity function $x\mapsto 1_x$ is simply the degeneracy $s_0 = 1_{\bullet} $.
+	\item Given a morphism $f\in N(\mathcal{C} )_1$, the $0$th face $d_0: N(\mathcal{C} )_1 \to N(\mathcal{C} )_0$ maps to the codomain $f\mapsto \operatorname{cod} f$, and similarly the first face $d_1: N(\mathcal{C})_1 \to N(\mathcal{C} )_0$ maps to the domain $f\mapsto \operatorname{dom} f$. We may thus define $\operatorname{dom} , \operatorname{cod} : \operatorname{Mor} (\mathcal{C})  \to \Obj(\mathcal{C} ) $ as the faces $\operatorname{dom} =d_1$ and $\operatorname{cod} =d_0$.
+	\item A composable pair $(g,f)$ is a 2-simplex $(g,f)\in N(\mathcal{C} )_2$. The 1st face $d_1: N(\mathcal{C} )_2 \to N(\mathcal{C} )_1$ maps composable pairs to their composite $(g,f)\mapsto gf$. Thus, composition is simply the 1st face $d_1=\circ $.
+	\item Composites of larger tuples of maps arise from higher degeneracies, and associativity follows from the simplicial identities. The unit law for identities under composition also follows from simplicial identities.
+\end{enumerate}
+\end{remark}
+
+A more explicit description of \cref{1.1.2.3} (5,6) will be helpful later. A morphism from $x$ to $y$ is defined as a 1-simplex $f\in N(\mathcal{C} )_1$ with $d_1(f)=x$ and $d_0(f)=y$. Given two morphisms $x\xlongrightarrow{f}y\xlongrightarrow{g}z$, the composite $g\circ f$ can be characterized by noting there exists a 2-simplex $(g,f)=\sigma\in N(\mathcal{C} )_2$ such that
+\begin{enumerate}
+	\item $d_0(\sigma)=g$;
+	\item $d_1(\sigma)=gf$;
+	\item $d_2(\sigma)=f$.
+\end{enumerate}
+We say $\sigma$ \emph{witnesses $gf$ as a composite of $g$ and $f$}.
+
+There exists a characterization of simplicial sets that arise as nerves, which is more straightforward than the characterization of Kan complexes.
+
+\begin{notation}\label{1.1.2.4}
+	Let $J$ be a linearly ordered set. Denote by $\Delta^J$ the representable functor $\Hom(-, J) $ in the \emph{category of linearly ordered sets}, restricted along the objects of $\boldsymbol{\Delta} $. Clearly, $\Delta^{[n]} =\Delta^n$, so this is simply a mild generalization of notation we already had.
+\end{notation}
+
+
+\begin{proposition}\label{1.1.2.5}
+	Let $K$ be a simplicial set. The following conditions are equivalent.
+	\begin{enumerate}
+		\item There exists a small category $\mathcal{C} $ and an isomorphism $K\cong N(\mathcal{C} )$.
+		\item For each $0<i<n$, and each diagram of solid arrows
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\Lambda_i^n\ar[r] \ar[hook, d]  & K \\
+			\Delta^n \ar[dashed, ur]  & 
+			\end{tikzcd}\]
+			there is a \emph{unique} dashed arrow as indicated, rendering the diagram commutative.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	We mostly follow Lurie's proof in \cite[Prop.~1.1.2.2]{htt}, but we take a different route for showing agreement for (1), and Lurie assumes a slightly more advanced understanding of simplicial sets than I currently have, so at some points in this proof we may prove extra facts. For example, we start by proving that for $0<i<n$, the vertices of the $i$th horn are $\left( \Lambda_i^n \right)_0=[n]$. Note that for $i$ to exist, we must have $n\geq 2$. For $n=2$, there exist at two coface maps $d^j : \Delta^1 \to \Delta^2$ with $j\neq i$. 0-simplices of $\Delta^1$ are arrows $[0]\to [1]$, which correspond to elements of $[1]$. More precisely, arrows are uniquely determined by their image. Thus, 0-simplices in the face $\partial _j\Delta^n_0=\im d^j_0$ will also be uniquely determined by their image, so it suffices to show each $x\in[2]$ lands in the image of some coface $d^j$ with $j\neq i$. This is immediate: since $d^j$ only skips $j$, and since another coface $d^k$, $k\neq i$ exists which doesn't skip $j$, every element shows up. Inducting on this same logic proves the statement for $n\geq 2$, and vacuously for all $n$.
+
+	Now we show for $0<k\leq n$ and $n\geq 2$, there is a simplicial subset $\Delta^{\left\{ k-1,k \right\} } \subseteq \Lambda_i^n$. Recall that $m$-simplices $f$ in the horn are composites $\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		{[m]}\ar[" f", r]  & {[n-1]}\ar[" d^{j\neq i}  ", r]  & {[n]}
+	\end{tikzcd}$. Let $g : [m] \to \left\{ k-1,k \right\} \subseteq [n]$ be an $m$-simplex in $\Delta^{k-1,k} $. If $k<n$, then $k,k-1\in[n-1]$. Write $g'$ for the map with codomain viewed as a subset $\left\{ k-1,k \right\} \subseteq [n-1]$. Since $i\neq n$, we have that $\im d^n \subseteq \Lambda_i^n$. Thus, $d^ng'=g\in\im d^n_m$, and thus is an $m$-simplex in the horn. If $k=n$, then since $n\geq 2$, we have $k-1>0$. Since $i\neq 0$, we do the same argument.
+
+	If $n<2$ then the statement is true vacuously, so let $n\geq 2$. Let $K$ be the nerve of a small category $\mathcal{C} $. Let $f_0 : \Lambda_i^n \to K$ with $0<i<n$, and let $x_k\in\mathcal{C} $ denote the image of the vertex $k\in\left( \Lambda_i^n \right) _0=[n]$ under $f_0$. Choose some $0<k\leq n$, and consider the restriction $f_0|\Delta^{\left\{ k-1,k \right\} } $. Note that the 1-simplices of $\Delta^{\left\{ k-1,k \right\} } $ are
+	\[
+		\Delta_1^{\left\{ k-1,k \right\} } =\left\{ (0,1)\mapsto k,(0,1)\mapsto k-1,
+			\begin{matrix}
+				0\mapsto k-1\\
+				1\mapsto k
+			\end{matrix}
+		\right\} 
+	.\]
+	The first two are easily seen to be the degenerates $s_0(k),s_0(k-1)$, respectively. Since $f_0$ is a morphism of simplicial sets, $f_0s_0(k)=s_0f_0(k)=s_0(x_k)=1_{x_k} $. This is uninteresting, so let $g_k$ denote the unique nondegenerate simplex. Note that the image under $f$ is a 1-simplex in $N(\mathcal{C} )$; that is a morphism $g_k : c \to d$. We want to show that with notation as above, $c=x_{k-1} $ and $d=x_k$. Indeed, note that for 1-simplices in the nerve, the first face is simply \emph{domain} and the 0th face is \emph{codomain}. Since $f_0$ commutes with faces, we have
+	\[
+		\operatorname{dom} g_k=d_1f_0(g_k)=f_0d_1(g_k)=f_0(g_k\circ d^1)=f_0(0\mapsto 0\mapsto k-1)=x_{k-1} ,
+	\]
+	since $0\mapsto 0\mapsto k-1=g_k\circ d^1$ is a 0-simplex, which is uniquely determined (and identified with) its image. The same follows for domain.
+	
+	We thus have for each $0<k\leq n$, there is an arrow $g_k : x_{k-1}  \to x_k$, allowing us to form a composable chain
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_0 \ar[" g_1 ", r]  & x_1 \ar[" g_2 ", r]  & \cdots \ar[" g_n ", r] & x_n.
+	\end{tikzcd}\]
+	This is an $n$-simplex in $\Delta^n$. We can similarly construct $m$-simplices for $m\leq n$ by requiring $k\leq m$. We claim that this relation allows us to define a mapping $f : \Delta^n \to K$.
+
+	To see how this follows, we invoke the Yoneda lemma to recall that there is an isomorphism $\Set ^{\boldsymbol{\Delta} ^{\mathrm{op}} } (\Delta^n,K)\cong K_n$ given by evaluating the $n$th component of natural transformations at the identity. In particular, Yoneda says a morphism $f : \Delta^n \to K$ is determined by $f_n(1_{[n]} )$. We choose $f_n(1_{[n]} )$ to be the $n$-simplex $(g_1, \ldots ,g_n)$ of $N(\mathcal{C} )$ considered above. The remainder of the proof will focus on showing this definition indeed agrees with $\Lambda_i^n$. For now, we note that $f$ is manifestly unique, since we obtained a unique composite constructed in this way, so any other map $\Delta^n \to K$ which restricts along the horn to $f_0$ must necessarily correspond to the same chain of morphisms.
+
+	We now begin to show $f|\Lambda_i^n=f_0$. First, we show they agree on cofaces. Let $d^j : [n-1] \to [n]$ be an $(n-1)$-simplex in $\Lambda_i^n$. Then since $f$ is a morphism of simplicial sets and commutes with faces, $d^j=1_{[n]} d^j=d_j(1_{[n]} )$ implies that $f(d^j)=d_jf(1_{[n]} )$. For simplicity, we take $d^j$ to be an inner face $0<j<n$, and simply note the argument for outer faces is the same. From our knowledge of the nerve, we have that
+	\[f(d^j)=fd_j(1_{[n]} )=d_jf(1_{[n]} )=d_j\left(
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			{x_0} \ar[" g_1 ", r]  & {\cdots} \ar[" g_n ", r] & {x_n}
+		\end{tikzcd}
+\right)\]
+	\[=\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+						    {x_0} \ar[" g_1 ", r]  & {\cdots} \ar[" g_{j-1}  ", r] & {x_{j-1}} \ar[" g_{j+1} g_j ", r]  & {x_{j+1}} \ar[" g_{j+1}  ", r]  & {\cdots} \ar[" g_n ", r] & {x_n}
+	\end{tikzcd}\]
+	It suffices to show $f_0(d^j)$ agrees with this composite. One can do this by showing each object and morphism align with that of $f(d^j)$, which involves an induction argument that is extremely lengthy due to needing to show many cases, but is in general very simple. We trust the reader to be able to do this argument, and we also trust that the reader knows I can do the argument too and just don't want to, so we prefer not to spend 2 pages on it and instead continue with the proof.	
+		
+
+	Now, we show this agreement on cofaces implies $f$ and $f_0$ agree in general. We note that every $m$-simplex $h\in\Delta^n_m$ is a morphism $h:[m]\to [n]$ in $\boldsymbol{\Delta} $, which admits a factorization into cofaces and codegeneracies $h=d^{j_1} \circ \cdots d^{j_\ell }\circ s^{p_1}\circ \cdots  \circ s^{p_q} $. Since faces and degeneracies in $\Delta^n$ are given by precomposing by the corresponding cofaces and codegeneracies in $\boldsymbol{\Delta} $, we have
+	\[
+		h=d^{j_1} \circ \cdots\circ s^{p_q} =1_{[n]} \circ d^{j_1} \circ \cdots \circ s^{p_q} =(s_{p_q} \circ \cdots\circ d_{j_1} )(1_{[n]} )
+	.\]
+	Since $f$ is a morphism of simplicial sets, we have $fs_j=s_jf$, and likewise for faces. Induction gives
+	\[
+		f(h)=(f\circ s_{p_q} \circ \cdots\circ d_{j_1} )(1_{[n]} )=(s_{p_q} \circ \cdots\circ d_{j_1} )(f(1_{[n]}))=(s_{p_q} \circ \cdots\circ d_{j_2} )(f(d_{j_1}(1_{[n]})))
+	.\]
+	Now we want to show $f$ agrees with $f_0$ on $m$-simplices of $\Lambda_i^n$. Since $h\in(\Lambda^n_i)_m$, there is some $m$-simplex $h'$ such that $h=d^jh'$ for $j\neq i$, so by uniqueness we have that $d^{j-1} \neq d^i$ in the epi-mono factorization of $h$. Since $f$ and $f_0$ agree on cofaces, 
+	\begin{align*}
+		f(h)&=(s_{p_q} \circ \cdots\circ d_{j_2} )(f(d_{j_1}(1_{[n]})))\\
+		    &=(s_{p_q} \circ \cdots\circ d_{j_2} )(f(d_{j_1}))\\
+		    &=(s_{p_q} \circ \cdots\circ d_{j_2} )(f_0(d_{j_1}))\\
+		    &=(s_{p_q} \circ \cdots\circ d_{j_2} )(f_0(d_{j_1}(1_{[n]})))\\
+		    &\overset{!}{=}f_0(h)
+	,\end{align*}
+	where the equality marked by $!$ follows since $f_0$ is a morphism of simplicial sets and commutes with faces and degeneracies. Thus, the statement $(1\implies 2)$ is proven.
+
+	Now for the converse. Let $K$ satisfy (2), and define a category $\mathcal{C} $ as follows.
+	\begin{enumerate}
+		\item Objects are vertices: $\Obj(\mathcal{C} ) =K_0$;
+		\item Morphisms are edges: $\operatorname{Mor} (\mathcal{C} )=K_1$. Domain and codomain are faces: $\operatorname{dom} =d_1$ and $\operatorname{cod} =d_0$;
+		\item Identity $1_{\bullet} : \Obj(\mathcal{C} ) \to \operatorname{Mor} (\mathcal{C} )$ is the degeneracy $1_{\bullet} =s_0$;
+		\item Let $f : x \to y$ and $g : y \to z$ in $\mathcal{C} $. We want to define a morphism $\sigma_0:\Lambda_1^2\to K$. Define the action on $0$-simplices by $0\mapsto x$, $1\mapsto y$, and $2\mapsto z$. Denote by $g_k$ the nondegenerate simplex in $\Delta^{k-1,k} $ for $0<k\leq 2$. Then define the map as $g_1\mapsto f$ and $g_2\mapsto g$. We will show later that this data determines a morphism $\sigma_0:\Lambda_1^2\to K$. By the horn filling condition, this extends to a map $\sigma : \Delta^2 \to K$. Let $\varphi : [1] \to [2]$ be the unique 1-simplex of $\Delta^2$ with $\varphi(0)=0$ and $\varphi(1)=2$. Then define $g\circ f$ as $\sigma(\varphi)$.
+	\end{enumerate}
+	
+	TODO: show the claim in (4) that this data determines a morphism from a horn is true; show is a category (see lurie); show the isomorphism.
+\end{proof}

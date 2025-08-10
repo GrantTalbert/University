@@ -1,0 +1,222 @@
+\begin{definition}\label{A.1.1}
+    A \emph{category} $\C$ is a class $\Obj(\C)$ of \emph{objects} of $\C$, together with a class $\Mor(\C)$ of \emph{morphisms} of $\C$, and four functions:
+    \begin{itemize}
+        \item A function $\dom : \Mor(\C) \to \Obj(\C)$, assigning each morphism $f\in\Mor(\C)$ a \emph{domain} $\dom(f)$;
+        \item A function $\cod : \Mor(\C)\to\Obj(\C)$, assigning each morphism $f\in\Mor(\C)$ a \emph{codomain} $\cod(f)$;
+        \item A function $1_\bullet : \Obj(\C)\to\Mor(\C)$, assigning each object $x\in\Obj(\C)$ a \emph{identity morphism} $1_x$;
+        \item If $f,g\in\Mor(\C)$ are morphisms such that $\cod(f)=\dom(g)$, we say that the pair $(g,f)$ is a \emph{composable pair}. There is then a function $\circ$ called \emph{composition} from the set of composable pairs to $\Mor(\C)$
+        \[
+        \circ : \{(g,f)\in\Mor(\C)\times\Mor(\C) \mid \dom(g)=\cod(f)\} \to \Mor(\C)
+        \]
+        that takes each composable pair $(g,f)$, and maps it to a morphism $g\circ f$, called the \emph{composite} of $g$ and $f$.
+    \end{itemize}
+    These functions must satisfy the following axioms:
+    \begin{enumerate}
+        \item For any $x\in\Obj(\C)$, the identity morphism $1_x$ must have $\dom(1_x)=\cod(1_x)=x$.
+        \item (right unitor) For any $f\in\Mor(\C)$ with $\dom(f)=x$, we must have the strict equality $f\circ 1_x = f$.
+        \item (left unitor) For any $g\in\Mor(\C)$ with $\cod(g)=x$, we must have the strict equality $1_x\circ g= g$.
+        \item (associativity) For any two composable pairs $(h,g)$ and $(g,f)$, we must have an equality $(h\circ g)\circ f=h\circ(g\circ f)$. We call $(h,g,f)$ a \emph{composable triple}, and write the composite $h\circ g\circ f$.
+    \end{enumerate}
+\end{definition}
+
+\begin{notation}\label{A.1.2}
+    If $f\in\Mor(\C)$ with $\dom(f)=x$ and $\cod(f)=y$, we say that $f$ \emph{is a morphism from $x$ to $y$}, and write $f : x \to y$ or $x\xlongrightarrow{f} y$. We write $\C(x,y)$ to denote the class of all morphisms from $x$ to $y$. If $(g,f)$ is a composable pair, we often denote the composite $g\circ f$ by juxtaposition $gf$, omitting the $\circ$ where possible. We often drop the $\Obj$, and write $x\in\C$ to denote that $x$ is an object of $\C$. We typically will never write $f\in\Mor(\C)$, and prefer to say \emph{$f$ is a morphism of $\C$} using language.
+\end{notation}
+
+\begin{remark}\label{A.1.3}
+    Most categories in nature are \emph{locally small}, meaning for any objects $x,y\in\C$, the class $\C(x,y)$ is in fact a \emph{set}. We will only need to consider locally small categories in this paper, so we may safely consider $\C(x,y)$ to be a set throughout. Some authors use the notation $\Hom(x,y)$ or $\Hom_\C(x,y)$ for the set $\C(x,y)$, so we often refer to $\C(x,y)$ as a \emph{hom-set}. Most of what we prove here will work in a more general setting where $\C(x,y)$ is a proper class, but working through the foundational issues adds unnecessary complexity, and some authors even go as far as to require that hom-sets indeed be sets in their definition of a category. When the class of objects of a category $\C$ is a set, we call the category \emph{small}. If a category is not small, we call it \emph{large}.
+\end{remark}
+
+\begin{example}\label{A.1.4}
+    A partial order on a set $P$ is a relation $\preceq$ which is
+    \begin{enumerate}
+        \item reflexive: for all $x\in P$, $x\preceq x$;
+        \item transitive: for all $x,y,z\in P$, if $x\preceq y$ and $y\preceq z$, then $x\preceq z$;
+        \item antisymmetric: for all $x,y\in P$, $x\preceq y$ and $y\preceq x$ \emph{if and only if} $x=y$.
+    \end{enumerate}
+    We can encode the information this relation carries into a category. If $x\preceq y$, then there is a unique morphism $x\to y$, and otherwise there is no morphism. Such a category is called an \emph{poset category}. A common type of poset category is for ordinal numbers: any ordinal number $n$, when viewed as a set, forms a poset under the standard $\leq$ relation. We thus can regard $n$ as a poset category under this relation, and typically write $\mathbf{n}$ for this category.
+\end{example}
+
+\begin{definition}\label{A.1.5}
+    Let $\C$ and $\D$ be categories. A \emph{functor} $F : \C \to \D$ consists of
+    \begin{itemize}
+        \item an object function $\Obj(\C)\to\Obj(\D)$,
+        \item and a morphism function $\Mor(\C)\to\Mor(\D)$,
+    \end{itemize}
+    both of which are typically denoted by $F$. These functions must preserve domain, codomain, identity, and composition:
+    \begin{enumerate}
+        \item if $f : x\to y$ in $\C$, then $F(f) : F(x)\to F(y)$ in $\D$;
+        \item for any composable pair $(g,f)$ in $\C$, there is an equality $F(g\circ f)=F(g)\circ F(f)$;
+        \item for any object $x\in\C$, $F(1_x)=1_{F(x)}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}\label{A.1.6}
+    It's shown fairly easily that given a commutative diagram, if we apply a functor $F$ to every object and every morphism in the diagram, it will still commute. For example, if the square
+    \[\begin{tikzcd}
+        a\ar["f", r]\ar["g"', d] & b \ar["h", d]\\
+        c \ar["k"', r] & d
+    \end{tikzcd}\]
+    commutes, then so does the square
+    \[\begin{tikzcd}
+        F(a)\ar["F(f)", r]\ar["F(g)"', d] & F(b) \ar["F(h)", d]\\
+        F(c) \ar["F(k)"', r] & F(d).
+    \end{tikzcd}\]
+\end{remark}
+
+\begin{terminology}\label{A.1.7}
+    We will usually refer to the properties (1), (2), and (3) of \cref{A.1.5}, and more generally \cref{A.1.6}, as \emph{functoriality}.
+\end{terminology}
+
+\begin{definition}\label{A.1.8}
+    Let $\C,\D$ be categories, and $F,G : \C\to\D$ be functors. A \emph{natural transformation} $\alpha : F \Rightarrow G$ is a function which assigns each $x\in\C$ to a morphism $\alpha_x : F(x)\to G(x)$ in $\D$, such that for any $f : x\to y$ in $\C$, the diagram
+    \[\begin{tikzcd}
+        F(x) \ar["F(f)", r]\ar["\alpha_x"', d] & F(y)\ar["\alpha_y", d]\\
+        G(x)\ar["G(f)"', r] & G(y)
+    \end{tikzcd}\]
+    commutes.
+\end{definition}
+
+\begin{remark}\label{A.1.9}
+    We obviously note that we can compose funtors in the same way we compose functions. We can also compose natural transformations: if $F,G,H : \C\to\D$ are functors and $\alpha : F\Rightarrow G$, $\beta : G\Rightarrow H$ are natural transformations, then the \emph{vertical composite} of $\beta$ and $\alpha$ is a natural transormation $\beta\circ\alpha : F \Rightarrow H$, with components given by $(\beta\circ\alpha)_x=\beta_{x}\circ\alpha_x$.
+\end{remark}
+
+\begin{notation}\label{A.1.10}
+We have various conventions for diagrams including natural transformations. A simple diagram
+\[\begin{tikzcd}
+	\C & \D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G"', curve={height=12pt}, from=1-1, to=1-2]
+	\arrow["\alpha", shorten=2pt, Rightarrow, from=0, to=1]
+\end{tikzcd}\]
+depicts that $F$ and $G$ are functors, and there is a natural transformation $\alpha$ between them. More complex diagrams such as
+\[\begin{tikzcd}
+	\C && \mathcal{E} \\
+	& \D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", from=1-1, to=1-3]
+	\arrow["G"', from=1-1, to=2-2]
+	\arrow["H"', from=2-2, to=1-3]
+	\arrow[shorten=2pt, Rightarrow, from=0, to=2-2, "\alpha"]
+\end{tikzcd}\]
+denote simply that $\alpha$ is a natural transformation from $F$ to the composite $H\circ G$.
+\end{notation}
+
+\begin{construction}\label{A.1.11}
+    \Cref{A.1.9} provides us a way to compose natural transformations along functors. However, we can also compose natural transformations along categories, using what is called \emph{horizontal composition}. Given a diagram
+    \[\begin{tikzcd}
+	\C & \D & \E,
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{F_1}", curve={height=-12pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{G_1}"', curve={height=12pt}, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{F_2}", curve={height=-12pt}, from=1-2, to=1-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{G_2}"', curve={height=12pt}, from=1-2, to=1-3]
+	\arrow["\alpha", shorten=2pt, Rightarrow, from=0, to=1]
+	\arrow["\beta", shorten=2pt, Rightarrow, from=2, to=3]
+\end{tikzcd}\]
+    the \emph{horizontal composite} of $\beta$ and $\alpha$, denoted $\beta\cdot\alpha$, is a natural transformation
+    \[\begin{tikzcd}
+	\C && \E
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{F_2\circ F_1}", curve={height=-12pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{G_2\circ G_1}"', curve={height=12pt}, from=1-1, to=1-3]
+	\arrow["{\beta\cdot\alpha}", shorten=2pt, Rightarrow, from=0, to=1]
+\end{tikzcd}\]
+    The components $(\beta\cdot\alpha)_x$ can be defined as either of the following expressions:
+    \[
+    (\beta\cdot\alpha)_x = \beta_{G_1(x)}\circ F_2(\alpha_x) \qquad \qquad (\beta\cdot\alpha)_x = G_2(\alpha_x)\circ \beta_{F_1(x)}.
+    \]
+    These two composites are shown to be equal by \cref{A.1.13} and \cref{A.1.14}.
+\end{construction}
+
+\begin{notation}\label{A.1.12}
+    As in \cref{A.1.2}, we often denote the composite $G\circ F$ of two functors by $GF$, omitting the $\circ$. Since there are two composites of natural transformations, notation becomes slightly more tricky. We prefer to never use the $\cdot$ notation for horizontal composition, so we will almost always denote the horizontal composite of $\beta$ and $\alpha$ by juxtaposition $\beta\alpha$. If both horizontal and vertical composition are being used, we will denote vertical composition by $\circ$. If only vertical composition is being used, we will usually denote it by juxtaposition. If only one type of composition is being used, we will usually clarify whether it is the horizontal or vertical composite, unless it is clear from context.
+\end{notation}
+
+\begin{remark}\label{A.1.13}
+    Given a diagram
+    \[\begin{tikzcd}
+	\C & \D & \E,
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G"', curve={height=12pt}, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "H", curve={height=-12pt}, from=1-2, to=1-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "H"', curve={height=12pt}, from=1-2, to=1-3]
+	\arrow["\alpha", shorten=2pt, Rightarrow, from=0, to=1]
+	\arrow[shorten=2pt, equals, from=2, to=3]
+\end{tikzcd}\]
+    we define the horizontal composite of $\alpha$ and the identity natural transformation $1_H$. Using either definition in \cref{A.1.11}, we obtain the definitions
+    \[
+    (1_H\alpha)_x = (1_H)_{G(x)}\circ H(\alpha_x)=H(\alpha_x)\circ (1_H)_{F(x)}.
+    \]
+    We have not yet shown the second equality holds, but we can show this fairly easily for this special case. Note that each component $(1_H)_x$ is just the identity $1_{H(x)}$. We can write these composites as the following diagram, which commutes if and only if the composites are indeed equal:
+    \[\begin{tikzcd}
+	{H(F(x))} & {H(G(x))} \\
+	{H(F(x))} & {H(G(x))}
+	\arrow["{H(\alpha_x)}", from=1-1, to=1-2]
+	\arrow["{1_{H(F(x))}}"', from=1-1, to=2-1]
+	\arrow["{1_{H(G(x))}}", from=1-2, to=2-2]
+	\arrow["{H(\alpha_x)}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    Note that this diagram is simply $H$ applied to the naturality condition for $\alpha$ with respect to the identity arrow, so this diagram commutes by \cref{A.1.8} and \cref{A.1.6}. Thus, the composites are indeed equal. The notation $(1_H)_x$ is very cumbersome, but luckily we usually only see identity natural transformations when they are being horizontally composed with something else. We thus adopt a new notation for horizontal composites with the identity morphism: $1_H\cdot \alpha$ is instead denoted as $H\alpha$. This notation is very nice, since $(H\alpha)_x=H(\alpha_x)$.
+
+    We also see that the notation $\alpha H$ is nice. Consider the diagram
+    \[\begin{tikzcd}
+	\E & \C & \D,
+	\arrow[""{name=0, anchor=center, inner sep=0}, "H", curve={height=-12pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "H"', curve={height=12pt}, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-2, to=1-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "G"', curve={height=12pt}, from=1-2, to=1-3]
+	\arrow["\alpha", shorten=2pt, Rightarrow, from=2, to=3]
+	\arrow[shorten=2pt, equals, from=0, to=1]
+    \end{tikzcd}\]
+    By the first formula in \cref{A.1.11}, the component at $x$ is given as
+    \[
+    (\alpha H)_x = \alpha_{H(x)}\circ F(H_x) = \alpha_{H(x)}\circ F(1_{H(x)})=\alpha_{H(x)}\circ 1_{FH(x)}=\alpha_{H(x)},
+    \]
+    where the subsequent steps follow by our notation $H_x=(1_H)_x=1_{H(x)}$, by \cref{A.1.5}, and by \cref{A.1.1}. By the second formula, we have
+    \[
+    (\alpha H)_x = G(H_x)\circ \alpha_{H(x)}=G(1_{H(x)})\circ\alpha_{H(x)}=1_{GH(x)}\circ\alpha_{H(x)}=\alpha_{H(x)},
+    \]
+    where the subsequent steps follow for the same reasons. We thus see that $(\alpha H)_x=\alpha_{H(x)}$, both justifying the equality in \cref{A.1.11} and justifying our notation.
+\end{remark}
+
+\begin{remark}\label{A.1.14}
+    We can now justify the equality in \cref{A.1.11}. Recall the situation depicted by the diagram therein, and note that we can alternatively view the two formulas given as
+    \[
+    (\beta\alpha)_x=(\beta G_1)_x\circ (F_2\alpha)_x,\qquad (\beta\alpha)_x = (G_2\alpha)_x\circ (\beta F_1)_x.
+    \]
+    We thus have
+    \[
+    \beta\alpha = \beta G_1\circ F_2\alpha,\qquad \beta\alpha = G_2\alpha\circ \beta F_1.
+    \]
+    To show this indeed holds, let $x\in\C$, and note that $\alpha_x : F_1(x)\to G_1(x)$. By functoriality of $F_2$ and $G_2$, we thus have two morphisms
+    \[\begin{tikzcd}[row sep=0em]
+	{F_2F_1(x)} & {F_2G_1(x)} \\
+	{G_2F_1(x)} & {G_2G_1(x).}
+	\arrow["{F_2(\alpha_x)}", from=1-1, to=1-2]
+	\arrow["{G_2(\alpha_x)}", from=2-1, to=2-2]
+    \end{tikzcd}\]
+    Since $\beta$ is natural from $F_2$ to $G_2$, by \cref{A.1.8} the square
+    \[\begin{tikzcd}
+	{F_2F_1(x)} & {F_2G_1(x)} \\
+	{G_2F_1(x)} & {G_2G_1(x)}
+	\arrow["{F_2(\alpha_x)}", from=1-1, to=1-2]
+	\arrow["{\beta_{F_1(x)}}"', from=1-1, to=2-1]
+	\arrow["{\beta_{G_1(x)}}", from=1-2, to=2-2]
+	\arrow["{G_2(\alpha_x)}", from=2-1, to=2-2]
+    \end{tikzcd}\]
+    commutes. Recognize that this expresses the equality
+    \[
+    \beta_{G_1(x)}\circ F_2(\alpha_x)=G_2(\alpha_x)\circ \beta_{F_1(x)},
+    \]
+    which is, by the notation introduced in \cref{A.1.13}, the same as
+    \[
+    (\beta G_1)_x\circ (F_2\alpha)_x = (G_2\alpha)_x \circ (\beta F_1)_x.
+    \]
+    This is precisely the claim we needed to show, proving the equality. 
+\end{remark}
+
+\begin{terminology}\label{A.1.15}
+    Let $F,G : \C\to\D$. If there are isomorphisms $F(c)\cong G(c)$ for each $c\in\C$, we say the isomorphism is \emph{natural} in $c$ if they form the components of a natural isomorphism $F(-)\cong G(-)$.
+\end{terminology}
+
+\begin{terminology}\label{A.1.16}
+    A functor $F$ is called \emph{representable} if it is naturally isomorphic to a hom-functor $\C(c,-)$ or $\C(-,c)=\C\opp(c,-)$.
+\end{terminology}

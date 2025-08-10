@@ -1,0 +1,237 @@
+We now return to our investigation of the functor $\Delta^\bullet$, defined on objects in \cref{2.2.7}. This investigation will not only provide us with a geometric intuition for the simplex category, cofaces, and codegeneracies, but will also offer a geometric intuition for the cosimplicial identities of \cref{2.3.6}. We thank \cite{concise} for being one of the best\footnote{Translation: the only.} resources we found which explicitly defined the maps of \cref{2.4.1}.
+
+\begin{definition}\label{2.4.1}
+    Let $\Delta^n$ denote the standard $n$-simplex, as in \cref{2.1.1}. For each $i\in[n]$, define a map $d^i : \Delta^{n-1}\to\Delta^n$ given by
+    \[\begin{tikzcd}
+    (t_0,\ldots,t_{n-1})\ar[mapsto, r] & (t_0,\ldots,t_{i-1},0,t_{i},\ldots,t_{n-1}).
+    \end{tikzcd}\]
+    We call $d^i$ the $i$th \emph{coface map}. Similarly, for each $i\in[n]$, define a map $s_i : \Delta^{n+1}\to\Delta^n$ by
+    \[\begin{tikzcd}   
+    (t_0,\ldots,t_i,t_{i+1},\ldots,t_{n+1})\ar[mapsto, r] & (t_0,\ldots,t_i+t_{i+1},\ldots,t_{n+1}).
+    \end{tikzcd}\]
+    We call $s^i$ the \emph{codegeneracy map}.
+\end{definition}
+
+\begin{remark}\label{2.4.2}
+    As I'm sure the reader can readily infer on their own, the definition of the functor $\Delta^\bullet$ on morphisms is given by mapping cofaces $d^i\mapsto d^i$, codegeneracies $s^i\mapsto s^i$, and all other maps are identified via their decomposition in \cref{2.3.4}. We will explore what this means geometrically in \cref{2.4.4} after a short commentary on terminology.
+\end{remark}
+
+\begin{terminology}\label{2.4.3}
+    It is far more common to refer to the maps $d^i$ and $s^i$ of \cref{2.4.1} as \emph{face} maps and \emph{degeneracy maps}, but as we will see in \cref{3.1.2}, this conflates with common terminology for simplicial sets. In particular, we prefer to use the `co' prefix for covariant functors $\BD\to (-)$, and we drop it for contravariant functors $\BD\opp\to(-)$. However, our categorical interpretation originaly arose from the study of simplices in algebraic topology, and before the categorical framework was developed it would have obviously been odd to call face maps ``coface maps''. As such, the terminology for these maps has persisted in the special case of the functor $\Delta^\bullet : \BD\to\Top$. Although this author prefers to adhere to the classical convention, we add in the `co' prefix in this paper for pedagogical purposes, as we believe it may prevent confusion. It is important to note that \textbf{basically no other papers use this terminology}, and we use it \emph{only} for pedagogical purposes.
+\end{terminology}
+
+\begin{intuition}\label{2.4.4}
+    Now we explore the geometric intuition of the coface and codegeneracy maps between geometric simplices.
+    \begin{itemize}
+        \item (cofaces) The intuition for cofaces is fairly simple. Consider the coface $d^i : \Delta^{n-1}\to\Delta^n$. Recall by \cref{2.1.6} that the faces of the standard $n$-simplex can be ordered according to the canonical ordering of the vertices. In particular, the faces are ordered from 0 to $n$, or equivalently, they are ordered by the set $[n]$. Thus each $i\in[n]$ corresponds to a \emph{face} of the standard $n$-simplex, which we recall by \cref{2.1.5}, is simply an $(n-1)$-simplex. The $i$th coface map takes the standard $(n-1)$-simplex, and inserts it as the $i$th face of the standard $n$-simplex.
+
+        To see how this intuition arises from the definition in \cref{2.4.1}, we consider a simple example. Consider the coface $d^1 : \Delta^1\to\Delta^2$. We map $(t_0,t_1)\mapsto (t_0,0,t_1)$. This places the 1-simplex on the $xz$-plane, as illustrated in \cref{fig:4}.
+        \begin{figure}[ht]
+            \centering
+            \begin{tikzpicture}[
+    font=\sf,
+    >=stealth
+]
+
+    %---------------------------------------------------
+    % Draw the 1-simplex on the left
+    %---------------------------------------------------
+    \begin{scope}[scale=2.5]
+        % Draw 2D axes
+        \draw[-latex] (0,0) -- (1.2,0) node[anchor=north]{$x$};
+        \draw[-latex] (0,0) -- (0,1.2) node[anchor=east]{$y$};
+
+        % Define vertices
+        \coordinate (v0_1d) at (1,0);
+        \coordinate (v1_1d) at (0,1);
+
+        % Draw and label the 1-simplex
+        \draw[thick, blue] (v0_1d) -- (v1_1d);
+        \node[at=(v0_1d), anchor=north] {$v_0$};
+        \node[at=(v1_1d), anchor=east] {$v_1$};
+    \end{scope}
+
+    %---------------------------------------------------
+    % Draw the mapping arrow in the middle
+    %---------------------------------------------------
+    \node[scale=3] at (4.5, 0.7) {$\mapsto$};
+    \node at (4.5, 1.2) {$d^1$};
+
+    %---------------------------------------------------
+    % Draw the 2-simplex on the right
+    %---------------------------------------------------
+    \begin{scope}[xshift=7cm, scale=3]
+        \tdplotsetmaincoords{70}{110}
+
+        % Establish the 3D coordinate system
+        \begin{scope}[tdplot_main_coords]
+            % Draw 3D axes
+            \draw[-latex] (0,0,0) -- (1.2,0,0) node[anchor=north east]{$x$};
+            \draw[-latex] (0,0,0) -- (0,1.2,0) node[anchor=north west]{$y$};
+            \draw[-latex] (0,0,0) -- (0,0,1.2) node[anchor=south]{$z$};
+
+            % Define vertices of the standard 2-simplex
+            \coordinate (v0_2d) at (1,0,0);
+            \coordinate (v1_2d) at (0,1,0);
+            \coordinate (v2_2d) at (0,0,1);
+
+            % Draw the filled 2-simplex (the body)
+            \fill[cyan, opacity=0.3] (v0_2d) -- (v1_2d) -- (v2_2d) -- cycle;
+            
+            % Draw the edges (1-faces)
+            \draw[cyan, thin] (v0_2d) -- (v1_2d);
+            \draw[cyan, thin] (v1_2d) -- (v2_2d);
+
+            % Highlight the image of the degeneracy map s_1
+            % This is the face f_2 = (v_0, v_1)
+            \draw[very thick, blue, line cap=round] (v0_2d) -- (v2_2d);
+
+            % Label the vertices
+            \node[at=(v0_2d), anchor=south east] {$v_0$};
+            \node[at=(v1_2d), anchor=south west] {$v_1$};
+            \node[at=(v2_2d), anchor=south west, yshift=2pt] {$v_2$};
+            
+            % Label the degenerate image
+            \node[at=($(v0_2d)!0.5!(v2_2d)$), anchor=south east, inner sep=3pt, text=blue] {$d^1(\Delta^1)$};
+        \end{scope}
+    \end{scope}
+
+\end{tikzpicture}
+            \caption{Visualization of $d^1 : \Delta^1\to\Delta^2$}
+            \label{fig:4}
+        \end{figure}
+
+        The idea is thus that the edges of the standard 2-simplex are precisely those that intersect with one of the $xy$-, $yz$-, or $xz$-planes. Since the map $d^i$ keeps one coordinate 0, its image is necessarily one of these planes. And of course, this intuition generalizes to higher dimensions. Also, it should be fairly obvious why we identify the coface maps of $\BD$ with these coface maps between simplicies; setting one coordinate always equal to 0 is very similar to ``skipping'' the correspoding number, which gives us the intuitive link between the two notions.
+        
+        \item (codegeneracies) The intuition for codegeneracies is not as simple. However, after we see the intuition, we will not only see how these behave geometrically, but we will also see why this definition of codegeneracies makes sense with regards to the definition in $\BD$. In fact, we start with the intuition in $\BD$, and translate this to define a map between simplices. We then illustrate the fact that \cref{2.4.1} agrees with the intuition we give here.
+
+        Recall that the codegeneracy $s^i : [n+1]\to[n]$ inserts both $i$ and $i+1$ at $i$, so we can think of it as \emph{identifying} $i$ and $i+1$ with each other. The functor $\Delta^\bullet$ can also be thought of as identifying each $i\in[n]$ with an entry $t_i$ in an $n$-tuple. So if $s^i$ identifies $i$ and $i+1$ together, and if $\Delta^\bullet$ identifies these numbers with entries in a tuple, we can think of the induced map as \emph{identifying} the $i$th and $(i+1)$th entries in the tuple. In other words, we are collapsing the entire $i,(i+1)$-plane generated by these entries into a single line, generated by the resultant single entry. We visualize this in \cref{fig:5}.
+        
+        \begin{figure}[ht]
+            \centering
+            \begin{tikzpicture}[
+    font=\small,
+    scale=2.5,
+    collapse_edge/.style={orange, thick},
+    main_simplex/.style={cyan, opacity=0.3, thick}
+    ]
+
+    %================================================
+    % FIGURE 1: Standard 2-Simplex 
+    %================================================
+    \begin{scope}
+        \tdplotsetmaincoords{70}{115}
+        \begin{scope}[tdplot_main_coords]
+            % Axes
+            \draw[-latex] (0,0,0) -- (1.2,0,0) node[anchor=north east]{$x$};
+            \draw[-latex] (0,0,0) -- (0,1.2,0) node[anchor=north west]{$y$};
+            \draw[-latex] (0,0,0) -- (0,0,1.2) node[anchor=south]{$z$};
+
+            % Vertices
+            \coordinate (v0) at (1,0,0);
+            \coordinate (v1) at (0,1,0);
+            \coordinate (v2) at (0,0,1);
+
+            % Simplex Body and Edges
+            \fill[main_simplex] (v0) -- (v1) -- (v2) -- cycle;
+            \draw[collapse_edge] (v0) -- (v1);
+            \draw[blue, thick] (v0) -- (v2);
+            \draw[blue, thick] (v1) -- (v2);
+
+            % Vertex Labels
+            \node[anchor=south east] at (v0) {$v_0$};
+            \node[anchor=south west] at (v1) {$v_1$};
+            \node[anchor=south west] at (v2) {$v_2$};
+        \end{scope}
+    \end{scope}
+
+    % Arrow 1
+    \node[scale=2] at (1.5, 0.6) {$\rightarrow$};
+
+    %================================================
+    % FIGURE 2: Intermediate Deformation
+    %================================================
+    \begin{scope}[xshift=2.2cm]
+        \tdplotsetmaincoords{70}{115}
+        \begin{scope}[tdplot_main_coords]
+            % Deformed Axes
+            \draw[-latex] (0,0,0) -- ({1.2*cos(22.5)},{1.2*sin(22.5)},0) node[anchor=north east]{$x'$};
+            \draw[-latex] (0,0,0) -- ({1.2*cos(67.5)},{1.2*sin(67.5)},0) node[anchor=north west]{$y'$};
+            \draw[-latex] (0,0,0) -- (0,0,1.2) node[anchor=south]{$z$};
+
+            % Vertices of the symmetrically deformed simplex
+            \coordinate (d_v0) at ({cos(22.5)},{sin(22.5)},0);
+            \coordinate (d_v1) at ({cos(67.5)},{sin(67.5)},0);
+            \coordinate (d_v2) at (0,0,1);
+
+            % Deformed Simplex Body and Edges
+            \fill[main_simplex] (d_v0) -- (d_v1) -- (d_v2) -- cycle;
+            \draw[collapse_edge] (d_v0) -- (d_v1);
+            \draw[blue, thick] (d_v0) -- (d_v2);
+            \draw[blue, thick] (d_v1) -- (d_v2);
+            
+            % Vertex Labels
+            \node[anchor=south east] at (d_v0) {$v_0$};
+            \node[anchor=south west] at (d_v1) {$v_1$};
+            \node[anchor=south west] at (d_v2) {$v_2$};
+        \end{scope}
+    \end{scope}
+
+    % Arrow 2
+    \node[scale=2] at (3.6, 0.6) {$\rightarrow$};
+
+    %================================================
+    % FIGURE 3: 1-Simplex 
+    %================================================
+    \begin{scope}[xshift=4.5cm]
+        \tdplotsetmaincoords{70}{115}
+        \begin{scope}[tdplot_main_coords]
+             % Axes
+            \draw[-latex] (0,0,0) -- ({1.2*cos(45)},{1.2*cos(45)},0) node[anchor=north west]{$x=y$};
+            \draw[-latex] (0,0,0) -- (0,0,1.2) node[anchor=south]{$z$};
+
+            % Vertices of the target 1-simplex
+            \coordinate (e0) at ({cos(45)}, {cos(45)}, 0); 
+            \coordinate (e1) at (0,0,1);
+
+            % Draw the 1-simplex
+            \draw[blue, thick] (e0) -- (e1);
+
+            % Label the vertices and the simplex
+            \node[anchor=south west] at (e0) {$v_0=v_1$};
+            \node[anchor=south west] at (e1) {$v_2$};
+        \end{scope}
+    \end{scope}
+    
+\end{tikzpicture}
+            \caption{Visualization of $s^0 : \Delta^2\to\Delta^1$}
+            \label{fig:5}
+        \end{figure}
+        We call simplicies like the one in \cref{fig:5} \emph{degenerate}. Degenerate simplicies are $n$-simplicies where two of the vertices coencide, meaning the $n$-simplex can be regarded as an $(n-1)$-simplex. As seen in \cref{fig:5}, the vertices $v_0,v_1$ are identified under $s^0$, allowing us to regard $s^0(\Delta^2)$ as a $1$-simplex. However, it can still be viewed as a 2-simplex with two vertices that coencide, making the simplex \emph{degenerate}. Hence the name of the codegeneracy maps.
+
+        Although this description may make intuitive sense, it is nontrivial to connect it back to \cref{2.4.1}. The easiest way to see that these notions are equivalent is to consider the action on the vertices. To see that the $i$th and $(i+1)$th vertices are indeed identified, recall that the $i$th vertex is the point $(0_0,\ldots,1_i,\ldots,0_{n+1})$, and the $(i+1)$th vertex is the point $(0_0,\ldots,0_i,1_{i+1},\ldots,0_{n+1})$, where we have denoted the ordering of each entry with a subscript. We then obtain
+        \[
+        s^i(0_0,\ldots,1_i,0_{i+1},\ldots,0_{n+1}) = (0_0,\ldots,1_i+0_{i+1},\ldots,0_{n+1})
+        \]
+        \[
+         = (0_0,\ldots,0_i+1_{i+1},\ldots,0_{n+1})=s^0(0_0,\ldots,0_i,1_{i+1},\ldots,0_{n+1}).
+        \]
+        This is the simplest way to connect the intuition herein back to \cref{2.4.1}. Since addition in the manner of \cref{2.4.1} is well known to be continuous, attempting to imagine a continuous map that identifies the respective vertices will generally lead back to the intuition we gave here. We encourage the reader who finds this unconvincing to work out a simple toy example for some $s^i : \Delta^2\to\Delta^1$ or $s^0 : \Delta^1\to\Delta^0$.
+    \end{itemize}
+\end{intuition}
+
+\begin{remark}\label{2.4.5}
+    \Cref{2.4.4} allows for a rigorous definition of the $i$th face of the standard $n$-simplex as the image of the $i$th coface $d^i : \Delta^{n-1}\to\Delta^n$.
+\end{remark}
+
+The functor $\Delta^\bullet : \BD\to\Top$, as far as we are aware, does not have a name, and is simply referred to as the ``canonical functor $\BD\to\Top$''. However, this functor is of incredible importance, for reasons the reader is likely already realizing. We illuminated in \cref{2.1.5} how $n$-simplices are constructed from lower level simplicies, and the \emph{coface} maps of \cref{2.4.1} express the same information for the standard $n$-simplices. However, we have also obtained \emph{codegeneracy} maps, which are ways of turning higher level simplices into lower level simplices. The relationships between geometric simplices are thus encoded in their cofaces and codegeneracies, which the functor $\Delta^\bullet$ shows are also encoded in the category $\BD$.
+
+The conclusion of this section is that $\BD$ offers us a combinatorial model for studying the relationships of the simplices. For example, consider the cosimplicial identities as stated in \cref{2.3.6}. One of these identities states that for $i<j$, $d^jd^i=d^id^{j=1}$. We can use the functor $\Delta^\bullet$ to give geometric meaning to this statement by interpreting it as a relationship between cofaces of simplices. Geometrically, this means that inserting the $(n-2)$-simplex into the $i$th face of the $(n-1)$-simplex, and then inserting that into the $j$th face of the $n$-simplex, is the same as inserting the $(n-2)$-simplex into the $(j-1)$th face of the $(n-1)$-simplex, and then inserting that into the $i$th face of the $n$-simplex. We see that this complex statement is simplified considerably by considering the combinatorial data of the category $\BD$, rather than the geometric data given by simplices. The other cosimplicial identities tell us similar statements:
+\begin{itemize}
+    \item Let $i<j$. Inserting the $n$-simplex into the $i$th face of the $(n+1)$-simplex, and then identifying the $j$th and $(j+1)$th vertices of the $(n+1)$-simplex to produce an $n$-simplex, is the same as identifying the $(j-1)$th and $j$th vertices of the $n$-simplex to produce an $(n-1)$-simplex, then inserting that simplex into the $i$th face of the $n$-simplex.
+    \item Inserting the $n$-simplex into \emph{either} the $j$th face \emph{or} the $(j+1)$th face of the $(n+1)$-simplex, and then identifying the $j$th and $(j+1)$th vertices to produce an $n$-simplex, is the same as doing nothing.
+    \item Let $i>j+1$. Inserting the $n$-simplex into the $i$th face of the $(n+1)$-simplex, and then identifying the $j$th and $(j+1)$th vertices to form an $n$-simplex, is the same as identifying the $j$th and $(j+1)$th of the $n$-simplex to form an $(n-1)$-simplex, and then inserting it into the $(i-1)$th face of the $n$-simplex.
+    \item Let $i\leq j$. Identifying the $i$th and $(i+1)$th vertices of the $(n+2)$-simplex to form an $(n+1)$-simplex, and then identifying the $j$th and $(j+1)$th vertices to form an $n$-simplex, is the same as identifying the $(j+1)$th and $(j+2)$th vertices of the $(n+2)$-simplex to form an $(n+1)$-simplex, and then identifying the $i$th and $(i+1)$th vertices to form an $n$-simplex.
+\end{itemize}
+
+Clearly, many of these claims are much easier proven as the cosimplicial identities in $\BD$, rather than directly proving them as properties of the geometric cofaces and codegeneracies. This understanding shows us that the simplex category $\BD$ is not only closely related to the geometric simplices, but is also an extremely neat and compact way of storing complex combinatorial data, allowing proofs to be simplified considerably. In the next section, we use this understanding to define \emph{simplicial sets}, which are similar and more powerful ways of storing combinatorial data. Simplicial sets are related to geometric simplices via the \emph{geometric realization functor}, an extremely important concept which will be introduced in \cref{sec3.2}.

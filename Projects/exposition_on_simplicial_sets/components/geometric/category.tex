@@ -1,0 +1,56 @@
+The category $\BD$ encodes valuable combinatorial data about the standard $n$-simplicies, which will be exploited heavily to develop the theory of simplicial sets in \href{sec3}{\S3}. Unfortunately, seeing the usefulness of this layer of abstraction requires the reader to wade through some poorly motivated material, but we hope the reader will see the motivation by the end. We begin by reviewing the definition of (finite) ordinal numbers.
+
+\begin{definition}\label{2.2.1}
+    The first ordinal number is defined as the empty set $\varnothing$, and is denoted $0$. The $(n+1)$th ordinal number is defined inductively as $n\cup \{n\}$.
+\end{definition}
+
+Exploring this defintion, we see that $0=\{\}$, and $1=0\cup\{0\}=\{\}\cup\{0\}=\{0\}$. We then see
+\[
+2 = 1\cup\{1\}=\{0\}\cup\{1\}=\{0,1\},\qquad 3=2\cup\{2\}=\{0,1\}\cup\{2\}=\{0,1,2\}.
+\]
+In general, we might think that $n=\{0,\ldots,n-1\}$, and indeed this is readily proven for the finite case:
+
+\begin{proposition}\label{2.2.2}
+    If $n$ is a nonzero finite ordinal number, then $n$ is defined as $\{0,\ldots,n-1\}$.
+\end{proposition}
+\begin{proof}
+    We use the method of proof by induction. By our above inspection, $1=\{0\}=\{0,\ldots,0\}$. We assume the inductive hypothesis that $n=\{0,\ldots,n-1\}$. Then by \cref{2.2.1},
+    \[
+    n+1=n\cup\{n\}=\{0,\ldots,n-1\}\cup\{n\}=\{0,\ldots,n\}.
+    \]
+    By induction, the statement is proven.
+\end{proof}
+
+\begin{notation}\label{2.2.3}
+Category theory rarely deals with numbers in the conventional sense of the term, so when we say ``consider the finite ordinal $n$'', we are likely using this as a shorthand for the set $\{0,\ldots,n-1\}$. It is also often convenient to havea second notation for finite ordinals: $[n]$ denotes the set $n+1=\{0,\ldots,n\}$. We then write $[-1]$ for $0=\{\}$. In other words, we are denoting a linearly ordered set $\{0,\ldots,n\}$ by its greatest element.
+\end{notation}
+
+\begin{remark}\label{2.2.4}
+    In view of \cref{2.2.3}, it is important to note that the notation $[n]$ comes up almost exclusively in the context of simplicial objects. Note that these sets are \emph{ordered}, since the relation $\leq$ defines an order on the set. Recalling the definition of poset categories, one often will say ``consider the category $\mathbf{n}$''. What they really mean is ``consider the category whose objects are elements of $n$, and whose morphisms are defined by taking the poset structure on $n$ using the $\leq$ relation.'' Most authors use bold font for ordinals to denote when they are being considered as categories. Although we dislike this convention, we agree it is pedagogically beneficial, so we adopt it for this paper.
+\end{remark}
+
+\begin{notation}\label{2.2.5}
+    We write $\omega$ for the first infinite ordinal. As a set, $\omega$ contains all finite ordinals $\{0,1,2,\ldots\}$. The natural numbers $\mathbb{N}$ can in fact be defined as the number $\omega$.
+\end{notation}
+
+\begin{definition}\label{2.2.6}
+    The \emph{simplex category} $\BD$ is the category where
+    \begin{enumerate}
+        \item Objects are nonempty finite ordinals, meaning $[n]$ for $n\geq 0$;
+        \item Morphisms are weakly order preserving functions, meaning a morphism is a function $f : [n] \to [m]$ such that $x\leq y$ implies $f(x)\leq f(y)$.
+    \end{enumerate}
+\end{definition}
+
+It is not immediately clear how the simplex category relates to \cref{2.1.1}, but there is an important functor that will make the relationship more clear. For now, we will only discuss the action of this functor on objects, since we will need to further develop the theory of morphisms in $\BD$ before the action of the functor can make sense on arrows. We thus offer the following preliminary definition:
+
+\begin{definition}\label{2.2.7}
+    The functor $\Delta : \BD\to\Top$ is defined by mapping the finite ordinal $[n]$ to the standard $n$-simplex $\Delta^n$, as defined in \cref{2.1.1}.
+\end{definition}
+
+\begin{notation}\label{2.2.8}   
+We have that $\Delta[n]=\Delta^n$, so we will often choose to write the functor of \cref{2.2.5} as $\Delta^{\bullet}$. The big dot, called a \emph{bullet}, is interpreted as a placeholder for the value of the functor, similar to the ``$-$'' in hom-functors.
+\end{notation}
+
+\begin{remark}\label{2.2.9}
+    The following remark is not important for this paper, but is an interesting fact. The category $\BD$ admits a full embedding into the category $\Cat$ of small categories. We map each ordinal $[n-1]$ to the poset category $\mathbf{n}$, and functors $F : \mathbf{n}\to\mathbf{m}$ are precisely order preserving functions $F : [n-1]\to[m-1]$.
+\end{remark}

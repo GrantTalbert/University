@@ -1,0 +1,178 @@
+We were able to view objects in $\BD$ as geometric objects using the functor $\Delta : \BD\opp\to\Top$. We can in fact achieve even better results with the \emph{geometric realization functor} $|-| : \sSet\to\Top$. What follows in \cref{3.2.1} is an extremely succinct way to summarize the geometric realization of a simplicial set using the language of \emph{coends}.
+
+Although it is simple, it is not particularly descriptive. Thus the reader who is unfamiliar with coends should not be concerned, as we will provide a much better description in \cref{3.2.2} and \cref{3.2.3}. We found it suprisingly difficult to find a good resource on geometric realization; most sources expect us to already know it, yet we cannot find where we are supposed to know it from. We thank Emily Riehl for her presentation in \cite{sset}, and we thank Greg Friedman for his presentation in \cite{fried}.
+
+\begin{definition}\label{3.2.1}
+    Let $X_\bullet$ be a simplicial set, and let $\Delta^n$ denote the standard $n$-simplex as defined in \cref{2.1.1}. The geometric realization $|X_\bullet|$ of $X_\bullet$ is the coend
+    \[
+    \int^{[n]\in\BD} X_n \times \Delta^n,
+    \]
+    where $X_n$ is given the discrete topology. This is equivalent to the definition via functor tensor products, since the usual tensor is the levelwise copower, and there is a homeomorphism $X_n\cdot\Delta^n\cong X_n\times\Delta^n$ when $X_n$ is given the discrete topology.
+\end{definition}
+
+\begin{construction}\label{3.2.2}
+    We now detail the construction of the geometric realization of a simplicial set. The experienced reader should be able to recognize this as the coend given in \cref{3.2.1}, computed via coproducts and coequalizers. Let $X_\bullet$ be a simplicial set, and recall that the coproduct in $\Top$ is the disjoint union. The geometric realization $|X_\bullet|$ is computed by following these steps:
+    \begin{enumerate}
+        \item Construct the coproduct
+        \[
+        \coprod_{[n]\in\BD} X_n\times\Delta^n,
+        \]
+        where the set $X_n$ is given the \emph{discrete topology}, meaning all subsets $U\subseteq X_n$ are open.
+        \item We then impose an equivalence relation on the space, which we plan to quotient by. Let $\alpha : [m]\to[n]$ be a morphism in the simplex category $\BD$. Denote by $\alpha^*$ the morphism $X(\alpha)$, and denote by $\alpha_*$ the morphism $\Delta^\bullet(\alpha)$. We describe in more detail how to think of these morphisms in \cref{3.2.3}. We quotient by the following relation: for any $x\in X_n$ and any $p\in \Delta^m$,
+        \[
+        (\alpha^*(x),p)\sim (x,\alpha_*(p)).
+        \]
+        Note that this quotient only affects the parts of the coproduct indexed by $[n]$ and $[m]$, so we intuitively think of it as only quotienting those parts. We then impose this quotient \emph{for all} morphisms $\alpha$, which gives the geometric realization $|X_\bullet|$.
+    \end{enumerate}
+\end{construction}
+
+\begin{remark}\label{3.2.3}
+    Of course by \cref{2.3.4}, we only need to consider cofaces and codegeneracies, not \emph{all} morphisms $\alpha$ in $\BD$. This simplifies the construction substantially, and we mainly described \cref{3.2.2} in terms of all morphisms for pedagogical purposes; in particular to emphasize that cofaces and codegeneracies subsume all other morphisms in $\BD$. We continue with the understanding that we need only work with cofaces and codegeneracies.
+    \begin{itemize}
+        \item (faces) Recall that the action of $X$ on the coface map $d^i : [n-1]\to[n]$ is given by the face map $d_i : X_n\to X_{n-1}$. Recall by \cref{2.4.1} and \cref{2.4.4} that the corresponding coface map $d^i:\Delta^{n-1}\to\Delta^{n}$ inserts $\Delta^{n-1}$ at the $i$th face of $\Delta^n$. What we want to do is think of each $n$-simplex $x\in X_n$ as identifying a geometric $n$-simplex via $\{x\}\times \Delta^n\subseteq X_n\times\Delta^n$. The product space can thus be thought of as an $X_n$-indexed (disjoint) collection of geometric $n$-simplices. The quotient process is thus interpreted as follows:
+        \begin{enumerate}
+            \item Choose an $n$-simplex $x\in X_n$, and find the corresponding geometric $n$-simplex $\Delta^n$.
+            \item Find the $i$th face $d_i(x)\in X_{n-1}$ of $x$, and find the corresponding geometric $(n-1)$-simplex $\Delta^{n-1}$.
+            \item Glue the $(n-1)$-simplex $\Delta^{n-1}$ corresponding to $d_i(x)$ to the $i$th face of the geometric $n$-simplex $\Delta^n$ corresponding to $x$ by gluing along the coface map $d^i : \Delta^{n-1}\to\Delta^n$.
+        \end{enumerate}
+        \item (degeneracies) Recall that the action of $X$ on the codegeneracy $s^i : [n+1]\to[n]$ is given by the degeneracy map $s_i : X_n\to X_{n+1}$. Recall by \cref{2.4.1} and \cref{2.4.4} that the corresponding codegeneracy map $s^i : \Delta^{n+1}\to\Delta^n$ identifies the $i$th and $(i+1)$th vertices of $\Delta^{n+1}$, in effect ``squishing'' the simplex down to a degenerate $n$-simplex. Using the same logic as we did for faces, we note that each $n$-simplex $x\in X_n$ identifies a geometric $n$-simplex $\{x\}\times\Delta^n$, so the quotienting process is interpreted as follows:
+        \begin{enumerate}
+            \item Choose an $n$-simplex $x\in X_n$, and find the corresponding geometric $n$-simplex $\Delta^n$.
+            \item Find a degenerate $(n+1)$-simplex $s_i(x)\in X_{n+1}$, and find the corresponding geometric $(n+1)$-simplex $\Delta^{n+1}$.
+            \item Collapse the $(n+1)$-simplex $\Delta^{n+1}$ corresponding to $s_i(x)$ to the $n$-simplex $\Delta^n$ corresponding to $x$ along the $i$th codegeneracy $s^i$, identifying $\Delta^{n+1}$ with a degenerate simplex.
+        \end{enumerate}
+        We can summarize this process as taking all the geometric simplices corresponding to degenerate simplices, and turning them into degenerate simplices by composing along the corresponding codegeneracy.
+    \end{itemize}
+    The resulting information we gather from this analysis is twofold. Degenerate simplices can be thought of as \emph{redundant information}, since the corresponding geometric simplex collapses down to a lower dimensional simplex. Faces of a simplex can be thought of as geometric faces of the corresponding geometric simplex, again by the process described above.
+\end{remark}
+
+\begin{intuition}\label{3.2.4}
+	The geometric realization, at first glance, is a fairly contrived and arbitrary construction. However, now that we've explored the construction in \cref{3.2.2} and \cref{3.2.3}, we can provide some decent intuition for what simplicial sets really are.
+
+	Recall that in \cref{sec2.4}, we obtained an understanding of how $\boldsymbol{\Delta} $ modeled simplicial sets and their relationships between each other in a combinatorial way by identifying each element with an $n$-simplex, and identifying each coface and codegeneracy with the corresponding geometric coface and codegeneracy. The category $\sSet $ is more powerful because it encodes \emph{more} combinatorial information that $\boldsymbol{\Delta} $. In \cref{3.2.7}, we will show the geometric realization of the standard $n$-simplicial sets are the standard $n$-simplices, and we will see even later that there is a notion of coface and codegeneracy between the standard $n$-simplicial sets, which correspond precisely to the notions of the same name between the standard geometric $n$-simplices. In this way, the objects $\Delta^n$ and the cofaces and codegeneracies between them encode the same information as $\boldsymbol{\Delta} $, since geometric realization gives us the same objects and the same morphisms.
+
+	However, $\sSet $ is a much larger category than just the simplicial sets given by the Yoneda embedding. Other simplicial sets can have simpler structure, or more complicated structure, allowing us to build much more interesting spaces. Each simplicial set $X_{\bullet} $ encodes combinatorial information via its faces and degeneracies, and this information tells the geometric realization how to construct a geometric object. It starts by building geometric $n$-simplices for each $n$-simplex of $X_{\bullet} $, and then it glues them together based on the combinatorial information $X_{\bullet} $ contains. The vast amount of freedom we have when defining a simplicial set allows us to construct a large variety of different spaces. For example, \cref{3.3.5} constructs a space known as the ``classifying space'' for the very simple group $\mathbb{Z} /2\mathbb{Z} =\mathbb{Z} _2$, which is the geometric realization of a related simplicial set called the \emph{nerve}. We find that the classifying space is the infinite real projective space $\mathbb{R} P^\infty $. Even though the group $\mathbb{Z} /2\mathbb{Z} $ is a very simple group, we are still able to construct an extremely complex space using the information it encodes. And we can also construct simple spaces with simplicial sets: in \cref{3.3.9} you will construct the discrete topological space on any set $X$ in two different ways.
+
+	Thus, simplicial sets are ways to encode extremely complex data in a simple combinatorial fasion. It's a set of rules for gluing and collapsing geometric simplices, as described in \cref{3.2.2}, which can produce complex and important spaces. As we saw in \cref{sec2.4}, this can simply quite a number of proofs, but simplicial objects have applications far beyond just this. In this paper, we will explore only a small number of the applications of simplicial sets, mainly with a focus on homotopy theory and category theory. However, applications of simplicial sets have become somewhat ubiquitous in algebraic topology, category theory, and fields beyond these in the past few years due to their \emph{relatively} simple nature, compared to the complex structure they encode.
+
+    The reader at this point is likely hoping for some examples of geometric realization computations. However, the geometric realization can be fairly lengthy to compute for nontrivial cases, and many computations require theory that will not be developed until later, if at all. For this reason, most of our examples of computations will center around developing some of this theory, and will be sprinkled throughout the text. Our first computation will be \cref{3.2.7}, where we compute the geometric realization of the standard $n$-simplicial sets $\Delta^n$. For the reader who immediately wants to see an example of a more advanced worked geometric realization, we recommend skipping to \cref{sec3.3}, and reading \cref{3.3.5}.
+\end{intuition}
+
+\begin{exercise}\label{3.2.5}
+    We claim in \cref{3.2.3} that by \cref{2.3.4}, we need only consider the faces and degeneracies when computing the geometric realization of a simplicial set. Make this notion precise by proving that if we construct the relations of \cref{3.2.2} (2) for only the faces and degeneracies, then we already necessarily have the relation $(\alpha^*(x),p)\sim(x,\alpha_*(p))$ for any arrow $\alpha$ in $\BD$, with notation as in \cref{3.2.2}.
+\end{exercise}
+
+\begin{remark}\label{3.2.6}
+    Throughout \cref{3.2.3} and \cref{3.2.5}, we continuously thought of each product $X_n\times\Delta^n$ not quite as a product space, but instead as an $X_n$-indexed collection of geometric $n$-simplices. The reader may be wondering if this is equivalent to the copower $X_n\cdot\Delta^n$, especially since these constructions are isomorphic as sets. Indeed, when $X_n$ is given the discrete topology, the copower is homeomorphic to the product. This is not difficult to prove, and we encourage the reader to work out the proof if they are not convinced. We typically prefer product notation since it is more simple to write $(x,-)$ to denote that $x$ is the indexing $n$-simplex in $X_n$, which simplifies the presentation of the relation we quotient by in \cref{3.2.2}. However this is largely notational, and we still think of it more as a copower.
+\end{remark}
+
+\begin{proposition}\label{3.2.7}
+    The geometric realization of the standard $n$-simplicial set $\Delta^n$, as defined in \cref{3.1.9}, is the standard $n$-simplex $\Delta^n$.
+\end{proposition}
+\begin{proof}
+    Due to our overloaded notation, we will need to adopt some new notational conventions for the duration of this proof in order to make it readable. We will denote the standard $n$-simplicial as $\Delta^n$, just like before, and will denote the standard geometric $n$-simplex as $\Delta_n$, with a subscript. Any time both a superscript \emph{and} a subscript show up of the form $\Delta^n_k$, this denotes the $k$-simplices of $\Delta^n$. Furthermore, the functor $\Delta_\bullet$ will denote the canonical embedding $\BD\to\Top$, and $\Delta^\bullet$ will be the Yoneda embedding $\BD\to\Set^{\BD\opp}$.
+
+    An element of $\left|\Delta^n\right|$ is an equivalence class of a pair $(f,p)$, where $f\in\Delta_k^n$ and $p\in\Delta^n$. By the defintion of $\Delta^n$ as given in \cref{3.1.8}, $k$-simplices are morphisms $f : [k]\to[n]$. Note that by \cref{2.4.2}, $f$ induces a continuous map $\Delta_\bullet(f) : \Delta_k\to\Delta_n$. Since $p\in\Delta^k$, we can evaluate this morphism at $p$. Thus we propose the map $\varphi : \left|\Delta^n\right| \to\Delta_n$ given by $[(f,p)]\mapsto \Delta_\bullet(f)(p)$. It is not obvious that this map is well-defined, so before we can show it is a homeomorphism, we must show that any choice of representative of the equivalence class evaluates to the same point.
+
+    We first show the function is well-defined. Let $f\in\Delta^n_k$, $p\in\Delta_h$, and $\alpha : [h]\to[k]$ in $\BD$. Define the map $\psi$ by
+    \[\begin{tikzcd}[row sep=0em]
+	{\displaystyle{\coprod_{[k]\in\BD}}\Delta^n_k\times\Delta_k} & {\Delta_n} \\
+	{(f,p)} & {\Delta_\bullet(f)(p).}
+	\arrow["\psi", from=1-1, to=1-2]
+	\arrow[maps to, from=2-1, to=2-2]
+    \end{tikzcd}\]
+     By \cref{3.2.2}, the equivalence relation we quotient by identifies points $(\alpha^*(f),p)\sim(f,\alpha_*(p))$, where $\alpha^*$ is the simplicial operator $\Delta^n_k\to\Delta^n_h$ induced by $\Delta^n$, and $\alpha_* : \Delta_h\to\Delta_k$ is given by $\Delta_\bullet(\alpha)$. Recall that since $\Delta^n$ is given by the Yoneda embedding, the morphism $\alpha^*$ is simply given by precomposition, so we obtain that the relation reads as
+    \[
+    (f\alpha,p)\sim(f,\Delta_\bullet(\alpha)(p)).
+    \]
+    Applying $\psi$ to both sides of this quotient gives, by functoriality of $\Delta_\bullet$,
+    \[
+    \psi(f\alpha,p)=\Delta_\bullet(f\alpha)(p),\qquad \psi(f,(\Delta_\bullet(\alpha))(p))=\Delta_\bullet(f)(\Delta_\bullet(\alpha)(p))=(\Delta_\bullet(f)\circ\Delta_\bullet(\alpha))(p)=\Delta_\bullet(f\alpha)(p).
+    \]
+    Since these are equal, we have that $\psi$ identifies elements under the equivalence relation $\sim$, and thus by univeraslity of the quotient, there exists a unique dashed arrow
+    \[\begin{tikzcd}
+	{\displaystyle{\coprod_{[k]\in\BD}}\Delta^n_k\times\Delta_k} & {\Delta_n} \\
+	{\displaystyle{\left|\Delta^n\right|\cong\left(\coprod_{[k]\in\BD}\Delta^n_k\times\Delta_k\right)/\tildesim}}
+	\arrow["\psi", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[dashed, from=2-1, to=1-2]
+    \end{tikzcd}\]
+    rendering the diagram commutative (in $\Set$). By our extensive knowledge of universals in $\Set$, we obtain an explicit description of the dashed arrow as $[(f,p)]=\psi(f,p)=\Delta_\bullet(f)(p)$, which is precisely the definition of $\varphi$. Thus $\varphi$ arises by universality, and is therefore well-defined.
+
+    Now we show $\varphi$ is continuous. Since $\varphi$ arises by universality, and since by \cref{3.0.1} all universals in $\Top$ admit the same point-set definition as in $\Set$, it suffices to show $\psi$ is continuous, since the canonical quotient is continuous by definition. This will promote the universal problem to $\Top$, rendering $\varphi$ continuous, as required. We start by considering the restriction of $\psi$ to only one component of the product $\Delta_k^n\times\Delta_k$. We can decompose the restriction of $\psi$ as the composite
+    \[\begin{tikzcd}
+	{\Delta_k^n\times\Delta_k} & {\Top(\Delta_k,\Delta_n)\times\Delta_k} & {\Delta_n.}
+	\arrow["{\Delta_\bullet\times1}", from=1-1, to=1-2]
+	\arrow["{\mathrm{eval}}", from=1-2, to=1-3]
+    \end{tikzcd}\]
+    If we give $\Top(\Delta_k,\Delta_n)$ the compact-open topology, then it is well known that the evaluation map $\mathrm{eval}(\Delta_\bullet(f),p)=\Delta_\bullet(f)(p)$ is continuous whenever the domain (in this case, $\Delta_k$) is locally compact Hausdorff. Indeed, all Euclidean spaces $\mathbb{R}^n$ are locally compact Hausdorff by Heine-Borel, and all open or closed subsets of locally compact Hausdorff spaces are locally compact Hausdorff. Since $n$-simplices are clearly closed as subspaces of $\mathbb{R}^{n+1}$, this follows. It suffices to show $\Delta_\bullet\times 1$ is continuous. Note that $\Delta_\bullet\times 1$ arises as the unique dashed arrow in the diagram
+    \[\begin{tikzcd}
+	{\Delta_k^n} & {\Top(\Delta_k,\Delta_n)} \\
+	{\Delta_k^n\times\Delta_k} & {\Top(\Delta_k,\Delta_n)\times\Delta_k} \\
+	{\Delta_k} & {\Delta_k}
+	\arrow["{\Delta_\bullet}", from=1-1, to=1-2]
+	\arrow[from=2-1, to=1-1]
+	\arrow["{\Delta_\bullet\times1}", dashed, from=2-1, to=2-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=1-2]
+	\arrow[from=2-2, to=3-2]
+	\arrow["1"', from=3-1, to=3-2]
+    \end{tikzcd}\]
+    induced by universality of products in $\Top$. Since the identity $1$ is continuous, it suffices to show $\Delta_\bullet$ is continuous. Recall that all functions whose domain is a discrete topological space are continuous, since the preimage of any open set is a set, and any set is open in a discrete space. Recall in \cref{3.2.1,3.2.2} that we grant the set of $k$-simplices $\Delta_k^n$ the discrete topology, and thus $\Delta_\bullet$ is continuous. We thus have that the restriction of $\psi$ is continuous for any $k$.
+
+    Since every restriction $\psi|_k$ of $\psi$ along the $k$-indexed component of the coproduct is continuous, universality of coproduct assembles the arrows $\psi|_k$ into a unique dashed arrow as indicated
+    \[\begin{tikzcd}
+	{\Delta_k^n\times\Delta_k} \\
+	{\displaystyle{\coprod_{[k]\in\BD}\Delta_k^n\times\Delta_k}} & {\Delta_n}
+	\arrow[from=1-1, to=2-1]
+	\arrow["{\psi|_k}", from=1-1, to=2-2]
+	\arrow[dashed, from=2-1, to=2-2]
+    \end{tikzcd}\]
+    rendering the diagram commutative. This unique dashed arrow is precisely $\psi$ since precomposing with the injection $\Delta_k^n\times\Delta_k$ is the same as restricting along the $k$-indexed component. Thus, $\psi$ arises by universality in $\Top$, and is therefore continuous. We thus obtain that $\varphi$ is continuous, as required.
+
+    We now show $\varphi$ is an isomorphism by constructing an explicit inverse. Define the map $\eta$ as the composite
+    \[\begin{tikzcd}[row sep=0em]
+	{\Delta_n} & {\displaystyle{\coprod_{[k]\in\BD}\Delta_k^n\times\Delta_k}} & {\left|\Delta^n\right|} \\
+	p & {(1,p)\in\Delta_n^n\times\Delta_n} & {[(1,p)].}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[maps to, from=2-1, to=2-2]
+	\arrow[maps to, from=2-2, to=2-3]
+    \end{tikzcd}\]
+    To be fully clear, we are mapping the point $p$ to the point $p\in\Delta_n$ in the geometric $n$-simplex indexed by the identity map $1\in\Delta_n$. First, we show this map is continuous. Note that given the diagram of solid arrows
+    \[\begin{tikzcd}
+	& {\Delta_n^n} \\
+	{\Delta_n} & {\Delta_n^n\times\Delta_n} & {\displaystyle{\coprod_{[k]\in\BD}\Delta_k^n\times\Delta_k}} & {\left|\Delta^n\right|} \\
+	& {\Delta_n}
+	\arrow["{x\mapsto1}", from=2-1, to=1-2]
+	\arrow[dashed, from=2-1, to=2-2]
+	\arrow["1"', from=2-1, to=3-2]
+	\arrow[from=2-2, to=1-2]
+	\arrow["{i_n}", from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow["\pi", from=2-3, to=2-4]
+    \end{tikzcd}\]
+    universality of product induces a unique dashed arrow as indicated, rendering the diagram commutative. We also clearly see that $\eta$ can be defined as the composite along the main row, where $\pi$ denotes the canonical projection and $i_n$ denotes the inclusion into the coproduct at the $n$-indexed component. Since $\pi$ and $i_n$ are continuous, we simply need to show the dashed arrow is continuous, and by universality it suffices to show the identity and the constant map at 1 are both continuous. Both are clearly continuous, giving us that $\eta$ is continuous, as required.
+    
+    Now we show $\eta$ is an inverse of $\varphi$. It's clearly a right inverse of $\varphi$:
+    \[
+    (\varphi\eta)(p)=\varphi[(1,p)]=\Delta_\bullet(1)(p)=1(p)=p,
+    \]
+    because $\Delta_\bullet$ is a functor and thus preserves identities. To show it is a left inverse, note that
+    \[
+    (\eta\varphi)[(f,p)]=\eta(\Delta_\bullet(f)(p))=[(1,\Delta_\bullet(f)(p))].
+    \]
+    We thus need to show that $(f,p)\sim(1,\Delta_\bullet(f)(p))$. Indeed, since $f=f^*(1)$, we have
+    \[
+    (f,p)=(f^*(1),p)\sim (1,\Delta_\bullet(f)(p)),
+    \]
+    concluding the proof.
+\end{proof}
+
+\begin{remark}\label{3.2.8}
+    \Cref{3.2.7} justifies our overloaded notation for $\Delta^n$ and $\Delta^\bullet$. Because of this fact, many authors prefer to denote the standard geometric $n$-simplex by $|\Delta^n|$. We prefer this notation as well, but both choices overload notation in some way (until we prove \cref{3.2.7} at least), and we felt that for a basic introduction, our choice of notation was, for lack of a better word, less bad. However, now that we have proven \cref{3.2.7}, \textbf{we now prefer to switch to the more common notation} of denoting the standard geometric $n$-simplex by $\left|\Delta^n\right|$.
+\end{remark}
+
+\begin{remark}\label{3.2.9}
+	Geometric realizations of simplicial sets are always compactly generated, and in particular are always CW complexes with one $n$-cell for each nondegenerate $n$-simplex of the simplicial set. This is extremely convenient, since the category $\mathcal{C} \mathcal{G} $ is notably much better behaved than the general category $\Top $, while still containing most notable topological spaces, making working in the category of compactly generated spaces particularly appealing.
+\end{remark}

@@ -1,0 +1,10 @@
+\section{Morphisms}
+
+Until \cref{3.4.13}, we had not yet discussed the action of geometric realizations on morphisms. However, geometric realization is indeed a functor since \cref{3.2.1} defines it by a coend, and since $\Top $ is cocomplete. Sticking temporarily with the language of coends, \cite[\S IX.7]{ml} provides us for the definition of the induced morphism. Given a morphism $\alpha : X_{\bullet}  \to Y_{\bullet} $ of simplicial sets, and note that each component promotes to a continuous map $\alpha_n : X_n \to Y_n$ when $X_n,Y_n$ are topologized with the discrete topology. Let $\omega^X$ and $\omega^Y$ be the ending wedges for the geometric realizations of $X_{\bullet} $ and $Y_{\bullet} $, respectively. Then given the diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\displaystyle{\int^{[n]\in\boldsymbol{\Delta} } X_n\times \left| \Delta^n \right| }\ar[" \left| \alpha \right|  "', dashed, d] \ar[" \omega_{n,n} ^X ", r]  & X_n\times \left| \Delta^n \right| \ar[" \alpha_{n} \times 1 ", d]  \\
+	\displaystyle{\int^{[n]\in\boldsymbol{\Delta} } Y_n\times \left| \Delta^n \right| }\ar[" \omega_{n,n} ^Y "', r]  & Y_n\times \left| \Delta^n \right| 
+\end{tikzcd}\]
+we note that $(\alpha_n\times 1)\circ \omega_{n,n} ^X$ defines a wedge for $\left| Y_{\bullet}  \right| $, and by universality there exists a unique dashed arrow as indicated, rendering the diagram commutative. NOTE TO SELF TO REDO THIS TOMORROW THE DIAGRAM IS FLIPPED THIS IS FOR ENDS NOT COENDS LOL
+
+If the reader at this point has no idea what this means intuitively, or how to prove anything with it, they are not the only ones. 

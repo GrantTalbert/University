@@ -1,0 +1,223 @@
+We now introduce the notion of a simplicial subset, along with two important constructions known as the \emph{horn}, and the \emph{boundary/simplicial sphere}, which are of particular importance in a variety of contexts.
+
+\begin{definition}\label{3.4.1}
+    Let $X_\bullet$ be a simplicial set. A \emph{simplicial subset} of $X_\bullet$ is a simplicial set $Y_\bullet$ where
+    \begin{itemize}
+        \item For all $n$, the $n$-simplices of $Y_\bullet$ are a subset of those of $X_\bullet$, meaning $Y_n\subseteq X_n$;
+        \item The faces and degeneracies in $Y_\bullet$ agree with those in $X_\bullet$; in particular, the faces $d_i^Y$ of $Y_\bullet$ are defined as the restrictions of the faces $d_i^X$ and degeneracies $s_i^X$ of $X_\bullet$ along the subset $Y_n\subseteq X_n$
+        \[
+        d_i^Y = d_i^X|_{Y_n}, \qquad s_i^Y = s_i^X|_{Y_n}.
+        \]
+    \end{itemize}
+    We write $\Y\subseteq\X$ to denote that it is a simplicial subset.
+\end{definition}
+
+\begin{remark}\label{3.4.2}
+    Unfortunately, not all collections of subsets $Y_n\subset X_n$ of a simplicial set $X_\bullet$ form a simplicial subset. Yes, one can define the faces and degeneracies for $Y_\bullet$ by restricting those of $X_\bullet$ along the relevant subsets, but \emph{the image of each restriction must be contained in the corresponding subset $Y_n$}.
+    
+    For example, consider the discrete simplicial set $X_\bullet$ where $X_n=\mathbb{Z}$ for all $n$, and all faces and degeneracies are the identities. We can construct subsets $Y_\bullet$ by taking $Y_n=X_n$ for all $n$ \emph{except} for $n=1$, where we take $Y_n=\mathbb{N}$. It doesn't matter whether or not we choose $0\in\mathbb{N}$ here. By \cref{3.4.1}, for $Y_\bullet$ to be a simplicial subset, the faces and degeneracies must agree with those of $X_\bullet$; in particular they are the restrictions along the subsets $Y_\bullet$. Since $Y_0=X_0$, the face $d_0 : Y_0 \to Y_1$ must be the same. Since the face is the identity, it maps each element to itself. Note that $-1\in Y_0=\mathbb{Z}$, and $d_0(-1)=-1\notin Y_1=\mathbb{N}$. Since the image is not in the subset $Y_1$, $\Y$ cannot be a simplicial subset, since the definition of $\Y$ as given does not form a valid simplicial set.
+\end{remark}
+
+\begin{remark}\label{3.4.3}
+    In contrast to \cref{3.4.2}, it turns out that all one has to check to determine whether an object $Y_\bullet$ is a simplicial subset of a simplicial set $\X$ is
+    \begin{itemize}
+        \item $Y_n\subseteq X_n$ for all $n$;
+        \item The faces and degeneracies agree with $X$;
+        \item The faces and degeneracies are well-defined in the sense of \cref{3.4.2}, meaning the sets $Y_n$ contain the images of all faces and degeneracies.
+    \end{itemize}
+    This is fairly easily shown. The first two criteria guarentee that if $\Y$ is a simplicial set, it will be a simplicial subset of $\X$, so we need only check that it is a simplicial set. Since the faces and degeneracies are all well-defined, \cref{3.1.7} tells us that we need only check the faces and degeneracies satisfy the simplicial identities. This is manifestly true: the faces and degeneracies in $\Y$ are simply restrictions of those on $\X$, and since $\X$ is a simplicial set, the faces and degeneracies satsify the simplicial identities on the whole of $\X$. This means they must satisfy them for every element of each $X_n$, and thus every subset of each $X_n$.
+
+    In particular, we see that to specify a simplicial subset $\Y$ of $\X$, one needs only specify the sets $Y_n$, and then show these sets contain the images of the restricted faces and degeneracies, since the definitions of the faces and degeneracies are forced by \cref{3.4.1}.
+\end{remark}
+
+\begin{definition}\label{3.4.4}
+    Let $\alpha : \X\to\Y$ be a morphism of simplicial sets. The \emph{image} of $\alpha$, denoted $\im\alpha_\bullet$, is defined as the simplicial subset of $\Y$ given by
+    \[
+    (\im\alpha)_n=\im(\alpha_n : X_n\to Y_n),
+    \]
+    where $\alpha_n$ is the component of $\alpha$ at $n$. We make use of the convenient notation and write $\im\alpha_n$ to denote the set of $n$-simplices of $\im\alpha$.
+\end{definition}
+
+\begin{claim}\label{3.4.5}
+    With notation as in \cref{3.4.4}, the image is indeed a simplicial subset of $\Y$.
+\end{claim}
+\begin{proof}
+    By \cref{3.4.3}, we need only show the images of each face and degeneracy land within the specified sets. We start by showing this for degeneracies. Let $y\in\im\alpha_n$, and we want to show $s_i^{\im\alpha}(y)\in\im\alpha_{n+1}$. Recall by \cref{3.1.5} that morphisms of simplicial sets are natural tranformations, meaning they commute with degeneracies as indicated in the diagram
+    \[\begin{tikzcd}
+	{X_n} & {Y_n} \\
+	{X_{n+1}} & {Y_{n+1}}
+	\arrow["{\alpha_n}", from=1-1, to=1-2]
+	\arrow["{s_i^X}"', from=1-1, to=2-1]
+	\arrow["{s_i^Y}", from=1-2, to=2-2]
+	\arrow["{\alpha_{n+1}}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    By definition, for each $y\in\im\alpha_n$, there exists at least one $x\in X_n$ such that $y=\alpha_n(x)$. Since the degeneracy in $\im\alpha_\bullet$ is the same as the degeneracy for $\Y$, we have
+    \[
+    s^{\im\alpha}_i(y)=s^Y_i(y)=\left(s^Y_i\alpha_n\right)(x)=\left(\alpha_{n+1}s_i^X\right)(x),
+    \]
+    where the final step follows by commutativity of the diagram. By definition, this is in the image of $\alpha_{n+1}$, completing the proof for degeneracies. The proof for faces is the same, and is done by constructing the corresponding naturality diagram for faces instead of degeneracies.
+\end{proof}
+
+\begin{definition}\label{3.4.6}
+    Let $\X,\Y$ be simplicial sets, and suppose that for each $n$, the faces and degeneraces of $\X$ and $\Y$ agree on the intersection $X_n\cap Y_n$. In symbols,
+    \[
+    s^Y_i|_{X_n\cap Y_n}=s_i^X|_{X_n\cap Y_n},\qquad d^Y_i|_{X_n\cap Y_n}=d_i^X|_{X_n\cap Y_n}.
+    \]
+    Then the \emph{union} $\X\cup\Y$ of $\X$ and $\Y$ is defined as the levelwise union
+    \[
+    (X\cup Y)_n=X_n\cup Y_n,
+    \]
+    and the faces and degeneracies are defined by
+    \[
+    s_i(x) = \begin{cases}
+        s_i^X(x),&x\in X\\
+        s_i^Y(x),&x\in Y
+    \end{cases},\qquad d_i(x) = \begin{cases}
+        d_i^X(x),&x\in X\\
+        d_i^Y(x),&x\in Y
+    \end{cases}.
+    \]
+\end{definition}
+
+\begin{claim}\label{3.4.7}
+    With notation as in \cref{3.4.6}, $\X\cup\Y$ is a simplicial set. In particular, $\X,\Y$ are simplicial subsets of their union.
+\end{claim}
+\begin{proof}
+    The fact that $\X,\Y\subseteq\X\cup\Y$ follows manifestly from the definition, provided we indeed show $\X\cup\Y$ is a simplicial set, which is not terribly difficult. As usual, we appeal to \cref{3.1.7} and show that the faces and degeneracies are well defined, and satisfy the simplicial identities. Since $\X$ and $\Y$ agree on their intersection, for any $x\in X_n\cap Y_n$, we must have $d_i^X(x)=d_i^Y(x)$, and the same for degeneracies. Thus, the maps are well-defined. To show they satisfy the simplicial identities, note that for all $x\in X_n\cup Y_n$, we have $x\in X_n$ or $x\in Y_n$. Without loss of generality, let $x\in X_n$. Since $\X$ is a simplicial set, the simplicial operators satisfy the simplicial identities for $x$. Extending this argument to $\Y$, we find that the simplicial operators satisfy the simplicial identities for all $x\in X_n\cup Y_n$, and thus $\X\cup\Y$ is indeed a simplicial set.
+\end{proof}
+
+Previously in \cref{2.1.6}, we defined the \emph{face} of the standard $n$-simplex, and we were even able to encode this information into the category $\BD$ in \cref{2.4.4}. As explained in \cref{3.2.5}, the combinatorial and geometric information encoded by simplicial sets is in many ways more general than that of $\BD$, and as seen in \cref{3.2.7}, the standard $n$-simplicial sets encode the information of the standard geometric $n$-simplex. We should thus think that there should be some way to define the faces of the standard $n$-simplicial set. Indeed there is such a way to do so, and the definition of the face of the standard $n$-simplicial set will give rise to much more important constructions.
+
+\begin{definition}\label{3.4.8}
+    Let $d^i$ be the image of the coface map $[n-1]\to[n]$ under the Yoneda embedding. More precisely, let $d^i : \Delta^{n-1}\to\Delta^n$ denote precomposition by the coface map $d^i:[n-1]\to[n]$.
+    \begin{enumerate}
+        \item The $i$th face $\partial_i\Delta^n$ of the simplical set $\Delta^n$ is the simplicial subset $\im d^i_\bullet$.
+        \item The \emph{boundary} $\partial\Delta^n$ of the standard $n$-simplicial set $\Delta^n$, also called the \emph{simplicial $n$-sphere}, is the simplicial subset
+        \[
+        \partial\Delta^n \coloneqq\bigcup_{i\in[n]} \partial_i\Delta^n=\bigcup_{i\in[n]}\im d^i_\bullet \subseteq\Delta^n.
+        \]
+        \item The \emph{$k$th horn} $\Lambda_n^k$ of the standard $n$-simplicial set is the simplicial subset
+        \[
+        \Lambda_n^k\coloneqq\bigcup_{i\in[n],i\neq k}\partial_i\Delta^n=\bigcup_{i\in[n],i\neq k}\im d^i_\bullet \subseteq\partial\Delta^n\subseteq\Delta^n.
+        \]
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}\label{3.4.9}
+    Because boundaries and horns are defined as unions over simplicial subsets of $\Delta^n$, their faces and degeneracies automatically agree with $\Delta^n$, and in particular agree with each other, making the union of simplicial sets well-defined.
+\end{remark}
+
+\begin{intuition}\label{3.4.10}
+    The geometric intuition for faces has already been discussed. Our definition of faces implies that the coface maps $d^i : \Delta^{n-1}\to\Delta^n$ do the ``simplicial set equivalent'' of inserting the standard $(n-1)$-simplicial set at the ``$i$th face of the standard $n$-simplicial set''. It remains to be shown of course that the geometric realization of $\im d^i_\bullet$ is the $i$th face of $|\Delta^n|$, but this will be shown soon.
+
+    For now, working with the understanding that $\im d^i_\bullet$ represents the face of the standard $n$-simplicial set, we define the \emph{boundary} of the standard $n$-simplicial set as the union of all of its faces. We expect a union of simplicial sets to correspond to a union of geometric objects, so working under this intuition, we would imagine the geometric realization of the boundary $\partial\Delta^n$ to be the physical boundary of the standard $n$-simplex. Once again, we will show this to be true shortly.
+
+    The only definition that may not be immediately clear is that of a horn. The definition of the $k$th horn $\Lambda_n^k$ is the union of all the faces of $\Delta^n$ \emph{except} the $k$th one. For example, consider $\Lambda_2^2$. Geometrically, this corresponds to taking the standard $2$-simplex, deleting the interior so that we are only left with its faces (which constitute the boundary), and then deleting the $2$nd face. \Cref{fig:6} illustrates this geometrically.
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}[scale=5]
+    % Set the viewing angle for the 3D plot
+    \tdplotsetmaincoords{70}{110}
+
+    % Establish the 3D coordinate system
+    \begin{scope}[tdplot_main_coords]
+    
+        % Draw the axes for context
+        \draw[-latex] (0,0,0) -- (1.2,0,0) node[anchor=north east]{$x$};
+        \draw[-latex] (0,0,0) -- (0,1.2,0) node[anchor=north west]{$y$};
+        \draw[-latex] (0,0,0) -- (0,0,1.2) node[anchor=south]{$z$};
+
+        % Define the vertices of the standard 2-simplex
+        \coordinate (v0) at (1,0,0);
+        \coordinate (v1) at (0,1,0);
+        \coordinate (v2) at (0,0,1);
+
+        \draw[thick, blue] 
+            (v1) -- (v2);
+        \draw[thick, blue] 
+            (v0) -- (v2);
+        \draw[thin, dashed, gray] 
+            (v0) -- (v1);
+
+        % Label the vertices (0-faces)
+        \node[at=(v0), anchor=south east, inner sep=2pt] {$v_0$};
+        \node[at=(v1), anchor=south west, inner sep=2pt] {$v_1$};
+        \node[at=(v2), anchor=south west, inner sep=5pt] {$v_2$};
+
+        \node[at=($(v1)!0.5!(v2)$), anchor=south west, inner sep=3pt, text=blue] {$f_0$};
+        \node[at=($(v0)!0.5!(v2)$), anchor=south east, inner sep=3pt, text=blue] {$f_1$};
+        \node[at=($(v0)!0.5!(v1)$), anchor=north, inner sep=3pt, text=blue] {$f_2$ - Deleted face};
+
+    \end{scope}
+\end{tikzpicture}
+        \caption{The second horn $|\Lambda_2^2|$ of $|\Delta^2|$}
+        \label{fig:6}
+    \end{figure}
+    The remaining two faces, $f_0$ and $f_1$, assemble into a sort of ``$\wedge$'' shape, which looks somewhat like a two-dimensional horn. Hence the namesake. It remains to be shown of course that the geometric realizations align with these objects. We can in fact prove stronger results. In \cref{sec4.1}, we will show that geometric realization is a left adjoint functor, and thus preserves colimits. It thus suffices to show that unions and images can be viewed as colimits, and our intuition here will follow as \cref{3.4.13}.
+\end{intuition}
+
+
+\begin{proposition}\label{3.4.11}
+    Let $F : \J\to\D^\C$ be a diagram with $\D$ complete, and let $\mathrm{ev}_c:\D^\C\to\D$ be the evaluation functor $F\mapsto F(c)$, $\alpha\mapsto\alpha_c$. Then $\lim F$, if it exists, is given by $(\lim F)(c)=\lim (\mathrm{ev}_c\circ F)$.
+\end{proposition}
+\begin{proof}
+    See \cite[\S5.3~Thm.~1]{ml}.
+\end{proof}
+
+\begin{corollary}\label{3.4.12}
+    Images and unions of simplicial sets, as defined in \cref{3.4.1} and \cref{3.4.6}, are colimits in $\sSet$. In particular, if $\X,\Y\in\sSet$ and $\alpha : \X\to\Y$ is a morphism of simplicial sets, then
+    \begin{enumerate}
+        \item $\left|\im(\alpha : \X\to\Y)_\bullet\right|\cong\im(\alpha : |\X|\to|\Y|)$, and
+        \item $\left|\X\cup\Y\right|\cong|\X|\cup|\Y|$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    Recall that $\sSet=\Set^{\BD\opp}$ is a functor category, and since $\Set$ is complete and cocomplete, \cref{3.4.11} and its dual apply. In particular, any diagram $F$ in $\sSet$ must satisfy $(\lim F)_n=\lim (\mathrm{ev}_n\circ F)$. This tells us that limit in $\sSet$ are computed levelwise, meaning in particular
+    \begin{enumerate}
+        \item Let $\alpha : \X\to\Y$ be a morphism of simplicial sets. The \emph{limit} definition of the image $\im\alpha_\bullet$ (not \cref{3.4.4}) must satisfy $(\im\alpha)_n=\im(\alpha_n)$, where the second is a limit in $\Set$. Note that this is precisely \cref{3.4.4}, and thus we have that our image in $\sSet$ can be regarded as a limit. Since $\Set$ admits canonical decompositions for morphisms, there is an isomorphism $\im(\alpha_n)\cong\coim(\alpha_n)$. The coimage is a colimit, and thus we may regard the image in $\sSet$ as isomorphic to a colimit.
+        \item Let $\X,\Y$ be simplicial sets whose simplicial operators agree on their intersection. Because their simplicial operators agree, it is easy to see that $\X\cap\Y$ is a subsimplicial set of both $\X$ and $\Y$, with the intersection given by levelwise intersection. Note that the pushout $Z_\bullet$ of $\X$ and $\Y$ along the canonical inclusions $\X\cap\Y\hookrightarrow \X,\Y$ can be computed levelwise, as indicated in the diagram
+        \[\begin{tikzcd}
+	{(X\cap Y)_n} & {X_n} \\
+	{Y_n} & {Z_n}
+	\arrow[hook', from=1-1, to=1-2]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]
+    in $\Set$. It is well known that this pushout can be given by $Z_n=X_n\cup Y_n$, which is precisely the definition of the $n$-simplices of the union $(X\cup Y)_n$. Thus, we may regard the union as the pushout, which is in particular a colimit.
+    \end{enumerate}
+    Recall that geometric realiation $|-|$ is left adjoint, and thus preserves colimits. This implies that $|\X\cup\Y|\cong|\X|\cup|\Y|$ and that $|\coim\alpha|=\coim|\alpha|$. Note that $\Top$ also admits canonical decompositions of morphisms, so we obtain $\coim|\alpha|\cong\im|\alpha|$, giving a string of isomorphism
+    \[
+    |\im\alpha|\cong|\coim\alpha|\cong\coim|\alpha|\cong\im|\alpha|.
+    \]
+\end{proof}
+
+\begin{corollary}\label{3.4.13}
+    The following statements hold.
+\begin{enumerate}
+    \item The geometric realization of the $i$th face is the $i$th face of the geometric $n$-simplex:
+    \[
+    \left|\partial_i\Delta^n\right|\cong d^i(|\Delta^{n-1}|).
+    \]
+    \item The geometric realization of the boundary is the boundary of the geometric $n$-simplex:
+    \[
+    \left|\partial\Delta^n\right|\cong\partial\left|\Delta^n\right|.
+    \]
+    \item The geometric realization of the $k$th horn is the $k$th horn (defined as the union of all faces other than $k$) of the geometric $n$-simplex:
+    \[
+    \left|\Lambda_n^k\right|\cong\bigcup_{i\in[n],i\neq k}\im (d^i :\left|\Delta^{n-1}\right|\to\left|\Delta^n\right|).
+    \]
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+	Indeed, these are all special cases of $\cref{3.4.12}$, and it suffices to show $|d^i|=d^i : |\Delta^{n-1}|\to|\Delta^n|$. This is shown in \cref{sec3.5}.
+\end{proof}
+
+\begin{notation}\label{3.4.14}
+    As is likely expected, we represent the geometric $k$th horn of the standard $n$-simplex as $|\Lambda_n^k|$. We also adopt the convention of denoting the $i$th face of the geometric $n$-simplex as $\partial_i|\Delta^n|$.
+\end{notation}
+
+\begin{remark}\label{3.4.15}
+    It should be fairly clear to anyone who has taken topology that the boundary of the triangle $\partial|\Delta^2|$ is homeomorphic to the 1-sphere $S^1$. Similarly, it's clear that the boundary of the tetrahedron $\partial|\Delta^3|$ is homeomorphic to the 2-sphere $S^2$. Indeed this generalizes: for $n>1$, there is a homeomorphism $\partial|\Delta^n|\cong S^{n-1}$. For this reason, many authors call $\partial\Delta^n$ the simplicial $n$-sphere.
+\end{remark}

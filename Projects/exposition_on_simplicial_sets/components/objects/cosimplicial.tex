@@ -1,0 +1,18 @@
+As with all abstract nonsense, simplicial objects have a dual notion, known as a cosimplicial object. Cosimplicial sets also admit a ``totalization'', which is the dual of the geometric realization of a simplicial set. Cosimplicial sets see much less use than simplicial sets, but we feel this paper would be incomplete without at least introducing the two concepts.
+
+\begin{remark}
+	Recall we gave \cref{3.4.8} in terms of the face maps of the cosimplicial object $\Delta^{\bullet} $ in $\sSet $. We can repeat the definition to define faces, boundaries, and horns of any cosimplicial object in $\sSet $. Let $X^{\bullet} $ be a cosimplicial object in $\sSet $. Then we define
+	\begin{enumerate}
+		\item the $i$th face $\partial _iX^n$ of the simplicial set $X^n$ as $\im d^i \subseteq X^n$;
+		\item the boundary $\partial X^n$ of the simplicial set $X^n$ as
+			\[
+				\bigcup_{i\in[n]} \partial _iX^n=\bigcup_{i\in[n]} \im d^i \subseteq X^n;
+			\]
+		\item the $k$th horn $\Lambda_{X^n} ^k$ of $X^n$ as
+			\[
+				\bigcup_{i\in[n],i\neq k} \partial _iX^n=\bigcup_{i\in[n],i\neq k} \im d^i \subseteq \partial X^n\subseteq X^n
+			.\]
+	\end{enumerate}
+	[ connects to reedy cats, this notation nonstandard for that reason ]
+\end{remark}
+

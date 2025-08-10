@@ -1,0 +1,74 @@
+The definition of simplicial sets is fairly innocuous, but the level of detail that our problems demand we work in will reveal the definition to be suprisingly complex. Most experts find simplicial sets very simple, but students often take significant time to fully process the definition and to come to terms with it. We develop many examples and exercises throughout this section to improve the reader's understanding. We highly recommend to work through all the exercises.
+
+\begin{definition}\label{3.1.1}
+    A simplicial set $X_{\bullet}$ is a contravariant functor $X : \BD\opp\to\Set$. We generally denote the image $X[n]$ on an object by the subscript $X_n$, hence the bullet notation. We will generally not denote the action on morphisms by subscripts, and instead appeal to \cref{3.1.2}.
+\end{definition}
+
+\begin{notation}\label{3.1.2}
+By \cref{2.3.4}, we need only consider the action of a simplicial set $X$ on cofaces and codegeneracies. We denote $X(d^i)$ by $d_i$, and call it a \emph{face map}. Similarly, we denote $X(s^i)$ by $s_i$, and call it a \emph{degeneracy map}. The term ``simplicial operators'' refers to faces, degeneracies, and in general any map in the image of a simplical set $X$.
+\end{notation}
+
+\begin{remark}\label{3.1.3}
+    Note that since $X : \BD\opp\to\Set$ is contravariant, face maps and degeneracy maps go in the opposite direction compared to the coface maps and codegeneracy maps in $\BD$. More precisely, $d_i : X_n\to X_{n-1}$ and $s_i : X_n\to X_{n+1}$.
+\end{remark}
+
+\begin{intuition}\label{3.1.4}
+    Note that a simplicial set is really just a function which takes each number $[n]$ and assigns it to a set $X_n$. Of course these sets have to satisfy some properties encoded by the faces and degeneracies, which is discussed in \cref{3.1.7}. The correct way to think about a simplicial set is thus as a collection of sets $X_n$ for each $n$, which comes imbued with some extra structure given by the simplicial operators.
+\end{intuition}
+
+\begin{remark}\label{3.1.5}
+    Since simplicial sets are just functors $\BD\opp\to\Set$, we can construct a \emph{category of simplicial sets} by simply considering the functor category $\Fun(\BD\opp,\Set)=\Set^{\BD\opp}$. We will generally denote this category as $\sSet$. Note that morphisms in this category are given by natural transformations, so we define morphisms $\alpha : X_{\bullet} \to Y_{\bullet}$ of simplicial sets to simply be natural transformations from $X$ to $Y$. By \cref{2.3.4}, we only need to consider faces and degeneracies. We thus have that a natural transformation $\alpha : X_{\bullet} \to Y_{\bullet}$ is a collection of arrows $\alpha_n : X_n \to Y_n$ for each $[n]\in\BD$ such that the naturality squares
+    \[
+    \begin{tikzcd}
+        X_n \ar["\alpha_n", r]\ar["d_i"', d] & Y_n \ar["d_i", d] & X_n \ar["\alpha_n", r] \ar["s_i"', d] & Y_n \ar["s_i", d]\\
+        X_{n-1} \ar["\alpha_{n-1}"', r] & Y_{n-1} & X_{n+1} \ar["\alpha_{n+1}"', r] & Y_{n+1}
+    \end{tikzcd}
+    \]
+    commute. In other words, a morphism $\alpha : X_{\bullet} \to Y_{\bullet}$ is a collection of maps $\alpha_n$ for each $n$ that commute with faces and degeneracies.
+\end{remark}
+
+\begin{terminology}\label{3.1.6}
+    Given a simplicial set $X_{\bullet}$, we call an element $x\in X_n$ an $n$-\emph{simplex}. As in \cref{2.1.2}, the plural of $n$-simplex is ``$n$-simplices''. We justify this terminology in \cref{3.2.6}. An $n$-simplex $x\in X_n$ is \emph{degenerate} if it is in the image of $\emph{any}$ degeneracy map $s_i : X_{n+1}\to X_n$. Given an $n$-simplex $x\in X_n$, the $i$th \emph{face} of $x$ is the image of the face map $d_i(x)$.
+\end{terminology}
+
+\begin{remark}[Simplicial identities]\label{3.1.7}
+    We pause to investigate faces and degeneracies in simplicial sets. We have seen in \cref{2.3.4} and \cref{2.3.6}, as summarized in \cref{2.3.8}, that the cofaces and codegeneracies, when subject to the cosimplicial operators, generate all morphisms in $\BD$. Similarly, any specified collection of faces $d_i : X_n \to X_{n-1}$ and degeneracies $s_i : X_n\to X_{n+1}$ will generate all simplicial operators for a simplicial set $X$, when subject to the following \emph{simplicial identities}:
+    \[
+    \begin{cases}
+        d_id_j = d_{j-1}d_i,& i<j\\
+        d_is_j = s_{j-1}d_i, & i<j\\
+        d_js_j=d_{j+1}s_j=1&\\
+        d_is_j=s_jd_{i-1},&i>j+1\\
+        s_is_j=s_{j+1}s_i,&i\leq j
+    \end{cases}.
+    \]
+    Note that these are simply the duals of \cref{2.3.6}, and indeed they follow by contravariance and functoriality of $X$. Thus, to define a simplicial set $X$, it suffices to do the following three things:
+    \begin{enumerate}
+        \item Define a set $X_n$ for each $[n]\in\BD$;
+        \item For each $i\in[n]$, define a map $d_i : X_n\to X_{n-1}$ and a map $s_i : X_n \to X_{n+1}$;
+        \item Show the maps of (2) satisfy the simplicial identities above.
+    \end{enumerate}
+    These are precisely the qualities you obtain by forcing $X$ to be functorial.
+\end{remark}
+
+\begin{exercise}\label{3.1.8}
+    We write the representable functor $\BD(-,[n])$ as $\Delta^n$; the same notation for the standard $n$-simplex. We then write the Yoneda embedding $\BD\to\sSet$ as $\Delta^\bullet$. The reasoning for this notation will become clear in \cref{3.2.7}, but for now, complete the following exercises.
+    \begin{enumerate}
+        \item Show that the $n$-simplicies $\Delta^0_n=*$ for all $n$, where $*$ denotes the singleton. In particular, show that $\Delta^0$ is terminal in $\sSet$.
+        \item We call the simplicial set $\Delta^n$ the standard $n$-simplicial set, or sometimes the standard $n$-simplex, although we think the latter is stupid because it conflates notation even more with topological $n$-simplices. Yoneda's lemma tells us quite a lot about the standard simplicial sets for free. What can you deduce about these objects using only the Yoneda lemma, and basic category theory? Make sure part of your answer includes a description of faces and degeneracies for $\Delta^n$.
+    \end{enumerate}
+\end{exercise}
+
+\begin{example}\label{3.1.9}
+    Any set $X$ can be regarded as a simplicial set by taking each $X_n=X$, and by taking the faces and degeneracies to all be the identity map $1_X$. This definition manifeslty satisfies the simplicial identities as stated in \cref{3.1.7}, indeed making $X$ a simplicial set. We call such a simplicial set \emph{discrete}, and this is the canonical way to view any set as a simplicial set. We will sometimes use sets in places where simplicial sets are supposed to be used. In those cases, we are implicitly considering the set $X$ as a discrete simplicial set.
+\end{example}
+
+\begin{definition}\label{3.1.10}
+	Let $X_\bullet$ be a simplicial set, and recall \cref{3.1.6}.
+    \begin{enumerate}
+        \item The simplicial set $X_\bullet$ is said to be $n$-\emph{skeletal} if for $m>n$, all $m$-simplices of $X_\bullet$ are degenerate.
+        \item The $n$-truncated simplex category $\BD_{\leq n}$ is the full subcategory of $\BD$ with objects $[m]$ for $m\leq n$.
+        \item The $n$-truncation $X_{\leq n}$ of a simplicial set $X_\bullet$ is the restriction of the simplicial set to the $n$-truncated simplex category $X|_{\BD_{\leq n}}$, which is intuitively understood as throwing away all dimensions above $n$.
+        \item The $n$-skeleton $\mathrm{sk}_n(X)$ of a simplicial set $X_\bullet$ is obtained by removing all nondegenerate $m$-simplices of $X$ for $m>n$. This is often phrased as taking the $n$-truncation and replacing higher dimensions $m>n$ with freely generated degenerate simplices.
+    \end{enumerate}
+\end{definition}

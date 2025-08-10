@@ -1,0 +1,137 @@
+The standard $n$-simplex is a fancy word for ``an $n$-dimensional equilateral triangle.'' If you are reading this, you most likely know what a regular, 2-dimensional equilateral triangle is, so let's begin by defining the standard $2$-simplex. This involves promoting our intuitive understanding of a triangle to a proper, point-set definition.
+
+There are a number of ways of doing this, but the standard way is as follows. We define the standard $2$-simplex $\Delta^2$ as the set
+\[
+\Delta^2 \coloneqq \left\{(t_0,t_1,t_2)\in\mathbb{R}^3 \mid \sum_{i=0}^2 t_i = 1,\text{ and } t_i\geq 0 \text{ for all  } i\right\}\subseteq\mathbb{R}^3.
+\]
+Let's parse this definition. We first note that each coordinate $t_i$ must be non-negative. We also note that $t_0+t_1+t_2=1$. If we graph $x+y+z=1$ in $\mathbb{R}^3$, and restrict to only the first octant, as shown in \cref{fig:1}, then the resulting shape is an equilateral triangle. Of course, there are other ways to define a triangle in $\mathbb{R}^3$, or even $\mathbb{R}^2$, but this is what the mathematical community has decided to choose as the ``standard way'', since this construction simplifies some later constructions such as the maps of \cref{2.4.1}.
+\begin{figure}[ht]
+\begin{tikzpicture}[scale=5]
+\tdplotsetmaincoords{70}{110}
+\begin{scope}[tdplot_main_coords]
+    % axes
+    \draw[-latex] (0,0,0) -- (1.2,0,0) node (x) [anchor=north east]{$x$};
+    \draw[-latex] (0,0,0) -- (0,1.2,0) node (y) [anchor=north west]{$y$};
+    \draw[-latex] (0,0,0) -- (0,0,1.2) node (z) [anchor=south]{$z$};
+    % shading the planes
+    \filldraw [gray!20, opacity=0.6] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle;
+    \draw (1,0,0) -- (1,1,0) -- (0,1,0);
+    \filldraw [gray!20, opacity=0.6] (0,0,0) -- (0,1,0) -- (0,1,1) -- (0,0,1) -- cycle;
+    \draw (0,1,0) -- (0,1,1) -- (0,0,1);
+    \filldraw [gray!20, opacity=0.6] (0,0,0) -- (1,0,0) -- (1,0,1) -- (0,0,1) -- cycle;
+    \draw (1,0,0) -- (1,0,1) -- (0,0,1);
+    % vertex definition
+    \coordinate (A) at (1,0,0);
+    \coordinate (B) at (0,1,0);
+    \coordinate (C) at (0,0,1);
+    % interior
+    \filldraw [draw=blue, fill=blue!30, opacity=0.6] (A) -- (B) -- (C) -- cycle;
+    % vertex lables
+    \node at (A) [anchor=north west] {$(1,0,0)$};
+    \node at (B) [anchor=south west] {$(0,1,0)$};
+    \node at (C) [anchor=south west] {$(0,0,1)$};1
+\end{scope}
+\end{tikzpicture}
+\centering
+\caption{The standard $2$-simplex $\Delta^2$}\label{fig:1}
+\end{figure}
+
+One of the reasons we choose to define the standard 2-simplex as this specific construction is because it is fairly clear how to generalize it. The ordered triple $(t_0,t_1,t_2)$ is indexed from 0 to 2, so a standard $n$-simplex should likely involve an $n$-tuple indexed from $0$ to $n$, of the form $(t_0,\ldots,t_n)$. We should still require $t_i\geq 0$ for all $i$. Finally, since we require the equality $t_0+t_1+t_2=1$, we can just generalize this to the sum over all entries $t_0+\cdots+t_n=1$. To this end, we offer the fully general defintition:
+\begin{definition}\label{2.1.1}
+    The \emph{standard $n$-simplex}, denoted by $\Delta^n$, is the set
+    \[
+    \Delta^n\coloneqq \left\{(t_0,\ldots,t_n)\in\mathbb{R}^{n+1}\mid\sum_{i=0}^n t_i = 1 \text{ and for all } i,\; t_i\geq 0\right\}\subseteq\mathbb{R}^{n+1}.
+    \]
+\end{definition}
+
+\begin{terminology}\label{2.1.2}
+    The plural form of the word ``simplex'' is ``simplices''. The text that this author first learned simplicial objects from did not clarify this, and this author was very confused by this fact. Note that the terms ``simplex'' and ``simplices'' inherit a new but similar definition in the context of simplicial sets, which we make precise in \cref{3.1.6}. However, ``simplices'' will still remain the plural of ``simplex'' in the new defintition.
+\end{terminology}
+
+\begin{remark}\label{2.1.3}
+    The reader who is familiar with topology will frequently see us refer to $n$-simplices as topological spaces. The obvious choice for a topology on $\Delta^n$ is the subspace topology inherited from $\mathbb{R}^{n+1}$, and we will always leave this definition implicit. The reader who is \emph{not} familiar with topology should be able to safely ignore this technicality, as we won't often have a need to work with the topological properties of spaces in this paper. However, we caution the reader not to go further down the rabbit hole without having learned at least some basic topology.
+\end{remark}
+
+\begin{example}\label{2.1.4}
+    We describe the standard 0- and 1-simplicies.   
+    \begin{enumerate}
+        \item The standard $0$-simplex is the subspace $\{t_0\in\mathbb{R}\mid t_0=1\}=\{1\}$. In particular, $\Delta^0$ is a singleton.
+        \item The standard $1$-simplex is the set of all pairs $(t_0,t_1)\in\mathbb{R}^2$ such that $t_0,t_1\geq 0$ and $t_0+t_1=1$. Rearranging this equation gives $t_1=1-t_0$. Graphing this equation gives \cref{fig:2}, which depicts the standard 1-simplex as a simple line segment.
+        \begin{figure}[ht]
+            \centering
+            \begin{tikzpicture}[scale=4]
+                \draw[->] (0,0) -- (1.1,0) node[right] {$x$};
+                \draw[->] (0,0) -- (0,1.1) node[above] {$y$};
+                \draw[domain=0:1,thick,blue,samples=2] plot (\x,{1-\x});
+                \fill (0,1) circle (0.5pt) node[left]  {$(0,1)$};
+                \fill (1,0) circle (0.5pt) node[below] {$(1,0)$};
+            \end{tikzpicture}
+            \caption{The standard 1-simplex}
+            \label{fig:2}
+        \end{figure}
+    \end{enumerate}
+\end{example}
+
+\begin{remark}\label{2.1.5}
+	An $n$-simplex is ``standard'' if it's point-set definition is precisely the same as \cref{2.1.1}. If a space has the same ``shape''\footnote{The notion of ``shape'' here is made precise by defining $n$-simplices as the convex spanned by a set of $n$ affinely independent points in $\mathbb{R} ^m$, but all of our $n$-simplices are constructed in such a way that this rigorous definition is not necessary whatsoever, so the intuitive definition suffices for our paper.} of the standard $n$-simplex, but has a different point-set definition (for example, defined in $\mathbb{R} ^{n+2} $, or translated to a different location, or rotated), then we simply call that an $n$-simplex. With this in mind, we make a series of observations based on \cref{fig:1,fig:2}.
+    \begin{enumerate}
+        \item Note that the vertices of both $\Delta^1$ and $\Delta^2$ are just points, but we also know that $\Delta^0$ is just a point. Thus, vertices are simply $0$-simplicies.
+        \item Note that the edges of $\Delta^2$ are line segments, and in particular they are the same line segment as the standard 1-simplex of \cref{fig:2}, becuase they trace a diagonal path through a unit square. Thus, edges are simply 1-simplicies. Also note that edges are always inserted \emph{between two vertices}, or alternatively in view of (1), \emph{between two 0-simplicies}.
+        \item At this point, we likely intuitively understand that the standard 3-simplex is a tetrahedron: a 4-sided triangular pyramid, wherein all sides are equilaterial triangles. In particular, the sides of the 3-simplex are 2-simplicies, which are inserted between three edges (1-simplicies), which are inserted between two vertices (0-simplicies).
+        \item Finally, note that the standard 0-simplex has one vertex, the standard 1-simplex has two vertices, the standard 2-simplex has three vertices, and the standard 3-simplex has four vertices.
+    \end{enumerate}
+    Inded, these remarks generalize to $n$-simplicies, meaning we can gain the following intuition. To construct the standard $n$-simplex, we can start with $n+1$ vertices, draw edges between each two vertices, draw 2-simplicies between each three edges, draw 3-simplicies between each four 2-simplicies, and so on. Oftentimes we will discuss the $k$-simplices of an $n$-simplex. This simply means the $k$-simplices inserted in this ``construction process''.
+\end{remark}
+
+\begin{terminology}\label{2.1.6}
+    In view of \cref{2.1.5}, we introduce some standard terminology for simplices. A \emph{face} of the $n$-simplex is an $(n-1)$-simplex of the $n$-simplex. The vertices of the \emph{standard} $n$-simplex can be precisely described as points of the form $(0,\ldots,1,\ldots,0)$; that is, tuples where there is only one nonzero entry, which must be 1 by \cref{2.1.1}. Vertices of the \emph{standard} $n$-simplex thus inherit a canonical ordering: the $i$th vertex of $\Delta^n$ is the vertex where the 1 appears in the $i$th spot. For example, the 1st vertex of $\Delta^2$ is $(1,0,0)$, the second is $(0,1,0)$, and the third is $(0,0,1)$. This also provides a canonical ordering for faces. Each face is exactly across from a vertex\footnote{To rigorize this notion, construct a perpendicular line through the middle of a face and see which vertex it passes through.}. We call the face directly across from the $i$th vertex the \emph{$i$th face}. $n$-simplicies which are ``nonstandard'' do not inherit a \emph{canonical} ordering, but we can still choose an arbitrary ordering of the vertices, and an ordering of the faces follows by the same logic.
+\end{terminology}
+
+\begin{example}\label{2.1.7}
+    The faces of the standard 2-simplex are precisely it's edges. In figure 3, we label the faces and the vertices of the standard 2-simplex by the canonical ordering of \cref{2.1.6}. The $i$th vertex is laveled $v_i$, and the $i$th face is labeled $f_i$.
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=5]
+        \tdplotsetmaincoords{70}{110}
+        \begin{scope}[tdplot_main_coords]
+
+        % axes
+        \draw[-latex] (0,0,0) -- (1.2,0,0) node[anchor=north east]{$x$};
+        \draw[-latex] (0,0,0) -- (0,1.2,0) node[anchor=north west]{$y$};
+        \draw[-latex] (0,0,0) -- (0,0,1.2) node[anchor=south]{$z$};
+
+        % vertices
+        \coordinate (v0) at (1,0,0);
+        \coordinate (v1) at (0,1,0);
+        \coordinate (v2) at (0,0,1);
+
+        % 2-simplex
+        \fill[cyan, opacity=0.3] (v0) -- (v1) -- (v2) -- cycle;
+
+        % edges
+        \draw[thick, blue] 
+            (v1) -- (v2);
+        \draw[thick, blue] 
+            (v0) -- (v2);
+        \draw[thick, blue] 
+            (v0) -- (v1);
+
+        % labels
+        \node[at=(v0), anchor=south east, inner sep=2pt] {$v_0$};
+        \node[at=(v1), anchor=south west, inner sep=2pt] {$v_1$};
+        \node[at=(v2), anchor=south west, inner sep=5pt] {$v_2$};
+
+        \node[at=($(v1)!0.5!(v2)$), anchor=south west, inner sep=3pt, text=blue] {$f_0$};
+        \node[at=($(v0)!0.5!(v2)$), anchor=south east, inner sep=3pt, text=blue] {$f_1$};
+        \node[at=($(v0)!0.5!(v1)$), anchor=north, inner sep=3pt, text=blue] {$f_2$};
+
+        \end{scope}
+        \end{tikzpicture}
+        \caption{The standard 2-simplex, labeled}
+        \label{fig:3}
+    \end{figure}
+\end{example}
+
+\begin{exercise}\label{2.1.8}
+    Unfortunately we cannot draw the \emph{standard} 3-simplex, since it lives in 4 dimensions, so draw any 3-simplex, and give its vertices an arbitrary ordering. Label all of its faces.
+\end{exercise}

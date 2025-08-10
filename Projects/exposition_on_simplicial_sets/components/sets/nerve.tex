@@ -1,0 +1,209 @@
+Given a category $\C$, there is an extremely important construction known as the \emph{nerve} of $\C$, which encodes \emph{all} of the information of $\C$ into a simplicial set. This is an extremely important construction for a number of reasons. For example, it's proven in \cite[Prop.~1.1.2.2]{htt}\footnote{Joyal proved this first, but I prefer Lurie's treatment. However, this fact is so fundamental that it's likely a proof may date back to Boardman and Vogt, but I unfortunatey don't have access to their paper.} that all nerves are $\infty$-categories, and in particular the nerve is the canonical way of regarding categories as $\infty$-categories. Although exploring this precisely is beyond the scope of this paper, we trust that the reader understands this is an important result, even if they do not quite understand it. With this in mind, we present the definition of the nerve.
+
+\begin{definition}\label{3.3.1}
+    The nerve $N(\C)$ of a category $\C$ is the simplicial set defined as follows.
+    \begin{enumerate}
+        \item $n$-simplices are composable $n$-tupes of morphisms in $\C$. More precisely, the set $N(\C)_n$ of $n$-simplices is the set of all $n$-tuples $(f_0,\ldots,f_{n-1})$ of composable arrows between $(n+1)$ objects
+        \[\begin{tikzcd}
+            c_0 \ar["f_0",r] & c_1 \ar["f_1",r] & \cdots \ar["f_{n-2}", r] & c_{n-1} \ar["f_{n-1}", r] & c_n.
+        \end{tikzcd}\]
+        The set of $0$-simplices is thus simply the collection of objects $\Obj(\mathcal{C} ) $.
+        \item Degeneracy maps $s_i : N(\C)_n \to N(\C)_{n+1}$ are defined by inserting the identity morphism as the $i$th arrow. Viewed as a $n$-tuple, this looks like the map
+        \[
+        (f_0,\ldots,f_{i-1},f_i,f_{i+1},\ldots,f_{n-1}) \mapsto (f_0,\ldots,f_{i-1},1_{c_i},f_i,f_{i+1},\ldots,f_{n-1}).
+        \]
+        Viewed as a diagram, this looks like taking the diagram of composable arrows
+        \[\begin{tikzcd}
+            c_0 \ar[r] & \cdots \ar["f_{i-1}", r] & c_{i} \ar["f_i",r] & \cdots \ar[r] & c_n
+        \end{tikzcd}\]
+        and mapping it to the diagram
+        \[\begin{tikzcd}
+            c_0 \ar[r] & \cdots \ar["f_{i-1}", r] & c_{i} \ar["1_{c_i}", r] & c_i \ar["f_i",r] & \cdots \ar[r] & c_n.
+        \end{tikzcd}\]
+        \item Face maps have different defintions for ``inner'' and ``outer'' faces. An inner face is a map $d_i$ where $0<i<n$, and an outer face is $d_i$ where $i=0$ or $i=n$.
+        \begin{enumerate}
+            \item Inner faces $d_i : N(\C)_n \to N(\C)_{n-1}$ are defined by composing the $i$th and the $(i+1)$th morphisms. Viewed as a map of $n$-tupes, this is the map
+        \[
+        (f_0,\ldots,f_{i-1},f_i,f_{i+1},\ldots,f_{n-1}) \mapsto (f_0,\ldots,f_{i-1},f_{i+1}\circ f_i,\ldots,f_{n-1}).
+        \]
+        Viewed as a diagram, this looks like taking the diagram of composable arrows
+        \[\begin{tikzcd}
+            c_0 \ar[r] & \cdots \ar[r] & c_{i-1} \ar["f_{i}", r] & c_{i} \ar["f_{i+1}",r] & c_{i+1} \ar[r] & \cdots \ar[r] & c_n
+        \end{tikzcd}\]
+        and mapping it to the diagram
+        \[\begin{tikzcd}
+            c_0 \ar[r] & \cdots \ar[r] & c_{i-1} \ar["f_{i+1}\circ f_{i}", r] & c_{i+1} \ar[r] & \cdots \ar[r] & c_n.
+        \end{tikzcd}\]
+        \item Outer faces are defined by deleting a morphism at the end of the chain. The 0th face deletes the first morphism, and the $n$th face deletes the last morphism. For example, if
+        \[\begin{tikzcd}
+            c_0 \ar[r] & c_1 \ar[r] & \cdots \ar[r] & c_{n-1}\ar[r] & c_n
+        \end{tikzcd}\]
+        is a diagram of composable arrows in $\C$, then the 0th face maps it to
+        \[\begin{tikzcd}
+        c_1 \ar[r] & \cdots \ar[r] & c_{n-1}\ar[r] & c_n
+        \end{tikzcd}\]
+        and the $n$th face maps it to
+        \[\begin{tikzcd}
+            c_0 \ar[r] & c_1 \ar[r] & \cdots \ar[r] & c_{n-1}.
+        \end{tikzcd}\]
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+\begin{example}\label{3.3.2}
+    Consider the poset category $\mathbf{n}$. A 0-simplex $k$ in the nerve $N(\mathbf{n})$ is simply an object of $\mathbf{n}$, equivalently a non-negative integer $k<n$. A 1-simplex $f$ in the nerve is a single morphism in $\mathbf{n}$, which corresponds to a relation $h\leq k$ for $h,k\in\mathbf{n}$. Thus, 1-simplices are relations $h\leq k$ for objects $h,k$. 2-simplices are pairs of morphisms $h\xlongrightarrow{f}k\xlongrightarrow{g}\ell$, which correspond to relations $h\leq k\leq \ell$. In general, we find that $m$-simplices are relations
+    \[
+    h_0\leq h_1\leq\cdots\leq h_m,
+    \]
+    where $h_i\in\mathbf{n}$ for all $i$.
+
+    Since $\mathbf{n}$ is well-ordered, we can say slightly more about it. Recall that \cref{3.1.6} defined \emph{degenerate} simplices as simplices which are the image of a degeneracy. In view of \cref{3.3.1}, degeneracies in the nerve simply add identity arrows. Thus any $m$-simplex with an identity arrow is automatically a degenerate simplex, since by removing the identity arrow we get an $(m-1)$-simplex, and the image of that $(m-1)$-simplex under the proper degeneracy map simply re-inserts the identity morphism back where it was. Since there are no non-identity endomorphisms in $\mathbf{n}$, note that the longest possible chain of relations in $\mathbf{n}$ without using an identity arrow is the sequence of relations
+    \[
+    0\leq 1\leq2\leq\cdots\leq n-2\leq n-1.
+    \]
+    This sequence of morphisms has length $n-1$, and it is the unique chain of arrows of length $n-1$ that can be formed without using identities. Thus, $N(\mathbf{n}$) has precisely 1 nondegenerate $(n-1)$-simplex. Moreover, no arrows longer than length $n-1$ can be made without using identities, so $N(\mathbf{n})$ has \emph{no} nondegenerate $k$-simplices for $k\geq n$.
+\end{example}
+
+\begin{example}\label{3.3.3}
+    Let $G$ be a group. You have likely seen that we can view a group $G$ as a category $\mathbf{B}G$ by taking $\mathbf{B}G$ to have only one object, usually denoted $*$, by taking each morphism of $\mathbf{B}G$ to be an element of $G$, and by taking composition in $\mathbf{B}G$ to be the group operation in $G$. In particular, every morphism in $\mathbf{B}G$ has an inverse by the group axioms for $G$. We call categories where all morphisms are invertible \emph{groupoids}, as an analogue of a group. Most authors prefer to identify a group $G$ with its category, and will refer to both of them simply as $G$. Some authors prefer to write $\mathbf{B}G$ for the category, since the category can be identified with it's \emph{delooping} in $\infty$-$\G\mathrm{rpd}$. Although we prefer the former notation, we believe the latter reduces the opportunity for confusion, so we use it here for pedagogical purposes.
+
+    We can compute the nerve of a group $G$ by considering it as a category. Since $\mathbf{B}G$ has one object, $N(\mathbf{B}G)_0=\{*\}$. The 1-simplices are the morphisms, which are precisely the elements of $G$. Thus, $N(\mathbf{B}G)_1=G$. The 2-simplices are chains of two morphisms, which are equivalently just pairs of elements in $G$, so we obtain $N(\mathbf{B}G)_2=G\times G$. This very clearly continues to give us $N(\mathbf{B}G)_n=G^n$, where $G^n$ is the $n$-repeated product. Indeed, this even generalizes to the $0$-simplices, since the empty product in $\Set$ is the terminal object, which is the singleton. Similarly to \cref{3.3.2}, we see that degeneracies insert the identity element $e\in G$, so degenerate simplices in $N(\mathbf{B}G)$ are simply tuples that contain the identity element.
+\end{example}
+
+\begin{exercise}\label{3.3.4}
+    Compute the nerves of a small groupoid $\G$ and the simplex category $\BD$. Where possible, give descriptions of the degenerate simplices.
+\end{exercise}
+
+\begin{example}\label{3.3.5}
+    The geometric realizations of the nerves of various categories are oftentimes fairly important objects. For example, the geometric realization of the nerve of a group is the \emph{classifying space} $BG$ of a group $G$. We will compute the very simple example $B\mathbb{Z}_2$ by following \cref{3.3.2}. We begin by constructing the coproduct
+    \[
+    \coprod_{[n]\in\BD} \mathbb{Z}_2^n\times\left|\Delta^n\right|.
+    \]
+    We will start by working only with lower dimension terms in the coproduct, to get a sense of how it will work. Since each $x\in\mathbb{Z}_2^n$ indexes a geometric $n$-simplex, we will adopt the convention of writing $|\Delta^n_{(-)}|$ to denote that the geometric $n$-simplex $|\Delta^n|$ is indexed by the $n$-simplex $(-)$. Since $|\mathbb{Z}_2|=2$, we have that the order $\left|\mathbb{Z}_2^n\right|=2^n$. We thus have
+    \[
+    \coprod_{[n]\in\BD} \mathbb{Z}_2^n\times|\Delta^n|\cong \left(|\Delta^0_*|\right)\amalg\left(|\Delta^1_0|\amalg|\Delta^1_1|\right)\amalg\left(|\Delta^2_{(0,0)}|\amalg|\Delta^2_{(0,1)}|\amalg|\Delta^2_{(1,0)}|\amalg|\Delta^{2}_{(1,1)}|\right)\amalg\cdots
+    \]
+    We begin by quotienting by degeneracies. Since $0\in\mathbb{Z}_2$ is the identity, any geometric simplex indexed by a tuple containing 0 is indexed by a degenerate simplex. For example, the simplex $|\Delta^2_{(0,0)}|$ is index by $(0,0)=s_0(0)=s_1(0)$, so $|\Delta^2_{(0,0)}|$ is identified with $|\Delta^1_0|$. This means that we should identify these geometric simplices.
+
+    I claim we can simply drop the higher dimension simplex in the coproduct up to homeomorphism. The proof is somewhat involved. By universality of coproduct, we can simply consider the space $|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|$, since a given homeomorphism, along with the identity arrows for all other maps, assemble into a homeomorphism by universality. We want to quotient this space by the relation $(s_0(x),p)\sim (x,s^0(p))$ for $x\in \mathbb{Z}_2^1$ and $p\in|\Delta_{(0,0)}^2|$. Note that the following proof is invariant under whether or not we choose the 0th or 1st degeneracy, so I chose the 0th. Our choice of $x$ is $0$, since $x$ is simply the indexing simplex for $|\Delta_0^1|$, and each point $p$ can be represented as a triple $(t_0,t_1,t_2)$ of nonnegative numbers which sum to 1. Since $s_0(0)=(0,0)$, and since $s^0(t_0,t_1,t_2)=(t_0+t_1,t_2)$, we thus have the relation
+    \[
+    (0,(t_0+t_1,t_2))\sim((0,0),(t_0,t_1,t_2)).
+    \]
+    We want to show there is a homeomorphism
+    \[
+    \left(|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|\right)/\tildesim \cong |\Delta_0^1|.
+    \]
+    To prove this, define the map
+    \[\begin{tikzcd}[row sep=0em]
+	{    f : \left(|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|\right)/\tildesim} & {|\Delta_0^1|} \\
+	{[(0,(t_0,t_1))]} & {(0,t_0,t_1)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[maps to, from=2-1, to=2-2]
+\end{tikzcd}\]
+    We must first show this map is well-defined. In particular, we must show each class $[(0,(t_0,t_1))]$ has precisely one representative of the given form. To do this, note that the class admits the definition as
+    \[
+    [(0,(t_0,t_1))] = \{(0,t_0,t_1)\}\cup\left\{(p_0,p_1,p_2)\in\Delta_{(0,0)}^2 \mid p_0+p_1=t_0,\text{ and }p_2=t_1\right\}.
+    \]
+    Since we are required to fix $p_0+p_1=t_0$ and $p_2=t_1$, clearly this equivalence class only has one representative of the given form, so the map is indeed well-defined. To show the map is continuous, we note that we can view the map as a map
+    \[\begin{tikzcd}      
+	{    |\Delta_0^1|\amalg|\Delta_{(0,0)}^2|}\ar[r] & {|\Delta_0^1|} \\
+    \end{tikzcd}\]
+    by noting that
+    \begin{itemize}
+        \item the map is the identity on the $|\Delta^1_0|$ component of the coproduct,
+        \item and the map is $s^0$ on,
+    \end{itemize}
+    so universality of coproduct assembles our map via the unique dashed arrow in the diagram of solid arrows
+    \[\begin{tikzcd}
+	{|\Delta_0^1|} \\
+	{|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|} & {|\Delta_0^1|} \\
+	{|\Delta_{(0,0)}^2|}
+	\arrow[from=1-1, to=2-1]
+	\arrow["1", from=1-1, to=2-2]
+	\arrow[dashed, from=2-1, to=2-2]
+	\arrow[from=3-1, to=2-1]
+	\arrow["{s^0}"', from=3-1, to=2-2]
+\end{tikzcd}\]
+    rendering the diagram commutative. This map manifestly identifies elements which are related to each other under the relation $\sim$, so it factors through the quotient
+    \[\begin{tikzcd}
+	{|\Delta_0^1|} \\
+	{|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|} & {\left(|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|\right)/\tildesim} & {|\Delta_0^1|} \\
+	{|\Delta_{(0,0)}^2|}
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-1, to=2-2]
+	\arrow["1", bend left, from=1-1, to=2-3]
+	\arrow[dashed, from=2-1, to=2-2]
+	\arrow["f", dashed, from=2-2, to=2-3]
+	\arrow[from=3-1, to=2-1]
+	\arrow[from=3-1, to=2-2]
+	\arrow["{s^0}"', bend right, from=3-1, to=2-3]
+\end{tikzcd}\]
+    Since we see that our map $f$ arises from universality conditions between continuous maps, and since $\Top$ is complete and cocomplete, necessarily $f$ is continuous.
+
+    It thus suffices to show $f$ has a continuous inverse. The inverse is obvious, we simply define $g : (0,(t_0,t_1))\mapsto [0,(t_0,t_1)]$, and this is automatically well-defined since we showed earlier each equivalence class has precisely one representative of this form. $f$ and $g$ are manifeslty inverse functions, so we now show $g$ is continuous. Note that $g$ arises equivalently as the composite
+    \[\begin{tikzcd}
+        {|\Delta_0^1|}\ar["i",r] & {|\Delta^1_0|\amalg|\Delta_{(0,0)}|}\ar["\pi",r] & \displaystyle{\left(|\Delta_0^1|\amalg|\Delta_{(0,0)}^2|\right)}
+    \end{tikzcd},
+    \]
+    where $i$ is the inclusion and $\pi$ is the natural projection onto the quotient. Since $g$ is a composite of continuous maps, it is indeed continuous.
+
+    We have thus shown that we may freely drop degenerate simplices (almost... see \cref{3.3.6}) in the geometric realization, since that is precisely the same as quotienting by degeneracies. Thus quotienting by degeneracies is homeomorphic to the space
+    \[
+    \coprod_{[n]\in\BD}|\Delta^n|.
+    \]
+    We now need to quotient by faces. We can show that every single non-degenerate simplex is a face of a single non-degenerate simplex in precisely two ways. Let $(1,\ldots,1)_{n-1}$ be the nondegenerate $(n-1)$-simplex, and let $(1,\ldots,1)_n$ be the nondegenerate $n$-simplex. Taking an inner face map on $(1,\ldots,1)_n$ corresponds to composing two morphisms, or in other words, taking the group operation on two elements. Since $1+1=0$, this can be viewed as removing two 1s and replacing it with a 0, turning it into a degenerate simplex. However, the outer faces simply remove one of the outer 1s, and thus map $(1,\ldots,1)_n\mapsto(1,\ldots,1)_{n-1}$. Thus the only faces that are not accounted for by the degeneracy quotient are the outer faces.
+
+    Since we only have a single copy of each geometric $n$-simplex left, from now on we will denote elements $p\in|\Delta^n|$ as $(n,p)$; in other words, the first slot in the pair is the dimensionality of the simplex the second slot lives in as a point.
+    
+    We begin by working inductively, and we start with the $0$-skeleton $|\Delta^0|$, which is the singleton $*$. Moving on to the 1-skeleton, we see that the inner face maps
+    \[\begin{tikzcd}
+	{|\Delta^0|} & {|\Delta^1|}
+	\arrow["{d^0}", shift left, from=1-1, to=1-2]
+	\arrow["{d^1}"', shift right, from=1-1, to=1-2]
+\end{tikzcd}\]
+    insert $*$ at $0$ and $1$ in the 1-simplex. Quotienting thus identifies $(1,0)\sim *\sim (1,1)$; in other words we have identified the endpoints of the 1-simplex. Since the 1-simplex is simply a line segment, this construction is homeomorphic to the unit circle $S^1$. Thus, the 1-skeleton is simply $S^1$. Now we move on to the 2-skeleton. The inner faces (subject to the previous quotient) $d^0,d^2 : S^1 \to |\Delta^2|$ insert the 1-skeleton at the $0$th and $2$nd faces. Gluing these faces together along the circle is precisely the antipodal map, producing the real projective plane $\mathbb{R}P^2$. One can induct on this construction and obtain that the $n$-skeleton is $\mathbb{R}P^n$. The geometric realization can then be seen as the colimit over the inclusions of the skeletons
+    \[
+    |N(\mathbf{B}G)| = \colim(X_0\hookrightarrow X_1\hookrightarrow X_2\hookrightarrow\cdots),
+    \]
+    which is precisely the definition of $\mathbb{R}P^{\infty}$. Thus, $B\mathbb{Z}_2=\mathbb{R}P^\infty$.
+\end{example}
+
+\begin{remark}\label{3.3.6}
+	The reader might think that the section of \cref{3.3.5} stating that we may drop degenerate simplices likely generalizes, since we rarely appealed to the specific problem of \cref{3.3.5} in that section. Although our proof is sufficient for the purposes of \cref{3.3.5}, it fails in general due to transfinite considerations. We proved in \cref{3.3.5} that for any degenerate $n$-simplex, we may drop the corresponding geometric $n$-simplex. Note that this only proves that we may drop one at a time. We can induct on the argument and find that we may drop any finite number $k$ of degenerate simplices at a time, but this still fails in general since a simplicial set need not have finitely many degenerate $n$-simplices. The proof only held for \cref{3.3.5} since there are $\left| \mathbb{Z}^n_2 \right| -1=2^n-1$ degenerate $n$-simplices, which is clearly less than $\infty $, and inducting on $n$ gives us that we may drop these for each $X_n$.
+
+	The general result is stated in \cref{3.3.7}, but the proof is notably longer. For this reason, we delegate the proof to \cref{secB} for the interested reader.
+\end{remark}
+
+\begin{proposition}\label{3.3.7}
+	Let $X_\bullet$ be a simplicial set. If $X_n^{nd} $ is the set of nondegenerate $n$-simplices of $X_{\bullet} $, define the equivalence relation $\sim_f $ on $\coprod_{[n]\in\boldsymbol{\Delta} } X_n^{nd} \times \left| \Delta^n \right|$ as the relation generated by the rule $(y,\mu_*(p))\sim_f(z,\beta_*(p))$ if
+	\begin{itemize}
+		\item $\mu$ is a composite of face maps,
+		\item $\beta$ is a composite of codegeneracy maps,
+		\item $z$ is nondegenerate,
+		\item $\beta^*(z)=\mu^*(y)$.
+	\end{itemize}
+	Let $\sim$ be the equivalence relation of \cref{3.2.2} Then there is a homeomorphism
+	\[
+		\left| X_{\bullet}  \right| =\left( \coprod_{[n]\in\boldsymbol{\Delta} } X_n\times \left| \Delta^n \right|  \right) /\tildesim \cong \left( \coprod_{[n]\in\boldsymbol{\Delta} } X_n^{nd} \times \left| \Delta^n \right|  \right) /\tildesim _f
+	.\]
+\end{proposition}
+\begin{proof}
+	Proven in \cref{secB}.
+\end{proof}
+
+\begin{corollary}\label{3.3.8}
+    Let $X_\bullet$ be an $k$-skeletal simplicial set, as defined in \cref{3.1.10}. Then its geometric realization $|X_\bullet|$ is homeomorphic to the geometric realization of its $k$-truncation $|X_{\leq k}|$:
+    \[
+	    |X_{\leq k}| \coloneqq\int^{[n]\in\BD_{\leq k}} X_n\times|\Delta^n|\cong \left( \coprod_{n\leq k} X_n\times \left| \Delta^n \right|  \right) /\tildesim .
+    \]
+    For those unfamiliar with coends, the only change here is that the limit is taken over $\BD_{\leq k}$ as defined in \cref{3.1.10}.
+\end{corollary}
+
+\begin{exercise}\label{3.3.9}
+Fun fact: we never proved the nerve was a simplicial set. Prove that the faces and degeneracies of the nerve as defined in \cref{3.3.1} satisfy the simplicial identities (\cref{3.1.7}). Afterwards, let $X$ be a set, and recall by \cref{3.1.9} that we may view $X$ as a simplicial set. We may also view it as a category by considering the discrete category structure on $X$. Compute the nerve $N(X)$, then apply \cref{3.3.8} to show $|N(X)|\cong |X|\cong X$, where the latter $X$ is viewed as a topological space with the discrete topology.
+\end{exercise}
+
+\begin{exercise}[Advanced]\label{3.3.10}
+	Prove that the geometric realization of the nerve of the poset category $\mathbf{n} =[n+1]$ is the geometric realization of the standard $(n+1)$-simplicial set $|N(\mathbf{n} )|\cong \left| \Delta^{n+1}  \right| $.
+\end{exercise}
+

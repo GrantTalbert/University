@@ -1,0 +1,140 @@
+%basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{microtype}
+\usepackage[skip=3pt, indent=20pt]{parskip}
+
+
+%math
+\usepackage{amsmath, amsthm, amsfonts, amssymb, mathtools, mathrsfs}
+\usepackage{eucal} % better \mathcal
+
+% tikz
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikz-cd}
+\usepackage{quiver}
+
+%misc
+\usepackage{float} % [ht] for images
+\usepackage[hyphens]{url}
+\usepackage{booktabs} %the \toprule and \bottomrule thick lines on tables
+
+\usepackage{hyperref}
+\definecolor{aqua}{HTML}{00C5FF}
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    urlcolor={black},
+    citecolor={black}
+}
+\usepackage{cleveref}
+
+
+
+%my commands
+\newcommand{\BD}{\boldsymbol{\Delta}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\X}{X_\bullet}
+\newcommand{\Y}{Y_\bullet}
+\newcommand{\opp}{^{\mathrm{op}}}
+\newcommand{\CG}{\mathcal{C}\mathcal{G}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Sing}{Sing}
+\newcommand{\Mod}{\mathcal{M}\mathrm{od}}
+\newcommand{\Vect}{\mathcal{V}\mathrm{ect}}
+\newcommand{\tildesim}{\mathbin{\sim}}
+\renewcommand{\mod}[1]{\;(\text{mod}\;#1)}
+
+\newcommand{\Set}{\mathcal{S}\mathrm{et}}
+\newcommand{\Grp}{\mathcal{G}\mathrm{rp}}
+\newcommand{\Top}{\mathcal{T}\mathrm{op}}
+\newcommand{\Ring}{\mathcal{R}\mathrm{ing}}
+\newcommand{\Cat}{\mathcal{C}\mathrm{at}}
+\newcommand{\Ab}{\mathcal{A}\mathrm{b}}
+\newcommand{\sSet}{\mathrm{s}\mathcal{S}\mathrm{et}}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Lan}{Lan}
+\DeclareMathOperator{\Ran}{Ran}
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\colim}{colim}
+
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\im}{im}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Coim}{Coim}
+\DeclareMathOperator{\coim}{coim}
+
+
+%theorems
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em, innertopmargin=5pt, innerbottommargin=6pt}
+
+% cool colors
+\definecolor{darkbg}{RGB}{54, 57, 63}
+\definecolor{lightfg}{RGB}{220, 221, 222}
+\definecolor{accentblue}{RGB}{133, 143, 255}
+\pagecolor{darkbg}
+\color{lightfg}
+\usepackage{sectsty}
+\allsectionsfont{\color{accentblue}}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accentblue,
+    filecolor=accentblue,      
+    urlcolor=accentblue,
+    citecolor=accentblue,
+}
+
+%%%%% theoremstyles
+\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont, qed={\color{accentblue}$\heartsuit$}]{definition}
+\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, qed={\color{accentblue}$\blacksquare$}]{proofline}
+\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, qed={\color{accentblue}\qedsymbol}]{egline}
+\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont]{dfn}
+\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\itshape]{thm}
+
+
+\declaretheorem[numberwithin=subsection, style=definition, name=Definition]{definition}
+\declaretheorem[sibling=definition, style=dfn, name=Remark]{remark}
+\declaretheorem[sibling=definition, style=dfn, name=Example]{example}
+\declaretheorem[sibling=definition, style=dfn, name=Notation]{notation}
+\declaretheorem[sibling=definition, style=dfn, name=Exercise]{exercise}
+\declaretheorem[sibling=definition, style=thm, name=Theorem]{theorem}
+\declaretheorem[sibling=definition, style=thm, name=Corollary]{corollary}
+\declaretheorem[sibling=definition, style=thm, name=Lemma]{lemma}
+\declaretheorem[sibling=definition, style=dfn, name=Construction]{construction}
+\declaretheorem[sibling=definition, style=thm, name=Proposition]{proposition}
+\declaretheorem[sibling=definition, style=dfn, name=Terminology]{terminology}
+\declaretheorem[sibling=definition, style=dfn, name=Intuition]{intuition}
+\declaretheorem[sibling=definition, style=thm, name=Claim]{claim}
+
+%solution environment
+\declaretheorem[numbered=no, style=egline, name=Solution]{setsolution}
+\newenvironment{solution}[1][]{\vspace{-10pt}\begin{setsolution}}{\end{setsolution}}
+%proof environment
+\declaretheorem[numbered=no, style=proofline, name=Proof]{replacementproof}
+\renewenvironment{proof}[1][\proofname]{\begin{replacementproof}}{\end{replacementproof}}
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries\color{accentblue}\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{accentblue}\centering}{\small\thesubsection}{1em}{\small}
+
+
+\author{Grant Talbert}

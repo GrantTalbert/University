@@ -1,0 +1,74 @@
+We now introduce an extremely important class of maps in the simplex category $\BD$, which in fact subsume all other morphisms in the category. These are coface and codegeneracy maps. We adhere to the notational conventions of \cite{gj} for simplicial and cosimplicial operators.
+
+\begin{definition}\label{2.3.1}
+    Let $[n]$ be an object in $\BD$, and let $i\in[n]$. The \emph{coface map} $d^i : [n-1] \to [n]$ is defined as
+    \[
+    d^i(x)=\begin{cases}
+        x,&x<i\\
+        x+1,&x\geq i
+    \end{cases}.
+    \]
+    Similarly, if $i\in[n]$, then the \emph{codegeneracy map} $s^i : [n+1]\to [n]$ is defined as
+    \[
+    s^i(x)=\begin{cases}
+        x,&x\leq i\\
+        x-1,&x>i
+    \end{cases}.
+    \]
+\end{definition}
+
+\begin{intuition}\label{2.3.2}
+    Coface and codegeneracy maps should be understood as follows. For now, disregard the naming of these maps; we will see why these maps are named the way they are once we consider geometric applications.
+    \begin{enumerate}
+        \item Coface maps insert $[n-1]$ into $[n]$ in a specific way. The $i$th coface map $d^i$ skips the number $i$, so it inserts all the numbers exactly where they should be ($x\mapsto x$) \emph{until it gets to $i$}. Once it gets there, it skips $i$ and starts inserting the numbers one slot above where they should be ($x\mapsto x+1$). In particular, cofaces are injective.
+        \item Instead of skipping $i$, the $i$th codegeneracy \emph{double counts $i$}. What it does is it once again maps all numbers to themselves ($x\mapsto x$) until it gets to $i$. It then maps both $i$ and $i+1$ to $i$. Note that to do this, it had to map $i+1$ down a slot, so it continues mapping all the rest of the numbers down a slot ($x\mapsto x-1$). In particular, codegeneracies are surjective.
+    \end{enumerate}
+\end{intuition}
+
+\begin{exercise}\label{2.3.3}
+    One can intuitively understand cofaces and codegeneracies by explicitly drawing out all of the arrows. For example, the coface $d^2 : [2]\to [3]$ can be described by the diagram
+    \[
+    \begin{tikzcd}[row sep=0em]
+        & 3\\
+        2 \ar[mapsto, ur] & 2\\
+        1\ar[mapsto, r] & 1\\
+        0\ar[mapsto, r] & 0
+    \end{tikzcd}
+    \]
+    Draw out similar diagrams for $d^2 : [5] \to [6]$, $s^0 : [3] \to [2]$, and $s^2 : [4] \to [3]$.
+\end{exercise}
+
+\begin{proposition}\label{2.3.4}
+    Every morphism $f$ in $\BD$ admits a unique representation as a composite of cofaces and codegeneracies. In particular, $f$ can be written uniquely as a composition
+    \[
+    f = d^{i_1}\circ \cdots\circ d^{i_k}\circ s^{j_1}\circ\cdots\circ s^{j_h}.
+    \]
+\end{proposition}
+\begin{proof}
+    We follow the proof of \cite[VII.5]{ml}, as recommended by \cite{gj}. Induction on $i\in [n]$ shows that a function $f : [n]\to [m]$ is uniquely determined by its image in $[m]$, together with the set of those $j\in [n]$ such that $f(j)=f(j+1)$. We call these elements $j$ ``elements where $f$ does not increase.'' Index the elements of $[m]$ not in the image of $f$ by $i_1,\ldots, i_k$, and index the elements where $f$ does not increase by $j_1,\ldots,j_h$. Put these in reverse order and form the composite indicated in the statement of the proposition. The equality follows.
+\end{proof}
+
+\begin{exercise}\label{2.3.5}
+    Complete the proof of \cref{2.3.4}. Although the argument is correct, it is clearly not fully rigorous, as it claims nonobvious things follow without justification. For example, although the induction argument it references is not difficult, it is not fully obvious that it should be true without completing the argument.
+\end{exercise}
+
+\begin{proposition}[Cosimplicial identities]\label{2.3.6}
+    With domains and codomains as appropriate, the following list of identities for the coface and codegeneracy operators hold, and are referred to as the \emph{cosimplicial identities}.
+    \[
+    \begin{cases}
+        d^jd^i = d^id^{j-1},& i<j\\
+        s^jd^i=d^is^{j-1},&i<j\\
+        s^jd^j=s^jd^{j+1}=1&\\
+        s^jd^i=d^{i-1}s^j,&i>j+1\\
+        s^js^i=s^is^{j+1},&i\leq j
+    \end{cases}.
+    \]
+\end{proposition}
+
+\begin{exercise}\label{2.3.7}
+    It is a rite of passage to prove the cosimplicial identities of \cref{2.3.6}. They may be regarded as a corollary of \cref{2.3.4} by inspecting the proof, but it is generally more simple and more fulfilling to do a direct proof. They are not very difficult; in fact you can likely see how to prove some of them in your head.
+\end{exercise}
+
+\begin{remark}\label{2.3.8}
+    By \cref{2.3.4}, cofaces and codegeneracies subsume all other morphisms in $\BD$. This is made even more precise by \cite[VII.5~Prop.~2]{ml}, which claims that by applying the cosimplicial relations of \cref{2.3.6}, one can obtain any morphism in $\BD$ from cofaces and codegeneracies. This is typically phrased as the claim that cofaces and codegeneracies, subject to the cosimplicial relations, generate the maps in $\BD$. 
+\end{remark}

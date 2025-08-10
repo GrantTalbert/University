@@ -1,0 +1,187 @@
+A cornerstone of basic category theory is the Yoneda lemma and universal properties. We prove the Yoneda lemma, review the informal notion of a universal property, and the formal definition via limits. Note that we use the notation $\D^\C(-,-)$ for the hom-sets of the functor category. Although this is a standard notation, some authors prefer $\Nat(-,-)$, and this author has found that if you are used to the latter notation, the former may be less intuitive.
+
+\begin{lemma}[Yoneda]\label{A.2.1}
+    Let $F : \C \to\Set$ be a functor. Then for all $c\in\C$, there is an isomorphism
+    \[
+    \Set^\C(\C(c,-),F)\cong F(c)
+    \]
+    natural in $c$. Dually, let $G : \C\opp\to\Set$ be a functor. Then for all $c\in\C$, there is an isomorphism
+    \[
+    \Set^{\C\opp}(\C(-,c),G)\cong G(c),
+    \]
+\end{lemma}
+\begin{proof}
+    Let $f : c\to d$ in $\C$ and let $\alpha : \C(c,-)\Rightarrow F$. Consider the diagram
+    \[\begin{tikzcd}
+	{\C(c,c)} & {F(c)} & {1_c} & {\alpha_c(1_c)} \\
+	{\C(c,d)} & {F(d)} & f & {\alpha_d(f)=(F(f)\alpha_c)(1_c)}
+	\arrow["{\alpha_c}", from=1-1, to=1-2]
+	\arrow["{f_*}"', from=1-1, to=2-1]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+	\arrow[maps to, from=1-3, to=1-4]
+	\arrow[maps to, from=1-3, to=2-3]
+	\arrow[maps to, from=1-4, to=2-4]
+	\arrow["{\alpha_d}"', from=2-1, to=2-2]
+	\arrow[maps to, from=2-3, to=2-4]
+    \end{tikzcd}\]
+    The diagram on the left commutes by naturality of $\alpha$. The diagram on the right follows the image of $1_c$ around the diagram, showing that $\alpha_d(f)$ is uniquely determined by $\alpha_c$ and $F(f)$. Thus the map $\alpha\mapsto \alpha_c(1_c)$ is indeed a bijection. To show the map is natural, consider the functor $\C\to\Set$ given by $c\mapsto \Set^\C(\C(c,-),F)$. The action on morphisms is given by postcomposition: let $f : c\to d$ in $\C$, and let $g : x\to y$ in $\C$. If $\alpha : \C(c,-)\Rightarrow F$, then the square on the left
+    \[\begin{tikzcd}
+	{\C(d,x)} & {\C(c,x)} & {F(x)} \\
+	{\C(d,y)} & {\C(c,y)} & {F(y)}
+	\arrow["{f^*}", from=1-1, to=1-2]
+	\arrow["{g_*}"', from=1-1, to=2-1]
+	\arrow["{\alpha_x}", from=1-2, to=1-3]
+	\arrow["{g_*}", from=1-2, to=2-2]
+	\arrow["{F(g)}", from=1-3, to=2-3]
+	\arrow["{f^*}"', from=2-1, to=2-2]
+	\arrow["{\alpha_y}"', from=2-2, to=2-3]
+\end{tikzcd}\]
+    commutes. We want to show the square on the right also commutes, which will show that $f^* : \C(d,-)\Rightarrow \C(c,-)$, and thus we can define our functor's action on morphisms as $\alpha\mapsto\alpha\circ f^*$. Indeed, for any $h : c\to x$, we have
+    \[
+    (g_*f^*)(h)=ghf=(f^*g_*)(h).
+    \]
+    Thus we have our functor. The naturality of the isomorphism thus amounts to showing the square on the left
+    \[\begin{tikzcd}
+	{\Set^\C(\C(c,-),F)} & {F(c)} & \alpha & {\alpha_c(1_c)} \\
+	{\Set^\C(\C(d,-),F)} & {F(d)} & {\alpha f^*} & {(\alpha_d f^*)(1_d)=(F(f)\alpha_c)(1_c)}
+	\arrow["{\mathrm{eval}_{1_c}}", from=1-1, to=1-2]
+	\arrow["{f^*}"', from=1-1, to=2-1]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+	\arrow[maps to, from=1-3, to=1-4]
+	\arrow[maps to, from=1-3, to=2-3]
+	\arrow[maps to, from=1-4, to=2-4]
+	\arrow["{\mathrm{eval}_{1_d}}"', from=2-1, to=2-2]
+	\arrow[maps to, from=2-3, to=2-4]
+\end{tikzcd}\]
+    commutes. Following some $\alpha : \C(c,-)\Rightarrow F$ around the square gives the square on the right, so it suffices to show the postulated equality holds. Indeed, by the earlier part of the proof, $(F(f)\alpha_c)(1_c)=\alpha_d(f)$, and we also know $(\alpha_df^*)(1_d)=\alpha_d(f)$. The second statement follows by duality.
+\end{proof}
+
+\begin{lemma}[Yoneda]\label{A.2.2}
+    For any (locally small) category $\C$, there is a full and faithful functor $y:\C\to\Set^{\C\opp}$, called the \emph{Yoneda embedding}, given by the object function $c\mapsto\C(-,c)$ and the morphism function $f\mapsto f^*$, where $f^*$ denotes precomposition; in particular all natural transformations between representable functors are given by precomposition by a fixed morphism $f$.
+\end{lemma}
+\begin{proof}
+    \Cref{A.2.1} gives us that 
+    \[
+    \Set^\C(\C(-,c),\C(-,d))\cong\C(c,d),
+    \]
+    and since we also saw in \cref{A.2.1} that embeddings of this form are functorial, we have our full and faithful embedding. We also saw that the morphism function was $f\mapsto f_*$, and the dual of this is $f\mapsto f^*$, giving us the second part of the statement.
+\end{proof}
+
+\begin{definition}\label{A.2.3}
+    Let $\C$ be a category. An object $0\in\C$ is \emph{initial} if for all $c\in\C$, there is a \emph{unique} arrow $0\to c$. An object $*\in\C$ is \emph{terminal} if for all $c\in\C$, there is a \emph{unique} arrow $c\to*$.
+\end{definition}
+
+\begin{remark}\label{A.2.4}
+    Initial and terminal objects need not exist, but if they exist they are unique up to isomorphism. Indeed, let $i,j$ be initial in $\C$. There is a unique arrow $i\to j$ and a unique arrow $j\to i$. Composing these gives arrows $i\to i$ and $j\to j$. Since $i$ and $j$ are initial, there must only be one arrow $i\to i$ and $j\to j$, namely the identity. Thus, the unique arrows are inverses.
+\end{remark}
+
+\begin{terminology}\label{A.2.5}
+    An object $x$ in a category $\C$ is said to satisfy a \emph{universal property} if it is either initial or terminal \emph{with respect to some property}. This involves constructing a new category of objects satisfying this property, and viewing the object as initial or terminal in it. For example, fix some $c\in\C$, and suppose the property is that an object $x\in\C$ has a specified arrow $f : x\to c$. Construct the category of pairs $(x,f)$ where $f : x\to c$, and define morphisms $\varphi : (f,x)\to (g,y)$ as morphisms $\varphi : x\to y$ in $\C$ such that the diagram
+    \[\begin{tikzcd}
+	x & y \\
+	c
+	\arrow["\varphi", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-1]
+\end{tikzcd}\]
+    commutes. An initial object in this category is thus a pair $(h,u)$ such that for any other $(f,x)$ in the category, there is a unique morphism $(h,u)\rightarrow (f,x)$. In particular, there is a unique morphism $u\to x$ making the diagram
+    \[\begin{tikzcd}
+	u & x \\
+	c
+	\arrow["\varphi", dashed, from=1-1, to=1-2]
+	\arrow["h"', from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-1]
+\end{tikzcd}\]
+    commute. We denote unique morphisms with dashed arrows. The pair $(h,u)$ is then said to satisfy this universal property. Univerals need not exist, but if they do, they are unique up to isomorphism.
+\end{terminology}
+
+\begin{definition}\label{A.2.6}
+    Let $F : \J\to\C$ be a functor. A \emph{cone} for $F$ is an object $c\in C$ and a collection of morphisms $\{\mu_j\}_{j\in\J}$ for each object of $\J$, such that for any morphism $f : j_1\to j_2$ in $\J$, the diagram
+    \[\begin{tikzcd}
+	& c \\
+	{F(j_1)} && {F(j_2)}
+	\arrow["{\mu_1}"', from=1-2, to=2-1]
+	\arrow["{\mu_2}", from=1-2, to=2-3]
+	\arrow["{F(f)}"', from=2-1, to=2-3]
+\end{tikzcd}\]
+    commutes. If $(c,\mu)$ and $(d,\nu)$ are cones for $F$, a \emph{morphism} of cones $\varphi : (d,\nu)\to(c,\mu)$ is an arrow $\varphi : d\to c$ such that for all $f : j_1\to j_2$ in $\J$, the diagram
+    \[\begin{tikzcd}
+	& d \\
+	& c \\
+	{F(j_1)} && {F(j_2)}
+	\arrow["{\nu_1}"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{\nu_2}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\mu_1}"', from=2-2, to=3-1]
+	\arrow["{\mu_2}", from=2-2, to=3-3]
+	\arrow["{F(f)}"', from=3-1, to=3-3]
+    \arrow["\varphi", from=1-2, to=2-2]
+\end{tikzcd}\]
+    commutes.
+
+    Dually, a \emph{co-cone} for $F$ is an object $c\in\C$ and a collection of morphisms $\{\mu_j\}_{j\in\J}$ for each object of $\J$, such that for any morphism $f : j_1\to j_2$ in $\J$, the dual diagram
+    \[\begin{tikzcd}
+	{F(j_1)} && {F(j_2)} \\
+	& c
+	\arrow["{F(f)}", from=1-1, to=1-3]
+	\arrow["{\mu_1}"', from=1-1, to=2-2]
+	\arrow["{\mu_2}", from=1-3, to=2-2]
+\end{tikzcd}\]
+    commutes. If $(c,\mu)$ and $(d,\nu)$ are co-cones for $F$, a \emph{morphism} of co-cones $\varphi : (d,\nu)\to(c,\mu)$ is an arrow $\varphi : d\to c$ such that for all $f : j_1\to j_2$ in $\J$, the diagram
+    \[\begin{tikzcd}
+	{F(j_1)} && {F(j_2)} \\
+	& d \\
+	& c
+	\arrow["{F(f)}", from=1-1, to=1-3]
+	\arrow["{\nu_1}"', from=1-1, to=2-2]
+	\arrow["{\mu_1}"', curve={height=12pt}, from=1-1, to=3-2]
+	\arrow["{\nu_2}", from=1-3, to=2-2]
+	\arrow["{\mu_2}", curve={height=-12pt}, from=1-3, to=3-2]
+	\arrow["\varphi", from=2-2, to=3-2]
+\end{tikzcd}\]
+    commutes.
+\end{definition}
+
+\begin{definition}\label{A.2.7}
+    Let $F:\J\to\C$ be a functor. A \emph{limit} for $F$ is a universal cone $(\lim F,\mu)$ such that for any other cone $(c,\nu)$ for $F$, there is a unique dashed arrow
+    \[\begin{tikzcd}
+	& c \\
+	& {\lim F} \\
+	{F(j_1)} && {F(j_2)}
+	\arrow[dashed, from=1-2, to=2-2]
+	\arrow["{\nu_1}"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{\nu_2}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\mu_1}"', from=2-2, to=3-1]
+	\arrow["{\mu_2}"', from=2-2, to=3-3]
+	\arrow["{F(f)}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+    rendering the diagram commutative for all $f : j_1\to j_2$ in $\J$.
+
+    Dually, a \emph{colimit} for $F$ is a universal co-cone $(\colim F,\mu)$ such that for any other co-cone $(c,\nu)$ for $F$, there is a unique dashed arrow
+    \[\begin{tikzcd}
+	{F(j_1)} && {F(j_2)} \\
+	& {\colim F} \\
+	& c
+	\arrow["{F(f)}", from=1-1, to=1-3]
+	\arrow["{\mu_1}"', from=1-1, to=2-2]
+	\arrow["{\nu_1}"', curve={height=12pt}, from=1-1, to=3-2]
+	\arrow["{\mu_2}", from=1-3, to=2-2]
+	\arrow["{\nu_2}", curve={height=-12pt}, from=1-3, to=3-2]
+	\arrow[dashed, from=2-2, to=3-2]
+\end{tikzcd}\]
+    rendering the diagram commutative for all $f : j_1\to j_2$ in $\J$.
+\end{definition}
+
+\begin{remark}\label{A.2.8}
+    In the above definitions, $\J$ is usually a small category, called an \emph{indexing} category. The functor $F$ is often called a \emph{diagram}. The intuition is that the functor $F$ indexes a diagram in $\C$. Many authors define universal properties as (co)limits of functors, or as an equivalent notion. Limits and colimits, like any universals, need not exist, but if they exist they are unique up to isomorphism.
+\end{remark}
+
+\begin{terminology}\label{A.2.9}
+    Let $\J$ be a category. If a category $\C$ has all limits of functors $\J\to\C$, we call it $\J$-complete. If $\C$ has all colimits of functors $\J\to\C$, we call it $\J$-cocomplete. If $\C$ has all limits of all small diagrams (functors with small domain), we call $\C$ \emph{complete}. If $\C$ has all colimits of all small diagrams, we call $\C$ \emph{cocomplete}. We also say $\C$ has all small (co)limits ( respectively finite (co)limits, $\J$-indexed (co)limits) when the respective notion exists.
+\end{terminology}
+
+\begin{proposition}\label{A.2.10}
+    Let $\C$ have limits over $\J$. Then $\lim : \C^\J\to\C$ is a functor. Dually, if $\C$ has colimits over $\J$, then $\colim : \C^\J\to\C$ is a functor.
+\end{proposition}
+\begin{proof}
+    The object function is given. Let $F,G : \J\to\C$, and let $\alpha : F\Rightarrow G$. Componentwise postcomposition of the limiting cone for $F$ with $\alpha$ gives a cone for $G$ by naturality, and by universality of limits, there is a unique induced arrow $\lim F\to\lim G$ making the relevant diagram commute. Define the induced arrow as $\lim\alpha$.
+\end{proof}

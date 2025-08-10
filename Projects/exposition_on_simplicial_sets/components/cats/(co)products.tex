@@ -1,0 +1,118 @@
+Products in arbitrary categories, and the dual notion of coproducts, are constructions of fundamental importance to the field of category theory. For example, any limit can be constructed using only products and equalizers, and any colimit can be constructed using only coproducts and coequalizers \cite[V.2]{ml}. Any category with finite products may be regarded as a symmetric monoidal category, which is a particularly important class of monoidal categories. This section will introduce (co)products from the perspective of universal properties and (co)limits, will give some simple examples, and will develop the product and coproduct bifunctors.
+
+\begin{definition}\label{A.3.1}
+    Let $\C$ be a category, and let $x,y\in\C$. The \emph{product} of $x$ and $y$, denoted $x\times y$, is an object of $\C$, together with two morphisms $\pi_x : x\times y \to x$ and $\pi_y : x\times y \to y$, which are universal in the sense that for any diagram of solid arrows
+    \[\begin{tikzcd}[row sep=3.5em, column sep=3.5em]
+	& z \\
+	x & {x\times y} & y
+	\arrow["f"', from=1-2, to=2-1]
+	\arrow["{(f,g)}"', dashed, from=1-2, to=2-2]
+	\arrow["g", from=1-2, to=2-3]
+	\arrow["{\pi_x}", from=2-2, to=2-1]
+	\arrow["{\pi_y}"', from=2-2, to=2-3]
+    \end{tikzcd}\]
+    there is a unique dashed arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+\begin{definition}\label{A.3.2}
+    Let $\C$ be a category, and let $x,y\in\C$. The \emph{coproduct} of $x$ and $y$, denoted $x\amalg y$, is the dual notion of a product, meaning it is an object of $\C$ together with two morphisms $i_x : x \to x\amalg y$ and $i_y : y\to x\amalg y$, which are universal in the sense that for any diagram of solid arrows
+    \[\begin{tikzcd}[row sep=3.5em, column sep=3.5em]
+	x & {x\amalg y} & y \\
+	& z
+	\arrow["{i_x}", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["{f+g}", dashed, from=1-2, to=2-2]
+	\arrow["{i_y}"', from=1-3, to=1-2]
+	\arrow["g", from=1-3, to=2-2]
+    \end{tikzcd}\]
+    there is a unique dashed arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+\begin{notation}\label{A.3.3}
+    As indicated in \cref{A.3.1}, we typically denote the unique arrow induced by $f$ and $g$ as $(f,g)$. As indicated indicated in \cref{A.3.2}, we typically denote the unique arrow induced by $f$ and $g$ as $f+g$. The arrows $\pi_x$ and $\pi_y$ are called the \emph{natural projections}, and the arrows $i_x,i_y$ are called the \emph{natural injections}. We will often drop the ``natural'' prefix and refer to the $\pi$s as projections and the $i$s as injections, but for some reason we drop the prefix more often for injections than projections.
+\end{notation}
+
+\begin{terminology}\label{A.3.4}
+    Recall that a \emph{discrete} category is a category $\J$ which has only identity arrows. We oftentimes will regard as set $J$ as a category $\J$ by taking $\J$ to be the discrete category whose objects are the elements of $J$. Since $\J$ offers no additional structure beyond the objects, this is a fair definition. We oftentimes abuse language and refer to a set as if it were a category, with the understanding that we are really referring to the discrete category that represents the set.
+\end{terminology}
+
+\begin{remark}\label{A.3.5}
+    Let $\J$ be the set $\{0,1\}$ of 2 elements. A functor $F : \J \to \C$ is simply a choice of two elements $F(0)=x$ and $F(1)=y$, since there are no nontrivial morphisms to consider. A cone for $F$ is thus an object $c\in\C$ and arrows $\mu_0,\mu_1$ as described by the diagram
+    \[\begin{tikzcd}
+	& c \\
+	{F(0)} && {F(1)}
+	\arrow["{\mu_0}", from=1-2, to=2-1]
+	\arrow["{\mu_1}"', from=1-2, to=2-3]
+    \end{tikzcd}\]
+    A \emph{limit} of $F$ is thus an object $\lim F$ of $\C$, together with two morphisms $\mu_0 : \lim F \to F(0)$ and $\mu_1 : \lim F \to F(1)$, such that for any cone $(c,\nu)$ for $F$, there is a unique arrow $c\to \lim F$ as indicated in the diagram
+    \[\begin{tikzcd}[row sep=3.5em, column sep=3.5em]
+	& c \\
+	F(0) & {\lim F} & F(1)
+	\arrow["\nu_0"', from=1-2, to=2-1]
+	\arrow[dashed, from=1-2, to=2-2]
+	\arrow["\nu_1", from=1-2, to=2-3]
+	\arrow["{\mu_0}", from=2-2, to=2-1]
+	\arrow["{\mu_1}"', from=2-2, to=2-3]
+    \end{tikzcd}\]
+    rendering it commutative. Note that this is precisely the universal property of \cref{A.3.1}, so the product of $x$ and $y$ is simply the limit of the functor $F : \J\to\C$ such that $F(0)=x$ and $F(1)=y$. By duality, the coproduct $x\amalg y$ is the colimit $\colim F$.
+\end{remark}
+
+\begin{definition}\label{A.3.6}
+    Let $\C,\D$ be categories. The product category $\C\times\D$ is defined as the category where
+    \begin{itemize}
+        \item objects are ordered pairs $(c,d)$ with $c\in\C$ and $d\in\D$;
+        \item morphisms $(c,d)\to (c',d')$ are ordered pairs $(f,g)$ such that $f : c\to c'$ in $\C$ and $g : d\to d'$ in $\D$.
+    \end{itemize}
+\end{definition}
+
+\begin{construction}\label{A.3.7}
+    A functor whose domain is a product category is called a \emph{bifunctor}. If a category $\C$ has all binary products --- meaning for any $c,d\in\C$, the product $c\times d$ exists --- then product assembles into a bifunctor $-\times - : \C\times\C\to\C$. The action on objects is clear: a pair $(c,d)\in\C\times\C$ is mapped to its product $c\times d$ in $\C$. The action on morphisms is a little more elusive, so consider a morphism $(f,g) : (c,d) \to (c',d')$ in $\C\times\C$; this is equivalently two morphisms
+    \[\begin{tikzcd}[row sep=0em]
+	c & {c'} \\
+	d & {d'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    in $\C$. We can construct the diagram of solid arrows
+    \[\begin{tikzcd}
+	c && {c'} \\
+	{c\times d} && {c'\times d'} \\
+	d && {d'}
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["{\pi_c}", from=2-1, to=1-1]
+	\arrow["{f\times g}", dashed, from=2-1, to=2-3]
+	\arrow["{\pi_d}"', from=2-1, to=3-1]
+	\arrow["{\pi_{c'}}"', from=2-3, to=1-3]
+	\arrow["{\pi_{d'}}", from=2-3, to=3-3]
+	\arrow["g"', from=3-1, to=3-3]
+    \end{tikzcd}\]
+    which commtues manifestly. Note that the composites $f\circ \pi_c$ and $g\circ \pi_d$ are arrows from $c\times d$ to $c'$ and $d'$, respectively, so by universality of product there is a unique morphism $c\times d \to c'\times d'$ as indicated by the dashed arrow, rendering the diagram commtutative. We define $f\times g$ as that unique arrow. Functoriality is easily shown by universality. We similarly construct the coproduct bifunctor $-\amalg - : \C\times\C \to\C$.
+\end{construction}
+
+\begin{remark}\label{A.3.8}
+    Using the definition of a product in \cref{A.3.5}, we can more easily define arbitrary products. Given a set $\J$, a $\J$-indexed product in $\C$ is a limit of a functor $F : \J \to \C$. This functor selects a collection $\{x_j\}_{j\in\J}$ of objects in $\C$, and taking the limit corresponds to taking the product over this collection. This allows us to even define limits where the indexing object is not a set, but a class, by viewing the class as a large discrete category. We call products over large categories \emph{large products}, products over small categories (sets) are \emph{small products}, and products over finite categories (finite sets) are \emph{finite products}. The same holds for coproducts.
+\end{remark}
+
+\begin{example}\label{A.3.9}
+    Products in $\Set$ are our usual cartesian products of sets. Coproducts in $\Set$ are the disjoint union: we take two sets $X$ and $Y$, and forcibly make them disjoint by replacing $X$ with $X\times\{0\}$ and $Y\times\{1\}$, and then take the union of these new sets. Note that the choices of 0 and 1 here are completely arbitrary, this is simply one way to force the sets to be disjoint, and any other method will work just as well. The only think that matters is that all options are isomorphic to each other in $\Set$, and indeed universals are unique up to isomorphism. Some other examples are
+    \begin{itemize}
+        \item The product in $\Grp$ is the direct product of groups, and the coproduct is the free product;
+        \item The product in $\Ab$ is the direct product of groups, but the (finite) coproduct is \emph{also} the direct product of groups;
+        \item Just line in $\Ab$, the (finite) product and coproduct in any category $\Mod_R$ of $R$-modules coencide, and indeed this happens in any \emph{abelian category} \cite[VIII.2]{ml}, \cite[IX.1.4]{alg0}. In abelian categories, we call the (finite) product/coproduct a \emph{biproduct}, and in $\Ab$ and $\Mod_R$ we call it the \emph{direct sum}. We typically denote it with the symbol $\oplus$;
+        \item The product in the poset category $\mathbb{Z}$ of a pair $(n,m)$ is the minimum number in the pair, and the coproduct is the maximum;
+        \item The product in $\Top$ is the product of topological spaces, and the coproduct is the disjoint union, with the usual topologies.
+    \end{itemize}
+\end{example}
+
+\begin{construction}\label{A.3.10}
+    The product of two categories as given in \cref{A.3.6} indeed satisfies the universal property of \cref{A.3.1}, so we obtain by way of \cref{A.3.7} a product bifunctor on the category $\Cat$ of small categories. The reason we restrict here to the category of \emph{small} categories has nothing to do with products, but with the foundational issues that arise when trying to define a category of all categories. However, we can still define the product of two functors, even if they don't live between small categories. They are constructed in the exact way you would expect.
+
+    Let $F : \C\to\D$ and $G : \C'\to\D'$ be functors. Then the product functor $F\times G : C\times C' \to \D\times\D'$ is defined on objects as
+    \[
+    (F\times G)(c,c')=(F(c),G(c'))
+    \]
+    and on morphisms as
+    \[
+    (F\times G)(f,g)=(F(f),G(g)).
+    \]
+\end{construction}
