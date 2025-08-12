@@ -297,4 +297,70 @@ Finally, we show the isomorphism $K\cong N(\mathcal{C} )$. By construction, we h
     Recall by our first part of the proof that $N(\mathcal{C} )$ satisfies property (2). Thus, since $K$ and $N(\mathcal{C} )$ satisfy (2), the vertical maps are bijective. It suffices to thus show the bottom map is bijective since isomorphisms satisfy 2-out-of-3. By the inductive hypothesis, there is an isomorphism $\sSet(\Delta ^{n-1} ,K)\cong \sSet(\Delta ^{n-1} ,N(\mathcal{C} ))$. Recall from earlier that any face $\partial _j\Delta ^n$ is isomorphic to $\Delta ^{n-1} $, and that the horn decomposes as maps for faces. Since the faces are isomorphic to $\Delta ^{n-1} $ for which the statement follows, the statement must follow for each face, and by universality the statement follows for the horn, completing the proof.
 \end{proof}
 
-Of course, \cref{1.1.2.5} (2) is similar to \cref{1.1.2.1}, but we require it only for inner horns, and we require the filler be unique. 
+\begin{remark}\label{1.1.2.6}
+	We may refer to $n$-simplices of a simplicial set $K$ as morphisms $\sigma : \Delta^n\to K$. We recall by our use of Yoneda in the above proof that such a morphism amounts to specifying an $n$-simplex $\sigma\in K_n$ and an image $1_{[2]} \mapsto \sigma$, justifying this terminology.
+\end{remark}
+
+
+\begin{remark}\label{1.1.2.7}
+	Of course, \cref{1.1.2.5} (2) is similar to \cref{1.1.2.1}, but we require it only for inner horns, and we require the filler be unique. It is fairly easy to see that it would be unreasonable to assume outer horns have unique fillers in \cref{1.1.2.5}. For example, let $n=2$. A horn $\Lambda_2^2 \to N(\mathcal{C} )$ is a diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & y \ar[dr]  &  \\
+	x\ar[dotted, ur] \ar[rr]  &  & z
+	\end{tikzcd}\]
+	and a filler is a dotted arrow as indicated, rendering the diagram commutative. This is of course unreasonable to ask for, but it is reasonable for \emph{groupoids}.
+\end{remark}
+
+Simplicial sets are thus good models for $\infty$-groupoids when $K$ is a Kan complex, and are good models for regular categories when $K$ satisfies \cref{1.1.2.5} (2). We earlier noted that $\infty $-groupoids and regular 1-categories are both special cases of $\infty $-categories, so we would expect some more general class of simplicial sets to give us a model. To see how this arises, we use our observations from \cref{1.1.2.5} and \cref{1.1.2.3} to consider how a simplicial set $K$ should be interpreted to yield an $\infty $-category.
+
+First, clearly objects are vertices, morphisms are edges, and identity, domain, and codomain are the same as \cref{1.1.2.3}. A 2-simplex $\sigma : \Delta^2 \to K$ is thought of as a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & y\ar[" \psi ", dr]  &  \\
+x \ar[" \phi ", ur] \ar[" \theta "', rr]  &  & z
+\end{tikzcd}\]
+together with a homotopy $\theta \simeq\psi\phi$ which witnesses the ``commutativity'' of the diagram (in higher category, commutativity of a diagram implies there are homotopies present as required to witness the composites). Simplices of higher dimension can be thought of similarly as verifying the commutivity of higher dimensional diagrams between higher level morphisms, which we will explore later as an aside from the main text.
+
+However, this discussion has a massive issue: there is in general no way to compose two adjacent morphisms. However, inspecting the proof of \cref{1.1.2.5} gives us a property which makes this possible. A composable pair $(g,f)$ determines a horn $\Lambda_1^2 \to K$, and the existence of their composite determines a filler $\sigma : \Delta^2 \to K$. We simply require that fillers for \emph{inner} horns always exist.
+
+The next problem is that of uniqueness. It is in fact fairly unnatural to require that fillers be unique. For example, recall the definition of composites of paths in a topological space, where we compress their domain along $I /2$ instead of $I$. We could just as easily compress one over $I /3$ and one over $2 I/3$, and since the two choices are homotopic, it doesn't matter which we choose. Since they are homotopic, they should both be valid choices for the composite of these homotopies, but each corresponds to a different filler for the relevant horn. With all of these considerations, we propose the following definition.
+
+\begin{definition}[Quasi-category]\label{1.1.2.8}
+	An $\infty $-category (in particular, a quasi-category) is a simplicial set $K$ which admits fillers for all inner horns. More precisely, for any $0<i<n$, for all diagrams of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda_i^n \ar[r] \ar[hook, d]  & K \\
+	\Delta^n \ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	there exists at least one (not necessarily unique) dotted arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+This definition was first proposed by Boardman and Vogt in \cref{BV73}, motivated by \cref{1.1.2.5}. They called them \emph{weak Kan complexes}, and later Andr\'e Joyal called them \emph{quasi-categories}. Lurie calls them $\infty $-categories, although Joyal's terminology is more commonly used when referring to the specific underlying model.
+
+\begin{example}\label{1.1.2.9}
+	Any Kan complex as defined in \cref{1.1.2.1} is an $\infty $-category. In particular, in view of \cref{1.1.2.2}, the singular complex $\Sing X$ of any topological space $X$ is an $\infty $-category.
+\end{example}
+\begin{example}\label{1.1.2.10}
+	By \cref{1.1.2.5}, the nerve of any category is an $\infty $-category. We will oftentimes abuse terminology and regard 1-categories $\mathcal{C} $ as $\infty $-categories by identifying them with their nerve $N(\mathcal{C})$. By way of this identification, we may view 1-category theory as a special case of the theory of $\infty $-categories.
+\end{example}
+
+\begin{notation}\label{1.1.2.11}
+	We will use two different notations for simplicial sets. When viewing a simplicial set $K$ as an $\infty $-category, we will generally denote it with a calligraphic letter ($\mathcal{C} ,\mathcal{D} ,\mathcal{E} \ldots $), and otherwise we denote them by capital roman letters $(K,X,Y \ldots )$. We may also employ the latter notation when comparing different models for $\infty $-categories, to avoid confusion.
+\end{notation}
+
+Before we continue with the text, I want to make a couple remarks that will be useful for later.
+
+\begin{proposition}\label{1.1.2.12}
+	Let $K$ be a simplicial set.
+	\begin{enumerate}
+		\item Specifying a horn $\Lambda_i^n\to K$ amounts to specifying $(n-1)$-simplices $\tau_j$ for all $0\leq j\neq i \leq n$ which satisfy the compatibiltiy condition $d_k(\tau_j)=d_{j-1} (\tau_k)$ for all $k<j$, by defining $d^j\mapsto\tau_j$.
+		\item Call an $n$-tuple $(f_1, \ldots ,f_n)$ of $1$-simplices \emph{composable} if $d_1(f_i)=d_0(f_{i-1} )$ for each $0<i\leq n$. Then the datum of a composable $n$-tuple defines an inner horn $\Lambda_i^n \to K$.
+		\item A filler for an inner horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
+			\[
+				\sigma_0(d^j)=\sigma(d^j)
+			.\]	
+	\end{enumerate}
+\end{proposition}
+
+
+\subsection{Equivalences of Topological Categories}
+
+We return for a short time to our simpler notion of topological categories, in order to get a feel for what an $\infty $-categorical notion of an \emph{equivalence of categories} should be.
