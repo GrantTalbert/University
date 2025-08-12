@@ -349,16 +349,65 @@ This definition was first proposed by Boardman and Vogt in \cref{BV73}, motivate
 Before we continue with the text, I want to make a couple remarks that will be useful for later.
 
 \begin{proposition}\label{1.1.2.12}
-	Let $K$ be a simplicial set.
+	Let $K$ be a simplicial set. Specifying a horn $\Lambda_i^n\to K$ amounts to specifying $(n-1)$-simplices $\tau_j$ for all $0\leq j\neq i \leq n$ which satisfy the compatibiltiy condition $d_k(\tau_j)=d_{j-1} (\tau_k)$ for all $k<j$, by defining $d^j\mapsto\tau_j$.
+\end{proposition}
+\begin{proof}
+	Recall that unions are pushouts in $\sSet$, meaning morphisms $\Lambda _i^n\to K$ are precisely pushout diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\bigcap_{j\in[n],j\neq i} \partial _j\Delta ^{n-1} } \ar[hook, r] \ar[hook, d] & \partial _j\Delta ^{n-1} \ar[bend left, ddr] \ar[hook, d]  &  \\
+		\partial _k\Delta ^{n-1} \ar[hook, r] \ar[bend right, drr]  & \displaystyle{\bigcup_{j\in[n],j\neq i} \partial _j\Delta ^{n-1} =\Lambda_i^n}\ar[dashed, dr]  &  \\
+	 &  & K
+	\end{tikzcd}\]
+	where the pushout is over all $j\in[n]\setminus \left\{ i \right\} $, but it is hard to draw this many arrows so we only draw two. The case for $n=1$ is trivial, so we assume $n\geq 2$.
+
+	Recall from the proof of \cref{1.1.2.5} that there is an isomorphism of simplicial sets $\partial _j\Delta ^{n} \cong \Delta ^{n} $ by mapping $\delta ^{j} \alpha \mapsto \alpha $, which is an isomorphism by the epi-mono factorization in $\boldsymbol{\Delta} $ (\cite{maclane,ssets}). Note that the map $\delta ^j\mapsto \tau _j$ decomposes as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\partial _j\Delta ^{n-1} \ar[" d^j\mapsto \tau _j ", bend left, rr] \ar[" d^j\alpha \mapsto \alpha  "', " \cong  ", r]  & \Delta ^{n-1} \ar[" 1_{[n-1]} \mapsto \tau _j "', r]  & K,
+	\end{tikzcd}\]
+	where we recall that $1_{[n-1]} \mapsto \tau_j$ is a map of simplicial sets by the Yoneda lemma, as noted in the proof of \cref{1.1.2.5}. We review the proof of this in the proof of \cref{1.1.2.13}. Thus, $d^j\mapsto \tau _j$ decomposes as a morphism of simplicial sets, and thus is a morphism of simplicial sets for each $j$. Thus by universality of pushout, and by levelwise computation of universals in functor categories (\cite{maclane}), the claimed morphism $\sigma :\Lambda _i^n\to K$ exists precisely when the above pushout diagram commutes.
+
+	First, we prove the easy direction. Let $k<j$, and suppose the diagram commutes, meaning there is indeed a morphism $\sigma : \Lambda _i^n \to K$ with $d^j\mapsto \tau _j$ for each $j\neq i$ in $[n]$. Since $\Lambda _i^n$ is a simplicial subset of $\Delta ^{n} $, faces are given by precomposition. Since $\sigma $ is a morphism of simplicial sets, we have the string of equalities
+	\[
+		d_k(\tau _j)=d_k\sigma (d^j)=\sigma d_k(d^j)=\sigma (d^jd^k)\overset{!}{=}\sigma (d^kd^{j-1} )=\sigma d_{j-1} (d^k)=d_{j-1} \sigma (d^k)=d_{j-1} (\tau _k)
+	,\]
+	where the equality $!$ is given by the cosimplicial identity $d^jd^k=d^kd^{j-1} $ for $k<j$.
+
+	Now we prove the converse. Suppose the compatibility condition holds. We do this in three steps:
 	\begin{enumerate}
-		\item Specifying a horn $\Lambda_i^n\to K$ amounts to specifying $(n-1)$-simplices $\tau_j$ for all $0\leq j\neq i \leq n$ which satisfy the compatibiltiy condition $d_k(\tau_j)=d_{j-1} (\tau_k)$ for all $k<j$, by defining $d^j\mapsto\tau_j$.
-		\item Call an $n$-tuple $(f_1, \ldots ,f_n)$ of $1$-simplices \emph{composable} if $d_1(f_i)=d_0(f_{i-1} )$ for each $0<i\leq n$. Then the datum of a composable $n$-tuple defines an inner horn $\Lambda_i^n \to K$.
-		\item A filler for an inner horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
+		\item We show for $n\geq 2$, the intersection $\bigcap_{j\neq i} \partial _j\Delta ^{n-1} $ has precisely one 0-simplex $i$, and all higher levels $m$ have precisely one $m$-simplex $s_m s_{m-1} \ldots s_0(i)$.
+		\item We show the maps $\partial _{j,k} \Delta ^{n-1} \to K$ agree on $i$.
+		\item We show this implies the maps $\partial_{j,k} \Delta ^{n-1} \to K$ agree on the full intersection.
+	\end{enumerate}
+	
+	(1) First, we show $i$ is the unique 0-simplex. Note that the 0-simplices of $\Delta ^{n-1} =[n-1]$, and the $0$-simplices of each $\partial _j\Delta ^{n-1} $ are thus $d^j[n-1]$. Since $j\neq i$, none of the cofaces $d^j$ skip $i$, meaning $i\in \im d^j$ for all $j$, and thus $j$ is a 0-simplex. Uniqueness follows from the fact that if $k\in[n-1]$ and $k\neq i$, then there exists $\partial _k\Delta ^{n-1} $ in the union, the 0-simplices of which are $d^k[n-1]$, which excludes $k$ by definition.
+
+	Now we show all higher $m$-simplices are the degenerate simplices $s_m \ldots s_0(i)$ by induction. A 1-simplex $\sigma $ must have its faces $d_0(\sigma ),d_1(\sigma )$ be 0-simplices of the union, meaning both its faces must be $i$. Recall that since we are working in a simplicial subset of $\Delta ^n$, faces are precomposition with cofaces, so this implies
+	\[
+		0\mapsto 0\mapsto \sigma (0) = 0\mapsto 1 \mapsto \sigma (1) = i,
+	\]
+	and thus $\sigma $ is necessarily the map $0,1\mapsto i$. Thus there is a unique $1$-simplex. This can be viewed as the degenerate simplex
+	\[
+		s_0(i) = 0,1\mapsto 0\mapsto i
+	,\]
+	giving the required form. Now assume the inductive hypothesis for $m$. Since $s_m \ldots s_0(i)$ is the unique $m$-simplex, all faces of an $(m+1)$-simplex $\sigma $ must be $s_m \ldots s_0(i)$. By the same logic as above, we immediately see that $\sigma $ is the map $[m+1]\mapsto i$, and thus admits the representation $s_{m+1}  \ldots s_0(i)$, concluding this section of the proof.
+
+	(2) Let $\sigma _j : \partial _j\Delta ^{n-1}  \to K$ and $\sigma _k : \partial _k\Delta ^{n-1}  \to K$ be the maps in question. This can be proven directly, but we use induction
+
+	(3) Keeping notation as before, we clearly have by inducting on the morphism condition for simplicial sets that for each $m$-simplex $\alpha $ in the intersection,
+	\[
+		\sigma _j(\alpha )=\sigma _js_m \ldots s_0(i))=s_0 \ldots s_m \sigma _j(i)=s_0 \ldots s_m \sigma _k(i)= \sigma _k s_m \ldots s_0(i)=\sigma _k(\alpha )
+	.\]
+\end{proof}
+
+\begin{proposition}\label{1.1.2.13}
+	Call an $n$-tuple $(f_1, \ldots ,f_n)$ of $1$-simplices \emph{composable} if $d_1(f_i)=d_0(f_{i-1} )$ for each $0<i\leq n$. Then the datum of a composable $n$-tuple defines an inner horn $\Lambda_i^n \to K$.
+
+	A filler for an inner horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
 			\[
 				\sigma_0(d^j)=\sigma(d^j)
 			.\]	
-	\end{enumerate}
 \end{proposition}
+
 
 
 \subsection{Equivalences of Topological Categories}
