@@ -156,8 +156,145 @@ There exists a characterization of simplicial sets that arise as nerves, which i
 		\item Objects are vertices: $\Obj(\mathcal{C} ) =K_0$;
 		\item Morphisms are edges: $\operatorname{Mor} (\mathcal{C} )=K_1$. Domain and codomain are faces: $\operatorname{dom} =d_1$ and $\operatorname{cod} =d_0$;
 		\item Identity $1_{\bullet} : \Obj(\mathcal{C} ) \to \operatorname{Mor} (\mathcal{C} )$ is the degeneracy $1_{\bullet} =s_0$;
-		\item Let $f : x \to y$ and $g : y \to z$ in $\mathcal{C} $. We want to define a morphism $\sigma_0:\Lambda_1^2\to K$. Define the action on $0$-simplices by $0\mapsto x$, $1\mapsto y$, and $2\mapsto z$. Denote by $g_k$ the nondegenerate simplex in $\Delta^{k-1,k} $ for $0<k\leq 2$. Then define the map as $g_1\mapsto f$ and $g_2\mapsto g$. We will show later that this data determines a morphism $\sigma_0:\Lambda_1^2\to K$. By the horn filling condition, this extends to a map $\sigma : \Delta^2 \to K$. Let $\varphi : [1] \to [2]$ be the unique 1-simplex of $\Delta^2$ with $\varphi(0)=0$ and $\varphi(1)=2$. Then define $g\circ f$ as $\sigma(\varphi)$.
+		\item Let $f : x \to y$ and $g : y \to z$ in $\mathcal{C} $. We want to define a morphism $\sigma_0:\Lambda_1^2\to K$. Define the action on $0$-simplices by $0\mapsto x$, $1\mapsto y$, and $2\mapsto z$. Denote by $g_k$ the nondegenerate simplex in $\Delta^{k-1,k} $ for $0<k\leq 2$. Then define the map as $g_1\mapsto f$ and $g_2\mapsto g$. We will show later that this data determines a morphism $\sigma_0:\Lambda_1^2\to K$. By the horn filling condition, this extends to a map $\sigma : \Delta^2 \to K$. Let $d^1 : [1] \to [2]$ be the unique 1-simplex of $\Delta^2$ with $d^1(0)=0$ and $d^1(1)=2$. Then define $g\circ f$ as $\sigma(d^1)$.
 	\end{enumerate}
-	
-	TODO: show the claim in (4) that this data determines a morphism from a horn is true; show is a category (see lurie); show the isomorphism.
+
+	Of course, we need to show the data in (4) defines a morphism $\sigma_0 : \Lambda_1^2 \to K$. Recall that $\Lambda_1^2=\partial _0\Delta^2 \cup \partial_2\Delta^2$. By universality of union, if we can define maps $\partial _0\Delta^2 \to K$ for $i=0,2$, such that these maps agree on $\partial_0\Delta^2 \cap \partial_2\Delta^2$, then they assemble into a map $\Lambda_1^2$. We may thus construct a map in this way using only the data of (4). Recall that $\partial _i\Delta^n= \im (d^i : \Delta^{n-1}  \to \Delta^n)$, and in particular $d^i : \Delta^{n-1} \to \partial _i\Delta^n$ is an isomorphism by uniqueness of the epi-mono factorization in $\boldsymbol{\Delta} $, with a well-defined inverse $d^i\circ h\mapsto h$. Thus, if $\tau_0 : \Delta^{n-1}  \to K$ is a morphism of simplicial sets, then there is a morphism of simplicial sets $\tau : \partial _i\Delta^n \to K$ given by $d^i\circ h\mapsto h\mapsto f_0(h)$, since this is simply composition of the inverse of the isomorphism with the map $f_0$. In particular, maps $\Delta^1\to K$ induce maps $\partial _i\Delta^2\to K$.
+
+	By the Yoneda lemma, maps $\tau_0':\Delta^1\to K$ are specified by the image $\tau_0'(1_{[1]} )$. Thus, the map $\tau_0 : \partial _i\Delta^2 \to K$ is fully specified by the image $\tau_0'(1_{[1]} )$ in the aforementioned manner. Define
+	\[
+		\alpha_0 : \Delta^1 \to K,\qquad 1_{[1]} \mapsto f,
+	\]
+	\[
+		\beta_0 : \Delta^1 \to K,\qquad 1_{[1]} \mapsto g
+	.\]
+	These of course assemble into maps $\alpha : \partial _2\Delta^2 \to K$ and $\beta : \partial _0\Delta^2 \to K$. To show these maps agree on the intersection, it suffices to show they agree on the vertex $1\in \partial _{0,2} \Delta^2_0$. Indeed, $1\in \partial _0\Delta^2_0$ is simply $d^0(0)$, and $1\in \partial _2\Delta^2_0$ is simply $d^2(1)$. Thus, they are mapped
+	\[
+		\alpha : 1=d^2(1)\mapsto 1\mapsto \alpha_0(1),\qquad \beta : 1=d^0(0)\mapsto 0\mapsto \beta_0(0)
+	.\]
+	We simply need to show these agree. Since $\beta_0$ and $\alpha_0$ are morphisms of simplicial sets, they necessarily commute with faces, meaning the diagrams
+	\[\begin{tikzcd}
+	{\Delta^1_1} & {K_1} & {\Delta_1^1} & {K_1} \\
+	{\Delta^1_0} & {K_0} & {\Delta_0^1} & {K_0}
+	\arrow["{\alpha_0}", from=1-1, to=1-2]
+	\arrow["{d_0}"', from=1-1, to=2-1]
+	\arrow["{d_0}", from=1-2, to=2-2]
+	\arrow["{\beta_0}", from=1-3, to=1-4]
+	\arrow["{d_1}"', from=1-3, to=2-3]
+	\arrow["{d_1}", from=1-4, to=2-4]
+	\arrow["{\alpha_0}"', from=2-1, to=2-2]
+	\arrow["{\beta_0}"', from=2-3, to=2-4]
+	\end{tikzcd}\]
+	commute. Recall that $\alpha_0(1_{[1]})=f$ and $\beta_0(1_{[1]} )=g$. Following the identity around both squares yields the equalities
+	\[\begin{tikzcd}
+	{1_{[1]}} & f & {1_{[1]}} & g \\
+	{1_{[1]}\circ d^0=1} & {\alpha_0(1)=d_0(f)} & {1_{[1]}\circ d^1=0} & {\alpha_0(0)=d_1(g)}
+	\arrow["{\alpha_0}", maps to, from=1-1, to=1-2]
+	\arrow["{d_0}"', maps to, from=1-1, to=2-1]
+	\arrow["{d_0}", maps to, from=1-2, to=2-2]
+	\arrow["{\beta_0}", maps to, from=1-3, to=1-4]
+	\arrow["{d_1}"', from=1-3, maps to, to=2-3]
+	\arrow["{d_1}", from=1-4, maps to, to=2-4]
+	\arrow["{\alpha_0}"', maps to, from=2-1, to=2-2]
+	\arrow["{\beta_0}"', maps to, from=2-3, to=2-4]
+	\end{tikzcd}\]
+	Recall that in (2), we defined $d_1(g)=\operatorname{dom} g$ and $d_0(f)=\operatorname{cod} f$. In (4), we defined $\operatorname{cod} f=y=\operatorname{dom} g$, and thus the morphisms agree. We thus have an induced map $\sigma_0=\alpha\cup \beta : \Lambda_1^2\to K$, which is immediately guarenteed to be defined as claimed in (4).
+
+	Now that our definitions are indeed defined, we must show $\mathcal{C}$ defines a category, as claimed.
+	\begin{enumerate}
+		\item First, we show the identity is indeed an identity. Let $y\in \mathcal{C} $, and let $f : x \to y$ and $g : y \to z$ be morphisms in $\mathcal{C} $. The data $(f,1_y)$ consitutes a horn $x\xlongrightarrow{f}y\xlongrightarrow{1}y$, which fills to a 2-simplex $\tau\in K_2$ and a morphism $\sigma:\Delta^2\to K$ given by $1_{[2]} \mapsto \tau$, such that $\tau$ witnesses $1_y\circ f$ as the composite of $1_y$ and $f$, as described in (4). We show $1_y\circ f=f$. Recall $1_y\circ f=\sigma(d^1)$. We have
+			\[
+				d_0(\tau)=d_0\sigma(1_{[2]} )=\sigma d_0(1_{[2]} )=\sigma(d^0)=1_y=s_0(y),
+			\]
+			\[
+				d_1(\tau)=d_1\sigma(1_{[2]} )=\sigma d_1(1_{[2]} )=\sigma(d^1)=1_y\circ f,
+			\]
+			\[
+				d_2(\tau)=d_2\sigma(1_{[2]} )=\sigma d_2(1_{[2]} )=\sigma(d^2)=f.
+			\]
+			Recall that there is a simplicial identity $s_id_{i} =s_id_{i+1} =1$. We have
+			\[
+				s_1(f)=s_1d_2(\tau)=\tau,
+			\]
+			and thus $\tau$ is degenerate. We also have
+			\[
+				1_y\circ f=d_1(\tau)=d_1s_1(f)=f
+			\]
+			by the same simplicial identity. The converse direction is the same argument, except we find that $s_0(g)=\tau$.
+
+		\item Now we show associativity. Let
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			w\ar[" f ", r]  & x\ar[" g ", r]  & y\ar[" h ", r]  & z
+			\end{tikzcd}\]
+			be a composable triple in $\mathcal{C} $. We want to show $h(gf)=(hg)f$. Define the following 2-simplices of $K$ to be the images of $1_{[2]} $ under the relevant fillers:
+    \[
+        \sigma_{gf} =\left\{ 
+        \begin{matrix}
+            d_0(\sigma_{gf} )=g,\\
+            d_1(\sigma _{gf} )=gf,\\
+            d_2(\sigma _{gf} )=f
+        \end{matrix}
+        \right. \qquad
+        \sigma_{hg} =\left\{ 
+        \begin{matrix}
+            d_0(\sigma_{hg} )=h,\\
+            d_1(\sigma _{hg} )=hg,\\
+            d_2(\sigma _{hg} )=g
+        \end{matrix}
+        \right.
+    \]
+    \[
+        \sigma_{h(gf)} =\left\{ 
+        \begin{matrix}
+            d_0(\sigma_{h(gf)} )=h,\\
+            d_1(\sigma _{h(gf)} )=h(gf),\\
+            d_2(\sigma _{h(gf)} )=gf
+        \end{matrix}
+        \right. \qquad
+        \sigma_{(hg)f} =\left\{ 
+        \begin{matrix}
+            d_0(\sigma_{(hg)f} )=hg,\\
+            d_1(\sigma _{(hg)f} )=(hg)f,\\
+            d_2(\sigma _{(hg)f} )=f
+        \end{matrix}
+        \right.
+  		  \]
+		  By the same logic as earlier (and indeed, we will show this holds generally later with an inductive argument), there is a horn $\tau_0 : \Lambda_2^3 \to K$ and a filler $\tau$ defining the 3-simplex $\lambda=\tau(1_{[3]} )\in K_3$. This simplex has faces
+		  \[
+		  	d_0(\lambda)=d_0\tau(1)=\tau(d^0)=\sigma_{hg} ,
+		  \]
+		  \[
+		  	d_1(\lambda)=d_1\tau(1)=\tau(d^1)=\sigma_{h(gf)} ,
+		  \]
+		  \[
+		  	d_3(\lambda)=d_3\tau(1)=\tau(d^3)=\sigma_{gf} 
+		  .\]
+		  We first want to show $d_2(\lambda)=\sigma_{(hg)f} $. For now, we note that
+		  \[
+		  	d_0d_2(\lambda)=d_1d_0(\lambda)=d_1(\sigma_{hg} )=hg,
+		  \]
+		  \[
+		  	d_2d_2(\lambda)=d_2d_3(\lambda)=d_2(\sigma_{gf} )=f,
+		  \]
+		  by the simplicial identity $d_id_j=d_{j-1} d_i$ for $i<j$. This defines a horn, which admits a filler. Since $\sigma_{(hg)f} $ agrees with the horn but is a 2-simplex, it necessarily is a filler, and by (2) this filler must be unique. Thus, $d_2(\lambda)=\sigma_{(hg)f} $ is the unique filler. Finally, note that by the same simplicial identity,
+		  \[
+			  (hg)f=d_1d_2(\lambda)=d_1d_1(\lambda)=h(gf)
+		  .\]
+		  Therefore, $\mathcal{C} $ is a category, as claimed.
+	\end{enumerate}
+
+Finally, we show the isomorphism $K\cong N(\mathcal{C} )$. By construction, we have a map $\varphi : K \to N(\mathcal{C} )$ given by mapping $n$-simplices to the $n$-fold composite they witness. Of course, this is a morphism of simplicial sets basically by construction, which is checked by a simple (but annoying to type up) proof. We simply show $\varphi $ is an isomorphism. It suffices to show it is an isomorphism levelwise, meaning $\varphi_n : K_n\cong N(\mathcal{C} )_n$. By the Yoneda lemma, this is equivalent to showing isomorphism
+    \[
+        \sSet(\Delta ^n,K)\cong \sSet(\Delta ^n,N(\mathcal{C} ))
+    \]
+    for all $n\geq 0$.
+
+    We induct on this statement. This is obvious by construction for $n=0$ and $n=1$, since $N(\mathcal{C} )_i=K_i$ when $i=0,1$, so assume the inductive hypothesis for $n\geq 2$, and choose $0<i<n$ an integer. Precomposition by the canonical inclusion $\Lambda _i^n\hookrightarrow \Delta ^n$ and postcomposition by $\varphi $ induce a commutative diagram
+    \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+    \sSet(\Delta ^n,K)\ar[r] \ar[d]  & \sSet(\Delta ^n,N(\mathcal{C} ))\ar[d]  \\
+    \sSet(\Lambda _i^n,K)\ar[r]  & \sSet(\Lambda _i^n,N(\mathcal{C} ))
+    \end{tikzcd}\]
+    Recall by our first part of the proof that $N(\mathcal{C} )$ satisfies property (2). Thus, since $K$ and $N(\mathcal{C} )$ satisfy (2), the vertical maps are bijective. It suffices to thus show the bottom map is bijective since isomorphisms satisfy 2-out-of-3. By the inductive hypothesis, there is an isomorphism $\sSet(\Delta ^{n-1} ,K)\cong \sSet(\Delta ^{n-1} ,N(\mathcal{C} ))$. Recall from earlier that any face $\partial _j\Delta ^n$ is isomorphic to $\Delta ^{n-1} $, and that the horn decomposes as maps for faces. Since the faces are isomorphic to $\Delta ^{n-1} $ for which the statement follows, the statement must follow for each face, and by universality the statement follows for the horn, completing the proof.
 \end{proof}
+
+Of course, \cref{1.1.2.5} (2) is similar to \cref{1.1.2.1}, but we require it only for inner horns, and we require the filler be unique. 
