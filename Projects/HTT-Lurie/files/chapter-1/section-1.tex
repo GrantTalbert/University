@@ -391,22 +391,34 @@ Before we continue with the text, I want to make a couple remarks that will be u
 	,\]
 	giving the required form. Now assume the inductive hypothesis for $m$. Since $s_m \ldots s_0(i)$ is the unique $m$-simplex, all faces of an $(m+1)$-simplex $\sigma $ must be $s_m \ldots s_0(i)$. By the same logic as above, we immediately see that $\sigma $ is the map $[m+1]\mapsto i$, and thus admits the representation $s_{m+1}  \ldots s_0(i)$, concluding this section of the proof.
 
-	(2) Let $\sigma _j : \partial _j\Delta ^{n-1}  \to K$ and $\sigma _k : \partial _k\Delta ^{n-1}  \to K$ be the maps in question. This can be proven directly, but we use induction
+	(2) Let $\sigma _j : \partial _j\Delta ^{n-1}  \to K$ and $\sigma _k : \partial _k\Delta ^{n-1}  \to K$ be the maps in question. Since $n$ is finite, it suffices to prove the statement for the case $k=j+1$. This step in the proof is a mess of wrangling symbols and I postpone it until later.
+	\begin{enumerate}
+		\item $(i<j)$ Let $p\in[n-1]$ be the vertex such that $d^j(p)=i$. Since $i<j$, this map is the identity on $i$, meaning $i=p$. Similarly, we have $d^{j+1} (p)=i$ implies $i=p$.
+		\item $(j<i)$ bnyuibjhdfs
+	\end{enumerate}
+	
 
 	(3) Keeping notation as before, we clearly have by inducting on the morphism condition for simplicial sets that for each $m$-simplex $\alpha $ in the intersection,
 	\[
-		\sigma _j(\alpha )=\sigma _js_m \ldots s_0(i))=s_0 \ldots s_m \sigma _j(i)=s_0 \ldots s_m \sigma _k(i)= \sigma _k s_m \ldots s_0(i)=\sigma _k(\alpha )
+		\sigma _j(\alpha )=\sigma _js_m \ldots s_0(i))=s_m \ldots s_0 \sigma _j(i)=s_m \ldots s_0 \sigma _k(i)= \sigma _k s_m \ldots s_0(i)=\sigma _k(\alpha )
 	.\]
 \end{proof}
 
-\begin{proposition}\label{1.1.2.13}
-	Call an $n$-tuple $(f_1, \ldots ,f_n)$ of $1$-simplices \emph{composable} if $d_1(f_i)=d_0(f_{i-1} )$ for each $0<i\leq n$. Then the datum of a composable $n$-tuple defines an inner horn $\Lambda_i^n \to K$.
-
-	A filler for an inner horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
+\begin{corollary}\label{1.1.2.13}
+	Let $K$ be a simplicial set.
+	\begin{enumerate}
+		\item Call an $n$-tuple $(f_1, \ldots ,f_n)$ of $1$-simplices \emph{composable} if $d_1(f_i)=d_0(f_{i-1} )$ for each $0<i\leq n$. Then the datum of a composable $n$-tuple defines an inner horn $\Lambda_i^n \to K$. [this statement is wrong its an inductive statement]
+		\item A filler for an inner horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
 			\[
 				\sigma_0(d^j)=\sigma(d^j)
 			.\]	
-\end{proposition}
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	(1) By \cref{1.1.2.12}, it suffices to show the compatibility condition holds for an inner horn.
+
+	(2) By the Yoneda lemma, morphisms $\sigma:\Delta^n \to K$ correspond to a choice of an $n$-simplex $\tau\in K_n$ and a map $1_{[n]} \mapsto \tau$. The restriction $\sigma|\Lambda_i^n$ gives a horn in $K$, and by \cref{1.1.2.12} this amounts to a choice $\tau_j$ for each $j\neq i$ satisfying the compatibiltiy condition, and mapping $d^j \mapsto \tau_j$. By \cref{1.1.2.12}, this horn is thus the given horn $\sigma_0$ precisely when $\sigma|\Lambda_i^n$ and $\sigma_0$ agree on faces, and thus $\sigma$ and $\sigma_0$ agree on ($\neq i$) faces.
+\end{proof}
 
 
 
