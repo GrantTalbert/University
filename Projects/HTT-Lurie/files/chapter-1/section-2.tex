@@ -1,0 +1,47 @@
+\section{The Language of Higher Category Theory}\label{sec1.2}
+
+This section is devoted to defining many elementary 1-categorical notions in an $\infty $-categorical setting. Our main results are the defintions of the opposite category, mapping spaces, the homotopy category, the language of objects, morphisms, and equivalences, homotopy, (full, faithful, essentially surjective) functors, joins, slice and coslice categories, subcategories, initial and terminal objects, limits and colimits, and presentations.
+
+
+\subsection{The Opposite of an $\infty $-Category}
+
+\begin{definition}\label{1.2.1.1}
+	Lurie's definition in \cite{htt} made little sense, so I pulled from \cite[003L]{kerodon}. Let $S$ be a simplicial set. Define $\mathrm{Op} : \boldsymbol{\Delta}  \to \boldsymbol{\Delta} $ by $[n]\mapsto [n]$ and for each $\alpha : [m] \to [n]$, we define $\mathrm{Op} (\alpha) : [m] \to [n]$ by mapping $i\mapsto n-\alpha(m-i)$. We then define $S^{\mathrm{op}} =S\circ \mathrm{Op} $.
+
+	Equivalently, and more concretely, we define $S^{\mathrm{op}} _n=S_n$, and faces and degeneracies are given by
+	\[
+		(d_i : S^{\mathrm{op}} _n \to S^{\mathrm{op}} _{n-1} ) = (d_{n-1} : S_n \to S_{n-1} ),
+	\]
+	\[
+		(s_i : S^{\mathrm{op}} _n \to S^{\mathrm{op}}_{n+1} ) = (s_{n-i} : S_n \to S_{n+1} )
+	.\]
+\end{definition}
+
+\begin{claim}\label{1.2.1.2}
+	Let $S$ be an $\infty $-category. Then so is $S^{\mathrm{op}} $.
+\end{claim}
+\begin{proof}
+	We show for $0<i<n$, $S$ fills horns $\Lambda_i^n \to S$ if and only if $S^{\mathrm{op}} $ fills horns $\Lambda_{n-i}^n$. First, we must of course show $S^{\mathrm{op}} $ is a simplicial set, and since $S\circ \mathrm{Op}^{\mathrm{op}}  : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Set $, it suffices to show faces and degeneracies are indeed described as claimed in \cref{1.2.1.1}. For this, it suffices to show $\mathrm{Op} (d^i)=d^{n-i} $ and $\mathrm{Op} (s^i)=s^{n-i} $ in $\boldsymbol{\Delta} $. We prove this only for faces, since the proof for degeneracies is the same. Let $j\in [n-1]$, and note that by \cref{1.2.1.1},
+	\[
+		\mathrm{Op} (d^i)(j)=n-d^j(n-1-j)=
+		\begin{cases}
+			n-n+1+j,&n-1-j<i\\
+			n-n+1+j-1,&n-1-j\geq i
+		\end{cases}
+	.\]
+	Note that the top case simplifies to $j+1$ and the bottom to $j$. Also note that $n-1-j<i$ if and only if $n-i<j+1$ if and only if $n-i\leq j$. Similarly, $n-1-j \geq i$ if and only if $n-i \geq j+1$ if and only if $n-i > j$. This is precisely the definition of $d^{n-i} $. Thus, the definitions as given are in agreement, and in particular this shows $\mathrm{Op} $ is indeed a functor. Thus, $S^{\mathrm{op}} $ is a simplicial set.
+
+	We now show the horn filling condition. Let $S$ be an $\infty $-category. This first involves showing $\mathrm{Op} : \boldsymbol{\Delta}  \to \boldsymbol{\Delta} $ is an isomorphism. Indeed, it is it's own inverse, since
+	\[
+	(\mathrm{Op} \circ \mathrm{Op} )[n]=[n],\qquad (\mathrm{Op} \circ \mathrm{Op} )(d^i)=\mathrm{Op} (d^{n-i} )=d^{n-(n-i)} =d^i,\]
+\[
+	\qquad (\mathrm{Op} \circ \mathrm{Op} )(s^i)=\mathrm{Op} (s^{n-i} )=s^{n-(n-i)} =s^{i} 
+	.\]
+	By Yoneda, precomposition gives an isomorphism $(\mathrm{Op} ^{\mathrm{op}}  )^* : \Cat (\boldsymbol{\Delta} ^{\mathrm{op}} ,-)\cong \Cat (\boldsymbol{\Delta} ^{\mathrm{op}} ,-)$. Temporarily passing to a higher universe, we may plug $\Set $ into the blank, giving $(\mathrm{Op} ^{\mathrm{op}} )^* : \sSet \cong \sSet $. We have thus reduced the problem to showing for any inner horn $\sigma_0 : \Lambda_i^n \to S^{\mathrm{op}} $, the corresponding map $\sigma_0^{\mathrm{op}} : (\Lambda_i^n)^{\mathrm{op}} \to S$ is also a horn, and that $(\Delta^n)^{\mathrm{op}} \cong\Delta^{\mathrm{op}} $.
+
+	We first show $\Delta^n\cong(\Delta^n)^{\mathrm{op}} $. Actually I dont wanna prove this the map is precompositing by $i\mapsto m-i$ for $i\in[m]$ go do the proof urself ok cool
+
+	We note that restricting this isomorphism along a horn $\Lambda_i^n$ gives $d^j\mapsto d^{n-j} $. In particular, $\Lambda_i^n\cong(\Lambda_{n-i} ^n)^{\mathrm{op}} $ (given by a simple inspection of elements). Since $0<i$, we have $n-i<n$, and since $i<n$, we have $0<n-i$. Thus, $\Lambda_{n-i}^n$ is an inner horn, and admits a filler under $\sigma_0^{\mathrm{op}} $ since $S$ is an $\infty $-category, completing the proof.
+\end{proof}
+
+

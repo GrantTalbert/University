@@ -221,3 +221,74 @@ Previously in \cref{2.1.6}, we defined the \emph{face} of the standard $n$-simpl
 \begin{remark}\label{3.4.15}
     It should be fairly clear to anyone who has taken topology that the boundary of the triangle $\partial|\Delta^2|$ is homeomorphic to the 1-sphere $S^1$. Similarly, it's clear that the boundary of the tetrahedron $\partial|\Delta^3|$ is homeomorphic to the 2-sphere $S^2$. Indeed this generalizes: for $n>1$, there is a homeomorphism $\partial|\Delta^n|\cong S^{n-1}$. For this reason, many authors call $\partial\Delta^n$ the simplicial $n$-sphere.
 \end{remark}
+
+We close this chapter by establishing a collection of important facts about horns. These facts are extremely useful in establishing basic results for \emph{Kan complexes} and \emph{quasi-categories}, which are explored a small amount in \cref{sec4.4}, and play a vital role in homotopy theory and higher category theory.
+
+\begin{definition}\label{3.4.16}
+	Let $X_{\bullet} $ be a simplicial set. A \emph{horn} of $X_{\bullet} $ is a morphism of simplicial sets $\Lambda_i^n \to X_{\bullet} $. A \emph{face} of $X_{\bullet} $ is a morphism of simplicial sets $\partial _i\Delta^n \to K$.
+\end{definition}
+
+\begin{lemma}\label{3.4.17}
+	Let $X_{\bullet} $ be a simplicial set. Then a morphism $\sigma : \Delta^n \to X_{\bullet} $ of simplicial sets is simply a choice of an $n$-simplex $\tau\in X_n$, and mapping $\sigma(1_{[n]} )=\tau$.
+\end{lemma}
+\begin{proof}
+	Indeed, this is precisely the Yoneda lemma applied to simplicial sets.
+\end{proof}
+
+\begin{remark}\label{3.4.18}
+	Since the epi-mono factorization in $\boldsymbol{\Delta} $ given by \cref{2.3.4} is unique, and since elements of $\partial _i\Delta^n$ are simply given by postcomposing $\Delta^{n-1} $ by a coface, uniqueness gives an isomorphism $\partial_i\Delta^n\cong\Delta^{n-1} $ given by simply removing the coface from the composite. Applying \cref{3.4.17}, this gives us the fact that a morphism of simplicial sets $\partial _i\Delta^n \to X_{\bullet} $ is a choice of an $(n-1)$-simplex $\tau\in X_{n-1} $, and mapping $d^i \mapsto \tau$.
+\end{remark}
+
+\begin{terminology}
+	In view of \cref{3.4.16,3.4.17,3.4.18}, we will often refer to morphisms $\Delta^n \to X_{\bullet} $ as $n$-simplices of $X_{\bullet} $, and will refer to morphisms $d^j\mapsto \tau\in X_n$ as \emph{faces} of $X_{\bullet} $.
+\end{terminology}
+
+
+\begin{proposition}\label{3.4.20}
+	A horn $\Lambda_i^n \to X_{\bullet} $ in a simplicial set $X_{\bullet} $ is determined by an $(n-1)$-simplex $\tau_j$ for each $j\neq i,j\in[n]$ such that the compatibility condition $d_{j} (\tau_k)=d_{k-1} (\tau_j)$ for $j<k$ holds. The horn is then given by $d^j \mapsto \tau_j$.
+\end{proposition}
+\begin{proof}
+	The proof is quite lengthy, so we offer only a sketch. In the proof of \cref{3.4.12}, we observed that unions in $\sSet $ are unions in the category-theoretic sense, so one constructs the relevant pullback diagram, which (by \cref{3.4.18}) simplifies the statement to ``the diagram commutes if and only if the compatibility condition holds''. If the diagram commutes, then the condition follows very easily by simplicial identities. For the converse direction, it suffices to show each face $d^j \mapsto \tau_j$ agrees on the intersection
+	\[
+		K_{\bullet} \coloneqq \bigcap_{j\in[n],j\neq i} \partial_j\Delta^n
+	.\]
+	This is shown by proving that $K_{\bullet} $ has $i$ as a unique vertex, and that it has $s_m s_{m-1} \ldots s_0(i)$ as a unique $m$-simplex. We then show the faces agree on $i$ by applying the compatibility condition on the $j$th and $(j+1)$th faces for $i<j$ and $j<i-1$; we then apply the condition for $i-1$ and $i+1$, showing any two faces agree by transitivity. By finiteness of $[n]$, induction gives that all faces agree on $i$, so it suffices to show they agree on degeneracies, which is immediate from the fact that the faces are morphisms of simplicial sets.
+\end{proof}
+
+\begin{definition}\label{3.4.21}
+	Let $\sigma_0: \Lambda_i^n\to X_{\bullet} $ be a horn in $X_{\bullet} $. A \emph{filler} for the horn $\sigma_0$ is an $n$-simplex $\sigma : \Delta^n \to X_{\bullet} $ which agrees with $\sigma_0$ on the horn. More precisely,
+	\[
+		\sigma|_{\Lambda_i^n} =\sigma_0
+	.\]
+	This is often also expressed as the existence of the (not necessarily unique) dotted arrow as indicated
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda_i^n \ar[" \sigma_0 ", r] \ar[hook, d]  & X_{\bullet}  \\
+	\Delta^n \ar[" \sigma "', dotted, ur]  & 
+	\end{tikzcd}\]
+	rendering the diagram commutative.
+\end{definition}
+
+
+\begin{corollary}\label{3.4.22}
+	Let $X_{\bullet} $ be a simplicial set. A filler for a horn $\sigma_0:\Lambda_i^n\to X_{\bullet} $ is an $n$-simplex $\sigma : \Delta^n \to X_{\bullet} $, $1_{[n]} \mapsto \tau\in X_n$, such that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
+			\[
+				\sigma_0(d^j)=\sigma(d^j)
+			.\]	
+\end{corollary}
+\begin{proof}
+	The restriction $\sigma|\Lambda_i^n$ gives a horn in $K$, and by \cref{3.4.20} this amounts to a choice $\tau_j$ for each $j\neq i$ satisfying the compatibiltiy condition, and mapping $d^j \mapsto \tau_j$. Also by \cref{3.4.20}, this horn agrees on (non-$i$) faces with $\sigma_0$ precisely when $\sigma|\Lambda_i^n = \sigma_0$.
+\end{proof}
+
+\begin{exercise}[Challenge]\label{3.4.23}
+	Technically, the reader now has the necessary knowledge to complete the following proof. This proof is fairly nontrivial, and the reader will likely struggle, especially if this is their first exposure to simplicial sets. We present the problem for the ambitious reader, but we do not expect the reader to solve it. A proof can be found in \cite[Prop.~1.1.2.2]{htt}. Let $X_{\bullet} $ be a simplicial set. Prove the following are equivalent:
+	\begin{enumerate}
+		\item There is a small category $\mathcal{C} $ and an isomorphism $N(\mathcal{C} )\cong X_{\bullet} $.
+		\item Every \emph{inner horn} admits a \emph{unique} filler. More precisely, for all $0<i<n$, for all diagrams of solid arrows
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\Lambda_i^n \ar[r] \ar[hook, d]  & X_{\bullet}  \\
+			\Delta^n \ar[dotted, ur]  & 
+			\end{tikzcd}\]
+			there exists a \emph{unique} dashed arrow as indicated, rendering the diagram commutative.
+	\end{enumerate}
+\end{exercise}
+

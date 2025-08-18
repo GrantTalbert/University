@@ -349,22 +349,22 @@ This definition was first proposed by Boardman and Vogt in \cref{BV73}, motivate
 Before we continue with the text, I want to make a couple remarks that will be useful for later.
 
 \begin{proposition}\label{1.1.2.12}
-	Let $K$ be a simplicial set. Specifying a horn $\Lambda_i^n\to K$ amounts to specifying $(n-1)$-simplices $\tau_j$ for all $0\leq j\neq i \leq n$ which satisfy the compatibiltiy condition $d_k(\tau_j)=d_{j-1} (\tau_k)$ for all $k<j$, by defining $d^j\mapsto\tau_j$.
+	Let $K$ be a simplicial set. Specifying a horn $\Lambda_i^n\to K$ amounts to specifying $(n-1)$-simplices $\tau_j$ for all $0\leq j\neq i \leq n$ which satisfy the compatibiltiy condition $d_k(\tau_j)=d_{j-1} (\tau_k)$ for all $k<j$. In particular, the horn is defined by $d^j\mapsto\tau_j$.
 \end{proposition}
 \begin{proof}
 	Recall that unions are pushouts in $\sSet$, meaning morphisms $\Lambda _i^n\to K$ are precisely pushout diagrams
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-		\displaystyle{\bigcap_{j\in[n],j\neq i} \partial _j\Delta ^{n-1} } \ar[hook, r] \ar[hook, d] & \partial _j\Delta ^{n-1} \ar[bend left, ddr] \ar[hook, d]  &  \\
-		\partial _k\Delta ^{n-1} \ar[hook, r] \ar[bend right, drr]  & \displaystyle{\bigcup_{j\in[n],j\neq i} \partial _j\Delta ^{n-1} =\Lambda_i^n}\ar[dashed, dr]  &  \\
+		\displaystyle{\bigcap_{j\in[n],j\neq i} \partial _j\Delta ^{n} } \ar[hook, r] \ar[hook, d] & \partial _j\Delta ^{n} \ar[bend left, ddr] \ar[hook, d]  &  \\
+		\partial _k\Delta ^{n} \ar[hook, r] \ar[bend right, drr]  & \displaystyle{\bigcup_{j\in[n],j\neq i} \partial _j\Delta ^{n} =\Lambda_i^n}\ar[dashed, dr]  &  \\
 	 &  & K
 	\end{tikzcd}\]
 	where the pushout is over all $j\in[n]\setminus \left\{ i \right\} $, but it is hard to draw this many arrows so we only draw two. The case for $n=1$ is trivial, so we assume $n\geq 2$.
 
-	Recall from the proof of \cref{1.1.2.5} that there is an isomorphism of simplicial sets $\partial _j\Delta ^{n} \cong \Delta ^{n} $ by mapping $\delta ^{j} \alpha \mapsto \alpha $, which is an isomorphism by the epi-mono factorization in $\boldsymbol{\Delta} $ (\cite{maclane,ssets}). Note that the map $\delta ^j\mapsto \tau _j$ decomposes as
+	Recall from the proof of \cref{1.1.2.5} that there is an isomorphism of simplicial sets $\partial _j\Delta ^{n} \cong \Delta ^{n-1} $ by mapping $\delta ^{j} \alpha \mapsto \alpha $, which is an isomorphism by the epi-mono factorization in $\boldsymbol{\Delta} $ (\cite{maclane,ssets}). Note that the map $\delta ^j\mapsto \tau _j$ decomposes as
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-		\partial _j\Delta ^{n-1} \ar[" d^j\mapsto \tau _j ", bend left, rr] \ar[" d^j\alpha \mapsto \alpha  "', " \cong  ", r]  & \Delta ^{n-1} \ar[" 1_{[n-1]} \mapsto \tau _j "', r]  & K,
+		\partial _j\Delta ^{n} \ar[" d^j\mapsto \tau _j ", bend left, rr] \ar[" d^j\alpha \mapsto \alpha  "', " \cong  ", r]  & \Delta ^{n-1} \ar[" 1_{[n-1]} \mapsto \tau _j "', r]  & K,
 	\end{tikzcd}\]
-	where we recall that $1_{[n-1]} \mapsto \tau_j$ is a map of simplicial sets by the Yoneda lemma, as noted in the proof of \cref{1.1.2.5}. We review the proof of this in the proof of \cref{1.1.2.13}. Thus, $d^j\mapsto \tau _j$ decomposes as a morphism of simplicial sets, and thus is a morphism of simplicial sets for each $j$. Thus by universality of pushout, and by levelwise computation of universals in functor categories (\cite{maclane}), the claimed morphism $\sigma :\Lambda _i^n\to K$ exists precisely when the above pushout diagram commutes.
+	where we recall that $1_{[n-1]} \mapsto \tau_j$ is a map of simplicial sets by the Yoneda lemma, as noted in the proof of \cref{1.1.2.5}. Thus, $d^j\mapsto \tau _j$ decomposes as a morphism of simplicial sets, and thus is a morphism of simplicial sets for each $j$. Thus by universality of pushout, and by levelwise computation of universals in functor categories (\cite{maclane}), the claimed morphism $\sigma :\Lambda _i^n\to K$ exists precisely when the above pushout diagram commutes.
 
 	First, we prove the easy direction. Let $k<j$, and suppose the diagram commutes, meaning there is indeed a morphism $\sigma : \Lambda _i^n \to K$ with $d^j\mapsto \tau _j$ for each $j\neq i$ in $[n]$. Since $\Lambda _i^n$ is a simplicial subset of $\Delta ^{n} $, faces are given by precomposition. Since $\sigma $ is a morphism of simplicial sets, we have the string of equalities
 	\[
@@ -374,12 +374,12 @@ Before we continue with the text, I want to make a couple remarks that will be u
 
 	Now we prove the converse. Suppose the compatibility condition holds. We do this in three steps:
 	\begin{enumerate}
-		\item We show for $n\geq 2$, the intersection $\bigcap_{j\neq i} \partial _j\Delta ^{n-1} $ has precisely one 0-simplex $i$, and all higher levels $m$ have precisely one $m$-simplex $s_m s_{m-1} \ldots s_0(i)$.
-		\item We show the maps $\partial _{j,k} \Delta ^{n-1} \to K$ agree on $i$.
-		\item We show this implies the maps $\partial_{j,k} \Delta ^{n-1} \to K$ agree on the full intersection.
+		\item We show for $n\geq 2$, the intersection $\bigcap_{j\neq i} \partial _j\Delta ^{n} $ has precisely one 0-simplex $i$, and all higher levels $m$ have precisely one $m$-simplex $s_m s_{m-1} \ldots s_0(i)$.
+		\item We show the maps $\partial _{j,k} \Delta ^{n} \to K$ agree on $i$.
+		\item We show this implies the maps $\partial_{j,k} \Delta ^{n} \to K$ agree on the full intersection.
 	\end{enumerate}
 	
-	(1) First, we show $i$ is the unique 0-simplex. Note that the 0-simplices of $\Delta ^{n-1} =[n-1]$, and the $0$-simplices of each $\partial _j\Delta ^{n-1} $ are thus $d^j[n-1]$. Since $j\neq i$, none of the cofaces $d^j$ skip $i$, meaning $i\in \im d^j$ for all $j$, and thus $j$ is a 0-simplex. Uniqueness follows from the fact that if $k\in[n-1]$ and $k\neq i$, then there exists $\partial _k\Delta ^{n-1} $ in the union, the 0-simplices of which are $d^k[n-1]$, which excludes $k$ by definition.
+	(1) First, we show $i$ is the unique 0-simplex. Note that the 0-simplices of $\Delta ^{n-1} =[n-1]$, and the $0$-simplices of each $\partial _j\Delta ^{n} $ are thus $d^j[n-1]$. Since $j\neq i$, none of the cofaces $d^j$ skip $i$, meaning $i\in \im d^j$ for all $j$, and thus $i$ is a 0-simplex. Uniqueness follows from the fact that if $k\in[n-1]$ and $k\neq i$, then there exists $\partial _k\Delta ^{n} $ in the union, the 0-simplices of which are $d^k[n-1]$, which excludes $k$ by definition.
 
 	Now we show all higher $m$-simplices are the degenerate simplices $s_m \ldots s_0(i)$ by induction. A 1-simplex $\sigma $ must have its faces $d_0(\sigma ),d_1(\sigma )$ be 0-simplices of the union, meaning both its faces must be $i$. Recall that since we are working in a simplicial subset of $\Delta ^n$, faces are precomposition with cofaces, so this implies
 	\[
@@ -391,10 +391,15 @@ Before we continue with the text, I want to make a couple remarks that will be u
 	,\]
 	giving the required form. Now assume the inductive hypothesis for $m$. Since $s_m \ldots s_0(i)$ is the unique $m$-simplex, all faces of an $(m+1)$-simplex $\sigma $ must be $s_m \ldots s_0(i)$. By the same logic as above, we immediately see that $\sigma $ is the map $[m+1]\mapsto i$, and thus admits the representation $s_{m+1}  \ldots s_0(i)$, concluding this section of the proof.
 
-	(2) Let $\sigma _j : \partial _j\Delta ^{n-1}  \to K$ and $\sigma _k : \partial _k\Delta ^{n-1}  \to K$ be the maps in question. Since $n$ is finite, it suffices to prove the statement for the case $k=j+1$. This step in the proof is a mess of wrangling symbols and I postpone it until later.
+	(2) Let $\sigma _j : \partial _j\Delta ^{n}  \to K$ and $\sigma _k : \partial _k\Delta ^{n}  \to K$ be the maps in question. Since $n$ is finite, it suffices to prove the statement for the case $k=j+1$, along with the additional case $k=i+1$ and $j=i-1$.
 	\begin{enumerate}
-		\item $(i<j)$ Let $p\in[n-1]$ be the vertex such that $d^j(p)=i$. Since $i<j$, this map is the identity on $i$, meaning $i=p$. Similarly, we have $d^{j+1} (p)=i$ implies $i=p$.
-		\item $(j<i)$ bnyuibjhdfs
+		\item $(i<j)$ Since $i<j$, precomposing by $d_j$ and $d_{j+1} $ is the identity on $i : [0] \to [n-1]$, so undoing this precomposition gives us $i$ as an $(n-1)$ simplex in $\Delta^{n-1} $. In particular, it suffices to consider the maps $\sigma_j' : \Delta^{n-1}  \to K$ and $\sigma_{j+1} ' : \Delta^{n-1}  \to K$ given by inverting the isomorphism $\partial _j\Delta^{n}\cong \Delta^{n-1} $. The $i$th vertex of the simplices $\tau_j = \sigma_j'(1_{n-1} )$ and $\sigma_{j+1}' (1_{n-1} )$ are the respective images of $i$ in $K$. The compatibility condition gives us $d_j(\tau_{j} )=d_{j} (\tau_{j+1} )$. Note that
+			\[
+				d_j(\tau_j)=d_j\sigma_j'(1)=\sigma_j'(d^j)
+			.\]
+			Since $i<j$, recall that precomposing by $d^j$ is an identity on the $i$th vertex, and by the same logic since $i<j+1$, we must have that the $j$th face preserves the $i$th vertex of $\tau_{j+1} $. However, since $d_j(\tau_j)=d_j(\tau_{j+1} )$ is a strict equality, they must have the \emph{same} $i$th vertex. Thus, they agree on $i$,
+		\item $(j<i-1)$ The logic for this part is the same as the above part, except $d_j$ and $d_{j+1} $ are no longer the identity on $i$. Since $j,j+1< i-1$, they both act the same way on it, mapping $i-1$ to $i$. The proof is concluded from this point in the same way as above.
+	\item $(j=i-1)$ We must now show $\sigma_{i-1} $ and $\sigma_{i+1} $ agree on $i$. Since $i-1<i<i+1$, we have that $d_{i-1} $ maps $i-1\mapsto i$, and $d_{i+1} $ maps $i\mapsto i$. Thus, we must show the $(i-1)$th vertex of $\tau_{i-1} $ is the $i$th vertex of $\tau_{i+1} $, by the same logic as above. The coherence condition gives us that $d_{i-1} (\tau_{i+1} )=d_i(\tau_{i-1} )$. Since $i-1<i$, the $(i-1)$th vertex of $\tau_{i-1} $ is preserved. Since $i-1<i+1$, the $i$th vertex of $\tau_{i+1} $ corresponds to the $(i-1)$th vertex of $d_{i-1} (\tau_{i+1} )$, since we drop the original $(i-1)$th vertex, and the other vertices shift down. The strict equality concludes the proof.
 	\end{enumerate}
 	
 
@@ -405,23 +410,160 @@ Before we continue with the text, I want to make a couple remarks that will be u
 \end{proof}
 
 \begin{corollary}\label{1.1.2.13}
-	Let $K$ be a simplicial set.
-	\begin{enumerate}
-		\item Call an $n$-tuple $(f_1, \ldots ,f_n)$ of $1$-simplices \emph{composable} if $d_1(f_i)=d_0(f_{i-1} )$ for each $0<i\leq n$. Then the datum of a composable $n$-tuple defines an inner horn $\Lambda_i^n \to K$. [this statement is wrong its an inductive statement]
-		\item A filler for an inner horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
+	Let $K$ be a simplicial set. A filler for a	 horn $\sigma_0:\Lambda_i^n\to K$ is an $n$-simplex $\tau\in K_n$ such that the morphism of simplicial sets $\sigma:1_{[n]} \mapsto \tau$ agrees with the horn $\Lambda_i^n$ in the sense that for each $j\neq i$ and each face $d^j : [n-1] \to [n]$,
 			\[
 				\sigma_0(d^j)=\sigma(d^j)
 			.\]	
-	\end{enumerate}
 \end{corollary}
 \begin{proof}
-	(1) By \cref{1.1.2.12}, it suffices to show the compatibility condition holds for an inner horn.
-
-	(2) By the Yoneda lemma, morphisms $\sigma:\Delta^n \to K$ correspond to a choice of an $n$-simplex $\tau\in K_n$ and a map $1_{[n]} \mapsto \tau$. The restriction $\sigma|\Lambda_i^n$ gives a horn in $K$, and by \cref{1.1.2.12} this amounts to a choice $\tau_j$ for each $j\neq i$ satisfying the compatibiltiy condition, and mapping $d^j \mapsto \tau_j$. By \cref{1.1.2.12}, this horn is thus the given horn $\sigma_0$ precisely when $\sigma|\Lambda_i^n$ and $\sigma_0$ agree on faces, and thus $\sigma$ and $\sigma_0$ agree on ($\neq i$) faces.
+	By the Yoneda lemma, morphisms $\sigma:\Delta^n \to K$ correspond to a choice of an $n$-simplex $\tau\in K_n$ and a map $1_{[n]} \mapsto \tau$. The restriction $\sigma|\Lambda_i^n$ gives a horn in $K$, and by \cref{1.1.2.12} this amounts to a choice $\tau_j$ for each $j\neq i$ satisfying the compatibiltiy condition, and mapping $d^j \mapsto \tau_j$. By \cref{1.1.2.12}, this horn is thus the given horn $\sigma_0$ precisely when $\sigma|\Lambda_i^n$ and $\sigma_0$ agree on faces, and thus $\sigma$ and $\sigma_0$ agree on ($\neq i$) faces.
 \end{proof}
 
 
 
-\subsection{Equivalences of Topological Categories}
+\subsection{Equivalences of Topological Categories}\label{sec1.1.3}
 
-We return for a short time to our simpler notion of topological categories, in order to get a feel for what an $\infty $-categorical notion of an \emph{equivalence of categories} should be.
+We return for a short time to our simpler notion of topological categories, in order to get a feel for what an $\infty $-categorical notion of an \emph{equivalence of categories} should be. Not all Kan complexes are isomorphic to singular sets, and similarly not all CW complexes are homeomorphic to geometric realizations of simplicial sets. However, these statements \emph{are all true} if instead of working with isomorphisms, we work with homotopy equivalences. We want to define a \emph{functor} $F : \mathcal{C}  \to \mathcal{D} $ which can be viewed as an equivalence in the same manner. Of course, the naive way to do this is to require that $F$ induce isomorphisms of mapping spaces, meaning it is an equivalence of topological categories.
+
+\begin{definition}\label{1.1.3.1}
+	A functor $F : \mathcal{C}  \to \mathcal{D} $ between topological categories is a \emph{strong equivalence} if it is an equivalence in the sense of enriched category theory, meaning the induced continuous maps $F : \Map_\mathcal{C}  (x,y) \to \Map_\mathcal{D}  (F(x),F(y))$ are isomorphisms, and each $d\in \mathcal{D} $ is isomorphic to some $F(c)$ with $c\in \mathcal{C} $.
+\end{definition}
+
+In classical category theory, this would be a perfectly fine definition, but for our cases it is still too strong. In particular, the induced morphisms between topological spaces are \emph{isomorphisms}, not homotopy equivalences, which we would expect them to be. The obvious next idea is to recall some model category theory. Quillen equivalent model categories are generally considered to have the same homotopy theory, but the Quillen functors need not actually be equivalences; they need only lower to equivalences of the homotopy categories. Since geometric realization and the singular complex form a Quillen equivalence bewteen $\sSet $ and $\Top $, this line of thought is very promising. However, this requires a definition of a homotopy category. To this end, we propose \cref{1.1.3.2}, which seems quite reasonable given that we are working with \emph{weak} homotopy equivalences. Recall that $\pi_0 : \Top  \to \Set $ maps topological spaces to their set of path components.
+
+\begin{definition}\label{1.1.3.2}
+	Let $\mathcal{C} $ be a topological category. The \emph{homotopy category} $\hh\mathcal{C} $ of $\mathcal{C} $ is defined by
+	\begin{itemize}
+		\item $\Obj(\hh\mathcal{C} ) =\Obj(\mathcal{C} ) $;
+		\item $\hh\mathcal{C} (x,y)=\pi_0 \Map _\mathcal{C} (x,y)$;
+	\end{itemize}
+	and composition is inherited by functoriality of $\pi_0$. In particular, $\hh\mathcal{C} =\im\pi_0$.
+\end{definition}
+
+\begin{example}\label{1.1.3.3}
+	Let $\mathcal{C} $ be the category of CW complexes, with mapping spaces given by the $k$-ification of the compact-open topology. The homotopy category thereof is quite important, is denoted by $\mathcal{H} $, and is called the \emph{homotopy category of spaces}.
+\end{example}
+
+Using $\mathcal{H} $, we can rewrite \cref{1.1.3.2} in a useful way. Recall:
+
+\begin{definition}\label{1.1.3.4}
+	A map $f : X \to Y$ of topological spaces is a \emph{weak homotopy equivalence} if it induces a bijection $\pi_0(f): \pi_0(X) \to \pi_0(Y)$ on path components, and isomorphisms on all homotopy groups
+	\[
+		\pi_i(f) : \pi_i(X,x) \to \pi_i(Y,f(x))
+	.\]
+\end{definition}
+
+Classical homotopy theory tells us for each $X\in\mathcal{C} \mathcal{G} $, there is a CW complex $X'$ and a weak homotopy equivalence $\varphi : X' \to X$. This space $X'$ is well-defined up to canonical weak homotopy equivalence, meaning there is a functor $\theta : \mathcal{C} \mathcal{G}  \to \mathcal{H} $ given by  $X\mapsto [X]\ni X'$. This is precisely the localization functor, meaning it is universal with respect to inverting weak homotopy equivalences. Recall that lax monoidal functors $F : \mathcal{C}  \to \mathcal{C} '$ induce 2-functors $F : \mathcal{C} \text{-} \Cat  \to \mathcal{C} '\text{-} \Cat $, and since $\theta$ fairly clearly preserves products, $\theta$ induces a 2-functor $\Cat_{\text{top} } \to \mathcal{H} \text{-} \Cat $. In particular, topological categories $\mathcal{C} $ are mapped to $\mathcal{H} $-enriched categories. It seems reasonable, since $\theta$ is localization, to define the image of $\mathcal{C} $ as the \emph{homotopy category} $\hh\mathcal{C} $ of $\mathcal{C} $. Recalling how the functor $\Cat _{\text{top} } \to \mathcal{H} \text{-} \Cat $ works, this gives
+\begin{enumerate}
+	\item $\Obj(\hh\mathcal{C} ) =\Obj(\mathcal{C} ) $;
+	\item For $x,y\in \mathcal{C} $, we have
+		\[
+			\Map _{\hh\mathcal{C} } (x,y) =[\Map_\mathcal{C} (x,y)]
+		,\]
+		where we continue to use the equivalence class $[-]$ notation to denote a choice of a weakly homotopic equivalent CW complex.
+	\item Composition is given by functoriality of $\theta : \mathcal{C} \mathcal{G}  \to \mathcal{H} $.
+\end{enumerate}
+Note here that $\theta$ maps morphisms to their (regular) homotopy classes. For a refresher on enriched category theory, we recommed chapter 3 of \cite{cathtpy}, but for a more general account of the theory see \cite{kelly05}.
+
+\begin{intuition}\label{1.1.3.5}
+	Departing slightly from the book here to improve my intuition. $\theta$ is simply localization at the class of weak homotopy equivalences, which is the class of weak equivalences in $\Top $. By Whitehead's theorem, we may choose $\mathcal{H} $ to have CW complexes as objects up to equivalence of categories. Of course, between cofibrant and fibrant objects, this agrees with the regular notion of a homotopy equivalence. In particular, each $\pi_n(X,x)$ identifies homotopic maps, making homotopy equivalence a stronger condition than weak homotopy equivalence.
+\end{intuition}
+
+\begin{remark}\label{1.1.3.6}
+	The equivalence of our definition of $\hh\mathcal{C} $ by $\theta$ and by \cref{1.1.3.2} follows by noting that there is a canonical isomorphism $\pi_0(X)\cong \Map_\mathcal{H} (*,[X])$, recovering $\hh\mathcal{C} $ as the underlying category of the $\mathcal{H} $-enriched version.
+\end{remark}
+
+Taking our cue from model category theory, we now think to define an equivalence as a functor that descends to an equivalence of categories $\hh\mathcal{C} \simeq\hh\mathcal{D}$.
+
+\begin{definition}\label{1.1.3.7}
+	Let $F : \mathcal{C}  \to \mathcal{D} $ be a functor between topological categories. We say $F$ is a \emph{weak equivalence} if the induced functor $\hh F : \hh\mathcal{C} \to \hh\mathcal{D} $ is an equivalence of $\mathcal{H} $-categories. Equivalently, $F$ is an equivalence if and only if
+	\begin{enumerate}
+		\item for each $x,y\in \mathcal{C} $, the map $\Map _\mathcal{C} (x,y)\to \Map _\mathcal{D} (F(x),F(y))$ is a weak homotopy equivalence;
+		\item Each $d\in \mathcal{D} $ is isomorphic to $F(c)$ for some $c\in \mathcal{C} $.
+	\end{enumerate}
+\end{definition}
+
+Here we recall that an equivalence of $\mathcal{H} $-categories must induce isomorphisms on hom-objects, and since $\theta$ inverts weak homotopy equivalences, the maps can equivalently be weak homotopy equivalences in $\mathcal{C} \mathcal{G} $. Weak equivalences are the correct notion of equivalences in the context of higher category theory. We will thus refer to them simply as \emph{equivalences} as we continue. Of course, two topological categories are \emph{equivalent} if an equivalence between them exists. However, before we continue, note that the homotopy category of a topological category $\mathcal{C} $ does \emph{not} determine $\mathcal{C} $ up to equivalence.
+
+\subsection{Simplicial Categories}\label{sec1.1.4}
+
+Now that we have a good notion of equivalences of topological categories, we want to show the theories of quasi-categories and topological categories are equivalent. It will be extremely beneficial to introduce the theory of \emph{simplicial categories}, which is not only related to both approaches, but will also motivate definitions similar to those of \cref{sec1.1.3} for quasi-categories.
+
+\begin{definition}\label{1.1.4.1}
+	A \emph{simplicial category} is a $\sSet $-category; that is, it is a category enriched over the category of simplicial sets. We denote the category of simplicial categories by $\mathrm{s} \Cat $.
+\end{definition}
+
+\begin{remark}\label{1.1.4.2}
+	Every simplicial category $\mathcal{C} $ forms a simplicial object $\mathcal{C} _{\bullet} $ in $\Cat $ by taking $\Obj(\mathcal{C}_n )=\Obj(\mathcal{C} ) $, and $\mathcal{C} _n(x,y)=\mathcal{C} (x,y)_n$. Faces and degeneracies are defined by the action of the faces and degeneracies of $\mathcal{C} $ within its hom-objects. Conversely, simplicial objects $\mathcal{C} _{\bullet} $ in $\Cat $ give rise to simpliical categories $\mathcal{C} $ \emph{precisely when} $\Obj(\mathcal{C}_n )=\Obj(\mathcal{C} _m)  $ for all $n,m$. We say this means the \emph{underlying simplicial set} of objects is constant. Also note that every category is a simplicial category by considering the discrete simplicial set on each hom-set.
+\end{remark}
+
+Of course, the Quillen adjunction $\left| - \right| \dashv\Sing : \sSet \to \mathcal{C} \mathcal{G} $ makes the relationship between topological and simplicial categories simple to describe. Both of these functors preserve finite products, and thus are lax monoidal functors. Thus, given a simplicial category $\mathcal{C} $, there is a topological category $\left| \mathcal{C}  \right| $ given by
+\begin{itemize}
+	\item $\Obj(\mathcal{C} ) =\Obj(\left| \mathcal{C}  \right| ) $;
+	\item For all $x,y\in \mathcal{C} $, $\Map _{\left| \mathcal{C}  \right| } (x,y)=\left| \Map _\mathcal{C} (x,y) \right| $.
+\end{itemize}
+We also obtain for each topological category $\mathcal{C} $ a simplicial category $\Sing\mathcal{C} $ given in the same way by
+\begin{itemize}
+	\item $\Obj(\mathcal{C} ) =\Obj(\Sing \mathcal{C} ) $;
+	\item For all $x,y\in \mathcal{C} $, $\Map _{\Sing \mathcal{C} } (x,y)=\Sing(\Map _\mathcal{C} (x,y))$.
+\end{itemize}
+In particular, $\left| - \right| \dashv\Sing : \sSet  \to \mathcal{C} \mathcal{G} $ raises to an adjunction $\left| - \right| \dashv\Sing : \mathrm{s} \Cat  \to \Cat _{\text{top} } $. To show the theories of topological and simplicial categories are equivalent, since we have modeled them homotopy-theoretically, we once again turn to homotopy theory. We previously defined weak equivalences of topological categories, so now we would like to define them between simplicial categories. We recall that weak equivalences between simplicial sets are maps $f : X \to Y$ which induce weak homotopy equivalences $\left| f \right| : \left| X \right|  \to \left| Y \right| $. Inverting these gives a homotopy category which we also denote $\mathcal{H} $, since the Quillen equivalence $\left| - \right| \dashv\Sing$ defines an equivalence of categories between the homotopy categories for $CW$ complexes and for simplicial sets.
+
+We can once again define $\hh\mathcal{C} $ for simplicial categories by applying the functor $\sSet \to \mathcal{H} $ and considering the induced $\mathcal{H} $-category. There are canonical isomorphisms $\hh\mathcal{C} \cong \hh\left| \mathcal{C}  \right| $ and $\hh \mathcal{D} \cong \hh\Sing \mathcal{D} $, meaning that our choice of notation offers little risk of confusion. It is at this point fairly obvious that topological categories and simplicial categories are equivalent, but we may finalize this fact by introducing the following definition.
+
+\begin{definition}\label{1.1.4.3}
+	A functor $F : \mathcal{C}  \to \mathcal{D} $ between simplicial categories is an \emph{equivalence} if $\hh F : \hh\mathcal{C}  \to \hh\mathcal{D} $ is an equivalence of $\mathcal{H} $-categories.
+\end{definition}
+
+In particular, since $\hh \mathcal{C} \cong \hh\left| \mathcal{C}  \right| $, a functor $F : \mathcal{C}  \to \mathcal{D} $ is an equivalence if and only if the geometric realization $\left| F \right| : \left| \mathcal{C}  \right|  \to \left| \mathcal{D}  \right| $ is an equivalence. Even better, we note by these remarks that in the adjunction $\left| - \right| \dashv\Sing : \mathrm{s} \Cat  \to \Cat _{\text{top} } $, the unit and counit maps
+\[
+	\mathcal{C} \to \Sing \left| \mathcal{C}  \right| ,\qquad \left| \Sing \mathcal{C}  \right| \to \mathcal{C} 
+\]
+induce \emph{isomorphisms of homotopy categories}. Not only is this exactly what we expect a Quillen equivalence to look like (without defining a whole model structure), but we also note that we may freely replace topological categories with simplicial categories up to equivalence, giving us our equivalence of models for $\infty $-categories.
+
+\subsection{Comparing $\infty $-Categories with Simplicial Categories}\label{sec1.1.4}
+
+In \cref{sec1.1.4}, we showed simplicial categories and topological categories were equivalent as models for $\infty $-categories. Showing this amounted to showing that there is an adjunction which is similar to a Quillen equivalence in that it preserves (weak) equivalences, and that the unit and counit are natural (weak) equivalences, allowing us to replace topological categories $\mathcal{C} $ with simplicial categories $\Sing \mathcal{C} $, and simplicial categories $\mathcal{C} $ with topological categories $\left| \mathcal{C}  \right| $, up to equivalence. Our proof that simplicial categories are equivalent to quasi-categories should be similar. I also remark here that these equivalences \emph{are indeed Quillen equivalences}, but since this first section of the book is more of an overview, we're glossing over many of the details, including (co)fibrations. Our proof will involve the \emph{simplicial nerve functor} $N : \mathrm{s} \Cat  \to \sSet $, and the \emph{Joyal rigification functor} $\mathfrak{C} : \sSet  \to \mathrm{s} \Cat $. Credit to the $n$Lab (\cite{nlab}) for the name of $\mathfrak{C} $.
+
+Recall that the nerve of a category $\mathcal{C} $ has $n$-simplices $N(\mathcal{C} )_n$ given by chains of $n$ composable morphisms. This is equivalently viewed as a functor $[n]\to \mathcal{C} $, since the datum of such a functor amounts to a choice of $n+1$ objects, and $n$ composable morphisms between them. Also recalling that $n$-simplices are precisely morphisms $\Delta^n \to N(\mathcal{C}) $, we can characterize $n$-simplices via the natural isomorphism
+\[
+	\sSet (\Delta^n,N(\mathcal{C} ))\cong \Cat ([n],\mathcal{C} )=N(\mathcal{C} )_n
+.\]
+We would like to promote this to a relationship between simplicial categories. Rather than waste time trying to figure out how to do this, we are just going to note that we end up with the wrong idea. The promotion we get does not involve the simplicial structure of $\mathcal{C} $, and instead it's more suitable to replace $[n]$ with a different category $\mathfrak{C} [\Delta^n]$.
+
+\begin{definition}\label{1.1.5.1}
+	Let $J$ be a finite nonempty linearly ordered set. The simplicial category $\mathfrak{C} [\Delta^J]$ is defined by
+	\begin{enumerate}
+		\item The objects of $\mathfrak{C} [\Delta^J]$ are the elements of $J$.
+	\item For $i,j\in J$, mapping spaces are given by
+		\[
+			\Map_{\mathfrak{C} [\Delta^J]} (i,j)=
+			\begin{cases}
+				\varnothing ,&j<i\\
+				N(P_{i,j} ),&i\leq j
+			\end{cases}
+		,\]
+		where $P_{ij} $ is the poset
+		\[
+			P_{ij} =\left\{ I\subseteq J\mid i,j\in I \land (\forall k\in I)(i\leq k\leq j)\right\} 
+		\]
+		ordered by inclusion. Note that elements $I$ have $\min I = i$ and $\max I = j$.
+	\item If a mapping space is empty then a composition morphism to/from it is the empty map, so let $i_0 \leq \ldots \leq i_n$. Composition morphisms
+		\[
+			\Map _{\mathfrak{C} [\Delta^j]} (i_0,i_1)\times \cdots \times \Map_{\mathfrak{C} [\Delta^J]} (i_{n-1} ,i_n)\to \Map _{\mathfrak{C} [\Delta^J]} (i_0,i_n)
+		\]
+		are given by taking the nerve functor on the morphism of poset categories
+		\[
+			P_{i_0,i_1} \times \cdots \times P_{i_{n-1} ,i_n} \to P_{i_0,i_n} ,
+		\]
+		\[
+			(I_1, \ldots ,I_n) \mapsto \bigcup_{j\in [n]} I_j
+		.\]
+	\end{enumerate}
+\end{definition}
+
+Lurie offers a short description of the topological category $\left| \mathfrak{C} [\Delta^n] \right| $ to provide some intuition. The objects of $\left| \mathfrak{C} [\Delta^n] \right| $ are the objects of $\mathfrak{C} [\Delta^n]$ are the objects of $[n]$. The space $\Map_{\left| \mathfrak{C} [\Delta^n ]\right| } (i,j)$ is homeomorphic to a cube when $i\leq j$, and empty otherwise. It may be identified with the set of functions $p : \left\{ k\in[n]\mid i\leq k\leq j \right\}  \to I$ such that $p(i)=p(j)=1$, and composition is given by concatenation of functions.
+
+Now we try to understand the simplicial category $\mathfrak{C} [\Delta^n]$ itself, and how it relates to $[n]$. Once again, $\mathfrak{C} [\Delta^n]$ and $[n]$ have the same objects. In $[n]$, there are unique morphisms $i\to j$ for $i\leq j$, and composites are defined by virtue of this uniqueness. We denote by $q_{ij} $ the morphism $i\to j$, and note that $q_{jk} \circ q_{ij} =q_{ik}$ for $i\leq j\leq k$.
+
+In $\mathfrak{C} [\Delta^n]$, we have vertices $p_{ij} \in \Map _{\mathfrak{C} [\Delta^n]} (i,j)$ for each $i\leq j$ given by $\left\{ i,j \right\} \in P_{ij} $. Of course $p_{jk} \circ p_{ij} =\left\{ i,j,k \right\} \neq p_{ik} $ for $i\leq j\leq k$, unless we have a degenerate case with either $i=j$ or $j=k$.
