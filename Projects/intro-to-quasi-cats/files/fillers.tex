@@ -1,0 +1,75 @@
+\section{Horns}
+
+Now that we understand some basic definitions, we would like to learn about \emph{horns}. Horns are fundamental to the notion of a quasi-category, but they are nontrivial objects to understand. We begin with the notion of a simplicial subset.
+
+\begin{definition}\label{4.1}
+	Let $X$ be a simplicial set. A \emph{simplicial subset} of $X$ is a simplicial set $Y$ such that
+	\begin{itemize}
+		\item $Y_n \subseteq X_n$ for all $n$;
+		\item The faces and degeneracies of $Y$ agree with those of $X$:
+			\[
+				d_i^X|Y_n = d_i^Y,\qquad s_i^X|Y_n=s_i^Y
+			.\]
+	\end{itemize}
+	If $Y$ is a simplicial subset of $X$, we write $Y\subseteq X$.
+\end{definition}
+
+Note that \cref{4.1} tells us what the faces and degeneracies of a simplicial subset must be. To construct a simplicial subset, we only need to specify the sets $Y_n$, and the subset condition gives us the faces and degeneracies for free.
+
+\begin{warning}\label{4.2}
+	Not all choices of subsets $Y_n\subseteq X_n$ yield a simplicial subset. For example, let $X_n=\mathbb{Z} $ for all $n$, and choose $Y_n=X_n$ for all $n\neq 1$, and $Y_1=\varnothing $. There must be a degeneracy map $s_0 : Y_0 \to Y_1$, but there are no functions with an empty codomain. In particular, one must check the images of the faces and degeneracies lie within the sets $Y_n$.
+\end{warning}
+
+\begin{definition}\label{4.3}
+	Let $\alpha : X \to Y$ be a morphism of simplicial sets. Then there is a subsimplicial set $\im \alpha \subseteq Y$, called the \emph{image of $\alpha $}, with sets given by
+	\[
+		(\im \alpha )_n=\im (\alpha _n : X_n \to Y_n)
+	,\]
+	where we define $\alpha _n$ by recalling \cref{??}.
+\end{definition}
+
+Many important simplicial sets arise as simplicial subsets of the standard $n$-simplicial set $\Delta ^n$. The first one is the \emph{face}.
+
+\begin{definition}\label{4.4}
+	Note by the Yoneda lemma that postcomposition by a coface gives a morphism of simplicial sets $(d^i)_*: \Delta ^{n-1}  \to \Delta^n$. Define the $i$th face of $\Delta ^n$, denoted by $\partial _i\Delta ^n$, as the image $\im (d^i)^*$.
+\end{definition}
+
+\begin{remark}\label{4.5}
+	An important thing to note about the face is that since the epi-mono factorization in $\boldsymbol{\Delta} $ is unique, there is an isomorphism $\Delta ^{n-1} \cong \partial _i\Delta ^n$ given in one direction by postcomposing by $d^i$, and in the other by simply removing it. Under this isomorphism, the $(n-1)$-simplex $1_{[n-1]} \in\Delta ^{n-1}_{n-1} $ corresponds to the $(n-1)$-simplex $d^i\in \partial _i\Delta ^{n} $. By \cref{??} and the Yoneda lemma, morphisms $\partial _i\Delta ^{n} \to X$ are precisely morphisms $\Delta ^{n-1} \to X$, which are precisely $(n-1)$-simplices $\tau \in X_{n-1} $. Since morphisms $\Delta ^{n-1} \to X$ are given by $1_{[n-1]} \mapsto \tau$, we have that morphisms $\partial _i\Delta ^n$ are given by $d^i\mapsto \tau $.
+\end{remark}
+
+\begin{proposition}\label{4.6}
+	Let $\left\{ X^i \right\}_{i\in I} $ be a collection of simplicial sets $X^i$ such that their faces and degeneracies all agree with each other on levelwise intersections:
+	\[
+		d^i_k| \bigcap_{i\in I} X^i_n = d^j_k | \bigcap_{i\in I} X^i_n
+	\]
+	for all $i,j\in I$ and $d^i_k : X^i_n \to X^i_{n-1} $ the $k$th face. Then the \emph{levelwise union}
+	\[
+		\bigcup_{i\in I} X^i
+	\]
+	is a simplicial set, and $X^i$ is a simplicial subset for all $i$.
+\end{proposition}
+\begin{proof}
+	Indeed, by \cite[\S5.3~Thm.~1]{ml}, limits in functor categories such as $\sSet $ are computed levelwise. Since the union of sets is the pushout along inclusions of the intersection into component sets
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X^i_n \cap X^j_n \ar[hook, r] \ar[hook, d]  & X^i_n \ar[d]  \\
+	X^j_n \ar[r]  & X^i_n \cup X^j_n
+	\end{tikzcd}\]
+	(and this generalizes for arbitrary unions), the statement is proven by cocompleteness of $\Set $.
+\end{proof}
+
+The construction of the union of simplicial sets yields a simplicial set of fundamental importance: the \emph{horn}.
+
+\begin{definition}\label{4.7}
+	Let $0\leq i\leq n$. The $i$th horn $\Lambda _i^n$ is defined as the simplicial subset
+	\[
+		\Lambda _i^n \coloneqq \bigcup_{j\in[n],j\neq i} \partial _j\Delta ^{n} \subseteq \Delta ^n
+	.\]
+\end{definition}
+
+\begin{terminology}\label{4.8}
+	Let $K$ be a simplicial set, and $\sigma _0 : \Lambda _i^n \to K$ a morphism of simplicial sets. We often refer to $\sigma _0$ as a \emph{horn in $K$}. Similarly, we refer to a map $\partial _i\Delta ^n\to K$ as a \emph{face} of $K$.
+\end{terminology}
+
+For geometric intuition for horns, see \cite[\S3.4]{ssets}. We continue 
+

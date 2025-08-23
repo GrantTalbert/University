@@ -1,0 +1,26 @@
+\section{Motivation}
+
+Consider a topological space $X$. We are often concerned not with studying $X$ up to isomorphism, but rather up to weak homotopy equivalence, called the \emph{homotopy type} of $X$. Recall that:
+
+\begin{definition}\label{2.1}
+	A \emph{weak homotopy equivalence} is a continuous map $f : X \to Y$ between topological spaces that induces a bijection on path components $\pi _0(f) : \pi _0(X)\cong \pi _0(Y)$, and for each $i>0$ and $x\in X$, induces an isomorphism of groups
+	\[
+		\pi _i(f): \pi _i(X,x) \cong \pi _i(Y,f(x))
+	,\]
+	where we recall that
+	\[
+		\pi _i(X,x) = \Top _*((S^n,0),(X,x)) /\tildesim 
+	.\]
+\end{definition}
+
+A more succinct way of expressing the homotopical information of a topological space $X$ is via its fundamental $n$-groupoids. Recall that a groupoid is a category in which all morphisms are invertible. Define $\Pi _1(X)$ to be the category where objects are given by points in $X$, and morphisms are given by homotopy classes of paths between these points.
+
+The reason we cannot consider the paths themselves to be the morphisms is since path concatenation is \emph{not associative}, but since it is assocaitive up to homotopy, we get a category structure by considering homotopy classes of paths. However, we \emph{want} to be able to consider the paths themselves, that way we get access to more information. For this to be possible, we have to work in a \emph{weak 2-category}, which is a type of 2-category, meaning we not only have objects and (1-)morphisms, but we have \emph{2-morphisms}, which are morphisms between our 1-morphisms. The relevance is that in a weak 2-category, compositions need not be well-defined (and to this end, need not be associative), but rather they only need to be well-defined up to 2-isomorphism.
+
+The way this is relevant to our example is we can construct a 2-groupoid $\Pi _2(X)$, where 1-morphisms are paths, and 2-morphisms are homotopies. Since concatenation of paths is well-defined up to homotopy, and homotopies always admit inverses, this gives us our desired structure. \emph{However}, this new structure gives us a new issue: just like concatenation of paths, composition of homotopies is \emph{not associative}. It is only associative up to homotopy, often called a higher homotopy. We thus cannot consider actual homotopies as our 2-morphisms, but must instead consider homotopy \emph{classes} as our 2-morphisms. In attempting to run way from our original problem, we have encountered it again, just in a new form.
+
+Attempting to add higher homotopies will clearly yield the same issue. The fundamental $n$-groupoid $\Pi _n(X)$ has objects given by $X$, 1-morphisms given by paths, $k$-morphisms given by homotopies of $(k-1)$-morphisms for $1<k<n$, and $n$-morphisms given by homotopy classes of homotopies of $(n-1)$-morphisms. We always run into the issue that the highest level has to be homotopy \emph{classes}, rather than just homotopies. It would be really nice if we could take some sort of limit as $n\to \infty $, obtaining the \emph{fundamental $\infty $-groupoid} $\Pi _\infty (X)$, which has $n$-morphisms for \emph{all} $n\in\mathbb{N} $. Indeed, this is possible, and it is the goal of this talk to illustrate the construction of not just $\infty $-groupoids, but $(\infty ,1)$-categories, using the theory of quasi-categories.
+
+Before we continue, some remarks on what to expect from this talk. Constructing categories which have $n$-morphisms for all $n$ is extremely difficult, and is simplified greatly by instead constructing $(\infty ,n)$-categories, which have all $k$-morphisms, but for $k>n$, these morphisms are invertible. Categories of this form, especially $(\infty ,1)$-categories, are extremely important in modern homotopy theory, and for this reason the term ``$\infty $-category'' has come to mean the same thing as ``$(\infty ,1)$-category''. A category without the invertibility restriction is usually called an $\omega $-category, since $\omega $ is the first infinite ordinal.
+
+There are a few different constructions of $\infty $-categories. We will use the theory of \emph{quasi-categories}, which were originally introduced by Boardman and Vogt in \cite{bv}, and were later pioneered by Andr\'e Joyal in \cite{joyal1,joyal2}, and Lurie in \cite{htt}.
