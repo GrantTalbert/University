@@ -566,4 +566,126 @@ Lurie offers a short description of the topological category $\left| \mathfrak{C
 
 Now we try to understand the simplicial category $\mathfrak{C} [\Delta^n]$ itself, and how it relates to $[n]$. Once again, $\mathfrak{C} [\Delta^n]$ and $[n]$ have the same objects. In $[n]$, there are unique morphisms $i\to j$ for $i\leq j$, and composites are defined by virtue of this uniqueness. We denote by $q_{ij} $ the morphism $i\to j$, and note that $q_{jk} \circ q_{ij} =q_{ik}$ for $i\leq j\leq k$.
 
-In $\mathfrak{C} [\Delta^n]$, we have vertices $p_{ij} \in \Map _{\mathfrak{C} [\Delta^n]} (i,j)$ for each $i\leq j$ given by $\left\{ i,j \right\} \in P_{ij} $. Of course $p_{jk} \circ p_{ij} =\left\{ i,j,k \right\} \neq p_{ik} $ for $i\leq j\leq k$, unless we have a degenerate case with either $i=j$ or $j=k$.
+In $\mathfrak{C} [\Delta^n]$, we have vertices $p_{ij} \in \Map _{\mathfrak{C} [\Delta^n]} (i,j)$ for each $i\leq j$ given by $\left\{ i,j \right\} \in P_{ij} $. Of course taking the view expressed above, $p_{jk} \circ p_{ij} =\left\{ i,j,k \right\} \neq p_{ik} $ for $i\leq j\leq k$, unless we have a degenerate case with either $i=j$ or $j=k$. Instead, all compositions of the form
+\[
+	p_{i_{n-1} i)n} \circ \ldots \circ p_{i_0i_1} 
+\]
+with $i_n < i_m$ for $n<m$ constitute the vertices of the cube $\Map_{\mathfrak{C}[\Delta ^n]}(i,j)$. Since the cube is contractible (i.e. the identity is null-homotopic), it is in particular weakly contractible, and thus although the vertices of the cube are not necessarily the same, they are all canonically homotopic to each other by the Quillen equivalence $\left| - \right| \dashv \Sing$.
+
+Indeed, there is a unique functor $\mathfrak{C} [\Delta ^n]\to [n]$ which is the identity on objects, and identifies homotopic compositions. In summary, $\mathfrak{C} [\Delta ^{\bullet} ]$ is a \emph{thickened} version of $[n]$, where composition is no longer strictly associative, and rather is associative up to (coherent) homotopy. Lurie notes that this is stated more precisely by saying $\mathfrak{C} [\Delta ^{\bullet} ]$ is a cofibrant replacement for $[\bullet ]$ in $\mathrm{s} \Cat $. I don't 100\% see the connection, but that's fine. We are more interested in showing  $J\mapsto \mathfrak{C} [\Delta ^J]$ is functorial $\mathcal{L} \mathrm{in} \to \mathrm{s} \Cat $.
+
+\begin{definition}\label{1.1.5.2}
+	Let $f : J \to J'$ be a morphism of posets. The simplicial functor $\mathfrak{C} [f]: \mathfrak{C} [\Delta ^J] \to \mathfrak{C} [\Delta ^{J'} ]$ is given by
+	\begin{itemize}
+		\item On objects $i\in \mathfrak{C} [\Delta ^J]$ (and thus $i\in J$), we define $\mathfrak{C} [f](i)=f(i)$.
+		\item If $i\leq j$ in $J$, then the map $\Map_{\mathfrak{C} [\Delta ^J]} (i,j)\to \Map_{\mathfrak{C} [\Delta ^{J'} ]} (f(i),f(j))$ induced by $f$ is the nerve of
+			\[
+				P_{i,j} \to P_{f(i),f(j)} ,
+			\]
+			\[
+				I\mapsto f(I)
+			.\]
+	\end{itemize}
+\end{definition}
+\begin{claim}\label{1.1.5.3}
+	$\mathfrak{C} [f]$ is functorial.
+\end{claim}
+\begin{proof}
+	By functoriality of the nerve, it suffices to show the given map of poset categories is functorial. Indeed, if $f$ is the identity $1$, then the morphism function is $I\mapsto I$, preserving the identity. Composition is preserved since $f(I_1) \cup f(I_2)=f(I_1 \cup I_2)$ is a well-known fact in set theory.
+
+	I assumed this would suffice as a proof but was not fully confident, so I wrote the argument out again in more rigor. I include it here because I can. We very obviously have that identities are preserved, so it suffices to show that $\mathfrak{C} [f]_{i,j} : I\mapsto f(I)$ (where we abuse notation mildly since we are not working in the nerve) preserves composition $(I_1,I_2)\mapsto I_1\cup I_2$. In enriched category theory, this amounts to the commutativity of the diagram
+\[\begin{tikzcd}
+    {P_{j,k}\times P_{i,j}} & {P_{i,k}} \\
+    {P_{f(j),f(k)}\times P_{f(i),f(j)}} & {P_{f(i),f(k)}}
+    \arrow["\circ", from=1-1, to=1-2]
+    \arrow["{\mathfrak{C}[f]_{j,k}\times\mathfrak{C}[f]_{i,j}}"', from=1-1, to=2-1]
+    \arrow["{\mathfrak{C}[f]_{i,k}}", from=1-2, to=2-2]
+    \arrow["\circ"', from=2-1, to=2-2]
+\end{tikzcd}\]
+	and tracing a pair $(I_1,I_2)$ around the square shows that this amounts to the equality noted above.
+\end{proof}
+\begin{remark}\label{1.1.5.4}
+	Note that $p_{i,j} =\left\{ i,j \right\} $ is mapped by $\mathfrak{C} [f]$ to $p_{f(i),f(j)} =\left\{ f(i),f(j) \right\} $.
+\end{remark}
+
+Since $\mathfrak{C} : \mathcal{L} \mathrm{in}  \to \mathrm{s} \Cat $ is a functor, restricting along the simplex category gives a cosimplicial object $\mathfrak{C} : \boldsymbol{\Delta}  \to \mathrm{s} \Cat $ with $[n]\mapsto \mathfrak{C} [\Delta ^n]$.
+
+\begin{definition}\label{1.1.5.5}
+	Let $\mathcal{C} $ be a simplicial category. Define the \emph{simplicial nerve} $N(\mathcal{C} )$ to be the simplicial set with $n$-simplices given by
+	\[
+		N(\mathcal{C} )_n \coloneqq \mathrm{s} \Cat (\mathfrak{C} [\Delta ^n],\mathcal{C} )
+	.\]
+	If $\mathcal{C} $ is a topological category, define the \emph{topological nerve} $N(\mathcal{C} )$ as the simplicial nerve of $\Sing \mathcal{C} $.
+\end{definition}
+
+\Cref{1.1.5.5} realizes our goal of defining a more suitable nerve for simplicial categories, and using the Quillen equivalence of simplicial and topological categories, we also obtain a topological nerve. Note that by the Yoneda lemma, there is an isomorphism
+\[
+	\sSet (\Delta ^n,N(\mathcal{C} ))\cong \mathrm{s} \Cat (\mathfrak{C} [\Delta ^n],\mathcal{C} )
+.\]
+It would be nice to show the simplicial nerve is functorial, since we would then have an adjunction. Before doing this however, we discuss terminology and present some intuition.
+
+\begin{terminology}\label{1.1.5.6}
+	If $\mathcal{C} $ is a simplicial or topological category, we often refer to the simplicial or topological nerve of $\mathcal{C} $ simply as the \emph{nerve} of $\mathcal{C} $. Note that this does not necessarily coencide with the ordinary nerve of the underlying category, so we adopt the convention of writing $N(\mathcal{C} )$ to mean the \emph{simplicial} or \emph{topological} nerve of $\mathcal{C} $ if $\mathcal{C} $ is simplicial topological, and if we need to consider the regular nerve of the underlying category, we will always specify that.
+\end{terminology}
+
+We continue by considering the nerve of a topological category $\mathcal{C} $, which is the nerve of the simplicial category $\Sing \mathcal{C} $. 0-simplices are morphisms $\mathfrak{C} [\Delta ^0]\to \Sing \mathcal{C} $. Recall that $\mathfrak{C} [\Delta ^0]$ takes as objects $[0]=*$, and as its mapping space $P_{0,0} =\left\{ 0 \right\} =*$, implying that $N(P_{0,0} )$ is the discrete simplicial set on the singleton, which is isomorphic to $\Delta ^0$. Thus, a morphism $\mathfrak{C} [\Delta ^0]\to \Sing \mathcal{C} $ is an object $x$ of $\Sing \mathcal{C} $ (equivalently an object of $\mathcal{C} $) and a 0-simplex of the singular set of the mapping space $\Sing\Map_\mathcal{C} (x,x)$. Since the simplicial functor must preserve identity morphisms, and since the nerve $N(P_{0,0} )$ is the identity in $\mathfrak{C} [\Delta ^0]$, we have that the 0-simplex selected must be the 0-simplex in $\Sing\Map_\mathcal{C} (x,x)$ corresponding to the identity in $\Map_\mathcal{C} (x,x)$. Thus, \emph{0-simplices of the topological nerve are precisely object of $\mathcal{C} $}.
+
+Continuing, we now unpack 1-simplices of $N(\mathcal{C} )$. A morphism $\mathfrak{C} [\Delta ^1]\to \Sing \mathcal{C} $ is a choice of two objects $x,y$ in $\Sing \mathcal{C} $, which are mapped to by $0$ and $1$, respectively; and a $1$-simplex of $\Sing\Map_\mathcal{C} (x,y)$, since the only non-identity mapping space is $N(P_{0,1} )$. Since morphisms $x\to y$ in the underlying category of $\mathcal{C} $ are points in $\Map_\mathcal{C} (x,y)$, the datum of a 1-simplex is a morphism $x\to y$ in the underlying category.
+
+We now consider the 2-simplices of $N(\mathcal{C} )$. Morphisms $\mathfrak{C} [\Delta ^2]\to \Sing \mathcal{C} $ identify three objects $0\mapsto x$, $1\mapsto y$, and $2\mapsto z$, and a 2-simplex $\tau \in \Sing\Map_\mathcal{C} (x,z)$. The simplicial identities guarentee that the boundary of this 2-simplex constitutes the three 1-simplices the functor decides, one in each of $\Sing\Map_\mathcal{C} (x,y)$, $\Sing\Map_\mathcal{C} (x,z)$, and $\Sing\Map_\mathcal{C} (y,z)$. Write $f_{x,y} $, $f_{x,z} $, and $f_{y,z} $ for these 1-simplices, respectively. The 2-simplex then corresponds to a path from $f_{x,z} $ to $f_{y,z} \circ f_{x,y} $ in the mapping space $\Map_\mathcal{C} (x,z)$.
+
+This is enough analysis for the reader to identify the relevant analogues with our treatment of morphisms in quasi-categories. The reader is likely expecting, due to our choice of notation, that we should be able to compute $\mathfrak{C} $ on any simplicial set, not just representable simplicial sets for linearly ordered sets. Indeed, recall that by \cite[III.7]{maclane}, any functor is a colimit of representable functors, so simply define $\mathfrak{C} : \sSet  \to \mathrm{s} \Cat $ as a colimit preserving functor, whose action on $\Delta ^n$ agrees with our above notation, essentially extending $\mathfrak{C} $ along the Yoneda embedding. This exists since $\mathrm{s} \Cat $ is cocomplete. By construction, $\mathfrak{C} \dashv N$ for $N$ the simplicial nerve, viewed as a functor in the obvious way.
+
+I would rather not compute examples of this category if it is not required. To make computation simpler, we can note that $\mathfrak{C} $ is the left Kan extension of $\mathfrak{C} [\Delta ^{\bullet} ]$ along the Yoneda embedding.
+
+\begin{proposition}\label{1.1.5.7}
+	Let $\mathcal{C} $ be a simplicial category such that each mapping space is a Kan complex. Then its simplicial nerve $N(\mathcal{C} )$ is an $\infty $-category.
+\end{proposition}
+\begin{proof}
+	Let $0<i<n$; we must show $N(\mathcal{C} )$ has the right lifting property with respect to inclusions $\Lambda _i^n\subseteq \Delta ^n$. By the adjunction $\mathfrak{C} \dashv N$, we may equivalently show $\mathcal{C} $ has the right extension property with respect to the simplicial functor $\mathfrak{C} [\Lambda _i^n]\to \mathfrak{C} [\Delta ^n]$. Proof of the equivalence of these statements is done simply via isomorphisms of hom-sets, but the diagrammatic proof via units and counits is more illuminating. Since I have done similar proofs, I omit writing this up in my notes.
+
+	We start by considering the structure of $\mathfrak{C} [\Lambda _i^n]$. I take Lurie at his word for the following observations, to avoid needing to compute the relevant colimits.
+	\begin{itemize}
+		\item Objects of $\mathfrak{C} [\Lambda _i^n]$ are objects of $\mathfrak{C} [\Delta ^n]$, which are objects of $[n]$.
+		\item For $0<j\leq k<n$, the mapping space $\Map_{\mathfrak{C} [\Lambda _i^n]} (j,k)=\Map_{\mathfrak{C} [\Delta ^n]} (j,k)$. This fails when $j=0$ or $k=n$ (or when the horn isn't an inner horn).
+	\end{itemize}
+	The lifting problem thus reduces to the action of the functor on the mapping spaces
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\Map_{\mathfrak{C} [\Lambda _i^n]} (0,n)\ar[r] \ar[d]  & \Map_\mathcal{C} (F(0),F(n)) \\
+		\Map_{\mathfrak{C} [\Delta ^n]} (0,n)\ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	where $F : \Lambda _i^n \to N(\mathcal{C} )$ was the original horn. The mapping space on the right is a Kan complex by hypothesis, which concludes the proof.
+\end{proof}
+\begin{corollary}\label{1.1.5.8}
+	Let $\mathcal{C} $ be a topological category. Then $N(\mathcal{C} )$ is an $\infty $-category.
+\end{corollary}
+
+We are now prepared to cite the following theorem, but we cannot yet prove it.
+
+\begin{theorem}\label{1.1.5.9}
+	Let $\mathcal{C} $ be a topological category, and let $x,y\in \mathcal{C} $. Then the counit
+	\[
+		\left| \Map_{\mathfrak{C} [N(\Sing(\mathcal{C}) )]} (x,y) \right| \to \Map_\mathcal{C} (x,y)
+	\]
+	is a weak homotopy equivalence, where $N$ is the simplicial nerve.
+\end{theorem}
+
+Note that this is the composite adjunction of $\left| - \right| \dashv \Sing$ and $\mathfrak{C} \dashv N$. This shows that the theory of $\infty $-categories is equivalent to that of topological categories or simplicial categories. Although $\left| \mathfrak{C} [-] \right| \dashv N$ is not an equivalence, they are \emph{homotopy} inverses of each other. Making this more precise motivates the definition:
+
+\begin{definition}\label{1.1.5.10}
+	Let $S$ be a simplicial set. The \emph{homotopy category} $\hh S$ is defined to be the homotopy category of the simplicial category $\hh \mathfrak{C} [S]$, which we recall is given by the $\mathcal{H} $-category on $\mathfrak{C} [S]$ induced by lax-monoidality of the quotient functor $\gamma :\sSet \to \Ho \sSet $ (mapping spaces are given by computing $\gamma $ on them).
+\end{definition}
+
+In particular, for vertices $x,y\in S$, the mapping space of the homotopy category has $\Map_{\hh S} (x,y)=[\Map_{\mathfrak{C} [S]} (x,y)]$, where we use the class notation for the quotient object given by computing the localization functor on the mapping space.
+
+\begin{definition}\label{1.1.5.11}
+	A map $f : S \to T$ of simplicial sets is a \emph{categorical equivalence} if the induced map $\hh f : \hh S \to \hh T$ is an equivalence of $\mathcal{H} $-categories.
+\end{definition}
+
+Lurie notes that Joyal calls the notion given in \cref{1.1.5.11} \emph{weak categorical equivalences}. I do not know how the modern literature has evolved in this regard. However, this seems fairly standard compared to other terminology, and I would be suprised if the literature has evolved in favor of Joyal's terminology. We call these maps \emph{categorical} equivalences to avoid conflating terminology with weak equivalences of simplicial sets.
+
+\begin{remark}\label{1.1.5.12}
+	From \cref{1.1.5.11}, we immediately have that $f : S \to T$ is an equivalence if and only if $\mathfrak{C} [f]: \mathfrak{C} [S] \to \mathfrak{C} [T]$ is an equivalence of simplicial categores if and only if $\left| \mathfrak{C} [f] \right| : \left| \mathfrak{C} [S] \right|  \to \left| \mathfrak{C} [T] \right| $ is an equivalence of topological categories (by \cref{1.1.5.9}).
+\end{remark}
+
+This asserts that the counnit $\left| \mathfrak{C} [N(\Sing(\mathcal{C}) )] \right| \to \mathcal{C} $ is an equivalence of topological categories, and the unit $S\to \Sing(N\left| \mathfrak{C} [S] \right| $ is a categorical equivalence of simplicial sets. Note that by \cref{1.1.5.9}, every simplicial set is canonically categorically equivalent to an $\infty $-category, proving the equivalence of these models as theories for $(\infty ,1)$-categories.
