@@ -676,7 +676,7 @@ Note that this is the composite adjunction of $\left| - \right| \dashv \Sing$ an
 	Let $S$ be a simplicial set. The \emph{homotopy category} $\hh S$ is defined to be the homotopy category of the simplicial category $\hh \mathfrak{C} [S]$, which we recall is given by the $\mathcal{H} $-category on $\mathfrak{C} [S]$ induced by lax-monoidality of the quotient functor $\gamma :\sSet \to \Ho \sSet $ (mapping spaces are given by computing $\gamma $ on them).
 \end{definition}
 
-In particular, for vertices $x,y\in S$, the mapping space of the homotopy category has $\Map_{\hh S} (x,y)=[\Map_{\mathfrak{C} [S]} (x,y)]$, where we use the class notation for the quotient object given by computing the localization functor on the mapping space.
+In particular, for vertices $x,y\in S$, the mapping space of the homotopy category has $\Map_{\hh S} (x,y)=[\Map_{\mathfrak{C} [S]} (x,y)]$ the class of path components of $\Map_{\mathfrak{C} [S]} (x,y)$, given of course by the singular set of the functor $\pi _0$ (classes of vertices with two vertices are equivalent if there is a 1-simplex between them). This is of course a set, and composition morphisms are induced in the expected way, rendering the homotopy category as a normal 1-category.
 
 \begin{definition}\label{1.1.5.11}
 	A map $f : S \to T$ of simplicial sets is a \emph{categorical equivalence} if the induced map $\hh f : \hh S \to \hh T$ is an equivalence of $\mathcal{H} $-categories.
