@@ -44,4 +44,441 @@ This section is devoted to defining many elementary 1-categorical notions in an 
 	We note that restricting this isomorphism along a horn $\Lambda_i^n$ gives $d^j\mapsto d^{n-j} $. In particular, $\Lambda_i^n\cong(\Lambda_{n-i} ^n)^{\mathrm{op}} $ (given by a simple inspection of elements). Since $0<i$, we have $n-i<n$, and since $i<n$, we have $0<n-i$. Thus, $\Lambda_{n-i}^n$ is an inner horn, and admits a filler under $\sigma_0^{\mathrm{op}} $ since $S$ is an $\infty $-category, completing the proof.
 \end{proof}
 
+We will use the fact that $\mathrm{Op} : \boldsymbol{\Delta}  \cong \boldsymbol{\Delta} $ thoughout the text to promote the principle of duality to an $\infty $-categorical setting.
 
+\subsection{Mapping Spaces in Higher Category Theory}
+
+In ordinary category theory, we have hom-sets $\mathcal{C} (x,y)$. In enriched category theory, we have hom-objects $\mathcal{C} (x,y)$ in some ambient category $\mathcal{V} $. In higher category theory, we have morphism \emph{spaces} $\Map_\mathcal{C} (x,y)$. The definition of these objects is simple in topological or simplicial categories, in fact it is defined as part of the formalism. However, quasi-categories do not contain a definition of mapping spaces as part of their definition, so we need to come up with such a definition.
+
+First, we pause to clear up some misconceptions I have been carrying with me. The homotopy category of a simplicial category $\mathcal{C} $ is computed by considering the image under some (so far unnamed) functor $\sSet \to \mathcal{H} $. This functor is any choice of fibrant replacement in Quillen's model structure (a choice of a kan complex), viewed as an object in $\Ho \sSet $ as defined in Quillen's model structure.
+
+We take the fibrant replacement here since we want to quotient by hommotopy, meaning the domain must be cofibrant and the codomain must be fibrant, by standard model category theory (\cite{hovey}). In the standard model structure on $\Top $, CW complexes are cofibrant and all spaces are fibrant, so we need only replace the domain cofibrantly. Similarly, in Joyal's model structure, all simplicial sets are cofibrant and quasi-categories are fibrant. Quillen's model structure also has all objects cofibrant, but Kan complexes are fibrant, which are simply a special case of a quasi-category.
+
+Since the hom-sets in the homotopy category of a topological category are its sets of path-components, it would make sense to define the hom-sets of $\hh \mathcal{C} $ in the same way. In particular, we must show $\pi _0\Map_\mathcal{C} (x,y)=R\Map_\mathcal{C} (x,y)$, where $R : \sSet  \to \mathcal{H} $ is a fibrant replacement. Note that the set of path-components of a simplicial set are defined in the expected way: given a composable pair of vertices of the mapping space, a homotopy is a 1-simplex witnessing their composite. We then identify homotopic 1-simplices. Since $R\Map_\mathcal{C} (x,y)$ is a Kan complex, this indeed follows: hom-sets in the underlying category are maps $\Delta ^0\to R\Map_\mathcal{C} (x,y)$ in $\mathcal{H} $. In $\sSet $, these would be choices of vertices, but since $\mathcal{H} $ identifies homotopic maps, this instead becomes a choice of vertices up to homotopy.
+
+Continuing, recall that mapping spaces of the homotopy category of $\mathfrak{C} [S]$ are Kan complexes. We may thus treat $\mathfrak{C} $ as a sort of fibrant replacement for simplicial sets, but only up to homotopy type and on what we expect their mapping spaces to be. An explicit construction of $\mathfrak{C} [S]$ that I will probably do later shows that the mapping spaces are indeed defined in the way we would expect (0-simplices are morphisms between vertices in the sense detailed for quasi-categories, etc). Thus, we would expect the mapping set $\mathrm{h} S(x,y)$ for a simplicial set $S$ to indeed be the hom-set $\mathrm{h} \mathcal{C} [S](x,y)$. Thisi justifies our preivous arguments that I just now realized I didn't understand well. With this fixed understanding, we continue.
+
+\begin{definition}\label{1.2.2.1}
+	Let $S$ be a simplicial set, and let $x,y\in S$ and $\mathcal{H} $ the homotopy category of spaces. Define $\Map_S(x,y)=\Map_{\hh S} (x,y)\in \mathcal{H} $.
+\end{definition}
+
+Of course, when we considered the homotopy category of a simplicial category as $\mathcal{H} $-enriched, we were speaking in the sense of its underlying category being equivalent to the expected definition. However, objects therein are still simplicial sets, they still retain enough structure to be considered a mapping space, and in particular by \cref{1.1.5.7}, they are Kan complexes, our models for $\infty $-groupoids. Since identifying their homotopic vertices gives us our standard notion of the hom-set of the homotopy space, we would expect that the object itself can serve as a mapping space for the simplicial set.
+
+\begin{remark}\label{1.2.2.2}
+	Lurie has the most roundabout motivation possible. I fully understand defining the mapping spaces of simplicial sets or simplicial categories via path-components, but $\mathcal{H} $-objects just make it needlessly confusing in my opinion.
+\end{remark}
+
+The next question is \emph{how do we compute these mapping spaces}? Not only is computing $\Map_{\mathfrak{C} [S]} (x,y)$ complex, but it need not be a Kan complex in general (only its corresponding homotopy hom-set is), making this entire idea somewhat poorly-founded. To fix this, we simply replace $\Map_{\mathfrak{C} [S]} (x,y)$ with a Kan complex of the same homotopy type. There is a lot of model category theory going on in the background to arrive at these definitions, but luckily we can ignore it!
+
+Define $\Hom_S^\mathrm{R} (x,y)$ as the simplicial set whose $n$-simplices are morphisms $\Delta ^{n+1} \to S$ that restrict $z|\Delta ^{\left\{ n+1 \right\} } =y$ and $z|\Delta ^{0, \ldots ,n} $ is constant at $x$, or more expicitly, identifying these restrictions under the Yoneda lemma $\Delta ^{\{n+1\}} \cong \Delta ^0,$ $\Delta ^{\left\{ 0, \ldots ,n \right\} } \cong \Delta ^n$ gives the vertex $y$ and the degenerate $n$-simplex on the vertex $x$, respectively. A more explicit description is $n$-simplices of $\Hom_S^\mathrm{R} (x,y)$ are $(n+1)$-simplices of $S$ whose $(n+1)$th vertex is $y$, and all other vertices are $x$; in particular its $(n+1)$th face is the degenerate $n$-simplex generated by $x$. Faces and degeneracies are then defined the same way they are in $S_{\bullet+1} $. We call $\Hom_S^\mathrm{R} (x,y)$ the space of \emph{right morphisms} from $x$ to $y$. Of course, we must still show it is indeed a space.
+
+\begin{proposition}\label{1.2.2.3}
+	Let $\mathcal{C} $ be an $\infty $-category. Then for any $x,y\in \mathcal{C} $, the simplicial set $\Hom_\mathcal{C} ^\mathrm{R} (x,y)$ is a Kan complex.
+\end{proposition}
+\begin{proof}
+	By \cref{1.2.5.1}, which will be proven later, it suffices to show $M=\Hom_\mathcal{C} ^\mathrm{R} (x,y)$ admits fillers for horns $\Lambda _i^n\to M$ with $0<i\leq n$. Of course, since $n\geq 1$ here, we have by way of \cref{1.1.2.12} that any horn in $M$ is a horn in $\mathcal{C} $, and in particular since the $n$-simplices of $M$ inject into the $(n+1)$-simplices of $\mathcal{C} $, the $n$th horn $\Lambda _n^n$ corresponds to the horn $\Lambda _n^{n+1} $ in $\mathcal{C} $, rendering all horns inner. It suffices to show the given filler is indeed a simplex of $M$.
+
+	Indeed, let $\sigma $ fill a horn $\sigma _0: \Lambda _i^n \to M$, and let $\tau $ be the corresponding $(n+1)$-simplex of $M$. Denote by $\tau _j$ the image $\sigma _0(d^j)\in M_n\subseteq \mathcal{C} _{n+1} $ for $j\neq i$. Then $d_j(\tau )=\tau _j$, and since $d_j$ preserves all vertices other than $j$, and since $n+1\geq 2$, tracing the reindexing of vertices that happens when you take a face gives that $\tau $ is an $n$-simplex of $M$.
+\end{proof}
+
+Unfortunately, there is no obvious composition law on the right morphism space. This is the main drawback of this space, instead of using $\Map_{\mathfrak{C} [S]} (x,y)$. We will show that when $S$ is an $\infty $-category, they are canonically isomorphic in the homotopy category, concluding that $\Hom_S^\mathrm{R} (x,y)$ represents $\Map_S(x,y)$ when $S$ is an $\infty $-category. This will not be done in this section, since the proof is technical, and will be delegated to chapter 2. For now, we take this statement as fact, along with the fact that a composition law exists up to a contractible space of choices, and make some observations.
+
+\begin{remark}\label{1.2.2.4}
+	$\Hom_S^\mathrm{R} (x,y)$ is not self-dual. We define $\Hom_S^\mathrm{L} (x,y)\coloneqq \Hom_{S^{\mathrm{op}} } ^\mathrm{R} (x,y)$, meaning $n$-simplicies of the \emph{left} mapping space from $x$ to $y$ have their 0th vertex as $x$, and other vertices as $y$.
+\end{remark}
+
+As noted in \cref{1.2.2.4}, $\Hom_S^\mathrm{L} (x,y)$ and $\Hom_{S}^{\mathrm{R}}(x, y) $ are not in general isomorphic, but they are homotopy equivalent whenever $S$ is an $\infty $-category. We show this by defining a self-dual space $\Hom_S(x, y) =\left\{ x \right\}\times _S S^{\Delta ^1} \times _S\left\{ y \right\} $. Recall the internal hom $S^{\Delta ^1}_{\bullet}  =\sSet (\Delta^{\bullet} \times \Delta ^1,S)$. An $n$-simplex is (for some reason) also described by a map $f : \Delta ^n\times \Delta ^1 \to S$ which restricts along $f|\Delta ^n\times \left\{ 0 \right\} $ to be constant at $x$, and $f|\Delta ^n\times \Delta ^1$ constant at $y$. With this understanding, we have obvious natural inclusions
+\[
+	\Hom_{S}^{\mathrm{R}}(x, y) \hookrightarrow \Hom_S(x, y) \hookleftarrow \Hom_{S}^{\mathrm{L}}(x, y) 
+.\]
+We (much) later show that these inclusions are homotopy equivalences, provided $S$ is an $\infty $-category.
+
+\subsection{The Homotopy Category}
+
+The nerve $N$ of a category $\mathcal{C} $ is an $\infty $-category, as noted in \cref{1.1.2.4}. Informally, we say that $N$ is a fully faithful inclusion from the bicategory $\Cat $ to the $(\infty ,2)$-category $\iCat $ of $\infty $-categories. However, we can in fact say more.
+
+\begin{proposition}\label{1.2.3.1}
+	The nerve functor $\Cat \to \sSet $ is right adjoint to the functor $\hh : \sSet  \to \Cat $ which maps simplicial sets $S\mapsto \hh S$, viewed as the underlying category rather than the $\mathcal{H} $-enriched category.
+\end{proposition}
+\begin{proof}
+	We temporarily modify our notation as follows: denote by $N : \Cat  \to \sSet $ the nerve, and denote by $N': \mathrm{s} \Cat  \to \sSet $ the simplicial nerve. We can relate these functors by noting that any category $\mathcal{C} $ is viewed as a simplicial category by taking mapping spaces $\Map_\mathcal{C} (x,y)$ to be the discrete simplicial set on $\mathcal{C} (x,y)$. This givess an inclusion functor $i : \Cat  \hookrightarrow \mathrm{s} \Cat $. The simplicial nerve $N'i(\mathcal{C} )$ takes as $n$-simplices simplicial functors $\mathfrak{C} [\Delta ^n]\to i(\mathcal{C} )$. We would like to show that the composite $N'\circ i=N$, which we do by showing simplicial functors $\mathfrak{C} [\Delta ^n]\to i(\mathcal{C} )$ are functors $[n]\to \mathcal{C} $.
+
+	Indeed, a simplicial functor $F: \mathfrak{C} [\Delta ^n]\to i(\mathcal{C}) $ is a choice of $n$ objects, and an $n$-simplex $\tau \in \Map_{i(\mathcal{C} )} (F(0),F(n))$ whose vertices define a chain of morphisms from $F(0)$ to $F(n)$. Thus,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Cat \ar[" N ", bend left, rr] \ar[" i "', hook, r]  & \mathrm{s} \Cat \ar[" N' "', r]  & \sSet .
+	\end{tikzcd}\]
+	Recall that the path components functor $\pi _0 : \sSet  \to \Set $ is lax monoidal, and promotes to the homotopy functor $\pi _0 = \hh : \mathrm{s} \Cat  \to \Cat $ for simplicial categories. In particular, since $\pi _0 : \sSet  \to \Set $ is left adjoint to the inclusion $i : \Set \hookrightarrow \sSet $, this adjunction promotes to $\hh \dashv i : \mathrm{s} \Cat  \to \Cat $. Since $\mathfrak{C}[-] \dashv N'$ by construction, composition of adjoints yields a left adjoint $\hh \circ \mathfrak{C}[-]\dashv N $. By definition, the composite $\hh \circ \mathfrak{C}[-] $ is the homotopy functor for simplicial sets $\hh : \sSet  \to \Cat $.
+\end{proof}
+
+\begin{remark}\label{1.2.3.2}
+	If $\mathcal{C} $ is a simplicial category, then we obtain that $\hh \mathcal{C} \simeq\hh N(\mathcal{C} )$ whenever $\mathcal{C} $ is fibrant in the sense that its mapping spaces are Kan complexes.
+\end{remark}
+
+Given a simplicial set $S$, Joyal referred to $\hh S$ as the \emph{fundamental category} of $S$, motivated by the fact that $\hh S$ is the fundamental groupoid of $S$ when $S$ is a Kan complex. I believe this is still used somewhat in the literature.
+
+We likely expect that the structure of the homotopy category $\hh \mathcal{C} $ of an $\infty $-category $\mathcal{C} $ should be something along the lines of
+\begin{itemize}
+	\item Objects are the same as $\mathcal{C} $;
+	\item Morphisms are homotopy classes of 1-morphisms;
+\end{itemize}
+and none of the other higher categorical data needs to be expressed explicitly, since it should be encoded in the behavior of the homotopies themselves. Indeed this will be the description we come up with. In order to properly work through this, we see fit to formally introduce homotopy and composition in quasi-categories. All definitions are in-line with those in the nerve, and I have kind of been writing these notes already knowing what they are, and I might have already written it down, but why not nail it down one more time. First, we recall some basics.
+
+\begin{definition}\label{1.2.3.3}
+	Let $\mathcal{C} $ be an $\infty $-category.
+	\begin{enumerate}
+		\item Objects of $\mathcal{C} $ are vertices $\mathcal{C} _0$.
+		\item 1-morphisms (often simply called morphisms) of $\mathcal{C} $ are edges $f\in \mathcal{C} _1$; equivalently $f : \Delta ^1 \to \mathcal{C} $.
+		\item Given a morphism $f$ in $\mathcal{C} $, the domain of $f$ is $d_1(f)$; equivalently $f(0)$ viewed as a morphism $\Delta ^1\to \mathcal{C} $.
+		\item Similarly, the codomain of $f$ is $d_0(f)$; equivalently $f(1)$.
+	\end{enumerate}
+	We use the usual notation $f : x \to y$ to denote that $f$ is a 1-morphism with domain $x$ and codomain $y$.
+\end{definition}
+
+
+We begin by defining a category $\pi (\mathcal{C} )$, which we later show to be equivalent to $\hh \mathcal{C} $. Of course, $\Obj \pi (\mathcal{C} )=\Obj(\mathcal{C} ) $. To define morphisms, first we must define \emph{homotopy}.
+
+\begin{definition}\label{1.2.3.4}
+	Let $\mathcal{C} $ be an $\infty $-category, and let $f,g : x \to y$ be morphisms. A \emph{homotopy} $\sigma $ from $f$ to $g$, written $\sigma : f \Rightarrow g$ (or simply $\sigma : f \to g$), is a 2-simplex $\sigma : \Delta ^2 \to \mathcal{C} $ with faces
+	\[
+		d_0(\sigma )=1_y,\qquad d_1(\sigma )=g,\qquad d_2(\sigma )=f
+	.\]
+	We depict this with a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & y \ar[" 1_y ", dr]  &  \\
+	x \ar[" f ", ur] \ar[" g "', rr]  &  & y
+	\end{tikzcd}\]
+	If there is a homotopy from $f$ to $g$, we say $f$ and $g$ are \emph{homotopic}.
+\end{definition}
+
+\begin{notation}\label{1.2.3.5}
+	Going off of \cref{1.2.3.4}, a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & y \ar[" g ", dr]  &  \\
+	x \ar[" f ", ur] \ar[" h "', rr]  &  & z
+	\end{tikzcd}\]
+	in a $\infty $-category $\mathcal{C} $ denotes a 2-simplex $\sigma \in \mathcal{C} _2$ with faces
+	\[
+		d_0(\sigma )=g,\qquad d_1(\sigma )=h,\qquad d_2(\sigma )=f
+	.\]
+\end{notation}
+
+We sometimes call homotopies \emph{2-morphisms}. Since we expect to be able to take homotopy classes of morphisms, we should probably show that homotopy is an equivalence relation on morphisms.
+
+\begin{proposition}\label{1.2.3.6}
+	Let $\mathcal{C} $ be an $\infty $-category, and let $x,y\in \mathcal{C} $ be objects. Then homotopy is an equivalence relation on the set of morphisms $x\to y$.
+\end{proposition}
+\begin{proof}
+	First, let $f : x \to y$ in $\mathcal{C} $. To show reflexivity, we will show $s_1(f)$ is a homotopy $f \Rightarrow f$. Indeed, by the simplicial identities (\cite{ssets}),
+	\begin{align*}
+		d_0s_1(f)&=s_0d_0(f)=s_0(y)=1_y,\\
+		d_1s_1(f)&=f,\\
+		d_2s_1(f)&=f
+	,\end{align*}
+	rendering $s_1(f)$ a homotopy from $f$ to $f$, showing reflexivity.
+
+	We now prove an intermediary result, from which symmetry and transitivity will fall out. Let $f,g,h : x \to y$ be morphisms, and let $\sigma : f \Rightarrow g$ and $\sigma ' : f \Rightarrow h$ be homotopies. Let $\sigma ''=s_1s_0(y) : \Delta ^2 \to \mathcal{C} $ be the constant map at $y$. We want to show there is a 3-simplex $\tau $ filling a horn defined by $\sigma ,\sigma ',\sigma ''$. Define $\tau _0 : \Lambda _1^3 \to \mathcal{C} $ by
+	\[
+		d^0\mapsto \sigma '',\qquad d^2\mapsto \sigma ',\qquad d^3\mapsto \sigma ,
+	\]
+	and by \cref{1.1.2.12} it suffices to show $d_0(\sigma ')=d_1(\sigma '')$ and $d_2(\sigma )=d_2(\sigma ')$. Indeed, since $\sigma ,\sigma '$ are homotopies with domain $f$, we have
+	\[
+		d_2(\sigma )=f,\qquad d_2(\sigma ')=f.
+	\]
+	Additionally, the 0th face of any homotopy is the identity, so $d_0(\sigma ')=1_y$. Since $\sigma ''=s_1s_0(y)$, we have by the simplicial identities
+	\[
+		d_1(\sigma ')=d_1s_1s_0(y)=s_0(y)\eqqcolon 1_y
+	.\]
+	Therefore, there exists a horn $\tau _0 : \Lambda _1^3 \to \mathcal{C} $ as claimed, and since $\mathcal{C} $ is an $\infty $-category, there exists a 3-simplex $\tau : \Delta ^3 \to \mathcal{C} $ rendering the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _1^3\ar[" \tau _0 ", r] \ar[hook, d]  & \mathcal{C}  \\
+	\Delta ^3 \ar[" \tau  "', ur]  & 
+	\end{tikzcd}\]
+	commutative. We now show that $d_1(\tau )$ is a homotopy $g\Rightarrow h$. Indeed, by the simplicial identities,
+	\[
+		d_0d_1(\tau )=d_0d_0(\tau )=1_y,\qquad d_1d_1(\tau )=d_1d_2(\tau )=h,\qquad d_2d_1(\tau )=d_1d_3(\tau )=g
+	.\]
+	
+	We now conclude the proof with a few remarks. First, we take the special case $f=h$ of the above situation. We then have that the hypothesis above is that there is a homotopy from $f$ to $g$, and the conclusion is that there is thus a homotopy from $g$ to $f$. This shows symmetry. From this, we derive transitivity from the above situation as follows:
+	\begin{enumerate}
+	\item Let there be a homotopy $f \Rightarrow g$ and $g \Rightarrow h$.
+	\item By symmetry, there is a homotopy $g\Rightarrow f$.
+	\item We may invoke the above result on the homotopies $g\Rightarrow f$ and $g\Rightarrow h$, obtaining a homotopy $f\Rightarrow h$.
+	\end{enumerate}
+\end{proof}
+
+\begin{notation}
+	From now on, due to convenient notation, we may choose to denote a horn $\Lambda _i^n \to \mathcal{C} $ by a pair $(f_0, \ldots ,\bullet, \ldots ,f_n)$. This notation implies that the horn is defined by $d^j \mapsto f_j$ for $j\neq i$, and the bullet appears in the $i$th spot to symbolize that there is no map for $d^i$.
+\end{notation}
+
+
+\begin{remark}\label{1.2.3.8}
+	We may also show that homotopy is self-dual. Let $f,g : x \to y$ be homotopic in $\mathcal{C} $, and let $\sigma $ be a homotopy between them. Consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 7em]
+	\Lambda _2^3 \ar[" (\sigma \text{,} s_1(f)\text{,} \bullet\text{,} s_0(f)) ", r] \ar[hook, d]  & \mathcal{C}  \\
+	\Delta ^3 \ar[" \tau  "', dotted, ur]  & 
+	\end{tikzcd}\]
+	wherein the dotted line exists since $\mathcal{C} $ is an $\infty $-category, rendering the diagram commutative. The face $d_2(\tau )$ forms the relevant homotopy in $\mathcal{C} $.
+\end{remark}
+
+We may now make precice our morphisms in $\pi (\mathcal{C} )$ as homotopy classes of morphisms in $\mathcal{C} $. More precisely, denote by $\mathcal{C} (x,y)$ the set of morphisms $x\to y$ in $\mathcal{C} $, and denote by $\sim $ the homotopy relation on $\mathcal{C} (x,y)$. Then $\pi (\mathcal{C} )(x,y)\coloneqq \mathcal{C} (x,y) /\tildesim $. Of course, we still need a valid composition operation in $\pi (\mathcal{C} )$.
+
+Let $f : x \to y$ and $g : y \to z$ in $\mathcal{C} $, and since $d_1(g)=d_0(f)$, by \cref{1.1.2.12} there is a horn $(g,\bullet,f ): \Lambda _1^2 \to \mathcal{C} $. This extends to a 2-simplex $\sigma : \Delta ^2 \to \mathcal{C} $. Define $[g]\circ [f]=[d_1(\sigma )]$.
+
+\begin{proposition}\label{1.2.3.9}
+	Let $\mathcal{C} $ be an $\infty $-category. Then composition in $\pi (\mathcal{C} )$ is well-defined. More precisely, the composite $[g]\circ [f]$ does not depend on the choice of representative, nor the choice of filler $\sigma $.
+\end{proposition}
+\begin{proof}
+	We start by verifying the independence of $\sigma $. Let $\sigma ,\sigma ' : \Delta ^2 \to \mathcal{C} $ be fillers for the horn $(g,\bullet,f) : \Lambda _1^2 \to \mathcal{C} $, and thus
+	\[
+		d_0(\sigma )=d_0(\sigma ')=g,\qquad d_2(\sigma )=d_2(\sigma ')=f
+	.\]
+	We thus have a horn $(s_1(g),\bullet,\sigma ',\sigma )$, which admits a filler $\tau $ since $\mathcal{C} $ is an $\infty $-category. By the same logic as the proof of \cref{1.2.3.6}, $d_1(\tau )$ is a homotopy from $d_1(\sigma )$ to $d_1(\sigma ')$.
+
+	We now show homotopy classes don't depend on representative. Since $\sigma _0=(g,\bullet,f)$ is a horn, let $\sigma $ be a 2-simplex with faces $d_0(\sigma )=g$ and $d_2(\sigma )=f$. I just want to prove that this is indeed a horn:
+	\[
+		d_0\sigma _0(d^2)=d_0(g)=y=d_1(f)=d_1\sigma _0(d^0)
+	,\]
+	and it follows by $2-1=1$ and \cref{1.1.2.12}. Let $\sigma ' : f \Rightarrow f'$ be a homotopy, for $f': x \to y$ some morphism in $\mathcal{C} $. As noted in \cref{1.2.3.8}, by duality it suffices to show $[g]\circ [f]=[g]\circ [f']$. There is a horn
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 6em]
+	\Lambda _1^3 \ar[" (s_0(g)\text{,} \bullet\text{,} \sigma \text{,} \sigma ' ", r] \ar[hook, d]  & \mathcal{C}  \\
+	\Delta ^3 \ar[" \tau  "', dotted, ur]  & 
+	\end{tikzcd}\]
+	and since $\mathcal{C} $ is an $\infty $-category, there exists a dotted line as indicated. Define $\sigma ''=d_1(\tau )$. Note that $\sigma ''$ fills $(g,\bullet,f')$:
+	\[
+		d_0(\sigma '')=d_0d_1(\tau )=d_0d_0(\tau )=d_0s_0(g)=g,
+	\]
+	\[
+		d_2(\sigma '')=d_2d_1(\tau )=d_1d_3(\tau )=d_1(\sigma ')=f'
+	.\]
+	Thus, $[g]\circ [f']=[d_1(\sigma '')]$. However, we also have
+	\[
+		d_1(\sigma '')=d_1d_1(\tau )=d_1d_2(\tau )=d_1(\sigma ),
+	\]
+	and since $[d_1(\sigma )]=[g]\circ [f]$, we have $[g]\circ [f']=[g]\circ [f]$.
+\end{proof}
+
+\begin{proposition}\label{1.2.3.10}
+	Let $\mathcal{C} $ be an $\infty $-category. Then $\pi (\mathcal{C} )$ is a category.
+\end{proposition}
+\begin{proof}
+	At this point, we need only check identities and associativity. Let $x\in \mathcal{C} $, and $f : x \to y$, and recall that the identity $1_x$ is given by $[s_0(x)]$. We construct the horn $(f,\bullet,1_x)$, and want to show $s_0(f)$ fills the horn. Indeed, by the simplicial identities,
+	\[
+		d_0s_0(f)=f,\qquad d_2s_0(f)=s_0d_1(f)=s_0(x)=1_x
+	.\]
+	We thus have that $d_1s_0(f)=f$, and by reflexivity, $[f]\circ [1_x]=[f]$.
+
+	Now for associativity. Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	w \ar[" f ", r]  & x \ar[" g ", r]  & y \ar[" h ", r]  & z
+	\end{tikzcd}\]
+	be a composable triple in $\mathcal{C} $. By filling the relevant horns, choose 2-simplices $\sigma ,\sigma ',\sigma '' : \Delta ^2 \to \mathcal{C} $ given by the diagrams, in order,
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & x \ar[" g ", dr]  &  \\
+	w \ar[" f ", ur] \ar[" gf "', rr]  &  & y \\
+	 & y \ar[" h ", dr]  &  \\
+	w \ar[" gf ", ur] \ar[" h(gf) "', rr]  &  & z \\
+	 & y \ar[" h ", dr]  &  \\
+	x \ar[" g ", ur] \ar[" hg "', rr]  &  & z
+	\end{tikzcd}\]
+	We claim that $(\sigma'',\sigma ',\bullet,\sigma )$ is a horn $\Lambda ^3_2 \to \mathcal{C} $. Indeed,
+	\[
+		d_0(\sigma ')=h=d_0(\sigma ''),\qquad d_1(\sigma )=gf=d_2(\sigma ')
+	.\]
+	Thus, there is a 3-simplex $\tau : \Delta ^3 \to \mathcal{C} $ filling the horn $(\sigma '',\sigma ',\bullet,\sigma )$. Note that $[h]\circ [gf]=[d_1(\sigma ')]$ by construction. Define $\sigma ''' \coloneqq d_2(\tau )$, and note that
+	\[
+		d_1(\sigma ''')=d_1d_2(\tau )=d_1d_1(\tau )=d_1(\sigma ')
+	.\]
+	It thus suffices to show $\sigma '''$ witnesses the composite of $hg$ and $f$. Indeed,
+	\[
+		d_0(\sigma ''')=d_0d_2(\tau )=d_1d_0(\tau )d_1(\sigma'')=hg,
+	\]
+	\[
+		d_2(\sigma ''')=d_2d_2(\tau )=d_2d_3(\tau )=d_2(\sigma )=f,
+	\]
+	and since $d_0(f)=d_1(hg)$, there is a horn $(hg,\bullet,f)$ filled by $\sigma '''$, concluding the proof.
+\end{proof}
+
+
+\begin{remark}\label{1.2.3.10}
+To show that $\pi (\mathcal{C} )\cong \hh \mathcal{C} $, we note that \cref{1.2.3.1} allows us to view $\hh \mathcal{C} $ in the following way:
+\begin{enumerate}
+	\item Objects are vertices of $\mathcal{C} $;
+	\item For every edge $f$ of $\mathcal{C} $, there is a morphism $f : d_1(f) \to d_0(f)$ in $\hh \mathcal{C} $;
+	\item For each 2-simplex $\sigma : \Delta ^2 \to \mathcal{C} $, there is an equality $d_0(\sigma )\circ d_2(\sigma )=d_1(\sigma )$;
+	\item For each vertex $x$, the morphism $s_0(x)$ is the identity $1_x$.
+\end{enumerate}
+Intuitively, this description is the same for the following reason: let $f\sim g$ be homotopic. Then there should be a 2-simplex $d_0(\sigma )=1$, $d_1(\sigma )=g$, and $d_2(\sigma )=f$. However, we note that since $[1]\circ [f]=[f]$, and since this is witnessed by another 2-simplex with $d_0(\sigma ')=1$, $d_1(\sigma ')=f$, and $d_2(\sigma ')=f$, we have that $f=g$ in $\hh \mathcal{C} $ by (3). This leads us to the conclusion of this section.
+\end{remark}
+
+\begin{proposition}\label{1.2.3.11}
+	Let $\mathcal{C} $ be an $\infty $-category. Then there is a functor $F : \hh \mathcal{C}  \to \pi (\mathcal{C} )$ which is the identity on objects, and maps morphisms by $f\mapsto [f]$. Moreover, $F$ is an \emph{isomorphism} of categories.
+\end{proposition}
+\begin{proof}
+	By way of \cref{1.2.3.9,1.2.3.10}, the functor clearly exists, and is manifestly bijective on objects and surjective on morphisms. It suffices to show the functor is faithful.
+
+	In \cref{1.2.3.10}, we stated that every morphism in $\mathcal{C} $ gives rise to a morphism in $\hh \mathcal{C} $ as described therein. We must start by showing the converse; in particular we must show the composite of two morphisms is a morphism, and that it contains identities. The second statement is trivial, since $s_0(x)$ is an edge of $\mathcal{C} $, so we focus on the first. By logic discussed at length previously which I make precise in \cref{1.2.3.12} because I can, if $f : x \to y$ and $g : y \to z$ in $\mathcal{C} $, then there is a 2-simplex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & y \ar[" g ", dr]  &  \\
+	x \ar[" f ", ur] \ar[" gf "', rr]  &  & z
+	\end{tikzcd}\]
+	Thus, any composite in $\hh \mathcal{C} $ gives rise to this simplex, and since $gf$ is an edge in $\mathcal{C} $, the statement is shown.
+
+	Now let $f,g : x \to y$ be homotopic. By \cref{1.2.3.10}, they are equal in $\hh \mathcal{C} $, showing $F$ is faithful.
+\end{proof}
+
+\begin{proposition}\label{1.2.3.12}
+	Let $\mathcal{C} $ be an $\infty $-category, and let $f : x \to y$ and $g : y \to z$. Then there is a horn $\sigma _0 \coloneqq (g,\bullet,f) : \Lambda _1^2 \to \mathcal{C} $.
+\end{proposition}
+\begin{proof}
+	Note that
+	\[
+		d_0\sigma _0(d^2)=d_0(f)=y=d_1(g)=d_1\sigma _0(d^0)
+	.\]
+	The statement now follows by \cref{1.1.2.12}.
+\end{proof}
+
+\subsection{Objects, Morphisms, and Equivalences}
+
+Generalizing the notion introduced in the previous section, in any model of $\infty $-category, two morphisms are homotopic if they are equal in the homotopy category. In topological categories, this means they are paths in the same path component of the mapping space $\Map_\mathcal{C} (x,y)$. We write $f\sim g$ to say that $f$ is homotopic to $g$.
+
+\begin{definition}\label{1.2.4.1}
+	Let $\mathcal{C} $ be an $\infty $-category. A morphism $f : x \to y$ in $\mathcal{C} $ is an \emph{equivalence} if it is an isomorphism in the homotopy category. Equivalently, it has a homotopy inverse $g : y \to x$ with $fg\sim 1$ and $gf\sim 1$. We say objects $x,y\in \mathcal{C} $ are \emph{equivalent} if there is an equivalence between them, meaning they are isomorphic in $\hh \mathcal{C} $.
+\end{definition}
+
+If $\mathcal{C} $ is a topological category, we can say some specific things about equivalences.
+
+\begin{proposition}\label{1.2.4.2}
+	Let $f : x \to y$ in a topological category $\mathcal{C} $. The following are equivalent.
+	\begin{enumerate}
+		\item The morphism $f$ is an equivalence;
+		\item The morphism $f$ has a homotopy inverse $g : y \to x$ with $fg\sim 1$ and $gf\sim 1$;
+		\item For each object $z\in \mathcal{C} $, the induced map $\Map_\mathcal{C} (z,x)\to \Map_\mathcal{C} (z,y)$ is a homotopy equivalence;
+		\item For each object $z\in \mathcal{C} $, the induced map $\Map_\mathcal{C} (z,x)\to \Map_\mathcal{C} (z,y)$ is a weak homotopy equivalence;
+		\item For each object $z\in \mathcal{C} $, the induced map $\Map_\mathcal{C} (y,z)\to \Map_\mathcal{C} (x,z)$ is a homotopy equivalence;
+		\item For each object $z\in \mathcal{C} $, the induced map $\Map_\mathcal{C} (y,z)\to \Map_\mathcal{C} (x,z)$ is a weak homotopy equivalence.
+	\end{enumerate}
+\end{proposition}
+
+In general, all meaningful properties of objects are invariant under equivalence, and similarly all meaningful properties of morphisms are invariant under homotopy (2-isomorphism). I have a feeling we will rigorize this later using some kind of $\infty $-Yoneda. For now, we appeal to the following proposition due to Joyal, which we also can't prove yet.
+
+\begin{proposition}\label{1.2.4.3}
+	Let $\mathcal{C} $ be an $\infty $-category and $f : \Delta ^1 \to \mathcal{C} $ a morphism of $\mathcal{C} $. Then $f$ is an equivalence if and only if, for each $n\geq 2$ and every map $f_0 : \Lambda _0^2 \to \mathcal{C} $ which restricts as $f_0|\Delta ^{\left\{ 0,1 \right\} } =f$, there exists a filler for $f_0$.
+\end{proposition}
+
+We note that the datum of the restriction $f_0|\Delta ^{\left\{ 0,1 \right\} } $ is determined by the action of $f_0$ on the coface $d^2 : [1] \to [2]$.
+
+
+\subsection{$\infty $-Groupoids and Classical Homotopy Theory}
+
+There is an interesting, albeit not too suprising, correlation between the theory of $\infty $-categories and $\infty $-groupoids.
+
+\begin{definition}\label{1.2.5.1}
+	Let $\mathcal{C} $ be an $\infty $-category. We say $\mathcal{C} $ is an $\infty $\emph{-groupoid} if the homotopy category $\hh \mathcal{C} $ is a groupoid.
+\end{definition}
+
+We may now make precise the fact that the theory of $\infty $-groupoids is the same as classical homotopy theory, by way of the following proposition, also due to Joyal.
+
+\begin{proposition}[\cite{joyal08a}]\label{1.2.5.2}
+	Let $\mathcal{C} $ be a simplicial set. The following are equivalent.
+	\begin{enumerate}
+		\item $\mathcal{C} $ is an $\infty $-groupoid in the sense of \cref{1.2.5.1}.
+		\item $\mathcal{C} $ admits fillers for all horns $\Lambda _i^n$ with $0\leq i<n$.
+		\item $\mathcal{C} $ admits fillers for all horns $\Lambda _i^n$ with $0<i\leq n$.
+		\item $\mathcal{C} $ is a Kan complex, meaning it fills all horns.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	By \cref{1.2.4.3}, a 0th horn maps $d^n\mapsto f$ with $f$ an equivalence if and only if it admits a filler. Since all maps in an $\infty $-groupoid are equivalences, \cref{1.2.4.3} witnesses $(1\iff 2)$. Duality gives $(1\iff 3)$. We conclude by noting $(4\iff 2\land3)$.
+\end{proof}
+
+The statement that the theory of $\infty $-groupoids is the same as classical homotopy theory then reduces to the Quillen adjunction $\left| - \right| \dashv\Sing$, and the model structures of $\mathcal{C} \mathcal{G} $ and $\sSet $. This is much easier parsed using the theory of quasi-categories than some other formulations. For example, proving this with the theory of topological categories requires an adjunction $\Omega \dashv B$ between the loop space and the classifying space of the topological monoid.
+
+Informally, we would say the inclusion functor $i$ from the full subcategory of Kan complexes into the $\infty $-category $\iCat $ exhibits $\infty $-$\mathcal{G} \mathrm{rpd} $ as a full subcategory of the $(\infty ,2)$-category $\iCat $. There is a converse to this operation, often called the \emph{core} of an $\infty $-category.
+
+\begin{proposition}[\cite{joyal08b}]\label{1.2.5.3}
+	Let $\mathcal{C} $ be an $\infty $-category, and let $\operatorname{Core}( \mathcal{C}) \subseteq \mathcal{C} $ be the largest simplicial subset which forms an $\infty $-groupoid. Then $\operatorname{Core}( \mathcal{C}) $ is a Kan complex, and is universal in the sense that for any Kan complex $K$, postcomposition by the inclusion $i^* : \sSet (K,\operatorname{Core} (\mathcal{C} )) \to \sSet (K,\mathcal{C} )$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+	\Cref{1.2.5.2} proves that $\operatorname{Core} (\mathcal{C} )$ is a Kan complex. To prove existence, see \cref{1.2.5.4}. To prove universality, any morphism of simplicial sets $f : K \to \mathcal{C} $ necessarily preserves equivalences since $\hh f : \hh K \to \hh \mathcal{C} $ is a functor and preserves isomorphisms. Thus, it factors uniquely through the inclusion $i : \operatorname{Core} (\mathcal{C} )\hookrightarrow \mathcal{C} $.
+\end{proof}
+
+\begin{construction}[{\cite[01CZ]{kerodon}}]\label{1.2.5.4}
+	Let $\mathcal{C} $ be an $\infty $-category. Let $\operatorname{Core} (\mathcal{C})$ be the simplicial subset whose $n$-simplices are preciely those maps $\Delta ^n\to \mathcal{C} $ whose edges are all equivalences. This is a simplicial subset by construction, and satisfies the universal property of \cref{1.2.5.3} by construction.
+\end{construction}
+
+The inclusion $\infty $-$\mathcal{G} \mathrm{rpd} \hookrightarrow \iCat $ doesn't have a left adjoint explicitly, but it has one in a higher categorical sense, which is given by any fibrant replacement with respect to Quillen's model structure. For example, $\Sing \left| - \right| $ suffices.
+
+\begin{remark}\label{1.2.5.5}
+	Lurie makes a fascinating remark here. The \emph{identity} functor $1: \sSet  \to \sSet $ is a Quillen adjunction between the Quillen model structure and the Joyal model structure, which we will define later. In retrospect this is obvious, but I still find it fascinating.
+\end{remark}
+
+\subsection{Homotopy Commutativity versus Homotopy Coherence}
+
+There is a problem in higher category theory introduced by the notion of a commutative diagram. The main difference between diagrams in $\hh \mathcal{C} $ and $\mathcal{C} $ is that one asks whether composites are \emph{equal} in the former, and \emph{homotopic} in the latter. Thus, we must consider the additional datum of a homotopy. The notion of a commutative diagram in $\hh \mathcal{C} $ gives rise to a \emph{homotopy commutative} diagram in $\mathcal{C} $, which turns out to be fairly unnatual.
+
+To understand the problem, we pass to the theory of topological categories and let $F : \mathcal{J}  \to \mathcal{H} $ be a diagram in the homotopy category of spaces, with $\mathcal{J} $ an ordinary category. We may view $\mathcal{J}$ as a topological category via discretization. Defining a homotopy commutative diagram in $\mathcal{C} \mathcal{G} $ corresponding to the diagram in $\mathcal{H} $ requires lifting $F$ to a functor $\widetilde{F} : \mathcal{J}  \to \mathcal{C} \mathcal{G} $ such that the functor $\mathcal{J} \to \mathcal{H} $ induced by $\widetilde{F} $ is naturally isomorphic to $F$. This is not always possible.
+
+To see why this is the case, assume such a lift exists, and let $f : x \to y$ and $g : y \to z$ be morphisms in the diagram $F$. The condition that the functor induced by $\widetilde{F} $ and $F$ be naturally isomorphic implies that there are homotopies $k_f : \widetilde{F} (f)\simeq F(f)$. One then obtains a canonical homotopy
+\[
+	F(gf)\simeq \widetilde{F} (gf)=\widetilde{F} (g)\widetilde{F} (f)\simeq F(g)F(f)
+.\]
+The functor $F$ is really just a first approximation of $\widetilde{F} $, and the second approximation should be given by accounting for the homotopies as described above. These homotopies cannot be arbitrary; even just accounting for associativity requires a relationship exist between the homotopies. This data can be encoded by the existence of a hiher homotopy, and so on. This is the idea of a \emph{homotopy coherent diagram}: the datum of one should consist of a functor $F : \mathcal{J}  \to \hh \mathcal{C} $, together with \emph{all} the higher homotopic data given by a lift $\widetilde{F} : \mathcal{J}  \to \mathcal{C} $. This is a big issue in higher category theory, since this is a lot of information to specify, and can be hard to work with.
+
+Quasi-categories, once again, provide a neat formulation of this topic. A diagram in a quasi-category $\mathcal{C} $ is a morphism of simplicial sets $f : N(\mathcal{J} ) \to \mathcal{C} $, where $\mathcal{J} $ is an ordinary category. We often abuse notation and write $f : \mathcal{J}  \to \mathcal{C} $, with the understanding that we identify 1-categories with their nerves in the theory of $\infty $-categories.
+
+\subsection{Functors Between Higher Categories}
+
+The notion of a homotopy coherent diagram is a special case of a functor of $\infty $-categories, sometimes simply called an $\infty $-functor or an $(\infty ,1)$-functor.
+
+\begin{definition}\label{1.2.7.1}
+	Let $\mathcal{C} ,\mathcal{D} $ be $\infty $-categories. An $\infty $-functor $F$ from $\mathcal{C} $ to $\mathcal{D} $ is a morphism $F : \mathcal{C}  \to \mathcal{D} $ of simplicial sets.
+\end{definition}
+
+Once again, we see that the theory of quasi-categories provides a very succinct model for $\infty $-functors. Of course, we would like to construct an $\infty $-category $\Fun(\mathcal{C} ,\mathcal{D} )$. We propose the following definition:
+
+\begin{definition}\label{1.2.7.2}
+	Let $\mathcal{C} ,\mathcal{D} $ be simplicial sets (athough we only use this notation when $\mathcal{D} $ is an $\infty $-category). We let $\Fun(\mathcal{C} ,\mathcal{D} )$ denote the simplicial set given by the internal hom $\Map_{\sSet }(\mathcal{C} , \mathcal{D} )_n =\sSet (\Delta ^n\times \mathcal{C} ,\mathcal{D} )$.
+\end{definition}
+
+\begin{proposition}\label{1.2.7.3}
+	Let $K$ be a simplicial set.
+	\begin{enumerate}
+		\item For every $\infty $-category $\mathcal{C} $, the simplicial set $\Fun(K,\mathcal{C} )$ is an $\infty $-category.
+		\item Let $\mathcal{C} \to \mathcal{D} $ be a categorical equivalence  (\cref{1.1.5.11}) of $\infty $-categories. Then the induced map $\Fun(K,\mathcal{C} )\to \Fun(K,\mathcal{D} )$ is a categorical equivalence.
+		\item Let $\mathcal{C} $ be an $\infty $-category and $K\to K'$ a categorical equivalence of simplicial sets. Then the induced map $\Fun(K',\mathcal{C} )\to \Fun(K,\mathcal{C} )$ is a categorical equivalence.
+	\end{enumerate}
+\end{proposition}
+
+We delegate the proof till later, since it uses Joyal's model structure. Morphisms in $\Fun(\mathcal{C} ,\mathcal{D} )$ are called \emph{natural transformations}, and equivalences are \emph{natural equivalences}. We could of course append $\infty $ to the beginning, but ``$\infty $-natural transformation'' just looks stupid in my opinion.
+
+\subsection{Joins of $\infty $-Categories}
+
+Let $\mathcal{C} $ and $\mathcal{D} $ be \emph{ordinary 1-categories}. We can define a new category $\mathcal{C} \star \mathcal{D} $, called the \emph{join} of $\mathcal{C} $ and $\mathcal{D} $, defined by
+\[
+	\Obj(\mathcal{C} \star \mathcal{D} ) =\Obj(\mathcal{C} ) \amalg \Obj(\mathcal{D} ),
+\]
+and for each $x,y\in \mathcal{C} \star \mathcal{D} $,
+\[
+	(\mathcal{C} \star \mathcal{D} )(x,y)=
+	\begin{cases}
+		\mathcal{C} (x,y),&x,y\in \mathcal{C} \\
+		\mathcal{D} (x,y),&x,y\in \mathcal{D} \\
+		\varnothing ,&x\in \mathcal{D} ,y\in \mathcal{C} \\
+		*,&x\in \mathcal{C} ,y\in \mathcal{D} 
+	\end{cases}
+.\]
+Apparently this construction is useful when discussing diagrams, limits, and colimits. We will generalize it to the $\infty $-categorical setting in this section.
+
+\begin{definition}\label{1.2.8.1}
+	Let $S,S'$ be simplicial sets. Define the \emph{join} of $S$ and $S'$, denoted $S\star S'$, as follows: for each nonempty finite linearly ordered set $J$, set
+	\[
+		(S\star S')(J)=\coprod_{J=I\cup I'} S(I)\times S'(I'),
+	\]
+	where the coproduct is computed over all decompositions of $J$ into \emph{disjoint} subsets $I,I'$, satisfying $\max I < \min I'$. We take the convention that $S(\varnothing )=S'(\varnothing )=*$.
+\end{definition}
+
+Restricting along $\boldsymbol{\Delta} $, we obtain a more explicit description
+\[
+	(S\star S')_n=S_n\amalg  S'_n\amalg  \coprod_{i+j=n-1} S_i\times S'_j
+.\]
+See \cite{nlab} for a longer description.

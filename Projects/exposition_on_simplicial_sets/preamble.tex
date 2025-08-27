@@ -24,13 +24,6 @@
 \usepackage{booktabs} %the \toprule and \bottomrule thick lines on tables
 
 \usepackage{hyperref}
-\definecolor{aqua}{HTML}{00C5FF}
-\hypersetup{
-    colorlinks,
-    linkcolor={black},
-    urlcolor={black},
-    citecolor={black}
-}
 \usepackage{cleveref}
 
 
@@ -87,28 +80,14 @@
 \usepackage[framemethod=TikZ]{mdframed}
 \mdfsetup{skipabove=1em,skipbelow=0em, innertopmargin=5pt, innerbottommargin=6pt}
 
-% cool colors
-\definecolor{darkbg}{RGB}{54, 57, 63}
-\definecolor{lightfg}{RGB}{220, 221, 222}
-\definecolor{accentblue}{RGB}{133, 143, 255}
-\pagecolor{darkbg}
-\color{lightfg}
 \usepackage{sectsty}
-\allsectionsfont{\color{accentblue}}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=accentblue,
-    filecolor=accentblue,      
-    urlcolor=accentblue,
-    citecolor=accentblue,
-}
 
 %%%%% theoremstyles
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont, qed={\color{accentblue}$\heartsuit$}]{definition}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, qed={\color{accentblue}$\blacksquare$}]{proofline}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, qed={\color{accentblue}\qedsymbol}]{egline}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont]{dfn}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\itshape]{thm}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{definition}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, qed={$\blacksquare$}]{proofline}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, qed={\qedsymbol}]{egline}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{dfn}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\itshape]{thm}
 
 
 \declaretheorem[numberwithin=subsection, style=definition, name=Definition]{definition}
@@ -133,8 +112,8 @@
 \renewenvironment{proof}[1][\proofname]{\begin{replacementproof}}{\end{replacementproof}}
 
 \usepackage{titlesec}
-\titleformat{\section}{\normalfont\large\bfseries\color{accentblue}\centering}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalfont\large\bfseries\color{accentblue}\centering}{\small\thesubsection}{1em}{\small}
+\titleformat{\section}{\normalfont\large\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\centering}{\small\thesubsection}{1em}{\small}
 
 
 \author{Grant Talbert}
