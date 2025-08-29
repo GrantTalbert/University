@@ -481,4 +481,53 @@ Restricting along $\boldsymbol{\Delta} $, we obtain a more explicit description
 \[
 	(S\star S')_n=S_n\amalg  S'_n\amalg  \coprod_{i+j=n-1} S_i\times S'_j
 .\]
-See \cite{nlab} for a longer description.
+It's not immediately clear why these are equivalent, but Lurie explains more in \cite[016K]{kerodon}. The empty simplicial set $\varnothing =\Delta ^{-1} $ is an identity for the operation:
+\[
+	(S\star \varnothing )_n=S_n\amalg \varnothing \amalg \coprod_{i+j=n-1} S_i \times \varnothing =S_n
+.\]
+In fact, $\star $ induces a monoidal structure on $\sSet $ in the obvious way. We also have natural isomorpisms $\varphi _{ij} : \Delta ^{i-1} \star \Delta ^{j-1} \cong \Delta ^{i+j-1} $ for all $i,j\geq 0$.
+
+The nerve respects joins. Let $\mathcal{C} ,\mathcal{D} $ be (1-, simplicial, topological) categories. Then there is a canonical isomorphism
+\[
+	N(\mathcal{C} )\star N(\mathcal{D} )\cong N(\mathcal{C} \star \mathcal{D} )
+\]
+for $N$ the (regular, simplicial, topological) nerve. I assume this is not terribly difficult to prove, but it seems tedious. This of course suggests that the proposed join on simplicial sets (and in particular, $\infty $-categories) is the same as that on categories. Unfortunately, $\mathfrak{C} [\bullet]$ does not commute with $\star $ up to isomorphism, but we will later show that it commutes up to equivalence of simplicial categories, with the equivalence functor the identity on both arguments.
+
+We conclude this section with another result due to Joyal, and some terminology that we will use later.
+
+\begin{proposition}\label{1.2.8.2}
+	Let $S,S'$ be $\infty $-categories. Then their join $S\star S'$ is an $\infty $-category.
+\end{proposition}
+\begin{proof}
+	Let $p : \Lambda _i^n \to S\star S'$ be a horn. If all vertices are carried into either $S$ or $S'$, $p$ has a filler by hypothesis, so we may freely assume there is some $j\in [n]$, $j\neq i$ such that $p : \left\{ 0, \ldots ,j \right\} \to S_0$ and $p : \left\{ j+1, \ldots , n \right\} \to S'_0$. Of course $p$ then restricts along these vertices by
+	\[
+		\Delta ^{\left\{ 0, \ldots ,j \right\} } \to S,\qquad \Delta ^{\left\{ j+1, \ldots ,n \right\} } \to S,
+	\]
+	and this determines an extension of $p$ mapping $\Delta ^n\to S\star S'$.
+\end{proof}
+\begin{definition}\label{1.2.8.3}
+	Let $K$ be a simplicial set. The \emph{left cone} $K^{\lhd} $ is the join $\Delta ^0\star K$, and the \emph{right cone} $K^{\rhd} $ is the join $K\star \Delta ^0$.
+\end{definition}
+
+\subsection{Overcategories and Undercategories}
+
+The most important examples of comma categories are the slice categories $(\mathcal{C} \downarrow x)=\mathcal{C} /x$ and coslice categories $(x\downarrow \mathcal{C} )=x /\mathcal{C} $. The text denotes these by $\mathcal{C} _{/x} $ and $\mathcal{C} _{x/} $, and we inherit the books notation for now. These categories are also called \emph{overcategories} and \emph{undercategories} for obvious reasons.
+
+The overcategory can be restated with a universal property: for any category $\mathcal{C} '$, there is an isomorphism of \emph{sets}
+\[
+	\Hom(\mathcal{C} ', \mathcal{C} _{/x} ) \cong \Hom_x(\mathcal{C} '\star [0], \mathcal{C} ) ,
+\]
+where the subscript $x$ denotes that we consider only those functors $\mathcal{C} '\star [0]\to \mathcal{C} $ whose restriction to $[0]$ is $x$. This property will be used to generalize overcategories to the $\infty $-categorical setting. This generalization is due to Joyal.
+
+\begin{proposition}\label{1.2.9.1}
+	Let $S,K$ be simplicial sets, and $p : K \to S$ a morphism of simplicial sets. Then there is a simplicial set $S_{/p} $ satisfying the universal property
+	\[
+		\sSet (Y,S_{/p} )\cong \sSet _p(Y\star K,S)
+	.\]
+	Once again, $\sSet _p$ denotes that we only consider maps $f : Y\star K \to S$ with $f|K=p$.
+\end{proposition}
+\begin{proof}
+	We prove by explicit construction of $S_{/p} $. Simply define the $n$-simplices to be the set $\sSet _p(\Delta ^n\star K,S)$. It holds by definition: by Yoneda, $\sSet (\Delta ^n,S_{/p} )\cong \sSet _p(\Delta ^n\star K,S)$
+\end{proof}
+
+If $S$ is an $\infty $-category, we call $S_{/p} $ an \emph{overcategory} of $S$ over $p$. 
