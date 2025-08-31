@@ -487,6 +487,13 @@ It's not immediately clear why these are equivalent, but Lurie explains more in 
 .\]
 In fact, $\star $ induces a monoidal structure on $\sSet $ in the obvious way. We also have natural isomorpisms $\varphi _{ij} : \Delta ^{i-1} \star \Delta ^{j-1} \cong \Delta ^{i+j-1} $ for all $i,j\geq 0$.
 
+\begin{remark}\label{1.2.8.2}
+	This is an important point. Using our equivalent definition, we can describe the $n$-simplices of the join as the set of all tuples $(\sigma ,\tau )$ with $\sigma \in S_i$ and $\tau \in S_j'$, where $i+j=n-1$. One might object that we also have $S_n$ and $S'_n$ in the disjoint union, but if we allow $i,j\geq -1$ and recall that $[-1]=\varnothing $ and we have taken the convention that $S(\varnothing )=S'(\varnothing)=*$, we obtain that $S_{-1} =S'_{-1} =*$.
+
+	The main idea behind the join is something inbetween a union and a coproduct. We disjointly insert both objects, but then we connect them together.
+\end{remark}
+
+
 The nerve respects joins. Let $\mathcal{C} ,\mathcal{D} $ be (1-, simplicial, topological) categories. Then there is a canonical isomorphism
 \[
 	N(\mathcal{C} )\star N(\mathcal{D} )\cong N(\mathcal{C} \star \mathcal{D} )
@@ -495,7 +502,7 @@ for $N$ the (regular, simplicial, topological) nerve. I assume this is not terri
 
 We conclude this section with another result due to Joyal, and some terminology that we will use later.
 
-\begin{proposition}\label{1.2.8.2}
+\begin{proposition}\label{1.2.8.3}
 	Let $S,S'$ be $\infty $-categories. Then their join $S\star S'$ is an $\infty $-category.
 \end{proposition}
 \begin{proof}
@@ -505,7 +512,7 @@ We conclude this section with another result due to Joyal, and some terminology 
 	\]
 	and this determines an extension of $p$ mapping $\Delta ^n\to S\star S'$.
 \end{proof}
-\begin{definition}\label{1.2.8.3}
+\begin{definition}\label{1.2.8.4}
 	Let $K$ be a simplicial set. The \emph{left cone} $K^{\lhd} $ is the join $\Delta ^0\star K$, and the \emph{right cone} $K^{\rhd} $ is the join $K\star \Delta ^0$.
 \end{definition}
 
@@ -527,7 +534,51 @@ where the subscript $x$ denotes that we consider only those functors $\mathcal{C
 	Once again, $\sSet _p$ denotes that we only consider maps $f : Y\star K \to S$ with $f|K=p$.
 \end{proposition}
 \begin{proof}
-	We prove by explicit construction of $S_{/p} $. Simply define the $n$-simplices to be the set $\sSet _p(\Delta ^n\star K,S)$. It holds by definition: by Yoneda, $\sSet (\Delta ^n,S_{/p} )\cong \sSet _p(\Delta ^n\star K,S)$
+	We prove by explicit construction of $S_{/p} $. Simply define the $n$-simplices to be the set $\sSet _p(\Delta ^n\star K,S)$. Of course if $Y=\Delta ^n$ the conclusion follows by Yoneda. I think the general proof follows by noting that $-\star K$ preserves colimits, and then doing functors as colimits of representable functors.
 \end{proof}
 
-If $S$ is an $\infty $-category, we call $S_{/p} $ an \emph{overcategory} of $S$ over $p$. 
+If $S$ is an $\infty $-category, we call $S_{/p} $ an \emph{overcategory} of $S$ over $p$. Passing operations to over/undercategories is well-behaved:
+
+\begin{proposition}\label{1.2.9.2}
+	Let $p : K \to \mathcal{C} $ be a morphism of simplicial sets with $\mathcal{C} $ and $\infty $-category. Then $\mathcal{C} _{/p} $ is an $\infty $-category. Moreover, given a categorical equivalence $q : \mathcal{C} \simeq \mathcal{C} '$, the induced map $\mathcal{C} _{/p} \to \mathcal{C} _{/qp} $ is a categorical equivalence.
+\end{proposition}
+
+Once again, we cannot do this proof yet. The first chapter is more of an overview of the language; the main machinery is postponed for the rest of the text.
+
+\begin{notation}\label{1.2.9.3}
+	If $\mathcal{C} $ is an $\infty $-category and $p : \Delta ^n \to \mathcal{C} $ is an $n$-simplex $\sigma \in \mathcal{C} _n$, we generally prefer to write $\mathcal{C} _{/\sigma } $ for the overcategory, for obvious reasons. In particular, with $x\in \mathcal{C} _0$ an object, we write $\mathcal{C} _{/x} $ for the overcategory for the map $\Delta ^0\to \mathcal{C} $ corresponding to the $0$-simplex $x$ under Yoneda.
+\end{notation}
+
+\begin{remark}\label{1.2.9.4}
+	We define the undercategory by noting that $Y\star K$ is dual to $K\star Y$, and thus we obtain for some $p : K \to S$ a morphism of simplicial sets, the \emph{undercategory} $S_{p/} $ is given by the simplicial set which is universal in the sense that
+	\[
+		\sSet (Y,S_{p/} )\cong \sSet _p(K\star Y,S)
+	.\]
+	Of course, the definition is simply dual to the one given in \cref{1.2.9.1}.
+\end{remark}
+
+\begin{remark}[\cite{nlab}]\label{1.2.9.5}
+	Another definition for the over or undercategory is as follows. Let $f : K \to \mathcal{C} $ be a morphism of simplicial sets. Define $\mathcal{C} _{/f} $ as the simpliical set which is universal in the sense that
+	\[
+		\sSet (S,\mathcal{C} _{/f} )\cong (K\downarrow \sSet )(i_{S,K} ,f)
+	\]
+	for $i_{S,K} : K \to S\star K$ the canonical inclusion. Of course, morphisms in the coslice category are diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	K\ar[equals, r] \ar[" i_{S\text{,} K}  "', d]  & K\ar[" f ", d]  \\
+	S\star K\ar[" \varphi  "', r]  & \mathcal{C} 
+	\end{tikzcd}\]
+whose commutivity implies that $\varphi \circ i_{S,K} =f$. Note that $\varphi \circ i_{S,K} =\varphi |K$, giving the equivalence to our definition. The undercategory is defined by swapping for $i_{K,S} : K \to K\star S$.
+\end{remark}
+
+\begin{claim}\label{1.2.9.6}
+	Let $\mathcal{C} $ be a 1-category. Then there is a (canonical) isomorphism $N(\mathcal{C} )_{/x} \cong N(\mathcal{C} _{/x} )$ for $x\in \mathcal{C} $.
+\end{claim}
+\begin{proof}
+	The proof amounts to an inspection of the definition of the undercategory of the nerve; the isomorphism will be obvious after this. Recall that $n$-simplices of the nerve of the overcategory $N(\mathcal{C} _{/x} )$ are simply $n$-simplices of the nerve of $\mathcal{C} $, followed by a map to $x$. We will essentially prove that $N(\mathcal{C} )_{/x} $ is basically the same.
+
+	Recall that $\Delta ^{i-1} \star \Delta ^{j-1} \cong \Delta ^{i+j-1} $. Applying this here gives $\Delta ^n\star \Delta ^0\cong \Delta ^{n+1} $. Thus, $n$-simplices of $N(\mathcal{C} )_{/x} $ are $(n+1)$-simplices $\Delta ^{n+1} \to N(\mathcal{C} )$. It suffices at this point to show that the codomain of the final map is $x$, which would conclude the proof by obviousness. Recall that our simplex $\Delta ^{n+1} \to \mathcal{C} $ must restrict along the original $\Delta ^0$ to $x$. This corresponds to the final vertex under the isomorphism (the isomorphism is basically just concatenating vertices), so we have the result as claimed.
+\end{proof}
+
+\subsection{Fully Faithful and Essentially Surjective Functors}
+
+
