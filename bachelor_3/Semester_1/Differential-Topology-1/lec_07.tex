@@ -1,0 +1,40 @@
+\lecture{7}{Fri 19 Sep 2025 12:20}{Tangent bundles}
+
+I MISSED STUFF. WE PICKED UP WITH CHANGE OF COORDINATES IN TANGENT SPACES $T_pM$.
+
+Choose $p\in M$, and choose a chart $(U,\varphi =u^\mu )$ for $p$. This is a coordinate system, and $\varphi (p)=\hat{p} =(x^1, \ldots ,x^n)$ in the natural basis $\partial _\mu |_{\hat{p} } $. This gives a vector
+\[
+	\left.\frac{\partial }{\partial x^i} \right|_p = \varphi ^{-1} \left( \left.\frac{\partial }{\partial x^i} \right|_{\hat{p} }  \right)  \implies v=v^\mu \partial _\mu 
+.\]
+However, given any other chart $(V,\psi )$, we get another basis induced in the same way. To change variables, we use the precomposition-esk change of variables map $(\psi \circ \varphi ^{-1} )_*$, which is literally the change of variables in the calc 3 sense.
+
+This change of variables basically becomes the chain rule.
+
+\begin{lemma}\label{askj}
+	Every $v\in T_pM$ is tangent to some smooth curve in $M$.
+\end{lemma}
+\begin{proof}
+	Let $(p\in U,\varphi )$ a chart of the curve at $p$. Then
+	\[
+		v=v^i \left.\frac{\partial }{\partial x^i} \right|_p
+	.\]
+	Let $\gamma : (-\varepsilon ,\varepsilon) \to M$ have $\gamma _i(t)=tv^i$. Then $\gamma (0)=p$ and $\gamma $ is $C^\infty $. Add idk i think we are writing $\gamma '$ instead which is $\gamma _* \frac{\mathrm{d}}{\mathrm{d}t} $ eval at $p$?
+\end{proof}
+
+\begin{definition}\label{1.2.20}
+	Let $M$ be a smooth manifold. Define the \emph{tangent bundle} $TM$ as the disjoint union
+	\[
+		TM\coloneqq \coprod_{p\in M} T_pM
+	.\]
+\end{definition}
+
+The motivation here is smooth vector fields. There is a projection $TM\to M$ by mapping each $v\in T_pM\subseteq TM$ to $p$:
+\[
+	\pi : T_pM \mapsto p
+.\]
+If we give $TM$ a smooth structure, we can define some $V : M \to TM$ to be a smooth vector field if $\pi \circ V=1$.
+
+\begin{proposition}\label{1.2.21}
+	For any smooth $n$-manifold $M$, the tangent bundle has a natural smooth structure making it a $2n$-manifold, and the canonical projection $\pi : TM \to M$ is smooth.
+\end{proposition}
+

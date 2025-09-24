@@ -1,0 +1,24 @@
+\section{Examples and constructions in abelian categories}
+
+We begin this section with some examples of abelian categories. Clearly, $\Mod_R$ is an abelian category, and thus so is $\Ab $, since we modeled them after these categories. The following construction gives another example.
+
+\begin{construction}\label{5.1}
+	Let $\mathcal{A} $ be an abelian category. The category $\Ch(\mathcal{A} ) $ of \emph{chain complexes} in $\mathcal{A} $ is defined by taking objects to be chain complexes $x_{\bullet} \in \Ch(\mathcal{A} ) $, and morphisms $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ are collections of functions $\left\{ f_n \right\}_{n\in\mathbb{Z} } $ which commute with differentials in the sense that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\ldots \ar[" d_{n+2}  ", r]  & x_{n+1} \ar[" d_{n+1}  ", r] \ar[" f_{n+1}  "', d]  & x_n \ar[" d_n ", r] \ar[" f_n "', d]  & x_{n-1} \ar[" d_{n-1}  ", r] \ar[" f_{n-1}  "', d]  & \ldots  \\
+	\ldots \ar[" d_{n+2}  "', r]  & y_{n+1} \ar[" d_{n+1}  "', r]  & y_n \ar[" d_n "', r]  & y_{n-1} \ar[" d_{n-1}  "', r]  & \ldots 
+	\end{tikzcd}\]
+	commutes. More precisely,
+	\[
+		f_{n-1} \circ d^x_{n} =d_{n}^y \circ f_{n} 
+	.\]
+	Composition and identity are given pointwise.
+\end{construction}
+
+\begin{proposition}\label{5.2}
+	The category $\Ch(\mathcal{A} ) $ is abelian.
+\end{proposition}
+
+We don't offer a full proof, but rather we note that $\Ch(\mathcal{A} ) $ is simply a full subcategory of $\Fun(\mathbb{Z} ,\mathcal{A} )$, and the relevant universals exist in the functor category and are defined pointwise by \cite{ml}. Some wrangling is needed to show the universals are indeed in $\Ch(\mathcal{A} ) $, and that the abelian structure is promoted.
+
+Another example of an abelian category in particular use in algebraic geometry is as follows. Given an abelian category $\mathcal{A} $ and a topological space $X$ (more generally, a site), the category $\mathcal{S} \mathrm{hf}_\mathcal{A} (X)$ of sheaves on $X$ with values in $\mathcal{A} $ is an abelian category. This means categories such as the category $\mathcal{S} \mathrm{hf} _{\Ab } (X)$ of sheaves of abelian groups are useful, since one can immediately do homological algebra with sheaves.

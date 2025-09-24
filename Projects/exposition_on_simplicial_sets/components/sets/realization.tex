@@ -1,4 +1,4 @@
-We were able to view objects in $\BD$ as geometric objects using the functor $\Delta : \BD\opp\to\Top$. We can in fact achieve even better results with the \emph{geometric realization functor} $|-| : \sSet\to\Top$. What follows in \cref{3.2.1} is an extremely succinct way to summarize the geometric realization of a simplicial set using the language of \emph{coends}.
+We were able to view objects in $\BD$ as geometric objects using the functor $\Delta^{\bullet}  : \BD\to\Top$. We can in fact achieve even better results with the \emph{geometric realization functor} $|-| : \sSet\to\Top$. What follows in \cref{3.2.1} is an extremely succinct way to summarize the geometric realization of a simplicial set using the language of \emph{coends}.
 
 Although it is simple, it is not particularly descriptive. Thus the reader who is unfamiliar with coends should not be concerned, as we will provide a much better description in \cref{3.2.2} and \cref{3.2.3}. We found it suprisingly difficult to find a good resource on geometric realization; most sources expect us to already know it, yet we cannot find where we are supposed to know it from. We thank Emily Riehl for her presentation in \cite{sset}, and we thank Greg Friedman for his presentation in \cite{fried}.
 
@@ -18,7 +18,7 @@ Although it is simple, it is not particularly descriptive. Thus the reader who i
         \coprod_{[n]\in\BD} X_n\times\Delta^n,
         \]
         where the set $X_n$ is given the \emph{discrete topology}, meaning all subsets $U\subseteq X_n$ are open.
-        \item We then impose an equivalence relation on the space, which we plan to quotient by. Let $\alpha : [m]\to[n]$ be a morphism in the simplex category $\BD$. Denote by $\alpha^*$ the morphism $X(\alpha)$, and denote by $\alpha_*$ the morphism $\Delta^\bullet(\alpha)$. We describe in more detail how to think of these morphisms in \cref{3.2.3}. We quotient by the following relation: for any $x\in X_n$ and any $p\in \Delta^m$,
+        \item We then impose an equivalence relation on the space, which we plan to quotient by. Let $\alpha : [m]\to[n]$ be a morphism in the simplex category $\BD$. Denote by $\alpha^*$ the morphism $X(\alpha)$, and denote by $\alpha_*$ the continuous map $\Delta^\bullet(\alpha)$. We describe in more detail how to think of these morphisms in \cref{3.2.3}. We quotient by the following relation: for any $x\in X_n$ and any $p\in \Delta^m$,
         \[
         (\alpha^*(x),p)\sim (x,\alpha_*(p)).
         \]

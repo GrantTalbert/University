@@ -1,0 +1,72 @@
+\lecture{8}{Mon 22 Sep 2025 12:20}{Tangent bundles}
+
+We want to give $TM$ a smooth manifold structure such that \cref{1.2.21} is true. Our idea is if $(U,\varphi )$ is a chart, consider $\pi ^{-1} (U)$, which is the set of tangent vectors at $p\in U$ for all $p$. We can define a function
+\[
+	\widetilde{\varphi } : \pi ^{-1} (U) \to \widetilde{U} \times \mathbb{R} ^n\subseteq \mathbb{R} ^{2n},\qquad T_pM\ni v\mapsto (\varphi (p),v^1, \ldots ,v^n),
+\]
+where $v^i$ is given under the chart $(U,\varphi )$. We want to topologize $TM$ using the maps $\widetilde{\varphi } $. To do this, we demand that $\widetilde{\varphi } $ be a homeomorphism. We recall a lemma from earlier in the book.
+
+\begin{lemma}\label{1.2.22}
+	Let $M$ be a set, and $\left\{ U_\alpha  \right\}_{\alpha \in A} $ a collection of subsets of $M$, together with injective maps $\varphi_\alpha : U_\alpha  \to \mathbb{R} ^n$ for all $\alpha \in A$, such that the following holds.
+
+	\begin{enumerate}
+		\item For all $\alpha \in A$, $\varphi_\alpha (U_\alpha )$ is open.
+		\item For all $\alpha ,\beta \in A$, $\varphi _\alpha (U_\alpha \cap U_\beta )$ and $\varphi _\beta (U_\alpha \cap U_\beta )$ is open.
+		\item Whenever the intersection is nonempty, $\varphi _\alpha \circ \varphi _\beta ^{-1} $ is a diffeomorphism.
+		\item Countably many $U_\alpha $s cover $M$.
+		\item For all $p\neq q\in M$, either there is some $U_\alpha \ni p,q$, or there are disjoint sets $U_\alpha ,U_\beta $ with $p\in U_\alpha $ and $q\in U_\beta $.
+	\end{enumerate}
+	Then $M$ has a unique smooth structure such that each $(U_\alpha ,\varphi_\alpha )$ is a smooth chart.
+\end{lemma}
+\begin{proof}
+	Topologize by generating a topology on preimages of each $\varphi _\alpha $ on open sets. Second countability follows by (4). Hausdorff follows by (5) and the definition of open sets. Since each $\varphi _\alpha $ is injective, factoring through the image gives $\varphi _\alpha : U_\alpha  \to \varphi_\alpha (U_\alpha )$ is a homeomorphism. We then obtain the smooth transition maps by (2) and (3).
+\end{proof}
+
+Recall our situation with $TM$. For each chart $(U,\varphi )$ of $M$, there is an injective map $\widetilde{\varphi } : \pi ^{-1} (U) \to \widetilde{U}\times \mathbb{R}^n $. Then the collection of $(\widetilde{\varphi },\pi ^{-1} (U))$ satisfies the requirements of \cref{1.2.22}. Smoothness of $\pi $ is immediate. Additionally,
+
+\begin{proposition}\label{1.2.23}
+	If $M$ is a smooth $n$-manifold which can be covered by one chart, then there is a diffeomorphism $TM\cong M\times \mathbb{R} ^n$.
+\end{proposition}
+\begin{proof}
+	Follows by definition, since there is a chart $\widetilde{\varphi } : TM \to M\times \mathbb{R} ^n$ since the chart covers the manifold. The global chart is a diffeomorphism. We then say that $TM$ is a trivial bundle.
+\end{proof}
+
+The upshot of this is for all $p\in M$, there is a neighborhood $U$ of $p$ with $\pi ^{-1} (U) \cong U\times \mathbb{R} ^n$. Thus, $TM$ is locally trivial.
+
+This puts constraints on what $TM$ can be. Consider $TS^1$. If we imagine gluing a line to each point of $S^1$ perpendicular to the plane of the circle, we get a cylinder. This is correct, since $TS^1 \cong S^1\times \mathbb{R} $. However, we could also glue them by rotating the direction as we traverse around the circle, giving us a Mob\"ius strip, which we cannot have since it is not locally trivial.
+
+\begin{definition}\label{1.2.24}
+	Let $F : M \to N$ be a smooth map. Define $F_* = \mathrm{d} F$, called the \emph{global pushforward} or \emph{global differential} by $\mathrm{d} F : TM \to TN$ via $\mathrm{d} F|T_pM = \mathrm{d} F_p$. Alternatively,
+	\[
+		\mathrm{d} F = \coprod_{p\in M} \mathrm{d} F_p
+	.\]
+	This still behaves covariantly.
+\end{definition}
+
+\begin{definition}\label{1.2.25}
+	A smooth vector field $V$ is a smooth map $M\to TM$ such that $\pi \circ V=1$.
+\end{definition}
+
+\begin{definition}\label{1.2.26}
+	Let $F : M \to N$ be a smooth map. Then the \emph{rank} of $F$ at $p$. is the rank of th matrix representation of $\mathrm{d}F_p : T_pM \to T_pN$. If the rank is constant with respect to $p$, we say the rank is constant, and simply refer to the \emph{rank} of $F$. The rank at $p$ is written $\mathrm{rk}_pF$.
+\end{definition}
+
+Clearly, given $F : M \to N$,
+\[
+	0\leq \mathrm{rk}_pF \leq \min (\dim M,\dim N)
+.\]
+If $\mathrm{rk} _pF = \min (\dim M,\dim N)$, then we say $F$ has \emph{full rank} at $p$.
+
+\begin{definition}\label{1.2.27}
+	A smooth map $F : M \to N$ is a \emph{submersion} if and only if $F$ is constant rank, and $\mathrm{rk} F=\dim N$. We say $F$ is a \emph{immersion} if and only if $F$ is constant rank, and $\mathrm{rk} F = \dim M$.
+\end{definition}
+
+
+\begin{proposition}\label{1.2.28}
+	Let $F : M \to N$ be smooth, and let $p\in M$. If $\mathrm{d} F_p : T_pM \to T_{F(p)} N$ is surective, then there is a neighborhood $U$ of $p$ such that $F|U$ is a submersion. If it is injective, then $F|U$ is an immersion.
+\end{proposition}
+\begin{proof}
+	Obvious, since the rank of surjections is just dim of codomain, similarly for injections, and continuity of $F$ implies there is a neighborhood wherein rank is constant. And also the fact that the space of full rank matrices is open.
+\end{proof}
+
+For example, the projection $\pi :M\times N\to M$ is surjective, so it is surjective on all tangent spaces. Thus, $\pi $ is a smooth submersion. An immersion could be given by a smooth path $\gamma : I \to M$ if and only if it has everywhere nonzero velocity, since $\mathrm{d} \gamma $ is non-rank-0 whenever velocity doesn't vanish everywhere. A fun example is $\pi : TM \to M$ is a smooth submersion. This follows since its a local property, so we apply the definition.

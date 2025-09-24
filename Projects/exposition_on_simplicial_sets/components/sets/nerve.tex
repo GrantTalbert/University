@@ -1,4 +1,4 @@
-Given a category $\C$, there is an extremely important construction known as the \emph{nerve} of $\C$, which encodes \emph{all} of the information of $\C$ into a simplicial set. This is an extremely important construction for a number of reasons. For example, it's proven in \cite[Prop.~1.1.2.2]{htt}\footnote{Joyal proved this first, but I prefer Lurie's treatment. However, this fact is so fundamental that it's likely a proof may date back to Boardman and Vogt, but I unfortunatey don't have access to their paper.} that all nerves are $\infty$-categories, and in particular the nerve is the canonical way of regarding categories as $\infty$-categories. Although exploring this precisely is beyond the scope of this paper, we trust that the reader understands this is an important result, even if they do not quite understand it. With this in mind, we present the definition of the nerve.
+Given a category $\C$, there is an extremely important construction known as the \emph{nerve} of $\C$, which encodes \emph{all} of the information of $\C$ into a simplicial set. This is an extremely important construction for a number of reasons. For example, Boardman and Vogt proved in \cite{BV73} that nerves are quasi-categories, and in particular the nerve is the canonical way of regarding categories as quasi-categories. See \cite{htt} Proposition 1.1.2.2 for a proof. Although exploring this precisely is beyond the scope of this paper, we trust that the reader understands this is an important result, even if they do not quite understand it. With this in mind, we present the definition of the nerve.
 
 \begin{definition}\label{3.3.1}
     The nerve $N(\C)$ of a category $\C$ is the simplicial set defined as follows.
@@ -111,7 +111,7 @@ Given a category $\C$, there is an extremely important construction known as the
     by noting that
     \begin{itemize}
         \item the map is the identity on the $|\Delta^1_0|$ component of the coproduct,
-        \item and the map is $s^0$ on,
+        \item and the map is $s^0$ on $| \Delta ^2_{(0,0)} | $,
     \end{itemize}
     so universality of coproduct assembles our map via the unique dashed arrow in the diagram of solid arrows
     \[\begin{tikzcd}

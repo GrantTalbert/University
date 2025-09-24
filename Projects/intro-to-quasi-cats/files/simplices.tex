@@ -1,13 +1,171 @@
 \section{Simplicial Sets}
 
+TODO: topologial simplices, faces, degeneracies
+
+
 Quasi-categories are built atop the theory of \emph{simplicial sets}. We review the basic theory.
 
 \begin{definition}\label{3.1}
 	The simplex category $\boldsymbol{\Delta} $ is defined as
 	\begin{itemize}
-		\item Objects are finite nonempty ordinals $[n]=\left\{ 0, \ldots ,n \right\} $;
+		\item Objects are finite nonempty ordinals $n+1=[n]=\left\{ 0, \ldots ,n \right\} $;
 		\item Morphisms are monotone functions, meaning $f : [n] \to [m]$ is a morphism if $x\leq y$ implies $f(x)\leq f(y)$.
 	\end{itemize}
 \end{definition}
 
+Of course, we are only really concerned with two important types of morphisms in $\boldsymbol{\Delta} $, called the \emph{cofaces} and \emph{codegeneracies}.
+
+\begin{definition}\label{3.2}
+	Let $n\geq 1$. For each $i\in[n]$, define $d^i : [n-1] \to [n]$ as the function
+	\[
+		d^i(x)=\begin{cases}
+			x,&x< i\\
+			x+1,&x\geq i
+		\end{cases}
+	.\]
+	We call $d^i$ the \emph{ith coface}. Let $m\geq 0$. For each $i\in[m]$, define $s^i : [m+1] \to [m]$ as the function
+	\[
+		s^i(x)=
+		\begin{cases}
+			x,&x\leq i\\
+			x-1,&x>i
+		\end{cases}
+	.\]
+	We call $s^i$ the \emph{ith codegeneracy}.
+\end{definition}
+
+\begin{intuition}\label{3.3}
+	Cofaces and codegeneracies have a very intuitive description. The $i$th coface $d^i : [n-1] \to [n]$ basically inserts $[n-1]$ into $[n]$ by \emph{skipping} $i$. Everything below $i$ gets mapped to itself, and anything equal or above $i$ gets mapped up one spot, effectively skipping $i$. Similarly, codegeneracies $[n+1]\to [n]$ collapse $[n+1]$ into $[n]$ by \emph{double counting $i$}. They map everything up to $i$ to itself, and everything above $i$ gets shifted down by $1$. The effect of this is both $i$ and $i+1$ map to $i$, effectively double counting $i$.
+\end{intuition}
+
+Cofaces and codegeneracies are important due to the following two theorems. It is a rite of passage to prove both of them, so I leave them as an exercise. For a sketch of the proof of the first, see \cite{ml}.
+
+\begin{proposition}[Epi-Mono Factorization]\label{3.4}
+	Let $f : [n] \to [m]$ be a morphism in $\boldsymbol{\Delta} $. Then $f$ has a \emph{unique} representation as a composite of cofaces and codegeneracies:
+	\[
+		f=d^{i_1} \circ \cdots \circ d^{i_k} \circ s^{j_1} \circ \cdots \circ s^{j_h} 
+	.\]
+	This factorization is known as the \emph{epi-mono factorization}.
+\end{proposition}
+\begin{proposition}[Cosimplicial Identities]\label{3.5}
+	With domains and codomains as appropriate, the following identities hold.
+	\[
+		\begin{cases}
+			d^jd^i=d^id^{j-1} ,&i<j\\
+			s^jd^i=d^is^{j-1} ,&i<j\\
+			s^jd^j=s^jd^{j+1} =1&\\
+			s^jd^i=d^{i-1} s^j,&i>j+1\\
+			s^js^i=s^is^{j+1} ,&i\leq j
+		\end{cases}
+	.\]
+	These are referred to as the \emph{cosimplicial identities}.
+\end{proposition}
+
+We do not ask that the reader remember the cosimplicial identities, and we will reference them any time they are invoked. The reader will pick them up slowly as they work through the theory.
+
+We will offer some geometric intuition for simplices, because it will be useful later. We can view simplices as geometric objects, and the coface and codegeneracy maps take a very geometric meaning.
+% TODO: this
+
+We now move on to the theory of simplicial sets. These arose as powerful models for topological spaces. Classically, a simplicial set can be identified with a topological space through a process known as \emph{geometric realization}, which takes a \emph{massive} collection of geometric simplices, and glues them together according to some rules encoded in the simplicial set. This process is very powerful and deserves at least some mention, since the geometric realization is what we call a \emph{Quillen equivalence}, meaning the homotopy theory of topological spaces is the \emph{exact same} as the homotopy theory of simplicial sets. This is a powerful tool for homotopy theorists.
+
+We will not be discussing the homotopy theory of simplicial sets at length, and will use them as a means to an end to introduce the notion of a quasi-category. This of course involves defining simplicial sets, which we now do.
+
+\begin{definition}\label{3.6}
+	A simplicial set $X$ is a functor $X : \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Set $.
+\end{definition}
+
+We often prefer not to think about simplicial sets as functors, and rather as collections of sets that have some interesting combinatorial properties. We will introduce this point of view momentarily, but we would like to point out some facts we get for free by viewing these objects as functors.
+
+\begin{notation}\label{3.7}
+	We write $\sSet $ for the category of simplicial sets, which is the functor category $\Fun(\boldsymbol{\Delta} ^{\mathrm{op}} ,\Set )$. There are a variety of other notations for this category, such as $\mathcal{S} \mathrm{imp} \mathcal{S} \mathrm{et} $ or $\mathcal{S} \mathcal{S} \mathrm{et} $. Given a simplicial set $X$, we write $X_n$ for $X$ evaluated at $[n]$. We write $d_i : [n] \to [n-1]$ for the image on the coface $X(d^i)$, and call $d_i$ a \emph{face operator}. Similarly, we write $s_i=X[s^i]: [n] \to [n+1]$ and call $s_i$ a \emph{degeneracy operator}. We typically do not write $X(\alpha )$ for more general morphisms $\alpha $ in $\boldsymbol{\Delta} $, and rather write $\alpha ^*$ and specify that we do not mean precomposition. We call maps $\alpha ^*$ \emph{simplicial operators}.
+\end{notation}
+
+
+\begin{remark}[Simplicial Identities]\label{3.8}
+	The cosimplicial identities (\cref{3.5}) dualize to what we call the \emph{simplicial identities}. By functoriality and contravariance, all we need to do is flip the order of composites. This means that face maps and degeneracy maps in a simplicial set $X$ satisfy the \emph{simplicial identities}:
+	\[
+		\begin{cases}
+			d_id_j=d_{j-1} d_i,&i<j\\
+			d_is_j=s_{j-1} d_i,&i<j\\
+			d_js_j=d_js_{j+1} =1&\\
+			d_is_j=s_jd_{i-1} ,&i>j+1\\
+			s_is_j=s_{j+1} s_i,&i\leq j
+		\end{cases}
+	.\]
+\end{remark}
+
+\begin{remark}\label{3.9}
+	Since $\sSet $ is a functor category, morphisms of simplicial sets are given by morphisms of functors, which are simply \emph{natural transformations}. More explicitly, let $X,Y\in \sSet $. A morphism $f : X \to Y$ of simplicial sets is a natural transformation from $X$ to $Y$. Recall that natural transformations $f$ have a component $f_x$ for each $x$ in the domain of the relevant functors. Translating this into the language of simplicial sets, this means for each $n\geq 0$, there is a \emph{function} $f_n : X_n \to Y_n$ such that for any $i$, the squares
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_n \ar[" f_n ", r] \ar[" d_i "', d]  & Y_n \ar[" d_i ", d]  & X_n \ar[" f_n ", r] \ar[" s_i "', d]  & Y_n \ar[" s_i ", d]  \\
+	X_{n-1} \ar[" f_{n-1}  "', r]  & Y_{n-1}  & X_{n+1} \ar[" f_{n+1}  "', r]  & Y_{n+1}  
+	\end{tikzcd}\]
+	commute. The reason we only care about faces and degeneracies is because by \cref{3.4}, \emph{all morphisms in $\boldsymbol{\Delta} $ are composites of faces and degeneracies}. By functoriality of simplicial sets, we can take any simplicial operator and decompose it into degeneracies and faces by \cref{3.4}. We then just glue together all the naturality squares for those faces and degeneracies, and get a naturality square for that operator.
+\end{remark}
+
+\begin{remark}\label{3.10}
+	The Yoneda lemma gives important simplicial sets. Given $[n]\in \boldsymbol{\Delta} $, the Yoneda embedding gives a simplicial set $\boldsymbol{\Delta} (-,[n]): \boldsymbol{\Delta} ^{\mathrm{op}}  \to \Set $. We denote $\boldsymbol{\Delta} (-,[n])$ by $\Delta ^n$, and call it the \emph{standard $n$-simplex} or \emph{standard $n$-simplicial set}. The geometric realization of the standard $n$-simplex is the standard geometric $n$-simplex. Also by the Yoneda lemma, we immediately know that faces $d_j$ in $\Delta ^n$ are given by \emph{precomposition} by cofaces $d^j$. Similarly, degeneracies $s_i$ are simply precomposition by codegeneracies $s^i$.
+\end{remark}
+
+The proper way to think about simplicial sets is as follows. A simplicial set $X$ is a collection of sets $X_n$ for each $n\geq 0$, and a collection of faces and degeneracies satisfying the simplicial identities. Since all maps in $\boldsymbol{\Delta} $ factor uniquely as composites of cofaces and codegeneracies, and moreover they can be factored using \emph{only the cosimplicial identities}, any collection of maps satisfying the simplicial identities will generate the proper operators for $X$ to be functorial.
+
+\begin{remark}\label{3.11}
+	We now investigate the standard $n$-simplices, since these are highly important objects. Given a cosimplicial operator $f : [n] \to [m]$, the Yoneda embedding gives a morphism $f_*: \Delta ^n \to \Delta ^m$ by postcomposition. In particular, given a coface $d^i : [n-1] \to [n]$, there is a map $(d^i)_* : \Delta ^{n-1}  \to \Delta ^n$. We also call this map a coface, and we also choose to denote it by $d^i : \Delta ^{n-1}  \to \Delta ^n$, rather than standard postcomposition notation. This is because the Yoneda embedding gives what we call a \emph{cosimplicial object} in the category $\sSet $.
+\end{remark}
+
+\begin{remark}\label{3.12}
+	By the Yoneda lemma, there is an isomorphism
+	\[
+		\Set ^{\boldsymbol{\Delta} ^{\mathrm{op}} } (\boldsymbol{\Delta} (-,[n]),K)\cong K[n]
+	\]
+	natural in $[n]$. Recognizing that $\sSet \coloneqq \Set ^{\boldsymbol{\Delta} ^{\mathrm{op}} } $ and that $\Delta ^n \coloneqq \boldsymbol{\Delta} (-,[n])$, this is more conventionally written as
+	\[
+		\sSet (\Delta ^n,K)\cong K_n
+	.\]
+	In other words, morphisms of simplicial sets $\Delta ^n \to K$ correspond \emph{exactly} to $n$-simplices of $K$. This is extremely important, because it means any $n$-simplex $\tau \in K_n$ completely determines a morphism $\sigma : \Delta ^n \to K$, and any morphism $\sigma : \Delta ^n \to K$ determines an $n$-simplex $\tau \in K_n$. Investigating the proof of the Yoneda lemma shows that $\tau $ is given by $\sigma (1_{[n]} )$, and that the way $\tau $ determines $\sigma $ is given by taking the epi-mono factorization (\cref{3.4}) of each $n$-simplex, writing it as precomposing $1_{[n]} $ by cofaces and codegeneracies, then applying the fact that morphisms of simplicial sets commute with faces and degeneracies (\cref{3.9}). For this reason, morphisms $\sigma : \Delta ^n \to K$ are sometimes called $n$-simplices, and we may even identify them with each other, writing $\sigma $ for both the morphism and the $n$-simplex it identifies under Yoneda. Some authors take this further and define $n$-simplices of a simplicial set $K$ as morphisms $\Delta ^n \to K$, although we think this is too far and we simply abuse terminology as we see convenient.
+\end{remark}
+
+
+We now introduce arguably the most important example of simplicial sets, the \emph{nerve} of a category.
+
+\begin{definition}\label{3.13}
+	Let $\mathcal{C} $ be a category. We define the \emph{nerve} $N(\mathcal{C} )$ of $\mathcal{C} $ to be the simplicial set where
+	\begin{itemize}
+		\item $n$-simplices are given by functors $[n]\to \mathcal{C} $ where $[n]$ is viewed as a poset category. More explicitly, $n$-simplices are chains of $n+1$ objects and $n$ composable morphisms between them:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			c_0 \ar[" f_1 ", r]  & c_1 \ar[" f_2 ", r]  & \cdots \ar[" f_{n-1}  ", r] & c_{n-1} \ar[" f_n ", r]  & c_n.
+			\end{tikzcd}\]
+		\item Degeneracies $s_i : N(\mathcal{C} )_n \to N(\mathcal{C} )_{n+1} $ insert the identity right after the $i$th morphism and insert $c_i$ as the new $(i+1)$th object. More explicitly, $s_i$ maps the $n$-simplex
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				c_0 \ar[" f_1 ", r]   & \cdots \ar[" f_{i}  ", r] & c_{i} \ar[" f_{i+1}  ", r]  & \cdots \ar[" f_n ", r] & c_n
+			\end{tikzcd}\]
+			to the $(n+1)$-simplex
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				c_0 \ar[" f_1 ", r]   & \cdots \ar[" f_{i}  ", r] & c_{i} \ar[" 1_{c_i}  ", r] & c_i \ar[" f_{i+1}  ", r]  & \cdots \ar[" f_n ", r] & c_n.
+			\end{tikzcd}\]
+		\item Faces are split into two different types of faces, \emph{inner faces} and \emph{outer faces}.
+			\begin{itemize}
+				\item Inner faces are faces $d_i : N(\mathcal{C} )_n \to N(\mathcal{C} )_{n-1} $ where $0<i<n$, and are defined by composing the maps around the $i$th object. More explicitly, inner faces map the $n$-simplex
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				c_0 \ar[" f_1 ", r]   & \cdots \ar[" f_{i}  ", r] & c_{i} \ar[" f_{i+1}  ", r]  & \cdots \ar[" f_n ", r] & c_n
+			\end{tikzcd}\]
+			to the $(n-1)$-simplex
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				c_0 \ar[" f_1 ", r]   & \cdots \ar[" f_{i-1}", r] & c_{i-1} \ar[" f_{i+1\circ f_i}  ", r]  & c_{i+1} \ar[" f_{i+2} ", r]  &\cdots \ar[" f_n ", r] & c_n.
+			\end{tikzcd}\]
+		\item Outer faces are faces $d_i : N(\mathcal{C} )_n \to N(\mathcal{C} )_{n-1} $ where $i=0$ or $i=n$, and are defined by simply deleting the trailing morphism. More explicitly, given an $n$-simplex
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			c_0 \ar[" f_1 ", r]  & c_1 \ar[" f_2 ", r]  & \cdots \ar[" f_{n-1}  ", r] & c_{n-1} \ar[" f_n ", r]  & c_n,
+			\end{tikzcd}\]
+			the 0th face is given by
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			 c_1 \ar[" f_2 ", r]  & \cdots \ar[" f_{n-1}  ", r] & c_{n-1} \ar[" f_n ", r]  & c_n
+			\end{tikzcd}\]
+			and the $n$th face is given by
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			c_0 \ar[" f_1 ", r]  & c_1 \ar[" f_2 ", r]  & \cdots \ar[" f_{n-1}  ", r] & c_{n-1} .
+			\end{tikzcd}\]
+			\end{itemize}
+	\end{itemize}
+\end{definition}
 

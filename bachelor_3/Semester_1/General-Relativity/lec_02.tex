@@ -1,0 +1,104 @@
+\lecture{2}{Thu 04 Sep 2025 12:31}{Vectors and dual vectors}
+
+In order to define vectors on a manifold, we work with the \emph{tangent space}. Let $M$ be an $n$-manifold, and choose some path $x^\mu (-)$ parametrized by the variable $\lambda $. Composing along the charts gives some $g : M \to \mathbb{R} $, and we can compute partial derivatives
+\[
+	\frac{\partial g(x)}{\partial x^\mu } 
+\]
+by once again composing along the charts in the other direction, which yields some $\mathbb{R} ^n\to \mathbb{R} $. The atlas condition guarentees invariance under choice of charts. The tangent space at $p=x^\mu (\lambda )$, written as $T_pM$, is the $\mathbb{R} $-vector space of these derivatives. It is spanned by
+\[
+	\left\{ \frac{\partial }{\partial x^1} , \ldots , \frac{\partial }{\partial x^n}  \right\} 
+.\]
+Any vector $v$ of this space admits a basis decomposition
+\[
+	v=v^\mu \frac{\partial }{\partial x^\mu } 
+.\]
+
+There is a vector
+\[
+	\frac{\partial }{\partial x^\mu } 
+,\]
+with $\nu $th component
+\[
+	\left( \frac{\partial }{\partial x^\mu } \right) ^\nu =\delta _\mu^\nu \left( \frac{\partial }{\partial x^\mu }  \right) 
+.\]
+Then
+\[
+	\frac{\partial }{\partial x^\mu } =\left( \frac{\partial }{\partial x^\nu }  \right) ^\mu \frac{\partial }{\partial x^\mu } 
+.\]
+Oftentimes we write
+\[
+	\hat{e}_\mu =\frac{\partial }{\partial x^\mu } =\hat{e}_\mu ^\nu \frac{\partial }{\partial x^\nu } 
+\]
+for simplicity.
+
+Given two coordinate systems $x^\mu ,(x')^\mu $, the tangent space $T_pM$ takes both $\frac{\partial }{\partial x^\mu } $ and $\frac{\partial }{\partial (x')^\mu } $ as bases. To translate between bases, we use t he chain rule
+\[
+	\frac{\partial }{\partial x^\mu } =\frac{\partial (x')^\alpha }{\partial x^\mu } \frac{\partial }{\partial (x')^\alpha } 
+.\]
+We thus obtain a change of basis: given
+\[
+	v=v^\mu \frac{\partial }{\partial x^\mu } =(v')^\mu \frac{\partial }{\partial (x')^\mu } ,
+\]
+we have
+\[
+	v=v^\mu \frac{\partial (x')^\alpha }{\partial x^\mu } \frac{\partial }{\partial (x')^\alpha } =(v')^\alpha \frac{\partial }{\partial (x')^\alpha } 
+.\]
+Thus,
+\[
+	v^\mu \frac{\partial (x')^\alpha }{\partial x^\mu } =(v')^\alpha 
+.\]
+
+We often have functions of vectors. We write $f(v)$ by $f(v^\mu )$, and leave the basis component implicit (i.e. not writing $f(v^1, \ldots ,v^n)$).
+
+Let $x^\mu (\lambda )$ be a path in $M$. We define the \emph{total} derivative
+\[
+	\frac{\mathrm{d}x^\mu(\lambda ) }{\mathrm{d}\lambda } 
+\]
+with components given by the components in the tangent space of $\frac{\mathrm{d}x}{\mathrm{d}\lambda } $. The total derivative can indeed be computed since paths are functions in 1 variable. Viewed in the tangent space, given
+\[
+	V\coloneqq \frac{\mathrm{d}x}{\mathrm{d}\lambda } ,
+\]
+we have
+\[
+	V=V^\mu \frac{\partial }{\partial x^\mu } 
+.\]
+How does $V$ act on a function $g$ on the manifold?
+\[
+	Vg(x)=V^\mu \frac{\partial }{\partial x^\mu } g(x)=\frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\partial }{\partial x^\mu } g(x)=\frac{\mathrm{d}}{\mathrm{d}\lambda } g(x(\lambda ))
+\]
+where the last equality is precisely the reverse of the chain rule.
+
+We have a metric $g_{\mu \nu } $. Given vectors $v^\mu ,w^\nu $, we can compute the \emph{inner product} $\left\langle v,w \right\rangle =g_{\mu \nu } v^\mu w^\nu $, and we write $g(v,w)$ for this inner product. We generally write this as
+\[
+	v^\mu w_\mu  ,\qquad w_\mu \coloneqq g_{\mu \nu } w^\nu 
+.\]
+This agrees with our previous raising-lowering indices convention. We call vectors $w_\mu $ \emph{dual vectors}. Dual vectors have a \emph{dual basis} $\mathrm{d} x^\mu $ given by
+\[
+	\mathrm{d} x^\mu \left(\frac{\partial }{\partial x^\nu } \right)=\delta _\nu ^\mu 
+.\]
+Dual vectors essentially act on vectors, rather than on functions. A general dual vector $\omega $ admits a basis decomposition via
+\[
+	\omega =\omega _\mu \mathrm{d} x^\mu
+.\]
+Linearity thus extends the formula for dual vectors acting on vectors:
+\[
+	\omega (v)=\omega _\mu \mathrm{d} x^\mu \left( v^\nu \frac{\partial }{\partial x^\nu }  \right) =x_\mu v^\nu \mathrm{d} x^\mu \frac{\partial }{\partial x^\nu } =\omega _\mu v^\nu \delta _\mu ^\nu =\omega _\mu v^\mu 
+.\]
+
+Consider transformations under basis change. Choose $x^\mu ,(x')^\mu $ coordinates. Since $\omega (v)=\omega _\mu v^\mu $ is basis independent,
+\[
+	\omega_\mu v^\mu =\omega '_\alpha (v')^\alpha \implies \omega '_\alpha =\omega _\nu \frac{\partial x^\nu }{\partial (x')^\mu } \implies \omega '_\alpha (v')^\alpha =\omega _\nu \frac{\partial x^\nu }{\partial (x')^\alpha } \left( v^\beta \frac{\partial (x')^\alpha }{\partial x^\beta }  \right) 
+\]
+\[
+	=v_\nu \delta _\beta ^\nu v^\beta =\omega _\nu v^\nu 
+.\]
+
+We finally are able to rigorize differentials. Let $\varphi (x)$ a function of $M$, and recall we define
+\[
+	\mathrm{d} \varphi =\frac{\partial \varphi (x)}{\partial x^\mu } \mathrm{d} x^\mu 
+.\]
+Some books write
+\[
+	\varphi ,\mu =\frac{\partial \varphi }{\partial x^\mu } 
+.\]
+Question: are ``dual vectors'' actually elements (at least, up to isomorphism) of the dual vector space?

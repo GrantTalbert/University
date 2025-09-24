@@ -1,0 +1,25 @@
+\lecture{2}{Thu 04 Sep 2025 13:57}{Axioms of quantum mechanics}
+
+The axioms of Quantum Mechanics are as follows.
+
+
+\begin{enumerate}
+	\item (Dirac) The (pure) physical state of a particle is completely described by a vector in a complex Hilberts space $\mathcal{H} $ with the canonical norm.
+	\item (Schr\"odinger) The time evolution dynamics are governed by the Schr\"odinger equation
+		\[
+			i\hbar \frac{\partial }{\partial t} \left|\Psi \right\rangle = \mathbf{\hat{H} } \left|\Psi \right\rangle, 
+		\]
+		where $\mathbf{\hat{H} } $ is the Hamiltonian operator.
+	\item Consider a composite system of two different Hilbert spaces $\mathcal{H} _1,\mathcal{H} _2$. Given $\left|A\right\rangle\in \mathcal{H} _1$ and $\left|B\right\rangle\in \mathcal{H} _2$ the subsystems, the total physical system is completely described by the vector $\left|A\right\rangle\otimes \left|B\right\rangle$ in the space $\mathcal{H} _1\otimes_\mathbb{C} \mathcal{H} _2$. We write $\left|A;B\right\rangle$ or $\left|AB\right\rangle$ for $\left|A\right\rangle\otimes \left|B\right\rangle$.
+	\item A physical observable is represented by a Hermitian operator $\mathbf{\hat{A} } $ on the elements of a Hilbert space such that the measurement on a system in a state $\left|\Psi \right\rangle$ always returns just one of its eigenvalues $\lambda _n\left|\psi _n\right\rangle = \mathbf{\hat{A} }  \left|\psi _n\right\rangle$ with probability of measuring $\lambda _n$ given by $\left\langle \psi _n\middle\vert\Psi \right\rangle$.
+	\item (Copenhagen) After the measurement, if the measurement yields eigenvalue $\lambda _n$, then the system is collapsed to a corresponding eigenstate $\left|\psi _n\right\rangle$.
+	\item (Many Worlds, alternative to (5)) After the measurement, the system and observer become entangled. The system continues to evolve according to (2).
+\end{enumerate}
+
+\begin{remark}
+	The Schr\"odinger equation can be fully relativistic, even though it appears to violate special relativity, so long as the Hamiltonian respects Lorentz invariance. However, the standard Schr\"odinger equation in the position basis
+	\[
+		\mathbf{\hat{H} } =\frac{\mathbf{\hat{p} } }{2m} +\mathbf{\hat{V} }(\mathbf{\hat{x} })  
+	,\]
+	violates Lorentz invariance. Unfortunately, this can also only be done in flat spacetime. The equation is, however, fully deterministic.
+\end{remark}

@@ -1,0 +1,53 @@
+\lecture{1}{Tue 02 Sep 2025 15:29}{Syllabus day}
+
+Syllabus at \url{https://juanitaduquer.github.io/Documents/syllabus741.pdf}.
+
+\chapter{Categories}
+
+\section{Definition}
+
+\begin{definition}\label{1.1.1}
+	A category $\mathcal{C} $ has
+	\begin{itemize}
+		\item a class $\Obj(\mathcal{C} ) $ of \emph{objects};
+		\item a class $\Mor(\mathcal{C} )$ of \emph{morpshism};
+		\item two functions $\dom, \cod : \Mor(\mathcal{C} ) \to \Obj(\mathcal{C} ) $ called \emph{domain} and \emph{codomain}, respectively (we write $f : x \to y$ to say $\dom f = x$ and $\cod f = y$);
+		\item a function $1_{\bullet} : \Obj(\mathcal{C} )  \to \Mor(\mathcal{C} )$ called \emph{identity};
+		\item a function
+			\[
+				\circ : \left\{ (g,f)\in\Mor(\mathcal{C} )\times \Mor(\mathcal{C} )\mid \dom g = \cod f \right\}  \to \Mor(\mathcal{C} )
+		\]
+		called \emph{composition} (we write $g\circ f$ or $gf$ for $\circ (g,f)$);	
+	\end{itemize}
+	such that the following axioms are satisfied:
+	\begin{enumerate}
+		\item $1_x : x \to x$;
+		\item composition is associative;
+		\item the identity $1_x$ is a unit for composition on both sides.
+	\end{enumerate}
+\end{definition}
+
+We write $\mathcal{C} (x,y)$ for the set of morphisms $x\to y$. We write $x\in \mathcal{C} $ to denote that $x$ is an object of $\mathcal{C} $. We take the fairly common convention that all categories are locally small in these notes. We write $\End_{\mathcal{C} }(x) \coloneqq \mathcal{C} (x,x)$. We often abuse notation and write $1$ for the identity on some object when specifying the object in the subscript becomes inconvenient.
+
+\begin{example}
+	Common categories include
+	\begin{itemize}
+		\item the category $\Set $ of sets and functions;
+		\item the category $\Grp $ of groups and group homomorphisms;
+		\item the category $\Ring $ of (unital) rings and (unital) ring homomorphisms;
+		\item the category $R$-$\Mod$ of $R$-modules and $R$-linear maps;
+		\item the category $\Ch(\mathcal{A} ) $ of chain complexes on an abelian category $\mathcal{A} $;
+		\item the category $\Top $ of topological spaces and continuous maps;
+		\item the category $\mathcal{L} \mathrm{in} $ of linearly ordered sets and monotonic maps;
+		\item the category $\boldsymbol{\Delta} $ of finite nonempty ordinals and monotonic maps;
+		\item the category $\Cat $ of small categories;
+		\item the category $\Mod$ of model categories;
+		\item the category $\mathcal{V} $-$\Cat $ of small $\mathcal{V} $-categories for $\mathcal{V} $ some cosmos;
+		\item the category $\sSet =\Set ^{\boldsymbol{\Delta}^{\mathrm{op}} } $ of simplicial sets;
+	\end{itemize}
+	and many more.
+\end{example}
+
+Given a poset $(S,\leq )$, we define the poset category by saying there is a unique arrow $x\to y$ whenever $x\leq y$, and no arrow otherwise. We call such a category a \emph{poset category}. All linearly ordered sets are assumed to be poset categories unless specified otherwise. Of particular interest are finite ordinals $n=[n-1]=\left\{ 0, \ldots ,n-1 \right\} $ ordered by $\leq $.
+
+

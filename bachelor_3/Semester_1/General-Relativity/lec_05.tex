@@ -1,0 +1,117 @@
+\lecture{5}{Tue 16 Sep 2025 12:32}{Covariance}
+
+Before discussing covariance, we continue our discussion of the Equivalence principle. Consider a laser firing a photon at a fixed wavelength $\lambda _i$. We measure it at the top with a detector to be a \emph{different number} $\lambda _f \neq \lambda _i$. This experiment was done at Harvard by shooting photons 22 meters. This small difference in gravity was able to measure the redshift. We derive this using only the equivalence principle.
+
+This situation is equivalent to the entire tower accelerating upwards at $9.8m/s^2$, and shooting a laser up the tower the instant it starts accelerating. The distance $z(t)$ of the photon from $z_0$ is $z(t) = z_0+\frac{1}{2} at^2$. Of course, $\Delta t=t_f-t_i=\frac{z_f}{c} $. We choose $t_i=0$. The velocity of the rocket is simply $v=at_f=a\frac{z_0}{c} $. There is then a redshift factor of $\frac{\Delta \lambda }{\lambda _i}  $ by the Doppler effect. This gives a doppler shift of
+\[
+	\sqrt{\frac{1+v/c}{1-v/c} } -1
+.\]
+This approximates out to $az_f/c^2$ in the small gravitational potential when plugging in the $t$s.
+
+We use a mathematical systemization of this argument, called \emph{general covariance}.
+
+\begin{enumerate}
+	\item First, write down equations of motion for physics in the absense of gravity.
+	\item Then, introduce the metric and its derivatives into the equations of motion in such a way that the resultant equations of motion are invariant under coordinate changes (Lorentz transformations). We then WLOG reduce to Minkowski space.
+\end{enumerate}
+
+To do this, we need to learn how to efficiently write the equations of motion in a coordinate-invariant manner more efficiently. We will explore this at length. The fascinating implications of this fact are that gravity follows completely by coordinate-invariance and the Minkowski metric, meaning the \emph{entire effect of gravity} is the coordinate transformation into the gravitational frame.
+
+We start by considering free motion of a particle
+\[
+	\frac{\mathrm{d}u^\mu }{\mathrm{d}\tau } =0
+.\]
+Recall that $u^\mu $ is  the 4-velocity $(u^0,u^i)$ and $\tau $ is the proper time (rest frame time)
+\[
+	\mathrm{d} \tau ^2=-\eta _{\mu \nu } \mathrm{d} x^\mu \mathrm{d} x^\nu 
+.\]
+. Idk $\tau $ represents time in our coordinate system. This is equivalently written as
+\[
+	\frac{\mathrm{d}^2x^\mu }{\mathrm{d}\tau ^2} =\left( \frac{\mathrm{d}^2t}{\mathrm{d}\tau ^2} ,\frac{\mathrm{d}^2x^i}{\mathrm{d}\tau ^2}  \right) =0
+.\]
+In the rest frame, $t=\tau $, so the time component vanishes in the rest frame.
+
+The issue is we want to also work with massless particles, and they don't have proper time. This means we can't use $\tau $ since it never changes, so we have to do something else. Define $\sigma =x^0$ as the time component in an inertial frame that is not necessarily the reference frame. We then have
+\[
+	\frac{\mathrm{d}^2x^\mu }{\mathrm{d}\sigma ^2} =0
+.\]
+We use affine parameters to show that $\sigma $ is invariant under our choice. Write $\sigma =a\lambda +b$, where $\lambda $ is an affine parameter. We then still have
+\[
+	\frac{\mathrm{d}^2x^\mu }{\mathrm{d}\lambda ^2} =0
+\]
+by change of variables. We thus have the freedom to redefine the coordinate system using any affine parameter.
+
+Both massive \emph{and} massless particles can then be written as
+\[
+	\frac{\mathrm{d}^2\xi ^\mu }{\mathrm{d}\lambda ^2} =0,\qquad \xi ^\mu =\text{freely falling frame}.
+\]
+Of course by Lorentz invariance (and in particular, invariance under boosts), we see that the velocity of the particle in this frame need not be defined, since all are Lorentz invariant.
+
+The question is: what are the equations of motion in the lab frame? The answer is given by transforming
+\[
+	\frac{\mathrm{d}^2\xi ^\mu }{\mathrm{d}\lambda ^2} =0 \to \text{lab frame equivalent} 
+.\]
+We do this explicitly by computing $\xi ^\mu (x)$. We want to write these in terms of the metric. In the freely falling frame we choose the metric by $\eta _{\mu \nu } $ with vanishing first derivatives. This is what the freely falling frame is (recall it exists by earlier discussion). The lab frame is an accelerating frame because our lab is on a rocketship. I love GR.
+
+Write $g_{\mu \nu } $ for the metric for the lab frame, and recall that we have that our metric transformation is given by
+\[
+	g_{\mu \nu } \to g'_{\mu \nu } =g_{\alpha \beta } \frac{\partial x^\alpha }{\partial (x')^\mu } \frac{\partial x^\beta }{\partial (x')^\nu } =\partial _\mu x^\alpha \partial _\nu x'^\beta =g_{\alpha \beta } \frac{\partial x^\alpha }{\partial \xi ^\mu } \frac{\partial x^\beta }{\partial \xi ^\nu } 
+.\]
+A trick to remembering this is that the indices must always contract meaning since $\mu ,\nu $ are on the bottom for $g_{\mu \nu } $, the must also be on the bottom, which we have by $\partial _\mu ,\partial _\nu $.
+
+Since $g'$ is the freely falling frame, we have
+\[
+	g_{\alpha \beta } \frac{\partial x^\alpha }{\partial \xi ^\mu } \frac{\partial x^\beta }{\partial \xi ^\nu } =\eta _{\mu \nu } 
+.\]
+Writing the tensors as matrices, we have inverse matrices
+\[
+	\frac{\partial x^\alpha }{\partial \xi ^\mu } =\left( \frac{\partial \xi ^\alpha }{\partial x^\mu }  \right) ^{-1} 
+.\]
+Multiplying through on our above equation gives
+\[
+	\eta \frac{\partial \xi ^\mu }{\partial x^\sigma } =g_{\alpha \beta } \frac{\partial x^\alpha }{\partial \xi ^\mu } \frac{\partial \xi ^\mu }{\partial x^\sigma } \frac{\partial x^\beta }{\partial \xi ^\nu } =g_{\alpha \beta } \delta _\sigma ^\alpha \frac{\partial x^\beta }{\partial \xi ^\nu } =g_{\sigma \beta } \frac{\partial x^\beta }{\partial x^\nu } 
+.\]
+Applying the same argument again gives
+\[
+	\eta _{\mu \nu } \frac{\partial \xi ^\mu }{\partial x^\sigma } \frac{\partial \xi ^\nu }{\partial x^\rho } =g_{\sigma \rho } 
+.\]
+
+We are now writing $\tau $ instead of $\lambda $ because the prof's notation got lazy. Applying the chain rule and product rule,
+\[
+	0=\frac{\mathrm{d}^2\xi ^\mu }{\mathrm{d}\tau ^2} =\frac{\mathrm{d}}{\mathrm{d}\tau } \frac{\mathrm{d}}{\mathrm{d}\tau } \xi ^\mu =\frac{\mathrm{d}}{\mathrm{d}\tau } \left( \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\partial \xi ^\mu }{\partial x^\alpha }  \right) =\frac{\partial ^2\xi ^\mu }{\partial x^\alpha \partial x^\beta } \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau } +\frac{\mathrm{d}^2x^\alpha }{\mathrm{d}\tau ^2} \frac{\partial \xi ^\mu }{\partial x^\alpha } 
+.\]
+Of course throughout this we are assuming derivatives freely commute, which indeed follows for smooth maps. We use the same process to strip of the factor of $\partial_\alpha \xi ^\mu $ by multiplying through by $\partial_{\xi ^\mu } x^\sigma $:
+\[
+	0=\frac{\mathrm{d}x^\sigma }{\mathrm{d}\tau ^2} +\frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau } \frac{\partial x^\sigma }{\partial \xi ^\mu }\frac{\partial ^2\xi ^\mu }{\partial x^\alpha \partial x^\beta } 
+.\]
+Wr write
+\[
+	\Gamma _{\alpha \beta } ^\sigma  \coloneqq \frac{\partial ^2\xi ^\mu }{\partial x^\alpha \partial x^\beta } \frac{\partial x^\sigma }{\partial \xi ^\mu } 
+.\]
+The answer is then rewritten as
+\[
+	0=\frac{\mathrm{d}^2x^\sigma }{\mathrm{d}\tau ^2} +\Gamma _{\alpha \beta } ^\sigma \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau } 
+.\]
+This is called the \emph{geodesic equation}. We want to rewrite it in terms of a metric to be able to use it more easily. To do this, we have to rewrite $\Gamma _{\alpha \beta } ^\sigma $ in terms of the metric
+\[
+	\eta _{\mu \nu } \frac{\partial \xi ^\mu }{\partial x^\sigma } \frac{\partial \xi ^\nu }{\partial x^\rho } =g_{\sigma \rho } 
+.\]
+Differentiate with respect to $x^\lambda $:
+\[
+	\frac{\partial g_{\alpha \beta } }{\partial x^\lambda } =\eta _{\mu \nu } \frac{\partial ^2\xi ^\mu }{\partial x^\lambda \partial x^\alpha } \frac{\partial \xi ^\nu }{\partial x^\beta } +\eta _{\mu \nu } \frac{\partial \xi ^\mu }{\partial x^\alpha } \frac{\partial ^2\xi ^\nu }{\partial x^\lambda \partial x^\beta } 
+.\]
+Notice that this is simply
+\[
+	\frac{\partial g_{\mu \nu } }{\partial x^\lambda } =\eta _{\mu \nu } \left( \Gamma _{\lambda \alpha } ^\rho \frac{\partial \xi ^\mu }{\partial x^\rho } \frac{\partial \xi ^\nu }{\partial x^\beta } +\Gamma _{\lambda \beta } ^\rho \frac{\partial \xi ^\mu }{\partial x^\alpha } \frac{\partial \xi ^\nu }{\partial x^\rho }  \right) =\Gamma^\rho_{\lambda \alpha } g_{\rho \beta } +\Gamma ^\rho _{\lambda \beta } g_{\alpha \rho } ,
+\]
+where the final step follows also by our above formula for $g_{\mu \nu } $.
+
+Note that by definition, the Christofell symbol $\Gamma _{\alpha \beta } ^\mu $ is symmetric under the lower indices, so we add the equation to itself under a permutation of indices, which I don't want tow rite. We end up with
+\[
+	\partial _\lambda g_{\mu \nu } +\partial _\mu g_{\lambda \nu } -\partial _\nu g_{\mu \lambda } =2\Gamma ^\rho _{\lambda \mu } g_{\rho \nu }  
+.\]
+Stripping the metric by multiplying by its inverse:
+\[
+	\Gamma _{\alpha \beta } ^\rho =\frac{1}{2} g^{\sigma \rho } \left( \frac{\partial g_{\alpha \sigma } }{\partial x^\beta } +\frac{\partial g_{\beta \sigma } }{\partial x^\alpha } -\frac{\partial g_{\alpha \beta } }{\partial x^\sigma }  \right) 
+.\]
+This allows us to rewrite the geodesic equation in terms of the metric only. Since the Minkowski metric has fully dropped out, this olds in \emph{any metric}.

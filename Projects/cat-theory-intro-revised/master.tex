@@ -1,0 +1,116 @@
+\documentclass[11pt, A4]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+
+\usepackage{titlepageBU}
+\title{Introduction to Category Theory}
+\author{Grant Talbert}
+\date{\today}
+\college{College of Arts and Sciences}
+\department{Department of Mathematics and Statistics}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	We introduce the basic notions of category theory at an undergraduate level. We cover categories, functors, natural transformations, universals, and Yoneda.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+A group is (roughly) a set $G$, and an operation (usually addition or multiplication) on the elements of $G$. For example, the sets of real numbers, complex numbers, integers, and rational numbers are all groups under addition. Technically they are not groups under multiplication, but this is not very important for us.
+
+There's another extremely important construction in the study of groups, called a \emph{group homomorphism}. Given groups $G,H$ where we denote both of the operations by multiplication, a \emph{group homomorphism} is a function $\varphi : G \to H$ such that for any $g,h\in G$,
+\[
+	\varphi (g\cdot h)=\varphi (g)\cdot \varphi (h)
+.\]
+We say that $\varphi $ \emph{preserves} the group operation. The reason group homomorphisms are interesting is because the existence of a group homomorphism implies two groups have similar \emph{structure}. We usually think of the group operation as having some additional \emph{structure}, and the study of groups is the study of this structure. The group homomorphism $\varphi $ takes the structure of $G$, and morphs it into something compatible with the structure of $H$, which is why the group operation of $H$ is the same both inside and outside of $H$. This is why group homomorphisms are interesting.
+
+The upshot of this short discussion is that the field of group theory is the study of \emph{groups}, and THE most important tool in this is the study of \emph{group homomorphisms}. We want to study a certain type of object (groups), and interesting types of maps between them (group homomorphisms).
+
+This idea of having a type of \emph{object} and a type of \emph{map} between them is not just isolated to group theory. Many different fields of math follow this exact same recipe, such as the study of vector spaces, $R$-modules, rings, topological spaces, and way more.
+
+Category theory abstracts this idea. Many fields of math are \emph{abstractions} of more mundane constructions, which means instead of focusing on any specific construction (eg. Euclidean space $\mathbb{R} ^n$), we focus on \emph{any} construction which behaves similarly (eg. any topological space $X$). In category theory, instead of looking at a specific field of math, we define \emph{categories}, which behave like these fields of math. This allows us to look at math from a higher level, and find fascinating connections between far-flung fields of math. Throughout these notes, we will see how we do this.
+
+Category theory arose in the 1940s due to Mac Lane and Eilenberg, who founded the subject to give a precise meaning to the notion of naturality. In the 80 years it has existed, category theory has found its way into nearly every branch of math, and is foundational to understanding modern research in numerous fields. In these notes, we will introduce the basic notions of the theory.
+
+\section{Categories}
+
+The definition of a category is fairly lengthy, so the reader is encouraged to reference remarks \ref{2.2}, \ref{2.3}, and \ref{2.4} while reading the definition for further commentary.
+
+\begin{definition}\label{2.1}
+	A \emph{category} $\mathcal{C} $ is a mathematical object consisting of
+	\begin{itemize}
+		\item A collection $\Obj(\mathcal{C} ) $ of things which we call \emph{objects};
+		\item A collection $\Mor(\mathcal{C} )$ of things which we call \emph{morphisms};
+		\item A function $\dom : \Mor(\mathcal{C} ) \to \Obj(\mathcal{C} ) $ assigning each morphism $f\in\Mor(\mathcal{C} )$ an object called its \emph{domain} $\dom f\in \Obj(\mathcal{C} ) $;
+		\item A function $\cod : \Mor(\mathcal{C} ) \to \Obj(\mathcal{C} ) $ assigning each morphism $f\in\Mor(\mathcal{C} )$ an object called its \emph{codomain} $\cod f\in \Obj(\mathcal{C} ) $;
+		\item A function $1_{\bullet} : \Obj(\mathcal{C} )  \to \Mor(\mathcal{C} )$ assigning each object $x\in \Obj(\mathcal{C} ) $ to a morphism $1_x\in\Mor(\mathcal{C} )$ called the \emph{identity on $x$};
+		\item If $f : x \to y$ and $g : y \to z$ are morphisms such that $\dom g=\cod f$, then we call $(g,f)$ a \emph{composable pair}. There is a function
+			\[
+				\circ : \left\{ (g,f)\mid (g,f)\text{ is a composable pair}  \right\}  \to \Mor(\mathcal{C} )
+			\]
+			mapping each composable pair $(g,f)$ to its \emph{composite} $g\circ f : x \to z$.
+	\end{itemize}
+	 This data has to satisfy the following axioms:
+	 \begin{enumerate}
+		 \item For each object $x$, the identity has $1_x : x \to x$;
+		 \item Composition is associative, meaning for any composable triple $(h,g,f)$, there is an equality $h\circ (g\circ f)=(h\circ g)\circ f$;
+		 \item The identity is an identity for composition, meaning for any $f : x \to y$, there are equalities $f\circ 1_x=f$ and $1_y\circ f=f$.
+	 \end{enumerate}
+\end{definition}
+\begin{remark}\label{2.2}
+	The idea is that objects should represent mathematical objects such as groups, sets, rings, or basically whatever we would conventionally think of as an object. Morphisms are then the interesting ways to map between them, such as group homomorphisms. Note that we \emph{do not require morphisms to be functions}, because many interesting categories are constructed where morphisms are not functions. Morphisms simply are things with a domain and a codomain which can be composed. In other words, they are simply arrows, and functions are simply a special case of this idea.
+\end{remark}
+\begin{remark}\label{2.3}
+	If $\mathcal{C} $ is a category and $f$ is a morphism, we write $f : x \to y$ to denote that $f$ is a morphism with $\dom f=  x$ and $\cod f = y$. We think of morphisms as \emph{arrows} from the objects $x$ to $y$, and we think of objects simply as points with arrows going between them.
+\end{remark}
+\begin{remark}\label{2.4}
+	The reasoning for requiring an identity morphism to exist will become clear later, but the point is that identities are required to define \emph{isomorphisms}, which are a fundamental notion in the study of categories.
+\end{remark}
+
+We will write $x\in \mathcal{C} $ to denote that $x$ is an \emph{object} of $\mathcal{C} $. We will typically never write $f\in\Mor(\mathcal{C} )$ when avoidable, and instead prefer to say either ``Let $f$ be a morphism in $\mathcal{C} $'', or ``Let $f : x \to y$''. We will write $\mathcal{C} (x,y)$ for the set of all morphisms $x\to y$ in $\mathcal{C} $, although other authors often use $\Hom_\mathcal{C} (x, y) $.
+
+We now present some examples.
+
+\begin{example}\label{2.5}
+	The canonical example of a category is the category of \emph{sets}, denoted by $\Set $. Objects are \emph{sets}, and morphisms are \emph{functions}. The category axioms are easily checked: any function $f : X \to Y$ obviously has a domain and a codomain, and function composition is well-known to be associative. Given a set $X$, the identity function $1_X$ is simply the function $x\mapsto x$ which ``does nothing''. The identity is easily seen to be an identity for composition, since
+	\[
+		f(1_X(x))=f(x),\qquad 1_Y(f(x))=f(x)
+	.\]
+\end{example}
+
+\begin{example}\label{2.6}
+	Another example, as stated earlier, is the category $\Grp $ of \emph{groups} and \emph{group homomorphisms}. Some other high level examples are
+	\begin{itemize}
+		\item The category $\Top $ of topological spaces and continuous maps;
+		\item The category $\CG$ of compactly generated spaces and continuous maps;
+		\item The category $\Ring $ of (unital) rings and (unital) ring homomorphisms;
+		\item The category $k$-$\mathcal{V} \mathrm{ect} $ of $k$-vector spaces and $k$-linear maps (if you haven't taken abstract algebra, ignore the $k$);
+		\item The category  $\Ab $ of abelian groups and group homomorphisms.
+	\end{itemize}
+\end{example}
+
+We shall now work through a more interesting example. In all the previous examples, our morphisms were \emph{functions}, but we will now present a category where morphisms are not functions. Consider the set $\mathbb{Z} $ of integers. Define a category $\mathcal{P} $ such that objects are integers
+\[
+	\Obj(\mathcal{P} ) =\mathbb{Z} ,
+\]
+and morphisms are defined as follows: for any $n,m\in\mathbb{Z} $, if $n\leq m$, then there is \emph{exactly one morphism} $n\to m$. If $n>m$, then there is \emph{no morphism} from $n$ to $m$. Since morphisms between integers are unique, we don't need to name them, since there is only one.
+
+
+\section{Functors and representable functors}
+
+\section{(Co)limits}
+
+\section{Natural transformations and Yoneda}
+\end{document}
+

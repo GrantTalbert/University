@@ -1,0 +1,115 @@
+\lecture{7}{Tue 23 Sep 2025 12:30}{Geodesics}
+
+Consider a vector $v^\mu $ tangent to a path $x^\mu (\lambda )$. We have
+\[
+	\frac{\mathrm{D} }{\mathrm{d} \lambda } \coloneqq \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \nabla _\mu 
+.\]
+Applying this to $v$ gives
+\[
+	0=\frac{\mathrm{D} }{\mathrm{d} \lambda } v^\mu =\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \left( \partial _\nu v^\mu +\Gamma _{\nu \alpha } ^\mu v^\alpha  \right) 
+.\]
+I skipped something. We want to check as claimed that if two vectors $v^\mu ,w^\mu $ on a path $x^\mu (\lambda )$, then when parallel transported along the path, the angle doesn't change. The $\mathrm{D} /\mathrm{d} \lambda =0$ is parallel transport or something.
+
+\[
+	\frac{\mathrm{D} }{\mathrm{d} \lambda} \left( v^\mu w_\mu  \right) =0
+.\]
+If they are parallel transported, then
+\[
+	\frac{\mathrm{D} }{\mathrm{d} \lambda } v^\mu =\frac{\mathrm{D} }{\mathrm{d} \lambda } w^\mu =0
+.\]
+Computing:
+\[
+	\frac{\mathrm{D} }{\mathrm{d} \lambda } (v^\mu w_\mu )=\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \nabla_\nu (v^\mu w_\mu )
+.\]
+By the product rule, we see
+\[
+	=\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \left( \nabla _\nu (v^\mu )w_\mu +v^\mu \nabla _\nu w_\nu  \right) 
+.\]
+The first term goes to 0 by hypothesis, and the second term has its index raised by the metric
+\[
+	=\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } (v^\mu \nabla_\nu g_{\mu \alpha } v^\alpha )=\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } v^\mu \left( g_{\mu \alpha } \nabla _\nu v^\alpha +g_{\mu \alpha } \nabla _\nu v^\alpha  \right) 
+.\]
+The second term is 0 by hypothesis, and the first is 0 since the covariant derivative of the metric vanishes by construction.
+
+What happens if we require $\frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } $ be parallel transported, meaning the angle we are traveling in is invariant along the curve? Then
+\[
+	0=\frac{\mathrm{D} }{\mathrm{d} \lambda } \left( \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda }  \right) =\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \nabla _\nu \left( \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda }  \right) =\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \left( \frac{\partial }{\partial x^\nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } +\Gamma_{\nu \sigma } ^\mu \frac{\mathrm{d}x^\sigma }{\mathrm{d}\lambda }  \right) =\frac{\mathrm{d}}{\mathrm{d}\lambda } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } +\Gamma ^\mu _{\nu \sigma } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\sigma }{\mathrm{d}\lambda } 
+.\]
+The last equality in the first term is chain rule. This is simply the geodesic equation:
+\[
+	0=\frac{\mathrm{d}^2x^\mu }{\mathrm{d}\lambda ^2} +\Gamma _{\nu \sigma } ^\mu \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } 
+.\]
+Thus, the geodesic equation is simply the requirement that the derivative be parallel transported.
+
+We would like to simplify computation of Christoffel symbols. Recall that given a distance $\mathrm{d} x^\mu $, the change in proper time is
+\[
+	\mathrm{d} \tau ^2=-g_{\mu \nu } \mathrm{d} x^\mu \mathrm{d} x^\nu =-g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \mathrm{d} \lambda ^2	
+.\]
+We write
+\[
+	\tau =\int  \,\mathrm{d} \tau =\int \sqrt{-g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } }  \,\mathrm{d} \lambda 
+.\]
+We are going to extremize $\tau $ by taking the variance $\delta \tau $ with respect to $x^\mu $:
+\[
+	\delta \tau =\int \frac{1}{2} \left( -g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda }  \right) ^{-1/2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } - g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } -g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}\delta x^\nu }{\mathrm{d}\lambda } \right)\,\mathrm{d} \lambda 
+.\]
+Of course, $\delta x^\mu =\delta (x^\mu )$. Since $\mu ,\nu $ are contracted with the metric, they are dummy variables, so we can rename them
+\[
+	\delta \tau =\int \frac{1}{2} \left( -g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda }  \right) ^{-1/2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } - g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } -g_{\mu \nu } \frac{\mathrm{d}x^\nu  }{\mathrm{d}\lambda } \frac{\mathrm{d}\delta x^\mu  }{\mathrm{d}\lambda } \right)\,\mathrm{d} \lambda 
+.\]
+Of course, the last two terms are now the same, so since derivatives commute,
+\[
+	\delta \tau =\int \frac{1}{2} \left( -g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda }  \right) ^{-1/2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } - 2g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \right)\,\mathrm{d} \lambda 
+.\]
+Note that
+\[
+	\left(-g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \right)^{-1/2} =\left( \frac{\mathrm{d}\tau ^2}{\mathrm{d}\lambda ^2}  \right) ^{-1/2} =\frac{\mathrm{d}\lambda }{\mathrm{d}\tau } 
+.\]
+We then have
+\[
+	\delta \tau =\int \frac{1}{2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } - 2g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \right)\, \frac{\mathrm{d}\lambda }{\mathrm{d}\tau } \mathrm{d} \lambda 
+\]
+\[
+	=\delta \tau =\int \frac{1}{2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } - 2g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \right)\,\left( \frac{\mathrm{d}\lambda }{\mathrm{d}\tau } \right) ^2 \mathrm{d} \tau
+.\]
+We have
+\[
+	\frac{\partial x^\mu }{\partial \lambda } =\frac{\partial x^\mu }{\partial \tau } \frac{\partial \tau }{\partial \lambda } ,
+\]
+giving
+\[
+	\delta \tau =\int \frac{1}{2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau }\left( \frac{\mathrm{d}\tau }{\mathrm{d}\lambda }  \right) ^2 - 2g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau  }\left( \frac{\mathrm{d}\tau }{\mathrm{d}\lambda }  \right) ^2 \right)\,\left( \frac{\mathrm{d}\lambda }{\mathrm{d}\tau } \right) ^2 \mathrm{d} \tau
+.\]
+The derivatives cancel, yielding
+\[
+	\delta \tau =\int \frac{1}{2} \left( \left(-\frac{\partial }{\partial x^\sigma } g_{\mu \nu }  \right) \delta x^\sigma \frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau } - 2g_{\mu \nu } \frac{\mathrm{d}\delta x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau  } \right)\, \mathrm{d} \tau
+.\]
+Apparently we can just write this as
+\[
+	\delta \left( \frac{1}{2} \int -g_{\alpha \beta } \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau }  \,\mathrm{d} \tau  \right) 
+.\]
+This is a nicer variational action to use, since the square root is gone. Interestingly, the integrand is 1 by a previous equation. This is not quite the version we want to use, since we have a derivative of the variation. We want it to just be an integral times $\mathrm{d} x^\mu $. The EOM is then integrand equal to 0.
+
+To fix this, we do some integration by parts, and the boundary vanishes since there is no variation at the boundary.
+
+\begin{remark}
+	the $\delta $ is just a derivative. but with... different symbols.
+\end{remark}
+
+I don't know why we're going on the tangent we can just recall the geodesic equation and definition of the Christoffel symbol in terms of the metric:
+\[
+	\delta \tau =\int g_{\sigma \rho } \left( \frac{\mathrm{d}^2x^\rho }{\mathrm{d}\tau ^2} +\Gamma _{\alpha \beta } ^\rho \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau }  \right) \delta x^\sigma  \,\mathrm{d} \tau 
+.\]
+The extremitization is given by just taking the integrand and dropping the $\delta x^\mu $ by the fundamental theorem of the calculus of variations. Wow, the equation of motion is just the geodesic equation.
+
+If $g_{\mu \nu } $ is arbitrary, then Christoffel symbol computations are just brute force. However, if the metric has symmetries (eg. is symmetric), then plugging into the action principal can simplify computations.
+
+
+So
+\[
+	0=2g_{\sigma \beta } \left( \frac{\mathrm{d}^2\beta }{\mathrm{d}\tau ^2} +\Gamma _{\mu \nu } ^\beta \frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau }  \right) 
+.\]
+Let's do an example with flat space in polar coordinates $\mathrm{d} s^2=-\mathrm{d} t^2+\mathrm{d} r^2+r^2 \mathrm{d} \theta ^2$.
+\[
+	L\equiv \frac{1}{2} \int -g_{\alpha \beta } \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau }  \,\mathrm{d} \tau =\frac{1}{2} \int \left( \frac{\mathrm{d}t}{\mathrm{d}\tau } ^2-\frac{\mathrm{d}r}{\mathrm{d}\tau } ^2-\frac{\mathrm{d}r}{\mathrm{d}\tau } ^2 \frac{\mathrm{d}\theta }{\mathrm{d}\tau } ^2 \right)  \,\mathrm{d} \tau 
+.\]

@@ -1,0 +1,215 @@
+\section{Definition}
+
+We are finally prepared to define quasi-categories.
+
+\begin{definition}\label{5.1}
+	A \emph{quasi-category} is a simplicial set $\mathcal{C} $ which fills \emph{inner} horns. More explicitly, for all $0<i<n$ and for all diagrams of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _i^n\ar[r] \ar[hook, d]  & \mathcal{C}  \\
+	\Delta ^n \ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	there exists a \emph{not necessarily unique} dotted arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+This definition was first introduced by Boardman and Vogt in \cite{BV73} under the name \emph{weak Kan complex}. Kan complexes are simplicial sets which fill \emph{all} horns, not just inner horns. Andr\'e Joyal expanded heavily on their work in \cite{joyal1,joyal2} and developed much of the elementary theory of quasi-categories, showing that they were fantastic models for $\infty $-categories, as we will see. It was Joyal who introduced the term \emph{quasi-category}, which is commonly used by the literature today. Jacob Lurie used quasi-categories as the foundational model for \cite{htt}, which is the standard reference on $\infty $-category theory today.
+
+Quasi-categories are the standard ways to define $\infty $-categories. For the remainder of this talk, I want to show you what $\infty $-categories \emph{feel like} using the language of quasi-categories. We will define objects, 1-morphisms, identities, composites, 2-morphisms, informally describe higher $n$-morphisms (recall these are hard to describe explicitly), $\infty $-functors of $\infty $-categories, and homotopy categories. I will also close with a few extra remarks that we will not have enough time to discuss the theory of. It will be helpful to begin by investigating the nerve $N(\mathcal{C} )$ of a regular 1-category $\mathcal{C} $.
+
+\begin{proposition}[\cite{BV73}]\label{5.2}
+	Let $K$ be a simplicial set. Then the following statements are equivalent.
+	\begin{enumerate}
+		\item There is a category $\mathcal{C} $ and an isomorphism $K\cong N(\mathcal{C} )$;
+		\item $K$ admits \emph{unique} fillers for inner horns, meaning for all $0<i<n$ and all diagrams of solid arrows
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\Lambda _i^n\ar[r] \ar[hook, d]  & K \\
+			\Delta ^n \ar[dashed, ur]  & 
+			\end{tikzcd}\]
+			there is a \emph{unique} dashed arrow as indicated, rendering the diagram commutative.
+	\end{enumerate}
+\end{proposition}
+
+See \cite{htt} Proposition 1.1.2.4 for a proof. Note that the objects of $\mathcal{C} $ are the vertices $N(\mathcal{C} )_0$, and the morphisms of $\mathcal{C} $ are the edges $N(\mathcal{C} )_1$. We also know that the faces $d_0,d_1 : N(\mathcal{C} )_1 \to N(\mathcal{C} )_0$ are defined by
+\[
+	d_0 = \operatorname{cod} ,\qquad d_1=\operatorname{dom} 
+.\]
+Finally, we know that the identity morphism $1_x$ on an object $x\in \mathcal{C} $ is simply the image $s_0(x)$ of the degeneracy $s_0 : N(\mathcal{C} )_0 \to N(\mathcal{C} )_1$. We might thnk that we can generalize these definitions to all quasi-categories, meaning for any quasi-category $\mathcal{C} $, we define
+\begin{enumerate}
+	\item Objects are vertices $\mathcal{C} _0$;
+	\item Morphisms are edges $\mathcal{C} _1$;
+	\item Domain and codomain are the faces $d_1,d_0$, respectively;
+	\item Identity is the degeneracy $s_0$.
+\end{enumerate}
+To see if these definitions work in general, we need to introduce a notion of \emph{composition}, a notion of \emph{homotopy}, and show they are compatible in the claimed manner. Just as in 1-categories, we write $f : x \to y$ to denote that $f\in \mathcal{C} _1$ is an edge of a quasi-category with domain $x$ and codomain $y$.
+
+Let $f : x \to y$ and $g : y \to z$ in a quasi-category $\mathcal{C} $. Note that these define a \emph{horn} $\sigma _0 : \Lambda _1^2 \to \mathcal{C} $: since $f,g\in \mathcal{C} _1$, we define $d^0 \mapsto g$ and $d^2 \mapsto f$; by \cref{4.10} it suffices to show the compatibility condition, which in this case states
+\[
+	y = d_0(f)=d_0\sigma _0(d^2) = d_1\sigma _0(d^0)=d_1(g)=y
+.\]
+As we can see, this follows, giving the horn as claimed. Since $\mathcal{C} $ is a quasi-category, by \cref{5.1} this fills to a 2-simplex $\sigma : \Delta ^2 \to \mathcal{C} $ rendering the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Lambda _1^2 \ar[" \sigma _0 ", r] \ar[hook, d]  & \mathcal{C}  \\
+\Delta ^2 \ar[" \sigma  "', ur]  & 
+\end{tikzcd}\]
+commutative. Define $\tau =\sigma (1_{[2]} )$ as the image under the Yoneda isomorphism, as expressed in \cref{3.12}. We of course have $d_0(\tau )=g$ and $d_2(\tau )=f$. Define $h\coloneqq d_1(\tau )$. We claim that $h$ is a morphism $x\to z$. This follows from the simplicial identities of \cref{3.8}: recall that $d_id_j=d_{j-1} d_i$ whenever $i<j$. It follows that
+\[
+	d_1d_1(\tau )=d_{2-1} d_1(\tau )=d_1d_2(\tau )=d_1(f)=x,
+\]
+\[
+	d_0d_1(\tau )=d_0d_0(\tau )=d_0(g)=z
+.\]
+We define $h$ as a \emph{composite of $g$ and $f$}. We write this as the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & y \ar[" g ", dr]  &  \\
+x \ar[" f ", ur] \ar[" h "', rr]  &  & z
+\end{tikzcd}\]
+For this reason, given a 2-simplex $\tau \in \mathcal{C}_2$ with vertices $x,y,z$, we usually express the 2-simplex as a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & y \ar[" d_0(\tau ) ", dr]  &  \\
+x \ar[" d_2(\tau ) ", ur] \ar[" d_1(\tau ) "', rr]  &  & z
+\end{tikzcd}\]
+A more ``geometric'' way to think about it that \emph{actually turns out to work} is as follows: given two composable morphisms $f : x \to y$ and $g : y \to z$, we can construct the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & y\ar[" g ", dr]  &  \\
+x\ar[" f ", ur]  &  & z
+\end{tikzcd}\]
+This looks like a geometric horn. We label the top right face as the 0th face, the bottom face as the 1st face, and the top left face as the second face. By the quasi-category condition, this fills to an entire 2-simplex $\tau $ whose 1st face is $h$, and we write
+\[\begin{tikzcd}
+	& y \\
+	x && z
+	\arrow["g", from=1-2, to=2-3]
+	\arrow["f", from=2-1, to=1-2]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "h"', from=2-1, to=2-3]
+	\arrow["\tau"{description}, draw=none, from=1-2, to=0]
+\end{tikzcd}\]
+Geometrically, the triangle is actually ``filled'', and we don't just have the morphisms around the boundary. The ``filling'' of the simplex is thought of as the diagram being ``commutative'', meaning $h$ is the composite $g\circ f$. We say that the 2-simplex \emph{witnesses} $h$ as the composite of $g$ and $f$. This terminology is useful.
+
+Since this definition of composition agrees with the definitions of objects, morphisms, domain, and codomain in the expected way, we are close to finishing (1) and (4), and even (7) since we could identify 1-categories with their nerves to view them as quasi-categories. However, we still have a few things to show before we can be happy. First, we must show that compositions are \emph{unique up to homotopy}. Recall that we defined composites as the 1st face of the filler of a horn, but the definition of a quasi-category \emph{does not require that this filler be unique}. This means two morphisms can have many composites. We need to define a notion of homotopy, and then we need to show all the different composites are indeed homotopic.
+
+\begin{definition}\label{5.3}
+	Let $\mathcal{C} $ be a quasi-category, and let $f,g : x \to y$ be morphisms. A \emph{homotopy} $\tau : f \to g$ is a 2-simplex $\tau \in \mathcal{C} _2$ such that
+	\[
+		d_0(\tau )=1_y,\qquad d_1(\tau )=g,\qquad d_2(\tau )=f
+	.\]
+\end{definition}
+
+Recall that earlier we wrote 2-simplices as ``commutative'' diagrams (the quotes are explained later). A homotopy $f\to g$ can thus be written as a diagram:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & y \ar[" 1_y ", dr]  &  \\
+x \ar[" f ", ur] \ar[" g "', rr]  &  & y
+\end{tikzcd}\]
+To explain why this makes sense, we have to invoke some circular reasoning. Luckily, since we are only describing the \emph{intuition} right now and not the actual math, circular reasoning is fine. Suppose we are able to show that with this definition of homotopy, all composites of $f$ and $g$ are homotopic. Suppose we are also able to show that $f$ composed with $1_y$ is simply $f$. In regular 1-category theory, the diagram would simply say $f=g$, but this is $\infty $-category theory. The composite $1_y \circ f$ is \emph{only well-defined up to homotopy}, meaning that there are other composites other than just $f$. In particular, $g$ is one of these composites. We thus have two different composites for $1_y$ and $f$: $f$ and $g$. Since composition is well-defined up to homotopy, we have that $f$ and $g$ are homotopic, as claimed. Thus, provided we can indeed show $1_y\circ f=f$ and that composition is well-defined up to homotopy, this definition is a good one.
+
+This also explains why I put ``commutative'' in quotes. In higher category theory, since composites are only well-defined up to higher morphism, commutative diagrams must also include the additional datum of the higher morphisms that witness the relevant composites. Thus the diagram does not strictly commute, but commutes up to higher homotopy.
+
+We now need to show that $1_y\circ f=f$, that homotopy is an equivalence relation, and that composites are all homotopic to each other. These will be the final results we prove in this paper.
+
+\begin{proposition}\label{5.4}
+	Let $f : x \to y$ be a morphism in a quasi-category $\mathcal{C} $. Then there is a 2-simplex witnessing the composite $1_y\circ f=f$.
+\end{proposition}
+\begin{proof}
+	As seen earlier, since $\operatorname{cod} f=\operatorname{dom} 1_y$, we obtain a horn $(f,-,1_y): \Lambda _1^2 \to \mathcal{C} $. Here I have adopted the useful notation $(f,-,1_y)$ for horns, since in view of \cref{4.10} we may simply describe the horn by $f\mapsto d^0$ and $1_y \mapsto d^2$, with no map to $d^1$. Our notation is designed to reflect this.
+
+	Rather than simply claiming a filler exists since $\mathcal{C} $ is a quasi-category, we are interested in \emph{constructing} a filler $\tau $ which has $d_1(\tau )=f$. We claim that $s_1(f)=\tau $ is such a filler. First, we must of course show it is indeed a filler. Note that by the simplicial identities of \cref{3.8}, we have $d_1s_1=d_2s_1=1$, and thus
+	\[
+		d_1s_1(f)=f,\qquad d_2s_1(f)=f
+	.\]
+	It suffices to show $d_0s_1(f)=1_y$, and indeed by the simplicial identities of \cref{3.8}, we have $d_is_j=s_{j-1} d_{i} $ for $i<j$, giving us
+	\[
+		d_0s_1(f)=s_0d_0(f)=s_0(y)=1_y
+	.\]
+	By \cref{4.11}, $s_1(f)$ is indeed a filler, and since $d_1s_1(f)=f$, we have that $s_1(f)$ witnesses $f$ as the composite $1_y\circ f$, concluding the proof.
+\end{proof}
+
+\begin{proposition}\label{5.5}
+	Let $\mathcal{C} $ be a quasi-category, and write $\mathcal{C} _1(x,y)$ for the set of morphisms $x\to y$ in $\mathcal{C} $. For $f,g : x \to y$ in $\mathcal{C} $, write $f\sim g$ if there exists a homotopy $f\to g$. Then $\sim $ is an equivalence relation on $\mathcal{C} _1(x,y)$.
+\end{proposition}
+\begin{proof}
+	By \cref{5.4}, we have that $\sim $ is reflexive. Symmetry and transitivity will follow from an intermediary result, which we now show. Let $f,g,h : x \to y$, and let $\sigma : f \to g$ and $\tau : h \to g$ be homotopies (note the direction of $\tau $). Define $\varphi \coloneqq s_1s_0(y) : \Delta ^2 \to \mathcal{C} $ to be the constant map at $y$. Note here that we are abusing notation and writing $\varphi $ for both the morphism and the 2-simplex. We will show there is a 3-simplex $\alpha $ filling the horn
+	\[
+		(\varphi ,-,\tau ,\sigma ): \Lambda _1^3 \to \mathcal{C} 
+	,\]
+	where we are using our new horn notation introduced in \cref{5.4}. We first of course show this is a horn; by \cref{4.10} we must show the compatibility condition. Note that $\sigma ,\tau $ are homotopies both with domain $f$:
+	\[
+		d_2(\sigma )=d_2(\tau )=f,
+	.\]
+	This shows the compatibility condition for $\sigma $ and $\tau $, so now we show it for $\sigma $ and $\varphi $. By \cref{5.3}, the 0th face of any homotopy is the identity, so we have $d_0(\tau )=1_y$. We also have
+	\[
+		d_1(\varphi )=d_1s_1s_0(y)=s_0(y)=1_y
+	\]
+	by the simplicial identities of \cref{3.8}. Thus, $\varphi $ and $\tau $ are indeed compatible, giving the horn as claimed. Since $\mathcal{C} $ is an $\infty $-category, the horn admits a filler $\alpha : \Delta ^3 \to \mathcal{C} $. We also write $\alpha $ for the 3-simplex given by Yoneda (\cref{3.12}). We now show $d_1(\alpha )$ is a homotopy $g\to h$. Indeed, by the simplicial identities of \cref{3.8},
+	\[
+		d_0d_1(\alpha )=d_0d_0(\alpha )=d_0(\varphi )=d_0s_1s_0(y)=s_0d_0s_0(y)=s_0(y)=1_y,
+	\]
+	\[
+		d_1d_1(\alpha )=d_1d_2(\alpha )=d_2(\tau )=h,
+	\]
+	\[
+		d_2d_1(\alpha )=d_1d_3(\alpha )=d_1(\sigma )=g
+	.\]
+	We thus have by \cref{5.3} that $d_1(\alpha ): h \to g$ is a homotopy.
+
+	We now conclude by the following remarks. Conside the special case with $f=h$. The above situation then reads as follows: if there are homotopies $f\to g$ and $f\to g$, then there is a homotopy $g\to f$. This is precisely symmetry. From this we derive transitivity as follows:
+	\begin{enumerate}
+		\item Let there be homotopies $f\to g$ and $g\to h$;
+		\item By symmetry, there is a homotopy $g\to f$;
+		\item Invoking the above result (note we are swapping the roles of $f$ and $g$) gives a homotopy $f\to h$.
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}\label{5.6}
+	Let $f x \to y$ and $g : y \to z$ in a quasi-category $\mathcal{C} $, and let $h,h'$ be composites of $g$ and $f$, witnessed by the 2-simplices $\sigma $ and $\tau $, respectively. Then $h$ is homotopic to $h'$.
+\end{proposition}
+\begin{proof}
+	We first show that $(s_1(g),-,\tau ,\sigma )$ is a horn $\Lambda _1^3\to \mathcal{C} $. Indeed,
+	\[
+		d_0(\tau )=g,\qquad d_1s_1(g)=g
+	\]
+	by \cref{5.3} and \cref{3.8}, and thus $s_1(g)$ and $\tau $ are compatible. To show $\tau $ and $\sigma $ are compatible, we have
+	\[
+		d_2(\sigma )=f=d_2(\tau ),
+	\]
+	and by \cref{4.10} we indeed have a horn. Since $\mathcal{C} $ is a quasi-category, there exists a filler $\alpha \in \mathcal{C} _3$. We claim that $d_1(\alpha )\eqqcolon \varphi $ is a homotopy $h' \to h$. Indeed, note that
+	\[
+		d_0(\varphi )=d_0d_1(\alpha )=d_0d_0(\alpha )=d_0s_1(g)=s_0d_0(g)=s_0(z)=1_z,
+	\]
+	\[
+		d_1(\varphi )=d_1d_1(\alpha )=d_1d_2(\alpha )=d_1(\tau )=h',
+	\]
+	\[
+		d_2(\varphi )=d_2d_1(\alpha )=d_1d_3(\alpha )=d_1(\sigma )=h
+	.\]
+	Therefore, $\varphi $ is a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & z \ar[equals, dr]  &  \\
+	x \ar[" h' ", ur] \ar[" h "', rr]  &  & z
+	\end{tikzcd}\]
+	which is precisely a homotopy $h'\to h$ as given by \cref{5.3}.
+\end{proof}
+
+A stronger result than \cref{5.6} is in fact available: a morphism $h'$ is a composite of $g$ and $f$ \emph{if and only if} it is homotopic to some composite $h$ of $g$ and $f$. See \cite[0041]{kerodon} for proof of the result.
+
+To summarize what we have done so far: we have defined
+\begin{enumerate}
+	\item objects as vertices;
+	\item morphisms as edges;
+	\item domain and codomain as faces;
+	\item identity as degenerates;
+	\item composition as fillers for horns $\Lambda _1^2 \to \mathcal{C} $ given by composable pairs;
+	\item homotopies $f\to g$ by 2-simplices witnessing the composite $1 \circ f=g$;
+\end{enumerate}
+and we have shown that composites are well-defined up to homotopy. Moreover, this agrees with the nerve construction in ways described above, meaning we may regard 1-categories as quasi-categories via their nerve. This suffices for conditions (1,2,4,7) for a viable model for an $\infty $-category. We also have likely figured out that $n$-simplices are a good model for $n$-morphisms. First note that 1-simplices are 1-morphisms, and 2-simplicies are homotopies, which are our conventional name for 2-morphisms. Also note that 2-simplices often ``witness'' the equality of various 1-morphisms, and similarly 3-simplices often ``witness'' the equality of various 2-simplices. We could likely thus define 3-simplices as 3-morphisms, and define a (convoluded) composition schema for homotopies. It should be clear that these definitions generalizes to $n$-morphisms, albeit they might be extremely difficult to write down. This is why we usually prefer to work with mapping spaces $\mathcal{C} (x,y)$ if we must go beyond 2-morphisms. This shows (4).
+
+We conclude by showing (5,6): we must construct $\infty $-functors and homotopy categories. The former is simple. An $\infty $-functor should be a functor on objects and $n$-morphisms for all $n$, which respects identity and composition. Morphisms of simplicial sets satisfy all of these: given $f : \mathcal{C}  \to \mathcal{D} $ a morphism of simplicial sets,
+\begin{itemize}
+	\item there is a function $f_n : \mathcal{C} _n \to \mathcal{D} _n$ for all $n$, and
+	\item $f$ preserves simplicial operators, which were used to define all important constructions, meaning $f$ will preserve all important constructions we have made so far.
+\end{itemize}
+Therfore, morphisms of simplicial sets are $\infty $-functors. We now need to simply define a homotopy category.
+
+Recall that a homotopy category should ``identify homotopic morphisms''. We don't need to go beyond 2-morphisms, since the higher homotopic data is encoded in the existence of the 2-morphisms themselves. We thus construct the homotopy category $\hh \mathcal{C} $ of a quasi-category $\mathcal{C} $ as follows:
+\begin{itemize}
+	\item Objects are vertices $\mathcal{C} _0$;
+	\item Hom-sets $\hh \mathcal{C} (x,y)$ are given by quotienting the set $\mathcal{C} _1(x,y)$ by the homotopy relation;
+	\item Composition is given by composition in $\mathcal{C} $.
+\end{itemize}
+Of course, one must show that composition is well-defined, but we are unfortunately out of time to show this. However, this does indeed follow, giving a well-defined notion of a homotopy category for a quasi-category $\mathcal{C} $. We have thus shown that $\mathcal{C} $ is a good model for an $\infty $-category (at least, up to the fairly informal standards of this paper).

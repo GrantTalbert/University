@@ -1,0 +1,62 @@
+\lecture{6}{Thu 18 Sep 2025 12:33}{Covariant derivatives}
+
+Furthering the topic of covariance, we introduce covariant derivatives. Tensors are automatically invariant under coordinate transformations, but derivatives are not usually tensors. We define a covariant derivative $\nabla _\mu $ to be a derivative that transforms in the right way. Since $\partial _\mu $ transforms properly on scalar functions, we should have $\nabla_\mu f=\partial _\mu f$. We should also have that if $S,T$ are tensors, then $\nabla _\mu (S+T)=\nabla _\mu S+\nabla _\mu T$ (linearity). Finally, it should satisfy the product rule with respect to the tensor product.
+
+Let's see how this acts on a dual vector $\omega _\nu $. We should have a tensor $\nabla _\mu \omega _\nu =X_{\mu \nu } $. The only linear maps on dual vectors are derivatives $\partial _\mu $ and matrics $C_{\mu \nu } ^\alpha $. The most general thing we can have is thus
+\[
+	\nabla _\mu \omega _\nu =a \partial _\mu \omega _\nu -C_{\mu \nu } ^\alpha \omega _\alpha ,
+\]
+for some scalar $a$. The reason we use a minus sign is so the right side can later become $\Gamma _{\mu \nu } ^\alpha $. Condition 1 forces $a=1$ for scalars, and the product rule forces $a=1$ for vectors.
+
+Now we consider it on an arbitrary vector $v^\alpha $. We must have
+\[
+	\nabla _\mu v^\alpha =\partial _\mu v^\alpha -B_{\mu \beta }^{\alpha } v^\beta 
+.\]
+We should find a relation between $B$ and $C$. Interestingly, we can already do this. Since $\omega _\alpha v^\alpha $ is a scalar,
+\[
+	\nabla _\mu (\omega _\alpha v^\alpha )=\partial _\mu (\omega _\alpha v^\alpha )=\omega _\alpha \partial _\mu v^\alpha +\left( \partial _\mu \omega _\alpha  \right) v^\alpha 
+.\]
+Alterntatively, via the product rule,
+\[
+	\nabla _\mu (\omega _\alpha v^\alpha )=(\nabla _\mu \omega _\alpha )v^\alpha +\omega _\alpha \nabla _\mu v^\alpha =\left( \partial _\mu \omega _\alpha -C_{\mu \alpha } ^\beta \omega _\beta \right) v^\alpha +\omega _\alpha \left( \partial _\mu v^\alpha -B_{\mu \beta } ^\alpha v^\beta  \right) 
+.\]
+These two expressions must be equal. We cancel the prtials to obtain
+\[
+	0=-C_{\mu \alpha } ^\beta \omega _\beta  v^\alpha +  B_{\mu \beta } ^\alpha \omega _\alpha v^\beta 
+.\]
+Intuitively, $B_{\mu \alpha } ^\beta =-C_{\mu \alpha } ^\beta $. To prove this, since $\alpha ,\beta $ are dummy indices, we can rename them as
+\[
+	C_{\mu \alpha } ^\beta \omega _\beta v^\alpha =B_{\mu \alpha } ^\beta  \omega _\beta v^\alpha 
+.\]
+Since this holds for \emph{every} dual vector and \emph{every} vector, this gives our relation. This can be done pointwise by choosing $\omega ,v$ to pick out individual entries. We now have
+\[
+	\nabla _\mu v^\alpha =\partial _\mu v^\alpha +C_{\mu \beta } ^\alpha  v^\beta 
+.\]
+The product rule can generalize to all tensors by taking the product over vectors and duals. Arbitrary tensors generalize by taking the derivative, then adding a term for each index, viewing upper indices as like vectors and lowers like duals.
+
+We are basically correcting the derivative to make it transform like a tensor by adding all the other terms. Any tensor satisfying these properties is a covariant derivative. We specialize by choosing a nice covariant derivative for GR.
+
+We want $C^\rho _{\mu \nu } =C_{\nu \mu } ^\rho $, meaning $C$ is symmetric in $\mu ,\nu $. This is nice for physics reasons, since we can just symmetrize it and antisymmetrize it. The antisymmeterization transforms like a tensor, and if that existed, then that would be an additional field. We have not found this extra field, so we demand it not have an antisymmetric component.
+
+We also require that $\nabla _{\mu } g_{\alpha \beta } =0$. We call this metric compatibility. This will help develop the equations of motion from the equivalence principle. This fixes $\nabla _\mu $ as follows. We have
+\[
+	\nabla _\mu g_{\alpha \beta } =\partial _\mu  g_{\alpha \beta } -C_{\mu \alpha } ^\lambda  g_{\lambda \beta } -C_{\mu \beta} ^\lambda  g_{\alpha \lambda } 
+.\]
+We have
+\[
+	\partial _\mu g_{\alpha \beta } =C_{\mu \alpha } ^\lambda g_{\lambda \beta } +C_{\mu\beta } ^\lambda g_{\alpha \lambda } 
+.\]
+Since the partial of the metric is $\partial _\mu g_{\alpha \beta } =\Gamma _{\mu \alpha } ^\lambda g_{\lambda \beta } +\Gamma _{\mu \beta } ^\lambda g_{\alpha \lambda } $,  we just obtain
+\[
+	C_{\alpha \beta } ^\lambda  =\Gamma _{\alpha \beta } ^\lambda 
+.\]
+
+Here is an example. The metric for flat space in polar coordinates is
+\[
+	\mathrm{d} s^2 = -\mathrm{d} t^2+\mathrm{d} r^2+r^2\mathrm{d} \theta ^2
+.\]
+We thus have $g_{\mu \nu } =\operatorname{ dia g}(-1,1,r^2)$. Computing $\Gamma _{\theta \theta } ^r$ at a point:
+\[
+	\Gamma _{\theta \theta } ^r=\frac{1}{2} g^{r\rho } \left( 2 \partial _\theta g_{\rho \theta } -\partial _\rho g_{\theta \theta }  \right) =\frac{1}{2} g^{rr} \left( 2 \partial _\theta g_{r\theta } -\partial _rg_{\theta \theta }  \right) =\frac{1}{2} \frac{1}{r^2} \left( -\partial _r r^2 \right) =-r
+.\]
+

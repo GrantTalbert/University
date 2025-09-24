@@ -1,0 +1,61 @@
+\lecture{5}{Thu 18 Sep 2025 14:03}{Solving for unitary operators}
+
+We are solving for
+\[
+	\frac{\partial U}{\partial t} =\frac{1}{i \hbar} HU,\qquad U(t_0,t_0)=1
+.\]
+Of course, recall that
+\[
+	U(t,t_0)=\exp \left( -\frac{i}{\hbar} H(t)(t-t_0) \right) 
+\]
+\emph{does not work} since $\left[ H(t),H(t') \right] \neq 0$ in general. For time independent hamiltonians, it works I think.
+
+Before solving this, we shift to the Dirac interaction picture. Time dependent hamiltonians are generally given by $H(t)=H_0+V(t)$, where $H_0$ is time independent, and $V$ is the \emph{interaction term}. We will define
+\[
+	\ket{\Psi _I(t)}\coloneqq \exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) \ket{\Psi (t)}
+.\]
+The inverse of the operator is given by multiplying through the exponent by $-1$. This new ket is called the Dirac interaction ket. They agree on $t_0$. We then want a time evolution in this picture
+\[
+	\ket{\Psi _I(t)}=U_I(t,t_0)\ket{\Psi _I(t_0)}
+.\]
+We want an equation of motion for $U_I$. Since they agree on the initial state,
+\[
+	\ket{\Psi _I(t)}=\exp \left( \frac{iH_0}{\hbar} (t-t_0) \right) U(t,t_0)\ket{\Psi _I(t_0)}
+.\]
+We thus necessarily have that the exponential times $U$ is $U_I$. Then
+\[
+	\frac{\partial U_I}{\partial t} =\frac{i}{\hbar} H_0\exp\left( \frac{i}{\hbar} H_0(t-t_0) \right) U+\exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) \frac{\partial U}{\partial t} =\frac{i}{\hbar} H_0\exp\left( \frac{i}{\hbar} H_0(t-t_0) \right) U+\exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) \frac{1}{i\hbar} HU
+\]
+\[
+	=\frac{i}{\hbar} H_0(t-t_0)U+\exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) \frac{-i}{\hbar} (H_0+V)U
+.\]
+Substitute in our expression for $U$ in terms of $U_I$:
+\[	
+	=\frac{i}{\hbar}  \exp \left( \frac{i}{\hbar} H_0(t-t_0) \right)\exp \left( -\frac{i}{\hbar} H_0(t-t_0) \right) U_I+\frac{i}{\hbar} \exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) (-H_0-V)\exp \left( -\frac{i}{\hbar} H_0(t-t_0) \right) U_I
+\]
+\[
+	=\frac{i}{\hbar} H_0U_I + \frac{i}{\hbar} (-H_0)U_I - \frac{i}{\hbar} \exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) U_I
+.\]
+I probably wrotoe this down a bit wrong. The first two terms cancel, giving
+\[
+	\frac{\partial U_I}{\partial t} =-\frac{i}{\hbar} \exp \left( \frac{i}{\hbar} H_0(t-t_0) \right) V(t)\exp \left( -\frac{i}{\hbar} H_0(t-t_0) \right) U_I
+.\]
+We define the exponentials time $V(t)$ to be $V_I(t)$, and call it the \emph{potential}. In this form,
+\[
+	\frac{\partial U_I}{\partial t} =\frac{1}{i\hbar} V_I(t)U_I(t,t_0)
+.\]
+We solve this given an initial condition $U(t_0,t_0)=1$. This is the Dirac interaction picture, and is extremely important.
+
+To solve this, we pass to an integral equation
+\[
+	(U_I=U_I(t)-1) = \int_{t_0} ^t \frac{1}{i\hbar} V_IU_I \,\mathrm{d} t
+.\]
+This is solved by Picard iterations. I don't want to work it all out you get $U_I^{(0)} (t,t_0)=1$, and inductively
+\[
+	U^{(n)} _I(t,t_0)=1+ \frac{1}{i\hbar} \int_{t_0}^{t} V_I(t)U_I^{(n-1)} (t,t_0) \,\mathrm{d} t
+.\]
+We then take $n\to \infty $. This gives something like
+\[
+	U_I(t,t_0)=1+\sum_{i=1}^{\infty } \left( \frac{1}{i\hbar}  \right) ^n \int_{t_0}^{\mathbf{t} } \prod_{j=1} ^n V_I(t^j) \,\mathrm{d} \mathbf{t} 
+.\]
+These are Dyson series. These play a fundamental role in the path integral formulation, which will be done in 512. This is also important in relativistic models.

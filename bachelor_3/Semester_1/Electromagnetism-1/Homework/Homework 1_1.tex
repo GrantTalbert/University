@@ -1,0 +1,88 @@
+\documentclass[11pt, letterpaper]{article}
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/physics.tex}
+\begin{document}
+
+(a) First we compute $C$. We work in spherical coordinates, and since we only integrate wrt $r$, the volume differential $\mathrm{d} V$ can be expressed as $4\pi r^2 \mathrm{d} r$. Integrating along $r$ gives
+\[
+	Q=-e=\int_{0}^{\infty } \rho (r) \,\mathrm{d} V=\int_{0}^{\infty } -C4\pi r^2 \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r = -C4\pi \int_{0}^{\infty } r^2 \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r
+.\]
+We compute the integral. Using integration by parts, we see
+\[
+	\int r^2 \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r=r^2\left( -\frac{a_0}{2}  \right) \exp \left( -\frac{2r}{a_0}  \right) -\int 2r\left( -\frac{a_0}{2}  \right) \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r
+\]
+\[
+	=-\frac{r^2a_0}{2} \exp \left( -\frac{2r}{a_0}  \right) +a_0 \int r \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r
+.\]
+We use integration by parts on the new integral:
+\[
+	\int r \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r=r\left( -\frac{a_0}{2}  \right) \exp \left( -\frac{2r}{a_0}  \right) -\int-\frac{a_0}{2}  \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r
+\]
+
+\[
+	=-\frac{ra_0}{2} \exp \left( -\frac{2r}{a_0}  \right) +\frac{a_0}{2} \int \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r=-\frac{ra_0}{2} \exp \left( -\frac{2r}{a_0}  \right) +\frac{a_0}{2} \left( -\frac{a_0}{2}  \right) \exp \left( -\frac{2r}{a_0}  \right) 
+\]
+\[
+	=\left( -\frac{ra_0}{2} -\frac{a_0^2}{4}  \right) \exp \left( -\frac{2r}{a_0}  \right) 
+.\]
+We plug this back into the original integral
+\[
+	\int r^2 \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r=-\frac{r^2a_0}{2} \exp \left( -\frac{2r}{a_0}  \right) +a_0\left( -\frac{ra_0}{2} -\frac{a_0^2}{4}  \right) \exp \left( -\frac{2r}{a_0}  \right) 
+\]
+\[
+	=-\left( \frac{r^2a_0}{2} +\frac{ra^2_0}{2} +\frac{a_0^3}{4}  \right) \exp \left( -\frac{2r}{a_0}  \right) 
+.\]
+We evaluate $r$ from $0$ to $\infty $:
+\[
+	-\left( \frac{r^2a_0}{2} +\frac{ra^2_0}{2} +\frac{a_0^3}{4}  \right) \exp \left( -\frac{2r}{a_0}  \right) \bigg|_0^{\infty } =\frac{a_0^3}{4} ,
+\]
+since the exponential grows faster than the polynomials, meaning the limit $r\to \infty $ is 0.
+
+Now we go back to our expression for $C$:
+\[
+	-e=-C4\pi \frac{a_0^3}{4} \implies C=\frac{e}{a_0^3\pi } 
+.\]
+
+To now compute $Q$ in a sphere of radius $a_0$, we first compute $Q_{\mathrm{cloud} } $ by computing the above integral from $0$ to $a_0$:
+\[
+	\int_{0}^{a_0} r^2 \exp \left( -\frac{2r}{a_0}  \right)  \,\mathrm{d} r=-\left( \frac{r^2a_0}{2} +\frac{ra^2_0}{2} +\frac{a_0^3}{4}  \right) \exp \left( -\frac{2r}{a_0}  \right) \bigg|_0^{a_0} 
+\]
+\[
+	=-\left( \frac{a_0^3}{2} +\frac{a_0^3}{2} +\frac{a_0^3}{4}  \right) \exp \left( -2 \right) +\frac{a_0^3}{4} =-e^{-2} \frac{5a_0^3}{4} +\frac{a_0^3}{4} =\frac{a_0^3}{4} \left( 1-5e^{-2}  \right) 
+.\]
+Note that $Q_{\mathrm{cloud} } $ is not equal to this integral, but rather
+\[
+	Q_{\mathrm{cloud} } =\int_{0}^{a_0} \rho (r) \,\mathrm{d} V=-C4\pi \frac{a_0^3}{4} \left( 1-5e^{-2}  \right) =-e\left( 1-5e^{-2}  \right) 
+.\]
+Overall $Q$ requires us to add the proton's contribution, giving
+\[
+	Q=e-e\left( 1-5e^{-2}  \right) =e-e+5e^{-2}e =5e^{-2}e, 
+\]
+where we note that Euler's number and the electron charge annoyingly have the same symbol. Taking $e=1.602\cdot 10^{-19} $ Coulombs, this evaluates to $Q\approx 1.08404\cdot 10^{-19} $ Coulombs.
+
+(b) We construct a sphere of radius $a_0$ as our Gaussian surface and apply Gauss' law
+\[
+	\int \mathbf{E} \cdot  \mathrm{d} \mathbf{A} =\frac{Q}{\epsilon _0} 
+.\]
+Of course by the spherical symmetry of $\rho (r)$ and the field, the integral on the left is simply $E$ times the surface area
+\[
+	\int \mathbf{E} \cdot  \mathrm{d} \mathbf{A} =E(4\pi a_0^2)=\frac{Q}{\epsilon _0} 
+.\]
+Plugging $Q$ into this gives
+\[
+	E4\pi a_0^2=\frac{5e}{e^2\epsilon _0} \implies E=\frac{5e}{4\pi a_0^2e^2\epsilon _0} 
+.\]
+Using $a_0\approx 0.53\cdot 10^{-10} $ and $\epsilon _0\approx 8.85418782\cdot 10^{-12} $ gives that numerically, we have
+\[
+	E\approx \left( 1.08404\cdot 10^{-19}  \right) \frac{1}{4\pi (0.53\cdot 10^{-10} )^2\left( 8.85418782\cdot 10^{-12}  \right) } \approx 3.46845\cdot 10^{11}\, \mathrm{N} /\mathrm{C} 
+.\]
+
+
+\end{document}

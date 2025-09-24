@@ -1,0 +1,51 @@
+\lecture{4}{Wed 10 Sep 2025 12:11}{awoooo}
+
+Let's now show $\mathbb{R} \mathbb{P} ^n$ is a topological manifold. Recall the real projective space is the quotient of $\mathbb{R} ^{n+1} $ by identifying colinear $n$-tuples (in the linear algebraic sense of ``colinear'', meaning the line passes through 0). Chooose $U_\alpha \subseteq \mathbb{R} \mathbb{P} ^n$, and define a chart $\varphi _\alpha : U \to \mathbb{R} ^n$ by scalar multiplying by $1/z^\alpha $ for $z^\alpha $ the $\alpha $th componet of a choice of representative for a point in $U_\alpha $. This is a smooth homeomorphism apparently.
+
+The product $M\times N$ of smooth manifolds is smooth.
+
+Let's specialize temporarily to manifolds with boundaries. We start with topological manifolds. We write $\partial M$ for the boundary of $M$. Write $\mathbb{H}^n$ for the upper half space $x\in\mathbb{R} ^n$, $x^n \geq 0$.
+
+\begin{definition}\label{1.1.12}
+	A topological manifold with boundary is a second countable, Hausdorff space $M$ wherein every point of $M$ has a neighborhood homeomorphic to an open set of $\mathbb{H} ^n$.
+\end{definition}
+
+Manifolds with boundary then have two different types of charts: interior and boundary charts, defined in the obvious way. An \emph{interior} point lives in some interior chart, otherwise it is a boundary point. We write $\operatorname{Int} (M)$ for the set of interior points. We need to know what it means to be smooth on a boundary chart. The solution is simply saying it is smooth at a point \emph{if and only if} it admits an extension to an open neighborhood of a point.
+
+\section{Smooth maps}
+
+\begin{definition}\label{1.2.1}
+	Let $M,N$ be $m$- and $n$-manifolds, respectively. A map $f : M \to N$ is \emph{smooth} at some $p\in M$ if and only if given a chart $(U,\varphi )$ of $p$ in the atlas, and some chart $(V,\psi )$ of $f(p)$ in the atlas of $N$, the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathbb{R} ^n \supseteq \widetilde{U} \ar[" \varphi ^{-1}  ", r]  & M \ar[" f ", r]  & N \ar[" \psi  ", r]  & \widetilde{V} \subseteq \mathbb{R} ^m
+	\end{tikzcd}\]
+	is smooth in the usual sense, \emph{and} if $f(U)\subseteq V$. If $f$ is smooth at all $p\in M$, we say $f$ is a smooth map.
+\end{definition}
+
+\begin{definition}\label{1.2.2}
+	Let $M$ be a smooth manifold. A smooth map $f : M \to \mathbb{R} $ will be calleed a \emph{smooth function on $M$}. The set of all smooth functions on $M$ is written $C^\infty (M)$.
+\end{definition}
+
+$C^\infty (M)$ forms an $\mathbb{R} $-algebra in the usual way.
+
+\begin{definition}\label{1.2.3}
+	Let $f : M \to N$ be smooth. Then $f$ is a \emph{diffeomorphism} if it is invertible and its inverses is smooth. If there is a diffeomorphism $M\to N$, we say $M$ and $N$ are \emph{diffeomorphic}, and write $M\cong N$.
+\end{definition}
+
+\begin{theorem}\label{1.2.4}
+	Composites of smooth maps are smooth.
+\end{theorem}
+\begin{proof}
+	Let $f : M \to N$ and $g : N \to R$ be smooth maps. Let $p\in M$, and since $f$ is smooth, there is a chart $(U,\varphi )$ for $p$ and a chart $(V,\psi )$ of $f(p)$ with $\psi \circ f\circ \varphi ^{-1} $ smooth, and $f(U)\subseteq V$. Since $g$ is smooth, there is a chart $(V',\psi ')$ of $f(p)$ and a chart $(W,\xi )$ of $gf(p)$ such that $g(V')\subseteq W$ and such that $\xi \circ g\circ (\psi ')^{-1} $ is smooth. If we show that $(V,\psi )$ suffices as a choice of $(V',\psi )$, then we have $gf(U)\subseteq g(V)\subseteq W$ and $\xi \circ g\circ \psi ^{-1} \circ \psi \circ f\circ \varphi ^{-1} =\xi \circ gf\circ \varphi ^{-1} $ is smooth. Thus, it suffices to show that statement.
+
+	use the transitio map
+\end{proof}
+
+\begin{remark}
+	doesnt matter what chart we choose cuz theyre all smoothly related!!! rigorize this
+\end{remark}
+\begin{remark}
+	inclusions and projections (in the sense of subobjects and quotients) are differentiable
+\end{remark}
+
+

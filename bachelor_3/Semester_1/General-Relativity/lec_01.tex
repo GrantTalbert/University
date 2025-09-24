@@ -1,0 +1,89 @@
+\lecture{1}{Tue 02 Sep 2025 12:31}{Syllabus day}
+
+We will be using Carroll. Course webpage at \url{https://physics.bu.edu/~fitzpatr/f25}. Grad class so please call him Liam. Most of the first half of the course is developing the theory of differential geometry, in order to discuss the manifold that is spacetime. Weinberg's book on GR is a good resource as well. Gravity is described by a (not quite) Gauge field $h_{\mu \nu } $ which we will discuss at the end of the course. This implies the equivalence prinicpal which implies gravity behaves as if spacetime is a Riemannian manifold, but it is more fundamental meaning the geometry is not the truth of the universe in the physical sense, only the mathematical sense.
+
+Newtonian gravity is not Lorentz invariant. Fixing this requires the equivalence principle, which states the laws of physics are the same in any inertial reference frame. A great way to phrase this is that standing in a box accelerating upwards is the same as standing in a box that is on Earth, subject to a downwards pull. This means gravity may be described by outwards acceleration.
+
+Interpret gravity as outwards acceleration in this way. This then amounts to sowing together \emph{different} accelerating frames around the border of the Earth. Wow I wonder if this is related to manifolds?
+
+\chapter{Review of special relativity}
+
+We take the convention that $x^\mu $ is a 4-vector with $x^0=t$, $x^1=x$, $x^2=y$, and $x^3=z$.
+
+Spacetime is obviously a 4-manifold, but it admits a metric, since distance can be measured. The speed of light is the same in all reference frames, so if we fix two coordinate systems $x^\mu $ and $(x')^\mu $ for spacetime, they must agree on the speed of light. More precisely, given an initial point $x_0^\mu $ and final point $x_f^\mu $ for a ray of light, if $\Delta x^0 =x_f^0-x_0^0$ is the distance in $x$ (and the same for other coordinates), then the time elapsed must be
+\[
+	c\Delta t = \sqrt{\Delta x^2+\Delta y^2+\Delta z^2} .
+\]
+Equivalently,
+\[
+	0=c^2\Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+.\]
+Invoking that the speed of light is the same in these coordinate systems,
+\[
+	0=c^2\Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2 = c^2 \Delta (t')^2 - \Delta (x')^2 - \Delta (y')^2 - \Delta (z')^2
+.\]
+
+We define this quantity as the invariant distance between $x^\mu $ and $(x')^\mu $. Equivalently,
+\[
+	\Delta s^2 = \eta _{\mu \nu } \Delta x^\mu \Delta x^\nu ,
+\]
+where
+\[
+	\eta _{\mu \nu } =\operatorname{diag }(1,-1,-1,-1)
+\]
+is the Minkowski metric. Here we recall Einstein notation that repeated indicies indicate implicit summations. Since $\eta _{\mu \nu } \neq 0$ iff $\mu =\nu $, the claimed equality follows.
+
+\begin{remark}\label{1.1}
+	Carroll uses $x^{\mu '} $ instead of $(x')^\mu $ for different coordinate symbols. This is just stupid because $\mu '$ should still be $\mu $????? Like why would we ever do this wtf
+\end{remark}
+
+\begin{definition}\label{1.2}
+	The manifold $\mathbb{R} ^4$ with topology given by $\Delta s^2$ is \emph{Minkowski space}. The spacetime metric is also known as the \emph{Minkowski metric}. I will often denote this space by $\mathcal{M} $ for simplicity; this is nonstandard as far as I am aware, but I like naming my mathematical objects.
+\end{definition}
+
+(Minkowski is pronounced ``Minkovski''). When we refer to ``flat space'' in this course, we always mean Minkowski space. As we do in geometry, we now consider symmetries of flat space. Clearly translations $x^\mu \mapsto (x')^\mu =x^\mu +a^\mu $ for any fixed $a^\mu \in\mathcal{M} $ are metric-invariant homeomorphisms of Minkowski space. However, we are also interested in the Lorentz tranformations
+
+\begin{definition}\label{1.3}
+	Lorentz transformations $\Lambda ^\mu _\nu $ are linear maps on $x^\mu $ that preserve $\Delta s^2$. They are given by  $x^\mu \mapsto \Lambda ^\mu _\nu x^\nu $, where the tensor $\Lambda _\nu ^\mu $ is a $4\times 4$ matrix we describe later. 
+\end{definition}
+
+We equivalently have
+\[
+	\Delta x^\mu \Delta x^\nu\eta _{\mu \nu }  =\Lambda ^\mu  _\alpha  \Delta x^\alpha  \Lambda _\beta  ^\nu  \Delta x^\beta  \eta _{\mu \nu } 
+.\]
+We thus need
+\[
+	\eta _{\alpha \nu } =\Lambda _\alpha ^\mu \Lambda _\beta ^\nu \eta _{\mu \nu } 
+.\]
+Lorents transformations are any map such that this is true.
+
+\begin{definition}\label{1.4}
+	We don't necessarily need to fix $\Delta s^2$, we need to lead the metric for \emph{light rays} invariant, where $\Delta s^2=0$. Maps that do this are called \emph{conformal transformations}.
+\end{definition}
+
+We are using a larger set than usual for Lorentz transformations. Oftentimes linear transformations must be homotopic to the identity, but our definition is more general. \emph{Discrete symmetries} do this. For example, \emph{time parity} $T : x^0 = t \mapsto -t$. Of course $T$ is not homotopic to $1$, but it is clearly a metric-invariant homeomorphism. In general, any spacial parity $x^i \mapsto -x^i$ with $i\in \left\{ 1,2,3 \right\} $ fixed is also a transformation.
+
+Oftentimes we do not want to discuss discrete transormations, so we impose the following requirements:
+
+\begin{enumerate}
+	\item $\Lambda _0^0\geq 1$,
+	\item $\det \Lambda =1$.
+\end{enumerate}
+The first gets rid of $t\mapsto -t$, and the second kind of just refuses stretching.
+
+\begin{notation}\label{1.5}
+	We will often have to deal with more general metrics than just Minkowski's metric. We will generally use the notation $g_{\mu \nu } $, and we define $g^{\mu \nu } \mapsto g_{\mu \nu } ^{-1} $, meaning
+	\[
+		g^{\mu \nu } g_{\nu \rho } =\delta_\rho^\mu =1,
+	\]
+	where $\delta_\rho^\mu $ is the Kronecker delta $\delta_{\mu }^\nu =1$ iff $\mu \nu $, 0 otherwise. Everything else raises and lowers indices with the metric, meaning
+	\[
+		x^\mu \coloneqq g^{\mu \nu } x_\nu ,\qquad x_\mu \coloneqq g^{\mu \nu } x^\nu 
+	.\]
+\end{notation}
+
+The Minkowski metric is self-inverse $\eta_{\mu \nu } =\eta ^{\mu \nu } $. Using this notation, viewing $\eta_{\mu \nu } $ as a vector in $\mu $, we can define
+\[
+	\eta^\mu _\nu  \coloneqq \eta ^{\mu \alpha }\eta _{\alpha \nu } =1
+.\]
+For this reason, we will almost never write $g_\mu ^\nu $ or $g_\nu ^\mu $, since they are both 1.

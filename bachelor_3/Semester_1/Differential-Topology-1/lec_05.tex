@@ -1,0 +1,137 @@
+\lecture{5}{Fri 12 Sep 2025 12:21}{Tangent vectors}
+
+Define $\mathbb{R} ^n_a$ as the set $\left\{ a \right\} \times \mathbb{R} ^n$ for some vector $a\in\mathbb{R} ^n$. We will show that this admits an interpretation as a tangent space to $\mathbb{R} ^n$ at $a$. We say that an element $(a,v)\in\mathbb{R} _a^n$ is a \emph{geometric tangent vector}, and we write it as $v_a$ or $v|_a$. The intuitive interpretation of this object is taking the vector $v$, and giving it starting point $a$.
+
+The set $\mathbb{R} _a^n$ forms a vector space in the obvious way, by interpreting $\left\{ a \right\} $ as $0$, and simply working with the space $0\times \mathbb{R} ^n\cong \mathbb{R} ^n$. The vectors $e_i|_a$ thus form a basis for this space.
+
+This allows us to define tangent spaces to manifolds which admit embeddings into $\mathbb{R}^{n+1} $, by taking the tangent space at a point $a\in M$ as $\mathbb{R} ^n_a$. However, to generalize this definition arbitrarily, we must explore some alternative representations of this information.
+
+To do this, we must somehow translate this information into that of smooth maps and manifolds. For example, given any vector $v_a\in\mathbb{R} _a^n$, the directional derivative $D_v|_a : C^\infty (\mathbb{R} ^n) \to \mathbb{R} $ given by
+\[
+	D_v|_af=D_vf(a)=\left.\frac{\mathrm{d}}{\mathrm{d}t} \right|_{t=0} f(a+tv)
+\]
+is $\mathbb{R} $-linear, and satisfies the \emph{product rule}
+\[
+	D_v|_a(fg)=f(a)D_v|_ag+g(a)D_v|_af
+.\]
+If we write $v_a=v^ie_i|_a$, then $D_v|_af$ can be written more concretely as
+\[
+	D_v|_af=v^i \frac{\partial f}{\partial x^i} (a)
+.\]
+This follows by the chain rule. We generalize directional derivatives using this formulation.
+
+\begin{definition}\label{1.2.7}
+	Let $a\in\mathbb{R} ^n$. A \emph{derivation} at $a$ is an $\mathbb{R} $-linear map $w : C^\infty (\mathbb{R} ^n) \to \mathbb{R} $ satisfying the product rule
+	\[
+		w(fg)=f(a)w(g)+g(a)w(f)
+	.\]
+	We write $T_a\mathbb{R} ^n$ for the set of all derivations at $a$.
+\end{definition}
+
+We immediately see that $T_a\mathbb{R} ^n$ is a vector space by noting that if $w_1,w_2$ are derivations, then
+\[
+	(w_1+w_2)(fg)=(f(a)w_1(g)+g(a)w_1(f))+(f(a)w_2(g)+g(a)w_2(f))=f(a)(w_1+w_2)(g)+g(a)(w_1+w_2)(f)
+,\]
+\[
+	(cw)(fg)=c\left( f(a)w(g)+g(a)w(f) \right) =f(a)(cw)(g)+g(a)(cw)(f)
+.\]
+The following lemma is not too interesting, but implies a very interesting result.
+
+\begin{lemma}\label{1.2.8}
+	Let $a\in\mathbb{R} ^n$, $w\in T_a\mathbb{R} ^n$, and $f,g\in C^\infty (\mathbb{R} ^n)$. If $f$ is a constant function, then $w(f)=0$. Additionally, if $f(a)=g(a)=0$, then $w(fg)=0$.
+\end{lemma}
+\begin{proof}
+	For the first statement, it suffices to prove $f$ for the constant function $f(x)=1$, since $g(x)=c$ implies $g=cf$, and the statement follows by linearity of derivations. The product rule gives
+	\[
+		w(f)=w(ff)=1w(f)+1w(f)=2w(f)
+	\]
+	and thus $w(f)=0$.
+
+	For the second statement, we have
+	\[
+		w(fg)=f(a)w(g)+g(a)w(f)=0w(f)+0w(g)=0
+	.\]
+\end{proof}
+
+\begin{proposition}\label{1.2.9}
+	Let $a\in\mathbb{R} ^n$ and $v_a\in\mathbb{R} _a^n$. Then $D_v|_a$ is a derivation, and the map $v_a \mapsto D_v|_a$ is an isomorphism of $\mathbb{R} $-vector spaces $\mathbb{R} _a^n \cong T_a\mathbb{R} ^n$.
+\end{proposition}
+\begin{proof}
+	First, we show $D_v|_a$ is a derivation. This follows by the properties of the partial derivative $\partial _\mu $. To show it is $\mathbb{R} $-linear, we have
+	\[
+		D_v|_a(f+g)=v^\mu \partial _\mu (f+g)|_a=v^\mu \partial _\mu f|_a+v^\mu \partial _\mu g|_a=D_v|_af+D_v|_ag,
+	\]
+	\[
+		D_v(cf)=v^\mu \partial _\mu (cf)|_a=cv^\mu \partial _\mu f|_a=cD_v|_af
+	.\]
+	The product rule also follows by the fact that $\partial _\mu $ satisfies the product rule: $\partial _x(fg)+f \partial _x(g)+g \partial _xf$. Adding in the evaluation gives
+	\[
+	D_v|_a(fg)=v^\mu \left( f(a)\partial _\mu g|_a+g(a)\partial _\mu f|_a \right) =f(a)D_v|_ag+g(a)D_v|_af
+	.\]
+	
+	Now we must show the map $v_a\mapsto D_v|_a$ is $\mathbb{R} $-linear. To show additivity, we must show $D_{v+w} |_a=D_v|_a+D_w|_a$. This is obvious by the fact that $(v+w)^\mu =v^\mu +w^\mu $:
+	\[
+		D_{v+w} |_a=(v+w)^\mu \partial _\mu |_a=v^\mu \partial _\mu |_a+w^\mu \partial _\mu |_a
+	.\]
+	Similarly, since $(cv)^\mu =cv^\mu $, we have
+	\[
+		D_{cv} |_a=(cv)^\mu \partial _\mu |_a=cv^\mu \partial _\mu |_a=cD_v|_a
+	.\]
+	Therefore, the map is $\mathbb{R} $-linear.
+
+	The main part of the proof is that the map is an isomorphism of $\mathbb{R} $-vector spaces. Injectivity is show by showing the kernel is trivial. Since we do not know that $T_a\mathbb{R} ^n$ is finite dimensional, this does not suffice as an isomorphism proof. Let $D_v|_a$ be the zero derivation $f\mapsto 0$. We want to show $v_a=0$. Let $f$ be the coordinate function $x^j : \mathbb{R} ^n \to \mathbb{R} $ by projecting onto the $j$th component. Then $\partial _ix^j=\delta_i^j$, giving
+	\[
+		0 = D_v|_a = v^\mu \partial _\mu x^j|_a=v^j ,
+	\]
+	since $1|_a=1$. The statement follows by letting $j$ range over $[n]$, showing the map is injective.
+
+	To prove surjectivity, let $w\in T_a\mathbb{R} ^n$ be an arbitrary derivation. With the same definition of $x^j$, write $v^i=w(x^i)$. We show $w=D_v|_a$.
+
+	We show this by proving they act on maps $f : C^\infty (\mathbb{R} ^n)$ in the same way. Since $f$ is analytic, it admits a Taylor expansion
+	\[
+		f=f(a)+\sum_{i=1}^{n} \frac{\partial f}{\partial x^i} (a)\left( x^i-a^i \right) +\sum_{i,j=1}^{n} \left( x^i-a^i \right) \left( x^j-a^j \right) \int_{0}^{1} (1-t)\frac{\partial ^2f}{\partial x^i \partial x^j} (a+t(x-a)) \,\mathrm{d} t
+	.\]
+	The functions $x^i-a^i$ and $x^j-a^j$ vanish at $x=a$. Since $w$ is $\mathbb{R} $-linear and distributes over addition, by \cref{1.2.8},
+	\[
+		w((x^i-a^i)(x^j-a^j))=0
+	.\]
+	The derivation thus annihilates the last term:
+	\[
+		w(f)=w(f)(a)+\sum_{i=1}^{n} w\left( \frac{\partial f}{\partial x^i} (a)\left( x^i-a^i \right)  \right) =\sum_{i=1}^{n} \frac{\partial f}{\partial x^i} (a)\left( w(x^i)-w(a^i) \right) =\sum_{i=1}^{n} \frac{\partial f}{\partial x^i} (a)w(x^i)
+	.\]
+	Since $w(x^i)=v^i$, this is simply $v^\mu \partial _\mu f|_a=D_v|_a$. This proves surjectivity.
+\end{proof}
+
+\begin{corollary}\label{1.2.10}
+	$T_a\mathbb{R} ^n$ has dimension $n$, and has a basis given by
+	\[
+		\left.\frac{\partial }{\partial x^i}\right|_a \coloneqq D_{e_i} |_a
+	\]
+	In particular, these are defined by
+	\[
+		\left.\frac{\partial }{\partial x^i} \right|_af=\frac{\partial f}{\partial x^i} (a)
+	.\]
+\end{corollary}
+\begin{proof}
+	These follow immediately by the above proof.
+\end{proof}
+
+We now see an obvious way to generalize this definition to arbitrary manifolds. We can define derivations on arbitary $C^\infty $-manifolds, and then show that this is generated by the partials at a point.
+
+\begin{definition}\label{1.2.11}
+	Let $M$ be a smooth manifold, and let $p\in M$. A linear map $v : C^\infty (M) \to \mathbb{R} $ is a \emph{derivation at p} if it satisfies the product rule
+	\[
+		\forall f,g\in C^\infty (\mathbb{R} ) \, : \, v(fg)=f(p)v(g)=g(p)v(f)
+	.\]
+	The set of all derivations for $p$ is denoted by $T_pM$, and is called the \emph{tangent space} to $M$ at $p$. An element of $T_pM$ is a \emph{tangent vector} at $p$.
+\end{definition}
+
+We now prove some facts to show that this definition behaves as expected.
+
+\begin{lemma}\label{1.2.12}
+	Let $M$ be a smooth manifold with or without boundary, $p\in M$, $v\in T_pM$, and $f,g\in C^\infty (M)$. If $f$ is constant, then $v(f)=0$. If $f(p)=g(p)=0$, then $v(fg)=0$.
+\end{lemma}
+\begin{proof}
+	The same proof for \cref{1.2.8} suffices.
+\end{proof}
+

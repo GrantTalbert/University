@@ -581,4 +581,143 @@ whose commutivity implies that $\varphi \circ i_{S,K} =f$. Note that $\varphi \c
 
 \subsection{Fully Faithful and Essentially Surjective Functors}
 
+The definition of these is easily given in the context of topological categories: a functor must be fully faithful and essentially surjective on the homotopy category. Equivalently, the functor must have weak homotopy equivalences from any object to its image, and must define weak homotopy equivalences on mapping spaces. This is a fairly obvious definition and at this point really does not require motivation.
+
+Translating to quasi-categories requires a slightly more convoluded description of the definition. Since Lurie does not offer this in HTT, and since I really don't feel like going through the annoying work of translating his definition along $\mathfrak{C} $, $\left| - \right| $, $\Sing $, and $N$, we mainly use \cite[01JG]{kerodon} for this section.
+
+Recall in \cref{1.2.2.1} we define the mapping space of an $\infty $-category by $\Map_{\mathcal{C} }(x, y) \coloneqq \Map_{\hh \mathcal{C} }(x, y) =\Map_{\hh \mathfrak{C} [\mathcal{C} ]}(x, y) \in \mathcal{H} $, viewed as the Kan complex in $\mathcal{H} $, rather than the underlying category. We now propose the following definitions.
+
+\begin{definition}\label{1.2.10.1}
+	Let $\mathcal{C} ,\mathcal{D} $ be $\infty $-categories, and $F : \mathcal{C}  \to \mathcal{D} $ an $\infty $-functor. We say $F$ is \emph{fully faithful} if the induced maps on mapping spaces $\Map_{\mathcal{C} }(x, y) \to \Map_{\mathcal{D} }(F(x), F(y)) $ are weak homotopy equivalences of Kan complexes (Quillen's model structure) for each $x,y\in \mathcal{C} $.
+\end{definition}
+
+Due to the calculation being really painful, I take Lurie at his word that given a functor of 1-categories $F : \mathcal{C}  \to \mathcal{D} $, $F$ is fully faithful if and only if $N(F): N(\mathcal{C} ) \to N(\mathcal{D} )$ is fully faithful in the sense of \cref{1.2.10.1}, successfully generalizing the definition.
+
+\begin{definition}\label{1.2.10.2}
+	Let $F : \mathcal{C}  \to \mathcal{D} $ be an $\infty $-functor. Then $F$ is \emph{essentially surjective} if for all $d\in \mathcal{D} $, there is $c\in \mathcal{C} $ and an equivalence $F(c)\simeq d$.
+\end{definition}
+
+This generalizes the standard notion very obviously. If $F : \mathcal{C}  \to \mathcal{D} $ is an essentially surjective 1-functor, then for all $d\in N(\mathcal{D} )_0$, there is $c\in N(\mathcal{C} )_0$ and an isomorphism $F(c)\cong d$. Since isomorphisms are equivalences in nerves, we observe that $N(F)$ is essentially surjective, and trivially the converse holds.
+
+I postpone developing much of the theory of these objects for later in the book, as I have with most sections in this first chapter. The goal is to understand the \emph{language}, not to be extremely rigorous, nor to fully understand all definitions.
+
+\subsection{Subcategories of $\infty $-Categories}
+
+Let $\mathcal{C} $ be an $\infty $-category, and let $\hh \mathcal{C} '\subseteq \hh \mathcal{C} $ be any subcategory of its homotopy category. We construct an $\infty $-category $\mathcal{C} '$ by constructing the pullback square in $\sSet $:
+\[\begin{tikzcd}
+	{\mathcal{C}'} & {\mathcal{C}} \\
+	{N(\hh\mathcal{C'})} & {N(\hh\mathcal{C})}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow["{N\hh}", from=1-2, to=2-2]
+	\arrow["\subseteq"', from=2-1, to=2-2]
+\end{tikzcd}\]
+We say $\mathcal{C} '$ is a \emph{subcategory} of $\mathcal{C} $. Of course it is a subcategory as an $\infty $-category, but we don't write ``$\infty $'' to avoid annoying language. To show that $\mathcal{C} '$ is an $\infty $-category, let $0<i<n$, and consider  a horn $\sigma _0: \Lambda _i^n \to \mathcal{C} '$. Composing with the arrows $\mathcal{C} '\to \mathcal{C} $ and $\mathcal{C} '\to N(\hh \mathcal{C} ')$ gives the relevant part of the diagram
+\[\begin{tikzcd}
+	{\Delta^n} \\
+	& {\Lambda_i^n} \\
+	&& {\mathcal{C}'} & {\mathcal{C}} \\
+	&& {N(\hh\mathcal{C}')} & {N(\hh\mathcal{C})}
+	\arrow[from=2-2, to=1-1, hook]
+	\arrow[curve={height=-30pt}, from=1-1, to=3-4]
+	\arrow[curve={height=30pt}, from=1-1, to=4-3]
+	\arrow[from=2-2, to=3-3]
+	\arrow[curve={height=-18pt}, from=2-2, to=3-4]
+	\arrow[curve={height=18pt}, from=2-2, to=4-3]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=3-3, to=4-4]
+	\arrow[from=3-4, to=4-4]
+	\arrow[from=4-3, to=4-4]
+\end{tikzcd}\]
+Of course since $\mathcal{C} ,N(\hh \mathcal{C} ')$ are $\infty $-categories, there are fillers as indicated, and since each triangle commutes, the entire diagram commutes. Universality induces a morphism $\Delta ^n\to \mathcal{C} '$ (not indicated), filling the horn by commutativity.
+
+We say $\mathcal{C} '$ is full when $\hh \mathcal{C} '$ is full as a subcategory of $\hh \mathcal{C} $, and we note that $\mathcal{C} '$ is determined by the set of objects $\mathcal{C} '_0\subseteq \mathcal{C} _0$. We then say $\mathcal{C} '$ is the \emph{full subcategory spanned by} $\mathcal{C} '_0$. The inclusion $\mathcal{C} '\hookrightarrow \mathcal{C} $ is fully faithful in this case. In particular, any fully faithful functor $f : \mathcal{C} '' \to \mathcal{C} $ factors as $\mathcal{C} ''\to \mathcal{C} '\to \mathcal{C} $, where the first map is an equivalence and the second is the inclusion of the full subcategory spanned by $f(\mathcal{C} ''_0)$.
+
+\subsection{Initial and Final Objects}
+
+\begin{terminology}\label{1.2.12.1}
+	Lurie calls objects ``final'',  whereas I use the term ``terminal.''
+\end{terminology}
+
+A natural generalization of final objects arises in the context of simplicial and topological categories.
+
+\begin{definition}\label{1.2.12.2}
+	Let $\mathcal{C} $ be a simplicial or topological category. Then $x\in \mathcal{C} $ is final if $\Map_{\mathcal{C} }(x, -) $ is weakly contractible.
+\end{definition}
+
+This translates to $x$ being final in $\hh \mathcal{C} $, which dualizes in the obvious way. Since this makes reference to $\hh \mathcal{C} $, this translates to $\infty $-categories, but we will need an explicit description.
+
+\begin{definition}\label{1.2.12.3}
+	Let $\mathcal{C} $ be a simplicial set. A vertex $x\in \mathcal{C} _0$ is \emph{strongly final} if the projection $\mathcal{C} _{/x} \to \mathcal{C} $ is a trivial fibration of simplicial sets (since cofibrations are mono maps, trivial fibrations lift against monics).
+\end{definition}
+
+We investigate the projection $\mathcal{C} _{/x} \to \mathcal{C} $ to give a better description of strongly final objects. Recall that $(\mathcal{C} _{/x} )_n=\sSet _x(\Delta ^n\star \Delta ^0,\mathcal{C} )$. Since $\Delta ^n \subseteq \Delta ^n\star \Delta ^0$, we can restrict $n$-simplices along the inclusion to obtain morphisms $\Delta ^n\to \mathcal{C} $, and by Yoneda, $n$-simplices of $\mathcal{C} $. This is how we define the projection: precomposition by the inclusion $i^* : \sSet_x(\Delta ^n\star \Delta ^0 \to \mathcal{C} )\to \sSet_x(\Delta ^n,\mathcal{C} )\cong \mathcal{C} _n$, where the second $\sSet _x$ denotes the set of morphisms whose final vertex is $x$.
+
+Let $x\in \mathcal{C} $ be strongly final. Then the projection is a trivial Kan fibration. Focusing on the Kan fibration condition, we see that any diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X \ar[d] \ar[r]  & \mathcal{C}_{/x} \ar[d]  \\
+Y \ar[r] \ar[dotted, ur]  & \mathcal{C} 
+\end{tikzcd}\]
+with the left vertical arrow mono, there is a lift as indicated by the dotted arrow, rendering the diagram commutative. We can make the very interesting remark that this is equivalent to the condition that all maps $f_0: \partial \Delta ^n \to \mathcal{C} $ wherein $(0\mapsto n)\mapsto x$ extend to maps $\Delta ^n\to \mathcal{C} $.
+
+To prove this, consider the case where the mono map is $\partial \Delta ^n\hookrightarrow \Delta ^n$, which is mono since it is levelwise injective. Suppose lifts
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\partial \Delta ^n \ar[hook, d] \ar[r]  & \mathcal{C}_{/x} \ar[d]  \\
+\Delta ^n \ar[r] \ar[dotted, ur]  & \mathcal{C} 
+\end{tikzcd}\]
+exist. Suppose for now that any map $f_0: \partial \Delta ^n \to \mathcal{C} $ which has $n$-th vertex $x$ factors through $\mathcal{C} _{/x} $. Then the lift diagram ensures commutativity of the diagram
+\[\begin{tikzcd}
+	{\partial\Delta^n} & {\mathcal{C}_{/x}} & {\mathcal{C}} \\
+	{\Delta^n}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{f_0}", curve={height=-12pt}, from=1-1, to=1-3]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["{i^*_\bullet}"', from=1-2, to=1-3]
+	\arrow["f"', dotted, from=2-1, to=1-2]
+	\arrow["{i^*_\bullet \circ f}"', curve={height=12pt}, from=2-1, to=1-3]
+\end{tikzcd}\]
+for $i^*_{\bullet} $ the inclusion. It thus suffices to show such factorizations exist. Indeed, let $f_0: \partial \Delta ^n \to \mathcal{C} $ map $(0\mapsto n)\mapsto x$, and recall that simplices $(\sigma ,\tau )$ in $\mathcal{C} _{/x} $ needed to have $x$ as the final vertex of $\sigma $, concluding the proof by factoring along the injection $\Delta ^n \hookrightarrow \Delta ^n\star \Delta ^0$.
+
+Now we show the converse. Of course $\mathcal{C} _{/x} \hookrightarrow \mathcal{C} $ is a fibration since we necessarily have $\Lambda ^i_n\hookrightarrow \Delta ^n$ factors through $\partial \Delta ^n\hookrightarrow \Delta ^n$, and horns $\Lambda _i^n\to \mathcal{C} $ have $n$th vertex $x$ iff it factors through $\mathcal{C} _{/x} $. Since boundaries admit fillers here by hypothesis, all lifts necessarily exist. It suffices to show $\mathcal{C} _{/x} $ is a weak equivalence, which requires simplicial homotopy that I don't know yet LOL.
+
+\begin{proposition}\label{1.2.12.4}
+	Let $\mathcal{C} $ be an $\infty $-category with an object $y$. Then $y$ is strongly final if and only if $\Hom_{\mathcal{C} }^{\mathrm{R}}(-, y) $ is weakly contractible.
+\end{proposition}
+
+\begin{corollary}\label{1.2.12.5}
+	Let $\mathcal{C} $ be an $\infty $-category. Then $y\in \mathcal{C} _0$ is final if and only if it is strongly final.
+\end{corollary}
+\begin{proof}
+	I don't fully understand one direction. For the convese, let $y$ be final. Thus, $\Map_{\mathcal{C} }(x, y) $ is contractible, and since that is the homotopy type of $\Hom_{\mathcal{C} }^{\mathrm{R}}(x, y) $, the latter space is also contractible. By \cref{1.2.12.4}, $y$ is strongly terminal.
+\end{proof}
+
+Final objects dualize in the obvious way: $x$ is (strongly) initial if the projection $\mathcal{C} _{x/} \to \mathcal{C} $ is a trivial fibration; in particular any sphere $\partial \Delta ^n\to \mathcal{C} $ with starting vertex $x$ admits a filler. The remainder of the arguments dualize in an even more obvious way.
+
+\begin{proposition}\label{1.2.12.6}
+	Let $\mathcal{C} $ be an $\infty $-category and $\mathcal{C} '$ the full subcategory spanned by terminal vertices. Then $\mathcal{C} '$ is either empty, or a contractible Kan complex.
+\end{proposition}
+\begin{proof}
+	If $\mathcal{C} '$ is empty then the statement follows. Otherwise, to show $\mathcal{C} '$ is a Kan complex, we show $\mathcal{C} '\to *$ is fibrant, meaning $\mathcal{C} '\to *$ right lifts against spheres $\partial \Delta ^n\hookrightarrow \Delta ^n$. Equivalently, given any diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\partial \Delta ^n\ar[" f ", r] \ar[hook, d]  & \mathcal{C} ' \\
+	\Delta ^n \ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	there is a dotted arrow as indicated, rendering the diagram commutative. Indeed, since the $n$th vertex of $f$ is necessarily terminal, since $\mathcal{C} '_0$ is only terminal objects, the map factors through $\mathcal{C} '_{/f(n)} $. Since $\mathcal{C}' _{/f(n)} \to \mathcal{C}' $ is a trivial fibration by hypothesis, there is a filler $\Delta ^n\to \mathcal{C} '_{/f(n)} $, which extends to the relevant filler $\Delta ^n\to \mathcal{C} '$.
+
+	To show contractibility, we explicitly construct a homotopy from $1$ and the constant map $\mathcal{C} '\to \Delta ^0\to \mathcal{C} '$ on an arbitrary terminal object $x$. First we show $X\times \Delta ^1$ is a cylinder object for a simplicial set $X$. Clearly $X\amalg X\to X\times \Delta ^1$ given by mapping the first $X$ to $X\times \left\{ 0 \right\} $, and the second to $X\times \left\{ 1 \right\} $, is monic. It suffices to show $X\times \Delta ^1\to X$ is a weak equivalence, and thus $\left| X \right| \times I\to \left| X \right| $ is a weak homotopy equivalence of spaces. Since $\pi _n$ preserves products for $n\geq 0$, and since $I$ is contractible (i.e. $\pi _n(I)=0$), we have
+	\[
+		\pi _n(\left| X \right| \times I)\cong \pi _n(X)\times \pi _n(I)\cong \pi _n(X)
+	.\]
+	We thus very simply have that the projection $\pi : X\times \Delta ^1 \to X$ is a weak equivalence.
+
+	Let $i_0+i_1$ be the map $\mathcal{C} '\amalg \mathcal{C} \to \mathcal{C} \times \Delta ^1$ given above. We must show given any diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} '\ar[" f ", bend left, drr] \ar[" i_0 ", dr] \ar[d]  &  &  \\
+	\mathcal{C} '\amalg \mathcal{C} ' \ar[" i_0+i_1 ", r]  & \mathcal{C} '\times \Delta ^1\ar[" H ", dotted, r]  & \mathcal{C} ' \\
+	\mathcal{C} '\ar[" x\in \mathcal{C} '_0 "', bend right, urr] \ar[" i_1 "', ur] \ar[u] &  & 
+	\end{tikzcd}\]
+	there exists a dotted homotopy as indicated, rendering the diagram commutative.
+\end{proof}
 

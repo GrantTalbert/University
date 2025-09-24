@@ -25,7 +25,7 @@ Note that \cref{4.1} tells us what the faces and degeneracies of a simplicial su
 	\[
 		(\im \alpha )_n=\im (\alpha _n : X_n \to Y_n)
 	,\]
-	where we define $\alpha _n$ by recalling \cref{??}.
+	where we define $\alpha _n$ by recalling the description of morphisms of simplicial sets given in \cref{3.9}.
 \end{definition}
 
 Many important simplicial sets arise as simplicial subsets of the standard $n$-simplicial set $\Delta ^n$. The first one is the \emph{face}.
@@ -35,7 +35,7 @@ Many important simplicial sets arise as simplicial subsets of the standard $n$-s
 \end{definition}
 
 \begin{remark}\label{4.5}
-	An important thing to note about the face is that since the epi-mono factorization in $\boldsymbol{\Delta} $ is unique, there is an isomorphism $\Delta ^{n-1} \cong \partial _i\Delta ^n$ given in one direction by postcomposing by $d^i$, and in the other by simply removing it. Under this isomorphism, the $(n-1)$-simplex $1_{[n-1]} \in\Delta ^{n-1}_{n-1} $ corresponds to the $(n-1)$-simplex $d^i\in \partial _i\Delta ^{n} $. By \cref{??} and the Yoneda lemma, morphisms $\partial _i\Delta ^{n} \to X$ are precisely morphisms $\Delta ^{n-1} \to X$, which are precisely $(n-1)$-simplices $\tau \in X_{n-1} $. Since morphisms $\Delta ^{n-1} \to X$ are given by $1_{[n-1]} \mapsto \tau$, we have that morphisms $\partial _i\Delta ^n$ are given by $d^i\mapsto \tau $.
+	An important thing to note about the face is that since the epi-mono factorization in $\boldsymbol{\Delta} $ is unique, there is an isomorphism $\Delta ^{n-1} \cong \partial _i\Delta ^n$ given in one direction by postcomposing by $d^i$, and in the other by simply removing it. Under this isomorphism, the $(n-1)$-simplex $1_{[n-1]} \in\Delta ^{n-1}_{n-1} $ corresponds to the $(n-1)$-simplex $d^i\in \partial _i\Delta ^{n} $. By \cref{3.12}, morphisms $\partial _i\Delta ^{n} \to X$ are precisely morphisms $\Delta ^{n-1} \to X$, which are precisely $(n-1)$-simplices $\tau \in X_{n-1} $. Since morphisms $\Delta ^{n-1} \to X$ are given by $1_{[n-1]} \mapsto \tau$, we have that morphisms $\partial _i\Delta ^n$ are given by $d^i\mapsto \tau $.
 \end{remark}
 
 \begin{proposition}\label{4.6}
@@ -71,5 +71,47 @@ The construction of the union of simplicial sets yields a simplicial set of fund
 	Let $K$ be a simplicial set, and $\sigma _0 : \Lambda _i^n \to K$ a morphism of simplicial sets. We often refer to $\sigma _0$ as a \emph{horn in $K$}. Similarly, we refer to a map $\partial _i\Delta ^n\to K$ as a \emph{face} of $K$.
 \end{terminology}
 
-For geometric intuition for horns, see \cite[\S3.4]{ssets}. We continue 
+\begin{definition}\label{4.9}
+	Let $K$ be a simplicial set, and let $\sigma _0: \Lambda _i^n \to K$ be a horn in $K$. A \emph{filler} for the horn $\sigma _0$ is a morphism of simplicial sets $\sigma : \Delta ^n \to K$ which agrees when restricted along the horn $\sigma |\Lambda _i^n=\sigma _0$. Put another way, given the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _i^n\ar[" \sigma _0 ", r] \ar[hook, d]  & K \\
+	\Delta ^n \ar[dotted, " \sigma  "', ur]  & 
+	\end{tikzcd}\]
+	a filler is a \emph{not necessarily unique} dotted arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+Horns and fillers are objects of particular interest. They play an important role in the homotopy theory of simplicial sets, but will also be of extreme importance in the theory of quasi-categories. The following theorem is one of the most important theorems regarding horns, as it gives us a convenient way to construct and study these objects.
+
+\begin{theorem}\label{4.10}
+	Let $K$ be a simplicial set and $0\leq i\leq n$. A horn $\sigma : \Lambda _i^n \to K$ is fully determined by a collection of $(n-1)$-simplices $\tau _j\in K_{n-1} $ for each $j\neq i$, $0\leq j\leq n$, satisfying the \emph{compatibility condition}:
+	\[
+		\forall k<j,\; d_k(\tau _j)=d_{j-1} (\tau _k)
+	.\]
+	The horn $\sigma $ is then defined by mapping $d^j\mapsto \tau _j$.
+\end{theorem}
+The proof is fairly lengthy so we unfortunately must omit it here. It is proven in \cite{gj}. The theorem is important enough that we feel it is important to unpack its impliciations.
+
+The theorem states that given a collection of simplices $\tau _j$ for $j\neq i$ satisfying the compatibility condition, the map $\Lambda _i^n$ given by $d^j\mapsto \tau _j$ completely describes a horn $\sigma : \Lambda _i^n \to K$. This means that given this data, there is exactly one way to obtain a horn $\sigma $. This is obtained by applying the face and degeneracy operators to the cofaces $d^j$ to describe all simplices of the $i$th horn $\Lambda _i^n$. The converse is also true, meaning given a horn there are maps $d^j\mapsto \tau _j$ satisfying the compatibility condition, but this is less interesting (and far easier to prove) than the other direction.
+
+One of the upshots of \cref{4.10} is \cref{4.11}:
+
+\begin{corollary}\label{4.11}
+	Let $\sigma _0: \Lambda _i^n \to K$ be a horn in a simplicial set $K$. With notation as in \cref{4.9}, a filler $\sigma : \Delta ^n \to K$ is completely determined by an $n$-simplex $\tau \in K_n$ such that $d_j(\tau)=\tau _j$ for all $i\neq j$.
+\end{corollary}
+\begin{proof}
+	By the Yoneda lemma (\cref{3.12}), a morphism $\sigma :\Delta ^n \to K$ is equivalent to an $n$-simplex $\tau \in K$ such that $\sigma (1_{[n]} )=\tau $. For $\sigma $ to be a filler simply means that $\sigma |\Lambda _i^n=\sigma _0$. By \cref{4.10}, it suffices to show $\sigma $ agrees with $\sigma _0$ on cofaces $d^j$ with $j\neq i$.
+
+	To show this, note that $d^j=1_{[n]} \circ d^j$, and thus
+	\[
+		\sigma (d^j)=\sigma (1_{[n]} \circ d^j)=\sigma d_j(1_{[n]} ),
+	\]
+	where the last step follows by \cref{3.10}: faces in $\Delta ^n$ are given by precomposition. By \cref{3.9}, morphisms of simplicial sets commute with faces, meaning
+	\[
+		\sigma d_j(1_{[n]} )=d_j(\sigma (1_{[n]} )=d_j(\tau )=\tau _j,
+	\]
+	where the last step follows by hypothesis. Therefore, $\sigma $ is a filler for $\sigma _0$.
+\end{proof}
+
+
+% TODO: add geometric intuition for objects; note that the geometric intuition for cofaces in $\Delta ^{\bullet} $ should be done in \S3.
 

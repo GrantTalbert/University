@@ -1,0 +1,96 @@
+\lecture{4}{Thu 11 Sep 2025 12:36}{idk}
+
+Missed some stuff, read notes.
+
+The energy-momentum tensor or stress tensor $T_{\mu \nu } $ is how energy and momentum enter into the equations of motion, since the stress tensor turns energy and momentum and turns them into an object which transforms like a tensor.
+
+A simple example is the case of a fluid. We can view this as a collection of individual molecules, and (in theory) we could keep track of the trajectory of each particle as some $x^\mu (\lambda )=(t(\lambda ),x^i(\lambda ))$. There are many ways to parameterize $x^\mu $, so we choose to parameterize it with the \emph{proper time} $\tau $. This is the amount of time that elapses for the \emph{particle itself}: if it was carrying a stopwatch, it's the readout of the stopwatch. Using $\Delta s$, we find
+\[
+	\left( \frac{\mathrm{d}\tau }{\mathrm{d}\lambda }  \right) ^2=-\eta _{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } 
+.\]
+This basically puts the particle in its rest frame. In the rest frame,
+\[
+	\frac{\mathrm{d}x^i}{\mathrm{d}\lambda } =0
+\]
+since the particle is not moving. Therefore,
+\[
+	0=-\eta _{\mu \nu } \mathrm{d} x^\mu \mathrm{d} x^\nu =-\eta _{00} \mathrm{d} x^0\mathrm{d} x^0=\mathrm{d} t^2
+.\]
+Convention: particle physicists take $(+,-,-,-)$ for $\eta _{\mu \nu } $, and relativists take the opposite convention $(-,+,+,+)$. We are going to swap to the relativistic conventions now. This is why there is a $-\eta _{\mu \nu } $ in the equation.
+
+Therefore, in the rest frame,
+\[
+	\mathrm{d} \tau ^2=\mathrm{d} t^2 \implies \left(\frac{\mathrm{d}\tau }{\mathrm{d}\lambda }\right)^2 =\left(\frac{\mathrm{d}t}{\mathrm{d}\lambda } \right)^2.
+\]
+
+We can also view fluids macroscopically. The quantity
+\[
+	u^\mu \coloneqq \frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } 
+\]
+can be viewed as a continuous function of spacetime by viewing it as an average over the little $x^\mu $s. We then have
+\[
+	u^\mu u_\mu =\eta _{\mu \nu } \eta ^\mu \eta ^\nu =\eta _{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau } =\eta _{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\lambda } \frac{\mathrm{d}\tau  }{\mathrm{d}\lambda  } \frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda  } \frac{\mathrm{d}\tau  }{\mathrm{d}\lambda  } 
+.\]
+Recall of course that in the rest frame, the space components go to 0 and $\tau $ is proper time, so plugging in our previous equations we find it normalizes to $-1$.
+
+Let's find $T_{\mu \nu } $ for a perfect fluid. The stress tensor locally depends on $u^\mu $, and in the local rest frame its rotationally invariant. We first look at $T^{\mu \nu } $ in the rest frame. This is a symmetric 4x4 matrix. For it to be rotationally invariant, all non-diagonal elements have to vanish. This can be proven by some annoying math. We also find that due to $\eta _{\mu \nu } $ signs, the first term $\rho =T^{00} $ is energy density, and the other terms $T^{ii} $ are pressure. This follows because space and time are different:
+
+In a perfect fluid, $x,y,z$ are all the same, so rotations in 3d don't do anything, and only 1 is invariant under 3d rotations. We are not demanding that we do 4-dimensional rotations (boosts), since it is not invariant under these. This gives us a second degree of freedom in $\rho $. 
+
+Aside: If we required it be invariant under boosts, we would have $\rho =-p$ due to the metric. This would imply that for a Lorentz transformation $\Lambda $,
+\[
+	T^{\mu \nu } =\Lambda \eta ^{\mu \nu } =\begin{pmatrix}
+	-\Lambda  &  &  &  \\
+	 & \Lambda  &  &  \\
+	 &  & \Lambda  &  \\
+	 &  &  & \Lambda 
+	\end{pmatrix}
+.\]
+This is dark energy apparently.
+
+We have simplified $T^{\mu \nu } $ to
+\[
+	T^{\mu \nu } =\operatorname{diag} (\rho ,p,p,p)
+.\]
+We then lower indices
+\[
+	T_{\mu \nu } =\eta _{\mu \alpha } \eta _{\nu \beta } T^{\alpha \beta } 
+.\]
+
+
+Useful trick. We start by deriving a formula in a specific frame, and we then use tensor analysis to write the tensor in any frame. We will now do this with $T_{\mu \nu } $, since we know it in its rest frame. We start by writing $T^{\mu \nu } $ in terms of $u^\mu =(1,0,0,0)$ in the rest frame. We of course have $u^\mu u^\nu =\operatorname{diag} (1,0,0,0)$, so we can start with $\rho u^\mu u^\nu $.
+
+The trick requires us to only use the 2-tensor $\mu \nu $, so writing it down we have to use thee two indices only. Thus, the things we can put on the right-hand side are $u^\mu u^\nu $ and $\eta ^{\mu \nu } $. In other words, the fluid picked out a specific reference frame, so we can only use things which pick out the same reference frame, which are $u$ and the spacetime metric, since the latter is invariant under reference frames. We have
+\[
+	p\eta ^{\mu \nu } +(\rho +p)u^\mu u^\nu =T^{\mu \nu } 
+.\]
+This gives us a way to express $T^{\mu \nu } $ in a general frame, by invariance under coordinate transformations. We simply have
+\[
+	T^{\mu \nu } =p\eta ^{\mu \nu } +(\rho +p)u^\mu u^\nu 
+\]
+in \emph{any} frame. Finally, note that energy and momentum are conserved, meaning we must have
+\[
+	\partial _\mu T^{\mu \nu } =0
+.\]
+This follows for this example without extra work I think.
+
+\chapter{Equivalence principle}
+
+Our previous discussion forms the basis for the equivalence principle, which is so important that it is basically a definition.
+
+\begin{definition}\label{alsjnsdl}
+	The \emph{weak equivalence principle} states that forces on particles only depend on distance:
+	\[
+		m \mathbf{a} _i = \mathbf{F} _i = -m \Delta \Phi_i = \sum_{j\neq i} \mathbf{F} ( \mathbf{x} _i - \mathbf{x} _j)
+	.\]
+	We can thus always remove gravity by passing to an accelerating frame: given the old coordinate system $x^\mu $, we map to a new system $(x')^\mu $ by
+	\[
+		x^\mu \to x^\mu +\frac{1}{2} t^2\Delta \Phi 
+	.\]
+
+	The \emph{strong} equivalence principle states that all laws of physics are exactly the same in any (inertial) reference frame, and are invariant under coordinate transformations.
+\end{definition}
+
+Mass comes from interactions. The mass of the proton, for example, is 1GeV, but the mass of quarks are only a few MeV. The mass of the proton comes largely from the interactions of its quarks, so forces have to couple to these interactions such that the Newtonian weak equivalence principle is satisfied. Thus, mass is inherentely relativistic, and it's hard for the strong equivalence principle to not be true.
+
+For example, effects of gravity are precisely effects of non-gravitational acceleration. This allows us to convert problems of gravity to problems that we already know: acceleration without gravity. Let's say one twin is standing on Earth and one twin is \emph{accelerating} in a rocket. The twin that is standing still is normal, but the moving twin experiences time dilation. If both are in inertial frames, nothing weird happens, but if the other accelerates to come back, the one who was moving is younger. This tells us that if we switch this scenario to being in a gravitational field, we find that we age slower in gravitational fields.

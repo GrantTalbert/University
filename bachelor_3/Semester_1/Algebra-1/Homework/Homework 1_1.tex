@@ -1,0 +1,311 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\courseID{MA741}
+% TODO:
+% 9.5
+% 10.1, 10.2
+\begin{document}
+\makeproblem
+
+\begin{notation}\label{0.1}
+	I use quite different notation from the text. Categories are denoted by calligraphic letters $(\mathcal{C} ,\mathcal{D} ,\mathcal{E} , \ldots )$, except important categories where capital letters are callgigraphic and lowercase letters are roman (eg. $\Set ,\Grp ,\Cat $). Objects are denoted by lowercase letters $(x,y,z, \ldots )$, and hom-sets of morphisms $x\to y$ in a category $\mathcal{C} $ are denoted by $\mathcal{C} (x,y)$. We write $x\in \mathcal{C}$ to denote that $x$ is an object of $\mathcal{C} $. Finite ordinal numbers are written as any of $n=[n-1]=\left\{ 0, \ldots ,n-1 \right\} $, with $0=[-1]=\varnothing $. I frequently abuse notation and write 1 for the identity morphism on an object when I do not feel like writing the object as a subscript. Any other differences in my notation from the text will be made clear when needed.
+
+	Additionally, I prefer to write ``terminal'' to mean what we are referring to as ``final'' objects. Since we are using terminal to mean something else, I have tried to abide by the course conventions in this regard because I feel not doing so would cause a large inconvenience. I'm stating this just incase I accidentally write terminal instead of final, that way the reader can figure out what I mean. I may also reference concepts not covered in class, but I mainly do this due to the convenience of the language or notation, and not to streamline proofs.
+\end{notation}
+
+
+\section{Problem 5}
+
+\begin{enumerate}
+	\item Define composition $\circ ^{\mathrm{op}} $ in $\mathcal{C} ^{\mathrm{op}} $ by $g\circ ^{\mathrm{op}} f=f\circ g$, for $\circ $ composition in $\mathcal{C} $. We show this satisfies the category axioms. First, given $f : x \to y$ and $g : y \to z$ in $\mathcal{C} ^{\mathrm{op}} $, it follows that $f : y \to x$ and $g : z \to y$ in $\mathcal{C} $. Thus, the composite $fg : z \to x$ in $\mathcal{C} $ is well-defined, and yields a morphism $f\circ g=g\circ ^{\mathrm{op}} f : x\to z$ in $\mathcal{C} ^{\mathrm{op}} $. Thus, our definition of composition is well-defined. Identity and associativity follow from the fact that $\mathcal{C} $ is a category:
+		\[
+			1\circ ^{\mathrm{op}} f=f\circ 1=f,\qquad f\circ ^{\mathrm{op}} 1=1\circ f=f,
+		\]
+		\[
+			h\circ^{\mathrm{op}} (g\circ ^{\mathrm{op}} f)=h\circ ^{\mathrm{op}} (f\circ g)=(f\circ g)\circ h=f\circ (g\circ h)=(g\circ h)\circ ^{\mathrm{op}} f=(h\circ ^{\mathrm{op}} g)\circ ^{\mathrm{op}} f
+		.\]
+		We never again use the notation $\circ ^{\mathrm{op}} $.
+	\item It suffices to show composites of monics are monic and that identities are monic; we may then define $\circ $ in $\mathcal{C} _{\mathrm{mono} } $ as $\circ $ in $\mathcal{C} $, and the category axioms then follow manifestly from the fact that $\mathcal{C} $ is a category and the relevant rules are satisfied with respect to $\circ $. To show the latter, let 1 equalize parallel arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x \ar[" \alpha  ", shift left, r] \ar[" \beta  "', shift right, r]  & y \ar[equals, r]  & y.
+		\end{tikzcd}\]
+		Since $\mathcal{C} $ is a category, we see that $1\alpha =\alpha $ and $1\beta =\beta $, giving
+		\[
+			\alpha =1\alpha =1\beta =\beta ,
+		\]
+		and thus $1$ is monic. For the former, let $f : x \to y$ and $g : y \to z$ be monics, and suppose $gf$ equalizes the parallel arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		a \ar[" \alpha  ", shift left, r] \ar[" \beta  "', shift right, r]  & x \ar[" f ", r]  & y\ar[" g ", r]  & z.
+		\end{tikzcd}\]
+		We thus have $g(f\alpha )=g(f\beta )$, and since $g$ is monic, we have $f\alpha =f\beta $. Since $f$ is monic, we have $\alpha =\beta $. The statement follows.
+	\item If $\alpha _a : a \to c$ and $\alpha _b : b \to c$ is an object of $\mathcal{C} ^{a,b} $, we write $(c,\alpha )$ for the object. This notation is not nonstandard, since $(c,\alpha )$ is common notation for cones, and $\mathcal{C} ^{a,b} \cong \operatorname{Cone} ((a,b): 2 \to \mathcal{C} )$ for 2 discrete.
+
+		We claim composites $\sigma : (c,\alpha ) \to (d,\beta )$ and $\tau : (d,\beta ) \to (e,\gamma )$ in $\mathcal{C} ^{a,b} $ are given by composing the morphisms $\tau \circ \sigma $ in $\mathcal{C} $. If this is a valid composition, then associativity follows immediately from the fact that $\mathcal{C} $ is a category, and by defining the identity $1:(c,-)\to (c,-)$ as $1_c$ for any $(c,-)$, unity also follows: given a morphism $h : (c,f) \to (d,k)$, we have
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		a \ar[" f_a "', d] \ar[" f_a ", dr] \ar[" k_a ", bend left, drr]  &  \\
+		c \ar[equals, r]  & c \ar[" h ", r] & d\\
+		b \ar[" f_b "', ur] \ar[" f_b ", u] \ar[" k_b "', bend right, urr]  & 
+		\end{tikzcd}\]
+		we see that this commutes obviously since $1f=f$ and $1g=g$, and since $k_a=hf_a$ and $k_b=hf_b$ by the fact that $h : (c,f) \to (d,k)$, and the definition of morphisms in $\mathcal{C} ^{a,b} $.
+
+		It suffices to show composites may indeed be defined in this way. Indeed, since the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		a \ar[" \alpha _a "', d] \ar[" \beta _a ", dr] \ar[" \gamma _a ", bend left, drr]  &  &  \\
+		c \ar[" \sigma  ", r]  & d \ar[" \tau  ", r]  & e \\
+		b \ar[" \beta _b "', ur] \ar[" \gamma _b "', bend right, urr]  \ar[" \alpha _b ", u]  &  & 
+		\end{tikzcd}\]
+		commutes, it follows that the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		a \ar[" \alpha _a "', d] \ar[" \gamma _a ", dr]  &  \\
+		c \ar[" \tau \circ \sigma  ", r]  & e \\
+		b \ar[" \alpha _b ", u] \ar[" \gamma _b "', ur]  & 
+		\end{tikzcd}\]
+		commutes, rendering $\tau \sigma $ as a morphism $(c,\alpha )\to (e,\gamma )$. The statement now follows as claimed.
+\end{enumerate}
+
+\section{Problem 6}
+\begin{enumerate}
+	\item Functions $X\to Y$ are defined set-theoretically as subsets $f \subseteq X\times Y$ satisfying the property $\forall x\in X \exists ! y\in Y \text{ s.t. } (x,y)\in f$. There is precisely one subset of $\varnothing \times X=\varnothing $, namely $\varnothing $ itself. The set $\varnothing \subseteq \varnothing \times X$ satisfies the function property vacuously, thus giving exactly one function $\varnothing : \varnothing  \to X$ for each $X\in \Set $. Thus, $\varnothing $ is initial. There are no other initial objects.
+
+		Singletons $*$ are final. This is fairly trivial to see: given a set $X$, the only way one can define a function $X\to *$ is by mapping $x\in X$ to the single element of $*$. To construct an isomorphism of singletons, let $\left\{ a \right\} ,\left\{ b \right\} $ be singletons, and note that $a\mapsto b$ is an isomorphism of sets.
+	\item Write $\Set _*$ for the category $(\Set \downarrow *)$ whose objects are pairs $(X,f : X \to *)$, which we usually just write as $f : X \to *$. The only initial object is obviously the empty map $!: \varnothing  \to *$: given another object $f : X \to *$, the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\varnothing \ar[r] \ar[" ! "', d]  & X\ar[" f ", dl]  \\
+		* & 
+		\end{tikzcd}\]
+		commutes since $*$ is final, and thus there is one morphism $\varnothing \to *$, meaning both composites are equal. Additionally, since there is precisely one map $\varnothing \to X$, the empty set is initial. There are no other initial objects since there is only one empty set.
+
+		The final objects are also singletons. Given a diagram of solid arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\left\{ a \right\} \ar[dashed, r] \ar[d]  & \left\{ b \right\} \ar[dl]  \\
+		* & 
+		\end{tikzcd}\]
+		we would like to show there exists a unique dashed arrow as indicated, rendering the diagram commutative. Indeed, since there is an isomorphism $\left\{ a \right\} \cong \left\{ b \right\} $ by $a\mapsto b$, and the composite $\left\{ a \right\} \to \left\{ b \right\} \to *$ is a map to a final object, it must be the same as the only map $\left\{ a \right\} \to *$, which is exhibited along the vertical arrow. Thus, such an arrow exists. Uniqueness follows since $\left\{ b \right\} $ is final, and thus there is precisely one arrow $\left\{ a \right\} \to \left\{ b \right\} $.
+
+		Finally, note that the arrow $\left\{ a \right\} \to \left\{ b \right\} $ in the above diagram is an explicit construction of the isomorphism $(\left\{ a \right\} \to *)\cong (\left\{ b \right\} \to *)$ in $\Set _*$. This follows since it is an isomorphism in $\Set $, and thus has an inverse in $\Set $:
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\left\{ a \right\} \ar[r] \ar[" 1 ", bend left, rr]  \ar[d] & \left\{ b \right\} \ar[r] \ar[dl]  & \left\{ a \right\} \ar[bend left, dll]  \\
+		* &  & 
+		\end{tikzcd}\]
+		Commutativity of the diagram once again follows since $*$ is final, and thus there is only one map $\left\{ a \right\} \to *$, meaning any composite is equal.
+
+		All of the above statements become obvious when noting there is a canonical isomorphism $\Set _* \cong \Set $ of categories. This follows for any category $\mathcal{C} $ and any terminal object $*\in \mathcal{C} $. We construct the isomorphism as follows. Let $F : \Set _* \to \Set $ be the functor mapping $(f : X \to *)\mapsto X$, and for any $\sigma : (X\to *) \to (Y\to *)$, mapping $\sigma \mapsto \sigma $. Note that this is simply the projection of the overcategory $\Set _*\to \Set $. This is a bijection on objects since $*$ is final, and thus for all $X\in \Set $, there is exactly one map $X\to *$, and thus exactly one object $(X\to *)\in \Set _*$. To show the functor is full, let $f : X \to Y$ in $\Set _*$. Note that because $*$ is final in $\Set $, the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X\ar[" f ", r] \ar[d]  & Y\ar[dl]  \\
+		* & 
+		\end{tikzcd}\]
+		commutes, since both composites are arrows $X\to *$, and there is only one arrow $X\to *$. Thus, $f : (X\to *) \to (Y\to *)$ in $\Set _*$, and $f\mapsto f\in \Set $, showing $F$ is full. To show $F$ is faithful, let $f,g : (X\to *) \to (Y\to *)$ be distinct morphisms, and since $f\mapsto f ,g\mapsto g$, and since $g\neq f$, we of course have $F(g)\neq F(f)$, showing that $F$ is full and faithful. Isomorphisms of categories are precisely equivalences which are bijective on objects. We of course have not shown that $F$ is a functor, but this is obvious:
+		\[
+			F(gf)=gf=F(g)F(f),\qquad F(1_{(X\to *)} )=1_X=1_{F(X\to *)} 
+		.\]
+		This proof makes no reference to the structure of $\Set $ or $\Set _*$, other than the fact that $*$ is final in $\Set $; thus this proof suffices in any $\mathcal{C} _*$ with $*\in \mathcal{C} $ final. Since isomorphisms of categories preserve initial and final objects \emph{exactly}, the intitials and finals in $\mathcal{C} _*$ are precisely those in $\mathcal{C} $.
+	\item The trivial $k$-vector space 0 is both initial and final. This is most easily seen by noting the adjunction $k[-]\dashv U : \Set  \to \Vect_k$, where $U$ is the forgetful functor and $k[-]$ is the free functor, then simply constructing $k[\varnothing ]$, noting that left adjoint functors preserve colimits, and then simply inspecting $0$ to see it is also final. We of course work the problem out more explicitly.
+
+		Write $0$ for the $k$-vector space on a singleton which takes the only object to be the 0 vector. This is initial since $k$-linear maps necessarily preserve the 0 vector, meaning $0\mapsto 0$. Since this fully describes how the only element can map to any other space $V$, this fully describes the only possible map $0\to V$. Therefore, $0$ is initial. To show it is final, note that there is only one function $f : V\to 0$ since $0$ is a singleton. This is well-known to be $k$-linear, since $f(cv)=0=c0=cf(v)$, and $f(v+w)=0=0+0=f(v)+f(w)$, with definitions as evident.
+
+		To construct isomorphisms, let $\left\{ a \right\} ,\left\{ b \right\} $ be trivial $k$-vector spaces. The map $a\mapsto b$ preserves 0 and is thus obviously a $k$-linear map, and it is clearly an isomorphism since $b\mapsto a$ is an inverse, and likewise is $k$-linear.
+\end{enumerate}
+\section{Problem 7}
+\begin{enumerate}
+	\item We write $\mathcal{P} $ for the poset category $\mathbb{Z} ^+$. This category has an initial object 1 and no terminal object. This is obvious since $1\leq n$ for $n\in\mathbb{Z} ^+$, but there is no $x$ with $n\leq x$ for all $n$, since $x < x+1 \in\mathbb{Z} ^+$.
+
+		To construct products, let $m,n\in\mathcal{P} $; we show $\min(m,n)$ is a product $m\times n$. For notational simplicity, without loss of generality take $n\leq m$. Let $x\leq m,n$ be a cone, giving a diagram of solid arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & n \\
+		x\ar[ur] \ar[dr] \ar[dashed, r]  & \min (m,n)=n\ar[equals, u] \ar[d]  \\
+		 & m
+		\end{tikzcd}\]
+		we note that since $n=n$, there is a dashed arrow $x\leq n$ as indicated, rendering the diagram commutative (the bottom triangle commutes by uniqueness of arrows in poset categories). Since poset categories have at most one morphism $x\to n$, the arrow is necessarily unique, and thus $\min (m,n)$ is a product of $m$ and $n$.
+
+		Similarly, $\max (m,n)$ is a coproduct $m\amalg n$: given a cone $m,n \leq x$ as indicated by a diagram of solid arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		m \ar[equals, d]\ar[dr]   &  \\
+		\max (m,n)=m\ar[dashed, r]  & x \\
+		n\ar[u] \ar[ur]  & 
+		\end{tikzcd}\]
+		we have $m\leq x$, giving the dashed arrow, which once again is unique. The diagram once again commutes by uniqueness of arrows in poset categories, meaning any possible composite $m\to x$ or $n\to x$ is necessarily the same.
+
+		This indeed generalizes to arbitrary products. Since $\mathbb{Z} ^+$ is well-ordered, any subset $X\subseteq \mathbb{Z} ^+$ has a minimum and a maximum. Let $\mathcal{J} $ be a discrete category and $\left\{ n_j \right\}_{j\in \mathcal{J} } $ a $\mathcal{J} $-indexed collection. Write $n$ for the minimum over this set, which exists since all subsets of $\mathbb{Z} ^+$ have minimal elements by the well-ordering principle. This gives arrows $n\leq n_j$ for each $j$. Let $x$ be a cone for the relevant diagram, meaning $x\leq n_j$ for each $j$. More precisely, there is a diagram of solid arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & n_j \\
+		x\ar[ur] \ar[dashed, r]  & n\ar[u]
+		\end{tikzcd}\]
+		for each $n_j$. Since $n\in \left\{ x_j \right\}_{j\in \mathcal{J}}\implies  x\leq n$, there exists a unique dashed arrow as indicated, which renders the diagram commutative by uniqueness of arrows in poset categories. Therefore, $n$ is a product
+		\[
+			\min \left\{ n_j \right\}_{j\in \mathcal{J} }=\prod_{j\in \mathcal{J} } n_j
+		.\]
+		The dual argument shows that if the coproduct exists, then
+		\[
+			\max \left\{ n_j \right\}_{j\in \mathcal{J} } =\coprod_{j\in \mathcal{J} } n_j
+		.\]
+		However, the coproduct need not exist in the infinite case. Consider for example the collection $\mathbb{Z}^+=\left\{ n_j \right\}_{j\in \mathcal{J} }$. The coproduct would then be $\max \mathbb{Z} ^+$, which does not exist in $\mathbb{Z} ^+$.
+	\item I will be less rigorous in my writeup here since most of the logic is the same as (1). Since $1|n$ for all $n$, we have that 1 is initial. A terminal object must be divisible by all $n$, which means it would be a product of all primes. Since there are infinitely many primes, such a number would not be finite, and thus does not exist in $\mathbb{Z} ^+$.
+
+		Products are given by the greatest possible divisor: given $n,m\in\mathbb{Z} ^+$, by definition $\operatorname{gcd} (n,m)$ is the greatest element that divides both $n$ and $m$. One can show with relatively low difficulty that any divisor of $n$ and $m$ divides $\operatorname{gcd}(n,m)$, completing the proof for products. A product always exist, since $1|n,m$ is true. Coproducts are likewise the least common multiple, since anything that is divided by $n$ and $m$ must necessarily be divided by its lcm. Coproducts also exist, since one can always find an lcm. Infinite products always exist (even when the indexing category is not small) since at the very least 1 is a divisor of everything, but infinite coproducts need not exist.
+
+		To illustrate this, let $\left\{ n_j \right\}_{j\in \mathcal{J} }\subseteq \mathbb{Z} ^+ $ be an infinite collection indexed over some discrete category $\mathcal{J} $. Suppose for contradiction that there exists a coproduct $n$. We necessarily have $n_j|n$ for all $j$. It follows that $n_j \leq n$. By assumption, $n$ is finite. Thus, $n_j$ is finite for all $j$, since $n_j | n \implies n_j \leq n$. It follows that there are an infinite number of distinct $n_j$s which all have $0<n_j\leq n$, a contradiction since $\left\{ 1, \ldots ,n \right\} $ is a finite set.
+	\item Products to not exist in general. Products with the empty set can be empty, since the empty function is injective (shown later). To illustrate the nonempty case, note that $\varnothing $ is not a product in general (since there is no map $J\to \varnothing $ for $J\neq \varnothing $), so let $X,Y$ be nonempty sets, and suppose there exists a nonempty product $P$ of $X$ and $Y$ in $\mathcal{S} $. Consider a diagram of solid arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & X &  \\
+		J \ar[" f_X ", ur] \ar[" f_Y "', dr] \ar[" \sigma  ", dashed, r]  & P \ar[" \pi _X "', u] \ar[" \pi _Y ", d]  &  \\
+		 & Y & 
+		\end{tikzcd}\]
+		and suppose for contradiction that there exists a unique injection $\sigma : J \to P$ as indicated, rendering the diagram commutative. Choose some $j\in J$ such that $f_X(j)\in \im \pi _X$ and $f_Y(j)\in \im \pi _Y$, and suppose $f_X(j)\neq f_Y(j)$. This may all be assumed, since we can always choose $X \cap Y=\varnothing $, and given a definition of $\pi _X$, we can always choose injections $f_X,f_Y$ which map $j$ into their image. Suppose that $\left| X \right| >1$; we conver the singleton case later. We must thus define $\sigma (j)$ such that $\pi _X\sigma (j)=f_X(j)$ and $\pi _Y\sigma (j)=f_Y(j)$. Since $\pi _X$ and $\pi _Y$ are injective, there is precisely one element $p,\widetilde{p} \in P$ such that $\pi _X(p)=\pi _Y(\widetilde{p} )$. If $p\neq \widetilde{p} $, the contradiction follows, so suppose they are equal. Then since $\im \pi _X$ has at least 2 elements by assumption, it follows that there is some $x' \neq f_X(j)$, so define a new function $f'_X(j)$ which either swaps the elements mapping to $f_X(j)$ and $x'$, or if nothing mapped to $x'$ before, defines $f'_X(j)=x'$. Then the contradiction follows since $\pi _X\sigma (j)=f_X(j)\neq f'_X(j)$.
+
+		If $X \cong *$, then the product $P$ necessarily has $\left| P \right| \leq \left| X \right| = 1$, otherwise no injection $P\hookrightarrow X$ exists. Since we are assuming $P\neq \varnothing $, we have $P \cong *$ as well, and the only map $P \to X$ is the isomorphism. Choose $Y=2=\left\{ 0,1 \right\} $. Then there are two possible projections $* \to 2$, $*\mapsto 0$ or $*\mapsto 1$. Choose without loss of generality the first one. Then there is only one possible dotted arrow
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & * \\
+		* \ar[dotted, r] \ar[ur] \ar[" *\mapsto 1 "', dr]  & * \ar[u] \ar[" *\mapsto 0 ", d]  \\
+		 & 2
+		\end{tikzcd}\]
+		in the diagram, but the bottom triangle does \emph{not} commute, so $*$ cannot be a product.
+
+
+		Binary products and coproducts need not exist in general, and thus infinite products and coproducts need not exist in general. To show this, first note that the empty function is injective: a function $f : X \to Y$ is injective iff $\forall x,y\in X(f(x)=f(y)\implies x=y)$. A function $\varnothing \to Y$ satisfies this vacuously, making it injective. Thus, $\varnothing $ is clearly initial. There is no final object for fairly clear reasons: a final object $T$ would need to have injections $X\to T$ for all $X$, and one can obviously find at least two injections $X\to T$ by just postcomposing a map $X\to T$ by a nontrivial permutation of $T$.
+
+		First, we show a product $P$ of $X$ and $Y$ has cardinality of at least $\min \left( \left| X \right| ,\left| Y \right|  \right) $. Suppose for contradiction that $P$ has cardinality less than it, and without loss of generality take $\left| X \right| \leq \left| Y \right| $. There then exists at least one injection $X\to X$ and $X\to Y$, meaning there is a diagram of solid arrows
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & X \\
+		X \ar[ur] \ar[dr] \ar[dashed, r]  & P\ar[" \pi _X "', u] \ar[" \pi _Y ", d]  \\
+		 & Y
+		\end{tikzcd}\]
+		and since $P$ is a product, there should exist a unique dashed injection as indicated. However, $\left| X \right| >\left| P \right| $, and a larger set cannot inject into a smaller set, meaning there are no injections $X\to P$, a contradiction. For this same reason that larger sets cannot inject into smaller sets, we cannot have $\left| P \right| >\left| X \right| $, giving us $\left| P \right| =\left| X \right| \leq \left| Y \right| $.
+
+		To show products do not exist in general, supposed for contradiction that there is a product $P$ of $X$ and $Y$. We will start with the case where $\left| X \right| ,\left| Y \right| \geq 2$. Since we do not know that the projections are surjective, we will need to do some mildly annoying book-keeping to ensure images all overlap. Let $J$ have injections $f_X : J \to X$ and $f_Y : J \to Y$. Then since $P$ is a product, there is a unique dashed arrow
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & X \\
+		J \ar[" f_X ", ur] \ar[" \sigma  ", dashed, r] \ar[" f_Y "', dr]  & P \ar[" \pi _X "', u] \ar[" \pi _Y ", d]  \\
+		 & Y
+		\end{tikzcd}\]
+		as indicated, rendering the diagram commutative. Since $\left| P \right| \geq 2$ and $\pi _X,\pi _Y$ are injective, we have $\left| \im \pi _X \right| \geq 2$. We may thus choose $f_X$ such that there is at least one $j\in J$ which maps $f_X(j)=x\in \im \pi _X$. Since $x\in \im \pi _X$ and $\pi _X$ is injective, there is exactly one $p\in P$ such that $\pi _X(p)=x$ by commutativity of the diagram. We are then forced to define $\sigma (j)=p$ by commutativity of the diagram. We may then choose an injection $f_Y$ such that $f_Y(j)=\pi _Y(p)$. Now we construct a new injection $f_X$ as follows:
+		\begin{enumerate}
+			\item let $x'\neq x$ be another element of $\im \pi _X$, which exists since by hypothesis, $\left| \im \pi _X \right| \geq 2$.
+			\item If there is some $j'\in J$ with $f_X(j')=x'$, then we define a new map $f'_X : J \to X$ which is the \emph{same as} $f_X$ everywhere except $j'$ and $j$, but switches where these two elements map
+				\[
+					f'_X(j)=x',\qquad f'_X(j')=x
+				.\]
+				This map is injective by construction and by injectivity of $f_X$.
+			\item If there is no $j'\in J$ such that $f_X(j')=x'$, then we may simply define $f_X'(j)=x'$, and $f_X'(y\neq x)=f_X(y\neq x)$ otherwise. This is also injective by construction and by injectivity of $f_X$.
+		\end{enumerate}
+		We now have a new diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & X \\
+			J \ar[" f'_X ", ur] \ar[" \sigma'  ", dashed, r]  \ar[" f_Y "', dr] & P \ar[" \pi _X "', u] \ar[" \pi _Y ", d]  \\
+		 & Y
+		\end{tikzcd}\]
+		which also must commute since $P$ is a product. Note that since we have not changed the bottom triangle, we must still have $\sigma '(j)=p$ for that triangle to commute since $f_Y(j)=y=\pi _Y(p)$. However, follow $j$ around the top triangle:
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & f'_X(j)=x'\neq x=\pi _X(p)  \\
+		j \ar[ur, mapsto] \ar[r, mapsto]  & p\ar[u, mapsto] 
+		\end{tikzcd}\]
+		Thus, the diagram cannot commute without $\pi _X$ being poorly defined (i.e. $x'=\pi _X(p)=x$ with $x\neq x'$), arriving at our contradiction.
+
+		We now have to work through the other cases. Let $X=\left\{ 0,1 \right\} $, and consider $Y=\left\{ 0,1 \right\} $ as well. We then suppose there is a product of $\left\{ 0,1 \right\} $ and $\left\{ 0,1 \right\} $, which by our discussion above must have cardinality 2, so we without loss of generality also call it $\left\{ 0,1 \right\} $. We then consider the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & \left\{ 0,1 \right\}  \\
+		\left\{ 0 \right\} \ar[" 0\mapsto 0 ", ur] \ar[" 0\mapsto 0 "', dr] \ar[dashed, r]  & \left\{ 0,1 \right\} \ar[u, " \pi _X "'] \ar[" \pi _Y ", d]  \\
+		 & \left\{ 0,1 \right\} 
+		\end{tikzcd}\]
+		Let $i$ be the element that $0$ maps to under the dashed arrow, and we necessarily have $\pi _X(i)=\pi _Y(i)=0$. Now consider a new diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & \left\{ 0,1 \right\}  \\
+		\left\{ 0 \right\} \ar[" 0\mapsto 1 ", ur] \ar[" 0\mapsto 0 "', dr] \ar[dashed, r]  & \left\{ 0,1 \right\} \ar[u, " \pi _X "'] \ar[" \pi _Y ", d]  \\
+		 & \left\{ 0,1 \right\} 
+		\end{tikzcd}\]
+		We must still have $0\mapsto i$ by commutativity of the bottom triangle, but $\pi _X(i)=0 \neq 1$, and $0\mapsto 1$ along the top composite, meaning the top triangle does not commute.
+
+		We now consider the singleton case: let $\left\{ * \right\} $ be a product of $\left\{ * \right\} ,\left\{ 0,1 \right\} $, and consider the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & \left\{ * \right\}  \\
+		\left\{ * \right\} \ar[" 1 ", ur] \ar[" *\mapsto 0 "', dr] \ar[dashed, r]  & \left\{ * \right\} \ar[" \pi _X "', u] \ar[" \pi _Y ", d]  \\
+		 & \left\{ 0,1 \right\} 
+		\end{tikzcd}\]
+		We are forced to define $\pi _Y : * \mapsto 0$ by commutativity of the diagram, but we then consider the map $\left\{ * \right\} \to \left\{ 0,1 \right\} $ by $*\mapsto 1$, giving the contradiction.
+
+		Finally, empty products do indeed exist: let $X$ be a set, and note that the only map $Y\to \varnothing $ is where $Y=\varnothing $. Thus, we need only show the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & \varnothing  \\
+		\varnothing \ar[equals, r] \ar[equals, ur] \ar[dr]  & \varnothing \ar[u] \ar[d]  \\
+		 & X
+		\end{tikzcd}\]
+		commutes, since all maps are empty maps and are thus injective. Indeed, any composite $\varnothing \to \varnothing $ is the same since it is initial, and so is any composite $\varnothing \to X$ for the same reason. Thus, empty products commute.
+
+		I am not writing that all up again for coproducts. They don't exist in general, and the argument is simply the dual of the argument for products. I offer an overview of the argument to avoid having to write all of that again. If $C\cong X\amalg Y$, then we choose maps $X\to Z$ and $Y\to Z$ which map $x\in X$ and $y\in Y$ to the same $z\in Z$. We then construct another map $X\to Z$ which maps $x\in X$ to $z'$, and keep the other triangle the same. The contradiction follows in the same way since $C\to Z$ is mapping $x$ to $z$ and $z'$, hence it is not well-defined and doesn't exist. The cases for singletons, empty sets, and binary sets are handled in the same way as they are for products.
+\end{enumerate}
+
+\section{Problem 8}
+
+Let $\mathcal{C} $ be a category and $x\in \mathcal{C} $. Composition of morphisms is associative, and thus so is $\circ $ restricted to $\Aut_{\mathcal{C} }(x) $. $1_x\circ 1_x=1_x$, and thus $1_x\in \Aut_{\mathcal{C} }(x) $, which by the category axioms is an identity for $\circ $. Inverses follows by definition: a morphism has $f\in \Aut_{\mathcal{C} }(x) $ if and only if there is some $f^{-1} : x \to x$ such that $ff^{-1} =1$ and $f^{-1} f=1$; it follows that $f^{-1} \in \Aut_{\mathcal{C} }(x) $. It suffices to show $\Aut_{\mathcal{C} }(x) $ is closed under composition. Let $f,g\in\Aut_{\mathcal{C} }(x) $, and denote by $f^{-1} ,g^{-1} $ their inverses, respectively. Note that by associativity,
+\[
+	(f^{-1} g^{-1} )(gf)=f^{-1} (g^{-1} g)f=f^{-1} 1f=f^{-1} f=1
+;\]
+\[
+	(gf)(f^{-1} g^{-1} )=g(ff^{-1} )g^{-1} =g1g^{-1} =gg^{-1} =1
+.\]
+The composites are all well-defined since all domains and codomains are $x$, and thus $gf$ has an inverse $f^{-1} g^{-1} $, and thus is an automorphism of $x$.
+
+\section{Problem 9}
+
+\begin{enumerate}
+	\item We drop the subscript $n$ because I'm lazy. We first show addition is well-defined. Let $x,x'\in[a]$. We show $[x+b]=[x'+b]$ for some $b\in\mathbb{Z} $. Since $x,x'\in [a]$, we have $n|(a-x),(a-x')$. Thus, there exist $k,k'\in\mathbb{Z} $ such that $kn=a-x$ and $k'n=a-x'$. We obtain $x=a-kn$ and $x'=a-k'n$. Let $k=p+k'$ for $p\in\mathbb{Z} $, and thus $x=a-(p-k')n=a-pn-k'n=x'-pn$. Let $z\in[x+b]$, and thus $n|(x+b-z)$. Write $hn=x+b-z$, and thus
+		\[
+			hn=x+b-z=x'-pn+b-z \implies (p+h)n=x'+b-z
+		.\]
+		Therefore, $n|(x'+b-z)$, and $z\in[x'+b]$. The converse direction is the same.
+
+		Associativity now follows by noting that $+$ is associative in $\mathbb{Z} $:
+		\[
+			[a]+([b]+[c])=[a]+[b+c]=[a+(b+c)]=[(a+b)+c]=[a+b]+[c]=([a]+[b])+[c]
+		.\]
+		Unity of $[0]$ follows similarly:
+		\[
+			[a]+[0]=[a+0]=[a]
+		.\]
+		To construct inverses, let $[a]\in\mathbb{Z} /n\mathbb{Z} $, and note that
+		\[
+			[-a]+[a]=[-a+a]=[0],\qquad [a]+[-a]=[a-a]=[0]
+		.\]
+	\item Note that $(\mathbb{Z} ,+)\in\Ab $. It follows that
+		\[
+			[a]+[b]=[a+ b]=[b+ a]=[b]+[a]
+		.\]
+		Therefore, $\mathbb{Z} /n\mathbb{Z} \in\Ab $.
+	\item Let $m>0$, and inducting on the definition of addition gives
+		\[
+			m[1]=\sum_{i=1}^{m} [1] = \left[\sum_{i=1}^{m} 1\right]=[m]
+		.\]
+		The statement follows since all elements can be written as $[m]$ for at least one $m\in\mathbb{Z} $. Note that with the given definition, we also have
+		\[
+			0[1]=[0] \text{ (the empty sum)} ,\qquad -m[1]=\sum_{i=1}^{m} [-1]=\left[ \sum_{i=1}^{m} -1 \right] =[-m]
+		.\]
+		Note that all numbers in $\mathbb{Z} $ can be written as $m$, $-m$, or $0$ for $m>0$. Thus, $[m]$ can always be written as $m[1]$.
+	\item The solution to (3) is a special case of the more general identity
+		\[
+			\sum_{i=1}^{m} a=ma
+		\]
+		which holds in $\mathbb{Z} $ whenever $m\geq 0$, where $m=0$ is intepreted as the empty sum which evaluates to 0. Plugging in $a$ in for 1 in the logic in (3) and applying this identity proves this statement as well.
+	\item Let $\operatorname{gcd} (n,a)=1$. Then by Bezout's identity, there are integers $m,k$ with
+		\[
+			ma+kn=1
+		.\]
+		Note that $ma+kn \equiv ma\mod{n}$ since factors of $n$ drop out when modding out by it. Thus, $[ma]=[1]$, and thus $m[a]=1$ by definition of multiplication in $\mathbb{Z} $ and in $\mathbb{Z} /n\mathbb{Z} $.
+
+		Now assume $m[a]=[1]$. Then $ma\equiv 1\mod{n}$, giving us $ma-1=kn$ for some $k$, and thus $ma-kn=1$. The gcd divides $a$ and $n$, meaning it divides any linear combination of $m$ and $n$. Thus, it divides $ma-kn=1$, and thus it must be 1.
+\end{enumerate}
+
+\section{Problem 10}
+\begin{enumerate}
+	\item Label each vertex by 1 through $n$, and note that a rigid symmetry simply swaps vertices around in a specific way. Thus, rigid symmetries can be viewed as functions on the set of vertices. Composites of functions are associative, and the identity $1$ on the vertices is an identity for composition. It suffices to show composites of rigid symmetries are rigid, and there exist inverses. I don't really know how to rigorize this, but the rigid symmetries are generated by rotations and reflections. These all clearly have inverses: given a reflection, we can simply re-reflect to undo it, and given a rotation, we can just rotate the other direction by the same amount to undo it. The claim is that $D_{2n}$ is generated by these transformations, meaning that any composite of them is a rigid symmetry. Thus, we have by my fairly unrigorous definition that $D_{2n} $ is closed under composites.
+	\item If $n$ is odd, then there are $n$ symmetries given by reflections passing through one vertex. If $n$ is even then there are $n/2$ given in this way (since symmetric lines pass through 2 vertices), but there are $n/2$ other reflections given by bisecting faces. There are then $n$ different rotatons, once for each $i \frac{360}{n} $, $0<i\leq n$. This is $2n$ total distinct elements.
+	\item Of course, labeling the vertices by $n=\left\{ 1,2, \ldots , n \right\} $, we see that rotations are permutations of these vertices since they are bijective on vertices, thus giving an inclusion $D_{2n} \hookrightarrow S_n$.
+\end{enumerate}
+
+\end{document}

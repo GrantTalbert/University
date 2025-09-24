@@ -1,0 +1,14 @@
+\section{Introduction}
+
+Throughout the Colloquium (I hope I spelled that right) we have discussed the theory of homology and its applications at length, but we have always taken our chain complexes to have $R$-modules as their entries, or sometimes abelian groups or vector spaces, both of which are of course special cases of $R$-modules. A natural question is whether we can construct chain complexes in more general categories, broadening our class of objects to which we can associate a theory of homological algebra.
+
+However, homological algebra has a large number of requirements, both obvious and non-obvious. For example, given a chain complex $C_{\bullet} $, the $n$th homology $H_n(C_{\bullet} )$ is the quotient $\Im d_{n-1} / \Ker d_{n} $. Even just to construct homology, we need to define kernels and images (we do not need quotients, as we will see). Kernels don't even exist in many mundane categories, such as $\Set $ and $\Top $. Additionally, it may not be clear how to abstract images and kernels to non-concrete categories, since they are fundamentally constructed using the underlying sets of objects.
+
+To this end, we develop the theory of \emph{abelian categories} as a ``good place to do homological algebra''. These categories were first introduced by Grothendieck in Tohoku for this very purpose, and nearly all constructions in homological algebra can be traced back to the theory of abelian categories in some way or another.
+
+Throughout this talk, we will develop the theory of abelian categories using this motivation. We will then construct homology in these categories, and introduce some of the basic theory of diagram chasing. If time permits, we will close with a discussion of derived functors.
+
+\begin{convention}
+	Given a category $\mathcal{C} $, we write $x,y\in \mathcal{C} $ to denote that $x,y$ are objects in $\mathcal{C} $, and $\mathcal{C} (x,y)$ to denote the hom-set of morphisms $x\to y$ in $\mathcal{C} $. Important categories are denoted with capital letters in script and lowercase letters in roman (eg. $\Top ,\Set ,\sSet $). Functors are denoted by capital roman letters $F : \mathcal{C}  \to \mathcal{D} $, unless there are other conventions (eg. quotient functors denoted by $\pi $). We will always denote the group operation in abelian groups by addition, and will always denote the group operation in non-abelian groups by mutliplication.
+\end{convention}
+

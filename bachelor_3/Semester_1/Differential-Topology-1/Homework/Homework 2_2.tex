@@ -1,0 +1,241 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\usepackage{titlepageBU}
+\title{Homework 2}
+\begin{document}
+\makeproblem
+
+\begin{convention}\label{0.1}
+	We keep with the book's notation and write $\mathrm{d} f$ for the differential of $f$, rather than $f_*$.
+\end{convention}
+\begin{remark}\label{0.2}
+	In the previous homework, I showed maps are smooth if and only if they are smooth componentwise. This result will be continuously referenced by referencing this remark.
+\end{remark}
+
+
+\section{Problem 3.1}
+
+\begin{problem}
+	Let $M,N$ be smooth manifolds with or without boundary, and $F : M \to N$ a smooth map. Show that $\mathrm{d} F_p : T_pM \to T_{F(p)} N$ is the zero map for each $p\in M$ if and only if $F$ is constant on each component of $M$.
+\end{problem}
+\begin{proof}
+	$(\impliedby )$ Let $F : M \to N$ be constant on all connected components of $M$. We start by assuming $M$ is connected, and use this result to generalize. Let $v\in T_pM$, and $f\in C^\infty (N)$. It suffices to show $\mathrm{d} F(v)_p(f)=v(f\circ F)=0$. This indeed follows, since $F$ is the constant map, and thus so is $f\circ F$. Derivations of constant maps are 0, so the statement follows.
+
+	For the more general case, let $p\in U\subseteq M$ such that $U$ is a connected component of $M$, and note the isomorphism $T_pM \cong T_pU$ which follows by reasoning explained later. By hypothesis, $F$ is constant on $U$, meaning any composite $f\circ F$ restricted along $U$ is constant. The derivation $\mathrm{d} (F|U)_p : T_pU \to T_{F(p)} N$ is then necessarily zero, since derivations of constant maps are 0. By the isomorphism $T_pM\cong T_pU$, this suffices for the arbitrary case, since $\mathrm{d} F_p(v)=0$ in $T_pM$ if and only if $\mathrm{d} F_p(v)=0$ in $T_pU$.
+
+	$(\implies )$ Let $\mathrm{d} F_p : T_pM \to T_{F(p)} N$ be zero for all $p\in M$. We start by assuming $M$ is connected, then generalize similarly to the $(\impliedby )$ case. Since path-connectedness is a topological invariant, and since $\mathbb{R} ^n$ is path connected, the locally Euclidean property of manifolds implies they are locally path-connected. This also follows for manifolds with boundary since $\mathbb{H} ^n$ is path-connected. By Lee A.43, locally path connected spaces are connected if and only if they are path connected, and thus manifolds are path connected. Note that connected components are open in locally path-connected spaces, hence components of manifolds form open submanifolds. This justifies the isomorphisms $T_pM \cong T_pU$ for $U$ a connected component.
+
+	It suffices to show $F(x)=F(y)$ for any $x,y\in M$. By path-connectedness, let $\gamma : I \to M$ be a smooth path with $\gamma (0)=x,\gamma (1)=y$. Note that $F\circ \gamma : I \to N$ gives a path from $F(x)$ to $F(y)$. By assumption this map is smooth, so it has a velocity vector
+	\[
+		\frac{\mathrm{d}}{\mathrm{d}t} (F\circ \gamma )(t_0)=\mathrm{d}F\left( \left.\frac{\mathrm{d}\gamma }{\mathrm{d}t}\right|_{t_0}\right)=\mathrm{d} F_{\gamma (t_0)} \left(\left.\frac{\mathrm{d}\gamma }{\mathrm{d}t}\right|_{t_0} \right)
+	.\]
+	By assumption, $\mathrm{d} F_{\gamma (t_0)} =0$ since it is 0 at each point $p$, meaning
+	\[
+		\frac{\mathrm{d}}{\mathrm{d}t} (F\circ \gamma )(t)=0
+	.\]
+	A path with everywhere zero velocity is necessarily constant, meaning $F\circ \gamma $ is constant. Thus, $F(x)=F(y)$, and $F$ is the contant map.
+
+	Now take $M$ to be an arbitrary manifold. Let $p\in M$, and choose a connected component $U\subseteq M$ containing $p$. Since $U$ is connected, and since $\mathrm{d} (F|U)_p : T_pU \to T_{F(p)} N$ is zero by the isomorphism $T_pM \cong T_pU$, we necessarily have that $F$ is constant on $U$ by the previous case. Therefore, $F$ is constant on each component.
+\end{proof}
+
+\begin{remark}
+	I felt my rigor when justifying that $\mathrm{d} (F|U)_p=0$ if and only if $\mathrm{d} F=0$ was lacking and messy, so I have added some further commentary. The restriction $F|U$ is simply the composite $F\circ i$, for $i : U\hookrightarrow M$ the inclusion. Since this is smooth, $\mathrm{d} (F|U)_p=\mathrm{d} (F\circ i)_p=\mathrm{d} F_p\circ \mathrm{d} i_p$. We see that if $\mathrm{d} F_p=0$, then the whole composite is necessarily 0 by properties of the 0 morphism.
+
+	Conversely, if $\mathrm{d} (F|U)_p=0$, then $\mathrm{d} F_p\circ \mathrm{d} i_p=0$. However, $\mathrm{d} i_p$ is an isomorphism, meaning it is nonzero whenever $T_pU$ is nonzero. It follows in this case that $\mathrm{d} F_p$ is necessarily 0, since no other map composed with an isomorphism is 0 since units are not zero-divisors by ring theory. Otherwise, if $T_pU\cong 0$, then $T_pM\cong T_pU$ implies $T_pM\cong 0$, and $\mathrm{d} F_p$ is necessarily 0 since the only map $0\to T_{F(p)} N$ is the zero morphism. (Or I could have just done $0=0 \circ \mathrm{d} i^{-1}_p =\mathrm{d} F_p\circ \mathrm{d} i_p\circ \mathrm{d} i_p ^{-1} =\mathrm{d} F_p$)
+\end{remark}
+
+
+\section{Problem 3.2}
+
+\begin{problem}\label{2}
+	Let $\left\{ M_i \right\}_{i=1}^k$ be smooth manifolds, and let $\pi _j : \prod_{i} M_i \to M_j$ be the natural projection. Prove that for any point $p=p_i \in \prod_{i} M_i$, the map
+	\[
+		\alpha : T_p \prod_{1\leq i\leq k} M_i \to \bigoplus_{1\leq i\leq k} T_{p_i} M_i
+	\]
+	given by
+	\[
+		\alpha (v)=\left( \mathrm{d} (\pi _1)_p(v), \ldots ,\mathrm{d} (\pi _k)_p(v) \right) 
+	\]
+	is an ismorphism. The same is true if one of the spaces $M_i$ has boundary.
+\end{problem}
+\begin{proof}
+	We will never deal with the global differential in this problem, so we drop the subscript when referring to differentials for notational convenience, but also because I accidentally forgot the subscripts when writing it up and don't want to fix it.
+
+	Because the product and coproduct in $\mathbb{R} $-$\mathcal{V} \mathrm{ect} $ coencide, we start by defining the map
+	\[
+		\iota _i : M_i \to \prod_{i=1}^{k} M_i,\qquad q \mapsto (p^1,p^2, \ldots ,p ^{i-1} ,q,p ^{i+1} , \ldots ,p^n)
+	.\]
+	We note that $\iota _i$ maps $p^i\mapsto p$, so the differential gives a map $\mathrm{d} \iota _i : T_{p^i} M_i \to T_p \prod_{i} M_i$. Univerality assembles these into a map
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T_{p^i} M_i \ar[" \mathrm{d}\iota _i ", dr] \ar[d]  &  \\
+	\displaystyle{\bigoplus_{i=1}^k T_{p^i} M_i}\ar[" \beta  "', dashed, r]  & \displaystyle{T_p \prod_{i=1}^{k} M_i}
+	\end{tikzcd}\]
+	defined by
+	\[
+		\beta (v)(f)=\sum_{i=1}^{k} \mathrm{d} \iota_i(v)(f)
+	.\]
+	It suffices of course to show that $\iota _i$ is $C^\infty $, otherwise its differential need not meaningfully exist, and also that $\alpha $ and $\beta $ are indeed inverses. 
+
+	By \cref{0.2}, maps are smooth if and only if they are smooth componentwise. The $j\neq i$th components map $x\mapsto p^j$, and $i$th component maps $x\mapsto x$, which is simply the identity. It was shown in the last homework that the identity is smooth, so we need only show the constant map is smooth. This is probably obvious enough that a proof need not be included, but I want extra practice with smoothness proofs. We do this for arbitrary manifolds $M,N$. Fix some $p\in N$, and let $f : M \to N$ be the constant map at $p$. Let $x\in M$, and choose a chart $(U,\varphi )$ of $x$. Choose any chart $(V,\psi )$ of $p=f(x)$, and $f(U)=\left\{ p \right\} \subseteq V$. Note also that
+	\[
+		(\psi \circ f\circ \varphi ^{-1} )(\hat{x} )=(\psi \circ f)(x)=\psi (p)
+	.\]
+	Thus, $\psi \circ f\circ \varphi ^{-1} $ is the constant map at $\psi (p)$, which is smooth by calc 3 knowledge. This shows that $\iota _i$ is smooth, and thus its differential is well-defined. Therefore, $\beta $ is well-defined by universality.
+
+	It suffices at this point to show $\alpha $ and $\beta $ are inverses. Let $v\in T_p \prod_{i} M_i$, and let $f : \prod_{i} M_i \to \mathbb{R} $ be smooth. We first note that
+	\[
+		(\beta \alpha )(v)=\beta \left( \mathrm{d} \pi _1(v), \ldots ,\mathrm{d} \pi _k(v) \right) =\sum_{i=1}^{k} \mathrm{d} \iota _i\mathrm{d} \pi _i(v)=\sum_{i=1}^{k} \mathrm{d} (\iota _i\circ \pi _i)(v)
+	.\]
+	By linearity of derivations, mapping under $f$ gives
+	\[
+		(\beta \alpha )(v)(f)=\left( \sum_{i=1}^{k} \mathrm{d} (\iota _i \pi _i)(v) \right) (f)=\sum_{i=1}^{k} \mathrm{d} (\iota _i\circ \pi _i)(v)(f)=\sum_{i=1}^{k} v(f\circ \iota _i\circ \pi _i)
+	.\]
+	Since $v$ is linear, it will be useful to factor it out of the sum as
+	\[
+		\sum_{i=1}^{k} v\left( f\circ \iota _i\circ \pi _i \right) =v\left( \sum_{i=1}^{k} f\circ \iota _i\circ \pi _i \right) 
+	.\]
+	Let $x\in \prod_{i} M_i$. Chasing $x$ along the $ith$ component of the sum gives
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x \ar[" \pi _i ", mapsto,r]  & x^i \ar[" \iota _i ", mapsto, r]  & (p^1, \ldots ,p ^{i-1} ,x^i, p ^{i+1} ,\ldots ,p^n)\ar[" f ", mapsto, r]  & f(p^1, \ldots ,x^i, \ldots ,p^n).
+	\end{tikzcd}\]
+	Summing over $k$ yields
+	\[
+		\left( \sum_{i=1}^{k} f\circ \iota _i\circ \pi _i \right) (x)=\sum_{i=1}^{k} f(p^1, \ldots ,x^i, \ldots ,p^n)
+	.\]
+	Since the action of $v$ is simply given by $v^i \partial _i$, it suffices to show $f$ and $\sum_{i} f\circ \iota _i\circ \pi _i$ have the same partials at $p$.
+
+	Note that since $f\circ \iota _i\circ \pi _i$ is constant at all $x^j$ for $j\neq i$, and is simply $f$ on $x^i$, we see that its partial with respect to $x^j$ is 0 whenever $j\neq i$, and is simply $\partial _i f$ when $j=i$. It follows that
+	\[
+		\left.\frac{\partial }{\partial x^j} \left( f\circ \iota _i\circ \pi _i \right) \right|_p=\delta_{ij} \left.\frac{\partial f}{\partial x^j} \right|_p	
+	\]
+	for $\delta _{ij} $ the Kronecker delta. We thus have
+	\[
+		\left. \frac{\partial }{\partial x^j} \left( \sum_{i=1}^{k} f\circ \iota _i\circ \pi _i \right) \right|_p = \sum_{i=1}^{k} \left.  \frac{\partial }{\partial x^j} (f\circ \iota _i\circ \pi _i)\right|_p= \sum_{i=1}^{k}\left. \delta_{ij}  \frac{\partial f}{\partial x^j}\right|_p=\left. \frac{\partial f}{\partial x^j} \right|_p
+	.\]
+	Therefore, the partials of $f$ and $\sum_{i} f\circ \iota _i\circ \pi _i$ agree, meaning $v$ acts on them the same way. This suffices to prove this direction.
+	
+		
+	The converse direction is more simple. Let $v=(v^1, \ldots ,v^n)\in \bigoplus_{i=1}^k T_{p^i} M_i$. We pass to Einstein notation and write $v^i$ for $v$ to simplify the notation. Then
+	\[
+		(\alpha \beta )(v)=\alpha (\mathrm{d} \iota _i(v^i))=\left( \mathrm{d} \pi _1\mathrm{d} \iota _i(v^i), \ldots ,\mathrm{d} \pi _k\mathrm{d} \iota _i(v^i) \right) =(\mathrm{d} (\pi _1\iota _i)(v^i), \ldots ,\mathrm{d} (\pi_k\iota _i)(v^i)),
+	\]
+	where the last step follows by linearity of differentials. We now stop using Einstein notation. It suffices to show that $\sum_{i} \mathrm{d} (\pi _j\iota _i)(v^i)=v^j$ for some fixed $j$. Let $f : M_j \to \mathbb{R} $ be smooth. Then
+	\[
+		\sum_{i=1}^{k} \mathrm{d} (\pi _j\iota _i)(v^i)(f)=\sum_{i=1}^{k} v^i(f\circ \pi _j\circ \iota _i)
+	.\]
+	It suffices to show that for each $i$,
+	\[
+		v^i(f\circ \pi _j\circ \iota _i)=\sum_{j=1}^{k} \delta _{ij} v^j(f)=v^i(f),
+	\]
+	for $\delta _{ij} $ the Kronecker delta. Indeed, when $i\neq j$, the map $f\circ \pi _j\circ \iota _i$ is the constant map at $p^j$, which is seen by chasing elements:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	M_i\ni x \ar[" \iota _i ", mapsto, r]  & (p^1, \ldots ,x, \ldots ,p^n)\ar[" \pi _j ", mapsto,r]  & p^j \ar[" f ", mapsto, r]  & f(p^j).
+	\end{tikzcd}\]
+	Derivations of constant functions are zero, so $v^i(f\circ \pi _j\circ \iota _i)=0$. Conversely, when $i=j$, then
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	M_j\ni x \ar[" \iota _j ", mapsto, r]  & (p^1, \ldots ,x, \ldots ,p^n)\ar[" \pi _j ", mapsto,r]  & x \ar[" f ", mapsto, r]  & f(x).
+	\end{tikzcd}\]
+	Thus, $f\circ \pi _j\circ \iota _j=f$, and therefore $v^j(f\circ \pi _j\circ \iota _j)=v^j(f)$. We then have
+	\[
+		(\alpha \beta )(v)(f)=\sum_{i=1}^{k} (\delta_{i1} v^i(f), \ldots , \delta_{ik} v^i(f))=(v^1(f), \ldots ,v^k(f))=v^i(f)
+	.\]
+	This concludes the proof.
+\end{proof}
+
+
+\section{Problem 3.3}
+\begin{problem}
+	Show that if $M,N$ are smooth manifolds, then there is a diffeomorphism $T(M\times N)\cong T(M)\times T(N)$.
+\end{problem}
+\begin{proof}
+	Recall that the product and coproduct coincide in $\mathbb{R} $-$\mathcal{V} \mathrm{ect} $. Since the direct sum is commutative up to natural isomorphism, by \cref{2} we see that
+	\[
+		T(M\times N)\coloneqq \bigoplus_{p\in M\times N} T_p(M\times N)\cong \bigoplus_{p\in M\times N} (T_{p^1} M \oplus T_{p^2} N)\cong \left( \bigoplus_{p\in M} T_pM \right) \oplus \left( \bigoplus_{q\in N} T_qN \right) \eqqcolon TM\times TN
+	.\]
+	Here, the product on the right is a product of $\mathbb{R} $-vector spaces. However, since the product/direct sum of $\mathbb{R} $-vector spaces is simply the Cartesian product, and as seen in the previous homework the product of manifolds is also the cartesian product, we obtain an isomorphism of the underlying sets of these structures. It of course remains to be shown that this isomorphism promotes to a diffeomorphism.
+
+	a
+\end{proof}
+
+\section{Problem 3.4}
+
+\begin{problem}
+	Show there is a diffeomorphism $TS^1\cong S^1\times \mathbb{R} $.
+\end{problem}
+\begin{proof}
+	Proof strategy: map $T_{p} S^1$ to $\left\{ p \right\} \times \mathbb{R} \subseteq S^1\times \mathbb{R} $. To do this, use the isomorphism $T_pS^1 \cong \mathbb{R} $. how was this isomorphism constructed again?
+\end{proof}
+
+
+\section{Problem 3.5}
+
+\begin{problem}
+	Let $S^1\subseteq \mathbb{R} ^2$ be the 1-sphere, and let $K\subseteq \mathbb{R} ^2$ be the boundary of the square $K=\partial ([-1,1]\times [-1,1])$. Show there is a homeomorphism $F : \mathbb{R} ^2 \to \mathbb{R} ^2$ which restricts along $S^1$ to give $F(S^1)=K$, but there is no \emph{diffeomorphism} with this property.
+\end{problem}
+\begin{proof}
+	Hint: given a smooth path $\gamma $ in $S^1$, consider the action of $\mathrm{d} F\gamma '(t)$ on coordinate functions $x^\mu ,y^\mu $.
+
+	note from arystan: a homeomorphism is given by the deformation retract. then to show no such shit exxists consider a convenient corner of the square.
+\end{proof}
+
+\section{Problem 3.6}
+
+\begin{problem}
+	View the 3-sphere as $S^3 \subseteq \mathbb{C} ^2$ by the usual identification $\mathbb{C} ^2 \cong \mathbb{R} ^4$. For each $z^i\in S^3$, define $\gamma _z : \mathbb{R}  \to S^3$ by $\gamma _3(t)=(e^{it} z^1,e^{it} z^2)$. Show $\gamma _z$ is smooth with everywhere nonzero velocity.
+\end{problem}
+
+\begin{proof}
+	It will be most convenient to view $S^3$ as a subspace of $\mathbb{R} ^4$, so note that since $(z^1,z^2)\in S^3$, we have $0\leq \left| z_1\right|,\left|z_2 \right| \leq 1$, meaning we may write
+	\[
+		z^1=r_1e^{i\theta _1} ,\qquad z^2=r_2e^{i\theta _2} 
+	\]
+	for $0\leq r_1,r_2\leq 1$. We then have
+	\[
+		\gamma _z(t)=\left( r_1e^{i(\theta _1+t)} ,r_2e^{i(\theta _2+t)}  \right) 
+	.\]
+	By Euler's formula, identifying under $\mathbb{C} ^2 \cong \mathbb{R} ^4$ gives
+	\[
+		\gamma_z(t) = \left( r_1 \cos (\theta _1+t),r_1 \sin (\theta _1+t),r_2 \cos (\theta _2+t),r_2 \sin (\theta _2+t) \right) 
+	.\]
+	Smoothness now follows fairly simply. The charts $(U^{\pm}_i,\varphi ^{\pm} _i)$ simply drop a component, so the composites $\varphi ^{\pm}_i \circ \gamma _z$ are simply three of the four components of the path. It thus suffices to show all four are smooth in the usual calc 3 sense. Ths indeed follows since trig functions, addition, and scalar multiplication are all smooth, and composites of smooth maps are smooth. The map is thus componentwise smooth, and appealing to \cref{0.2} yields that $\gamma _z$ is a smooth path.
+
+	Now we show the velocity is everywhere nonvanishing. Given a chart $(U,\varphi )$ for $\gamma_z(t_0)\in S^3$, we have the coordinate representation
+	\[
+		\gamma_z'(t_0)=\frac{\mathrm{d}\gamma_z^i}{\mathrm{d}t} (t_0)\left. \frac{\partial }{\partial x^i} \right|_{\gamma_z (t_0)} ,
+	\]
+	where $\gamma ^i$ is the $i$th coordinate function $\varphi ^i \circ \gamma $. Since partials $\partial _i|_{\gamma (t_0)} $ are never identically zero, it suffices to show the derivatives of $\varphi^i \circ \gamma $ are everywhere nonzero.
+
+	Since $z\in S^3$, at least one of $z^1,z^2$ is nonzero. Without loss of generality, take $z^1 \neq 0$. It follows that $r_1 \neq 0$. It's possible that one of the first two components will be zero when $\theta _1+t=n\pi /2$, however both cannot be zero simultaneously simply by knowledge of (co)sine. We can separate the problem into two cases: one where $r_1 \cos (\theta _1+t)$ is nonzero, and one where $r_1 \sin (\theta _1+t)$ is nonzero. The logic is exactly the same for both, so we solve only the first case.
+
+	Since $r_1 \cos (\theta _1+t)$ is nonzero, it falls in some chart $(U^{\pm}_1,\varphi _1)$. The velocity then takes the form
+	\[
+		\gamma_z '(t_0)= \frac{\mathrm{d}\left( \varphi ^{\pm}_1 \circ \gamma _z \right) }{\mathrm{d}t} (t_0) \left. \frac{\partial }{\partial x^i} \right|_{\gamma_z (t_0)} 
+	.\]
+	Since $\varphi_1^{\pm} $ drops the first component, we see that
+	\[
+		(\varphi _1^{\pm}\circ\gamma _z)(t_0)=(r_1 \sin (\theta _1+t),r_2 \cos (\theta_2+t),r_2 \sin (\theta _2+t))
+	.\]
+	The derivatives of this map are
+	\[
+		\frac{\mathrm{d}}{\mathrm{d}t} (\varphi^{\pm}_1\circ \gamma _z)=\left( r_1 \cos (\theta _1+t), -r_2 \sin (\theta _2+t),r_2 \cos (\theta _2+t) \right) 
+	.\]
+	Of course, we do not know that the final two components are nonzero, so we must show the first component is nonzero while $t_0$ is such that $\gamma _z(t_0)\in U^{\pm}_1$. Indeed, note that the first component of $\gamma _z^(t)$ was $r_1 \cos (\theta _1+t)$, and we are currently considering the case where $t_0$ is such that $r_1 \cos (\theta _1+t)\neq 0$. Since this is precisely the first component of the derivative, we necessarily have that the derivative is nonzero at $t_0$. Therefore, the derivative is not identically zero for this case, meaning the velocity is nonzero.
+
+
+	As stated above, the logic for the other cases are precisely the same, so repeating these arguments for the cases $r_1 \sin (\theta _1+t)\neq 0$ and $r_2 \neq 0$ will yield the result. The velocity is thus everywhere nonzero.
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,308 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\title{Homework 3}
+\begin{document}
+\makeproblem
+
+
+\setcounter{section}{6}
+
+\section{Problem 7}
+
+\begin{convention}
+	We read composition from right to left.
+\end{convention}
+
+\begin{problem}
+	Let $n\geq 2$. Show that any permutation in $S_n$ can be written as a product of transpositions.
+\end{problem}
+\begin{proof}
+	By Homework 2 6.3, any permutation can be written as a product of disjoint cycles, so it suffices to prove the statement for cycles. We induct on $n$. When $n=2$, then the empty cycle is simply the empty product $( )$ of transpositions, and a 1-cycle is just the empty cycle. 2-cycles are transpositions, so the statement holds. Suppose the inductive hypothesis, and let $\sigma =(a_1a_2 \ldots a_n)$ be an $n$-cycle. It suffices by induction to write $\sigma $ as the product of a transposition and an $(n-1)$-cycle.
+
+	Indeed, we claim that
+	\[
+		\sigma =(a_1 \ldots a_{n-1} )(a_{n-1} a_n)
+	.\]
+	We prove this by chasing elements. Let $1\leq i\leq n$, and note that when $i\leq n-2$, we simply have $a_i \mapsto a_{i+1} =\sigma (a_i)$. When $i=n-1$, we have
+	\[
+		a_{n-1} \mapsto a_n \mapsto a_n = \sigma (a_{n-1} )
+	.\]
+	When $i=n$, we have
+	\[
+		a_n \mapsto a_{n-1} \mapsto a_1 = \sigma (a_n)
+	.\]
+	Therefore, $\sigma =(a_1\ldots a_{n-1} )(a_{n-1} a_n)$, and the statement follows by induction.
+\end{proof}
+
+\begin{problem}\label{7.2}
+	If the identity in $S_{n\geq 2} $ is written as a product of $r$ transpositions, then $r$ is even.
+\end{problem}
+\begin{proof}
+	We induct on $r$. For $r=0$, the empty product is the identity, so assume inductively that whenever a product of $k<r$ transpositions is the identity, we have $k$ even. Let $( ) = \sigma _1 \ldots \sigma _r$, and note that the only four possibilities for the final two transpositions $\sigma_{r-1} \sigma _r$ are
+	\[
+		(ab)(ab)=( ),\qquad (ac)(bc),\qquad (cd)(ab),\qquad (ac)(ab)
+	.\]
+	Here, $a,b,c,d$ are all distinct. The reason these are the only possiblities is because any other product of two transpositions will simplify down to one of these, which is a slightly tedious proof due to the number of cases required to check, so we omit it. In the first case, we have $\sigma _{r-1} \sigma _r=( )$, meaning $\sigma _1 \ldots \sigma _{r-2} =( )$, and by induction $r-2$ is even. Therefore, $r$ is even.
+
+	In either of the other three cases, NIOT FINSHED
+\end{proof}
+
+\begin{problem}
+	Show that if a permutation $\sigma \in S_{n\geq 2} $ can be written as an even or odd number of transpositions, then all decompositions into transpositions have the same parity.
+\end{problem}
+\begin{proof}
+	It suffices to prove the case for even permutations by the contrapositive, which in this case is more easily understood with symbols:
+	\[
+		\neg(\forall \sigma _1 \ldots \sigma _r=\sigma : 2|r) \implies \neg (\exists \sigma _1 \ldots \sigma _r = \sigma \text{ s.t. } 2|r)
+	.\]
+	The first statement is equivalent to saying there exists some $\sigma _1\ldots \sigma _r=\sigma $ with 2 not dividing $r$, meaning there is an odd representation. The second statement is that there does not exist any even representations, meaning all are odd. This is precisely the odd case, meaning the two cases are equivalent. We proceed by proving the even case.
+\end{proof}
+
+
+
+\section{Problem 8}
+
+\begin{problem}
+	Prove or disprove that for any family $\left\{ H_\alpha  \right\}_{\alpha \in A} $ of subgroups of $G$, their union is a group.
+\end{problem}
+\begin{proof}
+	The statement is false. Consider $\mathbb{Z} \times \mathbb{Z} $ with subgroups $\left\{ 0 \right\} \times \mathbb{Z} $ and $\mathbb{Z} \times \left\{ 0 \right\} $. These are both clearly subgroups, since the inclusion of the first can be seen as the dashed arrow in the product diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left\{ 0 \right\} \ar[" 0 ", r]  & \mathbb{Z}  \\
+	\left\{ 0 \right\} \times \mathbb{Z} \ar[dashed, hook, r] \ar[" \pi  ", u] \ar[" \pi  "', d]  & \mathbb{Z} \times \mathbb{Z} \ar[" \pi  "', u] \ar[" \pi  ", d]  \\
+	\mathbb{Z} \ar[equals, r]  & \mathbb{Z} 
+	\end{tikzcd}\]
+	and similarly for $\mathbb{Z} \times \left\{ 0 \right\} $. Since all these maps are group homomorphisms, since $\Grp $ has finite products, the dashed arrow is a group homomorphism by universality of product.
+
+	The union can be described as
+	\[
+		H\coloneqq (\left\{ 0 \right\} \times \mathbb{Z} )\cup (\mathbb{Z} \times \left\{ 0 \right\} )=\left\{ (a,b)\mid a,b\in\mathbb{Z}, \text{ and } a=0\text{ or } b=0 \right\} 
+	.\]
+	In particular, if $(a,b)\in H$, then at least one of $a,b$ are 0. Note that $(1,0),(0,1)\in H$ by this fact. However,
+	\[
+		(0,1)+(1,0)=(1,1)\notin H
+	.\]
+	Thus, $H$ is not a subgroup, since it is not closed under addition.
+\end{proof}
+
+
+\begin{problem}\label{8.2}
+	Prove or disprove that for any family $\left\{ H_\alpha  \right\}_{\alpha \in A} $ of subgroups of $G$, their intersection is a subgroup.
+\end{problem}
+\begin{proof}
+	We claim that the intersection is a subgroup. Write
+	\[
+		H\coloneqq \bigcap_{\alpha \in A} H_\alpha 
+	.\]
+	\begin{itemize}
+		\item (closure) Let $g,h\in H$. Then $g,h\in H_\alpha $ for all $\alpha \in A$, and since each $H_\alpha $ is a group and thus closed under multiplication, $gh\in H_\alpha $ for all $\alpha \in A$. By definition of an intersection, $gh\in H$.
+		\item (associativity) Let $g,h,k\in H$, and thus $g,h,k\in H_\alpha $ for all $\alpha $. Since $H_\alpha $ is a group, associativity holds for $g,h,k$. Thus, $H$ is associative.
+		\item (identity) Since each $H_\alpha $ is a subgroup of $G$, the inclusion map $H_\alpha \hookrightarrow G$ is a group homomorphism. Since group homomorphisms preserve identities by Homework 2 problem 7.1, the map $H_\alpha \hookrightarrow G$ preserves identities. Since inclusions act trivially on elements, we have that the identity $e$ of $G$ must be the identity of each $H_\alpha $. Since $e\in H_\alpha $ for all $\alpha $, we have $e\in H$. Since $H\subseteq G$ and since $e$ is the identity for all elements of $G$, it is also an identity in $H$.
+		\item (inverses) Let $g\in H$. Then $g\in H_\alpha $ for all $\alpha $, and since each $H_\alpha $ is a group, $g^{-1} \in H_\alpha $ for all $\alpha $. Thus, $g^{-1} \in H$.
+	\end{itemize}
+	This suffices to prove $H$ is a subgroup of $G$.
+\end{proof}
+
+
+\section{Problem 9}
+
+\begin{problem}\label{9.1}
+	Let $H$ be an abelian group and $A$ a set. Show that $H^A$ is an abelian group with $\varphi +\psi $ defined pointwise.
+\end{problem}
+\begin{proof}
+	Write $0\in H$ for the identity. Let $\varphi ,\psi : A \to H$. Clearly $\varphi +\psi $ is still a function from $A\to H$, so closure is satisfied. Since $+$ is associative in $H$, it follows that $+$ is associative in $H^A$. Let $0: A \to H$ be the map $a\mapsto 0$ for any $a\in A$. We have that for $a\in A$,
+	\[
+		(0+\varphi )(a)=0+\varphi (a)=\varphi (a)
+	.\]
+	Once we show $+$ is commutative, it will follow that $0$ is an identity for the group. We now show $+$ is commutative. Indeed, since $H$ is abelian,
+	\[
+		(\varphi +\psi )(a)=\varphi (a)+\psi (a)=\psi (a)+\varphi (a)+(\psi +\varphi )(a)
+	.\]
+	Thus, $H^A$ is abelian. Finally, given $\varphi : A \to H$, define $-\varphi : A \to H$ by $a\mapsto -\varphi (a)$. We then have
+	\[
+		(\varphi -\varphi )(a)=\varphi (a)-\varphi (a)=0=0(a)
+	.\]
+	Since $+$ is commutative, these maps are inverses. Therefore, $H^A$ is an abelian group.
+\end{proof}
+
+\begin{problem}\label{9.2}
+	Let $H$ be an abelian group and $A$ a set. Show that $H^{\oplus A} $ is a subgroup of $H^A$.
+\end{problem}
+\begin{proof}
+	To clean up some language, we take some inspiration from measure theory and say ``$\varphi $ is zero almost everywhere'' whenever $\varphi : A \to H$ is zero except for finitely many $a\in A$. It suffices by the subgroup test to show that $\varphi -\psi \in H^{\oplus A} $ for all $\varphi ,\psi \in H^{\oplus A} $ under the same group operation.
+
+	Let $\varphi ,\psi $ be zero almost everywhere. Define
+	\[
+		A_{\varphi } \coloneqq \left\{ a\in A\mid \varphi (a)\neq 0 \right\} ,
+	\]
+	and define $A_{-\psi } $ similarly. By assumption, $A_\varphi $ and $A_{\psi }$ are finite. We quickly show that $A_{-\psi } $ is also finite. If $-\psi (a)\neq 0$, then $\psi (a)\neq 0$, and conversely if $\psi (a)\neq 0$, then $-\psi (a)\neq 0$. Therefore, there is a bijection $A_{-\psi } \cong A_{\psi } $, and thus $A_{-\psi } $ is finite.
+
+	It should be clear that $(\varphi -\psi )(a)\neq 0$ implies that at least one of $\varphi (a)\neq 0$ or $-\psi (a)\neq 0$ is true. Thus
+	\[
+		A_{\varphi -\psi } \subseteq A_\varphi \cup A_{-\psi } 
+	.\]
+	Since $A_\varphi ,A_{-\psi } $ are finite, so is their union, and thus the subset $A_{\varphi -\psi } $ is finite. Therefore, $\varphi -\psi $ is zero almost everywhere.
+\end{proof}
+
+\begin{problem}\label{9.3}
+	Let $A$ be a zet. Show the free abelian group on $A$ is isomorphic to $Z^{\oplus A} $.
+\end{problem}
+\begin{proof}
+By \cref{9.1} and \cref{9.2}, $H^{\oplus A} $ is abelian whenever $H$ is abelian. It thus suffices to show that for all $j : A \to H$ with $H$ abelian, there is a unique group homomorphism $\mathbb{Z} ^{\oplus A} \to H$ making the relevant diagram commute. We first construct the group homomorphism, then spell out the commutativity condition in more detail.
+
+	Let $a\in A$, and define the map $a : A \to \mathbb{Z} $ by $a(b)=\delta _{ab} $ for $\delta $ the Kronecker delta. More explicitly, $a\mapsto 1$ and $b\mapsto 0$ for $b\neq a$. We claim that each $\varphi \in \mathbb{Z} ^{\oplus A} $ admits a unique representation as a finite sum over elements $a\in\mathbb{Z} ^{\oplus A} $. First we prove an intermediary result.
+
+	Let $a\in\mathbb{Z} ^{\oplus A} $ and $m\in\mathbb{Z} $. Write
+	\[
+		ma =
+		\begin{cases}
+			a + \cdots + a \,\,\,(m\text{ times}),&m>0\\
+			0,&m=0\\
+			-(|m|a),&m<0
+		\end{cases}
+	.\]
+	This is the same as our notation in problem 9 of homework 1 for $\mathbb{Z} /n\mathbb{Z} $, but this time applied to a different abelian group. We claim that for any $m\in\mathbb{Z} $, the following holds:
+	\[
+		ma(b) = m\delta _{ab} 
+	.\]
+	This follows immediately for $m=0,1,-1$, so we start by proving the case for $m=2$. Indeed,
+	\[
+		2a(b)=(a+a)(b)=a(b)+a(b)=\delta _{ab} +\delta _{ab} =2\delta _{ab} 
+	.\]
+	Inducting on this result, we have
+	\[
+		(m+1)a(b)=ma(b)+a(b)=m\delta _{ab} +\delta _{ab} =(m+1)\delta _{ab} 
+	.\]
+	Similarly, for $m=-2$, we have
+	\[
+		-2a(b)=(-a-a)(b)=-a(b)-a(b)=-\delta _{ab} -\delta _{ab} =-2\delta _{ab} 
+	.\]
+	The statement for arbitrary $m<0$ follows in the same way.
+
+	Let $\psi \in \mathbb{Z} ^{\oplus A} $. Define the set
+	\[
+		B_\psi \coloneqq \left\{ (a,m)\mid m=\psi (a),m\neq 0 \right\} 
+	.\]
+	Since $\psi $ is zero almost everywhere, $B_\psi $ is finite. For notational reasons, we will prefer to write $B_\psi $ by choosing a finite indexing set $\left\{ (a_i,m_i) \right\}_{i\in I} $. We claim that
+	\[
+		\psi = \sum_{i\in I} m_i a_i,
+	\]
+	with notation as previously. Let $b\in A$ such that $\psi (b)=0$. Then $b\neq a_i$ for all $i$, so
+	\[
+		\left( \sum_{i\in I} m_i a_i \right) (b)=\sum_{i\in I} m_ia_i(b)=\sum_{i\in I} m_i\delta_{a_ib} =0=\psi (b)
+	.\]
+	Now let $b\in A$ such that $\psi (b)\neq 0$. Then $b=a_j$ for some $j\in I$, so $\psi (a_j)=m_j$ by definition. We thus see that
+	\[
+		\left( \sum_{i\in I} m_ia_i \right) (a_j)=\sum_{i\in I} m_ia_i(a_j)=\sum_{i\in I} m_i \delta _{a_ia_j} =m_j=\psi (a_j)
+	.\]
+	Therefore,
+	\[
+		\psi =\sum_{i\in I} m_i a_i
+	.\]
+	
+	We claimed earlier that this sum was finite. Indeed, since $I$ is finite and each $m_i$ is finite, decomposing the $m_i$s gives $\left| I \right| \cdot \prod_{i} m_i$ terms of $a_i$s in the sum. Since this is just a product of finite numbers, it is necessarily finite. Thus, $\psi $ is represented as a finite sum of the ``basis elements'' $a\in \mathbb{Z} ^{\oplus A} $.
+
+	Uniqueness of this representation is not yet clear. However, it is made clear by the following realization. We are basically showing that the group generated by finite sums over the basis elements is bijective with $\mathbb{Z} ^{\oplus A} $. The injectivity condition then simply states that if we have two different sums $\sum_{i} m_ia_i$, $\sum_{j} n_jb_j$, then they are different maps $A\to \mathbb{Z} $. This is fairly obvious, since each $a\in A$ is only acted upon by at most one term\footnote{Without loss of generality, since we can take $ma_i+na_i=(m+n)a_i$.} in each sum. The sums must differ for at least one term, and thus they will differ on the image of at least one $a\in A$, and thus are different functions.
+
+	We now prove $\mathbb{Z} ^{\oplus A} $ is universal. Let $i : A \to \mathbb{Z} ^{\oplus A} $ be the map $a\mapsto a$, and let $j : A \to H$ be any other map for $H$ abelian. Define $\varphi : \mathbb{Z} ^{\oplus A}  \to H$ as the map $a\mapsto j(a)$, and extend it to all other elements by requiring that $\varphi (a+b)=\varphi (a)+\varphi (b)$. The map is automatically a group homomorphism. Moreover, it makes the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathbb{Z} ^{\oplus A} \ar[" \varphi  ", r]  & H \\
+	A \ar[" i ", u] \ar[" j "', ur]  & 
+	\end{tikzcd}\]
+	commute since $(\varphi i)(a)=j(a)$ by definition. Finally, the definition on basis elements is forced by the commutativity condition, and the definition on all other elements is forced by uniqueness of basis representation. Thus, $\varphi $ is unique with respect to adhering to the commutativity condition, meaning $\mathbb{Z} ^{\oplus A} $ is the free abelian group on $A$.
+\end{proof}
+
+\section{Problem 10}
+
+\begin{problem}
+	Let $G$ be a group, and $\left[ G,G \right] $ the subgroup generated by elements $aba^{-1} b^{-1} $. Show $[G,G]$ is normal in $G$.
+\end{problem}
+\begin{proof}
+	We start by showing for any $g,a,b\in G$, the element $gaba^{-1} b^{-1} g^{-1} \in [G,G]$. We insert the identity $e=g^{-1} g=gg^{-1} $ at various spots in the expression:
+	\[
+		gaba^{-1} b^{-1} g^{-1} =ga(g^{-1} g)b(g^{-1} g)a^{-1} (g^{-1} g)b^{-1} g^{-1} =(gag^{-1} )(gbg^{-1} )(ga^{-1} g^{-1} )(gb^{-1} g^{-1} )
+	\]
+	\[
+		=\left( gag^{-1}  \right) \left( gbg^{-1}  \right) \left( gag^{-1}  \right) ^{-1} \left( gbg^{-1}  \right) ^{-1} 
+	.\]
+	This satifies the definition of an element of $[G,G]$.
+
+	Now we generalize. Choose some element $c\in [G,G]$, which can be written as a product
+	\[
+		c= a_1b_1a_1^{-1} b_1^{-1} \cdots a_nb_na_n ^{-1} b_n ^{-1} 
+	.\]
+	Write $c_i$ for $a_ib_ia_i ^{-1} b_i^{-1} $. We want to show that $gcg^{-1} \in [G,G]$. We do this by inserting $e=g^{-1} g$ between each $c_i$:
+	\[
+		gcg^{-1} =gc_1 (g^{-1} g)c_2(g^{-1} g)\cdots (g^{-1} g)c_n g^{-1} =(gc_1g^{-1} )(gc_2g^{-1} )\cdots(gc_ng^{-1} )
+	.\]
+	From the previous step, each $gc_ig^{-1} =ga_ib_i a_i ^{-1} b_i^{-1} g^{-1} $ is an element of $[G,G]$, and thus $gcg^{-1} $ has been written as a product of elements o $[G,G]$. Thus, $gcg^{-1} \in [G,G]$. Therefore, $g[G,G]g^{-1} \subseteq [G,G]$. This is sufficient to show that $[G,G]$ is normal.
+\end{proof}
+
+\begin{problem}
+	Show that $G/N$ is abelian if and only if $[G,G]\subseteq N$.
+\end{problem}
+\begin{proof}
+	Let $G/N$ be abelian. Then $abN=baN$, implying that $aba^{-1} b^{-1} N=N$. Equivalently, $aba^{-1} b^{-1} \in N$. Therefore, $[G,G]\subseteq N$.
+
+	Now let $[G,G]\subseteq N$. Then $aba^{-1} b^{-1}N=N$, and thus $abN=baN$. Therefore, $G/N$ is abelian.
+\end{proof}
+
+
+\section{Problem 11}
+
+\begin{problem}\label{11}
+	Let $G$ be abelian, and $D=\left\{ (g,g)\mid g\in G \right\} \subseteq G\times G$ the diagonal subset. Show that $(G\times G) /D \cong G$.
+\end{problem}
+
+
+
+\begin{proof}
+	To keep consistent with the problem's notation, we break with our convention of using additive notation for abelian groups, and instead use multiplicative notation for this problem.
+
+	As suggested by the hint, we use the map $\varphi : G\times G \to G$ given by $((g,h)\mapsto gh^{-1} $. A nice high level way to see that this is a group homomorphism is to note that since abelian groups are group objects in the category $\Grp $, the maps $i:g\mapsto g^{-1} $ and $\mu :(g,h)\mapsto gh$ are group homomorphisms for abelian groups. $\varphi $ may be defined as the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	G\times G \ar[" \varphi  ", bend left, rr] \ar[" 1 \times i  "', r]  & G\times G \ar[" \mu  "', r]  & G.
+	\end{tikzcd}\]
+
+	We also explicitly show that this recipe defines a group homomorphism. Let $(g_1,h_1),(g_2,h_2)\in G\times G$. By making use of the fact that $G$ is abelian, it follows that
+	\[
+		\varphi (g_1,h_1)\varphi (g_2,h_2)=g_1 h_1^{-1} g_2h_2^{-1} =g_1g_2h_1^{-1} h_2^{-1} =g_1g_2(h_1h_2)^{-1} =\varphi (g_1g_2,h_1h_2)
+	.\]
+	Therefore, $\varphi $ is a group homomorphism.
+
+	By the first isomorphism theorem, it suffices to show $\ker \varphi =D$ and that $\psi$ is surjective. Indeed, if $(g,h)\in \ker \varphi $, then
+	\[
+		\varphi (g,h)=gh^{-1} =e \implies g=h \implies (g,h)=(g,g)\in D
+	.\]
+	Conversely, clearly if $(g,g)\in D$, then $gg^{-1} =e$. Thus, $\ker \varphi =D$. Moreover, $\varphi $ is easily shown to be surjective: for any $g\in G$,
+	\[
+		\varphi (g,e)=ge =g
+	.\]
+	Therefore, by the first isomorphism theorem,
+	\[
+		\frac{G\times G}{D} =\frac{G\times G}{\ker \varphi } \cong \im \varphi =G
+	.\]
+
+	An alternative proof is realizing there is an isomorphism $G\cong D$ given by the diagonal morphism $\Delta (g)=(g,g)$. By identifying $G\cong G\times \left\{ e \right\} \subseteq G\times G$, it could be fairly easily shown that
+	\[
+		\frac{G\times G}{D} \cong \frac{G\times G}{G\times \left\{ e \right\} } 
+	\]
+	by playing with the isomorphism and universality. It's fairly obvious that the representation on the right is simply isomorphic to $G$, and a rigorous proof is constructed by noting that $G\times \left\{ e \right\} $ is obviously the kernel of the projection $(g,h)\mapsto h$, and since the natural projection is surjective, it follows by the first isomorphism theorem.
+\end{proof}
+
+
+
+\end{document}

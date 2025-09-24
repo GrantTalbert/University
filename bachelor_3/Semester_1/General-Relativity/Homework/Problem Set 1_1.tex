@@ -1,0 +1,52 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+
+\usepackage{titlepageBU}
+\title{Problem Set 1}
+\begin{document}
+\makeproblem
+
+\section{Problem 1}
+
+\section{Problem 2}
+
+Let $x^\mu =(x,y,z)$ be the cartesian coordinate system in $\mathbb{R} ^3$, and $(r,\theta ,\phi )$ the spherical coordinate system
+\[
+	x=r \sin \theta \cos \phi ,\qquad y=r \sin \theta \sin \phi  ,\qquad z=r \cos \theta 
+.\]
+The metric then takes the form
+\[
+	\mathrm{d} s^2=\mathrm{d} r^2+r^2 \mathrm{d} \theta ^2+r^2 \sin^2\theta \mathrm{d} \phi ^2
+.\]
+
+\begin{problem}
+	A particle moves along a curve
+	\[
+		x^\mu (\lambda )=(x(\lambda ),y(\lambda ),z(\lambda ))=(\cos \lambda ,\sin \lambda ,\lambda )
+	.\]
+	Express the path of the particle in the $(r,\theta ,\phi )$ coordinate system.
+\end{problem}
+\noindent\emph{Solution.} This feels too easy and like a trick question. From simple geometric reasoning, we would think that
+	\[
+		r^2=x^2+y^2+z^2
+	,\]
+	\[
+		\phi  =\arctan \frac{y}{x} ,\qquad \theta =\arctan \frac{\sqrt{x^2+y^2} }{z^2} 
+	.\]
+	Some care must be taken to ensure the arctangent is taken in the proper quadrant.
+\end{document}
+
+
+for 3 we can do whichever direction. parametrize via chi theta and go to other is easier

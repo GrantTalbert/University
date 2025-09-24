@@ -1,0 +1,581 @@
+\documentclass[11pt, letterpaper]{article}
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/lectures.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/physics.tex}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\begin{document}
+\makeproblem
+
+\section{\emph{Nature} quantum survey}
+
+The AI classified me as a believer in many worlds, which (in a nutshell) states that the Schr\"odinger is behaved, and what we observe as a ``collapse'' of the wavefunction is us entangeling ourselves with the system. The idea makes a lot of sense to me, and definitely makes more sense than the wavefunction just \emph{collapsing}, but I'm not sure I fully buy it. It's hard to really explain why, but I just don't really believe it either.
+
+\section{The planck constant and other fundamental constants}
+
+(i) Alfie is measuring the meter because $c$ is fixed, and the meter is defined in terms of $c$.
+
+(ii) Betty is measuring the kilogram. $h$ is now defined, so by measuring $K=hf-\phi $, we are really measuring energy conservation, which is tied to the kilogram by relating energy to mass.
+
+(iii) $N_A$ is fixed, and the molar mass is simply $mN_A$ for $m$ the mass of one atom of that element. By counting the number of moles in a gram, since $N_A$ is fixed, we are really measuring a gram in terms of the number of carbon atoms, thus measuring the \emph{gram}.
+
+(iv) Brownian motion experiments relate the mechanical energy of particles to the temperature via $k_B$. However, since $k_B$ is fixed, we are really measuring temperature, hence the \emph{kelvin}.
+
+(v) The oil drop experiment relates macroscopic charge to the quantum of charge $e$, which is now fixed. Since the ampere is defined as $1/e$, we are really measuring the ampere.
+
+Basically all of these would be different if I had to answer pre-2018, since $N_A,k_B,e,h$ were all fixed and the SI units recast in terms of them in 2018. Number (i) wouldn't really change though.
+
+\section{Pauli spin matrices}
+(a)
+\[
+	\sigma _x\sigma _y=\begin{pmatrix}
+	 & 1 \\
+	1 & 
+	\end{pmatrix}\begin{pmatrix}
+	 & -i \\
+	i & 
+	\end{pmatrix}=\begin{pmatrix}
+	i &  \\
+	 & -i
+	\end{pmatrix}=i\sigma _z
+.\]
+\[
+	\left[ \sigma _y,\sigma _z \right] =\sigma _y\sigma _z-\sigma _z\sigma _y=\begin{pmatrix}
+	 & -i \\
+	i & 
+	\end{pmatrix}\begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}-\begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}\begin{pmatrix}
+	 & -i \\
+	i & 
+	\end{pmatrix}=\begin{pmatrix}
+	 & i \\
+	i & 
+	\end{pmatrix}-\begin{pmatrix}
+	 & -i \\
+	-i & 
+	\end{pmatrix}=2i\sigma _x
+.\]
+\[
+	\sigma _x\sigma _y\sigma _z=i\sigma _z^2=i\begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}=i1
+.\]
+(b) Obviously all Pauli matrices are Hermitian, and $\dagger$ distributes over addition, giving
+\[
+	\sigma _+^\dagger = \left( \sigma _x + i\sigma _y \right) ^\dagger = \sigma _x^\dagger -i\sigma_y^\dagger = \sigma _x - i\sigma _y^\dagger = \sigma _-
+.\]
+We also have
+\[
+	\sigma _-^\dagger = \sigma _+^{\dagger\dagger}=\sigma _+
+\]
+since $(-)^\dagger$ is self-inverse. Therefore, these are clearly not Hermitian, since
+\[
+	\sigma _+=\sigma _x + i\sigma _y = \begin{pmatrix}
+	 & 1 + 1 \\
+	1 - 1 & 
+	\end{pmatrix}=\begin{pmatrix}
+	 & 2 \\
+	 & 
+	\end{pmatrix} \neq \begin{pmatrix}
+	 &  \\
+	2 & 
+	\end{pmatrix} = \begin{pmatrix}
+	 & 2 \\
+	 & 
+	\end{pmatrix}^\dagger = \sigma _-
+.\]
+
+
+We compute the eigenvalues for $\sigma _x,\sigma _y,\sigma _z$ in order:
+\[
+\det \begin{pmatrix}
+-\lambda  & 1 \\
+1 & -\lambda 
+\end{pmatrix}=0 \implies \lambda ^2 - 1 = 0 \implies \lambda =\pm 1,
+\]
+\[
+	\det \begin{pmatrix}
+	-\lambda  & -i \\
+	i & -\lambda 
+	\end{pmatrix}=0\implies \lambda ^2 - 1 = 0 \implies \lambda =\pm 1
+,\]
+\[
+	\det \begin{pmatrix}
+	1-\lambda  &  \\
+	 & -1-\lambda 
+	\end{pmatrix}=0 \implies \left( 1-\lambda  \right)\left( -1-\lambda  \right) =0 \implies -1 + \lambda ^2 = 0 \implies \lambda =\pm 1
+.\]
+We compute the eigenvectors for $\sigma _x,\sigma _y,\sigma _z$ in order:
+\[
+	\begin{pmatrix}
+	 & 1 \\
+	1 & 
+	\end{pmatrix}\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}=\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}\implies \begin{pmatrix}
+	y \\
+	x
+	\end{pmatrix}=\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix} \implies \begin{pmatrix}
+	1 \\
+	1
+	\end{pmatrix} \text{ e-vec for } \sigma _x,
+\]
+\[
+	\begin{pmatrix}
+	 & 1 \\
+	1 & 
+	\end{pmatrix}\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}=\begin{pmatrix}
+	-x \\
+	-y
+	\end{pmatrix}\implies \begin{pmatrix}
+	y \\
+	x
+	\end{pmatrix}=\begin{pmatrix}
+	-x \\
+	-y
+	\end{pmatrix}\implies x=-y \implies \begin{pmatrix}
+	1 \\
+	-1
+	\end{pmatrix}\text{ e-vec for } \sigma _x,
+\]
+\[
+	\begin{pmatrix}
+	 & -i \\
+	i & 
+	\end{pmatrix}\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}=\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}\implies \begin{pmatrix}
+	-iy \\
+	ix
+	\end{pmatrix}=\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}\implies y=ix \implies \begin{pmatrix}
+	1 \\
+	i
+	\end{pmatrix}\text{ e-vec for } \sigma _y,
+\]
+\[
+	\begin{pmatrix}
+	 & -i \\
+	i & 
+	\end{pmatrix}\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}=\begin{pmatrix}
+	-x \\
+	-y
+	\end{pmatrix}\implies \begin{pmatrix}
+	-iy \\
+	ix
+	\end{pmatrix}=\begin{pmatrix}
+	-x \\
+	-y
+	\end{pmatrix}\implies y=-ix \implies \begin{pmatrix}
+	1 \\
+	-i
+	\end{pmatrix}\text{ e-vec for } \sigma _y,
+\]
+\[
+	\begin{pmatrix}
+	1 &  \\
+	 & -1
+	\end{pmatrix}\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}=\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}\implies \begin{pmatrix}
+	x \\
+	-y
+	\end{pmatrix}=\begin{pmatrix}
+	x \\
+	y
+	\end{pmatrix}\implies \begin{pmatrix}
+	1 \\
+	0
+	\end{pmatrix}\text{ e-vec for } \sigma _z,
+\]
+\[
+	\begin{pmatrix}
+	x \\
+	-y
+	\end{pmatrix}=\begin{pmatrix}
+	-x \\
+	-y
+	\end{pmatrix}\implies \begin{pmatrix}
+	0 \\
+	1
+	\end{pmatrix}\text{ e-vec for } \sigma _z
+.\]
+
+
+(d) The following are well-known properties:
+\begin{enumerate}
+	\item $\sigma _i^2=1$;
+	\item $\sigma _i\sigma _j=-\sigma _j\sigma _i$ for $i\neq j$;
+	\item $\sigma _i\sigma _j=\delta _{ij} 1+\varepsilon _{ijk} i\sigma _k$ for $\varepsilon_{ijk} $ the Levi-Civita symbol with the obvious ordering.
+\end{enumerate}
+Proving these properties amounts to writing out a lot of different matrix equations, most of which contain only one step, and I don't think the grader would like to read that any more than I would like to write it.
+
+In particular, we obtain
+\[
+	\left[ \sigma _i,\sigma _j \right] =\sigma _i\sigma _j-\sigma _j\sigma _i=\varepsilon_{ijk} i\sigma _k + \varepsilon_{ijk} i\sigma _k=\varepsilon_{ijk} 2i\sigma _k
+.\]
+We then have
+\begin{align*}
+	\left[ \sigma _x,\left[ \sigma _y,\sigma _z \right]  \right] +\left[ \sigma _y,\left[ \sigma _z,\sigma _x \right]  \right] +\left[ \sigma _z,\left[ \sigma _x,\sigma _y \right]  \right] &=\left[ \sigma _x,2i\sigma _x \right] +\left[ \sigma _y,2i\sigma _y \right] +\left[ \sigma _z,2i\sigma _z \right] \\
+																								 &=2i\left( \left[ \sigma _x,\sigma _x \right] +\left[ \sigma _y,\sigma _y \right] +\left[ \sigma _z,\sigma _z \right]  \right) \\
+																								 &=0
+.\end{align*}
+
+\section{Exponentials of operators}
+
+Recall matrix exponentials are defined by extending the Taylor series representation of the exponential
+\[
+	e^M \coloneqq \sum_{n=0}^{\infty} \frac{M^n}{n!}
+;\]
+for $M$ a matrix.
+
+(a) (i) An easy induction argument shows that matrix exponentials of a diagonal matrix
+\[
+	\begin{pmatrix}
+	m_1 &  &  \\
+	 & \ddots &  \\
+	 &  & m_n
+	\end{pmatrix} = \diag (m_1, \ldots ,m_n)
+\]
+satisfy
+\[
+	\diag (m_1, \ldots ,m_n)^k = \diag (m_1^k, \ldots ,m_n^k)
+.\]
+Since $\sigma _z=\diag (1,-1)$, we have
+\[
+	e^{i\theta M} =\sum_{n=0}^{\infty} \frac{(i\theta \sigma _z)^n}{n!} =\sum_{n=0}^{\infty} \frac{\diag (i\theta ,-i\theta )^n}{n!} =\sum_{n=0}^{\infty} \frac{\diag ((i\theta )^n,(-i\theta )^n)}{n!} 
+.\]
+We factor the $n!$ into the matrix, and also note that by linearity of matrix addition we may also factor the sum into the matrix, giving
+\[
+	\sum_{n=0}^{\infty} \frac{\diag ((i\theta )^n,(-i\theta )^n)}{n!} =\sum_{n=0}^{\infty} \diag \left( \frac{(i\theta )^n}{n!} ,\frac{(-i\theta )^n}{n!}  \right) =\diag \left( \sum_{n=0}^{\infty} \frac{(i\theta )^n}{n!} ,\sum_{n=0}^{\infty} \frac{(-i\theta )^n}{n!}  \right) =\diag (e^{i\theta } ,e^{-i\theta } )
+,\]
+where the last equality follows once again by noting the Taylor expansion of $e^x$.
+
+(ii) For the rest of the problem, we will avoid explaining steps that were explained in (i) (for example, factoring the sum into diagonal matrices). Note the following:
+\[
+	\sigma _x^2=1 \implies \sigma _x^3=\sigma 
+.\]
+In particular, $\sigma _x^n=\sigma _x^{n\mod 2} $. We will apply this fact to split the Taylor expansion around even and odd components:
+\[
+	e^{i\theta \sigma _x} =\sum_{n=0}^{\infty} \frac{(i\theta \sigma _x)^n}{(2n+1)!} =\sum_{n=0}^{\infty} \frac{(i\theta \sigma_x )^{2n+1} }{n!} +\sum_{n=0}^{\infty} \frac{(i\theta 1)^{2n} }{(2n)!} =\sum_{n=0}^{\infty} (-1)^n \frac{i \theta ^{2n+1} \sigma_x }{(2n+1)!} +\sum_{n=0}^{\infty} (-1)^n \frac{\theta ^{2n} 1}{(2n)!} 
+\]
+\[
+	=\left( \sum_{n=0}^{\infty} (-1)^n \frac{i \theta ^{2n+1} }{(2n+1)!}  \right) \sigma _x + \left( \sum_{n=0}^{\infty} (-1)^n\frac{\theta ^{2n} }{(2n)!}  \right) 1=i \sin \theta \sigma _x + \cos \theta 1,
+\]
+where the final step follows by recognizing the Taylor expansions for sin and cos. Factoring into the matrices gives the representation
+\[
+	\begin{pmatrix}
+	 & i \sin \theta  \\
+	i \sin \theta  &
+	\end{pmatrix}+\begin{pmatrix}
+	\cos \theta  &  \\
+	 & \cos \theta 
+	\end{pmatrix}=\begin{pmatrix}
+	\cos \theta  & i \sin \theta  \\
+	i \sin \theta  & \cos \theta 
+	\end{pmatrix}
+.\]
+
+(iii) We apply the same proof strategy employed in (ii) by recognzing that
+\[
+	\sigma _y^2 = 1 \implies \sigma _y^{n} =\sigma _y^{n\mod 2} 
+.\]
+It follows that
+\[
+	e^{i\theta \sigma _y} =\sum_{n=0}^{\infty} \frac{(i\theta \sigma _y)^n}{n!} =\sum_{n=0}^{\infty} \frac{(i\theta \sigma _y)^{2n+1} }{(2n+1)!} +\sum_{n=0}^{\infty} \frac{(i\theta 1)^{2n} }{(2n)!} =\sum_{n=0}^{\infty} (-1)^{n} \frac{i\theta ^{2n+1} \sigma _y}{(2n+1)!} +\sum_{n=0}^{\infty} (-1)^{n} \frac{\theta ^{2n} 1}{(2n)!} 
+\]
+\[
+	=i\sin \theta \sigma _y + \cos \theta 1 = \begin{pmatrix}
+	\cos \theta  & \sin \theta  \\
+	-\sin \theta  & \cos \theta 
+	\end{pmatrix}
+.\]
+
+(b) (i)
+
+\[
+	e^{i\theta \sigma _+} =\sum_{n=0}^{\infty} \frac{(i\theta )^n( \sigma _x+i\sigma _y)^n}{n!} =\sum_{n=0}^{\infty} \frac{(i\theta )^n}{n!} \begin{pmatrix}
+	0 & 2 \\
+	0 & 0
+	\end{pmatrix}^n=1+i\theta \begin{pmatrix}
+	0 & 2 \\
+	0 & 0
+	\end{pmatrix}+\sum_{n=2}^{\infty} \frac{(i\theta )^n}{n!} \mathbf{0} =\begin{pmatrix}
+	1 & 2i\theta  \\
+	0 & 1
+	\end{pmatrix}
+.\]
+(ii)
+\[
+	e^{i\theta \sigma _i} =\sum_{n=0}^{\infty} \frac{(i\theta )^n\left( \sigma _x-i\sigma _y \right)^n }{n!} =\sum_{n=0}^{\infty} \frac{(i\theta )^n}{n!} \begin{pmatrix}
+	0 & 0 \\
+	2 & 0
+	\end{pmatrix}^n=1+i\theta \begin{pmatrix}
+	0 & 0 \\
+	2 & 0
+	\end{pmatrix}+\sum_{n=2}^{\infty} \frac{(i\theta )^n}{n!} \mathbf{0} =\begin{pmatrix}
+	1 & 0 \\
+	2i\theta  & 1
+	\end{pmatrix}
+.\]
+
+
+(c) (i)
+
+\[
+	e^{-i\theta \sigma _+} =e^{i(-\theta )\sigma _+} =\begin{pmatrix}
+	1 & -2i\theta  \\
+	0 & 1
+	\end{pmatrix}
+.\]
+\[
+	\begin{pmatrix}
+	1 & 2i\theta  \\
+	0 & 1
+	\end{pmatrix}\begin{pmatrix}
+	1 & 0 \\
+	0 & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 & -2i\theta  \\
+	0 & 1
+	\end{pmatrix}=\begin{pmatrix}
+	1 & -2i\theta  \\
+	0 & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 & -2i\theta  \\
+	0 & 1
+	\end{pmatrix}=\begin{pmatrix}
+	1 & -4i\theta  \\
+	0 & -1
+	\end{pmatrix}
+.\]
+
+(ii)
+
+\[
+	e^{-i\theta \sigma _-} \sigma _ze^{i\theta \sigma _+} =\begin{pmatrix}
+	1 & 0 \\
+	-2i\theta  & 1
+	\end{pmatrix}\begin{pmatrix}
+	1 & 0 \\
+	0 & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 & 2i\theta  \\
+	0 & 1
+	\end{pmatrix}=\begin{pmatrix}
+	1 & 0 \\
+	-2i\theta  & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 & 2i\theta  \\
+	0 & 1
+	\end{pmatrix}=\begin{pmatrix}
+	1 & 2i\theta  \\
+	-2i\theta & 4\theta ^2-1
+	\end{pmatrix}
+.\]
+
+
+(d)
+\[
+	(\mathbf{a} \cdot \boldsymbol{\sigma} )(\mathbf{b} \cdot \boldsymbol{\sigma} )=a^i\sigma _ib^j\sigma _j=a^ib^j(\delta _{ij} 1+\varepsilon _{ijk} i\sigma _k)=a^ib^i1 + ia^ib^j\varepsilon _{ijk} \sigma _k = (\mathbf{a} \cdot \mathbf{b} )1+i(\mathbf{a} \times \mathbf{b} )\cdot \boldsymbol{\sigma} 
+\]
+by our results from section 2, and the fact that the $k$th component of $\mathbf{a} \times \mathbf{b} =a^ib^j\varepsilon _{ijk} $.
+
+\[
+	\left[ \mathbf{a} \cdot \boldsymbol{\sigma} ,\mathbf{b} \cdot \boldsymbol{\sigma}  \right] =(\mathbf{a} \cdot \boldsymbol{\sigma} )(\mathbf{b} \cdot \boldsymbol{\sigma} )-(\mathbf{b} \cdot \boldsymbol{\sigma} )(\mathbf{a} \cdot \boldsymbol{\sigma} )=(\mathbf{a} \cdot \mathbf{b} )1+i(\mathbf{a} \times \mathbf{b} )\cdot \boldsymbol{\sigma} - \left( (\mathbf{b} \cdot \mathbf{a} )1+i(\mathbf{b} \times \mathbf{a} )\cdot \boldsymbol{\sigma}  \right) 
+\]
+\[
+	=i(\mathbf{a}\times \mathbf{b} )\cdot \boldsymbol{\sigma} -i(\mathbf{b} \times \mathbf{a} )\cdot \boldsymbol{\sigma} =i\left( (\mathbf{a} \times \mathbf{b} )\cdot \boldsymbol{\sigma} +(\mathbf{a} \times \mathbf{b} )\cdot \boldsymbol{\sigma}  \right) =2i(\mathbf{a} \times \mathbf{b} )\cdot \boldsymbol{\sigma} 
+.\]
+
+
+\section{Stern Gerlach experiment}
+
+(a) The control photograph shows the incidence locations of the silver atoms given no field. They show that in the presence of no field, the atoms do not deflect away from the enter. This shows that any deflection must be due to the presence of a field.
+
+(b) Not counting the spike at the top, it looks like the top and bottom are about 6 rulings apart, so $\approx 300$ microns. This means the deflection from the center is 150 microns. Counting the spike, the top deflects 300 microns away from the center.. To estimate the magnetic moment of the electron, we recall that
+\[
+	\mathbf{F} =\nabla (\boldsymbol{\mu} \cdot \mathbf{B} )\implies F_z=\mu _e \frac{\partial B_z}{\partial z}
+.\]
+The atom is in the magnet of length $L$ for a time $t = L/v_x$, for $v_x$ $x$-velocity. Basic kinematics tells us the vertical displacement is
+\[
+	z = \frac{1}{2} a_zt^2
+.\]
+Noting that $a_z = F_z / m$, substituting in gives
+\[
+	z = \frac{1}{2} \frac{\mu _e}{m} \frac{\partial B_z}{\partial z} \left( \frac{L}{v_x}  \right) ^2
+.\]
+It follows that
+\[
+	\mu _e = \frac{2mzv_x^2}{L^2\frac{\partial B_z}{\partial z} } 
+.\]
+To find $v_x$, note that the particle's speed is mostly in $v_x$, so we approximate the kinetic energy with the Maxwell speed distribution
+\[
+	\frac{1}{2} mv_x^2 \approx  \frac{1}{2} k_BT \implies v_x \approx \sqrt{\frac{k_BT}{m} } 
+.\]
+Plugging in gives
+\[
+	\mu _e = \frac{2mzk_BT}{L^2m \frac{\partial B_Z}{\partial z} } =\frac{2zk_BT}{L^2 \frac{\partial B_z}{\partial z} } 
+.\]
+We have the following approximate values:
+\[
+L = 0.035\mathrm{m} ,\qquad \frac{\partial B_z}{\partial z} =1000\mathrm{T}/\mathrm{m} ,\qquad z = 1.5\cdot 10^{-4} \mathrm{m} ,
+\]
+\[
+	T=1273.15\mathrm{K} ,\qquad k_B=1.38\cdot 10^{-23} \frac{\mathrm{m} ^2\mathrm{kg} }{\mathrm{s} ^2\mathrm{K} } 
+.\]
+Plugging in, we have
+\[
+	\mu _e = \frac{\left( 2 \right) \left( 1.5\cdot 10^{-4}  \right) \left( 1.38\cdot 10^{-23}  \right) \left( 1.27315\cdot 10^{3}  \right) }{\left( 0.035^2 \right) \left( 10^3 \right) } \approx 4302.727 \cdot 10^{-27} =4.302727 \cdot 10^{-24} 
+.\]
+This is in units of $\mathrm{J} /\mathrm{T}$. Also the magnetic moment of silver is the same as that of an electron because it has one valence electron, and other contributions cancel out.
+
+(c) No, mass cancels out of the final equation.
+
+(d) An electron is charged, and charged particles deflect when moving through $\mathbf{B} $-fields. The electron charge would have messed up the numbers. Silver atoms cancel out the charge because there is a proton to each electron.
+
+(e) Hopefully I found the right formula:
+\[
+	g_e = \frac{4 m_e\mu _e}{e \hbar} 
+.\]
+Plugging in our findings, as well as accepted values for $m_e,e,\hbar$ give an approximate value of $0.928$. That's not very close to the modern value.
+
+(f) I don't know much about particle physics, but I assume it's because the muon is signficantly more massive than the electron. This means that anomalies that might be related to the mass are easier to detect for the muon than the electron, since the mass scales much higher for the muon.
+\section{Pauli matrices as qubit operators}
+(a)
+\[
+	M_H = \frac{1}{\sqrt{2} } \left( \sigma _x + \sigma _z \right) 
+.\]
+\[
+	M_H \ket{0}=\frac{1}{\sqrt{2} } \left( \sigma _x+\sigma _z \right) \ket{0}=\frac{1}{\sqrt{2} } \begin{pmatrix}
+	 & 1 \\
+	1 & 
+	\end{pmatrix}\begin{pmatrix}
+	1 \\
+	0
+\end{pmatrix}+\frac{1}{\sqrt{2} } \ket{0}=\frac{1}{\sqrt{2} } \left( \ket{1}+\ket{0} \right) =\frac{1}{\sqrt{2} } \begin{pmatrix}
+1 \\
+1
+\end{pmatrix}=\ket{+}
+.\]
+\[
+	M_H \ket{1}=\frac{1}{\sqrt{2} } \left( \sigma _x+\sigma _z \right) \ket{1}=\frac{1}{\sqrt{2} } \begin{pmatrix}
+	 & 1 \\
+	1 & 
+	\end{pmatrix}\begin{pmatrix}
+	0 \\
+	1
+\end{pmatrix}-\frac{1}{\sqrt{2} } \ket{1}=\frac{1}{\sqrt{2} } \left( \ket{0}-\ket{1} \right) =\frac{1}{\sqrt{2} } \begin{pmatrix}
+1 \\
+-1
+\end{pmatrix}=\ket{-}
+.\]
+The Hadamard gate puts a $z$-basis qubit into a superposition in the $z$-basis.
+
+(b)
+\[
+	\det M_H = \frac{1}{2} \left( -1-1 \right) =-1
+.\]
+An inverse thus exists, using the regular formula for inverses for $2\times 2$s:
+\[
+	-\frac{1}{\sqrt{2} } \begin{pmatrix}
+	-1 & -1 \\
+	-1 & 1
+	\end{pmatrix}=\frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 & 1 \\
+	1 & -1
+	\end{pmatrix}=M_H
+.\]
+We verify the matrix is self-inverse:
+\[
+	\frac{1}{2} \begin{pmatrix}
+	1 & 1 \\
+	1 & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 & 1 \\
+	1 & -1
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	2 & 0 \\
+	0 & 2
+	\end{pmatrix}=1
+.\]
+(c) (i) The probability is
+\[
+	\left| \braket{\uparrow}{\psi } \right| ^2=\left| \frac{3}{\sqrt{34} } \braket{\uparrow}{\uparrow}+i\frac{5}{\sqrt{34} } \braket{\uparrow}{\downarrow} \right| ^2=\left| \frac{3}{\sqrt{34} }  \right| ^2=\frac{9}{34} 
+.\]
+
+(ii) The expectation value is $\bra{\psi }S_x\ket{\psi }$. Note that
+\[
+	S_x\ket{\psi }=\frac{\hbar}{2} \frac{1}{\sqrt{34} } \begin{pmatrix}
+	3 \\
+	5i
+\end{pmatrix}=\frac{\hbar}{2\sqrt{34} } \begin{pmatrix}
+5i \\
+3
+\end{pmatrix},\qquad \ket{\psi }=\frac{1}{\sqrt{34} } \begin{pmatrix}
+3 \\
+5i
+\end{pmatrix}
+.\]
+Their inner product is thus
+\[
+	\frac{\hbar}{2\cdot 34} \left( 15i-15i \right) =0,
+\]
+since
+\[
+	\bra{\psi }=\ket{\psi }^\dagger=\begin{pmatrix}
+	3 & -5i
+	\end{pmatrix}
+.\]
+
+(iii) The state is now collapsed to the eigenvector of $S_x$ corresponding to $-1$, which is simply that same eigenvector of $\sigma _x$ since $S_x = \frac{1}{\sqrt{2} } \sigma _x$. Thus, $\ket{\psi }$ is now
+\[
+	\ket{\psi }=\frac{1}{\sqrt{2} } \begin{pmatrix}
+	1 \\
+	-1
+\end{pmatrix}= \frac{1}{\sqrt{2} } \left( \ket{\uparrow}-\ket{\downarrow} \right) 
+.\]
+Since $\ket{\psi }$ is nonzero in both spin up and spin down, both possibilites of $\hbar/2$ and $-\hbar/2$ are measurable. The probabilities are obviously both $1/2$, but I compute them anyways:
+\[
+	\left| \braket{\uparrow}{\psi } \right| ^2=\left| \frac{1}{\sqrt{2} } \left( \braket{\uparrow}{\uparrow}-\braket{\uparrow}{\downarrow} \right)  \right| ^2=\left| \frac{1}{\sqrt{2} }  \right| ^2=\frac{1}{2} ,\quad \left| \braket{\downarrow}{\psi } \right| ^2=\left| \frac{1}{\sqrt{2} } \left( \braket{\downarrow}{\uparrow}-\braket{\downarrow}{\downarrow} \right)  \right| ^2=\left| \frac{-1}{\sqrt{2} }  \right| ^2=\frac{1}{2} 
+.\]
+
+
+\end{document}

@@ -1,26 +1,133 @@
-\section{Motivation}
+\section{Motivation}\label{sec1}
 
-Consider a topological space $X$. We are often concerned not with studying $X$ up to isomorphism, but rather up to weak homotopy equivalence, called the \emph{homotopy type} of $X$. Recall that:
+We begin by briefly motivating and introducing regular category theory. Recall that a set $X$ is a collection of things called \emph{elements}. Given sets $X,Y$, we can define a function $f$ that goes from $X$ to $Y$ in the sense that for all $x\in X$, there is (exactly) one element $y\in Y$ such that $f(x)=y$. We call $X$ the \emph{domain} of $f$, and we call $Y$ the \emph{codomain} of $Y$, and we write $f : X \to Y$ to indicate this.
+
+Many branches of math are structured as follows: there is a certain type of object we wish to study, which is often a set with some additional structure. For example, a \emph{group} is a set $G$ that has the following additional structure: given elements $g,h\in G$, we can \emph{multiply} them to obtain a new element $gh\in G$, which satisfies certain rules. We then also have an important type of \emph{function} that goes between these objects. For example, given groups $G,H$, we are interested in \emph{group homomorphisms}, which are functions $f : G \to H$ which \emph{preserve the group structure}, meaning for all $g,h\in G$,
+\[
+	f(gh)=f(g)f(h)
+.\]
+In other words, it doesn't matter whether we multiply in $G$ or in $H$, because the structure is the same in both groups.
+
+Many branches of math look like this. For some other examples, in topology, we are interested in topological spaces, and continuous functions between them. In ring theory, we are interested in rings, and ring homomorphisms between them. Mathematicians realized the ubiquetessness of this structure, and developed \emph{category theory} to study theories of this form.
 
 \begin{definition}\label{2.1}
-	A \emph{weak homotopy equivalence} is a continuous map $f : X \to Y$ between topological spaces that induces a bijection on path components $\pi _0(f) : \pi _0(X)\cong \pi _0(Y)$, and for each $i>0$ and $x\in X$, induces an isomorphism of groups
-	\[
-		\pi _i(f): \pi _i(X,x) \cong \pi _i(Y,f(x))
-	,\]
-	where we recall that
-	\[
-		\pi _i(X,x) = \Top _*((S^n,0),(X,x)) /\tildesim 
-	.\]
+	A \emph{category} $\mathcal{C} $ has the following information:
+	\begin{itemize}
+		\item A collection $\Obj(\mathcal{C} ) $ of \emph{objects};
+		\item A collection $\Mor(\mathcal{C} )$ of \emph{morphisms};
+		\item Two functions $\dom,\cod : \Mor(\mathcal{C} ) \to \Obj(\mathcal{C} ) $ called \emph{domain} and \emph{codomain}; we write $f : x \to y$ to say $f$ is a morphism with domain $x$ and codomain $y$;
+		\item A function $1_{\bullet} : \Obj(\mathcal{C} )  \to \Mor(\mathcal{C} )$ called \emph{identity};
+		\item For any two morphisms $f : x \to y$ and $g : y \to z$, a morphism $g\circ f : x \to z$ called the \emph{composite} of $f$ and $g$;
+	\end{itemize}
+	which satifies the following axioms:
+	\begin{enumerate}
+		\item For all objects $x$, the identity morphism has $1_x : x \to x$;
+		\item Composition is associative;
+		\item The identity morphism $1_x$ is a unit for composition, meaning $1_x\circ f=f$ and $g\circ 1_x=g$, provided domains and codomains are defined as required.
+	\end{enumerate}
 \end{definition}
 
-A more succinct way of expressing the homotopical information of a topological space $X$ is via its fundamental $n$-groupoids. Recall that a groupoid is a category in which all morphisms are invertible. Define $\Pi _1(X)$ to be the category where objects are given by points in $X$, and morphisms are given by homotopy classes of paths between these points.
+\begin{intuition}\label{2.2}
+	In regards to our previous discussion, we may interpret the category axioms as follows. Objects are simply a more abstract version of sets, and morphisms are a more abstract version of functions. Morphisms can be composed just like functions, and they have domain and codomain just like functions, and the other axioms guarentee they are similarly well-behaved. However, morphisms don't \emph{need} to be functions, they just need to be mathematical structures for which we can define a domain, codomain, identities, and composition in a coherent way.
+\end{intuition}
 
-The reason we cannot consider the paths themselves to be the morphisms is since path concatenation is \emph{not associative}, but since it is assocaitive up to homotopy, we get a category structure by considering homotopy classes of paths. However, we \emph{want} to be able to consider the paths themselves, that way we get access to more information. For this to be possible, we have to work in a \emph{weak 2-category}, which is a type of 2-category, meaning we not only have objects and (1-)morphisms, but we have \emph{2-morphisms}, which are morphisms between our 1-morphisms. The relevance is that in a weak 2-category, compositions need not be well-defined (and to this end, need not be associative), but rather they only need to be well-defined up to 2-isomorphism.
+Note that we have basically no axioms describing the role of objects in categories, and the emphasis is on \emph{morphisms}. In this way, category theory represents a philosophy shift in mathematics: rather than studying the actual objects themselves (groups, rings, etc.), we instead study their \emph{morphisms}. If we choose the morphisms to carry interesting information about the objects, then studying morphisms allows us to study objects at the sane time. Morphisms are the most important notion in category theory.
 
-The way this is relevant to our example is we can construct a 2-groupoid $\Pi _2(X)$, where 1-morphisms are paths, and 2-morphisms are homotopies. Since concatenation of paths is well-defined up to homotopy, and homotopies always admit inverses, this gives us our desired structure. \emph{However}, this new structure gives us a new issue: just like concatenation of paths, composition of homotopies is \emph{not associative}. It is only associative up to homotopy, often called a higher homotopy. We thus cannot consider actual homotopies as our 2-morphisms, but must instead consider homotopy \emph{classes} as our 2-morphisms. In attempting to run way from our original problem, we have encountered it again, just in a new form.
+To this end, since category theory is the study of \emph{categories} and morphisms are how we study objects in category theory, one might ask if there is a notion of morphisms between categories. Indeed, there is, and we call it a functor.
 
-Attempting to add higher homotopies will clearly yield the same issue. The fundamental $n$-groupoid $\Pi _n(X)$ has objects given by $X$, 1-morphisms given by paths, $k$-morphisms given by homotopies of $(k-1)$-morphisms for $1<k<n$, and $n$-morphisms given by homotopy classes of homotopies of $(n-1)$-morphisms. We always run into the issue that the highest level has to be homotopy \emph{classes}, rather than just homotopies. It would be really nice if we could take some sort of limit as $n\to \infty $, obtaining the \emph{fundamental $\infty $-groupoid} $\Pi _\infty (X)$, which has $n$-morphisms for \emph{all} $n\in\mathbb{N} $. Indeed, this is possible, and it is the goal of this talk to illustrate the construction of not just $\infty $-groupoids, but $(\infty ,1)$-categories, using the theory of quasi-categories.
+\begin{definition}\label{2.3}
+	Let $\mathcal{C} ,\mathcal{D} $ be categories. A \emph{functor} $F : \mathcal{C}  \to \mathcal{D} $ consists of two functions:
+	\begin{itemize}
+		\item an object function $\Obj(\mathcal{C} ) \to \Obj(\mathcal{D} ) $, which we write as $F$;
+		\item and a morphism function $\Mor(\mathcal{C} )\to \Mor(\mathcal{D} )$, which we also write as $F$;
+	\end{itemize}
+	such that domain, codomain, identity, and composition are all preserved. More explicitly,
+	\begin{enumerate}
+		\item for any $f : x \to y$ in $\mathcal{C} $, we have $F(f): F(x) \to F(y)$ in $\mathcal{D} $;
+		\item for any $x\in \mathcal{C} $, we have $F(1_x)=1_{F(x)} $;
+		\item for any composable pair $(g,f)$ in $\mathcal{C} $, we have $F(g\circ f)=F(g)\circ F(f)$.
+	\end{enumerate}
+\end{definition}
 
-Before we continue, some remarks on what to expect from this talk. Constructing categories which have $n$-morphisms for all $n$ is extremely difficult, and is simplified greatly by instead constructing $(\infty ,n)$-categories, which have all $k$-morphisms, but for $k>n$, these morphisms are invertible. Categories of this form, especially $(\infty ,1)$-categories, are extremely important in modern homotopy theory, and for this reason the term ``$\infty $-category'' has come to mean the same thing as ``$(\infty ,1)$-category''. A category without the invertibility restriction is usually called an $\omega $-category, since $\omega $ is the first infinite ordinal.
+Functors preserve nearly all the information between categories, so they are a very natural choice of morphism between categories. They can be composed in the obvious way: composing the object and morphism functions using normal function composition indeed yields another functor. The identity functions on $\Obj(\mathcal{C} ) $ and $\Mor(\mathcal{C} )$ assemble into an identity functor, and all the category axioms are satisfied. We thus want to consider a sort of ``category of categories''. Unfortunately, due to foundational set-theoretic issues, we can only consider a category of \emph{small} categories, which we denote by $\Cat $. For our purposes, the word ``small'' can be treated as a technicality. Nothing in this paper will rely on the small hypothesis; thus anything that is stated for the category $\Cat $ will hold in general for arbitrary categories.
 
-There are a few different constructions of $\infty $-categories. We will use the theory of \emph{quasi-categories}, which were originally introduced by Boardman and Vogt in \cite{bv}, and were later pioneered by Andr\'e Joyal in \cite{joyal1,joyal2}, and Lurie in \cite{htt}.
+However, we will rarely deal with the category $\Cat $ in this paper, and we introduce it for a different reason altogether. Functors are a fairly canonical choice of morphism between categories, but there is also a notion of \emph{morphisms between functors}.
+
+\begin{definition}\label{2.4}
+	Let $F,G : \mathcal{C}  \to \mathcal{D} $ be functors. A \emph{natural transformation} $\alpha : F \Rightarrow G$ is a collection of morphisms $\alpha _x : F(x) \to G(x)$ for all $x\in \mathcal{C} $, such that for any morphism $f : x \to y$ in $\mathcal{C} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(x)\ar[" \alpha _x ", r] \ar[" F(f) "', d]  & G(x)\ar[" G(f) ", d]  \\
+	F(y)\ar[" \alpha _y "', r]  & G(y)
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+For those who have not seen diagrams before, a diagram is said to \emph{commute} when any path between two objects is the same. For example, in the above diagram (often called the \emph{naturality condition}), there are two paths from $F(x)$ to $G(y)$:
+\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+F(x)\ar[" \alpha _x ", r]  & G(x)\ar[" G(f) ", r]  & G(y), \\
+F(x)\ar[" F(f) "', r]  & F(y)\ar[" \alpha _y "', r]  & G(y).
+\end{tikzcd}\]
+The commutativity condition says these are equal, meaning
+\[
+	\alpha _y \circ F(f)=G(f)\circ \alpha _x
+.\]
+
+
+It is difficult to explain why \cref{2.4} is a good definition of morphisms between functors, and we have yet to find a source that explains why to a satisfactory degree. We ask the reader to simply trust that as they work with natural tranformations, this understanding will slowly make itself clear.
+
+To summarize the situation, we have
+\begin{itemize}
+	\item categories (objects),
+	\item functors (morphisms of objects),
+	\item and \emph{natural transformations} (morphisms of functors).
+\end{itemize}
+In a sense, we have ``two levels'' of morphisms: a first level (functors) between our objects, and a second level (natural transformations) between our first level of morphisms. We call our first level of morphisms \emph{1-morphisms} and our second level \emph{2-morphisms}. A category with two levels of morphisms is called an \emph{2-category}.
+
+\begin{definition}\label{2.5}
+	A (strict) 2-category $\mathcal{C} $ is a class of objects $\Obj(\mathcal{C} ) $, a class of 1-morphisms $1\text{-} \Mor(\mathcal{C} )$ between objects, and a class of 2-morphisms $2\text{-} \Mor(\mathcal{C} )$ between 1-morphisms, satisfying analogues of the axioms of \cref{2.1}.
+\end{definition}
+
+We don't make precise the definition of a 2-category because it is \emph{extremely long}. One has to spell out all of the regular category axioms, but then has to write them all out again for the 2-morphisms. Additionally, there are \emph{two ways to compose 2-morphisms}, which adds even more axioms. We will not need to understand the two different compositions, so we recommend the reader see \cite{ml} or \cite{context} for an explanation. For now, we simply ask that the reader understand that the definition is quite lengthy and complex.
+
+A natural question to ask next is whether there is a notion of a 3-category, which has 3-morphisms between 2-morphisms. Indeed such a notion exists, but it is here that we run into one of the main problems of higher category theory: \emph{strong vs weak} $n$-categories. One would expect that in a 3-category, you can compose 1-morphisms just like you could in regular 1-categories, and that this composition is associative, and all the other axioms are satisfied. However, this is \emph{not the type of 3-category we see in practice}. Such a 3-category is called an \emph{strong} 3-category. However, in practice we see \emph{weak} 3-categories, which are (roughly) defined as follows:
+
+A weak 3-category has 3 levels of morphisms, where all the strict equalities one would expect for strong 3-categories are replaced with \emph{higher isomorphisms}. To illustrate what we mean, we take the example of 1-morphisms. If we have a composable triple $(h,g,f)$, then composition is \emph{not} associative in general, meaning $(hg)f\neq h(gf)$ in general. However, there is a specified 2-isomorphism $\alpha $ called the \emph{associator} such that $\alpha : (hg)f \cong h(gf)$. By replacing the strict equality condition with a higher isomorphism, we have weakkened the requirements of a 3-category.
+
+We did not have to bother with strong vs weak 2-categories since the theories turn out to actually be equivalent, but this is not the case for 3-categories, nor is it the case for $n$-categories with $n>2$. This becomes an issue because the definition of $n$-categories starts becoming extremely complex to write out fully when $n=3$, and by $n=4$ it is considered ``impossible to work with''. The way to circumvent this is to employ a different definition, the most simple of which comes from \emph{enriched category theory}. Instead of having a collection of morphisms, we will define a $n$-category as follows:
+\begin{itemize}
+	\item $\mathcal{C} $ has a collection $\Obj(\mathcal{C} ) $ of objects;
+	\item for any $x,y\in \mathcal{C} $, there is a $(n-1)$-category $\mathcal{C} (x,y)$ called a \emph{hom-category};
+	\item we then interpret 1-morphisms $x\to y$ as objects in $\mathcal{C} (x,y)$, 2-morphisms are 1-morphisms in $\mathcal{C} (x,y)$, and so on;
+	\item composition is given by functors of $(n-1)$-categories between the hom-categories.
+\end{itemize}
+This definition is more simple than it seems, but it gives the \emph{wrong} type of $n$-category. This definition gives us \emph{strong} $n$-categories, which simply do not occur in nature.
+
+There are a few other definitions of $n$-categories, but we will explore what is arguably the most useful one. To make this definition, mathematicians employ 4 tricks:
+\begin{enumerate}
+	\item We ignore $n$-categories, and pass directly to weak $\infty $-categories. These are categories with $n$-morphisms for all $n$, meaning there is no higher level. We usually call these $\omega $-categories, for reasons that we will discuss later.
+	\item We may also consider what are called $(n,r)$-categories. These are regular weak $n$-categories, with the following condition: whenever $k>r$, all $k$-morphisms are invertible.
+	\item However, both $\omega $-categories and $(n,r)$-categories are very difficult to define for obvious reasons, so our third trick is to merge (1) and (2) and consider $(\infty ,n)$-categories. These are $\omega $-categories where all morphisms above the $n$th level are invertible. A weak $n$-category can be viewed as an $(\infty ,n)$-category by taking all the morphisms above $n$ to simply be the identity morphism, which doesn't really add any extra information. However, if we can't even define $n$-categories, how can we possibly hope to define $\omega $-categories, even if we have this extra invertibility condition? The solution is trick 4:
+	\item We don't define these objects at all. Rather, we use a \emph{model}. A model is a \emph{different} mathematical object that we can view in a specific way that makes it \emph{behave} in the way we \emph{expect} an $(\infty ,n)$-category to be.
+\end{enumerate}
+
+An example of (4) is as follows. An $(\infty ,0)$-category can be thought of as a topological space, by thinking of
+\begin{itemize}
+	\item points as objects,
+	\item paths as 1-morphisms,
+	\item homotopies of paths as 2-morphisms,
+	\item homotopies of homotopies as 3-morphisms,
+\end{itemize}
+and so on, with the usual identities and composition. Combined with a \emph{straightening} procedure, this structure can indeed model $(\infty ,0)$-categories, which we call $\infty $-groupoids.
+
+In this talk, we will disucss a model for $(\infty ,1)$-categories. $(\infty ,1)$-categories are \emph{extremely} important, since they are the natural structure to encode a homotopy theory into. Given a category $\mathcal{C} $ with a model structure, we imagine taking the objects and 1-morphisms to be precisely those of $\mathcal{C} $, and the 2-morphisms and higher are the \emph{homotopies}, where we temporarily ignore fibrant-cofibrant technicalities. Due to their importance, we usually reserve the term ``$\infty $-category'' to mean $(\infty ,1)$-category, and we refer to $(\infty ,\infty )$-categories by \emph{$\omega $-categories} due to the fact that $\omega $ is the first infinite ordinal number.
+
+In this talk, we will develop some of the theory of simplicial sets, which is required to define quasi-categories, our model of choice for $\infty $-categories. Quasi-categories are one of the most powerful models for $\infty $-categories, and have been widely used throughout the literature throughout the past decade or two. We will then explore some of the basic theory of quasi-categories, trying to learn a little bit about what $\infty $-categories should \emph{feel like}. Unfortunately, we won't have enough time to construct all the machinery required to show everything I would like to. However, we will be able to define and describe the following:
+\begin{enumerate}
+	\item A class of objects, 1-morphisms, identities, domain, and codomain;
+	\item 2-morphisms (called homotopies), 2-identities, 2-domain, 2-codomain;
+	\item An (informal) schema for describing $n$-morphisms, and identities at every level. We leave the levels $n\geq 2$ informal because, as we explained earlier, explicit definitions at this level are difficult to write down to the point of being unuseable;
+	\item Composition of 1-morphisms, which is \emph{well-defined and associative up to 2-morphism}. $\infty $-categories relax the conditions of weak categories even further: rather than explicitly stating 2-isomorphisms for every 1-morphism rule, and so on up the latter, we simplify the discussion by saying that even \emph{composition} of 1-morhisms isn't well-defined, meaning two morphisms may have many composites. However, all composites are \emph{homotopic} to each other, meaning there is a 2-(iso)morphism between them;
+	\item A homotopy category. We said $\infty $-categories model homotopy theories, and given a suitable homotopy theory on a category $\mathcal{C} $, we can always quotient by the homotopy relation, obtaining a homotopy category $\Ho \mathcal{C} $. We should be able to do the same for any $\infty $-category $\mathcal{C} $, which we will denote by $\hh \mathcal{C} $;
+	\item $\infty $-functors between $\infty $-categories;
+	\item A way to view 1-categories as $\infty $-categories. Intuitively this corresponds to taking all higher homotopies to be trivial.
+\end{enumerate}

@@ -1,0 +1,77 @@
+\lecture{3}{Tue 09 Sep 2025 12:29}{Locally inertial coordinates}
+
+We will now begin discussing tensors. We begin with the metric tensor $g_{\mu \nu } $. Recall that components of the dual vector transform by
+\[
+	\omega _\mu \to \omega '_\mu =\frac{\partial x^\alpha }{\partial (x')^\mu } \omega _\alpha 
+.\]
+The metric tensor transforms the same way in 2 indices, meaning
+\[
+	g_{\mu \nu } \to g'_{\mu \nu } =\frac{\partial x^\alpha }{\partial (x')^\mu } \frac{\partial x^\beta }{\partial (x')^\nu } g_{\alpha \beta } 
+.\]
+This implies there is some basis independent quantity $g$, and the components $g_{\mu \nu } $ are a choice in a basis, meaning
+\[
+	g=g_{\mu \nu } \mathrm{d}  x^\mu \mathrm{d}  x^\nu =g'_{\mu \nu } \mathrm{d} (x')^\mu \mathrm{d} (x')^\nu 
+.\]
+This means the metric's components are not invariant under coordinate change. This is useful: let $M$ be spacetime, and choose a point $x^\mu _p$ in $M$. WLOG, there exist coordinates such that $g_{\mu \nu } (x^\mu_p)=\eta_{\mu \nu } $ and such that the partials are 0:
+\[
+	\partial_p g_{\mu \nu } (x^\mu _p)=0
+,\]
+where we have introduced the very convenient notation
+\[
+	\partial _\mu =\frac{\partial }{\partial x^\mu } 
+.\]
+We call such coordinates \emph{locally inertial coordinates}.
+
+Let $x^\alpha$ and $(x')^\mu $ be coordinate systems. Fix $x^\mu _p$ a point, and compute the Taylor expansion $(x')^\mu $ about $x_p^\mu $:
+\[
+	(x')^\mu (x)=(x')^\mu (x_p)+(x-x_p)^\alpha (\partial_\alpha (x')^\mu (x_p))+\frac{1}{2} (x-x_p)^\alpha (x-x_p)^\beta (\partial _\alpha \partial _\beta (x')^\mu _p)+\cdots
+.\]
+
+The first few terms give us the fact that $g_{\mu \nu } $ has $\frac{d(d+1)}{2} $ parameters, but we may choose $d^2 $ total free parameters. Thus, we may choose $g_{\mu \nu } =\eta _{\mu \nu } $ and still have $\frac{d(d-1)}{2} $ free parameters left over. Physically, these free parameters that leave the Minkowski metric invariant are the Lorentz transformations: velocity boosts and rotations. We think of these Lorentz transformations as ``generating'' elements: a rotation in $\mathbb{R} ^2$ for example should be a ``generating element'' (interpreted as an infintesimal) for $\operatorname{SO} (2)$.
+
+We will almost always assume locally inertial coordinates. We will choose a point $p$, and assume WLOG that the first derivatives vanish at that point and the metric at that point is Minkowski. This is useful because we know the laws of physics in Minkowski space.
+
+\chapter{Tensors}
+
+We will now introduce tensors in a differential geometric context. We have already seen one: $g=g_{\mu \nu } \mathrm{d}x^\mu \otimes \mathrm{d}x^\nu $. Earlier, we didn't write the tensor product, but now we do. This is an element of the tensor square of the dual space $(T_pM^\vee )^{\otimes 2} $. Similarly, $g^{-1} =g^{\mu \nu } \partial _\mu \otimes \partial _\nu $ is an element of the tensor product of the tangent space. We may also write $1=\delta _\mu ^\nu \partial _\mu \otimes \mathrm{d} x^\nu $. These are called $(0,2)$-, $(2,0)$-, and $(1,1)$-tensors, respectively. We will never again write the tensor product and will leave it implicit.
+
+Of course, we may generalize this to $(r,s)$-tensors which are given as
+\[
+	T=T^{\mu _1 \ldots \mu _r}_{\nu _1 \ldots \nu _s}  \partial_{\mu _1} \cdots \partial _{\mu _2} \mathrm{d} x^{\nu _1} \cdots \mathrm{d} x^{\nu _s} 
+.\]
+These of course may be interpreted as functions on the relevant space. Matrices may be viewed as bilinear via the identification $M(v_1,v_2)\coloneqq M_{ij} v_1^iv_2^j$. $(r,s)$-tensors generalize this in the sense that they are $(r,s)$-linear functions: they are $r$-multilinear in vectors and $s$-multilinear in dual vectors by acting on vectors in precisely the same way. We can always use the metric to raise and lower indices, meaning we can obtain a $(0,r+s)$-tensor (or likewise in the tangent space tensor power) by lowering indices on an $(r,s)$-tensor:
+\[
+	T_{\mu _1 \ldots \mu _r \nu _1 \ldots \nu _s} =g_{\mu _1\alpha  _1} \ldots g_{\mu _r \alpha _r} T^{\alpha _1 \ldots \alpha _r} _{\nu _1\ldots \nu _r} 
+.\]
+
+We may also be interested in making a tensor $T$ into a symmetric tensor, wherein $T_{ij} =T_{ji} $ (without writing extra indices), or antisymmetrizing it by $T_{ij} =-T_{ji} $. We can do this with matrices: given $M_{ij} $ a matrix,
+\[
+	\frac{M_{ij} +M_{ji} }{2} 
+\]
+is symmetric, and subtracting gives an antisymmetric matrix. We do a similar process with matrices: given $\sigma $ any permutation on $\left\{ 1, \ldots ,n \right\} $, we write
+\[
+	T_{(\mu _1\ldots \mu _n)} \coloneqq \frac{1}{n!} \sum_{\sigma } T_{\sigma } 
+.\]
+We only symmetrize on things in the parenthases, meaning
+\[
+	T_{(\mu \nu )\rho } =\frac{1}{2} \left( T_{\mu \nu \rho } +T_{\nu \mu \rho }  \right) 
+\]
+only symmetrizes $\mu ,\nu $. Similarly, $T_{(\mu |\nu |\rho )} $ means we symmetrize $\mu$ and $\rho $; the line is a ``break''. Notation for antisymmetrizing is given by brackets
+\[
+	T_{[\mu \nu ]} =\frac{1}{2} (T_{\mu \nu } -T_{\nu \mu } )
+.\]
+
+These are important due to their relation to Lorentz invariance. For example, we apply this to Maxwell's equations. We write these componentwise as
+\[
+	\varepsilon ^{ijk} \partial _j B_k-\partial _0E^i=J_E^i,
+\]
+\[
+	\partial _iE^i-J^0_E,
+\]
+\[
+	\varepsilon ^{ijk} \partial _jE_k+\partial _0B^i=J^i_M.
+\]
+\[
+	\partial _iB^i=-J_m^0
+.\]
+

@@ -1,0 +1,63 @@
+\section{Abelian categories}
+
+We are now prepared to begin defining \emph{abelian categories}. We already know of one requirement they must satisfy: an abelian category must be an additive category. This section will look for other properties they should satisfy in order for us to have a good theory of homological algebra.
+
+The first requirement we must make is the existence of kernels. Kernels are usually constructed as \emph{subsets} of $R$-modules or groups, so to generalize their definition to arbitrary categories, we must explore different characterizations of kernels. The most natural characterization is by way of a universal property.
+
+To see how kernels arise by a universal property, let $\varphi : M \to N$ be $R$-linear. Then the kernel $\Ker \varphi $ is a \emph{submodule} of $M$. This means that there is an inclusion map $i:\Ker \varphi \hookrightarrow M$ which is also $R$-linear. This inclusion map satsifies an interesting property. Every $m\in \Ker \varphi $ gets mapped to 0 by $\varphi $ by the definition of a kernel, meaning $\varphi \circ i=0$, since the inclusion simply restricts $\varphi $ to the kernel. Additionally, the kernel is \emph{universal} with respect to this property, meaning for any $\psi : P \to M$ such that $\varphi \circ \psi =0$, the map $\psi $ factors uniquely through the kernel of $\varphi $. Alternatively, given any diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+P \ar[" \psi  ", r] \ar[" 0 ", bend left, rr] \ar[dashed, dr]  & M \ar[" \varphi  ", r]  & N \\
+ & \Ker \varphi \ar[" i "', u]  & 
+\end{tikzcd}\]
+there is a unique dashed arrow as indicated, rendering the diagram commutative.
+
+Since zero morphisms exist in $\Ab $-categories, we have an immediate generalization of the notion of kernel to $\Ab $-categories.
+
+\begin{definition}\label{4.1}
+	Let $\mathcal{C} $ be an $\Ab $-category, and $\varphi : x \to y$ a morphism in $\mathcal{C} $. A kernel $\Ker \varphi $, if it exists, is an object  of $\mathcal{C} $, together with a morphism $\ker \varphi : \Ker \varphi  \to x$, such that for any diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	z \ar[r] \ar[" 0 ", bend left, rr] \ar[dashed, dr]  & x \ar[" \varphi  ", r]  & y \\
+	 & \Ker \varphi \ar[" \ker \varphi  "', u]  & 
+	\end{tikzcd}\]
+	there is a unique dashed arrow as indicated, rendering the diagram commutative.
+\end{definition}
+
+Note the interesting shift in notation. The morphism $\Ker \varphi \to x$ is now denoted by $\ker \varphi $. Since most of the structure in arbitrary categories is carried by the morphisms, when working outside of $\Mod_R$, it usually makes sense to refer to the \emph{inclusion morphism} as the kernel of $\varphi $, hence our notation. We use the capital K in $\Ker \varphi $ to denote the object, and the lowercase k in $\ker \varphi $ to denote the morphism.
+
+\begin{remark}\label{4.2}
+Kernels also have a dual, called the \emph{cokernel}. Given some $\varphi : x \to y$ in an $\Ab$-category $\mathcal{C} $, a \emph{cokernel} $\Coker \varphi $ of $\varphi $ is an object, together with a morphism $\coker \varphi : y \to \Coker\varphi $ with $\coker \varphi \circ \varphi =0$, such that for any diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & \Coker \varphi \ar[dashed, dr]  &  \\
+x \ar[" \varphi  "', r] \ar[" 0 "', bend right, rr]  & y \ar[r] \ar[" \coker \varphi  ", u]  & z
+\end{tikzcd}\]
+there is a unique dashed arrow as indicated, rendering the diagram commutative.
+\end{remark}
+
+
+We will also need a good notion of an \emph{image} object $\Im \varphi $ for any morphism $\varphi : x \to y$ in an additive category, and we will also need a way to construct the \emph{quotient} of the image and the kernel, such that we can obtain homology. Let's begin by considering quotients.
+
+Let $\varphi : M \to N$ be $R$-linear. The cokernel $\Coker \varphi $ can be constructed as the quotient module
+\[
+	\Coker\varphi \cong \frac{N}{\Im \varphi } 
+.\]
+This follows since this object is initial with respect to mapping $\Im \varphi $ to 0. Note that since this is constructed as a quotient module, we might want to think of cokernels as quotients, giving us an abstraction of cokernels. Since $\Im d_n \subseteq \Ker d_{n-1} $ in a chain complex $C_{\bullet} $, we can thus view the homology $H_n(C_{\bullet} )$ as the cokernel of $d_n$, viewed as a map $C_{n} \to \Ker d_{n-1} $, rather than a map $C_n\to C_{n-1} $.
+
+This gives a purely diagram-theoretic construction of homology. Let $C_{\bullet} $ be a chain complex, and since $d_{n-1} d_n=0$, the map $d_n$ factors through the kernel as indicated by the left triangle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+C_n \ar[" d_n ", r] \ar[" d_n' "', dashed, dr]  & C_{n-1} \ar[" d_{n-1}  ", r]  & C_{n-2}  \\
+ & \Ker d_{n-1} \ar[" \ker d_{n-1}  "', u] \ar[" \coker d_n'  "', r]  & \Coker d_n' \ar[dashed, u] 
+\end{tikzcd}\]
+By commutativity of the left triangle, $d_{n-1} \circ \ker d_n \circ d'_n=0$, and thus the second two maps factor through the cokernel. By our knowledge of kernels in $\Mod_R$, we know that $\Im d_n'=\Im d_n$, when viewed as submodules of $C_{n-1} $. Thus, if we demand that kernels and cokernels exist, we are guarenteed a purely categorical construction of homology by taking $H_n(C_{\bullet} ) \coloneqq \Coker d_n'$.
+
+There is one final requirement of abelian categories, which is motivated by a particular property of $\Mod_R$ that characterizes monics and epis. A monic map $M\to N$ is simply an injective map, meaning it identifies $M$ with a subspace $M \cong \Im \varphi \subseteq N$. Since all subspaces are kernels, $\Im \varphi =\Ker \psi $ for some $\psi $, meaning $M$ can be identified with the kernel of $\psi $, and thus $\varphi $ \emph{is a kernel}. Thus, monics are kernels. Conversely, epis coencide with cokernels. This property makes kernels and cokernels extremely well-behaved, and will help us develop a lot of important theory, such as a categorical definition of images and coimages. We thus demand that abelian categories have this property as well.
+
+We have now identified all the properties an abelian category must have, in order to have a well-behaved theory of homology. We summarize with
+
+\begin{definition}\label{4.3}
+	Let $\mathcal{C} $ be an $\Ab $-category. Then $\mathcal{C} $ is an \emph{abelian category} if
+	\begin{enumerate}
+		\item $\mathcal{C} $ is additive (\cref{3.4});
+		\item every morphism in $\mathcal{C} $ has a kernel and a cokernel;
+		\item every monic arrow is a kernel, and every epi arrow is a cokernel.
+	\end{enumerate}
+\end{definition}

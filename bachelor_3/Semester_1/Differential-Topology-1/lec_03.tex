@@ -1,0 +1,68 @@
+\lecture{3}{Mon 08 Sep 2025 12:22}{Smooth Manifolds}
+
+we want to define what it means for a function $f : M \to \mathbb{R} $ to be smooth (infinitely differentiable) at some $p\in M$. Since $M$ is a manifold, there is an open set $p\in U\subseteq M$ and a homeomorphism $\varphi : U \cong \widetilde{U} \subseteq \mathbb{R} ^n$, so we can consider the function $f\circ \varphi ^{-1} : \mathbb{R} ^n \to \mathbb{R} $. We can compute the partials of this function.
+
+\begin{terminology}\label{1.1.2}
+	We say $f$ is \emph{smooth} or $C^{\infty } $ at $p\in U$ if $f\circ \varphi ^{-1} $ is $C^{\infty } $ at $\hat{p} =\varphi (p)\in \widetilde{U} $.
+\end{terminology}
+
+The problem is that although $f\circ \varphi ^{-1} $ might be smooth at $\hat{p} $, but given another chart $\psi : V \to \widetilde{V} $, $f\circ \psi ^{-1} $ might not be smooth at $\psi (p)$. We need to add more structure to $M$ for this notion of smoothness to be well-defined.
+
+Note that we can restrict $\psi \circ \varphi ^{-1} $ to $\psi \circ \varphi ^{-1} : \varphi (U \cap V) \to \psi (U \cap V)$. Of course $f\circ \psi ^{-1} =f\circ \varphi ^{-1} \circ \varphi \circ \psi ^{-1} $. The issue can be rephrased: although $f\circ \varphi ^{-1} $ might be $C^{\infty } $, $\varphi \circ \psi ^{-1} $ might not be. The component $\varphi \circ \psi ^{-1} $ is the \emph{change of variables}, and we need the change of variables to be smooth. To ensure this is true, we \emph{choose} a collection of homeomorphisms that are smooth, and consider that structure on the manifold, instead of taking \emph{all} local homeomorphisms.
+
+\begin{definition}\label{1.1.3}
+	A \emph{chart} for a point $p\in M$ is an open set $p\in U\subseteq M$ and a homeomorphism $\varphi : U \cong \widetilde{U} \subseteq \mathbb{R} ^n$.
+\end{definition}
+\begin{definition}\label{1.1.4}
+	Let $U,V\subseteq M$ be open and $\varphi  : U \to \varphi (U)\subseteq \mathbb{R} ^n$, $\psi : V \to \psi (V)\subseteq \mathbb{R} ^n$ be charts. We say $\varphi $ and $\psi $ are $C^\infty $-related if $\varphi \circ \psi ^{-1} $ and $\psi \circ \varphi ^{-1} $ are both $C^{\infty } $ in the sense that all of their partials exist.
+\end{definition}
+
+\begin{definition}\label{1.1.5}
+	Let $M$ be a topological manifold. An \emph{atlas} $\mathcal{A} $ (sometimes a \emph{smooth atlas}) is a collection $\left\{ U_\alpha ,\varphi _\alpha ) \right\}_{\alpha \in A} $ of charts such that
+	\begin{enumerate}
+		\item The charts form an open cover of $M$:
+			\[
+				M=\bigcup_{\alpha \in A} U_\alpha 
+			;\]
+		\item Any pair of charts is $C^\infty $.
+	\end{enumerate}
+\end{definition}
+
+\begin{terminology}\label{1.1.6}
+	We often call each chart $U_\alpha ,\varphi _\alpha $ a \emph{coordinate system}.
+\end{terminology}
+
+We now know what it means for a map $f : M \to \mathbb{R} $ to be smooth: we just require it be smooth with respect to an atlas $\mathcal{A} $ for $M$. However, smooth manifolds has even more structure. One can choose \emph{larger} atlases.
+
+\begin{definition}\label{1.1.7}
+	Given an atlas $\mathcal{A} $ for a manifold $M$, define the \emph{maximal atlas} $\mathcal{A}'$ containing $\mathcal{A} $ to be the collection of \emph{all} charts on $M$ which are $C^\infty $-related to \emph{all} charts in $\mathcal{A} $.
+\end{definition}
+
+This condition guarentees we always have enough charts for our atlas $M$. This leads us to
+
+\begin{definition}[Smooth manifold]\label{1.1.8}
+	A \emph{smooth} $n$-manifold (also a $C^\infty $ $n$-manifold) is a pair $(M,\mathcal{A} )$ where $M$ is an $n$-manifold and $\mathcal{A} $ is a maximal atlas on $M$.
+\end{definition}
+
+\begin{example}\label{1.1.9}
+	A 0-manifold is the \emph{same} as a smooth 0-manifold and contains a countable discrete set.
+
+	Consider $1: \mathbb{R}  \to \mathbb{R} $, and consider another homeomorphism $\varphi : \mathbb{R}  \to \mathbb{R} $ given by $x\mapsto x^3$. These are both certaintly charts, and $\left\{ (\mathbb{R} ,\psi ) \right\} $ certaintly yields a smooth atlas. This is interestingly a maximal atlas??????
+
+	Consider matrices $M_{m\times n} (\mathbb{R} )\cong \mathbb{R} ^{mn} $. This is also a smooth manifold.
+\end{example}
+
+Consider the graph of a $C^\infty $ function $f : U\subseteq \mathbb{R} ^k \to \mathbb{R} ^n$. For simplicity, write $\Gamma _f$ for the graph of $f$. We claim that this is a smooth manifold of dimension $k$. The natural chart is given by composing along the natural projection $\pi : \Gamma _f \to \mathbb{R} ^k$. Collecting these gives an atlas.
+
+\begin{example}
+	An important example is the standard smooth structure on $S^n$. Recall that we have for any $0<j\leq n+1$, a homeomorphism $\varphi _j^{\pm}  : U_j^{\pm}  \to \widetilde{U}_j^{\pm} $ given by taking the upper hemisphere ($+$) or lower hemisphere $(-)$ and mapping them down to a unit disk. One rigorously defines this as the product of $1_i$ for $i\neq j$, and restricting along the relevant (open) hemisphere. Alternatively, $\varphi _j^{\pm} : (x^1, \ldots x^n) \mapsto (x^1, \ldots x^{j-1} ,x^{j+1} , \ldots x^n)$.
+
+	We claim the collection $\left\{ \varphi _j^{\pm}  \right\}_{j\in[n+1]\setminus [0]} $ is a smooth atlas. We check this in cases. Take $i<j$, assume WLOG that both are in the upper hemisphere, and consider $\varphi _i\circ \varphi _j^{-1} $. We show these are both smooth. To construct $\varphi _j^{-1} $, we need to re-insert the component making the norm of each vector 1. We thus have
+	\[
+		\varphi _i \circ \varphi _j : (x^1, \ldots ,x^{j-1} ,x^{j+1} ,\ldots ,x^n)\mapsto (x^1, \ldots ,x^{i-1} ,x^{i+1} ,\ldots , x^{j-1} , 1-\sqrt{\sum_{k=1}^{n}(x^k)^2} , x^{j+1} , \ldots ,x^n)
+	.\]
+	This is smooth since it is a product of smooth functions. Thus, $\varphi _j$ is $C^\infty $-related to $\varphi _i$.
+
+\end{example}
+
+	This argument immediately generalizes to \emph{level sets}. Given $C^\infty $ $\Phi : U\subseteq \mathbb{R} ^n \to \mathbb{R} $ with preimage $M_c \coloneqq \Phi ^{-1} (c)$ as a \emph{level set} (norm is 1) and nonzero derivatives at all $a\in M_c$, we have by the implicit function theorem that $M$ is a $C^\infty $ $(n-1)$-manifold.

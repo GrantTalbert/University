@@ -1,0 +1,29 @@
+\lecture{4}{Thu 11 Sep 2025 13:50}{Solving the Schrodinger Equation}
+
+Let $\mathcal{H} $ be a Hilbert space, and let $\ket{\psi _0}$ be some element in $\mathcal{H} $ which represents an initial state. There is then some operator mapping $\ket{\psi _0}\mapsto \ket{\psi (t)}$. We thus have an operator
+\[
+	\ket{\Psi (t)} = U(t,t_0)\ket{\Psi (t_0)}
+.\]
+We thus want to solve for the time evolution operator $U(t,t_0)$. This should satisfy some ``equation of motion'' in $\mathcal{H} $ inherited from Schr\"odinger's equation. This gives (writing $H,U$ for the operators)
+\[
+	i\hbar \frac{\partial }{\partial t} U\ket{\Psi _0} = HU\ket{\Psi _0}
+\]
+for all vectors. Since the vectoris not time dependent, we have 
+\[
+	i\hbar \left(\frac{\partial }{\partial t} U\right)\ket{\Psi _0}= HU\ket{\Psi_0}
+.\]
+Since this must be true for \emph{all} vectors, they cancel:
+\[
+	\frac{\partial U}{\partial t} =-\frac{i}{\hbar} HU
+.\]
+The operator space is only a Banach space, since it has no inner product. This gives us an equation in an operator space. We solve this equation, subject to the obvious initial condition that $U(t_0,t_0)=1$ (1 is the identity; $U$ is operator-valued). We of course intuitively think that
+\[
+	U = C\exp \left( - \frac{i}{\hbar} H \right) 
+.\]
+Let's try to rigorize this intuition. Is $U$ an observable? Well,
+\[
+	\frac{\partial U^\dagger}{\partial t} =\frac{i}{\hbar} U^\dagger H,
+\]
+since $H$ is an observable, where $U^\dagger(t_0,t_0)=1$. These equations are different in general, so $U$ is not an observable in general. We also know that $\braket{\Psi }{\Psi }=1$, so adding in $U$ gives $U^\dagger U=1$. Therefore, $U$ is unitary, and thus preserves the inner product. We claim it follows that $U(t,t_0)=U^\dagger(-t,t_0)$.
+
+Ok the stuff follows by Taylor.

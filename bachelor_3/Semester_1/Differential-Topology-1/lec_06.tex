@@ -1,0 +1,75 @@
+\lecture{6}{Mon 15 Sep 2025 12:22}{Tangent space}
+
+But how do we epress some $v\in T_pM$ in terms of th coordinates $x^i$ of a given chart $\varphi $ ($\varphi _i = x^i$)? Given the diagramm
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+U \ar[" \varphi  ", r] \ar[hook, d]  & \widetilde{U} \ar[hook, d]  \\
+M & \mathbb{R} ^n
+\end{tikzcd}\]
+the tangent space induces a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+T_p U \ar[" \varphi _* ", r] \ar[" i_* "', d]  & T_p \widetilde{U} \ar[" i_* ", d]  \\
+T_pM & T_p\mathbb{R} ^n
+\end{tikzcd}\]
+We would like to show there is an isomorphism $T_pM \cong T_p\mathbb{R} ^n$, rendering the diagram commutative.
+
+\begin{definition}\label{1.2.13}
+	Let $M$ be a space and $f : M \to \mathbb{R} ^n$ (often $\mathbb{R} $). The \emph{support} of $f$, denoted $\operatorname{supp} f$, is the closure of the set of points where $f$ is nonzero:
+	\[
+		\operatorname{supp} f = \overline{\left\{ p\in M\mid f(p)\neq 0 \right\} } 
+	.\]
+	If $\operatorname{supp} f \subseteq U$ for some open $U$, we say $f$ is \emph{supported in $U$}.
+\end{definition}
+
+
+\begin{definition}\label{1.2.14}
+	Let $M$ be a smooth manifold, and $A\subseteq M$ a closed subset contained in some open set $A\subseteq U$. A continuous function $\psi : M \to \mathbb{R} $ is a \emph{bump function} for $A$ supported in $U$ if and only if $0\leq \psi \leq 1$, and $\psi|A=1$ with $\operatorname{supp} \psi \subseteq U$.
+\end{definition}
+
+
+\begin{proposition}\label{1.2.15}
+	Let $p\in M\in \mathcal{M} \mathrm{an} $ and $v\in T_pM$. If $f,g\in C^\infty (M)$ agree on some neighborhood of $p$, then $v(f)=v(g)$. We say that $T_pM$ depends only on a neighborhood of $p$.
+\end{proposition}
+\begin{proof}
+	Let $f|U=g|U$ with $p\in U$ open in $M$. Then defining $h=f-g$, we see that $h|U=0$. Let $\operatorname{supp} h$ be some closed subset containing $U$. We claim there exists a smooth bump function for $\operatorname{supp} h$ supported on $U$. This follows by prop  2.2.5 (READ).
+
+	Let $\psi \in C^\infty (M)$ be a smooth bump function for $A=\operatorname{supp} h$ and is supported in $U$. Then $\psi h=h$ since $\psi =1$ where $h$ is nonzero. Then $v(\psi h)=0$ by product rule. ????????/
+\end{proof}
+
+\begin{proposition}\label{1.2.16}
+	Let $M$ be a smooth manifold, $U\subseteq M$ an open submanifold, $\iota : U\hookrightarrow M$ the natural inclusion, and $p\in U$. Then $\iota _* : T_pU \to T_pM$ is an isomorphism of vector spaces.
+\end{proposition}
+\begin{proof}
+	Injectivity: The key is the \emph{extension lemma}. Let $p\in V\subseteq U$ such that $\overline{V} \subseteq U$. Then jesus christ i am just going to read the book.
+\end{proof}
+
+\begin{corollary}\label{1.2.17}
+	If $M$ is a smooth $n$-manifold, then $\dim _\mathbb{R} T_pM=n$ for any $p\in M$.
+\end{corollary}
+
+This corollary gives a basis for the space. Let $\varphi : T_pM \cong T_{\hat{p} } \mathbb{R} ^n$. Since the latter has as a basis the set $\partial _\mu |_{\hat{p} } $, meaning we have a basis in $T_pM$ by
+\[
+	\varphi _*^{-1} \left( \left.\frac{\partial }{\partial x^i} \right|_{\varphi (p)}  \right) 
+.\]
+This is a lot of notation, so we simply write
+\[
+	\left.\frac{\partial }{\partial x^i} \right|_p\qquad\text{or} \qquad \partial _i|_p
+.\]
+A vector $v\in T_pM$ is then written as
+\[
+	V=V^i \partial _i|_p = V^i \varphi _*^{-1} \left( \left.\frac{\partial }{\partial x^i} \right|_{p}  \right) 
+.\]
+Note that $V^i$ are literal real numbers since they are just coefficients for the basis.
+
+Now colnsider a manifold $M$ with boundary. The definition of $T_pM$ still works. Since the space has boundary, it is locally homeomorphic to an open set in the half space $\mathbb{H} ^n$. This includes into $\mathbb{R} ^n$, and since smooth functions on the half space must extend to smooth maps on $\mathbb{R} ^n$, we still get our definition.
+
+Here's a useful special case. Let $V$ a vector space and $a\in V$. There exists a natural isomorphism of vector spaces $V\to T_aV$ given by $a\mapsto D_v|_a$ natural in both $V$ and $a$. This map is natural $1_{\mathbb{R} \text{-} \mathcal{V} \mathrm{ect} } \cong T_{(-)}(-) $.
+
+Does the tangent space functor preserve products?
+
+\begin{proposition}\label{asmd}
+	$T$ preserves products (3.14).
+\end{proposition}
+\begin{proof}
+	I think what we do is bring it into $\mathbb{R} ^n$, distribute there, and pull back.23212
+\end{proof}
+

@@ -1,0 +1,56 @@
+\section{$\Ab $-categories}
+
+The prototypical example of an abelian category is the category $\Ab $ of abelian groups, which can be thought of as $\mathbb{Z} $-modules. This is where abelian categories get their namesake. We will however use $\Mod_R$ as our foundational example throughout these notes since they are slightly more general, but for those who are unfamiliar with module theory, every single thing we discuss can be replaced by ``$k$-vector space'', where $k$ is your favorite field (eg. $\mathbb{R} ,\mathbb{C} ,\mathbb{Q} $).
+
+Let $\mathcal{C}$ be a category. Before we can even begin to define homology of chain complexes in $\mathcal{C} $, we first have to construct chain complexes in $\mathcal{C} $. We might na\"ively think think this is fairly simple. A chain complex $C_{\bullet} $ in $\Mod_R$ is simply a collection $\left\{ C_n \right\}_{n\in\mathbb{Z} } $ of $R$-modules, and $R$-linear maps $d_{n} : C_n \to C_{n-1} $ such that $d_{n-1} \circ d_n=0$. So to abstract this, we simply take the objects $C_n$ to be objects of $\mathcal{C} $, and the maps $d$ to be morphisms $d_{n-1} : C_n \to C_{n-1} $ in $\mathcal{C} $, which compose to 0.
+
+However, we have already run into an issue. What does it mean for a morphism to be ``0'' in an arbitrary category? In $\Mod_R$, the 0 map $0: M \to N$ maps each $a\in M$ to the identity $0\in N$. In arbitrary categories, we cannot argue elementwise, which means we need to find a different, yet equivalent, characterization of these maps which does not invoke elements.
+
+We begin by studying the hom-set $\Mod_R(M,N)$ of $R$-linear homomorphisms $M\to N$. A particularly useful fact is that these have the structure of an \emph{abelian group}. Given $R$-linear maps $\varphi ,\psi : M \to N$, we define $\varphi +\psi $ pointwise, meaning for any $m\in M$, we define $(\varphi +\psi )(m)=\varphi (m)+\psi (m)$. This map is indeed an $R$-linear map, since for all $m,n\in M$,
+\[
+	(\varphi +\psi )(m+n)=\varphi (m+n)+\psi (m+n)=\varphi (m)+\varphi (n)+\psi (m)+\psi (n)
+\]
+\[
+	=\varphi (m)+\psi (m)+\varphi (n)+\psi (n)=(\varphi +\psi )(m)+(\varphi +\psi )(n)
+.\]
+The first step follows by definition of $\varphi +\psi $, the second by $R$-linearity of these maps, the third by commutativity of $+$ in $R$-modules, and the fourth again by definition of $\varphi +\psi $. $R$-linearity is also simple: for any $r\in R$,
+\[
+	(\varphi +\psi )(r m)=\varphi (r m)+\psi (r m)=r \varphi (m)+r\psi (m)=r(\varphi +\psi )(m)
+.\]
+Associativity is easily show as well, and one simply defines the inverse $-\varphi $ of $\varphi $ as $x\mapsto -1\cdot \varphi (x)$, where $-1$ is the additive inverse of 1 in $R$. A more interesting fact is that the 0 map is the identity of the group:
+\[
+	(\varphi +0)(m)=\varphi (m)+0(m)=\varphi (m)+0=\varphi (m)
+.\]
+This gives us a new way to characterize the 0 morphism: it is the identity element of the abelian group $\Mod_R$.
+
+However, arbitrary categories don't necessarily have abelian group structures on their hom-sets. This means we must specialize to what are called $\Ab $\emph{-categories} or \emph{preadditive categories}.
+
+\begin{definition}\label{2.1}
+	An $\Ab $-category is a category enriched over $\Ab $. More explicitly, an $\Ab $-category $\mathcal{C} $ is a category wherein every hom-set $\mathcal{C} (x,y)$ has an abelian group structure, such that addition in hom-sets distributes over composition.
+\end{definition}
+
+Many books prefer to say that addition is \emph{bilinear} with respect to composition, instead of simply saying it distributes. Although they are indeed equivalent notions, I see no reason to use more confusing terminology than needed. This condition is required to ensure that the category behaves well with respect to this abelian group structure.
+
+\begin{remark}\label{2.2}
+	For those who know some enriched category theory, you will note that when working with $\Ab $-categories, we make use of the isomorphism $\Ab (\mathbb{Z} ,A)\cong A$ to identify the category with its underlying category. We thus say an $\Ab $-category is simply a category where morphisms can be added together, which is equivalent in this way to the usual notion of an enriched category.
+\end{remark}
+
+We may now realize the definition of a zero morphism in an arbitrary $\Ab $-category:
+
+\begin{definition}\label{2.3}
+	Let $\mathcal{C} $ be an $\Ab $-category, and $x,y\in \mathcal{C} $. The zero morphism $0: x \to y$ is the identity element of the abelian group $\mathcal{C} (x,y)$.
+\end{definition}
+
+One reason we require addition to distribute over composition in $\Ab $-categories is the following fact. In $\Mod_R$, composing by the zero morphism yields the zero morphism, meaning for any $R$-linear map $\varphi $,
+\[
+	\varphi \circ 0=0,\qquad 0\circ \varphi =0
+.\]
+This fact generalizes to $\Ab $-categories, using distributivity of addition over composition. Let $\varphi : x \to y$ in an $\Ab $-category $\mathcal{C} $. Then
+\[
+	\varphi \circ 0 = \varphi \circ (0+0)=(\varphi \circ 0)+(\varphi \circ 0)
+\]
+\[
+	\implies (\varphi \circ 0)-(\varphi \circ 0)=(\varphi \circ 0)+(\varphi \circ 0)-(\varphi \circ 0) \implies 0=\varphi \circ 0
+.\]
+
+We may now at the very least construct chain complexes in an $\Ab $-category. However, homologial algebra requires \emph{homology} (hence the name), and in fact requires even more to be able to study homology in any practical way, so we have a long way to go.

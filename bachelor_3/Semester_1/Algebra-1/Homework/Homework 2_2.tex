@@ -1,0 +1,424 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+
+
+\usepackage{titlepageBU}
+\title{Homework 2}
+\begin{document}
+\makeproblem
+
+\begin{notation}
+	$\Ab $ denotes the category of abelian groups.
+\end{notation}
+
+\setcounter{section}{4}
+\section{Problem 5}
+\begin{problem}\label{5.1}
+	Let $[m]\in\mathbb{Z} /n\mathbb{Z} $. Show $\left| [m] \right| =n/\operatorname{gcd} (m,n)$.
+\end{problem}
+\begin{proof}
+	$\left| [m] \right| $ is simply the smallest nonzero positive integer with $n|\left| [m] \right| m$ for some $m\in [m]$ (this proof is invariant under choice of $m$). Equivalently, it is the smallest nonzero positive integer such that $kn=\left| m \right| m$ for some $k\in\mathbb{Z} $. Since $\operatorname{gcd} (n,m)|n,m$, we can write $a \operatorname{gcd} (n,m)=m$ and $b \operatorname{gcd} (n,m)=n$ for some $\operatorname{gcd} (a,b)=1$. Substituting these in gives $(b \operatorname{gcd} (n,m))|(a \operatorname{gcd} (n,m)\left| [m] \right|) $. It follows that
+	\[
+		b|(a \left| [m] \right| )
+	.\]
+	Since $\operatorname{gcd} (a,b)=1$, we have that $b|\left| [m] \right| $. We also note that $b[m]=[0]$:
+	\[
+		b \operatorname{gcd} (n,m)=n \implies b=\frac{n}{\operatorname{gcd} (n,m)} \implies b[m]=\left[ \frac{nm}{\operatorname{gcd} (n,m)}  \right] 
+	.\]
+	Since $\operatorname{gcd} (n,m)$ divides $n$ and $m$, this equals
+	\[
+		\left[ n \left( \frac{m}{\operatorname{gcd} (n,m)}  \right)  \right] =[n]=[0]
+	\]
+	since it is a multiple of $n$.	Since $\left| [m] \right| $ is the smallest number satisfying this condition, and since $b|\left| [m] \right| $, we have $\left| [m] \right| =b$. By the definition of $b$, the statement is proven.
+\end{proof}
+
+\begin{problem}
+	Show that $[m]$ generates $\mathbb{Z} /n\mathbb{Z} $ if and only if $\operatorname{gcd} (m,n)=1$.
+\end{problem}
+\begin{proof}
+	Note that $[1]$ generates $\mathbb{Z} /n\mathbb{Z} $, so if $a[m]=[1]$, then clearly $[m]$ generates $\mathbb{Z} /n\mathbb{Z} $ by writing $[r]=r[1]=ra[m]$. We showed in homework 1 that there is $a\in\mathbb{Z} $ such that $a[m]=[1]$ if and only if $\operatorname{gcd} (m,n)=1$.
+
+	Alterntatively, $[m]$ generates $\mathbb{Z} /n\mathbb{Z} $ if and only if $\left| [m] \right| =\left| \mathbb{Z} /n\mathbb{Z}  \right| =n$, and by \cref{5.1}, this happens if and only if $\operatorname{gcd} (m,n)=1$.
+\end{proof}
+
+\begin{problem}
+	Show that $(\mathbb{Z} /n\mathbb{Z} )^\times $ is a group.
+\end{problem}
+\begin{proof}
+	Associativity follows immediately by associativity of multiplication in $\mathbb{Z} $ and by definition. The identity is also obvious:
+	\[
+		[m][1]=[m1]=[m]
+	.\]
+	The only nonobvious facts are inverses, closure, and whether the group operation is well-defined. We start by showing the operation is well-defined. Let $[r]=[m]$ be nonzero and coprime to $n$, and thus $n|(r-m)$. Let $p\in\mathbb{Z} \setminus n\mathbb{Z} $ be coprime to $n$. We want to show $[rp]=[mp]$; equivalently we must show $n|(rp-mp)$. This indeed follows since $rp-mp=(r-m)p$, and since $n|(r-m)$, we have $n|(r-m)p$. To show inverses exist, we want to show there is $p\in\mathbb{Z} \setminus n\mathbb{Z} $ coprime to $n$ such that $[1]=[pm]$. Equivalently,
+	\[
+		n|(pm-1)\iff (\exists k\in\mathbb{Z} \text{ s.t. } kn=pm-1) \iff 1=pm-kn
+	.\]
+	By homework 1, this happens if and only if $\operatorname{gcd} (m,n)=1$. This is true by definition for all elements $[m]\in(\mathbb{Z} /n\mathbb{Z} )^{\times } $. This equation also implies by homework 1 that $\operatorname{gcd} (p,n)=1$, and thus $[p]\in(\mathbb{Z} /n\mathbb{Z} )^{\times } $. Therefore, inverses exist.
+
+	Finally, we show closure. Let $[r],[m]\in(\mathbb{Z}/n\mathbb{Z} )^\times $, and thus $n|r,m$. It follows that $n|r m$, and thus $[r m]\in(\mathbb{Z} /n\mathbb{Z} )^\times $.
+\end{proof}
+
+
+\section{Problem 6}
+
+\begin{convention}
+	We compose permutations from right to left like normal function composition.
+\end{convention}
+
+
+\begin{problem}\label{6.1}
+	Show for $n\geq 2$, the order of a cycle in $S_n$ is its length.
+\end{problem}
+\begin{proof}
+	Let $(a_1 \ldots a_n)$ be an $n$-cycle. Note that a cycle simply maps $a_i \mapsto a_{i+1\mod{n}} $. Iterating this process, we find that mapping under $n$ iterations of $(a_1 \ldots a_n)$ gives $a_i \mapsto a_{i+n\mod{n}} $, and since $i+n\equiv i\mod{n}$, we have that $a_i\mapsto a_i$. Therefore, $(a_1 \ldots a_n)^n=( )$.
+\end{proof}
+\begin{problem}
+	Show for all $d\leq n\geq 2$, $S_n$ has at least one element of order $d$.
+\end{problem}
+\begin{proof}
+	This follows directly by \cref{6.1}. Consider the cycle $(123\ldots d)$, and note that this has order $d$ in $S_d$. There is a canonical inclusion $i:S_d\hookrightarrow S_n$, and this is an order-preserving group homomorphism. We do not need to show that itis a group homomorphism, but we do need to show it is order-preserving, which is not difficult. Let $\left| \tau  \right| =k$ in $S_d$, and since the inclusion is the identity on elements, $i(\tau )^k=\tau ^k=( )$. Thus, $(123\ldots d)$ has order $d$ in $S_n$.	
+\end{proof}
+
+\begin{problem}
+	Show any element in $S_{n} $, $n\geq 2$ can be written as a product of disjoint cycles.
+\end{problem}
+\begin{proof}
+	Let $\tau $ be a permutation in $S_n$. Since $S_n$ is finite, $\tau$ has finite order. Thus, there is some $k$ such that $\tau ^k=( )$. We may construct a cycle as follows: choose $i\in \left\{ 1, \ldots ,n \right\} $, and define
+	\[
+		\sigma _i = (\tau ^0(i), \tau ^1(i), \ldots ,\tau ^{k-1} (i))
+	.\]
+	This is a cycle since $\tau \left( \tau ^{k-1} (i) \right) =\tau ^k(i)=i$, since $\tau ^k=( )=\tau ^0$. This cycle describes the image of $\tau $ on any $\tau ^s(i)$, so choose some new $j\in \left\{ 1, \ldots ,n \right\} $ with $j\neq \tau ^s(i)$ for any $s$. If no such $j$ exists, then we are done; otherwise we construct $\sigma _j$ in the same exact way. It is easy to see that iterating this process and multiplying the cycles together gives a representation of $\tau $, provided that all of the cycles are \emph{disjoint}. If we assume this, then for all $i\in \left\{ 1, \ldots ,n \right\} $, then there is some $j$ and $s$ with $i=\tau ^s(j)$. It suffices to show they are disjoint.
+
+	Indeed, let $\sigma _i,\sigma _j$ be as constructed above. Let $\tau ^s(i)=\tau ^r(j)$ for some $s,r$. We must show $\sigma _i=\sigma _j$. Indeed, we have that $\tau ^{k-s+r} (j)=\tau ^{k-s+s} (i)=i$, and thus every term in the cycle $\sigma _i$ must be in the cycle $\sigma _j$. Conversely, $\sigma ^{s+k-r} (i)=j$, giving the same result.
+
+	Just for completion, I show $\sigma ^{j_1} \ldots \sigma ^{j_h} $, constructed in the given way, is the same as $\tau $. Given $1\leq i\leq n$, we have that precisely one $\sigma^{j_r} $ acts on $i$, and it acts by mapping $i\mapsto \tau (i)$. Since $\tau (i)$ is also only acted on by $\sigma ^{j_r} $, the action of the whole thing is $i\mapsto \tau (i)$.
+\end{proof}
+
+\begin{problem}\label{6.4}
+	Show disjoint cycles commute.
+\end{problem}
+
+\begin{proof}
+	Let $\sigma ,\tau $ be disjoint cycles. We show $\sigma \tau =\tau \sigma $ by showing the image of each $i\in \left\{ 1, \ldots ,n \right\} $ under each permutation is equal. We have three cases: when $j$ is acted on trivially by both, when it is acted on nontrivially by $\sigma $, and by $\tau $.
+
+	\begin{enumerate}
+		\item If $j$ is acted on trivially by both, then $(\sigma \tau )(j)=j$ and $(\tau \sigma )(j)=j$.
+		\item If $j$ is acted on nontrivially by $\sigma $, then $(\sigma \tau )(j)=\sigma (j)$. Note that since $\sigma $ and $\tau $ are disjoint, $\tau $ acts trivially on $\sigma (j)$. Thus, $(\tau \sigma )(j)=\sigma (j)$.
+		\item If $j$ is acted on nontrivially by $\tau $, then the logic is the same as (2).
+	\end{enumerate}
+	Therefore, $\sigma \tau =\tau \sigma $.
+\end{proof}
+
+\begin{problem}
+	Let $\sigma \in S_{n\geq 2} $ be a product of disjoint cycles $\sigma =C_1 \ldots C_k$. Then $\left| \sigma  \right| =\operatorname{lcm}_i \left| C_i \right| $.
+\end{problem}
+\begin{proof}
+	By \cref{6.4}, the cycles $C_i$ all commute with each other, and thus the order $m=\left| \sigma  \right| $ must satisfy
+	\[
+		\sigma ^k = \left( C_1 \ldots C_k \right)^m = C_1^m \ldots C_k^m = ( )
+	.\]
+	Since the $C_i$s are all disjoint, it's very easily shown that their powers $C_i^m$ are disjoint. To show this, let $C_i = (i_1, \ldots ,i_s)$, and we have
+	\[
+		C_i^\ell =(i_{1 + \ell \mod{s} }, \ldots , i_{s + \ell \mod{s}} )
+	.\]
+	Clearly any entry in the cycle $C_i^\ell $ is also in the cycle $C_i$, and thus the cycles remain disjoint. The order $m$ is them simply the smallest number which is divided by each order $\left| C_i \right| $. This is, by definition, the least common multiple $\operatorname{lcm}_i \left| C_i \right| $.
+\end{proof}
+
+
+\section{Problem 7}
+\begin{problem}\label{3.1}
+	Let $\varphi : G \to H$ be a group homomorphism. Show $\varphi (e_G)=e_H$.
+\end{problem}
+\begin{proof}
+	Let $h\in \im \varphi \subseteq H$, which exists since $\varnothing $ is not a group and thus $\varphi $ cannot be empty. Choose $g\in G$ such that $\varphi (g)=h$. Note that
+	\[
+		h\varphi (e_G)=\varphi (g)\varphi (e_G)=\varphi (ge_G)=\varphi (g)=h
+	.\]
+	It follows that
+	\[
+		h\varphi (e_G)=h=he_H \implies h^{-1} h\varphi (e_G)=h^{-1} he_H \implies \varphi (e_G)=e_H
+	.\]
+\end{proof}
+\begin{problem}\label{3.2}
+	Let $\varphi : G \to H$ be a group homomorphism, $g\in G$, and $k\in\mathbb{Z} $. Show $\varphi (g^k)=\varphi (g)^k$.
+\end{problem}
+\begin{proof}
+	By \cref{3.1} and the definition $g^0=e_G$,
+	\[
+		\varphi (g^0)=\varphi (e_G)=e_H=\varphi (g)^0
+	.\]
+	Let $k\in\mathbb{Z} ^+$. Then note that
+	\[
+		\varphi (g^2)=\varphi (gg)=\varphi (g)\varphi (g)=\varphi (g)^2
+	.\]
+	Inducting on this gives the statement for positive $k$. For $-k$, note that
+	\[
+		g^{-k} =\left( g^{-1}  \right) ^k
+	\]
+	by definition, and thus it suffices to show $\varphi (g^{-1} )=\varphi (g)^{-1} $, and higher negative exponents follow by the positive case. Note that by \cref{3.1},
+	\[
+		\varphi (g^{-1} )\varphi (g)=\varphi (g^{-1} g)=\varphi (e_G)=e_H,
+	\]
+	\[
+		\varphi (g)\varphi (g^{-1} )=\varphi (gg^{-1} )=\varphi (e_G)=e_H
+	,\]
+	and since inverses are unique, $\varphi (g^{-1} )=\varphi (g)^{-1} $.
+\end{proof}
+
+\begin{problem}\label{3.3}
+	Let $\varphi : G \to H$ be a group homomorphism, and $g\in G$ with finite order. Show $\left| \varphi (g) \right| | \left| g \right| $.
+\end{problem}
+\begin{proof}
+Let $\left| g \right| =n$. Then $g^n=e$ by definition, and thus by \cref{3.1} and \cref{3.2},
+	\[
+		e_H=\varphi (e_G)=\varphi (g^n)=\varphi (g)^n
+	.\]
+	It suffices at this point to show $g^n = e$ if and only if $\left| g \right| |n$. If we can show this, then $\left| \varphi (g) \right| |(n=\left| g \right| )$.
+
+	To show this, note that if $\left| g \right| |n$, then there is some $m\in\mathbb{Z} $ such that $n=m\left| g \right| $, and thus
+	\[
+		g^{m\left| g \right| } =\left( g^{\left| g \right| }  \right) ^m = e^m=e
+	.\]
+	Convsersely, if $g^n=e$, then write $n=m \left| g \right| + b$ with $0\leq b<\left| g \right| $. We want to show $b=0$. We have
+	\[
+		e = g^n=g^{m\left| g \right| +b} =g^{m \left| g \right| } g^b = \left( g^{\left| g \right| }  \right) ^m g^b = e^m g^b=g^b
+	.\]
+	We must thus have $g^b=e$. However, $\left| g \right| $ is the smallest positive number such that $g^{\left| g \right| } =e$, and $b<\left| g \right| $. We thus have $b=0$ necessarily.
+\end{proof}
+
+\begin{problem}
+	Let $\varphi : G \to H$ be a group homomorphism with $G$ having finite order. Show $\left| \varphi (g) \right| |\left| G \right| $ for all $g\in G$.
+\end{problem}
+\begin{proof}
+	Applying Lagrange's theorem and \cref{3.3}, we have
+	\[
+		\left| \varphi (g) \right| \big|\left| g \right| \big|\left| G \right| \implies \left| \varphi (g) \right| \big| \left| G \right| 
+	.\]
+\end{proof}
+
+
+
+\section{Problem 8}
+
+\begin{problem}
+	Complete the Cayley table for the Quaternion group $\mathcal{Q} $ using only the information given in the PDF.
+\end{problem}
+\begin{proof}
+	We are given that 1 is the identity, and for each $x\in \mathcal{Q} $ there is some element $-x$. We are also given $i^2=j^2=k^2=-1$, $(-1)(x)=-x$, and $(x)(-1)=-x$. Finally, we have $(-1)^2=1$ and $ij=k$. From this information, we make a few conclusions. For $x\in \left\{ i,j,k \right\} $, we also find that
+	\[
+		(-x)^2=(-1x)^2=(-1x)(-1x)\overset{!}{=}(-1x^2)(-1)=(-1)(-1)(-1)=-1,
+	\]
+	where the equality marked by $!$ follows since $-1x=-x=x(-1)$. Now note that
+	\[
+		ij=k \implies ijk=k^2 = -1
+	.\]
+	From here we obtain
+	\[
+		-i=i^2jk = -jk \implies i=jk
+	.\]
+	We also see that by plugging in $i=jk$ to $ji$,
+	\[
+		ji=j^2k= -k
+	,\]
+	\[
+		\implies ji^2 = -j = -ki \implies j=ki
+	.\]
+	Plugging in $k=ij$, we see that
+	\[
+		kj=ij^2=-i,\qquad ik=i^2j=-j
+	.\]
+	To summarize, we have
+	\[
+		ij=k,\quad jk=i,\quad ki=j,
+	\]
+	and for any $x,y\in \left\{ i,j,k \right\} $, $xy=-yx$. Using these facts, and that $(-1)x=-x$, we may extend this result to complete the Cayley table.
+	\begin{center}
+	\begin{tabular}{c||c|c|c|c|c|c|c|c}
+		&1&$-1$&$i$&$-i$&$j$&$-j$&$k$&$-k$\\
+		\hline
+		\hline
+		1&1&$-1$&$i$&$-i$&$j$&$-j$&$k$&$-k$\\
+		\hline
+		$-1$&$-1$&1&$-i$&$i$&$-j$&$j$&$-k$&$k$\\
+		\hline
+		$i$&$i$&$-i$&$-1$&1&$k$&$-k$&$-j$&$j$\\
+		\hline
+		$-i$&$-i$&$i$&1&$-1$&$-k$&$k$&$j$&$-j$\\
+		\hline
+		$j$&$j$&$-j$&$-k$&$k$&$-1$&1&$i$&$-i$\\
+		\hline
+		$-j$&$-j$&$j$&$k$&$-k$&1&$-1$&$-i$&$i$\\
+		\hline
+		$k$&$k$&$-k$&$j$&$-j$&$-i$&$i$&$-1$&1\\
+		\hline
+		$-k$&$-k$&$k$&$-j$&$j$&$i$&$-i$&1&$-1$
+	\end{tabular}
+\end{center}
+
+The Cayley table is uniquely determined by the given information because all of the information is forced. Each choice of products of elements was determined directly by the information that was given, and no arbitrary choices were involved.
+	
+\end{proof}
+
+\begin{problem}
+	Prove the following.
+	\begin{enumerate}
+		\item In the row corresponding to $e$, every group element appears in the original order. In the column corresponding to $e$, every group element appears in the original order.
+		\item Every element appears exactly once in each row and column.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Choose an ordering\footnote{The word ``ordering'' is not really super important to the proof itself, but feels somewhat important to the formalization of a Cayley table as a mathematical object. I assume one would define $I$ as an ordinal in this case.} of elements $\left\{ g_i \right\}_{i\in I} =G$ for the rows and columns of the Cayley table of a group $G$. Write $c_{ij} $ for the $ij$th entry in the table, which is given by $c_{ij} =g_ig_j$. Take $g_i=e$ to be the identity. Then $c_{ij} =eg_j=g_j$. Similarly, $c_{ji} =g_je=g_j$. This tells us that the $j$th entry in the $i$th row (corresponding to $e$) is $g_j$, and thus the ordering of the row corresponding to $e$ is the same ordering of the $g_j$s. Similarly, the row corresponding to $e$ is the same.
+
+	(2) Each column coresponding to some fixed $g\in G$ is simply a list of elements $hg$ for each $h\in G$, and similarly rows are all elements $gh$. To show each element appears exactly once, it suffices to show left- and right-multiplication by any fixed group element $g$ is a bijection on the underlying set of the group. Since groups may be viewed as categories, it suffices to prove the result for left-multiplication,  and the corresponding result for right-multiplication follows by duality by considering the opposite category.
+
+	Let $G$ be a group and choose some $g\in G$. Since $G$ is closed under multiplication, left multiplication $T_g : h\mapsto gh$ is a function $G\to G$. Consider the function $T_{g^{-1} } : G \to G$ given by $h\mapsto g^{-1} h$. These are clearly inverses: for all $h\in G$,
+	\[
+		(T_gT_{g^{-1} } )(h)=gg^{-1} h=h,\qquad (T_{g^{-1} } T_g)(h)=g^{-1} gh=h
+	.\]
+	Therefore, $T_{g^{-1} } =T_g^{-1} $, and thus $T_g$ is a bijection.
+\end{proof}
+
+
+\begin{problem}
+	How can you tell from a Cayley table if a group is Abelian?
+\end{problem}
+\begin{proof}
+	If the group is abelian, then it will be symmetric about the main diagonal. Given an element $ab$, reflecting about the diagonal gives the element $ba$. By definition, if $ab=ba$ in general, then the group is abelian.
+\end{proof}
+
+
+\section{Problem 9}
+
+\begin{problem}
+	Let $\phi ,\varphi $ be homomorphisms $\left\langle g \right\rangle \to G$ for some group $G$. Prove that if $\varphi (g)=\phi (g)$, then $\varphi =\phi $.
+\end{problem}
+\begin{proof}
+	We can prove this using only universality of the free group on one generator $g$. Let $i : \left\{ g \right\}  \to \left\langle g \right\rangle $ be the map $g\mapsto g$, and let $j : \left\{ g \right\}  \to G$ be the map $g\mapsto \varphi (g)$. This situation gives a diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left\langle g \right\rangle \ar[dashed, r]  & G \\
+	\left\{ g \right\} \ar[" i ", u] \ar[" j "', ur]  & 
+	\end{tikzcd}\]
+	and by universality of the free group, there is a unique group homomorphism as indicated by the dashed arrow, rendering the diagram commutative. Note that the commutativity condition amounts to the dashed arrow being mapping $g\mapsto \varphi (g)$. Note that both $\varphi $ and $\phi $ map $g\mapsto \varphi (g)$ by hypothesis, and thus both group homomorphisms would suffice as the dashed arrow, making the diagram commute. However, the arrow is \emph{unique}, so necessarily we have $\varphi =\phi $.
+\end{proof}
+
+
+\section{Problem 10}
+
+\begin{problem}
+	Either find a group isomorphism $\mathbb{Z} \to \mathbb{Q} $, or prove that none exist.
+\end{problem}
+\begin{proof}
+	First, we classify maps $\mathbb{Z} \to \mathbb{Q}$. We claim maps $\varphi : \mathbb{Z}  \to G $ are in bijection with elements $g\in G$, where each element determines a map by defining $1\mapsto g$, and extending to all $n\in \mathbb{Z} $ by imposing the homomorphism condition. We show this recipe defines a bijection.
+
+	Clearly the map $\Grp (\mathbb{Z} ,G)\mapsto G$ by $\varphi \mapsto \varphi (1)$ is well-defined, so it suffices to construct an inverse. Let $g\in G$, and define $\varphi : \mathbb{Z}  \to G$ by
+	\[
+		\varphi (1)=g,\qquad \varphi (n) = \varphi (1 + \ldots + 1)=\varphi (1) + \ldots + \varphi (1) = g + \ldots + g = n\cdot g
+	.\]
+	This is manifestly a group homomorphism, and it is well-defined since each $n\in\mathbb{Z} $ admits precisely one representation as a sum of the number 1. By the closure property of groups, $n\cdot g\coloneqq g + \ldots + g \in G$, so the map as defined is valid. Write this map as $\alpha $, and write the evaluation map $\varphi \mapsto \varphi (1)$ as $\mathrm{ev}_1$. These are clearly inverses:
+	\[
+		(\alpha \circ \mathrm{ev} _1)(\varphi )(n)=\alpha (\varphi (1))(n)=\varphi (1) + \ldots + \varphi (1) = \varphi (n),
+	\]
+	\[
+		(\mathrm{ev}_1 \circ \alpha )(g)=g
+	.\]
+	
+
+	An alternative, higher level way to see this classification is as follows. Write $\mathbb{Z} [-]: \Set  \to \Ab $ for the free abelian group functor. We don't define action on morphisms of this functor since we won't need it. Write $U : \Ab  \to \Set $ for the forgetful functor. Note that $\mathbb{Z} $ is free on one element $\mathbb{Z} \cong \mathbb{Z} [*]$, and Yoneda promotes this to a natural isomorphism of representable functors. Combining this with universality of the free abelian group, there are natural isomorphisms
+	\[
+		\Ab (\mathbb{Z} ,-)\cong \Ab (\mathbb{Z} [*],-)\cong \Set (*,U(-))\cong U
+	.\]
+	The second isomorphism can be seen as either the adjunction $\mathbb{Z} [-]\dashv U$, or as the universal property of $\mathbb{Z} [-]$, viewed as an isomorphism of representable functors. This isomorphism gives for each $g\in U(G)$ a group homomorphism $\mathbb{Z} \to G$ which is determined by mapping $1\mapsto g$, and extending this to all of $\mathbb{Z} $ by writing $\varphi (m)=\varphi (1 + \ldots + 1)$, and imposing the group homomorphism condition. This is extended to \emph{all} groups (rather than just abelian groups) by noting the image of a map with abelian domain must be abelian, and thus any map $\varphi :\mathbb{Z} \to G$, for $G$ not abelian, factors as $\varphi :\mathbb{Z} \to \im \varphi  \subseteq G$, where $\im \varphi $ must be abelian.
+
+	In particular, group homomorphisms $\mathbb{Z} \to \mathbb{Q} $ are maps $1\mapsto x$ for any $x\in\mathbb{Q} $. For such a map to be an isomorphism, it must be in particular surjective. Of course the zero map $1\mapsto 0$ is not surjective, so let $\varphi : 1\mapsto x$ with $x\neq 0$, and note that if $x\in\mathbb{Q} $, then $\frac{3}{2} x\in\mathbb{Q} $. By the above classification, $p\in \im \varphi $ if and only if $p=\varphi (m)=m\varphi (1)=mx$ for some $m\in\mathbb{Z} $. Since $3/2 \notin \mathbb{Z} $, clearly $\frac{3}{2} x \notin \im \varphi $, meaning $\varphi $ is not surjective.
+\end{proof}
+
+\begin{problem}
+	Either construct a nontrivial group homomorphism $\mathbb{Z} /2\mathbb{Z} \times \mathbb{Z} /2\mathbb{Z} \to S_4$, or prove one cannot exist.
+\end{problem}
+\begin{proof}
+	For notational simplicity, we drop the $[-]$ notation for this problem, and write $0=[0]$ and $1=[1]$, with the understanding that $1+1=0$.
+
+	Let $\sigma =(12)$ and $\tau =(34)$. Map $(1,0)\mapsto (12)$ and $(0,1)\mapsto (34)$. \Cref{3.1} determines that $(0,0)\mapsto ( )$, and the homomorphism condition determines the fact that
+	\[
+		(1,1) = (1,0)+(0,1)\mapsto (12)(34)
+	.\]
+	Since all nontrivial elements of $\mathbb{Z} /2\mathbb{Z} \times \mathbb{Z} /2\mathbb{Z} $ have order 2, it suffices to show $\sigma ,\tau ,\sigma \tau $ have order 2. Of course, the transpositions have order 2:
+	\[
+		(12)(12)=( ),\qquad (34)(34)=( )
+	.\]
+	By tracing elements, we also compute
+	\[
+		(12)(34)(12)(34) : 
+		\begin{cases}
+			1 \mapsto 1 \mapsto 2 \mapsto 2 \mapsto 1,\\
+			2\mapsto 2\mapsto 1\mapsto 1\mapsto 2,\\
+			3\mapsto 4\mapsto 4\mapsto 3\mapsto 3,\\
+			4\mapsto 3\mapsto 3\mapsto 4\mapsto 4
+		\end{cases}
+	.\]
+	Thus, $(12)(34)(12)(34) = ( )$. Therefore, we have
+	\[
+		(0,0)\mapsto ( ),\qquad (1,0)+(1,0)\mapsto ( ),\qquad (0,1) + (0,1)\mapsto ( ),\qquad (1,1) + (1,1) \mapsto ( )
+	.\]
+	This gives a nontrivial group homomorphism $\mathbb{Z} /2\mathbb{Z} \times \mathbb{Z} /2\mathbb{Z} \to S_4$, since $(12),(34),(12)(34)\neq 0$.
+\end{proof}
+
+
+\begin{problem}
+	Either find a nontrivial group homomorphism $\mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} /15\mathbb{Z} $, or prove that none exist.
+\end{problem}
+\begin{proof}
+	Since $\times =\oplus $ is a coproduct in $\Ab $, and since $\mathbb{Z} ,\mathbb{Z} /15\mathbb{Z} $ are abelian groups, by universality of coproduct a morphism $\mathbb{Z} \oplus \mathbb{Z} \to \mathbb{Z} /15\mathbb{Z} $ is equivalent to a coproduct diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathbb{Z} \ar[" \varphi  ", dr] \ar[d]  &  \\
+	\mathbb{Z} \oplus \mathbb{Z} \ar[" \varphi +\psi   ", r]  & \mathbb{Z} /15\mathbb{Z}  \\
+	\mathbb{A} \ar[" \psi  "', ur] \ar[u]  & 
+	\end{tikzcd}\]
+	where $(\varphi +\psi )(n,m)=\varphi (n)+\psi (m)$. Obvious choices for the morphisms $\varphi ,\psi $ are to take both to be the quotient morphism $\pi :\mathbb{Z} \to \mathbb{Z} /15\mathbb{Z} $ mapping $n\mapsto [n]$. We thus have that $(\pi+\pi )(n,m)=[n]+[m]=[n+m]$.
+
+	Although the categorical argument suffices, we still prove the claimed map is a homomorphism explicitly. Firstly, $\pi +\pi \neq 0$ since $(\pi +\pi )(1,1)=[1+1]=[2]\neq [0]$. To prove it is a homomorphism, let $(m,n),(r,s)\in\mathbb{Z}\oplus \mathbb{Z} $, and note that
+	\[
+		(\pi +\pi )(m,n)+(\pi +\pi )(r,s)=[m+n]+[r+s]=[m+n+r+s],
+	\]
+	\[
+		(\pi +\pi )((m,n)+(r,s))=(\pi +\pi )(m+r,n+s)=[m+r+n+s]=[m+n+r+s]
+	.\]
+	Therefore, we have a group homomorphism.
+\end{proof}
+
+\begin{problem}
+	Either construct a nontrivial group homomorphism from an abelian group to a non-abelian group, or prove one cannot exist.
+\end{problem}
+\begin{proof}
+	Choose a nonabelian group $G$ with a nontrivial center, and since the center is an abelian group, the inclusion morphism will be a group homomorphism from an abelian group to a nonabelian group.
+
+	For an explicit example, consider the quaternion group $\mathcal{Q} $ with center $\left\{ 1,-1 \right\} \cong \mathbb{Z} /2\mathbb{Z} $. This is obviously the center, since $ij\neq ji$ and $jk\neq kj$, but $(-1)x=-x=x(-1)$, and 1 is the identity. Consider the map $\varphi :\mathbb{Z} /2\mathbb{Z} \to \mathcal{Q} $ by $0\mapsto 1$ and $1\mapsto -1$. We check that this is as group homomorphism by brute force:
+	\[
+		\varphi (0+0)=\varphi (0)=1=1\cdot 1=\varphi (0)\varphi (0)
+	,\]
+	\[
+		\varphi (0+1)=\varphi (1)=-1=1(-1)=\varphi (0)\varphi (1),
+	\]
+	\[
+		\varphi (1+0)=\varphi (1)=-1=(-1)1=\varphi (1)\varphi (0),
+	\]
+	\[
+		\varphi (1+1)=\varphi (0)=1=(-1)(-1)=\varphi (1)\varphi (1)
+	.\]
+\end{proof}
+
+
+\end{document}
