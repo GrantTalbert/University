@@ -1,0 +1,286 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\usepackage{bbm}
+\title{Homework 6}
+\begin{document}
+\makeproblem
+\setcounter{section}{7}
+\section{Problem 8}
+\begin{problem}
+	Write $\mathcal{R} =C^0(I,\mathbb{R} )$ for $I$ the unit interval. Defining addition and multiplication pointwise,
+	\begin{itemize}
+		\item show that $(\mathcal{R} ,+,\cdot )$ is a commtuative ring,
+		\item determine all zero-divisors of $\mathcal{R} $,
+		\item and compute $\mathcal{R} ^\times $.
+	\end{itemize}
+\end{problem}
+\begin{proof}[Proof of part 1]
+	The main parts of this problem are the proofs of continuity. Let $f,g : I \to \mathbb{R} $ be continuous. We will use the fact that $+: \mathbb{R} \times \mathbb{R}  \to \mathbb{R} $ is continuous, and that $\Top $ has finite products (all of which I have proven in the past). The function $f+g$ arises as the composite $+\circ  (f,g)$ in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  \mathbb{R}  &  \\
+	I \ar[" f ", ur] \ar[" g "', dr] \ar[" (f\text{,} g) ", r]  &  \mathbb{R} \times \mathbb{R} \ar[u] \ar[d] \ar[" + ", r]  & \mathbb{R}  \\
+	 &  \mathbb{R}  & 
+	\end{tikzcd}\]
+	for $(f,g) : I\to \mathbb{R} \times \mathbb{R} $ the arrow arising by universality of product. Since $\Top $ has finite products, by universality of product $(f,g)$ is continuous. Therefore, the composite is continuous, and $f+g\in \mathcal{R} $, meaning $\mathcal{R} $ is closed under addition. We will also use the fact that $\cdot : \mathbb{R} \times \mathbb{R}  \to \mathbb{R} $ is continuous. The function $f\cdot g : I \to \mathbb{R} $ similarly arises as the composite $\cdot  \circ (f,g)$ in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  \mathbb{R}  &  \\
+	I \ar[" f ", ur] \ar[" g "', dr] \ar[" (f\text{,} g) ", r]  & \mathbb{R} \times \mathbb{R} \ar[u] \ar[d] \ar[" \bullet ", r]  & \mathbb{R}  \\
+	 &  \mathbb{R}  & 
+	\end{tikzcd}\]
+	We write $\bullet$ in the diagram to denote multiplication to improve readability. By the same logic, $f\cdot g$ is continuous, and $\mathcal{R} $ is closed under multiplication.
+
+	The function $\gamma : \mathbb{R} \times \mathbb{R}  \to \mathbb{R} \times \mathbb{R} $ mapping $(x,y)\mapsto (y,x)$ is a homeomorphism. In particular, it is continuous. The statement $x+y=y+x$ for $x,y\in \mathbb{R} $ can be rephrased as $+\circ \gamma =+$, since the left side is $(+\circ \gamma )(x,y)=y+x$ and the right side is simply $x+y$.
+
+	We would now like to show that $f+g=g+f$. Indeed, since $+=+\circ \gamma $, note that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  \mathbb{R}  &  \\
+		I \ar[" f ", ur] \ar[" g "', dr] \ar[" (f\text{,} g) ", r]  & \mathbb{R} \times \mathbb{R} \ar[u] \ar[d] \ar[" \gamma  ", r] \ar[" + ", bend left, rr]  & \mathbb{R} \ar[" + ", r] & \mathbb{R}  \\
+	 &  \mathbb{R}  & 
+	\end{tikzcd}\]
+	commutes. Therefore,
+	\[
+		+\circ \gamma \circ (f,g)=+\circ (f,g)=f+g
+	.\]
+	Additionally, note that for any $x\in\mathbb{R} $,
+	\[
+		(\gamma \circ \circ (f,g))(x)=\gamma (f(x),g(x))=(g(x),f(x))=(g,f)(x)
+	.\]
+	In particular, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  \mathbb{R}  &  \\
+		I \ar[" f ", ur] \ar[" g "', dr]\ar[" (g\text{,} f) "', bend right, rr] \ar[" (f\text{,} g) ", r]  & \mathbb{R} \times \mathbb{R} \ar[u] \ar[d] \ar[" \gamma  ", r] \ar[" + ", bend left, rr]  & \mathbb{R} \ar[" +  ", r] & \mathbb{R}  \\
+	 &  \mathbb{R}  & 
+	\end{tikzcd}\]
+	also commutes. Therefore, we have the equality
+	\[
+		f+g=+\circ (f,g)=+\circ (g,f)=g+f
+	.\]
+	Since this is a composite of continuous functions, addition commutes. Similarly, note that $xy=yx$ in $\mathbb{R} $, so $\cdot \circ \gamma =\cdot $ as well. The same logic yields the commutative diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  \mathbb{R}  &  \\
+		I \ar[" f ", ur] \ar[" g "', dr]\ar[" (g\text{,} f) "', bend right, rr] \ar[" (f\text{,} g) ", r]  & \mathbb{R} \times \mathbb{R} \ar[u] \ar[d] \ar[" \gamma  ", r] \ar[" \bullet ", bend left, rr]  & \mathbb{R} \ar[" \bullet  ", r] & \mathbb{R}  \\
+	 &  \mathbb{R}  & 
+	\end{tikzcd}\]
+	which witnesses the equality
+	\[
+		f\cdot g=\cdot \circ (f,g)=\cdot \circ (g,f)=g\cdot f
+	.\]
+	Therefore, multiplication commutes.
+
+	We will now show associativity of $+$ and $\cdot $. Let $f,g,h : I \to \mathbb{R} $ be continuous. Then since addition is associative in $\mathbb{R} $, we have for any $x\in\mathbb{R} $,
+	\[
+		(f+(g+h))(x)=f(x)+(g+h)(x)=f(x)+(g(x)+h(x))=(f(x)+g(x))+h(x)=(f+g)(x)+h(x)
+	\]
+	\[
+		=((f+g)+h)(x)
+	.\]
+	Similarly, since $\cdot $ is associative in $\mathbb{R} $, we have
+	\[
+		(f\cdot (g\cdot h))(x)=f(x)(g\cdot h)(x)=f(x)(g(x)h(x))=(f(x)g(x))h(x)=(f\cdot g)(x)h(x)=((f\cdot g)\cdot h)(x)
+	.\]
+	Therefore, $+,\cdot $ are associative.
+
+	Now we show the existence of identities. We claim that $0: I \to \mathbb{R} $ given by $x\mapsto 0$ is the additive identity, and $\mathbbm{1} : I \to \mathbb{R} $ given by $x\mapsto 1$ is the multiplicative identity. Indeed, note that $0,1\in\mathbb{R} $ are the additive and multiplicative identities, respectively, meaning for any $x\in\mathbb{R} $,
+	\[
+		(f+0)(x)=f(x)+0(x)=f(x)+0=f(x),
+	\]
+	\[
+		(f\cdot \mathbbm{1})(x)=f(x)\mathbbm{1}(x)=f(x)1=f(x),
+	\]
+	and the converse to both cases follows by commutativity. It suffices to show that $0,\mathbbm{1}$ are continuous. Recall that if $X$ has the discrete topology, $Z$ has the trivial topology, and $Y$ is any space, then all maps $X\to Y$ and all maps $Y\to Z$ are continous; the preimage of any map $X\to Y$ is a set and is necessarily open in $X$, and the preimages of $\varnothing $ and $Z$ under $Y\to Z$ are $\varnothing $ and $Y$, both of which are always open. Note that the singleton $*$ admits a unique topology, and this topology is both trivial and discrete. Write $0: * \to \mathbb{R} $ for the map $*\mapsto 0\in\mathbb{R} $ and $1: * \to \mathbb{R} $ for the map $*\mapsto 1\in\mathbb{R} $. Note that $0: I \to \mathbb{R} $ and $\mathbbm{1} : I \to \mathbb{R} $ arise as the composites
+	\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	I \ar[" 0 ", bend left, rr] \ar[r]  & *\ar[" 0 ", r]  & \mathbb{R} , \\
+	I \ar[" \mathbbm{1} "', bend right, rr] \ar[r]  & *\ar[" 1 "', r]  & \mathbb{R} ,
+	\end{tikzcd}\]
+	where the map $I\to *$ is the unique map to the terminal object in $\Top $ (the same as in $\Set $). Therefore, $0,\mathbbm{1}$ arise as composites of continuous maps, and are therefore continuous.
+
+	Finally, we show inverses exist. Given $f : I \to \mathbb{R} $ continuous, define $-f : I \to \mathbb{R} $ as the map $(-f)(x)=-f(x)$. This is clearly an inverse since for any $x\in\mathbb{R} $,
+	\[
+		(f-f)(x)=f(x)-f(x)=0,\qquad (-f+f)(x)=-f(x)+f(x)=0
+	.\]
+	It suffices to show continuity. Indeed, $-f$ can be written as the product $(x\mapsto -1)\cdot f$, and by contninuity of $f$ it suffices to show that $x\mapsto -1$ is continuous. This arises in the same way as $0$ and $\mathbbm{1}$: writing $-1: * \to \mathbb{R} $ as the map $*\mapsto -1$, we have
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	I \ar[" -1 ", bend left, rr] \ar[r]  & *\ar[" -1 "', r]  & \mathbb{R} .
+	\end{tikzcd}\]
+	Therefore, $\mathcal{R} $ is a ring.
+\end{proof}
+
+\begin{proof}[Proof of part 2]
+	Let $f : I \to \mathbb{R} $ be nonzero, and vanish on at least one $x\in I$. Write $\Ker f$ for the set of all $x\in I$ with $f(x)=0$. It's simple enough to construct a function $g$ with $fg=0$; simply define $g(\Ker f)=1$ and $g(I \setminus \Ker f)=0$. The issue is making $g$ continuous. Our strategy will be to construct a function $g$ in a piecewise manner by defining $g(I \setminus \Ker f)=0$, and then having it go up and down while $x\in\Ker f$ to have $g(x)\neq 0$ in a continuous manner. We will then see from this construction what extra conditions $f$ needs in order to have a zero-divisor.
+
+	We claim that $\Ker f$ is closed. Since $\Ker f$ is the fiber of 0, and $\left\{ 0 \right\} =[0,0]$ is closed in $\mathbb{R} $, it suffices to show preimages of closed maps are closed under continuous maps. Given $g : X \to Y$ a continuous map, let $Z\subseteq Y$ be closed, meaning $Y\setminus Z$ is open. Therefore, $g^{-1} (Y\setminus Z)$ is open. It suffices to show $g^{-1} (Y\setminus Z)=g^{-1} (Y)\setminus g^{-1} (Z)$. If $x\in g^{-1} (Y\setminus Z)$, then $g(x)\in Y\setminus Z$ and $x\in g^{-1} (Y)$. Since $g(x)\notin Z$, we have $x\notin g^{-1} (Z)$. Therefore, $x\in g^{-1} (Y)\setminus g^{-1} (Z)$. For the converse, if $x\in g^{-1} (Y)\setminus g^{-1} (Z)$, then $g(x)\in Y$ and $g(x)\notin Z$, meaning $g(x)\in Y\setminus Z$. Therefore, $x\in g^{-1} (Y\setminus Z)$.
+
+	Therefore, $\Ker f$ is closed in $I$. Let $C$ be a connected component of $\Ker f$. Since connected components are closed, we have that $C$ is closed in $\Ker f$. Then $\Ker f\setminus C=K \cap \Ker f$ for some open set $K\subseteq I$. Then $C=\Ker f \setminus (K \cap \Ker f)$ is the set of all $x\in I$ with $x\in \Ker f$ and $x\notin K$. This is precisely the set $(I\setminus K) \cap \Ker f$. Since $K$ is open, $I\setminus K$ is closed in $I$. Since $\Ker f$ is closed in $I$, we have that $C$ is an intersection of closed sets, and thus is closed in $I$.
+
+	Therefore, $C$ is a closed, connected subspace of the unit interval $I$. Closed connected subspaces of intervals in $\mathbb{R} $ are precisely closed intervals. Therefore, $C$ is of the form $[a,b]$. Since every (sub)space is a union of its connected components, we have
+	\[
+		\Ker f=\bigcup_{j\in J} C_j=\bigcup_{j\in J} [a_j,b_j]
+	\]
+	for $\left\{ C_j \right\}_{j\in J} =\left\{ [a_i,b_i] \right\}_{j\in J} $ the collection of distinct connected components of $\Ker f$. Furthermore, the $C_j$s are all disjoint. This will be quite important.
+
+	We are now prepared to define the map $g : I \to \mathbb{R} $ such that $gf=0$. We define $g$ piecewise as follows. Define $g_0 : I\setminus \Ker f \to \mathbb{R} $ as $g_0(x)=0$. For each $j\in J$, define $g_j : [a_j,b_j] \to \mathbb{R} $ as the map
+	\[
+		g_j(x)=
+		\begin{cases}
+		x-a_j,&\displaystyle{a_j \leq x\leq \frac{b_j-a_j}{2}} \\[10pt]
+		b_j-x,&\displaystyle{\frac{b_j-a_j}{2} \leq x\leq b_j}
+		\end{cases}
+	.\]
+	We will define
+	\[
+		g(x)=
+		\begin{cases}
+			g_j(x),&x\in C_j\\
+			g_0(x),&x\in I\setminus \Ker f
+		\end{cases}
+	.\]
+	It is not clear that this map is continuous. We make use of the \emph{pasting lemma}.
+
+	\begin{lemma}\label{8.1}
+		Let $X,Y$ be closed subspaces of a space $A$ such that $X \cup Y=A$. If $f : A \to Z$ is a function to a space $Z$ such that thr restrictions $f|X,f|Y$ are continuous $X,Y\to Z$, then $f$ is continuous.
+	\end{lemma}
+	\begin{proof}
+		Let $U$ be a closed subset of $Z$. Since $f$ is continuous on $X$ and $Y$, we have that the preimages $f^{-1} (U) \cap X$ and $f^{-1} (U) \cap Y$ are closed in $X$ and $Y$, since preimages of closed sets under continuous maps are closed. They are thus closed in $A$ since $X$ and $Y$ are closed, and thus $f^{-1} (U) = (f^{-1} (U) \cap X)\cup (f^{-1} (U) \cap Y)$ is a (finite) union of closed sets, and thus closed. We have
+		\[
+			\left( f^{-1} (U)\cap X \right) \cup \left( f^{-1} (U)\cap Y \right) =f^{-1} (U) \cap (X \cup Y)=f^{-1} (U) \cap A=f^{-1} (U)
+		.\]
+		Therefore, preimages of closed sets are closed under $f$.
+
+		Let $V\subseteq Z$ be open. Then $V=Z \setminus U$ for some closed $U$. The preimage $f^{-1} (U)$ is thus closed, so
+		\[
+			f^{-1} (V)=f^{-1} (Z\setminus U)=f^{-1} (Z)\setminus f^{-1} (U)
+		\]
+		is a compliment of a closed set, and thus is open. Therefore, preimages of open sets are open, and $f$ is continuous.
+	\end{proof}
+
+	Define $g_J$ as the map $g_J(x)=g_j(x)$ whenever $x\in C_j$. Since the connected components are disjoint, the map is well-defined. We would like to combine $g_0$ and $g_J$ and apply \cref{8.1}, but unfortunately $I\setminus \Ker f$ is not necessarily closed. We thus extend $g_0$ to the closure $\overline{I\setminus \Ker f}$. If $g_J$ is continuous and agrees with $g_0$ on the intersection of the domains, then we will have a well-defined continuous map $g : I \to \mathbb{R} $ by \cref{8.1}.
+
+	We start by showing that $g_J$ is continuous. Since each subspace $C_j$ is disjoint, there is a clear homeomorphism with the coproduct
+	\[
+		\bigcup_{j\in J} C_j \cong \coprod_{j\in J} C_j
+	.\]
+	I proved in a recent MA721 homework that (small) coproducts exist in $\Top $, and have the same point-set construction as in $\Set $. By universality of coproduct, it suffices to show that each $g_j : C_j \to \mathbb{R} $ is continuous. Here we once again apply \cref{8.1}. Given $C_j=[a_j,b_j]$, write $c_j=a_j+\frac{b_j-a_j}{2} $ for the midpoint of $[a_j,b_j]$. Then $C_j=[a_j,c_j]\cup [c_j,b_j]$. Recall our definition
+	\[
+		g_j(x)=
+		\begin{cases}
+			x-a_j,&x\in[a_j,c_j]\\
+			b_j-x,&x\in[c_j,b_j]
+		\end{cases}
+	.\]
+	Note that since subtraction or addition by a constant is continuous, and since the identity $x\mapsto x$ is continuous, restricting along $g_j|[a_j,c_j]$ yields a composite of continuous functions, and thus is continuous. Similarly, since addition by a constant and the inverse of the identity are continuous, the restriction $g_j|[c_j,b_j]$ is also a composite of continuous functions, and is thus continuous. Since $[a_j,c_j],[c_j,b_j]$ cover $C_j$ and are closed sets, by \cref{8.1} it suffices to show these definitions agree on $c_j=a_j+\frac{b_j-a_j}{2} $; that is, we are showing that $g_j$ is well-defined. Indeed,
+	\[
+		a_j+\frac{b_j-a_j}{2} -a_j = a_j+\frac{b_j-3a_j}{2} =\frac{b_j-a_j}{2},
+	\]
+	\[
+		b_j-a_j-\frac{b_j-a_j}{2} =\frac{2b_j-2a_j-b_j+a_j}{2} =\frac{b_j-a_j}{2}
+	.\]
+	Therefore, $g_j$ is continuous, and by universality $g_J$ is continuous. It remains only to be shown that $g_J$ and $g_0$ agree on the intersection. By our knowledge of boundaries of open sets in $\mathbb{R} $, it suffices to show that $g_J$ vanishes on the boundary of each connected component. Indeed,
+	\[
+		g_j(a_j)=a_j-a_j=0,\qquad g_j(b_j)=b_j-b_j=0
+	.\]
+
+	This gives us our map $g : I \to \mathbb{R} $. We immediately see that $g\cdot f=0$, since whenever $f(x)\neq 0$, we have $g(x)=0$ by construction. The question is whether $g=0$ or not. $g$ is only nonvanishing on connected components of the kernel of $f$. If each connected component is a singleton, meaning $f$ only vanishes at individual points, then the entirety of the connected component is on the boundary. Since $g$ vanishes on the boundary, it vanishes along the entirety of the component, and thus $g=0$. Therefore, we require that at least one connected component of $\Ker f$ be larger than a singleton. A cleaner way to phrase this is that $f$ vanishes on an open interval, since it necessarily vanishes on a closed interval by continuity and closure of $\left\{ 0 \right\} $, and the open interval $(a,b)\subseteq [a,b]$ condition simply states that $[a,b]$ is not a singleton. Therefore, $f$ is a zero divisor if and only if it vanishes on an open interval.
+\end{proof}
+
+\begin{proof}[Proof of part 3]
+	Units of $\mathcal{R} $ are precisely functions $f$ which are everywhere nonvanishing. Suppose that $f$ vanishes at some $x$, and suppose for contradiction that there is $g\in \mathcal{R} $ with $g\cdot f=\mathbbm{1}$. Then $(g\cdot f)(x)=1$. We have
+	\[
+		g(x)f(x)=g(x)0=1,
+	\]
+	a contradiction. Therefore, $f$ is not a unit.
+
+	Now let $f$ be everywhere nonvanishing. Division by a nonzero quantity is continuous. Write $(-)^{-1} $ for the map $\mathbb{R}_{\neq 0} \to \mathbb{R} $ given by $x\mapsto \frac{1}{x} $. Since $f$ vanishes nowhere, it factors through $\mathbb{R} _{\neq 0} $, meaning that there is a map $\frac{1}{f} =(-)^{-1} \circ f : I \to \mathbb{R} $ given by $x\mapsto \frac{1}{f(x)} $. This is easily an inverse to $f$:
+	\[
+		\left( \frac{1}{f} \cdot f \right) (x)=\frac{1}{f(x)} f(x)=1
+	.\]
+	Therefore, $f$ is a unit.
+\end{proof}
+
+\section{Problem 9}
+
+\begin{problem}
+	Let $a\in R$ be nilpotent for $R$ a commutative ring. Show that
+	\begin{enumerate}
+		\item $a$ is either 0 or a zero-divisor,
+		\item $ra$ is nilpotent for $r\in r$,
+		\item $1+a$ is a unit in $r$, and
+		\item $u+a$ is a unit for all $u\in R^\times $.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(a) 0 is clearly nilpotent, so let $a\neq 0$ be nilpotent. Then $a^m=0$ for some $m$, so we have that $a a^{m-1} =0$. Take $m$ to be the smallest positive number such that this is true, which is greater than 1 since $a=a^1\neq 0$. Therefore, $a^{m-1} \neq 0$, and thus $a$ is a zero divisor.
+
+	(b) Since $R$ is commutative, $(ra)^m=r^ma^m=r^m0=0$.
+
+	(c) First, note that
+	\[
+		a+(-1\cdot a)=(1\cdot a)+(-1\cdot a)=(1-1)a=0a=0
+	.\]
+	Therefore, since $R$ is an abelian group, we have $-1\cdot a=-a$ by uniqueness of inverses. Now given $n\geq 1$, note that
+	\[
+		(1-r)\sum_{i=0}^{n-1} r^i=\left( \sum_{i=0}^{n-1} r^i \right) -\left(\sum_{i=0}^{n-1} r^{i+1} \right)=1-r^n
+	.\]
+	The first equality follows by commutativity and distributivity of $R$, and the second by the fact that most terms in the summations cancel.
+
+	By (b), $-1\cdot a=-a$ is nilpotent, meaning $(-a)^m=0$ for some $m\geq 0$. Applying the expansion identity we found,
+	\[
+		1-(-a)^m=(1-(-a))\sum_{i=0}^{n-1} (-a)^i
+	.\]
+	By our knowledge of groups, $-(-a)=a$. Additionally, since $(-a)^m=0$, we have
+	\[
+		1=1-0=1-(-a)^m=(1+a)\sum_{i=0}^{n-1} (-a)^i
+	.\]
+	Therefore,
+	\[
+		1=(1+a)\sum_{i=0}^{n-1} (-a)^i
+	.\]
+	By commutativity of $R$, the summation on the right provides a two-sided inverse for $1+a$.
+
+	(d) Note that for a unit $u\in R^\times $, there exists $u^{-1} \in R^\times $, and
+	\[
+		u+a=u(1+u^{-1} a),
+	.\]
+	Since $R^\times $ is closed under multiplication and $u$ is a unit, it suffices to show $1+u^{-1} a$ is a unit. By (c), $1+u^{-1} a$ is a unit if $u^{-1} a$ is nilpotent, and by (b) it is indeed nilpotent since $a$ is nilpotent.
+\end{proof}
+
+\section{Problem 10}
+
+\begin{problem}\label{10}
+	Show that any finite integral domain is a field.
+\end{problem}
+\begin{proof}
+	It suffices to show all nonzero elements have inverses. Let $R$ be an integral domain, and $r\in R$ nonzero. Write $R^*$ for $R\setminus \left\{ 0 \right\} $. We claim that the function $L_r : R^* \to R^*$ given by left multiplication $a\mapsto ra$ is a bijection. The fact that the codomain can be taken to be $R^*$ follows since there are no zero divisors, and 0 is not in the domain.
+
+	Since $R$ is finite, $R^*$ is finite, and thus it suffices to show either injectivity or surjectivity. The former is easier, so suppose that there are $a,b\in\mathbb{R}^*$ such that $ra=rb$. Then $ra-rb=0$, and thus $r(a-b)=0$. Since $R$ is an integral domain, it has no zero divisors, and since $r\neq 0$, we must have $a-b=0$. Therefore, $a=b$, and $L_r$ is bijective.
+
+	From surjectivity of $L_r$, we see that there exists a (unique) $a\in R^*$ such that $ra=1$. Therefore, $r$ has a right-inverse. Since integral domains are commutative, we have $ar=1$, and thus $a$ is also a left-inverse of $r$. Therefore, $r$ has an inverse element for each $r\in R^*$, meaning $r$ is a unit. Since all nonzero elements of $R$ are units, by definition it is a field.
+\end{proof}
+
+\section{Problem 11}
+\begin{problem}
+	Show that if $n\geq 2$, then $\mathbb{Z} /n\mathbb{Z} $ is a field if and only if $n$ is prime.
+\end{problem}
+\begin{proof}
+	Let $n$ be prime. By \cref{10}, it suffices to show $\mathbb{Z} /n\mathbb{Z} $ is an integral domain, since it is finite. Since $\mathbb{Z} /n\mathbb{Z} $ is a commutative ring for all $n$, it suffices to show it has no zero divisors. Suppose for contradiction that there are nonzero $[a],[b]\in\mathbb{Z} /n\mathbb{Z} $ with $[a]\cdot [b]=[ab]=[0]$. Then by definition, we must have $n|ab$. However, since $n$ is prime, it follows that $ab = n^k$ for some $k$. Since $n$ is prime and $a,b|ab=n^k$, we must have $a=n^p$ and $b=n^q$ for some $p,q$. It follows that $a,b \geq n$, and in particular $n|a,b$. We thus have $a,b\in[n]$, and thus $[a]=[b]=[0]$, a contradiction. Therefore, $\mathbb{Z} /n\mathbb{Z} $ has no zero divisors, and is thus a field.
+
+	We prove the converse by contrapositive. Let $n$ not be prime. Then there exist $n>a,b \geq 2$ such that $n=ab$. We then have
+	\[
+		[a]\cdot [b]=[a\cdot b]=[n]=[0]
+	\]
+	because $n\equiv 0\mod{n}$. Additionally, since, $a,b<n$ and $a,b\neq n$, we must have $a,b \neq n\mod{n}$, meaning $[a],[b]\neq [0]$. Therefore, there exists at least one zero divisor, and $\mathbb{Z} /n\mathbb{Z} $ cannot be a field since a field has no zero divisors.
+\end{proof}
+
+\end{document}

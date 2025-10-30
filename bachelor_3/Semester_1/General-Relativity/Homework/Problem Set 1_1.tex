@@ -20,9 +20,183 @@
 
 \section{Problem 1}
 
+Consider the following two coordinate systems for $S^2$:
+
+``Embedding coordinates'' In any neighborhood with $x^2+y^2<1$, take $(x,y)$ as the coordinates for $S^2$, and similarly when $x^2+z^2<1$ and $y^2+z^2<1$, we take $(x,z)$ and $(y,z)$, respectively.
+
+``Angular coordinates'' $(\phi ,\theta )$ related to $(x,y,z)$ by
+\[
+	x=\sin \theta \cos \phi ,\quad y=\sin \theta \sin \phi ,\quad z=\cos \theta 
+\]
+with $0\leq \phi <2\pi $, $0\leq \theta \leq \pi $. We take $(\phi ,\theta )$ as coordinates in any neighborhood not containing the north  or south pole.
+
+\begin{problem}
+	Find explicit representations of $(x')^\mu (x^\nu )$ for
+	\begin{enumerate}
+		\item $(x')^\mu =(x,y)$, $x^\nu =(x,z)$;
+		\item $(x')^\mu =(\phi ,\theta )$, $x^\nu =(x,z)$.
+	\end{enumerate}
+\end{problem}
+\noindent\emph{Solution.} (1) Clearly we take $x=x$, and we compute $y$ given $(x,z)$ by
+\[
+	y=\pm\sqrt{1-x^2-z^2} 
+.\]
+This follows since all points on $S^d$ have norm 1. We must of course choose the correct sign depending on where we are on the sphere, hence the $\pm$.
+
+(2) Since $z=\cos \theta $ and we are given $z$, we have $\theta =\arccos z$. For $\phi $, we have
+\[
+	x=\sin \theta \cos \phi \implies \cos \phi =\frac{x}{\sin \theta } =\frac{x}{\sin \arccos z} 
+.\]
+Note that $\cos \theta =z$, and thus
+\[
+	1=\sin ^2\theta +\cos ^2\theta =\sin ^2\theta +z^2 \implies \sin \theta =\sqrt{1-z^2} 
+.\]
+We take the positive root since $0\leq \theta <\pi $. Plugging this in gives us our transformation law
+\[
+	(\phi ,\theta )=\left( \arccos \frac{x}{\sqrt{1-z^2} } ,\arccos z \right) 
+.\]
+Also when $y<0$ we instead use $\phi  =2\pi -\arccos \frac{x}{\sqrt{1-z^2}} $ due to domain restrictions.
+
+\begin{problem}
+	For the same choices (1,2) of $x'$ and $x$, find the Jacobians $\frac{\partial (x')^\mu }{\partial x^\nu } $.
+\end{problem}
+\noindent \emph{Solution.} (1)
+\[
+	\frac{\partial x'}{\partial x} =\frac{\partial }{\partial x} (x)=1,\qquad \frac{\partial x'}{\partial z} =\frac{\partial }{\partial z} (x)=0
+.\]
+\[
+	\frac{\partial y'}{\partial x} =\frac{\partial }{\partial x}\pm \sqrt{1-x^2-z^2} =\pm\frac{-x}{\sqrt{1-x^2-z^2} } =-\frac{x}{y} ,
+\]
+\[
+	\frac{\partial y'}{\partial z} =-\frac{z}{y} 
+.\]
+The Jacobian is thus
+\[
+	\frac{\partial (x')^\mu }{\partial x^\nu } =\begin{pmatrix}
+	1 & 0 \\
+	-\frac{x}{y}  & -\frac{z}{y} 
+	\end{pmatrix}
+.\]
+
+(2) We ignore the domain restrictions for $\arccos $ in this problem, and simply note that if $y<0$ then there is an extra factor of $-1$ in the derivatives of $\phi $.
+\[
+	\frac{\partial \phi }{\partial x} =\frac{\partial }{\partial x} \arccos \frac{x}{\sqrt{1-z^2} } \frac{1}{\sqrt{1-z^2} }=-\frac{1}{\sqrt{1-\frac{x^2}{1-z^2} } }\frac{1}{\sqrt{1-z^2} } =-\frac{1}{\sqrt{\frac{1-z^2-x^2}{1-z^2} } }\frac{1}{\sqrt{1-z^2} } 
+\]
+\[
+	=-\sqrt{\frac{1-z^2}{1-z^2-x^2} } \frac{1}{\sqrt{1-z^2} }=-\frac{1}{\sqrt{1-z^2-x^2} } 
+\]
+\[
+	\frac{\partial \phi }{\partial z} =\frac{\partial }{\partial z} \arccos \frac{x}{\sqrt{1-z^2} } =-\sqrt{\frac{1-z^2}{1-z^2-x^2} } \left( -\frac{1}{2}  \right) \frac{-2xz}{\left( 1-z^2 \right) ^{3/2} } =-\sqrt{\frac{1-z^2}{1-z^2-x^2} } \frac{zx}{\left( 1-z^2 \right) ^{3/2} } 
+\]
+\[
+	=-\frac{xz}{\left( 1-z^2 \right) \sqrt{1-z^2-x^2} } 
+\]
+\[
+	\frac{\partial \theta }{\partial x} =\frac{\partial }{\partial x} \arccos z=0
+\]
+\[
+	\frac{\partial \theta }{\partial z} =\frac{\partial }{\partial z} \arccos z=-\frac{1}{\sqrt{1-z^2} } 
+.\]
+The Jacobian is thus
+\[
+	\frac{\partial (x')^\mu }{\partial x^\nu } =\begin{pmatrix}
+		\displaystyle{-\frac{1}{\sqrt{1-z^2-x^2} }}   & \displaystyle{-\frac{xz}{\left( 1-z^2 \right) \sqrt{1-z^2-x^2 }} }  \\
+		0 & \displaystyle{-\frac{1}{\sqrt{1-z^2} } }
+	\end{pmatrix}
+.\]
+
+\begin{problem}
+	The metric on $S^2$ in angular coordinates is
+	\[
+		g_{\mu \nu } =\begin{pmatrix}
+		1 & 0 \\
+		0 & \sin ^2\theta 
+		\end{pmatrix}
+	.\]
+	Use the transformation law for tensors to find $g_{\mu \nu } $ in the coordinate system $(x,z)$. That is, using the explicit forms of the metric and the Jacobians, find $g_{xx} $, $g_{xz} $, and $g_{zz} $ via direct matrix multiplication.
+\end{problem}
+\noindent\emph{Solution.} Since the metric is a $(0,2)$-tensor, the transformation law for tensors tells us that the metric transforms as
+\[
+	g'_{\mu \nu } =\frac{\partial x^\alpha }{\partial (x')^\mu  } \frac{\partial x^\beta }{\partial (x')^\nu } g_{\alpha \beta } 
+.\]
+Representing the metric as a matrix, this can be given by $J^Tg_{\alpha \beta } J$, where $J$ is the Jacobian computed in part (2) of the previous problem. Note that we have to move some of the entries around, since the metric has entries in different spots than our Jacobian. Multiplying the matrices gives
+\[
+	\begin{pmatrix}
+		0&\displaystyle{-\frac{1}{\sqrt{1-z^2-x^2} }}  \\
+		\displaystyle{-\frac{1}{\sqrt{1-z^2} } }&\displaystyle{-\frac{xz}{\left( 1-z^2 \right) \sqrt{1-z^2-x^2 }} } \end{pmatrix}\begin{pmatrix}
+		1 & 0 \\
+		0 & \sin ^2\theta 
+		\end{pmatrix}\begin{pmatrix}
+		0 & \displaystyle{-\frac{1}{\sqrt{1-z^2} } }\\
+		\displaystyle{-\frac{1}{\sqrt{1-z^2-x^2} }}   & \displaystyle{-\frac{xz}{\left( 1-z^2 \right) \sqrt{1-z^2-x^2 }} }  
+	\end{pmatrix}
+\]
+\[
+	=\begin{pmatrix}
+		0&\displaystyle{-\frac{1}{\sqrt{1-z^2-x^2} }}  \\
+		\displaystyle{-\frac{1}{\sqrt{1-z^2} } }&\displaystyle{-\frac{xz}{\left( 1-z^2 \right) \sqrt{1-z^2-x^2 }} } \end{pmatrix}\begin{pmatrix}
+		0 & \displaystyle{-\frac{1}{\sqrt{1-z^2} } } \\
+		\displaystyle{-\frac{\sin ^2\theta }{\sqrt{1-z^2-x^2} }} & \displaystyle{-\frac{xz \sin ^2\theta }{\left( 1-z^2 \right) \sqrt{1-z^2-x^2 }} }
+		\end{pmatrix}
+\]
+\[
+	=\begin{pmatrix}
+		\displaystyle{\frac{\sin ^2\theta }{1-z^2-x^2} } & \displaystyle{\frac{xz \sin ^2\theta }{\left( 1-z^2 \right) \left( 1-z^2-x^2 \right) }}  \\
+			\displaystyle{\frac{xz \sin ^2\theta }{\left( 1-z^2 \right) \left( 1-z^2-x^2 \right) }} & \displaystyle{\frac{1}{1-z^2} +\frac{x^2z^2 \sin ^2\theta }{\left( 1-z^2 \right) ^2\left( 1-z^2-x^2 \right) } }
+	\end{pmatrix}
+.\]
+We can simplify this somewhat. First, we pull out a factor of $\frac{1}{1-z^2-x^2}$. Recall that $\sin \theta =\sqrt{1-z^2} $. For the $\frac{1}{1-z^2} $ factor, dividing out by this gives
+\[
+	\frac{1}{1-z^2} =\frac{1-x^2-z^2}{\left( 1-z^2 \right) \left( 1-x^2-z^2 \right) }
+.\]
+This gives
+\[
+	\frac{1-z^2-x^2}{(1-z^2)\left( 1-z^2-x^2 \right) } +\frac{x^2z^2 \left( 1-z^2 \right) }{\left( 1-z^2 \right) ^2\left( 1-z^2-x^2 \right) } =\frac{\left( 1-x^2 \right) \left( 1-z^2 \right) }{\left( 1-z^2 \right) \left( 1-z^2-x^2 \right) } =\frac{1-x^2}{1-z^2-x^2} 
+.\]
+\[
+	g'_{\mu \nu } =\frac{1}{1-z^2-x^2} \begin{pmatrix}
+		1-z^2 & xz\\
+		xz & 1-x^2
+	\end{pmatrix}
+.\]
+\begin{problem}
+	Rederive the previous result by starting with the line element in $\mathbb{R} ^3$
+	\[
+		\mathrm{d} s^2=\mathrm{d} x^2+\mathrm{d} y^2+\mathrm{d} z^2
+	,\]
+	and restricting to the unit sphere to eliminate $y$ in terms of $x$ and $z$. Then read the metric in $(x,z)$ coordinates off from
+	\[
+		\mathrm{d} s^2=g_{\mu \nu } \mathrm{d} x^\mu \mathrm{d} x^\nu =g_{xx} \mathrm{d} x^2+2g_{xz} \mathrm{d} x\mathrm{d} z+g_{zz} \mathrm{d} z^2
+	.\]
+\end{problem}
+\noindent \emph{Solution.} Recall that $y(x,z)=\sqrt{1-z^2-x^2} $. Using the transformation law for dual vectors, we have
+\[
+	\mathrm{d} y=\frac{\partial y}{\partial x} \mathrm{d} x+\frac{\partial y}{\partial z} \mathrm{d} z=-\frac{1}{\sqrt{1-z^2-x^2} } \left( x \mathrm{d} x+z \mathrm{dz}  \right) 
+.\]
+We write $y$ instead of the annoying square root on the bottom. Squaring $\mathrm{d} y$ gives
+\[
+	\mathrm{d} y^2=\left( -\frac{1}{y} \left( x\mathrm{d} x^2+z\mathrm{d} z^2 \right)  \right) ^2=\frac{1}{y^2} \left( x^2\mathrm{d} x+z^2\mathrm{d} z+2xz\mathrm{d} x\mathrm{d} z \right) 
+.\]
+This gives a line element
+\[
+	\mathrm{d} s^2=\left( 1+\frac{x^2}{y^2}  \right) \mathrm{d} x^2+\left( 1+\frac{z^2}{y^2}  \right) \mathrm{d} z^2+\frac{2xz}{y} \mathrm{d} x\mathrm{d} z
+.\]
+We have already founod our diagonal elements, so it suffices to show that $g_{xx} $ and $g_{zz} $ simplify down to $\frac{1-z^2}{y}$ and $\frac{1-x^2}{y} $, respectively. Indeed, we have
+\[
+	1+\frac{x^2}{y^2} =\frac{1-x^2-z^2}{1-x^2-z^2} +\frac{x^2}{1-x^2-z^2} =\frac{1-z^2}{y} ,
+\]
+\[
+	1+\frac{z^2}{y^2} =\frac{1-x^2-z^2}{1-x^2-z^2} +\frac{z^2}{1-x^2-z^2} =\frac{1-x^2}{y} 
+.\]
+Thus,
+\[
+	\mathrm{d} s^2=\left( 1-z^2 \right) \mathrm{d} x^2+\left( 1-x^2 \right) \mathrm{d} z^2+2xz\mathrm{d} x\mathrm{d} z
+.\]
+This agrees with what we found in the previous step, and was much easier.
+
 \section{Problem 2}
 
-Let $x^\mu =(x,y,z)$ be the cartesian coordinate system in $\mathbb{R} ^3$, and $(r,\theta ,\phi )$ the spherical coordinate system
+Let $x^\mu =(x,y,z)$ be the cartesian coordinate system in $\mathbb{R} ^3$, and $(x')^\mu =(r,\theta ,\phi )$ the spherical coordinate system
 \[
 	x=r \sin \theta \cos \phi ,\qquad y=r \sin \theta \sin \phi  ,\qquad z=r \cos \theta 
 .\]
@@ -38,15 +212,217 @@ The metric then takes the form
 	.\]
 	Express the path of the particle in the $(r,\theta ,\phi )$ coordinate system.
 \end{problem}
-\noindent\emph{Solution.} This feels too easy and like a trick question. From simple geometric reasoning, we would think that
-	\[
-		r^2=x^2+y^2+z^2
-	,\]
-	\[
-		\phi  =\arctan \frac{y}{x} ,\qquad \theta =\arctan \frac{\sqrt{x^2+y^2} }{z^2} 
-	.\]
-	Some care must be taken to ensure the arctangent is taken in the proper quadrant.
+\noindent\emph{Solution.} Of course,
+\[
+	r^2=x^2+y^2+z^2
+.\]
+Since $\theta $ is the inclination, it can be computed as $\theta =\arccos (z/r)$. Since $\phi $ is the phase angle, it can be computed as $\phi =\arctan (y/x)$. We compute
+\[
+	r(\lambda )=\sqrt{x(\lambda )^2+y(\lambda )^2+z(\lambda )^2} =\sqrt{\cos ^2\lambda +\sin ^2\lambda +\lambda ^2} =\sqrt{1+\lambda ^2} 
+\]
+\[
+	\theta (\lambda )=\arccos \frac{\lambda }{\sqrt{1+\lambda ^2} } 
+\]
+\[
+	\phi (\lambda )=\arctan \frac{\sin \lambda }{\cos \lambda } =\arctan \tan \lambda =\lambda 
+.\]
+Therefore,
+\[
+	(x')^\mu (\lambda )=\left( \sqrt{1+\lambda ^2} ,\arccos \frac{\lambda }{r} ,\lambda  \right) 
+.\]
+
+\begin{problem}
+	Calculate the components of the tangent vector to the curve in both the Cartesian and spherical coordinate systems.
+\end{problem}
+\noindent\emph{Solution.} The computation in cartesian coordinates is just the usual derivative with respect to $\lambda $:
+\[
+	\frac{\mathrm{d}x}{\mathrm{d}\lambda }=-\sin \lambda ,\quad \frac{\mathrm{d}y}{\mathrm{d}\lambda } =\cos \lambda ,\quad \frac{\mathrm{d}z}{\mathrm{d}\lambda } =1
+.\]
+The components are thus $(-\sin \lambda ,\cos \lambda ,1)$. Representing this more properly, the tangent vector $T$ in Cartesian coordinates is given by
+\[
+	T(\lambda )=-\sin \lambda \frac{\partial }{\partial x} +\cos \lambda \frac{\partial }{\partial y} +\frac{\partial }{\partial z} 
+.\]
+Recall that the coordinate transformation law for vectors $T\to T'$ is given by the chain rule
+\[
+	(T')^\nu =T^\mu \frac{\partial (x')^\nu }{\partial x^\mu } ,
+\]
+where $x$ is Cartesian and $x'$ is spherical. We thus need to compute the relevant partials.
+\[
+	\frac{\partial r}{\partial x^i} =\frac{2x^i}{2\sqrt{x^2+y^2+z^2} } =\frac{x^i}{r} 
+.\]
+\[
+	\frac{\partial \phi}{\partial x} =\frac{\partial }{\partial x} \arctan \frac{y}{x} =-\frac{1}{1+\left( \frac{y}{x}  \right) ^2} \frac{y}{x^2} =-\frac{1}{\frac{x^2+y^2}{x^2} }\frac{y}{x^2} =-\frac{y}{x^2+y^2} 
+\]
+\[
+	\frac{\partial \phi }{\partial y} =\frac{\partial }{\partial y} \arctan \frac{y}{x} =\frac{x^2}{x^2+y^2} \frac{1}{x} =\frac{x}{x^2+y^2} 
+.\]
+\[
+	\frac{\partial \theta }{\partial x} =\text{annoying, do later} 
+.\]
+We now multiply through by $T^\mu $ and convert to $\lambda $:
+\[
+	(T')^r=T^\mu \frac{x^\mu }{r} =\frac{(-\sin \lambda )(\cos \lambda )+(\cos \lambda )(\sin \lambda )+\lambda }{\sqrt{1+\lambda ^2} } =\frac{\lambda }{\sqrt{1+\lambda ^2} } 
+.\]
+\[
+	(T')^\phi = -\sin \lambda \frac{-\sin \lambda }{\cos ^2\lambda +\sin ^2\lambda } +\cos \lambda \frac{\cos \lambda }{\cos ^2\lambda +\sin ^2\lambda } =\sin ^2\lambda +\cos ^2\lambda =1
+.\]
+
+Now we do $\theta $.
+
+\[
+	\frac{\partial \theta }{\partial x} =\frac{\partial }{\partial x} \arccos \frac{z}{r} =-\frac{1}{\sqrt{1-\frac{z^2}{r^2} } } z \frac{\partial (1/r)}{\partial x} =-\frac{z}{\sqrt{1-\frac{z^2}{r^2} } } \left( -\frac{1}{2} \frac{2x}{r^3}  \right) =\frac{xz}{r^3\sqrt{1-z^2r^{-2} } } 
+\]
+\[
+	=\frac{xz}{r^3 \sqrt{\frac{r^2-z^2}{r^2} } } =\frac{xz}{r^2 \sqrt{r^2-z^2} } =\frac{xz}{r^2\sqrt{x^2+y^2} } 
+.\]
+\[
+	\frac{\partial \theta }{\partial y} =\frac{yz}{r^2\sqrt{x^2+y^2} } 
+.\]
+\[
+	\frac{\partial \theta }{\partial z} =-\frac{1}{\sqrt{\frac{r^2-z^2}{r^2}} } \left( \frac{r-z^2r^{-1} }{r^2}  \right) =-\frac{1}{\sqrt{\frac{r^2-z^2}{r^2} } } \frac{r^2-z^2}{r^3} =-\frac{x^2+y^2}{r^2\sqrt{x^2+y^2} }=-\frac{\sqrt{x^2+y^2} }{r^2} 
+.\]
+Once again multiplying through by $T^\mu $ and converting to $\lambda $:
+\[
+	(T')^\theta =-\sin \lambda \frac{\lambda \cos \lambda }{1+\lambda ^2 }+\cos \lambda \frac{\lambda \sin \lambda }{1+\lambda ^2} -\frac{1}{1+\lambda ^2} =\frac{-\lambda \cos \lambda \sin \lambda +\lambda \cos \lambda \sin \lambda -1}{1+\lambda ^2} =\frac{-1}{1+\lambda ^2} 
+.\]
+Therefore,
+\[
+	T'(\lambda )=\frac{\lambda }{\sqrt{1+\lambda ^2} } \frac{\partial }{\partial r} +\frac{\partial }{\partial \phi } -\frac{1}{1+\lambda ^2} \frac{\partial }{\partial \theta } 
+.\]
+
+\section{Problem 3}
+
+Prolate spheroidal coordinates can be used to simplify the Kepler problem in celestial mechanics. They are related to the usual cartesian coordinates $(x,y,z)$ of $\mathbb{R} ^3$ by
+\[
+	x=\sinh\chi \sin \theta \cos \phi ,
+\]
+\[
+	y=\sinh\chi \sin \theta \sin \phi ,
+\]
+\[
+	z=\cosh\chi \cos \theta 
+.\]
+\begin{problem}
+	Consider the restriction along $y=0$ (equivalently, $\phi =0$). What is the coordinate transformation matrix $\frac{\partial x^\mu }{\partial (x')^\nu } $ relating $(x,z)$ to $(\chi ,\theta )$?
+\end{problem}
+\noindent\emph{Solution.} The coordinate transformations are then
+\[
+	x=\sinh \chi \sin \theta ,\qquad z=\cosh\chi \cos \theta 
+.\]
+We compute the partials:
+\[
+	\frac{\partial x}{\partial \chi } =\cosh \chi \sin \theta,\qquad \frac{\partial x}{\partial \theta } =\sinh \chi \cos \theta 
+\]
+\[
+	\frac{\partial z}{\partial \chi } =\sinh \chi \cos \theta ,\qquad \frac{\partial z}{\partial \theta } =-\cosh \chi \sin \theta 
+.\]
+The Jacobian then takes the form
+\[
+	\frac{\partial x^\mu }{\partial (x')^\nu }=\begin{pmatrix}
+	\cosh\chi \sin \theta  & \sinh\chi \cos \theta  \\
+	\sinh\chi \cos \theta  & -\cosh\chi \sin \theta
+	\end{pmatrix}
+.\]
+How does hyperbolic trig make \emph{any} problem easier???
+
+\begin{problem}
+	What does the induced line element $\mathrm{d} s^2=\mathrm{d} x^2+\mathrm{d} z^2$ restricted along $y=0$ look like in prolate spheroidal coordinates (wrt $\theta ,\chi $)? What does the full line element $\mathrm{d} s^2=\mathrm{d} x^2+\mathrm{d} y^2+\mathrm{d} z^2$ look like in prolate spheroidal coordinates (now wrt $\theta ,\phi ,\chi $)?
+\end{problem}
+\noindent\emph{Solution.} Recall the transformation law for differentials
+\[
+	\mathrm{d} x^\mu =\frac{\partial x^\mu }{\partial (x')^\nu } \mathrm{d} (x')^\nu 
+.\]
+This gives us
+\[
+	\mathrm{d} x=\frac{\partial x}{\partial \chi } \mathrm{d} \chi +\frac{\partial x}{\partial \theta } \mathrm{d} \theta =\cosh\chi \sin \theta \mathrm{d} \chi +\sinh\chi \cos \theta \mathrm{d} \theta 
+.\]
+\[
+	\mathrm{d} z=\frac{\partial z}{\partial \chi } \mathrm{d} \chi +\frac{\partial z}{\partial \theta } \mathrm{d} \theta =\sinh\chi \cos \theta\mathrm{d}\chi -\cosh\chi \sin \theta \mathrm{d\theta } 
+.\]
+It follows that
+\[
+	\mathrm{d} x^2=\left( \cosh\chi \sin \theta \mathrm{d} \chi +\sinh\chi \cos \theta \mathrm{d} \theta  \right) ^2
+\]
+\[
+	=\cosh^2\chi \sin ^2\theta \mathrm{d} \chi ^2+\sinh^2\chi \cos ^2\theta \mathrm{d} \theta ^2+2\cosh\chi \sin \theta \sinh\chi \cos \theta \mathrm{d} \chi \mathrm{d} \theta 
+.\]
+\[
+	\mathrm{d} z^2=\left( \sinh\chi \cos \theta \mathrm{d} \chi -\cosh\chi \sin \theta \mathrm{d} \theta  \right) ^2
+\]
+\[
+	=\sinh^2\chi \cos ^2\theta \mathrm{d} \chi ^2+\cosh^2\chi \sin ^2\theta \mathrm{d} \theta ^2-2 \sinh\chi \cos \theta \cosh\chi \sin \theta \mathrm{d} \chi \mathrm{d} \theta 
+.\]
+Note that the off-diagonal elements cancel, giving us
+\[
+	\mathrm{d} s^2=\mathrm{d} x^2+\mathrm{d} z^2=\cosh^2\chi \sin ^2\theta \mathrm{d} \chi ^2+\sinh^2\chi \cos ^2\theta \mathrm{d} \theta ^2+\sinh^2\chi \cos ^2\theta \mathrm{d} \chi ^2+\cosh^2\chi \sin ^2\theta \mathrm{d}\theta ^2
+\]
+\[
+	=\left( \cosh^2\chi \sin ^2\theta +\sinh^2\chi \cos ^2\theta  \right)\left( \mathrm{d} \chi ^2+\mathrm{d} \theta ^2 \right) 
+.\]
+
+Now for the full line element. This requires computing all the partials.
+\[
+	\frac{\partial x}{\partial \chi } =\cosh\chi \sin \theta \cos \phi ,\quad \frac{\partial x}{\partial \theta } =\sinh\chi \cos \theta \cos \phi ,\quad \frac{\partial x}{\partial \phi } =-\sinh\chi \sin \theta \sin \phi =-y
+.\]
+\[
+	\frac{\partial y}{\partial \chi }=\cosh\chi \sin \theta \sin \phi ,\quad \frac{\partial y}{\partial \theta } =\sinh\chi \cos \theta \sin \phi ,\quad \frac{\partial y}{\partial \phi } =\sinh\chi \sin \theta \cos \phi =x
+.\]
+\[
+	\frac{\partial z}{\partial \chi } =\sinh\chi \cos \theta ,\quad \frac{\partial z}{\partial \theta } =-\cosh\chi \sin \theta ,\quad \frac{\partial z}{\partial \phi } =0
+.\]
+We then apply the transformation law:
+\[
+	\mathrm{d} x=\cosh\chi \sin \theta \cos \phi \mathrm{d} \chi +\sinh\chi \cos \theta \cos \phi \mathrm{d} \theta -y\mathrm{d} \phi ,
+\]
+\[
+	\mathrm{d} y=\cosh\chi \sin \theta \sin \phi \mathrm{d} \chi +\sinh\chi \cos \theta \sin \phi \mathrm{d} \theta +x\mathrm{d} \phi ,
+\]
+\[
+	\mathrm{d} z=\sinh\chi \cos \theta \mathrm{d} \chi -\cosh\chi \sin \theta \mathrm{d} \theta 
+.\]
+We now square these quantities.
+\begin{align*}
+	\mathrm{d} x^2&=\cosh^2\chi \sin ^2\theta \cos ^2\phi \mathrm{d} \chi ^2+\sinh^2\chi \cos ^2\theta \cos ^2\phi \mathrm{d} \theta ^2+\sinh^2\chi \sin ^2\theta \sin ^2\phi \mathrm{d} \phi ^2\\
+		      &+2\cosh\chi \sin \theta \cos \phi \sinh \chi \cos \theta \cos \phi \mathrm{d} \chi \mathrm{d} \theta -2 \cosh \chi \sin \theta \cos \phi \sinh\chi \sin \theta \sin \phi \mathrm{d} \chi  \mathrm{d} \phi \\
+		      &-2 \sinh\chi \cos \theta \cos \phi \sinh\chi \sin \theta \sin \phi \mathrm{d} \theta \mathrm{d} \phi 
+.\end{align*}
+\begin{align*}
+	\mathrm{d} y^2&=\cosh^2\chi \sin ^2\theta \sin ^2\phi \mathrm{d} \chi ^2+\sinh^2\chi \cos ^2\theta \sin ^2\phi \mathrm{d} \theta ^2+\sinh^2\chi \sin ^2\theta \cos ^2\phi \mathrm{d} \phi^2 \\
+	&+2 \cosh\chi \sin \theta \sin \phi \sinh\chi \cos \theta \sin \phi \mathrm{d} \chi \mathrm{d} \theta +2 \cosh\chi \sin \theta \sin \phi \sinh\chi \sin \theta \cos \phi \mathrm{d} \chi \mathrm{d} \phi \\
+	&+2 \sinh\chi \cos \theta \sin \phi \sinh\chi \sin \theta \cos \phi \mathrm{d} \theta \mathrm{d} \phi 
+.\end{align*}
+\begin{align*}
+	\mathrm{d} z^2&= \sinh^2\chi \cos ^2\theta \mathrm{d} \chi ^2+\cosh^2\chi \sin ^2\theta \mathrm{d} \theta ^2-2 \sinh\chi \cos \theta \cosh\chi \sin \theta \mathrm{d} \theta \mathrm{d} \chi 
+.\end{align*}
+We see that all off-diagonal terms for $\mathrm{d} x^2$ and $\mathrm{d} y^2$ cancel except for the $\mathrm{d} \chi \mathrm{d} \theta $ terms. To cancel those, we bring in the off-diagonal term from $\mathrm{d} z^2$, and add them together:
+\[
+	2 \cosh\chi \sin \theta \cos \phi \sinh\chi \cos \theta \cos \phi +2 \cosh\chi \sin \theta \sin \phi \sinh\chi \cos \theta \sin \phi -2 \sinh\chi \cos \theta  \cosh\chi \sin \theta 
+\]
+\[
+	=\left( 2 \cosh\chi \sin \theta \sinh\chi \cos \theta  \right) \left( \cos ^2\phi +\sin ^2\phi  \right) -2 \sinh\chi \cos \theta \cosh\chi \sin \theta =0
+.\]
+Therefore, all the off-diagonal terms vanish, so the line element is
+\begin{align*}
+	\mathrm{d} s^2&=\left( \cosh^2\chi \sin ^2\theta \cos ^2\phi +\cosh^2\chi \sin ^2\theta \sin ^2\phi +\sinh^2\chi \cos ^2\theta  \right) \mathrm{d} \chi ^2\\
+		      &+\left( \sinh^2\chi \cos ^2\theta \cos ^2\phi +\sinh^2\chi \cos ^2\theta \sin^2\phi +\cosh^2\chi \sin ^2\theta  \right) \mathrm{d}\theta ^2\\
+		      &+\left( \sinh^2\chi \sin ^2\theta \sin ^2\phi +\sinh^2\chi \sin ^2\theta \cos ^2\phi  \right) \mathrm{d} \phi ^2
+.\end{align*}
+We can simplify this further. For the $\mathrm{d} \chi ^2$ term:
+\[
+	=\cosh^2\chi \sin ^2\theta \left( \cos ^2\phi +\sin ^2\phi  \right) +\sinh^2\chi \cos ^2\theta =\cosh^2\chi \sin ^2\theta +\sinh^2\chi \cos ^2\theta 
+.\]
+For the $\mathrm{d} \theta ^2$ term:
+\[
+	=\sinh^2\chi \cos ^2\theta \left( \cos ^2\phi +\sin ^2\phi  \right) +\cosh^2\chi \sin ^2\theta =\sinh^2\chi \cos ^2\theta +\cosh^2\chi \sin ^2\theta 
+.\]
+Note that these are the same. For the $\mathrm{d} \chi ^2$ term:
+\[
+	=\sinh^2\chi \sin ^2\theta \left( \sin ^2\phi +\cos ^2\phi  \right) =\sin^2\chi \sin ^2\theta 
+.\]
+We thus have
+\[
+	\mathrm{d} s^2=\left( \cosh^2\chi \sin ^2\theta +\sinh^2\chi \cos ^2\theta  \right) \left( \mathrm{d} \chi ^2+\mathrm{d} \theta ^2 \right) +\sinh ^2\chi \sin ^2\theta \mathrm{d} \phi ^2
+.\]
+
 \end{document}
 
-
-for 3 we can do whichever direction. parametrize via chi theta and go to other is easier

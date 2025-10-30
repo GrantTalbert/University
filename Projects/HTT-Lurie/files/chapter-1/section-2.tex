@@ -718,6 +718,37 @@ Final objects dualize in the obvious way: $x$ is (strongly) initial if the proje
 	\mathcal{C} '\amalg \mathcal{C} ' \ar[" i_0+i_1 ", r]  & \mathcal{C} '\times \Delta ^1\ar[" H ", dotted, r]  & \mathcal{C} ' \\
 	\mathcal{C} '\ar[" x\in \mathcal{C} '_0 "', bend right, urr] \ar[" i_1 "', ur] \ar[u] &  & 
 	\end{tikzcd}\]
-	there exists a dotted homotopy as indicated, rendering the diagram commutative.
+	there exists a dotted homotopy as indicated, rendering the diagram commutative. come back to alter
 \end{proof}
+
+
+\subsection{Limits and Colimits}
+
+\begin{definition}\label{1.2.13.1}
+	Let $\mathcal{C} $ be an $\infty $-category and $p : K \to \mathcal{C} $ a morphism of simplicial sets. A \emph{limit} for $p$, denoted $\lim p$, is a final object of $\mathcal{C} _{/p} $. A \emph{colimit} for $p$, denoted $\colim p$, is an initial object of $\mathcal{C} _{p/} $.
+\end{definition}
+
+We define the limit of $p$ as an object in the overcategory for $p$, so we need a way to identify it with an object in $\mathcal{C} $. Recall that $\mathcal{C} _{/p} $ has $n$-simplices given by $\sSet _p(\Delta ^n\star K,\mathcal{C} )$. The $0$-simplex we are interested in is a map $\overline{p} : (\Delta ^0 \star K \eqqcolon K^{\lhd} ) \to \mathcal{C} $ which restricts as $\overline{p}|K=p$. We then abuse notation and write $\overline{p} (\infty )\in \mathcal{C} $ as the limit, where $\infty $ is the point of the cone at the vertex. Similarly for colimits, we abuse notation via $\overline{p} : K^{\triangleright}  \to \mathcal{C} $.
+
+Of course, (co)limits need not be unique, but \cref{1.2.12.6} says that they form a contractible Kan complex (meaning its homotopy category is equivalent to a group) when they exist. It of course follows that they are all \emph{equivalent} to each other, aka isomorphic in the $\infty $-categorical sense.
+
+Later, we will show this definition of (co)limits agrees with the classical theory of homotopy (co)limits in $\Top $.
+
+\begin{remark}
+	Let $\mathcal{C} '$ be a full sub-$\infty $-category of $\mathcal{C} $, and $p : K \to \mathcal{C} '$ a diagram. Then the overcategory $\mathcal{C} '_{p/} $ is a pullbback $\mathcal{C} '\times_\mathcal{C} \mathcal{C} _{p/} $. To prove this, consider the square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} '_{p/} \ar[r] \ar[d]  & \mathcal{C} ' \ar[hook, d]  \\
+	\mathcal{C} _{p/} \ar[" \pi  "', r]  & \mathcal{C} 
+	\end{tikzcd}\]
+	Does this square commute? Of course, the category $\mathcal{C}_{p/} \cong \sSet _p(K\star \Delta ^{\bullet},\mathcal{C} )$ projects onto $\mathcal{C} $ by precomposing along the inclusion $\Delta ^{\bullet} \hookrightarrow K\star \Delta ^{\bullet} $ and identifying under Yoneda, as indicated by $\pi $. The inclusion $\mathcal{C} '\hookrightarrow \mathcal{C} $ is obvious. Consider the map $\mathcal{C} _{p/} '\to \mathcal{C} $ to also be the projection. Note that a morphism $K\star \Delta ^{\bullet} \to \mathcal{C}' $ can postcompose along $\mathcal{C} '\hookrightarrow \mathcal{C} $ to yield an $\bullet$-simplex of $\mathcal{C} _{p/} $, so we have the vertical morphism on the left.
+
+	To see that the diagram indeed commutes, we chase simplices somewhat. Let $f : K\star \Delta ^n \to \mathcal{C} '$ be an $n$-simplex of $\mathcal{C} _{p/} '$. Composing along the right yields the $n$-simplex $f|\Delta ^n$, viewed as an element of $\mathcal{C} $. Composing along the left yields the $n$-simplex $(i\circ f)|\Delta ^n$, which is precisely the same since really this is just $i\circ \Delta ^n \circ i$, and so is the other one. Thus, the square commutes.
+
+	Of course, universality remains to be shown. Let $f : X \to \mathcal{C} '$ and $g : X \to \mathcal{C} _{p/} $ be morphisms of simplicial sets such that the square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X\ar[r] \ar[d]  & \mathcal{C} '\ar[d]  \\
+	\mathcal{C} _{p/} \ar[r]  & \mathcal{C} 
+	\end{tikzcd}\]
+	commutes. Consider the map $k : X \to \mathcal{C} '_{p/} $ given by $p \star f$???? defined in the obvious way psure this makes the right triangle commute cuz $\mathcal{C} '_{p/} \to \mathcal{C} '$ identifies under yoneda already, but like what about left ok well it suffices to show that $g$ is basically just $f$ on $\mathcal{C} '$. I'm pretty sure $g=g'\star p$ by universality of coproduct, so just gotta show $g'=f$ after playing with inclusions. Ok yeah basically $f(x)=g(x)\circ \iota $ for $\iota : \Delta ^{\bullet} \hookrightarrow \Delta ^{\bullet} \star K$.
+\end{remark}
 

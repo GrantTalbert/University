@@ -53,11 +53,15 @@
 \begin{proof}
 	We induct on $r$. For $r=0$, the empty product is the identity, so assume inductively that whenever a product of $k<r$ transpositions is the identity, we have $k$ even. Let $( ) = \sigma _1 \ldots \sigma _r$, and note that the only four possibilities for the final two transpositions $\sigma_{r-1} \sigma _r$ are
 	\[
-		(ab)(ab)=( ),\qquad (ac)(bc),\qquad (cd)(ab),\qquad (ac)(ab)
+		(ab)(ab)=( ),\qquad (bc)(ab),\qquad (cd)(ab),\qquad (ac)(ab)
 	.\]
 	Here, $a,b,c,d$ are all distinct. The reason these are the only possiblities is because any other product of two transpositions will simplify down to one of these, which is a slightly tedious proof due to the number of cases required to check, so we omit it. In the first case, we have $\sigma _{r-1} \sigma _r=( )$, meaning $\sigma _1 \ldots \sigma _{r-2} =( )$, and by induction $r-2$ is even. Therefore, $r$ is even.
 
-	In either of the other three cases, NIOT FINSHED
+	In either of the other three cases, we note the following equalities, which are all easily shown:
+	\[
+		(bc)(ab)=(ac)(bc),\qquad (cd)(ab)=(ab)(cd),\qquad (ac)(ab)=(ab)(bc)	
+	.\]
+	We replace $\sigma _{r-1} \sigma _r$ with the corresponding above equality. The important thing to note here is that in any of the above equalities, $a$ does \emph{not appear} in the rightmost transposition. We now repeat this process on $\sigma _{r-2} \sigma _{r-1} $. If we ever get that two adjacent transpositions, we are once again done by induction. In the case that this never happens, we may freely continue shifting $a$ to the left by iterating the above argument. It follows that eventually the only transposition which acts nontrivially on $a$ is $\sigma _1$. This is a contradiction, since then the entire composite would act nontrivially on $a$, since there is no action to cancel that of $\sigma _1$. The identity acts trivially on all elements, giving us the contradiction. Thus, we see that eventually we must have two transpositions cancelout, meaning $r-2$ is even, and thus $r$ is even.
 \end{proof}
 
 \begin{problem}
@@ -69,6 +73,12 @@
 		\neg(\forall \sigma _1 \ldots \sigma _r=\sigma : 2|r) \implies \neg (\exists \sigma _1 \ldots \sigma _r = \sigma \text{ s.t. } 2|r)
 	.\]
 	The first statement is equivalent to saying there exists some $\sigma _1\ldots \sigma _r=\sigma $ with 2 not dividing $r$, meaning there is an odd representation. The second statement is that there does not exist any even representations, meaning all are odd. This is precisely the odd case, meaning the two cases are equivalent. We proceed by proving the even case.
+
+	Let $\sigma =\sigma _1\sigma _2\cdots \sigma _r=\tau _1\cdots \tau _m$, where $r$ is even. We must show $m$ is even. The inverse is given by $\sigma _r\cdots\sigma _1$, giving
+	\[
+		( )=\tau _1\cdots\tau _m\sigma _r\cdots\sigma _1
+	.\]
+	By \cref{7.2}, it follows that $m+r$ is even. Since $r$ is even, it follows that $m$ must be even.
 \end{proof}
 
 
@@ -302,7 +312,5 @@ By \cref{9.1} and \cref{9.2}, $H^{\oplus A} $ is abelian whenever $H$ is abelian
 	\]
 	by playing with the isomorphism and universality. It's fairly obvious that the representation on the right is simply isomorphic to $G$, and a rigorous proof is constructed by noting that $G\times \left\{ e \right\} $ is obviously the kernel of the projection $(g,h)\mapsto h$, and since the natural projection is surjective, it follows by the first isomorphism theorem.
 \end{proof}
-
-
 
 \end{document}

@@ -1,0 +1,54 @@
+\section{Ridification of Quasi-Categories}
+
+I found Lurie's definition of ridigification $\mathfrak{C} $ (which is actually attributed to Joyal) particularly difficult to parse. However, the 2011 paper \cite{rigid} introduced a new characterization of $\mathfrak{C} $, which is not only simpler to understand than Joyal's rigidification, but does not require computing colimits in $\mathrm{s} \Cat $. In this section, we digress from the main text to explore Dugger and Spivak's rigidification functor, and the theory of necklaces.
+
+\subsection{Necklaces}
+
+\begin{definition}\label{1.3.1.1}
+	A \emph{necklace} is a wedge sum of representable simplicial sets of the form
+	\[
+		\Delta ^{n_0} \vee \Delta ^{n_1} \vee \cdots \vee \Delta ^{n_k} ,
+	\]
+	for $n_i\geq 0$, where we glue the final vertex of $\Delta ^{n_i} $ to the first vertex of $\Delta ^{n_{i+1} } $. A necklace is in \emph{preferred form} if either $n_i \geq 1$ for all $i$, or if $k=0$. Each $\Delta ^{n_i} $ is a \emph{bead} of the necklace. A \emph{joint} of the necklace is an initial or final vertex in one of the component $\Delta ^{n_i} $s.
+\end{definition}
+
+Given a necklace $T$, write $V_T=T_0$ for the set of vertices, and $J_T\subseteq V_T$ for the set of joints of $T$. Both of these sets admit total orders by writing $a\leq b$ if there is a directed path $a\to b$ in $T$. We write $\alpha _T$ for the initial vertex of $T$ and $\omega _T$ for the final vertex of $T$. We define the wedge sum $S\vee T$ of two necklaces $S,T$ in the obvious way, by gluing $\omega _S\sim \alpha _T$.
+
+Each necklace $T$ has a canonical morphism $\partial \Delta ^1\to T$ given by $0\mapsto \alpha _T$ and $1\mapsto \omega _T$. We define $\mathcal{N} \mathrm{ec} $ as the full subcategory of $\sSet _{*,*} =(\partial \Delta ^1\downarrow \sSet )$ spanned by those canonical morphisms to necklaces $(\partial \Delta ^1\to T,T)$. It follows that morphisms $f : S \to T$ of necklaces are maps of simplicial sets such that $f(\alpha _S)=\alpha _T$ and $f(\omega _S)=\omega _T$. We may then freely identify $\mathcal{N} \mathrm{ec} $ with a subcategory of $\sSet $ via the projection of the comma category.
+
+A \emph{simplex} is a necklace with one bead. A \emph{spine} is a necklace where all beads are $\Delta ^1$. Every necklace $T$ has a canonically associated simplex and spine: the representable functor $\Delta [T]=\Delta^{V_T} $ is the \emph{simplex} of $T$, and the spine $\operatorname{Spi} [T]$ is the longest spine in $T$. There are inclusions $\operatorname{Spi} [T]\hookrightarrow T\hookrightarrow \Delta [T]$, and the latter inclusion is functorial.
+
+If $X$ is a simplicial set, then there is a relation $\leq $ on its vertices given by $x\leq y$ iff there is a spine $T$ and a map $T\to X$ which restricts along $\alpha _T$ and $\omega _T$ to the vertices $x$ and $y$. This is a complex way of saying there is a path $x\to y$ in $X$. This relation is transitive and reflexive, but need not be antisymmetric (indeed, it is fully symmetric in Kan complexes).
+
+\begin{definition}\label{1.3.1.2}
+	A simplicial set $X$ is \emph{ordered} if
+	\begin{enumerate}
+		\item the relation $\leq $ on $X_0$ is antisymmetric, and
+		\item a simplex $x\in X_n$ is determined by its vertex sequence $x(0)\leq \ldots \leq x(n)$; i.e. no distinct simplices have the same vertex sequences.
+	\end{enumerate}
+\end{definition}
+
+I didn't fully understand (2), so I offer some further discussion. I used an AI chatbot to assist me with this information. The vertex sequence of an $n$-simplex is clearly just the ordered list of its vertices $(v_0, \ldots ,v_n)$. The $n$-simplex witnesses an ordering $v_i \leq v_{i+1} $, $0\leq i<n$ since its edges map $v_i\to v_{i+1} $. The condition simply says that no two $n$-simplices have the same vertices in the same order. Also recall that the ordering on the $n$-simplex $\sigma : \Delta ^n \to X$ is given by the images of the vertices $\left\{ 0, \ldots ,n \right\} =\Delta ^n_0$.
+
+\begin{definition}\label{1.3.1.3}
+	A map $f : A \to X$ of simplicial sets is a \emph{simple inclusion} if it has the right lifting property with respect to the canonical inclusions $\partial \Delta ^1\hookrightarrow T$ for all necklaces $T$.
+\end{definition}
+
+\begin{remark}\label{1.3.1.4}
+	The notion of a simple inclusion simply says that any path starting and ending in $A$ must lie entirely in $A$. More generally, any necklace $T\to X$ starting and ending in $A$ ($\alpha _T,\omega _T\in \Im A\hookrightarrow X)$ must be fully contained in $A$. We can immediately see that this is an inclusion of at least vertices, by noting that given any lifting problem against $\partial \Delta ^1\to \Delta ^0$ as indicated by the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\partial \Delta ^1\ar[r] \ar[d]  & A \ar[hook, d]  \\
+	\Delta ^0\ar[r]\ar[dotted, ur]  & X
+	\end{tikzcd}\]
+	admits a dotted arrow as indicated, rendering the diagram commutative. An arrow $\partial \Delta ^1\to A$ is simply a choice of two vertices, and the commutativity of the outer square says that the simple inclusion identifies these two vertices. The existence of the lift says that these two vertices are in fact the \emph{same}, showing that the simple inclusion is injective on vertices.
+\end{remark}
+
+We would also like to show higher levels of simple inclusions are injective, since we would then have that they are mono. This is a classical theorem of simplicial sets that I have never proven before.
+
+\begin{proposition}\label{1.3.1.5}
+	A morphism of simplicial sets $f : A \to X$ is monic (levelwise injective) if and only if it has the right lifting property with respect to the canonical inclusion $\partial \Delta ^1\hookrightarrow \Delta ^1$.
+\end{proposition}
+\begin{proof}
+	apparently this follows from ANOTHER theorem idk
+\end{proof}
+

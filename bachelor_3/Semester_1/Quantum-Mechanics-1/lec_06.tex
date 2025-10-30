@@ -1,0 +1,124 @@
+\lecture{6}{Tue 30 Sep 2025 13:59}{Nuclear magnetic resonance}
+
+Recall from my notes that the most general time-independent hamiltonian for a 2-dimensional state is
+\[
+	H=\begin{pmatrix}
+	\varepsilon _0 & \gamma e^{-i\chi }  \\
+	\gamma e^{i\chi }  & \varepsilon _1
+	\end{pmatrix}
+.\]
+Then
+\[
+	P_{0\to 1} (t)=\frac{4\gamma ^2}{4\gamma ^2+(\varepsilon _1-\varepsilon _0)^2} \sin ^2\left( \frac{t}{2\hbar} \sqrt{4\gamma ^2+(\varepsilon _1-\varepsilon _0)^2}  \right) 
+.\]
+
+A spin 1/2 proton in a uniform $\mathbf{B} +RF$ field has
+\[
+	H(t)=-\boldsymbol{\mu} \cdot \mathbf{B} (t)= -\boldsymbol{\mu} \cdot \left( B_0\mathbf{z} +\mathbf{B} _1(t) \right) 
+.\]
+We want to find the transmission probability $P_{0\to 1} $. Here, $\ket{0}$ is the ground state. $B_1$ is small compared to $B_0$, so we would expect that the transmission probability should be small ($\ket{0}$ eigenstate for ONLY $B_0$, so small contribution does small change).
+
+We could discuss a linearly polarized field $\mathbf{B} _1=B_1 \mathbf{x} \cos \omega t$. We could also discuss a ciruclar polarized field
+\[
+	B_0 \mathbf{z} +B_1\left( \mathbf{x} \cos \omega t \pm \mathbf{y} \sin \omega t \right) 
+.\]
+So then if you take the dot product for the $-$ case of the circular case, then
+\[
+	\mathbf{H} =-\frac{1}{2}  \hbar=\omega _L \sigma _z-\frac{1}{2} \hbar\Omega _1\left( \sigma _x \cos \omega t-\sigma _y \sin \omega t \right) 
+.\]
+Fascinatingly, there \emph{are not exact solutions} to the linear case. There \emph{are} exact solutions to the ciruclarly polarized case, which we explore.
+
+We will rewrite the hamiltonian as
+\[
+	\mathbf{H} =\begin{pmatrix}
+	-\frac{1}{2} \hbar\omega _L & \gamma e^{i\omega t}  \\
+	\gamma e^{-i\omega t}  & \frac{1}{2} \hbar\omega _L
+	\end{pmatrix}
+.\]
+Here, $\gamma =-\frac{1}{2} \hbar \Omega _1$. We can rewrite this as
+\[
+	\mathbf{H} _0+\mathbf{V} (t)
+.\]
+We have
+\[
+	\mathbf{H} _0=\operatorname{diag} \left( -\frac{1}{2} \hbar \omega _L,\frac{1}{2} \hbar\omega _L \right) ,\qquad \mathbf{V} (t)=\begin{pmatrix}
+	 & \gamma e^{i\omega t}  \\
+	\gamma e^{-i\omega t}  & 
+	\end{pmatrix}
+.\]
+We could solve this with the Schr\"odinger picture by using $i\hbar \partial_t \ket{\Psi }=\mathbf{H} \ket{\Psi }$. We would then set $\ket{\Psi }=\alpha _0(t)\ket{0}+\alpha _1(t)\ket{1}$, and solve the differential equation. However, it is better to solve this in Dirac's interaction picture. This will be a homework problem. Our reference frame changes to
+\[
+	\ket{\Psi _I}=\exp \left( \frac{i}{\hbar} \mathbf{H} _0t \right) \ket{\Psi_0}
+.\]
+This satisfies the equation of motion
+\[
+	i\hbar \frac{\partial }{\partial t} \ket{\Psi _I}=\exp \left( \frac{i}{\hbar} \mathbf{H} _0t \right) \mathbf{V} (t)\exp \left( -\frac{i}{\hbar} \mathbf{H} _0t \right) \ket{\Psi _0}
+.\]
+We then just solve this easier equation.
+
+There is yet another frame, the Rabi rotating frame. Here, we jump onto the $\mathbf{B} _1$ frame. We write
+\[
+	\ket{\Psi _R}=\exp \left( -\frac{i\omega t}{2} \sigma _z \right) \ket{\Psi } \iff \ket{\Psi }=\exp \left( \frac{i\omega t}{2} \sigma _z \right) \ket{\Psi _R}
+.\]
+We would like to find an equation
+\[
+	i\hbar \frac{\partial }{\partial t} \ket{\Psi _R}=\mathbf{H} _R\ket{\Psi _R}
+.\]
+We will then attain a definition of our hamiltonian. We substitute the Schr\"odinger picture:
+\[
+	i\hbar \frac{\partial }{\partial t} \exp \left( -\frac{i\omega t}{2} \sigma _z \right) \ket{\Psi }=i\hbar\left( -\frac{i\omega }{2} \sigma _z \right) \exp \left( -\frac{i\omega t}{2}  \right) \ket{\Psi }+\exp \left( -\frac{i\omega t}{2} \sigma _z \right) i\hbar \frac{\partial }{\partial t} \ket{\Psi }
+.\]
+Applying the Schr\"odinger equation:
+\[
+	=i\hbar\left( -\frac{i\omega }{2} \sigma _z \right) \exp \left( -\frac{i\omega t}{2}  \right) \ket{\Psi }+\exp \left( -\frac{i\omega t}{2} \sigma _z \right) \left( \mathbf{H}_0+\mathbf{V} (t) \right) \ket{\Psi }
+.\]
+Plugging in $\Psi _R$ for $\Psi $ gives a mess
+\[
+	=\frac{\hbar \omega }{2} \sigma _z+ \exp \left( -\frac{i\omega t}{2} \sigma _z \right) \mathbf{H} _0 \exp \left( \frac{i\omega t}{2} \sigma _z \right) +\exp \left( -\frac{i\omega t}{2} \sigma _z \right) \mathbf{V} (t)\exp \left( \frac{i\omega t}{2} \sigma _z \right) \ket{\Psi _R}
+.\]
+Because $\mathbf{H} _0=-\frac{1}{2} \hbar\omega _L\sigma _z$ is a scalar multiple of $\sigma _z$, the exponentials commute with $\mathbf{H} _0$ and cancel:
+\[
+	\mathbf{H} _R=\frac{\hbar}{2} \left( \omega -\omega _L \right) \sigma _z+\exp \left( -\frac{i\omega t}{2} \sigma _z \right) \mathbf{V} (t)\exp \left( \frac{i\omega t}{2} \sigma _z \right) \ket{\Psi _R}
+.\]
+This is the Hamiltonian in the Rabi frame. Can we compute the $\mathbf{V} _R(t)$ term, which is the $\mathbf{V} $ term? Recall that
+\[
+	e^{-i\omega t\sigma _z/2} =\begin{pmatrix}
+	e^{-i\omega t/2}  &  \\
+	 & e^{i\omega t/2} 
+	\end{pmatrix}
+.\]
+This gives
+\[
+	\mathbf{V} _R(t)=\begin{pmatrix}
+	e^{-i\omega t/2}  &  \\
+	 & e^{i\omega t/2} 
+	\end{pmatrix}\begin{pmatrix}
+	 & \gamma e^{i\omega t}  \\
+	e^{-i\omega t}  & 
+	\end{pmatrix}\begin{pmatrix}
+	e^{i\omega t/2}  &  \\
+	 & e^{-i\omega t/2} 
+	\end{pmatrix}
+.\]
+We can check that this becomes
+\[
+	\mathbf{V} _R(t)=\gamma \sigma _x
+.\]
+Therefore,
+\[
+	\mathbf{H} _R=\begin{pmatrix}
+	-\frac{\hbar}{2} (\omega _L-\omega ) & \gamma  \\
+	\gamma  & \frac{\hbar}{2} (\omega _L-\omega )
+	\end{pmatrix}
+.\]
+This is time independent, so it is given by the solution I did on friday. The ground state is the top left term, and the excited state is the bottom right term, so plugging this into the formula at the top of this lecture gives
+\[
+	P_{0\to 1} (t)=\frac{\gamma ^2/\hbar^2}{\frac{\gamma ^2}{\hbar^2} +\frac{(\omega -\omega _L)^2}{4} } \sin ^2 \left(t\sqrt{\frac{\gamma ^2}{\hbar^2} +\frac{(\omega _L-\omega )^2}{4} } \right)
+.\]
+We have written it in a slightly different form here. This is the generalized Rabi frequency.
+
+Why did this frame turn the Hamiltonian into a time-independent Hamiltonian? Since the field is circularly polarized, jumping on the circular rotation yields a fixed $\mathbf{B} $-field, so it is time independent. When $\omega =\omega _L$, we are at a resonant state, so $\omega -\omega _L$ is called the \emph{detuning}.
+
+At resonance, the Rabi flopping frequency oscillates from 0 to 1. All we have in the Rabi frame is a static field, so it just precesses around it. So every half period of a rotation, it has flipped eigenstates.
+
+We use this to construct quantum gates. For example, $\sigma _x$ is given by turning on a field to allow it to precess at resonance by $\pi $, and then turning it off. We can actually construct \emph{any} gate like this apparently.

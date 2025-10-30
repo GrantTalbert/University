@@ -1,0 +1,34 @@
+\section{$\delta $-functors}\label{sec8}
+
+In this section, we will discuss the relation of derived functors to exact sequences, and show that they are universal $\delta $-functors, cementing their usefulness in homological algebra. We first return to a question we asked in \cref{sec7}: are derived functors exact? The answer turns out to be no, and this turns out to be fairly simple to see.
+
+\begin{proposition}\label{8.1}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be right exact. Then $L_0F \cong F$.
+\end{proposition}
+\begin{proof}
+	Let $X\in \mathcal{A} $. Choose a projective resolution $\varepsilon _{\bullet} : P_{\bullet}  \to \iota (X)_{\bullet} $. Then by construction, $L_0F(X)=(H_0 \circ \Ch(F) )(P_{\bullet} )$. Note that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(P_1)\ar[r]  & F(P_0)\ar[r]  & F(X)\ar[r]  & 0 
+	\end{tikzcd}\]
+	is exact, since $F$ is right exact and the sequence is exact before applying $F$ by hypothesis. Thus, $(H_0 \Ch(F) )(P_{\bullet} )=(H_0F)(P_0)\cong F(X)$ by exactness.
+\end{proof}
+
+In particular, if $F$ is not exact, then $L_0F$ is not. To summarize, we were able to take a right exact functor $F$ and construct a new functor $\mathbb{L} F$ which preserves quasi-isomorphisms. We lowered this to $\mathcal{A} \to \mathcal{B} $, but the resulting functors are not in general exact, and do not generally preserve quasi-isomorphisms either. The question then becomes: \emph{what are derived functors}?
+
+Recall that derived functors were constructed by essentially replacing objects $X\in \mathcal{A} $ with ``nice'' complexes of projectives, and then computing the homology. Homology generally measures the failiure of a complex to be exact, so what if derived functors measure the faliure of a \emph{functor} to be exact?
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{definition}\label{8.?}
+	By \cref{7.8}, given $R$ a ring and $M$ an $S$-module, $-\otimes _SM$ is right exact and $S$-$\Mod(M,-)$ is left exact. Define the functor $\operatorname{Tor}^S_i(-,M)$ as the left derived functor $L_i(-\otimes _RM)$, and define $\operatorname{Ext}_S^i(M,-)$ as the right derived functor $R^iS$-$\Mod(M,-)$.
+\end{definition}

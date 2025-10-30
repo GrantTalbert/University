@@ -1,0 +1,38 @@
+\lecture{9}{Wed 24 Sep 2025 12:24}{Submersions and immersions}
+
+The linear map $\mathrm{d} F$ as a matrix in a basis is the Jacobian
+\[
+	J_{ij} = \frac{\partial \hat{F}^i}{\partial x^j} 
+.\]
+
+\begin{definition}\label{1.2.29}
+	Let $F : M \to N$ be smooth.  Then $F$ is a \emph{local diffeomorphism} if and only if for all $p\in M$, there is some $p\in U \subseteq M$ open such that $F(U)$ is open in $N$, and $F|U$ is a diffeomorphism onto its image.
+\end{definition}
+
+For example, consider the covering $\mathbb{R} \to S^1$. This is clearly not a diffeomorphism, but it is a local diffeomorphism since we just restrict to a small enough neighborhood such that it becomes injective.
+
+\begin{theorem}\label{1.2.30}
+	Let $M,N$ be smooth manifolds, $F : M \to N$ smooth, and $p\in M$ such that $\mathrm{d} F_{p} $ is invertible. Then there is a connected neighborhood $U_0$ of $p$, and $V_0$ of $F(p)$, such that $F|U_0 : U_0 \cong V_0$ is a diffeomorphism.
+\end{theorem}
+
+Here are some obvious properties of local diffeomorphisms.
+\begin{itemize}
+	\item Composites of local diffeomorphisms are locally diffeomorphic.
+	\item Finite products of local diffeomorphisms are locally diffeomorphic.
+	\item Diffeomorphisms are local diffeomorphisms.
+	\item Every bijective local diffeomorphism is a diffeomorphism.
+\end{itemize}
+
+\begin{proposition}\label{1.2.31}
+	Let $F : M \to N$ be smooth. Then $F$ is a local diffeomorphism \emph{if and only if} $F$ is an immersion and a submersion. Moreover, if $\dim M=\dim N$ and $F$ is either an immersion or a submersion, then it is a local diffeomorphism.
+\end{proposition}
+
+\begin{theorem}[Rank]\label{1.2.32}
+	Let $F : M^m \to N^n$ be smooth and constant rank $\operatorname{rk} F=r$. Then for all $p\in M$, there are two smooth charts $(U,\varphi )$ centered at $p$ (meaning $\varphi (p)=0$), and $(V,\psi )$ or $N$ centered at $F(p)$, such that $(\psi \circ F\circ \varphi ^{-1} )(x^1, \ldots ,x^m)=(x^1, \ldots ,x^r, 0,\ldots ,0)$.
+
+	In particular, if $F$ is a submersion $(n\leq m)$, then $\hat{F} (x^1, \ldots ,x^m)=(x^1, \ldots ,x^n)$. If $F$ is an immersion $(m\leq n)$, then $\hat{F} (x^1, \ldots ,x^m)=(x^1, \ldots ,x^n)$. Smooth submersions thus look like projections, and smooth immersions look like injections. Constant rank maps are thus in particular composites of submersions and immersions.
+\end{theorem}
+\begin{proof}
+	WLOG, take $M=U \subseteq \mathbb{R} ^n$ open, $V\subseteq \mathbb{R} ^n$ open, and let $F : U \to V$ be smooth. 
+\end{proof}
+

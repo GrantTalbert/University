@@ -1,0 +1,654 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/physics.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/code.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+
+\usepackage{titlepageBU}
+\title{Homework 5}
+\begin{document}
+\makeproblem
+
+\section{Instantaenous vs adiabatic change}
+
+(a) The initial Hamiltonian is given by
+\[
+	\mathbf{H}_0 =\frac{\mathbf{p} ^2}{2m} +\frac{1}{2} m\omega _0^2x^2
+.\]
+The ground state of this is the ground state of the usual oscillator
+\[
+	\psi _0(x)=\left( \frac{m\omega _0}{\pi \hbar}  \right) ^{1/4} \exp \left( -\frac{m\omega _0x^2}{2\hbar}  \right) 
+.\]
+Note that
+\[
+	\frac{1}{2} m\omega _0^2\left( x-a \right) ^2=\frac{1}{2} m\omega _0^2x^2-q\mathcal{E} x\implies \left( x-a \right) ^2=x^2-\frac{2q\mathcal{E} x}{m\omega _0^2} 
+.\]
+\[
+	\frac{1}{2} m\omega _0^2\left( x-\frac{q\mathcal{E} }{m\omega _0^2}  \right) ^2=\frac{1}{2} m\omega _0^2x^2-q\mathcal{E} x+\frac{q^2\mathcal{E} ^2}{2m\omega _0^2} =V(x)+\frac{q^2\mathcal{E} ^2}{2m\omega _0^2} 
+.\]
+Therefore,
+\[
+	V(x)=\frac{1}{2} m\omega _0^2\left( x-\frac{q\mathcal{E} }{m\omega _0^2}  \right) ^2-\frac{q^2\mathcal{E} ^2}{2m\omega _0^2} 
+.\]
+This is just the potential for an oscillator centered at $\frac{q\mathcal{E} }{m\omega _0^2} $, where the energy levels are all shifted downwards by a fixed constant $\frac{q^2\mathcal{E} ^2}{2m\omega _0^2} $.
+The ground state of the new Hamiltonian, which we denote $\psi_0'(x)$, is then given by
+\[
+	\psi '_0(x)=\psi _0\left( x-\frac{q\mathcal{E} }{m\omega _0^2}  \right) =\left( \frac{m\omega _0}{\pi \hbar}  \right) ^{1/4} \exp \left( -\frac{m\omega _0}{2\hbar} \left( x-\frac{q\mathcal{E} }{m\omega _0^2}  \right) ^2 \right) 
+.\]
+
+The transition probability is then given by
+\[
+	P=\left|\bra{\psi'_0}e^{-i\mathbf{H}t/\hbar} \ket{\psi_0}\right|^2
+.\]
+Here, $\mathbf{H} $ is the new Hamiltonian with the electric field, and this solution to the time evolution operator follows since the Hamiltonian is time-independent. Since the time evolution is Hermitian, it is self-adjoint and thus can multiply in either direction. Since $\ket{\psi _0'}$ is an eigenstate of $\mathbf{H} $ (the extra linear factor in the potential shifts the eigenvalues but not the eigenstates), we see that
+\[
+	\bra{\psi _0'}e^{-i \mathbf{H} t/\hbar}=\bra{\psi _0'}e^{-iE'_0t/\hbar} ,
+\]
+where $E_0$ is the corresponding energy eigenvalue in the Hamiltonian $\mathbf{H} $. The time evolution factor thus has a trivial contribution to the probability, since it has magnitude 1, so we see that
+\[
+	P=\left| \braket{\psi _0'}{\psi _0} \right| ^2
+.\]
+Now we simply compute the integral. Write $a=\frac{q\mathcal{E} }{m\omega _0^2} $, such that $\psi '_0(x)=\psi _0(x-a)$.
+
+
+$$\langle \psi'_0 | \psi_0 \rangle = \int_{-\infty}^{\infty} \left(\frac{m\omega_0}{\pi\hbar}\right)^{1/4} e^{-\frac{m\omega_0}{2\hbar}(x-a)^2} \left(\frac{m\omega_0}{\pi\hbar}\right)^{1/4} e^{-\frac{m\omega_0}{2\hbar}x^2} \, \mathrm{d} x$$
+$$= \left(\frac{m\omega_0}{\pi\hbar}\right)^{1/2} \int_{-\infty}^{\infty} \exp\left(-\frac{m\omega_0}{2\hbar}((x-a)^2 + x^2)\right) \, \mathrm{d} x . $$
+It would be nice to simplify the term inside the exponential.
+$$ (x-a)^2 + x^2 = x^2 - 2ax + a^2 + x^2 = 2x^2 - 2ax + a^2= 2\left(x - \frac{a}{2}\right)^2 + \frac{a^2}{2} .$$
+It follows that
+$$ \langle \psi '_0 | \psi_0 \rangle = \left(\frac{m\omega_0}{\pi\hbar}\right)^{1/2} \int_{-\infty}^{\infty} \exp\left(-\frac{m\omega_0}{2\hbar}\left(2\left(x - \frac{a}{2}\right)^2 + \frac{a^2}{2}\right)\right) \, \mathrm{d} x $$
+$$= \left(\frac{m\omega_0}{\pi\hbar}\right)^{1/2} e^{-\frac{m\omega_0 a^2}{4\hbar}} \int_{-\infty}^{\infty} \exp\left(-\frac{m\omega_0}{\hbar}\left(x - \frac{a}{2}\right)^2\right) \, \mathrm{d} x  .$$
+This is just a Gaussian. Recall that Gaussians of the form $\int_{-\infty}^{\infty} e^{-\beta u^2} \mathrm{d} u$ are solved by $\sqrt{\pi/\beta}$. Take $\beta = \frac{m\omega_0}{\hbar}$ and use the change of variables $u = x - a/2$. The integral then reduces to the given form, so we see that
+$$ \int_{-\infty}^{\infty} \exp\left[-\frac{m\omega_0}{\hbar}\left(x - \frac{a}{2}\right)^2\right] \, \mathrm{d} x = \sqrt{\frac{\pi\hbar}{m\omega_0}} $$
+We then see that
+$$ \langle \psi '_0 | \psi_0 \rangle = \left(\frac{m\omega_0}{\pi\hbar}\right)^{1/2} e^{-\frac{m\omega_0 a^2}{4\hbar}} \sqrt{\frac{\pi\hbar}{m\omega_0}} = \exp\left(-\frac{m\omega_0 a^2}{4\hbar}\right).$$
+The transition probability is thus given by
+\[
+	P=\left| \exp \left( -\frac{m\omega _0a^2}{4\hbar}  \right)  \right| ^2=\exp \left( -\frac{m\omega _0a^2}{4\hbar}  \right) ^2=\exp \left( -\frac{m\omega _0a^2}{2\hbar}  \right) 
+.\]
+Plugging in $a=\frac{q\mathcal{E} }{m\omega _0^2} $, we have
+\[
+	P=\exp \left( -\frac{q^2\mathcal{E}^2 }{2m\hbar\omega _0^3}  \right) 
+.\]
+Interestingly, this answer is \emph{time-independent}, since the time-evolution operator had a trivial contribution to the transition probability. As a sanity check, if $\mathcal{E} $ vanishes, then the probability goes to 1, as expected.
+
+(b) If we assume that the increase is very slow, then we can approximate the increase as locally zero. This means between any two periods, since the particle starts in the ground state, it should end in the ground state since the potential hasn't changed so there is zero probability of it leaving the eigenstate. Using this approximation, we see that the probability should be about $P\approx 1$ for all $t$. This is clearly very different from case (a) since the particle is essentially (extremely) slowly shifting to the newer ground states, whereas in $(a)$ there was a sudden jump in the transition probability.
+
+
+
+\section{Rabi problem: exact solution to the approximate problem}
+
+(a) We are given
+\[
+	\mathbf{H} =\mathbf{H}_0+\mathbf{V} =\begin{pmatrix}
+	\varepsilon _0 & 0 \\
+	0 & \varepsilon _1
+	\end{pmatrix}+\begin{pmatrix}
+	0 & \gamma e^{i\omega t}  \\
+	e^{-i\omega t}  & 0
+	\end{pmatrix},\qquad \gamma ,\omega \in\mathbb{R} 
+.\]
+The system is in the ground state $\ket{0}$ at $t=0$. Given an observable $\mathcal{O} $, write $\mathcal{O}_S$ and $\mathcal{O} _I$ for the representations in the Schr\"odinger and interaction pictures, respectively, and recall the transformation law
+\[
+	\mathcal{O}_I = \exp \left( \frac{i \mathbf{H} _0t}{\hbar}  \right) \mathcal{O}_S \exp \left( -\frac{i \mathbf{H} _0t}{\hbar}  \right) 
+.\]
+We also have the transformation law for statevectors
+\[
+	\ket{\Psi ,t}_I=\exp \left( \frac{i \mathbf{H} _0 t}{\hbar}  \right) \ket{\Psi ,t}_S
+.\]
+We will write $\ket{n}$ for the vector with components $\ket{n}_i=\delta_{ni} $. This is a statevector in the Schr\"odinger picture, but the transforamtion of this statevector into the interaction picture yields some $\ket{n}_I \neq \ket{n}$. The matrix form of $\ket{n}$ is quite useful, so we will continue using these vectors with the understanding that they are mainly mathematical tools for convenient expansions.
+
+If we expand $\ket{\Psi _t}$ in the $\ket{n}$ basis, we should obtain something of the form
+\[
+	\ket{\Psi ,t}=c_0(t)\ket{0}+c_1(t)\ket{1}
+.\]
+We immediately see that $\ket{\Psi ,t}=\ket{0}$ implies the intitial conditions
+\[
+	c_0(t)=1,\qquad c_1(t)=0
+.\]
+Recall also (equation 5.183) that given a state $\ket{\Psi ,t}$, the time evolution is governed only by the perturbative component of the Hamiltonian
+\[
+	i\hbar \frac{\partial }{\partial t} \ket{\Psi ,t}_I=\mathbf{V}_I \ket{\Psi,t}_I
+.\]
+Following the book, we multiply on the left by $\bra{n}$ and see that
+\[
+	i\hbar \frac{\partial }{\partial t} \braket{n}{\Psi ,t}_I=\bra{n} \mathbf{V}_I\ket{\Psi ,t}
+.\]
+Using the representation
+\[
+	1=\sum_{m} \ket{m}\bra{m},\qquad m=0,1,
+\]
+we expand the right as
+\[
+	\bra{n}\mathbf{V} _I\ket{\Psi ,t}=\sum_{m} \bra{n}\mathbf{V} _I\ket{m}\braket{m}{\Psi ,t}_I=\sum_{m}\bra{n}\mathbf{V} _I\ket{m}c_m(t)
+.\]
+The equation now reads
+\[
+	i\hbar \frac{\partial }{\partial t} c_n(t)=\sum_{m} \bra{n}\mathbf{V} _I\ket{m}c_m(t)
+.\]
+Using the representation of observables in the interaction picture,
+\[
+	\bra{n}\mathbf{V} _I\ket{m}=\bra{n} \exp \left( \frac{i \mathbf{H} _0t}{\hbar}  \right) \mathbf{V}_S \exp \left( -\frac{i \mathbf{H} _0t}{\hbar}  \right) \ket{m}=\bra{n}\exp \left( \frac{i\varepsilon _nt}{\hbar}  \right) \mathbf{V} _S \exp \left( -\frac{i \varepsilon _m t}{\hbar}  \right) \ket{m}
+\]
+\[
+	=\exp \left( \frac{it}{\hbar} (\varepsilon _n-\varepsilon _m) \right) \bra{n}\mathbf{V} _S\ket{m}=e^{it\omega_{nm} } \bra{n}\mathbf{V} _S\ket{m},
+\]
+where we define
+\[
+	\omega_{nm} =\frac{\varepsilon _n-\varepsilon _m}{\hbar} 
+.\]
+The equation then reads
+\[
+	i\hbar \frac{\partial }{\partial t} c_n(t)=\sum_{m} e^{it\omega_{nm} } \bra{n}\mathbf{V} _S\ket{m}c_m(t)
+.\]
+Of course, $\bra{n}\mathbf{V} _S\ket{m}$ is simply the $nm$th component of the matrix representation of $\mathbf{V} _S$, so we have
+\[
+	i\hbar \frac{\partial }{\partial t} c_n(t)=\sum_{m} e^{it\omega _{mn} } \mathbf{V}_{mn} =\begin{pmatrix}
+	e^{it\omega_{0n} }\mathbf{V}_{0n}   \\
+	e^{it \omega _{1n}} \mathbf{V} _{1n} 
+	\end{pmatrix}\cdot \begin{pmatrix}
+	c_0(t)  \\
+	c_1(t)
+	\end{pmatrix}
+.\]
+We can rewrite the entire situation as
+\[
+	i\hbar \begin{pmatrix}
+	\dot{c} _0(t) \\
+	\dot{c} _1(t)
+	\end{pmatrix}=\begin{pmatrix}
+	e^{it\omega_{00} } \mathbf{V}_{00}  & e^{it\omega _{01} } \mathbf{V}_{01}  \\
+	e^{it\omega _{10} } \mathbf{V} _{10}  & e^{it\omega _{11} } \mathbf{V} _{11} 
+	\end{pmatrix}\begin{pmatrix}
+	c_0(t) \\
+	c_1(t)
+	\end{pmatrix}=\begin{pmatrix}
+	0 & e^{-it\omega _{10} } \gamma e^{i\omega t}  \\
+	e^{it\omega _{10} } \gamma e^{-i\omega t}  & 0
+	\end{pmatrix}\begin{pmatrix}
+	c_0(t) \\
+	c_1(t)
+	\end{pmatrix}
+\]
+\[
+	=\begin{pmatrix}
+	0 & \gamma e^{i(\omega -\omega _{10} )t}  \\
+	\gamma e^{-i(\omega -\omega _{10} )t}  & 0
+	\end{pmatrix}\begin{pmatrix}
+	c_0(t) \\
+	c_1(t)
+	\end{pmatrix}
+.\]
+We will make the notational substitutions suggested by part (b)
+\[
+	\Omega _R=2\sqrt{\frac{\gamma ^2}{\hbar^2} +\frac{\Delta ^2}{4} } ,
+\]
+\[
+	\Delta =\omega -\omega _{10} 
+\]
+to simplify notation when possible. It is important that we do not confuse the notation $\Delta t$ for a change in time, and rather understand that this is the quantity $(\omega -\omega _{10} )t$. I would prefer to write $\Delta \omega $, but the problem said to use the notation $\Delta $. We are given the system of equations
+\[
+	\frac{\mathrm{d}c_0}{\mathrm{d}t} =-\frac{i\gamma }{\hbar} e^{i\Delta t} c_1(t),
+\]
+\[
+	\frac{\mathrm{d}c_1}{\mathrm{d}t} =-\frac{i\gamma }{\hbar}  e^{-i\Delta t} c_0(t)
+.\]
+Since we have an expression for $\dot{c} _1$ as a function of $c_0$, we might want to differentiate the first equation and plug in for $\dot{c} _1$. We find
+\[
+	\frac{\mathrm{d}^2c_0}{\mathrm{d}t^2} =-\frac{i\gamma }{\hbar} \left( i\Delta e^{i\Delta t} c_1(t)+e^{i\Delta t} \frac{\mathrm{d}c_1}{\mathrm{d}t}  \right) =\frac{\gamma \Delta }{\hbar} e^{i\Delta t} c_1(t)-\frac{\gamma ^2}{\hbar^2} c_0(t)
+.\]
+We also note that our first differential equation gives the equality
+\[
+	c_1(t)=\frac{i\hbar}{\gamma } e^{-i\Delta t} \frac{\mathrm{d}c_0}{\mathrm{d}t} 
+.\]
+Plugging this in gives
+\[
+	\frac{\mathrm{d}^2c_0}{\mathrm{d}t^2} =i \Delta \frac{\mathrm{d}c_0}{\mathrm{d}t} -\frac{\gamma ^2}{\hbar^2} c_0(t)
+.\]
+I don't actually remember the solutions to this off the top of my head, but we can model this as a system
+\[
+	\frac{\mathrm{d}\mathbf{Y} }{\mathrm{d}t} =\begin{pmatrix}
+	i\Delta  & -\frac{\gamma ^2}{\hbar^2}  \\
+	1 & 0
+	\end{pmatrix}\begin{pmatrix}
+	\dot{c} _0 \\
+	c_0
+	\end{pmatrix}
+.\]
+The solutions are given by linear combinations of the eignenvectors of the matrix. The eigenvalues satisfy
+\[
+	\lambda ^2-i\Delta \lambda +\frac{\gamma ^2}{\hbar^2} =0
+.\]
+The quadratic formula yields
+\[
+	\lambda =\frac{i\Delta \pm\sqrt{-\Delta ^2-\frac{4\gamma ^2}{\hbar^2} } }{2} =\frac{i\Delta \pm i\Omega _R}{2} 
+.\]
+Using the bottom row of the matrix, we can solve for both values of $c_0$ using
+\[
+	\frac{\mathrm{d}c_0}{\mathrm{d}t} =\lambda c_0(t)
+.\]
+We obtain the eigenvectors
+\[
+	c_0^\pm(t)=\exp \left( \frac{i\Delta \pm i\Omega _R}{2} t \right) 
+.\]
+The general solution is a linear combination of these eigenvectors
+\[
+	c_0(t)=A \exp \left( \frac{i\Delta + i\Omega _R}{2} t \right) +B \exp \left( \frac{i\Delta-i\Omega _R }{2} t \right) 
+\]
+\[
+	=e^{i\Delta t/2} \left( A e^{i\Omega _Rt/2} +Be^{-i\Omega _Rt/2}  \right) 
+.\]
+Using the initial condition $c_0(0)=1$, we see that $A+B=1$. Recall that
+\[
+	c_1(t)=\frac{i\hbar}{\gamma } e^{-i\Delta t} \frac{\mathrm{d}c_0}{\mathrm{d}t} 
+.\]
+Using the initial condition $c_1(0)=0$, we have
+\[
+	0=\frac{i\hbar}{\gamma } \frac{\mathrm{d}c_0}{\mathrm{d}t} 
+.\]
+Therefore, $\dot{c} _0(0)=0$. We differentiate our general form for $c_0(t)$:
+\[
+	\frac{\mathrm{d}c_0}{\mathrm{d}t} =\frac{i\Delta }{2} c_0(t)+e^{i\Delta t/2} \left( \frac{iA\Omega _R}{2} e^{i\Omega _Rt/2} -\frac{iB\Omega _R}{2} e^{-i\Omega _Rt/2}  \right) 
+.\]
+Applying the initial condition yields
+\[
+	0=\frac{i\Delta }{2} +\frac{iA\Omega _R}{2} -\frac{iB\Omega _R}{2} \implies A-B=-\frac{i\Delta }{i\Omega _R} =-\frac{\Delta }{\Omega _R} 
+.\]
+We now have a system of equations
+\[
+	\begin{pmatrix}
+	1 & 1 \\
+	1 & -1
+	\end{pmatrix}\begin{pmatrix}
+	A \\
+	B
+	\end{pmatrix}=\begin{pmatrix}
+	1 \\
+	-\frac{\Delta }{\Omega _R} 
+	\end{pmatrix}
+.\]
+The Hadamard matrix (denoted $K$ to avoid confusion with the Hamiltonian) is invertible by $K^{-1} =\frac{1}{2} K$. We then have
+\[
+	\begin{pmatrix}
+	A \\
+	B
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	1 & 1 \\
+	1 & -1
+	\end{pmatrix}\begin{pmatrix}
+	1 \\
+	-\Delta /\Omega _R
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	1-\frac{\Delta }{\Omega _R}  \\
+	1+\frac{\Delta }{\Omega _R} 
+	\end{pmatrix}
+.\]
+We therefore have
+\[
+	A=\frac{\Omega _R-\Delta }{2\Omega _R} ,\qquad B=\frac{\Omega _R+\Delta }{2\Omega _R} 
+.\]
+The first component then takes the form
+\[
+	c_0(t)=e^{i\Delta t/2} \left( \frac{\Omega _R-\Delta }{2\Omega _R} e^{i\Omega _Rt/2} +\frac{\Omega _R+\Delta }{2\Omega _R} e^{-i\Omega _Rt/2}  \right) 
+.\]
+It will be easiest to solve another system of differential equations for $c_1(t)$, since we \emph{can} plug in for it, but the algebra is horrible. We have
+\[
+	c_0(t)=e^{i\Delta t} \frac{i\hbar}{\gamma } \frac{\mathrm{d}c_1}{\mathrm{d}t} 
+,\]
+\[
+	\frac{\mathrm{d}^2c_1}{\mathrm{d}t^2} =-\frac{\Delta \gamma }{\hbar} e^{-i\Delta t} c_0(t)-\frac{i\gamma }{\hbar} e^{-i\Delta t} \frac{\mathrm{d}c_0}{\mathrm{d}t} =-i\Delta \frac{\mathrm{d}c_1}{\mathrm{d}t} -\frac{\gamma^2}{\hbar^2}c_1(t)
+.\]
+Due to the similarities with $c_0(t)$, we can skip some steps. The characteristic equation is
+\[
+	\lambda ^2+i\Delta \lambda+\frac{\gamma ^2}{\hbar^2} =0
+.\]
+We get
+\[
+	\lambda =\frac{-i\Delta \pm i\Omega _R}{2} 
+.\]
+The general solution is then
+\[
+	c_1(t)=e^{-i\Delta t/2} \left( Ce^{i\Omega _Rt/2} +De^{-i\Omega _Rt/2}  \right) 
+.\]
+Using $C+D=0$ we get $C=-D$. We also obtain $\dot{c}_1(t)=-\frac{i\gamma }{\hbar} $. We solve
+\[
+	C=-\frac{\gamma }{\hbar\Omega _R} 
+.\]
+We get the general solution
+\[
+	c_1(t)=e^{-i\Delta t/2} \left( -\frac{\gamma }{\hbar\Omega _R}  \right) \left( e^{i\Omega _Rt/2} -e^{-i\Omega _Rt/2}  \right) 
+.\]
+Therefore,
+\[
+	\ket{\Psi ,t}_I=e^{i\Delta t} \frac{i\hbar}{\gamma } \frac{\mathrm{d}c_1}{\mathrm{d}t}\ket{0}+e^{-i\Delta t/2} \left( -\frac{\gamma }{\hbar\Omega _R}  \right) \left( e^{i\Omega _Rt/2} -e^{-i\Omega _Rt/2}  \right) \ket{1}
+.\]
+
+
+
+(b) We of course have that $P_{01}(t) =\left| \braket{1}{\Psi ,t}_I \right|^2=\left| c_1(t) \right| ^2 $. This is given by
+\[
+	P_{01} (t)=\left| \frac{\gamma }{\hbar\Omega _R}  \right| ^2 \left| e^{i\Omega _Rt/2} -e^{-i\Omega _Rt/2}  \right| ^2
+.\]
+Recognize that the term in the second absolute value is a number minus its complex conjugate, which is just two times its imaginary component. Euler's formula then gives
+\[
+	P_{01} (t)=\frac{\gamma ^2}{\hbar^2 \Omega _R^2} 2 \sin^2 \left( \frac{\Omega _Rt}{2}  \right) 
+.\]
+We expand out $\Omega _R$ to check that this matches the given equation.
+\[
+	\frac{\gamma ^2}{\hbar^2\Omega _R^2} =\frac{\gamma ^2}{2\hbar^2} \frac{1}{\frac{\gamma ^2}{\hbar^2} +\frac{\Delta^2}{4} } =\frac{\gamma ^2}{2\gamma ^2+\frac{\hbar^2\Delta^2 }{2} } =\frac{\gamma ^2}{\frac{4\gamma ^2+\hbar^2\Delta^2 }{2} } =\frac{2\gamma ^2}{4\gamma ^2+\hbar^2(\omega -\omega _{10} )^2} = \frac{2\frac{\gamma ^2}{\hbar^2} }{\frac{4\gamma ^2}{\hbar^2} +(\omega -\omega _{10} )^2	} 
+.\]
+We then have
+\[
+	P_{01} (t)=\frac{4\gamma ^2/\hbar^2}{4\gamma ^2/\hbar^2+(\omega -\omega _{10} )^2} \sin ^2\left( t\sqrt{\frac{\gamma ^2}{\hbar^2} +\frac{(\omega -\omega _{10} )^2}{4} }  \right) 
+.\]
+This precisely matches the form given in the problem.
+
+
+
+\section{Numbers: exact solution to the approximate problem}
+
+(a) Recall that the Hamiltonian is given by
+\[
+	\mathbf{H}=-\boldsymbol{\mu} \cdot \mathbf{B} 
+.\]
+We start by working out the parameters $\varepsilon _0,\varepsilon _1$ which correspond to the unperturbed Hamiltonian
+\[
+	\mathbf{H} _0=-\boldsymbol{\mu }\cdot \mathbf{B} _0=\gamma _g\mathbf{S} \cdot B_0 \mathbf{z} =\gamma _gS_z=\frac{\gamma _g\hbar}{2} \sigma _z
+.\]
+We then have
+\[
+	\varepsilon _0=\frac{\gamma _g\hbar}{2} ,\qquad \varepsilon _1=-\frac{\gamma _g\hbar}{2} 
+.\]
+We can plug in
+\[
+	\varepsilon_0=\frac{g_e\mu _bB_0}{2} \approx \frac{2\times \left( 9.27\cdot 10^{-24} \,\mathrm{J} /\mathrm{T}  \right) \left( 0.35\,\mathrm{T}  \right) }{2} \approx -3.25\cdot 10^{-24} \,\mathrm{J} ,
+\]
+\[
+	\varepsilon _1=-\varepsilon _0\approx 3.25\cdot 10^{24} \,\mathrm{J} 
+.\]
+We also have
+\[
+	\omega_{10} =\gamma_gB_0 \approx -1.7609 \cdot 10^{11} \mathrm{rad}\cdot \mathrm{s} ^{-1} \mathrm{T} ^{-1} \times  0.35\mathrm{T} \approx 6.16\cdot 10^{10} \frac{\mathrm{rad} }{\mathrm{s} } 
+.\]
+To compute the coupling constant $\gamma $, we consider the rotating component of the field
+\[
+	\mathbf{V} = -\boldsymbol{\mu} \cdot B_1(\mathbf{x} \cos \omega t-\mathbf{y} \sin \omega t)=\frac{\gamma _bB_1\hbar}{2} (\sigma _x \cos \omega t-\sigma _y \sin \omega t)=\frac{\gamma _bB_1\hbar}{2} \begin{pmatrix}
+	0 & e^{i\omega t}  \\
+	e^{-i\omega t}  & 
+	\end{pmatrix}
+.\]
+Therefore,
+\[
+	\gamma =\frac{\gamma _b B_1\hbar}{2} 
+.\]
+The amplitude of the rotating component is given by
+\[
+	B_1=\sqrt{\frac{2\mu _0I}{c} } ,
+\]
+for $I=10\,\mathrm{W} /\mathrm{m} ^2$ the RF field intensity. We then compute
+\[
+	B_1 \approx 9.15\cdot 10^{-8} \,\mathrm{T} 
+.\]
+We then have
+\[
+	\gamma \approx 8.50\cdot 10^{-31} \,\mathrm{J} 
+.\]
+
+(b) We use the expression for $P_{01} (t)$ found in problem 2.
+
+\begin{lstlisting}[language=Python]
+#!/bin/python3
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.constants import hbar
+
+gamma = 8.50e-31
+omega_10 = 6.16e10
+
+def transition_probability(omega, t):
+    g_h = gamma / hbar
+    delta = omega - omega_10
+    return ((4 * g_h**2) / (4 * g_h**2 + delta**2)) * (np.sin(t * np.sqrt(g_h**2 + delta**2 / 4))**2)
+
+# we choose this t-value because then the peak is at 1
+# because the prefactor vanishes
+t_value = (np.pi * hbar) / (2 * gamma)
+
+# now we just compute stuff
+peak = 2 * gamma / hbar # this is peak
+omega_values = np.linspace(
+    omega_10 - 5 * peak,
+    omega_10 + 5 * peak,
+    2000
+)
+probabilities = transition_probability(omega_values, t_value)
+
+
+# plotting
+plt.style.use('seaborn-v0_8-whitegrid') # i saw ai use this the other day and didnt know it existed and now i like it
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.plot(omega_values, probabilities, lw=2, label=r'$P_{01}(\omega)$')
+ax.axvline(x=omega_10, color='r', linestyle='--', label=r'Resonance $\omega_{10}$')
+
+max_prob = np.max(probabilities)
+ax.axhline(y=max_prob, color='g', linestyle='--', label=f'Maximum Amplitude = {max_prob:.2f}')
+half_max_prob = max_prob / 2
+ax.axhline(y=half_max_prob, color='purple', linestyle='--', label=f'Half-Maximum = {half_max_prob:.2f}')
+
+ax.set_title(r'Transition probability vs frequency at $t=\pi\hbar/2\gamma$', fontsize=16)
+ax.set_xlabel(r'Frequency $\omega$ (rad/s)', fontsize=12)
+ax.set_ylabel(r'Transition Probability $P_{01}$', fontsize=12)
+ax.legend()
+ax.set_ylim(0, 1.1)
+ax.set_xlim(omega_values.min(), omega_values.max())
+ax.ticklabel_format(style='sci', axis='x', scilimits=(0,0), useMathText=True)
+ax.tick_params(axis='both', which='major', labelsize=10)
+
+plt.tight_layout()
+plt.show()
+\end{lstlisting}
+
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.55]{./owo.png}
+	\centering
+\end{figure}
+
+(c) We approximate $\left| \omega -\omega _{10}  \right| \approx \omega _{10} $. As in the above code, choose $t=\frac{\pi \hbar}{2\gamma } $ to ensure resonance. The transition probability for the attentive student is then maximized and reaches a peak of $1$ at $\omega =\omega_{10} $. For the distracted student, we have
+\[
+	P_{01} (t)\approx \frac{4\gamma ^2/\hbar^2}{4\gamma ^2/\hbar^2+\omega_{10} ^2} \sin ^2\left( \frac{\pi \hbar}{2\gamma } \sqrt{\frac{\gamma ^2}{\hbar^2} +\frac{\omega_{10} ^2}{4} }  \right) \approx \left( \frac{2\gamma }{\hbar\omega _{10} }  \right) ^2 \sin ^2\left( \frac{\pi \hbar}{2\gamma } \sqrt{\frac{\gamma ^2}{\hbar^2} +\frac{\omega _{10} ^2}{4} }  \right) 
+.\]
+Here we have also taken $\omega _{10 } \gg 2\gamma /\hbar$. If we plug in all the values we get approximately
+\[
+	\left( 6.84\cdot 10^{-14}  \right) \sin ^2\left( 6.009\cdot 10^6 \right) \approx 6.84\cdot 10^{-14} 
+.\]
+The factor is reduced by approximately $6.84\cdot 10^{-14} $.
+
+
+\section{Rotations and the Bloch sphere}
+
+(a) (i) We ignore the fact that $\eta $ is small.
+\[
+	\exp \left( \frac{i\eta }{\hbar} S_z \right) \ket{\Psi }=\exp \left( \frac{i\eta }{2} \sigma _z \right) \left( \cos \frac{\theta }{2} \ket{0}+ e^{i\phi } \sin \frac{\theta }{2} \ket{1} \right) 
+.\]
+Recall by homework 1 that $\exp (i\theta \sigma _z)=\operatorname{diag} (e^{i\theta } ,e^{-i\theta } )$. Using the representation $\ket{0}=(1,0)$, $\ket{1}=(0,1)$, we see that
+\[
+	\exp \left( \frac{i\eta }{2}\sigma _z \right) \ket{0}=e^{i\theta } \ket{0},\qquad \exp \left( \frac{i\eta }{2} \sigma _z \right) \ket{1}=e^{-i\theta } \ket{1}
+.\]
+We have
+\[
+	\exp \left( \frac{i\eta }{2} \sigma _z \right) \left( \cos \frac{\theta }{2} \ket{0}+ e^{i\phi } \sin \frac{\theta }{2} \ket{1} \right) = e^{i\eta /2} \cos \frac{\theta }{2} \ket{0}+e^{-i\eta /2} e^{i\phi } \sin \frac{\theta }{2} \ket{1}
+\]
+\[
+	=e^{i\eta /2} \left( \cos \frac{\theta }{2} \ket{0}+e^{-i\eta } e^{i\phi } \sin \frac{\theta }{2} \ket{1} \right) =e^{i\eta /2} \left( \cos \frac{\theta }{2} \ket{0}+e^{i(\phi -\eta )} \sin \frac{\theta }{2} \ket{1} \right) 
+.\]
+Since the global phase factor $e^{i\eta /2} $ produces no observable effect, we can safely drop it. We thus see that we have rotated from $\phi \to \phi -\eta $, effectively producing a rotation of magnitude $\eta $. Recall that on the Bloch sphere in the $z$-basis, the azimuthal angle is determined by the ratio of the magnitudes of the $\ket{0}$ and $\ket{1}$ components, and the polar angle (angle of rotation about the $z$-axis) is given by the relative phase factor. Since the angle of the relative phase factor is the only thing that changed, the rotation is indeed about the $z$-axis. Of course, if we instead swap for $-\eta $, then the only thing that changes is the relative phase becomes $e^{i(\phi +\eta )} $, so the rotation is simply the other direction.
+
+(ii) We start by constructing the $\mathbf{n} $-basis for the Block sphere, where the new $z$-axis is formed by the eigenstates for spin in direction $\mathbf{n} $. The spin operator is given by $\mathbf{n} \cdot \boldsymbol{\sigma} $. Write $\ket{\mathbf{n} ,+},\ket{\mathbf{n} ,-}$ for the $+$ and $-$ eigenstates of the spin operator. By definition,
+\[
+	(\boldsymbol{\sigma} \cdot \mathbf{n} )\ket{\mathbf{n} ,\pm}=\pm\ket{\mathbf{n} ,\pm}
+.\]
+We can write
+\[
+	\ket{\Psi }=\braket{\mathbf{n} ,+}{\Psi }\ket{\mathbf{n} ,+}+\braket{\mathbf{n} ,-}{\Psi }\ket{\mathbf{n} ,-}
+.\]
+To simplify notation, write $c_\pm = \braket{\mathbf{n} ,\pm}{\Psi }$. In this basis, we assign the matrix representations $\ket{\mathbf{n} ,+}=(1,0)$ and $\ket{\mathbf{n} ,-}=(0,1)$. The matrix representation of $\boldsymbol{\sigma} \cdot \mathbf{n} $ is then precisely the same as $\sigma _z$ in the $z$-basis, so this reduces to part (i). An extra relative phase of $e^{i\eta } $ is added to the $\ket{\mathbf{n},-}$ term, indicating a rotation about the $\mathbf{n} $-axis.
+
+
+(b) We begin by appealing to the Taylor expansion
+\[
+	\exp \left( -\frac{i}{2} \eta \boldsymbol{\sigma} \cdot \mathbf{n}  \right) =\sum_{n=0}^{\infty} \frac{\left( -\frac{i}{2} \eta \boldsymbol{\sigma} \cdot \mathbf{n}  \right)^n }{n!} =\sum_{n=0}^{\infty} (-1)^n i^n \left( \frac{\eta }{2}  \right) ^n\frac{\left( \boldsymbol{\sigma} \cdot \mathbf{n}  \right) ^n}{n!} 
+.\]
+We clearly want to break up the sum along even and odd components, and since $\sigma_k^2=1$ for all $k$, it will likely be convenient to investigate $(\boldsymbol{\sigma} \cdot \mathbf{n})^2$. Indeed,
+\[
+	\left( n_x\sigma _x+n_y\sigma _y+n_z\sigma _z \right) ^2=n_x^2+n_y^2+n_z^2+n_x\sigma _xn_y\sigma _y+n_x\sigma _xn_z\sigma _z+n_y\sigma _yn_x\sigma _x+n_y\sigma _yn_z\sigma _z+n_z\sigma _zn_x\sigma _x+n_z\sigma _zn_y\sigma _y
+.\]
+Recalling that the Pauli matrices are antisymmetric, staring at the off-diagonal terms for sufficiently long implies that they all vanish, giving
+\[
+	(\boldsymbol{\sigma} \cdot \mathbf{n} )^2=n_x^2+n_y^2+n_z^2=1
+.\]
+Therefore, we have
+\[
+\boldsymbol{\sigma} \cdot \mathbf{n} =n_x\sigma _x+n_y\sigma _y+n_z\sigma _z,\qquad (\boldsymbol{\sigma} \cdot \mathbf{n} )^2=1,\qquad (\boldsymbol{\sigma} \cdot \mathbf{n} )^n = (\boldsymbol{\sigma} \cdot \mathbf{n} )^{n\,\,(\text{mod} \,2)} 
+.\]
+Plugging this into the Taylor expansion yields even and odd terms
+\[
+	\sum_{n=0}^{\infty} (-1)^{2n} i^{2n} \left( \frac{\eta }{2}  \right) ^{2n}\frac{(\boldsymbol{\sigma} \cdot \mathbf{n} )^{2n} }{(2n)!} +\sum_{n=0}^{\infty} (-1)^{2n+1} i^{2n+1}\left( \frac{\eta }{2}  \right)^{2n+1}  \frac{(\boldsymbol{\sigma} \cdot \mathbf{n} )^{2n+1} }{(2n+1)!} 
+\]
+\[
+	=\sum_{n=0}^{\infty} (-1)^n\left( \frac{\eta }{2}  \right)^{2n}\frac{1}{(2n)!} -i \sum_{n=0}^{\infty} (-1)^n\left( \frac{\eta }{2}  \right)^{2n+1} \frac{\boldsymbol{\sigma} \cdot \mathbf{n} }{(2n+1)!} =\cos \frac{\eta }{2} 1-i \sin \frac{\eta }{2} \boldsymbol{\sigma} \cdot \mathbf{n} 
+.\]
+
+\section{An appoximate solution to the exact problem}
+
+(a) (i) We have
+\[
+	\ket{\Psi (t)}_I=\exp \left( \frac{it}{\hbar} \mathbf{H} _0 \right) \ket{\Psi (t)}_S=\exp \left( \frac{it}{\hbar} \mathbf{H} _0 \right) \left( c_0(t)\ket{0}+c_1(t)\ket{1} \right) 
+.\]
+Since $\mathbf{H} _0$ is diagonal, we have
+\[
+	\exp \left( \frac{it}{\hbar} \mathbf{H} _0 \right) =\begin{pmatrix}
+	e^{it\varepsilon _0/\hbar}  & 0 \\
+	0 & e^{it\varepsilon _1/\hbar} 
+	\end{pmatrix}
+.\]
+Plugging this in yields
+\[
+	\ket{\Psi (t)}_I=\exp \left( \frac{i\varepsilon _0t}{\hbar}  \right) c_0(t)\ket{0}+\exp \left( \frac{i\varepsilon _1t}{\hbar}  \right) c_1(t)\ket{1}=c_0(t)\ket{0}+\exp \left( \frac{it}{\hbar} (\varepsilon _1-\varepsilon _0) \right) \ket{1}
+.\]
+In the final step, we multiply through by $\exp \left( -\frac{i\varepsilon _0t}{\hbar}  \right) $ and drop the global phase factor. 
+
+(ii) The Heaviside step function is $1$ for $t \geq 0$, and since we are only considering $t \geq 0$, we may freely drop it. Using the same matrix representation for the mateix exponential, we have
+\[
+	\mathbf{V} _I=\begin{pmatrix}
+	e^{i\varepsilon _0t/\hbar}  & 0 \\
+	0 & e^{i\varepsilon _1t/\hbar} 
+	\end{pmatrix}\begin{pmatrix}
+	0 & 2V_0 \cos \omega t \\
+	2V_0\cos\omega t & 0
+	\end{pmatrix}\begin{pmatrix}
+	e^{-i\varepsilon _0t/\hbar}  & 0 \\
+	0 & e^{-i\varepsilon _1t/\hbar} 
+	\end{pmatrix}
+\]
+\[
+	=2V_0 \cos \omega t \begin{pmatrix}
+	0 & e^{it\varepsilon _0 /\hbar}  \\
+	e^{it\varepsilon _1/\hbar}  & 
+	\end{pmatrix}\begin{pmatrix}
+	e^{-i\varepsilon _0t/\hbar}  & 0 \\
+	0 & e^{-i\varepsilon _1t/\hbar} 
+	\end{pmatrix}=2V_0 \cos \omega t\begin{pmatrix}
+	0 & e^{-it(\varepsilon _1-\varepsilon _0) /\hbar}  \\
+	e^{it(\varepsilon _1-\varepsilon _0) /\hbar}  & 0
+	\end{pmatrix}
+.\]
+
+(b) It will be useful to write
+\[
+	2V_0 \cos \omega t=V_0 \left(e^{i\omega t} +e^{-i\omega t} \right)
+.\]
+Then the integral takes the form
+\[
+	 V_0 \int_{0}^{t} \begin{pmatrix}
+	 & e^{it'(\omega -\omega _{10} )} +e^{-it'(\omega +\omega _{10} )}  \\
+	e^{it'(\omega +\omega _{10} )} +e^{-it'(\omega -\omega _{10} )}  & 
+	\end{pmatrix} \,\mathrm{d} t'
+,\]
+where we have defined
+\[
+	\omega _{10} =\frac{\varepsilon _1-\varepsilon _0}{\hbar} 
+.\]
+I hope the grader will forgive my lack of rigor in the remainder of this part, since I did not want to type this matrix more times than required. The top right entry in the matrix integrates to
+$$ \int_0^t V_0 \left( e^{i(\omega - \omega_{10})t'} + e^{-i(\omega + \omega_{10})t'} \right) dt' = V_0 \left[ \frac{e^{i(\omega - \omega_{10})t'} }{i(\omega - \omega_{10})} - \frac{e^{-i(\omega + \omega_{10})t'} }{i(\omega + \omega_{10})} \right]_0^t $$ $$ = \frac{V_0}{i} \left( \frac{e^{i(\omega - \omega_{10})t} - 1}{\omega - \omega_{10}} - \frac{e^{-i(\omega + \omega_{10})t} - 1}{\omega + \omega_{10}} \right).$$
+The bottom left entry integrates to
+$$ \int_0^t V_0 \left( e^{i(\omega + \omega_{10})t'} + e^{-i(\omega - \omega_{10})t'} \right) dt' = V_0 \left[ \frac{e^{i(\omega + \omega_{10})t'} }{i(\omega + \omega_{10})} - \frac{e^{-i(\omega - \omega_{10})t'} }{i(\omega - \omega_{10})} \right]_0^t $$ $$ = \frac{V_0}{i} \left( \frac{e^{i(\omega + \omega_{10})t} - 1}{\omega + \omega_{10}} - \frac{e^{-i(\omega - \omega_{10})t} - 1}{\omega - \omega_{10}} \right).$$
+The (first order approximation of the) time evolution operator then takes the form
+\[
+	U_I(t,0)=\begin{pmatrix}
+		1 & \displaystyle{-\frac{V_0}{\hbar} \left( \frac{e^{it(\omega -\omega _{10} )} -1}{\omega -\omega _{10} } -\frac{e^{-it(\omega +\omega _{10} )} -1}{\omega +\omega _{10} }  \right) } \\
+	 \displaystyle{-\frac{V_0}{\hbar} \left( \frac{e^{it(\omega +\omega _{10} )} -1}{\omega +\omega _{10} } -\frac{e^{-it(\omega -\omega _{10} )} -1}{\omega -\omega _{10} }  \right) } & 1
+	\end{pmatrix}
+.\]
+
+(c) Since $\bra{1}U_I(t,0)\ket{0}$ is the bottom left entry in the matrix, we simply write it down:
+\[
+	c_1^{(1)} (t)=-\frac{V_0}{\hbar} \left( \frac{e^{it(\omega +\omega _{10} )} -1}{\omega +\omega _{10} } -\frac{e^{-it(\omega -\omega _{10} )} -1}{\omega -\omega _{10} }  \right)=\frac{V_0}{\hbar} \left( \frac{1-e^{i(\omega -\omega _{10} )t} }{\omega _{10} +\omega } -\frac{1-e^{-i(\omega -\omega _{10} )t} }{\omega -\omega _{10} }  \right) 	
+\]
+\[
+	=\frac{V_0}{\hbar} \left( \frac{1-e^{i(\omega +\omega _{10} )t} }{\omega _{10} +\omega } +\frac{1-e^{-i(\omega -\omega _{10} )t} }{\omega _{10} -\omega }  \right) 
+.\]
+This is precisely the given form.
+
+(d) The probability $P_{10} (t)$ is given by
+\[
+	P_{10} (t)=\left| \bra{1}U_I(t,0)\ket{0} \right| ^2=\left| \frac{V_0}{\hbar} \left( \frac{1-e^{i(\omega +\omega _{10} )t} }{\omega _{10} +\omega } +\frac{1-e^{-i(\omega -\omega _{10} )t} }{\omega _{10} -\omega }  \right)  \right| ^2
+.\]
+Yea no
+\begin{lstlisting}[language=Python]
+#!/bin/python3
+
+import sympy
+from sympy import I, exp, Abs, simplify, trigsimp, latex
+
+V0, hbar, omega, omega10, t = sympy.symbols(
+    'V_0 hbar omega omega_10 t', 
+    real=True, 
+    positive=True
+)
+
+c1 = (V0 / hbar) * (
+    (1 - exp(I * (omega10 - omega) * t)) / (omega10 - omega) + 
+    (1 - exp(I * (omega + omega10) * t)) / (omega + omega10)
+)
+
+P01 = (c1 * sympy.conjugate(c1)).expand()
+
+P01_simplified = trigsimp(P01)
+
+print(latex(P01_simplified))
+\end{lstlisting}
+\[
+	- \frac{V_{0}^{2}}{\hbar^{2} \omega^{2} e^{i \omega t} e^{i \omega_{10} t} + 2 \hbar^{2} \omega \omega_{10} e^{i \omega t} e^{i \omega_{10} t} + \hbar^{2} \omega_{10}^{2} e^{i \omega t} e^{i \omega_{10} t}} - \frac{V_{0}^{2} e^{i \omega t}}{\hbar^{2} \omega^{2} e^{i \omega_{10} t} - 2 \hbar^{2} \omega \omega_{10} e^{i \omega_{10} t} + \hbar^{2} \omega_{10}^{2} e^{i \omega_{10} t}}
+\]
+\[
+	- \frac{V_{0}^{2} e^{i \omega_{10} t}}{\hbar^{2} \omega^{2} e^{i \omega t} - 2 \hbar^{2} \omega \omega_{10} e^{i \omega t} + \hbar^{2} \omega_{10}^{2} e^{i \omega t}} - \frac{V_{0}^{2} e^{i \omega t} e^{i \omega_{10} t}}{\hbar^{2} \omega^{2} + 2 \hbar^{2} \omega \omega_{10} + \hbar^{2} \omega_{10}^{2}} + \frac{2 V_{0}^{2}}{\hbar^{2} \omega^{2} + 2 \hbar^{2} \omega \omega_{10} + \hbar^{2} \omega_{10}^{2}}
+\]
+\[
+	+ \frac{2 V_{0}^{2}}{\hbar^{2} \omega^{2} - 2 \hbar^{2} \omega \omega_{10} + \hbar^{2} \omega_{10}^{2}} - \frac{V_{0}^{2}}{- \hbar^{2} \omega^{2} e^{i \omega t} e^{i \omega_{10} t} + \hbar^{2} \omega_{10}^{2} e^{i \omega t} e^{i \omega_{10} t}} - \frac{V_{0}^{2} e^{i \omega t}}{- \hbar^{2} \omega^{2} e^{i \omega_{10} t} + \hbar^{2} \omega_{10}^{2} e^{i \omega_{10} t}}
+\]
+\[
+	+ \frac{V_{0}^{2}}{- \hbar^{2} \omega^{2} e^{2 i \omega t} + \hbar^{2} \omega_{10}^{2} e^{2 i \omega t}} - \frac{V_{0}^{2} e^{i \omega_{10} t}}{- \hbar^{2} \omega^{2} e^{i \omega t} + \hbar^{2} \omega_{10}^{2} e^{i \omega t}} + \frac{V_{0}^{2} e^{2 i \omega t}}{- \hbar^{2} \omega^{2} + \hbar^{2} \omega_{10}^{2}} - \frac{V_{0}^{2} e^{i \omega t} e^{i \omega_{10} t}}{- \hbar^{2} \omega^{2} + \hbar^{2} \omega_{10}^{2}} + \frac{2 V_{0}^{2}}{- \hbar^{2} \omega^{2} + \hbar^{2} \omega_{10}^{2}}
+.\]
+Sometimes symbolic computation is the coolest thing ever. Other times it's just like what do I even do with this? 
+
+
+(e) There are two possibilities. Either the particle can stay at the ground state, or it can absorb energy from the potential and become excited. The two terms represent these different probabilities.
+
+\end{document}

@@ -1,27 +1,29 @@
 \section{Additive categories}
 
-The next step up from an $\Ab $-category is an \emph{additive category}. An extremely important object in homological algebra is the trivial $R$-module $0$. The trivial $R$-module is used as the ``start'' and ``end'' of many chain complexes, including short exact sequences, and also characterizes when there is no homology in a complex. To have a good theory of homological algebra, we should require that our categories have a zero object. Luckiy, regular category theory already provides a good definition.
+The next step up from an $\Ab $-category is an \emph{additive category}. An extremely important object in homological algebra is the trivial $k$-vector space $0$. The trivial $k$-vector space is used as the ``start'' and ``end'' of many chain complexes, including short exact sequences, and also characterizes when there is no homology in a complex. To have a good theory of homological algebra, we should require that our categories have some kind of ``zero object''. Luckily, regular category theory already provides a good definition.
 
 \begin{definition}\label{3.1}
 	A \emph{zero object} or \emph{null object} of a category $\mathcal{C} $ is an object $0\in \mathcal{C} $ which is both initial and terminal.
 \end{definition}
 
-Indeed, $0\in\Mod_R$ is both initial and terminal, so this is a good definition. Moreover, the unique maps $0\to M$ and $M\to 0$ must be the zero map since abelian groups must have an identity, which agrees with $\Mod_R$ further.
+Indeed, $0\in k$-$\Vect$ is both initial and terminal, so this is a good definition. Moreover, the unique maps $0\to V$ and $V\to 0$ must be the zero map since abelian groups must have an identity, which agrees with $k$-$\Vect$ further.
 
-The next definition we introduce is largely motivated by the structure of $\Mod_R$, and less so by homological algebra. It may not be immediately clear how this is relevant in the study of homology, but many extremely important constructions and theorems in homological algebra make use of the notion of a \emph{biproduct}. To motivate this notion, we present a fascinating theorem.
+The next definition we introduce is largely motivated by $k$-$\Vect$. Many constructions and proofs in homological algebra require the following criteria, but we will unfortunately not see any in these notes. To motivate this notion, we present a fascinating theorem.
 
 \begin{proposition}\label{3.2}
 	Let $\mathcal{C} $ be an $\Ab $-category, and $x,y\in \mathcal{C} $. If a product $x\times y$ of $x,y$ exists, then a coproduct $x\amalg y$ also exists, and there is an isomorphism $x\times y \cong x\amalg y$. In particular, finite products and coproducts coencide.
 \end{proposition}
-The proof is nontrivial, and can be found in \cite{nlab-add} proposition 2.1.
+\begin{proof}
+	The proof is nontrivial, so see \cite{nlab-add} proposition 2.1, [weibel], or \cite{ml} i forget where.
+\end{proof}
 
 \begin{definition}\label{3.3}
-	Let $\mathcal{C} $ be a category. Two objects $x,y\in \mathcal{C} $ have a \emph{biproduct} when their product and coproduct coencide. We then call it a \emph{biproduct} and denote it by $x\oplus y$.
+	Let $\mathcal{C} $ be a category. Two objects $x,y\in \mathcal{C} $ have a \emph{biproduct} when their product and coproduct coencide. We then call both the product and coproduct a \emph{biproduct} and denote it by $x\oplus y$.
 \end{definition}
 
-In practice, we rarely actually call the biproduct a biproduct, and simply call it a product. We also rarely use the notation $\oplus $ outside of \emph{additive categories}, which we will shortly introduce.
+In practice, we rarely actually call the biproduct a biproduct, and simply call it a product or coproduct when appropriate. We also rarely use the notation $\oplus $ outside of \emph{additive categories}, which we will shortly introduce.
 
-The category $\Mod_R$ has finite products and coproducts, and by \cref{3.2} they coencide. The product of two $R$-modules $M\times N$ is the same as their coproduct $M\amalg N$, so we call it a \emph{direct sum} and denote it by $M\oplus N$. Direct sums ar extremely useful in the theory of $R$-modules, and it would be nice if our $\Ab $-categories hhad finite biproducts as well. This motivates \cref{3.4}.
+The category $k$-$\Vect$ has finite products and coproducts, and by \cref{3.2} they coencide. The product of two $k$-vector spaces $V\times W$ is the same as their coproduct $V\amalg W$, so we call it a \emph{direct sum} and denote it by $V\oplus W$. Direct sums ar extremely useful in the theory of $k$-vector spaces, and more generally the theory of $R$-modules, so it would be nice if our $\Ab $-categories had finite biproducts as well. This motivates \cref{3.4}.
 
 \begin{definition}\label{3.4}
 	An $\Ab $-category $\mathcal{C} $ is an \emph{additive} category if it has a zero object and binary biproducts. Equivalently, it must have a zero object and binary products (or coproducts), since products \emph{are} coproducts in $\Ab $-categories by \cref{3.2}.

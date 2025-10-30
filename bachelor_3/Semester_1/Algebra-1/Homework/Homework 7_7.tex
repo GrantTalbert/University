@@ -1,0 +1,188 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\title{Homework 7}
+\begin{document}
+\makeproblem
+\setcounter{section}{7}
+
+\section{Problem 8}
+
+Let $R$ be a commutative ring, $r\in R$, and $\varphi _r : R[x] \to R$ the evaluation map $f(x)\mapsto f(r)$.
+
+\begin{problem}
+	Show that $\varphi_r$ is a ring homomorphism.
+\end{problem}
+\begin{proof}
+	Let $f,g\in R[x]$ be given by
+	\[
+		f(x)=\sum_{i=0}^{n} a_ix^i,\qquad g(x)=\sum_{i=0}^{m} b_ix^i
+	.\]
+	Then by definition,
+	\[
+		\varphi_r (f+g)=\sum_{i=0}^{\max (m,n)} (a_i+b_i)r^i,
+	\]
+	and
+	\[
+		\varphi_r(f)+\varphi _r(g)=\left( \sum_{i=0}^{n} a_ir^i \right) +\left( \sum_{i=0}^{m} b_ir^i \right) =\sum_{i=0}^{\max (m,n)} (a_i+b_i)r^i
+	.\]
+	The final equality follows by distributivity, and finiteness of $m$ and $n$. Therefore, $\varphi_r $ preserves addition. It also preserves 1, since $1\in R[x]$ is simply $1\in R$, and since elements of $R\subseteq R[x]$ have no $x$ component, $\varphi _r$ acts trivially on them. Therefore, $\varphi _r(1)=1$. Finally, we have
+	\[
+		\varphi _r(fg)=\varphi _r\left( \sum_{k} \sum_{i+j=k} a_ib_jx^{i+j}  \right) =\sum_{k} \sum_{i+j=k} a_ib_jr^{i+j} ,
+	\]
+	\[
+		\varphi_r(f)\varphi _r(g)=\left( \sum_{i=0}^{n} a_ir^i \right) \left( \sum_{i=0}^{m} b_ir^i \right) =\sum_{k} \sum_{i+j=k} a_ib_jr^{i+j} 
+	.\]
+	The proof of the final equality is the same as the proof of the definition of multiplication in $R[x]$ agreeing with the usual definition given by simply imposing distributivity. Since we omitted this proof in class due to how messy it is, we feel it is fine to omit the proof here and cite it as fact. Therefore, $\varphi _r$ is a ring homomorphism.
+\end{proof}
+
+\begin{problem}
+	Find the image of $\varphi _r$.
+\end{problem}
+\begin{proof}
+	We claim that $\Im \varphi _r=R$. Indeed, given $s\in R$, there is a polynomial $s\in R[x]$ which has no higher order terms. Evaluation at $r$ is then trivial since there is no $x$-contribution, meaning that $\varphi _r(s)=s$. Thus, for each $s\in R$, there is $s\in \Im R$, giving us $\Im R=R$.
+\end{proof}
+
+\begin{problem}
+	Find the kernel of $\varphi _r$.
+\end{problem}
+\begin{proof}
+	We claim that $\Ker \varphi_r =(x-r)$. Clearly the only constant polynomial in the kernel is $0$, so take $f$ to have degree $\operatorname{deg} f\geq 1$. Since $x-r$ is monic, there are polynomials $q(x),r(x)\in R[x]$ with $\operatorname{deg} r < \operatorname{deg} (x-r)=1$ such that
+	\[
+		f(x) = (x-r)q(x)+r(x)
+	.\]
+	Since $r(x)$ has degree 0, we write it as a constant
+	\[
+		f(x)=(x-r)q(x)+c,\qquad c\in R
+	.\]
+	Since $f(r)=0$, we have that $(r-r)q(r)+c = 0$. Since $r-r=0$, we have $c=0$. Therefore, $f(x)=(x-r)q(x)$ for some $q(x)\in R[x]$. Hence, $f(x)\in (x-r)$.
+
+	The converse is immediate: If $f(x)\in (x-r)$, then $f(x)=q(x)(x-r)$ for some $q(x)\in R[x]$, and thus $f(r)=q(r)(r-r)=0$.
+\end{proof}
+
+
+
+\section{Problem 9}
+\begin{problem}
+	Let $R$ be a commtuative ring. Show that the following are equivalent.
+	\begin{enumerate}
+		\item $R$ is a field.
+		\item The only ideals of $R$ are trivial.
+		\item All nonzero ring homomorphisms with domain $R$ are injective.
+	\end{enumerate}
+\end{problem}
+\begin{remark}
+	The problem as stated in the problem set is wrong; condition (3) is stated to require that ring homomorphisms with \emph{nonzero codomain} are injective. However, the zero morphism to a nonzero ring cannot be injective. The correct condition is that nonzero morphisms are injective.
+\end{remark}
+
+\begin{proof}
+	$(1 \implies 2)$ Let $R$ be a field. Let $I\subseteq R$ be an ideal. If $I\neq 0$, then there is some nonzero $r\in I$. Since $r$ is nonzero and $R$ is a ring, $r$ has an inverse $r^{-1} r=1$. Therefore, $1\in I$ since $I$ is an ideal, and thus $I=R$. Therefore, if $I$ is nonzero, then it must be $R$, so the only ideals of $R$ are trivial.
+
+	$(2 \implies 3)$ Let $R$ have only trivial ideals. Since the kernel of a ring homomorphism $\varphi  : R \to S$ is an ideal, we must have $\Ker \varphi =R$ or $\Ker \varphi \cong 0$. Let $\varphi \neq 0$. Then $\Ker \varphi \neq R$, meaning $\Ker \varphi \cong 0$ since this is the only other ideal. Since ring homomorphisms with zero kernel are injective, we have that $\varphi $ is injective.
+
+	$(3 \implies 1)$ Let $R$ be a ring with all nonzero ring homomorphisms $\varphi : R \to S$ injective. Let $r\in R$ be nonzero; since $R$ is commutative and units are not zero-divisors, it suffices to show there is $r^{-1} \in R$. Consider the quotient morphism $\pi : R \to R/(r)$. If $R/(r)\neq 0$, then either $\pi =0$ or $\pi $ is injective. We cannot have $\pi =0$ since $\pi $ is surjective, and $0$ is not surjective on nonzero rings. Therefore, either $R/(r)\cong 0$, or $\pi $ is injective. If $R/(r)\cong 0$, then $(r)=R$, and thus there is $1\in (r)$. By definition, $1=ar$ for some $a\in R$, and by commutativity of $R$ we thus have that the element $a$ is a two-sided inverse of $r$.
+
+Otherwise, if $\pi $ is injective, then it must be bijective, meaning $R/(r) \cong R$. Since $\pi $ maps $s\mapsto s+(r)$, by bijectivity $r$ is the unique element mapping to $(r)$. Equivalently, $r$ is the only element of $(r)$, meaning $\left\{ r \right\} =(r)$. However, ring homomorphisms preserve 0, meaning $\pi (0)=(r)$, and thus $0\in (r)$. Therefore $0=r$, contradicting our assumption that $r\neq 0$. Therefore, $\pi $ cannot be injective.
+\end{proof}
+
+\section{Problem 10}
+
+\begin{problem}\label{10}
+	Show the characteristic of an integral domain is prime or zero.
+\end{problem}
+\begin{proof}
+	Let $\varphi : \mathbb{Z}  \to R$ be the unique ring morphism to an integral domain $R$. It is possible to have the kernel be trivial, since $\mathbb{Z} \hookrightarrow \mathbb{R} $ is injective, so suppose that $\Ker \varphi $ is nonzero. We must show it is of the form $p\mathbb{Z} $ for some prime $p$.
+
+	Suppose for contradiction that $\Ker \varphi =x\mathbb{Z} $ with $x$ \emph{not} prime. The cleanest argument is to appeal to the canonical decomposition
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathbb{Z} \ar[" \varphi  ", bend left, rrr] \ar[" \pi  "', r]  & \mathbb{Z} /x\mathbb{Z} \ar[" \overline{\varphi }  "', r]  & \Im \varphi \ar[" \iota  "', hook, r]  & R,
+	\end{tikzcd}\]
+	where we have noted that $\Ker \varphi=x\mathbb{Z} $ since the kernel is an ideal, and ideals are subgroups, which must be of this form. Since $\overline{\varphi } $ is an isomorphism, we have $\mathbb{Z} /x\mathbb{Z} \cong \Im \varphi \subseteq R$. In particular, $\mathbb{Z} /x\mathbb{Z} $ can be identified with a subring of $R$. Of course, $\mathbb{Z} /x\mathbb{Z} $ has zero divisors whenever $x$ is not prime (shown in HW 6), so it suffices to show injective ring homorphisms preserve zero divisors. The injectivity condition is to guarentee the zero divisors don't map to 0, since they would no longer be zero divisors. We also note the injectivity of $\iota $ and $\overline{\varphi } $ in the canonical decomposition.
+
+	Let $\psi : S \to T$ be a ring homomorphism, and let $r,s\in S$ be nonzero with $rs=0$. We then have that $\psi (r)\psi (s)=\psi (rs)=\psi (0)$. Since ring homomorphisms are in particular (abelian) group homomorphisms, they preserve the additive identity 0, giving
+	\[
+		\psi (r)\psi (s)=\psi (0)=0
+	.\]
+	Since $r,s\neq 0$, by injectivity $\psi (r),\psi (s)\neq 0$. Therefore, zero-divisors are preserved.
+
+	Since the proof was done by contradiction, this proof feels incomplete without an example of an integral domain with prime characteristic, to show that we cannot easily restrict our conditions further. Of course, $\mathbb{Z} /p\mathbb{Z} $ for $p$ prime has characteristic $p$, and is a field by the previous homework.
+\end{proof}
+
+\section{Problem 11}
+\begin{problem}\label{11}
+	Let $R$ be a ring. For any $r\in R$, define $\lambda _r : R \to R$ as the ring homomorphism given by left-multiplication. Show that the map $\lambda : R \to \End_{\Ab }(R) $ given by $r\mapsto \lambda _r$ is an injective ring homomorphism.
+\end{problem}
+\begin{proof}
+	First we show injectivity. Let $r\neq s$ be elements of $R$. Then $\lambda _r(1)=r$ and $\lambda _s(1)=s$ implies that $\lambda _r(1)\neq \lambda _s(1)$, and thus $\lambda _r \neq \lambda _s$. This proves injectivity.
+
+	Now we show $\lambda $ is a group homomorphism. Let $r,s\in R$. It suffices to show $\lambda _r+\lambda _s=\lambda _{r+s} $. Indeed, for any $a\in R$,
+	\[
+		\lambda _{r+s} (a)=(r+s)a=ra+sa=\lambda _r(a)+\lambda _s(a)
+	.\]
+	Therefore, the equality follows, and $\lambda $ is a group homomorphism. To show $\lambda $ is a ring homomorphism, first note that the identity $1\in \End_{\Ab }(R) $ is the identity function $\mathrm{id}_R: R \to R$, and this is given by $\lambda _1$:
+	\[
+		\lambda _1(a)=1a=a=\mathrm{id} _R(a)
+	.\]
+	Therefore, $1\mapsto \lambda _1$ preserves the identity. Finally, we show $\lambda $ distributes over multiplication, meaning $\lambda _r \circ \lambda _s = \lambda _{rs} $. Indeed,
+	\[
+		(\lambda _r \circ \lambda _s)(a)=\lambda _r(sa)=rsa=(rs)a=\lambda _{rs} (a)
+	.\]
+	Therefore, $\lambda _r \circ \lambda _s=\lambda _{rs} $, and $\lambda $ is an injective ring homomorphism.
+\end{proof}
+
+\section{Problem 12}
+\begin{problem}
+	Let $\left\{ I_n \right\}_{n\in\mathbb{Z}_{> 0} } $ be ideals of a ring $R$. Decide if the following are ideals of $R$.
+	\begin{enumerate}
+		\item $I_1+I_2$
+		\item $I_1I_2$
+		\item $\bigcap_{n} I_n$
+		\item $\bigcup_{n} I_n$
+		\item $\bigcup_{n} I_n$ when $I_1 \subseteq I_2 \subseteq \cdots$
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Since $R$ is abelian, we have $I_1+I_2=I_2+I_1$, and thus $I_1+I_2$ is a subgroup of $R$ by a lemma from homework 5. Let $a\in R$, and $r\in I_1$, $s\in I_2$. Then $a(r+s)=ar+as$. Since $I_1,I_2$ are ideals, we have $ar\in I_1$ and $as\in I_2$, and thus $a(r+s)\in I_1+I_2$. Multiplication on the other side follows in the same way. Therefore, $I_1+I_2$ is an ideal.
+
+	(2) Since we defined this to be an ideal in class, either this is an ideal by definition, or we are considering the definition in the sense of group theory. I consider the latter option since the former is immediate by definition.
+
+	This fails in general. Consider the polynomial ring $R=\mathbb{R} [x,y]$, and consider the ideal $I=( x,y ) $ generated by the polynomials $x,y$. More explicitly, $I$ consists of all polynomials with no constant term. Since $x\in I$, we have $x^2\in I\cdot I$, and similarly $y^2\in I\cdot I$. For $I\cdot I$ to be an ideal, we must have $x^2+y^2\in I\cdot I$, and thus there are polynomials $f(x,y),g(x,y)\in I$ such that $f(x,y)\cdot g(x,y)=x^2+y^2$. We will show no such polynomial exists.
+
+	Since $I$ has no polynomials of constant terms, we must have that $f,g$ have no contant terms. Since $x^2+y^2$ has degree 2, we see that $f,g$ can have degree no higher than two. Define
+	\[
+		f(x,y)=a_1x + a_2y+a_3xy+a_4x^2+a_5y^2+a_6x^2y+a_7xy^2+a_8x^2y^2,
+	\]
+	\[
+		g(x,y)=b_1x + b_2y+b_3xy+b_4x^2+b_5y^2+b_6x^2y+b_7xy^2+b_8x^2y^2,
+	.\]
+	Before we even multiply, we note that since $x$ and $y$ don't have inverses, and since $\mathbb{R} $ is a field (and thus has no zero divisors), we can take $a_i,b_i=0$ when $i\geq 6$. We also see that $a_3,b_3=0$, and since any product of the degree 2 terms with other elements contains terms that cannot exist, so we can take them to be zero since they cannot contribute to the product. So we can take
+	\[
+		f(x,y)=a_1x+a_2y,\qquad g(x,y)=b_1x+b_2y
+	.\]
+	Then
+	\[
+		f(x,y)g(x,y)=a_1b_1x^2+a_1b_2xy+a_2b_1xy+a_2b_2y^2
+	.\]
+	We must have $a_1b_2=a_2b_1=0$. We must also have $a_1b_1=1$ and $a_2b_2=2$. Therefore, $a_1,b_1,a_2,b_2 \neq 0$, a contradiction. Therefore, $x^2+y^2 \notin I\cdot I$.
+
+	(3) Write $I = \bigcap_{n} I_n$. Let $r\in R$ and $a\in I$. Then since $a\in I_n$ for all $n$ and $I_n$ is an ideal for all $n$, we have $ra\in I_n$ for all $n$, and thus $ra\in I$. The other side follows the same. We have previously shown this is a subgroup as well. Therefore, $\bigcap_{n} I_n$ is an ideal.
+
+	(4) This fails in general. Take $R=\mathbb{Z} $, $I_1=2\mathbb{Z} $, $I_2=3\mathbb{Z} $, and all other ideals $I_{n\geq 3} \cong 0$. Then the union is simply $I_1 \cup I_2$. We have $2\in2\mathbb{Z} $ and $3\in3\mathbb{Z} $. Since ideals are subgroups, we must have $2+3\in2\mathbb{Z} \cup 3\mathbb{Z} $. However, $5 \notin 2\mathbb{Z} $ and $5\notin 3\mathbb{Z} $, meaning $2\mathbb{Z} \cup 3\mathbb{Z} $ is not a subgroup.
+
+	(5) Let $I=\bigcup_{n} I_n$. Let $a,b\in I$. There then exist $n,m>0$ such that $a\in I_n$ and $b\in I_m$. Assume $n\leq m$ without loss of generality. Then $a,b\in I_m$ since $I_n \subseteq I_m$, and since $I_m$ is a subgroup of $R$, we have $-b\in I_m$ and $a-b\in I_m \subseteq I$. By the subgroup test, $I$ is a subgroup of $R$.
+
+	Now let $r\in R$ and $a\in I$. It follows that there is some $n>0$ with $a\in I_n$, and since $I_n$ is a  two-sided ideal, $ra,ar\in I_n \subseteq I$. Therefore, $I$ is a two-sided ideal.
+\end{proof}
+\end{document}

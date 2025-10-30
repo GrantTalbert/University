@@ -1,0 +1,86 @@
+\section{Resolutions}\label{sec6}
+
+Generally when we study objects ``up to isomorphism'', the goal is to replace complex objects with ``nice'' objects that we already know a lot about, and we do thus by finding an isomorphism between them. Although we are not studying chain complexes up to isomorphism, we should still take motivation from other areas of math. Our goal for this section will be to replace chain complexes with quasi-isomorphic ``nice'' chain complexes. First we obviously need to know what a ``nice'' chain complex is.
+
+\begin{definition}\label{6.1}
+	Let $\mathcal{A} $ be an abelian category. An object $p\in \mathcal{A} $ is \emph{projective} if for any epimorphism $f : x \to y$ and any morphism $g : p \to y$, there is a dotted arrow as indicated
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & p\ar[" g ", d] \ar[" \gamma  "', dotted, dl]  \\
+	x\ar[" f "', two heads, r]  & y
+	\end{tikzcd}\]
+	rendering the diagram commutative.
+\end{definition}
+
+\begin{remark}\label{6.2}
+	There is a reformulation of this definition which will not be important for our discussion, but hints at a cofibrantly generated model structure on chain complexes. \Cref{6.1} is equivalent to saying that for any diagram of solid arrows where $f$ is epi
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" 0 "', d] \ar[" 0 ", r]  & x\ar[" f ", two heads, d]  \\
+	p\ar[" \gamma  ", dotted, ur] \ar[" g "', r]  & y
+	\end{tikzcd}\]
+	there is a lift as indicated by the dotted arrow, rendering the diagram commutative. In other words, $0\to p$ has the left lifting property with respect to epimorphisms.
+\end{remark}
+
+Projective objects are ``nice'' because they play nicely with epimorphisms, which as we know from \cref{4.13} are precisely the cokernels of $\mathcal{A} $. Projective objects give us ways to factor cokernels, which is useful in many proofs, and many statements are more easily proven for projective objects than general objects. For example, we will see that additive functors represented by projectives $\mathcal{A} (p,-): \mathcal{A}  \to \Ab $ are \emph{exact}. Dual to projectives are \emph{injectives}:
+
+\begin{definition}\label{6.3}
+	Let $\mathcal{A} $ be an abelian category. An object $i\in \mathcal{A} $ is \emph{injective} if for any monomorphism $f : x \to y$ and any map $g : x \to i$, there is a dotted arrow as indicated
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" f ", tail, r] \ar[" g "', d]  & y \ar[" \gamma  ", dotted, dl]  \\
+	i & 
+	\end{tikzcd}\]
+	rendering the diagram commutative.
+\end{definition}
+
+The following definition is convenient, since it is a fairly common condition that ensures various important constructions always exist.
+
+\begin{definition}\label{6.4}
+	Let $\mathcal{A} $ be an abelian category. We say $\mathcal{A} $ has \emph{enough projectives} if for all $x\in \mathcal{A} $, there is a projective objec $p$ and an epimorphism $p\to x$. Similarly, we say $\mathcal{A} $ has \emph{enough injectives} if for all $x\in \mathcal{A} $, there is an injective object $i$ and a monomorphism $x\to i$.
+\end{definition}
+
+\begin{proposition}\label{6.5}
+	Let $\mathcal{A} $ be an abelian category with enough projectives (resp. injectives). Then $\Ch(\mathcal{A} ) $ has enough projectives (resp. injectives).
+\end{proposition}
+\begin{proof}
+	See [FIND REFERENCE].
+\end{proof}
+
+\begin{definition}\label{6.6}
+	Let $\mathcal{A} $ be an abelian category. A chain complex $p_{\bullet} $ in $\Ch(\mathcal{A} ) $ is a \emph{complex of projectives} if each $p_n$ is projective. A chain complex $i_{\bullet} $ is a \emph{chain complex of injectives} if each $i_n$ is injective.
+\end{definition}
+
+\begin{warning}\label{6.7}
+	A chain complex of projectives \emph{does not need to be a projective object} in $\Ch(\mathcal{A} ) $. Similarly, a chain complex of injectives does not need to be an injective object in $\Ch(\mathcal{A} ) $.
+\end{warning}
+
+Although complexes of projectives and injectives need not be projective or injective in $\Ch(\mathcal{A} ) $, they are still of significant importance due to the fact that they are constructed out of well-behaved objects. The significance of these constructions is illuminated by the notion of a \emph{resolution}.
+
+\begin{definition}\label{6.8}
+	Let $\mathcal{A} $ be an abelian category, and $X\in \mathcal{A} $. Define the chain complex $\iota (X)_{\bullet} \in \Ch(\mathcal{A} )$ as the complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[" 0 ", r] & 0\ar[" 0 ", r]  & X\ar[" 0 ", r]  & 0\ar[" 0 ", r]  & \cdots
+	\end{tikzcd}\]
+	In particular, we take $X$ to be the 0th degree object, and all other objects are 0.
+\end{definition}
+
+\begin{definition}\label{6.9}
+	Let $\mathcal{A} $ be an abelian category, and $X\in \mathcal{A} $. A \emph{projective resolution} is a chain complex $P_{\bullet} $ of projectives with $P_n=0$ for all $n<0$, together with a quasi-isomorphism $\epsilon : P_{\bullet}  \to \iota (X)_{\bullet} $. An \emph{injective resolution} is a cochain complex of injectives $I^{\bullet} $ with $I^n=0$ for all $n<0$, together with a quasi-isomorphism $\eta : \iota (X)^{\bullet}  \to I^{\bullet} $.
+\end{definition}
+
+We have not discussed cochain complexes yet, but there is not much to discuss. A cochain complex is just a chain complex where the indices go up, instead of down. Equivalently, the category of cochain complexes is the opposite category of the category of chain complexes. They are essentially the same thing, but we maintain the distinction for a few useful reasons. We denote cochain complexes via $X^{\bullet} $ rather than $X_{\bullet} $. We call the homology of a cochain complex its \emph{cohomology}.
+
+\begin{proposition}\label{6.10}
+	Let $\epsilon : P_{\bullet}  \to \iota (X)_{\bullet} $ be a projective resolution of $X\in \mathcal{A} $. Then the complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\cdots \ar[r] & P_2\ar[r]  & P_1\ar[r]  & P_0\ar[" \epsilon_0  ", r]  & X \ar[r] &0
+	\end{tikzcd}\]
+	is exact. Dually, if $\eta : \iota (X)^{\bullet}  \to I^{\bullet} $ is an injective resolution of $X\in \mathcal{A} $, then the complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]  & X\ar[" \eta _0 ", r]  & I^0\ar[r]  & I^1\ar[r]  & I^2\ar[r]  & \cdots
+	\end{tikzcd}\]
+	is exact.
+\end{proposition}
+\begin{proof}
+	Exercise. Injectives follow by duality. It suffices to show the homology is vanishing at all degrees. Of course, the homology in $P_{\bullet} $ vanishes for all $n\neq 0$, since it vanishes for $\iota (X)_{\bullet} $ at all $n\neq 0$, and $P_{\bullet} $ is quasi-isomorphic to $\iota (X)_{\bullet} $. We also have that the homology of $P_1\to P_0\to 0$ is the same as $0\to X\to 0$. The reader should be able to complete the proof without much difficulty.
+\end{proof}
+
+Let us discuss what we have achieved so far. Given an object $X\in \mathcal{A} $, we have found a way to view that object as a chain complex via \cref{6.8}. \emph{Projective and injective resolutions} of this object can be though of as special cases of our idea of replacing complexes with ``nice'' complexes. This special case turns out to be of extreme importance, and we will now illustrate why.

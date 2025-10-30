@@ -1,0 +1,40 @@
+\lecture{11}{Tue 21 Oct 2025 12:32}{Maximally symmetric spaces}
+
+Recall that there were only 6 maximally symmetric spaces. They must have a constant Ricci scalar $R$ and either Euclidean or Lorentzian metric signature. This means we have six different possible spaces:
+\begin{enumerate}
+	\item $S^d$\\
+	\item $\mathbb{R} ^d$\\
+	\item $\mathbb{R} ^d$ with negative curvature,
+\end{enumerate}
+all of which can be summarized as
+\[
+	\mathrm{d} s^2=\frac{\mathrm{d} r^2}{1-\kappa r^2}+r^2 \mathrm{d} \Omega ^2_{d-1} ,
+\]
+\[
+	\mathrm{d} \Omega ^2_d = \mathrm{d}x_1^2+\cdots+\mathrm{d} x_d^2
+.\]
+Any choice of $\kappa $ gives a maximally symmetric space. Here $\kappa =1$ is $S^d$, $\kappa =0$ is $\mathbb{R} ^d$, and $\kappa =-1$ is hyperbolic space $\mathbb{H}^d$. These are the euclidean spaces. Adding a time dimension and space expansion gives 
+\[
+	\mathrm{d} s^2=-\mathrm{d} t^2+R^2(t)\left( \frac{\mathrm{d} r^2}{1-\kappa r^2} +r^2 \mathrm{d} \Omega ^2_d \right) 
+.\]
+The $R(t)$ is proporitional to the scale factor $a(t)$ which we used previously in the expanding universe metric. The main difference is that $R(t)$ has units of length, whereas $a(t)$ is dimensionless. We fix some time $t_0$ and set $a(t)=R(t) /R(t_0)$.
+
+In our universe, $\kappa $ is nearly 0. We are pretty confident that $\kappa =0$, which is why our inverse seems like flat space, so we just need to measure $a(t)$. Why is $\kappa =0$ in our universe?
+
+Lets go back and look at the Lorentzian maximally symmetric spaces. One is just Minkowski space where $\kappa =0$. More generally,
+\[
+	\mathrm{d} s^2=-\mathrm{d} t^2+\ell ^2\cosh^2(t/\ell )\left( \frac{\mathrm{d} r^2}{1-\frac{r^2}{\ell ^2} }  +r^2\mathrm{d} \Omega _{d-2}^2\right) 
+.\]
+This is called de Sitter space. This is a special case of the expanding universe metric where $\ell ^2\cosh^2(t/\ell )=a^2(t)$ and $\kappa =\frac{1}{\ell ^2} $. This is important because the expanding universe is not maximally symmetric on all time but only on time slices, whereas de Sitter space is globally maximally symmetric.
+
+De Sitter space is a great approximation to our universe. In this case, $\ell $ is the analogue of the radius of the universe, and for our universe to be de Sitter we would need to take $\ell $ to be massive. Our universe is closer to de Sitter space than Minkowski space.
+
+Hyperbolic cosine blows up exponentially fast
+\[
+	a(t)=\ell \cosh^2(t/\ell )=\frac{\ell }{2} \left( e^{t/\ell } +e^{-t/\ell }  \right) 
+.\]
+If $t\gg \ell $ then approximately $a(t) \approx \frac{\ell }{2} e^{-t/\ell } $, and we can write
+\[
+	\mathrm{d} s^2 \approx -\mathrm{d} t^2+e^{2(t-t_0) /\ell } \left( \frac{\mathrm{d} r^2}{1-\frac{1}{\ell } e^{-t_0^2 /\ell ^2} r^2} +r^2 \mathrm{d} \Omega ^2_{d-2}  \right) 
+.\]
+So if we observe today in natural units then it looks like $\frac{1}{\ell ^2} e^{-t_0^2 /\ell ^2} $ which looks Minkowski.

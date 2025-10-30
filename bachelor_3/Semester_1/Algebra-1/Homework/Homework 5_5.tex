@@ -1,0 +1,106 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\title{Homework 5}
+\begin{document}
+\makeproblem
+\setcounter{section}{8}
+
+\section{Problem 9}
+
+\begin{problem}\label{9}
+	Let $G$ be a group with normal subgroups $N,H\subseteq G$ such that $N \cap H\cong 0$. Show that $NH \cong N\times H$.
+\end{problem}
+\begin{lemma}\label{9.1}
+	Let $G$ be a group and $H,K\subseteq G$ subgroups. Then $HK$ is a group if and only if $HK=KH$.
+\end{lemma}
+\begin{proof}
+	This proof is modified from the proof we did in MA541 homework 6 problem 3 last fall.
+
+	Let $HK$ be a group, and let $kh\in KH$ with $k\in K$ and $h\in H$. It follows that $hk\in HK$, and in particular $h^{-1} k^{-1} \in HK$ since $H,K$ are groups, and thus closed under inverse. Since $HK$ is a group, there is some $ab\in HK$ with $a\in H$ and $b\in K$ such that $\left( h^{-1} k^{-1}  \right) ^{-1} =ab$. However, since $HK\hookrightarrow G$ is a group homomorphism, we also see that $\left( h^{-1} k^{-1}  \right) ^{-1} =kh$, and thus $kh=ab$. Thus, $KH \subseteq HK$. For the converse, let $hk\in HK$, and thus $(hk)^{-1} =ab$ for some $a\in H$ and $b\in K$. It follows that $hk=(ab)^{-1} =b^{-1} a^{-1} \in KH$, and thus $hk\in KH$. The statement follows.
+
+	For the other direction, let $HK=KH$. First we show closure. Let $h_1k_1,h_2k_2\in HK$. Since $HK=KH$, there is thus some $k_3h_3\in KH$ such that $h_2k_2=k_3h_3$, giving
+	\[
+		h_1k_1h_2k_2=h_1k_1k_3h_3
+	.\]
+	Since $k_1k_3h_3\in KH$, there is some $h_4k_4\in HK$ with $h_4k_4=k_1k_3h_3$. We thus have
+	\[
+		h_1k_1h_2k_2=h_1k_1k_3h_3=h_1h_4k_4\in HK
+	.\]
+	Since $h_1h_4k_4\in HK$, we have that $HK$ is closed under the group operation. Associativity follows immediately since $H,K$ are subgroups of $G$, and since $e\in H,K$, we have $e=ee\in HK$. To show inverses exist, let $hk\in HK$, and thus $(hk)^{-1} =k^{-1} h^{-1} \in KH=HK$. Therefore, $HK$ is closed under inverses, meaning $HK$ is a group.
+\end{proof}
+
+\begin{corollary}\label{cor}
+	Let $H,K\subseteq G$ be subgroups with $H$ normal. Then $HK$ is a subgroup of $G$.
+\end{corollary}
+\begin{proof}
+	Note that if $hk\in HK$ with $h\in H$ and $k\in K$, then $hk\in Hk$. Similarly, $kh\in kH$. Thus,
+	\[
+		HK=\bigcup_{k\in K} Hk,\qquad KH=\bigcup_{k\in K} kH
+	.\]
+	Since $H$ is normal, for all $k\in K$ we have $Hk=kH$. It follows that
+	\[
+		HK=\bigcup_{k\in K} Hk=\bigcup_{k\in K} kH=KH
+	.\]
+	By \cref{9.1}, $HK$ is a subgroup of $G$.
+\end{proof}
+
+\begin{lemma}\label{9.2}
+	Let $H,K\subseteq G$ be subgroups with $H \cap K\cong 0$. Then every $g\in HK$ has a \emph{unique} representation as $g=hk$ for $h\in H$ and $k\in K$.
+\end{lemma}
+\begin{proof}
+	Existence follows by $g\in HK$, so we show uniqueness. Suppose that $g=h_1k_1=h_2k_2$ are two representations of $g$ in $HK$. Then
+	\[
+		k_1=h_1^{-1} h_2k_2 \implies k_1k_2^{-1} =h_1^{-1} h_2
+	.\]
+	Since $k_1k_2^{-1} \in K$ and $h_1^{-1} h_2\in H$, by hypothesis we have $h_1^{-1} h_2=e$ and $k_1k_2^{-1} =e$. It follows that $h_1=h_2 $ and $k_1=k_2$.
+\end{proof}
+
+\begin{lemma}\label{9.3}
+	Let $H,K\subseteq G$ be \emph{normal} subgroups with $H \cap K\cong 0$. Then for all $h\in H$ and $k\in K$, we have $hk=kh$.
+\end{lemma}
+\begin{proof}
+	Let $h\in H$ and $k\in K$. Consider the commutator
+	\[
+		[h,k]=hkh^{-1} k^{-1} 
+	.\]
+	Since $H$ is normal, we have $kh^{-1} k^{-1} \in H$. Since $K$ is normal, we have $hkh^{-1} \in K$. Since $H,K$ are closed, we have
+	\[
+		\left( hkh^{-1}  \right) k^{-1} \in K,\qquad h\left( kh^{-1} k^{-1}  \right) \in H
+	.\]
+	We thus have
+	\[
+		hkh^{-1} k^{-1} \in H \cap K = \left\{ e \right\} \implies hkh^{-1} k^{-1} =e
+	.\]
+	Therefore, $hk=kh$.
+\end{proof}
+
+
+\begin{proof}[Proof of \cref{9}]
+	Since $H$ is normal, by \cref{cor}, $NH$ is a subgroup of $G$. By \cref{9.2}, each $g\in NH$ has a unique representation as $g=nh$ for $n\in N$ and $h\in H$. Define the map $\varphi : NH \to N\times H$ by $nh\mapsto (n,h)$. The map is well-defined by \cref{9.2}, and is manifestly surjective since for all $(n,h)\in N\times H$, there is $nh\in NH$ with $nh\mapsto (n,h)$. Injectivity is also manifest, since if $nh\neq n'h'$, then at least one of $n\neq n'$ or $h\neq h'$ must be true, and thus $(n,h)\neq (n',h')$. It suffices to show $\varphi $ is a group homomorphism.
+
+	The statement will now follow. Let $n_1h_1,n_2h_2\in NH$. Then
+	\[
+		\varphi (n_1h_1)\varphi (n_2h_2)=(n_1,h_1)\cdot (n_2,h_2)=(n_1n_2,h_1h_2).
+	\]
+	By \cref{9.3}, we see that $h_1n_2=n_2h_1$. We thus have
+	\[
+		\varphi (n_1h_1n_2h_2)=\varphi (n_1n_2h_1h_2)=(n_1n_2,h_1h_2)
+	.\]
+	Therefore, $\varphi $ is a group homomorphism.
+\end{proof}
+
+
+\end{document}

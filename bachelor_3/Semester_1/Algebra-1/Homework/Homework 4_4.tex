@@ -1,0 +1,141 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\title{Homework 4}
+\begin{document}
+\makeproblem
+\setcounter{section}{6}
+
+\section{Problem 7}
+
+\begin{problem}\label{7}
+	Let $G$ be a finite abelian group, and $n$ coprime to $\left| G \right| $. Prove that $a\mapsto a^n$ is an automorphism of $G$.
+\end{problem}
+\begin{lemma}\label{7.1}
+	Let $\varphi : G \to H$ be a group homomorphism. Then $\varphi $ is injective if and only if $\ker \varphi \cong 0$.
+\end{lemma}
+\begin{proof}
+	Let $\ker \varphi \cong 0$, and let $g,h\in G$ with $\varphi (g)=\varphi (h)$. It follows that $\varphi (gh^{-1} )=\varphi (e)$, and thus $gh^{-1} \in \ker \varphi $. By assumption, $gh^{-1} =e$, and thus $g=h$, proving injectivity. For the converse, we simply note that $e\in \ker \varphi $ for all $\varphi $, and the statement is a triviality since $g\neq e$ implies that $\varphi (g)\neq \varphi (e)$.
+\end{proof}
+\begin{proof}[Proof of \cref{7}]
+	The homomorphism condition is simple. For $g,h\in G$, we have
+	\[
+		(gh)^n=(gh)(gh)\cdots(gh)=g^nh^n,
+	\]
+	where the final step follows by commutativity of $\cdot $ in abelian groups. To prove injectivity, it suffices by \cref{7.1} to show the kernel is trivial. Of course, $g^n=e$ if and only if the order of $g$ divides $n$ (the only if direction follows by part of a proof done in the previous homework). However, by Lagrange, the order of $g$ divides the order of $G$, and since $\operatorname{gcd} (\left| G \right| ,n)=1$, we see that $g^n=e$ if and only if $\left| g \right| =1$. It follows that $g=e$, giving us that $\ker (-)^n\cong 0$. Since functions between finite sets of the same cardinality are injective if and only if they are surjective, we have that $(-)^n$ is surjective as well by finiteness of $G$, showing that it is an automorphism.
+\end{proof}
+
+
+\section{Problem 8}
+
+\begin{problem}\label{8}
+	Show that if $G/Z(G)$ is cyclic, then $G$ is abelian.
+\end{problem}
+\begin{proof}
+	If $G/Z(G)$ is cyclic, then it has a generator $xZ(G)$. For all $g,h\in G$, there are thus integers $m,n$ such that $x^nZ(G)=gZ(G)$ and $x^mZ(G)=hZ(G)$. We then have that there is some $z_1,z_2,z_3,z_4\in Z(G)$ with $x^mz_1=gz_3$ and $x^nz_2=hz_4$. We thus have $x^mz_1z_3^{-1} =g$, and likewise for $h$. Since $Z(G)$ is a group, we have that $z_1z_3^{-1} \in Z(G)$. Since elements of the center commute with all elements of $G$, and since powers of $x$ commute with themselves,
+	\[
+		gh=x^mz_1z_3^{-1} x^nz_2z_4^{-1} =x^nz_2z_4^{-1} x^mz_1z_3^{-1}=hg
+	.\]
+	Therefore, $G$ is abelian.
+\end{proof}
+
+\section{Problem 9}
+
+\begin{problem}\label{9}
+	Let $p$ be a prime. Show that if $G$ is a finite group of order $p^2$, then $G$ is abelian and isomorphic to $\mathbb{Z} /p^2\mathbb{Z} $ or $\mathbb{Z} /p\mathbb{Z} \times \mathbb{Z} /p\mathbb{Z} $, without using the fundamental theorem of finitely generated abelian groups.
+\end{problem}
+\begin{proof}
+	First we show $G$ is abelian. By Lagrange, any subgroup $H\subseteq G$ must have its order divide that of $G$. Since the only divisors of $p^2$ are $1,p,p^2$, the order of any subgroup $H$ must have that order.
+	\begin{enumerate}
+		\item If $\left| H \right| =1$, then $G/H\cong G$.
+		\item If $\left| H \right| =p$, then $G/H$ has order $p$, and is thus cyclic since all groups of prime order are cyclic.
+		\item If $\left| H \right| =p^2$, then $H=G$, and thus $G/H\cong 0$.
+	\end{enumerate}
+	By \cref{8}, it thus suffices to show that $Z(G)$ has more than one element, since it must then have order either $p$ or $p^2$. By the class formula,
+	\[
+		p^2=\left| Z(G) \right| +\sum_{i=1}^{k} \left[ G : \operatorname{Stab}_G(a_i) \right]  ,
+	\]
+	where $\left\{ a_i \right\}_{i=1} ^k$ is a choice of a unique representative for each nontrivial conjugacy class. Since $\left| Z(G) \right| \geq 1$ since $e\in Z(G)$, we see that
+	\[
+		\sum_{i=1}^{k} \left[ G : \operatorname{Stab} _G(a_i) \right] <p^2
+	.\]
+	Since orbit-stabilizer gives
+	\[
+		\left[ G : \operatorname{Stab} _G(a_i) \right] = \left| O_G(a_i) \right| =\frac{\left| G \right| }{\left| \operatorname{Stab} _G(a_i) \right| } \implies \left| \operatorname{Stab} _G(a_i) \right| =\frac{\left| G \right| }{\left| O_G(a_i) \right| } \in\mathbb{N} 
+	\]
+	under the conjugacy action, we see that $\left[ G : \operatorname{Stab} _G(a_i) \right] $ divides $\left| G \right| $. Since the sum over all of these is less than $p^2$, we see that in particular, each conjugacy class has order either 1 or $p$. Thus, each stabilizer has order $p$ or $p^2$. It suffices to show all stabilizers are proper subgroups. This follows since we will then have that
+	\[
+		\left| Z(G) \right| +\sum_{i=1}^{k} \left[ G : \operatorname{Stab} _G(a_i) \right] =\left| Z(G) \right| +\sum_{i=1}^{k} p=\left| Z(G) \right| +kp = p^2 \implies \left| Z(G) \right| =p(p-k),
+	\]
+	and since $p\neq 1$, we see that $p(p-k)\neq 1$.
+
+	Indeed, suppose for contradiction that $\operatorname{Stab} _G(a_i)$ has order $p^2$. Then $\operatorname{Stab} _G(a_i)=G$, and thus $ga_ig^{-1} =a_i$ for all $g\in G$, so all elements of $g\in G$ commute with $a_i$. But this is precisely the definition of $a_i$ being in the center, so we have $a_i\in Z(G)$, contradicting the assumption that each $a_i$ represents a nontrivial conjugacy class.
+
+	To see that $G\cong \mathbb{Z} /p^2\mathbb{Z} $ or $\mathbb{Z} /p\mathbb{Z} \times \mathbb{Z} /p\mathbb{Z} $, we note by Lagrange that all elements of $G$ have order either $p$ or $p^2$. Suppose that there is an element $g$ of order $p^2$. Then since $\left| g \right| =\left| G \right| $, we have $\left\langle g \right\rangle =G$, and $G\mathbb{Z} /p^2\mathbb{Z} $. For the converse, suppose there is no element of order $p^2$. Then all elements have order $p$. Choose $g\in G$, and choose $h\in G \setminus \left\langle g \right\rangle $. Of course $\left\langle h \right\rangle \cong \left\langle g \right\rangle \cong \mathbb{Z} /p\mathbb{Z} $, so it suffices to show that $G\cong \left\langle g \right\rangle \times \left\langle h \right\rangle $. This follows directly by noting that all non-identity elements of either subgroup have order $p$, and thus generate the entire cyclic group. Suppose $\left\langle g \right\rangle \cap \left\langle h \right\rangle $ has a non-identity element $k$ in it. Then $\left\langle k \right\rangle =\left\langle h \right\rangle $ and $\left\langle k \right\rangle =\left\langle g \right\rangle $, but we then see $\left\langle h \right\rangle =\left\langle g \right\rangle $. Since $h\notin \left\langle g \right\rangle $, we obtain a contradiction, showing that $\left\langle h \right\rangle \cap \left\langle g \right\rangle \cong 0$.
+
+	Since $G$ is abelian, we have that $\left\langle h \right\rangle \left\langle g \right\rangle =\left\langle g \right\rangle \left\langle h \right\rangle $, so by a lemma shown on homework 5 which I already submitted, we have that $\left\langle g \right\rangle \left\langle h \right\rangle $ is a subgroup of $G$ isomorphic to $\left\langle g \right\rangle \times \left\langle h \right\rangle $. It suffices to show $G\subseteq \left\langle g \right\rangle \left\langle h \right\rangle $. Indeed, we have
+	\[
+		p^2=\left| \left\langle g \right\rangle \times \left\langle h \right\rangle  \right| =\left| \left\langle g \right\rangle \left\langle h \right\rangle  \right| =\left| G \right| 
+	.\]
+	It follows that $\left\langle g \right\rangle \left\langle h \right\rangle =G$, proving the statement.
+\end{proof}
+
+\section{Problem 10}
+
+\begin{problem}
+	Let $G$ be a finite abelian group and $p$ a prime divisor of $\left| G \right| $. Show that $G$ has an element of order $p$.
+\end{problem}
+\begin{proof}
+	We proceed by induction on the order $n=\left| G \right| $ of the group. For the base case $\left| G \right| =p$, we see that $G$ is cyclic, and thus admits a generator $g$ of order $p$. Assuming the inductive hypothesis, let $\left| G \right| =n$. Choose $x\in G\setminus \left\{ e \right\} $, and write $k=\left| x \right| $. If $p|k$, then we have $k=mp$ for some $m\in\mathbb{Z} $. Let $y=x^m$, and we have
+	\[
+		\left| x^m \right| =\frac{\left| x \right| }{\operatorname{gcd} (\left| x \right| ,m)} =\frac{k}{\operatorname{gcd} (k,m)} =\frac{mp}{m} =p
+	.\]
+	Therefore, $\left| y \right| =p$, and we have found an element of the required order.
+
+	If $p$ does not divide $k$, then the quotient $G/\left\langle x \right\rangle $ has order $n/k$. Write $n=mp$, and thus
+	\[
+		\left| \frac{G}{\left\langle x \right\rangle }  \right| =\frac{mp}{k} =\frac{m}{k} p
+	.\]
+	Since $m/k$ is necessarily an integer, we see that $p$ divides the order of the quotient. By induction, there is an element $g\left\langle x \right\rangle $ of order $p$. We then have $g^p\in \left\langle x \right\rangle $, so $g^p=x^j$ for some $j$. Let $a=\left| g \right| $, and since $\pi : G \to G /\left\langle x \right\rangle $ is a group homomorphism, the order of $g \left\langle x \right\rangle =\pi (g)$ must divide the order of $g$ (see homework 2 problem 7.3). We thus have $p|a$, meaning $a=pq$ for some $q\geq 1$. Then
+	\[
+		\left| g^q \right| =\frac{a}{\operatorname{gcd} (a,q)} =\frac{pq}{q} =p
+	.\]
+	The statement follows.
+\end{proof}
+
+\section{Problem 11}
+
+\begin{problem}
+	Let $G$ be a finite group, and $H\subseteq G$ a subgroup with index $p$, where $p$ is the smallest prime dividing $\left| G \right| $. Prove that $H$ is normal by
+	\begin{enumerate}
+		\item intepreting the action of $G$ on $G/H$  by left-multiplication as a group homomorphism $\sigma :G\to S_p$;
+		\item identifying $G/\ker \sigma $ under the first isomorphism theorem with a subgroup of $S_p$, and considering the implications concerning the index of $\ker \sigma $ in $G$;
+		\item showing that $\ker \sigma \subseteq H$;
+		\item concluding that $\ker \sigma =H$ by index considerations.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) By definition, since $H$ has index $p$, the cardinality of the set $G/H$ is $p$, and thus $\Aut_{\Set }(G/H) \cong S_p$ as groups by definition. To interpret left multiplication as an action $G\to S_p$, it suffices to show left multiplication is a permutation of the cosets of $G/H$. We then simply identify $g$ with the permutation given by left-multiplication.
+
+	Choose representatives $\left\{ a_i \right\}_{i=1} ^p$ of the distinct cosets $a_iH$, such that the representative of $eH$ is $e$. Let $g\in G$, and consider the map $a_iH\mapsto ga_iH$. We would like to show this is a permutation. To show surjectivity, let $a_jH\in G/H$. Then there is some $a_i$ with $a_iH=g^{-1} a_jH$ since $g^{-1} a_j\in G$, so we see that $a_iH\mapsto a_jH$. Since $G/H$ is finite, this shows left multiplication is injective as well, proving that left multiplication is a permutation of $G/H$. We then identify the action with a map $\sigma : G \to S_p$ by mapping $g$ to the permutation of $\left\{ 1, \ldots ,p \right\} $ on the indices of the $a_i$s given by left multiplication on $G/H$.
+
+	(2) Identifying along the first isomorphism theorem, we have $G/\ker \sigma \subseteq S_p$. We thus have by Lagrange that $[G : \ker \sigma ]$ divides $\left| S_p \right| =p!$ and $\left| G \right| $. In particular, $[G : \ker \sigma ] \leq \operatorname{gcd} (p!,\left| G \right| )$.
+
+	(3) Let $g\in G$ induce the identity map on $G/H$ under $\sigma $. Then in particular we have $gH=H$, which follows if and only if $g\in H$ by problem 1.a. This gives $\ker \sigma \subseteq H$.
+
+	(4) Of course, the only possible prime divisors of $p!$ are primes $q\leq p$, and the only possible prime divisors of $\left| G \right| $ are primes $q\geq p$. We thus see that the only possible prime divisor of $[G : \ker \sigma ]$ is $p$. Since $[G : \ker \sigma ]$ is just a number, it admits a prime decomposition into its prime divisors, which in this case are only $p$. Thus, $[G : \ker \sigma ]$ is a prime power of $p$. In particular, $p\leq [G : \ker \sigma ]$. However, the largest power of $p$ dividing $p!$ is $p$, so we have that $[G : \ker \sigma ]=p$. In particular, $\left| \ker \sigma  \right| =\left| H \right| $. Since these are finite subgroups and we already have $\ker \sigma \subseteq H$, we may conclude that $\ker \sigma =H$. Since kernels are normal, the statement is proven.
+\end{proof}
+
+\end{document}

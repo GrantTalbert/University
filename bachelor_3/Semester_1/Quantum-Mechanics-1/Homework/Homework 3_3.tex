@@ -4,28 +4,438 @@
 \input{/home/hyperion/.config/LatexHub/preambles/physics.tex}
 \input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
 \input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/code.tex}
 
 \usepackage{titlepageBU}
 \title{Homework 3}
+\date{September 25th, 2025}
 \begin{document}
 \makeproblem
 
 
-\section{Two-level system}
+\section{Sound waves vs de Broglie waves}
 
+(1) We can basically just read these values off the graph.
+\[
+	T=0.2 \implies \omega =\frac{2\pi }{T} =10\pi 
+.\]
+\[
+	\frac{\lambda }{2} =7\implies \lambda =14
+.\]
+\[
+	v=\frac{\lambda }{T} =\frac{140}{2} =70
+.\]
+At $x=0$ and $t=1$, there is positive slope in $y$. The displacement in $x$ is zero. If the wave were moving to the right, then the negative displacement to the left of $(x,t)=(0,1)$ would be moving towards $x=0$, meaning this point would be moving \emph{down}. However, we have positive slope in $y$, so it must be moving \emph{up}, so the wave has tobe moving \emph{left}.
+
+(2) (i)
+\[
+	\frac{\lambda }{2} =7 \implies \lambda =14 \mathrm{nm} 
+.\]
+Since $E=\sqrt{(pc)^2+(m_ec^2)^2} $, and since $pc=2\pi \hbar c/\lambda $, we obtain
+\[
+	E=\sqrt{\left( \frac{2\pi \hbar c}{\lambda }  \right) ^2+\left( m_ec^2 \right) ^2} 
+.\]
+(ii) We take $2\pi \hbar c \approx 1240$ eVnm, $pc \approx 88.57$ eV. We then take $m_ec^2 \approx 0.511 \cdot 10^6$ eV, and note that the $m_ec^2$ term is far larger, so the electron is clearly nonrelativistic. We can safely pass to the nonrelativistic approximation
+\[
+	\frac{E}{m_ec^2} \approx 1
+.\]
+In other words, the ratio of its total energy to its rest mass is extremely close to 1. The relativistic ratio is
+\[
+	\frac{E}{m_ec^2} \approx \sqrt{\frac{88.57\mathrm{eV} }{0.511\cdot 10^6\mathrm{eV} } +1} \approx 1+8\cdot 10^{-5} 
+.\]
+
+(iii) Note that $\omega =E/\hbar$, and since $p=\hbar k$, we have
+\[
+	v_1=\frac{E/\hbar}{p /\hbar} =\frac{E}{p} 
+.\]
+We then have
+\[
+	\frac{v_1}{c} =\frac{E}{pc} \approx \frac{0.511\cdot 10^6 \mathrm{eV} }{88.57 \mathrm{eV} } \approx 5770
+.\]
+
+(iv) We have
+\[
+	\frac{v_2}{c} =\frac{p}{m_ec} =\frac{pc}{m_ec^2} \approx \frac{88.57\mathrm{eV} }{0.511\cdot 10^6\mathrm{eV} } \approx 1.73\cdot 10^{-4} 
+.\]
+The speeds are very different, since $5770 \gg 1.73\cdot 10^{-4} $. As seen in these problems, the $m_ec^2$ term completely dominates, so the nonrelativistic approximation is valid.
+
+(3) There's a lot of differences. De Broglie waves are complex-valued, and obey the Schr\"odinger equation for a free particle, whereas a classical wave simply obeys the wave equation. The physical meaning of a de Broglie wave is its probability amplitude, whereas a classical wave dictates the physical displacement of a physical wave.
+
+
+\section{Exercises in commutators and operator identities}
+
+(1) We would like to Taylor expand this expression. We could expand each exponential, but it is inconvenient to distribute all the terms out, so we instead write $f(x)=e^{Ax} Be^{-Ax} $, and recover the lemma as the special case $x=1$. We have
+\[
+	f(x)=\sum_{n=0}^{\infty} \frac{x^n}{n!} \frac{\mathrm{d}^nf}{\mathrm{d}x^n} (0)=
+.\]
+An annoying induction proof shows that $\frac{\mathrm{d}^nf}{\mathrm{d}x^n}(x) =e^{Ax} [A,[A, \ldots ,[A,B]\ldots ]]e^{-Ax} $, where there are $n$ $A$s and one $B$ in the commutator. Taking $x=0$ causes the exponentials to vanish, giving
+\[
+	f(x)=\sum_{n=0}^{\infty} \frac{x^n}{n!} \left[ A, \ldots ,[A,B] \ldots  \right] 
+.\]
+The case $x=0$ is precisely what we needed to show.
+
+(2) Taylor expanding $f$ yields
+\[
+	f(B)=\sum_{n=0}^{\infty} \frac{B^n}{n!} \frac{\mathrm{d}^nf}{\mathrm{d}x^n} (0)
+.\]
+We then see that
+\[
+	\left[ A,f(B) \right] =\left( \sum_{n=0}^{\infty} \frac{AB^n}{n!} \left.\frac{\mathrm{d}^nf}{\mathrm{d}x^n} \right|_0 \right) -\left( \sum_{n=0}^{\infty} \frac{B^nA}{n!} \left. \frac{\mathrm{d}^nf}{\mathrm{d}x^n} \right|_0 \right) =\sum_{n=0}^{\infty} \frac{\left[ A,B^n \right] }{n!} \left. \frac{\mathrm{d}^nf}{\mathrm{d}x^n} \right|_0
+.\]
+We can prove that $\left[ A,B^n \right] =n\left[ A,B  \right] B^{n-1}$. For $n=1$,
+\[
+	\left[ A,B \right] =1\left[ A,B \right] I,
+\]
+since $B^0=I$. Assuming the inductive hypothesis,
+\[
+	\left[ A,B^{n+1} \right] =\left[ A,BB^{n}  \right] =B\left[ A,B^n \right] +\left[ A,B \right] B^n=Bn\left[ A,B \right] B^{n-1} +\left[ A,B \right] B^n
+\]
+\[
+	=n\left[ A,B \right] BB^{n-1} +\left[ A,B \right] B^n=n\left[ A,B \right] B^n+\left[ A,B \right] B^n=(n+1)\left[ A,B \right] B^n
+.\]
+Here we have used the identity $\left[ A,BC \right] =B[A,C]+[A,B]C$. We have also used the assumption that $[B,[A,B]]=0$ to commute $B$ past the commutator. We also note that
+\[
+	[A,B^0]=[A,I]=0
+.\]
+Plugging this into the Taylor expansion yields
+\[
+	\left[ A,f(B) \right] =\sum_{n=1}^{\infty} \frac{[A,B]B^{n-1} }{(n-1)!} \left.\frac{\mathrm{d}^nf}{\mathrm{d}x^n} \right|_0=\left[ A,B \right] \sum_{n=0}^{\infty} \frac{B^n}{n!} \left.\frac{\mathrm{d}^n}{\mathrm{d}x^n} \frac{\mathrm{d}f}{\mathrm{d}x} \right|_0=[A,B]f'(B)
+.\]
+
+The other statement follows by the same logic. Note that
+\[
+	[A^n,B]=-[B,A^n]=-n[B,A]A^{n-1} =A^{n-1} [A,B]n
+.\]
+Here we have used the fact that $[A,[A,B]=0$ to commute $A$ past the commutator. Taylor expanding $g$ gives by the same logic as previously,
+\[
+	\left[ g(A),B \right] =\sum_{n=0}^{\infty} \frac{A^nB-BA^n}{n!} \left. \frac{\mathrm{d}^ng}{\mathrm{d}B^n} \right|_0=\sum_{n=0}^{\infty} \frac{[A^n,B]}{n!} \left. \frac{\mathrm{d}^ng}{\mathrm{d}B^n} \right|_0=\sum_{n=0}^{\infty} \frac{A^{n-1}[A,B] }{(n-1)!} \frac{\mathrm{d}^ng}{\mathrm{d}B^n} 
+\]
+\[
+	=g'(A)[A,B]
+.\]
+
+
+
+
+\section{Two level system: eigenvectors and eigenvalues}
 Let $\varepsilon _0<\varepsilon _1\in \mathbb{R} $ and $\gamma ,\chi \in \mathbb{R}_{\geq 0} $. Define the Hamiltonian
 \[
-	H=\begin{pmatrix}
+	\mathbf{H}=\begin{pmatrix}
 	\varepsilon _0 & \gamma e^{-i\chi }  \\
 	\gamma e^{i\chi }  & \varepsilon _1
 	\end{pmatrix}
 .\]
-Energy eigenvalues
+(1) Energy eigenvalues
 \[
 	(\varepsilon _0-\lambda )(\varepsilon _1-\lambda )-\gamma ^2=0 \implies \lambda ^2-(\varepsilon _0+\varepsilon _1)\lambda +\varepsilon _0\varepsilon _1-\gamma ^2=0
-\]
+.\]
+The quadratic formula yields
 \[
 	\lambda = \frac{\varepsilon _0+\varepsilon _1\pm \sqrt{\varepsilon _0^2+\varepsilon _1^2+2\varepsilon _0\varepsilon _1-4\varepsilon _0\varepsilon _1+4\gamma ^2} }{2} =\frac{\varepsilon _0+\varepsilon _1\pm \sqrt{(\varepsilon _0-\varepsilon _1)^2+4\gamma ^2} }{2} ???
 .\]
+Since $\varepsilon _0,\varepsilon _1,\gamma $ are real-valued, the square root is positive, so the ground state is
+\[
+	\varepsilon_g=\frac{1}{2} \left( \varepsilon _0+\varepsilon _1-\sqrt{(\varepsilon _0-\varepsilon _1)^2+4\gamma ^2}  \right) 
+.\]
+The excited state is then
+\[
+	\varepsilon_e=\frac{1}{2} \left( \varepsilon _0+\varepsilon _1+\sqrt{(\varepsilon _0-\varepsilon _1)^2+4\gamma ^2}  \right) 
+.\]
+(2) Let $\ket{\psi _e}=(x_e,y_e)$. We have
+\[
+	\begin{pmatrix}
+	\varepsilon _0 & \gamma e^{-i\chi }  \\
+	\gamma e^{i\chi }  & \varepsilon _1
+	\end{pmatrix}\begin{pmatrix}
+	x_e \\
+	y_e
+	\end{pmatrix}=\lambda \begin{pmatrix}
+	x_e \\
+	y_e
+	\end{pmatrix}
+.\]
+This gives equations
+\[
+	\varepsilon _0x_e+\gamma e^{-i\chi } y_e=\lambda x_e,\qquad \gamma e^{i\chi } x_e+\varepsilon _1y_e=\lambda y_e
+.\]
+Using just the first equation, we see that
+\[
+	\frac{y_e}{x_e} =\frac{\varepsilon _0-\lambda }{\gamma e^{-i\chi } } =e^{i\chi } \frac{\lambda -\varepsilon _0}{\gamma } 
+.\]
+Note that because we used an arbitrary eigenvalue $\lambda $, this holds for $\ket{\psi _g}$ as well. We now specialize to the excited state, and derive the ground state later by orthogonality.
 
+Plugging in $\varepsilon _e$ for $\lambda $ gives
+\[
+	\frac{y_e}{x_e} =\frac{e^{i\chi } }{\gamma } \frac{\varepsilon _1-\varepsilon _0+\sqrt{\Delta \varepsilon ^2+4\gamma ^2} }{2} =e^{i\chi } \frac{-(\varepsilon _0-\varepsilon _1)+\sqrt{\Delta \varepsilon ^2+4\gamma ^2} }{2\gamma }
+.\]
+
+
+It is convenient to introduce an angle $\theta $ defined by
+\[
+	\tan \theta =\frac{2\gamma }{\varepsilon _0-\varepsilon _1} 
+.\]
+Such a definition is always possible because $\arctan $, restricted along $[0,\pi ]$, is bijective on $\mathbb{R} _{\geq 0} $. The hypotenuse of the relevant right triangle is the discriminant $\sqrt{(\varepsilon _0-\varepsilon _1)^2+4\gamma ^2} $. This gives us
+\[
+	\sin \theta =\frac{2\gamma }{\sqrt{\Delta \varepsilon ^2+4\gamma ^2} } ,\qquad \cos \theta =\frac{\varepsilon _0-\varepsilon _1}{\sqrt{\Delta \varepsilon ^2+4\gamma ^2} } 
+.\]
+There is an identity
+\[
+	\tan (\theta /2)=\frac{1-\cos \theta }{\sin \theta } 
+.\]
+I have no idea how I found this identity but sure I guess. Moreover, we note that
+\[
+	\frac{1-\cos \theta }{\sin \theta } =\frac{\sqrt{\Delta \varepsilon ^2+4\gamma ^2} }{2\gamma } \left( 1-\frac{\varepsilon _0-\varepsilon _1}{\sqrt{\Delta \varepsilon ^2+4\gamma ^2} }  \right) =\frac{\sqrt{\Delta \varepsilon ^2+4\gamma ^2} }{2\gamma } -\frac{\varepsilon _0-\varepsilon _1}{2\gamma } =\frac{-(\varepsilon _0-\varepsilon _1)+\sqrt{\Delta \varepsilon ^2+4\gamma ^2} }{2\gamma } 
+.\]
+It follows that
+\[
+	\frac{y_e}{x_e} =e^{i\chi } \tan (\theta /2)
+.\]
+We then have
+\[
+	y_e=x_e e^{i\chi } \tan (\theta /2)
+.\]
+
+We take $x_e$ and introduce a normalization constant $N$. We then have
+\[
+	\ket{\psi _e}=N\left( \ket{0}+e^{i\chi } \tan (\theta /2)\ket{1} \right) 
+.\]
+Here we are of course noting that $\ket{\phi _0}=\ket{0}$ and $\ket{\phi _1}=\ket{1}$, and are using the qubit notation instead.
+
+To find the normalization constant, we have
+\[
+	1=N^2\left( \braket{0}{0}+\tan ^2(\theta /2)\ket{1}{1} \right) \implies \frac{1}{1+\tan ^2(\theta /2)} =N^2
+.\]
+Note that
+\[
+	1+\tan ^2(\theta /2)=\frac{\cos  ^2(\theta /2)}{\cos ^2(\theta /2)} +\frac{\sin ^2(\theta /2)}{\cos ^2(\theta /2)} =\frac{1}{\cos ^2(\theta /2)} 
+.\]
+We thus have
+\[
+	N=\cos (\theta /2)
+.\]
+It follows that
+\[
+	\ket{\psi _e}=\cos (\theta /2)\left( \ket{0}+e^{i\chi }\frac{\sin (\theta /2)}{\cos (\theta /2)} \ket{1} \right) =\cos (\theta /2)\ket{0}+e^{i\chi } \sin (\theta /2)\ket{1}
+.\]
+To find $\ket{\psi _g}$, we impose orthogonality
+\[
+	\braket{\psi _e}{\psi _g}=\cos (\theta /2)x_g+e^{-i\chi } \sin (\theta /2)y_g=1
+.\]
+We then have
+\[
+	e^{-i\chi } \sin (\theta /2)y_g=-\cos (\theta /2)x_g\implies \frac{y_g}{x_g} =-\frac{\cos (\theta /2)}{e^{-i\chi } \sin (\theta /2)} =-e^{i\chi } \frac{\cos (\theta /2)}{\sin (\theta /2)} 
+.\]
+By the same logic as before, we introduce a normalization constant $N$ and have
+\[
+	\ket{\psi _g}=N\left( \ket{0}-e^{i\chi } \frac{\cos (\theta /2)}{\sin (\theta /2)} \ket{1} \right) 
+.\]
+Imposing normalization gives
+\[
+	1=N^2\left( 1+\frac{\cos ^2(\theta /2)}{\sin ^2(\theta /2)}  \right) =N^2\frac{1}{\sin ^2(\theta /2)} \implies N=\sin (\theta /2)
+.\]
+Therefore,
+\[
+	\ket{\psi _g}=\sin (\theta /2)\ket{0}-e^{i\chi } \cos (\theta /2)\ket{1}
+.\]
+(3) We are given the form
+\[
+	U(t,t_0)=\ket{\psi _g}\exp \left( -\frac{i}{\hbar} \varepsilon _g(t-t_0) \right) \bra{\psi _g}+\ket{\psi _e}\exp \left( -\frac{i}{\hbar} \varepsilon _e(t-t_0) \right) \bra{\psi _e}
+.\]
+It will be convenient to use the matrix representation, since writing this as a linear combination of coefficients will become extremely messy. We take
+\[
+	\ket{0}=\begin{pmatrix}
+	1 \\
+	0
+\end{pmatrix},\qquad \ket{1}=\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+.\]
+The time evolution operator then takes the form
+\[
+	U(t,t_0)=\exp \left( -\frac{i}{\hbar} \varepsilon _g(t-t_0) \right) \begin{pmatrix}
+	\sin (\theta /2) \\
+	-e^{i\chi } \cos (\theta /2)
+	\end{pmatrix}\begin{pmatrix}
+	\sin (\theta /2) & -e^{-i\chi } \cos (\theta /2)
+	\end{pmatrix}
+\]
+\[
+	+\exp \left( -\frac{i}{\hbar} \varepsilon _e(t-t_0) \right) \begin{pmatrix}
+	\cos (\theta /2) \\
+	e^{i\chi } \sin (\theta /2)
+	\end{pmatrix}\begin{pmatrix}
+	\cos (\theta /2) & e^{-i\chi } \sin (\theta /2)
+	\end{pmatrix}
+.\]
+Computing the matrix multiplications give
+\[
+	U(t,t_0)=\exp \left( -\frac{i}{\hbar} \varepsilon _g(t-t_0) \right) \begin{pmatrix}
+		\displaystyle{\sin ^2\left( \frac{\theta }{2}  \right)} & \displaystyle{-e^{-i\chi } \sin \left( \frac{\theta }{2}  \right) \cos \left( \frac{\theta }{2}  \right) } \\
+\displaystyle{-e^{i\chi } \sin \left( \frac{\theta }{2}  \right) \cos \left( \frac{\theta }{2}  \right)  }& \displaystyle{\cos ^2\left( \frac{\theta }{2}  \right) }
+	\end{pmatrix}
+\]
+\[
+	+\exp \left( -\frac{i}{\hbar} \varepsilon _e(t-t_0) \right) \begin{pmatrix}
+		\displaystyle{\cos ^2\left( \frac{\theta }{2}  \right) } & \displaystyle{e^{-i\chi } \cos \left( \frac{\theta }{2}  \right) \sin \left( \frac{\theta }{2}  \right) } \\
+		\displaystyle{e^{i\chi } \cos \left( \frac{\theta }{2}  \right) \sin \left( \frac{\theta }{2}  \right) } & \displaystyle{\sin ^2\left( \frac{\theta }{2}  \right) }
+	\end{pmatrix}
+.\]
+(4) The eigenvalues did not involve $\chi $ at all, so those would not change. The eigenvectors \emph{do} depend on $\chi $, but the derivation of them made no reference to the time-independence of $\chi $, so their form would not change. The eigenvectors would simply become a function of time, where $\chi $ is replaced by $\chi (t)$. Finally, because the Hamiltonian is now time-dependent, the time evolution operator cannot be derived in the same way that it is in the time-independent case, so it will change significantly.
+
+\section{The Heisenberg uncertainty principle}
+
+(1) First let $\lambda \in\mathbb{C} $. Define $\ket{\lambda }=\ket{\alpha }+\lambda \ket{\beta }$. We have
+\[
+	\braket{\lambda }{\lambda }=\left( \bra{\alpha }+\lambda ^*\bra{\beta } \right) \left( \ket{\alpha }+\lambda \ket{\beta } \right) =\braket{\alpha }{\alpha }+\left| \lambda  \right| ^2 \braket{\beta }{\beta }+\lambda ^*\braket{\beta }{\alpha }+\lambda \braket{\alpha }{\beta }
+\]
+\[
+	=\left| \alpha  \right| ^2+\left| \lambda  \right| ^2\left| \beta  \right| ^2+\lambda \braket{\alpha }{\beta }+\left( \lambda \braket{\alpha }{\beta } \right) ^\dagger
+.\]
+This must be greater than or equal to $0$ by the axioms of a Hilbert space.
+
+Now choose $\lambda =-\braket{\beta }{\alpha } / \left| \beta  \right| ^2$. The statement falls out:
+\[
+	\left| \lambda  \right| ^2\left| \beta  \right| ^2=\frac{\left| \braket{\alpha }{\beta } \right| ^2}{\braket{\beta }{\beta }^2} \braket{\beta }{\beta }=\frac{\left| \braket{\alpha }{\beta } \right| ^2}{\braket{\beta }{\beta }} 
+,\]
+\[
+	\lambda \braket{\alpha }{\beta }=-\frac{\braket{\beta }{\alpha }\braket{\alpha }{\beta }}{\braket{\beta }{\beta }} =-\frac{\left| \braket{\alpha }{\beta } \right| ^2}{\braket{\beta }{\beta }} ,
+\]
+\[
+	\lambda ^*\braket{\beta }{\alpha }=-\frac{\braket{\alpha }{\beta }\braket{\beta }{\alpha }}{\braket{\beta }{\beta }} =-\frac{\left| \braket{\alpha }{\beta } \right| ^2}{\braket{\beta }{\beta }} 
+.\]
+Plugging these in gives
+\[
+	\braket{\alpha }{\alpha }+\frac{\left| \braket{\alpha }{\beta } \right| ^2}{\braket{\alpha }{\beta }} -2\frac{\left| \braket{\alpha }{\beta } \right| }{\braket{\beta }{\beta }}=\braket{\alpha }{\alpha }-\frac{\left| \braket{\alpha }{\beta } \right| }{\braket{\beta }{\beta }} \geq 0
+.\]
+The statement follows by moving the term over and multiplying through by $\braket{\beta }{\beta }$.
+
+
+(2) Let $H$ be Hermitian. Then
+\[
+	\left\langle H \right\rangle^\dagger =\left(\bra{\psi }H\ket{\psi }\right)^\dagger=\ket{\psi }^\dagger H^\dagger\bra{\psi }^\dagger=\bra{\psi }H\ket{\psi }=\left\langle H \right\rangle 
+.\]
+Since $\left\langle H \right\rangle ^\dagger=\left\langle H \right\rangle $, and since the expectation value is just a number, it is necessarily real, since complex numbers would have their imaginary component flip signs, and thus not be equal.
+
+(3) If $z$ is a complex number such that $z^\dagger =-z$, then we necessarily have that $z$ is fully imaginary, since complex conjugation fixes the real component and flips only the imaginary component. If $C$ is anti-Hermitian,
+\[
+	\left\langle C \right\rangle ^\dagger =\left( \bra{\psi }C\ket{\psi } \right) ^\dagger=\ket{\psi }^\dagger C^\dagger\bra{\psi }^\dagger=-\bra{\psi }C\ket{\psi }=-\left\langle C \right\rangle 
+.\]
+Since the expectation value is just a number, we have that $\left\langle C \right\rangle $ is purely imaginary by the above discussion.
+
+(4) Define $\ket{\alpha }=\Delta A\ket{\psi }$ and $\ket{\beta }=\Delta B\ket{\psi }$ for some $\ket{\psi }$, giving us
+\[
+	\braket{\alpha }{\alpha }\braket{\beta }{\beta }=\left| \braket{\alpha }{\beta } \right| ^2
+\]
+by lemma 1. Plugging in our definitions gives
+\[
+	\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle \geq \left| \left\langle \Delta A\Delta B \right\rangle  \right| ^2
+.\]
+Here we apply the fact that states $\ket{\psi }$ are normalized, and observables are Hermitian.
+
+Using the fact that $[\Delta A,\Delta B]=[A,B]$, we note that
+\[
+	\left[ A,B \right] ^\dagger = \left( AB-BA \right) ^\dagger=BA-AB=[B,A],
+\]
+where we have used linearity of $(-)^\dagger$, and Hermitian-ness of $A,B$. Thus, the commutator is anti-Hermitian. The anticommutator is similarly clearly Hermitian. Note that
+\[
+	\Delta A\Delta B=\frac{\Delta A\Delta B-\Delta B\Delta A}{2} +\frac{\Delta A\Delta B+\Delta B\Delta A}{2} =\frac{1}{2} [\Delta A,\Delta B]+\frac{1}{2} \left\{ \Delta A,\Delta B \right\} 
+.\]
+Using linearity of expectation value, we see that
+\[
+	\left\langle \Delta A\Delta B \right\rangle =\frac{1}{2} \left\langle [A,B] \right\rangle +\frac{1}{2} \left\langle \left\{ \Delta A,\Delta B \right\}  \right\rangle 
+.\]
+By lemmas 2 and 3, the first term is purely imaginary, and the second term is purely real. Due to this fact, the norm squared takes the usual form of the norm squared of a complex number:
+\[
+	\left| \left\langle \Delta A\Delta B \right\rangle  \right| =\frac{1}{4} \left| \left\langle \left[ A,B \right]  \right\rangle  \right| ^2+\frac{1}{4} \left| \left\langle \left\{ \Delta A,\Delta B \right\}  \right\rangle  \right| ^2
+.\]
+This yields
+\[
+	\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle\geq \frac{1}{4} \left| \left\langle \left[ A,B \right]  \right\rangle  \right| ^2+\frac{1}{4} \left| \left\langle \left\{ \Delta A,\Delta B \right\}  \right\rangle  \right| ^2
+.\]
+It follows that
+\[
+	\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle-\frac{1}{4} \left| \left\langle \left\{ \Delta A,\Delta B \right\}  \right\rangle  \right| ^2\geq \frac{1}{4} \left| \left\langle \left[ A,B \right]  \right\rangle  \right| ^2
+.\]
+Since the norm squared of the EV of the anticommutator is a positive real number, it follows that
+\[
+	\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle\geq \frac{1}{4} \left| \left\langle \left[ A,B \right]  \right\rangle  \right| ^2
+.\]
+\section{Harmonic oscillator and superposition}
+(1) Note that $\braket{x}{0}$ is the ground state of the harmonic oscillator, and $\braket{x}{1}$ is the first excited state. Recalling the solutions to the harmonic oscillator, we have
+\[
+	\psi _0(x)=\left( \frac{m\omega _0}{\pi \hbar}  \right) ^{1/4} \exp \left( -\frac{m\omega _0x^2}{2\hbar}  \right) 
+,\]
+\[
+	\psi _1(x)=\left( \frac{m\omega _0}{\pi \hbar}  \right) ^{1/4} x\sqrt{\frac{2m\omega _0}{\hbar} } \exp \left( -\frac{m\omega _0x^2}{2\hbar}  \right) 
+.\]
+For simplicity of notation, make the usual subtitutions $\alpha=\frac{m\omega _0}{\hbar} $ and $\xi =x\sqrt{\alpha } $. These solutions then take the form
+\[
+	\psi _0(x)=\left( \frac{\alpha }{\pi }  \right) ^{1/4} \exp \left( -\frac{\xi ^2}{2}   \right) ,
+\]
+\[
+	\psi _1(x)=\left( \frac{\alpha }{\pi }  \right) ^{1/4} \xi \sqrt{2}\exp \left( -\frac{\xi ^2}{2}  \right) 
+.\]
+Plugging this into our state $\ket{\Psi ,t=0}$ gives
+\[
+	\Psi (x,0)=\frac{1}{\sqrt{2} } \psi _0(x)+\frac{e^{i\delta } }{\sqrt{2} } \psi _1(x)=\frac{1}{\sqrt{2} } \left( \frac{\alpha }{\pi }  \right) ^{1/4} \left( e^{-\xi ^2/2} +\xi \sqrt{2} e^{-\frac{1}{2}\xi ^2 +i\delta }  \right) 
+.\]
+
+(2) We see that
+\[
+	\left\langle \mathbf{H}  \right\rangle =\bra{\Psi }\mathbf{H} \ket{\Psi }=\bra{\Psi }\left( \frac{1}{\sqrt{2} } \mathbf{H} \ket{0}+\frac{e^{i\delta } }{\sqrt{2} } \mathbf{H} \ket{1} \right) =\bra{\Psi }\left( \frac{1}{\sqrt{2} } E_0\ket{0}+\frac{e^{i\delta } }{\sqrt{2} } E_1\ket{1} \right) 
+\]
+\[
+	=\frac{E_0}{2} \braket{0}{0}+\frac{E_1}{2} \braket{1}{1}=\frac{1}{2} \left( E_0+E_1 \right) 
+.\]
+Recall the energy states
+\[
+	E_0=\frac{1}{2} \hbar\omega _0,\qquad E_1=\frac{3}{2} \hbar \omega _0
+.\]
+Thus,
+\[
+	\left\langle \mathbf{H}  \right\rangle =\frac{1}{2} \hbar\omega _0\left( \frac{3}{2} +\frac{1}{2}  \right) =\hbar\omega _0
+.\]
+
+(3) Since the Hamiltonian is time-independent, the time evolution is just $e^{-i \mathbf{H} t/\hbar} $. We can use the fact that $\ket{0},\ket{1}$ are eigenstates of $\mathbf{H} $, and thus
+\[
+	\ket{\Psi(t) }=\frac{1}{\sqrt{2} } e^{-iE_0t/\hbar} \ket{0}+\frac{e^{i\delta } }{\sqrt{2} } e^{-iE_1t/\hbar} \ket{1}
+.\]
+We can swap $\mathbf{H} $ for the eigenvalue by noting that if we do the Taylor expansion, then take the action of each $\mathbf{H} ^n$ on the eigenvector, we just get the corresponding eigenvalue.
+
+The expectation value in the eigenstates is just 0, so we only get contributions from off-diagonal terms. Let $a,a^\dagger$ be the ladder operators. We compute
+\[
+	\bra{0}\mathbf{x} \ket{1}=\bra{0}\left( \sqrt{\frac{\hbar}{2m\omega _0} } \left( a+a^\dagger \right)  \right) \ket{1}=\sqrt{\frac{\hbar}{2m\omega _0} } \left( \braket{1}{1}+\sqrt{2} \braket{0}{2} \right)=\sqrt{\frac{\hbar}{2m\omega _0} } 
+.\]
+Since $\mathbf{x} $ is Hermitian, $\bra{1}\mathbf{x}\ket{0}$ is just the conjugate of this value, which is itself since it is real-valued. We thus see that
+\[
+	\left\langle \mathbf{x}  \right\rangle =\frac{1}{2} \left( e^{i\delta } e^{-i\omega _0} \bra{0}\mathbf{x} \ket{1}+e^{-i\delta } e^{i\omega _0t} \bra{0}\mathbf{x} \ket{1} \right) =\sqrt{\frac{\hbar}{2m\omega _0} } \cos (\omega _0t-\delta )
+.\]
+Here we note that $E_1-E_0=\hbar\omega _0$.
+
+Similarly,
+\[
+	\bra{0}\mathbf{p} \ket{1}=\bra{0}\left( i\sqrt{\frac{\hbar m\omega _0}{2} } \left( a^\dagger-a \right)  \right) \ket{1}=i\sqrt{\frac{\hbar m\omega _0}{2} } \left( \braket{0}{0}+\sqrt{2} \braket{0}{2} \right) =i\sqrt{\frac{\hbar m\omega _0}{2} } 
+.\]
+A similar computation to the one for $\mathbf{x} $ yields
+\[
+	\left\langle \mathbf{p}  \right\rangle =-\sqrt{\frac{\hbar m\omega _0}{2} } \sin (\omega _0t-\delta )
+.\]
+
+
+(4) Because $\ket{\Psi }$ is only a superposition of the ground and first excited state, you can only measure the corresponding energy levels of those eigenstates, which we stated in (2) are
+\[
+	\frac{1}{2} \hbar\omega _0,\qquad \frac{3}{2} \hbar\omega _0
+.\]
+
+(5) The larger energy eigenvalue is $\frac{3}{2} \hbar\omega _0$ because $3>1$.
+
+(6) We've measured the excited state, so $\ket{\Psi }=\ket{1}$. The wavefunction is given by time-evolving the first excited state $\psi _1(x)$. Since the Hamiltonian is time-independent, the time evolution operator is just the usual time evolution operator for this case.
+
+(7) The expecatation value of $\mathbf{x} $ in an eigenstate of $\mathbf{H} $ is 0. Since we are in an eigenstate $\ket{1}$, the EV is 0.
+
+
+(8) Now that we have measured the position, we are back in a superposition of energy states, so $\frac{1}{2} \hbar\omega _0 $ or $\frac{3}{2} \hbar\omega _0$.
+
+(9) In the first lecture, we discussed the Stern-Gerlach experiments. If we only consider the states $\ket{0},\ket{1}$, we have a 2-state system that behaves kind of like the spin states, so the results of Stern-Gerlach should carry over. So in a quantum system, if your state is a superposition of two eigenstates, you can often treat the study of that state as a two-state problem. That sounds useful, since we have a lot of theory for those.
 \end{document}

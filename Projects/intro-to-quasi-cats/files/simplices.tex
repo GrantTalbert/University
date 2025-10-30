@@ -1,8 +1,4 @@
 \section{Simplicial Sets}
-
-TODO: topologial simplices, faces, degeneracies
-
-
 Quasi-categories are built atop the theory of \emph{simplicial sets}. We review the basic theory.
 
 \begin{definition}\label{3.1}
@@ -63,8 +59,7 @@ Cofaces and codegeneracies are important due to the following two theorems. It i
 
 We do not ask that the reader remember the cosimplicial identities, and we will reference them any time they are invoked. The reader will pick them up slowly as they work through the theory.
 
-We will offer some geometric intuition for simplices, because it will be useful later. We can view simplices as geometric objects, and the coface and codegeneracy maps take a very geometric meaning.
-% TODO: this
+The category $\boldsymbol{\Delta} $ admits a geometric understanding. Define the standard $n$-simplex $\left| \Delta ^n \right| $ as the $n$-dimensional equilaterial triangle. We call this a \emph{geometric $n$-simplex}. You can assign an arbitrary ordering to the vertices of $\left| \Delta ^n \right| $, and then assign a corresponding ordering to the \emph{faces} of $\left| \Delta ^n \right| $ by taking the $i$th face to be the face across from the $i$th vertex. The $i$th coface then corresponds to the $i$th \emph{face} $d^i : \left| \Delta ^{n-1}  \right|  \to \left| \Delta ^n \right| $, which inserts $\left| \Delta ^{n-1}  \right| $ as the $i$th face of $\left| \Delta ^n \right| $. Codegeneracies are more complex to explain, but luckily we will not need the geometric intuition of simplices, so we omit it.
 
 We now move on to the theory of simplicial sets. These arose as powerful models for topological spaces. Classically, a simplicial set can be identified with a topological space through a process known as \emph{geometric realization}, which takes a \emph{massive} collection of geometric simplices, and glues them together according to some rules encoded in the simplicial set. This process is very powerful and deserves at least some mention, since the geometric realization is what we call a \emph{Quillen equivalence}, meaning the homotopy theory of topological spaces is the \emph{exact same} as the homotopy theory of simplicial sets. This is a powerful tool for homotopy theorists.
 
@@ -77,7 +72,7 @@ We will not be discussing the homotopy theory of simplicial sets at length, and 
 We often prefer not to think about simplicial sets as functors, and rather as collections of sets that have some interesting combinatorial properties. We will introduce this point of view momentarily, but we would like to point out some facts we get for free by viewing these objects as functors.
 
 \begin{notation}\label{3.7}
-	We write $\sSet $ for the category of simplicial sets, which is the functor category $\Fun(\boldsymbol{\Delta} ^{\mathrm{op}} ,\Set )$. There are a variety of other notations for this category, such as $\mathcal{S} \mathrm{imp} \mathcal{S} \mathrm{et} $ or $\mathcal{S} \mathcal{S} \mathrm{et} $. Given a simplicial set $X$, we write $X_n$ for $X$ evaluated at $[n]$. We write $d_i : [n] \to [n-1]$ for the image on the coface $X(d^i)$, and call $d_i$ a \emph{face operator}. Similarly, we write $s_i=X[s^i]: [n] \to [n+1]$ and call $s_i$ a \emph{degeneracy operator}. We typically do not write $X(\alpha )$ for more general morphisms $\alpha $ in $\boldsymbol{\Delta} $, and rather write $\alpha ^*$ and specify that we do not mean precomposition. We call maps $\alpha ^*$ \emph{simplicial operators}.
+	We write $\sSet $ for the category of simplicial sets, which is the functor category $\Fun(\boldsymbol{\Delta} ^{\mathrm{op}} ,\Set )$. There are a variety of other notations for this category, such as $\mathcal{S} \mathrm{imp} \mathcal{S} \mathrm{et} $, $\Set _\Delta $, or $\mathcal{S} \mathcal{S} \mathrm{et} $. Given a simplicial set $X$, we write $X_n$ for $X$ evaluated at $[n]$. We write $d_i : X_n \to X_{n-1} $ for the image on the coface $X(d^i)$, and call $d_i$ a \emph{face operator}. Similarly, we write $s_i=X(s^i): X_n \to X_{n+1}$ and call $s_i$ a \emph{degeneracy operator}. We typically do not write $X(\alpha )$ for more general morphisms $\alpha $ in $\boldsymbol{\Delta} $, and rather write $\alpha ^*$ and specify that we do not mean precomposition. We call maps $\alpha ^*$ \emph{simplicial operators}.
 \end{notation}
 
 

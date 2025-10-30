@@ -1,0 +1,575 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\title{Homework 4}
+\begin{document}
+\makeproblem
+
+\section{Problem 7.2}
+\begin{problem}\label{1}
+	Let $G$ be a Lie group.
+	\begin{enumerate}
+		\item Let $m : G\times G \to G$ denote multiplication. Using Lee 3.14 (Homework 3 ??) to identify $T_{(e,e)} (G\times G) \cong T_eG \oplus T_eG$, show that the differential $\mathrm{d}m_{(e,e)} : T_eG \oplus T_eG \to T_eG$ is given by $(x,y)\mapsto x+y$.
+		\item Let $i : G \to G$ denote inversion. Show that $\mathrm{d} i_e : T_eG \to T_eG$ is given by $x\mapsto -x$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	Identify the components of the product $T_eG \subseteq T_eG \oplus T_eG$ via the subspaces $T_eG \times \left\{ 0 \right\} $ and $\left\{ 0 \right\} \times T_eG$. The map $\mathrm{d}m_{(e,e)} $ then restricts along the two components via $\mathrm{d}m_{(e,e)} (-,0)$ and $\mathrm{d}m_{(e,e)} (0,-)$, respectively. We will show these are both the identity map. Let $v\in T_eG$ be the tangent vector $v=v^i \partial _i|_e$, and $f : G \to \mathbb{R} $ smooth. Write $x^i$ for the coordinates in the first component of $T_eG$ in the space, and $y^i$ for the coordinates in the second. Then $(v,w)\in T_eG \oplus T_eG$ can be represented as
+	\[
+		\sum_{i=1}^{\dim G} v^i \left.\frac{\partial }{\partial x^i} \right|_e + \sum_{i=1}^{\dim G} w^j\left. \frac{\partial }{\partial y^j} \right|_e
+	.\]
+	It follows that
+	\[
+		\mathrm{d}m_{(e,e)} (0,v)(f)=\sum_{i=1}^{\dim G} 0 \left.\frac{\partial f}{\partial x^i} \right|_e + \sum_{j=1}^{\dim G} v^j \left. \frac{\partial f}{\partial y^j} \right|_e = \sum_{j=1}^{\dim G} v^j \left.\frac{\partial f}{\partial y^j} \right|_e = v(f)
+	,\]
+	\[
+		\mathrm{d}m_{(e,e)} (v,0)(f)=\sum_{i=1}^{\dim G} v \left.\frac{\partial f}{\partial x^i} \right|_e + \sum_{j=1}^{\dim G} 0 \left. \frac{\partial f}{\partial y^j} \right|_e = \sum_{i=1}^{\dim G} v^i \left.\frac{\partial f}{\partial x^i} \right|_e = v(f)
+	.\]
+	Here we have of course noted that since $G=G$, the coordinate representations are the same, and we have only introduced the $x$ and $y$ notation to make the argument clearer. Linearity forces
+	\[
+		\mathrm{d}m_{(e,e)} (v,w)(f)=\mathrm{d}m_{(e,e)} (v,0)(f) + \mathrm{d}m_{(e,e)} (0,w)(f)=v(f)+w(f)
+	.\]
+	Therefore, $\mathrm{d} m_{(e,e)} (v,w)=v+w$.
+
+	Write $\Delta : T_eG \to T_eG\oplus T_eG$ for the diagonal map $v\mapsto (v,v)$. Consider the composite $\mathrm{d}m_{(e,e)}  \circ (1\times \mathrm{d}i_e)\circ \Delta $:
+	\[
+		(\mathrm{d}m_{(e,e)} \circ (1\times \mathrm{d}i_e)\circ \Delta )(v)=m(v, i(v)) = v + \mathrm{d}i_e(v)
+	.\]
+	However, note that $m \circ (1\times i) : G\times G \to G$ acts on pairs of the same group element by $(g,g)\mapsto e$:
+	\[
+		(m\circ (1\times i))(g,g)=m(g,i(g))=g g^{-1} =e
+	.\]
+	Since restricting along $\Delta $ gives the constant function, the differential is precomposition by a constant function. Derivations of constant functions are continuous, thus the differential is 0. Therefore,
+	\[
+		v+\mathrm{d} i_e(v) = 0 \implies \mathrm{d} i_e(v)=-v
+	.\]
+\end{proof}
+
+
+\section{Problem 7.3}
+\begin{problem}
+	Show that if $G$ is a smooth manifold with a group structure such that multiplication $m : G\times G \to G$ is smooth, then inversion $i : G \to G$ is smooth.
+\end{problem}
+\begin{proof}
+	Let $F : G\times G \to G\times G$ be the map $(g,h)\mapsto (g,gh)$. This is smooth since it arises as the dashed arrow in the product diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & G \\
+	G\times G\ar[" \pi_1 ", ur] \ar[" m "', dr] \ar[dashed, r]  & G\times G \ar[u] \ar[d]  \\
+	 & G
+	\end{tikzcd}\]
+	We would like to show that $F$ is a local diffeomorphism. Since $F$ is an endomorphism, it suffices to show $F$ is an isomorphism on tangent spaces.
+
+	Let $(g,h)\in G\times G$, and identifying $T_{(g,h)} (G\times G)\cong T_gG\oplus T_hG$, let $(v,w)$ be an element of the tangent space. Note that the proof of $\mathrm{d} m_{(e,e)} (v,w)=v+w$ in \cref{1} did not rely on the inversion being smooth, so we obtain the same result here. Since the differential of the identity is simply the identity, we have
+	\[
+		\mathrm{d} F_{(e,e)} (v,w)=(v,v+w)
+	.\]
+	This is easily an isomorphism of vector spaces, since it has an inverse given by $(v,w)\mapsto (v,w-v)$. Now consider $\mathrm{d} F_{(g,h)}(v,w)=(v,\mathrm{d} m_{(g,h)} (v,w)) $. Since the left component is the identity, which is an isomorphism of vector spaces, we now need to determine $\mathrm{d} m_{(g,h)} (v,w)$.
+
+	First, define for any $g\in G$ the map $i_g : G \to G\times G$ given by $x\mapsto (g,x)$, which is clearly smooth. Note that $(m\circ i_g)(x)=m(g,x)=gx=L_g(x)$, and thus $m\circ i_g=L_g$. We thus have $\mathrm{d}(L_g)_h = \mathrm{d}m_{(g,h)} \circ \mathrm{d}(i_g)_h$. We would like to show that $\mathrm{d} (i_g)_h(v) = (0,v)$. Indeed, $\mathrm{d} (i_g)_h : T_hG \to T_gG\oplus T_hG$ precomposes by the constant map at $g$ on the $T_gG$ component, and the identity map on the $T_hG$ component. Since derivations of constant maps are zero, we have that the left component vanishes and the right component is the identity, so $\mathrm{d} (i_g)_h(v)=(0,v)$. We similarly have that if $j_h : G \to G\times G$ is the map $x\mapsto (x,h)$, then $\mathrm{d} (j_h)_g(v)=(v,0)$. We also similarly have that $R_h=m \circ j_h$, meaning $\mathrm{d} (R_h)_g=\mathrm{d} m_{(g,h)} (v,0)$. We thus have by linearity that
+	\[
+		\mathrm{d} m_{(g,h)} (v,w)=\mathrm{d} (L_h)_g(v)+\mathrm{d} (R_g)_h(w)=\left( \mathrm{d} (L_h)_g(v),\mathrm{d} (R_g)_h(w) \right) 
+	.\]
+	The proof that $L_g,R_g$ are diffeomorphisms relies only on the fact that multiplication is smooth and the fact that $G$ is a group. In partiuclar, it does \emph{not} require that inversion be smooth. We thus have that $L_g$, $R_g$ are diffeomorphisms, meaning they promote to isomorphisms of vector spaces. Note that by our above argument, $\mathrm{d} m_{(g,h)} $ arises by universality in the coproduct diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T_gG \ar[hook, d] \ar[" \mathrm{d} (L_h)_g ", dr]  &  \\
+	T_gG \oplus T_hG \ar[" \mathrm{d} m_{(g\text{,}h)}  ", dashed, r]  & T_{gh} G \\
+	T_hG \ar[hook, u] \ar[" \mathrm{d} (R_g)_h "', ur]  & 
+	\end{tikzcd}\]
+	This follows since the canonical inclusion into the coproduct is the inclusion along the slice with 0. Since $L_h,R_g$ are diffeomorphisms, their differentials are isomorphisms, and thus $\mathrm{d} m_{(g,h)} $ is an isomorphism by universality.
+
+	Therefore, $F$ is a local diffeomorphism. Now we show that $F$ is bijective, which will make it a diffeomorphism by the global rank theorem. Suppose that we have $(g,h),(k,\ell )\in G\times G$ with $(g,gh)=(k,k\ell )$. We then have $g=k$, meaning $gh=g\ell $. Since $g$ has an inverse, $h=\ell $, showing injectivity. For surjectivity, let $(g,h)\in G\times G$. Note that since $g^{-1} \in G$, we have $(g,g^{-1} h)\in G\times G$, and
+	\[
+		F(g,g^{-1} h)=(g,gg^{-1} h)=(g,h)
+	.\]
+	Therefore, $F$ is surjective, and thus bijective.
+
+	Therefore, $F$ is a diffeomorphism, and has a smooth inverse $F^{-1} $ which must be given by $(g,h)\mapsto (g,g^{-1} h)$. Consider the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	G \ar[" j_e ", r]  & G\times G \ar[" F^{-1}  ", r]  & G\times G \ar[" \pi _2 ", r]  & G
+	\end{tikzcd}\]
+	given by
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	g \ar[mapsto, r]  & (g,e) \ar[mapsto, r]  & (g,g^{-1} e) \ar[r, mapsto]  & g^{-1} e=g^{-1} .
+	\end{tikzcd}\]
+	Therefore, this composite is precisely the inversion map $i : G \to G$. Since this is a composite of smooth maps, it is smooth.
+\end{proof}
+
+\section{Problem 7.4}
+\begin{problem}
+	Let $\det : \operatorname{GL} (n,\mathbb{R} ) \to \mathbb{R} $. Compute the differential of $\det $ using velocity vectors as follows.
+	\begin{enumerate}
+		\item For any $A\in M(n,\mathbb{R} )$, show that
+			\[
+				\left. \frac{\mathrm{d}}{\mathrm{d}t} \right|_0 \det (1+tA)=\operatorname{tr} A
+			.\]
+		\item For $X\in \operatorname{GL} (n,\mathbb{R} )$ and $B\in T_X \operatorname{GL} (n,\mathbb{R} )\cong M(n,\mathbb{R} )$, show that
+			\[
+				\mathrm{d} (\det )_X(B)=(\det X)\operatorname{tr} (X ^{-1} B)
+			.\]
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	The question says to use Lee corollary 3.25:\setcounter{definition}{24}
+	\begin{corollary}\label{cor}
+		Let $F : M \to N$ be smooth, $p\in M$, and $v\in T_pM$. Then for any smooth curve $\gamma : J \to M$ with $0\in J \subseteq \mathbb{R} $, $\gamma (0)=p$, and $\gamma '(0)=v$, we have
+		\[
+			\mathrm{d} F_p(v)=(F\circ \gamma ')(0)
+		.\]
+	\end{corollary}
+	
+	(a) We can define the determinant of an $n\times n$ matrix $A$ as
+	\[
+		\det A=\sum_{\sigma \in S_n} (\operatorname{sgn} \sigma )A_1^{\sigma (1)} \cdots A_n ^{\sigma (n)} 
+	\]
+	for $S_n$ the symmetry group on $n$ and $A^i_j$ the entry in the $i$th row and $j$th column. We then clearly see that $\det (I_n+tA)$ is a polynomial in $t$, since it's a sum over products over polynomials, and polynomials form a ring. The derivative evaluated at $t=0$ will then vanish everywhere \emph{except} for the degree 1 term. It suffices to show this term is the trace.
+
+	We do this by induction. The case for $n=1$ is trivial, so we start with $n=2$. We have
+	\[
+		\det \begin{pmatrix}
+		1+A^1_1t & A_2^1t \\
+		A_1^2t & 1+A_2^2t
+		\end{pmatrix}=\left( 1+A_1^1t \right) \left( 1+A_2^2t \right) -A_1^2A_2^1t^2=1+(A_1^1+A_2^2)t-A_1^2A_2^1t^2
+	.\]
+	The degree 1 term is indeed the trace $\operatorname{tr} A$. Now assume the inductive hypothesis, and let $A$ be an $n\times n$ matrix with $n>2$. Note that the $(n-1)\times (n-1)$ matrix formed by components $A^i_j$ for $i,j > 1$ is of the form $I_{n-1} +Bt$, with $B\in M(n-1,\mathbb{R} )$. We then have that the only linear term in $B$ is $\operatorname{tr} B = \operatorname{tr} A - A_1^1$. We will use the cofactor expansion along the top row of $I_n+At$. Since $n>2$, we have that the determinant of each cofactor is a polynomial in $t$. Since every term in the top row (except the top left corner) is linear in $t$, if the determinant of the corresopnding cofactor has no constant term, the contribution of that component of the sum will vanish in the derivative. If we can show this, then we will have that the (relevant part of the) determinant is the top left component $1+A_1^1t$ times the determinant of the cofactor $B$. Multiplying this out:
+	\[
+		(1+A^1_1t)(1+ \operatorname{tr} B + \cdots) = 1 + A_1^1t + (\operatorname{tr} B )t + \cdots
+	.\]
+	The linear term is thus still the trace. It suffices to show this weird statement with the off-diagonal cofactors having no constant term. Sorry if this is unclear but I find this argument very hard to communicate.
+
+	We now do another induction here. The base case is trivial, so we assume the inductive hypothesis. Then the off-diagonal cofactor is of the form $A^i_jt \left| C_j^i \right| $ for $C^i_j$ the cofactor, so we get that since $\left| C^i_j \right| $ has no constant term, multiplying it by a multiple of $t$ will not change that. The statement follows.
+
+	(b) Let $X\in \operatorname{GL} (n,\mathbb{R} )$ and $B\in T_X \operatorname{GL} (n,\mathbb{R} )$. Let $\gamma : J \to \mathbb{R} $ be the (clearly smooth) curve $\gamma (t)=X+tB$, defined on some open $J\subseteq \mathbb{R} $. Since $\gamma (0)=X$ and
+	\[
+		\gamma '(0)=\left.\frac{\mathrm{d}}{\mathrm{d}t} X+tB\right|_0 = B
+	.\]
+	Because $X\in \operatorname{GL} (n,\mathbb{R} )$, by continuity we can take $\Im \gamma \subseteq \operatorname{GL} (n,\mathbb{R} )$ for $J$ sufficiently small. By \cref{cor},
+	\[
+		\mathrm{d} (\det )_X(B)=(\det \circ \gamma )'(0)=\left. \frac{\mathrm{d}}{\mathrm{d}t} \det \circ \gamma \right|_0 = \left.\frac{\mathrm{d}}{\mathrm{d}t} \det (X+tB)\right|_0
+	.\]
+	The problem gives us the hint $\det (X+tB)=\det (X)\det (I_n+tX ^{-1} B)$. We then have
+	\[
+		= \det X \left. \frac{\mathrm{d}}{\mathrm{d}t} \det (I_n +t X ^{-1} B)\right|_0 = \det X \operatorname{tr} (X ^{-1} B)
+	,\]
+	where the final step follows by part (a).
+\end{proof}
+
+
+\section{Problem 7.9}
+\begin{problem}
+	Show that $\theta : (A,[x]) \mapsto A\cdot [x]=[Ax]$ is a smooth, transitive left action of $\operatorname{GL} (n+1,\mathbb{R} )$ on $\mathbb{R} \mathbb{P} ^n$.
+\end{problem}
+\begin{proof}
+	First, we show $\theta $ is indeed a group action. Since matrix multiplication is associative, we have $(AB)\cdot [x]=[ABx]=A\cdot (B\cdot x)$. Additionally, since the identity matrix $I$ is an identity, $I\cdot [x]=[Ix]=[x]$. Therefore, $\theta $ is indeed a group action.
+
+	Now we show smoothness. Let $\pi : \mathbb{R}_{\neq 0} ^{n+1}  \to \mathbb{R} \mathbb{P} ^n$ be the quotient map, which we have seen is a submersion. Consider the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\operatorname{GL} (n+1,\mathbb{R} )\times \mathbb{R} ^{n+1}_{\neq 0} \ar[" 1 \times \pi  "', d] \ar[dotted, r]  & \mathbb{R}_{\neq 0} ^{n+1} \ar[" \pi  ", d]  \\
+	\operatorname{GL} (n+1,\mathbb{R} )\times \mathbb{R} \mathbb{P}^n \ar[" \theta  "', r]  & \mathbb{R} \mathbb{P}^n
+	\end{tikzcd}\]
+	We would like to define a dotted arrow $\widetilde{\theta } $ making the diagram commute. This commutativity condition forces $\widetilde{\theta } (A,x)=Ax$. We will show that $\widetilde{\theta } $ is smooth, and that $1\times \pi $ is a submersion. It will then follow that $\pi \circ \widetilde{\theta } =\theta \circ (1\times \pi )$ is smooth, and thus $F$ is smooth since $(1\times \pi )$ is a submersion.
+
+	First, we show products preserve submersions by appealing to the local section theorem. We prove this in full generality.
+	\begin{proposition}\label{4.2}
+		Let $\pi _1 : M_1 \to N_1$ and $\pi _2 : M_2 \to N_2$ be submersions. Then $\pi _1 \times \pi _2$ is a submersion.
+	\end{proposition}
+	\begin{proof}
+		Since $\pi _1,\pi _2$ are submersions, by the local section theorem for all $p_1\in M_1$ and $p_2\in M_2$, there are open sets $U_1 \subseteq N_1$, $U_2 \subseteq N_2$ and smooth local sections $\sigma_1 : U_1 \to M_1$ and $\sigma _2 : U_2 \to M_2$ of $\pi _1$ and $\pi _2$, respectively, with $p_1\in \Im \sigma _1$ and $p_2\in \Im \sigma _2$. Since products of smooth functions are continuous, we have that $(p,q)$ is in the image of $\sigma _1 \times \sigma _2 : U_1 \times U_2 \to M_1\times M_2$. Since $U_1\times U_2$ is open by definition of the product topology, it suffices to show $\sigma _1\times \sigma _2$ is a local section of $\pi _1\times \pi _2$. Indeed,
+		\[
+			(\pi _1 \times \pi _2)\circ (\sigma _1\times \sigma _2)(x,y)=(\pi _1\sigma _1(x),\pi _2\sigma _2(y))=(x,y)
+		\]
+		since $\pi _1\sigma _1$ and $\pi _2\sigma _2$ are the identities.
+	\end{proof}
+	
+	It now suffices to show that $\widetilde{\theta } $ is smooth. Since $\operatorname{GL} (n+1,\mathbb{R} )$ is an open submanifold of $M(n+1,\mathbb{R} )\cong \mathbb{R} ^{(n+1)^2} $, the global chart $\mathbb{R} ^{(n+1)^2} \supseteq U \cong \operatorname{GL} (n+1,\mathbb{R} )$ is just a map organizing components of the $(n+1)^2$-tuple into an $(n+1)\times (n+1)$-matrix. Investigating the definition of matrix multiplication tells us that $Av$ is just componentwise a sum over products of components of $A$ and $x$. Since multiplication and addition are smooth, each component function is smooth. Therefore, $(A,x)\mapsto Ax$ is smooth. Since $\widetilde{\theta } $ is smooth, we see that $\theta $ is smooth.
+
+	Finally, we show transitivity. We must show for all $[x],[y]\in\mathbb{R} \mathbb{P} ^n$, there is $A\in \operatorname{GL} (n+1,\mathbb{R} )$ such that $A\cdot [x]=[y]$. This is equivalent to finding a matrix $A\in \operatorname{GL} (n+1,\mathbb{R} )$ and a scalar $\lambda \in\mathbb{R} \setminus \left\{ 0 \right\} $ such that $Ax=\lambda y$. We can absorb the factor of $1/\lambda $ into the matrix $A$, simplifying this to the requirement that $Ax=y$. We can simply choose a basis $\mathcal{B}_1 =\left\{ x,v_1, \ldots ,v_n \right\} $ for $\mathbb{R} ^{n+1} $, and similarly choose a basis $\mathcal{B} _2\left\{ y,w_1, \ldots ,w_n \right\} $. There is then a change of basis matrix $A$ mapping the basis $\mathcal{B} _1$ to the basis $\mathcal{B} _2$. In particular, $Ax=y$. Since change of basis matrices are isomorphisms, and isomorphisms are precisely those matrices with nonzero determinant, we have $A\in \operatorname{GL} (n+1,\mathbb{R} )$.
+\end{proof}
+
+
+\section{Problem 7.11}
+\begin{problem}
+	Define the \emph{Hopf action} of $S^1$ on $S^{2n+1} $ by $z(w^1 , \ldots ,w^{n+1} )=(zw^1, \ldots ,zw^{n+1})$. Show this action is smooth and that orbits are disjoint unit circles in $\mathbb{C} ^{n+1} $.
+\end{problem}
+\begin{proof}
+	Let $\theta : G\times S^{2n+1}  \to S^{2n+1} $ be the map $(z,w)\mapsto zw$. It should just be obvious that this is smooth, but the problem specifies that we must prove this, so I will provide a short writeup.
+
+	The charts $\mathbb{R} ^{2n+1} \cong \mathbb{C} ^{n+1} $ are given by $a^j + b^ji\mapsto (a^j,b^j)$ in each component $w^j=a^j+b^ji$ of $w\in\mathbb{C} ^{n+1} $. Then postcomposing $\theta $ with the chart $\mathbb{C} ^{n+1} \to \mathbb{R} ^{2n+2} $ gives th ecomposite
+	\[
+		(a+bi,a^1+b^1i, \ldots ,a^{n+1} + b^{n+1}i )\mapsto \left( a^1a - b^1b, ab^1+ba^1, \ldots , a^{n+1} a-b^{n+1} b,ab^{n+1} +ba^{n+1}  \right) 
+	.\]
+	Yeah this is just very clearly smooth. I could go through the full verification by writing out the charts for $S^1$ which just amounts to rewriting one of $a,b$, and then say ``because addition and subtraction and multiplication are all smooth, it follows'', but it should be clear at this point in the course that this is smooth since each component function is clearly smooth. Moreover, $zw\in S^1$ since $z$ can be viewed simply as a scalar, and thus $\left| zw \right| =\left| z \right| \left| w \right| =1\cdot 1=1$, since $z\in S^1$ and $w\in S^{2n+1} $.
+
+	It is a standard fact that of group theory that orbits partition the set being acted on, so distinct orbits are indeed are disjoint in $S^{2n+1} $. To show they are unit circles, let $w\in S^{2n+1} $. We will find a metric-preserving homeomorphism $\operatorname{O} (w) \cong S^1$; the fact that the metric is preserved will tell us that $\operatorname{O} (w)$ is a unit circle.
+
+	We will show that the map $F : \operatorname{O} (g) \to S^1$ given by $zw\mapsto z$ is a homeomorphism. To show it is well-defined and a bijection, we show the map $z\mapsto zw$ is a bijection. By definition $z\mapsto zw$ is surjective, so it suffices to show injectivity. Let $z_1,z_2\in S^1$ such that $z_1w=z_2w$. Since $w\in S^{2n+1} $ has norm 1, it has at least one nonzero component $w^i$. It follows that $z_1w^i=z_2w^i$, and since $w^i \neq 0$, it has an inverse, yielding $z_1=z_2$. Therefore, $z\mapsto zw$ is injective. We thus have that $zw\mapsto z$ is a bijection as well.
+
+	Recall that if $f : X \to Y$ is a continuous bijection between spaces with $X$ compact and $Y$ Hausdorff, then its inverse is continuous. Recall also that preimages of closed maps under continuous functions are closed. The map $\mathbb{R} ^2\to \mathbb{R} $ given by $(x,y)\mapsto x^2+y^2$ is continuous, and the preimage under the closed set $\left\{ 1 \right\} $ is $S^1$. Therefore, $S^1$ is closed in $\mathbb{R} ^2$. By Heine-Borel, since $S^1$ is bounded, it is compact. Therefore, $z\mapsto zw$ is a continuous bijection from a compact to a Hausdorff space. Therefore, $zw\mapsto z$ is continuous, and thus a homeomorphism.
+	
+	To show the metric is preserved, let $z_1,z_2\in S^1$. We must show that $\left| z_1-z_2 \right| =\left| z_1w-z_2w \right| $. Appealing to linear algebra, we have that
+	\[
+		\left| z_1w-z_2w \right| =\sqrt{\left\langle z_1w-z_2w,z_1w-z_2w \right\rangle }
+	\]
+	for $\left\langle -,- \right\rangle $ the inner product. Using the fact that the inner product is bilinear, we can expand the term inside the square root to
+	\[
+		\left\langle z_1w,z_1w \right\rangle +\left\langle -z_2w,z_1w \right\rangle +\left\langle z_1w,-z_2w \right\rangle +\left\langle z_2w,z_2w \right\rangle =z_1z_1^*\left\langle w,w \right\rangle -z_1z_2^*\left\langle w,w \right\rangle -z_1^*z_2\left\langle w,w \right\rangle +z_2z_2^*\left\langle w,w \right\rangle 
+	.\]
+	Here we have used the convention that $\left\langle v,w \right\rangle =v^\dagger w$. Since we can factor out a factor of $\left| w \right| ^2=1$, we have that
+	\[
+		\left| z_1w-z_2w \right| =\left| w \right|\sqrt{z_1z_1^*-z_1^*z_2-z_1z_2^*+z_2z_2^*} =\sqrt{z_1z_1^*-z_1z_1^*-z_1^*z_2+z_2z_2^*} 
+	.\]
+	To show this is equal to $\left| z_1-z_2 \right| $, we expand it out in the same way:
+	\[
+		\left| z_1-z_2 \right| =\sqrt{\left\langle z_1-z_2,z_1-z_2 \right\rangle } =\sqrt{\left( z_1-z_2 \right) ^*\left( z_1-z_2 \right) } =\sqrt{\left( z_1^*-z_2^* \right) \left( z_1-z_2 \right) } 
+	\]
+	\[
+		=\sqrt{z_1z_1^*-z_1z_2^*-z_1^*z_2+z_2z_2^*} 
+	.\]
+	Therefore, the map $zw\mapsto z$ is metric preserving, yielding a metric-preserving homeomorphism $\operatorname{O} (w)\cong S^1$. Since $\operatorname{O} (w)\subseteq S^{2n+1} $, we see that it must be a unit circle.
+\end{proof}
+
+\section{Problem 7.16}
+\begin{problem}\label{6}
+	Show there is a diffeomorphism $\operatorname{SU} (2)\cong S^3$.
+\end{problem}
+\begin{proof}
+	Define the map $F : S^3 \to \operatorname{SU} (2)$ by
+	\[
+		(\alpha ,\beta )\mapsto \begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix}
+	.\]
+	First we show this is indeed a map to $\operatorname{SU} (2)$. First, note that since $\left| (\alpha ,\beta ) \right| =\sqrt{\left| \alpha  \right| ^2+\left| \beta  \right| ^2} =1$, we have $\left| \alpha  \right|^2+\left| \beta  \right| ^2=1$. Also note that
+	\[
+		\det \begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix}=\alpha \overline{\alpha } + \overline{\beta } \beta = \left| \alpha  \right| ^2+\left| \beta  \right| ^2=1
+	.\]
+	Therefore, $F(\alpha ,\beta )$ has determinant 1. To show its conjugate is its inverse, note that
+	\[
+		\begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix}^\dagger = \begin{pmatrix}
+		\overline{\alpha }  & \overline{\beta }  \\
+		-\beta  & \alpha 
+		\end{pmatrix}
+	.\]
+	We then have
+	\[
+		\begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix}\begin{pmatrix}
+		\overline{\alpha }  & \overline{\beta }  \\
+		- \beta  & \alpha 
+		\end{pmatrix}=\begin{pmatrix}
+		\alpha \overline{\alpha } +\beta \overline{\beta }  & \alpha \overline{\beta } -\alpha \overline{\beta }  \\
+		\overline{\alpha } \beta - \overline{\alpha } \beta  & \overline{\beta } \beta + \overline{\alpha } \alpha 
+		\end{pmatrix}=\begin{pmatrix}
+		\left| \alpha  \right| ^2+\left| \beta  \right| ^2 & 0 \\
+		0 & \left| \alpha  \right| ^2+\left| \beta  \right| ^2
+		\end{pmatrix}=\begin{pmatrix}
+		1 & 0 \\
+		0 & 1
+		\end{pmatrix}
+	.\]
+	The other side follows in the same way. Therefore, $F(\alpha ,\beta )$ is unitary. We now show the map is bijective. Injectivity is simple: if
+	\[
+		F(\alpha ,\gamma )=\begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix}= \begin{pmatrix}
+		\gamma  & - \overline{\delta }  \\
+		\delta  & \overline{\gamma } 
+		\end{pmatrix}=F(\gamma ,\delta )
+	,\]
+	then just reading off the equality from the left two components gives $(\alpha ,\beta )=(\gamma ,\delta )$. For surjectivity, it suffices to show that any element of $\operatorname{SU} (2)$ can be represented of the form
+	\[
+		\begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix},\qquad \alpha ,\beta \in\mathbb{C} ,\qquad \left| \alpha  \right| ^2+\left| \beta  \right| ^2=1
+	.\]
+	This fact will also be useful in the final problem.
+
+	Let
+	\[
+		M\coloneqq \begin{pmatrix}
+		a & b \\
+		c & d
+		\end{pmatrix}\in \operatorname{SU} (2)
+	.\]
+	Then
+	\[
+		M^{-1} = \begin{pmatrix}
+		\overline{a}  & \overline{c}  \\
+		\overline{b}  & \overline{d} 
+		\end{pmatrix}
+	.\]
+	Recall that inverses of $2\times 2$ matrices are given by
+	\[
+		M^{-1} =\frac{1}{\det M} \begin{pmatrix}
+		d & -b \\
+		-c & a
+		\end{pmatrix}
+	.\]
+	Since $M\in \operatorname{SU} (2)$, the determinant is 1, so we have
+	\[
+		\begin{pmatrix}
+		\overline{a}  & \overline{c}  \\
+		\overline{b}  & \overline{d} 
+		\end{pmatrix}=\begin{pmatrix}
+		d & -b \\
+		-c & a
+		\end{pmatrix}
+	.\]
+	This gives us $d= \overline{a} $ and $-c= \overline{b}$ implies $c=- \overline{b} $. We thus have
+	\[
+		\begin{pmatrix}
+		a & b \\
+		c & d
+		\end{pmatrix}=\begin{pmatrix}
+		a & - \overline{c}  \\
+		c & \overline{a} 
+		\end{pmatrix}
+	.\]
+	Additionally, the condition that $\det M=1$ now becomes
+	\[
+		a \overline{a} + c \overline{c} =\left| a \right| ^2+\left| c \right| ^2=1
+	.\]
+	Therefore, $F$ is indeed surjective.
+
+	Now we show smoothness. Tracing all the definitions for the related Lie groups shows that $\operatorname{SU} (2)$ admits a very simple global chart $\psi^{-1} : U\subseteq \mathbb{R} ^4\to \operatorname{SU} (2)$ given by
+	\[
+		(a,b,c,d)\mapsto \begin{pmatrix}
+		a+bi & -c+di \\
+		c+di & a-bi
+		\end{pmatrix}
+	.\]
+	The map $\psi \circ F$ is then given by
+	\[
+		(a+bi,c+di)\mapsto \begin{pmatrix}
+		a+bi & -c+di \\
+		c+di & a-bi
+		\end{pmatrix}\mapsto (a,b,c,d)
+	.\]
+	Since the charts for $S^3$ simply view $(a+bi,c+di)$ as the real tuple $(a,b,c,d)$ and drop one of the components, we clearly see that this map is smooth, and we also already see that its inverse is clearly smooth. Therefore, there is a diffeomorphism $\operatorname{SU} (2) \cong S^3$.
+\end{proof}
+
+
+\section{Problem 7.22}
+\begin{problem}\label{7}
+	Let $\mathbb{H} $ denote the ring of quaternions.
+	\begin{enumerate}
+		\item Show that quaterion multiplication is associative, but noncommutative.
+		\item Show that $(pq)^*=q^*p^*$, where $p^*$ is the conjugate of $p$.
+		\item Show that $\left\langle p,q \right\rangle =\frac{1}{2} \left( p^*q+q^*p \right) $ is an inner product on $\mathbb{H} $, and the associated norm satisfies $\left| pq \right| =\left| p \right| \left| q \right| $.
+		\item Show that there is an inverse $p ^{-1} \coloneqq \left| p \right| ^{-2} p^*$ for $p$.
+		\item Show that the set $\mathbb{H} ^*$ of nonzero quaternions is a Lie group under multiplication.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) First we show noncommutativity of multiplication. Note that $ij=-ji$, and suppose for contradiction that $ji=-ji$. Then since $i(-i)=-(i^2)=-(-1)=1$, we have $j=-j$. Since $j^2=-1$, we have that $j^2=-j^2$ implies $1=-1$, an obvious contradiction.
+
+	Now we show associativity. I don't want to type it all out so instead I note that $\mathcal{Q} \coloneqq \left\{ \pm1,\pm i,\pm j,\pm k \right\} $ is a group (inverses are $i^{-1} =-i$, $j^{-1} =-j$, $k^{-1} =-k$), and $\mathbb{H}$ is the group-ring $\mathbb{R} [\mathcal{Q} ]$ freely generated on $\mathbb{R} $-linear combinations in $\mathcal{Q} $. Since $\mathbb{H} $ is a ring, multiplication is commutative.
+
+	(2) Let $(a,b),(c,d)$ be quaternions, where we are using the definition given in the problem. Then
+	\begin{align*}
+		((a,b)(c,d))^*&=(ac-\overline{b}d ,\overline{a}d+bc)^*\\
+			      &=\left( \overline{ac- \overline{b} d} ,- \overline{a} d-bc \right) \\
+		(c,d)^*(a,b)^*&=(\overline{c} ,-d)(\overline{a} ,-b)\\
+			      &=(\overline{c} \overline{a} - \overline{d} b, - \overline{\overline{c} }  b -d \overline{a} )\\
+			      &=\left( \overline{ca - \overline{b} d} ,-c b-d \overline{a}  \right) 
+	.\end{align*}
+	
+	(3) First we show symmetry. For $p,q\in\mathbb{H} $,
+	\[
+		\left\langle p,q \right\rangle =\frac{1}{2} \left( p^*q+q^*p \right) =\frac{1}{2} \left( q^*p+p^*q \right) =\left\langle q,p \right\rangle 
+	\]
+	by commutativity of addition. It now suffices to show linearity in one argument, so let $p,q,r\in\mathbb{H} $. First we will show that $(p+q)^*=p^*+q^*$. Let $p=(a,b)$ and $q=(c,d)$. Then
+	\[
+		\left( (a,b)+(c,d) \right) ^*=(a+c,b+d)^*=\left( \overline{a+c} ,-b-d \right) =\left( \overline{a} ,-b \right) +\left( \overline{c} ,-d \right) =(a,b)^*+(c,d)^*
+	.\]
+	Using this fact, we have
+	\[
+		\left\langle p+q,r \right\rangle =\frac{1}{2} \left( (p+q)^*r + r^*(p+q) \right) =\frac{1}{2} \left( \left( p^*+q^* \right) r+r^*\left( p+q \right)  \right) 
+	\]
+	\[
+		=\frac{1}{2} \left( p^*r+q^*r+r^*p+r^*q \right) =\frac{1}{2} \left( p^*r+r^*p \right) +\frac{1}{2} \left( q^*r+r^*q \right) =\left\langle p,r \right\rangle +\left\langle q,r \right\rangle 
+	.\]
+	Now let $k\in\mathbb{R} $. We also show that $(kp)^*=kp^*$:
+	\[
+		(kp)^*=(ka,kb)^*=( \overline{ka} ,-kb)=(k \overline{a} ,k(-b))=k(\overline{a} ,-b)=kp^*
+	.\]
+	We now have
+	\[
+		\left\langle kp,q \right\rangle =\frac{1}{2} \left( (kp)^*q+q^*kp \right) =\frac{1}{2} \left( kp^*q+q^*p \right) =\frac{k}{2} \left( p^*q+q^*p \right) =k\left\langle p,q \right\rangle 
+	.\]
+	Next, we must show that $\left\langle p,p \right\rangle \geq 0$, and $\left\langle p,p \right\rangle =0$ if and only if $p=0$. Let $p=(a,b)$. Then
+	\[
+		\left\langle p,p \right\rangle =\frac{1}{2} \left( p^*p^*p \right) =p^*p=(\overline{a} ,-b)(a,b)=( \overline{a} a+b \overline{b}, \overline{\overline{a} } b-ab)=\left( \overline{a} a+\overline{b} b,0 \right) 
+	.\]
+	Recall that $\overline{a} a$ is the norm square of $a$ as a complex number, and is thus $\overline{a} a \geq 0$. Therefore, $\overline{a} a+\overline{b} b\geq 0$. Additionally, since it is positive, we see that it is equal to 0 if and only if $a,b=0$ since $\left| a \right| $ is a norm on $\mathbb{C} $.
+	
+	Finally, we should show that $\left\langle p,q \right\rangle $ is indeed an element of $\mathbb{R} $, in the sense that the quaternion $\left\langle p,q \right\rangle $ is of the form $(a,0)$ for some complex $a$. Let $p=(a,b)$ and $q=(c,d)$. Then
+	\begin{align*}
+		\left\langle p,q \right\rangle &=\frac{1}{2} \left( p^*q+q^*p \right) \\
+					       &=\frac{1}{2} \left( (\overline{a} ,-b)(c,d)+(\overline{c} ,-d)(a,b) \right) \\
+					       &=\frac{1}{2} \left( \left( \overline{a} c+ \overline{b} d,ad-bc \right) +\left( \overline{c} a+ \overline{d} b,cb-ad \right)  \right) \\
+					       &=\frac{1}{2} \left( \overline{a} c+ a \overline{c} +\overline{b} d+ b \overline{d} , ad-bc+bc-ad \right) \\
+					       &=\frac{1}{2} \left( \overline{a} c+ a \overline{c} , \overline{b} d+b \overline{d} ,0 \right) 
+	.\end{align*}
+	Therefore, we can indeed identify this with a real number, meaning $\left\langle -,- \right\rangle : \mathbb{H} \times \mathbb{H}  \to \mathbb{R} $.
+
+	The norm is then given by $\left| p \right| =\sqrt{\left\langle p,p \right\rangle } =\sqrt{\overline{a} a+\overline{b} b} $, where $p=(a,b)$. Let $q=(c,d)$. We have
+	\begin{align*}
+		\left| pq \right| &=\left| (a,b)(c,d) \right| \\
+				  &=\left| (ac- \overline{b} d, \overline{a} d+bc) \right| \\
+				  &=\sqrt{\left( \overline{ac} -b \overline{d}  \right) \left( ac- \overline{b} d \right) +\left( a \overline{d} + \overline{bc}  \right) \left( \overline{a} d+bc \right) } \\
+				  &=\sqrt{\overline{ac} ac +b \overline{d} \overline{b} d - \overline{ac} \overline{b} d- acb \overline{d} +a \overline{d} \overline{a} d+ \overline{bc} bc + a \overline{d} bc + \overline{a} d \overline{bc} } \\
+				  &=\sqrt{\overline{a} a \overline{c} c + \overline{b} b \overline{d} d + \overline{a} a \overline{d} d + \overline{b} b \overline{c} c} \\
+				  &=\sqrt{\left( \overline{a} a+ \overline{b} b \right) \left( \overline{c} c+\overline{d} d \right) } \\
+				  &=\sqrt{\overline{a} a+ \overline{b} b} \sqrt{\overline{c} c+ \overline{d} d} \\
+				  &=\left| p \right| \left| q \right| 
+	.\end{align*}
+
+	(4) Let $p=(a,b)$. Then since $\left| p \right| =\sqrt{\left\langle p,p \right\rangle }=\sqrt{p^*p} $, we have
+	\[
+		\frac{p^*}{\left| p \right| ^2}p =\frac{p^*p}{\left| p \right|^2} =\frac{\left| p \right| ^2}{\left| p \right| ^2} =1
+	.\]
+	For the other side, we have
+	\[
+		p \frac{p^*}{\left| p \right| ^2} =\frac{pp^*}{\left| p \right| ^2} =\frac{\left| p^* \right| ^2}{\left| p \right| ^2} 
+	.\]
+	It suffices to show that $\left| p^* \right| =\left| p \right| $. Indeed,
+	\[
+		\left| p^* \right| =\left| (\overline{a} ,-b) \right| =\sqrt{a \overline{a} +(-b) \overline{(-b)} } =\sqrt{a \overline{a} +b \overline{b} } =\left| p \right| 
+	.\]
+	Therefore, $p ^{-1} =p^* \left| p \right| ^{-2} $.
+
+	(5) To recognize the smooth structure, it will be useful to fully transition to the $\left\{ 1,i,j,k \right\} $ basis. We will prove the important lemma that $\left| a+bi+cj+dk \right|^2 =a^2+b^2+c^2+d^2$. Using our previous definition of $\left| p \right| $, define $p=(\alpha ,\beta )=(a+bi,c+di)=a+bi+cj+dk$. Then
+	\[
+		\left| p \right|^2 =p^*p=\left( \overline{\alpha } \alpha + \overline{\beta } \beta  \right) =\left( \left| \alpha  \right| ^2+\left| \beta  \right| ^2 \right) =a^2+b^2+c^2+d^2
+	.\]
+	We define a global chart $\varphi :\mathbb{H} ^*\to \mathbb{R} ^4$ by mapping $a+bi+cj+dk\mapsto (a,b,c,d)$. We show the image of this map is open, the map is continuous under the metric space topology for $\mathbb{H} ^*$, and that it is injective. The fact that the map is continuous is fairly simple, since
+	\[
+		\left| (a,b,c,d) \right| =\sqrt{a^2+b^2+c^2+d^2} =\left| a+bi+cj+dk \right| 
+	.\]
+	Therefore, $\varphi $ is metric-preserving, meaning preimages of open balls are open balls, and in particular open. Conversely, images of open balls are open, and thus images of open sets are open. Therefore, the image of $\varphi $ is open. It suffices to show injectivity (bijectivity onto the image), and this follows immediately by uniqueness of basis representations. Since $\varphi $ is open, its inverse is continuous. Therefore, we have a homeomorphism. Since this is a global chart, we immediately have an atlas formed by the single chart $(\mathbb{H} ^*,\varphi )$.
+
+	Now we must show $\mathbb{H}^*$ is a Lie group. Using the basis $\left\{ 1,i,j,k \right\} $ will simplify this massively, but it requires us to untangle the definition of multiplication in this basis. Let $p=a+bi+cj+dk$ and $q=e+fi+gj+hk$. Then
+	\begin{align*}
+		pq&=\left( a+bi+cj+dk \right) \left( e+fi+gj+hk \right) \\
+		  &=\left( a+bi,c+di \right) \left( e+fi,g+hi \right) \\
+		  &=\left( (a+bi)(e+fi)-(c-di)(g+hi),(a-bi)(g+hi)+(c+di)(e+fi) \right) \\
+		  &=\left( ae-bf+(eb+af)i-(cg+dh+(ch-dg)i),ag+bh+(ah-bg)i+ce-df+(cf+de)i \right) \\
+		  &=\left( ae-bf-cg-dh+(eb+af-ch+dg)i,ag+bh+ce-df+(ah-bg+cf+de)i \right) \\
+		  &=(ae-bf-cg-dh)+(eb+af-ch+dg)i+(ag+bh+ce-df)j+(ah-bg+cf+de)k
+	.\end{align*}
+	This computation may not be 100\% correct, but the following idea is correct either way: multiplication is thus smooth componentwise, since it is simply a composite of multiplication, addition, and subtraction in $\mathbb{R} $, all of which are smooth.
+
+	Now consider inversion. We can view $p\mapsto p ^{-1} $ as the main horizontal composite in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & \mathbb{H} ^* &  \\
+		\mathbb{H} ^* \ar[" (-)^* ", ur] \ar[" \left| - \right| ^2 "', dr] \ar[r]  & \mathbb{R} \times \mathbb{H}^* \ar[" \mu  ", r] \ar[u] \ar[d]  & \mathbb{H} ^* \\
+	 & \mathbb{R}  & 
+	\end{tikzcd}\]
+	where $\mu $ denotes the map $(k,p)\mapsto kp$. The map $\mu $ is very clearly smooth since it is just multiplication componentwise in our coordinate representation, so it suffices to show $(-)^*$ and $\left| - \right| ^2$ are smooth. For the latter, we have
+	\[
+		(a,b,c,d)\mapsto a^2+b^2+c^2+d^2
+	\]
+	is clearly smooth. For the former, we note that conjugation is given by
+	\[
+		a+bi+cj+dk=(a+bi,c+di)\mapsto (a-bi,-c-di) = a-bi-cj-dk
+	.\]
+	The map $(a,b,c,d)\mapsto (a,-b,-c,-d)$ is clearly smooth, so $(-)^*$ is smooth. Therefore, inversion is smooth, and $\mathbb{H} ^*$ is a Lie group.
+\end{proof}
+
+
+\section{Problem 7.23}
+\begin{problem}
+	Let $\mathcal{S} \subseteq \mathbb{H} ^*$ be the set of unit quaternions. Show that $\mathcal{S} $ is a properly embedded submanifold of $\mathbb{H} ^*$ and is isomorphic to $\operatorname{SU} (2)$.
+\end{problem}
+\begin{proof}
+	Let $F : \mathbb{H} ^* \to \mathbb{R} $ be the map $p\mapsto \left| p \right| $. Then $\mathcal{S} =F^{-1} (1)$, so we will show that this is a regular level set, meaning $\mathrm{d} F_p$ is surjective at all $p\in F^{-1} (1)$. Since the codomain of $F$ is a 1-dimensional manifold, $T_1\mathbb{R} $ is 1-dimensional, so it suffices to show that $\mathrm{d} F_p$ is not identically zero. Using the global chart in \cref{7}, we have a coordinate representation of $\hat{F} : \mathbb{R} ^4 \to \mathbb{R} $ by mapping
+	\[
+		(a,b,c,d)\mapsto \sqrt{a^2+b^2+c^2+d^2} 
+	.\]
+	I forgot to say earlier that this is smooth since multiplication and addition and square roots are all smooth on the given domain, since we have $(a,b,c,d)\neq 0$. Consider any partial $\partial _i$ in $T_p\mathbb{H}^*$, and consider the image of this under $\mathrm{d} F_p$. It suffices to show that $\mathrm{d} F_p(\partial _i)$ is not identically zero. Consider the identity map $1: \mathbb{R}  \to \mathbb{R} $. We have
+	\[
+		\mathrm{d} F_p\left( \left. \frac{\partial }{\partial x^i} \right|_p \right) (1)=\left.\frac{\partial }{\partial x^i} 1\circ F\right|_p = \left.\frac{\partial \hat{F} }{\partial x^i} \right|_p
+	.\]
+	Write $(w,x,y,z)$ for the coordinates. Then
+	\[
+		\frac{\partial \hat{F} }{\partial w} =\frac{w}{\sqrt{w^2+x^2+y^2+z^2} } 
+	.\]
+	This is clearly not identically zero when $p=(a,b,c,d)\neq 0$, and in particular when $\left| p \right| =\left| (a,b,c,d) \right| =1$. Therefore, $\mathrm{d} F_p(\partial _i)(1)\neq 0$, and thus $\mathrm{d} F_p\neq 0$. Therefore, $\mathrm{d} F_p$ is surjective, meaning $\mathcal{S} $ is a properly embedded submanifold of codimension 1 by the regular level set theorem.
+
+	It is a fairly useful fact that there is a ring homomorphism $\mathcal{S} \cong \operatorname{SU} (2)$. We will promote this isomorphism to one of manifolds. We will also prove bijectivity for thoroughness.
+
+	Recall from \cref{6} that every element of $\operatorname{SU} (2)$ can be represented of the form
+	\[
+		\begin{pmatrix}
+		\alpha  & - \overline{\beta }  \\
+		\beta  & \overline{\alpha } 
+		\end{pmatrix},\qquad \alpha ,\beta \in\mathbb{C} ,\qquad \left| \alpha  \right|^2 +\left| \beta  \right|^2 =1
+	.\]
+	Define the map $\varphi : \operatorname{SU} (2) \to \mathcal{S} $ by
+	\[
+		\begin{pmatrix}
+		a+bi & -c+di \\
+		c+di & a-bi
+		\end{pmatrix}\mapsto a+bi-cj+dk
+	.\]
+	This is well-defined since elements of $\operatorname{SU} (2)$ satisfy
+	\[
+		1=\left| a+bi \right| ^2+\left| c+di \right| ^2=a^2+b^2+c^2+d^2=\left| a+bi+cj+dk \right| ^2
+	.\]
+	We start by showing this is a bijection. Define the map $\varphi ^{-1} : \mathcal{S}  \to \operatorname{SU} (2)$ by
+	\[
+		a+bi+cj+dk\mapsto \begin{pmatrix}
+		a+bi & c+di \\
+		-c+di & a-bi
+		\end{pmatrix}
+	.\]
+	Since $a+bi,-c+di\in\mathbb{C} $, and since
+	\[
+		\overline{a+bi} =a-bi,\qquad -\overline{-c+di} =-(-c-di)=c+di,
+	\]
+	we have that $\varphi ^{-1} (a+bi+cj+dk)\in \operatorname{SU} (2)$. Now we show they are inverses:
+	\[
+		(\varphi \varphi ^{-1} )(a+bi+cj+dk)=\varphi \begin{pmatrix}
+		a+bi & c+di \\
+		-c+di & a-bi
+		\end{pmatrix}=a+bi+cj+dk,
+	\]
+	\[
+		(\varphi ^{-1} \varphi )\begin{pmatrix}
+		a+bi & -c+di \\
+		c+di & a-bi
+		\end{pmatrix}=\varphi ^{-1} (a+bi-cj+dk)=\begin{pmatrix}
+		a+bi & -c+di \\
+		c+di & a-bi
+		\end{pmatrix}
+	.\]
+	Therefore, $\varphi $ is a bijection. Recalling from \cref{6} the charts for $\operatorname{SU} (2)$, we have
+	\[
+		\hat{\varphi }(a,b,c,d)=(a,b,-c,d),\qquad \widehat{\varphi ^{-1} }(a,b,c,d)=(a,b,-c,d)
+	.\]
+	The first is easier to see, and the latter can be seen by noting that $\widehat{\varphi ^{-1} }$ is an inverse to $\hat{\varphi }$. These are both clearly smooth, and are thus diffeomorphisms.
+\end{proof}
+
+\end{document}

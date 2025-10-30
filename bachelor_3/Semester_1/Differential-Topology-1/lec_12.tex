@@ -1,0 +1,52 @@
+\lecture{12}{Wed 01 Oct 2025 12:21}{Smooth coverings, embedded manifolds}
+
+\begin{theorem}\label{1.2.35}
+	Let $\pi : M \to N$ be a smooth submersion. Then any $F : N \to P$ is smooth if and only if $F\circ \pi $ is smooth. This is preisely universality of quotients in $\mathcal{M} \mathrm{an} $.
+\end{theorem}
+
+\begin{theorem}\label{1.2.36}
+	Let $\pi : M \to N$ be a smooth submersion. If $F : M \to P$ is smooth and constant on each fiber $\pi ^{-1} (n)$ of $\pi $, then there is exactly one $\widetilde{F} : N \to P$ such that
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	M\ar[" F ", r] \ar[" \pi  "', d]  & P \\
+	N\ar[" \widetilde{F}  "', dashed, ur]  & 
+	\end{tikzcd}\]
+	commutes.
+\end{theorem}
+\begin{proof}
+	Exists by topology, smooth by \cref{1.2.36}.
+\end{proof}
+
+\begin{theorem}\label{1.2.37}
+	Let there be a diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & M\ar[" \pi _2 ", dr] \ar[" \pi _1 "', dl]  &  \\
+	N_1 \ar[" F "', dashed, rr] &  & N_2
+	\end{tikzcd}\]
+	where each solid arrow is a submersion which are constant on each others fibers. Then there is a unique diffeomorphism as indicated by the dashed arrow, rendering the diagram commutative.
+\end{theorem}
+
+\begin{definition}\label{1.2.38}
+	Recall that a covering space of a space $M$ is a surjective, continuous map $\pi : E \to M$ between connected and locally path-connected spaces, such that for all $p\in M$, there is a neighborhood $U$ of $p$ such that each component of $\pi ^{-1} (U)$ is mapped homeomorphically to $U$. We say $U$ is \emph{evenly covered}. If $E$ is also simply connected (all loops contract to a point), we say it is a \emph{universal cover}.
+\end{definition}
+
+\begin{proposition}\label{1.2.39}
+	Let $\pi : E \to M$ be a smooth covering map. Given any evenly covered open $U\subseteq M$, any $q\in U$, and any $p\in \pi ^{-1} (q)$, then there is a \emph{unique} local section $\sigma : U \to E$ such that $\sigma (q)=p$.
+\end{proposition}
+
+\begin{proposition}\label{1.2.40}
+	Let $M$ be a smooth manifold and $\pi : E \to M$ a (not necessarily smooth) covering. Then $E$ is a topological $n$-manifold with a unique smooth structure promoting $\pi $ to a smooth covering.
+\end{proposition}
+
+\begin{corollary}\label{1.2.41}
+	If $M$ is a connected smooth manifold, then there is a simply connected smooth manifold $\widetilde{M} $ together with a smooth map $\pi : \widetilde{M}  \to M$. We call $\widetilde{M} $ the universal smooth cover.
+\end{corollary}
+
+\chapter{Submanifolds}
+
+\section{Embedded submanifolds}
+
+\begin{definition}\label{3.1.1}
+	Let $M$ be a smooth manifold, and $S\subseteq U$ a subspace endowed with a smooth structure such that the inclusion $S\hookrightarrow U$ is a smooth embedding. Then $S$ is an \emph{embedded submanifold}.
+\end{definition}
+
+

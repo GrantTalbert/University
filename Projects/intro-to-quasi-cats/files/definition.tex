@@ -15,7 +15,7 @@ This definition was first introduced by Boardman and Vogt in \cite{BV73} under t
 
 Quasi-categories are the standard ways to define $\infty $-categories. For the remainder of this talk, I want to show you what $\infty $-categories \emph{feel like} using the language of quasi-categories. We will define objects, 1-morphisms, identities, composites, 2-morphisms, informally describe higher $n$-morphisms (recall these are hard to describe explicitly), $\infty $-functors of $\infty $-categories, and homotopy categories. I will also close with a few extra remarks that we will not have enough time to discuss the theory of. It will be helpful to begin by investigating the nerve $N(\mathcal{C} )$ of a regular 1-category $\mathcal{C} $.
 
-\begin{proposition}[\cite{BV73}]\label{5.2}
+\begin{proposition}[\cite{groth}]\label{5.2}
 	Let $K$ be a simplicial set. Then the following statements are equivalent.
 	\begin{enumerate}
 		\item There is a category $\mathcal{C} $ and an isomorphism $K\cong N(\mathcal{C} )$;
@@ -39,7 +39,7 @@ Finally, we know that the identity morphism $1_x$ on an object $x\in \mathcal{C}
 	\item Domain and codomain are the faces $d_1,d_0$, respectively;
 	\item Identity is the degeneracy $s_0$.
 \end{enumerate}
-To see if these definitions work in general, we need to introduce a notion of \emph{composition}, a notion of \emph{homotopy}, and show they are compatible in the claimed manner. Just as in 1-categories, we write $f : x \to y$ to denote that $f\in \mathcal{C} _1$ is an edge of a quasi-category with domain $x$ and codomain $y$.
+To see if these definitions work in general, we need to introduce a notion of \emph{composition}. Since $\infty $-categories are supposed to be \emph{weak}, composition should only hold up to 2-isomorphism (which we will call \emph{homotopy}). The theory of quasi-categories takes a powerful approach of only having composition be well-defined up to homotopy. We will use this to motivate a definition of homotopy as well. Just as in 1-categories, we write $f : x \to y$ to denote that $f\in \mathcal{C} _1$ is an edge of a quasi-category with domain $x$ and codomain $y$.
 
 Let $f : x \to y$ and $g : y \to z$ in a quasi-category $\mathcal{C} $. Note that these define a \emph{horn} $\sigma _0 : \Lambda _1^2 \to \mathcal{C} $: since $f,g\in \mathcal{C} _1$, we define $d^0 \mapsto g$ and $d^2 \mapsto f$; by \cref{4.10} it suffices to show the compatibility condition, which in this case states
 \[
@@ -83,7 +83,9 @@ This looks like a geometric horn. We label the top right face as the 0th face, t
 \end{tikzcd}\]
 Geometrically, the triangle is actually ``filled'', and we don't just have the morphisms around the boundary. The ``filling'' of the simplex is thought of as the diagram being ``commutative'', meaning $h$ is the composite $g\circ f$. We say that the 2-simplex \emph{witnesses} $h$ as the composite of $g$ and $f$. This terminology is useful.
 
-Since this definition of composition agrees with the definitions of objects, morphisms, domain, and codomain in the expected way, we are close to finishing (1) and (4), and even (7) since we could identify 1-categories with their nerves to view them as quasi-categories. However, we still have a few things to show before we can be happy. First, we must show that compositions are \emph{unique up to homotopy}. Recall that we defined composites as the 1st face of the filler of a horn, but the definition of a quasi-category \emph{does not require that this filler be unique}. This means two morphisms can have many composites. We need to define a notion of homotopy, and then we need to show all the different composites are indeed homotopic.
+Recall that the quasi-category condition \emph{did not} require that the filler be unique. Since the 0th and 2nd faces are fixed for a given inner horn $\Lambda _1^2\to \mathcal{C} $, the only thing that can change is the first face. In more conventional terminology, this means that two morphisms \emph{do not need to have a unique composite}.
+
+What we need to do now is to define a notion of homotopy, such that composites are unique up to homotopy. More precisely, we need to define a notion of homotopy, and then we need to show all the different composites are indeed homotopic.
 
 \begin{definition}\label{5.3}
 	Let $\mathcal{C} $ be a quasi-category, and let $f,g : x \to y$ be morphisms. A \emph{homotopy} $\tau : f \to g$ is a 2-simplex $\tau \in \mathcal{C} _2$ such that
@@ -97,7 +99,7 @@ Recall that earlier we wrote 2-simplices as ``commutative'' diagrams (the quotes
  & y \ar[" 1_y ", dr]  &  \\
 x \ar[" f ", ur] \ar[" g "', rr]  &  & y
 \end{tikzcd}\]
-To explain why this makes sense, we have to invoke some circular reasoning. Luckily, since we are only describing the \emph{intuition} right now and not the actual math, circular reasoning is fine. Suppose we are able to show that with this definition of homotopy, all composites of $f$ and $g$ are homotopic. Suppose we are also able to show that $f$ composed with $1_y$ is simply $f$. In regular 1-category theory, the diagram would simply say $f=g$, but this is $\infty $-category theory. The composite $1_y \circ f$ is \emph{only well-defined up to homotopy}, meaning that there are other composites other than just $f$. In particular, $g$ is one of these composites. We thus have two different composites for $1_y$ and $f$: $f$ and $g$. Since composition is well-defined up to homotopy, we have that $f$ and $g$ are homotopic, as claimed. Thus, provided we can indeed show $1_y\circ f=f$ and that composition is well-defined up to homotopy, this definition is a good one.
+To explain why this makes sense, we have to invoke some circular reasoning. Luckily, since we are only describing the \emph{intuition} right now and not the actual math, circular reasoning is fine. Suppose we are able to show that with \emph{some} definition of homotopy, all composites of $f$ and $g$ are homotopic. Suppose we are also able to show that $f$ composed with $1_y$ is simply $f$. In regular 1-category theory, the diagram would simply say $f=g$, but this is $\infty $-category theory. The composite $1_y \circ f$ is \emph{only well-defined up to homotopy}, meaning that there are other composites other than just $f$. In particular, the diagram tells us that $g$ is one of these composites. We thus have two different composites for $1_y$ and $f$: $f$ and $g$. Since composition is well-defined up to homotopy, we have that $f$ and $g$ are homotopic, as claimed. Thus, provided we can indeed show $1_y\circ f=f$ and that composition is well-defined up to homotopy, this definition is a good one.
 
 This also explains why I put ``commutative'' in quotes. In higher category theory, since composites are only well-defined up to higher morphism, commutative diagrams must also include the additional datum of the higher morphisms that witness the relevant composites. Thus the diagram does not strictly commute, but commutes up to higher homotopy.
 
@@ -197,19 +199,21 @@ To summarize what we have done so far: we have defined
 	\item composition as fillers for horns $\Lambda _1^2 \to \mathcal{C} $ given by composable pairs;
 	\item homotopies $f\to g$ by 2-simplices witnessing the composite $1 \circ f=g$;
 \end{enumerate}
-and we have shown that composites are well-defined up to homotopy. Moreover, this agrees with the nerve construction in ways described above, meaning we may regard 1-categories as quasi-categories via their nerve. This suffices for conditions (1,2,4,7) for a viable model for an $\infty $-category. We also have likely figured out that $n$-simplices are a good model for $n$-morphisms. First note that 1-simplices are 1-morphisms, and 2-simplicies are homotopies, which are our conventional name for 2-morphisms. Also note that 2-simplices often ``witness'' the equality of various 1-morphisms, and similarly 3-simplices often ``witness'' the equality of various 2-simplices. We could likely thus define 3-simplices as 3-morphisms, and define a (convoluded) composition schema for homotopies. It should be clear that these definitions generalizes to $n$-morphisms, albeit they might be extremely difficult to write down. This is why we usually prefer to work with mapping spaces $\mathcal{C} (x,y)$ if we must go beyond 2-morphisms. This shows (4).
+and we have shown that composites are well-defined up to homotopy. Moreover, this agrees with the nerve construction in ways described above, meaning we may regard 1-categories as quasi-categories via their nerve. We also have likely also figured out that $n$-simplices are a good model for $n$-morphisms. First note that 1-simplices are 1-morphisms, and 2-simplicies are homotopies, which are our conventional name for 2-morphisms. Also note that 2-simplices often ``witness'' the equality of various 1-morphisms, and similarly 3-simplices often ``witness'' the equality of various 2-simplices. We could likely thus define 3-simplices as 3-morphisms, and define a (convoluded) composition schema for homotopies. It should be clear that these definitions generalizes to $n$-morphisms, albeit they might be extremely difficult to write down.
 
-We conclude by showing (5,6): we must construct $\infty $-functors and homotopy categories. The former is simple. An $\infty $-functor should be a functor on objects and $n$-morphisms for all $n$, which respects identity and composition. Morphisms of simplicial sets satisfy all of these: given $f : \mathcal{C}  \to \mathcal{D} $ a morphism of simplicial sets,
+Quasi-categories give us a way to avoid this problem using the notion of a \emph{mapping space}. Given vertices $x,y\in \mathcal{C} $, it is possible to define a \emph{new} simplicial set $\mathcal{C} (x,y)$, where morphisms $x\to y$ are vertices, homotopies are 1-simplices, and so on. This definition is nontrivial and will not be explored in this paper, but it is quite convenient to work with, and is the way we avoid having to write down composition laws for arbitrary $n$-morphisms.
+
+We conclude by briefly constructing $\infty $-functors and homotopy categories. The former is simple. An $\infty $-functor should be a functor on objects and $n$-morphisms for all $n$, which respects identity and composition. Morphisms of simplicial sets satisfy all of these: given $f : \mathcal{C}  \to \mathcal{D} $ a morphism of simplicial sets,
 \begin{itemize}
 	\item there is a function $f_n : \mathcal{C} _n \to \mathcal{D} _n$ for all $n$, and
 	\item $f$ preserves simplicial operators, which were used to define all important constructions, meaning $f$ will preserve all important constructions we have made so far.
 \end{itemize}
 Therfore, morphisms of simplicial sets are $\infty $-functors. We now need to simply define a homotopy category.
 
-Recall that a homotopy category should ``identify homotopic morphisms''. We don't need to go beyond 2-morphisms, since the higher homotopic data is encoded in the existence of the 2-morphisms themselves. We thus construct the homotopy category $\hh \mathcal{C} $ of a quasi-category $\mathcal{C} $ as follows:
+Recall that a homotopy category should ``identify homotopic morphisms''. Incredibly, we don't need to consider anything beyond 2-morphisms, since the higher homotopic data is encoded in the existence of the 2-morphisms themselves. We thus construct the homotopy category $\hh \mathcal{C} $ of a quasi-category $\mathcal{C} $ as follows:
 \begin{itemize}
 	\item Objects are vertices $\mathcal{C} _0$;
 	\item Hom-sets $\hh \mathcal{C} (x,y)$ are given by quotienting the set $\mathcal{C} _1(x,y)$ by the homotopy relation;
 	\item Composition is given by composition in $\mathcal{C} $.
 \end{itemize}
-Of course, one must show that composition is well-defined, but we are unfortunately out of time to show this. However, this does indeed follow, giving a well-defined notion of a homotopy category for a quasi-category $\mathcal{C} $. We have thus shown that $\mathcal{C} $ is a good model for an $\infty $-category (at least, up to the fairly informal standards of this paper).
+Of course, one must show that composition is well-defined, but we are unfortunately out of time to show this. However, this does indeed follow, giving a well-defined notion of a homotopy category for a quasi-category $\mathcal{C} $.

@@ -1,56 +1,71 @@
-\section{$\Ab $-categories}
+\section{$\Ab $-categories}\label{sec2}
 
-The prototypical example of an abelian category is the category $\Ab $ of abelian groups, which can be thought of as $\mathbb{Z} $-modules. This is where abelian categories get their namesake. We will however use $\Mod_R$ as our foundational example throughout these notes since they are slightly more general, but for those who are unfamiliar with module theory, every single thing we discuss can be replaced by ``$k$-vector space'', where $k$ is your favorite field (eg. $\mathbb{R} ,\mathbb{C} ,\mathbb{Q} $).
+Let $\mathcal{C} $ be a category. In order to do homological algebra in $\mathcal{C} $, we need to be able to at the very least construct \emph{chain complexes} and \emph{homology}. We will begin by constructing chain complexes, which are considerably simpler.
 
-Let $\mathcal{C}$ be a category. Before we can even begin to define homology of chain complexes in $\mathcal{C} $, we first have to construct chain complexes in $\mathcal{C} $. We might na\"ively think think this is fairly simple. A chain complex $C_{\bullet} $ in $\Mod_R$ is simply a collection $\left\{ C_n \right\}_{n\in\mathbb{Z} } $ of $R$-modules, and $R$-linear maps $d_{n} : C_n \to C_{n-1} $ such that $d_{n-1} \circ d_n=0$. So to abstract this, we simply take the objects $C_n$ to be objects of $\mathcal{C} $, and the maps $d$ to be morphisms $d_{n-1} : C_n \to C_{n-1} $ in $\mathcal{C} $, which compose to 0.
-
-However, we have already run into an issue. What does it mean for a morphism to be ``0'' in an arbitrary category? In $\Mod_R$, the 0 map $0: M \to N$ maps each $a\in M$ to the identity $0\in N$. In arbitrary categories, we cannot argue elementwise, which means we need to find a different, yet equivalent, characterization of these maps which does not invoke elements.
-
-We begin by studying the hom-set $\Mod_R(M,N)$ of $R$-linear homomorphisms $M\to N$. A particularly useful fact is that these have the structure of an \emph{abelian group}. Given $R$-linear maps $\varphi ,\psi : M \to N$, we define $\varphi +\psi $ pointwise, meaning for any $m\in M$, we define $(\varphi +\psi )(m)=\varphi (m)+\psi (m)$. This map is indeed an $R$-linear map, since for all $m,n\in M$,
-\[
-	(\varphi +\psi )(m+n)=\varphi (m+n)+\psi (m+n)=\varphi (m)+\varphi (n)+\psi (m)+\psi (n)
-\]
-\[
-	=\varphi (m)+\psi (m)+\varphi (n)+\psi (n)=(\varphi +\psi )(m)+(\varphi +\psi )(n)
-.\]
-The first step follows by definition of $\varphi +\psi $, the second by $R$-linearity of these maps, the third by commutativity of $+$ in $R$-modules, and the fourth again by definition of $\varphi +\psi $. $R$-linearity is also simple: for any $r\in R$,
-\[
-	(\varphi +\psi )(r m)=\varphi (r m)+\psi (r m)=r \varphi (m)+r\psi (m)=r(\varphi +\psi )(m)
-.\]
-Associativity is easily show as well, and one simply defines the inverse $-\varphi $ of $\varphi $ as $x\mapsto -1\cdot \varphi (x)$, where $-1$ is the additive inverse of 1 in $R$. A more interesting fact is that the 0 map is the identity of the group:
-\[
-	(\varphi +0)(m)=\varphi (m)+0(m)=\varphi (m)+0=\varphi (m)
-.\]
-This gives us a new way to characterize the 0 morphism: it is the identity element of the abelian group $\Mod_R$.
-
-However, arbitrary categories don't necessarily have abelian group structures on their hom-sets. This means we must specialize to what are called $\Ab $\emph{-categories} or \emph{preadditive categories}.
+Let's review the definition of chain complexes in the category $k$-$\Vect$ of $k$-vector spaces. A \emph{chain complex} $(V_{\bullet} ,d_{\bullet} )$ is a collection $\left\{ V_i \right\}_{i\in\mathbb{Z} } $ of $k$-vector spaces, and a collection $\left\{ d_i \right\}_{i\in\mathbb{Z} } $ of $k$-linear maps
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdots \ar[" d_{n+2}  ", r]  & V_{n+1} \ar[" d_{n+1}  ", r]  & V_n\ar[" d_n ", r]  & V_{n-1} \ar[" d_{n-1}  ", r]  & \cdots
+\end{tikzcd}\]
+such that $d_{i-1} \circ d_i=0$ for all $i$. We would like to elevate this definition to an arbitrary category $\mathcal{C} $. Luckily, the definition is already largely categorical, since we can simply take each $V_i$ to be an object of $\mathcal{C} $, and each $d_i$ to be a morphism $V_i\to V_{i-1} $ in $\mathcal{C} $. The main issue is the condition that $d_{i-1} \circ d_i=0$. In $k$-$\Vect$, the zero-morphism $0 : V \to W$ is the map which sends each $v\in V$ to the additive identity $0\in W$. Unfortunately, objects in arbitrary categories don't have additive identities, so we need to find a new characterization of the zero morphism which is more categorical. The way we do this is by recalling that the hom-set $k$-$\Vect(V,W)$ is an \emph{abelian group}.
 
 \begin{definition}\label{2.1}
-	An $\Ab $-category is a category enriched over $\Ab $. More explicitly, an $\Ab $-category $\mathcal{C} $ is a category wherein every hom-set $\mathcal{C} (x,y)$ has an abelian group structure, such that addition in hom-sets distributes over composition.
+	An \emph{abelian group} is a set $G$ together with an operation $+$ such that
+	\begin{enumerate}
+		\item (closure) For all $g,h\in G$, we have $g+h\in G$;
+		\item (associativity) For all $g,h,k\in G$,
+			\[
+				(g+h)+k=g+(h+k);
+			\]
+		\item (identity) There exists an element $0\in G$ such that for all $g\in G$,
+			\[
+				0+g=g+0=g;
+			\]
+		\item (inverse) For all $g\in G$, there is some element $-g\in G$ such that
+			\[
+				g+(-g)=(-g)+g=0;
+			\]
+		\item (commutativity) For all $g,h\in G$,
+			\[
+				g+h=h+g
+			.\]
+	\end{enumerate}
 \end{definition}
-
-Many books prefer to say that addition is \emph{bilinear} with respect to composition, instead of simply saying it distributes. Although they are indeed equivalent notions, I see no reason to use more confusing terminology than needed. This condition is required to ensure that the category behaves well with respect to this abelian group structure.
-
 \begin{remark}\label{2.2}
-	For those who know some enriched category theory, you will note that when working with $\Ab $-categories, we make use of the isomorphism $\Ab (\mathbb{Z} ,A)\cong A$ to identify the category with its underlying category. We thus say an $\Ab $-category is simply a category where morphisms can be added together, which is equivalent in this way to the usual notion of an enriched category.
+	For those familiar with linear algebra, an abelian group is simply a vector space but \emph{without scalars}.
 \end{remark}
 
-We may now realize the definition of a zero morphism in an arbitrary $\Ab $-category:
+\begin{proposition}\label{2.3}
+	Let $V,W$ be $k$-vector spaces. Then $k$-$\Vect(V,W)$ is an abelian group. In particular, if $\varphi ,\psi : V \to W$ are $k$-linear maps, then $\varphi +\psi $ is the $k$-linear map defined by
+	\[
+		(\varphi +\psi )(v)=\varphi (v)+\psi (v),
+	\]
+	and the additive identity is the zero map $0: V \to W$ given by $0(v)=0$.
+\end{proposition}
 
-\begin{definition}\label{2.3}
-	Let $\mathcal{C} $ be an $\Ab $-category, and $x,y\in \mathcal{C} $. The zero morphism $0: x \to y$ is the identity element of the abelian group $\mathcal{C} (x,y)$.
+The proof of \cref{2.3} is not difficult, and an even stronger result is proven in basic coures, which is that $k$-$\Vect(V,W)$ is a $k$-vector space. However, the result tells us something quite interesting: if the hom-sets $\mathcal{C} (x,y)$ of our category $\mathcal{C} $ have an abelian group structure, then we can define the zero morphism as the additive identity of this set. This motivates \cref{2.4}:
+
+\begin{definition}\label{2.4}
+	Let $\mathcal{C} $ be a category. We say $\mathcal{C} $ is an $\Ab $\emph{-category} if for all $x,y\in \mathcal{C} $, the hom-set $\mathcal{C} (x,y)$ has an \emph{abelian group structure} (we always denote the group operation by $+$), and if composition distributes over addition. Concretely, this means that if $f,g : x \to y$ and $h : y \to z$ are morphisms in $\mathcal{C} $, then
+	\[
+		h\circ (f+g)=(h\circ f)+(h\circ g)
+	.\]
 \end{definition}
 
-One reason we require addition to distribute over composition in $\Ab $-categories is the following fact. In $\Mod_R$, composing by the zero morphism yields the zero morphism, meaning for any $R$-linear map $\varphi $,
-\[
-	\varphi \circ 0=0,\qquad 0\circ \varphi =0
-.\]
-This fact generalizes to $\Ab $-categories, using distributivity of addition over composition. Let $\varphi : x \to y$ in an $\Ab $-category $\mathcal{C} $. Then
-\[
-	\varphi \circ 0 = \varphi \circ (0+0)=(\varphi \circ 0)+(\varphi \circ 0)
-\]
-\[
-	\implies (\varphi \circ 0)-(\varphi \circ 0)=(\varphi \circ 0)+(\varphi \circ 0)-(\varphi \circ 0) \implies 0=\varphi \circ 0
-.\]
+It is likely not yet clear why we require composition to distribute over addition, but we will see later why this is an important condition.
 
-We may now at the very least construct chain complexes in an $\Ab $-category. However, homologial algebra requires \emph{homology} (hence the name), and in fact requires even more to be able to study homology in any practical way, so we have a long way to go.
+\begin{remark}\label{2.5}
+	If the reader is familiar with enriched category theory, then they will likely have encountered this as an example before. On the off chance that they have not, we note that an $\Ab $-category in the sense of \cref{2.4} is precisely the underlying category of an $(\Ab ,\otimes ,\mathbb{Z} )$-enriched category, where we impose the group structure by the natural isomorphism $\Ab (\mathbb{Z} ,-)\cong U$ for $U : \Ab  \to \Set $ the forgetful functor.
+\end{remark}
+
+\begin{notation}\label{2.6}
+	Let $\mathcal{C} $ be an $\Ab $-category. We denote the additive identity of $\mathcal{C} (x,y)$ by $0$, and will call it the zero morphism. We will often not specify the domain and codomain of a zero morphism, and will leave it implicit.
+\end{notation}
+
+\begin{definition}\label{2.7}
+Let $\mathcal{C} $ be an $\Ab $-category. A \emph{chain complex} $(c_{\bullet} ,d_{\bullet} )$ in an $\Ab $-category is a collection $\left\{ c_i \right\}_{i\in\mathbb{Z} } $ of objects of $\mathcal{C} $,a nd a collection $\left\{ d_i \right\}_{i\in\mathbb{Z} }$ of morphisms of $\mathcal{C} $
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdots \ar[" d_{n+2}  ", r]  & c_{n+1} \ar[" d_{n+1}  ", r]  & c_n\ar[" d_n ", r]  & c_{nn-1} \ar[" d_{n-1}  ", r]  & \cdots
+\end{tikzcd}\]
+such that $d_{i-1} \circ d_i=0$ for all $i$. The morphisms $d_{\bullet} $ are called \emph{differentials} or \emph{boundary morphisms}. We will usually denote a chain complex by $c_{\bullet} $, and will leave the notation for the boundary morphisms implicit.
+\end{definition}
+

@@ -1,0 +1,42 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}[section]
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+\begin{document}
+
+The volume bound charge density is given by $\rho _b = -\nabla \cdot \mathbf{P} $. With $\mathbf{P} =k \mathbf{r} $, we have
+\[
+	-\nabla \cdot \mathbf{P} =-k \left( \partial _xx+\partial _yy+\partial _zz \right) =-3k
+.\]
+The surface bound charge density is given by $\sigma _b=\mathbf{P} \cdot \mathbf{\hat{n} } $. Since the cube is at the origin, the faces are at $x=\pm a/2$, or the same for $y$ or $z$. The computation for $\sigma _b$ is the same on all faces with a coordinate at $a/2$, and at $-a/2$, so we show two computations. Take $x=a/2$. Then the normal vector is $\mathbf{\hat{x} } $, so
+\[
+	\mathbf{P} \cdot \mathbf{\hat{x} } =(ka/2,ky,kz)\cdot (1,0,0)=\frac{ka}{2} 
+.\]
+Now take $x=-a/2$. The normal vector is $-\mathbf{\hat{x} } $,so
+\[
+	\mathbf{P} \cdot \mathbf{\hat{x} } =(-ka/2,ky,kz)\cdot (-1,0,0)=\frac{ka}{2} 
+.\]
+Therefore, $\sigma _b=ka/2$ on any face.
+
+We can now directly compute the bound charges. Since the volume is $a^3$, the volume bound charge is
+\[
+	a^3Q_v=\int_V \rho _b \,\mathrm{d} V'=(\rho _b\cdot V)=-3ka^3
+.\]
+The surface bound charge density is the same on all faces, so we can compute it for a single face $S$ and multiply by 6. This gives
+\[
+	Q_s = 6\int_{S} \sigma _b \,\mathrm{d} S=6\left( \frac{ka}{2} \cdot S \right) = 3ka^3
+.\]
+They indeed cancel.
+
+\end{document}

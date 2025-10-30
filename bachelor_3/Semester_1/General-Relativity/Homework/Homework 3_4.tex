@@ -1,0 +1,222 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{titlepageBU}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+
+\title{Homework 3}
+\begin{document}
+\makeproblem
+\section{Problem 1}
+
+(a) Given
+\[
+	\mathrm{d} s^2=\mathrm{d} \theta ^2+\sin ^2\theta \mathrm{d} \phi ^2,
+\]
+we have
+\[
+	g_{\mu \nu } =\begin{pmatrix}
+	1 & 0 \\
+	0 & \sin ^2\theta 
+	\end{pmatrix}
+.\]
+The Lagrangian is given by
+\[
+	\mathcal{L} =g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\sigma } \frac{\mathrm{d}x^\nu }{\mathrm{d}\sigma } =\dot{\theta } ^2+\sin ^2\theta \dot{\phi } ^2
+.\]
+Here we denote the $\sigma $-derivatives with Newton's notation. This satisfies the Euler-Lagrange equations
+\[
+	\frac{\mathrm{d}}{\mathrm{d}\sigma } \frac{\partial \mathcal{L} }{\partial \dot{x} ^\mu } -\frac{\partial \mathcal{L} }{\partial x^\mu } =0
+.\]
+The partials are
+\[
+	\frac{\partial \mathcal{L} }{\partial \theta } =2 \sin \theta \cos \theta \dot{\phi } ^2,\qquad \frac{\partial \mathcal{L} }{\partial \phi } =0,
+\]
+\[
+	\frac{\partial \mathcal{L} }{\partial \dot{\theta } } =2 \dot{\theta } ,\qquad \frac{\partial \mathcal{L} }{\partial \dot{\phi } } = 2\sin ^2\theta \dot{\phi } 
+.\]
+We then have
+\[
+	\frac{\mathrm{d}}{\mathrm{d}\sigma } \frac{\partial \mathcal{L} }{\partial \dot{\theta } } =2 \ddot{\theta } ,\qquad \frac{\mathrm{d}}{\mathrm{d}\sigma  } \frac{\partial \mathcal{L} }{\partial \dot{\phi } } =4 \sin \theta \cos \theta \dot{\theta } \dot{\phi } +2 \sin ^2\theta \ddot{\phi } 
+.\]
+This yields the system
+\[
+	4 \sin \theta \cos \theta \dot{\theta } \dot{\phi } +  2 \sin ^2\theta \ddot{\phi } =0,
+\]
+\[
+	2\ddot{\theta } - 2\sin\theta \cos \theta \dot{\phi } ^2=0
+.\]
+Recall the geodesic equation
+\[
+	\frac{\mathrm{d}^2x^\mu }{\mathrm{d}\sigma ^2} +\Gamma _{\alpha \beta } ^\mu  \frac{\mathrm{d}x^\alpha }{\mathrm{d}\sigma } \frac{\mathrm{d}x^\beta }{\mathrm{d}\sigma } =0
+.\]
+Take $\mu =\theta $. Then we have
+\[
+	\ddot{\theta } +\Gamma ^\theta _{\theta \theta } \dot{\theta } ^2 + 2\Gamma ^\theta _{\theta \phi } \dot{\theta } \dot{\phi } +\Gamma ^\theta _{\phi \phi } \dot{\phi } ^2=0
+.\]
+The 2 follows by symmetry in the bottom two arguments of the Christoffel symbol. This must be the same as the corresponding Euler-Lagrange equation
+\[
+	\ddot{\theta } - \sin \theta \cos \theta \dot{\phi } ^2=0,
+\]
+where we have divided an above equation by 2. This yields
+\[
+	\Gamma ^\theta _{\theta \theta } =0,\qquad \Gamma _{\theta \phi } ^\theta =0,\qquad \Gamma ^\theta _{\phi \phi } =-\sin \theta \cos \theta 
+.\]
+We can also rearrange the other equation as
+\[
+	\frac{2 \cos \theta }{\sin \theta } \dot{\theta } \dot{\phi } + \ddot{\phi } =0
+.\]
+This is the other part of the geodesic equation, giving
+\[
+	\Gamma ^\phi _{\theta \theta } =0,\qquad \Gamma ^\phi _{\phi \phi } =0,\qquad \Gamma ^\phi _{\theta \phi } = \frac{\cos \theta }{\sin \theta } =\cot \theta 
+.\]
+The Christoffel symbols are thus
+\[
+	\Gamma ^\theta_{\alpha \beta } =\begin{pmatrix}
+	0 & 0 \\
+	0 & -\sin \theta \cos \theta 
+	\end{pmatrix},\qquad \Gamma ^\phi _{\alpha \beta } =\begin{pmatrix}
+	0 &  \cot \theta  \\
+	\cot \theta  & 0
+	\end{pmatrix}
+.\]
+
+(b) Let $x^\mu (\phi )=(\pi /2,\phi )$, which is clearly the path along the equator. We compute the proper distance dertivatives:
+\[
+	\frac{\mathrm{d}x^\theta }{\mathrm{d}\sigma } =0,\qquad \frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma } = \frac{\mathrm{d}x^\phi }{\mathrm{d}\phi } \frac{\mathrm{d}\phi }{\mathrm{d}\sigma } =\dot{\phi } ,\qquad \frac{\mathrm{d}^2x^\phi }{\mathrm{d}\sigma ^2} = \frac{\mathrm{d}}{\mathrm{d}\sigma } \dot{\phi } =\ddot{\phi }
+.\]
+Using  the Christoffel symbols found in part (a), the geodesic equation reads
+\[
+	\frac{\mathrm{d}^2x^\theta }{\mathrm{d}\sigma }  - \sin \theta \cos \theta \left(\frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma }\right)^2=0,
+\]
+\[
+	\frac{\mathrm{d}^2x^\phi }{\mathrm{d}\sigma } + 2 \cot \theta \frac{\mathrm{d}x^\theta }{\mathrm{d}\sigma } \frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma }  =0
+.\]
+Plugging in our derivatives and $\cos \pi /2=0$, this reads
+\[
+	0 - 0 \sin \theta \left( \frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma }  \right) ^2=0 \implies 0=0,
+\]
+\[
+	\ddot{\phi } + 2 \cot \theta 0 \dot{\phi } =0 \implies \ddot{\phi } =0
+.\]
+It suffices to show this final equality holds. Using the metric we have
+\[
+	1=\left(\frac{\mathrm{d}\theta }{\mathrm{d}\sigma }\right)^2 + \sin ^2\theta \left(\frac{\mathrm{d}\phi }{\mathrm{d}\sigma }\right)^2
+.\]
+If we take $\theta $ constant at $\pi /2$, then $\frac{\mathrm{d}\theta }{\mathrm{d}\sigma } =0$ and $\sin \theta =1$, so we obtain
+\[
+	\pm1= \frac{\mathrm{d}\phi }{\mathrm{d}\sigma } 
+.\]
+It follows that
+\[
+	\frac{\mathrm{d}^2 \phi }{\mathrm{d}\sigma } = \pm\frac{\mathrm{d}}{\mathrm{d}\sigma } 1=0
+.\]
+Therefore, the statement follows.
+
+\section{Problem 2}
+
+(a) The path is $x^\mu =(\overline{\theta } ,\phi )$. Parallel transport then gives
+\[
+	\frac{\mathrm{D}}{\mathrm{d}\sigma } V^\mu =\frac{\mathrm{d}V^\mu }{\mathrm{d}\sigma } +\Gamma ^\mu _{\alpha \beta } \frac{\mathrm{d}x^\alpha }{\mathrm{d}\sigma } V^\beta =0
+.\]
+Note that
+\[
+	\frac{\mathrm{d}x^\theta }{\mathrm{d}\sigma } =0,\qquad \frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma } =\dot{\sigma } 
+.\]
+Using the Christoffel symbols from 1.a, we have the equations
+\[
+	\frac{\mathrm{d}V^\theta }{\mathrm{d}\sigma } - \sin \overline{\theta } \cos \overline{\theta } \frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma } V^\phi =0,
+\]
+\[
+	\frac{\mathrm{d}V^\phi }{\mathrm{d}\sigma } +\cot \overline{\theta } \frac{\mathrm{d}x^\phi }{\mathrm{d}\sigma }  V^\theta =0 
+.\]
+Here we have noted that since $x^\theta =\overline{\theta } $ is constant, $\frac{\mathrm{d}x^\theta }{\mathrm{d}\sigma } =0$. Note that when $\overline{\theta } $ is fixed,
+\[
+	1=\left( \frac{\mathrm{d}\theta }{\mathrm{d}\sigma }  \right) ^2+\sin ^2\theta \left( \frac{\mathrm{d}\phi }{\mathrm{d}\sigma }  \right) ^2 = \sin ^2 \overline{\theta } \left( \frac{\mathrm{d}\phi }{\mathrm{d}\sigma }  \right) ^2 \implies \frac{\mathrm{d}\phi }{\mathrm{d}\sigma } =\frac{1}{\sin \overline{\theta } } 
+.\]
+We then obtain $\frac{\mathrm{d}\theta }{\mathrm{d}\sigma } =0$. Noting that $x^\phi =\phi $, applying this to the above equations yields
+\[
+	\frac{\mathrm{d}V^\theta }{\mathrm{d}\sigma } =\cos \overline{\theta } V^\phi ,
+\]
+\[
+	\frac{\mathrm{d}V^\phi }{\mathrm{d}\sigma } = -\frac{\cos \overline{\theta } }{\sin ^2 \overline{\theta } } V^\theta 
+.\]
+To solve the system, differentiate the first equation to obtain
+\[
+	\frac{\mathrm{d}^2 V^\theta }{\mathrm{d}\sigma ^2} =\cos \overline{\theta } \frac{\mathrm{d}V^\phi }{\mathrm{d}\sigma } ,
+\]
+noting that $\cos \overline{\theta } $ is a constant. Plugging this into the second equation yields
+\[
+	\frac{1}{\cos \overline{\theta } } \frac{\mathrm{d}^2V^\theta }{\mathrm{d}\sigma ^2} = -\frac{\cos \overline{\theta } }{\sin ^2 \overline{\theta } } V^\theta  \implies \frac{\mathrm{d}^2 V^\theta }{\mathrm{d}\sigma ^2} =- \cot^2 \overline{\theta } V^\theta 
+.\]
+This is solved by
+\[
+	V^\theta = \exp \left( \pm \sigma \cot \overline{\theta }  \right) \xlongrightarrow{\mathbb{C} \to \mathbb{R} } \left\{ \cos (\sigma \cot \overline{\theta } ),\sin (\sigma \cot \overline{\theta } ) \right\} 
+.\]
+The most general form of $V^\theta $ is thus
+\[
+	V^\theta =C_1 \cos (\sigma \cot \overline{\theta } )+C_2 \sin (\sigma \cot \overline{\theta } )
+.\]
+We use this to solve for $V^\phi $ using the second equation. Computing the derivative yields
+\[
+	\frac{\mathrm{d}V^\theta }{\mathrm{d}\sigma } =-C_1 \cot \overline{\theta } \sin \left( \sigma \cot \overline{\theta }  \right) + C_2 \cot \overline{\theta }\cos \left( \sigma \cot \overline{\theta }  \right) = \cos \overline{\theta } V^\phi 
+.\]
+We obtain
+\[
+	V^\phi = \frac{1}{\sin \overline{\theta }} \left( C_2 \cos \left( \sigma \cot \overline{\theta }  \right) -C_1 \sin \left( \sigma \cot \overline{\theta }  \right)  \right) 
+.\]
+As found previously,
+\[
+	\frac{\mathrm{d}\phi }{\mathrm{d}\sigma } =\frac{1}{\sin \overline{\theta } } \implies \sigma =\phi \sin \overline{\theta } 
+.\]
+We can substitute this in to obtain
+\[
+	V^\theta =C_1 \cos \left( \phi \cos \overline{\theta }  \right) +C_2 \sin \left( \phi \cos \overline{\theta }  \right) ,
+\]
+\[
+	V^\phi =\frac{1}{\sin \overline{\theta } } \left( C_2 \cos \left( \phi \cos \overline{\theta }  \right) -C_1 \sin \left( \phi \cos \overline{\theta }  \right)  \right) 
+.\]
+Write $\omega = \cos \overline{\theta } $ to simplify notation. Imposing the initial condition $V^\mu (0)=(a,b)$ yields
+\[
+	a= C_1 \cos (0\omega )+C_2 \sin (0\omega )=C_1,
+\]
+\[
+	b= \frac{1}{\sin \overline{\theta } } \left( C_2 \cos (0\omega )-C_1 \sin (0\omega ) \right) = \frac{1}{\sin \overline{\theta } } C_2 \implies C_2 = b \sin \overline{\theta } 
+.\]
+We thus obtain
+\[
+	V^\theta =a \cos (\omega \phi )+ b \sin \overline{\theta } \sin (\omega \phi ),
+\]
+\[
+	V^\phi =b \cos (\omega \phi )- \frac{a}{\sin \overline{\theta } } \sin (\omega \phi )
+.\]
+
+(b) The initial condition gives $V^\mu (0)=(a,b)$. We compute $V^\mu (2\pi )$:
+\[
+	V^\theta (2\pi )=a \cos (\omega 2\pi )+ b \sin \overline{\theta }  \sin (\omega 2\pi ),
+\]
+\[
+	V^\phi (2\pi )=b \cos (\omega 2\pi )-\frac{a }{\sin \overline{\theta }} \sin (\omega 2\pi )
+.\]
+For us to simplify any further, we would need to know more about $\omega =\cos \overline{\theta } $. In general, this may differ from $V^\mu (0)$. In particular, if $\overline{\theta } =\pi /2$, then cosine goes to 0 and sin goes to 1. We then have
+\[
+	V^\theta (\phi )=a \cos (0)+\frac{b}{1} \sin (0)=a,
+\]
+\[
+	V^\phi (\phi )=b \cos (0)-\frac{a}{1} \sin (0)=b
+.\]
+Therefore, $V^\phi (2\pi )=(a,b)=V^\mu (0)$ when $\overline{\theta } =\pi /2$.
+
+We do not need to compute this, since we saw in problem 1 that the path around the equator (which is precisely $x^\mu$ with $\overline{\theta } =\pi /2$) is a geodesic. Along the geodesic, the metric reduces to the same as flat space. Parallel transporting can then ve viewed as parallel transporting along a straight line, which will not change the vector components.
+
+\end{document}

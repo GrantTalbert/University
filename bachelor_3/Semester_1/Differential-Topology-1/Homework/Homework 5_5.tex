@@ -1,0 +1,595 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 5}
+\begin{document}
+\makeproblem
+
+\section{Problem 8.12}
+\begin{problem}
+	Let $F : \mathbb{R} ^2 \to \mathbb{R} \mathbb{P} ^2$ be the map $(x,y)\mapsto [x,y,1]$, and let $X\in \mathfrak{X} (\mathbb{R} ^2)$ be the vector field $x \partial _y-y \partial _x$. Prove there exists a vector field $Y\in \mathfrak{X} (\mathbb{R} \mathbb{P} ^2)$ that is $F$-related to $X$, and compute its coordinate representations in terms of each of the usual charts.
+\end{problem}
+\begin{proof}
+	Recall the chart $U_2 \subseteq \mathbb{R} \mathbb{P} ^2$ is given by
+	\[
+		U_2 = \left\{ [x_0,x_1,x_2]\in\mathbb{R} \mathbb{P} ^2\mid x_2 \neq 0 \right\} 
+	.\]
+	The map $F$ is precisely the inverse of the chart $U\to \mathbb{R} ^2$, meaning that $F$ is a diffeomorphism onto the open submanifold $U_2$. By Lee 8.19, there exists a unique $Y'\in \mathfrak{X} (U_2)$ which is $F$-related to $X$.
+
+	The definition of $Y'$ along $\Im F=U_2$ is forced to be $Y'_{F(p)} =\mathrm{d} F_p (X_p)$. We will extend $Y'$ to a map $Y$ defined along all charts by simply computing its representation in local coordinates. These computations will prove that this map is smooth on all of $\mathbb{R} \mathbb{P} ^2$, since each map we find is very clearly smooth.
+
+	We start by computing $Y$ in $U_2$. We can take $F(p)=q$ for any $q\in U_2$, and we have the coordinate representation of $[x_0,x_1,x_2]$ via $(x_0/x_2,x_1/x_2)$. Expressed in local coordinates, $F$ is given by $(x,y)\mapsto (x,y)$, meaning its Jacobian is the identity. Write $(u_0,u_1)=(x_0/x_2,x_1/x_2)$ for the coordinates in $U_3$. Since the Jacobian of $F$ is 1, it acts trivially on the basis elements and simply changes the coordinates, meaning its pushforward yields
+	\[
+		Y|U_3=Y' =\mathrm{d} F(X)=u_0 \frac{\partial }{\partial u_1} -u_1 \frac{\partial }{\partial u_0} 
+	.\]
+
+	The coordinate repreesentation of $[x_0,x_1,x_2]$ in $U_0$ is given by $(x_1/x_0,x_2/x_0)$. Write $(v_0,v_1)=\left( x_1/x_0,x_2/x_0 \right) $. The transition map $\varphi _0 \circ \varphi _2^{-1} $ from $U_2$ to $U_0$ is given by
+	\[
+		(\varphi _0\circ \varphi _2^{-1} )(u_0,u_1)=\varphi _0\left[ u_0,u_1,1 \right] =\left( \frac{u_1}{u_0} ,\frac{1}{u_0}  \right) 
+	.\]
+	Write $(v_0,v_1)$ for the coordinate representation in $U_0$, meaning $v_0=\frac{u_1}{u_0} $ and $v_1=\frac{1}{u_0} $ is the coordinate representation of $\varphi _0\circ \varphi _2^{-1} $. We compute the representation of $Y$ in $U_0$ by taking the pushforward of $\varphi _0\circ \varphi _2^{-1} $, since this will map $\partial _{u_i} \mapsto \partial _{v_i} $. Computing the derivatives yields the Jacobian
+	\[
+		J=\begin{pmatrix}
+		-u_1/u_0^2 & 1/u_0 \\
+		-1/u_0^2 & 0
+		\end{pmatrix}
+	.\]
+	By taking our basis in $U_2$-coordinates as $\partial _{u_0} ,\partial _{u_1} $, we can represet $Y$ along $U_2$ as the vector $(-u_1,u_0)$, meaning that we can compute $Y$ along $U_0$ in $(u_0,u_1)$-coordinates simply by matrix multiplication:
+	\[
+		Y|U_0=\begin{pmatrix}
+		-u_1/u_0^2 & 1/u_0 \\
+		-1/u_0^2 & 0
+		\end{pmatrix}\begin{pmatrix}
+		-u_1 \\
+		u_0
+		\end{pmatrix}=\begin{pmatrix}
+		u_1^2/u_0^2+1 \\
+		u_1/u_0^2
+		\end{pmatrix}=\frac{u_1}{u_0^2} \frac{\partial }{\partial v_1} +\left( \frac{u_1^2}{u_0^2} +1 \right) \frac{\partial }{\partial v_0} 
+	.\]
+	Using our coordinate representation of the transition map in $U_0$, we have that
+	\[
+		Y|U_0= v_0v_1 \frac{\partial }{\partial v_1} +\left( v_0^2+1 \right) \frac{\partial }{\partial v_0} 
+	.\]
+	
+	Now we do the same to compute $Y$ along $U_1$. Write $(w_0,w_1)$ for the coordinates in $U_1$. The transition map in these coordinates is
+	\[
+		(w_0,w_1)=\left( \varphi _1\circ \varphi _2^{-1}  \right) (u_0,u_1)=\varphi _1[u_0,u_1,1]=\left( \frac{u_0}{u_1} ,\frac{1}{u_1}  \right) 
+	.\]
+	The Jacobian is
+	\[
+		J=\begin{pmatrix}
+		1/u_1 & -u_0/u_1^2 \\
+		0 & -1/u_1^2
+		\end{pmatrix}
+	.\]
+	The map $Y$ defined along $U_1$ is given as
+	\[
+		Y|U_1=\begin{pmatrix}
+		1/u_1 & -u_0/u_1^2 \\
+		0 & -1/u_1^2
+		\end{pmatrix}\begin{pmatrix}
+		-u_1 \\
+		u_0
+		\end{pmatrix}=\begin{pmatrix}
+		-1-u_0^2/u_1^2 \\
+		-u_0/u_1^2
+		\end{pmatrix}-\left( 1+\frac{u_0^2}{u_1^2}  \right) \frac{\partial }{\partial w_0} -\frac{u_0}{u_1^2} \frac{\partial }{\partial w_1} 
+	.\]
+	Transitioning to local coordinates, we have
+	\[
+		Y=-\left( 1+w_0^2 \right) \frac{\partial }{\partial w_0} -w_0w_1 \frac{\partial }{\partial w_1} 
+	.\]
+	Therefore, $Y$ extends to a vector field defined along all of $\mathbb{R} \mathbb{P} ^2$, and is $F$-related to $X$ by definition since $\Im F=U_2$.  Since all of the maps we have seen are clearly smooth in local coordinates, $Y$ is smooth, and thus $Y\in \mathfrak{X} (N)$.
+\end{proof}
+
+\section{Problem 8.18}
+\begin{problem}
+	Let $F : M \to N$ be a submersion with $M,N$ of nonzero dimension. Given $X\in \mathfrak{X} (M)$ and $Y\in \mathfrak{X} (N)$, $X$ is a \emph{lift} of $Y$ if $X$ is $F$-related to $Y$. A vector field $V\in \mathfrak{X} (M)$ is \emph{vertical} if it is everywhere tangent to the fibers of $F$.
+	\begin{enumerate}
+		\item Show that if $\dim M=\dim N$, then every vector field has a unique lift.
+		\item Show that if $\dim M \neq \dim N$, then every vector field has a lift, but that it is not unique.
+		\item Assume in addition that $F$ is surjective. Given $X\in \mathfrak{X} (M)$, show that $X$ is a lift of a vector field on $M$ if and only if $\mathrm{d} F_p(X_p)=\mathrm{d} F_q(X_q)$ whenever $F(p)=F(q)$. Show also that $X$ is then a lift of a unique smooth vector field.
+		\item Assume now that $F$ is surjective with connected fibers. Show that $X\in \mathfrak{X} (M)$ is a lift of a smooth vector field on $N$ if and only if $[V,X]$ is vertical whenever $V\in \mathfrak{X} (M)$ is vertical.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Since $\dim M=\dim N$, surjectivity of each differential $\mathrm{d} F_p$ implies each differential is an isomorphism of vector spaces. Let $Y\in \mathfrak{X} (N)$. Since $\mathrm{d} F_p$ is an isomorphism for all $p$, define
+	\[
+		X_p \coloneqq \mathrm{d} F_p ^{-1} (Y_{F(p)} )
+	.\]
+	We then have
+	\[
+		\mathrm{d} F_p(X_p)=Y_{F(p)} ,
+	\]
+	and thus $X$ and $Y$ are $F$-related. Uniqueness follows as follows: suppose $X$ is a lift of $Y$. Then for all $p\in M$,
+	\[
+		\mathrm{d} F_p(X_p)=Y_{F(p)} \implies X_p=\mathrm{d} F^{-1} _p (Y_{F(p)} )
+	.\]
+	Therefore, the definition is forced.
+
+	To prove smoothess, note that since $F$ is a local diffeomorphism, for any $p \in M$, there exists an open neighborhood $U$ of $p$ such that $F|U: U \to V$ is a diffeomorphism. We can thus write $X$ locally on $U$ as:
+\[
+X_q = \mathrm{d} (F|U)_q^{-1}(Y_{F(q)})
+.\]
+Since all of these maps are smooth, $X$ is smooth in a neighborhood of $p$. Therefore, $X$ is globally smooth since $p$ was arbitrary.
+
+(2) Since $F$ is a submersion and $\dim M\neq \dim N$, we necessarily have $\dim M > \dim N$. Let $Y\in \mathfrak{X}(N)$ and $p\in M$. By the rank theorem, there is a neighborhood $U$ of $p$ and $V$ of $F(p)$ such that $F$ is given in local coordinates by $F(x^1, \ldots ,x^m) = (x^1, \ldots ,x^n)$. Using the coordinate representation of $X,Y$ and $F$, we can write $\mathrm{d} F_p(X_p)$
+\[
+	\mathrm{d} F_p\left( \sum_{i=1}^{\dim M} X^i(x) \left.\frac{\partial }{\partial x^i} \right|_p \right) =\sum_{i=1}^{\dim M} X^i(p)\left( \mathrm{d} F_p \left. \frac{\partial }{\partial x^i} \right|_p \right) =\sum_{i=1}^{\dim N} X^i(p) \left.\frac{\partial }{\partial y^i} \right|_{y} 
+.\]
+Here we write $y^i$ for the coordinates on $V$. We can write $Y$ similarly, which turns the lift condition into
+\[
+	\sum_{i=1}^{\dim N} X^i(p) \left.\frac{\partial }{\partial y^i} \right|_{y}=\sum_{i=1}^{\dim N} Y^i(y)\left.\frac{\partial }{\partial y^i} \right|_y
+.\]
+Componentwise, we then may define $X$ as any vector field such that for all $i\leq n$, $X^i(p)=Y^i(y)$. The other component functions are arbitrary degrees of freedom.
+
+To show a smooth choice of the other components of $F$ can be made, and that the local definitions can be stitched together into a global definition we take an open cover $\left\{ U_\alpha  \right\}_{\alpha \in A} $ of $M$ by the charts given by the rank theorem as applied to $F$ earlier in the problem. Define the constrained components as done above, and define the unconstrained components to be identically zero. Therefore, each $U_\alpha $ has an associated vector field given in local coordinates as
+\[
+	X^\alpha _p =\left.\sum_{i=1}^{\dim N} Y^i(y) \frac{\partial }{\partial x^i_\alpha } \right|_p
+.\]
+Let $\left\{ \rho _\alpha  \right\}_{\alpha \in A} $ be a partition of unity subordinate to $\left\{ U_\alpha  \right\} $, and define the global vector field
+\[
+	X_p = \sum_{\alpha \in A} \rho _\alpha (p)X^\alpha _p
+.\]
+Here we note that by second-countability, we can take $A$ to be countable such that the sum is well-defined. This is clearly smooth, and since each $X^\alpha $ is a lift on its support,
+\[
+	\mathrm{d} F_p(X_p)=\mathrm{d} F_p\left( \sum_{\alpha \in A} \rho _\alpha (p)X^\alpha _p \right) = \sum_{\alpha \in A} \rho _\alpha (p)\mathrm{d} F_p(X^\alpha _p)=\sum_{\alpha \in A} \rho _\alpha (p)Y_{F(p)} =Y_{F(p)} \sum_{\alpha \in A} \rho _\alpha (p)=Y_{F(p)} 
+.\]
+Therefore, $X$ is a lift of $Y$. Note that we can choose a vertical vector field $V$ and will have
+\[
+	\mathrm{d} F_p(X_p+V_p)=\mathrm{d} F_p(X_p)+0=Y_{F(p)} 
+.\]
+Therefore, $X+V$ for any vertical vector field $V$ will also be a lift.
+
+
+
+(3) ($\implies $) Let $X$ be a lift of $Y\in \mathfrak{X} (N)$, and let $p,q\in M$ with $F(p)=F(q)$. Then since $X$ is $F$-related to $Y$,
+\[
+	\mathrm{d} F_p = Y_{F(p)} =Y_{F(q)} =\mathrm{d} F_q
+.\]
+
+($\impliedby $) Let $X\in \mathfrak{X} (M)$. Define the vector field $Y\in \mathfrak{X} (N)$ by
+\[
+	Y_{F(p)} \coloneqq \mathrm{d} F_p(X_p)
+.\]
+Since $F$ is surjective, all $q\in N$ can be viewed as $F(p)$ for at least one $p\in M$, and by the condition hat $\mathrm{d} F_p(X_p)=\mathrm{d} F_q(X_q)$ whenever $F(p)=F(q)$, our definition of $Y_{q} $ is the same no matter what choice of $p$ we take for $F(p)=q$. Therefore, $Y$ is a well-defined section of the tangent bundle.
+
+To show smoothness, we show $Y$ is smooth in a neighborhood of some $q\in N$. Since $F$ is a submersion, for any $p\in F^{-1} (q)$ there is a local section $\sigma : V \to M$ on some open neighborhood $q\in V \subseteq N$ with $\sigma (q)=p$. Then by our definition of $Y$,
+\[
+	Y_q=Y_{(F\circ \sigma )(q)} =\mathrm{d} F_{\sigma (q)} (X_{\sigma (q)} )
+.\]
+Equivalently, if we restrict $Y$ along $V$ then $Y$ arises as the composite
+\[
+	Y|V=\mathrm{d} F \circ X \circ \sigma 
+.\]
+Since these are all smooth, $Y$ is smooth in a neighboorhood of $q$. Since $q$ was arbitrary, $Y$ is globally smooth.
+
+Uniqueness of $F$ follows by its definition. For $X$ to be a lift of some $Y$, we must have
+\[
+	\mathrm{d} F_p(X_p)=Y_{F(p)} \qquad \forall p\in M
+.\]
+This is precisely the way $Y$ was defined, so the definition is forced by the lifting condition. Therefore, $Y$ is unique.
+
+(4) ($\implies $) Let $X$ be a lift of some $Y\in \mathfrak{X} (M)$, and let $V$ be vertical. Since $V$ is vertical, the problem tells us that $V$ is $F$-related to the zero vector field $0\in \mathfrak{X} (N)$, and
+\[
+	[0,Y]=[-0,Y]=-[0,Y]
+\]
+by bilinearity of the Lie bracket. Therefore, $[0,Y]=0$. By naturality of the Lie bracket, $[V,X]$ is $F$-related to $0$. This is equivalent to the statement that $[V,X]$ is vertical.
+
+($\impliedby $) Let $X\in \mathfrak{X}(M) $ such that for all vertical $V$, $[V,X]$ is vertical. By (3), it suffices to show that $\mathrm{d} F_p(X_p)=\mathrm{d} F_q(X_q)$ whenever $F(p)=F(q)$. Let $q\in N$, and by assumption $F^{-1} (y)$ is a connected submanifold of $M$. Let $p,q\in M$ with $F(p)=F(q)$. We will show that $X_p=X_q$ by showing that $X$ is constant on the fiber $F^{-1} (p)=F^{-1} (q)$. 
+
+First we claim that $T_pF^{-1} (y)$ can be identified with $\Ker \mathrm{d} F_p\subseteq T_pM$. Indeed, since $F$ is constant on the fiber and derivations of constant maps are constant, $\mathrm{d} F_p$ is 0 along $F^{-1} (y)$. Now consider $X_p$. Let $f : N \to \mathbb{R} $ be smooth, and note that
+\[
+	\mathrm{d} F_p(X_p)(f)=X_p(f\circ F).
+\]
+We want to show that the map $p\mapsto X_p(f\circ F)$ is constant on the fiber $F^{-1} (y)$.
+
+Let $p\in F^{-1} (y)$, and $v\in T_pF^{-1} (y) \cong  \Ker (\mathrm{d} F_p)$. By Lee 8.7, there is a vector field $V$ on $T_pF^{-1} $ such that $V_p=v$, and since this is the kernel, it is $F$-related to 0. Therefore, $V$ is vertical. By hypothesis, $[V,X]$ is also vertical, and thus
+\[
+	[V,X](f\circ F)=\mathrm{d} F[V,X](f)=0
+.\]
+Using the definition of the commutator,
+\[
+	0=(V\circ X)(f\circ F)-(X\circ V)(f\circ F)=(V\circ X)(f\circ F)-X(0)=(V\circ X)(f\circ F)
+.\]
+Therefore, $v(X(f\circ F))=0$. Since $v$ was arbitrary in $T_pF^{-1} (y)$, we have that $X(f\circ F)$ vanishes under \emph{any} tangent vector. Since $F^{-1} (y)$ is connected, $X$ must be constant on the fiber.
+
+Since $X_{(-)}(f\circ F)$ is constant along fibers, if $F(p)=F(q)$ then $X_p(f\circ F)=X_q(f\circ F)$. Equivalently,
+\[
+	\mathrm{d} F_p(X_p)(f)=\mathrm{d} F_q(X_q)(f)\qquad \forall f\in C^\infty (N)
+.\]
+Therefore, $\mathrm{d} F_p(X_p)=\mathrm{d} F_q(X_q)$.
+\end{proof}
+
+\section{Problem 8.20}
+\begin{problem}
+	Let $A\subseteq \mathfrak{X} (\mathbb{R} ^3)$ be the subspace spanned by
+	\[
+		X=y \frac{\partial }{\partial z} -z \frac{\partial }{\partial y} ,\qquad Y= z \frac{\partial }{\partial x} -x \frac{\partial }{\partial z} ,\qquad Z=x \frac{\partial }{\partial y} -y \frac{\partial }{\partial x} 
+	.\]
+	Show that $A$ is a Lie subalgebra of $\mathfrak{X} (\mathbb{R} ^3)$, which is isomorphic to $\mathbb{R} ^3$ with the cross product.
+\end{problem}
+\begin{proof}
+	First we show $A$ is a Lie algebra. By definition it is a subspace, so we need only to show closure under $[-,-]$. By bilinearity and antisymmetry of the Lie bracket, it suffices to show that $[X,Y]$, $[Y,Z]$, and $[Y,Z]$ are elements of $A$. We compute each of these using the coordinate representation of the Lie bracket
+	\[
+		[X,Y]=\left( X^i \frac{\partial Y^j}{\partial x^i} -Y^i \frac{\partial X^j}{\partial x^i}  \right) \frac{\partial }{\partial x^j} 
+	\]
+	where $(X_1,X_2,X_3)=(0,-z,y)$, $(Y_1,Y_2,Y_3)=(z,0,-x)$, and $(Z_1,Z_2,Z_3)=(-y,x,0)$.
+	\begin{itemize}
+		\item $[X,Y]$ We compute the coefficients of each component. We have
+			\[
+				j=1:\qquad [X,Y]^1=\sum_{i} X^i \frac{\partial z}{\partial x^i} -Y^i \frac{\partial 0}{\partial x^i} =X^3\frac{\partial z}{\partial z} =y
+			,\]
+			\[
+				j=2:\qquad [X,Y]^2=\sum_{i} X^i \frac{\partial 0}{\partial x^i} -Y^i \frac{\partial (-z)}{\partial x^i} =Y^3 \frac{\partial z}{\partial z} =-x
+			,\]
+			\[
+				j=3:\qquad [X,Y]^3=\sum_{i} X^i \frac{\partial y}{\partial x^i} -Y_i \frac{\partial (-x)}{\partial x^i} =-z +z=0
+			.\]
+			Therefore,
+			\[
+				[X,Y]=y \frac{\partial }{\partial x} -x \frac{\partial }{\partial y} =-Z\in A
+			.\]
+		\item $[Y,Z]$
+			\[
+				[Y,Z]^1=\sum_{i} Y^i \frac{\partial (-y)}{\partial x^i} -Z^i \frac{\partial z}{\partial x^i} =0-0=0
+			,\]
+			\[
+				[Y,Z]^2=\sum_{i} Y^i \frac{\partial x}{\partial x^i} -Z^i \frac{\partial 0}{\partial x^i} =z
+			,\]
+			\[
+				[Y,Z]^3=\sum_{i} Y^i \frac{\partial 0}{\partial x^i} -Z^i \frac{\partial (-x)}{\partial x^i} =-y
+			.\]
+			Therefore,
+			\[
+				[Y,Z]=z \frac{\partial }{\partial y} -y \frac{\partial }{\partial z} =-X\in A
+			.\]
+		\item $[Z,X]$ 
+			\[
+				[Z,X]^1=\sum_{i} Z^i \frac{\partial 0}{\partial x^i} -X^i \frac{\partial (-y)}{\partial x^i} =-z
+			,\]
+			\[
+				[Z,X]^2=\sum_{i} Z_i \frac{\partial (-z)}{\partial x^i} -X^i \frac{\partial x}{\partial x^i} =-0-0=0,
+			\]
+			\[
+				[Z,X]^3=\sum_{i} Z_i \frac{\partial y}{\partial x^i} -X^i \frac{\partial 0}{\partial x^i} =x
+			.\]
+			Therefore,
+			\[
+				[Z,X]=-z \frac{\partial }{\partial x} +x \frac{\partial }{\partial z} =-Y\in A
+			.\]
+	\end{itemize}
+	Therefore, $A$ is a Lie subalgebra of $\mathfrak{X} (\mathbb{R} ^3)$.
+
+	Now write $e_x=(1,0,0)$, $e_y=(0,1,0)$, and $e_z=(0,0,1)$ for the basis vectors of $\mathbb{R} ^3$, and define the linear map $A\to \mathbb{R} ^3$ via $X\mapsto -e_x$, $Y\mapsto -e_y$, and $Z\mapsto -e_z$. This is immediately an isomorphism of vector spaces since $\left\{ X,Y,Z \right\} $ is by definition a basis for $A$, meaning it suffices to show it is a morphism of Lie algebras. By uniqueness of basis representation, bilinearity of the Lie bracket, and bijectivity of the map, it suffices to show $[-e_x,-e_y]=e_z$, $[-e_y,-e_z]=e_x$, and $[-e_z,-e_x]=e_y$, where $[v,w]=v\times w$. By bilinearity we can factor out the negatives, so we just require that
+	\[
+		e_x\times e_y=e_z,\qquad e_y\times e_z=e_x,\qquad e_z\times e_x=e_y
+	.\]
+	These are all true. Therefore, there is a Lie algebra isomorphism $A \cong (\mathbb{R} ^3,\times )$.
+\end{proof}
+
+
+\section{Problem 8.24}
+\begin{problem}
+	Let $G$ be a Lie group and $\mathfrak{g} $ its Lie algebra. A vector field $X\in \mathfrak{X} (G)$ is \emph{right-invariant} if it is invariant under right translations.
+	\begin{enumerate}
+		\item Show that the set $\overline{\mathfrak{g} } $ of right-invariant vector fields of $G$ is a Lie subalgebra of $\mathfrak{X} (G)$.
+		\item Let $i : G \to G$ be inversion. Show that $i_* : \mathfrak{X} (G) \to \mathfrak{X} (G)$ restricts along $\mathfrak{g} $ to a Lie algebra isomorphism $\overline{\mathfrak{g} } \cong \mathfrak{g} $.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) By Lee 8.19, since $R_g : G \to G$ is a diffeomorphsm for any $g$, its pushforward is a Lie algebra homomorphism $\mathfrak{X} (G)\to \mathfrak{X} (G)$. Now let $X,Y \in \overline{\mathfrak{g} } $ be right invariant. Then
+	\[
+		(R_g)_*[X,Y]=[(R_g)_*X,(R_g)_*Y]=[X,Y]
+	.\]
+	Therefore, $[X,Y]\in \overline{\mathfrak{g} } $. Closure under addition and scalars follow easily by linearity of the pushforward:
+	\[
+		(R_g)_*(X+Y)=(R_g)_*X+(R_g)_*Y=X+Y,
+	\]
+	\[
+		c\in\mathbb{R} \qquad \qquad (R_g)_*(cX)=c(R_g)_*X=cX
+	.\]
+	Therefore, $\mathfrak{g} $ is a Lie subalgebra of $\mathfrak{X} (G)$.
+
+	(2) Since $i$ is smooth and a self-inverse, it is a diffeomorphism, meaning it has a pushforward by Lee 8.19. First we show that $i_*$ restricts to a map $\mathfrak{g} \to \overline{\mathfrak{g} } $, meaning we must show for any left-invariant $X$, the vector field $i_*X$ is right-invariant. Note that for any $g,h\in G$,
+	\[
+		(i\circ L_g)(h)=i(gh)=h^{-1} g^{-1} =R_{g^{-1} } (h^{-1} )=(R_{g^{-1} } \circ i)(h)
+	.\]
+	Therefore,
+	\[
+		i\circ L_g=R_{g^{-1} } \circ i
+	.\]
+	Since these are all diffeomorphisms, we take the pushforward of both sides and apply a vector field $X$:
+	\[
+		i_*\circ (L_g)_*X=(i\circ L_g)_*X=(R_{g^{-1} } \circ i)_*X=(R_{g^{-1} })_* \circ i_*X
+	.\]
+	Now take $X$ to be left invariant. We then have $(L_g)_*X=X$, so this equality reads
+	\[
+		i_*X=(R_{g^{-1} })_* (i_*X)
+	.\]
+	It follows that $(R_{g^{-1} } )_*(i_*X)=i_*X$ for all $g\in G$, and since inversion is a bijection, we have that $i_*X$ is right invariant.
+
+	Since $i_*$ is a diffeomorphism, by Lee 8.31 it commutes with the Lie bracket in the sense that for any $X,Y\in \mathfrak{X} (G)$,
+	\[
+		i_*[X,Y]=[i_*X,i_*Y]
+	.\]
+	Therefore, it is a Lie algebra homomorphism when restricted along $\mathfrak{g} $. It suffices to show it is bijective.
+
+	Since $i$ is its own inverse, it is easiest to show that the pushforward also defines a Lie algebra homomorphism $i_* : \overline{\mathfrak{g} }  \to \mathfrak{g} $. We will then have by properties of pushforwards that
+	\[
+		i_* \circ i_*=(i\circ i)_*=(\mathrm{id} )_*=\mathrm{id} 
+	,\]
+	and thus $i_*$ will be an isomorphism. Since $i_*$ is a diffeomorphism, it suffices to show it restricts along $\overline{\mathfrak{g} } $ to a map into $\mathfrak{g} $, since we obtain linearity and preservation of the Lie bracket for free as above.
+
+	The proof of this is the mirror of the previous proof. Let $X,Y$ be right invariant, and $g,h\in G$. Note that
+	\[
+		(i\circ R_g)(h)=g^{-1} h^{-1} =L_{g^{-1} } (h^{-1} )=(L_{g^{-1} } \circ i)(h)
+	.\]
+	Therefore, $i\circ R_g=L_{g^{-1} } \circ i$. Since these are diffeomorphisms, they have pushforwards. Computing the pushforwards on the right-invariant vector field $X$ yields
+	\[
+		i_*X = i_*\circ (R_g)_*X = L_{g^{-1} } (i_*X)
+	.\]
+	Therefore, $L_{g^{-1} } (i_*X)=i_*X$, meaning $i_*X$ is left-invariant, completing the proof.
+\end{proof}
+
+
+\section{Problem 8.25}
+\begin{problem}
+	Prove that if $G$ is an abelian Lie group, then $\operatorname{Lie} (G)$ is abelian. Do this by showing inversion is a group homomorphism, then applying the fact that $\mathrm{d} i_e(v)=-v$.
+\end{problem}
+\begin{proof}
+	Let $i : G \to G$ be inversion. Since $G$ is abelian, we can show $i$ is a group homomorphism. Given $g,h\in G$, we have $(gh)^{-1} =h^{-1} g^{-1} $, and since $G$ is abelian, $h^{-1} g^{-1} =g^{-1} h^{-1} $. Therefore $i(gh)=i(g)i(h)$. Since $i$ is smooth, it must be a Lie group homomorphism.
+
+	Recall that a Lie algebra is abelian when $[-,-]=0$. By Lee 8.37, the evaluation map at $e$ is a vector space isomorphism $\operatorname{Lie} (G)\cong T_eG$, meaning there is an induced Lie bracket on $T_eG$ such that the evaluation map promotes to an isomorphism of Lie algebras. This Lie bracket is necessarily defined as
+	\[
+		[v,w]_{T_eG} \coloneqq \varepsilon [\varepsilon ^{-1} (v),\varepsilon ^{-1} (w)]_{\operatorname{Lie} (G)} 
+	.\]
+	Since $i$ is a Lie group homomorphism, its pushforward $\mathrm{d} i_e$ is a Lie algebra homomorphism (inspect the proof of Lee 8.44) $T_eG\to T_eG$. It thus preserves the Lie bracket, meaning for any $v,w\in T_eG$,
+	\[
+		-[v,w]=\mathrm{d} i_e[v,w]=[\mathrm{d} i_e(v),\mathrm{d} i_e(w)]=[-v,-w]=[v,w]
+	.\]
+	Since $-[v,w]=[v,w]$, we have that $[v,w]=0$. Therefore, $T_eG$ is abelian, and thus $\operatorname{Lie} (G)$ is abelian since $T_eG \cong \operatorname{Lie} (G)$.
+\end{proof}
+
+\section{Problem 8.28}
+\begin{problem}
+	Considering $\det : \operatorname{GL} (n,\mathbb{R} ) \to \mathbb{R} ^*$ as a Lie group homomorphism, show that its induced Lie algebra homomorphism is $\operatorname{tr} : \mathfrak{gl} (n,\mathbb{R} ) \to \mathbb{R} $.
+\end{problem}
+\begin{remark}
+	I just realized that $\mathrm{d} i_e$ says ``die'' lol
+\end{remark}
+\begin{proof}
+	Lee problem 7.4 is provided as a hint: given $A\in M(n,\mathbb{R} )$, $X\in \operatorname{GL} (n,\mathbb{R} )$, and $B\in T_X \operatorname{GL} (n,\mathbb{R} )$,
+	\[
+		\left.\frac{\mathrm{d}}{\mathrm{d}t} \right|_0 \det (I+tA)=\operatorname{tr} A,
+	\]
+	\[
+		\mathrm{d} (\det )_X(B)=(\det X)\operatorname{tr} (X ^{-1} B)
+	.\]
+
+	We claim that $\operatorname{tr}=\mathrm{d} (\det )_I$. Recall that $M(n,\mathbb{R} )\cong T_X \operatorname{GL} (n,\mathbb{R} )$ for any invertible $X$, and by definition $\mathfrak{gl} (n,\mathbb{R} )\coloneqq M(n,\mathbb{R} )$. Therefore, $\mathrm{d} (\det )_I : \mathfrak{gl} (n,\mathbb{R} ) \to T_{\det I} \mathbb{R} ^* \cong \mathbb{R} $. The domain and codomain match, and we also have for any $B\in \mathfrak{gl} (n,\mathbb{R} )$,
+	\[
+		\mathrm{d} (\det )_I(B)=(\det I)\operatorname{tr} (I^{-1} B)=1 \operatorname{tr} B=\operatorname{tr} B
+	.\]
+	Therefore, $\mathrm{d} (\det )_I=\operatorname{tr} $.
+
+	Finally, using Lee 8.37, we may uniquely identify maps $T_I \operatorname{GL} (n,\mathbb{R} )\to T_1\mathbb{R} ^*$ with maps $\operatorname{Lie} (\operatorname{GL} (n,\mathbb{R} )) \to \operatorname{Lie} (\mathbb{R} ^*)$, yielding that $\mathrm{d} (\det )_I$ is indeed the induced Lie algebra homomorphism up to this identification.
+\end{proof}
+
+
+
+\section{Problem 8.30}
+\begin{problem}
+	Show via explicit construction that $\mathfrak{su} (2)\cong \mathfrak{o} (3)\cong (\mathbb{R}^3 ,\times)$ as Lie algebras.
+\end{problem}
+\begin{proof}
+	It's easiest to prove the isomorphisms $\mathfrak{su} (2) \cong \mathbb{R} ^3$ and $\mathfrak{o} (3)\cong \mathbb{R} ^3$, and obtain $\mathfrak{su} (2) \cong \mathfrak{o} (3)$ by composing these isomorphisms.
+
+	Write $e_x,e_y,e_z$ for the standard basis for $\mathbb{R} ^3$, and recall that
+	\[
+		e_i\times e_j = \varepsilon _{ijk} e_k
+	\]
+	for $\varepsilon_{ijk} $ the Levi-Civita symbol. It would be nice to find bases for $\mathfrak{o} (3)$ and $\mathfrak{su} (2)$ that satisfy this property with respect to their own Lie bracket. The induced Lie algebra isomorphisms will then be obvious, so the majority of this problem is construction of suitable bases.
+
+	Recall by Lee 8.47 that we may describe
+	\[
+		\mathfrak{o} (3)=\left\{ B\in \mathfrak{gl} (3,\mathbb{R} )\mid B^T+B=0 \right\} 
+	.\]
+	Define the elements
+	\[
+		O_x \coloneqq \begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & -1 \\
+		0 & 1 & 0
+		\end{pmatrix},\qquad O_y \coloneqq \begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+		-1 & 0 & 0
+		\end{pmatrix},\qquad O_z \coloneqq \begin{pmatrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}
+	.\]
+	We claim this is a basis for $\mathfrak{o} (3)$. By Lee 7.27, $O(3)$ has dimension
+	\[
+		\dim O(3)=\frac{3(3-1)}{2} =3
+	.\]
+	Therefore, $\mathfrak{o} (3) \cong T_IO(3)$ has dimension 3. Since $\left\{ O_x,O_y,O_z \right\} $ are clearly linearly independent and clearly elements of $\mathfrak{o} (3)$, we have that they form a basis for the space. We prove the commutation relation $[O_i,O_j]=\varepsilon_{ijk} O_k$. By the axioms for a Lie bracket, it suffices to show
+	\[
+		[O_x,O_y]=O_z,\qquad [O_y,O_z]=O_x,\qquad [O_z,O_x]=O_y
+	.\]
+	This follows by direct computation.
+	\[
+		\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & -1 \\
+		0 & 1 & 0
+		\end{pmatrix}\begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+		-1 & 0 & 0
+		\end{pmatrix}-\begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+		-1 & 0 & 0
+		\end{pmatrix}\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & -1 \\
+		0 & 1 & 0
+		\end{pmatrix}=\begin{pmatrix}
+		0 & 0 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}-\begin{pmatrix}
+		0 & 1 & 0 \\
+		0 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}=O_z,
+	\]
+	\[
+		\begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+		-1 & 0 & 0
+		\end{pmatrix}\begin{pmatrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}-\begin{pmatrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}\begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+		-1 & 0 & 0
+		\end{pmatrix}=\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & 0 \\
+		0 & 1 & 0
+		\end{pmatrix}-\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & 1 \\
+		0 & 0 & 0
+		\end{pmatrix}=O_x
+	,\]
+	\[
+		\begin{pmatrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & -1 \\
+		0 & 1 & 0
+		\end{pmatrix}-\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & -1 \\
+		0 & 1 & 0
+		\end{pmatrix}\begin{pmatrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}=\begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+		0 & 0 & 0
+		\end{pmatrix}-\begin{pmatrix}
+		0 & 0 & 0 \\
+		0 & 0 & 0 \\
+		1 & 0 & 0
+		\end{pmatrix}=O_y
+	.\]
+	There is then a Lie algebra isomorphism $\mathbb{R} ^3 \cong \mathfrak{o} (3)$ by mapping $e_x\mapsto O_x$, $e_y\mapsto O_y$, and $e_z\mapsto O_z$. This is an isomorphism because it maps a basis to a basis, its defined to be linear, and is a Lie algebra homomorphism because the bases are characterized by the exact same identity $[e_i,e_j]=\varepsilon _{ijk} e_k$, so the bracket is preserved by linearity of the bracket and the isomorphism.
+
+	Now we construct a basis for $\mathfrak{su} (2)$. By Lee 7.30, the dimension of $\mathfrak{su} (2)$ is the dimension of the manifold $\operatorname{SU} (2)$, which is
+	\[
+		2^2-1=3
+	.\]
+	Therefore, we need to find a linearly independent set of 3 matrices in $\mathfrak{su} (2)$ which satisfy the same relation with the commutator. Lee problem 8.29 characterizes $\mathfrak{su} (2)$ as
+	\[
+		\mathfrak{su} (n) = \mathfrak{u} (n) \cap \mathfrak{sl} (n,\mathbb{C} ) = \left\{ A\in \mathfrak{gl} (n,\mathbb{C} )\mid \operatorname{tr} A=0\text{ and } A+A^\dagger=0 \right\} 
+	.\]
+	Consider the matrices
+	\[
+		S_x = -\frac{i}{2} \begin{pmatrix}
+		0 & 1 \\
+		1 & 0
+		\end{pmatrix},\qquad S_y = -\frac{i}{2} \begin{pmatrix}
+		0 & -i \\
+		i & 0
+		\end{pmatrix},\qquad S_z = -\frac{i}{2} \begin{pmatrix}
+		1 & 0 \\
+		0 & -1
+		\end{pmatrix}
+	.\]
+	The set $\left\{ S_x,S_y,S_z \right\} $ is clearly linearly independent since they are scalar multiples of the Pauli matrices $\sigma _x,\sigma _y,\sigma _z$. Since $\dim \mathfrak{su} (2)=3$, we have that these form a basis for $\mathfrak{su} (2)$. Because the grader likely does not want to read 3 lines of matrix computation, writing $\delta _{ij} $ for the Kroenecker delta, we use the identity $\sigma_i\sigma _j=\delta_{ij} I+i\varepsilon _{ijk} \sigma _k$ to compute the commutator
+	\[
+		[\sigma _i,\sigma _j]=\sigma _i\sigma _j-\sigma _j\sigma _i=\delta _{ij} I+i\varepsilon _{ijk} \sigma _k - \delta _{ji} I - i\varepsilon _{jik} \sigma _k= \delta _{ij} I+i\varepsilon _{ijk} \sigma _k - \delta _{ij} I + i\varepsilon _{ijk} \sigma _k = 2i\varepsilon _{ijk} \sigma _k
+	.\]
+	Bilinearity of the Lie bracket yields
+	\[
+		[S_i,S_j]=\left( -\frac{i}{2}  \right) ^2 2i\varepsilon_{ijk} \sigma_k=-\frac{2i}{4} \varepsilon _{ijk} \sigma _k = -\frac{i}{2} \varepsilon _{ijk} \sigma _k = \varepsilon _{ijk} S_k
+	.\]
+	Therefore, $\left\{ S_x,S_y,S_z \right\} $ satisfies the same identity as the basis for $\mathbb{R} ^3$ and is of the same dimensionality, meaning we have a Lie algebra isomorphism $\mathbb{R} ^3 \to \mathfrak{su} (2)$ given by $e_i\mapsto S_i$.
+\end{proof}
+
+
+\section{Problem 8.31}
+\begin{problem}
+	Let $\mathfrak{g} $ be a Lie algebra. A linear subspace $\mathfrak{h} \subseteq \mathfrak{g} $ is called an \emph{ideal} if $[X,Y]\in \mathfrak{h} $ whenever at least one of $X,Y$ are in $\mathfrak{h} $.
+	\begin{enumerate}
+		\item Show that if $\mathfrak{h} $ is an ideal of $\mathfrak{g} $, then the quotient has a Lie bracket such that the quotient map $\pi : \mathfrak{g}  \to \mathfrak{g} /\mathfrak{h} $ is a Lie algebra homomorphism.
+		\item Show that ideals are precisely kernels of Lie algebra homomorphisms.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) The definition of the Lie bracket is most clear if we appeal to coset notation. Given $g,h\in \mathfrak{g} $, we want to define
+	\[
+		\left[ g+\mathfrak{h} ,h+\mathfrak{h}  \right]_{\mathfrak{g} /\mathfrak{h} } \coloneqq \left[ g,h \right]_{\mathfrak{g} } +\mathfrak{h} 
+	.\]
+	Since closure of $\mathfrak{g} /\mathfrak{h} $ under this Lie bracket is clear, we must prove that this is well-defined, and is indeed a Lie bracket. The latter will follow from the former, so we begin there.
+
+	Let $g,h,k\in \mathfrak{g}$ with $g+\mathfrak{h} =h+\mathfrak{h} $. Using the definition of $[-,-]_{\mathfrak{g} /\mathfrak{h} } $, we must show
+	\[
+		[g,k]_\mathfrak{g} +\mathfrak{h} =[h,k]_\mathfrak{g} +\mathfrak{h} 
+	.\]
+	Equivalently, we must show that
+	\[
+		[g,k]_\mathfrak{g} +\mathfrak{h} -([h,k]_\mathfrak{g} +\mathfrak{h}) =[g-h,k]_\mathfrak{g} +\mathfrak{h} =\mathfrak{h} 
+	.\]
+	Equivalently, we must show that
+	\[
+		[g-h,k]_\mathfrak{g}\in \mathfrak{h} 
+	.\]
+	Since $g+\mathfrak{h} =h+\mathfrak{h} $, we have that $g-h\in \mathfrak{h} $. Since $\mathfrak{h} $ is an ideal, we have that $[g-h,k]_\mathfrak{g} \in \mathfrak{h} $. Therefore, the Lie bracket is well-defined.
+	'
+	From here, it follows easily that the Lie bracket is indeed a Lie bracket. For example, antisymmetry follows by
+	\[
+		[g+\mathfrak{h} ,h+\mathfrak{h} ]_{\mathfrak{g} /\mathfrak{h} } =[g,h]_\mathfrak{g} +\mathfrak{h} =-[h,g]_\mathfrak{g} +\mathfrak{h} =-[h+\mathfrak{h} ,g+\mathfrak{h} ]_{\mathfrak{g} /\mathfrak{h} } 
+	.\]
+	I don't feel like writing out bilinearity and Jacobi but they follow in the exact same way: since the Lie bracket in $\mathfrak{g} /\mathfrak{h} $ is defined by computing the Lie bracket in $\mathfrak{g} $, the identities are automatically satisfied.
+
+	The fact that the quotient morphism is a Lie algebra homomorphism is also simple. $\pi : \mathfrak{g}  \to \mathfrak{g} /\mathfrak{h} $ is defined by $g\mapsto g+\mathfrak{h} $. It is automatically linear, so we simply show it preserves the Lie bracket. Let $g,h\in G$. Then
+	\[
+		\pi [g,h]_\mathfrak{g} =[g,h]_\mathfrak{g}+\mathfrak{h} \eqqcolon [g+\mathfrak{h} ,h+\mathfrak{h} ]_{\mathfrak{g} /\mathfrak{h} } =[\pi (g),\pi (h)]_{\mathfrak{g} +\mathfrak{h} } 
+	.\]
+	Therefore, $\pi $ is a Lie algebra homomorphism.
+
+	(2) Let $\mathfrak{h} $ be an ideal. Then by (1), the quotient map $\pi : \mathfrak{g}  \to \mathfrak{g} /\mathfrak{h} $ is a Lie algebra homomorphism, and it's well known that $\Ker \pi =\mathfrak{h} $. For the converse, let $\varphi : \mathfrak{g}  \to \mathfrak{k} $ be a Lie algebra homomorphism.  We will show $\Ker \varphi $ is an ideal. Since $\varphi $ is linear, its kernel is a subspace. Let $X,Y\in \mathfrak{g} $ with $X\in \Ker \varphi $. Then since the Lie bracket is bilinear and $\varphi $ is a Lie algebra homomorphism,
+	\[
+		\varphi [X,Y]=[\varphi (X),\varphi (Y)]=[0,\varphi (Y)]=[-0,\varphi (Y)]=-[0,\varphi (Y)]
+	.\]
+	Since $[0,\varphi (Y)]=-[0,\varphi (Y)]$, we have that $\varphi [X,Y]=[0,\varphi (Y)]=0$, and thus $[X,Y]\in \Ker \varphi $. If we instead have that $Y\in \Ker \varphi $, then we have $[X,Y]=[-Y,X]$, and $-Y\in \Ker \varphi $ since it is a linear subspace, reducing to the case we just showed. Therefore, $\Ker \varphi $ is an ideal of $\mathfrak{g} $.
+\end{proof}
+
+\end{document}

@@ -71,7 +71,7 @@
 	is an ismorphism. The same is true if one of the spaces $M_i$ has boundary.
 \end{problem}
 \begin{proof}
-	We will never deal with the global differential in this problem, so we drop the subscript when referring to differentials for notational convenience, but also because I accidentally forgot the subscripts when writing it up and don't want to fix it.
+	We will never deal with the global differential in this problem, so we drop the subscript when referring to differentials for notational convenience, and also because I accidentally forgot the subscripts when writing it up and don't want to fix it.
 
 	Because the product and coproduct in $\mathbb{R} $-$\mathcal{V} \mathrm{ect} $ coencide, we start by defining the map
 	\[
@@ -160,22 +160,86 @@
 	Show that if $M,N$ are smooth manifolds, then there is a diffeomorphism $T(M\times N)\cong T(M)\times T(N)$.
 \end{problem}
 \begin{proof}
-	Recall that the product and coproduct coincide in $\mathbb{R} $-$\mathcal{V} \mathrm{ect} $. Since the direct sum is commutative up to natural isomorphism, by \cref{2} we see that
+	First, we construct an isomorphism of sets. We then show the map raises to a diffeomorphism. From \cref{2}, we have that $T_p(M\times N)\cong T_{p^1} (M)\oplus T_{p^2} (N)\cong T_{p^1} (M)\times T_{p^2} (N)$. This already gets us halfway there:
 	\[
-		T(M\times N)\coloneqq \bigoplus_{p\in M\times N} T_p(M\times N)\cong \bigoplus_{p\in M\times N} (T_{p^1} M \oplus T_{p^2} N)\cong \left( \bigoplus_{p\in M} T_pM \right) \oplus \left( \bigoplus_{q\in N} T_qN \right) \eqqcolon TM\times TN
+		T(M\times N)\coloneqq \coprod_{p\in M\times N} T_p(M\times N) \cong \coprod_{p\in M\times N} (T_{p^1} M\oplus T_{p^2} N)\cong \coprod_{p\in M\times N} (T_{p^1} M\times T_{p^2} N)
 	.\]
-	Here, the product on the right is a product of $\mathbb{R} $-vector spaces. However, since the product/direct sum of $\mathbb{R} $-vector spaces is simply the Cartesian product, and as seen in the previous homework the product of manifolds is also the cartesian product, we obtain an isomorphism of the underlying sets of these structures. It of course remains to be shown that this isomorphism promotes to a diffeomorphism.
+	We could always invoke $-\times Z \dashv \Set (Z,-)$ to complete the proof of the bijection, but an explicit construction of the isomorphism will be useful. An element of the coproduct over $T_{p^1} M\times T_{p^2} N$ is a triple $(p,v_p,w_p)$, where $p=(p^1,p^2)$, $v_p\in T_{p^1} M$, and $w_p\in T_{p^2} N$. An element of
+	\[
+		TM \times TN \coloneqq \left( \coprod_{p\in M} T_pM \right) \times \left( \coprod_{q\in N} T_qN \right) 
+	\]
+	is a tuple $(p,v_p,q,w_q)$ with $v_p\in T_pM$ and $w_q\in T_qN$. We then define the map $(p,v_p,w_p)\mapsto (p^1,v_{p},p^2,w_p)$. This map is manifestly injective. Surjectivity is also immediate, since given any $(p,v_p,q,w_q)\in TM\times TN$, we have that $(p,q)\in M\times N$, meaning $((p,q),v_p,w_q) \mapsto (p,v_p,q,w_q)$. Therefore, we have an isomorphism. In particular, this isomorphism is the \emph{identity} on vectors.
 
-	a
+	We now promote the isomorphism of sets to a diffeomorphism. By construction of the isomorphism $T_p(M\times N)\cong T_{p^1} M\times T_{p^2} N$, we see that the map we have constructed may be described as
+	\[
+		(p,v_p,w_p)\mapsto (p^1,\mathrm{d} (\pi_M)_p(v_p),p^2,\mathrm{d} (\pi _N)_p(w_p))
+	.\]
+	The maps $p\mapsto p^1$ and $p\mapsto p^2$ are simply the projections $M\times N\to M$ and $M\times N\to N$, which we proved in the previous homework are smooth. It suffices to show the other two components are smooth, meaning we must show the map $(v,w)\mapsto (\mathrm{d} (\pi _M)_p(v),\mathrm{d}(\pi _N)(w))$ is smooth for all $p$. Note that assembling each $\mathrm{d} (\pi _M)_p$ along the coproduct yields the global differential, giving us the map
+	\[
+		\mathrm{d} (\pi _M)\times \mathrm{d} (\pi _N) : (v,w)\mapsto (\mathrm{d} (\pi _M)(v),\mathrm{d} (\pi _N)(w))
+	.\]
+	Since the global differential is smooth, the map $T(M\times N)\to TM\times TN$ is indeed smooth by \cref{0.2}.
+
+	Now we show the inverse is smooth. The inverse to this map is awful and annoying. We denote the inverse by $F$ because in retrospect, not naming these maps immediately was a mistake. Given $v\in T_pM$ and $w\in T_qN$, recall the inverse is given by
+	\[
+		(v,w)\mapsto \mathrm{d} (\iota _M)_p(v)+\mathrm{d} (\iota _N)_q(w)
+	.\]
+	Here, the inclusions $\iota _M$ include $T_pM$ into $T_{(p,q)} (M\times N)$ by mapping along $T_pM\times \left\{ q \right\} $, and the same for $N$. Since addition is smooth, we would like to assemble the differentials along the coproduct into the global differentials $\mathrm{d} (\iota _M)(v)+\mathrm{d} (\iota _N)(w)$. It is not immediately clear that we can do this, so we appeal to a short diagram chase.
+
+	The map $F:TM\times TN$ arises by constructing the maps $F_{(p,q)} :T_pM\times T_qN\to T_{(p,q)} (M\times N)$ of \cref{2}:
+	\[
+		(v,w)\mapsto \mathrm{d} (\iota _M)_p(v)+\mathrm{d} (\iota _N)_q(w)
+	;\]
+	and then assembling along the coproduct as indicated by the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	T_pM \times T_qN \ar[" F_{(p \text{,} q)}  ", r] \ar[" i\times i "', hook, d]  & T_{(p,q)} (M\times N)\ar[hook, d]  \\
+	TM\times TN\ar[" F "', r] & T(M\times N)
+	\end{tikzcd}\]
+	Note that $F_{(p,q)} $ factors along $T_{(p,q)} (M\times N)\times T_{(p,q)} (M\times N)$ as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+		(v,w)\ar[" \mathrm{d}(\iota_M)_p\times \mathrm{d} (\iota _N)_q ", mapsto, r]  & (\mathrm{d} (\iota _M)_p(v),\mathrm{d} (\iota _N)_q(w))\ar[" + ", mapsto,r]  & \mathrm{d} (\iota _M)_p(v)+\mathrm{d} (\iota _N)_q(w).
+	\end{tikzcd}\]
+	Factoring the coproduct diagram along this decomposition yields
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4.5em]
+	T_pM \times T_qN \ar[" \mathrm{d}(\iota _M)_p\times \mathrm{d} (\iota _N)_q ", r] \ar[" i\times i "', hook, d]  & T_{(p,q)} (M\times N)^2 \ar[" + ", r] \ar[hook, d]  & T_{(p,q)} (M\times N)\ar[hook, d]  \\
+	TM\times TN\ar[" \mathrm{d} (\iota _M)\times \mathrm{d} (\iota _N) "', r]  & T(M\times N)^2 \ar[" + "', r]  & T(M\times N)
+	\end{tikzcd}\]
+	Note here that each $T_{(p,q)} (M\times N)\times T_{(p,q)} (M\times N)$ includes into $T(M\times N)\times T(M\times N)$ by taking the product of the inclusions, which is smooth by \cref{0.2}. We then very clearly observe that the lower arrow $TM\times TN\to T(M\times N)\times T(M\times N)$ is simply the product of the coproducts along $\mathrm{d} (\iota _M)_p$ and $\mathrm{d} (\iota _N)_q$, which are precisely the global differentials. Thus, $F$ factors as $+ \circ (\mathrm{d}(\iota _M)\times \mathrm{d} (\iota _N))$. Since global differentials are smooth, products of smooth maps are smooth (\cref{0.2}), and addition is smooth, $F$ is necessarily smooth. We obtain that the map is a diffeomorphism, as required.
 \end{proof}
 
 \section{Problem 3.4}
 
-\begin{problem}
+\begin{problem}\label{4}
 	Show there is a diffeomorphism $TS^1\cong S^1\times \mathbb{R} $.
 \end{problem}
 \begin{proof}
-	Proof strategy: map $T_{p} S^1$ to $\left\{ p \right\} \times \mathbb{R} \subseteq S^1\times \mathbb{R} $. To do this, use the isomorphism $T_pS^1 \cong \mathbb{R} $. how was this isomorphism constructed again?
+	It will be most convenient to view $S^1 \cong \mathbb{R} /\mathbb{Z} $ as a quotient. Consider the vector field $\widetilde{V}  : \mathbb{R}  \to T\mathbb{R} $ given by $t\mapsto \left.\frac{\mathrm{d}}{\mathrm{d}x} \right|_t$. This descends along the quotient $\pi : \mathbb{R}  \to S^1$ to a map $V : S^1 \to TS^1$ given by
+		\[
+			[t]\mapsto \mathrm{d} (\pi )\left( \left. \frac{\mathrm{d}}{\mathrm{d}x} \right|_{t}  \right) =\mathrm{d} (\pi )_{[t]} \left( \left. \frac{\mathrm{d}}{\mathrm{d}x} \right|_t \right) 
+		.\]
+		It might not be clear that this is well-defined, since we evaluate the derivative at a representative of $[t]$. However, since precomposition by $\pi $ identifies all elements of the class of $t$, it is indeed well-defined. Moreover, clearly $V$ is a section of the projection $TS^1\to S^1$, since the image of $[t]$ is an element of the tangent space $T_{[t]} S^1$. We would like to now show $V$ is smooth.
+
+	Since the global differential $\mathrm{d} (\pi )$ is smooth, and since $\pi : \mathbb{R}  \to S^1$ is (clearly) smooth, it suffices to show $\widetilde{V} $ is smooth, since $V[t]=(\mathrm{d} (\pi )\circ \widetilde{V})(t) $. Since $\mathbb{R} $ admits a global chart $(\mathbb{R} ,1_\mathbb{R} )$ for $1_\mathbb{R} $ the identity, the global chart on $T\mathbb{R} $ can be described as
+	\[
+		\left( t,\left. c \frac{\mathrm{d}}{\mathrm{d}x} \right|_t \right) \mapsto (t,c)
+	.\]
+	Precomposing by $\widetilde{V} $ gives
+	\[
+		t\mapsto \left( t,1\cdot \left. \frac{\mathrm{d}}{\mathrm{d}x} \right|_t \right) \mapsto (t,1)
+	.\]
+	It follows that $\widetilde{V} $ composed with the chart is smooth, since one component is the identity $t\mapsto t$, and the other is the constant map at 1, both of which are smooth.
+
+	Note that since $\widetilde{V} $ was nowhere vanishing, $V$ necessarily is also nowhere vanishing. Thus, $V[t]$ is a nonzero vector in the tangent space $T_{[t]} S^1$ for all $[t]\in S^1$. Since this is a 1-dimensional vector space, any nonzero vector forms a basis, meaning for all $v\in T_{[t]} S^1$, there is a unique $c\in\mathbb{R} $ with $cV[t]=v$. By uniqueness of $c$, we can construct a well-defined map
+	\[
+		F : TS^1 \to S^1\times \mathbb{R} \qquad ([t],v)\mapsto ([t],c)
+	,\]
+	with notation as before. We automatically have that each $T_{[t]} S^1 \to \mathbb{R} $ is an isomorphism of sets by uniqueness of basis representations, meaning each $\left\{ [t] \right\} \times T_{[t]} S^1 \to \mathbb{R} $ is an isomorphism. These assemble along the coproduct to a bijection $TS^1 \cong S^1\times \mathbb{R} $. It suffices to show the map is smooth, and the evident inverse
+	\[
+		([t],c)\mapsto ([t],cV[t])
+	\]
+	is smooth.
+
+	Clearly the first component is smooth since it is the identity on $S^1$, so it suffices by \cref{0.2} to prove the second component. The inverse direction $c\mapsto cV[t]$ is smooth because scalar multiplication is smooth and $V$ is smooth. The converse direction follows since $V$ is smooth, so $v\mapsto c$ is smooth.
 \end{proof}
 
 
@@ -185,9 +249,33 @@
 	Let $S^1\subseteq \mathbb{R} ^2$ be the 1-sphere, and let $K\subseteq \mathbb{R} ^2$ be the boundary of the square $K=\partial ([-1,1]\times [-1,1])$. Show there is a homeomorphism $F : \mathbb{R} ^2 \to \mathbb{R} ^2$ which restricts along $S^1$ to give $F(S^1)=K$, but there is no \emph{diffeomorphism} with this property.
 \end{problem}
 \begin{proof}
-	Hint: given a smooth path $\gamma $ in $S^1$, consider the action of $\mathrm{d} F\gamma '(t)$ on coordinate functions $x^\mu ,y^\mu $.
+	First we construct the homeomorphism. The explicit construction is quite messy, so we explain how it works before working through it. Each $p\in S^1$ has an angle $\theta $ from the $x$-axis (any line works, but the $x$-axis is convenient because $p=\exp (i\theta )$). This angle $\theta $ forms a line through 0 and $p$. We push $p$ away from the origin along this line, until one of its caresian coordinates attains a magnitude of 1, and its other coordinate has lower magnitude. The point is then on the square, and this construction is obviously a homeomorphism. This extends to $\mathbb{R} ^2\to \mathbb{R} ^2$ via polar coordinates.
 
-	note from arystan: a homeomorphism is given by the deformation retract. then to show no such shit exxists consider a convenient corner of the square.
+	Each $(x,y)$ can be written as $(R\cos \theta ,R\sin \theta )$ for some $\theta \in[0,2\pi )$ and $R>0$. Consider first some $(x,y)$ on the square, meaning that
+	\[
+		\max (|R \cos \theta |,|R \sin \theta |)=1
+	.\]
+	We see that
+	\[
+		R(\theta )=\frac{1}{\max (\left| \cos \theta  \right| ,\left| \sin \theta  \right| )} 
+	.\]
+	Since the 1 is simply the magnitude of $(\cos \theta ,\sin \theta )$, we might hope that we can define a map $F : \mathbb{R} ^2 \to \mathbb{R} ^2$ by
+	\[
+		(x,y)\mapsto \frac{\sqrt{x^2+y^2} }{\max \left( \left| x \right| ,\left| y \right|  \right) } (x,y)
+	.\]
+	Of course, at 0 we map $(0,0)\mapsto (0,0)$. This consideration means that the denominator is never zero, and in this case division is continuous. Moreover, square roots, products, and exponents are continuous, so the numerator is continuous. It suffices to show the denominator is continuous when $(x,y)\neq 0$, since it should be clear that the map is indeed continuous at 0.
+
+	Indeed, the max function (with absolute values) can be thought of as just the projection onto $x$, composed with $\left| - \right| $, whenever $\left| x \right| \geq \left| y \right| $, and similarly for $y$. Clearly these two projections agree on the boundary, and are both continuous, so their union is the max function, rendering it continuous. This can be rigorized further by constructing the relevant pushouot square.
+
+	The map is thus continuous, and by construction we have $F(S^1)=K$. It is also clearly a bijection, since it has an inverse
+	\[
+		(x,y)\mapsto \frac{\max\left( \left| x \right| ,\left| y \right|  \right) }{\sqrt{\left| x^2+y^2 \right| } } (x,y)
+	,\]
+	again with the special consideration that $(0,0)\mapsto (0,0)$. This is continuous by the exact same argument, since all its component functions are continuous.
+
+	Now to show there is no diffeomorphism with this property. Intuitively, $K$ should not be differentiable at a corner, so we will focus on the point $(1,1)\in K$. Let $F : \mathbb{R} ^2 \cong \mathbb{R} ^2$ be a diffeomorphism, and suppose for contradiction that $F(S^1) = K$. Since $S^1$ is a smooth submanifold of $\mathbb{R} ^2$, the restriction $F|S^1$ must be diffeomorphic to $F(S^1)=K$. It suffices to show that $K$ is not a smooth manifold.
+
+	Consider the point $(1,1)\in K$, and suppose there is a chart $(U,\varphi )$ for $(1,1)$. Let $I\coloneqq \varphi (U) \subseteq \mathbb{R} $ be an open interval, and let $\gamma : I \to U$ be the inverse of $\varphi $. In particular, $\gamma $ is a path in $K$, and for it to be smooth, its tangent vector must exist. Without loss of generality, take $\gamma (0)=(1,1)$. For $t<0$, take $\gamma (t)=(x(t),1)$, and for $t>0$, take $\gamma (t)=(1,y(t))$. The tangent vectors to $\gamma (t<0)$ and $\gamma (t>0)$ are thus $(x'(t),0)$ and $(0,y'(t))$, respectively. It follows that $x'(t)=y'(t)=0$, and by continuity the same is true at $(1,1)$. Thus, $\gamma $ has everywhere-vanishing velocity, implying that it is a constant map. Since singletons are not open in $\mathbb{R} ^2$, and by extension $K$, we have that $\gamma $ cannot be a bijection, and thus not a diffeomorphism, a contradiction.
 \end{proof}
 
 \section{Problem 3.6}

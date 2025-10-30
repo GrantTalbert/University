@@ -1,0 +1,31 @@
+\lecture{19}{Fri 17 Oct 2025 12:20}{idk}
+
+Let $F : M \to N$ be a smooth map. For each $p\in M$, we get an induced map of tangent spaces $\mathrm{d} F_p : T_pM \to T_{F(p)} N$. However, if $V$ is a smooth vector field on $M$, we cannot in general define $\mathrm{d} FV$ as a smooth vector field on $N$.
+
+\begin{definition}\label{???}
+	Let $F : M \to N$ be smooth, and let $X : M \to TM$ and $Y : N \to TN$ be vector fields. Then $X$ and $Y$ are $F$-related if and only if for all $p\in M$, $\mathrm{d} F_p(V_p)=Y_p$, where of course $X_p=X|T_pM$, and the same for $Y$.
+\end{definition}
+
+This tells us that $X(f\circ F)=Y(f)\circ F$.
+
+\begin{proposition}\label{3.0.23}
+	Let $F : M \to N$ be a diffeomorphism. Then for all vector fields $X : M \to TM$, there exists a unique vector field $Y : N \to TN$ which is $F$-related to $X$.
+\end{proposition}
+\begin{definition}\label{3.0.24}
+	Let $X,Y$ be smooth vector fields on $M$. Define the Lie bracket $[X,Y]\coloneqq (X\circ Y)-(Y\circ X)$.
+\end{definition}
+
+\begin{definition}\label{3.0.25}
+	A Lie algebra is a ($\mathbb{R} $-)vector space $\mathfrak{g} $ together with a Lie bracket $[-,-]: \mathfrak{g} \times \mathfrak{g}  \to \mathfrak{g} $ which is antisymmetric, bilinear, and satisfies the Jacobi identity. A morphism of Lie algebras is a linear map $f : \mathfrak{g}  \to \mathfrak{h} $ such that $f[X,Y]_\mathfrak{g}=[f(X),f(Y)]_\mathfrak{h}$.
+\end{definition}
+
+To any manifold $M$ is assocaited a Lie algebra $\mathfrak{X} $ of smooth vector fiekds, with Lie bracket given by \cref{3.0.24}. Moreover, the Lie bracket is natural in the following sense: suppose $F : M \to N$ is smooth, and suppose $X_1,X_2\in \mathfrak{X} (M)$, $Y_1,Y_2\in \mathfrak{X} (N)$ are smooth vector fields with $X_i$ $F$-related to $Y_i$. Then the Lie bracket $[X_1,X_2]$ is also $F$-related to $[Y_1,Y_2]$. In particular, diffeomorphisms $F : M \cong N$ induce Lie algebra homeomorphisms. A corollary of this is if $S\subseteq M$ is immersed, then the Lie bracket of two vector fields tangent to $S$ is also tangent to $S$.
+
+\begin{proposition}\label{3.0.26}
+	Given a Lie group $G$,  there exists a natural finite dimensional Lie algebra $\mathfrak{g} $ such that $\mathfrak{g} \subseteq \mathfrak{X} (G)$ and $[\mathfrak{g} ,\mathfrak{g} ]\subseteq \mathfrak{g} $.
+\end{proposition}
+
+\begin{definition}\label{3.0.27}
+	Given a Lie group $G$ and a vector field $V\in \mathfrak{X} (G)$, we say $V$ is a \emph{left-invariant} vector field on $G$ if and only if $L_{g*} V=V$ for all $g\in G$. Right invariance is defined similarly. The Lie algebra of \cref{3.0.26} is given by the set of left-invariant vector fields.
+\end{definition}
+

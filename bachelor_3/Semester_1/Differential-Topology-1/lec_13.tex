@@ -1,0 +1,51 @@
+\lecture{13}{Fri 03 Oct 2025 12:20}{Submanifolds}
+
+For example, $S^n\hookrightarrow \mathbb{R} ^n$ is an embedded submanifold. The main proposition is
+\begin{proposition}\label{2.1.2}
+	Let $F : N \to M$ be a smooth embedding. Then $\im F$ is an embedded submanifold of $M$ with a unique smooth structure.
+\end{proposition}
+\begin{proof}
+	Endow $\im F$ with the smooth structure on $N$ postcomposed by $F$ or something.
+\end{proof}
+
+Let $U\subseteq M$ and $f : U \to M$ smooth. Then $(1,f): U \to M\times N$ is a homeomorphism onto the image $f\subseteq M\times N$. This is a section of the projection $\pi : M\times N \to M$, so $(1,f)$ is an immersion. We then have that the graph is an embedded submanifold. We will see that embedded submanifolds look locally like graphs of functions later.
+
+\begin{definition}\label{2.1.3}
+	An embedded submanifold $S\subseteq M$ is \emph{properly embedded} if and only if $S\hookrightarrow M$ is a proper map (preimage of compact sets is compact).
+\end{definition}
+
+\begin{proposition}\label{2.1.4}
+	Let $S\hookrightarrow M$ be an embedded submanifold. Then $S$ is a proper embedding if and only if $S$ is closed in $M$.
+\end{proposition}
+\begin{proof}
+	If $S\hookrightarrow M$ is properly embedded, then the inclusion is closed since manifolds are locally compact Hausdorff (Lee A.57). Conversely, Lee A.53.
+\end{proof}
+
+In particular, every compact/closed embedded submanifold is a proper embedding. In particular,
+
+\begin{proposition}\label{2.1.5}
+	Let $F : M \to N$ be smooth. Then the graph is properly embedded in $M\times N$.
+\end{proposition}
+Proven in the homework last year that graphs of continuous maps are closed.
+
+\begin{definition}\label{2.1.6}
+	A $k$-dimensional slice $S$ of $U\subseteq \mathbb{R} ^n$ is of the form $\left\{ (x^\mu ,c^\nu ) \right\} $ for the $c^\mu $s constant.
+\end{definition}
+
+\begin{definition}\label{2.1.7}
+	Let $M$ be a smooth manifold with a chart $(U,\varphi )$. If $S\subseteq U$ such that $\varphi (S)$ is a $k$-slice of $\varphi (U)$, then $S$ is a $k$-slice of $U$.
+\end{definition}
+
+\begin{theorem}[Slice charts]\label{2.1.8}
+	All embedded submanifolds locally look like $\mathbb{R} ^k\hookrightarrow \mathbb{R} ^{n\geq k} $. In particular, if $S\hookrightarrow U$, then for all $p\in S$ there is a chart $(U,\varphi )$ such that $S \cap U$ is a $k$-slice of $U$.
+\end{theorem}
+proof is like rank thm looks like slices.
+
+\begin{definition}\label{2.1.9}
+	Let $\Phi : M \to N$ be smooth. Then for any $c\in N$, the fiber $\Phi ^{-1} (c)$ is the \emph{level set of $\Phi $ at c}.
+\end{definition}
+
+\begin{proposition}\label{2.1.10}
+	Let $\Phi : M \to N$ be smooth with constant rank. Then the level sets of $\Phi $ are properly embedded submanifolds in $M$.
+\end{proposition}
+

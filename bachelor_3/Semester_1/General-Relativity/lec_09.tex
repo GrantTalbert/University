@@ -1,0 +1,59 @@
+\lecture{9}{Thu 02 Oct 2025 12:32}{Curvature}
+
+We start with the Riemann tensor. We are given a metric $g_{\mu \nu } $ on a manifold $M$. We want to find combinations of its derivatives that are tensors. We could do $\nabla _\mu g_{\rho \sigma } $, which is the simplest tensor. Unfortunately, this is 0 by definition, so this is useless.
+
+We use a trick to do this. Take a vector $V^\mu $ which is a rank 1 tensor. Then $\nabla _\mu \nabla _\nu V^\alpha $ is a rank 3 tensor. We are supposed to only use the metric though, but it turns out if we instead take the commutator
+\[
+	\left[ \nabla _\mu ,\nabla _\nu  \right] V^\alpha =\nabla _\mu \nabla _\nu V^\alpha -\nabla _\nu \nabla _\mu V^\alpha 
+\]
+is a tensor which is \emph{invariant} under the choice of $V$. This will evaluate to $R^\alpha _{\rho \mu \nu } V^\rho $. The left side is manifestly a tensor, since the derivative terms cancel (cuz they commute), and the part with only one derivative vanishes since we can pass to a frame where $\partial g$ vanishes, so we just get the part with the Christoffels. Now we must just show this equality.
+
+We work this out.
+\[
+	\nabla _\mu \left( \nabla _\nu V^\rho  \right) =\partial _\mu \left( \nabla_\nu V^\rho \right) +\Gamma _{\mu \alpha } ^\rho (\nabla _\nu V^\alpha )-\Gamma _{\mu \nu } ^\alpha (\nabla _\alpha V^\rho )-\left( \mu \leftrightarrow \nu  \right) 
+\]
+\[
+	=\partial _\mu \partial _\nu V^\rho +\partial _\mu \Gamma _{\nu \beta } ^\rho V^\beta +\Gamma 3_{\nu \beta } ^\rho \partial _\mu V^\beta +\Gamma _{\mu \alpha } ^\rho \left( \partial _\nu V^\alpha +\Gamma _{\nu \beta } ^\alpha V^\beta  \right) -\Gamma _{\mu \nu } ^\alpha \left( \partial _\alpha V^\rho +\Gamma _{\alpha \beta } ^\rho V^\beta  \right) -(\mu \leftrightarrow \nu )
+.\]
+Some stuff cancels giving
+\[
+	=\left( \partial _\mu \Gamma _{\nu \beta } ^\rho +\Gamma _{\mu \alpha } ^\rho \Gamma _{\nu \beta } ^\alpha -\left( \mu \leftrightarrow \nu  \right)  \right) V^\beta 
+.\]
+We see that the term in the parenthases is the rank 4 tensor $R^\rho _{\beta \mu \nu } $. Explicitly,
+\[
+	R^\rho _{\beta \mu \nu } =\partial _\mu \Gamma _{\nu \beta } ^\rho -\partial _\nu \Gamma _{\mu \beta } ^\rho +\Gamma _{\mu \alpha } ^\rho \Gamma ^\alpha _{\nu \beta } -\Gamma ^\rho _{\nu \alpha } \Gamma ^\alpha _{\mu \beta } 
+.\]
+
+There is another way to define it. Suppose we have a vector $V^\alpha $ which we parallel transport around flat space. On a \emph{curved} manifold, if we parallel transport, then when we come back to the same spot it could be pointing a \emph{different} direction. In particular, if there is \emph{any} curvature, the vector will always rotate (as long as we walk in more than 1 direction). Let's say we walk an infintesimal amount towards $A^\alpha $ then $B^\alpha $, then $-A^\alpha $ then $-B^\alpha $. In curved space, $V^\alpha $ undergoes some linear map $M^\alpha _\nu (A,B)V^\nu $. We Taylor expanded in small $A,B$. I don't care. The first nonzero term we get is
+\[
+	A^\mu B^\nu R^\alpha _{\beta \mu \nu } 
+.\]
+Wow the Riemann tensor does curvy stuff. However, it was only the leading term of the Taylor expansion. We will spend the remainder of this lecture showing it captures \emph{all} the invariant curvature of the manifold.
+
+Clearly, $R^{\rho } _{\sigma \mu \nu } =0$ when $g_{\mu \nu } =\eta _{\mu \nu } $ \emph{everywhere} in some coordinate system (flat spacetime). One direction is easy, since derivatives of $\eta _{\mu \nu } $ are 0.
+
+Start by choosing $p\in M$ and a dual vector $\omega _\mu $ at $p$ ($\omega \in T_pM$). We want to promote $\omega_\mu $ to a function $\omega _\mu (x)$, meaning it is a dual vector at any point $p$. We choose a path $x^\mu (\lambda )$ and parallel transport it along the path. This gives $\omega _\mu (x^\mu (\lambda ))$ by parallel transport (recall that is given by solving $0=\frac{\mathrm{D} }{\mathrm{d} \lambda } \omega _\mu =\frac{\mathrm{d} x^\nu }{\lambda } \nabla _\nu \omega _\mu $). This only promotes $\omega $ along the given curve, so we choose all possible curves. It's not clear this is well-defined, since two paths could be acted on by $\omega $ differently at the same point.
+
+However, recall that the differential in a transport around a square $\delta V^\alpha =R^\alpha _{\rho \mu \nu } A^\mu B^\nu V^\rho $. By assumption, this vanishes. Therefore, the differential in the change of $V^\alpha $ along different parallel transports vanishes, so parallel transporting along different curves is the same (parallel transport forward along the first and backwards along the second, it has to vanish, so they are the same). We thus have a well-defined promotion of $\omega $ to a dual vector at any point $\omega _\mu (x)$. Now note that if
+\[
+	\frac{\mathrm{d}x^\nu }{\mathrm{d}\lambda } \nabla _\nu \omega _\mu (x)=0\implies \nabla _\nu \omega _\mu =0
+,\]
+since this must hold for \emph{any} possible path, so dotting the derivative into the tensor always vanishes. We thus have
+\[
+	0=\partial _\mu \omega _\nu -\Gamma _{\mu \nu } ^\alpha \omega _\alpha 
+.\]
+Antisymmetrize on $\mu \nu $ (swap $\mu $ and $\nu $ then subtract from itself):
+\[
+	0=-\partial _\nu  \omega _\mu +\Gamma _{\nu \mu } ^\alpha \omega _\alpha +\partial _\mu \omega _\nu -\Gamma _{\mu \nu } ^\alpha \omega _\alpha =\partial _{\mu } \omega _\nu -\partial _\nu \omega _\mu 
+.\]
+This is because the Christoffel is symmetric on the two indices. Apparently this is similar to the electromagnetic field in terms of the Gauge potential $A_\mu $:
+\[
+	\partial _\mu A_\nu -\partial _\nu A_\mu =F_{\mu \nu } 
+\]
+for $F_{\mu \nu } $ the field strength. If the field strength is 0, then there is no field, so $A_\mu $ is a \emph{pure gauge}, so it is the gradient of a potential function $A_\mu =\partial _\mu \Phi $. This is of course because $\partial _\mu \omega _\nu -\partial _\nu \omega _\mu $ is something we remember from calc 3 as a test for when vector fields are conservative. Therefore, $\omega _\mu =\partial _\mu \Phi $ for some $\Phi $.
+
+Choose locally inertial coordinates at $p\in M$, such that $g_{\mu \nu } \to \eta _{\mu \nu } $ at $p$. We want to keep track of the coordinate transformation, so write $g_{\mu \nu } =\eta _{\alpha \beta } \omega _\mu ^{(\alpha )} \omega _\nu ^{(\beta )} $. This gives four 4-vectors $\omega_\mu ^{(\alpha =1)} $, and since each $\alpha $ gives a four vector, we have $\omega _\mu ^{(\alpha )} =\partial _\mu \Phi ^{(\alpha )} $. Since this extends \emph{everywhere} along the manifold, we are done since we can always write
+\[
+	g_{\mu \nu } =\eta _{\alpha \beta } \frac{\partial \Phi ^{(\alpha )} }{\partial x^\mu } \frac{\partial \Phi ^{(\beta )} }{\partial x^\nu } 
+.\]
+We have the new coordinate system $(x')^\alpha =\Phi ^{(\alpha )} (x)$, which turns the coordinate system into Minkowski everywhere.

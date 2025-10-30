@@ -25,7 +25,7 @@
 \tableofcontents
 \newpage
 
-\section{Introduction}
+\section{Introduction}\label{sec1}
 
 A group is (roughly) a set $G$, and an operation (usually addition or multiplication) on the elements of $G$. For example, the sets of real numbers, complex numbers, integers, and rational numbers are all groups under addition. Technically they are not groups under multiplication, but this is not very important for us.
 
@@ -93,7 +93,7 @@ We now present some examples.
 	Another example, as stated earlier, is the category $\Grp $ of \emph{groups} and \emph{group homomorphisms}. Some other high level examples are
 	\begin{itemize}
 		\item The category $\Top $ of topological spaces and continuous maps;
-		\item The category $\CG$ of compactly generated spaces and continuous maps;
+		\item The category $\CG$ of compactly generated topological spaces and continuous maps;
 		\item The category $\Ring $ of (unital) rings and (unital) ring homomorphisms;
 		\item The category $k$-$\mathcal{V} \mathrm{ect} $ of $k$-vector spaces and $k$-linear maps (if you haven't taken abstract algebra, ignore the $k$);
 		\item The category  $\Ab $ of abelian groups and group homomorphisms.
@@ -106,11 +106,295 @@ We shall now work through a more interesting example. In all the previous exampl
 \]
 and morphisms are defined as follows: for any $n,m\in\mathbb{Z} $, if $n\leq m$, then there is \emph{exactly one morphism} $n\to m$. If $n>m$, then there is \emph{no morphism} from $n$ to $m$. Since morphisms between integers are unique, we don't need to name them, since there is only one.
 
+Since $n\leq n$, there is exactly one morphism $n\to n$, so we define the identity as this morphism. Moreover, there is only way to define composition: if $m\leq n\leq k$, then $m\leq k$, meaning that there is precisely one arrow $m\to k$. The composite of the morphisms $m\to n$ and $n\to k$ is then defined as this arrow $m\to k$.
+
+Categories defined this way are called \emph{poset categories}. Any set $X$ endowed with a relation $\leq $ which is reflexive, transitive, and antisymmetric is called a \emph{poset}, and can be turned into a category in the same way. Our example had the added benefit of being \emph{well-ordered}, meaning either $n\leq m$ or $m\leq n$ for all $n,m$, but we do not need this fact in order to define a poset category. A nice example is give any set $X$, the power set $\mathcal{P} (X)$ together with the $\subseteq $ relation forms a poset, and hence a poset category.
+
+There are many interesting constructions we can make inside of categories. We will explore some of them later. For now, we would like to answer a different question. In \cref{2.1}, we had only one bullet point discussing objects, and every other bullet point was discussing morphisms. This means that although we are usually most interested in studying the objects in a category, the \emph{morphisms} are the data with the most information, so they are the real objects of interest. In other words, in order to study the objects of a category, it is most convenient to study the morphisms between them. The onus then is on us to define morphisms in such a way that they carry meaningful information about a category.
+
+With this in mind, we turn towards category theory itself. The objects of study in category theory are \emph{categories}, but the way to study objects in category theory is to study morphisms between them. Thus, it would be nice to have a notion of morphisms of \emph{categories}.
 
 \section{Functors and representable functors}
 
+\begin{definition}\label{3.1}
+	Let $\mathcal{C} ,\mathcal{D} $ be categories. A \emph{functor} $F$ from $\mathcal{C} $ to $\mathcal{D} $, written $F : \mathcal{C}  \to \mathcal{D} $, consists of two functions, both of which are also denoted $F$:
+	\begin{itemize}
+		\item An \emph{object function} $F : \Obj(\mathcal{C} )  \to \Obj(\mathcal{D} ) $;
+		\item A \emph{morphism function} $F : \Mor(\mathcal{C} ) \to \Mor(\mathcal{D} )$;
+	\end{itemize}
+	and these functions have to satisfy the following axioms.
+	\begin{enumerate}
+		\item $F$ commutes with domain and codomain. More precisely, if $f : x \to y$ in $\mathcal{C} $, then $F(f):F(x) \to F(y)$ in $\mathcal{D} $.
+		\item $F$ preserves identity. More precisely, if $1_x$ is the identity on some $x\in \mathcal{C} $, then $F(1_x)=1_{F(x)} $ is the identity on $F(x)\in \mathcal{D} $.
+		\item $F$ preserves composition. More precisely, if $f : x \to y$ and $g : y \to z$ in $\mathcal{C} $, then $F(g\circ f)=F(g)\circ F(f)$ in $\mathcal{D} $.
+	\end{enumerate}
+\end{definition}
+
+Functors are a good notion of morphisms between categories because they preserve basically all the information in a category. Recall that in \cref{sec1}, we said that because group homomorphisms preserved group structure, they were interesting to look at, because they made the structure of one group compatible with another. Functors are the same. They make the structure of one category compatible with another.
+
+Some examples of functors are the \emph{forgetful functors}. Let $U : \Grp  \to \Set $ be the functor which maps a group $(G,\cdot )$ to the underlying set $G$, and which maps group homomorphisms to themselves. The functor $U$ basically just ``forgets'' the group structure of a group, and views it as a set. It then views group homomorphisms simply as regular functions between regular sets. We call functors like this \emph{forgetful}, and most categories where objects have underlying sets admit a forgetful functor to $\Set $.
+
+\begin{example}\label{3.2}
+	A more important example of a functor is a representable functor. Let $\mathcal{C} $ be a category, and $c\in \mathcal{C} $. Recall that $\mathcal{C} (x,y)$ is the set of morphisms $x\to y$ in $\mathcal{C} $, so we can consider an object function $\mathcal{C} (c,-)$ which maps objects $x$ to the hom-set $\mathcal{C} (c,x)$. This function takes objects $x$ of $\mathcal{C} $, and maps them to \emph{sets} $\mathcal{C} (c,x)$, so if we can define a compatible action on morphisms, then this will give us a functor $\mathcal{C} (c,-): \mathcal{C}  \to \Set $.
+
+	To define action on morphisms, let $f : x \to y$. To prevent cumbersome notation, we will write $f_*$ instead of $\mathcal{C} (c,f)$. We want $f_*$ to be a morphism $\mathcal{C} (c,x)\to \mathcal{C} (c,y)$ in $\Set $. Morphisms in $\Set $ are just functions, so we can define $f_*$ like a normal function. Let $\varphi : c \to x$ be an element of $\mathcal{C} (c,x)$. Since $f : x \to y$, we note that $f\circ \varphi $ is a morphism $c\to x\to y$, and thus an element $f\circ \varphi \in \mathcal{C} (c,y)$. We can thus define $f_*(\varphi )=f\circ \varphi $. We call this \emph{postcomposition}. Indeed, this definition is functorial, although we leave it as an exercise to prove that this definition satisfies the functor axioms.
+\end{example}
+
+A functor $\mathcal{C} (c,-)$ is called a \emph{representable functor} represented by $c$, and $c$ is the representation for the functor. As we will see in \cref{sec5}, representable functors have interesting properties.
+
+The reader is at this point likely wondering if $\mathcal{C} (-,c)$ is a functor $\mathcal{C} \to \Set $ as well. Indeed, we can define the object function $x\mapsto \mathcal{C} (x,c)$, but we run into an issue with the morphism function. Let $f : x \to y$ in $\mathcal{C} $, and let $\varphi \in \mathcal{C} (x,c)$. Note that it is \emph{impossible} to compose $f$ and $\varphi $, so we cannot define a functor the same way as in \cref{3.2}. However, if we let $\varphi \in \mathcal{C} (y,c)$, then we note that we can compose $\varphi \circ f : x \to c$, giving us a function $\mathcal{C} (y,c)\to \mathcal{C} (x,c)$. This is called \emph{precomposition}, and we write the precomposition function as $f^* : \mathcal{C} (y,c) \to \mathcal{C} (x,c)$. We would like for this to also be a functor, but here is the issue. If $f : x \to y$ in $\mathcal{C} $, then $f^*: \mathcal{C} (y,c) \to \mathcal{C} (x,c)$ in $\Set $, meaning $\mathcal{C} (-,c)$ has \emph{flipped the direction} of the morphism $f$. \Cref{3.1} says that functors have to preserve the direction of $f$. Luckily, we can fix this with the notion of an \emph{opposite category}.
+
+\begin{construction}\label{3.3}
+	Let $\mathcal{C} $ be a category, and define a new category $\mathcal{C} ^{\mathrm{op}} $ as follows:
+	\begin{itemize}
+		\item $\Obj(\mathcal{C} ) =\Obj(\mathcal{C} ^{\mathrm{op}} ) $;
+		\item For any $x,y\in \mathcal{C} $, we have $\mathcal{C} (x,y)=\mathcal{C} ^{\mathrm{op}} (y,x)$. In other words, if $f : x \to y$ in $\mathcal{C} $, then $f : y \to x$ in $\mathcal{C} ^{\mathrm{op}} $. We basically have flipped the domain and codomain of all morphisms;
+		\item Identities are defined the same as in $\mathcal{C} $;
+		\item If $f : x \to y$ and $g : y \to z$ in $\mathcal{C} ^{\mathrm{op}} $, then $f : y \to x$ and $g : z \to y$ in $\mathcal{C} $. Note that $f\circ g$ exists in $\mathcal{C} $, so we define $g\circ f$ in $\mathcal{C} ^{\mathrm{op}} $ as $f\circ g$ in $\mathcal{C} $.
+	\end{itemize}
+	The category $\mathcal{C} ^{\mathrm{op}} $ is called the \emph{opposite category} of $\mathcal{C} $.
+\end{construction}
+
+Since $\mathcal{C} ^{\mathrm{op}} $ flips the direction of every morphism, we can view $\mathcal{C} (-,c)$ as a functor $\mathcal{C} ^{\mathrm{op}} \to \Set $, since every $f : x \to y$ in $\mathcal{C} $ is a morphism $f : y \to x$ in $\mathcal{C} ^{\mathrm{op}} $, which points in the same direction as $f^*$ in $\Set $. Functors whose domain is an opposite category are called \emph{contravariant functors}. We usually just think of contravariant functors as functors which \emph{flip} the direction of domain, codomain, and composition. Functors of the form $\mathcal{C} (-,c)$ are also called representable.
+
 \section{(Co)limits}
 
-\section{Natural transformations and Yoneda}
+Oftentimes in category theory, asking whether two objects $c,d$ are \emph{equal} is not useful, and it is more useful to ask whether or not they \emph{have the same categorical propeties}. In other words, two objects which behave the same way can be \emph{thought of} as being exactly equal, since they have the exact same properties in their category. To rigorously define when two objects have the same properties, we introduce the notion of an \emph{isomorphism}.
+
+\begin{definition}\label{4.1}
+	Let $\mathcal{C} $ be a category, and $f : x \to y$ in $\mathcal{C} $. We say the morphism $f$ is an \emph{isomorphism} if there is another morphism $g : y \to x$ such that $f\circ g=1_y$ and $g\circ f=1_x$. We call $g$ the \emph{inverse} of $f$, and usually write it as $f^{-1} $. We may also refer to isomorphisms as \emph{invertible morphisms}. If there is an isomorphism between two objects $x$ and $y$, then we call those objects \emph{isomorphic}, and write $x \cong y$. We may also write $f : x \cong y$ to denote that the isomorphism is given by $f$.
+\end{definition}
+
+Let $f : x \to y$ be an isomorphism. Note that any morphism $\varphi : x \to z$ can be turned into a morphism $y\to z$ by precomposing by $f^{-1} $, and any morphism $\varphi : y \to z$ can be turned into a morphism $x\to z$ by precomposing by $f$. Since the data of a category is encoded in morphisms, two objects should have the same cateorical properties if their morphisms are the same. Thus, we might think that isomorphic objects have the same categorical properties, since we can switch morphisms around between them. We will see that indeed, isomorphic objects can easily be thought of as the same.
+
+With the notion of isomorphism defined, we can now turn to likely the most powerful notion in all of category theory: a \emph{universal property}. We begin with an informal (but sufficient) description, and later we introduce the formal definition.
+
+It is most convenient to begin with an example. Let $x,y\in \mathcal{C} $ be objects of some category $\mathcal{C} $. A \emph{product} of $x$ and $y$, denoted $x\times y$, is an object $x\times y\in \mathcal{C} $ toghether with morphisms $\pi _x : x\times y \to x$ and $\pi _y : x\times y \to y$ called the \emph{natural projections}, which satisfies the following propery: let $z\in \mathcal{C} $ be any object of $\mathcal{C} $, and $f : z \to x$ and $g : z \to y$ be any morphisms. We can write this information using a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & x \\
+z \ar[" f ", ur] \ar[" g "', dr]  & x\times y \ar[" \pi _x "', u] \ar[" \pi _y ", d]  \\
+ & y
+\end{tikzcd}\]
+A product $x\times y$ has the property that for any diagram like this, there is a \emph{unique} morphism $\varphi : z \to x\times y$ indicated by the dashed arrow
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & x \\
+z \ar[" f ", ur] \ar[" g "', dr] \ar[" \varphi  ", dashed, r]  & x\times y \ar[" \pi _x "', u] \ar[" \pi _y ", d]  \\
+ & y
+\end{tikzcd}\]
+making the diagram \emph{commute}.
+
+A diagram \emph{commutes} when any two paths between two objects are the same. In this diagram, there are two paths from $z$ to $x$: we can take $f : z \to x$, or we can take $\pi _x \circ \varphi : z \to x\times y\to x$. For the diagram to \emph{commute}, these must be the same, meaning
+\[
+	\pi _x\circ \varphi =f
+.\]
+Similarly, we have
+\[
+	\pi _y\circ \varphi =g
+.\]
+
+The reader is likely confused why we are calling this a \emph{product}. To see why, let $X,Y$ be sets, and consider the \emph{cartesian product} $X\times Y$. Define the functions $\pi _X : X\times Y \to X$ and $\pi _Y : X\times Y \to Y$ by $(x,y)\mapsto x$ and $(x,y)\mapsto y$, respectively. I claim that $X\times Y$ is a product of $X$ and $Y$, in the above sense.
+
+Indeed, let $f : Z \to X$ and $g : Z \to Y$ be functions. We want to define a function $\varphi : Z \to X\times Y$ such that $f(z)=(\pi _X\circ \varphi )(z)$ and $g(z)=(\pi _Y\circ \varphi )(z)$. Define $\varphi (z)=(x,y)$. We then have
+\[
+	f(z)=\pi _X(x,y)=x,\qquad g(z)=\pi _Y(x,y)=y
+.\]
+It follows that $x=f(z)$ and $y=g(z)$, meaning we are forced to define $\varphi (z)=(f(z),g(z))$. This definition makes the diagram commute, and it was \emph{forced}, meaning it is unique. Therefore, the cartesian product is indeed a product.
+
+However, there's more. In every branch of math, there is a notion of a product. We can consider a \emph{direct product} of groups, the \emph{product topology} for two topologiacal spaces, a \emph{direct product} of rings, a \emph{cartesian product} of vector spaces, and so on. \emph{All} of these products are products in the above sense. In other words, the notion of a product introduced earlier is a \emph{universal} definition for a product in \emph{any category}. This is the idea behind a universal property. To formalize what a universal property is, we introduce the notion of a \emph{cone}.
+
+\begin{definition}\label{4.2}
+	Let $\mathcal{J} $ be a (small) category, and let $F : \mathcal{J}  \to \mathcal{C} $ be a functor. A \emph{cone} for $F$ is an object $c\in \mathcal{C} $, and a collection $\left\{ \mu_j : c \to F(j) \right\}_{j\in \mathcal{J} } $ of morphisms of $\mathcal{C} $, such that for every $f : i \to j$ in $\mathcal{J} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c \ar[" \mu_j ", dr] \ar[" \mu _i "', dl]  &  \\
+	F(i)\ar[" F(f) "', rr]  &  & F(j)
+	\end{tikzcd}\]
+	commutes. The object $c$ is called the vertex of the cone.
+\end{definition}
+
+The reason we call this a cone is as follows. Instead of thinking of $F$ as a functor, think of it as a \emph{diagram}. Every object $j\in \mathcal{J} $ simply indexes the object $F(j)$ in $\mathcal{C} $, and every $f : i \to j$ in $\mathcal{J} $ simply indexes the morphism $F(f): F(i) \to F(j)$ in $\mathcal{C} $. Thus, we can imagine visualizing the image of $F$ as a massive diagram in $\mathcal{C} $ corresponding to the entire category of $\mathcal{J} $. Now imagine the object $c$ sitting above the entire diagram, with morphisms $\mu _j$ coming down to every single object. This shape looks a little like a cone, hence we call it a cone.
+
+For example, consider the category $\mathcal{J} $ with two objects $x,y\in \mathcal{J} $, and \emph{no} non-identity morphisms in $\mathcal{J} $. A functor $F : \mathcal{J}  \to \mathcal{C} $ is then just a choice of two objects $c_x,c_y\in \mathcal{C} $, and then a map $x\mapsto c_x$ and $y\mapsto c_y$. A \emph{cone} for $F$ is then an object $c\in \mathcal{C} $, and two morphisms $\mu_x : c \to c_x$ and $\mu_y : c \to c_y$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & c \ar[" \mu _y ", dr] \ar[" \mu_x "', dl]  &  \\
+x &  & y
+\end{tikzcd}\]
+Since there are no non-identity morphisms in $\mathcal{J} $, there is no diagram to make commute.
+
+\begin{definition}\label{4.3}
+	Let $F : \mathcal{J}  \to \mathcal{C} $ be a functor, and let $(c,\mu ),(d,\nu )$ be cones for $F$. A \emph{morphism} $f : (c,\mu ) \to (d,\nu )$ of cones is a morphism $f : c \to d$ in $\mathcal{C} $ such that for any $g : i \to j$ in $\mathcal{J} $, the diagram commutes:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c \ar[" f ", d] \ar[" \mu_j ", bend left, ddr] \ar[" \mu _i "', bend right, ddl]  &  \\
+	 & d \ar[" \nu _j ", dr] \ar[" \nu _i "', dl]  &  \\
+	F(i)\ar[" F(g) "', rr]  &  & F(j)
+	\end{tikzcd}\]
+\end{definition}
+
+Including the morphism $g$ in the definition is not required, since that part of the diagram commutes for any cone, but we include it to keep the idea of a cone fresh in the reader's mind. This allows us to construct a category $\operatorname{Cone} (F)$ of cones for $F$. We will combine this category with the following two definitions:
+\begin{definition}\label{4.4}
+	An object $i$ in a category $\mathcal{C} $ is \emph{initial} if for all $x\in \mathcal{C} $, there is exactly one morphism $i\to x$. An object $t\in \mathcal{C} $ is \emph{terminal} or \emph{final} if for all $x\in \mathcal{C} $, there is exactly one morphism $x\to t$.
+\end{definition}
+
+Terminal objects in the category $\operatorname{Cone} (F)$ are cones $(t,\lambda )$ such that for any cone $(c,\mu )$, there is a \emph{unique morphism} $f : c \to t$ making the diagram commute:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c \ar[" f ", dashed, d] \ar[" \mu_j ", bend left, ddr] \ar[" \mu _i "', bend right, ddl]  &  \\
+	 & t \ar[" \lambda _j ", dr] \ar[" \lambda _i "', dl]  &  \\
+	F(i)\ar[" F(g) "', rr]  &  & F(j)
+	\end{tikzcd}\]
+	We again indicate unique morphisms by dashed arrows. Terminal objects in $\operatorname{Cone} (F)$ are called \emph{limits}.
+
+	\begin{definition}\label{4.5}
+		Let $F : \mathcal{J}  \to \mathcal{C} $. A \emph{limit} for $F$ is a \emph{terminal cone} $(t,\lambda )$, also called an \emph{limiting cone}. We usually abuse language and call the object $t$ the limit, forgetting the morphisms $\lambda $. We write $\lim F$ for the object $t$ in the limiting cone.
+	\end{definition}
+
+	Note that a functor can have \emph{more than one limit}, and limits for a functor may not exist at all. However, if they exist, then they are all \emph{isomorphic} to each other, meaning they behave the exact same way. This is proven by the following proposition:
+	\begin{proposition}\label{4.6}
+		Let $\mathcal{C} $ be a category. All initial objects (if they exist) are isomorphic, and all final objects (if they exist) are isomorphic.
+	\end{proposition}
+	\begin{proof}
+		We prove the statement for final objects. Let $s,t\in \mathcal{C} $ be final. Since $t$ is final, there is exactly one morphism $s\to t$, and likewise there is only one morphism $t\to s$. If we compose these morphisms, we get an arrow $s\to s$ or an arrow $t\to t$. Since $s,t$ are terminal, there is only one morphism $s\to s$ and $t\to t$, and this must be the identity by the category axioms. Thus, the arrows $s\to t$ and $t\to s$ are inverses.
+	\end{proof}
+	
+	This shows that all objects in $\operatorname{Cone} (F)$ are isomorphic. However, since morphisms of cones are also morphisms in $\mathcal{C}$, we have that the vertices of cones are \emph{also isomorphic in} $\mathcal{C} $. Thus, limits are all isomorphic as objects of the target category.
+
+	To see an example of a limit, consider the diagram $\mathcal{J} $ with two objects and no nontrivial morphisms again, and $F : \mathcal{J}  \to \mathcal{C} $. A cone for that we said was simply some $c\in \mathcal{C} $ and morphisms $\mu _x : c \to x$ and $\mu_y : c \to y$. A \emph{limit} for this diagram is then a cone $(\lim F,\lambda )$ such that given another cone $(c,\mu )$, there is a unique dashed arrow as indicated
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c \ar[" \mu _y ", dr] \ar[" \mu _x "', dl] \ar[dashed, d]  &  \\
+	x & \lim F \ar[" \lambda_x ", l] \ar[" \lambda _y "', r] & y
+	\end{tikzcd}\]
+	rendering the diagram commutative. This is \emph{precisely} the same definition as a product $x\times y$ of $x$ and $y$. In other words, \emph{products are limits}.
+
+	We now see the power of limits. Recall that the definition we gave above for products was a ``universal propety'' in the sense that it provided a way to construct products in any category. We were able to formalize this notion by defining a category $\mathcal{J} $ which encoded the information of this universal property in such a way that products are simply limits of functors $\mathcal{J} \to \mathcal{C} $. In other words, the category $\mathcal{J} $ is a \emph{universal} way to construct products in any category.
+
+	Another example of a limit is as follows. Consider the category whose only objects and nontrivial morphisms are indicated in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x \ar[" f ", r]  & z & y \ar[" g "', l] .
+	\end{tikzcd}\]
+	A cone for a functor $F : \mathcal{J}  \to \mathcal{C} $ is an object $c$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \mu_y ", r] \ar[" \mu _z ", dr] \ar[" \mu _x "', d]  & F(y)\ar[" F(g) ", d]  \\
+	F(x)\ar[" F(f) "', r]  & F(z)
+	\end{tikzcd}\]
+	commutes. We prefer not to write the morphism $\mu _z$, since we can always figure out how it is defined using the fact that the diagram commutes: we can simply define it as $F(g)\circ \mu _y$ or $F(f)\circ \mu _x$. It is enough to ask that the square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \mu _y ", r] \ar[" \mu _x "', d]  & F(y)\ar[" F(f) ", d]  \\
+	F(x)\ar[" F(f) "', r]  & F(z)
+	\end{tikzcd}\]
+	commutes. A \emph{limit} for $F$ is then a universal cone:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c \ar[" \mu _y ", bend left, drr] \ar[" \mu _x "', bend right, ddr] \ar[dashed, dr]  &  &  \\
+	 & \lim F \ar[" \lambda_y ", r] \ar[" \lambda _x "', d]  & F(y)\ar[" F(g) ", d]  \\
+	 & F(x)\ar[" F(f) "', r]  & F(z)
+	\end{tikzcd}\]
+	commutes. This is a special type of construction known as a \emph{pullback}, and because we defined it as a limit, we now have a way to define it in \emph{any category}, by simply defining the correct functor $\mathcal{J} \to \mathcal{C} $. The intersection of a family of sets can even be defined as a pullback.
+
+	Because limits can be thought of as universal constructions, we say they are \emph{universal}, or that they satisfy \emph{universal properties}. For example, might say that a product $x\times y$ is \emph{universal} with respect to mapping to $x$ and $y$. This is decoded as: construct a functor such that a cone contains a map to $x$ and $y$ and no other data, and a product is then a limit for that functor. A pullback could also be described as ``universal with respect to commutative squares''.
+
+	Before we close the section, there is a dual notion to limits. If we \emph{flip the direction} of the morphisms $\mu $ in a cone $(c,\mu )$, we obtain a \emph{cocone}.
+
+	\begin{definition}\label{4.6}
+		Let $F : \mathcal{J}  \to \mathcal{C} $ be a functor. A \emph{cocone} for $F$ is an object $c\in\mathcal{C} $, and a collection of morphisms $\left\{ \mu _j : F(j) \to c \right\}_{j\in \mathcal{J} } $, such that for any $f : i \to j$ in $\mathcal{J} $, the diagram
+		\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & c &  \\
+		F(i)\ar[" \mu _i ", ur] \ar[" F(f) "', rr]  &  & F(j)\ar[" \mu _j "', ul] 
+		\end{tikzcd}\]
+		commutes.
+	\end{definition}
+	A morphism $f : (c,\mu ) \to (d,\nu )$ of cocones is then given by flipping the arrows for a morphism of cones:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & d &  \\
+	 & c \ar[" f "', u]  &  \\
+	F(i)\ar[" \mu_i ", ur] \ar[" \nu_i ", bend left, uur] \ar[" F(f) "', rr]  &  & F(j)\ar[" \mu_j "', ul] \ar[" \nu _j "',bend right,  uul] 
+	\end{tikzcd}\]
+	We then form a category $\operatorname{Cone} (F)$ of cocones for $F$. This is the same as the notation for the category of cones, so usually we specify whether we are considering cones or cocones. However, we may also simply refer to cocones as cones, which makes it slightly confusing. Usually, it will be clear from contet.
+
+	A \emph{colimit} for the functor $F$, denoted $\colim F$, is an \emph{initial} cocone. Diagrammatically, this looks like
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c &  \\
+	 & \colim F \ar[dashed, u]  &  \\
+	F(i)\ar[" \lambda_i ", ur] \ar[" \mu _i ", bend left, uur] \ar[" F(f) "', rr]  &  & F(j)\ar[" \lambda _j "', ul] \ar[" \mu _j "',bend right,  uul] 
+	\end{tikzcd}\]
+	For example, if $\mathcal{J} $ is the category with two objects and no nontrivial morphisms,  a colimit for $F : \mathcal{J}  \to \mathcal{C} $ is a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c &  \\
+	c_x \ar[" \mu _x ", ur] \ar[" \lambda_x "', r]  & \colim F \ar[dashed, u]  & c_y\ar[" \mu _y "', ul] \ar[" \lambda _y ", l] 
+	\end{tikzcd}\]
+	We call this a \emph{coproduct}, and denote it by $c_x \amalg c_y$. In $\Set $, this is the \emph{disjoint union}.
+
+	If $\mathcal{J} $ is the category whose only objects and nontrivial morphisms are given by the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x & z \ar[" g ", r] \ar[" f "', l]  & y,
+	\end{tikzcd}\]
+	then a colimit for $F : \mathcal{J}  \to \mathcal{C} $ is a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(z)\ar[" F(g) ", r] \ar[" F(f) "', d]  & F(y)\ar[" \lambda _y ", d] \ar[" \mu_y ", bend left, ddr]  &  \\
+	F(x)\ar[" \lambda _x "', r] \ar[" \mu _x "', bend right, drr]  & \colim F \ar[dashed, dr]  &  \\
+	 &  & c
+	\end{tikzcd}\]
+	We have recalled that we may drop the arrows $F(z)\to \colim F,c$ by the same logic as with pullbacks. We call these objects \emph{pushouts}. A union of a family of sets is an example of a pushout. Similarly to limits, colimits are unique up to isomorphism, and are said to satisfy \emph{universal properties}.
+
+\section{Natural transformations and Yoneda}\label{sec5}
+
+We now come to the final section of these notes. We have defined categories, functors, and the most powerful way of constructing important objects in categories: universal properties. We now would like to define an extremely important type of category: a functor category.
+
+\begin{definition}\label{5.1}
+	Let $F,G : \mathcal{C}  \to \mathcal{D} $ be functors. A \emph{natural transformation} $\alpha : F \Rightarrow G$ is a collection of morphisms such that for each $x\in \mathcal{C} $, there is a morphism $\alpha _x : F(x) \to G(x)$ in $\mathcal{D} $, such that for any morphism $f : x \to y$ in $\mathcal{C} $, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(x)\ar[" \alpha _x ", r] \ar[" F(f) "', d]  & G(x)\ar[" G(f) ", d]  \\
+	F(y)\ar[" \alpha _y "', r]  & G(y)
+	\end{tikzcd}\]
+	commutes. We call squares of this form \emph{naturality squares}, and we call the commutativity condition the \emph{naturality condition}.
+\end{definition}
+Of course, natural transformations can be composed. If $\alpha : F \Rightarrow G$ and $\beta : G \Rightarrow H$, then for any $f : x \to y$ there is a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+F(x)\ar[" \alpha _x ", r] \ar[" F(f) "', d]  & G(x)\ar[" \beta _x ", r] \ar[" G(f) "', d]  & H(x)\ar[" H(f) ", d]  \\
+F(y)\ar[" \alpha _y "', r]  & G(y)\ar[" \beta _y "', r]  & H(y)
+\end{tikzcd}\]
+Of course, if we ignore the arrow $G(x)\to G(y)$, we get that the morphisms $\beta _x \circ \alpha _x$ form a natural transformation $\beta \circ \alpha : F \Rightarrow H$. Thus, we obtain a \emph{category} $\Fun(\mathcal{C} ,\mathcal{D} )$, where objects are functors $\mathcal{C} \to \mathcal{D} $, and morphisms are natural transformations. This category is also denoted $\mathcal{D} ^\mathcal{C} $. We also obtain a notion of a \emph{natural isomorphism}, which is an invertible natural transformation.
+
+If $F,G$ are functors such that there are isomorphisms $F(x)\cong G(x)$ for each object $x$, we say this isomorphism is \emph{natural in x} if the isomorphisms assemble into a natural isomorphism $F\cong G$.
+
+Recall that isomorphic objects are basically the same. Thus, isomorphic functors are basically the same. Amongst other things, this allows us to extend our definition of \emph{representable} functors.
+
+\begin{definition}\label{5.2}
+	A functor $F : \mathcal{C}  \to \Set $ is \emph{representable} if there is an object $c\in \mathcal{C} $ and a natural isomorphism $F\cong \mathcal{C} (c,-)$. Similarly, a contravariant functor $F : \mathcal{C} ^{\mathrm{op}}  \to \Set $ is representable if there is an isomorphism $F\cong \mathcal{C} (-,c)$.
+\end{definition}
+
+An interesting fact is that any functor $F : \mathcal{C}  \to \Set $ is a colimit of representable functors. This fact is more useful than it may sound. We break from our usual notation for hom-sets and write $\Nat(F,G)$ to denote the set of natural transformations from $F$ to $G$.
+
+Now that we have defined natural transformations, we can discuss a result of fundamental importance in category theory.
+
+\begin{lemma}[Yoneda]\label{5.3}
+	Let $F : \mathcal{C}  \to \Set $ be a functor. Then for any $c\in \mathcal{C} $, there is an isomorphism
+	\[
+		\Nat(\mathcal{C} (c,-),F)\cong F(c)
+	\]
+	natural in $c$. Similarly, if $G : \mathcal{C} ^{\mathrm{op}}  \to \Set $ is a contravariant functor, then there is an isomorphism
+	\[
+		\Nat (\mathcal{C} (-,c),G)\cong G(c)
+	\]
+	natural in $c$.
+\end{lemma}
+\begin{proof}
+	We prove only the isomorphism for the first case, and leave the second case and naturality as an exercise. We claim the isomorphism is given by $\alpha \mapsto \alpha_c(1_c)$. This is given by letting $f : c \to d$ in $\mathcal{C} $, and chasing the identity around the naturality square
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} (c,c)\ar[" \alpha _c ", r] \ar[" f_* "', d]  & F(c)\ar[" F(f) ", d]  \\
+	\mathcal{C} (c,d)\ar[" \alpha _d "', r]  & F(d)
+	\end{tikzcd}\]
+\end{proof}
+One result of importance here is the Yoneda embedding. Consider the case where $G=\mathcal{C} (-,d): \mathcal{C} ^{\mathrm{op}}  \to \Set $. Plugging this in gives isomorphisms
+\[
+	\Nat(\mathcal{C} (-,c),\mathcal{C} (-,d))\cong \mathcal{C} (c,d)
+.\]
+In particular, each natural transformation $\mathcal{C} (-,c)\Rightarrow \mathcal{C} (-,d)$ is simply given by having each component be \emph{postcomposition} by some $f : c \to d$ in $\mathcal{C} $. This gives us a \emph{functor} $y : \mathcal{C} ^{\mathrm{op}}  \to \Fun(\mathcal{C} ,\Set )$ by mapping $c\mapsto \mathcal{C} (c,-)$, and mapping morphisms to postcomposition $f\mapsto f_*$. This functor is called the \emph{Yoneda embedding}, and it is of importance because it is \emph{isomorphic} on hom-sets. We call such a functor full and faithful.
+
+The Yoneda embedding is very important in category theory, and shows up everywhere. For example, if I end up giving a second talk, we will use it to show that $n$-simplices of simplicial sets $K$ are equivalent to morphisms $\Delta ^n\to K$, to find a cosimplicial object $\Delta ^{\bullet} $ in $\sSet $, and to define faces, horns, and boundaries of the standard $n$-simplices.
+
+\section{Further reading}
+
+These notes are admittedly terse due to the time constraint on the talk they acompany, and although the reader has now been exposed to many important concepts in category theory and has seen how categorical arguments, they may struggle to apply these concepts if all they have seen are these notes. If the reader is interested, we encourage them to turn to a more complete resource for continuing their study of the theory.
+
+Unfortunately, category theory is generally only taught at the graduate level. Although it is definitely understandable with only basic knowledge of functions and sets, it is difficult to motivate, so nearly all authors assume knowledge with algebra, topology, or another higher level undergraduate subject. Of course, it is not necessary to understand all examples an author gives, so categorical texts are definitely approachable with only some knowledge of the above subjects, but if the reader is fully unfamiliar with these fields, we caution the reader not to explore further down the rabbit hole for now.
+
+The main text we recommend is Emily Riehl's \href{https://emilyriehl.github.io/files/context.pdf}{\emph{Category Theory in Context}}, a modern presentation of the basic theory. We also recommend Tom Leinster's \href{https://arxiv.org/abs/1612.09375}{\emph{Basic Category Theory}}, a more approachable presentation, albeit covering less material. We also note that the canonical reference on category theory is Saunders Mac Lane's \href{https://link.springer.com/book/10.1007/978-1-4757-4721-8}{\emph{Categories for the Working Mathematician}}, but we discourage learning from here because Mac Lane has a very dense writing style. This author is speaking from experience here. This book is also not available freely online, unlike the previous two, but it is quite a solid referenceso we acknowledge it here.
 \end{document}
 

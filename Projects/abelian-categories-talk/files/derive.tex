@@ -1,0 +1,180 @@
+\section{Derived functors}\label{sec7}
+
+One of the numerous reasons that functors are useful in math is because they preserve isomorphisms. Since we are usually interested in studying objects up to isomorphism, the existence of a functor allows us to move isomorphisms from one category to another. However, recall that we are interested in studying chain complexes up to \emph{quasi-isomorphism}, so it's natural to ask how functors interact with quasi-isomorphisms. We will specialize our discussion to \emph{additive} functors, since it is fairly important that functors preserve 0, which additive functors do. It will be useful to lead with the following construction.
+
+\begin{construction}\label{7.1}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive functor between abelian categories. Then we may define the functor $\Ch(F) : \Ch(\mathcal{A} )  \to \Ch(\mathcal{B} ) $ as follows. Given a chain complex $C_{\bullet} $ in $\Ch(\mathcal{A} ) $, define $\Ch(F) (C_{\bullet} )$ as the chain complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots\ar[" F(d_{n+2} ) ", r]  & C_{n+1} \ar[" F(d_{n+1} ) ", r]  & C_n\ar[" F(d_n) ", r]  & C_{n-1} \ar[" F(d_{n-1} ) ", r]  & \cdots
+	\end{tikzcd}\]
+	Note that this is indeed a chain complex, since additive functors induce \emph{abelian group homomorphisms} $\mathcal{A} (C_i,C_{i-1} )\to \mathcal{B} (F(C_i),F(C_{i-1} )$. In particular, they preserve the zero morphism, meaning that
+	\[
+		F(d_{i-1} )\circ F(d_i)=F(d_{i-1} \circ d_i)=F(0)=0
+	.\]
+	To define the action of $\Ch(F)$ on morphisms, let $f_{\bullet} : C_{\bullet}  \to D_{\bullet} $ be a morphism of chain complexes in $\Ch(\mathcal{A} ) $. Then by functoriality of $F$, the diagram
+	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
+	\cdots \ar[" F(d_{n+2} ) ", r] & F(C_{n+1}) \ar[" F(d_{n+1} ) ", r] \ar[" F(f_{n+1} ) "', d]  & F(C_n)\ar[" F(d_n) ", r] \ar[" F(f_n) "', d]  & F(C_{n-1} )\ar[" F(f_{n-1} ) "', d] \ar[" F(d_{n-1} ) ", r]  & \cdots \\
+	\cdots \ar[" F(d_{n+2} ) ", r] & F(C_{n+1} )\ar[" F(d_{n+1} ) "', r]  & F(C_n)\ar[" F(d_n) "', r]  & F(C_{n-1} )\ar[" F(d_{n-1} ) "', r]  & \cdots
+	\end{tikzcd}\]
+	Thus, $\Ch(F)(f_{\bullet} )$ is a morphism of chain complexes $\Ch(F)(C_{\bullet} )\to\Ch(F)(D_{\bullet} )$.
+\end{construction}
+
+With \cref{7.1} out of the way, we would like to know if additive functors preserve quasi-isomorphisms. Unfortunately, they do not in general. However, there is an important class of functions that \emph{does} preserve quasi-isomorphisms.
+
+\begin{definition}\label{7.2}
+	Let $\mathcal{A} $ be an abelian category. A \emph{short exact sequence} in $\Ch(\mathcal{A} ) $ is an exact complex of the form
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" 0 ", r]  & A\ar[" \varphi  ", r]  & B \ar[" \psi  ", r]  & C\ar[" 0 ", r]  & 0.
+	\end{tikzcd}\]
+\end{definition}
+\begin{definition}\label{7.3}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive functor between abelian categories. We say $F$ is \emph{exact} if $\Ch(F)$ takes short exact sequences to short exact sequences. More concretely, if
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" 0 ", r]  & A \ar[" \varphi  ", r]  & B \ar[" \psi  ", r]  & C\ar[" 0 ", r]  & 0
+	\end{tikzcd}\]
+	is a short exact sequence in $\Ch(\mathcal{A} ) $, then
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" 0 ", r]  & F(A)\ar[" F(\varphi ) ", r]  & F(B)\ar[" F(\psi ) ", r]  & F(C)\ar[" 0 ", r]  & 0
+	\end{tikzcd}\]
+	is a short exact sequence in $\Ch(\mathcal{B} ) $.
+\end{definition}
+\begin{proposition}\label{7.4}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive functor. If $F$ is exact, then $\Ch(F) $ preserves quasi-isomorphisms.
+\end{proposition}
+\begin{proof}
+	If $F$ is exact, then it can be shown that it preserves finite limits and colimits. It thus preserves homology, which is equivalent to saying it \emph{commutes} with homology. If $H_{\bullet} (f_{\bullet} )$ is an isomorphism, then $H_{\bullet} (\Ch(F)(f_{\bullet} )=\Ch(F)(H_{\bullet} (f_{\bullet} ))$ is an isomorphism since functors preserve isomorphisms.
+\end{proof}
+
+Most functors are in general not exact. However, there are two \emph{much} more common conditions that can be thought of as ``almost exact''.
+
+\begin{definition}\label{7.4}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive functor between abelian categories. We say $F$ is \emph{left exact} if for any short exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" 0 ", r]  & A\ar[" \varphi  ", r]  & B \ar[" \psi  ", r]  & C\ar[" 0 ",r]  & 0,
+	\end{tikzcd}\]
+	the sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" 0 ", r]  & F(A)\ar[" F(\varphi ) ", r]  & F(B)\ar[" F(\psi ) ", r]  & F(C)
+	\end{tikzcd}\]
+	is exact. Similarly, we say $F$ is \emph{right exact} if the sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	F(A)\ar[" F(\varphi ) ", r]  & F(B)\ar[" F(\psi ) ", r]  & F(C)\ar[" 0 ", r]  & 0
+	\end{tikzcd}\]
+	is exact.
+\end{definition}
+
+Left and right exact functors abound in homological algebra. For example, if $F\dashv G$ is an adjunction, then $F$ is right exact and $G$ is left exact. This is a special case of the following proposition:
+
+\begin{proposition}\label{7.6}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive functor between abelian categories. Then $F$ is left exact if it preserves finite limits. Dually, $F$ is right exact if it preserves finite colimits.
+\end{proposition}
+\begin{proof}
+	Kernels are (finite) limits and cokernels are (finite) colimits. It thus suffices by \cref{4.18} to show that additive functors which preserve finite limits must preserve monics, and the other statement follows by duality. Indeed, by \cref{4.13}, monics are kernels, which are (finite) limits, which are preserved by $F$.
+\end{proof}
+
+Not many functors preserve both finite limits and colimits, but quite a few preserve at least one of those. For example, we have
+
+\begin{corollary}\label{7.7}
+	Let $\mathcal{A} $ be an abelian category and $X\in \mathcal{A} $. Then the representable functor $\mathcal{A} (X,-): \mathcal{A}  \to \Ab $ is left exact, and $\mathcal{A} (-,X): \mathcal{A} ^{\mathrm{op}}  \to \Ab $ is right exact.
+\end{corollary}
+
+\begin{corollary}\label{7.8}
+	Let $V$ be a $k$-vector space (or $R$-module). Then $-\otimes_kV$ is right exact.
+\end{corollary}
+\begin{proof}
+	$-\otimes_k V \dashv k$-$\Vect(V,-)$.
+\end{proof}
+
+\begin{remark}\label{7.9}
+	An $R$-module $M$ is \emph{flat} if $-\otimes_RM$ is exact. For those unfamiliar with $R$-modules, vector spaces are a special case of $R$-modules. However, all $k$-vector spaces are projective, and all projective modules turn out to be flat. Thus, all $k$-vector spaces are flat.
+\end{remark}
+
+Since left and right exact functors are \emph{almost} exact, it would be nice if we could turn them into exact functors somehow. This yields the notion of a \emph{derived functor}. We will take our first step towards their construction with the notion of a \emph{point-set derived functor}. These do not exist in general, and we must restrict to the category $\Ch^-(\mathcal{A} ) $.
+
+\begin{definition}\label{7.10}
+	Let $\mathcal{A} $ be an abelian category. A chain complex $C_{\bullet} $ is \emph{bounded above} if $C_n=0$ for all $n>0$, and it is \emph{bounded below} if $C_n=0$ for all $n<0$. We write $\Ch^+(\mathcal{A} ) $ for the full subcategory of $\Ch(\mathcal{A} ) $ spanned by chain complexes which are bounded \emph{below} (the $+$ indicates they are concentrated in positive degrees), and $\Ch^-(\mathcal{A} ) $ for the category of chain complexes bounded \emph{above}.
+\end{definition}
+
+Note that if $F : \mathcal{A}  \to \mathcal{B} $ is additive, then there are functors $\Ch^\pm(F) : \Ch^\pm(\mathcal{A} )  \to \Ch^\pm(\mathcal{B} ) $ defined analogously to \cref{7.1}.
+
+\begin{construction}\label{7.11}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be right exact, and let $\mathcal{A} $ have enough projectives. We will define a functor $\mathbb{L} F : \Ch^-(\mathcal{A} )  \to \Ch^-(\mathcal{B} ) $ as follows. Let $C_{\bullet} $ be a chain complex in $\Ch^-(\mathcal{A} ) $, and let $P_{\bullet} $ be a complex of projectives with a quasi-isomorphism $\epsilon : P_{\bullet} \to C_{\bullet} $. It is a (nontrivial) fact that such a complex can always be chosen in a functorial way. We will discuss this more in-depth later for a special case. For now, we define $\mathbb{L} F(C_{\bullet} )=\Ch^-(F)(P_{\bullet} )$. The action on morphisms is not obvious. Given $f_{\bullet} : C_{\bullet}  \to D_{\bullet} $, together with $\epsilon _C : P_{\bullet}^C  \to C_{\bullet} $ and $\epsilon_D : P^D_{\bullet}  \to D_{\bullet} $, we obtain $\Ch^-(F) (f_{\bullet} \circ \epsilon _C): P_{\bullet} ^C \to D_{\bullet} $, but it is not clear how to get a morphism $D_{\bullet} \to P^D_{\bullet} $. It is yet another nontrivial fact that we can construct one in a functorial way. We thus obtain a functor $\mathbb{L} F : \Ch^-(\mathcal{A} )  \to \Ch^-(\mathcal{B} ) $.
+\end{construction}
+
+We understand that we have asked the reader to take us at our word for these two nontrivial claims. We are mainly using the construction $\mathbb{L} F$ as \emph{motivation} for a construction which we will shortly see, and we will prove these statements in the context of this new construction when we see it. For now, we ask the reader to take us at our word on one more thing: the functor $\mathbb{L}F$ preserves quasi-isomorphisms, \emph{and} is universal in the sense that there is a natural transformation $q : \mathbb{L} F \Rightarrow \Ch^-(F)$ such that for any other functor $G$ which preserves quasi-isomorphisms and has a natural transformation $\alpha : G \Rightarrow \Ch^-(F)$, $\alpha $ factors uniquely through $q$. In homotopy theory, $\mathbb{L} F$ would simply be called the derived functor of $F$, but in homological algebra that term is reserved for a slightly different (but related) construction. We will instead call $\mathbb{L}F $ the \emph{point-set left derived functor} of $F$. This terminology is taken from \cite{shulman} and is generally considered nonstandard.
+
+We have now taken a right exact functor $F : \mathcal{A}  \to \mathcal{B} $, and constructed a functor which preserves quasi-isomorphisms $\mathbb{L}F:\Ch^-(\mathcal{A} ) \to \Ch^-(\mathcal{B} ) $. It would be nice if we could lower it to a functor $\mathcal{A} \to \mathcal{B} $ which is exact. We in fact have multiple ways of accomplishing this.
+
+\begin{construction}\label{7.12}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be right exact, and let $\mathcal{A} $ have enough projectives. We can include $\mathcal{A} $ into $\Ch(\mathcal{A} ) $ in a canonical (functorial) way using the map $\iota : \mathcal{A}  \to \Ch(\mathcal{A} ) $. Recall that given $X\in \mathcal{A} $, we defined the complex $\iota (X)_{\bullet} $ as the complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots\ar[" 0 ", r]  & 0\ar[" 0 ", r]  & X\ar[" 0 ", r]  & 0\ar[" 0 ", r]  & \cdots,
+	\end{tikzcd}\]
+	where the $X$ was placed in the 0th degree. It turns out that we can take projective resolutions in a functorial way, so we could imagine defining $\mathbb{L} F$ on $\Im \iota $, yielding a functor $\mathbb{L} F\circ \iota : \mathcal{A}  \to \Ch(\mathcal{B} ) $. Note here that in \cref{7.11}, we replaced our complex with a quasi-isomorphic complex of projectives. Recall from \cref{6.9} that such a replacement for $\iota (X)_{\bullet} $ is a \emph{projective resolution}. Thus, $\mathbb{L} F\circ \iota $ can be described as taking a projective resolution of $X$, then mapping under $\Ch(F) $. We now only need a functor $\Ch(\mathcal{B} ) \to \mathcal{B} $. The most natural choice is a homology functor $H_i : \Ch(\mathcal{B} )  \to \mathcal{B} $. We can in fact choose \emph{any} homology functor $H_i$ for any $i$. Define $L_iF$ as the functor $H_i \circ \mathbb{L} F\circ \iota $. Computing $L_iF(X)$ can thus be described as the following process:
+	\begin{enumerate}
+		\item take a projective resolution $\epsilon : P_{\bullet}  \to X$,
+		\item compute $\Ch(F) (P_{\bullet} )$,
+		\item and take the $i$th homology of the resulting complex.
+	\end{enumerate}
+	We call $L_iF$ the $i$th \emph{left derived functor} of $F$.
+\end{construction}
+
+\begin{remark}\label{7.13}
+	My method of recovering $L_iF$ from $\mathbb{L} F$ is not very standard. It is technically mostly rigorous, since the process of taking a projective resolution for a complex can be viewed as a functor $Q : \Ch(\mathcal{A} )  \to \Ch(\mathcal{A} ) $, and thus restricting along $\iota $ yields a deformation $Q|\Im \iota $ for $F$ if we forget about the requirement that deformations be endofunctors. We then obtain $\mathbb{L} F$ in the claimed way by taking $F$ on a deformation retract of $Q|\Im \iota $.
+
+	However, it is more common to simply forget about all this and work in the derived category $\mathcal{D} (\mathcal{A} )$. We unfortunately did not have time to develop derived categoies or Cartan-Eilenberg resolutions, so I used a less advanced and less standard approach since. For more on the standard approach, see \cite{weibel} chapter 10.
+\end{remark}
+
+\begin{remark}\label{7.14}
+	Derived functors can be defined in much more generality. Given \emph{any} functor $F : \mathcal{A}  \to \mathcal{B} $, we can define $L_iF$ by taking a projective resolution of $X\in \mathcal{A} $, then computing $H_i \circ \Ch(F) $ on that resolution. We focused our discussion on left and right exact functors because this derivation process turns those functors into \emph{exact} functors, as we will see.
+\end{remark}
+
+We have three important questions we would like to answer.
+\begin{itemize}
+	\item Can we prove that $L_iF$ is invariant (up to isomorphism) under choice of projective resolution? Moreover, can we prove that such a resolution always exists, and is functorial?
+	\item Is $L_iF$ exact?
+	\item Can the derived functors be characterized by some universal property?
+\end{itemize}
+We will consider the first problem in the remainder of this section, and we delegate the final two to \cref{sec8}, which tie back into classical homological algebra.
+
+\begin{theorem}[\cite{weibel}]\label{7.15}
+	Let $\varepsilon _{\bullet} : P_{\bullet}  \to \iota (X)_{\bullet} $ be a projective resolution of $X\in \mathcal{A} $ and $f : X \to Y$ a morphism in $\mathcal{A} $. Then for any projective resolution $\eta : Q_{\bullet}  \to \iota (Y)_{\bullet} $ of $Y$, there is a morphism of chain complexes $f_{\bullet} : P_{\bullet}  \to Q_{\bullet} $ lifting $f$ in the sense that $\eta_0 \circ f_0=f\circ \varepsilon_0 $. The morphism $f_{\bullet} $ is unique up to chain homotopy.
+\end{theorem}
+\begin{proof}
+	See \cite[2.2]{weibel} theorem 2.2.6.
+\end{proof}
+
+\begin{lemma}\label{7.16}
+	Let $\mathcal{A} $ be an abelian category with enough projectives. Then each $X\in \mathcal{A} $ has a projective resolution.
+\end{lemma}
+\begin{proof}
+	We follow \cite[2.2]{weibel} lemma 2.2.5 for this part. Since $\mathcal{A} $ has enough projectives, there is an epimorphism $\varepsilon_0 :P_0\to X$ for some $P_0$. Set $M_0=\Ker \varepsilon_0 $, and continue inductively. Given $M_{n-1} $, there is an epimorphism $\varepsilon _n : P_n \to M_{n-1} $ with $P_n$ projective; set $M_n=\Ker \varepsilon _n$. The complex $P_{\bullet} $ is a projective resolution of $X$.
+\end{proof}
+
+\begin{lemma}\label{7.17}
+	Let $\mathcal{A} $ be an abelian category, and $P_{\bullet} ,Q_{\bullet} $ two projective resolutions for some $X\in \mathcal{A} $. Then there are quasi-isomorphisms $f_{\bullet} : P_{\bullet} \rightleftarrows Q _{\bullet} : g$.
+\end{lemma}
+\begin{proof}
+	Let $1_X : X \to X$. Consider the first $X$ with the resolution $P_{\bullet} $ and the second with the resolution $Q_{\bullet} $. Thus, $1_X$ lifts to some $\varepsilon _{\bullet} : P_{\bullet}  \to Q_{\bullet} $. If we flip the direction before lifting, we get a map $\eta _{\bullet} : Q_{\bullet}  \to P_{\bullet} $. Composing gives a map $\eta_{\bullet}  \circ \varepsilon_{\bullet}  : P_{\bullet}  \to P_{\bullet} $ which is a lift of $1_X \circ 1_X = 1_X$, but $1_{P_{\bullet} } $ is also a lift of $1_X$. By \cref{7.15}, $1_{P_{\bullet} } $ and $\eta_{\bullet}  \circ \varepsilon_{\bullet}  $ are chain homotopic, and thus $\eta _{\bullet} ,\varepsilon _{\bullet} $ are a chain homotopy equivalence.
+
+	\emph{Chain homotopy equivalences} are a special case of quasi-isomorphisms. For the proof of this fact, see \cite[1.4]{weibel} lemma 1.4.5 which states that chain homotopic maps induce the same maps on homology. This fact then follows as a corollary: the fact that $\eta _{\bullet} ,\varepsilon _{\bullet} $ are chain homotopy equivalences means that $\eta _{\bullet} \circ \varepsilon _{\bullet} $ and $\varepsilon _{\bullet} \circ \eta _{\bullet} $ are chain homotopic to the identity, meaning they induce the identity under homology. By functoriality of homology, $\eta _{\bullet} ,\varepsilon _{\bullet} $ are inverses in homology, and thus quasi-isomorphisms.	
+\end{proof}
+
+\begin{theorem}\label{7.18}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive, right exact functor between abelian categories, and let $\mathcal{A}  $ have enough projectives. Then $L_iF$ exists for all $i$, and is unique up to isomorphism.
+\end{theorem}
+\begin{proof}
+	By \cref{7.16}, there is a replacement function $Q:\mathcal{A} \to \Ch(\mathcal{A} ) $ mapping objects to projective resolutions. By \cref{7.1}, there is a functor $\Ch(F) : \Ch(\mathcal{A} )  \to \Ch(\mathcal{B} ) $, and by \cref{5.4} homology is functorial $H_i : \Ch(\mathcal{B} )  \to \mathcal{B} $. By \cref{7.17}, each choice of a projective resolution is quasi-isomorphic, and since $H_i$ identifies quasi-isomorphic complexes up to isomorphism, the map is well-defined. Continuing, any choice of lift is chain homotopic, and homology identifies chain homotopic maps (\cite[1.4]{weibel} lemma 1.4.5). Thus, the morphism function is well-defined, giving a functor. Since $\Ch(F) $, $H$ are additive, the functor is easily shown to be additive. Uniqueness up to isomorphism follows by \cref{7.17}.
+\end{proof}
+
+By the usual abstract nonsense, left derived functors have the dual notion of a \emph{right derived functor}. Moreover, all of the above statements dualize to the dual notion, meaning we automatically obtain that right derived functors are unique up to isomorphism, exact, additive, and all that stuff. We also obtain some facts about injective resolutions. We now detail the construction of right derived functors.
+
+\begin{construction}\label{7.19}
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be a \emph{left exact} functor, and let $\mathcal{A} $ have enough injectives. Because we are dualizing left derived functors, we must work with the opposite category $\Ch(\mathcal{A} ) ^{\mathrm{op}} $. However, this is just the category of \emph{cochain complexes}, which works the exact same way. We prefer to simply denote this category by $\Ch(\mathcal{A} ) $ due to this fact, with the understanding that this now refers to cochain complexes. We define the map $\Ch(F) : \Ch(\mathcal{A} )  \to \Ch(\mathcal{B} ) $ by following \cref{7.1} for cochain complexes. \emph{right derived functors} $R^iF$ are computed as follows:
+	\begin{enumerate}
+		\item Take an injective resolution $\eta ^{\bullet} : \iota (X)^{\bullet}  \to I^{\bullet} $ of $X\in \mathcal{A} $,
+		\item compute $\Ch(F) (I^{\bullet} )$,
+		\item and take the $i$th cohomology $H^i \Ch(F) (I^{\bullet} )$.
+	\end{enumerate}
+\end{construction}
+

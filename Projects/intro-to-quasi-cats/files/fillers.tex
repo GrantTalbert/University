@@ -31,7 +31,7 @@ Note that \cref{4.1} tells us what the faces and degeneracies of a simplicial su
 Many important simplicial sets arise as simplicial subsets of the standard $n$-simplicial set $\Delta ^n$. The first one is the \emph{face}.
 
 \begin{definition}\label{4.4}
-	Note by the Yoneda lemma that postcomposition by a coface gives a morphism of simplicial sets $(d^i)_*: \Delta ^{n-1}  \to \Delta^n$. Define the $i$th face of $\Delta ^n$, denoted by $\partial _i\Delta ^n$, as the image $\im (d^i)^*$.
+	Note by the Yoneda lemma that postcomposition by a coface gives a morphism of simplicial sets $(d^i)_*: \Delta ^{n-1}  \to \Delta^n$. Define the $i$th face of $\Delta ^n$, denoted by $\partial _i\Delta ^n$, as the image $\im (d^i)_*$.
 \end{definition}
 
 \begin{remark}\label{4.5}
@@ -50,7 +50,7 @@ Many important simplicial sets arise as simplicial subsets of the standard $n$-s
 	is a simplicial set, and $X^i$ is a simplicial subset for all $i$.
 \end{proposition}
 \begin{proof}
-	Indeed, by \cite[\S5.3~Thm.~1]{ml}, limits in functor categories such as $\sSet $ are computed levelwise. Since the union of sets is the pushout along inclusions of the intersection into component sets
+	Indeed, by \cite[\S5.3~Thm.~1]{ml}, colimits in functor categories such as $\sSet $ are computed levelwise. Since the union of sets is the pushout along inclusions of the intersection into component sets
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	X^i_n \cap X^j_n \ar[hook, r] \ar[hook, d]  & X^i_n \ar[d]  \\
 	X^j_n \ar[r]  & X^i_n \cup X^j_n
@@ -111,7 +111,3 @@ One of the upshots of \cref{4.10} is \cref{4.11}:
 	\]
 	where the last step follows by hypothesis. Therefore, $\sigma $ is a filler for $\sigma _0$.
 \end{proof}
-
-
-% TODO: add geometric intuition for objects; note that the geometric intuition for cofaces in $\Delta ^{\bullet} $ should be done in \S3.
-

@@ -1,0 +1,22 @@
+\lecture{17}{Tue 14 Oct 2025 12:20}{More more Lie groups}
+
+Suppose we have $H\subseteq G$ a Lie subgroup. Then $H$ acts smoothly on $G$ by right , multiplication or left multiplication. The orbits under this orbit are cosets. We call the stabilizer of $p\in M$ the \emph{isotropy} (sub)group at $p$.
+
+\begin{definition}\label{3.0.18}
+	Let $M,N$ be manifolds with $G$-actions $\theta :G\times M\to M$, $\psi :G\times N\to N$ for $G$ a Lie group. A \emph{smooth map} $F : M \to N$ is called $G$\emph{-equivariant} if the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	M \ar[" F ", r] \ar[" \theta _g "', d]  & N \ar[" \psi _g ", d]  \\
+	M \ar[" F "', r]  & N
+	\end{tikzcd}\]
+	commutes for each $g\in G$. The (functor) category $\mathcal{S} \mathrm{mth}^G $ is the category of smooth $G$-manifolds together with $G$-equivariant maps.
+\end{definition}
+
+
+\begin{theorem}[Equivariant rank theorem]\label{3.0.19}
+	Let $F : M \to N$ be a smooth $G$-equivariant map for $M,N$ $G$-manifolds, $G$ a Lie group. If the action on $N$ is transitive, then $F$ is constant rank, the action on $M$ is transitive, and if $F$ is (sur/in/bi)jective then it is (sub/im)mersion/diffeomorphism.
+\end{theorem}
+
+\begin{proposition}\label{3.0.20}
+	Given a $G$-action $\theta $ on $M$, for all $p\in M$ the orbit map $\theta ^{(p)} : G \to M$ given by $g\mapsto gp$ is smooth and has constant rank. Since fibers are isotropy grous, they are properly embedded.
+\end{proposition}
+

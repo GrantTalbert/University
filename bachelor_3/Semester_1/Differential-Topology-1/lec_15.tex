@@ -1,0 +1,77 @@
+\lecture{15}{Wed 08 Oct 2025 12:20}{Lie groups}
+
+We conclude submanifolds by discussing their tangent spaces. Let $S\hookrightarrow M$ be an immersed submanifold. The inclusion $i$ raises to an injection $\mathrm{d} _p(i): T_pS \to T_pM$ for each $p\in S$. Since its injective, we may identify it with its image up to isomorphism. This idea yields a useful proposition.
+
+\begin{proposition}\label{2.1.13}
+	Let $p\in S\hookrightarrow M$ be an embedded submanifold. Then $T_pS$ is isomorphic to the subset $K$ of $T_pM$ such that for each $v\in k$ and $f\in C^\infty (M)$ which vanishes on $S$ ($f|S=0$), we have $v(f)=0$.
+\end{proposition}
+\begin{proof}
+	Let $v\in T_pS$ identified with a subspace of $T_pM$. Then there is exactly one $w\in T_pS$ with $v=\mathrm{d}_p(i)(w)$. If $f|S=0$, then $v(f)=w(f\circ i)=w(0)$. For the converse, let $v\in T_pM$ satisfying the criteria. Choose slice coordinates $(x^1, \ldots ,x^n)$ for $S$ in a neighborhood $U$ of $p$. Then $i : S \cap U\to M$ has coordinate representation $\hat{i} (x^1, \ldots ,x^k)=(x^1, \ldots ,x^k,0, \ldots ,0)$. Then
+	\[
+		v=v^\mu \partial _\mu |_p
+	.\]
+	We have $v^j=0$ whenever $j>k$. Choose some $f(x)$ with $f|U \cap S=0$. It just kind of follows.
+\end{proof}
+
+
+\begin{corollary}\label{2.1.14}
+	Let $S\hookrightarrow M$ be an embedded submanifold, $U\subseteq M$, and $\Phi : U \to N$ any local defining map for $S$ (meaning $\Phi ^{-1} (c)=S \cap U$ for some $c$). Then $T_pS= \Ker \mathrm{d}_p\Phi $.
+\end{corollary}
+
+This is quite useful. Suppose that $S\subseteq M$ is a level set of some smooth submersion $\Phi =\Phi ^\mu : M \to \mathbb{R} ^k$. Then any $v\in T_pM$ is also tangent to $s$ if $v(\Phi ^i)=0$ for all $i$.
+
+\chapter{Lie groups}
+
+\begin{definition}\label{3.0.1}
+	A \emph{Lie group} is a topological group $G$ with a smooth structure such that multiplication and inversion are smooth. Equivalently, $G$ is a group object in the categorty of smooth manifolds.
+\end{definition}
+
+\begin{proposition}\label{3.0.2}
+	Let $G$ be a smooth manifold together with a smooth map $G\times G\to G$ given by $(g,h)\mapsto gh^{-1} $. Then $G$ is a Lie group, and mulitplication and inversion are recovered in the obvious way.
+\end{proposition}
+
+\begin{definition}\label{3.0.3}
+	A \emph{left translation} by $g\in G$ is the map $L_g : G \to G$ given by $h\mapsto gh$. Right translations similarly are $R_g : h\mapsto hg$. They are diffeomorphisms since $L_g^{-1} =L_{g^{-1} } $.
+\end{definition}
+
+A useful example is $\operatorname{GL} (n,\mathbb{R} )$ or $\operatorname{Gl} (n,\mathbb{C} )$. These are of dimension $n^2$ and $2n^2$, respectively. Most useful Lie groups arise as subgroups of these. We can also consider $\mathbb{R} ^n,\mathbb{C} ^n$ under addition or $\mathbb{R} ^*,\mathbb{C} ^*$ under multiplication. The latter have Lie subgroups $R_{>0} $ and $S^1$.
+
+\begin{proposition}\label{3.0.4}
+	Let $G,H$ be Lie groups. Then $G\times H$ is a Lie group.
+\end{proposition}
+
+\begin{definition}\label{3.0.5}
+	A \emph{discrete} Lie group is a 0-dimensional Lie group.
+\end{definition}
+
+\begin{definition}\label{3.0.6}
+	Lie groups form a category $\mathcal{L} ie$. A morphism $F : G \to H$ of Lie groups is a smooth group homomorphism.
+\end{definition}
+
+Exponentiation $(x^1, \ldots ,x^n)\mapsto (e^{x^1} , \ldots ,e^{x^n} )$ is a Lie group homomorphism $\mathbb{R} ^n$ to the torus $\mathbb{T} ^n$. Conjugation is smooth and is thus a Lie group homomorphism.
+
+
+\begin{theorem}\label{3.0.7}
+	Lie group homomorphisms have constant rank.
+\end{theorem}
+\begin{proof}
+	Choose $g\in G $ a Lie group with identity 1. Since $F : G \to H$ is a Lie group hom, $F(1)=1$. We will show the rank of $\mathrm{d} _gF$ is $\mathrm{d} _1F$, and this suffices. Choose $h\in G$, and consider $(F\circ L_g)(h)=F(gh)=(L_{F(g)} \circ F)(h)$. Thus,
+	\[
+		F\circ L_g=L_{F(g)} \circ F
+	.\]
+	We can pass to the differential
+	\[
+		\mathrm{d}_1(F)\circ \mathrm{d}_1L_g = \mathrm{d} _1(L_{F(g)} )\circ \mathrm{d} _1(F)
+	.\]
+	Since each $L$ is a diffeomorphism, we see that the differentials of $L$ are constant rank. Apparently it just follows idk check the book.
+\end{proof}
+
+\begin{corollary}\label{3.0.8}
+	A Lie group homomorphism is an isomorphism if and only if it is bijective.
+\end{corollary}
+This follows by the global rank theorem.
+
+\begin{remark}
+	The kernel $\Ker F$ of a Lie group homomorphism is the \emph{level set} $F^{-1} (1)$. The fact that $F$ is constant rank tells us that the kernel is a \emph{properly embedded submanifold} of the domain. Since the kernel is also a group, it should be a Lie group.
+\end{remark}
+

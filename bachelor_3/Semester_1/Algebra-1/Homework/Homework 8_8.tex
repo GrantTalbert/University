@@ -1,0 +1,131 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 8}
+\begin{document}
+\makeproblem
+\setcounter{section}{3}
+
+
+
+\section{Problem 4}
+
+\begin{problem}\label{4.1}
+	Let $R$ be a commutative ring and $I\subseteq R$ an ideal. Show there is a bijection between the ideals of $R$ containing $I$, and the ideals of the quotient ring $R/I$, given by mapping $I \subseteq J\mapsto \pi (J) \subseteq R/I$.
+\end{problem}
+\begin{lemma}\label{lma1}
+	Let $\varphi : R \to S$ be a surjective ring homomorphism, and $I\subseteq R$ an ideal of $R$. Then $\varphi (I)$ is an ideal of $S$.
+\end{lemma}
+\begin{proof}
+	Images of subgroups are subgroups, so $\varphi (I)$ is a subgroup of $S$. Let $s\in S$, and since $\Im  \varphi =S$, there is at least one $r\in R$ with $\varphi (r)=s$. Let $i\in I$. Then
+	\[
+		s\varphi (i)=\varphi (r)\varphi (i)=\varphi (ri)
+	\]
+	since $\varphi $ is a ring homomorphism. Since $I$ is an ideal, $ri\in I$. Therefore, $\varphi (ri)\in \varphi (I)$ implies that $s\varphi (i)\in \varphi (I)$. The other side follows by the same logic. Therefore, $\varphi (I)$ is an ideal of $S$.
+\end{proof}
+\begin{lemma}\label{lma2}
+	Let $\varphi : R \to S$ be a ring homomorphism, and $J\subseteq S$ an ideal. Then $\varphi ^{-1} (J)\subseteq R$ is an ideal.
+\end{lemma}
+\begin{proof}
+	Since $\varphi $ is a group homomorphism and ideals are subgroups, $\varphi ^{-1} (J)$ is a subgroup of $R$, so we need only show the absorbtion property. Let $r\in R$ and $j\in \varphi ^{-1} (J)$. Then $\varphi (r)\varphi (j)=\varphi (rj)\in J$ because $\varphi (j)\in J$ and $J$ is an ideal. Therefore, $rj\in \varphi ^{-1} (rj)\subseteq \varphi ^{-1} (J)$, meaning $rj\in \varphi ^{-1} (J)$. Hence $\varphi ^{-1} (J)$ is an ideal of $R$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{4.1}]
+	By \cref{lma1}, the map $J\mapsto \pi (J)$ takes ideals to ideals by surjectivity of the quotient map.
+
+	Now we show injectivity. Suppose $J,K\subseteq R$ are ideals containing $I$ such that $\pi (J)=\pi (K)$. Take $j\in J$, and note that since $I\subseteq J$ and $J$ is closed under addition, we have $j+I \subseteq J$. Similarly,  $k+I \subseteq K$ for all $k\in K$. Given $j\in J$, there exists $k\in K$ with $j+I = k+I$. Since $k+I \subseteq K$, we have $j+I \subseteq K$. Since $0\in I$, we have $j\in j+I$, meaning $j\in K$. Therefore, $J\subseteq K$. The other direction follows the same. This proves injectivity.
+
+	Finally, we show surjectivity. Let $J\subseteq R/I$ be an ideal. We claim that the preimage $\pi ^{-1} (J)\mapsto J$. Clearly $\pi (\pi^{-1} (J))=J$, so it suffices to show that $\pi ^{-1} (J)$ is an ideal. Indeed, this follows by \cref{lma2}.
+\end{proof}
+\begin{problem}\label{4.2}
+	With notation as in \cref{4.1}, show that
+	\begin{enumerate}
+		\item $R/M$ is a field if and only if $M$ is maximal;
+		\item $R/I$ is an integral domain if and only if $I$ is prime;
+		\item maximal ideals are prime, but the converse does not hold.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Let $M\subseteq R$ be maximal. By definition, the only two ideals containing $M$ are $M$ and $R$. By \cref{4.1}, there must be two ideals in $R/M$. Since $M$ is a proper ideal, $R/M \neq 0$, meaning $0$ and $R/M$ are ideals. These must then be the only ideals, meaning $R/M$ has only trivial ideals. By the previous homework, $R/M$ is a field.
+
+	For the converse, let $M$ be an ideal of $R$ with $R/M$ a field. Then since $R/M$ has two ideals, by \cref{4.1} there are two ideals containing $M$ in $R$. These must be $M$ and $R$, since both are ideals and both contain $R$. Therefore, $M$ is maximal.
+
+	(2) Let $P\subseteq R$ be prime. Since $R$ is commutative, so is $R/P$, so we must show there are no zero-divisors. Let $r,s\in R$. Since the zero element of $R/P$ is $P$, we assume $r+P,s+P \neq 0$; equivalently $r,s \notin P$. Since $P$ is prime, $rs\in P$ if and only if $r$ or $s$ is in $P$. Since neither is in $P$, $rs\notin P$, meaning $rs+P \neq p$. Therefore, if $r,s$ are nonzero in $R/P$, then their product is nonzero in $R/P$, meaning $R/P$ is an integral domain.
+
+	For the converse, let $P\subseteq R$ be an ideal with $R/P$ an integral domain. Since $R/P$ has no zero divisors, we have that for any $r,s\in P$,
+	\[
+	rs+P = P \iff r+P=P \text{ or } s+P=P
+	.\]
+	Therefore, $rs\in P$ if and only if $r\in P$ or $s\in P$. By definition of a prime ideal, $P$ is prime.
+
+
+	(3) Let $I\subseteq R$ be maximal. Then by (1), $R/M$ is a field, which is in particular an integral domain. By (2), $I$ is prime. The converse does not follow since not all integral domains are fields.
+\end{proof}
+
+\section{Problem 5}
+
+\begin{problem}\label{5}
+	Let $R$ be a commutative ring. Prove that every proper ideal is contained in a maximal ideal of $R$.
+\end{problem}
+\begin{proof}
+	Let $\mathcal{J} $ be the poset of proper ideals in $R$. Consider a linearly ordered set $J$ and a linearly ordered set of ideals
+	\[
+		\left\{ I_j \right\}_{j\in J}\subseteq \mathcal{J} ,\qquad I_j \subseteq I_{j'} \iff j \leq j',\qquad j,j'\in J
+	.\]
+	Since intersections and unions indexed over sets exist, we claim that the set $\left\{ I_j \right\} _{j\in J} $ contains an upper bound in $\mathcal{J} $, in particular a supremum, given by
+	\[
+		\sup_{\mathcal{J} } \left\{ I_j \right\} _{j\in J} =\bigcup_{j\in J} I_j
+	.\]
+	We prove only that this is an upper bound, since the fact that this upper bound is minimal will not be required for the proof. In the previous homework, we proved this for the special case $J=\omega $. The proof generalizes, so we repeat it for the more general case here.
+
+	Write $I$ for the union $\bigcup_{j} I_j$. First, we show that $I$ is a subgroup of $R$. Let $r,s\in I$. Then by definition of the union, there exist at least one $I_j,I_k$ with $j,k\in J$ and $r\in I_j,s\in I_k$. Since $J$ is totally ordered, we can without loss of generality take $j\leq k$. Then $I_j \subseteq I_k$, so $r\in I_k$. Since $I_k$ is a group, $r-s\in I_k\subseteq I$. By the subgroup test, $I$ is a subgroup of $R$. Now let $a\in R$ and $r\in I$. Then there is $j\in J$ such that $r\in I_j$ by definition of the union, so we have $ar\in I_j$ since $I_j$ is an ideal. Therefore, $ar\in I$, and $I$ is an ideal.
+
+	To show that $I$ exists in $\mathcal{J} $, we must show it is a \emph{proper} ideal. Indeed, since each $I_j$ is a proper ideal, $1\notin I_j$ for all $j$. By definition of a union, we have $1\notin I$, and thus $I \subset R$ is a proper ideal and exists in $\mathcal{J} $. Finally, by definition of a union we have $I_j \subseteq I$ for each $I$, meaning $I$ is an upper bound for the linearly ordered set $\left\{ I_j \right\} _{j\in J} $. By Zorn's lemma, there exists a maximal element in $\mathcal{J} $. A maximal element is simply an element which is not less than any other element, which in context is a proper ideal not contained in any other proper ideal. This is precisely the definition of a maximal ideal. Therefore, all rings have a maximal ideal.
+
+	We now need to show all ideals are contained in a maximal ideal. Let $I\subseteq R$ be a proper ideal, and consider the poset $\mathcal{J} _I$  of proper ideals $J\subseteq R$ such that $I\subseteq J$. Let $\left\{ J_k \right\}_{k\in K} $ be a linearly ordered set. Since $\mathcal{J} _I \subseteq \mathcal{J} $, this set has an upper bound given by the union in $\mathcal{J} $ by the previous argument. Since the union contains all ideals which themselves contain $I$, the union must contain $I$ by transitivity of $\subseteq $. Therefore, the union is also an upper bound in $\mathcal{J} _I$, so by Zorn's lemma there is a maximal element in $\mathcal{J} _I$.
+
+	We do not yet know that the inclusion $\mathcal{J} _I\hookrightarrow \mathcal{J} $ preserves maximal ideals. Let $M$ be a maximal element in $\mathcal{J} _I$. We prove directly that it is a maximal ideal. Let $J$ be any other ideal such that $M\subseteq J$. We then have that $I\subseteq M\subseteq J$, and thus $J$ is an element of $\mathcal{J} _I$. Since $M$ is maximal in $\mathcal{J} _I$, we have that there are no elements greater than it, meaning we must have $M=J$. Therefore, $M$ is maximal.
+\end{proof}
+
+\section{Problem 6}
+
+\begin{problem}
+	Define $N : \mathbb{Z} [\sqrt{-5} ]\setminus \left\{ 0 \right\}  \to \mathbb{Z} $ by
+	\[
+		a+b\sqrt{-5} \mapsto \left( a+b \sqrt{-5}  \right) \left( a-b \sqrt{-5}  \right) 
+	.\]
+	Prove that $N$ is multiplicative and $\Im N \subseteq \mathbb{Z} _{>0} $.
+\end{problem}
+\begin{proof}
+	Let $a,b\in\mathbb{Z} $ with $a+b\sqrt{-5} \neq 0$. Then
+	\[
+		N\left( a+b\sqrt{-5}  \right) =\left( a+b \sqrt{-5}  \right) \left( a-b \sqrt{-5}  \right) =a^2+ab \sqrt{-5} -ab \sqrt{-5} -b^2i^2 \sqrt{5} ^2=a^2 + 25b^2
+	.\]
+	Assume for contradiction that there exist $a,b\in\mathbb{Z} $ such that $N(a+b\sqrt{-5} )=0$. Then $a^2+25b^2=0$. Since $a+b\sqrt{-5} \neq 0$, at least one of $a,b$ is nonzero.
+	\begin{itemize}
+		\item ($a=0,b\neq 0$) $N(a+b\sqrt{-5} )=a^2>0$;
+		\item ($a\neq 0,b=0$) $N(a+b\sqrt{-5} )=25b^2>0$;
+		\item $(a,b \neq 0$) Both $a^2,b^2 > 0$ meaning $a^2 +25b^2 > 0$.
+	\end{itemize}
+	Therefore, $\Im N \subseteq \mathbb{Z} _{>0} $.
+\end{proof}
+
+\section{Problem 7}
+
+\begin{problem}
+	Let $R$ be a Euclidean domain that is not a field with Euclidean valuation $v$. Show that there is $a\in R$ such that every element of $R/(a)$ is represented by $0$ and units of $R$.
+\end{problem}
+\begin{proof}
+	Recall that Euclidean domains are PIDs, meaning every ideal is principal. By \cref{5}, a maximal ideal exists. Since the maximal ideal is principal, let $a\in R$ be an element such that $(a)$ is maximal. By \cref{4.2}, $R/(a)$ is a field.
+\end{proof}
+
+
+
+\end{document}

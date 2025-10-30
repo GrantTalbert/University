@@ -1,0 +1,136 @@
+\lecture{14}{Thu 30 Oct 2025 12:33}{Black holes}
+
+Ok so the action is like
+\[
+	S=\frac{1}{16\pi G_N} \int (R-2\Lambda )\sqrt{-g}  \,\mathrm{d} ^4x + S_{\mathrm{SM} } 
+.\]
+The $\Lambda $ is a cosmological constant. Now the $S_{\mathrm{SM} } $ contains the higher order terms of the Ricci scalar $(R^2,R^3, \ldots )$, but we think that their coefficients are small enough that the EFT given by $S$ matches observations to high precision. Here $G_N$ is the gravitationa coupling constant. Using GR as an EFT is the only way we can make it work as a quantum theory.
+
+What if instead of $R-2\Lambda $, we had some arbitrary $f(R)$? We can expand this as a Taylor series to obtain an expansion in powers of $R$. The extra terms would be dominated by small numbers so we recover Einstein's equation. So if we have some $f(R)$, then their coupling to the standard model is tiny.
+
+\chapter{Black holes}
+
+Ok so recall Einstein's equation
+\[
+	G_{\mu \nu } =8\pi G_N T_{\mu \nu } 
+.\]
+We are going to solve the simplest black hole: the Schwarzschild black hole. Consider the simple case where $8\pi G_NT_{\mu \nu } =0$. The equation $G_{\mu \nu } =0$ is a second order nonlinear differential equation, and is nontrivial to solve. In order to actually solve these equations, we will consider highly symmetric scenarios.
+
+Start by assuming rotational invariance and time invariance. Minkowski space is rotationally symmetric, where we write the metric as
+\[
+	\mathrm{d} s^2=-\mathrm{d} t^2+\mathrm{d} r^2 + r^2 \mathrm{d} \Omega _2^2 = -\mathrm{d} t^2+\mathrm{d} r^2+r^2 \left( \mathrm{d} \theta ^2+ \sin ^2\theta \mathrm{d} \phi ^2 \right)  
+.\]
+We can prove this rigorously using Killing vectors, but we will ignore that. Note that this is the metric on the 2-sphere. So rotational invariance implies that our metric is of the form
+\[
+	\mathrm{d} s^2 = g_{tt} (t,r)\mathrm{d} t^2 + g_{rr} (t,r)\mathrm{d} r^2+2g_{tr} (t,r)\mathrm{d} r \mathrm{d} t+g_{\theta \theta }(t,r) \mathrm{d} \Omega _2^2
+.\]
+So
+\[
+	g_{\mu \nu } =\begin{pmatrix}
+	g_{tt}  & g_{tr}  &  &  \\
+	g_{rt}  & g_{rr}  &  &  \\
+	 &  & g_{\theta \theta }  &  \\
+	 &  &  & g_{\theta \theta } \sin ^2\theta 
+	\end{pmatrix}
+.\]
+Invariance under time means we can get rid of all the time dependence in each term of $g$, so the metric is actually
+\[
+	\mathrm{d} s^2 = g_{tt} (r)\mathrm{d} t^2 + g_{rr} (r)\mathrm{d} r^2+g_{\theta \theta }(r) \mathrm{d} \Omega _2^2
+.\]
+Define a new coordinate $\widetilde{r} $ with $\widetilde{r} (r)=\sqrt{g_{\theta \theta } (r)} $. Write $g_{\mu \nu } (r(\widetilde{r} ))=g_{\mu \nu } (\widetilde{r} )$, which is an abuse of nootation. Then write
+\[
+	g_{\widetilde{r} \widetilde{r} } (\widetilde{r})\coloneqq g_{rr} (r(\widetilde{r} ))\left( \frac{\mathrm{d}r}{\mathrm{d}\widetilde{r} }  \right) ^2 \mathrm{d} \widetilde{r} ^2
+.\]
+Then the metric is of the form
+\[
+	\mathrm{d} s^2=-g_{tt} (\widetilde{r} )\mathrm{d} t^2+g_{\widetilde{r} \widetilde{r} } (\widetilde{r} )\mathrm{d} \widetilde{r} ^2+\widetilde{r} ^2\mathrm{d} \Omega ^2
+.\]
+This simplifies the equation a lot since we only have two metric components, so it becomes a system of two ordinary differential equations. We will plug this into the simple case
+\[
+	G_{\mu \nu } =0
+.\]
+Write $r$ instead of $\widetilde{r} $ to simplify notation. It just turns out that Einstein's tensor is diagonal
+\[
+	G_{\mu \nu } =\begin{pmatrix}
+	G_{tt}  &  &  &  \\
+	 & G_{rr}  &  &  \\
+	 &  & G_{\theta \theta }  &  \\
+	 &  &  & G_{\phi \phi } \sin ^2 \theta G_{\theta \theta } 
+	\end{pmatrix}
+.\]
+This gives us the system
+\[
+	G_{tt} =G_{rr} =G_{\theta \theta } =0
+.\]
+This is solveable. For the first component, we have the form
+\[
+	G_{tt} =\frac{-g_{tt} (r)}{r^2 g_{rr} ^2(r)} \left( r \frac{\mathrm{d}g_{rr} }{\mathrm{d}r} +g_{rr} ^2(r)-g_{rr} (r) \right) 
+.\]
+Setting this to zero and cancelling the prefactor yields the (nonlinear) differential equation
+\[
+	r \frac{\mathrm{d}g_{rr} }{\mathrm{d}r} =g_{rr} (r)-g_{rr} ^2(r)
+.\]
+This can become the separable equation
+\[
+	\mathrm{d} g_{rr} \left( \frac{1}{g_{rr} (r)} -\frac{1}{1-g_{rr} (r)}  \right) =\frac{\mathrm{d} r}{r} 
+.\]
+Solving this yields
+\[
+	g_{rr} (r)=\frac{1}{1+\frac{C}{r} } 
+\]
+for $C$ an integration constant. Now to solve for $g_{tt} (r)$, we use
+\[
+	\mathrm{d} s^2 = -g_{tt} (r)\mathrm{d} t^2+\left( \frac{1}{1+\frac{C}{r} }  \right) \mathrm{d} r^2+r^2 \mathrm{d} \Omega ^2
+.\]
+We then get
+\[
+	r^2 G_{rr} =\frac{C}{C+r} +r\frac{g_{tt} '(r)}{g_{tt} (r)} =0 \iff \mathrm{d} r\left( \frac{1}{C+r} -\frac{1}{r}  \right) =\frac{\mathrm{d}g_{tt} }{g_{tt} } 
+.\]
+Solving yields
+\[
+	g_{tt} (r)=\frac{1}{B} \left( 1+\frac{C}{r}  \right) 
+.\]
+We can delete the $1/B$ by taking the time-invariant translation $t\to t\sqrt{B} $. Then
+\[
+	\mathrm{d} s^2=-\left( 1+\frac{C}{r}  \right) \mathrm{d} t^2+\left( \frac{1}{1+\frac{C}{r} }  \right) \mathrm{d} r^2+r^2 \mathrm{d} \Omega ^2
+.\]
+
+Now define $R_S \coloneqq -C$. Then
+\[
+	\mathrm{d} s^2 = -\left( 1-\frac{R_S}{r}  \right) \mathrm{d} t^2 + \left( \frac{1}{1-\frac{R_S}{r} }  \right) \mathrm{d} r^2 + r^2 \mathrm{d} \Omega ^2
+.\]
+If we plug this into $G_{\theta \theta } $ then it becomes 0, so this is a valid solution. This is the \emph{Schwartzschild metric}. Black holes arise when $R_S=r$: we get
+\[
+	\mathrm{d} s^2= 0\mathrm{d} t^2+\frac{1}{0} \mathrm{d} r^2 + r^2 \mathrm{d} \Omega ^2
+.\]
+So we see that as $r\to R_S$, an outside observer sees their clock slow down asymptotically.
+
+The reason this is physical is because we can do a change of coordinates in $r$ and make the prefactor for $\mathrm{d} r^2$ anything we want. So it is not clear whether or not this is just a bad coordinate system, or if it's truly a physical singularity.
+
+How does the mass of the black hole come into play? Take $r\gg R_S$, and in the newtonian limit we have
+\[
+	g_{tt} =-\left( 1+2\Phi  \right) 
+.\]
+We can take
+\[
+	2\Phi =-\frac{R_S}{r} 
+.\]
+In Newtonian gravity, if there is a massive souce of gravity, then
+\[
+	\Phi =\frac{G_NM}{r} 
+.\]
+So we end up with
+\[
+	R_S=2G_NM
+.\]
+Scalars are invariant under coordinate transformations. There is a nonzero scalar
+\[
+	R^{\mu \nu \sigma r} R_{\mu \nu \sigma \rho } =\frac{RR_S^2}{r^6} ,
+\]
+which blows up at $r=0$, \emph{not} at $r=R_S$. This means that the event horizon is not a singularity, so if we fall across a horizon as an observer we actually will not notice anything different (assuming the universe is empty outside of the black hole, and neglecting spaggettificatoin). This means our infinity in the metric at $r=R_S$ is an artifact of the coordinates.
+
+If we have a star, then outside we have $T_{\mu \nu } $, meaning the Schwartzschild solution actually applies. We can then find the horizon, and if the radius of the horizon is \emph{inside} the sun, then that's fine since Schwartzschild doesn't work inside the sun since $T_{\mu \nu } \neq 0$ inside. Apparently we can compute
+\[
+	R_S = 2.6 \mathrm{km} 
+.\]
+The sun is slightly larger than that. Therefore, the sun is not a black hole.

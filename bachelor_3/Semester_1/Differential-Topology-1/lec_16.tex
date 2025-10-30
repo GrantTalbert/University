@@ -1,0 +1,77 @@
+\lecture{16}{Fri 10 Oct 2025 12:22}{More Lie groups}
+
+\begin{definition}\label{?}
+	A Lie subgroup is a subgroup with a smooth structure and topology such that it is a Lie group, and inclusion is an immersed submanifold.
+\end{definition}
+
+\begin{proposition}\label{3.0.11}
+	Let $G$ be a Lie group and $H$ a subgroup that is an \emph{embedded} submanifold.
+\end{proposition}
+\begin{proof}
+	It suffices to show $H$ is a Lie group. This follows easily by a diagram chase.
+\end{proof}
+
+\begin{lemma}\label{3.0.12}
+	Let $G$ be a Lie group and $H$ an \emph{open} subgroup. Then $H$ is an embedded Lie group, and $H$ is closed, and $H$ is a union of connected components.
+\end{lemma}
+\begin{proof}
+	We get that $H$ is an embedded submanifold of codimension 0, and we appeal to \cref{3.0.11}. The coset $gH$ is the image of left multiplication $Lg$, which is a diffeomorphism, so the image of the open set $H$ is open. We of course have $G\setminus H$ is the union of all nontrivial cosets, so $H$ is the compliment of the open set $G\setminus H$. The final follows from usual topology: any clopen set is a union of path components. Of course this coencides with path connectedness in manifolds.
+\end{proof}
+
+For example, given an open subset $U$ of $S^1$ containing 1, the group $\left\langle U \right\rangle $ is an open subgroup of $G$.
+
+\begin{proposition}\label{3.0.13}
+	Let $G$ be a Lie group, and $W\subseteq G$ a neighborhood of 1. Then $W$ generates an open subgroup of $G$. If $W$ is connected, then $W$ generates a connected open subset of $G$. If $G$ is connected, then $W$ generates $G$.
+\end{proposition}
+\begin{proof}
+	Let $H=\left\langle W \right\rangle $. Define
+	\[
+		W_k=\left\{ g\in G\mid \exists \left\{ w_i \right\}_{i=1} ^\ell\subseteq W,\ell \leq k \text{ s.t. }  g=\prod_{i=1}^{\ell } w_i \right\} 
+	.\]
+	Then
+	\[
+		H=\bigcup_{k\geq 1} W_k
+	.\]
+	Since inversion is a diffeomorphism, $W^{-1} =i(W)$ is open. Of course $W_1=W \cup W^{-1} $, and $W_k=W_{k-1} W_1$. This is just
+	\[
+		W_k=W_{k-1} W_1=\bigcup_{g\in W_1} L_g(W_{k-1} )
+	.\]
+	Since $L_g$ is a diffeomorphism, each of these sets is open, so $W_k$ is open. Subgroup follows by $1\in W$. $H$ is then a Lie subgroup by \cref{3.0.12}. If $W$ is connected, then so is $W^{-1} $, and thus $W_1=W \cup W^{-1} $ is connected since $1\in W \cap W^{-1} $. We then see
+	\[
+		W_2 = \mu (W_1 \times W_1)
+	\]
+	is connected since $\mu $ is continuous. Inducting gives $W_k$ is connected. Since each of these sets contains 1, they are not disjoint, so $H$ is connected. If $G$ is connected, then $H$ is an open and closed subgroup so $H=G$.
+\end{proof}
+
+\begin{definition}\label{3.0.14}
+	Let $G$ be a Lie group, and let $G_0 \subseteq G$ be the connected component containing 1. We call $G$ the \emph{identity component of $G$}.
+\end{definition}
+
+\begin{proposition}\label{3.0.15}
+	Let $G$ be a Lie group and $G_0$ the identity component. Then $G_0$ is normal in $G$, and is the \emph{only connected subgroup}. Every connected component of $G$ is diffeomorphic to $G_0$.
+\end{proposition}
+The idea of the proof is that connected components are cosets. Act by $L_g$ and it falls out.
+
+\begin{proposition}\label{3.0.16}
+	If $F : G \to H$ is a Lie group homomorphism, then $\Ker F$ is a properly embedded Lie subgroup of codimension $\operatorname{rk} F$.
+\end{proposition}
+\begin{proof}
+	We get subgroup from group theory. The kernel is the fiber of the identity. Since $F$ has constant rank, the kernel is a properly embedded submanifold.
+\end{proof}
+
+\begin{proposition}\label{3.0.17}
+	let $F : G \to H$ be an injective Lie group homomorphism. Then $F(G)$ has a unique smooth structure such that it is a Lie subgroup of $H$. Furthermore, $G\cong F(G)$.
+\end{proposition}
+\begin{proof}
+	Because $F$ has constant rank, it is (easily shown to be) an injective smooth submersion. Therefore, its image admits a unique smooth structure making it an immersed submanifold, and thus a Lie subgroup. The rest follows.
+\end{proof}
+
+For example, $\operatorname{SL} (n,\mathbb{R} )$ is the kernel of $\det : \operatorname{GL} (n,\mathbb{R}  )\to \mathbb{R} $.
+
+\begin{theorem}\label{3.0.18}
+	Let $G$ be a Lie subgruop with $H\subseteq G$ a Lie subgroup. Then $H$ is closed in $G$ if and only if it is embedded.
+\end{theorem}
+
+It will be useful to consider \emph{smooth} group actions of Lie groups on smooth manifolds. The best formalism of this is as a smooth map $G\times M\to M$ which induces the relevant group homomorphism.
+
+Consider $O(n)$ as the subset of $\operatorname{GL} (n,\mathbb{R} )$ such that $\left\langle Ax,Ay \right\rangle =\left\langle x,y \right\rangle $. We call this the orthogonal group. We will define this somehow eventually.

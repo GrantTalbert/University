@@ -1,0 +1,90 @@
+\lecture{10}{Tue 07 Oct 2025 12:31}{Integration}
+
+He gave some advice on what we really need to know about tensors. The main thing to remember is the transformation rule
+\[
+	M_\mu \to M'_\mu =M_\alpha \frac{\mathrm{d}x^\alpha }{\mathrm{d}(x')^\mu } 
+\]
+\[
+	M^\mu \to (M')^\mu =M^\alpha \frac{\mathrm{d}(x')^\mu }{\mathrm{d}x^\alpha } 
+\]
+and the raising and lowering
+\[
+	M_\mu =M^\alpha g_{\alpha \mu } ,\qquad M^\mu =M_\alpha g^{\alpha \mu } 
+.\]
+Of course we may iterate the transformation rule when there are more indices; for example
+\[
+	M_{\mu \nu } \to M'_{\mu \nu } =M_{\alpha \beta } \frac{\mathrm{d}x^\alpha }{\mathrm{d}(x')^\mu } \frac{\mathrm{d}x^\beta }{\mathrm{d}(x')^\nu } 
+.\]
+We also recall that all derivatives commute and that derivatives are vectors and $M_{\alpha \beta } $ is a scalar value acting on it here. The only other main thing to remember is the definition of $\nabla_\mu $ as $\partial _\mu $ plus some Christoffel, the geodesic equation, and the fact that we can always take locally inertial coordinates $g_{\mu \nu } |_p=\eta _{\mu \nu } $ where the first partials vanish.
+
+The Ricci tensor is given by
+\[
+	R_{\mu \nu } =R^{\lambda } _{\mu \lambda \nu } 
+,\]
+and the Ricci scalar is
+\[
+	R=R^\mu _\mu =g^{\mu \nu } R_{\mu \nu } 
+.\]
+
+Define
+\[
+	G_{\mu \nu } =R_{\mu \nu } -\frac{1}{2} g_{\mu \nu } R
+.\]
+This is called the \emph{Einstein tensor}, and it satisfies
+\[
+	\nabla ^\mu G_{\mu \nu } =0
+.\]
+
+We now want to do integration. At each point there exists locally inertial coordinates, so we choose
+\[
+	g_{\mu \nu } \to \eta _{\mu \nu } =g_{\alpha \beta } \frac{\partial x^\alpha }{\partial (x')^\mu } \frac{\partial x^\beta }{\partial (x')^\nu } 
+.\]
+Thus for any metric, we can always work out the jacobian to pass to flat coordinates, giving
+\[
+	\int f(x') \,\mathrm{d} ^nx'=\int \left| \frac{\partial (x')^\mu }{\partial x^\nu }  \right| f(x) \,\mathrm{d} ^nx
+.\]
+We don't want to have to compute the determinant every time, so we write it in terms of the metric. Take the determinant of both sides of the metric transformation $g\to \eta $:
+\[
+	-1=\det \eta _{\mu \nu } =\det \left( g_{\alpha \beta } \frac{\partial x^\alpha }{\partial (x')^\mu } \frac{\partial x^\nu }{\partial (x')^\nu }  \right)=\det g_{\mu \nu } \det \left( \frac{\partial x^\alpha }{\partial (x')^\beta }  \right) ^2
+.\]
+We thus have that the determinant we are interested in is simply
+\[
+	\left| \frac{\partial (x')^\beta }{\partial x^\alpha }  \right| =\sqrt{-\det g_{\mu \nu } } 
+.\]
+We choose to write $g=-\det g_{\mu \nu } $. Thus $\mathrm{d} ^nx'=\mathrm{d} ^nx \sqrt{\left| g \right| } $.
+
+Let's do an example. On the 2-sphere, $g_{\mu \nu } =\operatorname{diag} (1,\sin ^2\theta )$. We have $g=\sin ^2\theta $, so integrals on the sphere are given by integrating over $\mathrm{d} \theta \mathrm{d} \phi \sin \theta f(\theta ,\phi )$.
+
+It will be useful to define integration using differential forms, rather than relying on the presence of a metric. Define the Levi-Civita \emph{tensor} $\varepsilon_{\mu _1 \ldots \mu _k} $ as the Levi-Civita \emph{symbol} times the square root of $g$:
+\[
+	\varepsilon _{\mu _1\ldots \mu _k} =\widetilde{\varepsilon }_{\mu _1\ldots \mu _k} \sqrt{g} 
+.\]
+This is a form. Let's recall that a tensor $T$ is
+\[
+	T=T_{\mu _1 \ldots \mu _n} \mathrm{d} x_1^{\mu _1}  \otimes \ldots \otimes \mathrm{d} x_n^{\mu _n} 
+.\]
+Idk what happened but we introduce the wedge product $\wedge $. We defined it as like $x\wedge y=x\otimes y-y\otimes x$, but its just $\otimes $ quotiented by alternating. Then $\varepsilon $ in spherical coordinates somehow looks like
+\[
+	\int \varepsilon =\int \sin \theta  \,(\mathrm{d} \theta \otimes \mathrm{d} \phi -\mathrm{d} \phi\otimes  \mathrm{d} \theta) =0
+.\]
+So we just replace it with $\mathrm{d} \theta \wedge \mathrm{d} \phi $ and integrate
+\[
+	\int \varepsilon =\int \sin \theta  \,\mathrm{d} \theta \wedge \mathrm{d} \phi \coloneqq \int \sin \theta  \,\mathrm{d} \theta \mathrm{d}\phi 
+.\]
+This is how we define integtation over forms or something. A $p$-form is then just of the form
+\[
+	A=A_{\mu _1\ldots \mu _k} \mathrm{d} x_1^{\mu _1} \wedge\ldots \wedge  \mathrm{d} x_k^{\mu _k} 
+.\]
+We then have
+\[
+	\int A =\int A_{\mu _1\ldots \mu _k}  \,\mathrm{d} x_1\ldots \mathrm{d} x_k
+.\]
+We can integrate $p$-forms without appealing to the metric or computing jacobians. Woo!
+
+We can also compute derivatives of forms. We want $\partial _\alpha A_{\mu _1\ldots \mu _k} $ to be a $p+1$ form, so we just antisymmetrize on everything and we call it the exterior derivative. We call this $\mathrm{d} A$. If we do this twice, then since partials commute we actually have $\mathrm{d} ^2A=0$.
+
+We say $A$ is \emph{exact} if $A=\mathrm{d} B$ for some form $B$, and $A$ is \emph{closed} if $\mathrm{d} A=0$. Exact implies closed, but not the converse since we could have $A$ be symmetric in its indices. It would be nice to know which ones are exact though. Next time, we will see that whether or not closed forms are exact depends on the \emph{topology} of the manifold. Oh also Stokes' theorem: on a manifold $M$ and with a form $\omega $,
+\[
+	\int_M \mathrm{d} \omega =\int_{\partial M} \omega 
+.\]
+
