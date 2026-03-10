@@ -10,6 +10,30 @@
 \usepackage{titlepageBU}
 \begin{document}
 
-(b) 
+(a) Take $\mathbf{x} $ to be the direction to the right, $\mathbf{y} $ to be the upwards direction, and $\mathbf{z} $ is then out of the page. The initial velocity is in the $\mathbf{x} $-direction, so write $\mathbf{v} =v\mathbf{x} $. The $\mathbf{B} $-field is in the $-\mathbf{z} $-direction, so write $\mathbf{B} =-B\mathbf{z} $, where $B>0$. Then by bilinearity of the cross product,
+\[
+	\mathbf{F} =q(\mathbf{v} \times \mathbf{B} )=q(v \mathbf{x} \times (-B \mathbf{z} ))=-qvB(\mathbf{x} \times \mathbf{z} )=-qvB(-\mathbf{y} )=qvB \mathbf{y} 
+.\]
+If the charge is positive, then the force is up, and otherwise it is down. Since the force is up in the image, the charge \emph{is positive}.
+
+(b) Since $\mathbf{v} $ and $\mathbf{B} $ are perpendicular, the magnetic force $F_B=qvB$. The centripetal force is $F_c=\frac{mv^2}{R} =\frac{pv}{R} $. Equating these yields
+\[
+	\frac{pv}{R} =qvB \implies p=qBR
+.\]
+To find $R$, we note that the circle is centered at $(0,R)$ and contains the point $(a,d)$. This point therefore satisfies the circle equation $x^2+(y-R)^2=R^2$:
+\[
+	a^2+(d-R)^2=R^2 \implies a^2 + d^2-2dR + R^2 = R^2
+\]
+\[
+	\implies a^2+d^2=2dR
+.\]
+We thus have
+\[
+	R=\frac{a^2+d^2}{2d} 
+.\]
+Plugging this in yields
+\[
+	p=\boxed{\frac{qB\left( a^2+d^2 \right) }{2d} }
+.\]
 
 \end{document}

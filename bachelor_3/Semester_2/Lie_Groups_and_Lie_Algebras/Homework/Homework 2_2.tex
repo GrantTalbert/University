@@ -1,0 +1,336 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{titlepageBU}
+\title{Homework 2}
+\begin{document}
+\makeproblem
+
+\begin{problem}
+	Show that
+	\[
+		\exp \begin{pmatrix}
+		a & b \\
+		0 & d
+		\end{pmatrix}=\begin{pmatrix}
+		e^a & b\frac{e^a-e^d}{a-d}  \\
+		0 & e^d
+		\end{pmatrix}
+	\]
+	where the right hand side is defined by taking the limit when $a=d$. Let $A$ be the matrix we are exponentiating.
+\end{problem}
+\begin{proof}
+ We start by computing $A^k$. We claim the diagonal entries $(A_{ii})^k=(A^k)_{ii}  $ and that the bottom-left corner has $A_{21} ^k=0$. The statement holds immediately for $k=0,1$, so assume the inductive hypothesis, and denote the off-diagonal term by $A_{12}^k $. Then
+	\[
+		\begin{pmatrix}
+		a^k & A_{12} ^k \\
+		0 & d^k
+		\end{pmatrix}\begin{pmatrix}
+		a & b \\
+		0 & d
+		\end{pmatrix}=\begin{pmatrix}
+		a^{k+1}  & a^kb + A^k_{12} d \\
+		0 & d^{k+1} 
+		\end{pmatrix}
+	.\]
+	It suffices to compute  $A_{12} ^k$. We have the relation $A^{k+1}_{12} =a^kb + A_{12} ^kd$, $A^0_{12} =b$. We claim
+	\[
+		A_{12} ^k=b \sum_{i=0}^{k-1} a^{k-1-i} d^i
+	.\]
+	For $k=0$ the statement is trivial since the empty sum is 0, so assume the inductive hypothesis. We have
+	\[
+		A_{12} ^{k+1} =a^kb + \left( \sum_{i=0}^{k-1} a^{k-1-i} d^i \right) d
+	.\]
+	\begin{align*}
+		A_{12} ^{k+1} &=a^kb + \left( \sum_{i=0}^{k-1} a^{k-1-i} d^i \right) d\\
+			      &=b\left( a^kd^0 + \sum_{i=0}^{k-1} a^{k-1-i} d^{i+1}  \right) \\
+			      &=b\left( a^{(k+1)-1-0} d^0 + \sum_{i=1}^{k} a^{k-1-(i-1)} d^i \right) \\
+			      &=b\left( a^{(k+1)-1-0} d^0 + \sum_{i=1}^{k} a^{(k+1)-1-i} d^i \right) \\
+			      &=b \sum_{i=0}^{k} a^{(k+1)-1-i} d^i
+	.\end{align*}
+	The statement follows by induction. We rewrite this as
+	\[
+		A_{12} ^{k} =b a^{k-1}\sum_{i=0}^{k}(a^{-1} d)^{i} 
+	.\]
+	Since we assume $a,d\neq 0$, this is a (finite) geometric series, and when $a\neq d$ admits the solution
+	\begin{align*}	
+		A_{12} ^{k} &=ba^{k-1} \left( \frac{1-(a^{-1} d)^{k} }{1-a^{-1} d}  \right)\\
+			    &=b\left( \frac{a^{k-1} -a^{k-1-k} d^k}{1-a^{-1} d}  \right)\\
+			    &=b\left( \frac{a^{k-1} -a^{-1} d^k}{\frac{a}{a} -\frac{d}{a} }  \right) \\
+			    &=ab\left( \frac{a^{k-1} -a^{-1} d^k}{a-d}  \right) \\
+			    &=b\frac{a^k-d^k}{a-d} 
+	.\end{align*}
+	We thus have
+	\[
+		A^k = \begin{pmatrix}
+		a^k & b\frac{a^k-d^k}{a-d}  \\
+		0 & d^k
+		\end{pmatrix}
+	.\]
+	We now compute the matrix exponential
+	\[
+		e^{A} =\sum_{n=0}^{\infty} \frac{1}{n!} A^n = \begin{pmatrix}
+			\sum_{n=0}^{\infty} \frac{a^n}{n!}  & \sum_{n=0}^{\infty} \frac{b}{n!} \frac{a^n-d^n}{a-d}  \\[10pt]
+		0 & \sum_{n=0}^{\infty} \frac{d^n}{n!} 
+		\end{pmatrix}=\begin{pmatrix}
+		e^a & \sum_{n=0}^{\infty} \frac{b}{n!} \frac{a^n-d^n}{a-d}  \\
+		0 & e^d
+		\end{pmatrix}
+	.\]
+	We note that
+	\[
+		\sum_{n=0}^{\infty} \frac{b}{n!} \frac{a^n-d^n}{a-d} =\frac{b}{a-d} \sum_{n=0}^{\infty} \frac{a^n-d^n}{n!} =\frac{b}{a-d} \left( \sum_{n=0}^{\infty} \frac{a^n}{n!} -\sum_{n=0}^{\infty} \frac{d^n}{n!}  \right) =\frac{b}{a-d} (e^a-e^d)
+	.\]
+	Here we used the fact that $n!\to \infty $ faster than $a^n -d^n$, hence the sum can be shown to converge absolutely, and thus we may commute the terms in the infinite sum to distribute over the subtraction. Thus
+	\[
+		e^A = \begin{pmatrix}
+		e^a & b\frac{e^a-e^d}{a-d} \\
+		0 & e^d
+		\end{pmatrix}
+	.\]
+	To determine $e^A$ when $a=d$, we take the limit $a\to d$ and apply L'Hopital's rule by differentiating with respect to $a$ to get
+	\[
+		\lim_{a\to d} \frac{e^a-e^d}{a-d} =\lim_{a\to d} \frac{e^a}{1} =e^a
+	.\]
+	Alternatively, we could have used
+	\[
+		A^k_{12} =ba^{k-1} \sum_{i=0}^{k} \left( a^{-1} a \right) ^i = ba^{k-1} \sum_{i=0}^{k} 1\equiv kba^{k-1} 
+	.\]
+	Then the top right entry of the matrix exponential would have been
+	\[
+		\sum_{n=0}^{\infty} \frac{nba^{n-1} }{n!} =\frac{\mathrm{d}}{\mathrm{d}a} \sum_{n=0}^{\infty} \frac{ba^n}{n!} =\frac{\mathrm{d}}{\mathrm{d}a} be^a = be^a
+	.\]
+	
+\end{proof}
+
+
+\begin{problem}
+	Consider
+	\[
+		X=\begin{pmatrix}
+		1 & 2 \\
+		-2 & 1
+		\end{pmatrix},\qquad Y=\begin{pmatrix}
+		1 & 2 \\
+		2 & 1
+		\end{pmatrix}
+	.\]
+	Compute $e^{tX} $ and $e^{tY} $ by diagonalization. Visualize the curves $e^{tX} \cdot v$ and $e^{tY} \cdot v$ for $v\neq 0$.
+\end{problem}
+\begin{proof}
+	To diagonalize a matrix, we compute its eigenvalues and eigenvectors. We start by diagonalizing $X$.
+	\[
+		\det \begin{pmatrix}
+		\lambda -1 & -2 \\
+		2 & \lambda -1
+		\end{pmatrix}=\lambda ^2-2\lambda +5=0
+	\]
+	\[
+		\implies \lambda =\frac{2\pm \sqrt{4-20} }{2} =\frac{2\pm 4i}{2} =1\pm 2i
+	.\]
+	\[
+		\begin{pmatrix}
+		1 & 2 \\
+		-2 & 1
+		\end{pmatrix}\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix}=\begin{pmatrix}
+	(1+2i)x \\
+	(1+2i)y
+	\end{pmatrix}\implies \begin{pmatrix}
+	x+2y \\
+	-2x+y
+	\end{pmatrix}=\begin{pmatrix}
+	x+2ix \\
+	y+2iy
+	\end{pmatrix}
+	.\]
+	We obtain from $x+2y=x+2ix$ that $2y=2ix$, hence $y=ix$ and $x=-iy$. Set $x=1$ to obtain the first eigenvector $v_1=(1,i)$.
+	\[
+		\begin{pmatrix}
+		x+2y \\
+		-2x+y
+		\end{pmatrix}=\begin{pmatrix}
+		x-2ix \\
+		y-2iy
+		\end{pmatrix}
+	.\]
+	We obtain $2y=-2ix$, hence $y=-ix$. Set $x=1$ to obtain the second eigenvector $v_2=(1,-i)$. The inverse of $\begin{pmatrix}
+	v_1 & v_2
+	\end{pmatrix}$ is given by
+	\[
+		\begin{pmatrix}
+		1 & 1 \\
+		i & -i
+		\end{pmatrix}^{-1} =\frac{1}{-2i} \begin{pmatrix}
+		-i & -1 \\
+		-i & 1
+		\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+		1 & -i \\
+		1 & i
+		\end{pmatrix}
+	.\]
+	We then have
+	\[
+		\frac{1}{2} \begin{pmatrix}
+		1 & 1 \\
+		i & -i
+		\end{pmatrix}\begin{pmatrix}
+		1+2i & 0 \\
+		0 & 1-2i
+		\end{pmatrix}\begin{pmatrix}
+		1 & -i \\
+		1 & i
+		\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+		1+2i & 1-2i \\
+		-2+i & -2-i
+		\end{pmatrix}\begin{pmatrix}
+		1 & -i \\
+		1 & i
+		\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+		2 & 4 \\
+		-4 & 2
+		\end{pmatrix}=X
+	.\]
+	Thus the matrix is properly diagonalized. Write $X=ADA^{-1} $ with $A,D$ defined as the relevant above matrices. We then compute the matrix exponential
+	\[
+		e^{tX} =A e^{tD} A^{-1} =\frac{1}{2}\begin{pmatrix}
+		1 & 1 \\
+		i & -i
+		\end{pmatrix}\begin{pmatrix}
+		e^{t(1+2i)}  & 0 \\
+		0 & e^{t(1-2i)} 
+		\end{pmatrix}\begin{pmatrix}
+		1 & -i \\
+		1 & i
+		\end{pmatrix}=
+	\]
+	\[
+		\frac{1}{2} \begin{pmatrix}
+		e^{t(1+2i)} +e^{t(1-2i)}  & -i\left( e^{t(1+2i)} -e^{t(1-2i)}  \right)  \\
+		i\left( e^{t(1+2i)} -e^{t(1-2i)}  \right)  & e^{t(1+2i)} +e^{t(1-2i)} 
+		\end{pmatrix}	
+	.\]
+	Euler's formula provides some convenient simplifications. 
+	\[
+		e^{t(1+2i)} +e^{t(1-2i)} =2e^t \cos (2t),\qquad e^{t(1+2i)} -e^{t(1-2i)} =2ie^t \sin (2t)
+	.\]
+	Then
+	\[
+		e^{tX} = \begin{pmatrix}
+		e^t \cos (2t) & e^t \sin (2t) \\
+		e^t \sin (2t) & e^t \cos (2t)
+		\end{pmatrix}
+	.\]
+	We fix $v=(1,1)$ and plot
+	\[
+		e^{tX} \cdot v=\begin{pmatrix}
+		e^t \left( \cos (2t)+\sin (2t) \right)  \\
+		e^t \left( \cos (2t)-\sin (2t) \right) 
+		\end{pmatrix}
+	.\]
+	\begin{center}
+	\begin{tikzpicture}
+    \begin{axis}[
+	    width=15cm,
+	    height=15cm,
+        axis lines = center,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        trig format plots = rad,
+        xmin = -6, xmax = 6,
+        ymin = -6, ymax = 6,
+        axis equal image
+    ]
+        \addplot [
+            domain=-10:1.6,
+            samples=500,
+            color=blue,
+            thick,
+            ->
+        ]
+        ( {exp(t)*(cos(2*t) + sin(2*t))}, {exp(t)*(cos(2*t) - sin(2*t))} );
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+We now repeat the process for $Y$, showing much less work. We obtain
+\[
+	Y=\begin{pmatrix}
+	1 & 2 \\
+	2 & 1
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	-1 & 1 \\
+	1 & 1
+	\end{pmatrix}\begin{pmatrix}
+	-1 & 0 \\
+	0 & 3
+	\end{pmatrix}\begin{pmatrix}
+	-1 & 1 \\
+	1 & 1
+	\end{pmatrix}
+.\]
+Then
+\[
+	e^{tY} =\frac{1}{2} \begin{pmatrix}
+	-1 & 1 \\
+	1 & 1
+	\end{pmatrix}\begin{pmatrix}
+	e^{-t}  & 0 \\
+	0 & e^{3t} 
+	\end{pmatrix}\begin{pmatrix}
+	-1 & 1 \\
+	1 & 1
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	 e^{3t} +e^{-t}  & e^{3t} -e^{-t}  \\
+	e^{3t} -e^{-t}  & e^{3t} +e^{-t} 
+	\end{pmatrix} 
+.\]
+Again choosing $v=(1,1)$, we obtain
+\[
+	e^{tY} \cdot v=\begin{pmatrix}
+	e^{3t}  \\
+	e^{3t} 
+	\end{pmatrix}
+.\]
+Plotting:
+
+	\begin{center}
+	\begin{tikzpicture}
+    \begin{axis}[
+	    width=15cm,
+	    height=15cm,
+        axis lines = center,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        xmin = -10, xmax = 10,
+        ymin = -10, ymax = 10,
+        axis equal image
+    ]
+        \addplot [
+            domain=-10:0.7,
+            samples=500,
+            color=blue,
+            thick,
+            ->
+        ]
+        ( {exp(3*t)}, {exp(3*t)} );
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{proof}
+
+
+\end{document}

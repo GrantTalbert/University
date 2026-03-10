@@ -1,0 +1,38 @@
+\lecture{28}{Fri 05 Dec 2025 12:21}{Integrals of forms}
+
+Give $\mathbb{R} ^n$ the standard orientation, and let $\omega \in \Omega ^n_c(\widetilde{U} )$, where $\Omega _c$ is compactly supported forms. Then $\omega =f(x^1, \ldots ,x^n)\mathrm{d} x^1 \wedge \cdots \wedge \mathrm{d} x^n$. To integrate this in $\mathbb{R} ^n$, we just do
+\[
+	\int_{\widetilde{U} } \omega=\int_{\widetilde{U} } f(x^1, \ldots ,x^n) \,\mathrm{d} x^1 \cdots x^n
+.\]
+We would like to generalize this. Let $(M,\mathrm{or} )$ be an oriented $n$-manifold and $\omega \in \Omega ^n(M)$ which is compactly supported in some chart $(U,\varphi )$ which is either positively or negatively oriented. Define
+\[
+	\int_M \omega \coloneqq \pm \int_{U} \varphi ^*\omega ,
+\]
+with the positive sign for the positive orientation and the negative sign for the negative orientation. It is a simple theorem that this is well-defined in the sense that it is invariant under choice of chart.
+
+To finally define integrals over the entire manifold, let $M$ be an $n$-manifold with orienation, and $\omega $ a compactly supported $n$-form on $M$. Let $\left\{ U_i \right\} $ be a finite open cover of $\operatorname{supp} \omega $ by charts either all positively or negatively oriented, and let $\left\{ \psi _i \right\} $ be a subordinate smooth partition of unity. Define
+\[
+	\int_M \omega \coloneqq \sum_{i} \int_M \psi _i\omega 
+.\]
+Here, juxtaposition denotes \emph{pointwise multiplication}.
+\begin{proposition}\label{owo}
+	This definition is well-defined. Moreover, it is $\mathbb{R} $-linear, is orientation reversing (if $-M$ is $M$ with opposite orientation, then:
+	\[
+		\int _{-M} \omega =-\int _M\omega  ,
+	\]
+	if $\omega $ is a positively oriented form, then $\int _M\omega >0$, and if $F : M \to N$ is an orientation preserving or reversing diffeomorphism, then
+	\[
+		\int_M\omega =\pm\int_NF^*\omega ,
+	\]
+	with $-$ if $F$ is orientation-reversing.
+\end{proposition}
+\begin{theorem}[Stokes]\label{the end}
+	Let $M$ be a smooth oriented $n$-manifold with boundary, and let $\omega\in \Omega _c^{n-1} (M)$. Then
+	\[
+		\int_M \mathrm{d}\omega  = \int_{\partial M}\omega 
+	.\]
+\end{theorem}
+\begin{remark}
+	We implicitly interpret the $\omega $ on the right as $\iota _{\partial M} ^*M$, and induce the usual orientation on the boundary. If $M$ doesn't have boundary, then $\partial M=\varnothing $, so the integral on the right vanishes.
+\end{remark}
+

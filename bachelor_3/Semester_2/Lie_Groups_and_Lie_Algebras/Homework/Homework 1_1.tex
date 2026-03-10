@@ -1,0 +1,116 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\begin{document}
+\makeproblem
+\begin{problem}
+	Let $a\in\mathbb{R} $ be irrational, and consider the set
+	\[
+		G\coloneqq \left\{ \begin{pmatrix}
+		e^{it}  & 0 \\
+		0 & e^{ita} 
+		\end{pmatrix}\mid t\in\mathbb{R}  \right\} 
+	.\]
+	Show that the closure of $G$ in $\operatorname{GL} (2,\mathbb{C} )$ is the torus
+	\[
+		T\coloneqq \left\{ \begin{pmatrix}
+		e^{i\theta }  & 0 \\
+		0 & e^{i\phi } 
+		\end{pmatrix}\mid ,\theta ,\phi \in\mathbb{R}  \right\} 
+	.\]
+\end{problem}
+\begin{proof}
+	First we show that $T\subseteq \overline{G} $. Let 
+	$$A=\begin{pmatrix}
+	e^{i\theta }  & 0 \\
+	0 & e^{i\phi } 
+	\end{pmatrix}\in T,$$
+	and let $U\subseteq \operatorname{GL} (2,\mathbb{C} )$ be an open neighborhood of $A$. Since the product topology has a basis given by products of open sets in $\mathbb{C} $, which has a basis given by open balls, we can take $U$ to be a product $V_1\times V_2\times V_3\times V_4$ for some open sets $V_i\subseteq \mathbb{C} $, $1\leq i\leq 4$ with $e^{i\theta } \in V_1$, $e^{i\phi } \in V_2$, and $0\in V_3,V_4$. It suffices to show $U \cap G \neq \varnothing $. For simplicity of notation, we identify matrices with tuples via the identification
+	\[
+		\begin{pmatrix}
+		a & b \\
+		c & d
+		\end{pmatrix}\iff (a,d,b,c)
+	.\]
+	It is useful to recall \cite{hall} 1.6 exercise 9, which states that $\left\{ e^{i2\pi na} \mid n\in\mathbb{Z}  \right\} $ is dense in $S^1$ whenever $a$ is irrational. Define $t_n \coloneqq \theta +2\pi n$ for each $n\in\mathbb{Z} $, and note that
+	\[
+		e^{it_n} =e^{i\theta +i2\pi n} =e^{i\theta } e^{i2\pi n} =e^{i\theta } 
+	.\]
+	We claim there exists $n$ such that $(e^{it_n} ,e^{it_na} ,0,0)\in U$. Since $e^{it_n} =e^{i\theta } \in V_1$, it suffices to show that there exists an $n$ such that $e^{it_na} \in V_2$. Note that
+	\[
+		e^{it_na} =e^{i(\theta +2\pi n)a} =e^{i\theta a} e^{i2\pi na} 
+	.\]
+	Note that multiplication by $e^{i\theta a} $ is a homeomorphism. Hence there is $e^{it_na} \in V_2$ if and only if there is $e^{i2\pi na} \in e^{-i\theta a} V_2$. Since $e^{-i\theta a} V_2$ is the preimage of the open set $V_2$ under the continuous map $p\mapsto e^{i\theta a} p$, it is open. By density of $\left\{ e^{i2\pi na} \mid n\in\mathbb{Z}  \right\} $ in $S^1$, since $e^{-i\theta a} V_2 \cap S^1$ is open in $S^1$, there exists $e^{i2\pi na} $ in $e^{-i\theta a} V_2 \cap S^1 \subseteq e^{-i\theta a}V_2$. Thus $(e^{i\theta } ,e^{i\phi } ,0,0)\in \overline{G} $.
+
+	Now we show $\overline{G} \subseteq T$. First note that by definition, $G\subseteq T$. Next note that if $A\in \overline{G} $, then every open neighborhood of $A$ intersects $G$, and thus $T$. Hence $A\in \overline{T} $. We complete the proof by showing $T$ is closed. Note that $S^1$ is closed and bounded when viewed in $\mathbb{R} ^2 \cong \mathbb{C} $, and by Heine-Borel's theorem, $S^1$ is compact. By Tychonoff's theorem, the product $S^1\times S^1$ is compact in $\mathbb{C} ^2$. The inclusion map $\mathbb{C} ^2\hookrightarrow \mathbb{C} ^4$ defined by $(w,z)\mapsto (w,z,0,0)$ is clearly continuous, and the image of $S^1\times S^1$ under this inclusion is $T$. Since images of continuous maps preserve compactness, $T$ is compact in $\mathbb{C} ^4$. Since $\mathbb{C} ^4$ is Hausdorff, and compact sets are closed in Hausdorff spaces, $T$ is closed in $\mathbb{C} ^4$. Since passing to the subspace topology preserves closedness, $T$ is closed in $\operatorname{GL} (2,\mathbb{C} )$. Thus $T=\overline{T} $, and since $\overline{G} \subseteq \overline{T} $, we have $\overline{G} \subseteq T$.
+\end{proof}
+
+\begin{problem}
+	Prove that the Cayley transformation
+	\[
+		A\mapsto (I-A)(I+A)^{-1} 
+	\]
+	sends orthogonal matrices in $\operatorname{SO} (2)$ with eigenvalue $\neq -1$ to skew-symmetric matrices in $\mathfrak{so} (2)$, and vice versa.
+
+\end{problem}
+\begin{proof}
+	Let $A\in \operatorname{SO} (2)$ without eigenvalue $-1$. Since $\lambda $ is an eigenvalue if and only if the matrix $A-\lambda I$ is not invertible, it follows that $A-(-1)I=A+I$ must be invertible. Define $Q\coloneqq (I-A)(I+A)^{-1} $. We must show $Q^t=-Q$. Since $A$ is orthogonal, $A^t=A^{-1} $. By the various properties of transpose,
+	\begin{align*}
+		Q^t&=\left( (I-A)(I+A)^{-1}  \right) ^t\\
+		   &=\left( \left( I+A \right) ^{-1}  \right) ^t\left( I-A \right) ^t\\
+		   &=\left( I^t+A^t \right) ^{-1} \left( I^t-A^t \right) \\
+		   &=\left( I+A^{-1}  \right) ^{-1} \left( I-A^{-1}  \right)\\
+		   &=\left( \left( A+I \right) A^{-1}  \right) ^{-1} \left( A-I  \right)A^{-1}\\
+		   &=A(A+I)^{-1} (A-I)A^{-1} \\
+		   &\overset{!}{=}(A+I)^{-1} A A^{-1} (A-I)\\
+		   &=(A+I)^{-1} (A-I)\\
+		   &\overset{!!}{=}(A-I)(A+I)^{-1} \\
+		   &=-(I-A)(I+A)^{-1} \\
+		   &=-Q
+	.\end{align*}
+	The equalities marked with $!$ and $!!$ require some minor justification. For the first, note that since $A$ commutes with $I$ and itself, it thus commutes with $A+I$ and $A-I$. Note that if $BC=CB$, then $C^{-1} B=C^{-1} BCC^{-1} =C^{-1} CBC^{-1} =BC^{-1} $. Applying this here yields $A(A+I)^{-1} =(A+I)^{-1} A$ and $(A-I)A^{-1} =A^{-1} (A-I)$. The equality marked with $!!$ follows by this same logic: since $A,I$ commute, the linear combinations $A-I$ and $A+I$ commute, and thus so do their inverses.
+
+	Now let $A\in \mathfrak{so} (2)$, meaning $A^t=-A$. Skew symmetric matrices have purely imaginary eigenvalues, so by the same logic as before $I+A$ is invertible. Define $Q\coloneqq (I-A)(I+A)^{-1} $. We must show $Q^tQ=I$ and $\det Q=1$.
+\begin{align*}
+	Q^T &= \left( (I-A)(I+A)^{-1} \right)^t \\
+&= ((I+A)^{-1})^t (I-A)^t \\
+&= (I^t+A^t)^{-1} (I^t-A^t)\\
+&=(I-A)^{-1} (I+A)\\
+&=\left( (I+A)^{-1} (I-A) \right) ^{-1} \\
+&=\left( (I-A)(I+A)^{-1}  \right) ^{-1} \\
+&=Q^{-1} 
+\end{align*}
+Commuting $I-A$ and $(I+A)^{-1} $ follows by the same logic as before. Thus $Q$ is indeed orthogonal. Now using the fact that determinant preserves multiplication, and that $\det B^t=\det B$,
+\begin{align*}
+	\det Q &= \det \left( I-A \right) \det \left( (I+A)^{-1}  \right) \\
+	       &=\det (I-A) \left( \det (I+A) \right) ^{-1} \\
+	       &=\frac{\det (I-A)}{\det (I+A)} \\
+	       &=\frac{\det (I-A)^t}{\det (I+A)} \\
+	       &=\frac{\det (I^t-A^t)}{\det (I+A)} \\
+	       &=\frac{\det (I+A)}{\det (I+A)} \\
+	       &=1
+.\end{align*}
+Finally, we show that $Q$ does not have $-1$ as an eigenvalue. Suppose for contradiction that there exists $v\neq 0$ with $Qv=-v$. Then
+\begin{align*}
+	&\qquad\,\,\,\,(I-A)(I+A)^{-1} v=-v \\
+	&\implies (I+A)^{-1} (I-A)v=-v\\
+	&\implies (I-A)v=-(I+A)v\\
+	&\implies v-Av=-v-Av\\
+	&\implies v=-v\\
+	&\implies v=0
+.\end{align*}
+This contradicts $v\neq 0$, meaning $-1$ is not an eigenvalue of $Q$.
+\end{proof}
+
+	\bibliographystyle{alpha}
+	\bibliography{refs-1.bib}
+\end{document}

@@ -1,0 +1,28 @@
+\lecture{3}{Thu 29 Jan 2026 11:00}{h}
+
+Oh god we went to a lecture on shifted symplectic structures last class that i did NOT understand because i dont know AG. i was following until he started computing homology and i dont know what (co?)homology theory he was using but it WASNT THE USUAL ONE
+
+Let $M$ a Lie group. Then $\Aut_{\mathcal{M} \mathrm{an} } (M) $ is a Lie group as well. Then $T_1\Aut(M) =\mathfrak{diffeo} (M)$ is the Lie algebra. The convention is that $\Aut(M) $ acts on $M$ on the right as follows. Define $\cdot : \Aut(M) \times M \to M$ by, for $x\in M$ and $\rho \in \Aut(M) $,
+\[
+	x\cdot \rho \coloneqq \rho ^{-1} (x)
+.\]
+
+\begin{remark}
+	Since Lie groups have canonical isomorphisms $T_gG \cong T_eG$ for all $g\in G$, a metric on a Lie group is the same as an inner product on $T_eG$, and simply forcing left-invariance.
+\end{remark}
+\begin{definition}\label{1.2.7}
+	The Levi-Civita connection is the unique torsion-free metric-preserving connection. In local coordinates,
+	\[
+		\nabla _i \partial _j=\Gamma _{ij} ^k \partial _k
+	.\]
+\end{definition}
+
+Recall the geodesic equation
+\[
+	\frac{\mathrm{d}^2x^\mu }{\mathrm{d}\tau ^2} +\Gamma _{\alpha \beta } ^\mu \frac{\mathrm{d}x^\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}x^\beta }{\mathrm{d}\tau } =0
+.\]
+Then if $X,Y,Z$ vector fields,
+\[
+	g(\nabla _XY,Z)=\partial _Xg(Y,Z)+\partial _Yg(X,Z)-\partial _Zg(X,Y)+g([X,Y],Z)-g([Y,Z],X)+g([Z,X],Y)
+.\]
+

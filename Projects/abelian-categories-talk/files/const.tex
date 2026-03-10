@@ -1,6 +1,6 @@
-\section{Examples and constructions in abelian categories}
+\section{Homology}
 
-We begin this section with some examples of abelian categories. Clearly, $k$-$\Vect$ is an abelian category, and so are $\Ab $ and $R$-$\Mod$, since we modeled them after these categories. The following definition gives another example.
+We begin this section with some examples of abelian categories. Clearly, $\Vect_{k} $ is an abelian category, and so are $\Ab $ and $\Mod_R$, since we modeled abelian categories after these categories. The following definition gives another example.
 
 \begin{definition}\label{5.1}
 	Let $\mathcal{A} $ be an abelian category. The category $\Ch(\mathcal{A} ) $ of \emph{chain complexes} in $\mathcal{A} $ is defined by taking objects to be chain complexes $x_{\bullet} \in \Ch(\mathcal{A} ) $, and morphisms $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ are collections of functions $\left\{ f_n \right\}_{n\in\mathbb{Z} } $ which commute with differentials in the sense that the diagram
@@ -8,9 +8,9 @@ We begin this section with some examples of abelian categories. Clearly, $k$-$\V
 	\ldots \ar[" d_{n+2}  ", r]  & x_{n+1} \ar[" d_{n+1}  ", r] \ar[" f_{n+1}  "', d]  & x_n \ar[" d_n ", r] \ar[" f_n "', d]  & x_{n-1} \ar[" d_{n-1}  ", r] \ar[" f_{n-1}  "', d]  & \ldots  \\
 	\ldots \ar[" d_{n+2}  "', r]  & y_{n+1} \ar[" d_{n+1}  "', r]  & y_n \ar[" d_n "', r]  & y_{n-1} \ar[" d_{n-1}  "', r]  & \ldots 
 	\end{tikzcd}\]
-	commutes. More precisely,
+	commutes. More explicitly,
 	\[
-		f_{n-1} \circ d^x_{n} =d_{n}^y \circ f_{n} 
+		f_{n-1} \circ d_{n} =d_{n} \circ f_{n} 
 	.\]
 	Composition and identity are given pointwise.
 \end{definition}
@@ -18,14 +18,12 @@ We begin this section with some examples of abelian categories. Clearly, $k$-$\V
 \begin{proposition}\label{5.2}
 	The category $\Ch(\mathcal{A} ) $ is abelian.
 \end{proposition}
-\begin{proof}
-	A good exercise. The categorically-minded reader can simplify the proof by recognizing $\Ch(\mathcal{A} ) $ as a full subcategory of $\Fun(\mathbb{Z} ,\mathcal{A} )$, and finding the theorem in \cite{ml} about (co)limits in functor categories.
-\end{proof}
+The proof of this fact is a good exercise. The categorically-minded reader can simplify the proof by recognizing $\Ch(\mathcal{A} ) $ as a full subcategory of $\Fun(\mathbb{Z} ,\mathcal{A} )$, and recalling how (co)limits in functor categories are defined. It then remains only to show that $\Ch(\mathcal{A} ) $ is stable under the relevant (co)limits.
 
-Another example of an abelian category in particular use in algebraic geometry is as follows. Given an abelian category $\mathcal{A} $ and a topological space $X$ (more generally, a site), the category $\mathcal{S} \mathrm{hf}_\mathcal{A} (X)$ of sheaves on $X$ with values in $\mathcal{A} $ is an abelian category. This means categories such as the category $\mathcal{S} \mathrm{hf} _{\Ab } (X)$ of sheaves of abelian groups are useful, since one can immediately do homological algebra with sheaves.
+Another example of an abelian category in particular use in geometry is as follows. Given an abelian category $\mathcal{A} $ and a topological space $X$ (more generally, a site), the category $\mathcal{S} \mathrm{hf}_\mathcal{A} (X)$ of sheaves on $X$ with values in $\mathcal{A} $ is an abelian category. This means categories such as the category $\mathcal{S} \mathrm{hf} _{\Ab } (X)$ of sheaves of abelian groups are useful, since one can immediately do homological algebra with sheaves.
 
 \begin{construction}\label{5.3}
-	In order to actually do homological algebra, we now do good on our promise to construct homologies of chain complexes in an abelian group $\mathcal{A} $. Let $x_{\bullet} $ be a chain complex. Recall that in $k$-$\Vect$, we defined homology as $H_i(x_{\bullet} )=\Ker d_i /\Im d_{i+1} $. This can be viewed as the cokernel of the inclusion $\Im d_{i+1} \hookrightarrow \Ker d_i$. We thus need to construct a map $\Im d_{i+1} \to \Ker d_i$ in an arbitrary abelian category which we can take the cokernel of.
+	In order to actually do homological algebra, we now do good on our promise to construct the homology of chain complexes in an abelian group $\mathcal{A} $. Let $x_{\bullet} $ be a chain complex. Recall that in $\Vect_k$, we defined homology as $H_i(x_{\bullet} )=\Ker d_i /\Im d_{i+1} $. This can be viewed as the cokernel of the inclusion $\Im d_{i+1} \hookrightarrow \Ker d_i$. We thus need to construct a map $\Im d_{i+1} \to \Ker d_i$ in an arbitrary abelian category which we can take the cokernel of.
 
 	Consider just a part of the chain complex
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
@@ -57,7 +55,7 @@ Another example of an abelian category in particular use in algebraic geometry i
 \end{construction}
 
 \begin{proposition}\label{5.4}
-	Let $\mathcal{A} $ be an abelian category. Then homology is a functor $H_n : \Ch(\mathcal{A} )  \to \mathcal{A} $.
+	Let $\mathcal{A} $ be an abelian category. Then for any $n$, the $n$th homology is a functor $H_n : \Ch(\mathcal{A} )  \to \mathcal{A} $.
 \end{proposition}
 \begin{proof}
 	We already have an object function $x_{\bullet} \mapsto H_n(x_{\bullet} )$, so we need to show that morphisms $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ induce morphisms $H_n(f_{\bullet} ): H_n(x_{\bullet} ) \to H_n(y_{\bullet} )$ in a functorial manner. First, we construct the morphism $H_n(f_{\bullet} )$. Consider the diagram
@@ -75,12 +73,12 @@ Another example of an abelian category in particular use in algebraic geometry i
 	\[\begin{tikzcd}[row sep = 3.5em, column sep = 3.5em]
 	\Ker d_n^x \ar[" 0 ", bend left, rr] \ar[" f_n \circ \ker d_n^x ", r] \ar[" \sigma  "', dashed, dr]  & y_n \ar[" d_n^y ", r]  & y_{n-1}  \\					     & \Ker d_n^y \ar[" 0 "', ur] \ar[" \ker d_n^y "', tail, u]  & 
 	\end{tikzcd}\]
-	This gives an induced map $\sigma \Ker d_n^x \to \Ker d_n^y$. By commutativity of the diagram, we also have the commutative diagram of solid arrows
+	This gives an induced map $\sigma :\Ker d_n^x \to \Ker d_n^y$. By commutativity of the diagram, we also have the commutative diagram of solid arrows
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	x_{n+1} \ar[" \coim d^x_{n+1}  ", two heads, r] \ar[" f_{n+1}  "', d]  & \Im d_{n+1} ^x \ar[" \psi _x ", r]  & \Ker d_n^x \ar[" \ker d_n^x ", tail, r] \ar[" \sigma  ", dotted, d]  & x_n \ar[" f_n ", r]  & y_n \\
 	y_{n+1} \ar[" \coim d_{n+1} ^y "', two heads, r]  & \Im d_{n+1} ^y \ar[" \psi _y "', r]  & \Ker d_n^y \ar[" \ker d_n^y "', tail, urr]  &  & 
 	\end{tikzcd}\]
-	commutes. We want to show that if we include the dotted arrow $\sigma $, then the diagram will still commute. The triangle on the right commutes by definition of $\sigma $.  The rectangle then follows by commutativity of the border. Of course, including $H_n(y_{\bullet} )$ in this diagram gives
+	commutes. We want to show that if we include the dotted arrow $\sigma $, then the diagram will still commute. The triangle on the right commutes by definition of $\sigma $.  The rectangle then follows by commutativity of the border and that $\ker d_n^y$ is monic. Of course, including $H_n(y_{\bullet} )$ in this diagram gives
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	x_{n+1} \ar[" \coim d^x_{n+1}  ", two heads, r] \ar[" f_{n+1}  "', d]  & \Im d_{n+1} ^x \ar[" \psi _x ", r]  & \Ker d_n^x \ar[" \ker d_n^x ", tail, r] \ar[" \sigma  ", d]  & x_n \ar[" f_n ", r]  & y_n \\
 	y_{n+1} \ar[" \coim d_{n+1} ^y "', two heads, r]  & \Im d_{n+1} ^y \ar[" \psi _y "', r] \ar[" 0 "', bend right, rr]  & \Ker d_n^y \ar[" \ker d_n^y "', tail, urr] \ar[" \coker \psi _y "', r]  & H_n(y_{\bullet} ) & 
@@ -102,11 +100,31 @@ Another example of an abelian category in particular use in algebraic geometry i
 	\Im d_{n+1} ^x \ar[" 0 ", bend left, rrr] \ar[" \psi _x ", r]  & \Ker d_n^x \ar[" \sigma  ", r] \ar[" \coker \psi _x "', two heads, d]  & \Ker d^y_n \ar[" \coker \psi _y ", two heads, r]  & H_n(y_{\bullet} ) \\
 	 & H_n(x_{\bullet} )\ar[" H_n(f_{\bullet} ) "', dashed, urr]  &  & 
 	\end{tikzcd}\]
-	Because the morphism $H_n(f_{\bullet} )$ arises by universality, $H_n$ is easily shown to be functorial.
+	Thus there exists a morphism $H_n(f_{\bullet} )$, as claimed. We must now show that this definition is functorial.
+
+	Let $1_{x_\bullet} : x_{\bullet}  \to x_{\bullet} $ be the identity. Then $\sigma $ is defined as the dashed arrow witnessing the commutativity of the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Ker d_n^x \ar[" \sigma  "', dashed, dr] \ar[" 0 ", bend left, rr] \ar[" 1_{x_n} \circ \ker d_n^x ", r]  & x_n \ar[" d_n^x ", r]  & x_{n-1}  \\
+	 & \Ker d_n^x \ar[" \ker d_n^x "', tail, u] \ar[" 0 "', ur]  & 
+	\end{tikzcd}\]
+	In particular, $\ker d_n^x \circ \sigma =\ker d_n^x\circ 1_{\Ker d_n^x} $. Since kernels are monic in abelian categories, $\sigma =1_{\Ker d_n^x} $. Thus $H_n(1_{x_\bullet} )$ arises as the dashed arrow in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Im d_{n+1} ^x \ar[" 0 ", bend left, rr] \ar[" \psi _x ", r]  & \Ker d_n^x \ar[" \coker \psi_x ", r] \ar[" \coker \psi _x "', two heads, d]  & H_n(x_{\bullet} ) \\
+	 & H_n(x_{\bullet} ) \ar[" H_n(1_{x_\bullet} ) "', dashed, ur]  & 
+	\end{tikzcd}\]
+	Note that if the dashed arrow were 1, the diagram would commute. By uniqueness of the induced arrow, $H_n(1_{x_\bullet} )=1_{H_n(x_\bullet)} $.
+
+	Now let $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ and $g_{\bullet} : y_{\bullet}  \to z_{\bullet} $:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_{n+1} \ar[" d_{n+1} ^x ", r] \ar[" f_{n+1}  "', d]  & x_n \ar[" d_n^x ", r] \ar[" f_n ", d]  & x_{n-1} \ar[" f_{n-1}  ", d]  \\
+	y_{n+1} \ar[" d_{n+1} ^y ", r] \ar[" g_{n+1}  "', d]  & y_n \ar[" d^y_n ", r] \ar[" g_{n}  ", d]  & y_{n-1} \ar[" g_{n-1}  ", d]  \\
+	z_{n+1} \ar[" d_{n+1} ^z "', r]  & z_n \ar[" d_n^z "', r]  & z_{n-1} 
+	\end{tikzcd}\]
+	a
 \end{proof}
 
 \begin{remark}\label{5.5}
-	We can in fact show more. If $\mathcal{C} ,\mathcal{D} $ are additive categories, a functor $F : \mathcal{C}  \to\mathcal{D} $ is \emph{additive} if it preserves addition, meaning if $f,g : x \to y$ in $\mathcal{C} $, then $F(f+g)=F(f)+F(g)$. Homology is actually an \emph{additive} functor, but I don't want to prove it.
+	We can in fact show more. If $\mathcal{C} ,\mathcal{D} $ are additive categories, a functor $F : \mathcal{C}  \to\mathcal{D} $ is \emph{additive} if it preserves addition, meaning if $f,g : x \to y$ in $\mathcal{C} $, then $F(f+g)=F(f)+F(g)$. Homology is indeed an \emph{additive} functor, but as the reader can likely guess from the proof of \cref{5.4}, proving this result is fairly involved and unenlightening. The reader is encouraged to prove this on their own should they feel so inclined.
 \end{remark}
 
 \begin{corollary}\label{5.6}
@@ -115,9 +133,9 @@ Another example of an abelian category in particular use in algebraic geometry i
 \begin{proof}
 	Define the complex $H_{\bullet} (x_{\bullet} )$ as the complex whose object in the $n$th degree is the $n$th homology $H_n(x_{\bullet} )$, and whose boundaries are all 0:
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	H_{\bullet} (x_{\bullet} ):\cdots \ar[" 0 ", r] & H_{n+1} (x_{\bullet} ) \ar[" 0 ", r] & H_n(x_{\bullet} )\ar[" 0 ", r]  & H_{n-1} (x_{\bullet} )\ar[" 0 ", r]  & \cdots.
+	H_{\bullet} (x_{\bullet} )=\cdots \ar[" 0 ", r] & H_{n+1} (x_{\bullet} ) \ar[" 0 ", r] & H_n(x_{\bullet} )\ar[" 0 ", r]  & H_{n-1} (x_{\bullet} )\ar[" 0 ", r]  & \cdots.
 	\end{tikzcd}\]
-	This is clearly a chain complex. Additionally, by \cref{4.16} we see that $H_{\bullet} (f_{\bullet} )$ is indeed a morphism $H_{\bullet} (x_{\bullet} )\to H_{\bullet} (y_{\bullet} )$ for each $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $.
+	This is clearly a chain complex. Additionally, by \cref{4.16} we see that $H_{\bullet} (f_{\bullet} )$ is indeed a morphism $H_{\bullet} (x_{\bullet} )\to H_{\bullet} (y_{\bullet} )$ for each $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $; commutativity with the differentials is immediate by \cref{4.16}, since they are all 0.
 \end{proof}
 
 
@@ -137,7 +155,7 @@ Another example of an abelian category in particular use in algebraic geometry i
 	.\]
 	Thus, \emph{any} collection of morphisms $f_{\bullet} =\left\{ f_i : x_i \to y_i \right\}_{i\in\mathbb{Z} } $ suffices as a morphism $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ between chain complexes with 0 boundary.
 
-	This tells us something interesting about isomorphisms of chain complexes with 0 boundary. An isomorphism $f_{\bullet} $ is a morphism of chain complexes is a morphism such that each $f_i$ has an inverse, and the inverses assemble into a morphism $f_{\bullet} ^{-1} $ of chain complexes. However, since the commutativity condition for chain complexes with 0 boundary is automatically satisfied, \emph{any} collection of \emph{isomorphisms} $f_{\bullet} $ is an isomorphism of chain complexes between complexes with 0 boundary.
+	This tells us something interesting about isomorphisms of chain complexes with 0 boundary. An isomorphism $f_{\bullet} $ is a morphism of chain complexes is a morphism such that each $f_i$ has an inverse, and the inverses assemble into a morphism $f_{\bullet} ^{-1} $ of chain complexes. However, since the commutativity condition for chain complexes with 0 boundary is automatically satisfied, \emph{any} such collection of \emph{isomorphisms} $f_{\bullet} $ is an isomorphism of chain complexes, provided the complexes have 0 boundary.
 
 	Now we can apply this to the functor of \cref{5.6}. Suppose we have two chain complexes $x_{\bullet} ,y_{\bullet} $. Since the homology complexes $H_{\bullet} (x_{\bullet} ),H_{\bullet} (y_{\bullet} )$ have 0 boundary, an isomorphism $f_{\bullet} : H_{\bullet} (x_{\bullet} ) \to H_{\bullet} (y_{\bullet} )$ is simply a collection of isomorphisms $f_i : H_i(x_{\bullet} ) \cong H_i(y_{\bullet} )$. In other words, $H_{\bullet} (x_{\bullet} )\cong H_{\bullet} (y_{\bullet} )$ if and only if $x_{\bullet} $ and $y_{\bullet} $ have the same homology in each degree. The real power of this fact comes from the following idea. Suppose we have some morphism $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ in $\Ch(\mathcal{A} ) $ such that $H_{\bullet} (f_{\bullet} )$ is an \emph{isomorphism} $H_{\bullet} (x_{\bullet} )\cong H_{\bullet} (y_{\bullet} )$. Not only do we now know that $x_{\bullet} $ and $y_{\bullet} $ have the same homology, but we have a \emph{regular morphism} $f_{\bullet} $ which tells us this fact. Morphisms of this form are important, and deserve a name.
 \end{remark}
@@ -146,10 +164,10 @@ Another example of an abelian category in particular use in algebraic geometry i
 	Let $\mathcal{A} $ be an abelian category. A \emph{quasi-isomorphism} is a morphism $f_{\bullet} : x_{\bullet}  \to y_{\bullet} $ of chain complexes which lowers to an isomorphism in homology $H_{\bullet} (f_{\bullet} ): H_{\bullet} (x_{\bullet} )\cong H_{\bullet} (y_{\bullet} )$.
 \end{definition}
 
-Quasi-isomorphisms are extremely significant. Throughout the Colloquium, we have been far more interested in the \emph{homology} of a chain complex, rather than the chain complex itself. Homology is a convenient yet powerful way to extract information from chain complexes, and by \cref{5.4} it is an invariant. Because of this, much of homological algebra is the study of chain complexes \emph{up to homology}. In other words, we would like to consider two chain complexes to be ``the same'' if they have the same homology. This is different from much of math, where we are often interested in studying objects \emph{up to isomorphism}. Because quasi-isomorphisms tell us when chain complexes have the same homology, another way to say this is that we are intereted in studying chain complexes \emph{up to quasi-isomorphism}.
+Quasi-isomorphisms are extremely significant. Throughout the Colloquium, we have been far more interested in the \emph{homology} of a chain complex, rather than the chain complex itself. Homology is a convenient yet powerful way to extract information from chain complexes, and by \cref{5.4} it is an invariant. Because of this, much of homological algebra is the study of chain complexes \emph{up to homology}. In other words, we would like to consider two chain complexes to be ``the same'' if they have the same homology. However, quasi-isomorphisms \emph{need not be isomorphism}, and in particular if two chain complexes have the same homology, \emph{this does not mean they are isomorphic}. This is very different from much of math, where we are often interested in studying objects up to isomorphism, and thus presents some obstacles.
 
 \begin{digression}\label{5.9}
-	It would be nice if we could somehow turn quasi-isomorphisms into isomorphisms. The study of homological algebra would then reduce to the study of chain complexes up to this new notion of isomorphism, and we are already quite good at studying objects up to isomorphism. This is a very powerful perspective, and a decent amount of modern homological algebra involves \emph{homotopical algebra}. Oftentimes, a category $\mathcal{C} $ comes with a class of maps $\mathcal{W} $ which we call \emph{weak equivalences}, and we want those weak equivalences to be isomorphisms. Good examples are quasi-isomorphisms of chain complexes, and (weak) homotopy equivalences of topological spaces. We have a construction called \emph{localization} which can construct a new category wherein the weak equivalences become isomorphisms, but unfortunately this new category can be very poorly behaved and very difficult to work in (for example, it may not be locally small). Homotopical algebra can be roughly described as trying to fix these issues by giving $\mathcal{C} $ extra structure, designed to make the weak equivalences behave better when localized. Many important constructions in homological algebra, such as the derived category, the derived $\infty $-category, derived functors, and more can be seen as following from homotopical algebra.
+	It would be nice if we could somehow turn quasi-isomorphisms into isomorphisms. The study of homological algebra would then reduce to the study of chain complexes up to this new notion of isomorphism, and we are already quite good at studying objects up to isomorphism. This is a very powerful perspective, and a decent amount of modern homological algebra involves \emph{homotopy theory}. Oftentimes, a category $\mathcal{C} $ comes with a class of maps $\mathcal{W} $ which we call \emph{weak equivalences}, and we want those weak equivalences to be isomorphisms. Good examples are quasi-isomorphisms of chain complexes, and (weak) homotopy equivalences of topological spaces. We have a construction called \emph{localization} which can construct a new category wherein the weak equivalences become isomorphisms, but unfortunately this new category can be very poorly behaved and very difficult to work in (for example, it may not be locally small). Homotopy theory can be roughly described as trying to fix these issues by giving $\mathcal{C} $ extra structure, designed to make the weak equivalences behave better when localized. Many important constructions in homological algebra, such as the derived category, the derived $\infty $-category, derived functors, and more can be seen as following from homotopical methods.
 \end{digression}
 
 

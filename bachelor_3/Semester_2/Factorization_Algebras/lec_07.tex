@@ -1,0 +1,37 @@
+\lecture{7}{Tue 10 Feb 2026 14:00}{Further examples and a crash course in Lie theory}
+
+MA822 will be on thursday this week from 2-3:15, and the room is still to be found; probably CDS 424.
+
+\begin{remark}
+	If we instead take preFAs valued in chain complexes and define a locally constant preFA to preserve weak equivalences, then we get $A_\infty $-algebras.
+\end{remark}
+
+Recall $M$ from the last lecture. Define a pFA as follows. Fix $p\in\mathbb{R} $, and let $U_1$ denote any interval contained fully within $\mathbb{R} _{<p} $; $U_2$ denote any interval contained within $\mathbb{R} _{>p} $; and $U_3$ any interval containing $p$. Define $\mathcal{F}  (U_1)=A$, $\mathcal{F} (U_2)=B$, and $\mathcal{F} (U_3)=M$. Let $V$ be any interval containing the relevant subsets. The map $\mathcal{F} (U_1)\otimes \mathcal{F} (U_2)\to V$ is then $A\otimes M\to M$, which would be the left action of $A$ on $M$. Similarly, $\mathcal{F} (U_2)\otimes \mathcal{F} (U_3)\to V$ is the right action $M\otimes B\to M$. The map $U_1 \subseteq V\ni p$ must be $A\to M$, and thus will be determined by $1\mapsto m_0\in M$. This means $M$ should be a pointed bimodule, which is recieved from the empty set. All other maps are the identity. Coherence arises via compatibility and associativity properties. This is a special case of a \emph{stratified} factorization algebra. In physics, this is a simple example of a \emph{defect}: some notion of two different theories (like different potentials) that are somehow coupled at some point $p$.
+
+\begin{remark}
+	The prefactorization algebra axioms imply that $\mathcal{F} (\varnothing )$ is a unital commutative algebra.
+\end{remark}
+
+Final example. Let $A,B,C$ unital $R$-algebras, $M$ an $(A,B)$-bimodule, and $N$ a $(B,C)$-bimodule. We can do the same thing with $M\sim p$ and $N \sim q$, but we need interaction between $M$ and $N$. If $p,q\in V$, then we take $\mathcal{F} (V)=M\otimes _BN$. Here recall that algebras are rings together with an action of another ring, so this makes sense. There exist maps $M\hookrightarrow M\otimes _BN$ and $N\hookrightarrow M\otimes _BN$ by making use of the pointed-ness of $M,N$ and mapping $m\mapsto m\otimes n_0$ and $n\mapsto m_0\otimes n$. Most generally, $(a,m,b,n,c)\mapsto amb\otimes nc$; the $b$ can travel between the two tensors since we tensor over $B\ni b$.
+
+
+Crash course in Lie theory:
+\begin{definition}\label{1.1.7}
+	Let $\mathfrak{g} $ a Lie algebra. It's universal enveloping algebra $\mathcal{U} (\mathfrak{g} )$ is an associative algebra which is universal in the following sense: let $A$ a unital associative algebra and $\mathfrak{g} \to A$ a Lie algebra hom (associative algebras also have a commutator). Then there is a unique unital algebra homomorphism $\mathcal{U} (\mathfrak{g} )\to A$ making the relevant diagram commute.
+\end{definition}
+
+Let $\mathrm{Lie} : \mathcal{A} \mathrm{ss}  \to \mathcal{L} \mathrm{ie} $ the inclusion functor and $\mathcal{U} $ the enveloping algebra functor. Then $\mathcal{U} \dashv \mathrm{Lie} $. We construct $\mathcal{U} $ explicitly using the tensor algebra $T(\mathfrak{g} )$:
+\[
+	\mathcal{U} (\mathfrak{g}) = \frac{T(\mathfrak{g}) }{\left\langle x\otimes y - y\otimes x - [x,y] \right\rangle } 
+.\]
+Recall a $\mathfrak{g} $-module is a map $\mathfrak{g} \otimes M\to M$ which is compatible with the Lie bracket: $x(ym)-y(xm)=[x,y]m$. This is precisely the same as a $\mathcal{U} (\mathfrak{g} )$-module.
+
+Note that $\Mod_\mathfrak{g} $ is an abelian category, so we can do (co)homology. Consider a functor $inv : \Mod _\mathfrak{g} \to \Vect_\mathbb{C} $ which maps $M$ to its subspace of \emph{invariants}: $M^\mathfrak{g} =\left\{ m\in M\mid xm=0\forall x\in \mathfrak{g}  \right\} $. The functor of \emph{coinvariants} $coinv : \Mod_\mathfrak{g}  \to \Vect_{\mathbb{C} } $ is the map $M\mapsto M_{\mathfrak{g} } \coloneqq M / \mathfrak{g} M$.
+
+We will reframe these in terms of $\mathcal{U} (\mathfrak{g} )$ to show they are not exact. We could write $U^\mathfrak{g} =\Hom_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} , M) $. Hence $inv \cong \Hom(\mathbb{C} , -) $, and is thus left-exact. We can then write $M_\mathfrak{g} =\mathbb{C} \otimes_{\mathcal{U} (\mathfrak{g} )} M$. This follows since $a\otimes xm = ax\otimes m=0$ for any $a$ in $M^\mathfrak{g} $. Idk this one is weird. The derived functors of Hom are Ext, and the derived functors of $\otimes $ are Tor.
+
+\begin{definition}\label{aslkj}
+	We define $H^n(\mathfrak{g} ,M)=R^n \Mod_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} ,M) = \operatorname{Ext}^n_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} ,M)$. We similarly define $H_n(\mathfrak{g} ,M)=L^n(\mathbb{C} \otimes_{\mathcal{U} (\mathfrak{g} )} M)=\operatorname{Tor} ^n_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} ,M)$.
+\end{definition}
+
+

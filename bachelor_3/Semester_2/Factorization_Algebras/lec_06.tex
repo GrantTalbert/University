@@ -1,0 +1,39 @@
+\chapter{Prefactorization algebras and examples}
+
+\section{Prefactorization algebras}
+
+\lecture{6}{Fri 06 Feb 2026 14:05}{Prefactorization algebras}
+
+\begin{definition}\label{3.1.1}
+	A prefactorization algebra on a topological space $X$ (usually a manifold) valued in vector spaces is a functor $\mathcal{F} :\Open(X) \to \Vect_{k} $ such that for any collection $\left\{ U_i \subseteq V\right\}_{1\leq i\leq n} \subseteq \Open(X) $ of pairwise disjoint open sets, where $V$ is open, there is a map
+	\[
+		\bigotimes_{i=1} ^n \mathcal{F} (U_i)\to \mathcal{F} (V)
+	\]
+	which are compatible in the obvious way: let $\left\{ U_i^j \subseteq V^j\subseteq W \right\}_{1\leq i\leq n} ^{1\leq j\leq m} $ be collections of opens. Then the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\bigotimes_{i=1} ^n \bigotimes_{j=1} ^m \mathcal{F} (U_i^j)} \ar[rr] \ar[dr] &  & \displaystyle{\bigotimes_{j=1} ^m \mathcal{F} (V^j)}\ar[dl]  \\
+	 & W & 
+	\end{tikzcd}\]
+	commutes.
+\end{definition}
+
+\begin{example}
+	Any (unital) associative algebra $A$ yields a prefactorization algebra on $\mathbb{R} $ denoted $A^{fact} $. Note that any open subset of the reals is at most a \emph{countable} union of open intervals (use countability and density of $\mathbb{Q} $ to prove). To each open interval $(a,b)$, define $A^{fact} (a,b)=A$ with compatibility on intervals given by the identity. To any open set $U=\amalg_jI_j$, we want to set $A^{fact} (U)=\bigotimes_{j} A_j$, where $A_j=A$. The structure maps are simply multiplication. The issue is when the tensor is countable, this need not be defined. To do this, we require that in a countable tensor, all but finitely many elements of each tensor are the unit $1$ of the algebra. Thus multiplication only needs to be performed finitely many times. The compatibility condition comes from the strict associativity of the multiplication maps. Since $A$ need not be commutative, the ordering of the intervals in $\mathbb{R} $ yields the ordering of our elements. Raising the dimension of $\mathbb{R} ^n$ can yield the notion of an $\mathbb{E} _n$ algebra here.
+\end{example}
+
+We can also consider the other direction, but we need to require our factorization algebra be locally constant. Inclusions of smaller intervals into bigger ones yield the identity map, but for example taking the symmetric algebra of a precosheaf does not yield this (note $\operatorname{Sym} (\mathcal{F} (U_1)\oplus \mathcal{F} (U_2))\cong \operatorname{Sym} (\mathcal{F} (U_1))\otimes \operatorname{Sym} (\mathcal{F} (U_2))$.
+
+\begin{definition}\label{3.1.3}
+	Let $\mathcal{F} $ be a prefactorization algebra in $\mathbb{R} $ valued in vector spaces. We say $\mathcal{F} $ is locally constant if $\mathcal{F} (U)\to \mathcal{F} (V)$ is an isomorphism when $U\subseteq V$ is an inclusion of connected open intervals (more generally, a homotopy equivalence).
+\end{definition}
+
+\begin{lemma}\label{3.1.4}
+	Let $\mathcal{F} $ be a locally constant prefactorization algebra on $\mathbb{R} $ valued in $\Vect_{k} $. Set $A\coloneqq \mathcal{F} (\mathbb{R} )$. Then $\mathcal{F} \cong A^{fact} $.
+\end{lemma}
+\begin{proof}
+	Let $I=(a,b)\subseteq \mathbb{R} $ an interval. Then $\mathcal{F} (I)\to \mathcal{F} (\mathbb{R} )$ is an isomorphism. Hence all open intervals map under $\mathcal{F} $ to be isomorphic to $A$. We define a multiplication map for $A$ by taking intervals $(a,b),(c,d)\subseteq I$ and considering the structure map $m : \mathcal{F} (a,b)\otimes \mathcal{F} (c,d) \to \mathcal{F} (I)\cong A$. To show $A$ is associative, we simply apply the compatibility condition for 3 intervals.
+\end{proof}
+
+We can see how (pre)factorization algebras may be used to give rise to algebras with much less trivial properties, such as vertex algebras.
+
+Let $A,B$ be $R$-algebras. We can define an $(A,B)$-bimodule as an $R$-module with compatible left- and right-actions by $A,B$.

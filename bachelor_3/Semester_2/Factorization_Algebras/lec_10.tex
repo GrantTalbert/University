@@ -1,0 +1,82 @@
+\lecture{10}{Fri 27 Feb 2026 14:01}{More constructing $\mathcal{U} (g)$}
+
+The complex $\mathfrak{g} ^\mathbb{R}$ is quasi-isomorphic to the abelian dgla consisting of $\mathfrak{g} $ in degree 1, and 0 elsewhere. Since the differential is 0 and the bracket is 0 (thats what we mean by abelian), both $d_\mathfrak{g} $ and $d_{\mathrm{CE} } $ are 0. Hence
+\[
+	C_{\bullet} (\mathfrak{g} ^\mathbb{R} (U))\cong \operatorname{Sym} (\mathfrak{g} [-1][1],d=0) = \operatorname{Sym} (\mathfrak{g} )
+.\]
+Since $\mathfrak{g} $ lives in degree 0, this is a true symmetric algebra, giving us an associative algebra, which we call $A_\mathfrak{g} $. PBW says there is an increasing filtration on $\mathcal{U} (\mathfrak{g} )$ and multiplication preserves this filtration. Hence $\mathcal{U} (\mathfrak{g} ) \cong \operatorname{Sym} (\mathfrak{g} )$ as vector spaces. We now only check the multiplicative structure. We construct a linear isomorphism $\phi : \mathfrak{g}  \to A_\mathfrak{g} $ and check that it is a map of Lie algebras, using the commutator for $A_\mathfrak{g} $. Transposing under $\mathcal{U} \dashv \mathrm{Lie} $ yields a map of \emph{algebras} $\mathcal{U} (\mathfrak{g} ) \to A_\mathfrak{g} $.
+
+Pick a bump function $\varepsilon _i$ centered at $i\in \left\{ \pm1,0 \right\} $ with support $B_{\delta } (i)$, $\delta \ll \frac{1}{2} $, and integral 1. Let $\varepsilon $ any compactly supported bump function with $\int_\mathbb{R} \varepsilon \mathrm{d} x =1$. Define $\phi : \mathfrak{g}  \to A_\mathfrak{g}\cong H^{\bullet} (C_{\bullet} (\mathfrak{g} ^\mathbb{R} (\mathbb{R} ))) $ by $X\mapsto [X\otimes \varepsilon \mathrm{d} x]$. Since there are no brackets to take and since it is closed, this is a well-defined cohomology class under the differential $d_{\mathrm{CE} } +d_{\mathrm{dR} } $.
+
+Recall multiplication in $A_\mathfrak{g} $ is done by choosing disjoint intervals $I,J$. Pick $\alpha ,\beta \in A_\mathfrak{g} $, hence $\alpha \in \mathcal{H} (I),\beta \in \mathcal{H} (J)$. Then $\alpha \beta $ is the image of $\alpha \otimes \beta $ under the factorization structure map $\mathcal{H} (I)\otimes \mathcal{H} (J)\to \mathcal{H} (\mathbb{R} )=A_\mathfrak{g} $.
+
+Now  pick $X,Y\in \mathfrak{g} $. Then we pick compactly supported bump functions to write $\phi (X)\phi (Y) = [X\otimes \varepsilon _0\mathrm{d} x][Y\otimes \varepsilon _1 \mathrm{d} x]$. Note that we choose the element multiplied on the left to be supported in an interval on the left. Thus $\phi (Y)\phi (X)=[Y\otimes \varepsilon _{-1} \mathrm{d} x][X\otimes \varepsilon _0\mathrm{d} x]$. We also have
+\[
+	\phi [X,Y]=[[X,Y]\otimes \varepsilon _0\mathrm{d} x]
+.\]
+We show that $\phi $ preserves the bracket: in $\mathcal{H} \left(\mathbb{R}  \right) $,
+\[
+	\phi (X)\phi (Y)-\phi (Y)\phi (X)=\phi [X,Y]
+.\]
+\begin{remark}
+	Since the CE \emph{chain} complex is not a dg algebra, meaning the differential is not compatible with the multiplicative structure, just because multiplication commutes in the symmetric algebra does not mean that multiplication is the same in cohomology. Hence mutliplication of cohomology classes is not cohomology of mutliplication.
+\end{remark}
+
+Note that
+\[
+	\int_\mathbb{R} \varepsilon _{-1} \mathrm{d} x - \varepsilon _1\mathrm{d} x =0
+\]
+since they are compactly supported. Then there is $h\in \Omega ^0_c(\mathbb{R} )$ with $\mathrm{d} h = \varepsilon _{-1} \mathrm{d} x - \varepsilon _1 \mathrm{d} x$, since in $\mathbb{R} $ exact forms are precisely $\Ker \int$ since $\mathbb{R} \simeq *$. Now consider
+\[
+	(d_{\mathrm{CE} } +d_{\mathrm{dR} } )(X\otimes \varepsilon _0\mathrm{d} x)(Y\otimes h)
+.\]
+I think this is the product minus the bracket under $\phi $. The CE differntial gives $[X,Y]\otimes h\varepsilon _0\mathrm{d} x$, and sufficiently close to 0 we have $h\varepsilon _0=\varepsilon _0$. Finally, de Rham kills $\varepsilon _0\mathrm{d} x$ and maps $h\mapsto \mathrm{d} h$, so we get
+\[
+	=[X,Y]\otimes \varepsilon _0\mathrm{d} x + (X\otimes \varepsilon _0\mathrm{d} x)(Y\otimes \mathrm{d} h) = [X,Y]\otimes \varepsilon _0\mathrm{d} x + (X\otimes \varepsilon _0\mathrm{d} x)(Y\otimes \varepsilon _1\mathrm{d} x - Y\otimes \varepsilon _{-1}\mathrm{d} x)
+.\]
+Working out the algebra and using the fact that we may interchange things in Sym, this reduces to $\phi [X,Y]-\phi (X)\phi (Y)-\phi (Y)\phi (X)$. Since this is in the image of the differential, it vanishes in cohomology, so we are done.
+
+\begin{remark}
+	Although the 1-forms are in degree 1 in de Rham, CE shifts degree by 1 so these objects do indeed commute, rather than anticommute.
+\end{remark}
+
+\section{(Pre)factorization envelopes}
+
+A sheaf $\mathcal{F} $ on a smooth manifold $M$ is \emph{fine} if it admits a partition of unity; i.e. for a locally finite cover $\left\{ U_i \right\} _{i\in I} $ of $M$, there exist endomorphisms $\left\{ \psi _i \right\} _{i\in I} $ of $\mathcal{F} $ such that $\sum_{i} \psi _i=1$ and each $\psi _i$ is supported in $U_i$. In particular, for any section $s\in \Gamma (U,\mathcal{F})$ there is a collection of sections $s_i\in U_i$ supported in $U_i$ with $s=\sum_{i} s_i = \sum_{i} \psi _i(s)(?)$. For example, all smooth vector bundles over a smooth manifold.
+
+Suppose we have a fine sheaf $\mathcal{L} $ on $M$ valued in dglas, and $\mathcal{L} _c$ the cosheaf of its compactly supported sections. Fine-ness implies that $\mathcal{L} _c(U_1 \amalg U_2) = \mathcal{L} _c(U_1)\oplus \mathcal{L} _c(U_2)$. Define the pFA $\mathbb{U} \mathcal{L} $ as follows: for all open $V\subseteq M$, define
+\[
+	\mathbb{U} \mathcal{L} \coloneqq C_{\bullet} (\mathcal{L} _c(V))
+.\]
+Since $\operatorname{Sym}$ coherently takes $\oplus \to \otimes $, this is a preFA.
+
+Examples: de Rham - $\mathcal{L} ^{\mathrm{dR} }_{M,\mathfrak{g} } =(\mathfrak{g} \otimes \Omega ^{\bullet} (M),d_{\mathrm{dR} } )$. Dolbeaux ($X$ complex manifold) - $\mathcal{L} _{X,\mathfrak{g} } ^{\mathrm{Dol} } =(\mathfrak{g} \otimes \Omega _X^{0,\bullet} ,\overline{\partial } _X)$ (holomorphic evelope but not holomorpic sections - those aren't fine).
+
+Recall in physics that we care about states up to global phase, and in particular up to scaling by normalization. Hence physics is really a projective space. Let $\mathfrak{g} $ a Lie algebra and $\mathfrak{h}\subseteq \mathfrak{g} $ a (Lie) ideal. For example, the center. The center of $\mathfrak{gl} (n,\mathbb{C} )$, for example, is $\mathbb{C} 1$. We can quotient by ideals in $\mathrm{L} \mathrm{ie} \mathcal{A} \mathrm{lg} $.
+
+A \emph{central extension} of a Lie algebra $\mathfrak{g} $ is a Lie algebra $\hat{\mathfrak{g} }$ such that $\mathfrak{g} \cong \hat{\mathfrak{g} } / \mathfrak{a} $, for $\mathfrak{a} $ an abelian ideal contained in the center $\mathfrak{a} \subseteq Z(\hat{\mathfrak{g}} )$. Equivalently, it is a short exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathfrak{g} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathfrak{a} \ar[r]  & 0
+\end{tikzcd}\]
+with $\mathfrak{a} $ an abelian ideal.
+
+\begin{claim}
+	Central extensions  of $\mathfrak{g} $ by $\mathfrak{a} $ are classified by a certain Lie algebra cohomology group $H^2(\mathfrak{g} ,\mathfrak{a} )$, where $\mathfrak{a} $ is the trivial module. I.e., every central extension of $\mathfrak{g} $ is described by a 2-cocycle $\Lambda ^2\mathfrak{g} \to \mathfrak{a} $.
+\end{claim}
+\begin{proof}
+	Consider a central extension
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]  & \mathfrak{g} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathfrak{a} \ar[r]  & 0.
+	\end{tikzcd}\]
+	Choose a split as vector spaces (i.e. a section $j$ of the projection). Let $\omega \in \Lambda ^2\mathfrak{g} ^*\otimes \mathfrak{a} =\Hom(\Lambda ^2\mathfrak{g} , \mathfrak{a} )$ as
+	\[
+		\omega (X,Y)=[j(X),j(Y)]-j[X,Y]
+	.\]
+	If $j$ were a Lie algebra homomorphism, $\omega =0$. But it need not be. We can show this cocycle vanishes in cohomology iff $j$ is a split as a sequence of Lie algebras.
+
+	For the converse, let $\omega : \Lambda ^2\mathfrak{g}  \to \mathfrak{a} $ which dies in $d_{\mathrm{CE} } $. Define $\hat{\mathfrak{g} }$ as $\mathfrak{g} \oplus \mathfrak{a} $ as vector spaces, with bracket
+	\[
+		[(x,a),(y,b)]=([x,y],\omega (x,y))
+	.\]
+\end{proof}
+

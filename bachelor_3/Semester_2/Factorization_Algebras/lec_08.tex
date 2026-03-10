@@ -1,0 +1,76 @@
+\lecture{8}{Thu 12 Feb 2026 14:01}{Lol brian taught class tday}
+
+Let $\mathfrak{g} $ a Lie algebra and $M$ a $\mathfrak{g} $-module; equivalently a $\mathcal{U} (\mathfrak{g} )$-module as a module over an associative algebra. In particular $\mathcal{U} $ induces an equivalence $\Mod _\mathfrak{g} \cong \Mod_{\mathcal{U} (\mathfrak{g} )} $.
+
+To compute the cohomology $H^i(\mathfrak{g} ;M)$, we use the Chevalley-Eilenberg resolution to find a cochain complex in vector spaces whose cohomology is $H^i(\mathfrak{g} ;M)$. We start by finding a free resolution of $\mathbb{C} $ as a $\mathcal{U} (\mathfrak{g} )$-module. We do this by working in dg Lie algebras.
+
+\begin{definition}[dg Lie algebra]\label{dfn:a}
+	A dg Lie algebra is a graded Lie algebra $\mathfrak{g} =\bigoplus_{i} \mathfrak{g} _i$ (so it has a bracket) together with a differential $d : \mathfrak{g} _i \to \mathfrak{g} _{i-1} $, where
+	\[
+		[-,-]: \mathfrak{g}^i\times \mathfrak{g} ^j \to \mathfrak{g} ^{i+j} 
+	\]
+	and the bracket satisfies
+	\[
+		[x,y]=-(-1)^{\left| x \right| \left| y \right| } [y,x]
+	.\]
+	Abs value is the degree here. Also $d$ is a derivation for the bracket:
+	\[
+		d[x,y]=[dx,y]+(-1)^{\left| x \right| } [x,dy]
+	.\]
+\end{definition}
+
+For an example, let $\mathfrak{g} $ be an ordinary Lie algebra. If we take a dg Lie algebra to be concentrated in degree 0, then $\mathfrak{g} $ is a dg Lie algebra. Define $\mathfrak{g} _{\mathrm{dR} } $ to be the following Lie algebra (the de Rham dg Lie algebra) as the cochain complex with $\mathfrak{g} $ in degrees $-1$ and 0, and vanishing everywhere else. The map is the identity. The bracket is defined as follows. Take $x,y\in \mathfrak{g} ^0_{\mathrm{dR} } $ and $x',y'\in \mathfrak{g} ^{-1} _{\mathrm{dR} } $. A general element is of the formm $x+x',y+y'$. The bracket is
+\[
+	[x+x',y+y']=[x,y]+[x,y']+[x',y]
+.\]
+A quasi-isomorphism of dg Lie algebras is a map of dg Lie algebras which is a quasi-isomorphism when viewed as a map of cochains.
+
+\begin{remark}
+	There is a quasi-isomorphism $\mathfrak{g} _{\mathrm{dR} } \simeq 0$.
+\end{remark}
+\begin{lemma}\label{askj}
+	The universal enveloping algebra preserves cohomology.
+\end{lemma}
+\begin{theorem}[PBW]\label{thmassas}
+	As vector spaces, $\mathcal{U} (\mathfrak{g} )\cong \operatorname{Sym} (\mathfrak{g} )$. If passing to dg Lie algebras, the result holds for Sym the graded symmetric algebra on a graded vector space, which is worth googling.
+\end{theorem}
+
+An example of the graded symmetric algebra on $W$ a $\mathbb{C} $-vector space is $\mathbb{C} $ in degree 0, and $\Lambda ^nW$ in degree $-n$.
+
+\begin{lemma}\label{lma:asjkskjas}
+	$\mathcal{U} (\mathfrak{g} _{\mathrm{dR} } )$ is a free $\mathcal{U} (\mathfrak{g} )$-module.
+\end{lemma}
+\begin{proof}
+	The universal enveloping algebra is monoidal $(\Mod _\mathfrak{g} ,\oplus )\to (\Mod _{\mathcal{U} (\mathfrak{g} )} ,\otimes_\mathbb{C}  )$. Additionally, $\mathcal{U} (\mathfrak{g} \oplus \mathfrak{h} )\cong \mathcal{U} (\mathfrak{g} )\otimes_\mathbb{C} \mathcal{U} (\mathfrak{h} )$ is free (take a basis for $\mathfrak{h} $). Apply this to $\mathfrak{g} _{\mathrm{dR} } $ to obtain via PBW that
+	\[
+		\mathcal{U} (\mathfrak{g} _{\mathrm{dR} } )\cong \mathcal{U} (\mathfrak{g} )\otimes _\mathbb{C} \operatorname{Sym} (\mathfrak{g} [1])
+	\]
+	as $\mathcal{U} (\mathfrak{g} )$-modules. This proves it.
+\end{proof}
+
+Since $\mathcal{U} (\mathfrak{g} _{\mathrm{dR} }) \simeq \mathbb{C} $, we have a free resolution as a dg Lie algebra. Hence
+\[
+	\operatorname{Ext}_{\mathcal{U} (\mathfrak{g} )} ^i(\mathbb{C} ,M) \cong H^i\left( \Mod_{\mathcal{U} (\mathfrak{g} )} (\mathcal{U} (\mathfrak{g} _{\mathrm{dR} } ),M \right) 
+.\]
+If $A$ is a free $\mathbb{C} $-algebra, then $\Mod _A(A\otimes F,M)\cong \Mod _\mathbb{C} (F,M)$. Applying this here yields
+\[
+	\Mod _{\mathcal{U} (\mathfrak{g} )} (\mathcal{U} (\mathfrak{g} _{\mathrm{dR} } ),M)\cong \Mod_{\mathcal{U} (\mathfrak{g} )} (\mathcal{U}(\mathfrak{g} )\otimes_\mathbb{C} \operatorname{Sym} (\mathfrak{g} [1]),M) \cong \Vect_{\mathbb{C} } (\operatorname{Sym} (\mathfrak{g} [1]),M)
+.\]
+We often call this complex $C^{\bullet} (\mathfrak{g} ;M)$. In degree 0, then this is $\Vect_{\mathbb{C} } (\mathbb{C} ,M)\cong M$. In degree 1, we take the degree $-1$ generators $\Vect_{\mathbb{C} } (\mathfrak{g} ,M)$. In degree 2, its $\Vect_{\mathbb{C} } (\Lambda ^2\mathfrak{g} ,M)$. This generalizes.
+\[
+	C^i(\mathfrak{g} ;M)=\Vect_{\mathbb{C} } (\Lambda ^i\mathfrak{g} ,M)
+.\]
+
+Cheveleakslky-Eilenberg's theorem si that if $G$ is a connected compact Lie group, then the cohomology of the invariants of the de Rham complex $\Omega (G)^G$ are that of $C^{\bullet}(\mathfrak{g} ;\mathbb{C} ) $. More powerfully, $\Omega (G)^G \cong C^{\bullet} (\mathfrak{g} ;\mathbb{C} )$. This follows because your tangent bundle for Lie groups is trivial so ur forms are constant coefficient. Hence we obtain a differential on $C^{\bullet} (\mathfrak{g} ;\mathbb{C} )$ via the exterior derivative.
+
+We claim for any $M$, then $C^{\bullet} (\mathfrak{g} ;M)$ is a $C^{\bullet} (\mathfrak{g};\mathbb{C} )$ module. Take $C^{\bullet} (\mathfrak{g} ;M) \cong C^{\bullet} (\mathfrak{g} )\otimes M$. We may now define the differential. For trivial coefficients, $d$ being a derivation implies we need only define it on generators:
+\[
+	C^{\bullet} (\mathfrak{g} ) \cong \operatorname{Sym} (\mathfrak{g} [1]^*) = \Lambda ^{\bullet} \mathfrak{g} ^*
+\]
+has it as $0 : \mathbb{C}  \to \mathfrak{g} $, and it suffices now only to define it on $\mathfrak{g}^* \to \Lambda^2 \mathfrak{g}^* $ since all others are generated on it. We define this as the adjunct of $[-,-]: \Lambda ^2\mathfrak{g}  \to \mathfrak{g} $. Check wikipedia for a full explicit definition.
+
+For $C^{\bullet} (\mathfrak{g} ;M)$, we only need it on degree 0 since it is a $C^{\bullet} (\mathfrak{g} )$-module. The map $M\to \Hom(\mathfrak{g} , M) $ is given by $m\mapsto (x\mapsto xm)$. Wikipedia also computes the first few cohomology groups. H2 corresponds to ``central extensions'' modulo some sort of isomorphism classes. These are extensions of $\mathfrak{g} $ as a Lie algebra by $\mathbb{C} $, meaning Lie algebras $\mathfrak{h} $ which extend $\mathfrak{g} $ in the sense taht
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathbb{C} \ar[r]  & \mathfrak{h} \ar[r]  & \mathfrak{g} \ar[r]  & 0
+\end{tikzcd}\]
+is exact. Short exact sequences of vector spaces always split, so $\mathfrak{h} \cong \mathfrak{g} \oplus \mathbb{C} $. Thus its bracket has to be $[x,y]+\varphi (x,y)c$ for some basis $c\in\mathbb{C} $ and some $\varphi : \Lambda ^2\mathfrak{g}  \to \mathbb{C} $. What in all of the fucks is happening????? review these notes later.  see wikipedia page on Lie group cohomology, nLab page on dg Lie algebras, \cite{cg1} A.3, and check the paper they cite at the end and apparently Lurie treats this for $\infty $-categories somewhere so maybe I can find that.

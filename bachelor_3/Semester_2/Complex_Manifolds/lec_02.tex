@@ -1,0 +1,62 @@
+\lecture{2}{Thu 22 Jan 2026 12:24}{Multivariate holomorphic functions and Weierstrass polynomials}
+
+\begin{theorem}[Hartog, \cite{huybrechts} 1.1.4]\label{1.1.19}
+	Let there exist nested polydisks $\Delta (\varepsilon ')\subseteq \Delta (\varepsilon )$ in $\mathbb{C} ^n$ for $n\geq 2$, which we can WLOG take to be centered at 0. Let $U\coloneqq \Delta (\varepsilon )\setminus \Delta (\varepsilon ')$ and let $f : U \to \mathbb{C} $ be holomorphic. Then $f$ extends to $\Delta (\varepsilon )$.
+\end{theorem}
+\begin{proof}
+	Recall the following for 1-variable functions: if $f(z)$ is analytic in an annulus centered at 0, then $f(z)$ can be written
+	\[
+		f(z)=\sum_{n\in\mathbb{Z} } a_nz^n,\qquad a_n=\frac{1}{2\pi i} \oint_Cf(\xi )\xi ^{-n-1} \,\mathrm{d} \xi 
+	\]
+	for any contour $C$ with winding number 1 around the annulus (aka anything in the homotopy class; there are no singularities in the annulus by holomorphy).
+
+	We prove it in 2 variables. With assumptions and notation as stated in the problem, we can do a Laurant expansion in each $z_i$ with the rest fixed. Hence
+	\[
+		f(z)=\sum_{n\in\mathbb{Z} } a_n(z_1)z_1^n,\qquad a_n(z_1)=\frac{1}{2\pi i} \oint_{C} f(z_1,\xi )\xi ^{-n-1}  \,\mathrm{d} \xi 
+	.\]
+	Applying \cref{1.1.11} allows us to realize this as a holomorphic function in $z_2$ in the entire disk, hence $a_n(z_1)=0$ for $n<0$ and $\varepsilon _1'<\left| z_1 \right| <\varepsilon _1$. By the 1-variable identity principle, this implies $a_n(z_1)=0$ for $n<0$ in the entire disk. Thus only non-negative powers of $z_2$ occur in the expansion. The same logic applies for $z_1$. Hence $f$ extends via power series to the entire polydisk, and is particular holomorphic on $\Delta (\varepsilon )$. It is clear how an inductive proof can now proceed, or how this logic can prove $n>1$ dimensions automatically.
+\end{proof}
+\begin{remark}\label{1.1.20}
+	This implies that in 2 or more variables, singularities are never isolated, nor are bounded. They look more like long codimension 1 hypersurfaces, in particular branched covers of $\mathbb{C} ^{n-1}$.
+\end{remark}
+\begin{remark}\label{1.1.21}
+	This is an analytic analogue of the fact from AG that $\mathbb{A} ^n\setminus \left\{ 0 \right\} $, $n\geq 2$ is not affine.
+\end{remark}
+
+We now explore precisely what singularities of multivariate complex variables look like. By passing to the reciprocal we can turn singularities into zeroes, so we start by trying to understand zero sets of analytic functions in $\mathbb{C} ^n$.
+
+\begin{definition}\label{1.1.22}
+	A \emph{Weierstrass polynomial} in $z_1$ is a polynomial of the form
+	\[
+		z_1^d+\alpha_1(z_2, \ldots ,z_n)z_1^{d-1} +\alpha _2(z_2, \ldots ,z_n)z_1^{d-2} +\cdots +\alpha _d(z_2, \ldots ,z_n)
+	\]
+	where each $\alpha _i$ is a holomorphic function in some small disk in $\mathbb{C} ^{n-1} $ about the origin, and they vanish at $0\in\mathbb{C} ^{n-1} $.
+\end{definition}
+
+\begin{proposition}[Weierstrass perparation, \cite{huybrechts} 1.1.6]\label{1.1.23}
+	Let $f : \Delta (\varepsilon ,0) \to \mathbb{C} $ be holomorphic with $f(0)=0$ and $f(z_1, 0,\ldots,0)$ not identically zero. Then in a polydisk $\Delta (\varepsilon ',0)$ with $\varepsilon '<\varepsilon $ we can write $f$ as $p\cdot u$, where $p$ is a Weierstrass polynomial and $u(0)\neq 0$ is a unit in the ring of germs at 0: $u\in \mathcal{O}_{\mathbb{C} ^n,0} $. In particular, $p$ contains all the information of the zero set of $f$.
+\end{proposition}
+I omit the proof in exchange for intuition for the zero set of $f$. Take $f$ a function on $\mathbb{C} ^2$. Fix a variable $z_2$; the Weierstrass polynomial is now a polynomial of degree $d-1=3$ in $z_1$ which has $d-1=3$ roots in the relevant slice of $\mathbb{C} ^2$. Now letting $z_2$ vary shows that there are $d-1=3$ roots in each slice which vary smoothly, yielding 3 lines (counting multiplicity) of singularities.
+
+\begin{theorem}[Weierstrass division]\label{1.1.24}
+	Under the assumptions of \cref{1.1.23}, let $p(z_1, \ldots ,z_n)$ be a Weierstrass polynomial in $z_1$ of degree $d$. In a sufficiently small $\Delta (\varepsilon ,0)$ we can write $f=q\cdot p+s$, where $q$ is holomorphic in $\Delta (\varepsilon ,0)$ and $s\in \mathcal{O}_{\mathbb{C} ^{n-1}}[z_1] $ is a polynomial in $z_1$ with coefficients in $\mathcal{O}_{\mathbb{C} ^{n-1} } $ evaluated at a polydisk sufficiently close to $0$, and is of degree less than $d$ in $z_1$. Note that $s$ need not be a Weierstrass polynomial.
+\end{theorem}
+
+Now we consider algebraic properties of the ring of germs of $\mathcal{O} _{\mathbb{C} ^n,0} $. This can be identified with the ring $\mathbb{C} \left\{ z_1, \ldots ,z_n \right\} $ of convergent power series in a sufficiently small polydisk in all $n$ variables by passing to the power series representation of holomorphic functions.
+
+\begin{remark}\label{1.1.25}
+	This is a power series because uh $\mathbb{C} \left\{ z_1, \ldots ,z_n \right\} $ is obviously an integral domain.
+\end{remark}
+\begin{remark}\label{1.1.26}
+	$\mathcal{O}_{\mathbb{C} ^n,0} $ is a \emph{local ring}, meaining there is a unique maximal ideal. This is given by functions that vanish at the origin. To check this, we need only show that it is a unit. This indeed follows since it must have a multiplicative inverse.
+\end{remark}
+
+\begin{proposition}\label{1.1.27}
+	$\mathcal{O} _{\mathbb{C} ^n,0} $ is a UFD.
+\end{proposition}
+\begin{proof}
+	We induct on $n$. Take $n=1$. The only irreducible element up to units is $f(z)=z$, and all holomorphic functions are analytic. Assume the inductive hypothesis for $n-1$. Recall Gauss' lemma implies that if $R$ is a UFD, then $R[x]$ is a UFD. Take $f\in \mathcal{O} _{\mathbb{C} ^n,0} $ a non-unit, meaning $f(0)=0$. By \cref{1.1.23}, $f=p\cdot u$ for $u$ a unit in $\mathcal{O} _{\mathbb{C} ^n} ,0$ and $p$ a Weierstrass polynomial, which lives in $p\in \mathcal{O} _{\mathbb{C} ^{n-1} ,0} [z_1]$. By induction and Gauss' lemma, $\mathcal{O} _{\mathbb{C} ^{n-1} ,0} [z_1]$ is a UFD, so factor $p$ as irreducible polynomials $p=p_1 \cdots p_r$. We claim $p_i$ are all Weierstrass. I omit the proof. We now need to show the $p_i$s are irreducible in $\mathcal{O} _{\mathbb{C} ^n,0} $, since we are working in a proper subring $\mathcal{O} _{\mathbb{C} ^{n-1} ,0} \subsetneq \mathcal{O} _{\mathbb{C} ^n,0} $.
+
+	Suppose for contradiction that $p_j=a\cdot b$ in $\mathcal{O} _{\mathbb{C} ^n,0} $, meaning one of these must be a unit. By \cref{1.1.23} on each of $a,b$, we obtain $a=q_1u_q$ and $b=q_2u_2$. Then $p_j=q_1u_1q_2u_2$. We claim $q_1q_2$ is also a Weierstrass polynomial. We then appeal to the uniqueness part of \cref{1.1.23} which we did not state but it says the polynomial is unique. Hence $u_1u_2=1$, and thus $p_j$ is a product of Weierstrass polynomials. Thus contradicts irreducibility of $p_j$.
+\end{proof}
+

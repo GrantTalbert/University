@@ -1,0 +1,60 @@
+\chapter{De Rham cohomology}
+
+\lecture{31}{Thu 15 Jan 2026 22:19}{Personal Review}
+
+\section{The de Rham cohomology groups}
+
+Recall that a closed form is a form $\omega $ such that $\mathrm{d} \omega =0$, and an exact form is any form of the form $\mathrm{d} \eta $. Since $\mathrm{d} ^2=0$, clearly exact implies closed. All closed forms are \emph{locally} exact, but not necessarily globally exact, meaning that the question of whether closed implies exact depends entirely on the global topological properties of the manifold.
+
+Since $\mathrm{d} ^2=0$, defining $\Omega ^k(M)=0$ for all $k<0$ or $k>n$, then we have a cochain complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Omega ^0(M)\ar[" \mathrm{d}  ", r]  & \Omega ^1(M)\ar[" \mathrm{d}  ", r]  & \Omega ^2(M)\ar[" \mathrm{d}  ", r]  & \cdots
+\end{tikzcd}\]
+with values in $\mathbb{R} $-vector spaces. The $k$th cohomology group can then be described as the quotient of the set of closed $k$-forms by the set of exact $k$-forms, and thus closed implies exact if and only if the cochain complex has vanishsing homology in degree $k\geq 1$. The cohomology groups are called the \emph{de Rham cohomology groups}, and are denoted $H_{\mathrm{dR} } ^k(M)$.
+
+\begin{lemma}\label{6.1.1}
+	Let $F : M \to N$ be smooth. Since there exist maps $F^*: \Omega ^k(N) \to \Omega ^k(M)$ for all $N$, there exists a functor $\mathcal{M} \mathrm{an}^{\mathrm{op}} \to \Ch(\mathbb{R} ) $ given by mapping manifolds to their de Rham cochain complexes, and by mapping $F$ to the chain map given by pullbacks.
+\end{lemma}
+\begin{proof}
+	Since pullbacks are functorial, it suffices to show naturality, meaning $F^*\circ \mathrm{d} =\mathrm{d} \circ F^*$. This follows by 3.1.22 (4).
+\end{proof}
+\begin{corollary}\label{6.1.2}
+	The map $M\mapsto H_{\mathrm{dR} } ^k(M)$ is functorial $\mathcal{M} \mathrm{an} ^{\mathrm{op}} \to \mathbb{R} \text{-} \Vect$.
+\end{corollary}
+\begin{proof}
+	Homology is functorial. In particular, any smooth $F : M \to N$ lowers to a map $F^*: H_{\mathrm{dR} } ^k(N) \to H_{\mathrm{dR} } ^k(M)$ defined by $F^*[\omega ]=[F^*\omega ]$.
+\end{proof}
+\begin{corollary}\label{6.1.3}
+	Diffeomorphic manifolds have isomorphic de Rham cohomology groups. Even more powerfully, diffeomorphic manifolds have isomorphic (not just quasi-isomorphic) de Rham complexes of differential graded algebras.
+\end{corollary}
+
+\section{Elementary computations}
+
+\begin{proposition}\label{6.2.1}
+	Let $\left\{ M_j \right\} _{j\in J} $ be a countable collection of smooth manifolds. Then $H_{\mathrm{dR} } ^k$ preserves countable products in the sense that
+	\[
+		\prod_{j\in J} H_{\mathrm{dR} } ^k(M)\cong H_{\mathrm{dR} } ^k \coprod_{j\in J} M_j
+	.\]
+\end{proposition}
+\begin{proof}
+	It suffices to show $M\mapsto \Omega ^k$ preserves products in this sense, since limits in functor categories are computed pointwise, $\Ch(\mathbb{R} ) $ can be realized as a functor category, and homology preserves countable products. The isomorphism for $\Omega ^k$ is given by the inclusion maps $i_j : M_j\hookrightarrow \coprod_{j} M_j$ by
+	\[
+		\Omega ^k\coprod_{j\in J} M_j\ni\omega \mapsto \left\{ i^*_j\omega  \right\} _{j\in J} \in \prod_{j\in J} \Omega ^k(M_j)
+	.\]
+	I find this obvious and omit the proof.
+\end{proof}
+
+\begin{proposition}\label{6.2.2}
+	Let $M$ be a connected smooth manifold. Then $H^0_{\mathrm{dR} } (M)$ is the space of constant functions, and thus 1-dimensional.
+\end{proposition}
+\begin{proof}
+	There are no $(-1)$-forms, and thus there are no exact 0-forms. A 0-form is a smooth function $f : M \to \mathbb{R} $, and a closed 0-form is a function $f$ such that $\mathrm{d} f=0$. Recall this is true if and only if $f$ is constant.
+\end{proof}
+
+\begin{proposition}\label{6.2.3}
+	Let $M$ be a 0-manifold. Then the de Rham cohomology of $M$ is concentrated in degree 0, and is a direct product of 1-dimensional vector spaces for each point of $M$.
+\end{proposition}
+
+\section{Homotopy invariance}
+
+There is a strengthening of \cref{6.1.3}.

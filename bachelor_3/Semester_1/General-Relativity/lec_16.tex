@@ -1,0 +1,72 @@
+\lecture{16}{Tue 18 Nov 2025 12:37}{Einstein's equation in stars}
+
+If we include quantum mechanics, we expect black holes to evaporate in time.
+
+In black holes, $T_{\mu \nu } =0$, but inside stars this is not true. We need to understand stars to even see if black holes can form. We can assume a rotationally invariant and time-independent metric
+\[
+	\mathrm{d} s^2=-g_{tt}\mathrm{d} t^2 + g_{rr}\mathrm{d} r^2 + r^2 \mathrm{d} \Omega ^2
+\]
+on the $2$-sphere, where we have noted that there is no $\mathrm{d} t\mathrm{d} r$ coefficient since $t$ and $-t$ should be symmetric. Additionally, we know that $g_{tt} ,g_{rr} $ depend only on $r$ due to $t$- and rotational-invariance. Of course if $T_{\mu \nu } =0$ then we get our Schwartzschild solution
+\[
+	g_{tt}=g_{rr}  =1-\frac{2G_NM}{r} 
+.\]
+Inside a star this isn't true, so we will assume a star is a perfect fluid with $T^{\mu \nu } $ characterized by energy density $\rho (r)$, pressure $p(r)$, and 4-velocity $U^\mu (r)$. So somehow
+\[
+	T_{\mu \nu } =(p+\rho )U_\mu U_\nu +p g_{\mu \nu } 
+.\]
+This is easy to derive by passing to locally inertial coordinates with $T^\mu \!_\nu =\operatorname{diag}  (\rho ,p,p,p)$. Recall
+\[
+	U^\mu =\frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } 
+.\]
+The 3-velocity has to be invariant under rotations, and the only rotationally-invariant vector is 0, so
+\[
+	\frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } =\delta^\mu_0 \frac{\mathrm{d}(x^0=t)}{\mathrm{d}\tau } 
+.\]
+Recall that $U^\mu U_\mu =-1$, so $U^0U^0g_{\mu \nu } =-1$. Therefore $U^0U^0g_{tt} =-1$, so
+\[
+	U^0 = -\sqrt{\frac{1}{-g_{tt} (r)} } ,\qquad U_0 = \sqrt{-g_{tt} (r)} 
+.\]
+So we can obtain
+\[
+	T_{00} =(p+\rho )U_0^2 + \boldsymbol{\rho} g_{tt} =(p+\rho )g_{tt} +p(-g_{tt})=\rho g_{tt}  
+.\]
+Additionally,
+\[
+	T_{11} =g_{rr} 
+\]
+since $U_1U_1$ vanishes. This continues, so
+\[
+	T_{\mu \nu } =\begin{pmatrix}
+	\rho (r)f(r) &  &  &  \\
+	 & p(r) /h(r)  &  &  \\
+	 &  & p(r)r^2 &  \\
+	 &  &  & p(r)r^2 \sin ^2\theta 
+	\end{pmatrix}
+.\]
+It is convenient to write $f(r)=-g_{tt} (r)$ and $h(r)=\frac{1}{g_{rr} (r)}$, such that $g_{tt} (r) = -f(r)$. We need to solve
+\[
+	G_{tt} =8\pi G_NT_{00} ,\qquad G_{rr} =8\pi G_NT_{rr} ,\qquad G_{\theta \theta } =8\pi G_NT_{\theta \theta } 
+.\]
+It turns out that the hard part of this derivation is understanding $\rho $ and $p$. This generally depends on the particular astrophysical body we focus on, but for now our equations are quite general. The first equation gives
+\[
+	G_{tt} =\left( 1-h(r)-rh'(r) \right) f(r) r^2 = 8\pi G_N\rho (r)f(r) \implies 1-h(r)-rh'(r) = 8\pi G_Nr^2\rho (r)
+.\]
+It turns out the left hand side is $\frac{\mathrm{d}}{\mathrm{d}r} \left( r(1-h(r)) \right) $, so we can solve
+\[
+	2(1-h(r)) = 2G_N4\pi \int_{0}^{2} r^2\rho (r) \,\mathrm{d} r 
+.\]
+We write $m(r) = \frac{1-h(r)}{G_N} $, so
+\[
+	m(r) = 4\pi \int_{0}^{r} r^2\rho (r) \,\mathrm{d} r
+.\]
+Then
+\[
+	h(r) = 1-\frac{2G_Nm(r)}{r} 
+.\]
+This reminds us of $f(r)$ for the Schwartzschild metric, but now $m$ is a function of $r$ rather than a constant. Indeed, $m$ is an integral over some sort of density function over radius, so this makes physical sense. By doing some investigation that is in the notes we get
+\[
+	p'(r) = -G_N(\rho (r)+p(r))\left( \frac{m(r)+4\pi r^3p(r)}{r(r-2G_Nm(r))}  \right) 
+.\]
+This is called the Tolman-Oppenheimer-Volkoff equation apparently. This is aids so instead there are other equations in the notes which are nicer.
+
+Much of our study of $p$ and $\rho $ comes from the study of the equation of state $p(\rho )$ in thermodynamics. 

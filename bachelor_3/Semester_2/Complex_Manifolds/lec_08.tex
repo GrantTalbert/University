@@ -1,0 +1,17 @@
+\lecture{8}{Thu 19 Feb 2026 12:22}{Toric geometry}
+
+Class taught by Lau today. Consider $\mathbb{C} ^{\times } =\mathbb{C} \setminus \left\{ 0 \right\} $. Topologically this is a cylinder. We have a map $\mathbb{C} ^\times \to \mathbb{R} $ via $z\mapsto \log \left| z \right| $. Note that $S^1$ acts on $\mathbb{C} ^{\times } $ by multiplication, and our map $z\mapsto \ln \left| z \right| $ is $S^1$-equivariant. Now consider taking the dimension to $n$:
+\[
+	(\mathbb{C} ^\times )^n \to \mathbb{R} ^n,\qquad \left\{ z_i \right\}_{1\leq i\leq n} \mapsto \left\{ \ln  \left| z_i \right|  \right\}_{1\leq i\leq n} 
+.\]
+Then the $n$-torus $T^n = (S^1)^n$ acts on this in the same way, and our map is $T^n$-equivariant.
+
+We might want to allow this to be $\mathbb{C} $ instead of $\mathbb{C} ^{\times } $, but $\ln 0=-\infty $, so we need to take our map $\mathbb{C} \to \mathbb{R} \cup \left\{ -\infty  \right\} $. We then think of $\mathbb{C} $ as kind of like a cylinder that is infinite in one dimension and pinched off at 0 in the other, since each circle is identified down by taking ln of its modulus. We could then try something like
+\[
+	\mathbb{C} ^n\times \left( \mathbb{C} ^{\times }  \right) ^m \to \left( \mathbb{R} \cup \left\{ -\infty  \right\}  \right) ^n \times \mathbb{R} ^m
+\]
+defined in the same $T^{n+m} $-equivariant way.
+
+Consider $\mathbb{C} \mathbb{P} ^1$. We can apply our toric point of view here as well. Consider the map $\mathbb{C} \mathbb{P} ^1 \to \mathbb{R} $ in coordinates as follows. In $U_0$, we map $[z_0 : z_1] = [1,z_1 / z_0]\mapsto \log \left| z_1 / z_0 \right| $. We do the same for $U_1$. We can do a similar construction for $\mathbb{C} \mathbb{P} ^2\to \mathbb{R} ^2$ by dividing out by the nonzero element of a chart and applying our construction on each coordinate. This allows us to visualize $\mathbb{C} \mathbb{P}^n$  as polytopes and stuff in $\mathbb{R} ^n$ modulo a toric action. It also makes it much easier to read off $T^n$-equivariant morphisms of complex manifolds.
+
+A \emph{toric variety} is a $n$-variety $X$ that admits a $(\mathbb{C} ^\times )^n$-action with an open dense orbit. We then take the $T^n$-subaction. Importantly, we can also reverse this process and obtain a manifold back by tajing the dual cone of a cone and then just constructing back our manifold.

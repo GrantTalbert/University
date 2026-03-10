@@ -1,0 +1,105 @@
+\lecture{12}{Tue 03 Mar 2026 14:01}{Prefactorization envelopes (pFE's)}
+
+Let $\mathcal{L} $ be a fine sheaf on a manifold $M$ of dgla's, and $\mathcal{L} _c$ the corresponding cosheaf of compactly supported sections. The factorization envelope $\mathbb{U} \mathcal{L} $ is defined as the prefactorization algebra mapping $U\subseteq M$ to Chevelay chains $C_{\bullet} (\mathcal{L} _c(U))$. This is a preFA in cochain complexes, and the cohomology of this (which is the dgla homology) yields a preFA $H^{\bullet} (C_{\bullet} (\mathcal{L} _c(U)))$ in vector spaces.
+
+It's often useful to consider \emph{twisted} variants of this construction corresponding to central extensions of $\mathcal{L} $. Recall given a Lie algebra $\mathfrak{g}$, a central extension of $\mathfrak{g} $ is a Lie algebra $\hat{\mathfrak{g} }$ with a short exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathfrak{a} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathfrak{g} \ar[r]  & 0,
+\end{tikzcd}\]
+where $\mathfrak{a} \subseteq Z(\hat{\mathfrak{g} })$ is an ideal contained inside the center. There is a correspondence of central extensions with $H^2(\mathfrak{g} ,\mathfrak{a} )$. Given a splitting of this sequence $j : \mathfrak{g}  \to \hat{\mathfrak{g} }$, we define $\omega (x,y)=[j(x),j(y)]-j([x,y])$. We can show $d_{\mathrm{CE} } \omega =0$. We can also show that if we choose a different splitting, then $\omega $ changes only by a coboundary. Write another split as $j'=j+\alpha $, then
+\[
+	\omega '(x,y)=[j(x)+\alpha (x),j(y)+\alpha (y)]-j[x,y]-\alpha [x,y]
+.\]
+We must have $\alpha : \mathfrak{g}  \to \mathfrak{a} $, so $\alpha (x),\alpha (y)$ fall in the center and don't affect the bracket. So it is just
+\[
+	\omega '=[j,j]-j[\cdot ,\cdot ]-\alpha [\cdot ,\cdot ]
+.\]
+We see then that $\alpha $ is a coboundary since $x\wedge y\to \alpha [x,y]$ is $d_{\mathrm{CE} } \alpha $ in $C^{\bullet} (\mathfrak{g} ,\mathfrak{a} )$ apparently. So the cohomology class of $\omega $ is well-defined.
+
+\begin{example}
+	Let $\mathfrak{g} =\mathbb{C} ^2$ an abelian Lie algebra, and consider the 1-dimensional central extensions
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]  & \mathbb{C} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathbb{C} ^2\ar[r]  & 0.
+	\end{tikzcd}\]
+	Then $H^2(\mathfrak{g} ,\mathbb{C} )$ looks like
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathfrak{g} ^* \ar[r]  & \Lambda ^2 \mathfrak{g} ^* \ar[r]  & \Lambda ^3 \mathfrak{g} ^*\ar[r]  & \cdots .
+	\end{tikzcd}\]
+	Given $\phi \in \Lambda ^n\mathfrak{g} ^*$ and $\left\{ x_i \right\} _{1\leq i\leq n+1} \subseteq \mathfrak{g} $, the differential is
+	\[
+		(d_{\mathrm{CE} } \phi )(x_1 \wedge \cdots \wedge x_{n+1} )=\sum_{i,j} \pm \phi ([x_i,x_j],x_1, \cdots ,\hat{x} _i,\cdots ,\hat{x} _j,\cdots ,x_n)
+	.\]
+	The $\pm$ is determined by the parity of $i,j$. Since the brackets are all 0, $d_{\mathrm{CE} } \phi =0$, so the homology is simply $H^2(\mathfrak{g} ,\mathbb{C} )\cong \Lambda ^2\mathfrak{g} ^*$. Since this is 1-dimensional over $\mathbb{C}$ since $\mathfrak{g} ^*$ is 2-dimensional, there is a unique central extension up to scaling. Thus $\hat{\mathfrak{g} } \cong \mathfrak{g} \oplus \mathbb{C} k$ for some $k\in\mathbb{C} $, and $\omega (x,y)=k$ (here $x,y$ the coordinates of $\mathbb{C} ^2$). There is then one bracket $[x,y]=k$. This is the \emph{Heisenberg Lie algebra} in 3 dimensions. These can be thought of as upper-triangular 3 dimensional matrices of the form
+	\[
+		\begin{pmatrix}
+		0 & x & k \\
+		0 & 0 & y \\
+		0 & 0 & 0
+		\end{pmatrix}
+	.\]
+\end{example}
+
+\begin{example}[Affine Ka(c?z?idk)-Moody algebras]
+	Let $\mathfrak{g} $ be a simple Lie $\mathbb{C} $-algebra. If $A$ is a commutative $\mathbb{C} $-algebra, then $\mathfrak{g} \otimes _\mathbb{C} A$ is a Lie algebra $[x\otimes a,y\otimes b]=[x,y]\otimes ab$. This may fail in noncommutative rings due to failiure of Jacobi's identity. Take $A$ either Laurant polynomials $\mathbb{C} [t^{-1} ,t]$ or Laurent series $\mathbb{C} ((t))$. In the first case, the \emph{Loop algebra} is defined as
+	\[
+		L\mathfrak{g} =\mathfrak{g} \otimes \mathbb{C} [t^{-1} ,t]\cong \mathfrak{g} [t^{-1} ,t]
+	.\]
+	If we identify $t$ with $e^{i\theta } $ ($\mathbb{C} $-polynomials in $z$ are polynomials in $e^{i\theta } $), then we may think of this as $C^\infty (S^1,\mathfrak{g} )$, justifying the name.
+
+	Consider the cocycle $\left\langle -,- \right\rangle _{\mathfrak{g} } $, a symmetric $\mathfrak{g} $-invariant form (so all multiples of the killing form). We will define
+	\[
+		\omega (x\otimes f(t),y\otimes g(t))=\left\langle x,y \right\rangle_\mathfrak{g} \operatorname{Res}_{t=0} f\mathrm{d} g
+	.\]
+	Skew-symmetry follows since the residue of $f\mathrm{d} g$ is negative of that of $g\mathrm{d} f$; easy to check. We claim $\omega \in H^2(\mathfrak{g} ,\mathbb{C} )$, and
+	\[
+		\hat{\mathfrak{g} }=L\mathfrak{g} \otimes \mathbb{C} k,
+	\]
+	\[
+		[x\otimes f(t),y\otimes g(t)]=[x,y]\otimes f(t)g(t)+\omega (x\otimes f,y\otimes g)k
+	.\]
+\end{example}
+
+\begin{example}[Virasoro algebra]
+	Consider the Witt algebra of algebraic vector fields on $\mathbb{C} ^*$; equivalently as vector fields on $S^1$. This is $\mathbb{C} [t,t^{-1} ]\partial _t$. Then
+	\[
+		[f\partial_t,g\partial_t]=(fg'-gf')\partial _t
+	.\]
+	We present the Witt algebra as $\operatorname{span} \left\{ L_n = -t^{n+1} \partial _t \right\} $ with
+	\[
+		[L_m,L_n]=(m-n)L_{m+n} 
+	.\]
+	Then $H^2(\mathrm{Witt} ,\mathbb{C} )\cong \mathbb{C} $ has an interesting cocycle
+	\[
+		\omega (L_m,L_n)=\frac{1}{12} (m^2-m)\delta _{m(-n)} 
+	.\]
+	In string theory, we consider things called world sheets, and we are interested in gluing their boundaries (eg. spheres). Note that $\operatorname{Lie} (\operatorname{Diff } (S^1))\cong \mathfrak{X} (S^1)$ -- this should hold for all manifolds. The Witt algebra should act on this since it looks similar. QFT takes place in a complex Hilbert space $\mathcal{H} $, but the physical quantities only depend on the projective space $\mathbb{P} (\mathcal{H} )$ since they don't depend on global phase. So the symmetries of a quantum system are actually $\Aut(\mathbb{P} (\mathcal{H} )) \eqqcolon \mathrm{PGL} (\mathcal{H} )$, and we can write this as a central extension of groups
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathbb{C} ^*\ar[r]  & \operatorname{GL} (\mathcal{H} ) \ar[r] & \mathrm{PGL} (\mathcal{H} )\ar[r]  & 0.
+	\end{tikzcd}\]
+	Differentiating this yields a central extension of Lie algebras. A symmetry group $G$ on a QFT is then a morphism $G\to \mathrm{PGL} (\mathcal{H} )$. Since projective geometry is harder than working in $\mathcal{H} $, we would like to lift $G\to \mathrm{PGL} (\mathcal{H} )$ to $\mathrm{GL} (\mathcal{H} )$ as indicated by the dotted arrow:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathbb{C} ^*\ar[r]  & \mathrm{GL} (\mathcal{H} )\ar[r]  & \mathrm{PGL} (\mathcal{H} )\ar[r]  & 0 \\
+	0\ar[dashed, r]  & \mathbb{C} ^*\ar[dashed, r] \ar[equals, u]  & \hat{G} \ar[dashed, u] \ar[dashed, r]  & G\ar[u] \ar[dotted, ul] \ar[dashed, u] \ar[dashed, r]  & 0
+	\end{tikzcd}\]
+	This dotted arrow need not always exist, but we can always find the dashed arrows to obtain a central extension, allowing us to consider $\hat{G} $ instead. Differentiating this does the same thing for Lie algebras ($\mathrm{d} =T_1$). Interesting paper by Dan Freed about stuff like this for mroe physics and it uses categories.
+\end{example}
+
+Ok back to pFE's. Let $\mathcal{L} : \Open(M) ^{\mathrm{op}}  \to \mathcal{D} \mathcal{G} \mathrm{Lie} $ a fine sheaf. An $r$-shifted central extension of $\mathcal{L} _c$is a cosheaf of dgla's $\widehat{\mathcal{L} }_c$ lifting into an exact sequence of dgla's
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathbb{C} [r]\ar[r]  & \widehat{\mathcal{L} }_c\ar[r]  & \mathcal{L} _c\ar[r]  & 0.
+\end{tikzcd}\]
+In this case we can form the \emph{twisted envelope} $\mathbb{U} \widetilde{\mathcal{L} }: U \to C_{\bullet} (\widehat{\mathcal{L} }_c(U))$.
+
+For example, consider
+\[
+	\mathcal{L} =\mathfrak{g} \otimes \Omega _\mathbb{R} ^{\bullet} =\mathfrak{g} ^\mathbb{R} 
+.\]
+Pick a cocycle $H^2(\mathfrak{g} ,\mathbb{C} )\ni\omega : \mathfrak{g} \otimes \mathfrak{g}  \to \mathfrak{g} $ and write
+\[
+	\widehat{\mathcal{L} }=\mathfrak{g} \otimes \Omega ^{\bullet} _\mathbb{R} \oplus \mathbb{C} [?]k
+.\]
+To figure out what the shift is by, consider the thing we want the bracket to be
+\[
+	[x\otimes \alpha ,y\otimes \beta ]=[x,y]\otimes (\alpha \wedge \beta )+\left(\int_\mathbb{R} \omega (x,y)\alpha \wedge \beta \right)k
+.\]
+One simply figures out what order everything has to be and determines that $k$ must be degree 1, so we shift $-1$.

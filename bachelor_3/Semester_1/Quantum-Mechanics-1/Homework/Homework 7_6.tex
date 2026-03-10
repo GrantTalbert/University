@@ -1,0 +1,289 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/physics.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 7}
+\begin{document}
+\makeproblem
+\section{Problem 1}
+(a) We note that
+\[
+	\bra{0}e^{ik \hat{x} } \ket{0}=\int_{-\infty }^{\infty } \bra{0}e^{ik \hat{x} } \ket{x}\braket{x}{0} \,\mathrm{d} x
+.\]
+Since $\ket{x}$ is an eigenstate of $\hat{x} $, the exponential of $\hat{x} $ acts on this by
+\[
+	=\int_{-\infty }^{\infty } \bra{0}e^{ikx} \ket{x}\braket{x}{0} \,\mathrm{d} x
+	=\int_{-\infty }^{\infty } e^{ikx} \braket{0}{x}\braket{x}{0} \,\mathrm{d} x
+.\]
+One can prove this by writing out the Taylor expansion and factoring in $\ket{x}$. Since $\braket{x}{0}=\psi _0(x)$ for $\psi _0$ the time-independent wavefunction in the ground state of the oscillator, this equals
+\[
+	=\int_{-\infty }^{\infty } e^{ikx} \left| \psi _0 (x)\right| ^2 \,\mathrm{d} x
+.\]
+The is the fourier transform of the probability distribution of the ground state. The ground state probability density is
+\[
+	\left| \psi _0(x) \right| ^2=\frac{1}{\sqrt{2\pi x_0^2} } e^{-x^2/2x_0^2} ,
+\]
+where
+\[
+	x_0^2 = \frac{\hbar}{2m\omega } 
+.\]
+This is just a gaussian, and the fourier transform of a gaussian is just
+\[
+	\int_{-\infty }^{\infty } e^{ikx} \left| \psi _0(x) \right| ^2 \,\mathrm{d} x=e^{-k^2 x_0^2/2} 
+.\]
+It suffices to show that $\bra{0}\hat{x}^2 \ket{0}=x_0^2$. Note that
+\[
+	\hat{x} =x_0\left( \hat{a} +\hat{a} ^\dagger \right) 
+.\]
+We can use the properties that $\hat{a} \ket{0}=0$, $\bra{0}\hat{a} ^\dagger=0$, and $[\hat{a} ,\hat{a} ^\dagger]=1$ to show
+\[
+	\bra{0}x_0^2\left( \hat{a} +\hat{a} ^\dagger \right)^2 \ket{0}=x_0^2\left( \bra{0}\hat{a} ^2\ket{0}+\bra{0}(\hat{a} ^\dagger)^2\ket{0} + \bra{0}\hat{a} \hat{a} ^\dagger\ket{0}+\bra{0}\hat{a} ^\dagger \hat{a} \ket{0} \right) 	
+\]
+\[
+	=x_0^2\left( \bra{0}\hat{a} \hat{a} ^\dagger\ket{0}+\bra{0}\hat{a} ^\dagger (\hat{a} \ket{0}) \right) = \bra{0}\hat{a} ^\dagger \hat{a} +1\ket{0} =x_0^2\left( \bra{0}\hat{a}^\dagger \hat{a} \ket{0}+\braket{0}{0} \right) =x_0^2
+.\]
+Therefore, the exponential we found is
+\[
+	=\exp \left( -\frac{k^2}{2} \bra{0}\hat{x} ^2\ket{0} \right) 
+.\]
+
+(b) By all of the same logic, but now in momentum space,
+\[
+	\bra{0}e^{ix \hat{k} } \ket{0} = \int_{-\infty }^{\infty } \bra{0}e^{ix \hat{k} } \ket{0} \,\mathrm{d} p = \int_{-\infty }^{\infty } \bra{0} e^{ixp/\hbar} \ket{p}\braket{p}{0} \,\mathrm{d} p
+\]
+\[
+	=\int_{-\infty }^{\infty } e^{ixp/\hbar} \left| \psi _0(p) \right| ^2 \,\mathrm{d} p
+.\]
+Because the wavefunction in the momentum space is the Fourier transform of the wavefunction in position space, and the Fourier transform of a gaussian is a gaussian, we can write
+\[
+	\left| \psi _0(p) \right| ^2=\frac{1}{2\pi k_0^2} e^{-p^2/2p_0^2} ,\qquad k_0^2 = \frac{m\omega }{2\hbar} 
+.\]
+The Fourier transform is thus
+\[
+	=\exp \left( -\frac{x^2 k_0^2}{2\hbar^2}  \right) 
+.\]
+It suffies now to show that $k_0^2=\bra{0}\hat{p} ^2\ket{0}$. Note that
+\[
+	\hat{p} =i\sqrt{\frac{m\omega \hbar}{2} } \left( \hat{a} ^\dagger -\hat{a} \right) \implies \hat{k} =\frac{1}{\hbar} \hat{p}  = i\sqrt{\frac{m\omega }{2\hbar} } \left( \hat{a} ^\dagger - \hat{a}  \right) =ik_0 \left( \hat{a}^\dagger - \hat{a}   \right) 
+.\]
+Since $\hat{a} \ket{0}$ and $\bra{0}\hat{a} ^\dagger$ are both 0, we can cancel most of the terms as before. Using the commutator expansion once again, we have that
+\[
+	\bra{0}\hat{k} ^2\ket{0}=-i^2k_0^2\bra{0}\hat{a} \hat{a} ^\dagger \ket{0} = k_0^2
+.\]
+
+\section{Problem 2}
+
+(a) We start by solving the Schr\"odinger equation in position space. The time-independent wavefunction must be of the form $\psi (x)=Ae^{\kappa x} +Be^{-\kappa x} $ for some real $\kappa >0$. The solutions are not imaginary because we are working with a bound state, which we take to have negative energy. For $\psi (x)$ to be normalizeable, it must go to 0 as $x\to \pm \infty $, meaning
+\[
+	\psi (x) = 
+	\begin{cases}
+		Ae^{\kappa x} ,&x\leq 0\\
+		Be^{-\kappa x} ,&x\geq 0
+	\end{cases}
+.\]
+Because both piecewise components must agree at $x=0$, we see that $A=B$. We determine $A$ from normalizeability:
+\[
+	\int_{-\infty }^{\infty } \left| \psi (x) \right| ^2 \,\mathrm{d} x = A^2 \left( \int_{-\infty }^{0} e^{2\kappa x}  \,\mathrm{d} x + \int_{0}^{\infty } e^{-2\kappa x}  \,\mathrm{d} x \right) =A^2 \left( \frac{1}{2\kappa } e^{2\kappa x}\bigg|_{-\infty } ^0 - \frac{1}{2\kappa } e^{-2\kappa x} \bigg|_0^{\infty }   \right) 
+\]
+\[
+	=A^2\left( \frac{1}{2\kappa } -0+\frac{1}{2\kappa } -0 \right) =\frac{A^2}{\kappa } =1 \implies A=\sqrt{\kappa } 
+.\]
+The wavefunction is thus $\sqrt{\kappa } e^{-\kappa |x|} $.
+
+Now we Fourier transform into $k$-space using the Fourier transform into momentum space by relating $k$ and momentum. Using the convention $\braket{k}{x}=\frac{e^{-ikx} }{\sqrt{2\pi } } $,
+\[
+	\braket{k}{\psi _b} = \int_{-\infty }^{\infty } \braket{k}{x}\braket{x}{\psi _b} \,\mathrm{d} x = \int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi } } e^{-ikx} \psi(x) \,\mathrm{d} x=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi } } e^{-ikx} \sqrt{\kappa } e^{-\kappa |x|}  \,\mathrm{d} x
+\]
+\[
+	=\sqrt{\frac{\kappa }{2\pi } } \left(\int_{-\infty }^{0} e^{(\kappa -ik)x}  \,\mathrm{d} x + \int_{0}^{\infty } e^{-(\kappa +ik)x}  \,\mathrm{d} x\right)
+\]
+\[
+	=\sqrt{\frac{\kappa }{2\pi } } \left(\left[ \frac{e^{(\kappa -ik)x} }{\kappa -ik}  \right]_{-\infty } ^0 + \left[ \frac{e^{-(\kappa +ik)x} }{-(\kappa +ik)}  \right]_0^{\infty } \right)=\sqrt{\frac{\kappa }{2\pi } } \left( \frac{1}{\kappa -ik} -\frac{1}{-(\kappa +ik)}  \right) 
+\]
+\[
+	=\sqrt{\frac{\kappa }{2\pi } } \frac{\kappa +ik+\kappa -ik}{\left( \kappa -ik \right) \left( \kappa +ik \right) } =\sqrt{\frac{\kappa }{2\pi } } \frac{2\kappa }{\kappa ^2+k^2} 
+.\]
+
+(b) The wavefunction $\psi _2(x)$ in position space is
+\[
+	\psi _2(x)=\sqrt{\frac{2}{a} } \sin \frac{2\pi x}{a} ,\qquad x\in[0,a]
+,\]
+and it vanishes outside the box. Fourier transforming to momentum space:
+\[
+	\psi _2(p) = \int_{-\infty }^{\infty } \braket{p}{x}\braket{x}{\psi _2} \,\mathrm{d} x=\int_{0}^{a} \braket{p}{x}\psi _2(x) \,\mathrm{d} x
+.\]
+Using the relation $\braket{p}{x}=\frac{1}{\sqrt{2\pi \hbar} } e^{ipx/\hbar} $, we have
+\[
+	=\int_{-\infty }^{\infty } \frac{1}{\sqrt{2\pi \hbar} } e^{ipx/\hbar} \sqrt{\frac{2}{a} } \sin \frac{2\pi x}{a}  \,\mathrm{d} x=\frac{1}{\sqrt{\pi a\hbar} } \int_{-\infty }^{\infty } e^{ipx/\hbar} \sin \frac{2\pi x}{a}  \,\mathrm{d} x
+.\]
+We use Euler's formula to write $\sin \theta =\frac{1}{2i} (e^{i\theta } -e^{-i\theta }) $. Applying this here yields
+\[
+	=\frac{1}{2i\sqrt{\pi a\hbar} } \left( \int_{-\infty }^{\infty } e^{i(2\pi /a -p/\hbar)x} -e^{-i(2\pi /a + p/\hbar)x}  \,\mathrm{d} x \right) 
+.\]
+I did not feel like typing up all the work so this simplifies down to
+\[
+	\psi _2(p)=\frac{2\hbar \sqrt{\pi a\hbar}}{4\pi^2\hbar^2 - p^2a^2} \left( 1-e^{-ipa/\hbar}  \right) 
+.\]
+The probability density is then
+\[
+	\left| \psi _2(p) \right| ^2 = \frac{4\pi a\hbar^3}{\left( 4\pi^2\hbar^2 - p^2a^2 \right) ^2} \left| 1-e^{-ipa/\hbar}  \right| ^2
+.\]
+You have to use
+\[
+	\left| 1-e^{-i\theta }  \right| ^2 = (1-\cos\theta )^2 + \sin ^2\theta =1-2 \cos \theta +\cos ^2\theta +\sin ^2\theta = 2\left( 1-\cos \theta  \right) =4 \sin ^2\frac{\theta }{2} 
+.\]
+This yields
+\[
+	\left| \psi _2(p) \right| ^2 = \frac{16\pi a\hbar^3}{\left( 4\pi ^2\hbar^2 - p^2a^2 \right) ^2} \sin ^2\frac{pa}{2\hbar} 
+.\]
+Therefore,
+\[
+	\mathrm{d} W(p) = \frac{16\pi a\hbar^3}{\left( 4\pi ^2\hbar^2 - p^2a^2 \right) ^2} \sin ^2\frac{pa}{2\hbar} \mathrm{d}p 
+.\]
+
+
+\section{Problem 3}
+
+i didnt do this one
+
+\section{Problem 4}
+
+(a) We start with
+\[
+	\hat{x} _H = e^{i \hat{H} t/\hbar} \hat{x} e^{i \hat{H} t/\hbar} ,\qquad \hat{x} _H(0)=\hat{x} (0) = \Delta _x(\hat{a} +\hat{a} ^\dagger)
+.\]
+We can then write
+\[
+	\hat{x} _H(t) = \Delta _x\left(e^{i \hat{H} t/\hbar} \hat{a} e^{-i \hat{H} t/\hbar} +e^{i \hat{H} t/\hbar} \hat{a}^\dagger e^{-i \hat{H} t/\hbar} \right)
+.\]
+Note that the terms inside the parenthases are precisely the Heisenberg picture annihilation operators, so
+\[
+	\hat{x} _H(t) =\Delta_x\left( \hat{a} _H(t) + \hat{a} _H^\dagger(t)\right)
+.\]
+To find the annihilation operators, note that the oscillator Hamiltonian in the Schr\"odinger picture can be written as
+\[
+	\hat{H} =\hbar\omega \left( \hat{a} ^\dagger \hat{a} +\frac{1}{2}  \right) 
+.\]
+Since the Hamiltonian is time-independent, we can write $\exp \left( i \hat{H} t/\hbar \right) $ as $U$, which will simlify notation considerably. We can use the Heisenberg equation of motion
+\[
+	i\hbar \frac{\mathrm{d}\hat{a} _H}{\mathrm{d}t} =[\hat{a} _H, \hat{H} _H]=[U \hat{a} U^\dagger, U \hat{H} U^\dagger] = U[\hat{a} , \hat{H} ]U^\dagger
+.\]
+We can compute the commutator in the Schr\"odinger picture:
+\[
+	[\hat{a} , \hat{H} ]=\hbar \omega \left[ \hat{a} , \hat{a} ^\dagger \hat{a} + \frac{1}{2}  \right] =\hbar\omega \left[ \hat{a} , \hat{a} ^\dagger \hat{a}  \right] + \hbar\omega \left[ \hat{a} , \frac{1}{2} I \right] =\hbar \omega \left[ \hat{a} ,\hat{a} ^\dagger \hat{a}  \right] 
+\]
+\[
+	=\hbar\omega \left( \hat{a} \hat{a} ^\dagger \hat{a} - \hat{a} ^\dagger\hat{a} ^2 \right) =\hbar\omega \left[\hat{a}, \hat{a} ^\dagger \right]\hat{a} =\hbar\omega \hat{a} 
+.\]
+We then have
+\[
+	\frac{\mathrm{d}\hat{a} _H}{\mathrm{d}t} =-i\omega \hat{a}_H(t)
+.\]
+The differential equation is solved by
+\[
+	\hat{a} _H(t) = \hat{a} _H(0)e^{-i\omega t} =\hat{a} e^{-i\omega t} 
+.\]
+We then have
+\[
+	\hat{a} _H^\dagger (t) = \hat{a} ^\dagger e^{i\omega t} 
+.\]
+We then compute
+\[
+	\hat{x} _H(t) = \Delta _x\left(\hat{a} e^{-i\omega t} + \hat{a} ^\dagger e^{i\omega t} \right)
+.\]
+Substituting this into the definition for $g_x(t,0)$, we obtain
+\[
+	g_x(t,0)=\Delta _x^2\left\langle n\bigg| \left( \hat{a} e^{-i\omega t} + \hat{a} ^\dagger e^{i\omega t}  \right) \left( \hat{a} + \hat{a} ^\dagger \right) \bigg|n\right\rangle
+.\]
+Expanding this out:
+\[
+	=\Delta _x^2\bra{n}\left( \hat{a}^2e^{-i\omega t}+(\hat{a} ^\dagger)^2 e^{i\omega t} +\hat{a} \hat{a} ^\dagger e^{-i\omega t} +\hat{a} ^\dagger \hat{a} e^{i\omega t}   \right) \ket{n}
+.\]
+We of course have that
+\[
+	\bra{n}\hat{a} \hat{a} \ket{n}=\braket{n}{n+2}=0,\qquad \bra{n}\hat{a} ^\dagger \hat{a} ^\dagger \ket{n}=\braket{n}{n-2}=0
+.\]
+Keeping the other terms only yields
+\[
+	g_x(t,0)=\Delta _x^2 e^{-i\omega t} \bra{n} \hat{a} \hat{a} ^\dagger\ket{n}+\Delta _x^2 e^{i\omega t} \bra{n} \hat{a} ^\dagger \hat{a} \ket{n}=\Delta _x^2 \left( (n+1)e^{-i\omega t} + n e^{i\omega t}   \right) 
+.\]
+To compute $g_x(0,t)$, we note that
+\[
+	g_x(0,t) = \bra{n} \hat{x} _H(0) \hat{x} _H(t)\ket{n} = \ket{n}^\dagger \hat{x} ^\dagger_H(0) \hat{x} ^\dagger_H(t) \bra{n}^\dagger=\left( \bra{n} \hat{x} _H(t) \hat{x} _H(0) \ket{n} \right) ^\dagger = g_x^\dagger(t,0)
+.\]
+We therefore have
+\[
+	g_x(0,t) = \Delta _x^2 \left( (n+1)e^{i\omega t} +ne^{-i\omega t}  \right) 
+.\]
+These are not going to be equal in general since they are complex conjugates and are not purely real unless $\omega =n\pi $.
+
+
+
+(b) The symmetric correlation function is given by
+\[
+	g_x(t) = \frac{1}{2} \left(g_x(t,0)+g_x(0,t)\right)=\frac{\Delta _x^2}{2} \left( (n+1)\left( e^{i\omega t} +e^{-i\omega t}  \right) +n\left( e^{i\omega t} +e^{-i\omega t}  \right)  \right) 
+\]
+\[
+	=\frac{\Delta _x^2}{2} \left( (n+1)2 \cos \omega t + 2n \cos \omega t \right) =\Delta _x^2 (2n+1)\cos \omega t
+.\]
+
+
+\section{Problem 5}
+(i) We want to show
+\[
+	\hat{D}^\dagger (\alpha ) \hat{a} \hat{D}  (\alpha )=\exp \left( \alpha ^* \hat{a} -\alpha \hat{a} ^\dagger \right) \hat{a} \exp \left( \alpha \hat{a} ^\dagger - \alpha ^* \hat{a}  \right) =\hat{a} +\alpha 
+.\]
+Recall the Hadamard operator lemma
+\[
+	e^ABe^{-A} =\sum_{n=0}^{\infty} \frac{[A,[ \ldots ,[A,B]\ldots ]}{n!} 
+.\]
+Take $A$ to be the argument of the first exponential and $B=\hat{a} $. Then using the fact that $\hat{a} $ commutes with itself,
+\[
+	[A,B]=a^* \hat{a} \hat{a} -\alpha \hat{a}^\dagger \hat{a} -\alpha ^* \hat{a} \hat{a} +\alpha \hat{a} \hat{a} ^\dagger=\alpha \left( \hat{a} \hat{a} ^\dagger - \hat{a} ^\dagger \hat{a}  \right) =\alpha [\hat{a} ,\hat{a} ^\dagger]=\alpha1
+.\]
+Then note that $[A,\alpha1]=0$, so all higher order terms vanish. We are left with the 0th and 1st terms
+\[
+	e^ABe^{-A} =B+[A,B]
+.\]
+Plugging in our definition of $A$ and $B$ yields
+\[
+	\hat{D} ^\dagger(\alpha )\hat{a}\hat{D}  (\alpha )=\hat{a} +\alpha 1
+.\]
+
+(ii) We want to show
+\[
+	\hat{D}(\alpha )\hat{a} \hat{D} ^\dagger(\alpha )= \exp \left( \alpha \hat{a} ^\dagger - \alpha ^* \hat{a}  \right) \hat{a} \exp \left( \alpha ^* \hat{a} -\alpha \hat{a} ^\dagger \right) = \hat{a} -\alpha 
+.\]
+Appealing once again to the Hadamart operator lemma, define
+\[
+	A=\alpha \hat{a} ^\dagger - \alpha ^* \hat{a} ,\qquad B=\hat{a} 
+.\]
+As before,
+\[
+	[A,B]=\left( \alpha \hat{a} ^\dagger - \alpha ^* \hat{a}  \right) \hat{a} - \hat{a} \left( \alpha \hat{a} ^\dagger - \alpha ^* \hat{a}  \right) =\alpha \left( \hat{a} ^\dagger \hat{a} -\hat{a}  \hat{a} ^\dagger \right) =-\alpha [\hat{a} ,\hat{a} ^\dagger]=-\alpha 1
+.\]
+Higher order terms in the expansion once again vanish, leaving us with
+\[
+	e^ABe^{-A} =B + [A,B] = \hat{a} -\alpha 
+.\]
+
+
+(iii) Conjugating both sides of the identity (i) yields
+\[
+	\hat{D}^\dagger (\alpha )\hat{a} ^\dagger \hat{D} (\alpha ) = \left( \hat{a} +\alpha 1 \right) ^\dagger = \hat{a} ^\dagger + \alpha ^* 1
+.\]
+
+(iv) Conjugating both sides of the identity (ii) yields
+\[
+	\hat{D} (\alpha )\hat{a} ^\dagger \hat{D} ^\dagger(\alpha )=\left( \hat{a} -\alpha 1 \right) ^\dagger = \hat{a} ^\dagger-\alpha ^*1
+.\]
+
+
+\end{document}

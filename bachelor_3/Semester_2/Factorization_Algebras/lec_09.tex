@@ -1,0 +1,79 @@
+\lecture{9}{Fri 20 Feb 2026 14:01}{sdfgh}
+
+Now we want to return to our goal of constructing $\mathcal{U} (\mathfrak{g} )$ via prefactorization algebras. Might be useful for reviewing notes: $\mathcal{U} $ adjoint implies it commutes with $\oplus $, so $\mathcal{U} (\mathfrak{g} )$ is graded if $\mathfrak{g} $ is graded.
+
+Recall the \emph{homology} is computed by $C^{\bullet} (\mathfrak{g} ,M)\cong \operatorname{Sym} (\mathfrak{g} [1])\otimes M$ (dualize $\mathfrak{g} $ and $1\to -1$ for cohomology), with differential $d_{\mathrm{CE} } +d_\mathfrak{g} +d_M$, which acts by (up to the grading signs)
+\begin{align*}
+	d(x_1\cdot x_2 \cdots x_r\cdot m)&=\sum (-1)^? [x_i,x_j]x_1 \cdots \hat{x} _i \cdots \hat{x} _j \cdots x_r m\\
+					 &+(-1)^?\sum_{r=1}^{n} x_1 \cdots \hat{x} _i \cdots x_r(x_im)\\
+					 &+(-1)^?\sum_{i=1}^{r} x_1 \cdots d_\mathfrak{g}(x_i)\cdots x_r m\\
+					 &+(-1)^?x_1 \cdots x_r d_M(m)
+.\end{align*}
+\begin{remark}
+	Replaing normal commutativity with Kozkul's sign rulle yields
+	\[
+		\operatorname{Sym} (V)=\mathbb{T} (V) / \left\langle x\otimes y - (-1)^{\left| x \right| \left| y \right| } y\otimes x \right\rangle 
+	.\]
+	Here $\mathbb{T} (V)$ is the tensor algebra.
+\end{remark}
+For example, if $V$ is concentrated in odd degree, then it becomes the exterior algebra. If concentrated in even degree, we get the usual symmetric algebra. The gading takes care of all relevant variations on the rules.
+
+\begin{definition}\label{as}
+	A differential graded algebra (DGA), $(A,d_A)$ is a graded algebra such that
+	\[
+		d_A(a\cdot b)=d_A(a)b + (-1)^{\left| a \right| } a\cdot d_A(b)
+	.\]
+\end{definition}
+For example, de Rham's complex. In fact, de Rham's complex is \emph{commutative} in the graded sense (sometimes called supercommutative???) meaning it is commutative up to Kozkul's sign rule.
+
+Typically we will have $M=\mathbb{C} $. Then we write $C^{\bullet} (\mathfrak{g} )$ and $C_{\bullet} (\mathfrak{g} )$ for simplicity, and note that $d_M$ has no contribution to the boundary morphism.
+
+\begin{warning}
+	Although \emph{cohomology} $C^{\bullet} (\mathfrak{g} )$ is a DGA, \emph{homology} $C_{\bullet} (\mathfrak{g} )$ is NOT a DGA. It would be a ``differential graded coalgebra''.
+\end{warning}
+\begin{definition}\label{asds}
+	Let $(\mathfrak{g} ,d_\mathfrak{g} )$ a dg Lie algebra. A Maurev-Cartan element in $\mathfrak{g} $ is some degree 1 $\alpha \in \mathfrak{g} _1$ such that
+	\[
+		d_\mathfrak{g} (\alpha )+\frac{1}{2} [\alpha ,\alpha ]=0
+	.\]
+\end{definition}
+
+Some kind of proof exists that like formal neighborhoods of a space in some moduli space are equivalent as $\infty $-categories to some category of dg Lie algebras. In field theory, we work with the moduli space $EL(S)$ of solutions to the Euler Lagrange equations. Hence we can locally model these solutions, up to $\infty $-categorical equivalence, by dg Lie algebras via taking the Maurev-Cartan locus or smt.
+
+\begin{proposition}\label{prad}
+	Let $(\mathfrak{g} ,d_\mathfrak{g} )$ a dgla. Then the (not Lie!) cohomology $H^{\bullet} (\mathfrak{g})$ is a graded Lie algebra.
+\end{proposition}
+\begin{proof}
+	Let $\alpha \in H^i(\mathfrak{g} )$ and $\beta \in H^j(\mathfrak{g} )$. Then $[\alpha ,\beta ]$ by choosing a representative, computing the Lie bracket, and passing to cohomology. Note that the choice of representatives are closed (kernel mod image so everything in kernel). We need to check that the bracket of representatives is closed. This is immediate:
+	\[
+		d[ \widetilde{\alpha } ,\widetilde{\beta } ]=[d \widetilde{\alpha } ,\widetilde{\beta } ]+(-1)^{\left| \widetilde{\alpha }  \right| } [ \widetilde{\alpha } ,d \widetilde{\beta } ]=[0,\widetilde{\beta } ] + (-1)^{\left| \alpha  \right| } [ \widetilde{\alpha } ,0]=0
+	.\]
+	Now we shw it is well-defined. This is easy to check using that the elements r closed.
+\end{proof}
+
+
+Let $U\subseteq X=\mathbb{R} $. Consider the precosheaf of dglas
+\[
+	U\mapsto (\mathfrak{g} \otimes \Omega _c^{\bullet}(U),d_{\mathrm{dR} } )
+\]
+given by the compactly supported de Rham complex. Call this $\mathfrak{g} ^{\mathbb{R} } (U)$. Ordinary de Rham cohomology is singular cohomology, and $\mathbb{R} ^n$ is contractible so $H^i(\mathbb{R} )=\delta _{i0} \mathbb{R} $. Unfortunately, compactly supported cohomology is \emph{not} homotopy invariant, so it turns out we will get
+\[
+	H^i_c(\mathbb{R} ^n)=\delta_{in} \mathbb{R} 
+.\]
+Since $\mathfrak{g} ^\mathbb{R} $ is just a cosheaf, we get
+\[
+	\mathfrak{g} ^\mathbb{R} (U_1 \amalg U_2)\cong \mathfrak{g} ^\mathbb{R} (U_1)\oplus \mathfrak{g} ^\mathbb{R} (U_2)
+.\]
+If we take the symmetric algebra on that, it becomes a tensor product. So $U\mapsto C_{\bullet} (\mathfrak{g} ^\mathbb{R} (U))$ is a prefactorization algebra in cochain complexes.
+
+\begin{proposition}[3.4.1]\label{askjas}
+	Let $\mathcal{H} $ denote the cohomology pFA of $C_{\bullet} (\mathfrak{g}^\mathbb{R} ) $ by assigning
+	\[
+		\mathcal{H} (U)=H^{\bullet} (C_{\bullet} (\mathfrak{g} ^\mathbb{R} (U)))
+	.\]
+	This is a pFA valued in graded vector spaces. Then $\mathcal{H} $ is locally constant (corresponding to a graded associative algebra). The corresponding graded algebra is isomorphic to $\mathcal{U} (\mathfrak{g} )$.
+\end{proposition}
+\begin{proof}
+	Let $I\hookrightarrow J$ an inclusion of open intervals. Then there is a quasi-isomorphism $\mathfrak{g} \otimes \Omega^{\bullet} _c(I)\simeq \mathfrak{g} \otimes \Omega ^{\bullet} _c(J)$. Note that quasi-isomorphic dglas have quasi-isomorphic chevelay-eilenberg complexes (simple lemma). In particular the functor $\mathfrak{g} \mapsto C_{\bullet} (\mathfrak{g} )$ is a homotopic functor. Hence there is $C_{\bullet} (\mathfrak{g} ^\mathbb{R} (I))\simeq C_{\bullet} (\mathfrak{g} ^\mathbb{R} (J))$, yielding an isomorphism in cohomology.
+\end{proof}
+

@@ -1,0 +1,31 @@
+\lecture{23}{Mon 10 Nov 2025 12:23}{Tensors}
+
+We are trying to define a bilinear form $g_p : T_pM \times T_pM \to \mathbb{R} $ which is smooth and positive-definite, like a smooth inner product. It will be useful to start by defining a smooth map $T_pM \otimes T_pM \to \mathbb{R} $ and then precomposing with tensor.
+\begin{notation}
+	Define
+	\[
+		T^kT_pM \coloneqq \left( T_pM \right) ^{\otimes k} ,
+	\]
+	\[
+		T^kT_p^*M \coloneqq \left( T_p^*M \right) ^{\otimes k} ,
+	\]
+	\[
+		T^{(k,\ell )} T_pM \coloneqq T^kT_pM \otimes T^\ell T_p^*M
+	.\]
+	Then define
+	\[
+		T^{(k,\ell )} TM \coloneqq \coprod_{p\in M} T^{(k,\ell )} T_pM
+	.\]
+	We also use the notation $T^{(0,k )} TM=T^kT^*M$ and $T^{(k,0)} TM=T^kTM$. Finally, we denote the tensor algebra on a $\mathbb{R} $-linear space $V$ by $\mathbb{T} V$. The professor uses $\mathcal{T} ^{(k,\ell )} TM$ instead.
+\end{notation}
+
+The tensor product of duals $V^*\otimes V^*$, then this is naturally isomorphic to the set $L(V,V;\mathbb{R} )$ of bilinear forms $V\times V\to \mathbb{R} $.
+
+\begin{definition}\label{3.1.14}
+	A \emph{covariant} $k$-tensor in a $\mathbb{K} $-vector space $V$ is an element of $(V^*)^{\otimes k} $. This terminology is ancient and terrible and some books flip this with contravariant so we will prefer to just call this a $k$-cotensor or a $k$-multilinear form on $V$. Similarly, a \emph{contravariant} $k$-tensor is an element of $V^{\otimes k} $. We will just call this a $k$-tensor.
+\end{definition}
+
+\begin{definition}\label{3.1.15}
+	A \emph{Riemannian metric} on a manifold $M$ is a smooth section of $T^2T^*M$ which is symmetric and positive definite.
+\end{definition}
+

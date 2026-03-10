@@ -1,0 +1,25 @@
+\lecture{7}{Thu 26 Feb 2026 09:36}{Primitive along a path}
+
+Let $f$ be holomorphic on $U$. We currently only have integrals defined over piecewise $C^1$ paths, but to take advantage of the notion of homotopy we want to define them for $C^0$ paths. So let $\gamma : I \to U$ be $C^0$. We choose a partition $a=t_0<t_1<\cdots <t_n=b$ such that $\gamma [t_{i-1} ,t_{i} ]$ falls inside a disk $D_i$ for all $i$. Since $f$ is holomorphic, it has a primitive on any open disc, so let $F_i$ be a primitive of $f$ on $D_i$. Since $D_i \cup D_{i+1} $ is connected, the primitives $F_i,F_{i+1} $ differ by at most a constant. We choose these constants such that $F_i=F_{i+1} $; since $n$ is finite we obtain that $F_i=F_j$ for all $i,j$. For $t\in[t_i,t_{i+1} ]$, define $F_\gamma (t)=F_i(\gamma (t)) = ((\bigcup_i F_i) \circ \gamma )(t)$. We define
+\[
+	\int_\gamma f\coloneqq F_\gamma (b)-F_\gamma (a)
+.\]
+
+\begin{definition}\label{2.0.5}
+	A \emph{primitive} $F_\gamma $ along a path $\gamma $ for a function $f\in \mathcal{O}(U)$ is a continuous function $F_\gamma : I \to \mathbb{C} $ with the property that for every $\tau \in I$, there is an open disk $D_\tau \subseteq U$ with $\tau \in D_\tau $ such that for $t$ sufficiently close to $\tau $, we have $F_\gamma (t)=F_{\tau } (\gamma (t))$ where $F_{\tau } $ is a primitive of $f$ on $D_\tau $.
+\end{definition}
+
+
+\begin{theorem}\label{2.0.6}
+	Let $f\in \mathcal{O} (U)$ and $\gamma ,\delta $ homotopic paths in $U$. Then
+	\[
+		\int_\gamma f=\int_\delta f
+	.\]
+\end{theorem}
+\begin{corollary}[Cauchy]\label{2.0.7}
+	Let $f\in \mathcal{O} (U)$ and $\gamma $ be null-homotopic in $U$. Then
+	\[
+		\int_\gamma f =0
+	.\]
+\end{corollary}
+

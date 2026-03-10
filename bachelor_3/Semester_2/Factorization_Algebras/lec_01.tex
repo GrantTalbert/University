@@ -1,0 +1,52 @@
+\chapter{Introduction}
+
+\lecture{1}{Tue 20 Jan 2026 14:06}{Syllabus day}
+
+
+We will move the thursday class to 2-3:30 friday. Maybe cds424?
+
+A factorization algebra is essentially an algebraic formulation of observables in a QFT. Examples are numerous: associative algebras, vertex algebras, $\mathbb{E} _n$-algebras over the little $n$-cubes operad, etc.
+
+FAs are of course motivated by QFT, and more generally a classical field theory. A classical field theory is a space $\mathcal{E} $ of classical fields, typically the space $\Gamma (E)$ of sections of some bundle $E$ over a manifold $M$, usually a fiber bundle; and an action functional $S : \mathcal{E}  \to \mathbb{R} \text{ or } \mathbb{C} $. Write CLFT for classical field theory. In CLFT, we look for the \emph{critical locus}
+\[
+	\operatorname{Crit} (S)=\left\{ \phi \in \mathcal{E} \mid \frac{\delta S}{\delta \phi } =0 ,\mathrm{d} S|_{\phi } =0\right\} 
+.\]
+These are solved by the Euler-Lagrange equations.
+
+For example, classical mechanics on $\mathbb{R} ^n$. Take $\mathcal{E} =\Hom(I,\mathbb{R} ^n)$ for $I=[0,1]$. The category can be any function, smooth maps, piecewise linear, etc. The action functional can be defined as follows. Given $q\in \mathcal{E} $, take
+\[
+	S(q)=\frac{1}{2} \int_{0}^{1} \left\langle \dot{q} (t),\dot{q} (t) \right\rangle  \,\mathrm{d} t=\frac{1}{2} \int_{0}^{1} E(t) \,\mathrm{d} t,
+\]
+where $E$ is the kinetic energy. Take the functional derivative of $S$ to extremize $S$ locally. These are of course just geodesics in $\mathbb{R} ^n$, meaning they satisfy
+\[
+	\frac{\mathrm{d}^2q}{\mathrm{d}t^2} =0
+\]
+since $\Gamma _{ij} ^k=0$ on $\mathbb{R} ^n$. Of course these are functions of the form $at+b$, $a,b\in\mathbb{R} $ fixed. We also obtain another constraint from the IBP (see my ma721 project): $\left\langle \dot{q} ,\delta q \right\rangle|_0^1=$ for any variation $\delta q$ of $q$. If we dont fix the endpoints, then $\delta q(0)\neq \delta q(1)$ in general. This forces $\dot{q} =0$ at $0,1$, and since $\dot{q} =a$ we have $a=0$. Thus $q=b\in\mathbb{R} $ is constant. This is boring. Hence why we fix straight endpoints of $q$. We thus define
+\[
+	\frac{\delta S}{\delta q} =\left.\frac{\mathrm{d}}{\mathrm{d}\varepsilon } \right|_{\varepsilon =0} S(q+\varepsilon \delta q)
+\]
+for a variation $\delta q$ of $q$ fixing endpoints. In this case, $\operatorname{Crit} (S)\subseteq \mathcal{E} $ is a $2n$-dimensional space when $\mathcal{E} $ is functions on $\mathbb{R} ^n$.
+
+\begin{definition}\label{1.0.1}
+	Define the \emph{classical observavles} $\mathcal{O} ^{cl} $ as the algebra of functions on $\operatorname{Crit} (S)$. This is a fairly informal definition, since we have not specified what types of functions we are considering. Sometimes we will consider all functions $\Set (E,\mathbb{R} )$, but since $E$ is rarely finite-dimensional we often restrict to one of the two following important subalgebras:
+	\begin{itemize}
+		\item Smooth functions $C^\infty (\operatorname{Crit} (S),\mathbb{R} )$;
+		\item Polynomials in the coefficients of $\operatorname{Crit} (S)$ elements.
+	\end{itemize}
+\end{definition}
+
+We have another example: scalar FT, which we will call scalar $\phi ^m$ theory on $\mathbb{R} ^n$. Take $\mathcal{E} =C^\infty (\mathbb{R} ^n)$, and
+\[
+	S(\phi )=\int_{\mathbb{R} ^n}\frac{1}{2} \phi \Delta \phi +\frac{g}{m!} \phi ^m \,\mathrm{d} \mathrm{Vol} 
+.\]
+Here $\Delta $ is the laplacian, which exists on any Riemannian manifold. However we are integrating over something noncompact, so we will later get around this issue. Intuitively $\phi $ must decay sufficiently rapidly at $\infty $. We get around it by taking the derivative of the action. We also only consider $\delta \phi $ that are compactly supported. Thus the functional derivative wrt $\delta \phi $ always converges. Extremitization is more complex but we obtain
+\[
+	\Delta \phi +\frac{g}{(m-1)!} \phi ^{m-1} =0
+.\]
+If $m=1,2$ then this is a linear PDE, and we call it a \emph{free field theory}. Once $m$ is higher, the $\phi ^{m-1} $ term is nonlinear in $\phi $. If $g=0$ then $\phi $ is harmonic. These are the various characterizations of solutions to special cases of this PDE, and most critical loci are not finite dimensional.
+
+Finally, just note that even if $S$ is not well-defined, if we only vary wrt compactly supported variations then the critical locus is well-defined.
+
+\textbf{Summary of first day:} A field theory is a set $\mathcal{E} $ of fields and an action functional $S : \mathcal{E}  \to \mathbb{R} $. Usually $\mathcal{E} $ is the vector space $\Gamma (E)$ of a vector bundle $\pi : E \to M$ for a manifold $M$, generally a fiber bundle defined below. The \emph{critical locus} $\operatorname{Crit} (S)$ is the set of extrema for $S$, also denoted $EL(S)$ for Euler-Lagrange. These are the equations of motion. Classical observables are then defined as the algebra of functions $\Set (\operatorname{Crit} (S),\mathbb{R} )$, smooth functions $C^\infty (\operatorname{Crit} (S),\mathbb{R} )$, or polynomials in $\operatorname{Crit} (S)$. The way to interpret the final one is less formal. For an example, let $\mathcal{E} =C^\infty (I,\mathbb{R} ^n)$ such that $\operatorname{Crit} (S)=\left\{ q(t)=at+b\mid a,b\in\mathbb{R} ^n \right\} $. Then the example is $\mathbb{R} [a^i,b^i]$ -- that is, polynomials in components of the coefficients of the extrema.
+
+Often times, $\mathcal{E} $ is not a finite-dimensional vector space, meaning to give it the structure of a smooth manifold we would need to pass to infinite-dimensional differential geometry. This is possible, but quite difficult, and we ignore this point for now, since this is not an important point.

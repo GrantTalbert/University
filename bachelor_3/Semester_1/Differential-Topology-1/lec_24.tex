@@ -1,0 +1,36 @@
+\lecture{24}{Fri 14 Nov 2025 12:19}{Riemannian metrics}
+
+\begin{definition}\label{????????}
+	A Riemannian metric $g$ on a smooth manifold $M$ is a smooth section of $T^*M\otimes T^*M$ such that each $g_p : T_pM \otimes T_pM \to \mathbb{R} $ is symmetric and positive definite, meaning $g(v,v)=0$ iff $v=0$.
+\end{definition}
+In coordinates we write
+\[
+	g_p=\sum_i \sum_{j} g_{ij} \mathrm{d} x^i \otimes \mathrm{d} x^j
+.\]
+An example is $g_{ij}=\delta _i^j$, which makes
+\[
+	g_p(W,V) = V^iW^i = V\cdot W
+.\]
+\begin{proposition}\label{prp:}
+	Every smooth manifold admits a Riemannian metric.
+\end{proposition}
+
+We write $\overline{g} $ for the standard Euclidean metric.
+
+\begin{proposition}\label{askjdnsk}
+	Cover $M$ by charts $\left\{ (U_\alpha ,\varphi _\alpha ) \right\} _{\alpha \in A} $. Then $g_\alpha =\varphi _\alpha ^* \overline{g}_\alpha $.
+\end{proposition}
+We can define the length $L(\gamma )$ of a curve $\gamma $ as
+\[
+	\int _a^b \left\| \dot{\gamma } (t) \right\|  \,\mathrm{d} t
+.\]
+Of course $\left\| \gamma (t) \right\| =\sqrt{g_{\gamma (t)} (\dot{\gamma } ,\dot{\gamma } )} $.
+
+\begin{definition}\label{kasdkjs}
+	Let $(M,g)$ and $(N,h)$ be Riemannian manifolds. A diffeomorphism $F : M \to N$ is called an \emph{isometry} if $F^*h=g$. If every $p\in M$ has an open neighborhood isometric to an open set of $N$, then $(M,g)$ is \emph{locally} isometric to $(N,h)$.
+\end{definition}
+
+\begin{definition}\label{kwoooo}
+	A Riemannian $n$-manifold is \emph{flat} if and only if it is locally isometric to $\mathbb{R} ^n$.
+\end{definition}
+

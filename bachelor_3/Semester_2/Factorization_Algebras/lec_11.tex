@@ -1,0 +1,188 @@
+\lecture{11}{Sat 28 Feb 2026 21:27}{Weibel}
+\section*{Lie algebras}
+To improve my understanding of dg Lie algebra cohomology, I read Weibel chapter 7, which focuses on Lie algebra cohomology. We begin with some basic notions.
+
+Let $R$ be a commutative ring. A \emph{Lie algebra} $\mathfrak{g} $ is a $R$-module together with a \emph{Lie bracket} $[-,-]: \mathfrak{g} \otimes_R\mathfrak{g}  \to \mathfrak{g} $ which is not necessarily associative, but is antisymmetric $[x,x]=0$ and satisfies the Jacobi identity
+\[
+	[x,[y,z]]+[y,[z,x]]+[z,[x,y]]=0
+.\]
+An \emph{ideal} is a $R$-submodule $\mathfrak{h} \subseteq \mathfrak{g} $ such that $[\mathfrak{g} ,\mathfrak{h} ]\subseteq \mathfrak{h} $. An ideal is immediately a Lie subalgebra, and one can quotient by an ideal to obtain a Lie algebra. A morphism of Lie algebras is a map $\varphi : \mathfrak{g}  \to \mathfrak{g} '$ which commutes with the bracket in the sense that $\varphi [-,-]=[\varphi (-),\varphi (-)]$. Every ideal can thus be written as a short exact sequence of Lie algebras
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathfrak{h} \ar[r]  & \mathfrak{g} \ar[r]  & \mathfrak{g} /\mathfrak{h} \ar[r]  & 0.
+\end{tikzcd}\]
+An \emph{abelian} Lie algebra is a Lie algebra where $[-,-]=0$.
+
+Intuitively, the bracket is a commutator, and indeed every associative $R$-algebra $A$ can be viewed as a Lie algebra by defining $[x,y]=xy-yx$. We write $\operatorname{Lie} (A)$ for this Lie algebra, and thus we obtain a functor $\mathrm{Lie} : \mathcal{A} \mathrm{lg} _R \to \mathrm{Lie} $. This functor has a left adjoint given by the universal enveloping algebra $U : \mathrm{Lie}  \to \mathcal{A} \mathrm{lg} _R$, which we will explore indepth later.
+
+Given an associative $R$-algebra $A$, we obtain the Lie algebra $\mathfrak{gl} _n(A)$ of matrices with values in $A$, together with important Lie subalgebras
+\begin{itemize}
+	\item $\mathfrak{sl} _n(A)$: the set of traceless matrices. This becomes difficult to define precisely when $A$ is noncommutative.
+	\item $\mathfrak{o}_n(A)$: the set of skew-symmetric matrices $A_{ij} =-A_{ji} $.
+	\item $\mathfrak{t} _n(A)$: the set of upper triangular matrices.
+	\item $\mathfrak{n} _n(A)$: the set of strictly upper triangular matrices.
+\end{itemize}
+
+Let $A$ a not necessarily associative $R$-algebra. A derivation of $A$ into itself is a $R$-linear map $D : A \to A$ satisfying a Leibnitz rule
+\[
+	D(ab)=(D(a))b + a(D(b))
+.\]
+The set $\operatorname{Der} (A)$ of derivations on $A$ has a commutator $[D_1,D_2]=D_1\circ D_2 - D_2\circ D_1$, which makes $\operatorname{Der} (A)$ into a Lie algebra.
+
+Given an $R$-module $M$, the \emph{free Lie algebra} $\mathfrak{f} (M)$ is a Lie algebra containing $M$ as a submodule which is universal with respect to turning $R$-linear maps into Lie algebra maps. The free Lie algebra assembles into a functor $\mathfrak{f} : \mathrm{Lie}  \to \Mod _R$ with $\mathfrak{f} \dashv U$ for $U$ the forgetful functor. The existence of such a Lie algebra follows by the adjoint functor theorem.
+
+Given Lie algberas $\mathfrak{g} ,\mathfrak{h} $, the product Lie algebra $\mathfrak{g} \times \mathfrak{h} $ is defined by
+\[
+	[(g,h),(g',h')]=([g,g'],[h,h'])
+.\]
+The \emph{lower central sequence} of a Lie algebra is the descending sequence of ideals
+\[
+	\mathfrak{g} \supseteq \mathfrak{g} ^2=[\mathfrak{g} ,\mathfrak{g} ]\supseteq \mathfrak{g} ^3=[\mathfrak{g} ^2,\mathfrak{g} ]\supseteq \cdots \supseteq \mathfrak{g} ^n=[\mathfrak{g} ^{n-1} ,\mathfrak{g} ]\supseteq\cdots 
+.\]
+A Lie algebra is \emph{nilpotent} if $\mathfrak{g} ^n=0$ for some $n$. For example, $\mathfrak{n} _n(A)$ is nilpotent, and so are abelian Lie algebras.
+
+The \emph{derived series} of a Lie algebra $\mathfrak{g} $ is the following descending sequence of ideals
+\[
+	\mathfrak{g} \supseteq \mathfrak{g}^{(1)}  =[\mathfrak{g} ,\mathfrak{g} ]\supseteq \mathfrak{g} ^{(2)} =[\mathfrak{g} ^{(1)} ,\mathfrak{g} ^{(1)} ] \supseteq \cdots \supseteq \mathfrak{g} ^{(n)} =[\mathfrak{g} ^{(n-1)} ,\mathfrak{g} ^{(n-1)} ]\supseteq\cdots 
+.\]
+We say that $\mathfrak{g} $ is \emph{solvable} if $\mathfrak{g} ^{(n)} =0$ for some $n$. For example, every nilpotent Lie algebra is solvable: simply show $[\mathfrak{g} ^i,\mathfrak{g} ^j]\subseteq \mathfrak{g} ^{i+j} $ and the statement follows inductively. The converse is not true -- for example, $\mathfrak{t} _n(A)$ is solvable but not nilpotent.
+
+\section*{$\mathfrak{g}$-Modules}
+
+\begin{definition}\label{dfn:sddskjnfds}
+	A (left) $\mathfrak{g} $-module $M$ is an $R$-module together with a $R$-bilinear multiplication map $\mathfrak{g} \otimes _RM \to M$ (written $x\otimes m\mapsto xm$) such that
+	\[
+		[x,y]m=x(ym)-y(xm)
+	.\]
+	A $\mathfrak{g} $-module homomorphism is an $R$-linear map $\varphi : M \to N$ such that $\varphi (xm)=x\varphi (m)$. We write $\Hom_\mathfrak{g} (M,N)$ or $\Mod _\mathfrak{g} (M,N)$ for the set of $\mathfrak{g} $-module homomorphisms, yielding an abelian category $\Mod _\mathfrak{g} $.
+\end{definition}
+Note that $\Hom_\mathfrak{g} (M,N)\subseteq \Hom_R(M,N)$ is a $R$-submodule.
+
+There is a trivial $\mathfrak{g} $-module functor from $\Mod _R\to \Mod _\mathfrak{g} $ given by taking an $R$-module $M$, and defining the action by $\mathfrak{g} $ to be the trivial action $0: \mathfrak{g} \otimes _RM \to M$. It is an exact functor, and elements of its image are called \emph{trivial $\mathfrak{g} $-modules}. Write this functor as $\mathbf{0} $. It has left- and right-adjoints.
+
+The \emph{invariant submodule} $M^\mathfrak{g} $ of a $\mathfrak{g} $-module $M$ is the submodule
+\[
+	M^\mathfrak{g} =\left\{ m\in M\mid xm=0\forall x\in \mathfrak{g}  \right\} 
+.\]
+We note that $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (R,M)$, when viewing $R$ as a trivial $R$-module. This follows since $R$-linear maps $\varphi :R\to M$ are determined by $\varphi (1)$ since $\varphi (r)=r\varphi (1)$. To make it $\mathfrak{g} $-linear, we need $x\varphi (1)=\varphi (x1)=\varphi (0)=0$ since $R$ is a trivial module, hence we may only map $1$ to an element of $M^\mathfrak{g} $. Moreover such a choice uniquely determines $\varphi $. Since it is the maximal trivial submodule of $M^\mathfrak{g} $, we obtain $\mathbf{0} \dashv (-)^{\mathfrak{g} } $. This is immediate to see: a $\mathfrak{g} $-module homomorphism $\mathbf{0} (N)\to M$ must identify $x\varphi (n)=0$, so its image must fall into a trivial submodule, hence it factors through $M^\mathfrak{g} $. Moreover, any $R$-linear map $N\to M^\mathfrak{g}$ induces a map $\mathbf{0} (N)\to M$ in this way. Hence we have $\mathbf{0} \dashv -^\mathfrak{g} $. Additionally, since $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (\mathbf{0} (R),M)$, we have a representation $-^\mathfrak{g} \cong \Mod _\mathfrak{g} (\mathbf{0} (R),-)$.
+
+The \emph{coinvariants} of $M$ are the quotient $M/\mathfrak{g} M$. Note that this is also a trivial module since for any $x\in \mathfrak{g} $ and $m\in M$, we have $xm\in \mathfrak{g} M$ which is identified to 0 in the quotient. Since this is the largest quotient which is a trivial module, we can show that $(-)_\mathfrak{g} \dashv \mathbf{0} $. We will see later that $\Mod _\mathfrak{g} $ has enough projectives and injectives, hence we can compute the derived functors of (co)invariants.
+
+\begin{definition}\label{lasdsajk}
+	Let $M$ be a $\mathfrak{g} $-module. We write $H_{\bullet} (\mathfrak{g},M)$ or $H_{\bullet} ^{\mathrm{Lie} } (\mathfrak{g} ,M)$ for the derived functors $L_{\bullet} (-_\mathfrak{g} )(M)$ of $-_\mathfrak{g} $, and call them the \emph{homology groups of $\mathfrak{g} $ with coefficients in $M$}. By definition, $H_0(\mathfrak{g} ,M)=M_\mathfrak{g} $.
+
+	Similarly, write $H^{\bullet} (\mathfrak{g},M)$ or $H^{\bullet} _{\mathrm{Lie} } (\mathfrak{g} ,M)$ for the right derived functors $R^{\bullet} (-^{\mathfrak{g} } )(M)$ of $-^{\mathfrak{g} } $, and call them the \emph{cohomology groups of $\mathfrak{g} $ with coefficients in $M$}. By definition, $H^0(\mathfrak{g} ,M)=M^\mathfrak{g} $.
+\end{definition}
+
+\section*{Universal Enveloping Algebras}
+
+Write $T(\mathfrak{g} )$ for the tensor algebra on $\mathfrak{g} $. If $\mathfrak{g} $ is a Lie algebra, the universal enveloping algebra can be given as $T(\mathfrak{g})$ modulo the relation that the inclusion $\mathfrak{g} \hookrightarrow T(\mathfrak{g} )$ be a Lie algebra homomorphism and $T(\mathfrak{g} )$ have bracket given by the commutator. It is universal in the sense that precomposition by the inclusion yields
+\[
+	\operatorname{Lie} (-,\mathrm{Lie} )\cong \Alg_R(U,-)
+.\]
+
+\begin{proposition}\label{kjsndfkndsk}
+	If $\mathfrak{g} $ is a Lie algbera, then every $\mathfrak{g} $-module is naturally a $U\mathfrak{g} $-module, and vice versa. This yields natural isomorphisms $\Mod _\mathfrak{g} \cong \Mod _{U\mathfrak{g} } $.
+\end{proposition}
+\begin{proof}
+	A $\mathfrak{g} $-module is a Lie algebra map $\mathfrak{g} \to \operatorname{Lie} (\End_R(M) )$ for some $R$-module $M$. A $U\mathfrak{g} $-module is an algebra map $U\mathfrak{g} \to \End_R(M) $. The statement now follows by adjointness
+	\[
+		\operatorname{Lie} (\mathfrak{g} ,\operatorname{Lie} (\End_{R} (M) ))\cong \Alg_R(U\mathfrak{g} ,\End_R(M) )
+	.\]
+\end{proof}
+Since the categories of associative algebras have enough projectives and injectives, thus so do the categories of $\mathfrak{g} $-modules. The action is simply given by, for $x_1, \ldots ,x_n\in \mathfrak{g} $,
+\[
+	(x_1 \cdots x_n)m = x_1(\cdots (x_nm)\cdots )
+.\]
+We then impose bilinearity to cover all of $U\mathfrak{g} $.
+
+\begin{corollary}\label{khsdjfkcnsdjfndks}
+	Let $M$ be a $\mathfrak{g} $-module. Then
+	\[
+		H_{\bullet} (\mathfrak{g} ,M) \cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,M)
+	,\]
+	\[
+		H^{\bullet} (\mathfrak{g} ,M)\cong \operatorname{Ext}_{U\mathfrak{g} } ^{\bullet} (R,M)
+	.\]
+\end{corollary}
+\begin{proof}
+	Since we have already observed that $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (R,-) \cong \Mod_{U\mathfrak{g} } (R,-)$, the second statement is immediate by functoriality of derived functors (in the homotopy sense) and homology. For the first, note that the transpose of $0: \mathfrak{g}  \to R$ under $U\dashv \mathrm{Lie} $ is the unique map $U\mathfrak{g} \to R$ mapping $\mathfrak{g}\mapsto 0$. Define the \emph{augmentation ideal} $\mathfrak{J} $ to be the kernel of this map; evidently $\mathfrak{J} $ is the two-sided ideal generated by the image of $\mathfrak{g} $ in $U\mathfrak{g} $. This map is epi, hence the first isomorphism theorem yields $R \cong U\mathfrak{g} /\mathfrak{J} \cong (U\mathfrak{g} )_\mathfrak{g} $. Then
+	\[
+		R\otimes_{U\mathfrak{g} } M \cong (U\mathfrak{g} /\mathfrak{J} )\otimes _{U\mathfrak{g} } M \cong M / \mathfrak{J} M \cong M / \mathfrak{g} M \cong M_\mathfrak{g} 
+	.\]
+\end{proof}
+
+\begin{theorem}[Poincar\'e-Birkhoff-Witt]\label{PBW}
+	Let $\mathfrak{g} $ be a free $R$-module. Then $U\mathfrak{g} $ is also a free $R$-module. If $\left\{ e_\alpha  \right\} _{\alpha \in A} $ is an ordered basis of $\mathfrak{g} $, then the collection of all elements of the form $e_I$, where $I$ is an increasing sequence, form a basis for $U\mathfrak{g} $.
+\end{theorem}
+We decline to prove the PBW.
+\begin{corollary}\label{lkasj}
+	The inclusion $\mathfrak{g} \hookrightarrow U\mathfrak{g} $ is injective, so we may identify $\mathfrak{g} $ with its image.
+\end{corollary}
+\begin{corollary}\label{askj}
+	If $\mathfrak{h} \subseteq \mathfrak{g} $ is a Lie subalgebra, and $R=k$ is a field, then $U\mathfrak{g} $ is a free $U\mathfrak{h} $-module.
+\end{corollary}
+
+\begin{exercise}
+	Let $M,N$ be left $\mathfrak{g} $-modules. Show that $\Mod _R(M,N)$ is a $\mathfrak{g} $-module by $(xf)(m)=xf(m)-f(xm)$. Then show that $\Mod _\mathfrak{g}(M,N)\cong \Mod _R (M,N)^\mathfrak{g} $.  Show that this induces isomorphisms $\operatorname{Ext} ^{\bullet} _{U\mathfrak{g} } (M,N)\cong H^{\bullet} _{\mathrm{Lie} } (\mathfrak{g} ,\Mod _R(M,N))$. In particular, the global dimension of $U\mathfrak{g} $ equals the Lie algebra cohomological dimension of $\mathfrak{g} $.
+\end{exercise}
+\begin{proof}
+	For the first, we need only show $[x,y]f=x(yf)-y(xf)$. Let $x,y\in \mathfrak{g} $ and $m\in M$. Then since $M,N$ are $\mathfrak{g} $-modules, 
+	\begin{align*}
+		([x,y]f)(m) &= [x,y]f(m) - f([x,y]m)\\
+			    &=xyf(m) - yxf(m) - f(xym - yxm)\\
+			    &=xyf(m) - yxf(m) - f(xym) + f(yxm)
+	.\end{align*}
+	Note that $xf = x\circ f-f\circ x$. Thus we also have
+	\[
+		x(yf) = x(y\circ f - f\circ y) = x\circ y\circ f - y\circ f\circ x - x \circ f\circ y + f\circ y\circ x
+	.\]
+	Hence evaluating at $m$ yields
+	\[
+		(x(yf))(m) = xyf(m) - yf(xm) - xf(ym) + f(yxm)
+	.\]
+	Similarly,
+	\[
+		(y(xf))(m) = yxf(m) - xf(ym) - yf(xm) + f(xym)
+	.\]
+	Thus
+	\[
+	(x(yf))(m) - (y(xf))(m) \]
+	\[
+		= xyf(m) - yf(xm) - xf(ym) + f(yxm) - yxf(m) + xf(ym) + yf(xm) - f(xym)
+	\]
+	\[
+		=xyf(m)+f(yxm) - yxf(m) - f(xym)
+	.\]
+	They agree, hence $\Mod _R(M,N)$ is a $\mathfrak{g} $-module in the way claimed. 
+
+	Now let $f$ be a $\mathfrak{g} $-invariant of $\Mod _R(M,N)$. Then $0=xf = x\circ f - f\circ x$ for all $x\in \mathfrak{g} $, and thus $x\circ f = f\circ x$. Thus $f$ is $\mathfrak{g} $-linear. Conversely if $f$ is $\mathfrak{g} $-linear, then $f\circ x = x\circ f$, and thus $xf = x\circ f-f\circ x =0$, so $f$ is a $\mathfrak{g} $-invariant of $\Mod_R(M,N)$.
+\end{proof}
+
+\section*{$H^1$ and $H_1$}
+
+Since $\mathfrak{J} $ is the kernel of $U\mathfrak{g} \to R$, there is a short exact sequence of $\mathfrak{g} $-modules
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathfrak{J} \ar[r]  & U\mathfrak{g} \ar[r]  & R\ar[r]  & 0.
+\end{tikzcd}\]
+
+Since $H_{\bullet} (\mathfrak{g} ,-)\cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,-)$, we apply the \emph{dimension shifting technique} to take $H_{n} (\mathfrak{g} ,-) = H_{n-1} (\mathfrak{g},-)$: consider the long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+\cdots \ar[r]  & \operatorname{Tor} _n^{U\mathfrak{g} } (U\mathfrak{g} ,M)\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (U\mathfrak{g} ,M) \ar[r] & \cdots .
+\end{tikzcd}\]
+Since $U\mathfrak{g} $ is free as a $U\mathfrak{g} $-module, it is flat, and hence its Tor modules vanish. Thus the short exact sequence simply reads
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+\cdots \ar[r]  & 0\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & 0 \ar[r] & \cdots .
+\end{tikzcd}\]
+The only way for this to be exact is if the map $\operatorname{Tor} _n^{U\mathfrak{g} } (R,M)\to \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (\mathfrak{J} ,M)$ is an isomorphism for $n\geq 2$. Additionally, reading this in degree $n=1,0$, we obtain the exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & H_1(\mathfrak{g} ,M)\ar[r]  & \mathfrak{J} \otimes _{U\mathfrak{g} } M\ar[r]  & M\ar[r]  & M_{\mathfrak{g} } \ar[r]  & 0.
+\end{tikzcd}\]
+Here we have noted that $R\otimes _{U\mathfrak{g} } M \cong M_\mathfrak{g} $.
+
+\begin{exercise}
+	Show that the inclusion $i : \mathfrak{g}  \to U\mathfrak{g} $ maps $[\mathfrak{g} ,\mathfrak{g} ]$ to $\mathfrak{J}^2$. Conclude that it induces a map $i : \mathfrak{g} ^{ab}  \to \mathfrak{J} /\mathfrak{J} ^2$, where $\mathfrak{g} ^{ab} =\mathfrak{g} /[\mathfrak{g} ,\mathfrak{g} ]$.
+\end{exercise}
+\begin{proof}
+	We consider the map $0 : \mathfrak{g}  \to R$. 
+\end{proof}
+

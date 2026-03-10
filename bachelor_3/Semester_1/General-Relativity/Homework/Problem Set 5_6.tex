@@ -1,0 +1,162 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/code.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Problem Set 5}
+\begin{document}
+\makeproblem
+\section{Problem 1}
+\begin{problem}
+	Consider a metric of the form
+	\[
+		\mathrm{d} s^2=\mathrm{d} r^2+f(r)\mathrm{d} \Omega _2^2
+	.\]
+	Assuming the metric is maximally symmetric, find the most general form for $f(r)$. Hint: there are two free parameters corresponding to the scalar curvature and an integration constant, and the integration constant can be removed without loss of generality by shifting $r\to r+c$.
+\end{problem}
+\noindent \textbf{Solution.} Recall a space of dimension $3$ is maximally symmetric if and only if the Riemann tensor is of the form
+\[
+	R_{\mu \nu \rho \sigma } =\frac{R}{6} \left( g_{\mu \rho } g_{\nu \sigma } -g_{\mu \sigma } g_{\nu \rho }  \right) 
+.\]
+We first need to compute the Ricci scalar.
+\begin{lstlisting}[language=Mathematica]
+coords = {r, \[Theta], \[Phi]};
+n = 3;
+g = DiagonalMatrix[{1, f[r], f[r] Sin[\[Theta]]^2}];
+ginv = Inverse[g];
+
+(* christoffels *)
+\[CapitalGamma][k_, i_, j_] := 1/2 Sum[ginv[[k, l]] * (D[g[[l, j]], coords[[i]]] + D[g[[i, l]], coords[[j]]] - D[g[[i, j]], coords[[l]]]), 
+   {l, 1, n}];
+
+(* mr riemann ur tensor sucks *)
+Rtensor[i_, j_, k_, l_] := 
+  D[\[CapitalGamma][i, j, l], coords[[k]]] - D[\[CapitalGamma][i, j, k], coords[[l]]] + 
+  Sum[\[CapitalGamma][i, m, k] \[CapitalGamma][m, j, l] - \[CapitalGamma][i, m, l] \[CapitalGamma][m, j, k], {m, 1, n}];
+
+(* ricci *)
+RicciTensor[i_, j_] := Sum[Rtensor[m, i, m, j], {m, 1, n}];
+RicciScalar = Simplify[
+  Sum[ginv[[ii, jj]] RicciTensor[ii, jj], {ii, 1, n}, {jj, 1, n}]
+]
+\end{lstlisting}
+This code yields
+\[
+	R=\frac{f'(r)^2+4f(r)(1-f''(r))}{2f(r)^2} 
+.\]
+This gives $R$ in terms of derivatives of $f$. We can solve for $f$ in terms of $R$ by solving the second order ode. This is in fact an ODE because we can take $R$ to be constant in a maximally symmetric space since curvature is constant. The general solution is a mess, so we modify the equation to make it easier for Mathematica to solve. If we set $f(r)=a(r)^2$ then we obtain
+\[
+	R = \frac{\left( \frac{\mathrm{d}}{\mathrm{d}r} a(r)^2 \right) ^2 + 4a(r)^2\left( 1-(a(r)^2)'' \right) }{2a(r)^4} =\frac{4a(r)^2a'(r)^2 + 4a(r)^2\left( 1-2a(r)a''(r)-2a'(r)^2 \right) }{2a(r)^4} 
+\]
+\[
+	=\frac{2a'(r)^2+2-4a(r)a''(r)-4a'(r)^2}{a(r)^2}=\frac{2-2a'(r)^2-4a(r)a''(r)}{a(r)^2}
+.\]
+We then obtain
+\[
+	Ra^2 = 2-2(a')^2-4aa''
+.\]
+We also perform a change of variables $u(a) = \left( \frac{\mathrm{d}a}{\mathrm{d}r}  \right) ^2$. This just kind of made Mathematica solve the integral better. We can take $a(0)=0$ since at the origin there is no $\theta $-dependence, so the $\mathrm{d} \Omega _2^2$ term in the metric should vanish. We can also take $a'(0)=1$ since near the origin curvature becomes negligable from the observer's frame, and flat space has $\mathrm{d} s^2 = \mathrm{d} r^2 + r^2 \mathrm{d} \Omega _2^2$. This yields $a \to r$, and thus $a' \to 1$.
+\begin{lstlisting}[language=Mathematica]
+odeA = Simplify[RicciScalar == R /. f -> (a[#]^2 &)];
+reducedODE = Simplify[
+    odeA /. {a''[r] -> u'[a]/2, a'[r] -> Sqrt[u[a]], a[r] -> a}
+];
+(* boundary condition *)
+solU = DSolveValue[{reducedODE, u[0] == 1}, u[a], a];
+SolveGeneral[assumption_] := Module[{integral, invSol, aSol},
+    (* find r as a function of a *)
+    integral = Simplify[
+	Integrate[1/Sqrt[solU], a, Assumptions -> {a > 0, assumption}],
+	assumption
+    ];
+    (* recover a as a function of r *)
+    invSol = Solve[r == integral, a, Assumptions -> {r > 0, assumption}];
+
+    aSol = a /. Last[invSol]
+    (* recover f = a^2 *)
+    Simplify[aSol^2, assumption]
+];
+solPos = SolveGeneral[R > 0];
+Print[solPos];
+solZero = SolveGeneral[R == 0];
+Print[solZero];
+solNeg = SolveGeneral[R < 0];
+Print[solNeg];
+\end{lstlisting}
+This outputs
+\[
+	R>0 \implies f(r) = \frac{6 \sin \left( \frac{r\sqrt{R} }{\sqrt{6} }  \right) ^2}{R} 
+\]
+\[
+	R=0 \implies f(r) = r^2
+\]
+\[
+	R<0 \implies f(r) = -\frac{6 \sinh \left( \frac{r\sqrt{-R} }{\sqrt{6} }  \right) ^2}{R} 
+.\]
+
+\section{Problem 2}
+\begin{problem}
+	Show that when someone falls across the Horizon of a Schwarzschild black hole, the slowest they can approach the center $r=0$ is
+	\[
+		\left| \frac{\mathrm{d}r}{\mathrm{d}\tau }  \right| \geq \sqrt{\frac{2GM}{r} -1} ,
+	\]
+	for $\mathrm{d} \tau $ the proper time.
+\end{problem}
+\noindent \textbf{Solution.} We start with the Schwarzschild metric
+\[
+	\mathrm{d} s^2=-\left( 1-\frac{R_S}{r}  \right) \mathrm{d} t^2+\frac{\mathrm{d} r^2}{1-\frac{R_S}{r} } +r^2 \mathrm{d} \Omega ^2
+.\]
+Let $\mathrm{d} \tau ^2=g_{\mu \nu } \mathrm{d} x^\mu \mathrm{d} x^\nu $. Take $r<R_S$, making $\frac{R_S}{r} >\frac{R_S}{R_S} =1$. Thus $1-\frac{R_S}{r} <0$. We can factor out a negative sign, yielding
+\[
+	\mathrm{d} \tau ^2 = -\left(\left( \frac{R_S}{r} -1 \right) \mathrm{d} t^2-\frac{\mathrm{d} r^2}{\frac{R_S}{r} -1} +r^2 \mathrm{d} \Omega ^2\right) = -\left( \frac{R_S}{r} -1 \right) \mathrm{d} t^2 + \frac{\mathrm{d} r^2}{\frac{R_S}{r} -1} -r^2 \mathrm{d} \Omega ^2
+.\]
+We start by maximizing $\mathrm{d} \tau /\mathrm{d} r$, and recover the minimum of $\mathrm{d} r/\mathrm{d} \tau $ using the fact that they are inverses.
+
+To maximize $\mathrm{d} \tau ^2$, we note that the $\mathrm{d} t$ and $\mathrm{d} \Omega $ terms are negative, so the largest they can be is 0. Assuming they vanish, the maximum of $\mathrm{d} \tau ^2$ is
+\[
+	\mathrm{d} \tau ^2 \leq \frac{\mathrm{d} r^2}{\frac{R_S}{r} -1} \implies \frac{\mathrm{d}\tau }{\mathrm{d}r} ^2 \leq \frac{1}{\frac{R_S}{r} -1} =\frac{1}{\frac{R_S-r}{r} } =\frac{r}{R_S-r} 
+.\]
+Inverting the fraction yields
+\[
+	\frac{\mathrm{d}r}{\mathrm{d}\tau } ^2 \geq \frac{R_S-r}{r} =\frac{R_S}{r} -1
+.\]
+Since $R_S=2GM$,
+\[
+	\left| \frac{\mathrm{d}r}{\mathrm{d}\tau }  \right| \geq \sqrt{\frac{R_S}{r} -1} =\sqrt{\frac{2GM}{r} -1} 
+.\]
+\begin{problem}\label{2}
+	Show if they go as slow as possible, then they go from the horizon $r=2GM$ to the singularity $r=0$ in a proper time of $\Delta t=\frac{\pi }{2} R_S$. Hint: use the identity $\int_{0}^{1} \frac{1}{\sqrt{x^{-1} -1} }  \,\mathrm{d} x=\frac{\pi }{2} $; restore the factors of $c$ by dimensional analysis.
+\end{problem}
+\noindent\textbf{Solution.} We continue using $R_S=2GM$. Since the person is falling from the horizon to the singularity, $r$ is decreasing, so we write it with a negative sign:
+\[
+	\mathrm{d} \tau =-\frac{\mathrm{d} r}{\sqrt{\frac{R_S}{r} -1} } 
+.\]
+Integrating gives
+\[
+	\Delta \tau =\int_{R_S}^{0} -\frac{1}{\sqrt{\frac{R_S}{r} -1}}  \,\mathrm{d} r=\int_{0}^{R_S} \frac{1}{\sqrt{\frac{R_S}{r} -1} }  \,\mathrm{d} r
+.\]
+In order to use the given identity, we substitute $r$ for a dimensionless quantity $R_Sx=r$, $R_S\mathrm{d} x=\mathrm{d} r$. We then have
+\[
+	\Delta \tau =\int_{0}^{1} \frac{R_S}{\sqrt{x ^{-1} -1} } \,\mathrm{d} x=\frac{\pi }{2} R_S
+.\]
+The hint also tells us to restore factors of $c$ by dimensional analysis, so note that the Schwarzschild radius has units of length and proper time has units of time. We thus divide by velocity $c$ to obtain $\Delta \tau =\frac{\pi R_S}{2c} $.
+
+\begin{problem}
+	The largest black hole discovered so far has a Schwarzschild radius of $9.75\times 10^{13} $ meters. Calculate the maximum $\Delta \tau $ using the formula from \cref{2}.
+\end{problem}
+\noindent \textbf{Solution.} The meter is defined such that
+\[
+	c=299,792,458
+.\]
+We have
+\[
+	\Delta \tau =\frac{\pi }{2} \frac{9.75 \times 10^{13} }{299,792,458} \approx 510,862\,\text{ seconds}.
+\]
+According to Google that's almost 6 days.
+\end{document}

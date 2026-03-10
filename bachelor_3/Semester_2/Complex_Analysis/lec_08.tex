@@ -1,0 +1,15 @@
+\lecture{8}{Tue 03 Mar 2026 09:31}{Homotopy invariance}
+
+\begin{theorem}\label{awooo}
+	Let $f : U \to \mathbb{C} $ be holomorphic, and let $\gamma ,\delta : I \to U$ be continuous paths in $U$ with the same endpoints, which are homotopic with the endpoints fixed. Then $\int_\gamma f=\int_\delta f$.
+\end{theorem}
+\begin{proof}
+	Just note that if $f$ is holo then $f\mathrm{d} z$ is closed, pull back along the homotopy, and throw Stokes at it.
+\end{proof}
+\begin{corollary}[Cauchy integration formula]\label{awoooo}
+	Let $f\in \mathcal{O} (U)$ and $z_0\in U$ a point such that $\overline{B_r(z_0)} \subseteq U$. Then for any $z\in D\coloneqq D_r(z_0)$,
+	\[
+		f(z) = \frac{1}{2\pi i} \oint_{\partial D} \frac{f(\zeta )}{\zeta -z}  \,\mathrm{d} \zeta 
+	.\]
+\end{corollary}
+

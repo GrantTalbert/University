@@ -1,0 +1,320 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 12}
+\begin{document}
+\makeproblem
+\section{Problem 10}
+\setcounter{section}{10}
+\begin{problem}\label{10.1}
+	Let $\xi =\sqrt{2+\sqrt{2} } $. Show that $[\mathbb{Q} (\xi ) : \mathbb{Q} ]=4$. Hint: $\sqrt{2} $ is not rational.
+\end{problem}
+\begin{proof}
+	Note that $\xi ^2 - 2 = \sqrt{2} $, and thus $\left( \xi ^2 - 2 \right) ^2=2$. Thus $\xi $ is a root of $f(x) = (x^2-2)^2 -2= x^4 - 4x^2 + 2$. We claim that $f$ is the minimal polynomial of the field extension; the statement then follows since $\operatorname{deg} f=4$. It suffices to show $f$ is irreducible over $\mathbb{Q} $, and since it has coefficients in $\mathbb{Z} $, we can equivalently show irreducibility in $\mathbb{Z} $. This follows by Eisenstein's criteria, since $0,4\in (2)$, $1\notin (2)$, and $2\notin (2^2=4)$.
+\end{proof}
+\begin{problem}\label{10.2}
+	Find a monic polynomial $p(t)\in \mathbb{Q} (t)$ satisfied by $\xi $.
+\end{problem}
+\begin{proof}
+	With notation as in \cref{10.1}, define $p(x)\coloneqq f(x)$.
+\end{proof}
+\begin{problem}\label{10.3}
+	Show that $\sqrt{2-\sqrt{2} } \in\mathbb{Q} (\xi )$.
+\end{problem}
+\begin{proof}
+	Note that
+	\[
+		\sqrt{2+\sqrt{2} } \sqrt{2-\sqrt{2} } =\sqrt{\left( 2+\sqrt{2}  \right) \left( 2-\sqrt{2}  \right) } =\sqrt{4-2} =\sqrt{2} \implies \sqrt{2-\sqrt{2} } =\frac{\sqrt{2} }{\sqrt{2+\sqrt{2} } } 
+	.\]
+	Since inverses exist in fields and $\mathbb{Q} (\xi )$ is a field, it suffices to show $\sqrt{2} \in \mathbb{Q} (\xi )$. Indeed, since $\xi ^2=2+\sqrt{2} $ and $2\in \mathbb{Q} (\xi )$,  by closure under subtraction $2+\sqrt{2} -2=\sqrt{2} \in\mathbb{Q} (\xi )$.
+\end{proof}
+\begin{problem}\label{10.4}
+	Justify why $\xi \mapsto \sqrt{2-\sqrt{2} } $ determines an automorphism $\sigma $ of $\mathbb{Q} (\xi ) /\mathbb{Q} $.
+\end{problem}
+\begin{proof}
+	It suffices to simply show that $\mathbb{Q} (\sqrt{2-\sqrt{2} } )=\mathbb{Q} (2+\sqrt{2} )$. The automorphism then falls out immediately. Since $\sqrt{2-\sqrt{2} } \in\mathbb{Q} (\xi )$, we have $\mathbb{Q} (\sqrt{2-\sqrt{2} } )\subseteq \mathbb{Q} (\xi )$, so it suffices to show that $\xi \in \mathbb{Q} (\sqrt{2-\sqrt{2} } )$, since we will then have $\mathbb{Q} (\xi )\subseteq \mathbb{Q} (\sqrt{2-\sqrt{2} } )$. This follows by the relation found in \cref{10.3}:
+	\[
+		\sqrt{2-\sqrt{2} } =\frac{\sqrt{2} }{\xi } \implies \xi =\frac{\sqrt{2} }{\sqrt{2-\sqrt{2} } } 
+	.\]
+	By the same logic, we need only show $\sqrt{2} \in\mathbb{Q}(\sqrt{2-\sqrt{2} } )$, and once again we have $\sqrt{2-\sqrt{2} } ^2=2-\sqrt{2} $, yielding $\sqrt{2} \in\mathbb{Q} (\sqrt{2-\sqrt{2} } )$ by $2\in\mathbb{Q} $ and the various closure properties of fields.
+\end{proof}
+\begin{problem}
+	Find the matrix representation of $\sigma $ with respect to the $\left\{ 1,\xi ,\xi ^2,\xi ^3 \right\} $ basis.
+\end{problem}
+\begin{proof}
+	Clearly $1\mapsto 1$. We previously saw
+	\[
+		\xi \sigma (\xi )=\sigma 
+	.\]
+	Note that $\xi ^2=2+\sqrt{2} $, and thus
+	\[
+		\xi \sigma (\xi )=\xi ^2-2 \implies \sigma (\xi )=\xi -2\xi ^{-1} 
+	.\]
+	To determine $\xi ^{-1} $, recall that $\xi $ satisfies the minimal polynomial
+	\[
+		\xi ^4-4\xi ^2+2=0 \implies \xi ^4 - 4\xi ^2=-2
+	.\]
+	Dividing out by $\xi $ yields
+	\[
+		-2\xi ^{-1} =\xi ^3-4\xi
+	.\]
+	We thus have
+	\[
+		\sigma (\xi )=\xi +\xi ^3-4\xi =\xi ^3-3\xi 
+	.\]
+	To compute $\sigma (\xi ^2)$, we note that $\sigma $ is a ring homomorphism, and thus $\sigma (\xi ^2)=\sigma (\xi )^2$. It is easiest to do this explicitly.
+	\[
+		\sigma (\xi )^2=\sqrt{2-\sqrt{2} } ^2=2-\sqrt{2} =2-\left( \xi^2-2 \right) =4-\xi ^2
+	.\]
+	We thus obtain by the same logic that
+	\[
+		\sigma (\xi ^3)=\sigma (\xi )\sigma (\xi ^2)=\left( \xi ^3-3\xi  \right) \left( 4-\xi ^2 \right) =4\xi ^3-12\xi -\xi ^5+3\xi ^3
+	\]
+	\[
+		=-12\xi +7\xi ^3-\xi ^5
+	.\]
+	We need only find $\xi ^5$ in the $\left\{ 1,\xi ,\xi ^2,\xi ^3 \right\} $ basis. We start by finding $\xi ^4$:
+	\[
+		\xi ^4=\left( \xi ^2 \right) ^2=\left( 2+\sqrt{2}  \right) ^2=6+4\sqrt{2} =6+4\left( \xi ^2-2 \right) =-2+4\xi ^2
+	.\]
+	We then obtain
+	\[
+		\xi ^5=\xi \left( -2+4\xi ^2 \right) =-2\xi +4\xi ^3
+	.\]
+	This yields
+	\[
+		\xi ^3 = -12\xi +7\xi ^3-\left( -2\xi +4\xi ^3 \right) =-12\xi +7\xi ^3+2\xi -4\xi ^3
+	\]
+	\[
+		=-10\xi +3\xi ^3
+	.\]
+	The matrix form of $\sigma $ is thus
+	\[
+		\begin{pmatrix}
+		1 & 0 & 4 & 0 \\
+		0 & -3 & 0 & -10 \\
+		0 & 0 & -1 & 0 \\
+		0 & 1 & 0 & 3
+		\end{pmatrix}
+	.\]
+\end{proof}
+\begin{problem}
+	Show that $\Aut_{\mathbb{Q} }(\mathbb{Q} (\xi )) \cong \mathbb{Z} /4\mathbb{Z} $.
+\end{problem}
+\begin{proof}
+	Showing that $\sigma ^i$ are distinct for $0\leq i\leq 3$ is a straightforward calculation. To simplify notation, write $\zeta \coloneqq \sqrt{2-\sqrt{2} } $. Then
+	\[
+		\sigma ^2(\xi )=\sigma (\zeta )=\sigma (\xi ^3-3\xi )=\sigma (\xi ^3)-3\sigma (\xi )=\left( -10\xi +3\xi ^3 \right) -3\left( -3\xi +\xi ^3 \right)=-\xi ,
+	\]
+	\[
+		\sigma ^3(\xi )=\sigma (-\xi )=-\sigma (\xi )=-\zeta ,
+	\]
+	\[
+		\sigma ^4(\xi )=\sigma (-\zeta )=-\sigma (\zeta )=-(-\xi )=\xi 
+	.\]
+	Note that since $\sigma |\mathbb{Q} =\mathrm{id} $, we have $\sigma ^i|\mathbb{Q}=\mathrm{id} $ for all $i$. Since $\sigma$ is fully determined by its action on $\mathbb{Q} $ and $\xi $, and since $\sigma ^4$ and $\sigma $ agree on these, we must have that $\sigma =\sigma ^4$, showing that the subgroup of $\Aut_{\mathbb{Q} }(\mathbb{Q} (\xi )) $ generated by $\xi $ is isomorphic to $\mathbb{Z} /4\mathbb{Z} $. It suffices now to show that this subgroup is the entire group. We do this by showing the order of $\Aut_{\mathbb{Q} }(\mathbb{Q} (\xi )) $ is 4.
+
+	It suffices to show that $\mathbb{Q} (\xi )$ is Galois, since the degree of a Galois extension is preciely the order of its Galois group. We show that $\mathbb{Q} (\xi )$ is the splitting field of the minimal polynomial $p(x)$, and that $p(x)$ is separable. We claim that $\pm \xi ,\pm\zeta $ are roots of $p(x)$. Since all of these are distinct elements of $\mathbb{Q} (\xi )$, if this statement is true then $p(x)$ is indeed separable since it will split as $(x-\xi )(x+\xi )(x-\zeta )(x+\zeta )$, and moreover $\mathbb{Q} (\xi )$ is the splitting field. We thus compute
+	\[
+		p(-\xi )=(-\xi )^4-4(-\xi )^2+2=\xi ^4-4\xi ^2+2=p(\xi )=0,
+	\]
+	\[
+		p(\zeta )=\zeta ^4-4\zeta ^2+2=\sqrt{2-\sqrt{2} } ^4 - 4\sqrt{2-\sqrt{2} } ^2+2=\left( 2-\sqrt{2}  \right) ^2-4\left( 2-\sqrt{2}  \right) +2
+	\]
+	\[
+		=6-4\sqrt{2} -8+4\sqrt{2} +2=0,
+	\]
+	\[
+		p(-\zeta )=\left( -\zeta  \right) ^4-4(-\zeta )^2+2=\zeta ^4-4\zeta ^2+2=p(\zeta )=0
+	.\]
+	This proves the statement.
+\end{proof}
+
+\section{Problem 11}
+\begin{theorem}[Isomorphism extension]\label{thm:11.1}
+	Let $F/k$ be an algebraic extension, and $E/k'$ an extension with $E$ algebraicly closed. Given an isomorphism $\sigma : k \cong k'$, there exists a homomorphism $\tau : F \to E$ extending $\sigma $ in the sense that $\tau |k=\sigma $.
+\end{theorem}
+\begin{problem}\label{11.1}
+	Show \cref{thm:11.1} when $F/k$ is finite and simple.
+\end{problem}
+\begin{proof}
+	By hypothesis, there exists $\alpha \in F$ with $F=k(\alpha )$. Since $k(\alpha )$ is algebraic, there is a polynomial $f(x)\in k[x]$ with $f(\alpha )=0$. Define $\widetilde{\sigma } : k[x] \to k'[x]$ as the homomorphism induced by acting by $\sigma $ on the coefficients of polynomials in $k[x]$. In particular, $\widetilde{\sigma } (f)\in k'[x]$, and since $E$ is an algebraic closure of $k'$, there exists $\beta \in k'$ with $\widetilde{\sigma } (f)(\beta )=0$. Define $\tau : k(\alpha ) \to E$ by imposing the ring homomorphism condition on the definitions $\tau |k=\sigma $ and $\tau (\alpha )=\beta $. The homomorphism properties follow immediately by definition and those of $\widetilde{\sigma } $, so it suffices only to show that this map is well-defined in the sense that $\beta $ can be chosen independently of our choice of $f\in k[x]$.
+
+	Since $F$ is simple, there is $\alpha \in F$ such that $F=k(\alpha )$. Let $f(x)\in k[x]$ be the minimal polynomial of $\alpha $, which exists since $F$ is algebraic, and thus so is $\alpha $. This yields the isomorphism
+	\[
+		\phi : \frac{k[x]}{(f(x))}  \cong  k(\alpha )
+	.\]
+	Let $\widetilde{\sigma } : k[x] \to k'[x]$ be the homomorphism given by acting by $\sigma $ on coefficients, meaning for any $\sum_{i} a_ix^i\in k[x]$,
+	\[
+		\widetilde{\sigma } \left( \sum_{i} a_ix^i \right) =\sum_{i} \sigma (a_i)x^i\in k'[x]
+	.\]
+	Since $E$ is the algebraic closure of $k'$, there exists a root $\beta \in E$ of $\widetilde{\sigma } (f)$. Define the map $\mathrm{Ev}_\beta : k'[x] \to E$ given by evaluation at $\beta $, which we have seen previously is a ring homomorphism. Consider the composite $\mathrm{Ev} _\beta \circ \widetilde{\sigma } : k[x] \to E$. Note that $(\mathrm{Ev} _\beta \circ \widetilde{\sigma } )(f)= \widetilde{\sigma } (f)(\beta )=0$, and thus $(f(x))\subseteq \Ker \mathrm{Ev} _\beta \circ \widetilde{\sigma } $. By universality of quotient rings, $\mathrm{Ev} _\beta \circ \widetilde{\sigma } $ lowers to a map $ \psi : k[x] /(f(x)) \to E$. Define $\tau $ as the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		k(\alpha )\ar[" \tau  ", bend left, rr] \ar[" \phi ^{-1}  "', r]  & \displaystyle{\frac{k[x]}{(f(x))} }\ar[" \psi  "', r]  & E.
+	\end{tikzcd}\]
+	It remains only to be shown that $\tau |k=\sigma $, and indeed for any $p\in k \subseteq k(\alpha )$,
+	\[
+		\phi ^{-1} (p)=p + (f(x))
+	.\]
+	Recall that classes of distinct elements $p\in k$ are distinct; this can also be  seen by injectivity of $\phi ^{-1} $. Then since $p$ is a degree 0 polynomial, $\widetilde{\sigma } (p)=\sigma (p)$, and $\mathrm{Ev} _\beta $ acts trivially on it. Thus when passing to the quotient, we have $\psi (p)=\sigma (p)$. Thus $\tau |k=\sigma $.
+\end{proof}
+
+\begin{problem}\label{11.2}
+	Define
+	\[
+		\Sigma =\left\{ (L,\nu )\mid k \subseteq L \subseteq F\text{ and } \nu : L \to E \text{ s.t. } \nu |k=\sigma  \right\} 
+	.\]
+	Show that $\Sigma $ is nonempty and that every ascending chain in $\Sigma $ is bounded.
+\end{problem}
+\begin{proof}
+	We assume that $L$ is a field and $\nu $ is a homomorphism. Note that $k\subseteq k\subseteq L$ and $\sigma |k = \sigma $ implies that $(k,\sigma )\in \Sigma $, so $\Sigma $ is nonempty. The problem does not provide us a relation to impose on $\Sigma $, and the obvious relation of $(L,\nu )\leq (L',\nu ')$ whenever $L\subseteq L'$ is not sufficient. Since the only point of this construction is to impose Zorn's lemma, we are free to impose a stricter relation, provided we can show $L=F$ in the next part. As such, for each $(L,\nu ),(L',\nu ')\in \Sigma $, define $(L,\nu )\leq (L',\nu ')$ if and only if both $L\subseteq L'$ and $\nu '|L=\nu $. The relevance of this definition is that given an ascening chain, the $\nu $s will all agree with each other, making a construction of the function in the upper bound possible.
+
+	Let $\left\{ (L_i,\nu _i) \right\}_{i\in I} \subseteq \Sigma $ be a linearly ordered chain in $\Sigma $. Consider
+	\[
+		L\coloneqq \bigcup_{i\in I} L_i 
+	.\]
+	It suffices to show that this is a field, and that $\nu : L \to E$ can be defined with the property that $\nu |L_i=\nu _i$ for any $i$; the properties $\nu |k=\sigma $ and $L\subseteq F$ will then follow immediately. We saw a union of this form in Homework 7 problem 12 part (e), where we showed a countable union of ideals with the property $I_n \subseteq I_m \iff n \leq m$ was an ideal. My proof made no reference to the countable nature of the indexing set, and as such generalizes immediately. My proof also made no reference to the fact that each $I_n$ was an ideal when proving that the union $\bigcup_{n} I_n$ was a \emph{group}; in particular a subgroup of the ambient ring. From this proof we may thus conclude that arbitary unions of chains of groups $\left\{ G_i\subseteq G \right\}_{i\in I} $ of the form $G_i \subseteq G_j$ iff $i\leq j$ are subgroups of $G$. Since each $L_i \subseteq F$ is a group, this tells us that $L$ is a subgroup of $F$.
+	
+	To show closure under multiplication, let $\ell _i\in L_i$ and $\ell _j\in L_j$; without loss of generality take $i \leq j$. Then $L_i \subseteq L_j$ implies $\ell _i \in L_j$, and thus $\ell _i \ell _j\in L_j$ since $L_j$ is a field, and thus closed under mutliplication. Thus $L$ is a ring. All of the other field axioms follow in the same exact way: choose some elements, place them in $L_i$s, use the linearly-ordered condition to show they are all in the same field, and the axiom is therefore satisfied. We avoid writing out the remaining axioms and instead move to the construction of $\nu : L \to E$.
+
+	Given $\ell \in L$, there is at least one $i\in I$ with $\ell \in L_i$. Define $\nu (\ell )=\nu _i(\ell )$. To show that this map is well-defined, let $\ell \in L_j$ for some $j\in I$. If $i\leq j$, then $\nu _j|L_i=\nu _i$, and thus $\nu _j(\ell )=\nu _i(\ell )$. If $j\leq i$, then $\nu _i|L_j=\nu _j$, and thus $\nu_j(\ell )=\nu _i(\ell )$. By definition $\nu |L_i=\nu _i$ for all $i$, so provided that $\nu $ is indeed a ring homomorphism, we will have $(L_i,\nu _i)\leq (L,\nu )$ for all $i\in I$. By the above remarks we also have $(L,\nu )\in \Sigma $.
+
+	Let $\ell _i,\ell _j\in L$. Then there are $i,j\in I$ and $L_i,L_j \subseteq L$ with $\ell _i\in L_i$ and $\ell _j\in L_j$. Without loss of generality, take $i \leq j$. Then $\ell _i \in L_i \subseteq L_j$ implies $\ell _i\in L_j$. Since $\nu _j$ is a ring homomorphism,
+	\[
+		\nu (\ell _i+\ell _j)=\nu_j(\ell _i+\ell _j)=\nu _j(\ell _i)+\nu _j(\ell _j)=\nu (\ell _i)+\nu (\ell _j),
+	\]
+	\[
+		\nu (\ell _i\ell _j)=\nu _j(\ell _i\ell _j)=\nu _j(\ell _i)\nu _j(\ell _j)=\nu (\ell _i)\nu (\ell _j).
+	\]
+	Finally, since $1\in k \subseteq L_i$ for all $i$, and $\nu _i$ is a ring homomorphism,
+	\[
+		\nu (1)=\nu _i(1)=1
+	.\]
+	Therefore, $\nu $ is indeed a ring homomorphism, and Zorn's lemma applies.
+\end{proof}
+\begin{problem}\label{11.3}
+	\Cref{11.2} implies there exists a maximal element $(L,\nu )\in \Sigma $. Show that $L=F$ and conclude the theorem.
+\end{problem}
+\begin{proof}
+	If $L=F$, then the condition $\nu |k=\sigma $ implies that $\nu $ is the morphism we are required to show the existence of. It suffices to show $L=F$. Suppose for contradiction that $L\neq F$; since $(L,\nu )\in \Sigma $ we must have $L\subseteq F$. Then there exists $\gamma \in F\setminus L$. Since $F/k$ is algebraic, $\gamma $ is algebraic over $k$, and thus $L$ since $k\subseteq L$.
+
+	Consider the simple extension $L(\gamma )$. Since all ring homomorphisms of fields have trivial kernel, $\nu $ defines an isomorphism onto its image $\nu : L \cong \Im \nu $. We can thus apply \cref{11.1} to $L(\gamma ) /L$ and extend $\nu $ to $\tau : L(\gamma ) \to E$. Since $L(\gamma )\subseteq F$ and $\tau |k=\nu |k=\sigma $, we have $(L(\gamma ),\tau )\in \Sigma $ with $(L,\nu )\leq (L(\gamma ),\tau )$, a contradiction.
+\end{proof}
+
+\section{Problem 12}
+
+\begin{problem}\label{12.1}
+Let $k$ be a field,
+\[
+	\Gamma \coloneqq \left\{ f\in k[x]\mid f\text{ is monic and irreducible}  \right\} ,
+\]
+and $k[\left\{ x_f \right\}_{f\in \Gamma } ]$ a polynomial ring over $k$ in a $\Gamma $-indexed set of variables. Let $I$ be the ideal of $k[\left\{ x_f \right\} _{f\in \Gamma } ]$ generated by the set $\left\{ f(x_f) \right\} _{f\in \Gamma } $. Show that $I$ is a proper ideal. \emph{Hint: if it wasn't, then there would exist $f_1, \ldots ,f_n\in \Gamma $ and $h_1, \ldots ,h_n\in k[\left\{ x_f \right\}_{f\in \Gamma } ]$ such that}
+\[
+	1=\sum_{i=1} ^n f_i(x_i)h_i
+.\]
+\emph{If $F/k$ is a  splitting field of the polynomials $f_i$ for $i\in \left\{ 1, \ldots ,n \right\} $, show that the equation above can be evaluated to a contradiction.}
+\end{problem}
+\begin{proof}
+	Suppose for contradiction that $I$ is not a proper ideal. Then there is $1\in I$, meaning that there is a finite $k[\left\{ x_f \right\}_{f\in \Gamma } ]$-linear combination
+	\[
+		1=\sum_{i=1} ^n h_i f_i(x_i)
+	\]
+	for some collections with definitions and notation as in the hint. Let $F/k$ be a splitting field of the polynomials $\left\{ f_i \right\}_{i=1} ^n$. Define the ring homomorphism $\Phi  : k[\left\{ x_f \right\} _{f\in \Gamma } ]\to F$ by mapping $\Phi |k=\mathrm{id} $, for all $1 \leq i \leq n$ mapping $\Phi (x_{i} )=\alpha _i$ for some root $\alpha _i$ of $f_i$, and $\Phi (x_g)=0$ for all $g \notin \left\{ f_i \right\} _{i=1} ^n$. Because $k[\left\{ x_f \right\} _{f\in \Gamma } ]$ is free as a $k$-algebra, these definitions extend uniquely to a well-defined ring homomorphism\footnote{I cite this because I can't recall if we have covered the evaluation map in the case of a polynomial ring in infinitely many variables. If we have, then this remark is unnecessary.}. Applying $\Phi $ to both sides of the equation yields
+	\[
+		1=\Phi \left( \sum_{i=1} ^n h_i f_i(x_i) \right) = \sum_{i=1}^{n} \Phi (h_i)\Phi (f_i(x_i))=\sum_{i=1}^{n} \Phi (h_i)f_i(\Phi (x_i))
+	\]
+	\[
+		=\sum_{i=1}^{n} \Phi (h_i)f_i(\alpha _i)=\sum_{i=1}^{n} \Phi (h_i)0=0
+	\]
+	since $\Phi $ is a ring homomorphism. This contradicts $1\neq 0$ in fields. The statement of course fails if one takes the singleton 0 to be a field since the polynomial ring is also a singleton, and thus has only one ideal, which cannot be proper. We are not taking 0 to be a field, so we proceed.
+\end{proof}
+\begin{problem}\label{12.2}
+	By \cref{12.1}, there is a maximal ideal $M$ containing $I$. Show that $\hat{k} \coloneqq k[\left\{ x_f \right\} _{f\in \Gamma } ] / M$ is an algebraic extension of $k$.
+\end{problem}
+\begin{proof}
+	Since $M$ is maximal, the quotient $\hat{k} $ by it is a field. By including $k\hookrightarrow k[\left\{ x_f \right\} _{f\in \Gamma } ]$ and projecting to the quotient, we get a ring homomorphism $k\to \hat{k} $ defined by $p\mapsto p+M$ for $p\in k$. Since $1\notin M$, we have $1+M \neq M$, so $1\notin \Ker \varphi $. In particular, $\Ker \varphi \neq k$. Since $k$ is a field and thus has only trivial ideals, and since the kernel of a ring homomorphism is an ideal, we have $\Ker \varphi =(0)$. By injectivity of $\varphi $, we may freely identify $k$ with its image in $\hat{k} $, and thus $\hat{k} $ is an extension of $k$ (up to isomorphism onto the image of $\varphi $).
+
+	Since the quotient map $\pi $ is a ring homomorphism, we can say more about the structure of the elements of $k[\left\{ x_f \right\} _{f\in \Gamma } ]/M$. Let $f(x_f)=\sum_{i} c_ix_f^i$. Then
+	\[
+		\pi (f(x_f))=\pi \left( \sum_{i} c_ix_f^i \right) =\sum_{i} \pi (c_i)\pi (x_f)^i
+	.\]
+	Recall that we identify $\pi (c_i)$ in the quotient with $c_i\in k$, so write $c_i=\pi (c_i)$. Instead of writing $\pi (x_f)=x_f+M$ or $[x_f]$, write $\overline{x} _f$ for the class of $x_f$ in the quotient. The element $f(x_f)$ thus takes the form $f(\overline{x} _f)$ when passing to the quotient. Note that this generalizes to any polynomial in $k[\left\{ x_f \right\} _{f\in \Gamma } ]$.
+
+	Since $I\subseteq M$, we have $f(x_f)\in I \subseteq M$ for all $f\in I$. Passing to the quotient then yields $f(\overline{x}_f)=0$. Thus $\overline{x} _f$ satisfies the polynomial $f$ over $k$, and since $f$ is monic and irreducible, $\overline{x} _f$ is algebraic over $k$.
+
+	Now consider an arbitrary element $\alpha \in \hat{k} $. Since $k[\left\{ x_f \right\} _{f\in \Gamma } ]$ is generated (as a $k$-algebra) by $\left\{ x_f \right\} _{f\in \Gamma } $, by surjectivity of projections we can generate $\hat{k} $ by $\left\{ \overline{x}_f \right\} _{f\in \Gamma } $, meaning $\alpha $ is a polynomial in finitely many generators $\left\{ \overline{x} _{f_1} , \ldots , \overline{x} _{f_n}  \right\} $ with coefficients in $k$. Thus $\alpha $ lies in the field extension $k(\overline{x} _{f_1} , \ldots , \overline{x} _{f_n} )$. Since each $\overline{x} _{f_i} $ is algebraic, this is a finite extension of $k$, and thus also algebraic. Thus $\alpha $ is algebraic over $k$.
+\end{proof}
+\begin{problem}\label{12.3}
+	We define inductively the fields $k_n$ as follows: $k_0\coloneqq k$ and $k_{n+1} \coloneqq \hat{k}_n $. Let $\mathcal{K} \coloneqq \bigcup_{n\geq 0} k_n$. Show that $\mathcal{K} /k$ is an algebraic extension of $k$ and that $\mathcal{K} $ is algebraically closed; i.e. $\mathcal{K} $ is an algebraic closure of $k$.
+\end{problem}
+\begin{proof}
+	Recall that by \cref{12.2}, there are embeddings $k_n \hookrightarrow \hat{k} _n = k_{n+1} $ for each $n\geq 0$. We thus identify each $k_n$ with the corresponding subfield of $\mathcal{K} $, which was shown to be a field as part of \cref{11.2}. We therefore take $k_n \subseteq k_m$ for all $n\leq m$.
+
+
+	First we show $\mathcal{K} /k$ is algebraic. Let $\alpha \in \mathcal{K} $; by definition there is $n$ such that $\alpha \in k_n$. If $n=0$ then $\alpha $ is algebraic by \cref{12.2} amd $k_0=k$, so assume the inductive hypothesis for $n$, and take $\alpha \in k_{n+1} =\hat{k} _n$. By \cref{12.2}, $\hat{k} _n/k_n$ is algebraic over $k_n$, which by hypothesis is algebraic as an extension over $k$. By transitivity of algebraic-ness of extensions, $\hat{k}_n$ is algebraic over $k$. Thus $\alpha $ is algebraic over $k$, and therefore $\mathcal{K} /k$ is algebraic.
+
+	Now we show algebraic closure of $\mathcal{K} $. Let $f\in \mathcal{K} [x]$ be non-constant (such that it has roots). Since polynomials have finitely many coefficients, assume $f$ has degree $n$, and write $f=\sum_{i=1} ^n c_ix^i$. We may order the coefficients $c_i$ of $f$ by $c_i \leq c_j$ if $c_i \in k_\ell $, $c_j\in k_m$, and $\ell \leq m$. Since $\left\{ c_i \right\} _{i=1} ^n$ is finite and $\left\{ k_n \right\}_{n\in\mathbb{N} } $ is linearly ordered over $\mathbb{N} $, there exists a maximal element $1\leq i\leq n$ under this order. In particular, there exists $N$ with $c_j\in k_N$ for all $1\leq j \leq n$. Thus we may take $f\in k_N[x]$
+
+	Let $g\in k_N[x]$ be a monic irreducible factor of $f$, which exists since $k_N$ is a field and thus $k_N[x]$ is a UFD. Since $\Gamma $ is constructed from monic and irreducible polynomials, and the construction in \cref{12.2} yields for each $f\in \Gamma $ a root in $\hat{k} $, we see that $g$ must have a root in $\hat{k} _N = k_{N+1} $. Thus $f$ has a root in $k_{N+1} \subseteq \mathcal{K} $, meaning all polynomials have a root in $k_{N+1} $. Since every nonconstant polynomial in $\mathcal{K} $ has a root in $\mathcal{K} $, $\mathcal{K} $ is algebraicly closed.
+\end{proof}
+
+\begin{problem}\label{12.4}
+	Let $F,F'$ be two algebraic closures of $k$. Show there is an isomorphism of fields $F\cong F'$. \emph{Hint: use the Isomorphism Extension Theorem}.
+\end{problem}
+\begin{proof}
+	By \cref{thm:11.1}, since $F$ is algebraic and $F'$ is an algebraic closure, both over $k$, the isomorphism $\mathrm{id} : k \cong k$ extends to a ring homomorphism $\varphi : F \to F'$ which restricts along $k$ to the identity. Since this is a ring homomorphism of fields and is nonzero, it is necessarily injective, so we need only show surjectivity. Since injections are isomorphic onto their image, we obtain $\varphi : F \cong \varphi (F)\subseteq F'$, and we can thus view $\varphi (F)$ as an algebraic closure over $k$ via the isomorphism. Since $k\subseteq \varphi (F)\subseteq F'$ are all algebraic over $k$, we see that $F'$ must be algebraic over $\varphi (F)$. Since $\varphi (F)$ is algebraicly closed, it has no nontrivial algebraic extensions, yielding $\varphi (F)=F'$.
+\end{proof}
+
+\section{Problem 13}
+
+\begin{problem}
+	Let $p$ prime, $\mathbb{F} _p$ the field with $p$ elements, $n\geq 0$ an integer, and $f_n(x)\coloneqq x^{p^n} =x\in\mathbb{F} _p[x]$. Show that $f_n(x)$ is seperable.
+\end{problem}
+\begin{proof}
+	The derivative is
+	\[
+		f_n'(x)=p^n x^{p^n-1} -1 \equiv -1\mod{p},
+	\]
+	which is a nonzero constant since 1 is not prime and thus $-1\not\equiv p$. Thus $\operatorname{gcd} (f_n,f_n')=1$ since $f_n'$ is a unit. Therefore $f_n$ is seperable.
+\end{proof}
+\begin{problem}
+	Let $\mathbb{F} _{p^n} $ be the splitting field of $f_n(x)$, and let $S\subseteq \mathbb{F} _{p^n} $ be the set of roots of $f_n(x)$. Show that $S$ is a field and that $S=\mathbb{F} _{p^n} $.
+\end{problem}
+\begin{proof}
+	The field $S$ can be described as all elements $\alpha \in \mathbb{F} _{p^n} $ with $\alpha ^{p^n} =\alpha $. By the subring test, it suffices to show closure and inverses. Closure under multiplication is immediate, since if $\alpha ^{p^n} =\alpha $ and $\beta ^{p^n} =\beta $, then 
+	\[
+		\left( \alpha \beta  \right) ^{p^n} =\alpha ^{p^n} \beta ^{p^n} =\alpha \beta 
+	.\]
+	Since inverses commute with exponents, if $\alpha \in S$ then
+	\[
+		\left( \alpha ^{-1}  \right)^{p^n} =\left( \alpha ^{p^n}  \right) ^{-1} =\alpha ^{-1} 
+	.\]
+	Since the field $\mathbb{F} _p$ is characteristic $p$, the extension must also be characteristic $p$ since we still have $\sum_{i=1} ^p1=0$. Thus we have the equality
+	\[
+		\left( \alpha +\beta  \right) ^{p^n} =\alpha ^{p^n} +\beta ^{p^n} =\alpha+\beta 
+	.\]
+	Thus $S $ is a field. Since $S$ contains all roots of $f_n$ and $\mathbb{F} _{p^n} $ is generated on these elements in the sense that it can be constructed by adjoining the roots, we see that $\mathbb{F} ^{p^n} \subseteq S$. The other side of the inclusion is by definition.
+\end{proof}
+\begin{problem}
+	Show $\left| \mathbb{F} _{p^n}  \right| =p^n$ and that $\mathbb{F} _{p^n} $ is the only field up to isomorphism with this order.
+\end{problem}
+\begin{proof}
+	Since $f_n$ is degree $p^n$ and separable, it has precisely $p^n$ distinct roots. Since $\mathbb{F} _{p^n} $ is precisely the set of roots, it has cardinality $p^n$. Now let $k$ be a field with $\left| k \right| =p^n$. Then its group of units has order $p^n-1$, and thus $\alpha ^{p^n-1} =1$ for all $\alpha \in k\setminus \left\{ 0 \right\} $. Thus $\alpha ^{p^n} =\alpha $. Thus every element of $k$ is a root of the polynomial $x^{p^n} -x$. Since splitting fields are unique up to isomorphism, $\mathbb{F} _{p^n} \cong k$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\end{document}

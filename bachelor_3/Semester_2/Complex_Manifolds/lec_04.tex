@@ -1,0 +1,45 @@
+\lecture{4}{Thu 29 Jan 2026 12:28}{sdlfdskm}
+
+\begin{theorem}[Implicit function, real version]\label{1.1.36}
+If $f : U\subseteq \mathbb{R} ^n \to V\subseteq \mathbb{R} ^m$, $U,V$ open, and $\mathrm{D} f_a : T_a\mathbb{R} ^n \to T_{f(a)} \mathbb{R} ^m$ is surjective for all $a\in f^{-1} (f(a))$, then if $f^{-1} (f(a))$ is the graph of a smooth function, then $f^{-1} (f(a))$ is a manifold.
+\end{theorem}
+
+\begin{theorem}[Lazarfeld 1.19; Inverse and implicit function]\label{1.1.37}
+	Let $f : U\subseteq \mathbb{C} ^n \to V\subseteq \mathbb{C} ^m$ be holomorphic with a Jacobian that is surjective (at $a$ iff neighborhood of $a$).
+	\begin{enumerate}
+		\item If $n=m$, then there exist neighborhoods $U'\ni a$ and $V'\ni f(a)$ such that $f|U'$ is a biholomorphism to $V'$.
+		\item If $n>m$ then $f^{-1} (f(a))$ is locally the graph of a holomorphic map.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Existence of $C^\infty $ solutions to (1,2) follow by the smooth verisons of inverse and implicit function theorems, so we prove only holomorphy.
+\end{proof}
+
+\begin{definition}[Laz 2.1]\label{awooo}
+	Let $X$ be a smooth manifold.
+	\begin{enumerate}
+		\item A holomorphic atlas $\mathcal{A} =\left\{ (U_i,\varphi _i) \right\} _{i\in I} $ consists of an open cover $\left\{ U_i \right\} _{i\in I} $ together with diffeomorphisms $\varphi : U_i \cong V_i \subseteq \mathbb{C} ^n$, $n$ fixed, $V_i$ open, such that the transition functions $\varphi _j \circ \varphi _i^{-1} $ are holomorphic for all $i,j\in I$.
+		\item Two holomorphic atlases are \emph{compatible} if their union is a holomorphic atlas.
+		\item A complex manifold of dimension $n$ is a smooth $2n$-dimensional manifold together with an equivalence class of compatible holomorphic atlases (basically the same as a maximal atlas).
+	\end{enumerate}
+\end{definition}
+\begin{definition}[Laz 2.2]\label{awoooo}
+	Let $X$ be a complex manifold.
+	\begin{enumerate}
+		\item A function $f : X \to \mathbb{C} $ is \emph{holomorphic} if $F\circ \varphi _i^{-1} : \varphi (U_i)\subseteq \mathbb{C} ^n \to \mathbb{C} $ is holomorphic for every $i$.
+		\item If $Y$ is also a complex manifold, then $f : X \to Y$ is holomorphic if (writing $\{V_j,\psi _j\}_{i\in J}  $ for the atlas on $Y$), for all $i,j$,
+			\[
+				\psi _j \circ F \circ \varphi _i^{-1} : \varphi (U_i) \to \psi (V_i)
+			\]
+			is holomorphic $\mathbb{C} ^n\to \mathbb{C} ^m$.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	All open subsets of complex manifolds are complex manifolds by restricting along the charts. A more interesting example is by viewing $S^2$ as the one point compactification of $\mathbb{R} ^2$ via taking the north pole to be $\infty $, and identifying $S^2\setminus \left\{ N \right\} $ with $\mathbb{R} ^2$ via the stereographic projection. The transition map from the north and south charts is $z\mapsto 1/z$, which is holomorphic.
+
+	Now we do analytic hypersurfaces. Let $U\subseteq \mathbb{C} ^{n+1} $ open and $f : U \to \mathbb{C} $ holomorphic. Take $Z(f)$ the zero locus of $f$ inside of $U$. The implicit function theorem tells us when this is a manifold. Let for all $a\in Z(f)$, the vector $\partial _{z_i} f(a)$ be nonzero for some $i$. Then by the IFT, $Z(f)$ is locally given as the graph of a holomorphic map $g:(V\subseteq \mathbb{C} ^n)\to Z(f)$; i.e. $Z(f)=\left\{ (w,g(w)) \right\} $. This is then a manifold.
+
+	It is important to be careful and ensure that spaces are bounded. For example, the zero locus of $z_1^2+z_2^2-1$ is not bounded.
+\end{example}
+

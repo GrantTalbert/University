@@ -1,0 +1,513 @@
+\section{Left fibrations}
+
+This section will develop the theory of left fibrations. We begin by reviewing the notion of categories fibered over groupoids in the sense of Grothendieck, and we will see that left fibrations are a natural generalization of this idea. We will establish a model categorical interpretation of left fibrations, and criterion for when a left fibration is a Kan fibration.
+
+\subsection{Left fibrations in classical category theory}
+
+Let $\mathcal{D} $ be a small category and $\chi : \mathcal{D}  \to \mathcal{G} \mathrm{rpd} $ a functor. The \emph{Grothendieck construction} provides a category $\mathcal{C}_\chi $ defined as follows.
+\begin{itemize}
+	\item Objects of $\mathcal{C} _\chi $ are pairs $(d,\eta )$ with $d\in \mathcal{D} $ and $\eta \in \chi (d)$. Note here that $\chi (d)$ is a groupoid, and thus $\eta $ is an object of a groupoid.
+	\item Morphisms $(d,\eta )\to (d',\eta ')$ are given by a pair $(f,\alpha )$ with $f : d \to d'$ a morphism in $\mathcal{D} $, and $\alpha : \chi (f)(\eta ) \cong \eta '$ an isomorphism in the groupoid $\chi (d')$. Note here that $\chi (f)$ is a functor of groupoids, and thus $\chi (f)(\eta )\in \chi (d')$.
+\end{itemize}
+
+Given the categories $\mathcal{C} _\chi $, $\mathcal{D} $, and the evident forgetful functor $F : \mathcal{C} _\chi  \to \mathcal{D} $, we can reconstruct $\chi $ up to equivalence. If $d\in \mathcal{D} $, then there is a canonical equivalence $\chi (d) \simeq \mathcal{C} _\chi \times _\mathcal{D} \left\{ d \right\} $. This is intuitively true: let $K : \mathcal{C}  \to \mathcal{C} _\chi $ be any functor which lies fully in the fiber $F^{-1} (d)$. Then we could write $K=(d,G(-))$ for some $G : \mathcal{C}  \to \chi (d)$, and this $G$ is uniquely determined by $K$. We prove this more rigorously.
+
+We claim $\chi (d)$ is the pullback along
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & \left\{ d \right\} \ar[hook, d]  \\
+\mathcal{C} _\chi \ar[" F "', r]  & \mathcal{D} 
+\end{tikzcd}\]
+for $F$ the forgetful functor. Define a map $X : \chi (d)\to \mathcal{C} _\chi $ via $\eta \mapsto (d,\eta )$ (since \emph{all} pairs of this form are objects in $\mathcal{C} _\chi $, this is valid). The functor acts on morphisms by $\alpha \mapsto (1_d,\alpha )$. To show this is a pullback, consider a diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{C} \ar[" H ", bend left, drr] \ar[" K "', bend right, ddr] \ar[" G ", dashed, dr]  &  &  \\
+ & \chi (d) \ar[" ! ", r] \ar[" X "', d]  & \left\{ d \right\} \ar[hook, d]  \\
+ & \mathcal{C} _\chi \ar[" F "', r]  & \mathcal{D} 
+\end{tikzcd}\]
+We claim there is a unique dashed arrow as indicated, rendering the diagram commutative. Since $F\circ K$ is the constant functor at $d$, we note that all elements in the image of $K$ must be of the form $(d,\eta )$ for $\eta \in \chi (d)$. Hence $\Im K \subseteq \left\{ d \right\} \times \chi (d)$. For all $c\in \mathcal{C} $, if $K(c)=(d,\eta )$, then define $G(c)=\eta $. Once again, since $F\circ K$ is constant at $d$, it follows that for any $f : c \to c'$ in $\mathcal{C} $, $K(f)$ must be of the form $(1_d,\alpha )$ for some $\alpha $ a morphism in $\chi (d)$. We then simply define $G(f)=\alpha $. Commutativity forces these definitions, hence $\chi (d)$ is indeed a pullback.
+
+Reconstructing the action of $\chi $ on morphisms is more involved and requires the use of various lifting properties that will be explored in this section, so for now we take this result on faith. The main point is that we obtain a correspondence between functors $\mathcal{C} _\chi \to \mathcal{D} $ and functors $\mathcal{D} \to \mathcal{G} \mathrm{rpd} $. This correspondence is in general not an equivalence, since functors $\mathcal{C} \to \mathcal{D} $ can be defined that do not arise from the Grothendieck construction. The following definition clarifies the situation.
+
+\begin{definition}\label{2.1.1.1}
+	Let $F : \mathcal{C}  \to \mathcal{D} $. We say $F$ \emph{exhibits $\mathcal{C} $ as cofibered in groupoids over $\mathcal{D} $} if
+	\begin{enumerate}
+		\item for every $c\in \mathcal{C} $ and every $\eta : F(c) \to d$ in $\mathcal{D} $, there exists $c'\in F^{-1} (d)$ and $\widetilde{\eta } : c \to c'$ such that $F(\widetilde{\eta } )=\eta $.
+		\item For every $\eta : c \to c'$ in $\mathcal{C} $ and every $c''\in \mathcal{C} $, the map
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\mathcal{C} (c',c'')\ar[d]  \\
+			\mathcal{C} (c',c'')\times_{\mathcal{D} (F(c),F(c''))} \mathcal{D} (F(c'),F(c''))
+			\end{tikzcd}\]
+			is bijective. More precisely, the following commutative square is a pullback:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\mathcal{C} (c',c'')\ar[" F ", r] \ar[" \eta ^* "', d]  & \mathcal{D} (F(c'),F(c''))\ar[" F(\eta )^* ", d]  \\
+			\mathcal{C} (c,c'')\ar[" F "', r]  & \mathcal{D} (F(c),F(c''))
+			\end{tikzcd}\]
+	\end{enumerate}
+\end{definition}
+
+The main machinery of \cref{2.1.1.1}, and in fact the main reason any of this exists, is that if $F : \mathcal{C}  \to \mathcal{D} $ exhibits $\mathcal{C} $ as cofibered in groupoids over $\mathcal{D} $, then each fiber $F^{-1} (d)$ is a groupoid. We will see how this follows below, and will conclude this to be true in \cref{2.1.1.2}.
+
+A simple example is that given $\chi : \mathcal{D}  \to \mathcal{G} \mathrm{rpd} $, the functor $\mathcal{C} _\chi \to \mathcal{D} $ exhibits $\mathcal{C} _\chi $ as cofibered in groupoids over $\mathcal{D} $. Indeed, given $(d,\eta )\in \mathcal{C} _\chi$ and $f : d \to d'$ in $\mathcal{D} $, we can choose $(d',\chi (f)(\eta ))\in F^{-1} (d')$ such that $(f,1)$ is a morphism between these lowering to $f$. For the second statement, choose a morphism $(f,\alpha ): (d',\eta ') \to (d'',\eta '')$. Note that any commutative square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X \ar[" H ", r] \ar[" K "', d]  & \mathcal{D} (d',d'')\ar[" f^* ", d]  \\
+\mathcal{C} _{\chi } ((d,\eta ),(d'',\eta ''))\ar[" F "', r]  & \mathcal{D} (d,d'')
+\end{tikzcd}\]
+necessitates that if $h=H(x)$ and $(k,\beta )=K(x)$, then $k=h\circ f$. Hence we require that $K=(H(-)\circ f, -)$. We claim that we may uniquely factor $H,K$ through $\mathcal{C} _\chi ((d',\eta '),(d'',\eta ''))$ in the required way. It will be useful to write $K(x)=(K_1(x),K_2(x))$. Define $G(x)=(H(x),K_2(x)\circ \chi (H(x))(\alpha ^{-1} ))$. The definition in the first component is forced, so we investigate the second component. For simplicity, write $H(x)=h$ and $K(x)=(k,\beta )$ once again. Then recall that
+\[
+	(h,\beta\circ \chi (h)(\alpha^{-1}  ) )\circ (f,\alpha )=(h\circ f,\beta \circ \chi (h)(\alpha ^{-1} ) \chi (h)(\alpha ))=(k,\beta )
+\]
+by definition of composition in $\mathcal{C} _\chi $. The book actually didn't comment on that but the only obvious way to define a composite $(f,\eta )\circ (f',\eta ')$ is $(f\circ f',\eta \circ \chi (f)(\eta '))$ since $\eta '$ is a morphism in the wrong groupoid, so we must take its image under $\chi (f)$. Anyways, we see that this definition of $G$ satisfies commutivity of the relevant diagram, and moreover it must be unique by uniqueness of the inverse of $\alpha $. Hence the forgetful functor $F : \mathcal{C} _\chi  \to \mathcal{D} $ exhibits $\mathcal{C} _\chi $ as cofibered in groupoids over $\mathcal{D} $.
+
+The notion of \cref{2.1.1.1} allows us a converse to this statement: given a functor $F : \mathcal{C}  \to \mathcal{D} $ exhibiting $\mathcal{C} $ as cofibered in groupoids over $\mathcal{D} $, we construct such a functor $\chi : \mathcal{D}  \to \mathcal{G} \mathrm{rpd} $. First, we claim that $\mathcal{C} _d\coloneqq \mathcal{C} \times_\mathcal{D} \left\{ d \right\} $ is a groupid for all $d\in \mathcal{D} $. To show this, take the pullback square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{C} _d \ar[" ! ", r] \ar[" G "', d]  & \left\{ d \right\} \ar[hook, d]  \\
+\mathcal{C} \ar[" F "', r]  & \mathcal{D} 
+\end{tikzcd}\]
+We obtain immediately that $(F\circ G)(c)=d$ for all $c\in \mathcal{C}_d $, and similarly $(F\circ G)(f)=1_d$ for all morphisms $f$ in $\mathcal{C} _d$. Hence $\Im G \subseteq F^{-1} \left\{ d \right\} $. Let $f : c \to c'$ in $\mathcal{C} _d$; we must find an inverse for $f$. To do this, we invoke \cref{2.1.1.1} condition (2) in the following way:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} (G(c'),G(c))\ar[" F ", r] \ar[" G(f)^* "', d]  & \mathcal{D} (d,d)\ar[" 1 ", d]  \\
+\mathcal{C} (G(c),G(c))\ar[" F "', r]  & \mathcal{D} (d,d)
+\end{tikzcd}\]
+is a pullback square. Here we have taken $\eta =G(f)$, and noted that $(F\circ G)(f)=1_d$, so $(F\circ G)(f)^*=1^*=1$. Similarly we took (using notation as in the definition) $c=c''$, and noted that they become $d$ when evaluating under $F$.
+
+Now consider $1_{G(c)} \in \mathcal{C} (G(c),G(c))$ and $1_d\in \mathcal{D} (d,d)$. By universality of pullback, there exists a dashed arrow
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" *\mapsto 1_d ", bend left, drr] \ar[" *\mapsto 1_{G(c)}  "', bend right, ddr] \ar[dashed, " *\mapsto g ", dr]  &  &  \\
+ & \mathcal{C} (G(c'),G(c))\ar[" F ", r] \ar[" G(f)^* "', d]  & \mathcal{D} (d,d)\ar[" 1 ", d]  \\
+ & \mathcal{C} (G(c),G(c))\ar[" F "', r]  & \mathcal{D} (d,d)
+\end{tikzcd}\]
+which identifies a morphism $g : G(c') \to G(c)$ with $G(f)\circ g=1$. Repeating the same logic with all the stuff flipped yields $g\circ G(f)=1$. This yields an inverse $g$ for $G(f)$. We now need to pull $g$ back into $\mathcal{C} _d$ to show it induces an inverse there as well. Pulling it back is the same process as before: there exist arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" ! ", bend left, drr] \ar[" *\mapsto g "', bend right, ddr] \ar[dashed, " *\mapsto \widetilde{g}  ", dr]  &  &  \\
+ & \mathcal{C} _d \ar[" ! ", r] \ar[" G "', d]  & \left\{ d \right\} \ar[hook, d]  \\
+ & \mathcal{C} \ar[" F "', r]  & \mathcal{D} 
+\end{tikzcd}\]
+identifying a morphism $\widetilde{g} \in G^{-1} (g)$. Of course it remains to be shown that $\widetilde{g} $ is composable with $f$, and moreover is an inverse. Recall that pullbacks preserve monics, and thus since $\left\{ d \right\} \hookrightarrow \mathcal{D} $ is monic (injective on objects and faithful), we have that $G$ is monic. Moreover, note that $G$ is necessarily full, since otherwise we could construct a functor $[1]\to \mathcal{C} $ picking out an arrow not in the image of $G$. Hence $G$ is fully faithful and injective on objects. In particular, the preimage $G^{-1} (g)$ is a singleton. Since $G$ is injective on objects, we also have that $\operatorname{dom}  G(\widetilde{g} ) = \operatorname{cod} G(f)$ and vice versa implies $\operatorname{dom}  \widetilde{g} =\operatorname{cod} f$ and vice versa. Thus $\widetilde{g} \circ f$ and $f\circ \widetilde{g} $ exist. Since $G$ is faithful, the preimage of $1$ is precisely $1$, and thus $G(\widetilde{g} \circ f)=1$ implies that $\widetilde{g} \circ f=1$, and the same for the opposite direction. Hence $f$ has an inverse, and $\mathcal{C} _d$ is a groupoid.
+
+
+\begin{remark}\label{2.1.1.2}	
+It will be useful to remark here that we have proven something stronger: there is an \emph{isomorphism} $\mathcal{C} _d \cong F^{-1} (d)$. Indeed, note that $G : \mathcal{C} _d \to \mathcal{C} $ is injective on objects and fully faithful, meaning it is automatically isomorphic to its image. We have already that $\Im G \subseteq F^{-1} (d)$, so we show the converse. If there is $c\in F^{-1} (d)$ with $c\notin \Im G$, then we could construct a functor $*\to  \mathcal{C} $ mapping $*\mapsto c$ which cannot induce any arrow $*\to \mathcal{C} _d$ rendering the diagram commutative, contradicting that $\mathcal{C} _d$ is a pullback. We can do the same for arrows by selecting a morphism $[1]\to \mathcal{C} _d$. Hence $\mathcal{C} _d \cong F^{-1} (d)$. This remark clearly illustrates the terminology ``cofibered in groupoids'', since each fiber of $F$ is a groupoid. Here we also note that by $F^{-1} (d)$, we mean the preimage of the discrete category $\left\{ d \right\} $.
+\end{remark}
+
+Given $f : d \to d'$ in $d$, we now define a functor $f_!: \mathcal{C} _d \to \mathcal{C} _{d'} $ as follows. First let $c\in \mathcal{C} _d$. If $c$ does not exist, then we are done since $\mathcal{C} _d$ is the empty category and $f_!$ is the empty functor, so assume $c$ exists. Then since $F(c)=d$, by \cref{2.1.1.1} (1) we find some $c'\in \mathcal{C}_{d'}$ and some $\overline{f}_c : c \to c'$ in $\mathcal{C} $. Define $f_!(c)=c'$.
+
+For the action on morphisms, let $g : c_1 \to c_2$ in $\mathcal{C} _d$, let $f_!(c_i)=c'_i$, and consider the map $f\circ F(g): F(c) \to d'$. By \cref{2.1.1.1} (1), this lifts to a map $\widetilde{g} : c_1 \to \widetilde{c}$ for some $\widetilde{c}\in \mathcal{C} _{d'} $. We do not know that $\widetilde{c}$ falls in the same connected component of $\mathcal{C} _{d'} $ as $c_2'$, so there is no way to define the action of $f_!$ on $g$ yet. Write $\overline{f} _{1} $ and $\overline{f} _2$ for the lifts of $f : F(c_1) \to d$ and $f : F(c_2) \to d$, respectively, as guarenteed by \cref{2.1.1.1} (1). By \cref{2.1.1.1} (2), the square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} (c_1',c_2')\ar[" F ", r] \ar[" \overline{f} _1^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  \\
+\mathcal{C} (c_1,c_2')\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+is a pullback. Here we used that $c_1',c_2'\in \mathcal{C} _{d'} $ and $F(\overline{f} _i)=f$ for $i=1,2$. Here we recall that since $\mathcal{C} _d$ is the pullback $\mathcal{C} \times _\mathcal{D} \left\{ d \right\} $, we have that all morphisms in $\mathcal{C} _d$ must lie in the fiber of $1_d$, and thus $F(g)=1_d$. Thus
+\[
+	F(\overline{f} _2 \circ g)=F(\overline{f} _2)\circ F(g)=f\circ 1_d=f
+.\]
+Thus we have that the diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" *\mapsto 1_{d'} ", bend left, drr] \ar[" *\mapsto \overline{f} _2\circ g "', bend right, ddr] \ar[dashed, dr]  &  &  \\
+ & \mathcal{C} (c_1',c_2')\ar[" F ", r] \ar[" \overline{f} _1^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  \\
+ & \mathcal{C} (c_1,c_2')\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+commutes, and universality of pullback thus induces a unique dashed arrow as indicated, rendering the diagram commutative. We define $f_!(g)$ as the unique element in the image of the arrow $*\mapsto \mathcal{C} (c_1',c_2')$.
+
+Functoriality of $f_!$ will now follow from uniqueness of pullbacks. Let $g : c_1 \to c_2$ and $h : c_2 \to c_3$, and all other notation as before. Then $f_!(g)$ and $f_!(h)$ are defined by the diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" 1_{d'} ", bend left, drr] \ar[" \overline{f} _2 \circ g "', bend right, ddr] \ar[" f_!(g) ", dashed, dr]  &  &  & * \ar[" 1_{d'}  ", bend left, drr] \ar[" \overline{f} _{3} \circ h "', bend right, ddr] \ar[" f_!(h) ", dashed, dr]  &  &  \\
+													       & \mathcal{C} (c_1',c_2')\ar[" F ", r] \ar[" \overline{f} _1^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  & &  \mathcal{C} (c_2',c_3')\ar[" F ", r] \ar[" \overline{f} _2^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]   \\
+ & \mathcal{C} (c_1,c_2')\ar[" F "', r]  & \mathcal{D}(d,d') &  & \mathcal{C} (c_2,c_3')\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+Note that we are now adopting the convention that a function $*\to X$ will be named after the element $x\in X$ that it selects. We show that the composite $f_!(h)\circ f_!(g)$ suffices as the dashed arrow in the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" 1_{d'}  ", bend left, drr] \ar[" \overline{f} _3 \circ h\circ g "', bend right, ddr] \ar[" f_!(h\circ g) ", dashed, dr]  &  &  \\
+ & \mathcal{C} (c'_1,c'_3)\ar[" F ", r] \ar[" \overline{f} _1^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  \\
+ & \mathcal{C} (c_1,c_3')\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+and uniqueness of the arrow will prove that $f_!(h\circ g)=f_!(h)\circ f_!(g)$. Indeed, commutivity of the first two diagrams give us the equalities
+\[
+	f_!(g)\circ \overline{f} _1^*=\overline{f} _2\circ g,\qquad f_!(h)\circ \overline{f} _2=\overline{f} _3 \circ h
+.\]
+Thus
+\[
+	F(f_!(h)\circ f_!(g)\circ \overline{f} _1)=F(f_!(h)\circ \overline{f} _2\circ g)=F(\overline{f} _3 \circ h\circ g)
+.\]
+Note by commutivity of the third diagram that
+\[
+	F(\overline{f} _3 \circ h\circ g)=F(f_!(h\circ g)\circ \overline{f} _1)=f
+.\]
+Thus $f_!(h)\circ f_!(g)$ indeed suffices as the dashed arrow which renders the diagram commutative. The proof that $f_!(1_c)=1_{c'} $ follows in the exact same way: since $F$ is a functor, simply recognize that the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" 1_{d'}  ", bend left, drr] \ar[" \overline{f} _c "', bend right, ddr] \ar[" 1_{c'}  ", dashed, dr]  &  &  \\
+ & \mathcal{C} (c',c')\ar[" F ", r] \ar[" \overline{f} _c^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  \\
+ & \mathcal{C} (c,c')\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+commutes. Therefore $f_!$ is a functor.
+
+Note in particular that the action of $f_!$ on morphisms is uniquely determined by its action on objects. Since the cover of $f$ need not be unique however, there may be multiple functors that suffice as $f_!$. We will now show that $f_!$ is well-defined up to isomorphism. Let $\widetilde{f} _! $ and $\overline{f} _!$ be two choices of functors induced by $f : d \to d'$ in the way described above. Given $c_i\in \mathcal{C} _d$, we always write $\overline{f} _!(c_i)=\overline{c} _i$ and $\widetilde{f} _!(c_i)=\widetilde{c} _i$. We also write $\overline{f} _i$ for the relevant morphism $c_i \to \overline{c} _i$ covering $f$, and the same for $\widetilde{f} _i : c_i \to \widetilde{c} _i$. We first establish the existence of isomorphisms $\alpha _c : \overline{c} \cong \widetilde{c} $ for all $c\in \mathcal{C} _d$; we then show that $\alpha $ is natural in $c$.
+
+Existence of the isomorphisms is very simple. Consider the diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" 1_{d'}  ", bend left, drr] \ar[" \widetilde{f} "', bend right, ddr] \ar[" \alpha _c ", dashed, dr]  &  &  \\
+ & \mathcal{C} (\overline{c} ,\widetilde{c} )\ar[" F ", r] \ar[" \overline{f}^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  \\
+ & \mathcal{C} (c,\widetilde{c} )\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+Since $F(\widetilde{f} )=f=f^*(1_{d'} )$, we have that the diagram of solid arrows commutes, hence there exists a dashed arrow as indicated rendering the full diagram commutative. This yields a morphism $\alpha _c : \overline{c}  \to \widetilde{c} $. By commutivity of the top triangle, we have that $F(\alpha_c)=1_{d'} $, and thus $\alpha _c$ is a morphism in $\mathcal{C} _{d'} $ by \cref{2.1.1.2}. Thus it is an isomorphism $\alpha _c : \overline{c} \cong \widetilde{c} $.
+
+We now show $\alpha $ is natural in $c$. Let $g : c_1 \to c_2$ in $\mathcal{C}_d$. Consider the diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" 1_{d'}  ", bend left, drr] \ar[" \alpha _{c_2}  \circ \overline{f} _!(g) "', bend right, ddr] \ar[" h ", dashed, dr]  &  &  \\
+ & \mathcal{C} (\widetilde{c} _1, \widetilde{c} _2)\ar[" \alpha_{c_1} ^* "', d] \ar[" F ", r]  & \mathcal{D} (d',d')\ar[" F(\alpha _{c_1} )^* ", equals, d]  \\
+ & \mathcal{C} (\overline{c} _1, \widetilde{c} _2)\ar[" F "', r]  & \mathcal{D}(d',d')
+\end{tikzcd}\]
+Since $\alpha _{c_1} ,\alpha _{c_2} ,\overline{f} _!(g)$ are all morphisms in $\mathcal{C} _{d'} $, they lie in the fiber of $1_{d'} $, and thus the diagram commutes:
+\[
+	F(\alpha _{c_2}  \circ \overline{f} _{!} (g))=F(\alpha_{c_2} )\circ F(f_{!} (g))=1
+.\]
+Hence a dashed arrow $h$ exists as indicated, rendering the diagram commutative. We claim $h= \widetilde{f} _!(g)$. Recall that $\widetilde{f} _!(g)$ is defined as the unique morphism satisfying the universal property that
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+* \ar[" 1_{d'}  ", bend left, drr] \ar[" \widetilde{f}_2 \circ g "', bend right, ddr] \ar[" \widetilde{f} _!(g) ", dashed, dr]  &  &  \\
+ & \mathcal{C} (\widetilde{c} _1,\widetilde{c}_2)\ar[" F ", r] \ar[" \widetilde{f}_1^* "', d]  & \mathcal{D} (d',d')\ar[" f^* ", d]  \\
+ & \mathcal{C} (c_1, \widetilde{c} _2)\ar[" F "', r]  & \mathcal{D} (d,d')
+\end{tikzcd}\]
+commute. More explicitly, we require that
+\[
+	\widetilde{f} _!(g)\circ \widetilde{f} _1 = \widetilde{f} _2 \circ g
+\]
+and that $\widetilde{f} _!(g)$ be a morphism in $\mathcal{C} _{d'} $, which is equivalent to commutivity of the top triangle. Since $h$ is a morphism in $\mathcal{C} _{d'} $, it suffices to show that $h\circ \widetilde{f} _1 = \widetilde{f} _2 \circ g$. Universality of $h$ yields
+\[
+	h \circ \alpha _{c_1} = \alpha _{c_2} \circ \overline{f} _!(g)
+.\]
+By definition of $\alpha $, we have the identity $\alpha _{c_i}  \circ \overline{f} _i = \widetilde{f} _i$. Hence
+\[
+	\alpha _{c_2} \circ \overline{f} _!(g)\circ \overline{f} _1 = h \circ \alpha _{c_1} \circ \overline{f} _1 = h \circ \widetilde{f} _1
+.\]
+We apply $\overline{f} _!(g)\circ \overline{f} _1 = \overline{f} _2 \circ g$ to obtain
+\[
+	\alpha _{c_2} \circ \overline{f} _2 \circ g = h \circ \widetilde{f} _1
+.\]
+Applying $\alpha _{c_i} \circ \overline{f} _i=\widetilde{f} _i$ again yields
+\[
+	\widetilde{f} _2 \circ g = h \circ \widetilde{f} _1
+.\]
+Hence $h=\widetilde{f} _!(g)$, and thus we have by definition of $h$ that
+\[
+	\widetilde{f} _!(g) \circ \alpha _{c_1}  = \alpha_{c_2} \circ \overline{f} _!(g)
+.\]
+More explicitly, the naturality square
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\overline{f} _!(c_1)\ar[" \alpha_{c_1}  ", r] \ar[" \overline{f}_!(g) "', d]  & \widetilde{f}_!(c_1)\ar[" \widetilde{f} _!(g) ", d]  \\
+\overline{f}_!(c_2)\ar[" \alpha _{c_2}  "', r]  & \widetilde{f}_!(c_2)
+\end{tikzcd}\]
+commutes. Hence $\alpha : \overline{f} _! \cong \widetilde{f} _!$, and $f_!$ is well-defined up to canonical natural isomorphism.
+
+In view of this construction, we would like to define a functor $\chi : \mathcal{D}  \to \mathcal{G} \mathrm{rpd} $ by $d\mapsto \mathcal{C} _d$ and $f\mapsto f_!$. We have not yet shown that $1_! = 1$ and $(f\circ g)_! = f_! \circ g_!$. Unfortunately, these identities only hold up to isomorphism, meaning that $\chi $ is really only a 2-functor into the 2-category of groupoids. Rather than spend more time working through the proof of this, we note that the natural isomorphism $(f\circ g)_!\cong f_!\circ g_!$ is constructed in much the same way as $\alpha $, and similary for $1_! = 1$.
+
+Left fibrations turn out to be an $\infty $-categorical generalization of this notion. To motivate this, we present
+\begin{proposition}\label{2.1.1.3}
+	Let $F : \mathcal{C}  \to \mathcal{D} $. Then $F$ exhibits $\mathcal{C} $ as cofibered in groupoids over $\mathcal{D} $ if and only if $N(F): N(\mathcal{C} ) \to N(\mathcal{D} )$ is a left fibration.
+\end{proposition}
+\begin{proof}
+	By \cref{1.1.2.5}, we have that $N(\mathcal{C} )$ and $N(\mathcal{D} )$ admit fillers for inner horns. We claim this implies $N(F)$ is an inner fibration. Let the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & N(\mathcal{C} )\ar[" N(F) ", d]  \\
+	\Delta ^n \ar[" \tau  "', r]\ar[" \sigma  ", dashed, ur]   & N(\mathcal{D} )
+	\end{tikzcd}\]
+	be a lifting problem. There is a unique filler $\sigma $ for the horn, as indicated by the dashed arrow, so we need only show that commutivity of the outer square implies that $\tau =N(F)\circ \sigma $. This is immediate, since $N(F)\circ \sigma _0$ is a horn $\Lambda _i^n\to N(\mathcal{D} )$, and by \cref{1.1.2.5} the filler for this horn is unique, so we simply observe that $\tau $ fills this horn. Thus $N(F)$ is an inner fibration.
+
+	To show that $N(F)$ is a left fibration, we must invoke the fact that $F : \mathcal{C}  \to \mathcal{D} $ exhibits $\mathcal{C} $ as cofibered in groupoids over $\mathcal{D} $. We start by proving cases for small $n$. Consider the lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _0^1 \ar[" \sigma _0 ", r] \ar[hook, d]  & N(\mathcal{C} )\ar[" N(F)", d]  \\
+	\Delta ^1 \ar[" \tau  "', r] \ar[dotted, " \sigma  ", ur]  & N(\mathcal{D} )
+	\end{tikzcd}\]
+	given by the diagram of solid arrows. We would like a dotted arrow as indicated to exist. By \cref{1.1.2.12} the datum of the horn $\sigma _0$ is a 0-simplex $c_1\in N(\mathcal{C} )_0$. Note that $\sigma $ must fill such a horn, and by \cref{1.1.2.13}, it must thus be a 1-simplex $(f : c_0 \to c_1)\in N(\mathcal{C} )_1$ whose 1st face (and thus its domain) is $c_0$. To show such a $\sigma $ exists, we postcompose by $N(F)$, which acts on $N(\mathcal{C} )_0$ and $N(\mathcal{C} )_1$ as simply $F$, hence the composite $N(F)\circ \sigma_0$ may be identified with $F(c_0)$. By commutivity of the diagram, we have that the 1-simplex $\tau $ restricts along the horn to $N(F)\circ \sigma _0$. Thus the 1-simplex $\tau $ agrees with $N(F)\circ \sigma _0$ on its first face, and equivalently has the same codomain $F(c_0)$. Thus $\tau $ identifies a morphism $g : F(c_0) \to d'$, and by \cref{2.1.1.1} there exists $c_1\in \mathcal{C} $ and $f : c_0 \to c_1$ such that $F(f)=g$. Defining $\sigma $ as the 1-simplex $f : c_0 \to c_1$ fills the horn $\sigma _0$, and moreover $N(F)\circ \sigma =\tau $ by definition.
+
+	Now take $n=2$, and consider the lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _0^2 \ar[" \sigma _0 ", r] \ar[hook, d]  & N(\mathcal{C} )\ar[" N(F) ", d]  \\
+	\Delta ^2 \ar[" \tau  "', r] \ar[" \sigma  ", dotted, ur]  & N(\mathcal{D} )
+	\end{tikzcd}\]
+	with notation as before. By \cref{1.1.2.12}, write $\sigma _0=(-,\rho _1,\rho _2)$ for 1-simplicies $\rho _1,\rho _2\in N(\mathcal{C} )_1$. Write $\rho _i = (f^i : c_0^i \to c_1^i)$. Note that we must have $d_1(\rho _2)=d_1(\rho _1)$ by \cref{1.1.2.12}, and thus $c_0^1=c_0^2$, so we simply write $c_0$. We can display this data in the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & c_1^2 \ar[" d_0(\sigma ) ", dotted, dr]  &  \\
+	c_0 \ar[" f^2 ", ur] \ar[" f^1 "', rr]  &  & c_1^1
+	\end{tikzcd}\]
+	We claim to define $\sigma $, it suffices to find a dottted arrow as indicated, rendering the diagram commutative. Indeed, $\sigma $ must satisfy $d_1(\sigma )=\rho ^1$ and $d_2(\sigma )=\rho ^2$. Write
+	\[\sigma =\left(\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	c_0' \ar[" f_1 ", r]  & c_1' \ar[" f_2 ", r]  & c_2'
+	\end{tikzcd}\right).\]
+	Then this implies that $c_0'=c_0$, $c_1'=c_1^2$, and $c_2'=c_1^1$. It also implies that $f_1=f^2$ and $f_2\circ f_1 = f^1$. Hence to specify $\sigma $, we simply need to find $f_1 = d_0(\sigma ) : c_1^2 \to c_1^1$ as indicated by the dashed arrow above, rendering the diagram commutative.
+
+	To do this, we first note that $N(F)\circ \sigma _0$ can be depicted as the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & F(c_1^2)\ar[" d_0(\tau ) ", dotted, dr]  &  \\
+	F(c_0)\ar[" F(f^2) ", ur] \ar[" F(f^1) "', rr]  &  & F(c_1^1)
+	\end{tikzcd}\]
+	We claim $\tau $ induces a dotted arrow as indicated, rendering the diagram commutative. Indeed, commutativity of the outer square in the lifting problem yields $\tau |\Lambda _0^2=N(F)\circ \sigma $, and thus $d_2(\tau )=N(F)(\rho _2)$ and $d_1(\tau )=N(F)(\rho _1)$. However since $\tau $ is a full 2-simplex, as explored earlier and previously in chapter 1 it also carries the data of such a morphism $d_0(\tau ): F(c_1^2) \to F(c_1^1)$ as indicated by the dotted arrow.
+
+	We now consider the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	* \ar[" d_0(\tau ) ", bend left, drr] \ar[" f^1 "', bend right, ddr] \ar[" d_0(\sigma ) ", dashed, dr]  &  &  \\
+														& \mathcal{C} (c_1^2,c_1^1)\ar[" F ", r] \ar[" (f^2)^* "', d]  & \mathcal{D}(F(c_1^2),F(c_1^1))\ar[" F(f^2)^* ", d]  \\
+														& \mathcal{C} (c_0,c_1^1)\ar[" F "', r]  & \mathcal{D}(F(c_0),F(c_1^1))
+	\end{tikzcd}\]
+	The inner square commutes and is a pullback by \cref{2.1.1.1}, and the outer square commutes since, as seen above,
+	\[
+		d_0(\tau )\circ F(f^2) = d_1(\tau )=F(f^1)
+	.\]
+	Hence there exists a unique dashed arrow as indicted, which we define as $d_0(\sigma )$. By commutativity of the left triangle, $d_0(\sigma )\circ f^2=f^1$, and thus $d_0(\sigma )$ suffices as the dotted arrow in the relevant diagram, as required. We also remark that $d_0(\sigma )$ is unique by universality of pullback.
+
+	Since the nerve of a category is 2-coskeletal, the rest of the statement is trivial (I don't want to do it).
+\end{proof}
+
+We now consider an arbitrary left fibration $p : X \to S$. To get a good idea of what such a map looks like, and a more descriptive analog between left fibrations and \cref{2.1.1.1}, we make a few observations.
+
+\begin{remark}\label{2.1.1.4}
+	If $S\cong \Delta ^0$ is a singleton, then the left fibration property tells us that any lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & X \ar[" p ", d]  \\
+	\Delta ^n \ar[" \sigma  ", dotted, ur] \ar[r]  & \Delta ^0
+	\end{tikzcd}\]
+	admits a solution $\sigma $. Since $\Delta ^0$ is terminal in $\sSet $, the bottom right triangle always commutes, and thus this diagram admits a solution precisely when $\sigma_0$ admits a filler. Hence $p : X \to \Delta ^0$ is a left fibration precisely when all $i$th horns, $0\leq i<n$, admit fillers. By \cref{1.2.5.2}, this happens if and only if $X$ is a Kan complex, which we recall is our notion of an $\infty $-groupoid.
+\end{remark}
+
+\begin{remark}\label{2.1.1.5}
+	Recall that if $f$ has the left (right) lifting property with respect to any arrow $h$, then so does any pullback of $f$. See my notes on \cite{hovey}, and in particular the proof of what is marked as Corollary 1.1.20 in my notes. In particular, pullbacks of left fibrations are stable under pullback.
+\end{remark}
+
+We use the property noted in \cref{2.1.1.5} as follows. Let $p : X \to S$ be a left fibration, let $s\in S_0$ be a vertex, and consider the pullback $X\times _S\left\{ s \right\} $:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X\times _S\left\{ s \right\} \ar[r] \ar[d]  & \left\{ s \right\} \ar[hook, d]  \\
+X \ar[" p "', r]  & S
+\end{tikzcd}\]
+By \cref{2.1.1.5}, the map $X\times _S\left\{ s \right\} \to \left\{ s \right\} $ is a left fibration, and by \cref{2.1.1.4} it follows that $X\times_S\left\{ s \right\} $ is a Kan complex. We write $X_s \coloneqq X\times _S\left\{ s \right\} $, and call it the fiber of $s$ under $p$. We can indeed realize $X\times _S\left\{ s \right\} \cong p ^{-1} \left\{ s \right\} $, which is simple enough to realize intuitively by universality of pullback.
+
+The Kan complexes $X_s$ are related to each other by the edges of $S$. Let $f : s \to s'$ be an edge in $S$, and consider the inclusion $i : X_s \simeq X_s \times \left\{ 0 \right\} \hookrightarrow X_s \times \Delta ^1$. We will show in the next section that this map is left anodyne, and thus there exists a dotted arrow as indicated, solving the lifting problem
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_s \times \left\{ 0 \right\} \ar[hook, rr] \ar[hook, d]  && X \ar[" p ", d]  \\
+X_s \times \Delta ^1 \ar[r]\ar[" \sigma  ", dotted, urr]   & \Delta ^1 \ar[" f "', r] & S
+\end{tikzcd}\]
+We remark that the outer diagram commutes since $X_s\times \left\{ 0 \right\} \to X_s\times \Delta ^1\to \Delta ^1$ is constant at 0, and thus composing with $f$ is constant at the domain of $f$, which is $s$. Additionally since $X_s$ is the fiber of $s$ under $p$, we have that $p|X_s$ is constant at $s$. We can then restrict the dotted arrow to $f_! \coloneqq \sigma |X_s \times \left\{ 1 \right\} $, and commutativity of the diagram implies that $p\circ f_!$ is constant at $s'$. hence $f_! : X_s \times \left\{ 1 \right\}\simeq X_s  \to X_{s'} $. This arrow is uniquely determined up to homotopy.
+
+\begin{lemma}\label{2.1.1.6}
+	Let $q : X \to S$ be a left fibration of simplicial sets. Then the assignment
+	\[
+		S_0\ni s\mapsto X_s
+	\]
+	\[
+		S_1\ni f\mapsto f_!
+	\]
+	determines a functor $\hh S\to \mathcal{H} $.
+\end{lemma}
+\begin{proof}
+	Let $f : s \to s'$ be an edge of $S$. Recall that we may define $\mathcal{H} \coloneqq \hh \mathcal{S} $ for $\mathcal{S} $ the $\infty $-category of spaces. By standard model category theory, $\Ho \mathcal{K} \mathrm{an} \cong \Ho \sSet $, so let $K$ be any simplicial set and consider homotopy classes of maps $\eta \in \mathcal{H} (K,X_s)$ and $\eta '\in \mathcal{H} (K,X_{s'} )$. We claim that $\eta '=f_! \circ \eta $ if and only if there exists some morphism $p : K\times \Delta ^1 \to X$ such that $q\circ p$ is equal to the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	K\times \Delta ^1 \ar[r]  & \Delta ^1 \ar[" f ", r]  & S,
+	\end{tikzcd}\]
+	if $\eta $ is the homotopy class of $p|K\times \left\{ 0 \right\} $, and if $\eta '$ is the homotopy class of $p|K\times \left\{ 1 \right\} $.
+
+	We abuse notation and also write $\eta ,\eta '$ for representatives of their homotopy classes. Assume that $f_!\circ \eta \simeq \eta '$. As seen above, $f_!$ arises from the restriction of some lift $\sigma : X_s\times \Delta ^1 \to X$ along $X_s\times \left\{ 1 \right\} $. Define $p$ as the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	K\times \Delta ^1 \ar[" \eta \times 1 ", r]  & X_s\times \Delta ^1 \ar[" \sigma  ", r]  & X.
+	\end{tikzcd}\]
+	Recall that $\sigma $ satisfises the property that $q\circ \sigma =f\circ \pi $ for $\pi : X_s\times \Delta ^1 \to \Delta ^1$ the projection, and $\sigma |X_s\times \left\{ 0 \right\} $ is the inclusion of $X_s$ into $X$.
+
+	We write $d^1 : \left\{ 0 \right\}  \to \Delta ^1$ and $d^0 : \left\{ 1 \right\}  \to \Delta ^1$ for the inclusions, since precomposing by $\Delta ^0 \cong \left\{ 0 \right\} ,\left\{ 1 \right\} $ indeed yields the coface maps. Then the restriction $\sigma \circ (\eta \times 1)|K\times \left\{ 0 \right\} $ is given by the composite $\sigma \circ (\eta \times d^1)$, and similarly $\sigma \circ (\eta \times 1)|K\times \left\{ 1 \right\} =\sigma \circ (\eta \times d^0)$. We show these are the homotopy types of $\eta $ and $\eta '$, respectively.
+
+	We use the fact that $\sigma \circ (1\times d^1)$ is the inclusion $i : X_s\hookrightarrow X$ to obtain
+	\[
+		\sigma \circ (\eta \times d^1) = \sigma \circ (1\times d^1)\circ (\eta \times 1) = i \circ (\eta \times 1) : K\times \left\{ 0 \right\}  \to X
+	.\]
+	We identify $K\times \left\{ 0 \right\} \cong K$, and since $i$ is mono we can factor through its image to obtain $\sigma \circ (\eta \times d^1) = \eta : K \to X_s$. Hence $\eta $ is in the homotopy class of $p|K\times \left\{ 0 \right\} $. We also use the fact that $\sigma |X_s\times \left\{ 1 \right\} =f_!$ to obtain
+	\[
+		\sigma \circ (\eta \times d^0) = \sigma \circ (1\times d^0)\circ (\eta \times 1) = f_! \circ (\eta \times 1): K\times \left\{ 1 \right\}  \to X_{s'} 
+	.\]
+	We identify this with the map $f_! \circ \eta : K \to X_{s'} $. By hypothesis, $f_! \circ \eta \simeq \eta '$, so we have that $\eta '$ is in the homotopy class of $p|K\times \left\{ 1 \right\} $.
+
+	Finally, note that $q \circ p = q \circ \sigma \circ (\eta \times 1)$. By definition of $\sigma $, we have that $q\circ \sigma $ is the composite of $f$ the projection $X_s \times \Delta ^1\to \Delta ^1$. By definition of product, the composite of $(\eta \times 1)$ with the projection $X_s\times \Delta ^1 \to \Delta ^1$ is the composite of 1 with projection $\pi : K\times \Delta ^1 \to \Delta ^1$; hence $q\circ p = f\circ \pi $.
+
+	For the other direction, let $p : K\times \Delta ^1 \to X$ exist with the given properties. Then since $p|K\times \left\{ 0 \right\} : K \to X_s$ is the homotopy class of $\eta $, we can compose $f_! \circ p|K\times \left\{ 0 \right\} \simeq f_! \circ \eta $. It suffices to show $f_! \circ p|K\times \left\{ 0 \right\} $ is the homotopy class of $p|K\times \left\{ 1 \right\} $, since that is the homotopy class of $\eta '$. We will explicitly construct such a homotopy $f_! \circ p|K\times \left\{ 0 \right\} \simeq p|K\times \left\{ 1 \right\} $. To do this, we first note that $p$ is a homotopy $\eta \simeq \eta '$ when viewed as maps into $X$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	K\times \left\{ 0 \right\} \ar[" \eta  ", r] \ar[" 1\times d^1 "', hook, d]  & X_s \ar[hook, d]  \\
+	K\times \Delta ^1 \ar[" p ", r] & X \\
+	K\times \left\{ 1 \right\} \ar[" \eta ' "', r] \ar[" 1\times d^0 ", hook, u]  & X_{s'} \ar[hook, u] 
+	\end{tikzcd}\]
+	We also can consider the map $H$ defined as the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 5em]
+	K\times \Delta ^1 \ar[" (p|K\times \left\{ 0 \right\} )\times 1 ", r]  & X\times \Delta ^1\ar[" \sigma  ", r]  & X
+	\end{tikzcd}\]
+	which is a homotopy as well. To see what it is a homotopy between, we write $p|K\times \left\{ 0 \right\} =\eta $ since it is in the homotopy class, and recall from the previous section that $\sigma \circ (\eta \times d^1)=\eta$, and $\sigma \circ (\eta \times d^0)=f_!\circ \eta $. Hence we obtain a homotopy
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	K\times \left\{ 0 \right\} \ar[" 1\times d^1 "', hook, d] \ar[" \eta  ", dr]  &  \\
+	K\times \Delta ^1 \ar[" H ", r]  & X \\
+	K\times \left\{ 1 \right\} \ar[" 1\times d^0 ", hook, u] \ar[" f_! \circ \eta  "', ur]  & 
+	\end{tikzcd}\]
+	We would like to glue these homotopies together to obtain a lifting problem against some horn $K\times \Lambda _0^2\to X\to S$, which admits a solution since $q$ is a left fibration. We can then take the omitted face as a homotopy between the desired maps. Since products are left-adjoint and a single union can be realized as a pushout, which is a colimit, we obtain $(K\times \partial_1\Delta ^2)\cup (K\times \partial _2\Delta ^2) \cong K\times \Lambda _0^2$. To check that $H \cup p$ defines a map $K\times \Lambda _0^2 \to X$ as claimed, we need to check that they agree on the intersection. Tbe compatibility condition for a 0th horn $(-,\tau _1,\tau _2)$ is $d_1(\tau _2)=d_1(\tau _1)$, so for a map $K\times \Lambda _0^2$ we must check
+	\[
+		H\circ (1\times d^1) = p \circ (1\times d^1)
+	.\]
+	This follows since $\eta =\eta $,  so we obtain a map $H\cup p : K\times \Lambda _0^2 \to X$. Consider the lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		K\times \Lambda_0^2 \ar[" H\cup p ", rr] \ar[hook, d]  && X \ar[" q ", d]  \\
+		K\times \Delta ^2 \ar[r] \ar[" \tau  ", dotted, urr]  &\Delta ^2 \ar[" s_1(f) "', r] & S
+	\end{tikzcd}\]
+	The product of 1 with any left anodyne map is left anodyne, so the dotted arrow exists if the diagram of solid arrows commutes. It is useful to consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		K\times \left\{ 0 \right\} \ar[" 1\times d^1 ", rr] \ar[" 1\times d^1 "', dd] & & K\times \partial _1\Delta ^2\ar[" H ", dd] \ar[hook, dl] \ar[" \eta \times 1 ", r] & X\times \partial_1\Delta ^2 \ar[" \cong  ", d]  \\
+											      & K\times \Lambda _0^2 \ar[" H\cup p ", dashed, dr]  && X\times \Delta ^1 \ar[" \sigma  ", dl]\ar[d]  \\
+		K\times \partial _2\Delta ^2\ar[" p "', rr]\ar[hook, ur] \ar[d]  && X \ar[" q ", dr]  & \Delta ^1 \ar[" f ", d]   \\
+						    \partial _2\Delta ^2 \ar[" \cong  "', r]  & \Delta ^1 \ar[" f "', rr]  && S
+	\end{tikzcd}\]
+	This commutes by definition of $H$ and by the assumed property of $p\circ q$. In particular, the composites $q\circ H$ and $q\circ p$ are constant at $f$, so the composite $q\circ H\cup p$ falls inside the degenerate simplex $s_1(f)$ which has the identity as its 0th face. Hence the diagram commutes, and the lift $\tau $ exists.
+
+	Let $h\coloneqq \tau \circ (1\times d^0)$. We want $h$ to be a homotopy from $f_!\circ \eta $ to $\eta '$. By the cosimplicial identity $d^jd^i = d^id^{j-1} ,$ $i<j$,
+	\[
+		\tau \circ (1\times d^0)\circ (1\times d^1) = \tau \circ (1\times d^0d^1) = \tau \circ (1\times d^2d^0)=\tau \circ (1\times d^2)\circ (1\times d^0)=p\circ (1\times d^0)=\eta '	
+	,\]
+	\[
+		\tau \circ (1\times d^0)\circ (1\times d^0) = \tau \circ (1\times d^0d^0) = \tau \circ (t\times d^1d^0) = \tau \circ (1\times d^1)\circ (1\times d^0) = H\circ (1\times d^0)=f_! \circ \eta 
+	.\]
+	Thus $h$ witnesses the commutativity of the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	K\times \left\{ 0 \right\} \ar[" 1\times d^1 "', d] \ar[" \eta ' ", dr]  &  \\
+	K\times \Delta ^1 \ar[" h ", r]  & X \\
+	K\times \left\{ 1 \right\} \ar[" 1\times d^0 ", u] \ar[" f_!\circ \eta  "', ur]  & 
+	\end{tikzcd}\]
+	Hence we obtain a homotopy $\eta '\circ f_!\circ \eta$. Here we have noted that since $f_! \circ \eta $ and $\eta '$  are morphisms with codomain a Kan complex, homotopy is an equivalence relation, so this suffices.
+
+	Now that we have proven this intermediary result, let $\sigma : \Delta ^2 \to S$ be a 2-simplex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & v \ar[" g ", dr]  &  \\
+	u \ar[" f ", ur] \ar[" h "', rr]  &  & w.
+	\end{tikzcd}\]
+	We will prove later (although the proof is simple) that the inclusion $X_u\times \left\{ 0 \right\} \subseteq X_s \times \Delta ^2$ is left anodyne. Thus the lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_u\times \left\{ 0 \right\} \ar[" \cong  ", r]\ar[hook, d]   & X_u \ar[hook, r]  & X \ar[" q ", d]  \\
+	X_u\times \Delta ^2 \ar[r] \ar[" p ", dotted, urr]  & \Delta ^2 \ar[" \sigma  "', r]  & S
+	\end{tikzcd}\]
+	admits a solution $p$. Note that the outer rectangle commutes since the 0th vertex of $\sigma $ is $u$, and $q|X_u$ is constant on $u$. Note that by definition, $f_! \simeq p|X_u \times \left\{ 1 \right\} $, $h_! \simeq p|X_u\times \left\{ 2 \right\} $, and the map $p|X_u\times \Delta ^{\left\{ 1,2 \right\} } $ verifies the equation $h_! \simeq g_! \circ f_!$ in $\mathcal{H} (X_u,X_w)$.
+\end{proof}
+
+We informally summarize this information as follows. Let $S$ be a simplicial set. To give a left fibration $q : X \to S$, one must specify a Kan complex $X_s$ for each $s\in S_0$, a map $f_! : X_s \to X_{s'} $ for each $f : s \to s'$ in $S_1$, and coherence data for these morphisms for each higher dimensional simplex of $S$. In other words, a left fibration $p : X \to S$ should be more or less equivalent to an $\infty $-functor $p : S \to \mathcal{S} $ mapping $s\mapsto X_s$ and $f\mapsto f_!$. \Cref{2.1.1.6} is actually a weak version of this statement; we will prove something stronger later. We close this section by establishing two more properties of left fibrations.
+
+\begin{proposition}\label{2.1.1.7}
+	Let $p : \mathcal{C}  \to \mathcal{D} $ be a left fibration of $\infty $-categories and let $f : x \to y$ be a morphism in $\mathcal{C} $ such that $p(f)$ is an equivalence in $\mathcal{D} $. Then $f$ is an equivalence in $\mathcal{C} $.
+\end{proposition}
+\begin{proof}
+	Let $\widetilde{g} $ be a homotopy inverse of $f$, such that we obtain a 2-simplex $\sigma $ of $\mathcal{D} $ displayed as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & p(y)\ar[" \widetilde{g}  ", dr]  &  \\
+	p(x)\ar[" p(f) ", ur] \ar[" 1_{p(x)}  "', rr]  &  & p(x).
+	\end{tikzcd}\]
+	Consider the horn $k = (-,f,1_{x}): \Lambda_0^2 \to \mathcal{C} $. Then $\sigma $ restricts as $\sigma |\Lambda_0^2 = p\circ k$, so the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _0^2 \ar[" k ", r] \ar[hook, d]  & \mathcal{C} \ar[" p ", d]  \\
+	\Delta ^2 \ar[" \sigma  "', r]  \ar[dotted, " \tau  ", ur] & \mathcal{D} 
+	\end{tikzcd}\]
+	commutes, hence the lifting problem admits a solution as indicated by the dotted arrow. The 2-simplex $\tau $ can be displayed as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & y \ar[" g ", dr] &  \\
+		x \ar[" 1_x "', rr] \ar[" f ", ur]  & & x
+	\end{tikzcd}\]
+	for some $g$ in the fiber of $\widetilde{g} $ under $p$. Thus $g$ is a left homotopy inverse for $f$. Since $p(g)=\widetilde{g} $ is an equivalence in $\mathcal{D} $, it has a left homotopy inverse in $\mathcal{D} $, and thus the same argument now applied to $g$ yields a left homotopy inverse for $g$ in $\mathcal{C} $. Thus $g$ has left- and right-inverses, and by the usual proof they coencide and are unique up to homotopy. Thus $f$ and $g$ are homotopy inverses.
+\end{proof}
+
+\begin{proposition}\label{2.1.1.8}
+	Let $p : \mathcal{C}  \to \mathcal{D} $ be a left fibration of $\infty $-categories, let $y\in \mathcal{C} $, and let $\widetilde{f} : \widetilde{x}  \to p(y)$ be an equivalence in $\mathcal{D} $. Then there exists a morphism $f : x \to y$ in $\mathcal{C} $ such that $p(f)=\widetilde{f} $, and by \cref{2.1.1.7} this is automatically an equivalence.
+\end{proposition}
+\begin{proof}
+	Let $\widetilde{g} : p(y) \to \widetilde{x}$ be a homotopy inverse of $\widetilde{f} $ in $\mathcal{D} $. Then since the first face of $g$ is its domain $y$, the horn $y : \Lambda _0^1 \to \mathcal{C} $ makes the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _0^1 \ar[" y ", r] \ar[hook, d]  & \mathcal{C} \ar[" p ", d]  \\
+	\Delta ^1 \ar[" \widetilde{g} "', r] \ar[" g ",dotted,  ur]  & \mathcal{D} 
+	\end{tikzcd}\]
+	commute, hence the dotted arrow $g$ exists since $p$ is a left fibration. Now consider the 2-simplex $\sigma \in \mathcal{D} _2$ depicted as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & p(x) \ar[" \widetilde{f}  ", dr]  &  \\
+	p(y) \ar[" p(g) ", ur] \ar[" 1_{p(y)}  "', rr]  &  & p(y).
+	\end{tikzcd}\]
+	Since $\sigma |\Lambda _0^2$ can be lifted into $\mathcal{C} $ along $p$ as the horn $(-,1_y,g)$, there exists a filler to this horn, giving $g$ a homotopy right-inverse $f : x \to y$ in $\mathcal{C} $ lifting $\widetilde{f} $.
+\end{proof}
+
+\subsection{Stability properties of left fibrations}
+
+The purpose of this section is to show that left fibrations abound. The most important example proceeds intuitively as follows. Informally, we think of a left fibration as a functor $\mathcal{C} \to \mathcal{S} $. Recall that given an $\infty $-category $\mathcal{C} $, the mapping space $\mathcal{C} (c,d)=\Map_{\mathcal{C} }(c,d) $ should be a Kan complex. Hence the map $y\mapsto \mathcal{C} (c,d)$ should determine a functor $\mathcal{C} \to \mathcal{S} $, and thus a left fibration $\widetilde{\mathcal{C} } \to \mathcal{C} $ for some suitable category $\mathcal{C} $.
+
+Consider the projection of the overcategory $f : \mathcal{C} _{c/} \to \mathcal{C} $. We claim the fiber of $d\in \mathcal{C}$ under $f$ is $\Hom_\mathcal{C} ^\mathrm{L} (c, d) $, which we recall is the simplicial set defined by taking its $n$-simplicies to be $(n+1)$-simplicies $\sigma $ of $\mathcal{C} $ such that $\sigma |\left\{ 0 \right\} $ is the vertex $c$, and the restriction $\sigma |\Delta ^{\left\{ 1, \ldots ,n+1 \right\} } $ along the other $n$ vertices yields the degenerate $n$-simplex on $d$; hence this simplex is constant at $d$.
+
+Recall that $\mathcal{C} _{c/} \coloneqq \sSet_c(\Delta^0\star\Delta ^{\bullet},\mathcal{C} )$ is the set of maps $\Delta ^0\star \Delta ^n \cong \Delta ^{n+1} \to \mathcal{C} $ whose 0th vertex is $c$, and the projection $f : \mathcal{C} _{c/}  \to \mathcal{C} $ is defined by mapping an $n$-simplex $\sigma : \Delta ^{n+1}  \to \mathcal{C} $ of $\mathcal{C} _{c/} $ to its restriction $\sigma |\Delta ^{\left\{ 1, \ldots ,n+1 \right\} } : \Delta ^n \to \mathcal{C} $. Hence the fiber $f^{-1} (d) \cong \mathcal{C}_{c/} \times_{\mathcal{C} } \left\{ d \right\} $ is precisely the set of all $(n+1)$-simplicies of $\mathcal{C} $ which restrict to $c$ on the 0th vertex and $d$ on the other $n$ vertices. Thus
+\[
+	\Hom_\mathcal{C} ^{\mathrm{L} } (c, d) \cong f^{-1} (d) \cong \mathcal{C} _{c/} \times _\mathcal{C} \left\{ d \right\} 
+.\]
+We would like to show that $f$ is a left fibraton, justifying this. We have a more general statement.
+
+\begin{proposition}[Joyal]\label{2.1.2.1}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A\subseteq B \ar[" p ", r]  & X \ar[" q ", r]  & S
+	\end{tikzcd}\]
+	be a diagram of simplicial sets, with $q$ an inner fibration. Let $r=q\circ p : B \to S$, $p_0=p|A$, and $r_0=r|A$. Then the induced map
+	\[
+		X_{p/} \to X_{p_0/} \times_{S_{r_0/} } S_{r/} 
+	\]
+	is a left fibration. If $q$ is already a left fibration, then the induced map
+	\[
+		X_{/p} \to X_{/p_0} \times _{S_{/r_0} } S_{/r} 
+	\]
+	is a left fibration as well.
+\end{proposition}
+
+\begin{remark}\label{2.1.2.2}
+	It is nice to illustrate how the map $X_{p/} \to X_{p_0/} \times_{S_{r_0/}} S_{r/} $ arises. Note that an element $\sigma \in X_{p/} =\sSet (B \star \Delta ^{\bullet} ,X)$ restricts along $B$ to $p$, and thus restricts along $A\subseteq B$ to $p_0=p|A$. Therefore we obtain an inclusion $X_{p/} \to X_{p_0/} $. Moreover, given any map $\sigma : B\star \Delta ^{\bullet}  \to X$ which restricts along $B$ to $p$, we have that $q\circ \sigma $ restricts along $B$ to $q\circ p=r$, so postcomposition determines a map $X_{p/} \to S_{r/} $. When including this into $S_{r_0/} $, this necessarily agrees with the postcomposition of $X_{p_0/} $ by $q$, since both maps amount to $\sigma\mapsto q\circ \sigma \circ i$ for $i : A \subseteq B$. Thus we obtain a map by universality of pullback.
+\end{remark}
+
+This statement implies a number of propositions. For example,
+
+\begin{corollary}[Joyal]\label{2.1.2.3}
+	Let $\mathcal{C} $ be an $\infty $-category and $p : K \to \mathcal{C} $ a morphism of simplicial sets. Then $\mathcal{C} _{p/} $ is an $\infty $-category, and the projection $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration.
+\end{corollary}
+\begin{proof}
+	We apply \cref{2.1.2.1} with $A=\varnothing $, $X=\mathcal{C} $, $S=\Delta ^0$, and $B=K$. The relevant pullback diagram is
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} _{p_0/} \times _{\Delta ^0_{r_0/} } \Delta^0_{r/} \ar[r] \ar[d]  & \Delta ^0_{r/}\ar[d]  \\
+	\mathcal{C}_{p_0/} \ar[r]  & \Delta^0_{r_0/} 
+	\end{tikzcd}\]
+	First note that $p_0: \varnothing  \to \mathcal{C} $ and $r_0 : \varnothing  \to \Delta ^0$ are the empty maps. We claim that for any simplicial set $S$, if $k : \varnothing  \to S$ is the empty map, then $S_{\varnothing /} \cong S$. This is immediate, since $\varnothing \star \Delta ^{\bullet} \cong \Delta ^{\bullet} $, so
+	\[
+		S_{0/} \cong \sSet (\varnothing \star \Delta^{\bullet} ,S) \cong \sSet (\Delta ^{\bullet} ,S)\cong S
+	.\]
+	We claim also that $\Delta _{r/} ^0\cong \Delta ^0$. We note that $r$ is the unique map $K\to \Delta ^0$, so
+	\[
+		\Delta _{r/} ^0 \cong \sSet (K\star \Delta ^{\bullet},\Delta ^0)
+	\]
+	is a singleton, and manifestly precomposing the single map by the inclusion of $K$ will yield $r$. Hence $\Delta _{r/} ^0 \cong \Delta ^0$.
+	
+	Thus the diagram is of the form
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} \times_{\Delta ^0} \Delta ^0 \ar[r] \ar[d]  & \Delta ^0\ar[equals, d]  \\
+	\mathcal{C} \ar[r]  & \Delta ^0
+	\end{tikzcd}\]
+	It is now clear that $\mathcal{C} \times _{\Delta ^0} \Delta ^0 \cong \mathcal{C} $. Thus the induced map $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration. Moreover by considering \cref{2.1.2.2}, we see that the map $\mathcal{C} _{p/} \to \mathcal{C} $ arises by restricting along $\varnothing \subseteq K$; equivalently by restricting along $\Delta ^{\bullet} \to \mathcal{C} $, which is precisely the projection $\mathcal{C} _{p/} \to \mathcal{C} $.
+
+	Using the lifting property, we can now prove that $\mathcal{C} _{p/} $ is an $\infty $-category. Consider an inner horn $\sigma _0 : \Lambda _i^n \to \mathcal{C} _{p/} $. Mapping this under the projection yields a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda_i^n \ar[" f ", r]  \ar[hook, d]& \mathcal{C} _{p/} \ar[r]   & \mathcal{C}  \\
+	\Delta ^n \ar[" \tau  "', urr]  &  & 
+	\end{tikzcd}\]
+	which admits a filler $\tau $ since $\mathcal{C} $ is an $\infty $-category. This yields a lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda_i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & \mathcal{C}_{p/} \ar[d]  \\
+	\Delta ^n \ar[" \tau  "', r] \ar[dotted, " \sigma  ", ur]  & \mathcal{C}
+	\end{tikzcd}\]
+	which admits a solution $\sigma $ as indicated by the dotted arrow, asince $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration, and lifts against inner horns. This $n$-simplex $\sigma $ fills the horn $\sigma _0$, and thus $\mathcal{C} _{p/} $ is an $\infty $-category.
+\end{proof}
+
+We can also prove \cref{1.2.4.3}, which we stated without proof earlier.
+
+\begin{proposition}[Joyal, \cref{1.2.4.3}]\label{2.1.2.4}
+	Let $\mathcal{C} $ be an $\infty $-category  and $\phi : \Delta ^1 \to \mathcal{C} $ a morphism in $\mathcal{C} $. Then $\phi $ is an equivalence if and only if, for each $n\geq 2$ and every map $f_0 : \Lambda _0^n \to \mathcal{C} $ which restricts as $f_0|\Delta ^{\left\{ 0,1 \right\} } =\phi $, there exists a filler $f$ for $f_0$.
+\end{proposition}
+\begin{proof}
+	For $n\geq 2$, write $\Delta ^n \cong \Delta ^1 \star \Delta ^{n-2} $, where $\Delta ^1 $ spans the vertices $\left\{ 0,1 \right\} $. We then note that $\Lambda _0^n$ can be written as $\partial_1(\Delta ^1 \star \Delta ^{n-2} ) \cong \left\{ 0 \right\} \star \Delta ^{n-2} $ in union with each $\Delta ^1 \star \partial _i \Delta ^{n-2} $; equivalenly $(\left\{ 0 \right\} \star  \Delta ^{n-2} )\cup (\Delta ^1 \star \partial \Delta ^{n-2} )$. Hence $f_0$ factors through each of these. Write $h=f_0|\Delta ^{\left\{ 2, \ldots ,n \right\} } : \Delta ^{n-2}  \to \mathcal{C} $ and $h_0 = f_0|\partial \Delta ^{\left\{ 2, \ldots ,n \right\} } : \partial \Delta ^{n-2}  \to \mathcal{C} $. Since a map $\Delta ^n \star K\to \mathcal{C} $ is equivalent to a map $\Delta ^n \to \mathcal{C} _{/K} $,we view the restriction of $f_0$ along $\left\{ 0 \right\} \star \Delta ^{n-2} $ as a map $\left\{ 0 \right\} \to \Delta ^{n-2} $, and similarly for the restriction of $f_0$ along $\Delta ^1 \star \partial \Delta ^{n-2} $. All together, this gives us maps
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\left\{ 0 \right\} \ar[hook, d] \ar[r]  & \mathcal{C} _{/h} \ar[" q ", d]  \\
+	\Delta ^1 \ar[" \phi ' "', r]  & \mathcal{C} _{/h_0} 
+	\end{tikzcd}\]
+	where the right vertical map is precomposition by the inclusion $\partial \Delta ^{n-2} \subseteq \Delta ^{n-2} $, and the horizontal maps arise as the transposes of the relevant restrictions of $f$ under the adujnction for $\star $ and the overcategory. The diagram automatically commutes. A lift would transpose to a map $\Delta ^1 \star \Delta ^{n-2} \to \mathcal{C} $ which agrees with $f_0$ on the entire horn, and is thus a filler. So we need to solve this lifting problem. 
+\end{proof}
+

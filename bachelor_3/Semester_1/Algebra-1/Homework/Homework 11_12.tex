@@ -1,0 +1,617 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage[hyphens]{url}
+\usepackage{booktabs}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\makeatletter
+\renewcommand*\env@matrix[1][c]{\hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols #1}}
+\makeatother %matrix realignment
+
+% simple macros
+\newcommand{\tildesim}{\mathbin{\sim}} % better spacing for quotients
+\renewcommand{\mod}[1]{\;(\text{mod}\;#1)} % objectively better than default
+
+\author{Grant Talbert}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 11}
+\begin{document}
+\makeproblem
+\setcounter{section}{4}
+\section{Problem 5}
+\begin{problem}\label{5.1}
+	Let $R$ be an integral domain. Let $M$ be an $R$-module of rank $n$, and let $\left\{ x_1, \ldots ,x_n \right\} $ be a maximal linearly independent set in $M$. Show that $M /\left\langle x_1, \ldots ,x_n \right\rangle $ is torsion.
+\end{problem}
+\begin{proof}
+	Since $\left\{ x_1, \ldots x_n \right\} $ is a maximally linearly independent set, for any $m\in M$ the set $\left\{ x_1, \ldots ,x_n,m \right\} $ is not linearly independent. Therefore there exist $\left\{ c_i \right\}_{i=1}^{n+1} \subseteq R$ such that not all of the $c_i$s are zero, and
+	\[
+		c_1x_1 + \cdots + c_n x_n + c_{n+1} m=0
+	.\]
+	Passing to the quotient and using coset notation, since $\sum_{i} c_ix_i \in \left\langle x_1, \ldots ,x_n \right\rangle $, it follows that
+	\[
+		c_1x_1 + \cdots + c_n x_n+c_{n+1} m \in c_{n+1} m + \left\langle x_1, \ldots ,x_n \right\rangle 
+	.\]
+	Since the sum is zero, it follows that
+	\[
+		0\in c_{n+1} m+ \left\langle x_1, \ldots ,x_n \right\rangle \iff c_{n+1} m + \left\langle x_1, \ldots ,x_n \right\rangle = \left\langle x_1, \ldots ,x_n \right\rangle 
+	.\]
+	Therefore, when we pass to the quotient, we identify $c_{n+1} m=0$. At this point it suffices only to show that $c_{n+1} \neq 0$. Indeed, suppose for contradiction that $c_{n+1} =0$. Then our linear combination reads
+	\[
+		c_1x_1 + \cdots + c_nx_n = 0
+	\]
+	with not all $c_i$s zero. However, since the $x_i$s are linearly independent, such a linear combination is zero if and only if $c_i=0$ for all $i$, a contradiction. Therefore $c_{n+1} \neq 0$, and the class of $m$ in $ M/\left\langle x_1, \ldots ,x_n \right\rangle $ is a torsion element for all $m\in M$. In particular, all elements of the quotient are torsion elements.
+\end{proof}
+\begin{problem}\label{5.2}
+	Let $R$ be an integral domain and $M$ an $R$-module with $N\subseteq M$ a free submodule. Show that if $M/N$ is torsion, then $\mathrm{rk} _RM=\mathrm{rk} _RN$.
+\end{problem}
+\begin{proof}
+	Since the rank can be defined as a maximally linearly independent set, this can be viewed as a converse to \cref{5.1}. Since $N$ is free, we can choose a basis $\left\{ x_1, \ldots ,x_n \right\} $ for $N$ with $n=\mathrm{rk} _RN$. We claim this is a maximally linearly independent set in $M$. Since it is linearly independent in $N$, it must be linearly independent in $M$, so we need only show there exist no larger linearly independent sets.
+
+	Suppose for contradiction that there is a larger linearly independent set $\left\{ x_1, \ldots ,x_n,m \right\} \subseteq M$. Then for any $\left\{ c_i \right\}_{i=1} ^{n+1} \subseteq R$,
+	\[
+		c_1x_1 + \cdots + c_nx_n + c_{n+1} m = 0 \iff c_i=0\forall i
+	.\]
+	Now consider the torsion element $m+\left\langle x_1, \ldots ,x_n \right\rangle $ of the quotient. Since this element has torsion, there is nonzero $r\in R $ such that $r m\in \left\langle x_1, \ldots ,x_n \right\rangle $. Since $r m$ is an element of the span $\left\langle x_1, \ldots ,x_n \right\rangle $, it follows that
+	\[
+		c_1x_1 + \cdots c_nx_n = r m 
+	\]
+	for some collection of coefficients $\left\{ c_i \right\}_{i=1} ^n$. In particular,
+	\[
+		c_1x_1 + \cdots + c_nx_n - r m=0,
+	\]
+	but at least the coefficient $-r\in R$ is nonzero, a contradiction.
+\end{proof}
+
+
+\section{Problem 6}
+\begin{problem}
+	Let $M,N$ be $R$-modules of rank $m,n$, respectively with $R$ an integral domain. Show that the rank of $M\oplus N$ is $m+n$.
+\end{problem}
+\begin{proof}
+	Since $M$ has rank $m$, there exists a set $\left\{ x_1, \ldots ,x_m \right\} \subseteq M$ of linearly independent elements. Since $N$ has rank $n$, there exists a set $\left\{ y_1, \ldots ,y_n \right\} \subseteq N$ of linearly independent elements. By \cref{5.1}, the quotients
+	\[
+		\frac{M}{\left\langle x_1, \ldots ,x_m \right\rangle } ,\qquad \frac{N}{\left\langle y_1, \ldots ,y_n \right\rangle } 
+	\]
+	are torsion. By \cref{8.1},
+	\[
+		\frac{M}{\left\langle x_1, \ldots ,x_m \right\rangle } \oplus \frac{N}{\left\langle y_1 , \ldots ,y_n \right\rangle } \cong \frac{M\oplus N}{\left\langle x_1, \ldots ,x_m\right\rangle\oplus \left\langle y_1, \ldots ,y_n \right\rangle } 
+	.\]
+	Since the direct sum of free modules is free, we have that
+	\[
+		\left\langle x_1, \ldots ,x_m \right\rangle \oplus \left\langle y_1, \ldots ,y_n \right\rangle \cong R ^{\oplus m} \oplus R ^{\oplus n} \cong \left( \bigoplus_{i=1} ^mR \right) \oplus \left( \bigoplus_{i=1} ^nR \right) \cong R^{\oplus m+n} \cong \left\langle x_1, \ldots ,x_m,y_1, \ldots ,y_n \right\rangle ,
+	\]
+	which has $m+n$ generators and is therefore of dimension $m+n$.	It suffices by \cref{5.2} to show the quotient is torsion. By the isomorphism, it suffices to show the direct sum of two torsion modules is torsion.
+
+	Let $A,B$ be torsion $R$-modules, meaning given $a\in A$ and $b\in B$, there is nonzero $r\in R $ with $ra=0$. Additionally, since $rb\in B$, there is nonzero $s\in R$ with $s(rb)=0$. We thus have
+	\[
+		(sr)(a,b) = (s(ra),s(rb)) = (s0,0)=0
+	.\]
+	Therefore, each pair $(a,b)$ is a torsion element, meaning $A\oplus B$ is torsion.
+\end{proof}
+\begin{problem}
+	Let $M$ be an $R$-module with $R$ an integral domain such that $M\cong R^r\oplus T$ for some $r$ and $T$ is torsion. Show that $r =\mathrm{rk} _RM$ and $T\cong \operatorname{Tor}_R (M)$.
+\end{problem}
+\begin{proof}
+	By \cref{8.1},
+	\[
+		T \cong 0 \oplus T\cong \frac{R^r}{R^r} \oplus \frac{T}{0} \cong \frac{R^r \oplus T}{R^r\oplus 0} \cong \frac{M}{R^r} 
+	.\]
+	Since the quotient of $M$ by the free submodule $R^r$ is torsion, by \cref{5.2} $\mathrm{rk} _RM = \mathrm{rk} _RR^r=r$. To show $T=\operatorname{Tor} _R(M)$, note that $T\subseteq \operatorname{Tor} _R(M)$ since $T$ is torsion. To show the converse, recall that we identify $T$ with a submodule via the inclusion $T \cong 0 \oplus T \subseteq R^r\oplus T$. Let $(s,t)\in R^r\oplus T$ have torsion, meaning there is nonzero $c\in R$ such that $(cs,ct)=0$. This implies that $cs=0$ in $R$, and since $R$ is an integral domain and has no zero divisors, $s=0$ is forced. Therefore, $(s,t)=(0,t)\subseteq 0\oplus T$. Thus proves $\operatorname{Tor} _R(M) \subseteq T$, concluding the proof.
+\end{proof}
+
+
+\section{Problem 7}
+For this problem, let $k$ be a field, $R=k[x,y,z],$ and $I=(x^2-y,x^3-z)$.
+\begin{problem}
+	Show there is a surjective $R$-module homomorphism $\pi :R^{\oplus 2} \to I$.
+\end{problem}
+\begin{proof}
+	Let $2=\left\{ 0,1 \right\} $, and note that the map $2\to R^{\oplus 2} $ given by $0\mapsto (1,0)$ and $1\mapsto (0,1)$ is universal in the relevant sense. We can define an injection $2\hookrightarrow I$ via $0\mapsto x^2-y$ and $1\mapsto x^3-z$. Then by universality, there is a unique $R$-linear map $\pi :R^{\oplus 2} \to I$ mapping $(1,0)\mapsto x^2-y$ and $(0,1)\mapsto x^3-z$ which commutes with the inclusions of 2. Since $I$ is generated by $x^2-y$ and $x^3-z$, it is also generated by them as an $R$-module with the canonical action of left multiplication. Since it is generated as an $R$-module, by definition of a generating set the morphism $\pi $ is surjective.
+\end{proof}
+\begin{problem}
+	Show that $(-(x^3-z),x^2-y)\in \Ker \pi $.
+\end{problem}
+\begin{proof}
+	Since $-\left( x^3-z \right) ,x^2-y\in R$, and since $R^{\oplus 2} $ has scalar action given by left multiplication, we can write
+	\[
+		\left( -\left( x^3-z \right) ,x^2-y \right) =-\left( x^3-z \right) (1,0)+\left( x^2-y \right) (0,1)
+	.\]
+	Since $\pi $ is $R$-linear, it preserves scalar multiplication, meaning this maps under $\pi $ to the element
+\[
+	-\left( x^3-z \right) \pi (1,0)+\left( x^2-y \right) \pi (0,1) = -\left( x^3-z \right) \left( x^2-y \right) +\left( x^2-y \right) \left( x^3-z \right) =0
+.\]
+The final step follows since $k$ is a field, and in particular a commutative ring, meaning so is $R=k[x,y,z]$.
+\end{proof}
+\begin{problem}
+	Justify why $R$ is a UFD.
+\end{problem}
+\begin{proof}
+	Polynomial rings over fields are UFDs. Since $k$ is a field and $R$ is a polynomial ring over $k$, $R$ must be a UFD.
+\end{proof}
+\begin{problem}
+	Show that $x^3-z$ and $x^2-y$ are irreducible in $R$.
+\end{problem}
+\begin{proof}
+	We can view $x^3-z$ as a polynomial in $(k[x,y])[z]$. The degree of $x^3-z$ in $z$ is 1, so any factorization $x^3-z=fg$ must have either $f$ or $g$ with degree 1 in $z$, and the other with degree 0 in $z$. Without loss of generality take $g$ to have degree 0 in $z$. Thus $g\in k[x,y]$. Since $f$ has degree 1 in $z$, we can write $f=a(x,y)z+b(x,y)$ for some $a,b\in k[x,y]$. The equation is then
+	\[
+		g(x,y)\left( a(x,y)z+b(x,y) \right) =x^3-z
+	.\]
+	In particular we see that $g(x,y)a(x,y)z=-z$, and since $R$ is an integral domain, we cancel $z$ to obtain $g(x,y)a(x,y)=-1$. Thus $g(x,y)$ is a unit with $-a$ as its inverse, meaning that any factorization $gf$ is actually just an associate of $x^3-z$. This is not a true factorization, meaning $x^3-z$ is irreducible.
+
+	We can use the same logic for the other polynomial. Taking $x^2-y$ over $(k[x,z])[y]$, we factor it as $fg$ for $f$ with $y$-degree 1 and $g$ with $y$-degree 0. Then $f=a(x,z)y+b(x,z)$ and $g\in k[x,z]$, so
+	\[
+		x^2-y = g(x,z)\left( a(x,z)y+b(x,z) \right) =g(x,z)a(x,z)y + g(x,z)b(x,z)
+	.\]
+	We then have $g(x,z)a(x,z)y = -y$, and since $R$ is an integral domain, $ga=-1$. Therefore $g$ is a unit, and $fg$ is an assocaite of $x^2-y$ rather than a factorization. Therefore $x^2-y$ is also irreducible.
+\end{proof}
+\begin{problem}
+	Use the past two parts to show that any $(a,b)\in \Ker \pi $ is a multiple of $(-x^3+z,x^2-y)$.
+\end{problem}
+\begin{proof}
+	For simplicity, write $f(x,y,z)=x^2-y$ and $g(x,y,z)=x^3-z$. A pair $(a,b)\in \Ker \pi $ must satisfy
+	\[
+		\pi (a,b)=a\pi (1,0)+b\pi (0,1)=af+bg=0
+	.\]
+	This yields $af=-bg$. Since $k$ is a field, $R$ is a UFD. Since $f$ is irredicuble and irreducibles in UFDs are prime, $f$ must divide $-bg$. Note that $f$ does not divide $g$ since $f$ has degree 1 in $z$ and $g$ has degree 0 in $z$, and degree 1 polynomials cannot divide degree 0 polynomials. Thus $f$ does not divide $g$, meaning $f$ divides $b$. Writing $b=hf$ for some polynomial $h$, we obtain $af=-hfg$. Since $R$ is an integral domain and is commutative, we can cancel $f$ yielding $a=hg$. Thus $(a,b)=(hf,-hg)$. If we redefine $h$ to include an extra factor of $-1$, which is possible since $-1$ is a unit, we obtain $(a,b)=(-hf,hg)=h(-f,g)$. Therefore $\Ker \pi \subseteq \left\langle f,g \right\rangle $. The other direction of inclusion follows immediately by part 2 and $R$-linearity of $\pi $.
+\end{proof}
+\begin{problem}
+	Describe the $R$-module homomorphisms in the free presentation
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[r]  & R\ar[" i ", r]  & R^{\oplus 2} \ar[" \pi  ", r]  & I\ar[r]  & 0.
+	\end{tikzcd}\]
+\end{problem}
+\begin{proof}
+	This presentation is a short exact sequence, and is in particular exact. This implies that $\Im \pi = \Ker 0 = I$, so $\pi $ is surjective. It makes sense to use the same $\pi $ we found in part 1. Exactness at $R$ implies that $i$ is injective, and exactness at $R^{\oplus 2} $ implies that $\Im i = \Ker \pi $, and by part 4 we have $\Ker \pi =\langle(-(x^3-z),x^2-y)\rangle$. We can simply define $i : 1\mapsto (-(x^3-z),x^2-y)$ and exactness at $R^{\oplus 2} $ is immedaitely satisfied. To show exactness at $R$, we need to show injectivity of $i$. This follows since $R$ is an integral domain and thus the cancellation applies. Suppose we have $f(x,y,z),g(x,y,z)\in R$ with $i(f)=i(g)$.
+	\[
+		i(f) = f(x,y,z)\left( -(x^3-z),x^2-y \right) = g(x,y,z)\left( -(x^3-z),x^2-y \right) =i(g)
+	.\]
+	Distributing $f$ and $g$ into the tuple yields equalities
+	\[
+		-f(x,y,z)\left( x^3-z \right) =-g(x,y,z)\left( x^3-z \right) ,
+	\]
+	\[
+		f(x,y,z)\left( x^2-y \right) =g(x,y,z)\left( x^2-y \right) 
+	.\]
+	On either equality, cancel the other polynomial on the right to obtain $f=g$. This proves injectivity.
+\end{proof}
+
+\section{Problem 8}
+\begin{problem}\label{8.1}
+	Let $A_1, \ldots ,A_n$ be $R$-modules and $B_i \subseteq A_i$ a $R$-submodule for all $i$. Show there is an isomorphism
+	\[
+		\bigoplus_{i=1} ^n \frac{A_i}{B_i} \cong \frac{\bigoplus_{i=1} ^n A_i}{\bigoplus_{i=1} ^n B_i} 
+	.\]
+\end{problem}
+\begin{remark}
+	My approach to this problem was inspired by the identities the projectionss and inclusions of a biproduct satisfy, and I thought it might simplify the proof. It did not.
+\end{remark}
+\begin{proof}
+	First we prove the case
+	\[
+		\frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \cong \frac{A_1\oplus A_2}{B_1\oplus B_2} 
+	.\]
+	Since $\oplus $ is a coproduct, there exist natural inclusions $A_1,A_2 \hookrightarrow A_1\oplus A_2$. It follows by universality of quotient that given the diagrams of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A_1 \ar[" i_{A_1}  ", hook, r]\ar[" p  "', d] \  & A_1 \oplus A_2 \ar[" \widetilde{p}  ", d]  & A_2 \ar[" i_{A_2}   ", hook, r] \ar[" p "', d]  & A_1 \oplus A_2 \ar[" \widetilde{p}  ", d]  \\
+	A_1/B_1 \ar[" \varphi_1 "', dashed, r]  & \frac{A_1 \oplus A_2}{B_1 \oplus B_2}  & A_2/B_2 \ar[" \varphi _2 "', dashed, r]  & \frac{A_1 \oplus A_2}{B_1\oplus B_2} 
+	\end{tikzcd}\]
+	there exist unique dashed arrows as indicated, rendering the diagrams commutative. This of course follows since $\iota (B_1) = B_1 \times \left\{ 0 \right\} \subseteq B_1 \oplus B_2$, and the same for the other diagram. Coproducting yields the dashed arrow $\varphi $
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A_1/B_1 \ar[" \varphi _1 ", dr] \ar[" \iota_A  "', hook, d]  &  \\
+	\frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \varphi  "', dashed, r]  & \frac{A_1\oplus A_2}{B_1\oplus B_2}  \\
+	A_2/B_2 \ar[" \iota_B  "', hook, u] \ar[" \varphi _2 "', ur]  & 
+	\end{tikzcd}\]
+	which is unique with respect to rendering the diagram commutative.
+
+	Additionally, since $\oplus $ is a product, there exist natural projections $A_1\oplus A_2 \to A_1,A_2$. Given the diagrams of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A_1\oplus A_2 \ar[" \widetilde{p}  "', d] \ar[" p_{A_1}  ", r]  & A_1 \ar[" p  ", d]  & A_1\oplus A_2 \ar[" p_{A_2}   ", r] \ar[" \widetilde{p} "', d]  & A_2 \ar[" p  ", d] \\
+	\frac{A_1\oplus A_2}{B_1\oplus B_2} \ar[" \pi _1 "', dashed, r]  & A_1/B_1 & \frac{A_1\oplus A_2}{B_1\oplus B_2} \ar[" \pi _2 "', dashed, r]  & A_2/B_2
+	\end{tikzcd}\]
+	universality of quotient yields unique dashed as indicated, rendering the diagrams commtutative. This once again follows since $\pi (B_1 \oplus B_2)$ is either $B_1$ or $B_2$, depending which diagram we are in, which get identified to 0 in the quotient. Producting yields the dashed arrow $\pi $
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & A_1/B_1 \\
+	\frac{A_1\oplus A_2}{B_1\oplus B_2} \ar[" \pi _1 ", ur] \ar[" \pi _2 "', dr] \ar[" \pi  ", dashed, r]  & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \pi_A  "', u] \ar[" \pi_B  ", d]  \\
+	 & A_2/B_2
+	\end{tikzcd}\]
+	which is unique with respect to rendering the diagram commutative. Note that $\pi _A \circ \iota _A=1$ and $\pi _B \circ \iota _B=1$\footnote{This holds in any $\Ab $-enriched category with finite (co)products; see \cite{ml} \S VIII.2 Theorem 2, or see Proposition 2.1 in \href{https://ncatlab.org/nlab/show/additive+category}{this entry} on the $n$Lab and the definition of a biproduct.}, so we claim that the diagram of solid arrows
+	\[\begin{tikzcd}
+	&& {\frac{A_1}{B_1}} \\
+	{\frac{A_1\oplus A_2}{B_1\oplus B_2}} &&& {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} \\
+	&& {\frac{A_1}{B_1}} && {\frac{A_2}{B_2}} \\
+	{\frac{A_1\oplus A_2}{B_1\oplus B_2}} &&& {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} \\
+	&&&& {\frac{A_2}{B_2}}
+	\arrow[dotted, " 1 ", from=4-4, to=2-4]
+	\arrow[" \varphi_1 "', from=3-3, to=4-1]
+	\arrow[" \iota _A ", from=3-3, to=4-4]
+	\arrow[" 1 ",  from=3-3, to=1-3]
+	\arrow[" \varphi  "', from=4-4, to=4-1]
+	\arrow[" \iota _B "', from=5-5, to=4-4]
+	\arrow[" \varphi _2 ", from=5-5, to=4-1]
+	\arrow[" 1 ", from=4-1, to=2-1]
+	\arrow[" \pi _1 ", from=2-1, to=1-3]
+	\arrow[" \pi  ", from=2-1, to=2-4, crossing over]
+	\arrow[" \pi _2 "', from=2-1, to=3-5, crossing over]
+	\arrow[" \pi _A "', from=2-4, to=1-3]
+	\arrow[" \pi _B ", from=2-4, to=3-5]
+	\arrow[" 1 "', from=5-5, to=3-5]
+\end{tikzcd}\]
+commutes. Showing that the diagram commutes with the inclusion of the dotted arrow is precisely what we must show to prove this direction. For now, we focus on the diagram of solid arrows. Although it cannot be seen, the map $A_1/B_1 \to A_1/B_1$ is the identity. The direction of the identity maps in this diagram is important, as $\pi _{A,B} $ and $\iota _{A,B} $ are not inverses, but only sections.
+
+The commutativity of the diagram is actually nontrivial to see, since it is not yet clear that $\pi _1 \circ \varphi _1=1$ and $\pi _2 \circ \varphi _2=1$. Consider the cube
+\[\begin{tikzcd}
+	{A_1} && {A_1} \\
+	& {\frac{A_1}{B_1}} && {\frac{A_1}{B_1}} \\
+	{A_1\oplus A_2} && {A_1\oplus A_2} \\
+	& {\frac{A_1\oplus A_2}{B_1\oplus B_2}} && {\frac{A_1\oplus A_2}{B_1\oplus B_2}}
+	\arrow["1", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["{\iota_A}"', from=1-1, to=3-1]
+	\arrow["p", from=1-3, to=2-4]
+	\arrow["{\pi_A}"', from=3-3, to=1-3]
+	\arrow["1", from=2-2, to=2-4, crossing over]
+	\arrow["1", from=3-1, to=3-3]
+	\arrow["{\varphi_1}"', from=2-2, to=4-2, crossing over]
+	\arrow["\widetilde{p}", from=3-1, to=4-2]
+	\arrow[" \widetilde{p}", from=3-3, to=4-4]
+	\arrow["1", from=4-2, to=4-4]
+	\arrow["{\pi_1}"', from=4-4, to=2-4]
+\end{tikzcd}\]
+The unlabeled map $A_1\oplus A_2\to A_1\oplus A_2$ is the identity. The only face for which commutativity is not clear is the front face. Since the arrow directions are not the usual directions for such a diagram, this is not immediately implied, so we must do a short diagram chase. We first prove the equality
+\[
+	\pi _1 \circ 1 \circ \varphi _1 \circ p = p
+.\]
+By commutativity of the left face, we obtain $\varphi _1 \circ p = \widetilde{p} \circ \iota _A$. By commutativity of the bottom face and this relation, we obtain
+\[
+	1 \circ \varphi _1 \circ p = 1 \circ \widetilde{p} \circ \iota _A = \widetilde{p} \circ 1 \circ \iota _A
+.\]
+By this relation and the commutativity of the right square, we obtain
+\[
+	\pi _1 \circ 1 \circ \varphi _1 \circ p = \pi _1 \circ 1 \circ \widetilde{p} \circ \iota _A = \pi _1 \circ \widetilde{p} \circ 1 \circ \iota _A = p \circ \pi _A \circ 1 \circ \iota _A
+.\]
+By commutativity of the top face,
+\[
+	p \circ \pi _A \circ 1 \circ \iota _A = p \circ 1 = p
+.\]
+Therefore,
+\[
+	\pi _1 \circ 1 \circ \varphi _1 \circ p = p
+.\]
+Now note that the projections onto quotients are surjections. Since surjections have right-inverses in $\Set $, even though we are working in $R$-$\Mod$ instead of $\Set $, we can still precompose by a section of $p$ to cancel it, yielding the equality
+\[
+	\pi _1 \circ 1 \circ \varphi _1 = 1,
+\]
+as required. The same argument shows $\pi _2 \circ 1 \circ \varphi _2 = 1$. Both diagrams therefore commute, as claimed. This shows the solid arrows in the wedge diagram commute, so we now focus on the dotted arrow.
+
+Observe that we have morphisms
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\frac{A_1}{B_1}\ar[" \varphi _1 "', bend right, rr]  \ar[" \iota _A ", r] \ar[" 1 ", bend left, rrrr]  & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \varphi  ", r]  & \frac{A_1\oplus A_2}{B_1\oplus B_2} \ar[" \pi _1 ",bend right, rr] \ar[" \pi  ", r] & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \pi _A ", r]  & \frac{A_1}{B_1} ,
+\end{tikzcd}\]
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\frac{A_2}{B_2}\ar[" \varphi _2 "', bend right, rr]  \ar[" \iota _B ", r] \ar[" 1 ", bend left, rrrr]  & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \varphi  ", r]  & \frac{A_1\oplus A_2}{B_1\oplus B_2} \ar[" \pi _2 ",bend right, rr]\ar[" \pi  ", r]  & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \pi _B ", r] & \frac{A_2}{B_2} .
+\end{tikzcd}\]
+We can thus form a diagram
+\[\begin{tikzcd}
+	{\frac{A_1}{B_1}} & {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} & {\frac{A_1}{B_1}} \\
+	{\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} &&& {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} \\
+	{\frac{A_2}{B_2}} & {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} & {\frac{A_1}{B_1}}
+	\arrow["{\iota_A}", from=1-1, to=1-2]
+	\arrow["1", curve={height=-24pt}, from=1-1, to=1-4]
+	\arrow["\varphi", from=1-2, to=1-3]
+	\arrow["{\pi_1}", from=1-3, to=1-4]
+	\arrow["{\pi_A}", from=2-1, to=1-1]
+	\arrow["{\pi_A}"', from=2-1, to=1-4]
+	\arrow[dashed, from=2-1, to=2-4]
+	\arrow["{\pi_B}"', from=2-1, to=3-1]
+	\arrow["{\pi_B}"', from=2-1, to=3-4]
+	\arrow["{\pi_A}"', from=2-4, to=1-4]
+	\arrow["{\pi_B}", from=2-4, to=3-4]
+	\arrow["{\iota_B}"', from=3-1, to=3-2]
+	\arrow["1"', curve={height=24pt}, from=3-1, to=3-4]
+	\arrow["\varphi"', from=3-2, to=3-3]
+	\arrow["{\pi_2}"', from=3-3, to=3-4]
+\end{tikzcd}\]
+The dashed arrow is both the product $(\pi _1 \circ \varphi \circ \iota_A)\times (\pi _2 \circ \varphi \circ \iota _B)$ given by the product bifunctor, but as can also be seen it must also arise by universality in the product diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & \frac{A_1}{B_1}  \\
+\frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \pi _A ", ur] \ar[" \pi _B "', dr] \ar[dashed, r]  & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[" \pi _A "', u] \ar[" \pi _B ", d]  \\
+ & \frac{A_2}{B_2} 
+\end{tikzcd}\]
+The dashed arrow therefore must be the identity morphism. We claim that $\pi \circ \varphi $ also suffices as the dashed arrow; we will then have that $\pi \circ \varphi =1$ by uniqueness. This means we must show $\pi _A \circ \pi \circ \varphi =\pi _A$, and the same for $\pi _B$. Consider the diagram
+\[\begin{tikzcd}
+	{\frac{A_1}{B_1}} && {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} && {\frac{A_1}{B_1}} \\
+	{\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} && {\frac{A_1\oplus A_2}{B_1\oplus B_2}} && {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} \\
+	{\frac{A_2}{B_2}} && {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} && {\frac{A_1}{B_1}}
+	\arrow["{\iota_A}", from=1-1, to=1-3]
+	\arrow["1"', curve={height=-30pt}, from=1-1, to=1-5]
+	\arrow["{\iota_A}", from=1-1, to=2-1]
+	\arrow["{\varphi_1}", from=1-1, to=2-3]
+	\arrow["{\pi_A}", from=1-3, to=1-5]
+	\arrow["\varphi", from=2-1, to=2-3]
+	\arrow["{\pi_1}", from=2-3, to=1-5]
+	\arrow["\pi", from=2-3, to=2-5]
+	\arrow["{\pi_2}"', from=2-3, to=3-5]
+	\arrow["{\pi_A}"', from=2-5, to=1-5]
+	\arrow["{\pi_B}", from=2-5, to=3-5]
+	\arrow["{\iota_B}", from=3-1, to=2-1]
+	\arrow["{\varphi_2}"', from=3-1, to=2-3]
+	\arrow["{\iota_B}"', from=3-1, to=3-3]
+	\arrow["1"', curve={height=30pt}, from=3-1, to=3-5]
+	\arrow["{\pi_B}"', from=3-3, to=3-5]
+\end{tikzcd}\]
+which witnesses the equalities
+\[
+	\pi_A \circ \pi \circ \varphi \circ \iota _A = \pi _A \circ \iota _A
+\]
+\[
+	\pi _A \circ \pi \circ \varphi \circ \iota _B = \pi _1 \circ \varphi_2
+.\]
+In particular, the dashed arrows in both coproduct diagrams
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\frac{A_1}{B_1} \ar[" \pi _A \circ \pi \circ \varphi \circ \iota _A ", dr] \ar[" \iota _A "', d]  &  & \frac{A_1}{B_1} \ar[" \pi _A\circ \iota _A ", dr] \ar[" \iota _A "', d]  &  \\
+\frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[dashed, r]  & \frac{A_1\oplus A_2}{B_1\oplus B_2}  & \frac{A_1}{B_1} \oplus \frac{A_2}{B_2} \ar[dashed, r]  & \frac{A_1\oplus A_2}{B_1\oplus B_2}  \\
+\frac{A_2}{B_2} \ar[" \iota _B ", u] \ar[" \pi _A\circ \pi \circ \varphi \circ \iota _B "', ur]  &  & \frac{A_2}{B_2} \ar[" \iota _B ", u] \ar[" \pi _1 \circ \varphi _2 "', ur]  & 
+\end{tikzcd}\]
+must be equal. We see in the first diagram that $\pi _A \circ \pi \circ \varphi $ suffices as a dashed arrow. We claim $\pi _A$ suffices as a dashed arrow for the second diagram. Returning to the definitions, we consider the diagram
+
+\[\begin{tikzcd}[row sep = 3em, column sep = 4em] A_2 \ar["i_{A_2}", r] \ar["p", d] & A_1 \oplus A_2 \ar["\widetilde{p}", d] \ar["p_{A_1}", r] & A_1 \ar["p", d] \\ A_2/B_2 \ar["\varphi_2", r] & \frac{A_1 \oplus A_2}{B_1 \oplus B_2} \ar["\pi_1", r] & A_1/B_1 \end{tikzcd}\]
+We claim that the top composite is 0. Indeed, chasing elements we see for any $a\in A_2$,
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	a \ar[" i_{A_2}  ", mapsto,r]  & (a,0) \ar[" p_{A_1}  ", r] & 0.
+\end{tikzcd}\]
+We thus have by commutativity of the diagram that
+\[
+	0 = p \circ  0 = p \circ (p_{A_1} \circ i_{A_2} ) = \pi _1 \circ \varphi _2 \circ p
+.\]
+Since $p$ is surjective, it has a right inverse $j$. We then have
+\[
+	0 = 0 \circ j = \pi _1 \circ \varphi _2 \circ p \circ j = \pi _1 \circ \varphi _2
+.\]
+Therefore, $\pi _1 \circ \varphi _2 = 0$. It thus suffices to show that $\pi _A \circ \iota _B = 0$ as well. This actually follows by the exact same proof by arbitrarity of $A_1$ and $A_2$; we have shown that the injection onto the second component composed with the projection onto the first of any direct sum of two $R$-modules is 0. This is precisely what $\pi _A \circ \iota _B$ is. Therefore, $\pi _A \circ \iota _B = 0 = \pi _1 \circ \varphi _2$, meaning that $\pi _A$ indeed suffices as a dashed arrow in the above coproduct diagram. By universality,
+\[
+	\pi _A = \pi _A \circ \pi \circ \varphi 
+.\]
+The same proof shows the same for $\pi _B$. This shows that $\pi \circ \varphi $ suffices as the dashed arrow in the relevant product diagram, which we already showed is the identity, proving that $\pi \circ \varphi =1$. Therefore, the wedge diagram we drew at the start indeed commutes.
+
+
+Now we show the other direction, which is that $\varphi \circ \pi =1$. Na\"ively we might choose to consider the diagram
+\[\begin{tikzcd}
+	&& {\frac{A_1}{B_1}} \\
+	{\frac{A_1\oplus A_2}{B_1\oplus B_2}} && {\frac{A_1}{B_1}\oplus\frac{A_2}{B_2}} && {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	&& {\frac{A_2}{B_2}}
+	\arrow["{\iota_A}", shift left, from=1-3, to=2-3]
+	\arrow["{\varphi_1}", from=1-3, to=2-5]
+	\arrow["{\pi_1}", from=2-1, to=1-3]
+	\arrow["\pi", from=2-1, to=2-3]
+	\arrow["{\pi_2}"', from=2-1, to=3-3]
+	\arrow["{\pi_A}", shift left, from=2-3, to=1-3]
+	\arrow["\varphi", from=2-3, to=2-5]
+	\arrow["{\pi_B}"', shift right, from=2-3, to=3-3]
+	\arrow["{\iota_B}"', shift right, from=3-3, to=2-3]
+	\arrow["{\varphi_2}", from=3-3, to=2-5]
+\end{tikzcd}\]
+However, this diagram does not commute; only each individual triangle commutes. The reason commutativity fails is since $\iota _A\circ \pi _A,\iota _B \circ \pi _B \neq 1$. However, we have another identity.
+
+Let $M,N$ be $R$-modules, $(m,n)\in M\oplus N$, and $\pi _M,\pi _N,\iota _M,\iota _N$ be the natural projections and inclusions. Then
+\[
+	((\iota _M \circ \pi _M)+(\iota _N\circ \pi _N))(m,n) = (\iota _M\circ \pi _M)(m,n)+(\iota _N\circ \pi _N)(m,n)=\iota _M(m)+\iota _N(n)=(m,0)+(0,n)
+\]
+\[
+	=(m,n)
+.\]
+Therefore, $(\iota _M\circ \pi _M)+(\iota _N\circ \pi _N)=1$. We can describe this situation diagrammatically as the statement that the horizontal composite in the diagram
+\[\begin{tikzcd}
+	& {M\oplus N} & M & {M\oplus N} \\
+	{M\oplus N} & {\left(M\oplus N\right)\oplus \left(M\oplus N\right)} && {\left(M\oplus N\right)\oplus \left(M\oplus N\right)} & {M\oplus N} \\
+	& {M\oplus N} & N & {M\oplus N}
+	\arrow["{\pi_M}", from=1-2, to=1-3]
+	\arrow[equals, from=2-1, to=1-2]
+	\arrow[equals, from=2-1, to=3-2]
+	\arrow["{\iota_M}", from=1-3, to=1-4]
+	\arrow["\delta", from=2-1, to=2-2]
+	\arrow["{q_1}", from=2-2, to=1-2]
+	\arrow[dashed, from=2-2, to=2-4]
+	\arrow["{q_2}"', from=2-2, to=3-2]
+	\arrow["{q_1}"', from=2-4, to=1-4]
+	\arrow["{+}", from=2-4, to=2-5]
+	\arrow["{q_2}", from=2-4, to=3-4]
+	\arrow["{\pi_N}"', from=3-2, to=3-3]
+	\arrow["{\iota_N}"', from=3-3, to=3-4]
+\end{tikzcd}\]
+is the identity, where $\delta $ is the diagonal morphism $m\mapsto (m,m)$, the dashed arrow is given by universality of product, the maps $q_i$ are natural projections, and $+$ is the linear map $(a,b)\mapsto a+b$. It's actually harder to see that $+$ is linear than it is to see that this composite is indeed equal to $(\iota _M\circ \pi _M)+(\iota _N\circ \pi _N)=1$, so we show this. Given $m,n,p,q\in P$ for $P$ some $R$-module and $c\in R$,
+\[
+	+(cm,cn) = cm+cn = c(m+n) = c(+(m,n)),
+\]
+\[
+	+((m,n)+(p,q))=+(m+p,n+q)=m+p+n+q=m+n+p+q=+(m,n)++(p,q)	
+.\]
+We acknowledge that this notation is terrible when working with elements. However, we have indeed shown that $+$ is linear.
+
+We can apply this identity to our problem by considering the commutative diagrams
+\[\begin{tikzcd}[row sep = 3em, column sep = 4em] A_1 \oplus A_2 \ar["\widetilde{p}"', d] \ar["\pi_{A_1}", r] & A_1 \ar["\iota_{A_1}", r] \ar["p_1", d] & A_1 \oplus A_2 \ar["\widetilde{p}", d] \\ \frac{A_1 \oplus A_2}{B_1 \oplus B_2} \ar["\pi_1", r] & A_1/B_1 \ar["\iota_1", r] & \frac{A_1 \oplus A_2}{B_1 \oplus B_2} \end{tikzcd}\]
+\[\begin{tikzcd}[row sep = 3em, column sep = 4em] A_1 \oplus A_2 \ar["\widetilde{p}"', d] \ar["\pi_{A_2}", r] & A_2 \ar["\iota_{A_2}", r] \ar["p_2", d] & A_1 \oplus A_2 \ar["\widetilde{p}", d] \\ \frac{A_1 \oplus A_2}{B_1 \oplus B_2} \ar["\pi_2", r] & A_2/B_2 \ar["\iota_2", r] & \frac{A_1 \oplus A_2}{B_1 \oplus B_2} \end{tikzcd}\]
+We can sum $(\varphi _1\circ \pi _1 \circ \widetilde{p} )+(\varphi_2 \circ \pi _2 \circ \widetilde{p} )$. It is helpful to view this diagrammatically:
+\[\begin{tikzcd}
+	&& {A_1} & {A_1\oplus A_2} \\
+	& {A_1\oplus A_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} & {A_1/B_1} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	{A_1\oplus A_2} & {\left(A_1\oplus A_2\right)\oplus\left(A_1\oplus A_2\right)} &&& {\left(\frac{A_1\oplus A_2}{B_1\oplus B_2}\right)\oplus\left(\frac{A_1\oplus A_2}{B_1\oplus B_2}\right)} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	& {A_1\oplus A_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} & {A_2/B_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	&& {A_2} & {A_1\oplus A_2}
+	\arrow["{\iota_{A_1}}", from=1-3, to=1-4]
+	\arrow["p", from=1-3, to=2-4]
+	\arrow["{\tilde{p}}", from=1-4, to=2-5]
+	\arrow["{\pi_{A_1}}", from=2-2, to=1-3]
+	\arrow["{\tilde{p}}", from=2-2, to=2-3]
+	\arrow["{\pi_1}", from=2-3, to=2-4]
+	\arrow["{\varphi_1}", from=2-4, to=2-5]
+	\arrow[equals, from=3-1, to=2-2]
+	\arrow["\delta", from=3-1, to=3-2]
+	\arrow[equals, from=3-1, to=4-2]
+	\arrow["{q_1}"', from=3-2, to=2-2]
+	\arrow[dashed, from=3-2, to=3-5]
+	\arrow["{q_2}", from=3-2, to=4-2]
+	\arrow["{q_1}"', from=3-5, to=2-5]
+	\arrow["{+}", from=3-5, to=3-6]
+	\arrow["{q_2}", from=3-5, to=4-5]
+	\arrow["{\tilde{p}}"', from=4-2, to=4-3]
+	\arrow["{\pi_{A_2}}"', from=4-2, to=5-3]
+	\arrow["{\pi_2}"', from=4-3, to=4-4]
+	\arrow["{\varphi_2}"', from=4-4, to=4-5]
+	\arrow["p"', from=5-3, to=4-4]
+	\arrow["{\iota_{A_2}}"', from=5-3, to=5-4]
+	\arrow["{\tilde{p}}"', from=5-4, to=4-5]
+\end{tikzcd}\]
+We can glue this diagram to the diagram witnessing the addition $(\widetilde{p} \circ \iota_{A_1} \circ \pi _{A_1} )+(\widetilde{p} \circ \iota _{A_2} \circ \pi _{A_2} )$:
+\[\begin{tikzcd}[row sep=1.5em, column sep=1.5em]
+	& {A_1\oplus A_2} & {A_2} & {A_1\oplus A_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	&& {\left(A_1\oplus A_2\right)\oplus\left(A_1\oplus A_2\right)} &&& {\left(\frac{A_1\oplus A_2}{B_1\oplus B_2}\right)\oplus\left(\frac{A_1\oplus A_2}{B_1\oplus B_2}\right)} \\
+	&&& {A_1\oplus A_2} & {A_1} & {A_1\oplus A_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	& {A_1\oplus A_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} & {\frac{A_2}{B_2}} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	{A_1\oplus A_2} && {\left(A_1\oplus A_2\right)\oplus \left(A_1\oplus A_2\right)} &&& {\left(\frac{A_1\oplus A_2}{B_1\oplus B_2}\right)\oplus\left(\frac{A_1\oplus A_2}{B_1\oplus B_2}\right)} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} \\
+	&&& {A_1\oplus A_2} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}} & {\frac{A_1}{B_1}} & {\frac{A_1\oplus A_2}{B_1\oplus B_2}}
+	\arrow["{\pi_{A_2}}", from=1-2, to=1-3]
+	\arrow["{\iota_{A_2}}", from=1-3, to=1-4]
+	\arrow["p", from=1-3, to=4-4]
+	\arrow["{\tilde{p}}", from=1-4, to=1-5]
+	\arrow["{q_2}"', from=2-3, to=1-2]
+	\arrow["{q_1}"', from=2-3, to=3-4, crossing over]
+	\arrow["{q_2}"', from=2-6, to=1-5]
+	\arrow["{q_1}", from=2-6, to=3-7]
+	\arrow["{\pi_{A_1}}", from=3-4, to=3-5]
+	\arrow["{\iota_{A_1}}", from=3-5, to=3-6]
+	\arrow["{\tilde{p}}", from=3-6, to=3-7]
+	\arrow[equals, from=4-2, to=1-2]
+	\arrow["{\tilde{p}}", from=4-2, to=4-3]
+	\arrow["{\pi_2}", from=4-3, to=4-4]
+	\arrow["{\varphi_2}", from=4-4, to=4-5]
+	\arrow[equals, from=4-5, to=1-5]
+	\arrow["\delta", from=5-1, to=2-3]
+	\arrow[equals, from=5-1, to=4-2]
+	\arrow["\delta", from=5-1, to=5-3]
+	\arrow[equals, from=5-1, to=6-4]
+	\arrow[equals, from=5-3, to=2-3]
+	\arrow[dashed, from=2-3, to=2-6, crossing over]
+	\arrow[" q_2 ", from=5-3, to=4-2]
+	\arrow[dashed, from=5-3, to=5-6]
+	\arrow[" q_1 "', from=5-3, to=6-4]
+	\arrow[" q_2 ", from=5-6, to=4-5]
+	\arrow["{+}", from=5-6, to=5-7]
+	\arrow[" q_1 "', from=5-6, to=6-7]
+	\arrow[equals, from=6-4, to=3-4]
+	\arrow["{\tilde{p}}"', from=6-4, to=6-5]
+	\arrow["p", from=3-5, to=6-6, crossing over]
+	\arrow["{\pi_1}"', from=6-5, to=6-6]
+	\arrow["{\varphi_1}"', from=6-6, to=6-7]
+	\arrow[equals, from=6-7, to=3-7]
+	\arrow[equals, from=5-6, to=2-6]
+\end{tikzcd}\]
+Every face of the diagram commutes either by universality, by definition, or by the identity morphism being an identtity. Unlabeled or unreadable arrows should be interpreted as whatever seems most natural and renders the diagram commutative. Therefore, the entire diagram commutes. We thus have an equality
+\[
+	( \widetilde{p} \circ \iota _{A_1} \circ \pi _{A_1} )+( \widetilde{p} \circ \iota _{A_2} \circ \pi _{A_2} ) = (\varphi _1 \circ \pi _1 \circ \widetilde{p} ) + (\varphi _2 \circ \pi _2 \circ \widetilde{p} )
+.\]
+Recall that addition distributes over composition. Focusing on the left side of the equality, we can factor out $\widetilde{p} $ and apply our identity with the inclusions and projections to obtain
+\[
+	( \widetilde{p} \circ \iota _{A_1} \circ \pi _{A_1} )+( \widetilde{p} \circ \iota _{A_2} \circ \pi _{A_2} )=\widetilde{p} \circ (\left( \iota _{A_1} \circ \pi _{A_1}  \right) +\left( \iota _{A_2} \circ \pi _{A_2}  \right)) = \widetilde{p} \circ 1= \widetilde{p} 
+.\]
+The right hand side also distributes to
+\[
+	(\varphi _1 \circ \pi _1 \circ \widetilde{p} ) + (\varphi _2 \circ \pi _2 \circ \widetilde{p} ) = \left( (\varphi _1\circ \pi _1)+(\varphi _2\circ \pi _2) \right) \circ \widetilde{p} 
+.\]
+We thus have
+\[
+	\widetilde{p} = \left( (\varphi _1\circ \pi _1)+(\varphi _2\circ \pi _2) \right) \circ \widetilde{p} 
+.\]
+Since $\widetilde{p} $ is surjective, we have seen already it cancels, yielding
+\[
+	\left( \varphi _1\circ \pi _1 \right) +\left( \varphi _2\circ \pi _2 \right) =1
+.\]
+It suffices to show this sum is $\varphi \circ \pi $. This can be done without diagrams. Note that
+\begin{align*}
+	\varphi \circ \pi &= \varphi \circ 1 \circ \pi \\
+			  &=\varphi \circ (\iota_A\circ \pi _A + \iota _B \circ \pi _B)\circ \pi \\
+			  &=(\varphi \circ \iota _A)\circ (\pi _A\circ \pi )+(\varphi \circ \iota _B)\circ (\pi _B\circ \pi )
+.\end{align*}
+Since $\varphi $ arose from a coproduct diagram, by definition we have $\varphi \circ \iota _A = \varphi _1$ and $\varphi \circ \iota _B = \varphi _2$. Similarly since $\pi $ arose from a product diagram, we have $\pi _A\circ \pi =\pi _1$ and $\pi _B \circ \pi =\pi _2$. The equation thus reads
+\[
+	\varphi \circ \pi  = \varphi _1 \circ \pi _1 + \varphi _2 \circ \pi _2,
+\]
+as claimed. Therefore $\varphi \circ \pi =1$.
+
+
+
+Using the case we have proven, the theorem follows by a short induction argument. To review notation, we want to show
+\[
+	\bigoplus_{i=1} ^n \frac{A_i}{B_i} \cong \frac{\bigoplus_{i=1} ^n A_i}{\bigoplus_{i=1} ^n B_i} 
+.\]
+The case for $n=1$ reads
+\[
+	\frac{A_1}{B_1} \cong \frac{A_1}{B_1} 
+\]
+which holds since the identity morphism is an isomorphism. Assume the statement holds for arbitrary $n$, and write
+\[
+	\bigoplus_{i=1} ^{n+1} \frac{A_i}{B_i} \cong \left( \bigoplus_{i=1} ^n \frac{A_i}{B_i}  \right) \oplus \frac{A_{n+1} }{B_{n+1} } \cong \left( \frac{\bigoplus_{i=1} ^n A_i}{\bigoplus_{i=1} ^nB_i}  \right) \oplus \frac{A_{n+1} }{B_{n+1} } ,
+\]
+where the last step follows by the inductive hypothesis. Applying the case for $n=2$ that we proved in great length, we have
+\[
+	\left( \frac{\bigoplus_{i=1} ^n A_i}{\bigoplus_{i=1} ^nB_i}  \right) \oplus \frac{A_{n+1} }{B_{n+1} } \cong \frac{\left( \bigoplus_{i=1} ^n A_i \right) \oplus A_{n+1} }{\left( \bigoplus_{i=1} ^nB_i \right) \oplus B_{n+1} } \cong \frac{\bigoplus_{i=1} ^{n+1} A_i}{\bigoplus_{i=1} ^{n+1} B_i} 
+.\]
+\end{proof}
+\begin{problem}\label{8.2}
+	Using the previous part, conclude that for any finitely generated free $R$-module $M$ with basis $\left\{ x_1, \ldots ,x_n \right\}$ and submodule $N$ with basis $\left\{ a_1x_1, \ldots ,a_mx_m \right\} $, $a_i\in R$ for all $i$, and $m\leq n$,
+	\[
+		\frac{M}{N} \cong R^{n-m} \oplus \bigoplus_{i=1} ^m \frac{R}{(a_i)} 
+	.\]
+\end{problem}
+\begin{proof}
+	Since $M$ has a basis of cardinality $n$, it is $n$-dimensional and can be written as $M \cong R^n$. We thus have
+	\[
+		\frac{M}{N} =\frac{\bigoplus_{i=1} ^n R}{N} 
+	.\]
+	By (a), it suffices only to show that
+	\[
+	N \cong \left(\bigoplus_{i=1} ^m (a_i)\right) \oplus \left( \bigoplus_{i=m+1}^n (0) \right) 
+	.\]
+	Since $x_i\in R$ for all $i$, we have $a_ix_i\in (a_i)$. 
+\end{proof}
+\begin{proof}
+    Since $M$ has a basis of cardinality $n$, it is $n$-dimensional and can be written as $M = \bigoplus_{i=1}^n Rx_i \cong R^n$. We identify $Rx_i \cong R$ via the map $rx_i \mapsto r$. Under this identification, the basis elements $a_ix_i$ of $N$ correspond to elements $a_i$ in the $i$-th copy of $R$ for $1\leq i \leq m$. Thus, we can decompose $N$ as
+    \[
+    N \cong \left(\bigoplus_{i=1} ^m (a_i)\right) \oplus \left( \bigoplus_{i=m+1}^n (0) \right) 
+    .\]
+    To simplify notation, define $a_i=0$ for $i>m$ such that 
+    \[
+    	N\cong \bigoplus_{i=1} ^n (a_i) \cong \left( \bigoplus_{i=1} ^m(a_i) \right) \oplus \left( \bigoplus_{i=m+1} ^n(0) \right) 
+    .\]
+    \Cref{8.1} and $R/0 \cong R$ then yield the isomorphisms
+    \[
+        \frac{M}{N} \cong \frac{\bigoplus_{i=1}^n R}{\bigoplus_{i=1}^n (a_i)} \cong \bigoplus_{i=1}^n \frac{R}{(a_i)} = \left( \bigoplus_{i=1}^m \frac{R}{(a_i)} \right) \oplus \left( \bigoplus_{i=m+1}^n \frac{R}{(0)} \right) \cong \left( \bigoplus_{i=1} ^m \frac{R}{(a_i)}  \right) \oplus \left( \bigoplus_{i=m+1} ^n R \right) 
+    \]
+    \[
+         \cong \left( \bigoplus_{i=1}^m \frac{R}{(a_i)} \right) \oplus R^{n-m}.
+    \]
+\end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}

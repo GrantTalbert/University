@@ -1,0 +1,49 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 6}
+\courseID{MA713}
+\begin{document}
+\makeproblem
+\begin{problem}
+	Let $X,Y$ be topological spaces. Prove that if $X$ is connected then a continuous locally constant function $f : X \to Y$ is constant.
+\end{problem}
+\begin{proof}
+	Suppose for contradiction that $f$ is not constant. We claim for all $y\in Y$, the fiber $f^{-1} (y)$ is open. To show this, let $x\in f^{-1} (y)$. Since $f$ is locally constant, there is an open neighborhood $x\in U_x\subseteq X$ such that $f$ is constant at $y$ along $U_x$. Then we can write
+	\[
+		f^{-1} (y) = \bigcup_{x\in f^{-1} (y)} U_x,
+	\]
+	which is a union of open sets, and thus open. Now note that
+	\[
+		X=\bigcup_{y\in Y} f^{-1} (y)
+	\]
+	is an open cover. Note also that since $f$ is well-defined, we have that the collection $\left\{ f^{-1} (y) \right\} _{y\in Y} $ is pairwise disjoint. Hence $X$ can be realized as a union of disjoint open sets, contradicting the assumption that $X$ be connected.
+\end{proof}
+\begin{problem}
+	Given any open cover $\mathcal{C} =\left\{ C_i \right\} _{i\in I} $ of a compact metric space $(X,d)$, show that there is a number $\delta >0$ such that for every $x_0\in X$, the ball $B_\delta (x_0)$ is contained in $C_i$ for some $C_i\in \mathcal{C} $. (Hint: use sequential compactness)
+\end{problem}
+\begin{proof}
+	Metric spaces are compact precisely when they are sequentially compact. Suppose for contradiction that no such $\delta $ exists. Then for all $n\in\mathbb{Z} _{\geq 1} $, there is $x_n\in X$ such that $B_{1/n} (x_n)$ is not a subset of $C_i$ for all $i$\footnote{If this is not true, then $B_{1/n} (x)\subseteq B_{1/m} (x)$ whenever $n\leq m$ implies that there is some $N$ such that $B_{1/n} (x)\nsubseteq C_i$ for all $i$ implies $n>N$, thus $\delta \coloneqq N$ would be valid, a contradiction.}. Since $X$ is compact, $\left\{ x_n \right\} _{n\geq 1} $ has a convergent subsequence $\left\{ x_{n_i}  \right\} _{i\geq 1} $. Let $x\coloneqq \lim_ix_{n_i} $. Then by definition of convergence, for all open neighborhoods $U\ni x$, there is $N$ such that $n\geq N$ implies $x_n\in U$. 
+\end{proof}
+
+\begin{problem}
+	A set $S\subseteq \mathbb{R} ^n$ is \emph{star-shaped} if there is a point $s_0\in S$ such that for all $s\in S$, the line segment from $s_0$ to $s$ is contained in $s$. Prove a star-shaped set is path-connected.
+\end{problem}
+\begin{proof}
+	Let $s,t\in S$. Then since straight lines are continuous, the paths $s_0\to s$ and $s_0\to t$ are continuous. By reversing the parameterization via precomposing by the homeomorphism $\varphi : I \cong I$ given by $x\mapsto 1-x$, we obtain paths $s_0\to t$ and $s\to s_0$. Concatenating the paths yields a path $s\to t$.
+\end{proof}
+\begin{problem}
+	Prove that the continuous image of a path-connected space is path-connected.
+\end{problem}
+\begin{proof}
+	Let $f : X \to Y$ with $X$ path connected. Let $y_1,y_2\in \Im f$ and choose $x_1\in f^{-1} (y_1)$ and $x_2\in f^{-1} (y_2)$. Since $X$ is path-connected, there exists a path $\gamma : I \to X$ that goes $x_1 \to x_2$. Then $(f\circ \gamma )(0)=f(x_1)=y_1$ and $(f\circ \gamma )(1)=f(x_2)=y_2$, so $f\circ \gamma : I \to Y$ is a path $y_1\to y_2$ in $\Im f$. Hence the image is path-connected.
+\end{proof}
+\end{document}

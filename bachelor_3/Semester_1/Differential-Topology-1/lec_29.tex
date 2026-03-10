@@ -1,0 +1,213 @@
+\chapter{Orientations}
+
+
+\lecture{29}{Mon 12 Jan 2026 13:59}{Personal Review}
+
+This section is me reviewing in preparation for courses next semester. I intend to review starting from orientations since they were very confusing, and will continue through integration and Stokes, de Rham cohomology, the de Rham theorem, and probably distributions, foliations, and the exponential. I think I will omit quotient manifolds and symplectic manifolds for now.
+
+\section{Orientations of vector spaces}
+
+The spaces $\mathbb{R} ^n$ has a canonical basis $\left\{ e_i=\delta_{ij}  \right\}_{1\leq i\leq n} $. This induces the conventionally standard ``right-handed'' orientation on $\mathbb{R} ^n$. The notion of ``right-handedness'' can be formalized as follows: the transition matrix $e_i^j$ of the basis has positive determinant. This leads us to the following generalization to vector spaces with no canonical basis.
+
+\begin{definition}\label{4.1.1}
+	Let a nontrivial finite $\mathbb{R} $-vector space $V$ have bases $\left\{ e_i \right\} ,\left\{ \widetilde{e}_i \right\} $. We say these bases are \emph{consistently oriented} if the transition matrix $B_i^j$ given by
+	\[
+		e_i=B_i^j \widetilde{e} _j
+	\]
+	has positive determinant.
+\end{definition}
+
+\begin{proposition}\label{4.1.2}
+	Being consistently oriented is an equivalence relation.
+\end{proposition}
+\begin{proof}
+	The transition matrix $e_i \to e_i$ is 1 which has determinant 1. Let $B$ be a transition matrix $e_i \to \widetilde{e}_i$ of positive determinant; since it has nonzero determinant it has an inverse which clearly satisfies the properties of a transition matrix $\widetilde{e} _i\to e_i$. Since det preserves multiplication,
+	\[
+		\det B^{-1} =\frac{1}{\det B} >0
+	\]
+	because $\det B>0$. Finally, let $B : e_i \to \widetilde{e} _i$ and $C : \widetilde{e}_i \to \hat{e}_i$ be transition matrices of positive determinant. Then the transition matrix $e_i \to \hat{e} _i$ is simply $CB$ which has determinant $\det CB=\det C \det B>0$ since both $\det C,\det B>0$.
+\end{proof}
+
+\begin{definition}\label{4.1.3}
+	Let $V$ be a nontrivial finite $\mathbb{R} $-vector space. Define an \emph{orientation} of $V$ as an equivalence class of bases under the relation given by \cref{4.1.2}.
+\end{definition}
+\begin{notation}\label{4.1.4}
+	Given a basis $(e_1, \ldots ,e_n)$ for $V$, we write the orientation it determines as $[e_1, \ldots ,e_n]$, or simply $[e_i]$. We denote the opposite orientation by $-[e_i]$, which is given by $-[e_i]=[-e_i]$.
+\end{notation}
+
+An \emph{oriented} vector space is a vector space together with a choice of orientation. Any basis in the orientation is said to be \emph{positively oriented}, and otherwise it is said to be \emph{negatively oriented}. For the special case $V=0$, we define an orientation to be a choice of a number $\pm1$.
+
+For example, $\mathbb{R} ^n$ comes with the standard orientation $[\delta _i^j]$.
+
+\begin{proposition}\label{4.1.5}
+	Let $V$ be a $\mathbb{R} $-vector space with dimension $n$. Each nonzero $\omega \in \Lambda ^n(V^*)$ determines an orientation $\mathcal{O} _\omega $ of $V$ as follows. If $n\geq 1$, then $\mathcal{O} _\omega $ is the set of bases $\left\{ e_i \right\}_{1\leq i\leq n}  $ such that $\omega (e_1, \ldots ,e_n)>0$; if $n=0$, then $\mathcal{O} _\omega =1$ if $\omega >0$, and $\mathcal{O}_\omega =-1$ if $\omega <0$. Two nonzero alternating $n$-covectors determine the same orientation if and only if one is a positive multiple of the other.
+\end{proposition}
+\begin{proof}
+	We define $\Lambda ^0(0^*)$ to be a real number, so this follows immediately. Take $n\geq 1$. Let $\omega \in \Lambda ^n(V^*)$ be nonzero, and define $\mathcal{O} _\omega $ as in the proposition. We must show it is indeed an orientation. It suffices to show it is precisely an equivalence class.
+
+	Let $\left\{ e_i \right\} ,\left\{ \widetilde{e} _j \right\} $ be bases for $V$ and $B$ the transition matrix $e_i \to \widetilde{e} _i$:
+	\[
+		\widetilde{e} _j= B_j^ie^i
+	.\]
+	Recall that for any linear map $T : V \to V$ and any vectors $\left\{ v_i \right\} $ and any alternating $n$-covector $\eta $,
+	\[
+		\eta (Tv_1, \ldots ,Tv_n)=(\det T)\eta (v_1, \ldots ,v_n)
+	.\]
+	Applying this yields
+	\[
+		\omega (\widetilde{e} _1, \ldots , \widetilde{e} _n)=\omega (Be_1, \ldots ,Be_n)=(\det B)\omega (e_1, \ldots ,e_n)
+	.\]
+	The bases are consistently oriented if and only if $\det B > 0$, and we see that this happens if and only if $\omega (\widetilde{e} _1, \ldots ,\widetilde{e} _n)$ and $\omega (e_1, \ldots ,e_n)$ have the same sign. The last statement follows immediately by noting that the sign is determined by the determinant of the transition matrices.
+\end{proof}
+
+If $V$ is oriented and $\omega \in \Lambda ^n(V^*)$ determines the orientation of $V$, we say $\omega $ is positively oriented. For example, $\bigwedge_i e_i$ is positively oriented on $\mathbb{R} ^n$.
+
+Recall that space $\Lambda ^n(V^*)$ is 1-dimensional\footnote{The basis for $\Lambda ^k(V)$ is given by choosing an \emph{ordered} basis and taking $k$-fold wedge products with strictly increasing indicies. Take $n=1$; there is only one wedge product with increasing indicies.}. The second statement of \cref{4.1.5} shows that choosing a nonzero component is the same as choosing a connected component of $\Lambda ^n(V^*)\setminus \left\{ 0 \right\} $. This also works for $V=0$, explaining why we defined the orientation of 0 as we did.
+
+\section{Orientations of manifolds}
+
+The notion of an oriented vector space generalizes to manifolds quite immediately.
+
+\begin{definition}\label{4.2.1}
+	Let $M$ be a manifold. A \emph{pointwise orientation} is a choice of an orientation for each tangent space. If $\left\{ E_i : (U\subseteq M) \to TM \right\} $ is a local frame (not necessarily smooth!) for $M$, we say $\left\{ E_i \right\} $ is \emph{positively oriented} if $\left\{ E_1|_p, \ldots ,E_n|_p \right\} $ is a positively oriented basis for each $T_pM$; negatively oriented frames are defined analogously. A pointwise orientation is \emph{continuous} if each point in $M$ is in the domain of some local frame. An \emph{orientation} for $M$ is then a continuous pointwise orientation. We say $M$ is \emph{orientable} if an orientation exists, and otherwise we say $M$ is \emph{nonorientable}. An \emph{oriented manifold} is a pair $(M,\mathcal{O} )$, where $\mathcal{O} $ is an orientation for $M$; an \emph{oriented manifold with boundary} is defined similarly. The orientation for $T_pM$ is denoted by $\mathcal{O} _p$. We will often simply say ``$M$ is an oriented manifold'' and not explicitly name the chosen orientation.
+\end{definition}
+
+Recall that a local frame is a collection of vector fields $\left\{ E_i \right\} $ defined on some open $U\subseteq M$ which is linearly indepedent and spanning in the sense that each $\left\{ E_i|_p \right\} $ is a basis for $T_pM$. Frames are automatically continuous.
+
+\begin{exercise}\label{4.2.2}
+	Let $(M,\mathcal{O} )$ be an oriented $n$-manifold, $n\geq 1$. Show that any local frame with connected domain is either positively or negatively oriented. Show connectedness is necessary.
+\end{exercise}
+\begin{proof}
+	Let $\left\{ E_i \right\}_{1\leq i\leq n} \subseteq \mathfrak{X}(U)$ be a local frame with $\pi_0(M)\cong *$.Let $s : U \to \left\{ \pm1 \right\} $ be defined as follows: if $\left\{ E_i|_p \right\}_{1\leq i\leq n} $ is positively oriented, then $s(p)=1$; otherwise $s(p)=-1$. We must show $s$ is constant; since $U$ is connected it suffices to show $s$ is locally constant. We claim that since $\mathcal{O} $ is continuous, there exists $V\subseteq U$ open such that there is a local frame $\mathcal{F} $ on $V$ which is positively oriented. Indeed, we may simply choose a frame $\widetilde{\mathcal{F} } $ and restrict along $V$.
+
+	For each $x\in V$, let $A(x)$ be the transition matrix between the bases $\left\{ E_i|_x \right\} _{1\leq i\leq n}$ and $\left\{ F_i|_x \right\} _{1\leq i\leq n} $. Since $E$ and $\mathcal{F} $ are local continuous frames, we claim that $x\mapsto \det A(x)$ is continuous. Since $\det A(x)\neq 0$ for all $x$, this is a map $V\to \mathbb{R} \setminus \leq \{0\}$; since $V$ is connected we must have by continuity that the image of this map lies fully within a connected component of $\mathbb{R} \setminus \left\{ 0 \right\} $. This immediately shows $s|V$ is constant, proving the first claim.
+
+	That $x\mapsto \det A(x)$ is continuous is trivial to show. The determinant is a polynomial in the entries of $A(x)$, and those can be recovered in a continuous manner from the entries of $\left\{ E_i|_x \right\} $ and $\left\{ \mathcal{F} _i|_x \right\} $ using continuity of the frames.
+
+	Now let $U\cong U_1 \amalg U_2$ be disconnected. I won't spell out the argument, but most of the argument is inducing a basis such that we can choose it to have one orientation on $U_1$ and the other on $U_2$.
+\end{proof}
+
+\begin{proposition}\label{4.2.3}
+	Let $M$ be a smooth $n$-manifold. Any nonvanishing $n$-form $\omega \in \Omega ^n(M)$ determines a unique orientation of $M$ for which $\omega_p $ is positively oritented for each $p$ in the sense given above: $\omega _p$ determines the orientation of $T_pM$ for all $p$. Conversely, if $(M,\mathcal{O} )$ is an oriented manifold, there is a nonvanishing $n$-form that is positively oriented at each point, thus determining the orientation.
+\end{proposition}
+\begin{proof}
+	Let $\omega \in \Omega ^n(M)$ be nonvanishing. Then $\omega $ determines a pointwise orientation by \cref{4.1.5} since each $\omega _p$ is nonvanishing, so we need only show it is continuous. This is trivial for $n=0$, so take $n\geq 1$. Let $p\in M$, and let $\left\{ E_i \right\} _{1\leq i\leq n} $ be a local frame on some \emph{connected} neighborhood $p\in U$. Let $\left\{ \varepsilon ^i \right\} _{1\leq i\leq n} $ be the dual coframe $\varepsilon ^i|_p(E_j|_p)=\delta_{ij}$. On $U$, we may write\footnote{On each point, $\omega _x=\omega_I^x\wedge \varepsilon ^1\cdots \wedge \varepsilon ^n$ since the single vector is the basis, so define $f(x)=\omega _I^x$. Continuity is trivial; I think we can also assume smoothness but that's not needed here.} $\omega =f\varepsilon ^1 \wedge \cdots \wedge \varepsilon ^n$ for some continuous $f$. Since $\omega $ is nonvanishing, we have that $f$ is nonvanishing.
+.
+	In particular, note that if $v=v^iE_i|_p\in T_pM$, then
+	\[
+		\omega (v)=v^i\omega (E_i)=v^if(p)\left(\bigwedge_j\varepsilon ^j\right)(E_i|_p)=v^if(p)
+	.\]
+	Take $v^i=1$ such that $v=\sum_{i} E_i|_p$; then we recover $f(p)=\omega _p(E_1|_p, \ldots ,E_n|_p)$. Thus $f=\omega \circ \left(\bigotimes_{i} E_i\right)$.
+
+	Since $f\neq 0$ for all $p\in U$, we have $f : U \to \mathbb{R} \setminus \left\{ 0 \right\} $. Since $U$ is connected, it follows that $\im f$ lies fully within a connected component of $\mathbb{R} \setminus \left\{ 0 \right\} $. Thus the frame is either positively or negatively oriented. If negative,  replace $E_1 \to -E_1$ to obtain a positively oriented frame by $n$-multilinearity. Since every point on a manifold has a connected neighborhood, this proves that the pointwise orientation determined by $\omega $ is continuous.
+
+	Conversely, let $(M, \mathcal{O})$ be an oriented manifold, and define $\Lambda _+^nT^*M\subseteq \Lambda ^nT^*M$ to be the set of all positively oriented $n$-covectors at all poins of $M$. Each intersection $\Lambda _+^nT^*M \cap \Lambda ^nT^*_pM$ is an open half-line since the vector space has dimension 1 and an orientation is a choice of connected component. There exists a partition of unity argument to construct a global smooth section of $\Lambda _+^nT^*M$.
+\end{proof}
+
+In view of \cref{4.2.3}, any nonvanishing $n$-form is often called an \emph{orientation form}. If $M$ is oriented and $\omega $ induces the given orientation, we call it \emph{positively oriented}; otherwise we call it \emph{negatively oriented}. It can be checked that if $\omega $ and $\eta $ are both positively oriented, then $\omega =f\eta $ for some smooth strictly positive $f : M \to \mathbb{R} $. The existence of a function follows by \cref{4.1.5}; smoothness follows by smoothness of $n$-forms.
+
+\begin{terminology}\label{4.2.4}
+	A chart $(U,\varphi )$ is said to be \emph{positively oriented} if the frame $\left\{ \partial _i \right\} $ is positively oriented, and similarly for negatively oriented. An atlas $\left\{ (U_\alpha ,\varphi _\alpha ) \right\} _{\alpha \in A} $ is said to be \emph{consistently oriented} if for all $\alpha ,\beta \in A$, the transition map $\varphi _\beta \circ \varphi _\alpha ^{-1} $ has Jacobian of positive determinant on all of $\varphi _\alpha (U_\alpha \cap U_\beta )$.
+\end{terminology}
+
+\begin{proposition}\label{4.2.5}
+	Let $M$ be a smooth $n$-manifold, $n\geq 1$. Given any consistently oriented atlas $\mathcal{A} $ on $M$, there is a unique orientation of $M$ with the property that each chart is positively oriented. Conversely, if $M$ is oriented and either $\partial M=\varnothing $ or $\dim M > 1$, then the collection of all oriented charts is a consistently oriented atlas for $M$.
+\end{proposition}
+\begin{proof}
+	Let $M$ be a consistently oriented smooth atlas. Each chart determines an orientation by \cref{4.1.5} and definition, and since the jacobian has positive determinant they determine the same orientation on overlap. Thus they determine the same orientation globally. Conversely, let $\partial M=\varnothing $ or $\dim M>1$. If any chart is negatively oriented, replace $x^1 \to -x^1$ to induce a positive orientation. This doesn't work when $\dim M=1$ and $\partial M\neq 0$ since we take the final coordinate on a boundary to be nonnegative by convention.
+\end{proof}
+\begin{proposition}\label{4.2.6}
+	Let $\left\{ M_i \right\} _{1\leq i\leq k} $ be orientable manifolds. Then there is a unique orientation on $\prod_{i} M_i$ called the \emph{product orientation} characterized by the following property: if for each $1\leq i\leq k$, the $n$-form $\omega _i$ is an orientation form for $M_i$, then $\bigwedge_i \pi _i^*\omega _i$ is an orientation form for the product orientation.
+\end{proposition}
+\begin{proof}
+	Here $\pi _i : \prod_{j} M_j \to M_i$ is the natural projection, and as usual the pullback determines a map $\pi _i^* : \Omega ^n(M_i) \to \Omega ^{n} (\prod_{j} M_j)$. Taking the wedge product yields a $\dim \prod_{j} M_j$-form
+	\[
+		\bigwedge_{1\leq i\leq k} \pi _i^*(\omega _i)\in \Omega ^{\dim \prod_{1\leq j\leq k} M_j} \left( \prod_{1\leq j\leq k} M_j \right) 
+	.\]
+	Nonvanishing is immediate, so by \cref{4.2.3} it determines an orientation. It now suffices to show any two different forms determine the same orientation. Let $\left\{ \omega _i \right\} ,\left\{ \eta _i \right\} $ be two collections of orientation forms for $\left\{ M_i \right\} $. Then for each $i$ and each $p\in M_i$, we have $\omega _i|_p,\eta _i|_p$ determine the same orientation for $T_pM_i$. Recall that $\prod_{i} T_{p^i} M_i\cong T_p \prod_{i} M_i$. From here the argument is fairly trivial.
+\end{proof}
+
+\begin{proposition}\label{4.2.7}
+	Let $M$ be a connected, orientable $n$-manifold. Then $M$ has exactly two orientations. If two orientations agree at a point, they are equal.
+\end{proposition}
+\begin{proof}
+	It is clear at this point that every $T_pM$ has exactly two orientations, which amount to choices of connected components of $\Lambda ^nT_p^*M\setminus \left\{ 0 \right\} $, of which there are two. Choose an orientation Since $M$ is connected, for any nonvanishing $n$-form $\omega $ the map $s : M \to \mathbb{R} $ given by mapping $p\mapsto 1$ if $\omega _p$ is positively oriented, and $-1$ otherwise, must be constant using the same argument as before. In particular, $s$ raises to a map $s : \Omega^n(M) \to \left\{ 1,-1,0 \right\} $ mapping nonvanishing forms to their orientation, and vanishing forms to $0$. It suffices to show those mapped to $-1$ all determine the same orientation. I don't want to show this its obvious. The second proposition follows immediately.
+\end{proof}
+
+\begin{proposition}\label{4.2.8}
+	Let $M$ be an oriented $n$-manifold and $D\subseteq M$ a submanifold of codimension 0. Then the orientation of $M$ restricts to an orientation of $D$. If $\omega $ is an orientation form for $M$ and $i : D \hookrightarrow M$, then $i^*\omega $ is an orientation form for $D$.
+\end{proposition}
+\begin{proof}
+	The first statement is immediate. For each $p\in D$, since $\operatorname{codim} D=0$ there is an isomorphism $T_pD\cong T_pM$, and thus $D$ inherits a pointwise orientation from $M$. Continuity of the pointwise orientation is similarly immediate. Additionally for $v\in T_pD$, we have $\iota ^*\omega (v)=\omega (v)$, so the other statement is similarly immediate.
+\end{proof}
+
+Let $F : M \to N$ be a local diffeomorphism between oriented manifolds of positive dimension. We say $F$ is \emph{orientation-preserving} if for each $p\in M$, the isomorphism $F_{*p} $ takes oriented bases of $T_pM$ to oriented bases of $T_{F(p)} N$. We say $F$ is \emph{orientation-reversing} if it takes oriented bases to negatively oriented bases. If $M,N$ are 0-manifolds, then $F$ is preserving if $p$ and $F(p)$ have the same orientation, and orientation-reversing if they have the opposite orientation.
+
+\begin{proposition}\label{4.2.9}
+	Let $F : M \to N$ be a local diffeomorphism between oriented manifolds. The following are equivalent.
+	\begin{enumerate}
+		\item $F$ is orientation preserving.
+		\item The Jacobian of $F$ with respect to any coordinates has positive determinant.
+		\item For any positively oriented orientation form $\omega $ on $N$, the form $F^*\omega $ is a positively oriented form for $M$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+    Let $p \in M$. Since $F$ is a local diffeomorphism, $F_{*p}  : T_pM \to T_{F(p)}N$ is an isomorphism.
+
+    $(1 \iff 3)$: Let $\omega \in \Omega^n(N)$ be a positively oriented orientation form. Let $\{e_1, \ldots, e_n\}$ be a basis for $T_pM$. By definition of the pullback:
+    \[
+        (F^*\omega)_p(e_1, \ldots, e_n) = \omega_{F(p)}(F_{*p}(e_1), \ldots, dF_p(e_n)).
+    \]
+    Suppose $F$ is orientation preserving. If $\{e_i\}$ is a positively oriented basis, then $\{F_{*p}(e_i)\}$ is a positively oriented basis for $T_{F(p)}N$. Since $\omega$ is positively oriented, $\omega_{F(p)}$ evaluates to a positive number on any positive basis. Thus $(F^*\omega)_p(e_i) > 0$, so $F^*\omega$ is positively oriented.
+    Conversely, suppose $F^*\omega$ is positively oriented. Let $(e_i)$ be a positively oriented basis for $T_pM$. Then $(F^*\omega)_p(e_i) > 0$, which implies $\omega_{F(p)}(dF_p(e_i)) > 0$. Since $\omega$ is a positively oriented form, a basis evaluates to a positive number if and only if the basis itself is positively oriented. Thus $(dF_p(e_i))$ is positively oriented, so $F$ preserves orientation.
+
+    $(1 \iff 2)$: Let $(U, \varphi)$ and $(V, \psi)$ be positively oriented charts centered at $p$ and $F(p)$ respectively, with coordinate bases $\{\partial_{x^i}\}$ and $\{\partial_{y^j}\}$. The Jacobian matrix $J$ of $F$ is the transition matrix of the linear map $dF_p$ with respect to these bases:
+    \[
+        dF_p\left(\frac{\partial}{\partial x^i}\right) = J_i^j \frac{\partial}{\partial y^j}.
+    \]
+    Since $\{\partial_{x^i}\}$ is a positively oriented basis for $T_pM$, $F$ is orientation preserving if and only if $\{dF_p(\partial_{x^i})\}$ is a positively oriented basis for $T_{F(p)}N$.
+    Since $\{\partial_{y^j}\}$ is already a positively oriented basis for $T_{F(p)}N$, the basis $\{dF_p(\partial_{x^i})\}$ is consistent with $\{\partial_{y^j}\}$ (i.e., positively oriented) if and only if the determinant of the transition matrix $J$ is positive.
+\end{proof}
+
+\begin{remark}\label{4.2.10}
+	Composites of orientation-preserving maps are orientation-preserving. This follows immediately by either the definition, or \cref{4.2.9} (2).
+\end{remark}
+
+\begin{proposition}\label{4.2.11}
+	Let $F : M \to N$ be a local diffeomorphism and $N$ oriented. Then there is a unique orientation on $M$ such that $F$ is orientation preserving. We call this orientation the \emph{pullback orientation} induced by $F$.
+\end{proposition}
+\begin{proof}
+	For each $p\in M$, there is a unique orientation on $T_pM$ that makes the isomorphism $F_{*p} : T_pM \cong T_{F(p)} N$ orientation preserving defined in the obvious way. This proves uniqueness of the pointwise orientaiton. To show this pointwise orientation is continuous, let $\omega $ be a smooth orientation form for $N$, and note that $F^*\omega $ is a smooth orientation form for $M$ by \cref{4.2.9}. This defines an orientation which coencides with the pointwise orientation.
+\end{proof}
+
+\begin{notation}\label{4.2.12}
+	If $(N,\mathcal{O} )$ is an oriented manifold and $F : M \to N$ is a local diffeomorphism, the pullback orientation on $M$ induced by $F$ is often denoted $F^*\mathcal{O} $.
+\end{notation}
+
+\begin{proposition}\label{4.2.13}
+	The pullback orientation is contravariant.
+\end{proposition}
+\begin{proof}
+	Let $F : M \to N$ and $G : N \to P$ be local diffeomorphisms and $(P,\mathcal{O} )$ an oriented manifold. We must show $(G\circ F)^*\mathcal{O} =F^*G^*\mathcal{O} $. Let $\omega $ be an orientation form for $P$. Then $(G\circ F)^*=F^*G^*\omega $ is an orientation form for $M$ by \cref{4.2.9}.
+\end{proof}
+
+\section{Boundary orientations}
+
+An (embedded, immersed) hypersurface $S$ is an (embedded, immersed) submanifold $S\subseteq M$ of codimension 1. A vector field \emph{along $S$} is a map $S\to TM$ which is a section of $\pi : TM \to M$ in the relevant sense.
+
+\begin{proposition}\label{4.3.1}
+	Let $M$ be an orientable $n$-manifold, $S$ an immersed hypersurface, and $N$ a vector field along $S$ that is nowhere tangent\footnote{This means that $N_p \in T_pM\setminus T_pS$.} to $S$. Then $S$ has a unique orientation such that for each $p\in S$, $\left\{ e_i \right\} _{1\leq i\leq n-1} $ is an oriented basis for $T_pS$ if and only if $\left\{ N_p \right\} \cup \left\{ e_i \right\} _{1\leq i\leq n-1} $ is an oriented basis for $T_pM$. If $\omega $ is an orientation form for $M$, then $i^*(\iota _N\omega )=i^*\omega (N,-)$ is an orientation form for $S$ with respect to this orientation, where $i : S \hookrightarrow M$.
+\end{proposition}
+\begin{proof}
+	Let $\omega $ be an orientation form for $M$. Then $\sigma =i^*(\iota _N\omega )$ is an $(n-1)$-form on $S$, since the pullback $i^*$ is really just the restriction of the interior product $\iota _N\omega $ to $S$. It follows taht $\sigma $ is an orientation if and only if it never vanishes. Since $N$ is nowhere tangent to $S$ and $S$ has codimension 1, for any basis $\left\{ e_i \right\} _{1\leq i\leq n-1} $ for $T_pS$, the set $\left\{ N_p,e_1, \ldots ,e_{n-1}  \right\} $ is a basis for $T_pM$ since $N_p$ must be independent of $\left\{ e_i \right\} _{1\leq i\leq n} $. Since $\omega $ is nowhere vanishing,
+	\[
+		\sigma (e_1, \ldots ,e_{n-1} )=\omega (N_p, e_1, \ldots ,e_{n-1} )\neq 0
+	.\]
+	Thus $\sigma $ is nowhere vanishing. The orientation is clearly the same as the one in the proposition.
+\end{proof}
+
+\begin{corollary}\label{4.3.2}
+	Let $M$ be an orientable manifold with boundary. Then $\partial M$ is orientable. In particular, any vector field outward pointing\footnote{Along and the final component in coordinates is negative.} along $\partial M$ determines the same orientation.
+\end{corollary}
+
+I decline to prove the second part of \cref{4.3.2}.

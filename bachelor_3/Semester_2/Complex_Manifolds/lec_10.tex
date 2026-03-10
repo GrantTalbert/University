@@ -1,0 +1,64 @@
+\lecture{10}{Tue 03 Mar 2026 12:17}{Continuing holomorphic vector bundles}
+
+We remark that $\mathcal{O} _{\mathbb{P} ^n} (-1)$ is basically $\mathbb{P} ^n\times \mathbb{C} ^{n+1} $ apparently.
+
+We then define
+\[
+	\mathcal{O} _{\mathbb{P} ^n} (k)\coloneqq \mathcal{O} _{\mathbb{P} ^1} ^{\otimes k} ,
+\]
+and the corresopnding cocycles are given by the tensors of the cocycles. Since the line bundles have dimension 1, the $k$-fold tensor of $g_{ij} =z_j / z_i$ is $g_{ij} ^{\otimes k} =z_j^k / z_i^k$. Anyways the space of global sections $\Gamma (\mathbb{P} ^n,\mathcal{O} _{\mathbb{P} ^n} (k))$ is isomorphic to the homogeneous polynomials in $\left\{ z_0, \ldots ,z_k \right\} $ of degree $k$. Recall of course that homogeneous polynomials are precisely polynomials in the coordinates of $\mathbb{P} ^n$. In particular, the space is finite-dimensional.
+
+\begin{remark}
+	We will see later, using Dolbeaux cohomology, that this generalizes: if $p : E \to X$ is a holomorphic vector bundle over a compact manifold has a finite dimensional $\mathbb{C} $-vector space of global sections.
+\end{remark}
+
+\begin{example}
+	Let $X$ be a complex manifold with atlas $\left\{ (U_i,\varphi _i) \right\} _{i\in I} $. Write $\psi _{ij} =\varphi _i \circ \varphi _j ^{-1} $. Let $g_{ij} =J(\psi _{ij} )$ for $J$ the holomorphic Jacobian. This is a cocycle. Recall that taking the Jacobian preserves composition. Also note that $\psi _{ij} \circ \psi _{jk} =\psi _{ik} $, and thus $J(\psi _{ij} \circ \psi _{jk} ) = J(\psi _{ij} )\cdot J(\psi _{jk} ) = J(\psi _{ik} )$. Additionally we have $J(f\circ f^{-1} ) = J(1)=1$ for any $f\in C^\infty (U)$, so the cocycle conditions are satisfied. We call the bundle this induces the holomorphic cotangent bundle $\mathcal{T} _X^*$, which will be the set of 1-forms $\Omega _{\mathrm{holo} } ^1(X)$. We will discuss the linear algebra of the total space construction later.
+\end{example}
+
+\begin{remark}
+	Let $\mathcal{L} _1,\mathcal{L} _2$ be line bundles on $X$. Then $\mathcal{L} _1\otimes \mathcal{L} _2$ is also a line bundle. Additionally, $\Gamma (\mathcal{L} _1\otimes \mathcal{L} _1^*,-)\cong \mathcal{O} _X$. To see this, if $\left\{ g_{ij}  \right\} $ represents $\mathcal{L} _1$ then $\left\{ \frac{1}{g_{ij} }  \right\} $ represents $\mathcal{L} _1^*$. Hence their product is 1. Alternatively, note that $\mathcal{L} _1\otimes \mathcal{L} _1^*$ corresponds to endomorphisms of $\mathcal{L} _1$. Consider the identity and play with that.
+\end{remark}
+\begin{definition}\label{kjasn}
+	Isomorphism classes of line bundles on a complex manifold $X$ form a group of line bundles known as the \emph{Picard group}, denoted $\operatorname{Pic} (X)$.
+\end{definition}
+We will see using more advanced machinery that $\operatorname{Pic} (\mathbb{P} ^n)\cong \mathbb{Z} ^n$, a highly unusual fact following since $\mathbb{P} ^n$ is some special type of variety.
+
+\begin{exercise}
+	Let $p : E \to X$ be a holomorphic bundle. There is a correspondence between trivializations of a bundle $E|U \to U\times \mathbb{C} ^r$ and holomorphic frames on $U$.
+\end{exercise}
+
+\begin{notation}
+	Note that if $p :  E \to X$ is any vector bundle and $x\in X$, then $p ^{-1} (x) \eqqcolon E_x$ is a vector space by choosing a trivialization.
+\end{notation}
+
+\begin{definition}\label{kaskjsa}
+	Let $p_1 : E \to X$ and $p_2 : F \to X$ be holomorphic vector bundles on a complex manifold $X$. A homomorphism $\psi : E \to F$ is a holomorphic map such that
+	\begin{enumerate}
+		\item $\psi|E_x : E_x \to F_x$ is linear, and
+		\item $\mathrm{rk}\psi _x$ is constant as a function over $x\in X$, and
+		\item the diagram
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			E \ar[" \psi  ", rr] \ar[" p_1 "', dr]  &  & F \ar[" p_2 ", dl]  \\
+			 & X & 
+			\end{tikzcd}\]
+			commutes.
+	\end{enumerate}
+\end{definition}
+
+We can construct kernels and cokernels of maps in the usual way, hence the category of holomorphic vector bundles is an abelian category.
+
+We want to recast this definition in terms of cocycles. We start with trivial bundles. A homomorphism $\psi : E \to F$ gives us local maps $\psi _i : p ^{-1} (U_i)\cong U_i\times \mathbb{C} ^e \to p ^{-1} (U_i)\cong U_i\times \mathbb{C} ^f$ via $(x,v)\mapsto (x,\psi _i(x)\cdot v)$. Hence $\psi _i$ is an $f\times e$ matrix of holomorphic functions. So we end up with a diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+p_1 ^{-1} (U_j)\ar[" \psi _j ", r] \ar[" g_{ij}  "', d]  & p_2 ^{-1} (U_j)\ar[" h_{ij}  ", d]  \\
+p_1 ^{-1} (U_i)\ar[" \psi _i "', r]  & p_2 ^{-1} (U_i)
+\end{tikzcd}\]
+Hence the general way to write a cocycle is to have matrices of holomorphic functions $\left\{ \psi _i \right\} $ which are constant rank, and make this diagram commute.
+
+\begin{remark}
+	Define $E$ as a category with objects all $U_i$ in the cover, and precisely one morphism $U_i \to U_j$ for all $i,j$. Hence this is a groupoid. We may then consider vector bundles as a functor, and morphisms of vector bundles are natural transformations between them. This is a somewhat na\"ive picture and there are indeed issues with trying to generalize this.
+\end{remark}
+
+
+
+The correspondence of cocycles with holomorphic vector bundles is not precise, and is only bijective up to some equivalence relation on cocycles. We will explore this today, but the idea is that various open covers can admit the same cocycles.

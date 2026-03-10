@@ -1,0 +1,551 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 6}
+\begin{document}
+\makeproblem
+
+\section{Problem 9.3}
+\begin{problem}
+	Compute the flow of the vector field
+	\[
+		V=y \frac{\partial }{\partial x} + \frac{\partial }{\partial y} 
+	.\]
+\end{problem}
+\begin{proof}
+	The flow $\theta : \mathbb{R} \times \mathbb{R} ^2 \to \mathbb{R} ^2$ must be such that the curve $\gamma \coloneqq \theta (-,p)=\theta _t(p)$ satisfies $\gamma'(t) = V(\gamma (t))$. We then have in coordinates
+	\[
+		\frac{\mathrm{d}\gamma_x}{\mathrm{d}t} \frac{\partial }{\partial x} + \frac{\mathrm{d}\gamma _y}{\mathrm{d}t} \frac{\partial }{\partial y} = \gamma _y(t)\frac{\partial }{\partial x} + \frac{\partial }{\partial y} 
+	.\]
+	This gives us the system
+	\[
+		\frac{\mathrm{d}\gamma _x}{\mathrm{d}t} =\gamma _y,\qquad \frac{\mathrm{d}\gamma _y}{\mathrm{d}t} =1
+	.\]
+	We solve the system by
+	\[
+		t+C = \int \frac{\mathrm{d}\gamma _y}{\mathrm{d}t}  \,\mathrm{d} t = \int \,\mathrm{d} \gamma _y=\gamma _y
+	.\]
+	Then
+	\[
+		\gamma _x(t)=\int \frac{\mathrm{d}\gamma _x}{\mathrm{d}t}  \,\mathrm{d} t=\int \frac{\mathrm{d}\gamma _y}{\mathrm{d}t}  \,\mathrm{d} t=\int t+C \,\mathrm{d} t=\frac{1}{2} t^2 + Ct = D
+	.\]
+	The solution must satisfy the initial condition $\gamma(0)=p$. Write $p=(x,y)$. This yields
+	\[
+		\theta _t(x,y)=\left( \frac{1}{2} t^2 + yt + x,t+y \right) 
+	.\]
+\end{proof}
+
+
+\section{Problem 11.5}\label{11.5}
+\begin{problem}
+	Given $M$ a manifold, show $T^*M$ is a trivial vector bundle if and only if $TM$ is trivial.
+\end{problem}
+\begin{remark}
+	A (real) vector bundle of rank $k$ over $M$ is a space $E$ and a continuous surjection $\pi : E \to M$ such that
+	\begin{enumerate}
+		\item for each $p\in M$, the fiber $E_p \coloneqq \pi ^{-1} (p)$ is a $\mathbb{R} $-vector space of dimension $k$;
+		\item for each $p\in M$, there is an open neighborhood $p\in U\subseteq M$ and a homeomorphism $\Phi : \pi ^{-1} (U) \cong U\times \mathbb{R} ^k$ called the \emph{local trivialization of $E$ over $U$}, satisfying the following conditions:
+			\begin{itemize}
+				\item If $\pi _U : U\times \mathbb{R} ^k \to U$ is the projection, then $\pi _U \circ \Phi =\pi $;
+				\item For each $q\in U$, the restriction $\Phi |E_q$ is a vector space isomorphism $E_q \cong \left\{ q \right\} \times \mathbb{R}^k \cong \mathbb{R} ^k$.
+			\end{itemize}
+	\end{enumerate}
+	If $M,E$ are smooth manifolds, $\pi $ is smooth, and the local trivializations can be chosen to be diffeomorphisms, then $E$ is a \emph{smooth} vector bundle of rank $k$ over $M$. If there exists a local trivialization of $E$ over all of $M$, called a global trivialization, then $E$ is called a \emph{trivial} vector bundle.
+\end{remark}
+\begin{proof}
+	Throughout the problem, let $e^i$ be the $i$th basis vector in the standard basis for $\mathbb{R} ^n$
+	\[
+		e^i = (0, \ldots , 0,1,0, \ldots ,0)
+	\]
+	with a 1 in the $i$th spot.
+
+	($\impliedby $) Let $TM$ be trivial with $\Phi : TM \cong M\times \mathbb{R} ^n$ the global trivialization. Write the component functions as $\Phi (p,v)=(\phi'(p),\phi (v))$. Let $\pi _M : M\times \mathbb{R} ^n \to M$ and $\pi : TM \to M$ be the natural projections. Since $\pi _M \circ \Phi =\pi $, we have
+	\[
+		p = \pi (p,v) = (\pi _M \circ \Phi )(p,v)=\pi _M(\phi'(p),\phi (v)) = \phi'(p)
+	.\]
+	Therefore, $\phi '$ is the identity, meaning we can write $\Phi (p,v)=(p,\phi (v))$.
+
+	Write $\Phi _p$ for the restriction $\Phi |T_pM : T_pM \cong \left\{ p \right\} \times \mathbb{R} ^n$. It's important to note here that when viewed as a subset of $TM$, the space $T_pM$ takes elements of the form $(p,v)$ with $v$ tangent to $p$. This means we should really be writing $\left\{ p \right\} \times T_pM$, but this is annoying and the spaces are isomorphic so we will abuse notation throughout this problem in this way. We will similarly write $T_p^*M$ for the subspace $\left\{ p \right\} \times T_p^*M \subseteq T^*M$. This means that we write $\Phi _p(p,v)=(p,\phi (v))$.
+
+	With this notation established, we can begin the problem. Since $\Phi $ is a trivialization, each $\Phi _p$ is an isomorphism of vector spaces, meaning there are inverses $\Phi _p ^{-1} : \left\{ p \right\} \times \mathbb{R} ^n \to T_pM$. Since isomorphisms of vector spaces map bases to bases, we note that
+	\[
+		\left\{ V_p^i \coloneqq \Phi ^{-1} _p(e^i) \right\}_{i=1} ^n
+	\]
+	is a basis for $T_pM$. To define a covector, we need only specify its action on basis elements, so we can define a covector $\omega^i_p\in T_p^*M$ for each $p$ and for each $1\leq i\leq n$ which acts as
+	\[
+		\omega^i_p(V^j_p)=\delta _i^j
+	.\]
+	First, we claim that the set $\left\{ \omega _p^i \right\}_{i=1} ^n$ is a basis for $T_p^*M$.
+
+	Since $T_p^*M$ is $n$-dimensional, it suffices to show that $\left\{ \omega _p^i \right\}_{i=1} ^n$ is a linearly independent set. Let there exist coefficients $c_i$ for $1\leq i\leq n$ such that
+	\[
+		\sum_{1\leq i\leq n} c_i\omega _p^i=0
+	.\]
+	Then this covector must map all vectors to 0; in particular,
+	\[
+		0=\left( \sum_{1\leq i\leq n} c_i\omega _p^i \right) (V^j_p)=\sum_{1\leq i\leq n} c_i\omega _p^i(V^j_p)=\sum_{1\leq i\leq n} c_i\delta _i^j = c_j
+	.\]
+	Therefore, each $c_i$ is 0, so the $\omega _p^i$s are linearly independent.
+
+
+	We now claim that for each $i$, the $\omega ^i_p$s assemble into a smooth covector field $\omega ^i \in \mathfrak{X} ^*(M)$. We also claim that the collection $\left\{ \omega ^i \right\}_{1\leq i\leq n} $ is a smooth global frame for $T^*M$ in the sense of the following definition. By Lee 10.20, a smooth vector bundle is trivial if and only if it admits a smooth global frame, so showing this suffices for this direction of the proof. We must show the following is satisfied.
+	\begin{definition}[Lee page 257]\label{kasndsjkn}
+		Let $E\to M$ be a vector bundle. If $U\subseteq M$ is an open subset, a $k$-tuple of local sections $(\sigma _1, \ldots ,\sigma _k)$ of $E$ over $U$ is said to be \emph{linearly independent} if their values $(\sigma _1(p), \ldots ,\sigma _k(p))$ form a linearly independent $k$-tuple in $E_p$ for each $p\in U$. A \emph{local frame for $E$ over $U$} is an ordered $k$-tuple $(\sigma _1, \ldots ,\sigma _k)$ of linearly independent local sections over $U$ that span $E$; thus $(\sigma _1(p), \ldots ,\sigma _k(p))$ is a basis for the fiber $E_p$ for each $p\in U$. It is called a global frame if $U=M$. If $E\to M$ is a smooth vector bundle, a local or global frame is a \emph{smooth frame} if each $\sigma _i$ is a smooth section.
+	\end{definition}
+	We have already shown that the tuple $(\omega ^1, \ldots ,\omega ^n)$ is a global frame since they are sections of $T^*M$ by definition, and their evaluations form bases as explored earlier. It suffices to show they are smooth. By Lee 11.11, it suffices to show for any $X\in \mathfrak{X} (M)$, the map $\omega ^i(X)$ is smooth.
+
+	First, note that $V^i$ is a smooth vector field since by definition, $V^i_p = \Phi ^{-1} _p(e^i)$, and $\Phi ^{-1} $ is smooth. Since the collection of $V^i$s are linearly independent in the above sense, they form a global frame for $TM$. By the basis condition, given a vector field $X\in \mathfrak{X} (M)$ we can write
+	\[
+		X_p = \sum_{i} c_i(p) V^i_p
+	\]
+	for some coefficients $\left\{ c_i(p) \right\}_{1\leq i\leq n} $. We can assemble these into functions $c_i : M \to \mathbb{R} $ such that
+	\[
+		X = \sum_{i} c_i(p)V^i
+	.\]
+	We would like to show the $c_i$s are smooth. Applying $\Phi $ yields
+	\[
+		\Phi (X_p)=\Phi _p\left( \sum_{i} c_i(p)V^i_p \right) =\left( p,\sum_{i} c_i(p)\Phi _p(V^i_p) \right) =\left( p,\sum_{i} c_i(p)e^i \right) 
+	.\]
+	Now let $\pi _\mathbb{R} : M\times \mathbb{R}  \to \mathbb{R} $ be the projection $(p,x)\mapsto x$. Since $X,\Phi ,\pi _\mathbb{R} $ are all smooth, the composite $\pi _\mathbb{R} \circ \Phi \circ X$ is smooth. To determine what this composite is, we follow an element $p\in M$:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		p \ar[" X ", mapsto, r]  & \displaystyle{X_p=\sum_{i} c_i(p)V^i_p}\ar[" \Phi ", mapsto, r]  & \displaystyle{\left( p, \sum_{i} c_i(p)e^i \right) }\ar[" \pi _\mathbb{R}  ", mapsto, r]  & \displaystyle{\sum_{i} c_i(p)e^i}.
+	\end{tikzcd}\]
+	Note that the component functions of this map are the $c_i$s, and since a map is smooth if and only if its component functions are smooth, it follows that $c_i$ is smooth for all $i$.
+
+	Now we simply apply $\omega ^i$ to $X$:
+	\[
+		\omega ^i(X)_p = \omega ^i_p \left( \sum_{j} c_j(p)V^j_p \right) =\sum_{j} c_j(p) \delta _i^j = c_i(p)
+	.\]
+	Therefore, $\omega^i(X)=c_i$. Since $c_i$ is smooth, $\omega^i(X)$ is smooth. By Lee 11.11, $\omega ^i$ is smooth, and thus forms a smooth global frame, completing this direction by 10.20.
+
+	($\implies $) The proof for this direction is exactly the same so we offer less details. Let $\Phi : T^*M \to M\times \mathbb{R} $ be a global trivialization with notation as before. Define $\omega ^i_p$ as $\Phi ^{-1}_p(e^i)$. There exists no natural isomorphism $T^*M \cong (T^*M)^*$, but there is a natural isomorphism $TM \cong (T^*M)^*$ by basic linear algebra. We utilize this fact as follows. Define $V^i_p\in T_pM$ as the vector $W^i_p(\omega ^j_p)=\delta ^i_j$; since the $\omega ^i_p$s are a preimage of a basis and thus a basis, this suffices to specify $W^i_p$. Then define $V^i_p$ to be the element of $TM$ corresponding to $W^i_p$ under the natural isomorphism. Recall the definition of this isomorphism: for any $v\in V$, there is an element $v\in V^{* * } $ which maps $f\mapsto f(v)$ for all $f\in V^*$.
+
+	To see that this is indeed an isomorphism (for finite dimensional vector spaces), choose a basis $\left\{ v^i \right\}_{i \leq \dim V} $ for $V $, and it suffices to show that the corresponding elements of $V^{* *} $ are a basis. To specify an element of $V^*$, it suffices to specify it on the basis $\left\{ v^i \right\} $. Define $w_i$ as the map $v^j\mapsto \delta ^i_j$. The set $\left\{ w_i \right\} $ is linearly independent by the exact same argument offered in the previous section, so it forms a basis. Now define $v^*$ as the map $w_j \mapsto \delta ^i_j$. Once again, this is a basis. Now simply observe that $v^*$ and $v$ are the corresponding elements under the claimed isomorphism, proving it is indeed a bijection on bases. Linearity is immediate.
+
+	In particular, $W^i_p(\omega^i_p)=\omega ^i_p(V^i_p)$, so we recover our set $\left\{ V^i_p \right\}_{1\leq i\leq n} $ with $\omega ^i_p(V^j_p)=\delta ^i_j$. From here, the proof proceeds as before. The set $\left\{ \omega ^i \right\} $ forms a smooth global frame by smoothness of $\Phi $, so we may write covector fields $\eta $ as
+	\[
+		\eta_p = \sum_{i} c_i(p) \omega ^i_p
+	.\]
+	We may allow the above natural isomorphism to induce a smooth structure on $T^{* *} M = (T^*M)^*$ such that it promotes to a diffeomorphism. Write the diffeomorphism as $\Psi $. Suppose we show the section $W^i$ of $T^{* *} M$ is smooth. Then since $W^i = \Psi \circ V^i$, we will have that $\Psi ^{-1} W^i = V^i$ is smooth, so it suffices to show that the sections $W^i$ of $T^{* *} M$ are smooth. This process is exactly the same as before, with the only exception being that we must prove Lee 11.11 for the new co-cotangent bundle. We do this at the end. The $c_i$s are smooth since they arise as the smooth composite $\pi _\mathbb{R} \circ \Phi \circ \eta $ once again, and
+	\[
+		W^i(\eta)_p = W^i \left( \sum_{j} c_j(p)\omega _p^j \right) =\sum_{j} c_j(p)\delta ^i_j = c_i(p)
+	.\]
+	Therefore, each $W^i(\eta )$ is smooth since $W^i(\eta )=c_i$ is smooth.
+
+	Now we show this implies that $W^i$ is smooth. Let $p\in M$ and $(U,x^1, \ldots ,x^n)$ a chart for $M$ containing $p$. This induces a canonical frame $\partial _i$ for $TM$, and thus a corresponding frame which we will denote $D^i$ for $T^{* *} M$. For all $q\in U$, we can write
+	\[
+		W^i_q = \sum_{j} W^i_j(q)D^j(q)
+	.\]
+	Here we note that the notation $D^j(q)$ corresponds to $\partial _j|_q$ or $\mathrm{d} x^j|_q$, and $W^i_j$ is some function which defines $W^i$ over $U$ in these coordinates, as before. Then $W^i$ is smooth if and only if the component functions $W^i$ are all smooth. Fix some $k$; we show $W^i_k$ is smooth on $U$. Then
+	\[
+		W^i_q(\mathrm{d} x^k)=\sum_{j} W^i_j(q)D^j(\mathrm{d} x^k)=\sum_{j} W^i_j \delta ^j_k = W^i_k(q)
+	.\]
+	We know already that, $W^i_k(\mathrm{d} x^k)$ is smooth since $\mathrm{d} x^k$ is a covector, so $W^i_k$ is smooth. Therefore, $W^i$ is smooth on any arbitrary chart $U$, and is thus globally smooth.
+\end{proof}
+
+\section{Problem 11.7}
+\begin{problem}
+	Let $F : \mathbb{R} ^2 \to \mathbb{R} ^2$ be the smooth map $(s,t)\mapsto (st,e^t)$, and let $\omega \in \mathfrak{X} ^*(\mathbb{R} ^2)$ be given by $\omega =x \mathrm{d} y-y\mathrm{d} x$. Compute $F^*\omega $.
+\end{problem}
+\begin{proof}
+	We will follow the notation in the problem, writing $(s,t)$ for the coordinates in the domain and $(x,y)$ for the coordinates in the codomain.
+
+	We will compute $F^*\omega $ by seeing how it acts on a tangent vector $V=V^s \partial _s|_p + V^t \partial _t|_p\in T_p\mathbb{R} ^2$, where $p=(s,t)\in\mathbb{R} ^2$. This is given by
+	\[
+		(F^*\omega )_p(V)=\omega_{F(p)} (F_{*p} V)
+	.\]
+	To compute $F_{*p} V$, we compute the Jacobian of $F$ at $p$:
+	\[
+		J(F)|_p=\begin{pmatrix}
+			\partial_sF^s & \partial _tF^s \\
+		\partial _sF^t & \partial _tF^t
+		\end{pmatrix}=\begin{pmatrix}
+		t & s \\
+		0 & e^t
+		\end{pmatrix}
+	.\]
+	Then
+	\[
+		F_{*p} V = \begin{pmatrix}
+		t & s \\
+		0 & e^t
+		\end{pmatrix}\begin{pmatrix}
+		V^s \\
+		V^t
+		\end{pmatrix}=\begin{pmatrix}
+		tV^s+sV^t \\
+		e^tV^t
+		\end{pmatrix} = \left( tV^s+sV^t \right) \left.\frac{\partial }{\partial x} \right|_{F(p)} +e^tV^t \left. \frac{\partial }{\partial y} \right|_{F(p)}
+	.\]
+	Note that $F(p)=(st,e^t)=(x,y)$. Acting $\omega $ on $F_{*p} V$ yields by linearity and $\mathrm{d} x^i(\partial _j)=\delta_i^j$ that
+	\[
+		\omega_{F(p)} (F_{*p} V)=\left( st\mathrm{d} y-e^t \mathrm{d} x \right) \left( \left( tV^s+sV^t \right) \left.\frac{\partial }{\partial x} \right|_{F(p)} +e^tV^t \left. \frac{\partial }{\partial y} \right|_{F(p)} \right) 
+	\]
+	\[
+		=-e^t\left( tV^s+sV^t \right) +ste^tV^t = -t e^tV^s + \left( ste^t-se^t \right) V^t
+	.\]
+	Therefore, $F^*\omega $ can be written as
+	\[
+		F^*\omega =\left( t-1 \right) se^t\mathrm{d} t-te^t \mathrm{d} s
+	.\]
+	
+\end{proof}
+
+
+\section{Problem 11.14}
+\begin{problem}
+	Consider the covector fields on $\mathbb{R} ^3$:
+	\[
+		\omega =-\frac{4z \mathrm{d} x}{\left( x^2+1 \right) ^2} +\frac{2y\mathrm{d} y}{y^2+1} +\frac{2x\mathrm{d} z}{x^2+1} 
+	\]
+	\[
+		\eta =-\frac{4xz\mathrm{d} x}{\left( x^2+1 \right) ^2} +\frac{2y\mathrm{d} y}{y^2+1} +\frac{2\mathrm{d} z}{x^2+1} 
+	.\]
+	\begin{enumerate}
+		\item Set up and evaluate the line integrals of each covector field along the line segment from $0$ to $(1,1,1)$.
+		\item Determine whether or not these vector fields are exact.
+		\item For each one that is exact, find its potential function and use it to recompute the line integral.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Write $I=[0,1]\subseteq \mathbb{R} $ for the unit interval, and let $\gamma : I \to \mathbb{R} ^3$ be the map $\gamma (t)=(t,t,t)$ parameterizing the given line segment. The line integrals are then given by
+	\[
+		\int_\gamma \omega =\int_0^1 \gamma ^*\omega,\qquad \int_\gamma \eta =\int_0^1 \gamma ^*\eta 
+	.\]
+	We start by computing the coordinate representations of $\gamma ^*\omega $ and $\gamma ^*\eta $. Let $V=V^t \partial_t$ be a tangent vector in $T_tI$, and consider $(\gamma ^*\omega )_t(V)=\omega_{(t,t,t)} (\gamma _{*t} V)$. The Jacobian of $\gamma $ is
+	\[
+		J(\gamma )=\begin{pmatrix}
+		1 \\
+		1 \\
+		1
+		\end{pmatrix}
+	.\]
+Thus
+\[
+	\gamma_{*t} (V)=\begin{pmatrix}
+	1 \\
+	1 \\
+	1
+	\end{pmatrix}V^t = \begin{pmatrix}
+	V^t \\
+	V^t \\
+	V^t
+	\end{pmatrix}
+.\]
+Then we have
+\[
+	\omega _{(t,t,t)} (\gamma_{*t} V)=\begin{pmatrix}
+		\displaystyle{-\frac{4t}{\left( t^2+1 \right) ^2} } & \displaystyle{\frac{2t}{t^2+1} } & \displaystyle{\frac{2t}{t^2+1} }
+	\end{pmatrix}\begin{pmatrix}
+	V^t \\
+	V^t \\
+	V^t
+	\end{pmatrix}=V^t \left( \frac{4t}{t^2+1} -\frac{4t}{\left( t^2+1 \right) ^2}  \right) 
+.\]
+We then obtain that
+\[
+	\gamma ^*\omega =\left( \frac{4t}{t^2+1} -\frac{4t}{\left( t^2+1 \right) ^2}  \right) \mathrm{d} t
+.\]
+We can compute the integral of this.
+\[
+	\int_\gamma \omega =\int_0^1 \gamma ^*\omega =\int_0^1 \frac{4t}{t^2+1} -\frac{4t}{\left( t^2+1 \right) ^2}  \,\mathrm{d} t=\int_0^1 \frac{4t}{t^2+1}  \,\mathrm{d} t-\int_{0}^{1} \frac{4t}{\left( t^2+1 \right) ^2}  \,\mathrm{d} t
+.\]
+For both, use the $u$-substitution $u=t^2+1$. This yields $\mathrm{d} u = \frac{\partial u}{\partial t} \mathrm{d} t = 2t$, and $u(0)=1$ and $u(1)=2$, so the bounds of the integrals do not change. Completing the computation:
+\[
+	\int_{1}^{2} \frac{2}{u}  \,\mathrm{d} u - \int_{1}^{2} \frac{2}{u^2}  \,\mathrm{d} u=2\left[ \ln u + \frac{1}{u}  \right]_1^2=2\left( \ln 2 + \frac{1}{2} -1 \right) =2 \ln 2 - 1
+.\]
+
+Now we compute the integral of $\eta $. We have
+\[
+	(\gamma ^*\eta )_p(V) = \eta _{(t,t,t)} (\gamma _{*t} V)=\begin{pmatrix}
+		\displaystyle{-\frac{4t^2}{\left( t^2+1 \right) ^2} } & \displaystyle{\frac{2t}{t^2+1} } & \displaystyle{\frac{2}{t^2+1} }
+	\end{pmatrix}\begin{pmatrix}
+	V^t \\
+	V^t \\
+	V^t
+	\end{pmatrix}
+\]
+\[
+	=V^t\left( \frac{2t+2}{t^2+1} -\frac{4t^2}{\left( t^2+1 \right) ^2}  \right) 
+.\]
+We thus have that in coordinates,
+\[
+	\gamma ^*\eta =\left(\frac{2t+2}{t^2+1} -\frac{4t^2}{\left( t^2+1 \right) ^2} \right)\mathrm{d} t
+.\]
+The integral is then
+\[
+\int_\gamma \eta =\int_0^1 \gamma ^*\eta = \int_{0}^{1} \frac{2t+2}{t^2+1} -\frac{4t^2}{\left( t^2+1 \right) ^2}  \,\mathrm{d} t=\int_0^1\frac{2t}{t^2+1}  \,\mathrm{d} t +\int_{0}^{1} \frac{2}{t^2+1}  \,\mathrm{d} t- \int_{0}^{1} \frac{4t^2}{\left( t^2+1 \right) ^2}  \,\mathrm{d} t
+.\]
+We already saw the integral of the first integral is $\ln u|_1^2 =\ln 2$. We recognize the integrand of the second integral as the derivative of arctan, so that evaluates to 
+\[
+	2 \left( \arctan 1 - \arctan 0 \right) =2\left( \frac{\pi }{4} -0 \right) =\frac{\pi }{2} 
+.\]
+To compute the final integral, we ask chatgpt for the correct substitution $t=\tan \theta $. Then $\mathrm{d} t = \frac{\partial t}{\partial \theta } \mathrm{d} \theta = \sec ^2 \theta \mathrm{d} \theta $. Note that $\tan \frac{\pi }{4} =1$ and $\tan 0=0$, so the integral becomes
+\[
+	-\int_{0}^{\pi /4} \frac{4 \tan ^2\theta }{\left( \tan ^2\theta +1 \right) ^2} \sec ^2\theta  \,\mathrm{d} \theta.
+\]
+Note that
+\[
+	\tan ^2\theta +1 = \frac{\sin ^2\theta }{\cos ^2\theta } +1  = \frac{\sin ^2\theta +\cos ^2\theta }{\cos ^2\theta } =\frac{1}{\cos ^2\theta } 
+.\]
+Therefore
+\[
+	\frac{4 \tan ^2\theta \sec ^2\theta }{\left( \tan ^2\theta +1 \right) ^2} =\frac{4 \tan ^2\theta \sec ^2\theta }{\frac{1}{\cos ^4\theta } } =4 \tan ^2\theta \sec ^2\theta \cos ^4\theta =4\frac{\sin ^2\theta }{\cos ^2\theta } \frac{1}{\cos ^2\theta } \cos ^4\theta =4\sin ^2\theta 
+.\]
+The integral is thus
+\[
+	-\int_{0}^{\pi /4} 4\sin ^2\theta  \,\mathrm{d} \theta 
+.\]
+Use the double angle identity
+\[
+	\cos 2\theta =1-2 \sin ^2\theta  \implies \sin ^2\theta  = \frac{1-\cos 2\theta }{2} 
+.\]
+This yields
+\[
+	=-2\int_{0}^{\pi /4} 1-\cos 2\theta  \,\mathrm{d} \theta =-2\left( \frac{\pi }{4} - \frac{1}{2} \sin \frac{\pi }{2} +\frac{1}{2} \sin 0 \right) =-2\left( \frac{\pi }{4}-\frac{1}{2} \right) =1-\frac{\pi }{2}
+.\]
+The full integral is thus
+\[
+	2 \ln 2+\frac{1}{2} -\frac{\pi }{2} + \frac{\pi }{2} =2 \ln 2 + 1
+.\]
+
+(2) Since $M=\mathbb{R} ^3$, we can use calculus 3 knowledge. Note that the gradient $\mathrm{d} f$ in coordinates is precisely the usual gradient:
+\[
+	\mathrm{d} f= \sum_{i} \frac{\partial f}{\partial x^i} \mathrm{d} x^i = \frac{\partial f}{\partial x} \mathrm{d} x+\frac{\partial f}{\partial y} \mathrm{d} y + \frac{\partial f}{\partial z} \mathrm{d} z=\nabla f.
+\]
+Of course we are replacing the basis vectors $\hat{x} ,\hat{y} ,\hat{z} $ with $\mathrm{d} x^i$, but this is an isomorphism of vector spaces so is negligable. A vector field in $\mathbb{R} ^3$ is exact if and only if it is conservative if and only if\footnote{I actually don't remember if this second statement is if and only if, but by problem 11.15 we show that if its conservative it has 0 gradient, so by contrapositive $\omega $ is not conservative. By construction of a potential in part (3),  $\eta $ is conservative. So if this assumption fails, the proof still works.} it has 0 curl.
+\[
+	\nabla \times \omega =\left( \partial _y\omega _z - \partial _z \omega _y \right) \mathrm{d} x - \left( \partial _x \omega _z - \partial _z\omega _x \right) \mathrm{d} y + \left( \partial _x \omega _y - \partial _y\omega _x \right) 
+\]
+\[
+	=-\left( \frac{2x^2+2-4x^2}{\left( x^2+1 \right) ^2} +\frac{4}{\left( x^2+1 \right) ^2}  \right) \mathrm{d} y=\frac{2x^2-6}{\left( x^2+1 \right) ^2} \mathrm{d} y \neq 0
+.\]
+Therefore, $\omega $ is not exact. We now compute the curl of $\eta $.
+\[
+	\nabla \times \eta =-\left( -\frac{4x}{\left( x^2+1 \right) ^2} +\frac{4x}{\left( x^2+1 \right) ^2}  \right) \mathrm{d} y=0
+.\]
+Therefore $\eta $ is exact.
+
+(3) I claim that $\eta =\mathrm{d} f$ when
+\[
+	f=\frac{2z}{x^2+1} + \ln \left( y^2+1 \right) 
+.\]
+Indeed,
+\[
+	\mathrm{d} f = \frac{\partial f}{\partial x} \mathrm{d} x = \frac{\partial f}{\partial y} \mathrm{d} y + \frac{\partial f}{\partial z} \mathrm{d} z=-\frac{4xz}{\left( x^2+1 \right) ^2} \mathrm{d} x + \frac{2y}{y^2+1} \mathrm{d} y + \frac{2}{x^2+1} \mathrm{d} z=\eta 
+.\]
+We then have by the fundamental theorem for line integrals that
+\[
+	\int_\gamma \eta =\int_\gamma \mathrm{d} f=f(\gamma (1))-f(\gamma (0))=f(1,1,1)-f(0,0,0)=\frac{2}{2} +\ln 2=1+\ln 2
+.\]
+This is precisely the same answer we got before, but with a lot less work.
+\end{proof}
+
+\section{Problem 11.15}
+\begin{problem}
+	Let $X$ be a smooth vector field defined on some open $U\subseteq \mathbb{R} ^n$. Given a piecewise smooth $\gamma : [a,b] \to U$, define the \emph{line integral of} $X$ \emph{over} $\gamma $, denoted $\int_\gamma X \cdot \mathrm{d} s$, as
+	\[
+		\int_\gamma X\cdot  \mathrm{d} s=\int _a^b X_{\gamma (t)} \cdot \gamma '(t) \,\mathrm{d} t
+	\]
+	where $\cdot $ is the usual dot product. A conservative vector field is one whose line integral around every piecewise smooth closed curve is 0.
+	\begin{enumerate}
+		\item Show $X$ is conservative if and only if there exists $f\in C^\infty (U)$ such that $X=\nabla f$ (viewing $\nabla f$ as a section of $TU$). [Hint: consider $\omega \in \mathfrak{X} ^*(U)$ given by $\omega _x(v)=X_x\cdot v$]
+		\item Suppose $n=3$, and define curl in the usual way. Show that if $X$ is conservative, then $\nabla \times X=0$.
+		\item Show that if $U\subseteq \mathbb{R} ^3$ is star-shaped, then $X$ is conservative on $U$ if and only if $\nabla \times X=0$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	We start by constructing an integral-preserving isomorphism $TU\cong T^*U$ using the global coordinates on $U$ induced by $\mathbb{R} ^n$. Let $\varphi : TU \to T^*U$ be the map $\partial _i \mapsto \mathrm{d} x^i$, where we use the canonical coordinates in $\mathbb{R} ^n$. This induces a map $\mathfrak{X} (U) \to \mathfrak{X} ^*(U)$ defined by
+	\[
+		X = \sum_{i} X^i \partial _i \mapsto \varphi (X) = \sum_{i} X^i \mathrm{d} x^i
+	.\]
+	This map is either a diffeomorphism $TM \cong T^*M$ by obviousness, by inspection of the coordinates, or by problem 11.5. This fact is not useful beyond the fact that the induced map $\mathfrak{X} (U) \to \mathfrak{X} ^*(U)$ is a bijection, which is also clear from the fact that it is a bijection of basis elements on each tangent space $T_pM \cong T_p^*M$. We claim that $\varphi $, viewed as a map $\mathfrak{X} (U) \cong \mathfrak{X} ^*(U)$, preserves integrals in the sense that using the given definition,
+	\[
+		\int_\gamma X \cdot \mathrm{d} s = \int_\gamma \varphi (X)
+	\]
+	for any piecewise smooth $\gamma : [a,b] \to U$. By Lee 11.38,
+	\[
+		\int_\gamma \varphi (X) = \int_a^b \varphi (X)_{\gamma (t)} (\gamma '(t))\,\mathrm{d} t
+	.\]
+	By definition,
+	\[
+		\int_\gamma X\cdot \mathrm{d} s = \int_a^b X_{\gamma (t)} \cdot \gamma '(t) \,\mathrm{d} t
+	.\]
+	We must show these are the same. Indeed, writing $\gamma ^i$ for the $i$th component of $\gamma $ and recalling how velocity vectors are written in coordinates,
+	\[
+		\varphi (X)_{\gamma (t)} (\gamma '(t))=\sum_{i} X^i_{\gamma (t)} \mathrm{d} x^i\left( \gamma '(t) \right) |_{\gamma (t)}=\sum_{i} X^i_{\gamma (t)}  \mathrm{d} x^i \left.\left( \sum_{j} \left.\frac{\mathrm{d}\gamma^j }{\mathrm{d}t}\right|_t\left. \frac{\partial }{\partial x^j}\right|_{\gamma (t)}   \right) \right|_{\gamma (t)} 
+	\]
+	\[
+		=\sum_{i} X^i_{\gamma (t)}  \frac{\mathrm{d}\gamma ^i}{\mathrm{d}t} =X_{\gamma (t)}\cdot \gamma '(t)
+	.\]
+	This is precisely the integrand of the second integral, completing the proof. We now complete the problem.
+
+	(1) By the above argument, $\varphi $ and its inverse $\varphi ^{-1} $ preserve conservativeness. It suffices to show that $\varphi(\nabla  f)=\mathrm{d}f$, since the converse will then follow for free:
+	\[
+		\varphi ^{-1} (\mathrm{d}f)=(\varphi ^{-1} \circ \varphi)(\nabla f)=\nabla f
+	.\]
+	Indeed, in coordinates,
+	\[
+		\nabla f = \sum_{i} \frac{\partial f}{\partial x^i} \frac{\partial }{\partial x^i},
+	\]
+	and
+	\[
+		\mathrm{d} f = \sum_{i} \frac{\partial f}{\partial x^i} \mathrm{d} x^i
+	.\]
+	We thus have
+	\[
+		\varphi (\nabla f)=\sum_{i} \frac{\partial f}{\partial x^i} \mathrm{d} x^i=\mathrm{d} f
+	.\]
+	
+	(2) This is a calculus 3 proof which we recite. Let $X=\nabla f$ be a vector field on $U$. Then
+	\[
+		\nabla \times X = \nabla \times \nabla f=\left( \frac{\partial }{\partial y} \frac{\partial f}{\partial z} -\frac{\partial }{\partial z} \frac{\partial f}{\partial y}  \right) \frac{\partial }{\partial x} -\left( \frac{\partial }{\partial x} \frac{\partial f}{\partial z} -\frac{\partial }{\partial z} \frac{\partial f}{\partial x}  \right) \frac{\partial }{\partial y} + \left( \frac{\partial }{\partial x} \frac{\partial f}{\partial y} -\frac{\partial }{\partial y} \frac{\partial f}{\partial x}  \right) \frac{\partial }{\partial z} 
+	.\]
+	Since $f$ is smooth, the partials commute with each other,  so we can rewrite this as
+	\[
+		\nabla \times \nabla f = \left( \frac{\partial ^2f}{\partial y \partial z} -\frac{\partial ^2 f}{\partial y \partial z}  \right) \frac{\partial }{\partial x} -\left( \frac{\partial ^2f}{\partial x \partial z} -\frac{\partial ^2f}{\partial x \partial z}  \right) \frac{\partial }{\partial y} +\left( \frac{\partial ^2f}{\partial x \partial y} -\frac{\partial ^2 f}{\partial x \partial y}  \right) \frac{\partial }{\partial z} =0
+	.\]
+	
+	(3) The condition $\nabla \times f = 0$ is equivalent to saying that
+	\[
+		\frac{\partial ^2 f}{\partial x^i \partial x^j} = \frac{\partial ^2 f}{\partial x^j \partial x^i} 
+	,\]
+	and it follows by the chain rule that this is true in any chart $(V,\psi )$. Translating under $\varphi $ into the language of covector fields, is the definition of a closed vector field. Therefore, closed vector fields are precisely those whose curl vanishes. By Lee proposition 11.44 and Poincar\'e's lemma (Lee 11.49), closed covector fiels are precisely exact covector fields on star-shaped domains, and thus the same is true for vector fields.
+
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{proof}
+	($\impliedby $) Let $M$ be an $n$-manifold such that there is a global trivialization $\Phi : TM \cong M\times \mathbb{R}^n$. The trivialization condition means that $\pi_M \circ \Phi =\pi $. This means that for any $(p,v)\in TM$, writing $\psi $ and $\phi $ for the component functions of $\Phi $,
+	\[
+		(\pi _M\circ \Phi )(p,v)=\pi _M(\psi(p),\phi(v))=\psi (p)=p=\pi(p,v)
+	.\]
+	Therefore, $\Phi (p,v)=(p,\phi (v))$ for some $\phi : TM \to \mathbb{R} ^n$.
+
+	Since $\Phi $ is invertible, we can consider the preimage $\Phi ^{-1} (p,x)$ for some $p\in M$ and $x\in\mathbb{R} ^n$. This must be an element of $TM$, which is of the form $(p,V)$ for $v\in T_pM$. Define $\phi_p ^{-1} (x)$ to be the entry $V$ in $\Phi ^{-1} (p,x)=(p,V)$. This is a well-defined map, and we use it for convenience of notation. Write $x^i$ for the $i$th standard basis vector $(0, \ldots ,1, \ldots ,0)$ which has a 1 at the $i$th entry. Consider the map $\Psi : T^*M \to M\times \mathbb{R} ^n$ which is defined by, for all $p\in M$ and $\omega \in T_p^*M$,
+	\[
+		(p,\omega )\mapsto \left( p, \sum_{i} \omega(\phi ^{-1} _p(x^i))x^i \right) 
+	.\]
+	We claim that $\Psi $ is a global trivialization for $T^*M$. Of course it is immediately (well-)defined globally, so we simply show it is smooth, and that the trivialization conditions are satisfied.
+
+	The first condition is satisfied immediately, since $\pi $ simply projects onto $M$ and $\Psi $ acts trivially on this component. The second condition is only mildly more involved. Each fiber is a cotangent space $T_p^*M$, so we simply show that $\Psi $ restricts to an isomorphism $T_p^*M \cong \left\{ p \right\} \times \mathbb{R} ^n$. Since $ \Phi(p,V)=(p,\phi _p(V))$, we can note that $\phi_p$ is an isomorphism $T_pM \cong \mathbb{R} ^n$, where we simply don't write the $p$ in the tuple. Since $\left\{ x^i \right\}_{i=1} ^n $ is a basis for $\mathbb{R} ^n$, and since $\phi _p$ is an isomorphism of vector spaces, $\left\{ \phi ^{-1} _p(x^i) \right\}_{i=1} ^n$ is a basis for $T_pM$. Denote $V^i_p \coloneqq  \phi ^{-1} _p(x^i)$.
+
+	To show $\Psi|T_p^*M$ is an isomorphism, since $T_p^*M$ and $\mathbb{R} ^n$ are finite-dimensional, it suffices to show it has trivial kernel. Let $\omega \in T_p^*M$ such that $\Psi (p,\omega )=(p,0)$. Then
+	\[
+		\sum_{i} \omega (V^i_p)x^i=0
+	\]
+	by definition of $\Psi $. Since the $x^i$s are linearly independent, we have $\omega (V^i)=0$ for all $i$. Since $V^i$ form a basis for $T_pM$, we see that $\omega =0$, and thus the kernel is indeed trivial.
+
+	Next, we show that $\Psi $ is smooth. Since $\Psi $ is given by
+	\[
+		(p,\omega )\mapsto \left( p, \sum_{i} \omega (V_p^i)x^i \right) =\left( p,\omega (V^1_p), \ldots ,\omega (V_p^n) \right) ,
+	\]
+	it suffices to show that each component function is smooth. The first is just the identity, which is smooth, so define $\Psi^i : T^*M \to \mathbb{R} $ by $\Psi ^i|T_p^*M : \omega \mapsto \omega (V_p^i)$. It suffices to show all of these are smooth. This is equivalent to showing the map $(p,\omega )\mapsto \omega (V^i_p)$ is smooth $T^*M\to \mathbb{R} ^n$. We prove this is smooth by proving the coordinate representation is smooth. Recall that given a chart $(U,\varphi )$ of $p\in M$, we define the chart $(\pi ^{-1} (U),\widetilde{\varphi } )$ on $T^*M$ by
+	\[
+		\widetilde{\varphi } (p,\omega )=\widetilde{\varphi } (p,\sum_{i} \omega_i \mathrm{d} x^i)=(\varphi (p),\omega_1, \ldots ,\omega _n)
+	.\]
+	The coordinate representation of $\Psi ^i$ is thus
+	\[
+		(\varphi (p),\omega_1, \ldots ,\omega _n)\mapsto \omega (V^i_p)
+	.\]
+	Mapping $p\mapsto V^i_p$ is smooth since this is just $p\mapsto (p,x^i)$ and applying $\Phi ^{-1} $, so the $p$-dependency of this function is smooth. It suffices to show $(\omega _1, \ldots ,\omega _n)\mapsto \omega (V^i_p)$ is smooth. In coordinates, this can be computed as
+	\[
+		\omega (V^i_p) = \left( \sum_{j} \omega _j \mathrm{d} x^j|_p \right) \left( \sum_{k} (V^i_p)^k \left.\frac{\partial }{\partial x^k} \right|_p \right) =\sum_{j} \sum_{k} \omega _j(V^i_p)^k \delta _j^k = \sum_{j} \omega ^j(V_p^i)^j
+	.\]
+	The map $\omega \mapsto \omega (V^i_p)$ then arises as the composite
+	\[
+		(\omega _1, \ldots ,\omega _n)\mapsto (\omega _1, \ldots ,\omega _n,(V^i_p)^1, \ldots ,(V^i_p)^n)\mapsto (\omega _1(V^i_p)^1, \ldots ,\omega _n(V^i_p)^n)\mapsto \sum_{j} \omega _j (V^i_p)^j
+	.\]
+	Since the constant map, multiplication, and addition are all smooth between $\mathbb{R} ^m$, this composite is therefore smooth, meaning $\Psi ^i$ is smooth, meaning $\Psi $ is smooth.
+
+	Now we show $\Psi ^i$ is a diffeomorphism. The inverse map is clear: given $(p,c_1, \ldots ,c_n)\in M\times \mathbb{R} ^n$, we can define a dual vector $\omega \in T_p^*M$ by $\omega (V^i_p)=c_1$; since the $V^i_p$s form a basis, this suffices to define $\omega $. This is a clear inverse since
+	\[
+		(p,c^1, \ldots ,c^n)\mapsto (p,\omega )\mapsto (p,\omega (V^1_p), \ldots , \omega (V^n_p)) \coloneqq (p,c_1, \ldots ,c_n),
+	\]
+	\[
+		(p,\omega )\mapsto (p, \omega(V^1_p), \ldots ,\omega (V^n_p))\mapsto (p,\omega ')
+	,\]
+	and $\omega '(V^i_p)=\omega (V^i_p)$ for all $i$, meaning $\omega '=\omega $. It suffices to show smoothness. We appeal once again to the coordinate representation, which is
+	\[
+		(p,c_1, \ldots ,c_n)\mapsto (\varphi (p),\omega_1, \ldots ,\omega _n)
+	.\]
+	The $p\mapsto \varphi (p)$ component is smooth since charts are diffeomorphisms, so we should determine $\omega _i$. In coordinates, these are given by
+	\[
+		\omega _i = \omega (\partial_i|_p)
+	.\]
+	Since $V^i_p$ forms a basis for $T_pM$, there exist coefficients $d_i$ such that
+	\[
+		\partial _i|_p = \sum_{j} d_jV^j_p
+	.\]
+	Then by linearity of $\omega $,
+	\[
+		\omega (\partial _i|_p)=\sum_{j} d_j \omega (V^j_p)=\sum_{j} c_jd_j
+	.\]
+	TODO: figure out how tf the assignment to $d_j$s arises in a smooth way (i assume use $\Phi $)
+\end{proof}
+
+
+
+
+
+
+	(1) ($\implies $) Let $X$ be conservative. Then it is path-independent by the usual proof: given two paths $\gamma ,\delta : [a,b] \to \mathbb{R} ^n$ with the same starting and ending points, parameterize $\delta $ backwards to obtain $\widetilde{\delta } $, and concatenate them to obtain a closed path $\widetilde{\delta } \cdot \gamma $. The integral of this is 0, so the integrals are the same. Then note that $\widetilde{\delta } \cdot \delta $ is also a closed path so the integral of that is 0, meaning the integrals of $\widetilde{\delta} $ and $\delta $ are the same.
+
+	By way of path-independence, the following definition is well-defined. Fix any $x_0\in\mathbb{R} ^n$. Let $f : \mathbb{R} ^n \to \mathbb{R} $ be the function given by
+	\[
+		f(x)=\int_{\gamma _x} X\cdot \mathrm{d} s,
+	\]
+	where $\gamma _x$ is any path from $x_0$ to $x$. Note here that there are thus a variety of possible $f$s that can be chosen by choosing different values of $x_0$. By path-independence, these can be thought of as translations, meaning this corresoponds to constants of integration.
+
+	We claim that $X=\nabla f$. We start by proving this for points sufficiently close to our fixed point $x_0$. Let $V\subseteq U$ be an open ball containing $x_0$, and let $x\in V$. 
+
+
+
+	($\impliedby $) Let $X=\nabla f$ and $\gamma : [a,b] \to \mathbb{R} ^n $ any piecewise smooth path. Write $\gamma _i$ for the component functions of $\gamma $, such that $(\gamma ')_i=(\gamma _i)'$. Then writing $\gamma _i^'(t)$ for the $i$th component function of $\gamma '$,
+	\[
+		\int_\gamma \nabla f \cdot \mathrm{d} s = \int_a^b \nabla f(\gamma (t))\cdot \gamma '(t) \,\mathrm{d} t= \sum_{i} \int_a^b \left. \gamma '_i(t)\frac{\partial f}{\partial x^i} \right|_{\gamma (t)}  \,\mathrm{d} t
+	.\]
+	Notice that this is just the chain rule:
+	\[
+		\frac{\mathrm{d}}{\mathrm{d}t} f(\gamma (t)) = \sum_{i} \left. \frac{\partial f}{\partial x^i} \right_{\gamma (t)} \frac{\mathrm{d}\gamma }{\mathrm{d}t} =\nabla f\cdot \gamma '(t)
+	.\]
+	The fundamental theorem of calculus now says
+	\[
+		=\int_a^b\frac{\mathrm{d}}{\mathrm{d}t} f(\gamma (t)) \,\mathrm{d} t=f(\gamma (b))-f(\gamma (a))
+	.\]
+	Now suppose $\gamma $ is a closed path, meaning $\gamma (b)=\gamma (a)$. Using the above relation, we find that
+	\[
+		\int_\gamma X \cdot \mathrm{d} s = f(\gamma (b))-f(\gamma (a))=f(\gamma (b))-f(\gamma (b))=0
+	.\]

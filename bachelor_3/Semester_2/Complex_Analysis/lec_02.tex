@@ -1,0 +1,66 @@
+\lecture{2}{Thu 22 Jan 2026 09:32}{The complex differential operators}
+
+By convention, we often identify the Jacobian matrix $f_*$ of a holomorphic function $f$ with the single complex number $f_*(1)\cdot (1,i)$. As explored last time, we can precisely recover $f_*$ from such a number.
+
+We now want to work in a more natural basis of differential operators for our tangent space, in particular $\partial _z$ and $\partial _{\overline{z} } $. We claim these are indeed linearly independent, and thus form a basis since they are of the same cardinality as $\partial _x,\partial_y$. We define them as follows.
+\begin{definition}\label{1.1.3}
+	Define the differential operators
+	\[
+		\frac{\partial }{\partial z} =\frac{1}{2} \left( \frac{\partial }{\partial x} -i\frac{\partial }{\partial y}  \right) \qquad \frac{\partial }{\partial \overline{z} } =\frac{1}{2} \left( \frac{\partial }{\partial x}+i \frac{\partial }{\partial y}  \right) 
+	.\]
+\end{definition}
+
+This makes sense for several reasons.
+
+\begin{proposition}\label{1.1.4}
+	A function $f : U\subseteq \mathbb{C}  \to \mathbb{C} $ satisfies the C-R equations if and only if $\partial _{\overline{z} } f=0$.
+\end{proposition}
+\begin{proof}
+	Let $f=u+iv$. Then
+	\begin{align*}
+		\frac{\partial f}{\partial \overline{z} } &=\frac{1}{2} \left( \frac{\partial f}{\partial x} +i \frac{\partial f}{\partial y}  \right) \\
+							  &=\frac{1}{2} \left( \frac{\partial u}{\partial x} +i \frac{\partial v}{\partial x} +i \frac{\partial u}{\partial y} -\frac{\partial v}{\partial y}  \right) \\
+							  &=\frac{1}{2} \left( \frac{\partial u}{\partial x} -\frac{\partial v}{\partial y}  \right) +\frac{i}{2} \left( \frac{\partial v}{\partial x} +\frac{\partial u}{\partial y}  \right) 
+	.\end{align*}
+	By linear independence of $\left\{ \partial _x,\partial _y \right\} $, this is zero if and only if the C-R equations are satisfied.
+\end{proof}
+\begin{proposition}\label{1.1.5}
+	Let $f : U\subseteq \mathbb{C}  \to \mathbb{C} $ be holomorphic. Then $f'(z)=\partial_zf|_z$.
+\end{proposition}
+\begin{proof}
+	This follows immediately by the calculation done in the proof of \cref{1.1.4}.
+\end{proof}
+
+We then see by \cref{1.1.2,1.1.5} that $\partial _{z} \overline{z} =0$ and $\partial _{\overline{z} } z=0$. We also have $\partial _zz=\partial _{\overline{z} } \overline{z} =1$.
+
+We now define a non-standard notion introduced by the book.
+\begin{definition}\label{1.1.6}
+	Let some $f : U\subseteq \mathbb{C}  \to \mathbb{C}$. We will call $f$ $C^1$-holomorphic if $f$ is $C^1$ as a map $U\subseteq \mathbb{R} ^2\to \mathbb{R} ^2$, and $\partial _{\overline{z} } f=0$.
+\end{definition}
+The only difference between \cref{1.1.1} and \cref{1.1.6} is that a $C^1$-holomorphic function has \emph{continuous} partials. The more classical notion is the weaker notion. However, we will eventually see that $C^1$-holomorphic functions are equivalent to holomorphic functions. We will more precisely see that holomorphic functions are $C^\omega $.
+
+There is an even more traditional way of saying something is holomorphic.
+
+\begin{definition}\label{1.1.7}
+	Let $f : U\subseteq \mathbb{C}  \to \mathbb{C} $. We say $f$ is \emph{holomorphic} if for all $z\in U$, the limit
+			\[
+				f'(z)\coloneqq \lim_{h\to 0\text{ in }\mathbb{C} } \frac{f(z+h)-f(z)}{h} 
+			\]
+			exists.
+\end{definition}
+
+I went afk for a bit but we ended up with this being equivalent to
+\[
+	f'(z)=\lim_{\mathbb{R} \ni t\to 0} \frac{f(z+it)-f(z)}{it} 
+.\]
+
+Since we are able to formulate derivatives in terms of the same formula used in calculus, the same proofs are used to prove derivative rules for holomorphic functions, such as
+\[
+	(fg)'=f'g+fg',\qquad (f\circ g)'=(f'\circ g)\cdot g'
+.\]
+
+\begin{definition}\label{1.1.8}
+	We say $f : U\subseteq \mathbb{C}  \to \mathbb{C} $ is \emph{analytic} if it locally can be given by a power series, meaning for all $z\in U$ there exists an open neighborhood $z\in V\subseteq U$ such that $f$ has a power series expansion around $z$ which converges in $V$. We can write $V$ as an $\varepsilon $-neighborhood $B_\varepsilon (z)$ for some $\varepsilon >0$ sufficiently small such that $B_\varepsilon (z)\subseteq U$. We say $f$ is $C^\omega $ and write $f\in C^\omega (U,\mathbb{C} )$.
+\end{definition}
+
+A major goal of the next few weeks is to show that $f$ is holomorphic on $U$ if and only if $f$ is analytic on $U$. This will imply that $f$ is $C^\infty $, and thus reconciling the definition given by \cite{greene-krantz}.

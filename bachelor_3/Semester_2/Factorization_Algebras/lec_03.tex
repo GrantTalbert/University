@@ -1,0 +1,43 @@
+\lecture{3}{Tue 27 Jan 2026 14:01}{The quantum motivation}
+
+So far we have been fairly imprecise in our motivation of (pre)factorization algebras using the classical reasining for preFAs. Now we are exploring the \emph{quantum} motivation for prefactorization algebras via the path integral. We will for now think of observables $\mathcal{O} ^{cl} $ as functions on \emph{all fields}, not just the critical locus. Recall that we want something like
+\[
+	\left\langle \mathcal{O} _1^{cl} , \ldots ., \mathcal{O} ^{cl} _r \right\rangle =\int _{\phi \in \mathcal{E} } \mathcal{O}^{cl}_1(\phi )\cdots \mathcal{O}^{cl} _r(\phi )e^{-\frac{1}{\hbar }S(\phi )}  \,\mathrm{D}\phi  
+.\]
+Of course this should be some kind of probability measure, but it doesn't really make mathematical sense. Recall that we invoked the isomorphism of forms and polyvector fields to construct the \emph{divergence complex}, provided we have a volume form. The maps $\Gamma (\Lambda ^{n-k} TM)\to \Gamma (\Lambda ^{n-k-1} TM)$ are the divergence maps. In de Rham, integration lowers to
+\[
+	\int : H^n(M)\cong  \mathbb{R} 
+.\]
+Thus we can identify along the chain isomorphism to think of the projection $C^\infty (M)\to C^\infty (M) / \Im \mathrm{div} _\omega $ as $f\mapsto \int _Mf\omega =\left\langle f \right\rangle $.
+
+Let's derive prefactorization algebras from this. Consider the free scalar field theory $\mathcal{E} =C^\infty (\mathbb{R} ^n)$,
+\[
+	S(\phi )=\int_{\mathbb{R} ^n} \phi (\Delta +m^2)\phi  \,\mathrm{d} ^nx
+.\]
+Although this need not make sense, recall that provided our variations are compactly supported, extremizing $S$ does indeed make sense. Fix $A$ a positive definite $n\times n$ symmetric matrix. Write $\mathbb{P} (\mathbb{R} ^n)=\mathbb{R} [x_1, \ldots ,x_n]$. Then recall a Gaussian integral is of the form $\left\langle - \right\rangle : \mathbb{P} (\mathbb{R} ^n) \to \mathbb{R} $ by
+\[
+	f\mapsto \int_{\mathbb{R} ^n} f(x) \exp \left( -\frac{1}{2} x^tAx \right)
+.\]
+This makes sense since $A$ is positive definite. We claim that path integrals
+\[
+	\int_\mathcal{E} \mathcal{O} _1^{cl} (\phi )\cdots \mathcal{O} _r^{cl} \exp \left(\int -\frac{1}{2} \phi (\Delta +m^2) \phi \mathrm{d} ^nx\right)
+\]
+are like an infinite dimensional version of the first problem. This follows since
+\[
+	\phi \otimes \psi \mapsto \int \frac{1}{2} \phi (\Delta +m^2)\psi  \,\mathrm{d} ^nx
+\]
+is positive definite and symmetric. Oh btw $m$ is mass.
+
+Now let's try to generalize. Consider $\mathbb{R} ^n$ which is noncompact. We have $\mathrm{div} _\omega : \mathbb{P} \mathfrak{X} (\mathbb{R} ^n) \to \mathbb{P} (\mathbb{R} ^n)$ and then integation maps to $\mathbb{R} $. We cannot consider all of $C^\infty $ since $\mathbb{R} ^n$ is contractible so its top de Rham cohomology is 0. bla bla see picture i aint typin allat rn
+
+Now we want to integrate over $C^\infty (\mathbb{R} ^n)$ rather than just $\mathbb{R} ^n$. We should start by defining polynomials on $V=C^\infty (\mathbb{R} ^n)$. Given a finite vector space $W$, a polynomial on $W$ is a symmetric algebra on $W^*$. This is since stuff like $x_i$ are projections (lin functionals) so $x_1^2x_2\cdots $ something like that is a symmetric product of those functionals. Hence motivating a polynomial.
+
+We don't want the entire algebraic dual of $V$, since it would be massive. It would make more sense to at least restrict to \emph{continuous} functionals with respect to some natural topolgy on $C^\infty (\mathbb{R} ^n)$, like the compact-open topology. Certaintly we want the continuous functions $\mathrm{ev} _x$ evaluating at $x$. We can rewrite them as distributions using the dirac delta (a distribution)
+\[
+	\mathrm{ev}_xf= \int_{\mathbb{R} ^n} f(z)\delta (z-x) \,\mathrm{d} ^nz
+.\]
+Thus the correct analogue of polynomials here is something like the symmetric algebra on the space of distributions on $\mathbb{R} ^n$. Integrating against compactly supported functions yields an inclusion of compactly supported $C^\infty $ functions into distributions. We will restrict to those for our discussion. Delta functions and evaluation functionals are not in the image of this inclusion. We will write this as $C^\infty _c(\mathbb{R} ^n)$, and note that this is dense in the space of distributions. For our purposes, distributions are defined as dual to a space of functions.
+
+Apparently distributions generalize functions and it makes sense to consider diffeqs of distributions, so if you can't find a function that satisfies your PDE then you can look for a distribution.
+
+We define $\mathbb{P} (C^\infty (\mathbb{R} ^n))\coloneqq \operatorname{Sym} C^\infty _c(\mathbb{R} ^n)$.

@@ -1,0 +1,87 @@
+\lecture{5}{Tue 03 Feb 2026 09:31}{Harmonic functions}
+
+\begin{definition}\label{1.1.15}
+	A \emph{harmonic function} is a $C^2$ function $u : U\subseteq \mathbb{R} ^n\to \mathbb{R} $ such that the wave equation $\Delta u=\operatorname{Div} _\omega \mathrm{d} u=0$ is satisfied.
+\end{definition}
+
+\begin{remark}\label{1.1.16}
+	Since vector fields admit a canonical multiplication operation, and since $[\partial _x,\partial _y]=0$,
+	\[
+		\frac{\partial }{\partial z} \frac{\partial }{\partial \overline{z} } =\frac{1}{4} \left( \frac{\partial }{\partial x} -i \frac{\partial }{\partial y}  \right) \left( \frac{\partial }{\partial x} +i \frac{\partial }{\partial y}  \right) =\frac{1}{4} \left(\frac{\partial ^2}{\partial x^2} +\frac{\partial ^2}{\partial y^2} \right)=\frac{1}{4} \Delta 
+	.\]
+\end{remark}
+
+\begin{proposition}\label{1.1.17}
+	The real and imaginary parts of a holomorphic function $f=u+iv$ are harmonic.
+\end{proposition}
+\begin{proof}
+	We have
+	\[
+		\Delta f=4 \frac{\partial }{\partial z} \frac{\partial }{\partial \overline{z} } f=4 \frac{\partial }{\partial z} 0=0
+	.\]
+	By linearity, $\Delta u+i\Delta v=0$. By $\mathbb{R} $-linear independence of $\left\{ 1,i \right\} $ and since $u,v$ are purely real, we have $\Delta u=\Delta v=0$.
+\end{proof}
+
+This statement has a partial converse. Locally, we can take an open set to always be simply connected, hence giving us a local converse.
+
+\begin{proposition}\label{1.1.18}
+	Let $u : U\subseteq \mathbb{R} ^2 \to \mathbb{R} $ be harmonic, with $U$ open and simply connected. Then there exists a holomorphic function $f : U \to \mathbb{C} $ such that $f=u+iv$ for some $v$.
+\end{proposition}
+
+The proof requires a lemma from multivariate calculus.
+
+\begin{proposition}\label{1.1.19}
+	Let $P,Q : U\subseteq \mathbb{R} ^2 \to \mathbb{R} $ be $C^1$ on an open set $U$, and satisfy $\partial _xQ=\partial _yP$. Then there exists a $C^2$ function $\phi  : U \to \mathbb{R} $ such that $\partial _x\phi $ and $\partial _y\phi $. Equivalently, $\mathrm{d} \phi =(P,Q)$, meaning $\phi $ is a \emph{potential function} for the exact vector field $(P,Q)\in \mathfrak{X} (U)$. 
+\end{proposition}
+
+\begin{proof}[Proof of \cref{1.1.18}]
+	Define
+	\[
+		P\coloneqq -\frac{\partial u}{\partial y} ,\qquad Q\coloneqq \frac{\partial u}{\partial x} 
+	.\]
+	Then since $u$ is harmonic, we have
+	\[
+		-\frac{\partial P}{\partial y} +\frac{\partial Q}{\partial x} =-\left(-\frac{\partial ^2u}{\partial y^2}\right) +\frac{\partial ^2u}{\partial x^2} =\Delta u=0
+	.\]
+	Thus \cref{1.1.19} yields the potential function $v : U \to \mathbb{R} $ with $\mathrm{d} v =(-\partial _yu,\partial _xu)$. Note that this yields
+	\[
+		\frac{\partial v}{\partial x} =-\frac{\partial u}{\partial y} ,\qquad \frac{\partial v }{\partial y} =\frac{\partial u}{\partial x} 
+	.\]
+	These are the C-R equations, so $f=u+iv $ is holomorphic on $U$. 
+\end{proof}
+
+\chapter{Complex line integrals}
+
+Let $\gamma : [a,b] \to \mathbb{C} $. Then $\gamma $ is $C^1$ if
+\begin{itemize}
+	\item $\gamma |(a,b)$ is $C^1$, and
+	\item $\partial _t\gamma $ extends to a continuous function on $[a,b]$.
+\end{itemize}
+Now let $f$ be holomorphic on $U\subseteq \mathbb{C} $ and let $\Im \gamma \subseteq U$. Then we define
+\[
+	\int_\gamma f = \int_a^b f(\gamma (t))\gamma '(t) \,\mathrm{d} t
+.\]
+We can view $f$ as a section of the complexified cotangent bundle $T_\mathbb{C} ^*U$. If $z=x+iy$, then we define $\mathrm{d} z=\mathrm{d} x+i\mathrm{d} y$. Then define the 1-form $\omega =f(z)\mathrm{d} z$. Recall that complex differentials make sense in the complexified (co)tangent bundle, so this is indeed a 1-form. We then have that our definition above yields
+\[
+	\int_\gamma f = \int_\gamma \omega =\int_a^b \gamma ^*\omega 
+.\]
+As usual, this is the same formula:
+\[
+	\int_{a}^{b} \gamma ^*\omega =\int_{a}^{b} \gamma ^*(f(z)\mathrm{d} z) 
+.\]
+Here we apply \cite{lee} 11.25, which says if $u$ is smooth and $\omega $ is a covector field, then the pullback along any $F$ is $F^*(u\omega )=(u\circ F)F^*\omega $. This yields
+\[
+	=\int_a^b f(\gamma (t)) \gamma ^*\mathrm{d} z
+.\]
+Note that $\gamma ^*\mathrm{d} z$ is a 1-form on $[a,b]$. To see what it is, we see how it acts on the vector field $\partial _t$. We have $\gamma ^*\mathrm{d} z( \partial _t)=\mathrm{d} z(\gamma _*\partial_t)$. The (real) pushforward of $\gamma (t)=\gamma ^x(t)+i \gamma ^y(t)$ is
+\[
+	\gamma _* = \begin{pmatrix}
+	\partial_t\gamma ^x \\
+	\partial _t\gamma ^y
+	\end{pmatrix} = \frac{\partial \gamma ^x}{\partial t} \frac{\partial }{\partial x} +\frac{\partial \gamma ^y}{\partial t} \frac{\partial }{\partial y} 
+.\]
+Acting this on $\partial _t$ yields simply $\gamma _*$. Then acting $\mathrm{d} z$ on this yields
+\[
+	\left( \mathrm{d} x+i \mathrm{d} y \right) \left( \frac{\partial \gamma ^x}{\partial t} \frac{\partial }{\partial x} +\frac{\partial \gamma ^y}{\partial t} \frac{\partial }{\partial y}  \right) =\frac{\partial \gamma ^x}{\partial t} +i \frac{\partial \gamma ^y}{\partial t} =\gamma '(t)
+.\]
+Since $\gamma ^*\mathrm{d}z$ is a 1-form on $[a,b]$, it must be of the form $g(t)\mathrm{d} t$ for some $g$. By this computation, $\gamma ^*\mathrm{d} z=\gamma '(t)\mathrm{d} t$.

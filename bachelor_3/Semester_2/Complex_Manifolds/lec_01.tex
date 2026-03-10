@@ -1,0 +1,153 @@
+\chapter{Local theory}
+
+\section{Holomorphic functions of several variables}
+
+\lecture{1}{Tue 20 Jan 2026 12:25}{Syllabus day}
+
+Book: \emph{Complex Geometry} by Daniel Hugbrechts.
+
+\begin{definition}\label{1.1.1}
+	A complex manifold is a topological manifold locally modeled by open subsets of $\mathbb{C} ^n$ such that the transition functions are biholomorphic (holomorphic and invertible).
+\end{definition}
+
+Holomorphic functions are extremely rigid. For example, they are necessarily analytic (stronger than $C^\infty $ -- has convergent power series). These are very special manifolds and we should be able to say a lot about them. However, we cannot, for example, have partitions of unity or compactly supported holomorphic functions, so the study of them is very different from that of real manifolds, and we will use many tools that show up in algebraic geometry.
+
+Recall: let $f : U\subseteq \mathbb{C}  \to \mathbb{C} $. Then $f$ is holomorphic if any of the following equivalent characterizations hold.
+\begin{enumerate}
+	\item $f$ satisfies the Cauchy-Riemann (C-R) equations: Let $z=x+iy$ and $f(z)=u(x,y)+iv(x,y)$. Then $\partial _xu=\partial _yv$ and $\partial _yu=-\partial _xv$.
+	\item $\mathrm{d} fJ=J\mathrm{d}f$ for $J\in \Hom_\mathbb{C} (\mathbb{C} , \mathbb{C} ) $ the complex structure $x\mapsto ix$ (easy verification, multiply matrices in both directions and recover C-R eqns).
+	\item Another way of saying (2) is $\mathrm{d} f$ is $\mathbb{C} $-linear.
+	\item Another formulation is defining $\partial _z=\frac{1}{2} (\partial _x-i-\partial _y)$ and $\partial _{\overline{z} } =\frac{1}{2} (\partial _x+i \partial _y)$. Then we require $\partial _{\overline{z} } f=0$. This follows by expanding it out in terms of $u,v,x,y$, and recovering C-R.
+	\item Near all $c\in U$, there exists an $\varepsilon $-ball $B(\varepsilon ,c)$ centered at $c$ where $f$ has a convergent power series expansion.
+\end{enumerate}
+
+We also recall some relevant theorems from single variable complex analysis.
+
+\begin{proposition}[Maximum principle]\label{1.1.2}
+	Let $U\subseteq \mathbb{C} $ be open and connected. If $f : U \to \mathbb{C} $ is holomorphic and non-constant, then $\left| f \right| $ has no local maximum in $U$. If $U$ is bounded and $f$ can be extended to a continuous function $f : \overline{U}  \to \mathbb{C} $, then $\left| f \right| $ takes its maximal values on the boundary $\partial U$.
+\end{proposition}
+\begin{proposition}[Identity theorem]\label{1.1.3}
+	If $f,g : U \to \mathbb{C} $ are holomorphic on a connected open subset $U\subseteq \mathbb{C} $ such that for a non-empty open subset $V\subseteq U$, the restrictions $f|V=g|V$ agree, then $f=g$.
+\end{proposition}
+\begin{proposition}[Riemann extension theorem]\label{1.1.4}
+	Let $f : B_\varepsilon (z_0)\setminus \left\{ z_0 \right\}  \to \mathbb{C} $ be a bounded holomorphic function. Then $f$ can be extended to a holomorphic function $f : B_\varepsilon (0) \to \mathbb{C} $.
+\end{proposition}
+\begin{proposition}[Riemann mapping theorem]\label{1.1.5}
+	Let $U\subseteq \mathbb{C} $ be a simply connected proper open subset. Then $U$ is biholomorphic to the unit ball $B_1(0)$, i.e. there exists a bijective holomorphic map $f : U \to B_1(0)$ such that its inverse is also holomorphic.
+\end{proposition}
+\begin{proposition}[Liouville]\label{1.1.6}
+	Every bounded holomorphic function $f : \mathbb{C}  \to \mathbb{C} $ is constant. In particular, there is no biholomorphic map between $\mathbb{C} $ and a ball $B_\varepsilon (0)$ with $\varepsilon <\infty $. This is a striking difference to the real situation and will cause a different concept of locality for complex manifolds than the one we are used to from real differential geometry.
+\end{proposition}
+\begin{proposition}[Residue theorem]\label{1.1.7}
+	Let $f : B_\varepsilon (0)\setminus \left\{ 0 \right\}  \to \mathbb{C} $ be a holomorphic function. Then $f$ can be expanded in a Laurent series
+	\[
+		f(z)=\sum_{n=-\infty }^{\infty} a_nz^n
+	\]
+	and the coefficient $a_{-1} $ is given by the residue formula
+	\[
+		a_{-1} =\frac{1}{2\pi i} \int_{\left| z \right| =\varepsilon /2} f(z) \,\mathrm{d} z
+	.\]
+	The residue theorem is usually applied to more general situations where the function $f$ has several isolated singularities in a connected open subset and the integral is taken over a closed contractible path surrounding the singularities.
+\end{proposition}
+
+
+
+We generalize this to several complex variables. We will not get into why this makes sense beyond contrasting with our previous characterizations since this subject is quite different than complex analysis in 1 variable.
+
+We have notation as follows. $z\in\mathbb{C} ^n$ is $z_j$ with each component written as $z_j=x_j+iy_j$. We will often write $i$ instead of $j$ and assume it does not get confused with the complex unit. We will sometimes use $z^J=z_i^{j_k} $. A basis for the topology is given by polydisks
+\[
+	\Delta (\varepsilon ,c)=\left\{ z\in\mathbb{C} ^n\mid \left| z_j-c_j \right| <\varepsilon _j\forall j=1, \ldots ,n \right\} 
+.\]
+Polydisks in $\mathbb{C} ^n$ are like real $2n$-dimensional rectangles.
+
+\begin{theorem}\label{1.1.8}
+	Let $U\subseteq \mathbb{C} ^n$ open and $f\in C^\infty (U,\mathbb{C} )$ (although assuming $C^1$ suffices). The following are equivalent.
+	\begin{enumerate}
+		\item $f$ satisfies the C-R equations in each $z_i$: $\partial _{x_i}u=\partial _{y_i} v$ and $\partial _{x_i} v=\partial _{y_i} u$;
+		\item $f$ is separably holomorphic in each variable $z_j$, i.e. fixing all but one variable is holomorphic;
+		\item Given $c\in U$, there exists an $\varepsilon $-polydisk $\Delta (\varepsilon ,c)$ such that $f(z)$ has a powerseries expansion in the polydisk $\Delta (\varepsilon ,c)$
+			\[
+				f(z)=\sum_{\left| J \right| =0}^{\infty} a_J(z-c)^J
+			.\]
+	\end{enumerate}
+\end{theorem}
+\begin{proof}[Sketch of proof.]
+	Proof of $(1)\iff (2)$ is simple via 1-variable complex analysis. Power series converge on their interior, so they converge in any variable, thus $(3)\implies (2)$. The only work required to prove this is $(2)\implies (3)$. This follows from the multivariat Cauchy Integral Formula (CIF).
+\end{proof}
+
+
+\begin{definition}\label{1.1.9}
+	A function $f : U\subseteq \mathbb{C} ^n \to \mathbb{C}^n $ is \emph{holomorphic} if it satisfies any of the criteria of \cref{1.1.8}.
+\end{definition}
+
+\begin{theorem}[Cauchy integration formula, \cite{huybrechts} 1.1.2]\label{1.1.10}
+	Let $f$ be holomorphic on a polydisk $D=\prod_{j} D_j$ with $D_j$ an open disk, and continuous on its closure. Then for $z\in D$,
+	\[
+		f(z)=\frac{1}{(2\pi i)^n} \int \cdots \int_{\partial D_1\times \cdots \times \partial D_n} \frac{f(\zeta_1, \ldots ,\zeta _n)}{\prod_{j} (\zeta _j-z_j)}  \,\mathrm{d} \zeta _1 \cdots \mathrm{d} \zeta _n
+	.\]
+\end{theorem}
+
+Many 1-variable theorems generalize. For example, the maximum modulus principle and the identity theorem. If $f$ is a nonconstant holomorphic function, then its modulus does not attain a maximum on the interior of its domain. If $f$ and $g$ are analytic on a domain $D$ and $f=g$ on some $S\subseteq D$ with an accumulation point, then $f=g$ on $D$.
+
+\begin{lemma}[\cite{huybrechts} 1.1.3]\label{1.1.11}
+	Let $U\subseteq \mathbb{C} ^n$ be open, and let $V\subseteq \mathbb{C} $ be an open neighborhood of the boundary of an $\varepsilon $-sphere $\partial B_\varepsilon (0)$. Suppose $f : U\times V \to \mathbb{C} $ is holomorphic. Then the function
+	\[
+		g(z_1, \ldots ,z_n)=\int_{\left| \zeta  \right| =\varepsilon } f(\zeta , z_1, \ldots ,z_n) \,\mathrm{d} \zeta 
+	\]
+	is holomorphic on $U$.
+\end{lemma}
+\begin{proof}[Sketch of proof.]
+	Differentiate under the integral sign; this is valid by compactness $\left| \zeta  \right| =\varepsilon $, or alternatively the dominated convergence theorem. Thus
+	\[
+		\frac{\partial g}{\partial \overline{z} _i} =\int _{\left| \zeta  \right| =\varepsilon } \frac{\partial f}{\partial \overline{z} _i} f(\zeta ,z_1, \ldots ,z_n) \,\mathrm{d} \zeta 
+	.\]
+	Since $f$ is holomorphic, appealing to \cref{1.1.8} (2) the interior of the integral vanishes, and $g$ is holomorphic also by \cref{1.1.8} (2).
+\end{proof}
+
+More review.
+
+\begin{definition}\label{1.1.12}
+	Let $(X,\mathcal{T} )$ be a topological space and $\mathcal{O} \mathrm{pen} (X)$ the poset category $\mathcal{T} $. Then a \emph{presheaf} with values in a \emph{concrete} category $\mathcal{C} $ is a functor $\mathcal{F} : \mathcal{O} \mathrm{pen} (X)^{\mathrm{op}}  \to \mathcal{C} $.
+\end{definition}
+Often we take $\mathcal{C} =\Set $, $\Ab $, $R$-$\Mod$, or another concrete abelian category $\mathcal{A} $. If $U\subseteq X$ is open, we call elements of $\mathcal{F} (U)$ \emph{sections} of $\mathcal{F} $ over $U$. If $U\subseteq V$ are open in $X$ and $s\in \mathcal{F} (V)$, then we write $s|U$ for the image of $s$ in the induced map $\mathcal{F} (V)\to \mathcal{F} (S)$. 
+\begin{definition}\label{1.1.13}
+	 A \emph{sheaf} is a presheaf $\mathcal{F} $ that satisfies the following axioms.
+	\begin{itemize}
+		\item (Locality) If $U\subseteq X$ is open and $\left\{ U_i\subseteq U \right\} _{i\in I} $ is an open cover of $U$, and $s,t\in \mathcal{F} (U)$ have $s|U_i=t|U_i$ for all $i$, then $s=t$.
+		\item (Gluing) Let $U\subseteq X$ be open, $\left\{ U_i\subseteq U \right\} _{i\in I} $ an open cover of $U$ and $\left\{ s_i\in \mathcal{F} (U_i) \right\} _{i\in I} $ a collection of sections. If $s_i|U_i \cap U_j=s_j|U_i \cap U_j$ for all $i,j\in I$, then there is some $s\in \mathcal{F} (U)$ such that $s_i=s|U_i$ for all $i$.
+	\end{itemize}
+\end{definition}
+
+Locality and gluing can be reinterpreted in terms of exactness of a sequence, and even more generally this can be rephrased as a certain diagram being an equalizer diagram. We will not need non-concrete categories in this case, so we ignore this generalization.
+
+\begin{notation}\label{1.1.14}
+	Given a space $X$, we define the \emph{category of $\mathcal{C} $-valued presheaves} as $\mathcal{P} \mathrm{shf} (X,\mathcal{C} )\coloneqq \mathcal{C}^{\mathcal{O} \mathrm{pen} (X)^{\mathrm{op}} } $. We define the category $\mathcal{S} \mathrm{hf} (X,\mathcal{C} )$ of $\mathcal{C} $-valued sheaves on $X$ as the full subategory of $\mathcal{P} \mathrm{shf} (X,\mathcal{C} )$ spanned by sheaves. This means that a morphism of (pre)sheaves are natural transformations.
+\end{notation}
+
+\begin{definition}\label{1.1.15}
+	Let $\mathcal{F} $ be a (pre)sheaf of a space $X$ on a category $\mathcal{C} $. The \emph{stalk} $\mathcal{F} _p$ of $\mathcal{F} $ at a point $p\in X$ is the quotient
+	\[
+		\left\{ (s,U)\mid U\in \mathcal{O} \mathrm{pen} (X),p\in U,s\in \mathcal{F} (U) \right\} /\tildesim 
+	\]
+	where $\sim $ is defined by $(s,U)\sim (t,V)$ iff there is an open set $W\subseteq U,V$ with $p\in W$ such that $s|W=t|W$. A \emph{germ} of $\mathcal{F} $ at $p$ is an element of the stalk of $\mathcal{F} $ at $p$. An equivalent characterization of the stalk is as follows. Let $\mathcal{U}_p \subseteq \mathcal{O} \mathrm{pen} (X)$ be the full subcategory spanned by open sets containing $p$. Then
+	\[
+		\mathcal{F} _p\coloneqq \colim \mathcal{F} |\mathcal{U} 
+	.\]
+\end{definition}
+\begin{proposition}\label{1.1.16}
+	Let $\mathcal{A}$ be an abelian category and $X$ a space. Then $\mathcal{P} \mathrm{shf} (X,\mathcal{A} )$ is abelian.
+\end{proposition}
+\begin{proof}
+	By \cite{ml}, limits in functor categories exist and are computed pointwise. All statements that remain to be shown are very straightforward.
+\end{proof}
+\begin{corollary}\label{1.1.17}
+	Let $\mathcal{A} $ be an abelian category and $X$ a space. Then $\mathcal{S} \mathrm{hf} (X,\mathcal{A} )$ is abelian.
+\end{corollary}
+\begin{proof}
+	It suffices to show sheaves are closed under taking (co)limits, which is trivial.
+\end{proof}
+
+\begin{example}[\cite{huybrechts} 1.1.14]
+	Let $\mathcal{O} _{\mathbb{C} ^n} $ denote the sheaf of holomorphic functions, where the sections of $\mathcal{O} _{\mathbb{C} ^n} $ over $U\subseteq \mathbb{C} ^n$ are all holomorphic functions $f : U \to \mathbb{C} $, and for each $U\subseteq V$ the restriction morphism $\mathcal{O} _{\mathbb{C} ^n} (V)\to \mathcal{O} _{\mathbb{C} ^n} (U)$ is precisely function restriction, meaning we map $f\in \mathcal{O} _{\mathbb{C} ^n} (V)$ as $f\mapsto f|U$. We write the stalk of $\mathcal{O} _{\mathbb{C} ^n} $ at $z\in\mathbb{C} ^n$ as $\mathcal{O} _{\mathbb{C} ^n,z} $.
+\end{example}
+

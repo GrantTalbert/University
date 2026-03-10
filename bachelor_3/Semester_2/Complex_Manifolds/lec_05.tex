@@ -1,0 +1,50 @@
+\lecture{5}{Tue 03 Feb 2026 12:33}{Complex manifolds}
+
+\begin{example}\label{2.1.1}
+	If $X,Y$ are complex manifolds, then $X\times Y$ is a complex manifold since it is a smooth manifold, and products of holomorphic functions are holomorphic by definition.
+
+	Let $\left\{ f_i \right\} _{1\leq i\leq k} $ holomorphic $X\to \mathbb{C} $, $X$  a complex manifold. Then we can define the zero locus on \emph{all} functions $Z(f_1, \ldots ,f_k)\subseteq X$ as
+	\[
+		\left\{ z\in X\mid f_i(z)=0\forall i \right\} 
+	.\]
+	If
+	\[
+		J(f_1, \ldots ,f_k)^i_j= \frac{\partial f_i}{\partial z_j} 
+	\]
+	has full rank at all $z$, then the zero locus is a complex submanifold of $X$. We do this by taking the zero locus as a curve-like thingy and straightening it.
+
+	Another example is complex Lie groups. These are very simply Lie groups that are complex manifolds with multiplication and inversion holomorphic. Equivalently, it is a group object in $\mathcal{C} \mathrm{plx} \mathcal{M} \mathrm{an} $. For example, consider $\operatorname{GL} (n,\mathbb{C} )$. This is equal to $\mathrm{M}_{n\times n} (\mathbb{C} )\setminus Z(\det )$, and since the fiber of 0 is closed, $\operatorname{GL} (n,\mathbb{C} )$ is open in $\mathbb{C} ^{2n} $. Since multiplication is a polynomial in each entry, it is holomorphic. Inversion is also holomorphic since it can, via Cramer's rule, be realized as a division of polynomials, which is a rational function in the entries in this case, and we are working in the nonvanishing locus of det.
+
+	There are many subgroups of GL that are submanifolds. For example, $\operatorname{SL} (n,\mathbb{C} )$ the set of all matrices with determinant 1. This is the fiber of 1 under det, it suffices to check that 1 is a regular value of det, meaning the Jacobian is surjective on the tangent spaces on each element of the preimage. It suffices to show $\mathrm{d} (\det )_A : T_A \operatorname{GL} (n,\mathbb{C} ) \to T_1\mathbb{C} $ for all $A\in \operatorname{SL} (n,\mathbb{C} )$. We are able to work in the non-complexified tangent space, since that will be surjective precisely when the real Jacobian is surjective (follow directly from writing down the complexified Jacobian). To do this, we take a curve passing through $A$ and show its derivative maps to a nonzero tangent vector. Let $\gamma (t)=(1+t)A$. Then
+	\[
+		\det (\gamma (t))=(1+t)^n \det A = (1+t)^n
+	.\]
+	Thus
+	\[
+		\mathrm{d} (\det )_A(\gamma '(0)) = \left. \frac{\mathrm{d}}{\mathrm{d}t} \right|_0 \gamma (t) = n\neq 0
+	.\]
+	Many other matrix Lie groups are defined analogously. However, \emph{the unitary and special unitary groups are NOT complex Lie groups}. This follows by a fact that compact complex Lie groups have to be abelian. This follows by considering conjugation, which you can show is always constant. Then since U, SU are compact and nonabelian, the statement follows.
+
+	Another example is complex tori. Let $\Lambda \in\mathbb{C} ^n$ be a lattice: a free abelian subgroup of the maximal rank $2n$. Hence this is simply the subgroup $\left\langle \lambda _i \right\rangle _{1\leq i\leq 2n} $ for $\lambda _i\in\mathbb{C} ^n$ linearly independent. Now define the group quotient $X_\Lambda \coloneqq \mathbb{C} ^n / \Lambda $. The quotient map is the universal cover of $X_\Lambda $, and moreover is a local diffeomorphism. Hence we obtain coordinates on $X_\Lambda $ by taking a local invese $s$ on $U$ of $\pi $, then defining coordinates on $U$ via $s : U \to V\subseteq \mathbb{C} ^n$. Coordinate transformations are translations -- affine maps. Those are clearly holomorphic. We claim there is a diffeomorphism $X_\Lambda \cong (S^1)^{2n} $. NOTE that this is NOT an isomorphism of complex manifolds.
+
+	We can construct a matrix $A=\begin{pmatrix}
+	\lambda _1 & \cdots  & \lambda _{2n} 
+	\end{pmatrix}$, which is $\mathbb{R} $-linear and invertible since the vectors $\lambda _i$ are linaerly independent. Thus the inverse is $\lambda _i\mapsto e_i$. This then descends to $\mathbb{R} ^{2n} /\Lambda \cong \mathbb{R} ^{2n} / \left\langle e_i \right\rangle $. We commute the product and quotient as $\prod_{i=1} ^{2n} \mathbb{R} /\mathbb{Z} \cong \prod_{i=1} ^{2n} S^1$.
+
+	However, not all are biholomorphic. The issue is that the matrix not need be $\mathbb{C} $-linaer. We claim all holomorphic maps $X_\Lambda \to X_{\Lambda '} $ are induced by some $A\in \mathrm{M}_{n\times n} (\mathbb{C} )$. The universal cover of both of these is $\mathbb{C} ^n$, so if $f : X_{\Lambda } \cong X_{\Lambda '} $, then there is a lift
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 &  & \mathbb{C} ^n\ar[" \pi  ", d]  \\
+		\mathbb{C} ^n \ar[" F ", dashed, urr] \ar[" \pi  "', r]  & X_\Lambda \ar[" f "', r]  & X_{\Lambda '} 
+	\end{tikzcd}\]
+	by precompsing $X_\Lambda $ with its cover. Since $F$ is holomorphic, consider $g(z)=F(z+\lambda _i )-F(z)$. We can show that $g(z)\in \Lambda '$ for all $z\in\mathbb{C} ^n$. Note that $\Lambda '$ is discrete and $\mathbb{C} ^n$ is connected. Thus $g$ is constant for all $\lambda_i $. We take the derivative to obtain that the holomorphic derivatives of the lift are periodic with respect to $\Lambda $. Hence the values are fully determined within one ``box'' determined by the lattice. Hence $\partial _{z_j} F$ is bounded and holomorphic, since it is determined on a compact bounded subset. Liouville's theorem says bounded holomorphic functions on $\mathbb{C} $ are constant. Thus we are constant in each variable, and $\partial _{z_j} F$ is constant. Thus we must have $F$ of the form
+	\[
+		F(z)= \widetilde{A} z + b,
+	\]
+	$\widetilde{A} $ an $n\times n$ matrix and $b\in\mathbb{C} ^n$ a constant. Translating by $-b$ we can take $F(z)= \widetilde{A} z$. Hence our map is (affine; 0 not always mapped to 0) $\mathbb{C} $-linear.
+
+Since lattices correspond to invertible $2n\times 2n$ matrices, over $\mathbb{R} $ the space of lattices can be defined with dimension $4n^2$. However $\operatorname{GL} (n,\mathbb{C} )$ has $\mathbb{R} $-dimension $2n^2$. Thus there are more lattices than these linear maps, and thus not all can be biholomorphic.
+
+Final example for today are Hopf manifolds. Pick $\lambda \in\mathbb{R} $ with $\left| \lambda  \right| <1$. Then $\mathbb{Z} $ acts on $\mathbb{C} \setminus \left\{ 0 \right\} $ by $m\cdot (z_1, \ldots ,z_n)=(\lambda ^mz_1, \ldots ,\lambda ^mz_n)$. The action is free and \emph{properly discontinuous}, meaning (for an arbitary $G$-space) for any open set $U$ and any $g\in G$, then $g(U)\cap U$ is nonempty iff $g=e$. A Hopf manifold is $\mathbb{C} ^n\setminus \left\{ 0 \right\} $ quotiented by this action. Interestingly, as a complex manifold, this is isomorphic to $S^{2n-1} \times S^1$
+\end{example}
+
+We will generally say \emph{submanifold} to mean an embedded submanifold, and will specify when submanifolds are immersed explicitly.

@@ -1,0 +1,287 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 10}
+\begin{document}
+\makeproblem
+\begin{remark}
+	Since all problems are optional, I had fun with the solutions where possible. I was also more hand-wavy with proofs.
+\end{remark}
+
+\section{Problem 1}
+
+\begin{problem}
+	Let $M$ be an $R$-module. Define the \emph{annihilator}
+	\[
+		\mathrm{Ann} _R(M)\coloneqq \left\{ r\in R\mid \forall m\in M,r m=0 \right\} 
+	.\]
+	Show $\mathrm{Ann} _R(M)$ is an ideal of $R$.
+\end{problem}
+\begin{proof}
+	An $R$-module can be defined as an abelian group $M$ and a ring homomorphism $\rho :R \to \End_{\Ab }(M) $, where we define $r m\coloneqq \rho (r)(m)$. The annihilator $\mathrm{Ann} _R(M)$ is then by definition the kernel of $\rho $, and since $\rho $ is a ring homomorphism, its kernel is an ideal.
+\end{proof}
+\begin{problem}
+	Find a module with a trivial annihilator.
+\end{problem}
+\begin{proof}
+	The $\mathbb{R} $-vector space $\mathbb{R} $ has trivial annihilator because $xy = 0$ if and only if one of $x$ or $y$ is 0. More generally, $\mathrm{Ann} _D(D)$ for any integral domain $D$ is trivial.
+\end{proof}
+\begin{problem}
+	Find a module with nontrivial annihilator.
+\end{problem}
+\begin{proof}
+	$\mathbb{Z} /2\mathbb{Z} $ as a $\mathbb{Z} $-module has nontrivial annihilator. Consider $2\in\mathbb{Z} $. We have $2\cdot 0=0$ and $2\cdot 1=1+1=0$, so $2\in \mathrm{Ann} _\mathbb{Z} (\mathbb{Z} /2\mathbb{Z} )$.
+\end{proof}
+
+
+\section{Problem 2}
+\begin{problem}
+	Let $R$ a ring and $M,N$ $R$-modules. Show the following are $R$-modules.
+	\begin{enumerate}
+		\item $R^{\oplus A} $; $A$ a set;
+		\item $M_{m\times n}(R)$;
+		\item $R$-$\Mod(M,N)$.
+	\end{enumerate}
+	Determine which ones are free.
+\end{problem}
+\begin{proof}
+	(1) Done in class.
+
+	(2) Since we are dealing with matrix addition, there is an isomorphism of abelian groups $\varphi :R^{mn} \cong R^{\oplus mn} \to M_{m\times n} (R)$ for any choice of basis in $R^{\oplus mn} $ by choosing an ordering for the matrix components, and inserting the $i$th entry into the $i$th slot of the matrix. Simply define the $R$-module structure on $M_{m\times n} (R)$ such that this isomorphism promotes to one of $R$-modules; meaning for any $X\in M_{m\times n} (R)$ and $r\in R$,
+	\[
+		rX \coloneqq \varphi (r \varphi ^{-1} (X))
+	.\]
+	This clearly agrees with the usual pointwise definition. Moreover, the module is free as an $R$-module.
+
+	(3) This only holds if $R$ is commutative. Let $\varphi : M \to R$, $m\in M$, and $r,s\in R$. For $r\varphi $ to be $R$-linear, we must have $(r\varphi )(sm)=s(r\varphi )(m)$. However, since $\varphi $ is linear, we have $(r\varphi )(sm)=r(\varphi (sm))=r(s\varphi (m))=(rs)\varphi (m)$. We thus require that $rs=sr$.
+
+	Define a ring $R$ as a monoid object in $\Ab $. An $R$-module is then an abelian group homomorphism $\rho : R\otimes_\mathbb{Z}  M \to M$; this agrees with the usual definition since we require that the map $\rho : R\times M \to M$ be $\mathbb{Z} $-bilinear, and thus factors uniquely as a $\mathbb{Z} $-linear map via the tensor product. We define an $R$-module structure on $R$-$\Mod(M,N)$ as follows. Define $\lambda $ as the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\lambda : R \otimes_\mathbb{Z}  \Ab(M,N)\otimes_\mathbb{Z}  M \ar[" 1_R \otimes \mathrm{ev}  ", r] & R \otimes_\mathbb{Z}  N \ar[" \rho_N ", r] & N,
+	\end{tikzcd}\]
+	where $\mathrm{ev} : \Ab (M,N)\otimes_\mathbb{Z}  M \to N$ is the evaluation map $(\varphi ,m)\mapsto \varphi (m)$, which is $\mathbb{Z} $-bilinear as a map $\Ab\times M\to N$, and thus is well-defined as a $\mathbb{Z} $-linear map from the tensor product. Define $\mu : R\otimes _\mathbb{Z} \Ab (M,N) \to \Ab (M,N)$ as the transpose of $\lambda $ under $-\otimes _\mathbb{Z} M \dashv \Ab (M,-)$. We claim $\mu $ induces an $R$-module structure on $R$-$\Mod(M,N)$ by restricting along $R$-$\Mod(M,N)\subseteq \Ab (M,N)$.
+
+	To check, this, let $\eta $ and $\varepsilon $ be the unit and counit, respectively, of the adjunction $-\otimes _\mathbb{Z} M \dashv \Ab(M,-)$. There are two useful identities this provides:
+	\[
+		\mu =\Ab(M,\lambda )\circ \eta _{R\otimes _\mathbb{Z} \Ab (M,N)\otimes _\mathbb{Z} M} ,
+	\]
+	\[
+		\lambda =\varepsilon_{\Ab (M,N)} \circ (\mu  \otimes _\mathbb{Z} 1_M)
+	.\]
+	a
+
+	Writing $m_R : R\times R \to R$ for ring multiplication and $\alpha $ for the associator for tensor, associativity is expressed as the commutativity of the pentagon diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(R\otimes _\mathbb{Z} R)\otimes _\mathbb{Z} \Ab (M,N) \ar[" m_R \otimes _\mathbb{Z} 1 ", rr] \ar[" \alpha  "', d]  & & R\otimes _\mathbb{Z} \Ab (M,N)\ar[" \mu  ", d]  \\
+		R \otimes _\mathbb{Z} (R\otimes _\mathbb{Z} \Ab (M,N))\ar[" 1\otimes _\mathbb{Z} \mu  "', r]  & R\otimes _\mathbb{Z} \Ab (M,N)\ar[" \mu  "', r] & \Ab (M,N)
+	\end{tikzcd}\]
+	Tensoring the top row by $-\otimes _\mathbb{Z} M$ and postcomposing by the counit yields the solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 4em]
+		(R\otimes _\mathbb{Z} R)\otimes _\mathbb{Z} \Ab (M,N)\otimes _\mathbb{Z} M \ar[" m_R \otimes _\mathbb{Z} 1\otimes _\mathbb{Z} 1 ", r]  & R\otimes _\mathbb{Z} \Ab (M,N)\otimes _\mathbb{Z} M \ar[" 1\otimes \varepsilon  ", r] \ar[" \lambda  "', dotted, dr]  & R \otimes _\mathbb{Z} N \ar[" \rho _N ", dotted, d] \\
+																		       & & N
+	\end{tikzcd}\]
+	The dotted arrows are explained by noting $\varepsilon =\mathrm{ev} $ and applying the definition of $\lambda $. Doing the same for the bottom row and applying $\lambda =\varepsilon \circ (\mu \otimes 1)$ yields
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3em]
+	R\otimes _\mathbb{Z} (R\otimes _\mathbb{Z} \Ab (M,N))\otimes _\mathbb{Z} M \ar[" 1\otimes _\mathbb{Z} \mu \otimes _\mathbb{Z} 1 ", r]  & R\otimes _\mathbb{Z} \Ab (M,N)\otimes_\mathbb{Z}  M \ar[" \mu \otimes _\mathbb{Z} 1 ", r] \ar[" \lambda  "', bend right, rr]  & \Ab (M,N) \otimes _\mathbb{Z} M \ar[" \varepsilon  ", r]  & N.
+	\end{tikzcd}\]
+	We can write $\lambda $ using the definition, yielding a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3em]
+	R\otimes _\mathbb{Z} (R\otimes _\mathbb{Z} \Ab (M,N))\otimes _\mathbb{Z} M \ar[" 1\otimes 1\otimes \varepsilon  "', d] \ar[" 1\otimes \mu \otimes 1 ", r] \ar[" 1\otimes (\varepsilon \circ (\mu \otimes 1)) "', dr]  & R\otimes \Ab (M,N)\otimes M \ar[" \mu \otimes 1 ", r] \ar[" 1\otimes \varepsilon  "', d]  \ar[" \lambda  ", bend left, rr]&  \Ab (M,N)\otimes M \ar[" \varepsilon  ", r]  & N \\
+	R\otimes R\otimes N \ar[" \rho _N "', r] & R\otimes N \ar[" \rho _N "', urr]  &  & 
+	\end{tikzcd}\]
+	The arrow $1\otimes \lambda $ follows by functoriality of $R\otimes -$, and there are implicit composites with the associator.
+
+**3. The Proof:**
+We will show that the transpose of the **Goal** diagram *is* the **Given** diagram (pasted with $\mathrm{ev}$).
+
+* **Transpose the Top Path of (1):**
+    We append $(-\otimes 1_M)$ and then $\mathrm{ev}$.
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "(m_R \otimes 1) \otimes 1_M"] & (R \otimes H) \otimes M \ar[r, "\mu \otimes 1_M"] & H \otimes M \ar[r, "\mathrm{ev}"] & N
+    \end{tikzcd}
+    $$
+    By pasting diagram **(2)** (the adjunction identity), we replace the path $\mathrm{ev} \circ (\mu \otimes 1_M)$ with $\lambda$:
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "(m_R \otimes 1) \otimes 1_M"] & (R \otimes H) \otimes M \ar[r, "\lambda"] & N
+    \end{tikzcd}
+    $$
+    Now, by pasting diagram **(1)** (your definition), we replace $\lambda$ with $\rho_N \circ (1_R \otimes \mathrm{ev})$:
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "(m_R \otimes 1) \otimes 1_M"] & (R \otimes H) \otimes M \ar[r, "1_R \otimes \mathrm{ev}"] & R \otimes N \ar[r, "\rho_N"] & N
+    \end{tikzcd}
+    $$
+    This simplifies (by naturality) to: $\rho_N \circ (m_R \otimes \mathrm{ev})$. This is the transpose of the top path.
+
+* **Transpose the Bottom Path of (1):**
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "(1_R \otimes \mu) \otimes 1_M"] & (R \otimes H) \otimes M \ar[r, "\mu \otimes 1_M"] & H \otimes M \ar[r, "\mathrm{ev}"] & N
+    \end{tikzcd}
+    $$
+    Paste **(2)**: $\mathrm{ev} \circ (\mu \otimes 1_M)$ becomes $\lambda$:
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "(1_R \otimes \mu) \otimes 1_M"] & (R \otimes H) \otimes M \ar[r, "\lambda"] & N
+    \end{tikzcd}
+    $$
+    Paste **(1)**: $\lambda$ becomes $\rho_N \circ (1_R \otimes \mathrm{ev})$:
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "(1_R \otimes \mu) \otimes 1_M"] & (R \otimes H) \otimes M \ar[r, "1_R \otimes \mathrm{ev}"] & R \otimes N \ar[r, "\rho_N"] & N
+    \end{tikzcd}
+    $$
+    This simplifies (by naturality) to: $\rho_N \circ (1_R \otimes (\mathrm{ev} \circ (\mu \otimes 1_M)))$.
+    Now paste **(2)** *again* inside the parentheses: $\mathrm{ev} \circ (\mu \otimes 1_M)$ becomes $\lambda$:
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "..."] & R \otimes (H \otimes M) \ar[r, "1_R \otimes \lambda"] & R \otimes N \ar[r, "\rho_N"] & N
+    \end{tikzcd}
+    $$
+    Finally, paste **(1)** again: $\lambda$ becomes $\rho_N \circ (1_R \otimes \mathrm{ev})$:
+    $$
+    \begin{tikzcd}
+    (R \otimes R) \otimes H \otimes M \ar[r, "..."] & R \otimes (H \otimes M) \ar[r, "1 \otimes (1 \otimes \mathrm{ev})"] & R \otimes (R \otimes N) \ar[r, "1_R \otimes \rho_N"] & R \otimes N \ar[r, "\rho_N"] & N
+    \end{tikzcd}
+    $$
+    This simplifies to $\rho_N \circ (1_R \otimes \rho_N) \circ (1_R \otimes 1_R \otimes \mathrm{ev})$. This is the transpose of the bottom path.
+
+**Conclusion:**
+You have shown that the two paths in the transposed diagram are:
+* $\rho_N \circ (m_R \otimes \mathrm{ev})$
+* $\rho_N \circ (1_R \otimes \rho_N) \circ (1_R \otimes 1_R \otimes \mathrm{ev})$
+
+The **Given** diagram (2) states that $\rho_N \circ (m_R \otimes 1_N) = \rho_N \circ (1_R \otimes \rho_N) \circ a_N$.
+If we pre-compose this known identity with $(1_R \otimes 1_R \otimes \mathrm{ev})$, we get exactly that your two transposed paths are equal.
+
+Since the transposed paths are equal, the original paths in the **Goal** diagram (1) must be equal by the properties of the adjunction. You can use this exact "pasting" method for the unitality axiom.
+\end{proof}
+
+\section{Problem 3}
+\begin{problem}
+	Let $R$ be a ring, $M$ an $R$-module, and $\pi : M \to M$ an $R$-linear map with $\pi ^2=\pi $. Show that $M \cong \Ker \pi \oplus \Im \pi $.
+\end{problem}
+\begin{proof}
+	This is equivalent to saying that the exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[r]  & \Ker \pi \ar[r]  & M \ar[r]  & \Im \pi \ar[r]  & 0
+	\end{tikzcd}\]
+	splits. By the splitting lemma, it suffices to show that $\pi $ has a section. By hypothesis, the restriction $\pi |\Im \pi =1$, and since $\pi $ is an $R$-linear map, the inclusion $i:\Im \pi \hookrightarrow M$ is $R$-linear. Therefore $\pi \circ i=1$.
+\end{proof}
+
+
+\section{Problem 4}
+\begin{problem}
+	Let $R$ a ring, $n>1$. Include $R^{\oplus n-1} \hookrightarrow \mathbb{R} ^{\oplus n} $ via $(r_1, \ldots ,r_{n-1} )\mapsto (r_1, \ldots ,r_{n-1} ,0)$. Prove that
+	\[
+		\frac{R^{\oplus n} }{R^{\oplus n-1} } \cong R
+	.\]
+\end{problem}
+\begin{proof}
+	The projection $\pi _n : R^{\oplus n}\to R $ onto the $n$th element of each tuple has $R^{\oplus n-1} $ as its kernel and is surjective. The statement follows by the first isomorphism theorem.
+\end{proof}
+
+\section{Problem 6}
+
+\begin{problem}
+	Let $\left\{ M_\alpha  \right\} _{\alpha \in A} $ and $N$ be $R$-modules. If $A$ is finite, show
+	\begin{enumerate}
+		\item 
+		\[
+				R\text{-} \Mod\left( N,\bigoplus_{\alpha \in A} M_\alpha  \right) \cong \bigoplus_{\alpha \in A} R\text{-} \Mod(N,M_\alpha )
+			\]
+		\item
+			\[
+				R\text{-} \Mod\left( \bigoplus_{\alpha \in A} M_\alpha ,N \right) \cong \bigoplus_{\alpha \in A} R\text{-} \Mod(M_\alpha ,N)
+			.\]
+	\end{enumerate}
+	Find counterexamples if $A$ is infinite.
+\end{problem}
+\begin{proof}
+	In any locally small category, the hom functor is continuous in both arguments; in the contravariant argument this means it sends colimits in $R$-$\Mod$ to limits in $\Set $. Since finite coproducts and finite products coencide in $R$-$\Mod$, the claim is immediate. [na have to view as internal hom use tensor-hom adj and dual adj for (2)?]
+
+	For a counterexample to (2), we consider $\mathbb{R} $-vector spaces. The arbitrary coproduct over a family $\left\{ M_\alpha  \right\}_{\alpha \in A} $ of $\mathbb{R} $-vector spaces, which we will always denote $\oplus $, is composed of finite $\mathbb{R} $-linear combinations in $\left\{ M_\alpha  \right\}_{\alpha \in A} $. The product is the set of all sequences $\left\{ m_\alpha \in M_\alpha  \right\}_{\alpha \in A} $, with operations defined pointwise.
+
+	Consider the product and coproduct
+	\[
+		\mathbb{R} ^\mathbb{N} \coloneqq \prod_{n\in\mathbb{N} } \mathbb{R} ,\qquad \mathbb{R} ^{\oplus \mathbb{N} } \coloneqq \bigoplus_{n\in\mathbb{N} } \mathbb{R} 
+	.\]
+	Note that since $\mathbb{N} $ has cardinality $\aleph_0$, by definition of dimension the space $\mathbb{R} ^{\oplus \mathbb{N}} $ has dimension $\aleph_0$. We show that $\mathbb{R} ^\mathbb{N}  $ has dimension $\mathfrak{c} =\left| \mathbb{R}  \right| $. Since the cardinality of $\mathbb{R} ^\mathbb{N} $ is $\aleph_0\cdot \mathfrak{c} =\mathfrak{c} $, we have $\dim \mathbb{R} ^\mathbb{N} \leq \mathfrak{c} $, so it suffices to construct a linearly independent set of cardinality $\mathfrak{c} $. Define $v_r=\left\{ r^n \right\}_{n\in\mathbb{N} } $ for all $0<r<1$. The cardinality of the set $\left\{ v_r \right\}_{0<r<1} $ is $\mathfrak{c} $, so we show the set is linearly independent. Consider a finite linear combination
+	\[
+		\sum_{i=1} ^n c_iv_{r_i} =0
+	\]
+	with distinct $r_i$s. This is equivalent to an infinite system of equations
+	\[
+		\begin{cases}
+			\sum_{i=1} ^n c_i = 0\\
+			\sum_{i=1} ^n c_ir_i = 0\\
+			\sum_{i=1}^{n} c_ir_i^2=0\\
+			\vdots
+		\end{cases}
+	.\]
+	Since the linear combination is finite, we can represent the first $n$ equations as the matrix equation
+	\[
+		\begin{pmatrix}
+		1 & 1 & \cdots & 1 \\
+		r_1 & r_2 & \cdots & r_n \\
+		\vdots & \vdots & \ddots & \vdots \\
+		r_1^{n-1}  & r_2^{n-1}  & \cdots & r_n^{n-1} 
+		\end{pmatrix}\begin{pmatrix}
+		c_1 \\
+		c_2 \\
+		\vdots\\
+		c_{n} 
+		\end{pmatrix}=0
+	.\]
+	The relevance of this is that this is a \emph{square matrix}, and in particular a Vandermonde matrix\footnote{The usual form, including the one given on the Wikipedia page, is the transpose of the given form. Determinants are invariant under transposse.}, which have determinant
+	\[
+		\prod_{0\leq i<j \leq n-1} r_j-r_i
+	.\]
+	Since the $r_i$s are distinct, the determinant is nonzero, so the matrix is invertible. This shows that all of the $c_i$s are 0. Therefore, the set is linearly independent, so $\dim \mathbb{R} ^{\mathbb{N}  } \geq \mathfrak{c} $.
+
+	Since $\mathbb{N} $ is a set, there is are natural isomorphisms
+	\begin{align*}
+		\mathbb{R} \text{-} \mathcal{V} \mathrm{ect} (\mathbb{R} ^{\oplus \mathbb{N} } ,\mathbb{R} )&=\mathbb{R} \text{-} \mathcal{V} \mathrm{ect} \left( \bigoplus_{n\in\mathbb{N} } \mathbb{R} ,\mathbb{R} \right) \\
+													&\cong \prod_{n\in\mathbb{N} } \mathbb{R} \text{-} \mathcal{V} \mathrm{ect} (\mathbb{R} ,\mathbb{R} ) \\
+													&\cong \prod_{n\in\mathbb{N} } \mathbb{R} \\
+													&= \mathbb{R} ^\mathbb{N}
+	.\end{align*}
+The second isomorphism follows by noting that since $1\cong -\otimes _\mathbb{R} \mathbb{R} \dashv \mathbb{R} \text{-} \mathcal{V} \mathrm{ect}(\mathbb{R} ,-) $, by $1\dashv 1$, and by uniqueness of adjunctions up to isomorphism, we have $\mathbb{R} \text{-} \mathcal{V} \mathrm{ect} (\mathbb{R} ,-)\cong 1$. We then assmble the isomorphisms $\mathbb{R} \text{-} \mathcal{V} \mathrm{ect} (\mathbb{R} ,\mathbb{R} )\cong \mathbb{R} $ along the $\mathbb{N} $-ary product multifunctor. Since $\mathbb{R} ^\mathbb{N} $ is not isomorphic to $\mathbb{R} ^{\oplus \mathbb{N} } $, this gives us a counterexample for (2).
+
+For a counterexample to (1), [i just redid 2 bruh] consider $\mathbb{Z} $ as a $\mathbb{Z} $-module. The claim is that
+\[
+	\Ab \left( \bigoplus_{n\in\mathbb{N} } \mathbb{Z} ,\mathbb{Z}  \right) \cong \bigoplus_{n\in\mathbb{N} } \Ab (\mathbb{Z} ,\mathbb{Z} )
+.\]
+Note that there are natural isomorphisms $\Ab (\mathbb{Z} ,\mathbb{Z} )$ and
+\[
+	\Ab \left( \mathbb{Z} ^{\oplus \mathbb{N} } ,\mathbb{Z}  \right) \cong \prod_{n\in\mathbb{N} } \Ab (\mathbb{Z} ,\mathbb{Z} )\cong \prod_{n\in\mathbb{N} } \mathbb{Z} 
+.\]
+The statement now reduces to showing there is no isomorphism
+\[
+	\prod_{n\in\mathbb{N} } \mathbb{Z}  \cong \bigoplus_{n\in\mathbb{N} } \mathbb{Z} 
+.\]
+For an isomorphism to exist, the sets must have the same cardinality. We know that
+\[
+	\left| \prod_{n\in\mathbb{N} } \mathbb{Z}  \right| =\aleph_0^{\aleph_0} \geq 2^{\aleph_0} >\aleph_0
+.\]
+We can write $\mathbb{Z} ^{\oplus \mathbb{N} } $ as the union over the following sets:
+\[
+	\mathbb{Z} ^{\oplus \mathbb{N} } =\bigcup_{k\in\mathbb{N} } \left\{ \left\{ a_n \right\}_{n\in\mathbb{N} } \subseteq \mathbb{Z} \mid a_n=0\forall n\geq k \right\} 
+.\]
+This follows since all elements can be viewed as collections of elements where all but finitely many are zero. In particular, the set of $n\in\mathbb{N}$ such that $a_n$ is nonzero is a \emph{finite} subset of $\mathbb{N} $, and thus has a maximal element. The set $\left\{ a_n \right\} _{n\in\mathbb{N} } $ then belongs to the union by taking $k=n+1$. We can compute the cardinality of this by noting that each of the sets we are unioning over has cardinality $\aleph_0$, so
+\[
+	\left| \mathbb{Z} ^{\oplus \mathbb{N} }  \right| =\aleph_0^2=\aleph_0
+.\]
+Therefore, the groups are not even isomorphic as sets, and thus cannot be isomorphic as $\mathbb{Z} $-modules.
+\end{proof}
+
+\end{document}

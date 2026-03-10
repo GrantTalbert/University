@@ -1,0 +1,65 @@
+\chapter{Integration on manifolds}
+
+\lecture{30}{Tue 13 Jan 2026 22:09}{Personal Review}
+
+\section{Review of some notions}
+
+\begin{definition}\label{5.1.1}
+	Let $F : M \to \mathbb{R} $ be a function. The \emph{support} $\operatorname{supp} F$ is the closure of the set of all points wherein $F$ is nonzero
+	\[
+		\operatorname{supp} F \coloneqq \overline{\left\{ x\in M\mid F(x)\neq 0 \right\} } 
+	.\]
+	Given $U\subseteq M$, we say $F$ is \emph{supported} in $U$ if $\operatorname{supp} F\subseteq U$. If $\operatorname{supp} F$ is compact, we say $F$ is \emph{compactly supported}.
+\end{definition}
+\begin{definition}\label{5.1.2}
+	Let $A\subseteq M$ be a closed set. A \emph{smooth bump function} for $A$ is a function $\psi : M \to [0,1]$ which is identically 1 on $A$, and there exists an open neighborhood $A\subseteq U\subseteq M$ wherein $0 \leq \psi |U \leq 1$, and $\psi =0$ outside of $U$. We often specify the neighborhood $U$, leading to the following alternate definition. A smooth bump function for $A$ supported in $U$ is a function $\psi : M \to [0,1]$ supported in $U$ with $\psi |A$ the constant function at 1.
+\end{definition}
+
+\begin{definition}\label{5.1.3}
+	Let $\mathcal{X} =\left\{ X_\alpha  \right\} _{\alpha \in A} $ be an open cover of $M$. A \emph{partition of unity subordinate to} $\mathcal{X} $ is a collection of continuous functions $\left\{ \psi _\alpha : X_\alpha  \to [0,1]  \right\} _{\alpha \in A} $ such that the following properties are satisfied:
+	\begin{enumerate}
+		\item $\psi _\alpha $ is supported in $X_\alpha $ for each $\alpha \in A$;
+		\item For all $p\in M$, there is a neighborhood $U$ of $p$ which intersects only finitely many $\operatorname{supp} \psi _\alpha $. We say the family of supports is \emph{locally finite};
+		\item For all $p\in M$,
+			\[
+				\sum_{\alpha \in A} \psi _\alpha (p)=1
+			.\]
+			Note that the local finiteness condition in particular implies that $\psi _\alpha (p)$ is nonzero for only finitely many $\alpha $, so there are no convergence issues.
+	\end{enumerate}
+	If each $\psi _\alpha $ is smooth, we say that partition of unity is \emph{smooth}.
+\end{definition}
+
+Some theorems.
+\begin{enumerate}
+	\item Let $\mathcal{X} =\left\{ X_\alpha  \right\} _{\alpha \in A} $ be an open cover of $M$. Then there exists a smooth partition of unity subordinate to $\mathcal{X} $.
+	\item Given any closed set $A$ and any open neighborhood $U$ of $A$, there is a smooth bump function for $A$ supported in $U$.
+	\item Given a smooth map $f : A \to \mathbb{R} ^k$ with $A$ closed, for all open $U\subseteq M$ containing $A$ there exists an extension $\widetilde{f} : M \to \mathbb{R} ^k$ with $\widetilde{f} |A=f$ and $\operatorname{supp} f\subseteq U$. In particular, $f$ vanishes outside of $U$.
+	\item Let $M$ be a manifold. If $K$ is a closed subset, then there is a smooth nonnegative function $f : M \to \mathbb{R} $ with $f^{-1} (0)=K$.
+\end{enumerate}
+
+\begin{remark}
+	Functions vanish outside of their support. The main takeaway from saying a function is supported in a set is that it vanishes outside of that set.
+\end{remark}
+
+
+
+
+\section{Integration of differential forms}
+
+\begin{definition}\label{5.2.1}
+	A \emph{domain of integration} is a bounded subset $D\subseteq \mathbb{R} ^n$ whose boundary has measure zero.
+\end{definition}
+
+For a general $n$-form on $\mathbb{R} ^n$, our form must be of the form $\omega =f\mathrm{d} x^1 \wedge \ldots \wedge \mathrm{d} x^n$ for some continuous $f$. We can define the integral of it over some domain of integration $D\subseteq \mathbb{R} ^n$ as
+\[
+	\int \omega =\int_D f \,\mathrm{d} V=\int_D f \,\mathrm{d} x^1\cdots \mathrm{d} x^n
+.\]
+We can generalize slightly more. Define the \emph{support} of an $n$-form $\omega \in\Omega ^n(M)$ as the closure
+\[
+	\operatorname{supp} \omega =\overline{\left\{ p\in M\mid \omega _p\neq 0 \right\} }
+.\]
+Returning to $M=\mathbb{R} ^n$ to build intuition, suppose that $\omega $ is compactly supported on some open $U\subseteq \mathbb{R} ^n$. We can then define
+\[
+	\int_U\omega \coloneqq \int_D\omega 
+\]
+for any domain of integration $D$ containing $\operatorname{supp} \omega $. It is immediate that this definition is independent of the choice of $D$.

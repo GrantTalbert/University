@@ -1,0 +1,28 @@
+\section{Homotopy}\label{sec2}
+
+The standard construction of the derived category involves the notion of chain homotopy, so it should be no suprise (especially given the commentary in \cref{sec1}) that the construction of the derived $\infty $-category also involves chain homotopy. Throughout this section, let $\mathcal{A} $ denote an abelian category, and $\Ch(\mathcal{A} ) $ the category of chain complexes in $\mathcal{A} $.
+
+\begin{definition}\label{2.1}
+	Let $f_{\bullet} ,g_{\bullet} : C_{\bullet}  \to D_{\bullet} $ in $\Ch(\mathcal{A} ) $. A \emph{chain homotopy} from $f$ to $g$ is a morphism of chain complexes $\psi : C_{\bullet}  \to D_{\bullet+1} $ (meaning $\psi _i : C_i \to D_{i+1} $) such that
+	\[
+		f_n-g_n=d_n^D\circ \psi _n + \psi _n\circ d_n^C
+	.\]
+	We will write $\psi : f \Rightarrow g$ to denote that $\psi $ is a chain homotopy from $f$ to $g$.
+\end{definition}
+
+\begin{remark}\label{2.2}
+	[restrict to r-mod???] Chain homotopies are genuine homotopies in the sense that if $I_{\bullet} $ is an interval object in $\Ch(\mathcal{A} ) $, then this is equivalent to the condition that the following diagram commute:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C_{\bullet} \ar[d] \ar[" f ", dr]  &  \\
+	I_{\bullet} \otimes C_{\bullet} \ar[" (f\text{,} g\text{,} \psi ) ", r]  & D_{\bullet}  \\
+	C_{\bullet} \ar[u] \ar[" g "', ur]  & 
+	\end{tikzcd}\]
+\end{remark}
+
+\begin{proposition}\label{2.3}
+	Let $f_{\bullet} ,g_{\bullet} : C_{\bullet}  \to D_{\bullet} $ in $\Ch(\mathcal{A} ) $, and write $f_{\bullet} \sim g_{\bullet} $ if there is a chain homotopy $f_{\bullet} \Rightarrow g_{\bullet} $. Then $\sim $ is an equivalence relation on $\Ch(\mathcal{A} ) (C_{\bullet} ,D_{\bullet} )$. Additionally, if $f_{\bullet} \sim g_{\bullet} $, then $h_{\bullet} \circ f_{\bullet} \sim h_{\bullet} \circ g_{\bullet} $ and $f_{\bullet} \circ  h_{\bullet} \sim g_{\bullet} \circ h_{\bullet} $ for all morphisms $h_{\bullet} $ with the proper (co)domain.
+\end{proposition}
+\begin{proof}
+	See \cite{wei}.
+\end{proof}
+

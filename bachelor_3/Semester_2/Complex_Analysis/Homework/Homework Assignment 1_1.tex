@@ -1,0 +1,28 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework Assignment 1}
+\begin{document}
+\makeproblem
+
+\textbf{A true story:} One of the main theorems at a certain PhD thesis defense at the University of Toronto asserted (roughly) that for a certain power series $\sum_{n\geq 1} a(n)z^n$ known to have a positive radius of convergence, the coefficients $a(n)$ satisfied
+\[
+	\left| a(n)+(-1)^nn! \right| \leq c^n
+\]
+for some constant $c>1$. A member of the defense committee objected that this theorem couldn't possibly be correct. Why?
+
+We start with a convenient counterexample to the theorem. Take $a(n)=0$ for all $n$, and suppose for contradiction that such a $c$ exists. Then the theorem states
+\[
+	\left| (-1)^nn! \right| \leq c^n
+.\]
+Note that $\left| (-1)^nn! \right| =n!$, so the theorem now states that $n!\leq c^n$ for all $n$ and a fixed constant $c$. However, $n!$ tends to $\infty $ faster than $c^n$, so there exists some $N>n$ for which $N! > c^n$, showing that this theorem cannot be true for all $n$.
+
+Note that this theorem will also fail in the case $a(n)>0$, since we can choose $n$ even such that $\left| a(n)+(-1)^nn! \right| =a(n)+n!$. Since this is now strictly greater than $n!$, the same logic applies. If $a(n)<0$, we choose $n$ odd and the statement to obtain $\left| a(n) \right| +n!$, and the statement once again follows.
+\end{document}

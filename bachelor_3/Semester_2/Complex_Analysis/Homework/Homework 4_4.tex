@@ -1,0 +1,91 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 4}
+\begin{document}
+\makeproblem
+
+\begin{problem}
+	Given an example of an open subset $U\subseteq \mathbb{C} $ and two holomorphic functions $f,g : U \to \mathbb{C} $ such that $f'=g'$ but $g$ does not equal $f$ plus a constant.
+\end{problem}
+\begin{proof}
+	Let $U$ be the union of two disjoint open connected subsets $U_1,U_2 \subseteq \mathbb{C} $. Define $f(z)=z^2$. Define $g|U_1=z^2$ and $g|U_2=z^2+1$. Clearly $f$ is holoomorphic. Since $g|U_1,g|U_2$ are holomorphic, since $U_1 \cup U_2 \cong U_1 \amalg U_2$, and since coproducts of holomorphic functions are holomorphic, it follows that $g$ is holomorphic. Moreover, $\partial _zf=\partial _zg=2z$. However, they do not differ by a constant, but rather by the function
+	\[
+		z\mapsto 
+		\begin{cases}
+			0,&z\in U_1\\
+			1,&z\in U_2
+		\end{cases}
+	\]
+	which is only locally constant. Since $U$ is disconnected, this does not imply it is constant. Since disjoint connected components exist in $\mathbb{C} $ (consider two disjoint open balls), this is an example.
+\end{proof}
+
+\begin{problem}
+	Let $f(z)=z^2$. Calculate that the integral of $f$ around the circle $\partial B_1(2)$ given by
+	\[
+		\int_{0}^{2\pi } f(2+e^{i\theta } ) \,\mathrm{d} \theta 
+	\]
+	is not zero. Yet the Cauchy theorem asserts that
+	\[
+		\oint_{\partial B_1(2)} f =0
+	.\]
+	Give an explanation.
+\end{problem}
+\begin{proof}
+	Although $2+e^{i\theta } $ parameterizes $\partial B_1(2)$ counterclockwise for $\theta \in[0,2\pi ]$, the line integral of $f$ along $\gamma $ is defined as
+	\[
+		\int_\gamma f\mathrm{d} z = \int_0^{2\pi } \gamma ^*(f \mathrm{d} z)=\int_{0}^{2\pi } f(\gamma (\theta ))\gamma '(\theta ) \,\mathrm{d} \theta 
+	.\]
+	Note that the given integral is missing the factor of $\gamma '$. We compute the given integral:
+	\[
+		\int_0^{2\pi } 4+4e^{i\theta } +e^{2i\theta }  \,\mathrm{d} \theta =8\pi 
+	\]
+	since $e^{0} =e^{i2\pi } =e^{i4\pi } $.
+\end{proof}
+
+\begin{problem}
+	\begin{enumerate}
+		\item Let $\gamma $ be a positively oriented parameterization of $S^1$ with a counterclockwise orientation. Give an example of a $C^1$ function $f$ on a neighborhood of $\overline{B_1(0)} $ such that
+			\[
+				\int_\gamma f =0
+			\]
+			but such that $f$ is not holomorphic on any open set.
+		\item Suppose that $f$ is $C^0$ on $B_1(0)$ and satisfies
+			\[
+				\int_{\partial B_r(0)} f=0
+			\]
+			for all $0<r<1$. Must $f$ be holomorphic on $B_1(0)$?
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Let $f(z)=\overline{z} ^2$, and let $z(\theta )=e^{i\theta } $ such that $\mathrm{d} z=ie^{i\theta } \mathrm{d} \theta $. Then
+	\[
+		\int_\gamma f = \int_0^{2\pi } e^{-2i\theta } ie^{i\theta }  \,\mathrm{d} \theta =-\int_{0}^{2\pi } e^{-i\theta }  \,\mathrm{d} \theta =0
+	.\]
+	However, clearly $\partial _{\overline{z} } f =2 \overline{z} \neq 0$ on all open $U\subseteq \mathbb{C} $.
+
+	(2) Take $f$ the same as in (1), and parameterize $\partial B_r(0)$ by $z(\theta )=re^{i\theta } $. The integral is then
+	\[
+		\int_{0}^{2\pi } rie^{-i\theta }  \,\mathrm{d} \theta ,
+	\]
+	which is still 0.
+\end{proof}
+
+
+
+\begin{problem}
+	Give a simple proof (actually a one-line proof if you use what we know about power series) that an analytic function has a \emph{local} primitive.
+\end{problem}
+\begin{proof}
+	Any power series clearly has a primitive, and analytic functions admit local power series representations.
+\end{proof}
+
+\end{document}

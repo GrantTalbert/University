@@ -1,0 +1,75 @@
+\lecture{27}{Mon 24 Nov 2025 12:19}{More forms}
+
+Recall that a differential form is a section of $\Lambda ^k(T^*M)$. We denote the set of $k$-forms by $\Omega ^k(M)$. There is a map $\mathrm{d} : \Omega ^k(M) \to \Omega ^{k+1} (M)$ called the \emph{exterior derivative} which we defined in coordinates. We then showed the fundamental properties of linearity, $\mathrm{d} ^2=0$, $\mathrm{d}$ commutes with pullbacks, and for all 1-forms $\eta $ and $k$-forms $\omega $,
+\[
+	\mathrm{d} (\omega \wedge \eta )=\mathrm{d} \omega \wedge \eta +\left( -1 \right) ^k \omega \wedge \mathrm{d} \eta 
+.\]
+Define
+\[
+	\Omega ^k(M) \coloneqq \coprod_{p\in M} \Lambda ^k(T_p^*M)
+.\]
+Passing to
+\[
+	\Omega ^{\bullet} (M) \coloneqq \bigoplus_{k\geq 0} \Omega ^k(M)
+\]
+yields an exterior algebra with wedge product given by $(\omega \wedge \eta )_p=\omega _p \wedge \eta_p$.
+
+We claim that $\mathrm{d} $ subsumes the curl and gradient and divergence in the following sense. Define $\beta (V)\coloneqq (\mathrm{d} x \wedge \mathrm{d} y \wedge \mathrm{d} z)(V,-,-)$. Then the diagram commutes:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C^\infty (\mathbb{R} ^3)\ar[" \nabla  ", r] \ar[equals, d]  & \mathfrak{X}(\mathbb{R} ^3)\ar[" \mathrm{curl}  ", r] \ar[" \overline{g} ^\flat ", d]  & \mathfrak{X} (\mathbb{R} ^3)\ar[" \beta  ", d] \ar[" \mathrm{div}  ", r]  & C^\infty (\mathbb{R} ^3)\ar[" * ", d]  \\
+C^\infty (\mathbb{R} ^3)\ar[" \mathrm{d}  "', r]  & \Omega ^1(\mathbb{R} ^3)\ar[" \mathrm{d}  "', r]  & \Omega ^2(\mathbb{R} ^3)\ar[" \mathrm{d}  "', r]  & \Omega ^3(\mathbb{R} ^3)
+\end{tikzcd}\]
+
+
+\begin{proposition}\label{awooo}
+	Let $M$ be a smooth $n$-manifold, $\omega $ a $k$-form, and $V_1, \ldots ,V_{k+1} $ vector fields. Then
+	\[
+		(\mathrm{d} \omega )(V_1, \ldots ,V_{k+1} ) = \sum_{i=1}^{k+1} (-1)^iV_i(\omega (V_1, \ldots ,\hat{V} _i , \ldots ,V_{k+1} )) - \sum_{1\leq i<j\leq n} (-1)^{i+j} \omega ([V_i,V_j],V_1, \ldots ,\hat{V} _i,\hat{V} _j, \ldots ,V_{k+1} )
+	.\]
+	The hat of course denotes that we omit the argument.
+\end{proposition}
+
+We can define the Lie derivative on forms in the exact same way as for tensor fields. Given a vector field $V$, a $k$-form $\eta $ and an $\ell $-form $\psi $,
+\[
+	\mathcal{L} _V\omega =\left.\frac{\mathrm{d}}{\mathrm{d}t}\right|_{t=0} (\theta _t^*\omega )
+\]
+\[
+	\mathcal{L} _V(\omega \wedge \psi )=(\mathcal{L} _V\omega )\wedge \psi +\omega +(\mathcal{L} _V\psi )
+.\]
+
+\begin{definition}\label{skdsnjn}
+	Let $V$ be a finite vector space. Define for any $X\in V$ the operator $\iota _X : \Lambda ^kV^* \to \Lambda ^{k-1} V^*$ by $\omega \mapsto  \omega (X,-, \ldots ,-)$. We call this the \emph{interior product} with respect to $X$.
+\end{definition}
+
+\begin{proposition}\label{properties}
+	Ler $X,Y\in V$.
+	\begin{enumerate}
+		\item $\iota _X \circ \iota _Y = - \iota _{Y\circ X} $.
+		\item $\iota _X(\omega \wedge \psi )=(\iota _X\omega )\wedge \psi +(-1)^k\omega \wedge \iota _X\psi $.
+		\item $\iota _X$ is an odd derivation.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proposition}\label{askm}
+	Cartan's formula:
+	\[
+		\mathcal{L} _X = \mathrm{d} \circ \iota _X + \iota _X\circ d : \Omega ^k(M)\to \Omega ^k(M)
+	.\]
+\end{proposition}
+\begin{proof}
+	The proof goes by showing they agree on functions and 1-forms. Then by the uniqueness proofs we can do with the product rule on Lie derivatives, it follows.
+\end{proof}
+
+
+\begin{construction}
+	Since $\mathrm{d} ^2=0$ and since the set of \emph{sections} is a vector space, there is a cochain complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\Omega^0(M) \ar[" \mathrm{d}_p ", r]  & \Omega^1(M)\ar[" \mathrm{d} _p ", r] & \Omega ^2(M)\ar[" \mathrm{d} _p ", r]  & \cdots
+	\end{tikzcd}\]
+	The kernel is the set of closed forms and the image is the set of exact forms. Thus the cohomology, called the De Rahm cohomology, can be given as
+	\[
+		H_{\mathrm{dh} } ^k(M)\coloneqq \frac{Z^k(M)}{B^k(M)} ,
+	\]
+	for $Z^k(M)$ the set of closed $k$-forms and $B^k(M)$ the set of exact $k$-forms. Note that $H_{\mathrm{dh} } ^{\bullet} =0$ if and only if closed and exact $k$-forms coencide on $M$.
+\end{construction}
+

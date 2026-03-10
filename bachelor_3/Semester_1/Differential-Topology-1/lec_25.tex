@@ -1,0 +1,12 @@
+\lecture{25}{Mon 17 Nov 2025 12:32}{More metrics}
+
+Let $i : S^2 \to \mathbb{R} ^3$ be the inclusion. We define the metric $g^\circ  \coloneqq i^* \overline{g} $ on the sphere. If we work it out then it looks like
+\[
+	g^\circ =\left( 1-v^2 \right) \mathrm{d} u^2 + \left( 1-u^2 \right) \mathrm{d} v^2 + 2uv\mathrm{d} u\mathrm{d} v
+.\]
+If we don't write the tensor product between covectors, then that is understood to be the wedge product
+\[
+	\mathrm{d} u\mathrm{d} v \coloneqq \mathrm{d} u \wedge \mathrm{d} v = \frac{\mathrm{d} u \otimes \mathrm{d} v + \mathrm{d} v \otimes \mathrm{d} u}{2} 
+.\]
+
+Given a Riemannian manifold $(M,g)$, there is an isomorphism $g^\flat_p : T_pM \to T_p^*M$ given by the linear map $g_p^\flat(v)(v) = 1$. The kernel is trivial by definition, so it is indeed an isomorphism. Turns out this is even a diffeomorphism, and if it commutes with the projections then it is an isomorphism of vector bundles.

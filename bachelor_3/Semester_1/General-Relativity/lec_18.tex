@@ -1,0 +1,90 @@
+\lecture{18}{Tue 25 Nov 2025 12:33}{Gravitational waves}
+
+Recall we are working in a metric $g_{\mu \nu } =\eta _{\mu \nu } +h_{\mu \nu } $ for $h$ small, meaning we take $h^2=0$. Also typo above: $h_{00} =-2\Phi $.
+
+Recall the gauge theory of E\&M:
+\begin{mdframed}
+	\[
+		A_\mu \to A_\mu +\partial _\mu \lambda (x)
+	.\]
+\end{mdframed}
+The gauge transformation for gravity is
+\[
+	h_{\mu \nu } \to h_{\mu \nu } -\partial _\mu \varepsilon _\nu -\partial _\nu \varepsilon _\mu 
+.\]
+Componentwise,
+\[
+	h_{00} \to h_{00} -2 \partial _0\varepsilon _0
+\]
+\[
+	\implies \Phi \to \Phi +\partial _0\varepsilon _0
+.\]
+So we obtain
+\[
+	w_i \to w_i-\partial _0\varepsilon^i+\partial _i\varepsilon ^0
+.\]
+\[
+	\Psi \to \Psi +\frac{1}{3} \partial _i \varepsilon ^i
+.\]
+\[
+	s_{ij} \to \partial _i\varepsilon _j+\frac{1}{2} \partial _t\varepsilon ^t\delta _{ij} 
+.\]
+Since $e^\mu $ has 4 components, there are 4 diffeomorphisms. Each gauge transformation removes a degree of freedom, so we lose 4 more degrees of freedom, leaving us with 2. 
+
+We can choose $\varepsilon ^\mu (x)^2 $ to make $G_{\mu \nu } =0$. Gravitational waves are fluctuations in a vaccuum. We will impose $\partial _is^{ij} =0$ and $\partial _iw^i=0$. This reduces our Einstein tensor
+\[
+	G_{00} =2\nabla ^2 \Psi =0,\qquad G_{0i} =-\frac{1}{2} \nabla ^2 s_{i} +   \partial _0 \partial _i \Psi =0
+.\]
+From the first equation we obtain $\Psi =0$, and from the second we obtain $\omega =0$. Our equation is now much simpler:
+\[
+	G^i\!_i=2\nabla ^2\Phi 
+\]
+\[
+	G^i\!_j=(\delta ^i_j\nabla ^2-\partial _i \partial _j)\Phi +(\partial _0^2-\nabla ^2)s_{ij} =0
+.\]
+By definition $s_{ij} $ is traceless, so
+\[
+	G^i\!_i = 2\nabla ^2\Phi  \implies \Phi =\frac{1}{\nabla ^2} 0 = 0
+.\]
+Therefore $\left( \partial _0^2 - \nabla ^2 \right) s_{ij} =0$. Recall that since $\Phi =\Psi =\omega ^i=0$,
+\[
+	h_{\mu \nu } =\begin{pmatrix}
+	0 & 0 & 0 & 0 \\
+	0 & s^{11}  & s^{12}  & s^{13}  \\
+	0 & s^{21}  & s^{22}  & s^{23}  \\
+	0 & s^{31}  & s^{32}  & s^{33} 
+	\end{pmatrix}
+.\]
+This is easier to use if we pass to Fourier space.
+\[
+	\widetilde{s} _{ij} =\int e^{ik_\mu x^\mu } s_{ij} (x)\,\mathrm{d} ^4x
+.\]
+We can Fourier transform both sides.
+\[
+	\int e^{ik_\mu x^\mu } \left( \partial _0^2 - \nabla ^2 \right) s_{ij}  \,\mathrm{d} ^4x
+.\]
+I will trust the professor that we obtain
+\[
+	k_0^2-k^2=0
+.\]
+Then
+\[
+	k_\mu k^\mu =0
+.\]
+This is like the 4-momentum, and in momentum,
+\[
+	p_0^2 - (\vec{p}) ^2=m^2_{\text{rest} } 
+.\]
+Thus the graviton is massless. Since the only degree of freedom left over is $s_{ij} $ with spin 2, gravitational waves are massless of spin 2. There is a fascinating implication we will not cover which is that if we assume there exists a massless spin 2 particle, then we obtain Einstein's entire theory of gravity.
+
+
+
+
+
+\[
+	g_{\mu \nu } =\begin{pmatrix}
+	1 &  \\
+	 & R
+	\end{pmatrix}
+.\]
+

@@ -1,0 +1,129 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 4}
+\courseID{MA731}
+\begin{document}
+\makeproblem
+
+\begin{problem}\label{1}
+	Using the Jordan canonical form, show that every complex square matrix is the limit of a sequence of diagonalizable matrices. (For instance consider the vectors $e_1 + \varepsilon e_2 + \cdots + \varepsilon ^{k-1} e_k$.)
+\end{problem}
+
+\begin{proof}
+	Let $A\in \mathfrak{gl} (n,\mathbb{C} )$. Since $\mathbb{C} $ is algebraically closed, $A$ is conjugate to its Jordan canonical form $J$, meaning $A=PJP ^{-1} $ for some invertible $P\in \operatorname{GL} (n,\mathbb{C} )$. Recall that $J$ is given by the block diagonal matrix $J = \operatorname{diag} (J_{k_1} (\lambda _1), \ldots ,J_{k_m} (\lambda _m)$, where each Jordan block $J_{k} (\lambda )$ is of the form
+	\[
+		J_k(\lambda )= \begin{pmatrix}
+		\lambda  & 1 & 0 & \cdots  & 0 \\
+		0 & \lambda  & 1 & \cdots  & 0 \\
+		\vdots & \vdots & \ddots & \ddots & \vdots \\
+		0 & 0 & \cdots  & \lambda  & 1 \\
+		0 & 0 & \cdots  & 0 & \lambda 
+		\end{pmatrix}
+	.\]
+	It suffices to show each Jordan block is a limit of some sequence of diagonalizable matrices, since we can take the direct sum of the sequences to obtain a sequence converging to $J$, then simply conjugate each term in the sequence.
+
+	Let $J_k(\lambda )$ be a Jordan block $\lambda 1+N$ for $N$ the matrix having all 1s on the first diagonal above the main diagonal, and 0s elsewhere. Note that if $\left\{ e_i \right\} _{1\leq i\leq k} $ is the standard basis, then $Ne_j=e_{j-1} $ for $j>1$, and $Ne_1=0$. Let $\varepsilon \neq 0$ and define
+	\[
+		M(\varepsilon)=J_k(\lambda )+\begin{pmatrix}
+			0 & 0 & \cdots  & 0 \\
+			0 & 0 & \cdots & 0\\
+			\vdots & \vdots & \ddots & \vdots \\
+			\varepsilon ^k & 0 & \cdots  & 0
+		\end{pmatrix}
+	.\]
+	Write $\varepsilon ^kE$ for the matrix on the far right, such that $E$ is the matrix with a 1 in the bottom left corner, and 0s elsewhere. Note that
+	\[
+		Ee_i=\delta _{i1} e_k
+	.\]
+	Let
+	\[
+		v(\varepsilon )\coloneqq \sum_{j=1}^{k} \varepsilon ^{j-1} e_j=e_1+\varepsilon e_2 + \cdots + \varepsilon ^{k-1} e_k
+	.\]
+	We compute $M(\varepsilon )v(\varepsilon )$:
+	\begin{align*}
+		M(\varepsilon )v(\varepsilon )&=(\lambda 1+N+\varepsilon ^kE)\sum_{j=1}^{k} \varepsilon ^{j-1} e_j\\
+					      &=\sum_{j=1}^{k} \lambda \varepsilon ^{j-1} e_j + \sum_{j=1}^{k} \varepsilon ^{j-1} Ne_j + \sum_{j=1}^{k} \varepsilon ^{j-1} \varepsilon ^kEe_j\\
+					      &=\lambda v(\varepsilon )+\sum_{j=1}^{k-1} \varepsilon ^{j-1} e_{j-1} +\varepsilon ^{k} Ee_1\\
+					      &=\lambda v(\varepsilon )+\varepsilon \left(v(\varepsilon )-\varepsilon ^{k-1} e_k\right) + \varepsilon ^ke_k\\
+					      &=\lambda v(\varepsilon ) + \varepsilon \left(v(\varepsilon )-\varepsilon ^{k-1} e_k + \varepsilon ^{k-1} e_k\right)\\
+					      &=(\lambda +\varepsilon )v(\varepsilon )
+	.\end{align*}
+	Thus $v(\varepsilon )$ is an eigenvector of $M(\varepsilon )$ with eigenvalue $\lambda +\varepsilon $. We can extend this to a full basis of eigenvectors by taking $\omega $ to be a primitive $k$th root of unity $e^{2i\pi /k} $, and considering $v(\omega^m\varepsilon )$ for any $m\in\mathbb{Z} $. There are of course $k$ distinct vectors of this form, and we can once again compute (since $(\omega ^m)^k=(\omega ^k)^m=1$)
+	\begin{align*}
+		M(\varepsilon )v(\omega ^m\varepsilon )&=(\lambda 1+N+\varepsilon ^kE)\sum_{j=1}^{k} (\omega ^m\varepsilon) ^{j-1} e_j\\
+					      &=\sum_{j=1}^{k} \lambda (\omega ^m\varepsilon )^{j-1} e_j + \sum_{j=1}^{k} (\omega ^m\varepsilon )^{j-1} Ne_j + \sum_{j=1}^{k} (\omega ^m\varepsilon )^{j-1} \varepsilon ^kEe_j\\
+					      &=\lambda v(\omega ^m\varepsilon )+\sum_{j=1}^{k-1} (\omega ^m\varepsilon)^{j-1} e_{j-1} +\varepsilon ^{k} Ee_1\\
+					      &=\lambda v(\omega ^m\varepsilon )+\omega ^m\varepsilon \left(v(\omega ^m\varepsilon )-(\omega ^m\varepsilon)^{k-1} e_k\right) + \varepsilon ^ke_k\\
+					      &=\lambda v(\omega ^m\varepsilon ) + \omega ^m\varepsilon \left(v(\omega ^m\varepsilon )-(\omega ^m\varepsilon )^{k-1} e_k + (\omega ^m\varepsilon )^{k-1} e_k\right)\\
+					      &=(\lambda +\omega ^m\varepsilon )v(\omega ^m\varepsilon )
+	.\end{align*}
+	Because $\varepsilon \neq 0$, these eigenvalues are distinct, and thus $M(\varepsilon )$ is always diagonalizable. Now simply take the sequence $\left\{ \varepsilon _m = 1/m \right\}_{m\in\mathbb{N} } $ which converges $\varepsilon _m\to 0$ as $m\to \infty $, meaning
+	\[
+		\lim_{m\to \infty } M(\varepsilon _m)=\lim_{m\to \infty } \left( \lambda 1+N+\varepsilon_m^kE \right) =\lambda 1+N=J_k(\lambda )
+	.\]
+	Hence every single Jordan block matrix is a limit of diagonalizable matrices. We can take the direct sum to obtain that $J$ is a limit of diagonalizable matrices. Conjugating each limit term by $P$ yields $A$, and the conjugate of a diagonalizable matrix is diagonalizable, hence $A$ is a limit of diagonalizable matrices.
+\end{proof}
+
+
+\begin{problem}\label{2}
+	Using $\log (-)$, show that for $X\in \mathfrak{gl} (n,\mathbb{C} )$,
+	\[
+		\lim_{m\to \infty } \left( 1+\frac{X}{m}  \right) ^m = e^X
+	.\]
+\end{problem}
+\begin{proof}
+	Recall (\cite{hall} def 2.7) that $\log X$ can be written as
+	\[
+		\log X=\sum_{n=1}^{\infty} (-1)^{n+1} \frac{(X-1)^n}{n}
+	.\]
+	Then
+	\[
+		\log\left( 1+\frac{X}{m}  \right) =\sum_{n=1}^{\infty} (-1)^{n+1} \frac{X^n}{nm^n} 
+	.\]
+	We must of course choose $X,m$ such that $\left\| \frac{X}{m}  \right\| <1$ for the power series to converge. In particular, there exists sufficiently large $m$ for which the sequence converges, so the sum is defined in the limit $m\to \infty $. We can multiply by $m$ to write
+	\[
+		m \log \left( 1+\frac{X}{m}  \right) =\sum_{n=1}^{\infty } (-1)^{n+1} \frac{X^n}{nm^{n-1} } =X + \sum_{n=2}^{\infty} (-1)^{n+1} \frac{X^n}{nm^{n-1} } 
+	.\]
+	Write $R=\sum_{n=2}^{\infty} (-1)^{n+1} X^n/(nm^{n-2} )$ such that
+	\[
+		m \log \left( 1+\frac{X}{m}  \right) =X + \frac{R}{m} 
+	.\]
+	Then
+	\[
+		\left\| R \right\| =\left\| \sum_{n=2}^{\infty} (-1)^{n+1} \frac{X^n}{nm^{n-2} }  \right\| \leq \sum_{n=2}^{\infty} \frac{\left\| X \right\| ^n}{nm^{n-2}} \leq \sum_{n=2}^{\infty} \frac{\left\| X \right\| ^n}{m^{n-2} } 
+	.\]
+	We claim that when $m>1$ and $m > 2\left\| X \right\| $, this is a convergent geometric series. This follows by
+	\[
+		\sum_{n=2}^{\infty} \frac{\left\| X \right\| ^n}{m^{n-2} } =\left\| X \right\| ^2 \sum_{n=0}^{\infty} \frac{\left\| X \right\| ^n}{m^n} =\left\| X \right\| ^2\sum_{n=0}^{\infty} \left( \frac{\left\| X \right\| }{m}  \right) ^n,
+	\]
+	and this converges when $\left\| X \right\| /m < 1$. If we take $m > 2\left\| X \right\| $, then $\left\| X \right\| /m < 1/2$ implies that this converges to a value strictly less than
+	\[
+		\sum_{n=0}^{\infty} \left( \frac{\left\| X \right\| }{m}  \right) ^n < \frac{1}{1-\frac{1}{2} } =\frac{1}{\frac{2}{2} -\frac{1}{2} } =2
+	.\]
+	Hence $\left\| R \right\| < 2\left\| X \right\|^2 $, and thus $R$ is bounded by a constant for sufficiently large $m$. Hence the sum converges in the limit $m\to \infty $, and in particular $R/m \to 0$ as $m\to \infty $. Thus
+	\[
+		\lim _{m\to \infty } m \log \left( 1+\frac{X}{m}  \right) =\lim_{m\to \infty } \left( X + \frac{R}{m}  \right) =X
+	.\]
+	Since $\exp \circ\log =\mathrm{id} $, and since $\exp (mA)=(\exp A)^m$ for all $A\in \mathfrak{gl} (n,\mathbb{C} )$, we have
+	\[
+		\exp \left( m \log \left( 1+\frac{X}{m}  \right)  \right) =\exp \left( \log \left( 1+\frac{X}{m}  \right)  \right) ^m=\left( 1+\frac{X}{m}  \right) ^m
+	.\]
+	Since the matrix exponential is everywhere continuous, it commutes with the limit, and thus
+	\[
+		\exp X = \exp \left( \lim _{m\to \infty } \log \left( 1+\frac{X}{m}  \right)  \right) =\lim _{m\to \infty } \exp \left( \log \left( 1+\frac{X}{m}  \right)  \right) =\lim_{m\to \infty } \left( 1+\frac{X}{m}  \right) ^m
+	.\]
+\end{proof}
+
+
+\bibliographystyle{alpha}
+\bibliography{refs-1.bib}
+\end{document}

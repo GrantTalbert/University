@@ -1,0 +1,62 @@
+\lecture{6}{Thu 05 Feb 2026 12:28}{Complex furries}
+
+\begin{remark}
+	I finally have good motivation for why complexifying the tangent space is tensoring with $\mathbb{C} $. Let $v\in T_pM$ and $z=x+iy\in\mathbb{C} $. Then $v\otimes z\in T_p^\mathbb{C} M$ is equivalent to, by bilinearity,
+	\[
+		v\otimes (x+iy)=v\otimes x + v\otimes iy
+	.\]
+	Of course by $\mathbb{R} $-linearity of $\otimes _\mathbb{R} $, this is equal to
+	\[
+		=x(v\otimes 1)+y(v\otimes i)
+	.\]
+	We can choose to write $v\otimes 1=v$ and $v\otimes i=iv$, and this really does behave like normal multiplication since normal multiplication is also bilinear. Thus all elements of $T_p^\mathbb{C} M$ can be written of the form $u+iv$ for some $u,v\in T_pM$; in our example above, $u=xv$ and $v=yv$ (abusing notation very badly). This is required to have $\partial _z=\frac{1}{2} (\partial _x -i \partial _y)$ in the tangent space.
+\end{remark}
+
+\begin{proposition}\label{???}
+	Let $X$ be a compact complex connected submanifold, and $f : X \to \mathbb{C} $ a holomorphic function. Then $f$ is constant.
+\end{proposition}
+\begin{proof}
+	Easy to show $f$ is constant on connected components by passing to coordinates.
+\end{proof}
+\begin{corollary}\label{????}
+	If $X\subseteq \mathbb{C} ^n$ is a compact complex connected submanifold, then $X$ is a point.
+\end{corollary}
+\begin{proof}
+	Take the holomorphic function
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X \ar[hook, r]  & \mathbb{C} ^n \ar[" \pi _i ", r]  & \mathbb{C} .
+	\end{tikzcd}\]
+	This must be constant by \cref{???}.
+\end{proof}
+
+Since looking for compact complex connected subsets of $\mathbb{C} ^n$, we look to projective space for something like Whittney's theorem for embedding complex manifolds into $\mathbb{C} ^n$. This still is not perfect, but is worth considering.
+
+Recall that projective space $k\mathbb{P} ^n$ over a field $k$ is defined as the set of lines through the origin in $k ^{n+1} \setminus \left\{ 0 \right\} $, topologized in the obvious way:
+\[
+	k\mathbb{P} ^n \coloneqq \frac{k^{n+1}\setminus \left\{ 0 \right\} }{ \left\langle \lambda x \sim x \mid x\in k^{n+1} ,\lambda \in k\setminus \left\{ 0 \right\}  \right\rangle 
+}.\]
+Given $\pi $ the canonical projection and $L$ any line in $\mathbb{C} ^{n+1} $, we have $\pi ^{-1} (L)\cong L\setminus \left\{ 0 \right\} \cong \mathbb{C} ^*$. We can then show that $\mathbb{C} ^{n+1} \setminus 0$ is a locally trivial $\mathbb{C} ^*$-bundle over $\mathbb{C} \mathbb{P} ^n$. Recall that the atlas is formed by sets
+\[
+	U_i \coloneqq \left\{ [c_0 : \cdots : c_n]\in\mathbb{C} \mathbb{P} ^n \mid c_i \neq 0 \right\} 
+.\]
+This is well-defined. The coordinates simply drop $c_i$, since we can always take it to be normalized at 1.
+
+\begin{remark}
+	We work in the quotient topology on $\mathbb{C} \mathbb{P} ^n$, which is not the same as the usual topologies we would use in algebraic geometry. However many of the results translate between the two, due to some work by Serre.
+\end{remark}
+
+We equip $\mathbb{C} ^{n+1} $ with the Hermitian inner product $\left\langle z,w \right\rangle =\sum_{i} z_i \overline{w} _i$, the \emph{opposite} of the physics convention.
+
+The fibration
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+S^1 \ar[hook, r]  & S^{n+1} \ar[r]  & \mathbb{C} \mathbb{P} ^n
+\end{tikzcd}\]
+is called the Hopf fibration.
+
+Complex projective space is a CW complex. We can define $\mathbb{C} \mathbb{P} ^1 \coloneqq \mathbb{C} ^1 \amalg \mathbb{C} ^0$ with $\mathbb{C} ^0$ the point at $\infty $. If we take a chart $U_0 \subseteq \mathbb{C} \mathbb{P} ^2$, then $\mathbb{C} \mathbb{P} ^2\setminus U_0$ is just the set $\left\{ [0 : z_1 : z_2 \right\} $. Since $U_0 \cong \mathbb{C} ^2$, we have $\mathbb{C} \mathbb{P} ^2 \coloneqq \mathbb{C} ^2 \amalg \mathbb{C} ^1 \amalg \mathbb{C} ^0$. We can induct to obtain
+\[
+	\mathbb{C} \mathbb{P} ^n \coloneqq \coprod_{i=0}^{n} \mathbb{C} ^i
+.\]
+Hence $\mathbb{C} \mathbb{P} ^n$ admits this cell decomposition and is a CW complex with cells of even real dimension. Here we of course have not made the gluing relations explicit. Since cohomology of a CW complex comes by each level of the cells, and every other degree of cells is zero, the cohomology $H^{\bullet} (\mathbb{C} \mathbb{P} ^n;\mathbb{C} )\cong \mathbb{C} / 0 \cong  \mathbb{C} $. Oh and also $\mathbb{C} \mathbb{P} ^n \cong S^{n+1} /S^1$ a diffeomorphism.
+
+Submanifolds (more generally, subvarieties) of $\mathbb{C} \mathbb{P} ^n$ admit descriptions as \emph{homogeneous polynomials}. A polynomial $f$ in $n+1$ variables is \emph{homogeneous of degree $d$} if $f(\lambda x)=\lambda ^df(x)$, $x\in\mathbb{C} ^{n+1} $. It follows that $f$ is a sum of monomials of degree $d$.

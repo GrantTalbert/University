@@ -35,7 +35,7 @@ I didn't fully understand (2), so I offer some further discussion. I used an AI 
 \end{definition}
 
 \begin{remark}\label{1.3.1.4}
-	The notion of a simple inclusion simply says that any path starting and ending in $A$ must lie entirely in $A$. More generally, any necklace $T\to X$ starting and ending in $A$ ($\alpha _T,\omega _T\in \Im A\hookrightarrow X)$ must be fully contained in $A$. We can immediately see that this is an inclusion of at least vertices, by noting that given any lifting problem against $\partial \Delta ^1\to \Delta ^0$ as indicated by the diagram of solid arrows
+	The notion of a simple inclusion simply says that any path starting and ending in $A$ must lie entirely in $A$. More generally, any necklace $T\to X$ starting and ending in $A$ ($\alpha _T,\omega _T\in \Im (A\hookrightarrow X))$ must be fully contained in $A$. We can immediately see that this is an inclusion of at least vertices, by noting that given any lifting problem against $\partial \Delta ^1\to \Delta ^0$ as indicated by the diagram of solid arrows
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	\partial \Delta ^1\ar[r] \ar[d]  & A \ar[hook, d]  \\
 	\Delta ^0\ar[r]\ar[dotted, ur]  & X
@@ -43,12 +43,28 @@ I didn't fully understand (2), so I offer some further discussion. I used an AI 
 	admits a dotted arrow as indicated, rendering the diagram commutative. An arrow $\partial \Delta ^1\to A$ is simply a choice of two vertices, and the commutativity of the outer square says that the simple inclusion identifies these two vertices. The existence of the lift says that these two vertices are in fact the \emph{same}, showing that the simple inclusion is injective on vertices.
 \end{remark}
 
-We would also like to show higher levels of simple inclusions are injective, since we would then have that they are mono. This is a classical theorem of simplicial sets that I have never proven before.
-
-\begin{proposition}\label{1.3.1.5}
-	A morphism of simplicial sets $f : A \to X$ is monic (levelwise injective) if and only if it has the right lifting property with respect to the canonical inclusion $\partial \Delta ^1\hookrightarrow \Delta ^1$.
-\end{proposition}
+\begin{lemma}\label{1.3.1.5}
+	A simple inclusion $A\hookrightarrow X$ has the right lifting property with respect to maps $\partial \Delta ^k\hookrightarrow \Delta ^k$ for all $k\geq 1$.
+\end{lemma}
 \begin{proof}
-	apparently this follows from ANOTHER theorem idk
+	Let
+	\[\begin{tikzcd}[row sep =  2.5em, column sep = 2.5em]
+	\partial \Delta ^k \ar[" h ", r] \ar[hook, d]  & A \ar[" i ", d]  \\
+	\Delta ^k \ar[" k "', r]  & X
+	\end{tikzcd}\]
+	be a lifting problem where $i$ is a simple inclusion. We can then use $\partial \Delta ^1 \hookrightarrow \partial \Delta ^k$ by mapping to the initial and final vertices of $\Delta ^k$ to obtain a lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\partial \Delta ^1 \ar[" h\circ \iota  ", r]\ar[hook, d]  & A \ar[equals, d] \ar[" i ", bend left, dd]  \\
+	\partial \Delta ^k \ar[" h ", r] \ar[hook, d]  & A \ar[" i ", d]  \\
+	\Delta ^k \ar[" k "', r]  & X
+	\end{tikzcd}\]
+	Since $\Delta ^k$ is a necklace and the composite $\partial \Delta ^1 \hookrightarrow \partial \Delta ^k \hookrightarrow \Delta ^k$ is a canonical inclusion, there is a lift $l : \Delta ^k \to A$ as indicated:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\partial \Delta ^1 \ar[" h\circ \iota  ", r]\ar[hook, d]  & A \ar[equals, d] \ar[" i ", bend left, dd]  \\
+	\partial \Delta ^k \ar[hook, d]  & A \ar[" i ", d]  \\
+	\Delta ^k \ar[" k "', r] \ar[" l ", dotted, uur]  & X
+	\end{tikzcd}\]
+	It is not immediately clear that $l$ agrees with $h$ on all of $\partial \Delta ^k$ rather than just $\partial \Delta ^1$; however the two are equal after composing with $A\to X$, so it suffices to show $A\to X$ is monic.
 \end{proof}
 
+This section is a work in progress because I can't even figure out how the basic theorems follow, and I feel the authors may have made a typo in their arXiv draft...

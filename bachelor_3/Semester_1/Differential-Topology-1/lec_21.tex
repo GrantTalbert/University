@@ -1,0 +1,130 @@
+\lecture{21}{Mon 03 Nov 2025 12:28}{Cotangent bundle}
+
+Let $T_p^*M$ be the dual space $\Hom(T_pM, \mathbb{R} ) $. This has a basis $\mathrm{d} x^i|_p$ which acts by
+\[
+	\mathrm{d} x^i|_p(\partial_j|_p)=\delta _i^j
+.\]
+We call this the cotangent space at $p$, and elements are tangent covectors. The cotangent bundle
+\[
+	T^*M \coloneqq \coprod_{p\in M} T_p^*M
+\]
+has a smooth structure analogous to $TM$, and has a smooth projection $\pi : T^*M \to M$ via $(p,\omega )\mapsto p$. Smooth sections are called covector fields, and we write $\mathfrak{X} ^*(M)$ for the set of covector fields. There is a linear map, called the \emph{gradient}
+\[
+	\mathrm{d} : C^\infty (M) \to \mathfrak{X} ^*(M)
+\]
+which maps functions $f$ to vector fields $\mathrm{d} f$ which act on tangent vectors $V_p\in T_pM$ via
+\[
+	(\mathrm{d} f)_p(V_p)=V_p(f)
+.\]
+In coordinates,
+\[
+	\mathrm{d} f = \frac{\partial f}{\partial x^\mu } \mathrm{d} x^\mu 
+.\]
+Given a smooth map $F : M \to N$, the pushforward $F_{*p} : T_pM \to T_{F(p)} N$ is a covariant action. Since dualizing is contravariant, this induces a \emph{pullback}
+\[
+	F_p^* : T_{F(p)} ^*N \to T_p^*M
+.\]
+This is defined as follows: given a covector $\alpha \in T_{F(p)} ^*N$ and a vector $V_p\in T_pM$,
+\[
+	(F^*_p\alpha )(V_p)=\alpha (F_{*p}V_p)
+.\]
+Indeed, $F_{*p} V_p \in T_{F(p)} N$, so $\alpha$ (which we write $\alpha _{F(p)} $ usually) can act on it. This is nice because we can pull back covector fields. Given $\omega \in \mathfrak{X} ^*(N)$ and a smooth $F : M \to N$, then define $F^*\omega $ by
+\[
+	(F^*\omega )_p(V_p)=(F^*_p\omega _{F(p)} )(V_p)=\omega _{F(p)} (F_{*p} V_p)
+.\]
+In other words, $F^* : \mathfrak{X} ^*(N) \to \mathfrak{X} ^*(M)$.
+
+\begin{lemma}\label{???}
+	Let $G : M \to N$ be smooth and $f : N \to \mathbb{R} $ smooth. Then
+	\[
+		G^*(\mathrm{d} f)=\mathrm{d} (f\circ G)
+	.\]
+	If $\omega \in \mathfrak{X} ^*(N)$, then
+	\[
+		G^*(f\omega )=(f\circ G)(G^*\omega )
+	.\]
+\end{lemma}
+\begin{proof}
+	By definition,
+	\[
+		G^*(\mathrm{d} f)_p(X_p)=(\mathrm{d} f)_{G(p)} (G_{*p}X_p)=(G_{*p}X_p)(f)=X_p(f\circ G)=\mathrm{d} (f\circ G)_p(X_p)
+	.\]
+	I don't even know what the second implication is stating.
+\end{proof}
+\begin{remark}
+	There is a functor $T^* : \mathcal{M} \mathrm{an}_*^{\mathrm{op}}  \to \mathbb{R} $-$\mathcal{V} \mathrm{ect} $, where $\mathcal{M} \mathrm{an} _*$ is the category of based manifolds. This is given by $(M,p)\mapsto T_p^*M$, and $F\mapsto F^*_p$.
+\end{remark}
+
+\section{Line integrals of covector fields}
+
+Let $J=[a,b]\subseteq \mathbb{R} $, and let $\omega \in \mathfrak{X} ^*(J)$. This can be given by $\omega =f(t) \mathrm{d} t$, where $\mathrm{d} t$ is the single basis element in our chart and $f\in C^\infty (J)$. We can define
+\[
+	\int_J \omega = \int_a^b f(t) \,\mathrm{d} t
+.\]
+\begin{proposition}\label{3.1.1}
+	Let $\omega $ be a smooth covector field on an interval $J$, and let $\varphi : [c,d]\to [a,b]$ be an increasing diffeomorphism. Then
+	\[
+		\int_{[c,d]} \varphi^*\omega =\int_{[a,b]} \omega 
+	.\]
+\end{proposition}
+\begin{proof}
+	\begin{align*}
+		(\varphi^*\omega )_s &= \varphi ^*(f(t)\mathrm{d} t)\\
+				     &=(\varphi ^*f)\mathrm{d} \varphi ^*t\\
+				     &=f(\varphi (s))\mathrm{d} \varphi (s)\\
+				     &=f(\varphi (s))\varphi '(s)\mathrm{d} s
+	.\end{align*}
+	Here $\varphi (s)=t$. We then recover
+	\[
+		\int_{[c,d]} f(\varphi (s))\varphi '(s) \,\mathrm{d} s = \int_{[a,b]} f(t) \,\mathrm{d} t
+	\]
+	from the chain rule.
+\end{proof}
+\begin{definition}\label{3.1.2}
+	Let $M$ be a smooth manifold, and $\gamma : J \to M$ a continuous and piecewise smooth curve in $M$ with $J$ an interval. Let $\omega \in \mathfrak{X} ^*(M)$. Define the line integral of $\omega $ over $J$ as
+	\[
+		\int_\gamma \omega \coloneqq \int_{J} \gamma ^*\omega
+	.\]
+	This definition makes sense since $\gamma ^*\omega $ is a smooth covector field on $J$.
+\end{definition}
+
+Lee 11.33 says any two points on a smooth manifold can be connected with a piecewise smooth curve.
+
+\begin{proposition}\label{3.1.3}
+	The integral over a curve $\gamma $ is $\mathbb{R} $-linear. If $\gamma $ is constant than the integral over it is 0. If $\gamma : [a,b] \to M$ can be split into piecewise smooth curves $\gamma _1 : [a,c] \to M$ and $\gamma _2: [c,b] \to M$, then
+	\[
+		\int_\gamma  \omega =\int_{\gamma _1} \omega +\int _{\gamma _2} \omega
+	.\]
+	If $F : M \to N$ is smooth, then
+	\[
+		\int F^*\omega =\int_{F\circ \gamma } \omega
+	.\]
+\end{proposition}
+
+\begin{remark}[Author's remarks]
+The tangent space at $p$ is functorial $(p,M)\mapsto T_pM$ and $F\mapsto F_{*p} $. Then $\Hom(-, \mathbb{R} ) $ is a functor mapping $T_pM$ to $T_p^*M$, so the definition of $F^*_p$ can be given more transparently. Given $\omega \in T_p^*M$, define $F^*_p\omega \coloneqq \omega \circ F_{*p} $. This is equivalent to what was given, since for any vector $V\in T_pM$,
+\[
+	(F^*_p\omega )(V)=(\omega \circ F_{*p} )(V)=\omega (F_{*p} V)
+.\]
+The gradient $\mathrm{d} : C^\infty (M) \to \mathfrak{X} ^*(M)$ can be interpreted as the map $f\mapsto \mathrm{Ev} _f$, since for any $p\in M$ and any tangent vector $V\in T_pM$,
+\[
+	(\mathrm{d} f)_p(V)=V(f)=\mathrm{Ev} _f(V)
+.\]
+In other words, $\mathrm{d} f=\mathrm{Ev} _f$. And of course the gradient has the coordinate representation
+\[
+	\mathrm{d} f= \frac{\partial f}{\partial x^\mu } \mathrm{d} x^\mu \implies \mathrm{d} x^\mu =\frac{\partial x^\mu }{\partial (x')^\nu } \mathrm{d} (x')^\nu 
+.\]
+This agrees with the transformation law given in GR, from which we obtain the transformation law for covectors
+\[
+	\omega ^{\prime \mu } =\omega _\nu \frac{\partial x^\nu }{\partial (x')^\mu } 
+.\]
+Furthermore, the pullback for vector fields is just given by coproducting along. Given $\omega \in \mathfrak{X} ^*(N)$ and $F : M \to N$ smooth, and given $p\in M$ and $V\in T_pM$, define $F^*: T_{F(p)} ^*N \to T_p^*M$ by $F^*\omega =\omega \circ F_{*} $ pointwise in the sense that
+\[
+	(F^*\omega )_p=F^*_p\omega _{F(p)} =\omega _{F(p)} \circ F_{*p} 
+.\]
+Acting on a tangent vector, this is the same as what was given:
+\[
+	(F^*\omega )_p(V)=(\omega_{F(p)} \circ F_{*p} )(V)=\omega _{F(p)} (F_{*p} V)
+.\]
+Now let $J\subseteq \mathbb{R} $ be an interval. We said earlier that any covector field $\omega $ on $J$ can be written as $\omega =f(t)\mathrm{d} t$ for $f\in C^\infty (J)$. This an abuse of notation; we should write that for any given $t\in J$, the component of $\omega $ at $t$ is given as $\omega _t=f(t)\mathrm{d} t$. 
+\end{remark}

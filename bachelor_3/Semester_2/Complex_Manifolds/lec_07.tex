@@ -1,0 +1,76 @@
+\lecture{7}{Tue 10 Feb 2026 12:29}{Complex projective space}
+
+\begin{notation}
+	Given a manifold $X$ and an open set $U\subseteq X$, we will now write $\mathcal{O} _X(U)$ for the set of holomorphic functions $U\to \mathbb{C} $. Recall by \cref{2.1.2} that if $X$ is compact, then $\mathcal{O} _X(X)\cong \mathbb{C} $.
+\end{notation}
+
+Let $f$ be a homogeneous polynomial of degree $d$. It makes sense to consider the vanishing locus $Z(f)$ as a subset of $\mathbb{C} \mathbb{P} ^n$ since if $f$ vanishes on $z$, then it vanishes on $\left\{ \lambda z \right\}_{\lambda \in\mathbb{C} } =[z]$.
+
+\begin{definition}\label{???}
+	Let $F_1, \ldots ,F_r$ be homogeneous polynomial of degree $d$ in $\mathbb{C} [z_0, \ldots ,z_n]$. Then the zero locus is defined as
+	\[
+		Z(F_1, \ldots ,F_r)=\left\{ [z]\in\mathbb{C} \mathbb{P} ^n\mid F_i([z])=0\forall i \right\} 
+	.\]
+	Subsets of this are called \emph{projective varieties}.
+\end{definition}
+
+Note that any complex (embedded) manifold of $\mathbb{C} \mathbb{P} ^n$ is compact.
+
+\begin{theorem}[Chow]\label{???????}
+	Any complex submanifold of $\mathbb{C} \mathbb{P} ^n$ is cut out by homogeneous polynomials. In particular, all complex submanifolds of $\mathbb{C} \mathbb{P} ^n$ are algebraic.
+\end{theorem}
+
+\begin{proposition}\label{??a;lkdmsjk}
+	Given $F$ a homogneous polynomial in $\mathbb{C} [z_0, \ldots ,z_n]$, suppose that $\partial_{z_i} F$ has no common zeroes in $\mathbb{C} \mathbb{P} ^n$ for all $i$. Then $Z(F)$ is a manifold.
+\end{proposition}
+\begin{proof}
+	Let $F$ be homogeneous of degree $d$. There is an identity known as \emph{Euler's identity} which says
+	\[
+		\sum_{i=0}^{n} z_i \frac{\partial F}{\partial z_i} =dF(z)
+	.\]
+	Here $d$ is the degree, NOT the exterior derivative (it is my convention to write that as d). We prove this by differentiating $F(\lambda z)=\lambda ^dF(z)$ on both sides with respect to $\lambda $ and applying the chain rule, then setting $\lambda =1$.
+
+	We want to verify that $Z(F) \cap U_i$ is a manifold. For simplicity take $i=0$ without loss of generality. Take $[a]\in Z(F) \cap U_i$; we then may freely set $a_i=1$. Using the identity,
+	\[
+		\left.\frac{\partial F}{\partial z_0} +a_1 \frac{\partial F}{\partial z_1} +\cdots +a_n\frac{\partial F}{\partial z_n}\right|_{(1,a_1, \ldots ,a_n)}  =dF(1,a_1, \ldots ,a_n)
+	.\]
+	The right side vanishes. Hence $Z(F) \cap U_0 = Z(F(1,z_1, \ldots ,z_n))$. To check that this is a manifold using the implicit function theorem, we need a nonzero partial derivative, and thus the Jacobian will have rank 1. The hypothesis and non-zero-ness of $[a]$ guarentees this.
+\end{proof}
+
+Let $X\subseteq \mathbb{C} \mathbb{P} ^n$ a manifold or projective variety, and $\left\{ F_i \right\} _{0\leq i\leq s} \subseteq \mathbb{C} [z_0, \ldots ,z_n]$ all homogeneous of the same degree $d$. We claim the map $f : X \to \mathbb{C} \mathbb{P} ^s$ defined by $[x]\mapsto [F_0(x): \ldots :F_s(x)]$ is well-defined. This follows by homogeneity of the $F$s, \emph{except} for the fact that $f[x]$ needs to be nonzero everywhere. This happens if and only if $X \cap Z(F_0, \ldots ,F_s)$ is empty. We claim $f$ is holomorphic. Let $x\in U_j$ and $f(x)\in U_k$, then in coordinates
+\[
+	f(x) = \left\{ \frac{F_i(z_0, \ldots , \hat{z}_j, \ldots ,z_n)}{F_k(z)}  \right\}_{0\leq i\leq s}  
+.\]
+This is holomorphic. A fascinating result we will see later is that \emph{all} holomorphic maps arise of this form.
+
+Recall that $\operatorname{GL}(n+1,\mathbb{C} )$ acts on $\mathbb{C} ^{n+1}$, and this descends to $\mathbb{C} \mathbb{P} ^n$. However this is not a faithful action, since some matrices act trivially: anything that scales stuff. This is the center, so we can mod out by the center $\operatorname{GL} (n+1,\mathbb{C} ) / \mathcal{Z}(\operatorname{GL} (n+1,\mathbb{C} ))$, and this acts faithfully. We claim that these are precisely the automorphisms of $\mathbb{C} \mathbb{P} ^n$. We may prove this later.
+
+
+Let $X\subseteq \mathbb{C} \mathbb{P} ^r$ and $Y\subseteq \mathbb{C} \mathbb{P} ^s$ are manifolds. Any submanifold of projective space will be called a projective manifold. We know $X\times Y$ is a  complex manifold, but we do not yet know if it is projective. We proceed with the following proposition; $X\times Y$ will then be projective by a simple corollary.
+
+\begin{proposition}[Segre's embedding]\label{lask}
+	$\mathbb{C} \mathbb{P} ^r \times \mathbb{C} \mathbb{P} ^s$ is a submanifold of $\mathbb{C} \mathbb{P} ^{rs+r+s} $.
+\end{proposition}
+\begin{proof}
+	Think of $\mathbb{C} ^{rs+r+s+1} =\mathbb{C} ^{(r+1)(s+1)} $ as matrices of size $(r+1)\times (s+1)$ over $\mathbb{C} $. Then $\mathbb{C} \mathbb{P} ^{rs+r+s} $ is just $\mathbb{P} (\mathrm{M}_{(r+1)\times (s+1)} (\mathbb{C} ))$. Consider the map $\mu_{r,s} : \mathbb{C} \mathbb{P} ^r\times \mathbb{C} \mathbb{P} ^s \to \mathbb{P} (M_{(r+1)\times (s+1)} (\mathbb{C} ))$ defined by
+	\[
+		([a],[b])\mapsto [c_{ij} ],\qquad c_{ij} =a_ib_j
+	.\]
+	For example,
+	\[
+		([a_0 : a_1],[b_0 : b_1])\mapsto \left[ \begin{pmatrix}
+		a_0b_0 & a_0b_1 \\
+		a_1b_0 & a_1b_1
+		\end{pmatrix} \right] 
+	,\]
+	where of course the class is defined by $c_{ij} \sim \lambda c_{ij} $. We claim the image of this map is precisely (classes of) all matrices of rank 1 (all matrices in a class of a matrix with rank 1 will have rank 1). The argument is messy so we do it for our 2 dimensional example. We can take $a_0$ out of the first row and $a_1$ out of the second row to get
+	\[
+		\begin{pmatrix}
+		b_0 & b_1 \\
+		b_0 & b_1
+		\end{pmatrix}
+	.\]
+	This has at most rank 1. Since $a,b\neq 0$ it has at least rank 1. In this example, this is a submanifold since it is precisely the fiber of 0 under $\det $. 
+\end{proof}
+
+

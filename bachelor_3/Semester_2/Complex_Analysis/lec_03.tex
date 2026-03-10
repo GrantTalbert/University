@@ -1,0 +1,53 @@
+\lecture{3}{Tue 27 Jan 2026 09:34}{Analytic implies holomorphic}
+
+\begin{definition}\label{1.1.9}
+	Let $f : U\subseteq \mathbb{C}  \to \mathbb{C} $. We say $f$ is \emph{analytic} or $C^\omega $ if for each $z\in U$, there exists an open set $x\in V \subseteq U$ such taht $f$ admits a power series expansion which converges in $V$.
+\end{definition}
+
+\begin{proposition}\label{1.1.10}
+	Suppose $\sum_{n} a_nw^n$ converges for some $\left\{ a_n \right\} _{n\in\mathbb{N} } \subseteq \mathbb{C} $, $w\in\mathbb{C} $. If $z\in\mathbb{C} $ and $\left| z \right| <\left| w \right| $, then $\sum_{n} \left| a_n \right| \left| z \right| ^n$ converges.
+\end{proposition}
+\begin{proof}
+	Suppose $z$ exists, meaning $w\neq 0$. Then
+	\[
+		\left| a_n \right| \left| z \right| ^n=\left| a_n \right|\left| w \right| ^n \left( \frac{\left| z \right| }{\left| w \right| }  \right) ^n
+	.\]
+	It follows kinda easily from here by noting that $\left\{ a_nw^n \right\}_{n\in\mathbb{N} } $ is bounded.
+\end{proof}
+\begin{corollary}\label{1.1.11}
+	If $\sum_{n} a_n(z-z_0)^n$ converges for some $z\in B_r(z_0)$, $r>0$, then it converges absolutely in the entire ball.
+\end{corollary}
+
+\begin{definition}\label{1.1.12}
+	Given a power series $\sum_{n} a_n(z-z_0)^n$, the \emph{radius of convergence} is the number $R\in [0,\infty )\cup \left\{ \infty  \right\} $ such that the series converges for $z\in B_R(z_0)$, and diverges for $z\in\mathbb{C} \setminus \overline{B_R(z_0)} $.
+\end{definition}
+Equivalently, $R=\sup \left\{ \left| z-z_0 \right| \mid \sum_{n} a_n(z-z_0)^n\text{ converges}  \right\} $. Equivalently, recall that the lim sup of a sequence $\left\{ c_n \right\} _{n\in\mathbb{N}} \subseteq \mathbb{R} $, $c_n\geq 0$ is
+\[
+	\limsup_{n \to \infty} c_n=\lim_{n\to \infty } \sup \left\{ c_m \right\}_{m\geq n} 
+.\]
+We can then define $R=\left(\limsup_{n \to \infty} \left| a_n \right| ^{1/n} \right)^{-1} $. It follows from these facts that if $a_n(z-z_0)^n$ converges, then so does replacing $a_n\to na_n$ or $a_n/n$.
+
+\begin{theorem}\label{1.1.13}
+	Let $f$ be analytic on $U\subseteq \mathbb{C} $. Then $f$ is holomorphic on $U$.
+\end{theorem}
+\begin{proof}
+	This is a nonstandard proof the professor came up with. Let $z_0\in U$; it suffices to show $\partial _zf$ exists at $z_0$. Since $f$ is analytic, there exists an open (wrt $\mathbb{C} $) neighborhood $V\subseteq U$ of $z_0$. Write
+	\[
+		f(z)=\sum_{n=0}^{\infty} a_n(z-z_0)^n
+	.\]
+	Let $h$ sufficiently small such that the perturbation $f(z_0+h)$ can be evaluated by this power series. Then
+	\[
+		\frac{f(z_0+h)-f(z_0)}{h} =\frac{\sum_{n\geq 0} a_nh^n-a_0}{h} =\frac{\sum_{n\geq 1} a_nh^n}{h}=\sum_{n\geq 1} a_nh^{n-1} 
+	.\]
+	The limit of the right hand side should be $a_1$. This makes sense since if we recall Taylor series, we should always find $a_n=f^{(n)} (z_0) /n!$. We need to show this limit exists, and we cannot assume power series are continuous on $\mathbb{C} $. Choose $\left| h \right| <r'<$ radius of convergence. Since it converges, there is $\varepsilon $ such that
+	\[
+		\sum_{n\geq m+1} \left| a_n \right| (r')^{n-1} <\frac{\varepsilon }{2} 
+	.\]
+	Since the partial sums are continuous functions in $h$, we see that they approach their limit, so it like follows.
+\end{proof}
+
+This proof was aids and I stopped following. There is a more canonical proof which also shows that
+\[
+	\partial _zf(z)=\sum_{n\geq 1} na_n(z-z_0)^{n-1} ,
+\]
+and that this also converges on an open disk that the original power series converges on.

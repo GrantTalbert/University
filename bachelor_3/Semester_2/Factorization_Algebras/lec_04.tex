@@ -1,0 +1,120 @@
+\lecture{4}{Fri 30 Jan 2026 14:03}{Formalizing Gaussian integrals over infinite dimensional manifolds}
+
+For now we will continue to meet in psy b33 pending further room changes.
+
+First recall some stuff from the previous lecture. A gaussian integral is of the form
+\[
+	\int_{x\in\mathbb{R} ^n} \exp \left( -\frac{1}{2} \sum_{i,j} x_iA_{ij} x_j \right) \,\mathrm{d} ^nx
+\]
+for $A$ positive-definite and symmetric. Here positive definite means $x^tAx>0$ for all nonzero $x\in\mathbb{R} ^n$. These integrals are analogous to our definition of the path integral in the following way. By recognizing the exponential as $-1/2 x^tAx$, by changing $x\to \phi $ and $A\to (\Delta +m^2)$, we obtain something like the free $\phi $-field theory path integral. In quantum mechanics, it is standard to consider a combinatorial approach to this integral, and to generalize it to infinite dimensions. We instead focus on the divergence operator we previously defined.
+
+Let $\omega =\exp \left( -\frac{1}{2} \sum_{i,j} x_i A_{ij} x_j \right) \mathrm{d} ^nx$ be a volume form (aka a measure) on $M=\mathbb{R} ^n$. Recall that we are defining the divergence operator abstractly via
+\[
+	\operatorname{Div} _\omega X \omega =\mathcal{L} _X\omega 
+\]
+for any $X\in \mathfrak{X} (M)$. Then for $X=\sum_{i} f_i \partial _i$, we can compute using Cartan's magic formula that
+\[
+	\mathrm{Div} _\omega X=\mathrm{Div}_\omega \left( \sum_{i} f_i \partial _i \right) =-\sum_{i,j} f_iA_{ij} x_j+\sum_{i} \partial _if_i
+.\]
+It's convenient to restrict only to polynomial $P(\mathbb{R} ^n)$ on $\mathbb{R} ^n$. By diagonalizing $A$, it follows that the kernel of $\operatorname{Div} _\omega $ has codimension 1 in $P(\mathbb{R} ^n)$, and thus it lowers to an isomorphism with $\mathbb{R} $, as desired. This justifies working in polynomials, since we may once again identify integration with computing the divergence operator in homology.
+
+Now we pass to infinite dimensional manifolds. Such a measure $\omega $ no longer exists,so our task is to generalize our definition of divergence in such a way that makes sense of a ``measure'' of the form
+\[
+	\widetilde{\omega } =\exp \left( \int_{\mathbb{R} ^n} -\frac{1}{2} \phi (\Delta +m^2)\phi  \,\mathrm{d} ^nx \right) \mathrm{D} \phi 
+.\]
+Taking inspiration from $\mathbb{R} ^n$, we try to work in polynomials once again. It is useful also to consider the set $\operatorname{Vect} (\mathbb{R} ^n)$ of \emph{polynomial vector fields} on $\mathbb{R} ^n$, meaning for $X\in \operatorname{Vect} (\mathbb{R} ^n)$, there is a coordiante representation of $X$ as
+\[
+	X=\sum_{i} P_i(x)\frac{\partial }{\partial x_i} ,
+\]
+for $P_i\in\mathbb{R} [x_1, \ldots ,x_n]$ a polynomial on $\mathbb{R} ^n$.
+
+In order to begin replicating this process in the infinite dimensional case of $C^\infty (U)$, we need to define polynomials in $C^\infty (U)$. We can do this slightly more generally. Let $V$ a vector space, and note that $C^\infty (U)$ is a vector space, hence this generalizes our situation. We cannot directly define polynomials on $V$, but we \emph{can} pass to the symmetric algebra $\operatorname{Sym} (V)$. However, this is a somewhat na\"ive approach. A \emph{monomial} on $\mathbb{R} ^n$ is a linear functional on $\mathbb{R}^n$; it is precisely an element of $\Vect_{\mathbb{R} } (\mathbb{R} ^n,\mathbb{R} )$. Hence we would expect that polynomials would instead be defined as something like $\operatorname{Sym} (V^*)$.
+
+This is overkill for our approach. If we only want to look at $V=C^\infty (U)$, then the dual space of this can be identified with the set of \emph{compactly supported distributions} $\mathcal{D}_c (U)$ in $U$. This is a bit more than we need, so we note that we can identify the set $C_c^\infty (U)$ of compactly supported smooth functions on $U$ with a subspace of $\mathcal{D} _c(U)$ via, for all $g\in C^\infty _c(U)$, considering $g\in \mathcal{D} _c(U)$ as the linear functional
+\[
+	g(\phi )=\int_U g\phi  \,\mathrm{d} ^nx
+.\]
+It can be shown $C^\infty _c(U)$ is dense in the set of distributions, so functions such as the Dirac delta admit approximations in $C^\infty _c(U)$. Hence we work with $C^\infty _c(U)$, since it is convenient for carrying out the calculus of variations.
+
+With this understanding, a priori we might take polynomials to be $\widetilde{P} (C^\infty (U))=\operatorname{Sym} (C_c^\infty (U))$ the symmetric algebra. This makes intuitive sense, since a monomial in $n$ variables would be some coefficient times an $n$-fold product in linear functionals, hence an element of the $n$th symmetric power. A full polynomial would then be a finite linear combination of elements of the symmetric algebra. We will see issues with this definition, hence the tilde. However it is good motivation.
+
+From this, we note that given $V$ a vector space, there is an identification $T_pV \cong V$. Since a polynomial vector field is a linear combination in tangent vectors with polynomial coefficients, we might a priori take
+\[
+	\widetilde{\mathrm{Vect} } (C^\infty (U))\coloneqq \operatorname{Sym} (C^\infty _c(U))\otimes C^\infty (U) \cong \operatorname{Sym} (C^\infty _c(U))\otimes T_pC^\infty (U)
+.\]
+Here we recall that $\widetilde{P}(C^\infty (U))\coloneqq \operatorname{Sym} (C^\infty _c(U))$.
+
+Let $\left\{ f_i \right\} _{1\leq i\leq r} \subseteq  C^\infty _c(V)$ such that their product $\prod_{i} f_i$ is a monomial in $P(C^\infty (U))$. Then such a monomial acts on $C^\infty (U)$ via
+\begin{align*}
+	\left(\prod_{i} f_i\right)(\phi )&=\int_{x\in U^r}  \prod_{i} f_i(x_i)\phi(x_i) \,\mathrm{d}vol (x_1)\wedge \cdots \wedge \mathrm{d} vol (x_r)\\
+			      &=\prod_{i} \int_U f_i\phi  \,\mathrm{d} vol 
+.\end{align*}
+Note that this is the same as the usual action, simply generalized in the natural way for symmetric products. Imposing linearity allows arbitrary polynomials to act on $C^\infty (U)$.
+
+
+An element of $\widetilde{\mathrm{Vect} } (C^\infty (U))$ is a finite linear combination of the form $X=f_1 \cdots f_r  \partial_\phi $ with $f_i,\phi \in C^\infty _c(U)$. [\textbf{What is} $\partial _\phi $?] Now let $g_1 \cdots g_m$ be a monomial in $P(C^\infty (U))$. Then $X$ can act on $g_1 \cdots g_s$ by imposing linearity, the product rule, and applying the action of polynomials on $C^\infty (U)$:
+\[
+	f_1 \cdots f_r \frac{\partial }{\partial \phi } (g_1 \cdots g_s) = f_1 \cdots f_r \sum_{i=1}^{s} g_1 \cdots \widehat{g}_i \cdots g_s\int_U g_i\phi  \,\mathrm{d}vol
+.\]
+
+\begin{definition}\label{2.0.1}
+	The divergence operator associated to the action functional
+\[
+	S(\phi )=\int _{U}\phi (\Delta +m^2)\phi  \,\mathrm{d} vol
+\]
+is the linear map
+\[
+	\widetilde{\operatorname{Div} }_\omega  : \widetilde{\operatorname{Vect}} (C^\infty (U)) \to \widetilde{P} (C^\infty (U))
+\]
+defined by, for $f_i,\phi \in C_c^\infty (U)$,
+\[
+	\widetilde{\operatorname{Div} } _\omega \left( f_1 \cdots f_r \frac{\partial }{\partial \phi }  \right) =-f_1 \cdots f_r\left( \Delta +m^2 \right) \phi +\sum_{i=1}^{r} f_1 \cdots \widehat{f}_i \cdots f_r \int_U\phi f_i \,\mathrm{d} vol
+.\]
+\end{definition}
+
+Now this is generally not sufficient. Later in the text, we will see an issue with making homological algebra work with topological vector spaces. It is generally difficult to do homological algebra without breaking the topological properties of the vector spaces. The solution we will employ is working with a certian category that we will not discuss in class, but is in the book. It sounds like some kind of Grothendieck construction. To work in this category, we need to consider a \emph{completed} tensor product.
+
+Note that there is a canonical map $C^\infty (M)\otimes C^\infty (M)\to C^\infty (M\times M)$ by $f\otimes g\mapsto f(x)g(y)$; $x$ coordinates on the first $M$ and $y$ on the second. This is injective but not surjective, but the image is dense. We define $C^\infty (M\times M)$ to then be the \emph{completed} tensor product of $C^\infty (M)$ with itself. Moreover note that $C^\infty $ is lax monoidal.
+
+In a similar manner, we define the \emph{completed} symmetric power $\operatorname{Sym} ^n(C^\infty (M))$ to be $C^\infty (M^n)^{S_n} $, which comes with an action of $S_n$, which it also injects into. This means we need to modify our previous definitions to introuce the completed tensor and symmetric power. Then
+\[
+	\mathbb{P} (C^\infty (V))=\bigoplus_{n\geq 0} C^\infty _c(V^n)^{S_n} 
+\]
+\[
+	\operatorname{Vect} (C^\infty (V))=\bigoplus_{n\geq 0} C_c^\infty (V^{n+1} )^{S_n} 
+.\]
+Here the $n+1$ is because we want an extra component for the vector part. So now $\widetilde{\operatorname{Div} } $ extends to the completion
+\[
+	\operatorname{Vect}_C(C^\infty (V))\mapsto F(\Delta +m^2)_{x_{n+1} }F(x_1, \ldots ,x_{n+1} )-\sum_{i=1}^{n} \int_{x_i\in U} F(x_1, \ldots ,x_i, \ldots ,x_n,x_i) \,\mathrm{d} \mathrm{vol} 
+.\]
+\begin{definition}\label{?}
+	Quantum observables $\operatorname{Obs} ^q(U)$ on $U\subseteq M$ are defined as the cokernel of divergence:
+	\[
+		\operatorname{Obs} ^q(U)\coloneqq \frac{\mathbb{P} (C^\infty (U))}{\Im \mathrm{Div} } \cong \operatorname{Coker} \mathrm{Div} 
+	.\]
+\end{definition}
+We think of quantum observables as path integrals of fields supported in $U$. This makes sense due to our recharacterization of integration via de Rham cohomology and the divergence complex. We now want to know what the structure of this is for different open sets $U,V\subseteq M$?
+
+Polynomials, even in infinite dimensions, form a commutative ring. Thus $\mathbb{P} (C^\infty (U))$ has a commutative ring structure. Write $\mathbb{P} ^n(C^\infty (U))\coloneqq C^\infty _c(U^n)^{S_n} $ such that $\mathbb{P} (C^\infty (U))=\bigoplus \mathbb{P} ^n(C^\infty (U))$. Then we can define
+\[
+	\mathbb{P} ^n(C^\infty (U))\otimes \mathbb{P} ^m(C^\infty (U))\to \mathbb{P} ^{n+m} (C^\infty (U))
+.\]
+This follows by symmetrizing the product of two polynomials
+\[
+	F(x_1, \ldots ,x_n)\otimes G(x_{n+1} ,\ldots ,x_{n+m})\mapsto \frac{1}{\left| S_{m+n}  \right| =(m+n)!} \sum_{\sigma \in S_{n+m} } F(x_{\sigma (1)} , \ldots , x_{\sigma (n)} )G(x_{\sigma (n+1)} ,\ldots ,x_{\sigma (n+m)} ) 
+.\]
+Note that under inclusions $U\subseteq V$ of open sets, a compactly supported function on $U$ is compactly supported on $V$, so $C^\infty _c$ is a cosheaf. So given $F\in P(C^\infty (U))$, we can extend it to a polynomial on $P(C^\infty (V))$.
+
+\begin{lemma}[\cite{cg1} 2.3.1]\label{?}
+	The product map
+	\[
+		\mathbb{P} (C^\infty (U))\otimes \mathbb{P} (C^\infty (U))\to \mathbb{P} (C^\infty (U))
+	\]
+	does \emph{not} descend to the quotient, meaning it does not induce $\operatorname{Obs} ^q(U)\otimes \operatorname{Obs} ^q(U)\to \operatorname{Obs} ^q(U)$. However, if $U_1,U_2$ are disjoint open subsets of an open set $V$, then the product map
+	\[
+		\mathbb{P} (C^\infty (U_1))\otimes \mathbb{P} (C^\infty (U_2))\to \mathbb{P} (C^\infty (V))
+	\]
+	defined by composing the inclusions into $\mathbb{P} (C^\infty (V))$ with the product map \emph{does} descent to such a map on quantum observables.
+\end{lemma}
+Recall $\operatorname{Obs} ^q(U)=\mathbb{P} (C^\infty (U)) / \Im \mathrm{Div} $. The non-existence follows since $\operatorname{Div} $ need not be a ring homomorphism, so the image need not be an ideal. We complete the proof next time, showing we obtain a prefactorization structure.
+

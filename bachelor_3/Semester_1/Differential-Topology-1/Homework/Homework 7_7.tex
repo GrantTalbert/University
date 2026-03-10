@@ -1,0 +1,463 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 7}
+\begin{document}
+\makeproblem
+
+
+\section{Problem 12.3}
+\begin{problem}
+	Suppose $\widetilde{\pi } : V\times W \to Z$ is bilinear and universal with respect to factoring bilinear maps into linear maps. Show there is a canonical isomorphism $Z\cong V\otimes W$.
+\end{problem}
+\begin{proof}
+	By Lee 12.7, the canonical map $p : V\times W \to V\otimes W$ is also universal with respect to factoring bilinear maps into linear maps. Since $p$ is bilinear, it factors uniquely through $Z$ inducing a unique linear map $\widetilde{p} : Z \to V\otimes W$. Since $\widetilde{\pi } $ is bilinear, it factors through $V\otimes W$ inducing a unique linear map $\widetilde{\widetilde{\pi } } :V\otimes W\to Z$. We claim that $\widetilde{p} \circ \widetilde{\widetilde{\pi } } =1$ and $\widetilde{\widetilde{\pi } } \circ \widetilde{p} =1$.
+
+	We can factor $\widetilde{\pi } $ and $p$ through themselves, inducing unique dashed arrows as indicated in the diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V\times W \ar[" \widetilde{\pi }  "', d] \ar[" 1 \circ \widetilde{\pi }  ", r]  & Z & V\times W \ar[" p "', d] \ar[" 1\circ p ", r]  & V\otimes W \\
+	Z \ar[dashed, ur]  &  & V\otimes W \ar[dashed, ur]  & 
+	\end{tikzcd}\]
+	Since the identity map is a linear map that would satisfy either of the dashed arrows in the above diagrams, by uniqueness we conclude that the dashed arrows must be the identity. However, note also that (recalling that $\widetilde{\widetilde{\pi } } \circ p= \widetilde{\pi } $ and $\widetilde{p} \circ \widetilde{\pi } =p$)
+	\[
+		(\widetilde{\widetilde{\pi } } \circ \widetilde{p})\circ \widetilde{\pi } =\widetilde{\widetilde{\pi } } \circ (\widetilde{p} \circ \widetilde{\pi } )=\widetilde{\widetilde{\pi } } \circ p=\widetilde{\pi } 
+	.\]
+	Therefore, the linear map $\widetilde{\widetilde{\pi } } \circ \widetilde{p} $ also makes the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V\times W \ar[" \widetilde{\pi }  ", r] \ar[" \widetilde{\pi }  "', d]  & Z \\
+	Z \ar[" \widetilde{\widetilde{\pi } } \circ \widetilde{p} "', dashed, ur]  & 
+	\end{tikzcd}\]
+	commute. By uniqueness of the dashed arrow, $\widetilde{\widetilde{\pi } } \circ \widetilde{p} =1$. Similarly,
+	\[
+		(\widetilde{p} \circ \widetilde{\widetilde{\pi } } )\circ p = \widetilde{p} \circ (\widetilde{\widetilde{\pi } } \circ p)=\widetilde{p} \circ \widetilde{\pi } =p
+	.\]
+	We thus have that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V\times W \ar[" p ", r] \ar[" p "', d]  & V\otimes W \\
+	V\otimes W \ar[" \widetilde{p} \circ \widetilde{\widetilde{\pi } }  "', dashed, ur]  & 
+	\end{tikzcd}\]
+	also commutes. Once again by uniqueness of the dashed arrow, $\widetilde{p} \circ \widetilde{\widetilde{\pi } } =1$. Therefore the maps are inverses.
+\end{proof}
+
+\section{Problem 12.4}
+\begin{problem}
+	Given $L(V_1, \ldots ,V_k;W)$ the set of $k$-multilinear maps $\prod_{i} V_i \to W$, show there is a canonical isomorphism
+	\[
+		V_1^* \otimes \cdots \otimes V_k^* \otimes W \cong L(V_1, \ldots ,V_k;W)
+	.\]
+\end{problem}
+\begin{proof}
+	Let $f_1 \otimes \cdots \otimes f_k \otimes w\in V_1 \otimes \cdots \otimes V_k \otimes W$. Define
+	\[
+		\varphi : \left( \bigotimes_{1\leq i\leq k} V_i^* \right) \otimes W \to L(V_1, \ldots ,V_k;W)
+	\]
+	as the map
+	\[
+		f_1 \otimes \cdots \otimes f_k \otimes w \mapsto \left( (v_1, \ldots ,v_k)\mapsto f_1(v_1)f_2(v_2) \ldots f_k(v_k)\cdot w \right) 
+	.\]
+	To show this map is well-defined, we must show the assignment $(v_1, \ldots ,v_k)\mapsto f_1(v_1)\cdots f_k(v_k)w$ is multilinear. This follows since each $f_i$ is linear, so they distribute over multiplication:
+	\[
+		(v_1, \ldots ,v_{i-1} ,v_i^1+v_i^2, v_{i+1} , \ldots ,v_k)\mapsto f_1(v_1)\cdots f_i(v_i^1 + v_i^2)\cdots f_k(v_k)w
+	\]
+	\[
+		=f_1(v_1)\cdots f_i(v_i^1)\cdots f_k(v_k)w+f_1(v_1)\cdots f_i(v_i^2)\cdots f_k(v_k)w
+	.\]
+	By the exact same logic, we can pull out any scalars from any of the $f_i$s, showing that the map is indeed multilinear.
+
+	Now we show $\varphi $ itself is linear. This is equivalent to showing the map $\prod_{i} V_i \times W \to L(V_1, \ldots ,V_k;W)$ given by
+	\[
+		(f_1, \ldots ,f_k,w)\mapsto \left( (v_1, \ldots ,v_k)\mapsto f_1(v_1) \cdots f_k(v_k)w \right) 
+	\]
+	is multilinear. This is already fairly clear since each $f_i$ is linear and since scalar multiplication distributes over addition, and the verification amounts to writing out a few long equations, so let $v_i,v_i^1,v_i^2\in V_i$ for all $i$; $w_1,w_2\in W$, and $c\in \mathbb{R} $. Recall that addition of multilinear maps is done pointwise.
+
+	\[
+		(f_1, \ldots ,f_k, w_1 + w_2) \mapsto \left( v\mapsto \left( \prod_{i} f_i(v_i) \right) (w_1+w_2) \right) 
+	\]
+	\[
+		=\left( v\mapsto \left( \prod_{i} f_i(v_i) \right) w_1 \right) +\left( v\mapsto \left( \prod_{i} f_i(v_i) \right) w_2 \right) 
+	.\]
+	\[
+		\left( f_1, \ldots ,f_{i-1} ,f_i^1 + f_i^2, f_{i+1} , \ldots ,w \right) \mapsto \left( v\mapsto \left( \prod_{j \neq i} f_j(v_j) \right) (f_i^1+f_i^2)(v_i)w \right) 
+	\]
+	\[
+		=\left( v\mapsto \left( \prod_{j \neq i} f_j(v_j) \right) (f_i^1(v_i)+f_i^2(v_i))w \right) 
+	\]
+	\[
+		=\left( v\mapsto \left( \prod_{j \neq i} f_j(v_j) \right) f_i^1(v_i)w \right) +\left( v\mapsto \left( \prod_{j \neq i} f_j(v_j) \right) f_i^2(v_i)w \right) 
+	.\]
+	\[
+		(f_1, \ldots ,f_k,cw_i)\mapsto \left( v\mapsto \left( \prod_{i} f_i(v_i) \right) cw \right) =\left( v\mapsto c\left( \prod_{i} f_i(v_i) \right) w \right) 
+	.\]
+	\[
+		\left( f_1, \ldots ,cf_i, \ldots ,f_k,w \right) \mapsto \left( v\mapsto \left( \prod_{j\neq i} f_j(v_j) \right) cf_i(v_i)w \right) =\left( v\mapsto c\left( \prod_{i} f_i(v_i) \right) w \right) 
+	.\]
+	Therefore, the map is multilinear, so $\varphi $ is linear.
+
+	The kernel of $\varphi $ is clearly the set of tensors where $w=0$ or at least one $f_i=0$. Without loss of generality, take $f_1$ to be 0 since the following holds whenever any of the components are 0. By multilinearity of tensor, we can factor out 0 from the initial map
+	\[
+		0 \otimes f_2 \otimes \cdots \otimes w = 0\left( 0 \otimes f_2 \otimes \cdots \otimes w \right) =0
+	.\]
+	Therefore every element in the kernel is equivalent to 0, so the kernel is trivial. Therefore, $\varphi $ is a linear isomorphism.
+\end{proof}
+
+\section{Problem 12.8}
+\begin{problem}
+	Given overlapping charts $(U,x^i),(\widetilde{U} , \widetilde{x} ^j)$ and a $k$-cotensor $A$, find a transformation law
+	\[
+		A=A_{i_1 \ldots i_k} \mathrm{d} x^{i_1} \otimes \cdots \otimes \mathrm{d} x^{i_k} =\widetilde{A}_{j_1 \ldots j_k} \mathrm{d} \widetilde{x}^{j_1} \otimes \cdots \otimes \mathrm{d} \widetilde{x}^{j_k} 
+	.\]
+\end{problem}
+\begin{proof}
+	Some of the indicies feel unnecessary so just write
+	\[
+		A=A_i \mathrm{d} x^{i_1} \otimes \cdots \otimes \mathrm{d} x^{i_k}  = \widetilde{A}_j \mathrm{d} \widetilde{x}^{j_1} \otimes \cdots \otimes \mathrm{d} \widetilde{x}^{j_k} 
+	.\]
+	Recall that the chain rule yields
+	\[
+		\left.\frac{\partial }{\partial x ^j} \right|_p = \sum_{i} \frac{\partial \widetilde{x} ^i}{\partial x^j} \left.\frac{\partial }{\partial \widetilde{x} ^i}\right|_p 
+	.\]
+	We start by determining the transformation law $\mathrm{d}x^i \to \mathrm{d} \widetilde{x} ^i $, and then derive the general one by imposing multilinearity of tensor. We have that
+	\[
+		\mathrm{d} \widetilde{x}^i(\partial _{x^{^j} } |_p)=\mathrm{d} \widetilde{x}^i \left( \sum_{k} \frac{\partial \widetilde{x} ^k}{\partial x ^j} \left.\frac{\partial }{\partial \widetilde{x}^k} \right|_p \right) =	\sum_{k} \frac{\partial \widetilde{x} ^k}{\partial x ^j} \delta ^i_k = \frac{\partial \widetilde{x}^i}{\partial x^j} 
+	.\]
+	We can then write
+	\[
+		\mathrm{d} \widetilde{x} ^i = \sum_{j} \frac{\partial \widetilde{x} ^i}{\partial x^j} \mathrm{d} x^j
+	.\]
+	Because this was for arbitrary coordinate systems, in this specific problem this also gives us
+	\[
+		\mathrm{d} x^i = \sum_{j} \frac{\partial x ^i}{\partial \widetilde{x}^j} \mathrm{d} \widetilde{x} ^j
+	.\]
+	At this point we pass fully to index notation and write
+	\[
+		\mathrm{d} x^i =  \frac{\partial x ^i}{\partial \widetilde{x}^j} \mathrm{d} \widetilde{x}^j
+	.\]
+	Then by multilinearity of tensor we can write each individual component of $A$ as
+	\[
+		A_i \mathrm{d} x^{i_1} \otimes \cdots \otimes \mathrm{d} x^{i_k} =A_i \left( \frac{\partial x ^{i_1}}{\partial \widetilde{x}^{j_1}} \mathrm{d} \widetilde{x}^{j_1}\right) \otimes \cdots \otimes \left( \frac{\partial x^{i_k}}{\partial \widetilde{x}^{j_k}} \mathrm{d} \widetilde{x}^{j_k}\right)
+	\]
+	\[
+		=A_i \frac{\partial x^{i_1} }{\partial \widetilde{x} ^{j_1} } \cdots \frac{\partial x^{i_k} }{\partial \widetilde{x} ^{j_k} } \mathrm{d} \widetilde{x} ^{j_1} \otimes \cdots \otimes \mathrm{d} \widetilde{x} ^{j_k} 
+	.\]
+	This gives us
+	\[
+		\widetilde{A}_j=A_i \frac{\partial x^{i_1} }{\partial \widetilde{x} ^{j_1} } \cdots \frac{\partial x^{i_k} }{\partial \widetilde{x} ^{j_k} } 
+	.\]
+\end{proof}
+
+\section{Problem 12.12}
+\begin{problem}\label{4}
+	Let $M$ be a smooth manifold and $V\in \mathfrak{X} (M)$. Show that the Lie derivative operators $\mathcal{L} _V : \mathcal{T} ^k(M) \to \mathcal{T} ^k(M)$ for $k\geq 0$ are uniquely characterized by
+	\begin{enumerate}
+		\item $\mathcal{L} _V$ is $\mathbb{R} $-linear;
+		\item $\mathcal{L} _Vf=Vf$ when $f\in \mathcal{T} ^0(M)=C^\infty (M)$;
+		\item $\mathcal{L} _V(A\otimes B)=\mathcal{L} _V(A)\otimes B+A\otimes \mathcal{L} _V(B)$ for $A\in \mathcal{T} ^k(M)$ and $B\in \mathcal{T} ^l(M)$;
+		\item $\mathcal{L} _V(\omega (X))=(\mathcal{L} _V\omega )(X)+\omega [V,X]$ for $\omega \in \mathcal{T} ^l(M)$ and $X\in \mathfrak{X} (M)$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	($\implies $) The fact that $\mathcal{L} _V$ satisfies (2,3) follows by Lee 12.32, and also by 12.32 we have
+	\[
+		\mathcal{L} _V(\omega (X)) = (\mathcal{L} _V\omega )(X) + \omega (\mathcal{L} _VX)
+	.\]
+	Since $X$ is a vector field, $\mathcal{L} _VX=[V,X]$, so we obtain (4). Finally, (1) follows by the fact that the Lie derivative can be written as $\partial _t|_0 \circ \theta _t^*$, both of which are linear.
+
+	Now let $\mathcal{L} _V$ satisfy the listed properties. We show $\mathcal{L} _V$ is the \emph{unique} function satisfying these properties. Of course $\mathcal{L} _V$ is unique on $\mathcal{T} ^0(M)$ by condition (2) which says $\mathcal{L} _V : \mathcal{T} ^0(M) \to \mathcal{T} ^0(M)$ is simply $f\mapsto Vf$. Additionally, given a 1-cotensor field $\omega \in \mathfrak{X} ^*(M)$, its action on a vector field $X\in \mathfrak{X} (M)$ is a smooth function $\omega (X): M \to \mathbb{R} $, so by property (4) we have
+	\[
+		\mathcal{L} (\omega (X)) = (\mathcal{L} _V\omega )(X) + \omega [V,X]
+	.\]
+	By property (2) we have $\mathcal{L} _V(\omega (X))=V\omega (X)$, so this yields
+	\[
+		(\mathcal{L} _V\omega )(X) = V\omega (X) - \omega [V,X]
+	.\]
+	Since the right hand side no longer depends on $\mathcal{L} _V$  and is now a function in $X$, this property has fully and uniquely determined $\mathcal{L} _V\omega $.
+
+	We now use induction. Suppose that $\mathcal{L} _V$ is uniquely determined for $k-1 \geq 1$. For general $k$-cotensors $A\in\mathcal{T} ^k(M)=\Gamma (T^kT^*M)$ with $k\geq 2$, we note that an element of $T^kT^*_pM$ is a linear combination of $k$-fold tensor products in $T^*_pM$, so $A$ is a linear combination of tensors of the form
+	\[
+		A_p = \sum_{i} \bigotimes_{j=1}^k a_{ij}^p 
+	\]
+	for some collectionn $\left\{ a_{ij}^p  \right\} \subseteq T^*_pM$. By linearity of $\mathcal{L} _V$, it suffices to define $\mathcal{L} _V$ when $i$ only ranges over one value; in other words, $A_p$ is of the form $a_{1} ^p \otimes \cdots \otimes a_k^p$. We can then write cotensor fields $A^i_p = \bigotimes_{j} a_{ij} ^p$ and write the most general case $A = \sum_{i} A^i$, and the definition on $A$ follows by linearity, which holds by property (1).
+
+	To determine $\mathcal{L} _V$ on the simplified $A_p=a_1^p \otimes \cdots\otimes a_k^p$, we define the covector field $\omega_p=a_1^p$ and the $(k-1)$-cotensor field $B=a_2^p \otimes \cdots\otimes a_k^p$. Both of these exist since $k\geq 2$. We can then write, and by (3) we have
+	\[
+		\mathcal{L}_V(A)=\mathcal{L} _V(\omega \otimes B)=\mathcal{L} _V(\omega )\otimes B+\omega \otimes \mathcal{L} _V(B)
+	.\]
+	By induction, since $k-1,1 \geq 1$, we have that $\mathcal{L} _V$ is uniquely determined on both $\omega $ and $B$, meaning that $\mathcal{L} _V$ is uniquely determined on $A$.
+\end{proof}
+
+\section{Problem 13.6}
+\begin{problem}
+	Prove that every Riemannian 1-manifold is flat. Hint: use 13.5, which states any smooth curve with everywhere nonvanishing velocity has a unit-speed reparameterization.
+\end{problem}
+\begin{proof}
+	Let $M$ be a Riemannian 1-manifold. Let $(U,\varphi )$ be a chart for $M$, and since $M$ is a 1-manifold, we have $\varphi : \mathbb{R}  \to U$ is a \emph{smooth curve} in $M$. Since charts are diffeomorphisms, by Lee 3.6 the pushforward $\varphi_* = \varphi '$ is an isomorphism on each tangent space $T_pU$, and thus vanishes nowhere. By Lee problem 13.5, there exists a unit-speed reparameterization of $\varphi $, so we can without loss of generality take $g_t(\varphi '(t),\varphi'(t))=1$ for all $t\in\mathbb{R} $.
+
+	Now consider the pullback $\varphi ^*g$ which acts on $v,w\in T_pU$ by
+	\[
+		(\varphi ^*g)(u,v) = g_p(\varphi _{*p} v,\varphi _{*p} u)
+	.\]
+	In particular,
+	\[
+		(\varphi ^*g)_p(\partial _t,\partial _t) = g_{\varphi (p)}(\varphi ',\varphi ')=1
+	\]
+	by definition of a velocity vector and by unit-speed of $\varphi $. By bilinearity of $\varphi ^*g$, we have for any $v=v^t \partial _t$ and $w=w^t \partial _t$ in $T_pU$,
+	\[
+		(\varphi ^*g)_p(v,w) = (\varphi ^*g)_p(v^t \partial _t,w^t \partial _t) = v^tw^t (\varphi ^*g)_p(\partial _t,\partial _t) = v^t w^t = v\cdot w
+	.\]
+	Therefore, $\varphi ^*g = \overline{g} $. We thus have that $M$ is locally isometric to $\mathbb{R} $, and is thus flat.
+\end{proof}
+
+\section{Problem 13.13}
+\begin{problem}
+	Let $(M,g)$ be a Riemannian manifold. A smooth vector field $V$ on $M$ is called a \emph{Killing vector field for $g$} if the flow of $V$ acts by isometries of $g$.
+	\begin{enumerate}
+		\item Show that the set of all Killing vector fields on $M$ constitues a Lie subalgebra of $\mathfrak{X} (M)$ (Hint: see Corollary 9.39.c).
+		\item Show that a smooth vector field $V$ on $M$ is a Killing vector field if and only if it satisfies the following equation in each smooth local coordinate chart:
+			\[
+				V^k \frac{\partial g_{ij} }{\partial x^k} +g_{jk} \frac{\partial V^k}{\partial x^i} +g_{ik} \frac{\partial V^k}{\partial x^j} =0
+			.\]
+	\end{enumerate}
+\end{problem}
+\begin{proof}\label{6}
+	Let $V$ be a Killing vector field, meaning its flows are isometries. We claim that $\mathcal{L} _Vg=0$. Indeed, using the definition and the fact that flows are isometries, we have
+	\[
+		\mathcal{L} _Vg= \frac{\mathrm{d}}{\mathrm{d}t}\theta _t^*g = \frac{\mathrm{d}}{\mathrm{d}t} g=0
+	\]
+	because $g$ has no $t$-dependence. This simplifies the proof.
+
+	(1) By the subspace test, it suffices to show that for all $V,W\in \mathfrak{X} (M)$ and $c\in\mathbb{R} $, the vector fields $V-W$ and $cV$ are Killing vector fields, and closure under the Lie bracket. First we show the former. This amounts to showing linearity of $\mathcal{L} _{(-)} g$, since we will then have
+	\[
+		\mathcal{L} _{V-W}g = \mathcal{L} _Vg - \mathcal{L} _Wg = 0,\qquad \mathcal{L} _{cV} g = c\mathcal{L} _Vg=0
+	.\]
+	By Lee 12.33, and bilinearity of $g$ and the Lie bracket, for any $X,Y\in \mathfrak{X} (M)$,
+	\begin{align*}
+		(\mathcal{L} _{V-W} g)(X,Y)&=(V-W)(g(X,Y)) - g([V-W,X],Y) - g(X,[V-W,Y])\\
+					   &=V(g(X,Y)) - W(g(X,Y))-g([V,X]-[W,X],Y) -g(X,[V,Y]-[W,Y])\\
+					   &=V(g(X,Y))-g([V,X],Y)-g(X,[V,Y])-W(g(X,Y))+g([W,X],Y)+g(X,[W,Y])\\
+					   &=\mathcal{L}_Vg - \mathcal{L} _Wg
+	.\end{align*}
+	Similarly, for any $X,Y\in \mathfrak{X} (M)$ and $c\in\mathbb{R} $,
+	\begin{align*}
+		(\mathcal{L} _{cV} g)(X,Y)&=cV(g(X,Y))-g([cV,X],Y)-g(X,[cV,Y])\\
+					  &=cV(g(X,Y))-g(c[V,X],Y)-g(X,c[V,Y])\\
+					  &=cV(g(X,Y))-cg([V,X],Y)-cg(X,[V,Y])\\
+					  &=c\left( V(g(X,Y))-g([V,X],Y)-g(X,[V,Y]) \right) \\
+					  &=c\mathcal{L} _Vg
+	.\end{align*}
+	Therefore, $V\mapsto \mathcal{L} _Vg$ is linear. As noted above, this shows that the set of Killing vector fields is a subspace of $\mathfrak{X} (M)$, so now we need only show closure under the Lie bracket.
+
+	The problem says to use $\mathcal{L} _{[V,W]} =\mathcal{L}_V\mathcal{L} _W - \mathcal{L} _W\mathcal{L} _V$, but the proof it cites only holds for vector fields, and we did not prove the statement for tensor fields. We extend this result to all tensor fields, from which the statement follows since
+	\[
+		\mathcal{L} _V \mathcal{L} _Wg-\mathcal{L}_W\mathcal{L} _Vg = \mathcal{L} _V0-\mathcal{L} _W0 = 0
+	.\]
+	The remainder of the proof of part (1) is spent extending this result to arbitrary tensor fields. This is more general than the result that the problem demands.
+
+	We start with smooth maps $f\in C^\infty (M)$. \Cref{4} computes the Lie derivative as $\mathcal{L} _Vf=Vf$, so
+	\[
+		\mathcal{L} _{[V,W]} f=[V,W]f=VWf-WVf=\mathcal{L} _VWf - \mathcal{L} _WVf=\mathcal{L} _V\mathcal{L} _Wf-\mathcal{L} _W\mathcal{L}_Vf
+	.\]
+	Thus the statement holds for $(0,0)$-tensor fields. Lee 9.39 gives us the statement for vector fields.
+
+	Now let $\omega \in \mathfrak{X} ^*(M)$ and $X\in \mathfrak{X} (M)$. \Cref{4} yields
+	\[
+		(\mathcal{L} _{[V,W]} \omega )(X)=[V,W](\omega (X))-\omega [[V,W],X]
+	.\]
+	We explicitly calculate the double Lie derivative.
+    \begin{align*}
+        (\mathcal{L} _V \mathcal{L} _W \omega)(X) &= V((\mathcal{L} _W \omega)(X)) - (\mathcal{L} _W \omega)([V,X]) \\
+        &= V(W(\omega(X)) - \omega([W,X])) - \left( W(\omega([V,X])) - \omega([W, [V,X]]) \right) \\
+        &= VW(\omega(X)) - V(\omega([W,X])) - W(\omega([V,X])) + \omega([W, [V,X]])
+    .\end{align*}
+    Interchanging $V$ and $W$, we obtain
+    \[
+        (\mathcal{L} _W \mathcal{L} _V \omega)(X) = WV(\omega(X)) - W(\omega([V,X])) - V(\omega([W,X])) + \omega([V, [W,X]])
+    .\]
+    Subtracting the two expressions, the middle terms $V(\omega([W,X]))$ and $W(\omega([V,X]))$ cancel:
+    \begin{align*}
+        ([\mathcal{L} _V, \mathcal{L} _W]\omega)(X) &= (VW-WV)(\omega(X)) + \omega([W, [V,X]] - [V, [W,X]]) 
+\end{align*}
+Recognize the first term as the commutator. By the Jacobi identity, we can rewrite the second term as
+\begin{align*}
+        &= [V,W](\omega(X)) + \omega([[W,V], X])  \\
+        &= [V,W](\omega(X)) - \omega([[V,W], X]) 
+    ,\end{align*}
+    which agrees with what we found earlier using \cref{4}.
+
+    Now let $A$ and $B$ be tensor fields for which the identity holds. We will use this step in an induction argument. \Cref{4} yields the product rule for the tensor algebra:
+    \begin{align*}
+        [\mathcal{L}_V, \mathcal{L}_W](A \otimes B) &= \mathcal{L}_V(\mathcal{L}_W A \otimes B + A \otimes \mathcal{L}_W B) - \mathcal{L}_W(\mathcal{L}_V A \otimes B + A \otimes \mathcal{L}_V B) \\
+        &= (\mathcal{L}_V\mathcal{L}_W )(A) \otimes B + \mathcal{L}_W A \otimes \mathcal{L}_V B + \mathcal{L}_V A \otimes \mathcal{L}_W B + A \otimes (\mathcal{L}_V\mathcal{L}_W )(B) \\
+        &\quad - (\mathcal{L}_W\mathcal{L}_V)( A) \otimes B - \mathcal{L}_V A \otimes \mathcal{L}_W B - \mathcal{L}_W A \otimes \mathcal{L}_V B - A \otimes (\mathcal{L}_W\mathcal{L}_V )(B)\\
+	&=(\mathcal{L} _V \mathcal{L} _W)(A)\otimes B-(\mathcal{L} _W\mathcal{L} _V)(A)\otimes B + A\otimes (\mathcal{L} _V\mathcal{L} _W)(B)-A\otimes (\mathcal{L} _W\mathcal{L} _V)(B)\\
+	&=(\mathcal{L} _V\mathcal{L} _W - \mathcal{L} _W \mathcal{L} _V)(A)\otimes B + A\otimes (\mathcal{L} _V\mathcal{L} _W - \mathcal{L} _W\mathcal{L} _V)(B)\\
+	&=[\mathcal{L} _V,\mathcal{L}_W](A)\otimes B + A\otimes [\mathcal{L} _V,\mathcal{L} _W](B)\\
+	&=[\mathcal{L} _V,\mathcal{L} _W](A\otimes B),
+    \end{align*}
+    where the final step once again follows by \cref{4}.
+
+    Now recall that every $(k,\ell )$-tensor locally can be represented as a sum over $(k,\ell )$-tensors, and thus as a sum over tensor products of vector fields and covector fields. Since the statement holds for both vector and covector fields, and since the Lie derivative is linear, induction shows that $\mathcal{L} _{[V,W]} =[\mathcal{L} _V,\mathcal{L} _W]$ on any tensor field. As noted above, this proves part (1).
+
+    (2) I think I've seen this expression before in general relativity, but I cannot figure out where. I thought it was similar to the covariant derivative, which would make some sense since we take $\nabla _\mu g_{\rho \sigma } =0$, but on further inspection I think it was something else because that's basically $\Gamma _{\mu \nu } ^\sigma $ which only slightly resembles this.
+
+    ($\implies $) Let $V$ satisfy the given expression
+    \[
+	    V^k \frac{\partial g_{ij} }{\partial x^k} +g_{jk} \frac{\partial V^k}{\partial x^i} +g_{ik} \frac{\partial V^k}{\partial x^j} =0
+    \]
+    in any coordinates. We can compute the components $(\mathcal{L} _Vg)_{ij} \coloneqq (\mathcal{L} _Vg)(\partial _i,\partial _j)$ in coordinates. By Lee 12.33, since $g$ is a 2-cotensor,
+    \[
+	    (\mathcal{L} _Vg)(\partial _i,\partial _j) = V(g(\partial _i,\partial _j)) - g([V,\partial _i],\partial _j) - g(\partial _i,[V,\partial _j])
+    .\]
+    We compute this term by term. In coordinates, $V=V^k \partial _k$ acts on $g(\partial _i,\partial _j)=g_{ij} $ by
+    \[
+    	V(g_{ij} )=V^k \frac{\partial g_{ij} }{\partial x^k} 
+    .\]
+    By bilinearity of the Lie bracket, summation notation is well-defined and we can write $[V^k \partial _k,\partial _i]$. Since each $V^k$ is a function $M\to \mathbb{R} $, we invoke Lee 3.39, which gives for each $V,W\in \mathfrak{X} (M)$:
+    \[
+    	\mathcal{L} _V(fW)=(Vf)W + g\mathcal{L} _VW
+    .\]
+    In the language of Lie brackets,
+    \[
+	    [V,fW]=(Vf)W + f[V,W] \implies [fW,V]=-(Vf)W + f[W,V]
+    .\]
+    Applying this to our situation yields
+    \[
+	    [V^k\partial _k,\partial _i]=V^k[\partial _k,\partial _i] - (\partial _iV^k)\partial _k
+    .\]
+    By bilinearity of $g$ and since $[\partial _i,\partial _j]=0$ for all $i,j$,
+    \[
+	    g([V,\partial _i],\partial _j)=g(V^k[\partial _k,\partial _i]-\partial _iV^k \partial _k,\partial _j)
+    \]
+    \[
+	    =g(V^k[\partial _k, \partial _i],\partial _j)-g(\partial _iV^k \partial _k,\partial _j)=-g\left( \frac{\partial V^k}{\partial x^i} \frac{\partial }{\partial x^k} ,\frac{\partial }{\partial x^j}  \right) =- \frac{\partial V^k}{\partial x^i} g_{kj} = - \frac{\partial V^k}{\partial x^i} g_{jk} ,
+    \]
+    where the final step follows by symmetry of the metric. We can also use symmetry of the metric to compute the third term using the computation we just did by swapping $i \leftrightarrow j$:
+    \[
+	    g(\partial _i,[V,\partial _j])=g([V,\partial _j],\partial _i)=-\frac{\partial V^k}{\partial x^j} g_{ik} 
+    .\]
+    Substituting these expressions back into the relation we found earlier yields
+    \[
+	    (\mathcal{L} _Vg)_{ij} =V^k \frac{\partial g_{ij} }{\partial x^k} -\left( -g_{jk} \frac{\partial V^k}{\partial x^i}  \right) -\left( -g_{ik} \frac{\partial V^k}{\partial x^j}  \right) 
+    .\]
+    Note that this is precisely the equation given by the problem, so this quantity is 0. Therefore $\mathcal{L}_Vg=0$ since all of its components vanish in any coordinate system.
+
+    We now show that $\mathcal{L} _Vg=0$ implies that $V$ is a Killing vector field, which proves the converse of our earlier statement. Let $\theta $ be the flow of $V$. Lee 12.36 states that
+    \[
+    	\frac{\mathrm{d}}{\mathrm{d}t} \theta ^*_t g=\theta _t^*(\mathcal{L} _Vg)=\theta _t^*(0)=0
+    .\]
+    Therefore $\theta ^*_t g$ is constant with respect to $t$. Recall that for any $p\in M$, the flow $\theta$ satisfies the differential equation
+    \[
+    	\frac{\mathrm{d}}{\mathrm{d}t} \theta^{(p)} (t) = V(\theta ^{(p)} (t))
+    \]
+    and the initial condition $\theta ^{(p)} (0)=p$. In particular, the initial condition implies that $\theta _0(p)=p$ for all $p$, and thus $\theta _0$ is the identity. The pullback of the identity is the identity, so $\theta ^*_0g=g$. Since $\theta $ is constant with respect to $t$, we have $\theta ^*_t g=g$ for all $t$. Therefore $V$ is a Killing vector field.
+
+    ($\impliedby $) Let $V$ be a Killing vector, and as shown before it follows that $\mathcal{L} _Vg=0$. However we computed in the previous direction that
+    \[
+	    (\mathcal{L} _Vg)_{ij} =V^k \frac{\partial g_{ij} }{\partial x^k} +g_{jk} \frac{\partial V^k}{\partial x^i} +g_{ik} \frac{\partial V^k}{\partial x^j} 
+    .\]
+    Since $\mathcal{L} _Vg=0$, we have $(\mathcal{L} _Vg)_{ij} =0$, and thus the given expression must vanish in any coordinate system.
+    
+\end{proof}
+
+\section{Problem 13.14}
+\begin{problem}
+	Let $K\subseteq \mathfrak{X} (\mathbb{R} ^n)$ denote the Lie algebra of Killing vector fields with respect to the Euclidean metric $\overline{g} $, and let $K_0 \subseteq K$ denote the subspace of fields that vanish at the origin.
+	\begin{enumerate}
+		\item Show that the map
+			\[
+				V\mapsto \frac{\partial V^i}{\partial x^j} (0)
+			\]
+			is an injective linear map $K_0 \to \mathfrak{o} (n)$.
+		\item Show that the following is a basis for $K$:
+			\[
+				\frac{\partial }{\partial x^i} ,\quad 1\leq i\leq n;\quad x^j\frac{\partial }{\partial x^i} -x^i \frac{\partial }{\partial x^j} ,\quad 1\leq i<j \leq n
+			.\]
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Recall that $\mathfrak{o} (n)$ is the subset of $\mathfrak{gl} (n,\mathbb{R} )$ such that $A^t+A=0$. We first show the map is well-defined, meaning the matrix $\partial _jV^i$ is an element of $\mathfrak{o} (n)$. It suffices to show that $\partial _jV^i=-\partial _iV^j$.
+
+	Recall that $\overline{g}_{ij} =\delta _{ij} $ for $\delta $ the Kroenecker delta. Using the equation from \cref{6}, if $V\in K_0$ is Killing, then
+	\[
+		V^k \frac{\partial g_{ij} }{\partial x^k} +g_{ik} \frac{\partial V^k}{\partial x^j} +g_{jk} \frac{\partial V^k}{\partial x^i} =0
+	.\]
+	The derivatives of $\delta _{ij} $ vanish since it is either constant at 1 or constant at 0. Since we are looking for each individual $ij$th component, we only sum over $k$. To make this clear, we explicitly write the summations in the following computation:
+	\[
+		0= \sum_{k} \delta _{ik} \partial _jV^k+\delta _{jk} \partial _iV^k=\delta _{ii} \partial _jV^i + \delta _{jj} \partial _iV^j = \partial _jV^i + \partial _iV^j
+	.\]
+	It then follows that $\partial _jV^i = -\partial _iV^j$ for each $(i,j)$, as required. This holds when evaluating anywhere, so it will still hold when evaluating at 0. This also holds for all Killing vectors, so it will definitely hold for $K_0$.
+
+	Linearity follows immediately by linearity of the derivative. Given $V,W\in K_0$ (although this step once again holds for all of $K$), we have
+	\[
+		\frac{\partial (V+W)^i}{\partial x^j} = \frac{\partial V^i}{\partial x^j} +\frac{\partial W^i}{\partial x^j} 
+	.\]
+	Similarly, for $c\in\mathbb{R} $,
+	\[
+		\frac{\partial (cV)^i}{\partial x^j} =c\frac{\partial V^i}{\partial x^j} 
+	.\]
+	The statement will clearly still hold when we evaluate at 0, so we obtain an $\mathbb{R} $-linear map $K_0 \to \mathfrak{o} (n)$.
+
+	Proving injectivity requires the stronger hypotheses provided by the problem. Since we are working in $\mathbb{R} ^n$, we can use regular calculus to obtain the answer. Recall the expression given in \cref{6} under the Euclideam metric:
+	\[
+		\frac{\partial V^j}{\partial x^i} +\frac{\partial V^i}{\partial x^j} =0
+	.\]
+	It follows that for any $k$,
+	\[
+		0=\frac{\partial }{\partial x^k} \left( \frac{\partial V^j}{\partial x^i} +\frac{\partial V^i}{\partial x^j}  \right) =\frac{\partial^2 V^j}{\partial x^k \partial x^i} + \frac{\partial^2 V^i}{\partial x^k \partial x^j} 
+	.\]
+	Any permutation of the indices must still satisfy the same equation. In particular, consider $i\leftrightarrow k$ and $j\leftrightarrow k$:
+	\[
+		0=\frac{\partial^2 V^j}{\partial x^i \partial x^k} + \frac{\partial^2 V^k}{\partial x^i \partial x^j} 
+	;\]
+	\[
+		0=\frac{\partial^2 V^k}{\partial x^j \partial x^i} + \frac{\partial^2 V^i}{\partial x^j \partial x^k} 
+	.\]
+	Since these all equal 0, we can add the second and third equations, then subtract the first to cancel some terms. Invoking the fact that the $V^k$s are smooth and thus their partials commute, this yields
+	\[
+		0=\frac{\partial^2 V^k}{\partial x^j \partial x^i} + \frac{\partial^2 V^i}{\partial x^j \partial x^k} +\frac{\partial^2 V^j}{\partial x^i \partial x^k} + \frac{\partial^2 V^k}{\partial x^i \partial x^j}-\frac{\partial^2 V^j}{\partial x^k \partial x^i} + \frac{\partial^2 V^i}{\partial x^k \partial x^j} =2 \frac{\partial ^2V^k}{\partial x^i \partial x^j} 
+	.\]
+	Cancelling the 2 yields
+	\[
+		0=\frac{\partial ^2V^k}{\partial x^ix^j} 
+	.\]
+	Note that we made no assumptions about the relationships between $i,j,k$, meaning that \emph{all} second partials of Killing vector fields on $\mathbb{R} ^3$ must vanish. It follows that their first partial is a constant, and thus the functions $V^k : \mathbb{R} ^n \to \mathbb{R} $ are linear. We have $V^k(x)=V^k_x =b^V_{k} + \sum_{i} a^V_{ik} x^i$ for coefficients $b^V_k,a^V_{ik} \in\mathbb{R} $ for all $i,k$ and all Killing vectors $V$.
+
+	Now suppose we have two Killing vector fields $V,W\in K_0$ whose first partials agree at 0. We must show they agree everyhere. We have from calculus that
+	\[
+		\frac{\partial V^i}{\partial x^j} =a_{ij} ^V
+	,\]
+	and the same for $W$. t follows that the coefficients $a^W_{ij} =a^V_{ij} $ for all $ij$ and at all values in $\mathbb{R} $; in particular at 0. It thus suffices to show the terms $b_i^V$ and $b_i^W$ agree. This follows from the initial condition $V_0=W_0$. We have
+	\[
+		V^i_0 = b_i^V+\sum_{j} a_{ij}^V(0)=b_i^V,
+	\]
+	and the same for $W$. Therefore
+	\[
+		b_i^V = V^i_0=W^i_0 = b^W_i.
+	.\]
+	This completes the proof.
+
+	(2) Since we have shown that each $V\in K$ can be represented with $V^i=b_i+a_{ij} x^j$, we have
+	\[
+		V=\left( b_i+a_{ij} x^j \right) \partial _i = b_i \partial _i + a_{ij} x^j \partial _i
+	.\]
+	This is a linear combination in the set $\left\{ \partial _i \right\} \cup \left\{ x^j \partial _i \right\} $, which is immediately also seen to be linearly independent. We thus have that this set is a basis for the space. There are $n$ different $\partial _i$s. The other set is indexed through $1 \leq i<j \leq n$. Note that the basis given in the problem also contains a set indexed from 1 to $n$, and another set indexed through $1 \leq i<j \leq n$. Therefore, the cardinalities of these two sets are the same. It therefore suffices by linear algebra to prove independence \emph{or} spanning of the given set, since its cardinality is the same as the dimension of the space.
+
+	Recalling once again that
+	\[
+		V= b_i \partial _i + a_{ij} x^j \partial _i
+	,\]
+	we note that the $b_i$ terms are a linear combination in $\left\{ \partial _i \right\} $, so we need to show that the other term is a linear combination in $x^i \partial _j - x^j \partial _i$. We can make this clear simply by rewriting the expression for $V$. We write the summations to make it clear that the indices we sum over match those given in the problem. Recall that we proved for \emph{all} Killing vector fields that $\partial _iV^j = \partial _jV^i$, and thus $a_{ij} =-a_{ji} $. We can thus write
+	\[
+		V= b_i \partial _i + a_{ij} x^j \partial _i = \sum_{i} b_i \partial _i + \sum_{1 \leq i < j \leq n} a_{ij} \left( x^j \partial _i - x^i \partial _j \right) 
+	.\]
+	Here we have note that $a_{ij} =-a_{ji} $ implies $a_{ii} =0$, hence we can allow a strict inequality $i<j$. This clearly expresses $V$ as a linear combination in the given set, showing it is indeed a basis.
+\end{proof}
+
+
+\end{document}

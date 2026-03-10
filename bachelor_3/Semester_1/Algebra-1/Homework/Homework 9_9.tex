@@ -1,0 +1,119 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 9}
+\begin{document}
+\makeproblem
+\setcounter{section}{4}
+\section{Problem 5}
+\section{Problem 6}
+\begin{problem}
+	Let $R$ be a commutative ring with subset $S\subseteq R$ closed under multiplication and containing 1. Define the relation $\sim $ on $R\times S$ by, for all $s,s'\in S$ and $a,a'\in R$:
+	\[
+		(a,s)\sim (a',s') \iff \exists t\in S \text{ s.t. } t(s'a-sa')=0
+	.\]
+	Prove that $\sim $ is an equivalence relation.
+\end{problem}
+\begin{proof}
+	For this problem, let $a,a',a''\in R$ and $s,s',s'',t,u\in S$. Given $(a,s)\sim (a',s')$, say the relation is \emph{witnessed by $t$} if
+	\[
+		t(as'-a's)=0
+	.\]
+	Of course the witness is not necessarily unique; it is simply convenient terminology.
+
+	(reflexivity) By commutativity of $R$,
+	\[
+		1(as-sa)=as-as=0
+	.\]
+	Therefore, $(a,s)\sim (a,s)$.
+	
+	(symmetry) Let $(a,s)\sim (a',s')$ be witnessed by $t$. Then by commutativity of $R$,
+	\[
+		t(as'-a's)=0 \iff (-t)(a's-as')=0 \iff (a',s')\sim (a,s)
+	,\]
+	where the last implication follows by definition of $\sim $. Therefore, $\sim $ is symmetric.
+
+	(transitivity) Let $(a,s)\sim (a',s')$ and $(a',s')\sim (a'',s'')$ be witnessed by $t$ and $u$, respectively. Then
+	\[
+		t(as'-a's) = 0 = u(a's''-a''s')
+	.\]
+	Since $u,s''\in S$, we have $us''\in S$, so we can write
+	\[
+		(us''t)(as'-a's)=0
+	.\]
+	a
+\end{proof}
+\begin{problem}
+	Denote by $\frac{a}{s} $ the equivalence class $[(a,s)]_\sim $. Let $S^{-1} R =(R\times S)/\tildesim $ be endowed with the operations
+	\[
+		\frac{a}{s} +\frac{a'}{s'} =\frac{as'+a's}{ss'} ,\qquad \frac{a}{s} \cdot \frac{a'}{s'} =\frac{aa'}{ss'} 
+	\]
+	for all $a,a'\in R$ and $s,s'\in S$. Show that $S^{-1} R$ is a commutative ring.
+\end{problem}
+\begin{proof}
+	It is immediate by definition that $S^{-1} R$ is closed under both operations. Since $R$ is commutative,
+	\[
+		\frac{a}{s} +\frac{a'}{s'} =\frac{as'+a's}{ss'} =\frac{a's+as'}{s's} =\frac{a'}{s'} +\frac{a}{s} 
+	.\]
+	We can also show associativity of addition:
+	\[
+		\left( \frac{a}{s} +\frac{a'}{s'}  \right) +\frac{a''}{s''} =\frac{as'+a's}{ss'} +\frac{a''}{s''} =\frac{\left( as'+a's \right) s''+a''ss'}{ss's''} =\frac{ass''+a'ss''+a''ss'}{ss's''} ,
+	\]
+	\[
+		\frac{a}{s} +\left( \frac{a'}{s'} +\frac{a''}{s''}  \right) =\frac{a}{s} +\frac{a's''+a''s'}{s's''} =\frac{as's''+\left( a's''+a''s' \right) s}{ss's''} =\frac{as's''+a's''s+a''s's}{ss's''} 
+	.\]
+	Invoking commutativity of $R$ shows these quantities are equal. Since $S$ contains $1_R\in S$, define $1$ in $S^{-1} R$ as $1_R/1_R$. Then
+	\[
+		\frac{1_R}{1_R} \cdot \frac{a}{s} =\frac{1_Ra}{1_Rs} =\frac{a}{s} 
+	\]
+	since $1_R $ is the identity in $R$. To show commutativity, we note that since $R$ is commutative,
+	\[
+		\frac{a}{s} \cdot \frac{a'}{s'} =\frac{aa'}{ss'} =\frac{a'a}{s's} =\frac{a'}{s'} \cdot \frac{a}{s} 
+	.\]
+	The final thing we must do is deal with zero. Define $0$ as any element of the form $0/s$; we must show these all fall within the same equivalence class. Indeed, if $(0,s),(0,s')$ are two elements of $R\times S$, then
+	\[
+		(0s'-0s)=0-0=0,
+	\]
+	so we have $(0,s)\sim (0,s')$. Since the definition is now well-defined, we observe that
+	\[
+		\frac{a}{s} +\frac{0}{s'} = \frac{as'+0s}{ss'} =\frac{as'}{ss'} =\frac{a}{s} \cdot \frac{s'}{s'} 
+	.\]
+	It suffices to show that $(s',s')\sim (1_R,1_R)$. Once again,
+	\[
+		(s'1_R-1_Rs')=s'-s'=0
+	,\]
+	so we indeed have $s'/s'=1$. Therefore,
+	\[
+		\frac{a}{s} \cdot \frac{s'}{s'} =\frac{a}{s} \cdot 1=\frac{a}{s} 
+	.\]
+	0 is thus an additive identity. Given $a/s$, define the inverse $-a/s$ by $[(-a,s)]_{\tildesim}$. Then
+	\[
+		\frac{a}{s} +\frac{-a}{s} = \frac{-as + as}{s^2} =\frac{0}{s^2} =0
+	.\]
+	Therefore, $S^{-1} R$ is a commutative ring.
+\end{proof}
+
+\begin{problem}
+	Show $S^{-1} R\cong 0$ if and only if $0\in S$.
+\end{problem}
+\begin{proof}
+	It suffices to show that $(a,s)\sim (0,s')$ for all $(a,s)\in R\times S$ and some $s'\in S$. Consider $s'=0$. We have
+	\[
+		(a0-0s)=0-0=0,
+	\]
+	so indeed $(a,s)\sim (0,0)=0$. Therefore, $S^{-1} R$ is the zero ring.
+\end{proof}
+
+
+\section{Problem 7}
+
+
+
+\end{document}

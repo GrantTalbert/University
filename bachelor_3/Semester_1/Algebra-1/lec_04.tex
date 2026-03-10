@@ -1,0 +1,28 @@
+\lecture{4}{Tue 18 Nov 2025 15:36}{Field extensions}
+
+\begin{theorem}\label{kd}
+	Let $k$ a field and $f\in k[x]$ irreducible. Then $K\coloneqq k[x]/(f(x))$ is a field where $f$ has a root. For any field $F$ containing roots of $f$, there is a homomorphism $K\hookrightarrow F$. All ring homomorphisms are injective.
+\end{theorem}
+\begin{definition}\label{ksjhb}
+	If $k,F$ are fields, then $F$ is a \emph{field extension} of $k$ if $k\subseteq F$. We write $F/k$. The \emph{degree} of the extension is $\dim _kF$, and is denoted $[F : k]$.
+\end{definition}
+\begin{definition}\label{ksjnfdk}
+	Let $F/k$ be a field extension with $\alpha \in F$. Then $k(\alpha )$ is the smallest subfield of $F$ containing $\alpha $ and $k$. It is constructed as
+	\[
+		k(\alpha )= \bigcap_{k\subseteq F'\subseteq F,\alpha \in F'} F'
+	.\]
+\end{definition}
+
+\begin{definition}\label{asodsfsofn}
+	A field extension $F/k$ is \emph{simple} if $F=k(\alpha )$ for some $\alpha \in F$.
+\end{definition}
+\begin{proposition}\label{owo}
+	Let $k(\alpha ) /k$ be simple. Consider the evaluation map $\varepsilon : k[t] \to k(\alpha )$ given by $t\mapsto \alpha $. Then $\varepsilon $ is injective if and only if $k(\alpha ) /k$ is an infinite extension. In this case, $k(\alpha )$ is isomorphic to $\operatorname{Frac} (k[t])$, which is the field of rational functions on $t$.
+
+	If $\varepsilon $ is \emph{not injective}, then there is a monic nonconstant $p(t)\in k[t]$ of degree $n=[k(\alpha ): k]$ such that
+	\[
+		k(\alpha ) \cong \frac{k[t]}{(p(t))} 
+	\]
+	given by $\alpha \mapsto [t]$.
+\end{proposition}
+

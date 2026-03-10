@@ -362,10 +362,15 @@ If $\mathcal{C} $ is a topological category, we can say some specific things abo
 In general, all meaningful properties of objects are invariant under equivalence, and similarly all meaningful properties of morphisms are invariant under homotopy (2-isomorphism). I have a feeling we will rigorize this later using some kind of $\infty $-Yoneda. For now, we appeal to the following proposition due to Joyal, which we also can't prove yet.
 
 \begin{proposition}\label{1.2.4.3}
-	Let $\mathcal{C} $ be an $\infty $-category and $f : \Delta ^1 \to \mathcal{C} $ a morphism of $\mathcal{C} $. Then $f$ is an equivalence if and only if, for each $n\geq 2$ and every map $f_0 : \Lambda _0^2 \to \mathcal{C} $ which restricts as $f_0|\Delta ^{\left\{ 0,1 \right\} } =f$, there exists a filler for $f_0$.
+	Let $\mathcal{C} $ be an $\infty $-category and $\phi : \Delta ^1 \to \mathcal{C} $ a morphism of $\mathcal{C} $. Then $f$ is an equivalence if and only if, for each $n\geq 2$ and every map $f_0 : \Lambda _0^n \to \mathcal{C} $ which restricts as $f_0|\Delta ^{\left\{ 0,1 \right\} } =\phi$, there exists a filler $f$ for $f_0$.
 \end{proposition}
 
-We note that the datum of the restriction $f_0|\Delta ^{\left\{ 0,1 \right\} } $ is determined by the action of $f_0$ on the coface $d^2 : [1] \to [2]$.
+We note that the datum of the restriction $f_0|\Delta ^{\left\{ 0,1 \right\} } $ is determined by the action of $f_0$ on the coface $d^2 : [1] \to [2]$. More precisely, let $\phi : x \to y$ in $\mathcal{C} $. The bulk of the statement is the $n=2$ case; the higher simplicies are largely there for coherence. The condition $f|\Delta ^{\left\{ 0,2 \right\} } =\phi $ states that the horn takes the form of the diagram of solid arrows
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & y \ar[" \psi  ", dotted, dr]  &  \\
+x \ar[" \phi  ", ur] \ar[" h "', rr]  &  & z
+\end{tikzcd}\]
+for any $h : x \to z$, and the filler condition guarentees the existence of the dashed arrow. In particular, take $z=x$ and $h=1_x : x \to x$. Then we obtain the existence of some $\psi $ with $\psi \circ \phi \sim 1_x$. This shows one direction of the inversion; the other requires more work but is not difficult.
 
 
 \subsection{$\infty $-Groupoids and Classical Homotopy Theory}
@@ -524,7 +529,9 @@ The overcategory can be restated with a universal property: for any category $\m
 \[
 	\Hom(\mathcal{C} ', \mathcal{C} _{/x} ) \cong \Hom_x(\mathcal{C} '\star [0], \mathcal{C} ) ,
 \]
-where the subscript $x$ denotes that we consider only those functors $\mathcal{C} '\star [0]\to \mathcal{C} $ whose restriction to $[0]$ is $x$. This property will be used to generalize overcategories to the $\infty $-categorical setting. This generalization is due to Joyal.
+where the subscript $x$ denotes that we consider only those functors $\mathcal{C} '\star [0]\to \mathcal{C} $ whose restriction to $[0]$ is $x$. This is fairly simple to prove. A functor $F : \mathcal{C} '\to \mathcal{C} _{/x} $ maps each $a\in \mathcal{C} '$ to some $f : c \to x$ in $\mathcal{C} $. Define a functor $G : \mathcal{C} '\star [0] \to \mathcal{C} $ by mapping $a\in \mathcal{C} '$ to $G(a)=\operatorname{dom} F(a)$ and mapping the morphism $a\to 0\in[0]$ to the morphism $F(a)$. This is a functor because $0\mapsto x$ is forced, and we can clearly recover $F$ given such a $G$, making this relation an isomorphism. It suffices to show naturality, which we omit.
+
+This property will be used to generalize overcategories to the $\infty $-categorical setting. This generalization is due to Joyal.
 
 \begin{proposition}\label{1.2.9.1}
 	Let $S,K$ be simplicial sets, and $p : K \to S$ a morphism of simplicial sets. Then there is a simplicial set $S_{/p} $ satisfying the universal property
@@ -534,7 +541,61 @@ where the subscript $x$ denotes that we consider only those functors $\mathcal{C
 	Once again, $\sSet _p$ denotes that we only consider maps $f : Y\star K \to S$ with $f|K=p$.
 \end{proposition}
 \begin{proof}
-	We prove by explicit construction of $S_{/p} $. Simply define the $n$-simplices to be the set $\sSet _p(\Delta ^n\star K,S)$. Of course if $Y=\Delta ^n$ the conclusion follows by Yoneda. I think the general proof follows by noting that $-\star K$ preserves colimits, and then doing functors as colimits of representable functors.
+	We prove by explicit construction of $S_{/p} $. Simply define the $n$-simplices to be the set $\sSet _p(\Delta ^n\star K,S)$. Of course if $Y=\Delta ^m$ the conclusion follows by Yoneda, since
+	\[
+		\sSet (\Delta ^m,S_{/p})= \sSet (\Delta ^m,\sSet _p(\Delta^{\bullet} \star K,S)) \cong \sSet _p(\Delta ^m \star K,S)=(S_{/p} )_m
+	.\]
+	We claim that $\sSet _p(-,S)$ preserves (small) limits and $-\star K$ preserves (small) colimits; we prove this later. Recall by \cite{maclane} that any simplicial set $Y$ is a colimit of representables, which is often written as
+	\[
+		Y\cong \colim_{(\Delta ^n\to Y)\in(\sSet\downarrow Y)} \Delta ^n
+	.\]
+	For simplicity, we will simply write $Y\cong \colim \Delta ^n$. We then obtain
+	\begin{align*}
+		\sSet (Y,S_{/p} )&\cong \sSet(\colim \Delta ^n,S_{/p} )&\text{(Yoneda, \cite{maclane})} \\
+				 &\cong \lim \sSet (\Delta ^n,S_{/p} )&\text{(Continuity and contravariance)} \\
+				 &\cong \lim \sSet_p(\Delta ^n \star K,S)&\text{(Base case)} \\
+				 &\cong \sSet_p(\colim (\Delta ^n\star K),S)&\text{(Assumption)} \\
+				 &\cong \sSet _p((\colim \Delta ^n)\star K,S)&\text{(Assumption)} \\
+				 &\cong \sSet_p(Y\star K,S)&\text{(Yoneda, \cite{maclane})}
+	.\end{align*}
+	It now suffices to show the two assumptions. That $-\star K$ preserves colimits is simple to prove. Recall that colimits commute and that $-\times A \dashv (-)^A$ in $\Set $, meaning that also preserves colimits. By pointwise computation of limits in functor categories (\cite{maclane}), it suffices to show that colimits are preserved levelwise, and indeed
+	\[
+		(Y\star K)_n=Y_n \amalg K_n \amalg \coprod_{i+j=n-1} Y_i\times K_j
+	\]
+	is a composite of colimits and the product, so it preserves colimits in $Y$.
+
+	Now we need only show the functor $\sSet _p(-,S)$ preserves limits.
+
+	Let $\eta : \sSet(-\star K,S) \Rightarrow \sSet (K,S)$ be defined by $\eta _Y : F\mapsto F|K$. Note that $\eta_Y =i^*$ for $i : K \to Y\star K$ the inclusion, so it is natural in $Y$ by Yoneda. We claim that $\sSet _p(Y \star K,S)$ is the pullback
+	\[
+		\sSet _p(Y\star K,S)\cong \sSet (Y\star K,S)\times_{\sSet (K,S)} \left\{ p \right\} 
+	\]
+\[\begin{tikzcd}
+	{\sSet_p(Y\star K,S)} & {\{p\}} \\
+	{\sSet(Y\star K,S)} & {\sSet(K,S)}
+	\arrow["{!}", from=1-1, to=1-2]
+	\arrow["i"', from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow["i", from=1-2, to=2-2]
+	\arrow["{\eta_Y}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+	where the $i$s are the inclusions. Commutativity of the diagram is immediate: given $F : Y\star K \to S$ with $F|K=p$, we obtain
+	\[
+		(\eta _Y \circ i)(F)=\eta _Y(F)=F|K=p,
+	\]
+	\[
+		(i\circ !)(F)=i(p)=p
+	.\]
+	Universality is also simple. Let $X\in \Set $ have a morphism $f : X\to \left\{ p \right\} $ and $g : X \to \sSet (Y\star K,S)$ rendering the square commutative. Then given each $x\in X$, we have $g(x)|K=p$, so $g(x)\in \sSet _p(Y\star K,S)$. We thus define $X\to \sSet _p(Y\star K,S)$ by $x\mapsto g(x)$, and it is manifestly unique. Thus $\sSet _p(Y\star K,S)$ is a pullback as claimed.
+
+	This allows us to complete the proof. Let $F : \mathcal{J}  \to \sSet $ be any diagram. Then recalling that limits commute and pullback is a limit,
+	\begin{align*}
+		\sSet _p(\colim_{j\in \mathcal{J} }F(j)\star K,S)&\cong \sSet (\colim_{j\in \mathcal{J} } F(j)\star K,S)\times_{\sSet (K,S)} \left\{ p \right\} \\
+					   &\cong (\lim_{j\in \mathcal{J} } \sSet (F(j)\star K,S))\times _{\sSet (K,S)} \left\{ p \right\} \\
+					   &\cong \lim_{j\in \mathcal{J} } (\sSet (F(j)\star K,S)\times_{\sSet (K,S)} \left\{ p \right\} )\\
+					   &\cong \lim_{j \in \mathcal{J}  } \sSet _p(F(j)\star K,S)
+	.\end{align*}
+	Here we extend the limit to be a constant diagram over the other two arguments of pullback, allowing us to commute pullback with the limit in only one argument.
 \end{proof}
 
 If $S$ is an $\infty $-category, we call $S_{/p} $ an \emph{overcategory} of $S$ over $p$. Passing operations to over/undercategories is well-behaved:
@@ -554,7 +615,10 @@ Once again, we cannot do this proof yet. The first chapter is more of an overvie
 	\[
 		\sSet (Y,S_{p/} )\cong \sSet _p(K\star Y,S)
 	.\]
-	Of course, the definition is simply dual to the one given in \cref{1.2.9.1}.
+	Of course, the definition is simply dual to the one given in \cref{1.2.9.1}:
+	\[
+		(S_{p/} )_n\coloneqq \sSet_p(K\star \Delta ^n,S)
+	.\]
 \end{remark}
 
 \begin{remark}[\cite{nlab}]\label{1.2.9.5}
@@ -653,11 +717,11 @@ This translates to $x$ being final in $\hh \mathcal{C} $, which dualizes in the 
 	Let $\mathcal{C} $ be a simplicial set. A vertex $x\in \mathcal{C} _0$ is \emph{strongly final} if the projection $\mathcal{C} _{/x} \to \mathcal{C} $ is a trivial fibration of simplicial sets (since cofibrations are mono maps, trivial fibrations lift against monics).
 \end{definition}
 
-We investigate the projection $\mathcal{C} _{/x} \to \mathcal{C} $ to give a better description of strongly final objects. Recall that $(\mathcal{C} _{/x} )_n=\sSet _x(\Delta ^n\star \Delta ^0,\mathcal{C} )$. Since $\Delta ^n \subseteq \Delta ^n\star \Delta ^0$, we can restrict $n$-simplices along the inclusion to obtain morphisms $\Delta ^n\to \mathcal{C} $, and by Yoneda, $n$-simplices of $\mathcal{C} $. This is how we define the projection: precomposition by the inclusion $i^* : \sSet_x(\Delta ^n\star \Delta ^0 \to \mathcal{C} )\to \sSet_x(\Delta ^n,\mathcal{C} )\cong \mathcal{C} _n$, where the second $\sSet _x$ denotes the set of morphisms whose final vertex is $x$.
+We investigate the projection $\mathcal{C} _{/x} \to \mathcal{C} $ to give a better description of strongly final objects. Recall that $(\mathcal{C} _{/x} )_n=\sSet _x(\Delta ^n\star \Delta ^0,\mathcal{C} )$. Since $\Delta ^n \subseteq \Delta ^n\star \Delta ^0$, we can restrict $n$-simplices along the inclusion to obtain morphisms $\Delta ^n\to \mathcal{C} $, and by Yoneda, $n$-simplices of $\mathcal{C} $. This is how we define the projection: precomposition by the inclusion $i^* : \sSet_x(\Delta ^n\star \Delta ^0 \to \mathcal{C} )\to \sSet(\Delta ^n,\mathcal{C} )\cong \mathcal{C} _n$.
 
 Let $x\in \mathcal{C} $ be strongly final. Then the projection is a trivial Kan fibration. Focusing on the Kan fibration condition, we see that any diagram of solid arrows
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-X \ar[d] \ar[r]  & \mathcal{C}_{/x} \ar[d]  \\
+X \ar[tail, d] \ar[r]  & \mathcal{C}_{/x} \ar[d]  \\
 Y \ar[r] \ar[dotted, ur]  & \mathcal{C} 
 \end{tikzcd}\]
 with the left vertical arrow mono, there is a lift as indicated by the dotted arrow, rendering the diagram commutative. We can make the very interesting remark that this is equivalent to the condition that all maps $f_0: \partial \Delta ^n \to \mathcal{C} $ wherein $(0\mapsto n)\mapsto x$ extend to maps $\Delta ^n\to \mathcal{C} $.
@@ -751,4 +815,110 @@ Later, we will show this definition of (co)limits agrees with the classical theo
 	\end{tikzcd}\]
 	commutes. Consider the map $k : X \to \mathcal{C} '_{p/} $ given by $p \star f$???? defined in the obvious way psure this makes the right triangle commute cuz $\mathcal{C} '_{p/} \to \mathcal{C} '$ identifies under yoneda already, but like what about left ok well it suffices to show that $g$ is basically just $f$ on $\mathcal{C} '$. I'm pretty sure $g=g'\star p$ by universality of coproduct, so just gotta show $g'=f$ after playing with inclusions. Ok yeah basically $f(x)=g(x)\circ \iota $ for $\iota : \Delta ^{\bullet} \hookrightarrow \Delta ^{\bullet} \star K$.
 \end{remark}
+
+Let $f : \mathcal{C}  \to \mathcal{C} '$ be an $\infty $-functor and $p : K \to \mathcal{C} $ a diagram with a colimit $x\in \mathcal{C} _{p/} $. The image $f(x)\in \mathcal{C} _{f\circ p/} $ may or may not be a colimit for $f\circ p$ in $\mathcal{C} '$; if it is, we say $f$ \emph{preserves} the colimit of $p$. We apply this terminology in the usual way to (co)limits over classes of diagrams.
+
+Lurie concludes the section with the following ``simple example'' of a colimit preserving $\infty $-functor.
+
+\begin{proposition}\label{1.2.13.3}
+	Let $\mathcal{C} $ be an $\infty $-category and $q : T \to \mathcal{C} $, $p : K \to \mathcal{C} $ two diagrams. Let $p_0$ denote the composite of $p$ with the projection $\mathcal{C} _{/q} \to \mathcal{C} $, and suppose $p_0$ has a colimit in $\mathcal{C} $. Then
+	\begin{enumerate}
+		\item The diagram $p$ has a colimit in $\mathcal{C} _{/q} $ which is preserved by the projection to yield the colimit of $p_0$;
+		\item An extension $\widetilde{p} : K^{\rhd}  \to \mathcal{C} _{/q} $ is a colimit for $p$ if and only if the composite
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			K^{\rhd} \ar[r]  & \mathcal{C} _{/q} \ar[r]  & \mathcal{C} 
+			\end{tikzcd}\]
+			is a colimit for $p_0$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Begin by recalling definitions, so we know what to prove. A colimit $\widetilde{p} $ for $p$ is an initial object of $(\mathcal{C} _{/q} )_{p/} $, which of course is defined as an initial \emph{vertex}, meaning it is a map
+	\[
+		\widetilde{p} : K\star \Delta ^0 \to \mathcal{C} _{/q} 
+	\]
+	such that the mapping spaces $\Map_{(\mathcal{C} _{/q})_{p/} }(\widetilde{p} , -) $ are contractible. A colimit for $p_0$ is a map
+	\[
+		\widetilde{p} _0 : K\star \Delta ^0 \to \mathcal{C} 
+	\]
+	such that the mapping spaces $\Map_{\mathcal{C} _{p/} }(\widetilde{p} _0, -) $ are contractible.
+
+	(1)
+
+	(2) ($\impliedby $) Let $\pi^q : \mathcal{C} _{/q}  \to \mathcal{C} $, and let $\widetilde{p} : K \to \mathcal{C}_{/q} $ such that $\pi ^q\circ \widetilde{p} $ be a colimit for $p_0$. Note that
+	\[
+		((\mathcal{C}_{/q} )_{p/} )_n=\sSet _p(K\star \Delta ^n,\mathcal{C} _{/q} )=\sSet_p(K\star \Delta ^n,\sSet _q(\Delta^{\bullet}  \star T,\mathcal{C} ))
+	.\]
+	We claim that we may identify $\widetilde{p} : K\star \Delta ^0 \to \mathcal{C} _{/q} $ with a map $K\star \Delta ^0\star T\to \mathcal{C} $.
+
+	To show this, recall that univeraslity of the overcategory states
+	\[
+		\sSet (Y,\mathcal{C} _{/q} )\cong \sSet_q(Y\star T,\mathcal{C} )
+	.\]
+	It follows that
+	\[
+		\widetilde{p} \in\sSet (K\star \Delta ^0,\mathcal{C}_{/q} )\cong \sSet_q(K\star \Delta ^0 \star T,\mathcal{C} )
+	.\]
+	We can restrict along the subfunctor to obtain
+	\[
+		\widetilde{p} \in \sSet _p(K\star \Delta ^0,\mathcal{C} _{/q} )\cong \sSet _{p,q} (K\star \Delta ^0\star T,\mathcal{C} )
+	.\]
+	Proving rigorously that this isomorphism restricts to an isomorphism is fairly simple by the fact that the subfunctor is a pullback. Write $f : K\star \Delta ^0\star T \to \mathcal{C} $ for this functor. Let $B$ be any simplicial set with simplicial subset $A\subseteq B$, and consider a diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(K\star B\star T)\amalg_{K\star A\star T} (K\star \Delta ^0\star A\star T)\ar[r] \ar[hook, d]  & \mathcal{C}  \\
+	K\star \Delta ^0 \star B\star T \ar[dotted, ur] & 
+	\end{tikzcd}\]
+	We would like to solve the lifting problem. what in ALL THE FUCKS does lurie do here????
+
+	(1) ????????
+\end{proof}
+
+\subsection{Presentations of $\infty $-Categories}
+
+It makes sense, and will be quite important, to discuss \emph{finitely presented} $\infty $-categories. Intuitively, a finitely presented $\infty $-category is an $\infty $-category which is constructed by specifying finitely many generating morphisms a finite number of relations between the morphisms, a finite number of relations amongst the relations, and so forth with the total number of relations specified being finite.
+
+The notion of a presentation for an $\infty $-category is presented much better using Joyal's model structure for $\sSet $, but for now we summarize only the following important facts:
+\begin{itemize}
+	\item Fibrant objects are quasi-categories, and
+	\item weak equivalences are precisely those maps $f : S \to S'$ which induce equivalences $\mathfrak{C} [S]\to \mathfrak{C} [S']$.
+\end{itemize}
+Of course on fibrant objects, the notion of weak equivalences and equivalences of $\infty $-categories coencide. Given a simplicial set $S$, we can choose a fibrant replacement $\mathcal{C} $ which is defined up to equivalence. We will call this the $\infty $-category \emph{generated by} $S$. That's really it; presenting an $\infty $-category then amounts to finitely generating $S$.
+
+\subsection{Set-Theoretic Technicalities}
+
+We postulate the existence of a strongly innacessible cardinal $\kappa $ and employ the theory of Grothendieck universes. Given a cardinal $\kappa _0$, let $\mathcal{U} (\kappa _0)$ denote the set of all sets with cardinality less or equal to $\kappa _0$. Write $\mathcal{U} =\mathcal{U} (\kappa )$. As always, this is largely for convenience; no results herein will depend on this assumption in an important way, and this is simply to avoid bookkeeping technicalities. It should still be noted though that it cannot be proven $\mathrm{ZFC} \land(\exists \kappa) \iff \mathrm{ZFC} $. The reasoning for this is interesting and I digress onto it.
+
+Given $\mathrm{ZFC} +\exists \kappa $, we note that $\mathcal{U} $ is itself a model for ZFC, and $\mathrm{ZFC} +\exists \kappa $ can prove the consistency of this model. Thus if $\mathrm{ZFC} +\text{ZFC is consistent} $ could prove $\mathrm{ZFC} +\exists \kappa $, then $\mathrm{ZFC} +\exists \kappa $ could prove its own consistency by
+\[
+	\mathrm{ZFC} +\exists \kappa \implies \text{ZFC} +\text{ZFC consistent} \implies \mathrm{ZFC} +\exists \kappa ,
+\]
+contradicting G\"odel's second incompleteness theorem.
+
+We will say an $\infty $-category is small when its objects and mapping spaces are small objects, and we will say it is \emph{essentially small} if it has a small number of isomorphism classes and each homotopy group of each mapping space is small; essentially it is equivalent to a small $\infty $-category.
+
+\subsection{The $\infty $-Category of Spaces}
+
+The category $\Set $ plays a vital role in the theory of 1-categories since all categories are enriched over $\Set $. In $\infty $-category theory, categories are enriched over \emph{spaces}, so the $\infty $-category of spaces takes the role from $\Set $ as the mostimportant category.
+
+\begin{definition}\label{1.2.16.1}
+	Let $\mathcal{K} \mathrm{an} $ be the full subcategory of $\sSet $ spanned by Kan complexes. Regarding $\mathcal{K} \mathrm{an} $ as a simplicial category, let $\mathcal{S} \coloneqq \mathrm{N}(\mathcal{K} \mathrm{an} )$ for $\mathrm{N} $ the homotopy coherent nerve. we call $\mathcal{S} $ the $\infty $-category of spaces.
+\end{definition}
+
+\begin{proposition}\label{1.2.16.2}
+	$\mathcal{S} $ is an $\infty $-category.
+\end{proposition}
+\begin{proof}
+	We claim that given Kan complexes $X,Y$, the mapping space $\underline{\sSet } (X,Y)_{\bullet} =\sSet (\Delta ^{\bullet} \times X,Y)$ is a Kan complex. By \cref{1.1.5.7}, $\mathcal{S} $ is an $\infty $-category.
+
+	Let $\sigma _0 : \Lambda_i^n \to \underline{\sSet } (X,Y)$. By $-\times X \dashv \underline{\sSet } (X,-)$, the lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & \underline{\sSet } (X,Y)\\
+	\Delta ^n \ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	transposes under the adjunction to the equivalent lifting problem
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Lambda _i^n \times X \ar[r] \ar[hook, d]  & Y \\
+	\Delta ^n \times X \ar[dotted, ur]  & 
+	\end{tikzcd}\]
+	This follows from some basic simplicial homotopy. Since $Y$ is a Kan complex, it lifts against all anodyne extensions, and it is a simple lemma that if $i$ is anodyne, then $i\times 1$ is anodyne.
+\end{proof}
 

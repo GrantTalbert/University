@@ -1,8 +1,8 @@
 \section{Abelian categories}
 
-There is one problem we have not yet solved. In order to do homological algebra, we need to be able to compute \emph{homology}, hence the name of the field. Our goal now will be to figure out what else an additive category needs in order to have a notion of homology. To begin, we recall the definition of homology in $k$-$\Vect$.
+There is one problem we have not yet solved. In order to do homological algebra, we need to be able to compute \emph{homology}, hence the name of the field. Our goal now will be to figure out what else an additive category needs in order to have a notion of homology. To begin, we recall the definition of homology in $\Vect_k$.
 
-Let $(V_{\bullet},d_{\bullet} ) $ be a chain complex in $k$-$\Vect$. Since $\Im d_{i+1}  \subseteq \Ker d_{i}\subseteq V_i $, we defined the $i$th homology as
+Let $(V_{\bullet},d_{\bullet} ) $ be a chain complex in $\Vect_k$. Since $\Im d_{i+1}  \subseteq \Ker d_{i}\subseteq V_i $, we defined the $i$th homology as
 \[
 	H_i(V_{\bullet} )=\frac{\Ker d_i}{\Im d_{i-1} } 
 .\]
@@ -14,26 +14,26 @@ Let $\varphi : V \to W$ be a $k$-linear map. The \emph{kernel} $\Ker \varphi $ i
 	The kernel $\Ker \varphi $ is a subspace of $V$, meaning there is an \emph{inclusion map} $i:\Ker \varphi \hookrightarrow V$ which maps each $v\in \Ker \varphi $ to itself $v\in V$. This inclusion map is
 	\begin{enumerate}
 		\item a $k$-linear map,
-		\item a \emph{monomorphism} (\cref{4.?}),
-		\item and the composite $d_i \circ i=0$ because the image of $i$ is precisely $\Ker d_i$, and $d_i(\Ker d_i)=0$.
+		\item a \emph{monomorphism},
+		\item and the composite $\varphi \circ i=0$ because the image of $i$ is precisely $\Ker \varphi $, and $\varphi (\Ker \varphi)=0$.
 	\end{enumerate}
 \end{remark}
 
-We will explain monomorphisms shortly. For now, we focus on an extremely implication of (1) and (3). Suppose we have some other $k$-linear map $\psi : Z \to V$ such that $\varphi \circ \psi =0$. This implies that $\Im \psi \subseteq \Ker \varphi $, so we note that $\psi $ can be decomposed as
+We will explain monomorphisms shortly. For now, we illustrate another fact. Suppose we have some other $k$-linear map $\psi : Z \to V$ such that $\varphi \circ \psi =0$. This implies that $\Im \psi \subseteq \Ker \varphi $, so we note that $\psi $ can be decomposed as
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	Z \ar[" \psi  ", bend left, rrr] \ar[" \psi  "', r]  & \Im \psi \ar[hook, r]  & \Ker \psi \ar[" i "', hook, r] & V.
+	Z \ar[" \psi  ", bend left, rrr] \ar[" \psi  "', r]  & \Im \psi \ar[hook, r]  & \Ker \varphi \ar[" i "', hook, r] & V
 \end{tikzcd}\]
-In particular, the entire situation can be displayed as the commutative diagram
+for $\Im \psi \hookrightarrow \Ker \varphi $ the inclusion map. In particular, the entire situation can be displayed as the commutative diagram
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 Z \ar[" \psi  ", r] \ar[" 0 ", bend left, rr] \ar[" \psi  "', dr]  & V \ar[" \varphi  ", r]  & W \\
  & \Ker \varphi \ar[" i "', hook, u] \ar[" 0 "', ur]  & 
 \end{tikzcd}\]
-Here we have merged the maps $Z\to \Im \psi $ and $\Im \psi \hookrightarrow \Ker \varphi  $ into a single map $Z\to \Ker \varphi $ for simplicity. The most interesting thing is that the map $\psi : Z \to \Ker \varphi $ is \emph{unique}; this is the \emph{only} map that will make the diagram commute.
+Here we have merged the maps $Z\to \Im \psi $ and $\Im \psi \hookrightarrow \Ker \varphi  $ into a single map $Z\to \Ker \varphi $ for simplicity, which we also denote by $\psi $ in a mild abuse of notation. The most interesting thing is that the map $\psi : Z \to \Ker \varphi $ is \emph{unique}; this is the \emph{only} map that will make the diagram commute.
 
-Anyone who has seen \emph{universal properties} before will realize the significance of this. A classic fact of category is as follows. Suppose we have some other $k$-vector space $K$ such that for any diagram of solid arrows
+Anyone who has seen \emph{universal properties} before will realize the significance of this. A classic fact of category theory (specialized to the case of kernels) is as follows. Suppose we have some other $k$-vector space $K$ such that for any diagram of solid arrows
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 Z \ar[" 0 ", bend left, rr] \ar[" \psi  ", r] \ar[dashed, dr]  & V \ar[" \varphi  ", r]  & W \\
- & \Ker \varphi \ar[" i "', hook, u] \ar[" 0 "', ur]  & 
+ & K \ar[" i "', hook, u] \ar[" 0 "', ur]  & 
 \end{tikzcd}\]
 there is a unique dashed arrow as indicated, rendering the diagram commutative. Then we necessarily have an isomorphism $K\cong \Ker \varphi $. In other words, any other $k$-vector space satisfying this diagrammatic property must necessarily be isomorphic to the kernel. Since we only really care about objects up to isomorphism, we could choose to \emph{define} the kernel in an arbitrary category as any $k$-vector space satisfying this property. Indeed,
 
@@ -59,7 +59,7 @@ We now have kernels in any $\Ab $-category, so we only need to define images and
 	there is a unique dashed arrow as indicated, rendering the diagram commutative.
 \end{definition}
 
-To see why this is useful, it will be useful to construct cokernels in $k$-vector spaces.
+Similarly to kernels, cokernels are also unique up to isomorphism. To see why this is a useful definition, it will be useful to explicitly construct cokernels in $\Vect_{k} $.
 
 \begin{proposition}\label{4.4}
 	Let $\varphi : V \to W$ be a $k$-linear map. Then the cokernel can be constructed as the quotient $\Coker \varphi \cong W / \Im \varphi $.
@@ -69,16 +69,16 @@ To see why this is useful, it will be useful to construct cokernels in $k$-vecto
 \end{proof}
 
 \begin{remark}\label{4.5}
-	The definition of a quotient is inherently dependent on subsets, which do not exist in general in $\Ab $-categories. However, \cref{4.4} allows us to \emph{almost} recharacterize quotients using \emph{cokernels}, which we have already defined in any $\Ab $-category. Note that in $k$-$\Vect$, if we have a subspace $W\subseteq V$, then there is an inclusion $i : W \hookrightarrow V$ with $\Im i \cong W$. By \cref{4.4}, the cokernel $\Coker i$ is then $V / \Im i$, but since $\Im i \cong W$, we have that $\Coker i \cong V / W$. This allows us to quotient by any subobject using cokernels. The issue us we do not have a notion of \emph{subobjects} in general categories.
+	The definition of a quotient is inherently dependent on subsets, which do not exist in general in $\Ab $-categories. However, \cref{4.4} allows us to \emph{almost} recharacterize quotients using \emph{cokernels}, which we have already defined in any $\Ab $-category. Note that in $\Vect_{k} $, if we have a subspace $W\subseteq V$, then there is an inclusion $i : W \hookrightarrow V$ with $\Im i \cong W$. By \cref{4.4}, the cokernel $\Coker i$ can be realized as the quotient $V / \Im i$, but since $\Im i \cong W$, we have that $\Coker i \cong V / W$. This allows us to quotient by any subobject using cokernels. The issue then becomes that we do not have a notion of \emph{subobjects} in general categories.
 \end{remark}
 
-The quest for subobjects is not very difficult. In $k$-$\Vect$, every subspace is a kernel of some morphism. In particular, it is the kernel of its \emph{cokernel}. We can actually prove something more general, which will be extremely useful.
+We once again turn to the theory of $k$-vector spaces. In $\Vect_k$, every subspace is a kernel of some morphism. In particular, it is the kernel of its \emph{cokernel}. We can actually prove something more general, which will be extremely useful.
 
 \begin{proposition}\label{4.6}
 	Let $\varphi : V \to W$ be a $k$-linear map. Then the image $\Im \varphi $ is given by the kernel of the cokernel $\Im \varphi \cong \Ker (\coker \varphi )$.
 \end{proposition}
 \begin{proof}
-	The cokernel is the map $W\to W/\Im \varphi $ given by $w\mapsto w+\Im \varphi $, using coset notation. By our knowledge of cosets from standard group theory, the kernel of this map is precisely those $w\in \Im \varphi \subseteq W$. Thus, $\Ker (\coker \varphi )\cong \Im \varphi $.
+	The cokernel is the map $W\to W/\Im \varphi $ given by $w\mapsto w+\Im \varphi $, using coset notation. By our knowledge of cosets from standard group theory, the kernel of this map is precisely $\Im \varphi \subseteq W$. Thus, $\Ker (\coker \varphi )\cong \Im \varphi $.
 \end{proof}
 \begin{corollary}\label{4.7}
 	Let $W\subseteq V$ be a $k$-linear subspace, and $i$ the inclusion map $W\hookrightarrow V$. Then $W \cong \Ker (\coker i)$.
@@ -97,9 +97,7 @@ The quest for subobjects is not very difficult. In $k$-$\Vect$, every subspace i
 	Recall from \cref{4.2} that kernels come with a canonical morphism. This means that there is a morphism $\ker \coker \varphi : \Ker (\coker \varphi ) \to y$. We denote this morphism by $\im \varphi : \Im \varphi  \to y$. Similarly, there is a morphism $\coim \varphi =\coker \ker \varphi : x \to \Coim \varphi $.
 \end{remark}
 
-At this point, we could require that kernels and cokernels exist, and we would be able to define homology. However, there is \emph{one more requirement} of abelian categories. To see what this requirement is, we once again consider $k$-$\Vect$ as motivation.
-
-By \cref{4.7}, subspaces of a $k$-linear space $V$ are precisely kernels in $V$. We would like to categorify this claim, but we haven't fully defined what a subobject should be in an arbitary category. We might think that it could be an image, but it doesn't really make sense to think of the image of \emph{any} morphism as a subobject. In $k$-$\Vect$, subobjects can be thought of as \emph{inclusions}, since every subspace has a canonical inclusion into the ambient space. A quotient map, for example, is absolutely not something we would think of as a subobject.
+By \cref{4.7}, subspaces of a $k$-linear space $V$ are precisely kernels in $V$, which are also precisely images of morphisms into $V$. Na\"ively we might choose to define subobjects in an arbitary category as kernels or images, but this still isn't quite right. It doesn't really make sense to think of the image of \emph{any} morphism as a subobject. A quotient map, for example, is absolutely not something we would think of as a subobject. We need a categorification of the notion of an \emph{inclusion} map.
 
 It will help to broaden our notion of a subobject. We can think of \emph{any} injective map as a subobject. To see why, let $\varphi : V \to W$ be a $k$-linear injective map, and let $i : \Im \varphi  \to W$ be the canonical inclusion. We can then factor $\varphi $ as
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
@@ -108,7 +106,7 @@ V \ar[" \varphi  ", bend left, rr] \ar[" \overline{\varphi }  "', r]  & \Im \var
 where $\overline{\varphi } (v)=\varphi (v)$, viewed as an element of $\Im \varphi $. The important thing to note is that $\overline{\varphi } $ is an \emph{isomorphism}. Injective maps can thus be thought of as identifying a subspace $\Im \varphi $ of the codomain, and then including it into the main space. This is why we can think of injections as subobjects. Conversely, we can think of surjections as \emph{quotients}. There are categorical versions of injections and surjections, which we now review.
 
 \begin{definition}\label{4.10}
-	Let $\mathcal{C} $ be a category. A morphism $f : x \to y$ is said to be \emph{monic} or a \emph{monomorphism} if
+	Let $\mathcal{C} $ be a category. A morphism $f : x \to y$ is said to be \emph{monic} or a \emph{monomorphism} if for any $z\in \mathcal{C} $ and any $\alpha ,\beta : z \to x$,
 	\[
 		f\circ \alpha =f\circ \beta \implies \alpha =\beta 
 	.\]
@@ -119,7 +117,7 @@ where $\overline{\varphi } (v)=\varphi (v)$, viewed as an element of $\Im \varph
 	commutes\footnote{It is convention to say that if there are two parallel arrows $z\rightrightarrows x$, then it is not required for them to be equal in order for the diagram to commute.}, then $\alpha = \beta $.
 \end{definition}
 \begin{definition}\label{4.11}
-	Let $\mathcal{C} $ be a category. A morphism $f : x \to y$ is said to be \emph{epi} or an \emph{epimorphism} if
+	Let $\mathcal{C} $ be a category. A morphism $f : x \to y$ is said to be \emph{epi} or an \emph{epimorphism} if, for any $z\in \mathcal{C} $ and any $\alpha ,\beta : y \to z$,
 	\[
 		\alpha \circ f=\beta \circ f\implies \alpha =\beta 
 	.\]
@@ -131,13 +129,23 @@ where $\overline{\varphi } (v)=\varphi (v)$, viewed as an element of $\Im \varph
 \end{definition}
 
 \begin{proposition}\label{4.12}
-	Let $\varphi : V \to W$ be an injective map. Then it is a monomorphism in $\Set $. If it is $k$-linear and $V,W$ are $k$-vector spaces, then it is a monomorphism in $k$-$\Vect$. Dually, if $\psi : V \to W$ is a surjective map, then it is epi in $\Set $, and if it is $k$-linear, then it is epi in $k$-$\Vect$.
+	Let $\varphi : V \to W$ be a function. Then it is a monomorphism in $\Set $ if and only if it is injective. If it is $k$-linear and $V,W$ are $k$-vector spaces, then it is a monomorphism in $\Vect_k$ if and only if it is injective. Dually, if $\psi : V \to W$ is a surjective map, then it is epi in $\Set $, and if it is $k$-linear, then it is epi in $k$-$\Vect$.
 \end{proposition}
 \begin{proof}
-	Exercise.
+	One can show that if $\varphi $ is injective, then there exists a surjection $\psi : W \to V $ such that $\psi \circ \varphi =1_V$. Then if $\varphi \circ \alpha =\varphi \circ \beta $ for any compatible morphisms $\alpha ,\beta $, then we have
+	\[
+		\alpha =1_V\circ \alpha =\psi \circ \varphi \circ \alpha =\psi \circ \varphi \circ \beta =1_V \circ \beta =\beta 
+	.\]
+	Thus $\varphi $ is a monomorphism. This proof works in both $\Set $ and $\Vect_{k} $, but the converse is different for the different categories.
+
+	In $\Set $, note that an element $v\in V$ is precisely the same as the morphism $\left\{ * \right\} \to V$ given by $*\mapsto v$. Let $v,w : \left\{ * \right\}  \to V$ be elements of $V$. Then if $\varphi (v)=\varphi (w)$, then $\varphi \circ v=\varphi \circ w$. If $\varphi $ is monic, then $v=w$.
+
+	In $\Vect_{k} $, $\left\{ * \right\} $ is the trivial vector space $0$, and the only morphism $0\to V$ is 0. Thus we need a different proof of the converse. Recall from linear algebra that a $k$-linear map $\varphi : V \to W$ is injective if and only if its kernel is trivial. Thus we show that if $\varphi $ is monic, then $\Ker \varphi \cong0$. Consider the inclusion $i : \Ker \varphi \hookrightarrow V$ and the zero morphism $0 : \Ker \varphi  \to V$. Since $\varphi \circ i=0$ and $\varphi \circ 0=0$, and since $\varphi $ is monic, we have $i=0$. The only way for the inclusion of a subspace to be 0 is if $\Ker \varphi \cong 0$.
+
+	The proof that epi $\iff $ surjective is left as an exercise; they follow by dualizing the logic for monic $\iff $ injective.
 \end{proof}
 
-Thus, we should think of monics as identifying subobjects in an arbitrary category, and similarly epis should be quotients. However, we would also like \emph{kernels} to be subobjects in view of \cref{4.7}, and similarly we would like \emph{cokernels} to be quotients. We should thus ask that monics should be kernels and epis should be cokernels\footnote{Recall that when referring to a morphism as a (co)kernel, we are referring to the canonical injection/projection associated to the (co)kernel object.}. This motivates conditions (2,3) of the following definition.
+Thus, we should think of monics as identifying subobjects in an arbitrary category, and similarly epis should be quotients. However, we would also like \emph{kernels} to be subobjects in view of \cref{4.7}, and similarly we would like \emph{cokernels} to be quotients in view of \cref{4.4,4.5}. We should thus ask that monics should be kernels and epis should be cokernels\footnote{Recall that when referring to a morphism as a (co)kernel, we are referring to the canonical injection/projection associated to the (co)kernel object.}. This motivates conditions (2,3) of the following definition.
 
 \begin{definition}[\cite{ml}]\label{4.13}
 	An abelian category is an additive category $\mathcal{A} $ such that
@@ -209,6 +217,6 @@ We close this section with two propositions that will be useful later on, as wel
 \end{proof}
 
 \begin{definition}\label{4.18}
-	Let $(X_{\bullet},d_{\bullet} ) $ be a chain complex of objects in an abelian category. We say $X_{\bullet} $ is \emph{exact} at $i$ if $\ker d_i=\im d_{i-1} $. There are numerous equivalent characterizations of this definition, and we encourage the reader to find some. One useful recharacterization is that the homology (which will be defined in \cref{5.3}) of $X_{\bullet} $ is 0 at $i$. We say $X_{\bullet} $ is \emph{exact} if it has zero homology everywhere.
+	Let $(X_{\bullet},d_{\bullet} ) $ be a chain complex of objects in an abelian category. We say $X_{\bullet} $ is \emph{exact} at $i$ if $\ker d_i=\im d_{i-1} $. There are numerous equivalent characterizations of this definition, and we encourage the reader to find some. One useful recharacterization is that the homology (which will be defined in \cref{5.3}) of $X_{\bullet} $ is 0 at $i$. We say $X_{\bullet} $ is \emph{exact} if it is exact in all degrees.
 \end{definition}
 

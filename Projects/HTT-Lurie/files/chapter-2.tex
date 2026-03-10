@@ -1,0 +1,30 @@
+\chapter{Fibrations of simplicial sets}
+
+There are various important types of fibrations of simplicial sets. This chapter will be devoted to the homotopy theory of these fibrations, especially as they relate to simplicial sets. Most of these definitions were introduced by Andr\'e Joyal.
+
+\begin{definition}[Joyal]\label{2.0.0.1}
+	A morphism $f : X \to S$ of simplicial sets is
+	\begin{itemize}
+		\item a \emph{Kan fibration} if it has the right lifting property with respect to all horn inclusions $\Lambda _i^n \subseteq \Delta ^n$, $0\leq i\leq n$.
+		\item a \emph{left fibration} if it has the right lifting property with respect to all horn inclusions $\Lambda _i^n \subseteq \Delta ^n$, $0\leq i<n$.
+		\item a \emph{right fibration} if it has the right lifting property with respect to all horn inclusions $\Lambda _i^n \subseteq \Delta ^n$, $0<i\leq n$.
+		\item an \emph{inner fibration} if it has the right lifting property with respect to all horn inclusions $\Lambda _i^n \subseteq \Delta ^n$, $0<i<n$.
+		\item \emph{anodyne} if it has the left lifting property with respect to all Kan fibrations.
+		\item \emph{left anodyne} if it has the left lifting property with respect to all left fibrations.
+		\item \emph{right anodyne} if it has the left lifting property with respect to all right fibrations.
+		\item \emph{inner anodyne} if it has the left lifting property with respect to all inner fibrations.
+	\end{itemize}
+\end{definition}
+
+We also remark the following, which come from the classical homotopy theory of simplicial sets. Trivial (Kan) fibrations are precisely those that lift on the right against all boundary inclusions $\partial \Delta ^n \subseteq \Delta ^n$, and those maps that lift on the left against trivial fibrations are called (Kan) cofibrations.
+
+In this chapter, we begin by studying left fibrations, which will lead us to a more precise formulation of our equivalence between simplicial categories and quasi-categories. We will then explore the more general notion of (co)Cartesian fibrations and inner fibrations.
+
+\begin{remark}\label{2.0.0.2}
+	Quillen's model structure for $\sSet $ takes Kan fibrations as the fibrations, Kan cofibrations as the cofibrations, trivial Kan fibrations as the trivial fibrations, and anodyne maps as the trivial cofibrations.
+\end{remark}
+\begin{remark}\label{2.0.0.3}
+	Since left fibrations (left anodyne maps) are dual to right fibrations (right anodyne maps) in the sense that $S\to T$ is a left fibration (left anodyne) if and only if $S^{\mathrm{op}} \to T^{\mathrm{op}} $ is a right fibration (right anodyne), we confine our results to left fibrations, and invoke duality for the same results on the right.
+\end{remark}
+
+\input{files/chapter-2/section-1.tex}

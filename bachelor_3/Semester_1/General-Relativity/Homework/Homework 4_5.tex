@@ -1,0 +1,539 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 4}
+\begin{document}
+\makeproblem
+
+\section{Problem 1}
+\begin{problem}\label{1.1}
+	The metric for $S^3$ is
+	\[
+		\mathrm{d} s^2=\mathrm{d} \theta _1^2+\sin ^2\theta _1\left( \mathrm{d} \theta _2^2+\sin ^2\theta _2\mathrm{d} \theta _3^2 \right) 
+	.\]
+	Compute $R$.
+\end{problem}
+\noindent \textbf{Solution.} The metric is $g_{\mu \nu } =\operatorname{diag} \left( 1, \sin ^2\theta _1,\sin ^2\theta _1 \sin ^2\theta _2 \right) $. Thus $g^{\mu \nu } =\operatorname{diag} \left( 1, \csc ^2\theta _1, \csc ^2\theta _1 \csc ^2\theta _2 \right) $. The Ricci scalar is given by $R=g^{\mu \nu } R_{\mu \nu } $. The Ricci tensor is given by
+\[
+	R_{\mu \nu } =R^\lambda \!_{\mu \lambda \nu } =\partial_\lambda \Gamma ^\lambda_{\nu \mu } -\partial _\nu \Gamma ^\lambda _{\lambda \mu } +\Gamma ^\lambda _{\lambda \alpha } \Gamma ^\alpha _{\nu \mu } -\Gamma ^\lambda _{\nu \alpha } \Gamma ^\alpha _{\lambda \mu } 
+.\]
+It might be helpful to compute the Christoffel symbol. We do this with the action principal. We have
+\[
+	\mathcal{L} =g_{\mu \nu } \frac{\mathrm{d}\theta_\mu }{\mathrm{d}\tau } \frac{\mathrm{d}\theta _\nu }{\mathrm{d}\tau } =g_{\mu \mu } \left( \frac{\mathrm{d}\theta _\mu }{\mathrm{d}\tau }  \right) ^2=\dot{\theta}_1^2 + \sin ^2\theta _1 \dot{\theta } _2^2 + \sin ^2\theta _1 \sin ^2\theta _2 \dot{\theta } _3^2
+.\]
+This satisfies the Euler-Lagrange equation
+\[
+	\frac{\mathrm{d}}{\mathrm{d}\tau } \frac{\partial \mathcal{L} }{\partial \dot{\theta } _\mu } - \frac{\partial \mathcal{L} }{\partial \theta _\mu } =0
+.\]
+Note that I use the symbol $\tau $ for proper time even though there is no time because I didn't realize I should probably use $\sigma $ for proper distance like last homework and have written to much to change it now. We compute the partials:
+\[
+	\frac{\partial \mathcal{L} }{\partial \theta _1} =2 \sin \theta _1 \cos \theta _1 \dot{\theta } _2^2 + 2 \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \dot{\theta } _3^2
+\]
+\[
+	\frac{\partial \mathcal{L} }{\partial \theta _2} =2 \sin ^2 \theta _1 \sin \theta _2 \cos \theta _2 \dot{\theta } _3^2
+\]
+\[
+	\frac{\partial \mathcal{L} }{\partial \theta _3} =0
+\]
+\[
+	\frac{\partial \mathcal{L} }{\partial \dot{\theta } _1} =2 \dot{\theta } _1
+\]
+\[
+	\frac{\partial \mathcal{L} }{\partial \dot{\theta } _2} =2 \sin ^2\theta _1 \dot{\theta } _2
+\]
+\[
+	\frac{\partial \mathcal{L} }{\partial \dot{\theta } _3} =2 \sin ^2\theta _1 \sin ^2\theta _2 \dot{\theta } _3
+.\]
+We now compute the relevant $\tau $-derivatives:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}\tau } \frac{\partial \mathcal{L} }{\partial \dot{\theta } _1} =2\ddot{\theta }_1
+\]
+\[
+	\frac{\mathrm{d}}{\mathrm{d}\tau } \frac{\partial \mathcal{L} }{\partial \dot{\theta } _2} =4 \sin \theta _1 \cos \theta _1 \dot{\theta } _1 \dot{\theta } _2 + 2 \sin ^2\theta _1 \ddot{\theta }_2
+\]
+\[
+	\frac{\mathrm{d}}{\mathrm{d}\tau } \frac{\partial \mathcal{L} }{\partial \dot{\theta } _3} =4 \sin \theta _1 \cos \theta _1 \sin ^2 \theta _2 \dot{\theta } _1 \dot{\theta } _3 + 2 \sin ^2\theta _1\left(  2\sin \theta _2 \cos \theta _2 \dot{\theta } _2 \dot{\theta } _3 + \sin ^2\theta _2 \ddot{\theta }_3 \right) 
+\]
+\[
+	= 4 \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \dot{\theta } _1 \dot{\theta } _3 + 4 \sin ^2\theta _1 \sin \theta _2 \cos \theta _2 \dot{\theta } _2 \dot{\theta } _3 + 2 \sin ^2\theta _1 \sin ^2 \theta _2 \ddot{\theta } _3
+.\]
+This yields the Euler-Lagrange equations
+\[
+	2 \ddot{\theta } _1 - 2 \sin \theta _1 \cos \theta _1 \dot{\theta } _2^2 - 2 \sin \theta _1 \cos \theta _1 \sin ^2 \theta _2 \dot{\theta } _3^2 = 0
+\]
+\[
+	4 \sin \theta _1 \cos \theta _1 \dot{\theta } _1 \dot{\theta } _2 + 2 \sin ^2\theta _1 \ddot{\theta } _2 - 2 \sin ^ 2\theta _1 \sin \theta _2 \cos \theta _2 \dot{\theta } _3^2 = 0
+\]
+\[
+	4 \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \dot{\theta } _1 \dot{\theta } _3 + 4 \sin ^2\theta _1 \sin \theta _2 \cos \theta _2 \dot{\theta } _2 \dot{\theta } _3 + 2 \sin ^2\theta _1 \sin ^2 \theta _2 \ddot{\theta } _3 = 0
+.\]
+We must rearrange each of these equations to recover the geodesic equation
+\[
+	\frac{\mathrm{d}^2\theta _\mu }{\mathrm{d}\tau ^2} + \Gamma^\mu_{\alpha \beta } \frac{\mathrm{d}\theta _\alpha }{\mathrm{d}\tau } \frac{\mathrm{d}\theta _\beta }{\mathrm{d}\tau } 
+,\]
+from which we can then read off the Christoffel symbols.
+
+Every single term in every single Euler-Lagrange equation has a factor of 2, so we divide out by that in each equation. We start with $\mu =1$, which now reads
+\[
+	\frac{\mathrm{d}^2\theta _1}{\mathrm{d}\tau ^2} + \left( - \sin \theta _1 \cos \theta _1 \left( \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau }  \right) ^2 - \sin \theta _1 \cos \theta _1 \sin ^2 \theta _2 \left( \frac{\mathrm{d}\theta _3}{\mathrm{d}\tau }  \right) ^2 \right) 
+.\]
+From this we see that
+\[
+	\Gamma ^1_{\alpha \beta } =\begin{pmatrix}
+	0 & 0 & 0 \\
+	0 & -\sin \theta _1 \cos \theta _1 & 0 \\
+	0 & 0 & -\sin \theta _1 \cos \theta _1 \sin ^2\theta _2
+	\end{pmatrix}
+.\]
+For the second equation, divide out by $\sin ^2 \theta _1$ to obtain
+\[
+	\frac{\mathrm{d}^2\theta _2}{\mathrm{d}\tau ^2} + \left( \frac{2 \cos \theta _1}{\sin \theta _1} \frac{\mathrm{d}\theta _1}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } -  \sin \theta _2 \cos \theta _2 \left( \frac{\mathrm{d}\theta _3}{\mathrm{d}\tau }  \right) ^2\right) =0
+.\]
+The factor of 2 in the cotangent term comes from the fact that
+\[
+	\frac{\mathrm{d}\theta _1}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } =\frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _1}{\mathrm{d}\tau } ,
+\]
+meaning that this term really represents
+\[
+	\cot \theta _1 \frac{\mathrm{d}\theta _1}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } + \cot \theta _1 \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _1}{\mathrm{d}\tau } 
+.\]
+We can see this also by symmetry of the lower indices in $\Gamma ^\mu _{\alpha \beta } $. This yields
+\[
+	\Gamma ^2_{\alpha \beta } =\begin{pmatrix}
+	0 & \cot \theta _1  & 0 \\
+	\cot \theta _1  & 0 & 0 \\
+	0 & 0 & - \sin \theta _2 \cos \theta _2
+	\end{pmatrix}
+.\]
+For the final equation, we have
+\[
+	\sin ^2\theta _1 \sin ^2\theta _2 \frac{\mathrm{d}^2\theta _3}{\mathrm{d}\tau ^2} + \left( 2 \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \frac{\mathrm{d}\theta_1}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _3}{\mathrm{d}\tau } + 2 \sin ^2\theta _1 \sin \theta _2 \cos \theta _2 \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _3}{\mathrm{d}\tau }  \right) =0
+.\]
+Dividing out by $\sin ^2\theta _1 \sin ^2\theta _2$ yields
+\[
+	\frac{\mathrm{d}^2\theta _3}{\mathrm{d}\tau ^2} + \left( 2 \cot \theta _1 \frac{\mathrm{d}\theta _1}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _3}{\mathrm{d}\tau } + 2 \cot \theta _2 \frac{\mathrm{d}\theta _2}{\mathrm{d}\tau } \frac{\mathrm{d}\theta _3}{\mathrm{d}\tau }  \right) 
+.\]
+We then obtain by the same logic as before that
+\[
+	\Gamma ^3_{\alpha \beta } =\begin{pmatrix}
+	0 & 0 &  \cot \theta _1 \\
+	0 & 0 & \cot \theta _2 \\
+	\cot \theta _1 & \cot \theta _2 & 0
+	\end{pmatrix}
+.\]
+
+Now return to our computation of $R_{\mu \nu } $. We must compute the four terms of the equation
+\[
+	R^\lambda \!_{\mu \lambda \nu } = \partial _\lambda \Gamma ^\lambda _{\nu \mu } -\partial _\nu \Gamma ^\lambda _{\lambda \mu } +\Gamma ^\lambda _{\lambda \alpha } \Gamma ^\alpha _{\nu \mu } - \Gamma ^\lambda _{\nu \alpha } \Gamma ^\alpha _{\lambda \mu } 
+.\]
+We can simplify this computation by noting that for our purposes of comptuing $R$, we need not compute the entire Ricci tensor. Since $g_{\mu \nu } =g_{\mu \mu }$ since the metri is diagonal, we have
+\[
+	R = g^{\mu \nu } R_{\mu \nu } =g^{\mu \mu } R_{\mu \mu } 
+.\]
+We thus only need to compute the diagonal components, so we need only compute
+\[
+	R_{\mu \mu } =R^\lambda\!_{\mu \lambda \mu } =\partial _\lambda \Gamma ^\lambda _{\mu \mu } -\partial _\mu \Gamma ^\lambda _{\lambda \mu } +\Gamma ^\lambda _{\lambda \alpha } \Gamma ^\alpha _{\mu \mu } -\Gamma ^\lambda _{\mu \alpha } \Gamma ^\alpha _{\lambda \mu } 
+.\]
+
+Start by taking $\mu =1$. We compute each term independently. First the terms with partials:
+\[
+	\partial _\lambda  \Gamma ^\lambda_{11} =\frac{\partial }{\partial \theta _1} 0 + \frac{\partial }{\partial \theta _2} (-\sin \theta _1 \cos \theta _1) + \frac{\partial }{\partial \theta _3} \left( - \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \right)  = 0
+\]
+\[
+	\partial_1 \Gamma ^\lambda_{\lambda 1} =\frac{\partial }{\partial \theta _1} \Gamma ^1_{11} + \frac{\partial }{\partial \theta _1} \Gamma ^2_{21} + \frac{\partial }{\partial \theta _1} \Gamma ^3_{31} = 0 + 2\frac{\partial }{\partial \theta _1} \cot \theta _1 = -2\csc ^2 \theta _1
+.\]
+This next term follows since $\Gamma^\alpha  _{11} =0$ for all $\alpha $:
+\[
+	\Gamma ^\lambda _{\lambda \alpha } \Gamma ^\alpha _{11} =0.
+\]
+Finally,
+\[
+	\Gamma ^\lambda _{1\alpha } \Gamma ^\alpha _{\lambda 1} =\Gamma^1_{11} \Gamma ^1_{11} + \Gamma ^1_{12} \Gamma ^2_{11} + \Gamma ^1_{13} \Gamma ^3_{11} + \Gamma ^2_{11} \Gamma ^1_{21} +\Gamma ^2_{12} \Gamma ^2_{21} +\Gamma ^2_{13} \Gamma ^3_{21} +\Gamma ^3_{11} \Gamma ^1_{31} +\Gamma ^3_{12} \Gamma ^2_{31} +\Gamma ^3_{13} \Gamma ^3_{31} 
+\]
+\[
+	=0+0+0+0+\cot ^2\theta _1+0+0+0+\cot ^2\theta _1 = 2 \cot ^2\theta _1
+.\]
+Therefore,
+\[
+	R_{11} = 0 + 2 \csc ^2\theta _1 + 0 - 2 \cot ^2 \theta _1 = 2\left( \csc ^2\theta _1 - \cot ^2 \theta _1 \right) =2\left( \frac{1}{\sin ^2\theta _1} -\frac{\cos ^2\theta _1}{\sin ^2\theta _1}  \right) =2\frac{\sin ^2\theta _1}{\sin ^2\theta _1} =2
+.\]
+
+Next take $\mu =2$. We once again start with the partials:
+\[
+	\partial _\lambda \Gamma^\lambda _{22} =\frac{\partial }{\partial \theta _1} \Gamma ^1_{22} + \frac{\partial }{\partial \theta _2} \Gamma ^2_{22} + \frac{\partial }{\partial \theta _3} \Gamma ^3_{22} = \frac{\partial }{\partial \theta _1} \left( - \sin \theta _1 \cos \theta _1 \right) = \sin ^2\theta _1 - \cos ^2\theta _1
+\]
+\[
+	\partial _2\Gamma ^\lambda _{\lambda 2} =\frac{\partial }{\partial \theta _2} \Gamma ^1_{12} + \frac{\partial }{\partial \theta _2} \Gamma ^2_{22} + \frac{\partial }{\partial \theta _2} \Gamma ^3_{32} = \frac{\partial }{\partial \theta _2} \cot \theta _2 = -\csc ^2 \theta _2
+.\]
+Since $\Gamma ^\alpha _{22} $ is nonzero only when $\alpha =1$, the third term is once again simplified to
+\[
+	\Gamma^\lambda _{\lambda 1} \Gamma ^1_{22} =-\sin \theta _1 \cos \theta _1 \left( \Gamma ^1_{11} +\Gamma ^2_{21} +\Gamma ^3_{31}  \right) =-\sin \theta _1 \cos \theta _1\left( \cot \theta _1 + \cot \theta _1 \right) =-2 \sin \theta _1 \cos \theta _1 \frac{\cos \theta _1}{\sin \theta _1}
+\]
+\[
+	 =-2 \cos ^2\theta _1
+.\]
+\[
+	\Gamma ^\lambda_{2\alpha } \Gamma ^\alpha _{\lambda 2}=\Gamma ^1_{21}\Gamma ^1_{12} +\Gamma ^1_{22} \Gamma ^2_{12} +\Gamma ^1_{23} \Gamma ^3_{12} +\Gamma ^2_{21} \Gamma ^1_{22} +\Gamma ^2_{22} \Gamma ^2_{22} +\Gamma ^2_{23} \Gamma ^3_{22} +\Gamma ^3_{21} \Gamma ^1_{32} +\Gamma ^3_{22} \Gamma ^2_{32} +\Gamma ^3_{23} \Gamma ^3_{32} 
+\]
+\[
+	=0+-\sin \theta _1 \cos \theta _1 \cot \theta _1+0-\cot \theta _1 \sin \theta _1 \cos \theta _1+0+0+0+0+\cot ^2 \theta _2
+\]
+\[
+	=\cot ^2\theta _2 - 2 \sin \theta _1 \cos \theta _1 \cot \theta _1=\cot ^2\theta _2 - 2 \cos ^2\theta _1
+.\]
+We then have
+\[
+	R_{22} =\sin ^2\theta _1-\cos ^2\theta _1 + \csc ^2\theta _2 - 2 \cos ^2\theta _1 - \cot ^2\theta _2 + 2 \cos ^2\theta _1= \sin ^2\theta _1 - \cos ^2\theta _1 + \frac{1}{\sin ^2\theta _2} -\frac{\cos ^2\theta _2}{\sin^2\theta _2} 
+\]
+\[
+	=1 - \cos ^2\theta _1 + \sin ^2\theta _1 = 2 \sin ^2\theta _1
+.\]
+
+Finally, take $\mu =3$.
+\[
+	\partial _\lambda \Gamma ^\lambda _{33} =\frac{\partial }{\partial \theta _1} \Gamma ^1_{33} +\frac{\partial }{\partial \theta _2} \Gamma ^2_{33} +\frac{\partial }{\partial \theta _3} \Gamma ^3_{33} =-\frac{\partial }{\partial \theta _1} \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 - \frac{\partial }{\partial \theta _2} \sin \theta _2 \cos \theta _2
+\]
+\[
+	=-\sin ^2\theta _2\left( \cos ^2\theta _1 - \sin ^2\theta _1 \right) - \left( \cos ^2\theta _2 - \sin ^2\theta _2 \right)
+.\]
+Because the Christoffels have no $\theta _3$-dependence,
+\[
+	\partial _3\Gamma ^\lambda _{\lambda 3} \frac{\partial }{\partial \theta _3} \Gamma ^1_{13} + \frac{\partial }{\partial \theta _3} \Gamma ^2_{23} + \frac{\partial }{\partial \theta _3} \Gamma ^3_{33} =0
+.\]
+For the next term, note that once again $\Gamma _{33} ^\alpha \neq 0$ if and only if $\alpha =1$ or 2, so it reduces to
+\[
+	\Gamma ^\lambda _{\lambda 1} \Gamma ^1_{33} =-\sin \theta _1 \cos \theta _1 \sin ^2\theta _2\left( \Gamma^1_{11} +\Gamma ^2_{21} +\Gamma ^3_{31}  \right) =-2 \sin \theta _1 \cos \theta _1 \cot \theta _1 \sin ^2\theta _2
+\]
+\[
+	 = -2 \cos ^2\theta _1 \sin ^2\theta _2
+\]
+and
+\[
+	\Gamma ^\lambda _{\lambda 2} \Gamma ^2_{33} =- \sin \theta _2 \cos \theta _2\left( \Gamma^1_{12} +\Gamma^2_{22} +\Gamma ^3_{32}  \right) =- \sin \theta _2 \cos \theta _2 \cot \theta _2=-\cos ^2\theta _2
+.\]
+Finally,
+\[
+	\Gamma ^\lambda _{3\alpha } \Gamma ^\alpha _{\lambda 3} =\Gamma ^1_{31} \Gamma ^1_{13} +\Gamma ^1_{32} \Gamma ^2_{13} +\Gamma ^1_{33} \Gamma ^3_{13} +\Gamma ^2_{31} \Gamma ^1_{23} +\Gamma ^2_{32} \Gamma ^2_{23} +\Gamma ^2_{33} \Gamma ^3_{23} +\Gamma ^3_{31} \Gamma ^1_{33} +\Gamma ^3_{32} \Gamma ^2_{33} +\Gamma ^3_{33} \Gamma ^3_{33} 
+\]
+\[
+	=0+0+\Gamma ^1_{33} \Gamma ^3_{13} +0+0+\Gamma ^2_{33} \Gamma ^3_{23} +\Gamma ^3_{31} \Gamma ^1_{33} +\Gamma ^3_{32} \Gamma ^2_{33} +0
+\]
+\[
+	=-\sin \theta _1 \cos \theta_1 \sin ^2\theta _2 \cot \theta _1 - \sin \theta _2 \cos \theta _2 \cot \theta _2 - \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \cot \theta _1 - \sin \theta _2 \cos \theta _2 \cot \theta _2
+\]
+\[
+	=-2\left( \sin \theta _1 \cos \theta _1 \sin ^2\theta _2 \cot \theta _1 + \sin \theta _2 \cos \theta _2 \cot \theta _2 \right) =-2\left( \cos ^2\theta _1 \sin ^2\theta _2 + \cos ^2\theta _2 \right) 
+.\]
+We now have
+\[
+	R_{33} =-\sin ^2\theta _2\left( \cos ^2\theta _1-\sin ^2\theta _1 \right) -\left( \cos ^2\theta _2-\sin ^2\theta _2 \right) -2 \cos ^2\theta _1 \sin ^2\theta _2 - \cos ^2\theta _2+2\left( \cos ^2\theta _1 \sin ^2\theta _2+\cos ^2\theta _2 \right) 
+\]
+\[
+	=-\sin ^2\theta _2 \cos ^2\theta _1 + \sin ^2\theta _2 \sin ^2\theta _1 - \cos ^2\theta _2 + \sin ^2\theta _2 - 2 \cos ^2\theta _1 \sin ^2\theta _2 - \cos ^2\theta _2 + 2 \cos ^2\theta _1 \sin ^2\theta _2 + 2 \cos ^2\theta _2
+\]
+\[
+	=-\cos ^2\theta _1 \sin ^2\theta _2 + \sin ^2\theta _1 \sin ^2\theta _2 + \sin ^2\theta _2 = \sin ^2\theta _2\left( 1 - \cos ^2\theta _1 \right) + \sin ^2\theta _1 \sin ^2\theta _2
+\]
+\[
+	=2 \sin ^2\theta _1 \sin ^2\theta _2
+.\]
+
+We now have
+\[
+	R_{\mu \mu } = \left( 2, 2 \sin ^2\theta _1, 2 \sin ^2\theta _1 \sin ^2\theta _2 \right) =2\left( 1, \sin ^2\theta _1, \sin ^2\theta _1 \sin ^2\theta _2 \right) =2g_{\mu \mu } 
+.\]
+It follows that
+\[
+	R = g^{\mu \mu } R_{\mu \mu } =g^{\mu \mu } 2g_{\mu \mu } =2 + 2 + 2 = 6
+.\]
+Therefore, $R=6$.
+
+\begin{problem}
+	Now consider an expanding 3-spherical universe
+	\[
+		\mathrm{d} s^2 = - \mathrm{d} t^2 + a^2(t) \left( \mathrm{d} \theta _1^2 + \sin ^2\theta _1  \left( \mathrm{d} \theta _2^2 + \sin ^2\theta _2 \mathrm{d} \theta _3^2 \right) \right) 
+	.\]
+	Compute the Ricci scalar.
+\end{problem}
+\noindent \textbf{Solution.} To simplify notation, we use the convention that roman letters as indices $i,j,k$ run over spatial coordiantes $\theta _1,\theta _2,\theta _3$, and greek letters $\mu ,\nu ,\rho $ run over spacetime coordinates $t,\theta _1,\theta _2,\theta _3$. Write $h_{ij} $ for the metric used in \cref{1.1}. Then $g_{ij} =a^2(t) h_{ij} $, and
+\[
+	\mathrm{d} s^2 = g_{\mu \nu } \mathrm{d} x^\mu \mathrm{d} x^\nu =-\mathrm{d} t^2 + a^2(t) h_{ij} \mathrm{d} \theta _i \mathrm{d} \theta _j
+.\]
+Since the metric is still diagonal, we can use the same simplification as last time and only compute $R_{\mu \mu } $. It would be nice if we could use the result of \cref{1.1} to simplify the problem, so write
+\[
+	R_{\mu \mu } =R_{tt} +R_{ii} 
+.\]
+We will start by writing
+\[
+	R_{ii} =\partial _\lambda \Gamma ^\lambda _{ii} -\partial _i \Gamma ^\lambda _{\lambda i}+\Gamma ^\lambda _{\lambda \alpha } \Gamma ^\alpha _{ii} -\Gamma ^\lambda _{i \alpha } \Gamma ^\alpha _{\lambda i} 
+\]
+in terms of the Ricci tensor from \cref{1.1} $2h_{ii} $, which we will denote by $K_{ii} $. It will be useful to split this into a spatial component which ranges only over spatial coordinates, and then bundle the time-dependent terms into a different component. The relationship will then become more clear. We have
+\begin{align*}
+	R_{ii} &=\partial _t\Gamma ^t_{ii} -\partial _i\Gamma ^t_{ti} +\Gamma ^t_{t\alpha } \Gamma ^\alpha _{ii} -\Gamma ^t_{i\alpha } \Gamma ^\alpha _{ti} +\partial _j\Gamma ^j_{ii} -\partial _i\Gamma^j_{ji} +\Gamma ^j_{j\alpha } \Gamma ^\alpha _{ii} -\Gamma ^j_{i\alpha } \Gamma ^\alpha _{ji} \\
+	       &=\partial _t\Gamma ^t_{ii} -\partial _i\Gamma ^t_{ti} +\Gamma ^t_{t\alpha } \Gamma ^\alpha _{ii} -\Gamma ^t_{i\alpha } \Gamma ^\alpha _{ti} +\partial _j\Gamma ^j_{ii} -\partial _i\Gamma^j_{ji} +\Gamma ^j_{jt} \Gamma ^t_{ii}+\Gamma ^j_{jk} \Gamma ^k _{ii} -\Gamma ^j_{it} \Gamma ^t_{ji}-\Gamma ^j_{ik} \Gamma ^k_{ji}
+.\end{align*}
+Define the time component
+\[
+	T_{ii} =\partial _t\Gamma ^t_{ii} -\partial _i\Gamma ^t_{ti} +\Gamma _{t\alpha } ^t\Gamma _{ii} ^\alpha -\Gamma ^t_{i\alpha } \Gamma ^\alpha _{ti}  + \Gamma ^j_{jt} \Gamma ^t_{ii} -\Gamma _{it} ^j\Gamma _{ji} ^t
+\]
+and the space component
+\[
+	S_{ii} =\partial _j\Gamma ^j_{ii} -\partial _i\Gamma ^j_{ji} +\Gamma ^j_{jk} \Gamma ^k_{ii} -\Gamma ^j_{ik} \Gamma ^k_{ij} 
+.\]
+The form of the space component looks quite a bit like the Ricci tensor $K_{ii} $ from \cref{1.1}. To find the exact relationship, we use the coordinate invariant definition of the Christoffel symbol
+\[
+	\Gamma^\rho _{\alpha \beta } =\frac{1}{2} g^{\sigma \rho } \left( \frac{\partial g_{\alpha \sigma } }{\partial x^\beta } +\frac{\partial g_{\beta \sigma } }{\partial x^\alpha } -\frac{\partial g_{\alpha \beta } }{\partial x^\sigma }  \right) 
+.\]
+Using $g_{ij} =a^2(t)h_{ij} $ and $g^{ij} =a^{-2} (t) h^{ij} $, and noting that $a^{-2} (t)$ has no spatial dependence and thus factors out of the partial derivatives,
+\[
+	\Gamma ^i_{jk} =\frac{1}{2} g^{\ell i} \left( \frac{\partial g_{j\ell } }{\partial x^k} +\frac{\partial g_{k\ell } }{\partial x^j} -\frac{\partial g_{jk} }{\partial x^\ell }  \right) =\frac{1}{2} \frac{h^{ij} }{a^2(t)} \left( a^2(t) \frac{\partial h_{j\ell } }{\partial x^k} +a^2(t) \frac{\partial h_{k\ell } }{\partial x^j} -a^2(t) \frac{\partial h_{jk} }{\partial x^\ell }  \right) 	
+\]
+\[
+	=\frac{1}{2} h^{ij} \left( \frac{\partial h_{j\ell } }{\partial x^k} +\frac{\partial h_{k\ell } }{\partial x^j} -\frac{\partial h_{jk} }{\partial x^\ell }  \right) 
+.\]
+Note that this is exactly the same as the Christoffel symbol from the metric in \cref{1.1}, so we immediately see that $S_{ii} =K_{ii} =2h_{ii} $. We now need only compute $T_{ii} $ and $R_{tt} $.
+
+We still need to compute some new Christoffel symbols, but since we only need to compute a few of them, we will not set up all of the Euler-Lagrange equations. It will be faster to use Euler-Lagrange for $\Gamma ^t_{\mu \nu } $, and then to compute the remaining components directly from the definition. We have
+\[
+	\mathcal{L} =g_{\mu \nu } \frac{\mathrm{d}x^\mu }{\mathrm{d}\tau } \frac{\mathrm{d}x^\nu }{\mathrm{d}\tau } =-\dot{t} ^2 + a^2(t) \dot{\theta } _1^2 + a^2(t) \sin ^2\theta _1 \dot{\theta } _2^2 + a^2(t) \sin ^2\theta _1 \sin ^2\theta _2 \dot{\theta } _3^2
+.\]
+Then
+\[
+	\frac{\partial \mathcal{L} }{\partial \dot{t} } =-2 \dot{t}  \implies \frac{\mathrm{d}}{\mathrm{d}\tau } \frac{\partial \mathcal{L} }{\partial \dot{t} } =-2 \ddot{t} 
+,\]
+\[
+	\frac{\partial \mathcal{L} }{\partial t} =\frac{\partial }{\partial t} \left( - \dot{t} ^2 + a^2(t)\left(h_{ii} \dot{\theta } _i^2 \right)  \right) =2 a \dot{a} h_{ii} \dot{\theta } _i^2
+.\]
+Divding out by $-2$, the geodesic equation then takes the form
+\[
+	\frac{\mathrm{d}^2t}{\mathrm{d}\tau ^2} +a \dot{a} h_{ii} \left( \frac{\mathrm{d}\theta _i}{\mathrm{d}\tau }  \right) ^2=0
+.\]
+The Christoffel symbol is thus
+\[
+	\Gamma ^t_{ij} =\Gamma ^t_{ii} =a \dot{a} h_{ii} 
+.\]
+In particular,
+\[
+	\Gamma ^t_{tt} =0,\qquad \Gamma ^t_{t\alpha } =\Gamma ^t_{tt} =0,\qquad \Gamma ^t_{i\alpha } =\Gamma ^t_{ii},\qquad \Gamma ^t_{ii} =a \dot{a} h_{ii} 
+.\]
+This will simplify our computation of the remaining components of the Ricci tensor. For instance, the time component
+\[
+	T_{ii} =\partial _t\Gamma ^t_{ii} -\partial _i\Gamma ^t_{ti} +\Gamma ^t_{t\alpha } \Gamma ^\alpha _{ii} -\Gamma ^t_{i\alpha } \Gamma ^\alpha _{ti} +\Gamma ^j_{jt} \Gamma ^t_{ii} -\Gamma ^j_{it} \Gamma ^t_{ji} 
+\]
+simplifies:
+\[
+	\partial_t\Gamma ^t_{ii} =\partial _t a \dot{a} h_{ii} =\left( \dot{a} ^2+a \ddot{a}  \right) h_{ii} 
+\]
+\[
+	\partial _i\Gamma ^t_{ti} =0
+\]
+\[
+	\Gamma ^t_{t\alpha } \Gamma ^\alpha _{ii}=0
+\]
+\[
+	\Gamma ^t_{i\alpha } \Gamma ^\alpha _{ti} = \Gamma ^t_{ii} \Gamma ^i_{ti} =a \dot{a} h_{ii}\Gamma ^i_{ti}  
+\]
+\[
+	\Gamma ^j_{jt} \Gamma ^t_{ii} =\Gamma ^j_{jt} a \dot{a} h_{ii} 
+\]
+\[
+	\Gamma ^j_{it} \Gamma ^t_{ji} =\Gamma ^i_{it} \Gamma ^t_{ii} = \Gamma ^i_{it} a \dot{a} h_{ii} 
+.\]
+We then have
+\[
+	T_{ii} = \left( \dot{a} ^2+a \ddot{a}  \right) h_{ii} -a \dot{a} h_{ii} \Gamma ^i_{ti} +\Gamma ^j_{jt} a \dot{a} h_{ii} - \Gamma ^i_{it} a \dot{a} h_{ii} 
+\]
+\[
+	=\left( \dot{a} ^2 + a \ddot{a}  \right) h_{ii} + a \dot{a} h_{ii} \left( \Gamma ^j_{jt} -2\Gamma ^i_{it}  \right) 
+.\]
+We now need to compute the three components of the Christoffel symbol $\Gamma ^i_{it} $, then plug them in and sum over $j$. We can compute these directly. Using the definition of the Christoffel symbol,
+\[
+	\Gamma ^i_{ti} =\frac{1}{2} g^{\sigma i} \left( \frac{\partial g_{t\sigma } }{\partial x^i} +\frac{\partial g_{i\sigma } }{\partial x^t} -\frac{\partial g_{ti} }{\partial x^\sigma }  \right) 
+.\]
+Because $g_{\mu \nu } $ is diagonal, $g_{ti} =0$, so the final derivative vanishes. We also see that $g^{ti} $ vanishes, so we force $\sigma =j$ to only range over spatial coordinates. We then see by again applying diagonal-nes of $g_{\mu \nu } $ that
+\[
+	\Gamma ^i_{ti} =\frac{1}{2} g^{ji} \left( \frac{\partial g_{tj} }{\partial x^i} +\frac{\partial g_{ij} }{\partial x^t}  \right) =\frac{1}{2} g^{ji} \frac{\partial g_{ij} }{\partial x^t} = \frac{1}{2} g^{ii} \frac{\partial g_{ii} }{\partial x^t} =\frac{1}{2} \frac{h^{ii} }{a^2(t)} h_{ii} \frac{\partial }{\partial t} a^2(t)=\frac{1}{2} \frac{2a \dot{a} }{a^2} =\frac{\dot{a} }{a}
+.\]
+Then summing over $j$ yields
+\[
+	T_{ii} =\left( \dot{a} ^2 + a \ddot{a}  \right) h_{ii} + a \dot{a} h_{ii} \left( \frac{3 \dot{a} }{a} -\frac{2 \dot{a} }{a}  \right) = \left( \dot{a} ^2 + a \ddot{a}  \right) h_{ii} + \dot{a} ^2 h_{ii} = \left( 2 \dot{a} ^2 + a \ddot{a}  \right) h_{ii} 
+.\]
+We therefore have that
+\[
+	R_{ii} =T_{ii} +S_{ii} =\left( 2 \dot{a} ^2+a \ddot{a}  \right) h_{ii} +2h_{ii} =\left( 2+2 \dot{a} ^2 + a \ddot{a}  \right) h_{ii} 
+.\]
+We can then compute the space components of the Ricci scalar:
+\[
+	g^{ii} R_{ii} =a^{-2} h^{ii} \left( 2 + 2 \dot{a} ^2 + a \ddot{a}  \right) h_{ii} =3a^{-2}\left( 2 + 2\dot{a}^2 + a\ddot{a}  \right) =\frac{6}{a^2} +\frac{6 \dot{a} ^2}{a^2} +\frac{3 \ddot{a} }{a} 
+.\]
+Finally we compute the time component $R_{tt} $, which is given by
+\[
+	R_{tt} =\partial _\lambda \Gamma ^\lambda _{tt} -\partial _t \Gamma ^\lambda _{\lambda t} +\Gamma ^\lambda _{\lambda \alpha } \Gamma ^\alpha _{tt} -\Gamma ^\lambda _{t\alpha } \Gamma ^\alpha _{\lambda t} 
+.\]
+We can simplify this fairly easily. First, since $g_{tt} =-1$, all of its partials vanish, meaning
+\[
+	\Gamma^\lambda _{tt} =\frac{1}{2} g^{\sigma \lambda } \left( \frac{\partial g_{t\sigma } }{\partial t} +\frac{\partial g_{t\sigma } }{\partial t} -\frac{\partial g_{tt} }{\partial x^\sigma }  \right) =0
+.\]
+This simplifies it down to
+\[
+	R_{tt} =-\partial _t \Gamma ^\lambda _{\lambda t} -\Gamma ^\lambda _{t\alpha } \Gamma ^\alpha _{\lambda t} 
+.\]
+We have already computed
+\[
+	\Gamma ^\lambda_{\lambda t} =\Gamma ^t_{tt} +\Gamma ^j_{jt} =\Gamma ^j_{jt} =\frac{3 \dot{a} }{a} 
+.\]
+We then have
+\[
+	-\frac{\partial }{\partial t} \frac{3 \dot{a} }{a} =-3\frac{a \ddot{a} -\dot{a} ^2}{a^2} 
+.\]
+To compute the other term,
+\[
+	\Gamma ^\lambda _{t\alpha } \Gamma ^\alpha _{\lambda t} =\Gamma ^t_{t\alpha } \Gamma ^\alpha_{tt}+\Gamma ^j_{t\alpha } \Gamma ^\alpha _{jt} 
+.\]
+Since $\Gamma ^t_{t\alpha } =0$, the $\lambda =t$ component vanishes. We then have
+\[
+	\Gamma ^\lambda _{t\alpha } =\Gamma ^j_{t\alpha } =\Gamma ^j_{tt} \Gamma ^t_{jt} +\Gamma ^j_{tk} \Gamma ^k_{jt} 
+.\]
+Again $\Gamma ^t_{tj} =0$, so we recover
+\[
+	\Gamma ^\lambda _{t\alpha } \Gamma ^\alpha _{\lambda t} =\Gamma ^j_{tk} \Gamma ^k_{jt} 
+.\]
+To compute this, we will show that $\Gamma ^j_{tk} =\Gamma ^j_{tj}\delta ^j_k $, reducing this to a problem we have already solved. Indeed, using the fact that $g_{\mu \nu } $ is diagonal,
+\[
+	\Gamma ^j_{tk} =\frac{1}{2} g^{\sigma j} \left( \frac{\partial g_{t\sigma } }{\partial x^k} +\frac{\partial g_{k\sigma } }{\partial t} -\frac{\partial g_{tj} }{\partial x^\sigma }  \right) =\frac{1}{2} g^{jj} \left( \frac{\partial g_{tj} }{\partial x^k} +\frac{\partial g_{kj} }{\partial t}  \right) =\frac{1}{2} g^{jj} \delta _j^k \frac{\partial g_{jk} }{\partial t} =\Gamma ^j_{tj} \delta ^j_k
+.\]
+We then have
+\[
+	\Gamma ^j_{tk} \Gamma ^j_{jt} =\Gamma ^j_{tj} \Gamma ^j_{tj} =\frac{3 \dot{a} ^2}{a^2} 
+.\]
+This yields
+\[
+	R_{tt} =3\left( -\frac{\ddot{a} }{a} +\frac{\dot{a} ^2}{a^2} -\frac{\dot{a} ^2}{a^2}  \right) =-\frac{3 \ddot{a} }{a} 
+.\]
+Therefore, since $g^{tt} =-1$,
+\[
+	R=\frac{3 \ddot{a} }{a} +\frac{6}{a^2} +\frac{6 \dot{a} ^2}{a^2} +\frac{3 \ddot{a} }{a} =\frac{6}{a} \left( \ddot{a} +\frac{1}{a} +\frac{\dot{a} ^2}{a}  \right) 
+.\]
+
+\section{Problem 2}
+
+\begin{problem}
+	Verify explicitly that the coordinates
+	\[
+		x_1 = \left( \theta -\theta _p \right) -\frac{1}{4} \left( \phi -\phi _p \right) ^2 \sin \left( 2\theta _p \right) ,\qquad x_2 = \left( \phi -\phi _p \right) \sin \theta _p+\left( \theta -\theta _p \right) \left( \phi -\phi _p \right) \cos \theta _p
+	\]
+	are locally flat coordinates for the sphere
+	\[
+		\mathrm{d} s^2 = \mathrm{d} \theta ^2 + \sin ^2\theta \mathrm{d} \phi ^2
+	\]
+	at the point $p=(\theta _p,\phi _p)$.
+\end{problem}
+\noindent \textbf{Solution.} We first compute the transformation for the metric on the sphere $g_{\mu \nu } '$ to the new metric $g_{\mu \nu } $ given by
+\[
+	g_{\mu \nu } =\frac{\partial x^\alpha }{\partial x^\mu  } \frac{\partial x^\beta  }{\partial x^\nu } g'_{\alpha \beta } 
+.\]
+We don't want to compute $\theta $ and $\phi $ in terms of $x_1$ and $x_2$, so we instead compute the inverse:
+\[
+	g^{\mu \nu } =\left( g_{\mu \nu }  \right) ^{-1} =\left( \frac{\partial x^\alpha }{\partial x^\mu } \frac{\partial x^\beta }{\partial x^\nu } g'_{\alpha \beta }  \right) ^{-1} =\frac{\partial x^\mu }{\partial x^\alpha } \frac{\partial x^\nu }{\partial x^\beta } g^{\prime \alpha \beta } 
+.\]
+We have to compute all of the partials:
+\[
+	\frac{\partial x_1}{\partial \theta } =1,\qquad \frac{\partial x_1}{\partial \phi } =-\frac{\phi -\phi _p}{2} \sin (2\theta _p),
+\]
+\[
+	\frac{\partial x_2}{\partial \theta } =\left( \phi -\phi _p \right) \cos \theta _p,\qquad \frac{\partial x_2}{\partial \phi } =\sin \theta _p+\left( \theta -\theta _p \right) \cos \theta _p
+.\]
+Sinnce $g'_{\alpha \beta } $ is diagonal, writing out the summation for $g_{\mu \nu } $ gives
+\[
+	g^{\mu \nu } =\frac{\partial x^\mu }{\partial \theta } \frac{\partial x^\nu }{\partial \theta } +\frac{\partial x^\mu }{\partial \phi } \frac{\partial x^\nu }{\partial \phi } \csc ^2\theta 
+.\]
+We compute each component.
+\[
+	g^{11} = \left( \frac{\partial x_1}{\partial \theta }  \right) ^2+\left( \frac{\partial x_1}{\partial \phi }  \right) ^2 \csc ^2\theta = 1+\frac{\left( \phi -\phi _p \right) ^2}{4} \sin ^2\left( 2\theta _p \right) \csc ^2\theta 
+\]
+\[
+	g^{12} =g^{21} = \frac{\partial x_1}{\partial \theta } \frac{\partial x_2}{\partial \theta } +\frac{\partial x_1}{\partial \phi } \frac{\partial x_2}{\partial \phi } \csc ^2\theta
+\]
+\[
+	=(\phi -\phi _p)\cos \theta _p+\left( -\frac{\phi -\phi _p}{2} \sin (2\theta _p) \right) \left( \sin \theta _p+(\theta -\theta _p)\cos \theta _p \right) \csc ^2\theta 
+\]
+\[
+	g^{22} =\left( \frac{\partial x_2}{\partial \theta }  \right) ^2 + \left( \frac{\partial x_2}{\partial \phi }  \right) ^2 \csc^2 \theta 
+\]
+\[
+	=\left( \phi -\phi _p \right) ^2 \cos ^2\theta _p + \left( \sin ^2\theta _p + (\theta -\theta _p)^2 \cos ^2\theta _p + 2 (\theta -\theta _p)\sin \theta _p \cos \theta _p \right) \csc ^2\theta 
+.\]
+Now if we evaluate $g^{\mu \nu } $ at $p$, we obtain
+\[
+	g^{11} =1,\qquad g^{21} =g^{12} =0,\qquad g^{22} = \sin ^2\theta _p \csc ^2\theta _p = 1
+.\]
+Therefore, $g^{\mu \nu } (p)=\delta _\mu ^\nu $. Since the inverse to the identity matrix is the identity matrix, $g_{\mu \nu } =\delta _\mu ^\nu $.
+
+Now we show the first derivatives vanish. We will show it suffices to show that the derivatives of $g^{\mu \nu } $ with respect to the old coordinates vanish at $p$. This suffices because, writing $y^\mu $ for the coordinates $\theta ,\phi $ and $x^\mu $ for the new coordinates $x_1,x_2$, the chain rule yields
+\[
+	\frac{\partial g^{\mu \nu } }{\partial y^\alpha } =\frac{\partial g^{\mu \nu } }{\partial x^\lambda } \frac{\partial x^\lambda }{\partial y^\alpha }  \implies \frac{\partial g^{\mu \nu } }{\partial x^\lambda } =\frac{\partial g^{\mu \nu } }{\partial y^\alpha } \frac{\partial y^\alpha }{\partial x^\lambda } 
+.\]
+So if the derivatives with respect to the old coordinates vanish at $p$, then so will the ones for the new metric. This implies that those for $g_{\mu \nu }$ vanish as well because
+\[
+	g^{\mu \rho } g_{\rho \nu } =\delta _\mu ^\nu  \implies \frac{\partial }{\partial x^\lambda } \left( g^{\mu \rho } g_{\rho \nu }  \right) =\frac{\partial }{\partial x^\lambda } \delta _\mu ^\nu =0
+.\]
+Expanding the product rule yields
+\[
+	\frac{\partial g^{\mu \rho } }{\partial x^\lambda } g_{\rho \nu } +\frac{\partial g_{\rho \nu } }{\partial x^\lambda } g^{\mu \rho } =0
+.\]
+If $\frac{\partial g^{\mu \rho } }{\partial x^\lambda } $ vanishes at $p$, then we have
+\[
+	\frac{\partial g_{\rho \nu } }{\partial x^\lambda } g^{\mu \rho } =0
+.\]
+Since the metric is invertible,
+\[
+	\frac{\partial g_{\rho \nu } }{\partial x^\lambda } =0
+.\]
+
+We now conclude by computing more partials and showing they all vanish at $p$. First the $\theta $-derivatives:
+\[
+	\frac{\partial g^{11} }{\partial \theta } =\frac{\left( \phi -\phi _p \right) ^2}{4} \sin ^2 (2\theta _p)\left( -2\csc^2\theta \cot \theta   \right) 
+\]
+\[
+	\frac{\partial g^{12} }{\partial \theta } =\left( -\frac{\phi -\phi _p}{2} \sin (2\theta _p) \right) \left( -2 \sin \theta _p \csc ^2\theta \cot \theta +\cos \theta _p\left( \csc ^2\theta -2(\theta -\theta _p)\csc ^2\theta \cot \theta  \right)  \right) 
+\]
+\[
+	\frac{\partial g^{22} }{\partial \theta } =-2 \sin ^2\theta _p \csc ^2\theta \cot \theta +2(\theta -\theta _p)\cos ^2\theta _p \csc ^2\theta -2\left( \theta -\theta _p \right)^2 \cos ^2\theta _p \csc ^2\theta \cot \theta 
+\]
+\[
+	+2 \sin \theta _p \cos \theta _p \left( \csc ^2\theta -2(\theta -\theta _p)\csc ^2\theta \cot \theta  \right) 
+.\]
+The first two vanish at $p$ due to the $\phi -\phi _p$ in the prefactor. The final one vanishes because if we cancel all the terms with $\theta -\theta _p$, then we are left with
+\[
+	-2 \sin ^2\theta _p \csc ^2\theta _p \cot \theta _p + 2 \sin \theta _p \cos \theta _p \csc ^2\theta _p = 2\left( \frac{\sin \theta _p \cos \theta _p}{\sin ^2\theta _p} - \frac{\sin ^2\theta _p \cos \theta _p}{\sin ^3\theta _p }  \right) =0
+.\]
+Finally the $\phi $-derivatives:
+\[
+	\frac{\partial g^{11} }{\partial \phi } =\frac{\phi -\phi _p}{2} \sin ^2(2\theta _p)\csc ^2\theta 
+\]
+\[
+	\frac{\partial g^{12} }{\partial \phi } =\cos \theta _p-\frac{\sin (2\theta _p)}{2} \left( \sin \theta _p + (\theta -\theta _p)\cos \theta _p \right) \csc ^2\theta 
+\]
+\[
+	\frac{\partial g^{22} }{\partial \phi } =2(\phi -\phi _p)\cos ^2\theta _p
+.\]
+The first and final ones vanish at $p$ due the the $\phi -\phi _p$ prefactor, and the second one vanishes at $p$ because
+\[
+	\cos \theta _p - \frac{\sin (2\theta _p)}{2}\left( \sin \theta _p + (\theta _p-\theta _p)\cos \theta _p \right) \csc ^2\theta _p = \cos \theta _p - \frac{\sin (2\theta _p)}{2} \sin \theta _p \csc ^2\theta _p
+\]
+\[
+	=\cos \theta _p - \frac{\sin (2\theta _p)}{2 \sin \theta _p} 
+.\]
+Double angle identities yield
+\[
+	= \cos \theta _p - \frac{2 \sin \theta _p \cos \theta _p}{2 \sin \theta _p} =\cos \theta _p-\cos \theta _p = 0
+.\]
+
+\end{document}

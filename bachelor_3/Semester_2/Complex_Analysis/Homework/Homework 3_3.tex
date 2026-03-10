@@ -1,0 +1,66 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 3}
+\courseID{MA713 Complex Analysis}
+\begin{document}
+\makeproblem
+
+\begin{problem}\label{1}
+	Define $\exp (z)=e^z$ by
+	\[
+		e^z=\sum_{n\geq 0} \frac{z^n}{n!} 
+	.\]
+	Prove directly from this definition that $e^{z+w} =e^ze^w$.
+\end{problem}
+\begin{problem}
+	In class we proved that if $f(z)=\sum_{n} a_n(z-z_0)^n$ is a convergent power series on $B_r(z_0)$, then $f$ is analytic on $B_r(z_0)$. Give a one line proof of this in the case $f=\exp $, $z_0=0$, and $r=\infty $.
+\end{problem}
+\begin{proof}
+	???
+\end{proof}
+
+\begin{problem}
+	Repeat problem 2 but for $f(z)=1/(1-z)$, $z_0=0$, and $r=1$.
+\end{problem}
+\begin{proof}
+	\[
+		\frac{1}{1-z} =\sum_{n=0}^{\infty} z^n\,\,\forall z\in B_1(0)
+	.\]
+\end{proof}
+
+\begin{problem}
+	Find the complex power series expansion of $z^2/(1-z^2)^3$ about 0 and determine the radius of convergence (do not use Taylor's formula).
+\end{problem}
+\begin{problem}
+	Give an example of a power series $\sum_{k} a_kz^k$ which converges for every complex value of $z$ and which sums to 0 for infinitely many values of $z$ but is not the identically zero series.
+\end{problem}
+\begin{proof}
+	The power series expansion of $\sin (z)$:
+	\[
+		\sin (z)=\sum_{n=0}^{\infty} (-1)^n \frac{z^{2n+1} }{(2n+1)!} 
+	.\]
+	This vanishes for $z=n\pi $, $n\in\mathbb{Z} $. This converges everywhere because it is easily shown to be equal to the entire function $(e^{iz}-e^{-iz} )/2i$ via Euler's formula.
+\end{proof}
+
+\begin{problem}
+	Give an example of a nonconstant power series $\sum_{k} a_kz^k$ which converges for every $z$ but which sums to 0 for no values of $z$.
+\end{problem}
+\begin{proof}
+	Power series expansion of $\exp (z)$. Write $z=x+iy$. Then by \cref{1},
+	\[
+		e^z=e^{x+iy} =e^xe^{iy} 
+	.\]
+	Since $x,y$ are purely real, we have that $e^x\neq 0$, and $e^{iy} =\cos y + i \sin y$ by the easy to prove Euler's formula. We then have $\left| e^{iy}  \right| =\cos^2y+\sin ^2y = 1$, hence $e^{iy} \neq 0$. 
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,68 @@
+Note that this generalizes to piecewise-smooth curves $\gamma $.
+
+\lecture{6}{Tue 10 Feb 2026 09:32}{Complex line integrals}
+
+\begin{definition}\label{2.0.1}
+	Let $f : U \to \mathbb{C} $ be holomorphic. If $g : U \to \mathbb{C} $ is an \emph{antiderivative} of $f$ in the sense that $g'=f$, then we call $g$ a \emph{primitive} of $f$.
+\end{definition}
+
+\begin{terminology}\label{2.0.2}
+	Given $R\subseteq \mathbb{C} $ \emph{closed}, we say $f$ is holomorphic on $R$ if it is holomorphic on some open neighborhood of $R$.
+\end{terminology}
+
+\begin{theorem}[Goursat]\label{2.0.3}
+	Let $R\subseteq \mathbb{C} $ be the closed rectangle $[a,b]\times i[c,d]$, and let $f$ be holomorphic on $R$. Then
+	\[
+		\int_{\partial R}f=0
+	.\]
+\end{theorem}
+\begin{proof}
+	Choose a piecewise smooth parameterization $\gamma $ for $\partial R$. Later we will show that integrals are homotopy-invariant, so it makes sense that any parameterization will suffice. Write $\alpha =\int_{\partial R} f$, and assume for contradiction that $\alpha \neq 0$. The boundary $\partial R$ inherits the Stokes orientation. Subdivide $R$ into four isotopic rectangles $R_i$ (bisect each side of $R$ with a horizontal/vertical line). These are submanifolds which inherit orientations orientations via restricting the orientation form, and their boundaries inherit the Stokes orientation. These orientations conflict on the bisectors, but agree on the boundary. Hence they cancel on the interior, so
+	\[
+		\left( \int_{\partial R_1} + \int_{\partial R_2} + \int_{\partial R_3} + \int_{\partial R_4} \right) f=\int_{\partial R} f
+	.\]
+	We claim that there exists $i$ with
+	\[
+		\left| \int_{\partial R_i} f \right| \geq \frac{\left| \alpha  \right| }{4} 
+	.\]
+	This follows immediately by
+	\[
+		\left| \alpha  \right| \leq \left| \sum_{i} \int_{\partial R_i} f \right| \leq \sum_{i} \left| \int_{\partial R_i} f \right| < \left| \alpha  \right| 
+	.\]
+	Write $R^0=R$ and $R^1$ for a choice of a subrectangle $R_i$ with $\left|\int_{\partial R_i} f\right| \geq \frac{\left| \alpha  \right| }{4} $. We can iterate this process to obtain a nested family of proper inclusions
+	\[
+		R^0 \supsetneq R^1 \supsetneq \cdots
+	.\]
+	Note that for all $i$,
+	\[
+		\left| \int_{\partial R^i} f \right| \geq \frac{\left| \alpha  \right| }{4^n} 
+	.\]
+	Let $P_n$ be the length (perimeter) of $\partial R^n$. Let $D_n$ be the diameter of $R^n$, computed by taking the line of an affine line through two corners of $R^n$. Note that $\lim \left\{ R^n \right\} \cong *$, and thus $P_n,D_n\to 0$. So for any choice $z_n\in R^n$, the sequence $\left\{ z_n \right\} $ is Cauchy. Since $f$ is holomorphic, we can fix $z_0$ and choose sufficiently small $h$ such that $f(z_0+h)=f(z_0)+f'(z_0)h+\left| h \right| \varphi (h)$, for
+	\[
+		\lim_{h\to 0} \varphi =0
+	.\]
+	Some nice intuition that I didn't write down earlier: $\varphi $ is the higher order terms of the Taylor expansion of $f$, hence we are really considering a germ of a Taylor expansion. Take $z$ sufficiently close to $z_0$ such that we may write $h=z-z_0$ with $z\to z_0$. Then this yields
+	\[
+		f(z)=f(z_0)+f'(z-0)(z-z_0)+\left| z-z_0 \right| \varphi (z-z_0)
+	.\]
+	Then
+	\[
+		\int_{\partial R^n} f=f(z_0)\int_{\partial R^n} \mathrm{d} z + f'(z_0)\int_{\partial R^n} (z-z_0)\mathrm{d} z + \int_{\partial R^n} \left| z-z_0 \right| \varphi (z-z_0)\mathrm{d} z
+	.\]
+	Since 1 has a primitive and is the integral around a closed curve, we can apply the fundamental theorem of line integrals to see that $\int_{\partial R^n} \mathrm{d} z=0$. For the same reason, the second integral vanishes. We then obtain
+	\[
+		\int_{\partial R^n} f=\int_{\partial R^n} \left| z-z_0 \right| \varphi (z-z_0)\mathrm{d} z \geq  \frac{\left| \alpha  \right| }{4^{n} } 
+	.\]
+	However,
+	\[
+		\int_{\partial R^n}\left| z-z_0 \right| \varphi (z-z_0)\mathrm{d} z\leq \int_{\partial R^n} \left| z-z_0 \right| \left| \varphi (z-z_0) \right|  \,\mathrm{d} z\leq D_n\varepsilon P_n = \frac{D}{\alpha ^n} \frac{P}{\alpha ^n} \varepsilon 
+	\]
+	for sufficiently small $\varepsilon $ and sufficiently large $n$. We choose $\varepsilon =\frac{\left| \alpha  \right| }{P_nD_n} $ and some cancelling yields the contradiction
+	\[
+		\frac{\left| \alpha  \right| }{4^n} < \frac{\alpha }{4^n} 
+	.\]
+\end{proof}
+\begin{remark}\label{2.0.4}
+	This did not require that $f$ have a primitive. We will show next time that holomorphic functions always have primitives.
+\end{remark}
+

@@ -1,0 +1,68 @@
+\lecture{17}{Thu 20 Nov 2025 12:30}{Perturbation theory for gravity}
+
+We will apply perturbation theory to see gravitational waves arise from Einstein's equation. We will study them in the limit that $g_{\mu \nu } $ is very close to flat space plus a tiny correction $\eta _{\mu \nu } +h_{\mu \nu } $. This will be closely related to quantum gravity. For example, in electromagnetism, a photon is just a minimal quantum of an electromagnetic wave. Similarly, a graviton would be a minimal quantum of a gravitational wave.
+
+Recall from electromagnetism
+\[
+	S_\mathrm{EM} =\int -\frac{1}{4} F_{\mu \nu } F^{\mu \nu }  \,\mathrm{d} ^4x,\qquad F_{\mu \nu } =\partial _\mu A_\nu -\partial _\nu A_\mu 
+.\]
+Expanding this out yields
+\[
+	S_{\mathrm{EM} } =\frac{1}{2} \int A_\mu \left( \eta ^{\mu \nu } \partial ^2-\partial ^\mu \partial ^\nu  \right) A_\nu  \,\mathrm{d} ^4x
+.\]
+Apparently you can do this in your head. Moreover, Lorentz invariance and Gauge invariance states that the action is fixed under transformations $A_\mu(x) \to A_\mu(x) +\partial _\mu \alpha (x)$ for any function $\alpha $. Something happens but once it couples to charged matter the action obtains a term $A_\mu J^\mu $. Yea idk the full action is
+\[
+	S=\int -\frac{1}{4e^2} F_{\mu \nu } F^{\mu \nu } +A_\mu J^\mu  \,\mathrm{d} ^4x
+.\]
+
+Now recall the Einstein-Hilbert action
+\[
+	S_{\mathrm{EH} } =\int \sqrt{-g} R \,\mathrm{d} ^4x
+.\]
+We have to expand this out to second order Taylor expansion in $h$. At $h^0$ with $g_{\mu \nu } =\eta _{\mu \nu } $, we have $R=0$ so $S_{\mathrm{EH} } =0$. For the linear term in $h$, recall
+\[
+	R_{\mu \nu \rho \sigma } =\frac{1}{2} \left( \partial _\rho \partial _\nu h_{\mu \sigma } +\partial _\sigma \partial _\mu h_{\nu \rho } -\partial _\sigma \partial _\nu h_{\mu \rho } -\partial _\rho \partial _\nu h_{\nu \sigma }  \right) +O(h^2)
+.\]
+Contracting indicies,
+\[
+	R_{\mu \nu } =R_{\sigma \mu \sigma \nu }=\frac{1}{2} \left( \partial _\sigma \partial _\nu h^\sigma\!_\mu +\partial _\sigma \partial _\mu h^\sigma \!_\nu -\partial _\mu \partial _\nu h - \partial ^2h \right) ,
+\]
+\[
+	h=\operatorname{tr} h = \eta^{\mu \nu } h_{\mu \nu } 
+.\]
+Contracting again,
+\[
+	R=\partial _\mu \partial _\nu h^{\mu \nu } -\partial ^2h
+.\]
+The action is then
+\[
+	S_{\mathrm{EH} } =\int \partial _\mu \partial _\mu h^{\mu \nu } -\partial ^2h \,\mathrm{d} ^4x
+.\]
+Integrating by parts, and ignoring boundary terms since we assume any further corrections fall off in the limit, the integral vanishes since it is a total derivative. This means we now pass to the $h^2$ term. We already know
+\[
+	\frac{1}{\sqrt{-g} } \frac{\delta S_{\mathrm{EH} } }{\delta g^{\mu \nu } } =G_{\mu \nu } =R_{\mu \nu } -\frac{1}{2} Rg_{\mu \nu } 
+.\]
+We can expand out $R_{\mu \nu } $ as we did above. We then integrate to get the quadratic term in the action
+\[
+	S=\frac{1}{2} h^{\mu \nu } \frac{\delta S}{\delta h^{\mu \nu } } +O(h^3)=\frac{1}{2} \int \text{a total mess of an integrand}  \,\mathrm{d} ^4x
+.\]
+
+This is nice, but it is cleaner to rederive it from Gauge invariance. For gravity, this is invariance under diffeomorphisms. Consider a coordinate transformation $(x')^\mu =x^\mu +\varepsilon ^{\mu } (x)$ for some small $\varepsilon $. The metric transforms as
+\[
+	g'_{\mu \nu } = \frac{\mathrm{d}x^\alpha }{\mathrm{d}(x')^\mu } \frac{\mathrm{d}x^\beta }{\mathrm{d}(x')^\nu } g_{\alpha \beta } = \left( \delta ^\mu _\alpha -\partial _\mu \varepsilon ^\alpha  \right) \left( \delta _\beta ^\nu -\partial _\nu \varepsilon  ^\beta  \right) g_{\alpha \beta } 
+.\]
+Now write $g=\eta +h$ and expand to the leading order, treating $\varepsilon $ and $h$ as the same size:
+\[
+	\eta _{\mu \nu } +h'_{\mu \nu } =\nu _{\mu \nu } +h_{\mu \nu } -\partial _\nu \varepsilon _\mu -\partial _\mu \varepsilon _\nu 
+.\]
+Thus $h$ transforms as
+\[
+	h_{\mu \nu } \to h_{\mu \nu } ' = h_{\mu \nu } -\partial_\mu \eta _\nu -\partial _\nu \eta _\mu 
+.\]
+We obtain the action from this by writing down a Lorentz-invariant action and then imposing this gauge invariance. I don't see a point in writing down the equations because we skip all the calculation anyways.
+
+So $h_{\mu \nu } $ has 10 independent components
+\[
+	h_{00} \coloneqq \Phi ,\qquad h_{0i} \coloneqq \omega _i,\qquad h^\alpha \!_k \coloneqq \Psi ,\qquad h^i\!_k \coloneqq s^{ij} 
+.\]
+We are going to see that nearly all of these vanish in some way except the final one, which has $5=2(2) + 1$ components, and thus has spin 2.

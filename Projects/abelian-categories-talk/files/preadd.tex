@@ -2,11 +2,11 @@
 
 Let $\mathcal{C} $ be a category. In order to do homological algebra in $\mathcal{C} $, we need to be able to at the very least construct \emph{chain complexes} and \emph{homology}. We will begin by constructing chain complexes, which are considerably simpler.
 
-Let's review the definition of chain complexes in the category $k$-$\Vect$ of $k$-vector spaces. A \emph{chain complex} $(V_{\bullet} ,d_{\bullet} )$ is a collection $\left\{ V_i \right\}_{i\in\mathbb{Z} } $ of $k$-vector spaces, and a collection $\left\{ d_i \right\}_{i\in\mathbb{Z} } $ of $k$-linear maps
+We begin by reviewing the definition of chain complexes in the category $\Vect_k$ of $k$-vector spaces; the reader unfamiliar with vector spaces over an arbitrary field $k$ can take all vector spaces to be over $\mathbb{R} $. A \emph{chain complex} $(V_{\bullet} ,d_{\bullet} )$ is a collection $\left\{ V_i \right\}_{i\in\mathbb{Z} } $ of $k$-vector spaces, and a collection $\left\{ d_i \right\}_{i\in\mathbb{Z} } $ of $k$-linear maps known as the \emph{boundary maps} or \emph{differentials}, as depicted in the diagram
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-\cdots \ar[" d_{n+2}  ", r]  & V_{n+1} \ar[" d_{n+1}  ", r]  & V_n\ar[" d_n ", r]  & V_{n-1} \ar[" d_{n-1}  ", r]  & \cdots
+\cdots \ar[" d_{n+2}  ", r]  & V_{n+1} \ar[" d_{n+1}  ", r]  & V_n\ar[" d_n ", r]  & V_{n-1} \ar[" d_{n-1}  ", r]  & \cdots,
 \end{tikzcd}\]
-such that $d_{i-1} \circ d_i=0$ for all $i$. We would like to elevate this definition to an arbitrary category $\mathcal{C} $. Luckily, the definition is already largely categorical, since we can simply take each $V_i$ to be an object of $\mathcal{C} $, and each $d_i$ to be a morphism $V_i\to V_{i-1} $ in $\mathcal{C} $. The main issue is the condition that $d_{i-1} \circ d_i=0$. In $k$-$\Vect$, the zero-morphism $0 : V \to W$ is the map which sends each $v\in V$ to the additive identity $0\in W$. Unfortunately, objects in arbitrary categories don't have additive identities, so we need to find a new characterization of the zero morphism which is more categorical. The way we do this is by recalling that the hom-set $k$-$\Vect(V,W)$ is an \emph{abelian group}.
+such that $d_{i-1} \circ d_i=0$ for all $i$. We would like to elevate this definition to an arbitrary category $\mathcal{C} $. Luckily, the definition is already largely categorical, since we can simply take each $V_i$ to be an object of $\mathcal{C} $, and each $d_i$ to be a morphism $V_i\to V_{i-1} $ in $\mathcal{C} $. The main issue is the condition that $d_{i-1} \circ d_i=0$. In $\Vect_k$, the zero-morphism $0 : V \to W$ is the map which sends each $v\in V$ to the additive identity $0\in W$. Unfortunately, objects in arbitrary categories don't have additive identities nor do they have elements, so we need to find a new characterization of the zero morphism which is more categorical. The way we do this is by recalling that the hom-set $\Vect_k(V,W)$ is an \emph{abelian group}.
 
 \begin{definition}\label{2.1}
 	An \emph{abelian group} is a set $G$ together with an operation $+$ such that
@@ -31,30 +31,30 @@ such that $d_{i-1} \circ d_i=0$ for all $i$. We would like to elevate this defin
 	\end{enumerate}
 \end{definition}
 \begin{remark}\label{2.2}
-	For those familiar with linear algebra, an abelian group is simply a vector space but \emph{without scalars}.
+	An abelian group can be thought of as a vector space where the only scalars are the \emph{integers}, and scalar multiplication is defined as follows. If $A$ is an abelian group, $a\in A$, and $n\in\mathbb{Z} $, then $n\cdot a$ is simply defined as $\underbrace{a+ \cdots +a}_{n\text{ times} } $.
 \end{remark}
 
 \begin{proposition}\label{2.3}
-	Let $V,W$ be $k$-vector spaces. Then $k$-$\Vect(V,W)$ is an abelian group. In particular, if $\varphi ,\psi : V \to W$ are $k$-linear maps, then $\varphi +\psi $ is the $k$-linear map defined by
+	Let $V,W$ be $k$-vector spaces. Then $\Vect_k(V,W)$ is an abelian group. In particular, if $\varphi ,\psi : V \to W$ are $k$-linear maps, then $\varphi +\psi $ is the $k$-linear map defined by
 	\[
 		(\varphi +\psi )(v)=\varphi (v)+\psi (v),
 	\]
 	and the additive identity is the zero map $0: V \to W$ given by $0(v)=0$.
 \end{proposition}
 
-The proof of \cref{2.3} is not difficult, and an even stronger result is proven in basic coures, which is that $k$-$\Vect(V,W)$ is a $k$-vector space. However, the result tells us something quite interesting: if the hom-sets $\mathcal{C} (x,y)$ of our category $\mathcal{C} $ have an abelian group structure, then we can define the zero morphism as the additive identity of this set. This motivates \cref{2.4}:
+The proof of \cref{2.3} is not difficult, and an even stronger result is proven in basic linear algebra courses, which is that $\Vect_k(V,W)$ is a $k$-vector space. However, the result tells us something quite interesting: in an arbitrary category $\mathcal{C} $, if the hom-sets $\mathcal{C} (x,y)$ have an abelian group structure, then we can define the zero morphism as the additive identity of this set. This motivates \cref{2.4}:
 
 \begin{definition}\label{2.4}
-	Let $\mathcal{C} $ be a category. We say $\mathcal{C} $ is an $\Ab $\emph{-category} if for all $x,y\in \mathcal{C} $, the hom-set $\mathcal{C} (x,y)$ has an \emph{abelian group structure} (we always denote the group operation by $+$), and if composition distributes over addition. Concretely, this means that if $f,g : x \to y$ and $h : y \to z$ are morphisms in $\mathcal{C} $, then
+	Let $\mathcal{C} $ be a category. We say $\mathcal{C} $ is an $\Ab $\emph{-category} if for all $x,y\in \mathcal{C} $, the hom-set $\mathcal{C} (x,y)$ has an \emph{abelian group structure} (we always denote the group operation by $+$), and if composition distributes over addition. Concretely, this means that if $f,g : x \to y$ and $h,k : y \to z$ are morphisms in $\mathcal{C} $, then
 	\[
-		h\circ (f+g)=(h\circ f)+(h\circ g)
+		h\circ (f+g)=(h\circ f)+(h\circ g)\quad \text{and} \quad (h+k)\circ f = (h\circ f)+(k\circ f)
 	.\]
 \end{definition}
 
-It is likely not yet clear why we require composition to distribute over addition, but we will see later why this is an important condition.
+To see why we require that composition distribute over multiplication, recall that elements of $\Vect_{k} (V,W)$ can be represented by matrices (in the finite dimensional case), and function composition is simply matrix multiplication. We then simply note that addition distributes over multiplication. We will see stronger motivation for this requirement later.
 
 \begin{remark}\label{2.5}
-	If the reader is familiar with enriched category theory, then they will likely have encountered this as an example before. On the off chance that they have not, we note that an $\Ab $-category in the sense of \cref{2.4} is precisely the underlying category of an $(\Ab ,\otimes ,\mathbb{Z} )$-enriched category, where we impose the group structure by the natural isomorphism $\Ab (\mathbb{Z} ,-)\cong U$ for $U : \Ab  \to \Set $ the forgetful functor.
+	If the reader is familiar with enriched category theory, they will recognize that an $\Ab $-category in the sense of \cref{2.4} is precisely the underlying category of an $(\Ab ,\otimes )$-enriched category, where we impose the group structure by identifying along the natural isomorphism $\Ab (\mathbb{Z} ,-)\cong U$, for $U : \Ab  \to \Set $ the forgetful functor.
 \end{remark}
 
 \begin{notation}\label{2.6}
@@ -62,10 +62,24 @@ It is likely not yet clear why we require composition to distribute over additio
 \end{notation}
 
 \begin{definition}\label{2.7}
-Let $\mathcal{C} $ be an $\Ab $-category. A \emph{chain complex} $(c_{\bullet} ,d_{\bullet} )$ in an $\Ab $-category is a collection $\left\{ c_i \right\}_{i\in\mathbb{Z} } $ of objects of $\mathcal{C} $,a nd a collection $\left\{ d_i \right\}_{i\in\mathbb{Z} }$ of morphisms of $\mathcal{C} $
+Let $\mathcal{C} $ be an $\Ab $-category. A \emph{chain complex} $(c_{\bullet} ,d_{\bullet} )$ in an $\Ab $-category is a collection $\left\{ c_i \right\}_{i\in\mathbb{Z} } $ of objects of $\mathcal{C} $, and a collection $\left\{ d_i \right\}_{i\in\mathbb{Z} }$ of morphisms of $\mathcal{C} $
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-\cdots \ar[" d_{n+2}  ", r]  & c_{n+1} \ar[" d_{n+1}  ", r]  & c_n\ar[" d_n ", r]  & c_{nn-1} \ar[" d_{n-1}  ", r]  & \cdots
+\cdots \ar[" d_{n+2}  ", r]  & c_{n+1} \ar[" d_{n+1}  ", r]  & c_n\ar[" d_n ", r]  & c_{n-1} \ar[" d_{n-1}  ", r]  & \cdots
 \end{tikzcd}\]
 such that $d_{i-1} \circ d_i=0$ for all $i$. The morphisms $d_{\bullet} $ are called \emph{differentials} or \emph{boundary morphisms}. We will usually denote a chain complex by $c_{\bullet} $, and will leave the notation for the boundary morphisms implicit.
 \end{definition}
+
+\begin{remark}\label{2.8}
+	A \emph{cochain complex} is the dual notion of a chain complex. Concretely, given an $\Ab $-category $\mathcal{C} $, a cochain complex $(c ^{\bullet} ,d^{\bullet} )$ is a collection of objects $\left\{ c^i \right\} _{i\in\mathbb{Z} } $ and morphisms $\left\{ d^i \right\} _{i\in\mathbb{Z} } $
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[" d^{n-1}  ", r]  & c^{n-1} \ar[" d^n ", r]  & c_n \ar[" d^{n+1}  ", r]  & c^{n+1} \ar[" d^{n+2}  ", r]  & \cdots 
+	\end{tikzcd}\]
+	such that $d^i \circ d^{i-1} =0$ for all $i$. The homology of a cochain complex is called \emph{cohomology}.
+
+	The astute reader has likey realized that the only difference between a chain and cochain complex is that we write the indices of a cochain complex as superscripts, and that they ascend rather than descend. Indeed, the theory of chain and cochain complexes is precisely the same, and the main reason we make a distinction between the two is that in many examples in nature, it is more natural to write the indices as either ascending or descending. For example, our objects could be sets of $n$-dimensional objects, and our boundary morphisms could take $n$-dimensional objects and produce $(n+1)$-dimensional objects. It would make sense to set $c^n$ to be the $n$-dimensional objects, and set $d^i : c^i \to c^{i+1} $, hence giving us a cochain complex.
+\end{remark}
+
+\begin{convention}\label{2.9}
+	It is also common practice to write the boundary morphisms of a (co)chain complex as $\partial$ rather than $d$. We stick to the convention of writing $d$ for the boundary morphisms in this section.
+\end{convention}
 

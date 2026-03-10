@@ -1,0 +1,120 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework Assignment 2}
+\begin{document}
+\makeproblem
+
+
+\begin{problem}\label{1}
+	Let $U\subseteq \mathbb{C} $ be open. Prove that $\partial _z$ and $\partial _{\overline{z} } $ are derivations on $U$.
+\end{problem}
+\begin{proof}
+	This proof is inspired by the fact that the collection of vector fields $\mathfrak{X} (M)$ on a manifold $M$ is a vector space. In this case, the manifold would need to be complex such that $\mathfrak{X} (M)$ would be a $\mathbb{C} $-vector space.
+
+	Let $F,G$ be derivations on $U$, and let $aF+bG$, $a,b\in\mathbb{C} $ be a $\mathbb{C} $-linear combination of derivations. We claim that this is also a derivation. Linearity of $aF+bG$ follows by the usual proof: given $f,g\in C^1(U,\mathbb{C} )$ and $w,z\in\mathbb{C} $,
+	\begin{align*}
+		(aF+bG)(w+z)&=aF(wf+zg)+bG(wf+zg)\\
+			    &=aF(wf)+aF(zg)+bG(wf)+bG(zg)\\
+			    &=waF(f)+zaF(g)+wbG(f)+zbG(g)\\
+			    &=w(aF+bG)(f)+z(aF+bG)(g)
+	.\end{align*}
+	To prove the product rule, we appeal to the fact that $F,G$ are derivations. We have
+	\begin{align*}
+		(aF+bG)(fg)&=aF(fg)+bG(fg)\\
+			   &=a(fF(g)+gF(f))+b(fG(g)+gG(f))\\
+			   &=f(aF+bG)(g)+g(aF+bG)(f)
+	.\end{align*}
+	Thus $aF+bG$ is a derivation. Since $\partial _x,\partial _y$ are $\mathbb{C} $-linear they are derivations on $U $.
+\end{proof}
+
+\begin{problem}
+	Prove that if $f$ is holomorphic on $\mathbb{C} $ and real-valued, then $f$ is constant.
+\end{problem}
+\begin{proof}
+	Let $f=u+iv$ for $u,v : \mathbb{C}  \to \mathbb{R} $. Since $f$ is real-valued, $v=0$, so $\partial _xv=\partial _yv=0$. The Cauchy-Riemann equations then read as follows:
+	\[
+		\frac{\partial u}{\partial x} =0,\qquad \frac{\partial u}{\partial y} =0
+	.\]
+	Since $f=u$, we thus have that $f$ has vanishing partials. Constant functions are precisely those functions whose partials all vanish. Thus $f$ is constant.
+\end{proof}
+
+\begin{problem}
+	Prove that if
+	\[
+		L=a \frac{\partial }{\partial x} +b \frac{\partial }{\partial y} 
+	\]
+	and
+	\[
+		M=c \frac{\partial }{\partial x} +d\frac{\partial }{\partial y} 
+	\]
+	(with $a,b,c,d\in\mathbb{C} $) and if
+	\[
+		Lz=1,\qquad L \overline{z} =0,
+	\]
+	\[
+		Mz=0,\qquad M \overline{z} =1,
+	\]
+	then it must be that $L=\partial _z$ and $M=\partial _{\overline{z} } $.
+\end{problem}
+\begin{proof}
+	Let notation and assumptions be as given in the problem, with $z=x+iy$. By assumption, $Lz=1$ implies that
+	\begin{align*}
+		1&=\left( a \partial _x+b \partial _y \right) (x+iy)\\
+		 &=a \partial _x(x+iy)+b \partial _y(x+iy)\\
+		 &=a+ib
+	.\end{align*}
+	This does not imply $b=0$ since $\left\{ 1,i \right\} $ is not $\mathbb{C} $-linearly independent. However, applying $L \overline{z} =0$ yields
+	\begin{align*}
+		0&=\left( a \partial _x+b \partial _y \right) \left( x-iy \right) \\
+		 &=a \partial _x(x-iy)+b \partial _y(x-iy)\\
+		 &=a-ib
+	.\end{align*}
+	We obtain $a=ib$, and plugging into $a+ib=1$ yields $2a=1$. Thus $a=\frac{1}{2} $ and
+	\[
+		ib=\frac{1}{2} \implies b=\frac{1}{2i} =-\frac{i}{2} 
+	.\]
+	Thus
+	\[
+		L=\frac{1}{2} \frac{\partial }{\partial x} -\frac{i}{2} \frac{\partial }{\partial y} =\frac{1}{2} \left( \frac{\partial }{\partial x} -i \frac{\partial }{\partial y}  \right) =\frac{\partial }{\partial z} 
+	.\]
+	We apply the same process to $M$.
+	\begin{align*}
+		0&=\left( c \partial _x+d \partial _y \right) (x+iy)\\
+		 &=c+id\\
+		1&=\left( c \partial _x+d \partial _y \right) (x-iy)\\
+		 &=c-id
+	.\end{align*}
+	Thus $c=-id$ implying that $1=-2id$, and thus $d=\frac{i}{2} $. We then obtain $c=\frac{1}{2} $, yielding
+	\[
+		M=\frac{1}{2} \left( \frac{\partial }{\partial x} +i \frac{\partial }{\partial y}  \right) =\frac{\partial }{\partial \overline{z} } 
+	.\]
+\end{proof}
+
+\begin{problem}
+	If $f$ is a $C^1$ function on an open set $U\subseteq \mathbb{C} $, then prove that
+	\[
+		\overline{\left(\frac{\partial f}{\partial z} \right)} =\frac{\partial \overline{f} }{\partial \overline{z} } 
+	.\]
+\end{problem}
+\begin{proof}
+	This is once again a straightforward computation. Recall that all complex functions $f : U \to \mathbb{C} $ are of the form $f=u+iv$ for $u,v : U \to \mathbb{R} $. We then obtain
+	\begin{align*}
+		\overline{\left( \frac{\partial f}{\partial z}  \right) } &= \frac{1}{2}\left( \overline{\frac{\partial u}{\partial x} +i \frac{\partial v}{\partial x} -i \frac{\partial u}{\partial y} +i^2 \frac{\partial v}{\partial y} } \right)\\
+									  &=\frac{1}{2} \left( \frac{\partial u}{\partial x} -\frac{\partial v}{\partial y} +i\left( \frac{\partial u}{\partial y} -\frac{\partial v}{\partial x}  \right)  \right) \\
+									  \frac{\partial \overline{f} }{\partial \overline{z} } &= \frac{\partial }{\partial \overline{z} } \left( u-iv \right) \\
+																&=\frac{1}{2} \left( \frac{\partial u}{\partial x} -i \frac{\partial v}{\partial x} +i \frac{\partial u}{\partial y} +i^2 \frac{\partial v}{\partial y}  \right) \\
+																&=\frac{1}{2} \left( \frac{\partial u}{\partial x} -\frac{\partial v}{\partial y} +i\left( \frac{\partial u}{\partial y} -\frac{\partial v}{\partial x}  \right)  \right) 
+	.\end{align*}
+	The computations agree.
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,83 @@
+\documentclass[11pt, letterpaper]{article}
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Final Project Notes}
+\begin{document}
+\makereport
+\section{Inner products or smt}
+Given an inner product $\left\langle -,- \right\rangle : V\times V \to k$, we can identify it with a 2-cotensor $g\in \mathcal{T} ^2(V)$. Let $\left\{ v_i \right\} _{i=1} ^n\subseteq V$ a basis and $\left\{ v_i^* \right\} _{i=1} ^n \subseteq V^*$ the corresponding dual basis. Writing $g_{ij} =\left\langle v_i,v_j \right\rangle $, we have
+\[
+	\left\langle -,- \right\rangle =\sum_{i,j=1} ^n g_{ij} v^*_i\otimes v^*_j
+.\]
+We can see also that $\det g_{ij} \neq 0$.
+
+\begin{proposition}\label{1.1}
+	Let $V$ be an $n$-dimensional vector space with inner product $\left\langle -,- \right\rangle $. Then there is a basis $\left\{ v_i \right\} _{i=1} ^n$ with $\left\langle v_i,v_j \right\rangle =\delta _{ij} $; such a basis is called \emph{orthonormal}.
+\end{proposition}
+The proof is by Grahm-Schmidt. A nice corollary is that there is an isomorphism $f : \mathbb{R} ^n \to V$ such that for all $a,b\in\mathbb{R}^n $, the inner product in $\mathbb{R} ^n$, denoted by the dot product, can be given as
+\[
+	a\cdot b=\left\langle f(a),f(b) \right\rangle 
+.\]
+We write $g^{ij} =g_{ij} ^{-1} $. We apply this to manifolds.
+
+\begin{definition}\label{1.2}
+	Let $\pi : E \to M$ be a vector bundle. A \emph{Riemannian metric} on $E$ is a function $\left\langle -,- \right\rangle : M \to E$ which maps each $p\in M$ to a positive-definite inner product $\left\langle -,- \right\rangle _p : \pi ^{-1} (p) \to \mathbb{R} $, and is continuous in the sense that for any two continuous sections $s_1,s_2$ of $E$, the map $p\mapsto \left\langle s_1(p),s_2(p) \right\rangle_p$ is continuous $M\to \mathbb{R} $. If $M$ is a smooth manifold and $E$ is a smooth vector bundle
+\end{definition}
+\begin{theorem}\label{1.3}
+	Let $\pi : E \to M$ be a smooth $k$-plane bundle over $M$. Then there is a smooth Riemannian metric on $E$.
+\end{theorem}
+
+When the bundle is the tangent bundle $TM$, a smooth Riemannian metric for $TM$ will simply be called a Riemannian metric for $M$. We can write this in coordinates as
+\[
+	\left\langle -,- \right\rangle =g_{ij} \mathrm{d} x^i\otimes \mathrm{d} x^j
+.\]
+
+\section{IDK}
+
+Let $\gamma : [a,b] \to M$ be a smooth curve. This yields tangent vectors $\gamma '(t)\in T_{\gamma (t)} M$, and we can thus define the \emph{length} of the tangent vectors by
+\[
+	\left\| \frac{\mathrm{d}\gamma }{\mathrm{d}t}  \right\| =\sqrt{\left\langle \frac{\mathrm{d}\gamma }{\mathrm{d}t} ,\frac{\mathrm{d}\gamma }{\mathrm{d}t}  \right\rangle_{\gamma (t)} } 
+.\]
+We thus define the \emph{length of $\gamma $ from $a$ to $b$ as}
+\[
+	L_a^b(\gamma )=\int_{a}^{b} \left\| \frac{\mathrm{d}\gamma }{\mathrm{d}t}  \right\|  \,\mathrm{d} t=\int_{a}^{b} \left\| \gamma '(t) \right\|  \,\mathrm{d} t
+.\]
+If $\gamma $ is piecewise smooth, we define its length by summing over lengths of smooth components. We generally will simply write $L_a^b$ instead of $L$.
+
+Classically, the norm $\left\| - \right\| $ was denoted by $\mathrm{d} s$. This notation is to be interpreted as $\left| \mathrm{d} s \right| =\gamma ^*(\left\| - \right\| )$.
+
+We can define a metric on $M$ via $d(p,q)$ defined as the inf over lengths of smooth curve from $p$ to $q$. However, the shortest possible curve bewteen two points need not be a straight line. For example, if the manifold is $\mathbb{R} ^n$ with a hole at the origin, then the curve has to go around the hole. To find the true path, we employ methods from the calculus of variations.
+
+
+For example, suppose there is a suitably differentiable function $F : \mathbb{R} ^3 \to \mathbb{R} $. We look for functions $f : [a,b] \to \mathbb{R} $ that minimize the quantity
+\[
+	J=\int _a^b F(t,f(t),f'(t)) \,\mathrm{d} t
+.\]
+To find minima and maxima for $J$, we have to look at curves in the set of functions. We proceed by taking a variation -- that is, a function $\alpha : (-\varepsilon ,\varepsilon )\times [a,b] \to \mathbb{R} $ such that $\alpha (0,t)=f(t)$. Thus $\alpha $ determines a family of functions in $t$ paramterized over $(-\varepsilon ,\varepsilon )$, and this family passes through $f$. We will frequently abuse notation and write $\alpha (u)=\alpha (u,-)$. If $\alpha $ also fixes endpoints in the sense that $\alpha(-,a)=f(a)$ and $\alpha (-,b)=f(b)$, then we say $\alpha $ is a variation of $f$ that fixes endpoints.
+
+we now compute
+\[
+	\left.\frac{\mathrm{d}J(\alpha (u))}{\mathrm{d}u} \right_{u=0} =\left. \frac{\mathrm{d}}{\mathrm{d}u} \right|_{u=0} \int_{a}^{b} F(t,\alpha (u,t),\frac{\partial \alpha }{\partial t} (u,t)) \,\mathrm{d} t
+.\]
+\begin{align*}
+	\left.\frac{\mathrm{d}J(\alpha (u))}{\mathrm{d}u} \right_{u=0} &=\left. \frac{\mathrm{d}}{\mathrm{d}u} \right|_{u=0} \int_{a}^{b} F(t,\alpha (u,t),\frac{\partial \alpha }{\partial t} (u,t)) \,\mathrm{d} t\\
+								       &=\int_{a}^{b} \left. \frac{\mathrm{d}}{\mathrm{d}u} \right_{u=0} F(t,\alpha (u,t),\frac{\partial \alpha }{\partial t} (u,t)) \,\mathrm{d} t
+.\end{align*}
+?????
+\[
+	\Gamma _{ij} ^k=\frac{1}{2} \left( \frac{\partial g_{ik} }{\partial x^j} +\frac{\partial g_{jk} }{\partial x^i} -\frac{\partial g_{ij} }{\partial x^k}  \right) 
+.\]
+So
+\[
+	\frac{\mathrm{d}^2\gamma ^k}{\mathrm{d}t^2} +\sum_{i,j=1} ^n \Gamma _{ij} ^k \frac{\mathrm{d}\gamma ^i}{\mathrm{d}t} \frac{\mathrm{d}\gamma ^j}{\mathrm{d}t} =0
+.\]
+
+\end{document}

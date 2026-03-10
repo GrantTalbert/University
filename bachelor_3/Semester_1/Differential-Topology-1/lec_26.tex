@@ -1,0 +1,57 @@
+\lecture{26}{Fri 21 Nov 2025 12:43}{Forms}
+
+The exterior algebras of $k$-tensors $\Lambda ^kT^*_pM$ assemble into a vector bundle $\Lambda ^kT^*M$. Sections of this bundle are called $k$-differential forms or $k$-forms, and the set of sections are denoted
+\[
+	\Omega ^k(M)\coloneqq \Gamma (\Lambda ^kT^*M)
+.\]
+We can then define the exterior algebra
+\[
+	\Omega ^{\bullet} (M)\coloneqq \bigoplus_{i=0} ^\infty \Omega ^i
+\]
+with wedge product given pointwise by, for any $\omega \in \Omega^k(M)$ and $\psi \in \Omega ^\ell (M)$, by antisymmetrizing the tensor product $\omega \otimes \psi $. We can as usual pull back $k$-forms $\omega $ by smooth maps $F : M \to N$:
+\[
+	(F^*\omega )_p(v_1, \ldots ,v_k)=\omega _{F(p)} (F_{*p} v_1, \ldots ,F_{*p} v_k)
+.\]
+This is linear, preserves the wedge product, and in coordinates
+\[
+	F^*\left( \sum_{I} \omega _I\mathrm{d} x^I \right) =\sum_{i} (\omega _i\circ F)\mathrm{d} (x^{i_1}\circ F)\wedge \cdots \wedge \mathrm{d} (x^{i_k} \circ F)
+.\]
+
+
+Locally, $k$-forms look like $\omega =\sum_{i}\omega _i \mathrm{d} x^{i_1} \wedge \cdots \wedge \mathrm{d} x^{i_k} $. We typically write $\omega =\sum_{I} \omega _I\mathrm{d} x^I$ for simplicity.
+
+\begin{definition}\label{kjasd}
+	The exterior derivative $\mathrm{d} : \Omega ^k(M) \to \Omega ^k(M)$ is the map given by
+	\[
+		\omega =\sum_{I} \omega _I \mathrm{d} x^I \mapsto \sum_{I} \left( \sum_{j=1} ^n \frac{\partial \omega _I}{\partial x^j} \mathrm{d} x^j \right) \wedge \mathrm{d} x^I
+	.\]
+	We write the coefficient as $\mathrm{d} \omega _I$.
+\end{definition}
+
+If $k=0$ then $\Omega ^0(M)=C^\infty (M)$, and we obtain $\mathrm{d} f = \partial _{x^i} f \mathrm{d} x^i$ which is the gradient. For $k=1$, we have $\Omega ^1(M)=\mathfrak{X} ^*(M)$, yielding
+\[
+	\mathrm{d} \omega =\sum_{j=1} ^n \left( \partial _{x^j} \omega _i - \partial _{x^i} \omega _j \right) \mathrm{d} x^i \wedge \mathrm{d} x^j
+.\]
+This definition requires charts which kinda sucks. Grinding out the chain rule and product rule allows us to find
+\begin{proposition}\label{kjjdf}
+	\begin{enumerate}
+		\item $\mathrm{d}$ is $\mathbb{R} $-linear.
+		\item If $\omega $ is a $k$-form and $\eta $ is a 1-form on an open subset $U\subseteq \mathbb{R} ^n$ or $\mathbb{H} ^n$, then
+			\[
+				\mathrm{d} (\omega \wedge \eta )=\mathrm{d\omega } \wedge \eta +(-1)^k \omega \wedge \mathrm{d} \eta 
+			.\]
+		\item $\mathrm{d} ^2=0$.
+		\item $\mathrm{d} $ commutes with pullbacks: $F^*(\mathrm{d} \omega )=\mathrm{d} F^*(\omega )$ for any smooth $F : M \to N$ and $k$-form $\omega $.
+	\end{enumerate}	
+\end{proposition}
+
+We can actually generalize $\mathrm{d} $ to a map $\Omega ^k\to \Omega ^{k+1} $ in such a way that the first 3 properties still hold, and on $0$-forms $f : M \to \mathbb{R} $ it acts by $\mathrm{d} f(X)=X(f)$.
+
+\begin{definition}\label{sljnd}
+	We say a $k$-form is \emph{closed} iff $\mathrm{d} \omega =0$, and exact iff $\omega =\mathrm{d} \eta $ for some $\eta $. Note that exact $\implies $ closed by $\mathrm{d} ^2=0$.
+\end{definition}
+
+\begin{example}
+	If we try to compute $\mathrm{d} $ on $\mathbb{R} ^3$ and those manifolds we get $\nabla $, $\nabla \times $, and $\nabla \cdot $.
+\end{example}
+

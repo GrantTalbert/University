@@ -1,0 +1,75 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 5}
+\courseID{MA713}
+\begin{document}
+\makeproblem
+
+\begin{problem}
+	This is really a problem in real analysis rather than complex analysis, but the issue that it illustrates -- namely, that the mere \emph{existence} of the partial derivatives $\partial _xu$, $\partial _yu$ at a point $(x,y)$ does not guarentee that $u$ is differentiable at $(x,y)$ -- has come up so often in this course that it is worth a problem. Define a function $u$ on $\mathbb{R} ^2$ by
+	\[
+		u(x,y)=
+		\begin{cases}
+			\frac{xy}{x^2+y^2} ,&(x,y)\neq 0\\
+			0,&(x,y)=0
+		\end{cases}
+	.\]
+	Show that $\partial _xu$ and $\partial _yu$ exist at $0$ but that $u$ is not even continuous at $0$, let alone differentiable there.
+\end{problem}
+\begin{proof}
+	a
+\end{proof}
+
+
+\begin{problem}
+	In the proof of Goursat's theorem given in class, we assumed that
+	\[
+		\int_{\partial R} f =\alpha \neq 0
+	\]
+	and got a contradiction. The final step of the proof was that $\alpha /4^n < \alpha /4^n$, which would be a contradiction even if $\alpha $ were 0. So where in the proof was it absolutely essential to assume that $\alpha \neq 0$?
+\end{problem}
+\begin{proof}
+	idfk
+\end{proof}
+\begin{problem}\label{4}
+	Let $R$ be as in \cref{3}, and let $f(z)=1/z$. By direct calculation, show that
+	\[
+		\int_{\partial R} f=2\pi i
+	.\]
+\end{problem}
+\begin{proof}
+	Recall that
+	\[
+		\frac{1}{z} =\frac{\overline{z} }{\left| z \right|^2 } 
+	.\]
+	Choose a unit speed parameterization of $\partial R$ such that
+	\begin{align*}
+		\oint_{\partial R} f \mathrm{d} z&=\oint_{\partial R} f (\mathrm{d}x+i\mathrm{d} y)\\
+						 &=\int_{-1}^{1} \frac{x+i}{x^2+1}  \mathrm{d} x + \int_{-1}^{1} \frac{1-iy}{y^2+1} i\mathrm{d} y + \int_{1}^{-1} \frac{x-i}{x^2+1} \mathrm{d} x + \int_{1}^{-1} \frac{-1-iy}{y^2+1} i\mathrm{d} y\\
+						 &=\int_{-1}^{1} \frac{x+i+i+x-x+i+i-x}{x^2+1} \mathrm{d} x\\
+						 &=\int_{-1}^{1} \frac{4i}{x^2+1} \mathrm{d} x\\
+						 &=4i \left( \arctan (1) - \arctan (-1) \right) \\
+						 &=4i\left( \frac{\pi }{4} -\frac{-\pi }{4}  \right) \\
+						 &=2\pi i
+	.\end{align*}
+\end{proof}
+\begin{problem}
+	Let $\gamma $ be the unit circle with counterclockwise orientation. For any real number $\lambda $, give an example of a nonconstant holomorphic function on the annulus $\Delta (2,0)\setminus \Delta (1/2,0)$ such that
+	\[
+		\frac{1}{2\pi i} \oint_{\gamma } F = \lambda 
+	.\]
+\end{problem}
+\begin{proof}
+	Set $F(z)=\lambda /z$ and see \cref{4}.
+\end{proof}
+
+\end{document}

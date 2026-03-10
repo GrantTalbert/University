@@ -1,0 +1,76 @@
+\chapter{Fundamental concepts}
+
+\section{Holomorphic functions}
+
+\lecture{1}{Tue 20 Jan 2026 09:29}{Syllabus day}
+the hw is calc 2. radius of convergence is 1 for both
+\[
+	\frac{1}{1-x} =\sum_{n=0}^{\infty} x^n,\qquad \frac{1}{1+x^2} =\sum_{n=0}^{\infty} (-1)^nx^{2n} 
+.\]
+seems relevant for hw maybe?
+
+Recall that $\mathbb{R} ^2\cong \mathbb{C} $ as $\mathbb{R} $-vector spaces via $(1,0)\mapsto 1$ and $(0,1)\mapsto i$. When is an $\mathbb{R} $-linear map $L : \mathbb{R} ^2 \to \mathbb{R} ^2$ $\mathbb{C} $-linear when viewed as a map $\mathbb{C} \to \mathbb{C} $? Recall $\dim _\mathbb{R} \mathbb{C} =2$ and $\dim _\mathbb{C} \mathbb{C} =1$. Well a $\mathbb{C} $-linear map $L : \mathbb{C}  \to \mathbb{C} $ from a 1-dimensional space to itself is fully determined by the image $L(1)$, since $L(z)=zL(1)$. So an $\mathbb{R} $-linear map $L : \mathbb{R} ^2 \to \mathbb{R} ^2$ is $\mathbb{C} $-linear precisely when $L(0,1)=(0,1)L(1)=(0,L(1))$, where $L(1,0)$ is of the form $(\alpha ,0)$ and we define $L(1)\coloneqq \alpha $.
+
+This is a shitty characterization. We can try to characterize the matrix of $L$ as an $\mathbb{R} $-linear map. We start with a map $L : \mathbb{C}  \to \mathbb{C} $. As a map $\mathbb{R} ^2\to \mathbb{R} ^2$ the matrix is simply given as follows. Take $L(1)+a+bi$. Then the matrix of $L$ is $L(1,0)=(a,b)$ and $L(0,1)=i(a+bi)=-b+ai=(-b,a)$. Thus the matrix relative to the standard basis is
+\[
+	L\sim \begin{pmatrix}
+	a & -b \\
+	b & a
+	\end{pmatrix}
+.\]
+Thus $\mathbb{R} $-linear maps which induce $\mathbb{C} $-linear maps are precisely matrices of this form. Additionally, $L(z)=z(a+bi)$ for all $z\in\mathbb{C} $. Apparently this is the linalg version of the Cauchy-Riemann equation.
+
+Analysis review!!! I havent taken analysis but i bet 10 bucks i know what hes about to review. Let $U\subseteq \mathbb{R} ^n$ be open. Recall $f : U \to \mathbb{R} ^m$ is \emph{differentiable} at a point $x\in U$ if and only if there exists a linear transformation $L : \mathbb{R} ^n \to \mathbb{R} ^m$ and a map $\varphi : \mathbb{R} ^n \to \mathbb{R} ^m$ such that $f(x+h)=f(x)+L(h)+\left\| h \right\| \varphi (h)$ for $\left\| h \right\|$ in some $\varepsilon $-neighborhood of $0$, and
+\[
+	\lim_{h \to 0} \varphi (h)=0
+.\]
+. Intuitively $f$ is well-approximated by a linear function sufficiently close to a point $x$. I guess owe someone 10 bucks now. If this holds, $L$ is called the \emph{derivative} of $f$ at $x$, also called the \emph{Jacobian} $f_*(x)=\partial _if^j$. It is simple to show that $L$ is unique. Recall that matrix indicies are row then column.
+
+The main subject of this course is \emph{holomorphy} and holomorphic functions. In $\mathbb{R} ^n$, it is interesting to say whether a function is differentiable at a point. In $\mathbb{C} $, this is not interesting at all and it is more interesting to consider holomorphy on open subsets.
+
+\begin{definition}\label{1.1.1}
+	Let $U\subseteq \mathbb{C} $ open. A function $f : U \to \mathbb{C} $ is called \emph{holomorphic} on all of $U$ if for all $z\in U$, when viewed as a map $f : U\subseteq \mathbb{R} ^2 \to \mathbb{R} ^2$ is differentiable at $z$ and the Jacobian is $\mathbb{C} $-linear, meaning
+	\[
+		\begin{pmatrix}
+		\partial _xf^x & \partial _xf^y \\
+		\partial _yf^x & \partial _yf^y
+		\end{pmatrix}\text{ is of the form } \begin{pmatrix}
+		a & b \\
+		-b & a
+		\end{pmatrix}
+	.\]
+	In particular, $\partial _xf^x=\partial _yf^y$ and $\partial _xf^y=-\partial _yf^x$. These are the \emph{Cauchy-Riemann} equations, usually written as $f^x=u$ and $f^y=v$.
+\end{definition}
+
+\begin{mdframed}
+	\[
+		\frac{\partial u}{\partial x} =\frac{\partial v}{\partial y} \qquad \text{and} \qquad \frac{\partial u}{\partial y} =-\frac{\partial v}{\partial x} 
+	\]
+\end{mdframed}
+
+Thus \cref{1.1.1} can be rewritten as a function which is everywhere differentiable on $U$ and satisfies the Cauchy-Riemann equations.
+
+\begin{example}\label{1.1.2}
+	Let $f(z)=z$, so $u=x$ and $v=y$. Then $\partial _if^j=\delta _{i} ^j$, which satisfies the Cauchy-Riemann equations.
+
+	Let $f(z)=z^2$. Then
+	\[
+		f(x+iy)=(x^2-y^2)+i2xy
+	.\]
+	The derivatives are
+	\[
+		\frac{\partial u}{\partial x} =2x,\qquad \frac{\partial v}{\partial y} =2x,\qquad \frac{\partial v}{\partial x} =2y,\qquad \frac{\partial u}{\partial y} =-2y
+	.\]
+	This satisfies the Cauchy-Riemann equations.
+
+	Let $e^z=e^x\left( \cos y+i \sin y \right) $. Then
+	\[
+		\partial _if^j=\begin{pmatrix}
+		e^x \cos y & e^x \sin y \\
+		-e^x \sin y & e^x \cos y
+		\end{pmatrix}
+	.\]
+	
+	Let $f(z)=\overline{z} $. Then $\partial _if^j=\sigma _z$ (easy to check) which does \emph{not} satisfy Cauchy-Riemann.
+\end{example}
+

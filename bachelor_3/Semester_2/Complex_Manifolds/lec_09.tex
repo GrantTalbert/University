@@ -1,0 +1,74 @@
+\lecture{9}{Thu 26 Feb 2026 12:31}{Holomorphic vector bundles}
+
+Consider a map $X\to \mathbb{C} \mathbb{P}^m$ for $X\subseteq \mathbb{C} \mathbb{P} ^n$ a manifold. Such a map is given by a collection $\left\{ p_i \right\} _{0\leq i\leq m} $ of homogeneous polynomials of the same degree that do not simultaneously vanish on $X$. We will see that this can be described as follows: maps $X\to \mathbb{C}\mathbb{P} ^m$ are given by a line bundle $\mathcal{L} \to X$ together with a collection of holomorphic sections that don't simultaneously vanish. To understand this, we define holomorphic vector bundles.
+
+There are two approaches to holomorphic vector bundles. We start with the \emph{total space picture}, and show how this is equivalent to the \emph{cocycle picture}.
+
+\begin{definition}\label{>>>}
+	Let $X$ be a complex manifold. A holomorphic vector bundle $E$ over $X$ of rank $ k$ is a complex manifold $E$ together with a holomorphic map $\pi : E \to X$ such that
+	\begin{itemize}
+		\item there exists an open cover $\left\{ U_i \right\} _{i\in I} $ of $X$ and biholomorphisms $\varphi _i : \pi ^{-1} (U_i) \to U_i\times \mathbb{C} ^k$ making the following diagram commute:
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\pi ^{-1} (U_i)\ar[" \varphi _i ", rr] \ar[" \pi  "', dr]  &  & U_i\times \mathbb{C} ^k \ar[" \pi _i ", dl]  \\
+			 & U_i & 
+			\end{tikzcd}\]
+		\item Write $U_{ij} =U_i \cap U_j$. Then the transition functions $\varphi _{ij} \coloneqq \varphi _i \circ \varphi _j^{-1} : U_{ij} \cap \mathbb{C} ^k \to U_{ij} \cap \mathbb{C} ^k$ must be biholomorphic and of the form
+			\[
+				\varphi _{ij} (x,v)=(x,g_{ij} (x)v)
+			\]
+			for some $g_{ij} \in \operatorname{GL} (k,\mathcal{O}_X(U_{ij} ))$; i.e. $g_{ij} $ is a biholomorphic map $U_{ij} \to \operatorname{GL} (k,\mathbb{C} )$.
+	\end{itemize}
+\end{definition}
+
+Note that $g_{ij} =g_{ji} ^{-1} $, and on a triple overlap $U_{ijk} $, we have $g_{ij}\cdot  g_{jk} =g_{ik} $. This is called the \emph{cocycle condition}, and the collection $\left\{ g_{ij}  \right\}_{i,j\in I} $ is called the \emph{cocycle} of $E$.
+
+\begin{terminology}\label{askjnsk}
+	A holomorphic vector bundle of rank 1 is called a holomorphic \emph{line bundle}.
+\end{terminology}
+
+\begin{example}
+	A simple example is the trivial bundle $X\times \mathbb{C} ^k \to X$. For a more interesting example, consider $\mathcal{O}_{\mathbb{C} \mathbb{P} ^n} (-1)$. Given $[a]\in\mathbb{C} \mathbb{P} ^n$, write $L$ for the line $\left\{ ([a],v)\mid v\in\mathbb{C} a \right\} $. We project by $p|L : L \to \mathbb{C} \mathbb{P} ^n$. We use the usual cover $\left\{ U_i \right\}_{0\leq i\leq n} $ where the $i$th homogeneous coordinate is nonzero in $U_i$, and its preimage $p ^{-1} (U_i)$ is $U_i \times \left\{ v\in\mathbb{C} ^{n+1} \mid v\in [z]\in U_i \right\} $. We then write $v = t[z]$ for the representative of $[z]$ with $z_i=1$, and map $([z],v)\mapsto ([z],t)$. This gives a map $p ^{-1} (U_i) \cong U_i \times \mathbb{C} $. By construction the relevant diagram commutes. Since $\operatorname{GL} (1,\mathcal{O} _X(U_{ij} )) \cong \mathcal{O} _{X} (U_{ij} )$, we compute the cocycle by finding a holomorphic function which is nonvanishing on the overlaps. Define
+	\[
+		g_{ij} : U_{ij}  \to \operatorname{GL} (1,\mathbb{C} )=\mathbb{C} ^*
+	\]
+	as follows. Define
+	\[
+		g_{ij} : U_{ij} \times\mathbb{C}  \to U_{ij} \times \mathbb{C} 
+	\]
+	as follows. View the first $U_{ij} $ as $\subseteq U_j$, and the second as $U_i$. By this we mean set $z_j=1$ in the first, and $z_i=1$ in the second. The transition function $\varphi _{ij} $ is $\varphi _i \circ \varphi _{j} ^{-1} $, which maps
+	\[
+		\left(\left[ \frac{z_0}{z_j} : \cdots : 1 : \cdots : \frac{z_n}{z_j}  \right],t\right) \mapsto \left( \left[ \frac{z_0}{z_j} : \cdots : 1 : \cdots : \frac{z_n}{z_j}  \right] ,t[z] \right) = \left( \frac{z_j}{z_i}[z], t \frac{z_j}{z_i} [z]  \right) \mapsto \left( [z],\frac{z_j}{z_i} t \right) 
+	.\]
+	Hence $g_{ij} =\frac{z_j}{z_i} $.
+\end{example}
+
+It will be useful to see how cocycles give rise to holomorphic vector bundles, since it is easier to see if cocycles are cohomologous in some sense, rather than constructing isomorphisms on the total space.
+
+Suppose we are given, for all $i,j$, a cover $\left\{ U_i \right\} _{i\in I} $ and maps $g_{ij} : U_{ij}  \to \operatorname{GL} (k,\mathbb{C} )$ satisfying
+\begin{itemize}
+	\item $g_{ij} =g_{ji} ^{-1} $ and
+	\item $g_{ij} \cdot g_{jk} =g_{ik} $.
+\end{itemize}
+Then we can build the total space and projection of a vector bundle of rank $k$ $p : E \to X$ as follows. We start by taking the disjoint union of the covers, and then glue along the relation
+\[
+	E\coloneqq \left( \coprod_{i\in I} U_i\times \mathbb{C} ^k \right) / \left\langle (x,v)\sim (x,g_{ij} (v)) \forall x\in U_{ij}  \right\rangle 
+.\]
+There is some bookkeeping needed to check $E$ has a complex manifold structure. To define $p : E \to X$, choose $(x,v)\in[x,v]$, note that $x$ is fixed, and map $p[x,v]=x$. Because the equivalence relation we glued along is linear, we find that all relevant universals for vector spaces can be done to vector bundles.
+
+We compute the cocycles for the dual $E^*$ for fun. Let $p : E \to X$ be a vector bundle of rank $k$ with local trivializations $\varphi _i : p ^{-1} (U_i) \to U_i\times \mathbb{C} ^k$. Write $\varphi _i \circ \varphi _j ^{-1} =g_{ij} $. When we dualize, the map $g_{ij} ^t$ goes the opposite direction, so we invert it to obtain $(g_{ij} ^t)^{-1} $ as a cocycle for $E^*$. Proving this is a cocycle is like effort.
+
+Let $E,F\to X$ be represented by $\left\{ g_{ij}  \right\} ,\left\{ h_{rs}  \right\} $. WLOG assume they are trivialized on the same open cover, since otherwise we may refine it. We represent $E\oplus F$ by $g_{ij} \oplus h_{ij} $ (diagonal block matrix). We represent $E\otimes F$ by $g_{ij} \otimes h_{ij} $. We represent the \emph{highest} exterior power $\Lambda ^kE$, which should have rank 1, by $\left\{ \det g_{ij}  \right\} $.
+
+\begin{definition}\label{ashj}
+	Let $p : E \to X$ be a holomorphic vector bundle. A (global) holomorphic section of $E$ is a holomorphic map $s : X \to E$ such that $p\circ s=1$. We write $\Gamma (E)$ or $\Gamma (X,E)$ for the set of global sections of $E$.
+\end{definition}
+
+One defines local sections in the same way. Note here that any holomorphic vector bundle $E$ on $X$ defines a sheaf on $X$, also denoted by $E$, by taking sections of the sheaf $E$ to be sections of the vector bundle $E$.
+
+If $\varphi _i : p ^{-1} (U_i) \to U_i\times \mathbb{C} ^k$ is a trivialization, then $\varphi _i \circ s|U_i : U_i \to U_i\times \mathbb{C} ^k$ is a vector-valued function $x\mapsto (x,(\varphi_i \circ s)(x))$. Here we abuse notation and write $\varphi (p) = (p,\varphi (p))$ since $\varphi $ must act in this way. We also note that, writing $\varphi _i \circ s = f_i$, we have $f_i = g_{ij} f_j$.
+
+Consider $\mathcal{O} _{\mathbb{C} \mathbb{P} ^1} (-1)$ and its dual $\mathcal{O} _{\mathbb{C} \mathbb{P}^1 } (1)$ on $\mathbb{C} \mathbb{P} ^1$. Represent these by $g,h$. Then
+\[
+	g_{01} =\frac{z_0}{z_1} ,\qquad h_{01} =\frac{z_1}{z_0} =\frac{1}{g_{01} } 
+.\]
+I got this backwards earlier. A section of $\mathcal{O} _{\mathbb{C} \mathbb{P} ^1} (-1)$ is a pair $f_0,f_1 :  \mathbb{C} \to \mathbb{C} $ (which look like polynomials $a_0+a_1t+ \cdots $ and $b_0+b_1t^{-1}+b_2t ^{-2}+ \cdots $), such that $f_0 = \frac{1}{t} f_1$ (agree under $g_{ij} $ on overlap). There is no way for this to happen unless $f_0=f_1=0$. Thus $\mathcal{O} _{\mathbb{P} ^1} (-1)$ has no nontrivial sections, so $\Gamma (\mathbb{P} ^1,\mathcal{O} _{\mathbb{P} ^1} (-1))\cong 0$. The same will not be true of the dual.

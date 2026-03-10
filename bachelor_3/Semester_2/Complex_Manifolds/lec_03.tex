@@ -1,0 +1,108 @@
+\lecture{3}{Tue 27 Jan 2026 12:29}{a}
+
+Office hours are Wednesday 1-3pm, cds431. MA822 will probably move to psy b33.
+
+\begin{proposition}\label{1.1.28}
+	$\mathcal{O} _{\mathbb{C} ^n,0} $ is Noetherian.
+\end{proposition}
+\begin{proof}
+	We induct on $n$. At $n=1$ the statement is trivial apparently. Assume the inductive hypothesis for $n-1$. Recall that the Hilbert basis theorem says that $N$ Noetherian implies $N[x]$ Noetherian. We apply this here to obtain $\mathcal{O} _{\mathbb{C}^{n-1},0} [z_1]$ is Noetherian. Let $I\subseteq \mathcal{O} _{\mathbb{C} ^n,0} $ be a nonzero proper ideal. Then it contains some nonzero nonunit $f\in I$, so $f(0)=0$. By \cref{1.1.23}, $f=p\cdot u$ for $p$ a Weierstrass polynomial and $u$ a unit. Then $f\in I$ implies $f\cdot u^{-1} =p\in I$. Consider $I'\coloneqq I \cap \mathcal{O} _{\mathbb{C} ^{n-1} ,0} $. Then since $\mathcal{O} _{\mathbb{C} ^{n-1} ,0} $ is Noetherian, $I'=\left<q_1, \ldots ,q_r\right>$. We claim $I=\left\langle p,q_1, \ldots ,q_r \right\rangle $. Choose $g\in I$. Then \cref{1.1.24} divides $g$ as $ap+s$ for $s\in \mathcal{O}_{\mathbb{C} ^{n-1} ,0} $ of degree less than $p$ and $a$ holomorphic. Since $g,p\in I$, we have $s\in I$. Thus $s\in I'$, and thus $s$ is a linear combination in $q_i$. Thus $g$ is a linear combination in $p$ and the $q_i$s, concluding the proof.
+\end{proof}
+
+\begin{remark}\label{1.1.29}
+	We do not need to only consider rings of germs at the origin, since up to translation any point can be mapped to the origin.
+\end{remark}
+
+\begin{definition}\label{1.1.30}
+	Let $U\subseteq \mathbb{C} ^n$ be open. An \emph{analytic subvariety of $U$} is a subset $V\subseteq U$ such that for every $z_0\in V$, there exists a collection of holomorphic functions $\{f_i : U\to \mathbb{C}\}_{1\leq i\leq r}  $ such that $z_0$ is in the inersection of the vanishing loci of the $f_i$s.
+\end{definition}
+
+We can then discuss germs of analytic varieties, and obtain a nice language similar to that of algebraic geometry for $\mathbb{C} ^n$. We will not continue down this path, and will instead begin our discussion of complex geometry.
+
+\begin{definition}\label{1.1.31}
+	Let $U\subseteq \mathbb{C} ^n$ and $V\subseteq \mathbb{C} ^m$ open. Then $f : U \to V$ is holomorphic iff all $f_j$s are holomorphic. We say $f$ is biholomorphic if it has a holomorphic inverse.
+\end{definition}
+\begin{remark}\label{1.1.32}
+	With notation as in \cref{1.1.31}, if $f$ is a biholomorphism, then $n=m$ is forced. We do not prove this since it is not quite trivial.
+\end{remark}
+\begin{notation}\label{1.1.33}
+	We will generally write coordinates in the domain as $z_i=x_i+iy_i$ and coordinates in the codomain as $w_i=u_i+iv_i$.
+\end{notation}
+
+Identifying $\mathbb{C} ^n \cong \mathbb{R} ^{2n} $, the derivative takes the form
+\[
+	\mathrm{D} f=\begin{bmatrix}
+		\frac{\partial u^i}{\partial x_j}  & \frac{\partial u^i}{\partial y_j}  \\
+	\frac{\partial v^i}{\partial x_j}  & \frac{\partial v^i}{\partial y_j} 
+	\end{bmatrix}
+.\]
+This is $\mathbb{C} $-linear $T_a\mathbb{C} ^n\to T_{f(a)} \mathbb{C} ^m$, which are complex vector spaces now defined as $C^\infty (\mathbb{C} ^n)$. In this case, $\mathrm{D} f$ is represented by the frames $\partial _{x_i} $ and $\partial _{u_k} $ by
+\[
+	\mathrm{D} f_i^j=\frac{\partial f^i}{\partial z_j} 
+.\]
+For example, take $U,V\subseteq \mathbb{C} $. The fact that $f$ is holomorphic and $\mathrm{D} f$ viewed as $\mathbb{R} ^2\to \mathbb{R} ^2$ is $\mathbb{C} $-linear means that for $J$ the complex structure
+\[
+	J=\begin{pmatrix}
+	0 & -1 \\
+	1 & 0
+	\end{pmatrix},
+\]
+we have $J\circ \mathrm{D} f=\mathrm{D} f\circ J$. Expanding this out yields
+\[
+	\mathrm{D} f(\partial _x)= \frac{\partial f}{\partial z} \partial_u
+.\]
+
+It is convenient to work with complex tangent vectors.
+
+\begin{warning}\label{1.1.34}
+	The vectors $\partial _{z_j} $ and $\partial _{\overline{z} _j} $ \emph{do not live} in $T_a\mathbb{R} ^{2n} $. This is because $\partial _{z_j} =\frac{1}{2} (\partial _{x_j} +i \partial _{y_j} )$, and the number $i$ doesn't make sense in $T_a\mathbb{R} ^{2n} $. Thus we need to tensor with $\mathbb{C} $ over $\mathbb{R} $. Thus we usually consider $T_a\mathbb{C} ^n \otimes _\mathbb{R} \mathbb{C} $.
+\end{warning}
+
+\begin{claim}
+	With respect to the frames $\partial _{z_j} $ and $\partial _{w_k} $, $\mathrm{D} f : T_a\mathbb{C} ^n \to T_{f(a)} \mathbb{C} ^m$ extends to a linaer transformation
+	\[
+		\mathrm{D} f : T_a\mathbb{C} ^n\otimes _\mathbb{R} \mathbb{C}  \to T_a\mathbb{C} ^n\otimes _\mathbb{R} \mathbb{C} 
+	.\]
+	Moreover it is of the form
+	\[
+		\mathrm{D} f=\begin{bmatrix}
+			(\partial _zf) & (\partial_{\overline{z} } f) \\
+			(\partial _z \overline{f})  & (\partial _{\overline{z} } \overline{f} )
+		\end{bmatrix}
+	.\]
+	Thus if it is holomorphic,
+	\[
+		\mathrm{D} f=\begin{bmatrix}
+			(\partial _zf) & 0 \\
+		0 & (\partial _{\overline{z} } \overline{f} )
+		\end{bmatrix}=\begin{bmatrix}
+		(\partial _zf) & 0 \\
+		0 & \overline{(\partial _zf)} 
+		\end{bmatrix}
+	.\]
+\end{claim}
+
+Let's see this when $m=n=1$. Then
+\[
+	\mathrm{D} f(\partial _z)=\begin{pmatrix}
+	\partial _xu & \partial _yu \\
+	\partial _xv & \partial _yv
+	\end{pmatrix}\begin{pmatrix}
+	\frac{1}{2}  \\
+	-\frac{i}{2} 
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	\partial _xu \\
+	\partial _xv
+	\end{pmatrix}-\frac{i}{2} \begin{pmatrix}
+	\partial _yu \\
+	\partial _yv 
+	\end{pmatrix}=\frac{1}{2} \begin{pmatrix}
+	\partial _xu-i \partial _yu \\
+	\partial _xv-i \partial _yv
+	\end{pmatrix}
+.\]
+We claim this is
+\[
+	\frac{\partial f}{\partial z} \frac{\partial }{\partial w} +\frac{\partial \overline{f} }{\partial z} \frac{\partial }{\partial \overline{w} } 
+.\]
+This can be verified by brute force. We remark that since $T_a\mathbb{C} ^n \otimes _\mathbb{R} \mathbb{C} $ is basically just $T_a\mathbb{C} ^n \oplus iT_a\mathbb{C} ^n$ and since the Jacobians of holomorphic functions are half zero, they basically reduce to maps $T_a\mathbb{C} ^n\to T_a\mathbb{C} ^n$ in the way we would conventionally think, and the determinant agrees with their real Jacobian.

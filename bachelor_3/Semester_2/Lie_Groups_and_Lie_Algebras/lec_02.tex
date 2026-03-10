@@ -1,0 +1,45 @@
+\section{Lie algebras}
+
+
+\lecture{2}{Thu 22 Jan 2026 10:57}{The Lie algebra and the exponential}
+
+Let $G$ a Lie group. Then since left- and right-multiplication $\mathcal{L} _g : h\mapsto gh$ and $\mathcal{R} _g : h\mapsto hg$ are diffeomorphisms, we obtain $T_gG\cong T_eG$ for all $g\in G$ by passing to the pushforwards. Thus there exists a global tangent frame by a choice of basis for $T_eG$. We then identify $X\in T_eG$ with \emph{left-invariant vector field}. This is a vector field which is invariant under left-multiplication, meaning
+\[
+	X_g\coloneqq (\mathcal{L} _g)_*X
+.\]
+As explored in MA721 (see \cite{lee} 8.33 and onwards), the set of left-invariant vector fields forms a Lie algebra. Hence we define
+\begin{definition}\label{1.2.1}
+	Let $G$ be a Lie group. The \emph{Lie algebra} of $G$, often denoted $\mathfrak{g} $, is defined to be the set of left-invariant vector fields of $G$, and is generally identified with $T_eG$.
+\end{definition}
+
+\begin{definition}\label{1.2.2}
+	Let $X$ be a manifold with hermitian structure. If the fundamental form $\omega $ is closed, i.e. $\mathrm{d} \omega =0$, then the manifold is called a \emph{K\"ahler manifold} and $\omega $ is called the \emph{K\"ahler form} (\cite{huybrechts} 3.1.6). A \emph{Calabi-Yau maniold} is a compact K\"ahler manifold with a nowhere-vanishing holomorphic $n$-form.
+\end{definition}
+
+
+\begin{definition}\label{1.2.3}
+	A \emph{Lie groupoid} is a groupoid $\mathcal{G} $ such that $\Obj(\mathcal{G} ) ,\Mor(\mathcal{G} )$ are smooth manifolds, the maps $\dom, \cod : \Mor(\mathcal{G} ) \to \Obj(\mathcal{G} ) $ are smooth, identity $1_{\bullet} : \Obj(\mathcal{G} )  \to \Mor(\mathcal{G} )$ is smooth, and the collection of composeable pairs $\Mor(\mathcal{G} )\times_{\dom,\cod} \Mor(\mathcal{G} )$ is a smooth manifold and composition is smooth. More succinctly, a Lie groupoid is an \emph{internal groupoid object} in the category $\mathcal{M} \mathrm{an} $ of smooth manifolds (\cite{nlab:groupoid_object}). An \emph{et\'ale groupoid} is a Lie groupoid where dom and cod are local diffeomorphisms.
+\end{definition}
+
+\begin{example}\label{1.2.4}
+	Let $M\times M\rightrightarrows M$ be the projections of a manifold $M$. Then this is a Lie groupoid with identity given by $x\mapsto (x,x)$. Another example is the first fundamental groupoid $\Pi _1(M)$ of a manifold $M$ (recall morphisms are homotopy classes of paths). 
+\end{example}
+
+\subsection{The exponential map}
+
+Recall the flow of a vector field $X$ is given by some $\gamma (t)$ satisfying
+\[
+	\frac{\mathrm{d}\gamma (t)}{\mathrm{d}t} =X(\gamma (t)),\qquad \gamma (0)=p
+\]
+for any $p\in M$. This locally has solutions on any manifold since it is an ODE, but in Lie groups it has solutions for all time on left-invariant vector fields since we can translate via left translation and the resultant equations still satisfy the ODE. This leads to a notion of the \emph{exponential}.
+
+\begin{definition}\label{1.2.5}
+	Let $G$ be a Lie group, and let $X\in T_eG$ be a left-invariant vector field. Then define $\exp ^tX$ to be the flow $\gamma (t)$ of $X$ satisfying
+	\[
+		\frac{\mathrm{d}\gamma }{\mathrm{d}t} =X(\gamma (t)),\qquad \gamma (t)=e
+	\]
+	for $e\in G$ the identity. We then write $\exp =\exp ^1$, so
+	\[
+		\exp X=\gamma (1)
+	.\]
+\end{definition}

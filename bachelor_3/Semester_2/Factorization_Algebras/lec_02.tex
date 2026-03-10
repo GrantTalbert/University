@@ -1,0 +1,94 @@
+\lecture{2}{Fri 23 Jan 2026 13:59}{Finishing classical motivation and beginning quantum motivation}
+
+Recall that the issue of boundary conditions vanishes by restricting to compactly supported variations.
+
+\begin{definition}\label{1.0.2}
+	Let $U\subseteq M$ open. Define $EL(U)$ as solutions to E-L eqns on $U$ via restricting $S|U$. Define $\mathcal{O} ^{cl} (U)$ to be functions on $EL(U)$.
+\end{definition}
+We are intentionally vague with what ``functions on $EL(U)$'' means. Generally the critical locus is at least topologized since we can endow $\mathcal{E} $ with the compact-open topology and consider $EL(U)$ as a subspace. The point is that we are thinking of $\mathcal{O} ^{cl} $ as some sheaf-like construction. We will then axiomatize factorization algebras as such structures.
+
+Note that $U\subseteq V$ induces $EL(V)\to EL(U)$ via restriction, which then induces $\mathcal{O}^{cl}  (U)\to \mathcal{O} ^{cl} (V)$ via precomopsition. Thus $\mathcal{O} ^{cl} $ is a \emph{precosheaf}. We are thus interested in how $\mathcal{O} ^{cl} $ interacts with open sets.
+
+If $U_1,U_2\subseteq M$ are open and disjoint, then specifying a solution to the Euler Lagrange eqns on $U_1 \cup U_2$ is the same on specifying a solution on $U_1$ then $U_2$, since the solution on one region does not impact the other. Thus we have
+\[
+	EL(U_1 \amalg U_2) \cong EL(U_1)\times EL(U_2)
+.\]
+We want to see how this changes when we take $\mathcal{O} ^{cl} $. To take functions on a product $EL(U_1)\times EL(U_2)\to \mathbb{R} $, we should be able to pass to the tensor product. For example, if we consider polynomials, then we can view polynomials on $U_1$ as polynomials in $x$ and polynomials on $U_2$ as polynomials in $y$. We then simply note that $\mathbb{C} [x]\otimes _\mathbb{C} \mathbb{C} [y]\cong \mathbb{C} [x,y]$, and similarly for other fields. There is a bit of a more rigorous argument that I will not get into. The point is that for classes of functions we are considering, we should have
+\[
+	\mathcal{O} ^{cl} (U_1\amalg U_2)\cong \mathcal{O} ^{cl} (U_1)\otimes \mathcal{O} ^{cl} (U_2)
+.\]
+This isomorphism need not hold in maximal generality, but there are various tools we can use to make it hold more generally, such as completing a ring with respect to a topology. This is apparently discussed further in \cite{cg1}.
+
+We should expect $\mathcal{O} $ to pass a notion of functoriality to these tensor products, meaning that given a collection $\left\{ U_i\subseteq M \right\} _{i\in n} $ of pairwise disjoint open sets and an open set $V\subseteq M$, there should be a \emph{structure map}
+\[
+	\bigotimes_{i\in n} U_i \to V
+.\]
+It may be useful to think of this like a functor of colored operads.
+
+In classical theory, when $U_1 \cap U_2$ is nonempty, it is straightforward to just say we consider solutions that agree on the overlap. So we can consider overlaps. However in a quantum theory, it doesn't make sense to make meaurements at the same time (recall our manifold represents space\emph{time}), since observables don't commute and thus measuring two things at once would not just be measuring the particle, but the other measurement would be interfering. Hence we cannot consider overlaps in quantum theory. Thus we do not have a cosheaf.
+
+\chapter{From gaussian measures to factorization algebras}
+
+\section{Gaussian integrals in finite dimensions}
+
+We now consider another motivation via Feynman's path integral and the BV formalism. Let $(X,\mu )$ a probabiliy space (measure space with a specific measure that behaves like you would expect) and random variables $\left\{ f_i : X \to \mathbb{C}  \right\} _{i\in r} $. The expectation value is defined by $\left\langle \left\{ f_i \right\}  \right\rangle =\int _X \prod_{i} f_i\,\mathrm{d} \mu $. For quantum mechanics, we replace classical variables with classical observables $\mathcal{E} \to \mathbb{C} $ and we rplace $\mu $ with $e^{-S(\phi )} D \phi $. This yields the path integral
+\[
+	\left\langle \left\{ \mathcal{O} _i^{cl}  \right\} _{i\in r}  \right\rangle \text{``}=\text{''} \int_\mathcal{E} \prod_{i\in r} \mathcal{O} _i(\phi )e^{-S(\phi )}  \,\mathrm{D}\phi 
+.\]
+There is a problem introduced by the $\mathrm{D} \phi $ term. This should be a measure on the space $\mathcal{E} $ of fields, but such a meaure either doesn't exist, or is sufficiently poorly behaved to be wrong. For example, on topological vector spaces such a meaure is not translation invariant.
+
+Thus it's hard (for mathematicians) to figure out what this means. We can make sense of this in the perturbative case, but physicists and mathematicians agree this is not the whole picture. This is a serious problem, because physicists use the path integral to obtain correct physical answers, so there must be some rigorous mathematical definition of the path integral. This would be quite useful to find, since computing expectation values van yield nearly all the information in quantum physics.
+
+Let's reframe integrals in homological terms. Let $M$ a compact orientable $n$-manifold (compactness not required, but simpler) without boundary. Recall the de Rham complex $(\Omega ^{\bullet} (M),\mathrm{d} )$ is truncated at $n$, and yields de Rham cohomology. The top cohomology $H^n_{\mathrm{dR} } (M) =\Omega ^n(M) /  \mathrm{d} \Omega ^{n-1} (M)$ is isomorphic to $\mathbb{R} $ since it is compact. Since we integrate $n$-forms, we can view integration as a map
+\[
+	\int : \Omega ^n(M) \to \mathbb{R} 
+.\]
+By Stokes' theorem, the kernel of $\int$ is exact forms since $\partial M=\varnothing $, so it lowers by universality to
+\[
+	\int : H^n(M) \cong \mathbb{R} 
+.\]
+The issue is when passing to infinite dimensional manifolds with $M=\mathcal{E} $, where top forms don't make sense. To make sense of this, we review another characterization of the de Rham complex in the finite case.
+
+	Recall that given a $k$-vector field $X\in \Gamma (TM^{\otimes k} )$ and an $\ell $-form $\omega \in \Omega ^\ell (M)$, then the interior product $X\intprod\omega $ is defined as the $(\ell -k)$-form defined by
+	\[
+		(X\intprod\omega )_p=\omega_p (X_p, -)
+	.\]
+	This makes sense since $X_p$ is a $k$-tensor, and up to multilinearity represents $k$ vectors. Thus $\omega (X,-)$ is a map in $\ell -k$ variables.
+
+	Recall also that a \emph{volume form} for a Riemannian manifold is a form $\omega $ such that for every oriented orthonormal local frame $\left\{ E_i \right\} _{i=1} ^n$, we have $\omega (E_1, \ldots ,E_n)=1$. In smooth coordinates,
+	\[
+		\omega _g=\sqrt{\det g_{ij} } \mathrm{d} x^1 \wedge \cdots \wedge \mathrm{d} x^n
+	.\]
+
+Take $\omega \in \Omega ^n(M)$ a volume form. This is nondegenerate, so the interior product $-\intprod\omega $ yields isomorhisms $\Lambda ^kTM \cong \Lambda ^{n-k} T^*M$. Thus contracting with $\omega $ yields by functoriality of taking sections
+\[
+	 \Gamma (\Lambda ^{n-k} TM)\cong \Omega ^k(M)
+.\]
+We call these \emph{polyvector fields}. We can induce a differential on $\Lambda ^{\bullet} TM$ to promote this to a map of cochain complexes:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdots \ar[" \mathrm{d}  ", r]  & \Omega ^{n-1} (M)\ar[" \mathrm{d}  ", r]  & \Omega ^n(M)\ar[" \mathrm{d}  ", r]  & 0 \\
+\cdots \ar[" ? "', r]  & \mathfrak{X} (M)\ar[equals, d] \ar[" \intprod \omega "', " \cong  ", u] \ar[" ? "', r]  & C^\infty (M)\ar[equals, d] \ar[" \cong  ", " \intprod \omega "', u] \ar[" ? "', r]  & 0 \\
+\cdots  & \Gamma (\Lambda ^1TM) & \Gamma (\Lambda ^0TM) & 
+\end{tikzcd}\]
+
+We can compute the map $\mathfrak{X} (M)\to C^\infty (M)$ using the fact that contraction with $\omega $ is an isomorphism. Let $X\in \mathfrak{X} (M)$. Then the image of $X$ in $\Omega ^n(M)$ is $\mathrm{d} i_X\omega $. We then use Cartan's magic formula (\cite{lee} 14.35)
+\[
+	\mathcal{L} _X\omega =i_X\mathrm{d} \omega +\mathrm{d} i_X\omega 
+\]
+to compute
+\[
+	\mathcal{L} _X\mathrm{d} \omega =i_X\mathrm{d} ^2\omega +\mathrm{d} i_X\omega =\mathrm{d} i_X\omega 
+.\]
+Hence the image of $X$ in $C^\infty (M)$ must contract with $\omega $ to yield $\mathcal{L} _X\omega $. Since contracting with a function is simply pointwise multiplication and $\omega $ is nonvanishing, it makes sense to divide by it, yielding the map
+\[
+	X\mapsto \frac{\mathcal{L} _X\mathrm{d}\omega }{\omega }=\frac{\mathrm{d} \mathcal{L} _X\omega }{\omega }  
+.\]
+
+This map turns out to be $\operatorname{Div} _\omega $. We call the complex the \emph{divergence complex} and in finite dimensions it is isomorphic to the de Rham complex. The relevance is that it can pass to infinite dimensions by rephrasing integration as a map
+\[
+	\int : \Omega ^n(M) \cong \Gamma (\Lambda ^{n-n=0} TM)=C^\infty (M)\longrightarrow \mathbb{R} 
+\]
+and remarking that in infinite dimensions, the de Rham complex is concentrated in positive degree, whereas the divergence complex must be concentrated in negative degree. We can hope to make sense of $\operatorname{div} _\omega $, called the BV laplacian $\Delta $, in $\infty $ dim when $M=\mathcal{E} $.
+
+Some remarks from \cite{cg1} that I find important. Perturbative theory corresponds to working over the ring $\mathbb{C} [[\hbar ]]$ of formal power series in $\hbar $ (so like stuff is just power series). At $\hbar =0$, we recover classical theory. In perturbative theory, the vector space $\mathcal{O} (U)$ of observables on an open set $U$ will form a flat $\mathbb{C} [[\hbar ]]$-module.
+

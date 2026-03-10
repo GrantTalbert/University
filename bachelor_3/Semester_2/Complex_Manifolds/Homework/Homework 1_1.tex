@@ -1,0 +1,255 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{enumitem}
+\usepackage{titlepageBU}
+\title{Homework 1}
+\courseID{MA 726 Complex Geometry}
+\begin{document}
+\makeproblem
+
+\begin{problem}[1.1]
+	Let $U\subseteq \mathbb{C} ^n$ be a connected open set. Reduce to the one-variable case to prove the following. Let $f : U \to \mathbb{C} $ be holomorphic. Suppose that $V\subseteq U$ is a non-empty open set with the property that $f$ is identically zero on $V$. Then $f$ is identically zero on $U$. Hence if $g\in \mathcal{O}_{\mathbb{C} ^n}(U)$ is a second holomorphic function which agrees with $f$ on $V$, then $f=g$ on all of $U$.
+\end{problem}
+\begin{proof}
+	Define the set
+	\[
+		Z\coloneqq \left\{ z\in U\mid f\text{ vanishes on an open neighborhood of } z \right\} 
+	.\]
+	We will show $Z=U$. Since $U$ is connected, it suffices to show $Z$ is open and closed with respect to the subspace topology. Showing $Z$ is open follows by definition: given $z\in Z$, let $K_z\subseteq U$ be an open neighborhood of $z$ such that $f|K_z=0$. Then $K_z$ is an open neighborhood of all $k\in K_z$ such that $f|K_z=0$, so $K_z \subseteq Z$. Thus
+	\[
+		Z=\bigcup_{z\in Z} K_z
+	.\]
+	Therefore we can realize $Z$ as a union of open sets, meaning $Z$ is open.
+
+	Recall that for all $\xi $ in the closure $\overline{Z}$ (with respect to the subspace topology), any open neighborhood $B$ of $\xi $ intersects $Z$. Fix some $\xi \in \overline{Z} $. We want to construct $B$ such that $f|B=0$.
+
+	Since polydisks form a basis for the topology on $\mathbb{C} ^n$, there exists $\varepsilon_i>0$, $1\leq i\leq n$ such that $B\coloneqq \Delta (\xi;\varepsilon)\subseteq U$. Since polydisks are connected, $B$ is connected in the subspace topology. By assumption, $B \cap Z \neq \varnothing $. Throughout this proof, let $p=(p_1, \ldots ,p_n)\in B \cap Z$ such that $f(p)=0$, and for each $1\leq i\leq n$, write
+	\[
+		K_i^p \coloneqq \left\{ z\in\mathbb{C} \mid (p_1, \ldots ,p_{i-1} ,z,p_{i+1} , \ldots ,p_n)\in B \right\} ,\qquad g_i^p(z) \coloneqq f(p_1, \ldots ,p_{i-1} ,z,p_{i+1} , \ldots ,p_n)
+	.\]
+	Then $g_i^p : K_i^p \to \mathbb{C} $ is holomorphic in one variable since $f$ is holomorphic. Write $\pi _i : \mathbb{C} ^n \to \mathbb{C} $ for the $i$th projection $z\mapsto z_i$. Then $p_i\in K_i^p \cap \pi _i(Z \cap B)$, so $K_i^p \cap \pi _i(Z \cap B)$ is nonempty. We now show that $K_i^p$ is open and connected.
+
+	Let $\phi _i : \mathbb{C}  \to \mathbb{C} ^n$ be the map $z\mapsto (p_1, \ldots ,p_{i-1} ,z, p_{i+1} , \ldots ,p_n)$. Note that $K_i^p=\phi ^{-1} (B)$, and that $\phi _i$ is clearly continuous since it is continuous in each variable. Since $K_i^p$ is the preimage of an open set, it is open. Now consider the map $\pi _i : U\to \mathbb{C} $ given by $(z_1, \ldots ,z_n)\mapsto z_i$. This is well-known to be continuous, and clearly if $z\in K_i^p$ then $z\in \pi _i(B)$, so $K_i^p \subseteq \pi _i(B)$. Let $z=(z_1, \ldots ,z_n)\in B$ such that $\pi (z)=z_i$. We claim $z_i\in K_i^p$. It suffices to show that $(p_1, \ldots ,z_i, \ldots ,p_n)\in B$. Indeed, since $z\in B$ and $p\in B$, we have
+	\[
+	 \left| z_i-\xi _i \right| <\varepsilon _i,\qquad \forall 1\leq j\leq n,\,\,\left| p_j-\xi _j \right| <\varepsilon_j
+	.\]
+	Thus $\pi _i(B)=K_i^p$. Since images of connected sets are connected, $K_i^p$ is connected.
+
+	Since $K_i^p$, $Z$, and $B$ are open, and since $\pi _i$ is an open map, we have that $K_i^p \cap \pi _i(Z \cap B)$ is open in $\mathbb{C} $. Since $g_i^p|\pi _i(Z \cap B)=0$, by the one-variable identity principle we have that $g_i^p=0$. Now choose an arbitarry $z=(z_1, \ldots ,z_n)\in B$. By the above logic, $f(z_1,p_2, \ldots ,p_n)=g_1^p(p_1)=0$. Thus $f$ vanishes at $(z_1, p_2,\ldots ,p_n)$.
+
+	Now assume the inductive hypothesis that given $z\in B$ and $p\in Z$, we have $f(z_1, \ldots ,z_i,p_{i+1} ,\ldots ,p_n)=0$. It will be useful later to note that $z$ and $p$ need not be fixed. To show that $f(z_1, \ldots ,z_{i+1} ,p_{i+2} ,\ldots ,p_n)=0$, it suffices to show that $\zeta \coloneqq (z_1, \ldots ,z_i,p_{i+1} , \ldots ,p_n)\in Z$, since we could then apply the above logic to show the map $g_{i+1} ^\zeta : K_{i+1} ^\zeta \to \mathbb{C} $ is identically zero. Equivalently, it suffices to construct an open neighborhood $W\subseteq U$ of $\zeta $ such that $f|W=0$.
+
+	Since $p\in Z \cap B$, there exists a neighborhood $L\subseteq U$ such that $p\in L$ and $f|L=0$. Note that $L\subseteq Z$, and we can without loss of generality take $L$ to be a polydisk $\Delta (p,\delta )$, since if it isn't, we can simply take a polydisk inside of it centered at $p$. We can write $\Delta (p,\delta )=\prod_{1\leq j\leq n} \Delta (p_j,\delta _j)$ for each $\Delta (p_j,\delta _j)\subseteq \mathbb{C} $. Define
+	\[
+		W\coloneqq \left( \prod_{1\leq j\leq i} \pi _j(B) \right) \times \left( \prod_{i+1 \leq k \leq n} \Delta (p_k;\delta _k) \right) 
+	.\]
+	Clearly $W$ is open, and moreover since $z_j\in B_j$ and $p_j\in \Delta (p_j ; \delta _j)$ for all $1\leq j\leq n$, we have $\zeta \in W$. Additionally, given $w\in W$, we have
+	\begin{itemize}
+		\item ($1 \leq j\leq i$) $w_j\in \pi _j(B=\Delta (\xi ;\varepsilon ))$ implies $\left| w_j-\xi _j \right| <\varepsilon _j$;
+		\item ($i+1 \leq j \leq n$) $w_j\in \Delta (p_j ; \delta _j)$ implies that $\left| w_j-p_j \right| <\delta _j$. Since $\Delta (p ; \delta _\subseteq \Delta (\xi ;\varepsilon )$, we have $\Delta (p_j;\delta _j)\subseteq \Delta (\xi _j;\varepsilon _j)$, and thus $\left| w_j-\xi _j \right| <\varepsilon _j$.
+	\end{itemize}
+	Thus $w\in B$, and $W\subseteq B$. It suffices only to show $f|W=0$. To do this, we remark that since $z\in B$ was arbitrary, what the inductive hypothesis states is that for any $w\in B$ and any $p\in Z$, the map
+	\[
+		(w_1, \ldots ,w_i)\mapsto f(w_1, \ldots ,w_i,p_{i+1} , \ldots ,p_n)
+	\]
+	is identically zero. Let $w\in W$. Thus for $1\leq j\leq i$, we have $w_j\in \pi _j(B)$, and otherwise we have $w_j\in \Delta (p_j;\delta_j)\subseteq L\subseteq Z$. Thus by the inductive hypothesis, we obtain that $f(w)=0$, proving that $f|W=0$. Thus $f$ vanishes on a neighborhood of $\zeta $, and by induction we have $f|B=0$.
+
+	Since $f$ vanishes on a neighborhood of $\xi $, it follows that $\xi \in Z$. Thus $\overline{Z}  \subseteq Z$, and thus $Z$ is closed. Since $f|Z=0$ and $Z=U$, we have $f=0$.
+
+	The second statement follows by noting that if $f,g$ are holomorphic on $U\subseteq \mathbb{C} ^n$, then $f-g$ is holomorphic on $U$.
+\end{proof}
+
+
+\begin{problem}[1.3]
+	\begin{enumerate}[label=(\roman*)]
+		\item If $f : U \to \mathbb{C} $ is $C^\infty $ on some open $U\subseteq \mathbb{C} ^n$, then
+			\[
+				\frac{\partial \overline{f} }{\partial \overline{z} } =\overline{\left(\frac{\partial f}{\partial z}\right) } ,\qquad \frac{\partial \overline{f} }{\partial z} = \overline{\left(\frac{\partial f}{\partial \overline{z} } \right)} 
+			.\]
+		\item Let $f : U \to \mathbb{C} $, $g : V \to \mathbb{C} $ be $C^\infty $ on open $U,V\subseteq \mathbb{C} $ such that $f\circ g$ is defined. Then
+			\[
+				\frac{\partial }{\partial z} (f\circ g)(z)=\frac{\partial f}{\partial w} \frac{\partial g}{\partial z} +\frac{\partial f}{\partial \overline{w} } \frac{\partial \overline{g} }{\partial z} 
+			\]
+			\[
+				\frac{\partial }{\partial \overline{z} } (f\circ g)(z)=\frac{\partial f}{\partial \overline{w} } \frac{\partial \overline{g} }{\partial \overline{z}} +\frac{\partial f}{\partial w} \frac{\partial g}{\partial \overline{z} } 
+			.\]
+			In particular, if $f$ and $g$ are analytic, then so is $f\circ g$ and the usual one-variable chain rule holds for $\partial _z$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(i) I think $\partial _zf=\{\partial _{z_i} f\}_i$ so it suffices to show that $\overline{\partial _{z_i}f} =\partial _{\overline{z}_i } \overline{f} $. This is a direct computation. We write $f=u+iv$ for $u,v : \mathbb{R} ^n \to \mathbb{R} ^2$ and $z_i=x_i+iy_i$. Then recalling that $\partial _z=\frac{1}{2} (\partial _{x_i} -i \partial _{y_i} )$ and similarly for $\partial _{\overline{z} } $,
+	\begin{align*}
+		\overline{\left( \frac{\partial f}{\partial z_i}  \right) } &= \frac{1}{2} \overline{\left(\frac{\partial u}{\partial x_i} +i \frac{\partial v}{\partial x_i} -i \frac{\partial u}{\partial y_i} + \frac{\partial v}{\partial y_i}  \right)}\\
+									  &=\frac{1}{2} \left( \frac{\partial u}{\partial x_i} +\frac{\partial v}{\partial y_i} +i\left( \frac{\partial u}{\partial y_i} -\frac{\partial v}{\partial x_i}  \right)  \right) \\
+									  \frac{\partial \overline{f} }{\partial \overline{z}_i } &= \frac{\partial }{\partial \overline{z}_i } \left( u-iv \right) \\
+																&=\frac{1}{2} \left( \frac{\partial u}{\partial x_i} -i \frac{\partial v}{\partial x_i} +i \frac{\partial u}{\partial y_i} + \frac{\partial v}{\partial y_i}  \right) \\
+																&=\frac{1}{2} \left( \frac{\partial u}{\partial x_i} +\frac{\partial v}{\partial y_i} +i\left( \frac{\partial u}{\partial y_i} -\frac{\partial v}{\partial x_i}  \right)  \right) 
+	.\end{align*}
+	The calculations agree.
+
+	(ii) We can do this by direct computation using the chain rule for real-valued functions. Write $z=x+iy$ for the coordinates in $V$ and $w=u+iv$ for the coordinates of $U$. For $f\circ g$ to exist, we must have $g : V \to U$. Write $g(x,y)=u(x,y)+iv(x,y)$ and $f(u,v)=\alpha (u,v)+i\beta (u,v)$. Then by definition, we have
+	\[
+		(f\circ g)(x,y)=\alpha (g(x,y))+i\beta (g(x,y))=\alpha (u(x,y),v(x,y))+i\beta (u(x,y),v(x,y))
+	.\]
+	We then decompose the partial derivative as
+	\begin{align*}
+		\frac{\partial (f\circ g)}{\partial z} &= \frac{\partial }{\partial z} ((\alpha \circ g) + (\beta  \circ g))\\
+						       &=\frac{\partial (\alpha \circ g)}{\partial z} +i\frac{\partial (\beta \circ g)}{\partial z} \\
+						       &=\frac{1}{2} \left( \frac{\partial (\alpha \circ g)}{\partial x} + i\frac{\partial (\beta \circ g)}{\partial x} -i \frac{\partial (\alpha \circ g)}{\partial y} -i^2\frac{\partial (\beta \circ g)}{\partial y}  \right) 
+	.\end{align*}
+	Here we note that although $g$ is complex-valued, we have written it as a function $\mathbb{R} ^2\to \mathbb{C} $, and since $\alpha ,\beta  : \mathbb{R} ^2 \to \mathbb{R} $, we have $\alpha \circ g,\beta \circ g : \mathbb{R} ^2 \to \mathbb{R} $. Thus the usual chain rule applies.
+	\[
+		\frac{\partial (\alpha \circ g)}{\partial x} =\frac{\partial \alpha }{\partial u} \frac{\partial u}{\partial x} +\frac{\partial \alpha }{\partial v} \frac{\partial v}{\partial x} 
+	\]
+	\[
+		\frac{\partial (\alpha \circ g)}{\partial y} =\frac{\partial \alpha }{\partial u} \frac{\partial u}{\partial y} +\frac{\partial \alpha }{\partial v} \frac{\partial v}{\partial y} 
+	\]
+	\[
+		\frac{\partial (\beta \circ g)}{\partial x} =\frac{\partial \beta }{\partial u} \frac{\partial u}{\partial x} +\frac{\partial \beta }{\partial v} \frac{\partial v}{\partial x} 
+	\]
+	\[
+		\frac{\partial (\beta \circ g)}{\partial y} =\frac{\partial \beta }{\partial u} \frac{\partial u}{\partial y} +\frac{\partial \beta }{\partial v} \frac{\partial v}{\partial y} 
+	.\]
+	This yields
+	\begin{align*}
+		\frac{\partial (f\circ g)}{\partial z} &=\frac{1}{2} \left( \frac{\partial \alpha }{\partial u} \frac{\partial u}{\partial x} +\frac{\partial \alpha }{\partial v} \frac{\partial v}{\partial x} +i\frac{\partial \beta }{\partial u} \frac{\partial u}{\partial x} +i\frac{\partial \beta }{\partial v} \frac{\partial v}{\partial x} -i \left( \frac{\partial \alpha }{\partial u} \frac{\partial u}{\partial y} +\frac{\partial \alpha }{\partial v} \frac{\partial v}{\partial y} +i\frac{\partial \beta }{\partial u} \frac{\partial u}{\partial y} +i\frac{\partial \beta }{\partial v} \frac{\partial v}{\partial y}  \right)  \right) \\
+						       &=\frac{1}{2} \left( \frac{\partial \alpha }{\partial u} \left( \frac{\partial u}{\partial x} -i \frac{\partial u}{\partial y}  \right) +\frac{\partial \alpha }{\partial v} \left( \frac{\partial v}{\partial x} -i \frac{\partial v}{\partial y}  \right) + i\frac{\partial \beta }{\partial u} \left( \frac{\partial u}{\partial x} -i \frac{\partial u}{\partial y}  \right) +i\frac{\partial \beta }{\partial v} \left( \frac{\partial v}{\partial x} -i \frac{\partial v}{\partial y}  \right)  \right) \\
+						       &=\frac{\partial \alpha }{\partial u} \frac{\partial u}{\partial z} +\frac{\partial \alpha }{\partial v} \frac{\partial v}{\partial z} +i\frac{\partial \beta }{\partial u} \frac{\partial u}{\partial z} +i\frac{\partial \beta }{\partial v} \frac{\partial v}{\partial z} \\
+						       &=\left( \frac{\partial \alpha }{\partial u} +i \frac{\partial \beta }{\partial u}  \right) \frac{\partial u}{\partial z} +\left( \frac{\partial \alpha }{\partial v} +i \frac{\partial \beta }{\partial v}  \right) \frac{\partial v}{\partial z} \\
+						       &=\frac{\partial f}{\partial u} \frac{\partial u}{\partial z} +\frac{\partial f}{\partial v} \frac{\partial v}{\partial z} 
+	.\end{align*}
+	Now note that
+	\[
+		\frac{\partial }{\partial w} + \frac{\partial }{\partial \overline{w} } =\frac{1}{2} \left( \frac{\partial }{\partial u} -i \frac{\partial }{\partial v} +\frac{\partial }{\partial u} +i \frac{\partial }{\partial v}  \right) =\frac{\partial }{\partial u} 
+	,\]
+	\[
+	i\left(\frac{\partial }{\partial w} -\frac{\partial }{\partial \overline{w} } \right)=\frac{1}{2} \left( i\frac{\partial }{\partial u} + \frac{\partial }{\partial v}-i\frac{\partial }{\partial u} + \frac{\partial }{\partial v} \right) =\frac{\partial }{\partial v} 
+	.\]
+	This yields
+	\begin{align*}
+		\frac{\partial (f\circ g)}{\partial z} &=\left( \frac{\partial f}{\partial w} +\frac{\partial f}{\partial \overline{w} }  \right) \frac{\partial u}{\partial z} + i\left( \frac{\partial f}{\partial w } -\frac{\partial f}{\partial \overline{w}}  \right) \frac{\partial v}{\partial z} \\
+						       &=\frac{\partial f}{\partial w} \frac{\partial u}{\partial z} +i\frac{\partial f}{\partial w} \frac{\partial v}{\partial z} +\frac{\partial f}{\partial \overline{w} } \frac{\partial u}{\partial z} -i\frac{\partial f}{\partial \overline{w} } \frac{\partial v}{\partial z} \\
+						       &=\frac{\partial f}{\partial w} \left( \frac{\partial u}{\partial z} +i \frac{\partial v}{\partial z}  \right) + \frac{\partial f}{\partial \overline{w} } \left( \frac{\partial u}{\partial z} -i \frac{\partial v}{\partial z}  \right) \\
+						       &=\frac{\partial f}{\partial w} \frac{\partial g}{\partial z} + \frac{\partial f}{\partial \overline{w} } \frac{\partial \overline{g} }{\partial z } 
+	.\end{align*}
+	
+	We now apply (i) to the first part of (2) to obtain the second part. Note that $\overline{(f\circ g)(z)} =\overline{f} (g(z))$, thus we can write $\overline{f\circ g} =\overline{f} \circ g$. We obtain
+	\begin{align*}
+		\frac{\partial (f\circ g)}{\partial \overline{z} } &= \overline{\left( \frac{\partial \overline{(f\circ g)} }{\partial z}  \right) } \\
+								   &= \overline{\left( \frac{\partial (\overline{f} \circ g)}{\partial z}  \right) } \\
+								   &=\overline{\frac{\partial \overline{f} }{\partial w} \frac{\partial g}{\partial z} +\frac{\partial \overline{f} }{\partial \overline{w} } \frac{\partial \overline{g} }{\partial z} } \\
+								   &=\overline{\left( \frac{\partial \overline{f} }{\partial w}  \right) } \overline{\left( \frac{\partial g}{\partial z}  \right) } + \overline{\left( \frac{\partial \overline{f} }{\partial \overline{w} }  \right) } \overline{\left( \frac{\partial \overline{g} }{\partial z}  \right) } \\
+								   &=\frac{\partial f}{\partial \overline{w} } \frac{\partial \overline{g} }{\partial \overline{z} } +\frac{\partial f}{\partial w} \frac{\partial g}{\partial \overline{z} } 
+	.\end{align*}
+
+	
+
+	When $f,g$ are analytic, then they are holomorphic, so we have $\partial _{\overline{z} } g=\partial_{\overline{w} } f=0$. We obtain
+	\[
+		\frac{\partial f\circ g}{\partial z} =\frac{\partial f}{\partial w} \frac{\partial g}{\partial z} ,\qquad \frac{\partial f\circ g}{\partial \overline{z} } =0
+	.\]
+\end{proof}
+
+
+\begin{problem}[1.7]
+	Working in $\mathbb{C} ^2$ with variables $z,w$, find the Weierstrass polynomial for $\sin (w^2-z^3)$.
+\end{problem}
+\begin{proof}
+	Let $f(w,z)=\sin (w^2-z^3)$ and let $p(z,w)=w^d + \alpha _{d-1} (z)w^{d-1} +\cdots +\alpha _d(z)$ be the Weierstrass polynomial of $\sin (w^2-z^3)$, which exists by the Weierstrass preparation theorem since $\sin (w^2-z^3)$ is clearly holomorphic, $\sin 0=0$, and $\sin (w^2)$ is not identically zero.
+
+	Note that since $\alpha _i(0)=0$ for all $i$, we have that $p(w,0)=w^d$. In particular, $\partial^r_w p(0,0)=0$ for all $0\leq r < d$. Note also that since $u$ is a unit, it is nonzero at 0, so by the product rule
+	\[
+		\frac{\partial f}{\partial w} =\left.\frac{\partial u\cdot p}{\partial w}\right|_{(0,0)} =\left.\frac{\partial u}{\partial w}\right|_{(0,0)}  p(0,0)+u(0,0) \left.\frac{\partial p}{\partial w} \right|_{(0,0)}=u(0,0) \left. \frac{\partial p}{\partial w} \right|_{(0,0)} 
+	.\]
+	In particular, $\partial_w^rf(0,0)=0$ if and only if $\partial _w^rp(0,0)=0$. Thus the degree $d$ can be determined by taking partials of $f$. We compute:
+	\[
+		\frac{\partial f}{\partial w} =2w \cos \left( w^2-z^3 \right) \implies \frac{\partial f}{\partial w} (0,0)=0
+	\]
+	\[
+		\frac{\partial ^2f}{\partial w^2} =2\cos \left( w^2-z^3 \right) - 4w^2 \sin \left( w^2-z^3 \right) \implies \frac{\partial ^2f}{\partial w^2} (0,0)=2\cos 0=2
+	.\]
+	Thus the degree of the Weierstrass polynomial of $f$ is 2.
+
+	We have
+	\[
+		p(w,z)=w^2+\alpha _1(z)w+\alpha _2(z)
+	.\]
+	The most natural thing to try here is to rewrite
+	\[
+		\sin \left( w^2-z^3 \right) =\left( w^2-z^3 \right) \frac{\sin \left( w^2-z^3 \right) }{w^2-z^3} 
+	.\]
+	Indeed, note that defining $\alpha _1(z)=0$ and $\alpha _2(z)=-z^3$ yield the given polynomial, are both holomorphic, and vanish at 0. Thus $w^2-z^3$ is the Weierstrass polynomial if the other term is a unit. This function has a removable singularity at 0, so we can extend it to a holomorphic function with
+	\[
+		u(0,0)=\lim_{(w,z)\to (0,0)} \frac{\sin (w^2-z^3)}{w^2-z^3} =1
+	.\]
+	Since $u$ is nonvanishing at the origin and holomorphic, it is nonvanishing in a neighborhood of the origin, and thus is a unit for $\mathcal{O} _{\mathbb{C} ^n,0} $. Thus the Weierstrass polynomial of $\sin \left( w^2-z^3 \right) $ is $w^2-z^3$.
+\end{proof}
+
+
+
+\begin{problem}[1.9]
+	Denote by $\mathcal{A} _n$ the ring of germs at $0\in\mathbb{C} ^n$ of smooth functions. In contrast to $\mathcal{O} _n$, the ring $\mathcal{A} _n$ is not well-behaved algebraically. Specifically, prove that it is neither an integral domain nor Noetherian.
+\end{problem}
+\begin{proof}
+	Recall that a function $\mathbb{C} ^n\to \mathbb{C} $ is smooth if it is smooth as a function $\mathbb{R} ^{2n} \to \mathbb{R} ^2$. Thus it suffices to prove the statement for germs of smooth functions $\mathbb{R} ^{2n} \to \mathbb{R} ^2$. Define $f,g : \mathbb{R} ^{2n}  \to \mathbb{R}  $ by
+	\[
+		f(x)=
+		\begin{cases}
+			\exp \left( -\frac{1}{x_1^2}  \right) ,&x_1>0\\
+			0,&x_1\leq 0
+		\end{cases}
+	,\]
+	\[
+		g(x)=
+		\begin{cases}
+			\exp \left( \frac{-1}{x_1^2}  \right) ,&x_1<0\\
+			0,&x_1 \geq 0
+		\end{cases}
+	.\]
+	Note that all partials of both functions clearly go to 0 as $x_1\to 0$, so they are indeed smooth. However, since the sets on which they are nonzero are disjoint, $f\cdot g=0$. Moreover, if we let $U=\left\{ x\in\mathbb{R} ^{2n} \mid x_1>0 \right\} $ and $V=\left\{ x\in\mathbb{R} ^{2n} \mid x_1<0 \right\} $, then $0$ lies in the closures $0\in\overline{U} ,\overline{V} $. Thus any neighborhood of 0 intersects a region where $f,g\neq 0$, so neither are zero when passing to germs. Thus they are indeed zero divisors, and $\mathcal{A} _{n} $ is not an integral domain.
+
+	Now we show $\mathcal{A} _{n} $ does not satisfy the ascending chain condition. For each integer $k\geq 1$, define
+	\[
+		S_k\coloneqq \left\{ (re^{i\theta } ,0, \ldots ,0)\in\mathbb{C} ^n\mid 0<r<1,\,\, \frac{1}{k+1} <\theta <\frac{1}{k}  \right\} 
+	.\]
+	Define
+	\[
+		I_k \coloneqq \left\{ f\in A_n \mid \forall j> k,\,\, f|S_j=0 \right\} 
+	\]
+	Clearly this is an ideal:
+	\begin{itemize}
+		\item Let $f,g$ vanish on all $z\in S_j$ for all $j>k$. Then $f(z)+g(z)=0+0=0$, so $f+g\in I_k$.
+		\item Let $f\in I_k$ and $g\in \mathcal{A} _n$. Then for any $z\in S_j$ with $j>k$, we have $f(z)g(z)=0g(z)=0$. Thus $f\cdot g\in I_k$.
+	\end{itemize}
+	Note that if $f\in I_{k} $, then it vanishes on $S_j$ for all $j>k$. In particular, it vanishes for $j>k+1$, so $f\in I_{k+1} $. Thus $I_k \subseteq I_{k+1} $ for all $k$. We show this inclusion is proper.
+
+	Let $h : \mathbb{R}  \to \mathbb{R} $ be any nonzero smooth bump function supported in $(0,1)$. We define $\psi _k : \mathbb{C} ^n \to \mathbb{C} $ by
+	\[
+		\psi (z_1, \ldots ,z_n) = \exp \left( -\frac{1}{\left| z_1 \right| }  \right) \cdot h(\arctan (\Im z_1 / \operatorname{Re} z_1))
+	,\]
+	and $\psi (0,z_2, \ldots ,z_n)=0$. Since the exponential goes to 0 as $z_1 \to 0$, its derivatives will also go to zero, and thus the function is smooth. Note that the arctangent term yields the angle $\theta $ for the polar representation of the first coordainate. We can then take $h$ to be supported on some subset of$(1/(k+2),1/(k+1))\subseteq (0,1)$, meaning $\psi _k$ will vanish on all $S_{j} $ with $j>k+1$ since its support is disjoint from the $S_j$s. Thus $\psi _k\in I_{k+1} $. Note that the support of $\psi _k$ can only intersect $\bigcup_{j=1}^k \overline{S} _j$ at 0 due to the disjointness of the sets $(1/(j+1),1/j)$. Note also that by construction, $\psi _k$ doesn't vanish inside of $S_{k+1} $. Since $0\notin S_k$ but is in its closure, there is no neighborhood which we can restrict to make $\psi _k$ vanish on $S_{k+1} $. Thus $\psi _k \notin I_k$, and the inclusion is proper. Thus $\mathcal{A} _n$ does not satisfy the ascending chain condition, and is not Noetherian.
+\end{proof}
+
+
+\begin{problem}[1.13]
+	In contrast to the case of holomorphic mappings between domains in $\mathbb{C} $, it is not the case that in general a holomorphic map between domains in higher dimensions is an open mapping. For example, show that
+	\[
+		f : \mathbb{C} ^2 \to \mathbb{C} ^2,\qquad (z,w)\mapsto (z,zw)
+	\]
+	is not an open mapping.
+\end{problem}
+\begin{proof}
+	Let $B_\varepsilon (0)\subseteq \mathbb{C} ^2$ be an open ball about 0 of radius $\varepsilon >0$. We claim that $f(B_\varepsilon (0))$ is not open in $\mathbb{C} ^2$. Recall that a basis for a topology has the property that given any open set $U$ and any $x\in U$, there is an element of the basis $x\in B \subseteq U$. Note also that $\mathbb{C} ^2 \cong \mathbb{R} ^4$ has a basis given by open balls. We show this is not true for $0\in f(B_\varepsilon (0))$, proving that the set is not open.
+
+	For any $\delta >0$ and $B_\delta (0)\subseteq \mathbb{C} ^2$, there exists $(0,\frac{\delta }{2} )\in B_\delta (0)$. Note also that if $f(z,w)$ is of the form $(0,zw)$, then $z=0$ and thus $f(z,w)=0$. Thus there exists no $(0,w)\in f(B_\varepsilon (0))$ with $w>0$, meaning $(0,\frac{\delta }{2} )\notin f(B_\varepsilon (0))$. Thus $B_\delta (0)$ is not a subset of $f(B_\varepsilon (0))$.
+\end{proof}
+
+\end{document}

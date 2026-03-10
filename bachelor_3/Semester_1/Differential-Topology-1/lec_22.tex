@@ -1,0 +1,94 @@
+\lecture{22}{Wed 05 Nov 2025 12:20}{Covector fields}
+
+Recall: given a path $\gamma : [a,b] \to M$ in a manifolds and a covector field $\omega \in \mathfrak{X} ^*(M)$, we can define the \emph{line integral} of $\omega $ over $\gamma $ by
+\[
+	\int_\gamma \omega =\int_{a} ^b \gamma ^*\omega 
+.\]
+In vector calculus, the line integral of a vector field $V : \mathbb{R} ^m \to \mathbb{R} ^n$ over a path $\gamma : [a,b] \to \mathbb{R} ^n$ was given by
+\[
+	\int_\gamma  V\cdot  \,\mathrm{d} \mathbf{s} =\int_a^b V(\gamma (t)) \frac{\partial \gamma }{\partial t}  \,\mathrm{d} t
+.\]
+It would be interesting if our formula basically became the same. The reason vector calc used vectors instead of covectors was because we had a nice inner product. On manifolds, we don't, so we have to use covectors and do more work.
+
+Given a vector space $V$, we can define a bilinear map $g : V\times V \to \mathbb{R} $ by $g(v_1,v_2)=v_1\cdot v_2$ the dot product. We can then define a map $g^\flat : V \to V^*$ by $v\mapsto g(v,-)$. This is linear and has trivial kernel, so its an isomorphism of vector spaces.
+
+Let's move on to considering conservative fields. In calculus 3, a vector field $V$ was called conservative if it had a potential function $V=\nabla f$ for some $f$, and it was path independent if and only if it was conservative.
+
+\begin{proposition}\label{3.1.5}
+	If $\gamma : [a,b] \to M$ is piecewise smooth and $\omega $ is a covector field on $M$, then
+	\[
+		\int_\gamma \omega =\int_a^b \omega_{\gamma (t)} (\gamma '(t)) \,\mathrm{d} t
+	.\]
+	This reduces this to just a calculus 1 integral.
+\end{proposition}
+
+\begin{proposition}\label{3.1.6}
+	Let $M$ be a smooth manifold, $\omega \in \mathfrak{X} ^*(M)$, and $\gamma : [a,b] \to M$ piecewise smooth. Let $\widetilde{\gamma } $ be a \emph{forwards representation} of $\gamma $. Then
+	\[
+		\int_{\widetilde{\gamma } } \omega =\int_\gamma \omega 
+	.\]
+	If $\widetilde{\gamma } $ is a \emph{backwardsd reparameterization}, then
+	\[
+		\int_{\widetilde{\gamma } } \omega =-\int_\gamma \omega
+	.\]
+\end{proposition}
+\begin{definition}\label{3.1.7}
+	Given $\gamma : [a,b] \to M$ a piecewise smooth curve, a forwards reparameterization is a reparameterization which is monotonic, so if $\gamma$ is in terms of $t$ and we change $t\to s$, then as $t$ increases, $s$ increases, and vice versa. A backwards reparameterization is the opposite.
+\end{definition}
+
+\begin{theorem}\label{3.1.8}
+	Let $M$ be a smooth manifold, $\gamma : [a,b] \to M$ piecewise smooth, and $f : M \to \mathbb{R} $ a smooth function. Then recalling that $\mathrm{d} f\in \mathfrak{X} ^*(M)$,
+	\[
+		\int_\gamma \mathrm{d} f = (f\circ \gamma )(b)-(f\circ \gamma )(a)
+	.\]
+\end{theorem}
+\begin{proof}
+	By our definition of d and \cref{3.1.5},
+	\[
+		\int_\gamma  \mathrm{d} f = \int_a^b \mathrm{d} f_{\gamma (t)} (\gamma '(t)) \,\mathrm{d} t = \int_a^b (f\circ \gamma )'(t) \,\mathrm{d} t
+	.\]
+	Applying the fundamentl theorem of calculus recovers the statement.
+\end{proof}
+\begin{corollary}\label{3.1.9}
+	If $\gamma (a)=\gamma (b)$, then
+	\[
+		\int_\gamma \mathrm{d} f =0
+	.\]
+\end{corollary}
+
+\begin{definition}\label{3.1.10}
+	Let $\omega \in \mathfrak{X} ^*(M)$. Then $\omega $ is \emph{exact} if and only if $\omega =\mathrm{d} f$ for some $f\in C^\infty (M)$. We say $f$ is the \emph{potential function} of $\omega $. We say $\omega $ is \emph{conservative} if and only if
+	\[
+		\int_\gamma  \omega =0
+	\]
+	for all piecewise smooth \emph{closed} curves (loops) $\gamma $.
+\end{definition}
+
+In calculus, exactness and conservativeness were identical. On manifolds, we have aleady shown that exact $\implies $ conservative. Is the converse true?
+
+\begin{proposition}\label{3.1.11}
+	A covector field $\omega \in \mathfrak{X} ^*(M)$ is conservative if and only if
+	\[
+		\int_\gamma \omega =\int_{\widetilde{\gamma } } \omega 
+	\]
+	for all $\gamma ,\widetilde{\gamma } $ starting and ending at the same points.
+\end{proposition}
+\begin{proof}
+	Using \cref{3.1.3} and \cref{3.1.6}, form a closed loop be reparameterizing one of them backwards and adding them together.
+\end{proof}
+
+\begin{theorem}\label{3.1.12}
+	A smooth covector field $\omega $ on $M$ is conservative if and only if it is exact.
+\end{theorem}
+\begin{proof}
+	We already have one direction, so let $\omega $ be conservative. We can assume $M$ is connected by taking a connected component. Let $\gamma : [a,b] \to M$ be piecewise smooth, and write
+	\[
+		\int_{\gamma (a)}^{\gamma (b)} \omega =\int_\gamma \omega
+	.\]
+	Since $\omega $ is conservative, this notation is well-defined. Pick a basepoint $p_0\in M$, and define
+	\[
+		f(q)\coloneqq \int_{p_0} ^q\omega
+	.\]
+	We claim that $\mathrm{d} f=\omega $. Choose some $q_0\in M$, and choose a chart $(U,\varphi )$ of $q_0$. Write $x^i$ for the coordinates. The blackboard got messy and I got lost but it follows. Basically you write it in coordinates then use the same argument we did in calculus 3 to show the proof. I don't remember the calculus three argument...
+\end{proof}
+

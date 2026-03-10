@@ -1,0 +1,172 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 5}
+\begin{document}
+\makeproblem
+
+Since $\mathrm{SU} (2)\cong S^3$, we have $H_{\mathrm{dR} }^{\bullet}(\mathrm{SU} (2))\cong H_{\mathrm{dR} }^{\bullet} (S^3)$. Let $N,S$ denote the north and south poles of $S^3$, repectively. Stereographic projection yields diffeomorphisms $S^3\setminus \left\{ N \right\} \cong \mathbb{R} ^3$ and $S^3\setminus \left\{ S \right\} \cong \mathbb{R} ^3$. Since $\mathbb{R} ^3$ is contractible, the de Rham cohomology of $S^3\setminus \left\{ N \right\} $ and $S^3\setminus \left\{ S \right\} $ is simply $\mathbb{R} $ concentrated in degree 0 by Poincar\'e's lemma. Let $U\coloneqq S^3\setminus \left\{ N \right\} $ and $V\coloneqq S^3\setminus \left\{ S \right\} $, and note that this forms an open cover of $S^3$. De Rham's theorem says that de Rham cohomology is isomorphic to singular cohomology, so we can apply the Mayer-Vietoris sequence for cohomology to obtain the long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[r] & H^k(S^3)\ar[r]  & H^k(U)\oplus H^k(V)\ar[r]  & H^k(U \cap V)\ar[r]  & H^{k+1} (S^3)\ar[r]  & \cdots
+\end{tikzcd}\]
+Note that $U \cap V$ has the homotopy type of the 2-sphere $S^2$. We computed in class that the cohomology of the 2- sphere is
+\[
+	H^k_{\mathrm{dR} } (S^2)\cong 
+	\begin{cases}
+		\mathbb{R} ,&k=0,2\\
+		0,&k\neq 0,2
+	\end{cases}
+.\]
+Since the de Rham complex functor preserves homotopy, and cohomology identifies homotopic maps, we can use the natural isomorphism $H^k(U \cap V) \cong H^k(S^2)$. We use exactness of the sequence to compute $H^k(S^3)$ for all $k$. Since de Rham cohomology is 0 for both $S^2$ and $S^3$ above degree $3$ (for $S^3$ this is since it's a 3-manifold and de Rham vanishes above the dimension), and since $H^k(U)\cong H^k(V)$ is also 0 above degree 1, we only need to consider degrees $0\leq k\leq 3$.
+
+
+We first consider degree 0:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & H^0(S^3)\ar[r]  & H^0(U)\oplus H^0(V)\ar[r]  & H^0(U \cap V)\ar[r]   & \cdots .
+\end{tikzcd}\]
+Since $H^0(U)\cong H^0(V)\cong \mathbb{R} $, since $H^1(S^3)\cong 0$, and since $H^0(U \cap V)\cong H^0(S^2) \cong \mathbb{R} $, this reads
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & H^0(S^3)\ar[r]  & \mathbb{R}^2 \ar[r]  & \mathbb{R} \ar[r]   &\cdots .
+\end{tikzcd}\]
+By exactness, $\Ker (H^0(S^3)\to \mathbb{R} ^2)\cong \Ker (0\to H^0(S^3))\cong 0$. Thus this map is injective, and $H^0(S^3)$ is canonically isomorphic to its image in $\mathbb{R} ^2$. By exactness, this image is isomorphic to $\Ker (\mathbb{R}^2\to \mathbb{R} )$. The map $H^k(U)\oplus H^k(V)\to H^k(U \cap V)$ in the Mayer-Vietoris sequence is given by the difference $(u,v)\mapsto u-v$, which is not identically zero. Thus it must have rank 1, and is surjective. Thus its kernel is $\mathbb{R} $ by the rank-nullity theorem, so $H^0(S^3)\cong \mathbb{R} $.
+
+We now consider $H^1(S^3)$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots\ar[r]   & H^0(U)\oplus H^0(V)\ar[r] & H^0(U \cap V)\ar[r]  & H^1(S^3)\ar[r]  & H^1(U )\oplus H^1( V)\ar[r]   & \cdots .
+\end{tikzcd}\]
+We plug in 
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots\ar[r] & \mathbb{R} ^2 \ar[r]  & \mathbb{R} \ar[r]  & H^1(S^3)\ar[r]  & 0\ar[r]   & \cdots .
+\end{tikzcd}\]
+Note that $\Ker (H^1(S^3)\to 0)\cong H^1(S^3)$. Exactness tells us that 
+\[
+	\Im (\mathbb{R} \to H^1(S^3))\cong \Ker (H^1(S^3)\to 0)\cong H^1(S^3).
+\]
+Since $\mathbb{R} ^2\to \mathbb{R} $ is surjective, the kernel of $\mathbb{R} \to H^1(S^1)$ is the image of $\mathbb{R} ^2\to \mathbb{R} $, which is $\mathbb{R} $. Thus we obtain the zero morphism $0: \mathbb{R}  \to H^1(S^3)$. The image of this is 0, so $H^1(S^3)\cong 0$.
+
+We now consider $H^2(S^3)$. Consider
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[r]  & H^1(U \cap V)\ar[r]  & H^2(S^3)\ar[r]  & H^2(U)\oplus H^2(V)\ar[r]  & \cdots .
+\end{tikzcd}\]
+We plug in
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdots \ar[r]  & 0\ar[r]  & H^2(S^3)\ar[r]  & 0\ar[r]  & \cdots .
+\end{tikzcd}\]
+Exactness tells us that
+\[
+	0 \cong \Im (0\to H^2(S^3))\cong \Ker (H^2(S^3)\to 0)\cong H^2(S^3)
+.\]
+
+We now consider $H^3(S^3)$. The relevant part of the sequence is
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[r] & H^2(U)\oplus H^2(V)\ar[r]   & H^2(U \cap V)\ar[r]  & H^3(S^3)\ar[r]  & H^3(U)\oplus H^3(V)\ar[r]  & \cdots .
+\end{tikzcd}\]
+We plug in
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdots \ar[r]  & 0\ar[r]  & \mathbb{R} \ar[r]  & H^3(S^3)\ar[r]  & 0\ar[r]  & \cdots .
+\end{tikzcd}\]
+This is exact if and only if the map $\mathbb{R} \to H^3(S^3)$ is an isomorphism. Hence
+\[
+	H^k(S^3) \cong 
+	\begin{cases}
+		\mathbb{R} ,&k=0,3\\
+		0,&k\neq 0,3
+	\end{cases}
+.\]
+Recall once again that higher cohomology groups vanish since de Rham cohomology is 0 above the dimension of the manifold.
+
+We claim there exists a basis $\left\{ X_1,X_2,X_3 \right\} \subseteq \mathfrak{su} (2)$ satisfying $[X_i,X_j]=\varepsilon _{ijk}X_k$, for $\varepsilon $ the Levi-Civita symbol. We use the characterization
+\[
+	\mathfrak{su} (2)=\left\{ A\in \mathfrak{gl}(2,\mathbb{C} )\mid A^\dagger +A=0\text{ and } \operatorname{tr} A=0 \right\} ,
+\]
+where $A^\dagger $ denotes the Hermitian conjugate. Recall that the Pauli matrices
+\[
+	\sigma _x = \begin{pmatrix}
+	0 & 1 \\
+	1 & 0
+	\end{pmatrix},\qquad \sigma _y = \begin{pmatrix}
+	0 & i \\
+	-i & 0
+	\end{pmatrix},\qquad \sigma _z = \begin{pmatrix}
+	1 & 0 \\
+	0 & -1
+	\end{pmatrix}
+\]
+satisfy the commutator relation
+\[
+	[\sigma _i,\sigma _j]=2i\varepsilon _{ijk} \sigma _k
+.\]
+Define $X_i = -\frac{i}{2} \sigma _i$. Since each Pauli matrix is traceless, so is its product by $-\frac{i}{2} $. We also have
+\[
+	X_1^\dagger =\begin{pmatrix}
+	0 & -i/2 \\
+	-i/2 & 0
+	\end{pmatrix}^\dagger =\begin{pmatrix}
+	0 & i/2 \\
+	i/2 & 0
+	\end{pmatrix}=-X_1,
+\]
+\[
+	X_2^\dagger =\begin{pmatrix}
+	0 & 1/2 \\
+	-1/2 & 0
+	\end{pmatrix}^\dagger =\begin{pmatrix}
+	0 & -1/2 \\
+	1/2 & 0
+	\end{pmatrix}=-X_2,
+\]
+\[
+	X_3^\dagger =\begin{pmatrix}
+	-i/2 & 0 \\
+	0 & i/2
+	\end{pmatrix}^\dagger =\begin{pmatrix}
+	i/2 & 0 \\
+	0 & -i/2
+	\end{pmatrix}=-X_3
+.\]
+Finally,
+\[
+	[X_i,X_j]=\left( -\frac{i}{2}  \right) ^2[\sigma _i,\sigma _j]=\left( -\frac{i}{2}  \right) ^22i\varepsilon _{ijk} \sigma _k=2i\frac{-i}{2} \varepsilon _{ijk} \left( -\frac{i}{2} \sigma _k \right) =\varepsilon _{ijk} X_k
+.\]
+Thus such a basis exists. Let $\left\{ \alpha _1,\alpha _2,\alpha _3 \right\} $ be the dual basis.
+
+Recall that Lie algebra cohomology of a Lie $\mathbb{R} $-algebra $\mathfrak{g} $ can be computed by the cohomology of the Chevalley-Eilenberg complex, which can be identified with the subcomplex of the de Rham complex $\Omega ^{\bullet} (\operatorname{SU} (2))$ spanned by left-invariant forms. Write $d$ for the Chevalley-Eilenberg differential, which in this case coencides with the exterior derivative. Then we compute
+\[
+	d\alpha _i(X_j,X_k) = X_j \alpha_i(X_k) - X_k \alpha_i(X_j) - \alpha_i[X_j,X_k]
+.\]
+Here note that we define left-invariant vector fields for the $X_i$'s. For any left-invariant vector field $X$, left-invariant form $\alpha $, and $g\in G$,
+\[
+	\alpha _g(X_g) = (L_{g^{-1} }^*\alpha_1)((L_g)_*X_1) = \alpha _1(X_1)
+.\]
+In particular, $\alpha (X)$ is constant for any left-invariant $X$. Thus $X_j\alpha _i(X_k)$ vanishes for all indicies, since as a vector field $X_j$ is a linear combination of partial derivatives acting on a constant function. Thus
+\[
+	d\alpha _i(X_j,X_k)=-\alpha_i[X_j,X_k]
+.\]
+Using the commutation relation,
+\[
+	-\alpha _i[X_j,X_k]=-\alpha _i(\varepsilon _{jk\ell }X_\ell )=-\varepsilon _{jk\ell } \alpha _i(X_\ell ) = -\varepsilon _{jk\ell } \delta _{i\ell } =-\varepsilon _{jki} =-\varepsilon _{ijk}
+\]
+for $\delta $ the Kronecker delta. This needs to be a 2-form, and thus must be of the form $c\alpha _j \wedge \alpha _k$. We note that if $i\neq j,k$, then
+\[
+	(c\alpha _j \wedge \alpha _k)(X_j,X_k) = c\alpha _j(X_j)\alpha _k(X_k)-c\alpha _k(X_j)\alpha _j(X_k)=c
+.\]
+Note that if $c=-\varepsilon _{ijk} $, then we have $d\alpha _i = -\varepsilon _{ijk} \alpha _j \wedge \alpha _k$ on basis vectors, and thus they should agree in general. Thus we have computed $d\alpha _i$.
+
+Now consider the Chevalley-Eilenberg complex for $\mathfrak{su} (2)$:
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[" d^{0}  ", r]  & \Lambda ^0\mathfrak{su} (2)^*\ar[" d^1 ", r]  & \mathfrak{su} (2)^*\ar[" d^2 ", r]  & \Lambda ^2\mathfrak{su} (2)^*\ar[" d^3 ", r]  & \Lambda ^3\mathfrak{su} (2)^*\ar[" d^4", r] & 0
+\end{tikzcd}\]
+Since $\Lambda ^0\mathfrak{su} (2)^*\cong \mathbb{R} $ is the space of constant functions, and the differential acts trivially on a constant function, $\Ker d^1 \cong \mathbb{R} $. Since $\Im d^{0} \cong 0$, we have $H^0(\mathfrak{su} (2))\cong \mathbb{R} $. Now we use the action of $d^2$ on the basis
+\[
+	d^2(\alpha _1) = -\alpha _2 \wedge \alpha _3,\qquad d^2(\alpha _2) = -\alpha _3 \wedge \alpha _1,\qquad d^2(\alpha_3) = -\alpha _1 \wedge \alpha _2
+.\]
+Note that this is clearly a basis for $\Lambda ^2 \mathfrak{su}(2)^*$, so $d^2$ is an isomorphism. Its kernel is therefore trivial, and since the image of $d^1$ is also trivial, $H^1(\mathfrak{su} (2))\cong 0$. We also obtain that the image of $d^2$ is the entire vector space $\Lambda ^2\mathfrak{su} (2)^*$, so $d^3$ must be the zero map. The cohomology $H^2(\mathfrak{su} (2))$ must then also be 0 since the sequence is exact in degree 2. Finally, since $d^3$ has trivial image and $d^4$ is the zero morphism, $H^3(\mathfrak{su} (2))\cong \Ker d^4 \cong \Lambda ^3 \mathfrak{su} (2)^*$. Since $\Lambda ^3\mathfrak{su} (2)^*$ is 1-dimensional with basis $\left\{ \alpha _1 \wedge \alpha _2\wedge \alpha _3 \right\} $, the third cohomology group is $\mathbb{R} $. Therefore, $H^{\bullet} (\mathfrak{su} (2))\cong H^{\bullet}_{\mathrm{dR} } (\operatorname{SU} (2))$.
+\end{document}

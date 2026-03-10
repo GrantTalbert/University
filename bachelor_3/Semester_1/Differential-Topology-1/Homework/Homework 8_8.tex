@@ -1,0 +1,299 @@
+\documentclass[10pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting.tex}
+\usepackage{titlepageBU}
+\title{Homework 8}
+\begin{document}
+\makeproblem
+
+\section{Page 372 exercise 14.34}
+\begin{problem}\label{1}
+	Let $M$ be a smooth manifold, $V\in \mathfrak{X} (M)$, and $\eta ,\omega \in \Omega ^*(M)$. Then
+	\[
+		\mathcal{L} _V(\eta \wedge \omega )=\mathcal{L} _V\eta \wedge \omega +\eta \wedge \mathcal{L} _V\omega 
+	.\]
+\end{problem}
+\begin{proof}
+    Let $\theta_t$ be the flow of $V$. By definition, $\mathcal{L}_V \alpha = \frac{d}{dt}\big|_{t=0} \theta_t^* \alpha$. By Lee 14.16,
+    \[
+    	\theta _t^*(\eta \wedge \omega )=\theta _t^*\eta \wedge \theta _t^*\omega 
+    .\]
+    Applying the product rule for regular differentiation,
+    \begin{align*}
+        \mathcal{L}_V (\eta \wedge \omega) &= \frac{d}{dt}\bigg|_{t=0} (\theta_t^* \eta \wedge \theta_t^* \omega) \\
+        &= \left( \frac{d}{dt}\bigg|_{t=0} \theta_t^* \eta \right) \wedge \theta_0^* \omega + \theta_0^* \eta \wedge \left( \frac{d}{dt}\bigg|_{t=0} \theta_t^* \omega \right) \\
+        &= (\mathcal{L}_V \eta) \wedge \omega + \eta \wedge (\mathcal{L}_V \omega)
+    ,\end{align*}
+    where we used that $\theta_0 = \operatorname{id}$ so $\theta_0^* =\mathrm{id} $.
+\end{proof}
+
+\section{Problem 14.1}
+\begin{problem}
+	Show that covectors $\omega ^1, \ldots, \omega ^k$ on a finite dimensional vector space are linearly dependent if and only if $\omega ^1 \wedge \cdots \wedge \omega ^k=0$.
+\end{problem}
+\begin{proof}
+	($\implies $) Let the collection of covectors be linearly dependent. Then there is $1\leq i \leq k$ and some collection of constants $\left\{ c_j \right\}_{1 \leq j \leq k, j \neq i} $ such that
+	\[
+		\omega ^i = \sum_{1 \leq j \leq k, j\neq i} c_j \omega ^j
+	.\]
+	By multilinearity of the exterior product,
+	\[
+		\omega ^1 \wedge \cdots \wedge \left( \sum_{1\leq j\leq k,j\neq i} c_j\omega ^j \right) \wedge \cdots \wedge \omega ^k = \sum_{1\leq j\leq k,j\neq i} c_j \omega ^1 \wedge \cdots \wedge \omega ^j \wedge \cdots \wedge \omega ^k
+	.\]
+	The indicated $\omega ^j$ appears in the $i$th component of the wedge product by hypothesis. However, another $\omega ^j$ appears in the $j$th component of the wedge product by definition. By hypothesis, since $j\neq i$, there are two $\omega ^j$s in the wedge product, and because the wedge product is alternating it follows that the wedge product is 0. Thus each term in the sum is 0.
+
+	($\impliedby $) We prove the contrapositive. Let $\left\{ \omega ^i \right\}_{i=1} ^k$ be linearly independent, and thus there exists a basis $\left\{ \omega ^i \right\}_{i=1} ^n$ for $V^*$ extending the linearly independent set. By Lee 14.8, there is a basis for $\Lambda ^k(V^*)$ given by
+	\[
+		\mathcal{B} \coloneqq \left\{ \omega ^I \mid I\text{ is a $k$-multi-index} \right\} \subseteq \Lambda ^k(V^*)
+	\]
+	By Lee 14.10, $\omega ^i \wedge \omega ^j = \omega ^{(i,j)} $. Thus there is a basis
+	\[
+		\mathcal{B} = \left\{ \omega^{i_1} \wedge \cdots \wedge \omega ^{i_k} \right\}_{1 \leq i_1 < \cdots < i_k \leq n} \subseteq \Lambda ^k(M)
+	.\]
+	In particular,
+	\[
+		\omega ^1 \wedge \cdots \wedge \omega ^k \in \mathcal{B} 
+	.\]
+	Since a basis contains all nonzero vectors, it follows that $\omega ^1 \wedge\cdots \wedge \omega ^k \neq 0$.
+\end{proof}
+\section{Problem 14.6}
+
+\begin{problem}
+	Define the 2-form on $\mathbb{R} ^3$ by
+	\[
+		\omega =x\mathrm{d} y\wedge \mathrm{d} z+y\mathrm{d} z\wedge \mathrm{d} x+z\mathrm{d} x\wedge \mathrm{d} y
+	.\]
+	\begin{enumerate}
+		\item Compute $\omega $ in spherical coordinates $(x,y,z)=(\rho \sin \phi \cos \theta ,\rho \sin \phi \sin \theta ,\rho \cos \phi )$.
+		\item Compute $\mathrm{d} \omega $ in both Cartesian and spherical coordinates and verify that both expressions represent the same 3-form.
+		\item Compute the pullback $\iota ^*_{S^2} \omega $ to $S^2$ using coordinates $(\phi ,\theta )$ on the open subset where these coordinates are defined.
+		\item Show that $\iota ^*_{S^2} \omega $ is nowhere zero.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Using the transformation law
+	\[
+		\mathrm{d} x^i=\frac{\partial x^i}{\partial \rho } \mathrm{d} \rho +\frac{\partial x^i}{\partial \theta } \mathrm{d} \theta +\frac{\partial x^i}{\partial \phi } \mathrm{d} \phi ,
+	\]
+	we compute
+	\[
+		\mathrm{d} x=\sin \phi \cos \theta \mathrm{d} \rho - \rho \sin \phi \sin \theta \mathrm{d} \theta +\rho \cos \phi \cos \theta \mathrm{d} \phi 
+	\]
+	\[
+		\mathrm{d} y=\sin \phi \sin \theta \mathrm{d} \rho +\rho \sin \phi \cos \theta \mathrm{d} \theta +\rho \cos \phi \sin \theta \mathrm{d} \phi 
+	\]
+	\[
+		\mathrm{d} z=\cos \phi \mathrm{d} \rho -\rho \sin \phi \mathrm{d} \phi 
+	.\]
+	We now compute the wedge product using bilinearity and using anticommutativity to ignore terms of the form $\mathrm{d} x^i \wedge \mathrm{d} x^i$:
+	\[
+		\mathrm{d} y \wedge \mathrm{d} z=-\sin \phi \sin \theta \mathrm{d} \rho \wedge \rho \sin \phi \mathrm{d} \phi +\rho \sin \phi \cos \theta \mathrm{d} \theta \wedge \cos \phi \mathrm{d} \rho -\rho \sin \phi \cos \theta \mathrm{d} \theta \wedge \rho \sin \phi \mathrm{d} \phi 
+	\]
+	\[
+		+\rho \cos \phi \sin \theta \mathrm{d} \phi \wedge \cos \phi \mathrm{d} \rho 
+	\]
+	\[
+		=\left( \rho \sin^2\phi \sin \theta +\rho \cos^2 \phi \sin \theta  \right) \mathrm{d} \phi  \wedge \mathrm{d} \rho +\rho \sin \phi \cos \theta \cos \phi \mathrm{d} \theta \wedge \mathrm{d} \rho -\rho ^2 \sin ^2\phi \cos \theta \mathrm{d} \theta \wedge \mathrm{d} \phi 
+	\]
+	\[
+		=\rho \sin \theta \mathrm{d} \phi \wedge \mathrm{d} \rho +\rho \sin \phi \cos \theta \cos \phi \mathrm{d} \theta \wedge \mathrm{d} \rho -\rho ^2 \sin ^2\phi \cos \theta \mathrm{d} \theta \wedge \mathrm{d} \phi 
+	.\]
+	\[
+		\mathrm{d} z \wedge \mathrm{d} x=-\cos \phi \mathrm{d} \rho \wedge\rho \sin \phi \sin \theta \mathrm{d} \theta +\cos \phi \mathrm{d} \rho \wedge \rho \cos \phi \cos \theta \mathrm{d} \phi -\rho \sin \phi \mathrm{d} \phi \wedge \sin \phi \cos \theta \mathrm{d} \rho 
+	\]
+	\[
+		+\rho \sin \phi \mathrm{d} \phi \wedge \rho \sin \phi \sin \theta \mathrm{d} \theta 
+	\]
+	\[
+		=-\rho \sin \phi \cos \phi \sin \theta \mathrm{d} \rho \wedge \mathrm{d} \theta +\left( \rho \cos ^2 \phi \cos \theta +\rho \sin ^2\phi \cos \theta  \right) \mathrm{d} \rho \wedge \mathrm{d} \phi +\rho ^2 \sin ^2\phi \sin \theta \mathrm{d} \phi \wedge \mathrm{d} \theta 
+	\]
+	\[
+		=-\rho \sin \phi \cos \phi \sin \theta \mathrm{d} \rho \wedge \mathrm{d} \theta +\rho \cos \theta \mathrm{d} \rho \wedge \mathrm{d} \phi +\rho ^2 \sin ^2 \phi \sin \theta \mathrm{d} \phi \wedge \mathrm{d} \theta 
+	.\]
+	\[
+		\mathrm{d} x \wedge \mathrm{d} y=\sin \phi \cos \theta \mathrm{d} \rho \wedge \rho \sin \phi \cos \theta \mathrm{d} \theta +\sin \phi \cos \theta \mathrm{d} \rho \wedge \rho \cos \phi \sin \theta \mathrm{d} \phi -\rho \sin \phi \sin \theta \mathrm{d} \theta \wedge \sin \phi \sin \theta \mathrm{d} \rho
+	\]
+	\[-\rho \sin \phi \sin \theta \mathrm{d} \theta \wedge \rho \cos \phi \sin \theta \mathrm{d} \phi +\rho \cos \phi \cos \theta \mathrm{d} \phi \wedge \sin \phi \sin \theta \mathrm{d} \rho +\rho \cos \phi \cos \theta \mathrm{d} \phi \wedge \rho \sin \phi \cos \theta \mathrm{d} \theta 
+	\]
+	\[
+		=\left( \rho \sin^2 \phi \cos ^2\theta+\rho \sin ^2 \phi \sin ^2\theta   \right) \mathrm{d} \rho \wedge \mathrm{d} \phi +\left( \rho \sin \phi \cos \theta \cos \phi \sin \theta -\rho \cos\phi \sin \theta \cos\theta \sin \phi \right) \mathrm{d} \rho \wedge \mathrm{d} \phi 
+	\]
+	\[
+		+\left( \rho ^2 \sin \phi \cos \phi \sin ^2\theta +\rho ^2 \sin \phi \cos \phi \cos ^2\theta  \right) \mathrm{d} \phi \wedge \mathrm{d} \theta 
+	\]
+	\[
+		=\rho \sin ^2\phi \mathrm{d} \rho \wedge \mathrm{d}\theta   +\rho ^2 \sin \phi \cos \phi \mathrm{d} \phi \wedge \mathrm{d} \theta 
+	.\]
+	Now we assemble the components.
+	\[
+		\omega =\rho \sin \phi \cos \theta \left( \rho \sin \theta \mathrm{d} \phi \wedge \mathrm{d} \rho +\rho \sin \phi \cos \theta \cos \phi \mathrm{d} \theta \wedge \mathrm{d}\rho  -\rho ^2 \sin ^2\phi \cos \theta \mathrm{d} \theta \wedge \mathrm{d} \phi  \right) 
+	\]
+	\[
+		+\rho \sin \phi \sin \theta \left( -\rho \sin \phi \cos \phi \sin \theta \mathrm{d} \rho \wedge \mathrm{d} \theta +\rho \cos \theta \mathrm{d} \rho \wedge \mathrm{d} \phi +\rho ^2 \sin ^2\phi \sin \theta \mathrm{d} \phi \wedge \mathrm{d} \theta  \right) 
+	\]
+	\[
+		+\rho \cos \phi \left( \rho \sin ^2\phi \mathrm{d} \rho \wedge \mathrm{d} \theta +\rho ^2 \sin \phi \cos \phi \mathrm{d} \phi \wedge \mathrm{d} \theta  \right) 
+	\]
+	\[
+		=\left(-\rho ^3 \sin ^3\phi \cos ^2\theta -\rho ^3 \sin ^3\phi \sin ^2\theta -\rho ^3 \sin \phi \cos ^2\phi \right)\mathrm{d} \theta \wedge \mathrm{d} \phi =\boxed{\rho ^3 \sin \phi \mathrm{d} \phi \wedge \mathrm{d} \theta }
+	.\]
+	
+	(2) Treat the functions $x,y,z$ as 0-forms. Then given a 2-form $\eta $, the wedge product of a 0-form $f$ and $\eta $ is simply $f \wedge \eta =f\eta $. Applying the product rule for exterior derivatives, $\mathrm{d} (f\alpha )=\mathrm{d} f\wedge \alpha +f\wedge \mathrm{d} \alpha $.
+
+	Now apply this to the problem, noting $\mathbb{R} $-linearity and that $\mathrm{d} ^2=0$ and $\mathrm{d} (x^i)=\mathrm{d} x^i$.
+	\[
+		\mathrm{d} \omega =\mathrm{d} \left( x\mathrm{d} y\wedge \mathrm{d} z+y \mathrm{d} z\wedge \mathrm{d} x+z \mathrm{d} x\wedge \mathrm{d} y \right) =\mathrm{d} x\wedge \mathrm{d} y\wedge \mathrm{d} z+\mathrm{d} y\wedge \mathrm{d} z\wedge \mathrm{d} x+\mathrm{d} z\wedge \mathrm{d} x\wedge \mathrm{d} y
+	\]
+	\[
+		=3\mathrm{d} x\wedge \mathrm{d} y\wedge \mathrm{d} z
+	.\]
+	In spherical coordinates,
+	\[
+		\mathrm{d} \omega =\mathrm{d} \left( \rho ^3 \sin \phi  \right) \wedge \mathrm{d} \phi \wedge \mathrm{d} \theta =\left( \frac{\partial }{\partial \rho } \rho ^3 \sin \phi  \mathrm{d} \rho + \frac{\partial }{\partial \theta } \rho ^3 \sin \phi \mathrm{d} \theta +\frac{\partial }{\partial \phi } \rho ^3 \sin \phi \mathrm{d} \phi  \right) 
+	\]
+	\[
+		=3\rho ^2 \sin \phi \mathrm{d} \rho \wedge \mathrm{d} \theta \wedge \mathrm{d} \phi +\rho ^3 \cos \phi \mathrm{d} \phi \wedge \mathrm{d} \phi \wedge \mathrm{d} \theta =3\rho ^2 \sin \phi \mathrm{d} \rho \wedge \mathrm{d}\theta \wedge \mathrm{d} \phi
+	.\]
+	To verify that they agree, we compute $\mathrm{d} x\wedge \mathrm{d} y\wedge \mathrm{d} z$ in spherical coordinates:
+	\[
+		\left( \sin \phi \cos \theta \mathrm{d} \rho -\rho \sin \phi \sin \theta \mathrm{d} \theta +\rho \cos \phi \cos \theta \mathrm{d} \phi  \right) \wedge \left( \sin \phi \sin \theta \mathrm{d} \rho +\rho \sin \phi \cos \theta \mathrm{d} \theta +\rho \cos \phi \sin \theta \mathrm{d} \phi  \right) 
+	\]
+	\[
+		\wedge \left( \cos \phi \mathrm{d} \rho -\rho \sin \phi \mathrm{d} \phi  \right) 
+	\]
+	\[
+		=\text{im not writing this out ok i worked it out on a whiteboard} = \rho ^2 \sin \phi \mathrm{d} \phi \wedge \mathrm{d} \theta 
+	.\]
+	Multiplying both of them by 3 shows that they are the same form.
+
+	(3) The inclusion $\iota : S^2 \to \mathbb{R} ^3$ maps $(\phi ,\theta )\mapsto (\rho =1,\phi ,\theta )$. Since $\mathrm{d} $ commutes with pullbacks,
+	\[
+		\iota ^*(\omega )=\iota ^*(\rho ^3 \sin \phi \mathrm{d} \phi \wedge \mathrm{d} \theta )=\sin \phi \mathrm{d} \iota ^*\phi \wedge \mathrm{d} \iota ^*\theta =\sin \phi \mathrm{d} \phi \wedge \mathrm{d} \theta 
+	.\]
+	Of course we note here that the pullback of a 0-form is simply given by precomposition $\iota ^*f=f\circ \iota $, justifying $\iota ^*\rho =1$ and $\iota ^*\theta =\theta $, $\iota ^*\phi =\phi $.
+	
+	(4) It's easiest to check this in cartesian coordinates, since these can be defined everywhere. It suffices to show that $(x,y,z)=0$ never happens, and indeed on the unit 2-sphere we must have $\sqrt{x^2+y^2+z^2} =1$, so not all coordiantes can vanish. Since all the pullback $\iota ^*\omega $ does is restrict $\omega $ to the sphere, the statement follows. 
+\end{proof}
+
+
+\section{Problem 14.9}
+\begin{problem}
+	Let $M,N$ be smooth manifolds and $\pi : M \to N$ a surjective submersion with connected fibers. We say $v\in T_pM$ is \emph{vertical} if it vanishes under the pushforward $\pi _{*p} (v)=0$. Suppose $\omega \in \Omega ^k(M)$. Show that there is $\eta \in \Omega ^k(N)$ such that $\omega =\pi ^*\eta $ if and only if $\iota _v\omega _p=0$ and $\iota _v \mathrm{d} \omega _p=0$ for all $p\in M$ and all vertical vectors $v\in T_pM$.
+\end{problem}
+Recall that
+\[
+	\iota _X : \Lambda ^kV^* \to \Lambda ^{k-1} V^*,\qquad \omega \mapsto \omega (X,-,\cdots ,-).
+\]
+\begin{proof}
+	($\implies $) Let there exist a $k$-form $\eta $ with $\omega =\pi ^*\eta $. Explicitly, for any $v_1, \ldots ,v_k\in T_pM$,
+	\[
+		\omega _p(v_1, \ldots ,v_k)=\eta_{\pi (p)}(\pi_{*p} (v_1), \ldots ,\pi _{*p} (v_k))
+	.\]
+	Let $v\in T_pM$ be vertical. Then
+	\[
+		\iota _v\omega_p = \omega_p(v, -, \ldots ,-)=\eta _{\pi (p)} (\pi _{*p} (v),\pi _{*p} (-), \ldots , \pi _{*p} (-))=\eta _{\pi (p)} (0,\pi _{*p} (-), \ldots ,\pi _{*p} (-))
+	.\]
+	Recall that the $k$-covector $\eta_{\pi (p)} $ acts $k$-multilinearly on $k$-tuples, and thus we can factor the 0 out:
+	\[
+		\eta_{\pi (p)}(0, \ldots , \pi _{*p} (-))=(0\eta_{\pi (p)})(0, \ldots ,\pi _{*p} (-))=0
+	.\]
+	By Lee 14.23, $\mathrm{d} 0=0$ and $\mathrm{d} $ commutes with pullbacks, yielding
+	\[
+		\iota _v(\mathrm{d} \omega_p)=\iota_v(\mathrm{d} \pi ^*\eta )_p=\iota _v\pi ^*\mathrm{d} \eta_{\pi (p)} =(\mathrm{d} \eta )_{\pi (p)}(\pi _{*p} (v),\pi _{*p} (-), \ldots ,\pi _{*p} (-))=(\mathrm{d} \eta )_{\pi (p)}(0, \ldots ,\pi _{*p} (-))=0
+	.\]
+	($\impliedby $) Let $i_v\omega_p =0$ and $i_v \mathrm{d} \omega_p =0$ for all vertical vectors $v$. For each $q\in N$, choose some $p\in \pi ^{-1} (q)$, and for each $u_1, \ldots , u_k\in T_qM$ choose a collection $v_1, \ldots ,v_k\in T_pM$ with $\pi _{*p} (v_i)=u_i$ for all $i$. Then define $\eta _q(u_1, \ldots , u_k) \coloneqq \omega_p (v_1, \ldots ,v_k)$. Because $\pi $ is surjective, such a $p$ always exists, and because it is a submersion, it is surjective on each tangent space, meaning such a lift of the vectors always exists. By definition $\eta $ is alternating and $\pi ^*\eta =\omega $, so at this point it suffices only to show that it is well-defined.
+
+	First we show independence of lifts $\left\{ v_i \right\},\left\{ \widetilde{v} _i \right\} \subseteq T_pM$ with $\pi _{*p} (v_i)=\pi _{*p} (\widetilde{v} _i)$ for all $1\leq i\leq n$. Note that
+	\[
+		\pi _{*p} (v_i- \widetilde{v} _i) = \pi _{*p} (v_i)-\pi _{*p} (\widetilde{v} _i)=0,
+	\]
+	and thus $v_i - \widetilde{v} _i$ is vertical for all $i$. For convenience of notation, define $w_i \coloneqq v_i - \widetilde{v} _i$. By hypothesis for all $p\in M$,
+	\[
+		\iota_{w_i} \omega _p=0,\qquad \iota _{w_i} \mathrm{d} \omega _p = 0
+	.\]
+	Now consider the difference
+	\[
+		\omega _p(v_1, \ldots ,v_k) - \omega _p( \widetilde{v} _1, \ldots , \widetilde{v} _k) = \omega _p(v_1, \ldots ,v_k) - \omega _p( v_1 - w_1, \ldots ,v_k-w_k)
+	.\]
+	We can expand the second term via multilinearity. Precisely one of these terms must be $\omega _p(v_1, \ldots ,v_k)$, and all other terms must contain at least one $w_i$. We then note that
+	\[
+		\omega _p(v_1, \ldots , w_i ,\ldots ,v_k) = (-1)^{i-1} \omega _p(w_i, v_1, \ldots ,v_k)=(-1)^{i-1} (\iota _{w_i} \omega _p)(v_1, \ldots ,v_k)=0
+	\]
+	since $\iota _{w_i} \omega _p=0$ by hypothesis. Thus, all terms other than $\omega _p(v_1, \ldots ,v_k)$ vanish, yielding
+	\[
+		\omega _p(v_1, \ldots ,v_k) - \omega _p( \widetilde{v} _1, \ldots , \widetilde{v} _k) = \omega _p(v_1, \ldots ,v_k) - \omega (v_1, \ldots ,v_k)=0
+	.\]
+	Thus $\omega $ agrees on lifts.
+
+	Now we show $\eta $ is independent of the choice of $p$ in the fiber of $q$. It will be important to recall Lee 8.18, which we proved (at least part of, I don't remember if we did the whole thing) in a previous homework.
+
+	\begin{proposition}[Lee 8.18]\label{4.1}
+		Let $F : M \to N$ be a submersion between positive dimensional manifolds $M,N$. We say $Y\in \mathfrak{X} (M)$ is a \emph{lift} of some $X\in \mathfrak{X} (M)$ if they are $F$-related. A vector field $V\in \mathfrak{X} (M)$ is vertical if it is $F$-related to 0. The following are true.
+		\begin{enumerate}
+			\item If $\dim M = \dim N$, then all vector fields on $N$ lift unqiuely.
+			\item If $\dim M \neq \dim N$, then all vector fields lift, but not necessarily uniquely.
+			\item If $F$ is surjective, then each $X\in \mathfrak{X} (M)$ is a lift of a smooth vector field on $N$ if and only if $F_{*p} (X_q)=F_{*q} (X_q)$ for each $F(p)=F(q)$. In this case, it is the lift of a unique vector field.
+			\item If $F$ is surjective and has connected fibers, then $X\in \mathfrak{X} (M)$ is a lift of a smooth vector field on $N$ if and only if $[V,X]=\mathcal{L} _VX$ is vertical whenever $V\in \mathfrak{X} (M)$ is vertical.
+		\end{enumerate}
+	\end{proposition}
+	Now we show that $\eta $ is independent of the choice of $p\in \pi ^{-1} (q)$ for $q\in N$. Let $u_1, \ldots , u_k\in T_qN$, and for each $p\in \pi ^{-1} (q)$, let there exist vector fields $V^i$ for $1\leq i\leq k$ with $\pi _{*p} (V^i_p)=u_i$. The existence of these vector fields follows by \cref{4.1} (2), the fact that we may choose a smooth vector field $U^i$ on $N$ with $U^i_p=u_i$, for each $i$, and the hypotheses of the problem. The problem reduces to showing, for any $p,\widetilde{p} \in M$,
+	\[
+		\omega _{p} (V_p^1, \ldots ,V_p^k) = \omega _{\widetilde{p} } (V^1_{\widetilde{p} } , \ldots , V^k_{\widetilde{p} } )
+	.\]
+	Equivalently, we would like to show the function $f:\pi ^{-1} (q)\to \mathbb{R} $ defined by
+	\[
+		p\mapsto \omega _p(V^1_p, \ldots ,V^k_p)
+	\]
+	is constant. The function is smooth since evaluation is smooth, and thus it arises as a composite of smooth functions. It suffices to show that its derivative vanishes in any direction. Let $V^0$ be vertical to $\pi $, and by hypothesis
+	\[
+		0=\iota _{V^0}\mathrm{d} \omega =\mathrm{d} \omega (V^0,V^1, \ldots ,V^k)=V^0(\omega (V^1, \ldots ,V^k))+\sum_{i=1}^{k} (-1)^iV^i(\omega (V,V^1, \ldots , \hat{V} ^i, \ldots ,V^k))
+	\]
+	\[
+		+\sum_{0\leq i<j\leq k} (-1)^{i+j} \iota ([V^i,V^j],V^0, \ldots , \hat{V} ^i, \ldots ,\hat{V} ^j, \ldots ,V^k)
+	.\]
+	Note that each term inside the first summation is of the form $(-1)^iV^i(\iota _{V^0} \omega )$, which by hypothesis is zero. Thus the first summation vanishes. For the second term, note that the commutator $[V^0,V^i]$ is vertial for all $V$ since
+	\[
+		\pi _*[V^0,V^i]=[\pi _*V,\pi _*V^i]=[0,u^i]=0
+	.\]
+	We can rewrite terms involving commutators with $V^0$ as interior products of $\omega $ with the commutator, which vanish by hypothesis. If $V^0$ does not appear in the commutator, then it appears as an argument in $\omega $. Since forms are alternating, we can move $V^0$ to the first slot, picking up a few factors of $-1$, and then we obtain an interior product of $\omega $ by $V$, which once again vanishes. Thus all terms in the second summation vanish, yielding
+	\[
+		V^0(\omega (V^1, \ldots ,V^k))=0
+	\]
+	for all vertical $V^0$. Thus $f$ is constant.
+\end{proof}
+
+
+\section{Problem 15.1}
+\begin{problem}
+	Let $M$ be a smooth manifold that is the union of two orientable open submanifolds with connected intersection. Show that $M$ is orientable. Use this to prove $S^n$ is orientable.
+\end{problem}
+\begin{proof}
+    Choose orientations $\mathcal{O} _U$, $\mathcal{O} _V$ or $U$ and $V$, respectively. We view orientations as nonvanishing $n$-forms. Define a function $\sigma: U \cap V \to \{ -1, 1 \}$ by
+    \[
+        \sigma(p) =
+        \begin{cases}
+            1 & \text{if } \mathcal{O}_U|_p = \mathcal{O}_V|_p, \\
+            -1 & \text{if } \mathcal{O}_U|_p = -\mathcal{O}_V|_p.
+        \end{cases}
+    \]
+    Since orientations are locally constant (relative to coordinate charts), this function is locally constant, and thus continuous (where $\{ -1, 1 \}$ has the discrete topology). Because $U \cap V$ is connected, $\sigma$ must be a constant function. The relevance of this is that if $\sigma (p)=1$ for all $p$, then the orientations agree; otherwise we can simply swap $\mathcal{O} _V$ for the orientation $-\mathcal{O} _V$, and the orientations will then agree. Define a global orientation $\mathcal{O}\in\Omega ^n(M)$ on $M$ by
+    \[
+        \mathcal{O}|_p =
+        \begin{cases}
+            \mathcal{O}_U|_p & p \in U \\
+            \widetilde{\mathcal{O}}_V|_p & p \in V
+        \end{cases}
+    \]
+    This is well-defined since the orientations agree on the intersection, and by assumption vanishes nowhere and is an $n$-form. Since open submanifolds have codimension 0, this is a nowhere vanishing $n$-form on $M$, and thus an orientation on $M$.
+
+    Let $N, S \in S^n$ be the north and south poles. Let $U = S^n \setminus \{N\}$ and $V = S^n \setminus \{S\}$. Both $U$ and $V$ are diffeomorphic to $\mathbb{R}^n$ by stereographic projection. Since $\mathbb{R}^n$ is orientable, $U$ and $V$ inherit canonical orientations by pulling back along the diffeomorphism. Since they are open submanifolds of $S^n$, their union is $S^n$, and their intersection $S^n \setminus \left\{ N,S \right\} $ is clearly connected, $S^n$ is orientable.
+\end{proof}
+
+
+\end{document}

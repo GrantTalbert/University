@@ -5,7 +5,7 @@ One of the numerous reasons that functors are useful in math is because they pre
 \begin{construction}\label{7.1}
 	Let $F : \mathcal{A}  \to \mathcal{B} $ be an additive functor between abelian categories. Then we may define the functor $\Ch(F) : \Ch(\mathcal{A} )  \to \Ch(\mathcal{B} ) $ as follows. Given a chain complex $C_{\bullet} $ in $\Ch(\mathcal{A} ) $, define $\Ch(F) (C_{\bullet} )$ as the chain complex
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\cdots\ar[" F(d_{n+2} ) ", r]  & C_{n+1} \ar[" F(d_{n+1} ) ", r]  & C_n\ar[" F(d_n) ", r]  & C_{n-1} \ar[" F(d_{n-1} ) ", r]  & \cdots
+	\cdots\ar[" F(d_{n+2} ) ", r]  & F(C)_{n+1} \ar[" F(d_{n+1} ) ", r]  & F(C)_n\ar[" F(d_n) ", r]  & F(C)_{n-1} \ar[" F(d_{n-1} ) ", r]  & \cdots
 	\end{tikzcd}\]
 	Note that this is indeed a chain complex, since additive functors induce \emph{abelian group homomorphisms} $\mathcal{A} (C_i,C_{i-1} )\to \mathcal{B} (F(C_i),F(C_{i-1} )$. In particular, they preserve the zero morphism, meaning that
 	\[
@@ -16,10 +16,10 @@ One of the numerous reasons that functors are useful in math is because they pre
 	\cdots \ar[" F(d_{n+2} ) ", r] & F(C_{n+1}) \ar[" F(d_{n+1} ) ", r] \ar[" F(f_{n+1} ) "', d]  & F(C_n)\ar[" F(d_n) ", r] \ar[" F(f_n) "', d]  & F(C_{n-1} )\ar[" F(f_{n-1} ) "', d] \ar[" F(d_{n-1} ) ", r]  & \cdots \\
 	\cdots \ar[" F(d_{n+2} ) ", r] & F(C_{n+1} )\ar[" F(d_{n+1} ) "', r]  & F(C_n)\ar[" F(d_n) "', r]  & F(C_{n-1} )\ar[" F(d_{n-1} ) "', r]  & \cdots
 	\end{tikzcd}\]
-	Thus, $\Ch(F)(f_{\bullet} )$ is a morphism of chain complexes $\Ch(F)(C_{\bullet} )\to\Ch(F)(D_{\bullet} )$.
+	commutes. Thus, $\Ch(F)(f_{\bullet} )$ is a morphism of chain complexes $\Ch(F)(C_{\bullet} )\to\Ch(F)(D_{\bullet} )$.
 \end{construction}
 
-With \cref{7.1} out of the way, we would like to know if additive functors preserve quasi-isomorphisms. Unfortunately, they do not in general. However, there is an important class of functions that \emph{does} preserve quasi-isomorphisms.
+This is an important construction that will appear periodically. For now, we turn our attention back to quasi-isomorphisms. Unfortunately, additive functors need not preserve quasi-isomorphisms in general, but there are important classes of functors that do.
 
 \begin{definition}\label{7.2}
 	Let $\mathcal{A} $ be an abelian category. A \emph{short exact sequence} in $\Ch(\mathcal{A} ) $ is an exact complex of the form

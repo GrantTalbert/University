@@ -1,0 +1,7 @@
+\lecture{7}{Thu 19 Feb 2026 12:07}{Cohomology}
+
+Consider the \emph{left-invariant} differential forms, meaning forms that act only on left-invariant vector fields $\Lambda ^{\bullet} \mathfrak{g} $. Then the de Rham complex this yields is called the Cheveley-Eilenberg complex. In general, given vector fields $\left\{ X_i \right\} _{1\leq i\leq k} $ and a $k$-form $\omega $, we have
+\[
+	\mathrm{d} \omega (X_1, \ldots ,X_k)=\sum_{i} (-1)^i X_i(\omega (X_1, \ldots , \hat{X}_i, \ldots ,X_k)) + \sum_{i<j} (-1)^{i+j} \omega ([X_i,X_j], X_1, \ldots ,\hat{X}_i, \ldots ,\hat{X} _j, \ldots ,X_k)
+.\]
+However when only considering left-invariant vector fields on a Lie group, the first sum vanishes, so the differential is only the second term. If $G$ is compact, then this agrees with the de Rham cohomology (over a field of characteristic 0).

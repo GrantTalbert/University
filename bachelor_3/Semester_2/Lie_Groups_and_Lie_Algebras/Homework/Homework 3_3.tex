@@ -1,0 +1,68 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 3}
+\begin{document}
+\makeproblem
+
+
+\begin{problem}
+    Give an example of $G \subset \operatorname{GL}(n, \mathbb{C})$ and $X \in \mathfrak{gl}(n, \mathbb{C})$ such that $e^X \in G$ but $X \notin \operatorname{Lie}(G)$.
+\end{problem}
+
+\begin{proof}
+    Take $G = \operatorname{SL}(2, \mathbb{C})$ with Lie algebra $\mathfrak{sl} (2,\mathbb{C} )$ given by traceless $2\times 2$ matrices over $\mathbb{C} $. Let $X=i\pi I$ for $I$ the identity. The exponential is
+    \[
+    e^X = \begin{pmatrix} e^{i\pi} & 0 \\ 0 & e^{i\pi} \end{pmatrix}  = -I.
+    \]
+    Note that $\det (-I)=-1^2=1$ since we take $n=2$, and thus $-I\in \mathfrak{sl} (2,\mathbb{C} )$. The trace of $X$ is
+    \[
+    \operatorname{tr}(X) = i\pi + i\pi = 2\pi i \neq 0.
+    \]
+    Thus, $X \notin \mathfrak{sl}(2, \mathbb{C}) = \operatorname{Lie}(G)$.
+\end{proof}
+
+\begin{problem}
+    Let $A \in \operatorname{SL}(2, \mathbb{C})$ which has an eigenvalue in $\mathbb{C} \setminus \mathbb{R} $. Show that
+    \[
+    	A=C \begin{pmatrix}
+    	\cos \theta  & -\sin \theta  \\
+    	\sin \theta  & \cos \theta 
+    	\end{pmatrix}C^{-1} 
+    \]
+    for some invertible matrix $C$.
+\end{problem}
+\begin{proof}
+	Let $\lambda _1,\lambda _2\in\mathbb{C} $ be the eigenvalues of $A$, which exist since $\mathbb{C} $ is algebraicly closed and eigenvalues are a solution to a polynomial. Also since the eigenvalues solve the characteristic polynomial of $A$, we have that $p(t)=\det (A-tI)$ factors as $(t-\lambda _1)(t-\lambda _2)=t^2-(\lambda _1+\lambda _2)t+\lambda _1\lambda _2$. We then have $p(0)=\det A = \lambda _1\lambda _2$. However, $A\in \operatorname{SL} (2,\mathbb{C} )$ implies $\lambda _1\lambda _2=1$, hence $\lambda _2=\lambda _1 ^{-1} $.
+
+    Let $\lambda \in\mathbb{C} \setminus \mathbb{R} $ be an eigenvalue of $A$, which exists by hypothesis. Since $\lambda \notin \mathbb{R}$, we have $\lambda \neq \pm 1$, and thus $\lambda \neq \lambda^{-1}$ (as $\lambda = \lambda^{-1} \implies \lambda^2 = 1$). Since $A$ has distinct eigenvalues, it admits a diagonalization, rendering it conjugate to the diagonal matrix of eigenvalues
+    \[
+        D= \begin{pmatrix} \lambda & 0 \\ 0 & \lambda^{-1} \end{pmatrix}.
+    \]
+    Now consider the matrix
+    \[
+        B = \begin{pmatrix}
+        \cos \theta & -\sin \theta \\
+        \sin \theta & \cos \theta
+        \end{pmatrix}.
+    \]
+    with characteristic polynomial
+    \[
+    	q(t)=(\cos \theta -t)(\cos \theta -t)+\sin ^2\theta =\cos ^2\theta +t^2-2 \cos (\theta )t+\sin ^2\theta =t^2-2 \cos (\theta )t+1
+    .\]
+    The quadratic equation yields roots for $q$:
+    \[
+    	t=\frac{2 \cos \theta \pm \sqrt{4 \cos ^2\theta -4} }{2} =\cos \theta \pm \sqrt{- \sin ^2\theta } =\cos \theta \pm i \sin \theta =e^{\pm i\theta } 
+    .\]
+    Since the complex exponential map $\exp: \mathbb{C} \to \mathbb{C} \setminus \{0\}$ is surjective, there exists $\theta \in \mathbb{C}$ such that $e^{i\theta} = \lambda$, hence $B$ has eigenvalues $\lambda$ and $e^{-i\theta } =(e^{i\theta } )^{-1} =\lambda^{-1}$. Since these are distinct, $B$ is also conjugate to $D$. Since conjugacy is an equivalence relation, we find that there exist matrices $C$ such that $A=CBC ^{-1} $.
+\end{proof}
+
+\end{document}

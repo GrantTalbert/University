@@ -1,0 +1,237 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 2}
+\courseID{MA726 Complex Geometry}
+\begin{document}
+\makeproblem
+
+\begin{problem}[2.3]
+	Let $U\subseteq \mathbb{C} ^n$ be an open set, and $f=f(z)\in \mathcal{O} (U)$ a non-zero holomorphic function. Denote by $X\subseteq U$ the complement of the zero-locus of $f$:
+	\[
+		X=U\setminus Z(f)\subseteq U
+	.\]
+	Show that $X$ is isomorphic to a closed submanifold of $U\times \mathbb{C} $. (Hint: consider the function $f(z)\cdot t-1\in \mathcal{O} (U)[t]$.)
+\end{problem}
+\begin{proof}
+	Let $p : U\times \mathbb{C}  \to \mathbb{C} $ be $p(z,t)=f(z)t-1$, which is clearly holomorphic on $U\times \mathbb{C} \subseteq \mathbb{C} ^{n+1} $. We have $p(z,t)=0$ whenever $f(z)t=1$, hence the zero locus is
+	\[
+		Z(p)=\left\{ (z,t)\in U\times \mathbb{C} \mid f(z),t\neq 0 \text{ and } t = 1/f(z) \right\} \subseteq U\times \mathbb{C} 
+	.\]
+	This is closed since $\left\{ 0 \right\} \subseteq \mathbb{C} $ is closed, since $p$ is holomorphic (in particular, continuous), and since continuous preimages of closed sets are closed. We construct an isomorphism with $X$ as follows. Let $\pi : U\times \mathbb{C}  \to U$ be the canonical projection $(z,t)\mapsto z$, and write $\pi_Z$ for the restriction $\pi_Z : Z(p) \to \pi (Z(p))$. Each $z\in \pi (Z(p))$ determines precisely one $t\in\mathbb{C} $ such that $(z,t)\in Z(p)$. Hence $\pi _Z$ admits a continuous inverse
+	\[
+		\pi_Z^{-1} (z) = (z,1/f(z))
+	.\]
+	Since $z\in \pi (Z(p))$, we have $f(z) \neq 0$, and thus $1/f(z)$ is always defined. Thus $\pi _Z$ is a biholomorphism on $\pi (Z(p))$ since the inverse is holomorphic due to $f$ being holomorphic.
+
+	To show $Z(p)$ is a complex manifold of dimension $n$, we appeal to Lazardsfeld example 2.6 (or more generally the implicit function theorem), which says we need only show there exists a coordinate $z_i$ with $\frac{\partial p}{\partial z_i}(z) \neq 0$ for all $z\in Z(p)$. We have
+	\[
+		\frac{\partial p}{\partial t} =f(z),
+	\]
+	and as shown earlier $f$ is nonzero everywhere on $X$. Thus $\partial _tp \neq 0$ on $Z(p)$, so $Z(p)$ is a complex submanifold of codimension 1.
+\end{proof}
+
+\begin{problem}[2.4]
+	Let $Y$ be a complex manifold of dimension $n+k$. A subset $X\subseteq Y$ is a closed $n$-submanifold if and only if one can find an open cover $\left\{ U_\alpha  \right\}_{\alpha \in A} $ of $Y$, together with a $k$-tuple $\left\{ f_\alpha  \right\}_{\alpha \in A} $ of holomorphic functions on each $U_\alpha $, such that
+	\[
+		U_\alpha \cap X = Z(f_\alpha ),
+	\]
+	and $J(f_\alpha )$ has maximal rank on $U_\alpha \cap X$.
+\end{problem}
+\begin{proof}
+	($\implies $) Let $X\subseteq Y$ be a closed submanifold. Then $X$ is a closed $2n$-submanifold of $Y$, and there is a holomorphic atlas $\left\{ (U_\alpha ,\varphi _\alpha ) \right\} _{\alpha \in A} $ on $Y$ such that if $U_\alpha \cap X \neq \varnothing $, then
+	\[
+		\varphi _\alpha : U_\alpha \cap X \cong \varphi_\alpha  (U_\alpha )\cap \mathbb{C} ^n
+	\]
+	for some linear embedding $\mathbb{C} ^n\cong \mathbb{C} ^n\times \left\{ 0 \right\} \hookrightarrow \mathbb{C} ^{n+k} $. Write $\varphi_\alpha ^i$ for the $i$th component function of $\varphi _\alpha $ such that
+	\[
+		\varphi _\alpha (z)=(\varphi _\alpha ^1(z), \ldots ,\varphi _\alpha ^{n+k} (z))
+	.\]
+	Since for $z\in X$ we have that $\varphi_\alpha (z)\in \varphi_\alpha (U_\alpha )\cap \mathbb{C} ^{n} $, we have that only the first $n$ components $\varphi _\alpha ^{i\leq n} (z)$ are nonzero, and the final $k$ components $\varphi _\alpha ^{i > n} (z)$ must be zero. Consider the open cover $\left\{ U_\alpha  \right\}_{\alpha \in A} $ of $Y$ together with the $k$-tuples of functions
+	\[
+		\left\{ \left(\varphi_{\alpha }^{n+1}, \ldots , \varphi _\alpha ^{n+k} \right) \right\}_{\alpha \in A} 
+	.\]
+	Each function is immediately holomorphic since $\varphi _\alpha $ is holomorphic, and by definition of holomorphy.
+
+	For simplicity of notation we write $Z(\varphi _\alpha ^i)$ to always mean the zero locus of the tuple $\left( \varphi _\alpha ^{n+1} , \ldots , \varphi_\alpha ^{n+k}  \right) $. Let $z\in U_\alpha \cap X$. Then $\varphi_\alpha (z) \in \varphi _\alpha (U_\alpha )\cap \mathbb{C} ^n$ implies that $\varphi _\alpha ^i(z)=0$ for all $n<i\leq n+k$, and thus $z\in Z(\varphi_\alpha^i)$. Conversely, let $z\in Z(\varphi _\alpha ^i)$. Then $\varphi _\alpha (z) = (\varphi_1^\alpha (z), \ldots ,\varphi _\alpha ^n(z), 0, \ldots ,0)$, and thus $\varphi _\alpha (z)\in \mathbb{C} ^n\times \left\{ 0 \right\} $. It follows that $\varphi _\alpha (z)\in \varphi _\alpha (U_\alpha )\cap \mathbb{C} ^n$, and since $\varphi _\alpha $ is an isomorphism, we obtain $z\in U_\alpha \cap X$. Thus we obtain $U_\alpha \cap X = Z(\varphi _\alpha ^i)$.
+
+	It remains only to show that the Jacobian has maximal rank. We view the tuple of functions as a map $U_\alpha \to \mathbb{C} ^k$ via $z\mapsto \left( \varphi _\alpha ^i(z) \right)_{n<i\leq n+k} $, which is holomorphic since each $\varphi _\alpha^i $ is holomorphic. The (real) Jacobian, which we simply write as $J(\varphi_\alpha ^i)$ for simplicity of notation, is then of the form
+	\[
+		J(\varphi _\alpha ^i)=\begin{pmatrix}
+		\frac{\partial \varphi_\alpha ^{n+1} }{\partial z_{n+1} }  & \cdots  & \frac{\partial \varphi _\alpha ^{n+1} }{\partial z_{n+k} }  \\
+		\vdots & \ddots& \vdots \\
+		\frac{\partial \varphi _\alpha ^{n+k} }{\partial z_{n+1} }  & \cdots  & \frac{\partial \varphi _\alpha ^{n+k} }{\partial z_{n+k} } 
+		\end{pmatrix},
+	\]
+	where we note again that the complexified Jacobian is completely determined by the real Jacobian on holomorphic functions, and moreover attains maximal rank whenever the real one does. It is simple to show that the Jacobian contains the $k\times k$ identity matrix as a block matrix: since $\varphi _\alpha $ gives coordinates on $U_\alpha $, the functions $\varphi _\alpha ^{i} $ are precisely the coordinate functions, and thus $\partial_i \varphi _\alpha ^j = \delta _{ij} $. Hence $J(\varphi _\alpha ^i)$ contains the identity at all points on $U_\alpha $, including on the intersection $U_\alpha \cap X$. It thus has rank at least $k$, which is the maximal rank since it maps from a $(n+k)$-dimensional space to a $k$-dimensional space.
+
+	$(\impliedby )$ Let $\left\{ U_\alpha  \right\}_{\alpha \in A} $ be an open cover of $Y$, and $\left\{ f_\alpha =(f^1_\alpha , \ldots ,f^k_\alpha )\right\}_{\alpha \in A} $ a collection of holomorphic functions on $U_\alpha $ such that $U_\alpha \cap X = Z(f_\alpha )$ and such that $J(f_\alpha )$ attains maximal rank on $U_\alpha \cap X$.
+
+	Since $X$ is the zero locus of a collection of holomorphic functions, it is automatically closed. It is also a real submanifold of dimensnion $2n$ by the same theorem for smooth geometry. Let $\alpha \in A$ and let $p\in U_\alpha \cap X$. Choose a chart $(V,z_i)$ with $p\in V \subseteq U_\alpha $, and for each $f_\alpha ^i$, view the Jacobian $J(f_\alpha ^i)$ as an element of the tangent space\footnote{I did this because we haven't explicitly mentioned the cotangent space yet, but it would be more precise to say the $\mathrm{d} f_\alpha ^i$'s are linearly indendent in the holomorphic cotangent space.} $T_p^\mathbb{C} V$ via the identification $\partial _{z_i} \leftrightarrow \mathrm{d} z_i$. Since the Jacobian has maximal rank on $U_\alpha \cap X$, the set $\left\{ J (f_{\alpha } ^i) \right\}_{1\leq i\leq k} $ is linearly independent in $T_p^\mathbb{C}V\cong T_p^\mathbb{C} U_\alpha $ for any $p\in U_\alpha \cap X$. Since derivatives with respect to coordinates span the tangent space, we can choose $n$ coordinate functions $\left\{ z_{i_j}  \right\}_{1\leq j\leq  n} $ to complete the set of Jacobians to a basis $\left\{ J (f_\alpha ^i), \frac{\partial }{\partial z_{i_j} }  \right\} $ for the space.
+
+	Define the function $F= (z_{i_1} , \ldots ,z_{i_n}, f_\alpha ^1, \ldots ,f_\alpha ^k)$. Then since the components of $F$ have linearly independent derivatives, the Jacobian of $F$ is invertible. In particular, it is surjective for any $p\in U_\alpha \cap X$. By the inverse function theorem, there is an open neighborhood $p\in W_p \subseteq U_\alpha $ such that $F$ restricts to an isomorphism $F : W_p \cong F(W_p)$. Since we can construct such a $W_p$ for any $p\in X \cap U_\alpha $ and for any $U_\alpha $, we immediately have that there is a holomorphic atlas containing $\left\{ (W_p,F) \right\} _{p\in X} $. Moreover, by construction $F$ restricted to $X$ yields $F : W_p \cap X \cong F(W_p)\cap \mathbb{C} ^n$ for any $p$, since the last $k$ component functions are $f_\alpha ^i$, which vanish on $X$. It remains only to complete $\left\{ (W_p,F) \right\} _{p\in X} $ into an atlas such that the only charts intersecting $X$ are the $W_p$s. This is simple to do: choose a holomorphic atlas $\left\{ (V_i,\varphi _i) \right\} _{i\in I} $ for $Y$, and since $X$ is closed, its compliment $X^{c} $ is open. Then each $V_i \cap X^{c} $ is open, and the restriction $\varphi _i | V_i \cap X^{c} $ is still a biholomorphism onto an open subset of $\mathbb{C} ^{n+k} $. Thus we may construct the new atlas
+	\[
+		\left\{ \left(V_i \cap X^{c} ,\varphi |V_i \cap X^{c} \right) \right\} _{i\in I} \cup \left\{ (W_p,F) \right\} _{p\in X} 
+	.\]
+	As noted before, $F$ is compatible with all coordinate functions, and thus this is indeed a holomorphic atlas.
+\end{proof}
+
+
+\begin{problem}[2.5]
+	Working in $\mathbb{C} ^2$ with coordinates $z,w,$ let
+	\[
+		X=\left\{ w^2 - p_{2g+2} (z)=0 \right\} 
+	\]
+	be the curve defined as the zero locus of a polynomial $w^2-p_{2g+2} (z)$, where $p_{2g+2} $ is a polynomial of degree $2g+2$ in $z$ with distinct roots.
+	\begin{enumerate}
+		\item Prove that the comdition of Example 2.6 is met, and hence that $X$ is a complex manifold of dimension 1.
+		\item By studying the projection
+			\[
+				\pi : X \to \mathbb{C} ,\qquad (z,w)\mapsto z
+			\]
+			show that one can compactify $X$ by adding two points ``at infinity'' to obtain a compact Riemann surface $\overline{X} $ in such a way that $\pi $ extends to a holomorphic map
+			\[
+				\overline{\pi } : \overline{X}  \to S \cong \mathbb{C} \cup \left\{ \infty  \right\} 
+			.\]
+			(Hint: because $p$ has even degree, the inverse image under $\pi $ of the complement $D^*$ of a disk of very large radius consists of the disjoint union of two copies of $D^*$. But $D^*$ is a punctured neighborhood of the point at infinity, and therefore we need to add two points to compactify $X$.)
+	\end{enumerate}
+	It is instructive to think through why $\overline{X} $ is diffeomorphic to a compact surface of genus $g$. When $g\geq 2$, such a curve or Riemannian surface is called hyperelliptic.
+\end{problem}
+\begin{proof}
+	(1) Example 2.6 says that given $U\subseteq \mathbb{C} ^{n+1} $ and a holomorphic map $f : U \to \mathbb{C} $, if for all points $a\in Z(f)$ there is an index $i$ such that $\frac{\partial f}{\partial z_i}(a) \neq 0$, then the zero locus $Z(f)$ is a complex manifold of dimension $n$. Since $p : \mathbb{C} ^2 \to \mathbb{C} $ has the derivative $\frac{\partial p}{\partial w} =2w$ which is only zero at $w=0$, we need only check points $(w,z)=(0,z)$.
+
+	We show that if $p_{2g+2} (z_0)=0$, then $p'_{2g+2} (z_0)\neq 0$. Suppose that $z_0$ is a root for $p_{2g+2} $. Then since $p_{2g+2}$ splits over $\mathbb{C} $, it can be written
+	\[
+		p_{2g+2} (z)=a(z - c_1)\cdots (z-c_{2g+2} ) = a \prod_{i=1}^{2g+2} (z-c_i).
+\]
+	Since $z_0$ is a root, there exists $k$ such that $c_k=z_0$. the product rule yields
+	\[
+		\frac{\partial p_{2g+2} }{\partial z} =a\sum_{i=1}^{2g+2} \prod_{j\neq i} (z-c_j)
+	.\]
+	Evaluating at $z_0=c_k$ yields
+	\[
+		\frac{\partial p_{2g+2} }{\partial z} (c_k) = a \prod_{j\neq k} (c_k-c_j)
+	.\]
+	Here we note that every term other than the $k$th term of the sum is annihilated by the factor $(z-c_k)$. Since all roots are distinct, $c_k-c_j\neq 0$ for all $j\neq k$. Thus the product of these terms is nonsero, and thus $p'_{2g+2} (c_k)\neq 0$. Therefore we have that if $(0,z)\in X$, since this implies that $p_{2g+2} (z)=0$, the partial with respect to $z$ (which is $-p'_{2g+2} $) is therefore nonvanishing at $(0,z)$, and $X$ is therefore a complex manifold of dimension 1.
+
+	(2) Recall (Lazardsfeld example 2.5) that the coordinate charts on the Riemann sphere $\mathbb{C} \cup \left\{ \infty  \right\} $ are given by $(\mathbb{C} ,z)$ and $(\mathbb{C}\cup \left\{ \infty  \right\} \setminus \left\{ 0 \right\} ,u=1/z)$ with $u(\infty )=0$.
+
+	Let $D$ be an \emph{open} disk in $\mathbb{C} $ of radius $R$ sufficiently large such that all roots of $p_{2g+2} $ fall inside $D$. On the compliment $D^* \coloneqq \mathbb{C} \setminus D$, we can write
+	\[
+		p_{2g+2} (z) = a_{2g+2} z^{2g+2} +\cdots +a_0 = a_{2g+2} z^{2g+2} \left( 1+ \frac{a_{2g+1} }{a_{2g+2} z^{2g+2} } +\cdots +\frac{a_0}{a_{2g+2} z^{2g+2} }  \right) 
+	.\]
+	Write $H(z) = 1 + \cdots + \frac{a_0}{a_{2g+2} z^{2g+2} } $ such that $p_{2g+2} (z) = a_{2g+2} z^{2g+2} H(z)$ on $D^*$. We claim that we may choose $R$ sufficiently large such that for some $0<\varepsilon <1$, the image of $H$ falls within the ball $B_\varepsilon (1)\subseteq \mathbb{C} $. Importantly, the image of $H$ does not contain 0 or complex numbers with negative real component. To show this, let
+	\[
+		C\coloneqq \max_{1\leq i < 2g+2} \frac{a_i}{a_{2g+2} } ,
+	\]
+	and thus for any $z\in D^*$,
+	\begin{align*}
+		\left| H(z) - 1 \right| &= \left| \frac{a_{2g+1} }{a_{2g+2} z}+\cdots +\frac{a_0}{a_{2g+2} z^{2g+2} }   \right| \\
+					&\leq \left| \frac{a_{2g+1} }{a_{2g+2} }  \right| \frac{1}{\left| z \right| } +\cdots +\left| \frac{a_0}{a_{2g+2} }  \right| \frac{1}{\left| z^{2g+2}  \right| } \\
+					&\leq C\frac{1}{\left| z \right| } +\cdots +C\frac{1}{\left| z^{2g+2}  \right| } \\
+					&\overset{!}{\leq }C\left( \frac{1}{\left| z \right|} +\cdots +\frac{1}{\left| z \right| }  \right) \\
+					&=\frac{C(2g+2)}{\left| z \right| } ,
+	\end{align*}
+	where the inequality marked by $!$ follows by taking $R>1$. To take $H(z)\in B_\varepsilon (1)$, we must have $\left| H(z)-1 \right|<\varepsilon $, so we want to take $\frac{C(2g+2)}{\left| z \right| } <\varepsilon $. It follows that we must take $\left| z \right| > \frac{C(2g+2)}{\varepsilon } $, so simply take $R > \max \left\{ 1,\frac{C(2g+2)}{\varepsilon } ,\text{magnitudes of zeroes of } p_{2g+2}  \right\} $. This implies such an $R$ exists for which the image of $H$ falls in $B_\varepsilon (1)$ for any $0 < \varepsilon $; in particular for $\varepsilon <1$.
+
+	For any $z\in D^*$, we can thus write $H(z) = \left| H(z) \right| e^{i\theta } $ for some $\theta \in (-\pi/2,\pi/2)$. Since $\left| H(z) \right| >0$, we can then define a single-valued holomorphic prinicpal square root function on its image:
+	\[
+		\sqrt{H(z)} =\sqrt{\left| H(z) \right| } e^{i\theta /2} 
+	.\]
+	by taking a single branch of the real square root function $\sqrt{\left| H(z) \right| } $. Since the degree of $p_{2g+2} $ is even, we can extend this to define
+	\[
+		f_+(z) = z^{g+1} \sqrt{a_{2g+2} } \sqrt{H(z)} ,
+	\]
+	\[
+		f_-(z) = -z^{g+1} \sqrt{a_{2g+2} } \sqrt{H(z)} 
+	,\]
+	where we choose some value of $\sqrt{a_{2g+2} } $.
+
+	Now note that any fiber of $z\in D^*$ under the projection can be described as
+	\[
+		\pi ^{-1} (z) = \left\{ (z,w)\in\mathbb{C} ^2\mid w^2 = p_{2g+2} (z) \right\} =\left\{ \left( z,\sqrt{p_{2g+2} (z)}  \right) ,\left( z,-\sqrt{p_{2g+2} (z)}  \right)  \right\} 
+	\]
+	\[
+		=\left\{ \left( z,f_+(z) \right) ,\left( z,f_-(z) \right)  \right\} 
+	.\]
+	Since these are distinct when $z\in D^*$, we obtain that the preimage $\pi ^{-1} (D^*)$ can be described as the disjoint union of the two components
+	\[
+		U_+ \coloneqq \left\{ (z,f_+(z))\mid z\in D^* \right\} ,
+	\]
+	\[
+		U_-\coloneqq \left\{ (z,f_-(z)\mid z\in D^* \right\} 
+	.\]
+	Note also that since $f_\pm$ are holomorphic, and the map $z\mapsto (z,f_\pm(z))$ admits a holomorphic inverse by restricting the projection $\pi|U_\pm$, we have isomorphisms $U_+ \cong D^* \cong U_-$. To compactify $D^*$, we add a point at $\infty $, and coordinates near $\infty $ are defined as $u=1/z$ by taking $D^* \cup \left\{ \infty  \right\} $ to be a submanifold of $\mathbb{C} \cup \left\{ \infty  \right\} $. Hence to compactify $U_\pm$, we must add two points $U_+^\infty \coloneqq U_+ \cup \left\{ \infty _+ \right\} $ and $U_-^\infty \coloneqq U_- \cup \left\{ \infty _- \right\} $. We define $\overline{X} \coloneqq X \cup \left\{ \infty _+,\infty _- \right\} $, and define charts at these points by defining charts on some open neighborhood\footnote{Each $U_\pm^\infty$ is closed, so this is necessary. This is an artifact of choosing $D$ to be open, which simplifies the compactness proof.} $V_\pm \subseteq U_\pm^\infty $ of the points $\infty_\pm$ by mapping $U_\pm$ along the isomorphism to $D^*$, mapping $\infty _\pm \mapsto \infty $, and then taking the chart there. Since these maps are isomorpisms, they are automatically compatible with the chart on $X$, hence we have a holomorphic atlas\footnote{I was concerned that assuming this atlas was holomorphically compatible at the points at $\infty $ was assuming that $\overline{\pi } $ was holomorphic there, but the holomorphic atlas only needs to be compatible on the intersections of charts, which do not include the points at $\infty $. Thus one only needs $\overline{\pi } $ to be continuous at $\infty _\pm$ for this step, which is immediate.} on $\overline{X} $.
+
+Define $\overline{\pi } : \overline{X}  \to \mathbb{C} \cup \left\{ \infty  \right\} $ by $\infty _\pm \mapsto \infty $ and $\overline{\pi } |X = \pi $. We only need to show $\overline{\pi } $ is holomorphic near $\infty _\pm$, so without loss of generality let $p\in V_+$. Write $\varphi _+$ for the coordinate chart on $V_+$, which we have defined to be equal to $p\mapsto 1/ \overline{\pi } (p)$, where we note once again that $1/\infty$ is defined to be $0$. Write $\psi(z) = 1/z$ for the coordinates on $\mathbb{C} \cup \left\{ \infty  \right\} $ near $\infty $, such that the coordinate representation $\psi \circ \overline{\pi } \circ \varphi _+^{-1} $ is given by
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\frac{1}{\overline{\pi } (p)} \ar[" \varphi _+^{-1}  ", mapsto, r]  & p \ar[" \overline{\pi }  ", mapsto, r]  & \overline{\pi } (p) \ar[" \psi  ", mapsto, r] &  \frac{1}{\overline{\pi }(p) } .
+\end{tikzcd}\]
+This is the identity map, which is holomorphic.
+
+Finally, although each $U_\pm^\infty  \subseteq \overline{X} $ is compact, we have not yet shown that $\overline{X} $ is compact. This is fairly simple to do: since a finite union of compact sets is compact, we simply need to find a compact subset $Y$ of $X$ such that $U_+^\infty \cup U_-^\infty  \cup Y = \overline{X} $. Fix some finite real number $R_0 > R$, and define $Y\coloneqq \pi ^{-1} (\overline{B_{R_0} (0)} )$. Polynomials are continuous and bounded on compact sets, and thus so is their square root. Therefore $Y$ is bounded, and since it is a continuous preimage of a closed set, it is closed. By Heine-Borel, $Y$ is compact. To show $\overline{X} =U_+^\infty  \cup U_-^\infty  \cup Y$, suppose that there exists a point $p$ not in $Y$. We can take $p\neq \infty _\pm$ since those fall in $U_\pm^\infty $. Since $p\notin Y = \pi ^{-1} (\overline{B_{R_0} (0)})$, we note that $\left|\pi (p)\right| \geq  R_0 > R$. But then $\pi (p)\in D^*$, and the preimage of this is $U_+ \cup U_-$, which is a subset of $U_+^\infty \cup U_-^\infty $. Therefore $p$ is in the union, so $\overline{X} $ is the finite union of compact spaces, and thus compact.
+\end{proof}
+
+\begin{problem}[2.8]
+	Let
+	\[
+		\Lambda _0 = \mathbb{Z} ^n + i\mathbb{Z} ^n \subseteq \mathbb{C} ^n
+	\]
+	and let $\Lambda \subseteq \mathbb{C} ^n$ be a lattice spanned by $2n$ vectors $\left\{ \lambda _j \right\} _{1\leq j\leq 2n} \subseteq \mathbb{C} ^n$. Assume that the $2n^2$ complex numbers appearing as coordinates of the $\lambda _j$'s are algebraically independent over $\mathbb{Q} $. Then $\Lambda _0$ and $\Lambda $ determine non-isomorphic complex tori.
+\end{problem}
+\begin{proof}
+	A morphism $f : X_{\Lambda _0}  \to X_\Lambda $ is fully and uniquely determined by a $\mathbb{C} $-linear map $A : \mathbb{C} ^n \to \mathbb{C} ^n$ mapping $A(\Lambda _0)\subseteq \Lambda $. It's fairly immediate that if $f$ is an isomorphism, then $A$ must be an isomorphism, and thus $A(\Lambda _0)=\Lambda $. Thus it suffices to show there is no $\mathbb{C} $-linear isomorphism $A : \mathbb{C} ^n \to \mathbb{C} ^n$ mapping $A(\Lambda_0)=\Lambda$.
+
+	By hypothesis, the $2n^2$ components of the $\lambda _j$'s are not the roots of a single nontrivial polynomial with coefficients in $\mathbb{Q} $. Suppose for contradiction that such an $A$ exists; we will show that the existence of $A$ determines a polynomial $p$ in $2n^2$ variables with coefficients in $\mathbb{Q} $ for which the set $S$ of components of the $\lambda _j$'s is a root.
+	
+	Write $e_i$ for the $i$th basis vector of $\mathbb{R} ^n$ (equivalently $\mathbb{C}^n$), and note that $\Lambda _0$ is a free $\mathbb{Z} $-module generated by $\left\{ e_j,ie_j \right\}_{1\leq j\leq n} $. Since $A(\Lambda _0)=\Lambda $ and $A$ is $\mathbb{C} $-linear, it follows that $\Lambda $ is also spanned by $\left\{ A(e_j) ,iA(e_j) \right\}_{1\leq j\leq n} $ as a $\mathbb{Z} $-module. It follows by injectivity of $A$ that this set is a $\mathbb{Z} $-basis, hence $A$ determines an isomorphism $\Lambda _0 \cong \Lambda $ as $\mathbb{Z} $-modules with $\left\{ A(e_j),iA(e_j) \right\} _{1\leq j\leq n} $ a basis for $\Lambda $. Thus for each $0\leq j\leq 2n$, there exist integers $c_j^k$, $0\leq k\leq 2n$ such that
+	\[
+		\lambda_j = c_j^1 A(e_1) + \cdots + c_j^n A(e_n) + c_j^{n+1} iA(e_1) + \cdots + c_j^{2n} iA(e_n)
+	\]
+	\[
+		=\sum_{1\leq k\leq n} \left( c_j^k + ic_j^{n+k}  \right) A(e_k)
+	.\]
+	For simplicity of notation, write $Z_{jk} =c_j^k+ic_j^{n+k} \in\mathbb{Z} [i]$, such that
+	\[
+		\lambda _j = \sum_{1\leq k\leq n} Z_{jk} A(e_k)
+	.\]
+	We can write $A$ as a matrix in $\operatorname{GL} _n(\mathbb{C} )$ with respect to the $\left\{ e_j \right\}_{1\leq j\leq n} $ basis for $\mathbb{C} $. Write $A_{jk}$ for the $jk$th entry of $A$. Let $V$ be the $\mathbb{Q} (i)$-vector space spanned by the matrix entries $\left\{ A_{jk}  \right\} _{1\leq j,k\leq n} $ of $A$. Since there are $n^2$ such entries, note that $\dim _{\mathbb{Q} (i)} V \leq n^2$. Write $\lambda_j^m$ for the $m$th entry of $\lambda _j$. Then since
+	\[
+		\lambda _j = \sum_{1\leq k\leq n} Z_{jk} A(e_k) = \sum_{1\leq k\leq n} \sum_{1\leq m\leq n} Z_{jk} A_{mk}e_k ,
+	\]
+	we must have that
+	\[
+		\lambda_j^m = \sum_{1\leq k\leq n} Z_{jk} A_{mk} 
+	.\]
+	Since each $Z_{jk}$ is an element of $\mathbb{Z} [i]$, it is in particular an element of $\mathbb{Q} (i)$. Thus all $2n^2$ elements of $S\coloneqq \left\{ \lambda _j^m \right\}_{j,m} $ belong to the $\mathbb{Q} (i)$-vector space $V$. Since $S$ has $2n^2$ elements, which is more than the dimension of the space, $S$ must be linearly dependent in $V$. Thus there are coefficients $a_{jm} \in\mathbb{Q} (i)$ for all $1\leq m\leq n$ and $1\leq j\leq 2n$ which are \emph{not all zero}, such that
+	\[
+		\sum_{j=1}^{2n} \sum_{m=1}^{n} a_{jm} \lambda _{j}^m =0
+	.\]
+	Write $a_{jm} = u_{jm} +iv_{jm} $ with $u_{jm} ,v_{jm} \in\mathbb{Q} $ not all zero, such that
+	\[
+		\sum_{j,m} \left( u_{jm} +iv_{jm}  \right) \lambda_j^m=0
+	.\]
+	To turn this into a polynomial in $\mathbb{Q} $, we multiply by the complex conjugate
+	\[
+		\left( \sum_{j,m} \left( u_{jm} +iv_{jm}  \right) \lambda _j^m \right) \left( \sum_{j,m} \left( u_{jm} -iv_{jm}  \right) \lambda_j^m \right) =0
+	.\]
+	By linearity of the complex conjugate, and by $z \overline{z} =\left| z \right| ^2$, we obtain that this equation is
+	\[
+		\left( \sum_{j,m} u_{jm} \lambda _j^m \right) ^2 + \left( \sum_{j,m} v_{jm} \lambda _j^m \right) ^2=0
+	.\]
+	Define the polynomial $p\in\mathbb{Q} [\left\{ x_{jm}  \right\}_{j,m} ]$ in $2n^2$ variables over $\mathbb{Q} $ as
+	\[
+		p(\left\{ x_{jm}  \right\}_{j,m} ) = \left( \sum_{j,m} u_{jm} x_{jm} \right) ^2 + \left( \sum_{j,m} v_{jm} x_{jm}  \right)^2=0
+	.\]
+	Since $\left\{ \lambda _j^m \right\} _{j,m} $ is a solution to this polynomial, and since not all coefficients of the polynomial are zero, there exists a nontrivial polynomial $p$ in $\mathbb{Q} $ for which the entries of the $\lambda _j$'s are a root, contradicting their algebraic independence over $\mathbb{Q} $. Therefore no isomorphism of complex tori exists.
+\end{proof}
+
+\end{document}
