@@ -1,0 +1,28 @@
+\section{$H^1$ and $H_1$}
+
+Since $\mathfrak{J} $ is the kernel of $U\mathfrak{g} \to R$, there is a short exact sequence of $\mathfrak{g} $-modules
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathfrak{J} \ar[r]  & U\mathfrak{g} \ar[r]  & R\ar[r]  & 0.
+\end{tikzcd}\]
+
+Since $H_{\bullet} (\mathfrak{g} ,-)\cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,-)$, we apply the \emph{dimension shifting technique} to take $H_{n} (\mathfrak{g} ,-) = H_{n-1} (\mathfrak{g},-)$: consider the long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+\cdots \ar[r]  & \operatorname{Tor} _n^{U\mathfrak{g} } (U\mathfrak{g} ,M)\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (U\mathfrak{g} ,M) \ar[r] & \cdots .
+\end{tikzcd}\]
+Since $U\mathfrak{g} $ is free as a $U\mathfrak{g} $-module, it is flat, and hence its Tor modules vanish. Thus the short exact sequence simply reads
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
+\cdots \ar[r]  & 0\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & 0 \ar[r] & \cdots .
+\end{tikzcd}\]
+The only way for this to be exact is if the map $\operatorname{Tor} _n^{U\mathfrak{g} } (R,M)\to \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (\mathfrak{J} ,M)$ is an isomorphism for $n\geq 2$. Additionally, reading this in degree $n=1,0$, we obtain the exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & H_1(\mathfrak{g} ,M)\ar[r]  & \mathfrak{J} \otimes _{U\mathfrak{g} } M\ar[r]  & M\ar[r]  & M_{\mathfrak{g} } \ar[r]  & 0.
+\end{tikzcd}\]
+Here we have noted that $R\otimes _{U\mathfrak{g} } M \cong M_\mathfrak{g} $.
+
+\begin{exercise}
+	Show that the inclusion $i : \mathfrak{g}  \to U\mathfrak{g} $ maps $[\mathfrak{g} ,\mathfrak{g} ]$ to $\mathfrak{J}^2$. Conclude that it induces a map $i : \mathfrak{g} ^{ab}  \to \mathfrak{J} /\mathfrak{J} ^2$, where $\mathfrak{g} ^{ab} =\mathfrak{g} /[\mathfrak{g} ,\mathfrak{g} ]$.
+\end{exercise}
+\begin{proof}
+	We consider the map $0 : \mathfrak{g}  \to R$. 
+\end{proof}
+

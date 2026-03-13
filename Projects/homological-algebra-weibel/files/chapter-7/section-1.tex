@@ -1,0 +1,70 @@
+\section{Lie algebras}
+
+Let $R$ be a commutative ring.
+
+\begin{definition}\label{7.1.1}
+	A \emph{Lie $R$-algebra}, usually called a \emph{Lie algebra}, is an $R$-module $\mathfrak{g} $ together with a \emph{Lie bracket} $[-,-]: \mathfrak{g} \otimes_R\mathfrak{g}  \to \mathfrak{g} $ often referred to as a multiplication operation, which is not necessarily associative, but instead satisfies the following:
+	\begin{itemize}
+		\item \textbf{(Antisymmetry)} $[x,x]=0$;
+		\item \textbf{(Jacobi identity)} $[x,[y,z]+[y,[z,x]+[z,[x,y]]=0$. 
+	\end{itemize}
+	A morphism $\varphi : \mathfrak{g}  \to \mathfrak{h} $ of Lie $R$-algebras is an $R$-linear map which preserves the bracket in the sense that the diagram
+\[\begin{tikzcd}
+	{\mathfrak{g}\times \mathfrak{g}} && {\mathfrak{g}} \\
+	{\mathfrak{h}\times \mathfrak{h}} && {\mathfrak{h}}
+	\arrow["{[-,-]_\mathfrak{g}}", from=1-1, to=1-3]
+	\arrow["{\varphi\times \varphi}"', from=1-1, to=2-1]
+	\arrow["\varphi", from=1-3, to=2-3]
+	\arrow["{[-,-]_\mathfrak{h}}"', from=2-1, to=2-3]
+\end{tikzcd}\]
+	commutes. One can equivalently work with maps from the tensor products, of course.
+\end{definition}
+
+Intuitively, the bracket is a commutator, and indeed every associative $R$-algebra $A$ can be viewed as a Lie $R$-algebra by defining $[x,y]=xy-yx$. We write $\Lie(A)$ for this Lie algebra, and thus we obtain a functor $\mathrm{Lie} : \Alg_R \to \Lie_R $. This functor has a left adjoint given by the universal enveloping algebra $U : \Lie_R \to \Alg_R$, which we will explore indepth later.
+
+An \emph{ideal} is a $R$-submodule $\mathfrak{h} \subseteq \mathfrak{g} $ such that $[\mathfrak{g} ,\mathfrak{h} ]\subseteq \mathfrak{h} $. An ideal is immediately a Lie subalgebra, and one can quotient by an ideal to obtain a Lie algebra. Every ideal can thus be written as a short exact sequence of Lie algebras
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathfrak{h} \ar[r]  & \mathfrak{g} \ar[r]  & \mathfrak{g} /\mathfrak{h} \ar[r]  & 0.
+\end{tikzcd}\]
+An \emph{abelian} Lie algebra is a Lie algebra where $[-,-]=0$.
+
+\begin{example}\label{7.1.2}
+Given an associative $R$-algebra $A$, we obtain the Lie algebra $\mathfrak{gl} _n(A)$ of matrices with values in $A$, together with important Lie subalgebras
+\begin{itemize}
+	\item $\mathfrak{sl} _n(A)$: the set of traceless matrices. This becomes difficult to define when $A$ is noncommutative.
+	\item $\mathfrak{o}_n(A)$: the set of skew-symmetric matrices $A_{ij} =-A_{ji} $.
+	\item $\mathfrak{t} _n(A)$: the set of upper triangular matrices.
+	\item $\mathfrak{n} _n(A)$: the set of strictly upper triangular matrices.
+\end{itemize}
+\end{example}
+
+\begin{example}\label{7.1.3}
+Let $A$ a not necessarily associative $R$-algebra. A derivation of $A$ into itself is a $R$-linear map $D : A \to A$ satisfying a Leibnitz rule
+\[
+	D(ab)=(D(a))b + a(D(b))
+.\]
+The set $\operatorname{Der} (A)$ of derivations on $A$ has a commutator $[D_1,D_2]=D_1\circ D_2 - D_2\circ D_1$, which makes $\operatorname{Der} (A)$ into a Lie algebra.
+\end{example}
+
+\begin{construction}\label{7.1.4}
+Given an $R$-module $M$, the \emph{free Lie algebra} $\mathfrak{f} (M)$ is a Lie algebra containing $M$ as a submodule which is universal with respect to turning $R$-linear maps into Lie algebra maps. The free Lie algebra assembles into a functor $\mathfrak{f} : \Mod_R\to\Lie$ with $\mathfrak{f} \dashv U$ for $U$ the forgetful functor. The existence of such a Lie algebra follows by the adjoint functor theorem.
+\end{construction}
+
+\begin{construction}\label{7.1.5}	
+Given Lie algberas $\mathfrak{g} ,\mathfrak{h} $, the product Lie algebra $\mathfrak{g} \times \mathfrak{h} $ is defined by
+\[
+	[(g,h),(g',h')]=([g,g'],[h,h'])
+.\]
+\end{construction}
+
+The \emph{lower central sequence} of a Lie algebra is the descending sequence of ideals
+\[
+	\mathfrak{g} \supseteq \mathfrak{g} ^2=[\mathfrak{g} ,\mathfrak{g} ]\supseteq \mathfrak{g} ^3=[\mathfrak{g} ^2,\mathfrak{g} ]\supseteq \cdots \supseteq \mathfrak{g} ^n=[\mathfrak{g} ^{n-1} ,\mathfrak{g} ]\supseteq\cdots 
+.\]
+A Lie algebra is \emph{nilpotent} if $\mathfrak{g} ^n=0$ for some $n$. For example, $\mathfrak{n} _n(A)$ is nilpotent, and so are abelian Lie algebras.
+
+The \emph{derived series} of a Lie algebra $\mathfrak{g} $ is the following descending sequence of ideals
+\[
+	\mathfrak{g} \supseteq \mathfrak{g}^{(1)}  =[\mathfrak{g} ,\mathfrak{g} ]\supseteq \mathfrak{g} ^{(2)} =[\mathfrak{g} ^{(1)} ,\mathfrak{g} ^{(1)} ] \supseteq \cdots \supseteq \mathfrak{g} ^{(n)} =[\mathfrak{g} ^{(n-1)} ,\mathfrak{g} ^{(n-1)} ]\supseteq\cdots 
+.\]
+We say that $\mathfrak{g} $ is \emph{solvable} if $\mathfrak{g} ^{(n)} =0$ for some $n$. For example, every nilpotent Lie algebra is solvable: simply show $[\mathfrak{g} ^i,\mathfrak{g} ^j]\subseteq \mathfrak{g} ^{i+j} $ and the statement follows inductively. The converse is not true -- for example, $\mathfrak{t} _n(A)$ is solvable but not nilpotent.

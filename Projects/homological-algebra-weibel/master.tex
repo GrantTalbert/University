@@ -1,0 +1,33 @@
+\documentclass[A4, 11pt]{report}
+\input{./preamble.tex}
+\usepackage{titlepageBU}
+
+\title{Homological Algebra - Self Study}
+\date{Spring-Summer 2026}
+
+
+% for some reason no worky in preamble when i tried, fix later
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries\centering}{Chapter \thechapter}{10pt}{\Large}
+\titleformat{\section}{\normalfont\large\bfseries\centering}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+	I am currently reading Weibel's \emph{Introduction to Homological Algebra} to better understand homological algebra. Since I already have an understanding of some of the fundamental concepts of homological algebra, I started with chapter 7 during spring 2026 due to two of my classes working through Lie algebra cohomology. I intend to read through the book starting in chapter 1 this summer, since homology is becoming increasingly relevant in my coursework and it would be beneficial to improve my understanding of the subject. \cite{weibel}
+\end{abstract}
+
+% FILES START
+
+\input{./files/chapter-7.tex}
+
+% FILES END
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}
+

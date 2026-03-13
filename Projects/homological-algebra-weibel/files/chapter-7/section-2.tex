@@ -1,0 +1,38 @@
+\section{$\mathfrak{g}$-Modules}
+
+\begin{definition}\label{7.2.1}
+	A (left) $\mathfrak{g} $-module $M$ is an $R$-module together with an $R$-bilinear multiplication map $\mathfrak{g} \otimes _RM \to M$ (written $x\otimes m\mapsto xm$) such that
+	\[
+		[x,y]m=x(ym)-y(xm)
+	.\]
+	A $\mathfrak{g} $-module homomorphism is an $R$-linear map $\varphi : M \to N$ such that $\varphi (xm)=x\varphi (m)$. We write $\Hom_\mathfrak{g} (M,N)$ or $\Mod _\mathfrak{g} (M,N)$ for the set of $\mathfrak{g} $-module homomorphisms, yielding an abelian category $\Mod _\mathfrak{g} $.
+\end{definition}
+
+\begin{remark}\label{7.2.2}
+Note that $\Hom_\mathfrak{g} (M,N)\subseteq \Hom_R(M,N)$ is an $R$-submodule.
+\end{remark}
+
+\begin{example}\label{7.2.3}
+	Let $A$ be an associative $R$-algebra. Then any $A$-module $M$ is also a $\Lie(A)$-module by taking the action $\Lie(A)\otimes_RM \to M$ to be the same as the action $A\otimes _AM \to M$.
+\end{example}
+
+
+\begin{example}\label{7.2.4}
+There is a trivial $\mathfrak{g} $-module functor from $\Mod _R\to \Mod _\mathfrak{g} $ given by taking an $R$-module $M$, and defining the action by $\mathfrak{g} $ to be the trivial action $0: \mathfrak{g} \otimes _RM \to M$. It is an exact functor, and elements of its image are called \emph{trivial $\mathfrak{g} $-modules}. Write this functor as $\mathbf{0} $. It has left and right adjoints.
+\end{example}
+
+The \emph{invariant submodule} $M^\mathfrak{g} $ of a $\mathfrak{g} $-module $M$ is the submodule
+\[
+	M^\mathfrak{g} =\left\{ m\in M\mid xm=0\forall x\in \mathfrak{g}  \right\} 
+.\]
+We note that $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (R,M)$, when viewing $R$ as a trivial $R$-module. This follows since $R$-linear maps $\varphi :R\to M$ are determined by $\varphi (1)$ since $\varphi (r)=r\varphi (1)$. To make it $\mathfrak{g} $-linear, we need $x\varphi (1)=\varphi (x1)=\varphi (0)=0$ since $R$ is a trivial module, hence we may only map $1$ to an element of $M^\mathfrak{g} $. Moreover such a choice uniquely determines $\varphi $. Since it is the maximal trivial submodule of $M^\mathfrak{g} $, we obtain $\mathbf{0} \dashv -^{\mathfrak{g} } $. This is immediate to see: a $\mathfrak{g} $-module homomorphism $\mathbf{0} (N)\to M$ must identify $x\varphi (n)=0$, so its image must fall into a trivial submodule, hence it factors through $M^\mathfrak{g} $. Moreover, any $R$-linear map $N\to M^\mathfrak{g}$ induces a map $\mathbf{0} (N)\to M$ in this way. Hence we have $\mathbf{0} \dashv -^\mathfrak{g} $. Additionally, since $M^\mathfrak{g} \cong \Hom_\mathfrak{g} (\mathbf{0} (R),M)$, we have a representation $-^\mathfrak{g} \cong \Hom_\mathfrak{g} (\mathbf{0} (R),-)$.
+
+
+The \emph{coinvariants} of $M$ are the quotient $M/\mathfrak{g} M$. Note that this is also a trivial module since for any $x\in \mathfrak{g} $ and $m\in M$, we have $xm\in \mathfrak{g} M$ which is identified to 0 in the quotient. Since this is the largest quotient which is a trivial module, we can show that $-_\mathfrak{g} \dashv \mathbf{0} $. We will see later that $\Mod _\mathfrak{g} $ has enough projectives and injectives, hence we can compute the derived functors of (co)invariants.
+
+\begin{definition}\label{lasdsajk}
+	Let $M$ be a $\mathfrak{g} $-module. We write $H_{\bullet} (\mathfrak{g},M)$ or $H_{\bullet} ^{\mathrm{Lie} } (\mathfrak{g} ,M)$ for the derived functors $L_{\bullet} (-_\mathfrak{g} )(M)$ of $-_\mathfrak{g} $, and call them the \emph{homology groups of $\mathfrak{g} $ with coefficients in $M$}. By definition, $H_0(\mathfrak{g} ,M)=M_\mathfrak{g} $.
+
+	Similarly, write $H^{\bullet} (\mathfrak{g},M)$ or $H^{\bullet} _{\mathrm{Lie} } (\mathfrak{g} ,M)$ for the right derived functors $R^{\bullet} (-^{\mathfrak{g} } )(M)$ of $-^{\mathfrak{g} } $, and call them the \emph{cohomology groups of $\mathfrak{g} $ with coefficients in $M$}. By definition, $H^0(\mathfrak{g} ,M)=M^\mathfrak{g} $.
+\end{definition}
+
