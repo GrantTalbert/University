@@ -1,0 +1,31 @@
+\lecture{11}{Tue 07 Apr 2026 11:04}{hai}
+
+Note that $\mathrm{ad} $ preserves the Killing form: $K(\mathrm{ad} _XY,Z)=K(Y,\mathrm{ad} _XZ)$. Cartan subalgebras $\mathfrak{h} \subseteq \mathfrak{g} $. If $\mathfrak{g} $ is semisimple, then the Killing form $K$ is nondegenerate. Thus diagonalization exists, so we get a weight space decomposition:
+\[
+	\mathfrak{g} = \mathfrak{h} \oplus \bigoplus_{\alpha \in R} \mathfrak{g} _\alpha 
+.\]
+Here $\mathfrak{h} $ has weight 0 ($\mathrm{ad} _{\mathfrak{h} } \mathfrak{h} =0$), and
+\[
+	\mathfrak{g} _\alpha \coloneqq \left\{ Y\in \mathfrak{g} \mid \mathrm{ad}_HY=\alpha (H)Y\;\;\forall H\in \mathfrak{h}  \right\} 
+.\]
+Here $R\subseteq \mathfrak{h} ^*$. We call $R$ the \emph{root system}, and
+\[
+	R=\left\{ \alpha \in \mathfrak{h} ^* \mid \mathfrak{g} _\alpha \neq 0 \right\} 
+.\]
+The space $\mathfrak{g} _\alpha $ is the eigenspace of $\alpha $, and $R$ is finite.
+
+The most important thing to consider is $\mathfrak{sl} _2(\mathbb{C} )$. Write $H\coloneqq \sigma _z$,
+\[
+	X = \begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix},\qquad Y \coloneqq \begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}
+.\]
+This yields the relations
+\[
+	[X,Y]=H,\qquad  [X,H]=-2Y,\qquad [Y,H] = 2X
+.\]
+We claim $\mathfrak{h} =\left\langle H \right\rangle $, $\mathfrak{g} _\alpha =\left\langle X \right\rangle $, and $\mathfrak{g} _{-\alpha } =\left\langle Y \right\rangle $ is the root decomposition. To see this, we must have $\alpha (H)Y=\mathrm{ad}_HY=-2X$.

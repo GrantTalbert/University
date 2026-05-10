@@ -1,0 +1,76 @@
+\lecture{17}{Fri 17 Apr 2026 13:57}{Continuing abelian Chern-Simons?}
+
+Now we look at what happens on the level of quantum observables
+\[
+	\Obs^q \coloneqq C_{\bullet} (\mathcal{H}_{\mathcal{E}} )
+.\]
+To construct the Heisenberg extension, we can use the skew pairing $\left\langle -,- \right\rangle : \mathcal{E} _c\otimes_{\mathbb{R} } \mathcal{E} _c \to \mathbb{R} $ is
+\[
+	\left\langle \alpha ,\beta  \right\rangle_U=\int_{U} \alpha \wedge \beta 
+.\]
+Of course, this vanishes if $\alpha \wedge \beta \notin \Omega ^3_M(U)$. Due to our degree shifting, this has cohomological degree $-1$. This also agrees with the canonical skew pairing.
+
+We use this to construct the Heisenberg extension $\mathcal{H} _{\mathcal{E} } \coloneqq \mathcal{E} _c\oplus \mathbb{C} \hbar [-1]$. We can filter $C_{\bullet} (\mathcal{E} \oplus \mathbb{C} \hbar [-1])$ by symmetric degree to obtain a filtration. The cohomology of a filtered complex can be computed by a spectral sequence, which proceeds via a series of approximations (called \emph{pages}). In good situations, this gives the associated graded of the cohomology of the complex.
+
+To see how this arises, let $(C^{\bullet},d)$ be a cochain complex of tensors of a Lie algebra $\mathfrak{g} $, like with our situation. with ascending filtration $F^{\bullet} C$. We will take the filtration to start at $F^{-1} C\cong 0$. We define $F^0C \cong \mathbb{C} $ (the tensors spanned by 0 or fewer terms in a Lie algebra are constants). Then $F^1C \cong \mathbb{C} +\mathfrak{g} $, and so on. This induces a filtration $F^{\bullet} H^{\bullet} (C^{\bullet} )$ on the cohomology. The spectral sequence provides a sequence of complexes $E^{n\geq 0} C^{\bullet} $, where $E^iC^{\bullet} $ is the cohomology $H^{\bullet} (E^{i-1} C^{\bullet} )$. Assuming $C^{\bullet} $ is sufficiently bounded, we find that $E^\infty \cong \mathrm{gr} (H^{\bullet} (C^{\bullet} ))$. This final object is not canonically $H^{\bullet} (C^{\bullet} )$, but if we are working with vector spaces over a field, then they are non-canonically isomorphic. This at least allows us to extract dimension as an integer invariant. If we work with coefficients in something other than a field, it can be difficult to lift information from the associated graded to the original cohomology. This arises often in algebraic topology.
+
+We will apply this here to compute $H^{\bullet} (C_{\bullet} (\mathcal{E} _c\oplus \mathbb{C} \hbar [-1]))$. Define a filtration $E_0=C_{\bullet} (\mathcal{H} _\mathcal{E} )$ with differential $\dd _{\mathrm{CE} } +\dd _{\mathrm{dR} } $. The first pageis $E_1=H^{\bullet} (\mathrm{gr} (E_0))$ with whatever survives the differential. Since the Chevalley-Eilenberg differential always lowers symmetric degree, it vanishes at the level of the associated graded, so we recover $H^{\bullet} (\Sym (\mathcal{E} _c)[\hbar ])\cong H^{\bullet} (\Obs^{cl} [\hbar ])$ with the de Rham differential. Then $E_2$ is $H^{\bullet} (\Obs^{cl} [\hbar ])$, with differential induced by the Chevalley-Eilenberg differential via the cup product. We find that the induced differential is
+\[
+	\dd ([\alpha ],[\beta ])=\hbar \left\langle [\alpha ],[\beta ] \right\rangle_{H^{\bullet} } 
+.\]
+In this good case, since the filtration has very trivial cohomology, $H^{\bullet} (\Obs^q(M)) \cong \mathbb{R} [\hbar ][1-\dim H^2(M)]$ is canonical. The first bracket is polynomials and the second is a shift. For more details, see the book.
+
+
+\section{Compactifying along a closed surface}
+
+Consider abelian Chern-Simons on a 3-manifold $\Sigma \times \mathbb{R} $, where $\Sigma $ is a genus $g$ closed surface (2-manifold). We will argue that $H^{\bullet} (\pi _*\Obs^q)$ is a type of Weyl algebra modeled on $H^{\bullet} (\Sigma ,\mathbb{R} )[1]$. First, note that $H^{\bullet} (\Sigma ,\mathbb{R} )$ is a graded symplectic vector space. It has no more than three nonvanishing cohomology groups, $H^{0,1,2} $. The bottom and top cohomologies are $\mathbb{R} $, and $H^1$ is $\mathbb{R} ^{2g} $. To see this, note that each hole determines two 1-cycles (think of the two canonical homotopy classes of loops in $S^1\times S^1$). For the bottom homology, we simply note path-connectedness. There is a nondegenerate skew-pairing (symplectic form) on $H^1(\Sigma )$ (I think by multiplying in the cochains?), and since we shift down by 1, this extends to a graded symplectic form (on the odd degrees, it means symmetric). Choose a basis $v=1\in H^0(\Sigma ,\mathbb{R} )$ and $\mu =[\Sigma ]\in H^2(\Sigma ,\mathbb{R} )$. The cup product turns $H^{\bullet} (\Sigma ,\mathbb{R} )[1]$ into a graded symplectic vector space.
+
+If $W$ is graded symplectic, then $W\oplus \mathbb{C} \hbar [-1]$ is a Lie algebra with bracket given by $\hbar $ times the symplectic form $[u,v]=\hbar \left\langle u,v \right\rangle $. We can thus associate a Weyl algebra $\operatorname{Weyl} (W) \coloneqq U(W\oplus \mathbb{C} \hbar [-1])$ to the graded symplectic space. Note how this echoes what we have been doing with the Heisenberg central extensions.
+
+The classical Weyl algebra $\mathbb{R} \partial _x \oplus \mathbb{R} x$ with $\left\langle \partial _x,x \right\rangle =1$ is a special case of this by playing with indicies and taking $\hbar =1$.
+
+\begin{proposition}\label{prp:7.2.1}
+	The prefactorization algebra $H^{\bullet} (\pi _*\Obs^q))$ on $\mathbb{R} $ is locally constant, and corresponds to the Weyl algebra $A_\Sigma $ modeled on $H^{\bullet} (\Sigma ,\mathbb{R} )[1]$. This Weyl algebra has brackets
+	\[
+		[v,\mu ]=\hbar ,\qquad [\alpha _i,\beta _j]=\hbar \delta _{ij} 
+	.\]
+\end{proposition}
+\begin{proof}
+	Start on $\Sigma \times \mathbb{R} $. The complex of fields is $\mathcal{E} =(\Omega ^{\bullet} _M[1],\dd)$. To push forward, we can push forward the complex of fields and then find the quantum observables thereof. Let $\mathcal{L} =\pi _*\Omega ^{\bullet} _M[1]$, which is an abelian dgla. Then $\pi _*\Obs^{cl} \cong C_{\bullet} *\mathcal{L} _c)$, and $\pi _*\Obs^q \cong C_{\bullet} (\widehat{\mathcal{L} } _c)$, where $\widehat{\mathcal{L} } $ denotes the Heisenberg central extension.
+
+	The pushforward $\mathcal{L} _c$ is defined on $U\subseteq \mathbb{R} $ by taking $\Omega _{M,c}^{\bullet} (\pi ^{-1} (U))[1]$. Using $\pi ^{-1} (U) \cong \Sigma \times U$, we find
+	\[
+		\Omega ^{\bullet}_{M} (\pi ^{-1} (U))\cong \pi ^{\bullet} _{\Sigma } (M) \otimes \Omega ^{\bullet} _{\mathbb{R} } (U)
+	.\]
+	The tensor product here is completed. Since $\Sigma $ is a compact Riemann surface (when did we say that?), which is K\"ahler, it has been proven that $\Omega ^{\bullet} _{\Sigma } (\Sigma )$ is \emph{formal}. This means $\Omega ^{\bullet}_{\Sigma } (\Sigma )$ is quasi-isomorphic as a commutative differential graded algebra to its singular cohomology. Thus up to quasi-isomorphism,
+	\[
+		\mathcal{L} (U) \simeq \Omega ^{\bullet} _{\mathbb{R} } \otimes H^{\bullet}(\Sigma,\mathbb{R}  )[1]
+	.\]
+	Compactly supported sections are thus
+	\[
+		\mathcal{L} _c(U) \simeq \Omega ^{\bullet} _{\mathbb{R} ,c} \otimes H^{\bullet} (\Sigma ,\mathbb{R} )[1]
+	.\]
+	Thus
+	\[
+		\Obs^{cl} \simeq C_{\bullet} (\Omega ^{\bullet} _{\mathbb{R} ,c} \otimes H^{\bullet} (\Sigma ,\mathbb{R} )[1])
+	.\]
+	The quantum observables are given by taking a central extension of the inside of the chains. We have seen this earlier in the course:
+	\[
+		H^{\bullet} (\Omega ^{\bullet} _M \otimes \mathfrak{g} )\cong U\mathfrak{g} 
+	.\]
+	Doing this here gives us the universal enveloping algebra on the Weyl algebra $H^{\bullet} (\Sigma ,\mathbb{R} )[1]$.
+\end{proof}
+
+Intuitively, this tells us that pushing down a theory to $\mathbb{R} $ gives us some notion of quantum mechanics, which always gives us some type of Weyl algebra since it is rigid. Usually the Weyl algebra is modeled on the cohomology of the above space.
+
+\begin{remark}
+	More general Chern-Simons theory has many applications to low dimensional topology and knot theory. Abelian Chern-Simons can show you some of this information by showing us the linking number of a knot. Recall that a knot is an embedding $K : S^1\hookrightarrow \mathbb{R} ^3$ (or sometimes more general 3-folds, like $S^3$). Givn two disjoint knots $\kappa ,\kappa'$, their \emph{linking number} $\ell(\kappa ,\kappa ')$ measures how many times $\kappa '$ winds around $\kappa $. The way of rigorizing this notion is as follows. Consider the product of these two knots $\kappa \times \kappa ' \cong  S^1 \times S^1$. Since the torus embeds into $\mathbb{R} ^3$, we obtain an embedding $\kappa \times \kappa ' \subseteq \mathbb{R} ^3$. We also have a smooth map $S^1\times S^1 \to S^2$ given by the Gauss map $(x,y)\mapsto \frac{x-y}{\left| x-y \right| } $ in coordinates. Then the linking number $\ell (\kappa ,\kappa ')$ is the \emph{degree} of the Gauss map $\kappa \times \kappa ' \to S^2$. More precisely, we find that $G$ is multiplication by a number, and that number is the linking number.
+
+	To compute this geometrically, we can find a filler
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	S^1\ar[hook, d] \ar[" \kappa  ", r]  & \mathbb{R} ^3 \\
+	D \ar[" \widetilde{\kappa }  "', ur]  & 
+	\end{tikzcd}\]
+	for a knot since $\mathbb{R} ^3$ is a CW complex. We then find the number of times $\kappa '$ intersects the filler $\widetilde{\kappa } $. This can actually be found by looking at the factorization algebra.
+\end{remark}
+

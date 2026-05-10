@@ -1,0 +1,64 @@
+\lecture{23}{Thu 30 Apr 2026 12:28}{Final lecture nuuuuuuuu}
+
+We will now compute $\operatorname{Pic} (\mathbb{P}^n)$. Recall that this is the group of isomorphism classes of line bundles, and for $\mathbb{P} ^1$ it was $\mathbb{Z} $. Let $X=\mathbb{P} ^n$. Then Pic is given by the sheaf cohomology $\operatorname{Pic} (X) = H^1(X,\mathcal{O} _X^*)$. We use the short exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathbb{Z} \ar[r]  & \mathcal{O} _X\ar[" \exp  ", r]  & \mathcal{O} _X^*\ar[r]  & 0
+\end{tikzcd}\]
+which yields the long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[r]  & H^n(X,\mathbb{Z} )\ar[r]  & H^n(X,\mathcal{O} _X)\ar[r]  & H^n(X,\mathcal{O} _X^*)\ar[r]  & H^{n+1} (X,\mathbb{Z} )\ar[r]  & \cdots .
+\end{tikzcd}\]
+We use $H^q(X,\mathcal{O} _X) = H^{0,q} (X,\mathcal{O} _X)$. In small degrees, this reduces to
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \operatorname{Pic} (X)\ar[r]  & \mathbb{Z} \ar[r]  & 0.
+\end{tikzcd}\]
+This proves $\operatorname{Pic} (X)\cong \mathbb{Z} $.
+
+\begin{lemma}[$\partial\overline{\partial }$]\label{lma:owo}
+	Let $(X,g)$ a compact K\"ahler manifold, or a blow up of a K\"ahler manifold. Let $\alpha \in \mathcal{A} ^{p,q} $ be $\dd $-closed. Then the following are equivalent.
+	\begin{enumerate}
+		\item $\alpha $ is $\dd $-exact.
+		\item $\alpha $ is $\partial $-exact.
+		\item $\alpha $ is $\overline{\partial } $-exact.
+		\item $\alpha $ is $\partial \overline{\partial } $-exact.
+		\item $\alpha $ is orthogonal to $\mathcal{H} ^{p,q}(X,g)$ for an arbitrary K\"ahler metric.
+	\end{enumerate}
+\end{lemma}
+\begin{proof} 
+	($1,2,3,4\implies 5$) Since $\alpha $ is pure of type $(p,q)$, it is $\dd $-closed iff it is $\partial $ and $\overline{\partial } $-closed. This implies condition 5 by Hodge's theorem. It's enough to show ($5\implies 4$). This also follows by Hodge's theorem.
+\end{proof}
+
+Since $L,\Lambda $ commute with any of these Laplacians on a compact K\"ahler manifold, they will descend to the harmonic space, which we have seen is the same as cohomology. So for example,
+\[
+	L : H^{p,q} (X) \to H^{p+1,q+1} (X),\qquad \Lambda : H^{p+1,q+1} (X) \to H^{p,q} 
+.\]
+Note that they depend only on the cohomology class of the fundamental form.
+
+\begin{theorem}[Hard Lefzschetz]\label{thm:hard}
+	The map
+	\[
+		L^{n-k} : H^k(X) \to H^{2n-k} (X)
+	\]
+	is an isomorphism.
+\end{theorem}
+This is because $L$ is an $\mathfrak{sl} _2$-representation and gives an isomorphism with weight spaces. We already knew this isomorphism existed by Poincare duality, but the interesting bit is that it is given by wedging with $[\omega ]^{n-k} $.
+
+This gives us a Lefschetz decomposition. Define $P^k(X,\mathbb{C} )$ to be the kernel of $\Lambda : H^k(X,\mathbb{C} ) \to H^{k+2} (X,\mathbb{C} )$. We can of course take a $(p,q)$-refinement of this.
+
+\begin{theorem}[Lefschetz decomposition]\label{thm:owo}
+	We have
+	\[
+		H^k(X,\mathbb{C} )\cong \bigoplus_{i\geq 0} L^iP^{k-2i} (X,\mathbb{C} )
+	.\]
+	Similarly for Dolbeault cohomology,
+	\[
+		H^{p,q} (X) \cong \bigoplus_{i\geq 0} L^iP^{p-i,q-i} (X)
+	.\]
+\end{theorem}
+\begin{theorem}[Lefschetz theorem on $(1,1)$-classes]\label{thm:1}
+	Let $L\to X$ be a complex line bundle (smooth line bundle with fibers isomorphic to $\mathbb{C} $ -- not necessarily holomorphic). Then $L$ is completely classified by $c_1(L)\in H^2(X,\mathbb{Z} )$.
+\end{theorem}
+\begin{proof}
+	Recall that complex line bundles $L$ on $X$ are the homotopy classes of maps $X\to BL$ to the classifying space. In this case, it is $BL=\mathbb{C} \mathbb{P} ^\infty $. But $\mathbb{C} \mathbb{P} ^\infty $ is an Eilenberg-MacLane space $K(\mathbb{Z} ,2)$, which classifies cohomology by homotopy classes of maps into it. Thus $[X,\mathbb{C} \mathbb{P} ^\infty ] \cong H^2(X,\mathbb{Z} )$. Let $H^{1,1} (X,\mathbb{Z} )$ be the classes of $H^2(X,\mathbb{Z} )$ such that they map to $H^{1,1}(X)\subseteq H^2(X,\mathbb{C} )$. The statement is that these are exactly the first Chern classes, meaning it suffices to show that the image of $c_1 : \operatorname{Pic} (X) \to H^2(X,\mathbb{Z} )$ is $H^{1,1} (X,\mathbb{Z} )$.
+\end{proof}
+

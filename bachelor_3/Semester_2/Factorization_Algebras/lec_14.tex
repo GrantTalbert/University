@@ -1,0 +1,158 @@
+\lecture{14}{Tue 31 Mar 2026 14:01}{Poisson brackets and quantization}
+
+\section{The Poisson bracket}
+
+
+\begin{definition}\label{dfn:4.5.1}
+	A Poisson $R$-algebra $A$ is a commutative algebra together with a Lie bracket $\left\{ -,- \right\} : A\otimes_R A \to A$ whihch acts as a derivation in each input:
+	\[
+		\left\{ ab,c \right\} =\left\{ a,c \right\} b + \left\{ b,c \right\} a,
+	\]
+	\[
+		\left\{ a,bc \right\} =\left\{ a,b \right\} c+ \left\{ a,c \right\} b
+	.\]
+\end{definition}
+
+\begin{example}\label{ex:4.5.2}
+	Let $V$ a vector space with a skew form $\left\langle -,- \right\rangle : V\otimes V \to V$. Then there is a unique way to extend $\left\langle -,- \right\rangle $ to a Poisson bracket on the symmetric algebra $\operatorname{Sym} (V)$. Simply define $\left\{ v,w \right\} =\left\langle v,w \right\rangle $, and inductively impose the derivation condition on higher degree elements.
+\end{example}
+
+\begin{lemma}\label{lma:4.5.3}
+	Let $(M,\mathcal{E} )$ be a free field theory on a manifold $M$. Let $\left\langle -,- \right\rangle : \mathcal{E} _c\otimes_\mathbb{R} \mathcal{E} _c \to \mathcal{E} _c$ be the skew pairing of cohomological degree 1 as described in \cref{rmk:4.3.4}. Then there is a unique smooth Poisson bracket on $\Obs^{cl} (U)$ of cohomological degree 1, which satisfies
+	\[
+		\left\{ \alpha ,\beta  \right\} =\left\langle \alpha ,\beta  \right\rangle 
+	\]
+	for any observables $\alpha ,\beta \in \mathcal{E} _c(U)[1]$.
+\end{lemma}
+\begin{proof}
+	We will not need the smooth part of this hypothesis, so the proof simly reduces to adapting \cref{ex:4.5.2} to a graded situation.
+\end{proof}
+
+Classical theories should carry a Poisson bracket, so this makes sense. Note that $\left\{ i_V^{U_1} \alpha ,i_V^{U_2} \beta  \right\} =0$ whenever $U_1 \cap U_2 =\varnothing $ (not too hard to show, just recall definitions). Interpreting this physically means that observables on disjoint open subsets commute with respect to the Poisson bracket.
+
+
+
+
+
+
+
+\section{The quantum observables of a free field theory}
+
+In our toy model, we defined a Heisenberg dg Lie algebra $\mathcal{H} _W$ as a central extension of our compactly supported sections of $\mathcal{E} $, with Lie bracket determined by the canonical pairing. We follow this intuition in great detail to define $\Obs^q$ for an arbitrary free field theory $(M,\mathcal{E} )$.
+
+
+\begin{construction}\label{cst:4.6.1}
+	Recall that we have a graded antisymmetric pairing $\omega  : \mathcal{E} _c\otimes _\mathbb{R} \mathcal{E} _c \to \mathbb{R} $. For the explicit construction, see \cref{rmk:4.3.4}. We want to construct a central extension $\widehat{\mathcal{E} }_c $ of $\mathcal{E} _c$. Such a construction is done pointwise, meaning for all open sets $U\subseteq M$, we have a central extension $\widehat{\mathcal{E} }_c(U) $ of $\mathcal{E} _c(U)$.
+
+	In order for such a central extension to make sense, we need $\mathcal{E} _c(U)$ to be a dg Lie algebra. Take $\mathcal{E} _c$ to be an abelian dg Lie algebra. Just like with Lie algebras, a central extension of a dg Lie algebra $\mathfrak{g} $ is a short exact sequence of dg Lie algebras
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathfrak{h} \ar[r]  & \mathfrak{e} \ar[r]  & \mathfrak{g} \ar[r]  & 0.
+	\end{tikzcd}\]
+	Over a field, short exact sequences always split (since there is an underlying short exact sequence of graded vector space, which pointwise is a short exact sequence of vector spaces).
+
+	Recall that central extensions correspond to 2-cocycles. Since $\omega $ respects the differential, it is a 2-cocycle, meaning it defines a central extension. Since it has cohomological degree $-1$, and we want to define $[x,y]=\omega (x,y)$, we have to introduce a generator $\hbar $ of degree 1 to absorb the shift, ensuring that the resulting dg Lie bracket preserves degrees. We define $[x,y]=\hbar \omega (x,y)$, which now preserves degrees. Since $\hbar $ lives in degree 1, we find that $\mathcal{H} _\mathcal{E} $ arises as the central extension
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]  & \mathbb{R} \hbar \left[ -1 \right] \ar[r]  & \mathcal{H} _\mathcal{E} \ar[r]  & \mathcal{E} _c\ar[r]  & 0.
+	\end{tikzcd}\]
+	Since sequences split, $\mathcal{H} _\mathcal{E} \cong \mathbb{R}\hbar [-1]\oplus \mathcal{E} _c$. The dg Lie bracket is as defined: $[x,y]=\hbar \omega (x,y)$.
+
+	Now that we have a natural central Heisenberg extension of the dg Lie algebra, we define
+	\[
+		\Obs^q(U)\coloneqq C_{\bullet} (\mathcal{H} _\mathcal{E} (U))
+	.\]
+	We define the Chevalley-Eilenberg chains using the completed tensor product. This yields isomorphisms of graded vector spaces.
+	\[
+		\Obs^q(U)\cong \Sym \left( \mathcal{H} _\mathcal{E} (U)[1] \right) \cong \Obs^{cl} (U)[\hbar ]
+	.\]
+	There is a differential here, which we now consider. The differential of the Chevalley-Eilenberg chains is simply $\dd _{\mathcal{H} _\mathcal{E} } +\dd _{\mathrm{CE} } $, where of coure $\dd _{\mathrm{CE} } $ acts by $\dd _{\mathrm{CE} } (x\wedge y) = [x,y]=\hbar \omega (x,y)$, which extends to higher order terms by applying the Leibniz rule. The operator $\dd _{\mathcal{H} _\mathcal{E} } $ is simply the operator $0 \oplus \dd $, where $\dd $ is the differential operator on $\mathcal{E} $, restricted to $\mathcal{E} _c$.
+\end{construction}
+
+We saw previously that $\Obs^{cl} (U)$ can be viewed as $\mathrm{PV} ^{\bullet} _c$, with differential $\intprod \dd S$. Introducing the $\hbar $ factor and the Chevalley-Eilenberg differential yields the new differential $\intprod \dd S + \hbar \mathrm{Div} $.
+
+\begin{definition}\label{dfn:4.6.2}
+	Let $(M,\mathcal{E} )$ be a free field theory, and let $\mathcal{H} _\mathcal{E} $ be as constructed in \cref{cst:4.6.1}. Then
+	\[
+		\Obs^q(U) \coloneqq C_{\bullet} (\mathcal{H} _\mathcal{E} (U))
+	.\]
+\end{definition}
+As always, the quantum observables form a prefactorization algebra, and they agree with what we saw in chapter 2.
+
+
+
+
+
+
+
+
+
+\chapter{Quantum mechanics and the Weyl algebra}
+
+
+Recall the scalar field theory $\mathcal{E} _c = \left( \Delta +m^2 : C^\infty _c[1] \to C^\infty _c \right) $ on a single dimension $\mathbb{R} $. In a single dimension, the quantum observables are extremely simple.
+
+\begin{lemma}\label{lma:5.0.1}
+	The prefactorization algebra $\Obs^q$ on the scalar free field theory on $\mathbb{R} $ is locally constant.
+\end{lemma}
+
+We begin by reviewing some machinery that we will need.
+
+\begin{definition}\label{dfn:5.0.2}
+	Let $(C^{\bullet} ,d)$ a cochain complex. An \emph{increasing filtration} on $C^{\bullet} $ is a sequence
+	\[
+		F^0C^{\bullet} \subseteq F^1C^{\bullet} \subseteq F^2C^{\bullet} \subseteq \cdots \subseteq C^{\bullet} 
+	\]
+	of subcomplexes, such that
+	\[
+		\bigcup_{n\geq 0} F^nC^{\bullet} =C^{\bullet} ,
+	\]
+	and the differential preserves each stage, meaning $d(F^kC^{\bullet} )\subseteq F^kC^{\bullet} $. The \emph{associated graded complex} $\mathrm{gr} (C^{\bullet} ,d)$ is the complex
+	\[
+		\mathrm{gr} (C^{\bullet} ,d) \coloneqq \bigoplus_{k\geq 0} \frac{F^kC^{\bullet} }{F^{k-1} C^{\bullet} } 
+	.\]
+	Note that $d$ defines a differential $\widetilde{d} $ on this object $[\alpha _k]\mapsto [d\alpha _k]$. This is well-defined because $d$ factors through the quotient.
+\end{definition}
+
+\begin{proof}[Proof of \cref{lma:5.0.1}]
+	There is apparently an isomorphism $H^0(\Obs^q(U))\cong H^0(\Obs^{cl} (U))[\hbar ]$, so this follows by local constant-ness of $H^0(\Obs^{cl} )$: we recall that all open intervals map to $\mathbb{R} [p,q]$.
+\end{proof}
+
+
+
+
+We now review the Weyl algebra. A polynomial differential operator on $\mathbb{R} ^n$ is an expression $\sum_{\alpha } r_\alpha (x)\partial _\alpha $, where $\alpha $ is a multi-index $\left( \alpha _1, \ldots ,\alpha _n \right) $, and $p_\alpha $ is a polynomial in $x_1, \ldots , x_n$, and
+\[
+	\partial _\alpha  \coloneqq \left( \frac{\partial }{\partial x_1}  \right) ^{\alpha _1} \cdots \left( \frac{\partial }{\partial x_n}  \right) ^{\alpha _n} 
+.\]
+Denote by $\mathscr{D} (\mathbb{R} ^n)$ the $\mathbb{R} $-algebra of all such polynomial differential operators on $\mathbb{R} ^n$. For example,
+\[
+	\Delta +m^2 = -\left( \sum_{i} \frac{\partial ^2}{\partial x_i^2}  \right) +m^2\in \mathscr{D} (m^2)
+.\]
+We will show that there is a Heisenberg algebra $\mathcal{H} _{\mathbb{R} ^n} $ such that $\mathscr{D} (\mathbb{R} ^n) \cong U(\mathcal{H} _{\mathbb{R} ^n} )$. A natural definition for $\mathcal{H} _{\mathbb{R} ^n} $ is to consider the algebra
+\[
+	\mathcal{H} _{\mathbb{R} ^n} =\operatorname{span} \left\{ x_1, \ldots ,x_n , \partial_1, \ldots , \partial _n \right\} 
+\]
+with Lie bracket
+\[
+	\left[ \frac{\partial }{\partial x_i} ,x_j \right] =\delta _{ij} ,\qquad \left[ x_i,x_j \right] =0,\qquad \left[ \frac{\partial }{\partial x_i} ,\frac{\partial }{\partial x_j}  \right] =0
+.\]
+The idea here is if $f\in C^\infty (\mathbb{R} ^n)$, then by the product rule, we see that $C^\infty (\mathbb{R} ^n)$ is an $\mathcal{H} _{\mathbb{R} ^n} $-module:
+\[
+	\left[ \frac{\partial }{\partial x_i} ,x_j \right] =\frac{\partial }{\partial x_i} (x_j f) - x_j \left( \frac{\partial }{\partial x_i} f \right) =\frac{\partial x_j}{\partial x_i}f +x_j\frac{\partial f}{\partial x_i} -x_j \frac{\partial f}{\partial x_i} =\delta _{ij} f
+.\]
+
+Choose an ordering $\left\{ x_i \right\} _{i\in I} $ for the generators of a Lie algebra $\mathfrak{g} $. We recall that the PBW yields a basis for $U\mathfrak{g} $ given by monomials of the form $x_{i_1} ,\ldots ,x_{i_r} $, where $i_{1} \leq \cdots \leq i_{r} $. We apply this to $\mathcal{H} _{\mathbb{R} ^n} $. Let $x_1 \leq \cdots \leq x_n \leq \partial _1 \leq \cdots \leq \partial _n$. Then the PBW implies
+\[
+	U (\mathcal{H} _{\mathbb{R} ^n}) \cong \left\langle x_1^{\alpha _1} \cdots x_n^{\alpha _n} \partial _1^{\beta _1} \cdots \partial _n^{\beta _n}  \right\rangle 
+\]
+for all $\alpha_i,\beta _i\in\mathbb{N} $. Note that this is precisely $\mathscr{D} (\mathbb{R} ^n)$ as a vector space -- the $x_i$s turn into the polynomial coefficients and the derivatives turn into the... derivatives. A fascinating fact is that due to the definition of the Lie bracket, we see that this promotes to an isomorphism of associative algebras. I think.
+
+
+
+Now we follow this process more concretely. Recall that if $(\psi _{-1} ,\psi _0)$ and $(\psi _{-1} ',\psi _0')$ are compactly supported sections of the graded vector bundle $E$ (not necessarily homogeneous elements!), then we defined our pairing
+\[
+	\left\langle (\psi _{-1} ,\psi _0),(\psi _{-1} ',\psi _0') \right\rangle = \int_{\mathbb{R} } \left(\psi _{-1} '\psi _0 - \psi _0'\psi _{-1} \right)\dd x
+.\]
+We will show that $C_{\bullet} (\mathcal{H} _{\mathbb{R} } )$ yields the quantum observables $\Obs^q(U)$ for the scalar field theory in 1 dimension.
+
+We want to show the pFA $H^0(\mathrm{Obs} ^q)$ valued in vector spaces is locally constant. We will filter the Chevalley-Eilenberg chains $C_{\bullet} (\mathcal{H} _{\mathcal{E} _c} )$ by polynomial degree, and check that the associated graded is locally constant.
+

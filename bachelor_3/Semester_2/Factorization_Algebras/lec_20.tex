@@ -1,0 +1,32 @@
+\lecture{20}{Tue 28 Apr 2026 14:03}{Translation invariance}
+
+Let $\left\{ U_i \subseteq V\right\} _{1\leq i\leq k} $ be disjoint open subsets of an open set $V$ in $M$. Define $\mathcal{D} \mathrm{isj} (U_1, \ldots ,U_k ; V)$ to be the set of $k$-tuples $(x_1, \ldots ,x_k)\in(\mathbb{R}^n)^k $ such that $\tau _{x_1} (U_1), \ldots ,\tau _{x_k} (U_k)$ are still disjoint and are contained in $V$. If the closures of the $U_i$'s are still disjoint, then $\mathcal{D} \mathrm{isj} (U_1, \ldots ,U_k;V)$ is an open subset of $(\mathbb{R} ^n)^k$.
+
+Let $\mathcal{F} $ be a discretely translation invariant prefactorization algebra. Then for any $(x_1, \ldots ,x_k)\in \mathcal{D} \mathrm{isj} (U_1, \ldots ,U_k;V)$, there is a multilinear map
+\[
+	m_{(x_1, \ldots ,x_k)} : \bigotimes_{1\leq i\leq k} \mathcal{F} (U_i) \to \bigotimes_{1\leq i\leq k} \mathcal{F} (\tau _{x_i} U_i)
+.\]
+There is some level of sophistication required to address some analytical issues that we are ignoring.
+
+\begin{definition}\label{dfn:7.1.9}
+	A discretely translation invariant prefactorization algebra $\mathcal{F} $ is \emph{smoothly translation invariant} if
+	\begin{enumerate}
+		\item The map above depends smoothly on $(x_1, \ldots ,x_k)\in \mathcal{D} \mathrm{isj} (U_1, \ldots ,U_k;V)$ (this requires DVS machinery).
+		\item Since $\mathbb{R} ^n$ is its own (abelian) Lie algebra, $\mathcal{F} $ has an action $\rho : \mathbb{R} ^n \to \operatorname{Der} (\mathcal{F} )$. For all $v\in\mathbb{R} ^n$, denote by $\frac{\mathrm{d}}{\mathrm{d}v} $ the corresponding derivation, which acts $\mathcal{F} (U)\to \mathcal{F} (U)$.
+		\item The infinitesimal action of $\mathbb{R} ^n$ is given by differentiating the global action. More precisely, if $v\in\mathbb{R} ^n$, let $v_i = (0, \ldots ,v_i, \ldots ,0)$ in $(\mathbb{R} ^n)^k$. We want
+			\[
+				\frac{\mathrm{d}}{\mathrm{d}v} m_{(x_1, \ldots ,x_k)} (\alpha _1, \ldots ,\alpha _k) = m_{x_1, \ldots ,x_k)} \left( \alpha _1, \ldots , \frac{\mathrm{d}}{\mathrm{d}v_i} \alpha _i, \ldots ,\alpha _k \right) 
+			.\]
+	\end{enumerate}
+\end{definition}
+
+For example, for the frfee scalar field theory on $\mathbb{R} $, we have $\mathbb{R} $ acting on itself by $x\mapsto \frac{\mathrm{d}}{\mathrm{d}x} \mapsto [H,-]$ for $H$ the Hamiltonian. This makes sense since the Hamiltonian generates time evolution in qm: $U = \exp (iH / \hbar )$ or smt.
+
+This is where the operadic perspective becomes useful. Define $\mathcal{D} \mathrm{isj} $ to be the colored operad with colors $\Open(M) $, and $n$-multimorphisms as defined earlier.
+
+We now define the little disks operad, which has one color. Define $\mathcal{O}_k(n)$ to be all possible configurations of $n$ different ordered $k$-balls with disjoint closures inside of the unit $k$-ball. Composition can be given by shrinking down one of the unit ball and inserting it into one of the inner balls. Note that unlike arbitrary factorization algebras, this operad $\mathcal{O} $ does not care about the size of things. The ones that satisfied this are the locally constant factorization algebras. Now the following is not adequate if we care about some kind of weak equivalence i think. BUT. Locally constant prefactorization algebras on $\mathbb{R} ^n$ are algebras for the little $n$-disks operad $\mathcal{O}_n$. This is called an $E_n$-algebra.
+
+\begin{theorem}[Stasheff, May]\label{thm:7.1.10}
+	A space $X$ has the homotopy type of the $n$-fold loop space of a manifold $L^nM$ if and only if $X$ is an algebra over the little $n$-disk operad.
+\end{theorem}
+The $n$-fold loop space is $\Top (S^n,M)$. Not hard to see this if we note that $S^n = B_n / \partial B_n$, $B_n$ an $n$-ball.

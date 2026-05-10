@@ -5,7 +5,7 @@ Since $\mathfrak{J} $ is the kernel of $U\mathfrak{g} \to R$, there is a short e
 0\ar[r]  & \mathfrak{J} \ar[r]  & U\mathfrak{g} \ar[r]  & R\ar[r]  & 0.
 \end{tikzcd}\]
 
-Since $H_{\bullet} (\mathfrak{g} ,-)\cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,-)$, we apply the \emph{dimension shifting technique} to take $H_{n} (\mathfrak{g} ,-) = H_{n-1} (\mathfrak{g},-)$: consider the long exact sequence
+Since $H_{\bullet} (\mathfrak{g} ,-)\cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,-)$, we apply the \emph{dimension shifting technique}: consider the long exact sequence
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
 \cdots \ar[r]  & \operatorname{Tor} _n^{U\mathfrak{g} } (U\mathfrak{g} ,M)\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (U\mathfrak{g} ,M) \ar[r] & \cdots .
 \end{tikzcd}\]
@@ -14,15 +14,182 @@ Since $U\mathfrak{g} $ is free as a $U\mathfrak{g} $-module, it is flat, and hen
 \cdots \ar[r]  & 0\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & 0 \ar[r] & \cdots .
 \end{tikzcd}\]
 The only way for this to be exact is if the map $\operatorname{Tor} _n^{U\mathfrak{g} } (R,M)\to \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (\mathfrak{J} ,M)$ is an isomorphism for $n\geq 2$. Additionally, reading this in degree $n=1,0$, we obtain the exact sequence
-\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\begin{equation}\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 0\ar[r]  & H_1(\mathfrak{g} ,M)\ar[r]  & \mathfrak{J} \otimes _{U\mathfrak{g} } M\ar[r]  & M\ar[r]  & M_{\mathfrak{g} } \ar[r]  & 0.
-\end{tikzcd}\]
-Here we have noted that $R\otimes _{U\mathfrak{g} } M \cong M_\mathfrak{g} $.
+\end{tikzcd}\tag{$*$}\label{eq:7.4.1}\end{equation}
+Here we have noted that $R\otimes _{U\mathfrak{g} } M \cong M_\mathfrak{g} $, as computed in the proof of \cref{7.3.3}.
 
-\begin{exercise}
+\begin{exercise}\label{7.4.1}
 	Show that the inclusion $i : \mathfrak{g}  \to U\mathfrak{g} $ maps $[\mathfrak{g} ,\mathfrak{g} ]$ to $\mathfrak{J}^2$. Conclude that it induces a map $i : \mathfrak{g} ^{ab}  \to \mathfrak{J} /\mathfrak{J} ^2$, where $\mathfrak{g} ^{ab} =\mathfrak{g} /[\mathfrak{g} ,\mathfrak{g} ]$.
 \end{exercise}
 \begin{proof}
-	We consider the map $0 : \mathfrak{g}  \to R$. 
+	Recall that $\mathfrak{J} $ can be described as $U\mathfrak{g} \setminus R$, which admits a description as all linear combinations in all possible $n$-fold products in $\mathfrak{g} $ with $n\geq 1$. Hence $\mathfrak{J} ^2$ would be all linear combinations in all $n$-fold products in $\mathfrak{g} $ with $n\geq 2$. By definition, $i[x,y]=xy-yx$. This fits inside of $\mathfrak{J} ^2$, so we obtain $i[\mathfrak{g} ,\mathfrak{g} ]\subseteq \mathfrak{J} ^2$. Thus the composite of $i$ with the quotient $\mathfrak{J} \to \mathfrak{J} /\mathfrak{J} ^2$ identifies $[\mathfrak{g} ,\mathfrak{g} ]$ to $0$, and thus factors through the quotient $\mathfrak{g} /[\mathfrak{g} ,\mathfrak{g} ]\eqqcolon \mathfrak{g} ^{ab} $.
+\end{proof}
+\begin{exercise}\label{7.4.2}
+	Show that there is a $R$-module map $\sigma : U\mathfrak{g}  \to \mathfrak{g}^{ab}  $ sending $\mathfrak{J} ^2$ to zero and $i(x)$ to $\overline{x} $. \emph{Hint:} First define a map from the tensor algebra $T(\mathfrak{g} )$ to $\mathfrak{g} ^{ab} $ sending $\mathfrak{g} \otimes _R\mathfrak{g} $ to zero and then pass to the quotient $U\mathfrak{g} $.
+\end{exercise}
+\begin{proof}
+	I don't know why \cite{weibel} denotes the class of $x$ in the quotient by $\overline{x} $, but I hate this so I will write $i(x)\mapsto [x]$. Clearly $\sigma (x) = [x]$ would identify $[\mathfrak{g} ,\mathfrak{g} ]$ to 0, but showing it is well-defined, $R$-linear, and defining it on $R$ is not immediate, so we start by considering the map $\widetilde{\sigma } : T(\mathfrak{g})  \to \mathfrak{g}^{ab} $ defined on $\mathfrak{g} $ by $[x]$, and defined on 2-tensors by
+	\[
+		x\otimes y\mapsto [ [x,y]_\mathfrak{g} ]=0
+	.\]
+	I now understand why Weibel denotes the class by $\overline{x} $. I will still not use his notation. It is clear that $\mathfrak{g} \otimes _R\mathfrak{g} \mapsto 0$ under this map. We define it on higher tensors by
+	\[
+		x_1\otimes \cdots \otimes x_n \mapsto [[x_1,[x_2, [\cdots [x_{n-1} ,x_n]_\mathfrak{g} \cdots ]_\mathfrak{g} ]=0
+	.\]
+	On 0-fold tensors, we define $\widetilde{\sigma } (r) = 0$. This is $R$-linear since the definition of the $R$-action on $\mathfrak{g} ^{ab} $ is $r[x]=[rx]$, so $\widetilde{\sigma } (rx) = r \widetilde{\sigma } (x) = r[x]=[rx]$ holds. Since this map identifies $[x,y]_\mathfrak{g} $ to zero, and also identifies $x\otimes y-y\otimes x$ to zero, it must identify $[x,y]_\mathfrak{g} \sim x\otimes y-y\otimes x$, hence it descends to a map $\sigma : U\mathfrak{g}  \to \mathfrak{g} $ defined by $x\mapsto [x]$, $R\mapsto 0$, and $\mathfrak{J} ^2 \mapsto 0$. 
+\end{proof}
+\begin{exercise}\label{7.4.3}
+Deduce from \cref{7.4.1} and \cref{7.4.2} that $\mathfrak{J} /\mathfrak{J} ^2 \cong \mathfrak{g} ^{ab} $. 
+\end{exercise}
+\begin{proof}
+	The map $i : \mathfrak{g} ^{ab}  \to \mathfrak{J} /\mathfrak{J} ^2$ is defined by $[x]\mapsto [x]$. Consider the restriction $\sigma |\mathfrak{J} : \mathfrak{J}  \to \mathfrak{g} $. Since this identifies $\mathfrak{J} ^2$ to zero, it descends to a map $\overline{\sigma } : \mathfrak{J} /\mathfrak{J} ^2 \to \mathfrak{g} ^{ab} $ which maps $[x]\mapsto [x]$. This is an inverse to $i$.
+\end{proof}
+\begin{theorem}\label{7.4.4}
+	For any Lie $R$-algebra $\mathfrak{g} $, we have $H_1(\mathfrak{g} ,R)\cong \mathfrak{kg} ^{ab} $.
+\end{theorem}
+\begin{proof}
+	Taking $M=R$ in \eqref{eq:7.4.1} yields the exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & H_1(\mathfrak{g} ,R)\ar[r]  & \mathfrak{J} \otimes _{U\mathfrak{g} } R\ar[r]  & R\ar[r]  & R_\mathfrak{g} \ar[r]  & 0.
+	\end{tikzcd}\]
+	Recall from the proof of \cref{7.3.3} that $R \cong U\mathfrak{g} /\mathfrak{J} $. We establish an isomorphism $\mathfrak{J} \otimes _{U\mathfrak{g} } (U\mathfrak{g} /\mathfrak{J} )\cong \mathfrak{J} /\mathfrak{J} ^2$ as a special case of \cref{7.4.6}, hence
+	\[
+		\mathfrak{J} \otimes_{U\mathfrak{g} } R \cong \mathfrak{J} \otimes _{U\mathfrak{g} } (U\mathfrak{g} /\mathfrak{J} )\cong \mathfrak{J} /\mathfrak{J} ^2 \cong \mathfrak{g} ^{ab} ,
+	\]
+	where the final isomorphism is \cref{7.4.3}. We will now show the map $R\to R_\mathfrak{g} $ is an isomorphism. It is automatically surjective. Since $R_\mathfrak{g} \coloneqq R/\mathfrak{g} R$, and since $R$ has the trivial $\mathfrak{g} $-module structure,
+	\[
+		\frac{R}{\mathfrak{g} R} \cong \frac{R}{0} \cong R
+	.\]
+	Thus the quotient is indeed an isomorphism, meaning that
+	\[
+		0 \cong \Ker (R\to R_\mathfrak{g} ) \cong \Im (\mathfrak{J} \otimes _{U\mathfrak{g} } R\to R)
+	.\]
+	Hence this map is the 0 morphism, so we obtain an exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & H_1(\mathfrak{g} ,R)\ar[r]  & \mathfrak{J} \otimes _{U\mathfrak{g} } R\ar[r]  & 0.
+	\end{tikzcd}\]
+	This verifies
+	\[
+		H_1 \cong \mathfrak{J} \otimes _{U\mathfrak{g} } R \cong \mathfrak{g} ^{ab} 
+	.\]
+\end{proof}
+\begin{corollary}\label{7.4.5}
+	If $M$ is any trivial $\mathfrak{g} $-module, then $H_1(\mathfrak{g} ,M)\cong \mathfrak{g} ^{ab} \otimes _RM$.
+\end{corollary}
+\begin{proof}
+	The proof relies on $M\cong M_\mathfrak{g} $, so that we have an isomorphism $H_1(\mathfrak{g} ,M)\cong \mathfrak{J} \otimes _{U\mathfrak{g} } M$ as in \cref{7.4.4}. Now we use the isomorphism $\mathfrak{J} \otimes _{U\mathfrak{g} } R \cong \mathfrak{g} ^{ab} $ to obtain
+	\[
+		\mathfrak{J} \otimes _{U\mathfrak{g} } M \cong \mathfrak{J} \otimes _{U\mathfrak{g} } (R\otimes _RM) \cong (\mathfrak{J} \otimes _{U\mathfrak{g} } R)\otimes _RM \cong \mathfrak{g} ^{ab} \otimes _RM
+	.\]
+\end{proof}
+\begin{lemma}\label{7.4.6}
+	Let $A$ be a ring, $J\subseteq A$ an ideal, and $M$ an $A$-module. Then
+	\[
+		(A/I)\otimes _AM \cong M/IM
+	.\]
+	In particular, since $\mathfrak{J} \subseteq U\mathfrak{g} $ is an ideal of the $R$-algebra $U\mathfrak{g} $ (and in particular, an ideal as a ring), and since $\mathfrak{J} $ is thus an $U\mathfrak{g} $-module, we obtain $U\mathfrak{g} /\mathfrak{J} \otimes _{U\mathfrak{g} } \mathfrak{J} \cong \mathfrak{J} /\mathfrak{J} ^2$.
+\end{lemma}
+We decline to prove this standard fact of algebra, but it is required for the previous two statements so we include it since we did not remember it.
+
+\begin{exercise}
+	Let $\mathfrak{g} $ be a free $R$-module on basis $\left\{ e_i \right\} _{1\leq i\leq n} $, viewed as an abelian Lie $R$-algebra. Show that $H_p(\mathfrak{g} ,R)\cong \Lambda ^p\mathfrak{g} $.
+\end{exercise}
+\begin{proof}
+	We first find a free resolution of $R$ over $R[e_1, \ldots ,e_n]$. View $R$ as an $R[e_1, \ldots ,e_n]$-module with trivial action by the $e_i$'s. Apparently the sequence is $U\mathfrak{g} \otimes_R \Lambda ^p\mathfrak{g} \cong \Lambda ^p$ with differential
+	\[
+		d(1\otimes x_1 \wedge \cdots \wedge x_{p} ) = \sum_{i=1}^{p} (-1)^{i+1} x_i\otimes  x_1 \wedge \cdots \wedge \widehat{x_i}\wedge \cdots \wedge x_{p} 
+	.\]
+	I will take this on faith as it was probably done earlier in the book. Then $\operatorname{Tor}_{p+1}^{U\mathfrak{g} } (R,R)$ is the $(p+1)$th homology group of the new complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\cdots \ar[r]  & (U\mathfrak{g} \otimes _R\Lambda ^2\mathfrak{g} )\otimes_{U\mathfrak{g} } R\ar[" d_2\otimes 1 ", r]  & (U\mathfrak{g} \otimes _R\Lambda ^1\mathfrak{g} )\otimes _{U\mathfrak{g} } R\ar[" d_1\otimes 1 ", r]  & (U\mathfrak{g} \otimes _RR)\otimes _{U\mathfrak{g} } R\ar[r] & 0.
+	\end{tikzcd}\]
+	Of course the zeroth degree term is just $R$, and the first degree term is simply
+	\[
+		(U\mathfrak{g} \otimes _R\Lambda ^1\mathfrak{g} )\otimes _{U\mathfrak{g}} R \cong (U\mathfrak{g}  \otimes_R R^n)\otimes_{U\mathfrak{g} } R \cong U\mathfrak{g} ^n \otimes _{U\mathfrak{g} } R \cong R^n\cong \mathfrak{g} \cong \Lambda ^1\mathfrak{g} 
+	.\]
+	Since the exterior power of a free module is free, this process generalizes immediately yielding $(U\mathfrak{g} \otimes _R\Lambda ^p\mathfrak{g} )\otimes _{U\mathfrak{g} } R \cong \Lambda ^p\mathfrak{g} $. Hence our complex is simply $\Lambda ^{\bullet} \mathfrak{g} $. We now need to compute the differential in this complex. Explicitly, the isomorphism $U\mathfrak{g} \otimes _R\Lambda ^p\mathfrak{g} \otimes _{U\mathfrak{g} } R$ is given by $u\otimes \omega \otimes r\mapsto (u\cdot r)\omega $. Thus we define the isomorphic chain complex
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\cdots \ar[r]  & \Lambda ^2\mathfrak{g}  \ar[" \widetilde{d}_2 ", r]  & \Lambda ^1\mathfrak{g} \ar[" \widetilde{d} _1 ", r]  & \Lambda ^0\mathfrak{g} \ar[r] & 0
+	\end{tikzcd}\]
+	where
+	\[
+		\widetilde{d}_p(x_1 \wedge \cdots \wedge x_p) = \sum_{i=1}^{p} (x_i \cdot 1)x_1 \wedge \cdots \wedge \widehat{x_i}\wedge \cdots \wedge x_p
+	.\]
+	We now need to compute the homology of this chain complex to obtain the Lie algebra homology of $\mathfrak{g} $. Since $R$ is the trivial $\mathfrak{g} $-module, we have that $x_i\cdot 1=0$, so $\widetilde{d} _p(x_1 \wedge \cdots \wedge x_p)=0$, meaning the differentials are all trivial, so the chain complex is isomorphic to its homology. Thus $H_{p} ^{\mathrm{Lie} } (\mathfrak{g} ,R)\cong \Lambda ^p\mathfrak{g} $.
+\end{proof}
+
+
+We now consider cohomology. Using the same idea as before, we start with the short exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathfrak{J} \ar[r]  & U\mathfrak{g} \ar[r]  & R\ar[r]  & 0.
+\end{tikzcd}\]
+Applying $\operatorname{Ext}_{U\mathfrak{g} } ^{\bullet} (-,M)$ to this, and using contravariance of Hom in the first variable, yields the long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[r]  & \operatorname{Ext}_{U\mathfrak{g} } ^{n-1} (\mathfrak{J} ,M)\ar[r]  & \operatorname{Ext} _{U\mathfrak{g} }^n(R ,M)\ar[r]  & \operatorname{Ext} _{U\mathfrak{g} } ^n(U\mathfrak{g} ,M)\ar[r]  & \operatorname{Ext} ^{n}_{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r] & \cdots .
+\end{tikzcd}\]
+Since $\Hom_{U\mathfrak{g} }(U\mathfrak{g} , -) \cong 1$ by identifying $U\mathfrak{g} $-linear maps $\varphi : U\mathfrak{g} \to M$ with $\varphi (1)$, the $\operatorname{Ext} ^{\bullet} _{U\mathfrak{g} } (U\mathfrak{g} ,M)$ modules vanish, yielding isomorphisms
+\[
+	\operatorname{Ext}_{U\mathfrak{g} } ^{n-1} (\mathfrak{J},M) \cong \operatorname{Ext} ^n_{U\mathfrak{g} } (R,M)\cong H^n_{\mathrm{Lie} } (\mathfrak{g} ,M)
+\]
+for $n\geq 2$, and in degree 1 yielding the exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \Hom_{U\mathfrak{g} } (R, M)  \ar[r]  & \Hom_{U\mathfrak{g} } (U\mathfrak{g} , M) \ar[r]  & \Hom_\mathfrak{Ug} (\mathfrak{J} , M) \ar[r]  & \operatorname{Ext}_{U\mathfrak{g}} ^1(R,M)\ar[r]  & 0,
+\end{tikzcd}\]
+where we of course use $\operatorname{Ext}^0_{U\mathfrak{g} } \cong \Hom_{U\mathfrak{g} } $. Note that $\Hom_{U\mathfrak{g} } \cong \Hom_\mathfrak{g} $, and thus
+\[
+	\Hom_{U\mathfrak{g} } (R, M) \cong \Hom_\mathfrak{g} (R, M) \cong M^\mathfrak{g} ,
+\]
+where the final isomorphism was seen earlier. We also already saw $\Hom_{U\mathfrak{g} } (U\mathfrak{g} , -) \cong 1$, so $\Hom_{U\mathfrak{g} } (U\mathfrak{g} , M) \cong M$. Finally, $\operatorname{Ext} ^1_{U\mathfrak{g} } (R,M)\cong H^1_{\mathrm{Lie} } (\mathfrak{g} ,M)$ yields the exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & M^\mathfrak{g} \ar[r]  & M\ar[r]  & \Hom_\mathfrak{g} (\mathfrak{J} , M) \ar[r]  & H^1_{\mathrm{Lie} } (\mathfrak{g} ,M)\ar[r]  & 0.
+\end{tikzcd}\]
+To describe $H^1$, we study $\Hom_\mathfrak{g} (\mathfrak{J} , M) $.
+
+\begin{definition}\label{7.4.8}
+	Let $M$ be a $\mathfrak{g} $-module. A \emph{derivation} from $\mathfrak{g} $ into $M$ is a $R$-linear map $D : \mathfrak{g}  \to M$ such that the Leibniz rule holds
+	\[
+		D[x,y]=x(Dy)-y(Dx)
+	.\]
+	The set of all derivations is denoted $\operatorname{Der} (\mathfrak{g} ,M)$; it is an $R$-submodule of $\Hom_R(\mathfrak{g} , M) $. Note that if $M$ is a trivial $\mathfrak{g} $-module, then $\operatorname{Der} (\mathfrak{g} ,M)\cong \Hom_R(\mathfrak{g} ^{ab} , M) $. This follows since if $M$ is trivial, then $D[x,y]=xDy-yDx=0$, so $D$ factors through $\mathfrak{g} ^{ab} $. The converse direction of the correspondence is immediate.
+\end{definition}
+
+\begin{example}\label{7.4.9}
+	If $m\in M$, deefine $D_m(x)=xm$. This is a derivation:
+	\[
+		D_m[x,y]=[x,y]m=x(ym)-y(xm)=xD_my-yD_mx
+	.\]
+	These derivations are called the \emph{inner derivations} of $\mathfrak{g} $ into $M$, and they form a $R$-submodule $\operatorname{Der}_{\mathrm{Inn} } (\mathfrak{g} ,M)$ of $\operatorname{Der} (\mathfrak{g},M)$.
+\end{example}
+
+\begin{example}\label{7.4.10}
+	Let $\varphi : \mathfrak{J}  \to M$ be a $\mathfrak{g} $-linear map. Then the map $D_\varphi : \mathfrak{g}  \to M$ defined by $D_\varphi (x)=\varphi (i(x))$ is also a derivation; here of course $i : \mathfrak{g} \hookrightarrow U\mathfrak{g} $ factors through $\mathfrak{J} $. We write $i(x)=x$ without loss of generality. This too is a derivation: since the bracket in $U\mathfrak{g} $ is the commutator and $\varphi $ is $\mathfrak{g} $-linear,
+	\[
+		D_\varphi [x,y]=\varphi[x,y]=\varphi (xy-yx)=x\varphi (y)-y\varphi (x)=xD_\varphi y-yD_\varphi x
+	.\]
+	We will be able to show in this section that \emph{all} derivations are of this form.
+\end{example}
+\begin{lemma}\label{7.4.11}
+	With notation as in \cref{7.4.10}, the map $\varphi \mapsto D_\varphi $ is a natural isomorphism of $R$-modules:
+	\[
+		\Hom_\mathfrak{g} (\mathfrak{J} , M) \cong \operatorname{Der} (\mathfrak{g},M)
+	.\]
+\end{lemma}
+\begin{proof}
+	Naturality is immediate. For the proof of isomorphism, we use the  fact that the product map $U\mathfrak{g} \otimes _R\mathfrak{g} \to (U\mathfrak{g} )\mathfrak{g} $ is epi, as was established in the proof of \cref{7.3.3}. Write this map as $g$. Since $[x,y]$ becomes $xy-yx$ in $U\mathfrak{g} $, we have that
+	\[
+		g(u\otimes [x,y]) = u[x,y] = uxy-uyx
+	.\]
+	Thus we have
+	\[
+		\Ker g\cong \left\langle u\otimes [x,y]-ux\otimes y + uy\otimes x \mid u\in U\mathfrak{g} ;x,y\in \mathfrak{g}  \right\rangle 
+	.\]
+	We write $ux\otimes y$ instead of $u\otimes xy$ since $xy$ is not defined in $\mathfrak{g} $, but under $f$ we have $f(ux\otimes y)=uxy$, so it is immaterial.
+
+	Let $D$ be a derivation. Define the map $f : U\mathfrak{g} \otimes _R\mathfrak{g}  \to M$ by $f(u\otimes x)=u(Dx)$. Since $D$ is a derivation,
+	\[
+		f(u\otimes [x,y]-ux\otimes y + uy\otimes x) = uD[x,y]-uxDy + uyDx=0
+	.\]
+	Thus $f$ factors through $U\mathfrak{g} / \Ker g \cong \mathfrak{J} $, inducing a map $\varphi : \mathfrak{J}  \to M$. We claim this is a map of $\mathfrak{g} $-modules.
 \end{proof}
 

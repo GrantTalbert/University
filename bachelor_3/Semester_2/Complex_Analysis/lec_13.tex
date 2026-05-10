@@ -1,0 +1,100 @@
+\lecture{13}{Tue 14 Apr 2026 09:31}{Winding number}
+
+Let $f : U\subseteq \mathbb{R} ^2 \to \mathbb{R} ^2$ be $C^1$. Then recall that $f$ has a local $C^1$ inverse if and only if $\mathrm{D} f$ is invertible. Now if $f$ is holomorphic, then $\det \mathrm{D} f = a^2 + b^2$. Here $a = \partial _xu = \partial _yv$ and $b = \partial _yu = -\partial _xv$. This obviously happens if and only if $a+ib \neq 0$. Thus all nonzero holomorphic functions have local inverses. Moreover, this local inverse is holomorphic.
+
+\begin{definition}\label{dfn:3.0.12}
+	Given a piecewise $C^1$ closed curve $\gamma : I \to \mathbb{C} $, and given $z\in\mathbb{C} \setminus \gamma (I)$, define the \emph{winding number} by
+	\[
+		W_{\gamma } (z)=\frac{1}{2\pi i} \int_{\gamma } \frac{1}{\zeta -z} \dd \zeta 
+	.\]
+\end{definition}
+\begin{remark}\label{rmk:3.0.13}
+	The curve $\gamma $ defines a homotopy class in $ \pi _1(\mathbb{C} \setminus \left\{ z \right\} )$. The map $[\gamma ]\mapsto W_\gamma (z)$ is an isomorphism $\pi _1(\mathbb{C} \setminus \left\{ z \right\} )$. Of course, we know that such an isomorphism exists since $\mathbb{C} \setminus \left\{ z \right\} $ has the homotopy type of $S^1$.
+\end{remark}
+
+Of course \cref{rmk:3.0.13} relies on
+\begin{proposition}\label{prp:3.0.14}
+	With notation as in \cref{dfn:3.0.12}, $W_\gamma (z)\in\mathbb{Z} $.
+\end{proposition}
+\begin{proof}
+	The book's proof is quite computational, so we give a more conceptual proof. Recall that $e^z$ is a local biholomorphism. Recall that
+	\[
+		\frac{\mathrm{d}}{\mathrm{d}\zeta } \ln \zeta =\frac{1}{\zeta } 
+	.\]
+	Thus
+	\[
+		\frac{\mathrm{d}}{\mathrm{d}\zeta } \ln (\zeta -z)=\frac{1}{\zeta -z} 
+	.\]
+	Choose a primitive $F$ of $\frac{1}{\zeta -z} $ along $\gamma $. Thus
+	\[
+		\int_{\gamma } \frac{\dd \zeta }{\zeta -z} =F(\gamma (1)) - F(\gamma (0))
+	.\]
+	Recall that a primitive is defined as a collection $\left\{ F_j \right\}_{j\geq 0} $ of maps defined on some open subset $F_j : U_j \to \mathbb{C} $ with $\gamma (I) \cap U_j \neq \varnothing $, and such that the $U_j$'s cover $\gamma (I)$. We generally order them in the obvious way.
+
+	Note that we can take $F_1(\zeta )=\ln (\zeta -z)$, such that $E^{F_1(\zeta )} =\zeta -z$. This relation must thus hold in the overlap $U_1 \cap U_2$, and the principle of analytic continuation implies $e^{F_2(\zeta )} =\zeta -z$. Induction proves this for all $n$. Thus
+
+	\[
+		F(\gamma (1)) - F(\gamma (0)) = \ln (\zeta -z) - \ln (\zeta -z)
+	.\]
+	However, these logs can be defined on different branches, so this need not be zero. However, they are equal when taking the exponential, meaning they differ by an element of the kernel $\Ker \exp \cong \mathbb{Z} $. Thus this must be an element of $\mathbb{Z} $.
+\end{proof}
+
+\begin{theorem}[Cauchy Integral Formula, General Case]\label{thm:3.0.15}
+	Let $f : U \to \mathbb{C} $ holomorphic and $\gamma : I \to U$ is a piecewise $C^1$ closed, null-homotopic curve. Let $z\in U\setminus \gamma (I)$. Then
+	\[
+		W_\gamma (z)f(z) = \frac{1}{2\pi i} \int_{\gamma } \frac{f(\zeta )}{z-\zeta } \dd \zeta 
+	.\]
+\end{theorem}
+\begin{theorem}[Residue]\label{thm:3.0.16}
+	Let $f : U \to \mathbb{C} $ be meromorphic with finitely many poles $\left\{ z_i \right\} _{i\in[n]}\subseteq U$. Let $\gamma : U \to \mathbb{C} $ be a piecewise $C^1$ closed curve, which is null-homotopic on $U$. Assume that $\left\{ z_i \right\}_{i\in[n]} \cap \gamma (I) =\varnothing $. Then
+	\[
+		\int_{\gamma } f = 2\pi i\sum_{0\leq i\leq n} W_\gamma (z_i) \operatorname{Res}_{z_i} f
+	.\]
+\end{theorem}
+
+\begin{example}
+	Show
+	\[
+		\int_{-\infty }^{\infty } \frac{\cos x}{x^2+1}  \,\mathrm{d} x=\frac{\pi }{e} 
+	.\]
+\end{example}
+
+
+Let $f(z) = \frac{e^{iz} }{z^2+1} $ and consider the contouor $\gamma _R$ which traverses the line segment $[-R,R]\subseteq \mathbb{R} $, and then traverses the semicircle of radius $R>1$ counterclockwise from $R$ to $-R$. The residues of $f$ are $\pm i$, so for $R>1$, there is a residue $i$ inside the contour. By the Residue theorem,
+\[
+	\int_{\gamma_R} f = 2\pi i\cdot  \mathrm{res}_{i} f
+.\]
+Now we compute the residue. We factor
+\[
+	f(z) = \frac{\exp (iz)}{(z+i)(z-i)} 
+.\]
+The residue is thus
+\[
+	\mathrm{res} _if = \lim_{z\to i} (z-i)f(z) = \lim_{z\to i} \frac{\exp (iz)}{z+i} =\frac{\exp (-1)}{2i} =\frac{1}{2ei} 
+.\]
+Thus
+\[
+	\int_{\gamma _R} f = \frac{2\pi i}{2ei} =\frac{\pi }{e} 
+.\]
+The integral is independent of $R$, and in particular we can take $R\to \infty $. Write $C_R$ for the semicircle component of $\gamma $. We conclude by showing that $\int_{C_R} f\to 0$ in the limit as $R\to \infty $ (because $\sin x$ is odd so that part vanishes apparently). We compute
+\[
+	\lim _{R\to \infty } \int_{C_R} \frac{e^{iz} }{z^2+1} \dd z
+.\]
+This limit exists because it's sufficiently bounded for all $R>1$. Well, if $z$ is in the upper half plane $\Im z \geq 0$, then $\left| e^{iz}  \right| <1$. Thus the top part of the integral will vanish in the limit to the boundary of the upper half plane, so we estimate the denominator:
+\[
+	\left| z^2+1 \right| \geq \left| z^2 \right| -1=R^2 - 1 \geq \frac{R^2}{2} ,\qquad R \geq \sqrt{2} 
+.\]
+Note that $\left| \frac{R^2}{2} \geq 1 \right| $. Thus the denominator does not vanish but the numerator does, meaning that the integrand can be taken to 0 in the limit $R\to \infty $. One can rigorize this more but I do not care.
+
+\begin{example}
+	Calculate
+	\[
+		\int_{0}^{2\pi } \frac{\dd \theta }{2+\sin \theta }
+	.\]
+\end{example}
+
+Let $U$ be connected and $M(U)$ the field of meromorphic functions on $U$. The \emph{logarithmic derivative} $L : M(U)^\times \to M(U)$ is the map $L(f) = f'/f$. This is a group homomorphism:
+\[
+	L(fg) = \frac{f'g+g'f}{fg} =\frac{f'}{f} +\frac{g'}{g} =L(f)+L(g)
+.\]
+

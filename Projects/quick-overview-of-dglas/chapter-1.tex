@@ -1,0 +1,583 @@
+\chapter{Graded structures}\label{ch:1}
+
+
+
+The definitions of graded structures are often confusing. We show how they arise as natural generalizations of more well-known structures by passing to the functor category $\Fun(\mathbb{Z} ,\Mod _R)$ and considering algebras over relevant operads.
+
+\section{Graded $R$-modules}\label{sec:1.1}
+
+Let $R$ be a commutative ring and $k$ a field.
+
+\begin{definition}\label{1.1.1}
+	The category $\mathcal{G} \Mod_R$ of \emph{graded $R$-modules} is the functor category $\Fun(\mathbb{Z} ,\Mod _R)$, where $\mathbb{Z} $ is viewed as a discrete category.
+\end{definition}
+
+\begin{remark}\label{1.1.2}
+	More explicitly, a graded $R$-module is a collection $\left\{ M^i \right\} _{i\in\mathbb{Z} } $ of $R$-modules, where we write $M^i$ for the functor $M$ evaluated at $i$. A morphism $f : \left\{ M^i \right\} _{i\in\mathbb{Z} }  \to \left\{ N^i \right\} _{i\in\mathbb{Z} } $ of graded $R$-modules is a collection $f=\left\{ f^i \right\} _{i\in\mathbb{Z} } $ of morphisms $f^i : M^i \to N^i$ of $R$-modules. Note that all universals in $\Mod _R$ promote to universals in $\mathcal{G} \Mod _R$, and are computed pointwise. For example, $\left\{ M^i \right\} _{i\in\mathbb{Z} } \oplus \left\{ N^i \right\} _{i\in\mathbb{Z} } \cong \left\{ M^i\oplus N^i \right\}_{i\in\mathbb{Z} } $. Since $\Mod _R$ is abelian and $\mathbb{Z} $ is small, we obtain for free that $\mathcal{G} \Mod _R$ is an abelian category.
+\end{remark}
+
+\begin{terminology}\label{1.1.3}
+	Given a graded $R$-module $M=\left\{ M^i \right\} _{i\in\mathbb{Z} } $, we call $M^i$ the $i$th degree of $M$. Given a graded $R$-module $M$, we write $M^i$ for the $i$th degree of $M$. If $x\in M^i$, we say $x$ is a \emph{homogeneous element} of degree $i$, or simply a \emph{homogeneous element}. We will sometimes write $x\in M$ to denote that $x$ is a homogeneous element of arbitrary or unknown degree. If $x\in M^i$, we say the \emph{degree} of $x$ is $i$, and write $\left| x \right| =i$ to denote the degree of $x$. If $R=k$ is a field, we call graded $k$-modules \emph{graded $k$-vector spaces}. If $M$ is a graded $R$-module and there exists $i\in\mathbb{Z} $ such that $M^j \cong 0$ for all $i\neq j$, then we say $M$ is \emph{concentrated in degree $i$}.
+\end{terminology}
+
+\begin{warning}\label{1.1.4}
+	Since $\Mod_R$ has tensor product, the functor category $\mathcal{G} \Mod _R$ inherits this tensor product. Thus one might expect that given graded $R$-modules $M,N$, we define the tensor product $M\otimes N$ pointwise, meaning $(M\otimes N)^k=M^k\otimes N^k$. Although this indeed yields a symmetric monoidal structure for $\Mod _R$, this is not the correct tensor product to use. We explore how the correct tensor product arises in \cref{1.1.5}, \cref{1.1.6}, and \cref{1.1.7}.
+\end{warning}
+
+\begin{discussion}\label{1.1.5}
+	Since graded objects are algebraic structures, it is natural to consider the algebraic structure of $\mathbb{Z} $ when defining graded $R$-modules. In particular, we are interested in the group structure of $\mathbb{Z} $, since a graded $R$-module should be seen as a generalization of an $R$-module, which inherents the structure of an abelian group. Luckily, all groups are in particular monoids, meaning that the discrete category $\mathbb{Z} $ inherits a strict symmetric monoidal structure by taking the monoidal product to be usual addition. We can now use the \emph{Day convolution}.
+\end{discussion}
+
+\begin{construction}\label{1.1.6}
+	The \emph{Day convoltion} takes two symmetric monoidal categories $(\mathcal{C},\otimes _\mathcal{C}) ,(\mathcal{D} ,\otimes _\mathcal{D} )$ and provides a symmmetric monoidal structure on $\Fun(\mathcal{C} ,\mathcal{D} )$. This requires that the tensor product in $\mathcal{D} $ preserves colimits in both arguments, which follows in $\Mod _R$ since it is closed symmetric monoidal.
+
+	The Day convolution is canonical in the sense that it yields the unique monoidal structure on $\Fun(\mathcal{C} ,\mathcal{D} )$ such that Yoneda's embedding $y : \mathcal{C} \to \Fun(\mathcal{C}^{\mathrm{op}} ,\mathcal{D} )$ is monoidal. Explicitly, we want $\mathcal{C} (c_1,-)\otimes \mathcal{C} (c_2,-)\cong \mathcal{C}(c_1\otimes _\mathcal{C} c_2,-)$.
+
+	To derive the Day convolution, let $F,G : \mathcal{C}  \to \mathcal{D} $. It might be useful to start by considering the functor $F\boxtimes G : \mathcal{C} \times \mathcal{C}  \to \mathcal{D} $ given by $(F\boxtimes G)(c_1,c_2)=F(c_1)\otimes _\mathcal{D} F(c_2)$. This is functorial since it asises as the composite $\otimes _\mathcal{D} \circ (F\times G)$. We want to turn this into a functor $\mathcal{C} \to \mathcal{D} $ in a natural way. To do this, we can take the left Kan extension
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} \times \mathcal{C} \ar[" F\boxtimes G "{name=owo}, rr] \ar[" \otimes_\mathcal{C}   "', dr]  &  & \mathcal{D}  \\
+	 & \mathcal{C} \ar[" \Lan_{\otimes _\mathcal{C} } F\boxtimes G "', dashed, ur]  & 
+	 \arrow[from=owo, to=2-2, Rightarrow, shorten=7pt]
+	\end{tikzcd}\]
+	This is clearly a fairly natural way to construct such a structure, since it is the universal way to construct a functor $\mathcal{C} \to \mathcal{D} $ from $F,G$ which maps $c_1\otimes_\mathcal{C} c_2 \mapsto F(c_1)\otimes _\mathcal{D} F(c_2)$. Thus we define $F\otimes D \coloneqq \Lan_{\otimes _\mathcal{C} } F\boxtimes G$.
+
+	Now we assume that everything is sufficiently well-behaved such that the Kan extensions exist. We can compute the Kan extension by the coend (\cite{ml})
+	\[
+		\Lan_{\otimes _\mathcal{C} } (F\boxtimes G)(c) \cong \int^{(c_1,c_2)\in \mathcal{C}\times \mathcal{C}  } \mathcal{C} (c_1\otimes_\mathcal{C}  c_2,c)\cdot (F\boxtimes G)(c_1, c_2)
+	\]
+	\[
+		\cong \int^{(c_1,c_2)\in \mathcal{C} \times \mathcal{C} } \mathcal{C} (c_1\otimes_\mathcal{C}  c_2,c)\cdot (F(c_1)\otimes_\mathcal{D}  F(c_2))
+	,\]
+	where $\cdot $ denotes the copower.
+
+	This defintion of a tensor product indeed makes $\Fun(\mathcal{C} ,\mathcal{D} )$ into a symmetric monoidal category. If $1_\mathcal{C} $ is the unit for $\otimes _\mathcal{C} $, then $\mathcal{C} (1_\mathcal{C} ,-)$ is the unit for Day's tensor product.
+\end{construction}
+
+\begin{construction}\label{1.1.7}
+	We now apply \cref{1.1.5,1.1.6} to construct a tensor product $\otimes $ for $\mathcal{G} \Mod _R$. Since $\mathbb{Z} $ is discrete, the computation of the coend is simplified dramatically by $\mathbb{Z} (i,j)$ being empty when $i\neq j$ and the singleton when $i=j$. Hence for $M,N$ graded $R$-modules and $\delta _{i}^j $ the Kronecker delta, we have
+	\begin{align*}
+		(M\otimes N)^k &\coloneqq \int^{(i,j)\in \mathbb{Z} \times \mathbb{Z} } \mathbb{Z} (i+j,k)\cdot \left( M^i \otimes_R M^j \right) \\
+			       &=\int^{(i,j)\in\mathbb{Z} \times \mathbb{Z} } \delta_{i+j}^k \cdot \left( M^i\otimes _RN^j \right).
+	\end{align*}
+	For convenience of notation, we write $F : (\mathbb{Z} \times \mathbb{Z} )^{\mathrm{op}} \times (\mathbb{Z} \times \mathbb{Z} ) \to \mathcal{G} \Mod _R$ for the functor
+	\[
+		((i,j),(k,\ell ))\mapsto \mathbb{Z} (i+j,-)\cdot \left( M^k\otimes _R M^\ell  \right) 
+	\]
+	such that
+	\[
+		M\otimes N \coloneqq \int^{\mathbb{Z} \times \mathbb{Z} } F
+	.\]
+	We can then compute the coend as the coequalizer of the diagram
+	\[\begin{tikzcd}[column sep=2.5em]
+	{\displaystyle{\coprod_{(f,g) : (i,j)\to (k,\ell )}^{(f,g)\in\Mor(\mathbb{Z}\times \mathbb{Z} )}F(i,j,k,\ell) }} \ar[shift left, r] \ar[shift right, r] & {\displaystyle{\coprod_{(i,j)\in\mathbb{Z}\times \mathbb{Z} }F(i,j,i,j)}}
+\end{tikzcd}\]
+	where the arrows act by the action of $F$ on $(f,1_{(k,\ell )} )$ and $(1_{(i,j)} ,g)$. Since these morphisms only exist when $f,g$ are the identities, and since $F$ must map an identity to an identity, we see that these actions are trivial here, so both arrows are the identity. Their coequalizer is thus their codomain
+	\[
+		\coprod_{i,j\in\mathbb{Z} } F(i,j,i,j)
+	.\]
+	Since the coproduct in $\Mod _R$ is the direct sum, and by \cref{1.1.2}, we obtain that this is
+	\[
+		M\otimes N \cong \bigoplus_{i,j\in\mathbb{Z} } \delta _{i+j}^k \left( M^i\otimes _RM^j \right) 
+	.\]
+	We now can compute the $k$th degree of $M\otimes N$:
+	\[
+		(M\otimes N)^k \cong \bigoplus_{i,j\in\mathbb{Z} } \delta _{i+j} ^k \left( M^i\otimes_RM^j \right) \cong \bigoplus_{i,j\in\mathbb{Z}}^{i+j=k}M^i\otimes _RM^j
+	.\]
+\end{construction}
+\begin{definition}\label{1.1.8}
+	Let $M,N$ be graded $R$-modules. Then the \emph{graded tensor product} $M\otimes N$ is defined by
+	\[
+		(M\otimes N)^k \coloneqq \bigoplus_{i,j\in\mathbb{Z} }^{i+j=k} M^i\otimes _RM^j
+	.\]
+\end{definition}
+\begin{proposition}\label{1.1.9}
+	The graded tensor product promotes $\mathcal{G} \Mod _R$ to a symmetric monoidal category such that the unit for the tensor is $R$ concentrated in degree 0.
+\end{proposition}
+
+\begin{remark}\label{1.1.10}
+	Let $M$ be an $R$-module. Then we can view $M$ as a graded $R$-module by viewing it as the graded $R$-module concentrated in degree $0$ with $M^0=M$. This yields a canonical embedding $i : \Mod _R \to \mathcal{G} \Mod _R$ which is easily seen to be fully faithful.
+\end{remark}
+
+\begin{remark}\label{1.1.11}
+	The category $\mathcal{G} \Mod _R$ is closed symmetric monoidal. To construct the internal hom, we look for a left adjoint $-\otimes M \dashv \underline{\mathcal{G} \Mod }_R (M,-)$. This must satisfy the universal property that for any graded $R$-modules $N,P$ and any diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	N\otimes M \ar[" f ", r]  & P \\
+	\underline{\mathcal{G} \Mod}_R (M,N)\ar[u] \ar[dashed, ur]  & 
+	\end{tikzcd}\]
+	there is a unique dashed arrow as indicated, rendering the diagram commutative. To show how this arises, continuity of representable functors and the usual tensor-hom adjunction $-\otimes _RM \dashv \Hom_R(M, -) $ yields
+	\begin{align*}
+		\mathcal{G} \Mod _R(N\otimes M,P) &\cong \prod_{i,j\in\mathbb{Z} } \Hom_R(N^j\otimes _RM^i, P^{i+j} ) \cong\\
+						  &\prod_{i,j\in\mathbb{Z} } \Hom_R(M^i, \Hom_R(N^j, P^{i+j} ) ) \\
+						  &\cong \prod_{i\in\mathbb{Z} } \prod_{j\in\mathbb{Z} } \Hom_R(M^i, \Hom_R(N^j, P^{i+j} ) ) \\
+						  &\cong \prod_{i\in\mathbb{Z} } \Hom_R(M^i, \prod_{j\in\mathbb{Z} } \Hom_R(N^j, P^{i+j} ) )
+	.\end{align*}
+	An element of this product is a tuple $\left\{ f^i \right\}_{i\in\mathbb{Z} } $ such that $f^i : M^i \to \prod_{j} \Hom_R(N^j, P^{i+j} ) $. Then simply define
+	\[
+		\underline{\mathcal{G} \Mod}_R(N,P)_j \coloneqq \prod_{j\in\mathbb{Z} } \Hom_R(N^j, P^{i+j} ) 
+	.\]
+	We thus have our adjunction $-\otimes M \dashv \underline{\mathcal{G} \Mod}_R$.
+\end{remark}
+
+\begin{notation}\label{1.1.12}
+	Throughout \cref{sec:1.1}, we have denoted the tensor product in $\mathcal{G} \Mod _R$ by $\otimes $ and the internal hom by $\underline{\mathcal{G} \Mod}_R$. These notations were very convenient in the short term for making distinctions between operations in $\mathcal{G} \Mod _R$ and $\Mod _R$, but will be inconvenient in the long term. Let $M,N$ be graded $R$-modules. We will write $M\otimes _RN$ for their graded tensor product and $\underline{\Hom}_R(M,N)$ for their internal hom. We reconcile this notation with the usual use of these notations in $\Mod_R$ as follows. Since there is a canonical embedding $\Mod _R\hookrightarrow \mathcal{G} \Mod _R$ by viewing $R$-modules as concentrated in degree 0, we can consider the graded tensors and internal homs of normal $R$-modules $M,N$. By \cref{1.1.8},
+	\[
+		(M\otimes _RN)^k \cong \bigoplus_{i,j\in\mathbb{Z} }^{i+j=k} M^i\otimes _RN^j
+	.\]
+	Since $M^i \otimes_RN^j $ is nonzero if and only if $i=j=0$, in which case it is the usual tensor product $M\otimes _RN$, we obtain that the graded tensor product $M\otimes _RN$ is simply the usual tensor product of $R$-modules, concentrated in degree 0. Hence the inclusion is monoidal. Similarly, since $\Hom_R(M^i, N^j) $ is a singleton whenever $i$ or $j$ is nonzero, the internal hom
+	\[
+		\underline{\Hom}_R(M,N)_i \cong \prod_{j\in\mathbb{Z} } \Hom_R(M^j, N^{i+j} ) \cong \Hom_R(M^{-i} , N^i) 	
+	\]
+	is nonzero only in degree 0, where it is simply $\Hom_R(M, N) $. Hence the inclusion also preserves the internal hom.
+\end{notation}
+
+\begin{warning}\label{1.1.13}
+	One would expect that we would use the symmetry isomorphism $M\otimes _RN \cong N\otimes _RM$ given by $m\otimes n\mapsto n\otimes m$. We \emph{will not use this}. Instead, we will use \emph{Koszul braiding}. This will be important to define various differentiable structures, which is of course our goal, but will have strange effects on the definition of ``commutivity'' later on. The symmetry isomorphism is defined by $m\otimes n\mapsto (-1)^{\left| m \right| \left| n \right| } n\otimes m$, where $-1\in R$. We demonstrate one such implication immediately.
+\end{warning}
+
+\begin{discussion}\label{1.1.14}
+	We consider the evaluation morphism. Given $M,N$ graded $R$-modules, consider the map $\varepsilon : \underline{\Hom}_R(M,N)\otimes_R M \to N$ defined as follows. By \cref{1.1.8}, a homogeneous element of order $k$ is a homogeneous element $f\in \underline{\Hom}_R(M,N)^i$ and $m\in M^j$ with $i+j=k$. By \cref{1.1.11}, the element $f$ has a component $f^j : M^j \to N^{i+j} $, so $f^j(m)$ is well-defined and is homogeneous of degree $k$. We thus define $\varepsilon^k(f\otimes m)=f^{\left| m \right| } (m)$.
+
+	We explore some implications of this. Let $X_1,X_2,Y_1,Y_2$ be graded $R$-modules. The tensor of two morphisms $X_1\to X_2$ and $Y_1\to Y_2$ should be a degree 0 element of
+	\[
+		\underline{\Hom}_R (X_1,X_2)\otimes_R \underline{\Hom} _R(Y_1,Y_2)
+	.\]
+	More generally, we can explore the evaluation map for all homogeneous elements of the internal hom. Let $f\in \underline{\Hom} _R(X_1,X_2)$, $g\in \underline{\Hom} _R(Y_1,Y_2)$, $x\in X_1$, and $y\in Y_1$ be homogeneous elements. Define $(f\otimes g)(x\otimes y)$ as the image under the following composite, where $\sigma $ denotes the symmetry isomorphism:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\underline{\Hom} _R(X_1,X_2)\otimes _R \underline{\Hom}_R(Y_1,Y_2)\otimes _RX_1\otimes _RY_1\ar[" 1 \widetilde{\otimes } \sigma \otimes 1 ", d]  \\
+	\underline{\Hom}_R(X_1,X_2)\otimes _RX_1\otimes _R\underline{\Hom} _R(Y_1,Y_2)\otimes _RY_1\ar[" \varepsilon \otimes  \varepsilon  ", d]   \\
+	X_2\otimes _RY_2.
+	\end{tikzcd}\]
+	By \cref{1.1.13}, we see that
+	\[
+		(1 \widetilde{\otimes } \sigma \widetilde{\otimes } 1)(f\otimes g\otimes x\otimes y) = f \otimes (-1)^{\left| g \right| \left| x \right| } x \otimes g \otimes y
+	.\]
+	Then acting the evaluation map on this yields $(-1)^{\left| x \right| \left| g \right| } f(x)\otimes g(y)\in X_2 \otimes _RY_2$. Note that this is a degree $\left| f \right| +\left| g \right| +\left| x \right| +\left| y \right| $ homogeneous element, the correct degree.
+\end{discussion}
+
+
+
+
+\section{Operads}\label{sec:1.2}
+
+Now that we have a notion of a graded $R$-module, a natural next step is to define a graded $R$-algebra. The usual notion of an associative $R$-algebra is an $R$-module $A$ which is itself a ring, meaning it has a bilinear multiplication map $A\otimes _\mathbb{Z} A \to A$ which is compatible with the $R$-module structure in the sense of associativity. More precisely, an associative $R$-algebra is a monoid object in $\Mod _R$. It is useful to at this point view algebras from the perspective of operads.
+
+\begin{definition}\label{1.2.1}
+	Write $\left\langle n \right\rangle =\left\{ 1, \ldots ,n \right\} $. A \emph{colored operad} $\mathcal{O} $ consists of
+	\begin{itemize}
+		\item A collection $\Obj(\mathcal{O} ) $ of \emph{objects} or \emph{colors} (we write $x\in \mathcal{O} $ to say $x\in \Obj(\mathcal{O} ) $);
+		\item For each finite collection $\left\{ x_i \right\} _{1\leq i\leq n} \subseteq \mathcal{O} $ and each $y\in \mathcal{O} $, a collection of \emph{$n$-multimorphisms}
+			\[
+				\Mul_\mathcal{O} (\left\{ x_i \right\}_{1\leq i\leq n} ,y) = \Mul_\mathcal{O} (x_1, \ldots ,x_n ; y)
+			.\]
+			If $f\in\Mul_\mathcal{O} (\left\{ x_i \right\}_{1\leq i\leq n}  ,y)$, we write $f : \left\{ x_i \right\} _{1\leq i\leq n}  \to y$. If $n=1$ such that $\left\{ x_i \right\}_{1\leq i\leq n} =\left\{ x \right\} $, then we write $f : x \to y$ and call $f$ a morphism. We allow $n=0$, in which case the collection $\left\{ x_i \right\} _{1\leq i\leq 0} $ is empty. Morphisms $\varnothing \to y$ are called 0-multimorphisms.
+		\item For each $x\in \mathcal{O} $, an \emph{identity morphism} $1_x : x \to x$;
+		\item For each function $f : \left\langle n \right\rangle  \to \left\langle m \right\rangle $ of finite sets, for every $\left\{ x_i \right\}_{1\leq i\leq n} \subseteq \mathcal{O} $, for every $\left\{ y_j \right\} _{1\leq j\leq m} \subseteq \mathcal{O} $, and every $z\in \mathcal{O} $, a composition map
+			\[
+				\left(\prod_{1\leq j\leq m} \Mul_\mathcal{O}(\left\{ x_i \right\}_{i\in f^{-1} (j)} ,y_j)\right)\times \Mul_\mathcal{O} (\left\{ y_j \right\} _{1\leq j\leq m} ,z)\to \Mul_\mathcal{O} (\left\{ x_i \right\} _{1\leq i\leq n} ,z)
+			.\]
+	\end{itemize}
+	This data has to satisfy a convoluted associativity law, and the identity morphisms are left- and right-units for composition in convoluded ways. We refer the reader to \cite{ha} definition 2.1.1.1.
+\end{definition}
+\begin{terminology}\label{1.2.2}
+	An \emph{operad} is a colored operad with one color. Given a colored operad $\mathcal{O} $, we may occasionally write $\Mul(\mathcal{O} )$ to denote the collection of all multimorphisms in $\mathcal{O} $. We will rarely use this notation beyond \cref{1.2.3}.
+\end{terminology}
+
+\begin{definition}\label{1.2.3}
+	Let $\mathcal{O} ,\mathcal{P} $ be colored operads. A \emph{functor} $F : \mathcal{O}  \to \mathcal{P} $ of colored operads is an object function $F : \Obj(\mathcal{O})  \to \Obj(\mathcal{P} ) $ and a multimorphism function $F : \Mul(\mathcal{O} ) \to \Mul(\mathcal{P} )$ which respects domain, codomain, composition, and identity in the expected ways. For example, if $f : \left\{ x_i \right\}_{1\leq i\leq n}  \to y$ in $\mathcal{O} $, then $F(f): \left\{ F(x_i) \right\}_{1\leq i\leq n}  \to F(y)$ in $\mathcal{P} $.
+
+	If $F,G : \mathcal{O}  \to \mathcal{P} $ are functors of colored operads, then a \emph{natural transformation} $\alpha : F \to G$ is a collection of morphisms $\alpha_{x } : F(x)\to G(x)$ for all $ x\in\mathcal{O} $ such that, for any $f : \left\{ x_i \right\}_{1\leq i\leq n}  \to y$ in $\mathcal{O} $, we have
+	\[
+		G(f)\circ (\alpha_{x_1} , \ldots , \alpha _{x_n} ) = \alpha_y \circ F(f)
+	.\]
+	If $n=0$, then we simply require $G(f)=\alpha _y \circ F(f)$.
+\end{definition}
+
+
+\begin{remark}\label{1.2.4}
+	Let $(\mathcal{C} ,\otimes )$ be a symmetric monoidal category. Then $\mathcal{C} $ can be regarded as a colored operad by taking, for any $\left\{ x_i \right\} _{1\leq i\leq n} \subseteq \mathcal{C} $ and $y\in \mathcal{C} $,
+	\[
+		\Mul_\mathcal{C} (\left\{ x_i \right\} _{1\leq i\leq n} ,y)\coloneqq \mathcal{C} \left(\bigotimes_{1\leq i\leq n} x_i,y\right)
+	.\]
+	Composition is defined as follows. Let $\alpha  : \left\langle n \right\rangle  \to \left\langle m \right\rangle $ be a function of finite sets, and let $\left\{ x_i \right\} _{1\leq i\leq n} ,\left\{ y_i \right\} _{1\leq i\leq m} ,z$ be objects in $\mathcal{C} $. Let $f : \left\{ y_j \right\}_{1\leq j\leq m}  \to z$ and $\left\{ g_i^j : \bigotimes_{i} x_i \to y_j \right\}_{1\leq j\leq m}^{i\in \alpha ^{-1} (j)}  $. Then we define the composite
+	\[
+		f \circ \left\{ g_{ij} \right\}_{i\in \alpha ^{-1} (j)} \coloneqq f\circ \bigotimes_{1\leq j\leq m}  g_{ij}
+	.\]
+	This makes sense since $g_{ij} : \bigotimes_i x_i \to y_j$, so the map $\alpha $ essentially sits all the $g_{ij} $s next to each other, maps all of the $x_i$s into some $y_j$, and then maps all of them to $z$ under $f$.
+
+	In particular, if $\mathcal{O} $ is a colored operad and $(\mathcal{C},\otimes ) $ is a symmetric monoidal category, we can discuss functors $F : \mathcal{O}  \to \mathcal{C} $.
+\end{remark}
+
+\begin{intuition}\label{1.2.5}
+	Colored operads are a generalization of the notion of a category in the same sense that multilinear maps generalize linear maps. Indeed, $\Mod _R$ forms a colored operad by taking $n$-multimorphisms to be $n$-multilinear maps. However, usually it is more useful to consider small colored operads with only one or two colors, and a small number of maps. The idea here is to encode the structure of an algebraic object in a symmetric monoidal category $(\mathcal{C} ,\otimes )$ as a functor $\mathcal{O} \to \mathcal{C} $ for some operad $\mathcal{O} $.
+\end{intuition}
+
+\begin{definition}\label{1.2.6}
+	Let $\mathcal{A} \mathrm{ss} $ be the colored operad with one color $*$, one 0-multimorphism $e:\varnothing \to *$, and one 2-multimorphism $\mu : \left\{ x_1,x_2 \right\}  \to *$ with $x_0=x_1=*$, and one $n$-multimorphism for all $n\geq 2$. Let $\mathcal{C}$ be a symmetric monoidal category. A \emph{associative algebra object in $\mathcal{C} $} is a functor $A:\mathcal{A} \mathrm{ss} \to \mathcal{C} $.
+\end{definition}
+
+\begin{discussion}\label{1.2.7}
+	Let $A : \mathcal{A} \mathrm{ss}  \to \mathcal{C} $ be an associative algebra object in a symmetric monoidal category $(\mathcal{C} ,\otimes ,1)$. Note that the empty tensor product is the unit $1$, so the image of the 0-multimorphism under $A$ is $A(e): 1 \to A(*)$. The image of the morphism $\mu $ is a map $A(\mu ): A(*)\otimes A(*) \to A(*)$. Suppose that $\mathcal{C} =\Mod _R$, and write $A(*)=A$, $A(e)=e$, and $A(\mu )=\mu $ for simplity. Then we get a map $e : R \to A$ and a map $\mu : A\otimes _RA \to A$. The datum of the map $e$ is a choice of an element $e_A\coloneqq e(e_R)\in A$ for $e_R\in R$ the identity element. We claim that the composition law implies that $\mu \circ (1_A \otimes e) = 1_A$, for $1_A : A \to A$ the identity morphism.
+
+	Note that $\mathcal{A} \mathrm{ss} $ has an identity morphism $1_* : * \to *$. Consider the function $f : \left\langle 1 \right\rangle  \to \left\langle 2 \right\rangle $ mapping $1\mapsto 2$. \Cref{1.2.1} yields a composition map
+	\[
+		\left( \Mul_{\mathcal{A} \mathrm{ss} } (\varnothing,*)\times \Mul_{\mathcal{A} \mathrm{ss} } (*,*) \right) \times \Mul_{\mathcal{A} \mathrm{ss} } (*,*)\to \Mul_{\mathcal{A} \mathrm{ss} } (* ,*)
+	.\]
+	In particular, this means that composition $\mu \circ (e,1_*)$ must be $1_*$. Now we consider the images under $A$. First note that $A(1_*)=1_A$ is the identity morphism, and composition must map to composition. By \cref{1.2.4}, the composition law says that $1_* \circ (e,1_*) = 1_*\circ (e\otimes 1_*)$, and thus we obtain $1_* \circ (e\otimes 1_*)=1_*$ by functoriality. The same argument yields $1_*\circ (1_*,e)=1_*$. Note that if we take $\mu $ to be multiplication and $e$ to be the identity map, this is precisely the definition of an associative $R$-algebra: $R$-bilinearity ensures that multiplication is compatible with the $R$-action, the argument we just did guarentees that the identity element is a unit, and the colored operad axioms guarantee associativity of multiplication; since there is only one $n$-multimorphism, so all possible composites of $\mu $ must yield the same $n$-ary multiplication operation. More generally, an associative algebra object in $\mathcal{C} $ is precisely a monoid object in $\mathcal{C} $.
+\end{discussion}
+
+\begin{definition}\label{1.2.8}
+	Let $\mathcal{O} $ be a colored operad and $\mathcal{C} $ a symmetric monoidal category. A functor $F : \mathcal{O}  \to \mathcal{C} $ is called an \emph{algebra for $\mathcal{O} $ over $\mathcal{C} $}. A morphism of algebras for $\mathcal{O} $ over $\mathcal{C} $ is a natural transformation. The category of algebras for $\mathcal{O} $ over $\mathcal{C} $ is denoted $\Alg_{\mathcal{O} } (\mathcal{C} )$.
+\end{definition}
+
+\begin{discussion}\label{1.2.9}
+	Let $A,B$ be associative algebra objects in $\Mod _R$. Denote the identity maps by $e_A : R \to A$ and $e_B : R \to B$. Denote multiplication by $\mu _A : A\otimes _RA \to A$ and $\mu _B : B\otimes _RB \to B$. A morphism $\varphi : A \to B$ consists of an $R$-linear map $\varphi : A \to B$ with some properties. First, we must have $\varphi \circ e_A = e_B$, meaning that $\varphi $ preserves identity. Then we must have $\varphi \circ \mu _A = \mu _B \circ (\varphi ,\varphi )$. By \cref{1.2.4}, the composite is equal to $\mu _B \circ (\varphi \otimes \varphi )$. This is precisely the definition of preserving multiplication. Thus there is an evident isomorphism $\Alg_{\mathcal{A} \mathrm{ss} } (\Mod _R)\cong \Alg_R$.
+\end{discussion}
+
+\section{Graded associative and commutative $R$-algebras}\label{sec:1.3}
+
+Operads will provide a useful perspective throughout our introduction. Our first application is immediate.
+
+\begin{definition}\label{1.3.1}
+	A \emph{graded associative $R$-algebra} is an algebra for the operad $\mathcal{A} \mathrm{ss} $ over $\mathcal{G} \Mod _R$. The category $\mathcal{G} \Alg_R$ of graded associative $R$-algebras is the category $\Alg_{\mathcal{A} \mathrm{ss} } (\mathcal{G} \Mod _R)$.
+\end{definition}
+
+\begin{discussion}\label{1.3.2}
+	Let $A$ be a graded associative $R$-algebra. By \cref{1.1.9}, the unit for tensor in $\mathcal{G} \Mod _R$ is $R$ concentrated in degree 0, so the unit is a map $e : R \to A$. The datum of such a map is a homogeneous element $e_A\in A^0$ of degree 0, with the definition $e(r)=re_A$. We will hereafter denote this element as $1$ or $e$. We now investigate the multiplication map. Note by \cref{1.2.7} that for all homogeneous elements $a\in A$, we obtain $a1=a$.
+
+	\Cref{1.2.7} yields a map $\mu : A\otimes _RA \to A$. In particular, we get maps $\mu ^k : (A\otimes _RA)^k \to A^k$ for all $k$. By \cref{1.1.8}, this is equivalently
+	\[
+		\mu ^k : \bigoplus_{i,j\in\mathbb{Z} } ^{i+j=k} A^i \otimes _RA^j \to A^k
+	.\]
+	For any homogeneous elements $x\in A^i$ and $y\in A^j$ with $i+j=k$, denote the product $\mu ^k(x\otimes y)$ by $xy$. Thus we obtain that $xy\in A^k$, meaning that multiplication can be described as an $R$-bilinear map sending pairs $(x,y)$ of homogeneous elements of degree $i,j$, respectively, to a homogeneous element $xy$ of degree $i+j$. There is a convenient way to express this condition. If $U\subseteq A^i$ and $V\subseteq A^j$, then we write
+	\[
+		UV=\left\{ xy\in A^{i+j} \mid x\in U,y\in V \right\} .
+	\]
+	Then $A^iA^j \subseteq A^{i+j} $. Note that this means $A^0A^0 \subseteq A^0$. In particular, $A^0$ is an associative $R$-algebra.
+\end{discussion}
+
+Before we can proceed, we need another notion of operad.
+
+\begin{definition}\label{1.3.3}
+	Let $\mathcal{O} $ be a colored operad. Note that permutations $\sigma : \left\langle n \right\rangle  \to \left\langle n \right\rangle $ induce composition maps, and hence $S_n$ has a canonical action on $n$-multimorphisms of $\mathcal{O} $. A \emph{symmetric colored operad} is a colored operad such that composition is equivariant under this action in the relevant sense. A functor of symmetric colored operads is a functor of colored operads that preserves the symmetric group action. Note that all symmetric colored operads and their symmetric functors are also colored operads and their functors in the sense of \cref{1.2.1} and \cref{1.2.3}. A natural transformation of functors of symmetric colored operads is then simply a natural transformation of functors of colored operads.
+\end{definition}
+
+\begin{example}\label{1.3.4}
+	Let $(\mathcal{C} ,\otimes )$ be a symmetric monoidal category with braiding (symmetry isomorphism) $\sigma $. Then $\mathcal{C} $ forms a symmetric colored operad by first forming a colored operad as in \cref{1.2.4}, and then simply noting that by precomposing by tensor powers of $\sigma $ and the identity morphism, one can obtain an $S_n$ action on multimorphisms of $\mathcal{C} $. For example, the bijection $\left\langle 2 \right\rangle \to \left\langle 2 \right\rangle $ given by $1\mapsto 2$ and $2\mapsto 1$ induces the map $\sigma ^*$. Let $f : x\otimes y \to z$ be a 2-multimorphism. Then $f\circ \sigma : y\otimes x \to z$ is a map such that the relevant composititon maps are equivariant under this action.
+\end{example}
+
+\begin{definition}\label{1.3.5}
+	The commutative algebra operad $\mathcal{C} \mathrm{om} $ is the symmetric algebra with one $n$-multimorphism for all $n$ and the trivial $S_n$-action. Let $\mathcal{C} $ be a symmetric monoidal category. A \emph{commutative algebra object in $\mathcal{C} $} is a functor of symmetric operads $\mathcal{C} \mathrm{om} \to \mathcal{C} $.
+\end{definition}
+
+\begin{warning}\label{1.3.6}
+	Since $\Mod _R$ is a symmetric colored operad with nontrivial symmetric structure, a functor of symmetric operads $\mathcal{C} \mathrm{om} \to \Mod _R$ is \emph{more restrictive} than simply a functor of operads $\mathcal{C} \mathrm{om} \to \Mod _R$, viewing $\mathcal{C} \mathrm{om} $ as a normal operad. Moreover, a symmetric monoidal category may have multiple symmetry isomorphisms. We will often specify the symmetry isomorphism we are considering.
+\end{warning}
+
+\begin{definition}\label{1.3.7}
+	A \emph{graded commutative $R$-algebra} $A$ is a commutative algebra object in $\mathcal{G} \Mod _R$ with respect to the Koszul braiding of \cref{1.1.13}.
+\end{definition}
+
+\begin{discussion}\label{1.3.8}
+	We now investigate \cref{1.3.7}. Let $C$ be a graded commutative $R$-algebra. Note that $\mathcal{C} \mathrm{om} $ is precisely the same as $\mathcal{A} \mathrm{ss} $ when viewed as a normal operad; although we specified the 0- and 2-multimorphisms of $\mathcal{A} \mathrm{ss} $, this was purely for pedagogical emphasis. However viewing the operad as symmetric as impacts on the structure of its algebras, as noted in \cref{1.3.6}. In particular, the multiplication map $\mu : C\otimes _RC \to C$ must preserve the $S_n$-action in some sense. We investigate what this means.
+
+	Write $m$ for the 2-multimorphism in $\mathcal{C} \mathrm{om} $, and $\alpha : \left\langle 2 \right\rangle \cong \left\langle 2 \right\rangle $ for the permutation $1\mapsto 2$ and $2\mapsto 1$. This induces a map $\alpha ^* : \Mul_{\mathcal{C} \mathrm{om} } ((x_1,x_2) ,y) \to \Mul_{\mathcal{C} \mathrm{om} } ((x_2,x_1),y)$. Since $S_n$ acts trivially on $\mathcal{C} \mathrm{om} $, we obtain that this action is trivial. This makes sense since there is only one such morphism. In $\mathcal{G} \Mod _R$, by \cref{1.3.4} we have that the induced map is precomposition by the Koszul braiding $\sigma ^*$. Since the functor $C : \mathcal{C} \mathrm{om}  \to \mathcal{G} \Mod _R$ must preserve this action, we obtain that $\alpha ^*(m) \mapsto \mu \circ \sigma $. However, $\alpha ^*(m)=m$ since the $S_n$-action is trivial, and $m\mapsto \mu $. Thus we must have $\mu \circ \sigma =\mu $.
+
+	We consider what this means. By the definition of $\sigma $ given in \cref{1.1.13}, given homogeneous elements $x,y\in C$, we have that
+	\[
+		xy = \mu (x\otimes y) = (\mu \circ \sigma )(x\otimes y) = \mu \left( (-1)^{\left| x \right| \left| y \right| } y\otimes x \right) =(-1)^{\left| x \right| \left| y \right| } yx
+	.\]
+	This gives us a notion of what we will informally refer to as \emph{graded symmetry}, which means
+	\[
+		xy=(-1)^{\left| x \right| \left| y \right| } yx
+	.\]
+	Note that when $x,y$ are homogeneous elements of degree 0, we obtain $xy=yx$. Combined with \cref{1.3.2} says that $C^0$ is a commutative $R$-algebra in the usual sense.
+\end{discussion}
+
+\begin{definition}\label{1.3.9}
+	Let $\mathcal{O} $ be a symmetric colored operad and $\mathcal{C} $ a symmetric monoidal category. A \emph{symmetric} algebra for $\mathcal{O} $ over $\mathcal{C} $ is a functor $F : \mathcal{O}  \to \mathcal{C} $, and the category of such algebras is denoted $\mathcal{C} \Alg_\mathcal{O} (\mathcal{C} )$.
+\end{definition}
+\begin{remark}\label{1.3.10}
+	Given a symmetric colored operad $\mathcal{O} $ and a symmetric monoidal category $\mathcal{C} $, there is an evident functor $\mathcal{C} \Alg_\mathcal{O} (\mathcal{C} )\to \Alg_\mathcal{O} (\mathcal{C} )$ by viewing $\mathcal{O} $ as a normal colored operad, and its algeras as normal functors of colored operads.
+\end{remark}
+
+
+\section{Graded rings and their modules}\label{sec:1.4}
+
+We provide one more generalization for everything considered in this section. Since a ring can be defined as a monoid in $(\Ab ,\otimes _\mathbb{Z} )$, it would make sense to define a \emph{graded} ring similarly.
+
+\begin{definition}\label{1.4.1}
+	A \emph{graded ring} is a graded associative $\mathbb{Z} $-algebra. A \emph{graded commutative ring} is a graded commutative $\mathbb{Z} $-algebra. The category of graded rings is denoted $\mathcal{G} \Ring $, and the category of graded commutative rings is denoted $\mathcal{G} \mathcal{C} \Ring $.
+\end{definition}
+
+\begin{discussion}\label{1.4.2}
+	As seen in \cref{1.3.2}, a graded ring $R$ is simply a collection of abelian groups $\left\{ R^i \right\} _{i\in\mathbb{Z} } $ such that $R^0$ has a unit element, and there is a $\mathbb{Z} $-bilinear multiplication operation mapping $R^iR^j \subseteq R^{i+j} $. As seen in \cref{1.3.8}, such a structure is said to be commutative when multiplication satisfies, for any homogeneous elements $x,y\in R$,
+	\[
+		xy=(-1)^{\left| x \right| \left| y \right| } yx
+	.\]
+	By \cref{1.3.8}, we see that $R^0$ is a ring in the usual sense.
+\end{discussion}
+
+\begin{definition}\label{1.4.3}
+	Let $\mathcal{O} $ be an operad with a single color $*$. Define the colored operad $\mathcal{O} _{\mathrm{mod} } $ as the 2-colored operad with colors $\mathfrak{a} ,\mathfrak{m} $ and multimorphisms defined as follows. Let $\left\{ x_i \right\}_{1\leq i\leq n} ,y$ be colors of $\mathcal{O} $.
+	\begin{itemize}
+		\item If $x_i=y=\mathfrak{a} $ for all $i$, then
+	\[
+		\Mul_{\mathcal{O} _{\mathrm{mod} } } (\left\{ x_i \right\} _{1\leq i\leq n} ,y)=\Mul_{\mathcal{O} } (\left\{ * \right\} ^n ,*)
+	.\]
+		\item If exactly one $x_i$ is $\mathfrak{m} $, the rest are $\mathfrak{a} $, and $y=\mathfrak{m} $, then 
+	\[
+		\Mul_{\mathcal{O} _{\mathrm{mod} } } (\left\{ x_i \right\} _{1\leq i\leq n} ,y)=\Mul_{\mathcal{O} } (\left\{ * \right\}^n ,*)
+	.\]
+		\item All other possible combinations have no $n$-multimorphisms.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}\label{1.4.4}
+	Let $\mathcal{O} $ be an operad with a single color, $\mathcal{C} $ a symmetric monoidal category, and $F : \mathcal{O} _{\mathrm{mod} }  \to \mathcal{C} $ an algebra for $\mathcal{O} _{\mathrm{mod} } $ over $\mathcal{C} $. Let $A=F(\mathfrak{a} )$. Then $F(\mathfrak{m} )$ is called an \emph{$\mathcal{O} $-module over $A$}, or simply an $A$-module object of $\mathcal{C} $. This definition has an evident symmetric version.
+\end{definition}
+
+\begin{example}\label{1.4.5}
+	Consider a (symmetric) module $F : \mathcal{C} \mathrm{om}_{\mathrm{mon} }  \to \Ab $. We first obtain a ring $F(\mathfrak{a})$, which we will denote $R$, and an abelian group $F(\mathfrak{m} )$, which we will denote $M$. The operadic structure yields maps $R\otimes _\mathbb{Z} M\to M$ and $M\otimes _\mathbb{Z} R\to M$, and the symmetric property requires that they be equal. This is precisely the structure of a (two-sided) $R$-module. We also see that if we drop the symmetry requirement and instead consider $F : \mathcal{A} \mathrm{ss}  \to \Ab $, we get an $(R,R)$-bimodule. This suggests more definitions.
+\end{example}
+
+\begin{definition}\label{1.4.6}
+	Let $\mathcal{O} $ be an operad with a single color. Define the suboperads $\mathcal{L} \mathcal{O}_{\mathrm{mod} },\mathcal{R} \mathcal{O} _{\mathrm{mod} } \subseteq \mathcal{O} _{\mathrm{mod} } $ as follows.
+	\begin{itemize}
+		\item If $x_i=y=\mathfrak{a} $ for all $i$, then
+	\[
+		\Mul_{\mathcal{L} \mathcal{O} _{\mathrm{mod} } } (\left\{ x_i \right\} _{1\leq i\leq n} ,y)=\Mul_{\mathcal{O} } (\left\{ * \right\} ^n ,*)=\Mul_{\mathcal{R} \mathcal{O} _{\mathrm{mod} } } (\left\{ x_i \right\} _{1\leq i\leq n} ,y)
+	.\]
+		\item If $x_n=\mathfrak{m} $, the other $x_i$'s are $\mathfrak{a} $, and $y=\mathfrak{m} $, then
+	\[
+		\Mul_{\mathcal{L} \mathcal{O} _{\mathrm{mod} } } (\left\{ x_i \right\} _{1\leq i\leq n} ,y)=\Mul_{\mathcal{O} } (\left\{ * \right\}^n ,*)
+	.\]
+		\item If $x_1=\mathfrak{m} $, the other $x_i$'s are $\mathfrak{a} $, and $y=\mathfrak{m} $, then
+	\[
+		\Mul_{\mathcal{R} \mathcal{O} _{\mathrm{mod} } } (\left\{ x_i \right\} _{1\leq i\leq n} ,y)=\Mul_{\mathcal{O} } (\left\{ * \right\}^n ,*)
+	.\]
+		\item All other possible combinations have no $n$-multimorphisms.
+	\end{itemize}
+	Let $F : \mathcal{L} \mathcal{O}_{\mathrm{mod}}   \to \mathcal{C} $ be an algebra. Write $A=F(\mathfrak{a} )$. Then $F(\mathfrak{m} )$ is called a \emph{left $\mathcal{O} $-module over $A$}, or simply an $A$-module object of $\mathcal{C} $. Similarly if $F : \mathcal{R} \mathcal{O} _{\mathrm{mod} }  \to \mathcal{C} $, then $F(\mathfrak{m} )$ is a right $A$-module object in $\mathcal{C} $.
+\end{definition}
+
+\begin{example}\label{1.4.7}
+	We can now immedaitely see that if $F : \mathcal{L} \mathcal{A}\mathrm{ss}_{\mathrm{mod}}  \to \Mod _R$, writing $M=F(\mathfrak{m} )$ and $R=F(\mathfrak{a} )$, then $M$ is a left $R$-module: for $n=2$, we obtain one multiplication map $R\otimes _\mathbb{Z} M\to M$. Since $R$ is a ring, this is precisely a left $R$-module. Similarly, if $F : \mathcal{R} \mathcal{A} \mathrm{ss} _{\mathrm{mod}}  \to \Mod _R$, with notation as before, then $M$ is a right $R$-module.
+\end{example}
+
+\begin{definition}\label{1.4.8}
+	Let $\mathcal{C} $ be a symmetric monoidal category, $\mathcal{O} $ an operad with one color, and let $R$ be an algebra for $\mathcal{O} $ over $\mathcal{C} $. Define the following. Denote by $\left\{ R \right\} $ the discrete subcategory of $\Alg_\mathcal{O} (\mathcal{C} )$ given by $R$.
+	\begin{enumerate}[label=(\arabic*), align=left]
+		\item The category $\mathcal{L}\Mod_R^\mathcal{O} (\mathcal{C} )$ of \emph{left $R$-modules} is the pullback $\Alg_{\mathcal{L} \mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\times_{\Alg_\mathcal{O} (\mathcal{C} )} \left\{ R \right\} $.
+		\item The category $\mathcal{R}\Mod_R^\mathcal{O} (\mathcal{C} )$ of \emph{right $R$-modules} is the pullback $\Alg_{\mathcal{R} \mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\times_{\Alg_\mathcal{O} (\mathcal{C} )} \left\{ R \right\} $.
+		\item The category $\mathcal{B}\Mod_R^\mathcal{O} (\mathcal{C} )$ of \emph{$R$-bimodules} is the pullback $\Alg_{\mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\times_{\Alg_\mathcal{O} (\mathcal{C} )} \left\{ R \right\} $.
+		\item If $\mathcal{O} $ has a symmetric operad structure and $A$ is a functor of symmetric operads, then the category $\Mod_R^\mathcal{O} (\mathcal{C} )$ of \emph{$R$-modules} is the pullback $\mathcal{C}\Alg_{\mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\times_{\mathcal{C}\Alg_\mathcal{O} (\mathcal{C} )} \left\{ R \right\} $.
+	\end{enumerate}
+\end{definition}
+
+\begin{discussion}\label{1.4.9}
+	We illustrate \cref{1.4.8} in more detail. There are evident inclusion functors $U_\mathcal{L} : \mathcal{L} \mathcal{O} _{\mathrm{mod} }  \to \mathcal{O} $, $U_\mathcal{R} : \mathcal{R} \mathcal{O}_{\mathrm{mod} }  \to \mathcal{O}$, and $U : \mathcal{O} _{\mathrm{mod} }  \to \mathcal{O} $, the final of which is a functor of symmetric colored operads whenever $\mathcal{O} $ is symmetric. Precomposition by each of these functors induces restriction morphisms
+	\[\begin{tikzcd}[row sep = 0em, column sep = 2.5em]
+	\Alg_{\mathcal{L} \mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\ar[" U_\mathcal{L} ^* ", r]  & \Alg_\mathcal{O} (\mathcal{C} ) \\
+	\Alg_{\mathcal{R} \mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\ar[" U_\mathcal{R} ^* ", r]  & \Alg_\mathcal{O} (\mathcal{C} ) \\
+	\Alg_{\mathcal{B} \mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\ar[" U^* ", r]  & \Alg_\mathcal{O} (\mathcal{C} ) \\
+	\mathcal{C}\Alg_{\mathcal{O} _{\mathrm{mod} } } (\mathcal{C} )\ar[" U^* ", r]  & \mathcal{C}\Alg_\mathcal{O} (\mathcal{C} ) 
+	\end{tikzcd}\]
+	which restrict the relevant algebra along the color $\mathfrak{a} $ to obtain an algebra for $\mathcal{O} $ over $\mathcal{C} $. Let $R : \mathcal{O}  \to \mathcal{C} $ be an algebra. Then the pullbacks
+\[\begin{tikzcd}
+	{\mathcal{L}\Mod^\mathcal{O}_R(\mathcal{C})} & {\{R\}} & {\mathcal{R}\Mod^\mathcal{O}_R(\mathcal{C})} & {\{R\}} \\
+	{\Alg_{\mathcal{L}\mathcal{O}_{\mathrm{mod}}}(\mathcal{C})} & {\Alg_{\mathcal{O}}(\mathcal{C})} & {\Alg_{\mathcal{R}\mathcal{O}_{\mathrm{mod}}}(\mathcal{C})} & {\Alg_{\mathcal{O}}(\mathcal{C})} \\
+	{\mathcal{B}\Mod^\mathcal{O}_R(\mathcal{C})} & {\{R\}} & {\Mod^\mathcal{O}_R(\mathcal{C})} & {\{R\}} \\
+	{\Alg_{\mathcal{O}_{\mathrm{mod}}}(\mathcal{C})} & {\Alg_{\mathcal{O}}(\mathcal{C})} & {\mathcal{C}\Alg_{\mathcal{O}_{\mathrm{mod}}}(\mathcal{C})} & {\Alg_{\mathcal{O}}(\mathcal{C})}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow[hook', from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-3, to=2-4]
+	\arrow[hook', from=1-4, to=2-4]
+	\arrow["{U^*_\mathcal{L}}"', from=2-1, to=2-2]
+	\arrow["{U_\mathcal{R}^*}"', from=2-3, to=2-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-1, to=4-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=3-1, to=4-2]
+	\arrow[hook', from=3-2, to=4-2]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=3-3, to=4-4]
+	\arrow[hook', from=3-4, to=4-4]
+	\arrow["{U^*}"', from=4-1, to=4-2]
+	\arrow["{U^*}"', from=4-3, to=4-4]
+\end{tikzcd}\]
+	can be described explicitly as the largest subcategory of algebras for the relevant module operad such that restricting along the inclusion yields $R$ (or for morphisms of algebras, the component at $R$ must be the identity morphism). For example, $\Mod _R^\mathcal{O} (\mathcal{C} )$ is the collection of all commutative algebras $M$ for $\mathcal{O} _{\mathrm{mod} } $ such that $M(\mathfrak{a} )=R$, and the collection of all morphisms $f : M \to N$ of commutative algebras for $\mathcal{O} _{\mathrm{mod} } $ such that $f_\mathfrak{a} =1_R$ is the identity morphism.
+\end{discussion}
+
+
+\begin{definition}\label{1.4.10}
+	Let $R$ be a graded ring. A graded (left, right, bi) $R$-module is a (left, right, bi) $R$-module in the sense of \cref{1.4.8}, viewing $R$ in the sense of \cref{1.4.1}. We denote the categories of graded left, right, bi, and regular $R$-modules, respectively, as
+	\[
+		\mathcal{G} \mathcal{L} \Mod _R,\qquad \mathcal{G} \mathcal{R} \Mod _R,\qquad \mathcal{G} \mathcal{B} \Mod _R, \qquad \mathcal{G} \Mod _R
+	.\]
+\end{definition}
+
+\begin{discussion}\label{1.4.11}
+	Let $R$ be a graded ring and $F$ a graded left $R$-module. By \cref{1.4.9}, $F$ is an algebra for $\mathcal{L} \mathcal{A}\mathrm{ss}_{\mathrm{mod} } $. To simplify notation, write $F(\mathfrak{m} )=M$ and $F(\mathfrak{a} )=R$. Then as before, we obtain a multiplication map $R\otimes_\mathbb{Z} M \to M$. In view of \cref{1.1.8}, unpacking the graded tensor product yields that this means $R^iM^j \subseteq M^{i+j} $. More explicitly, if $r\in R^i$ and $m\in M^j$ are homogeneous elements, then $r m\in M^{i+j} $. Note in particular that we have $R^0M^0\subseteq M^0$. Since \cref{1.4.2} says that $R^0$ is a ring, we see that $M^0$ is an $R^0$-module in the usual sense. Right and bimodules all work analogously. By following the logic of \cref{1.2.7} one can also see that the unit $1\in R^0$ is a left unit for this multiplication in the sense that $1m=m$ for all homogeneous elements $m\in M$.
+
+	Now let $R$ be a graded commutative ring and $M$ a graded module. The relationship between the maps $R\otimes_\mathbb{Z}  M\to M$ and $M\otimes _\mathbb{Z} R\to M$ is given by the action on 2-multimorphisms induced by the bijection $\alpha : \left\langle 2 \right\rangle \cong \left\langle 2 \right\rangle $ given by $1\mapsto 2$ and $2\mapsto 1$. We have seen previously that in symmetric monoidal categories, this is given by the symmetry isomorphism. Since we are working in $\mathcal{G} \Mod _\mathbb{Z} $, we once again have the Koszul braiding. Following \cref{1.3.8} tells us that if $r\in R$ and $m\in M$ are homogeneous elements, then
+	\[
+		r m = (-1)^{\left| r \right| \left| m \right| } m r
+	.\]
+	Note once again that if the degrees of $r,m$ are 0, then $r m=mr$, and $M$ is an $R$-module in the usual sense. Note also that this gives us a recipe for identifying $\mathcal{G}\mathcal{L} \Mod _R \cong \mathcal{G} \mathcal{R} \Mod _R \cong \mathcal{G} \Mod _R$ when $R$ is graded commutative: if $M$ is a graded left $R$-module, then for all homogeneous elements $r\in R,m\in M$, simply define $mr \coloneqq (-1)^{\left| r \right| \left| m \right| } rm$. This provides $M$ the structure of a graded $R$-module, and we can do the same for graded right $R$-modules.
+
+	We now investigate morphisms $f : M \to N$ of graded (left, right, bi) $R$-modules. By \cref{1.4.8}, $f$ is a natural transfomation of symmetric colored operads, meaning it consists of a pair of maps $f_\mathfrak{a} : R \to R$ and $f_\mathfrak{m} : M \to N$. We treat the case of left $R$-modules; the rest follow analogously. Let $\mu _M,\mu _N$ denote the morphisms $R\otimes_\mathbb{Z} M\to M$ and $R\otimes _\mathbb{Z} N\to N$, respectively. The naturality condition tells us that
+	\[
+		\mu_M \circ (f_\mathfrak{a} ,f_\mathfrak{m} )=f_\mathfrak{m} \circ \mu _N
+	.\]
+	Let $e_R : \mathbb{Z}  \to R$ be the identity element. Then the naturality condition also tells us that
+	\[
+		e_R =f_\mathfrak{a} \circ e_R
+	.\]
+	Recall from \cref{1.4.9} that $f_\mathfrak{a} $ must be the identity morphism $1_R$, meaning
+	\[
+		\mu _M \circ (f_\mathfrak{a} ,f_\mathfrak{m} ) = \mu _M \circ (1_R \otimes f_\mathfrak{m} ) = f_\mathfrak{m} \circ \mu _N
+	.\]
+	If $r\in R$ and $m\in M$ are homogeneous elements, then this implies that
+	\[
+		rf_\mathfrak{m} (n)=\mu_M(r \otimes f_\mathfrak{m} (m)) = f_\mathfrak{m} (\mu _N(r \otimes m)) = f_\mathfrak{m} (rm)
+	.\]
+	Note that in the case that $R,M$ are concentrated in degree 0, this boils down to $R$-linearity in the usual sense.
+\end{discussion}
+
+\begin{terminology}\label{1.4.12}
+	Let $R$ be an algebra for an operad with one color in a symmetric monoidal category. Whenever we say $M$ is a (left, right, bi) $R$-module, we always abuse notation and write $M$ for $M(\mathfrak{m} )$. Similarly, if $f : M \to N$ is a morphism of (left, right, bi) $R$-modules, then we will always abuse notation and write $f$ for $f_\mathfrak{m} $.
+\end{terminology}
+
+
+\begin{remark}\label{1.4.13}
+	If $R$ is a ring, we may view it as a graded ring by concentrating it in degree 0. If $M$ is a graded (left, right, bi) $R$-module, then each $M^i$ is then a (left, right, bi) $R$-module in the usual sense. For example, if $M$ is a graded left $R$-module, then the grading says $R^0M^i \subseteq M^i$ for all $i$, and thus $R^0=R$ has a left $\mathbb{Z} $-bilinear action on $M^i$. In particular, if $R$ is a graded ring, then there is no ambiguity with the notation $\Mod _R$.
+\end{remark}
+
+\begin{construction}\label{1.4.14}
+	Let $R$ be a graded commutative ring. The category $\mathcal{G} \Mod_R$ also has a graded tensor product and an internal hom, which allows all other definitions formulated in this chapter to be extended to graded modules over graded commutative rings. We begin by constructing the graded tensor product.
+	
+	We start by working in the symmetric monoidal category $(\mathcal{G} \Mod _\mathbb{Z} ,\otimes _\mathbb{Z} ,\mathbb{Z} )$ with $\mathbb{Z} $ concentrated in degree 0, and $\otimes _\mathbb{Z} $ the Day tensor product as defined in \cref{1.1.8}. We as always use Koszul's braiding isomorhism for symmetry. Let $M,N$ be graded $R$-modules, and write the left and right actions as $\mu_M : M\otimes _\mathbb{Z} R \to M$ and $\mu _N : R\otimes _\mathbb{Z} N \to N$. One characterization of the tensor product in linear algbera is as the coequalizer
+	\[
+		M\otimes _RN \cong \operatorname{coeq}\left( 
+			\begin{tikzcd}[column sep=4em]
+				M\otimes _\mathbb{Z} R\otimes _\mathbb{Z} N \ar[" \mu_M \otimes 1_N ", shift left, r] \ar[" 1_M\otimes \mu _N "', shift right, r] & M\otimes _\mathbb{Z} N
+			\end{tikzcd}
+		\right) ,
+	\]
+	which makes sense since the tensor product should be universal with respect to setting $mr\otimes n = m\otimes rn$ for $m\in M$, $r\in R$, and $n\in N$, and that is precisely what this coequalizer is. We thus choose to use this definition to generalize the tensor product to graded rings.
+
+	Recall that since $\mathbb{Z} $ is a normal ring, $\mathcal{G} \Mod _\mathbb{Z} $ is a functor category, so appealing to \cref{1.1.2} yields that the coequalizer may be computed pointwise. Hence we obtain
+	\[
+		\left( M\otimes _RN \right) ^k = \operatorname{coeq} \left( 
+			\begin{tikzcd}[column sep=4em]
+				\displaystyle{\bigoplus_{i,j,d\in\mathbb{Z} } ^{i+j+d=k} M^i \otimes _\mathbb{Z} R^d \otimes _\mathbb{Z} N^j} \ar[" \mu_M \otimes 1_N ", shift left, r] \ar[" 1_M\otimes \mu _N "', shift right, r] & \displaystyle{\bigoplus_{p,q\in\mathbb{Z} } ^{p+q=k} M^p\otimes _\mathbb{Z} N^q}
+			\end{tikzcd}
+		\right) 
+	.\]
+	We may now appeal to the coequalizer in the category of normal $\mathbb{Z} $-modules, which is constructed as the quotient of the codomain by the image of the difference $\mu _M \otimes 1_N - 1_M \otimes \mu _N$. The image can be described as all elements of the form $mr \otimes n - m\otimes rn$, where $m\in M$, $r\in R$, and $n\in N$ are homogeneous elements whose degrees sum to $k$. Thus the image is the direct sum
+	\[
+		\bigoplus_{i,j,d\in\mathbb{Z} } ^{i+j+d=k} M^iR^d\otimes _\mathbb{Z} N^j - M^i\otimes _\mathbb{Z} R^dN^j
+	.\]
+	Thus we obtain
+	\begin{align*}
+		\left( M\otimes _RN \right) ^k &\coloneqq \frac{\displaystyle{\bigoplus_{p,q\in\mathbb{Z} }M^p\otimes _\mathbb{Z} N^q}}{\displaystyle{\bigoplus_{i,j,d\in\mathbb{Z} } ^{i+j+d=k} M^iR^d\otimes_\mathbb{Z} N^j - M^i \otimes_\mathbb{Z}  R^dN^j}} 
+	.\end{align*}
+	In view of \cref{1.4.11}, the coequalizer now forces the relation
+	\[
+		r m\otimes n = (-1)^{\left| r \right| \left| m \right| } mr\otimes n = (-1)^{\left| r \right| \left| m \right| } m\otimes rn
+	.\]
+\end{construction}
+
+\begin{remark}\label{1.4.15}
+	Note that in \cref{1.4.14}, if $R$ is concentrated in degree 0, then we are quotienting by precisely $R$-bilinearity, meaning that we perfectly recover the usual graded tensor product of $R$-modules.
+\end{remark}
+
+
+\begin{remark}\label{1.4.16}
+	As with normal linear algebra, we can construct a tensor product of left and right $R$-modules when $R$ is a not necessarily commutative graded ring. However, such a structure is not naturally an $R$-module, and is only a $\mathbb{Z} $-module. Hence we generally only work with graded commutative rings. This is more than sufficient generality, since most of our applications in Lie theory will be over one of the fields $\mathbb{R} $ or $\mathbb{C} $, concentrated in degree 0.
+\end{remark}
+
+\begin{discussion}\label{1.4.17}
+	We can also construct the internal hom $\underline{\Hom}_R(M,N)$ for a graded commutative ring $R$ and graded $R$-modules $M,N$. We will not detail the proof, but we claim that the internal hom can be written as the equalizer
+	\[
+	\underline{\Hom}_R(M,N) \cong \operatorname{eq}\left(
+		\begin{tikzcd}[column sep=2.5em]
+			\underline{\Hom}_\mathbb{Z}(M,N) \ar[" \alpha ", shift left, r] \ar[" \beta "', shift right, r] & \underline{\Hom}_\mathbb{Z}(R \otimes_\mathbb{Z} M, N) \end{tikzcd}
+\right)
+	,\]
+	where $\alpha ,\beta $ are defined as
+	\[
+		\alpha (f)(r\otimes m) = f(rm),\qquad \beta (f)(r\otimes m)=rf(m)
+	.\]
+	One can see that this is the case by using continuity and contravariance of Hom in the first argument, and applying the tensor-hom adjunction in $\mathbb{Z} $ to a similar argument to that of \cref{1.1.11}. The equalizer is the largest subset of the domain which is equalized by these two maps. A homogeneous element $f$ of degree $i$ is thus a tuple $\left\{ f^j : M^j \to N^{i+j}  \right\} _{j\in\mathbb{Z} } $ of $\mathbb{Z} $-linear maps which respects the $R$-action in the sense that
+	\[
+		f^j(rm) =(-1)^{\left| r \right| \left| f \right| } f^{j-\left| r \right| }(m)
+	.\]
+	It is important to remark that a degree 0 homogeneous element $f$ is a graded $\mathbb{Z} $-module morphism $f : M \to N$ which satisfies $f(rm)=rf(m)$ for all homogeneous elements $r\in R$ and $m\in M$. Note that this is precisely a morphism of graded $R$-modules, hence obtain
+	\[
+		\underline{\Hom}_R(M,N)^0 = \Hom_R(M,N)
+	.\]
+	We could also show this from the tensor-hom adjunction.
+\end{discussion}
+
+\begin{remark}\label{1.4.18}
+	Similarly to \cref{1.1.13}, when working in the category $\mathcal{G} \Mod _R$ with $R$ a graded commutative ring, we use the symmetry isomorphism $M\otimes _R N \cong N\otimes _R M$ given by $m\otimes n\mapsto (-1)^{\left| m \right| \left| n \right| } n\otimes m$. We refer to this as Koszul braiding.
+\end{remark}
+
+\begin{remark}
+	Let $R$ be a graded ring. Since the categories of (left, right, bi) $R$-modules are all defined as specific functor categories, all (co)limits that exist in them are computed pointwise. Since the category is constant at the fiber of $R$, we see that computing (co)limits pointwise means computing (co)limits on the actual module, which is an object in $\Mod _\mathbb{Z} $, which is also a functor category. \Cref{1.1.2} now gives us that $\Mod_R$ is an abelian category for free.
+\end{remark}
+
+We have now developed sufficient machinery to re-characterize all constructions in this chapter over graded $R$-modules for graded rings. For example, a graded associative $R$-algebra $A$ is an algebra for $\mathcal{A} \mathrm{ss} $ in $\mathcal{G} \Mod _R$, which can be described as a graded $R$-module with a multiplication $A\otimes _RA\to A$ which is compatible with the $R$-action in the sense that, for $r\in R$ and $a,b\in A$ homogeneous elements,
+\[
+	rab = (-1)^{\left| a \right| \left| r \right| } arb
+.\]
+
+\section{Summary}\label{sec:1.5}
+
+We provide a summary of important definitions, constructions, and results from this chapter. Let $R$ be a commutative ring.
+\begin{enumerate}
+	\item A graded $R$-module is a collection $M=\left\{ M^i \right\}_{i\in\mathbb{Z} } $ of $R$-modules $M^i$. A morphism $f : M \to N$ of graded $R$-modules is a collection $\left\{ f^i : M^i \to N^i \right\} _{i\in\mathbb{Z} } $ of $R$-linear maps. The category of graded $R$-modules is denoted $\mathcal{G} \Mod _R$.
+	\item The graded tensor product $M\otimes _RN$ of graded $R$-modules $M,N$ is defined as the graded $R$-module
+		\[
+			(M\otimes _RN)^k \coloneqq \bigoplus_{n\in\mathbb{Z} }^{i+j=k} M^i\otimes _RN^j,
+		\]
+		where $M^i\otimes _RN^j$ is the usual tensor product of $R$-modules. This yields a symmetric monoidal structure for $\mathcal{G} \Mod _R$. The symmetry isomorphism $M\otimes _RN \cong N\otimes _RM$ is defined by $m\otimes n \mapsto (-1)^{\left| m \right| \left| n \right| } n\otimes m$, where $m\in M$ and $n\in N$ are homogeneous elements.
+	\item The category $\mathcal{G} \Mod _R$ is closed monoidal, with internal hom
+		\[
+			\underline{\Hom}_{R}(M, N)^i \coloneqq \prod_{j\in\mathbb{Z} }\Hom_{R}(M^j, N^{i+j} ) 
+		.\]
+		Note that $\underline{\Hom} _R(M,N) \cong \Hom_{R}(M, N) $.
+	\item There is a canonical embedding $\Mod _R \hookrightarrow \mathcal{G} \Mod _R$ by viewing $R$-modules as concentrated in degree 0. This embedding is strict monoidal. This embedding also preserves the internal hom.
+	\item A graded $R$-algebra is a graded $R$-module $A$ together with a map $\pi : A\otimes _RA \to A$ called multiplication, and denoted $m(x,y)=xy$ for $x,y\in A$ homogeneous elements. The product $xy$ is a homogeneous element of degree $\left| x \right| +\left| y \right| $. This implies that $A^iA^j \subseteq A^{i+j} $ for all $i,j\in\mathbb{Z} $. A morphism $f : A \to B$ of graded $R$-algebras is a morphism of graded $R$-modules which commutes with multiplication in the usual way. The category of graded $R$-algebras is denoted $\mathcal{G}\Alg_{R} $. The zeroth degree $A^0$ is an associative $R$-algebra.
+	\item A commutative graded $R$-algebra $A$ is a graded $R$-algebra $A$ which satisfies the property that, for any homogeneous elements $x,y\in A$,
+		\[
+			xy=(-1)^{\left| x \right| \left| y \right| } yx
+		.\]
+		A morphism of commutative graded $R$-algebras is a morphism of graded $R$-algebras. The category of commutative graded $R$-algebras is denoted $\mathcal{C}\mathcal{G}\Alg_{R} $. The zeroth degree $A^0$ is a commutative $R$-algebra.
+	\item There are canonical embeddings $\Alg_{R} \hookrightarrow \mathcal{G} \Alg_{R} $ and $\mathcal{C} \Alg_{R} \hookrightarrow \mathcal{C} \mathcal{G} \Alg_{R} $ by viewing (associative, commutative) $R$-algebras as concentrated in degree 0.
+	\item A graded ring $R$ is a graded $\mathbb{Z} $-algebra, meaning it is a collection $\left\{ R^i \right\} _{i\in\mathbb{Z} } $ of abelian groups with a multiplication operation $R\otimes _\mathbb{Z} R\to R$ satisfying $R^iR^j \subseteq R^{i+j} $ for all $i,j\in\mathbb{Z} $. A morphism of graded rings is a morphism of graded $\mathbb{Z} $-algebras. The category of graded rings is denoted $\mathcal{G} \Ring $. The zeroth degree $R^0$ is a ring.
+	\item A commutative graded ring $R$ is a commutative graded $R$-algebra. The category of commutative graded rings is denotd $\mathcal{C} \mathcal{G} \Ring $. The zeroth degree $R^0$ is a commutative ring.
+\end{enumerate}
+
+We can repeat all of this over graded rings. When a graded ring is concentrated in degree 0, we recover everything here. Let $R$ be a graded commutative ring.
+
+\begin{enumerate}
+	\item A graded $R$-module $M$ is a graded $\mathbb{Z} $-module together with a multiplication operation $R\otimes _\mathbb{Z} M\to M$. This means for any homogeneous elements $r\in R$ and $m\in M$, we have $rm \in M^{\left| r \right| +\left| m \right| } $. More precisely, $R^iM^j \subseteq M^{i+j} $. We also define $rm = (-1)^{\left| r \right|\left| m \right|} mr$.
+	\item A morphism $f : M \to N$ of graded $R$-modules is a morphism of graded $\mathbb{Z} $-modules which preserves the $R$-action in the sense that, for any homogeneous elements $r\in R^i$ and $m\in M^j$, we have $f^{i+j} (rm)=rf^j(m)$. The category of graded $R$-modules is denoted $\mathcal{G} \Mod _R$.
+	\item The category $\mathcal{G} \Mod _R$ has a symmetric monoidal structure with graded tensor product given by, for $M,N$ graded $R$-modules,
+		\[
+			\left( M\otimes _RN \right) ^k \coloneqq \frac{\displaystyle{\bigoplus_{p,q\in\mathbb{Z} }M^p\otimes _\mathbb{Z} N^q}}{\displaystyle{\bigoplus_{i,j,d\in\mathbb{Z} } ^{i+j+d=k} M^iR^d\otimes_\mathbb{Z} N^j - M^i \otimes_\mathbb{Z}  R^dN^j}} 
+		.\]
+		The symmetry isomorphism in $\mathcal{G} \Mod _R$ is given by $m\otimes n\mapsto (-1)^{\left| m \right| \left| n \right| } n\otimes m$.
+	\item The category $\mathcal{G} \Mod _R$ is closed monoidal, with internal hom given by
+		\[
+			\underline{\Hom}_R(M,N)^i \coloneqq \left\{ f\in \underline{\Hom}_\mathbb{Z} (M,N)^i \mid f^j(rm) = (-1)^{\left| r \right| \left| f \right| } f^{j-\left| r \right| } (m) \right\} 
+		.\]
+		Here we note that in the above expression, $\left| f \right| =i$. Note that $\underline{\Hom}_R(M,N)^0 = \Hom_{R}(M, N) $.
+\end{enumerate}
+

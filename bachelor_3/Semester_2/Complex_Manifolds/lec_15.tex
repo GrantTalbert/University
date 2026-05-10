@@ -1,0 +1,45 @@
+\lecture{15}{Tue 31 Mar 2026 12:25}{Examples of sheaf cohomology}
+
+To compute the right derived functors $R^n\Gamma $, we can resolve $\mathcal{F} $ by injective sheaves. Unfortunately, injective sheaves suck. Luckily, we can more generally find an \emph{acyclic resolution}. Let $F : \mathcal{A}  \to \mathcal{B} $ be a left exact functor of abelian categories. Then some object $x\in \mathcal{A} $ is \emph{acyclic for $F$} if $R^nF(x)=0$ for all $n>0$.
+
+Fact: for sheaves, sheaves of smooth sections of vector bundles are $\Gamma (X,-)$-acyclic. Intuitively, this is because locally these sheaves look like direct sums of the structure sheaf for smooth manifolds $C^\infty $, and thus admit paritions of unity, allowing global to local information transfer, deleting the higher homological information. Thus if we can resolve a sheaf by sheaves of this type, we can compute the cohomology by applying $\Gamma (X,-)$ to this resolution.
+
+\begin{example}
+	Let $M$ a smooth $n$-manifold. Then we get an exact sequence of sheaves
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r] & \Omega ^0_M\ar[" \dd  ", r]  & \Omega ^1_M\ar[" \dd  ", r]  & \cdots \ar[" \dd  ", r]  & \Omega ^n_M\ar[" 0 ", r]  & 0.
+	\end{tikzcd}\]
+	This is exact by the Poincare lemma in all nonzero degrees: any form that is closed is locally exact. Hence kernels are locally images, and by \cref{4.1.5} images are local. However, it is not exact in the lowest degree, since it has kernel $\mathbb{R} $: constant functions. Thus the complex is quasi-isomorphic to the (sheafification of the) constant sheaf $\mathbb{R} $, and is thus a resolution. This yields
+	\[
+		H^n_{\Shf }(M, \mathbb{R} ) =R^n\Gamma (M,\mathbb{R} ) \cong H^n(\Omega ^{\bullet}_M(M) )
+	.\]
+	The de Rham cohomology computes the cohomology of the constant sheaf $\mathbb{R} $. Of course, this is just $H^n_{\Sing } (M,\mathbb{R} )$. This explains why the de Rham complex is topological in nature: it is computing the cohomology of something with no local structure.
+\end{example}
+
+\begin{example}
+	Recall from \cref{4.1.7} that if $X$ is a complex $n$-manifold, then we have the Dolbealt complex for global sections
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathcal{A} _X^{p,0}(X) \ar[" \overline{\partial }  ", r]  & \mathcal{A} _X^{p,1}(X) \ar[" \overline{\partial }  ", r]  & \cdots \ar[" \overline{\partial }  ", r]  & \mathcal{A} ^{p,n}_X(X) \ar[" \overline{\partial }  ", r]  & 0,
+	\end{tikzcd}\]
+	which is exact at $q$ for all $q\geq 1$, since once again the $\overline{\partial } $-Poincare lemma says any $\overline{\partial } $-closed $(p,q \geq 1)$-form is locally $\overline{\partial } $-exact. However, in degree 0, $\overline{\partial } $ has a kernel given by holomorphic $p$-forms (\cref{prp:3.2.17}). Thus this is a resolution of the sheaf of holomorphic $p$-forms, denoted $\Omega _X^p$, and we obtian that the $(p,q)$-Dolbeault cohomology is the cohomology of this sheaf. Therefore
+	\[
+		H^{\bullet}_{\Shf }(X,\Omega _X^p) \cong H^{\bullet} (\mathcal{A}_X^{p,\bullet} (X))
+	.\]
+	Thus the sheaf cohomology of $\Omega _X^p$ is the Dolbealt cohomology $(p,\bullet)$. This is not a homotopy invariant, unlike de Rham cohomology. To see this, consider for example $H^{\bullet} (\mathbb{C} ^n, \mathcal{O} )$. There are many global holomorphic functions $\mathbb{C} ^n\to \mathbb{C} $, but the homotopy type of $\mathbb{C} ^n$ is a point, and there are only constant holomorphic functions $*\to \mathbb{C} $.
+\end{example}
+
+\begin{remark}
+	There is a generalization of Dolbealt cohomology. Let $\pi : E \to X$ a holomorphic vector bundle. We can consider the sheaf $\mathcal{A} ^{p,q} (E)$ of $(p,q)$-forms valued in $E$. By this, we mean elements of the form $\sum \alpha \otimes e$, where $\alpha \in \mathcal{A} ^{p,q} $ and $e$ is a local holomorphic section of $E$. Hence $\mathcal{A} ^{p,q} \otimes_{\mathcal{O} _X} \mathcal{E} \cong \mathcal{A} ^{p,q} (E)$.
+
+	Present $E$ via the cocycle $\left\{ g_{ij}  \right\} $ wrt some open cover $\left\{ U_i \right\} $. Sections of $\mathcal{A} ^{p,q} (E)$ are $\mathrm{rk}(E)$-vectors of $(p,q)$-forms that transform according to the cocycle, i.e. for all $i\in I$, there is $s_i\in\Gamma (U_i, (\mathcal{A} ^{p,q} )^{\oplus ?} $ and $s_i = g_{ij} s_j$. Then $\overline{\partial } $ is defined on the sheaf:
+	\[
+		\overline{\partial } s_i = \overline{\partial } (g_{ij} s_j) = \overline{\partial } g_{ij} \cdot s_j + g_{ij} \overline{\partial } s_j = g_{ij} \overline{\partial } s_j,
+	\]
+since $g_{ij} $ is holomorphic. Thus we have the required relation for $\overline{\partial } s$ to be a section. By the $\overline{\partial } $-Poincare lemma, we obtain the same exactness relationship. The kernel of the bottom degree differential is just holomorphic sections of $E \otimes _\mathbb{C} \mathcal{O} ^p_{\mathrm{hol} } $, with sheaf denoted $\mathcal{E} \otimes \Omega ^p_{\mathrm{hol} } $. Therefore
+\[
+	H^{\bullet}_{\Shf }(X,\mathcal{E} \otimes \Omega ^p_{\mathrm{hol} })\cong H^{\bullet}(\mathcal{A} ^{p,\bullet}(E) , \overline{\partial } )
+.\]
+This feels wrong
+\end{remark}
+
+In general, $\mathcal{A} ^{p,q} (E)$ is $\infty $-dimensional, and difficult to actually find the cohomology of. We need better tools for computing cohomology. In de Rham cohomology, we use homotopy invariance to actually do computations by relating it to singular cohomology. Sheaves have another cohomology theory that often coencides with the one we have been using, known as \v{C}ech cohomology.

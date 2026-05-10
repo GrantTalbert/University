@@ -1,0 +1,295 @@
+\chapter{Differential graded Lie $\mathbb{K}$-algebras}\label{ch:3}
+
+Let $\mathbb{K}$ be a field of characteristic zero. We establish the basic facts of differential graded Lie $\mathbb{K}$-algebras and a particularly important (co)homology theory thereof, which is computed by the Chevalley-Eilenberg complex.
+
+\section{Lie $\mathbb{K}$-algebra (co)homology}\label{sec:3.1}
+
+Let $\mathfrak{g} $ be a Lie $\mathbb{K} $-algebra.
+
+\begin{definition}\label{3.1.1}
+	View $\mathfrak{g} $ as a differential graded Lie $\mathbb{K} $-algebra concentrated in degree 0 with trivial differential. The \emph{Chevalley-Eilenberg chain complex} for $\mathfrak{g} $ is the chain complex $C_{\bullet} (\mathfrak{g} )$ given as a graded $\mathbb{K} $-vector space by
+	\[
+		C_{\bullet} (\mathfrak{g} ) = \operatorname{Sym} ^{\bullet}(\mathfrak{g} [1])
+	.\]
+	The differential is given by the Lie bracket.
+
+	The \emph{Chevalley-Eilenberg cochain complex} for $\mathfrak{g} $ is the differential graded $\mathbb{K} $-vector space $C^{\bullet} (\mathfrak{g} )$ given by
+	\[
+		C^{\bullet} (\mathfrak{g} )=\underline{\Hom}_\mathbb{K} (C_{\bullet} (\mathfrak{g} ),\mathbb{K})
+	.\]
+\end{definition}
+
+\begin{discussion}\label{3.1.2}
+	Recall here that we take $C_i(\mathfrak{g} )=\operatorname{Sym} ^{-i} (\mathfrak{g} [1])$ to reconcile homological and cohomological grading conventions. By \cref{2.1.1}, we have that $\mathfrak{g} [1]^i=\mathfrak{g} ^{i+1} $. Thus
+	\[
+		\mathfrak{g} ^0 = \mathfrak{g} ^{1-1} =\mathfrak{g} [1]^{-1} 
+	.\]
+	Thus $\mathfrak{g} [1]$ is concentrated in degree $-1$. As seen in \cref{2.2.9}, the symmetric algebra $\operatorname{Sym} (\mathfrak{g}[1] )$ can then be given as the exterior algebra
+	\[
+		\operatorname{Sym} ^{-k} (\mathfrak{g}[1] )=\Lambda ^k(\mathfrak{g} )
+	.\]
+	It is thus customary to denote the symmetric product in $C_{\bullet} (\mathfrak{g} )$ by the wedge symbol $\wedge $. In particular, $\operatorname{Sym} ^0(\mathfrak{g} )=\mathbb{K} $.
+
+	The differential $d$, called the Chevalley-Eilenberg differential, is defined as follows. If $x,y\in \mathfrak{g} $, then we define $d_1(x\wedge y)\coloneqq-[x,y]$. We would like the differential to  and extend this to all of $\operatorname{Sym} (\mathfrak{g} )$ by imposing Koszul braiding, bilinearity, and the graded Leibniz rule $d[x,y]=[dx,y]+(-1)^{\left| x \right| \left| y \right| } [x,dy]$. Explicitly, if $x_1, \ldots ,x_k\in \mathfrak{g} $ are homogeneous elements of $C_{\bullet} (\mathfrak{g} )$ of degree $-1$, then
+	\[
+		d_k(x_1 \wedge \cdots \wedge x_k)=\sum_{1\leq i<j\leq k} (-1)^{i+j} [x_i,x_j]\wedge x_1 \wedge \cdots \wedge \widehat{x}_i\wedge \cdots \wedge \widehat{x}_j\wedge \cdots \wedge x_k,
+	\]
+	where $\widehat{x_i}$ denotes omitting that argument.
+
+	Note here that $C_{\bullet} (\mathfrak{g} )$ is naturally treated as a dg $\mathbb{K}$-coalgebra. For most of our applications, it is preferred to work with dg $\mathbb{K} $-algebras, so we generally prefer the Chevalley-Eilenberg cochain complex, which forms a dg $\mathbb{K} $-algebra.
+\end{discussion}
+\begin{discussion}\label{3.1.3}
+	We claim that $C^{\bullet} (\mathfrak{g} )\cong \operatorname{Sym} ^{\bullet} (\mathfrak{g} ^*[-1])$, where $\mathfrak{g} ^*$ denotes its dual. To see this, recall a homogeneous element of degree $k$ is a map $C_k(\mathfrak{g} )\to \mathbb{K} $, which is a map $\operatorname{Sym} ^{-k} (\mathfrak{g} [1])\to \mathbb{K} $. Since this is just the exterior product, $\alpha \in C^{\bullet} (\mathfrak{g} )$ is a map $\alpha : \Lambda ^k\mathfrak{g}  \to \mathbb{K} $.
+
+	Linear algebra will now yield our result. There is a canonical form $\left\langle -,- \right\rangle : \Lambda ^k\mathfrak{g} ^* \otimes \Lambda ^k\mathfrak{g}  \to \mathbb{K} $ given by
+	\[
+		\left\langle \alpha _1 \wedge \cdots \wedge \alpha _k,x_1 \wedge \cdots \wedge x_k \right\rangle =\det \begin{pmatrix}
+		\alpha _1(x_1) & \cdots  & \alpha _1(x_k) \\
+		\vdots & \ddots & \vdots \\
+		\alpha _k(x_1) & \cdots  & \alpha _k(x_k)
+		\end{pmatrix}=\det \alpha _i(x_j)
+	.\]
+	Since the determinant is alternating, this map is well-defined. Moreover this map is nondegenerate, and thus yields an isomorphism $(\Lambda ^k\mathfrak{g} )^*\cong \Lambda ^k(\mathfrak{g} ^*)$ by mapping $\alpha \mapsto \left\langle \alpha ,- \right\rangle $. Important examples include 1-forms $\left\langle \alpha ,x \right\rangle =\alpha (x)$ and 2-forms
+	\[
+		\left\langle \alpha \wedge \beta ,x\wedge y \right\rangle =\alpha (x)\beta (y)-\alpha (y)\beta (x)
+	.\]
+
+	Write $d_{\bullet} $ for the differential of $C_{\bullet} (\mathfrak{g} )$. Recall from \cref{2.1.8} that the differential $d^{\bullet} $ on $C^{\bullet} (\mathfrak{g} )$ is given by
+	\[
+		d^{\bullet} \omega =d_\mathbb{K} \circ \omega  -(-1)^{\left| \omega  \right| } \omega \circ d_{\bullet} 
+	.\]
+	As always, we take $d_\mathbb{K} =0$, so the first component vanishes.
+
+	We would like to reconcile this differential with the isomorphism we just found. We start in degree 1. Let $\omega \in \mathfrak{g} ^*$ and $x,y\in \Lambda ^2\mathfrak{g} $. The isomorphism acts trivially on $\Lambda ^1\mathfrak{g}^*\cong \mathfrak{g}^* $, so we simply have
+	\[
+		d^1\omega (x,y)=\left\langle d_1^*\omega ,x\wedge y \right\rangle =\left\langle \omega \circ d_1,x\wedge y \right\rangle =(\omega \circ d_1)(x\wedge y)
+	.\]
+	Recall that (or set $x=x_1$ and $y=x_2$ and plug into the formula)
+	\[
+		d_1(x\wedge y)=-[x,y]
+	.\]
+	Thus we have
+	\[
+		d^1\omega (x,y)=(\omega \circ d_1)(x\wedge y)=-\omega [x,y]
+	.\]
+	We extend this to higher degrees by recalling $C^{\bullet} (\mathfrak{g} )$ is a dg commutative $\mathbb{K} $-algebra, and \cref{??} says that $d^{\bullet} $ must be a derivation. Hence
+	\[
+		d^2(\alpha \wedge \beta )=d^1(\alpha )\wedge \beta +\alpha \wedge d^1(\beta )\mathbf{THIsiswrong} 
+	.\]
+	Here it is useful to recall that we are denoting the symmetric product by the wedge. Inducting on what we have found yields the following two useful formulas. Let $\omega =\alpha _1 \wedge \cdots \wedge \alpha _k$ be a homogeneous element of degree $k$, and let $x_1, \ldots ,x_{k+1}\in \mathfrak{g} $. Then
+	\[
+		d^k\omega (x_1, \ldots ,x_{k+1})=\sum_{1\leq i<j\leq k+1} (-1)^{i+j} \omega ([x_i,x_j],x_1, \ldots ,\widehat{x}_i, \ldots ,\widehat{x}_j, \ldots ,x_{k+1} )
+	\]
+	\[
+		d^k(\alpha _1 \wedge \cdots \wedge \alpha _k)=\sum_{i=1}^{k} (-1)^{i-1} \alpha _1 \wedge \cdots \wedge d(\alpha _i)\wedge \cdots \wedge \alpha _k
+	.\]
+	Here, as always, the hat denotes omitting an argument.
+\end{discussion}
+
+\begin{definition}\label{3.1.4}
+	The Lie $\mathbb{K} $-algebra homology of $\mathfrak{g} $ is defined as the homology of the Chevalley-Eilenberg chains $H_{\bullet} ^{\mathrm{Lie} } (\mathfrak{g})\coloneqq  H_{\bullet} (C_{\bullet} (\mathfrak{g} ))$. The Lie $\mathbb{K} $-algebra cohomology of $\mathfrak{g} $ is defined as the cohomology of the Chevalley-Eilenberg cochains $H^{\bullet} _{\mathrm{Lie} } (\mathfrak{g} )\coloneqq H^{\bullet} (C^{\bullet} (\mathfrak{g} ))$.
+\end{definition}
+
+\begin{discussion}\label{3.1.5}
+	Another approach to Lie $\mathbb{K} $-algebra cohomology, which we will discuss later on in context of dg Lie algebras, involves computing the derived functors of $\otimes_\mathbb{K} U\mathfrak{g} $, where $U\mathfrak{g} $ is the \emph{universal enveloping algebra} of $\mathfrak{g} $. Such a structure is a $\mathbb{K} $-algebra, and thus a ring. One computes this by noting that there is a quotient of $U\mathfrak{g}$-modules $U\mathfrak{g} /\mathfrak{g} \cong \mathbb{K} $, and thus $\mathbb{K} $ is a $U\mathfrak{g} $-module. One then forms the free resolution
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\cdots \ar[r]  & \Lambda ^2\mathfrak{g} \otimes _\mathbb{K} U\mathfrak{g} \ar[r]  & \Lambda ^1\mathfrak{g} \otimes _\mathbb{K} U\mathfrak{g} \ar[r]  & \Lambda ^0\mathfrak{g} \otimes_\mathbb{K} U\mathfrak{g} \ar[r]  & \mathbb{K} 
+	\end{tikzcd}\]
+	and uses this to compute the Tor functors. This is where the relevance of Lie $\mathbb{K} $-algebra cohomology comes from, but we find the categorical introduction better motivates the generalization to dg Lie $\mathbb{K} $-algebras. However it poorly motivates the more tame case of Lie $\mathbb{K} $-algebras, so we include this remark.
+\end{discussion}
+
+\begin{definition}\label{3.1.6}
+	A $\mathfrak{g} $-module is a $\mathbb{K} $-vector space $M$ together with a multiplication map $\mathfrak{g} \otimes_\mathbb{K} M\to M$. [redo this with operads later then continue on to define Lie $\mathbb{K} $-algebra (co)homology with values in a $\mathfrak{g} $-module]
+\end{definition}
+
+
+
+
+\section{Differential graded Lie $\mathbb{K} $-algebra (co)homology}\label{sec:3.2}
+
+Let $(\mathfrak{g},d_\mathfrak{g} )=(\mathfrak{g} ^{\bullet},d^{\bullet} _\mathfrak{g} ) $ be a dg Lie $\mathbb{K} $-algebra. We would now like to construct an analog of \cref{3.1.1} for $\mathfrak{g} $.
+
+Throughout this section, degree considerations will play a significant role, so we adopt the following conventions. Let $s : \Ch(\mathbb{K} )  \to \Ch(\mathbb{K} ) $ denote the \emph{suspension functor} $sC=C[1]$. Note that $C^k=sC^{k-1} $, so for any homogeneous element $x\in C^k$, denote by $sx$ the corresponding homogeneous element in $sC^{k-1} $. Note that $\left| sx \right| =\left| x \right| -1$. We denote by $s ^{-1} : \Ch(\mathbb{K} )  \to \Ch(\mathbb{K} ) $ the inverse $s ^{-1} C=C[-1]$, and similarly denote by $s ^{-1} x$ the homogeneous element of $s ^{-1} C^{k+1} $ corresponding to $x\in C^k$.
+
+\begin{definition}\label{3.2.1}
+	The \emph{Chevalley-Eilenberg chain complex} of $\mathfrak{g} $ is defined as $C_{\bullet} (\mathfrak{g} )\coloneqq \operatorname{Sym}^{\bullet} (\mathfrak{g} [1])$. The \emph{Chevalley-Eilenberg cochain complex} of $\mathfrak{g} $ is defined as $C^{\bullet} (\mathfrak{g} )=\underline{\Hom}_\mathbb{K} (C_{\bullet} (\mathfrak{g}), \mathbb{K} ) $.
+\end{definition}
+
+\begin{discussion}\label{3.2.2}
+	We start by investigating the Chevalley-Eilenberg chains. We do not obtain a nice description of the symmetric algebra other than the fact that multiplication satisfies Koszul braiding. Let $x,y\in \operatorname{Sym} (\mathfrak{g} [1])$ be homogeneous elements. Then $xy=(-1)^{\left| x \right| \left| y \right| } yx$. It is important to note here that if $x,y\in \mathfrak{g} $, then their homological degree is 1 (or -1? idk), not zero.
+
+	The differential on $C_{\bullet} (\mathfrak{g} )$ is defined as $d_{\mathfrak{g} [1]} +d_{\mathrm{CE} } $. Due to the degree shift, we spell out explicitly how to arive at the formula for these. By \cref{2.1.6}, we have $d_{\mathfrak{g} [1]} =-d_\mathfrak{g} [1]$. Let $x\in \mathfrak{g} ^k$ be a homogeneous element of degree $k$. Write $\partial _0 = d_{\mathfrak{g} [1]} $, such that we have $\partial^{k-1}_0(sx)=-sd_\mathfrak{g}^{k}(x)$. We can extend this to a map on $C_{\bullet} (\mathfrak{g} )$ by simply requiring that it be a derivation: if $x_1, \ldots ,x_p\in \mathfrak{g} $ are homogeneous elements whose degrees in $C_{\bullet} (\mathfrak{g} )$ sum to $k$, then
+	\begin{align*}
+		\partial _0^k(sx_1 \cdots sx_p) &= \sum_{i=1}^{p} (-1)^{\sum_{j=1}^{i-1} \left| sx_j \right| } sx_1 \cdots \partial _0^{\left| sx_i \right| }(sx_i) \cdots sx_p\\
+					      &= - \sum_{i=1}^{p} (-1)^{\sum_{j=1}^{i-1} \left| sx_j \right| } sx_1 \cdots sd^{\left| x_i \right|}_\mathfrak{g} (x_i) \cdots sx_n
+	.\end{align*}
+	
+	Now we explore the Chevalley-Eilenberg differential on $C_{\bullet} (\mathfrak{g} )$. On pairs of elements, this should be defined as the dg Lie bracket, but we must take care to track degrees. In particular, define
+	\[
+		\partial _1 \coloneqq s \circ [-,-] \circ (s ^{-1} \otimes s ^{-1} )
+	.\]
+	Care must be taken with the degrees such that this is well-defined. Given $sx,sy\in C^{\bullet} (\mathfrak{g} )$ homogeneous elements, it might appear we want to define $\partial _1(sx\cdot sy)=s[x,y]$. However, recall from \cref{1.1.14} that since $s ^{-1} : \mathfrak{g} [1] \to \mathfrak{g} $ has cohomological degree $-1$, we define
+	\[
+		(s ^{-1} \otimes s ^{-1} )(sx \otimes sy) = (-1)^{\left| s ^{-1}  \right| \left| sx \right| } s ^{-1} (sx) s ^{-1} (sy) = (-1)^{-(\left| x \right|-1) } x\otimes y=(-1)^{\left| x \right| -1} x\otimes y
+	.\]
+	Thus we actually define
+	\[
+		\partial _1(sx \cdot sy) = (-1)^{\left| x \right| -1} s[x,y]
+	.\]
+	The natural global extension is by defining
+	\[
+		\partial _1(sx_1 \cdots sx_k) = \sum_{1\leq i<j\leq k} (-1)^{\left| x_i \right| \left| x_j \right| } \partial _1(sx_i \cdot sx_j)\cdot sx_1 \cdots \widehat{sx_i}\cdots \widehat{sx_j}\cdots sx_k
+	.\]
+	The final differential $d=\partial _0+\partial _1$ is then as follows. let $x_1, \ldots ,x_k\in \mathfrak{g} $ be homogeneous elements. Then
+	\begin{align*}
+		d(sx_1\cdots sx_k) &= -\sum_{i=1}^{k} (-1)^{\sum_{j=1}^{i-1} \left| sx_j \right| } sx_1 \cdots sd_\mathfrak{g}(x_i)\cdots sx_k\\
+				   &+\sum_{1\leq i<j\leq k} (-1)^{\left| x_i \right| \left| x_j \right| } (-1)^{\left| x_i \right| -1} s[x_i,x_j]\cdots sx_1 \cdots \widehat{sx_i}\cdots \widehat{sx_j}\cdots sx_k
+	.\end{align*}
+	Once again, the Chevalley-Eilenberg chains do not form a dg $\mathbb{K} $-algebra, and only form a dg $\mathbb{K} $-coalgebra. This is weird to work with, so we prefer to work with the Chevalley-Eilenberg cochains.
+\end{discussion}
+
+
+
+\begin{discussion}\label{3.2.3}
+	We investigate the underlying graded $\mathbb{K} $-vector space of the Chevalley-Eilenberg cochains. Recall by \cref{???} that we define $\mathfrak{g} ^* \coloneqq \underline{\Hom}_\mathbb{K} (\mathfrak{g} ,\mathbb{K} )$. Since $\mathbb{K} $ is concentrated in degree 0, we can appeal to the explicit construction in \cref{2.1.7} to recover
+	\[
+		(\mathfrak{g} ^*)^i = \Hom_\mathbb{K} (\mathfrak{g} , \mathbb{K} [i]) 
+	.\]
+	Since $\mathbb{K} [i]$ is concentrated in degree $-i$, a graded $\mathbb{K} $-vector space morphism $\mathfrak{g} \to \mathbb{K} [i]$ is precisely a $\mathbb{K} $-linear map $\mathfrak{g} ^{-i} \to \mathbb{K} $. Thus we obtain
+	\[
+		(\mathfrak{g} ^*)^i \cong \Hom_\mathbb{K} (\mathfrak{g} ^{-i} , \mathbb{K} ) \cong (\mathfrak{g} ^{-i} )^*
+	.\]
+	Then of course $(\mathfrak{g} ^*[-1])^i \cong (\mathfrak{g}^{1-i} )^*$, meaning $C^{\bullet} (\mathfrak{g} )\cong \operatorname{Sym} (\mathfrak{g} ^*[-1])$. Following \cref{??} then tells us what homogeneous elements of the symmetric algebra are. A homogeneous element $\omega \in C^{\bullet} (\mathfrak{g} )$ of degree $k$ is any $\mathbb{K} $-linear combination of products of homogeneous elements $x_1, \ldots ,x_p\in \mathfrak{g} ^*$ such that
+	\[
+		\sum_{1\leq i\leq p} (\left| x_i\right| + 1) =\left| \omega  \right| 
+	.\]
+	The factor of $+1$ comes from the shift: a homogeneous element of degree $i$ in $\mathfrak{g} ^*$ is homogeneous of degree $i+1$ in $\mathfrak{g} ^*[-1]$. Hence we must have
+	\[
+		\sum_{1\leq i\leq p} \left| x_i \right| =\left| \omega  \right| -p
+	.\]
+	Although we no longer have the nice structure of an exterior algebra as in the non-graded case, $C^{\bullet} (\mathfrak{g} )$ is still a dg commutative $\mathbb{K} $-algebra, and thus \cref{1.3.8} tells us that multiplication obeys Koszul braiding
+	\[
+		xy=(-1)^{\left| x \right| \left| y \right| } yx
+	\]
+	with respect to the degrees in $C^{\bullet} (\mathfrak{g} )$.
+\end{discussion}
+
+\begin{discussion}\label{3.2.4}
+	Now we are interested in the differential on $C^{\bullet} (\mathfrak{g} )$. Recall by \cref{3.2.2} that we define the differential on $\operatorname{Sym} (\mathfrak{g} [1])$ by
+	\begin{align*}
+		d(sx_1\cdots sx_k) &= -\sum_{i=1}^{k} (-1)^{\sum_{j=1}^{i-1} \left| sx_j \right| } sx_1 \cdots sd_\mathfrak{g}(x_i)\cdots sx_k\\
+				   &+\sum_{1\leq i<j\leq k} (-1)^{\left| x_i \right| \left| x_j \right| } (-1)^{\left| x_i \right| -1} s[x_i,x_j]\cdots sx_1 \cdots \widehat{sx_i}\cdots \widehat{sx_j}\cdots sx_k
+	.\end{align*}
+	Write $d^{\bullet} $ for the cohomological differential and $d_{\bullet} $ for the homological differential. Recall from \cref{2.1.8} that in $C^{\bullet} (\mathfrak{g} )=\underline{\Hom}_\mathbb{K} (C_{\bullet} (\mathfrak{g} ),\mathbb{K} )$, the differential is given by
+	\[
+		d^{\bullet}(f)=d_\mathbb{K} \circ f - (-1)^{\left| f \right| } f\circ d_{\bullet} 
+	.\]
+	Since $d_\mathbb{K} =0$, we obtain that the differential in $C^{\bullet} (\mathfrak{g} )$ is given by
+	\[
+		d^{\bullet} =-(-1)^{\left| - \right| } d_{\bullet} ^*
+	.\]
+	
+
+	With notation as in \cref{3.2.2}, write $d_{\bullet} =\partial _0 + \partial _1$. Since $\Vect_\mathbb{K} $ is an abelian category, and since cochains $\omega \in C^k(\mathfrak{g} )$ are $\mathbb{K} $-linear maps $\omega : C_k(\mathfrak{g} ) \to \mathbb{K} $, we obtain
+	\[
+		d^{\bullet} \omega =-(-1)^{\left| \omega  \right| }\omega \circ d_{\bullet} =-(-1)^{\left| \omega  \right| } \omega \circ (\partial _0 + \partial _1) = -(-1)^{\left| \omega  \right| }\omega \circ \partial _0 -(-1)^{\left| \omega  \right| } \omega \circ \partial _1
+	.\]
+	Hence we obtain that $d^{\bullet} $ can be described as a graded sum of two operators $\partial _0^*$ and $\partial _1^*$, which we write as $d_0^{\bullet} =-(-1)^{\left| - \right| } \partial _0^*$ and $d_1^{\bullet} =-(-1)^{\left| - \right| } \partial _1^*$.
+
+	As always, we don't want to view $n$-cochains as maps $C_n(\mathfrak{g} )\to \mathbb{K} $, but rather as degree $n$ homogeneous elements of $\operatorname{Sym} (\mathfrak{g} ^*[-1])$, as explored in \cref{3.2.3}. So we explore the isomorphisms in detail to obtain a formula for taking $d^{\bullet} _0$ and $d^{\bullet} _1$ on homogeneous elements of $\operatorname{Sym} (\mathfrak{g} ^*[-1])$.
+
+	Recall that $\operatorname{Sym} (\mathfrak{g}^*[-1])$ is a dg commutative $\mathbb{K} $-algebra, so the differential acts as a derivation, so it suffices to define it on elements $s ^{-1} \alpha $. We of course illustrate how it extends more generally. Let $\alpha : \mathfrak{g}^k \to \mathbb{K} $ a map of graded $\mathbb{K} $-vector spaces, which determines the homogeneous element $\alpha \in C^{-k} (\mathfrak{g} )$ by identifying it with the map $C_{\bullet} (\mathfrak{g} )\to \mathbb{K} [k]$ which is $\alpha $ in degree $-k$. Nope thats wrong it conflates g with Sym(g)
+\end{discussion}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{discussion}\label{2.4.3}
+    We can now transparently recover the cochain differential $D = d_0 + d_1$ from \cref{2.3.2} by dualizing the chain complex.
+    
+    The cochain complex is defined as $C^\bullet(\mathfrak{g}) = \underline{\Hom}_\mathbb{K}(C_\bullet(\mathfrak{g}), \mathbb{K})$. 
+    Let $s^{-1}\alpha \in \mathfrak{g}^*[-1]$ be a degree 1 generator of the cochains, dual to $sx \in \mathfrak{g}[1]$. The canonical pairing evaluates as $\langle s^{-1}\alpha, sx \rangle = \alpha(x)$.
+
+    The cochain differential $D$ is the formal adjoint of the chain differential $\partial$. For any cochain $\omega$ and chain $c$, the duality relation defines $D$ such that:
+    \[
+        \langle D\omega, c \rangle = -(-1)^{|\omega|} \langle \omega, \partial c \rangle.
+    \]
+
+    \textbf{Dualizing $\partial_0$ to recover $d_0$:}
+    Let $\omega = s^{-1}\alpha \in \mathfrak{g}^*[-1]$, which has degree $|\omega| = 1 - |\alpha|$. Applying the duality relation to a chain $sx$:
+    \begin{align*}
+        \langle d_0(s^{-1}\alpha), sx \rangle &= -(-1)^{1-|\alpha|} \langle s^{-1}\alpha, \partial_0(sx) \rangle \\
+        &= (-1)^{-|\alpha|} \langle s^{-1}\alpha, s(d_\mathfrak{g}x) \rangle \\
+        &= -(-1)^{|\alpha|} \alpha(d_\mathfrak{g}x).
+    \end{align*}
+    This exactly recovers the definition of $d_0$ constructed in \cref{2.3.2}.
+
+    \textbf{Dualizing $\partial_1$ to recover $d_1$:}
+    Let $\omega = s^{-1}\alpha \in \mathfrak{g}^*[-1]$. We pair $d_1(s^{-1}\alpha)$ against the 2-chain $sx \cdot sy$. Using the duality relation:
+    \begin{align*}
+        \langle d_1(s^{-1}\alpha), sx \cdot sy \rangle &= -(-1)^{1-|\alpha|} \langle s^{-1}\alpha, \partial_1(sx \cdot sy) \rangle \\
+        &= (-1)^{-|\alpha|} \langle s^{-1}\alpha, (-1)^{|x|-1} s([x,y]) \rangle \\
+        &= (-1)^{|x|-|\alpha|-1} \alpha([x,y]).
+    \end{align*}
+    If we evaluate the specific case where $x$ and $y$ are both degree 0 (reducing to a regular Lie algebra), the sign becomes $(-1)^{-|\alpha|-1} = -(-1)^{-|\alpha|}$. Evaluated on a degree 0 functional where $|\alpha|=0$, this collapses precisely to $-\alpha([x,y])$, fully reconciling the minus sign derived in the non-DGLA case.
+\end{discussion}
+
+
+
+
+
+
+
+\begin{construction}\label{2.3.2}
+    Let $(\mathfrak{g}, d_\mathfrak{g})$ be a DGLA. We construct the Chevalley-Eilenberg cochain complex $C^\bullet(\mathfrak{g})$. 
+    
+    The underlying graded vector space is identical to the regular Lie algebra case: we shift the dual space and take the free graded commutative algebra, yielding
+    \[
+        C^\bullet(\mathfrak{g}) = \operatorname{Sym}(\mathfrak{g}^*[-1]).
+    \]
+    As established previously, the shift and the Koszul braiding canonically identify this space with $\Lambda^\bullet \mathfrak{g}^*$ as a graded vector space. However, we must now define a total differential $D$ of cohomological degree $+1$ that incorporates both the internal differential $d_\mathfrak{g}$ and the Lie bracket.
+
+    We define $D$ as the sum of two operators: $D = d_0 + d_1$.
+
+    \textbf{The internal differential ($d_0$):} 
+    The internal differential $d_\mathfrak{g} : \mathfrak{g} \to \mathfrak{g}[1]$ dualizes to a map $d_\mathfrak{g}^* : \mathfrak{g}^* \to \mathfrak{g}^*[1]$. Applying the shift functor $[-1]$ to both domain and codomain yields a map of degree $+1$ on the generators:
+    \[
+        d_0 : \mathfrak{g}^*[-1] \to \mathfrak{g}^*[-1].
+    \]
+    For a generator $s^{-1}\alpha \in \mathfrak{g}^*[-1]$ and $x \in \mathfrak{g}$, this evaluates as $d_0(s^{-1}\alpha)(x) = -(-1)^{\left| \alpha \right|} \alpha(d_\mathfrak{g}(x))$. Because $\operatorname{Sym}(\mathfrak{g}^*[-1])$ is a free algebra, $d_0$ extends uniquely to a degree $+1$ graded derivation on the entire algebra. Crucially, $d_0$ preserves the symmetric power (the "word length") of the cochains.
+
+    \textbf{The Chevalley-Eilenberg differential ($d_1$):}
+    The bracket $[-,-] : \mathfrak{g} \otimes \mathfrak{g} \to \mathfrak{g}$ dualizes and shifts exactly as derived in the regular Lie algebra case, yielding a map of degree $+1$ on the generators:
+    \[
+        d_1 : \mathfrak{g}^*[-1] \to \operatorname{Sym}^2(\mathfrak{g}^*[-1]).
+    \]
+    This also extends uniquely to a degree $+1$ graded derivation on the entire algebra. Unlike $d_0$, $d_1$ increases the symmetric power by 1.
+\end{construction}
+
+\begin{proposition}\label{2.3.3}
+    The total differential $D = d_0 + d_1$ satisfies $D^2 = 0$, making $(C^\bullet(\mathfrak{g}), D)$ a valid differential graded commutative algebra.
+\end{proposition}
+
+\begin{proof}
+    Because $D$ is the sum of two degree $+1$ graded derivations, its square expands as:
+    \[
+        D^2 = (d_0 + d_1)^2 = d_0^2 + (d_0 \circ d_1 + d_1 \circ d_0) + d_1^2.
+    \]
+    Since $d_0$ increases the word length by 0 and $d_1$ increases it by 1, the three terms on the right-hand side increase the word length by 0, 1, and 2, respectively. For the sum to be identically zero, each component must vanish independently.
+    
+    \begin{enumerate}
+        \item $d_0^2 = 0$: This follows directly from the fact that $d_\mathfrak{g}^2 = 0$ on the underlying module $\mathfrak{g}$.
+        \item $d_1^2 = 0$: As verified in the case of regular Lie algebras, this condition is exactly equivalent to the graded Jacobi identity for the bracket $[-,-]$.
+        \item $d_0 \circ d_1 + d_1 \circ d_0 = 0$: This is the graded commutator of the two derivations. Evaluated on a dual generator, this vanishing condition translates precisely to the requirement that $d_\mathfrak{g}$ acts as a graded derivation over the Lie bracket (axiom 3 of \cref{2.3.1}).
+    \end{enumerate}
+    Thus, $D^2 = 0$, and the cohomology $H^\bullet(\mathfrak{g}) = \ker(D)/\operatorname{im}(D)$ is well-defined.
+\end{proof}
+

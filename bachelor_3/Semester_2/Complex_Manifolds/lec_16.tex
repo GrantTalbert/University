@@ -1,0 +1,96 @@
+\section{\v{C}ech cohomology}
+\lecture{16}{Tue 07 Apr 2026 12:34}{\v{C}ech cohomology}
+
+
+To motivate \v{C}ech cohomology, let $X$ a topological space and $\mathcal{F} $ a sheaf on $X$. Consider an open cover $\mathcal{U} \coloneqq \left\{ U_i \right\} _{i\in I} $ by a linearly ordered index set $I$. We will try to compute global sections of $\mathcal{F} $ using the open cover $\mathcal{U} $. Using the gluing property, if we have a collection $\left\{ s_i \in \mathcal{F}(U_i) \right\}_{i\in I} $ of sections which agree on pairwise overlaps $s_i|U_i \cap U_j = s_j|U_i \cap U_j$, then there is a unique $s\in \mathcal{F} (X)$ such that $s|U_i = s_i$. Thus we can glue together compatible local sections along the open cover.
+
+We want to write down the set of all global sections by writing down the sets of all compatible local sections along $\mathcal{U} $. We want to do this in more homological terms. Define the zeroth cochains $\check{C}^0(\mathcal{U} ,\mathcal{F} )$ to be
+\[
+	\prod_{i\in I} \mathcal{F} (U_i)
+.\]
+This is a first approximation to global sections, but it ignores compatibility concerns. We write
+\[
+	U_{i_0 \ldots i_n} \coloneqq U_{i_0} \cap \cdots \cap U_{i_n} 
+.\]
+Then the first cochains are
+\[
+	\check{C}^1(\mathcal{U} ,\mathcal{F} )\coloneqq \prod_{i_0 < i_1} \mathcal{F} (U_{ij} )
+.\]
+We want to define a differential $\delta $ such that the kernel $\Ker \delta $ consists of sections which agree on the overlaps. Hence we want $\Ker \delta = \Gamma (X,\mathcal{F} ) = H^0(X,\mathcal{F} )$. Thus we define
+\[
+	(\delta \gamma )_{ij} =\gamma _i - \gamma _j
+.\]
+Here $\gamma =\left\{ \gamma _i\in \mathcal{F} (U_i) \right\}_{i\in I} $, and we write $\gamma _{ij} =\gamma |U_{ij} $. We can extend this to higher degrees:
+\[
+	\check{C}^p(\mathcal{U} ,\mathcal{F} )\coloneqq \prod_{i_0 < \cdots < i_p} \mathcal{F} (U_{i_0 \cdots i_p} )
+\]
+with differential $\delta : \check{C}^p(\mathcal{U} ,\mathcal{F} ) \to \check{C}^{p+1} (\mathcal{U} ,\mathcal{F} )$ given by
+\[
+	(\delta \gamma )_{i_0 \cdots i_{p+1}} =\sum_{j=0}^p (-1)^j \gamma _{i_0 \cdots \widehat{i}_j \cdots i_p} 
+.\]
+This yields a cochain complex $\check{C}^{\bullet} (\mathcal{F} ,\mathcal{U} )$. Since the 0th homology is $\Gamma (X,\mathcal{F} )$, this complex is in some sense \emph{trying} to resolve $\Gamma $. However, this complex is not quite exact.
+
+\begin{definition}\label{4.2.1}
+	The complex $(\check{C}^{\bullet} (\mathcal{U} ,\mathcal{F} ),\delta )$ is called the \emph{\v{C}ech complex} of the sheaf $\mathcal{F} $ with respect to the open cover $\mathcal{U} $.
+\end{definition}
+
+
+The choice of open cover is important. Consider $X=\mathbb{P} ^1 \cong S^2$, and consider the constant sheaf $\mathcal{F} =\mathbb{C} $. Recall $H^{\bullet}_{\Shf }(X,\mathbb{C} )$ is singular cohomology $H^{\bullet}_{\Sing } (X,\mathbb{C} )$. Recall that $S^2$ has cohomology $\mathbb{C} $ concentrated in degrees 0 and 2.
+Let $0$ denote the north pole and $\infty $ denote the south pole. Then
+\[
+	U_0 \coloneqq X\setminus \left\{ \infty  \right\} \cong \mathbb{R} ^2,
+\]
+\[
+	U_1 \coloneqq X \setminus \left\{ 0 \right\} \cong \mathbb{R} ^2,
+\]
+\[
+	U_{01} \coloneqq X\setminus \left\{ 0,\infty  \right\} \cong \mathbb{C} \setminus \left\{ 0 \right\} 
+.\]
+Since constant sheaves are locally constant, they are constant on connected sets. Thus
+\[
+	\mathcal{F} (U_0) \cong  \mathcal{F} (U_1) \cong \mathbb{C} 
+.\]
+Similarly, $\mathbb{C} \setminus \left\{ 0 \right\} $ is connected, so $\mathcal{F} (U_{01} )\cong \mathbb{C} $. The differential $\delta : \mathcal{F} (U_0)\times \mathcal{F} (U_1)\to \mathcal{F} (U_{01} )$ is simply subtraction $(a,b)\mapsto b-a$. Hence $\delta $ is surjective, since any complex number can be written as a difference of complex numbers. The kernel is pairs $(a,b)=(a,a)$, hence $\Ker \delta \cong \mathbb{C} $. We find that the cohomology is simply
+\[
+	H^0(\check{C}^{\bullet} (\left\{ U_0,U_1 \right\} ,\mathcal{F} )) = \mathbb{C} ,
+\]
+and the cohomology vanishes in other degrees. This is not simplicial cohomology.
+
+What has gone wrong? Clearly, the cover is not fine enough. For example, we need the complex to not vanish in degree 2, meaning we need at least 3 open sets. Another idea is as follows. The complex was sort of trying to resolve $\Gamma (X,-)$. Normally, our resolutions need to be $\Gamma (X,-)$-acyclic, so we need an analog. In particular, we need the sheaf cohomology of all intersections $H^n_{\Shf }(U_{i_0 \cdots i_p} ,\mathcal{F} )$ to vanish for $n>0$. This fails here: $H^1_{\Shf }(\mathbb{C} ^*,\mathbb{C} )$ is the singular cohomology, which is nonvanishing since $\mathbb{C} ^*$ has the homotopy type of $S^1$.
+
+Technically, \v{C}ech cohomology is defined as the colimit over \emph{all} covers
+\[
+	H^{\bullet} (\check{C} (\mathcal{F} ))=\colim_{\mathcal{U} } H^{\bullet} (\check{C}(\mathcal{U} ,\mathcal{F} ))
+.\]
+No one is going to enumerate all open covers, so we look for sufficiently nice open covers.
+\begin{theorem}[Serre]\label{thm:owo}
+	Let $X$ be a complex manifold. If $\mathcal{F} $ is a coherent analytic sheaf (a sheaf of $\mathcal{O} _X$-modules) that locally looks like a cokernel
+	\[
+		\Coker(\mathcal{O} _X^{\oplus n} \to \mathcal{O} _X^{\oplus m} )
+	.\]
+	Google coherent sheaves; analytic coherent is coherent in the holomorphic world. Then on a smooth algebraic variety $X$, any affine open cover suffices.
+\end{theorem}
+\begin{theorem}[GAGA]\label{thm:owo2}
+	If $X$ is a projective manifold (embeddable in projective space), the cohomology
+	\[
+		H^{\bullet}_{\Shf }(X,\mathcal{O} _X^{alg}) \cong H^{\bullet}_{\Shf } (X, \mathcal{O} _X)
+	,\]
+	where $\mathcal{O} _X^{alg} $ is the sheaf of algebraic functions on $X$. More generally, this holds for coherent sheaves $\mathcal{F} $.
+\end{theorem}
+
+\begin{example}
+	Consider $X=\mathbb{P} ^1$. We choose the sheaf $\mathcal{O} _X$ of holomorphic functions, but by GAGA,  we can use $\mathcal{O} _X^{alg} $. We use $U_0 = X\setminus \left\{ 0 \right\} $ and $U_1=X\setminus \left\{ \infty  \right\} $ once again, and $U_{01} =\mathbb{C} ^*$ is the circle. This cover is okay to use here because we are now working with algebraic functions, and all three of these sets are affine varieties. There is no higher cohomology on affine varieties, so these open sets pass the acyclicity test for algebraic functions. Choose a coordinate system near $0$ such that algebraic functions on $U_0$ are polynomials $\mathbb{C} [z]$. We then identify algebraic functions on $U_1$ with polynomials $\mathbb{C} [z^{-1} ]$ near $\infty $. Algebraic functions on $\mathbb{C} ^*$ are Laurant polynomials $\mathbb{C} [z, z^{-1} ]$.
+
+	The differential $\delta $ maps polynomials as
+	\[
+		(p(z), q(z^{-1} ))\mapsto q(z^{-1} ) - p(z)
+	.\]
+	This map is surjective \emph{because we are working in polynomials}. The kernel is once again $\mathbb{C} $, viewed as pairs of constant functions $a \mapsto (a,a)$. Thus $H^0_{\Shf } (X,\mathcal{O} _X^{alg} )$ is $\mathbb{C} $. The cohomology vanishes in $n>0$.
+\end{example}
+
+
+
+
+\begin{definition}\label{4.2.2}
+	Let $X$ be a topological space. An open cover $\left\{ U_i \right\} _{i\in I} $ is \emph{good} is a cover when all open sets $U_i$ and all finite $n$-fold intersections thereof are contractible.
+\end{definition}

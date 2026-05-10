@@ -1,105 +1,129 @@
-\lecture{12}{Tue 03 Mar 2026 14:01}{Prefactorization envelopes (pFE's)}
+\chapter{Free field theories}
 
-Let $\mathcal{L} $ be a fine sheaf on a manifold $M$ of dgla's, and $\mathcal{L} _c$ the corresponding cosheaf of compactly supported sections. The factorization envelope $\mathbb{U} \mathcal{L} $ is defined as the prefactorization algebra mapping $U\subseteq M$ to Chevelay chains $C_{\bullet} (\mathcal{L} _c(U))$. This is a preFA in cochain complexes, and the cohomology of this (which is the dgla homology) yields a preFA $H^{\bullet} (C_{\bullet} (\mathcal{L} _c(U)))$ in vector spaces.
+\section{The divergence complex of a measure}
 
-It's often useful to consider \emph{twisted} variants of this construction corresponding to central extensions of $\mathcal{L} $. Recall given a Lie algebra $\mathfrak{g}$, a central extension of $\mathfrak{g} $ is a Lie algebra $\hat{\mathfrak{g} }$ with a short exact sequence
+\lecture{12}{Tue 17 Mar 2026 14:03}{Free field theories}
+
+We now want to return to our free field theory motivation at the beginning of the course, but to lift them to pFAs in cochain complexes.
+
+Let $M$ an oriented $n$-manifold, and $\omega =e^{f/\hbar} \omega _0$ for $f : M \to \mathbb{C} $ and $\omega _0$ a volume form. We think of this as some kind of generalized measure. Start with the de Rham complex $\Omega ^{\bullet} (M)$. This is isomorphic to the divergence complex of polyvector fields $\Omega ^{\bullet} (M) \cong (PV^{\bullet} ,\mathrm{Div}_\hbar)$. We recall this looks like $\Gamma(M,\Lambda ^{n-\bullet-1} TM)$. Although they are isomorphic as chain complexes, although dR is a dg algebra, $PV^{\bullet} $ is not. On the lowest degree,
+\[
+	\mathrm{Div}_{\hbar } = \intprod \hbar ^{-1} \mathrm{d} f + \mathrm{Div} _{\omega _0} 
+.\]
+In the limit as $h\to 0$, we get $(PV^{\bullet} ,\intprod\mathrm{d} f)$ somehow.
+We call $(M,PV^{\bullet}_M,\intprod\mathrm{d} f)$ the \emph{derived critical locus} of $f$. We explain why.
+
+Let $f : M \to \mathbb{R} $ some smooth map on a manifold. Recall
+\[
+	\operatorname{Crit} (f) = \left\{ x\in M\mid \mathrm{d} f|_x=0 \right\} 
+.\]
+
+As before, we want to define observables to be functions on the critical locus. To formulate this precisely, it would be nice if $\operatorname{Crit} (f)$ was a manifold. Note that we can describe the critical locus as the interection of the graph $\Gamma (\mathrm{d} f)$ and the the zero section $M\times \left\{ 0 \right\} \cong M$ in $T^*M$. Unfortunately, this need not be a manifold at all. We instead transition to the tools of algebraic geometry. Recall an intersection is a pullback, hence a limit. In particular, it is the limit in $\Set $
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	0\ar[r]  & \mathfrak{a} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathfrak{g} \ar[r]  & 0,
+M \cap \Gamma (\mathrm{d} f)\ar[r] \ar[d]  & M\ar[d]  \\
+\Gamma (\mathrm{d} f)\ar[r]  & T^*M.
 \end{tikzcd}\]
-where $\mathfrak{a} \subseteq Z(\hat{\mathfrak{g} })$ is an ideal contained inside the center. There is a correspondence of central extensions with $H^2(\mathfrak{g} ,\mathfrak{a} )$. Given a splitting of this sequence $j : \mathfrak{g}  \to \hat{\mathfrak{g} }$, we define $\omega (x,y)=[j(x),j(y)]-j([x,y])$. We can show $d_{\mathrm{CE} } \omega =0$. We can also show that if we choose a different splitting, then $\omega $ changes only by a coboundary. Write another split as $j'=j+\alpha $, then
+Of course the category of manifolds need not have pullbacks. However, we are not interested in $\operatorname{Crit} (f)$ itself, but rather functions $C^\infty (\operatorname{Crit} (f))$. So we obtain a notion of what $C^\infty (\operatorname{Crit} (f))$ should beby applying $C^\infty =\mathcal{O} $ and computing the pushout
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{O} (\Gamma (\mathrm{d} f))\otimes_{\mathcal{O} (T^*M)} \mathcal{O} (M) & \mathcal{O} (M)\ar[l]  \\
+\mathcal{O} (\Gamma (\mathrm{d} f))\ar[u]  & \mathcal{O} (T^*M)\ar[u] \ar[l] 
+\end{tikzcd}\]
+Thus we would think of observables as elements of this tensor product.
+
+However, observables should be some kind of function that gives us a number. We can reconcile this while at the same time solving another problem: this object is not well-behaved in general. So we apply the derived philosophy to rather consider the derived tensor $\otimes^{\mathbf{L} }_{\mathcal{O} (T^*M)} $. We remark later that we may define the derived tensor product of two modules $M\otimes_R^{\mathbf{L} } N$ as the complex $\operatorname{Tor}_{\bullet} ^R(M,N)$. Hence we need to find a resolution of one of these modules by $\mathcal{O} (T^*M)$-modules.
+
+We resolve $\mathcal{O} (\Gamma (\mathrm{d} f))$ by a Koszul-type complex. The resolution $K^{\bullet} $ is by
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\cdots \ar[d]  \\
+	\mathcal{O} (T^*M)\otimes_{\mathcal{O} (M)} \Lambda ^2TM\ar[d] \\
+	\mathcal{O} (T^*M)\otimes _{\mathcal{O} (M)} \Lambda ^1TM\ar[d]  \\
+	\mathcal{O} (T^*M)\otimes _{\mathcal{O} (M)} \Lambda ^0TM\ar[d] \\
+	\mathcal{O} (\Gamma (\mathrm{d} f))\ar[d] \\
+	0.
+\end{tikzcd}\]
+It is unclear what the differential is in this complex. The lowest degree map on the Koszul part is $1\otimes X\mapsto X-X(f)$ apparently. Then clearly $\mathcal{O} (M)\otimes_{\mathcal{O} (T^*M)} K^{\bullet} \cong \Lambda ^{\bullet} TM$, and we claim what survives of the differential is precisely contraction with $\mathrm{d} f$. Thus we have recovered the derived critical locus, which is the dg-manifold $(M, \mathrm{PV} ^{\bullet} , \intprod \mathrm{d} f)$.
+
+Unfortunately, this has not given us a notion of functions on the critical locus, as we originally hoped. With our current notation, $M$ is the space of fields and $f$ is the action functional. Thus the degree 0 term $C^\infty (M)$ is just functions on \emph{all} fields. However, since the lowest degree map is contraction with $\dd f$, the image $\Im \iota _{(-)} \dd f$ consists of elements of the form $\dd f(X)$, for $X$ a vector field. We remark that this is defined as $X(f)$ and can be computed in coordinates easily.
+
+In particular, the image $\Im \iota _{(-)} \dd f$ is the ideal of $C^\infty (M)$ generated by the derivatives $\partial _if$ of the action $f$. In order for $\dd f$ to vanish identically, all of its partial derivatives must vanish, otherwise I could find a coordinate function $x^i$ and a nonvanishing partial $\partial _if$ and obtain $\dd S(x^i)= \partial _iS \neq 0$. Moreover, if the partials all vanish, then $\dd S$ vanishes. Thus quotienting out by the image $C^\infty (M) / \Im \iota _{(-)} \dd f$ is universal with respect to identifying $\dd f$ to zero. Thus, $\Im \iota _{(-)} \dd f$ is precisely the kernel of the restriction morphism $C^\infty (M) \to C^\infty (\operatorname{Crit} (f))$ given by $f\mapsto f|\operatorname{Crit} (f)$. Hence the first isomorphism theorem identifies the quotient with $C^\infty (\operatorname{Crit} (f))$. Of course $C^\infty (\operatorname{Crit} (f))$ need not exist, so we treat this identification as a definition. Now simply recognize that $C^\infty (M) / \Im \iota _{(-)} \dd f = H^0(\mathrm{PV} ^{\bullet} )$. We thus see that the functions on the critical locus live inside of the homology complex of the derived critical locus, but the derived critical locus contains more information.
+
+Toen has several survey papers on DAG that are quite readable.
+
+Now free field theories. A free field theory is one where the action functional is quadratic in the fields. If $\mathcal{E} $ is the space of fields, for example scalar fields, then
 \[
-	\omega '(x,y)=[j(x)+\alpha (x),j(y)+\alpha (y)]-j[x,y]-\alpha [x,y]
+	S(\phi )= \int_{\mathbb{R} ^n} \frac{1}{2} \phi \Delta \phi +\frac{1}{2} m^2\phi ^2\,\mathrm{d} V
 .\]
-We must have $\alpha : \mathfrak{g}  \to \mathfrak{a} $, so $\alpha (x),\alpha (y)$ fall in the center and don't affect the bracket. So it is just
+It is quadratic since $S(\lambda \phi )=\lambda ^2S(\phi )$. However something like
 \[
-	\omega '=[j,j]-j[\cdot ,\cdot ]-\alpha [\cdot ,\cdot ]
+	\widetilde{S} (\phi )=\int_{\mathbb{R} ^n} \frac{1}{2} \phi \Delta \phi +\frac{1}{2} m^2\phi ^2+\frac{g}{4^n} \phi ^4 \,\mathrm{d} V
+\]
+is not an FFT. We would call that an interacting field theory. This is in opposition to FFTs since an FFT is one where particles don't interact. All particles are free. Physically these theories are not very interesting. The general idea of QFT is to view a theory as a perturbation of a FFT, since we are not quite good at solving interacting field theories.
+
+Our goal is to construct pFAs of observables in FFTs as having values in cochain complexes, since this contains all higher order information as well as the observables which live in in degree 0. These will be twisted factorization envelopes of Heisenberg Lie algebras.
+
+Consider a finite dimensional toy example of why quadratic functions yield Heisenberg algebras. Consider $q(x)=\frac{1}{2} x^tAx$, $A$ a symmetric matrix. Then (using summation notation)
+\[
+	\mathrm{d} q = \mathrm{d} \left( \frac{1}{2} x_iA_{ij} x_j \right) =x_i A_{ij} \mathrm{d} x_j
 .\]
-We see then that $\alpha $ is a coboundary since $x\wedge y\to \alpha [x,y]$ is $d_{\mathrm{CE} } \alpha $ in $C^{\bullet} (\mathfrak{g} ,\mathfrak{a} )$ apparently. So the cohomology class of $\omega $ is well-defined.
+We claim $ \mathrm{d} q$ is a map $V\to V^*$. Choose $V=\mathbb{R} ^2$ and $q(x,y) = x^2 - 3xy + 2y^2$. Then
+\[
+	\mathrm{d} q = 2x\mathrm{d} x - 3x\mathrm{d} y - 3y\mathrm{d} x + 3y\mathrm{d} y
+.\]
+Let $x=(1,2)$ a tangent vector. Then $\mathrm{d} q$ and $x$ somehow become
+\[
+	2\mathrm{d} x - 3\mathrm{d} y - 6\mathrm{d} x + 6\mathrm{d}y\in V^*
+.\]
+This is the part where we use quadraticity of $q$. We do not know if this is contraction or not. We write
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	W : V\ar["  \mathrm{d} q", r]  & V^*[-1].
+\end{tikzcd}\]
+We view this complex as an abelian dgla. Consider Chevalay-Eilenberg chains on this $C_{\bullet} (W)=\operatorname{Sym} (V[1]\to V^*)$ with differential $d_{\mathrm{CE} } +\mathrm{d} q$. Brackets are 0 so $d_{\mathrm{CE} } =0$, so we just have the graded symmetric algebra with a derivation as the differential.
 
-\begin{example}
-	Let $\mathfrak{g} =\mathbb{C} ^2$ an abelian Lie algebra, and consider the 1-dimensional central extensions
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-		0\ar[r]  & \mathbb{C} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathbb{C} ^2\ar[r]  & 0.
-	\end{tikzcd}\]
-	Then $H^2(\mathfrak{g} ,\mathbb{C} )$ looks like
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	0\ar[r]  & \mathfrak{g} ^* \ar[r]  & \Lambda ^2 \mathfrak{g} ^* \ar[r]  & \Lambda ^3 \mathfrak{g} ^*\ar[r]  & \cdots .
-	\end{tikzcd}\]
-	Given $\phi \in \Lambda ^n\mathfrak{g} ^*$ and $\left\{ x_i \right\} _{1\leq i\leq n+1} \subseteq \mathfrak{g} $, the differential is
-	\[
-		(d_{\mathrm{CE} } \phi )(x_1 \wedge \cdots \wedge x_{n+1} )=\sum_{i,j} \pm \phi ([x_i,x_j],x_1, \cdots ,\hat{x} _i,\cdots ,\hat{x} _j,\cdots ,x_n)
-	.\]
-	The $\pm$ is determined by the parity of $i,j$. Since the brackets are all 0, $d_{\mathrm{CE} } \phi =0$, so the homology is simply $H^2(\mathfrak{g} ,\mathbb{C} )\cong \Lambda ^2\mathfrak{g} ^*$. Since this is 1-dimensional over $\mathbb{C}$ since $\mathfrak{g} ^*$ is 2-dimensional, there is a unique central extension up to scaling. Thus $\hat{\mathfrak{g} } \cong \mathfrak{g} \oplus \mathbb{C} k$ for some $k\in\mathbb{C} $, and $\omega (x,y)=k$ (here $x,y$ the coordinates of $\mathbb{C} ^2$). There is then one bracket $[x,y]=k$. This is the \emph{Heisenberg Lie algebra} in 3 dimensions. These can be thought of as upper-triangular 3 dimensional matrices of the form
-	\[
-		\begin{pmatrix}
-		0 & x & k \\
-		0 & 0 & y \\
-		0 & 0 & 0
-		\end{pmatrix}
-	.\]
-\end{example}
+We have that the complex can be viewed as $\mathcal{O} (V)\otimes \Lambda ^{\bullet} TV$; here $V\cong TV$. This is exactly polyvector fields on $V$, contracting with $\mathrm{d} q$. Hence this is the derived critical locus of $q$. This was the classical case, showing that Chevalley chains of $W$ yield the derived critical locus of $q$. Can we correspondingly recover the quantum object (divergence complex) as a derived critical locus of something?
 
-\begin{example}[Affine Ka(c?z?idk)-Moody algebras]
-	Let $\mathfrak{g} $ be a simple Lie $\mathbb{C} $-algebra. If $A$ is a commutative $\mathbb{C} $-algebra, then $\mathfrak{g} \otimes _\mathbb{C} A$ is a Lie algebra $[x\otimes a,y\otimes b]=[x,y]\otimes ab$. This may fail in noncommutative rings due to failiure of Jacobi's identity. Take $A$ either Laurant polynomials $\mathbb{C} [t^{-1} ,t]$ or Laurent series $\mathbb{C} ((t))$. In the first case, the \emph{Loop algebra} is defined as
-	\[
-		L\mathfrak{g} =\mathfrak{g} \otimes \mathbb{C} [t^{-1} ,t]\cong \mathfrak{g} [t^{-1} ,t]
-	.\]
-	If we identify $t$ with $e^{i\theta } $ ($\mathbb{C} $-polynomials in $z$ are polynomials in $e^{i\theta } $), then we may think of this as $C^\infty (S^1,\mathfrak{g} )$, justifying the name.
+Yes. Consider a central extension of $W$. $W$ has a graded skew form of cohomological degree $(\pm?)1$ by pairing $V$ and $V^*$:
+\[
+	\left\langle(v,\phi ),(v',\phi ')\right\rangle=\phi (v')-\phi '(v)
+.\]
+Let $H_W=\mathbb{C} \hbar [-1]\oplus W$, with bracket given by
+\[
+	[w,w']=\hbar \left\langle w,w' \right\rangle 
+.\]
+This is some kind of central extension of an abelian Lie algebra, also called a Heisenberg algebra.
 
-	Consider the cocycle $\left\langle -,- \right\rangle _{\mathfrak{g} } $, a symmetric $\mathfrak{g} $-invariant form (so all multiples of the killing form). We will define
+\begin{construction}
+	I have decided to, after the fact, detail how to compute the derived tensor product $M\otimes _R^LN$ of two $R$-modules $M,N$. The category $\Ch(R) $ admits a model structure such that right exact functors are left Quillen, and thus the pointwise tensor product $-\otimes _RM$ is left Quillen. The left derived functor of a left Quillen functor $F : \mathcal{C}  \to \mathcal{D} $ is defined as (\cite{hovey}):
 	\[
-		\omega (x\otimes f(t),y\otimes g(t))=\left\langle x,y \right\rangle_\mathfrak{g} \operatorname{Res}_{t=0} f\mathrm{d} g
-	.\]
-	Skew-symmetry follows since the residue of $f\mathrm{d} g$ is negative of that of $g\mathrm{d} f$; easy to check. We claim $\omega \in H^2(\mathfrak{g} ,\mathbb{C} )$, and
-	\[
-		\hat{\mathfrak{g} }=L\mathfrak{g} \otimes \mathbb{C} k,
+		\mathbf{L} F = \Ho F \circ \Ho Q,
 	\]
-	\[
-		[x\otimes f(t),y\otimes g(t)]=[x,y]\otimes f(t)g(t)+\omega (x\otimes f,y\otimes g)k
-	.\]
-\end{example}
+	for $Q : \mathcal{C}  \to \mathcal{C} _c$ a cofibrant replacement. We now consider this for the case of the tensor product.
 
-\begin{example}[Virasoro algebra]
-	Consider the Witt algebra of algebraic vector fields on $\mathbb{C} ^*$; equivalently as vector fields on $S^1$. This is $\mathbb{C} [t,t^{-1} ]\partial _t$. Then
+	Let $C$ be a chain complex. Passing to the homotopy category $\Ho \Ch(R)=\mathcal{D} (R) $ means we take the homotopy class $[C]$ of all quasi-isomorphic chain complexes. To compute the derived tensor product, we generally want to choose a representative $C\in [C]$ of $C$, meaning any quasi-isomorhic cochain complex. We then need to take $\Ho Q$, which means we pass to the homotopy class of a cofibrant replacement $Q(C)$ of $C$. However, we note that $Q : \Ch(R)  \to \Ch(R)_c$ falls into the full subcategory of cofibrant objects, meaning that this is really a ``cofibrant homotopy class'' of only cofibrant objects. Essentially, we need to find a cofibrant replacement $Q(C) \simeq C$ which is quasi-isomorphic. This representst he homotopy class of $C$.
+
+	Note here that although $Q$ is functorial, there is a natural trivial fibration (in particular, a natural quasi-isomorphism; \cite{hovey}) $Q \Rightarrow 1$, meaning that $Q(C) \simeq C$. Note here that when passing to homotopy, \emph{any cofibrant $C'$} which is quasi-isomorphic to $C$ is thus quasi-isomorphic to the proper cofibrant replacement $Q(C)$, and thus in homotopy they define the same (cofibrant) homotopy class. Thus we can choose \emph{any} cofibrant replacement without worry that it be functorial.
+
+	So choose a cofibrant replacement $Q(C)$ for $C$. Then we simply compute the homotopy tensor product, meaning we simply compute the pointwise tensor with $M$ and then take any quasi-isomorphic chain complex $X \simeq Q(C) \otimes _RM$ to be the derived tensor. It might seem simple to just say $Q(C) \otimes _RM$ is the answer, however in homological algebra, there is a more canonical choice. Note that for all complexes $A$, we have $A \simeq H_{\bullet}(A)$, meaning we can take its homology.
+
+	In the case that $C=N$ is an $R$-module concentrated in degree 0, then we note that any cochain complex bounded below of projective modules is cofibrant, and thus we simply need to find a bounded below complex of projective modules $P \simeq N$. This is precisely a projective resolution of $N$. Thus what we are doing is taking a projective resolution and taking the pointwise tensor with $M$. We then want to take the homology. Thus
 	\[
-		[f\partial_t,g\partial_t]=(fg'-gf')\partial _t
+		(N\otimes _R^LM)_i = H_1(Q(N) \otimes _RM)
 	.\]
-	We present the Witt algebra as $\operatorname{span} \left\{ L_n = -t^{n+1} \partial _t \right\} $ with
+	Note that this is preciely the $i$th derived functor of tensor, so
 	\[
-		[L_m,L_n]=(m-n)L_{m+n} 
+		N\otimes _R^LM = \operatorname{Tor}^R_{\bullet}(N,M)
 	.\]
-	Then $H^2(\mathrm{Witt} ,\mathbb{C} )\cong \mathbb{C} $ has an interesting cocycle
-	\[
-		\omega (L_m,L_n)=\frac{1}{12} (m^2-m)\delta _{m(-n)} 
-	.\]
-	In string theory, we consider things called world sheets, and we are interested in gluing their boundaries (eg. spheres). Note that $\operatorname{Lie} (\operatorname{Diff } (S^1))\cong \mathfrak{X} (S^1)$ -- this should hold for all manifolds. The Witt algebra should act on this since it looks similar. QFT takes place in a complex Hilbert space $\mathcal{H} $, but the physical quantities only depend on the projective space $\mathbb{P} (\mathcal{H} )$ since they don't depend on global phase. So the symmetries of a quantum system are actually $\Aut(\mathbb{P} (\mathcal{H} )) \eqqcolon \mathrm{PGL} (\mathcal{H} )$, and we can write this as a central extension of groups
+	
+
+	We recall that a bounded below resolution $P$ of an $R$-module $N$ is an exact cochain complex $P$ that is bounded below such that $P \simeq N$, where we without loss of generality take $P$ to be concentrated in nonnegative degree. If the quasi-isomorphism is $\varepsilon : P \simeq N$, then we can rewrite this as
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	0\ar[r]  & \mathbb{C} ^*\ar[r]  & \operatorname{GL} (\mathcal{H} ) \ar[r] & \mathrm{PGL} (\mathcal{H} )\ar[r]  & 0.
+		\cdots \ar[" d_3^P ", r] & P_2 \ar[" d_2^P ", r] & P_1 \ar[" d^P_1 ", r] & P_0 \ar[" \varepsilon _0 ", r] & N \ar[r] & 0.
 	\end{tikzcd}\]
-	Differentiating this yields a central extension of Lie algebras. A symmetry group $G$ on a QFT is then a morphism $G\to \mathrm{PGL} (\mathcal{H} )$. Since projective geometry is harder than working in $\mathcal{H} $, we would like to lift $G\to \mathrm{PGL} (\mathcal{H} )$ to $\mathrm{GL} (\mathcal{H} )$ as indicated by the dotted arrow:
-	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	0\ar[r]  & \mathbb{C} ^*\ar[r]  & \mathrm{GL} (\mathcal{H} )\ar[r]  & \mathrm{PGL} (\mathcal{H} )\ar[r]  & 0 \\
-	0\ar[dashed, r]  & \mathbb{C} ^*\ar[dashed, r] \ar[equals, u]  & \hat{G} \ar[dashed, u] \ar[dashed, r]  & G\ar[u] \ar[dotted, ul] \ar[dashed, u] \ar[dashed, r]  & 0
-	\end{tikzcd}\]
-	This dotted arrow need not always exist, but we can always find the dashed arrows to obtain a central extension, allowing us to consider $\hat{G} $ instead. Differentiating this does the same thing for Lie algebras ($\mathrm{d} =T_1$). Interesting paper by Dan Freed about stuff like this for mroe physics and it uses categories.
-\end{example}
+	
 
-Ok back to pFE's. Let $\mathcal{L} : \Open(M) ^{\mathrm{op}}  \to \mathcal{D} \mathcal{G} \mathrm{Lie} $ a fine sheaf. An $r$-shifted central extension of $\mathcal{L} _c$is a cosheaf of dgla's $\widehat{\mathcal{L} }_c$ lifting into an exact sequence of dgla's
-\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	0\ar[r]  & \mathbb{C} [r]\ar[r]  & \widehat{\mathcal{L} }_c\ar[r]  & \mathcal{L} _c\ar[r]  & 0.
-\end{tikzcd}\]
-In this case we can form the \emph{twisted envelope} $\mathbb{U} \widetilde{\mathcal{L} }: U \to C_{\bullet} (\widehat{\mathcal{L} }_c(U))$.
+	There is a standard result in homological algebra saying that the tensor $-\otimes _RM$ more generally preserves quasi-isomorphisms between \emph{flat} modules, which need not be cofibrant. However, this means that we may choose a flat resolution instead of a projective resolution. Also note that all free modules are projective, and all projective modules over a PID are free, so we often use free resolutions if possible.
+\end{construction}
 
-For example, consider
-\[
-	\mathcal{L} =\mathfrak{g} \otimes \Omega _\mathbb{R} ^{\bullet} =\mathfrak{g} ^\mathbb{R} 
-.\]
-Pick a cocycle $H^2(\mathfrak{g} ,\mathbb{C} )\ni\omega : \mathfrak{g} \otimes \mathfrak{g}  \to \mathfrak{g} $ and write
-\[
-	\widehat{\mathcal{L} }=\mathfrak{g} \otimes \Omega ^{\bullet} _\mathbb{R} \oplus \mathbb{C} [?]k
-.\]
-To figure out what the shift is by, consider the thing we want the bracket to be
-\[
-	[x\otimes \alpha ,y\otimes \beta ]=[x,y]\otimes (\alpha \wedge \beta )+\left(\int_\mathbb{R} \omega (x,y)\alpha \wedge \beta \right)k
-.\]
-One simply figures out what order everything has to be and determines that $k$ must be degree 1, so we shift $-1$.
+\begin{intuition}
+	We briefly explain the derived philosophy. Oftentimes a space $X$ has a natural sheaf $\mathcal{O} _X$, often valued in rings, which encodes much of the important data of that space. For manifolds, the natural sheaf to use is $C^\infty $. Thus to describe a manifold, especially if we only care about its homological data, it should suffice to describe the sheaf $C^\infty $ for that manifold. The derived philosophy says that even if the pullback $M\times _{T^*M} \Gamma (\mathrm{d} f)$ is not a manifold, we can describe what its structure sheaf $C^\infty $ \emph{should} look like.
+\end{intuition}
+

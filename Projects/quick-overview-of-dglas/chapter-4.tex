@@ -1,0 +1,139 @@
+\chapter{Bundles}
+
+An important class of graded objects to consider is vector and fiber bundles. A graded bundle has a sheaf of sections with values in cochain complexes. Throughout this section, $\mathbb{K} $ denotes either $\mathbb{R} $ or $\mathbb{C} $.
+
+\section{Graded bundles}
+
+\begin{definition}\label{dfn:4.1.1}
+	Let $X$ be a topological space. A \emph{fiber bundle} over $X$ is a tuple $(E,F,\pi ,X)$, where $\pi : E \to X$ is a surjection, and for all $x\in X$, there is an open neighborhood $U\subseteq X$ of $x$ and a homeomorphism $\varphi : \pi ^{-1} (U) \to U\times F$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	E \ar[" \varphi  ", r]\ar[" \pi  ", d]   & U\times F \ar[" \pi_U ", dl]  \\
+	U & 
+	\end{tikzcd}\]
+	commutes, where $\pi _U(u,f)=u$ is the natural projection of the product space. If $X$ and $E$ are smooth manifolds, then the fiber bundle is \emph{smooth} when $\pi $ is smooth and the maps $\varphi $ are diffeomorphisms. If $X$ and $E$ are complex manifolds, then the fiber bundle is \emph{holomorphic} if $\pi $ is holomorphic and the maps $\varphi $ are biholomorphisms. We generally refer to $E$ as the (total space of the) fiber bundle, $X$ as the base space, $\pi $ as the projection, and $F$ as the fiber. We call the maps $\varphi $ \emph{local trivializations}.
+\end{definition}
+\begin{definition}\label{dfn:4.1.2}
+	Let $\mathbb{K} $ be a topological field and $X$ a topological space. A \emph{$\mathbb{K} $-vector bundle} is a fiber bundle $\pi : E \to X$ where the fiber is $\mathbb{K}^n$ for some $n\in\mathbb{N} $. If $\mathbb{K} $ is a smooth or holomorphic manifold, then a $\mathbb{K} $-vector bundle is smooth or holomorphic when it is smooth or holomorphic as a fiber bundle. The number $n$ is called the \emph{rank} of the vector bundle. If the field $\mathbb{K} $ is understood, one often refers to $n$-vector bundles as $\mathbb{K} $-vector bundles of rank $n$.
+\end{definition}
+
+\begin{remark}\label{rmk:4.1.3}
+	One could develop a theory of $R$-module bundles, but I see no reason to do so, since it is already difficult to develop the theory of $\mathbb{K} $-vector bundles for arbitrary $\mathbb{K} $. For example, as noted in \cref{dis:4.1.18}, arbitrary fields $\mathbb{K} $ need not obtain the structure of an $\mathcal{O} _X$-module, which severely restricts their theory. Hence, we adopt the following convention.
+
+	If the base space is a \emph{smooth} manifold, then we only consider $\mathbb{K} $-vector bundles where $\mathbb{K} =\mathbb{R} $ or $\mathbb{K} =\mathbb{C} $. If the base space is a \emph{complex} manifold, we will only consider $\mathbb{C} $-vector bundles. From now on, whenever we specify a $\mathbb{K} $-vector bundle $\pi : E \to X$, we implicitly assume the vector bunde is either smooth or complex, and that the field $\mathbb{K} $ aligns with this remark. We do not work with general $\mathbb{K} $-vector bundles over arbitrary topological spaces. We will, however, work with fiber bundles over arbitrary topological spaces.
+\end{remark}
+
+\begin{discussion}\label{dis:4.1.4}
+	Let $X$ be a topological space and $\pi : E \to X$ a fiber bundle with fiber $F$. For all $x\in X$, we denote by $E_x$ the fiber $\pi ^{-1} (x)$ of the projection. Choose an open neighborhood $U$ of $x$, and a local trivialization $\varphi : \pi^{-1} (U) \to U\times F$. Commutativity of the diagram in \cref{dfn:4.1.1} implies that $\varphi (\pi ^{-1} (x))=\left\{ x \right\} \times F$, since we must have that $\pi (\varphi (\pi ^{-1} (x))) = \pi (\pi ^{-1} (x))=x$. Hence each fiber $E_x$ can be identified with the fiber $F$. This justifies the terminology ``fiber bundle'', since one thinks of $E$ as many copies of the fiber $F$ bundled in a topological way.
+\end{discussion}
+\begin{discussion}\label{dis:4.1.5}
+	By the same logic as \cref{dis:4.1.4}, if $\pi : E \to X$ is a $\mathbb{K} $-vector bundle, then each fiber $E_x$ of $x\in X$ can be identified with $\left\{ x \right\} \times \mathbb{K} ^n \cong \mathbb{K} ^n$. Note that this is a vector space, hence justifying the terminology ``vector bundle''.
+\end{discussion}
+\begin{definition}\label{dfn:4.1.6}
+	Let $\pi : E \to X$ be a vector bundle. A \emph{section} of the vector bundle over an open set $U\subseteq X$ is a continuous map $s : U \to E$ such that $\pi \circ s = 1$, for 1 the identity map. The collection of sections of $E$ over $U$ is denoted $\Gamma (U,E)$. Sections over $X$ are called \emph{global sections}. For all $x\in X$, we write $s_x=s(x)$. Whenever $E$ is smooth or holomorphic, we speak of smooth or holomorphic sections. Denote smooth sections of a smooth vector bundle $E$ by $\Gamma ^\infty (-,E)$, and holomorphic sections of a holomorphic vector bundle $E$ by $\Gamma ^\mathcal{O} (-,E)$.
+\end{definition}
+\begin{discussion}\label{dis:4.1.7}
+	Let $\pi : E \to X$ be a $\mathbb{K} $-vector bundle of rank $n$. Let $s : U \to E$ be a section over some open set $U\subseteq X$. The section condition implies that for all $x\in X$, we have $\pi (s(x))=x$. In particular, $s_x\in E_x$. Note that since $E_x \cong \mathbb{K} ^n$ can be viewed as a vector space, we can view $s_x$ as a \emph{vector} $s_x\in\mathbb{K} ^n$. Thus a section $s_x$ is a map which assigns to each $x\in X$ a vector $s_x\in E_x$.
+\end{discussion}
+\begin{example}\label{ex:4.1.8}
+	Let $M$ be an $n$-manifold. Then $TM$ is a $\mathbb{R} $-vector bundle of rank $n$, and sections are vector fields. Similarly, $\Lambda ^kT^*M$ is a $\mathbb{R} $-vector bundle over $M$, and sections are differential $k$-forms. These are the canonical examples of vector bundles, and motivates their existence as objects which allow us to construct various types of vector fields.
+\end{example}
+\begin{definition}\label{dfn:4.1.9}
+	Let $\pi_1 : E_1 \to X$ and $\pi _2 : E_2 \to X$ be fiber bundles on a topological space $X$ with fiber $F$. Then a morphism $\varphi : E_1 \to E_2$ of fiber bundles is a continuous map $\varphi : E_1 \to E_2$ which commutes with the projections in the sense that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	E_1 \ar[" \varphi  ", rr] \ar[" \pi _1 "', dr]  &  & E_2 \ar[" \pi _2 ", dl]  \\
+	 & X & 
+	\end{tikzcd}\]
+	commutes. One obtains a category $\mathcal{F} \mathrm{ib}_F(X)$ of fiber bundles over $X$ with fiber $F$. If the fiber bundles are smooth or holomorphic, then one speaks of smooth or holomorphic morphisms, and obtains categories $\mathcal{F} \mathrm{ib}_F^\infty (X)$ and $\mathcal{F}\mathrm{ib} _F^\mathcal{O} (X)$ of smooth and holomorphic fiber bundles, respectively. One similarly obtains categories $\Vect_{\mathbb{K} } (X)$, $\Vect_{\mathbb{K} }^\infty (X)$, and $\Vect_{\mathbb{K} } ^\mathcal{O} (X)$ of $\mathbb{K} $-vector bundles.
+\end{definition}
+
+\begin{warning}
+	The categories $\mathcal{F} \mathrm{ib} _\mathbb{K} ^\infty (X)$ and $\mathcal{F} \mathrm{ib} _F^\mathcal{O} (X)$ need not be subcategories of $\mathcal{F} \mathrm{ib} _F(X)$, or each other. For example, many smooth vector bundles admit many distinct holomorphic structures that promote them to holomorphic vector bundles.
+\end{warning}
+
+
+\begin{definition}\label{dfn:4.1.10}
+	A \emph{graded $\mathbb{K} $-vector bundle} $E$ over $X$ is a functor $E : \mathbb{Z}  \to \Vect_{\mathbb{K} } (X)$. More generally, a graded fiber bundle is a map $E : \mathbb{Z}  \to \mathcal{F} \mathrm{ib}_F(X)$. We also  speak of smooth and holomorphic fiber bundles.
+\end{definition}
+\begin{notation}
+	As before, if $E$ is a graded vector bundle, then we denote $E(i)$ by $E^i$, and write the projection as $\pi ^i$. Hence $E$ can be presented as a collection $\left\{ \pi ^i : E^i \to X \right\}_{i\in\mathbb{Z} } $.
+\end{notation}
+\begin{discussion}\label{4.1.11}
+	The category $\Vect_{\mathbb{K} } (X)$, and the smooth and holomorphic categories, are \emph{not abelian categories}. However, they have many universals, and are computed fiberwise. Important examples include the direct sum
+	\[
+		(E\oplus F)_x \coloneqq E_x \oplus F_x,
+	\]
+	tensor product
+	\[
+		(E\otimes_\mathbb{K} F)_x \coloneqq E_x \otimes _\mathbb{K} F_x,
+	\]
+	and the dual
+	\[
+		(E^*)_x \coloneqq (E_x)^*
+	.\]
+	We can also speak of the kernel and cokernel of a map $\varphi : E \to F$ of $\mathbb{K} $-vector bundles by defining
+	\[
+		\Ker \varphi \coloneqq \left\{ x\in E \mid \varphi (x) = 0 \right\} ,
+	\]
+	where $0$ lives in the appropriate fiber of $F$. Similarly, the cokernel is the quotient of $F$ by the set-theoretic image of $\varphi $. The reason these categories are not abelian is that these (co)kernels need not be vector bundles in general, and the issue arises from the fact that $E$ and $F$ could have different ranks, meaning the fibers of the resultant object could have a non-constant rank. However, one can still speak of the kernel and cokernel as topological spaces.
+\end{discussion}
+
+\begin{construction}\label{4.1.14}
+	To fix the issue of vector bundles not forming abelian categories, we pass to the theory of sheaves. Let $\pi : E \to X$ be a $\mathbb{K} $-vector bundle. If $U\subseteq X$ is open, then the sections $\Gamma (U,E)$ form a vector space: if $s,t$ are sections of $E$ over $U$, then by definition, for all $x\in U$ we have $s_x,t_x\in E_x$. Since $E_x$ is a vector space, $(s+t)_x = s_x + t_x\in E_x$. Similarly, for all $c\in\mathbb{R}$, we have $(cs)_x = c(s_x)\in E_x$. The other axioms are similarly checked pointwise. Therefore $\Gamma (U,E)$ is a vector space.
+	
+	Additionally, let $U\subseteq V$ be open in $X$. Let $s\in \Gamma (V,E)$. Then the restriction $s|U$ is manifestly a section $s|U\in \Gamma (U,E)$, yielding a restriction map $|U : \Gamma (V,E) \to \Gamma (U,E)$. It is trivial to show that restriction is $\mathbb{K} $-linear. Thus we obtain a presheaf $\Gamma (-,E)$ valued in $\mathbb{K} $-vector spaces. If $E$ is a vector bundle, we generally denote the presheaf $\Gamma (U,E)$ by $\mathcal{E}(U)$, using a cursive font.
+
+	We claim that $\mathcal{E} $ is a sheaf. Indeed, let $\left\{ U_i \right\} _{i\in I} $ be an open cover of some open set $U\subseteq X$, and let $s_i : U_i \to E$ be sections. It suffices to show that there is a unique section $s : U \to E$ with $s|U_i = s_i$ for all $i\in I$. This is immediate for continuous, smooth, and holomorphic vector bundles by the usual gluing theorems for functions. Thus $\mathcal{E} $ is a sheaf of $\mathbb{K} $-vector spaces, called the \emph{sheaf of sections} of $E$. We obtain the same results for the sheaves of smooth sections and of holomorphic sections. Generally, we will choose to only work with one type of sections (continuous smooth, holomorphic), and will write $\mathcal{E} $ for the sheaf of those sections. Rarely will we need to consider multiple different types of sheaves of sections at once.
+\end{construction}
+
+\begin{remark}\label{rmk:4.1.15}
+	Let $E$ be a graded $\mathbb{K} $-vector bundle over a space $X$, and $x\in X$. Then the collection $E_x=\left\{ E^i_x \right\} $ of fibers forms a graded $\mathbb{K} $-vector space. This suggests a definition for a section of $E$.
+\end{remark}
+
+\begin{definition}\label{dfn:4.1.16}
+	Let $E$ be a graded $\mathbb{K} $-vector bundle over $X$, and $U\subseteq X$ an open set. A \emph{section} $s$ of $E$ over $U$ is a continuous map
+	\[
+		s : X \to \bigoplus_{i\in\mathbb{Z} } E^i
+	.\]
+	such that $s(x)=s_x\in \bigoplus_{i} E^i_x$. Equivalently, a section $s$ of $E$ is a collection of continuous maps $\{s^i : X \to E^i\}_{i\in\mathbb{Z} } $ such that $s^i_x\in E^i_x$ for all $x\in U$, all but finitely many $s^i_x$ are zero. Thus $s = \bigoplus_{i} s^i$. One also speaks of smooth and holomorphic sections.
+\end{definition}
+
+\begin{remark}\label{4.1.17}
+	The definition \cref{dfn:4.1.16} follows the modern intuition that a graded object should not just be a collection of objects, but rather a canonical decomposition of an object. For example, the tensor algebra $T(M)$ of a module $M$ is a graded object, and admits a canonical decomposition into the tensor powers of $M$. We find it more intuitive to think of graded objects as collections of objects, but in this case it leads to a more poorly behaved definition, so we use the more common intuition.
+\end{remark}
+
+\begin{discussion}
+	We consider the sheaf of sections $\mathcal{E} $ of a graded $\mathbb{K} $-vector bundle $E\to X$. We obviously claim this object is a sheaf. In particular, we claim $\mathcal{E} $ is a graded $\mathcal{O} _X$-module in the sense that $\mathcal{E} (U)$ is a graded $\mathcal{O} _X(U)$-module, where $\mathcal{O} _X$ is the structure sheaf of $X$:
+	\begin{itemize}
+		\item If $E\to X$ is a graded holomorphic $\mathbb{K} $-vector bundle, then we take the structure sheaf $\mathcal{O} _X(U)$ to be holomorphic functions $U\to \mathbb{C} $.
+		\item If $E\to X$ is a graded smooth $\mathbb{K} $-vector bundle, then we take the structure sheaf $\mathcal{O} _X(U)$ to be smooth functions $C^\infty (U)$.
+		\item If $E\to X$ is a graded $\mathbb{K} $-vector bundle, then we take the structure sheaf $\mathcal{O} _X(U)$ to be continuous functions $C^0(U,\mathbb{R} )$.
+	\end{itemize}
+	
+	First we show $\mathcal{E} $ is a presheaf. We write $E$ for the direct sum $\bigoplus_{i} E^i$ and $\pi : E \to X$ for the induced projection, such that sections of $E$ are sections of the projection. Let $s : V \to E$ be a section of $E$ over some open $V\subseteq X$. If $U\subseteq V$ is another open set, then simply restricting $s|V$ yields a section over $V$; note also that $(s|V)^i = s^i|V$ since restriction is precomposition by the inclusion, which distributes over the direct sum.
+
+	Now we show $\mathcal{E} (U)$ is an $\mathcal{O} _X(U)$-module. All cases proceed analogously: if we have a section of the structure sheaf $f\in \mathcal{O} _X(U)$ and a section $s\in \mathcal{E} (U)$ of $E$, then one defines $(f\cdot s)_x \coloneqq f(x)s_x$ for all $x\in X$. Since $f(x)\in\mathbb{R} $ and $\mathcal{E}^i$ is a sheaf of $\mathbb{R} $-vector spaces, we ar done. Remark: the $\mathbb{K} $-generality is a mess
+\end{discussion}
+
+
+\section{wtf}
+
+Let $E=\left\{ \pi ^i : E^i\to M \right\} _{i\in\mathbb{Z} } $ be a graded vector bundle over a smooth manifold $M$. We like to view this data as a single vector bundle $E$ which admits a canonical decomposition
+\[
+	E=\bigoplus_{i\in\mathbb{Z} } E^i
+.\]
+Universality of coproduct yields a projection map $\pi : E \to M$ given by $\pi |E^i=\pi ^i$. This yields, for all $x\in M$,
+\[
+	\pi ^{-1} (x) = \bigoplus_{i\in\mathbb{Z} } (\pi ^i )^{-1} (x) = \bigoplus_{i\in\mathbb{Z} } E^i_x
+.\]
+Hence
+\[
+	E_x = \bigoplus_{i\in\mathbb{Z} } E_x^i
+.\]
+From this perspective, a section $s$ of a graded vector bundle $E$ is a section of the conventional vector bundle $E$, meaning a map $s : M \to E$ with the property that for all $x\in M$, writing $s(x) \eqqcolon s_x$,
+\[
+	s_x\in E_x = \bigoplus_{i\in\mathbb{Z} } E_x^i
+.\]
+Hence $s_x$ is a collection $\left\{ s_x^i \right\} _{i\in\mathbb{Z} } $ of vectors $s^i_x\in E^i_x$ such that all but finitely many $s_x^i$ are zero.
+
+If $E =\bigoplus_{i\in\mathbb{Z} } E_i$ is a graded vector bundle over a manifold $M$, I intuitively expect a section $s\in \Gamma (U,E)$ of $E$ to be a tuple $s=\left\{ s_i\in \Gamma (U,E_i) \right\}_{i\in\mathbb{Z} } $, but writing $E$ as a direct sum implies that $(s_i)_x=0$ for all but finitely many $i$, which I do not intuitively expect.
+

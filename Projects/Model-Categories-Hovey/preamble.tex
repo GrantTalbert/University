@@ -78,6 +78,7 @@
 \DeclareMathOperator{\Coim}{Coim}
 \DeclareMathOperator*{\hocolim}{hocolim}
 \DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\colim}{colim}
 %theorems
 \usepackage{thmtools}
 \usepackage{tikz}
@@ -149,8 +150,8 @@
 \definecolor{lightfg}{RGB}{220, 221, 222}
 %\definecolor{accentblue}{RGB}{88, 101, 242}
 \definecolor{accentblue}{RGB}{133, 143, 255}
-\pagecolor{darkbg}
-\color{lightfg}
+%\pagecolor{darkbg}
+%\color{lightfg}
 \usepackage{sectsty}
 \allsectionsfont{\color{accentblue}}
 \usepackage{hyperref}
@@ -163,15 +164,25 @@
 }
 
 %%%%% theoremstyles
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont, qed={\color{accentblue}$\heartsuit$}]{definition}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, mdframed={
-	bottomline=false, topline=false, rightline=false, innerrightmargin=0pt, linecolor=accentblue, backgroundcolor=darkbg, fontcolor={lightfg}, innertopmargin=0pt, innerbottommargin=0pt
-}, qed={\color{accentblue}$\blacksquare$}]{proofline}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, mdframed={
-	bottomline=false, topline=false, rightline=false, innerrightmargin=0pt, linecolor=accentblue, backgroundcolor=darkbg, innertopmargin=0pt, innerbottommargin=0pt, fontcolor={lightfg}
-}, qed={\color{accentblue}\qedsymbol}]{egline}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont]{dfn}
-\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\itshape]{thm}
+%\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont, qed={\color{accentblue}$\heartsuit$}]{definition}
+%\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, mdframed={
+%	bottomline=false, topline=false, rightline=false, innerrightmargin=0pt, linecolor=accentblue, backgroundcolor=darkbg, fontcolor={lightfg}, innertopmargin=0pt, innerbottommargin=0pt
+%}, qed={\color{accentblue}$\blacksquare$}]{proofline}
+%\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont\color{lightfg}, mdframed={
+%	bottomline=false, topline=false, rightline=false, innerrightmargin=0pt, linecolor=accentblue, backgroundcolor=darkbg, innertopmargin=0pt, innerbottommargin=0pt, fontcolor={lightfg}
+%}, qed={\color{accentblue}\qedsymbol}]{egline}
+%\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\normalfont]{dfn}
+%\declaretheoremstyle[headfont=\bfseries\color{accentblue}, bodyfont=\itshape]{thm}
+
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{definition}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={
+	bottomline=false, topline=false, rightline=false, innerrightmargin=0pt, innertopmargin=0pt, innerbottommargin=0pt
+}, qed={$\blacksquare$}]{proofline}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, mdframed={
+	bottomline=false, topline=false, rightline=false, innerrightmargin=0pt, innertopmargin=0pt, innerbottommargin=0pt,
+}, qed={\qedsymbol}]{egline}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont]{dfn}
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\itshape]{thm}
 
 
 \declaretheorem[numberwithin=section, style=definition, name=Definition]{definition}

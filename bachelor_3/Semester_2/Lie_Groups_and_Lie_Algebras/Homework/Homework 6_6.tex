@@ -1,0 +1,62 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 6}
+\begin{document}
+\makeproblem
+
+\begin{center}
+	In the future, I will submit assignments in the form you requested in your recent email. I have typed this assignment because I am sick and unfortunately all I have in my room right now is my laptop.
+\end{center}
+
+(1) Let $\mathfrak{g} $ be the abelian Lie algebra of translations. We first verify that $\omega $ is skew-symmetric:
+\[
+	\omega ((a,b),(c,d)) = ad - bc = -(cb - da) = -\omega ((c,d),(a,b))
+.\]
+Now we show $d\omega =0$ for $d$ the Chevalley-Eilenberg differential:
+\[
+	d\omega (u,v,w) = -\omega ([u,v],w)+\omega ([u,w],v)-\omega ([v,w],u)=0
+,\]
+where we have used the fact that $\mathfrak{g} $ is abelian, meaning all brackets vanish. Thus $\omega $ is a 2-cocycle on $\mathfrak{g} $.
+
+(2) The central extension determined by $\omega $ is the short exact sequence of Lie algebras
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathbb{R} \ar[r]  & \mathfrak{g}\oplus \mathbb{R}  \ar[r]  & \mathfrak{g}  \ar[r]  & 0
+\end{tikzcd}\]
+with maps determined in the evident way. The Lie bracket on $\mathfrak{g} \oplus \mathbb{R} $ is, for $u,v\in \mathfrak{g} $ and $x,y\in\mathbb{R} $,
+\[
+	[(u,x),(v,y)]_{\mathfrak{g} \oplus \mathbb{R} } =([u,v]_\mathfrak{g} ,\omega (u,v)) 
+.\]
+Since the Lie bracket in $\mathfrak{g} $ is trivial, we obtain that if $u=(a,b)$ and $v=(c,d)$
+\[
+	[(u,x),(v,y)]_{\mathfrak{g} \oplus \mathbb{R} } =(0,ad-bc)
+.\]
+
+(3) To show that that this is the Heisenberg Lie algebra, we identify
+\[
+	((a,b),x) \longleftrightarrow \begin{pmatrix}
+	0 & a & x \\
+	0 & 0 & b \\
+	0 & 0 & 0
+	\end{pmatrix}
+.\]
+This map is evidently $\mathbb{R} $-linear, so we need only show that this map respects the Lie bracket. Since the Lie bracket for the Heisenberg Lie algebra is fully determined by the basis elements $X=(1,0,0)$, $Y=(0,1,0)$, and $Z=(0,0,1)$ satisfying $[X,Y]=Z$, $[X,Z]=0$, and $[Y,Z]=0$, it suffices to show this holds in $\mathfrak{g} \oplus \mathbb{R} $.
+\[
+	[X,Y]=[((1,0),0),((0,1),0)]=((0,0),1-0)=((0,0),1)=Z
+\]
+\[
+	[X,Z]=[((1,0),0),((0,0),1)]=((0,0),0)=0
+\]
+\[
+	[Y,Z]=[((0,1),0),((0,0),1)]=((0,0),0)=0
+\]
+Therefore the central extension $\mathfrak{g} \oplus \mathbb{R} $ determined by $\omega $ is the Heisenberg Lie algebra.
+\end{document}

@@ -1,41 +1,116 @@
 \lecture{8}{Thu 12 Feb 2026 14:01}{Lol brian taught class tday}
 
-Let $\mathfrak{g} $ a Lie algebra and $M$ a $\mathfrak{g} $-module; equivalently a $\mathcal{U} (\mathfrak{g} )$-module as a module over an associative algebra. In particular $\mathcal{U} $ induces an equivalence $\Mod _\mathfrak{g} \cong \Mod_{\mathcal{U} (\mathfrak{g} )} $.
+To compute the cohomology $H^i_{\Lie }(\mathfrak{g} ,M)$, we need to compute $\operatorname{Ext}^n_{U\mathfrak{g} } (\mathbb{K} ,M)$. Since $\mathbb{K} $ never changes, it might be easiest to find a free resolution of $\mathbb{K} $ and then to tensor with $M$ over $U\mathfrak{g} $ and take the homology of that. We proceed by doing just this using the Chevalley-Eilenberg resolution. To do this, we work with dg Lie algebras.
 
-To compute the cohomology $H^i(\mathfrak{g} ;M)$, we use the Chevalley-Eilenberg resolution to find a cochain complex in vector spaces whose cohomology is $H^i(\mathfrak{g} ;M)$. We start by finding a free resolution of $\mathbb{C} $ as a $\mathcal{U} (\mathfrak{g} )$-module. We do this by working in dg Lie algebras.
+\section{dg Lie $\mathbb{K} $-algebras}
 
-\begin{definition}[dg Lie algebra]\label{dfn:a}
-	A dg Lie algebra is a graded Lie algebra $\mathfrak{g} =\bigoplus_{i} \mathfrak{g} _i$ (so it has a bracket) together with a differential $d : \mathfrak{g} _i \to \mathfrak{g} _{i-1} $, where
+Recall that a graded $\mathbb{K} $-vector space is a collection $\left\{ V^i \right\}_{i\in\mathbb{Z} } $ of $\mathbb{K} $-vector spaces. It is differential graded if it has a differential $d^i : V^i \to V^{i+1} $ for all $i$ with $d^2=0$. The graded tensor product of graded $\mathbb{K} $-modules is
+\[
+	M\otimes_\mathbb{K} N \coloneqq \bigoplus_{i+j=k} M^i\otimes _\mathbb{K} N^j
+.\]
+
+\begin{definition}[dg Lie $\mathbb{K} $-algebra]\label{3.3.1}
+	A differential graded Lie $\mathbb{K} $-algebra is a differential graded $\mathbb{K} $-vector space $\mathfrak{g} $ together with a bracket $[-,-] : \mathfrak{g} \otimes_\mathbb{K} \mathfrak{g}  \to \mathfrak{g} $ such that
+	\begin{itemize}
+		\item The bracket respects degrees:
+			\[
+				[\mathfrak{g}_i, \mathfrak{g} _j]\subseteq \mathfrak{g} _{i+j} ;
+			\]
+		\item the bracket satisfies \emph{graded anticommutivity}:
+			\[
+				[x,y]=-(-1)^{\left| x \right| \left| y \right| } [y,x]
+			;\]
+		\item the differential is a derivation for the bracket:
+			\[
+				d[x,y]=[dx,y]+(-1)^{\left| x \right| } [x,dy]
+			;\]
+		\item the bracket satisfies the graded Jacobi identity:
+			\[
+				[x,[y,z]]=[[x,y],z]+(-1)^{\left| x \right| \left| y \right| } [y,[x,z]
+			.\]
+	\end{itemize}
+	Here if $x\in \mathfrak{g} $ is a homogeneous element, then $\left| x \right| $ is the \emph{degree} of $x$, meaning the number $i$ such that $x\in \mathfrak{g} _i$.
+\end{definition}
+
+\begin{example}\label{3.2.2}
+	Any ordinary Lie $\mathbb{K} $-algebra can be viewed as a dg Lie $\mathbb{K} $-algebra concentrated in degree 0. More interestingly, given a Lie $\mathbb{K} $-algebra $\mathfrak{g} $, define the \emph{de Rham} dg Lie $\mathbb{K} $-algebra $\mathfrak{g} _{\mathrm{dR} } $ which is concentrated in degrees 0 and $-1$, and has $\mathfrak{g} =\mathfrak{g} _{\mathrm{dR} }^0=\mathfrak{g}_{\mathrm{dR} }^{-1}$. Let $x,y\in \mathfrak{g} ^0$ and $x',y'\in \mathfrak{g} ^1$. Then the bracket is defined as
 	\[
-		[-,-]: \mathfrak{g}^i\times \mathfrak{g} ^j \to \mathfrak{g} ^{i+j} 
-	\]
-	and the bracket satisfies
-	\[
-		[x,y]=-(-1)^{\left| x \right| \left| y \right| } [y,x]
+		[x+x',y+y']_{\mathfrak{g} _{\mathrm{dR} } }=[x,y]_{\mathfrak{g} } +[x,y']_{\mathfrak{g} } +[x',y]_{\mathfrak{g} } 
 	.\]
-	Abs value is the degree here. Also $d$ is a derivation for the bracket:
+	The differential is given by the identity $1 : \mathfrak{g}_{\mathrm{dR} } ^{-1} \cong \mathfrak{g} _{\mathrm{dR} } ^0$.
+\end{example}
+
+\begin{remark}\label{3.2.3}
+	There is a quasi-isomorphism $\mathfrak{g} _{\mathrm{dR} } \simeq 0$.
+\end{remark}
+
+\begin{definition}\label{3.2.4}
+	A \emph{differential graded commutative $\mathbb{K} $-algebra} $A$ is a differential graded $\mathbb{K} $-module which is
+	\begin{itemize}
+		\item a graded $\mathbb{K} $-algebra, meaning it has a multiplication map $C\otimes_\mathbb{K} C\to C$ which satisfies $A^iA^j \subseteq A^{i+j} $ and graded commutivity:
+			\[
+				xy=(-1)^{\left| x \right| \left| y \right| } yx
+			;\]
+		\item a differential graded associative $\mathbb{K}$-algebra, meaning that the differential acts as a derivation:
+			\[
+				d(xy) = d(x)y + (-1)^{\left| x \right| } xd(y)
+			.\]
+	\end{itemize}
+\end{definition}
+
+\begin{remark}\label{3.3.5}
+	Let $A$ be a dg commutative $\mathbb{K} $-algebra. Then $A$ is a dg Lie $\mathbb{K} $-algebra by taking the Lie bracket to be a sort of graded commutator. Define
 	\[
-		d[x,y]=[dx,y]+(-1)^{\left| x \right| } [x,dy]
+		[a,b]\coloneqq ab-(-1)^{\left| a \right| \left| b \right| } ba
+	.\]
+	We show this satisfies the axioms. Graded antisymmetry:
+	\[
+		[b,a]=ba-(-1)^{\left| a \right| \left| b \right| } ab=-(-1)^{\left|  \right| \left| b \right| } \left( ab-(-1)^{\left| a \right| \left| b \right| } ba \right) =(-1)^{\left| a \right| \left| b \right| } [a,b]
+	.\]
+	The graded Jacobi identity is more than we would like to type, so we omit it. Compatibility with the differential:
+	\[
+		d[a,b]=d(ab) - (-1)^{\left| a \right| \left| b \right| } d(ba) = d(a)b + (-1)^{\left| a \right| } ad(b) - (-1)^{\left| a \right| \left| b \right| } \left( d(b)a + (-1)^{\left| b \right| } bd(a) \right) 
+	\]
+	\[
+		=\left( d(a)b - (-1)^{(\left| a \right| +1)\left| b \right| } bd(a) \right) +(-1)^{\left| a \right| } \left( ad(b)-(-1)^{\left| a \right| (\left| b \right| +1)} d(b)a \right)
+	\]
+	\[
+		=\left( d(a)b-(-1)^{\left| da \right| \left| b \right| } b(da) \right) +(-1)^{\left| a \right| } \left( ad(b)-(-1)^{\left| a \right| \left| db \right| } d(b)a \right) =[da,b]+(-1)^{\left| a \right| } [a,db]
+	.\]
+	Here we used that $\left| a \right| =\left| a \right| ^2$. Given any dg commutative algebra $A$, we denote the corresponding dg Lie $\mathbb{K} $-algebra by $\Lie (A)$. Note that $\Lie $ is a functor $\mathcal{D} \mathcal{G} \Alg_{\mathbb{K} } \to \mathcal{D} \mathcal{G} \Lie _\mathbb{K} $.
+\end{remark}
+
+\begin{definition}\label{3.3.6}
+	Let $\mathfrak{g} $ be a dg Lie $\mathbb{K} $-algebra and $A$ a dg commutative $\mathbb{K} $-algebra. Then the \emph{universal enveloping algebra} $U\mathfrak{g} $ is universal in the sense that there are isomorphisms
+	\[
+		\mathcal{D} \mathcal{G}\mathrm{Lie }_\mathbb{K} (\mathfrak{g} ,\Lie (A)) \cong \mathcal{D} \mathcal{G} \Alg_{\mathbb{K} } (U\mathfrak{g} ,A)
+	\]
+	natural in $\mathfrak{g} $ and $A$. By construction, $U\dashv \Lie $.
+\end{definition}
+
+\begin{definition}\label{3.3.7}
+	Let $M$ be a dg $\mathbb{K} $-module. Then the \emph{graded symmetric $\mathbb{K} $-algebra} is the free graded commutative $\mathbb{K} $-algebra on $M$, and is given by formal symmetric products of elements in $M$. Explicitly, if $T(M)$ is the tensor algebra,
+	\[
+		\operatorname{Sym} (M) \coloneqq \frac{T(M)}{\left\langle x\otimes y - y\otimes x \right\rangle } 
 	.\]
 \end{definition}
 
-For an example, let $\mathfrak{g} $ be an ordinary Lie algebra. If we take a dg Lie algebra to be concentrated in degree 0, then $\mathfrak{g} $ is a dg Lie algebra. Define $\mathfrak{g} _{\mathrm{dR} } $ to be the following Lie algebra (the de Rham dg Lie algebra) as the cochain complex with $\mathfrak{g} $ in degrees $-1$ and 0, and vanishing everywhere else. The map is the identity. The bracket is defined as follows. Take $x,y\in \mathfrak{g} ^0_{\mathrm{dR} } $ and $x',y'\in \mathfrak{g} ^{-1} _{\mathrm{dR} } $. A general element is of the formm $x+x',y+y'$. The bracket is
-\[
-	[x+x',y+y']=[x,y]+[x,y']+[x',y]
-.\]
-A quasi-isomorphism of dg Lie algebras is a map of dg Lie algebras which is a quasi-isomorphism when viewed as a map of cochains.
-
-\begin{remark}
-	There is a quasi-isomorphism $\mathfrak{g} _{\mathrm{dR} } \simeq 0$.
+\begin{remark}\label{3.3.8}
+	The symmetric algebra of a dg $\mathbb{K} $-module is canonically a dg commutative $\mathbb{K} $-algebra with the following differential. First, the tensor algebra $T(M)$ on a dg $\mathbb{K} $-module $(M,d)$ is a dg associative $\mathbb{K} $-algebra with differential
+	\[
+		d(v_1 \otimes \cdots \otimes v_n) = \sum_{i=1}^{n} (-1)^{\left| v_1 \right| +\cdots +\left| v_{i-1}  \right| } v_1 \otimes \cdots \otimes dv_i \otimes \cdots \otimes v_n
+	.\]
+	An annoying check shows that the differential indeed preserves the quotient, meaning we obtain a differential on $\operatorname{Sym} (M)$ given by
+	\[
+		d(v_1 \cdots v_n) = \sum_{i=1}^{n} (-1)^{\left| v_1 \right| + \cdots + \left| v_{i-1}  \right| } v_1 \cdots dv_i \cdots v_n
+	.\]
 \end{remark}
-\begin{lemma}\label{askj}
-	The universal enveloping algebra preserves cohomology.
-\end{lemma}
-\begin{theorem}[PBW]\label{thmassas}
-	As vector spaces, $\mathcal{U} (\mathfrak{g} )\cong \operatorname{Sym} (\mathfrak{g} )$. If passing to dg Lie algebras, the result holds for Sym the graded symmetric algebra on a graded vector space, which is worth googling.
-\end{theorem}
 
-An example of the graded symmetric algebra on $W$ a $\mathbb{C} $-vector space is $\mathbb{C} $ in degree 0, and $\Lambda ^nW$ in degree $-n$.
+
+
+\begin{theorem}[PBW]\label{3.3.9}
+	Let $\mathfrak{g} $ be a dg Lie algebra. Then $U\mathfrak{g}\cong \operatorname{Sym} (\mathfrak{g} )$. 
+\end{theorem}
 
 \begin{lemma}\label{lma:asjkskjas}
 	$\mathcal{U} (\mathfrak{g} _{\mathrm{dR} } )$ is a free $\mathcal{U} (\mathfrak{g} )$-module.

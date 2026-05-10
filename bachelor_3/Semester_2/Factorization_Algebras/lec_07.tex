@@ -2,36 +2,75 @@
 
 MA822 will be on thursday this week from 2-3:15, and the room is still to be found; probably CDS 424.
 
-\begin{remark}
+\begin{remark}\label{3.1.5}
 	If we instead take preFAs valued in chain complexes and define a locally constant preFA to preserve weak equivalences, then we get $A_\infty $-algebras.
 \end{remark}
 
-Recall $M$ from the last lecture. Define a pFA as follows. Fix $p\in\mathbb{R} $, and let $U_1$ denote any interval contained fully within $\mathbb{R} _{<p} $; $U_2$ denote any interval contained within $\mathbb{R} _{>p} $; and $U_3$ any interval containing $p$. Define $\mathcal{F}  (U_1)=A$, $\mathcal{F} (U_2)=B$, and $\mathcal{F} (U_3)=M$. Let $V$ be any interval containing the relevant subsets. The map $\mathcal{F} (U_1)\otimes \mathcal{F} (U_2)\to V$ is then $A\otimes M\to M$, which would be the left action of $A$ on $M$. Similarly, $\mathcal{F} (U_2)\otimes \mathcal{F} (U_3)\to V$ is the right action $M\otimes B\to M$. The map $U_1 \subseteq V\ni p$ must be $A\to M$, and thus will be determined by $1\mapsto m_0\in M$. This means $M$ should be a pointed bimodule, which is recieved from the empty set. All other maps are the identity. Coherence arises via compatibility and associativity properties. This is a special case of a \emph{stratified} factorization algebra. In physics, this is a simple example of a \emph{defect}: some notion of two different theories (like different potentials) that are somehow coupled at some point $p$.
+\begin{example}\label{3.1.6}
+	Let $A,B$ be $R$-modules and $M$ an $(A,B)$-bimodule, meaning it has compatible left- and right-actions by $A$ and $B$, respectively. We can encode this data into a prefactorization algebra as follows. Fix $p\in\mathbb{R} $, and let $U_1$ denote any interval contained fully within $\mathbb{R} _{<p} $; $U_2$ denote any interval contained within $\mathbb{R} _{>p} $; and $U_3$ any interval containing $p$. Define $\mathcal{F}  (U_1)=A$, $\mathcal{F} (U_2)=B$, and $\mathcal{F} (U_3)=M$. Let $V$ be any interval containing the relevant subsets. The map $\mathcal{F} (U_1)\otimes_R \mathcal{F} (U_2)\to V$ is the $A$-multipliction $A\otimes_R M\to M$. Similarly, $\mathcal{F} (U_2)\otimes_R \mathcal{F} (U_3)\to V$ is the action $M\otimes_R B\to M$.
 
-\begin{remark}
+	Note that if $V$ contains $U_1$ and $p$, then we get a map $A\to M$. We take this map to be $A$-linear, and thus fully determined by how it maps $1\mapsto m_0$. This yields $M$ the structure of a \emph{pointed} bimodule, so the question is how to choose the base point $m_0$. We use the empty set $\varnothing \subseteq V$ to define a map $R\to M$ which chooses the basepoint. We similarly get a basepoint determined by the $B$-action; this must agree with that of $A$.
+
+	All other relevant maps are the identity. Coherence arises via compatibility and associativity properties. This is a special case of a \emph{stratified} factorization algebra. In physics, this is a simple example of a \emph{defect}: some notion of two different theories (like different potentials) that are somehow coupled at some point $p$.
+\end{example}
+
+
+\begin{remark}\label{3.1.7}
 	The prefactorization algebra axioms imply that $\mathcal{F} (\varnothing )$ is a unital commutative algebra.
 \end{remark}
 
+
 Final example. Let $A,B,C$ unital $R$-algebras, $M$ an $(A,B)$-bimodule, and $N$ a $(B,C)$-bimodule. We can do the same thing with $M\sim p$ and $N \sim q$, but we need interaction between $M$ and $N$. If $p,q\in V$, then we take $\mathcal{F} (V)=M\otimes _BN$. Here recall that algebras are rings together with an action of another ring, so this makes sense. There exist maps $M\hookrightarrow M\otimes _BN$ and $N\hookrightarrow M\otimes _BN$ by making use of the pointed-ness of $M,N$ and mapping $m\mapsto m\otimes n_0$ and $n\mapsto m_0\otimes n$. Most generally, $(a,m,b,n,c)\mapsto amb\otimes nc$; the $b$ can travel between the two tensors since we tensor over $B\ni b$.
 
+\section{A crash course in Lie theory}
 
-Crash course in Lie theory:
-\begin{definition}\label{1.1.7}
-	Let $\mathfrak{g} $ a Lie algebra. It's universal enveloping algebra $\mathcal{U} (\mathfrak{g} )$ is an associative algebra which is universal in the following sense: let $A$ a unital associative algebra and $\mathfrak{g} \to A$ a Lie algebra hom (associative algebras also have a commutator). Then there is a unique unital algebra homomorphism $\mathcal{U} (\mathfrak{g} )\to A$ making the relevant diagram commute.
+\begin{definition}\label{3.2.1}
+	Let $\mathfrak{g} $ a Lie $\mathbb{K} $-algebra. It's universal enveloping algebra $U\mathfrak{g} $ is an associative algebra which is universal in the following sense: let $A$ be a (unital) associative $\mathbb{K} $-algebra and $\mathfrak{g} \to A$ a Lie algebra homomorphism, where $A$ is viewed as a Lie $\mathbb{K} $-algebra by taking the bracket to be the commutator. Then there is a unique unital algebra homomorphism $U\mathfrak{g} \to A$ making the relevant diagram commute.
 \end{definition}
 
-Let $\mathrm{Lie} : \mathcal{A} \mathrm{ss}  \to \mathcal{L} \mathrm{ie} $ the inclusion functor and $\mathcal{U} $ the enveloping algebra functor. Then $\mathcal{U} \dashv \mathrm{Lie} $. We construct $\mathcal{U} $ explicitly using the tensor algebra $T(\mathfrak{g} )$:
+\begin{remark}\label{3.2.2}
+	Let $\Lie : \Alg_{\mathbb{K} }  \to \Lie _\mathbb{K} $ be the functor which views associative $\mathbb{K} $-algebras as Lie algebras by taking the Lie bracket to be the commutator. Let $U : \Lie _\mathbb{K}  \to \Alg_{\mathbb{K} } $ be the universal enveloping algebra. Then by construction, $U\dashv \Lie $.
+\end{remark}
+
+\begin{construction}\label{3.2.3}
+We construct $U$ explicitly using the tensor algebra $T(\mathfrak{g} )$:
 \[
 	\mathcal{U} (\mathfrak{g}) = \frac{T(\mathfrak{g}) }{\left\langle x\otimes y - y\otimes x - [x,y] \right\rangle } 
 .\]
-Recall a $\mathfrak{g} $-module is a map $\mathfrak{g} \otimes M\to M$ which is compatible with the Lie bracket: $x(ym)-y(xm)=[x,y]m$. This is precisely the same as a $\mathcal{U} (\mathfrak{g} )$-module.
+In particular, $U\mathfrak{g} $ is the free associative $\mathbb{K} $-algebra on a Lie $\mathbb{K} $-algebra which respects the Lie bracket, and contains $\mathfrak{g} $ in a universal way.
+\end{construction}
 
-Note that $\Mod_\mathfrak{g} $ is an abelian category, so we can do (co)homology. Consider a functor $inv : \Mod _\mathfrak{g} \to \Vect_\mathbb{C} $ which maps $M$ to its subspace of \emph{invariants}: $M^\mathfrak{g} =\left\{ m\in M\mid xm=0\forall x\in \mathfrak{g}  \right\} $. The functor of \emph{coinvariants} $coinv : \Mod_\mathfrak{g}  \to \Vect_{\mathbb{C} } $ is the map $M\mapsto M_{\mathfrak{g} } \coloneqq M / \mathfrak{g} M$.
-
-We will reframe these in terms of $\mathcal{U} (\mathfrak{g} )$ to show they are not exact. We could write $U^\mathfrak{g} =\Hom_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} , M) $. Hence $inv \cong \Hom(\mathbb{C} , -) $, and is thus left-exact. We can then write $M_\mathfrak{g} =\mathbb{C} \otimes_{\mathcal{U} (\mathfrak{g} )} M$. This follows since $a\otimes xm = ax\otimes m=0$ for any $a$ in $M^\mathfrak{g} $. Idk this one is weird. The derived functors of Hom are Ext, and the derived functors of $\otimes $ are Tor.
-
-\begin{definition}\label{aslkj}
-	We define $H^n(\mathfrak{g} ,M)=R^n \Mod_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} ,M) = \operatorname{Ext}^n_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} ,M)$. We similarly define $H_n(\mathfrak{g} ,M)=L^n(\mathbb{C} \otimes_{\mathcal{U} (\mathfrak{g} )} M)=\operatorname{Tor} ^n_{\mathcal{U} (\mathfrak{g} )} (\mathbb{C} ,M)$.
+\begin{definition}\label{3.2.4}
+	Let $\mathfrak{g} $ be a Lie $\mathbb{K} $-algebra. A $\mathfrak{g} $-module is a $\mathbb{K} $-module $M$ together with a $\mathbb{K} $-linear map $\mathfrak{g} \otimes _\mathbb{K} M\to M$ such that $[x,y]m=x(ym)-y(xm)$.
 \end{definition}
 
+\begin{remark}\label{3.2.5}
+	A $\mathfrak{g} $-module $M$ is precisely a $U\mathfrak{g} $-module, viewed as a module over an algebra, where we define $(x_1 \ldots x_k)m=x_1( \ldots (x_km)\ldots )$. In particular, we obtain an isomorphism $\Mod _{U\mathfrak{g} } \cong \Mod _\mathfrak{g} $. Hence $\Mod _{\mathfrak{g} } $ is an abelian category with enough projectives and injectives, so we can do homological algebra.
+\end{remark}
+
+\begin{definition}\label{3.2.6}
+	Let $\mathfrak{g} $ be a Lie $\mathbb{K} $-algebra. Define the \emph{invariants} $M^\mathfrak{g} $ of a $\mathfrak{g} $-module $M$ as the largest subspace which is annihilated by $\mathfrak{g} $:
+	\[
+		M^\mathfrak{g} \coloneqq \left\{ m\in M\mid xm=0\forall x\in \mathfrak{g}  \right\} 
+	.\]
+	Define the \emph{coinvariants} $M_\mathfrak{g} $ to be the smallest quotient which identifies the $\mathfrak{g} $-action to 0:
+	\[
+		M_\mathfrak{g} \coloneqq M / \mathfrak{g} M
+	.\]
+\end{definition}
+
+The invariants and coinvariants determine functors. We can rephrame them in terms of the universal enveloping algebra to show they are not exact.
+
+\begin{remark}\label{3.2.7}
+	We regard $\mathbb{K} $ as a trivial $\mathfrak{g} $-module. Hence a $\mathfrak{g} $-linear map $f : \mathbb{K}\to M $ must first off be $\mathbb{K} $-linear, meaning it is fully determined by the image of 1; but since it must be $\mathfrak{g} $-linear, we must have $xf(1) = f(x1) = 0$ due to the trivial $\mathfrak{g} $-action on $\mathbb{K} $. Hence $M^\mathfrak{g} \cong \Hom_\mathfrak{g} (\mathbb{K} ,M) \cong \Hom_{U\mathfrak{g} } (\mathbb{K} ,M)$. Thus the invariants are only left exact.
+\end{remark}
+
+\begin{remark}\label{3.2.8}
+	We now claim that $M_\mathfrak{g} \cong \mathbb{K} \otimes _{U\mathfrak{g} } M$. We do this by showing that $-^\mathfrak{g} \dashv -_\mathfrak{g} $ and using uniqueness fo adjoint functors up to natural isomorphism. A $\mathfrak{g} $-linear map $f : M / \mathfrak{g} M\to N$ must fall fully into $N^\mathfrak{g} $ since $M / \mathfrak{g} M$ has trivial $\mathfrak{g} $-action. Hence we can define a map $M \to N^\mathfrak{g} $ by precomopsing $f$ by the projection $M \to M/\mathfrak{g} M$. For the converse, let $f : M \to N^\mathfrak{g} $. Then $f(\mathfrak{g} M)=\mathfrak{g} f(M)\subseteq \mathfrak{g} N^\mathfrak{g} =0$, so $f$ factors uniquely through the quotient. Uniqueness of adjunction shows that $-_\mathfrak{g} \cong \mathbb{K} \otimes _{U\mathfrak{g} } -$.
+\end{remark}
+
+
+\begin{definition}\label{3.2.9}
+	We define Lie $\mathbb{K} $-algebra cohomology $H^n_{\Lie }(\mathfrak{g} ,M)=R^n \Hom_{\mathcal{U} (\mathfrak{g} )} (\mathbb{K} ,M) = \operatorname{Ext}^n_{U\mathfrak{g} } (\mathbb{K} ,M)$. We similarly define Lie $\mathbb{K} $-algebra homology $H_n^{\Lie }(\mathfrak{g} ,M)=L_n(\mathbb{K} \otimes_{U\mathfrak{g} } M)=\operatorname{Tor}_n^{U\mathfrak{g} } (\mathbb{K} ,M)$.
+\end{definition}
 

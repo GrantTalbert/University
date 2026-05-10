@@ -70,25 +70,30 @@ Although it is simple, it is not particularly descriptive. Thus the reader who i
     The geometric realization of the standard $n$-simplicial set $\Delta^n$, as defined in \cref{3.1.9}, is the standard $n$-simplex $\Delta^n$.
 \end{proposition}
 \begin{proof}
-    Due to our overloaded notation, we will need to adopt some new notational conventions for the duration of this proof in order to make it readable. We will denote the standard $n$-simplicial as $\Delta^n$, just like before, and will denote the standard geometric $n$-simplex as $\Delta_n$, with a subscript. Any time both a superscript \emph{and} a subscript show up of the form $\Delta^n_k$, this denotes the $k$-simplices of $\Delta^n$. Furthermore, the functor $\Delta_\bullet$ will denote the canonical embedding $\BD\to\Top$, and $\Delta^\bullet$ will be the Yoneda embedding $\BD\to\Set^{\BD\opp}$.
+    Due to our overloaded notation, we will need to adopt some new notational conventions for the duration of this proof in order to make it readable. We will denote the standard $n$-simplicial set as $\Delta^n$, just like before, and will denote the standard geometric $n$-simplex as $\Delta_n$, with a subscript. Any time both a superscript \emph{and} a subscript show up of the form $\Delta^n_k$, this denotes the $k$-simplices of $\Delta^n$. Furthermore, the functor $\Delta_\bullet$ will denote the canonical embedding $\BD\to\Top$, and $\Delta^\bullet$ will be the Yoneda embedding $\BD\to\Set^{\BD\opp}$.
 
-    An element of $\left|\Delta^n\right|$ is an equivalence class of a pair $(f,p)$, where $f\in\Delta_k^n$ and $p\in\Delta^n$. By the defintion of $\Delta^n$ as given in \cref{3.1.8}, $k$-simplices are morphisms $f : [k]\to[n]$. Note that by \cref{2.4.2}, $f$ induces a continuous map $\Delta_\bullet(f) : \Delta_k\to\Delta_n$. Since $p\in\Delta^k$, we can evaluate this morphism at $p$. Thus we propose the map $\varphi : \left|\Delta^n\right| \to\Delta_n$ given by $[(f,p)]\mapsto \Delta_\bullet(f)(p)$. It is not obvious that this map is well-defined, so before we can show it is a homeomorphism, we must show that any choice of representative of the equivalence class evaluates to the same point.
+    An element of $\left|\Delta^n\right|$ is an equivalence class of a pair $(f,p)$, where $f\in\Delta_k^n$ and $p\in\Delta_k$. By the defintion of $\Delta^n$ as given in \cref{3.1.8}, $k$-simplices are morphisms $f : [k]\to[n]$. Note that by \cref{2.4.2}, $f$ induces a continuous map $\Delta_\bullet(f) : \Delta_k\to\Delta_n$. Since $p\in\Delta_k$, we can evaluate this morphism at $p$. Thus we propose the map $\varphi : \left|\Delta^n\right| \to\Delta_n$ given by $[(f,p)]\mapsto \Delta_\bullet(f)(p)$. It is not obvious that this map is well-defined, so before we can show it is a homeomorphism, we must show that any choice of representative of the equivalence class evaluates to the same point.
 
-    We first show the function is well-defined. Let $f\in\Delta^n_k$, $p\in\Delta_h$, and $\alpha : [h]\to[k]$ in $\BD$. Define the map $\psi$ by
+    We do this by showing $\varphi $ is given by taking a function $\psi $ which respects $\sim $, and descending along the quotient. For all $0\leq k\leq n$, and any $f\in\Delta^n_k$, $p\in\Delta_k$, and $\alpha : [h]\to[k]$ in $\BD$, define the map $\psi$ by
     \[\begin{tikzcd}[row sep=0em]
 	{\displaystyle{\coprod_{[k]\in\BD}}\Delta^n_k\times\Delta_k} & {\Delta_n} \\
 	{(f,p)} & {\Delta_\bullet(f)(p).}
 	\arrow["\psi", from=1-1, to=1-2]
 	\arrow[maps to, from=2-1, to=2-2]
     \end{tikzcd}\]
-     By \cref{3.2.2}, the equivalence relation we quotient by identifies points $(\alpha^*(f),p)\sim(f,\alpha_*(p))$, where $\alpha^*$ is the simplicial operator $\Delta^n_k\to\Delta^n_h$ induced by $\Delta^n$, and $\alpha_* : \Delta_h\to\Delta_k$ is given by $\Delta_\bullet(\alpha)$. Recall that since $\Delta^n$ is given by the Yoneda embedding, the morphism $\alpha^*$ is simply given by precomposition, so we obtain that the relation reads as
+     Let $p'\in \Delta _h$. By \cref{3.2.2}, the equivalence relation we quotient by identifies points $(\alpha^*(f),p')\sim(f,\alpha_*(p'))$, where $\alpha^*$ is the simplicial operator $\Delta^n_k\to\Delta^n_h$ induced by $\Delta^n$, and $\alpha_* : \Delta_h\to\Delta_k$ is given by $\Delta_\bullet(\alpha)$. Recall that since $\Delta^n$ is given by the Yoneda embedding, the morphism $\alpha^*$ is simply given by precomposition, so we obtain that the relation reads as
     \[
-    (f\alpha,p)\sim(f,\Delta_\bullet(\alpha)(p)).
+    (f\circ \alpha,p')\sim(f,\Delta_\bullet(\alpha)(p')).
     \]
     Applying $\psi$ to both sides of this quotient gives, by functoriality of $\Delta_\bullet$,
     \[
-    \psi(f\alpha,p)=\Delta_\bullet(f\alpha)(p),\qquad \psi(f,(\Delta_\bullet(\alpha))(p))=\Delta_\bullet(f)(\Delta_\bullet(\alpha)(p))=(\Delta_\bullet(f)\circ\Delta_\bullet(\alpha))(p)=\Delta_\bullet(f\alpha)(p).
+    	\psi (f\circ \alpha ,p') = \Delta_{\bullet} (f\circ \alpha )(p'),
     \]
+    \begin{align*}
+	    \psi (f, \Delta _{\bullet} (\alpha )(p'))&=\Delta _{\bullet} (f)(\Delta _{\bullet} (\alpha )(p'))\\
+						     &=(\Delta _{\bullet} (f)\circ \Delta _{\bullet} (\alpha ))(p')\\
+						     &=\Delta _{\bullet} (f\circ \alpha )(p')
+    .\end{align*}
     Since these are equal, we have that $\psi$ identifies elements under the equivalence relation $\sim$, and thus by univeraslity of the quotient, there exists a unique dashed arrow
     \[\begin{tikzcd}
 	{\displaystyle{\coprod_{[k]\in\BD}}\Delta^n_k\times\Delta_k} & {\Delta_n} \\
@@ -97,15 +102,15 @@ Although it is simple, it is not particularly descriptive. Thus the reader who i
 	\arrow[from=1-1, to=2-1]
 	\arrow[dashed, from=2-1, to=1-2]
     \end{tikzcd}\]
-    rendering the diagram commutative (in $\Set$). By our extensive knowledge of universals in $\Set$, we obtain an explicit description of the dashed arrow as $[(f,p)]=\psi(f,p)=\Delta_\bullet(f)(p)$, which is precisely the definition of $\varphi$. Thus $\varphi$ arises by universality, and is therefore well-defined.
+    rendering the diagram commutative. It's important to note that we have not show $\psi $ is continuous yet, so this diagram only exists in $\Set $. By our extensive knowledge of universals in $\Set$, we obtain an explicit description of the dashed arrow as $[(f,p)]\mapsto \psi(f,p)=\Delta_\bullet(f)(p)$, which is precisely the definition of $\varphi$. Thus $\varphi$ arises by universality, and is therefore well-defined.
 
-    Now we show $\varphi$ is continuous. Since $\varphi$ arises by universality, and since by \cref{3.0.1} all universals in $\Top$ admit the same point-set definition as in $\Set$, it suffices to show $\psi$ is continuous, since the canonical quotient is continuous by definition. This will promote the universal problem to $\Top$, rendering $\varphi$ continuous, as required. We start by considering the restriction of $\psi$ to only one component of the product $\Delta_k^n\times\Delta_k$. We can decompose the restriction of $\psi$ as the composite
+    Now we show $\varphi$ is continuous. Since $\varphi$ arises by universality, and since by \cref{3.0.1} all universals in $\Top$ admit the same point-set definition as in $\Set$, it suffices to show $\psi$ is continuous, since the quotient morphism is continuous by definition of the quotient topology. This will promote the universal problem to $\Top$, rendering $\varphi$ continuous, as required. We start by considering the restriction of $\psi$ to only one component of the product $\Delta_k^n\times\Delta_k$. We can decompose the restriction of $\psi$ as the composite
     \[\begin{tikzcd}
 	{\Delta_k^n\times\Delta_k} & {\Top(\Delta_k,\Delta_n)\times\Delta_k} & {\Delta_n.}
 	\arrow["{\Delta_\bullet\times1}", from=1-1, to=1-2]
 	\arrow["{\mathrm{eval}}", from=1-2, to=1-3]
     \end{tikzcd}\]
-    If we give $\Top(\Delta_k,\Delta_n)$ the compact-open topology, then it is well known that the evaluation map $\mathrm{eval}(\Delta_\bullet(f),p)=\Delta_\bullet(f)(p)$ is continuous whenever the domain (in this case, $\Delta_k$) is locally compact Hausdorff. Indeed, all Euclidean spaces $\mathbb{R}^n$ are locally compact Hausdorff by Heine-Borel, and all open or closed subsets of locally compact Hausdorff spaces are locally compact Hausdorff. Since $n$-simplices are clearly closed as subspaces of $\mathbb{R}^{n+1}$, this follows. It suffices to show $\Delta_\bullet\times 1$ is continuous. Note that $\Delta_\bullet\times 1$ arises as the unique dashed arrow in the diagram
+    If we give $\Top(\Delta_k,\Delta_n)$ the compact-open topology, then it is well known that the evaluation map $\mathrm{eval}(\Delta_\bullet(f),p)=\Delta_\bullet(f)(p)$ is continuous whenever the domain (in this case, $\Delta_k$) is locally compact Hausdorff, meaning for every $p\in \Delta _k$ there is an open neighborhood $U$ and a compact neighborhood $K$ with $p\in U \subseteq K$. Indeed, all Euclidean spaces $\mathbb{R}^n$ are locally compact Hausdorff by Heine-Borel, and all open or closed subsets of locally compact Hausdorff spaces are locally compact Hausdorff. Since $n$-simplices are clearly closed as subspaces of $\mathbb{R}^{n+1}$, this follows. It suffices to show $\Delta_\bullet\times 1$ is continuous. Note that $\Delta_\bullet\times 1$ arises as the unique dashed arrow in the diagram
     \[\begin{tikzcd}
 	{\Delta_k^n} & {\Top(\Delta_k,\Delta_n)} \\
 	{\Delta_k^n\times\Delta_k} & {\Top(\Delta_k,\Delta_n)\times\Delta_k} \\

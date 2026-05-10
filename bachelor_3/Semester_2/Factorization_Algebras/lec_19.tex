@@ -1,0 +1,88 @@
+\lecture{19}{Fri 24 Apr 2026 13:58}{More stuff}
+
+Let $K : S^1 \to \mathbb{R} ^3$ be a knot. A very basic type of observable in CS is defined by
+\[
+	O_K : \Omega ^1_{\mathbb{R} ^3} (\mathbb{R} ^3) \ni A\mapsto \int_{K(S^1)} K^*A
+.\]
+Recall here that observables in CS are 1-forms. This observable is supported along $K(S^1)$, which is a closed submanifold of $\mathbb{R} ^3$. Factorization algebras use open submanifolds, so to do this we extend it to an open subset. Additionally, recall
+\[
+	\Obs^{cl} (U) \cong \Sym \left( \Omega ^{\bullet}_c(U)[2],\dd  \right) 
+.\]
+These aren't really observables in the sense of physics. We need to find a way to turn these into some kind of functions on the fields. To fix this, we recall that $\Obs^{cl} \coloneqq \Sym \mathcal{E} ^\vee $. This is a perfectly fine definition. However, this does not admit an easy quantization: the BV laplacian is distributional (wedge fields and integrate over a diagonal), so it's kind of hard to act distributions on distributions. However, since $\mathcal{E} (U)=\Gamma (U,E)$, then we can think of $\mathcal{E} (U)^\vee $ as distributional sections $\overline{\Gamma }_c(U,E^*)$ with compact support. Then $\Gamma _c(U,E^!) \subseteq \overline{\Gamma }_c(U,E^!)$. As seen previously, this is a quasi-isomorphism when $(\mathcal{E} ,\dd )$ is elliptic. This is more properly how to do observables in QFT. This follows by $E^! \cong E[1]$ by the BV pairing. Hence this promotes to
+\[
+	\Obs^{cl} \coloneqq \Sym \mathcal{E} ^\vee \simeq \Sym (\mathcal{E} _c[1])
+.\]
+It should be clear that this quasi-isomorphism is given by integrating against it.
+
+\begin{remark}
+	If the field theory is not free, then there is another term in the differential on $\Sym \mathcal{E} ^\vee $. If $\left\langle -,- \right\rangle $ is the BV pairing, then the action is $S=\left\langle \phi ,\dd \phi  \right\rangle $. Then $S\in \mathcal{O} _{\mathrm{loc} } (\mathcal{E} )\subseteq \mathcal{O} (\mathcal{E}_c)$. However if the theory is \emph{interacting} , then there is another local functional which is at least cubic, meaning
+	\[
+		S=\left\langle \phi ,\dd \phi  \right\rangle +I(\phi ) \implies I\in \mathcal{O} _{\mathrm{loc} }^{\geq 3} (\mathcal{E} )
+	.\]
+	The true differential then requires the BV bracket $\dd _{\mathrm{free} } +\left\{ I,- \right\} $. It is hard to then translate $\left\{ I,- \right\} $ to $\Sym (\mathcal{E} _c[1])$, so we can't really appeal to smeared observables, even in the classical sense. ``Interactions don't preserve smearedness.''
+\end{remark}
+
+Back to knots. Write $\Obs_s$ for smeared observables and $\Obs^{cl} $ for normal observables. If $U$ is an open set with $K(S^1)\subseteq U$, then we have that $O_K \in \mathcal{O} ^{cl}(U)$. The observable is closed by Stokes' theorem. Thus we should be able to find a representative as a smeared observable. The systematic way to do this is to start with a torus $T\coloneqq  S^1\times \mathbb{R}^2$. We then view $K(S^1) \times 0 \subseteq S^1 \times \mathbb{R}$ by embedding $T\mapsto \mathbb{R} ^3$. Let $\kappa $ be the embedding and $\pi $ the projection to $\mathbb{R} ^2$. Fix a compactly supported 2-form $\mu \in \Omega _c^2(\mathbb{R} ^2)$ such that $0\in \operatorname{supp} \mu =1$ and $\int_{\mathbb{R} ^2} \mu =1$. Then $[\mu ]$ generates $H^2_c(\mathbb{R} ^2) \cong \mathbb{R} ^2$ (Poincare lemma).
+
+Let $\mu _T = \pi ^*\mu $. So we are pulling a bump function back into the torus. This gives us a smoothed observable $O_\mu $ which takes the gauge field $A\in \Omega ^1$, and integrates
+\[
+	A\mapsto \int_{\mathbb{R} ^3} A\wedge \mu _T
+.\]
+We claim this is a representative of $O_K$ as a smeared observable. This is how we make sense of the quasi-isomorphism. Then since $\mu _T$ is compactly supported, it pushes forward to $\mu_{K} \coloneqq \kappa _*\mu _T$.
+
+All of these things have degree 0, so we can look at the cohomology class of a product of observables
+\[
+	[\mu _K \mu _{K'} ]\in H^0(\Obs^q(\mathbb{R} ^3))\cong \mathbb{R} [\hbar ]
+.\]
+Thus essentially this is just a number times $\hbar $. We claim that it is represented by $\hbar \ell (K,K')$.
+
+We will show this using the factorization product $\star _\hbar $ we found last time. We will use the Green's function for $\mathbb{R} ^3$ minus the diagonal. To construct this, let
+\[
+	j : \mathbb{R} ^3\times \mathbb{R} ^3 \to S^2
+\]
+map
+\[
+	(x,y)\mapsto \frac{x-y}{\left| x-y \right| } 
+.\]
+Define
+\[
+	G(\alpha \otimes \beta ) = \lim_{\varepsilon \to 0} \int_{U} \alpha (x)\beta (y)\omega (x,y),\qquad \omega =j^*\mathrm{vol}_{S^2} 
+.\]
+This is a Green's function for $\dd _{\mathrm{dR} }$ when $\left| x-y \right| >\varepsilon $. $\omega $ is kinda like the residue of the 2-sphere. Then the linking number is the cohomology class of the factorization product
+\[
+	[\mu _K \star \mu _{K'}] =\mu _K\mu _{K'} + \hbar \int_{\mathbb{R} ^3\times \mathbb{R} ^3} \mu _K(x)\mu _{K'} (x)\omega (x,y)
+.\]
+Note that $\mu _K\mu _{K'} $ is 0 in cohomology, so we just have the integral.
+
+
+
+We will now discuss \emph{translation invariant} factorization algebras on $\mathbb{R} ^n$. This, unlike locally constantness, is more physically interesting. First we use a ``discrete version'' which does not fully capture the info. Let $x\in\mathbb{R} ^n$ and $U\subseteq \mathbb{R} ^n$ open. We can translate $U$ by $x$ by mapping
+\[
+	U\mapsto \tau_xU \coloneqq \left\{ y\in\mathbb{R} ^n \mid y-x\in U \right\} = U+x
+.\]
+\begin{definition}\label{dfn:?}
+	A prefactorization algebra $\mathcal{F} $ on $\mathbb{R} ^n$ is \emph{discretely translation invariant} if $\mathcal{F} (U) \cong \mathcal{F} (\tau _xU)$ for all $x\in\mathbb{R} ^n$ and all open sets $U\subseteq \mathbb{R} ^n$. These isomorphisms should be compatible with the factorization products.
+\end{definition}
+
+\begin{remark}
+	Every pFA that we have seen so far is discretely translation invariant.
+\end{remark}
+
+This isn't quite right. We also want the factorization \emph{products} to be controlled in a nice way under translations. To do this, we consider a derivation of the prefactorization algebra. Recall a degree $k$ dervation is a map $D : \mathcal{F} (U) \to \mathcal{F} (U)[k]$ for all $U$ which acts as a derivation on the structure maps. Then $\operatorname{Der} (\mathcal{F} )$ is a dgla with bracket given by commutator.
+
+Note that if $\mathfrak{g} $ is a dg Lie algebra, then $\mathfrak{g} $ can act on a pFA by $\mathfrak{g} \to \operatorname{Der} (\mathcal{F} )$.
+
+\begin{definition}\label{dfn:??}
+	A \emph{smooth} translation invariant prefactorization algebra $\mathcal{F} $ on $\mathbb{R} ^n$ is a discrete prefactorization algebra together with a representation
+	\[
+		\rho : \mathbb{R} ^n_{\mathrm{trans} }  \to \operatorname{Der} (\mathcal{F} )
+	.\]
+	Here note that the Lie algebra of (infintesimal?) translations $\mathbb{R} ^n_{\mathrm{trans} } $ is abelian $n$-dimensional, concentrated in degree 0.
+\end{definition}
+\begin{remark}
+	If $\mathcal{F} $ is a pFA valued in symmetric monoidal category, then we look at Lie algebras in that symmetric monoidal category. For example, valued in spaces.
+\end{remark}
+
+For example, CS provides that the Lie derivative $\mathcal{L} _{\partial _x} : \mathbb{R} ^3_{\mathrm{trans} }  \to \operatorname{Der} \Obs_{CS} ^{q} $. Translation invariant pFAs can often be easier to describe. In particular, they are algebras over a much simpler colored operad (built from disks of various radii) than usual pFAs.
+
+

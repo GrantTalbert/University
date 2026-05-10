@@ -1,0 +1,231 @@
+\chapter{Differential calculus on complex manifolds}
+
+\section{Complex and Hermitian structures}
+
+\lecture{11}{Tue 17 Mar 2026 12:30}{Complex and hermitian linear algebra}
+
+In this section, we explore indepth the implications of complexification of a real vector space. This involves woring with almost complex vector spaces.
+
+\begin{definition}\label{dfn:3.1.1}
+	Let $V$ be a $\mathbb{R} $-vector space. An \emph{almost complex structure} on $V$ is an $\mathbb{R} $-linear endomorphism $J : V \to V$ such that $J^2=-1$.
+\end{definition}
+
+Note that $J$ has eigenvalues $\pm i$ so it cannot be $\mathbb{R} $-diagonalized. Note the following fairly obvious statement:
+
+\begin{lemma}\label{lma:3.1.2}
+	Any almost complex vector space $(V,J)$ admits the structure of a complex vector space in a natural way.
+\end{lemma}
+\begin{proof}
+	Define $(a+ib)v = av + bJ(v)$. This is a $\mathbb{C} $-bilinear map since $(i+i)(v)=(J+J)(v)=J(v)+J(v)$.
+\end{proof}
+
+\begin{definition}\label{dfn:3.1.3}
+Let $V$ be a $\mathbb{R} $-vector space. The \emph{complexification} of $V$, denoted $V_\mathbb{C} $, is the tensor product $V_\mathbb{C} \coloneqq V\otimes _\mathbb{R} \mathbb{C} $.
+\end{definition}
+\begin{remark}\label{rmk:3.1.4}
+	There is a canonical inclusion $V\hookrightarrow V_\mathbb{C} $ via the map $v\mapsto v\otimes 1$. Hence we may write $V\subseteq V_\mathbb{C} $. We write $v\otimes 1$ as $v$ and $v\otimes i$ as $iv$ for any $v\in V$, and define complex conjugation $\overline{(v\otimes \lambda )} =v\otimes \overline{\lambda } $. Then $V\subseteq V_\mathbb{C} $ is precisely the part that is invariant under complex conjugation. We can also write all $v\in V_\mathbb{C} $ as $v=x+iy$ with notation as before, and $\overline{v} =x-iy$.
+\end{remark}
+
+\begin{notation}\label{notation:3.1.5}
+	If $(V,J)$ is an almost complex vector space, then we also denote by $V_\mathbb{C} $ the extension of $V$ to a $\mathbb{C} $-vector space as defined in \cref{lma:3.1.2}. These notations are immediately reconciled by taking the almost complex structure on $V$ to be multiplication by $i$. We also denote by $J$ the extension of $J$ to a $\mathbb{C} $-linear endomorphism $V_\mathbb{C} \to V_\mathbb{C} $ defined by $J(i) = iJ(1)$.
+\end{notation}
+
+\begin{definition}\label{dfn:3.1.5}
+	Let $(V,J)$ be an almost complex vector space, and also write $J : V_\mathbb{C}  \to V_\mathbb{C} $ as in \cref{notation:3.1.5}. Then we define $V^{1,0} $ to be the $i$-eigenspace of $J$, and $V^{0,1} $ to be the $-i$-eigenspace of $J$. More precisely,
+	\[
+		V^{1,0} =\left\{ v\in V_\mathbb{C} \mid J(v)=iv \right\} ,\qquad V^{0,1} =\left\{ v\in V_\mathbb{C} \mid J(v)=-iv \right\} 
+	.\]
+\end{definition}
+
+\begin{remark}\label{rmk:3.1.6}
+	Let $v+iw\in V^{1,0} $. Here we \emph{do not assume $v,w\in V$}. Then
+	\[
+		J(v+iw)=i(v+iw)=iv-w
+	.\]
+	Since $J$ is $\mathbb{C} $-linear, we obtain $J(v)=-w$ and $J(w)=v$. We obtain
+	\[
+		V^{1,0} =\left\{ v-iJ(v)\mid v\in V_\mathbb{C} \right\}
+	.\]
+	Similarly,
+	\[
+	V^{0,1} =\left\{ v+iJ(v)\mid v\in V_\mathbb{C} \right\} 
+	.\]
+\end{remark}
+
+\begin{lemma}\label{lma:3.1.8}
+	Let $(V,J)$ be an almost complex vector space. Then
+	\[
+		V_\mathbb{C} \cong V^{1,0} \oplus V^{0,1} 
+	.\]
+\end{lemma}
+\begin{proof}
+	Note that $V^{1,0} \cap V^{0,1} =0$, since $-iv=J(v)=iv$ would imply $v=0$. It suffices to write any $v+iw\in V_\mathbb{C} $ as a linear combination of elements in $V^{1,0} $ and $V^{0,1} $. Indeed, write
+	\[
+		v=\frac{1}{2} (v-iJ(v)) + \frac{1}{2} (v+iJ(v))
+	.\]
+\end{proof}
+
+\begin{discussion}\label{discussion:3.1.9}
+	We collect a corollary of \cref{lma:3.1.8}. There are canonical projections $\pi ^{1,0} : V^{1,0}  \to V_\mathbb{C} $ and $\pi ^{0,1} : V^{0,1}  \to V_\mathbb{C} $ defined by
+\[
+	\pi ^{1,0} (w) = \pi ^{1,0} \left( \frac{1}{2} (w-iJw) + \frac{1}{2} (w+iJw) \right) =\frac{1}{2} (w-iJw),
+\]
+\[
+	\pi ^{0,1} (w) = \frac{1}{2} \left( w+iJw \right) 
+.\]
+\end{discussion}
+
+\begin{lemma}\label{lma:3.1.10}
+	Let $(V,J)$ be an almost complex vector space. Then the real dual $V^*=\Hom_\mathbb{R} (V, \mathbb{R} ) $ has a natural almost complex structure given by $J(f)(v)=f(J(v))$. Then there is an isomorphism $(V_\mathbb{C} )^* \cong (V^*)_\mathbb{C} $ which decomposes as
+	\[
+		(V^*)^{1,0} =\left\{ f\in \Hom_\mathbb{R} (V,\mathbb{C} )\mid f(I(v))=if(v) \right\} =(V^{1,0} )^*
+	\]
+	\[
+		(V^*)^{0,1} =\left\{ f\in \Hom_\mathbb{R} (V,\mathbb{C} )\mid f(I(v))=-if(v) \right\} =(V^{0,1} )^*
+	.\]
+	Also note that $(V^*)^{1,0} =\Hom_\mathbb{C} ((V,J),\mathbb{C} )$.
+\end{lemma}
+
+\begin{remark}\label{rmk:3.1.11}
+	Let $(V,J)$ be an almost complex vector space. The composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		(V,J) \ar[hook, r]  & V_\mathbb{C} \ar[" \pi ^{1,0}  ", r]  & V^{1,0} 
+	\end{tikzcd}\]
+	is an isomorphism of $\mathbb{C} $-vector spaces.
+\end{remark}
+
+
+\begin{discussion}\label{discussion:3.1.12}
+	Let $(V,J)$ be an almost complex vector space. Let $\left\{ z_i = \frac{1}{2} (x_i - iy_i) \right\}_{1\leq i\leq n} $ be a $\mathbb{C} $-basis for $V^{1,0} $. Then we find $y_i = J(x_i)$ and that $\left\{ x_i, y_i \right\}_{1\leq i\leq n} $ forms a $\mathbb{R} $-basis for $V$, and thus a $\mathbb{C} $-basis of $V_\mathbb{C} $. A natural basis for $V^{0,1} $ is then given by $\overline{z} _i = \frac{1}{2} \left( x_i + iy_i \right) $. The dual basis for $(V^*)^{1,0} $ is given by $z^i = \frac{1}{2} \left( x^i + iy^i \right) $, where
+	\[
+		x^i(x_j) = \delta _{ij} ,\qquad y^i(y_j) = \delta _{ij} ,\qquad x^i(y_j)=y^i(x_j)=0
+	\]
+	are the elements of the dual $\mathbb{C} $-basis for $V_\mathbb{C} $. Additionally, $z^i(z_j)=\delta _{ij} $. We similarly have $\overline{z} ^i = \frac{1}{2} \left( x^i - iy_i \right) $ and $z^i(\overline{z} _j) = 0$ and the other expected identities.
+\end{discussion}
+
+\begin{discussion}\label{discussion:3.1.13}
+	Now consider the ($\mathbb{C} $-)exterior algebra of the complexification of an almost complex vector space $(V,J)$. By \cref{lma:3.1.8},
+	\[
+		\Lambda ^kV_\mathbb{C}  \cong \Lambda ^k \left(V^{1,0} \oplus V^{0,1} \right)
+	.\]
+	One notes that this should be generated by wedges $z_1 \wedge \cdots \wedge z_k$, where $z_i = x_i + y_i$ for $x_i\in V^{1,0} $ and $y_i\in V^{0,1} $. Hence it decomposes as a sum of wedges, all of length $k$, which contain elements of $V^{1,0} $ and $V^{0,1} $, meaning that we should be able to generate the $k$th exterior power with elements of the form
+	\[
+		x_1 \wedge \cdots \wedge x_j \wedge y_{j+1} \wedge \cdots \wedge y_{k} ,\qquad x_i\in V^{1,0} ,\quad y_i\in V^{0,1} .
+	\]
+	Generally authors define $\Lambda ^{p,q} V_\mathbb{C} \coloneqq \Lambda ^pV^{1,0} \otimes _\mathbb{C} \Lambda ^qV^{0,1} $, noting that for some reason the tensor product here is isomorphic to the wedge product via the canonical map $x\otimes y\mapsto x\wedge y$. (This works because we want $2x\wedge y = x\otimes y - y\otimes x$, but $y\otimes x$ doesn't exist in this space because this is a tensor product of disjoint spaces). I think this is all confusing and pointless so I just define it as follows:
+	\[
+		\Lambda ^{p,q} V_\mathbb{C} \coloneqq \Lambda ^pV^{1,0} \wedge \Lambda ^qV^{0,1} \cong \Lambda ^pV^{1,0} \otimes _\mathbb{C} \Lambda ^qV^{0,1} 
+	.\]
+	We then have
+	\[
+		\Lambda ^kV_\mathbb{C} \cong \bigoplus_{0\leq p,q\leq n} ^{p+q=k} \Lambda ^{p,q} V_\mathbb{C} 
+	.\]
+	An element $x\in \Lambda ^{p,q} V_\mathbb{C} $ is said to be of type $(p,q)$ or to have bidegree $(p,q)$. All exterior products are taken as complex exterior products, meaning wedges are $\mathbb{C} $-linear.
+\end{discussion}
+
+\begin{remark}\label{rmk:3.1.14}
+Let $(V,J)$ be an almost complex vector space. Given a basis $z_i$ for $V^{1,0} $, then a basis for $\Lambda ^{p,q} V_\mathbb{C} $ is
+\[
+	\left\{ z_{r_1} \wedge \cdots \wedge z_{r_p} \wedge \overline{z}_{s_1} \wedge \cdots \wedge \overline{z} _{s_q}  \right\}
+\]
+where $r_i < r_j$ iff $i<j$ and the same for $s$. Additionally, one defines
+\[
+	\Lambda ^kJ : \Lambda ^kV_\mathbb{C}  \to \Lambda ^kV_\mathbb{C} 
+\]
+by
+\[
+	(\Lambda ^kJ)(v_1\wedge \cdots \wedge v_k)=Jv_1 \wedge \cdots \wedge Jv_k
+.\]
+\end{remark}
+
+\begin{definition}\label{dfn:3.1.15}
+	Let $(V,J)$ be an almost complex vector space. Define the projections
+	\[
+		\Pi ^{p,q} : \Lambda ^{\bullet} V_\mathbb{C}  \to \Lambda ^{p,q} V
+	.\]
+	Note that if $x \notin \Lambda ^{p,q} V$, then $\Pi ^{p,q} (v)=0$. Similarly, define
+	\[
+		\Pi ^k : \Lambda ^{\bullet} V_\mathbb{C}  \to \Lambda ^kV_\mathbb{C} 
+	.\]
+\end{definition}
+
+
+Now inner products. Every real positive definite inner product on a real vector space is diagonalizeable to the identity, so its signature is 1. Up to changes of basis, there is only one such inner product.
+
+\begin{definition}\label{dfn:3.1.16}
+	Let $(V,J)$ be an almost complex vector space where $(V,\left\langle -,- \right\rangle )$ is an inner product space. Then $J$ is \emph{compatible} with the inner product if it is an \emph{isometry}:
+	\[
+		\left\langle J(-),J(-) \right\rangle =\left\langle -,- \right\rangle 
+	.\]
+	An almost complex vector space with compatible inner product is called an \emph{almost complex inner product space}.
+\end{definition}
+
+
+\begin{remark}\label{rmk:3.1.17}
+If $J$ is compatible with the inner product, then there is a basis $\left\{ x_1, Jx_1, \ldots ,x_n,Jx_n \right\} $, and this is the orientation determined by $J$. Then $J$ preserves this orientation.
+\end{remark}
+
+\begin{definition}\label{dfn:3.1.18}
+	Let $(V,J,\left\langle -,- \right\rangle )$ be an almost complex inner product space. The \emph{fundamental form} $\omega $ of $V$ is the form $\omega =\left\langle J(-),- \right\rangle $.
+\end{definition}
+\begin{lemma}\label{lma:3.1.19}
+	The fundamental form is a form. In particular, $\omega $ is of type $(1,1)$.
+\end{lemma}
+\begin{proof}
+	We must show $\omega $ is skew-symmetric. This follows:
+	\[
+		\omega (v,w) = \left\langle Jv,w \right\rangle =\left\langle w,Jv \right\rangle =\left\langle Jw,-v \right\rangle =-\left\langle Jw,v \right\rangle =-\omega (w,v)
+	.\]
+	For the second claim, recall that
+	\[
+		\Lambda ^2V^*_\mathbb{C} \cong \Lambda ^{2,0} V^*_\mathbb{C} \oplus \Lambda ^{1,1} V^*_\mathbb{C} \oplus \Lambda ^{0,2} V^*_\mathbb{C} 
+	.\]
+	Since $V^{1,0} $ is the $i$-eigenspace for $J$, we obtain that for any $\alpha \in \Lambda ^{2,0} V_\mathbb{C} ^*$, by \cref{rmk:3.1.14}, $(\Lambda ^2J^*)\alpha =-\alpha $. The same holds if $\alpha \in \Lambda ^{0,2} V_\mathbb{C} ^*$. However, we have
+	\[
+		(\lambda ^2J^*)(\omega )(v,w)=\omega (Jv,Jw)=\left\langle J^2v,Jw \right\rangle =\left\langle -v,Jw \right\rangle =\left\langle -Jv,J^2w \right\rangle =\left\langle Jv,w \right\rangle =\omega (v,w)
+	.\]
+	Here we have used the fact that $J$ is compatible with $\left\langle -,- \right\rangle $. Therefore $\omega \in \Lambda ^{1,1} V_\mathbb{C} ^*$.
+\end{proof}
+
+
+\begin{definition}\label{dfn:3.1.20}
+	A \emph{Hermitian form} on a complex vector space $U$ is a 2-form $H$ with $H(v,w)=\overline{H(w,v)} $ and $H(\alpha u,\beta v)=\alpha \overline{\beta } H(u,v)$.
+\end{definition}
+
+\begin{example}
+	Let $(V,J,\left\langle -,- \right\rangle )$ be a complex inner product space with fundamental form $\omega $. Define
+	\[
+		h\coloneqq \left\langle \cdot ,\cdot  \right\rangle -i\omega 
+	.\]
+	Here we use \cref{lma:3.1.2} to make sense of multiplicaiton by $i$.
+
+	Choose a $\mathbb{C} $-basis $z_i$ and write $z_i = \frac{1}{2} \left( x_i-iy_i \right) $ for $V^*_\mathbb{C} $. Then define
+	\[
+		\left\langle z_i,z_j \right\rangle \coloneqq \frac{1}{2} h_{ij} 
+	.\]
+	As always, the dual basis is $z^i = \frac{1}{2} \left( x^i + iy^i \right) $. Then we can compute
+	\[
+		\omega =\frac{i}{2} \sum_{i,j} h_{ij} z^i \wedge \overline{z} ^j
+	.\]
+\end{example}
+
+\begin{example}
+	Let $(V,J,\left\langle -,- \right\rangle )$ be a real inner product space. One then defines the hermitian inner product on $V_\mathbb{C} $ by extending the real inner product:
+	\[
+		\left\langle v\otimes \lambda ,w\otimes \mu  \right\rangle_\mathbb{C} \coloneqq (\lambda \overline{\mu } )\left\langle v,w \right\rangle 
+	.\]
+	A computation that I do not want to type up shows that this is the same as, if $\lambda ,\mu \in\mathbb{C} $ and $v,w\in V$, (since the inner product should be $\mathbb{C} $-sorta-linear):
+	\[
+		\left\langle \lambda v,\mu w \right\rangle =\lambda \overline{\mu } \left\langle v,w \right\rangle 
+	.\]
+\end{example}
+
+In the basis $z^i = \frac{1}{2} \left( x^i + iy^i \right) $ and $\overline{z} ^j$, then
+\[
+	\omega =\frac{i}{2} \sum_{i,j} h_{ij} z^i \wedge \overline{z} ^j
+.\]
+Here
+\[
+	h_{ij} =-ih(x_i,y_j)
+.\]
+

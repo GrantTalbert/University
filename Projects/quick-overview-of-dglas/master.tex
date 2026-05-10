@@ -1,0 +1,36 @@
+\documentclass[A4, 11pt]{report}
+\input{./preamble.tex}
+\usepackage{titlepageBU}
+
+\title{A brief overview of grading and dg Lie algebras}
+\date{\today}
+
+
+% for some reason no worky in preamble when i tried, fix later
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries\centering}{Chapter \thechapter}{10pt}{\Large}
+\titleformat{\section}{\normalfont\large\bfseries\centering}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+	In a class I am in we are working through C-G, which requires knowledge of graded structures and dg Lie algebras. My knowledge here is lacking, so I wrote an exposition from my perspective that makes everything clear.
+\end{abstract}
+
+% FILES START
+
+\input{./chapter-1.tex}
+\input{./chapter-2.tex}
+\input{./chapter-3.tex}
+\input{./chapter-4.tex}
+
+% FILES END
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}
+

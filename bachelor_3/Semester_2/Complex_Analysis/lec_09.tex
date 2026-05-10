@@ -1,0 +1,42 @@
+\chapter{???}
+
+\lecture{9}{Tue 24 Mar 2026 09:33}{Hai}
+
+
+\begin{definition}\label{3.1.1}
+	Let $X$ be a space. We say $X$ is simply connected if it is path connected and all loops are nullhomotopic, meaning $\pi _1(X)\cong 0$. Equivalently, $\Pi _1(X)(x,y)$ is always a singleton for any $x,y\in X$.
+\end{definition}
+
+\begin{theorem}[Riemann mapping]\label{3.1.2}
+	Every simply connected open subset $U\subseteq \mathbb{C} $ is biholomorphic to either the unit disk $D_1(0)$ \emph{or} $\mathbb{C} $. However, there is no biholomorphism between $D_1(0)$ and $\mathbb{C} $.
+\end{theorem}
+
+\begin{remark}[Uniformization theorem]
+	\Cref{3.1.2} extends to Riemann surfaces: the only other simply connected Riemann surface up to isomorphism is the Riemann sphere $\mathbb{P} ^1$.
+\end{remark}
+
+\begin{construction}[Riemann sphere]
+	Define the equivalence relation $\sim $ on $\mathbb{C} ^2\setminus 0$ by $z\sim \lambda z$ for all $z\in\mathbb{C} ^2$ and $\lambda \in\mathbb{C} $. Hence we identify all complex 1-dimensional linear subspaces of $\mathbb{C} ^2$, minus the origin. The quotient $\mathbb{P} ^1 \coloneqq (\mathbb{C} ^2\setminus 0)\tildesim $ is called the \emph{Riemann sphere}. It is a complex manifold that is isomorphic to the complex 2-sphere $S^2$, and has charts given as follows. Given $(z_0,z_1)\in\mathbb{C} ^2$, write $[z_0 : z_1]$ for the class of this point in $\mathbb{P} ^1$. Then for $i=0,1$, define
+	\[
+		U_i=\left\{ [z_0 : z_1] \mid z_i \neq 0 \right\} ,\qquad \varphi : U_i \to V\subseteq \mathbb{C},\qquad \varphi_0 [z_0 : z_1] = z_1,\qquad \varphi _1[z_0 : z_1]=z_0
+	.\]
+	The set $U_i$ is well-defined since $[z_0 : z_1] = \lambda [z_0 : z_1]$, and if we pull out any scalar while $z_i$ is 0 then it stays 0. The Riemann sphere is compact and is isomorphic to $\mathbb{C} \cup \left\{ \infty  \right\} $.
+\end{construction}
+
+	Recall that $f\in \mathcal{O} (U)$ can be viewed as a smooth map $f : U\subseteq \mathbb{R} ^2 \to \mathbb{R} ^2$, and its derivative has the form
+	\[
+		\mathrm{D} f=\begin{pmatrix}
+		a & -b \\
+		b & a
+		\end{pmatrix}
+	.\]
+	Consider the map $f(z=a+ib)=1 / \sqrt{a^2+b^2} $. Then
+	\[
+		\mathrm{D} f = \begin{pmatrix}
+		\frac{a}{\sqrt{a^2+b^2} }  & \frac{-b}{\sqrt{a^2+b^2} }  \\
+		\frac{b}{\sqrt{a^2+b^2} }  & \frac{a}{\sqrt{a^2+b^2} } 
+		\end{pmatrix}
+	.\]
+This is both of the form of a holomorphic function, \emph{and} is orthogonal.
+
+A conformal map is one which preserves angles.

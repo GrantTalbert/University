@@ -394,7 +394,7 @@ We informally summarize this information as follows. Let $S$ be a simplicial set
 	 & p(y)\ar[" \widetilde{g}  ", dr]  &  \\
 	p(x)\ar[" p(f) ", ur] \ar[" 1_{p(x)}  "', rr]  &  & p(x).
 	\end{tikzcd}\]
-	Consider the horn $k = (-,f,1_{x}): \Lambda_0^2 \to \mathcal{C} $. Then $\sigma $ restricts as $\sigma |\Lambda_0^2 = p\circ k$, so the diagram of solid arrows
+	Consider the horn $k = (-,1_{x},f): \Lambda_0^2 \to \mathcal{C} $. Then $\sigma $ restricts as $\sigma |\Lambda_0^2 = p\circ k$, so the diagram of solid arrows
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	\Lambda _0^2 \ar[" k ", r] \ar[hook, d]  & \mathcal{C} \ar[" p ", d]  \\
 	\Delta ^2 \ar[" \sigma  "', r]  \ar[dotted, " \tau  ", ur] & \mathcal{D} 
@@ -426,15 +426,15 @@ We informally summarize this information as follows. Let $S$ be a simplicial set
 
 \subsection{Stability properties of left fibrations}
 
-The purpose of this section is to show that left fibrations abound. The most important example proceeds intuitively as follows. Informally, we think of a left fibration as a functor $\mathcal{C} \to \mathcal{S} $. Recall that given an $\infty $-category $\mathcal{C} $, the mapping space $\mathcal{C} (c,d)=\Map_{\mathcal{C} }(c,d) $ should be a Kan complex. Hence the map $y\mapsto \mathcal{C} (c,d)$ should determine a functor $\mathcal{C} \to \mathcal{S} $, and thus a left fibration $\widetilde{\mathcal{C} } \to \mathcal{C} $ for some suitable category $\mathcal{C} $.
+The purpose of this section is to show that left fibrations abound. The most important example proceeds intuitively as follows. Informally, we think of a left fibration as a functor $\mathcal{C} \to \mathcal{S} $. Recall that given an $\infty $-category $\mathcal{C} $, the mapping space $\mathcal{C} (c,d)=\Map_{\mathcal{C} }(c,d) $ should be a Kan complex. Hence the map $d\mapsto \mathcal{C} (c,d)$ should determine a functor $\mathcal{C} \to \mathcal{S} $, and thus a left fibration $\widetilde{\mathcal{C} } \to \mathcal{C} $ for some suitable category $\mathcal{C} $.
 
 Consider the projection of the overcategory $f : \mathcal{C} _{c/} \to \mathcal{C} $. We claim the fiber of $d\in \mathcal{C}$ under $f$ is $\Hom_\mathcal{C} ^\mathrm{L} (c, d) $, which we recall is the simplicial set defined by taking its $n$-simplicies to be $(n+1)$-simplicies $\sigma $ of $\mathcal{C} $ such that $\sigma |\left\{ 0 \right\} $ is the vertex $c$, and the restriction $\sigma |\Delta ^{\left\{ 1, \ldots ,n+1 \right\} } $ along the other $n$ vertices yields the degenerate $n$-simplex on $d$; hence this simplex is constant at $d$.
 
-Recall that $\mathcal{C} _{c/} \coloneqq \sSet_c(\Delta^0\star\Delta ^{\bullet},\mathcal{C} )$ is the set of maps $\Delta ^0\star \Delta ^n \cong \Delta ^{n+1} \to \mathcal{C} $ whose 0th vertex is $c$, and the projection $f : \mathcal{C} _{c/}  \to \mathcal{C} $ is defined by mapping an $n$-simplex $\sigma : \Delta ^{n+1}  \to \mathcal{C} $ of $\mathcal{C} _{c/} $ to its restriction $\sigma |\Delta ^{\left\{ 1, \ldots ,n+1 \right\} } : \Delta ^n \to \mathcal{C} $. Hence the fiber $f^{-1} (d) \cong \mathcal{C}_{c/} \times_{\mathcal{C} } \left\{ d \right\} $ is precisely the set of all $(n+1)$-simplicies of $\mathcal{C} $ which restrict to $c$ on the 0th vertex and $d$ on the other $n$ vertices. Thus
+Recall that $\mathcal{C} _{c/} \coloneqq \sSet_c(\Delta^0\star\Delta ^{\bullet},\mathcal{C} )$ takes as $n$-simplicies the set of maps $\Delta ^0\star \Delta ^n \cong \Delta ^{n+1} \to \mathcal{C} $ whose 0th vertex is $c$, and the projection $f : \mathcal{C} _{c/}  \to \mathcal{C} $ is defined by mapping an $n$-simplex $\sigma : \Delta ^{n+1}  \to \mathcal{C} $ of $\mathcal{C} _{c/} $ to its restriction $\sigma |\Delta ^{\left\{ 1, \ldots ,n+1 \right\} } : \Delta ^n \to \mathcal{C} $. Hence the fiber $f^{-1} (d) \cong \mathcal{C}_{c/} \times_{\mathcal{C} } \left\{ d \right\} $ is precisely the set of all $(n+1)$-simplicies of $\mathcal{C} $ which restrict to $c$ on the 0th vertex and $d$ on the other $n$ vertices. Thus
 \[
 	\Hom_\mathcal{C} ^{\mathrm{L} } (c, d) \cong f^{-1} (d) \cong \mathcal{C} _{c/} \times _\mathcal{C} \left\{ d \right\} 
 .\]
-We would like to show that $f$ is a left fibraton, justifying this. We have a more general statement.
+We would like to show that $f$ is a left fibraton, justifying all this. We have a more general statement.
 
 \begin{proposition}[Joyal]\label{2.1.2.1}
 	Let
@@ -453,7 +453,7 @@ We would like to show that $f$ is a left fibraton, justifying this. We have a mo
 \end{proposition}
 
 \begin{remark}\label{2.1.2.2}
-	It is nice to illustrate how the map $X_{p/} \to X_{p_0/} \times_{S_{r_0/}} S_{r/} $ arises. Note that an element $\sigma \in X_{p/} =\sSet (B \star \Delta ^{\bullet} ,X)$ restricts along $B$ to $p$, and thus restricts along $A\subseteq B$ to $p_0=p|A$. Therefore we obtain an inclusion $X_{p/} \to X_{p_0/} $. Moreover, given any map $\sigma : B\star \Delta ^{\bullet}  \to X$ which restricts along $B$ to $p$, we have that $q\circ \sigma $ restricts along $B$ to $q\circ p=r$, so postcomposition determines a map $X_{p/} \to S_{r/} $. When including this into $S_{r_0/} $, this necessarily agrees with the postcomposition of $X_{p_0/} $ by $q$, since both maps amount to $\sigma\mapsto q\circ \sigma \circ i$ for $i : A \subseteq B$. Thus we obtain a map by universality of pullback.
+	It is nice to illustrate how the map $X_{p/} \to X_{p_0/} \times_{S_{r_0/}} S_{r/} $ arises. Note that an element $\sigma \in X_{p/} =\sSet_p(B \star \Delta ^{\bullet} ,X)$ restricts along $B$ to $p$, and thus restricts along $A\subseteq B$ to $p_0=p|A$. Therefore we obtain an inclusion $X_{p/} \to X_{p_0/} $ by restricting to $A\subseteq B$. Moreover, given any map $\sigma : B\star \Delta ^{\bullet}  \to X$ which restricts along $B$ to $p$, we have that $q\circ \sigma $ restricts along $B$ to $q\circ p=r$, so postcomposition determines a map $X_{p/} \to S_{r/} $. When including this into $S_{r_0/} $, this necessarily agrees with the postcomposition of $X_{p_0/} $ by $q$, since both maps amount to $\sigma\mapsto q\circ \sigma \circ i$ for $i : A \subseteq B$. Thus we obtain a map by universality of pullback.
 \end{remark}
 
 This statement implies a number of propositions. For example,
@@ -462,7 +462,7 @@ This statement implies a number of propositions. For example,
 	Let $\mathcal{C} $ be an $\infty $-category and $p : K \to \mathcal{C} $ a morphism of simplicial sets. Then $\mathcal{C} _{p/} $ is an $\infty $-category, and the projection $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration.
 \end{corollary}
 \begin{proof}
-	We apply \cref{2.1.2.1} with $A=\varnothing $, $X=\mathcal{C} $, $S=\Delta ^0$, and $B=K$. The relevant pullback diagram is
+	We apply \cref{2.1.2.1} with $A=\varnothing $, $X=\mathcal{C} $, $S=\Delta ^0$, and $B=K$. The definition of an $\infty $-category is a simplicial set $\mathcal{C} $ for which $\mathcal{C} \to \Delta ^0$ is an inner fibration, so the proposition applies. The relevant pullback diagram is
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	\mathcal{C} _{p_0/} \times _{\Delta ^0_{r_0/} } \Delta^0_{r/} \ar[r] \ar[d]  & \Delta ^0_{r/}\ar[d]  \\
 	\mathcal{C}_{p_0/} \ar[r]  & \Delta^0_{r_0/} 
@@ -471,7 +471,7 @@ This statement implies a number of propositions. For example,
 	\[
 		S_{0/} \cong \sSet (\varnothing \star \Delta^{\bullet} ,S) \cong \sSet (\Delta ^{\bullet} ,S)\cong S
 	.\]
-	We claim also that $\Delta _{r/} ^0\cong \Delta ^0$. We note that $r$ is the unique map $K\to \Delta ^0$, so
+	We claim also that for any $r : K \to \Delta ^0$, then $\Delta _{r/} ^0\cong \Delta ^0$. We note that $r$ is the unique map $K\to \Delta ^0$, so
 	\[
 		\Delta _{r/} ^0 \cong \sSet (K\star \Delta ^{\bullet},\Delta ^0)
 	\]
@@ -482,19 +482,19 @@ This statement implies a number of propositions. For example,
 	\mathcal{C} \times_{\Delta ^0} \Delta ^0 \ar[r] \ar[d]  & \Delta ^0\ar[equals, d]  \\
 	\mathcal{C} \ar[r]  & \Delta ^0
 	\end{tikzcd}\]
-	It is now clear that $\mathcal{C} \times _{\Delta ^0} \Delta ^0 \cong \mathcal{C} $. Thus the induced map $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration. Moreover by considering \cref{2.1.2.2}, we see that the map $\mathcal{C} _{p/} \to \mathcal{C} $ arises by restricting along $\varnothing \subseteq K$; equivalently by restricting along $\Delta ^{\bullet} \to \mathcal{C} $, which is precisely the projection $\mathcal{C} _{p/} \to \mathcal{C} $.
+	It is now clear that $\mathcal{C} \times _{\Delta ^0} \Delta ^0 \cong \mathcal{C} $. Applying \cref{2.1.2.1} now says that the induced map $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration. Moreover by considering \cref{2.1.2.2}, we see that the map $\mathcal{C} _{p/} \to \mathcal{C} $ arises by restricting along $\varnothing \subseteq K$; equivalently by restricting along $\Delta ^{\bullet} \to \mathcal{C} $, which is precisely the projection $\mathcal{C} _{p/} \to \mathcal{C} $.
 
 	Using the lifting property, we can now prove that $\mathcal{C} _{p/} $ is an $\infty $-category. Consider an inner horn $\sigma _0 : \Lambda _i^n \to \mathcal{C} _{p/} $. Mapping this under the projection yields a diagram
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\Lambda_i^n \ar[" f ", r]  \ar[hook, d]& \mathcal{C} _{p/} \ar[r]   & \mathcal{C}  \\
+	\Lambda_i^n \ar[" \sigma _0 ", r]  \ar[hook, d]& \mathcal{C} _{p/} \ar[" f ", r]   & \mathcal{C}  \\
 	\Delta ^n \ar[" \tau  "', urr]  &  & 
 	\end{tikzcd}\]
 	which admits a filler $\tau $ since $\mathcal{C} $ is an $\infty $-category. This yields a lifting problem
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-	\Lambda_i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & \mathcal{C}_{p/} \ar[d]  \\
+	\Lambda_i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & \mathcal{C}_{p/} \ar[" f ", d]  \\
 	\Delta ^n \ar[" \tau  "', r] \ar[dotted, " \sigma  ", ur]  & \mathcal{C}
 	\end{tikzcd}\]
-	which admits a solution $\sigma $ as indicated by the dotted arrow, asince $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration, and lifts against inner horns. This $n$-simplex $\sigma $ fills the horn $\sigma _0$, and thus $\mathcal{C} _{p/} $ is an $\infty $-category.
+	which admits a solution $\sigma $ as indicated by the dotted arrow, since $\mathcal{C} _{p/} \to \mathcal{C} $ is a left fibration, and lifts against inner horns. This $n$-simplex $\sigma $ fills the horn $\sigma _0$, and thus $\mathcal{C} _{p/} $ is an $\infty $-category.
 \end{proof}
 
 We can also prove \cref{1.2.4.3}, which we stated without proof earlier.
@@ -503,11 +503,108 @@ We can also prove \cref{1.2.4.3}, which we stated without proof earlier.
 	Let $\mathcal{C} $ be an $\infty $-category  and $\phi : \Delta ^1 \to \mathcal{C} $ a morphism in $\mathcal{C} $. Then $\phi $ is an equivalence if and only if, for each $n\geq 2$ and every map $f_0 : \Lambda _0^n \to \mathcal{C} $ which restricts as $f_0|\Delta ^{\left\{ 0,1 \right\} } =\phi $, there exists a filler $f$ for $f_0$.
 \end{proposition}
 \begin{proof}
-	For $n\geq 2$, write $\Delta ^n \cong \Delta ^1 \star \Delta ^{n-2} $, where $\Delta ^1 $ spans the vertices $\left\{ 0,1 \right\} $. We then note that $\Lambda _0^n$ can be written as $\partial_1(\Delta ^1 \star \Delta ^{n-2} ) \cong \left\{ 0 \right\} \star \Delta ^{n-2} $ in union with each $\Delta ^1 \star \partial _i \Delta ^{n-2} $; equivalenly $(\left\{ 0 \right\} \star  \Delta ^{n-2} )\cup (\Delta ^1 \star \partial \Delta ^{n-2} )$. Hence $f_0$ factors through each of these. Write $h=f_0|\Delta ^{\left\{ 2, \ldots ,n \right\} } : \Delta ^{n-2}  \to \mathcal{C} $ and $h_0 = f_0|\partial \Delta ^{\left\{ 2, \ldots ,n \right\} } : \partial \Delta ^{n-2}  \to \mathcal{C} $. Since a map $\Delta ^n \star K\to \mathcal{C} $ is equivalent to a map $\Delta ^n \to \mathcal{C} _{/K} $,we view the restriction of $f_0$ along $\left\{ 0 \right\} \star \Delta ^{n-2} $ as a map $\left\{ 0 \right\} \to \Delta ^{n-2} $, and similarly for the restriction of $f_0$ along $\Delta ^1 \star \partial \Delta ^{n-2} $. All together, this gives us maps
+	($\implies$) For $n\geq 2$, write $\Delta ^n \cong \Delta ^1 \star \Delta ^{n-2} $, where $\Delta ^1 $ spans the vertices $\left\{ 0,1 \right\} $. We then note that $\Lambda _0^n$ can be written as $\partial_1(\Delta ^1 \star \Delta ^{n-2} ) \cong \left\{ 0 \right\} \star \Delta ^{n-2} $ in union with each $\Delta ^1 \star \partial _i \Delta ^{n-2} $; equivalenly $(\left\{ 0 \right\} \star  \Delta ^{n-2} )\cup (\Delta ^1 \star \partial \Delta ^{n-2} )$. Hence $f_0$ factors through each of these. Write $h=f_0|\Delta ^{\left\{ 2, \ldots ,n \right\} } : \Delta ^{n-2}  \to \mathcal{C} $ and $h_0 = f_0|\partial \Delta ^{\left\{ 2, \ldots ,n \right\} } : \partial \Delta ^{n-2}  \to \mathcal{C} $. Since a map $\Delta ^n \star K\to \mathcal{C} $ is equivalent to a map $\Delta ^n \to \mathcal{C} _{/K} $,we view the restriction of $f_0$ along $\left\{ 0 \right\} \star \Delta ^{n-2} $ as a map $\left\{ 0 \right\} \to \mathcal{C} _{/h}$, and similarly for the restriction of $f_0$ along $\Delta ^1 \star \partial \Delta ^{n-2} $ as a map $\Delta ^1 \to \mathcal{C} _{/h_0} $. All together, this gives us maps
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
 	\left\{ 0 \right\} \ar[hook, d] \ar[r]  & \mathcal{C} _{/h} \ar[" q ", d]  \\
 	\Delta ^1 \ar[" \phi ' "', r]  & \mathcal{C} _{/h_0} 
 	\end{tikzcd}\]
-	where the right vertical map is precomposition by the inclusion $\partial \Delta ^{n-2} \subseteq \Delta ^{n-2} $, and the horizontal maps arise as the transposes of the relevant restrictions of $f$ under the adujnction for $\star $ and the overcategory. The diagram automatically commutes. A lift would transpose to a map $\Delta ^1 \star \Delta ^{n-2} \to \mathcal{C} $ which agrees with $f_0$ on the entire horn, and is thus a filler. So we need to solve this lifting problem. 
+	where the right vertical map is precomposition by the inclusion $\partial \Delta ^{n-2} \subseteq \Delta ^{n-2} $. The diagram automatically commutes. A lift would transpose to a map $\Delta ^1 \star \Delta ^{n-2} \to \mathcal{C} $ which agrees with $f_0$ on the entire horn, and is thus a filler. So we need to solve this lifting problem.
+
+	By the dual of \cref{2.1.2.3}, the projection $p : \mathcal{C} _{/h_0}  \to \mathcal{C} $ is a right fibration. By definition, $\phi '$ is the transpose of $f_0 | \Delta ^1 \star \partial \Delta ^{n-2} $. Projecting along $p: \mathcal{C} _{/h_0}  \to \mathcal{C} $ simply yields $f_0|\Delta ^1$, which is precisely $\phi $. Hence $\phi '$ is a preimage of $\phi $ under the right fibration $p$. Since $\left\{ 0 \right\} =\Lambda_1^1 \subseteq \Delta ^1$, $q$ lifts against this.
+
+	If $\phi $ is an equivalence, then by the dual of \cref{2.1.1.7}, right fibrations reflect equivalences, so $\phi '$ is an equivalence. Note that $\left\{ 0 \right\} $ is the 1st face of $\Delta ^1$, and thus a 0th horn $\Lambda _0^1$.
+
+	We now show $q$ is a right fibration by showing it follows by \cref{2.1.2.1}. By the dual of \cref{2.1.2.3}, $\mathcal{C} _{/h_0} $ is an $\infty $-category, and thus $\mathcal{C} _{/h_0} \to \Delta ^0$ is an inner fibration. Consider the map $h : \Delta ^{n-2}  \to \mathcal{C} $, and the restriction $h_0 = h|\partial \Delta ^{n-2} $. Define $r$ as the map $\Delta ^{n-2} \to \Delta ^0$, and $r_0$ as the restriction along the boundary. Then by the dual of \cref{2.1.2.1}, the induced map $\mathcal{C} _{/h} \to \mathcal{C} _{/h_0} \times _{\Delta ^0_{/r_0} } \Delta ^0_{/r} $ is a right fibration. We show ths map is $q$.
+
+	Recall by the dual proof of \cref{2.1.2.3} that $\Delta ^0_{/r} \cong \Delta ^0$ for all $r : K \to \Delta ^0$. Thus the relevant diagram is
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} _{/h} \ar[" ! ", bend left, drr] \ar[" i^* "', bend right, ddr] \ar[dashed, dr]  &  &  \\
+	 & \mathcal{C} _{/h_0} \times_{\Delta ^0} \Delta ^0 \ar[r] \ar[d]  & \Delta ^0 \ar[equals, d]  \\
+	 & \mathcal{C} _{/h_0} \ar[r]  & \Delta ^0,
+	\end{tikzcd}\]
+	where $i^*$ denotes precomposition by the inclusion of the boundary $\partial \Delta ^{n-2} \subseteq \Delta ^{n-2} $. The diagram of solid arrows commutes by \cref{2.1.2.2}, and by universality of pullback there is a unique dashed arrow as indicated, rendering the diagram commutative. Note the equality $i^*=q$, and note also that we clearly have $\mathcal{C}_{/h_0} \times _{\Delta ^0}\Delta ^0 \cong \mathcal{C} _{/h_0} $. Thus we can choose $\mathcal{C} _{/h_0} $ to be the pullback, in which case the dashed arrow must be $q$, hence $q$ is a right fibration.
+
+	Since right fibrations do not lift against 0th horns, we appeal instead to the dual of \cref{2.1.1.8}. Since the domain $\phi '(0)$ of the 1-simplex $\phi '$ is in the image of $q$ by commutativity of the lifting problem, the dual of \cref{2.1.1.8} provides a lift of $\phi '$ to an equivalence in $\mathcal{C} _{/h} $ which agrees with the image of $0$ in $\mathcal{C} _{/h} $, providing the filler as required.
+
+	($\impliedby $) Let $\phi : x \to y$ in $\mathcal{C} $. Consider the 0th horn $f_0 =(-,1_x,\phi ) : \Lambda _0^2 \to \mathcal{C} $ depicted as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & y \ar[" \psi  ", dotted, dr]  &  \\
+	x \ar[" 1_x "', rr]\ar[" \phi  ", ur]  &  & x .
+	\end{tikzcd}\]
+	This admits a filler $f\in \mathcal{C} _2$ by hypothesis, hence filling this simplex to a dotted arrow $\psi $ as indicated. This yields a left homotopy inverse $\psi $ for $\phi $. To show the other side, consider the horn $\tau _0 = (-,s_0(\phi ),s_1(\phi ),f)$. First we show this horn is well-defined. The simplicial identities yield $d_1s_0(\phi )=d_1s_1(\phi )=\phi $, so we only check compatibility with $f$. We note that by the simplicial identities,
+	\[
+		d_1(f) = 1_x,\qquad d_2s_0(\phi ) = s_0d_1(\phi ) = s_0(x) = 1_x
+	;\]
+	\[
+		d_2(f) = \phi = d_2s_1(\phi )
+	.\]
+	Thus $\tau _0$ is a well-defined 0th horn, and by hypothesis admits a filler $\tau $. We claim the face $d_0(\tau )$ verifies $\phi \circ \psi \simeq 1_y$. Indeed, the simplicial identities yield
+	\[
+		d_0d_0(\tau ) = d_0d_1(\tau ) = d_0s_0(\phi ) = \phi ,
+	\]
+	\[
+		d_1d_0(\tau ) = d_0d_2(\tau ) = d_0s_1(\phi ) = s_0d_0(\phi ) = s_0(y)=1_y,
+	\]
+	\[
+		d_2d_0(\tau ) = d_0d_3(\tau ) = d_0(f) = \psi 
+	.\]
+	Thus $d_0(\tau )$ can be depicted as 
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	 & x \ar[" \phi  ", dr]  &  \\
+	y \ar[" \psi  ", ur] \ar[" 1_y "', rr]  &  & y,
+	\end{tikzcd}\]
+	verifying that $\psi $ is a homotopy inverse of $\phi $, as needed.
 \end{proof}
 
+The proof of \cref{2.1.2.1} follows from some basic lemmas.
+
+\begin{lemma}[Joyal \cite{joyal08b}]\label{2.1.2.5}
+	Let $f : A_0 \subseteq A$ and $g : B_0 \subseteq B$ be inclusions of simplicial sets. If $f$ is right anodyne or $g$ is left anodyne, then the induced inclusion
+	\[
+		h : (A_0 \star B) \amalg _{A_0\star B_0} (A\star B_0)\subseteq A\star B
+	\]
+	is inner anodyne.
+\end{lemma}
+\begin{proof}
+	Let $f$ be right anodyne; the statement for for $g$ follows by duality.
+
+	Consider the collection of all morphisms $f$ such that for any inclusion $g$, the induced map $h$ by pushing forward along them is inner anodyne. Since right anodyne maps are generated by horn inclusions in the sense that they are $\left\{ \Lambda_i^n \right\}_{0<i \leq n} $-cof, and since they are closed under pushout, it suffices by cocontinuity of $\star $ in both arguments to show that the maps $f : \Lambda _j^n \subseteq \Delta ^n$ are in this set. Choose $f$ of this form.
+
+	Now with $f$ fixed, consier all $g$ that would satisfy this criteria. To prove that this set contains all inclusions, it suffices to show the lemma holds when $g$ is of the form $\partial \Delta ^m \subseteq \Delta ^m$, since these generate inclusions under pushouts I think. In this case, identifying $\Delta ^n \star \Delta ^m \cong \Delta ^{n+m+1} $, the pushout can be identified with the union $(\Lambda _j^n \star \Delta ^{m} ) \cup (\Delta ^n\star \partial \Delta ^m)$. This is just $\Lambda _j^{n+m+1} $, $0<j\leq n < n+m+1$ which is of course has an inner anodyne inclusion.
+\end{proof}
+
+The same lemma follows in the same way:
+
+\begin{lemma}\label{2.1.2.6}
+	Let $f : A_0 \subseteq A$ and $g : B_0 \subseteq B$ be inclusions of simplicial sets. If $f$ is left anodyne, then so is the inclusion
+	\[
+		h : (A_0\star B) \amalg _{A_0\star B_0} (A \star B_0) \subseteq A \star B
+	.\]
+\end{lemma}
+
+\noindent\textbf{Proof of \cref{2.1.2.1}.} Let definitions be as in the proposition statement. Write $i : A \subseteq B$ such that restriction along $A$ is precomposition $i^*$. The relevant map arises as
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+X_{p/} \ar[" q_* ", bend left, drr] \ar[" i^* "', bend right, ddr] \ar[" f ", dashed, dr]  &  &  \\
+ & X_{p_0/} \times _{S_{r_0/} } S_{r/}\ar[" \ell_S ", r] \ar[" \ell _X "', d]   & S_{r/} \ar[" i^* ", d]  \\
+ & X_{p_0/} \ar[" q_* "', r]  & S_{r_0/} .
+\end{tikzcd}\]
+Consider a lifting problem
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Lambda _i^n \ar[" \sigma _0 ", r] \ar[" \iota  "', hook, d]  & X_{p/} \ar[" f ", d]  \\
+\Delta ^n \ar[" \tau  "', r]  & X_{p_0/} \times _{S_{r_0/} } S_{r/} 
+\end{tikzcd}\]
+for $0\leq i<n$. We want to shift the problem back into working with $X$ and $S$ so we can solve it. By transposing under $\sSet (S,T_{g/} )\cong \sSet_g(K \star S,T)$, we identify $\sigma _0$ with a map $\Phi _0 : B \star \Lambda _i^n \to X$. Now note that by universality of pullback, $\tau $ identifies $n$-simplicies $\ell _S \circ \tau $ and $\ell _X \circ \tau $ of $S_{r/} $ and $X_{p_0/} $, respectively. Write $h,k$ for these $n$-simplicies, respectively, such that $h : B \star \Delta ^n \to S$ and $k : A \star \Delta ^n \to X$. The lifting problem tells us that $\tau |\Lambda _i^n = f\circ \sigma _0$, hence
+\[
+	\ell _X \circ \tau \circ \iota =\ell _X \circ f \circ \sigma _0 = i^* \circ \sigma _0 : \Lambda _i^n \to S_{r/}
+.\]
+By realizing $k$ as the transpose of $\ell_X \circ \tau $, we see that $\ell _X \circ \tau |\Lambda _i^n = k|(A \star \Lambda _i^n)$. this doesn't feel rigorous also i dont even know how to finish this line of reasoning.
+
+
+Ok we identify $\sigma _0$ with $\Phi _0 : B\star \Lambda _i^0 \to X$. But we need to identify the rest of the diagram with something to make the bullshit commute. I think I have a map $\Lambda _i^n\to S_{p_0/} \times _{S_{r_0/} } S_{r/} $ by taking $h : \Delta ^n \to S_{r/} $ and $k : \Delta ^n \to X_{p_0/} $ and restricting along the horn. The question is whether or not they agree on $S_{r/} $ when restricting along the horn. As seen above,  $h \circ \iota =i^*\circ \sigma _0$.
+
+Let's try this again. Consider a lifting problem
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\Lambda _i^n \ar[" \sigma _0 ", r] \ar[hook, d]  & X_{p/} \ar[d]  \\
+\Delta ^n \ar[" \sigma  "', r]  & X_{p_0/} \times _{S_{r_0/} } S_{r/} .
+\end{tikzcd}\]
+We will utilize the identification: if $g : K \to T$, then $\sSet (S,T_{g/} ) \cong \sSet _g(K\star S,T)$. In particular, $\sigma _0 : \Lambda _i^n \to X_{p/} $ can be identified with a map $\Phi _0 : B \star \Lambda _i^n \to X$ which restricts as $\Phi _0|B=p$. The idea to continue will be to consider the four relevant maps arising from universality of pullback, and transposing those to get something in the style of the previous two lemmas.

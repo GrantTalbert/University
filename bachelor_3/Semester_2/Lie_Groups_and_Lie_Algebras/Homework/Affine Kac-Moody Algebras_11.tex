@@ -1,0 +1,900 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{enumitem}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\newcommand{\gc}{\overset{\circ}{\mathfrak{g}}}
+\usepackage{titlepageBU}
+\title{Introduction to Kac-Moody algebras}
+\begin{document}
+\makereport
+
+\begin{abstract}
+	Kac-Moody algebras are a generalization of semi-simple Lie algebras that can be infinite dimensional. They admit root decompositions that follow similarly to semi-simple Lie algebras. Their classification is currently unfinished, but some classes of Kac-Moody algebras are particularly well-studied. We introduce the finite and affine types.
+\end{abstract}
+
+\section{Introduction}
+
+???
+
+These notes were compiled mainly from \cite{kac}, \cite{carter}, and \cite{???}. Since Kac is the canonical reference on this topic, I've cited his text as a reference for all proofs in these notes. I used \cite{carter} and \cite{???} to see different presentations on the same material.
+
+\section{Review of semi-simple Lie algebras}
+
+We will begin by reviewing the theory of semi-simple Lie algebras; in particular the motivation behind their study, the root decomposition, and the Cartan matrix and $\mathfrak{sl} _2$-subrepresentations. We omit proofs for statements included in this section, since we are only reviewing previously seen results.
+
+Throughout this paper, we always work over the base field $\mathbb{C} $. Most of these results work more generally for Lie algebras over any algebraically closed field.
+
+\begin{definition}\label{dfn:2-1}
+	A \emph{Lie algebra} $\mathfrak{g} $ is a vector space together with a bilinear map $[-,-]: \mathfrak{g} \otimes_\mathbb{C} \mathfrak{g}  \to \mathfrak{g} $ called the \emph{Lie bracket}, which satisfies, for all $x,y,z\in \mathfrak{g} $,
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item $[x,y]=-[y,x]$ (Antisymmety).
+		\item $[x,[y,z]] + [y,[z,x]] + [z,[x,y]]=0$ (Jacobi identity).
+	\end{enumerate}
+\end{definition}
+
+If $\mathfrak{g} $ is a Lie algebra and $H,K \subseteq \mathfrak{g} $ are arbitrary subsets, the notation $[H,K]$ denotes the set
+\[
+	[H,K] = \left\{ [h,k] \mid h\in H,k\in K \right\} \subseteq \mathfrak{g} 
+.\]
+An \emph{ideal} $\mathfrak{i} \subseteq \mathfrak{g} $ of $\mathfrak{g} $ is a linear subspace $\mathfrak{i} $ such that $[\mathfrak{g} ,\mathfrak{i} ]\subseteq \mathfrak{i} $. Note that $\mathfrak{i} $ is necessarily a Lie subalgebra of $\mathfrak{g} $.
+
+We then define the \emph{derived series} $\mathfrak{g} _{\bullet} =\left\{ \mathfrak{g}_i \right\} _{i\geq 0} $ inductively by setting $\mathfrak{g}_0 \coloneqq \mathfrak{g} $, and taking $\mathfrak{g} _i = [\mathfrak{g} _{i-1} ,\mathfrak{g} _{i-1} ]$ for $i\geq 1$. If $\mathfrak{i} \subseteq \mathfrak{g} $ is an ideal of $\mathfrak{g} $ such that $\mathfrak{i} $ is solvable, then we say $\mathfrak{i} $ is a solvable ideal of $\mathfrak{g} $.
+\begin{definition}\label{dfn:2-2}
+	Let $\mathfrak{g} $ be a Lie algebra, and let $\mathfrak{g} _{\bullet} $ denote its derived series.
+	\begin{itemize}
+		\item The Lie algebra $\mathfrak{g} $ is \emph{solvable} if the derived series $\mathfrak{g} _{\bullet} $ stabilizes at 0, meaning there is $i$ such that $\mathfrak{g} _i\cong 0$.
+		\item The Lie algebra $\mathfrak{g} $ is \emph{semi-simple} if the unique solvable ideal of $\mathfrak{g} $ is the trivial ideal $0\subseteq \mathfrak{g} $.
+	\end{itemize}
+	A Lie algebra is called \emph{abelian} if $[-,-]=0$.
+\end{definition}
+
+The notion of solvable and semi-simple Lie algebras is important in the classification of finite Lie algebras due to the following theorem, which was proven by Levi.
+
+\begin{theorem}[Levi decomposition]\label{thm:2-3}
+	Let $\mathfrak{g} $ be a finite dimensional Lie algebra. Then there exists a decomposition
+	\[
+		\mathfrak{g} \cong \mathfrak{s} \ltimes \mathfrak{r} 
+	,\]
+	where $\mathfrak{r} \subseteq \mathfrak{g} $ is the maximal solvable ideal of $\mathfrak{g} $, and $\mathfrak{s} $ is a semi-simple Lie subalgebra.
+\end{theorem}
+
+Levi's decomposition theorem reduces the classification of finite dimensional Lie algebras to the study of semi-simple Lie algebras. The classification of semi-simple Lie algebras proceeds via their root decomposition.
+
+\begin{definition}\label{dfn:2-4}
+	Let $\mathfrak{g} $ be a Lie algebra. A \emph{Cartan subalgebra} $\mathfrak{h} \subseteq \mathfrak{g} $ is a linear subspace with the properties
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item $[\mathfrak{h} ,\mathfrak{h} ]=0$.
+		\item If $h\in \mathfrak{h} $ and $x\in \mathfrak{g} $ have the property that $[h,x]\in \mathfrak{h} $, then $x\in \mathfrak{h} $.
+		\item If $h\in \mathfrak{h} $, then $\mathrm{ad}_h$ is diagonalizable.
+	\end{enumerate}
+\end{definition}
+\begin{definition}\label{dfn:2-5}
+	Let $\mathfrak{g} $ be a Lie algebra with Cartan subalgebra $\mathfrak{h} $. A \emph{root} (of $\mathfrak{g} $ relative to $\mathfrak{h} $) is a nonzero element $\alpha \in \mathfrak{h} ^*$ with the property that there is a nonzero $x\in \mathfrak{g} $ such that $[h,x]=\alpha (h)x$ for all $h\in \mathfrak{h} $. The \emph{root space} $\mathfrak{g} _{\alpha } $ is the set
+	\[
+		\mathfrak{g} _{\alpha } =\left\{ x\in \mathfrak{g} \mid [h,x]=\alpha (h)x \forall h\in \mathfrak{h}  \right\} 
+	.\]
+\end{definition}
+\begin{proposition}[Root space decomposition]\label{prp:2-6}
+	Let $\mathfrak{g} $ be a finite dimensional semisimple Lie algebra, $\mathfrak{h} $ a Cartan subalgebra, and $R$ the collection of all roots of $\mathfrak{g} $ relative to $\mathfrak{h} $. Then there is a decomposition
+	\[
+		\mathfrak{g} \cong \mathfrak{h} \oplus \bigoplus_{\alpha \in R} \mathfrak{g} _{\alpha } 
+	.\]
+	Additionally the following properties hold.
+	\begin{itemize}
+		\item If $\alpha ,\beta \in \mathfrak{h}^*$, then $[\mathfrak{g}_\alpha ,\mathfrak{g} _{\beta } ]\subseteq \mathfrak{g} _{\alpha +\beta } $.
+		\item If $\alpha \in R$, then $-\alpha \in R$.
+		\item $\operatorname{span} R = \mathfrak{h} ^*$.
+		\item Each root space $\mathfrak{g} _{\alpha } $ is 1-dimensional.
+	\end{itemize}
+\end{proposition}
+
+The root space decomposition of semisimple Lie algebras yields a particularly nice classification of \emph{simple} Lie algebras.
+
+\begin{definition}\label{dfn:2-7}
+	A \emph{simple} Lie algebra is a nonabelian Lie algebra with no nontrivial ideals.
+\end{definition}
+\begin{proposition}\label{prp:2-8}
+	Let $\mathfrak{g} $ be a Lie algebra. Then $\mathfrak{g} $ is semi-simple if and only if $\mathfrak{g}$ is the direct sum of simple Lie algebras.
+\end{proposition}
+
+\begin{proposition}\label{prp:2-9}
+	Finite simple Lie algebras are classified by the connected Dynkin diagrams. They fall into families denoted $A_n$, $B_n$, $C_n$, and $D_n$ with $n\geq 1$. There are five exceptions that do not fall into these families: $E_6$, $E_7$, $E_8$, $F_4$, and $G_2$.
+\end{proposition}
+We will not elaborate on the definitions of these families, since the classification itself, although interesting, is not useful for us beyond its existence. For more on this topic, see [find a citation].
+
+Let $\mathfrak{g} $ be a semi-simple Lie algebra and $\mathfrak{h} \subseteq \mathfrak{g} $ a Cartan subalgebra. Since $\mathfrak{g} $ is semi-simple, Cartan's criterion says that the Killing form $\kappa (x,y) = \mathrm{tr} (\mathrm{ad}_x \circ \mathrm{ad}_y)$ is nondegenerate, and thus it remains nondegenerate when restricting along $\mathfrak{h} $. This yields an isomorphism $\mathfrak{h} \cong \mathfrak{h} ^*$ by mapping $\mathfrak{h} \ni h\mapsto \kappa (h,-)\in \mathfrak{h} ^*$. In particular, for each $\alpha \in \mathfrak{h} ^*$, there is $t_\alpha \in \mathfrak{h} $ such that $\kappa (t_\alpha ,-)=\alpha $.
+
+Since $\kappa $ is nondegenerate, symmetric, and bilinear, it defines an inner product $(h,k)=\kappa (h,k)$ on $\mathfrak{h} $. The isomorphism promotes this to an inner product on $\mathfrak{h} ^*$, defined by
+\[
+	(\alpha ,\beta ) \coloneqq (t_\alpha ,t_\beta ) = \kappa (t_\alpha ,t_\beta )
+.\]
+By nondegeneracy, $(\alpha ,\alpha )\neq 0$, so we can define the \emph{coroot} $\alpha ^\vee $ as
+\[
+	\alpha ^\vee \coloneqq \frac{2}{(\alpha ,\alpha )} \alpha 
+.\]
+The isomorphism $\mathfrak{h} \cong \mathfrak{h} ^*$ identifies this with the element
+\[
+	h_\alpha \coloneqq \frac{2t_\alpha }{(\alpha ,\alpha )} \in \mathfrak{h} 
+.\]
+
+Let $R$ be the root system of $\mathfrak{g} $ relative to $\mathfrak{h} $. We claim that the elements $\left\{ h_\alpha  \right\}_{\alpha \in R} $ span $\mathfrak{h} $. PROVE THIS LATER
+
+Let $\alpha \in R$. Note that
+\[
+	\alpha (h_\alpha ) = \frac{2\alpha (t_\alpha )}{(\alpha ,\alpha )} =\frac{2\kappa (t_\alpha ,t_\alpha )}{\kappa (t_\alpha ,t_\alpha )} =2
+.\]
+Recall that the Killing form satisfies $\kappa ([x,y],h)=\kappa (x,[y,h])$ for $x,y,h\in \mathfrak{g} $. In particular, take $h\in \mathfrak{h} $, $x\in \mathfrak{g} _\alpha $, and $y\in \mathfrak{g} _{-\alpha } $. We know by \cref{dfn:2-5} that $[h,y]=-\alpha (h)y$ and $[h,x]=\alpha (h)x$. It follows that $[y,h] = \alpha (h)y$, and thus
+\[
+	\kappa ([x,y],h) = \kappa (x,\alpha (h)y) = \alpha (h)\kappa (x,y)
+.\]
+Recall $\alpha (h) = \kappa (t_\alpha ,h)$. Then
+\[
+	\kappa ([x,y],h) = \kappa (t_\alpha ,h)\kappa (x,y) = \kappa (\kappa (x,y)t_\alpha ,h)
+.\]
+By nondegeneracy of $\kappa $ on $\mathfrak{h} $, since $\kappa ([x,y],-) = \kappa (\kappa (x,y)t_\alpha ,-)$, we find that $[x,y] = \kappa (x,y)t_\alpha $. This has a number of immediate consequences.
+
+We claim there are elements $e_\alpha \in \mathfrak{g} _\alpha $ and $f_\alpha \in \mathfrak{g}_{-\alpha } $ with the property that
+\[
+	\kappa (e_\alpha ,f_\alpha ) = \frac{2}{(\alpha ,\alpha )} 
+.\]
+Choose $e_\alpha \in \mathfrak{g} _{\alpha } $ and $y\in \mathfrak{g} _{-\alpha } $ with $\kappa (e_\alpha ,y)\neq 0$. Then we define
+\[
+	f_\alpha \coloneqq \frac{\frac{2}{(\alpha ,\alpha )} }{\kappa (e_\alpha ,y)} y
+\]
+such that $\kappa (e_\alpha ,f_\alpha ) = 2/(\alpha ,\alpha )$, as desired.
+
+We now immediately find that, by definition of $h_\alpha $,
+\[
+	[e_\alpha ,f_\alpha ] = \kappa (e_\alpha ,f_\alpha )t_\alpha =\frac{2t_\alpha }{(\alpha ,\alpha )} = h_\alpha 
+.\]
+Since $h_\alpha \in \mathfrak{h} $ and $e_\alpha \in \mathfrak{g} _\alpha $, we also have the relation
+\[
+	[h_\alpha ,e_\alpha ]=\alpha (h_\alpha )e_\alpha =2e_\alpha 
+.\]
+By the same logic,
+\[
+	[h_\alpha ,f_\alpha ] =-\alpha (h_\alpha )f_\alpha  = -2f_\alpha 
+.\]
+Note that these are exactly the commutation relations satisfied by the basis $\left\{ e,f,h \right\} $ of $\mathfrak{sl} _2(\mathbb{C} )$. Thus we have proven
+
+\begin{proposition}\label{prp:2-10}
+	For each root $\alpha \in R$, the subspace $\left\langle e_\alpha ,f_\alpha ,h_\alpha  \right\rangle \subseteq \mathfrak{g} $ is isomorphic to $\mathfrak{sl} _2(\mathbb{C} )$.
+\end{proposition}
+
+This data is somewhat redundant. Recall that $\left\{ h_\alpha  \right\}_{\alpha \in R} $ spanned $\mathfrak{h} $, but it is \emph{not a basis}. To get rid of redundant information, we can restrict our attention to bases.
+
+\begin{definition}\label{dfn:2-11}
+	A \emph{base} for a root system $R$ is a parition $R = R^+ \cup R^-$ where $R^- = -R^+$ is disjoint from $R^+$, and $R^+$ satisfies the properties that
+	\begin{enumerate}
+		\item For all $\alpha\in R$, exactly one of $\alpha $ and $-\alpha $ are in $R^+$.
+		\item If $\alpha ,\beta \in R^+$ are such that $\alpha +\beta \in R$ is a root, then $\alpha +\beta \in R^+$.
+	\end{enumerate}
+	If $\alpha \in R^+$ cannot be written as a sum of more than one element of $R^+$, then we call $\alpha $ a \emph{simple root}. The set of all simple roots is denoted $\Delta $.
+\end{definition}
+
+\begin{proposition}\label{prp:2-12}
+	Let $\mathfrak{g} $ be a Lie algebra, $\mathfrak{h} \subseteq \mathfrak{g} $ a Cartan subalgebra, and $R$ the root system.
+	\begin{enumerate}
+		\item There is a base for $R$.
+		\item The number of simple roots is $\dim \mathfrak{h} $.
+		\item Every $\alpha \in R$ is a linear combination of simple roots in $\Delta $with \emph{integer} coefficients.
+		\item The coefficients in (3) are either all non-positive or all non-negative.
+	\end{enumerate}
+\end{proposition}
+
+Note that since $\Delta $ spans $R$ and $R$ spans $\mathfrak{h}^*$, we have that $\operatorname{span} \Delta =\mathfrak{h}^*$. Since $\Delta  $ is clearly linearly independent, we see that $\Delta $ is a basis for $\mathfrak{h} ^*$.
+
+\begin{definition}\label{dfn:2-13}
+	Let $\mathfrak{g} $ be a semi-simple Lie algebra with Cartan subalgebra $\mathfrak{h} $, root system $R$. Order the simple roots $\Delta =\left\{ \alpha _i \right\}_{1\leq i\leq r} $ for some finite integer $r=\dim \mathfrak{h} \geq 0$. With notation as above, write $h_i \coloneqq h_{\alpha _i} $. The \emph{Cartan matrix} $A$ is defined by
+	\[
+		a_{ij} =\alpha _j(h_i)=\frac{2(\alpha _i,\alpha _j)}{(\alpha _i,\alpha _i)} 
+	.\]
+\end{definition}
+
+The Cartan matrix is clearly well-defined up to permutation of the indicies and choice of base. However, a fascinating fact is that the Cartan matrix is \emph{invariant under choice of base}. We will see this shortly in \cref{thm:2-15}.
+
+\begin{proposition}\label{prp:2-14}
+	The Cartan matrix $A=(a_{ij} )$ satisfies the following properties.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item $a_{ii} =2$ for all $i$.
+		\item $a_{ij} \in \mathbb{Z} _{\leq 0} $ for $i\neq j$.
+		\item $a_{ij} =0$ if and only if $a_{ji} =0$.
+	\end{enumerate}
+\end{proposition}
+
+Cartan matrices characterize Lie algebras up to isomorphism.
+
+\begin{theorem}[Serre]\label{thm:2-15}
+	Let $A=(a_{ij} )$ be an $r\times r$ Cartan matrix of some Lie algebra. Then there is a Lie algebra $\mathfrak{g}'(A) $ whose Cartan matrix is $A$. Additionally, $\mathfrak{g} $ is a Lie algebra with Cartan matrix $A$ if and only if $\mathfrak{g} \cong \mathfrak{g}'(A)$. The Lie algebra $\mathfrak{g} '(A)$ is defined as the free Lie algebra on generators $\left\{ h_i,e_i,f_i\mid 1\leq i\leq r \right\} $ modulo the following relations:
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item $[h_i,h_j]=0$.
+		\item $[e_i,f_j]=\delta _{ij} h_i$.
+		\item $[h_i,e_j]=a_{ij} e_j$.
+		\item $[h_i,f_j]=-a_{ij} f_j$.
+		\item If $i\neq j$, then $[e_i,[e_i, \ldots ,[e_i,e_j]]] = [f_i, [f_i, \ldots ,[f_i,f_j]]]=0$, where the number of $e_i$'s and $f_i$'s appearing is $1-a_{ij} $. We usually prefer to write this as $\mathrm{ad}_{e_i} ^{1-a_{ij} } (e_j)$ and $\mathrm{ad}_{f_i} ^{1-a_{ij} } (f_j)$.
+	\end{enumerate}
+The Cartan subalgebra $\mathfrak{h} \subseteq \mathfrak{g}'(A) $ is $\mathfrak{h} =\operatorname{span} \left\{ h_i\mid 1\leq i\leq r \right\} $. 
+\end{theorem}
+	
+
+\begin{corollary}\label{cor:2-17}
+	If $\Delta $ and $\Delta '$ are bases for $\mathfrak{g} $, then the corresponding Cartan matrices are the same up to a permutation of indicies.
+\end{corollary}
+
+To summarize, we have seen that by leveraging the root space decomposition of a semi-simple Lie algebra, we may fully characterize it as a collection of $\mathfrak{sl} _2(\mathbb{C} )$-representations. We can encode this data quite succinctly into a \emph{Cartan matrix}, such that if a matrix is known to be a Cartan matrix, the original Lie algebra can be reconstructed. In \cref{prp:2-14}, we established some important properties that Cartan matrices satisfy; however these properties do not characterize Cartan matrices. One can construct matrices satisfying the claims of \cref{prp:2-14} that are \emph{not} Cartan matrices. However, by applying a similar construction, one can still always obtain a Lie algebra. This is the idea behind Kac-Moody algebras.
+
+\section{Kac-Moody algebras}
+
+\begin{definition}\label{dfn:3-1}
+	A \emph{generalized Cartan matrix} is a square matrix $A=(a_{ij} )$ with \emph{integer entries} satisfying the following properties.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item For diagonal entries, $a_{ii} =2$.
+		\item For off-diagonal entries, $a_{ij} \leq 0$.
+		\item $a_{ij} =0$ if and only if $a_{ji} =0$.
+	\end{enumerate}
+\end{definition}
+
+By \cref{prp:2-14}, all Cartan matrices are genralized Cartan matrices. However, the converse is not true. Additionally, if we take a generalized Cartan matrix and follow the construction in \cref{thm:2-15}, we don't get a root space decomposition of the resulting Lie algebra. We will modify the construction slightly in a way that we obtain a better behaved Lie algebra.
+
+\begin{definition}\label{dfn:3-2}
+	Let $A=(a_{ij} )$ be an $n\times n$ matrix. A \emph{realization} of $A$ is a triple $(\mathfrak{h} ,\Pi ,\Pi ^\vee )$ where $\mathfrak{h} $ is a $\mathbb{C} $-vector space of dimension $2n-\operatorname{rank } A$, and
+	\[
+		\Pi =\left\{ \alpha _i \right\}_{1\leq i\leq n} \subseteq \mathfrak{h} ^*,\qquad \Pi ^\vee =\left\{ \alpha ^\vee _i \right\}_{1\leq i\leq n} \subseteq \mathfrak{h} 
+	\]
+	are linearly independent sets satisfying
+	\[
+		\alpha _j(\alpha ^\vee _i)=a_{ij} .
+	\]
+\end{definition}
+
+What we call a realization of a matrix is called a \emph{minimal realization} by some authors (eg. ADD CITATIONS). Those authors do not put a dimension restriction on $\mathfrak{h} $. However, and call a realization \emph{minimal} if $\mathfrak{h} $ attains minimum dimension. This minimum dimension can be proven to be $2n - \operatorname{rank}A$, and after proving this they usually procceed by working with minimal representations. We have chosen to follow (CITE) and refer to minimal representations simply as representations.
+
+
+\begin{remark}\label{rmk:3-3}
+	The reason for working with realizations is to ensure $\mathfrak{h} $ has the proper dimension. To see why this is needed, suppose we took $\mathfrak{h} $ to have dimension $n$. Then since $\left\{ \alpha_i^\vee  \right\}_{1\leq i\leq n} $ is linearly independent, it forms a basis, meaning the $\alpha _i$'s are fully determined by $\alpha _i(\alpha _j^\vee )=a_{ij} $. Linear algebra then tells us that $\left\{ \alpha _i \right\}_{1\leq i\leq n} $ is linearly independent \emph{if and only if} $\det A \neq 0$. However, generalized Cartan matrices can be degenerate, meaning that our root decomposition falls apart if we force $\dim \mathfrak{h} =n$. By increasing the dimension, we are essentially adjoining enough generators to allow $\left\{ \alpha _i \right\}_{1\leq i\leq n} $ to be linearly independent.
+\end{remark}
+
+\begin{proposition}\label{prp:3-4}
+	Let $A$ be a matrix. Then the realization of $A$ exists and is unique up to isomorphism, where an isomorphism $\varphi : (\mathfrak{h} ,\Pi ,\Pi ^\vee ) \cong (\mathfrak{k} , \Sigma ,\Sigma ^\vee )$ of realizations is a linear isomorphism $\varphi : \mathfrak{h} \cong \mathfrak{k} $ with $\varphi (\Pi^\vee )=\Sigma ^\vee $ and $\varphi^*(\Pi ) = \Sigma $, where $\varphi ^* : \mathfrak{h} ^* \to \mathfrak{k} ^*$ is the induced map.
+\end{proposition}
+\begin{proof}
+	Follow Cartan proposition 14.2.
+\end{proof}
+
+\begin{construction}\label{const:3-5}
+	Let $A=(a_{ij} )$ be an $n\times n$ generalized Cartan matrix. Let $(\mathfrak{h} ,\Pi ,\Pi ^\vee )$ be the realization of $A$. Let $S=\left\{ e_i,f_i\mid 1\leq i\leq n \right\} $ be a set of generators. Let $F(S)$ be the free $\mathbb{C} $-vector space on the set $S$, and $\mathfrak{G} \coloneqq \mathfrak{f} (\mathfrak{h} \oplus F(S))$ the free Lie algebra on the vector space $\mathfrak{h} \oplus F(S)$. Define the following relations on $\mathfrak{G} $:
+	\begin{enumerate}[label=(R\arabic*), align=left]
+		\item $[\mathfrak{h},\mathfrak{h}]=0$;
+		\item $[h,e_i]=\alpha _i(h)e_i$ for all $h\in \mathfrak{h} $;
+		\item $[h,f_i]=-\alpha _i(h)f_i$ for all $h\in \mathfrak{h} $;
+		\item $[e_i,f_j]=\delta _{ij} \alpha _i^\vee $;
+		\item $\mathrm{ad}_{e_i} ^{1-a_{ij} } (e_j)=0$ whenever $i\neq j$;
+		\item $\mathrm{ad}_{f_i} ^{1-a_{ij} } (f_j)=0$ whenever $i\neq j$;
+	\end{enumerate}
+	Define $\widetilde{\mathfrak{g} }=\widetilde{\mathfrak{g} } (A)$ to be the quotient of $\mathfrak{G} $ by relations (R1)-(R4), and define $\mathfrak{g}$ to be the quotient of $\mathfrak{G} $ by relations (R1)-(R6). We call $\mathfrak{g}$ the \emph{Kac-Moody algebra on $A$}.
+\end{construction}
+
+We denote by $\mathfrak{h} $ and $e_i,f_i$ the images of the algebra $\mathfrak{h} $, $e_i$, and $f_i$ in the algebra $\mathfrak{g} $ under the canonical quotient $\mathfrak{f} (\mathfrak{h} \oplus F(S)) \to \mathfrak{g} $. We adopt the same notation when working with $\widetilde{\mathfrak{g} } $.
+
+The relations (R5) and (R6) are called the Serre relations. Some authors call relations (R1)-(R4) the Cartan relations or Cartan-Serre relations, but most authors leave them unnamed. We will simply refer to the collection (R1)-(R6) of relations as the \emph{Kac-Moody relations}. The generators $e_i,f_i$ are called the \emph{Chevalley generators} of $\mathfrak{g}$.
+
+The reason for introducing the Lie algebra $\widetilde{\mathfrak{g} }$ as well as the Kac-Moody algebra $\mathfrak{g}$ is since some proofs are simplified by working at the level of $\widetilde{\mathfrak{g} }$, and then descending to the quotient by the Serre relations.
+
+The benefit of requiring that $\mathfrak{h} $ be a realization of $A$ is that we have now axiomatized some of the properties of a root decomposition. Let $\mathfrak{n}^+ \subseteq \mathfrak{g}$ be the Lie subalgebra generated by $\left\{ e_i \right\}_{1\leq i\leq n} $, and let $\mathfrak{n}^-\subseteq \mathfrak{g}$ be the Lie subalgebra generated by $\left\{ f_i \right\}_{1\leq i\leq n} $. These definitions have obvious analogs in $\widetilde{\mathfrak{g} } $. We denote the analogs of $\mathfrak{n} ^+$ and $\mathfrak{n} ^-$ by $\widetilde{\mathfrak{n} } ^+$ and $\widetilde{\mathfrak{n} } ^-$, respectively.
+
+\begin{lemma}\label{lma:3-6}
+	There is a decomposition
+	\[
+		\widetilde{\mathfrak{g} } \cong \widetilde{\mathfrak{n} } ^- \oplus \mathfrak{h} \oplus \widetilde{\mathfrak{n} } ^+
+	.\]
+\end{lemma}
+\begin{proof}
+	prove this one too
+\end{proof}
+
+
+\begin{proposition}\label{prp:3-7}
+	There is a decomposition
+	\[
+		\mathfrak{g} \cong \mathfrak{n} ^- \oplus \mathfrak{h} \oplus \mathfrak{n} ^+
+	.\]
+\end{proposition}
+\begin{proof}
+	prove this one
+\end{proof}
+
+In analogy with the case for semi-simple Lie algebras, we refer to $\Pi $ as the \emph{root base}, and $\Pi ^\vee $ as the \emph{coroot base}. Elements from $\Pi $ are called \emph{simple roots}, and elements from $\Pi ^\vee $ are called \emph{simple coroots}. Given $\alpha \in \mathfrak{h} ^*$, we also define the subspace
+\[
+	\mathfrak{g} _{\alpha } \coloneqq \left\{ x\in \mathfrak{g} \mid [h,x]=\alpha (x)h \forall h\in \mathfrak{h}  \right\} 
+.\]
+We call this the \emph{root space of $\alpha $}. We also set
+\[
+	Q\coloneqq \bigoplus_{i=1}^n \mathbb{Z} \alpha _i,\qquad Q^+ \coloneqq \bigoplus_{i=1}^{n} \mathbb{Z} ^+\alpha _i,\qquad Q^- \coloneqq \bigoplus_{i=1}^{n} \mathbb{Z} ^-\alpha _i.
+\]
+where $\mathbb{Z} ^+$ denotes positive integers $\mathbb{Z} ^-$ denotes negative integers, and we recall that $\Pi =\left\{ \alpha _i \right\}_{1\leq i\leq n}$. We call $Q$ the \emph{root lattice}. One more explicitly thinks of $Q$ as all $\mathbb{Z} $-linear combinations of $\Pi $, and $Q^+$ (resp. $Q^-$) as the subset where the coefficients are all positive (resp. negative). An important warning with our terminology is that not all elements of $Q$ will be called roots. Some $\alpha \in Q$ are redundant information in the sense that $\mathfrak{g} _{\alpha } =0$.
+
+\begin{definition}\label{dfn:3-8}
+	A \emph{root} $\alpha $ of $\mathfrak{g} $ is an element $\alpha \in Q$ such that $\alpha \neq 0$ and $\mathfrak{g} _{\alpha } \neq 0$. We write $\Delta $ for the set of all roots, and $\Delta ^+$ (resp. $\Delta ^-$) for the set $\Delta  \cap Q^+$ (resp $\Delta  \cap Q^-$).
+\end{definition}
+
+
+All of these definitions have analogues in $\widetilde{g} $. We denote the analog of $\mathfrak{g} _\alpha $ by $\widetilde{\mathfrak{g} }_\alpha $.
+
+\begin{lemma}\label{lma:3-9}
+	The Lie algebra $\widetilde{\mathfrak{g} } $ has a root space decomposition
+	\[
+		\widetilde{\mathfrak{g} } \cong \bigoplus_{\alpha \in Q} \widetilde{\mathfrak{g} }_\alpha 
+	.\]
+	This decomposition satisfises the following.
+	\begin{enumerate}[align=right, label=(\arabic*)]
+		\item The dimension $\dim \widetilde{\mathfrak{g} }_{\alpha } $ is finite for all $\alpha \in Q$.
+		\item Note that $0\in Q$. We have that $\widetilde{\mathfrak{g} }_0=\mathfrak{h} $.
+		\item If $\widetilde{\mathfrak{g} }_\alpha =0$ and $\alpha \neq 0$, then either $\alpha \in Q^+$ or $\alpha \in Q^-$.
+		\item $[\widetilde{\mathfrak{g} }_\alpha ,\widetilde{\mathfrak{g} }_\beta ]\subseteq \widetilde{\mathfrak{g} }_{\alpha +\beta } $ for all $\alpha ,\beta \in Q$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	We first prove (2) Let $h\in \mathfrak{g} _0$. Then by definition, $[h',h]=0$ for all $h'\in \mathfrak{h} $. By relation (R1), we have $\mathfrak{h} \subseteq \mathfrak{g} _0$. By relations (R2) and (R3), since each $\alpha _i$ is nonzero, we have that $h\mapsto [h,e_i]$ and $h\mapsto [h,f_i]$ are nonzero for all $i$, since there exist $h$ for which $\alpha _i(h)\neq 0$. Since $\left\{ e_i,f_i \right\}_{1\leq i\leq n} $ generates $\mathfrak{g} \setminus (\mathfrak{h}\setminus 0) $ (here we can use $\mathfrak{f} (\mathfrak{h} \oplus F(S)) \cong \mathfrak{f} (\mathfrak{h} )\oplus \mathfrak{f} (F(S))$ since left adjoint functors preserve colimits) as a Lie algebra, and by linear independence of the $e_i$ and $f_i$'s, it follows that $[x,h]\neq 0$ for all $x\notin \mathfrak{h} $.
+
+	Now we look at the root decomposition. We start by showing that $\widetilde{\mathfrak{g} } = \sum_{\alpha \in Q} \widetilde{\mathfrak{g} }_\alpha $. By \cref{lma:3-6}, it suffices to show that $\widetilde{\mathfrak{n} } ^-, \widetilde{\mathfrak{n} } ^+, \mathfrak{h} $ are subspaces of $\bigoplus_{\alpha } \widetilde{\mathfrak{g} }_\alpha $. By (2), we obtain that $\mathfrak{h} \subseteq \widetilde{\mathfrak{g} }_0 \subseteq \bigoplus_{\alpha } \widetilde{\mathfrak{g} }_\alpha $. First we show $e_i\in \bigoplus_{\alpha } \widetilde{\mathfrak{g} }_\alpha $ for all $i$. By (R2),
+	\[
+		[h,e_i] = \alpha _i(h)e_i
+	\]
+	for all $h\in \mathfrak{h} $. Thus $e_i \in \widetilde{\mathfrak{g} }_{\alpha _i} \subseteq \bigoplus_{\alpha } \widetilde{\mathfrak{g} } _{\alpha } $. Now let $x,y\in \widetilde{\mathfrak{n} } ^+$, and suppose that $x,y\in \bigoplus_{\alpha } \widetilde{\mathfrak{g} } _\alpha $. In particular, let
+	\[
+		[h,x]=\beta (h)x,\qquad [h,y]=\gamma (h)y\qquad \text{for all } h\in \mathfrak{h} 
+	\]
+	for some $\beta ,\gamma \in Q$. Then for any $h\in \mathfrak{h} $, we have
+	\[
+		(\beta +\gamma )(h)[x,y] = \beta (h)[x,y] + \gamma (h)[x,y] = [\beta (h)x,y] + [x,\gamma (h)y]=[[h,x],y] + [x,[h,y]]
+	\]
+	\[
+		=[h,[x,y]]
+	.\]
+	The last step follows by the Jacobi identity. Thus
+	\[
+		[h,[x,y]] = (\beta +\gamma )(h)[x,y]\qquad \text{for all } h\in \mathfrak{h} 
+	.\]
+	This proves statement (3). Additionally, since $Q$ is a $\mathbb{Z} $-module, it is closed under addition, meaning $\beta +\gamma \in Q$. Thus $[x,y]\in \bigoplus_{\alpha } \widetilde{\mathfrak{g} } _\alpha $. Since each $\widetilde{\mathfrak{g} }_{\alpha } $ is a vector space, this suffices to prove that $\widetilde{\mathfrak{n} } ^+ \subseteq \bigoplus_{\alpha } \widetilde{\mathfrak{g} } _\alpha $, since induction now proves all finite nested commutators of elements $\left\{ e_1, \ldots ,e_n \right\} $ are in $\bigoplus_{\alpha } \widetilde{\mathfrak{g} }_\alpha $, and that is precisely what $\widetilde{\mathfrak{n} } ^+$ is spanned by. The proof for $\widetilde{\mathfrak{n} } ^-$ is the same.
+
+	I should be able to show that $\widetilde{\mathfrak{n} } ^+ \subseteq \bigoplus_{Q^+} \widetilde{\mathfrak{g} }_\alpha $, but I don't see how. I may need some lemmas.
+
+	Now we show that the sum is direct. We must show $\widetilde{\mathfrak{g} }_{\alpha_i} \cap \widetilde{\mathfrak{g} }_{\alpha _j} =0$ whenever $i\neq j$.
+\end{proof}
+
+
+
+\begin{theorem}\label{thm:3-10}
+	The Kac-Moody algebra $\mathfrak{g} $ has a root space decomposition
+	\[
+		\mathfrak{g} \cong \bigoplus_{\alpha \in Q} \mathfrak{g} _{\alpha } 
+	.\]
+	This decomposition satisfises the following.
+	\begin{enumerate}[align=right, label=(\arabic*)]
+		\item The dimension $\dim \mathfrak{g} _{\alpha } $ is finite for all $\alpha \in Q$.
+		\item Note that $0\in Q$. We have that $\mathfrak{g} _0=\mathfrak{h} $.
+		\item If $\mathfrak{g} _\alpha \neq 0$ and $\alpha \neq 0$, then either $\alpha \in Q^+$ or $\alpha \in Q^-$.
+		\item $[\mathfrak{g} _\alpha ,\mathfrak{g} _\beta ]\subseteq \mathfrak{g} _{\alpha +\beta } $ for all $\alpha ,\beta \in Q$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Let $\gamma : \widetilde{\mathfrak{g} }  \to \mathfrak{g} $ be the quotient morphism. By \cref{lma:3-9}, it suffices to show $\gamma (\mathfrak{h} )=\mathfrak{h} $ and $\gamma (\widetilde{\mathfrak{g} } _\alpha )=\mathfrak{g} _\alpha $ for all $\alpha \in Q$.
+\end{proof}
+
+\begin{corollary}\label{cor:3-11}
+	The Kac-Moody algebra $\mathfrak{g} $ has a root decomposition
+	\[
+		\mathfrak{g} \cong \mathfrak{h} \oplus \bigoplus_{\alpha \in \Delta } \mathfrak{g} _\alpha 
+	.\]
+\end{corollary}
+\begin{proof}
+	Note that by \cref{dfn:3-8}, we have
+	\[
+		\bigoplus_{\alpha \in Q\setminus \left\{ 0 \right\} } \mathfrak{g} _{\alpha } =\bigoplus_{\alpha \in \Delta } \mathfrak{g} _{\alpha } 
+	.\]
+	By \cref{thm:3-10}, we have $\mathfrak{h} =\mathfrak{g} _0$. Thus
+	\[
+		\mathfrak{g} \cong \bigoplus_{\alpha \in Q} \mathfrak{g} _{\alpha } =\mathfrak{g} _0 \oplus \bigoplus_{\alpha \in Q\setminus \left\{ 0 \right\} } \mathfrak{g} _{\alpha } =\mathfrak{h} \oplus \bigoplus_{\alpha \in \Delta } \mathfrak{g} _{\alpha } 
+	.\]
+	This proves the statement.
+\end{proof}
+
+
+\begin{example}[Semi-simple Lie algebras]\label{ex:3-12}
+	Let $A$ be a Cartan matrix. Then $A$ has rank $n$ by the same logic as \cref{rmk:3-3}, so $\dim \mathfrak{h} =n$. Thus we can write $\mathfrak{h} $ as generated by elements $\left\{ h_1, \ldots ,h_n \right\} $. Thus $\mathfrak{g} $ is a semi-simple Lie algebra by \cref{thm:2-15}.
+\end{example}
+
+There is an analog of simple Lie algebras for the more general case of Kac-Moody algebras.
+
+\begin{definition}\label{dfn:3-13}
+	A generalized Cartan matrix $A$ is \emph{decomposable} if there is a way of permuting its rows and columns such that it forms a block diagonal matrix. Otherwise, $A$ is \emph{indecomposable}.
+\end{definition}
+\begin{proposition}\label{prp:3-14}
+	Let $A$ be a decomposable generalized Cartan matrix, written in block matrix form as $A = \operatorname{diag} (B_1, \ldots , B_r)$, where $B_i$ is an $m_i \times m_i$ matrix. Then each $B_i$ is a generalized Cartan matrix, and the Kac-Moody algebra $\mathfrak{g} (A)$ decomposes as the product
+	\[
+		\mathfrak{g}(A) \cong \prod_{1\leq i\leq r} \mathfrak{g} (B_i)
+	.\]
+\end{proposition}
+\begin{proof}
+	a
+\end{proof}
+
+\begin{remark}\label{rmk:3-15}
+	Due to \cref{prp:3-14}, it is enough to classify Kac-Moody algebras for indecomposable generalized Cartan matrices, similarly to how it is enough to classify simple Lie algebras in order to classify semi-simple Lie algebras. In fact, if $A$ is a Cartan matrix, then $\mathfrak{g} (B_i)$ is a simple Lie algebra.
+\end{remark}
+
+The facts about the root decomposition that we obtained in \cref{thm:3-10} are not a full analog for the finite dimensional case. For example, we were unable to state that $\mathfrak{g} _{\alpha } $ has dimension 1 for all $\alpha \in \mathfrak{h} ^*$, and were only able to find that it is finite dimensional. We call the dimension $\dim \mathfrak{g} _{\alpha } $ the \emph{multiplicity} of the root $\alpha $. We can say a few things about the multiplicities of roots in the general case.
+
+\begin{proposition}\label{prp:3-16}
+	If $\alpha _i\in \Pi $ is a simple root, then $\dim \mathfrak{g} _{\alpha _i} =\dim \mathfrak{g} _{-\alpha _i} =1$. Additionally, if $k>1$, then $\dim \mathfrak{g} _{k\alpha _i} =\dim \mathfrak{g} _{-k\alpha _i} =0$.
+\end{proposition}
+
+
+\section{Finite and affine types}
+
+To say more about the root decomposition of Kac-Moody algebras, we need to specialize to more well-behaved cases. This amounts to a ``classification'' of different types of generalized Cartan matrices. We noted earlier that a Cartan matrix is invertible, but not all generalized Cartan matrices are invertible. We can find some conditions on the matrix $A$ for when $\mathfrak{g} $ is well-behaved. These are summarized by the following definition and proposition.
+
+We adopt the notation that if $u=(u_i)\in\mathbb{R} ^n$, then we write $u>0$ if $u_i>0$ for all $i$. We adopt the same convention for $\geq ,\leq ,<$. Throughout this section, let $A$ be a generalized Cartan matrix, which we will often assume is indecomposable. We always assume $A$ has dimension $n\times n$, unless otherwise specified.
+
+\begin{definition}\label{dfn:4-1}
+	Let $A$ be a generalized Cartan matrix.
+	\begin{enumerate}
+		\item We say $A$ is \emph{finite type} if the following all hold:
+			\begin{itemize}
+				\item $\det A \neq 0$;
+				\item There exists $u > 0$ such that $Au > 0$;
+				\item If $Au \geq 0$, then $u\geq 0$.
+			\end{itemize}
+		\item We say $A$ is \emph{affine type} if the following all hold:
+			\begin{itemize}
+				\item $\operatorname{rank} A = n-1$;
+				\item There is $u>0$ such that $Au=0$;
+				\item If $Au \geq 0$, then $Au=0$.
+			\end{itemize}
+		\item We say $A$ is \emph{indefinite type} if the following all hold:
+			\begin{itemize}
+				\item There exists $u>0$ such that $Au<0$;
+				\item If $Au\geq 0$ and $u\geq 0$, then $u=0$.
+			\end{itemize}
+	\end{enumerate}
+	We use the same terminology for the corresponding Kac-Moody algebra; for example, we refer to a Kac-Moody algebra on an affine type indecomposable generalized Cartan matrix as an \emph{affine type Kac-Moody algebra}.
+\end{definition}
+
+\begin{proposition}\label{prp:4-2}
+	If $A$ is an indecomposable generalized Cartan matrix, then $A$ is either finite, affine, or indefinite type.
+\end{proposition}
+
+At first glance, \cref{dfn:4-1} does not look like an exhaustive classification, but fascinatingly in the setting of indecomposable generalized Cartan matrices it is. \Cref{prp:4-2} has a useful corollary.
+
+\begin{corollary}\label{cor:4-3}
+	An indecomposable generalized Cartan matrix $A$ is finite (resp. affine, indefinite) type if and only if there is $u>0$ such that $Au>0$ (resp. $Au=0$, $Au<0$).
+\end{corollary}
+
+Using \cref{cor:4-3}, we can say more about when an indecomposable generalized Cartan matrix is a Cartan matrix, i.e. its Kac-Moody algebra is a simple Lie algebra. Recall by \cref{ex:3-12}, which followed the logic of \cref{rmk:3-3}, that a Cartan matrix $A$ is invertible. Thus it cannot be affine type. Note that this implies $\dim \mathfrak{h} =n$, and thus the coroots $\Pi ^\vee =\left\{ \alpha _i^\vee  \right\}_{1\leq i\leq n} $ span $\mathfrak{h} $. Since $\alpha _j(\alpha _i^\vee )=a_{ij} $ by \cref{dfn:3-2}, we see that by \cref{dfn:2-13} that the $\alpha _i^\vee $'s play the role of the $h_i$'s we saw in the case for semi-simple Lie algebras.
+
+There are many more conditions one can attach to when $\mathfrak{g} $ is simple. For example,
+\begin{proposition}[\cite{kac} Prop.~4.9]\label{prp:4-4}
+	Let $A$ be an indecomposable generalized Cartan matrix. Then the following are equivalent.
+	\begin{enumerate}
+		\item $A$ is finite type.
+		\item $A$ is symmetrizable and the bilinear form $(-,-)_{\mathfrak{h} _{\mathbb{R} } } $ is positive-definite.
+		\item $\left| \operatorname{Weyl}(\mathfrak{g} ) \right| < \infty $.
+		\item $\left| \Delta  \right| <\infty $.
+		\item $\mathfrak{g} $ is a simple finite-dimensional Lie algebra.
+		\item There exists $\alpha \in \Delta^+$ such that $\alpha +\alpha _i \notin \Delta $ for all $1\leq i\leq n$.
+	\end{enumerate}
+\end{proposition}
+We have not yet introduced symmetrizability, the invariant bilinear form, or the Weyl group in the context of Kac-Moody algebras, so the relevance of (2) and (3) is not yet clear. The point we are trying to make is that although much of the structure of semi-simple Lie algebras carries over to general Kac-Moody algebras, not all of it follows. For example, it is clear at this point that semi-simple Lie algebras are precisely those Kac-Moody algebras on decomposable generalized Cartan matrices $A=\operatorname{diag} (B_1, \ldots ,B_r)$, where each $B_i$ has finite type. This follows by \cref{prp:3-14} since semi-simple Lie algebras are precisely the products of simple Lie algebras. Now consider the following corollary.
+
+\begin{corollary}\label{cor:4-5}
+	Let $A$ be an indecomposable generalized Cartan matrix. Then $A$ is finite type if and only if $\mathfrak{g} $ is finite-dimensional.
+\end{corollary}
+\begin{proof}
+	($\implies $) If $A$ is finite type, then by \cref{prp:4-4}, $\mathfrak{g} $ is simple and finite.
+
+	($\impliedby $) Let $\mathfrak{g} $ be finite. By \cref{cor:3-11}, $\mathfrak{g} $ admits the root decomposition
+	\[
+		\mathfrak{g} \cong \mathfrak{h} \oplus \bigoplus_{\alpha \in \Delta } \mathfrak{g}_{\alpha } 
+	.\]
+	Thus
+	\[
+		\dim \mathfrak{g} = \dim \mathfrak{h} + \sum_{\alpha \in \Delta } \mathfrak{g} _{\alpha } 
+	.\]
+	Since $\mathfrak{h} $ has finite dimension, and since $\mathfrak{g} $ has finite dimension, we must have that $\sum_{\alpha } \mathfrak{g} _\alpha $ has finite dimension. Since $\dim \mathfrak{g} _{\alpha } \geq 1$ for all $\alpha \in \Delta $ by \cref{thm:3-10} and \cref{dfn:3-8}, it follows that $\Delta $ must be finite. This is condition (4) in \cref{prp:4-4}, meaning that $A$ is finite type.
+\end{proof}
+
+This corollary also immedately shows that semi-simple Lie algebras are the only finite Kac-Moody algebras. Many of the results for finite type Kac-Moody algebras also hold for affine types,  but we will need more machinery to work through them.
+
+\begin{definition}\label{dfn:4-6}
+	An $n\times n$ matrix $A$ is called \emph{symmetrizable} if there is an invertible diagonal matrix $D = \operatorname{diag} (d _1, \ldots ,d_n)$ and a symmetric matrix $S$ such that $A = DS$. The matrix $S$ is called the \emph{symmetrization of $A$}, and the Lie algebra $\mathfrak{g} (A)$ is called a \emph{symmetrizable Lie algebra} $A$. Sometimes we will refer to the expression $A = DS$ as a symmetrization of $A$.
+\end{definition}
+
+\begin{proposition}\label{prp:4-7}
+	Let $A$ be an indecomposable generalized Cartan matrix of affine or finite type. Then $A$ is symmetrizable.
+\end{proposition}
+
+There is a full classification of indecomposable generalized Cartan matrices of affine type. Similarly to the case for simple Lie algebras, this proceeds via Dynkin diagrams. We list all Dynkin diagrams of indecomposable generalized Cartan matrices of affine type, but do not prove this characterization. See CITE for a proof. [DO THIS]
+
+
+
+One important tool in the study of root systems for simple Lie algebras is the Killing form $\left\langle x,y \right\rangle  = \mathrm{tr} (\mathrm{ad}_x \circ \mathrm{ad}_y)$, which is a symmetric bilinear non-degenerate map that is invariant in the sense that $\left\langle [x,y],z \right\rangle =\left\langle x,[y,z] \right\rangle $. This does not necessarily exist for more general Kac-Moody algebras, but it \emph{does} hold for symmetrizable Kac-Moody algebras. Let $A = DS$ be a symmetrization of a \emph{not necessarily indecomposable} generalized Cartan matrix $A$, with $D = \operatorname{diag} (d_1, \ldots ,d_n)$ and $S = (s_{ij} )$. Note that $\Pi ^\vee $ spans an $n$-dimensional subspace $\left\langle \Pi ^\vee  \right\rangle \subseteq \mathfrak{h} $. Let $\mathfrak{h} '$ be a complementary subspace to $\left\langle \Pi ^\vee  \right\rangle $. Define the bilinear form $\left\langle -,- \right\rangle : \mathfrak{h} \otimes_\mathbb{C}  \mathfrak{h}  \to \mathbb{C} $ by
+\begin{align*}
+	&\left\langle \alpha _i^\vee ,\alpha _j^\vee  \right\rangle =d_id_js_{ij};\\
+	&\left\langle \alpha_i^\vee ,x \right\rangle =\left\langle x,h_i \right\rangle =d_i\alpha_i(x), & x\in \mathfrak{h} ';\\
+	&\left\langle x,y \right\rangle =0, & x,y\in \mathfrak{h} '
+.\end{align*}
+Linearity of $\alpha _i$ proves that this is a bilinear form, and it is evidently symmetric.
+
+\begin{proposition}\label{prp:4-8}
+	This form on $\mathfrak{h} $ is non-degenerate.
+\end{proposition}
+
+\begin{theorem}\label{thm:4-9}
+	There is a way to extend the form $\left\langle -,- \right\rangle $ on $\mathfrak{h} $ to a symmetric bilinear non-degenerate invariant form on the entire Kac-Moody algebra $\mathfrak{g} $.
+\end{theorem}
+\begin{proof}
+	The proof proceeds by viewing $\mathfrak{g} $ as a $\mathbb{Z} $-graded Lie algebra, and inducting. See Carter 16.2. Let $\alpha \in Q$, and by \cref{dfn:3-2} we can write $\alpha =\sum_{i} k_i \alpha _i$ for $\alpha _i$ the simple roots and $k_i$ all integers. Define the height $\operatorname{ht} \alpha \coloneqq \sum_{i} k_i$. Write $\mathfrak{g} _i$ for the direct sum of all root spaces $\mathfrak{g} _{\alpha } $ with $\operatorname{ht} \alpha =i$. The form is defined by
+	\begin{align*}
+		&\left\langle \mathfrak{g} _i,\mathfrak{g} _j \right\rangle =0,& i+j\neq 0;\\
+		&\left\langle e_i,f_i \right\rangle =\left\langle f_i,e_i \right\rangle =d_i;\\
+		&\left\langle e_i,f_j \right\rangle =\left\langle f_j,e_i \right\rangle =0,& i\neq j
+	.\end{align*}
+\end{proof}
+
+
+We call this form the \emph{standard invariant form} on $\mathfrak{g} $. The standard invariant form is unique up to a scalar multiple when $A$ is indecomposable, and agrees with the Killing form up to this scalar multiple when applied to Kac-Moody algebras of finite type. This form yields an isomorphism $\mathfrak{h} \cong \mathfrak{h} ^*$ by mapping $x\mapsto \left\langle x,- \right\rangle $. In particular, it induces a symmetric bilinear non-degenerate form on $\mathfrak{h} ^*$, which we denote by $(-,-)$. Given $\alpha \in \mathfrak{h} ^*$, there is $t_\alpha \in \mathfrak{h} $ with $\left\langle t_\alpha ,- \right\rangle =\alpha $. Then we define $(\alpha ,\beta )\coloneqq \left\langle t_\alpha ,t_\beta  \right\rangle $. Thus all affine and finite type Kac-Moody algebras have standard invariant forms, but more generally all symmetrizable Kac-Moody algebras have standard invariant forms.
+
+
+
+\section{Real and imaginary roots}
+
+\begin{definition}\label{dfn:5-1}
+	The \emph{Weyl group} of a Kac-Moody algebra $\mathfrak{g} $, denoted either $W$ or $\operatorname{Weyl} (\mathfrak{g} )$, is the group of invertible linear transformations $\mathfrak{h} \to \mathfrak{h} $ generated by $s_i(h) = h - \alpha _i(h)\alpha ^\vee _i$, $i\in \left\{ 1, \ldots ,n \right\} $.
+\end{definition}
+
+As always, there is an important action of $W$ on $\mathfrak{h} ^*$, defined by $s_i\cdot \lambda = s_i(\lambda ) = \lambda -\lambda (\alpha _i^\vee )\alpha_i$.
+
+We will not focus on the Weyl group of a Kac-Moody algebra in this talk (there is only so much theory one can cover in 40 minutes). However, note the analogs with the case for semi-simple Lie algebras, note that in the finite-dimensional case this is the classical Weyl group of a root system Lie algebra, and note that $s_i^2=1$.
+
+
+We now explore an aspect of the root decomposition of general Kac-Moody algebras which has no analog in the finite-dimensional case. The Weyl group generates the roots in the following sense: if $\alpha \in \Delta $ is a root, then there is $w\in W$ and $i$ such that $\alpha =w(\alpha _i)$. We usually write this as $W\cdot \Pi =\Delta $. Thus the action of $W$ has at most $n$ orbits: one per simple root. This is not the case when looking at more general Kac-Moody algebras.
+
+\begin{proposition}[\cite{kac} Prop.~5.1]\label{prp:5-2}
+	Let $\mathfrak{g} $ be a Kac-Moody algebra, and $\alpha $ a root with the property that $\alpha \in W\cdot \Pi $. Then the following are true.
+	\begin{enumerate}[align=left, label=(\arabic*)]
+		\item $\operatorname{mult} \alpha =1$.
+		\item $ka$ is a root if and only if $k=\pm 1$.
+		\item If $\mathfrak{g} $ is symmetrizable, then $(\alpha ,\alpha )>0$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{remark}\label{rmk:5-3}
+	\Cref{prp:5-2} condition (3) is an if and only if: If $\mathfrak{g} $ is a symmetrizable Kac-Moody algebra, then $(\alpha ,\alpha )>0$ if and only if $\alpha \in W\cdot \Pi $.
+\end{remark}
+
+\Cref{rmk:5-3} is important when working with root systems of affine Kac-Moody algebras, and is one of the reasons they are particularly well-understood. However, the Weyl group provides the requisite machinery to make the following definition for all Kac-Moody algebras.
+
+
+\begin{definition}\label{dfn:5-4}
+	Let $\mathfrak{g} $ be a Kac-Moody algebra, and $\alpha \in \Delta $ a root. We say $\alpha $ is a \emph{real root} if $\alpha \in W\cdot \Pi $, and $\alpha $ is an \emph{imaginary root} otherwise. The set of real root is denoted $\Delta ^{re} $, and the set of imaginary roots is denoted $\Delta ^{i m} $. By definition,
+	\[
+		\Delta =\Delta ^{re} \cup \Delta ^{i m} 
+	.\]
+\end{definition}
+
+The reason we are able to understand simple and semi-simple Lie algebras so well is due to their root decomposition. However, \emph{imaginary roots} do not have most of the nice properties that real roots do, and present themselves as one of the main obstructions to understanding Kac-Moody algebras in full generality. And now we will see one of the main payoffs of classifying indecomposable Kac-Moody algebras into finite, affine, and indefinite types: affine Kac-Moody algebras admit a simple description of their imaginary roots.
+
+\begin{theorem}[\cite{kac} Thm.~5.6]\label{thm:5-5}
+	Let $A$ be an $n\times n$ indecomposable generalized Cartan matrix, and $\mathfrak{g} $ its Kac-Moody algebra.
+	\begin{enumerate}[align=left, label=(\arabic*)]
+		\item If $A$ is of finite type, then the set of imaginary roots $\Delta ^{im} $ is empty.
+		\item If $A$ is of affine type, then
+			\[
+				\Delta ^{im} =\left\{ m\delta \mid m\in\mathbb{Z} \setminus \left\{ 0 \right\}  \right\} ,
+			\]
+			where we define
+			\[
+				\delta  = \sum_{i=1}^{n} k_i \alpha _i,
+			\]
+	and the $k_i$'s are the components of the unique vector $k=(k_i)_{1\leq i\leq n}$ with positive coprime integer coefficients such that $Ak=0$.
+		\item If $A$ is of indefinite type, then there exists a positive imaginary root $\alpha =\sum_{i} k_i\alpha _i$ with $k_i>0$ and $\alpha (\alpha _i^\vee )<0$ for $i\in \left\{ 1, \ldots ,n \right\} $.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(1) If $A$ is of finite type, then by \cref{prp:4-4} $\mathfrak{g} $ is a simple Lie algebra. As noted previously, $W\cdot \Pi =\Delta $ for simple Lie algebras. Thus $\Delta ^{re} =\Delta $, and $\Delta ^{\im }$ is necessarily empty.
+
+	(2) First we prove the existence of $k$. By \cref{dfn:4-1}, $\operatorname{rank} A = n-1$, and thus $\Ker A$ is a 1-dimensional linear subspace of $\mathbb{R} ^n$. Thus there exists a nonzero vector $k$ with the property that for all $1\leq i\leq n$,
+	\[
+		\sum_{j} a_{ij} k_j=0
+	.\]
+	It suffices to prove this system of equations has a solution of the desired form. Since the matrix is an integer matrix, it is in particular a matrix over $\mathbb{Q} $. Since $\mathbb{Q} $ is a field and the determinant is invariant under the inclusion $\mathbb{Q} \hookrightarrow \mathbb{C} $, we find that $A$ must be singular over $\mathbb{Q} $. Thus it has nonzero Kernel by the splitting lemma, and note that $\Ker_\mathbb{Q} A = \Ker_\mathbb{C} A \cap \mathbb{Q}^n$. Thus we can take $k$ to be rational. We can thus take $k\in\mathbb{Z} ^n$ by multiplying through by the product of the denominators, and then we can divide out by the gcd to obtain a coprime set. We can take $k$ to be positive throughout all of this without loss of generality.
+
+	We can use the standard invariant form and \cref{rmk:5-3} to prove that $\delta \in \Delta ^{im } $. Recall by \cref{dfn:3-2} that $\alpha _j(\alpha _i^\vee )=a_{ij}$, and recall by the construction of $(-,-)$ that $(\alpha ,\beta )\coloneqq \left\langle t_\alpha ,t_\beta  \right\rangle =\alpha (t_\beta )$, where $t_\alpha $ has the property that $\left\langle t_\alpha ,- \right\rangle =\alpha $. Using the properties of $\left\langle -,- \right\rangle $ that were defined in the discussion preceeding \cref{prp:4-8}, we can prove that $t_\alpha =\frac{1}{d_j}\alpha _i^\vee $, and thus $(\alpha _j,\alpha _i)=a_{ij}/d_j$ for some nonzero scalar $d_j$. By definition,
+	\[
+		\left\langle \alpha _j^\vee ,\alpha _i^\vee  \right\rangle =d_jd_is_{ji} ,
+	\]
+	where $A = DS$ is the symmetrization of $A$, $D = \operatorname{diag} (d_1, \ldots ,d_n)$, and $S = (s_{ij} )$. By \cref{dfn:4-6}, the matrix $D$ is invertible, meaning $d_i\neq 0$ for all $i$. By properties of diagonal matrices, $DS = (d_is_{ij} )$. Since $S$ is symmetric, $s_{ij} =s_{ji} $, and thus 
+	\[
+		d_is_{ji} =d_is_{ij} =a_{ij} =\alpha _j(\alpha _i^\vee )
+	.\]
+	We thus have that
+	\[
+		\alpha _j(\alpha _i^\vee ) = a_{ij} =d_is_{ij} = \frac{1}{d_j} d_jd_is_{ij} =\frac{1}{d_j} \left\langle \alpha _j^\vee ,\alpha _i^\vee  \right\rangle =\left\langle \frac{1}{d_j} \alpha _j^\vee ,\alpha _i^\vee  \right\rangle 
+	.\]
+	Therefore $t_\alpha =\frac{1}{d_j} \alpha _j^\vee $, and in particular $(\alpha_j,\alpha _i) = \alpha _{ij} /d_j$. One final thing that will be important to prove is that since $DS = (d_is_{ij} )$, we have
+	\[
+		d_i^{-1} a_{ij} =s_{ij} =s_{ji} = d_j^{-1} a_{ij} 
+	.\]
+
+	Recall that
+	\[
+		\sum_{j=1}^{n} a_{ij} k_j=0
+	.\]
+	Note that $(\delta ,\delta ) = \sum_{i}k_i(\delta ,\alpha _i)$ by bilinearity of the standard invariant form. We now compute
+	\[
+		(\delta ,\alpha +i) = \sum_{j=1}^{n}k_j(\alpha _j,\alpha _i) = \sum_{j=1}^{n} k_j \alpha _j(\alpha _i^\vee )=\sum_{j=1}^{n} k_j d_j^{-1}a_{ij} = \sum_{j=1}^{n} k_jd_i^{-1} a_{ij} = d_i ^{-1} \sum_{j=1}^{n} a_{ij} k_j = 0
+	.\]
+	Thus
+	\[
+		(\delta ,\delta )= \sum_{i=1}^{n} k_i(\delta ,\alpha _i) = 0
+	.\]
+	By definition, this implies $\delta \in\Delta ^{im} $.
+
+	Now we show that $\Delta ^{im } $ is all nonzero integer multiples of $\delta $. This requires an important lemma: since $A$ is indecomposable and of affine type, the standard invariant form is positive semi-definite on $Q$ (I believe this holds for all of $\mathfrak{h} ^*$, but we do not need that). Since $Q$ is the $\mathbb{Z} $-span of $\Pi $, let
+	\[
+		\lambda  = \sum_{i=1}^{n} c_i\alpha _i
+	\]
+	be an element of $Q$ with $c_i\in\mathbb{Z} $ for all $i$. Then by our previous investigation,
+	\[
+		(\lambda ,\lambda ) = \sum_{i=1}^{n} \sum_{j=1}^{n} c_ic_j(\alpha _i,\alpha _j)=\sum_{i=1}^{n} \sum_{j=1}^{n} c_ic_js_{ij} 
+	.\]
+	Now note that since $D$ is invertible, $Ak = DSk = =0$ implies $Sk=0$. Thus we can write
+	\[
+		\sum_{j=1}^{n} s_{ij} k_j = 0 \implies s_{ii} k_i = -\sum_{j\neq i} s_{ij} k_j
+	.\]
+	Now rewrite
+	\[
+		(\lambda ,\lambda ) = \sum_{i=1}^{n} c_i^2s_{ii} + \sum_{i=1}^{n} \sum_{j\neq i} c_ic_js_{ij} = \sum_{i=1}^{n} \left( -\sum_{j\neq i} s_{ij} \frac{k_j}{k_i}  \right) c_i^2 + \sum_{i=1}^{n} \sum_{j\neq i} c_ic_js_{ij} 
+	\]
+	\[
+		=-\sum_{i=1}^{n} \sum_{j\neq i} s_{ij} \frac{k_j}{k_i} c_i^2 + \sum_{i=1}^{n} \sum_{j\neq i} s_{ij} c_ic_j
+	.\]
+	By symmetry of $S$, we rewrite this as
+	\[
+		= - \sum_{i=1}^{n} \left(\sum_{j<i} s_{ij} \left( \frac{k_j}{k_i} c_i^2 + \frac{k_i}{k_j} c_j^2 \right) +\sum_{j<i} 2s_{ij} c_ic_j \right)=-\sum_{i=1}^{n} \sum_{j<i} s_{ij} \left( \frac{k_j}{k_i} c_i^2 + \frac{k_i}{k_j} c_j^2 + 2c_ic_j \right) 
+	.\]
+	We want to factor this. We can factor out $k_ik_j$ to obtain
+	\[
+		=- \sum_{i=1}^{n} \sum_{j<i} s_{ij} k_ik_j\left( \frac{c_i^2}{k_i^2} +\frac{2c_ic_j}{k_ik_j} + \frac{c_j^2}{k_j^2}  \right) =-\sum_{i=1}^{n} \sum_{j<i} s_{ij} k_ik_j\left( \frac{c_i}{k_i} -\frac{c_j}{k_j}  \right) ^2
+	.\]
+	We claim that we can choose $d_i>0$ for all $i$. Suppose that there is $i$ with $d_i < 0$. Then since $a_{ij} =d_is_{ij} $ and $a_{ji} =d_js_{ij} $ are both negative integers, we have that $s_{ij} $ is positive, and thus $d_j$ is negative. By simply moving the negative sign to $s_{ij} $, we can take $d_i,d_j>0$ while preserving symmetry of $S$. Thus we take $d_i>0$, and thus $s_{ij} \leq 0$ whenever $i\neq j$. In particular, when $i<j$. Now investigate the above sum. Since $c_i,k_i$ are not complex, the square is non-negative. Since the square is non-negative, sine $k_i \geq  0$ for all $i$, and since $s_{ij} <0$, we have that every term in the sum is non-positive. Thus multiplying by the $-1$ outside yields that $(\lambda ,\lambda )\geq 0$.
+
+	Now let $\alpha \in Q^+$, meaning we can write
+	\[
+		\alpha =\sum_{i=1}^{n} c_i\alpha _i,\qquad c_i\in\mathbb{Z} ^+\forall i
+	.\]
+	a
+\end{proof}
+
+
+\newpage
+\section{Notes for the talk}
+
+Semi-simple $\to $ Cartan matrix $A = (a_{ij} )$, $a_{ij} =\alpha _j(\alpha _i^\vee =h_i)$ iff Dynkin diagram $S(A)$.
+
+\begin{theorem}[Serre, proved in the 60s]\label{thm:6-1}
+	Let $A=(a_{ij} )$ be an $r\times r$ Cartan matrix of some Lie algebra $\mathfrak{g} $. Then there is a Lie algebra $\mathfrak{g}'(A) $ whose Cartan matrix is $A$, with $\mathfrak{g} \cong \mathfrak{g} '(A)$. The Lie algebra $\mathfrak{g} '(A)$ is defined as the free Lie algebra on generators $\left\{ h_i,e_i,f_i\mid 1\leq i\leq r \right\} $ modulo the following relations:
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item $[h_i,h_j]=0$.
+		\item $[e_i,f_j]=\delta _{ij} h_i$.
+		\item $[h_i,e_j]=a_{ij} e_j$.
+		\item $[h_i,f_j]=-a_{ij} f_j$.
+		\item If $i\neq j$, then $\mathrm{ad}_{e_i} ^{1-a_{ij} } (e_j)$.
+		\item If $i\neq j$, then $\mathrm{ad}_{f_i} ^{1-a_{ij} } (f_j)$.
+	\end{enumerate}
+The Cartan subalgebra $\mathfrak{h} \subseteq \mathfrak{g}'(A) $ is $\mathfrak{h} =\operatorname{span} \left\{ h_i\mid 1\leq i\leq r \right\} $. 
+\end{theorem}
+
+Want to do this to any matrix $A$. If $A$ is singular. Matrix representation of $\alpha _j$ in $\left\{ h_i \right\} $-basis is
+\[
+	\alpha _j = (a_{1j} , \ldots , a_{nj} )
+.\]
+Then $A$ is singular iff rows arent linearly independent. Thus simple roots are lin ind. We could reduce the number of simple roots to match $\operatorname{rank} A$, but then its hard to say what the Cartan matrix actually means. So instead we increase the size of $\mathfrak{h} $.
+
+
+
+\begin{definition}\label{dfn:6-2}
+	Let $A=(a_{ij} )$ be an $n\times n$ matrix. A \emph{realization} of $A$ is a triple $(\mathfrak{h} ,\Pi ,\Pi ^\vee )$ where $\mathfrak{h} $ is a $\mathbb{C} $-vector space of dimension $2n-\operatorname{rank } A$, and
+	\[
+		\Pi =\left\{ \alpha _i \right\}_{1\leq i\leq n} \subseteq \mathfrak{h} ^*,\qquad \Pi ^\vee =\left\{ \alpha ^\vee _i \right\}_{1\leq i\leq n} \subseteq \mathfrak{h} 
+	\]
+	are linearly independent sets satisfying
+	\[
+		\alpha _j(\alpha ^\vee _i)=a_{ij} .
+	\]
+\end{definition}
+
+The dimension of $\mathfrak{h}$ is defined to be the smallest such that $\Pi $ can be lin. ind. Realizations exist and are unique up to isomorphism. And now we can apply Serre's construction to any matrix using the realization. But that still won't have a root decomp with nice properties. We need to look at
+
+\begin{definition}\label{dfn:6-3}
+	A \emph{generalized Cartan matrix} is a square matrix $A=(a_{ij} )$ with \emph{integer entries} satisfying the following properties.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item For diagonal entries, $a_{ii} =2$.
+		\item For off-diagonal entries, $a_{ij} \leq 0$.
+		\item $a_{ij} =0$ if and only if $a_{ji} =0$.
+	\end{enumerate}
+\end{definition}
+
+Note that Cartan matrices are gcms. And s.s Lie algs are K-M algs.
+
+Define
+\[
+	Q\coloneqq \bigoplus_{i=1}^n \mathbb{Z} \alpha _i,\qquad Q^+ \coloneqq \bigoplus_{i=1}^{n} \mathbb{Z} ^+\alpha _i,\qquad Q^- \coloneqq \bigoplus_{i=1}^{n} \mathbb{Z} ^-\alpha _i.
+\]
+$Q$ is ``root lattice''. Define for all $\alpha \in \mathfrak{h} ^*$
+\[
+	\mathfrak{g} _{\alpha } =\left\{ x\in \mathfrak{g} \mid [h,x]=\alpha (h)x \right\} 
+.\]
+
+
+\begin{theorem}\label{thm:6-4}
+	The Kac-Moody algebra $\mathfrak{g} $ has a root space decomposition
+	\[
+		\mathfrak{g} \cong \bigoplus_{\alpha \in Q} \mathfrak{g} _{\alpha } 
+	.\]
+	This decomposition satisfises the following.
+	\begin{enumerate}[align=right, label=(\arabic*)]
+		\item The dimension $\dim \mathfrak{g} _{\alpha } $ is finite for all $\alpha \in Q$.
+		\item Note that $0\in Q$. We have that $\mathfrak{g} _0=\mathfrak{h} $.
+		\item If $\mathfrak{g} _\alpha \neq 0$ and $\alpha \neq 0$, then either $\alpha \in Q^+$ or $\alpha \in Q^-$.
+		\item $[\mathfrak{g} _\alpha ,\mathfrak{g} _\beta ]\subseteq \mathfrak{g} _{\alpha +\beta } $ for all $\alpha ,\beta \in Q$.
+	\end{enumerate}
+\end{theorem}
+
+Very curious about what we can say about the dimensions of $\mathfrak{g} _\alpha $. Also root lattice contains redundant information.
+
+\begin{definition}\label{dfn:6-5}
+	A \emph{root} $\alpha $ of $\mathfrak{g} $ is an element $\alpha \in Q$ such that $\alpha \neq 0$ and $\mathfrak{g} _{\alpha } \neq 0$. We write $\Delta $ for the set of all roots.
+\end{definition}
+
+\begin{corollary}\label{cor:6-6}
+	\[
+		\mathfrak{g} \cong \mathfrak{h} \oplus \bigoplus_{\alpha \in \Delta } \mathfrak{g} _{\alpha } 
+	.\]
+\end{corollary}
+
+To meaningfully say more about the root decomposition, we need to start classifying gcms.
+
+
+\begin{definition}\label{dfn:6-7}
+	A generalized Cartan matrix $A$ is \emph{decomposable} if there is a way of permuting its rows and columns such that it forms a block diagonal matrix. Otherwise, $A$ is \emph{indecomposable}.
+\end{definition}
+\begin{proposition}\label{prp:6-8}
+	Let $A$ be a decomposable generalized Cartan matrix, written in block matrix form as $A = \operatorname{diag} (B_1, \ldots , B_r)$, where $B_i$ is an $m_i \times m_i$ matrix. Then each $B_i$ is a generalized Cartan matrix, and the Kac-Moody algebra $\mathfrak{g} (A)$ decomposes as the product
+	\[
+		\mathfrak{g}(A) \cong \prod_{1\leq i\leq r} \mathfrak{g} (B_i)
+	.\]
+\end{proposition}
+
+This is like semi-simple as a product of simple, but for K-M algs. So it is enough to consider igcms.
+
+\begin{definition}\label{dfn:6-9}
+	Let $A$ be a generalized Cartan matrix.
+	\begin{enumerate}
+		\item We say $A$ is \emph{finite type} if the following all hold:
+			\begin{itemize}
+				\item $\det A \neq 0$;
+				\item There exists $u > 0$ such that $Au > 0$;
+				\item If $Au \geq 0$, then $u\geq 0$.
+			\end{itemize}
+		\item We say $A$ is \emph{affine type} if the following all hold:
+			\begin{itemize}
+				\item $\operatorname{rank} A = n-1$;
+				\item There is $u>0$ such that $Au=0$;
+				\item If $Au \geq 0$, then $Au=0$.
+			\end{itemize}
+		\item We say $A$ is \emph{indefinite type} if the following all hold:
+			\begin{itemize}
+				\item There exists $u>0$ such that $Au<0$;
+				\item If $Au\geq 0$ and $u\geq 0$, then $u=0$.
+			\end{itemize}
+	\end{enumerate}
+\end{definition}
+
+this doesnt look like a classification of gcms, but it is a classification of igcms.
+
+\begin{proposition}\label{prp:6-10}
+	If $A$ is an indecomposable generalized Cartan matrix, then $A$ is either finite, affine, or indefinite type.
+\end{proposition}
+
+kinda a weird classification, but this corollary makes it a little nicer. THIS IS OPTIONAL.
+
+\begin{corollary}\label{cor:6-11}
+	An indecomposable generalized Cartan matrix $A$ is finite (resp. affine, indefinite) type if and only if there is $u>0$ such that $Au>0$ (resp. $Au=0$, $Au<0$).
+\end{corollary}
+
+Now we can say something interesting about when a K-M alg is finite.
+\begin{proposition}[\cite{kac} Prop.~4.9]\label{prp:6-12}
+	Let $A$ be an indecomposable generalized Cartan matrix. Then the following are equivalent. (there are more conditions we do not mention)
+	\begin{enumerate}
+		\item $A$ is finite type.
+		\item $\mathfrak{g} $ is a simple finite-dimensional Lie algebra.
+		\item $\left| \Delta  \right| <\infty $.
+	\end{enumerate}
+\end{proposition}
+
+Thus if $A$ is a dgcm whose block components are finite type, then $\mathfrak{g} $ is semi-simple. Also semi-simple are the only finite K-M algs, since if $A$ has any non-finite-type block matrices, then by (3) it has infinitely many roots.
+
+Ok cool we can say a lot about finite type. We can also say a lot about affine type. We can say much less about indefinite type. We now discuss affine type. We need analogs of Weyl group and Killing form.
+
+\begin{definition}\label{dfn:6-13}
+	An $n\times n$ matrix $A$ is called \emph{symmetrizable} if there is an invertible diagonal matrix $D = \operatorname{diag} (d _1, \ldots ,d_n)$ and a symmetric matrix $S$ such that $A = DS$.
+\end{definition}
+
+\begin{proposition}\label{prp:6-14}
+	Let $A$ be an indecomposable generalized Cartan matrix of affine or finite type. Then $A$ is symmetrizable.
+\end{proposition}
+
+\begin{proposition}\label{prp:6-15}
+	If $A = DS$ is symmetrizable, then $\mathfrak{g} $ has a symmetric non-degenerate bilinear invariant form $\left\langle -,- \right\rangle : \mathfrak{g} \otimes _\mathbb{C} \mathfrak{g}  \to \mathbb{C} $. If $\mathfrak{g} $ is semi-simple, this agrees with the Killing form up to a constant multiple. There is then a symmetric bilinear invariant non-degenerate form $(-,-)$ on $\mathfrak{g} ^*$. In particular, on the root lattice.
+\end{proposition}
+
+
+\begin{definition}\label{dfn:6-16}
+	The \emph{Weyl group} $W$ of a Kac-Moody algebra $\mathfrak{g} $ is the group of invertible linear transformations $\mathfrak{h} \to \mathfrak{h} $ generated by $s_i(h) = h - \alpha _i(h)\alpha ^\vee _i$, $i\in \left\{ 1, \ldots ,n \right\} $.
+\end{definition}
+
+As always, there is an important action of $W$ on $\mathfrak{h} ^*$, defined by $s_i\cdot \lambda = s_i(\lambda ) = \lambda -\lambda (\alpha _i^\vee )\alpha_i$.
+
+If $\mathfrak{g} $ is symmetrizable, then $(\alpha ,\alpha )>0$ iff $\alpha \in W\cdot \Pi $ (must require $\alpha \in \Delta $). Not true for more general K-M alebras.
+
+\begin{definition}\label{dfn:6-17}
+	Let $\mathfrak{g} $ be a Kac-Moody algebra, and $\alpha \in \Delta $ a root. We say $\alpha $ is a \emph{real root} if $\alpha \in W\cdot \Pi $, and $\alpha $ is an \emph{imaginary root} otherwise. The set of real root is denoted $\Delta ^{re} $, and the set of imaginary roots is denoted $\Delta ^{i m} $. By definition,
+	\[
+		\Delta =\Delta ^{re} \cup \Delta ^{i m} 
+	.\]
+\end{definition}
+
+Terminology comes from we think of length as $\sqrt{(\alpha ,\alpha )} $ and if $(\alpha ,\alpha )<0$ then length is imaginary. Real roots are well-behaved.
+
+\begin{proposition}[\cite{kac} Prop.~5.1]\label{prp:6-18}
+	Let $\mathfrak{g} $ be a Kac-Moody algebra, and $\alpha $ a root with the property that $\alpha \in W\cdot \Pi $. Then the following are true.
+	\begin{enumerate}[align=left, label=(\arabic*)]
+		\item $\operatorname{mult} \alpha =1$.
+		\item $ka$ is a root if and only if $k=\pm 1$.
+		\item If $\mathfrak{g} $ is symmetrizable, then $(\alpha ,\alpha )>0$.
+	\end{enumerate}
+\end{proposition}
+
+Imaginary roots are less well-behaved. Their dimensionality can grow wildly. One of the reasons affine K-M algs are so well-understood is because of the following theorem.
+
+\begin{theorem}[\cite{kac} Thm.~5.6]\label{thm:5-5}
+	Let $A$ be an $n\times n$ indecomposable generalized Cartan matrix, and $\mathfrak{g} $ its Kac-Moody algebra.
+	\begin{enumerate}[align=left, label=(\arabic*)]
+		\item If $A$ is of finite type, then the set of imaginary roots $\Delta ^{im} $ is empty.
+		\item If $A$ is of affine type, then
+			\[
+				\Delta ^{im} =\left\{ m\delta \mid m\in\mathbb{Z} \setminus \left\{ 0 \right\}  \right\} ,
+			\]
+			where we define
+			\[
+				\delta  = \sum_{i=1}^{n} k_i \alpha _i,
+			\]
+	and the $k_i$'s are the components of the unique vector $k=(k_i)_{1\leq i\leq n}$ with positive coprime integer coefficients such that $Ak=0$.
+		\item If $A$ is of indefinite type, then there exists a positive imaginary root $\alpha =\sum_{i} k_i\alpha _i$ with $k_i>0$ and $\alpha (\alpha _i^\vee )<0$ for $i\in \left\{ 1, \ldots ,n \right\} $.
+	\end{enumerate}
+\end{theorem}
+
+Some closing remarks about affine Kac-Moody algs. The fundamental root $\delta $ has its behavior described by a f.d. simple lie alg $\gc$. The dimension of $\dim \mathfrak{g} _{k\delta } $ is the dimensnion of $\gc$. Thus we obtain useful tools for their study given our knowledge of f.d. lie algs. One can also construct most affine Kac-Moody algs in a concrete way, not just generators and relations. For example, many of them (the untwisted ones) are given by central extending a loop algeba of Laurant polynomials $\mathcal{L} (\gc)=\gc\otimes _\mathbb{C} \mathbb{C} [t^{-1} ,t]$ by a single element $c$, then by adjoining another derivation $d$ to get $\mathcal{L} (\gc)\otimes \mathbb{C} c\otimes \mathbb{C} d$. Other affine K-M algs have more convoluded physical constructions.
+
+\bibliographystyle{alpha}
+\bibliography{refs-project}
+
+\end{document}

@@ -1,0 +1,119 @@
+\lecture{19}{Thu 16 Apr 2026 12:20}{Hodge theory}
+
+\begin{proposition}\label{prp:5.0.6}
+	\begin{enumerate}
+		\item Let $\left\{ e_i \right\} _{1\leq i\leq n} $ be an orthonormal basis for a finite dimensional inner product space $(V,\left\langle -,- \right\rangle )$. Let $\mathrm{vol} =e_1 \wedge \cdots \wedge e_n$. If $I = \{i_1 < \cdots < i_k\}$ and $J = \{ j_1 < \cdots < j_{n-k} \}$ are indicies such that $I\amalg J=\{i_1, \ldots ,j_{n-k0} \}$, then
+	\[
+		\star e_I = \star \left( e_{i_1} \wedge \cdots \wedge e_{i_k}  \right) =\sigma _{I,J}\cdot  e_J,
+	\]
+	where $\sigma_{I,J} $ is the (sign of the) permutation $\left\{ 1, \ldots ,n \right\} \to \left\{ i_1, \ldots , j_{n-k}  \right\} $.
+	\item Let $\alpha \in \Lambda ^kV$ and $\beta \in \Lambda ^{n-k} V$. Then
+	\[
+		\left\langle \alpha ,\star \beta  \right\rangle =(-1)^{k(n-k)} \left\langle \star \alpha ,\beta  \right\rangle 
+	.\]
+	\item If $\alpha \in \Lambda ^{k} V$, then $\star \star \alpha =(-1)^{k(n-k)} \alpha $.
+	\item The map $\star $ is an isometry of $(\Lambda ^{\bullet} V,\left\langle -,- \right\rangle )$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	These are direct computations.
+\end{proof}
+
+
+Suppose we have an almost complex inner product space $(V,J,\left\langle -,- \right\rangle )$. We are interested in forms $\Lambda ^{\bullet} V^*$. We get a Hodge star $\star : \Lambda ^{\bullet} V^* \to \Lambda ^{\bullet} V^*$. The inner product extends to a Hermitian form $\left\langle -,- \right\rangle_{h} $ on $V_\mathbb{C} ^*$. We noted that $(V^*)^{1,0} $ and $(V^*)^{0,1} $ are orthogonal with respect to $\left\langle -,- \right\rangle _h$. Star then defines
+\[
+	\star : \Lambda ^kV^*_{\mathbb{C} }  \to V^{n-k} V^*_\mathbb{C} 
+\]
+by
+\[
+	\alpha \wedge \star \beta =\left\langle \alpha ,\overline{\beta }  \right\rangle_h\mathrm{vol} 
+.\]
+Note that $\left\langle \alpha ,\overline{\beta }  \right\rangle $ is nonzero if and only if $\alpha $ and $\overline{\beta } $ are of the same $(p,q)$-type, meaning if $\alpha $ is type $(p,q)$, then $\beta $ must be type $(q,p)$. Thus
+\[
+	\star : \Lambda ^{p,q} V_\mathbb{C} ^* \to \Lambda ^{n-q,n-p} V^*_\mathbb{C} 
+.\]
+For example, consider
+\[
+	V_\mathbb{C} ^*= \operatorname{span} \left\{ z_1,z_2,z_3, \overline{z} _1,\overline{z} _2,\overline{z} _3 \right\} 
+.\]
+We will compute $\star (z_1\wedge z_2\wedge \overline{z}_3)$. This is of type $(2,1)$, so the Hodge star of it lives in $\Lambda ^{3-1,3-2} V^*_\mathbb{C} =\Lambda ^{2,1} V^*_\mathbb{C} $. The volume form is $z_1 \wedge z_2 \wedge z_3 \wedge \overline{z} _1 \wedge \overline{z} _2 \wedge \overline{z} _3$. The na\"ive approach to the Hodge star would be the compliment $\pm z_3 \wedge \overline{z} _1 \wedge \overline{z} _2$. However, this has the wrong type, and it turns out the actual thing is its complex conjugate $\pm z_1 \wedge z_2 \wedge \overline{z} _3$.
+
+Now consider the Lefschetz operator on $V$. Although $V$ is still almost complex, we now go back to working fully with its real vector space structure, and consider complexification later. Let $\omega \in \Lambda ^2V^*$ be the fundamental form. Then $L=\omega \wedge -$ is a map $\Lambda ^kV^*\to \Lambda ^{k+2} V^*$ (these are the real exterior powers of the dual). The adjoint of $L$ with respect to the \emph{real} inner product, denoted $\Lambda $, is a map $\Lambda ^{k+2} V^*\to \Lambda ^kV^*$. It is determined by $\left\langle \Lambda \alpha ,\beta  \right\rangle =\left\langle \alpha ,L\beta  \right\rangle $.
+
+Since $\star $ is invertible, it makes sense to discuss $\star ^{-1} $.
+
+\begin{proposition}\label{prp:5.0.7}
+	\[
+		\Lambda =\star ^{-1} \circ L\circ \star 
+	.\]
+\end{proposition}
+\begin{proof}
+	Let $\alpha ,\beta $ be real forms. Then
+	\[
+		\left\langle \Lambda \alpha ,\beta  \right\rangle =\left\langle \alpha ,L\beta  \right\rangle 
+	.\]
+	It's sufficient to show $\left\langle \alpha ,L\beta \right\rangle \mathrm{vol} =\left\langle \beta  ,\star ^{-1} L\star \alpha  \right\rangle $ by uniqueness of adjoints.
+
+	We have
+	\[
+		\left\langle \alpha ,\star ^{-1} L\star \beta  \right\rangle \mathrm{vol} =\alpha \wedge \star \left(\star^{-1}  L\star \beta \right)=\alpha \wedge L\star \beta =\alpha \wedge \omega \wedge \star \beta =\left\langle \beta ,L\alpha  \right\rangle \mathrm{vol}
+	.\]
+\end{proof}
+
+Now we complexify. These maps extend to
+\[
+	L : \Lambda ^{\bullet} V^*_\mathbb{C}  \to \Lambda ^{\bullet+2} V^*_\mathbb{C} 
+\]
+\[
+	\Lambda : \Lambda ^{\bullet+2}V^*_\mathbb{C}  \to \Lambda ^{\bullet} V^*_\mathbb{C} 
+.\]
+We refine how we think of these Lefschetz operators by considering the bidegree. Recall $\omega $ has type $(1,1)$. Thus
+\[
+	L : \Lambda ^{p,q} V^*_\mathbb{C}  \to \Lambda ^{p+1,q+1} V^*_\mathbb{C} 
+.\]
+This implies
+\[
+	\Lambda : \Lambda ^{p+1,q+1} V^*_\mathbb{C}  \to \Lambda ^{p,q} V^*_\mathbb{C} 
+.\]
+
+Our goal is to show that the cohomology of a K\"ahler manifold is highly constrained, and this will arise by considering an $\mathfrak{sl} _2(\mathbb{C} )$ action on $\Lambda ^{\bullet} V^*_\mathbb{C} $. Let $H : \Lambda ^{\bullet} V^*_\mathbb{C}  \to \Lambda ^{\bullet} V^*_\mathbb{C} $ be defined by
+\[
+	H=\sum_{k=1}^{2n} (k-n)\Pi_k
+.\]
+Here recall that $\Pi _k : \Lambda ^{\bullet} V^*_\mathbb{C}  \to \Lambda ^kV^*_\mathbb{C} $, and that $V$ is a $2n$-dimensional vector space. Hence all this does is multiply a $k$-form by $n-k$.
+\begin{proposition}\label{prp:5.0.8}
+	The collection $\left\{ H,L,\Lambda  \right\} $ satisfies the $\mathfrak{sl} _2(\mathbb{C} )$ commutation relations
+	\[
+		[H,L] = 2L,\qquad [H,\Lambda ] = -2\Lambda ,\qquad [L,\Lambda ]=H
+	.\]
+	Hence $\Lambda ^{\bullet} V^*_\mathbb{C} $ is an $\mathfrak{sl} _2(\mathbb{C} )$-module.
+\end{proposition}
+
+This is proven by direct computation.
+
+\begin{definition}\label{dfn:5.0.9}
+	Let $U$ be a finite dimensional $\mathfrak{sl} _2(\mathbb{C} )$-representation. Define $P\coloneqq \left\{ u\in U\mid fu=0 \right\} \subseteq U$. This is called the subspace of \emph{primitive} vectors or \emph{lowest weight} vectors. Here, recall that an $\mathfrak{sl} _2(\mathbb{C} )$-representation is generated by $\left\{ e,f,h \right\} $.
+\end{definition}
+
+Thus $U \cong \bigoplus_{i\geq 0} e^iP$. Note also that for any weight $\lambda \in\mathbb{Z} $ in $U$, we obtain $e^\lambda : U_{-\lambda } \cong U_\lambda $.
+
+
+\begin{theorem}\label{thm:5.0.10}
+	If $(V,\left\langle -,- \right\rangle ,J)$ is an almost complex inner product spaace, then
+	\begin{enumerate}
+		\item We can write
+			\[
+				\Lambda ^kV^* \cong \bigoplus_{i\geq 0} L^iP^{k-2i} 
+			.\]
+			I.e., any $\alpha \in \Lambda ^kV^*$ can be written uniquely as
+			\[
+				\alpha =\alpha _k + L\alpha _{k+2} + L^2\alpha ^{k+4} +\cdots,\qquad \text{where } \alpha _j\in P^j
+			.\]
+		\item $L^{n-k} : \Lambda ^kV^* \cong \Lambda ^{2n-k} V^*$.
+		\item If $k>n$ then $P^k=0$. If $k\leq n$, then
+			\[
+				P^k \cong  \left\{ \alpha \in \Lambda ^kV^*\mid L^{n-k+1} \alpha =0 \right\} 
+			.\]
+	\end{enumerate}
+\end{theorem}
+

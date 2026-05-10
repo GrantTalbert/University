@@ -1,0 +1,96 @@
+\lecture{16}{Tue 14 Apr 2026 14:04}{Pushforwards of prefactorization algebras, Abelian Chern-Simons}
+
+\begin{remark}
+	We identify $p$ with $\partial _x$ and $q$ with $x$ to recover $U\mathcal{W} $ from $H^0(\Obs^q)$.
+\end{remark}
+
+
+\chapter{Pushforwards and canonical quantization}
+
+\begin{definition}\label{dfn:6.0.1}
+	Let $\mathcal{F}$ be a prefactorization algebra on a manifold $M$, and $\pi : M \to N$ a smooth map between smooth manifolds. We define a prefactorization algebra $\pi _*\mathcal{F} $ on $N$ the same way pushforwards of sheaves are defined: $(\pi _*\mathcal{F} )(U) \coloneqq \mathcal{F} (\pi ^{-1} (U))$.
+\end{definition}
+
+\begin{lemma}\label{lma:6.0.2}
+	Withnotation as in \cref{dfn:6.0.1}, then $\pi _*\mathcal{F} $ is a prefactorization algebra.
+\end{lemma}
+\begin{proof}
+	All we have to check is that structure maps exist. Since $\pi ^{-1} (U) \subseteq \pi ^{-1} (V)$ implies $U\subseteq V$, and $\pi ^{-1} (U_1) \cap \pi ^{-1} (U_2) =\varnothing $ implies $U_1 \cap U_2=\varnothing $, the structure maps are precisely those of $\mathcal{F} $ on the open sets given by the preimages.
+\end{proof}
+
+\begin{intuition}
+	If $\mathcal{F} $ describes quantum observables on a theory $M$, then $\pi _*\mathcal{F} $ describes the observables of the theory on $N$ compactified ($\leftarrow$ physics term, not math) along the fibers of $\pi $. Usually $\pi $ is some kind of fibration here.
+\end{intuition}
+
+We will show that dimensional reduction to $\mathbb{R} $ amounts to canonical quantization.
+
+\begin{example}
+	Let $M$ a manifold and $Q=M\times \mathbb{R} $ the cylinder; the idea is $\mathbb{R} $ is time and $M$ is space I think. Let $\pi : M\times \mathbb{R}  \to \mathbb{R} $ be the projection. Suppose $M=(M,g)$ is compact and Riemannian. Consider the scalar field theory $\Delta +m^2 : C^\infty _{Q,c}  \to C^\infty _{Q,c}[-1] $, and let $\left\{ e_i \right\} _{i\in I\subseteq \mathbb{R} } $ be an orthonormal basis of eigenvectors of $\Delta +m^2$ on $C^\infty _M$ with eigenvalues $\lambda _i \geq 0$. We claim the eigenspaces are orthogonal with respect to the $L^2$ inner product. This follows since $\Delta +m^2$ is self-adjoint, and is not immediate.
+
+	There is a theorem saying that the direct sums of the eigenspaces $\bigoplus_{i} \mathbb{R} e_i$ is dense in $C^\infty _M$. Writing $A_m$ as the Weyl algebra with inner derivation depending on $m$, we consider
+	\[
+		\mathbb{A}_M = A_{\sqrt{\lambda _1} } \otimes_{\mathbb{R} [\hbar ]} A_{\sqrt{\lambda _2} } \otimes _{\mathbb{R} [\hbar ]}\cdots  
+	.\]
+	To define such an infinite tensor product, we can take the complete tensor product---in all but finitely many slots, entries in a tensor are the identity 1 of the relevant unital $\mathbb{R} [\hbar ]$-algebra.
+
+	\begin{proposition}\label{prp:6.0.5}
+		There is a dense sub-prefactorization algebra of $\pi _*\Obs^q$ which is locally constant, and whose cohomology is the infinite tensor product $\mathbb{A} _M$ of Weyl algebras.
+	\end{proposition}
+	Intuitively, this means scalar field theory is essentially composed of a bunch of non-interacting harmonic oscillators. Here, we have assumed compactness, meaning we can use less harmonic oscillators by assigning one to each oscillation mode, but on non-compact space we would need one in each point of spacetime since the Laplacian no longer has a discrete collection of eigenvalues. Of course, none of these interact.
+	\begin{proof}[Sketch of proof]
+		First, recall $\pi _*\Obs^q$ assigns to each open $U\subseteq \mathbb{R} $ the Chevalley-Eilenberg chains of the Heisenberg central extension of $\mathcal{E} _c$, and a dense subcomplex is given by
+		\[
+			\left( \bigoplus_{i\in I} \Delta +\lambda _i \right) : \bigoplus_{i\in I} C^\infty_c(U)e_i \to \bigoplus_{i\in I} C^\infty _c(U)e_i
+		.\]
+		Let $\mathcal{F} _i$ be the prefactorization on $\mathbb{R} $ associated to quantum mechanics with (unknown word) $\sqrt{\lambda _i} $. This corresponds to $\mathcal{E} _c : C^\infty _c(U)e_i \to C^\infty _c(U)e_i[-1]$.
+
+		Prefactorization algebras can be tensored pointwise: Let $\mathcal{F} ,\mathcal{G} : M \to (\mathcal{C},\otimes ) $; then $\mathcal{F} \otimes \mathcal{G} $ is given by $(\mathcal{F} \otimes \mathcal{G} )(U)\coloneqq \mathcal{F} (U)\otimes \mathcal{G} (U)$. Consider $\mathcal{F} =\mathcal{F} _{\sqrt{\lambda _1} } \otimes \mathcal{F} _{\sqrt{\lambda _2} } \otimes \cdots $. Since we can define infinite tensor products pointwise, this exists. Then $\mathcal{F} $ can be viewed as the Heisenberg prefactorization algebra associate to the direct sum. There is a dense embedding $\mathcal{F} \hookrightarrow \pi _*\Obs^q$. Cohomology agrees also with the statement, and moreover the embedding in cohomology is still dense.
+	\end{proof}
+\end{example}
+
+\chapter{Abelian Chern-Simons theory}
+
+
+Let $M$ be a compact oriented 3-manifold. The space of fields $\mathcal{E} =\Omega ^{\bullet} _M[1]$ with de Rham differential, and the action functional is
+\[
+	S_U(A) = \int_{U} A\wedge \dd A
+.\]
+For this to be meaningful, we need $A$ to be a 1-form. General Chern-Simons takes values in an arbitrary Lie algebra
+\[
+	S(A) = \int_{M} \mathrm{tr} \left(A\wedge  \dd A + \frac{2}{3} A\wedge A\wedge A\right)
+.\]
+General Chern-Simons is not quadratic since the term $A\wedge A\wedge A$ scales with $\lambda ^3$ under $A\to \lambda A$. But if we take the Lie algebra to be abelian, then $A\wedge A\wedge A=A\wedge [A,A]=0$.
+
+Abelian Chern-Simons is both a free and a topological field theory. Recall that a TQFT has no metric-dependence in the action functional. What we have here is $U(1)$-Chern-Simons using forms valued in $\mathbb{C} $, which is the Lie algebra of $U(1)\otimes _\mathbb{R} \mathbb{C} $.
+
+The pairing of cohomological degree $-1$ on $\mathcal{E} _c$ is
+\[
+	\left\langle \alpha ,\beta  \right\rangle =(-1)^{\left| \beta  \right| } \int_{M} \alpha \wedge \beta 
+.\]
+We as always view 1-forms as connections on the trivial bundle via $A\to \dd +A$. Then $S(A)=\left\langle A ,\dd A \right\rangle $. The equations of motion are that $\dd A=0$.  This is as always computed by taking
+\[
+	\frac{\delta S}{\delta \alpha } (\beta ) = \left.\frac{\mathrm{d}}{\mathrm{d}\varepsilon } \right|_{\varepsilon =0} \int_{U} (\alpha +\varepsilon \beta )\wedge (\dd \alpha +\varepsilon \dd \beta )=\int_{M} \beta \wedge \dd \alpha +\alpha \wedge \dd \beta 
+\]
+\[
+	=2\int_{M} \beta \wedge \dd \alpha -\dd (\alpha \wedge \beta )=2\int_{M} \beta \wedge \dd \alpha =0 \implies \dd \alpha =0
+.\]
+Now note that $\Omega ^1_M \to \Omega ^2_M \to \cdots $ is an exact sequence of sheaves by Poincare, and if we want to extend it to the left keeping it exact then we would add in $\Omega ^1_{M,\text{closed} } $. However, we are using a \emph{gauge theory} where transformations $A\to A+\dd f$ leave the action functional invariant:
+\[
+	S(A+\dd f) = \left\langle A+\dd f,\dd (A+\dd f) \right\rangle =\left\langle A,\dd A \right\rangle +\left\langle \dd f,\dd A \right\rangle =S(A) + \int_{M} \dd f \wedge \dd A
+\]
+\[
+	=S(A)+\int_{M} \dd (f+\dd A)=0
+.\]
+Thus our symmetry is encoded by $\Omega ^0_M$, motivating our space of fields $\Omega ^{\bullet} _M[1]$. (again, the shift is so that the physical fields live in $H^0$). Thus we have our derived space of fields
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Omega ^0_M[1]\ar[" \dd  ", r]  & \Omega ^1_M\ar[" \dd  ", r]  & \Omega ^2_M[-1]\ar[" \dd  ", r]  & \Omega ^3_M[2].
+\end{tikzcd}\]
+The classical observables are (the 
+\[
+	\Obs^{cl} =\Sym (\mathcal{E} _c[1]),
+\]
+with de Rham differential. Sym commutes with cohomology, so
+\[
+	H^{\bullet} \Sym (\mathcal{E}_c[1]) = \Sym H^{\bullet} (\mathcal{E}_c[1])=\Sym (H^{\bullet} _{\mathrm{dR} ,c} (U)[2])
+.\]
+Globally, since $M$ is compact, $H^{\bullet} \Obs^{cl} (M) =\Sym (H^{\bullet}_{\mathrm{dR} }(M)[2])$.

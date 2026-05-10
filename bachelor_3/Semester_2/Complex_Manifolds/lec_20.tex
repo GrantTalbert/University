@@ -1,0 +1,38 @@
+\lecture{20}{Tue 21 Apr 2026 12:25}{More Hodge theory}
+
+Professor Fried taught class this week.
+
+The most important example of a K\"ahler manifold is $\mathbb{C} \mathbb{P} ^n$ with the Fubini-Study metric. Consider the isometry group $\operatorname{SU} (n+1)$. Intuitively, we want to find the distance between two lines in $\mathbb{C} ^{n+1} \setminus \left\{ 0 \right\} $. This isn't quite right. Equivalently, (compactifyingish -- we mod out by $z \sim \lambda z$, $\left| \lambda  \right| =1$ to recover CPn) we want to find the distance between circles in $S^{2n+1} $. We can define the distance between two sets, but this usually isn't good enough to define a metric since we don't usually get the triangle inequality. But in \emph{this case}, it is, pending some refinements. This gives the most symmetric possible metric on $\mathbb{C} \mathbb{P} ^n$. Now we rigorize our intuition.
+
+Start with the standard Hermitian metric $h(v,w)=\left\langle v,w \right\rangle =\sum_{i} v_i \overline{w} _i$ on $\mathbb{C} ^{n+1} $. Define $H$ to be the metric defined at each point $x$ by $H_x = \frac{1}{h(x,x)} h_x$. Apparently $\mathbb{C} ^*$ acts on $(\mathbb{C} ^{n+1} \setminus 0,H)$ isometrically. Let $\pi : \mathbb{C} ^{n+1} \setminus 0 \to \mathbb{C} \mathbb{P} ^n$ be the projection, and note that
+\[
+	\pi ^* T\mathbb{C} \mathbb{P} ^n \cong T(\mathbb{C} ^{n+1} \setminus 0) / L,
+\]
+where $L\subseteq T(\mathbb{C} ^{n+1}\setminus 0) $ is vectors tangent to $\mathbb{C} ^*$-orbits. I don't know what's happening so here's the metric. Let $(U_i,\varphi _i)$ be a chart. Write $z$ and $w$ for coords on $\mathbb{C} \mathbb{P}^n$ and $\mathbb{C} ^{n} $, respectively. Then the K\"ahler form $\omega $ is defined locally by
+\[
+	\omega|U_i \coloneqq \frac{i}{2\pi } \partial \overline{\partial } \ln \left( \sum_{\ell =0}^{n} \left| \frac{z_\ell }{z_i}  \right| ^2 \right) \in \mathcal{A} ^{1,1} (U_i)
+\]
+\[
+	\omega |U_i \coloneqq \frac{i}{2\pi } \partial \overline{\partial } \ln \left( \sum_{k=1}^{n} \left| w_k \right| ^2 +1\right) 
+.\]
+Note that $\omega =- \Im H$ for $H$ the metric. This is
+\[
+	\frac{i}{2} \left( \frac{\sum_{\alpha =1}^{n} \dd z_\alpha \wedge \dd \overline{z} _\alpha }{1+\sum_{\alpha =1}^{n} \left| z_\alpha  \right| ^2} -\frac{\sum_{1}^{n} \sum_{\alpha } \overline{z} _\alpha \dd z_\alpha \wedge \sum_{1}^{n} z_\alpha \dd \overline{z} _\alpha }{\left( ? \right) ^2}  \right) 
+.\]
+Idk what that is. The book uses
+\[
+	h_{ij} \left(1+\sum_{i} \left| w_i \right| ^2\right)\delta _{ij} -\overline{w} _iw_j
+.\]
+And
+\[
+	\omega =\frac{1}{\left( 1+\sum_i \left| w_i \right| ^2 \right) ^2} \sum_{i,j} h_{ij} \dd w_i \wedge \dd \overline{w} _j
+.\]
+See page 118, there's more.
+
+
+
+Now the K\"ahler identities. We have operators $\dd ,\partial ,\overline{\partial } $, and they have hermitian adjoints. These are important 1st order operators. We have important 0th order operators $L,\Lambda ,\star $. We have important 2nd order operators
+\[
+	\Delta =\dd \dd ^* + \dd ^*\dd ,\qquad \Delta_{\partial } =\partial \partial ^*+\partial ^*\partial ,\qquad \Delta _{\overline{\partial } } \overline{\partial} \overline{\partial } ^* + \overline{\partial } ^* \overline{\partial } 
+.\]
+Ok but wtf is the adjoint of a differential operator? Well it's just the adjoint under the $L^2$ inner product. It can be derived via the Leibniz identity.

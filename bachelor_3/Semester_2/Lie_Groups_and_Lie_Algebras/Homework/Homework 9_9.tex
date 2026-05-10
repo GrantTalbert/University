@@ -1,0 +1,225 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 9}
+\courseID{MA731}
+\begin{document}
+\makeproblem
+\begin{problem}
+Let
+\[
+	\mathfrak{g} =\left\{ \begin{pmatrix}
+	A & v \\
+	0 & 0
+	\end{pmatrix} \mid A\in \mathfrak{gl} _3(\mathbb{R} ),v\in\mathbb{R} ^3 \right\} \subseteq \mathfrak{gl} _4(\mathbb{R} )
+.\]
+\begin{enumerate}
+	\item Show that $\mathfrak{g} $ admits a decomposition
+		\[
+			\mathfrak{g} \cong \mathfrak{s} \ltimes \mathfrak{r} ,
+		\]
+		where $\mathfrak{r} $ is the radical and $\mathfrak{s} $ is a semisimple Lie subalgebra. Determine exactly what $\mathfrak{s} $ and $\mathfrak{r} $ are.
+	\item Let $K(x,y)=\mathrm{tr} (\mathrm{ad} _x\circ \mathrm{ad} _y)$ be the Killing form of $\mathfrak{g} $. Determine explicitly the Kernel
+		\[
+			\Ker K = \left\{ x\in \mathfrak{g} \mid K(x,-)=0 \right\} 
+		.\]
+	\item Using Cartan's criteria (assumed known):
+		\begin{enumerate}
+			\item Verify the criterion for semisimplicity on $\mathfrak{s} $.
+			\item Verify the corresponding criterion for semisimplicity on $\mathfrak{r} $.
+		\end{enumerate}
+	\item Show that $K(\mathfrak{s} ,\mathfrak{r} )=0$.
+\end{enumerate}
+\end{problem}
+
+
+(1) We write $\mathbb{R} ^3$ and $\mathfrak{gl} _3(\mathbb{R} )$ to denote the relevant Lie subalgebras of $\mathfrak{g} $. The bracket on $\mathbb{R} ^3$ is 0, and the bracket on $\mathfrak{gl} _3(\mathbb{R} )$ is the commutator
+\[
+	\left[ \begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix},\begin{pmatrix}
+	B & 0 \\
+	0 & 0
+	\end{pmatrix} \right] =\begin{pmatrix}
+	\left[ A,B \right]  & 0 \\
+	0 & 0
+	\end{pmatrix}
+.\]
+We usually abuse notation, and write
+\[
+	A=\begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix},\qquad v=\begin{pmatrix}
+	0 & v \\
+	0 & 0
+	\end{pmatrix},\qquad A+v=\begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix}+\begin{pmatrix}
+	0 & v \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	A & v \\
+	0 & 0
+	\end{pmatrix}
+.\]
+Let $\mathfrak{z} \coloneqq \left\{ c1\mid c\in\mathbb{R}  \right\} \subseteq \mathfrak{gl}_3(\mathbb{R} )$, where $1$ is the identity matrix. Let $\mathfrak{r} $ be the Lie subalgebra of $\mathfrak{g} $ whose underlying vector space is $\mathfrak{z} +\mathbb{R} ^3$. Since $\mathfrak{z} \cap \mathbb{R} ^3\cong 0$, as vector spaces this is isomorphic to the direct sum $\mathfrak{z} \oplus \mathbb{R} ^3$ (this does not promote to an isomorphism of Lie algebras), so we can write an element of $\mathfrak{r} $ as $c1+v$, with $c\in\mathbb{R} $ and $v\in\mathbb{R} ^3$. The bracket is simply the same as the bracket on $\mathfrak{g} $, meaning
+\[
+	[c1+v,-] = [c1,-] + [v,-] = [v,-],
+\]
+where we have used the fact that $c1$ is a diagonal matrix (viewed as an element of $\mathfrak{g} $, not $\mathfrak{gl} _3(\mathbb{R} )$), and thus commutes with everything, so its commutator vanishes.
+
+First, we show that $\mathfrak{r} $ is an ideal. Note that as vector spaces, we have $\mathfrak{g} \cong \mathfrak{gl} _3(\mathbb{R} )\oplus \mathbb{R} ^3$, and since $\mathfrak{gl} _3(\mathbb{R} )\cap \mathbb{R} ^3 \cong 0$, we have $\mathfrak{g} \cong \mathfrak{gl} _3(\mathbb{R} )+\mathbb{R} ^3$. Thus we can similarly write an arbitrary element of $\mathfrak{gl} _3(\mathbb{R} )$ as $A+v$. Now we compute
+\[
+	[A+v,c1+w] = [A,w] + [v,w]
+.\]
+\[
+	\begin{pmatrix}
+	a_{11}  & a_{12}  & a_{13}  & 0  \\
+	a_{21}  & a_{22}  & a_{23}  & 0 \\
+	a_{31}  & a_{32}  & a_{33}  & 0 \\
+	0 & 0 & 0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 & 0 & v_1 \\
+	0 & 0 & 0 & v_2 \\
+	0 & 0 & 0 & v_3 \\
+	0 & 0 & 0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	0 & 0 & 0 & a_{11} v_1 + a_{12} v_2 + a_{13} v_3\\
+	0 & 0 & 0 & a_{21} v_1 + a_{22} v_2 + a_{23} v_3 \\
+	0 & 0 & 0 & a_{31} v_1 + a_{32} v_2 + a_{33} v_3 \\
+	0 & 0 & 0 & 0
+	\end{pmatrix}\in \mathbb{R} ^3 \subseteq \mathfrak{r} 
+.\]
+\[
+	\begin{pmatrix}
+	0 & 0 & 0 & w_1 \\
+	0 & 0 & 0 & w_2 \\
+	0 & 0 & 0 & w_3 \\
+	0 & 0 & 0 & 0
+	\end{pmatrix}\begin{pmatrix}
+	0 & 0 & 0 & v_1 \\
+	0 & 0 & 0 & v_2 \\
+	0 & 0 & 0 & v_3 \\
+	0 & 0 & 0 & 0
+	\end{pmatrix}=0\in \mathfrak{r} 
+.\]
+Therefore, $[\mathfrak{g} ,\mathfrak{r} ]\subseteq \mathfrak{r} $, so we have an ideal.
+
+Now we show $\mathfrak{r} $ is solvable. We have shown that $[v,w]=0$ for $v,w\in\mathbb{R} ^3$, so
+\[
+	[c1+v,d1+w] = [v,d1+w] = [v,w]=0
+.\]
+Thus $[\mathfrak{r} ,\mathfrak{r} ] \cong 0$ is solvable.
+
+Now we show $\mathfrak{r} $ is the maximal solvable ideal of $\mathfrak{g} $. Since there is a maximal solvable ideal, let $\mathfrak{R} \subseteq \mathfrak{g} $ be the maximal solvable ideal, meaning $\mathfrak{r} \subseteq \mathfrak{R} $. We show that $\mathfrak{r} =\mathfrak{R} $.
+
+Then since $\mathbb{R} ^3 \subset \mathfrak{r} \subseteq \mathfrak{R} $, we must have that (as a vector space), $\mathfrak{R} =\left\langle \mathfrak{h} +\mathbb{R} ^3 \right\rangle\cong \left\langle \mathfrak{h}  \right\rangle +\mathbb{R} ^3 \cong \left\langle \mathfrak{h}  \right\rangle \oplus \mathbb{R} ^3$ for some subset $\mathfrak{h} \subseteq \mathfrak{g} $. We can take $\mathfrak{h} $ to be a subspace of $\mathfrak{gl} _3(\mathbb{R} )$ without loss of generality, such that $\mathfrak{h} =\left\langle \mathfrak{h}  \right\rangle $. We see immediately that $\mathfrak{h}   \supseteq \mathfrak{z} $.
+
+We will use the fact that when not viewing $\mathfrak{gl} _3(\mathbb{R} )$ as a subspace of $\mathfrak{g} $, and rather as the standalone Lie algebra, the solvable radical is $\mathfrak{z} $. We also use the fact that the embedding $\mathfrak{gl} _3(\mathbb{R} )\hookrightarrow \mathfrak{g} $ is a Lie algebra homomorphism, as noted at the beginning. Let $A+v\in \mathfrak{R} $ and $B+w\in \mathfrak{g} $. Then
+\[
+	[A+v,B+w] = [A,B]_{\mathfrak{gl} _3(\mathbb{R} )} +[A,w] + [v,B] + [v,w]
+.\]
+As noted earlier, $[A,w],[v,B]\in\mathbb{R} ^3$, and $[v,w]=0$. Moreover, since $[A,B]$ is the Lie bracket in $\mathfrak{gl} _3(\mathbb{R} )$, and since $\mathfrak{gl} _3(\mathbb{R} )$ is a Lie algebra, we have $[A,B]\in \mathfrak{gl} _3(\mathbb{R} )$. Therefore, $[A,B]$ is linearly independent from $[A,w] + [v,B]$, so this Lie bracket lands back in $\mathfrak{R} $ if and only if $[A,B] \in \mathfrak{R} $. We thus find that $\mathfrak{h} $ must be an ideal of $\mathfrak{gl} _3(\mathbb{R} )$.
+
+We now investigate the solvability of $\mathfrak{R} $. We have seen that the Lie bracket $[A+v,B+w]$ yields two linearly independent components: and $\mathbb{R} ^3$-component and a $\mathfrak{h} $-component. Write $\mathfrak{R} _n$ for the $n$th term in the derived series.
+
+We immediately have that
+\[
+	[\mathfrak{R} ,\mathfrak{R} ] = [\mathfrak{h} ,\mathfrak{h} ] + [\mathfrak{h} ,\mathbb{R} ^3] + [\mathbb{R} ^3, \mathfrak{h} ] + [\mathbb{R} ^3,\mathbb{R} ^3]
+.\]
+Induction then shows that
+\[
+	[\mathfrak{R} _n,\mathfrak{R} _n] = \mathfrak{h}_{n+1} +\mathbb{R} ^3_{n+1} +\text{various bracktets between $\mathfrak{h} $ and $\mathbb{R} ^3$} 
+.\]
+We denote the ``various brackets between $\mathfrak{h} $ and $\mathbb{R} ^3$'' by $\mathcal{O}(n)$. Note that $\mathcal{O} (n)\subseteq \mathbb{R} ^3$ always, since $[\mathfrak{h} ,\mathbb{R} ^3]\subseteq \mathbb{R} ^3$. 
+We now use linear independence of elements of $\mathbb{R} ^3$ and elements of $\mathfrak{h} $. There must be $N$ such that $\mathfrak{R} _N=0$. By linear independence, $\mathfrak{h} _N=0$ (beause you can't cancel the elements with elements in $\mathbb{R} ^3 \supseteq \mathbb{R} ^3_N + \mathcal{O} (N)$). In particular, $\mathfrak{h} $ must be solvable. Thus we have found that $\mathfrak{h} $ is a solvable ideal of $\mathfrak{gl} _3(\mathbb{R} )$ such that $\mathfrak{z} \subseteq \mathfrak{h} $. However, $\mathfrak{z} $ is the maximal solvable ideal of $\mathfrak{gl} _3(\mathbb{R} )$, so we conclude $\mathfrak{h} =\mathfrak{z} $, and thus $\mathfrak{R} =\mathfrak{r} $.
+
+
+
+
+
+The obvious definition for $\mathfrak{s} $ is now $\mathfrak{s} \coloneqq \mathfrak{sl} _3(\mathbb{R} )$. We have seen that a solvable ideal of $\mathfrak{gl} _3(\mathbb{R} )$ as a subset of $\mathfrak{g} $ must also be a solvable ideal of $\mathfrak{gl} _3(\mathbb{R} )$ as a standalone Lie algebra, and the converse also obviously holds. Thus since $\mathfrak{sl} _3(\mathbb{R} )$ is a semisimple Lie subalgebra of $\mathfrak{gl} _3(\mathbb{R} )$, it must also be a semisimple Lie subalgebra of $\mathfrak{g} $.
+
+We now show that as a vector space, $\mathfrak{g} \cong \mathfrak{s} \oplus \mathfrak{r} $. As vector spaces.
+\[
+	\mathfrak{s} \oplus \mathfrak{r}  = \mathfrak{sl} _3(\mathbb{R} ) \oplus (\mathfrak{z} \oplus \mathbb{R} ^3) \cong (\mathfrak{sl} _3(\mathbb{R} )\oplus \mathfrak{z} )\oplus \mathbb{R} ^3 \cong \mathfrak{gl}_3(\mathbb{R} ) \oplus \mathbb{R} ^3 \cong \mathfrak{g} 
+.\]
+Here we have used the Levi decomposition $\mathfrak{gl} _3(\mathbb{R} ) \cong \mathfrak{sl} _3(\mathbb{R} )\ltimes \mathfrak{z} $. Since $\mathfrak{s} \cap \mathfrak{r} \cong 0$, and since $\mathfrak{g} \cong \mathfrak{s} +\mathfrak{r} $ as vector spaces, we have $\mathfrak{g} \cong \mathfrak{s} \ltimes \mathfrak{r} $ as Lie algebras.
+
+(2) We need to find all $x\in \mathfrak{g} $ such that $\mathrm{tr} (\mathrm{ad} _x,\mathrm{ad} _y)=0$. We first find $\Ker (x\mapsto \mathrm{ad} _x)$. We claim that $\Ker K =\mathbb{R} ^3$. Note here that we have chosen to write $K$ for the Killing form.
+
+Let $x,y,z\in \mathfrak{g} $, and write
+\[
+	x = \begin{pmatrix}
+	A & v \\
+	0 & 0
+	\end{pmatrix},\qquad y=\begin{pmatrix}
+	B & w \\
+	0 & 0
+	\end{pmatrix},\qquad z=\begin{pmatrix}
+	C & u \\
+	0 & 0
+	\end{pmatrix}
+.\]
+Then
+\[
+	\mathrm{ad} _y(z) = \begin{pmatrix}
+	BC & Bu \\
+	0 & 0
+	\end{pmatrix}-\begin{pmatrix}
+	CB & Cw \\
+	0 & 0
+	\end{pmatrix}=\begin{pmatrix}
+	\left[B,C\right] & Bu-Cw \\
+	0 & 0
+	\end{pmatrix}
+.\]
+Then
+\[
+	\mathrm{ad} _x(\mathrm{ad} _y(z)) = \begin{pmatrix}
+	\left[ A,\left[ B,C \right]  \right]  & ABu-ACw -\left[ B,C \right] v \\
+	0 & 0
+	\end{pmatrix}
+.\]
+We can thus write $\mathrm{ad} _x$ as a $\mathfrak{gl} _3(\mathbb{R} )$ component $\mathrm{ad}_x^{\mathfrak{gl} } : \mathfrak{gl} _3(\mathbb{R} ) \to \mathfrak{gl} _3(\mathbb{R} )$ given by $[A,-]$, a $\mathbb{R} ^3$ component $\mathrm{ad} _x^{\mathbb{R} ^3} : \mathbb{R} ^3 \to \mathbb{R} ^3$ which maps $w\mapsto Aw$, and an off-diagonal component $\mathrm{ad}^d_x : \mathfrak{gl} _3(\mathbb{R} ) \to \mathbb{R} ^3$ which maps $B\mapsto Bv$. We can write
+\[
+	\mathrm{ad}_x(B+w) = \begin{pmatrix}
+	\mathrm{ad}_x^{\mathfrak{gl} } (B) & 0 \\
+	0 & 0
+	\end{pmatrix}+ \begin{pmatrix}
+	0 & \mathrm{ad} _x^{\mathbb{R} ^3} (w) \\
+	0 & 0
+	\end{pmatrix}+ \begin{pmatrix}
+	0 & \mathrm{ad}_x^{d} (B) \\
+	0 & 0
+	\end{pmatrix}
+.\]
+If we give $\mathfrak{g} $ a basis $\left\{ e_i \right\}_{1\leq i\leq 12} $, then the trace of an operator $\mathcal{O} : \mathfrak{gl} _3(\mathbb{R} ) \to \mathfrak{gl} _3(\mathbb{R} ) $ is given by
+\[
+	\mathrm{tr} \mathcal{O} =\sum_{i=1}^{12} \left\langle e_i, \mathcal{O} e_i \right\rangle 
+,\]
+where $\left\langle -,- \right\rangle $ is the dot product. In particular, this is nonzero if and only if $\mathcal{O} e_i $ can be written as a linear combination with a nonzero $e_i$ component. Since $\mathrm{ad} _x^d$ maps $\mathfrak{gl} _3(\mathbb{R} )$ into $\mathbb{R} ^3$, and since these spaces have $\mathfrak{gl} _3(\mathbb{R} ) \cap \mathbb{R} ^3 \cong 0$, we see that $\mathrm{ad}_x^d$ is traceless, and thus does not contribute to the trace of $\mathrm{ad} _x$. Here we note also that trace preserves addition.
+
+Note that the map $\mathrm{ad} _x^{\mathbb{R} ^3} $ mapping $w\mapsto Aw$ is just the linear map $A$, and thus the trace $\mathrm{tr} \left(\mathrm{ad} _x^{\mathbb{R} ^3}\right) =\mathrm{tr}A$. Thus
+\[
+	\mathrm{tr} (\mathrm{ad_x} \circ \mathrm{ad} _y) = \mathrm{tr} \left( \mathrm{ad} _x^{\mathfrak{gl} } \circ \mathrm{ad} _y^{\mathfrak{gl} }  \right) +\mathrm{tr} \left( AB \right)  
+.\]
+Since the trace thus depends entirely on the $\mathfrak{gl} _3(\mathbb{R} )$ components of $x,y$, we see that $\mathbb{R} ^3 \subseteq \Ker K$. Therefore, we adopt the convention of writing $\mathrm{ad} _x^{\mathfrak{gl} } =\mathrm{ad} _A^{\mathfrak{gl} } $ to make notation more clear.
+
+We are looking for $x=A+v$ such that $K(x,-)=0$; that is, for all $y=B+w\in \mathfrak{g} $,
+\[
+	\mathrm{tr} \left( \mathrm{ad} _A^{\mathfrak{gl} } \circ \mathrm{ad} _B^{\mathfrak{gl} }  \right) +\mathrm{tr} (AB)=0
+.\]
+The first term is simply the Killing form $K^{\mathfrak{gl} } $ on $\mathfrak{gl} _3(\mathbb{R} )$. 
+\end{document}

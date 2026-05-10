@@ -1,0 +1,152 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Homework 7}
+\begin{document}
+\makeproblem
+
+Define $\mathfrak{g} \subseteq \mathfrak{gl}(3,\mathbb{R} )$ as the Lie $\mathbb{R} $-algebra of matrices of the form
+\[
+	\begin{pmatrix}
+	A & v \\
+	0 & t
+	\end{pmatrix},\qquad A\in \mathfrak{gl} (2,\mathbb{R} ),\; v\in\mathbb{R} ^2, \; t\in\mathbb{R} , \; 0\in\mathbb{R} ^2
+.\]
+
+(1) Let $I$ be the $2\times 2$ identity matrix. We claim that the solveable radical $\mathfrak{r} $ of $\mathfrak{g} $ is
+\[
+	\mathfrak{r} =\left\{ \begin{pmatrix}
+	cI & v \\
+	0 & t
+	\end{pmatrix}\mid c,t\in\mathbb{R} ;v\in\mathbb{R} ^2 \right\} 
+.\]
+First we show this is an ideal:
+\[
+	\left[\begin{pmatrix}
+	A & w \\
+	0 & s
+	\end{pmatrix},\begin{pmatrix}
+	cI & v \\
+	0 & t
+\end{pmatrix}\right]=\begin{pmatrix}
+cA & Av+tw \\
+0 & st
+\end{pmatrix}-\begin{pmatrix}
+cA & cw+sv \\
+0 & st
+\end{pmatrix}
+\]
+\[
+	=\begin{pmatrix}
+	0 & (A-sI)v-(c-t)w \\
+	0 & 0
+	\end{pmatrix}
+.\]
+This is of the form
+\[
+	\begin{pmatrix}
+	0 & u \\
+	0 &0
+	\end{pmatrix}
+\]
+which is an element of $\mathfrak{r} $. Thus $\mathfrak{r} $ is an ideal of $\mathfrak{g} $. Additionally, this is also an element of the strictly upper triangular matrices $\mathfrak{n} $, which are known to be solveable. Thus $[\mathfrak{r} ,\mathfrak{r} ]\subseteq \mathfrak{n} $ implies that $\mathfrak{r} $ is also solveable.
+
+To show that $\mathfrak{r} $ is maximal, let $\mathfrak{R} $ be the maximal solveable ideal in $\mathfrak{g} $. Then $\mathfrak{r} \subseteq \mathfrak{R} $. Additionally, $\mathfrak{R} /\mathfrak{r} $ is an ideal of the quotient $\mathfrak{g} /\mathfrak{r} $. It suffices to show that $\mathfrak{R} /\mathfrak{r} \cong 0$ in the quotient. By part (3), the quotient is semisimple, so the statement follows. We will not use maximality of $\mathfrak{r} $ in the proofs to parts (2) or (3), so this is not circular reasoning.
+
+(2) Let
+\[
+	X\coloneqq \begin{pmatrix}
+	A & v \\
+	0 & t
+	\end{pmatrix}\in \mathfrak{g} 
+.\]
+We can decompose $X$ as
+\[
+	X= X_A + X_d = \begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix}+\begin{pmatrix}
+	0 & v \\
+	0 & t
+	\end{pmatrix}
+.\]
+In the quotient, the second factor vanishes, meaning any equivalence class in the quotient can be represented by an element of the form
+\[
+	X_A=\begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix},\qquad A\in \mathfrak{gl}_2(\mathbb{R} )
+.\]
+We can thus identify $\mathfrak{g} /\mathfrak{r} $ with a Lie subalgebra of $\mathfrak{gl} _2(\mathbb{R} )$ (it is not immediately clear that we can choose an identification such that this is a Lie subalgebra). Henceforth, we abuse notation and identify $X_A$ and $A$. However, this representation is not unique, since we can pull out a scalar multiple of the identity. In particular, we can pull out a factor of the trace:
+\[
+	A = \left(A - \left(\frac{1}{2} \mathrm{tr} A\right)I\right) + \left( \frac{1}{2} \mathrm{tr} A \right) I
+.\]
+Thus $A = A - \frac{1}{2}(\mathrm{tr} A)I$ when passing to the quotient, yielding a traceless representation for the class $[A]$ of $A$ in the quotient. Note also that the traceless representation of $[A]$ is \emph{unique}. Thus we may identify $[A]$ with its traceless representation, yielding a map $\varphi :\mathfrak{g} /\mathfrak{r} \to  \mathfrak{sl} _2(\mathbb{R} )$. The map is evidently an isomorphism, and moreover is an isomorphism of Lie algebras since the Lie brackets are both the commutator, and $\varphi $ clearly preserves multiplication.
+
+(3) $\mathfrak{sl} _2(\mathbb{R} )$ is semisimple.
+
+(4) Define $\mathfrak{l} \coloneqq \mathfrak{sl} _2(\mathbb{R} )$. Then parts (1), (2), and (3) show
+\[
+	\mathfrak{l} \cong \mathfrak{g} /\mathfrak{r} 
+.\]
+As $\mathbb{R} $-vector spaces, it then follows that $\mathfrak{g} \cong \mathfrak{l} \oplus \mathfrak{r} $. Consider the semidirect product $\mathfrak{l} \ltimes \mathfrak{r} $ with respect to the adjoint representation $X\mapsto [X,-]_\mathfrak{g} $. The bracket is then given by
+\[
+	\left[ (A,X),(B,Y) \right] = \left( \left[ A,B \right]_\mathfrak{l} ,\left[ X,Y \right]_{\mathfrak{r}} +[A,Y]_\mathfrak{g} -[B,X]_\mathfrak{g}  \right) 
+.\]
+The isomorphism of $\mathbb{R} $-vector spaces $\mathfrak{g} \cong \mathfrak{l} \oplus \mathfrak{r} $ can be given by
+\[
+	(A,X)\mapsto \begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix}+X,
+\]
+since $\mathfrak{sl} _2(\mathbb{R} ) \cap \mathfrak{r} =0$ in $\mathfrak{g} $. The Lie bracket can thus be rewritten as
+\begin{align*}
+	&\;\;\;\;[A,B]_\mathfrak{l} +[X,Y]_\mathfrak{r} +[A,Y]_\mathfrak{g} -[B,X]_\mathfrak{g} \\
+	&=\left[ \begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix},\begin{pmatrix}
+	B & 0 \\
+	0 & 0
+\end{pmatrix} \right]_\mathfrak{g} +[X,Y]_\mathfrak{g} +\left[ \begin{pmatrix}
+A & 0 \\
+0 & 0
+\end{pmatrix},Y \right] _\mathfrak{g} -\left[ \begin{pmatrix}
+B & 0 \\
+0 & 0
+\end{pmatrix},X \right] _\mathfrak{g} \\
+	&=\left[ \begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix},\begin{pmatrix}
+	B & 0 \\
+	0 & 0
+\end{pmatrix} \right]_\mathfrak{g} +[X,Y]_\mathfrak{g} +\left[ \begin{pmatrix}
+A & 0 \\
+0 & 0
+\end{pmatrix},Y \right] _\mathfrak{g} +\left[ X,\begin{pmatrix}
+B & 0 \\
+0 & 0
+\end{pmatrix} \right] _\mathfrak{g} \\
+	&=\left[ \begin{pmatrix}
+	A & 0 \\
+	0 & 0
+	\end{pmatrix}+X,\begin{pmatrix}
+	B & 0 \\
+	0 & 0
+	\end{pmatrix}+Y \right]_\mathfrak{g} 
+.\end{align*}
+Therefore the isomorphism $\mathfrak{g} \oplus \mathfrak{l} \oplus \mathfrak{r} $ promotes to an isomorphism of Lie algebras $\mathfrak{g} \cong \mathfrak{l} \ltimes \mathfrak{r} $.
+
+
+
+\end{document}

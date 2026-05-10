@@ -1,1 +1,68 @@
+\chapter{Examples}
+
+Chapters 1 and 2 showed us that model categories have a nice homotopy theory. However, \cref{1.1.5} is quite unpleasant to actually check, and moreover actually figuring out what the fibrations, cofibrations, and functorial factorizations should be in a homotopical category is fairly difficult. In this chapter, we present Quillen's small object argument, which is one of the main tools for constructing model categories in nature. We then explore two important examples: the model structures on $\Top $ and $\Ch_{R} $.
+
+\section{Cofibrantly generated model structures}
+
+\subsection{Ordinals, cardinals, and transfinite compositions}
+
+A \emph{limit ordinal} $\lambda $ is an ordinal such that $\lambda \neq 0$ and $\lambda $ is not the successor of any other ordinal. For example, $\omega =\aleph_0$ is a limit ordinal.
+
+\begin{definition}\label{3.1.1}
+	Let $\mathcal{C} $ be a cocomplete category and $\lambda $ an ordinal. A \emph{$\lambda $-sequence} in $\mathcal{C} $ is a colimit-preserving functor $X : \lambda  \to \mathcal{C} $, commonly written as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	X_0\ar[r]  & X_1\ar[r]  & X_2\ar[r]  & \cdots .
+	\end{tikzcd}\]
+	Since $X$ preserves colimits, for all limit ordinals $\gamma <\lambda $, the induced map
+	\[
+		\colim_{\beta <\gamma } X_\beta \to X_\gamma 
+	\]
+	is an isomorphism. We refer to the map $X_0 \to \colim_{\beta <\gamma } X_\beta $ as the \emph{composition} of the $\lambda $-sequence.
+\end{definition}
+
+Of course, if $\lambda =\omega =\aleph_0$, then a $\lambda $-sequence is just a sequence. We now want to define what it means for an object to be \emph{small}. The inuition is that a long enough composition mapping to the object should factor at some point in the composition. To make this notion precise, recall that the cardinality of a set $A$ is the smallest ordinal $\left| A \right| $ such that there is a bijection $\left| A \right| \cong A$. A cardinal is an ordinal $\kappa $ with $\left| \kappa  \right| =\kappa $.
+
+\begin{definition}\label{3.1.2}
+	Let $\gamma $ be a cardinal. An ordinal $\alpha $ is \emph{$\gamma $-filtered} if it is a limit ordinal and, for all $A\subseteq \alpha $ with $\left| A \right| \leq \gamma $, we have $\sup A < \alpha $.
+\end{definition}
+
+\begin{remark}\label{3.1.3}
+	Let $\gamma $ be finite, and let $\alpha $ be $\gamma $-filtered. Then since $\alpha $ is a limit ordinal, we have $\alpha \geq \omega >\gamma $. If $A\subseteq \alpha $ has $\left| A \right| =\gamma $, then $\sup A = \min A$. Since $\alpha $ is a limit ordinal, any minimum is strictly less than $\alpha $. Thus $\gamma $-filtered ordinals for finite $\gamma $ are simply limit ordinals.
+\end{remark}
+
+\begin{definition}\label{3.1.4}
+	Let $\mathcal{C} $ be a cocomplete category, and $\mathcal{D} $ a collection of morphisms in $\mathcal{C} $. Let $a\in \mathcal{C} $ and $\kappa $ a cardinal. We say $x$ is \emph{$\kappa $-small relative to $\mathcal{D} $} if, for all $\kappa $-filtered ordinals $\lambda $ and all $\lambda $-sequences
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_0\ar[r]  & x_1\ar[r]  & x_2\ar[r]  & \cdots 
+	\end{tikzcd}\]
+	such that all $x_\beta \to x_{\beta +1} $, $\beta +1<\gamma $ fall in $\mathcal{D} $, there is an isomorphism of sets
+	\[
+		\colim_{\beta <\gamma } \mathcal{C} (a,x_\beta ) \to \mathcal{C} (a, \colim_{\beta <\gamma } x_\beta )
+	.\]
+	We say $a$ is \emph{small relative to $\mathcal{D} $} if it is $\kappa $-small for some cardinal $\kappa $, and we say it is small if it is small relative to $\mathcal{C} $.
+\end{definition}
+
+\begin{remark}\label{4.1.5}
+	It is important to note the following. Let $\kappa \leq \kappa '$ be cardinals, and let $a$ be $\kappa $-small relative to $\mathcal{D} $. Let $\lambda$ be a $\kappa '$-filtered ordinal. Then it follows immediately by the definition that it is $\kappa $-filtered since $\left| A \right| < \kappa $ implies $\left| A \right| <\kappa '$. Since all $\kappa '$-filtered ordinals are $\kappa $-filtered, we see that $a$ is $\kappa'$-small. Hence $\kappa <\kappa '$ implies all $\kappa $-small objects are $\kappa '$-small.
+\end{remark}
+
+\begin{definition}\label{4.1.6}
+	Let $\mathcal{C} $ be a cocomplete category, $\mathcal{D} $ a collection of morphisms in $\mathcal{C} $, and $a\in \mathcal{C} $. We say $a$ is \emph{finite relative to $\mathcal{D} $} if it is $\kappa $-small relative to $\mathcal{D} $, where $\kappa $ is a finite cardinal. We say $a$ is \emph{finite} if it is finite relative to $\mathcal{C} $.
+\end{definition}
+
+If $a$ is finite, then $\mathcal{C} (a,-)$ commutes with colimits for arbitrary $\lambda $-sequences, where $\lambda $ is a limit ordinal. This follows since the smallest limit ordinal is $\omega $.
+
+\subsection{Relative $I$-cell complexes and the small object argument}
+
+Since small objects intuitively factor sufficiently long composites, we might be able to use them to construct functorial factorizations, one of the main barriers to constructing model structures. We begin with some preliminaries.
+
+\begin{definition}\label{4.1.7}
+	Let $I$ be a collection of morphisms of some category $\mathcal{C} $.
+	\begin{enumerate}
+		\item A morphism is \emph{$I$-injective} if it has the right lifting property with respect to all maps in $I$. The set of $I$-injective maps is denoted $I$-inj.
+		\item A morphism is \emph{$I$-projective} if it has the left lifting property with respect to all maps in $I$. The set of $I$-projective maps is denoted $I$-proj.
+		\item A morphism is an \emph{$I$-cofibration} if it has the left lifting property with respect to all $I$-injective maps. The class of $I$-cofibrations is ($I$-inj)-proj and is denoted $I$-cof.
+		\item A morphism is an \emph{$I$-fibration} if it has the right lifting property with respect to all $I$-projective maps. The class of $I$-fibrations is ($I$-proj)-inj and is denoted $I$-fib.
+	\end{enumerate}
+\end{definition}
 

@@ -1,0 +1,75 @@
+\lecture{18}{Tue 14 Apr 2026 12:30}{K\"ahler manifolds and the hodge star}
+
+\Cref{prp:5.0.2} will get a lot of mileage by proving that $\mathbb{P} ^n$ is K\"ahler. We see that if $X$ is compact, then $[\omega ]\in H^2(X,\mathbb{C} )$ is nonzero. This yields an obstruction to the existence of K\"ahler metrics on compact manifolds: if $H^2(X,\mathbb{C} )\cong 0$, then $X$ is not K\"ahler.
+
+\begin{example}
+	Let $\lambda \in(0,1)$. Then $\mathbb{C} ^n\setminus \left\{ 0 \right\} $ has a $\mathbb{Z} $-action $k\mapsto (x\mapsto \lambda ^kx)$. We consider the quotient manifold by this action. As we saw earlier when considering Hopf manifolds, there is a diffeomorphism $X\coloneqq \mathbb{C} ^n / \mathbb{Z} \cong S^{2n-1} \times S^1$. Then in cohomology,
+	\[
+		H^{\bullet} (X,\mathbb{C} ) \cong H^{\bullet} (S^{2n-1} \times S^1,\mathbb{C} )\cong H^{\bullet} (S^{2n-1} ,\mathbb{C} )\otimes _\mathbb{C} H^{\bullet} (S^1,\mathbb{C} )
+	.\]
+	This is of course the graded tensor product, meaning that the cohomology of spheres tells us that the cohomology is $\mathbb{C} $ concentrated in degrees 0, 1, $2n-1$, and $2n$. We thus see that $X$ cannot be K\"ahler for all $n\neq 1$. When $n=1$, we obtain an elliptic curve, which is projective. We will see that this implies it is K\"ahler.
+\end{example}
+
+
+Let $(W,\left\langle -,- \right\rangle )$ be a $\mathbb{R} $-inner product space. Then the inner product provides a canonical identification $W\cong W^*$ via $w\mapsto \left\langle w,- \right\rangle $. We also have induced inner products on all tensor, symmetric, and exterior powers of $W$, I think by multiplying. Let $\dim W = r$. There are maps
+\[
+	\Lambda ^kW \otimes _\mathbb{R} \Lambda ^{r-k} W \to \Lambda ^rW
+\]
+given by $\alpha \otimes \beta \mapsto \alpha \wedge \beta $. The map is nondegenerate since we can take the compliment of an index. Let $\left\{ e_i \right\}_{1\leq i\leq r} $ be an orthonormal basis for $W$, yielding a volume form $\mathrm{vol} \coloneqq e_1 \wedge \cdots \wedge e_r$ for $\Lambda ^rW$.
+
+
+\begin{definition}\label{dfn:5.0.4}
+	With notation as before, let $\star : \Lambda ^kW \to \Lambda ^{r-k} W$ be the map defined by, for any two $\alpha ,\beta \in \Lambda ^kW$,
+	\[
+		\alpha \wedge \star \beta = \left\langle \alpha ,\beta  \right\rangle \mathrm{vol} 
+	.\]
+	This map is defined as the \emph{Hodge star}.
+\end{definition}
+
+\begin{example}
+	Let $W=\operatorname{span} \left\{ e_1,e_2,e_3,e_4 \right\} $ be orthonormal. Then $\star e_1$ should be something such that, when wedged with $e_1$, yields the volume form. Thus $e_1 = e_2 \wedge e_3 \wedge e_4$. Similarly,
+	\[
+		e_2 = -e_1 \wedge e_3 \wedge e_4,
+	\]
+	\[
+		e_3 = e_1 \wedge e_2 \wedge e_4,
+	\]
+	\[
+		e_4 = -e_1 \wedge e_2 \wedge e_3
+	.\]
+	What about $\star (e_1 \wedge e_2)$? That has to be $e_3 \wedge e_4$. Similarly, $\star (e_2 \wedge e_4) = -e_1 \wedge e_3$. We have $\star (e_1 \wedge e_2 \wedge e_4) = e_3$. Finally, $\star 1=\mathrm{vol} $ and $\star \mathrm{vol} =1$.
+\end{example}
+
+Now the fundamental form of the vector space $W$ live in $\omega \in \Lambda ^2W^*$. This yields an operator wedging with omega:
+\[
+	\wedge \omega : \Lambda ^kW^* \to \Lambda ^{k+2} W^*
+.\]
+This yields an adjoint operator $\Lambda : \Lambda ^{k+2} W^* \to \Lambda ^kW^*$ defined by $\left\langle \alpha \wedge \omega ,\beta  \right\rangle =\left\langle \alpha ,\Lambda \beta  \right\rangle $. We will show that these two operators generate a complex $\mathrm{sl} _2(\mathbb{C} )$-action on $\Lambda ^{\bullet} W^*$. Recall that $\mathrm{sl} _2(\mathbb{C} )$ has generators
+\[
+	h\coloneqq \sigma _z,\qquad e\coloneqq \begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix},\qquad f\coloneqq \begin{pmatrix}
+	0 & 0 \\
+	1 & 0
+	\end{pmatrix}
+\]
+with commutation relations
+\[
+	[h,f]=2f,\qquad [h,e]=2e,\qquad [e,f]=h
+.\]
+Consider a representation on $W$. Then $h$ determines a map $W\to W$, and since we are working complex, it has an eigenvalue $\lambda $. Let $V_\lambda $ span the eigenspace. Then
+\[
+	heV_\lambda -ehV_\lambda =[h,e]V_\lambda =2eV_\lambda 
+.\]
+Thus
+\[
+	\lambda eV_\lambda  + 2eV_\lambda =heV_\lambda =(\lambda +2)V_\lambda 
+.\]
+Thus $eV_\lambda $ is an eigenvector of $h$ with eigenvalue $\lambda +2$, and the same proof shows $fV_\lambda $ is an eigenvector with eigenvalue $\lambda -2$. We can continue this for powers by continuously raising and lowering the eigenvalue.
+
+If this representation is a finite-dimensional irreducible representation, then at some point $e^nV_\lambda =(\lambda +n)V_\lambda $ must go to 0 (or $f^n$), meaning $\lambda \in\mathbb{Z} $. Then the irreducible representation looks as follows. There are 1-dimensional spaces spanned by eigenvalues of $h$:
+\[
+	V_n,V_{n-2} ,\cdots ,V_{-n} 
+.\]
+Each space is 1-dimensional. The $e$ and $f$ operators act as ladder operators. Thus the dimensionality of the representation is the number of such $V$'s.

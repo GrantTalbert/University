@@ -1,0 +1,136 @@
+\lecture{15}{Fri 10 Apr 2026 14:00}{The Weil algebra as the observables of the scalar field theory on $\mathbb{R} $}
+
+The plan to finish this course is as follows. First, we will finish discussing FFTs. This includes Abelian Chern-Simons and correlation functions. Then, we will discuss holomorphic field theories and vertex algebras, showing that 1-complex dimensional CFT can be extracted from factorization algebras.
+
+We now finish our discussion of scalar field theory on $\mathbb{R} $, and the Weil algebra. Recall that the Weil algebra on $\mathbb{R} ^n$ is the associative $\mathbb{R} $-algebra of polynomial differential operators on $\mathbb{R} ^n$, and is
+\[
+	\mathcal{W}_n \cong \left\langle x_1^{\alpha _1} \cdots x_n^{\alpha _n} \partial _1^{\beta _1} \cdots \partial _n^{\beta _n}  \right\rangle 
+.\]
+Today, we work in $n=1$. We recall that we have a sheaf of cochain complexes
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{E} (a,b) : & C^\infty (a,b)\ar[" \Delta +m^2 ", r]  & C^\infty (a,b).
+\end{tikzcd}\]
+We get a corresponding cosheaf of compactly supported sections of the relevant graded vector bundle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathcal{E} _c(a,b): & C^\infty _c(a,b)\ar[" \Delta +m^2 ", r]  & C^\infty _c(a,b).
+\end{tikzcd}\]
+Then we showed that classical observables arise as
+\[
+	\Obs^{cl} (a,b) \cong \Sym \left( \mathcal{E} _c(a,b),\Delta +m^2 \right) 
+.\]
+Here we recall that $\Delta =- \partial _x^2$. Then we had that the physical classical observables arise from homology
+\[
+	H^0(\Obs^{cl} (a,b)) \cong \mathbb{R} [p,q]
+.\]
+There is a pairing on $\mathcal{E} _c$ which yieled the Heisenberg algebra
+\[
+	\mathcal{H} (a,b) = \mathcal{E} _c(a,b)\oplus (\mathbb{C} \hbar) [-1],
+\]
+with bracket $[a,b]=\hbar \left\langle a,b \right\rangle $. Then we argued that the quantum observables arise as
+\[
+	\Obs^q(U) \cong C_{\bullet} (\mathcal{H} (U)) \cong \Sym \left( \mathcal{H} (U)[1], d_{\mathrm{CE} } +(\Delta +m^2) \right) 
+.\]
+We then showed that $H^0(\Obs^q)$ is a locally constant pre factorization algebra valued in vector spaces, by constructing a filtration on $\Obs^q$ by symmetric degree, looked at the associated graded, and identified $\mathrm{gr} (\Obs^q(U)) \cong \Obs^{cl} (U)[\hbar ]$. The point here is that the quantum case has an extra Chevalley-Eilenberg differential which encodes the $\hbar $-interaction. This then showed
+\[
+	H^0(\Obs^q(U)) \cong H^0(\Obs^{cl} (U))[\hbar ]
+.\]
+Then to check local constancy, we need to check that inclusions of open intervals induce isomorphisms in cohomology. Since we aleady know this happens in classical observables, the statement follows.
+
+Recall that locally constant factorization algebras on $\mathbb{R} $ correspond to associative algebras. We now consider what the relevant associative algebra we obtain is. To consider this, we first talk about derivations on prefactorization algebras. This is important since the algebras \emph{should} be parameterized by mass, but the algebras turn out to all be isomorphic, regardless of $m$. To recover mass, we see that it shows up in the Hamiltonian, via derivations.
+
+\begin{definition}\label{dfn:5.0.3}
+	Let $\mathcal{F} $ be a prefactorization algebra on a manifold $M$ valued in a concrete symmetric monoidal category. Then a \emph{derivation} $D$ of $\mathcal{F} $ is a collection of maps $D_U : \mathcal{F}(U)  \to \mathcal{F}(U) $ for all open sets $U$ satisfying the following property: For a structure map $m : \mathcal{F} (U_1) \otimes \cdots \otimes \mathcal{F} (U_r) \to \mathcal{F} (V)$,
+			\[
+				D_V(m)(\alpha _1, \ldots ,\alpha _r) = \sum_{j=1}^{r} (-1)^{\sum_{1\leq i<j } \left| \alpha _i \right| } m\left( \alpha _1, \ldots D_{U_j} (\alpha _j), \ldots ,\alpha _r \right) 
+			.\]
+\end{definition}
+In our FFT on $\mathbb{R} $, note that $[\partial _x, \Delta +m^2]=0$. We claim that that this extend to a pFA derivation as follows: if $f_i\in C^\infty_c(U_1)$ and $g_i\in C^\infty _c(U_2)$. Let $\alpha =\prod_{i} f_i$ and $\beta = \prod_{i} g_i$. Then if $U_1, U_2 \subseteq V$ and $U_1 \cap U_2=\varnothing $, then the derivation property implies that
+\[
+	\frac{\partial }{\partial x} (\alpha \beta ) = \alpha \frac{\partial }{\partial x} \beta + \left( \frac{\partial }{\partial x} \alpha  \right) \beta 
+.\]
+Thus $\partial _x$ is a derivation on the prefactorization algebra $H^0(\Obs^q)$. It will be more convenient to work with the derivation $-\partial _x$ to get some signs right.
+
+Now denote the associative algebra of $H^0(\Obs^q)$ by $A_m$. We will show that the derivation $-\partial _x$ on $H^0(\Obs^q)$ induces a derivation of the form $H_m = \frac{1}{2\hbar }( p^2 -m^2q^2)$.
+\begin{terminology}\label{5.0.4}
+	An \emph{inner} derivation $d$ on an associative $R$-algebra $A$ is a map of the form $d=[x,-]$ for some $x\in A$, and $[-,-]$ the commutator. We usually write $d=D_x$.
+\end{terminology}
+
+Consider the following identity with the \emph{commutator} on an associative algebra.
+\[
+	D_x(a_1 \cdots a_n) = [x,a_1 \cdots a_n] = \sum_{j=1}^{n} a_1 \cdots [x,a_j] \cdots a_n
+.\]
+This shows that all inner derivations are derivations.
+
+
+\begin{proposition}\label{prp:5.0.5}
+	The associative algebra $A_m$ is the Weil algebra $\mathcal{W}$ generated by $p,q, \hbar $, with the relation that $[p,q]=\hbar $, and all other brackets are 0. Additionally, the derivation corresponding to $-\partial _x$ is the inner derivation
+	\[
+		H_m = \frac{1}{2\hbar } \left( p^2 - m^2q^2 \right) 
+	.\]
+	I believe there is a factor of $i$ being eaten in $q$, hence the sign.
+\end{proposition}
+
+Recall that if $\mathfrak{g} $ is a Lie algebra, then for any open interval $(a,b)$, we have a dgla $\mathfrak{g} \otimes \Omega ^{\bullet} _c(a,b)$. Then we had a prefactorization algebra $\mathfrak{g} ^\mathbb{R} $ mapping $(a,b)\mapsto C_{\bullet} (\mathfrak{g} \otimes \Omega ^{\bullet} _c(a,b),d_{\mathrm{CE} } +\mathrm{d}_{\mathrm{dR} } )$. We showed the cohomology of this was a locally constant prefactorization lgebra, and that the corresponding associative algebra was $U\mathfrak{g} $. In the proof, we assigned to each $x\in \mathfrak{g} $ a bump function $x\otimes f\mathrm{d} t$, and what we had to verify was that in cohomology, the commutators agreed with that of $U\mathfrak{g} $. In particular, $[x,y]_{\mathfrak{g} }\otimes f\mathrm{d} t = [x\otimes f\mathrm{d} t,y\otimes f\mathrm{d} t]_{U\mathfrak{g} } $. We did this by choosing 3 disjoint intervals, and working with their relations.
+
+Our proof proceeds similarly. Recall
+\[
+	\Obs^q = \Sym \left( 
+		\begin{tikzcd}
+			 C^\infty _c(a,b)\ar[" \Delta +m^2 ", r] & C^\infty _c(a,b)[\hbar ]
+		\end{tikzcd}
+	\right) ,
+\]
+with differential $d_{\mathrm{CE} } +(\Delta +m^2)$. We defined functions
+\[
+	\phi _q(x) = \frac{1}{2} \left( e^{mx} +e^{-mx} \right),\qquad \phi _p(x) = \frac{1}{2m} \left( e^{mx} -e^{-mx}  \right) ,
+\]
+both of which are killed by $\Delta +m^2$. We have $\partial _x\phi _p=\phi _q$. We note that $\phi _q$ is an even function and $\phi _p$ is odd. Choose an even function $f\in C^\infty _c(-1/2, 1/2)$ that satisfies
+\[
+	\int_{\mathbb{R} } f\phi _q\dd x=1
+.\]
+It follows that
+\[
+	\int_{\mathbb{R} } f\phi _p\dd x=0
+.\]
+Let $f_t(x)=f(x-t)$ be defined over $C^\infty _c(t-1/2, t+1/2)$. Then define observables
+\[
+	Q_t=f_t,\qquad P_t=-\partial _x f_t
+.\]
+We are taking $Q_t,P_t$ to be degree 0, meaning they sit in $C^\infty _c(a,b)[\hbar ]$. To show these are observables, they need to be cocycles in the symmetric algebra. To see this, $d_{\mathrm{CE} } $ kills this since it takes brackets, and idk? (maybe since they only have 1 term?) But there is no higher differential in the original chain complex, so they die here as well. So these descend to cohomology classes.
+
+Recall that the cohomology classes $[P_0]$ and $[Q_0]$ generate $\mathbb{R} [p,q]$. Since $\Obs^{cl} $ is the associated graded of $\Obs^{q} $, it's also true that $[P_0],[Q_0]$ generate $H^0(\Obs^q(U))$. The book then proves $[[P_0],[Q_0]]=\hbar $. The proof is similar to that of $U\mathfrak{g} $.
+
+Now we need to identify the Hamiltonian
+\[
+	H_m = \left[ \frac{1}{2} [P_0]^2 - m^2[Q_0]^2,- \right] 
+\]
+with $-\partial _x$. To see this,
+\[
+	-\partial _xQ_t = -\partial _x f_t \eqqcolon P_t = \frac{\mathrm{d}}{\mathrm{d}t} f(x-t)=\frac{\mathrm{d}}{\mathrm{d}t} Q_t
+.\]
+The non-obvious step probably comes from even-ness or odd-ness, so something like $\partial _xf(x-t) = -\partial _t f(x-t)$. Maybe write $x(t)$ and $t(x)$ to show this. Also $-\partial _xP_t = \partial _x^2 f_t$.
+
+Recall that in cohomology, the image of $\Delta+m^2$ is trivial (use $d_{CE} =0$ on the relevant degree which i think is true here). We get that
+\[
+	(\Delta +m^2)[f_t] = 0 \implies -\partial _x^2[f_t] + m^2[f_t] = 0 \implies \partial _x^2[f_t] = m^2[f_t]
+.\]
+Thus
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} [P_t] = [\partial _x^2f_t] = [m^2f_t]
+.\]
+We define $H_m$ to be the map
+\[
+	H_m[P_0] = m^2[Q_0],\qquad H_m[Q_0] = [P_0]
+.\]
+This is a definition, since $[P_0],[Q_0]$ are generators of $H^0(\Obs^q)$. If we assume part (1) [commutator identities], then we can show this is implemented precisely by the Hamiltonian $H_m$ we found. It's enough to check
+\[
+	\frac{1}{2\hbar } \left[ [P_0]^2-m^2[Q_0]^2,[Q_0] \right] =[P_0],
+\]
+\[
+	\frac{1}{2\hbar } \left[ [P_0]^2-m^2[Q_0]^2,[P_0] \right] =m^2[Q_0],
+.\]
+This is immediate by the commutator identities and $[x,x]=0$. We check one, and use the identity for commutators on associative algebras:
+\[
+	\frac{1}{2\hbar } \left[ [P_0]^2,[Q_0] \right] =\frac{1}{2\hbar } \left([P_0][[P_0],[Q_0]] + [P_0][[P_0],[Q_0]]\right)=\frac{1}{2\hbar } 2\hbar[P_0]=[P_0]
+.\]
+Using the idea that $-\partial _x = \partial _t$, we see that the Hamiltonian kinda corresponds to the generator of time evolution.

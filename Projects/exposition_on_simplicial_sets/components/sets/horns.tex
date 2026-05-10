@@ -91,7 +91,7 @@ Previously in \cref{2.1.6}, we defined the \emph{face} of the standard $n$-simpl
 \begin{definition}\label{3.4.8}
     Let $d^i$ be the image of the coface map $[n-1]\to[n]$ under the Yoneda embedding. More precisely, let $d^i : \Delta^{n-1}\to\Delta^n$ denote precomposition by the coface map $d^i:[n-1]\to[n]$.
     \begin{enumerate}
-        \item The $i$th face $\partial_i\Delta^n$ of the simplical set $\Delta^n$ is the simplicial subset $\im d^i_\bullet$.
+        \item The $i$th face $\partial_i\Delta^n$ of the simplical set $\Delta^n$ is the simplicial subset $\im d^i_\bullet \subseteq \Delta ^n$.
         \item The \emph{boundary} $\partial\Delta^n$ of the standard $n$-simplicial set $\Delta^n$, also called the \emph{simplicial $n$-sphere}, is the simplicial subset
         \[
         \partial\Delta^n \coloneqq\bigcup_{i\in[n]} \partial_i\Delta^n=\bigcup_{i\in[n]}\im d^i_\bullet \subseteq\Delta^n.
@@ -172,7 +172,7 @@ Previously in \cref{2.1.6}, we defined the \emph{face} of the standard $n$-simpl
     \end{enumerate}
 \end{corollary}
 \begin{proof}
-    Recall that $\sSet=\Set^{\BD\opp}$ is a functor category, and since $\Set$ is complete and cocomplete, \cref{3.4.11} and its dual apply. In particular, any diagram $F$ in $\sSet$ must satisfy $(\lim F)_n=\lim (\mathrm{ev}_n\circ F)$. This tells us that limit in $\sSet$ are computed levelwise, meaning in particular
+    Recall that $\sSet=\Set^{\BD\opp}$ is a functor category, and since $\Set$ is complete and cocomplete, \cref{3.4.11} and its dual apply. In particular, any diagram $F$ in $\sSet$ must satisfy $(\lim F)_n=\lim (\mathrm{ev}_n\circ F)$. This tells us that limits in $\sSet$ are computed levelwise, meaning in particular
     \begin{enumerate}
         \item Let $\alpha : \X\to\Y$ be a morphism of simplicial sets. The \emph{limit} definition of the image $\im\alpha_\bullet$ (not \cref{3.4.4}) must satisfy $(\im\alpha)_n=\im(\alpha_n)$, where the second is a limit in $\Set$. Note that this is precisely \cref{3.4.4}, and thus we have that our image in $\sSet$ can be regarded as a limit. Since $\Set$ admits canonical decompositions for morphisms, there is an isomorphism $\im(\alpha_n)\cong\coim(\alpha_n)$. The coimage is a colimit, and thus we may regard the image in $\sSet$ as isomorphic to a colimit.
         \item Let $\X,\Y$ be simplicial sets whose simplicial operators agree on their intersection. Because their simplicial operators agree, it is easy to see that $\X\cap\Y$ is a subsimplicial set of both $\X$ and $\Y$, with the intersection given by levelwise intersection. Note that the pushout $Z_\bullet$ of $\X$ and $\Y$ along the canonical inclusions $\X\cap\Y\hookrightarrow \X,\Y$ can be computed levelwise, as indicated in the diagram
@@ -239,8 +239,8 @@ We close this chapter by establishing a collection of important facts about horn
 	Since the epi-mono factorization in $\boldsymbol{\Delta} $ given by \cref{2.3.4} is unique, and since elements of $\partial _i\Delta^n$ are simply given by postcomposing $\Delta^{n-1} $ by a coface, uniqueness gives an isomorphism $\partial_i\Delta^n\cong\Delta^{n-1} $ given by simply removing the coface from the composite. Applying \cref{3.4.17}, this gives us the fact that a morphism of simplicial sets $\partial _i\Delta^n \to X_{\bullet} $ is a choice of an $(n-1)$-simplex $\tau\in X_{n-1} $, and mapping $d^i \mapsto \tau$.
 \end{remark}
 
-\begin{terminology}
-	In view of \cref{3.4.16,3.4.17,3.4.18}, we will often refer to morphisms $\Delta^n \to X_{\bullet} $ as $n$-simplices of $X_{\bullet} $, and will refer to morphisms $d^j\mapsto \tau\in X_n$ as \emph{faces} of $X_{\bullet} $.
+\begin{terminology}\label{3.4.19}
+	In view of \cref{3.4.16,3.4.17,3.4.18}, we will often refer to morphisms $\Delta^n \to X_{\bullet} $ as $n$-simplices of $X_{\bullet} $.
 \end{terminology}
 
 

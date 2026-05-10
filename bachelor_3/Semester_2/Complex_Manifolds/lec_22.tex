@@ -1,0 +1,87 @@
+\lecture{22}{Tue 28 Apr 2026 12:30}{Hodge theory and stuff}
+
+\begin{theorem}\label{thm:jsak}
+	If $(X,g)$ is K\"ahler, then
+	\[
+		\Delta_{\partial } =\Delta _{\overline{\partial } } =\frac{1}{2} \Delta _{\dd } 
+	.\]
+\end{theorem}
+\begin{proposition}\label{prp:lkasn}
+	Let $(X,g)$ K\"ahler. Then $\alpha $ is $\dd $-harmonic iff $\left\| \alpha  \right\| $ is minimal in its cohomology class.
+\end{proposition}
+
+\begin{theorem}[Hodge]\label{thm:Hodge}
+	Let $(X,g)$ a compact complex manifold with a compatible metric. Then the 3 harmonic spaces of harmonic forms $\mathcal{H}_{\dd} \subseteq \mathcal{A} ^{k} (X)$, $\mathcal{H} ^{p,q}_{\overline{\partial } } \subseteq \mathcal{A} ^{p,q} (X)$, and $\mathcal{H}_{\partial }^{p,q} \subseteq \mathcal{A} ^{p,q} (X)$ are finite dimensional. Moreover, there are orthogonality relations
+	\[
+		\mathcal{A} ^{k} (X) = \dd \mathcal{A} ^{k-1} (X)\oplus \mathcal{H} ^k_{\dd } (X) \oplus \dd ^*\mathcal{A} ^{k+1} (X)
+	\]
+	\[
+		\mathcal{A} ^{p,q}(X) = \partial \mathcal{A} ^{p-1,q} (X) \oplus \mathcal{H} ^{p,q} _{\partial } \oplus \partial ^* \mathcal{A} ^{p+1,q} (X)
+	\]
+	\[
+		\mathcal{A} ^{p,q} (X) = \overline{\partial } \mathcal{A} ^{p,q-1} (X)\oplus \mathcal{H} ^{p,q}_{\overline{\partial } } \oplus \overline{\partial }^* \mathcal{A} ^{p,q+1} (X)
+	.\]
+\end{theorem}
+
+Using Hodge's theorem, we compute
+
+\begin{lemma}\label{lma:Kjnas}
+	\[
+		\Ker \left( \dd : \mathcal{A} ^k(X) \to \mathcal{A} ^{k+1} (X) \right) =\mathcal{H} _{\dd } ^k(X) \oplus \dd \mathcal{A} ^{k-1} 
+	.\]
+	The analogous statements hold for $\partial ,\overline{\partial } $.
+\end{lemma}
+
+\begin{corollary}\label{cor:klas}
+	If $(X,g)$ is a compact Hermitian manifold, then there are canonical isomorphisms
+	\[
+		\mathcal{H} ^k_{\dd } (X,g) \cong H^k_{\mathrm{dR} } (X) \cong H^k_{\Sing } (X,\mathbb{R} )
+	\]
+	\[
+		\mathcal{H} ^{p,q}_{\overline{\partial } } (X,g) \cong H^{p,q}_{\overline{\partial } } (X) \cong H^q_{\Shf } (X,\Omega ^p_{\mathrm{hol} } )
+	\]
+	\[
+		\mathcal{H} ^{p,q} _{\partial } (X,g)\cong H^{p,q} _{\partial } (X) \cong H^p_{\Shf } (X,\Omega ^p_{\mathrm{antihol} } )
+	.\]
+\end{corollary}
+
+In particular, the Hodge theorem implies that each cohomology class on a K\"ahler manifold has a canonical harmonic representative.
+
+\begin{theorem}\label{thm:awoooooooooo}
+	Let $(X,g)$ be a compact K\"ahler manifold. Then there is a decomposition of de Rham = singular cohomology
+	\[
+		H^k(X,\mathbb{C} ) \cong \bigoplus_{p,q\geq 0}^{p+q=k} H^{p,q} (X)
+	.\]
+	This is independent of the metric. Additionally,
+	\[
+		H^{q,p} (X) = \overline{H^{p,q} (X)} 
+	.\]
+	\[
+		H^{p,q} (X) \cong H^{n-p,n-q} (X)
+	.\]
+\end{theorem}
+\begin{proof}
+	Fix a K\"ahler metric $g$ on $X$. We get isomorphisms $\mathcal{H} ^{p,q}_{\overline{\partial } (X)} \cong H^{p,q}_{\overline{\partial } } (X)$, $\mathcal{H} ^{p,q}_{\partial } (X) \cong H^{p,q}_{\partial } (X)$, and $\mathcal{H} ^{k}_{\dd } (X) \cong H^k(X)$. Take $\Delta _{\dd } =2 \Delta _{\overline{\partial } } =2\Delta _{\partial } $. Take $\alpha \in \mathcal{H} ^k_{\dd } (X)$. Then
+	\[
+		\alpha =\sum_{p+q=k} \alpha ^{p,q} ,\qquad \alpha ^{p,q} \in \mathcal{A} ^{p,q} (X)
+	.\]
+	Then
+	\[
+		0=\Delta _{\dd } \alpha =\sum_{p+q=k} \Delta _{\dd } \alpha ^{p,q} \implies \Delta _{\dd } \alpha ^{p,q} =0 \implies \Delta _{\overline{\partial }} \alpha ^{p,q} =0
+	.\]
+	Thus the first statement follows. Now we show that this isomorphism is independent of $g$.
+\end{proof}
+
+This symmetry allows us to organize the cohomology into nice diagrams. Let $h^{p,q} \coloneqq \dim_\mathbb{C} H^{p,q} (X)$. Let $\dim_\mathbb{C} X=n$. One constructs a diamond
+\[\begin{tikzcd}
+	& {h^{n,n}} & \\
+	{h^{n/2,0}} && {h^{0,n/2}} \\
+	& {h^{0,0}}
+	\arrow[no head, from=2-1, to=1-2]
+	\arrow[no head, from=2-3, to=1-2]
+	\arrow[no head, from=2-3, to=2-1]
+	\arrow[no head, from=3-2, to=1-2]
+	\arrow[no head, from=3-2, to=2-1]
+	\arrow[no head, from=3-2, to=2-3]
+\end{tikzcd}\]
+This diamond is invariant under horizontal and vertical flips, and thus under 180 degree rotations. This is called the Hodge diamond.

@@ -1,0 +1,51 @@
+\lecture{10}{Thu 26 Mar 2026 09:34}{Analytic continuation}
+
+Let $f$ be holomorphic on $V\subseteq \mathbb{C} $ and let $U\subseteq \mathbb{C} $ be a connected open set which properly contains $V$. The question is whether $f$ extends to a holomorphic function on $U$. In general it is impossible to say; it depends on $f$, $V$, and $U$. The principle of analytic continuation tells us that if $f$ \emph{does} extend, then the extension is unique.
+
+\begin{proposition}\label{prp:salkds}
+	Let $U$ be a connected open subset of $\mathbb{C} $, and let $f,g : U \to \mathbb{C} $ be holomorphic. If there is an infinite compact subset $K\subseteq U$ such that $f|K=g|K$, then $f=g$.
+\end{proposition}
+
+In particular, let $h$ be holomorphic on some open $V$, and choose a compact subset $K\subseteq V$. If $f,g$ are holomorphic extensions of $h$ to a connected open set $U$ containing $V$, then $f|V=g|V=h$. In particular, $f|K=g|K$, implying that $f=g$. This statement is absolutely false for $C^\infty $ functions: suppose we have a function $h : V \to \mathbb{C} $ compactly supported in $V$. Then one can extend it to $f$ on $U$ with $V\subseteq U$ by taking either $f|(U\setminus V)=0$, or by taking $f$ to be some bump function supported in $U$.
+
+We can generalize somewhat.
+
+\begin{lemma}\label{lma:k d}
+	Let $D$ be an open ball of radius $r$ about $z_0$, and suppose $h$ is holomorphic on $D$. Suppose that $\left\{ z_n \right\}_{n\geq 1} $ is a sequence in $d$ with $z_n\to z_0$ such that $z_n \neq z_0$ for infinitely many $n$. Assume that $h(z_n)=0$ for $n\geq 1$. Then $h=0$.
+\end{lemma}
+\begin{proof}
+	Since $h\in \mathcal{O} (D)$, we have $h\in C^0(D)$, and thus
+	\[
+		h\left( \lim_{n\to \infty } z_n \right) =\lim_{n\to \infty } h(z_n)=\lim_{n\to \infty } 0=0
+	.\]
+	We now have a countable set $Z\coloneqq \left\{ z_n \right\}_{n\geq 0} \subseteq D$ such that $h|Z=0$.
+
+	Assume for contradiction that in a neighborhood of $z_0$, we can write
+	\[
+		h(z)=\sum_{n\geq 0} a_n(z-z_0)^n,\qquad z\in D
+	\]
+	for $a_n$ not all zero. Let $m$ be the smallest integer such that $a_m \neq 0$. We then write
+	\[
+		h(z) = \sum_{n\geq m} a_n(z-z_0)^{n} =(z-z_0)^m \sum_{n\geq m}a_{n} (z-z_0)^{n-m}
+	.\]
+	Write
+	\[
+		\ell (z)=\sum_{n\geq m} a_n(z-z_0)^{n-m} 
+	.\]
+	Then $\ell $ is holomorphic on some neighborhood of $z_0$. Note also that $\ell (z_0)=a_m\neq 0$. Continuity implies that there is $\varepsilon >0$ sufficiently small that $\ell $ is nonzero in an $\varepsilon $-ball $D_\varepsilon (z_0)$ of $z_0$. By definition of convergence, there is $N$ sufficiently large such that $n\geq N$ implies $z_n\in D_\varepsilon (z_0)$. Then
+	\[
+		h(z_0) = (z_n - z_0)^m \ell (z_n)
+	.\]
+	We have $z_n \neq z_0$ for infinitely many $n$, so we can choose $n\geq N$ such that $z_n \neq z_0$. Thus the first term is nonzero. By the same logic, $\ell (z_n)$ is nonzero since at least one coefficient $a_m$ is nonzero. Thus $h(z_n)$ is nonzero, a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of analytic continuation]
+	Let $U$ be connected, $K\subseteq U$ an infinite compact set, and $f,g\in \mathcal{O} (U)$ such that $f|K=g|K$. Let $h=f-g$ such that $h|K=0$; it suffices to show $h=0$.
+
+	Let $A\subseteq U$ be the set of all $z_0\in U$ such that $h$ vanishes in some neighborhood of $z_0$; by definition $A$ is open. Let $B = U \setminus A$. We show that $B$ is open and $A$ is nonempty. With these statements shown, if $B$ were nonempty, we then realize $U$ as a union $A \cup B$ of disjoint nonempty open sets, contradicting connectedness. It suffices to show $A$ is closed.
+
+	We first show $A$ is closed. It suffices to show that if $\left\{ z_n \right\}$ is a sequence with $z_n \to z_0$, $z_0\in U$, then $z_0\in A$. Sketch: choose some $D_\varepsilon (z_0)\subseteq U$, choose $z_n$ in $K$, apply lemma, and get $h|D_\varepsilon (z_0)=0$.
+
+	Finally, we use the fact that compactness and sequential compactness coencide in metric spaces. Choose a sequence in $K$; we have $h|\left\{ x_n \right\}_{n\geq 0} $. There is a convergent subsequence, which converges to some $z_0$. By the lemma, $h(z_0)=0$. 
+\end{proof}
+

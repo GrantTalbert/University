@@ -1,0 +1,74 @@
+\lecture{17}{Thu 09 Apr 2026 12:30}{\v{C}ech cohomology, continued}
+
+\begin{theorem}[\v{C}ech]\label{thm:4.2.5}
+	If $H^n(\left\{ U_{i_0}  \right\} ,\mathcal{F} ) = 0$ for $n>0$ for all $U_{i_j} \in \mathcal{U} $, then
+	\[
+		H^{\bullet} (\check{C}(\mathcal{U} ,\mathcal{F} ))=H^{\bullet}_{\Shf } (X,\mathcal{F} )
+	.\]
+	This can always be done on manifolds. For example, give a manifold a Riemannian metric, and take geodesic balls.
+\end{theorem}
+
+Let $X$ be a complex manifold. We consider the relation $H^1(X,\mathcal{O} _X^*)$ and the Picard group $\operatorname{Pic} (X)$, which is
+\[
+	\operatorname{Pic} (X) = \text{Group of isomorphism classes of holomorphic line bundles on } X
+.\]
+The group operation is the tensor product. We generally abuse notation and identify a line bundle with its sheaf of sections. The inverse is given by taking the dual: $\mathcal{L} \otimes_{\mathcal{O} _X} \mathcal{L} ^* \cong \End_{\mathcal{O} _X}(\mathcal{L} )$ has a canonical global section given by the identity section $s_x = 1_{\mathcal{L}} $. This gives a global, nowhere vanishing frame via a single section, which yields a global trivialization of $\mathcal{L} \otimes _{\mathcal{O} _X} \mathcal{L} ^* \cong X\times \mathbb{R} $. It is simply the trivial bundle.
+
+We sketch why $H^1_{\Shf } (X,\mathcal{O} _X^*) \cong \operatorname{Pic} (X)$. Choose a cover $\mathcal{U} =\left\{ U_i \right\} _{i\in I} $ which trivializes a line bundle $\mathcal{L} $; i.e. $\mathcal{L} |U_i \cong \mathcal{O} _X$. Trivializations of $\mathcal{L} $ on $U_i$ correspond to holomorphic frams $s_i\in \Gamma (U_i,\mathcal{L} )$. Based on this, we can define the cocycle $g_{ij} =\frac{s_i}{s_j} $, where we are defining this fraction as the proportionality of the function defining $s_i$ and $s_j$ on $U_i \cap U_j$.
+
+Since $\mathcal{O} _X^*$ is a multiplicative group, the differential $(\delta g)_{ijk} $ of a cocycle is given by
+\[
+	(\delta g)_{ijk} =g_{jk} g_{ik} ^{-1} g_{ij} =1,
+\]
+since $g_{ij} g_{jk} =g_{ik} $. Thus $g_{ij} $ is a cocycle in the \v{C}ech cohomology $ \check{H}^1(\mathcal{U} ,\mathcal{O} _X^*)$. We show that this is invariant of our choice of frame. When we switch frames, we multiply $s_i$ by a nonvanishing function. Then there is something and it works. The point is that it descends to a well-defined cohomology class. A converse can be shown using some facts of colimits, so we get that $H^1$ is in correspondence with cocycles, which is in correspondence with nonvanishing holomorphic functions, since that is what a cocycle (of a line bundle) is.
+
+Consider the long exact sequence for the global sections functor, which we write as $\Gamma _X$: if
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathcal{F} \ar[r]  & \mathcal{G} \ar[r]  & \mathcal{H} 
+\end{tikzcd}\]
+is exact, then there is an exact triangle
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+H^{\bullet}_{\Shf } (X,\mathcal{F} )\ar[r]  & H^{\bullet}_{\Shf } (X,\mathcal{G} )\ar[dl]  \\
+H^{\bullet} _{\Shf } (X,\mathcal{H} )\ar[" +1 ", u]  & 
+\end{tikzcd}\]
+In particular, there is a long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & H^0_{\Shf } (X,\mathbb{Z} _X)\ar[r]  & H^0_{\Shf } (X,\mathcal{O} _X)\ar[r]  & H^0_{\Shf } (X,\mathcal{O} _X^*)\ar[dlll]  \\
+H^1_{\Shf } (X,\mathbb{Z} _X)\ar[r]  & H^1_{\Shf } (X,\mathcal{O} _X)\ar[r]  & H^1_{\Shf } (X,\mathcal{O} _X^*)\ar[r]  & \cdots .
+\end{tikzcd}\]
+We apply this to $X=\mathbb{P} ^1 \cong S^2$. Since it is connected, since $H^{\bullet} _{\Shf } (X,\mathbb{Z} _X) \cong H^{\bullet} _{\Sing } (X,\mathbb{Z} )$, we know $H^{\bullet}_{\Shf } (X,\mathbb{Z} _X)$. We recall by \cref{4.2.4} that the cohomology $H^{\bullet} _{\Shf } (\mathbb{P} ^1,\mathcal{O} _X)$ is $\mathbb{C} $ concentrated in degree 0. We see something similar for $\mathcal{O} _X^*$. We then obtain a long exact sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0\ar[r]  & \mathbb{Z} \ar[r]  & \mathbb{C} \ar[r]  & \mathbb{C} ^*\ar[dll]  \\
+	 & 0\ar[r]  & 0\ar[r]  & \operatorname{Pic} (X)\ar[dll] \\
+	 & \mathbb{Z} \ar[r] & 0 \ar[r] & \cdots .
+\end{tikzcd}\]
+We are trying to investigate $\operatorname{Pic} (X)$. Exactness implies $\operatorname{Pic} (X)\cong \mathbb{Z} $. One can construct an explicit isomorphism using Chern classes: $c_1(\mathcal{O} _{\mathbb{P} ^1} (1))=1$, and we find that $\mathcal{O} _{\mathbb{P} ^1} (1)$ generates the Picard group. This classifies holomorphic line bundles on $\mathbb{P} ^1$.
+
+
+
+
+
+
+\chapter{idk but we're done sheaf}
+
+Recall: a K\"ahler manifold is a complex manifold $X$, where we write the almost complex structure as $J$. This must carry a compatible metric, meaning $J$ is an isometry: $g\circ (J\times J) = g$. Then $X$ is K\"ahler if the fundamental form $\omega =g\circ (J\times 1)$ is closed. It turns out that K\"ahler manifolds have nice cohomology, so people have spent a lot of time looking for manifolds with very specific metrics. K\"ahler manifolds are the roughest type of this metric.
+For example,
+\[
+	\omega =\frac{i}{2} \sum_{i=1}^{n} \dd z_i \wedge \dd \overline{z} _i
+\]
+is a closed fundamental form on $\mathbb{C} ^n$. The flat metric on $\mathbb{C} ^n$ is translation invariant. Recall that the metric is a section of $\Sym ^2T^*X$. In particular, it can be pulled back. The notion of ``translation invariance'' here means that it pulls back to itself along translations. Complex tori are also K\"ahler, by passing $g$ along the covering space or something.
+
+\begin{example}
+	Let $X$ be a 1-dimensional complex manifold. Then \emph{any} metric is K\"ahler, since the fundamental form is a (real) 2-form, and thus necessarily is killed by the differential.
+\end{example}
+
+\begin{proposition}\label{prp:5.0.2}
+	Let $X$ be K\"ahler, and let $i : Y \hookrightarrow X$ be a complex submanifold of $X$. Then $Y$ has the pullback metric induced by the K\"ahler metric $g_X$ on $X$. This metric is Kahler.
+\end{proposition}
+\begin{proof}
+	We simply have $g_Y = g_X|Y$. In particular, $\omega _Y = i^*\omega _X$. Then
+	\[
+		\dd \omega _Y = \dd i^*\omega _X = i^*\dd \omega _X = 0
+	.\]
+\end{proof}
+

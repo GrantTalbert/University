@@ -1,0 +1,46 @@
+\lecture{9}{Tue 17 Mar 2026 10:58}{I took notes today}
+
+We want to decompose Lie algebras into more understandable components. The main tool we will use is the representation theory of Lie algebras, and we will largely consider the adjoint representation.
+
+Let $G$ a Lie group. A representation of $G$ on a vector space $V$ is a Lie group homomorphism $\rho : G\to \Aut(V) $, where we note that $\Aut(V) $ is a Lie group: it's group structure is composition, and its manifold structure is given by viewing it as a vector space, choosing a basis, and using the isomorphism to $\mathbb{R} ^n$ to define a smooth structure. Given $g\in G$ and $v\in V$, we denote $\rho (g)(v)$ by $g\cdot v$.
+
+For example, consider the action of $\operatorname{SO} (3)$ on $\mathbb{R} ^3$ by rotation. Since each $R\in\operatorname{SO} (3)$ is an automorphism of $\mathbb{R} ^3$, we have $\operatorname{SO} (3) \subseteq \Aut(\mathbb{R} ^3) $ is a Lie subgroup, and the inclusion is a Lie group homomorphism.
+
+Now let $\mathfrak{g} $ be the Lie algebra of a Lie group $G$. Let $X\in \mathfrak{g} $, and let $\gamma (t)$ be a path in $G$ with $\gamma '(0)=X$. Let $G$ act on a vector space $V$, and let the action be given by $\rho : G \to \Aut(V) $. Then we define the action $\theta $ of the Lie algebra $\mathfrak{g} $ on the vector space $V$ to be
+\[
+	X\cdot v \coloneqq \left.\frac{\mathrm{d}}{\mathrm{d}t} \right|_{t=0} (\gamma (t)\cdot v)
+.\]
+This yields the commutative diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\mathfrak{g} \ar[" \theta  ", r] \ar[" \exp  "', d]  & \End(V) =\mathfrak{gl} (V)\ar[" \exp  ", d]  \\
+G\ar[" \rho  "', r]  & \Aut(V) .
+\end{tikzcd}\]
+Note that this representation commutes with the Lie bracket. This motivates a more general definition: a representation of a Lie algebra $\mathfrak{g} $ is a Lie algebra homomorphism $\theta : \mathfrak{g}  \to \mathfrak{gl}_n(V)$. Note that the Lie algebra homomorphism condition implies that $\rho [X,Y]=[\rho (X),\rho (Y)]$.
+
+We have a fairly canonical representation $\mathrm{ad} : \mathfrak{g}  \to \End(\mathfrak{g} ) $ given by the adjoint map:
+\[
+	\mathrm{ad} : X \mapsto \mathrm{ad}_X = [X,-]
+.\]
+Recall that Jacobi's identity implies $\mathrm{ad}_{[X,Y]} =[\mathrm{ad} _X,\mathrm{ad} _Y]$, hence this is a Lie algebra homomorphism. We call this the \emph{adjoint representation} of $\mathfrak{g} $.
+
+We would like to regard $\mathfrak{g} $ as a representation of itself by breaking it into smaller pieces.
+
+A vector space $V$ together with a representation of $\mathfrak{g} $ on $V$ is called a \emph{$\mathfrak{g} $-module}. Explicitly, this means $[X,Y]v=X(Yv)-Y(Xv)$. We will generally represent a representation by the name of the vector space. This allows us to consider a direct sum of representations: given representations $V,W$ of $\mathfrak{g}$, define the representation of $\mathfrak{g} $ on $V\oplus W$ as
+\[
+	X\cdot (v,w) = (X\cdot v,X\cdot w)
+.\]
+Given a subspace $W\subseteq V$ of a representation $V$ of $\mathfrak{g} $ together with the property that $\mathfrak{g} W \subseteq W$, define the \emph{subrepresentation} of $\mathfrak{g} $ on $W$ to be the representation of $\mathfrak{g} $ on $V$ but restricted to $W$. Given a subrepresentation $W$ of $V$, define the quotient representation $V/W$ to be $X\cdot [v]\coloneqq [X\cdot v]$. This is well-defined. Given a representation $V$, define the \emph{dual representation} $\rho ^*$ on the dual $V^*$ to be
+\[
+	\rho^*(X) \coloneqq -\rho (X)^t
+\]
+for $-^t$ the transpose.
+
+Consider the adjoint representation of $\mathfrak{g} $ on $\mathfrak{g} $. Suppose we have a subrepresentation $\mathfrak{i} $ of this. We call this an \emph{ideal}, and it is precisely a Lie subalgebra $\mathfrak{i} \subseteq \mathfrak{g} $ such that $[\mathfrak{g} ,\mathfrak{i} ]\subseteq \mathfrak{i} $.
+
+For example, consider the ideal $[\mathfrak{g} ,\mathfrak{g} ]$. This is immediately an ideal, and the quotient $\mathfrak{g} ^{ab} \coloneqq \mathfrak{g} /[\mathfrak{g} ,\mathfrak{g} ]$ is abelian.
+
+This motivates the \emph{derived series}: define $\mathfrak{g} ^{(n)} \coloneqq [\mathfrak{g} ^{(n-1)} ,\mathfrak{g} ^{(n-1)} ]$. Then $\mathfrak{g} ^{(n-1)} \subseteq \mathfrak{g} ^{(n)} $, and this series is the \emph{derived series}. Each $\mathfrak{g} ^{(n)} $ is an ideal, and the quotient by that ideal is an abelian Lie algebra. The series stabilizes. Apparently $\mathfrak{g} = \mathfrak{g} ^{ab} \ltimes [\mathfrak{g},\mathfrak{g} ]$.
+
+We want to write all Lie algebras as $\mathfrak{g} = \mathfrak{s} \ltimes \mathfrak{r} $, where $\mathfrak{s} $ is \emph{semi-simple}, meaning it has no nonzero Abelian ideal, and $\mathfrak{r} $ is a \emph{solvable radical}, meaning it's a solvable ideal (its derived series converges to 0) and it is the maximum solvable ideal. Classifying Lie algebras thus apparently amounts to classifying semi-simple Lie algebras. For example, the ???
+
+look up Engel's theorem for nilpo;tent representation also something about $\mathfrak{gl} _{n-k} $ being $\mathfrak{sl} _{n-k} $ as semisimple and upper triangular as solvable radical.

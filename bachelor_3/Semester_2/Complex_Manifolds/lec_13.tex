@@ -1,0 +1,50 @@
+\lecture{13}{Tue 24 Mar 2026 12:31}{K\"ahler metrics}
+
+Given $U\subseteq \mathbb{C} ^n$ and a metric $g$ compatible with the complex structure, we have the fundamental form $\omega =g(J-,-)\in \mathcal{A} ^{1,1}_\mathbb{C} $. We say $g$ is \emph{K\"ahler} if $\mathrm{d} \omega =0$. Recall that the Hermitian metric associated to $g$ is $h=g-i\omega $. We say this osculates to the identity of order 2 if for all $p\in U$, there are coordinates centered at $p$ such that the Taylor expansion of $h$ is the identity up to order 2.
+
+\begin{proposition}\label{???}
+	$\mathrm{d} \omega =0$ iff $h$ osculates to the identity of order 2.
+\end{proposition}
+\begin{proof}
+	($\impliedby $) If it osculates then $\mathrm{d} \omega =0$.
+
+	($\implies $) Conversely assume $\mathrm{d} \omega =0$. Write $\omega =\frac{i}{2} h_{ij} \mathrm{d} z_i \wedge \mathrm{d} \overline{z} _j$. At the origin, $h_{ij} $ is Hermitian, and after a linear change in coordinates we may thus assume $h_{ij} (0)=I$. We Taylor expand to order $n$:
+	\[
+		h_{ij} =\delta _{ij} + \sum_{h=1}^{n} a_{ijk} z_k + \sum_{k=1}^{n} a'_{ijk} \overline{z} _k + O(\left| z \right| ^2)
+	.\]
+	These have
+	\[
+		a_{ijk} =\frac{\partial h_{ij} }{\partial z_k}(0),\qquad a_{ijk} '=\frac{\partial h_{ij} }{\partial \overline{z} _k} (0)
+	.\]
+	We have
+	\[
+		\mathrm{d} \omega  = \frac{i}{2} \mathrm{d} (h_{ij} )\mathrm{d} z_i \wedge \mathrm{d} \overline{z} _j
+	\]
+	\[
+		=\frac{i}{2} \left( \sum_{k=1}^{n} a_{ijk} z_k \mathrm{d} z_k + \sum_{k=1}^{n} a'_{ijk} \mathrm{d} \overline{z} _k \right) \wedge \mathrm{d} z_j \wedge \mathrm{d} \overline{z} _j + O(\left| z \right| ^2)
+	.\]
+	The temrs in the sum have types $(2,1)$ and $(1,2)$, so they have to cancel. We use $a_{ijk} =a_{kji} $ and $a'_{ijk} =a'_{ikj} $. Also $h_{ij} =\overline{h_{ji} } $ because it's Hermitian at 0.
+
+	Introduce coordinates $\omega _j = z_j + \sum_{i,k=1}^n a_{ijk} z_iz_k$. An unpleasent calculation shows that $\omega $ in the new coordinates is of the form
+	\[
+		\omega =\frac{i}{2} \sum_{j=1}^{n} \mathrm{d} \omega _j \wedge \mathrm{d} \overline{\omega } _j + O(\left| \omega  \right| ^2)
+	.\]
+\end{proof}
+
+This yields geometric meaning for the condition that a manifold be K\"ahler.
+
+For complex manifolds, $\mathrm{d} =\partial +\overline{\partial } $. This is not true for almost complex manifolds. However, we have conditions on when it holds.
+\begin{theorem}[Newlander-Nierenberg]\label{owo}
+	Let $(X,J)$ be an almost complex manifold. The following are equivalent.
+	\begin{enumerate}
+		\item $X$ has a complex manifold structure giving rise to $J$.
+		\item $\mathrm{d} =\partial + \overline{\partial } $ on $\mathcal{A} ^{1,0} $;
+		\item $\mathrm{d} =\partial +\overline{\partial } $ on $\mathcal{A} ^{\bullet} $;
+		\item $\overline{\partial } ^2=0$;
+		\item $[T^{1,0}_X,T^{1,0}_X]\subseteq T^{1,0}_X$.
+	\end{enumerate}
+\end{theorem}
+A highly nontrivial and highly analytic proof exists which we do not provide.
+
+\chapter{Sheaf cohomology}
+

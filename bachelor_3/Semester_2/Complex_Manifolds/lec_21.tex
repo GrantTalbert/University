@@ -1,0 +1,51 @@
+\lecture{21}{Thu 23 Apr 2026 12:30}{Hodge decomposition}
+
+Define the inner product on $\mathcal{A} ^k_X(U)$ by
+\[
+	\left\langle \alpha ,\beta  \right\rangle_U \coloneqq \int_{U} \alpha \wedge \star \overline{\beta } 
+.\]
+We claim that
+\[
+	\left\langle \partial \alpha ,\beta  \right\rangle_X = \left\langle \alpha , -\star \partial \star \beta  \right\rangle \eqqcolon \left\langle \alpha , \partial ^* \beta  \right\rangle 
+.\]
+To show this, let $\alpha $ be a $(p,q)$-form, and note that $\partial \alpha $ is a $(p+1,q)$-form. Thus we have $\star \beta \in \mathcal{A} ^{n-p-1,n-q}_X$. This implies $\beta \in \mathcal{A} _X^{q,p+1} $. Then
+\[
+	\left\langle \partial \alpha ,\beta  \right\rangle =\int_{X} \partial \alpha \wedge \star \overline{\beta } 
+.\]
+Stokes shows that
+\[
+	0 = \int_{X} \partial (\alpha \wedge \star \overline{\beta } ) = \int_{X} \partial \alpha \wedge \star \overline{\beta } + (-1)^{\left| \alpha  \right| } \int_{X} \alpha \wedge \partial \star \overline{\beta } 
+\]
+since $\dd =\partial + \overline{\partial }$ and $\overline{\partial } =0$ apparently. Anyways some math shows
+\[
+	\partial ^* = -\star \partial \star 
+\]
+\[
+	\overline{\partial } ^* = -\star \overline{\partial } \star 
+\]
+\[
+	\dd ^* = -\star \dd \star 
+\]
+We now have the K\"ahler identities.
+
+\begin{enumerate}
+	\item $[L,\partial ]=0$
+	\item $[L,  \overline{\partial } ]=0$
+	\item $[\Lambda ,\partial ^*]=0$
+	\item $[\Lambda , \overline{\partial } ^*]=0$
+	\item $[L,\partial ^*]=i \overline{\partial } $
+	\item $[L, \overline{\partial } ^*]=-i \partial $
+	\item $[\Lambda ,\partial ]=i \overline{\partial } ^*$
+	\item $[\Lambda , \overline{\partial }]=-i \partial ^*$
+	\item $\partial \overline{\partial } ^* + \overline{\partial } ^* \partial =0$
+	\item $\Delta_{\dd } = (\partial +\overline{\partial } )(\partial ^* + \overline{\partial } ^*) + (\partial ^* +\overline{\partial } ^*)(\partial + \overline{\partial } )$
+	\item $\Delta _{\dd } =\Delta _{\partial } +\Delta _{\overline{\partial } } $
+	\item $\Delta _{\dd } \dd =\dd \Delta _{\dd } $
+\end{enumerate}
+
+Now we want to look for global topological data on compact K\"ahler manifolds. All holomorphic $p$-forms, aka $(p,0)$-forms, are closed on K\"ahler manifolds. It is even true that the cohomology class of any nonzero holomorphic $p$-form is nonzero. What this means is that there are not a lot of holomorphic forms on compact K\"ahler manifolds.
+
+
+
+
+

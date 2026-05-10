@@ -1,0 +1,176 @@
+\section{Differential calculus on manifolds}
+
+\lecture{12}{Tue 24 Mar 2026 12:31}{Complex calculus}
+
+\begin{definition}\label{dfn:3.2.1}
+	An \emph{almost complex manifold} $(X,I)$ is a smooth manifold $X$ and an $\mathbb{R} $-linear endomorphism $J : TX \to TX$ of the tangent bundle with $J^2=-1$.
+\end{definition}
+\begin{proposition}\label{prp:3.2.2}
+	Every complex manifold has an almost complex structure.
+\end{proposition}
+\begin{proof}
+	Multiply by $i$ in coordinates.
+\end{proof}
+
+\begin{remark}\label{rmk:3.2.3}
+	Not all even dimensional smooth manifolds admit almost complex structures. For example, the standard smooth structure on $S^4$ does not.
+\end{remark}
+
+\begin{definition}\label{dfn:3.2.4}
+	Let $X$ be an almost complex manifold. Then $T_\mathbb{C} X$ denotes the complexification of $TX$, defined by $T_\mathbb{C} X\coloneqq TX \otimes _\mathbb{R} \mathbb{C} $. A priori, this is just a complex vector bundle without a holomorphic structure, even if $X$ is a complex manifold.
+\end{definition}
+
+\begin{proposition}\label{prp:3.2.5}
+	Let $(X,J)$ be an almost complex manifold. Then there is a decomposition
+	\[
+		T_\mathbb{C} X \cong T^{1,0} X \oplus T^{0,1} X
+	\]
+	of complex vector bundles on $X$, where the $\mathbb{C} $-linear extension of $J$ acts by multiplication by $i$ on $T^{1,0} X$ and by multiplication by $-i$ on $T^{0,1} X$.
+\end{proposition}
+\begin{proof}
+	One defines
+	\[
+		T^{1,0} X \coloneqq \Ker \left( J - i\mathrm{1} : T_\mathbb{C} X \to T_\mathbb{C} X \right) ,
+	\]
+	and similarly for $T^{0,1} X$. One simply decomposes the bundles fiberwise and applies \cref{lma:3.1.8}.
+\end{proof}
+
+\begin{definition}\label{dfn:3.2.6}
+	Let $(X,J)$ be an almost complex manifold. Then $T^{1,0} X$ and $T^{0,1} X$ are called the \emph{holomorphic} and \emph{antiholomorphic} tangent bundles of $X$, respectively.
+\end{definition}
+\begin{remark}\label{rmk:3.2.7}
+	Let $E\to X$ be a complex vector bundle with cocycles $\left\{ \psi _{ij}  \right\} $. Then one defines the complex vector bundle $\overline{E} \to X$ by taking the cocycles to be $\left\{ \overline{\psi } _{ij}  \right\} $. The fibers are naturally isomorphic, but multiplication differs by a sign. Even if $E$ is a holomorphic vector bundle, $\overline{E} $ need not be. Note that $T^{0,1} X \cong \overline{T^{1,0} X} $.
+\end{remark}
+\begin{intuition}\label{intuition:3.2.8}
+	We work fiberwise. Let $X$ a complex manifold. We complexify all the tangent spaces $T_p^\mathbb{C} X$, and decompose this into holomorphic and antiholomorphic components $T^{1,0} X \oplus T^{0,1} X$. Choose holomorphic coordinates $z_i = x_i + iy_i$ for $X$. The real tangent space has a basis $\left\{ \partial _{x_i} ,\partial _{y_i}  \right\} $, and it makes sense to have the almost complex structure act on these by $J\partial _{x_i} =\partial _{y_i} $. By \cref{discussion:3.1.9}, the projection $\pi ^{1,0} (\partial _{x_i} )$ looks like
+	\[
+		\frac{1}{2} \left( \frac{\partial }{\partial x_i} -i J\left( \frac{\partial }{\partial x_i}  \right)  \right) =\frac{1}{2} \left( \frac{\partial }{\partial x_i} -i \frac{\partial }{\partial y_i}  \right)=\frac{\partial }{\partial z_i}
+	.\]
+	This of course means that $\mathrm{d} z_i\in (T^{1,0} X)^*$ and $\mathrm{d} \overline{z} _i\in (T^{0,1} X)^*$.
+\end{intuition}
+
+\begin{definition}\label{dfn:3.2.9}
+	Let $(X,J)$ be an almost complex manifold. Then we define the vector bundles
+	\[
+		\Lambda_\mathbb{C}^kX \coloneqq \Lambda ^k(T_\mathbb{C} X)^*\text{ and } \Lambda ^{p,q}X\coloneqq \Lambda ^p(T^{1,0} X)^*\otimes _\mathbb{C} \Lambda ^q(T^{0,1} X)^*
+	.\]
+	The sheaves of sections are denoted by $\mathcal{A} ^k_X$ and $\mathcal{A} ^{p,q} _X$, respectively. Global sections of $\mathcal{A} ^{p,q}_X$ are called \emph{forms} of \emph{type} $(p,q)$. The projections $\mathcal{A} ^{\bullet}(X)\to \mathcal{A} ^{k} (X)$ and $\mathcal{A} ^{\bullet} (X)\to \mathcal{A} ^{p,q} (X)$ are denoted by $\Pi ^k$ and $\Pi ^{p,q} $, respectively.
+\end{definition}
+
+\begin{corollary}\label{cor:3.2.10}
+	We have
+	\[
+		\Lambda _\mathbb{C} ^kX \cong \bigoplus_{p+q=k} \Lambda ^{p,q} X,\qquad \text{and} \qquad \mathcal{A} ^k_X \cong \bigoplus_{p+q=k} \mathcal{A} ^{p,q}_X
+	.\]
+\end{corollary}
+\begin{proof}
+	Immediate by \cref{discussion:3.1.13}, and pointwise computation of universals in functor categories and for vector bundles.
+\end{proof}
+
+\begin{definition}\label{dfn:3.2.11}
+	Let $(X,J)$ be an almost complex manifold. The \emph{exterior derivative} $\mathrm{d} : \mathcal{A} ^k_X \to \mathcal{A} ^{k+1} _X$ is the $\mathbb{C} $-linear extension of $\mathrm{d} : \Omega ^k(X) \to \Omega ^{k+1} (X)$.
+\end{definition}
+
+\begin{discussion}\label{discussion:3.2.12}
+	The exterior derivative is not quite the natural notion of a derivative. Recall that if $\omega =\omega _p \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} z_{i_k} $ is a form, then since $\mathrm{d} $ acts by the \emph{real derivatives} $x_i$,
+	\[
+		\mathrm{d} \omega  = \sum \frac{\partial \omega_p}{\partial x_i} \mathrm{d} x_i \wedge \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} z_{i_k} 
+	.\]
+	It is for this reason that $\mathrm{d} \omega $ falls in $\mathcal{A} ^{k+1} _X$, but we cannot say much about it's type: it is a sum of many types. It would be more natural to have a derivative that acts by taking partial derivatives of $\omega _p$ with respect to $z_i$ or $\overline{z} _i$. We would think of the former as going $\mathcal{A}^{p,q}_X \to \mathcal{A} ^{p+1,q} _X$, and similarly for the latter.
+\end{discussion}
+
+\begin{definition}\label{dfn:3.2.13}
+	Let $(X,J)$ be an almost complex manifold. For all $p,q$, define
+	\[
+		\partial \coloneqq \Pi ^{p+1,q} \circ \mathrm{d} : \mathcal{A} ^{p,q}_X \to \mathcal{A} ^{p+1,q} _X
+	\]
+	\[
+		\overline{\partial } \coloneqq \Pi ^{p,q+1} \circ \mathrm{d} : \mathcal{A} ^{p,q} _X \to \mathcal{A} ^{p,q+1} _X
+	.\]
+\end{definition}
+
+\begin{discussion}\label{discussion:3.1.14}
+	Let $f : X \to \mathbb{C} $ be a smooth function on a complex manifold $X$. Let $z_i = x_i + iy_i$ be coordinates. Then in these coordinates,
+	\[
+		\mathrm{d} f = \sum_{i} \frac{\partial f}{\partial x_i} \mathrm{d} x_i + \sum_{i} \frac{\partial f}{\partial y_i} \mathrm{d} y_i
+	.\]
+	An annoying but not unexpected calculation shows that
+	\[
+		\mathrm{d} f = \sum_{i} \frac{\partial f}{\partial x_i} \mathrm{d} x_i + \sum_{i} \frac{\partial f}{\partial y_i} \mathrm{d} y_i = \sum_{i} \frac{\partial f}{\partial z_i} \mathrm{d} z_i + \sum_{i} \frac{\partial f}{\partial \overline{z} _i} \mathrm{d} \overline{z} _i
+	.\]
+	This is easily checked for functions in one complex variable, which illustrates how the statement follows in general. As noted in \cref{intuition:3.2.8}, we have $\mathrm{d} z_i\in (T^{1,0} X)^*$ and $\mathrm{d} \overline{z} _i\in (T^{0,1} X)^*$, so the projections map
+	\[
+		\partial f = \sum_{i} \frac{\partial f}{\partial z_i} \mathrm{d} z_i
+	\]
+	\[
+		\overline{\partial } f=\sum_{i} \frac{\partial f}{\partial \overline{z} _i} \mathrm{d} \overline{z} _i
+	.\]
+	Hence $f$ is holomorphic if and only if $\overline{\partial } f=0$.
+
+	More generally, let $\omega =f \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} z_{i_p} \wedge \mathrm{d} \overline{z} _{j_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q} $ be a form of type $(p,q)$. Then since $\mathrm{d} $ is a derivation and $\mathrm{d} ^2=0$, we have
+	\begin{align*}
+		\mathrm{d} \omega &=\mathrm{d} f\wedge \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q} \\
+				  &=\sum_{i} \frac{\partial f}{\partial x_i} \mathrm{d} x_i \wedge \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q} \\
+				  &=\left( \sum_{i} \frac{\partial f}{\partial z_i} \mathrm{d} z_i + \sum_{i} \frac{\partial f}{\partial \overline{z} _i} \mathrm{d} \overline{z} _i \right) \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q} \\
+	.\end{align*}
+	Hence
+	\[
+		\partial \omega =\sum_{i} \frac{\partial f}{\partial z_i} \mathrm{d} z_i  \wedge \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q}
+	\]
+	\[
+		\overline{\partial } \omega =\sum_{i} \frac{\partial f}{\partial \overline{z}_i} \mathrm{d} \overline{z}_i \wedge  \mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q}
+	.\]
+	Additionally, we have $\mathrm{d}=\partial + \overline{\partial } $.
+\end{discussion}
+
+\begin{lemma}\label{lma:3.2.15}
+	Let $X$ be a complex manifold (NOT ALMOST COMPLEX!). Then
+	\begin{enumerate}
+		\item $\mathrm{d} =\partial + \overline{\partial } $;
+		\item $\partial ^2 = \overline{\partial } ^2 = 0$ and $\partial \overline{\partial } =- \overline{\partial } \partial $;
+		\item They satisfy the graded Leibniz rule
+			\[
+				\partial (\alpha \wedge \beta )=\partial \alpha \wedge \beta +(-1)^{\left| \alpha  \right| } \alpha \wedge \partial \beta 
+			\]
+			\[
+				\partial (\alpha \wedge \beta )=\partial \alpha \wedge \beta +(-1)^{\left| \alpha  \right| } \alpha \wedge \partial \beta 
+			\]
+			for $\alpha ,\beta \in \mathcal{A} ^{\bullet} _X$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	(1) Done in \cref{discussion:3.2.14}.
+
+	(2) We use $\mathrm{d} ^2=0$ to obtain
+	\[
+		\mathrm{d} ^2 = \left( \partial +\overline{\partial }  \right) \circ \left( \partial +\overline{\partial }  \right) =\partial ^2 + \partial \overline{\partial } +\overline{\partial } \partial + \overline{\partial } ^2
+	.\]
+	It suffices to show that $\partial ^2= \overline{\partial } ^2=0$. Indeed, let $\omega =f\mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q} $. Let $\eta $ be $\mathrm{d} z_{i_1} \wedge \cdots \wedge \mathrm{d} \overline{z} _{j_q} $ such that $\omega =f\wedge \eta $. Npte that $\mathrm{d} \eta =0$, and thus $\partial \eta =0$. Then using (3), we have
+	\[
+		\partial ^2\omega =\partial (\partial f \wedge \eta ) = \partial ^2 f \wedge \eta
+	.\]
+	The statement is then analogous to the proof that $\mathrm{d} ^2f=0$.
+
+	(3) The exterior derivative satisfies it. It follows immediately.
+\end{proof}
+
+\begin{proposition}\label{prp:3.2.16}
+	Let $f : X \to Y$ be a holomorphic map between complex manifolds. Then the pullback induces a $\mathbb{C} $-linear map $f^* : \mathcal{A} ^{p,q}(Y) \to \mathcal{A} ^{p,q} (X)$ which commutes with $\partial $ and $\overline{\partial } $.
+\end{proposition}
+\begin{proof}
+	The pullback exists by smooth geometry and satisfies $\mathrm{d} \circ f=f\circ \mathrm{d} $. If it's holomorphic, it commutes with the projections.
+\end{proof}
+
+This proposition identifies $\Omega ^{\bullet} (X) \cong \Lambda ^{^{\bullet},0} (X)$ as complex vector bundles, and thus holmorphic sections of $\Omega ^{\bullet} (X)$ are sections of $\Lambda ^{^{\bullet} ,0} X$.
+
+\begin{proposition}\label{prp:3.2.17}
+	Let $X$ be a complex manifold. Then the space of holomorphic $p$-forms on $X$ is the subspace of $\alpha \in\mathcal{A} ^{p,0} (X)$ such that $\overline{\partial } \alpha =0$.
+\end{proposition}
+
+\begin{definition}\label{dfn:3.2.18}
+	Let $X$ be a complex manifold. Then the \emph{$(p,q)$-Dolbeault cohomology} is the $\mathbb{R} $-vector space
+	\[
+		H^{p,q} (X)\coloneqq \frac{\Ker \left( \overline{\partial } : \mathcal{A} ^{p,q} (X) \to \mathcal{A} ^{p,q+1} (X) \right) }{\Im \left( \overline{\partial } : \mathcal{A} ^{p,q-1} (X) \to \mathcal{A} ^{p,q} (X) \right) } 
+	.\]
+\end{definition}
+

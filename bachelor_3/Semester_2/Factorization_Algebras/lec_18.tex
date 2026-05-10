@@ -1,0 +1,75 @@
+\lecture{18}{Tue 21 Apr 2026 13:59}{stuff}
+
+the pairing on sctions is compatible wih the differential: $\int_{M} \left\langle \dd f,g \right\rangle =\int_{M} -\left\langle f,\dd g \right\rangle $.
+
+Recall $\Obs^{cl} (U)= \Sym (\mathcal{E} _c(U)[1])$. We claim this is valued in $\mathbb{P} _0$-algebras (better than cdgas): there is a bracket $\left\{ -,- \right\} $ of degree 1 s.t. Jacobi is satisfied and it is a biderivation for the product (think Poisson). Let $\alpha ,\beta \in \mathcal{E} (U)[1]$. Define $\left\{ \alpha ,\beta  \right\} =\int_{U} \left\langle \alpha ,\beta  \right\rangle $. This is the bracket on the Heisenberg central extension
+
+Recall the quantum observables $\Obs^q$ are the quantization of $\Obs^{cl} $ in the BV sense:
+\[
+	\Obs^q(U) = \left( \Sym (\mathcal{E} _c(U)[1]) [\hbar ],d_{cl} + \hbar \Delta \right)
+.\]
+Here $d_{cl} $ is the differential for classical observables, and $\Delta |\Sym ^1=0$, $\Delta (\alpha \beta )=\left\{ \alpha ,\beta  \right\} $. This is called the BV Laplacian. This extends by acting as a sort of derivation (not fully since it kills single observables): for any $O_1,O_2$:
+\[
+	\Delta \left( O_1O_2 \right) =\Delta (O_1)O_2 + (-1)^{\left| O_1 \right| } O_1\Delta (O_2) + \left\{ O_1,O_2 \right\} 
+.\]
+Good exercise to check that this is $\dd _{\mathrm{CE} } $. There is a dequantization map of FAs $\Obs^{q} \to \Obs^{cl} $ via $\hbar \mapsto 0$. This is ``BV quantization'' which is different from most types of quantization, and basically amounts to defining $\Delta $.
+
+
+We now interpret quantization in a more physical way. To motivate this, consider the scalar free field theory on a Riemannian manifold $(M,g)$. If $M$ is compact, then the cohomology $H^{\bullet} (\mathcal{E} (M),\Delta )$ is concentrated in degree 0. Harmonic functions on a compact manifold are constant functions. If the differential is $\Delta +m^2$ then the cohomology fully vanishes.
+
+To see this, let $(\Delta +m^2)u=0$. Then
+\[
+	0=\int_{M} u(\Delta +m^2)u\mathrm{vol} _g = \int_{M} u\Delta u\mathrm{vol} _g + m^2 \int_{M} u^2 \mathrm{vol} _g = \int_{M} \left| \nabla u \right| ^2 \mathrm{vol} _g + m^2\int_{M} u^2 \mathrm{vol} _g
+.\]
+Here $\nabla $ is the Levi-Civita connection. These functions are both always nonnegative. If $m\neq 0$ then there is no way of killing $u^2$ unless $u=0$. This proves that cohomology is nonvanishing iff $m=0$.
+
+A Green's function for $\Delta $ is $G\in \mathcal{D} (M\times M)$ s.t. $(\Delta \otimes 1)G(x,y) = \delta (x-y)$. If we had mass, it would be $(\Delta \otimes 1)G+m^2G = \delta _{\mathrm{diag } } $. These exist.
+
+We want to generalize a Green's function to fre field theories $(\mathcal{E} ,\dd ,\left\langle -,- \right\rangle )$. We define it to be a map
+\[
+	G : \mathcal{E} _c[1]^{\otimes 2}  \to \mathbb{R} 
+\]
+which is graded symmetric, and satisfies
+\[
+	\dd G(\phi _1\otimes \phi _2)=\int_{M} \left\langle \phi_1,\phi _2 \right\rangle 
+.\]
+To see why this is useful, consider the \emph{contraction} operator $\partial _G : \Sym (\mathcal{E} _c(U)[1]) \to \Sym (\mathcal{E} _c(U)[1])$ given by summing over all possible ways of evaluating $G$ on two terms in a tensor. Note that $G$ has degree 0, thus so does $\partial _G$. Thus it's not really a differential. We can extend this to a map on $\Sym (\mathcal{E} _c(U)[1])[\hbar ]$ which preserves $\hbar $, and then we define the invertible operator $e^{\hbar \partial _G} $. First, note that $[\partial _G,d]=\Delta _{\mathrm{BV} } $. Thus $[\partial _G,\Delta _{\mathrm{BV} } ]=0$. Consider $\alpha \in\Obs^{q} (U)$ a homogeneous element, and
+\[
+	(\dd +\hbar \Delta )e^{\hbar \partial _G} (\alpha )=e^{\hbar \partial _G} \left( e^{-\hbar \partial _G} \left( \dd +\hbar \Delta  \right) e^{\hbar \partial _G}  \right) (\alpha )
+.\]
+Using the commutators, this is
+\[
+	e^{\hbar \partial _G} (\dd \alpha )
+.\]
+Ok, what does this tell us? Well, it tells us that we can construct a cochain isomorphism
+\[
+	\Obs^{cl}[\hbar ] \to \Obs^q
+.\]
+We just checked that it respects the differentials $(\dd +\hbar \Delta_{\mathrm{BV} } )\circ e^{\hbar \partial _G} =e^{\hbar \partial _G} \circ \dd $. However, this \emph{does not preserve} the factorization algebra structure \emph{or} the $\mathbb{P} _0$-structure. However, since we have a pointwise map of dg modules, we can try and move the factorization product from $\Obs^{cl} $ to $\Obs^q$.
+
+First, define it on $\Obs^{cl} [\hbar ]$. Let $\alpha \in\Obs^{cl} (U)[\hbar ]$ and $\beta \in\Obs^{cl} (V)[\hbar ]$ with $U \cap V=\varnothing $. We define the factorization product
+\[
+	\alpha \star _\hbar \beta \coloneqq e^{-\hbar \partial _G} \left( e^{\hbar \partial _G} (\alpha )e^{\hbar \partial _G} (\beta ) \right) 
+.\]
+The idea is that we send this up to $\Obs^q$, compute the factorization product, and pull it back. This generalizes to $k$-fold product. We claim
+\begin{theorem}\label{?}
+	There is an isomorphism of factorization algebras $(\Obs^{cl} [\hbar ],\dd ,\star _\hbar )\cong \Obs^q$.
+\end{theorem}
+
+This is a new approach to quantization which does not involve the BV Laplacian. We consider an example. Let $\mathcal{E} $ be the field theory for abelian Chern-Simons $\mathcal{E} =\Omega ^{\bullet} _{\mathbb{R} ^3}[1] $. The pairing is $\left\langle \alpha ,\beta  \right\rangle =\alpha \wedge \beta $. Consider a map $(\mathbb{R} ^3\times \mathbb{R} ^3)\setminus \left\langle (x,x) \right\rangle \to S^2$ given by $(x,y)\mapsto \frac{x-y}{\left| x-y \right| } $. Call this map $\psi $, and let $\omega \coloneqq \psi ^\alpha \mathrm{vol} _{S^2} $. Check the picture -- the superscript is the coordinate.
+
+It's a 2-form which defines a distribution $G_\omega : \Omega _c^{\bullet} (\mathbb{R} ^3)^{\otimes 2} \to \mathbb{R} $ given by
+\[
+	\alpha \otimes \beta \mapsto \int_{\mathbb{R} ^3\times \mathbb{R} ^3} \alpha (x)\beta (y)\omega (x,y)
+.\]
+(useful to note the diagonal has measure 0). This is a Green's function for $\dd _{\mathrm{dR} } $.
+
+Let $K,K'$ be knots in $\mathbb{R} ^3$. Let $T,T'$ be open tubular (diffeo to $S^1\times \mathbb{R} ^2$) neighborhoods of $K,K'$. Consider CS observables $\mu _K\in\Obs^{cl} (T)$ and $\mu _{K'} \in\Obs^{cl} (T')$. These are defined by
+\[
+	\mu _K(\alpha )=\int_{K} \alpha ,\qquad \mu _{K'} (\alpha )=\int_{K'} \alpha 
+.\]
+(Here we have $\mathcal{E} _c \simeq \overline{\mathcal{E} _c} \cong \mathcal{E}^\vee $?) Next time we will see
+\[
+	\mu _K \star _\hbar \mu _{K'} =\mu _K\mu _{K'} +\hbar \ell (K,K')
+\]
+for $\ell $ the linking number.

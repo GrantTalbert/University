@@ -1,188 +1,105 @@
-\lecture{11}{Sat 28 Feb 2026 21:27}{Weibel}
-\section*{Lie algebras}
-To improve my understanding of dg Lie algebra cohomology, I read Weibel chapter 7, which focuses on Lie algebra cohomology. We begin with some basic notions.
+\lecture{11}{Tue 03 Mar 2026 14:01}{Prefactorization envelopes (pFE's)}
 
-Let $R$ be a commutative ring. A \emph{Lie algebra} $\mathfrak{g} $ is a $R$-module together with a \emph{Lie bracket} $[-,-]: \mathfrak{g} \otimes_R\mathfrak{g}  \to \mathfrak{g} $ which is not necessarily associative, but is antisymmetric $[x,x]=0$ and satisfies the Jacobi identity
-\[
-	[x,[y,z]]+[y,[z,x]]+[z,[x,y]]=0
-.\]
-An \emph{ideal} is a $R$-submodule $\mathfrak{h} \subseteq \mathfrak{g} $ such that $[\mathfrak{g} ,\mathfrak{h} ]\subseteq \mathfrak{h} $. An ideal is immediately a Lie subalgebra, and one can quotient by an ideal to obtain a Lie algebra. A morphism of Lie algebras is a map $\varphi : \mathfrak{g}  \to \mathfrak{g} '$ which commutes with the bracket in the sense that $\varphi [-,-]=[\varphi (-),\varphi (-)]$. Every ideal can thus be written as a short exact sequence of Lie algebras
+Let $\mathcal{L} $ be a fine sheaf on a manifold $M$ of dgla's, and $\mathcal{L} _c$ the corresponding cosheaf of compactly supported sections. The factorization envelope $\mathbb{U} \mathcal{L} $ is defined as the prefactorization algebra mapping $U\subseteq M$ to Chevelay chains $C_{\bullet} (\mathcal{L} _c(U))$. This is a preFA in cochain complexes, and the cohomology of this (which is the dgla homology) yields a preFA $H^{\bullet} (C_{\bullet} (\mathcal{L} _c(U)))$ in vector spaces.
+
+It's often useful to consider \emph{twisted} variants of this construction corresponding to central extensions of $\mathcal{L} $. Recall given a Lie algebra $\mathfrak{g}$, a central extension of $\mathfrak{g} $ is a Lie algebra $\hat{\mathfrak{g} }$ with a short exact sequence
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-0\ar[r]  & \mathfrak{h} \ar[r]  & \mathfrak{g} \ar[r]  & \mathfrak{g} /\mathfrak{h} \ar[r]  & 0.
+	0\ar[r]  & \mathfrak{a} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathfrak{g} \ar[r]  & 0,
 \end{tikzcd}\]
-An \emph{abelian} Lie algebra is a Lie algebra where $[-,-]=0$.
-
-Intuitively, the bracket is a commutator, and indeed every associative $R$-algebra $A$ can be viewed as a Lie algebra by defining $[x,y]=xy-yx$. We write $\operatorname{Lie} (A)$ for this Lie algebra, and thus we obtain a functor $\mathrm{Lie} : \mathcal{A} \mathrm{lg} _R \to \mathrm{Lie} $. This functor has a left adjoint given by the universal enveloping algebra $U : \mathrm{Lie}  \to \mathcal{A} \mathrm{lg} _R$, which we will explore indepth later.
-
-Given an associative $R$-algebra $A$, we obtain the Lie algebra $\mathfrak{gl} _n(A)$ of matrices with values in $A$, together with important Lie subalgebras
-\begin{itemize}
-	\item $\mathfrak{sl} _n(A)$: the set of traceless matrices. This becomes difficult to define precisely when $A$ is noncommutative.
-	\item $\mathfrak{o}_n(A)$: the set of skew-symmetric matrices $A_{ij} =-A_{ji} $.
-	\item $\mathfrak{t} _n(A)$: the set of upper triangular matrices.
-	\item $\mathfrak{n} _n(A)$: the set of strictly upper triangular matrices.
-\end{itemize}
-
-Let $A$ a not necessarily associative $R$-algebra. A derivation of $A$ into itself is a $R$-linear map $D : A \to A$ satisfying a Leibnitz rule
+where $\mathfrak{a} \subseteq Z(\hat{\mathfrak{g} })$ is an ideal contained inside the center. There is a correspondence of central extensions with $H^2(\mathfrak{g} ,\mathfrak{a} )$. Given a splitting of this sequence $j : \mathfrak{g}  \to \hat{\mathfrak{g} }$, we define $\omega (x,y)=[j(x),j(y)]-j([x,y])$. We can show $d_{\mathrm{CE} } \omega =0$. We can also show that if we choose a different splitting, then $\omega $ changes only by a coboundary. Write another split as $j'=j+\alpha $, then
 \[
-	D(ab)=(D(a))b + a(D(b))
+	\omega '(x,y)=[j(x)+\alpha (x),j(y)+\alpha (y)]-j[x,y]-\alpha [x,y]
 .\]
-The set $\operatorname{Der} (A)$ of derivations on $A$ has a commutator $[D_1,D_2]=D_1\circ D_2 - D_2\circ D_1$, which makes $\operatorname{Der} (A)$ into a Lie algebra.
-
-Given an $R$-module $M$, the \emph{free Lie algebra} $\mathfrak{f} (M)$ is a Lie algebra containing $M$ as a submodule which is universal with respect to turning $R$-linear maps into Lie algebra maps. The free Lie algebra assembles into a functor $\mathfrak{f} : \mathrm{Lie}  \to \Mod _R$ with $\mathfrak{f} \dashv U$ for $U$ the forgetful functor. The existence of such a Lie algebra follows by the adjoint functor theorem.
-
-Given Lie algberas $\mathfrak{g} ,\mathfrak{h} $, the product Lie algebra $\mathfrak{g} \times \mathfrak{h} $ is defined by
+We must have $\alpha : \mathfrak{g}  \to \mathfrak{a} $, so $\alpha (x),\alpha (y)$ fall in the center and don't affect the bracket. So it is just
 \[
-	[(g,h),(g',h')]=([g,g'],[h,h'])
+	\omega '=[j,j]-j[\cdot ,\cdot ]-\alpha [\cdot ,\cdot ]
 .\]
-The \emph{lower central sequence} of a Lie algebra is the descending sequence of ideals
-\[
-	\mathfrak{g} \supseteq \mathfrak{g} ^2=[\mathfrak{g} ,\mathfrak{g} ]\supseteq \mathfrak{g} ^3=[\mathfrak{g} ^2,\mathfrak{g} ]\supseteq \cdots \supseteq \mathfrak{g} ^n=[\mathfrak{g} ^{n-1} ,\mathfrak{g} ]\supseteq\cdots 
-.\]
-A Lie algebra is \emph{nilpotent} if $\mathfrak{g} ^n=0$ for some $n$. For example, $\mathfrak{n} _n(A)$ is nilpotent, and so are abelian Lie algebras.
+We see then that $\alpha $ is a coboundary since $x\wedge y\to \alpha [x,y]$ is $d_{\mathrm{CE} } \alpha $ in $C^{\bullet} (\mathfrak{g} ,\mathfrak{a} )$ apparently. So the cohomology class of $\omega $ is well-defined.
 
-The \emph{derived series} of a Lie algebra $\mathfrak{g} $ is the following descending sequence of ideals
-\[
-	\mathfrak{g} \supseteq \mathfrak{g}^{(1)}  =[\mathfrak{g} ,\mathfrak{g} ]\supseteq \mathfrak{g} ^{(2)} =[\mathfrak{g} ^{(1)} ,\mathfrak{g} ^{(1)} ] \supseteq \cdots \supseteq \mathfrak{g} ^{(n)} =[\mathfrak{g} ^{(n-1)} ,\mathfrak{g} ^{(n-1)} ]\supseteq\cdots 
-.\]
-We say that $\mathfrak{g} $ is \emph{solvable} if $\mathfrak{g} ^{(n)} =0$ for some $n$. For example, every nilpotent Lie algebra is solvable: simply show $[\mathfrak{g} ^i,\mathfrak{g} ^j]\subseteq \mathfrak{g} ^{i+j} $ and the statement follows inductively. The converse is not true -- for example, $\mathfrak{t} _n(A)$ is solvable but not nilpotent.
-
-\section*{$\mathfrak{g}$-Modules}
-
-\begin{definition}\label{dfn:sddskjnfds}
-	A (left) $\mathfrak{g} $-module $M$ is an $R$-module together with a $R$-bilinear multiplication map $\mathfrak{g} \otimes _RM \to M$ (written $x\otimes m\mapsto xm$) such that
+\begin{example}
+	Let $\mathfrak{g} =\mathbb{C} ^2$ an abelian Lie algebra, and consider the 1-dimensional central extensions
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		0\ar[r]  & \mathbb{C} \ar[r]  & \hat{\mathfrak{g} }\ar[r]  & \mathbb{C} ^2\ar[r]  & 0.
+	\end{tikzcd}\]
+	Then $H^2(\mathfrak{g} ,\mathbb{C} )$ looks like
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathfrak{g} ^* \ar[r]  & \Lambda ^2 \mathfrak{g} ^* \ar[r]  & \Lambda ^3 \mathfrak{g} ^*\ar[r]  & \cdots .
+	\end{tikzcd}\]
+	Given $\phi \in \Lambda ^n\mathfrak{g} ^*$ and $\left\{ x_i \right\} _{1\leq i\leq n+1} \subseteq \mathfrak{g} $, the differential is
 	\[
-		[x,y]m=x(ym)-y(xm)
+		(d_{\mathrm{CE} } \phi )(x_1 \wedge \cdots \wedge x_{n+1} )=\sum_{i,j} \pm \phi ([x_i,x_j],x_1, \cdots ,\hat{x} _i,\cdots ,\hat{x} _j,\cdots ,x_n)
 	.\]
-	A $\mathfrak{g} $-module homomorphism is an $R$-linear map $\varphi : M \to N$ such that $\varphi (xm)=x\varphi (m)$. We write $\Hom_\mathfrak{g} (M,N)$ or $\Mod _\mathfrak{g} (M,N)$ for the set of $\mathfrak{g} $-module homomorphisms, yielding an abelian category $\Mod _\mathfrak{g} $.
-\end{definition}
-Note that $\Hom_\mathfrak{g} (M,N)\subseteq \Hom_R(M,N)$ is a $R$-submodule.
-
-There is a trivial $\mathfrak{g} $-module functor from $\Mod _R\to \Mod _\mathfrak{g} $ given by taking an $R$-module $M$, and defining the action by $\mathfrak{g} $ to be the trivial action $0: \mathfrak{g} \otimes _RM \to M$. It is an exact functor, and elements of its image are called \emph{trivial $\mathfrak{g} $-modules}. Write this functor as $\mathbf{0} $. It has left- and right-adjoints.
-
-The \emph{invariant submodule} $M^\mathfrak{g} $ of a $\mathfrak{g} $-module $M$ is the submodule
-\[
-	M^\mathfrak{g} =\left\{ m\in M\mid xm=0\forall x\in \mathfrak{g}  \right\} 
-.\]
-We note that $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (R,M)$, when viewing $R$ as a trivial $R$-module. This follows since $R$-linear maps $\varphi :R\to M$ are determined by $\varphi (1)$ since $\varphi (r)=r\varphi (1)$. To make it $\mathfrak{g} $-linear, we need $x\varphi (1)=\varphi (x1)=\varphi (0)=0$ since $R$ is a trivial module, hence we may only map $1$ to an element of $M^\mathfrak{g} $. Moreover such a choice uniquely determines $\varphi $. Since it is the maximal trivial submodule of $M^\mathfrak{g} $, we obtain $\mathbf{0} \dashv (-)^{\mathfrak{g} } $. This is immediate to see: a $\mathfrak{g} $-module homomorphism $\mathbf{0} (N)\to M$ must identify $x\varphi (n)=0$, so its image must fall into a trivial submodule, hence it factors through $M^\mathfrak{g} $. Moreover, any $R$-linear map $N\to M^\mathfrak{g}$ induces a map $\mathbf{0} (N)\to M$ in this way. Hence we have $\mathbf{0} \dashv -^\mathfrak{g} $. Additionally, since $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (\mathbf{0} (R),M)$, we have a representation $-^\mathfrak{g} \cong \Mod _\mathfrak{g} (\mathbf{0} (R),-)$.
-
-The \emph{coinvariants} of $M$ are the quotient $M/\mathfrak{g} M$. Note that this is also a trivial module since for any $x\in \mathfrak{g} $ and $m\in M$, we have $xm\in \mathfrak{g} M$ which is identified to 0 in the quotient. Since this is the largest quotient which is a trivial module, we can show that $(-)_\mathfrak{g} \dashv \mathbf{0} $. We will see later that $\Mod _\mathfrak{g} $ has enough projectives and injectives, hence we can compute the derived functors of (co)invariants.
-
-\begin{definition}\label{lasdsajk}
-	Let $M$ be a $\mathfrak{g} $-module. We write $H_{\bullet} (\mathfrak{g},M)$ or $H_{\bullet} ^{\mathrm{Lie} } (\mathfrak{g} ,M)$ for the derived functors $L_{\bullet} (-_\mathfrak{g} )(M)$ of $-_\mathfrak{g} $, and call them the \emph{homology groups of $\mathfrak{g} $ with coefficients in $M$}. By definition, $H_0(\mathfrak{g} ,M)=M_\mathfrak{g} $.
-
-	Similarly, write $H^{\bullet} (\mathfrak{g},M)$ or $H^{\bullet} _{\mathrm{Lie} } (\mathfrak{g} ,M)$ for the right derived functors $R^{\bullet} (-^{\mathfrak{g} } )(M)$ of $-^{\mathfrak{g} } $, and call them the \emph{cohomology groups of $\mathfrak{g} $ with coefficients in $M$}. By definition, $H^0(\mathfrak{g} ,M)=M^\mathfrak{g} $.
-\end{definition}
-
-\section*{Universal Enveloping Algebras}
-
-Write $T(\mathfrak{g} )$ for the tensor algebra on $\mathfrak{g} $. If $\mathfrak{g} $ is a Lie algebra, the universal enveloping algebra can be given as $T(\mathfrak{g})$ modulo the relation that the inclusion $\mathfrak{g} \hookrightarrow T(\mathfrak{g} )$ be a Lie algebra homomorphism and $T(\mathfrak{g} )$ have bracket given by the commutator. It is universal in the sense that precomposition by the inclusion yields
-\[
-	\operatorname{Lie} (-,\mathrm{Lie} )\cong \Alg_R(U,-)
-.\]
-
-\begin{proposition}\label{kjsndfkndsk}
-	If $\mathfrak{g} $ is a Lie algbera, then every $\mathfrak{g} $-module is naturally a $U\mathfrak{g} $-module, and vice versa. This yields natural isomorphisms $\Mod _\mathfrak{g} \cong \Mod _{U\mathfrak{g} } $.
-\end{proposition}
-\begin{proof}
-	A $\mathfrak{g} $-module is a Lie algebra map $\mathfrak{g} \to \operatorname{Lie} (\End_R(M) )$ for some $R$-module $M$. A $U\mathfrak{g} $-module is an algebra map $U\mathfrak{g} \to \End_R(M) $. The statement now follows by adjointness
+	The $\pm$ is determined by the parity of $i,j$. Since the brackets are all 0, $d_{\mathrm{CE} } \phi =0$, so the homology is simply $H^2(\mathfrak{g} ,\mathbb{C} )\cong \Lambda ^2\mathfrak{g} ^*$. Since this is 1-dimensional over $\mathbb{C}$ since $\mathfrak{g} ^*$ is 2-dimensional, there is a unique central extension up to scaling. Thus $\hat{\mathfrak{g} } \cong \mathfrak{g} \oplus \mathbb{C} k$ for some $k\in\mathbb{C} $, and $\omega (x,y)=k$ (here $x,y$ the coordinates of $\mathbb{C} ^2$). There is then one bracket $[x,y]=k$. This is the \emph{Heisenberg Lie algebra} in 3 dimensions. These can be thought of as upper-triangular 3 dimensional matrices of the form
 	\[
-		\operatorname{Lie} (\mathfrak{g} ,\operatorname{Lie} (\End_{R} (M) ))\cong \Alg_R(U\mathfrak{g} ,\End_R(M) )
+		\begin{pmatrix}
+		0 & x & k \\
+		0 & 0 & y \\
+		0 & 0 & 0
+		\end{pmatrix}
 	.\]
-\end{proof}
-Since the categories of associative algebras have enough projectives and injectives, thus so do the categories of $\mathfrak{g} $-modules. The action is simply given by, for $x_1, \ldots ,x_n\in \mathfrak{g} $,
-\[
-	(x_1 \cdots x_n)m = x_1(\cdots (x_nm)\cdots )
-.\]
-We then impose bilinearity to cover all of $U\mathfrak{g} $.
+\end{example}
 
-\begin{corollary}\label{khsdjfkcnsdjfndks}
-	Let $M$ be a $\mathfrak{g} $-module. Then
+\begin{example}[Affine Ka(c?z?idk)-Moody algebras]
+	Let $\mathfrak{g} $ be a simple Lie $\mathbb{C} $-algebra. If $A$ is a commutative $\mathbb{C} $-algebra, then $\mathfrak{g} \otimes _\mathbb{C} A$ is a Lie algebra $[x\otimes a,y\otimes b]=[x,y]\otimes ab$. This may fail in noncommutative rings due to failiure of Jacobi's identity. Take $A$ either Laurant polynomials $\mathbb{C} [t^{-1} ,t]$ or Laurent series $\mathbb{C} ((t))$. In the first case, the \emph{Loop algebra} is defined as
 	\[
-		H_{\bullet} (\mathfrak{g} ,M) \cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,M)
-	,\]
-	\[
-		H^{\bullet} (\mathfrak{g} ,M)\cong \operatorname{Ext}_{U\mathfrak{g} } ^{\bullet} (R,M)
+		L\mathfrak{g} =\mathfrak{g} \otimes \mathbb{C} [t^{-1} ,t]\cong \mathfrak{g} [t^{-1} ,t]
 	.\]
-\end{corollary}
-\begin{proof}
-	Since we have already observed that $M^\mathfrak{g} \cong \Mod _\mathfrak{g} (R,-) \cong \Mod_{U\mathfrak{g} } (R,-)$, the second statement is immediate by functoriality of derived functors (in the homotopy sense) and homology. For the first, note that the transpose of $0: \mathfrak{g}  \to R$ under $U\dashv \mathrm{Lie} $ is the unique map $U\mathfrak{g} \to R$ mapping $\mathfrak{g}\mapsto 0$. Define the \emph{augmentation ideal} $\mathfrak{J} $ to be the kernel of this map; evidently $\mathfrak{J} $ is the two-sided ideal generated by the image of $\mathfrak{g} $ in $U\mathfrak{g} $. This map is epi, hence the first isomorphism theorem yields $R \cong U\mathfrak{g} /\mathfrak{J} \cong (U\mathfrak{g} )_\mathfrak{g} $. Then
-	\[
-		R\otimes_{U\mathfrak{g} } M \cong (U\mathfrak{g} /\mathfrak{J} )\otimes _{U\mathfrak{g} } M \cong M / \mathfrak{J} M \cong M / \mathfrak{g} M \cong M_\mathfrak{g} 
-	.\]
-\end{proof}
+	If we identify $t$ with $e^{i\theta } $ ($\mathbb{C} $-polynomials in $z$ are polynomials in $e^{i\theta } $), then we may think of this as $C^\infty (S^1,\mathfrak{g} )$, justifying the name.
 
-\begin{theorem}[Poincar\'e-Birkhoff-Witt]\label{PBW}
-	Let $\mathfrak{g} $ be a free $R$-module. Then $U\mathfrak{g} $ is also a free $R$-module. If $\left\{ e_\alpha  \right\} _{\alpha \in A} $ is an ordered basis of $\mathfrak{g} $, then the collection of all elements of the form $e_I$, where $I$ is an increasing sequence, form a basis for $U\mathfrak{g} $.
-\end{theorem}
-We decline to prove the PBW.
-\begin{corollary}\label{lkasj}
-	The inclusion $\mathfrak{g} \hookrightarrow U\mathfrak{g} $ is injective, so we may identify $\mathfrak{g} $ with its image.
-\end{corollary}
-\begin{corollary}\label{askj}
-	If $\mathfrak{h} \subseteq \mathfrak{g} $ is a Lie subalgebra, and $R=k$ is a field, then $U\mathfrak{g} $ is a free $U\mathfrak{h} $-module.
-\end{corollary}
-
-\begin{exercise}
-	Let $M,N$ be left $\mathfrak{g} $-modules. Show that $\Mod _R(M,N)$ is a $\mathfrak{g} $-module by $(xf)(m)=xf(m)-f(xm)$. Then show that $\Mod _\mathfrak{g}(M,N)\cong \Mod _R (M,N)^\mathfrak{g} $.  Show that this induces isomorphisms $\operatorname{Ext} ^{\bullet} _{U\mathfrak{g} } (M,N)\cong H^{\bullet} _{\mathrm{Lie} } (\mathfrak{g} ,\Mod _R(M,N))$. In particular, the global dimension of $U\mathfrak{g} $ equals the Lie algebra cohomological dimension of $\mathfrak{g} $.
-\end{exercise}
-\begin{proof}
-	For the first, we need only show $[x,y]f=x(yf)-y(xf)$. Let $x,y\in \mathfrak{g} $ and $m\in M$. Then since $M,N$ are $\mathfrak{g} $-modules, 
-	\begin{align*}
-		([x,y]f)(m) &= [x,y]f(m) - f([x,y]m)\\
-			    &=xyf(m) - yxf(m) - f(xym - yxm)\\
-			    &=xyf(m) - yxf(m) - f(xym) + f(yxm)
-	.\end{align*}
-	Note that $xf = x\circ f-f\circ x$. Thus we also have
+	Consider the cocycle $\left\langle -,- \right\rangle _{\mathfrak{g} } $, a symmetric $\mathfrak{g} $-invariant form (so all multiples of the killing form). We will define
 	\[
-		x(yf) = x(y\circ f - f\circ y) = x\circ y\circ f - y\circ f\circ x - x \circ f\circ y + f\circ y\circ x
+		\omega (x\otimes f(t),y\otimes g(t))=\left\langle x,y \right\rangle_\mathfrak{g} \operatorname{Res}_{t=0} f\mathrm{d} g
 	.\]
-	Hence evaluating at $m$ yields
+	Skew-symmetry follows since the residue of $f\mathrm{d} g$ is negative of that of $g\mathrm{d} f$; easy to check. We claim $\omega \in H^2(\mathfrak{g} ,\mathbb{C} )$, and
 	\[
-		(x(yf))(m) = xyf(m) - yf(xm) - xf(ym) + f(yxm)
-	.\]
-	Similarly,
-	\[
-		(y(xf))(m) = yxf(m) - xf(ym) - yf(xm) + f(xym)
-	.\]
-	Thus
-	\[
-	(x(yf))(m) - (y(xf))(m) \]
-	\[
-		= xyf(m) - yf(xm) - xf(ym) + f(yxm) - yxf(m) + xf(ym) + yf(xm) - f(xym)
+		\hat{\mathfrak{g} }=L\mathfrak{g} \otimes \mathbb{C} k,
 	\]
 	\[
-		=xyf(m)+f(yxm) - yxf(m) - f(xym)
+		[x\otimes f(t),y\otimes g(t)]=[x,y]\otimes f(t)g(t)+\omega (x\otimes f,y\otimes g)k
 	.\]
-	They agree, hence $\Mod _R(M,N)$ is a $\mathfrak{g} $-module in the way claimed. 
+\end{example}
 
-	Now let $f$ be a $\mathfrak{g} $-invariant of $\Mod _R(M,N)$. Then $0=xf = x\circ f - f\circ x$ for all $x\in \mathfrak{g} $, and thus $x\circ f = f\circ x$. Thus $f$ is $\mathfrak{g} $-linear. Conversely if $f$ is $\mathfrak{g} $-linear, then $f\circ x = x\circ f$, and thus $xf = x\circ f-f\circ x =0$, so $f$ is a $\mathfrak{g} $-invariant of $\Mod_R(M,N)$.
-\end{proof}
+\begin{example}[Virasoro algebra]
+	Consider the Witt algebra of algebraic vector fields on $\mathbb{C} ^*$; equivalently as vector fields on $S^1$. This is $\mathbb{C} [t,t^{-1} ]\partial _t$. Then
+	\[
+		[f\partial_t,g\partial_t]=(fg'-gf')\partial _t
+	.\]
+	We present the Witt algebra as $\operatorname{span} \left\{ L_n = -t^{n+1} \partial _t \right\} $ with
+	\[
+		[L_m,L_n]=(m-n)L_{m+n} 
+	.\]
+	Then $H^2(\mathrm{Witt} ,\mathbb{C} )\cong \mathbb{C} $ has an interesting cocycle
+	\[
+		\omega (L_m,L_n)=\frac{1}{12} (m^2-m)\delta _{m(-n)} 
+	.\]
+	In string theory, we consider things called world sheets, and we are interested in gluing their boundaries (eg. spheres). Note that $\operatorname{Lie} (\operatorname{Diff } (S^1))\cong \mathfrak{X} (S^1)$ -- this should hold for all manifolds. The Witt algebra should act on this since it looks similar. QFT takes place in a complex Hilbert space $\mathcal{H} $, but the physical quantities only depend on the projective space $\mathbb{P} (\mathcal{H} )$ since they don't depend on global phase. So the symmetries of a quantum system are actually $\Aut(\mathbb{P} (\mathcal{H} )) \eqqcolon \mathrm{PGL} (\mathcal{H} )$, and we can write this as a central extension of groups
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathbb{C} ^*\ar[r]  & \operatorname{GL} (\mathcal{H} ) \ar[r] & \mathrm{PGL} (\mathcal{H} )\ar[r]  & 0.
+	\end{tikzcd}\]
+	Differentiating this yields a central extension of Lie algebras. A symmetry group $G$ on a QFT is then a morphism $G\to \mathrm{PGL} (\mathcal{H} )$. Since projective geometry is harder than working in $\mathcal{H} $, we would like to lift $G\to \mathrm{PGL} (\mathcal{H} )$ to $\mathrm{GL} (\mathcal{H} )$ as indicated by the dotted arrow:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathbb{C} ^*\ar[r]  & \mathrm{GL} (\mathcal{H} )\ar[r]  & \mathrm{PGL} (\mathcal{H} )\ar[r]  & 0 \\
+	0\ar[dashed, r]  & \mathbb{C} ^*\ar[dashed, r] \ar[equals, u]  & \hat{G} \ar[dashed, u] \ar[dashed, r]  & G\ar[u] \ar[dotted, ul] \ar[dashed, u] \ar[dashed, r]  & 0
+	\end{tikzcd}\]
+	This dotted arrow need not always exist, but we can always find the dashed arrows to obtain a central extension, allowing us to consider $\hat{G} $ instead. Differentiating this does the same thing for Lie algebras ($\mathrm{d} =T_1$). Interesting paper by Dan Freed about stuff like this for mroe physics and it uses categories.
+\end{example}
 
-\section*{$H^1$ and $H_1$}
-
-Since $\mathfrak{J} $ is the kernel of $U\mathfrak{g} \to R$, there is a short exact sequence of $\mathfrak{g} $-modules
+Ok back to pFE's. Let $\mathcal{L} : \Open(M) ^{\mathrm{op}}  \to \mathcal{D} \mathcal{G} \mathrm{Lie} $ a fine sheaf. An $r$-shifted central extension of $\mathcal{L} _c$is a cosheaf of dgla's $\widehat{\mathcal{L} }_c$ lifting into an exact sequence of dgla's
 \[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-0\ar[r]  & \mathfrak{J} \ar[r]  & U\mathfrak{g} \ar[r]  & R\ar[r]  & 0.
+	0\ar[r]  & \mathbb{C} [r]\ar[r]  & \widehat{\mathcal{L} }_c\ar[r]  & \mathcal{L} _c\ar[r]  & 0.
 \end{tikzcd}\]
+In this case we can form the \emph{twisted envelope} $\mathbb{U} \widetilde{\mathcal{L} }: U \to C_{\bullet} (\widehat{\mathcal{L} }_c(U))$.
 
-Since $H_{\bullet} (\mathfrak{g} ,-)\cong \operatorname{Tor} _{\bullet} ^{U\mathfrak{g} } (R,-)$, we apply the \emph{dimension shifting technique} to take $H_{n} (\mathfrak{g} ,-) = H_{n-1} (\mathfrak{g},-)$: consider the long exact sequence
-\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
-\cdots \ar[r]  & \operatorname{Tor} _n^{U\mathfrak{g} } (U\mathfrak{g} ,M)\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (U\mathfrak{g} ,M) \ar[r] & \cdots .
-\end{tikzcd}\]
-Since $U\mathfrak{g} $ is free as a $U\mathfrak{g} $-module, it is flat, and hence its Tor modules vanish. Thus the short exact sequence simply reads
-\[\begin{tikzcd}[row sep = 2.5em, column sep = 2em]
-\cdots \ar[r]  & 0\ar[r]  & \operatorname{Tor}_n^{U\mathfrak{g} } (R,M)\ar[r]  & \operatorname{Tor}_{n-1}^{U\mathfrak{g} } (\mathfrak{J} ,M)\ar[r]  & 0 \ar[r] & \cdots .
-\end{tikzcd}\]
-The only way for this to be exact is if the map $\operatorname{Tor} _n^{U\mathfrak{g} } (R,M)\to \operatorname{Tor} _{n-1} ^{U\mathfrak{g} } (\mathfrak{J} ,M)$ is an isomorphism for $n\geq 2$. Additionally, reading this in degree $n=1,0$, we obtain the exact sequence
-\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
-0\ar[r]  & H_1(\mathfrak{g} ,M)\ar[r]  & \mathfrak{J} \otimes _{U\mathfrak{g} } M\ar[r]  & M\ar[r]  & M_{\mathfrak{g} } \ar[r]  & 0.
-\end{tikzcd}\]
-Here we have noted that $R\otimes _{U\mathfrak{g} } M \cong M_\mathfrak{g} $.
-
-\begin{exercise}
-	Show that the inclusion $i : \mathfrak{g}  \to U\mathfrak{g} $ maps $[\mathfrak{g} ,\mathfrak{g} ]$ to $\mathfrak{J}^2$. Conclude that it induces a map $i : \mathfrak{g} ^{ab}  \to \mathfrak{J} /\mathfrak{J} ^2$, where $\mathfrak{g} ^{ab} =\mathfrak{g} /[\mathfrak{g} ,\mathfrak{g} ]$.
-\end{exercise}
-\begin{proof}
-	We consider the map $0 : \mathfrak{g}  \to R$. 
-\end{proof}
-
+For example, consider
+\[
+	\mathcal{L} =\mathfrak{g} \otimes \Omega _\mathbb{R} ^{\bullet} =\mathfrak{g} ^\mathbb{R} 
+.\]
+Pick a cocycle $H^2(\mathfrak{g} ,\mathbb{C} )\ni\omega : \mathfrak{g} \otimes \mathfrak{g}  \to \mathfrak{g} $ and write
+\[
+	\widehat{\mathcal{L} }=\mathfrak{g} \otimes \Omega ^{\bullet} _\mathbb{R} \oplus \mathbb{C} [?]k
+.\]
+To figure out what the shift is by, consider the thing we want the bracket to be
+\[
+	[x\otimes \alpha ,y\otimes \beta ]=[x,y]\otimes (\alpha \wedge \beta )+\left(\int_\mathbb{R} \omega (x,y)\alpha \wedge \beta \right)k
+.\]
+One simply figures out what order everything has to be and determines that $k$ must be degree 1, so we shift $-1$.

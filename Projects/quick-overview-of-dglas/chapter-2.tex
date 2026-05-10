@@ -1,0 +1,498 @@
+\chapter{Differential graded structures}\label{ch:2}
+
+Generally when we have some kind of graded structure, it is useful to include a differential. The constructions of \cref{ch:1} can immediately be re-defined in a differential graded sense, but some of the rules seem arbitrary. They are clarified by recasting in a categorical light. For maximal generality, we always let $R$ be a graded ring, but most interesting examples occur when $R$ is a regular ring. The notions are coincide by viewing a normal ring as a graded ring concentrated in degree 0.
+
+\section{Differential graded $R$-modules}\label{sec:2.1}
+
+\begin{definition}\label{2.1.1}
+	For all $n\in\mathbb{Z} $, define the functor $\mathcal{G} \Mod _R\to \mathcal{G} \Mod _R$ given by $M\mapsto M[n]$, where $M[n]^i=M^{i+n} $. The action on morphisms is as follows. If $f : M \to N$ is a morphism of graded $R$-modules, then $f[n]: M[n] \to N[n]$ is the morphism of graded $R$-modules $f[n]^i=f^{i+n} $. We will often omit the $[n]$ on morphisms; for example given $f : M \to N$ and $g : N[-1] \to P$, we will write $g\circ f$ to denote the composite $g[1]\circ f$ or $g\circ f[-1]$, depending on the context.
+\end{definition}
+
+\begin{terminology}\label{2.1.2}
+	Let $M$ be a graded $R$-module and $n\in\mathbb{Z} $. A map $f : M \to M[n]$ is said to have \emph{cohomological degree $n$}.
+\end{terminology}
+
+\begin{definition}\label{2.1.3}
+	A \emph{differential graded $R$-module} $(M,d)$ is a graded $R$-module $M$ together with a map $d : M[-1] \to M$ of cohomological degree $1$ known as the \emph{differential}, which has the property that $d\circ d=0$, where $d\circ d$ denotes the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		{M[-1]} & {M} & {M[1]}.
+		\arrow[from=1-2, to=1-3, " {d[1]} ", ]
+		\arrow[from=1-1, to=1-2, " d ", ]
+	\end{tikzcd}\]
+	A differential graded $R$-module is also called a cochain complex (with values in $R$). A \emph{morphism} $f : (M,d_M) \to (N,d_N)$ of differential graded $R$-modules is a morphism $f : M \to N$ of graded $R$-modules such that $d_N \circ f[-1] = f\circ d_M$. The category of differential graded $R$-modules is denoted $\Ch(R) $.
+\end{definition}
+
+\begin{discussion}\label{2.1.4}
+	Let$(M,d)$ be a differential graded $R$-module. Since $M[1]^i=M^{i+1} $, this means we have maps $d^i : M^{i-1}  \to M^{i} $. The property that $d[1]\circ d=0$ implies that $d^{i+1} \circ d^i = 0$ for all $i$. We usually abbreviate this as $d^2=0$, unless there is possibility of confusing the double composite $d^2$ with the second degree map $d^2$, in which case we specify.
+
+	Now let $(M,d_M)$ and $(N,d_N)$ be differential graded $R$-modules and $f : M \to N$ a morphism of differential graded $R$-modules. Write $f^i : M^i \to N^i$ for the $i$th degree of the map. The condition that $f$ be a morphism can be spelled out more explicitly as $f^{i} \circ d_M^i = d_N^i\circ f^{i-1}$.
+\end{discussion}
+
+\begin{example}\label{2.1.5}
+	Any graded $R$-module can be turned into a differential graded $R$-module by taking all of the differentials to be 0. In particular, we consider $R$ as a differential graded $R$-module $(R,d_R)$ by taking $d_R=0$. By convention, we always take $R$ to be a differential graded $R$-module in this way.
+
+	Other canonical examples are as follows. Given a topological space $X$ and a ring $R$, the singular cochain complex $C^{\bullet} (X;R)$ with values in $R$ is a differential graded $R$-algebra. Given a smooth manifold $M$, the de Rham complex $\Omega ^{\bullet} (M)$ is a differential graded $\mathbb{R} $-algebra.
+\end{example}
+
+\begin{discussion}\label{2.1.6}
+	The functors $[n]$ defined in \cref{2.1.1} extend to functors $\Ch(R) \to \Ch(R) $. It is convention to define, if $(M,d_M)$ is a differential graded $R$-module, the differential $d_{M[n]} \coloneqq (-1)^{n} d_M[n]$.
+\end{discussion}
+
+\begin{remark}\label{2.1.7}
+	Recall from \cref{1.4.17} that $\mathcal{G} \Mod _R$ is closed symmetric monoidal, and if $R$ is concentrated in degree 0, then \cref{1.1.11} yields the internal hom
+	\[
+		\underline{\Hom}_R(M,N)^i = \prod_{j\in\mathbb{Z} } \Hom_R(M^j, N^{i+j} ) 
+	.\]
+	Here we implicitly write $\Hom_R$ for the hom-set in the category $\Mod _R$ whenever the arguments are normal modules. Note that a homogeneous element of degree $i$ is a tuple of maps $\left\{f^j : M^j \to N^{i+j}\right\}_{j\in\mathbb{Z} }  $, which is precisely a morphism of graded $R$-modules $f : M \to N[i]$. Hence we can write
+	\[
+		\underline{\Hom}_R(M,N)^i = \Hom_R(M, N[i]) 
+	.\]
+	Thus a homogeneous element of degree $i$ of the internal hom for $\mathcal{G} \Mod _R$ is a graded $R$-module map of cohomological degree $i$.
+\end{remark}
+
+Our goal for now is to promote the tensor product to $\Ch(R) $. The definition of the differential is done most naturally in the context of the internal hom for $\Ch(R) $.
+
+\begin{construction}\label{2.1.8}
+	We want to use \cref{2.1.7} to construct an internal hom for $\Ch(R) $ in a similar sense to \cref{1.1.11}. For now, we will write the internal hom for $\Ch(R) $ as $\underline{\Ch}_R(-,-)$, and the normal hom as $\Ch_R(-,-)$.
+
+	Let $(M,d_M),(N,d_N)$ be differential graded $R$-modules. Since we want the tensor product to promote to $\Ch(R) $, it makes sense to define $\underline{\Ch} _R(M,N) = \underline{\Hom} _R(M,N)$, and to simply define the differentials. Initially this seems strange since $\underline{\Ch}_R(M,N)$ now contains information that does not respect the differential (for example, one might expect $\Ch_R(M,N)$ to be the degree 0 homogeneous elements). However, the internal hom just needs to respect the canonical identification
+	\[
+		\Ch_R(M,N) \cong \Ch_R(R\otimes _RM,N) \cong \Ch_R(R,\underline{\Ch_R} (M,N))
+	.\]
+	Thus as long as we define the differentials in the correct way, we can still extract the proper data from this definition.
+
+	We explore this identification further. Recall by \cref{1.4.17} that degree 0 homogeneous elements of the internal hom are $\Hom_R(M,N)$. Let $f : R \to \underline{\Ch}_R(M,N)$, and consider the degree 0 morphism $f^0 : R^0 \to \Hom_R(M,N) $. Since $R^0$ is a ring, $f^0$ is uniquely determined by the image of its identity element $1\in R^0$. Since $f$ is a morphism of differential graded $R$-modules, we obtain $f^1 \circ d_R^0 = d^0\circ f^0$, where $d^0$ is the zeroth degree of the differential on the internal hom. Since $d_R^0=0$, this equation reads $d^0 \circ f^0=0$. In particular, $(d^0\circ f^0)(1)=0$. Let $\varphi =f^0(1): M \to N$. Recall that we want the possible choices of $\varphi $ to correspond exactly to differential graded $R$-module homomorphisms, so choose $\varphi $ to be differential graded, meaning $d_N \circ \varphi =\varphi \circ d_M$. In particular,
+	\[
+		d_N \circ \varphi -\varphi \circ d_M = 0 = d^0(\varphi )
+	.\]
+	Note that $d_N \circ \varphi : M \to N[1]$ and $\varphi \circ d_M : M \to N[1]$, so this equality indeed holds. Moreover, suppose we have any graded $R$-module homomorphism $\psi : M \to N$ such that $d_N \circ \psi-\psi \circ d_M=0$. Then $d_N \circ \psi =\psi \circ d_M$, so $\psi $ is a differential graded map. Thus if we define
+	\[
+		d^0(\psi )\coloneqq d_N \circ \psi -\psi \circ d_M
+	\]
+	for all $\psi \in \underline{\Ch}_R(M,N)^0$, then we obtain that the possible choices of $f^0(1)$ are precisely differential graded maps $\Ch_R(M,N)$, giving us our identification.
+
+	Since there is now a correspondence $\Hom_{R^0}(R^0, \Hom_R(M,N))\cong \Ch_R(M,N)$ of only degree 0 maps with degree 0 homogeneous elements, we should have that there is precisely one way to define the higher degrees of any such map. Consider a differential graded $R$-module morphism $f : R \to \underline{\Ch}_R(M,N)$. By the graded ring structure explored in \cref{1.4.2}, since $1\in R$ is a unit, we obtain that $r=r\cdot 1$. Since $f$ is a graded $R$-module homomorphism and 1 is homogeneous of degree 0, we have by \cref{1.4.11} that $f^i(r\cdot 1)=r\cdot f^0(1)$. Thus $f^i$ is uniquely determined by $f^0$.
+
+	We now want to define $d^i$ fully generally. Consider $d^1$. If we defined $d^1(f) = d_N \circ f - f\circ d_M$, then we would not obtain $d^1 \circ d^0=0$: let $f : M \to N$ be a differential graded $R$-module morphism. Then
+	\begin{align*}
+		(d^1\circ d^0)(f) = d^1(d_N \circ f-f\circ d_M) &= d_N\circ d_N \circ f - d_N\circ f\circ d_M - d_N \circ f \circ d_M + f\circ  d_M \circ d_M\\
+								&=-2d_N \circ f \circ d_M\\
+								&\neq 0
+	.\end{align*}
+	It appears that there has been a sign mismatch which made cancellation fail. Indeed, this issue is resolved by instead defining $d^1(f) = d_N \circ f + f \circ d_M$. The same logic shows that we must have $d^2(f) = d_N \circ f - f \circ d_M$, or else we would have the same sign mismatch, and this shows $d^3(f) = d_N \circ f + f \circ d_M$, and so on. In full generality we can thus define
+	\[
+		d^i(f) = d_N \circ f - (-1)^{\left| f \right| } f\circ d_M
+	.\]
+\end{construction}
+
+\begin{notation}\label{2.1.9}
+	From now on, we write the internal hom of $\Ch(R) $ as $\underline{\Hom}_R(M,N)$, since it is the same as that of $\mathcal{G} \Mod _R$. However, we continue writing the unenriched hom-sets as $\Ch_R(M,N)$.
+\end{notation}
+
+
+
+
+\begin{construction}\label{2.1.10}
+	We now promote the graded tensor product of \cref{1.1.8,1.4.13} to $\Ch(R) $ such that $\Ch(R) $ is closed monoidal with internal hom as given in \cref{2.1.8}. We would also like the evident forgetful functor $U : \Ch(R)  \to \mathcal{G} \Mod _R$ to be monoidal, so we are forced to define the tensor in $\Ch(R) $ in the same way as in $\mathcal{G} \Mod _R$. All we need to define are the differentials.
+
+	Let $M,N$ be differential graded $R$-modules. Recall the concrete construction of the tensor product
+	\[
+		\left( M\otimes _RN \right) ^k = \frac{\bigoplus_{i,j\in\mathbb{Z} } ^{i+j=k} M^i\otimes _\mathbb{Z} N^j}{\left\langle r m\otimes n - m\otimes rn\mid r\in R,m\in M,n\in N,\left| r \right| +\left| m \right| +\left| n \right| =k \right\rangle } 
+	\]
+	\[
+		=\frac{\displaystyle{\bigoplus_{i,j\in\mathbb{Z} } ^{i+j=k} M^i\otimes _\mathbb{Z} N^j}}{\displaystyle{\bigoplus_{p,q,d\in \mathbb{Z} } ^{p+q+d=k} \left\langle R^dM^p\otimes _\mathbb{Z} N^q - M^p \otimes _\mathbb{Z} R^dN^q\right\rangle}} 
+	.\]
+	It suffices to construct $\mathbb{Z} $-linear maps $d^i : (M\otimes _RN)^{i-1}  \to (M\otimes _RN)^i$ which are $R$-linear in the relevant sense. We will do this by enforcing the tensor-hom adjunction.
+
+	As explored in \cref{DO THIS}, the adjunct $\Ch_{R} (M\otimes _RN,P)\cong \Ch_{R} (M,\HOM_{R}(N, P) )$ is given by mapping $f : M\otimes _RN \to P$ to a map $\widehat{f} : M \to \HOM_{R}(N, P) $ given by $\widehat{f} (m)=f(m\otimes -)$ for any homogeneous element $m\in M$. To simplify notation, write $d_h$ for the differential on the internal hom. For the tensor-hom adjunction to hold in $\Ch_{R} $, this map must commute with differentials in the sense that
+	\[
+		d_{h} \circ \widehat{f} =\widehat{f} \circ d_M
+	.\]
+	We evaluate both sides on a homogeneous element $m\in M$, yielding the equality
+	\[
+		d_h(\widehat{f} (m)) = \widehat{f} (d_M(m))
+	.\]
+	Note that $\left| \widehat{f} (m) \right| =\left| m \right| $ since $\widehat{f} $ is a morphism of graded modules. Applying this to the formula for $d_h$ found in \cref{2.1.8}, we have that
+	\[
+		d_h(\widehat{f} (m)) = d_P\circ \widehat{f} (m) - (-1)^{\left| m \right| } \widehat{f} (m)\circ d_M
+	.\]
+	We now evaluate both sides on a homogeneous element $n\in N$:
+	\[
+		d_P(f(m\otimes n)) - (-1)^{\left| m \right| } f(m\otimes d_N(n)) = f(d_M(m)\otimes n)
+	.\]
+	Rearranging yields
+	\[
+		d_P(f(m\otimes n)) = f(d_M(m)\otimes n) + (-1)^{\left| m \right| } f(m\otimes d_N(n)) = f\left( d_M(m)\otimes n + (-1)^{\left| m \right| } m\otimes d_N(n) \right) 
+	\]
+	by $\mathbb{Z} $-linearity of $f$. Since this must hold on all $m\otimes n\in M\otimes _RN$, we obtain that
+	\[
+		d_P \circ f = f\circ \left(d_M \otimes _R1_N + (-1)^{\left| - \right| } 1_M \otimes _R d_N\right)
+	.\]
+	Since $f$ is a chain map, we have $d_P \circ f = f \circ d_{M\otimes_R N} $. We can choose $f,P$ such that $f$ is monic. Then we obtain
+	\[
+		d_{M\otimes _RN} (m\otimes n) = d_M(m) \otimes n + (-1)^{\left| m \right| } m\otimes d_N(n)
+	.\]
+	This defines the differential on $M\otimes _RN$. Note that it is $R$-bilinear in the relevant sense due to $R$-linearity of $d_M$ and $d_N$.
+\end{construction}
+
+\begin{corollary}\label{2.1.11}
+	The inclusion functor $\mathcal{G} \Mod _R \to \Ch_{R} $ which views graded $R$-modules as having 0 differential is monoidal. The forgetful functor $U : \Ch_{R}  \to \mathcal{G} \Mod _R$ is monoidal.
+\end{corollary}
+
+
+
+\section{Differential graded associative and commutative $R$-algebras}\label{sec:2.2}
+
+\begin{definition}\label{2.2.1}
+	A differential graded associative $R$-algebra is an algebra for the operad $\mathcal{A} \mathrm{ss} $ in $\Ch(R) $. The category of differential graded $R$-algebras is denoted $\dg \Alg_R$.
+\end{definition}
+
+\begin{remark}\label{2.2.2}
+	Let $\mathcal{O} $ be a (symmetric) colored operad and $F : \mathcal{O}  \to \mathcal{C} $ a (symmetric) algebra for $\mathcal{O} $ over a symmetric monoidal category $\mathcal{C} $. Let $U : \mathcal{C}  \to \mathcal{D} $ be a monoidal functor between symmetric monoidal categories. Then the composite $U\circ F : \mathcal{O}  \to \mathcal{D} $ is a (symmetric) algebra for $\mathcal{O} $ over $\mathcal{D} $. In particular, \cref{2.1.8} dictates that if $A$ is a differential graded associative $R$-algebra, then composing with the functor $\Ch(R) \to \mathcal{G}\Mod_R$ yields a graded associative $R$-algebra. Since this functor simply forgets the differentials, we obtain that a differential graded associative $R$-algebra is precisely a graded associative $R$-algebra together with some differentials.
+\end{remark}
+
+\begin{discussion}\label{2.2.3}
+	We will now show that the differential for a differential graded $R$-algebra $(A,d_A)$ is a \emph{derivation}, meaning it satisfies a Leibniz rule $d_A(xy) = d_A(x)y + (-1)^{\left| x \right| } xd_A(y)$ for $x,y\in A$ homogeneous elements. To do this, we use the fact that since the multiplication map $\mu : A\otimes _RA \to A$ is a morphism in $\Ch_{R} $, it must satisfy $\mu \circ d_{A\otimes_RA} =d_A \circ \mu $. We have
+	\[
+		(d\circ \mu )(x\otimes y) = d(xy) = \mu \left( d_A(x)\otimes y + (-1)^{\left| x \right| } x\otimes d_A(y) \right) =\mu \left( d_A(x)\otimes y \right) +(-1)^{\left| x \right| } \mu \left( x\otimes d_A(y) \right) 
+	\]
+	\[
+		=d_A(x)y+(-1)^{\left| x \right| } xd_A(y)
+	.\]
+\end{discussion}
+
+\begin{definition}\label{2.2.4}
+	A differential graded commutative $R$-algebra is a commutative algebra for the operad $\mathcal{C} \mathrm{om} $ in $\Ch(R) $. The category of differential graded commutative $R$-algebras is denoted $\dg \mathcal{C}\Alg_R$.
+\end{definition}
+
+\begin{discussion}\label{2.2.5}
+	All of the properties of differential graded commutative algebras have already been explored in \cref{2.2.3} and \cref{1.3.8}: they are graded $R$-algebras satisfing graded commutativity in the sense that $xy=(-1)^{\left| x \right| \left| y \right| } yx$, and have a differential satisfying the Leibniz rule $d(xy)=d(x)y + (-1)^{\left| x \right| }xd(y)$ for all homogeneous elements $x,y$.
+\end{discussion}
+
+An example of great importance is the graded symmetric $R$-algebra on a graded $R$-module. We begin with a review of linear algebra.
+
+\begin{discussion}\label{2.2.6}
+	For now, let $R$ be a normal ring and $M$ an $R$-module. Recall that the symmetric algebra $\operatorname{Sym} ^{\bullet} (M)$ is given by the quotient of the tensor algebra $T(M)$ by the subalgebra generated by elements of the form $x\otimes y-y\otimes x$. We then denote equivalence classes $[x\otimes y]$ by $xy$, and the quotient forces $xy=yx$. We would like to recharacterize this construction in a more general manner.
+
+	We can start by recharacterizing the tensor algebra. Given an $R$-module $M$, the tensor algebra $T(M)$ can intuitively be thought of as the free associative $R$-algebra on $M$. The way to formalize such a notion is to say that the tensor algebra defines a functor $T : \Mod _R \to \Alg_R$ which is left adjoint to the evident forgetful functor $U : \Alg_R \to \Mod _R$. It is thus natural to think of the symmetric algebra as defining a functor $\operatorname{Sym}^{\bullet}  : \Mod _R \to \mathcal{C}\Alg_R$ which is left adjoint to the forgetful functor $U : \mathcal{C} \Alg_R \to \Mod _R$; hence $\operatorname{Sym}^{\bullet}  $ is the free commutative algebra on a module. This suggests the following definition.
+\end{discussion}
+
+\begin{definition}\label{2.2.7}
+	Let $M$ be a graded $R$-module. Then the \emph{graded symmetric $R$-algebra on $M$}, denoted $\operatorname{Sym}^{\bullet} (M)$, is a commutative algebra which admits a map $i : M \to \operatorname{Sym}^{\bullet}(M)$ which is universal in the sense that precomposition induces isomorphisms
+	\[
+		i^* : \mathcal{C} \Alg_R(\operatorname{Sym}^{\bullet}  (M),A) \cong \Hom_R(M,U(A))
+	\]
+	natural in $A$, where $U : \mathcal{C} \Alg_R \to \mathcal{G} \Mod _R$ is the forgetful functor.
+\end{definition}
+
+\begin{discussion}\label{2.2.8}
+	Given a graded $R$-module $M$, we can define a tensor algebra $T(M)$ by taking $T(M)\coloneqq \bigoplus_{i\geq 0} M^{\otimes i} $, where the tensor is the graded tensor product taken over $R$. Here we define the 0th tensor power to be $R$. Although we will not show this, it will not be unexpected that $T$ is universal in the sense a tensor algebra must be universal. We might expect that $\operatorname{Sym}^{\bullet}  (M)$ can be derived by applying the proper quotient to $T(M)$ such that the algebra $\operatorname{Sym}^{\bullet}  (M): \mathcal{A} \mathrm{ss}  \to \mathcal{G} \Mod _R$ becomes a commutative algebra $\mathcal{C} \mathrm{om} \to \mathcal{G} \Mod _R$. As explored in \cref{1.3.8}, this amounts to quotienting by the $S_n$-action on $T(M)$.
+
+	We explore once again what that means. Let $\alpha : \left\langle 2 \right\rangle  \to \left\langle 2 \right\rangle $ be the permutation $1\mapsto 2\mapsto 1$. This acts on symmetric monoidal categories by precomposing by the symmetry isomorphism, which we will write as $\sigma ^*$. Since this acts trivially on $S_n$, we must identify the multiplication $\mu : T(M)\otimes _RT(M) \to T(M)$ with $\sigma ^*\mu : T(M)\otimes _RT(M) \to T(M)$. Since symmetry is given by Koszul braiding, this implies that we have an equality between $\mu (x\otimes y)=xy$ and $(\mu \circ \sigma )(x\otimes y) = (-1)^{\left| x \right| \left| y \right| } yx$. Of course since $\alpha $ generates the $S_n$ action on symmetric monoidal categories, we obtain that
+	\[
+		\operatorname{Sym} (M) = \frac{T(M)}{  \left\langle xy-(-1)^{\left| x \right| \left| y \right| } yx \mid x,y\in T(M) \right\rangle} 
+	.\]
+	Recall here that the quotient is taken degreewise.
+
+	We now show that this definition of $\operatorname{Sym}^{\bullet}  (M)$ satisfies \cref{2.2.7}. Define the map $i : M \to \operatorname{Sym}^{\bullet}  (M)$ as follows. Since $M=M^{\otimes 1} $, there is a natural inclusion $M\hookrightarrow T(M)$. Postcomposing by the projection $T(M)\to \Sym^{\bullet}  (M)$ yields a map $i : M \to \Sym (M)$. Since $i^*$ yields a morphism $\mathcal{C} \Alg_{R} (\Sym^{\bullet}  (M),A) \to \Hom_{R}(M, U(A)) $, we simply show that a morphism $f : M \to U(A)$ induces a morphism $\widetilde{f} : \Sym^{\bullet}  (M) \to A$ with $\widetilde{f} \circ i=f$.
+
+	The map $i$ is trivially shown to be pointwise injective, so we abuse notation and write $i(x)=x$ for $x\in M$ a homogeneous element. Let $f : M \to U(A)$ be a morphism of graded $R$-modules. For $\widetilde{f} $ to be a morphism of graded $R$-algebras, we must have $\widetilde{f} (x_1 \cdots x_n) = \widetilde{f} (x_1)\cdots \widetilde{f} (x_n)$. We then define $\widetilde{f} (x_i) = f(x_i)$. This manifestly satisfies $\widetilde{f} \circ i=f$, yielding our adjunction.
+\end{discussion}
+
+\begin{example}\label{2.2.9}
+	Let $R$ be a regular ring and $M$ be a regular $R$-module concentrated in degree 0, such that $M[-1]$ is concentrated in degree 1. Then $\Sym ^{\bullet} (M) \cong \Lambda ^{\bullet} M$, where $(\Lambda^{\bullet} M)^i = \Lambda ^iM$ is the $i$th exterior power of $M$ over $R$.
+\end{example}
+
+\begin{definition}\label{2.2.10}
+	Let $M$ be a differential graded $R$-module. Then the \emph{differential graded symmetric $R$-algebra} on $M$, denoted $\Sym^{\bullet}  (M)$, is the differential graded commutative algebra which is universal in the sense that
+	\[
+		\dg\mathcal{C} \Alg_{R} (\Sym^{\bullet}  (M),A) \cong \Ch_{R} (M,U(A))
+	\]
+	natural in $A$, where $U : \dg \mathcal{C} \Alg_{R}  \to \Ch_{R} $ is the forgetful functor.
+\end{definition}
+\begin{construction}\label{2.2.11}
+	Let $(M,d_M)$ be a differential graded $R$-module. We define a differential $d_{S} $ on the graded symmetric algebra $\Sym^{\bullet}  (M)$ to construct the differential graded symmetric algebra; the same logic as \cref{2.2.8} proves that it solves the universal problem in the differential graded categories. We need the inclusion $i : M \to \Sym^{\bullet}  (M)$ to be a morphism of differential graded $R$-modules, meaning $d_S\circ i=i\circ d_M$. If we view $i$ as restriction along $M$, then this implies that $d_S|M=d_M$.	By \cref{2.2.3}, $d_S$ must satisfy the graded Leibniz rule. This forces
+	\[
+		d_S(x) = d_M(x),\qquad d_S(xy) = d_M(x)y + (-1)^{\left| x \right| } d_M(y)
+	\]
+	for all homogeneous elements $x,y\in M$. Inducting on this definition shows
+	\[
+		d_M(x_1 \cdots x_n) = \sum_{i=1}^{n} (-1)^{\sum_{j=1}^{i-1} \left| x_j \right|} x_1 \cdots d_M(x_i)\cdots x_n
+	.\]
+	A mildly annoying proof shows that this derivation is indeed an $R$-linear map of differential graded $R$-modules, completing the proof.
+\end{construction}
+
+\section{Differential graded Lie $R$-algebras}
+
+We now want to define differential graded Lie $R$-algebras over a graded ring $R$. Doing this intuitively is nontrivial, since the Lie operad is not particularly simple to define. We start by assuming $R$ is a normal ring.
+
+\begin{definition}\label{2.3.1}
+	Let $(\mathcal{V},\otimes,I) $ be a monoidal category, although usually it is a closed symmetric monoidal category. A $\mathcal{V} $-enriched colored operad $\mathcal{O} $, or simply a colored $\mathcal{V} $-operad, is
+	\begin{itemize}
+		\item A collection $\Obj(\mathcal{O} ) $ of \emph{objects} or \emph{colors}.
+		\item For any $n\geq 0$, any $\left\{ x_i \right\} _{1\leq i\leq n} \subseteq \Obj(\mathcal{O} ) $, and any $y\in \Obj(\mathcal{O} ) $, an object $\mathcal{O} (\left\{ x_i \right\},y)$ of $\mathcal{V} $ called a \emph{hom-object} of \emph{$n$-multimorphisms}.
+		\item For any $x\in \Obj(\mathcal{O} ) $, a morphism $1_x : I \to \mathcal{O} (x,x)$ called the \emph{identity morphism on $x$}.
+		\item For any $n\geq 1$, any objects $\left\{ x_i \right\} _{1\leq i\leq n} \subseteq \Obj(\mathcal{O} ) $, integers $k_1, \ldots , k_n$, and sequences of objects $\left\{ w_{i,j}\right\}_{1\leq j\leq k_i} $ for all $1\leq i\leq n$, a composition map
+			\[
+				\mathcal{O} (\left\{ x_i \right\} ,y) \otimes \mathcal{O} (\left\{ w_{1,j}  \right\} ,x_1) \otimes \cdots \otimes \mathcal{O} (\left\{ w_{n,j} \right\} ,x_n)\to \mathcal{O} (\left\{ w_{i,j} \right\}_{1\leq i\leq n,\,1\leq j\leq k_i}, y)
+			.\]
+		\item This data must satisfy associativity and unit laws, as expected.
+	\end{itemize}
+	The operad is called \emph{symmetric} if composition is $S_n$-equivariant.
+\end{definition}
+
+
+\begin{definition}\label{2.3.2}
+	Fix a ring $R$. The operad $\mathfrak{Lie}_R$ is the symmetric colored $\Mod _R$-operad with one color. For simplicitly of notation, write $\mathfrak{Lie}_R(n)$ for the set of $n$-multimorphisms $\mathfrak{Lie}_R(\left\{ *,\ldots , * \right\} ,*)$.
+	\begin{itemize}
+		\item Let $V_n$ be a free $R$-module on $n$ letters. Let $F(V_n)$ be the \emph{free Lie $R$-algebra} on $V_n$, formally defined as the left adjoint to the forgetful functor. To construct $F(V_n)$ explicitly, let $T(V_n)$ be the tensor $R$-algebra, which forms a Lie $R$-algebra via $[x,y]\coloneqq x\otimes y-y\otimes x$. Then $F(V_n)$ is the Lie subalgebra generated by $V_n \subseteq T(V_n)$.
+		\item An element of $F(V_n)$ is thus a nested collection of commutators of elements of $V_n$. For $x_1, \ldots ,x_n\in V_n$, define $P(x_1, \ldots ,x_n)$ to be any nested commutator of $n$ elements, called a \emph{Lie polynomial of degree $n$}. For example, $[x_1,[x_2,x_3]]$ and $[[x_1,x_2],x_3]$ are both valid nested commutators of $3$ elements.
+		\item Define the space $\mathfrak{Lie}_R(n)$ of $n$-multimorphisms as the subspace of $F(V_n)$ spanned by elements of the form $P(x_1, \ldots , x_n)$ where each $x_i$ appears exactly once.
+		\item Given $P(x_1, \ldots ,x_n)\in \mathfrak{Lie} _R(n)$ and $\sigma \in S_n$, define the $S_n$-action to be
+			\[
+				(P\cdot \sigma )(x_1, \ldots ,x_n) = P(x_{\sigma (1)} , \ldots , x_{\sigma (n)} ).
+			\]
+		\item Let $P\in \mathfrak{Lie} _R(m)$, let $f : \left\langle n \right\rangle  \to \left\langle m \right\rangle $, and let $Q_j\in \mathfrak{Lie}_R(f^{-1} (j))$ for all $j\in \left\langle m \right\rangle $. The composition map is defined as $Q_1 \otimes_R \cdots \otimes _RQ_m \otimes_R P \mapsto P(Q_1, \ldots ,Q_m)$, where the notation means substitution. or example, if $P(x_1, x_2)=[x_1,x_2]$, if $Q_1(y_1, y_2,y_3)=[[y_1,y_2],y_3]$, and $Q_2(z_1,z_2,z_3)=[z_1,[z_2,z_3]]$, then
+			\[
+				P(Q_1,Q_2) = [[[y_1,y_2],y_3],[z_1,[z_2,z_3]]]
+			.\]
+	\end{itemize}
+\end{definition}
+
+\begin{discussion}\label{2.3.3}
+	The definition of the $\mathfrak{Lie}_R$ operad is highly involved and deserves significant analysis. The reason for requiring enrichment over $\Mod _R$ is twofold. First, the Jacobi identity requires enrichment over abelian groups in some sense, since we need to be able to add and negate morphisms. Additionally, $R$-multilinearity of the Lie bracket requires $R$-enrichment. Thus we will see later that a Lie $R$-algebra is an algebra over the operad $\mathfrak{Lie} _R$ in $\Mod _R$. For now, we investigate the structure of \cref{2.3.2}. We start with the basic structure of the spaces of multimorphisms.
+
+	Since $V_0 \cong 0$, we see that $F(V_0) \cong 0$ contains exactly one element. One can define the zero Lie polyomial $P(0)=0$, showing that $\mathfrak{Lie} _R(0)\cong 0$. As seen in \cref{1.2.7}, this will guarentee that the element 0 of a Lie $R$-algebra annihilates higher arity operations.
+
+	Since $V_1$ is 1-dimensional, any nonzero element forms a basis. Let $x\in V_1$ be nonzero. The only valid Lie polynomial of degree 1 is $P(x) = x$, so there is a unique morphism $*\to *$ in $\mathfrak{Lie} _R(1)$. Define this morphism to be the identity element, meaning we have $\mathfrak{Lie} _R(1)\cong \left\langle P=1_x \right\rangle $ is the free $R$-module on the identity morphism. Here it's useful to recall that polynomials themselves need not form a $R$-module; for example $P+P=2P \neq P$, so the set $\left\{ P \right\} $ is not a $R$-module. Thus we must generate a space on $P$. The reason that $\mathfrak{Lie} _R(0)\cong 0$ was since the zero polynomial satisfied $k0=0$.
+
+	Now we consider $V_2$, which is where we expect to see some notion of a Lie bracket. Since $V_2$ has dimension 2, we can choose a basis $\left\{ x,y \right\} $ for $V_2$. The only valid Lie polynomials of degree 2 are $P(x,y) = [x,y]$ and $Q(x,y) = [y,x]$. However, since the Lie bracket is taken in the tensor $R$-algebra $T(V_2)$ which is itself a Lie $R$-algebra, we have the identity $[x,y]=-[y,x]$. Thus we write $Q=-P$, and find that $\mathfrak{Lie} _R(2) \cong \left\langle P \right\rangle $ is the 1-dimensional free $R$-module generated by $P(x,y) = [x,y]$. It will be important to note for \cref{2.3.9} that if $\tau =(12)\in S_2$ is the nontrivial permutation, then $P\cdot \tau =Q=-P$.
+
+	Now consider $V_3$, which will be the final space we consider. We expect at this point to see the Jacobi identity, which is the only axiom of a Lie $R$-algebra which requires arity 3, so we recall what the Jacobi identity should say. If $x,y,z\in \mathfrak{g} $ are elements of some Lie $R$-algebra $\mathfrak{g} $, then
+	\[
+		[x,[y,z]] + [y,[z,x]] + [z,[x,y]]=0
+	.\]
+	Write $\mu (x,y) = [x,y]$ as the 2-multimorphism which should encode the Lie bracket. Let $x_1,x_2,x_3\in V_3$ be generators. It is clear that $\mathfrak{Lie} _R$ is spanned by all permutations of the two possible Lie bracket combinations $P(x_1,x_2,x_3)=[x_1,[x_2,x_3]]$ and $Q(x_1,x_2,x_3)=[[x_1,x_2],x_3]$. However, by antisymmetry of the Lie bracket,
+	\[
+		Q(x_1,x_2,x_3) = [[x_1,x_2],x_3] = -[x_3,[x_1,x_2]] = P(x_3,x_1,x_2)
+	.\]
+	Thus $Q$ is in the span of the permutations of $P$. We find that $\mathfrak{Lie}_R(3) \cong \left\langle P\cdot S_3 \right\rangle $. We also know that, since $T(V_3)$ is a Lie $R$-algebra, the Jacobi identity implies
+	\[
+		P(x_1,x_2,x_3) + P(x_2,x_3,x_1) + P(x_3,x_1,x_2) = 0
+	.\]
+	However, the Jacobi identity should be written in terms of the Lie bracket $\mu $, not the Lie polynomial $P$. Thus we want to rewrite this as
+	\[
+		(\mu \circ (1_*,\mu ))(x_1,x_2,x_3) + (\mu \circ (1_*,\mu ))(x_2,x_3,x_1) + (\mu \circ (1_*,\mu ))(x_3,x_1,x_2)=0
+	.\]
+	Here $1_*$ is the identity morphism. It thus suffices to show $P=\mu \circ (1_*,\mu )$. Recall from \cref{2.3.2} that composition is given by substitution, meaning $\mu \circ (1_*,\mu ) = \mu (1_*,\mu )$. Evaluating on the basis yields
+	\[
+		(\mu (1_*,\mu ))(x_1,x_2,x_3) = \mu (1_*(x_1),\mu (x_2,x_3)) = [x_1,[x_2,x_3]] = P(x_1,x_2,x_3)
+	.\]
+	Thus the Jacobi identity holds.
+\end{discussion}
+
+\begin{definition}\label{2.3.4}
+	Let $R$ be a ring. A \emph{Lie $R$-algebra} is an algebra for $\mathfrak{Lie}_R$ over $\Mod _R$. The category of Lie $R$-algebras, denoted $\Lie _R$, is the category $\mathcal{C}\Alg_{\mathfrak{Lie}_R} (\Mod _R)$.
+\end{definition}
+
+\begin{discussion}\label{2.3.5}
+	The structure of Lie $R$-algebras should aready be fairly well-understood from \cref{2.3.4}, especially since the category of enrichment is concrete, meaning the study of enriched category theory is simplified by identifying with the underlying category. Let $\mathfrak{g} $ be a Lie $R$-algebra All arity $n\geq 2$ operations are generated by the Lie bracket $\mu $ and the identity morphism. The Jacobi identity and antisymmetry of $\mu $ are satisfied. There is a distinguished element $0: R \to \mathfrak{g} $ which annihilates $\mu $ in the relevant sense. Morphisms of Lie $R$-algebras $\mathfrak{g} \to \mathfrak{h} $ are morphisms of $R$-modules which preserve $\mu $ in the relevant sense. We are more interested in how to promote this to the graded setting. Since we required $\mathfrak{Lie}_R$ to be enriched over $\Mod _R$ in order to define Lie $R$-algebras, we might expect a graded or differential graded Lie operad to be enriched over graded or differential graded $R$-modules. This would also allow for $R$ to be a graded ring. We do this by concentrating the operad of \cref{2.3.2} in degree 0, with trivial differential.
+\end{discussion}
+
+\begin{definition}\label{2.3.6}
+	Let $R$ be a graded ring. A \emph{free graded $R$-module} $F(S)$ is defined on a collection $S=\left\{ S_i \right\}_{i\in\mathbb{Z} } $ of sets, and is defined in the way one would expect: $F(S)^k$ consists of all formal linear combinations of formal elements $rs$, where $r\in R$ and $s\in S$ are homogeneous elements with $\left| r \right| +\left| s \right| =k$. If $S$ is concentrated in degree 0, then so is $F(S)$, and we refer to $F(S)$ as a \emph{free $R$-module}.
+\end{definition}
+
+\begin{definition}\label{2.3.7}
+	Let $R$ be a graded ring.
+	\begin{enumerate}[align=left, label=(\arabic*)]
+		\item We can define the operad $\mathfrak{gLie}_R$ in the same way as \cref{2.3.2} by taking the generators $\left\{ x_1, \ldots ,x_n \right\} $ of $V_n$ to be concentrated in degree 0.
+		\item The operad $\mathfrak{dgLie}_R$ is defined by giving $\mathfrak{gLie}_R$ the 0 differential pointwise.
+	\end{enumerate}
+	In particular if $R$ is concentrated in degree 0, then $\mathfrak{gLie} _R$ and $\mathfrak{dgLie} _R$ are simply the operad $\mathfrak{Lie} _R$ concentrated in degree 0 pointwise.
+\end{definition}
+
+\begin{definition}\label{2.3.8}
+	Let $R$ be a graded ring.
+	\begin{enumerate}[align=left, label=(\arabic*)]
+		\item A \emph{graded Lie $R$-algebra} is an algebra for $\mathfrak{gLie}_R$ over $\mathcal{G} \Mod _R$. The category of graded Lie $R$-algebras, denoted $\mathcal{G} \Lie _R$, is the category $\mathcal{C}\Alg_{\mathfrak{gLie}_R} (\mathcal{G} \Mod _R)$.
+		\item A \emph{differential graded Lie $R$-algebra} is an algebra for $\mathfrak{dgLie} _R$ over $\Ch_{R} $. The category of differential graded Lie $R$-algebras, denoted $\dgLie _R$, is the category $\mathcal{C}\Alg_{\mathfrak{dgLie}_R} (\Ch_{R} )$.
+	\end{enumerate}
+\end{definition}
+
+\begin{discussion}\label{2.3.9}
+	We discuss graded Lie $R$-algebras first. Let $\mathfrak{g} $ be a graded Lie $R$-algebra. We see first that $\mathfrak{g} $ is a graded $R$-module. By \cref{2.3.3}, we see that there is a map $[-,-]: \mathfrak{g} \otimes _R\mathfrak{g}  \to \mathfrak{g} $ induced by the 2-ary generator $\mu \in \mathfrak{gLie}_R(2)^0$. Let $x,y\in \mathfrak{g} $ be homogeneous elements. We will start by showing that $[-,-]=\mathfrak{g} (\mu )$ satisfies \emph{graded antisymmetry}, meaning $[x,y]=-(-1)^{\left| x \right| \left| y \right| } [y,x]$.
+
+	It will be useful to view $\mathfrak{g} $ as a functor of symmetric colored $\mathcal{G}\Mod _R$-operads, meaning $[-,-]=\mathfrak{g} (\mu )$. Since $\mathfrak{g} $ is a $\mathcal{G}\Mod _R$-functor, it preserves scalar multiplication. Since it is a symmetric functor, it preserves the $S_n$-action. Recall from \cref{1.3.4} that the induced action by $\tau $ on the symmetric monoidal category $\mathcal{G} \Mod _R$ is precomposition by the symmetry isomorphism $\sigma $ given by Koszul braiding. Finally, recall from \cref{2.3.3} that $\mu \cdot \tau =-\mu $. Thus
+	\[
+		[-,-]\circ \sigma =\mathfrak{g} (\mu )\circ \sigma =\mathfrak{g} (\mu \cdot \tau )=\mathfrak{g} (-\mu )=-\mathfrak{g} (\mu )=-[-,-]
+	.\]
+	This implies
+	\[
+		(-1)^{\left| x \right| \left| y \right| } [y,x] =([-,-]\circ \sigma )(x\otimes y) =(-[-,-])(x\otimes y) = -[x,y]
+	.\]
+	Multiplying both sides by $-1$ yields
+	\[
+		[x,y]=-(-1)^{\left| x \right| \left| y \right| } [y,x]
+	.\]
+	Therefore, Lie brackets for graded Lie $R$-algebras satisfy a graded antisymmetry rule.
+
+	We also remark that since $[-,-]: \mathfrak{g} \otimes _R\mathfrak{g}  \to \mathfrak{g} $ is a morphism of graded $R$-modules, it must preserve degrees. Using the explicit construction of the graded tensor product in \cref{1.4.14}, it follows that $[x,y]$ has degree $\left| x\otimes y \right| =\left| x \right| +\left| y \right| $. This is usually written as $[\mathfrak{g} ^i,\mathfrak{g} ^j]=\mathfrak{g} ^{i+j} $.
+
+	We next show the Lie bracket satisfies a \emph{graded Jacobi identity}, which is usually written as
+	\begin{equation}\label{eq:2.3.9.1}
+		[x,[y,z]]=[[x,y],z]+(-1)^{\left| x \right| \left| y \right| } [y,[x,z]].\tag{$*$}
+	\end{equation}
+	The Jacobi identity in $\mathfrak{gLie}_R$ can be rewritten using the permutations $\tau_1 = (123)$ and $\tau _2 = (132)=(123)^2$. We have
+	\[
+		(\mu \circ (1,\mu ))+(\mu \circ (1,\mu ))\cdot \tau_1 + (\mu \circ (1,\mu ))\cdot \tau _2=0
+	.\]
+	Mac Lane's coherence axioms for symmetric monoidal categories prove that we may write the action of these permutations on $\mathcal{G} \Mod _R$ as follows:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\otimes y\otimes z \ar[" \tau _1 ", bend left, rr] \ar[" \sigma \otimes 1  ", r]  & y\otimes x\otimes z \ar[" 1\otimes \sigma  ", r]  & y\otimes z\otimes x,
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\otimes y\otimes z \ar[" \tau _2 ", bend right, rr] \ar[" 1\otimes \sigma  ", r]  & x\otimes z\otimes y \ar[" \sigma \otimes 1 ", r]  & z\otimes x\otimes y.
+	\end{tikzcd}\]
+	Since $\mathfrak{g} $ is a $\mathcal{G}\Mod _R$-functor and a functor of symmetric colored operads, it preserves the $S_3$-action, addition, and the zero element. We thus have
+	\begin{align*}
+		\mathfrak{g} ( (\mu \circ (1,\mu ))+(\mu \circ (1,\mu ))\cdot \tau_1 + (\mu \circ (1,\mu ))\cdot \tau _2 ) &= \mathfrak{g} ( \mu \circ (1,\mu ) ) +\mathfrak{g} (\mu \circ (1,\mu ))\circ \tau _1+\mathfrak{g} (\mu \circ (1,\mu ))\circ \tau _2\\
+															   &=[-,[-,-]]+[-,[-,-]]\circ \tau _1 + [-,[-,-]]\circ \tau _2\\
+															   &=0
+	.\end{align*}
+	We evaluate this on an element $x\otimes y\otimes z$:
+	\[
+		([-,[-,-]]+[-,[-,-]]\circ \tau _1 + [-,[-,-]]\circ \tau _2)(x\otimes y\otimes z)
+	\]
+	\begin{equation}\label{eq:2.3.9.2}
+		=[x,[y,z]]+(-1)^{\left| x \right| \left| y \right| } (-1)^{\left| x \right| \left| z \right| } [y,[z,x]]+(-1)^{\left| y \right| \left| z \right| } (-1)^{\left| x \right| \left| z \right| } [z,[x,y]]=0.\tag{$**$}
+	\end{equation}
+	One form of the Jacobi identity (the one listed on Wikipedia) is derived from this as follows. We multiply both sides by $(-1)^{\left| x \right| \left| z \right| } $ to obtain
+	\[
+		(-1)^{\left| x \right| \left| z \right| } [x,[y,z]]+(-1)^{\left| x \right| \left| y \right| } [y,[z,x]]+(-1)^{\left| y \right| \left| z \right| } [z,[x,y]]=0
+	.\]
+	The other form of the Jacobi identity \eqref{eq:2.3.9.1} is derived from \eqref{eq:2.3.9.2} as follows.
+
+	We can rewrite the second and third terms using graded antisymmetry. For the second term, applying graded antisymmetry to the inner bracket yields $[z,x] = -(-1)^{\left| x \right| \left| z \right|}[x,z]$, so
+    \[
+        (-1)^{\left| x \right| \left| y \right| + \left| x \right| \left| z \right| } [y,[z,x]] = -(-1)^{\left| x \right| \left| y \right| + 2\left| x \right| \left| z \right| } [y,[x,z]] = -(-1)^{\left| x \right| \left| y \right|} [y,[x,z]]
+    .\]
+    For the third term, recall that the degree of $[x,y]$ is $\left| x \right| + \left| y \right|$. Applying graded antisymmetry to the outer bracket yields $[z,[x,y]] = -(-1)^{\left| z \right|(\left| x \right| + \left| y \right|)} [[x,y],z]$, so
+    \[
+        (-1)^{\left| y \right| \left| z \right| + \left| x \right| \left| z \right| } [z,[x,y]] = -(-1)^{2\left| y \right| \left| z \right| + 2\left| x \right| \left| z \right| } [[x,y],z] = -[[x,y],z]
+    .\]
+    Substituting these back into our evaluated sum gives
+    \[
+        [x,[y,z]] - (-1)^{\left| x \right| \left| y \right| } [y,[x,z]] - [[x,y],z] = 0
+    ,\]
+    which rearranging yields equation \eqref{eq:2.3.9.1}:
+    \[
+        [x,[y,z]]=[[x,y],z]+(-1)^{\left| x \right| \left| y \right| } [y,[x,z]]
+    .\]
+    Thus we find that a graded Lie $R$-algebra is simply a graded $R$-module $\mathfrak{g} $ with a graded antisymmetric map $[-,-]: \mathfrak{g} \otimes _R\mathfrak{g}  \to \mathfrak{g} $ satisfying a graded Jacobi identity.
+\end{discussion}
+
+\begin{discussion}\label{2.3.10}
+	We now discuss differential graded Lie $R$-algebras. Let $\mathfrak{g} $ be a differential graded Lie $R$-algebra. Since this is an object of $\Ch_{R} $ (with some extra algebraic properties), it has a differential $d$. By \cref{2.1.11}, the forgetful functor $U : \Ch_{R}  \to \mathcal{G} \Mod _R$ is monoidal, so if $\mathfrak{g} $ is a differential graded Lie $R$-algebra, then $U\circ \mathfrak{g} $ is a graded Lie $R$-algebra. Thus the underlying graded structure of $\mathfrak{g} $ is described by \cref{2.3.9}, meaning we only need to consider the structure of the differential $d$.
+
+	We will show that $d$ acts as a derivation on the Lie bracket, meaning for any homogeneous elements $x,y\in \mathfrak{g} $, it satisfies a graded Leibniz rule:
+	\[
+		d[x,y] = [d(x),y] + (-1)^{\left| x \right| } [x,d(y)]
+	.\]
+	Since $\mathfrak{g} $ is an algebra in $\Ch_{R} $, we find that the Lie bracket must be a map of differential graded $R$-modules, meaning it commutes with $d$ in the sense that $d\circ [-,-] = [-,-]\circ d_{\mathfrak{g} \otimes \mathfrak{g} } $, where $d_{\mathfrak{g} \otimes \mathfrak{g} } $ is the differential on the tensor product $\mathfrak{g} \otimes \mathfrak{g} $. Recall by \cref{2.1.10} that for any $x,y\in \mathfrak{g} $,
+	\[
+		d_{\mathfrak{g} \otimes \mathfrak{g} } (x\otimes y) = d(x)\otimes y + (-1)^{\left| x \right| } x\otimes d(y)
+	.\]
+	We therefore obtain equalities
+	\[
+		d[x,y] = (d\circ [-,-])(x\otimes y) = ([-,-]\circ d_{\mathfrak{g} \otimes \mathfrak{g} } )(x\otimes y) = [-,-]\left( d(x)\otimes y + (-1)^{\left| x \right| } x\otimes d(y) \right) 
+	.\]
+	By $R$-linearity of the bracket, this implies
+	\[
+		d[x,y] = [d(x),y] + (-1)^{\left| x \right| } [x,d(y)]
+	.\]
+	Thus, a differential graded Lie $R$-algebra is simply a graded Lie $R$-algebra together with a differential which acts as a derivation on the Lie bracket.
+\end{discussion}
+
+\section{Closure properties}
+
+One important thing we have not discussed is the various closure properties of these (differential) graded algebraic structures under taking specific (co)limits and universal constructions. It will be useful to recall the following results.
+
+\begin{proposition}[\cite{ml} \S5.2 Corollary 2]\label{2.4.1}
+	If a category $\mathcal{C} $ has all small products and equalizers of all pairs of arrows, then $\mathcal{C} $ is complete. Dually, if $\mathcal{C} $ has all small coproducts and all coequalizers of pairs of arrows, then $\mathcal{C} $ is cocomplete.
+\end{proposition}
+
+\begin{proposition}[\cite{ml} \S5.3 Theorem 1]\label{2.4.2}
+	Let $\mathcal{J} ,\mathcal{C} ,\mathcal{D} $ be categories, and let $F : \mathcal{J}  \to \Fun(\mathcal{C} , \mathcal{D} ) $ be a functor. If for every $c\in \mathcal{C} $, the functor $\mathcal{J} \to \mathcal{D} $ given by $F(c)$ has a limit, then $F$ has a limit given by $(\lim F)(c) = \lim (F(c))$. We usually phrase this as limits in functor categories being computed \emph{pointwise}.
+\end{proposition}
+
+This has an immediate consequence, which we previously noted in \cref{1.1.2}.
+
+\begin{proposition}\label{2.4.3}
+	The category $\mathcal{G} \Mod _R$ is complete and cocomplete if $R$ is concentrated in degree 0.
+\end{proposition}
+\begin{proof}
+	A graded $R$-module in this case is a functor $\mathbb{Z} \to \Mod _R$. Since $\Mod _R$ is complete and cocomplete, the statement follows by \cref{2.4.2}.
+\end{proof}
+
+\begin{proposition}\label{2.4.4}
+	The category $\mathcal{G} \Mod _R$ is complete and cocomplete if $R$ is graded.
+\end{proposition}
+\begin{proof}
+	I don't believe this can be conveniently thought of as a functor category, since we formally defined it as a pullback of a category of functors of colored operads, so we appeal to \cref{2.4.1}. The constructions of (co)products and (co)equalizers are pointwise and are the same as in $\Mod_R$.
+\end{proof}
+
+\begin{definition}\label{2.4.5}
+	Let $\mathcal{O} $ be an operad with one color $*\in \mathcal{O} $, and $\mathcal{V} $ a symmetric closed monoidal category. Then the forgetful functor $U : \Alg_{\mathcal{O} } (\mathcal{V} ) \to \mathcal{V} $ is defined on objects by $F\mapsto F(*)$ and morphisms by $\alpha \mapsto (\alpha _*: F(*) \to G(*)) $.
+\end{definition}
+
+\begin{proposition}\label{2.4.6}
+	Let $\mathcal{O} $ be an operad with one color $*\in \mathcal{O} $, and $\mathcal{V} $ a symmetric closed monoidal category. Then the forgetful functor $U : \Alg_{\mathcal{O} } (\mathcal{V} ) \to \mathcal{V} $ creates limits.
+\end{proposition}
+\begin{proof}
+	Let $F : \mathcal{J}  \to \Alg_{\mathcal{O} } (\mathcal{V} )$ be a diagram such that the composite $U\circ F$ has a limit $\lim (U\circ F)$. Recall that for $U$ to create limits, we must have that there is a unique limit $\lim F$ such that $U(\lim F) = \lim (U\circ F)$. Since $\mathcal{O} $ is an operad with one color, we simply need to show there is a unique $\mathcal{O} $-algebra structure on $(U\circ F)(j)$ for all $j\in \mathcal{J} $. We then show that it is a limit of $F$. Let $j\in \mathcal{J} $, and let $\{\pi_j : \lim (U\circ F) \to (U\circ F)(j)\}_{j\in \mathcal{J} } $ be the limiting cone. A lot of bullshit happens but it follows.
+\end{proof}
+
+\begin{corollary}\label{2.4.7}
+	The categories $\mathcal{G} \Alg_{R} $, $\mathcal{G} \mathcal{C} \Alg_{R} $, $\mathcal{G}\mathrm{Lie } _R$, $\dg\Alg_{R} $, $\dg \mathcal{C} \Alg_{R} $, and $\dgLie_R$ are complete.
+\end{corollary}
+
+Colimits also follow somehow.
+
+\section{Homological grading conventions}
+
+Throughout this paper, we have used the cohomological grading convention, meaning indicies are written as subscripts, an differentials go $d^i : M^{i-1}  \to M^i$. There is another convention, known as the \emph{homological grading convention}, where indicies are written as \emph{subscripts} and differentials go $d_i : M_{i-1} \to M_{i} $. We view these as the same category by writing $M^i = M_{-i} $ for all $i$. Although we can view these as the same objects, it is usually useful to view them as different. A differential graded object where the indicies decrease is called a \emph{chain complex}, and a differential graded object where the indicies increase is called a \emph{cochain complex}. We note that both homological and cohomological degree always coencide, meaning all of our definitions are invariant under change in notation. Finally, we note that we often write chain complexes as $M_{\bullet} $ and cochain complexes as $M^{\bullet} $ to indicate which type of object we view them as. We write $(M_{\bullet} )_i = M_i$ and $(M^{\bullet} )^i =M^i$.
+
+\section{Homology and cohomology}
+
+\begin{definition}\label{2.6.1}
+	Let $(M^{\bullet},d^{\bullet} ) $ be a cochain complex over a graded ring $R$. The \emph{cohomology} of $M^{\bullet} $ is the graded $R$-module $H^{\bullet} (M^{\bullet} )^i = \Ker d^i / \Im d^{i-1} $. This is viewed as a cochain complex with 0 differential. Similarly, if $(M_{\bullet} ,d_{\bullet} )$ is a chain complex, the \emph{homology} is the graded $R$-module $H_{\bullet} (M_{\bullet} )_i = \Ker d_{i-1} / \Im d_{i} $. This is viewed as a chain complex with 0 differential.
+\end{definition}
+
+Unless otherwise specified, we always work in the cohomological grading convention.
+
+\begin{terminology}\label{2.6.2}
+	If $M^{\bullet} $ is a cochain complex and $x\in M^{k} $ is a homogeneous element, then if $d(x)=0$ we say $x$ is a \emph{cocycle} of degree $k$. If $x=d(y)$ for some $y\in M^{k-1} $, we say $x$ is a \emph{coboundary} of degree $k$. We drop the `co' for chain complexes.
+\end{terminology}
+
+
+
+\begin{remark}\label{2.6.3}
+	Let $M,N$ be differential graded $R$-modules. Recall that if $f\in \HOM_{R}(M, N) $ is a homogeneous element of degree $k$ in the internal hom. Recall that $d(f) = d_N\circ f- (-1)^{\left| f \right| } f\circ d_M$. We claim that $f$ is a $k$-cocycle if and only if $f : M \to N[k]$ is a morphism of cochain complexes. It suffices only to check compatibility with differentials. If $f$ is a cocycle, then
+	\[
+		d_N \circ f = (-1)^{\left| f \right| } f\circ d_M
+	.\]
+	By convention, $d_{N[k]} =(-1)^{\left| k \right| } d_N = (-1)^{\left| f \right| } d_N$, so this implies that $f$ is a morphism of differential graded $R$-modules. Thus the cohomology of $\HOM_{R}(M, N) $ is given by $\Ch_{R} (M,N[\bullet])$ modulo coboundaries.
+\end{remark}
+
+\begin{definition}\label{2.6.4}
+	Let $f,g : M \to N$ be morphisms of differential graded $R$-modules. A \emph{homotopy} $h$ from $f$ to $g$, written $h: f \Rightarrow g$, is a morphism of chain complexes $h : M \to N[-1]$ such that $d(h)=f-g$, where $d$ is the differential of the interal hom $\HOM_{R}(M, N) $. More explicitly,
+	\[
+		f-g = d_N \circ h + h \circ d_M
+	.\]
+	Clearly homotopy is an equivalence relation, so we say $f,g$ are \emph{homotopic} if there is a homotopy $f\Rightarrow g$.
+\end{definition}
+\begin{remark}\label{2.6.5}
+	In view of \cref{2.6.4}, wee see that $H^k(\HOM_{R}(M, N))$ consists of homotopy classes of $\HOM_{R}(M, N) ^k = \Hom_{R}(M, N[k]) $. There are ways of viewing $\Ch_{R} $ as a model category or $\infty $-category in which the usual notion of homotopy coencides with \cref{2.6.4}, and the weak equivalences are \emph{quasi-isomorphisms}: morphisms that lower to isomorphisms in (co)homology. This justifies our construction of the internal hom, and thus the graded tensor product.
+\end{remark}
+

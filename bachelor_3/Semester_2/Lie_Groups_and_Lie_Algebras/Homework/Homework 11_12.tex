@@ -1,0 +1,214 @@
+\documentclass[11pt, letterpaper]{article}
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-section.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\usepackage{enumitem}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+\usepackage{titlepageBU}
+\title{Peter-Weyl theorem; principal bundle}
+\begin{document}
+\makeproblem
+
+
+\section*{Problem 1}
+An irreducible $\operatorname{SU} (2)$ representation of weight $n$ has dimension $n+1$. Moreover there is only one irreducible representation of weight $n$ up to isomorphism. If the weight is 0, then we are considering a representation on $\mathbb{C} $. Such a representation must be the trivial representation $gz=z$, and thus the only matrix coefficient is 1. Now consider an irreducible weight 1 representation on $\mathbb{C} ^2$ with basis $\left\{ e_1,e_2 \right\} $. Write $T(g)$ for the matrix representation of the action of $g$ on $\mathbb{C} ^2$. The representation is the canonical representation
+\[
+	gz = T(g)z = \begin{pmatrix}
+	a & b \\
+	- \overline{b}  & \overline{a} 
+	\end{pmatrix}\begin{pmatrix}
+	z_1 \\
+	z_2
+	\end{pmatrix}
+.\]
+Thus the matrix coefficients are precisely those matrix coefficients. Finally, consider a weight 2 representation. We consider this representation on the symmetric power $\Sym ^2\mathbb{C} ^2$. We use an orthonormal basis $\left\{ e_1^2,e_2^2, \sqrt{2} e_1e_2 \right\} $. The action of $g$ on the basis elements is given by
+\[
+	g(e_1^2) = (ge_1)^2 = (ae_1 - \overline{b} e_2)^2 = a^2e_1^2 + \overline{b} ^2e_2^2 - 2a \overline{b} e_1e_2
+\]
+\[
+	g(e_2^2) = \left( ge_2 \right) ^2 = (be_1 + \overline{a} e_2)^2 = b^2e_1^2 + \overline{a} ^2e_2^2 + 2 \overline{a} be_1e_2
+\]
+\[
+	g(\sqrt{2} e_1e_2) = \sqrt{2} (ge_1)(ge_2) = \sqrt{2} (ae_1 - \overline{b} e_2)(be_1 + \overline{a} e_2) = \sqrt{2} abe_1^2 + \sqrt{2} (a \overline{a} - b \overline{b} )e_1e_2 - \sqrt{2} \overline{a} \overline{b} e_2^2
+.\]
+Thus the matrix coefficients of $g$ are given by the matrix representation in the $\left\{ e_1^2,e_2^2, \sqrt{2} e_1e_2 \right\} $ basis:
+$$T(g) = \begin{pmatrix}
+a^2 & b^2 & \sqrt{2}ab \\
+\overline{b}^2 & \overline{a}^2 & -\sqrt{2}\overline{a}\overline{b} \\
+-\sqrt{2}a\overline{b} & \sqrt{2}\overline{a}b & a\overline{a} - b\overline{b}
+\end{pmatrix}.$$
+
+(b) Write the matrix coefficients of $g$ for the weight $n$ representation as $t_{ij}^n(g)$. The Wikipedia page for Peter-Weyl says that provided our representations are unitary,
+\[
+	\left\{ \sqrt{d^{\pi } } u_{ij} ^{\pi } \mid \pi\in\Sigma , 1\leq i,j\leq d^{\pi }  \right\} 
+.\]
+Here $\Sigma $ denotes isomorphism classes of irreducible representations for a fixed weight, and $d^{\pi } $ is the dimension of the representation. Here there is just 1 isomorphism class and all our representations are unitary, so we get the following orthonormal sets. For weight 0, we still just have $\left\{ 1 \right\} $. For weight 1, we just scale by $\sqrt{2} $:
+\[
+	\left\{ \sqrt{2} a,\sqrt{2} b,-\sqrt{2} \overline{b} ,\sqrt{2} \overline{a}  \right\} 
+.\]
+For weight 2, we scale by $\sqrt{3} $:
+\[
+	\left\{ \sqrt{3} a^2,\sqrt{6} ab,\sqrt{3} b^2,-\sqrt{6} a \overline{b} ,\sqrt{3} (a \overline{a} -b \overline{b} ), \sqrt{6} \overline{a} b,\sqrt{3} \overline{b} ^2,-\sqrt{6} \overline{a} \overline{b} ,\sqrt{3} \overline{a} ^2 \right\} 
+.\]
+
+(c) (1) The approximation of $f$ is given by
+\[
+	f_{\leq 2} (g) = \sum_{n=0}^{2}(n+1) \sum_{i=0}^{n} \sum_{j=0}^{n} \left\langle f,t^{n}_{ij}  \right\rangle t^n_{ij} (g)
+.\]
+
+(2) Since $\left\langle f,t^n_{ij}  \right\rangle $ is an integral, this representation suffices.
+
+
+
+\section*{Problem 2}
+
+
+(1) The polynomials given by trace $P_1 = \mathrm{tr} $ and determinant $P_2 = \det $.
+
+(2) The commutator is
+\[
+	[A_\mu ,A_\nu ] = \begin{pmatrix}
+	\overline{b}_\mu b_\nu  - b_\mu \overline{b} _\nu  & (a_\mu -d_\mu )b_\nu -(a_\nu -d_\nu )b_\mu  \\
+	-(\overline{a} _\mu - \overline{d} _\mu )\overline{b} _\nu +(\overline{a} _\nu - \overline{d} _\nu )\overline{b} _\mu  & b_\mu \overline{b} _\nu - \overline{b} _\mu b_\nu 
+	\end{pmatrix}
+.\]
+Thus
+\[
+	F_{\mu \nu } = \begin{pmatrix}
+	\partial _\mu a_\nu -\partial _\nu a_\mu +\overline{b}_\mu b_\nu  - b_\mu \overline{b} _\nu  & \partial _\mu b_\nu -\partial _\nu b_\mu +(a_\mu -d_\mu )b_\nu -(a_\nu -d_\nu )b_\mu  \\
+	\overline{\partial _\mu b_\nu -\partial _\nu b_\mu } -(\overline{a} _\mu - \overline{d} _\mu )\overline{b} _\nu +(\overline{a} _\nu - \overline{d} _\nu )\overline{b} _\mu  & \partial _\mu d_\nu -\partial _\nu d_\mu + b_\mu \overline{b} _\nu - \overline{b} _\mu b_\nu 
+	\end{pmatrix}
+.\]
+Write these matrix components as
+\[
+	F_{\mu \nu } =\begin{pmatrix}
+	F^{11}_{\mu \nu }  & F^{12}_{\mu \nu }  \\
+	F^{21}_{\mu \nu }  & F^{22}_{\mu \nu } 
+	\end{pmatrix}
+.\]
+Then we have
+\[
+	F_A = \frac{1}{2} \begin{pmatrix}
+	F^{11}_{\mu \nu }  & F^{12}_{\mu \nu }  \\
+	F^{21} _{\mu \nu }  & F^{22}_{\mu \nu } 
+	\end{pmatrix}\dd x^\mu \wedge \dd x^\nu 
+.\]
+Then $\mathrm{tr}(F_A)$ is
+\[
+	\mathrm{tr} (F_A)=\left(F_{\mu \nu } ^{11} + F^{22}_{\mu \nu } \right)\dd x^\mu \wedge \dd x^\nu = \frac{1}{2} \left( \partial _\mu a_\nu -\partial _\nu a_\mu +\partial _\mu d_\nu -\partial _\nu d_\mu  \right) \dd x^\mu \wedge \dd x^\nu 
+.\]
+A similar computation shows
+\[
+	\mathrm{tr}(F_A^2) = \frac{1}{4}\left( F_{\mu \nu } ^{11} F_{\rho \sigma } ^{11} + F_{\mu \nu } ^{22} F_{\rho \sigma } ^{22} + 2 F_{\mu \nu } ^{12} F^{21}_{\rho \sigma }  \right) \dd x^\mu \wedge \dd x^\nu \wedge \dd x^\rho \wedge \dd x^\sigma 
+.\]
+This provides explicit formulas
+\[
+	c_1(A) = \frac{i}{2\pi } \left(F_{\mu \nu } ^{11} + F^{22}_{\mu \nu } \right)\dd x^\mu \wedge \dd x^\nu,
+\]
+\[
+	c_2(A) = \frac{1}{16\pi^2} \left( F_{\mu \nu}^{11} F_{\rho \sigma}^{22} - F_{\mu \nu}^{12} F_{\rho \sigma}^{21} \right) \dd x^\mu \wedge \dd x^\nu \wedge \dd x^\rho \wedge \dd x^\sigma
+.\]
+
+(3) The Bianchi identity states that the covariant derivative of the curvature $\dd _AF_A=0$. In terms of the exterior derivative, this states
+\[
+	\dd F_A + [A,F_A] = 0 \implies \dd F_A = F_A \wedge A - A \wedge F_A
+.\]
+We also use the graded commutativity of the trace for Lie algebra-valued forms. For $\alpha \in \Omega^k(M, \mathfrak{u}(2))$ and $\beta \in \Omega^l(M, \mathfrak{u}(2))$, we have $\mathrm{tr}(\alpha \wedge \beta) = (-1)^{kl} \mathrm{tr}(\beta \wedge \alpha)$. Specifically, if one of the forms has even degree, the trace of their wedge products commutes.
+
+
+
+
+For $c_1(A)$, taking the exterior derivative yields:
+\[
+	\dd (\mathrm{tr}(F_A)) = \mathrm{tr}(\dd F_A) = \mathrm{tr}(F_A \wedge A - A \wedge F_A) = \mathrm{tr}(F_A \wedge A) - \mathrm{tr}(A \wedge F_A)
+.\]
+Since $F_A$ is a 2-form, $\mathrm{tr}(F_A \wedge A) = \mathrm{tr}(A \wedge F_A)$, and thus $\dd (\mathrm{tr}(F_A)) = 0$. Consequently, $\dd c_1(A) = 0$.
+
+For $c_2(A)$, we must show that $\mathrm{tr}(F_A^2)$ is closed, since we already know $(\mathrm{tr}(F_A))^2$ is closed. Applying the exterior derivative and the Leibniz rule:
+\[
+	\dd (\mathrm{tr}(F_A \wedge F_A)) = \mathrm{tr}(\dd F_A \wedge F_A + F_A \wedge \dd F_A) = 2\mathrm{tr}(\dd F_A \wedge F_A)
+.\]
+Substituting the Bianchi identity gives:
+\[
+	\dd (\mathrm{tr}(F_A^2)) = 2\mathrm{tr}([F_A, A] \wedge F_A) = 2\mathrm{tr}(F_A \wedge A \wedge F_A - A \wedge F_A \wedge F_A)
+.\]
+Since $F_A \wedge A$ is a 3-form and $F_A$ is a 2-form, their trace commutes, meaning $\mathrm{tr}(F_A \wedge A \wedge F_A) = \mathrm{tr}(A \wedge F_A \wedge F_A)$. Thus, the right-hand side vanishes, giving $\dd (\mathrm{tr}(F_A^2)) = 0$. It follows that $\dd c_2(A) = 0$.
+
+
+
+
+Let $A_t$ be a smooth family of connections on $P$. The derivative $\dot{A}_t = \frac{\mathrm{d}}{\mathrm{d}t} A_t$ is a globally defined $\mathfrak{u}(2)$-valued 1-form. The curvature of $A_t$ is $F_{A_t} = \dd A_t + A_t \wedge A_t$. Differentiating this with respect to $t$ yields:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} F_{A_t} = \dd \dot{A}_t + \dot{A}_t \wedge A_t + A_t \wedge \dot{A}_t = \dd \dot{A}_t + [A_t, \dot{A}_t] = \mathrm{d}_{A_t} \dot{A}_t
+.\]
+
+For $i=1$, we evaluate the derivative of $\mathrm{tr}(F_{A_t})$:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \mathrm{tr}(F_{A_t}) = \mathrm{tr}(\mathrm{d}_{A_t} \dot{A}_t) = \mathrm{tr}(\dd \dot{A}_t + [A_t, \dot{A}_t]) = \dd (\mathrm{tr}(\dot{A}_t)) + \mathrm{tr}([A_t, \dot{A}_t])
+.\]
+Since $A_t$ and $\dot{A}_t$ are both 1-forms, their commutator trace vanishes: $\mathrm{tr}(A_t \wedge \dot{A}_t + \dot{A}_t \wedge A_t) = \mathrm{tr}(A_t \wedge \dot{A}_t) - \mathrm{tr}(A_t \wedge \dot{A}_t) = 0$. Thus,
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} c_1(A_t) = \dd \left( \frac{i}{2\pi} \mathrm{tr}(\dot{A}_t) \right)
+,\]
+which is globally exact.
+
+For $i=2$, we differentiate the components of $c_2(A_t)$. First, for the squared trace term:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} (\mathrm{tr}(F_{A_t}))^2 = 2 \mathrm{tr}(F_{A_t}) \wedge \frac{\mathrm{d}}{\mathrm{d}t} \mathrm{tr}(F_{A_t}) = 2 \mathrm{tr}(F_{A_t}) \wedge \dd (\mathrm{tr}(\dot{A}_t))
+.\]
+Because $\mathrm{tr}(F_{A_t})$ is closed, we can pull the exterior derivative to the outside:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} (\mathrm{tr}(F_{A_t}))^2 = \dd \left( 2 \mathrm{tr}(\dot{A}_t) \wedge \mathrm{tr}(F_{A_t}) \right)
+,\]
+which is exact. Next, we differentiate $\mathrm{tr}(F_{A_t}^2)$:
+\[
+	\frac{\mathrm{d}}{\mathrm{d}t} \mathrm{tr}(F_{A_t} \wedge F_{A_t}) = 2\mathrm{tr}\left( \frac{\mathrm{d}}{\mathrm{d}t} F_{A_t} \wedge F_{A_t} \right) = 2\mathrm{tr}(\mathrm{d}_{A_t} \dot{A}_t \wedge F_{A_t})
+.\]
+Expanding the covariant derivative:
+\[
+	\mathrm{tr}(\mathrm{d}_{A_t} \dot{A}_t \wedge F_{A_t}) = \mathrm{tr}(\dd \dot{A}_t \wedge F_{A_t}) + \mathrm{tr}([A_t, \dot{A}_t] \wedge F_{A_t})
+.\]
+Consider the exterior derivative of the 3-form $\mathrm{tr}(\dot{A}_t \wedge F_{A_t})$:
+\[
+	\dd (\mathrm{tr}(\dot{A}_t \wedge F_{A_t})) = \mathrm{tr}(\dd \dot{A}_t \wedge F_{A_t}) - \mathrm{tr}(\dot{A}_t \wedge \dd F_{A_t}) = \mathrm{tr}(\dd \dot{A}_t \wedge F_{A_t}) - \mathrm{tr}(\dot{A}_t \wedge [F_{A_t}, A_t])
+.\]
+Expanding the commutator traces yields $\mathrm{tr}([A_t, \dot{A}_t] \wedge F_{A_t}) = \mathrm{tr}(A_t \wedge \dot{A}_t \wedge F_{A_t} + \dot{A}_t \wedge A_t \wedge F_{A_t})$. This is equal to $-\mathrm{tr}(\dot{A}_t \wedge (F_{A_t} \wedge A_t - A_t \wedge F_{A_t})) = -\mathrm{tr}(\dot{A}_t \wedge [F_{A_t}, A_t])$. Thus,
+\[
+	\mathrm{tr}(\mathrm{d}_{A_t} \dot{A}_t \wedge F_{A_t}) = \dd (\mathrm{tr}(\dot{A}_t \wedge F_{A_t}))
+,\]
+meaning $\frac{\mathrm{d}}{\mathrm{d}t} \mathrm{tr}(F_{A_t}^2) = 2\dd(\mathrm{tr}(\dot{A}_t \wedge F_{A_t}))$, which is exact. Since both components of the derivative of $c_2(A_t)$ are exact, $\frac{\mathrm{d}}{\mathrm{d}t} c_2(A_t)$ is exact.
+
+
+Since $\frac{\mathrm{d}}{\mathrm{d}t} c_i(A_t) = \dd \alpha_{i,t}$ for some globally defined forms $\alpha_{i,t}$, we integrate with respect to $t$ from $0$ to $1$:
+\[
+	c_i(A_1) - c_i(A_0) = \int_{0}^{1} \frac{\mathrm{d}}{\mathrm{d}t} c_i(A_t) \dd t = \int_{0}^{1} \dd \alpha_{i,t} \dd t = \dd \left( \int_{0}^{1} \alpha_{i,t} \dd t \right)
+.\]
+Because the difference $c_i(A_1) - c_i(A_0)$ is an exact form, it maps to zero in de Rham cohomology. Therefore, the cohomology classes $[c_i(A_0)] = [c_i(A_1)] \in H_{dR}^{2i}(M)$ are identical.
+
+
+(4) The trace is $\omega _1 + \omega _2$. Thus
+\[
+	c_1(A) = \frac{i}{2\pi } (\omega _1 + \omega _2)
+.\]
+Then
+\[
+	F_A = \begin{pmatrix}
+	\omega _1 \wedge \omega _1 & 0 \\
+	0 & \omega _2\wedge \omega _2
+	\end{pmatrix}
+.\]
+We also have
+\[
+	(\mathrm{tr} (F_A))^2 = \omega _1 \wedge \omega _1 + \omega _2 \wedge \omega _2 + 2\omega _1 \wedge \omega _2
+.\]
+Thus $\mathrm{tr} (F_A^2) - (\mathrm{tr} (F_A))^2 = -2\omega _1 \wedge \omega _2$. Thus
+\[
+	c_2(A) = -\frac{1}{8\pi ^2} \left( -2\omega _1 \wedge \omega _2 \right) =\frac{1}{4\pi } \left( \omega _1\wedge \omega _2 \right) 
+.\]
+
+\end{document}

@@ -1,0 +1,78 @@
+\lecture{11}{Tue 31 Mar 2026 09:34}{The principle of analytic continuation}
+
+\begin{example}
+	We cna show that $\exp z$ and
+	\[
+		\log z = \sum_{n\geq 1} (-1)^{n+1} \frac{(z-1)^n}{n} ,\qquad \left| z-1 \right| <1
+	\]
+	satisfy the relation $\exp (\log z)=z$ by sorting out the power series. We can also show the fllowing: let $f(z) = e^{\ln z} $. Sufficiently close to $z=1$, we can show that $g(z) = e^{\ln z} =z$. Thus we have $f|B = g|B$ sufficiently close to $z=1$, so the principle of analytic continuation yields $e^{\ln z} =1$ on a disk $D_1(1)$. We cannot go  past this due to $\ln $ having a pole at 0.
+\end{example}
+
+\begin{theorem}[Morena]\label{thm:?}
+	Let $f$ be \emph{continuous} on $U$ and suppose that for all rectangles $R\subseteq U$,
+	\[
+		\int_{\partial R} f=0
+	.\]
+	Then $f$ is holomorphic.
+\end{theorem}
+\begin{proof}
+	Suffices to show that $f$ is holomorphic on any open disk in $U$. Let $D = D_r(z_0)\subseteq u$. We show $f$ is holomorphic on $D$.
+
+	Define $F : D \to \mathbb{C} $ by
+	\[
+		F(z) = \int_{\gamma _z} f,
+	\]
+	where $\gamma _z$ is a path $z_0 \to z$ for some $z\in D$. Since $D$ is contractible and simply connected, all such paths are homotopic, and at least one such path exists. In particular, let $R$ be a rectangle with $z_0$ and $z$ the opposite corners. Then take two paths $\gamma _z,\delta _z$ to both travel one side of the boundary of the rectangle. Reversing the orientation of one of them and concatenating yields a parameterization of $\partial R$. We then have
+	\[
+		0=\int_{\partial R} f = \int_{-\delta_z } f + \int_{\gamma_z } f
+	.\]
+	One may follow the same method as in the proof to Goursatz to find a local primitive $f$ with $F'(z)=f(z)$, showing $F$ is holomorphic. By the Cauchy Integral formula, the derivative of $F$ is holomorphic. Therefore $f$ is holomorphic since it is locally a primitive.
+\end{proof}
+
+\begin{theorem}\label{thm:?}
+	Let $\left\{ f_n \right\} _{n\geq 1} $ be a sequence of functions on $U$ which is uniformly convergent on compact sets in $U$ to a function $f$ on $U$. I.e. for all compact $K\subseteq U$, the sequence converges on restrictions $f_n|K\to f|K$. Then $f$ is holomorphic on $U$.
+\end{theorem}
+\begin{proof}
+	We know that $f|K$ is continuous for all compact subsets $K$, we can take $K = \overline{D} $ for any disk $D\subseteq U$ to obtain that $f$ is continuous on $U$.
+
+	Now fix $D$ such that $\overline{D} \subseteq U$ and apply the hypothesis on $K=\overline{D} $ or $K=\partial R$ for a rectangle $R$. Then holomorphy yields
+	\[
+		\int_{\partial R} f_n=0\qquad \forall n
+	.\]
+	Uniform convergence yields
+	\[
+		0 = \int_{\partial R} f_n|R \to \int_{\partial R} f|R = 0
+	.\]
+	Therefore $f$ is holomorphic by the above lemma.
+\end{proof}
+
+\begin{definition}\label{dfn:ksaj}
+	Given a series $\sum_{n\geq 1} f_n$ of holomorphic functions, we say $\sum_{n\geq 1} f_n$ is \emph{normally convergen on compact sets} in $U$ if for each compact $K\subseteq U$, there is a sequence $\left\{ M_n \right\}_{n\geq 1} $ of real numbers $M_{n} \geq 0$ such that
+	\begin{enumerate}
+		\item $\left| f_n(z) \right| \leq M_n$ on $K$, and
+		\item $\sum_{n\geq 1} M_n$ converges.
+	\end{enumerate}
+	These are the hypotheses of the Weierstrass $M$-test, which tells us:
+\end{definition}
+
+\begin{theorem}\label{thmkjasn}
+If $\sum_{n\geq 1} f_n$ converges normally on compact sets, then it converges uniformally on compact sets.
+\end{theorem}
+
+
+Let $n>0$ a real number. Write $n^s \coloneqq e^{s \ln n} $ for $s\in\mathbb{C} $. For $\Re (s) > 1$, we define
+\[
+	\zeta (s) = \sum_{n\geq 1} n^{-s} ,
+\]
+the Riemann $\zeta $ function. To see that $\zeta $ is holomorphic on $\Re (s) > 1$, we show it is normally convergent. It suffices to show it is normally convergent on $U_{1+\varepsilon } $ given by $\Re (s) > 1+\varepsilon $ for $\varepsilon >0$.
+
+Let $M_n = n^{-(1+\varepsilon )} $. Then if $s\in K \subseteq U_{1+\varepsilon } $, get $\Re (s) \geq 1+\varepsilon $, so
+\[
+	\left| n^{-s} \right| \leq n^{-(1+\varepsilon )} 
+.\]
+Thus we have our bounds, and the series trivially converges. Therefore $\zeta $ is holomorphic with $\Re (s)>1$.
+
+Fact: there is an analytic continuation $\zeta (s)$ to $\mathbb{C} \setminus \left\{ 1 \right\} $, which means a function $f\in \mathcal{O} (\mathbb{C} \setminus \left\{ 1 \right\} )$ which agrees with $\zeta $ on the restriction $f|\{\Re (s)>1\}=\zeta $. We define the Riemann zeta function as this continuation.
+
+For now, we can demonstrate the analytic continuation to $\Re (s) > 0$, $s\neq 1$.
+
