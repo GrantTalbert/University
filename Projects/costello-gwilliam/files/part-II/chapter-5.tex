@@ -1,0 +1,379 @@
+\chapter{Holomorphic field theories and vertex algebras}
+
+
+\subsection{Vertex algebras and holomorphic prefactorization algebras on $\mathbb{C} $}
+
+Vertex algebras are the standard formalism of a two-dimensional chiral field theory. We will define a vertex algebra such that we can compare it to our own approach in this chapter.
+
+\begin{definition}\label{dfn:5-0-1}
+	Let $V$ be a vector space. An element $a(z) = \sum_{n\in\mathbb{Z} } a_nz^{-n} $ in $\End V[[z,z^{-1} ]]$ is a \emph{field} if, for each $v\in V$, there is some $N$ such that $a_jv=0$ for all $j>N$.
+\end{definition}
+\begin{warning}\label{warn:5-0-2}
+	The usage of the word ``field'' in \cref{dfn:5-0-1} achieves maximum possible confusion. Even though vertex algebras show up in field theory, a field in the sense of \cref{dfn:5-0-1} is not a field in the sense of field theory, nor is it a field in the sense of algebra. I have no idea why this terminology was chosen, and hope that there is a good reason for it.
+\end{warning}
+
+\begin{definition}\label{dfn:5-0-3}
+	A \emph{vertex algebra} is the following data:
+	\begin{itemize}
+		\item A $\mathbb{C} $-vector space $V$, referred to as the \emph{state space};
+		\item A nonzero vector $\ket{0}\in V$, referred to as the \emph{vacuum vector};
+		\item A linear map $T : V \to V$, referred to as the \emph{shift operator};
+		\item A linear map $Y(-,z): V \to \End V[[z,z^{-1} ]]$ that sends every vector $v$ to a field, referred to as the \emph{vertex operation};
+	\end{itemize}
+	subject to the following axioms:
+	\begin{enumerate}
+		\item (Vacuum axiom) $Y(\ket{0},z)=1_V$ and $Y(v,z)\ket{0}=v+zV[[z]]$ for all $v\in V$;
+		\item (Translation axiom) $[T,Y(v,z)] = \partial _zY(v,z)$ for all $v\in V$ and $T\ket{0}=0$;
+		\item (Locality axiom) For any pair of vectors $v,v'\in V$, there exists a nonnegative integer $N$ such that $(z-w)^N[Y(v,z),Y(v',z)] = 0$ as an element of $\End V[[z^{\pm 1} ,w^{\pm 1} ]]$.
+	\end{enumerate}
+\end{definition}
+
+This is a complex definition, so we consider the following intuition. We can think of $V$ as the set of pointwise measurements one can make of the fields. Essentially, given a field $\phi $, a measurement made at a single point $z\in\mathbb{C} $ would live in $V$. Thus we imagine attaching a copy of $V$ to each $z\in\mathbb{C} $, which we denote $V_z$. Given a disk $D$ containing $z$, the measurements at $z$ are a dense sunset of the measurements one can make on $D$. We denote the observables on $D$ by $V_D$. The vertex operation is a way of combining the pointwise measurements. Given a disk $D$ centered at the origin and $z\neq 0$, we cans multiply observables at 0 and $z$ to get a map
+\[
+	Y_z : V_0 \otimes V_z \to V_D
+.\]
+This \emph{vertex operator} should vary holomorphically in $z\in D\setminus \left\{ 0 \right\} $. In other words, we should get something with properties like the formal definition $Y(-,z)$ above.
+
+The language of factorization algebras has the benefit of making this intuition rigorous. We can formalize this picture using the structure maps of a factorization algebra, and in particular we can do so in a coordinate free way. This relationship is given by the main theorem for the chapter. Let $\mathcal{F} $ be a prefactorization algebra on $\mathbb{C} $. We want $\mathcal{F} $ to be \emph{holomorphically translation-invariant}. A rough description of that is as follows. We saw earlier that if $\mathcal{F} $ is smoothly translation-invariant, then multiplication $p\mapsto m[p](\alpha_1. \ldots ,\alpha _k)$ yields a map
+\[
+	\mu : \mathcal{F} _{r_1} \otimes \cdots \otimes \mathcal{F} _{r_n}  \to C^\infty \left( \operatorname{Disks} (r_1, \ldots , r_k ; s),\mathcal{F} _s \right) 
+.\]
+Here, $\operatorname{Disks}(r_1, \ldots ,r_k ; s)$ is the open subset of $\mathbb{C} ^k$ consisting of valid configurations of disks in $\mathbb{C} $, in the sense made precise in \cref{dfn:4-8-6}. Note that since this is now an open subset of complex space, it is a complex manifold. If $\mathcal{F} $ is \emph{holomorphically translation-invariant}, then $\mu $ lifts to a cochain map
+\[
+	\mu : \mathcal{F} _{r_1} \otimes \cdots \otimes \mathcal{F} _{r_n}  \to \Omega ^{0,\bullet} \left( \operatorname{Disks} (r_1, \ldots ,r_k ; s),\mathcal{F} _s \right) 
+.\]
+Here, $\Omega ^{0,\bullet} $ is the Dolbeault complex of $(0,\bullet)$-forms for the complex manifold $\operatorname{Disks} (r_1, \ldots ,r_k ; s)$ with differential $\overline{\partial } $. There are also some compatibility conditions on these lifts, which we consider later.
+
+In other words, holomorphic translation-invariance means that the operator product map is holomorphic up to homotopy in the location of the disks.
+
+\begin{theorem}\label{thm:5-0-4}
+	Let $\mathcal{F} $ be a holomorphically translation invariant prefactorization algebra on $\mathbb{C} $. Let $\mathcal{F} $ be equivariant under the action of $S^1$ on $\mathbb{C} $ by rotation, and let $\mathcal{F} _{r} ^k$ denote the weight $k$ eigenspace of the $S^1$ action on the complex $\mathcal{F} _r$. Assume that for ever $r<s$, the extension map $\mathcal{F} _r^k \to \mathcal{F} _s^k$ associated to the inclusion $D_r(0) \subseteq D_0(s)$ is a quasi-isomorphism. Finally, assume that the $S^1$ action on each $\mathcal{F} _r$ satisfies a certian technical ``tameness'' condituion. Then the vector space
+	\[
+		V_{\mathcal{F} } \coloneqq \bigoplus_{k\in\mathbb{Z} } H^{\bullet} (\mathcal{F} _r^k)
+	\]
+	has the structure of a vertex algebra. The vertex algebra structure map
+	\[
+		Y_{\mathcal{F} } : V_{\mathcal{F} } \otimes V_{\mathcal{F} }  \to V_{\mathcal{F} } [[z,z^{-1} ]]
+	\]
+	is the Laurent expansion of the operator product map
+	\[
+		H^{\bullet} \mu : H^{\bullet} (\mathcal{F} _{r_1} ^{k_1} )\otimes H^{\bullet} (\mathcal{F} _{r} ^{k_2} ) \to \mathcal{O} (\operatorname{Disks} (r_1, r_2 ; s), H^{\bullet} (\mathcal{F} _s))
+	\]
+	for $\mathcal{O} $ the space of holomorphic maps.
+\end{theorem}
+In other words, in this situation, the intuition that the vertex map is our factorization product is made precise here. The nice thing about holomorphically transation invariant prefactorization algebras is that they make sense in complex dimensions other than 1, yielding a sort of higher vertex algebra as the algebraic structure attached to those theories.
+
+\section{Holomorphically translation-invariant prefactorization algebras}
+
+\subsection{The definition}
+
+Let $\mathcal{F} $ be a smoothly translation-invariant prefactorization algebra. We want to describe what it means for $\mathcal{F} $ to be \emph{holomorphically translation-invariant}. Of course, this requires $\mathcal{F} $ be defined over $\mathbb{C} $, so we now assume that $\mathcal{F}$ take values in $\Ch_{\mathbb{C} } $.
+
+Recall that the datum of a smoothly translation-invariant prefactorization algebra includes an action of the (real) Lie algebra $\mathbb{R} ^{2n} \cong \mathbb{C} ^n$ by derivations. Since $\mathcal{F} $ is defined over $\mathbb{C} $, this action extends to a complexified action by the Lie algebra $\mathbb{R} ^{2n} \otimes _{\mathbb{R} } \mathbb{C} $. The action of $z_i = x_i + iy_i$ and $\overline{z} _j = x_j - iy_j$ are denoted
+\[
+	\frac{\partial }{\partial z_i} ,\frac{\partial }{\partial \overline{z} _j} : \mathcal{F} (U) \to \mathcal{F} (U)
+,\]
+and are generated using the standard Wirtinger derivatives (i.e. $\partial _{z_i} =\frac{1}{2} (\partial _{x_i} -i \partial _{y_i} )$.)
+\begin{definition}\label{dfn:5-1-1}
+	A translation-invariant prefactorization algebra $\mathcal{F} $ on $\mathbb{C} ^n$ is \emph{holomorphically translation-invariant} if it is equipped with derivations $\eta _i : \mathcal{F}  \to \mathcal{F} [-1]$ of cohomological degree $-1$ for $i=1, \ldots ,n$, such that
+	\[
+		\dd \eta _i = \frac{\partial }{\partial \overline{z} _i} \in \operatorname{Der} (\mathcal{F} ),
+	\]
+	\[
+		[\eta _i,\eta _j] = 0,
+	\]
+	\[
+		\left[ \eta _i, \frac{\partial }{\partial \overline{z} _i}  \right] =0
+	.\]
+	Here, $\dd $ is the differential on the dg Lie algebra $\operatorname{Der} (\mathcal{F} )$.
+\end{definition}
+
+\begin{intuition}\label{int:5-1-2}
+	Recall that the differential on $\operatorname{Der} (\mathcal{F} )$ is $\dd_{\mathrm{Der} }D= [\dd_{\mathcal{F} },D]$ for the bracket given by the commutator. The idea is that for the field theory to be holomorphic, the antiholomorphic derivatives should be strictly 0. However, the derivatives are acting on the level of $\mathcal{F} $, and the physically meaningful information is on the level of cohomology, so we should not require that $\partial _{\overline{z} _i} =0$ on the level of $\mathcal{F} $. Rather, we require that the derivatives vanish up to homotopy. This is the role of the maps $\eta _i$.
+
+	By guarenteeing that $\partial _{\overline{z} _i} =\dd \eta _i$, we guarentee that antiholomorphic derivatives are exact, and thus vanish in cohomology. The other two conditions guarentee that certain pathologies don't arise. For example, if we expect the antiholomorphic action to be homotopy trivial, then they should probably commute with each other, and they should be invariant under antiholomorphic translation.
+\end{intuition}
+
+
+\subsection{An operadic reformulation}
+
+Let $\Delta _r(z)=PD_r(z)$ be the polydisk of radius $r$ about $z\in\mathbb{C} ^n$. Define the $\mathbb{R} _{>0} $-colored operad enriched over complex manifolds to have multimorphisms
+\[
+	\operatorname{PDisks} _n(r_1, \ldots ,r_k ; s) \subseteq (\mathbb{C} ^n)^k
+\]
+given by all configurations $(z_1, \ldots ,z_k)$ of polydisks of radii $r_i$ such that their closures are disjoint and fit inside of $\Delta _s(0)$. We will see that holomorphically translation-invariant prefactorization algebras form algebras for this colored operad.
+
+As before, if $\mathcal{F} $ is a holomorphically translation-invariant prefactorization algebra on $\mathbb{C} ^n$, denote by $\mathcal{F} _r$ the cochain complex $\mathcal{F} (\Delta _r(0))$. For any polydisk configuration $p\in \operatorname{PDisks} (r_1, \ldots , r_k ; s)$, translation-invariance yields a map given by the factorization product
+\[
+	m[p] : \mathcal{F} _{r_1} \otimes \cdots \otimes \mathcal{F} _{r_k}  \to \mathcal{F} _s
+.\]
+This map is a smooth map of cochain complexes, and varies smoothly with $p$. To show that $\mathcal{F} $ is an algebra for $\operatorname{PDisks} (r_1, \ldots , r_k ; s)$, we must show that these maps are holomorphic in a particular sense.
+
+We must use the extra structure of the derivations $\eta _i$ which make $\partial _{\overline{z} _i} $ holomorphically trivial. Let $\left\{z_{ij} , \overline{z} _{ij}\right\}_{1\leq i\leq k} ^{1\leq j\leq n}$ be coordinates on $(\mathbb{C} ^n)^k$. This yields coordinates on the open subset
+\[
+	\operatorname{PDisks} _n(r_1, \ldots , r_k ; s) \subseteq (\mathbb{C} ^n)^k
+.\]
+Thus we can define operations
+\[
+	\frac{\partial }{\partial \overline{z}_{ij} } m[p] : \mathcal{F} _{r_1} \otimes \cdots \otimes \mathcal{F} _{r_k}  \to \mathcal{F} _s
+\]
+by differentiating $m[p]$, which depends on $p$, in the $\overline{z} _{ij} $-direction. To show $m[p]$ depends holomorphically on $p$ (up to homotopy), it suffices to show that this operation annihilates $m[p]$ in cohomology.
+
+Let $m[p]\circ _i \eta _j$ denote the operation
+\[
+	(\alpha _1, \ldots , \alpha _k) \mapsto (-1)^{\sum_{\ell=1}^{i-1} \left| \alpha _\ell  \right| } m[p](\alpha _1, \ldots , \eta _j\alpha _i, \ldots ,\alpha _k)
+\]
+where the sign arises from Koszul's sign rule. The axioms of a smoothly translation-invariant prefactorization algebra (\cref{dfn:4-8-4} condition 3) tell us that
+\[
+	\frac{\partial }{\partial \overline{z} _{ij} } m[p] = m[p]\circ _i \frac{\partial }{\partial \overline{z} _{j} } 
+.\]
+Here, $\partial _{\overline{z} _j} $ is the derivation of the prefactorization algebra $\mathcal{F} $. Note that since $\dd_{\mathcal{F} }$ and $\eta _j$ have cohomological degree $1$ and $-1$, respectively,
+\[
+	[\dd_{\mathcal{F} },\eta _j] = \dd_{\mathcal{F} }\eta _j - (-1)^{(1)(-1)} \eta _j \dd_{\mathcal{F} } = \dd_{\mathcal{F} } \eta _j + \eta _j \dd_{\mathcal{F} } 
+.\]
+Additionally, recall that the differential of a derivation $\dd \eta _j$ is defined as the commutator with the differential $[\dd _{\mathcal{F} } ,\eta _j]$. Thus the first eqation of \cref{dfn:5-1-1} can be rewritten as
+\[
+	[\dd _{\mathcal{F} } ,\eta _j] = \frac{\partial }{\partial \overline{z} _j} 
+.\]
+Applying this fact and doing some messy algebra yields
+\[
+	[\dd _{\mathcal{F} } ,m[p]\circ_i\eta _j] = \frac{\partial }{\partial \overline{z} _{ij} } m[p]
+.\]
+The algebra is not hard, just use the fact that $m$ is a chain map and commutes with differentials, and chase elements under the action of the tensor product differential. The commutator once again simplifies to a homotopy witnessing the fact that the right hand side is homotopic to 0. Thus, $m[p]$ depends holomorphically on $p$ up to homotopy.
+
+\subsection{A cooperadic reformulation}
+
+We will form a colored cooperad in the category of convenient cochain complexes using the Dolbeault complex. We will utilize the fact that if $\widehat{\otimes }_\beta$ is the symmetric monoidal product for convenient vector spaces, then
+\[
+	\Omega ^{0,\bullet}(X\times Y) \cong \Omega^{0,\bullet}(X)\, \widehat{\otimes }_\beta \,\Omega ^{0,\bullet} (Y)
+.\]
+I don't actually know what a cooperad is, but the notation for the maps is useful, so I have copied down the definitions from this section.
+
+Let $r_1, \ldots , r_k, t_1, \ldots , t_m, s\in\mathbb{R} _{>0} $. Define
+\[
+	\circ _i^* : \Omega ^{0,\bullet} (\operatorname{PDisks}_n(t_1, \ldots ,t_{i-1} ,r_1, \ldots ,r_k, t_{i+1} , \ldots , t_m ; s)) \to \Omega ^{0,\bullet} (\operatorname{PDisks}_n(r_1, \ldots ,r_k ; t_i)\times \operatorname{PDisks} (t_1, \ldots ,t_m ; s))
+\]
+be the pullback of $\circ _i$ on Dolbeault complexes. Given a differentiable vector space $V$, define
+\[
+	\Omega ^{0,\bullet} (X,V) \coloneqq \Omega ^{0,\bullet}(X)\otimes _{C^\infty (X)} C^\infty (X,V)
+.\]
+Since differential operators on $X$ act on $C^\infty (X,V)$, we can define $\overline{\partial } $ on $\Omega ^{0,\bullet} (X,V)$. Anyways the cooperad structure on $\mathcal{F} $ is given by lifting $m[p]$ to a map
+\[
+	\mu ^{\overline{\partial } } (r_1, \ldots ,r_k ; s) : \mathcal{F} _{r_1} \otimes \cdots \otimes \mathcal{F} _{r_k}  \to \Omega ^{0,\bullet} (\operatorname{PDisks} _n(r_1, \ldots , r_k ; s), \mathcal{F}_s)
+\]
+which are compatible with differentials and satisfy the relevant conditions to be a cooperad. See the book for the specifics, and a nice remark on comparisons with other theories.
+
+\section{A general method for constructing vertex algebras}
+
+In this section, we show that the cohomology of a holomorphically translation-invariant prefactorization algebra on $\mathbb{C} $ with a compatible $S^1$-action yields a vertex algebra. Using some results from the second volume, this will allow the construction of vertex algebras using compatible Lagrangians.
+
+\subsection{The circle action}
+
+\begin{definition}\label{dfn:5-2-1}
+	A \emph{holomorphically translation-invariant prefactorization algebra $\mathcal{F} $ with compatible $S^1$ action} is a smoothly $S^1\ltimes\mathbb{R} ^2$-invariant prefactorization algebra $\mathcal{F} $ on $\mathbb{C} $ with values in $\Ch_{\mathbb{C}} $, together with an extension of the action of the complex Lie algebra
+	\[
+		\Lie _{\mathbb{C} } (S^1\ltimes \mathbb{R} ^2)=\mathbb{C} \left\{ \partial _{\theta } ,\partial_z, \partial _{\overline{z} }  \right\} 
+	,\]
+	where $\partial _{\theta } $ is a basis of $\Lie _{\mathbb{C} } (S^1)$, to an action of the dg Lie algebra
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 3.5em]
+		\mathbb{C} \left\{ \eta  \right\} [1] \ar[" \dd \eta =\partial _{\overline{z} }  ", r]  & \mathbb{C} \left\{ \partial _{\theta } ,\partial _{z} ,\partial _{\overline{z} }  \right\} .
+	\end{tikzcd}\]
+	In this dg Lie algebra, the only nonvanishing commutator involving $\eta $ is
+	\[
+		[\partial _\theta ,\eta ] = -\eta 
+	.\]
+\end{definition}
+
+I take some time to explore this definition, since it is somewhat opaque. The intuition is that this definition encodes all the data of \cref{dfn:5-1-1}, but adds on an action by $S^1$ in a compatible way via the semidirect product. Write
+\[
+	\Lie _{\mathbb{C} } (S^1\ltimes\mathbb{R} ^2) = (S^1\ltimes\mathbb{R} ^2)\otimes _{\mathbb{R} } \mathbb{C} 
+.\]
+Note that $S^1$ acts on $\mathbb{C} $ via rotation in the usual way. We add this into the action of $\mathbb{C} \cong \mathbb{R} ^2$ via the semi-direct product, which is used since rotations don't commute with translations. Thus the fact that $\mathcal{F} $ is smoothly $(S^1\ltimes\mathbb{R} ^2)$-invariant means that it is discretely translation and rotation invariant, and has infinitesimal actions
+\[
+	\frac{\partial }{\partial z} , \frac{\partial }{\partial \overline{z} } , \frac{\partial }{\partial \theta } 
+\]
+for translation in $z$ and $\overline{z} $, and rotation, which act as derivations for the factorization product, and are compatible with global $(S^1\ltimes\mathbb{R} ^2)$-invariance in the sense of \cref{dfn:4-8-4}. Note that the brackets for the complexified Lie algebra can be derived to be
+\[
+	[\partial _\theta ,\partial _z] = \partial _z,\qquad [\partial _\theta ,\partial _{\overline{z} } ]=-\partial _{\overline{z} } 
+.\]
+Note that part of the datum of this definition is that $\mathcal{F} $ be translation-invariant. We have just added the fact that it is also rotation-invariant.
+
+We now want to consider the extension to the dg Lie algebra. The reason for this extension is that we want $\mathcal{F} $ to be \emph{holomorphically invariant}, not just smoothly, so we need to define $\eta $ like we did in \cref{dfn:4-8-4} to witness the fact that the infinitesimal generators of translation are null-homotopic. We do not require that the infinitesimal generator of rotation is null-homotopic, since the prefactorization algebra is \emph{holomorphically translation-invariant}, not holomorphically rotation-invariant; it only comes with a compatible smooth rotation action. Write $\mathfrak{g} $ for the dg Lie algebra. This is done simply by adding in $\eta $ such that $\dd \eta =\partial _{\overline{z} } $. Since the action $\mathfrak{g} \to \operatorname{Der} (\mathcal{F} )$ is a chain homomorphism, we see that this relationship holds in the action, meaning the action of $\partial _{\overline{z} } $ vanishes in cohomology.
+
+The definition of the bracket is forced by the definition of $\dd $: recall that $\dd $ acts as as a derivation for the bracket in the sense that
+\[
+	\dd [x,y] = [\dd x,y] + (-1)^{\left| x \right| } [x,\dd y]
+.\]
+Note that $\dd \mathfrak{g} ^0=0$, meaning that for any $\partial_x\in \mathfrak{g} ^0$, we have
+\[
+	\dd [\eta ,\partial _x] = [\dd \eta ,\partial _x] + [\eta ,0] = [\partial_{\overline{z} } ,\partial _x]
+.\]
+We now simply read off the fact that $\dd [\eta ,\partial _{\theta } ]=-\partial _{\overline{z} } $ and 0 otherwise from the definition of the bracket in $\mathfrak{g} ^0$ from earlier.
+
+\begin{discussion}\label{disc:5-2-2}
+	It is finally time to make precise some technicalities about what we mean when we say $\mathcal{F} $ takes values in $\Ch_{\mathbb{C} } $. Our prefactorization algebras all take values in \emph{differentiable vector spaces}, which need only be $\mathbb{R} $-vector spaces. Thus, a \emph{complex} differentiable vector space will refer to a differentiable vector space $E$ such that for all manifolds $M$, the $C^\infty (M)$-module $E(M)$ has a $\mathbb{C} $-vector space structure. Additionally, pullback morphisms should be $\mathbb{C} $-linear.
+
+	There is a way of using the flat connection $\nabla $ for $E$ to obtain a notion of the $\overline{\partial } $-operator, which will be our preferred way of describing when a complex differentiable vector space is holomorphic (since working with $\mathcal{O} $-modules on $\mathcal{C} \Man $ is homologically poorly-behaved). First, recall that $\nabla $ is a map
+	\[
+		\nabla : C^\infty (M,E) \to \Omega ^1(M,E)\eqqcolon \Omega ^1(M)\otimes _{C^\infty (M)} C^\infty (M,E),
+	\]
+	natural in $M$, where $C^\infty (M,E)=E(M)$. We can obtain a decomposition into $\Omega ^{1,0} (M,E)\oplus \Omega ^{0,1} (M,E)$ for all complex manifolds $M$. Due to the use of $C^\infty $-mutlilinear maps, some extra algebraic machinery is required to construct this decomposition, which we now detail.
+
+	Recall the extension of scalars map: given a commutative ring $R$, an $R$-algebra $A$, an $R$-module $M$, and an $A$-module $N$, there is a canonical isomorphism of $A$-modules
+	\[
+		M\otimes _RN \cong (M\otimes _RA)\otimes _AN
+	.\]
+	Setting $R=C^\infty (M)$ for $M$ a complex manifold, let $A=C^\infty (M,\mathbb{C} )\cong C^\infty (M)\otimes _{\mathbb{R} } \mathbb{C} $, let $M=\Gamma (M,T^*M) = \Omega ^1(M)$, and let $N=C^\infty (M,E)$. Note that $C^\infty(M,E) $ is indeed an $C^\infty(M,\mathbb{C} ) $-module since it is a complex vector space, and thus for any $f\in C^\infty (M,E)$ and smooth $u+iv : M \to \mathbb{C} $, we see that $(u+iv)f = uf + ivf$, which is defined. Then we obtain
+	\[
+		\Gamma (M,T^*M) \otimes_{C^\infty (M)} C^\infty (M,E) \cong \left(\Gamma (M,T^*M)\otimes _{C^\infty (M)} \mathbb{C} \right) \otimes_{C^\infty(M,\mathbb{C} ) } C^\infty(M,E) 
+	.\]
+	Using the fact that global sections is a monoidal functor, and thus commutes with tensor products, we have
+	\[
+		\left(\Gamma (M,T^*M)\otimes _{C^\infty (M)} \mathbb{C}\right) \otimes _{C^\infty (M,\mathbb{C} )} C^\infty(M,E) \cong \Gamma (M,T^*_{\mathbb{C} } M)\otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E) 
+	.\]
+	Decompose $T^*_{\mathbb{C} } M \cong T^{*1,0} M\oplus T^{*0,1} M$, and using the fact that $\oplus $ is a product and $\Gamma $ is right-adjoint, we obtain
+	\[
+		\Gamma (M,T^*_{\mathbb{C} } M)\otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E) \cong (\Gamma (M,T^{*1,0} M)\oplus \Gamma (M,T^{*0,1} M))\otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E) 
+	.\]
+	Using the fact that $-\otimes_{C^\infty(M,\mathbb{C} ) }C^\infty(M,E) $ is left-adjoint, and thus commutes with the coproduct $\oplus $, we have
+	\[
+			\cong \left(\Gamma(M,T^{*1,0} M)\otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E)\right)\oplus \left( \Gamma (M,T^{*0,1} M)\otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E)  \right) 
+	\]
+	\[
+		=\left( \Omega ^{1,0} (M) \otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E)  \right) \oplus \left( \Omega ^{0,1} (M)\otimes _{C^\infty(M,\mathbb{C} ) } C^\infty(M,E)  \right) \eqqcolon \Omega ^{1,0} (M,E)\oplus \Omega ^{0,1} (M,E)
+	.\]
+	We thus obtain a projection
+	\[
+		\pi ^{0,1} : \Omega ^1(M,E) \to \Omega ^{0,1} (M,E)
+	.\]
+	Define $\overline{\partial } \coloneqq \pi ^{0,1} \circ \nabla $. Define $\partial $ in the same way. Thus we obtain a morphism
+	\[
+		\overline{\partial } : C^\infty(M,E)  \to \Omega ^{0,1} (M,E)
+	\]
+	natural in $M$. Note that this in particular gives us both a morphism of sheaves on $\mathcal{C} \Man $
+	\[
+		\overline{\partial } : E \to \Omega ^{0,1} (-,E),
+	\]
+	\emph{and} a morphism of sheaves on $M$
+	\[
+		\overline{\partial } : C^\infty_{M}(-,E)  \to \Omega ^{0,1}_M(-,E)
+	.\]
+
+	Now letting $E^{\bullet} $ be a differentiable complex cochain complex, these constructions promote to cochain complexes (degreewise), yielding a map $\overline{\partial } ^{\bullet} $ of sheaves of complex differentiable cochain complexes. We will focus on this being a map of sheaves on $M$. Since $E^{\bullet} $ is a cochain complex of complex differentiable vector spaces, we can take its cohomology $H^{\bullet} (E^{\bullet} )$ as a cochain complex. This yields a sheaf $H^{\bullet} (E^{\bullet} )$ of graded differentiable vector spaces. Note that since the sections functor does \emph{not} commute with cohomology, $H^{\bullet} (E^{\bullet} )(U) \neq H^{\bullet} (E^{\bullet} (U))$. Rather, we denote $\Gamma (-,H^{\bullet} (E^{\bullet}))$ by $C^\infty(-,H^{\bullet} (E^{\bullet} )) $ as usual. Regardless, we obtain two graded complex differentiable vector spaces
+	\[
+		C^\infty(-,H^{\bullet} (E^{\bullet} )) ,\qquad \Omega ^{0,1} (-,H^{\bullet} (E^{\bullet} ))
+	.\]
+	Restricting along a complex manifold yields sheaves of graded complex (not differentiable) vector spaces
+	\[
+		C^\infty_{M}(-,H^{\bullet} (E^{\bullet} )) ,\qquad \Omega ^{0,1} _M(-,H^{\bullet} (E^{\bullet} ))
+	.\]
+	The $\overline{\partial }^{\bullet} $-operator is a cochain map, and by functoriality of cohomology descends to a morphism of graded complex differentiable vector spaces
+	\[
+		H^{\bullet} (\overline{\partial}^{\bullet}) : C^\infty(-,H^{\bullet} (E^{\bullet} ))  \to \Omega ^{0,1} (-,H^{\bullet} (E^{\bullet} ))
+	.\]
+	This restricts along the complex manifold $M$ to a map of sheaves of complex (not differentiable) vector spaces
+	\[
+		H^{\bullet} (\overline{\partial } ^{\bullet} _M) = H^{\bullet} (\overline{\partial } ^{\bullet} )_M : C^\infty_{M}(-,H^{\bullet} (E^{\bullet} ))  \to \Omega ^{0,1} _M(-,H^{\bullet} (E^{\bullet} ))
+	.\]
+	The equality noted holds since restriction from the site $\Man $ to a single manifold is an exact functor. Thus, we will not be extremely careful about the placements of the subscripts, since it can be inferred from context without dealing with technicalities.
+
+	We have now finally introduced enough machinery for a proper notion of holomorphicity of maps $M\to E$. The kernel $\Ker H^{\bullet} (\overline{\partial } ^{\bullet}_M)$ is itself a sheaf on $M$, and since kernels are computed pointwise in sheaf categories, we can describe the kernel very well. We view $H^{\bullet} (\overline{\partial } ^{\bullet} _M)$ as a map of sheaves of graded vector spaces (we can equivalently view it as a map of graded sheaves of vector spaces!), so we start by passing to sections over $U$. Thus we have a map
+	\[
+		H^{\bullet} (\overline{\partial }^{\bullet} _M)_U : C^\infty_{M}(U,H^{\bullet} (E^{\bullet} ))  \to \Omega ^{0,1} _M(U,H^{\bullet} (E^{\bullet} ))
+	.\]
+	We now pass to homogeneous elements. For any $i\in\mathbb{Z} $, we have a map of $\mathbb{C} $-vector spaces
+	\[
+		H^i(\overline{\partial }^{\bullet} _M)_U : C^\infty_{M}(U,H^i(E^{\bullet} ))  \to \Omega ^{0,1} _M(U,H^i(E^{\bullet} ))
+	.\]
+	Suppose that $f\in \Ker H^i (\overline{\partial } _M)_U$. Then $H^i(\overline{\partial }^{\bullet} _M)_U(f) = 0$. We would like $H^i(\overline{\partial } ^{\bullet} _M)_U(f)$ to lift to a closed section $\overline{\partial } ^{i}_M(f)$ of $C^\infty_{M}(-,E^i) $, which would express the statement that $f$ is holomorphic up to homotopy. However, this would require commuting sections with cohomology, which need not follow. Rather, we appeal to the explicit construction of limits in $\Shf $ and $\Pshf $.
+
+	The cohomology is the quotient of the kernel by the image. Kernel and image are limits, and by continuity of the forgetful functor $U : \Shf  \to \Pshf $ and \cite{ml}, we can compute them pointwise. By cocontinuity of sheafification, the quotient in $\Shf $, which is a colimit, is the sheafification of the quotient in $\Pshf $, which is once again computed pointwise in $\Pshf $. Because (co)limits in $\Pshf $ are computed pointwise, cohomology commutes with sections of presheaves, since cohomology is a composite of limits and colimits, and sections are just evaluation functors. Thus, if $(-)^+$ is sheafification, then
+	\[
+		H^i(E^{\bullet} ) \cong \left( \frac{\Ker \left( E^i \to E^{i+1}  \right) }{\Im \left( E^{i-1}  \to E^i \right) }  \right) ^+,
+	\]
+	where all (co)limits other than sheafification are computed in $\Pshf $. Denote the unsheafified cohomology (aka the cohomology computed in $\Pshf $) by $H^{\bullet} _{\Pshf } $. Recall that the sheafification of a presheaf is given by collections of all compatible germs of the presheaf. Thus, a section $f$ of $H^i(E^{\bullet} )(U)$ is a collection $\left\{ f_p  \in H^i_{\Pshf } (E^{\bullet} )_p \right\}_{p \in U} $ of compatible germs on $U$. Germs are compatible if they are locally germs of some section, meaning that there is a collection $\left\{ f_\alpha \in H^i_{\Pshf }(E^{\bullet} )(U_\alpha ) \right\}_{\alpha \in A} $ of sections of the presheaf cohomology, for some open cover $\left\{ U_\alpha  \right\} _{\alpha \in A} $ of $U$. Since every section gives rise to a collection of compatible germs, we obtain that $f|U_\alpha  = f_\alpha $. Thus, $f$ can locally be written as a section $f_\alpha $ of $H^i_{\Pshf } (E^{\bullet} )(U_\alpha )$. But since presheaf cohomology commutes with sections, we can view each $f_\alpha $ as a cohomology class
+	\[
+		[f_\alpha]  \in H^i_{\Pshf }(E^{\bullet} (U_\alpha )),\qquad \forall \alpha \in A
+	.\]
+	Note that we use the notation $[-]$ only when considering elements as a cohomology class of presheaf cohomology. We will sometimes abuse notation and refer to $f_\alpha $ as a representative of this class, but we will avoid this where possible.
+	
+	Now we act $H^i_{\Pshf } (\overline{\partial } ^{\bullet} _M)_U$ on each cohomology class $f_\alpha $. It's important to note here that by universality of presheaf, $H^i(\overline{\partial }_M)$ restricted along the map $\iota : H^i_{\Pshf } (E^{\bullet} ) \to H^i(E^{\bullet} )$ acts the same as $H^i_{\Pshf } (\overline{\partial } _M)$. The morphism $\iota $ maps a section $s$ over $U$ to its collection $\left\{ s_p \right\} _{p\in U} $ of compatible germs, which we view as being equivalent to the section $s$ from the presheaf. However, multiple sections in a presheaf can have the same germs, so $\iota $ identifies all these sections). Thus, if $H^i(\overline{\partial } ^{\bullet} _M)_U(f_\alpha ) = 0$, then we may immediately conclude that $H^i_{\Pshf }(\overline{\partial } ^{\bullet} _M)_U(f_\alpha )$ has vanishing germs. Since $H^i(\overline{\partial } ^{\bullet} _M)$ is a sheaf morphism, it commutes with restriction morphisms, and since $f|U_\alpha =f_\alpha $, we have
+	\[
+		H^i(\overline{\partial } ^{\bullet} _M)_U(f_\alpha ) = H^i(\overline{\partial } ^{\bullet} _M)_U(f|U_\alpha )=H^i(\overline{\partial } ^{\bullet} _M)_U(f)|U_\alpha = 0|U_\alpha =0
+	.\]
+	The final step follows since restriction morphisms must be abelian group homomorphisms.
+
+	Now, we need to rewrite this in the language of presheaf cohomology. This tells us that for any $p\in U_\alpha $, the germ at $p$, denoted $H^i_{\Pshf } (\overline{\partial } ^{\bullet} _M)_U(f_\alpha )_p$, is the zero germ. This implies that for any point $p\in U_\alpha $, there is an open set $p\in V \subseteq U_\alpha $ with
+	\[
+		\left[ \overline{\partial } ^i_M f_\alpha  \right] |V = \left[ \overline{\partial } ^i_Mf|V \right] =0
+	.\]
+	Choose an open cover $\left\{ U_{\alpha \beta }  \right\} _{\beta \in B_\alpha } $ of $U_\alpha $ by such subsets, and assemble this into a cover $\left\{ U_{\beta }  \right\}_{\beta \in B} $ of $U$. Since this is finer than $\left\{ U_{\alpha }  \right\}_{\alpha \in A} $, we still have $f|U_\beta =f_\beta $. However, we now have that each cohomology class $[f_\beta ]$ is strictly killed by $H^i_{\Pshf }(\overline{\partial } ^{\bullet} _M)$:
+	\[
+		H^i_{\Pshf }(\overline{\partial } ^{\bullet} _M)[f_\beta ]=0
+	.\]
+	Thus we can find an exact representative $\dd \eta_\beta \in \Omega ^{0,1} _M(U_\beta ,E^i)$ of $[\overline{\partial }^i_M(f_\beta)]$. Note that although cohomology for sheaves does not commute with taking sections, we still get a map of sheaves
+	\[
+		\Ker \dd _{E^{\bullet} } \to H^{\bullet} (E^{\bullet} )
+	.\]
+	Recall that $\Omega ^{0,1}(-,E^{\bullet} )\coloneqq \Omega ^{0,1} _M \otimes_{C^\infty_M}  E^{\bullet} $, where this tensor product is applied \emph{pointwise}, and is \emph{not the graded tensor product}. Thus applying $\Omega ^{0,1} _M \otimes -$ to this map of sheaves yields a map
+	\[
+		\Omega ^{0,1}_M(-, \Ker \dd _{E}) \to \Omega^{0,1} (-,H^{\bullet} (E^{\bullet} ))
+	.\]
+	Note that $\Ker \dd _{E} \otimes \Omega ^{0,1} _M = \Ker \dd _{\Omega } $, since the differential on $\Omega ^{0,1} _M(-,E^{\bullet} )$ is induced from $E^{\bullet} $. Thus, by taking the component of this map of sheaves at $U_\beta $, we see that $\dd \eta_\beta  \in \Omega ^{0,1} _M(U_\beta ,E^i)$ maps to an element of $\Omega ^{0,1} _M(U_\beta ,H^{\bullet} (E^{\bullet} ))$. I believe naturality of everything forces this image to be both $H^{\bullet} (\overline{\partial }^{\bullet} _M)_U(f)|U_\beta $ and $0$, expressing that $f$ is locally $\dd _{E} $-exact.
+
+	To summarize, given any $i\in\mathbb{Z} $, any $U\subseteq M$, and any section $f\in \Ker H^i( \overline{\partial } ^i_M)_U$, we can find an open cover $\left\{ U_\beta  \right\}_{\beta \in B} $ of $U$ such that $H^{\bullet} (\overline{\partial } ^{\bullet} _M)_U(f|U_\beta)$ lifts to a $(1\otimes \dd _E)$-exact element of $\Omega ^{0,1} (U,E^i)$. Thus, $H^{\bullet} (\overline{\partial } ^{\bullet}_M)_U(f)$ is locally exact.
+
+	Thus, we denote $\Ker (H^{\bullet} (\overline{\partial } ^{\bullet} ))$ by $\mathcal{O} _M(-,H^{\bullet} (E^{\bullet} ))$, and call its elements \emph{holomorphic sections} of $H^{\bullet} (E^{\bullet} )$ on $M$. We think of holomorphic sections on $H^{\bullet} (E^{\bullet} )$ as locally given by smooth maps $M\to E^{\bullet} $ which are holomorphic up to homotopy.
+\end{discussion}
+
+The theorem on vertex algebras will require an extra hypothesis regarding the $S^1$-action. Given any compact Lie group $G$, we can formulate a notion of \emph{tameness} for a $G$-action on a differentiable vector space. The $S^1$-action on $\mathcal{F} _r$ will then be required to be tame.
+
+Given a Lie group $G$, the space $\mathcal{D} (G)$ of distributions on $G$ is an algebra under convolution. Since distributions are naturally differentiable vector spaces, and the convolution
+\[
+	*: \mathcal{D} (G) \times  \mathcal{D} (G) \to \mathcal{D} (G)
+\]
+is smooth, $\mathcal{D} (G)$ forms an algebra in $\DVS $. Here, an action just means a smooth bilinear map
+\[
+	\mathcal{D} (G)\times E \to E
+\]
+which is associative in the relevant sense. There is a map $\delta : G \to \mathcal{D} (G)^{\times }$ sending $g$ to the $\delta $-distribution at $g$. It is smooth and a homomorphism of monoids.
+
+\begin{definition}\label{dfn:5-2-3}
+	Let $E$ be a differentiable vector space and let $G$ be a compact Lie group. A \emph{tame} action of $G$ on $E$ is a smooth action of the algebra $\mathcal{D} (G)$ on $E$. Note that this is, in particular, an action of $G$ on $E$ via the smooth map of groups $G\to \mathcal{D} (G)^{\times } $ sending $g\mapsto \delta _g$. If $E$ is a differentiable cochain complex, a tame action is an action of $\mathcal{D} (G)$ on $E$ which commutes with the differential.
+\end{definition}
+
+Let us now specialize $G=S^1$. Let $k$ be an integer. Then there is an irreducible representation $\rho _k$ of $S^1$ on $S^1$ given by the function $\lambda \mapsto \lambda ^k$, where $\lambda \in S^1 \subseteq \mathbb{C} $. We view $\rho _k$ as a map of sheaves on $\Man $ from the representable sheaf $C^\infty (-,S^1)$ to the representable differentiable vector space $C^\infty(-,\mathbb{C} )$. This lifts naturally to a representation of the algebra $\mathcal{D} (S^1)$ defined by
+\[
+	\widetilde{\rho } _k(\phi ) = \left\langle \phi ,\rho _k \right\rangle 
+\]
+for $\left\langle -,- \right\rangle $ the pairing on distributions and functions. For simplicity, we will abuse notation and write $\rho _k$ for this representation as well.
+
+If $E$ is a differentiable vector space equipped with such a smooth action of $\mathcal{D} (S^1)$, we use $E_k \subseteq E$ to denote the subspace on which $\mathcal{D} (S^1)$ acts by $\rho _k$. We call this the \emph{weight $k$ eigenspace} for the $S^1$-action on $E$.
+
+The map $\rho _k : S^1 \to S^1$ can be viewed as a distribution by integrating against it. If we denote the action of $\mathcal{D} (S^1)$ on $E$ by $*$, then the map $\rho _k * - : E \to E$ defines a projection $\pi _k$ from $E$ onto $E_k$: since $\rho _k * \rho _k = \rho _k$ by idempotence,
+\[
+	\pi _k(\pi _k(v)) = \rho _k * (\rho _k * v) = (\rho _k * \rho _k) * v = \rho _k * v = \pi _k(v)
+.\]
+The statment now follows by some theorem.
+
+\subsection{The statement of the main theorem}
+
+\begin{theorem}\label{thm:5-2-4}
+	Let $\mathcal{F} $ be a unital $S^1$-equivariant holomorphically translation invariant prefactorization algebra on $\mathbb{C} $ valued in differentiable vector spaces. Assume that for eahch disk $\Delta _0(r)$ around the origin, the action of $S^1$ on $\mathcal{F} (\Delta _0(r))$ is tame. Let $\mathcal{F} _k(\Delta _0(r))$ be the weight $k$ eigenspace of the $S^1$-action on $\mathcal{F} (\Delta _0(r))$. We make the following additional assumptions.
+	\begin{enumerate}
+		\item Assume that, for $r < r'$, the structure map
+			\[
+				\mathcal{F} _k(\Delta _0(r)) \to \mathcal{F} _k(\Delta _0(r'))
+			\]
+			is a quasi-isomorphism.
+		\item For $k \gg 0$, the vector space $H^{\bullet} (\mathcal{F} _k(\Delta _0(r))) \cong 0$.
+		\item For each $k$ and $r$, we require that $H^{\bullet} (\mathcal{F} _k(\Delta _0(r)))$ is isomorphic, as a sheaf on the site of smooth manifolds, to a countable sequential colimit of finite-dimensional graded vector spaces.
+	\end{enumerate}
+	Let $V_k = H^{\bullet} (\mathcal{F} _k(\Delta _0(r)))$, and let $V = \bigoplus_{k\in\mathbb{Z} } V_k$. This space is independent of $r$ by assumption. Then $V$ has the structure of a vertex algebra, determined by the structure maps of $\mathcal{F} $.
+\end{theorem}
+
+The construction is functorial: maps of prefactorization algebras that respect the equivariance conditions produce maps of vertex algebras. The book proves this later.
+
+\subsection{Using the theorem}
+
+

@@ -1,0 +1,59 @@
+\chapter{Factorization algebras: examples}
+
+\section{Some examples of computations}
+
+The examples we now provide are very appealing in the sense that computing the global sections (i.e. the factorization homology) is straightforward, and does not require invoking the gluing axiom. Instead, we can use the theorems in the preceeding sections to compute global sections. By analogy, consider how de Rham cohomology, which exploits partitions of unity and analysis, compares to the derived functor of global sections for the constant sheaf.
+
+We focus in this section on examples we have already seen.
+
+\subsection{Enveloping algebras}
+
+Let $\mathfrak{g} $ be a Lie algebra and $\mathfrak{g} ^\mathbb{R} $ the local Lie algebra $\Omega ^{\bullet} _{\mathbb{R} } \otimes \mathfrak{g} $ on the real line $\mathbb{R} $. Recall that the factorization envelope $\mathbb{U} \mathfrak{g} ^{\mathbb{R} }$ is simply the universal enveloping algebra $U\mathfrak{g} $. This factorization algebra can also be defined on the circle
+\begin{proposition}\label{prp:8-1-1}
+	There is a weak equivalence
+	\[
+		\mathbb{U} \mathfrak{g} ^{\mathbb{R} } (S^1)\simeq C_{\bullet} (\mathfrak{g} ,U \mathfrak{g} ^{ad} )\simeq H H_{\bullet} (U\mathfrak{g} )
+	\]
+	where in the middle we mean the Lie algebra homology complex for $U\mathfrak{g} $ as a $\mathfrak{g} $-module via the adjoint action
+	\[
+		v\cdot a = va-av
+	,\]
+	where $v\in \mathfrak{g} $ and $a\in U\mathfrak{g} $.
+\end{proposition}
+\begin{proof}
+	The second map is a standard result in Hochschild homology, so we prove the first. The wonderful fact here is that we need not use the \v{C}ech complex. De Rham's theorem provides a quasi-isomorphism between singular cochains and the de Rham complex. However, it is possible to show that $S^1$ is \emph{formal}, i.e. there is a quasi-isomorphism $C^{\bullet} (S^1) \simeq H^{\bullet} (S^1)$ which preserves the dg algebra structure. Thus, there is a quasi-isomorphism $\Omega ^{\bullet} (S^1)\simeq H^{\bullet} (S^1)$. Thus, there is a quasi-isomorphism of dg Lie algebras
+	\[
+		\Omega ^{\bullet} (S^1)\otimes \mathfrak{g} \simeq H^{\bullet} (S^1)\otimes \mathfrak{g} \cong (\mathbb{R} \oplus \mathbb{R} [-1])\otimes \mathfrak{g} \cong \mathfrak{g} \oplus \mathfrak{g} [-1],
+	\]
+	where, on the right, $\mathfrak{g} $ acts by the shifted adjoint action of $\mathfrak{g} [-1]$. Then of course
+	\[
+		C_{\bullet} (\mathfrak{g} \oplus \mathfrak{g} [-1])\cong C_{\bullet} (\mathfrak{g} ,\Sym \mathfrak{g} )
+	.\]
+	As vector spaces, $U\mathfrak{g} \cong \Sym \mathfrak{g} $, so direct computation shows that the $\mathfrak{g} $-module structure on $\Sym \mathfrak{g} $ obtianed from the Chevalley-Eilenberg homology complex is precisely the adjoint action of $\mathfrak{g} $ on $U\mathfrak{g} $.
+\end{proof}
+
+
+\subsection{The free scalar field in dimension 1}
+
+Recall that the factorization algebra of quantum observables $\Obs^{q} $ on the free scalar field theory on $\mathbb{R} $ was the Weyl algbera. Thus we expect that the factorization homology of $\Obs^{q} $ on a circle should have some relationship with the Hochschild homology of the Weyl algebra, but we will see that this relation depends on the mass of the theory, and the radius of the circle.
+
+Let $S^1_L = \mathbb{R} /\mathbb{Z} L$ be a circle with a rotation-invariant metric, radius $r$, and a total length $L=2\pi r$. We work with $\mathbb{C} $-linear observables, rather than $\mathbb{R} $-linear.
+
+\begin{proposition}\label{prp:8-1-2}
+	If the mass $m=0$, then $H^k(\Obs^{q} (S^1_L))$ is $\mathbb{C} [\hbar ]$ for $k=0,-1$, and vanishes for all other $k$.
+
+	If the mass satisfies $mL = in$ for some $n\in\mathbb{Z} $, then $H^k(\Obs^{q} (S^1_L))$ is $\mathbb{C} [\hbar ]$ for $k=0,-2$, and vanishes for all other $k$.
+
+	For other values of $m$, the cohomology is $\mathbb{C} [\hbar ]$ concentrated in degree 0.
+\end{proposition}
+
+The proof follows much of what I've seen in my quantum physics experience. For example, we use the topological basis of exponentials $e^{ikx/L} $, $k\in\mathbb{Z} $, and use
+\[
+	(\Delta +m^2)e^{ikx/L} =\left( \frac{k^2}{L^2} +m^2 \right) e^{ikx/L} 
+\]
+to note that the complex $\mathcal{E} $ of fields has trivial cohomology when $m^2L^2$ is not a square integer. Then
+\[
+	H^{\bullet} (\Obs^{q} ) = H^{\bullet} (\Sym (\mathcal{E}_c[1] \oplus \mathbb{C} \hbar))\cong \Sym (H^{\bullet} (\mathcal{E} _c[1]) \oplus H^{\bullet} (\mathbb{C} \hbar))\cong \Sym (\mathbb{C} \hbar)\cong \mathbb{C} [\hbar ]
+.\]
+
+In the $m=0$ case, we fairly easily use the constant functions in each degree of the cohomology of $\mathcal{L} = \mathcal{E} \oplus \mathbb{C} \hbar[-1]$ to compute $H^{\bullet} (C_{\bullet} \mathcal{L} )$. A similar argument works for $m=in/L$, $n\in\mathbb{Z} $, by using the 2-dimensional kernel and cokernel of $\Delta +m^2$, and writing them as being spanned by $\pm e^{inx/L} $.

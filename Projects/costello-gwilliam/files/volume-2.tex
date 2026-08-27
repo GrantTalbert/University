@@ -1,0 +1,219 @@
+\part{Volume 2}
+
+\chapter{Introduction to classical field theory}
+
+I wanted to begin some light reading of concepts covered in volume 2, such as $L_\infty $-algebras, elliptic moduli problems, etc. Since I'm only reading for a few days, I am not making a new project for this, and am keeping it in this file. We will mostly be following part 1 of \cite{cg2}, as well as their appendicies. We will be using significant supplimental material since they provide only a brief overview of many important topics.
+
+We start by following chapter 2 of \cite{cg2} for motivation. However, since the current focus is not on understanding the mathematical physics, but rather the mathematical tools, we will keep this chapter very brief.
+
+We will be working perturbatively throughout this book. Our goal is to describe the derived space of solutions to the Euler-Lagrange equations. Since these are usually a system of PDEs on a manifold $M$, and those PDEs are usually elliptic in a particular sense, the space we want to describe will be called a \emph{formal elliptic moduli problem}. Since one can solve the Euler-Lagrange equations on any open subset $U\subseteq M$, the correct object to use is a sheaf $\mathcal{EL} $ of formal elliptic moduli problems on $M$.
+
+We then think of observables as some kind of function on $\mathcal{E} \mathcal{L} $, so that
+\[
+	\Obs^{cl} (U) = \mathcal{O} (\mathcal{E} \mathcal{L} (U))
+.\]
+We will be precise about what this means later. The factorization algebra structure arises from this idea. In finite dimensions, a formula moduli problem that arises as the derived critical locus of a function is equipped with a symplectic form of cohomological degree $-1$. This symplectic form is quite useful, and in fact we later \emph{define} a classical field theory to be a formal elliptic moduli problem equipped with a symplectic form of cohomological degree $-1$. We can then show how to construct such a theory from a local action functional satisfying certain non-degeneracy properties. Finally, we look at a particular construction on an elliptic moduli problem $\mathcal{F} $ similar to that of the cotangent bundle. This is motivated by symplectic geometry, and turns out to be physically interesting.
+
+In finite dimensions, the symplectic form for a formal moduli problem $\mathcal{F} $ yields a Poisson bracket of degree 1 for $\mathcal{O} (\mathcal{F} )$, hence $\mathcal{O} (\mathcal{F} )$ is a $P_0$-algebra. We show that something similar happens in infinite dimensions: any classical field theory has a $P_0$-structure on its factorization algebra of observables. This is the main payoff of ellipticity of the Euler-Lagrange equations.
+
+\chapter{$L_\infty $ algebras and moduli problems}
+
+\section{Lie algebras and $L_\infty $ algebras}
+
+Given a dg Lie algebra $\mathfrak{g} $, we have extensively used the Chevalley-Eilenberg chains and cochains to construct many important factorization algebras. It is necessary to make a homotopic generalization of the notion of a Lie algebra for interacting theories, and the category $\Ch_{\mathbb{K} } $ (here $\mathbb{K}$ is a field of characteristic 0) is a great place to work, since it is an $\infty $-category via the dg nerve.
+
+\begin{definition}\label{dfn:10-1-1}
+	An $L_\infty $ algebra over a ring $R$ is a graded projective $R$-module $\mathfrak{g} $ equipped with multilinear maps
+	\[
+		\ell_n : \mathfrak{g} \otimes_R \cdots \otimes _R \mathfrak{g}  \to \mathfrak{g} [n-2]
+	\]
+	for all $n\geq 1$, referred to as \emph{brackets}, satisfying the following properties.
+	\begin{enumerate}
+		\item Each bracket $\ell _n$ is graded-alternating, meaning
+			\[
+				\ell _n(x_1, \ldots ,x_i,x_{i+1} ,\ldots ,x_n) = -(-1)^{\left| x_i \right| \left| x_{i+1}  \right| } \ell _n(x_1, \ldots , x_{i+1} ,x_i, \ldots ,x_n)
+			.\]
+		\item Each bracket $\ell _n$ satisfies the $n$-Jacobi rule: for all tuples $(x_1, \ldots , x_n)\in \mathfrak{g} $,
+			\[
+				0=\sum_{k=1}^{n} (-1)^k \sum_{\substack{i_1 < \cdots < i_k \\ j_{k+1} < \cdots < j_n \\ \left\{ i_1, \ldots , j_n \right\} =\left\{ 1, \ldots ,n \right\} }} \varepsilon_{i_1, \ldots ,j_n} \ell _{n-k+1} (\ell _k(x_{i_1} , \ldots ,x_{i_k} ), x_{j_{k+1} } , \ldots , x_{j_n} )
+			.\]
+			Here, $\varepsilon $ yields the proper sign for the alternating Koszul sign rule $ab=-(-1)^{\left| a \right| \left| b \right| } ba$.
+	\end{enumerate}	
+\end{definition}
+
+Part (2) is a tad confusing so I shall explain it. To be more explicit about the actual equation itself, I will write down some terms from the sum. We will let $x_1,x_2,x_3\in \mathfrak{g} $, and work with the 3-Jacobi rule. First, we set $k=1$. Then we have $\left\{ i_1, j_2, j_3 \right\} =\left\{ 1,2,3 \right\} $. If we set $i_1=1$, $j_2=2$, and $j_3=3$, then we simply have
+\[
+	(-1)^k \varepsilon \ell_3(\ell _1(x_1),x_2,x_3)
+.\]
+Since there are no crossings, we have $\varepsilon =-(-1)^1 = 1$. Thus this term evaluates to simply
+\[
+	\ell _3(\ell _1(x_1),x_2,x_3)
+.\]
+If we were to switch $x_1$ and $x_2$ by setting $i_1 = 2$ and $j_2 = 1$, then we would have $\varepsilon =(-1)^{\left| x_1 \right| \left| x_2 \right|}$, yielding the term
+\[
+	(-1)^k {\varepsilon } \ell _3(\ell _1(x_2),x_1,x_3) = -(-1)^{\left| x_1 \right| \left| x_2 \right| } \ell _3(\ell _1(x_2),x_1,x_3)
+.\]
+From here, it should be clear how the rest of the terms are calculated.
+
+We can use this to compute low dimensional examples of the brackets. For example, the 1-Jacobi rule simply says
+\[
+	0 = \sum_{k=1}^{1} (-1)^k\sum_{i_1 = 1} \varepsilon_{i_1} \ell_{1 - k + 1} (\ell_k(x_{i_1})) = -(-1)^{1} \ell _1(\ell _1(x_1))
+.\]
+Since there are no crossings, $\varepsilon =1$, so this evaluates to
+\[
+	0 = \ell_1(\ell _1(x_1))
+,\]
+or more simply, $\ell _1\circ \ell _1=0$. Thus, $\ell _1$ is a differential. Let's temporarily write $\dd =\ell _1$ and $[-,-]=\ell _2$. We now consider the 2-Jacobi rule:
+\[
+	0=\sum_{k=1}^{2} (-1)^k \sum_{\substack{i_1 < \cdots < i_k \\ j_{k+1} < \cdots < j_n \\ \left\{ i_1, \ldots , j_n \right\} =\left\{ 1, \ldots ,n \right\} }} \varepsilon_{i_1, \ldots ,j_n}  \ell _{n-k+1} (\ell _k(x_{i_1} , \ldots ,x_{i_k} ), x_{j_{k+1} } , \ldots , x_{j_n} )
+.\]
+There are two possible values for $k$, so we work with each one individually. First, consider the terms where $k=1$. Let $x_1,x_2\in \mathfrak{g} $. The list of all possible permutations, and the corresponding sign value, is
+\begin{align*}
+	(x_1,x_2) && \varepsilon =-(-1)^1=1\\
+	(x_2,x_1) && \varepsilon =-(-1)^{\left| x_1 \right| \left| x_2 \right| } 
+.\end{align*}
+The $k=1$ component of the summand ranges over $i_1=1$ and $i_1=2$, hence it ranges over both permutations. Since $(-1)^k=-1$, the $k=1$ component is simply
+\[
+	-[\dd x_1,x_2] + (-1)^{\left| x_1 \right| \left| x_2 \right| } [\dd x_2,x_1]
+.\]
+The $k=2$ component of the summand forces $i_1=1$ and $i_2=2$ due to the reqirement that $i_1 < i_2$. Thus, it is simply
+\[
+	(-1)^2(- (-1)^1) \ell_{2-2+1} (\ell _2(x_1,x_2)) = \dd [x_1,x_2]
+.\]
+Putting it together, we have
+\[
+	0=\dd [x_1,x_2] - [\dd x_1,x_2] + (-1)^{\left| x_1 \right| \left| x_2 \right| } [\dd x_2,x_1]
+.\]
+We can write this in a more conventional form. First, we move $\dd[x_1,x_2]$ over to the other side to get
+\[
+	-\dd [x_1,x_2] = -[\dd x_1,x_2] + (-1)^{\left| x_1 \right| \left| x_2 \right| } [\dd x_2,x_1]
+.\]
+We then multiply through by $-1$ to obtain
+\[
+	\dd [x_1,x_2] = [\dd x_1,x_2] - (-1)^{\left| x_1 \right| \left| x_2 \right| } [\dd x_2,x_1] 
+.\]
+Recall that $\ell _2$ is graded alternating, meaning $[x,y] = -(-1)^{\left| x \right| \left| y \right| } [y,x]$. Since $\left| \dd x_2 \right| =\left| x_2 \right| +1$, we have that
+\[
+	-(-1)^{\left| x_1 \right| \left| x_2 \right| } =-(-1)^{\left| x_1 \right| \left| x_2 \right| } (-(-1)^{\left| x_1 \right| \left| x_2 \right| +\left| x_1 \right| } )[x_1,\dd x_2]=(-1)^{2\left| x_1 \right| \left| x_2 \right| +\left| x_1 \right| } [x_1,\dd x_2]=(-1)^{\left| x_1 \right| } [x_1,\dd x_2]
+.\]
+Thus the 2-Jacobi rule reads
+\[
+	\dd [x_1,x_2] = [\dd x_1,x_2] + (-1)^{\left| x_1 \right| } [x_1,\dd x_2]
+.\]
+This is precisely the graded Leibniz rule. Additionally, note that due to the definition of the differential on the graded tensor product $\mathfrak{g} \otimes_R \mathfrak{g} $, this is also the requirement that $\ell _2$ be a cochain map $\mathfrak{g} \otimes _R\mathfrak{g} \to \mathfrak{g} $.
+
+Now we consider the 3-Jacobi rule. Let $x_1,x_2,x_3\in \mathfrak{g} $. Then the possible permutations, and their corresponding $\varepsilon $ value are
+\begin{align*}
+	(x_1,x_2,x_3)&& \varepsilon =-(-1)^{1}=1\\
+	(x_1,x_3,x_2) && \varepsilon =-(-1)^{\left| x_2 \right| \left| x_3 \right| } \\
+	(x_2,x_1,x_3) && \varepsilon =-(-1)^{\left| x_1 \right| \left| x_2 \right|}\\
+	(x_2,x_3,x_1) && \varepsilon =(-1)^{\left| x_1 \right| \left| x_2 \right|}(-1)^{\left| x_1 \right| \left| x_3 \right| } \\
+	(x_3,x_2,x_1) && \varepsilon =-(-1)^{\left| x_1 \right| \left| x_2 \right| }(-1)^{\left| x_1 \right| \left| x_3 \right| } (-1)^{\left| x_2 \right| \left| x_3 \right| } \\
+	(x_3,x_1,x_2) && \varepsilon =(-1)^{\left| x_1 \right| \left| x_3 \right| } (-1)^{\left| x_2 \right| \left| x_3 \right| } 
+.\end{align*}
+Note that not all of these are possible, since we must have $i_1 < i_2 < i_3$ and likewise for the $j$'s. In fact, the only possible permutations are
+\[
+	(i_1,i_2,i_3) = (i_1,i_2,j_3) = (i_1,j_2,j_3) = (x_1,x_2,x_3),\qquad (i_1,i_2,j_3) = (x_1,x_3,x_2),
+\]
+\[
+	(i_1,j_2,j_3) = (x_2,x_1,x_3),\qquad (i_1,i_2,j_3) = (x_2,x_3,x_1),\qquad (i_1,j_2,j_3) = (x_3,x_1,x_2)
+.\]
+Essentially, all permutations except $(x_3,x_2,x_1)$ are possible. We once again work termwise under $k$. Start with $k=3$. Then we must have 3 $i$'s, meaning there is only one possible permutation, $(i_1,i_2,i_3) = (x_1,x_2,x_3)$. Thus the $k=3$ term is
+\[
+	(-1)^3(-(-1)^1) \ell_{3-3+1} (\ell _3(x_1,x_2,x_3)) = -\dd \ell _3(x_1,x_2,x_3)
+.\]
+The bracket for the $k=2$ terms is $\ell _{3-2+1} \circ \ell_2 = \ell_2(\ell _2,-)$. Thus plugging in the terms with two $i$'s yields the $k=2$ terms:
+\[
+	[[x_1,x_2],x_3] - (-1)^{\left| x_2 \right| \left| x_3 \right| } [[x_1,x_3],x_2] + (-1)^{\left| x_1 \right| (\left| x_2 \right| +\left| x_3 \right|)} [[x_2,x_3],x_1]
+.\]
+We will later be able to rearrange the brackets to get rid of these signs. For now, we compute the $k=1$ terms. These all pick up a factor of $-1$ from $(-1)^k=-1$, which cancels the leading minus sign in all $\varepsilon $'s except for the $(x_1,x_2,x_3)$ permutation, where $\varepsilon =1$. Moreover, $\ell _{3-k+1} =\ell _3$, so the operator is simply $\ell _3(\dd ,-,-)$. Taking all permutations with two $j$'s yields
+\[
+	-\ell _3(\dd x_1,x_2,x_3) + (-1)^{\left| x_1 \right| \left| x_2 \right| } \ell _3(\dd x_2,x_1,x_3) - (-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} \ell _3(\dd x_3,x_1,x_2)
+.\]
+We can now write the full 3-Jacobi rule:
+\begin{align*}
+	0&=-\dd \ell _3(x_1,x_2,x_3) + [[x_1,x_2],x_3] - (-1)^{\left| x_2 \right| \left| x_3 \right| } [[x_1,x_3],x_2] + (-1)^{\left| x_1 \right| (\left| x_2 \right| +\left| x_3 \right| )} [[x_2,x_3],x_1]\\
+	 &\,\,\,\,\,\,\,-\ell _3(\dd x_1,x_2,x_3) + (-1)^{\left| x_1 \right| \left| x_2 \right| } \ell _3(\dd x_2,x_1,x_3) - (-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} \ell _3(\dd x_3,x_1,x_2)
+.\end{align*}
+We will isolate the terms with $\ell _2$ brackets from the terms with $\ell _3$ brackets to begin putting this in a more conventional form. We also use $[x_1,x_3] = -(-1)^{\left| x_1 \right| \left| x_3 \right| } [x_3,x_1]$. We rewrite
+\begin{align*}
+	&[[x_1,x_2],x_3] + (-1)^{\left| x_3 \right|(\left| x_1 \right| +\left| x_2 \right| ) } [[x_3,x_1],x_2] + (-1)^{\left| x_1 \right| (\left| x_2 \right| +\left| x_3 \right| )} [[x_2,x_3],x_1]\\
+	&=\dd \ell _3(x_1,x_2,x_3) + \ell _3(\dd x_1,x_2,x_3) - (-1)^{\left| x_1 \right| \left| x_2 \right| } \ell _3(\dd x_2,x_1,x_3) + (-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} \ell _3(\dd x_3,x_1,x_2)
+.\end{align*}
+We will hereafter refer to this expression as the 3-Jacobi rule, and will make specific reference to its left hand side and right hand side.
+
+We claim that this equation encodes the usual graded Jacobi identity up to homotopy, and this homotopy is encoded in the bracket $\ell _3$. Thus, we should first check that when $\ell _3=0$, we recover the usual graded Jacobi identity
+\[
+	(-1)^{\left| x \right| \left| z \right| } [x,[y,z]]+(-1)^{\left| y \right| \left| x \right| } [y,[z,x]]+(-1)^{\left| z \right| \left| y \right| } [z,[x,y]]=0
+.\]
+Setting $\ell _3=0$ yields
+\[
+	[[x_1,x_2],x_3] + (-1)^{\left| x_3 \right|(\left| x_1 \right| +\left| x_2 \right| ) } [[x_3,x_1],x_2] + (-1)^{\left| x_1 \right| (\left| x_2 \right| +\left| x_3 \right| )} [[x_2,x_3],x_1]=0
+.\]
+Note that $\left| [x,y] \right| =\left| x \right| +\left| y \right| $ since $\ell _2$ has cohomological degree 0. Thus,
+\[
+	[x,[y,z]] = -(-1)^{\left| x \right| (\left| y \right| +\left| z \right| )} [[y,z],x]
+.\]
+We can apply this to the first and third term of our equation, allowing us to write
+\[
+	-(-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} [x_3,[x_1,x_2]] + (-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} [[x_3,x_1],x_2] -[x_1,[x_2,x_3]]=0
+.\]
+We did not apply this to the second term, because we would like to treat that term separately. We have
+\[
+	(-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} [[x_3,x_1],x_2] = -(-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )+\left| x_2 \right| (\left| x_3 \right| +\left| x_1 \right| )} [x_2,[x_3,x_1]] = -(-1)^{\left| x_1 \right( \left| x_3 \right|+ \left| x_2 \right|)} [x_2,[x_3,x_1]]
+.\]
+The last equality is given by expanding out the exponent and removing the factor of $2\left| x_2 \right| \left| x_3 \right| $. Substituting this in and distributing in all the exponents, we have
+\[
+	-(-1)^{\left| x_3 \right| \left| x_1 \right| +\left| x_3 \right| \left| x_2 \right| } [x_3,[x_1,x_2]] -(-1)^{\left| x_1 \right( \left| x_3 \right|+ \left| x_2 \right|)} [x_2,[x_3,x_1]] -[x_1,[x_2,x_3]]=0
+.\]
+Note that both terms with an exponent contain an $\left| x_1 \right| \left| x_3 \right| $ term. We can now simply multiply through by $-(-1)^{\left| x_3 \right| \left| x_1 \right| } $ to obtain
+\[
+	(-1)^{\left| x_2 \right| \left| x_3 \right| } [x_3,[x_1,x_2]]+(-1)^{\left| x_1 \right| \left| x_2 \right| } [x_2,[x_3,x_1]]+(-1)^{\left| x_1 \right| \left| x_3 \right| } [x_2,[x_3,x_1]]=0
+.\]
+This is precisely the graded Jacobi identity. Thus, if $\mathfrak{g} $ is an $L_\infty $ algebra with $\ell_n=0$ for all $n\geq 3$, then $\mathfrak{g} $ is precisely a differential graded Lie $R$-algebra.
+
+Now, we will consider the case where $\ell _3 \neq 0$. We claim that the datum of $\ell _3$ allows us to pass to cohomology, and to have the graded Jacobi identity hold in cohomology. First, we note that if $x=\dd \eta $ is exact and $y$ is closed, then by the graded Leibniz rule,
+\[
+	[x,y]=[\dd \eta ,y] = \dd [\eta ,y] - (-1)^{\left| \eta  \right| } [\eta ,\dd y]=\dd [\eta ,y] - 0 = \dd [\eta ,y]
+.\]
+Thus, $[x,y]$ is exact. This is the standard argument that a dgla's cohomology inherits a well-defined bracket: given any exact form, the bracket with that exact form is necessarily killed.
+
+We can apply similar logic to the 3-Jacobi rule. Let $x_1,x_2,x_3$ now be closed elements, such that they define a cohomology class. The right hand side of the 3-Jacobi rule reads
+\[
+	\dd \ell _3(x_1,x_2,x_3) + \ell _3(\dd x_1,x_2,x_3) - (-1)^{\left| x_1 \right| \left| x_2 \right| } \ell _3(\dd x_2,x_1,x_3) + (-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} \ell _3(\dd x_3,x_1,x_2)
+.\]
+Since each $x_i$ is closed, $\dd x_i=0$ for all $i$, so the latter three $\ell _3$-brackets necessarily vanish, leaving just
+\[
+	\dd \ell _3(x_1,x_2,x_3)
+.\]
+Note that this is an exact element. Thus, when evaluating on closed elements, we have
+\[
+	[[x_1,x_2],x_3] + (-1)^{\left| x_3 \right|(\left| x_1 \right| +\left| x_2 \right| ) } [[x_3,x_1],x_2] + (-1)^{\left| x_1 \right| (\left| x_2 \right| +\left| x_3 \right| )} [[x_2,x_3],x_1] = \dd \ell _3(x_1,x_2,x_3)
+.\]
+Alternatively, using the more conventional graded Jacobi identity (and recalling that to derive it, we had to multiply through by $(-1)^{\left| x_1 \right| \left| x_3 \right| } $), we can write
+\[
+	(-1)^{\left| x_1 \right| \left| x_3 \right| } [x_1,[x_2,x_3]]+(-1)^{\left| x_1 \right| \left| x_2 \right| } [x_2,[x_3,x_1]]+(-1)^{\left| x_2 \right| \left| x_3 \right| } [x_3,[x_1,x_2]]=\dd \ell _3(x_1,x_2,x_3)
+.\]
+Regardless of how we write it, the point is that the left hand side is an exact element, and thus vanishes in cohomology. Therefore, the Jacobi identity is satisfied in cohomology.
+
+Finally, we can prove that $\ell_3$ is a homotopy which guarentees this relation. This is a trivial application of basic results, which we now recall. First, a cochain map $f\simeq 0$ if and only if there is a homotopy $h$ with $\mathrm{D} (h)=f$, for $\mathrm{D} $ the differential on the internal hom $\underline{\Ch}_R(\dom f, \cod f)$. In this case, we use $\underline{\Ch}_R(\mathfrak{g} ^{\otimes 3} ,\mathfrak{g} )$. Next, recall that since a homotopy $h$ has cohomological degree $-1$, we have $\mathrm{D} (h) = \dd_{\mathfrak{g} } \circ h + h \circ  \mathrm{d}_{\mathfrak{g}^{\otimes 3} } $. Finally, recall that given differential graded $R$-modules $M,N$, the differential is given by
+\[
+	\dd _{M\otimes_RN}(m\otimes n) = \dd _M(m)\otimes n + (-1)^{\left| m \right| } m\otimes \dd_N(n)
+.\]
+Applying this here, we have
+\[
+	\mathrm{D} (\ell _3)(x_1,x_2,x_3) = \dd(\ell _3(x_1,x_2,x_3)) + \ell _3(\dd x_1 \otimes x_2 \otimes x_3 + (-1)^{\left| x_1 \right| } x_1 \otimes \dd x_2 \otimes x_3 +  (-1)^{\left| x_1 \right| +\left| x_2 \right| } x_1\otimes x_2\otimes \dd x_3)
+.\]
+Since $\ell _3$ is 3-multilinear, and thus linear in triple tensors, this can be rewritten as
+\[
+	\mathrm{D} (\ell _3)(x_1,x_2,x_3) = \dd \ell _3(x_1,x_2,x_3) + \ell _3(\dd x_1,x_2,x_3) + (-1)^{\left| x_1 \right| } \ell _3(x_1,\dd x_2,x_3) + (-1)^{\left| x_1 \right| +\left| x_2 \right| } \ell _3(x_1,x_2,\dd x_3)
+.\]
+We claim that we can exactly recover the right hand side of the 3-Jacobi rule from this expression. We have already recovered the first two terms, so we simply need to match the signs on the remaining two. For the first one, we have
+\[
+	(-1)^{\left| x_1 \right| } \ell _3(x_1,\dd x_2,x_3) = -(-1)^{\left| x_1 \right| +\left| x_1 \right| +\left| x_1 \right| \left| x_2 \right| } \ell _3(\dd x_2,x_1,x_3) = -(-1)^{\left| x_1 \right| \left| x_2 \right| } \ell _3(\dd x_2,x_1,x_3),
+\]
+which is exactly the term that shows up in the 3-Jacobi rule. Finally, the last remaining term
+\[
+	(-1)^{\left| x_1 \right| +\left| x_2 \right| } \ell _3(x_1,x_2,\dd x_3) = (-1)^{\left| x_1 \right| +\left| x_2 \right| +\left| x_2 \right| \left| x_3 \right| +\left| x_2 \right| +\left| x_1 \right| \left| x_3 \right| +\left| x_1 \right| } \ell _3(\dd x_3,x_1,x_2)=(-1)^{\left| x_3 \right| (\left| x_1 \right| +\left| x_2 \right| )} \ell _3(\dd x_3,x_1,x_2),
+\]
+which is the exact final term in the 3-Jacobi rule. Therefore, $\ell _3$ is a \emph{cochain homotopy} expressing the fact that the usual graded Jacobi identity is null-homotopic. We have now finally done good on our motivation of $L_\infty $ algebras as homotopy Lie algebras.

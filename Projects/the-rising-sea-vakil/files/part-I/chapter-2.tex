@@ -1,0 +1,300 @@
+\chapter{Sheaves}
+
+\section{Motivating example: the sheaf of smooth functions}
+
+Let $X$ be a smooth manifold. Given $U\subseteq X$ open, denote the set $C^\infty (U)$ by $\mathcal{O} (U)$. Given $U\subseteq V$, precomposition by $U\hookrightarrow V$ induces a restriction morphism. Note that $\mathcal{O} (U)$ is a ring, using the ring structure of $\mathbb{R} $ to define addition and multiplication pointwise. Thus $\mathcal{O} : \Open(X) ^{\mathrm{op}}  \to \Ring $. Such a structure is called a \emph{presheaf}.
+
+Let $\left\{ U_i \subseteq U \right\}_{i\in I} $ be an open cover, and let $\left\{ f_i\in \mathcal{O} (U_i) \right\}_{i\in I}  $ a collection of functions such that, for all $i,j\in I$, we have $f_i|U_i \cap U_j = f_j|$. Then one can glue together the $f_i$'s into a map $f : \in \mathcal{O} (U) $ via $f|U_i = f_i$, and moreover $f$ is the unique map with this property. This property makes $\mathcal{O} $ into a \emph{sheaf}.
+
+\section{Definition of sheaf and presheaf}
+
+\begin{definition}\label{dfn:2-2-1}
+	Let $X$ be a space. A \emph{presheaf on $X$ valued in a category $\mathcal{C} $} is a functor $\mathcal{F} : \Open(X) ^{\mathrm{op}}  \to \mathcal{C} $. We often speak of sheaves valued on $X$, leaving $\mathcal{C} $ implicit, or speak of sheaves valued in $\mathcal{C} $, leaving the space implicit. We denote the category $\Fun(\Open(X) ^{\mathrm{op}} , \mathcal{C} ) $ of presheaves on $X$ valued in $\mathcal{C} $ by $\Pshf_X(\mathcal{C} )$. We will often omit $\mathcal{C} $ or $X$ when understood via context. An element $s\in \mathcal{F} (U)$ is called a \emph{section of $\mathcal{F} $ over $U$}. Sections over $X$ are referred to as \emph{global sections}.
+\end{definition}
+
+\begin{definition}\label{dfn:2-2-2}
+	Let $\mathcal{F} $ be a presheaf on $X$, and let $p\in U\subseteq X$. The \emph{stalk of $\mathcal{F} $ at $p$}, denoted by $\mathcal{F} _p$, is the colimit $\colim_{p\in U} \mathcal{F}(U) $, and is explicitly described as the set
+	\[
+		\left\{ (s,U)\mid p\in U,s\in \mathcal{F} (U) \right\} 
+	\]
+	modulo $(s,U)\sim (g,V)$ iff there is $W\subseteq U,V$ with $s|W=t|W$.
+\end{definition}
+
+\begin{definition}\label{dfn:2-2-3}
+	Let $X$ be a space and $\mathcal{F} $ a presheaf on $X$ valued in a concrete category $\mathcal{C} $. Then $\mathcal{F} $ is a \emph{sheaf} if it satisfies the following axioms:
+	\begin{enumerate}
+		\item (Locality/identity) If $U\subseteq X$ is open, $\left\{ U_i\subseteq U \right\} _{i\in I} $ is an open cover, and $s,t\in \mathcal{F} (U)$ are sections such that $s|U_i=t|U_i$ for all $i$, then $s=t$.
+		\item (Gluing) If $U\subseteq X$ is open, $\left\{ U_i\subseteq U \right\} _{i\in I} $ is an open cover, and $\left\{ s_i\in \mathcal{F} (U_i) \right\} _{i\in I} $ is a collection of sections such that $s_i|U_i \cap U_j = s_j|U_i\cap U_j$ for all $i,j\in I$, then there is $s\in \mathcal{F} (U)$ such that $s|U_i=s_i$ for all $i$.
+	\end{enumerate}
+\end{definition}
+\begin{remark}\label{rmk:2-2-4}
+	The locality axiom is equivalent to requiring that sections glue uniquely. To prove this, suppose $\left\{ s_i\in \mathcal{F} (U_i) \right\} _{i\in I} $ glue to two sections $s,t\in \mathcal{F} (U)$. Then $s|U_i = s_i = t|U_i$ for all $i$, and by locality, $s=t$. Conversely, suppose that sections glue uniquely, and let $s,t\in \mathcal{F} (U)$ such that $s|U_i = t|U_i$ for all $i$. Then define $s_i \coloneqq s|U_i\in \mathcal{F} (U_i)$, and note that $s,t$ are both given by gluing the $s_i$'s. By uniqueness, $s=t$. This proves locality.
+\end{remark}
+
+If $\mathcal{F} $ is a sheaf, then $\mathcal{F} (\varnothing )$ is terminal in $\mathcal{C} $. This allows us to immediately prove that $\mathcal{F} (U \cap V) \cong \mathcal{F} (U)\times \mathcal{F} (V)$ whenever $U,V$ are disjoint. We can generalize sheaves to taking values in arbitrary abelian categories.
+
+\begin{definition}\label{dfn:2-2-5}
+	Let $\mathcal{A} $ be an abelian category. A sheaf $\mathcal{F} $ on $X$ valued in $\mathcal{A} $ is a presheaf $\mathcal{F} $ such that for every open $U\subseteq X$ and every open cover $\left\{ U_i \right\} _{i\in I} $ of $U$, the sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0\ar[r]  & \mathcal{F} (U)\ar[r]  & \prod_{i} \mathcal{F} (U_i)\ar[shift left, r] \ar[shift right, r]  & \prod_{i,j} \mathcal{F} (U_i)\times \mathcal{F} (U_j)
+	\end{tikzcd}\]
+	is exact. Note that this sequence is an equalizer.
+\end{definition}
+
+Let $X$ be a space and $U\subseteq X$ an open set. Note that $\Open(U) \subseteq \Open(X) $. Define the restriction sheaf $\mathcal{F} |U\coloneqq \mathcal{F} |\Open(U) ^{\mathrm{op}} $. We will explore more general restrictions of sheaves with non-open subsets later, but essentially it requires a left adjoint to pushforward along the inclusion map.
+
+\begin{example}
+	Let $X$ a space, $c\in \mathcal{C} $ some object of an abelian or concrete category, and $p\in X$. The \emph{skyscraper sheaf} $i_{p,*} S$ is defined by
+	\[
+		i_{p,*} S(U)=
+		\begin{cases}
+			S,&p\in U\\
+			*,&p\notin U
+		\end{cases}
+	.\]
+	The restriction maps are the identity, except in the case where $p\notin V\subseteq U\ni p$, where the restriction is the unique map $!: S \to *$.
+\end{example}
+
+\begin{example}
+	Let $X$ be a space, $\mathcal{C} $ an abelian or concrete category, and $c\in \mathcal{C} $. The \emph{constant presheaf at $c$}, denoted $\underline{c}_{\mathrm{pre} } $, is the constant functor $\Delta (c): \Open(X) ^{\mathrm{op}}  \to \mathcal{C} $. In general, this is not a sheaf. In the case where $\mathcal{C} $ is concrete, $\mathcal{V} $-enriched for some monoidal category $\mathcal{V} $ (usually a cosmos), and each $U\subseteq X$ is an object in some concrete category $\mathcal{S} $ such that the set of locally constant maps in $\mathcal{S} (U,c)$ is in $\mathcal{V} $, then we can define a new sheaf $\mathcal{F} $ to be this set of maps. Such a sheaf is called a constant sheaf, and denoted $\underline{c} $. Generally $c$ is a set and we just consider all locally constant maps $U\to c$. We will generalize the notion of constant sheaves using sheafification.
+\end{example}
+
+\begin{exercise}
+	Let $X,Y$ be spaces. Show that $\Top (-,Y)$ restricted along $\Open(X) ^{\mathrm{op}} $ forms a sheaf of sets on $X$.
+\end{exercise}
+\begin{proof}
+	This is immediately functorial since subsets $V\subseteq U$ are precisely inclusion morphisms $V\hookrightarrow U$. We now prove that this is a sheaf. Let $f,g : U \to Y$ and $\left\{ U_i\subseteq U \right\} _{i\in I} $ an open cover such that $f|U_i=g|U_i$ for all $i$. Choose $p\in U$. Then since $\left\{ U_i \right\} _{i\in I} $ is an open cover, there is $i\in I$ such that $p\in U_i$. Since $f|U_i=g|U_i$, we have $f(p)=g(p)$. Since $p$ is arbitrary, $f=g$. This proves locality. Now let $\left\{ f_i : U_i \to Y \right\} _{i\in I} $ be sections satisfying the gluing hypotheses, and $\left\{ U_i\subseteq U \right\} _{i\in I} $ an open cover. We are forced by \cref{rmk:2-2-4} to glue these to a section $f$ defined by $f|U_i=f_i$. To show this is well-defined, we must show this definition is independent of the choice of $i$. Let $p\in U$. Since $\left\{ U_i \right\} _{i\in I} $ is an open cover, $p\in U_i$ for some $i$. Let $J\subseteq I$ be the set of all $j$ such that $p\in U_j$. Let $i,j\in J$. It suffices to show $f_i(p)=f_j(p)$, and this is immediate by the gluing hypothesis.
+\end{proof}
+
+\begin{exercise}
+	The previous exercise is a corollary of this. Let $\pi : Y \to X$ be a map. Show that the sheaf of sections $\Gamma (-,Y)$ is a sheaf.
+\end{exercise}
+\begin{proof}
+	If $\pi $ is not a surjection, then $\Gamma (-,Y)=\Gamma (-)$ is constant at the empty set. This is vacuously a sheaf. Now suppose $\pi $ is a surjection, and by the axiom of choice it has at least one section.
+
+	Most of the proof follows by the above exercise. All that remains to be checked is that restrictions of sections are sections, and gluing sections yields a section. Both are similarly immediate. FOr the former, let $s $ be a section of $\pi $ over $U$, and let $V\subseteq U$ be open. Let $p\in V$. Then $(s |V)(p)=s (p)$, and thus $(\pi \circ s|V)(p)=(\pi \circ s )(p)=p$. Thus $s |V$ is a section over $V$. Now let $\left\{ s_i\in U_i \right\} _{i\in I} $ satisfy the gluing hypothesis, where $\left\{ U_i \right\} _{i\in I} $ is an open cover of some open $U\subseteq X$. We define $s$ by $s|U_i=s_i$. By the logic in the above exercise, this is well-defined as a function. Now we show it is a section. Let $p\in U$; then there is $i\in I$ with $p\in U_i$. We have $(\pi \circ s)(p) = (\pi \circ s_i)(p)=p$ since $s_i$ is a section. Thus $s$ is a section. We did not appeal to continuity here at all; thus this should work in any category whose objects are spaces, and more generally probably works in any concrete category. That is, if $Y$ is a set and we use sections of all functions, or if $X,Y$ have additional structure (eg. topological, smooth, complex manifolds; vector bundles), then this logic should all work.
+\end{proof}
+
+\begin{definition}\label{dfn:2-2-10}
+	Let $\pi : X \to Y$ be a continuous map and $\mathcal{F}$ a presheaf on $X$. There is a presheaf $\pi _*\mathcal{F} $ on $Y$, called the \emph{pushforward of $\mathcal{F} $ along $\pi $}, defined by $\pi _*\mathcal{F} (U)\coloneqq \mathcal{F} (\pi ^{-1} (U))$. If $\mathcal{F} $ is a sheaf, so is $\pi _*\mathcal{F} $. We will see later that this is a functor $\Shf _X\to \Shf _Y$.
+\end{definition}
+
+\begin{exercise}
+	Let $\pi : X \to Y$ be continuous and $\mathcal{F} $ a sheaf on $X$. Let $q\coloneqq \pi (p)$, $p\in X$. There is a morphism $(\pi _*\mathcal{F} )_q\to \mathcal{F} _p$. What is this morphism?
+\end{exercise}
+\begin{proof}
+	Recall that $(\pi _*\mathcal{F} )_q \coloneqq \colim _{q\in U} (\pi _*\mathcal{F} )(U)$. This comes with the datum of a cone $c^q_U : (\pi _*\mathcal{F}) (U) \to (\pi _*\mathcal{F} )_q$. Note that $(\pi _*\mathcal{F} )(U)=\mathcal{F} (\pi ^{-1} (U))$, and $p\in \pi ^{-1} (U)$. Thus the correspoding cone $c_U^p : \mathcal{F} (U) \to \mathcal{F} _p$ for $\mathcal{F} _p$ yields maps for all $q\in \pi (U)$, meaning universality induces a unique morphism.
+
+	On the level of elements, this is described as follows. A germ $(s,U)$ of $\pi_*\mathcal{F} $ is some $s\in \mathcal{F} (\pi ^{-1} (U))$ modulo the relevant relation, where $q\in U$. Thus $p\in \pi ^{-1} (U)$, so $(s,\pi ^{-1} (U))$ represents a germ in $\mathcal{F} _p$. Thus we obtain a map $[(s,U)]\mapsto [(s,\pi ^{-1} (U)]$ which is well-defined.
+\end{proof}
+
+\begin{definition}\label{dfn:2-2-12}
+	Let $X$ be a space and $\mathcal{O} _X$ a sheaf of rings on $X$. A tuple $(X,\mathcal{O}_X)$ is called a \emph{ringed space}, and the sheaf $\mathcal{O} _X$ is called the \emph{structure sheaf}\footnote{Generally this is something like $C^\infty _X$ if $X$ is a smooth manifold, or holomorphic functions if it is a complex manifold. We usually choose structure sheaves with meaningful information about the structure of $X$.}.
+\end{definition}
+\begin{definition}\label{dfn:2-2-13}
+	Let $(X,\mathcal{O} _X)$ be a ringed space. An $\mathcal{O} _X$-module $\mathcal{F} $ is a sheaf of abelian groups on $X$ such that for all $U\subseteq X$, the group $\mathcal{F} (U)$ is an $\mathcal{O} _X(U)$-module, which respects restriction in the sense that if $U\subseteq V$, then the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{O} _X(V)\times \mathcal{F} (V)\ar[r]\ar[" |U\times |U "', d]   & \mathcal{F} (V)\ar[" |U ", d]  \\
+	\mathcal{O} _X(U)\times \mathcal{F} (U)\ar[r]  & \mathcal{F} U)
+	\end{tikzcd}\]
+	commutes, where the horizontal arrows are the scalar action.
+\end{definition}
+\begin{remark}
+	A sheaf of abelian groups is simply a $\underline{\mathbb{Z} }$-module. Hence any statements about $\mathcal{O} _X$-modules apply to sheaves of abelian groups.
+\end{remark}
+
+The motivating example of an $\mathcal{O} _X$-module is a vector bundle. Let $X$ be a smooth manifold and $\pi : E \to X$ a smooth vector bundle. The structure sheaf on $X$ is the sheaf $C^\infty _X$ of smooth maps to $\mathbb{R} $. Given a section $s\in \Gamma (U,E)$ and $f\in C^\infty _X(U)$, there is a section $fs\in \Gamma (U,E)$ defined by $p\mapsto f(p)s_p$. This works since $s_p$ is in an $\mathbb{R} $-vector space and $f(p)\in\mathbb{R} $, so scalar multiplication yields another vector. Furthermore multiplication by a smooth function is always smooth since multiplication itself is smooth.
+
+\section{Morphisms of presheaves and sheaves}
+
+\begin{definition}\label{dfn:2-3-1}
+	Let $\mathcal{F} ,\mathcal{G} $ be presheaves or sheaves. A morphism of presheaves or sheaves is a natural transformation.
+\end{definition}
+
+\begin{exercise}\label{ex:2-3-2}
+	Let $f : \mathcal{F}  \Rightarrow \mathcal{G} $ be a morphism of (pre)sheaves on $X$, and $p\in X$. Show there is an induced morphism on stalks $\phi _p : \mathcal{F} _p \to \mathcal{G} _p$.
+\end{exercise}
+\begin{proof}
+	By functoriality of colimit, this is immediate. To describe the morphism explicitly for concrete categories, let $(U,s)$ be a germ of $\mathcal{F} $ at $p$. Then $f(s)\in \mathcal{G} (U)$, so $(U,f(s))$ is a germ. This is well-defined since natural transformations commute with restriction morphisms.
+
+	More categorically, let $K_p : \mathcal{J}  \to \Open(X) $ be the diagram picking out the full subcategory of $\Open(X) $ spanned by those open sets containing $p$. Then $\mathcal{F} _p \cong \colim (\mathcal{F} \circ K_p)$. If $f : \mathcal{F}  \Rightarrow \mathcal{G} $ is a morphism, then horizontal composition yields a morphism $f\cdot 1 : \mathcal{F} \circ K_p \Rightarrow \mathcal{G} \circ K_p$. Functoriality of $\colim : \mathcal{A} ^{\Open(X) }  \to \mathcal{A} $ yields the required morphism. Hence there are \emph{stalkificaiton functors} $(-)_p : \Shf_X(\mathcal{A} )\to \mathcal{A} $ for any $p$.
+\end{proof}
+
+\begin{exercise}\label{ex:2-3-3}
+	Show pushforward is a functor.
+\end{exercise}
+\begin{proof}
+	Let $\mathcal{F},\mathcal{G}$ sheaves on $X$. Let $\pi : X \to Y$. We define the action on morphisms. Let $f: \mathcal{F}  \Rightarrow \mathcal{G} $. We need a map $(\pi _*f)_U : \mathcal{F} (\pi ^{-1} (U)) \to \mathcal{G} (\pi ^{-1} (U))$. Note that $\pi ^{-1} (U)$ is open, and thus there exists $f_{\pi ^{-1} (U)} $. Define
+	\[
+		(\pi _*f)_U\coloneqq f_{\pi ^{-1} (U)} 
+	.\]
+	This is evidentally functorial.
+\end{proof}
+
+\begin{definition}\label{dfn:2-3-4}
+	Let $(\mathcal{V} , \otimes )$ be closed symmetric monoidal. Define a tensor product on $\Pshf_X(\mathcal{V} )$ pointwise. Define the tensor product $\otimes_{sh} $ of sheaves by sheafifying the presheaf tensor product. Define the internal hom as
+	\[
+		\Hom_{\mathcal{V} }(\mathcal{F} , \mathcal{G} ) (U) \coloneqq \Shf_X(\mathcal{V} )(\mathcal{F} |U,\mathcal{G} |U)
+	.\]
+	This construction is an internal hom in all useful situations for this book. Moreover, it is a sheaf if $\mathcal{F} ,\mathcal{G} $ are sheaves.
+\end{definition}
+\begin{warning}\label{warn:2-3-5}
+	Sheaf hom does not commute with taking stalks.
+\end{warning}
+
+\section{Properties determined at the level of stalks; sheafification}
+
+\begin{definition}\label{dfn:2-4-1}
+	Let $\mathcal{F} $ be a presheaf on $X$, and let $U\subseteq X$ be open. A collection of germs $\left\{ f_p \right\} _{p\in U} $, where $f_p\in \mathcal{F} _p$, is called \emph{compatible} if they are locally germs of a section. Explicitly, for all $q\in U$ there is an open set $q\in V \subseteq U$ and a section $s\in \mathcal{F} (V)$ such that for all $p\in V$, the germ $s_p$ of $s$ at $p$ is
+	\[
+		s_p=f_p
+	.\]
+\end{definition}
+\begin{proposition}\label{prp:2-4-2}
+	Let $\mathcal{F} $ be a sheaf. Then a collection of compatible germs $\mathfrak{f} \coloneqq \left\{ f_p \right\}_{p\in U} $ corresponds to a unique section $s\in \mathcal{F} (U)$ whose germ at $p$ is $f_p$. We will sometimes call this a collection of compatible germs \emph{over $U$}.
+\end{proposition}
+\begin{proof}
+	Write $s_p$ for the germ of $s$ at $p$. Since $\mathfrak{f} $ is compatible by assumption, for each $p\in U$ there is $p\in V_p\subseteq U$ and a section $t\in \mathcal{F} (V_p)$ with $t_q=f_q$ for all $q\in V_p$. Let $a,b\in U$. Let $S\subseteq U$ be a set of points such that the corresponding set of open sets $\left\{ V_p \right\} _{p\in S} $ is an open cover of $U$. Let $t^{p} $ be the section corresponding to $V_p$. We claim that we can glue $\mathfrak{S} \coloneqq \left\{ t^p \right\}_{p\in S} $ together to obtain a section $s$ on $U$. By the gluing axiom, it suffices to show we can glue together any pair of sections. Let $t^a,t^b\in \mathfrak{S} $. If the corresponding domains $V_a,V_b$ are disjoint then we are done, so assume $V_a \cap V_b$ is nonempty. Choose $p\in V_a \cap V_b$. Then since $t^a_p =f_p= t^b_p$ by assumption, by definition of equality of germs there is an open set $p\in W_p \subseteq V_a \cap V_b$ such that $t^a|W_p = t^b|W_p$. Therefore, $t^a$ agrees with $t^b$ on $W_p$. We can construct such a $W_p$ for any $p\in V_a \cap V_b$, providing an open cover $\left\{ W_p \right\} _{p\in V_a \cap V_b} $ of the set, for which the sections $t^a$ and $t^b$ agree on any restriction. By locality and functoriality, $t^a|V_a \cap V_b = t^b|V_a \cap V_b$. Thus $\mathfrak{S} $ glues to a section $s$ with $s|V_p = t_p$, and thus by assumption the germ $s_p$ of $s$ at $p$ is $f_p$.
+\end{proof}
+
+\begin{remark}\label{rmk:2-4-3}
+	Thus in the context of sheaves, compatibility of germs promotes to a global condition: a collection $\mathfrak{f} $ of germs over $U$ is compatible if they are germs of a section $s$. Note that we have a bijection: given a section over $U$, we obtain a collection of compatible germs over $U$. We know already that this function is surjective, so we show that it is injective (the construction in reverse might be thought to be an inverse, but we do not yet know that $s$ is unique). It suffices to show that if two sections have the same germs, they are the same section.
+
+	Let $s,t\in \mathcal{F} (U)$ with $s_p=t_p$ for all $p\in U$; here we denote by $(-)_p$ the germ of $(-)$ at $p$. By locality, it suffices to find an open cover $\left\{ U_i \right\}_{i\in I} $ of $U$ such that $s|U_i=t|U_i$. Indeed, for each $p\in U$, since $s_p=t_p$, there is an open set $p\in U_p \subseteq U$ with $s|U_p=t|U_p$, by definition of equality of germs. Clearly $\left\{ U_p \right\}_{p\in U} $ is an open cover of $U$, so the statement follows.
+	
+	Thus, sheaves have a bijective correspondence between compatible germs over $U$ and sections over $U$. This will be useful when constructing sheaves from presheaves on a base.
+\end{remark}
+
+\begin{exercise}\label{ex:2-4-4}
+	If $f,g  : \mathcal{F}  \Rightarrow \mathcal{G} $ are morphisms from a presheaf $\mathcal{F} $ to a sheaf $\mathcal{G} $ which induce the same maps on stalks, then $f=g$.
+\end{exercise}
+\begin{proof}
+	Write $f_p,g_p$ for the induced maps $\mathcal{F} _p\to \mathcal{G} _p$. Let $s\in \mathcal{F} (U)$; it suffices to show $f(s)=g(s)$. Since $f_p=g_p$, we have $\prod_{p\in U} f_p=\prod_{p\in U} g_p$. Thus $\left\{ f_p(s_p) \right\}_{p\in U} =\left\{ g_p(s_p) \right\} _{p\in U} $. Note that $f(s)_p = f_p(s_p)$ by definition of $f_p$. Thus $f(s)_p=g(s)_p$ for all $p\in U$. From here we use the same logic as in \cref{prp:2-4-2}: equality of germs at all points allows us to cover $U$ by open sets on which $f(s)=g(s)$, allowing us to appeal to locality.
+\end{proof}
+
+\begin{exercise}\label{ex:2-4-5}
+	Show that a morphism of sheaves is an isomorphism if and only if it induces an isomorphism of stalks. Note that this does not say that the stalks are isomorphic, but rather that they are induced by a natural transformation; there may be no way to assemble a collection of isomorphisms of stalks into a natural transformation.
+\end{exercise}
+\begin{proof}
+	($\implies $) Colimit is a functor.
+
+	($\impliedby $) Let $f : \mathcal{F}  \to \mathcal{G} $ be a morphism of sheaves on $X$ such that $f_p : \mathcal{F} _p \to \mathcal{G} _p$ is an isomorphism for all $p\in X$. Then there are inverses $g_p : \mathcal{G} _p \to \mathcal{F} _p$ for each $f_p$. We must assemble the collection $\left\{ g_p \right\} _{p\in X} $ into a natural transformation $g: \mathcal{G}  \Rightarrow \mathcal{F} $ which provides an inverse to $f$. Let $U\subseteq X$ be open, and let $s\in \mathcal{G} (U)$. We will show that the collection $\mathfrak{S} \coloneqq \left\{ g_p(s_p) \right\} _{p\in U} $ of germs is compatible.
+
+	Let $p\in U$, and let $g_p(s_p)\in \mathfrak{S} $. By definition of a germ, there is at least one $t\in \mathcal{F} (V)$ for an appropriate $p\in V\subseteq X$ such that $g_p(s_p)=t_p$. We may assume without loss of generality that $V\subseteq U$, otherwise we take the intersection $V \cap U$. Since $f_p \circ g_p=1$, it follows that $f_p(t_p) = s_p$. However, note that $f_p(t_p) = f(t)_p$ by definition. Thus we have $f(t)=s|V$ by \cref{rmk:2-4-3}. Hence, $s_q = f(t)_q$ for all $q\in V$. It follows that
+	\[
+		g_q(s_q) = g_p(f(t)_q) = (g_p \circ f_q)(t_q) = t_q
+	.\]
+	Therefore, for all $q\in V$, we have $g_q(s_q) = t_q$. Thus for any $p\in U$, there exists $V\subseteq U$ and $t\in \mathcal{F} (V)$ such that $g_q(s_q) = t_q$ for all $q\in V$. This is precisely the definition of a collection of compatible germs. Since $\mathcal{F} $ is a sheaf, \cref{rmk:2-4-3} provides a section $t\in \mathcal{F} (U)$ such that $t_p = g_p(s_p)$ for all $p$. Define $g_U(s)\coloneqq t$. This definition is forced in order for $g$ to induce the necessary morphisms on stalks: we require that $g_p(s_p) = g(s)_p$, and indeed this is precisely how it was defined.
+
+	The statement now follows immediately from \cref{rmk:2-4-3}. A corrollary of that remark is that a section over $U$ is uniquely determined by its germs. Hence, $(f\circ g)_U(s)=s$ if and only if $(f_p \circ g_p)(s_p)=s_p$ for all $p\in U$, which follows by assumption. The same logic proves $g\circ p=1$. Therefore, $g=f^{-1} $, yielding the desired inverse for $f$.
+\end{proof}
+
+\begin{definition}\label{dfn:2-4-6}
+	Let $U : \Shf \to \Pshf $ be the forgetful functor. Then sheafification, denoted $(-)^+$, is defined as $(-)^+\dashv U$.
+\end{definition}
+\begin{proposition}\label{prp:2-4-7}
+	Sheafification exists.
+\end{proposition}
+\begin{proof}
+	By Freyd's adjoint functor theorem and (co)completeness of $\Shf $, it suffices to show that the forgetful functor preserves small limits. It suffices to show the usual products and equalizers of functors are products and equalizers of sheaves. This is trivial and I avoid working it out.
+\end{proof}
+
+\begin{construction}
+	Let $\mathcal{F} $ be a presheaf. Then $\mathcal{F} ^+(U)$ is the set of all collections compatible germs of $\mathcal{F} $ over $U$. Alternatively, define a space $E$ whose points are germs $s_x$, where $s$ is any section of $\mathcal{F} $ over any open set in $X$, and $x\in X$ is any point in that open set. Topologize $E$ by taking open sets to be all sets of the form
+	\[
+		\left\{ s_x \mid s\in \mathcal{F} (U),x\in U \right\} 
+	\]
+	for $U$ a fixed open set in $X$. Then $\mathcal{F} ^+ \cong \Gamma (-,E)$.
+\end{construction}
+
+
+\begin{exercise}
+	Let $f : \mathcal{F}  \to \mathcal{H} $ be a morphism of sheaves. The following are equivalent.
+	\begin{enumerate}
+		\item $f$ is a monomorphism.
+		\item $f$ is injective on stalks.
+		\item $f$ is injective on open sets.
+	\end{enumerate}
+\end{exercise}
+
+Important note: the sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+0 \ar[r]  & \underline{\mathbb{Z} } \ar[r]  & \mathcal{O} _X \ar[r]  & \mathcal{O} _X^* \ar[r]  & 0
+\end{tikzcd}\]
+is exact.
+
+\section{Recovering sheaves from a ``sheaf on a base''}
+
+\begin{definition}\label{dfn:2-5-1}
+	Let $X$ be a space with a base $\mathcal{B} $. A \emph{presheaf $\mathcal{F} $ on a base of $X$} with values in $\mathcal{C} $ is a functor $\mathcal{B}^{\mathrm{op}} \to \mathcal{C} $, where $\mathcal{B} $ is viewed as a poset category. A \emph{sheaf} on a base is a presheaf on a base which satisfies the analogues of locality and gluing for only elements of the base.
+\end{definition}
+
+\begin{theorem}\label{thm:2-5-2}
+	Let $\mathcal{F} $ be a sheaf on a base $\mathcal{B} =\left\{ B_i \right\} _{i\in I} $ of a space $X$. Then there is a sheaf $\mathscr{F} $ extending $\mathcal{F} $ which is unique up to unique isomorphism.
+\end{theorem}
+\begin{proof}
+	The obvious answer is to use compatible germs. Define the stalk of a sheaf on a base as $\mathcal{F} _p = \colim_{p\in B} \mathcal{F} (B)$. Define $\mathscr{F} (U)$ to be all collections of compatible germs over $U$, which in this case must be defined using the base. There is an obvious natural isomorphism from $\mathcal{F} $ to the subfunctor $\mathscr{F} |\mathcal{B}$ of $\mathscr{F} $.
+\end{proof}
+
+
+\begin{exercise}
+	Let $\left\{ U_i \right\} _{i\in I} $ be a cover of some space $X$, and let $\mathcal{F} _i$ be sheaves on $U_i$ which are compatible in the sense that there are isomorphisms
+	\[
+		\varphi _{ij} : \mathcal{F}_i|U_i \cap U_j \cong \mathcal{F} _j|U_i \cap U_j
+	\]
+	which satisfy the cocycle condition
+	\[
+		\varphi _{jk} \circ \varphi _{ij} =\varphi _{ik} ,
+	\]
+	and such that $\varphi _{ii} =1$. Then there is a sheaf $\mathcal{F} $ which is unique up to isomorphism and satisfies $\mathcal{F} |U_i = \mathcal{F} _i$.
+\end{exercise}
+
+\section{Sheaves of abelian groups, and $\mathcal{O} _X$-modules, form abelian categories}
+
+I believe I already commented on how all one must prove for $\Shf (\mathcal{A} )$ to be abelian when $\mathcal{A} $ is abelian is stability under colimits. Sheafification provides the relevant colimits. Hence, the only new thing here is $\mathcal{O} _X$-modules, but the proof for those simply requires showing that $\mathcal{O} _X$-modules are stable under the sheaf (co)limits. This is immediate since it reduces to the case of (co)limits of modules, which are well-understood. This section then goes on to note that a lot of functors are left- or right-exact, but they are all right- or left-adjoint, respectively. Thus, I will skip this section.
+
+\section{The inverse image sheaf}
+
+\begin{definition}\label{dfn:2-7-1}
+	Let $\pi : X \to Y$ be continuous. Then define the functor $\pi ^{-1} : \Shf _Y \to \Shf _X$ as $\pi ^{-1} \dashv \pi _*$.
+\end{definition}
+
+It is simple to prove that $\pi _*$ preserves limits. Thus, $\pi ^{-1} $ exists by Freyd's adjoint functor theorem (see \cite{ml}). The explicit construction is as follows.
+
+\begin{construction}
+	Let $\mathcal{G} $ be a presheaf. Define $(\pi ^{-1} _{\mathrm{pre} } \mathcal{G})(U) \coloneqq \colim_{\pi (U) \subseteq V} \mathcal{G} (V)$. If $\mathcal{G} $ is a sheaf, define $\pi ^{-1} \mathcal{G}\coloneqq (\pi _{\mathrm{pre} } ^{-1} \mathcal{G} )^+$.
+\end{construction}
+
+The inverse image sheaf provides us a way to restrict sheaves to non-open subsets. Given $X$ a space, $\mathcal{F} $ a sheaf on $X$, and $A\subseteq X$ with inclusion morphism $i : A \subseteq X$, define $\mathcal{F} |A$ to be $i^{-1} \mathcal{F} $. It is simple to show that in the case where $A$ is open, these notions agree. Fix an open set $\mathcal{U} \subseteq X$, and consider the restriction $\mathcal{F} |\mathcal{U} $. We have that
+\[
+	(i^{-1} \mathcal{F} )(U) \coloneqq \colim_{U \subseteq V \text{ open in } \mathcal{U}} \mathcal{F} (V)
+.\]
+Here we have used $i^{-1} (U)=U$ to simplify the colimit. Note that this colimit is taken over a poset category. Since the functor is contravariant, we remark that the limit of this diagram (hence the colimit in the opposite category) is a lower bound for the $\subseteq $ relation. It's easy to show that $\mathcal{F} $ preserves this colimit (not all colimits though), and thus we have that $(i^{-1} \mathcal{F})(U)\cong \mathcal{F} (U)$ by left-adjointness of sheafification.
+
+\begin{remark}
+	The inverse image functor is an exact functor for sheaves taking values in abelian categories. The same logic yields an exact functor $\pi ^{-1}$ from $\mathcal{O} _Y$-modules on $Y$ to $(\pi^{-1} \mathcal{O}_Y)$-modules on $X$. This is easy to show: left-adjointness yields right exactness, and left-exactness follows since colimits over filtered index sets are exact.
+\end{remark}
+
+
+
+\begin{definition}\label{dfn:2-7-3}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	W \ar[" \beta ' ", r] \ar[" \alpha ' "', d]  & X \ar[" \alpha  ", d]  \\
+	Y \ar[" \beta  "', r]  & Z
+	\end{tikzcd}\]
+	commute, and let $\mathcal{F} $ be a sheaf on $X$. Define the push-pull map of sheaves on $Y$ as follows. Transpose the identity on $(\beta ')^{-1} \mathcal{F} $ under $(\beta ')^{-1} \dashv \beta '_*$ and apply $\alpha _*$ to obtain $\alpha _* \mathcal{F} \to \alpha _*(\beta '_*)(\beta ')^{-1} \mathcal{F} $. Apply $\alpha \beta '=\beta \alpha '$ and transpose back under the adjunction to get the desired map.
+\end{definition}
+
+
+\begin{definition}\label{dfn:2-7-4}
+	Let $\mathcal{F} $ be a sheaf. Define the support $\operatorname{Supp}(s)$ of a global section $s$ of $\mathcal{F} $ (one can define this more locally if one desires) as the set of points where $s$ has nonzero germ:
+	\[
+		\operatorname{Supp} (s)\coloneqq \left\{ p\in X\mid s_p \neq 0\in \mathcal{F} _p \right\} 
+	.\]
+	If $\mathcal{F} $ is valued in an abelian category, we define the support of the sheaf $\mathcal{F} $ as
+	\[
+		\operatorname{Supp} \mathcal{F} \coloneqq \left\{ p\in X\mid \mathcal{F} _p \neq 0 \right\} 
+	.\]
+\end{definition}
+

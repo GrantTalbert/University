@@ -1,0 +1,38 @@
+\chapter{The structure sheaf, and the definition of schemes in general}
+
+\section{The structure sheaf of an affine scheme}
+
+The intuition for $\mathcal{O} _{\Spec A} $ will be thgat $\mathcal{O} _{\Spec A} (U)$ contains all algebraic functions on the open set $U$. A good motivation is algebraic functions on $\mathbb{C} ^n$. For example, on the nonvanishing locus $D(xy)$, we would expect $(3x^4 + y + 4) / x^7y^3$ to be an algebraic function. 
+
+\begin{definition}\label{dfn:4-1-1}
+	Let $A$ be a ring, and $f\in A$ a function. Define $\mathcal{O} _{\Spec A} (D(f))$ to be the localization $A[S^{-1} ]$, for $S$ the multiplicative set of all functions $g\in A$ that do not vanish outside of $V(f)$. Equivalently, $D(f) \subseteq D(g)$.
+\end{definition}
+
+\begin{theorem}\label{thm:4-1-2}
+	The presheaf $\mathcal{O} _{\Spec A} $ is a sheaf on a base, and thus extends to a sheaf on $\Spec A$.
+\end{theorem}
+
+Note that the presheaf structure is defined as follows. Let $f,g\in A$ with $D(f) \subseteq D(g)$. Thus, the nonvanishing locus of $f$ is smaller than that of $g$, meaning $f\notin [\mathfrak{p} ]$ implies $g\notin [\mathfrak{p} ]$ for a prime ideal $\mathfrak{p} $. We want to define a restriction $\mathcal{O} _{\Spec A} (D(g))\to \mathcal{O} _{\Spec A} (D(f))$. Write $S_f,S_g$ for the multiplicative sets of functions with larger nonvanishing loci than $f,g$, respectively. If $k\in S_g$, then $D(g) \subseteq D(k)$. But $D(f)\subseteq D(g)$ implies $D(f)\subseteq D(k)$, and thus $k\in S_f$. Therefore $S_g \subseteq S_f$. The canonical quotient map $\pi _f : A \to A[S^{-1}_f]$ thus inverts all elements in $S_g$, and by universality, factors through the quotient $\pi _g : A \to A[S_g^{-1} ]$ as the unique dashed arrow rendering the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A \ar[" \pi _f ", r] \ar[" \pi _g "', d]  & {A[S_{f} ^{-1} ]} \\
+	{A[S_g^{-1} ]} \ar[dashed, ur]  & 
+\end{tikzcd}\]
+commutative. This is the restriction morphism $\mathcal{O} _{\Spec A} (D(g))\to \mathcal{O} _{\Spec A} (D(f))$. We can explicitly describe this map by viewing $A[S^{-1} ]$ as $A$ adjoined with formal inverses of $S$. If $k\in S_g$, then $k\in S_f$, implying that $1/k \in A[S^{-1}_g]$ also exists as $1/k\in A[S^{-1} _f]$. Thus this map can be thought of as the inclusion of a subset $A[S_g^{-1} ]\subseteq A[S_f^{-1} ]$.
+
+
+\begin{definition}\label{dfn:4-1-3}
+	Let $M$ be an $A$-module. Then the following construction defines an $\mathcal{O}_A$-module $\widetilde{M}$. Define $\widetilde{M} (D(f))$ to be the localization of $M$ at the multiplicative set of all functions that do not vanish outside of $V(f)$, and define restriction maps in the same way.
+\end{definition}
+
+
+\section{?}
+
+\section{Definition of schemes}
+
+\begin{definition}\label{dfn:4-3-1}
+	An \emph{isomorphism of ringed spaces} $(X,\mathcal{O} _X) \cong (Y,\mathcal{O} _Y)$ is a homeomorphism $\pi : X \cong Y$ and an isomorphism of sheaves $f : \mathcal{O}_Y \cong \pi _* \mathcal{O} _X$.
+\end{definition}
+\begin{definition}\label{dfn:4-3-2}
+	An \emph{affine scheme} is a ringed space that is isomorphic to $(\Spec A, \mathcal{O} _{\Spec A} )$ for some $A$. A \emph{scheme} $(X,\mathcal{O}_X)$ is a ringed space that is locally an affine scheme. The topology on $X$ is called the Zariski topology. The category of schemes is defined to be the full subcategory of ringed spaces spanned by schemes. We call sections $\mathcal{O}_X(U)$ ``functions on $U$''.
+\end{definition}
+

@@ -1,0 +1,23 @@
+\section{Differential forms and integration}
+
+Consider $\dd x^i$ for $x^i$ some coordinate. Show that $\dd x^i(\partial _j) = \delta _{ij} $ under the identification $T_p\mathbb{R} \cong \mathbb{R} $. Introduce $T^*M$ as the dual bundle, and define the pullback map. Introduce $\dd f$ as a section $\Gamma (-,T^*M) \eqqcolon \Omega ^1$. Write $\dd : C^\infty (U) \to \Omega ^1(U)$. Discuss $\mathbb{R} $-linearity and $\dd (fg) = (\dd f)g + f\dd g$. Write a general 1-form as $(f\dd x^i)_p = f(p)\dd x^i|_p$ in coordinates. Argue that $\dd x^i$ is indeed a differential in the direction $x^i$: a derivative is the operator giving us infinitesimal changes, and so this is like the length of that operator, which is infinitesimal... idk. Consider a line integral
+\[
+	\int_{\gamma } f\dd x^i = \int_{0}^{1} \gamma ^*(f \dd x^i) = \int_{0}^{1} f(\gamma (t))\gamma '(t) \,\mathrm{d} t 
+.\]
+Finally, argue using orientations that we should work in $\Gamma (-\Lambda ^{\bullet} T^*M)$. Define
+\[
+	\dd \omega = \sum_{i} \frac{\partial \omega _I}{\partial x^i} \dd x^i \wedge \dd x^I
+.\]
+Argue $\dd ^2=0$. Note that this yields the de Rham complex, and note the fascinating quasi-isomorphism to the singular cochain complex, and homotopy-invariance of $\Omega ^{\bullet} $. Given a top form $\omega $, define
+\[
+	\int_{U} \omega 
+.\]
+Note that some manifolds (Riemannian manifolds) have a canonical top form, called $\vol$. We then define the integral of $f : M \to \mathbb{R} $ to be
+\[
+	\int_{U} f \vol
+.\]
+If $M$ doesn't have a canonical top form, then it makes less sense to think about forms as measures, and more sense to think about them as the different things you integrate (since the interesting thing probably is the diff measures u get). Write Stokes' theorem
+\[
+	\int_{M} \dd \omega =\int_{\partial M} \omega 
+.\]
+Use this to prove the fundamental theorem of calculus. Note that this subsumes the fundamental theorem of line integrals, Stokes' theorem for vector fields, and Gauss' theorem. If time, remark on sheaves to motivate AG.

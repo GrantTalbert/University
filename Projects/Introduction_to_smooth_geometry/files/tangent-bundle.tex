@@ -1,0 +1,14 @@
+\section{The tangent bundle}
+
+I don't know about you guys, but I'm tired of carrying around the ``evalation at $p\in M$'' symbol. If we have coordinates on an open set $U$, we can do derivatives anywhere on $U$ using those coordinates, so why do we have to carry around a symbol for derivatives at a single point? Additionally, we have been working extensively with coordinates. But coordinates can be messy, and are not necessarily defined everywhere. It would be nice to have some coordinate-independent properties of derivatives. The \emph{tangent bundle} $TM$ will solve all of these problems.
+
+The idea of the tangent bundle is exactly what the name says: we bundle together all of the tangent spaces into a new manifold. More precisely, the definition is as follows.
+
+\begin{definition}\label{dfn:3-1}
+	Let $M$ be an $n$-manifold. Define the \emph{tangent bundle} $TM$ to be the space
+	\[
+		TM = \left\{ (p,v) \mid  p\in M,v\in T_pM \right\} 
+	.\]
+	The explicit description of the smooth structure is not important, but we make two comments. First, $TM$ is a $2n$-manifold. Second, there is a function $\pi : TM \to M$ given by $\pi (p,v)=p$. This map is smooth.
+\end{definition}
+

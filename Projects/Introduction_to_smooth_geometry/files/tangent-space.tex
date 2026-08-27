@@ -1,0 +1,143 @@
+\section{The tangent space}
+
+So far, we have been very interested in functions $\mathbb{R} ^n \to \mathbb{R} $. Thus, it makes sense to look at functions $M\to \mathbb{R} $, for $M$ some manifold. To start doing calculus on manifolds, we should start by discussing the notion of a derivative for such a function, since derivatives are historically easiest to study. In calculus, given a function $f : \mathbb{R} \to \mathbb{R} $, we start by defining the derivative at a \emph{point} $x\in\mathbb{R}$ using the limit
+\[
+	f'(x) = \lim_{h\to 0} \frac{f(x+h) - f(x)}{h} 
+.\]
+In multivariate calculus, we started by defining the partial derivative $\partial _if$ of a function $f : \mathbb{R} ^n \to \mathbb{R} $ at a point $x\in\mathbb{R} ^n$ using a similar limit definition. Thus, we should start by attempting to define the derivative of a function $f: M \to \mathbb{R} $ at a point.
+
+Let $M$ be an $n$-manifold, let $f : M \to \mathbb{R} $ be any function, and let $p\in M$ be a point. We can use the coordinates of $M$ to obtain a notion of a derivative. Choose a chart $(U,x)$ such that $p\in U$. Recall that this means $x$ is an isomorphism $x : U \cong V \subseteq \mathbb{R} ^n$ to some open subset $V$ of $\mathbb{R} ^n$. Recall that this allows us to write any point $q\in U$ using coordinates $x(q) = (x^1(q), \ldots , x^n(q))$, which we usually just write as $(x^1, \ldots , x^n)$ for simplicity. This means that if we only look at the values of $f$ on $U$, then we can write $f$ as a function in coordinates
+\[
+	f(x) : \mathbb{R} ^n \to \mathbb{R} 
+.\]
+This should be good enough to define a derivative at $p$, since the derivative only depends on the value of $f$ in an infinitesimally small region near $p$.
+\begin{definition}\label{dfn:2-1}
+	With notation as above, define the \emph{partial derivative of $f$ with respect to $x^i$ at $p$} to be the value
+	\[
+		\left.\frac{\partial f(x)}{\partial x^i} \right|_{p} ,
+	\]
+	where $f(x)$ represents the function $f$ in coordinates, and $|_p$ denotes ``evaluation at $x(p)$''.
+\end{definition}
+
+\begin{notation}
+	We often write $\partial _i|f$ or $\left.\frac{\partial }{\partial x^i} \right|_pf$ to denote the partial derivative of $f$ evaluated at $p$.
+\end{notation}
+
+If we want to take multiple partial derivatives of $f$ at $p$, then we just take the partial derivatives before evaluating at $p$. For example,
+\[
+	\left.\frac{\partial }{\partial x^i} \right|_{p} \left. \frac{\partial }{\partial x^j} \right|_p f = \left.\frac{\partial f}{\partial x^ix^j} \right|_p
+.\]
+For this reason, we usually only write one evaluation bar. We will usually use notation like
+\[
+	\left.\left( \frac{\partial }{\partial x^i} \frac{\partial }{\partial x^j}  \right) \right|_pf \text{ or } \left. \frac{\partial }{\partial x^ix^j} \right|_p f
+.\]
+
+
+\begin{definition}\label{dfn:2-3}
+	Let $M$ be a manifold, and let $U\subseteq M$ be an open subset. Let $f : U \to \mathbb{R} $ be any function. We say $f$ is \emph{smooth at $p\in M$} if all possible combinations of partial derivatives of $f$ at $p$ exist. The set of all smooth functions $U\to \mathbb{R} $ is denoted $C^\infty _M(U)$.
+
+	If $M$ and $N$ are manifolds, then using the coordinates on both $M$ and $N$ simultaneously, we can provide the same definition for smooth functions $f : M \to N$.
+\end{definition}
+
+Although we could work with functions that are not smooth (eg. continuously differentiable functions), smooth functions are much more interesting, are much better behaved, are much more critical to developing the theory, and are still abundant in nature. Thus, we will focus extensively on smooth functions. We will highlight two of these properties right now. If $U\subseteq M$ and $f,g : U \to \mathbb{R} $ are smooth, then define the functions $f+g, fg : U \to \mathbb{R} $ by
+\[
+	(f+g)(p) = f(p) + g(p),\qquad (fg)(p) = f(p)g(p)
+.\]
+Then both $f+g$ and $fg$ are smooth functions. In other words, $C^\infty _M(U)$ is a \emph{ring}. For those with knowledge of sheaves, $C^\infty _M$ is a sheaf of rings.
+
+There's a particular property about partial derivatives at a point $p$ which will help us significantly moving forward: partial derivatives at $p$ form a \emph{vector space}.
+
+\begin{proposition}\label{prp:2-4}
+	Let $M$ be an $n$-manifold, and let $p\in M$. Let $(U,x)$ be a chart containing $p$. Then the partial derivatives $\left\{ \partial _i|_p \right\}_{1\leq i\leq n} $ form a basis for a vector space.
+\end{proposition}
+\begin{proof}
+	In order for partial derivatives to form a vector space, we need to know how to add partial derivatives, and how to multiply them by a scalar $c\in\mathbb{R} $. A partial derivative is just a function which takes in smooth functions $C^\infty _M(U)$ (or defined on any subset containing $p$), and sends them to $\mathbb{R} $. Thus to define $\partial _i|_p + \partial _j|_p$, we just need to know how to evaluate it on a function. Define
+	\[
+		(\partial _i|_p + \partial _j|_p)f = \partial _i|_pf + \partial _j|_pf
+	.\]
+	This is a pretty simple definition. The definition for multiplying by a scalar is similarly simple:
+	\[
+		(c \partial _i|_p)f = c\left( \partial _i|_pf \right) 
+	.\]
+	The vector space axioms are fairly routine to check, and we omit them for conciceness. The proof that the $\partial _i$'s are linearly independent is left as an exercise (hint: construct a function $f^i : \mathbb{R}^n \to \mathbb{R} $ and $p\in\mathbb{R} ^n$ such that $\partial _j|_pf^i=1$ if and only if $i=j$, and $0$ otherwise. Using the coordinates $x : U \cong V \subseteq \mathbb{R} ^n$, argue that this is sufficient).
+\end{proof}
+
+The vector space constructed in \cref{prp:2-4} is invariant under choice of coordinates. Suppose $(V,y)$ is another set of coordinates, and let $\varphi$ be the transition function. Recall that this means $y=\varphi (x)$. Let $f : V \to \mathbb{R} $ be a smooth function, and suppose that I can write $f$ in the coordinates $y$. Then since $y=\varphi (x)$, we can write $f$ in the coordinates $x$ as well using $f(y) = f(\varphi (x))$. We can now use the chain rule to calculate the partial derivatives of $f$ in the $x^i$ direction:
+\[
+	\left.\frac{\partial f}{\partial x^i}\right|_p = \left.\frac{\partial f(\varphi (x))}{\partial x^i} \right|_p = \sum_{j} \left. \frac{\partial f}{\partial y^j}\right|_p\left. \frac{\partial \varphi ^j}{\partial x^i} \right|_p = \left( \sum_{j} \left. \frac{\partial \varphi ^j}{\partial x^i} \right|_p \left. \frac{\partial }{\partial y^j} \right|_p \right) f
+.\]
+Note that the component
+\[
+	\left.\frac{\partial \varphi ^j}{\partial x^i} \right|_p
+\]
+is just a number, i.e. a \emph{scalar}. Thus,
+\[
+	\sum_{j} \left. \frac{\partial \varphi ^j}{\partial x^i} \right|_p \left. \frac{\partial }{\partial y^j} \right|_p
+\]
+is an element of the vector space given by partial derivatives in the coordinates $y^i$. Thus, we see that the transition function $\varphi $ gives us a way of transitioning from the vector space of partial derivatives with respect to $x^i$, to the vector space of partials with respect to $y^i$. This can also be done in the reverse direction, meaning that these vector spaces are \emph{isomorphic}. In other words, this vector space doesn't depend on the choice of coordinates, since we can always use the transition function to switch between coordinates.
+
+\begin{definition}\label{dfn:2-5}
+	The vector space constructed in \cref{prp:2-4} is denoted $T_pM$, and is called the \emph{tangent space to $p$}.
+\end{definition}
+
+Now, we can define a total derivative of a function at a point $p$. Recall that in single variable calculus, the total derivative of a function $f : \mathbb{R}  \to \mathbb{R} $ at a point $p$ is just the number $f'(p)$. In multivariable calculus, our best notion of a total derivative was the \emph{gradient vector}, meaning that the total derivative at a point $p$ of a function $f : \mathbb{R} ^n \to \mathbb{R} $ is a \emph{vector} $\nabla f(p)\in\mathbb{R} ^n$. If we have a function $f : \mathbb{R} ^n \to \mathbb{R}^m$, we can upgrade the notion of a total derivative to the \emph{Jacobian matrix}: writing $f(x) = (f^1(x), \ldots , f^m(x))$, define the Jacobian matrix at $p$, denoted $\mathrm{D} f(p)$, as the matrix of partial derivatives
+\[
+	\mathrm{D} f(p) = \begin{pmatrix}
+	\partial _1|_pf^1 & \cdots  & \partial _n|_pf^1 \\
+	\vdots & \ddots & \vdots \\
+	\partial _1|_pf^m & \cdots  & \partial _n|_pf^m
+	\end{pmatrix}
+.\]
+Essentially, the derivative of a function $f : \mathbb{R} ^n \to \mathbb{R} ^m$ is an $m\times n$ matrix.
+
+Using this intuition, we can define the derivative of a smooth function $f : M \to N$ between \emph{manifolds}. Let $M$ be $m$-dimensional, and let $N$ be $n$-dimensional. Let $p\in M$, let $(U,x)$ be a chart for $p$ on $M$, and let $(V,y)$ be a chart for $f(p)$ on $N$. Then using these coordinates, we can write $f$ as a function $f : \mathbb{R} ^m \to \mathbb{R} ^n$. We can then define the \emph{differential of $f$ at $p$}, denoted $\dd f_p$, to be the Jacobian matrix
+\[
+	\dd f_p = \mathrm{D} f(p)
+.\]
+
+This definition has a problem: we want our definitions to be coordinate-independent. That is, if I have different coordinates, I should get the same answer. But that isn't the case here; changing coordinates changes the matrix itself. However, we can fix this by viewing $\dd f_p$ as a \emph{linear transformation}. Recall that a linear transformation can be given by different matrices when we change the basis, and recall that coordinates give us a basis for $T_pM$ and $T_{f(p)} N$. Thus, we will $\dd f_p$ as a linear transformation $T_pM \to T_{f(p)} N$, whose \emph{basis representation} is $\mathrm{D} f(p)$.
+
+Let's unpack what this means. Let $V\in T_pM$, and use the basis to write
+\[
+	V = \sum_{i} c_i \partial _i|_p,\qquad c_i\in\mathbb{R} \forall i
+.\]
+Let's treat the $\partial _i|_p$ as basis vectors, and rewrite this as a column vector:
+\[
+	V = \begin{pmatrix}
+	c_1 \\
+	\vdots \\
+	c_n
+	\end{pmatrix}
+.\]
+Then we can calculate
+\[
+	(\dd f_p)V = \begin{pmatrix}
+	\partial _1|_pf^1 & \cdots  & \partial _n|_pf^1 \\
+	\vdots & \ddots & \vdots \\
+	\partial _1|_pf^m & \cdots  & \partial _n|_pf^m
+	\end{pmatrix}\begin{pmatrix}
+	c_1 \\
+	\vdots \\
+	c_n
+	\end{pmatrix}=\begin{pmatrix}
+	c_1 \partial _1 |_p f^1 + \cdots + c_n \partial _n|_p f^1 \\
+	\vdots \\
+	c_1 \partial _1|_p f^m + \cdots + c_n \partial _n|_pf^m
+	\end{pmatrix}
+.\]
+If we rewrite this column vector using the basis $\partial _j$ (here we take the partials wrt $y$), we have
+\[
+	= \sum_{i} \sum_{j} c_j \left.\frac{\partial f^i}{\partial x^j} \right|_p \left. \frac{\partial }{\partial y^i} \right|_p
+.\]
+Using this formula, we can calculate that
+\[
+	(\dd f_p)(\partial _j|_p) = \sum_{i} \left.\frac{\partial f^i}{\partial x^j} \right|_p \left. \frac{\partial }{\partial y^i} \right|_p
+.\]
+
+Let's look at the special case of a function $f : M \to \mathbb{R} $. Then we note that $T_p\mathbb{R}$ always has a basis given by $\partial_x|_p$, since $\mathbb{R} $ has a global set of coordinates given by normal coordinates (we call this a \emph{global chart}). This means that we can write
+\[
+	(\dd f_p)(\partial _i|_p) = \left.\frac{\partial f}{\partial x^i}\right|_p \left. \frac{\partial }{\partial x} \right|_p
+.\]
+We will come back to this calculation. For now, we will close with the following remark about tangent spaces.
+
+If $f$ is a function $f : \mathbb{R}  \to \mathbb{R} $, then one definition of $f'(x)$ is the \emph{slope of the line tangent to $f$ at the point $x$}. If $f : \mathbb{R} ^n \to \mathbb{R} $, then one definition of $\nabla f$ is the \emph{tangent vector to the graph of $f$ with maximal slope}. Continuing this trend, there is a way of thinking about $\dd f$ as a vector tangent to $f$. In particular, notice that $\partial _i|_p$ produces tangent vectors, and thus we can think of $\partial _i|_p$ as a tangent vector \emph{itself}. The vector $\partial _i|_p$ is the vector tangent to $p$ which points in the $x^i$-direction. This geometric interpretation of the algebraic object $\partial_i|_p$ turns out to be well-motivated; there is a theorem proving that this interpretation works. In this way, we think of the entire tangent space $T_pM$ as the space of vectors that are tangent to $p$. This interpretation will be useful.

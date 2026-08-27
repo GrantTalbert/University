@@ -1,0 +1,191 @@
+\chapter{Toward affine schemes: the underlying set, and topological space}
+
+\section{Toward schemes}
+
+The idea behind a scheme is as follows. Given a geometric space, such as a smooth, complex, or real analytic manifold, we can usually study this space using particular functions on that space (for the given examples, $C^\infty _M,C^\omega _M,\mathcal{O} _X$, respectively). These are usually taken to be the structure sheaf of the space. The idea of a scheme is to generalize such a notion of a geometric space in such a way that the tools of algebra can be more readily applied. Thus we will define a scheme to be a particular class of ringed spaces.
+
+\begin{example}\label{ex:3-1-1}
+	Let $M$ be a smooth manifold, and recall that $(M,C^\infty _M)$ is a ringed space. By continuity of smooth maps, the evaluation of a germ $f_p$ at $p$ is well-defined, so evaluation yields a map
+	\[
+		\varepsilon _p : C^\infty _{M,p}  \to \mathbb{R} 
+	.\]
+	This map is clearly surjective. To show this, choose a chart $U$ containing $p$, choose a closed neighborhood $p\in A \subseteq U$ which exists by $U \cong V \subseteq \mathbb{R} ^n$, and choose a bump function $f$ for $A$ supported in $U$. Then $\varepsilon _p(kf)=k$ for any $k\in\mathbb{R} $. The first isomorphism theorem yields $C^\infty _{M,p} /\Ker \varepsilon _p \cong \mathbb{R} $. Since $\mathbb{R} $ is a field and fields have no nontrivial ideals, $\Ker \varepsilon _p \coloneqq \mathfrak{m}_{M,p} $ is a maximal ideal of the stalk $C^\infty _{M,p} $.
+
+	We could choose to take the reverse approach, defining a smooth manifold to be a space with a sheaf of rings $\mathcal{O} _X$, and a cover by open sets that are isomorphic to balls in $\mathbb{R} ^n$ (wlog we can take these balls centered at the origin). The manifold is simply given by gluing the cover together. Algebraically, elements of the cover translate to the notion of an \emph{affine scheme}. We can also describe morphisms of manifolds in this language, by requiring that smooth functions pull back to smooth functions. This is sufficient: given $f : M \to N$ continuous such that all smooth $g : U \to \mathbb{R} $ pull back to a smooth map $g\circ f|f^{-1} (U): f^{-1} (U) \to \mathbb{R} $, it follows that $f$ is smooth by letting $g$ be a component of local coordinates. The book writes $f^{\sharp} $ for this morphism $C^\infty _N \to \pi _*C^\infty _M$, which I hate so unless there is a conflict of notation, I will write $f^*$. Note that the pushforward here is so that this becomes a sheaf morphism; it essentially just makes evaluation of $C^\infty _M$ default to an open set of the form $f^{-1} (U)$.
+\end{example}
+
+Much of this language also applies if one is interested in the more general notion of a topological space; the correct structure sheaf here is clearly $C^0(-,\mathbb{R})$. The point here is that geometric spaces can be viewed as topological spaces with a particular structure sheaf (usually a subsheaf of $C^0$). Affine schemes also fit into this family.
+
+\section{The underlying set of an affine scheme}
+
+\begin{definition}\label{dfn:3-2-1}
+	Let $A$ be a ring. Define $\Spec A$ to be the set of prime ideasl of $A$. Given a prime ideal $\mathfrak{p} \subseteq A$, we will denote $\mathfrak{p} $ by $[\mathfrak{p} ]$ when considered as an element of $A$. An element $a\in A$ is called a \emph{function on $\Spec A$}, and their \emph{value} at the point $\mathfrak{p} $ will be $a\pmod{\mathfrak{p} }$. Note that this is only well-defined if $a([\mathfrak{p} ])\in A/\mathfrak{p} $, meaning for $a$ to be formally viewed as a function, we must define
+	\[
+		a : \Spec A \to \bigoplus_{\mathfrak{p} \text{ prime} } \frac{A}{\mathfrak{p} } 
+	.\]
+\end{definition}
+
+Note that if $a\in \mathfrak{p} $, then the value of $a$ at $[\mathfrak{p} ]$ is 0. We can add or multiply functions on $\Spec A$, which is well-defined since the projections $A \to A/\mathfrak{p} $ are ring homomorphisms. If $A$ is generated over another ring by elements $X=\left\{ x_1, \ldots ,x_r \right\} $, then the set $X$ is referred to as \emph{coordinates}.
+
+\begin{example}\label{ex:3-2-2}
+	The complex affine line is defined as $\mathbb{A} _{\mathbb{C} } ^1 \coloneqq \Spec\mathbb{C} [x]$. Since $\mathbb{C} [x]$ is an integral domain, $0$ is prime. Additionally, $(x-a)$ is maximal for all $a\in\mathbb{C} $, since quotienting out by it just yields $\mathbb{C} $, a field. Hence all ideals $(x-a)$ are prime. One can show that there are no other prime ideals by dividing polynomials and getting some contradictions.
+
+	Thus we can geometrically interpret affine space. For all $a\in\mathbb{C}$, we get a point $[(x-a)]$ in $\Spec\mathbb{C} [x]$, but that leaves an extra point $[(0)]$ which is not accounted for by these points. However, $[(0)]$ is included in any of the other ideals, so we could imagine it living somewhere within any of them. More formally, we associate it with the line passing through all other points, and call it the generic point of this line.
+\end{example}
+
+Interestingly, in \cref{ex:3-2-2}, if I have a polynomial $f$ interepreted as a function on $\mathbb{A} _{\mathbb{C} } ^1$, then its value at $[(x-a)]$ is simply $f(a)$. The proof is very messy algebra. We can also talk about rational functions $(x-3)^3 / (x-2)$, which are not functions in the sense of elements of $\mathbb{C} [x]$, but can be defined more generally as an algebraic function that exists everywhere except $x=2$. We will later define it as a section of $\mathcal{O} _{\mathbb{A} _\mathbb{C} ^1} (\mathbb{A} _{\mathbb{C} } ^1\setminus \left\{ 2 \right\} )$, and we will also later be able to say that this function has a triple zero at $x=3$ in this language.
+
+\begin{example}\label{ex:3-2-3}
+	Let $k$ be an algebraically closed field. Then $\mathbb{A} _k^1 \coloneqq \Spec k[x]$. All of the same discussion as before applies.
+\end{example}
+
+\begin{example}\label{ex:3-2-4}
+	Consider $\Spec\mathbb{Z} $. The prime ideals are $0$ and $(p)$ for $p$ prime. The same picture as before works, but with a more discrete space. We can also discuss functions on this space. The function $100$ has value $100[(3)]=1$, and a double zero $100[(2)]0$. There is a rational function $27 /4$ defined away from $(2)$. It has a ``double pole'' at $(2)$, and a triple zero at $(3)$. Its value at $(5) $ is 3. We will make this discussion more precise over time.
+\end{example}
+
+\begin{example}\label{ex:3-2-5}
+	The real affine line $\mathbb{A} _{\mathbb{R} } ^1$ consists of the ideals generated by 0, linear functions, and irreducible quadratics. Linears and irreducible quadratics generate maximal ideals.
+\end{example}
+
+We could continue with examples. An interesting one is that $\Spec\mathbb{F} _p[x]$ has infinitely many points. In fact, $\Spec k[x]$ has infinitely many points for all fields $k$.
+
+\begin{example}
+	The complex affine plane is $\mathbb{A} _{\mathbb{C} } ^2\coloneqq \Spec\mathbb{C} [x,y]$. As before, we could replace $\mathbb{C} $ with any algebraically closed field. As before, 0 is prime. For any $(a,b)\in\mathbb{C} ^2$, the ideal $(x-a,y-b)$ is prime with $\mathbb{C} [x,y]/(x-a,y-b) \cong \mathbb{C} $ via $f\mapsto f(a,b)$. Any irreducible polynomial also determines a prime ideal. This determines all prime ideals of $\mathbb{C} [x,y]$. To picture $\mathbb{A} _{\mathbb{C} } ^2$, first identify $(x-a,y-b)$ with the point $(a,b)$. We think of irreducibles $f(x,y)$ as determining their graph, so we identify the ideal generated by $f(x,y) = y-x^2$ with the parabola $y=x^2$. We then finally set $[(0)]$ as living behind everything; everywhere yet nowhere in particular. Note that maximal ideals correspond to the smallest points, and this geometric picture appears to preserve the $\subseteq $ relation.
+\end{example}
+
+\begin{definition}\label{dfn:3-2-5}
+	Let $A$ be a ring. Then the $n$-dimensional affine space over $A$ is defined as $\Spec A[x_1, \ldots ,x_n]$.
+\end{definition}
+
+Hilbert's nullstellensatz is useful here.
+
+\begin{theorem}[Weak nullstellensatz]\label{thm:3-2-6}
+	Let $k$ be an algebraically closed field. Then the maximal ideals of $k[x_1, \ldots ,x_n]$ are precisely those ideals of the form $(x_1 - a_1, \ldots ,x_n - a_n)$, for $a_i\in k$.
+\end{theorem}
+\begin{theorem}[Nullstellensatz, Zariski]\label{thm:3-2-7}
+	If $k$ is a field, then every maximal ideal of $k[x_1 ,\ldots ,x_n]$ has residue field a finite extension of $k$. Alternatively, any field extension of $k$ that is finitely generated as a $k$-algebra is also finitely generated as a $k$-vector space.
+\end{theorem}
+
+The prime ideals of the form in \cref{thm:3-2-6} are geometrically intepreted as the (0-dimensional) points $(a_1 ,\ldots ,a_n)$. Over an algebraically closed field, we also have an $n$-dimensional point $[0]$. Given an irreducible polynomial $f(x)$ in the $n$-variables, we view $[(f)]$ as its graph, which is an $(n-1)$-dimensional point. This is the best classification we can give algebraically. There are more prime ideals, corresponding to the other dimensions. For example, $(x_1,x_2)$ is an $(n-2)$-dimensional point. Thus continuing this classification in any meaningful or reasonable way is a geometric question, not an algebraic one.
+
+Recall that there is a bijective correspondence between prime ideals of $A/I$ and prime ideals of $A$ containing $I$. Thus we have inclusions $\Spec A/I \subseteq \Spec A$. Suppose $A$ is a $\mathbb{C} $-algebra generated by $x_1, \ldots , x_n$ modulo relations $f_i(x) = 0$, $i = 1, \ldots , r$. We can naturally extract a picture of $\Spec A$ as a subset of $\mathbb{A} _{\mathbb{C} } ^n$ using this picture. The zero-dimensional points are given by the solutions to $f_1 = \cdots = f_r = 0$. The higher dimensional points are more complex.
+
+Let $f : R \to S$ be a map of rings. Then $f^{-1}(\mathfrak{p} )$ is prime for any prime ideal $\mathfrak{p}\subseteq S $, so there is an induced map $\Spec f : \Spec S \to \Spec R$. In particular, $\Spec$ is a functor $\Ring^{\mathrm{op}}\to \Set $. 
+
+Let $r\in R$ such that $r[\mathfrak{p} ]=0$ for all $\mathfrak{p} $. It does not follow that $r=0$. For example, consider $k[\varepsilon ] / (\varepsilon ^2)$. Note that since $\varepsilon ^2=0$, we have $\varepsilon \in \mathfrak{p} $ for any prime ideal, and thus $\varepsilon $ is zero as a function on prime ideals, but is not zero as an element of $R$. An element $r$ with $r^n=0$ is called \emph{nilpotent}. To get rid of this issue, one might think that we must get rid of zero-divisors.
+
+\begin{definition}\label{dfn:3-2-10}
+	Let $R$ be a ring. If $r\in R$ is such that $r^n=0$ for some $n$, then $r$ is called \emph{nilpotent}. The collection of nilpotents of $R$ is denoted $\mathfrak{R} (R) = \mathfrak{R} $, and is called the \emph{nilradical}. It is obviously an ideal.
+\end{definition}
+\begin{theorem}\label{thm:3-2-11}
+	Let $R$ be a ring. Then $\mathfrak{R}(A)$ is the intersection of all prime ideals of $R$.
+\end{theorem}
+
+\section{generic points}
+
+skip
+
+\section{The underlying topological space of an affine scheme}
+
+\begin{definition}\label{dfn:3-4-1}
+	Let $A$ be a ring. Given $S\subseteq A$, define the \emph{vanishing set of $S$} by
+	\[
+		V(S) \coloneqq \left\{ [\mathfrak{p} ]\in \Spec A \mid S \subseteq \mathfrak{p}  \right\} 
+	.\]
+	The \emph{Zariski topology} on $\Spec A$ is the topology where the closed sets are precisely the sets $V(S)$ for all subsets $S\subseteq A$.
+\end{definition}
+
+The Zariski topology makes precise the intuition that we have been considering so far. To illustrate this, let $\mathfrak{p} \subseteq \mathfrak{q} $ be an inclusion of prime ideals. Earlier, we graphically identified a prime ideal with its zero locus $V(\mathfrak{p} )$. Note that $S_1 \subseteq S_2$ implies $V(S_2) \subseteq V(S_1)$. This means that graphically, the point $\mathfrak{p} $ should contain the point $\mathfrak{q} $. Since points are usually closed sets (in all Hausdorff spaces), this intuition makes sense.
+
+\begin{definition}\label{dfn:3-4-2}
+	Let $I\subseteq A$ be an ideal. Define the \emph{radical} $\sqrt{I} $ as
+	\[
+		\sqrt{I} \coloneqq \left\{ r\in A\mid r^n\in I\text{ for some } n\in\mathbb{Z} _{>0}  \right\} 
+	.\]
+\end{definition}
+
+The radical of an ideal is an ideal, and has the properties that $\sqrt{\sqrt{I} } =\sqrt{I} $, and it commutes with finite intersctions:
+\[
+	\sqrt{\bigcap_{i=1} ^n I_i} =\bigcap_{i=1} ^n \sqrt{I_i} 
+.\]
+Additionally, $\sqrt{I} $ is the intersection of all prime ideals containing $I$.
+
+Let $\phi : A \to B$ be a morphism of rings. Then the preimage map $\phi^* : \Spec B \to \Spec A$ is continuous.
+
+
+\section{A base of the Zariski topology on $\Spec A$: distinguished open sets}
+
+\begin{definition}\label{dfn:3-6-1}
+	Let $A$ be a ring and $f\in A$. Define the \emph{distinguished open set}
+	\[
+		D(f) \coloneqq \left\{ [\mathfrak{p} ]\in \Spec A \mid f\notin \mathfrak{p}  \right\} 
+	\]
+	as the nonvanishing locus of $f$. Hence, distinguished open sets are the compliments of vanishing loci of singletons.
+\end{definition}
+
+These form a base for the topology on $\Spec A$.
+
+\begin{remark}
+	He never defined what $\Spec A_f$ meant, but now he notes that $D(f) \cong \Spec A_f$ as spaces, so I will take this as a definition.
+\end{remark}
+
+An important fact is that
+\[
+	\bigcup_{i\in J}D(f_i) =\Spec A \text{ iff } \left\{ f_i \right\} _{i\in J} =A
+.\]
+Another important fact is that an equivalent statement to $\left\{ f_i \right\} _{i\in J} =A$ is that there is a parition of unity: there are $\left\{ a_i \right\} _{i\in J} \subseteq A$, all but finitely many 0, such that $\sum_{i} a_if_i=1$.
+
+\section{Topological and Noetherian properties}
+
+Note that $\Spec : \Ring ^{\mathrm{op}}  \to \Top $. It can be shown that $\Spec$ preserves finite coproducts, i.e.
+\[
+	\Spec \prod_{1\leq i\leq n} A_i \cong \coprod_{1\leq i\leq n} \Spec A_i
+.\]
+Note that this implies $\Spec A$ \emph{cannot be connected} if it can be reduced to a product of nonzero rings. This statement turns out to be an if and only if.
+
+
+Recall that a topological space is called \emph{irreducible} if it is not the union of two proper \emph{closed} subsets. This is a very strange notion, since these subsets \emph{need not be disjoint}. For example, $[0,1]$ is not irreducible. A useful and equivalent definition is  that any two nonempty open subsets of $X$ must intersect. An example of such a space is the cofinite topologyon a finite set; the closed sets are too small for the space to be a union of finitely many proper closed sets. Many spectra are irreducible since they have similar topologies to the cofinite topology. For example, $\mathbb{A} _{\mathbb{C} } ^2$ is irreducible.
+
+Any nonempty open set in an irreducible space is dense. The spectrum of any integral domain is irreducible. All irreducible spaces are connected.
+
+The book refers to compactness as ``quasicompactness''. I hate this.
+
+\begin{definition}\label{dfn:3-6-1}
+	Let $X$ be a space. A \emph{closed point} is a point whose singleton is closed.
+\end{definition}
+
+Given a ring $A$, the closed points of $\Spec A$ are precisely the maximal ideals. Given a space $X$ and $x,y\in X$, we say $y$ is a \emph{generalization} of $x$ and $x$ is a \emph{specialization} of $y$ if $x\in \overline{\left\{ y \right\} } $.
+
+\begin{definition}\label{dfn:3-6-2}
+	A point $p\in X$ for a space $X$ is a \emph{generic point} for a closed subset $K$ if $\overline{\left\{ p \right\} } =K$.
+\end{definition}
+
+Note that the smallest open set containing $\mathfrak{p} \in\Spec A$ is $V(\mathfrak{p} )$. This contains $V(\mathfrak{m} )$ for any and all maximal ideals $\mathfrak{m} $ such that $\mathfrak{p} \subseteq \mathfrak{m} $. The same can be said for any other prime ideals containing $\mathfrak{q} $. Thus the ``generalized points'' we were talking about are \emph{generic points}.
+
+A topological space $X$ is \emph{Noetherian} if every chain $Z_1 \supseteq Z_2 \supseteq \cdots $ of closed sets stabilizes. Then every closed set is a finite union of irreducible closed sets, none of which contain each other.
+
+\begin{theorem}[Hilbert]\label{thm:3-6-3}
+	Let $A$ be Noetherian. Then so is $A[x]$.
+\end{theorem}
+
+If $A$ is Noetherian, then $\Spec A$ is Noetherian as a space. The converse need not hold.
+
+\section{The function $I$, taking subsets of $\Spec A$ to ideals of $A$}
+
+\begin{definition}\label{dfn:3-7-1}
+	Given a ring $A$ and a subset $S\subseteq \Spec A$, define the ideal $I(S)$ of $A$ to be
+	\[
+		I(S) \coloneqq \bigcap_{\mathfrak{p} \in S} \mathfrak{p} 
+	.\]
+	Note that the empty intersection is $0$ since $\cap $ is a limit, so this is always an ideal.
+\end{definition}
+
+$I$ is an inclusion reversing property such that $I(\overline{S} )=I(S)$, for $\overline{S} $ the closure. One can also prove the following:
+\begin{itemize}
+	\item $V(I(S)) = \overline{S} $;
+	\item $I(V(J)) = \sqrt{J} $ for ideals $J$.
+\end{itemize}
+\begin{theorem}\label{thm:3-7-2}
+	The functions $V,I$ yield an inclusion-reversing bijection between closed subsets of $\Spec A$ and radical ideals of $A$.
+\end{theorem}
+

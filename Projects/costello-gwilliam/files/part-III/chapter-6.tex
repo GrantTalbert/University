@@ -1,0 +1,883 @@
+\chapter{Factorization algebras: definitions and constructions}
+
+A prefactorization algbera is similar to a precosheaf or a presheaf. In the same way that it is usually beneficial to refine pre(co)sheaves to (co)sheaves, there is a ``descent'' axiom which refines a prefactorization algebra into a factorization algebra. We will see that the examples we have constructed so far satisfy this axiom later in this chapter.
+
+This axiom is not always essential for field theory, but is still beneficial, and sometimes simplifies the arguments mathematically.
+
+\section{Factorization algebras}
+
+A factorization algebra is a prefactorization algebra that satisfies a particular local to global axiom. This axiom is similar to the cosheaf axiom, but defined for \emph{Weiss covers}. We review the important notions.
+
+\subsection{Sheaves and cosheaves}
+
+\begin{definition}\label{dfn:6-1-1}
+	Let $M$ be a topological space and $\mathcal{C} $ any category. A \emph{presheaf on $M$ valued in $\mathcal{C} $}  is a functor $\mathcal{A} : \Open(M) ^{\mathrm{op}}  \to \mathcal{C} $. Given an open cover $\left\{ U_i \right\} _{i\in I} $ of some open set $U\subseteq M$, there is a canonical map
+	\[
+		\prod_{i\in I} (-)|U_i : \mathcal{A} (U) \to \prod_{i\in I} \mathcal{A} (U_i)
+	,\]
+	provided the product exists. We say $\mathcal{A} $ is a \emph{sheaf} if for every open $U\subseteq M$ and every open cover $\left\{ U_i \right\} _{i\in I} $ of $U$, this map is an equalizer
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{A} (U) \ar[r]  & \displaystyle{\prod_{i\in I} \mathcal{A} (U_i)}\ar[shift left, r] \ar[shift right, r]  & \displaystyle{\prod_{i,j\in I} \mathcal{A} (U_i \cap U_j)}
+	\end{tikzcd}\]
+	of the parallel arrows given by the inclusions $U_i \cap U_j \to U_i$ and $U_i \cap U_j \to U_j$.
+\end{definition}
+
+If $\mathcal{C} $ is a concrete category, then \cref{dfn:6-1-1} says that given a collection $\left\{ s_i\in \mathcal{A} (U_i) \right\} _{i\in I} $ of sections in the product $\prod_{i} \mathcal{A} (U_i)$, we can pull this back to a \emph{unique} section $s\in \mathcal{A} (U)$ with $s|U_i = s_i$ \emph{if and only if} the property
+\[
+	s_i|U_i \cap U_j = s_j|U_i \cap U_j
+\]
+holds. Note that this is precisely the sheaf axiom. Framing this definition allows it to be easily dualized.
+\begin{definition}\label{dfn:6-1-2}
+	A \emph{precosheaf} $\Phi $ on $M$ with values in $\mathcal{C} $ is a functor $\Phi : \Open(M)  \to \mathcal{C} $. It is a cosheaf if for every open cover $\left\{ U_k \right\} _{k\in K} $ of an open set $U\subseteq M$, the canonical map
+	\[
+		\coprod_{k\in K} \Phi (U_k) \to \Phi (U)
+	\]
+	is a coequalizer
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\coprod_{i,j\in K} \Phi (U_i \cap U_j) \ar[shift left, r] \ar[shift right, r]  & \coprod_{k\in K} \Phi (U_k)\ar[r]  & \Phi (U)
+	\end{tikzcd}\]
+	of the parallel arrows given by the inclusions $U_i \cap U_j \to U_i$ and $U_i \cap U_j \to U_j$. Equivalently, $\Phi $ is a sheaf with values in $\mathcal{C} ^{\mathrm{op}} $.
+\end{definition}
+
+\begin{remark}\label{rmk:6-1-3}
+In these notes, we focus on categories such as cochain complexes valued in an abelian category, dg Lie $R$-algebras, graded vector spaces, etc. These categories are linear/abelian in nature, so the cosheaf axiom can be reformulated as the exactness of the sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\displaystyle{\bigoplus_{i,j\in K} \Phi (U_i \cap U_j)}\ar[r]   & \displaystyle{\bigoplus_{k\in K} \Phi (U_k)}\ar[r]  & \Phi (U)\ar[r]  & 0,
+\end{tikzcd}\]
+where the first map is the difference of the parallel arrows in \cref{dfn:6-1-2}. We will usually phrase our axioms in this style, since it is generally easier to work with.
+\end{remark}
+
+\subsection{Weiss covers}
+
+We will require our covers for factorization algberas to be finer than those for cosheaves. In particular, we want our open covers to capture the structure of the factorization product in the underlying prefactorization algebra. The proper notion will be a \emph{Weiss cover}.
+
+\begin{definition}\label{dfn:6-1-4}
+	Let $U$ be an open set of some space $M$. A \emph{Weiss cover} is a collection of open sets $\mathfrak{U} =\left\{ U_i\subseteq U \right\} _{i\in I} $ such that for any finite collection of points $S=\left\{ x_1, \ldots ,x_k \right\} \subseteq U$, there is an open set $U_i\in \mathfrak{U} $ such that $S\subseteq U_i$.
+\end{definition}
+
+The Weiss covers define a Grothendieck pretopology, and thus a Grothendieck topology, on $\Open(M) $, called the \emph{Weiss topology}. A Weiss cover is much larger than an open cover in most cases, and is better suited to studying all possible configuration spaces of finitely many points in $U$.
+
+\begin{example}\label{ex:6-1-5}
+	Let $M$ be a smooth $n$-manifold. One Weiss cover of $M$ is the collection of all open sets diffeomorphic to a finite disjoint union of $n$-balls. Alternatively, the open sets $\left\{ M\setminus \left\{ p \right\} \mid p\in M \right\} $ is a Weiss cover. One can even form a Weiss cover with countably many elements by fixing a Riemannian metric $g$. Let $d$ be the corresponding distance function. Choose points $\left\{ p_n\in M \right\} _{p\in\mathbb{N} } $ such that the union of the $g$-balls
+	\[
+		B_1(p_n) = \left\{ q\in M\mid d(p_n,q)<1 \right\} 
+	\]
+	covers $M$. Consider the collection of all balls
+	\[
+		\mathfrak{D} =\left\{ D_{1/m} (p_n)\mid m\in\mathbb{N} ,n\in\mathbb{N}  \right\} 
+	.\]
+	The collection of all finite, pairwise disjoint unions of elements of $\mathfrak{d} $ is a countable Weiss cover.
+\end{example}
+
+These examples suggest the following definition.
+
+\begin{definition}\label{dfn:6-1-6}
+	Let $\mathfrak{B} $ be a Weiss cover. Then a cover $\mathfrak{U} =\left\{ U_{\alpha }  \right\} _{\alpha \in A} $ \emph{generates} the Weiss cover $\mathfrak{B} $ if every $V\in \mathfrak{B}$ is a finite disjoint union of open sets in $\mathfrak{U} $.
+\end{definition}
+
+
+\subsection{Strict factorization algebras}
+
+The value of a factorization algebra on $U$ will be determined by its behavior on a Weiss cover of $U$ in the same way a cosheaf is determined by open covers.
+
+\begin{definition}\label{dfn:6-1-7}
+	Let $\mathcal{F} $ be a prefactorization algebra on $M$ valued in a linear colored operad $\mathcal{C} $ (in particular, a linear symmetric monoidal category). Then $\mathcal{F} $ is a \emph{factorization algebra} if it satisfies the following property: for ever open subset $U\subseteq M$ and every Weiss cover $\left\{ U_i \subseteq U \right\} _{i\in I} $ of $U$, the sequence
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\displaystyle{\bigoplus_{i,j\in K} \Phi (U_i \cap U_j)}\ar[r]   & \displaystyle{\bigoplus_{k\in K} \Phi (U_k)}\ar[r]  & \Phi (U)\ar[r]  & 0,
+\end{tikzcd}\]
+that was defined in \cref{rmk:6-1-3} is exact. That is, $\mathcal{F} $ is a factorization algebra if it is a cosheaf with respect to the Weiss topology.
+
+A factorization algebra is \emph{multiplicative} if for every pair of disjoint open sets $U,V\subseteq M$, the factorization product
+\[
+	m_{U \cup V} ^{U,V} : \mathcal{F} (U)\otimes \mathcal{F} (V) \to \mathcal{F} (U\cup V)
+\]
+is an isomorphism.
+\end{definition}
+
+The multiplicative axiom says that obervables of finite collections of disjoint opens can be factored into tensor products of its value on each disjoint open.
+
+Direct verification that a prefactorization algebra satisfies the descent axiom is typically not easy. We will later discuss results that exhibit many examples, allowing us to build more complex factorization algebras from simple examples.
+
+\subsection{The \v{C}ech complex and homotopy factorization algebras}
+
+If the target symmetric monoidal category has a notion of a weak equivalence, then there is a natural modification of the notion of a cosheaf. One should require not that $\Phi (U)$ be a colimit, but that it be a homotopy colimit. Applying this modification to a cosheaf yields the notion of a homotopy cosheaf. We will begin by describing these, since they are simpler.
+
+In this book, we always take the target category to be unbounded cochain complexes with values in some additive category $\mathcal{A} $, with weak equivalences given by quasi-isomorphisms. Usually, we take $\mathcal{A} =\DVS $. In this case, $\DVS $ is a \emph{Grothendieck abelian category}.
+
+\subsubsection{Digression on the derived $\infty $-category $\mathcal{D} ^{\infty } (\mathcal{A} )\cong \mathrm{N} ^{\mathrm{dg} } _{\bullet} (\Ch_{\mathcal{A} } )$}
+
+\begin{definition}\label{dfn:6-1-5}
+	A \emph{Grothendieck abelian category} is an abelian category $\mathcal{A} $ which satisfies Grothendieck's AB5 axiom, and has a generator. More explicitly,
+	\begin{enumerate}
+		\item AB3: $\mathcal{A} $ has all small coproducts. This implies that $\mathcal{A} $ is cocomplete.
+		\item AB5: Filtered colimits are exact in $\mathcal{A} $. More precisely, given a filtered category $\mathcal{J} $ (see \cite{ml}), the functor $\colim : \mathcal{A} ^{\mathcal{J} }  \to \mathcal{A} $ is an exact functor.
+		\item There exists an object $g\in \mathcal{A} $ called the \emph{generator} such that $\mathcal{A} (g,-)$ is faithful.
+	\end{enumerate}
+\end{definition}
+
+There is a useful theorem of Lurie's. Let $\mathcal{A} $ be any Grothendieck abelian category, and let $\Ch_{\mathcal{A} }$ denote the 1-category of (unbounded) cochain complexes in $\mathcal{A} $. Let $W$ denote the quasi-isomorphisms in $\Ch_{\mathcal{A} }$.
+
+\begin{proposition}[Lurie]\label{prp:6-1-6}
+	There is a left proper combinatorial model structure on $\Ch_{\mathcal{A} }$. Given a map $f : c \to d$,
+	\begin{itemize}
+		\item $f$ is a weak equivalence if and only if it is a quasi-isomorphism;
+		\item $f$ is a cofibration if and only if $f^k : c^k \to d^k$ is a monomorphism in $\mathcal{A} $;
+		\item $f$ is a fibration if and only if it satisfies the right lifting property with respect to every trivial cofibration (also called acyclic cofibrations).
+	\end{itemize}
+\end{proposition}
+
+Note that this is the same as the usual cofibrantly generated model structure for $\Ch_{\mathcal{A} } $; the new results are that it is left proper and combinatorial, which are terms I will gloss over.
+
+Note that all cochains are cofibrant in this model structure. We then define the $\infty $-categorical version of $\Ch_{\mathcal{A} }$, also called the derived $\infty $-category and denoted $\mathcal{D}^{\infty }(\mathcal{A} )$, to be the differential graded nerve $\mathrm{N}^{\mathrm{dg}}_{\bullet}(\Ch_{\mathcal{A} }^{f} )$ of the \emph{full} subcategory $\Ch_{\mathcal{A} }^f$ of fibrant objects of $\Ch_{\mathcal{A} }$. Here we must note that $\Ch_{\mathcal{A} } $ is self-enriched via the usual internal hom
+\[
+	\underline{\Ch} _{\mathcal{A} }(c,d)^k \cong \prod_{n\in\mathbb{Z} } \mathcal{A} (c^n,d^{n+k} )\cong  \mathcal{A}^{\mathbb{Z} }(c,d[k]),
+\]
+for $\mathcal{A}^{\mathbb{Z} }$ the (functor) category of $\mathbb{Z} $-graded objects of $\mathcal{A} $. A differential graded category only requires $\Ch_{\mathbb{Z} } $-enrichment, and many of the differential graded categories we use are $\Ch_{R} $, which are self-enriched and come with a natural $\mathbb{Z} $-action, which is a stronger result. Using this, we may now define the differential graded nerve on $\Ch_{\mathcal{A} } ^{f} $. Here I follow \cite{kerodon}'s approach in Tag 00PK.
+
+\begin{definition}[\cite{kerodon} 2.5.3.1, 2.5.3.5]\label{dfn:6-1-10}
+	Let $\mathcal{C} $ be a differential graded category with $\Ch_{\mathbb{Z} } $-hom $\underline{\mathcal{C} } $. Define the simplicial set $\mathrm{N}^{\mathrm{dg} }_{\bullet} (\mathcal{C} )$ as follows.
+	\begin{itemize}
+		\item An $n$-simplex $\sigma \in \mathrm{N} ^{\mathrm{dg} }_n(\mathcal{C} )$ is a pair of tuples
+			\[
+				\sigma=\left( \left\{ x_i \right\}_{1\leq i\leq n} , \left\{ f_I \mid I = \left\{ i_0 > i_1 > \cdots > i_k \right\} \subseteq [n]\right\} \right) 
+			,\]
+			where each $x_i$ is an object of $\mathcal{C} $, and $f_I$ is a homogeneous element of $\underline{\mathcal{C} } (x_{i_k} ,x_{i_0} )^{1-k} $ of degree $1-k$, satisfying the identity
+			\[
+			\dd f_I = \sum_{a=1}^{k-1} (-1)^{a} \left( f_{\left\{ i_0 > \cdots > i_a \right\} } \circ f_{\left\{i_a > \cdots > i_k\right\}} - f_{I\setminus \left\{ i_a \right\} }  \right) 
+			.\]
+			Here $\dd $ is the differential of $\underline{\mathcal{C} } $. Note that this requires $I$ have at least two elements.
+		\item Given a morphism $\alpha : [n] \to [m]$ in the simplex category, the map $\alpha ^* : \mathrm{N} ^{\mathrm{dg}}_m(\mathcal{C} ) \to \mathrm{N} ^{\mathrm{dg} } _n(\mathcal{C} )$ is given by
+			\[
+				\left( \left\{ x_i \right\}_{1\leq i\leq m} ,\left\{ f_I \right\}  \right) \mapsto \left( \left\{ x_{\alpha (j)}  \right\}_{1\leq j\leq n} ,\left\{ g_J \right\}  \right) 
+			\]
+			for
+			\[
+				g_J \coloneqq 
+				\begin{cases}
+					f_{\alpha (J)} ,& \alpha |J\text{ is injective}\\
+					1_{x_i} ,& J=\left\{ j_0 > j_1 \right\} \text{ with } \alpha (j_0)=\alpha (j_1)=i\\
+					0,& \text{otherwise} 
+				\end{cases}
+			.\]
+	\end{itemize}
+\end{definition}
+It is shown in \cite{kerodon} 2.5.3.10 that $\mathrm{N} ^{\mathrm{dg} }_{\bullet}(\mathcal{C} )$ is a quasi-category. Note that the definition Lurie presents works with homological grading conventions, whereas we work with cohomological grading conventions. Thus, a morphism of degree $k$ for Lurie has degree $-k$ for us.
+
+This definition is a mess. We take a minute to look at the intuition behind the differential graded nerve. We start by looking at 0-simplicies. Since the set $I$ must have at least two elements, a 0-simplex is a pair $(\left\{ x \right\} ,\varnothing )$. We identify this with the object $x\in \mathcal{C} $, yielding $\mathrm{N} ^{\mathrm{dg} } _{0} \left( \mathcal{C}  \right) \cong \Obj(\mathcal{C} ) $.
+
+Now consider a 1-simplex. Note that $[1]$ has two elements, so there is exactly one linearly ordered subset $I\subseteq [1]$, which is simply $I=[1]$. Thus, a 1-simplex $\sigma $ is a pair $(\left\{ x_0,x_1 \right\} ,\left\{ f_{10}  \right\} )$ (here we recall $i_0 > i_1$, thus $i_0 = 1$). We simply write $f$ for $f_{10} $. Writing $i_0 = 1$ and $i_1 = 0$ yields that $f \in \underline{\mathcal{C} } (x_0, x_1)^{0} $; i.e. $f$ is a morphism $x_0 \to x_1$ of cohomological degree 0. Now we have that
+\[
+	\dd f = \sum_{a=1}^{k-1} (-1)^{a} \left( f_{\left\{ i_0 > \cdots > i_a \right\} } \circ f_{\left\{ i_a > \cdots > i_k \right\}} - f_{I\setminus \left\{ i_a \right\} }  \right) 
+.\]
+However, note that $k=1$, so this sum is from $1$ to $0$. Hence, this is the empty sum, which is 0. Therefore we have $\dd f = 0$, meaning a 1-simplex is a closed cochain map $f : x_0 \to x_1$.
+
+In the setting $\Ch_{\mathcal{A} } $, recall that if $f\in \underline{\Ch}_{\mathcal{A} } (X,Y)^k$, then $f$ is a map of graded $\mathcal{A} $-objects $f : X \to Y[k]$ of cohomological degree $k$. Then $\dd f : X \to Y[k+1]$ is also a map of graded $\mathcal{A} $-objects, and is defined by
+\[
+	\dd f = \dd_Y \circ f - (-1)^{\left| f \right|=k} f\circ \dd _X
+.\]
+Applying our condition that $(X,Y,f)$ is a 1-simplex of the differential graded nerve, this simplifies to
+\[
+	\dd f = \dd _Y \circ f - f\circ \dd _X = 0 \iff \dd _Y \circ f = f\circ \dd _X
+.\]
+This is exactly the condition that $f$ is a map of cochains. Thus, 1-simplicies of $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\Ch_{\mathcal{A} } )$ are precisely cochain maps, as we would expect.
+
+We now explore 2-simplices of the differential graded category $\mathcal{C} $. First, note that $[2]$ admits four subsets with at least two elements: $\left\{ 1,0 \right\} ,\left\{ 2,1 \right\} ,\left\{ 2,0 \right\} ,\left\{ 2,1,0 \right\} $. By \cref{dfn:6-1-10}, a 2-simplex $\sigma$ is the data $(x_0,x_1,x_2,f_{10} ,f_{20} ,f_{21} ,f_{210} )$, where
+\begin{itemize}
+	\item $x_0,x_1,x_2\in \mathcal{C} $ are objects.
+	\item The maps $f_{i_0,i_1}$ are elements of $\underline{\mathcal{C} } (x_{i_1} ,x_{i_0} )^0$. More precisely,
+		\[
+			f_{10} \in \underline{\mathcal{C} } (x_0,x_1)^0,\qquad f_{20} \in \underline{\mathcal{C} } (x_0,x_2)^0,\qquad f_{21} \in \underline{\mathcal{C} } (x_1,x_2)^0
+		.\]
+	\item The map $f_{210} $ is an element of $\underline{\mathcal{C} } (x_0,x_2)^{-1}$ satisfying the identity
+		\[
+			\dd f_{210} =\sum_{a=1}^{2-1} (-1)^{a} \left( f_{\left\{i_0 > \cdots > i_a\right\}} \circ f_{\left\{ i_a > \cdots > i_k \right\} } -f_{I \setminus \left\{ i_a \right\} }  \right) = -\left( f_{21} \circ f_{10} -f_{20}  \right) =f_{20} -f_{21} \circ f_{10} 
+		.\]
+	\item Additionally, by the same logic applied to 1-simplicies, we have $\dd f_{ij} =0$ for all $i,j\in[2]$.
+\end{itemize}
+
+We now apply this in the case that $\mathcal{C} =\Ch_{\mathcal{A} } $. We have that $f_{ij} : x_j \to x_i$ is a chain map for all $i,j\in[2]$. Additionally, $f_{210} : x_0 \to x_2[1]$ has cohomological degree 1, and yields the statement
+\[
+	\dd f_{210}  = f_{20} -f_{21} \circ f_{10} \iff \dd f_{210} +f_{21} \circ f_{10} =f_{20} 
+.\]
+Additionally, note that $f_{21} \circ f_{10} $ is also closed: since $f_{21} ,f_{10} $ are closed, we have $f_{21} \circ \dd _1 = \dd _2 \circ f_{21} $, and $f_{10} \circ \dd _0=\dd _1\circ f_{10} $. Thus,
+\begin{align*}
+	\dd (f_{21} \circ f_{10} ) &= \dd _2 \circ f_{21}\circ f_{10} - f_{21} \circ f_{10} \circ \dd _0\\
+				  &= (\dd _2 \circ f_{21} )\circ f_{10} - f_{21} \circ (f_{10} \circ \dd _0) \\
+				  &=f_{21} \circ (\dd _1 \circ f_{10} ) - f_{21} \circ (f_{10} \circ \dd _0)\\
+				  &=f_{21} \circ (\dd _1\circ f_{10} -f_{01} \circ \dd _0)\\
+				  &=f_{21} \circ \dd f\\
+				  &=f_{21} \circ 0\\
+				  &=0
+.\end{align*}
+Therefore, the cochain maps $f_{21} \circ f_{10} $ and $f_{20} $ differ by the exact element $\dd f_{210} $, which means that they define the same cohomology class. Therefore, the datum of the arrow $f_{210} $ can be interpreted as the statement that $f_{20} $ and $f_{21} \circ f_{10} $ are cohomologous, which we depict as the diagram
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+ & x_1 \ar[" f_{21}  ", dr]  &  \\
+	x_0 \ar[" f_{10}  ", ur] \ar[" f_{20}  "'{name=x}, rr]  &  & x_2.
+	\arrow[from=1-2, to=x, Rightarrow, " f_{210}  ", shorten=5px]
+\end{tikzcd}\]
+Thus, composition of maps is well-defined up to homology, and since $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\Ch_{\mathcal{A} } )$ is a quasi-category, composites always exist. Thus we have the expected intuition.
+
+This suggests a notion of faces and degeneracies. We will now show that the given definition of simplicial operators indeed yields the proper notion of faces and degeneracies. We follow the convention that $d_i$ is the $i$th face operator, and $d^i$ is the $i$th coface map in the simplex category $\boldsymbol{\Delta}$. We similarly write $s_i$ and $s^i$ for degeneracies and codegeneracies, respectively. Both of these operators are fairly simple to deal with.
+
+Let $d^k : [n] \to [n+1]$ be a coface, and let $\sigma =\left( \left\{ x_i \right\}_{1\leq i\leq n+1} ,\left\{ f_I \right\}  \right) $ be an $(n+1)$-simplex of $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\mathcal{C} )$. We work with the action of $d_k$ on the objects $\left\{ x_i \right\} _{1\leq i\leq n+1}$ and morphisms $\left\{ f_I \right\} $ independently. First, by definition, we have
+\[
+	d_k \left\{ x_i \right\}_{1\leq i\leq n+1} =\left\{ x_0, \ldots , x_{k-1} ,x_{k+1} , \ldots , x_{n+1}  \right\} =\left\{ x_0, \ldots , \widehat{x_k}, \ldots , x_{n+1}  \right\} ,
+\]
+where the hat denotes the omission of an argument. Next, note that $d^k$ is injective, and thus
+\[
+	d_k\left\{ f_I \right\} =\left\{g_J = f_{d^k(J)}\mid J \subseteq [n] \right\} 
+.\]
+
+We explore a low-dimensional example in $\Ch_{\mathcal{A} } $. Let $\sigma = (x_0,x_1,f)$ be a 1-simplex in $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\Ch_{\mathcal{A} }) $. We expect that $d_1\sigma =x_0$ and $d_0\sigma =x_1$, which would allow us to say that $f$ is a morphism $x_0\to x_1$ in the $\infty $-category $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\Ch_{\mathcal{A} } )$. First, note that $d_i\sigma $ is a 0-simplex for any $i$, and thus has no morphisms. Thus we need only look at the action of $d_i$ on objects, and indeed,
+\[
+	d_0\sigma =\left\{ \widehat{x_0} ,x_1 \right\} =x_1,\qquad d_1\sigma =\left\{ x_0, \widehat{x_1}  \right\} =x_0
+.\]
+Thus, $\sigma$ is a morphism $x_0\to x_1$. We prefer to write $f : x_0 \to x_1$ for obvious reasons.
+
+We also quickly check the faces of a 2-simplex. Let $\sigma =(x_0,x_1,x_2,f_{10} ,f_{20} ,f_{21} ,f_{210} )$ be a 2-simplex of $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\mathcal{C} )$. We start with $d_0$. From the above diagram. we would expect that $d_0\sigma =(x_1,x_2,f_{21} )$. We immediately see that the objects work out, so now we appeal to the morphisms. Recall that 1-simplices have a single morphism, determined by the subset $[1]\subseteq [1]$, which we will write as $g_{10} $. By definition,
+\[
+	g_{10} =f_{d^0(1),d^0(0)} =f_{21}
+.\]
+Thus, $d_0\sigma =(x_1,x_2,f_{21} )$, as expected. We similarly compute that the morphisms for $d_1\sigma $ and $d_2\sigma $ are, respectively,
+\[
+	f_{d^1(1),d^1(0)} =f_{20} ,\qquad f_{d^2(1),d^2(0)} =f_{10} 
+.\]
+These are precisely what we would expect, given the above intuition.
+
+Finally, we check degeneracies. Recall that codegeneracies $s^i : [n] \to [n-1]$ are injective everywhere except the subset $\left\{ i,i+1 \right\} \subseteq [n]$, which both map to $i\in[n-1]$. Thus, combining rules 1 and 2 for simplicial operators yields that if $\sigma = \left( \left\{ x_i \right\} _{1\leq i\leq n-1} ,\left\{ f_I \right\}  \right) $ is an $(n-1)$-simplex, then
+\[
+	s_k\sigma =\left( \left\{ x_0, \ldots , x_i,x_i, \ldots , x_{n-1}  \right\} ,\left\{ f_{s^i(J)} \mid J\subseteq [n] \right\}  \right) 
+\]
+is an $n$-simplex, where $f_{s^i(J)} $ simply inserts 1 at $i$, between the parts of $J$ where $s^i$ is injective (on those parts, it comes from the definition of $\sigma $, like before). Thus, it is trivial to see that for $x\in \mathrm{N} ^{\mathrm{dg} } _0(\mathcal{C} )$, we have $s^0x = (x,x,1_x)$ is the identity morphism.
+
+We now return to the notation $\mathcal{D}^{\infty } (\mathcal{A} )$ for the simplicial set $\mathrm{N} ^{\mathrm{dg} } _{\bullet} (\Ch_{\mathcal{A} } )$. It is possible to state that $\mathcal{D} ^{\infty } (\mathcal{A} )$ is the $\infty $-categorical localization of $\Ch_{\mathcal{A} } $ at weak equivalences in a more precise sense: there is an $\infty $-functor $\mathrm{N} (\Ch_{\mathcal{A} } )\to \mathcal{D} ^{\infty } (\mathcal{A} )$ which is universal amongst $\infty $-categories with respect to inverting quasi-isomorphisms. The $\infty $-category $\mathcal{D} ^{\infty } (\mathcal{A} )$ is a stable $\infty $-category.
+
+Finally, note that $\mathcal{D} ^{\infty } (\Ch_{\mathcal{A} } )$ is presented by $\Ch_{\mathcal{A} } $ as a combinatorial model category. This makes intuitive sence, since standard model category theory yields an equivalence $\Ch_{\mathcal{A} } \simeq \Ch_{\mathcal{A} } ^{f} $.
+
+
+\subsubsection{Back to the normal content of the chapter}
+
+Since $\Ch_{\DVS } $ is Grothendieck abelian, all of this applies to our most common example of factorization algebras. We now have a notion of fibration and cofibration in $\Ch_{\DVS }$, as well as a simple way of constructing homotopy (co)limits using quasi-categories.
+
+Let $\Phi $ be a precosheaf on a topological space $M$ with values in cochain complexes in a sufficiently nice additive category $\mathcal{A} $. Let $\mathfrak{U} =\left\{ U_i \right\}_{i\in I} $ be an open cover of some open subset $U\subseteq M$. Consider the cochain complex
+\[
+	C^k \coloneqq \bigoplus_{j_0, \ldots , j_k\in I ; j_i\text{ all distinct} } \Phi (U_{j_0} \cap \cdots \cap U_{j_k} )
+.\]
+There are two differentials here, defined as follows. Given a multi-index $J$, let $U_J$ denote the intersection over all $U_j$, $j\in J$. Since $\Phi (U_J)$ is a cochain complex,  it has a differential $\dd _{J} $. We can rewrite
+\[
+	C^{k,p}  = \bigoplus_{\left| J \right| =k+1} \Phi (U_J)^p
+,\]
+making $C$ clearly bigraded. We then define the differential $\dd : C^{k, p}  \to C^{k, p+1} $ as mapping some $x\in \Phi (U_J)^p \mapsto \dd _Jx$. Thus, $\dd =\bigoplus_{\left| J \right| =k+1} \dd _J$. This is called the \emph{internal differential}.
+
+There is also an \emph{external differential}, which acts via the extension maps arising from the precosheaf $\Phi $. This is the dual of the usual \v{C}ech differential, meaning it makes $C^{\bullet, p} $ into a chain complex. Write $\iota _a$ for the pushforward map $\Phi (U_J) \to \Phi (U_{J\setminus \left\{ j_a \right\} } )$, where $j_a\in J = \left\{ j_0 < \cdots < j_a < \cdots < j_{k}  \right\} $ (here we assume tuples are increasing only). Let $x\in C^{k,p} $. Then $x$ is a tuple, which has a value $x_J\in \Phi (U_J)$ for each $J\subseteq I$ with $k+1$ elements. We define
+\[
+	\dd (x)_K = \sum_{\left| J \right| =k+1, J\setminus \left\{ j_a \right\} =K} (-1)^{a} \iota _a(x_{J} )
+.\]
+The \emph{\v{C}ech complex of $\mathfrak{u} $ with coefficients in $\Phi $} is defined as the \emph{totalization} of this double complex, which is the complex
+\[
+	\check{C}(\mathfrak{U} ,\Phi ) \coloneqq \bigoplus_{k=0} ^{\infty } \left( \bigoplus_{j_0, \ldots , j_k\in I ; j_i\text{ all distinct} } \Phi (U_{j_0} \cap \cdots \cap U_{j_k} )[k]  \right) 
+.\]
+In particular,
+\[
+	\check{C}(\mathfrak{U} ,\Phi )^n = \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Phi (U_J)^{n+k} 
+.\]
+Note that $C^{p,k} $ falls into degree $n=p-k$. Recall that the differential of the shifted complex $\Phi (U_J)[k]$ picks up a sign of $(-1)^k$. The differential of the totalization uses both differentials on the bigrading, so we denote the internal differential by $\dd_i$, and the external differential by $\dd _e$. Then we define the differential $\mathrm{D} $ as
+\[
+	\mathrm{D} |C^{k,p} =(-1)^k\dd _i + \dd _e
+.\]
+Note that this is a map $C^{k,p} \to C^{k-1,p}\oplus C^{k,p+1} $ which lives inside degree $p - (k - 1) = p + 1 - k = n+1$. It is easy to show $\mathrm{D} ^2=0$, yielding a cochain complex.
+
+There is a natural map $\check{C}(\mathfrak{U} ,\Phi ) \to \Phi (U)$ given as follows. Since $\Phi $ yields maps $\Phi (U_J) \to \Phi (U)$, we can define a map on the $n$th degree via the composite
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\displaystyle{\bigoplus_{k\geq 0} } C^{k,n+k} \ar[" \pi _0 ", r]  & \displaystyle{C^{0,n} =\bigoplus_{\left| J \right| =n+1} \Phi(U_J)^n}\ar[" \bigoplus_{J} \iota _J ", r] & \Phi (U)^n,
+\end{tikzcd}\]
+where $\pi _0$ is the projection of the product onto $k=0$, and $\bigoplus_{J} \iota _J$ is the coproduct of the pushforwards $\iota _J : \Phi (U_J) \to \Phi (U)$. These maps assemble into a cochain map.
+
+\begin{definition}\label{dfn:6-1-11}
+	A precosheaf $\Phi $ is a \emph{homotopy cosheaf} if the natural map $\check{C}(\mathfrak{U} ,\Phi )^0 \to \Phi (U)$ is a quasi-isomorphism for every open $U$, and every open cover $\mathfrak{U} $ of $U$.
+\end{definition}
+
+This definition has a lot hiding behind it that I don't feel like going through. The idea is that there is a \v{C}ech nerve $\mathcal{N} $ which maps open covers $\mathfrak{U} $ of $U\subseteq X$ to a particular simplicial object in $(\Top\downarrow U)$. Then Kan extending a cosheaf to this simplicial object yields a particular diagram indexed by $\boldsymbol{\Delta} ^{\mathrm{op}} $. This diagram is 1-coskeletal, and its 1-truncation is a coequalizer diagram (the existence of the diagram posits the existence of a section for the parallel arrows, but given such a datum, the colimit is isomorphic to the coequalizer). When passing to $\infty $-categories by taking the nerve of this 1-category, gluing laws have to hold up to coherent homotopy, and the coherence requires taking into account $n$-fold intersections. Hence, we take the homotopy colimit of the full \v{C}ech nerve.
+
+
+We now suggest the notion of a homotopy factorization algebra.
+
+\begin{definition}\label{dfn:6-1-13}
+	A \emph{homotopy factorization algebra} (valued in cochain complexes) is a prefactorization algebra $\mathcal{F} $ on $X$ valued in $\Ch_{\mathcal{A} } $ with the property that for every open $U\subseteq X$, and every Weiss cover $\mathfrak{U} $ of $U$, the natural map from the \v{C}ech complex is a quasi-isomorphism
+	\[
+		\check{C}(\mathfrak{U} ,\mathcal{F} )\simeq \mathcal{F} (U)
+	.\]
+	If $\mathcal{A} $ is symmetric monoidal, then so is $\Ch_{\mathcal{A} } $ via the Day convolution. The homotopy factorization algebra $\mathcal{F} $ is \emph{multiplicative} if for every disjoint pair of opens $U,V\subseteq X$, the factorization product
+	\[
+		\mathcal{F} (U)\otimes \mathcal{F} (V)\to \mathcal{F} (U\cup V)
+	\]
+	is a quasi-isomorphism.
+\end{definition}
+
+\begin{remark}\label{rmk:6-1-14}
+	Due to our applications having observables living in cohomology, it is almost always most natural to consider homotopy factorization algebras. Thus, the term ``factorization algebra'' will almost always denote a homotopy factorization algebra.
+\end{remark}
+
+\begin{definition}\label{dfn:6-1-15}
+	A \emph{differentiable factorization algebra} is a factorization algebra valued in differentiable cochain complexes.
+\end{definition}
+Due to differentiable vector spaces not having a tensor product, we have to modify the multiplicative axiom to a statement about the factorization product, viewed as a bilinear map. However, most vector spaces we work with are convenient vector spaces, which we recall \emph{do} have a tensor product. Thus, this issue can usually be ignored. Regardless, we are more interested in the descent axiom than multiplicity.
+
+\subsection{Weak equivalences}
+
+One can promote the notion of weak equivalences of factorization algberas valued in an $\infty $-category to the level of factorization algebras themselves.
+
+\begin{definition}\label{dfn:6-1-16}
+	Let $\mathcal{F} ,\mathcal{G} $ be homotopy factorization algebras. Then a map $\phi : \mathcal{F}  \to \mathcal{G} $ is a \emph{weak equivalence} if each component $\phi _U : \mathcal{F} (U) \simeq \mathcal{G} (U)$ is a weak equivalence.
+\end{definition}
+
+\begin{definition}\label{dfn:6-1-17}
+	A \emph{factorizing basis} $\mathfrak{U} =\left\{ U_i \right\} _{i\in I} $ for a space $X$ is a basis for the topology on $X$ with the following properties:
+	\begin{enumerate}
+		\item For every finite set $\left\{ x_i \right\} _{1\leq i\leq n} \subseteq X$, there exists $i\in I$ such that $\left\{ x_i \right\} _{1\leq i\leq n} \subseteq U_i$. Equivalently, $\mathfrak{U} $ is a Weiss cover.
+		\item If $U_i,U_j$ are disjoint, then $U_i \cup U_j\in \mathfrak{U} $.
+		\item $U_i \cap U_j\in \mathfrak{U} $ for all $U_i,U_j\in \mathfrak{U} $.
+	\end{enumerate}
+\end{definition}
+
+
+\begin{lemma}\label{lma:6-1-18}
+	A map $\phi : \mathcal{F}  \to \mathcal{G} $ of differentiable factorization algebras on a \emph{Hausdorff} space $X$ is a weak equivalence if and only if, for every factorizing basis $\mathfrak{U} $ of $X$ and every $U\in \mathfrak{U} $, the map $\phi _U : \mathcal{F} (U)\simeq \mathcal{G} (U)$ is a weak equivalence. More succinctly, it suffices to check weak equivalences on a factorizing basis.
+\end{lemma}
+\begin{proof}
+	Fix a factorizing basis $\mathfrak{U} $. Let $V\subseteq X$ be open, and let $\mathfrak{U} _V$ denote the Weiss cover of $V$ generated by all open subsets in $\mathfrak{U} $ that lie in $V$. We must show that this is indeed a Weiss cover. This is trivial: let $\left\{ V_i \subseteq V\right\} _{i\in J}\subseteq \mathfrak{U}  $ be an open cover of $V$ by $\mathfrak{U} $, which exists since $\mathfrak{U} $ is a basis. Now let $S\subseteq V$ be a finite set, and for $p,q\in S$, let $W_p,W_q$ be disjoint open neighborhoods of $p,q$, respectively, which exist since $X$ is Hausdorff. We may without loss of generality take $W_p,W_q \subseteq V$, since if they aren't subsets, we can intersect them with $V$ to produce subsets. Now cover $W_p,W_q$ with elements $\left\{ U_i^p \right\} _{i\in J_p \subseteq I} \subseteq \mathfrak{U} $ and $\left\{ U_j^q \right\}_{j\in J_q \subseteq I} \subseteq \mathfrak{U} $ of the factorizing basis, which can be done since it is in particular a basis. Then $U_i^p \cap U_j^q = \varnothing $ for all $i,j$. There exists at least one $i\in J_p$ and $j\in J_q$ such that $p\in U_p^i$ and $q\in U_q^i$. Thus, we have disjoint elements of $\mathfrak{U} $ which are subsets of $V$, and contain 2 of the points of $S$. Continuing this argument inductively yields a collection of pairwise disjoint opens whose union covers $S$, and is a subset of $V$. Since this belongs to $\mathfrak{U} _V$, we are done.
+
+	Now we continue with the proof. By the descent axiom, there is a weak equivalence $\check{C}(\mathfrak{U} _V,\mathcal{F})\simeq \mathcal{F}(V)$, and similarly for $\mathcal{G}$. Thus, it suffices to check that the map
+	\[
+		\check{\phi }: \check{C}(\mathfrak{U}_V,\mathcal{F}) \to \check{C}(\mathfrak{U} _V,\mathcal{G})
+	\]
+	is a weak equivalence. Recall that
+	\[
+		\check{C}^{\bullet}(\mathfrak{U}_V,\mathcal{F} )\cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \mathcal{F} (U_J)[k]^{\bullet},\qquad \check{C}^{\bullet} (\mathfrak{U}_V,\mathcal{G} )\cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right|=k+1} \mathcal{G} (U_J)[k]^{\bullet} .
+	\]
+	We must use the fact that $\phi $ is a quasi-isomorphism on all elements of the factorizing basis. Note that since $\mathfrak{U} _V$ is given by finite unions of pairwise disjoint elements of $\mathfrak{U} $, and since $\mathfrak{U} $ is closed under finite union of pairwise disjont elements, we have $\mathfrak{U} _V \subseteq \mathfrak{U}$. Since $U_J$ is a union of pairwise disjoint elements of $\mathfrak{U} _V$, and thus $\mathfrak{U} $, and since factorizing bases are closed under finite intersection, we have $U_J\in \mathfrak{U} $ for all $J$. Therefore, $\phi _{U_J} $ is a quasi-isomorphism.
+
+	Filter the complex by $k$. The differential on the $E_0$ page is the internal differential $\dd _i$, since the external differential lowers the degree of $k$, and thus is killed in $k=0$. We recall that the internal differential is simply the direct sum of $\dd _{\mathcal{F}(U_J)}$. Since $\oplus : \Ch_{\DVS } ^2 \to \Ch_{\DVS } $ is exact (easy to prove for arbitrary additive categories), it suffices to show each $\phi _J$ is a quasi-isomorphism. We have shown this, so $\check{\phi }$ is a quasi-isomorphism on the page $E_0$.
+
+	The $E_1$ page is given by taking homology with respect to $\dd _i$. Since $\phi _{U_J} $ is a quasi-isomorphism, the induced map is an isomorphism on the $E_1$ page. The spectral sequence comparison theorem yields an isomorphism on $E_{\infty } $, meaning $\check{\phi }$ is a quasi-isomorphism.
+\end{proof}
+
+\subsection{The (multi)category structure on factorization algberas}
+
+The category $\mathcal{F} \mathrm{a}(X,\mathcal{C} )$ is the full subcategory of $\mathcal{P}\mathcal{F}\mathrm{a}(X,\mathcal{C} )$ spanned by factorization algebras. The tensor product of prefactorization algebras was defined as
+\[
+	(\mathcal{F} \otimes \mathcal{G})(U) \coloneqq \mathcal{F} (U)\otimes \mathcal{G} (U).
+\]
+This does not immediately promote,  but if the tensor product commutes (separately in each variable) with geometric realizations of simplicial objects, then $\mathcal{F} \mathrm{a} (X,\mathcal{C} )$ has a symmetric monoidal structure. This is to ensure $F\otimes G$ satisfies descent. We will not use this structure on factorization algebras, so we do not expand on this.
+
+\section{Factorization algebras in quantum field theory}
+
+So far, the definition of a factorization algebra is well-motivated by sheaf theory. It allows us to better study factorization algebras, and thus their quantum field theories. But one must ask what kinds of quantum field theories produce factorization algebras, and what the descent axiom means physically.
+
+Consider the Weiss cover $\mathfrak{U} _{\varepsilon } $. The descent axiom roughly says that an observable $O$ can be written as a sum of observables of the form $O_1 \cdots O_k$, for $O_i\in \Obs(B_{\delta _i} (x_i))$, $x_1, \ldots , x_k\in M$. Now by taking $\varepsilon $ small, we can write any observable as a sum of products of observables supported arbitrarily close to a point.
+
+To be more precise, we can (up to chain homotopy) write any $O\in \mathcal{F} (U)$ as a sum
+\[
+	O= \sum_{\alpha } \iota_{V_\alpha } (O_\alpha ),\qquad V_\alpha \in \mathfrak{U}_{\varepsilon } 
+.\]
+But since elements of $\mathfrak{U} $ are just pairwise disjoint unions of balls, we can decompose $V_\alpha $ into disjoint unions $B_{\delta _1} (x_1) \sqcup \cdots \sqcup B_{\delta _k} (x_k)$ of balls. If we also assume the factorization algebra is multiplicative, then up to chain homotopy, we can write any $O_\alpha \in V_\alpha $ as a factorization product $O_1 \cdots O_k$ of observables $O_i\in B_{\delta _i} (x_i)$.
+
+By taking $\varepsilon $ small, we can write observables as being supported arbitrarily close to a point. In particular, all observables can be written as sums of products of observables supported arbitrarily close to a point. This is a reasonable assumption, since most physical observables in QFT have pointlike support.
+
+However, QFT also considers many global observables. The answer to how these fit into the factorization picture reveals that factorization algebras only work for \emph{perturbative quantum field theories}. An arbitrary field theory need not yield a factorization algebra, only a prefactorization algebra.
+
+Indeed, in a perturbative gauge theory, the gauge field (eg. a connection) is taken to be a small perturbation $A_0 + \delta A$ of a fixed and well-known connection $A_0$. Consider the holonomy over some loop $L$. It is easy to work with $A_0 + \delta A$ as a power series of integrals over $L^k$, which shows that $A_0 + \delta A$ can be built from observables supported at points on $L$.
+
+However, in a non-perturbative setting, we cannot do this. In general, the prefactorization algebra of observables need not satisfy descent.
+
+
+\section{Variant definitions of factorization algebras}
+
+Didn't feel like writing this bit down.
+
+\section{Locally constant factorization algebras}
+
+
+Recall that the little $n$-disks operad $E_n$ is the topological ($\infty $-)operad with 1 color whose $k$-ary operations are embeddings $\coprod_{i=1}^k B_{r_i} (x_i)\hookrightarrow B_1(0)$. Essentially, the datum of a $k$-ary operation is a $k$-tuple of pairs $(x_i,r_i)$, where $x_i\in\mathbb{R} ^n$ and $r_i\in\mathbb{R} _{>0} $, such that the relevant balls are all disjoint, and fit into the unit ball. We thus identify $E_n(k) \subseteq \left( \mathbb{R} ^n\times \mathbb{R} _{>0}  \right) ^k$, and give it the subspace topology. Composition is defined by inserting a disk configuration into a single disk. The $S_k$-action is given by permuting the labels $1, \ldots , k$ on the tuple.
+
+An $E_n$-algebra $A$ is thus an object $A$ of a symmetric monoidal category $\mathcal{C} $ which is enriched, tensored, and cotensored over $\Top $, or a related category like $\sSet $; together with maps $A^{\otimes k} \to A$ for each disk configuration, compatible with the substitution composition and $S_k$-action. Recall that the $S_k$-action on a symmetric monoidal category is given by the symmetry isomorphism, appropriately applied.
+
+Although fundamentally different objects, factorization algebras bear a resembelence to $E_n$-algebras in the sense that they describe maps between disjoint opens sitting inside of larger opens. In fact, $E_n$-algebras form a full subcategory of factorization algebras on $\mathbb{R} ^n$, which we discuss in this section.
+
+\begin{definition}\label{dfn:6-4-1}
+	A factorization algebra $\mathcal{F} $ on an $n$-manifold $M$ is \emph{locally constant} if for each inclusion of open disks $D \subseteq D'$, the map $\mathcal{F}(D)\to \mathcal{F} (D')$ is a quasi-isomorphism.
+\end{definition}
+
+For example, given an associative algebra $A$, the prefactorization algebra $A^{fact} $ on $\mathbb{R} $ is locally constant. Lurie has extended this example as follows. First, we must note that the homotopy coherent nerve promotes $E_n$ to an $\infty $-operad, allowing us to consider $E_n$-algebras in any symmetric monoidal $\infty $-category.
+
+\begin{theorem}\label{thm:6-4-2}
+	There is an equivalence of $\infty $-categories between $E_n$-algebras and locally constant factorization algebras on $\mathbb{R} ^n$, valued in an $\infty $-category.
+\end{theorem}
+
+This theorem provides a fascinating bridge between topology and physics. Topological field theories produce locally constant factorization algebras, which can then be viewed as $E_n$-algebras, and analyzed using homotopy theory. Conversely, intuition from the physical behavior of topological field theories can motivate new insights and definitions in topology.
+
+\subsection{Motivation from topology}
+
+Many examples of $E_n$-algebras arise naturally from topology. As such, we begin our motivational work by considering algebras and factorization algebras valued in a nice category of spaces, which we denote $\Top $. Cocontinuity of Hom yields an isomorphism
+\[
+	\Top (U \amalg V, X) \cong \Top (U,X)\times \Top (V,X)
+.\]
+If we use the cartesian monoidal structure (which would yield a cartesian closed category), then we might think that a representable functor could yield a prefactorization algebra of spaces. Indeed, our original intuition of observables was some type of functions $\Map(\mathbb{P}^{\bullet} (M), \mathbb{R} ) $, so this is not unexpected. The issue is, Hom is contravariant in its first argument, whereas we require prefactorization algebras to be covariant. The solution is to pass to compactly supported sections.
+
+To make sense of compactly supported sections for an arbitrary space, consider a pointed space $(X,p)$, and define a compactly supported map $U\to X$ to be a map such that the closure of $f^{-1} (X\setminus \left\{ p \right\} )$ is compact. The usual case of a compactly supported map is recovered by taking $(X,p)=(\mathbb{R} ,0)$.
+
+This defines a prefactorization algebra on pointed spaces that is also valued in pointed spaces, given by taking the subfunctor of $\Top _*(-,(X,p))$ given by compactly supported maps. This is topologized via the subspace topology for the compact-open topology. The basepoint is simply the constant map. One recovers a prefactorization algebra on spaces by identifying compactly supported maps $U\to (X,p)$ with basepoint-preserving compactly supported maps from the one point compactification of $U$ to $(X,p)$. Restricting this along the open sets of a space $M$ yields a prefactorization algebra on $M$. Write $F$ for this prefactorization algebra.
+
+Consider $M=\mathbb{R} ^n$, and let $D\subseteq \mathbb{R} ^n$ be an open disk. There is a weak homotopy equivalence to the $n$-loop space based at $p$:
+\[
+	F(D)\simeq \Omega^n_pX
+.\]
+This is easy to see: a compactly supported map $f : D \to X$ must extend uniquely to a map on $\overline{D} $, mapping $\partial \overline{D} \mapsto p$. Then simply recall that $\Omega ^n_pX$ is the space of maps $(\overline{D}, \partial \overline{D} ) \to (X,p)$. Finally, recall that we can take $\partial \overline{D} $ to be the 1-point compactification of $D$, which produces the $n$-sphere.
+
+This prefactorization algebra is locally constant: given an inclusion of open disks $D\hookrightarrow D'$, the extension map is easily verified to be a weak homotopy equivalence. Additionally, we have isomorphisms
+\[
+	F(U_1 \amalg U_2)\cong F(U_1)\times F(U_2)
+\]
+for disjoint opens. If we have a disk configuration $D_1,D_2 \subseteq D_3$, then we get a map $F(D_1)\times F(D_2)\to F(D_3)$. These maps correspond to the standard $E_n$-structure on the $n$-fold loop space. A nice example is that when $M=\mathbb{R} $, we recover the standard product on $\pi _0\Omega _pX \cong \pi _1(X,p)$.
+
+This prefactorization algebra does not always satsify gluing. However, if $X$ is sufficiently connected, $F$ is indeed a factorization algebra.
+
+\subsection{Relationship with Hochschild homology}
+
+Evaluating a locally constant factorization algebra globally on a manifold $M$ is known as \emph{factorization homology} or \emph{topological chiral homology}. It is sometimes denoted
+\[
+	\int_{M} \mathcal{F} 
+.\]
+The following result is interesting.
+
+\begin{theorem}\label{thm:4-6-3}
+	For $A$ an $E_1$-algebra (eg. an associative algebra, and $A_\infty $-algebra), there is a weak equivalence
+	\[
+		A^{fact} (S^1)\simeq HH_{\bullet} (A),
+	\]
+	for $A^{fact} $ the locally constant factorization algebra on $\mathbb{R} $ associated to $A$, and $H H_{\bullet} (A)$ the Hochschild homology of $A$, defined up to quasi-isomorphism by
+	\[
+		H H_{\bullet} (A) \simeq A\otimes_{A\otimes A} ^{\mathbb{L}} A
+	.\]
+\end{theorem}
+
+Here, the extension of $A^{fact} $ from $\mathbb{R} $ to $S^1$ is defined by covering $S^1$ with opens $U,V \cong \mathbb{R} $ whose intersection has $U \cap V \cong \mathbb{R} \amalg \mathbb{R} $, and then taking the homotopy colimit over these opens and their intersection.
+
+There is a generalization of this result. There are a number of ways to extend $A^{fact} $ from $\mathbb{R} $ to $S^1$, by allowing ``monodromy''. Pick an automorphism $\sigma $ of $A$. Pick an orientation of $S^1$, and a point $p\in S^1$. Let $(A^{fact} )^{\sigma } $ denote the prefactorization algebra on $S^1$ such that $S^1\setminus \left\{ p \right\} $ agrees with $A^{fact} $, but where the structure maps use the automorphism $\sigma $. For instance, if $L$ is a small interval to the left of $p$, and $R$ is a small interval to the right of $p$, and $M$ is an interval containing both $L$ and $R$, hen the structure map $A\otimes A\to A$ is
+\[
+	a\otimes b\mapsto a\cdot \sigma (b)
+\]
+where the left copy of $A$ corresponds to $L$, and so on. It's natural to view the copy of $A$ associated to an interval containing $p$ as an $(A,A)$-bimodule, with a left $A$-action and a $\sigma $-twisted right $A$-action.
+
+\begin{theorem}\label{thm:6-4-4}
+	There is a weak equivalence $(A^{fact} )^{\sigma } \simeq H H_{\bullet} (A,A^{\sigma } )$.
+\end{theorem}
+
+\subsection{Factorization envelopes}
+
+The connection between locally constant factorization algebras and $E_n$-algebras provides a beautiful universal property for factorization envelopes. Let $\mathfrak{g} $ be a differential graded Lie algebra, and define the ($n$-)factorization envelope
+\[
+	\mathbb{U} _n\mathfrak{g} : M\mapsto C_{\bullet} (\Omega ^{\bullet} _c(M)\otimes \mathfrak{g} ),
+\]
+where $M$ runs over the category $\mathcal{E} \mathrm{mb} _n$ of smooth $n$-manifolds and smooth embeddings. This yields a functor
+\[
+	\mathbb{U} _n : \dg\Lie_{k}  \to \Alg_{E_n}(\Ch_{k} )
+,\]
+where $k$ is a field of characteristic 0. Here we can use the singular chains functor to turn $E_n$ into a dg operad, which is a nice way of viewing $E_n$ as an $\infty $-operad. Here, we view $\mathbb{U} _n$ as an $E_n$-algebra, by Lurie's theorem (consider disks in coordinates; Lurie's theorem only appeals to disks; there's a bit more nuance here though).
+
+There is another ``forgetful functor'' $U : \Alg_{E_n}(\Ch_{k} )  \to \dg\Lie_k$. For $n=1$, we view $A_\infty $-algebras as dg associative algebras, and this functor is simply given by defining the Lie bracket as a commutator. For $n>1$, such a functor exists since the cohomology of $E_n$-algebras are $P_n$-algebras (somehow), which clearly have a forgetful functor to $\dg\Lie_{k} $.
+
+The fascinating part is that we have an $\infty $-adjunction $\mathbb{U} _n \dashv U$!
+\begin{theorem}\label{thm:6-4-5}
+	Let $k$ be a field of characteristic zero. Let $\mathcal{C} $ be a stable, $k$-linear, presentably symmetric monoidal $\infty $-category. Then there is an $\infty $-adjunction
+	\[
+		\mathbb{U} _n \dashv U : \dg\Lie_k \to \Alg_{E_n} (\mathcal{C} )
+	\]
+	such that for any $x\in \mathcal{C} $, we have $\operatorname{Free}_{E_n} (X)\simeq \mathbb{U} _n \operatorname{Free}_{\Lie} (\Sigma ^{n-1} X)$.
+\end{theorem}
+Here, $\Sigma $ is the suspension functor, which we recall for chain complexes is simply a shift.
+
+This concludes the book's introduction to factorization homology, which was very hand-wavy. I have a paper which goes more into it, which I may read sometime.
+
+\section{Factorization algebras from cosheaves}
+
+This section will describe a natural class of factorization algebras. The main theorem is that given a nice cosheaf $F$ of cochains on a manifold $F$, the functor $\Sym F(-)$ is a factorization algebra. This is trivially a prefactorization algebra, so we just need to consider the descent axiom. The examples we are ultimately interested in are cosheaves of compactly supported sections of a graded vector bundle, so we focus on cosheaves of this form when working on this theorem.
+
+\subsection{Preliminary definitions}
+
+\begin{definition}\label{dfn:6-5-1}
+	A \emph{local cochain complex} on $M$ is a graded vector bundle $E$ on $M$ with finite rank, whose smooth sections shall be denoted $\mathcal{E} $, equipped with a differential operator $\dd : \mathcal{E}  \to \mathcal{E} $ satisfying $\dd ^2=0$.
+\end{definition}
+
+We use similar notation to previously. We denote by $E^\vee,\mathcal{E}^\vee $ the graded dual $(E^\vee )^{n} =(E^{-n} )^*$; we denote by $\mathcal{E} _c$ the cosheaf of compactly supported sections; we denote by $\overline{\mathcal{E} } \coloneqq \mathcal{E} \otimes_{C^\infty _M} \mathcal{D}$ the distributional sections (here $\mathcal{D} $ is distributions), and we denote by $E^!,\mathcal{E} ^!$ the object
+\[
+	E^! = E^\vee \otimes \operatorname{Dens}_M,\qquad \mathcal{E} ^! = \mathcal{E}^\vee  \otimes_{C^\infty _M} \mathcal{D} \mathrm{ens}_M
+.\]
+Note that $\overline{\mathcal{E} } _c$ is the continuous dual to $\mathcal{E} ^!$, and $\mathcal{E} _c$ the continuous dual to $\overline{\mathcal{E} } ^!$.
+
+\begin{lemma}\label{lma:6-5-2}
+	A local cochain complex $(\mathcal{E} ,\dd )$ is a sheaf of differentiable cochain complexes. It is also a homotopy sheaf. Similarly, compactly supported sections $(\mathcal{E} _c,\dd )$ is a homotopy cosheaf of differentiable cochain complexes.
+\end{lemma}
+\begin{proof}
+	We work with the cosheaf case; the sheaf case follows similarly. First, we recall how to define a differentiable vector space structure on $\mathcal{E} _c$; this follows from \cref{sec:3-5-5}. Fix an open subset $U\subseteq M$, and let $X$ be any manifold. Let $\pi_X : M\times X \to X$ be the natural projection, and recall that the pullback bundle $\pi ^*_XE$ is defined to have fibers
+	\[
+		\left( \pi ^*_XE \right)_{(x,m)} =E_m
+	.\]
+	Now define $C^\infty (M,\mathcal{E} (U))$ to consist of all smooth sections of $\pi ^*_XE$ over $M\times U$ whose support maps properly to to $X$. More precisely, the projection to $X$, restricted along the support of a section $\pi _X : \operatorname{Supp} s \to X$ is a proper map, i.e. preimages of compact sets are compact.
+
+	The flat connection is defined in coordinates as follows. Given local coordinates $\left\{ x^\mu ,m^\mu  \right\} $ defined on a neighborhood $U$ of a point $(x,m)$, we can choose a local frame $\left\{ e^i \right\} $ for $E$, and thus $\pi ^*_XE$, on this open $U$. Then write a section $s$ as
+	\[
+		s_{(x,m)} =\sum_{i} s_i(m,x)e^i_x
+	\]
+	for some component functions $s_i$. Define the flat connection
+	\[
+		\nabla s = \sum_{j} \left( \sum_{i} \frac{\partial s_i}{\partial m^j} \otimes e^i_x \right) \otimes \dd m^j
+	.\]
+
+	This yields a convenient vector space, amd thus a differentiable vector space.
+
+	Let $\left\{ U_i \right\} _{i\in I} $ be an open cover of some open $U\subseteq M$. Let $ext_i : \mathcal{E} _c(U_i) \to \mathcal{E}_c(U)$ denote the extension-by-zero maps defining the precosheaf structure of $\mathcal{E} _c$. Consider the map
+	\[
+		\sum_{i} ext_i : \bigoplus_{i} \mathcal{E}_c(U_i) \to \mathcal{E} _c(U)
+	.\]
+	We can also consider the map
+	\[
+		\sum_{i,j} ext_{i,j} : \bigoplus_{i,j} \mathcal{E}_c(U_i \cap U_j) \to \mathcal{E} _c(U)
+	.\]
+	Here, $ext_{i,j} $ is the extension-by-zero map $\mathcal{E} _c(U_i \cap U_j) \to \mathcal{E} _c(U)$. Now write $ext_{i,j} ^i$ for the extension-by-zero map $\mathcal{E} _c(U_i \cap U_j) \to \mathcal{E}_c(U_i)$. We can immediately see that the diagrams
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\bigoplus_{i} \mathcal{E} _c(U_i) \ar[" \sum_{i} ext_i ", r]  & \mathcal{E} _c(U) & \bigoplus_{j} \mathcal{E} _c(U_j)\ar["\sum_{j} ext_j ", r]  & \mathcal{E} _c(U) \\
+	\bigoplus_{i,j} \mathcal{E} _c(U_i \cap U_j)\ar[" \sum_{i,j} ext_{i,j}  "', ur] \ar[" \bigoplus_{i,j} ext_{i,j} ^i ", u]  &  & \bigoplus_{i,j} \ar[" \sum_{i,j} ext_{i,j}  "', ur] \ar[" \bigoplus_{i,j} ext_{i,j} ^j ", u]  & 	
+	\end{tikzcd}\]
+	commute due to the nature of the extension-by-zero map. Additionally, the arrows $\sum_{j} ext_j$ and $\sum_{i} ext_i$ are the same morphism, just with a different letter used as the index for notational clarity. We claim that this arrow equalizes the relevant parallel arrows. By linearity of the extension-by-zero maps, and by explicit construction of the coproduct, it suffices to show this for a single section $s_{ij} \in \mathcal{E} _c(U_i \cap U_j)$. Let $p\in U$. We have
+	\[
+		\left( \sum_{i} ext_i \right) \circ \left( \bigoplus_{i,j} ext_{i,j} ^i \right) (s_{ij} )_p = (ext_i \circ ext_{ij} ^i)(s_{ij})_p = 
+		\begin{cases}
+			(s_{ij})_p,& p\in \operatorname{Supp}(s)\\
+			0,&\text{otherwise} 
+		\end{cases}
+	;\]
+	\[
+		\left( \sum_{i} ext_i \right) \circ \left( \bigoplus_{i,j} ext_{i,j} ^i \right) (s_{ij} )_p = (ext_j \circ ext_{ij} ^j)(s_{ij})_p = 
+		\begin{cases}
+			(s_{ij})_p,& p\in \operatorname{Supp}(s)\\
+			0,&\text{otherwise} 
+		\end{cases}
+	.\]
+	Thus, the maps $\sum_{i} ext_i$ and $\sum_{i,j} ext_{i,j} $ form a cocone for the equalizer diagram, yielding a morphism
+	\[
+		ext_I : \colim \left( 
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\displaystyle{\bigoplus_{i,j\in I} \mathcal{E} _c(U_i \cap U_j)}\ar[shift left, r] \ar[shift right, r]  & \displaystyle{\bigoplus_{i\in I} \mathcal{E} _c(U_i)}
+		\end{tikzcd}	\right) \longrightarrow \mathcal{E} _c(U)
+	.\]
+	We will show this map is an isomorphism. We will use a partition of unity.
+
+	Recall that a partition of unity subordinate to the cover $\left\{ U_i \right\} _{i\in I} $ is a collection $\left\{ \rho_i \right\}_{i\in I} $ of nonnegative smooth functions $M \to \mathbb{R} $ such that
+	\begin{itemize}
+		\item every $x\in M$ has a neighborhood in which all but finitely many $\rho _i$ vanish,
+		\item the sum $\sum_{i} \rho _i=1$ at all points, and
+		\item $\operatorname{Supp} \rho _i \subseteq U_i$ for all $i\in I$.
+	\end{itemize}
+	Every open cover has a smooth partition of unity subordinate to it.
+
+	Choose a smooth partition of unity $\left\{ \rho _i \right\} _{i\in I} $ subordinate to the cover $\left\{ U_i \right\} _{i\in I} $. Recall that $\mathcal{E} _c$ is a $C^\infty_M$-module, and thus we can define a morphism $\widetilde{\rho }_i : \mathcal{E}_c(U) \to \mathcal{E}_c(U_i)$ by mapping $v\mapsto \rho _iv$. Here we use the fact that $\operatorname{Supp} \rho _i \subseteq U_i$, meaning $\operatorname{Supp} (\rho _iv) \subseteq U_i$, meaning it is supported in $U_i$. To show that the support is compact, we will argue that the intersection of compact and closed sets in any Hausdorff space is compact. It then follows since $\operatorname{Supp} (\rho _iv) = \operatorname{Supp} (\rho _i)\cap \operatorname{Supp} (v)$.
+
+	Let $X$ be Hausdorff, let $K\subseteq X$ be compact, and let $C\subseteq X$ be closed. In Hausdorff spaces, compact sets are closed, meaning $K$ is closed. Thus, the intersection $K \cap C$ is closed in $X$, and thus closed in $K$ in the subspace topology. Recall that all closed subsets of a compact space are compact, and recall that a subspace is compact with respect to the subspace topology if and only if it is compact as a subset of the full space. Therefore, $K \cap C$ is compact in $K$. Continuous images of compact sets are compact, and thus $K \cap C$ is compact in $X$.
+
+	Now consider the map
+	\[
+		\sum_{i} \widetilde{\rho }_i : \mathcal{E} _c(U) \to \bigoplus_{i} \mathcal{E} _c(U_i)
+	.\]
+	Consider the image of a section $v\in \mathcal{E} _c(U)$ under the map
+	\[
+		\left( \sum_{i} ext_i \right) \circ \left( \sum_{i} \widetilde{\rho }_i \right) : v \mapsto \sum_{i} \rho _iv \mapsto \sum_{i} ext_i(\rho _iv)
+	.\]
+	Of course, $ext_i(\rho _iv)$ is just equal to $\rho _iv$ on the support of $\operatorname{Supp} (\rho _iv)$, and vanishing elsewhere, so we drop the $ext_i$ for simplicity and consider $\rho _iv$ as a section over $\mathcal{E} _c(U)$ via this extension. Evaluating this at a point $p$, we see that not only does this linear combination exist (since all but finitely many $\rho _i$ vanish at $p$), but we have
+	\[
+		\sum_{i} (\rho _iv)_p = \left( \sum_{i} \rho _i(p) \right) v_p=  1v_p = v_p
+	\]
+	by the properties of a partition of unity. Thus,
+	\[
+		\left( \sum_{i} ext_i \right) \circ \left( \sum_{i} \widetilde{\rho }_i \right) = 1_{\mathcal{E} _c(U)} 
+	.\]
+
+	Denote the relevant colimit by $Q$, and use the fact that $\DVS $ is abelian to rewrite the colimit as the exact sequence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\bigoplus_{i,j} \mathcal{E} _c(U_i \cap U_j)}\ar[" f ", r]  & \displaystyle{\bigoplus_{i} \mathcal{E} _c(U_i)}\ar[" g ", r]  & Q\ar[r]  & 0,
+	\end{tikzcd}\]
+	where $f$ is the difference of the two maps that the colimit coequalizes.
+
+	Since this sequence is exact, $g$ is surjective. Thus $\Im g \cong Q$. Applying exactness and the first isomorphism theorem yields
+	\[
+		Q \cong \Im g \cong \frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Ker g} \cong \frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Im f} 
+	.\]
+	We will identify $Q$ with the quotient by $\Im f$, and will identify $g$ with the quotient morphism. We will show that the composition
+	\[
+		g \circ \left( \sum_{i} \widetilde{\rho } _i \right) 
+	\]
+	is a left inverse to $ext_I$. We will verify this on a convenient collection of elements that span $\bigoplus_{i} \mathcal{E} _c(U_i)$. Fix $k\in I$, and let $v = \left\{ v_i \right\}_{i\in I} \in \bigoplus_{i} \mathcal{E} _c(U_i)$ have the property that $v_i = 0$ if $i\neq k$. Write $\widetilde{v} $ for the image of $v$ under $\sum_{i} \widetilde{\rho } _i \circ \sum_{i} ext_i$. Thus,
+	\[
+		\widetilde{v} = \left( \sum_{i} \widetilde{\rho } _i \right) \circ \left( \sum_{i} ext_i \right) (v) = \left( \sum_{i} \widetilde{\rho } _i \right) (v_k) = \left\{ \rho _iv_k \right\}_{i\in I} 
+	.\]
+	Thus, $\widetilde{v}_i = \rho _iv_k$.
+
+	We claim that it suffices to show that $v= \widetilde{v} $ in $Q$. To see this, first note that the collection of all such $v$ clearly span $\bigoplus_{i} \mathcal{E} _c(U_i)$, and thus span the quotient by surjectivity of the quotient morphism. Additionally, let us recall our setup. The map $ext_I$ is a morphism of cocones
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\bigoplus_{i,j\in I} \mathcal{E} _c(U_i \cap U_j)} \ar[" \iota_i ", shift left, rr] \ar[" \iota _j "', shift right, rr] \ar[" g\circ \iota  "', dr] \ar[" \sum_{i,j} ext_{i,j} "', bend right, ddr]  &  & \displaystyle{\bigoplus_{i\in I} \mathcal{E} _c(U_i)}\ar[" g ", dl] \ar[" \sum_{i} ext_i ", bend left, ddl]  \\
+	 & Q \ar[" ext_I ", d]  &  \\
+	 & \mathcal{E} _c(U). & 
+	\end{tikzcd}\]
+	Here we write $\iota $ for either $\iota _i$ or $\iota _j$ when composing with $g$, and we recall the definitions
+	\[
+		\iota _k = \bigoplus_{i,j} ext_{i,j}^k
+	\]
+	for $k\in\left\{ i,j \right\} $. By directly constructing $Q$ as the quotient $\bigoplus_{i} \mathcal{E} _c(U_i) / \Im (\iota _i - \iota _j)$, we can obtain a direct formula for $ext_I$ as the map $[\left\{ s_i \right\}_{i\in I} ]\mapsto \sum_{i} ext_i(s_i)$. Thus, we have actually already shown that $g\circ \sum_{i} \widetilde{\rho } _i$ is a right-inverse for $ext_I$! We will explore this later, to avoid getting distracted. For now, we must explain why showing $v= \widetilde{v} $ in $Q$ is sufficient.
+
+	We are trying to show the composite
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Im f} \ar[" ext_I ", r] } & \mathcal{E} _c(U) \ar[" \sum_{i} \widetilde{\rho } _i ", r]  & \displaystyle{\bigoplus_{i} \mathcal{E} _c(U_i)} \ar[" g ", r] & \displaystyle{\frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Im f} }
+	\end{tikzcd}\]
+	is the identity morphism. Consider the following diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\displaystyle{\bigoplus_{i} \mathcal{E} _c(U_i)}\ar[" \sum_{i} ext_i ", r] \ar[" g "', d]  & \mathcal{E} _c(U)\ar[" \sum_{i} \widetilde{\rho } _i ", r]  & \displaystyle{\bigoplus_{i} \mathcal{E} _c(U_i)}\ar[" g ", d]  \\
+		\displaystyle{\frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Im f} } \ar[" ext_I "', ur] \ar[" 1 "', dotted, rr] &  & \displaystyle{\frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Im f} }.
+	\end{tikzcd}\]
+	The goal is to show that the diagram commutes with the inclusion of the dotted arrow. However, commutativity of the top left triangle means that we need only verify that the outer square (with the inclusion of the dotted arrow) commutes (here we use the fact that cokernels are epi in abelian categories). Indeed, this simply means that given $v$, we must show
+	\[
+		g(v) = \left( g\circ \sum_{i} \widetilde{\rho } _i \circ \sum_{i} ext_i \right) (v) = g( \widetilde{v} )
+	.\]
+	Since $g(v) = [v]$, this is precisely the statement that $v$ and $\widetilde{v} $ descend to the same class in the quotient. We now show this.
+
+	It suffices to show that $v - \widetilde{v} \in \Im f$. We recall that $v_i = 0$ if $i\neq k$, and $\widetilde{v} _i = \rho _iv_k$. Consider $w\in \bigoplus_{i,j} \mathcal{E}_c(U_i \cap U_j)$ given by
+	\[
+		w_{ik} =\rho _iv_k
+	\]
+	for all $i$, and $w_{ij} =0$ for $j\neq k$. Then
+	\[
+		f(w) = \left\{ f(w)_i \right\}_{i\in I} =\left\{ \sum_{j} ext_jw_{ij} -ext_jw_{ji}  \right\}_{i\in I} 
+	.\]
+	For $i\neq k$, we have
+	\[
+		f(w)_i = \sum_{j} w_{ij} -w_{ji} =\sum_{j} w_{ij} = w_{ik} =\rho _iv_k
+	.\]
+	For $i=k$, we have
+	\[
+		f(w)_k = \sum_{j} w_{kj} - w_{jk} =w_{kk} -\sum_{j} w_{jk} =\rho _kv_k - \sum_{j} \rho _jv_k = \rho _kv_k - v_k
+	.\]
+	Here we have used the fact that the partition of unity always sums to 1. Finally, note that if $i\neq k$, then
+	\[
+		\widetilde{v} _i - v_i = \rho _iv_k - 0 = \rho _iv_k = f(w)_i,
+	\]
+	and if $i=k$, then
+	\[
+		\widetilde{v} _k - v_k = \rho _kv_k - v_k = f(w)_k
+	.\]
+	Thus, $\widetilde{v} -v=f(w)$, meaning $\widetilde{v} -v\in \Im f$.
+
+	Now, we return to our discussion of why we have already shown that $g\circ \sum_{i} \widetilde{\rho } _i$ is a right inverse. Recall that we showed
+	\[
+		\left( \sum_{i} ext_i \right) \circ \left( \sum_{i} \widetilde{\rho } _i \right) =1_{\mathcal{E} _c(U)} 
+	.\]
+	Diagramattically, we can obtain the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{E} (U) \ar[" 1 ", bend left, rr] \ar[" \sum_{i} \widetilde{\rho } _i ", r]  & \displaystyle{\bigoplus_{i} \mathcal{E} _c(U_i)} \ar[" \sum_{i} ext_i ", r] \ar[" g ", d]  & \mathcal{E}_c(U) \\
+												     & \displaystyle{\frac{\bigoplus_{i} \mathcal{E} _c(U_i)}{\Im f}} \ar[" ext_I "', dashed,  ur] . & 
+	\end{tikzcd}\]
+	Note that the dashed arrow exists and is unique by the formula we found previously, and thus by commutativity of the diagram, we obtain
+	\[
+		ext_I \circ g \circ \sum_{i} \widetilde{\rho } _i = 1
+	.\]
+	Thus, $\mathcal{E} _c$ is a cosheaf. A similar argument shows that $\mathcal{E} _c$ is a homotopy cosheaf, but I don't feel like working through it.
+\end{proof}
+
+
+The factorization algebras we discuss in field theory are usually constructed from the symmetric algebra on the vector spaces $\mathcal{E} _c(U)$ and $\overline{\mathcal{E} } _c^!(U)$. First, define the completed (with respect to symmetric degree) symmetric algebra
+\[
+	\widehat{\Sym }(V)= \prod_{n} \Sym ^n(V)
+\]
+of a graded topological vector space $V$. The grading is by symmetric degree: an element of homogeneous degree $n$ is a tuple which is everywhere vanishing, except for the $n$th degree. Essentially, it is graded in the exact same way as the usual symmetric algebra, but when viewed as a vector space and not a graded space, we are allowing infinite linear combinations due to the infinite slots in a tuple.
+
+Note that since $\overline{\mathcal{E} } _c^!(U)$ is dual to $\mathcal{E} (U)$, we can view $\widehat{\Sym }(\overline{\mathcal{E} } _c^!(U))$ as the algebra of formal power series on $\mathcal{E} (U)$. Here we note that
+\[
+	\overline{\mathcal{E} } _c^!(U) \cong \mathcal{E}^\vee \otimes _{C^\infty _M} \mathcal{D}\mathrm{ens} _M \otimes_{C^\infty _M} \mathcal{D} _c,
+\]
+where compactly supported distributions are precisely those distributions that extend to $C^\infty_M$, hence $\mathcal{D} _c(U)$ is all continuous linear functionals on $C^\infty(U)$. I spent a ton of time trying to figure out what this duality was, and have concluded that $\mathcal{D} _c$ must denote the continuous linear dual of densities.
+
+Given na inclusion $U\subseteq V$ of open sets, there are natural maps of dg commutative algebras
+\[
+	\Sym \mathcal{E} _c(U)\to \Sym \mathcal{E} _c(V)
+,\]
+\[
+	\widehat{\Sym }\,\mathcal{E} _c(U)\to \widehat{\Sym }\,\mathcal{E} _c(V)
+,\]
+\[
+	\Sym \overline{\mathcal{E} } _c(U)\to \Sym \overline{\mathcal{E} } _c(U)
+,\]
+\[
+	\widehat{\Sym }\,\overline{\mathcal{E} }_c(U)\to \widehat{\Sym }\,\overline{\mathcal{E} }_c(V)
+.\]
+
+\subsection{The main theorem}
+
+\begin{theorem}\label{thm:6-5-3}
+	Let $M$ be a manifold.
+	\begin{enumerate}
+		\item Let $E$ be a vector bundle on $M$. Then
+			\begin{enumerate}
+				\item $\Sym \mathcal{E} _c$ and $\Sym \overline{\mathcal{E} } _c$ are strict (non-homotopical) factorization algebras valued in $\DVS $.
+				\item $\widehat{\Sym}\, \mathcal{E}_c$ and $\widehat{\Sym }\, \overline{\mathcal{E} }_c$ are strict (non-homotopical) factorization algebras valued in the category of differentiable pro-vector spaces.
+			\end{enumerate}
+		\item Let $E$ be a local cochain complex on $M$. Then
+			\begin{enumerate}
+				\item $\Sym \mathcal{E} _c$ and $\Sym \overline{\mathcal{E} } _c$ are homotopy factorization algebras valued in $\Ch_{\DVS } $.
+				\item $\widehat{\Sym }\,\mathcal{E} _c$ and $\widehat{\Sym } \, \overline{\mathcal{E} } _c$ are homotopy factorization algebras valued in differentiable pro-cochain complexes.
+			\end{enumerate}
+	\end{enumerate}
+\end{theorem}
+
+I am tired of typing, so I will omit typing this up. I worked through this proof on a whiteboard.
+
+\section{Factorization algebras from local Lie algebras}
+
+We showed that $\widehat{\Sym }\, \overline{\mathcal{E} } _c$ is a factorization algebra. Intuitively, this means ``functions on $\mathcal{E} $'' satisfy the descent condition. We will now try and do this when $\mathcal{E} $ has more structure. In particular, when $\mathcal{E} $ is a local dg Lie algebra. In particular, we might expect that the Chevalley-Eilenberg chains $C_{\bullet} \mathcal{L} $ and cochains $C_{\bullet} \mathcal{L} $ of a local dg Lie algebra $\mathcal{L} $ is a factorization algebra.
+
+This is compounded from the fact that in the abelian case, we have that $\mathbb{U} \mathcal{L} =C_{\bullet} \mathcal{L}_c =\Sym \mathcal{L}_c[1]$, which we know is a factorization algebra. Indeed, this holds in the more general case of a dg Lie algebra. The following statement holds for $L_\infty $-algebras, which we introduce later.
+
+\begin{theorem}\label{thm:6-5-4}
+	Let $\mathcal{L} $ be a local dg Lie algebra on a manifold $M$. Then the prefactorization algebras
+	\[
+		\mathbb{U} \mathcal{L} : U \mapsto C_{\bullet} (\mathcal{L} _c(U))
+	\]
+	\[
+		\mathbb{O} \mathcal{L} : U\mapsto C^{\bullet} (\mathcal{L}(U))
+	\]
+	are factorization algebras.
+\end{theorem}
+\begin{proof}
+	We start with the factorization envelope. We make the following remark: let $\mathfrak{g} $ be a dg Lie algebra. Then the Chevalley-Eilenberg chains $C_{\bullet} \mathfrak{g}$ have a natural filtration $F_n = \Sym ^{\leq n} (\mathfrak{g} [1])$ compatible with the differential. It's finally time to start nailing down specifics of spectral sequences associated to filtrations, so I comment a bit on this.
+
+	Recall a (decreasing) filtration $F^{\bullet} C$ of a cochain complex $C$ is a sequence of subcomplexes $\cdots \subseteq F^nC \subseteq F^{n-1} C \subseteq \cdots \subseteq C$. There is a spectral sequence associated to this filtration, denoted $E^{p,q}_{\bullet} $. For each $p,q$, the 0th page is given by
+	\[
+		E^{p,q}_0 = \frac{F^pC^{p+q} }{F^{p+1} C^{p+q} } 
+	\]
+	and has 1st page
+	\[
+		E^{p,q}_1 = H^{p,q} (E_0^{p,\bullet} )= H^{p,q} \left( \frac{F^pC^{p+q} }{F^{p+1} C^{p+q} }  \right) 
+	.\]
+	(The complete $i$th page is the direct sum over all $(p,q)$-components). The comparison theorem states that if a map $f : C \to D$ between filtered cochain complexes induces an isomorphism on the $n$th page with $n\geq 1$, then $f$ is a quasi-isomorphism. All of this can be modified for increasing filtations by having $F_nC \subseteq F_{n+1} C$ and setting
+	\[
+		E_{p,q} ^0 = \frac{F_{p} C^{p+q} }{F_{p-1} C^{p+q} } ,\qquad E^1_{p,q} =H^{p,q} (E^0_{p,\bullet} )
+	.\]
+	
+	Note that on $C_{\bullet} \mathfrak{g} $, $F_n$ is indeed a filtration, since $\Sym ^{\leq n} (\mathfrak{g} [1])\subseteq \Sym ^{\leq n+1} (\mathfrak{g} [1])$ tautologically. We have
+	\[
+		E^{p,q}_0 = \frac{\Sym^{\leq p} (\mathfrak{g}[1]^{p+q} )}{\Sym ^{\leq p-1} (\mathfrak{g} [1]^{p+q} )} = \frac{\bigoplus_{i=0}^{p} \Sym ^i(\mathfrak{g} [1]^{p+q} )}{\bigoplus_{i=0}^{p-1} \Sym ^i(\mathfrak{g} [1]^{p+q} )} \cong \Sym^p(\mathfrak{g} [1]^{p+q}) 
+	\]
+	\[
+		\implies E_0 = \bigoplus_{p,q} E^{p,q}_0 = \bigoplus_{p,q} \Sym ^p(\mathfrak{g}[1]^{p+q} )=\bigoplus_{q} \Sym (\mathfrak{g}[1]^q) = \Sym (\mathfrak{g} [1])
+	.\]
+	Here we have used the fact that $\Sym $ and $\oplus $ are colimits, and thus commute. Thus $E_1 = H_{\bullet} (\Sym (\mathfrak{g} [1]))$. Recall that the differential on the Chevalley-Eilenberg chains is the differential $\dd _{\mathfrak{g} } $ extended as a derivation, together with the Chevalley-Eilenberg differential $\dd _{\mathrm{CE} } $, which is the Lie bracket, extended as a coderivation.
+
+	Note that $\dd _{\mathrm{CE} }(F_n) \subseteq F_{n-1} $ (eg. $[x,y]$ is a single element, so $xy\mapsto [x,y]$ decreases symmetric degree), and thus $\dd _{\mathrm{CE} } $ vanishes on $E^{p,q}_0$. Thus, the homology $E_1$ is computed just using the extension of $\dd _{\mathfrak{g} } $.
+
+	Now, we return to the actual proof. Consider the \v{C}ech complex of $\mathbb{U} \mathcal{L} $ with respect to a Weiss cover $\mathfrak{U} $ for an open set $U\subseteq M$. We can apply the given filtration to $\mathbb{U} \mathcal{L} (U)$, but it is unclear how to apply it to $\check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} )$.
+
+	To see how this is done, recall
+	\[
+		\check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} )^{\bullet} = \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \mathbb{U} \mathcal{L} (U_J)[k]^{\bullet},
+	\]
+	where $J = \left\{ j_0, \ldots , j_k \right\} $, and $U_J = U_{j_1} \cap \cdots \cap U_{j_k} $, and $U_{j_i} \in \mathfrak{U} $ for all $j_i\in J$. We note that since $\mathbb{U} \mathcal{L} =C_{\bullet} \mathcal{L}_c$, we can rewrite
+	\[
+		\check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} )^{\bullet} \cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym (\mathcal{L}_c(U_J)[1])[k]^{\bullet}
+	.\]
+	We can then see that the \v{C}ech complex admits the filtration
+	\[
+		F_n\check{C}^{\bullet}  = \bigoplus_{k\geq 0}\bigoplus_{\left| J \right| =k+1} \Sym ^{\leq n} (\mathcal{L} _c(U_J)[1])[k]^{\bullet}
+	.\]
+	
+	I got confused here because I forgot that $C_{\bullet} \mathfrak{g} $ is a cochain complex, even though it is called the Chevalley-Eilenberg \emph{chains}. To see this, recall that $\dd =\dd _{\mathfrak{g}[1]} +\dd _{\mathrm{CE} } $, where
+	\[
+		\dd _{\mathfrak{g}[1]} (x_1 \cdots x_n) =-\dd _{\mathfrak{g} } [1](x_1 \cdots x_n)= -\sum_{i} \pm x_1 \cdots \dd _{\mathfrak{g} }x_i \cdots x_n,
+	\]
+	which has an increased degree of 1 since $\mathfrak{g} $ is a cochain complex; and
+	\[
+		\dd _{\mathrm{CE} } (x_1\cdots x_n) = \sum_{1\leq i<j\leq n}\pm [x_i,x_j] x_1\cdots \widehat{x}_i \cdots \widehat{x} _j \cdots x_n
+	.\]
+	It's a bit tricker to see that this has a higher degree, but recall that if $x_i\in \mathfrak{g}^{k_i} $, then $\left| x_i \right| =k_i - 1$ in $\mathfrak{g} [1]$. Thus since $[x_i,x_j]\in \mathfrak{g} ^{k_i+k_j} $,
+	\[
+		\left| [x_i,x_j] \right| =k_i + k_j - 1,\qquad \left| x_i \right| +\left| x_j \right| = k_i - 1 + k_j - 1
+	.\]
+	Thus $\dd _{\mathrm{CE} } $ also increases degree by 1. I don't know why I forgot this, I've literally derived this like 5 times.
+
+	Ok back to our regularly scheduled programming. We want the canonical map $\check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} )\to \mathbb{U} \mathcal{L} $ to respect the filtation, so that we can lower it to the level of the spectral sequence. Luckily, we can use the fact that we have an explicit description of the map: writing $\varphi : \check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} ) \to \mathbb{U} \mathcal{L} $ and writing $i_J$ for the pushforward $\mathbb{U} \mathcal{L} (U_J)\to \mathbb{U} \mathcal{L} (U)$, and $\pi _0$ for the projection onto the $k=0$ component of the outer direct sum, we have
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\varphi^n : \displaystyle{\bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \mathbb{U} \mathcal{L} (U_J)[k]^n}\ar[" \pi _0 ", r]  & \displaystyle{\bigoplus_{\left| J \right| =n+1} \mathbb{U} \mathcal{L} (U_J)^n}\ar[" \bigoplus_{J} i_J ", r]  & \mathbb{U} \mathcal{L} (U)^n,
+	\end{tikzcd}\]
+	where we note that writing $\mathbb{U} \mathcal{L} (U_J)[k]^n$ as living in degree $n$ is a convenient abuse of notation; it actually lives in degree $k+n$, allowing the given map to be defined. I find it more intuitive to write that than to work out what the degree $n$ is.
+
+	This map clearly respects the symmetric degree. To see this, let $x\in\check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} )$. Then $x$ can be written as a linear combination of components
+	\[
+		x_k\in \bigoplus_{\left| J \right| =k+1} \mathbb{U} \mathcal{L}(U_J)[k]^{n-k}
+	.\]
+	We write $x$ as a tuple $x = \left\{ x_k \right\}_{k\geq 0} $ for simplicity. Recall that the \v{C}ech differential is given by $\mathrm{D} =\bigoplus\dd _{\mathbb{U} \mathcal{L} } +\dd _e$, where $\dd _e$ acts via the inclusion $U_J \subseteq U_{J\setminus \left\{ j \right\} } $, $j\in J$. Using the fact that we already know this is a cochain map, we have
+	\[
+		\pi_0(\mathrm{D} x)  = \dd _{\mathbb{U} \mathcal{L} } x_0
+	.\]
+	All $x_{k\geq 1} $ components vanish under this map, meaning that although their symmetric degree is not preserved, they still land in $\Sym ^0 \subseteq \Sym ^{\leq n} $. Finally, on the $x_0$ component, we just note from our earlier formula for the action of $\dd _{\mathfrak{g} } $ and $\dd _{\mathrm{CE} } $ that the dg Lie algebra differential and Chevalley-Eilenberg differential, extended to the symmetric algebra, preserves symmetric degree. Therefore, $\varphi $ is a filtered map of filtered chain complexes.
+
+	By the comparison theorem, it suffices to show that $\varphi $ induces an isomorphism on the first page. We recall that the first page of $\mathbb{U} \mathcal{L}(U)$ was computed to be $H^{\bullet} (\Sym \mathcal{L} _c(U)[1])$, equipped with only the differential on $\mathcal{L}$. We also can compute the first page of $\check{C}(\mathfrak{U} ,\mathbb{U} \mathcal{L} )$. We start with the zeroth page:
+	\[
+		E^{p,q}_0 = \frac{F_p\check{C}^{p+q} }{F_{p-1} \check{C}^{p+q} } =\frac{\bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym ^{\leq p} (\mathcal{L} _c(U_J)[1])[k]^{p+q-k} }{\bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym ^{\leq p-1} (\mathcal{L} _c(U_J)[1])[k]^{p+q-k} } 
+	\]
+	\[
+		\cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \frac{\Sym ^{\leq p} (\mathcal{L} _c(U_J)[1])[k]^{p+q-k} }{\Sym ^{\leq p-1} (\mathcal{L} _c(U_J)[1])[k]^{p+q-k} } \cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym ^{p} (\mathcal{L} _c(U_J)[1])[k]^{p+q-k} 
+	.\]
+	We then have
+	\[
+		E_0 = \bigoplus_{p,q} \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym ^p(\mathcal{L} _c(U_J)[1])[k]^{p+q-k} \cong \bigoplus_{q} \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym (\mathcal{L} _c(U_J)[1])[k]^{\bullet+q-k} 
+	\]
+	\[
+		\cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right|=k+1} \Sym (\mathcal{L} _c(U_J)[1])[k]^{\bullet-k} 
+	.\]
+	The first page is just the cohomology of this complex. Note that cohomology commutes with $\oplus $ and $\Sym $, so we can write
+	\[
+		E_1 \cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym \left( H^{\bullet} (\mathcal{L} _c(U_J)[1]) \right) [k]^{\bullet-k} 
+	.\]
+	Note that although the shift $[k]$ induces a change in differential $\dd \to  (-1)^k\dd $, this doesnt change the cohomology of the complex. Thus
+	\[
+		E_1 \cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym (H^{\bullet} (\mathcal{L} _c(U_J)[1]))^{\bullet} 
+	.\]
+	It will be useful to decompose this into symmetric degrees, so we rewrite this as
+	\[
+		E_1 \cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} H^{\bullet} \left( \bigoplus_{p\geq 0} \Sym ^p(\mathcal{L} _c(U_J))[1] \right)\cong H^{\bullet} \left( \bigoplus_{p\geq 0} \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \Sym ^p(\mathcal{L} _c(U_J))[1] \right) 
+	.\]
+	Observe that
+	\[
+		\bigoplus_{k\geq 0}\bigoplus_{\left| J \right| =k+1} \Sym ^p(\mathcal{L}_c(U_J))[1] \cong \check{C}(\mathfrak{U} ,\Sym ^p\mathcal{L} _c[1])
+	.\]
+	Thus we obtain
+	\[
+		E_1 \cong \bigoplus_{p\geq 0} \check{C}(\mathfrak{U} ,\Sym ^p\mathcal{L} _c[1])
+	.\]
+	By the comparison theorem, we thus need to consider the induced map
+	\[
+		\varphi : \bigoplus_{p\geq 0} H^{\bullet} (\check{C}(\mathfrak{U}, \Sym ^p\mathcal{L} _c[1])) \to H^{\bullet} (\Sym (\mathcal{L} _c(U)[1]))\cong \bigoplus_{p\geq 0} H^{\bullet} (\Sym^p(\mathcal{L} _c(U)[1]))
+	.\]
+	The action of $\varphi $ is still by $\bigoplus_{J} i_J \circ \pi _0$, since each internal \v{C}ech complex has a $\pi _0$, so we can consider a global $\pi _0$ via the coproduct. These maps manifestly preserve symmetric degree (not cohomological degree, \emph{symmetric} degree; easier to show if you commute $\Sym $ and $H^{\bullet} $ first). Thus, since $\varphi $ respects the $p$-grading, we can decompose it along the direct sum to a collection of maps
+	\[
+		\varphi ^p : H^{\bullet} (\check{C}(\mathfrak{U} ,\Sym ^p(\mathcal{L} _c[1])) \to H^{\bullet} (\Sym(\mathcal{L} _c(U)[1]))
+	.\]
+	Functoriality of $\oplus $ means that it suffices to show each $\varphi ^p$ is an isomorphism. 
+
+	To do this, we re-interepret $\Sym ^p(\mathcal{L} _c(U)[1])$ as compactly supported sections on $U^p$. Recall that a local dg Lie algebra $\mathcal{L} $ is defined as arising as the sheaf of sections of some graded vector bundle $L$ on $M$, where the differential and dg Lie bracket are defined at the level of $\mathcal{L} $. This means that we can rewrite $\mathcal{L} _c(U) \coloneqq \Gamma _c(U,L)$, allowing for the very simple identification
+	\[
+		\Sym ^p(\mathcal{L} _c(U)) \cong \Gamma _c(U^p,L^{\boxtimes p} )^{S_p} 
+	.\]
+	Here, we recall that the exterior tensor product of the bundle is defined by $(L^{\boxtimes p} )_{x}  = L_{x_1} \otimes \cdots \otimes L_{x_p} $, for $x=\left\{ x_1, \ldots ,x_p \right\} \in U^p$. We can then easily identify $\mathcal{L} _c(U)^{\otimes p} \cong \Gamma (U^n,L^{\boxtimes p} )$ by viewing a product $v_1 \otimes \cdots \otimes v_p$ as having $v_i$ be a section of the $i$th copy of $L$ in the exterior tensor product. It then follows immediately that $\Sym ^p(\mathcal{L} _c(U))$ is just given by symmetrizing these sections. We prefer to write $\Gamma_c(-,L^{\boxtimes p} )^{S_p} \eqqcolon \mathcal{L} ^{\boxtimes p}_c(-)^{S_p} $.
+
+	I'm tired of working through this proof and will come back to it at a later date. There are two ideas. 1: use $\Sym ^p(\mathcal{L} _c[1]) \cong \Lambda ^p(\mathcal{L} _c)[p]$, and 2: work on the level of the tensor algebra, allowing us to drop the $S_p$-invariants, and then show that the map descends to the symmetric algebra to become a quasi-isomorphism. Either way, the argument proceeds by using the Weiss cover to define an open cover of $U^p$ by taking powers. We then use a partition of unity subordinate to $U^p$ in a similar way to the previous lemma, and use that to build a contracting homotopy which is $S_p$-invariant. The argument for $\mathbb{O} \mathcal{L} $ is the same, we just use the opposite filtration on the product version of the symmetric algebra.
+\end{proof}
+
+
+

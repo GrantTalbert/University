@@ -1,0 +1,40 @@
+\documentclass[A4, 11pt]{report}
+\input{./preamble.tex}
+
+\title{Factorization Algebras in Quantum Field Theory - Self Study}
+\date{Summer 2026}
+\author{Grant Talbert}
+
+
+% for some reason no worky in preamble when i tried, fix later
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries\centering}{Chapter \thechapter}{10pt}{\Large}
+\titleformat{\section}{\normalfont\large\bfseries\centering}{\thesection}{1em}{}
+
+\begin{document}
+	\maketitle
+
+	\begin{abstract}
+		This document contains notes from my reading of Kevin Costello and Owen Gwilliam's \emph{Factorization algebras in quantum field theory} (\cite{cg1,cg2}). My readings of this book serve as a continuation of a course I took in Spring 2026, taught by Professor \href{https://math.bu.edu/people/szczesny/}{Matiej Szczesny}. It has been about 2 months since I actively worked on this content, so I will complete a brief review of material we covered in class, starting from Chapter 4 on free field theories. My goals are to finish volume 1 by the end of the summer, and preferably begin volume 2.
+
+		\textbf{Notation}. Given a smooth manifold $M$, the sheaf of smooth functions will be denoted $C^\infty _M$. If $M$ is Riemannian, the metric will be denoted $g$, unless otherwise noted. The sheaf of $k$-forms will be denoted $\Omega ^k_M$. Given a fiber bundle $E$, we generally denote the sheaf of sections $\Gamma (-,E)$ by $\mathcal{E} $. Given a graded vector bundle $E$, we also denote the sheaf of sections $\Gamma (-,E)$ by $\mathcal{E} $. We use cohomological grading conventions. The action functional will be denoted $S$, and is considered to be a morphism of presheaves from an appropriate sheaf $\mathcal{E} $ of fields to the constant presheaf $\mathbb{R} $, and we denote by $S_U$ the component of this morphism at the open set $U$. If $X$ is a complex manifold, the sheaf of holomorphic functions is denoted $\mathcal{O} _X$.
+	\end{abstract}
+	
+	
+	\tableofcontents
+
+	% FILES START
+
+	\setcounter{chapter}{2}
+
+	\input{./files/part-I}
+	\input{./files/part-II}
+	\input{./files/part-III}
+	\input{./files/volume-2}
+
+	% FILES END
+
+	\bibliographystyle{alpha}
+	\bibliography{refs}
+\end{document}
+

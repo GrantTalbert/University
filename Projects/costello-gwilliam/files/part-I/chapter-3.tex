@@ -1,0 +1,350 @@
+\chapter{Prefactorization algebras and basic examples}
+
+\setcounter{section}{4}
+
+We covered the majority of chapter 3 in my spring 2026 course, but we skipped the machinery of differentiable vector spaces. Although this \emph{can} be mostly treated as a technical point, I wanted to understand it more completely, so I have reviewed it here.
+
+\section{Some functional analysis}
+
+\subsection{Differentiable vector spaces}
+
+We introduce the preliminary notion of a \emph{site}. This is mostly a technical point required to properly formulate the notion of a sheaf on a category. The intuition is that we wish to view a category $\mathcal{C} $ in a similar way to the category $\Open(X) $ of open sets on a space $X$, so that we may define sheaves on $\mathcal{C} $. \Cref{dfn:3-5-1,dfn:3-5-2,dfn:3-5-3,dfn:3-5-4,dfn:3-5-5} come from \href{https://en.wikipedia.org/wiki/Grothendieck_topology}{wikipedia}. 
+
+\begin{definition}\label{dfn:3-5-1}
+	Let $\mathcal{C} $ be a category and $c\in \mathcal{C} $. A \emph{sieve} on $c$ is a subfunctor of the representable functor $\mathcal{C} (-,c)$. Given a sieve $S$ on $x\in \mathcal{C} $, and a morphism $f : y \to x$ in $\mathcal{C} $, postcomposition yields a sieve $f^*S$ on $y$, called the \emph{pullback of $S$ along $f$}. It is explicitly described as
+	\[
+		(f^*S)(c)= \left\{ g : c \to y \mid f\circ g\in S(c) \right\} 
+	.\]
+\end{definition}
+In the category $\Open(X) $, all hom-sets are singletons or empty. Thus a sieve $S$ on $U$ amounts to a collection $\left\{ V_i \right\} _{i\in I} $ of subsets of $U$; we then define $S(V_i)$ to be the only nonempty values of $S$. Pulling this sieve back along an inclusion $W \subseteq U$ corresponnds to the sieve for the collection $\left\{ V_i \cap W \right\} _{i\in I} $.
+
+Using the fact that in $\Open(X) $ sieves correspond to choices of subsets, we can try to view sieves as a more general notion of an open cover. Not all sieves in an arbitrary category are suitable for this purpose; we must specify a collection of \emph{covering sieves} for some $c\in \mathcal{C} $. This is formalized by a Grothendieck topology.
+\begin{definition}\label{dfn:3-5-2}
+	A \emph{Grothendieck topology} $J$ on $\mathcal{C} $ is a collection $\left\{ J(c) \right\}_{c\in \mathcal{C} } $ of distinguished sieves. We call $J(c)$ the \emph{covering sieves} of $c$. This selection must satisfy the following three axioms.
+	\begin{itemize}
+		\item Pullbacks of covering sieves are covering sieves. In other words, if $f : y \to x$ is a morphism, then for any $S\in J(x)$, we have $f^*S\in J(y)$.
+		\item Let $S$ be a covering sieve on $x$, and let $T$ be any sieve on $x$. If for any $f : y \to x$ in $S(y)$, the pullback $f^*T$ is a covering sieve on $y$, then it follows that $T$ is a covering sieve on $x$.
+		\item The representable functor $\mathcal{C} (-,x)$ is a covering sieve for $x$.
+	\end{itemize}
+	A category $\mathcal{C} $ equipped with a Grothendieck topology $J$ is called a \emph{site}.
+\end{definition}
+
+Following the intuition of $\Open(X) $, we can write down what these axioms intuitively mean. The first axiom represents the idea that if $\left\{ U_i \right\}_{i\in I}$ is a cover of $U$, then $\left\{ U_i \cap V \right\} _{i\in I}$ covers $V$. The second represents the idea that if $\left\{ U_i \right\} _{i\in I} $ is a cover for $U$ and $\left\{ V_{ij}\right\} _{j\in J} $ covers $U_i$ for each $i$, then $\left\{ V_{ij}  \right\} _{i\in I,j\in J} $ covers $U$. The third axiom simply states that $U$ covers $U$. We can write this data more topologically in some cases.
+
+\begin{definition}\label{dfn:3-5-3}
+	A covering family for $c\in \mathcal{C} $ is a collection of morphisms which all map to $c$, but need not have the same domain. A \emph{Grothendieck pretopology} is a collection of distinguished covering families (simply referred to as covering families for simplicity) that satisfy the following axioms.
+	\begin{enumerate}
+		\item If $x\in \mathcal{C} $, then for all $x_0\to x$ in some covering family of $x$ and all morphisms $y\to x$, the pullback $x_0\times _xy$ exists.
+		\item For all $x\in \mathcal{C} $, all $y\to x$, and all covering families $\left\{ x_\alpha \to x \right\} _{\alpha \in A} $, the family $\left\{ x_\alpha \times _xy \to y \right\}_{\alpha \in A} $ is a covering family.
+		\item If $\left\{ x_\alpha \to x \right\} _{\alpha \in A} $ is a covering family, and if $\left\{ x_{\beta \alpha } \to x_\alpha   \right\} _{\beta \in B_\alpha } $ is a covering family for all $\alpha $, then the composites $\left\{ X_{\beta \alpha } \to X_\alpha \to X \right\}_{\alpha \in A,\beta \in B_\alpha } $ is a covering family.
+		\item If $f : Y \cong X$ is an isomorphism, then $\left\{ f \right\} $ is a covering family.
+	\end{enumerate}
+	Given a pretopology for $\mathcal{C} $, the collection of all sieves that contian a covering family from the pretopology is always a Grothendieck topology.
+\end{definition}
+
+\begin{definition}\label{dfn:3-5-4}
+	A \emph{presheaf} on a category $\mathcal{C} $ is a contravariant functor. A \emph{sheaf} $\mathcal{F} $ on a site $(\mathcal{C} ,J)$ is a presheaf $F$ such that for all $x\in \mathcal{C}$ and all $S\in J(x)$, the map
+	\[
+		i^* : \Nat(\mathcal{C} (-,x),\mathcal{F} ) \to \Nat(S,\mathcal{F} )
+	\]
+	induced by the inclusion $i : S \subseteq \mathcal{C} (-,x)$ is an isomorphism. We generally refer to the image of a sheaf on a morphism $f$ by $f^*$, and call it a \emph{pullback map}.
+\end{definition}
+
+\begin{definition}\label{dfn:3-5-5}
+	Let $X$ and $\left\{ V_\alpha  \right\} _{\alpha \in A} $ be spaces. A collection of maps $\left\{ u_\alpha : V_\alpha  \to X \right\}_{\alpha \in A} $ is \emph{jointly surjective} if
+	\[
+		\bigcup_{\alpha \in A} u_\alpha (V_\alpha )=X
+	.\]
+	Define the pretopology on $\Man $ by taking covering families to be jointly surjective families whose members are all open immersions. Covering sieves $S$ for $X$ are then sieves such that
+	\begin{itemize}
+		\item For all manifolds $Y$ and smooth maps $f : Y \to X$, there is a manifold $V$ and an open immersion $g : V \to X$ such that $g\in S(V)$ and $f$ factors through $g$ (i.e. $f=g \circ \widetilde{f} $).
+		\item If $W$ is the union of all sets $f(Y)$, where $Y$ is a manifold and $f\in S(Y)$, then $W=X$.
+	\end{itemize}
+\end{definition}
+
+We may now begin working towards the definition of a differentiable vector space.
+
+\begin{definition}\label{dfn:3-5-6}
+	Let $C^\infty $ denote the sheaf of rings on $\Man$ that maps a manifold $M$ to the commutative $\mathbb{R} $-algebra $C^\infty (M)$. A $C^\infty $-module $\mathcal{F} $ is a sheaf of abelian groups on $\Man$ which is a module over $C^\infty $ in the usual sense: for any manifold $M$, the abelian group $\mathcal{F} (M)$ is a $C^\infty (M)$-module, and for any $f : M \to N$, the pullback map $f^* : \mathcal{F} (N) \to \mathcal{F} (M)$ is a morphism of $C^\infty (N)$-modules.
+\end{definition}
+
+For example, given a topological vector space $V$, there is a natural notion of a smooth map\footnote{For example, let $\Omega \subseteq \mathbb{R} ^n$, and use the topology on $V$ to define a derivative of a map $\Omega \to V$ at some $h\in\mathbb{R} ^n$ with the usual limit definition. Then raise this definition to manifolds using local coordinates.} $M\to V$. Thus we may define a $C^\infty $-module $C^\infty (-,V)$. Being even more specific, let $V$ be the space of smooth maps $C^\infty (N)$ for some manifold $N$, equipped with the usual Fr\'echet topology. It is possible to show that
+\[
+	C^\infty (M,C^\infty (N)) \cong C^\infty (M\times N)
+.\]
+
+Sheaves of $C^\infty $-modules that arise from topological vector spaces are endowed with extra structure: we can always differentiate smooth maps $M\to V$. Differentiation can be viewed as an action of vector fields $\mathfrak{X} (M)$ on the space $C^\infty (M,V)$: in coordinates, $X\in \mathfrak{X} (M)$ is written as $\sum_{i} X^i \partial _i$, so we simply take partial derivatives in coordinates. Dually, we can view derivatives as coming from a connection
+\[
+	\nabla : C^\infty (M,V) \to \Omega ^1(M,V)
+,\]
+where
+\[
+	\Omega ^1(M,V) \coloneqq \Omega ^1(M) \otimes _{C^\infty (M)} C^\infty (M,V)
+.\]
+This tensor product is the usual algebraic tensor product, which is well-behaved since $\Omega ^1(M)$ is a projective $C^\infty (M)$-module of finite rank. I believe the definition is
+\[
+	\nabla f\coloneqq \dd f = \sum_{i} \frac{\partial f}{\partial x^i} \otimes \dd x^i \eqqcolon \sum_{i} \frac{\partial f}{\partial x^i} \dd x^i
+\]
+in coordinates. This would agree with what the book says next: $\nabla \circ \nabla =0$, meaning the connection is flat. Note that evaluating this connection on a vector field yields
+\[
+	\nabla _Xf = (\dd f)(X) = \sum_{i} \frac{\partial f}{\partial x^i} (\dd x^iX)=\sum_{i} X^i \frac{\partial f}{\partial x^i} ,
+\]
+since $\dd x^iX \coloneqq X^i$. Flatness ensures that the action of vector fields is a Lie algebra action, so we get an algebra of \emph{all} differential operators on $M$, not just vector fields on $M$.
+\begin{definition}\label{dfn:5-5-7}
+	Let $\Omega ^1$ denote the $C^\infty $-module $M\mapsto \Omega ^1(M)$. For $F$ any $C^\infty $-module, the $C^\infty $-module of $k$-forms valued in $F$, denoted $\Omega ^k(F)$, is the (algebraic) tensor product
+	\[
+		M\mapsto \Omega ^{k} (M,F)\coloneqq \Omega ^k(M) \otimes _{C^\infty _M} F(M)
+	.\]
+	A \emph{connection} on a $C^\infty $-module $F$ is a map of sheaves on $\Man $
+	\[
+		\nabla : F \to \Omega ^1(F),
+	\]
+	that satisfies the Leibniz rule for any manifold $M$.
+
+	A \emph{differentiable vector space} $F$ is a $C^\infty $-module $F$ equipped with a flat connection. A map $f : F \to G$ of differentiable vector spaces is a morphism of $C^\infty $-modules that intertwines with the flat connections. The category of differentiable vector spaces is denoted $\DVS $.
+\end{definition}
+
+Note that a differentiable vector space $\mathcal{F} $ is a $C^\infty $-module. However, since $C^\infty (M)$ is an $\mathbb{R} $-algebra, we see that $\mathcal{F} (M)$ is an $\mathbb{R} $-vector space with $\mathbb{R} $-action defined as follows. The multiplicative unit of $C^\infty (M)$ is the function $1: M \to \mathbb{R} $ which is constant at $1\in\mathbb{R} $. Since a module can be written as a ring homomorphism $C^\infty (M) \to \End(\mathcal{F} (M)) $, we see that $1$ is a scalar multiplicative unit since ring homomorphisms preserve 1. Now for $v\in \mathcal{F} (M)$ and $c\in\mathbb{R} $, define $c\cdot v \coloneqq (c1)v$.
+
+Most of the differentiable vector spaces we will work with are concrete in nature. Let $\mathcal{F} $ be a sheaf of abelian groups on $\Man $, and postcompose with the forgetful functor $U : \Ab  \to \Set $ to view $\mathcal{F} $ as taking values in $\Set $. Then there is a natural map $\mathcal{F} (M)\to \Set (M,\mathcal{F} (*))$. This map is defined as follows. Given $p\in M$, there is a smooth map $*\to M$ mapping $*\mapsto p$. Write $\varepsilon _p$ for this map. Since $\mathcal{F} $ is a sheaf, there is an induced pullback map $\varepsilon _p^* : \mathcal{F} (M) \to \mathcal{F} (*)$. Now define the map $f : \mathcal{F} (M) \to \Set (M,\mathcal{F} (*))$ by, writing $f_x$ for the function $f(x) : M \to \mathcal{F} (*)$,
+\[
+	f_x(p) \coloneqq \varepsilon_p^*(x)
+.\]
+We say a sheaf $\mathcal{F} $ is \emph{concrete} if this map is injective. The idea of a concrete sheaf is that a section over $M$ is a ``smooth'' map $M\to \mathcal{F} (*)$. For example, define the sheaf $\underline{X} =C^\infty(-,X) $ for a manifold $X$. It is quite clear that $\underline{X} $ is concrete: a section is, by definition, a function $M\to X$, and $\mathcal{F} (*) = C^\infty(*,X) \cong X$. Hence, this sheaf justifies which set-theoretic functions are smooth. Moreover, as noted earlier, $\mathcal{F} (*)$ is guarenteed to be a vector space, and the spaces $C^\infty (M,V)$ are also vector spaces, as expected.
+
+We generally work with the differentiable vector space arising from a topological vector space $V$, which justifies which maps to $V$ are smooth. For this reason, we will usually think of a differentiable vector space $\mathcal{F} $ as an ordinary vector space, given by its value $V=\mathcal{F} (*)$, and will think of sections $\mathcal{F} (M)$ as smooth maps $C^\infty (M,V)$. We often use the notation $C^\infty(M,V) $ for $\mathcal{F} (M)$. We abuse notation further and refer to maps of differentiable vector spaces as \emph{smooth maps}.
+
+\begin{variant}\label{var:3-5-8}
+	There is a Grothendieck topology on the category $\mathcal{C} \Man $ of complex manifolds and holomorphic maps, and a sheaf $\mathcal{O} : \mathcal{C} \Man  \to \Ring $ of holomorphic functions to $\mathbb{C} $. The analog for a differentiable vector space in the complex world is an $\mathcal{O} $-module with a flat connection, which we will call a \emph{holomorphic vector space}. Unfortunately, holomorphic vector spaces are poorly behaved in homological algebra. The main reason differentiable vector spaces are nice is because they are \emph{fine}, meaning they admit a partition of unity in a particular sense, and the global sections functor $\Gamma (M,-)$ is \emph{exact} for fine sheaves. Of course, you cannot define a partition of unity using holomorphic functions, so this fails. This is a big issue, since a local quasi-isomorphism no longer yields a global quasi-isomorphism in this world, and takign global sections over a manifold introduces large issues. We fix this issue by not working with holomorphic vector spaces. As we will see in chapter 5, the main trick for avoiding this issue is by passing to the Dolbeault complex.
+\end{variant}
+
+
+\subsection{Differentiable cochain complexes}
+
+The category $\DVS $ is much nicer than the category of topological vector spaces, so we usually use it, even if most of the objects we work with come from topological vector spaces. The key reason for this is that homological algebra is well-developed for sheaves, even those on a site, which solves many of the issues of doing homological algebra with infinite-dimensional vector spaces.
+
+\begin{definition}\label{dfn:3-5-9}
+	A \emph{differentiable cochain complex} is a cochain complex in the category of differentiable vector spaces. A cochain map $f : V \to W$ of differentiable cochain complexes is a \emph{quasi-isomorphism} if it is a quasi-isomorphism pointwise. This condition is equivalent to asking that the map be a quasi-isomorphism at the level of stalks (usually this is not an equivalence, just an implication).
+\end{definition}
+
+The category of differentiable cochain complexes is denoted $\Ch_{\DVS } $, but may sometimes be denoted $\Ch_{\mathbb{R} } $ in abuse of notation. It is enriched over itself in the usual way.
+
+\begin{discussion}\label{disc:3-5-10}
+	It is useful to further discuss quasi-isomorphisms in this category. Let $f : C^{\bullet}  \to D^{\bullet} $ be a morphism of differentiable cochain complexes. The data of such a morphism can be expressed in two equivalent ways:
+	\begin{itemize}
+		\item For every $i\in\mathbb{Z} $, a morphism $f^i : C^i \to D^i$ of differentiable vector spaces;
+		\item For every manifold $M$, a morphism $f_M : C^{\bullet} (M) \to D^{\bullet} (M)$ of cochain complexes of $\mathbb{R} $-vector spaces (or $C^\infty (M)$-modules, or abelian groups).
+	\end{itemize}
+	Note that the second condition actually preserves exactness of sequences. Note that although we think of $C^{\bullet} (*)$ as the vector space itself, a quasi-isomorphism $C^{\bullet} (*) \simeq D^{\bullet} (*)$ does not yield a quasi-isomorphism $C^{\bullet} \simeq D^{\bullet} $. One must show that the choices of smooth maps are also quasi-isomorphic.
+\end{discussion}
+
+
+\subsection{Differentiable prefactorization algebras}
+
+To define a prefactorization algebra valued in $\DVS $ or $\Ch_{\DVS } $, we need a colored operad structure on $\DVS $. Since intuitively a differentiable vector space is just a vector space with a distinguished collection of smooth maps, it would make sense to define a tensor product using multilinearity.
+
+\begin{definition}\label{dfn:3-5-11}
+	Let $\left\{ V_i \right\} _{1\leq i\leq n}$ be differentiable vector spaces. A \emph{smooth multilinear map}
+	\[
+		\Phi : V_1\times \cdots \times V_n \to W
+	\]
+	is a $C^\infty $-multilinear map $\Phi $ of sheaves that satisfies the following Leibniz rule with respect to the connections on $V_i$ and $W$. For every manifold $M$, and for every $v_i\in V_i(M)$, we require that
+	\[
+		\nabla \Phi (v_1, \ldots ,v_n) = \sum_{i=1}^{n} \Phi (v_1, \ldots , \nabla v_i, \ldots ,v_n)\in\Omega ^1(M,W)
+	.\]
+	We let $\DVS (V_1,\ldots , V_n ; W)$ denote the space of smooth multilinear maps.
+\end{definition}
+
+\begin{discussion}\label{disc:3-5-12}
+	I expand on the definition somewhat. First, recall that since sheaves are functors whose forgetful functor to the functor category preserves limits, by pointwise computation of limits in functor categories we see that
+	\[
+		(V_1 \times \cdots \times V_n)(M) \cong V_1(M) \times \cdots \times V_n(M)
+	.\]
+	Note that $\Phi $, presented as a map from the product, is not a map of sheaves: we would need $\Phi _M$ to be a morphism of $C^\infty (M)$-modules, but it is $C^\infty (M)$-\emph{multi}linear, not linear. However, we factor it through the tensor product to redefine it as a map of sheaves
+	\[
+		\Phi : V_1 \otimes _{C^\infty } \cdots \otimes _{C^\infty } V_n \to W
+	.\]
+	Thus it is indeed a morphism of sheaves.
+\end{discussion}
+
+This yields a colored operad structure for $\DVS $, which promotes to a colored operad structure for $\Ch_{\DVS } $ by grading the tensor product over $C^\infty $. To be more precise, given differentiable cochain complexes $V^{\bullet}_i, W^{\bullet} $ for $1\leq i\leq n$, a smooth multilinear map is simply a map of cochain complexes
+\[
+	\Phi ^{\bullet} : V^{\bullet} _1 \otimes _{C^\infty } \cdots \otimes _{C^\infty } V^{\bullet} _n \to W
+\]
+which is compatible with the connections pointwise, meaning for any $k$, the map
+\[
+	\Phi ^k : \bigoplus_{a_1 + \cdots + a_n = k}\left( V_1^{a_1} \otimes _{C^\infty} \cdots \otimes _{C^\infty} V_1^{a_1}\right) \to W^k
+\]
+is a smooth multilinear map of differentiable vector spaces.
+
+\begin{definition}\label{dfn:3-5-13}
+	A \emph{differentiable prefactorization algebra} is a prefactorization algebra in $\Ch_{\DVS } $.
+\end{definition}
+
+In other words, a differentiable prefactorization algbera $\mathcal{F} $ on a space $X$ assigns a differentiable cochain complex $\mathcal{F} (U)$ to every open set $U\subseteq X$. We intuitively think of $\mathcal{F} (U)$ as the cochain complex of vector spaces $\mathcal{F} (U)(*)$, and simply note that the datum of a (quasi-iso)morphism carries the structure of the smooth maps on $\mathcal{F} (U)(*)$. This philosophy is not only well-supported by the theory, but is well-supported by our use case: the main reason for defining differentiable vector spaces is not for the added mobility of being able to choose smooth maps on a vector space, but rather for being able to work with a (usually canonical) smooth structure on farily tame topological vector spaces.
+
+\subsection{Relationship with topological vector spaces}
+
+Recall that a topological vector space is just a vector space with a topology such that $+,\cdot $ are continuous. We have seen that we may view (sufficiently well-behaved) topological vector spaces as differentiable vector spaces in at least one way. This method is fairly canonical:
+\begin{theorem}\label{thm:3-5-14}
+	Let $\mathrm{LCTVS}$ denote the category of locally-convex Hausdorff topological vector spaces, and continuous maps. Let $\mathrm{BVS} $ denote the category with the same objects, and morphisms given by bounded linear maps. The functor $\mathrm{LCTVS} \to \DVS $ embeds $\mathrm{BVS} \subseteq \mathrm{LCTVS} $ as a full sub-colored operad of $\DVS $.
+\end{theorem}
+This theorem tells us that viewing topological vector spaces as differentiable vector spaces does not lose much information. However, we should also say something about completeness for a topological vector space.
+
+\begin{definition}\label{dfn:3-5-15}
+	A topological vector space $V\in \mathrm{BVS} $ is \emph{$c^\infty $-complete}, or \emph{convenient}, if every smooth map $c : \mathbb{R}  \to V$ has an antiderivative. The category of convenient vector spaces and bounded linear maps is denoted $\mathcal{CVS} $.
+\end{definition}
+
+This definition is somewhat weaker than the usual notion of completeness for a topological vector space. Thus, all complete topological vector spaces are $c^\infty $-complete, including Banach and Hilbert spaces. The usefulness of this approach is it focuses only on differentiability.
+
+\begin{proposition}\label{prp:3-5-16}
+	The full subcategory $\mathcal{CVS} \subseteq \DVS $ is closed under small limits, countable coproducts, and sequential colimits of closed embeddings.
+\end{proposition}
+
+We give $\mathcal{CVS} $ a colored operad structure inherited from $\DVS $ and $\mathrm{BVS} $. We will now recast this colored operad structure as a particular tensor product on the category.
+
+\begin{theorem}\label{thm:3-5-17}
+	The colored operad structure on $\mathcal{CVS} $ is represented by a symmetric monoidal structure with tensor product denoted by $\widehat{\otimes }_{\beta } $.
+\end{theorem}
+
+This symmetric monoidal structure is called the \emph{completed bornological tensor product}. If $E,F\in \mathcal{CVS} $, this completed bornological tensor product is written as $E\, \widehat{\otimes }_{\beta } \, F$. \Cref{thm:3-5-16} means that smooth multilinear maps $f : E_1\times E_2 \to F$ are the same as smooth/bounded linear maps $f : E_1 \, \widehat{\otimes }_{\beta } \, E_2\to F$. When no confusion may arise, we often write $\otimes $ instead of $\widehat{\otimes } _{\beta } $.
+
+\subsection{Examples from differential geometry}\label{sec:3-5-5}
+
+The following examples will form the building blocks of most factorization algebras we will consider. Much of the theory reduces to that of usual vector spaces.
+
+Let $E$ be a vector bundle on a manifold $X$. Let $\mathcal{E} $ denote the sheaf of sections, and $\mathcal{E} _c$ the cosheaf of compactly supported sections. We construct DVS structures for the vector spaces of sections of these objects.
+
+Let a smooth map $M\to \mathcal{E} $ be defined as a smooth section of the bundle $\pi^*_XE$ on $M\times X$. Thus the set of smooth maps $C^\infty (M,\mathcal{E} (X))$ is defined as
+\[
+	C^\infty (M,\mathcal{E} (U)) \coloneqq \Gamma (M\times U, \pi_X^*E)
+.\]
+The map $U\mapsto C^\infty (-,\mathcal{E} (U))$ is a sheaf on $X$ valued in $C^\infty $-modules $M\mapsto C^\infty (M,\mathcal{E} (U))$. Fixing $U$, define a flat connection on this sheaf as follows. Let $s$ be a section of $\pi _X^*E$ over $M\times U$, and note that $(\pi _X^*E)_{(m,x)} =E_x$. Choose a point $(m,x)$, and choose coordinates $\left\{ m^i,x^j \right\}$ for a neighborhood of this point. Choose a local frame $\left\{ e^i \right\} $ for $E$, and thus $\pi _X^*E$, on these coordinates. Then $s$ can be written as
+\[
+	s_{(m,x)} =\sum_{i} s_i(m,x)e^i_x
+\]
+for some component functions $s_i$. Since the vector spaces do not change as we move along $M$, it makes sense to define the connection by differentiating along the coordinates for $M$. Indeed, define
+\[
+	\nabla s \coloneqq \sum_{j} \left( \sum_{i} \frac{\partial s_i}{\partial m^j} \otimes e^i_x \right) \otimes \dd m^j
+.\]
+Thus, $\mathcal{E} $ is a sheaf of differentiable vector spaces.
+
+The cosheaf $\mathcal{E} _c$ is defined similarly. Smooth maps $M\to \mathcal{E} _c(U)$ are smooth sections of the same bundle whose support maps properly to $M$. Here, the word ``properly'' means proper in the sense of a proper map, meaning the projection $\pi _M|(M\times \operatorname{Supp}s) : M\times \operatorname{Supp} s \to M$ is proper (preimages of compact sets are compact). This yields a cosheaf on $X$ valued in differentiable vector spaces (the connection is the same).
+\begin{theorem}\label{thm:3-5-18}
+	With this differentiable structure, $\mathcal{E} (X)$ and $\mathcal{E} _c(X)$ are in the full subcategory $\mathcal{CVS} $ of convenient vector spaces. Further, since any open subset $U\subseteq X$ is a submanifold in its own right, $\mathcal{E} $ and $\mathcal{E} _c$ promote to (co)sheaves valued in convenient vector spaces. Finally, these differentiable structures are the same as those arising from the natural topologies on sections of $\mathcal{E} ,\mathcal{E}_c$.
+\end{theorem}
+
+Let $E$ be a vector bundle over $X$. Denote by $\overline{\mathcal{E} } $ the \emph{distributional sections of $E$}, defined by
+\[
+	\overline{\mathcal{E} } \coloneqq \mathcal{E} \otimes _{C^\infty_X} \mathcal{D} 
+,\]
+where $\mathcal{D}(U)$ is the space of distributions on $U\subseteq X$. Similarly, let $\overline{\mathcal{E} } _c$ denote the compactly supported distributional sections of $E$ on $X$. We define the inclusions
+\[
+	\mathcal{E} _c \hookrightarrow \overline{\mathcal{E} } _c \hookrightarrow \overline{\mathcal{E} } ,
+\]
+\[
+	\mathcal{E} _c \hookrightarrow \mathcal{E} \hookrightarrow \overline{\mathcal{E} } 
+\]
+by viewing smooth functions as distributions. More precisely, if $1$ is the constant function $X\to \mathbb{R} $ at 1, and $\iota : C^\infty _X \to \mathcal{D} $ is the standard inclusion, then the inclusion $\mathcal{E} \hookrightarrow \overline{\mathcal{E} } $ is the map $s\mapsto s\otimes \iota (1)$. Note that distributions on manifolds are the dual of top forms. This inclusion effectively explains all the other non-obvious inclusions as well.
+
+Let $E^! \coloneqq E^* \otimes \operatorname{Dens}_X$, and note that there is a pairing $\mathrm{ev} : E\otimes E^! \to \mathrm{Dens}_X$. The differential structure on $\overline{\mathcal{E} } ,\overline{\mathcal{E} } _c$ can now be described as follows.
+\begin{theorem}\label{thm:3-5-19}
+	For any manifold $M$, a smooth map $M\to \overline{\mathcal{E} } (U)$ is the same as a smooth linear map
+	\[
+		\mathcal{E} ^!_c(U) \to C^\infty (M)
+	.\]
+	Similarly, a smooth map $M\to \overline{\mathcal{E} } _c(U)$ is the asme as a smooth linear map
+	\[
+		\mathcal{E} ^! \to C^\infty (M)
+	.\]
+\end{theorem}
+
+\subsection{Multilinear maps and enriched spaces of maps}
+
+The category $\DVS $ also has a natural tensor product and internal hom. If $V,W$ are differentiable vector spaces, then since they are $C^\infty $-modules, we might define the tensor product to be $\otimes _{C^\infty } $. Indeed, it inherits a new flat connection $\nabla _V \otimes 1_W + 1_V \otimes \nabla _W$. However, this tensor product is poorly behaved in analysis. For example, if $M,N$ are manifolds, then
+\[
+	C^\infty (M) \otimes _{C^\infty } C^\infty (N) \neq C^\infty (M\times N)
+\]
+in general. This is an issue, since this is what we would expect from an appropriately completed tensor product. Thus, the colored operad structure is preferable to the tensor product. When restricting to convenient vector spaces, we may freely use the tensor product in $\mathcal{CVS} $, which coencides with the colored operad structure. Oftentimes we will still consider a tensor product of differentiable vector spaces in the case that they are \emph{convenient} vector spaces. This is a fair use of notation by \cref{thm:3-5-17}.
+
+There is an internal hom $\mathcal{H} \mathrm{om} _{\DVS } (V,W)$ given by the sheaf hom. However, the sheaf hom does not really capture the notion of ``smooth families of maps'', so this definition doesn't make much sense. Instead, we use a different enrichment.
+
+\begin{definition}\label{dfn:3-5-20}
+	Let $V$ be a differentiable vector space and $M$ a manifold. Write $\mathbf{C}^\infty (M,V)$ for the differentiable vector space
+	\[
+		N\mapsto C^\infty (N\times M,V)
+	\]
+	with connection
+	\[
+		\nabla _{N,\mathbf{C}^\infty (M,V)} : C^\infty (N,\mathbf{C} ^\infty (M,V)) \to \Omega ^1(N,\mathbf{C}^\infty (M,V))
+	\]
+	given by the composition of the flat connection
+	\[
+		\nabla_{N\times M} : C^\infty (M\times N,V) \to \Omega ^1(M\times N,V)\cong \Omega ^1(M,\mathbf{C} ^\infty (N,V))\oplus \Omega ^1(N,\mathbf{C} ^\infty (M,V))
+	\]
+	with the projection onto $\Omega ^1(N, \mathbf{C} ^\infty (M,V))$.
+\end{definition}
+Here we use $T^*_{M\times N} \cong \pi _M^*T^*M \oplus \pi _N^*T^*_N$. This makes $\DVS $ into a category cotensored over $\Man $. Note that $C^\infty (M)$ is a ring object in $\DVS $, so we refer to it as a \emph{differentiable ring}.
+
+This construction is fairly intuitive. We want $C^\infty (M,V)$ to be a differentiable vector space itself. We would want to think of a smooth map $N\to C^\infty (M,V)$ as the same as a smooth map $N\times M\to V$ in the following way. If $f : N \to C^\infty (M,V)$ maps $n\mapsto f_n : M \to V$, then we could identify $f$ with a map $\widehat{f} : N\times M \to V$ which maps $\widehat{f} (n,m)=f_n(m)$. Hence we think of $\mathbf{C} ^\infty $ as a sort of ``almost'' internal hom for manifolds and differentiable vector spaces. Hence $\DVS $ being cotensored over $\Man $.
+
+This construction generalizes. If $E$ is a vector bundle, define
+\[
+	\mathbf{C}^\infty (M, E\otimes V)\coloneqq \mathcal{E} (M)\otimes _{C^\infty(M) } \mathbf{C} ^\infty (M,V)
+.\]
+Although in general tensor products in $\DVS $ are ill-behaved analytically, problems do not arise here since $\mathcal{E}$ is a projective $C^\infty _M$-module of finite rank. We will denote
+\[
+	\boldsymbol{\Omega} ^1(M,E)\coloneqq \mathbf{C} ^\infty (M,T^*M \otimes E)
+.\]
+
+We want to create an internal hom for $\DVS $ using $\mathbf{C} ^\infty $.
+\begin{definition}\label{dfn:3-5-21}
+	Let $\left\{ V_i \right\} _{1\leq i\leq n} $ and $W$ be differentiable vector spaces. Given a manifold $M$, a smooth family of multilinear maps $V_1 \times \cdots \times V_n \to W$ \emph{parameterized by $M$} is an element of
+	\[
+		\DVS (V_1, \ldots , V_n ; \mathbf{C} ^\infty (M,W))
+	\]
+	where we regard $\mathbf{C} ^\infty (M,W)$ as a differentiable vector space via \cref{dfn:3-5-20}.
+\end{definition}
+
+The intuition for this definition is as follows. Let $N$ be any test manifold A smooth multilinear map
+\[
+	\Phi : V_1 \times \cdots \times V_n \to \mathbf{C} ^\infty (M,W)
+\]
+yields a map
+\[
+	\Phi _N : V_1(N)\times \cdots \times V_n(N) \to \mathbf{C} ^\infty (N\times M,W)\cong C^\infty (M,C^\infty (N,W)) = C^\infty (M,W(N))
+.\]
+The final isomorphism was explored informally earlier. Fix $m\in M$. Including $i_m : N\hookrightarrow N\times M$ along $m\in M$ yields a pullback map $i^*_m : W(N\times M) \to W(N)$. Thus we obtain a map
+\[
+	\Phi _{N,m} =
+\left(	\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	V_1(N) \times \cdots \times V_n(N) \ar[" \Phi _N ", r]  & W(N\times M)\ar[" i_m^* ", r]  & W(N)
+	\end{tikzcd}\right)
+.\]
+Naturality allows us to rewrite $\Phi _m : V_1 \times \cdots V_n \to W$ as a map of differentiable vector spaces, justifying the terminology.
+
+It can then be shown that there is a differentiable vector space $\mathbb{H} \mathrm{om} _{\DVS } (V_1, \ldots , V_n ; W)$ defined by
+\[
+	\mathbb{H} \mathrm{om} _{\DVS } (V_1, \ldots , V_n ; W) : M\mapsto \DVS (V_1, \ldots , V_n ; \mathbf{C} ^\infty (M,W))
+.\]
+The flat connection is the natural map
+\[
+	\boldsymbol{\nabla }_{\mathbf{C}^\infty (M,W)} : \mathbf{C}^\infty (M,W) \to \boldsymbol{\Omega} ^1(M,W)
+\]
+given by applying the projection in the $M$-direction to the connection $\nabla _{M\times N,W} $.
+
+In the rest of the text, if we consider a smooth family of maps between differentiable vector spaces, we always mean an element of the internal hom in this sense.
+
+\subsection{Algebras of observables}
+
+The prefactorization algebras of observables we will see in this book are mostly built as functions on convenient vector spaces, which will mean symmetric algebras and their dual spaces. Most of these will be built on sections of graded vector bundles. Let $\widehat{\otimes } _{\pi } $ denote the completed projective tensor product in LCTVS.
+
+\begin{proposition}\label{prp:3-5-22}
+	Let $E$ be a vector bundle on a manifold $X$, and let $F$ be a vector bundle on a manifold $Y$. Let $\mathcal{E} $ denote the sheaf of convenient vector spaces of smooth sections of $E$ on $X$, and likewise for $\mathcal{F} $. Then
+	\[
+		\mathcal{E} (X)\,\widehat{\otimes } _{\beta } \, \mathcal{F} (Y) \cong \Gamma (X\times Y, E\boxtimes F) \cong \mathcal{E} (X)\, \widehat{\otimes } _{\pi } \mathcal{F} (Y),
+	\]
+	where $E\boxtimes F$ denotes the external tensor product of vector bundles and $\Gamma $ denotes smooth sections.
+\end{proposition}
+
+The book then does some nonsense with symmetric algebras that I do not feel the need to review. What I will note is that the usual tensor product is dense in the bornological tensor product, meaning it suffices to still work with tensors as usual when considering elements.

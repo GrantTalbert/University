@@ -1,0 +1,330 @@
+\chapter{Just enough category theory to be dangerous}
+
+\section{Categories and functors}
+
+\begin{exercise}
+	Make sense of the definition of a group as a groupoid with one object. Then describe a groupoid that is not a group.
+\end{exercise}
+\begin{proof}
+	For the first, given a group $G$, we define a category $\mathbf{B} G$ with one object $*$, morphisms $\mathbf{B} G(*,*)\coloneqq G$, and composition, for any $g,h\in \mathbf{B} G(*,*)$, given by $h\circ g \coloneqq h\cdot g,$ for $\cdot$ the group operation. For the second, let $X$ a space, and $\Pi _1(X)$ the fundamental groupoid given by taking $\Obj(\Pi _1(X)) \coloneqq X$ and, for any $x,y\in X$, define $\Pi _1(X)(x,y)$ to be homotopy classes of paths from $x$ to $y$. The subscript 1 is a reference to the fact that one could define a fundamental $n$-groupoid for any $n$, including $n=\infty $. Often we simply write $\Pi (X)$ for $\Pi _1(X)$.
+\end{proof}
+
+
+\begin{notation}
+	Let $\mathcal{C} $ a category. If $x,y\in \mathcal{C} $, then \cite{vakil} often writes $h^c : \mathcal{C}  \to \Set $ for the representable functor $h^c = \mathcal{C} (c,-)$. Similarly, he writes $h_c = \mathcal{C} (-,c): \mathcal{C} ^{\mathrm{op}}  \to \Set $. He refers to the latter as the \emph{functor of points}.
+\end{notation}
+
+\begin{exercise}
+	Let $\mathrm{f}\Vect_{k} $ be the category of finite-dimensional $k$-vector spaces. Show that the double dual functor $(-)^{* *} \cong 1 : \mathrm{f} \Vect_{k}  \to \mathrm{f} \Vect_{k} $.
+\end{exercise}
+\begin{proof}
+	Let $V$ a finite-dimensional $k$-vector space. Let $v\in V$, let $\varphi \in \Hom_{k}(V , k) $, and write $\varepsilon _v : \Hom_{k}(V, k)  \to k$ for the map $\varepsilon _v(\varphi )=\varphi (v)$. We claim the map $v\mapsto \varepsilon _v$ determines a natural isomorphism $\varepsilon : (-)^{* *} \cong 1$. First, note that this map is $k$-linear: for $u,v\in V$, by $k$-linearity of $\varphi $,
+	\[
+		\varepsilon _{u+v} (\varphi ) = \varphi (u+v) = \varphi (u)+\varphi (v) = \varepsilon _u(\varphi )+\varepsilon -v(\varphi )
+	.\]
+
+	We show this is an isomorphism by counting dimensions. We are allowed to choose a basis to prove that $\varepsilon $ is an isomorphism without making it non-canonical, since the map itself is not canonical. Let $\left\{ e_i \right\}_{1\leq i\leq n} \subseteq V$ a basis, let $\left\{ \delta _i \right\}_{1\leq i\leq n} \subseteq V^*$ be the dual basis $\delta _i(e_j)=\delta _{ij} $, and let $\left\{ \varepsilon _i \right\} _{1\leq i\leq n} \subseteq V^{* *} $ be $\varepsilon _i \coloneqq \varepsilon _{e_i} $. Of course it is easy to show that the dual basis $\delta _i$ is indeed a basis. Given $\varphi \in V^*$, we immediately have
+	\[
+		\varphi =\sum_{1\leq i\leq n} \varphi (e_i)\delta _i
+	.\]
+	Moreover, the $\delta _i$'s are linearly independent by linear independence of the $e_i$'s: if $\left\{ c_i \right\} _{1\leq i\leq n} \subseteq k$ such that $\sum_{i} c_i\delta _i=0$, then
+	\[
+		\left( \sum_{1\leq i\leq n} c_i\delta _i \right) (e_j) = c_j\delta _j(e_j) = c_j=0
+	\]
+	implies $c_j=0$ for all $j$. Now simply note that $\varepsilon _i(\delta _j) = \delta _j(e_i) = \delta _{ij}$, meaning $\left\{ \varepsilon _i \right\} _{1\leq i\leq n} $ is the dual basis of $\left\{ \delta _i \right\} _{1\leq i\leq n} $. Thus $\dim V = \dim V^* = \dim V^{* *} $. Moreover, we see that the map $\varepsilon _{(-)} $ maps the basis $\left\{ e_i \right\} _{1\leq i\leq n} $ to the basis $\left\{ \varepsilon _i \right\} _{1\leq i\leq n} $, meaning it is an isomorphism.
+
+	Finally, we show naturality. Let $\varphi : V \to W$ be $k$-linear, and $v\in V$. Since $(-)^* = \Hom_{k}(-, k) $, the induced map $\varphi ^* : V^* \to W^*$ is given by precomposition by $\varphi $, and the induced map $\varphi ^{* *} = (\varphi ^*)^* : V^{* *}  \to W^{* *} $ is given by precomposition by $\varphi ^*$. Naturality amounts to showing $\varphi ^{* *}(\varepsilon _v) = \varepsilon _{\varphi (v)} $. Let $\psi \in V^*$. We have
+	\[
+		\varphi ^{* *} (\varepsilon _v)(\psi ) = (\varepsilon _v \circ \varphi ^*)(\psi ) = \varepsilon _v(\psi \circ \varphi ) = (\psi \circ \varphi )(v)=\psi (\varphi (v)) = \varepsilon _{\varphi (v)} (\psi )
+	.\]
+	This proves naturality.
+\end{proof}
+
+\section{Universal properties determine an object up to unique isomorphism}
+
+\begin{example}
+	Let $A$ a ring and $S\subseteq A$ a subset closed under multiplication and containing 1. Such a subset is called \emph{multiplicative}. The \emph{localization of $A$ at $S$}, denoted $S^{-1} A$, is initial with respect to inverting $S$. More precisely, given any $A$-algebra $B$ and algebra homomorphism $A\to B$ which sends each $s\in S$ to an invertible element of $B$ must factor uniquely through a map $A\to S^{-1} A$. We generally define $S^{-1} A$ by formally adding inverses $1/s$ to each $s\in S$, and we define the map by $a\mapsto a/1$.
+\end{example}
+\begin{remark}
+	One can also define localizations of $A$-modules at a multiplicative subset $S$ of $A$.
+\end{remark}
+
+\begin{exercise}\label{ex:1:2:3}
+	Let $A,B,C$ rings and $A\to B$, $A\to C$ maps of rings. Define a ring structure on $B\otimes _AC$ in a natural way.
+\end{exercise}
+\begin{proof}
+	First we define an $A$-module structure on $B$ and $C$. Let $\varphi _B : A \to B$ and $\varphi _C : A \to C$ be the given maps, and define for any $a\in A$, $b\in B$, $c\in C$ scalar multiplication by $a\cdot b\coloneqq \varphi_B(a)b$, and $a\cdot c\coloneqq \varphi_C(a)c$. Since $\varphi _B$ and $\varphi _C$ are ring homomorphisms, this is easily seen to yield $A$-module structures on the given rings. We thus have an $A$-module $B\otimes _AC$, so we define multiplication in the natural way on pure tensors by
+	\[
+		(b_1\otimes c_1)(b_2\otimes c_2)\coloneqq b_1b_2\otimes c_1c_2
+	.\]
+\end{proof}
+
+\begin{definition}\label{dfn:1-2-4}
+	If $\pi : x \to y$ is a morphism and $x\times _yx$ exists, then the map $\pi \times _y\pi : x \to x\times _yx$ is denoted $\delta _{\pi } $, and called the \emph{diagonal morphism}.
+\end{definition}
+
+
+\begin{exercise}
+	Let $x_1,x_2\to y$ and $y\to z$ be morphisms. Show that there is a pullback diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times _yx_2\ar[r] \ar[d]  & x_1\times_zx_2\ar[d]  \\
+	y\ar[r]  & y\times _zy
+	\end{tikzcd}\]
+\end{exercise}
+\begin{proof}
+	To make the proof easier to read, the following diagrams establish notation for all relevant maps, and make it transparent how the map $p_y^z : x_1\times _yx_2 \to x_1\times _zx_2$ arises:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x_1\times _yx_2\ar[" \delta _x ", dr] \ar[" \pi _1^y ", r] \ar[" \pi _2^y "', d]  & x_1 \ar[" f_1 ", d]  &  & x_1\times _yx_2 \ar[" \pi _1^y ", bend left, drr] \ar[" \pi _2^y "', bend right, ddr] \ar[" p_y^z ", dashed, dr]  &  &  \\
+	x_2 \ar[" f_2 "', r]  & y \ar[" g ", dr]  &  &  & x_1\times _zx_2 \ar[" \pi _1^z ", r] \ar[" \pi _2^z "', d]  & x_1 \ar[" g\circ f_1 ", d]  \\
+	 &  & z &  & x_2 \ar[" g\circ f_2 "', r]  & z
+	\end{tikzcd}\]
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times _zx_2 \ar[" f_1 \circ \pi _1^z ", bend left, drr] \ar[" f_2\circ \pi _2^z "', bend right, ddr]  \ar[" p_x^y ", dashed, dr] &  &  \\
+	 & y\times _zy \ar[" \pi _y^z ", r] \ar[" \pi _y^z "', d]   & y\ar[" g ", d]  \\
+	 & y\ar[" g "', r]  & z.
+	\end{tikzcd}\]
+	We label these diagrams (1), (2), and (3), respectively. Our goal is to show that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times _yx_2 \ar[" p_y^z ", r] \ar[" \delta _x "', d]  & x_1\times_zx_2\ar[" p_x^y ", d]  \\
+	y \ar[" \delta_g "', r ]  & y\times _zy
+	\end{tikzcd}\]
+	commutes, and is a pullback diagram. By universality, $p_x^y \circ p_y^z : x_1\times _yx_2 \to y\times _zy$ should give rise to a morphism $p_x^y\circ p_y^z : x_1\times _yx_2 \to y$ as indicated by the dotted arrows, rendering the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x_1\times _yx_2 \ar[dotted, bend left, drr] \ar[dotted, bend right, ddr] \ar[" p_x^y\circ p_y^z ", dr]  &  &  \\
+	 & y\times _zy \ar[" \pi _y^z ", r] \ar[" \pi _y^z "', d]  & y\ar[" g ", d]  \\
+	 & y\ar[" g "', r]  & z
+	\end{tikzcd}\]
+	commute. Commutativity forces the dotted arrows to be $\pi _y^z \circ p_x^y \circ p_y^z$. Using diagrams (1-3), we find that for any $i=1,2$,
+	\begin{align*}
+		\pi _y^z \circ p_x^y \circ p_y^z &= f_i \circ \pi _i^z \circ p_y^z & (3) \\
+						 &=f_i \circ \pi _i^y & (2)\\
+						 &=\delta _x  & (1)
+	.\end{align*}
+	Hence
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x_1\times _yx_2 \ar[" \delta _x ", bend left, drr] \ar[" \delta _x "', bend right, ddr] \ar[" p_x^y\circ p_y^z ", dashed, dr]  &  &  \\
+	 & y\times _zy \ar[" \pi _y^z ", r] \ar[" \pi _y^z "', d]  & y\ar[" g ", d]  \\
+	 & y\ar[" g "', r]  & z
+	\end{tikzcd}\]
+	commutes. Now consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times _yx_2 \ar[" \delta _x ", dr] \ar[" \delta _x ", bend left, ddrrr] \ar[" \delta _x "', bend right, dddrr]  &  &  &  \\
+															  & y \ar[" \delta _g ", dashed, dr] \ar[equals, bend left, drr] \ar[equals, bend right, ddr]  &  &  \\
+	 & & y\times _zy \ar[" \pi _y^z ", r] \ar[" \pi _y^z "', d]  & y\ar[" g ", d]  \\
+	 & &  y \ar[" g "', r]  & z.
+	\end{tikzcd} = \begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		x_1\times _yx_2 \ar[" \delta _x ", bend left, drr] \ar[" \delta _x "', bend right, ddr] \ar[" \delta _g\circ \delta _x ", dashed, dr]  &  &  \\
+	 & y\times _zy \ar[" \pi _y^z ", r] \ar[" \pi _y^z "', d]  & y\ar[" g ", d]  \\
+	 & y\ar[" g "', r]  & z
+	\end{tikzcd}\]
+	By uniqueness of the dashed arrows, we conclude that $\delta _g \circ \delta _x = p_x^y \circ p_y^z$.
+
+	Now we show that the given square is a pullback. Let $c\in \mathcal{C} $, let $\rho _x : c \to x_1\times _zx_2$, and let $\rho _y : c \to y$ such that the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		c \ar[" \rho _x ", r] \ar[" \rho _y "', d]  & x_1\times _zx_2 \ar[" p_x^y ", d]  \\
+	y \ar[" \delta _g "', r]  & y\times _zy
+	\end{tikzcd}\]
+	commutes. Looking at $\rho _x$ in particular, universality of pullback means that there exist morphisms $\rho _x^i$, $i=1,2$, rendering the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		c \ar[" \rho _x ", dr] \ar[" \rho _x^1 ", bend left, drr] \ar[" \rho _x^2 "', bend right, ddr]  &  &  \\
+	 & x_1\times _zx_2 \ar[" \pi _1^z ", r] \ar[" \pi _2^z "', d]  & x_1\ar[" g\circ f_1 ", d]  \\
+	 & x_2 \ar[" g\circ f_2 "', r]  & z \\
+	\end{tikzcd}\]
+	commutative.
+\end{proof}
+
+\begin{exercise}
+	Let $A\to B$ and $A\to C$ be ring maps. Show that there is are natural maps $B\to B\otimes _AC$ and $C\to B\otimes _AC$ such that $B\otimes _AC$ is the pushout $B\amalg _AC$ in $\Alg_{A}$ along these maps.
+\end{exercise}
+\begin{proof}
+	Let $i_B : B \to B\otimes _AC$ be the map $b\mapsto b\otimes 1$, and let $i_C : C \to B\otimes _AC$ be defined the same. Let $\varphi _B : B \to Z$ and $\varphi_C : C \to Z$ be maps rendering the diagram of solid arrows
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	A \ar[r] \ar[d]  & B \ar[" i_B ", d] \ar[" \varphi _B ", bend left, ddr]  &  \\
+	C \ar[" i_C "', r] \ar[" \varphi _C "', bend right, drr]  & B\otimes _AC \ar[" \omega ", dashed, dr]  &  \\
+	 &  & Z
+	\end{tikzcd}\]
+	commutative. We want to show there is a unique way to define $\omega $ such that the diagram commutes. By commutativity of the top triangle, we must have $\omega (b\otimes 1) = \varphi _B(b)$ for all $b\in B$, and likewise by commutativity of the bottom triangle we have $\omega (1\otimes c)=\varphi _C(c)$ for $c\in C$. We then recall the ring structure in exercise \ref{ex:1:2:3} to write $b\otimes c = (b\otimes 1)(1\otimes c)$. Since $\omega $ must be a ring homomorphism, we define
+	\[
+		\omega (b\otimes c) = \omega (b\otimes 1)\omega (1\otimes c) = \varphi _B(b)\varphi _C(c)
+	.\]
+	This makes sense since multiplication is a bilinear map, and tensor products are universal with respect to being bilinear. Finally, $\omega $ is well-defined as an $A$-algebra map since $\varphi _B$ and $\varphi _C$ agree on the $A$-action.
+\end{proof}
+
+\begin{exercise}
+	Show that $f : x \to y$ is a monomorphism if and only if $x\times _yx$ exists and $\delta _f : x \to x\times _yx$ is an isomorphism.
+\end{exercise}
+\begin{proof}
+	$(\implies )$ Let $f$ be mono. Let $g_1,g_2 : z \to x$ be maps such that
+	\[\begin{tikzcd}[row sep =  2.5em, column sep = 2.5em]
+	z\ar[" g_1 ", r] \ar[" g_2 "', d]  & x\ar[" f ", d]  \\
+	x \ar[" f "', r]  & y
+	\end{tikzcd}\]
+	commutes. Since $f$ is mono, $g_1=g_2$, so there exists a unique morphism $g = g_1 = g_2$ making the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	z \ar[" g_1 ", bend left, drr] \ar[" g_2 "', bend right, ddr] \ar[" g ", dashed, dr]  &  &  \\
+	 & x \ar[equals, r] \ar[equals, d]  & x \ar[" f ", d]  \\
+	 & x \ar[" f "', r]  & y
+	\end{tikzcd}\]
+	commutes. Hence the given cone $x = x = x$ is a pullback. The cone that gives rise to $\delta _f$ is the cone $x=x=x$, so it follows that $\delta _f = 1_x$, hence $\delta _f$ is an isomorphism.
+
+	$(\impliedby )$ Let $x\times _yx$ exist and $\delta _f : x \cong x\times _yx$. Since $\delta _f$ is an isomorphism, this induces an isomorphism of cones, meaning
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x\ar[equals, r] \ar[equals, d]  & x\ar[" f ", d]  \\
+	x \ar[" f "', r]  & y
+	\end{tikzcd}\]
+	is a pullback square. Let $g_1,g_2 : z \to x$ such that $f\circ g_1=f\circ g_2$. We can display this information as a diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	z \ar[" g_1 ", r] \ar[" g_2 "', d]  & x \ar[" f ", d]  \\
+	x \ar[" f "', r]  & y.
+	\end{tikzcd}\]
+	Universality of pullback induces a unique dashed arrow $g$ as indicated:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	z \ar[" g_1 ", bend left, drr] \ar[" g_2 "', bend right, ddr] \ar[" g ", dashed, dr]  &  &  \\
+	 & x\ar[equals, r] \ar[equals, d]  & x\ar[" f ", d]  \\
+	 & x \ar[" f "', r]  & y
+	\end{tikzcd}\]
+	rendering the diagram commutative. We thus see $g=g_1=g_2$. Therefore, $f\circ g_1=f\circ g_2$ implies $g_1=g_2$, meaning $f$ is mono.
+\end{proof}
+
+\begin{exercise}
+	Let $f : y \to z$ be mono, and $x_1,x_2\in \mathcal{C} $. Show that the map $x_1\times _yx_2 \to x_1\times _zx_2$ is an isomorphism. (Hint: prove $\mathcal{C} (-,x_1\times _yx_2)\cong \mathcal{C} (-,x_1\times _zx_2)$. The statement follows since Yoneda reflects isomorphisms).
+\end{exercise}
+\begin{proof}
+	Let
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1 \ar[" g_1 ", r]  & y & x_2 \ar[" g_2 "', l] 
+	\end{tikzcd}\]
+	be the span diagram. Note that the map $\varphi : x_1\times _yx_2 \to x_1\times _zx_2$ arises as
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times_yx_2 \ar[" p_1 ", bend left, drr] \ar[" p_2 "', bend right, ddr] \ar[" \varphi  ", dashed, dr]  &  &  \\
+	 & x_1\times _zx_2 \ar[" \pi _1 ", r] \ar[" \pi _2 "', d]  & x_1 \ar[" f\circ g_1 ", d]  \\
+	 & x_2 \ar[" f\circ g_2 "', r]  & z.
+	\end{tikzcd}\]
+	This diagram expresses the equalities $f\circ g_2\circ \pi _2 = f\circ g_1\circ \pi _1$ and $f\circ g_2\circ p_2=f\circ g_1\circ p_1$. Since $f$ is mono, $g_2\circ \pi _2=g_1\circ \pi _1$ and $g_2\circ p_2=g_1\circ p_1$. In particular, the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times_yx_2 \ar[" p_1 ", bend left, drr] \ar[" p_2 "', bend right, ddr] \ar[" \varphi  ", dashed, dr]  &  &  \\
+	 & x_1\times _zx_2 \ar[" \pi _1 ", r] \ar[" \pi _2 "', d]  & x_1 \ar[" g_1 ", d]  \\
+	 & x_2 \ar[" g_2 "', r]  & y\ar[" f ", dr] \\
+	 &&& z
+	\end{tikzcd}\]
+	commutes. In particular, we get a map $\psi : x_1\times _zx_2 \to x_1\times _yx_2$ via universality:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times_yx_2 \ar[" p_1 ", bend left, ddrrr] \ar[" p_2 "', bend right, dddrr]\ar[" \varphi  ", dashed, dr]   &  &  &  \\
+	 & x_1\times _zx_2 \ar[" \pi _1 ", bend left, drr] \ar[" \pi _2 "', bend right, ddr] \ar[" \psi  ", dashed, dr]  &  &  \\
+	 &  & x_1\times _yx_2 \ar[" p_1 ", r] \ar[" p_2 "', d]  & x_1 \ar[" g_1 ", d]  \\
+	 &  & x_2 \ar[" g_2 "', r]  & y.
+	\end{tikzcd}\]
+	Note that the inner 2 squares commute by universality of $x_1\times_yx_2$, and the outer 2 squares commute since they are the above diagram. Hence $\psi \circ \varphi  $ satisfies the dashed arrow in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	x_1\times _yx_2 \ar[" p_1 ", bend left, drr] \ar[" p_2 "', bend right, ddr] \ar[dashed, dr]  &  &  \\
+	 & x_1\times _yx_2 \ar[" p_1 ", r] \ar[" p_2 "', d]  & x_1 \ar[" g_1 ", d]  \\
+	 & x_2 \ar[" g_2 "', r]  & y.
+	\end{tikzcd}\]
+	However, the identity arrow also suffices as this dashed arrow, and by universality we have $\psi \circ \varphi =1$. We may similarly arrange the squares in the reverse order to see that $\varphi \circ \psi  = 1$. Thus $\varphi $ is an isomorphism.
+\end{proof}
+
+\begin{exercise}\label{ex:1-2-9}
+	\begin{enumerate}
+		\item Let $a,a'\in \mathcal{C} $, and maps $i_c : \mathcal{C} (c,a) \to \mathcal{C} (c,a')$ for all $c\in \mathcal{C} $, commuting with all precomposition maps in the sense that if $f : b \to c$, then
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				\mathcal{C} (c,a)\ar[" i_c ", r] \ar[" f^* "', d]  & \mathcal{C} (c,a')\ar[" f^* ", d]  \\
+			\mathcal{C} (b,a)\ar[" i_b "', r]  & \mathcal{C} (b,a')
+			\end{tikzcd}\]
+			commutes. Show that there is a unique morphism $g : a \to a'$ which induces the $i_c$'s.
+		\item If each $i_c$ is a bijection, show that $g$ is an isomorphism.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}
+	(1) Let $c\in \mathcal{C} $ and $f\in \mathcal{C} (c,a)$. We will show that $i_c(f) = i_a(1_a)\circ f$, and will define $g\coloneqq i_a(1_a)$. This is sufficient to prove the statement since $c$ is an arbitrary object and $f$ is an arbitrary element of the domain of $i_c$. Since $f\in \mathcal{C} (c,a)$, we have $f : c \to a$, and thus $f^* : \mathcal{C} (a,a) \to \mathcal{C} (c,a)$. Thus we consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} (a,a)\ar[" i_a ", r] \ar[" f^* "', d]  & \mathcal{C} (a,a')\ar[" f^* ", d]  \\
+	\mathcal{C} (c,a)\ar[" i_c "', r]  & \mathcal{C} (c,a'),
+	\end{tikzcd}\]
+	and note that $1_a$ is an element of $\mathcal{C} (a,a)$. We chase it around the diagram:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1_a \ar[" i_a ", mapsto, r] \ar[" f^* "', mapsto, d]  & i_a(1_a) \ar[" f^* ", mapsto, d] \\
+	f \ar[" i_c "', mapsto, r]  & i_c(f) = i_a(1_a)\circ f.
+	\end{tikzcd}\]
+	The two equalities in the bottom right are given by chasing $1_a$ around either direction of the diagram. Since the diagram commutes by hypothesis, the equality is forced.
+
+	(2) If each $i_c$ is a bijection, then in particular $i_{a'}$ is a bijection, meaning there exists $i_{a'}^{-1} : \mathcal{C} (a',a') \to \mathcal{C} (a',a)$. We can consider the map $i_{a'} (1_{a'} ): a' \to a$. We want to show that this map is an inverse to $i_a(1_a)$. To do this, we start by considering the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{C} (a,a)\ar[" i_a ", r] \ar[" i_{a'} ^{-1} (1_{a'} )^* "', d]  & \mathcal{C} (a,a')\ar[" i_{a'} ^{-1} (1_{a'} )^* ", d]  \\
+	\mathcal{C} (a',a)\ar[" i_{a'}  "', r]  & \mathcal{C} (a',a').
+	\end{tikzcd}\]
+	We can chase $1_a$ around this diagram:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	1_a\ar[" i_a ", mapsto, r] \ar[" i_{a'} ^{-1} (1_{a'} )^* "', mapsto, d]  & i_a(1_a)\ar[" i_{a'} ^{-1} (1_{a'} )^* ", mapsto, d]  \\
+	i_{a'} ^{-1} (1_{a'} )\ar[" i_{a'}  "', mapsto, r]  & i_{a'} (i_{a'} ^{-1} (1_{a'} )) = i_a(1_a)\circ i_{a'} ^{-1} (1_{a'} ).
+	\end{tikzcd}\]
+	Note that $i_{a'} (i_{a'} ^{-1} (1_{a'} ))=1_{a'} $ since $i_{a'} \circ i_{a'} ^{-1} =1$, thus we have $i_a(1_a)\circ i_{a'} ^{-1} (1_{a'} )=1_{a'} $.
+
+	For the other direction, note that rules of commutative diagrams allow us to swap the $i_c$'s for $i_c^{-1} $'s in the commutative diagrams. For a more rigorous proof of this, let $f : b \to c$. Then
+	\begin{align*}
+		&\qquad\;\;\; f^*\circ i_c = i_b\circ f^*\\
+		&\implies f^* = i_b \circ f^* \circ i_c^{-1} \\
+		&\implies i_b^{-1} \circ f^* = f^* \circ i_c^{-1} 
+	.\end{align*}
+	Thus we can consider the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\mathcal{C} (a',a')\ar[" i_{a'} ^{-1}  ", r] \ar[" i_a(1_a)^* "', d]  & \mathcal{C} (a',a)\ar[" i_a(1_a)^* ", d]  \\
+	\mathcal{C} (a,a')\ar[" i_a ^{-1}  "', r]  & \mathcal{C} (a,a)
+	\end{tikzcd}\]
+	and chase $1_{a'} $ around the diagram:
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		1_{a'}\ar[" i_{a'} ^{-1}  ", mapsto, r] \ar[" i_a(1_a)^* "', mapsto, d]  & i_{a'} ^{-1} (1_{a'} )\ar[" i_a(1_a)^* ", mapsto, d]  \\
+	i_a(1_a)\ar[" i_a ^{-1}  "', mapsto, r]  & i_a^{-1} (i_a(1_a)) = i_{a'} ^{-1} (1_{a'} )\circ i_a(1_a)
+	\end{tikzcd}\]
+	Since $i_a^{-1} (i_a(1_a)) = 1_a$, we have that $i_{a'} ^{-1} (1_{a'})\circ i_a(1_a) = 1_a$. Therefore $i_a(1_a)^{-1} =i_{a'} ^{-1} (1_{a'} )$.
+\end{proof}
+
+\begin{exercise}
+	\begin{enumerate}
+		\item Let $a,b\in \mathcal{C} $. Prove that $\mathcal{C} (b,a) \cong \Nat(\mathcal{C} (a,-), \mathcal{C} (b,-)) $.
+		\item State and prove the corresponding fact for contravariant functors.
+		\item Let $F : \mathcal{C}  \to \Set $. Prove $F(a) \cong \Nat(\mathcal{C} (a,-),F)$, natural in $a$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}
+	(1) It suffices to show that the only maps $\eta : \mathcal{C} (a,-) \Rightarrow \mathcal{C} (b,-)$ are given by precomposition. Note that in \cref{ex:1-2-9}, we showed that if $i : \mathcal{C} (-,a) \Rightarrow \mathcal{C} (-,b)$, then $i$ was given by postcomposition by a particular morphism. The statement thus follows by duality.
+
+	(2) The statement is that $\Nat(\mathcal{C} (-,a),\mathcal{C} (-,b))\cong \mathcal{C} (a,b)$. This was proven in \cref{ex:1-2-9}.
+
+	(3) The proof is the same as in \cref{ex:1-2-9}: you let $\eta : \mathcal{C} (a,-) \Rightarrow F$, let $f\in \mathcal{C} (a,b)$, and trace $1_a\in \mathcal{C} (a,a)$ around the relevant naturality diagram to find that $\eta_b(f) = \eta _a(1_a)\circ F(f)$. This yields the given isomorphism. Naturality requires a bit more pushing, but it follows from naturality of pre- and post-composition.
+\end{proof}
+
+\section{Limits and colimits}
+
+\begin{exercise}
+	Let $\mathcal{I} $ be a poset with initial object $e$. Show that for any $F : \mathcal{I}  \to \mathcal{C} $, $\lim F$ exists.
+\end{exercise}
+\begin{proof}
+	I prefer $0\in \mathcal{I} $ for the initial object. Let $F : \mathcal{I}  \to \mathcal{C} $. We show that $\lim F\cong F(0)$. The fact that $F(0)$ is a cone is immediate, since for any $i\in \mathcal{I} $, we have $0\leq i$ by definition, and thus there is $F(0\leq i): F(0) \to F(i)$. Now let $\eta : \Delta (c) \Rightarrow F$ be another cone, where $c\in \mathcal{C} $ and $\Delta : \mathcal{C}  \to \mathcal{C} ^{\mathcal{I} }$ is the diagonal functor. Then in particular there is a map $\eta _0: c \to F(0)$, and manifestly this map is the unique map making the relevant iagram commute.
+\end{proof}
+
+\begin{example}
+	Let $A$ be a ring. The ring of formal power series, denoted $A[[x]]$, is described as the $A$-algebra generated by a generating set $\left\{ x^n\mid n\geq 0 \right\} $, subject to the expected relations. One can describe it as the limit $\lim F$, where $F : \omega^{\mathrm{op}}  \to \Ring $ maps $n\mapsto A[x]/(x^{n+1} )$.
+\end{example}
+
+exercise 1.3.D because ophelia couldnt do it: Interpret the union of some subsets as a colimit.
+
+\begin{proof}
+	Let $X$ be a set and $ \left\{ U_i \subseteq X \right\}_{i\in I} $ a collection of subsets. Let $\mathcal{U} $ be the full subcategory of the power set $\mathcal{P} (X)$ spanned by $\left\{ U_i \right\} _{i\in I} $. Let $F : \mathcal{U}  \to \Set $ act on objects by $U_i \mapsto U_i$, and act on morphisms by mapping subsets $U_i \subseteq U_j$ to the inclusion map $U_i \hookrightarrow U_j$. Then $\bigcup_{i} U_i\cong \colim F$. One may alternatively define this as a colimit in the poset category $\mathcal{P} (X)$ by noting that there is an inclusion functor $i : \mathcal{U} \subseteq \mathcal{P} (X)$, and $\bigcup_{i} U_i \cong \colim i$. One may also define $G$ to be the evident inclusion functor $\mathcal{P} (X) \subseteq \Set $, and $\bigcup_{i} U_i \cong \colim (G\circ i)$. We usually write this as $\colim (G\circ i) = \colim_{i\in I} G(U_i)$; this notation specifies the subcategory $\mathcal{U} $ indexed by $I$ using indicies rather than the inclusion morphism $i$, and is often very convenient.
+\end{proof}
+
+$\tau _{A} : \Hom_{\mathcal{B} }(F(A), -)  \to \Hom_{\mathcal{A} }(A, G(-)) $
+\section{Adjoints}
+
+\section{Abelian categories}
+
+\begin{exercise}[FHHF]
+	Let $F : \mathcal{A}  \to \mathcal{B} $ be a functor of abelian categories, and $x^{\bullet} \in \Ch_{\mathcal{A} } $.
+	\begin{enumerate}
+		\item If $F$ is right-exact, then there is a map $H^{\bullet}\circ  F \Rightarrow F\circ H^{\bullet} $.
+		\item If $F$ is left-exact, then there is a map $H^{\bullet} \circ F \Rightarrow F\circ H^{\bullet} $.
+		\item If $F$ is exact, then $F\circ H^{\bullet} \cong H^{\bullet} \circ F$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}
+	
+\end{proof}

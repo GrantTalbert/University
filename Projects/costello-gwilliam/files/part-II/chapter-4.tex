@@ -1,0 +1,809 @@
+\chapter{Free field theories}
+
+The beginning of this chapter is fully review. I am well-versed on the contents of sections 1 through 3, and am fairly confident in sections 4-6. Beyond that was not covered in class, meaning content I am unfamiliar with begins at section 7. For these reasons, section 1 is fully omitted, sections 2 and 3 are very sparse and only contain some details I felt worth copying down, and sections 4-6 should not be considered full notes either.
+
+\stepcounter{section}
+
+\section{The prefactorization algebra of a free field theory}
+
+\subsection{The classical observables of the free scalar field}
+
+For this section, let $M$ be a Riemannian manifold with metric $g$, which provides a natural density $\vol_{g} $ for integrating against. Consider the free scalar field theory with naive fields $C^\infty _M$ and action functional
+\[
+	S_U(\phi )=\int_{U} \phi \Delta \phi ,
+\]
+where $\Delta $ is the Laplacian on $M$, which we recall acts in local coordinates by $\Delta f=-\frac{1}{\sqrt{\det g} } \partial _j\left( g^{ij} \sqrt{\det g} \partial _if \right) $, and more importantly, is self-adjoint. The Euler-Lagrange equations are $\Delta \phi =0$, so we have a derived space of fields
+\[
+	\mathcal{E} =\left( 
+		\begin{tikzcd}
+			C^\infty _M\ar[" \Delta  ", r] &{C^\infty _M[-1]}
+		\end{tikzcd}
+	\right) 
+.\]
+The sheaf $\mathcal{E} $ is a local dg Lie algebra with trivial bracket $[-,-]=0$, and thus has a factorization envelope. The classical observables on this theory are
+\[
+	\Obs^{cl} \coloneqq \mathbb{U} \mathcal{E} =C_{\bullet} (\mathcal{E} _c)= \Sym \left( C^\infty _c[1] \right) 
+.\]
+Here $C^\infty _c$ is the cosheaf of compactly supported smooth maps, $\mathcal{E} +c$ is compactly supported homogeneous elements of $\mathcal{E} $, and $C_{\bullet} $ is the Chevalley-Eilenberg chains for a dg Lie algebra, which is defined as the graded symmetric . The differential is given by $\dd _{\mathcal{E} } +\dd _{\mathrm{CE} } $, but since $[-,-]=0$ and $d_{\mathrm{CE} } =[-,-]$ applied as a derivation, we see that the differential reduces simply to $\dd _{\mathcal{E} } $, extended via the Leibiz rule, thus forming a dg associative algebra.
+
+\subsection{Interpreting this construction}
+
+One can interpret this as polynomial polyvector fields on $C^\infty _M$ in the following sense: since $\mathcal{E}[1] $ is concentrated in nonpositive degrees, we can compute
+\[\Obs^{cl} \cong \left(\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\cdots \ar[r]  & \Lambda ^2C_c^\infty \otimes \Sym C^\infty _c\ar[r]  & C^\infty _c\otimes \Sym C^\infty _c\ar[r]  & \Sym C^\infty _c
+\end{tikzcd}\right).\]
+All tensor products are completed tensor products. Since $C^\infty _c$ is concentrated in degree 0, its symmetric algebra can be interpreted as an algebra of polynomial functions on $C^\infty _M$ by viewing compactly supported functions as distributions, identifying $C^\infty _c \subseteq (C^\infty _M)^*$.
+
+\subsection{General free field theories}
+
+\begin{definition}\label{dfn:4-2-3-1}
+	Let $M$ be a manifold. A \emph{free field theory} on $M$ is the following data.
+	\begin{enumerate}
+		\item A graded vector bundle $E$ on $M$, with sheaf of sections $\mathcal{E} $ and compactly supported sections $\mathcal{E} _c$.
+		\item A differential operator $\dd : \mathcal{E}  \to \mathcal{E} [1]$ with square 0, making $\mathcal{E} $ into an elliptic complex.
+		\item An isomorphism $\varphi : E \to (E^\vee \otimes \mathrm{Dens} _M)[-1]$ compatible with differentials. This is generally repackaged into the data of a graded anti-symmetric pairing $\left\langle -,- \right\rangle : \mathcal{E}_c\otimes _{C^\infty _M} \mathcal{E} _c \to \mathcal{D} \mathrm{ens} _M[-1]$ via mapping a pair $(\alpha ,\beta )$ of compactly supported sections to evaluating the $\mathcal{E} ^\vee $ component of $\varphi (\alpha )$ at $\beta $, and multiplying with the density. Integrating this gives a pairing $\mathcal{E}_c\otimes _\mathbb{R}\mathcal{E} _c\to \mathbb{R} [-1]$. On a Riemannian manifold, the metric $g$ gives a canonical density $\vol_{g} $.
+	\end{enumerate}
+\end{definition}
+
+The complex $\mathcal{E} $ is the derived version of the solutions to the equations of motion, and we refer to it as the derived space of fields or the derived solutions to the equations of motion.
+
+For the free scalar field theory with nonzero mass $m$ on a Riemannian manifold $M$, we have
+\[\mathcal{E} =\left(\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		C^\infty _M\ar[" \Delta +m^2 ", r]  & C^\infty _M[-1]
+\end{tikzcd}\right).\]
+The pairing $\left\langle -,- \right\rangle : \mathcal{E} _c\otimes _\mathbb{R} \mathcal{E} _c \to \mathbb{R} [-1]$ is given by
+\[
+	\left\langle \phi _0,\phi _1 \right\rangle_U=\int_{U} \phi _0\phi _1 \vol_{g} 
+.\]
+
+Abelian Yang-Mills with gauge group $\mathbb{R} $ is described as follows. Let $M$ be a 4-manifold, and $A\in \Omega ^1_M(U)$ a connection on the trivial line $\mathbb{R} $-bundle. Then the Yang-Mills action functional is
+\[
+	S_{YM} (A)=-\frac{1}{2} \int_{U} \dd A\wedge \star \dd A,
+\]
+for $\star $ the Hodge star. If $\dd \star \dd $ is the Hodge Laplacian, then the equations of motion are $(\dd \star \dd )A=0$. Gauge symmetry is given by $A\to A+\dd X$, for $X\in \Omega ^0_M(U)$. The complex describing this is
+\[\mathcal{E} =\left(\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\Omega ^0_M[1]\ar[" \dd  ", r]  & \Omega ^1_M\ar[" \dd \star \dd  ", r]  & \Omega _M^3[-1]\ar[" \dd  ", r]  & \Omega ^4_M[-2]
+\end{tikzcd}\right).\]
+
+\begin{definition}\label{dfn:4-2-3-2}
+	Let $\mathcal{E} $ be the derived space of fields for a free field theory. The prefactorization algebra of classical observables $\Obs^{cl} $ is defined as
+	\[
+		\Obs^{cl} \coloneqq \Sym (\mathcal{E} _c[1])
+	\]
+	with differential $\dd _{\mathcal{E} } $ extended to a derivation.
+\end{definition}
+
+To show that $\Obs^{cl} $ is a prefactorization algebra, note that it is a sheaf of differential graded commutative algebras with multiplication defined by the symmetric product (the differential is compatible by definition). If $U\subseteq V$ is an inclusion of open sets, then extension by 0 gives an inclusion $C^\infty _c(U)\hookrightarrow C^\infty _c\left(V \right) $, which induces a  map $\Obs^{cl} (U)\hookrightarrow \Obs^{cl} (V)$. If $\left\{ U_i\subseteq V \right\} _{1\leq i\leq n} $ are disjoint open sets, then the factorization product is the map
+\[
+	(\alpha _1, \ldots ,\alpha _n)\mapsto \prod_{i=1}^n i_V^{U_i} (\alpha _i),
+\]
+where $i_V^{U_i} : \Obs^{cl} (U_i)\hookrightarrow \Obs^{cl} (V)$, and the product shown is the symmetric product. We evaluate this observable on a field $\phi $ by
+\[
+	\left( \prod_{i=1}^{n} i_V^{U_i} \alpha _i \right) (\phi ) = \prod_{i=1}^{n} \alpha _i(\phi |U_i),
+\]
+where the product on the right is the product in $\mathbb{R} $. Here we note that any observable may be evaluated on a field in a similar way.
+
+\subsection{The one-dimensional case, in detail}
+
+Consider $M=\mathbb{R} $. Here the spacetime manifold has only one dimension, so we call it time, and write $t\in\mathbb{R} $. The classical field theory of a particle in 1 dimension is just classical mechanics. Given an open interval $U$, the cohomology of $\Obs^{cl}(U) $ is $\mathbb{R} [p,q]$, concentrated in degree 0. To see this, if $m=0$, let $\phi _q(x)=1$ and $\phi_p(x)=x$. If $m>0$, let
+\[
+	\phi _q(x) = \frac{1}{2} \left( e^{mx} +e^{-mx}  \right) ,\qquad \phi _p(x) = \frac{1}{2m} \left( e^{mx} -e^{-mx}  \right) 
+.\]
+The map $\Delta+m^2$ is simply $-\partial_x^2+m^2$. Both functions are annihilated by this operator, and form a basis for its kernel. Further, $\phi _q(0)=1$ and $\phi _p(0)=0$, whereas $\phi _q'(0)=0$ and $\phi _p'(0)=1$. Finally, $\phi _q=\phi_p'$. Then there is a cochain map $\pi : \mathcal{E}_c(U) \to \mathbb{R} \left\{ p,q \right\} $ by
+\[
+	g\mapsto q \int_{U} g(t)\phi _q\dd x + p \int_{U} g(t)\phi _p\dd t
+.\]
+This map is a quasi-isomorphism.
+
+\subsection{The Poisson bracket}
+
+Let $M$ be a smooth manifold with free field theory whose complex of fields is $\mathcal{E} $. Classical observables are described by $\Sym (\mathcal{E} [1])$. Recall that there is an antisymmetric pairing $\left\langle -,- \right\rangle : \mathcal{E} _c\otimes_\mathbb{R} \mathcal{E} _c\to \mathbb{R} [-1]$ associated to this free field theory. This translates to a symmetric pairing on $\mathcal{E} _c[1]$. Proving this is a mess of dealing with degrees and I choose to omit it here.
+
+\begin{lemma}\label{lma:4-2-5-1}
+	There is a unique smooth Poisson bracket on $\Obs^{cl} $ of cohomological degree 1 such that
+	\[
+		\left\{ \alpha ,\beta  \right\} =\left\langle \alpha ,\beta  \right\rangle 
+	\]
+	for any two \emph{linear} observables $\alpha ,\beta \in \mathcal{E} _c[1]$.
+\end{lemma}
+
+\subsection{The quantum observables of a free field theory}
+
+In this section, we use the pairing $\left\langle -,- \right\rangle : \mathcal{E} _c\otimes _\mathbb{R} \mathcal{E} _c \to \mathbb{R} [-1]$. To construct $\Obs^{q} $ from $\Obs^{cl} $, we start with a Heisenberg central extension $\widehat{\mathcal{E} }_c\coloneqq \mathcal{E} _c \oplus \mathbb{R} \hbar $, where $\mathbb{R} \hbar $ is the 1-dimensional $\mathbb{R} $-vector space spanned by $\hbar $. This central extension is given by the 2-cocycle $\omega (\alpha ,\beta )=\left\langle \alpha , \beta  \right\rangle $. The Lie bracket is given by mapping $\alpha ,\beta \in \mathcal{E} _c$ to $[\alpha ,\beta ]=\hbar \left\langle \alpha ,\beta  \right\rangle $, and acting trivially on $\mathbb{R} \hbar $. The differential on the $\mathbb{R} \hbar $ component is trivial. Then $\Obs^{q} \coloneqq \mathbb{U} \widehat{\mathcal{E} }$:
+\[
+	\Obs^{q} \coloneqq \Sym \left( \widehat{\mathcal{E} }_c[1]  \right) \cong \Obs^{cl} [\hbar ]
+,\]
+where the latter is polynomials in $\hbar $ with coefficients in $\Obs^{cl} $. The differential arises from the Lie bracket and the differential on $\widehat{\mathcal{E} }_c$. Note that the above isomorphism $\Obs^{q} \cong \Obs^{cl} [\hbar ]$ is \emph{only an isomorphism of graded vector spaces}, and does \emph{not} repect differentials. The differential is $\dd _{\mathcal{E} } +\dd _{\mathrm{CE} }$, for $\dd_{\mathrm{CE} }( \alpha\beta )=[\alpha ,\beta ]$ the usual Chevalley-Eilenberg differential. Recall the full formula
+\[
+	\dd _{\mathrm{CE} }(x_1 \cdots x_n) = \sum_{1\leq i<j\leq k} \pm[x_i,x_j]x_1 \cdots \widehat{x} _i \widehat{x} _j \cdots x_n
+\]
+with sign given by commuting the things all the way down.
+
+The differential on $\Obs^{q} $ satisfies
+\begin{equation}\label{eq:4-2-6-1}
+	\dd (ab)=(\dd a)b + (-1)^{\left| a \right| } ab + (-1)^{\left| a \right| } \hbar \left\{ a,b \right\} .
+\end{equation}
+
+
+\section{Quantum mechanics and the Weyl algebra}
+
+\begin{lemma}\label{lma:4-3-1}
+	The prefactorization algebra $\Obs^{q} $ on $\mathbb{R} $ constructed from the free field theory is locally constant.
+\end{lemma}
+\begin{proof}
+	There is a filtration
+	\[
+		F^{\leq k} \Obs^{q} \coloneqq \Sym ^{\leq k} (\widehat{\mathcal{E} }[1])
+	.\]
+	The associated graded is $\Obs^{cl} [\hbar ]$, so it suffices to show $H^{\bullet} (\Obs^{cl} )$ is locally constant. We have already seen $H^{\bullet} (\Obs^{cl} (a,b))=\mathbb{R} [p,q]$ for any interval $(a,b)$, and inclusion maps induce isomorphisms.
+\end{proof}
+
+The associative algebra corresponding to this prefactorization algbera $\Obs^{q} $ will be denoted $A_m$. We will show this is the Weyl algebra, and is independent of the mass $m$. Of course we still want to keep track of the mass, so we will see that this is encoded in a \emph{Hamiltonian operator} $H$.
+
+The prefactorization algebra of quantum observables is the Chevalley-Eilenberg chains on the Heisenberg central extension of the complex $\Delta +m^2 : C^\infty _c \to C^\infty _c$. Note that $\partial _x$ acts on $C^\infty _c$ in the usual way, and more importantly, it commutes with the differential $\Delta +m^2 = -\partial _x^2 + m^2$ (you might think $\partial _x$ annihilates $m$ so this isn't true, but recall that the commutator is really the difference of the two \emph{composites}, and you are composing $\partial _x$ with the map $f\mapsto m^2f$, so this is fine.). This means that $\partial _x : \mathcal{E} _c \to \mathcal{E} _c$ is a map of cosheaves. We will extend this to a map $\Obs^{q} \to \Obs^{q} $, not by requiring that it respect the factorization product, but rather that it act as a derivation on $\Obs^{q} $.
+
+\begin{definition}\label{dfn:4-3-2}
+	Let $\mathcal{F} $ be a prefactorization algebra on $X$ with values in $\Ch_{R} $. A \emph{degree $k$ derivation} $D$ of $\mathcal{F} $ is a collection of maps $\left\{ D_U : \mathcal{F} (U) \to \mathcal{F} (U) \right\} _{U\in \Open(X) } $ of cohomological degree $k$, which act as a derivation on the factorization product in the sense that if $\left\{ U_i\subseteq V \right\} _{1\leq i\leq n} $ are pairwise disjoint, $\left\{ \alpha _i\in \mathcal{F} (U_i) \right\} _{1\leq i\leq n} $ are homogeneous elements, and $m : \bigotimes_{i} \mathcal{F}(U_i) \to \mathcal{F} (V)$ is the factorization product, then
+	\[
+		(D_V\circ m)(\alpha _1, \ldots ,\alpha _n) = \sum_{1\leq i\leq n} (-1)^{k \sum_{j=1}^{i-1} \left| \alpha _j \right| } m(\alpha _1, \ldots , D_{U_i} \alpha _i, \ldots ,\alpha _n)
+	.\]
+\end{definition}
+\begin{remark}\label{rmk:4-3-3}
+	If we apply \cref{dfn:4-3-2} to the unary factorization product on an inclusion $U\subseteq V$, we obtain the relation
+	\[
+		(D_V \circ m)(\alpha ) = (m\circ D_U)(\alpha )
+	.\]
+	This is precisely the naturality condition for precosheaves, meaning any derivation of prefactorization algebras is automatically a morphism of precosheaves. However, such a morphism cannot be a morphism of prefactorization algebras (except possibly in some trivial edge cases which aren't worth considering).
+\end{remark}
+
+Here, note that $\partial _x$ is clearly a derivation on $\Obs^{q} $, and it follows immediately that $\partial_x$ is a derivation on $A_m$.
+
+\begin{definition}\label{dfn:4-3-4}
+	The \emph{Hamiltonian} $H$ is thge derivation of the associative algebra $A_m$ arising from the derivation $-\partial _x$ on the prefactorization algebra $\Obs^{q} $ for the free scalar field theory with mass $m$.
+\end{definition}
+\begin{proposition}\label{prp:4-3-5}
+	The associative algebra $A_m$ is the Weyl algebra
+	\[
+		\mathcal{W} \cong \left\langle x^{\alpha } \partial _x^{\beta }  \right\rangle_{\alpha ,\beta }  
+	.\]
+	It is generated by $p,q,\hbar $ modulo the relations $[p,q]=\hbar $ and all other commutators vanishing. The Hamiltonian is
+	\[
+		H(a)=\frac{1}{2\hbar } \left[ p^2-m^2q^2,a \right] 
+	.\]
+	Note that it is an inner derivation.
+\end{proposition}
+
+The proof is like 4 pages long so I went through it in the book but didn't copy it down.
+
+\section{Pushforward and canonical quantization}
+
+Given $\pi : X \to Y$ a continuous map between spaces, we can push forward precosheaves $\mathcal{P} \mathcal{C} \mathrm{shf}_X \to \mathcal{P} \mathcal{C} \mathrm{shf} _Y$ by defining $\pi _*\mathcal{F} (U) \coloneqq \mathcal{F} (\pi ^{-1} (U))$; the same as pushforwards of sheaves. We can do the same construction on the level of prefactorization algebras.
+
+\begin{definition}\label{dfn:4-4-1}
+	Let $\pi : X \to Y$ be a continous map between spaces, and $\mathcal{F}$ a prefactorization algebra on $X$. Define the pushforward prefactorization algebra $\pi _*\mathcal{F} $ on $Y$ as follows:
+	\begin{itemize}
+		\item If $U\subseteq Y$ is open, then $(\pi _*\mathcal{F} )(U)\coloneqq \mathcal{F} (\pi ^{-1} (U))$.
+		\item If $\left\{ U_i\subseteq V \right\} _{1\leq i\leq n} $ are pairwise disjoint opens, then note that $\pi ^{-1}(U_i),\pi ^{-1} (V)$ are open in $X$ for all $i$, and taking preimages preserves disjointness, so $\mathcal{F} $ comes with the datum of a factorization product
+			\[
+				\bigotimes_{1\leq i\leq n} (\pi _*\mathcal{F})(U_i)\to (\pi _*\mathcal{F}) (V)
+			.\]
+			Define this to be the relevant factorization product for $\pi _*\mathcal{F} $.
+	\end{itemize}
+\end{definition}
+
+\begin{warning}\label{warn:4-4-2}
+	Although pushforwards always exist for \emph{pre}factorization algebras, when we look at factorization algebras, not all pushforwards will always be a factorization algebra. However in the relevant cases, it usually will be. We will discuss this more in a few chapters.
+\end{warning}
+
+Consider a manifold of the form $N\times \mathbb{R} $ with the product metric, and assume for simplicity that $N$ is compact. Let $\pi : N\times \mathbb{R}  \to \mathbb{R} $ be the canonical projection. Then $\pi _*\Obs^{q} $ is a prefactorization algebra on $\mathbb{R} $. Let $\left\{ e_i \right\} _{i\in I} $ be an orthonormal eigenbasis for $\Delta +m^2$ on $C^\infty _N(N)$, and associate eigenvalue $\lambda _i$ to each $e_i$. Then by definition, $\bigoplus_{i} \mathbb{R} e_i$ is a dense subset of $C^\infty _N(N)$. For $m\in M$, let $A_m$ denote the cohomology of the prefactorization algebra associated to the free 1-dimensional scalar field theory with mass $m$, which we previously showed is the Weyl algebra generated by $p,q,\hbar $ subject to $[p,q]=\hbar $ and all other brackets 0. Define $A_N$ to be the infinite tensor product
+\[
+	A_N = A_{\sqrt{\lambda _1} } \otimes _{\mathbb{R} [\hbar ]} A_{\sqrt{\lambda _2} } \otimes _{\mathbb{R} [\hbar ]}\cdots ,
+\]
+which is defined as the relevant colimit.
+
+\begin{proposition}\label{prp:4-4-1}
+	There is a dense sub-prefactorization algbera of $\pi _*\Obs^{q} $ that is locally constant, and whose cohomology prefactorization algebra corresponds to the associative algebra $A_N$.
+\end{proposition}
+\begin{remark}
+	This proposition encodes the notion of canonical quantization in the sense of a physicist . The Weyl algebra $A_{\sqrt{\lambda _i} } $ corresponds to a quantum mechanical particle evolving in $N$ with mass $m$ and energy $\lambda _i$. The observables of the free scalar field $\pi _*\Obs^{q} $ are essentially described by the combination of all of these algebras corresponding to each possible energy level; since the theory is free, they do not interact, meaning there are no relations to consider. Essentially, this allows us to describe the free scalar field theory on a manifold using the free scalar field theory on $\mathbb{R} $, which is already well-understood, in such a way that encodes the notion of canonical quantization.
+\end{remark}
+\begin{proof}
+	The prefactorization algebra $\pi _*\Obs^{q} $ maps open subsets $U\subseteq \mathbb{R} $ to the Chevalley-Eilenberg chains
+	\[\Sym \left(\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			C^\infty _c(U\times N)[-1]\ar[" \Delta+m^2 ", r]  & C^\infty _c(U\times N)
+	\end{tikzcd}\right)[\hbar ].\]
+	A dense subcomplex of these observables is
+	\[\bigoplus_{i\in I} \left(\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		C^\infty _c(U)e_i\ar[" \Delta _{\mathbb{R} } +\lambda _i ", r]  & C_c^\infty (U)e_i[-1]
+	\end{tikzcd}\right).\]
+	Define $\mathcal{F} _i$ to be the prefactoriation algebra for the scalar free field theory on $\mathbb{R} $ with mass $m$. Note that $\mathcal{F} _i$ is a prefactorization algebra of $\mathbb{R} [\hbar ]$-modules. Using the tensor product of prefactorization algebras, define
+	\[
+		\mathcal{F} \coloneqq \mathcal{F} _1 \otimes_{\mathbb{R} [\hbar ]} \mathcal{F} _2 \otimes _{\mathbb{R} [\hbar ]} \cdots ,
+	,\]
+	where the infinite tensor product is the appropriate colimit. We can equivalently view this tensor product as being the factorization envelope of the Heisenberg central extension of the dense subcomplex of $\pi _*\Obs^{q} $ noted above. Because the complex is a dense subcomplex, the evident map $\mathcal{F} \to \pi _*\Obs^{q} $ has a dense image, and passing to homology maintains that dense image. Note that $H^{\bullet} (\mathcal{F} _i)$ corresponds to the Weyl algebra $A_{\sqrt{\lambda _i} } $, and thus $H^{\bullet} \mathcal{F} $ corresponds to $A_N$.
+\end{proof}
+
+\section{Abelian Chern-Simons}
+
+We now consider Abelian Chern-Simons theory, which is a simple example of a gauge theory and a topological field theory. We will consider perturbative Chern-Simons with gauge group $U(1)$.
+
+Let $M$ be an orientable 3-manifold, with $\mathcal{E} =\Omega _M^{\bullet} [1]$ and differential given by the exterior derivative. The pairing $\mathcal{E} _c\otimes _{\mathbb{R} } \mathcal{E} _c\to \mathbb{R}[-1]$ is given by
+\[
+	\left\langle \alpha ,\beta  \right\rangle =(-1)^{\left| \beta  \right| } \int_{U} \alpha \wedge \beta 
+.\]
+The action functional is $S(\alpha )=\left\langle \alpha ,\dd \alpha  \right\rangle $, and the equations of motion are $\dd \alpha =0$. The action functional has a gauge symmetry $\alpha \to \alpha +\dd f$, hence $\Omega ^0_M[1]$ being in $\mathcal{E} $.
+
+\subsection{Observables}
+
+We have
+\[
+	\Obs^{cl} =\Sym\left( 
+	\begin{tikzcd}
+		\Omega _c^0[2]\ar[" \dd  ", r] & \Omega _c^1[1]\ar[" \dd  ", r] & \Omega _c^2\ar[" \dd  ", r] & \Omega ^3_c
+	\end{tikzcd}
+	\right) 
+.\]
+Writing $H_c$ for the compactly supported de Rham cohomology, and recalling that cohomology commutes with taking the symmetric algebra, we see that $H^{\bullet} \Obs^{cl} \cong \Sym (H_c^{\bullet}[2]) $. The dimensions of $H^{\bullet} \Obs^{cl} (U)$ are thus always finite dimensional, which is much easier to understand than an arbitrary free scalar field theory, where the cohomology can be infinite dimensional.
+
+This continues to quantum observables. Filter $\Obs^{q} $ by
+\[
+	F^k \Obs^{q} (U) = \Sym ^{\leq k} \left( \Omega^{\bullet} _c(U)[2] \right) [\hbar ]
+.\]
+This filtration induces a spectral sequence with first page $H^{\bullet} \Obs^{cl} (U)[\hbar ]$. The differential on this first page is 0, but the differential on the second arises from the pairing of linear observables, which descends to cohomology:
+\[
+	\left\langle [\alpha ],[\beta ] \right\rangle_{H^{\bullet} } = [\left\langle \alpha ,\beta  \right\rangle ]
+.\]
+The differential $d_2$ on the second page vanishes on $\Sym^0$ and $\Sym ^1$, and satisfies
+\[
+	d_2([\alpha ][\beta ])=\hbar \left\langle [\alpha ],[\beta ] \right\rangle_{H^{\bullet} } 
+.\]
+\Cref{eq:4-2-6-1} determines $d_2$ on terms that are higher. Thus, $H^{\bullet} \Obs^{q} $ simplifies to understanding the integration pairing between cohomology classes of compactly supported de Rham forms.
+
+\begin{lemma}\label{lma:4-5-1}
+	Let $M$ be a closed, connected 3-manifold (I think it also has to be orientable). Then
+	\[
+		H^{\bullet} \Obs^{q} (M) \cong \mathbb{R} [\hbar ][1-\dim H^2(M)]
+	.\]
+	Here the first bracket is polynomials, and the second is a shift.
+\end{lemma}
+\begin{proof}
+	Poincar\'e duality for closed, connected manifolds yields $H^n(M) \cong \mathbb{R} $, and $H^i(M) \cong H^{n-i} (M)$. Let $b_2 = \dim H^2(M)$. Choose a basis $\left\{ \alpha _1, \ldots ,\alpha _{b_2}  \right\}$ for $H^2(M)$ and a dual basis $\{\beta _1, \ldots ,\beta _{b_2} \}$ for $H^1(M)$:
+	\[
+		\left\langle \alpha _j,\beta _k \right\rangle_{H^{\bullet} } =\delta _{jk} 
+	.\]
+	Let $v$ denote the generator for $H^0(M)$, which we know is 1-dimensional by Poincar\'e duality, and $[M]$ the dual generator for $H^3(M)$. Thus, $d_2(\alpha _j\beta _k)=\hbar \delta _{jk} $ and $d_2(v[M])=\hbar $, and $d_2$ vanishes on all other quadratic monomials. Explicit computation shows that $v\alpha _1 \cdots \alpha _{b_2} $ is closed but not exact, and it generates the cohomology.
+\end{proof}
+
+\subsection{Compactifying along a closed surface}
+
+Consider a 3-manifold of the form $M\coloneqq\mathbb{R} \times \Sigma $, where $\Sigma $ is a closed, orientable surface. Let $\pi : M \to \mathbb{R} $ be the natural projection. We will show that $\pi _*\Obs^{q} $ is locally constant, so that it corresponds to an associative algebra. This will turn out to be the Weyl algebra for the graded symplectic vector space $H^{\bullet} (\Sigma )[1]$.
+
+Let $g$ be the genus of $\Sigma $. Pick a symplectic basis $\left\{ \alpha _1, \ldots , \alpha _g, \beta _1, \ldots , \beta _g \right\} $ for $H^1(\Sigma )$ such that
+\[
+	\int_{\Sigma } \alpha _j\beta _k = \delta _{jk} 
+.\]
+\begin{remark}
+	It's time I become more familiar with symplectic geometry. A symplectic form $\omega $ is a nondegenerate skew-symmetric bilinear form. Clearly the pairing $\left\langle -,- \right\rangle $ is a symplectic form. A \emph{symplectic basis} is a basis $\left\{ e_i,f_i \right\} $ of the vector space such that $\omega (e_i,e_j)=0$, $\omega (f_i,f_j)=0$, and $\omega (e_i,f_j)=\delta _{ij} $. A symplectic manifold is a manifold with a symplectic form.
+\end{remark}
+Let $\nu $ be the constant function 1, which yilelds the basis for $H^0(\Sigma )$. Let $\mu $ be a basis for $H^2(\Sigma)$ with the property that
+\[
+	\int_{\Sigma } \mu =1
+.\]
+Then $H^{\bullet} (\Sigma )[1]$ has a natural symplectic structure given by the integration pairing, and $\nu ,\mu $ are dual under this pairing.
+
+\begin{proposition}\label{prp:4-5-3}
+	The prefactorization algebra $H^{\bullet} \pi _*\Obs^{q} $ is locally constant, and it corresponds to the Weyl algebra $A_\Sigma $ for $H^{\bullet} (\Sigma )[1]$. In terms of our chosen generators, this Weyl algebra has commtuators $[\nu,\mu ]=\hbar $, $[\alpha _j,\beta _k]=\hbar \delta _{jk} $, and all others vanish. The Hamiltonian of this Weyl algebra is 0.
+\end{proposition}
+
+The fact that the Hamiltonian is 0 makes Abelian Chern-Simons a topological field theory.
+
+\begin{proof}
+	By Hodge theory, $\Omega ^{\bullet} _\Sigma (\Sigma ) \cong H^{\bullet} (\Sigma )$. We will use this fact in this proof. We start by showing local constancy. This is essentially the same proof as showing that $\mathbb{U} \mathfrak{g} ^{\mathbb{R} } \cong U\mathfrak{g} $; our construction of the universal enveloping algebra via the factorization envelope.
+
+	Let $U\subseteq \mathbb{R} $ be open. Define $\mathcal{L} \coloneqq \pi _* \Omega _M^{\bullet} [1]$. Then $\mathbb{U} \mathcal{L} \cong \pi _* \Obs^{cl} $:
+	\[
+		\mathbb{U} \mathcal{L} (U) = C_{\bullet} (\pi _* \Omega ^{\bullet} _{M,c} (U))=C_{\bullet} (\Omega ^{\bullet} _{M,c} (\pi ^{-1} (U))) = \Obs^{cl} (\pi ^{-1} (U))=\pi _*\Obs^{cl} (U)
+	.\]
+	We thus have that $\Obs^{q} = \mathbb{U}\widehat{\mathcal{L} }$. Finally, note that
+	\[
+		\Omega ^{\bullet}_M(\pi ^{-1} (U)) = \Omega ^{\bullet} _M(U\times \Sigma ) \cong \Omega ^{\bullet} _\mathbb{R} (U)\otimes _{?} \Omega ^{\bullet} _\Sigma (\Sigma )
+	.\]
+	Thus we have
+	\[
+		\mathcal{L} \cong \Omega ^{\bullet} _\mathbb{R} [1]\otimes _{\mathbb{R}} \Omega ^{\bullet} _\Sigma (\Sigma )
+	.\]
+	Using our result from Hodge theory,
+	\[
+		\mathcal{L} \simeq \Omega ^{\bullet} _{\mathbb{R} } [1]\otimes _{\mathbb{R} } H^{\bullet} (\Sigma )
+	.\]
+	Here we note that the completed tensor product is isomorphic to the usual tensor product when one of the entries is finite-dimensional. Since closed orientable surfaces have finite-dimensional cohomology, we can simply tensor over $\mathbb{R} $.
+
+	Now let $I\subseteq J\subseteq \mathbb{R} $ be an inclusion of open intervals. We will show local constancy of both classical and quantum observables. First, we note that since there is a homotopy equivalence $I\simeq J$, homotopicity of the de Rham functor $I\mapsto \Omega ^{\bullet} _\mathbb{R} (I)[1]$ (not the de Rham sheaf, which is a sub-functor of the de Rham functor) yields a quasi-isomorphism $\Omega ^{\bullet} _\mathbb{R} (I)\simeq \Omega ^{\bullet} _\mathbb{R}(J)$. Since vector spaces are flat, $\otimes _\mathbb{R} H^{\bullet} (\Sigma)$ is exact, and thus preserves quasi-isomorphisms. We can thus tensor to obtain the quasi-isomorphisms
+	\[
+		\mathcal{L}(I) \simeq \Omega ^{\bullet} _\mathbb{R} (I) \otimes_{\mathbb{R}} H^{\bullet} (\Sigma ) \simeq \Omega ^{\bullet} _{\mathbb{R} } (J) \otimes _{\mathbb{R} } H^{\bullet} (\Sigma ) \simeq \mathcal{L} (J)
+	.\]
+	Thus, $\mathcal{L} $ is locally constant up to homotopy. Note that passing to compactly supported sections preserves quasi-isomorphisms since it clearly preserves homotopy. Additionally, the shift functor clearly preserves everything. Although Sym does not preserve quasi-isomorphisms, we recall that Sym commutes with cohomology, and thus
+	\[
+		H^{\bullet} \Obs^{cl} =H^{\bullet} (\Sym \mathcal{L} _c[1])\cong \Sym H^{\bullet} (\mathcal{L}_c[1])
+	.\]
+	Since $H^{\bullet} $ inverts quasi-isomorphisms, by functoriality of $\Sym $ we see that $H^{\bullet} \Obs^{cl} $ is locally constant.
+
+	Now we pass to quantum observables. The same argument works; the only thing we must note is that if $\mathcal{L} (I) \simeq \mathcal{L} (J)$, then $\mathcal{L} (I)\oplus \mathbb{R} \hbar  \simeq \mathcal{L} (J) \oplus \mathbb{R} \hbar $. It is trivial to check that $-\oplus \mathbb{R} \hbar $ is exact; hence it preserves quasi-isomorphisms. Therefore, $H^{\bullet}\Obs^{q} $ is locally constant.
+
+	Write $\widehat{\mathfrak{g} }=\widehat{\mathcal{L}}_c $. We have previously seen that $H^{\bullet} (C_{\bullet} \widehat{\mathfrak{g} })\cong \Sym^{\bullet} (H^{\bullet} \widehat{\mathfrak{g} } [1]) \cong U\widehat{H^{\bullet} (\Sigma )[1]} $ in our construction of the universal enveloping algebra (note that $\mathfrak{g} $ is just $\mathfrak{g} ^{\Sigma } $). Here, the central element is $\hbar $.
+
+	Now we consider the Hamiltonian. The conceptual reason that the Hamiltonian vanishes is since the de Rham complex is preserved up to homotopy under every diffeomorphism of $\mathbb{R} $, which includes infitesimal translations.
+
+	Let $x$ be a coordinate system on $\mathbb{R} $. Fix a function $f\in C^\infty _c((-\frac{1}{2} ,\frac{1}{2} ))$ such that $\int_{\mathbb{R} } f\dd x=1$. Hence $f\dd x$ generates $H^1_c(\mathbb{R} )$. Let $f_t(x) = f(x-t)$. Then there are linear observables in $C_{\bullet} \widehat{\mathfrak{g} } ((t-\frac{1}{2} ,t+\frac{1}{2} ))$ given by
+	\[
+		A_{t,j} = f_t\dd x\otimes \alpha _j,
+	\]
+	\[
+		B_{t,k} =f_t\dd x \otimes \beta _k,
+	\]
+	\[
+		\nu _t = f_t\dd x\otimes \nu ,
+	\]
+	\[
+		\mu _t = f_t\dd x\otimes \mu 
+	.\]
+	These elements are all cohomologically nontrivial, and their cohomology classes generate the Weyl algebra. Observe that, for instance,
+	\[
+		\frac{\partial }{\partial x} A_{t,j} =f'_t\dd x \otimes \alpha _j = \dd f_t \otimes \alpha _j,
+	\]
+	so the infinitesimal translation is cohomologically trivial ($\dd f_t$ is exact, and is thus 0 in cohomology). This logic applies to any generator. Thus the derivation on the Weyl algebra given by $\partial _x$ is trivial.
+\end{proof}
+
+\section{Another take on quantizing observables}
+
+We have given an abstract definition of $\Obs^{q} $ as the factorization envelope of a particular Heisenberg dg Lie algebra. This is mathematically useful, but physically it may not be fully clear how this is interesting. We provide another useful description here, which helpts to answer that question.
+
+As (precosheaves of) graded vector spaces, $\Obs^{q} \cong \Obs^{cl} [\hbar ]$. Additionally, the factorization products are the same. However, the differentials are not compatible. Previously we saw that taking cohomology changes the differentials and leads to a Weyl algebra; in particular the change in differential modifies the structure maps at the level of cohomology. However, deformation quantization deforms the product of observables. It is possible to approach quantization in this sense: modifying the structure maps at the cochain level, rather than the differential.
+
+Hence we will construct a different isomorphism of precosheaves $\Obs^{q} \cong \Obs^{cl} $ which compatible with differentials. This isomorphism is \emph{not} compatible with the factorization product. Thus, this isomorphism induces a deformed factorization product on $\Obs^{cl} [\hbar ]$ corresponding to the factorization product on $\Obs^{q} $.
+
+In other words, instead of viewing $\Obs^{q} $ as being obtained from $\Obs^{cl} $ by keeping the factorization product and deforming the differential, we deform the factorization product and keep the differential. One advantage of this is that correlation functions and vacua are easier to construct in this language. We introduce these ideas for the free scalar field.
+
+\subsection{Green's functions}
+
+\begin{definition}\label{dfn:4-6-1}
+	A \emph{Green's function} (for the Laplacian $\Delta $) is a distribution $G$ on $M\times M$, preserved under reflection across the diagonal (i.e., symmetric) and satisfying
+	\[
+		(\Delta \otimes 1)G=\delta _{\Delta } ,
+	\]
+	where $\delta _{\Delta } $ is the delta distribution\footnote{Note that $\delta $-sub-$\Delta $ does not mean ``$\delta $-sub-Laplacian, even though the $\Delta $ on the LHS is the Laplacian. There are two different uses of $\Delta $ in this equation: Laplacian on the left and diagonal on the right.} on the diagonal $M\hookrightarrow M\times M$. A Green's function for the Laplacian with mass satisfies
+	\[
+		(\Delta \otimes 1)G + m^2G = \delta _{\Delta } 
+	.\]
+\end{definition}
+
+If $M$ is compact, then there is no Green's function for the Laplacian. Instead, there is a unique $\widetilde{G} $ satisfying $(\Delta \otimes 1) \widetilde{G} =\delta _{\Delta } -1$. However, if mass is nonzero, then $\Delta + m^2$ is an isomorphism on $C^\infty (M)$, yielding a unique Green's function.
+
+If $M$ is non-compact, then there can be a Green's function when there is no mass term. For example, a Green's function for $\Delta $ on $\mathbb{R} ^n$ is
+\[
+	G(x,y)=
+	\begin{cases}
+		\frac{1}{4\pi ^{d/2} } \Gamma (\frac{d}{2} -1)\left| x-y \right| ^{2-n} ,& n\neq 2\\
+		-\frac{1}{2\pi } \ln \left| x-y \right| ,& n=2
+	\end{cases}
+.\]
+Here, I believe $d$ is distance. The role of the Green's function is to produce an isomorphism. Intuitively, this is since it serves as an ``inverse'' for a differential operator. Different choices of Green's functions thus lead to different isomorphisms. These choices do not change the quantum observables themselves though, just the process of promoting a classical observable to a quantum one.
+
+\subsection{The isomorphism of graded vector spaces}
+
+Consider free field theory $\mathcal{E} =C^\infty _M\xrightarrow{\Delta +m^2}C^\infty _M[-1]$. The underlying graded vector space of $\Obs^{q} $ is
+\[
+	\Sym \left( C^\infty _c(U)[1]\oplus C^\infty _c(U) \right) [\hbar ]
+.\]
+
+Let $V$ a vector space and $P\in (V^{\vee } )^{\otimes 2} $. Then $P$ defines a differential operator $\partial _P$ on $\Sym V$ by $\partial _P|\Sym ^{\leq 1}V = 0$, and $\partial _P$ on quadratic terms by contraction (symmetrize and evaluate). In the asme way, if $P$ is a distribution on $U\times U$, we can define a continous, second-order differential operator on $\Sym \left( C^\infty _c(U)[1]\oplus C^\infty _c(U) \right) $ that vanishes on linear and lower terms, vanishes elements of negative cohomological degree in $\Sym ^2$, and
+\[
+	\partial _P(\phi \psi ) = \int_{U\times U} P(x,y)\phi (x)\psi (y)
+\]
+for any $\phi ,\psi \in C^\infty _c(U)$ of cohomological degree 0 (hence degree 1 after the shift, landing $\phi \psi $ in $\Sym ^2$).
+
+The mild abuse of notation here tripped me up, so I will make this more precise. Define $(\phi \boxtimes \psi ): M\times M \to \mathbb{R} $ by $(\phi \boxtimes \psi )(x,y)=\phi (x)\psi (y)$. Then $\partial_P(\phi \psi )\coloneqq \left\langle P,\phi \boxtimes \psi  \right\rangle $, where of course the pairing here is just contraction, which is given by symmetrizing $P$ and evaluating. We abuse notation and write $P^{sym} (\phi \boxtimes \psi )$ as an integral against a test function $P(x,y)$ since almost all useful distributions arise in this way, or at least up to arbitrary precision. Especially since $\phi ,\psi $ are compactly supported, so the test function $P$ need not be compactly supported.
+
+Choose a Green's function $G$ for $\Delta $ on $M$. Thus, $G$ restricts to a Green's function for the Laplacian on any open subset $U\subseteq M$. Thus, we define a second-order differential operator $\partial _G$ on the algebra $\Sym \left( C^\infty _c(U)[1]\oplus C^\infty _c(U) \right) $, and extend by $\mathbb{R} [\hbar ]$-linearity to an operator on $\Obs^{q} (U)$.
+
+The differential on $\Obs^{q} (U)$ can be written as $\dd =\dd _1 + \dd _2$, for $\dd _1=\dd _{\mathcal{E} }$ a first-order differential operator arising from the space of fields, and $\dd _2$ a second-order $\mathbb{R} [\hbar ]$-linear differential operator given by the BV Laplacian. In the scalar field theory, this means
+\[
+	\dd _2(\phi _{-1} \phi _0) = \hbar \int_{U} \phi _{-1} \phi _0,
+\]
+for $\phi _k$ in the copy of $C^\infty _c(U)$ sitting in degree $k$, sitting in $\Obs^{q} $.
+
+\begin{remark}
+	Let $a\in \Sym (V^{\bullet} )$ for some complex $V^{\bullet} $, and write $\mu_a$ for the map $x\mapsto ax$. A differential operator of order $\leq n$ is an operator $D$ such that $[D,\mu _a]$ is a differential operator of order $\leq n-1$. A differential operator of order 0 is an operator given by right-multiplication by some element $D(1)$. Most differential operators annihilate some lower degree of elements in the symmetric algebra.
+\end{remark}
+
+
+Since
+\[
+	((\Delta +m^2)\otimes 1)G=\delta _{\Delta } ,
+\]
+we can show that
+\[
+	[\hbar \partial _G,\dd _1]=\dd _2
+.\]
+Indeed, both sides of the equation are second-order differential operators, so it suffices to check it on a quadratic term. If $\phi _k\in C^\infty _c(U)$ has cohomological degree $k$, then
+\[
+	\hbar \partial _G\dd_1(\phi_0\phi _{-1} )=\hbar \partial _G(\phi _0(\Delta +m^2)\phi _{-1} )=\hbar\int_{U\times U} G(x,y)\phi _0(x)((\Delta +m^2)\phi _{-1} )(y)\vol_{g} 
+\]
+\[
+	=\int_{U\times U} ((\Delta _y + m^2)G(x,y))\phi _0(x)\phi _{-1} (y)\vol_{g} = \int_{U} \phi _0(x)\phi _{-1} (y)\vol_{g} = \dd _2(\phi _0\phi _{-1} )
+.\]
+\begin{remark}\label{rmk:4-6-3}
+	This calculation confused me, so I provide further commentary. First, note that
+	\[
+		[\hbar \partial _G,\dd _1] = \hbar \partial _G\dd _1 - (-1)^{\left| \partial _G \right| \left| \dd _1 \right| } \dd_1 \hbar \partial _G
+	.\]
+	On quadratic terms, $\partial _G$ is second order, thus mapping quadratic terms to constants, i.e. $\Sym ^0$. Note that $\dd _1$ kills $\Sym ^0$, so $\dd_1 \hbar \partial _G=0$. Thus $[\hbar \partial _G,\dd _1]=\hbar \partial _G\dd _1=\dd _2$. Recall that $G$ is symmetric, so the choice of variable assignment in the integral doesn't matter. This is also due to symmetrization. The Laplacian commutes past $G$ since it is self-adjoint.
+\end{remark}
+
+It is also immediate that $\partial _G$ commutes with $\dd _2$: both are just derivatives, and derivatives commute. Thus if $W$ is a map assigning a classical observable $\alpha $ to a quantum observable $W(\alpha )=e^{\hbar \partial _G} (\alpha )$, then
+\[
+	(\dd _1 + \dd _2)W(\alpha ) = W(\dd _1\alpha )
+.\]
+
+The book does not explain why this is true. Google's Gemini suggested that I recall Hadamard's lemma. The following is my own work. Recall Hadamard's lemma
+\[
+	e^ABe^{-A} =B + [A,B] + \frac{1}{2!} [A,[A,B]] + \cdots 
+.\]
+This is a non-graded statement, and must be adjusted to account for grading. Substitute $A=\hbar \partial _G$ and $B=\dd_1+\dd _2$. Then note that since $\partial _G$ has cohomological degree -2, the above identity holds in the graded setting. Now use $[\hbar \partial _G,\dd _1]=\dd _2$ and $[\hbar \partial _G,\dd _2]=0$ to simplify the expression to only the first two terms
+\[
+	e^{\hbar \partial _G} \dd _1 e^{-\hbar \partial _G} = \dd _1 + \dd _2
+.\]
+Multiplying on the left by $e^{\hbar \partial _G} $ yields the result
+\[
+	e^{\hbar \partial _G} \dd _1 = \left( \dd _1 + \dd _2 \right) e^{\hbar \partial _G} 
+,\]
+recovering the book's statement. 
+
+It is important to note here that this is exactly the statement that $W=e^{\hbar \partial _G} $ commutes with the differentials of $\Obs^{cl} $ and $\Obs^{q} $. Moreover, it is $\mathbb{R} [\hbar ]$-linear: if $c\in\mathbb{R} $ and $\alpha \in \Obs^{cl} $,
+\[
+	W(c\hbar \alpha ) = e^{\hbar \partial _G} (c\hbar \alpha ) = \sum_{n\geq 0} \frac{1}{n!} \hbar \partial _G^n(c\hbar \alpha )=\sum_{n\geq 0} \frac{1}{n!} \hbar (c\hbar)\partial _G^n\alpha =c\hbar \sum_{n\geq 0} \hbar \partial _G^n\alpha =c\hbar e^{\hbar \partial _G} \alpha =c\hbar W(\alpha )
+.\]
+Thus, $W$ is an $\mathbb{R} [\hbar ]$-linear cochain map $\Obs^{cl} [\hbar ]\to \Obs^{q} $. Since it it has an inverse given by $e^{-\hbar \partial _G}$, it is an isomorphism.
+
+We can promote this to a map of prefactorization algebras by defining a new factorization product for $\Obs^{cl} [\hbar ]$. If $U,V\subseteq M$ are disjoint and $\alpha \in \Obs^{cl} (U)$, $\beta \in \Obs^{cl} (V)$ are observables, then define the factorization product $\star _{\hbar } $ to be
+\[
+	\alpha \star _{\hbar } \beta \coloneqq e^{-\hbar \partial _G} \left( \left( e^{\hbar \partial _G} \alpha  \right) \left( e^{\hbar \partial _G} \beta  \right)  \right) = W^{-1} (W(\alpha )W(\beta ))
+.\]
+We can easily show that this is the correct definition. Let $\star _{\hbar } $ denote the factorization product on $\Obs^{cl} [\hbar ]$, and recall that the factorization product on $\Obs^{q} $ is simply the $\mathbb{R} [\hbar ]$-multilinear symmetric algebra product. Let $\alpha ,\beta \in \Obs^{cl}(U)[\hbar ]$ be homogeneous elements. For $W$ to be a morphism of prefactorization algebras, we must have $W(\alpha \star _\hbar \beta )=W(\alpha )W(\beta )$. Using its inverse $W^{-1} $, we obtain
+\[
+	\alpha \star _{\hbar } \beta =  W^{-1} (W(\alpha \star _{\hbar } \beta )) = W^{-1} (W(\alpha )W(\beta ))
+.\]
+Thus, we have our definition.
+
+\subsection{Beyond the free scalar field}
+
+This construction can be readily generalized. Let $M$ be a manifold with space of fields $\mathcal{E} $ and differential $\dd $. Instead of a Green's function, let $G : (\mathcal{E} (M)[1])^{\otimes 2}  \to \mathbb{R} $ be a symmetric continuous linear operator such that
+\[
+	G\dd (e_1\otimes e_2)=\left\langle e_1,e_2 \right\rangle 
+\]
+for $\left\langle -,- \right\rangle $ the BV pairing. The analog of the operator $e^{\hbar \partial _G} $ is the ``renormalization group flow operator from scale zero to scale $\infty $''. See \cite{costello-renormalization} for more on whatever that means.
+
+
+
+\section{Correlation functions}
+
+Let $\mathcal{E} $ be the space of fields of some free field theory on a \emph{compact} manifold $M$ (compactness is important!). Additionally, suppose that $H^{\bullet} (\mathcal{E} (M))=0$. For example, the free scalar field theory on $M$ where
+\[
+	\mathcal{E} =\left( 
+	\begin{tikzcd}
+		C^\infty _M \ar[" \Delta +m^2 ", r] & C^\infty _M[-1]
+	\end{tikzcd}
+	\right) 
+.\]
+The book claims that since our conventions are such that $\Delta $ has non-negative eigenvalues, adding the $m^2$ yields a term with no zero eigenvalues, meaning the complex has no cohomology by Hodge theory (this doesn't hold on non-compact manifolds).
+
+In this situation, the dg Lie algebra $\widehat{\mathcal{E} }(M) $ has cohomology spanned by the element $\hbar $ in degree 1, and cohomology still vanishes in the lowest degree. Since cohomology commutes with taking Sym, there is an isomorphism of $\mathbb{R} [\hbar ]$-modules
+\[
+	H^{\bullet} (\Obs^{q} (M))\cong \Sym \left( H^1(\widehat{\mathcal{E} }(M)[-1][1]) \right) \cong \Sym (\langle\hbar\rangle)\cong \mathbb{R} [\hbar ]
+.\]
+Let us normalize this isomorphism by requiring that the element
+\[
+	1\in \Sym ^0(\widehat{\mathcal{E} }[1])=\mathbb{R}  
+\]
+is mapped to $1\in\mathbb{R} [\hbar ]$.
+
+\begin{definition}\label{dfn:7-0-1}
+	In this situation, we define the \emph{correlation functions} of the free field theory as follows. For a finite collection $\left\{ U_i \subseteq M \right\}_{1\leq i\leq n} $ of disjoint open sets and a closed element $O_i\in \Obs^{q} (U_i)$ for each open, we define
+	\[
+		\left\langle O_1 \cdots O_n \right\rangle \coloneqq [O_1 \cdots O_n]\in H^{\bullet} (\Obs^{q} (M))\cong \mathbb{R} [\hbar ]
+	.\]
+	Here $O_1 \cdots O_n\in \Obs^{q} (M)$ denotes the image under the factorization product
+	\[
+		\bigotimes_{1\leq i\leq n} \Obs^{q} (U_i) \to \Obs^{q} (M)
+	\]
+	of the tensor $O_1 \otimes \cdots \otimes O_n$.
+\end{definition}
+
+Essentially, our choice of a normalization for this isomorphism gives a real value in $\mathbb{R} [\hbar ]$ for each cohomology class, and we identify this with the ``expected value'' of the observable. The map $W : \Obs^{cl} [\hbar ]\cong \Obs^{q} $ simplifies this computation somewhat. Suppose we have the free scalar field theory with a nonzero mass term on a compact manifold, yielding a unique Green's function for $\Delta+m^2$.
+\begin{lemma}[Wick]\label{lma:4-7-2}
+	Let $\left\{ U_i \subseteq M \right\} _{1\leq i\leq n} $ be pairwise disjoint open sets. Let
+	\[
+		\alpha _i\in \Obs^{cl} (U_i)
+	\]
+	be classical observables of the free scalar field theory. Let
+	\[
+		W(\alpha _i) = e^{\hbar \partial _G} \alpha _i\in \Obs^{q} (U_i)
+	\]
+	be the corresponding quantum observables under the isomorphism $W$ of cohain complexes. Then
+	\[
+		\left\langle W(\alpha _i)\cdots W(\alpha _n) \right\rangle =W^{-1} (W(\alpha _1)\cdots W(\alpha _n))(0)\in \mathbb{R} [\hbar ]
+	.\]
+	On the right hand side, the product indicates the symmetric product in $\Sym $, and evaluation at 0 indicates evaluating the function at $0\in \Sym ^0$.
+\end{lemma}
+\begin{proof}
+	The map $W$ is an isomorphism $\Obs^{q} (U) \cong \Obs^{cl} (U)[\hbar]$ for every open $U\subseteq M$. Let $\star _\hbar $ denote the deformed factorization product on $\Obs^{cl} [\hbar ]$. It is easily seen that
+	\[
+		\alpha _1 \star _{\hbar } \cdots \star _{\hbar } \alpha _n = e^{-\hbar \partial _G} \left( \left( e^{\hbar \partial _G} \alpha _1 \right) \cdots \left( e^{\hbar \partial _G} \alpha _n \right)  \right) 
+	.\]
+	Since $W$ is an isomorphism, it preserves cohomology classes, meaning the correlation function for the observables $W(\alpha _i)$ is the cohomology class of $\alpha _1 \star_{\hbar } \cdots \star _{\hbar } \alpha _n$. The map $\Obs^{q} (M)\to \mathbb{R}[\hbar ]$ is an $\mathbb{R} [\hbar ]$-linear quasi-isomorphism sending $1\mapsto 1$. Such a map can be shown to be unique up to chain homotopy. It suffices to show that the map $\alpha \mapsto \alpha (0)$ suffices as the dotted arrow in the diagram
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\Obs^{cl} (M)[\hbar ]\ar[dotted, dr]  &  \\
+		\Obs^{q} (M) \ar[" W^{-1}  ", u] \ar[" 1\mapsto 1 "', r]  & \mathbb{R} [\hbar ].
+	\end{tikzcd}\]
+	We will thus have that evaluation at 0 is the unique map sending $1\mapsto 1$ on the level of cohomology (since cohomology identifies homotopies). Indeed, all we must show is that $W^{-1} (1)(0) = 1$, where $1$ is the constant observable, and indeed
+	\[
+		e^{\hbar \partial _G} (1) = \sum_{n\geq 0} \frac{1}{n!} \partial _G^n(1) = \frac{1}{0!} 1 = 1
+	\]
+	is still the constant observable, and $1(0)=1$.
+\end{proof}
+
+This statement does not resemble the usual statement of Wick's lemma in a physics text, so we explore it further. Suppose that we have two linear observables $\alpha _1,\alpha _2$ of cohomological degree 0 over open sets $U,V$. By the isomorphism of graded vector spaces, we may view these as either quantum or classical observables, and we will change our viewpoint as is convenient. Since these are linear observables, they are killed by $\partial _G$, so we have that $e^{\hbar \partial _G}(\alpha _k)=\alpha _k$. But their product is quadratic, so we obtain
+\[
+	W^{-1} (\alpha_1\alpha _2) = \alpha _1\alpha _2 - \hbar \partial _G(\alpha _1\alpha _2)
+.\]
+Recall the formula
+\[
+	\partial _G = \int_{M\times M} G(x,y)\alpha _1(x)\alpha _2(y).
+\]
+Applying \cref{lma:4-7-2} and these equations, we can compute the expectation value as
+\begin{align*}
+	\left\langle W(\alpha_1)W(\alpha _2) \right\rangle &=W^{-1} (W(\alpha _1)W(\alpha _2))\\
+							   &=W(\alpha_1)W(\alpha _2) - \hbar \partial _G(W(\alpha _1)W(\alpha _2))\\
+							   &=-\hbar \partial _G(W(\alpha _1)W(\alpha _2))\\
+							   &=-\hbar \int_{M\times M} G(x,y)\alpha _1(x)\alpha _2(y)
+.\end{align*}
+The second to last step follows since $W$ kills $\Sym ^1$. This is what a physicist would write down as the expectation value of two linear observables. This is also what follows from our lemma -- note that since $\partial _G$ is a differential operator of degree 2, it drops the quadratic term to a constant term in $\Sym ^0$, meaning evaluation at 0 is trivial.
+
+We have now given a precise definition to the earlier heuristic of integrating against a "Lebesgue" measure $e^{S/\hbar } \dd \mu $ over the space of field configurations.
+
+\section{Translation-invariant prefactorization algebras}
+
+Most physical theories posess some notion of translation invariance. In this section, we will analyze thijs notion for prefactorization algebras on $\mathbb{R} ^n$. For one-dimensional theories, one often uses the phrase ``time-independent Hamiltonian'' for this property. We will show how the Hamiltonian formalism of quantum mechanics can be related to our approach.
+
+\subsection{The definition}
+
+\begin{definition}\label{dfn:4-8-1}
+	For any $U\subseteq \mathbb{R} ^n$ and $x\in\mathbb{R} ^n$, let $\tau _xU \coloneqq U+x$ denote the translation of $U$ by $x$. A prefactorization algebra $\mathcal{F} $ on $\mathbb{R} ^n$ is \emph{discretely translation-invariant} if we have isomorphisms
+	\[
+		\tau _x : \mathcal{F} (U) \cong \mathcal{F} (\tau _xU)
+	\]
+	for all $x\in\mathbb{R} ^n $ and all open subsets $U\subseteq \mathbb{R} ^n $, which satisfy the following condtions:
+	\begin{enumerate}
+		\item We have $\tau _x \circ \tau _y = \tau _{x+y}$ for all $x,y\in\mathbb{R} ^n$.
+		\item For all pairwise disjoint collections $\left\{ U_i \subseteq V \right\} _{1\leq i\leq k} $ of open sets, the diagram
+			\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+				\displaystyle{\bigotimes_{1\leq i\leq k} \mathcal{F} (U_i)}\ar[" \tau _k ", r] \ar[d]  & \displaystyle{\bigotimes_{1\leq i\leq k} \mathcal{F} (\tau _xU_i)}\ar[d]  \\
+			\mathcal{F} (V) \ar[" \tau _x "', r]  & \mathcal{F} (\tau _xV)
+			\end{tikzcd}\]
+			commtues. Here the vertical arrows are the factorization product.
+	\end{enumerate}
+\end{definition}
+
+Most of the theories we have seen so far are discretely translation-invariant. For example, any locally constant theory is (homotopy) discretely translation invariant. However, this notion turns out to be a bit too general for physical interest. We are more interested in the case where the factorization product depends smoothly on the position of the open sets, in a particular sense which we now make precise. Recall \cref{dfn:4-3-2} which says the following:
+\begin{definition}\label{dfn:4-8-2}
+	Let $\mathcal{F} $ be a prefactorization algebra on $M$ with values in $\Ch_{R} $. A \emph{degree $k$ derivation} $D$ of $\mathcal{F} $ is a collection of maps $\left\{ D_U : \mathcal{F} (U) \to \mathcal{F} (U) \right\} _{U\in \Open(M) } $ of cohomological degree $k$, which act as a derivation on the factorization product in the sense that if $\left\{ U_i\subseteq V \right\} _{1\leq i\leq n} $ are pairwise disjoint, $\left\{ \alpha _i\in \mathcal{F} (U_i) \right\} _{1\leq i\leq n} $ are homogeneous elements, and $m : \bigotimes_{i} \mathcal{F}(U_i) \to \mathcal{F} (V)$ is the factorization product, then
+	\[
+		(D_V\circ m)(\alpha _1, \ldots ,\alpha _n) = \sum_{1\leq i\leq n} (-1)^{k \sum_{j=1}^{i-1} \left| \alpha _j \right| } m(\alpha _1, \ldots , D_{U_i} \alpha _i, \ldots ,\alpha _n)
+	.\]
+\end{definition}
+
+Recall that \cref{rmk:4-3-3} proves that a derivation is necessarily a natural transformation. Given a prefactorization algebra $\mathcal{F} $ valued in cochain complexes, we define a dg Lie algebra $\operatorname{Der} ^{\bullet} (\mathcal{F} )$ of derivations on $\mathcal{F} $ by detting $\operatorname{Der} ^k(\mathcal{F} )$ to be the degree $k$ derivations of $\mathcal{F} $. The differential is defined by $(\dd D)_U \coloneqq [\dd _U,D_U]$ for $\dd _U$ the differential on $\mathcal{F} (U)$. The Lie bracket is defined by $[D,D']_U \coloneqq [D_U,D'_U]$. This concept allows us to introduce the notion of an action of a dg Lie algebra on a prefactorization algebra.
+
+\begin{definition}\label{dfn:4-8-3}
+	Let $\mathcal{F} $ be a prefactorization algebra on $M$ valued in $\Ch_{R} $, and let $\mathfrak{g} $ be a differential graded Lie $R$-algebra. An \emph{action} of $\mathfrak{g} $ on $\mathcal{F} $ is a morphism of differential graded Lie algebras $\mathfrak{g} \to \operatorname{Der} ^{\bullet} (\mathcal{F} )$.
+\end{definition}
+
+Now we introduce the requisite machinery to discuss the smoothness condition for a discretely translation-invariant prefactorization algebra. Define the operad $\operatorname{Disj} $ to have colors given by finite tuples $(U_1, \ldots , U_k)$ of disjoint open subsets. If $U_i \subseteq V$ for all $i$, define the $k$-ary multimorphisms $\operatorname{Disj} (U_1, \ldots , U_k; V)$ to be all $k$-tuples $(x_1, \ldots ,x_k)\in(\mathbb{R} ^n)^k$ such that $\tau _{x_1} (U_1), \ldots ,\tau _{x_k} (U_k)$ are still disjoint and are contained in $V$. Hence $\operatorname{Disj} (U_1, \ldots , U_k; V)$ parameterizes the way we can move the open sets without causing overlaps. If the closure of each $U_i$ are disjoint and contained in $V$, then $\operatorname{Disj} (U_1, \ldots , U_k; V)$ has nonempty interior.
+
+Let $\mathcal{F} $ be any discretely translation-invariant prefactorization algebra. For each $(x_1, \ldots ,x_k)\in \operatorname{Disj} (U_1, \ldots , U_k; V)$, we have a multilinear map
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\prod_{i} \mathcal{F} (U)_i\ar[r]  & \prod_{i} \mathcal{F} (\tau _{x_i} U_i)\ar[r]  & \mathcal{F} (V),
+\end{tikzcd}\]
+where the second map is the factorization product. Write $m_{x_1, \ldots ,x_k} $ for this compositite.
+
+\begin{definition}\label{dfn:4-8-4}
+	A discretely translation-invariant prefactorization algebra $\mathcal{F} $ is \emph{smoothly translation-invariant} if the following hold.
+	\begin{enumerate}
+		\item The map $m_{x_1, \ldots ,x_k} $ depends smoothly on $(x_1, \ldots ,x_k)$.
+		\item The prefactorization algebra $\mathcal{F} $ is equipped with an action of the abelian Lie algebra $\mathbb{R} ^n$ of translations. If $v\in\mathbb{R} ^n$, we denote the corresponding action maps by
+			\[
+				\frac{\mathrm{d}}{\mathrm{d}v} : \mathcal{F} (U) \to \mathcal{F} (U)
+			.\]
+			We view this Lie algebra action as an infinitesimal version of the global translation invariance.
+		\item The infinitesimal action is compatible with the global translation invariance in the following sense. For $v\in\mathbb{R} ^n$, let $v_i\in(\mathbb{R} ^n)^k$ be the vector $(0, \ldots ,v, \ldots ,0)$ containing $v$ in the $i$th slot. If $\alpha _i\in \mathcal{F} (U_i)$, then we require that
+			\[
+				\frac{\mathrm{d}}{\mathrm{d}v_i} m_{x_1, \ldots ,x_k} (\alpha _1, \ldots ,\alpha _k)=m_{x_1, \ldots ,x_k} \left( \alpha _1, \ldots , \frac{\mathrm{d}}{\mathrm{d}v} \alpha _i, \ldots ,\alpha _k \right) 
+			.\]
+	\end{enumerate}
+\end{definition}
+
+Whenever we refer to a translation-invariant prefactorization algebra without further qualification, we always mean a smoothly translation-invariant one.
+
+\begin{example}
+	Let $\mathcal{F} $ be the cohomology prefactorization algebra $H^{\bullet} \Obs^{q} $ on the free scalar field theory on $\mathbb{R} $ with mass $m$. Recall that this is locally constant, and corresponds to the Weyl algebra $A$, generated by $p,q,\hbar $ subject to the relation $[p,q]=\hbar $. Clearly this is discretely translation invariant, so we must check that it is smoothly translation invariant. We start with the action of $\mathbb{R} $ on $H^{\bullet} \Obs^{q} $. Choose some $x\in\mathbb{R} $; we want to define an action of $x$ on $\mathcal{F} $, denoted $\frac{\mathrm{d}}{\mathrm{d}x} $. The natural choice here is to simply use the derivative as the derivation: given $\phi \in C^\infty _c(U)$, define $\frac{\mathrm{d}}{\mathrm{d}x} \phi (t) \coloneqq -x \frac{\mathrm{d}\phi}{\mathrm{d}t} $. Since the derivative is supported within the original support, this returns an element of $C^\infty _c(U)$. Now we simply demand that $\frac{\mathrm{d}}{\mathrm{d}x} $ act as a derivation on the symmetric algebra. Since the factorization product is precisely the symmetric product, we obtain a derivation on $\mathcal{F} $. It is immediate to check copatibility with global translation invariance. Note that this derivation induces the Hamiltonian derivation $H(a) = \frac{1}{2\hbar } [p^2-m^2q^2,a]$ on the Weyl algebra.
+\end{example}
+
+\subsection{Operadic reformulation}
+
+\begin{definition}\label{dfn:4-8-6}
+	Let $\operatorname{Disks}_n$ be the $\mathbb{R} _{>0} $-colored operad in the category of smooth manifolds whose space of multimorphisms is defined as follows. Given $r_1, \ldots ,r_k,s\in\mathbb{R} _{>0} $, define
+	\[
+		\operatorname{Disks}_n(r_1, \ldots ,r_k ; s) \subseteq \left( \mathbb{R} ^n \right) ^k
+	\]
+	to be the (possibly empty) open subset of $k$-tuples $x_1, \ldots ,x_k\in\mathbb{R} ^n$ such that the closures of the balls $B_{r_i} (x_i)$ are all disjoint and contained in $B_s(0)$. We refer to this as a \emph{disk configuration}. Composition is defined by inserting balls into bigger balls.
+\end{definition}
+
+An important map to consider is as follows. Given $r_1, \ldots ,r_k, t_1, \ldots ,t_m,s\in\mathbb{R} _{>0} $, define
+\[
+	\circ _i : \operatorname{Disks}_n(r_1, \ldots ,r_k ; t_i) \times \operatorname{Disks}_n(t_1, \ldots ,t_m ; s)\to \operatorname{Disks} (t_1, \ldots ,t_{i-1} , r_1, \ldots ,r_k,t_{i+1} ,\ldots ,t_m ; s)
+\]
+by only inserting in the $r$-balls at $t_i$.
+
+Let $\mathcal{F} $ be a translation-invariant prefactorization algebra on $\mathbb{R} ^n$. Let $\mathcal{F} _r \coloneqq \mathcal{F} (B_r(0))$; by translation invariance we can replace $0$ with any $x\in\mathbb{R} ^n$ up to isomorphism. The structure maps yield, for any configuration of disks $p\in \operatorname{Disks} (r-1, \ldots ,r_k ; s)$, a multiplication operation
+\[
+	m[p] : \mathcal{F} _{r_1} \times \cdots \times \mathcal{F} _{r_k}  \to \mathcal{F} _s
+.\]
+Here we must take $\mathcal{F} _{r_i} $ to be $\mathcal{F} (B_{r_i} (p_i))$ such that all the balls are disjoint, but of course once again we can shift these to $B_{r_i} (0)$ up to isomorphism. This map is a smooth multilinear map of differentiable spaces, and depends smoothly on $p$.
+
+These operations make the complexes $\{\mathcal{F}_r\}_{r>0} $ into an algebra over the operad $\operatorname{Disks}_n$ valued in (differentiable) chain complexes. Additionally, there is an action of the abelian Lie algebra $\mathbb{R} ^n$ on the $\operatorname{Disks} _n$-algebra $\mathcal{F}$ given by the action on the prefactorization algebra $\mathcal{F} $.
+
+Now we will explain what it means to be a $\operatorname{Disks} _n$-algebra in $\Ch_{\mathbb{R} }$. Let $\mathcal{F} $ be such an algebra, and denote the operations by $m[p]$, as above. Given a configuration $p\in \operatorname{Disks} _n(r_1, \ldots ,r_k ; s)$, the map $m[p]$ is a multilinear map of cohomological degree 0, and is compatible with the differentials.
+
+Second, if $N$ is a manifold and $f_i : N \to \mathcal{F} _{r_i} ^{d_i} $ be smooth maps into the space of homogeneous elements with degree $d_i$. The smoothness of $m[p]$ means that
+\[
+	N\times \operatorname{Disks}_n(r_1, \ldots ,r_k ; s)\to \mathcal{F}_s
+\]
+\[
+	(x,p) \mapsto m[p](f_1(x), \ldots ,f_k(x))
+\]
+is smooth. Next, let $\sigma \in S_k$ be a permutation. There is an isomorphism
+\[
+	\sigma : \operatorname{Disks}_n(r_1, \ldots , r_k ; s) \cong \operatorname{Disks} _n(r_{\sigma (1)} , \ldots ,r_{\sigma (k)} ; s)
+.\]
+We require that $m[\sigma (p)]=m[p]$. Finally, multiplication is functorial in the sense that if $p\in \operatorname{Disks}_n(r_1, \ldots ,r_k ; t_i)$ and $q\in \operatorname{Disks} _n(t_1, \ldots , t_l ; s)$, then for any collections $\alpha _i\in \mathcal{F} _{r_i} $ and $\beta _j\in \mathcal{F} _{l_j} $,
+\[
+	m[q](\beta _1, \ldots ,\beta _{i-1} ,m[p](\alpha _1, \ldots ,\alpha _k), \beta _{l+1} , \ldots ,\beta _l) = m[q\circ _ip](\beta _1, \ldots ,\beta _{i-1} ,\alpha _1, \ldots ,\alpha _k, \beta _{i+1} , \ldots ,\beta _l)
+.\]
+Essentially, $m[q]\circ _im[p] = m[q\circ_ip]$ for an appropriate notion of $\circ _i$ in the category $\Ch_{\mathbb{R} } $. In addition, the action of $\mathbb{R} ^n$ on each $\mathcal{F} _r$ is compatible with these multiplication maps.
+
+\subsection{A co-operadic reformulation}
+
+???????
+
+\subsection{The free scalar field}
+
+Let us write down explicit formulas for the multiplication maps in the working example of the free scalar field theory. We will utilize the isomorphism $W : \Obs^{cl} [\hbar ] \to \Obs^{q} $ given by a Green's function for $\Delta $. Recall that
+\[
+	\alpha \star _{\hbar } \beta \coloneqq W^{-1}_{U \sqcup V} (W_U\alpha \cdot W_V\beta )
+,\]
+with notation as is evident. The multiplication map $m[p]$ varies smoothly with $p$, and thus $m$ is a map
+\[
+	m : \mathcal{F}_{r_1} \otimes \cdots \otimes \mathcal{F} _{r_k}  \to C^\infty(\operatorname{Disks} _n(r_1, \ldots ,r_k ; s), \mathcal{F} _s)
+\]
+via $(\alpha _1, \ldots ,\alpha _k) \mapsto m[-](\alpha _1, \ldots ,\alpha _k)$. We will write this map $m$ as $\mu _{r_1, \ldots ,r_k} ^s$. Using $\star _{\hbar } $ and $W$, we can fully describe this map in the case of the free scalar field theory.
+
+We use $\mathbb{R} ^2$ as an example on how to do this. Let $\alpha _1,\alpha _2$ be compactly supported smooth functions on disks $B_{r_i} (0)$. Then we can view $\alpha _i$ as homogeneous elements of $\Obs^{cl} (B_{r_i} (0))[\hbar ]$ of degree 0. Denote by $\tau _x\alpha _i$ the image of $\alpha _i$ in $C_c^\infty (B_{r_i} (x))$ under the translation $\tau _x$.
+
+For $x_1,x_2\in\mathbb{R} ^2$ such that $B_{r_i} (x_i)$ are disjoint and contained within $B_s(0)$ for some $s$, we have
+\[
+	\mu _{r_1,r_2} ^s(\alpha _1,\alpha _2) = \tau _{x_1} \alpha _1 \star _{\hbar } \tau _{x_2} \alpha _2 = (\tau _{x_1} \alpha _1)\cdot (\tau _{x_2} \alpha _2) - \hbar \int_{u_1,u_2\in\mathbb{R} ^2} \alpha _1(u_1 + x_1)\alpha _2(u_2 + x_2)\ln \left| u_1 - u_2 \right| 
+.\]
+Here we used the Green's function
+\[
+	G(x,y) = -\frac{1}{2\pi } \ln \left| x-y \right| 
+.\]
+
+
+\section{States and vacua for translation invariant theories}
+
+We now develop the notions of \emph{states} and \emph{vacuum} in this language for translation-invariant theories. Note that prefactorization algebras only encode the local relationships between observables. Long-range and global aspects of a physical situation appear in a different way, and the notion of state provides one way to introduce them.
+
+\begin{definition}\label{dfn:4-9-1}
+	Let $\mathcal{F} $ be a smoothly translation-invariant prefactorization algebra on $\mathbb{R} ^n$, over a ring $R$. (In practice, $R$ is $\mathbb{R} ,\mathbb{C},\mathbb{R} [[\hbar ]],\mathbb{C} [[\hbar ]]$). A \emph{state} for $\mathcal{F} $ is a smooth linear map $\left\langle - \right\rangle : H^{\bullet} (\mathcal{F} (\mathbb{R} ^n)) \to R$. The state is \emph{translation invariant} if it commutes with both the action of the group $\mathbb{R} ^n$, and the infinitesimal action of the Lie algebra $\mathbb{R} ^n$, where the actions on $R$ are trivial.
+\end{definition}
+
+Previously, we only defined correlation functions for the free scalar field theory when the manifold was compact. Now, we can define correlation functions more generally using a state. Given observables $O_i\in \mathcal{F}(B_{r_i} (0))$ and a configuration $(x_1, \ldots ,x_k)$ such that the disks $B_{r_i} (x_i)$ are disjoint, then we define the \emph{correlation function}
+\[
+	\left\langle O_1(x_1) \cdots O_n(x_n) \right\rangle 
+\]
+by applying the state $\left\langle - \right\rangle $ to the product observable $\tau _{x_1} O_1 \cdots \tau _{x_n} O_n\in \mathcal{F} (\mathbb{R} ^n)$. Since the factorization algebra is \emph{smoothly} translation invariant, we obtain that the correlation function depends smoothly on the configuration $(x_1, \ldots ,x_n)$; i.e. it forms a smooth map $\operatorname{Disks} (r_1, \ldots ,r_k ; \infty ) \to R$. This function is invariant under simultaneous translation of all the points $x_i$.
+
+\begin{definition}\label{dfn:4-9-2}
+	A translation-invariant state $\left\langle - \right\rangle $ is called a \emph{vacuum} if it satisfies the cluster decomposition principle: in the situation above, for any observables $O_1\in \mathcal{F} (B_{r_1} (0))$ and $O_2\in \mathcal{F} (B_{r_2} (0))$, we have
+	\[
+		\left\langle O_1(0)O_2(x) \right\rangle -\left\langle O_1(0) \right\rangle \left\langle O_2(0) \right\rangle \xrightarrow{x\to \infty }0
+	.\]
+	A vacuum is \emph{massive} if the above equation tends to 0 exponentially fast.
+\end{definition}
+
+Consider the free scalar field with mass $m$. If $m>0$, then there is a unique Green's function of the form $G(x,y) = f(x-y)$ for a distribution $f$ on $\mathbb{R} ^n$ that is smooth away from the origin and tends to 0 exponentially fast at $\infty $. For example, if $n=1$, then $f(x) = \frac{1}{2m} e^{-m\left| x \right| } $. If $m\neq 0$, then the canonically defined Green's function is
+\[
+	G(x,y) =
+	\begin{cases}
+		\frac{1}{4\pi ^{d/2} } \Gamma (d/2 - 1)\left| x-y \right| ^{2-n} ,&n\neq 2\\
+		-\frac{1}{2\pi } \ln \left| x-y \right| ,&n=2
+	\end{cases}
+.\]
+
+Consider the map $\Obs^{cl} (\mathbb{R} ^n)\to \mathbb{R} $ which is the identity on $\Sym ^0$ and vanishes elsewhere. Since $\Sym ^0$ lives in degree 0, this is a cochain map of cohomological degree 0. It extends to an $\mathbb{R} [\hbar ]$-linear map
+\[
+	\left\langle - \right\rangle : \Obs^{cl} (\mathbb{R} ^n)[\hbar ] \to \mathbb{R} [\hbar ]
+.\]
+This map is clearly translation-invariant and smooth, since constants are invariant under translation. The isomorphism $\Obs^{cl} [\hbar ]\cong \Obs^{q} $ yields a translation-invariant quantum state.
+
+\begin{lemma}\label{lma:4-9-3}
+	For $m>0$, this state is a massive vacuum. For $m=0$, this state is a vacuum if and only if $n>2$.
+\end{lemma}
+\begin{proof}
+	Let $F_1\in C^\infty _c(B_{r_1} (0))^{\otimes k_1} $ and $F_2\in C^\infty_c(B_{r_2} (0))^{\otimes k_2} $, viewed as observables in $\Obs^{cl} (B_{r_i} (0))$ using the natural map $C^\infty _c(U)^{\otimes k} \to \Sym ^k C^\infty _c(U)$. Let $c$ be sufficiently large such that $B_{r_1} (c)$ and $B_{r_2} (0)$ are disjoint, and let $\tau _cF_2$ denote the translation of $F_2$ by $c$. Explicitly, $(\tau _cF_2)(y_1, \ldots ,y_{k_2} ) = F_2(y_1-c, \ldots ,y_{k_2} -c)$. We want to compute the expected value $\left\langle F_1(\tau_cF_2) \right\rangle $. Note that these states are sufficiently arbitrary for full generality due to translation invariance.
+
+	The factorization product in this higher-dimensional example is the messy expression
+	\[
+		F_1 \star _{\hbar } \tau _cF_2=\sum_{r=0}^{\min (k_1,k_2)} \hbar ^r \sum_{1\leq i_1 < \cdots < i_r \leq k_1} \sum_{1\leq j_1 < \cdots < j_r \leq k_2} \int_{\mathbf{x} \in\mathbb{R} ^{nk_1} } \int_{\mathbf{y} \in\mathbb{R} ^{nk_2} } F_1(\mathbf{x} )F_2(\tau _c \mathbf{y} )\prod_{k=1}^{r} G(x_{i_k} ,y_{j_k} )
+	.\]
+	Note that after performing the integrals, we are left with a function of the $k_1+k_2 - 2r$ copies of $\mathbb{R} ^n$ that we have not integrated over. Some remarks to make this confusing line make sense: this is the Taylor expansion of the exponential $e^{\hbar \partial _G} $. The integrals are written wrong I think. Each one is only supposed to integrate over $k_i - r$ copies of $r$, not $k_i$ copies. This is reflected more accurately in the Green's function product (im psure the integral is just a nice shorthand for taking the distributional Green's function anyways). Hence we are indeed left with that many copies of $\mathbb{R} ^n$. We view this as an observable in $\Sym ^{k_1+k_2+2r} C^\infty _c(\mathbb{R} ^n)$.
+
+	If $k_1,k_2 > 0$, then $\left\langle F_1 \right\rangle =0$ and $\left\langle F_2 \right\rangle =0$. Furthermore, $\left\langle F_1(\tau _cF_2) \right\rangle $ selects the constant term in the factorization product $F_1(\tau _cF_2)$. Passing to the deformed factorization product, this is the constant term in $F_1\star _{\hbar } \tau _cF_2$. As seen above, there is only a nonzero constant term if $k_1 = k_2 = k$, otherwise $r$ never ranges high enough that $k_1 + k_2 - 2r = 0$ (it ranges to the min over $k_1,k_2$). If this happens, then the constant term is simply the $r=k$ term in the series:
+	\[
+		\left\langle F_1(\tau _cF_2) \right\rangle =\hbar ^k \int_{\mathbf{x},\mathbf{y}\in\mathbb{R}^{kn}} F_1(\mathbf{x} )F_2(\mathbf{y} - c^{\otimes k} )\prod_{i=1}^{k} G(x_i,y_i)
+	.\]
+	
+	We now must check the cluster decomposition principle. If $k_1 = k_2 = 0$, then the sum has a single term, which can be shown to  be $F_1 \left\langle \tau _cF_2 \right\rangle $. Using $\left\langle F_i \right\rangle =F_i$, we conclude the statement. Now assume $k_1,k_2 > 0$, and as seen before we immediately have that the cluster decomposition equation vanishes unless $k_1 = k_2$. In this case, it reduces to
+	\[
+		\left\langle F_1(\tau _cF_2) \right\rangle -\left\langle F_1 \right\rangle \left\langle F_2 \right\rangle =\left\langle F_1(\tau _cF_2) \right\rangle 
+	.\]
+	We must take $c\to \infty $ and see that this tends to 0. If $m>0$, then $G$ tends to 0 exponentially fast as $x-y \to \infty $, which can be seen in our definition. Thus we have a massive vacuum in this case. If $m=0$, then $G(x,y)$ tends to 0 like the inverse of a polynomial as long as $n>2$. Otherwise, we do not see a vacuum at all, since $G$ does not tend to 0.
+\end{proof}
+
+We can give a more abstract construction for the vacuum associated to a massive scalar field theory on $\mathbb{R} ^n$,  which illuminates how boundary conditions relate to observables. Let $\mathcal{E} $ be the complex of fields, and $\widehat{\mathcal{E}_c} =\mathcal{E} _c \oplus \mathbb{R} \hbar $ be the Heisenberg central extension, where $\hbar $ has degree 1.
+
+A function $\mathbb{R} ^n\to \mathbb{R} $ is \emph{Schwartz} if it tends to zero at $\infty $ faster than the reciprocal of any polynomial. Let $\mathcal{S} (\mathbb{R} ^n)$ be the collection of Schwartz functions, and define $\mathcal{E} _{\mathcal{S} } (\mathbb{R} ^n)$ to be the complex
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	\mathcal{S} (\mathbb{R} ^n) \ar[" \Delta +m^2 ", r]  & \mathcal{S} (\mathbb{R} ^n).
+\end{tikzcd}\]
+We once again define a Heisenberg central extension
+\[
+	\widehat{\mathcal{E}}_{\mathcal{S} }(\mathbb{R} ^n) \coloneqq \mathcal{E} _{\mathcal{S} }(\mathbb{R} ^n) \oplus (\mathbb{R} \hbar [-1]),\qquad [\phi ^0,\phi ^1] \coloneqq \hbar \int_{U} \phi ^0\phi ^1
+.\]
+Here $\phi ^k$ is a Schwartz function of cohomological degree $k$. We remark here that the product of two Schwartz functions is Schwartz, and Schwartz functions are integrable.
+
+Some Grothendieck magic shows us that the completed tensor product of Schwartz spaces can be defined, and coencides with
+\[
+	\mathcal{S} (\mathbb{R} ^n)\, \widehat{\otimes} \, \mathcal{S} (\mathbb{R} ^m) \cong \mathcal{S} (\mathbb{R} ^{n+m} )
+.\]
+This allows us to define the Chevalley-Eilenberg complex of the Heisenberg algebra as usual:
+\[
+	\Obs^{q}_{\mathcal{S} }(\mathbb{R} ^n) \coloneqq C_{\bullet} (\widehat{\mathcal{E} }_{\mathcal{S} }(\mathbb{R} ^n) )
+.\]
+Since compactly supported functions are Schwartz, there is a map $\Obs^{q} (\mathbb{R} ^n) \to \Obs^{q} _{\mathcal{S} } (\mathbb{R} ^n)$.
+
+\begin{lemma}\label{lma:4-9-4}
+	The cohomology of $\Obs^{q} _{\mathcal{S} } (\mathbb{R} ^n)$ is $\mathbb{R} [\hbar ]$ concentrated in degree 0.
+\end{lemma}
+\begin{proof}
+	The complex $\mathcal{E} _{\mathcal{S} }$ has no cohomology. I don't know why; I've never seen Schwartz functions before. I'll trust the authors here. It immediately follows that the cohomology of $\Obs^{q} _{\mathcal{S} } (\mathbb{R} ^n)$ has the same cohomology of $C_{\bullet} (\mathbb{R} \hbar [-1])$. Since $\mathbb{R} \hbar $ is abelian, the Chevalley-Eilenberg chains have no differential, and thus are their own cohomology. We have
+	\[
+		C_{\bullet} (\mathbb{R} \hbar [-1])\coloneqq \Sym ^{\bullet} (\mathbb{R} \hbar [-1][1])=\Sym ^{\bullet} (\mathbb{R} \hbar ) \cong \mathbb{R} [\hbar ]
+	.\]
+\end{proof}
+
+Thus we have a translation-invariant state
+\[
+	\left\langle - \right\rangle : H^{\bullet} (\Obs^{q} (\mathbb{R} ^n)) \to H^{\bullet} (\Obs^{q} _{\mathcal{S} } (\mathbb{R} ^n))=\mathbb{R} [\hbar ]
+.\]
+This state is uniquely characterized by the fact that it is defined on Schwartz observables, and is a massive vacuum.

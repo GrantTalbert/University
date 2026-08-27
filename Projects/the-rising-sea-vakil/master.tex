@@ -1,0 +1,37 @@
+\documentclass[A4, 11pt]{report}
+\input{./preamble.tex}
+
+\title{The Rising Sea - Self Study}
+\date{Summer 2026}
+\author{Grant Talbert}
+
+
+% for some reason no worky in preamble when i tried, fix later
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\bfseries\centering}{Chapter \thechapter}{10pt}{\Large}
+\titleformat{\section}{\normalfont\large\bfseries\centering}{\thesection}{1em}{}
+
+\begin{document}
+	\maketitle
+
+	\begin{abstract}
+		This document contains notes from my reading of Ravi Vakil's \emph{The Rising Sea} (\cite{vakil}). I read this book with my friend, \href{https://sites.google.com/view/xcyou/about?authuser=0}{Ophelia You}, over the course of the summer of 2026. Our goal was to gain a working understanding of algebraic geometry, since it was becoming increasingly applicable in both of our fields of interest.
+
+		I have personally already encountered (pre)sheaves, sheaf cohomology via the derived functors of $\Gamma$, \v{C}ech cohomology, affine varieties, (pre)cosheaves, and the notion of a structure sheaf on a space, largely due to my spring 2026 classes in complex geometry and factorization algebras (see \cite{cm} and \cite{fa}, respectively). I also have experience with category theory, abelian categories, and some exposure to homological algebra, due to these same classes and my readings on \cite{ml,htt,hovey,cathtpy,aluffi,weibel}.
+
+		As such, I'm approaching the book looking to solidify the various holes in this background, as well as to gain knowledge of schemes and to deepen my understanding of algebraic geometry. For these reasons, some parts of these notes will seem very barren and empty, possibly not even recording the important definitions and theorems in the book, and only writing a couple things. This is intentional -- I see no reason to write down the definition of a functor for the 100th time when it is a concept I have been confidently using for the past year and a half. Additionally, I am taking an algebraic geometry class in the fall, taught by professor \href{https://math.bu.edu/people/szczesny/}{Matiej Szczesny}, so I will be treating this reading as preparation for that class. Any notes not credited to a bibliography source are either directly from \cite{vakil}, are my interpretation of a passage therein, or are directly from me.
+	\end{abstract}
+	
+	\tableofcontents
+
+	% FILES START
+
+	\input{./files/part-I}
+	\input{./files/part-II}
+
+	% FILES END
+
+	\bibliographystyle{alpha}
+	\bibliography{refs}
+\end{document}
+

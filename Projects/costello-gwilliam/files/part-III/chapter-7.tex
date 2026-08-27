@@ -1,0 +1,213 @@
+\chapter{Formal aspects of factorization algebras}
+
+\section{Pushing forward factorization algebras}
+
+Let $M,N$ be spaces admitting Weiss covers, and $f : M \to N$ a continuous map. Given a Weiss cover $\mathfrak{U} =\left\{ U_\alpha  \right\}_{\alpha \in A} $ of an open $U\subseteq N$, let $f^{-1} \mathfrak{U} =\left\{ f^{-1} (U_\alpha) \right\} _{\alpha \in A} $ denote the preimage cover of $f^{-1} (U) \subseteq M$. Observe that $f^{-1} \mathfrak{U} $ is Weiss: given $\left\{ x_1, \ldots ,x_n \right\} \in f^{-1} (U)$, we have $\left\{ f(x_1), \ldots ,f(x_n) \right\} \subseteq U$, and thus is contained in some $U_\alpha $ since $\mathfrak{U} $ is Weiss. Thus, we have $\left\{ x_1, \ldots , x_n \right\} \subseteq f^{-1}(U_\alpha )$ for the same $\alpha $.
+
+\begin{definition}\label{dfn:7-1-1}
+	With notation as above, if $\mathcal{F} $ is a factorization algebra on $M$, the pushforward factorization algebra $f_*\mathcal{F} $ on $N$ is defined as
+	\[
+		(f_*\mathcal{F} )(U) = \mathcal{F} (f^{-1} (U))
+	.\]
+\end{definition}
+Note that if $f : M \to *$ is the unique map to the singleton, then $f_*\mathcal{F} (*) \cong \mathcal{F} (M)$ is just the global sections of $\mathcal{F} $. We call this the \emph{factorization homology of $\mathcal{F} $ on $M$}.
+
+\section{Extension from a basis}
+
+\subsection{Preliminary definitions}
+
+Let $X$ be a space, and let $\mathfrak{U} $ be a basis for $X$ that is closed under finite intersections. Then it is a well-known fact that there is an equivalence of categories between $\Shf_X$ and $\Shf _{\mathfrak{U} } $, there the latter denotes sheaves only defined on the basis $\mathfrak{U} $. There is a similar statement for factorizing bases and factorization algebras, when $X$ is Hausdorff. Recall \cref{dfn:6-1-16}, which defines factorizing bases as bases that are Weiss covers, closed under unions of finite pairwise disjoint opens, and closed under finite intersections.
+
+An example of a factorizing basis for $\mathbb{R} ^n$ is the collection of all opens that are a disjoint union of finitely many convex open sets (convex sets contain line segments drawn between any two of their elements).
+
+As noted before, assuming $X$ is Hausdorff, a factorizing basis produces Weiss covers for all opens. Given $U\subseteq X$ open, define the Weiss cover $\mathfrak{U} _U$ by taking all pairwise disjoint unions of opens $V_i \subseteq U$ with $V_i\in \mathfrak{U} $. We use the Hausdorff condition to guarentee that any finite number of points can have disjoint neighborhoods, and we intersect each of those with the open $U$ to ensure that they are subsets of $U$. Note that since $\mathfrak{U} $ is closed under finite intersection and finite pairwise disjoint union, we have $\mathfrak{U} _U \subseteq \mathfrak{U} $. Note that as we continue, the notation $\mathfrak{U} _U$ will only denote the collection of subsets of $U$ contained in $\mathfrak{U} $, and the Weiss cover is given by unions of pairwise disjoint unions of elements in $\mathfrak{U} _U$.
+
+\begin{definition}\label{dfn:6-2-1}
+	Let $\mathfrak{U} $ be a factorizing basis for a Hausdorff space $X$, and let $\mathcal{C} $ be a symmetric monoidal Grothendieck abelian category. A $\mathfrak{U} $-prefactorization algebra is a functor $\mathcal{F} : \mathfrak{U}  \to \mathcal{C} $ with the following properties:
+	\begin{enumerate}
+		\item For every finite tuple of pairwise disjoint opens $\left\{ U_{i_0} , \ldots , U_{i_n}  \right\}$, all contained in $U_j$, and all of these opens in $\mathfrak{U} $, there is a factorization product
+			\[
+				\mathcal{F} (U_{i_0} )\otimes \cdots \otimes \mathcal{F} (U_{i_n} )\to \mathcal{F} (U_j)
+			.\]
+		\item The factorization product is associative and equivariant.
+	\end{enumerate}
+	We say $\mathcal{F} $ is a (homotopy) $\mathfrak{U} $-factorization algebra if for every $U\in \mathfrak{U} $, and every Weiss cover $\mathfrak{V} $ of $U$ with $\mathfrak{V} \subseteq \mathfrak{U} $, the natural map
+	\[
+		\check{C}(\mathfrak{V} ,\mathcal{F} )\to \mathcal{F} (U)
+	\]
+	is a weak equivalence.
+\end{definition}
+Note that we have not required that the factorization product be an equivalence, meaning we are not specializing to multiplicative factorization algebras here. Also note that we have not required $\mathcal{C} $ be a dg category, or any type of homotopic category, model category, or $\infty $-category, meaning it may not have a notion of weak equivalence beyond that of an isomorphism. In this case, note that taking weak equivalences to be isomorphisms recovers the usual cosheaf condition from the \v{C}ech condition (this follows since the \v{C}ech nerve is 1-coskeletal, and (co)limits over $\boldsymbol{\Delta} _{\leq 1} $-indexed diagrams yield (co)equalizers for parallel arrows that happen to share a section).
+
+The extension will rely on the existence of a lax symmetric monoidal functor $\mathrm{s} \Ch_{\mathcal{A} } \to \Ch_{\mathcal{A} } $, for $\mathrm{s} \Ch$ simplicial cochain complexes.
+
+\subsection{The statement}
+
+We will show that any $\mathfrak{U} $-factorization algebra extends uniquely to a factorization algebra on the full space. For an open $V\subseteq X$, we denote $\mathfrak{U} _V$ for the collection of all the opens in $\mathfrak{U} $ that are contained inside $V$.
+
+Let $\mathcal{F} $ be a $\mathfrak{U} $-factorization algebra. Define a prefactorization algebra $\operatorname{ext} (\mathcal{F} )$ on $X$ by
+\[
+	\operatorname{ext} (\mathcal{F} )(V) \coloneqq \check{C}(\mathfrak{U} _V,\mathcal{F} )
+.\]
+Conversely, if $\mathcal{G} $ is a factorization algebra on $X$, let $\operatorname{res} (\mathcal{G} )$ denote its restriction to a $\mathfrak{U} $-factorization algebra.
+
+\begin{proposition}\label{prp:6-2-2}
+	Given a $\mathfrak{U} $-factorization algebra $\mathcal{F} $, its extension $\operatorname{ext} (\mathcal{F} )$ is a factorization algebra on $X$ such that $\operatorname{res} (\operatorname{ext} (\mathcal{F} ))$ is naturally isomorphic to $\mathcal{F} $. Conversely, if $\mathcal{G} $ is a factorization algebra on $X$, then $\operatorname{ext} (\operatorname{res} (\mathcal{G} ))$ is naturally weakly equivalent to $\mathcal{G} $.
+\end{proposition}
+
+\subsection{The proof}.
+
+Let $\mathfrak{U} $ be a factorizing basis for a Hausdorff space $X$, and let $\mathcal{F} $ be a $\mathfrak{U} $-factorization algebra. We will construct a factorization algebra $\operatorname{ext} (\mathcal{F} )$ on $X$.
+
+We use the following notation. A simplicial cochain complex will be denoted $A_{\bullet} $, where each $A_n$ is a cochainb complex. We obtain a double complex by taking the unnormalized cochains, and denote the totalization thereof by $C(A_{\bullet} )$. We denote the totalization of the double complex given by the \emph{normalized} chains by $C_N(A_{\bullet} )$. Finally, we denote by
+\[
+	sh_{A,B} : C_N(A_{\bullet} )\otimes C_N(B_{\bullet} ) \to C_N(A_{\bullet} \otimes B_{\bullet} )
+\]
+the Eilenberg-Zilber shuffle map, which yields a lax symmetric monoidal functor $\mathrm{s} \Ch_{\mathcal{A} } \to \Ch_{\mathcal{A} } $.
+
+To be more specific about definitions, define the unnormalized chains as
+\[
+	C(A_{\bullet} ) \coloneqq 
+	\begin{cases}
+		A_{\left| m \right| } ,& m \leq 0\\
+		0,& m>0
+	\end{cases}
+\]
+with differential
+\[
+	\dd : C(A_{\bullet} )^m \to C(A_{\bullet} )^{m+1} ,\qquad \dd a=\sum_{k=0}^{\left| m \right| } (-1)^{k} d_k(a)
+\]
+for $d_k$ the $k$th face of $A_{\bullet} $. Note that this is indeed a chain complex since we take $C(A_{\bullet} )^{-m} =A_{m} $, so mapping $A_m \to A_{m-1} $ induces a map $C(A_{\bullet} )^{-m} \to C(A_{\bullet} )^{-m+1} $. We will always use the upright d for the differential, and the italic $d_k$ for the $k$th face. This will be how we distinguish between the two.
+
+The normalized chains are defined by
+\[
+	C_N(A_{\bullet} )^m \coloneqq \bigcap_{k=0} ^{\left| m \right| -1} \Ker \left( d_k : A_m \to A_{m-1}  \right) 
+\]
+where $m\leq 0$, and vanishing on higher degrees. The differential is simply the remaining face map $d_{\left| m \right| } $. For example, the singular chains $C_{\bullet} (X)$ of a space $X$ are the composition $C_N \circ \mathbb{Z} [-]\circ \Sing $ of functors. Indeed, the Dold-Kan correspondence tells us precisely that $C_N : \mathrm{s} \Ab \simeq \Ch_{\Ab } ^{\leq 0} $ with $\pi _n(A_{\bullet} )\cong H^{-n} (C_N(A_{\bullet} ))$. Moreover, this functor preserves all homotopies, meaning this is moreover a Quillen equivalence.
+
+Next, recall that since simplicail objects are functor categories, tensor products and universals are computed pointwise. The Eilenberg-Zilber shuffle map is a natural quasi-isomorphism
+\[
+	sh : C(A_{\bullet} )\otimes C(B_{\bullet} )\to C(A_{\bullet} \otimes B_{\bullet} )
+\]
+natural in $A_{\bullet} ,B_{\bullet} $. The exact definition is not useful here; we simply note that this natural quasi-isomorphism provides the information that $C$ is a lax-monoidal functor $\mathrm{s} \Ch_{\mathcal{A} } \to \Ch_{\mathcal{A} } $.
+
+Finally, we will need to reinterpret the \v{C}ech complex as a particular simplicial set. We define a variant of the \v{C}ech nerve, which I refer to as the \emph{factorizing nerve of $\mathcal{F} $ with values in $\mathfrak{U} $}:
+\[
+	\mathcal{N} (\mathfrak{U}, \mathcal{F})_n = \bigoplus_{j_0 \leq \cdots \leq j_n} \mathcal{F} (U_J)^{\bullet}
+.\]
+The faces and degeneracies are defined in the obvious way. We now show that $C_N(\mathcal{N} (\mathfrak{U} ,\mathcal{F} )_{\bullet} )\cong \check{C}(\mathfrak{U} ,\mathcal{F} )$. A fact that is shown in the Dold-Kan correspondence is that if $D(A_{\bullet} )$ is the subcomplex of $C(A_{\bullet} )$ spanned by degenerate simplicies, then
+\[
+	C_N(A_{\bullet} )\cong \frac{C(A_{\bullet} )}{D(A_{\bullet} )} 
+.\]
+Note that trivial simplicies of $\mathcal{N} (\mathfrak{U} ,\mathcal{F} )_{\bullet} $ are simply those simplicies belonging to $f\mathcal{A} (U_J)$ where $J$ contains repeated indicies. Thus
+\[
+	C_N(\mathcal{N} (\mathfrak{U} ,\mathcal{F} _{\bullet} ))^{-n}\cong \bigoplus_{\left| J \right| =n+1} \mathcal{F} (U_J)^{\bullet} 
+.\]
+Writing this in totality rather than appealing to degrees,
+\[
+	C_N(\mathcal{N} (\mathfrak{U} ,\mathcal{F} )_{\bullet} )^{\bullet} \cong \bigoplus_{k\geq 0} \bigoplus_{\left| J \right| =k+1} \mathcal{F} (U_J)[k]^{\bullet} ,
+\]
+where the shift is to slot $\mathcal{F} (U_J)^{\bullet} $ into the $-k$th degree. This is precisely the \v{C}ech complex.
+
+Now, we begin the proof. First, recall that we define
+\[
+	\operatorname{ext} (\mathcal{F} )(V)\coloneqq \check{C}(\mathfrak{U} _V,\mathcal{F} )
+.\]
+This construction immediately provides a precosheaf on $X$ valued in cochain complexes. We define the structure maps on the level of simplicial cochain complexes, since many properties are more immediate at that level. Given disjoint open subsets $V,V' \subseteq X$, we define the factorization product
+\[
+	m_{VV'} : \operatorname{ext} (\mathcal{F} )(V)\otimes \operatorname{ext} (\mathcal{F} )(V') \to \operatorname{ext} (\mathcal{F} )(V \cup V')
+\]
+which we recall means a map of cochains
+\[
+	m_{VV'} : \check{C}(\mathfrak{U}_V,\mathcal{F} )\otimes \check{C}(\mathfrak{U}_{V'} ,\mathcal{F} ) \to \check{C}(\mathfrak{U} _{V\cup V'} , \mathcal{F} )
+.\]
+This recovers all binary multiplication maps by postcomposing with a unary map
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+\operatorname{ext} (\mathcal{F} )(V)\otimes \operatorname{ext} (\mathcal{F} )(V')\ar[rr] \ar[dr]  &  & \operatorname{ext} (\mathcal{F} )(W) \\
+ & \operatorname{ext} (\mathcal{F} )(V \cup V') \ar[ur] . & 
+\end{tikzcd}\]
+
+We define the map $m_{VV',n} $ at each level of the simplicial cochain complex, and pass it to the level of cochains using the functor $C_N$. Let $\left\{ U_{i_k}  \right\}_{0\leq k\leq n} \subseteq \mathfrak{U}_V$ and $\left\{ U_{j_k}  \right\}_{0\leq k\leq n} \subseteq \mathfrak{U} _{V'} $, and write $U_I,U_J$ for their intersections, respectively. We define the map
+\[
+m_{VV',n} :	\mathcal{N} (\mathfrak{U}_V,\mathcal{F} )_{n} \otimes  \mathcal{N} (\mathfrak{U} _{V'} ,\mathcal{F} )_n \to \mathcal{N} (\mathfrak{U} _{V\cup V'} ,\mathcal{F} )_n
+\]
+at the level of the direct summands $\mathcal{F} (U_{I} )$, $\mathcal{F} (U_J)$. In particular, we define a map
+\[
+	\mathcal{F} (U_{i_0} \cap \cdots \cap U_{i_n} )\otimes \mathcal{F} (U_{j_0} \cap \cdots \cap U_{j_n} )\to \mathcal{F} \left( (U_{i_0} \cap \cdots \cap U_{i_n} ) \cup (U_{j_0} \cap \cdots \cap U_{j_n} ) \right) 
+.\]
+Note that
+\[
+	(U_{i_0} \cap \cdots \cap U_{i_n} ) \cup (U_{j_0} \cap \cdots \cap U_{j_n} ) = \left( U_{i_0} \cup U_{j_0}  \right) \cap \cdots \cap \left( U_{i_n} \cup U_{j_n}  \right) 
+\]
+by de Morgan's laws. Additionally, since $U_{i_k} \cap U_{j_k} =\varnothing $ since $V \cap V'=\varnothing $, since $\mathfrak{U} $ is a factorizing basis and $U_{i_k} ,U_{j_k} \in \mathfrak{U} $, we have $U_{i_k} \cup U_{j_k} \in \mathfrak{U} $. Additionally, all finite intersections between $U_i$'s and $U_j$'s are in $\mathfrak{U} $, by the closure property. Thus,
+\[
+(U_{i_0} \cap \cdots \cap U_{i_n} ), (U_{j_0} \cap \cdots \cap U_{j_n} ),\left( U_{i_0} \cup U_{j_0}  \right) \cap \cdots \cap \left( U_{i_n} \cup U_{j_n}  \right) \in \mathfrak{U} 
+.\]
+Since $\mathcal{F} $ is a $\mathfrak{U} $-factorization algebra, there already exists a map
+\[
+	\mathcal{F}(U_{i_0} \cap \cdots \cap U_{i_n} ) \otimes \mathcal{F} (U_{j_0} \cap \cdots \cap U_{j_n} ) \to \mathcal{F} \left( U_{i_0} \cup U_{j_0}  \right) \cap \cdots \cap \left( U_{i_n} \cup U_{j_n}  \right) 
+\]
+since all elements are in the factorizing basis. Thus, we define this map on all direct summands, and define $m_{VV',n} $ as the direct summand of these maps. Moreover, these levelwise maps manifestly commute with faces and degeneracies (using functoriality and coherence data of the factorization product of $\mathcal{F} $ on $\mathfrak{U} $), so they assemble into a map of simplicial cochains. Finally, we recover the map $m_{VV'} $ on the level of cochains is recovered as the composition
+\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+C_N(\mathcal{N} (\mathfrak{U}_V,\mathcal{F} )_{\bullet} )\otimes C_N(\mathcal{N} (\mathfrak{U} _{V'} ,\mathcal{F} )_{\bullet} )\ar[" sh ", d]  \\
+C_N\left( \mathcal{N} (\mathfrak{U}_V,\mathcal{F} )_{\bullet} \otimes \mathcal{N} (\mathfrak{U} _{V'} ,\mathcal{F} )_{\bullet}  \right) \ar[" C_N(m_{VV',\bullet} ", d]  \\
+C_N(\mathcal{N} (\mathfrak{U}_{V \cup V'} ,\mathcal{F} )_{\bullet} ).
+\end{tikzcd}\]
+It is evident from this construction how to construct the factorization product on $n$ disjoint opens. Associativity and equivariance of the factorization product are true on $\mathfrak{U} $ by definition, and thus are clearly true at the simplicial level for all opens. Thus, they are indeed true.
+
+It remains only to be shown that $\mathcal{F} $ respects gluing/descent/whatever. The standard results for \v{C}ech cohomology apply, since our gluing axiom is the standard cosheaf axiom, just with respect to a particular class of covers. We will note these as we continue.
+
+For $W\subseteq X$ open and $\mathfrak{W} =\left\{ W_j \right\} _{j\in J} $ a Weiss cover of $W$, there are two important associated covers we will use.
+\begin{itemize}
+	\item $\mathfrak{U} _W=\left\{ U_i \subseteq W\mid U_i\in \mathfrak{U}  \right\} $;
+	\item $\mathfrak{U} _{\mathfrak{W} } =\left\{ U_i\mid \exists j\text{ s.t. } U_i \subseteq W_j \right\} $.
+\end{itemize}
+The first is just the Weiss cover of $W$ induced by $\mathfrak{U} $. The latter consists of all opens in $\mathfrak{U} $ subordinate to $\mathfrak{W} $. Both are Weiss covers.
+
+\begin{lemma}\label{lma:?}
+	There is a natural quasi-isomorphism
+	\[
+		f : \check{C}(\mathfrak{W} ,\operatorname{ext} (\mathcal{F} )) \simeq \check{C}(\mathfrak{U} _{\mathfrak{W} } ,\mathcal{F} )
+	\]
+	for every Weiss cover $\mathfrak{W} $ of an open $W$.
+\end{lemma}
+\begin{proof}
+	This proof boils down to combinatorics of the covers. The book provides extra notation to clarify what is happenin. Given an $n$-fold intersection $W_{j_0} \cap \cdots \cap W_{j_n} $, we denote the intersection by $W_{\vec{j} } $. This departure from our previous notation is not only because the book uses this notation, but because we index $\mathfrak{W} $ by $J$, so using the notation $W_J$ would be a bad conflict of notation. Denote by $\widehat{J^{n+1} } $ the subset of $J^{n+1} $ whose tuples have no repeated entries. Then $\vec{j} \subseteq \widehat{J^{n+1} } $.
+
+	First, we exhibit the map $f$ of cochain complexes. The source complex $\check{C}(\mathfrak{W} ,\operatorname{ext} (\mathcal{F} ))$ is defined by
+	\[
+		\check{C}(\mathfrak{W} ,\operatorname{ext} (\mathcal{F} )) = \bigoplus_{n\geq 0} \bigoplus_{\vec{j} \in \widehat{J^{n+1} } } \check{C}(\mathfrak{U}_{W_{\vec{j} } } , \mathcal{F} )[n]
+	.\]
+	Each direct summand is another direct sum of terms of the form $\mathcal{F} (U_{\vec{i} } )$ for $\vec{i} \in \widehat{I^{k+1} } $, $U_i\subseteq W$ and $U_i\in \mathfrak{U} $. The target complex is
+	\[
+		\check{C}(\mathfrak{U}_{\mathfrak{W} } ,\mathcal{F} ) = \bigoplus_{n\geq 0} \bigoplus_{\vec{i} \in \widehat{I^{n+1} } } \mathcal{F} (U_{\vec{i} } )[n],
+	\]
+	where it is understood that each $U_i\in \mathfrak{U}_{\mathfrak{W} } $. We can show that each term $\mathcal{F} (U_{\vec{i} } )$ from the source complex appears exactly once in the target complex. To show this, start by recalling $U_i \subseteq W$. 
+\end{proof}
+
+
+\section{Pullback along an open immersion}
+
+Factorization algebras do not always pull back in a simple way. However, factorization algebras clearly restrict: given an open subset $U\subseteq X$ and a factorization algebra $\mathcal{F} $ on $X$, we can define a restriction factorization algebra $\mathcal{F} |U$ on $U$. We can generalize this to open immersions.
+
+For simplicity, let $Y,X$ be smooth manifolds of the same dimension (since these are the only examples we will care about), and let $f : Y \to X$ be a local diffeomorphism. We will restrict to multiplicative factorization algebras. Equip $X$ with a factorizing basis by fixing a Riemannian metric, and letting $\mathfrak{C} =\left\{ C_i \right\} _{i\in I} $ be all strongly convex open sets in $X$ (the unique minimizing geodesic between any two points is wholly contained in the open, and no other geodesic is contained in the open). This is a basis since it contains all balls, and is closed under intersection. Thus the Weiss cover $\overline{\mathfrak{C} } $ generated by $\mathfrak{C} $ is a factorizing basis.
+
+Now define $\mathfrak{C} '$ to be all opens $U\subseteq Y$ such that $f(U)\in \mathcal{C} $ (here we recall $f : Y \to X$). Then this also has a factorizing basis $\overline{\mathfrak{C} '} $ generated by $\mathfrak{C} '$.
+
+Given a multiplicative factorization algebra $\mathcal{F} $ on $X$, let $\mathcal{F} _{\mathfrak{C} } $ denote the associated multiplicative factorization algebra on the basis $\overline{\mathfrak{C} } $. Define a multiplicative factorization algebra $f^*\mathcal{F} _{\mathfrak{C} '} $ on the basis $\overline{\mathfrak{C} '} $ as follows. For all $U\in \mathfrak{C} '$, let
+\[
+	(f^*\mathcal{F} _{\mathfrak{C} '} )(U) = \mathcal{F} (f(U))
+.\]
+Any $U\in \overline{\mathfrak{C} '} $ can be written as a finite disjoint union of opens $V_i\in \mathfrak{C} '$. By multiplicativeness, we have
+\[
+	(f^*\mathcal{F} _{\mathfrak{C} '} )(V_1 \cup \cdots \cup V_n) \simeq (f^*\mathcal{F} _{\mathfrak{C} '} )(V_1)\otimes \cdots \otimes (f^*\mathcal{F} _{\mathfrak{C} '} )(V_n)
+.\]
+Thus, we define these two to be strictly equal to each other. It now suffices only to define the precosheaf structure, which is given by that of $\mathcal{F} $: for $U\subseteq V$ in $\mathfrak{C} '$, define
+\[
+	(f^*\mathcal{F} _{\mathfrak{C} '} )(V) \to (f^*\mathcal{F} _{\mathfrak{C} '} )(U)
+\]
+as the map $\mathcal{F} (f(V)) \to \mathcal{F} (f(U))$ (here we recall the definition of $f^*\mathcal{F}_{\mathfrak{C} '} $). By multiplicativity, this determines all factorization products on $\overline{\mathfrak{C} '} $. By the previous section, $f^*\mathcal{F} _{\mathfrak{C} '} $ extends to a factorization algebra $f^*\mathcal{F} $ which is unique up to isomorphism.
+
+\section{Descent along a torsor}
+
+Let $G$ be a discrete group acting properly discontinuously on a space $X$, so that $X \to X/G$ is a principal $G$-bundle. Then there is an equivalence of categories between $G$-equivariant multiplicative factorization algebras on $X$, and multiplicative factorization algebras on $X/G$, given in one direction by the pullback of the quotient.
