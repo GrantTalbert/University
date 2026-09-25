@@ -1,0 +1,138 @@
+\lecture{2}{Wed 23 Sep 2026 23:19}{Vertex algebras}
+
+\section{Definition of vertex algebras, \cite{frenkel-ben-zvi}}
+
+\begin{definition}\label{dfn:formal-power-series}
+	Let $R$ be a $\mathbb{C} $-algebra. An \emph{$R$-valued formal power series} (or formal distribution) in variables $z_1, \ldots , z_n$ is an arbitrary (finite or infinite) series
+	\[
+		A(z_1, \ldots , z_n) = \sum_{i_1\in\mathbb{Z} } \cdots \sum_{i_n\in\mathbb{Z} } A_{i_1, \ldots , i_n} z_1^{i_1} \cdots z_n^{i_n} 
+	\]
+	where the coefficients $A_{i_1, \ldots , i_n} \in R$. These series form a vector space, denoted $R[[z_1^{\pm 1} ,  \ldots , z_{n} ^{\pm 1} ]]$.
+\end{definition}
+
+The vector space $R[[z_1^{\pm 1} ,  \ldots , z_{n} ^{\pm 1} ]]$ is not a $\mathbb{C} $-algebra, since the product of two formal power series does not always make sense: the product must still have coefficients $A$, but when you take the product $PQ$ of two formal power series, these coefficients themselves become infinite series formed out of the coefficients of $P$ and $Q$, which need not converge.
+
+However, this is since these formal power series act in the same variables, so we end up collecting infinite terms. If we have $P\in R[[z_1^{\pm 1} ,  \ldots , z_{n} ^{\pm 1} ]]$ and $Q\in R[[w_1^{\pm 1} ,  \ldots , w_{n} ^{\pm 1} ]]$, then we can get a well-defined product $PQ$ in $R[[z_1^{\pm 1} ,  \ldots , z_{n} ^{\pm 1} , w_1^{\pm 1} , \ldots , w_n^{\pm 1}]]$. Additionally, the product with a Laurent polynomial (i.e. all but finitely many coefficients vanish) is clearly always well-defined.
+
+\begin{definition}\label{dfn:residue}
+	Given a formal power series in one variable $f$, we define the residue $\operatorname{Res} f(z)\dd z = a_{-1} $.
+\end{definition}
+Note that if $R=\mathbb{C} $, then this agrees with the usual notion of residue for a function $f$:
+\[
+	\operatorname{Res} f(z)\dd z = \frac{1}{2\pi i} \oint f(z)\dd z
+.\]
+Given such a formal power series $f\in \mathbb{C} [[z^{\pm 1} ]]$, we obtain a linear functional on Laurent polynomials $\mathbb{C} [z,z^{-1} ]$ via
+\[
+	g\mapsto \operatorname{Res} f(z)g(z)\dd z
+.\]
+This generalizes to formal power series in multiple dimensions, and rational functions in those dimensions. For this reason, we often call these \emph{formal distributions}.
+
+For example, define the \emph{formal dirac delta} in two variables $z,w$ as
+\[
+	\delta (z-w) = \sum_{m\in\mathbb{Z} } z^m w^{-m-1} 
+.\]
+Writing this as a series in 2 variables, the coefficients are $a_{nm} =\delta _{m,-n-1} $:
+\[
+	\delta (z-w) = \sum_{m} \sum_{n} \delta _{m,-n-1} z^nw^{m} 
+.\]
+Hence, the coefficients are supported on the diagonal $m+n=-1$, so given a formal power seies $A$ in 1 variable $w$, we can multiply
+\[
+	A(w)\delta (z-w) = \sum_{m,n\in\mathbb{Z} } A_{m+n+1} z^mw^n
+.\]
+Thus we see
+\[
+	A(w)\delta (z-w) = A(z)\delta (z-w)
+.\]
+We thus obtain from this fact that
+\[
+	(z-w)\delta (z-w)=0,
+\]
+and induction yields
+\[
+	(z-w)^{n+1} \partial ^n_w \delta (z-w)=0
+.\]
+I want to prove this fact since it seems nontrivial. Assume the inductive hypothesis. Then
+\[
+	(z-w)^{n+2} \partial _{w} ^{n+1} \delta (z-w) = (z-w)^{n+2} \partial _w \partial _w^{n} \delta (z-w)
+.\]
+We would like to pull out this $\partial _w$ to use the inductive hypothesis. Since derivatives act by a Leibniz rule, we have
+\[
+	\partial _w\left( (z-w)^{n+2} \partial _w^n \delta (z-w) \right) =-(n+2)(z-w)^{n+1} \partial _w^n(z-w) + (z-w)^{n+2} \partial _w^{n+1} \delta (z-w)
+.\]
+Reorganizing yields
+\[
+	\partial _w\left( (z-w)^{n+2} \partial _w^n \delta (z-w) \right) + (n+2)(z-w)^{n+1} \partial _w^n(z-w) = (z-w)^{n+2} \partial _w^{n+1} \delta (z-w)
+.\]
+However,
+\[
+	(z-w)^{n+1} \partial _w^n(z-w)=0
+\]
+by the inductive hypothesis. Hence
+\[
+	\partial _w\left( (z-w)^{n+2} \partial _w^n \delta (z-w) \right) = (z-w)^{n+2} \partial _w^{n+1} \delta (z-w)
+.\]
+We are now essentially done. Write
+\[
+	(z-w)^{n+2} \partial _w^n\delta (z-w) = (z-w)(z-w)^{n+1} \partial _w^n \delta (z-w) = (z-w)0=0
+\]
+by the inductive hypothesis, and thus
+\[
+	\partial _w(0) = (z-w)^{n+2} \partial _w^{n+1} \delta (z-w)
+.\]
+By the method of induction, we are done.
+
+These properties yield an abstract characterization of $\delta $ and its derivatives, due to Kac.
+\begin{lemma}\label{lma:delta}
+	Let $f(z,w)$ be a formal power series in $R[[z^{\pm 1} , w^{\pm q} ]]$ satisfying $(z-w)^Nf(z,w)=0$ for some $N \geq 0$. Then
+	\[
+		f(z,w) = \sum_{i=0}^{N-1} g_i(w)\partial _w^i\delta (z-w),\qquad g_i(w)\in R[[w^{\pm 1} ]]
+	.\]
+	Moreover, the $g_i$'s are unique.
+\end{lemma}
+\begin{proof}
+	Since $(z-w)\delta (z-w)=0$, we see that for any $N\geq 1$, we obtain
+	\[
+		(z-w)^N\delta (z-w) = (z-w)^{N-1} (z-w)\delta (z-w) = 0
+	.\]
+	We must show
+	\[
+		(z-w)^N \sum_{i=0}^{N-1} g_i(w) \partial _w^i \delta (z-w)=0
+	.\]
+	This is immediate: simply distribute in the $(z-w)^N$, commute it with $g_i(w)$ (both of these can be done since $(z-w)^N$ is Laurent), and we see that every term vanishes. Noting here that $0 \leq i \leq N-1$, we have
+	\[
+		(z-w)^N g_i(w) \partial _w^i(z-w) = g_i(w) (z-w)^N \partial _w^i \delta (z-w)
+	\]
+	\[
+		g_i(w)(z-w)^{N-i-1} (z-w)^{i+1}  \partial _w^{i} \delta (z-w)=0
+	.\]
+	Thus, we have proven all series of this form satisfy the given property.
+
+	Now we prove all series satisfying the given property are of this form. Write
+	\[
+		f(z,w) = \sum_{n,m\in\mathbb{Z} } f_{n,m} z^nw^m
+	.\]
+	Define $(\Delta f)_{n,m} \coloneqq f_{n-1,m} -f_{n,m-1} $. Then we claim $(\Delta ^Nf)_{n,m} =0$ for all $n,m$. Here we interpret $\Delta $ as an operator on formal distributions which produces the formal power series whose coefficients are as defined. We prove $(\Delta ^Nf)_{n,m} =0$. To do this, we proceed inductively. First, note that
+	\[
+		(z-w)f(z-w) = (z-w)\sum_{n,m\in\mathbb{Z} } f_{n,m} z^nz^m = \sum_{n,m\in\mathbb{Z} } f_{n,m} z^{n+1} w^m - f_{n,m} z^nw^{m+1} 
+	\]
+	\[
+		=\sum_{n,m\in\mathbb{Z} } f_{(n+1)-n,m} z^{n+1} w^m - f_{n,(m+1)-1} z^nm^{m+1} =\sum_{n,m\in\mathbb{Z} } (\Delta f)_{n,m} z^nw^m = \Delta f
+	.\]
+	Now assume the relevant inductive hypothesis for some $n$. We compute
+	\[
+		(z-w)^{n+1} f(z-w) = (z-w)(\Delta ^nf)(z,w) = \Delta (\Delta ^nf)(z,w) \Delta ^{n+1} f
+	.\]
+	By induction, we in particular obtain $\Delta ^Nf = (z-w)^Nf(z-w)$. Since the latter vanishes by hypothesis, we find that all coefficients of $\Delta ^Nf$ vanish.
+
+	Note that the equations $(\Delta ^Nf)_{n,m} $ can be reduced to equations on a particular diagonal. In particular, we can fix $k$, and consider coefficients on the diagonal $f_{k,p-k} $. These must all sum to 0. Hence we can define $f^{(p)}$ to be supported on this diagonal, meaning $f^{(p)} _{n,m} \neq 0$ if and only if $n+m=p$. Thus
+	\[
+		f(z,w) = \sum_{p\in\mathbb{Z} } f^{(p)}(z,w)
+	.\]
+
+	On the $p$th diagonal, the equation $(\Delta ^Nf)_{n,m} =0$ becomes a difference equation of $N$ functions using the binomial theorem in a sort of way:
+	\[
+		(\Delta ^Nf)_{n,m} =\sum_{j=0}^{N} (-1)^j \binom{N}{j} f_{n-N+j,m-j}
+	.\]
+	
+\end{proof}
+

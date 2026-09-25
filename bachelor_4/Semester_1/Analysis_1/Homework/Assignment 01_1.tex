@@ -1,0 +1,183 @@
+\documentclass[11pt, letterpaper]{article}
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting-global.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\crefname{problem}{problem}{problems}
+\Crefname{problem}{Problem}{Problems}
+\usepackage{titlepageBU}
+\title{Assignment 01}
+\courseID{MA511}
+\begin{document}
+\makeproblem
+
+\begin{notation}
+	We write $\mathbb{N} $ for the set of naturals, which we only use for convenience of notation, since sets have not been formally introduced. Given $n\in\mathbb{N} $, we write $s(n)$ for the successor of $n$. Multiplication is always denoted by juxtaposition or $\cdot $. References to in-class results/definitions are either given by name, or cited in the first lecture notes \cite{lec-1}.
+\end{notation}
+
+
+\begin{problem}[Addition is commutative]\label{prob:1}
+	For any naturals $n,m$, we have $n+m=m+n$.
+\end{problem}
+\begin{proof}
+	We proceed by induction on $n$. Fix a natural $m$, and let $n=0$. By definition of addition, we have $0+m=m$, and by \cite{lec-1} \S2.2 Lemma 1, we have $m+0=m$. Thus, $m+0=m=0+m$.
+
+	Now assume $n+m=m+n$ for some natural $n$, and consider the expression $s(n)+m$. By definition of addition, $s(n)+m = s(n+m)$. By the inductive hypothesis, $n+m=m+n$, and thus $s(n+m) = s(m+n)$. By \cite{lec-1} \S2.2 Lemma 2, we have $s(m+n) = m+s(n)$. Thus, we have equalities
+	\[
+		s(n)+m = s(n+m) = s(m+n) = m+s(n).
+	\]
+	The statement now follows by induction.
+\end{proof}
+
+\begin{problem}[Cancellation law]\label{prob:2}
+	Let $a,b,c$ be naturals such that $a+b=a+c$. Then $b=c$.
+\end{problem}
+\begin{proof}
+	We proceed by induction on $a$. Let $a=0$, and let $b,c\in\mathbb{N} $ such that $a+b=a+c$. Then by definition of addition, $0+b=b$ and $0+c=c$. Thus,
+	\[
+		b=0+b=0+c=c
+	.\]
+	Now assume $a+b=a+c$ implies that $b=c$ for some natural $a$ and all naturals $b,c$, and suppose that $s(a)+b=s(a)+c$ for some $b,c\in\mathbb{N} $. Then by definition of addition, we have
+	\[
+		s(a+b)=s(a)+b = s(a)+c = s(a+c)
+	.\]
+	By Peano axiom 4, it follows that $a+b=a+c$. By the inductive hypothesis, $b=c$. By the method of induction, we are done.
+\end{proof}
+
+\begin{problem}[Order is transitive]\label{prob:3}
+	Prove that ordering is transitive.
+\end{problem}
+\begin{proof}
+	Let $a,b,c$ be naturals with $c\leq b\leq a$. We must show $c\leq a$. The following lemma is required.
+
+	\begin{lemma}\label{lma:3-1}
+		Let $a,b,c$ be naturals. Then $(a+b)+c=a+(b+c)$.
+	\end{lemma}
+	\begin{proof}
+		We proceed by induction on $a$. Fix naturals $b,c$, and let $a=0$, and recall that $0+b=b$ and $0+(b+c)=b+c$ by definition of addition. Thus
+		\[
+			(0+b)+c = b+c = 0+(b+c)
+		.\]
+		Now let $a$ be an arbitrary natural, and consider the successor $s(a)$. We have
+		\begin{align*}
+			(s(a)+b)+c &=s(a+b)+c &\text{Definition of addition}\\
+				   &=s((a+b)+c)&\text{Definition of addition}\\
+				   &=s(a+(b+c))&\text{Inductive hypothesis}\\
+				   &=s(a)+(b+c)&\text{Definition of addition}
+		.\end{align*}
+		By the method of induction, the statement is proven.
+	\end{proof}
+	We now continue with \cref{prob:3}. Since $c\leq b$, there is a natural $n$ such that $c+n=b$. Since $b\leq a$, there is a natural $m$ such that $b+m=a$. We have
+	\[
+		a=b+m = (c+n)+m \overset{!}{=}c+(n+m)
+	,\]
+	where the equality marked with a $!$ follows by \cref{lma:3-1}. Since $n+m$ is a natural, by definition of $\leq $, we have $c\leq a$.
+\end{proof}
+
+\begin{problem}[Multiplication is commutative]\label{prob:4}
+	Let $n,m$ be naturals. Then $nm=mn$.
+\end{problem}
+\begin{proof}
+	We use $ab=ba$ instead of $nm=mn$, to improve readability. We proceed by induction on $a$. Let $a=0$, and by definition of multiplication, $0b=0$ for all $b\in\mathbb{N} $. We must show $b0=0$. We proceed by induction on $b$. When $b=0$, we observe that $0\cdot 0=0$ is true by definition of multiplication. Now assume $b0=0$, and consider the expression $s(b)0$. By definition of multiplication, $s(b)0=(b0)+0$. By the inductive hypothesis, $b0=0$, and by definition of addition, $0+0=0$. Thus,
+	\[
+		s(b)0=(b0)+0 = 0+0=0
+	.\]
+	Thus, $b0=0$ holds for all $b$.
+
+	Now we assume the inductive hypothesis for $a$; that is, we assume $ab=ba$ for some arbitrary natural $a$ and all naturals $b$. By definition of multiplication, 
+	\[
+		s(a)b=ab+b = ba+b 
+	.\]
+	It suffices to show $bs(a)=ba+b$ for all naturals $b$. We proceed by induction on $b$. First, take $b=0$. Notice that $0s(a) = 0$ by definition of multiplication, and $0a + 0 = 0+0=0$ by definition of multiplication and addition. Now assume the statement holds for $b$ an arbitrary natural. We want to show $s(b)s(a) = s(b)a+s(b)$. We have
+	\begin{align*}
+		s(b)s(a) &=bs(a)+s(a)&\text{Definition of multiplication}\\
+			 &=(ba+b)+s(a)&\text{Inductive hypothesis} \\
+			 &=ba+(b+s(a))&\text{\Cref{lma:3-1}}\\
+			 &=ba+(s(a)+b)&\text{\Cref{prob:1}}\\
+			 &=ba+s(a+b)&\text{Definition of addition} \\
+			 &=ba+s(b+a)&\text{\Cref{prob:1}} \\
+			 &=ba+(s(b)+a)&\text{Definition of addition}  \\
+			 &=ba+(a+s(b))&\text{\Cref{prob:1}} \\
+			 &=(ba+a)+s(b)&\text{\Cref{lma:3-1}}\\
+			 &=s(b)a+s(b)&\text{Definition of multiplication} 
+	.\end{align*}
+	Thus, the statement is proven.
+\end{proof}
+
+\begin{problem}[$\mathbb{N} $ has no zero-divisors]\label{prob:5}
+	Let $n,m$ be naturals. Then $nm=0$ if and only if at least one of $n,m$ is $0$.
+\end{problem}
+We once again use $a,b$ in place of $n,m$ to improve readability. The proof of one direction requires a lemma, which was proven in class but is not contained in the notes.
+\begin{lemma}\label{lma:5-1}
+	Let $a$ be a natural. Then $a$ is either 0, or a successor.
+\end{lemma}
+\begin{proof}
+	We proceed by induction. If $a=0$, then $a=0$, and by Peano axiom 2 $a$ is not a successor.
+		Now let $a$ be an arbitrary natural. Then $s(a)$ is a successor. Moreover, by Peano axiom 2, $s(a)\neq 0$. The statement is now proven.
+\end{proof}
+\begin{proof}[Proof of \cref{prob:5}]
+	($\implies $) Let $ab=0$. If $a=0$ or $b=0$ we are done, so suppose for contradiction that $a,b\neq 0$. Applying \cref{lma:5-1} to $a,b\neq 0$, we see that $a=s(\widetilde{a} )$ and $b=s(\widetilde{b} )$ for some naturals $\widetilde{a} ,\widetilde{b}$. By the definition of multiplication, we compute
+	\[
+		ab = s(\widetilde{a} )s(\widetilde{b} ) = \widetilde{a} s(\widetilde{b} )+s(\widetilde{b})
+	.\]
+	Applying \cref{prob:4} and the definition of multiplication, we have
+	\[
+		\widetilde{a} s(\widetilde{b} )+s(\widetilde{b})  = s(\widetilde{b}) \widetilde{a} +s(\widetilde{b}) =(\widetilde{b} \widetilde{a} +\widetilde{a} )+s(\widetilde{b} )
+	.\]
+	We now have
+	\begin{align*}
+		(\widetilde{b} \widetilde{a} +\widetilde{a} )+s(\widetilde{b} )&=s(\widetilde{b} )+( \widetilde{b} \widetilde{a} +\widetilde{a} ) &\text{\Cref{prob:1}} \\
+											     &=s( \widetilde{b} +(\widetilde{b} \widetilde{a} +\widetilde{a} ))  &\text{Definition of addition}
+	.\end{align*}
+	Notice that the equation is thus equal to a successor, and by Peano axiom 2, all successors are nonzero. Thus,
+	\[
+		ab=s( \widetilde{b} +(\widetilde{b} \widetilde{a} +\widetilde{a} )) \neq 0
+	,\]
+	and the first direction is proven.
+	
+
+	($\impliedby $) Let at least one of $a,b$ be $0$. By \cref{prob:4}, we can take $a=0$ without loss of generality. Then by definition of multiplication,
+	\[
+		ab=0b=0
+	.\]
+	The statement is proven.
+\end{proof}
+
+\begin{problem}
+	For any naturals $a,b,c$, we have
+	\begin{equation}\label{eq:6-1}
+		a(b+c)=ab+ac
+	\end{equation}
+	and
+	\begin{equation}\label{eq:6-2}
+		(b+c)a=ba+ca.
+	\end{equation}
+\end{problem}
+\begin{proof}
+	Assume \eqref{eq:6-1} holds. Then \eqref{eq:6-2} follows by \cref{prob:4}:
+	\[
+		(b+c)a=a(b+c)=ab+ac=ba+ca
+	.\]
+	Thus, it suffices to prove \eqref{eq:6-1}. We proceed by induction on $a$. If $a=0$, then $0(b+c)=0$ by definition of multiplication. Additionally, $0b=0c=0$ by definition of multiplication, and thus $0b+0c=0+0=0$ by definition of addition. Thus, $0(b+c)=0b+0c$.
+
+	Now assume $a(b+c)=ab+ac$ for some arbitrary natural $a$. We have
+	\begin{align*}
+		s(a)(b+c)&=a(b+c)+(b+c)&\text{Definition of multiplication}\\
+			 &=(ab+ac)+(b+c)&\text{Inductive hypothesis} \\
+			 &=(ab+b)+(ac+c)&\text{Repeated applications of \cref{prob:1,lma:3-1}}\\
+			 &=s(a)b+s(a)c&\text{Definition of multiplication}
+	.\end{align*}
+	By the method of induction, we are done.
+\end{proof}
+
+
+
+
+
+\bibliographystyle{alpha}
+\bibliography{refs-1.bib}
+\end{document}

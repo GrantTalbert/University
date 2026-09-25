@@ -5,10 +5,81 @@ I don't know about you guys, but I'm tired of carrying around the ``evalation at
 The idea of the tangent bundle is exactly what the name says: we bundle together all of the tangent spaces into a new manifold. More precisely, the definition is as follows.
 
 \begin{definition}\label{dfn:3-1}
-	Let $M$ be an $n$-manifold. Define the \emph{tangent bundle} $TM$ to be the space
+	Let $M$ be an $n$-manifold. Define the \emph{tangent bundle} $TM$ to be the manifold
 	\[
 		TM = \left\{ (p,v) \mid  p\in M,v\in T_pM \right\} 
 	.\]
 	The explicit description of the smooth structure is not important, but we make two comments. First, $TM$ is a $2n$-manifold. Second, there is a function $\pi : TM \to M$ given by $\pi (p,v)=p$. This map is smooth.
 \end{definition}
 
+The tangent bundle is the prototypical example of a vector bundle. A \emph{vector bundle} is a fascinating object which allows us to bridge algebraic geometry and smooth geometry through the language of sheaves, and I recommend the interested reader to look into them after this paper. For now, we will focus on the tangent bundle.
+
+The power of the tangent bundle comes from the notion of a \emph{section}.
+
+\begin{definition}\label{dfn:3-2}
+	Let $M$ be a manifold, and let $\pi : TM \to M$ be the projection of the tangent bundle. A \emph{smooth section $s$ of the tangent bundle $TM$ over an open set $U\subseteq M$} is a smooth function $s : U \to TM$ such that for all $p\in M$, we have $\pi (s(p))=p$. The set of all smooth sections over $U$ is denoted $\mathfrak{X} (U)$.
+\end{definition}
+
+There is another term for a section of $TM$ over $U$: a \emph{vector field}. To motivate this terminology, we investigate what it means for $\pi (s(p)) = p$. First, note that we must have $s(p)\in \pi ^{-1} (p)$. Note that
+\[
+	\pi ^{-1} (p) \coloneqq \left\{ (p,v)\mid \pi (p,v)=p \right\} =\left\{ (p,v)\mid v\in T_pM \right\} =\left\{ p \right\} \times T_pM
+.\]
+Thus, $s(p)$ must be of the form $(p,v)$, where $v\in T_pM$. We can identify $s(p)$ with the component $v$ (since there is an isomorphism $\left\{ p \right\} \times T_pM\cong T_pM$). Thus, a section $s$ is simply a choice of a vector $s(p)$ which is tangent to $p$ for all $p\in U$. It is convention to write $s_p$ instead of $s(p)$ for sections, and we adopt this convention in what follows.
+
+Now imagine drawing a manifold, and at each point, drawing a vector which goes out from that point, and is tangent to the curves of the manifold. This is exactly what a vector field is.
+
+We can now finally drop the evaluation at $p$ symbol from partial derivatives using the following proposition.
+
+\begin{proposition}\label{prp:3-3}
+	Let $x^i$ be coordinates on some open set $U\subseteq M$. Then for all $i$, there is a vector field $\partial _i\in \mathfrak{X} (U)$ given by thpe assignment $(\partial _i)_p = \partial _i|_p$.
+\end{proposition}
+\begin{proof}
+	We will not worry too much about smoothness, so we will simply say that once we have explicitly defined the smooth structure on $TM$, the smoothness of this proposition is obvious. The definition itself is mildly complex however, hence why we have omitted it. As for showing that $\pi ((\partial _i)_p) = p$, we simply note that $(\partial _i)_p = \partial _i|_p \in T_pM \cong \pi ^{-1} (p)$, and thus the statement follows.
+\end{proof}
+
+This statement has a useful corollary.
+
+\begin{corollary}\label{cor:3-4}
+	Let $X\in \mathfrak{X} (U)$ be a vector field, and let $x^i$ be coordinates on $U$. Then there are smooth functions $X^i : U \to \mathbb{R} $ such that for all $p\in U$,
+	\[
+		X_p = \sum_{i} X^i(p)\left.\frac{\partial }{\partial x^i} \right|_p
+	.\]
+\end{corollary}
+\begin{proof}
+	Let $p\in U$. Then $X_p\in T_pM$. As noted before, the collection $\left\{ \partial _i|_p \right\} _{i} $ forms a basis for $T_pM$, and thus we can write
+	\[
+		X_p = \sum_{i} c_i \partial _i|_p
+	\]
+	for some coefficients $c_i\in\mathbb{R} $. We simply define $X^i(p) \coloneqq c_i$. Using the smooth structure, it can be proven that these functions are smooth.
+\end{proof}
+
+Thus, given a vector field $X$, every component vector $X_p$ is a differential operator. This suggests the following definition.
+
+\begin{definition}\label{dfn:3-5}
+	Let $f : U \to \mathbb{R} $ be a smooth function, and $X\in \mathfrak{X} (U)$ a vector field. We define the \emph{action} of $X$ on $f$, denoted $Xf$, to be the \emph{smooth function}
+	\[
+		Xf : U \to \mathbb{R} 
+	\]
+	\[
+		(Xf)(p) = X_p f
+	.\]
+	Here, the notation $X_pf$ indicates that we are writing $X_p$ as a differential operator, and then applying that differential operator to $f$. Since this differential operator lives in $T_pM$, it already includes evaluation at $p$, so we do not need to write something like $(X_pf)(p)$.
+\end{definition}
+
+There is a similar definition, where we act $C^\infty (U)$ on $\mathfrak{X} (U)$:
+
+\begin{definition}\label{dfn:3-6}
+	Let $f : U \to \mathbb{R} $ be a smooth function, and $X\in \mathfrak{X} (U)$ a vector field. Define the \emph{action} of $f$ on $X$ also called the \emph{multiplication} of $X$ and $f$, to be the vector field $fX\in \mathfrak{X} (U)$ given by
+	\[
+		(fX)_p = f(p)X_p
+	.\]
+\end{definition}
+Note that since $f : U \to \mathbb{R} $, we have $f(p)\in\mathbb{R} $. Since $X_p$ is a vector in a vector space $T_pM$, and since vector spaces are closed under scalar multiplication, scaling $X_p$ by the scalar $f(p)$ simply yields another vector in $T_pM$. Thus, this is indeed a vector field.
+
+We can now elevate most of the properties of derivatives to the level of vector fields. For example, the chain rule holds at this level. The multivariate chain rule (especially in coordinates) can be a bit messy to work with without using computers, so we will look at a simpler rule: the product rule (also called the Leibniz rule). Given a vector field $X$ and smooth maps $f,g : U \to \mathbb{R} $, for any $p\in U$, we have
+\[
+	X(fg)(p) = (Xf)(p)\cdot g(p) + f(p)\cdot (Xg)(p)
+.\]
+This can be proven using coordinates, however this has the benefit of \emph{not requiring coordinates at all} in order to be used. Just beacuse the proof uses coordinates doesn't mean that we have to choose coordinates in order to use this fact. Thus, this fact can apply anywhere on a manifold, not just in a small area where we happen to have coordinates. This is the power of ``coordinate-independence''.
+
+Before closing, we also note that $\mathfrak{X} (U)$ is a vector space, with $(X+Y)_p \coloneqq X_p + Y_p$.

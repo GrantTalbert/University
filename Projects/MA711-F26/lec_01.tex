@@ -1,0 +1,35 @@
+We did set theory today. No shot I'm writing ts down.
+
+
+
+\begin{definition}[Cauchy]\label{dfn:1}
+	We say $\left\{ x_n \right\}_{n\geq 1} $ is a \emph{Cauchy} sequence if as $n$ gets large, $x_n$ gets sufficiently close to the other $x_n$'s. In other words, for all $\varepsilon >0$, there is $N$ such that $n,m>N$ implies $\left| x_n - x_m \right| <\varepsilon $.
+\end{definition}
+\begin{theorem}\label{thm:2}
+	If $\left\{ x_n \right\}_{n\geq 1} $ is Cauchy, then $\lim_{n\to \infty } x_n$ exists in $\mathbb{R} $.
+\end{theorem}
+
+\begin{definition}\label{dfn:3}
+	Let $\left\{ a_n \right\}_{n\geq 1} \subseteq \mathbb{R} $ be a sequence. The sequence is \emph{increasing} if $a_n > a_{n-1} $ for all $n>1$, and similarly for decreasing. Define the sequence
+	\[
+		y_n \coloneqq \sup \left\{ x_m \right\}_{m\geq n} 
+	.\]
+	Then $\left\{ y_n \right\}_{n\geq 1} $ is decreasing. It can be proven all decreasing sequences have a limit in $\mathbb{R} \cup \left\{ \infty ,-\infty  \right\} $. Define
+	\[
+		\limsup_{n \to \infty} x_n \coloneqq \lim_{n\to \infty } y_n
+	.\]
+	We similarly define
+	\[
+		\liminf_{n \to \infty} x_n \coloneqq \lim_{n\to \infty } \left( \inf \left\{ x_m \right\}_{m\geq n}  \right) 
+	.\]
+	Both of these exist.
+\end{definition}
+
+\begin{proposition}\label{prp:4}
+	Let $\left\{ x_n \right\}_{n\geq 1} \subseteq \mathbb{R} $. If the sequence is bounded by $N$ (i.e. it does not go off to infinity, and $x_n < N$), then
+	\[
+		\limsup_{n \to \infty} x_n = \text{largest cluster point of the sequence}
+	.\]
+	Otherwise, $\limsup_{n \to \infty} x_n=\infty $.
+\end{proposition}
+

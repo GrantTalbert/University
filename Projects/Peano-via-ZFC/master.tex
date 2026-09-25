@@ -1,0 +1,254 @@
+\documentclass{article}
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/basic-theorems-global.tex}
+\newtheorem{axiom}{Axiom}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-custom.tex}
+
+\title{Peano axioms from set theory}
+\author{Grant Talbert}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Axioms of ZF}
+
+The following takes place in first order logic. Note that in first order logic, for any symbols $x,y$ and any formula $\phi $ with a free variable $z$, then $x=y \implies (\phi (x) \iff \phi (y))$. Additionally, we must have $x=x$. This is not the definition of equality in first order logic; the implication $\phi (x) \implies \phi (y)$ is one of the axioms according to Wikipedia. However, it can be proven that $x=y$ implies $y=x$, and thus the other direction follows.
+
+\begin{axiom}[Extensionality]\label{axiom:extensionality}
+	Sets are equal if and only if they have the same elements:
+	\[
+		\forall x\forall y\left( \forall z\left( z\in x \iff z\in y \right) \implies x=y \right) 
+	.\]
+\end{axiom}
+\begin{axiom}[Regularity]\label{axiom:regularity}
+	Sets cannot contain themselves:
+	\[
+		\forall x\left( (\exists a(a\in x))\implies \exists y(y\in x \land \neg \exists z(z\in y\land  z\in x)) \right) 
+	.\]
+\end{axiom}
+\begin{axiom}[Schema of restricted comprehension]\label{axiom:comprehension}
+	Given any formula $\varphi $ in the language of ZFC which is free in variables $x,w_1, \ldots , w_n,z$ (not $y$), we have the following axiom, which provides set builder notation:
+	\[
+		\forall z\forall w_1 \forall w_2 \cdots \forall w_n \exists y\forall x\left( x\in y \iff ((x\in z) \land \varphi (x, w_1, w_2, \ldots , w_n, z)) \right) 
+	.\]
+	We typically write $y=\left\{ x\in Z\mid \varphi (x) \right\} $.
+\end{axiom}
+\begin{axiom}[Pairing]\label{axiom:pairing}
+	If $x,y$ are sets, then there exists a set containing $x$ and $y$:
+	\[
+		\forall x\forall y\exists z\left( (x\in z)\land (y\in z) \right) 
+	.\]
+	Note that this only supplies a set containing $x,y$, but does not supply the set $\left\{ x,y \right\} $.
+\end{axiom}
+\begin{axiom}[Union]\label{axiom:union}
+	Unions of families exist:
+	\[
+		\forall \mathcal{F} \exists A \forall Y\forall x\left( (x\in Y \land Y\in \mathcal{F} ) \implies x\in A \right) 
+	.\]
+	This axiom does not assert the existence of $\cup \mathcal{F} $, but provides a set containing $\cup \mathcal{F} $.
+\end{axiom}
+\begin{axiom}[Schema of replacement]\label{axiom:replacement}
+	Let $\varphi $ be any formula in the language of ZFC which is free in variables $x,y,A,w_1, \ldots , w_n$, and not $B$. Then we have the axiom
+	\[
+		\forall A \forall w_1 \cdots \forall w_n\left( \forall x\left( x\in A \implies \exists !y\varphi  \right) \implies \exists B\forall x\left( x\in A \implies \exists y(y\in B \land \varphi ) \right)  \right) 
+	.\]
+	This allows the image of a function to fall inside a set.
+\end{axiom}
+\begin{definition}\label{dfn:union}
+	Let $\mathcal{F} $ be a set. Let $A$ be the set guarenteed by the axiom of union. Define the set
+	\[
+		\cup \mathcal{F} \coloneqq \left\{ x\in A \mid \exists Y((Y\in \mathcal{F} )\land (x\in Y)) \right\} 
+	.\]
+	This exists by the axiom schema of restricted comprehension.
+\end{definition}
+\begin{construction}\label{const:pair}
+	Let $x,y$ be sets. Then by the axiom of pairing, there exists a set $z$ such that $x,y\in z$. Define
+	\[
+		\left\{ x,y \right\} \coloneqq \left\{ a\in z\mid (a=x)\lor (a=y) \right\} 
+	.\]
+	Since $=$ exists by the axiom of extensionality, this formula is well-defined, and thus $\left\{ x,y \right\} $ exists by the axiom schema of restricted comprehension. We can similarly define a set
+	\[
+		\left\{ x \right\} \coloneqq \left\{ a\in z \mid (a=x) \right\} 
+	.\]
+\end{construction}
+\begin{definition}\label{dfn:union-pair}
+	With notation as in the above construction, define
+	\[
+		x\cup y \coloneqq \cup \left\{ x,y \right\} 
+	.\]
+\end{definition}
+
+\begin{axiom}[Infnity]\label{axiom:infinity}
+	A set exists, and it contains the naturals up to isomorphism. Here we write $\varnothing $ for the empty set. The axiom can be modified to postulate the existence of $\varnothing $ as well as the set $X$, but we present a simpler version using two axioms. Write $s(x)$ for the set $x\cup \left\{ x \right\} $. This set exists by the above definition, and by modifying the construction above it to select only the element $x$.
+	\[
+		\exists \varnothing \forall x(\neg(x\in \varnothing ))
+	.\]
+	\[
+		\exists \mathcal{X}\left( (\varnothing \in \mathcal{X})\land (x\in \mathcal{X} \implies s(x)\in \mathcal{X}) \right) 
+	.\]
+\end{axiom}
+\begin{definition}[Subset]\label{dfn:subset}
+	Let $x,y$ be sets. Then we define
+	\[
+		(y\subseteq x) \iff (z\in y \implies z\in x)
+	.\]
+\end{definition}
+\begin{axiom}[Power set]\label{axiom:powerset}
+	Power sets exist:
+	\[
+		\forall x\exists y \forall z(z \subseteq x \implies z\in y)
+	.\]
+	The set $y$ contains the power set of $x$. We then define
+	\[
+		\mathcal{P} (x) \coloneqq \left\{ z\in y \mid z\subseteq x \right\} 
+	.\]
+	We call $\mathcal{P} (x)$ the \emph{power set} of $x$.
+\end{axiom}
+
+\begin{remark}
+	The axiom of choice requires us to define functions. Since functions are subsets of cartesian products, we would need to define cartesian products. This is not necessary for our purposes. Thus, we work in ZF, rather than ZFC. This has the advantage of being simpler, since C is independent of ZF.
+\end{remark}
+
+
+\section{Definition of $\mathbb{N}$ and the Peano axioms}
+
+\begin{definition}\label{dfn:6}
+	Let $x$ be a set. We define the \emph{successor} of $x$, denoted $s(x)$, to be the set $x \cup \left\{ x \right\} $.
+\end{definition}
+
+\begin{definition}\label{dfn:7}
+	Let $X$ be a set. We say $X$ is an \emph{inductive set} if $\varnothing \in X$ and, for all $x\in X$, $s(x)\in X$.
+\end{definition}
+
+Note that by the \hyperref[axiom:infinity]{axiom of infinity}, there exists at least one inductive set. Let $\mathcal{X} $ denote this set.
+
+\begin{construction}
+	By the \hyperref[axiom:powerset]{axiom of power set}, the power set $\mathcal{P} (\mathcal{X} )$ exists. Let
+	\[
+		\mathcal{I} \coloneqq \left\{ X \in \mathcal{P} (\mathcal{X} ) \mid X\text{ is inductive}  \right\} 
+	.\]
+	Since being inductive is a well-defined formula ($X$ is inductive if and only if $(\varnothing \in X)\land (x\in X \implies s(x)\in X)$), this set $I$ exists by the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}.
+\end{construction}
+\begin{definition}\label{dfn:9}
+	Let $\mathcal{F} $ be a set. Define the \emph{intersection} $\cap \mathcal{F} $ to be the set
+	\[
+		\cap \mathcal{F}  \coloneqq \left\{ x\in \cup \mathcal{F} \mid \forall X(X\in \mathcal{F} \implies x\in X) \right\} 
+	.\]
+\end{definition}
+\begin{definition}\label{dfn:10}
+	Define the set $\mathbb{N} \coloneqq \cap \mathcal{I}$. We call $\mathbb{N} $ the \emph{natural numbers}.
+\end{definition}
+
+\begin{lemma}\label{lma:11}
+	Let $X$ be a set. Then $X\in \mathcal{P}(X)$.
+\end{lemma}
+\begin{proof}
+	Note that $x\in X $ implies $x\in X $, and thus $X \subseteq X $ by \cref{dfn:subset}. Let $y$ be the set guarenteed by the \hyperref[axiom:powerset]{axiom of power set}, such that $\mathcal{P} (X ) \subseteq y$. Since $X \subseteq X$, we have $X \in y$ by the \hyperref[axiom:poweset]{axiom of power set}. Since $X\subseteq X $, we have $X \in \mathcal{P} (X)$ by the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}.
+\end{proof}
+\begin{lemma}\label{lma:12}
+	Let $\mathcal{F} $. For all $X\in \mathcal{F} $ and all $x\in X$, we have $x\in \cup \mathcal{F} $.
+\end{lemma}
+\begin{proof}
+	Let $\mathcal{F} $ be a set, and let $X\in \mathcal{F} $ and $x\in X$. By the \hyperref[axiom:union]{axiom of union}, there is a set $A$ such that $(x\in X) \land (X\in \mathcal{F} )$ implies $x\in A$. By \cref{dfn:union}, $\cup \mathcal{F} $ is the subset of $A$ guarenteed by the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension} such that
+	\[
+		\cup \mathcal{F} =\left\{ x\in A\mid \exists X((X\in \mathcal{F} )\land (x\in X)) \right\} 
+	.\]
+	Hence, $x\in X$ and $X\in \mathcal{F} $ implies $x\in \cup \mathcal{F} $ by the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}. Thus, $x\in \cup \mathcal{F} $.
+\end{proof}
+\begin{lemma}\label{lma:13}
+	Let $\mathcal{F} $ be a nonempty set. Then $x\in \cap \mathcal{F} $ if and only if for all $X\in \mathcal{F} $, we have $x\in X$. Symbolically,
+	\[
+		(x\in \cap \mathcal{F} ) \iff \forall X(X\in \mathcal{F} \implies x\in X)
+	.\]
+\end{lemma}
+\begin{proof}
+	($\implies $) Let $x\in \mathcal{F} $. Then by \cref{dfn:9} and the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}, for all $X\in \mathcal{F} $, we have $x\in X$.
+	
+	($\impliedby $) Let $x\in X$ for all $X\in \mathcal{F} $. Then there is some $X\in \mathcal{F} $ such that $x\in X$, and by \cref{lma:12} we have $x\in \cup \mathcal{F} $. By the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}, since $\forall X(X\in \mathcal{F} \implies x\in X)$ and $x\in \cup \mathcal{F} $, we have $x\in \cap \mathcal{F} $.
+\end{proof}
+
+
+
+\begin{lemma}\label{lma:14}
+	The set $\mathbb{N} $ is inductive.
+\end{lemma}
+\begin{proof}
+	Let $\varphi (x)$ if and only if $\forall X(X\in \mathcal{F} \implies x\in X)$. By the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension} and \cref{dfn:10}, we have $x\in\mathbb{N} $ if and only if $x\in \cup \mathcal{I} $ and $\varphi (x)$.
+
+	Note that $\mathcal{X} $ is an inductive set by the \hyperref[axiom:infinity]{axiom of infinity}. Thus, $\mathcal{X} \in \mathcal{I} $, meaning $\mathcal{X} $ is nonempty. Let $X\in \mathcal{I} $. Then since $X$ is inductive, by \cref{dfn:7} we have $\varnothing \in X$. Thus, $\forall X(X\in \mathcal{I} \implies \varnothing \in X)$. By \cref{lma:13}, $\varnothing \in \cap \mathcal{I} $. Now let $x\in\mathbb{N} $. We must show $s(n)\in \mathbb{N} $ to complete the proof. Since $x\in\mathbb{N} =\cap \mathcal{I} $, by \cref{lma:13}, for all $X\in \mathcal{I} $, we have $x\in X$. Let $X\in \mathcal{I} $. Then $x\in X$, and since $X$ is inductive, by \cref{dfn:7} we have $s(x)\in X$. Thus, for all $X\in \mathcal{I} $, we have $s(x)\in X$. By \cref{lma:13}, we have $s(x)\in \cap \mathcal{I} =\mathbb{N} $. Therefore, $\mathbb{N} $ is inductive.
+\end{proof}
+
+\begin{lemma}\label{lma:15}
+	Let $x$ be a set. Then $x\in s(x)$.
+\end{lemma}
+\begin{proof}
+	Recall construction \ref{const:2}. Let $x$ be a set. Since $\mathcal{X} $ also exists, by the \hyperref[axiom:pairing]{axiom of pairing}, there is a set $z$ with $x,\mathcal{X} \in z$. By the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}, we can deifne a set
+	\[
+		\left\{ x \right\} \coloneqq \left\{ a\in Z \mid a=x \right\} 
+	.\]
+	By \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}, we have $a\in \left\{ x \right\} $ if and only if $a\in z$ and $a=x$. Note that $a=x$ implies $a\in z$ since $x=z$ by definition of equality in first order logic. Thus, we have $a\in \left\{ x \right\} $ if and only if $a=x$. Now recall that $s(x) = x \cup \left\{ x \right\} $. Note that by construction \ref{const:pair}, we have $\left\{ x \right\} \in \left\{ x,\left\{ x \right\}  \right\} $. By \cref{lma:12}, since $x\in \left\{ x \right\} \in \left\{ x,\left\{ x \right\}  \right\} $, we have
+	\[
+		x\in \cup \{ x,\left\{ x \right\}  \} = x \cup \left\{ x \right\} =s(x),
+	\]
+	where the first quality is by \cref{dfn:union-pair}, and the second is by \cref{dfn:6}. Thus, $x\in s(x)$.
+\end{proof}
+
+\begin{lemma}\label{lma:16}
+	Let $A\subseteq B \subseteq C$. Then $A\subseteq C$.
+\end{lemma}
+\begin{proof}
+	Let $a\in A$. Then $A\subseteq B$ implies $a\in B$. Then $B\subseteq C$ implies $a\in C$. Thus $a\in A$ implies $a\in C$, and thus $A\subseteq C$.
+\end{proof}
+
+
+
+\begin{theorem}[Peano Axioms]\label{thm:peano}
+	The following are true.
+	\begin{enumerate}
+		\item $\varnothing \in \mathbb{N} $.
+		\item If $n\in\mathbb{N} $, then $s(n)\in\mathbb{N} $.
+		\item For all $n\in\mathbb{N} $, $s(n) \neq \varnothing$.
+		\item If $s(n)=s(m)$, then $n=m$.
+		\item If $A\subseteq \mathbb{N} $ is such that $0\in A$ and $n\in A \implies s(n)\in A$, then $A=\mathbb{N} $. In other words, $\mathbb{N} $ has no proper inductive subset.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(1) By \cref{lma:14}, $\mathbb{N} $ is inductive. By \cref{dfn:7}, $\varnothing \in X$.
+
+	(2) By \cref{lma:14}, $\mathbb{N} $ is inductive. By \cref{dfn:7}, for all $n\in\mathbb{N} $, we have $s(n)\in\mathbb{N} $.
+
+	(3) Let $n\in\mathbb{N} $. Then since $n\in s(n)$ by \cref{lma:15}, we have that $s(n) \neq \varnothing $ since $n\in \varnothing $ is false for all $n$.
+
+	(5) Let $A\subseteq \mathbb{N} $ be inductive. Since $A \subseteq \mathbb{N} \subseteq \mathcal{X} $, by \cref{lma:16}, $A\subseteq \mathcal{X} $. Thus, $A\in \mathcal{P} (\mathcal{X} )$ by definition and the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}. Since $A$ is inductive and $A\in \mathcal{P} (\mathcal{X} )$, by \hyperref[axiom:comprehension]{axiom schema of restricted comprehension} and definition of $\mathcal{I} $, we have $A\in \mathcal{I} $. By \cref{lma:13}, if $n\in \cup \mathcal{I} $, then $n\in A$. Since $\cup \mathcal{I} =\mathbb{N} $, we have for all $n\in \mathbb{N} $, it follows that $n\in A$. Thus $n\in \mathbb{N} \implies n\in A$. By \cref{dfn:subset}, since $A\subseteq \mathbb{N} $, we have $n\in A \implies n\in\mathbb{N} $. Therefore, $n\in A \iff n\in\mathbb{N} $. By the \hyperref[axiom:extensionality]{axiom of extensionality}, we have $A=\mathbb{N} $.
+
+	The proof of Peano axiom (4) requires a lemma which requires Peano axiom (5).
+
+	\begin{lemma}\label{lma:18}
+		Let $n,m\in\mathbb{N} $ and $n\in m$. Then $n\subseteq m$.
+	\end{lemma}
+	\begin{proof}
+		Since we have proven Peano axiom (5), we use it for this proof. Define the set
+		\[
+			A = \left\{ m\in\mathbb{N} \mid \forall n(n\in m \implies n \subseteq m) \right\} 
+		.\]
+		We first show that $A=\mathbb{N} $. First, note that by definition we have $A \subseteq \mathbb{N} $. Note that $n\in \varnothing $ is false, and thus $n\in \varnothing \implies n \subseteq \varnothing $ by vacuous truth. Since $\varnothing \in\mathbb{N} $, we have $\varnothing \in A$.
+
+		Now suppose that $m\in A$. Let $n\in s(m) = m \cup \left\{ m \right\} $. By \cref{dfn:union-pair} and the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}, it follows that $n\in m$ or $n\in \left\{ m \right\} $. If $n\in \left\{ m \right\} $, then by an argument given previously, $n=m$. Since $n\in m$ implies $n\in m$ or $n\in \left\{ m \right\} $ if and only if $n\in s(m)$ , we have $n=m \subseteq s(m)$, and thus $n\subseteq m$. If $n\in m$, then since $m\in A$, by the \hyperref[axiom:comprehension]{axiom schema of restricted comprehension}, we have $n\in m$ implies $n\subseteq m$. Thus, $n\subseteq m$. Therefore, $n\subseteq m \subseteq s(m)$. By \cref{lma:16}, we have $n \subseteq s(m)$. Therefore, $s(m)\in A$.
+
+		We now have $A \subseteq \mathbb{N} $ and $\varnothing \in A$ and $n\in A \implies s(n)\in A$. By Peano axiom (5), $A=\mathbb{N} $. Thus for any $m\in\mathbb{N} $, we have $m\in A$, and thus $n\in m$ implies $n \subseteq m$.
+	\end{proof}
+
+
+
+	(4) Let $n,m\in \mathbb{N} $ such that $s(n) = s(m)$. Note that $n\in s(n)=s(m)$ implies $n\in s(m) = m \cup \left\{ m \right\} $. If $n\in \left\{ m \right\} $, then $n=m$, and we are done. Suppose for contradiction that $n\in m$. Then we have $m\in s(m) = s(n)$ implies $m\in s(n)=n\cup \left\{ n \right\} $. If $m\in \left\{ n \right\} $, then $m=n$. Thus $n\in m = n$ implies $n\in n$, a contradiction by the \hyperref[axiom:regularity]{axiom of regularity}. Thus we must take $m\in n$. By \cref{lma:18}, we have $m\subseteq n$. We now have $n\subseteq m$ and $m\subseteq n$, and therefore $m=n$. We thus have $n\in m =n$, and thus $n\in n$, a contradiction by the \hyperref[axiom:regularity]{axiom of regularity}.
+\end{proof}
+
+
+
+\end{document}

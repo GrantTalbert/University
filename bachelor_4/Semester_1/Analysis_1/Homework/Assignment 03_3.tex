@@ -1,0 +1,308 @@
+\documentclass[11pt, letterpaper]{article}
+
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\usepackage{enumitem}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting-global.tex}
+\theoremstyle{definition}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{notation*}{Notation}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\crefname{problem}{problem}{problems}
+\Crefname{problem}{Problem}{Problems}
+\usepackage{titlepageBU}
+\title{Assignment 03}
+\courseID{MA511}
+\begin{document}
+\makeproblem
+
+\begin{notation*}
+	Given a set $X$, we denote the cardinality of $X$ by $\left| X \right| $. If $X,Y$ have the same cardinality, then we write $X \cong Y$. We may write $f : X \cong Y$ to denote that $f$ is a bijection $X\to Y$. We write $1$ or $1_X$ for the identity map on the set $X$, defined by $1(x) = x$. Note that $f\circ 1=f$ and $1\circ f=f$ for all functions $f$ with the proper (co)domain. Given sets $A\subseteq B$ and $C$, and given $f : B \to C$, denote the restriction of $f$ to $A$ by $f|A : A \to C$. Note that the definition of this is the composite $f\circ i$, for $i : A \to B$ the inclusion $a\mapsto a$.
+\end{notation*}
+
+\begin{remark*}
+	We make heavy use of the Von Neumann ordinals $n = \left\{ 0, \ldots , n-1 \right\} $ with successor $s(n) = n \cup \left\{ n \right\} $. We frequently refer to elements of a natural, or functions between naturals. Hence, it is important to establish that the Peano axioms hold in this setting. I did this about a year and a half ago because I was bored. On the off chance the grader actually wants to read this, I have compiled the relevant excerpts from my notes at \url{https://github.io/granttalbert/University/tree/master/Projects/???}. With this established, we note that a set $X$ has $\left| X \right| =n$ if and only if there is a bijection $X \cong n$. Thus, the identity morphism $1 : n \cong n$ yields $\left| n \right| =n$ for all $n\in\mathbb{N} $.
+\end{remark*}
+
+
+
+\begin{problem}[Exercise 3.4.3]\label{prob:1}
+	Let $A,B\subseteq X$ and $f : X \to Y$.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item Show that $f(A \cap B) \subseteq f(A) \cap f(B)$.
+		\item Show that $f(A) \setminus f(B) \subseteq f(A\setminus B)$.
+		\item Show that $f(A \cup B) = f(A)\cup f(B)$.
+		\item For the first two statements, when can the $\subseteq $ relation be improved to equality?
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Let $x\in f(A \cap B)$. Then there exists $y\in A \cap B$ such that $f(y) = x$. Thus $y\in A$ and $y\in B$, and thus $f(y)\in f(A)$ and $f(y)\in f(B)$. Thus, $x=f(y) \in f(A) \cap f(B)$.
+
+	(2) Let $x\in f(A) \setminus f(B)$. Then $x\in f(A)$ implies that there exists $y\in A$ such that $f(y)=x$. If $y\in B$, then we would have $x=f(y)\in f(B)$, a contradiction. Thus, $y\notin B$. Therefore $y\in A\setminus B$, meaning $x=f(y)\in f(A\setminus B)$.
+
+	(3) Let $x\in f(A \cup B)$. Then there exists $y\in A \cup B$ such that $f(y) = x$. In particular, $y\in A$ or $y\in B$. Hence, $f(y)\in f(A)$ or $f(y)\in f(B)$. Thus, $f(y)\in f(A) \cup f(B)$. Now let $x\in f(A) \cup f(B)$. Then $x\in f(A)$ or $x\in f(B)$. Without loss of generality, let $x\in f(A)$. Then there is $y\in A$ such that $f(y)=x$. In particular, $y\in A$ implies $y\in A \cup B$, and thus $x=f(y)\in f(A \cup B)$.
+
+	(4) For the first case, the issue with equality arises since we could have $a\in A$ and $b\in B$ with $a\neq b$, but $f(a)=f(b)$. If $f$ is injective, then we can show a strict equality. Let $f$ be injective, and let $x\in f(A) \cap f(B)$. Then $x\in f(A)$ and $x\in f(B)$. There thus exists $y_A\in A$ such that $f(y_A)=x$, and $y_B\in B$ such that $f(y_B)=x$. Since $x$ is injective, $y_A = y_B$, and thus $y_A=y_B\in A \cap B$. Thus $x\in f(A \cap B)$.
+
+	For the second case, the issue and fix are the same. Let $f$ be injective, and let $x\in f(A \setminus B)$. Then there exists $y\in A \setminus B$ such that $f(y)=x$. This gives $x=f(y)\in f(A)$. Suppose for contradiction that $f(y)\in f(B)$. Then there is $y'\in B$ such that $f(y')=x$. We thus have $y=y'$ by injectivity. However, $y\notin B$, a contradiction.
+\end{proof}
+
+\begin{problem}[Exercise 3.4.4]
+	Let $f : X \to Y$ and let $U,V\subseteq Y$.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item Show that $f^{-1} (U \cup V) = f^{-1} (U)\cup f^{-1} (V)$.
+		\item Show that $f^{-1} (U \cap V)=f^{-1} (U) \cap f^{-1} (V)$.
+		\item Show that $f^{-1} (U\setminus V) = f^{-1} (U) \setminus f^{-1} (V)$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Let $x\in f^{-1} (U \cup V)$. Then $f(x)\in U \cup V$. Thus $f(x)\in U$ or $f(x)\in V$. If $f(x)\in U$, then $x\in f^{-1} (U)$. Otherwise, $f(x)\in V$, and thus $x\in f^{-1} (V)$. Thus $x\in U \cup V$. Now let $x\in f^{-1} (U)\cup f^{-1} (V)$. Then $f(x)\in U$ or $f(x)\in V$, hence $f(x)\in U \cup V$.
+
+	(2) Let $x\in f^{-1} (U \cap V)$. Then $f(x)\in U \cap V$, and thus $f(x)\in U$ and $f(x)\in V$. Thus $x\in f^{-1} (U)$ and $x\in f^{-1} (V)$, hence $x\in f^{-1} (U)\cap f^{-1} (V)$. Now let $x\in f^{-1} (U) \cap f^{-1} (V)$. Then $f(x)\in U$ and $f(x)\in V$, hence $f(x)\in U \cap V$. Thus $x\in f^{-1} (U \cap V)$.
+
+	(3) Let $x\in f^{-1} (U\setminus V)$. Then $f(x)\in U\setminus V$, meaning $f(x)\in U$ and $f(x)\notin V$. Thus $x\in f^{-1} (U)$ and $x\notin f^{-1} (V)$, and therefore $x\in f^{-1} (U)\setminus f^{-1} (V)$. Now let $x\in f^{-1} (U)\setminus f^{-1} (V)$. Then $f(x)\in U$ and $f(x)\notin V$, thus $f(x)\in U\setminus V$. Therefore $x\in f^{-1} (U\setminus V)$.
+\end{proof}
+\begin{problem}[Exercise 3.5.4]
+	Let $A,B,C$ be sets.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item Show that $A\times (B \cup C) = (A\times B)\cup (A\times C)$.
+		\item Show that $A\times (B \cap C) = (A\times B)\cap (A\times C)$.
+		\item Show that $A\times (B\setminus C) = (A\times B)\setminus (A\times C)$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Let $p\in A\times (B \cup C)$. Then $p=(a,x)$ for some $a\in A$, and $x\in B$ or $x\in C$. If $x\in B$, then $(a,x)\in A\times B$. Otherwise, $x\in C$, and thus $(a,x)\in A\times C$. Hence $p=(a,x)\in (A\times B)\cup (A\times C)$. Conversely, let $p\in (A\times B)\cup (A\times C)$. Then $p\in A\times B$ or $p\in A\times C$. If the former, then $p=(a,b)$ for some $a\in A$ and $b\in B$. Since $b\in B \subseteq B\cup C$, we have $(a,b)\in A\times (B \cup C)$. Otherwise, $p=(a,c)$ for some $a\in A$ and $c\in C$. By the same logic, $p\in A\times (B \cup C)$.
+
+	(2) Let $p\in A\times (B \cap C)$. Then $p=(a,x)$ for some $a\in A$ and $x\in B \cap C$. Thus $x\in B$ and $x\in C$, hence $(a,x)\in A\times B$ and $(a,x)\in A\times C$. Thus $p\in (A\times B)\cap (A\times C)$. Now let $p\in (A\times B)\cap (A\times C)$. Then $p\in A\times B$ and $p\in A\times C$. Thus $p=(a,x)$ for some $a\in A$, and $x\in B$ and $x\in C$. Thus $(a,x)\in A \times (B \cap C)$.
+
+	(3) Let $p\in A\times (B\setminus C)$. Then $p=(a,b)$ for some $a\in A$ and $b\in B\setminus C$. Hence $b\in B$ and $b\notin C$. Thus we have $(a,b)\in A\times B$ and $(a,b)\notin A\times C$, since $b\notin C$. Thus $(a,b)\in (A\times B)\setminus (A\times C)$.  Now let $p\in (A\times B)\setminus (A\times C)$. Then $p=(a,b)$ for some $a\in A$ and $b\in B$, such that $(a,b)\notin A\times C$. Since $a\in A$, we are forced to take $b\notin C$, since otherwise we would have $(a,b)\in A\times C$. Thus we have $a\in A$ and $b\in B\setminus C$, hence $(a,b)\in A\times (B\setminus C)$.
+\end{proof}
+\begin{problem}[Exercise 3.5.5]
+	Let $A,B,C,D$ be sets.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item Show that $(A\times B)\cap (C\times D)=(A \cap C)\times (B \cap D)$.
+		\item Is it true that $(A\times B) \cup (C\times D)=(A \cup C)\times (B \cup D)$?
+		\item Is it true that $(A\times B)\setminus (C\times D)=(A\setminus C)\times (B\setminus D)$?
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) Let $p\in (A\times B)\cap (C\times D)$. Then $p\in A\times B$ and $p\in C\times D$. Write $p=(x,y)$. Then $x\in A$ and $x\in C$, and $y\in B$ and $y\in D$. Hence $x\in A \cap C$ and $y\in B \cap D$, and thus $(x,y)\in (A \cap C)\times (B \cap D)$. Now let $p\in (A \cap C)\times (B \cap D)$. Now let $p\in (A \cap C)\times (B \cap D)$. Letting $p=(x,y)$, we have $x\in A$ and $x\in C$ and $y\in B$ and $y\in D$. Hence $(x,y)\in A \times C$ and $(x,y)\in B \times D$. Thus $(x,y)\in (A \times C)\cap (B\times D)$.
+
+	(2) This is not true. Let $(x,y)\in (A\times B)\cup (C\times D)$. Then $(x,y)\in A\times B$ or $(x,y)\in C\times D$, hence $x\in A$ or $x\in C$, and $y\in B$ or $y\in D$. Thus we have $(x,y)\in (A \cup C)\times (B \cup D)$. However, the converse need not hold. The issue is if $(x,y)\in (A \cup C)\times (B \cup D)$, then we could have $x\in A$ and $y\in D$, hence $(x,y)\in A \times D$. If $B$ and $D$ are disjoint, and if $A$ and $C$ are also disjoint, then we cannot have $(x,y)\in A \times B$ nor can we have $(x,y)\in C\times D$. For a counterexample, let $A=\left\{ a \right\} $, let $B=\left\{ b \right\} $, let $C=\left\{ c \right\} $, and let $D=\left\{ d \right\} $, with all $a,b,c,d$ distinct sets. Then $(a,d)\in (A \cup C)\times (B \cup D)$, but we cannot have $(a,d)\in (A\times B)\cup (C\times D)$.
+
+	(3) This is also not true. Let $p\in (A\setminus C)\times (B\setminus D)$. Then $p=(a,b)$ with $a\in A\setminus C$ and $b\in B\setminus D$. We thus have $(a,b)\notin (C\times D)$ and $(a,b)\in A\times B$, hence $(a,b)\in (A\times B)\setminus (C\times D)$. For the converse, let $A=\left\{ a,c \right\} $, let $B=\left\{ b,d \right\} $, let $C=\left\{ c \right\} $, and let $D=\left\{ d \right\} $, where none of $a,b,c,d$ are equal. Consider the point $(a,d)$. Note that $a\notin C$ implies $(a,d)\notin C\times D$. However, we have $d\in D$, hence $d\notin B\setminus D$. Thus we cannot have $(a,d)\in (A\setminus C)\times (B\setminus D)$.
+\end{proof}
+
+
+
+\begin{problem}[Exercise 3.6.6]\label{prob:5}
+	Let $A,B,C$ be sets.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item Show that $(A^B)^C \cong A^{B\times C} $.
+		\item Conclude that $(a^b)^c = a^{bc} $ for $a,b,c\in\mathbb{N} $.
+		\item Use a similar argument to conclude that $a^ba^c = a^{b+c} $.
+	\end{enumerate}
+\end{problem}
+\begin{lemma}\label{lma:5-2}
+	Let $n\in\mathbb{N} $, and let $f : n \to n$ be any injective map. Then $f$ is a bijection.
+\end{lemma}
+\begin{proof}
+	We induct on $n$. First, note that the only map $f : 0 \to 0$ is the empty map. Since the empty map is also necessarily the identity map, we have $f\circ f = f =1$ is invertible, and thus a bijection. Now assume the statement holds for some $n\in\mathbb{N} $, and recall that $n+1 = n \cup \left\{ n \right\} $. We have two cases.
+	\begin{enumerate}[label=(\arabic*), align=right]
+		\item ($f(n)=n$) If $f(n)=n$, then since $f$ is injective and $n\notin n$, there is no $x\in n$ with $f(x)=n$. Since $f(x)\in n \cup \left\{ n \right\} $ implies $f(x)\in n$ or $f(x)\in \left\{ n \right\} $, and $f(x) \notin \left\{ n \right\} $, we must have $f(x)\in n$. Thus, the restriction $f|n$ of $f$ to the subset $n \subseteq n+1$ must be a map $f|n : n \to n$. Note that this is still an injection, since $f|n$ is defined as the composite of $f$ with the inclusion map $i : n \hookrightarrow n+1$ mapping $x\mapsto x$, which is manifestly injective. Thus, $f|n$ is injective. By the inductive hypothesis, $f|n$ is bijective. We now note that
+		\[
+			f(x) = \begin{cases}
+				n, & x=n \\
+				(f|n)(x), & x \neq n
+			\end{cases}
+		.\]
+		We can now prove surjectivity. Let $a\in n+1$. If $a=n$, then $f(n)=a$. If $a \neq n$, then $a\in n$, and since $f|n : n \to n$ is a bijection, there is some $f^{-1} (a)\in n$. Thus, $f$ is a bijection.
+		\item ($f(n) \neq n$) Define the transposition $\tau : n+1 \to n+1$ by
+		\[
+			\tau (x) = \begin{cases}
+				n, & x=f(n) \\
+				f(n), & x=n \\
+				x, & \text{otherwise} 
+			\end{cases}
+		.\]
+		Note that $\tau \circ \tau =1$, hence $\tau $ is a bijection. Thus the composite $\tau \circ f$ is injective, and moreover
+		\[
+			(\tau \circ f)(n) = \tau (f(n)) = n
+		.\]
+		Thus $\tau \circ f$ is an injection $n+1\to n+1$ which maps $n\mapsto n$. This is precisely case (1), and thus $\tau \circ f$ is surjective. Thus, $\tau \circ f$ is a bijection, and $\tau $ is a bijection. Since composites of bijections are bijections, we have that $\tau \circ \tau \circ f$ is a bijection. Since $\tau \circ \tau =1$, we have
+	\[
+		\tau \circ \tau \circ f = 1\circ f=f
+	.\]
+	Since $\tau \circ \tau \circ f$ is a bijection, we have that $f$ is a bijection.
+	\end{enumerate}
+\end{proof}
+\begin{lemma}\label{lma:5-3}
+	Let $n \neq m$ be naturals. Then there is no bijection $n \cong m$.
+\end{lemma}
+\begin{proof}
+	Let $n,m\in\mathbb{N} $ with $n\neq m$, and without loss of generality take $n<m$. Suppose for contradiction that $f : n \to m$ is a bijection. Then there is a bijection $f^{-1} : m \to n$. Let $i : n \to m$ be the inclusion $k\mapsto k$, and consider the map $i\circ f^{-1} : m \to m$. Since $f^{-1}$ is injective and $i$ is manifestly injective, this is an injective map. By \cref{lma:5-2}, this is a bijection. Note that $n\in m$, since $n<m$. Since $i\circ f^{-1} $ is a bijection, we have that $i\circ f^{-1} \circ f=i\circ 1=i$ is a bijection. Hence $i$ is surjective. Thus, there is some $k\in n$ such that $i(k) = n$. However, $i(k)=k$ implies $k=n$, hence $n\in n$, a contradiction.
+\end{proof}
+\begin{corollary}\label{cor:5-4}
+	Let $n,m\in\mathbb{N} $. Then $n=m$ if and only if $n \cong m$.
+\end{corollary}
+\begin{proof}
+	Let $n=m$. Then the identity map $1 : n \to n$ is a bijection. The contrapositive of the reverse direction is \cref{lma:5-3}.
+\end{proof}
+\begin{lemma}[Sorta functoriality of Hom in the first argument]\label{lma:5-5}
+	Let $X,Y,Z$ be sets, and let $f : X \to  Y$ be a function. Then there is a function $ f^* : Z^Y \to Z^X$ such that if $f$ is a bijection, then so is $f^*$.
+\end{lemma}
+\begin{proof}
+	Define the precomposition map $f^* : Z^Y \to Z^X$ by mapping $g\mapsto g\circ f$. This is well-defined: if $g : Y \to Z$, then the composite $f^*(g) = g\circ f$ maps
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X \ar[" f ", r]  & Y \ar[" g ", r]  & Z
+	\end{tikzcd}.
+	\]
+	Thus, our map exists. Now suppose $f$ is a bijection. Let $g,h : Y \to Z$ such that $f^*(g) = f^*(h)$. Then since $f$ is a bijection, it has an inverse. Thus
+	\begin{align*}
+		&\qquad\;\;\; g\circ f = h\circ f\\
+		&\implies g\circ f\circ f^{-1} = h\circ f\circ f^{-1} \\
+		&\implies g\circ 1 = h\circ 1\\
+		&\implies g=h
+	\end{align*}
+	Now let $g : X \to Z$. Since $f^{-1} : Y \to X$, the composite $g\circ f^{-1} $ exists. Moreover,
+	\[
+		f^*(g\circ f^{-1} ) = g\circ f^{-1} \circ f = g\circ 1 = g
+	.\]
+	Thus, there is some $g\circ f^{-1} \in Z^Y$ such that $f^*(g\circ f^{-1} )=g$. Thus, $f^*$ is surjective, and thus a bijection.
+\end{proof}
+\begin{lemma}\label{lma:unreferenced}
+	Let $a,b\in\mathbb{N} $. Then the set of functions $b\to a$, which we will for this lemma \emph{only} denote $\Hom(b,a)$ to avoid confusion, has equal cardinality to the exponent $a^b$ of natural numbers.
+\end{lemma}
+\begin{remark*}
+	This lemma will be continuously used \emph{without reference} throughout the main proof of this problem to translate statements about exponentials of sets into statements about exponentials of naturals. Since we always work up to bijection when dealing with cardinality, we may freely invoke this lemma without loss of generality.
+\end{remark*}
+\begin{proof}
+	By Proposition 3.6.14 (f) of the class 9 notes, we have $\left| \Hom(b,a) \right| =\left| a \right| ^{\left| b \right| } $. By definition of cardinality, $\left| a \right| =a$ and $\left| b \right| =b$. Hence we have $\left| a \right| ^{\left| b \right| } =a^b$. Thus $\left| \Hom(b,a) \right| =a^b$.
+\end{proof}
+\begin{lemma}\label{lma:unreferenced-2}
+	Let $X,Y,Z$ be sets, and $f : Y \to Z$ a map. Then there is a map $f_* : Y^X \to Z^X$ such that if $f$ is a bijection, then so is $f_*$.
+\end{lemma}
+\begin{remark*}
+	The usefulness of this result is establishing that if $\Hom(b,a) \cong a^b$, then we can insert this into the second argument of hom when establishing $\Hom(c,\Hom(b,a)) \cong (a^b)^c$. This does not automatically follow from what we have so far.
+\end{remark*}
+\begin{proof}
+	Define the postcomposition map $f_*(g) = f\circ g$. The proof is analogous to that for \cref{lma:5-5}.
+\end{proof}
+
+
+
+
+
+
+\begin{proof}[Proof of \cref{prob:5}]
+	(1) Let $A,B,C$ sets. We define the natural bijection $\varphi : A^{B\times C}  \to (A^B)^C$ by mapping, for any $f : B\times C \to A$ and $c\in C$,
+	\[
+		\varphi (f)(c) = f(-,c)
+	.\]
+	Here, the notation $f(-,c)$ denotes the function $B\to A$ mapping $b\mapsto f(b,c)$. Since bijections are precisely the invertible maps, we construct an inverse for $\varphi $. Define the function $\varphi ^{-1} : (A^B)^C \to A^{B\times C} $ by mapping, for any $g : C \to A^B$ and $(b,c)\in B\times C$,
+	\[
+		(\varphi ^{-1} (g))(b,c) = g(c)(b)
+	.\]
+	Given a set $X$, write the identity morphism $x\mapsto x$ as $1 : X \to X$. We show that $\varphi \circ \varphi ^{-1} =1$ and $\varphi ^{-1} \circ \varphi =1$.
+
+	First, let $f : B\times C \to A$. We must show that $(\varphi ^{-1} \circ \varphi )(f)=f$. Let $b\in B$ and $c\in C$. Then
+	\[
+		\varphi ^{-1} (\varphi (f))(b,c) = \varphi (f)(c)(b) = f(-,c)(b) = f(b,c)
+	.\]
+	Thus, $\varphi ^{-1} \circ \varphi =1$.
+
+	Now let $g : C \to A^B$. We must show $(\varphi \circ \varphi ^{-1} )(g)=g$. Let $c\in C$. Then
+	\[
+		\varphi (\varphi ^{-1} (g))(c) = (\varphi ^{-1} (g))(-,c) : B\ni b \mapsto (\varphi ^{-1} (g))(b,c) = g(c)(b)
+	.\]
+	Thus, $\varphi (\varphi ^{-1} (g))(c) = g(c)$. We thus have $\varphi \circ \varphi ^{-1} =1$.
+
+	(2) Recall that $\left| X\times Y \right| =\left| X \right| \left| Y \right| $ by part (e) of Proposition 3.6.14 of the class 9 notes. By (1) and \cref{lma:unreferenced-2}, we have $(a^b)^c \cong a^{b\times c} $. By Proposition 3.6.14 (e), we have $b\times c \cong bc$. By \cref{lma:5-5}, we have $a^{b\times c} \cong a^{bc} $. Since composites of bijections are bijective, $(a^b)^c \cong a^{bc} $. By \cref{cor:5-4}, we have $(a^b)^c =a^{bc} $.
+
+	(3) We proceed with an analogous argument.
+	\begin{definition}\label{dfn:4}
+		Let $X,Y$ be sets. Define the \emph{disjoint union} or the \emph{coproduct} $X\amalg Y$ as the set
+		\[
+			X \amalg Y \coloneqq (\left\{ 0 \right\} \times X) \cup (\left\{ 1 \right\} \times Y)
+		.\]
+		We do not need higher order than binary coproducts, so I will not describe how to generalize this definition beyond the obvious finite generalization.
+	\end{definition}
+	\begin{lemma}\label{lma:5-7}
+		Let $X,Y$ be sets. Then $\left| X\amalg Y \right| =\left| X \right| +\left| Y \right| $.
+	\end{lemma}
+	\begin{proof}
+		Note that the coproduct is defined as a union. By Proposition 3.6.14 in the class 9 notes, $\left| X\amalg Y \right| \leq \left| \left\{ 0 \right\} \times X \right| + \left| \left\{ 1 \right\} \times Y \right|$, with equality when $\left\{ 0 \right\} \times X$ and $\left\{ 1 \right\} \times Y$ are disjoint. Note that $\left\{ 0 \right\} \times X$ and $\left\{ 1 \right\} \times Y$ are indeed disjoint: if $(0,x)\in \left\{ 0 \right\} \times X$, then $(0,x)\in \left\{ 1 \right\} \times Y$ would imply $0\in \left\{ 1 \right\} $, hence $0=1$, a contradiction. Thus $a\in \left\{ 0 \right\} \times X$ implies $a\notin \left\{ 1 \right\} \times Y$, so the two sets are disjoint by \cite[Lemma~2.1]{hw2}.
+
+		The statement now follows from the more general statement. Let $A$ be a set, and $* = \left\{ p \right\}$ a singleton. We prove $\left| * \times A \right| =\left| A \right| $ by using the bijection $(p,a)\mapsto a$. This is immediately surjective, since for all $a\in A$ we have $(p,a)\in *\times A$, so we show it is injective. Suppose $(p,a),(p,b)\in *\times A$ such that $a=b$. Then since $p=p$, we have $(p,a)=(p,b)$.
+
+		Putting it all together, we have
+		\[
+			\left| X\amalg Y \right| =\left| \left\{ 0 \right\} \times X \right| + \left| \left\{ 1 \right\} \times Y \right| =\left| X \right| +\left| Y \right| 
+		.\]
+	\end{proof}
+	\begin{lemma}\label{lma:5-8}
+		Let $X,Y,Z$ be sets. Then $Z^{X \amalg Y} \cong Z^X \times Z^Y$.
+	\end{lemma}
+	\begin{proof}
+		This proof involves showing that $X\amalg Y$ is universal in the relevant sense. First, we show the following. Define $i_X : X \to X\amalg Y$ (resp. $i_Y : Y \to X\amalg Y$) as the maps $x\mapsto (0,x)$ (resp. $y\mapsto (1,y)$). We will first show that given maps $f : X \to Z$ and $g : Y \to Z$, there is a unique map $X\amalg Y\to Z$, denoted $f+g$, with the property that
+		\[
+			(f+g)\circ i_X = f,\qquad (f+g)\circ i_Y = g
+		.\]
+		We display this data as the requirement that given the diagram of solid arrows
+		\[
+			\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			X \ar[" i_X "', d] \ar[" f ", dr]  &  \\
+			X \amalg Y \ar[" f+g ", dashed, r]  & Z \\
+			Y \ar[" i_Y ", u] \ar[" g "', ur]  & 
+		\end{tikzcd},
+		\]
+		there is a unique dashed arrow as indicated, rendering the diagram commutative.
+
+		This is simple to prove. Define
+		\[
+			(f+g)(a,b) =\begin{cases}
+				f(b), & a=0 \\
+				g(b), & a=1
+			\end{cases}
+		.\]
+		If $a=0$, then $(a,b)\in \left\{ 0 \right\} \times X$, so $f(b)$ is defined. SImilarly, if $a=1$, then $g(b)$ is defined. Hence, $f+g$ is well-defined and exists. To show the relevant property, let $x\in X$ and $y\in Y$. Then by definition of $f+g$, we have
+		\[
+			(f+g)(i_X(x)) = (f+g)(0,x) = f(x),
+		\]
+		\[
+			(f+g)(i_Y(y)) = (f+g)(1,y) = g(y)
+		.\]
+		Now we show uniqueness. Suppose $h : X\amalg Y \to Z$ is a map with $h\circ i_X=f$ and $h\circ i_Y=g$. We show $f+g=h$. Indeed, if $x\in X$ and $y\in Y$, then we have
+		\[
+			h(0,x) = h(i_X(x)) = f(x) = (f+g)(0,x),
+		\]
+		\[
+			h(1,y) = h(i_Y(y)) = g(y) = (f+g)(1,y)
+		.\]
+		Since all elements of $X\amalg Y$ are of the form $(0,x)$ or $(1,y)$, we have $h=f+g$. Thus, uniqueness is shown. We refer to the existence and uniqueness of $f+g$ as universality.
+
+		We now have all we need to construct the required bijection. Define the map $Z^X \times Z^Y \to Z^{X\amalg Y} $ by mapping $(f,g)\mapsto f+g$. By universality, this map is well-defined and injective, so it suffices to show surjectivity. Let $h : X\amalg Y \to Z$. We show $h=(h\circ i_X)+(h\circ i_Y)$. Indeed,
+		\[
+			((h\circ i_X)+(h\circ i_Y))(0,x) = (h\circ i_X)(x) = h(0,x),
+		\]
+		\[
+			((h\circ i_X)+(h\circ i_Y))(1,y) = (h\circ i_Y)(y) = h(1,y)
+		\]
+		by definition. Thus, this map is a bijection.
+	\end{proof}
+	Now let $a,b,c\in\mathbb{N} $, as required by the problem. By \cref{lma:5-7}, we have $\left| b \amalg c \right| = \left| b \right| +\left| c \right| =\left| b+c \right| $. Hence, $b \amalg c \cong b+c$ by definition of cardinality. By \cref{lma:5-5}, we have $a^{b+c} \cong a^{b\amalg c} $. By \cref{lma:5-8}, we have $a^{b \amalg c} \cong a^b \times a^c$. By Proposition 3.6.14 (e) of the class 9 notes, we have $a^b \times a^c \cong a^b a^c$. Since cardinality is an equivalence relation, we have
+	\[
+		a^{b+c} \cong a^ba^c
+	.\]
+	By \cref{cor:5-4}, we have $a^{b+c} =a^ba^c$.
+\end{proof}
+
+
+\bibliographystyle{alpha}
+\bibliography{./refs-hw-3.bib}
+\end{document}

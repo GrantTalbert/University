@@ -1,0 +1,26 @@
+\lecture{3}{Thu 10 Sep 2026 09:33}{Fundamental group of $S^1$}
+
+
+
+
+\begin{definition}\label{dfn:covering-space}
+	Let $X$ be a space. A \emph{covering space} of $X$ is a space $\widetilde{X} $, together with a continuous map $p : \widetilde{X}  \to X$, such that for all $x\in X$, there is an open neighborhood $x\in U \subseteq X$ such that $p ^{-1} (U)$ can be realized as a disjoint union
+	\[
+		p ^{-1} (U) = \coprod_{\alpha \in J} \widetilde{U}_\alpha ,
+	\]
+	for $\widetilde{U} _\alpha \subseteq \widetilde{X} $ open subsets with the property that the restriction $p|\widetilde{U}_\alpha : \widetilde{U} _\alpha \cong U$ is a homeomorphism.
+\end{definition}
+
+\begin{intuition}
+	The best intuition is the canonical picture of $\mathbb{R} $ twisted into a coil, sitting above $S^1$. Choose a point, and a small neighborhood. Then at each level of the coil, you can lift it to a homeomorphic open. Thus you get a disjoint union of opens, all homeomorphic to $U$.
+\end{intuition}
+
+\begin{lemma}\label{lma:covering-space-lifts}
+	Let $p : \widetilde{X}  \to X$ be a covering space. Then any path $f : I \to X$ starting at $x_0\in X$, and any $\widetilde{x} _0\in p ^{-1} (x_0)$, there is a unique lift $\widetilde{f} : I \to \widetilde{X} $. More generally, given a homotopy $H$ of paths in $X$ which preserves endpoints, we can lift $H$ to a homotopy $\widetilde{H} $ of the lifted paths in $\widetilde{X} $.
+\end{lemma}
+
+\begin{theorem}\label{thm:fundamental-group-of-s1}
+	For any $p\in S^1$, we have $\pi _1(S^1,p)\cong \mathbb{Z} $.
+\end{theorem}
+
+

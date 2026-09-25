@@ -1,0 +1,100 @@
+\section{Modules}
+
+In order to properly introduce modules, we need to be a little more precise about what the scalars actually are. Although we won't be restricting ourselves to $\mathbb{R} $ and $\mathbb{C} $, the scalars still can't be literally \emph{anything}. For example, \cref{dfn:vector-space} property (5) requires the existence of some element $1$ in our collection of scalars; property (6) requires that we can multiply scalars with scalars; and property (8) requires that we can add our scalars together. Thus, our collection of scalars has to be some sort of algebra with addition, multiplication, and 1. Such an algebraic structure is referred to mathematicians as a \emph{ring}.
+
+\begin{definition}\label{dfn:ring}
+	A \emph{ring} is a set $R$ together with \emph{two} operations, addition $+: R\times R \to R$ and \emph{multiplication} $\cdot : R\times R \to R$, which satisfy the following properties.
+	\begin{enumerate}
+		\item The pair $(R,+)$ is an abelian group (\cref{dfn:group}).
+		\item For all $a,b,c\in R$, we have $a(bc)=(ab)c$. This is called \emph{associativity}.
+		\item There exists some element $1\in R$ with the property that for all $a\in R$, we have $1a=a1=a$. This is called \emph{one}, or the \emph{multiplicative identity}, or the \emph{unit}.
+		\item For all $a,b,c\in R$, we have $a(b+c)=ab+ac$ and $(a+b)c=ac+bc$. These are called the \emph{left and right distributive properties}.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}\label{rmk:rng}
+	Many authors, especially for undergraduate texts, do not require that rings have a unit $1$. They would refer to a ring with a unit as a \emph{unital ring}. However, most rings in practice (and all rings I personally work with) have an element $1$, so I include a unit in the definition of a ring. This is a fairly standard convention. A ring without a unit is then referred to as an \emph{rng} (we remove the ``i'' since ``i'' stands for ``identity'').
+\end{remark}
+
+Rings are one of the most general type of interesting algebra that has two operations $+,\cdot $. It's possible to make more general algebras with two operations, but they're much less interesting. For example, without the associativie property for multiplication, it would be incredibly hard to work with rings at all. Without the distributive property, there would be no relationship between addition and multiplication, meaning it would be weird to even think of a ring as an algebra with 2 operations.
+
+\begin{example}\label{ex:ring-1}
+	The integers $\mathbb{Z} $ are a ring, using normal addition and multiplication. So are the real numbers $\mathbb{R} $, the rational numbers $\mathbb{Q} $, and the complex numbers $\mathbb{C} $. All of these rings have the property that $ab=ba$. Such a ring is known as a \emph{commutative ring}. The natural numbers $\mathbb{N} =\left\{ 0,1,2, \ldots  \right\} $ are \emph{not} a ring, since they are not a group. Natural numbers only contain non-negative integers, meaning they don't contain additive inverses, since the inverse of a non-negative integer is negative. However, $\mathbb{N} $ satisfies every other axiom of a ring, yielding a structure known as a \emph{rig} (we remove the ``n'' since ``n'' stands for ``negative''). I personally know of zero applications of rigs.
+\end{example}
+
+\begin{example}\label{ex:ring-2}
+	Consider the set of $n\times n$ matrices with real entries, which we will denote by $M_n(\mathbb{R} )$. This is a ring using normal matrix addition and multiplication. However, more general $n\times m$ matrices are \emph{not} a ring if $n \neq m$, since we can't multiply two matrices if the dimensions don't line up properly.
+\end{example}
+
+\begin{example}\label{ex:ring-3}
+	Let $R$ be any \emph{commutative} ring. We can define a new ring called $R[x]$ called the \emph{polynomial ring over $R$}. Elements of this ring are polynomial functions $R\to R$, meaning if $p\in R[x]$, then we can write
+	\[
+		p(x) = \sum_{i=0}^n r_i x^i
+	\]
+	for some coefficients $r_i\in R$. Addition and multiplication are defined in the exact way you would expect. Polynomial rings are extremely important in \emph{commutative algebra}, which can generally be described as the study of commutative rings (and similar algebras).
+\end{example}
+
+We can now define modules over a ring $R$.
+
+\begin{definition}\label{dfn:module}
+	Let $R$ be a ring. Then an \emph{$R$-module} is an abelian group $(M,+)$ and an operation $\cdot : R\times M \to M$ called \emph{scalar multiplication} such that the following properties hold:
+	\begin{enumerate}
+		\item For all $m\in M$, if $1\in R$ is the unit, then $1m=m$.
+		\item For all $r,s\in R$ and $m\in M$, we have $(rs)m=r(sm)$.
+		\item For all $r\in R$ and all $m,n\in M$, we have $r(m+n)=r m+rn$.
+		\item For all $r,s\in R$ and all $m\in M$, we have $(r+s)m=r m+sm$.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}\label{rmk:modules-as-morphisms}
+	This remark should not be given during the talk. There is an alternative definition of a module, which is somewhat more complex but much cleaner. Given rings $R,S$, a \emph{ring homomorphism} is a function $\varphi : R \to S$ such that for all $r_1,r_2\in R$,
+	\[
+		\varphi (r_1+r_2) = \varphi (r_1)+\varphi (r_2)\qquad \text{and} \qquad \varphi (r_1r_2)=\varphi (r_1)\varphi (r_2)
+	.\]
+	Let $(M,+)$ be an abelian group, and write $\End_{\Ab }(M) $ for the set of all group homomorphisms $M\to M$ (we call such a map a \emph{group endomorphism}). If $f,g\in \End_{\Ab } (M)$, then we define the functions $f+g$ and $f\circ g$ as follows: for all $m\in M$,
+	\[
+		(f+g)(m) = f(m)+g(m),\qquad (f\circ g)(m) = f(g(m))
+	.\]
+	I claim that by taking $+$ to be addition and $\circ $ to be multiplication, the set $\End_{\Ab }(M) $ is a ring. An $R$-module can then be defined as a ring homomorphism $\rho : R \to \End_{\Ab }(M) $. \Cref{dfn:module} is then recovered as follows. Let $r\in R$ and $m\in M$; we want to define $r m$. Since $\rho $ maps $R$ to endomorphisms of $M$, we have that $\rho (r)$ is a function $M\to M$. Since $m\in M$, we can evaluate the function $\rho (r)$ at $m$, yielding an element $\rho (r)(m)\in M$. We define
+	\[
+		r m\coloneqq \rho (r)(m)
+	.\]
+	All of the properties listed in \cref{dfn:module} can be proven from this definition.
+\end{remark}
+
+There are a ton of great examples of $R$-modules. We will go through a few.
+
+\begin{example}\label{ex:module-1}
+	We have shown previously in \cref{prp:Z-module} that any abelian group satisfies all the axioms of a $\mathbb{Z} $-module. Thus, all abelian groups are $\mathbb{Z} $-modules. Since all $\mathbb{Z} $-modules are also abelian groups (condition 1 of \cref{dfn:module}), we have a two-sided inclusion
+	\[ 
+		\left\{ \mathbb{Z} \text{-modules}  \right\} \subseteq \left\{ \text{abelian groups}  \right\} \qquad \text{and} \qquad \left\{ \mathbb{Z} \text{-modules}  \right\} \supseteq \left\{ \text{abelian groups}  \right\} 
+	.\]
+	Therefore, $\mathbb{Z} $-modules are the same thing as abelian groups.
+\end{example}
+
+\begin{example}\label{ex:module-2}
+	Let's look at a more concrete example. First, any vector space over $\mathbb{R} $ is an $\mathbb{R} $-module. Similarly, any vector space over $\mathbb{C} $ is a $\mathbb{C} $-module. I will later define a \emph{field} as a particular type of ring, and we will define a vector space to be a module over a field.
+\end{example}
+
+\begin{example}\label{ex:module-3}
+	A module can be a module over multiple rings at once. For example, any ring $R$ is an abelian group, and thus a $\mathbb{Z} $-module. However, $R$ is also an $R$-module, where the scalar multiplication is just normal ring multiplication.
+\end{example}
+
+
+\begin{example}\label{ex:module-4}
+	Here's a more complex, but more concrete and \emph{very useful} example. A \emph{vector field} on $\mathbb{R} ^3$ is a function $X : \mathbb{R} ^3 \to \mathbb{R} ^3$. Recall that $\mathbb{R} ^3$ is a vector space, meaning that for any point $(x,y,z)\in\mathbb{R} ^3$, the vector field $X$ produces a vector $X(x,y,z)\in\mathbb{R} ^3$. Note that if I multiply this vector by a scalar $c\in\mathbb{R} $, I get a new vector $c\cdot X(x,y,z)\in\mathbb{R} ^3$. We can use this fact to give the set of vector fields on $\mathbb{R} ^3$ the structure of a $C^\infty (\mathbb{R} ^3)$-module.
+
+	First, let $\mathfrak{X} (\mathbb{R} ^3)$ be the set of all vector fields on $\mathbb{R} ^3$. Define $C^\infty (\mathbb{R} ^3)$ to be the set of all \emph{smooth functions} $f : \mathbb{R} ^3 \to \mathbb{R} $. Here, smooth simply means that any possible combination of partial derivatives of $f$ exist. We can give $C^\infty (\mathbb{R} ^3)$ the structure of a ring by using the ring structure of $\mathbb{R} $. If $f,g\in C^\infty (\mathbb{R} ^3)$, then we define the new smooth functions $f+g$ and $f\cdot g$ as follows:
+	\[
+		\forall (x,y,z)\in\mathbb{R} ^3,\qquad (f+g)(x,y,z) = f(x,y,z) + g(x,y,z),\qquad (f\cdot g)(x,y,z)=f(x,y,z)\cdot g(x,y,z)
+	.\]
+	It's fairly easy to check that this forms a ring. Each ring axiom needs to be checked at a single arbitrary point $(x,y,z)$ of $\mathbb{R} ^3$, meaning that we can simply work with equations in $\mathbb{R} $, which is already a ring. Thus, we can consider a $C^\infty (\mathbb{R} ^3)$-module.
+
+	In order for $\mathfrak{X} (\mathbb{R} ^3)$ to be a $C^\infty (\mathbb{R} ^3)$-module, we need to define a multiplication operation which takes a smooth function $f : \mathbb{R} ^3 \to \mathbb{R} $ and a vector field $X : \mathbb{R} ^3 \to \mathbb{R} ^3$, and outputs a new vector field $fX : \mathbb{R} ^3 \to \mathbb{R} ^3$. We define it as follows. Let $(x,y,z)\in\mathbb{R} ^3$. then
+	\[
+		(fX)(x,y,z) = f(x,y,z)\cdot X(x,y,z)
+	.\]
+	Since $f(x,y,z)\in\mathbb{R} $, we have that $f(x,y,z)$ is just a number, i.e. a \emph{scalar}. Since $X(x,y,z)$ is a vector in $\mathbb{R} ^3$, we know how to multiply it by a scalar. Thus, multiplying $f(x,y,z)$ and $X(x,y,z)$ can not only be done, but produces a new element of $\mathbb{R} ^3$! Thus, $fX : \mathbb{R} ^3 \to \mathbb{R} ^3$ is indeed a vector field.
+\end{example}
+
+\Cref{ex:module-4} is a more complex example of a module, and it can be difficult to understand at first. However, a \emph{ton} of modules over rings of smooth functions (or other types of functions, eg. continuous, holomorphic) show up in geometry. I won't use many more examples from geometry in these notes to keep them more understandable, but since one of the most interesting applications of module theory is with modules of this form in geometry, it's important (and very cool) to at least know about this.

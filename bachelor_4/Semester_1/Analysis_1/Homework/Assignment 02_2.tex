@@ -1,0 +1,123 @@
+\documentclass[11pt, letterpaper]{article}
+
+\input{/home/hyperion/.config/LatexHub/preambles/base.tex}
+\usepackage{enumitem}
+\input{/home/hyperion/.config/LatexHub/preambles/tikz.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/diagrams.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-cat-theory.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/macros-algebra.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/homework-formatting-global.tex}
+\input{/home/hyperion/.config/LatexHub/preambles/refs-basic.tex}
+\crefname{problem}{problem}{problems}
+\Crefname{problem}{Problem}{Problems}
+\usepackage{titlepageBU}
+\title{Assignment 02}
+\begin{document}
+\makeproblem
+
+\noindent\textbf{Remark.} We frequently use the result that if $A\subseteq B$ and $B\subseteq A$, then $A=B$. This was proven in Proposition 1 of the class 5 notes, and is in Proposition 3.1.17 of Tao. The result will be continuously used without reference.
+
+\begin{problem}[Exercise 3.1.5]\label{prob:1}
+	Let $A,B$ be sets. Show that the following are equivalent.
+	\begin{enumerate}[label=(\arabic*)]
+		\item $A\subseteq B$.
+		\item $A\cup B=B$.
+		\item $A \cap B=A$.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	($1\implies 2$) Let $A\subseteq B$. Let $a\in A \cup B$. Then $a\in A$ or $a\in B$. If $a\in A$, then since $A\subseteq B$, by definition we have $a\in B$. Thus, we have $a\in B$ or $a\in B$, and thus $a\in B$. Therefore, $A \cup B \subseteq B$. Now let $b\in B$. Then $b\in B$ or $b\in A$ is true, and thus $b\in A \cup B$. Therefore, $B\subseteq A \cup B$, and thus $B = A \cup B$.
+
+	($2\implies 1$) Let $A \cup B = B$. If $a\in A$, then $a\in A$ or $a\in B$, and thus $a\in A \cup B$. Since $A \cup B=B$, we have $a\in B$. Thus, $A\subseteq B$.
+
+	($2\implies 3$) Let $A \cup B = B$. Let $a\in A \cap B$. Then since $a\in A$ and $a\in B$, we have $a\in A$. Thus all $a\in A \cap B$ have $a\in A$, and thus $A \cap B \subseteq A$. Conversely, let $a\in A$. To show $A \subseteq A \cap B$ and to complete this part of the proof, it suffices to show $a\in B$. By $(1 \iff 2)$, this follows.
+
+	($3\implies 1$) Let $A \cap B=A$. Suppose $a\in A$. Then since $A = A \cap B$, we have $a\in A \cap B$. Thus, $a\in A$ and $a\in B$. In particular, $a\in B$, and thus $A\subseteq B$.
+\end{proof}
+
+
+\begin{problem}[Exercise 3.1.10]\label{prob:2}
+	Let $A,B$ be sets.
+	\begin{enumerate}[label=(\arabic*)]
+		\item Show that $A\setminus B$, $A \cap B$, and $B\setminus A$ are disjoint.
+		\item Show that the union of the three above sets is $A \cup B$.
+	\end{enumerate}
+\end{problem}
+
+\begin{lemma}\label{lma:2-1}
+	Let $A,B$ be sets. If $x\in A$ implies $x\notin B$, then $A$ and $B$ are disjoint.
+\end{lemma}
+\begin{proof}
+	Let $x\in A$ imply $x\notin B$. By definition, $A,B$ are disjoint if $A \cap B=\varnothing $. Suppose for contradiction that $x\in A \cap B$. then $x\in A$ and $x\in B$. However, $x\in A$ implies that $x\notin B$, so we now have $x\in B$ and $x\notin B$, a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prob:2}]
+	(1) First we show $A\setminus B$ and $A \cap B$ are disjoint. Let $x\in A \setminus B$. Then by definition, $x\in A$ and $x\notin B$. Since $a\in A \cap B$ implies $a\in B$, by contrapositive $a\notin B$ implies $a\notin A \cap B$. Thus, $x\notin A \cap B$. Thus, $x\in A \setminus B$ implies $x\notin A \cap B$. By \cref{lma:2-1}, $A\setminus B$ and $A \cap B$ are disjoint.
+
+	Now we show $A \cap B$ and $B\setminus A$ are disjoint. Let $x\in B\setminus A$. Then $x\in B$ and $x\notin A$. It follows that $x\notin A \cap B$ by the same logic as the previous step. By \cref{lma:2-1}, $B\setminus A$ and $A \cap B$ are disjoint.
+
+	Now we show $A\setminus B$ and $B\setminus A$ are disjoint. Let $x\in A\setminus B$. Then $x\in A$ and $x\notin B$. In particular, $x\notin B$. Note that $b\in B\setminus A$ implies $b\in B$ and $b \notin A$, and thus $b\in B$. By contrapositive, $b\notin B$ implies $b\notin B\setminus A$, and thus $x\notin B\setminus A$. By \cref{lma:2-1}, the sets are disjoint.
+
+	(2) First, we show $(A\setminus B)\cup (A \cap B) \cup (B\setminus A) \subseteq A \cup B$. Let $x\in (A\setminus B) \cup (A \cap B) \cup (B\setminus A)$. Thus $x\in A\setminus B$ or $x\in A \cap B$ or $x\in B\setminus A$. We proceed in cases.
+	\begin{itemize}
+		\item ($x\in A\setminus B$) We have $x\in A$ and $x\notin B$ implies $x\in A$ implies $x\in A$ or $x\in B$ implies $x\in A \cup B$.
+		\item ($x\in B\setminus A$) We have $x\in B$ and $x\notin A$ implies $x\in B$ implies $x\in B$ or $x\in A$ implies $x\in A \cup B$.
+		\item ($x\in A \cap B$) We have $x\in A$ and $x\in B$ implies $x\in A$ implies $x\in A$ or $x\in B$ implies $x\in A \cup B$.
+	\end{itemize}
+	Now we show $A \cup B \subseteq (A \setminus B)\cup (A \cap B)\cup (B\setminus A)$. Let $x\in A \cup B$. We proceed in cases.
+	\begin{itemize}
+		\item ($x\in A$) If $x\in A$, then since $x\in A \cup B$, we have two cases. If $x\in B$, then we have $x\in A$ and $x\in B$, and thus $x\in A \cap B$. If $x\notin B$, then we have $x\in A$ and $x\notin B$, and thus $x\in A\setminus B$.
+		\item ($x\notin A$) Since $x\in A \cup B$ and $x\notin A$, we must have $x\in B$. Thus we have $x\in B$ and $x\notin A$, which implies $x\in B\setminus A$.
+	\end{itemize}
+	
+\end{proof}
+
+\begin{problem}
+	Suppose that $A,B,A',B'$ are sets such that $A'\subseteq A$ and $B'\subseteq B$.
+	\begin{enumerate}[label=(\arabic*)]
+		\item Show that $A' \cup B'\subseteq A \cup B$ and $A' \cap B' \subseteq A \cap B$.
+		\item Give a counterexample to show that the statement $A'\setminus B' \subseteq A\setminus B$ is false. Can you find a modification of this statement involving the setminus operation which is true given the stated hypotheses?
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	(1) We show the statements in order. Let $x\in A' \cup B'$. Then $x\in A'$ or $x\in B'$. We proceed in cases.
+	\begin{itemize}
+		\item If $x\in A'$, then $A'\subseteq A$ implies $x\in A$. Thus $x\in A $ or $x\in B$, and thus $x\in A \cup B$.
+		\item If $x\in B'$, then $B'\subseteq B$ implies $x\in B$. Thus $x\in A$ or $x\in B$, and thus $x\in A \cup B$.
+	\end{itemize}
+	
+	Let $x\in A' \cap B'$. Then $x\in A'$ and $x\in B'$. Thus $x\in A'$. Since $A'\subseteq A$, we have $x\in A$. Additionally, since $x\in B'$ and $B'\subseteq B$, we have $x\in B$. Thus $x\in A$ and $x\in B$. Therefore $x\in A \cap B$.
+
+	(2) Write $[n]=\left\{ 0, \ldots , n \right\}\subseteq \mathbb{N} $. Let $A=A'=[2]$, let $B=[1]$, and let $B'=[0]$. Then
+	\[
+		A\setminus B = \left\{ 2 \right\} ,\qquad A'\setminus B' = \left\{ 1,2 \right\} 
+	.\]
+	There exists $1\in A'\setminus B'$ such that $1\notin A\setminus B$, and thus we cannot have $A'\setminus B'\subseteq A\setminus B$.
+
+	A correct statement given the hypotheses is $A'\setminus B \subseteq A\setminus B'$. Let $x\in A'\setminus B$. then $x\in A'$, and since $A'\subseteq A$, we have $x\in A$. Note that since $B'\subseteq B$, if $b\in B'$, then $b\in B$. The contrapositive of this is $b \notin B$ implies $b\notin B'$. Thus, since $x\notin B$, we have $x\notin B'$. Thus, $x\in A$ and $x\notin B'$. Therefore, $x\in A\setminus B'$.
+\end{proof}
+
+\begin{problem}[Exercise 3.3.5]\label{prob:4}
+	Let
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		X \ar[" f ", r]  & Y \ar[" g ", r]  & Z
+	\end{tikzcd}
+	\]
+	be functions.
+	\begin{enumerate}[label=(\arabic*)]
+		\item If $f,g$ are injective, show $g\circ f$ is injective.
+		\item If $f,g$ are surjective, show $g\circ f$ is surjective.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	i did this in class why do i have to do it again
+
+	(1) Let $f,g$ be injective. Let $x_1,x_2\in X$ such that $(g\circ f)(x_1)=(g\circ f)(x_2)$. By definition of composition, $g(f(x_1))=g(f(x_2))$. Since $g$ is injective, we have $f(x_1)=f(x_2)$. Since $f$ is injective, we have $x_1=x_2$. Therefore, $g\circ f$ is injective.
+
+	(2) Let $f,g$ be surjective. Let $z\in Z$. Then since $g$ is surjective, there is $y\in Y$ such that $g(y)=z$. Since $f$ is surjective, there is $x\in X$ such that $f(x)=y$. We thus have $(g\circ f)(x) = g(f(x)) = g(y)=z$. Thus, $g\circ f$ is surjective.
+\end{proof}
+
+
+
+\end{document}

@@ -1,0 +1,36 @@
+\section{Homework 1}
+
+\textbf{1.} Show that $A\subseteq B$  if and only if $A \cap B = A$ if and only if $A \cup B = B$.
+
+\begin{proof}
+	($1\implies 2$) Let $A\subseteq B$. Let $x\in A \cap B$. Then $x\in A$ and $x\in B$. In particular, we have $x\in A$, and thus $A \cap B \subseteq A$. For the converse, let $x\in A$. Then since $A\subseteq B$, we have $x\in B$, and thus $x\in A \cap B$.
+
+	($2\implies 3$) Let $A \cap B = A$. Let $x\in B$, and observe that we have $x\in A$ or $x\in B$, and thus $x\in A \cup B$. This proves $A \cap B \subseteq A \cup B$. For the converse, let $x\in A \cup B$. Then $x\in A$ or $x\in B$. If $x\in A$, then $x\in A \cap B$, and thus $x\in B$. Otherwise, we immediately have $x\in B$.  Therefore, $x\in B$.
+
+	($3\implies 1$) Let $A\cup B = B$. Let $x\in A$. Then $x\in A$ or $x\in B$ implies that $x\in A \cup B = B$. Thus, $A\subseteq B$.
+\end{proof}
+
+\textbf{2.} Show that a sequence $\left\{ x_n \right\}_{n\geq 0} $ of real numbers which converges to some $l\in\mathbb{R} $ is Cauchy. Then show that all Cauchy sequences are bounded.
+
+\begin{proof}
+	Recall the definition of convergence: for all $\varepsilon>0$, there exists $N>0$ such that if $n>N$, then $\left| l - x_n \right| < \varepsilon $. Now let $\varepsilon >0$. We must find $N$ sufficiently large such that $n,m>N$ implies $\left| x_n - x_m \right| <\varepsilon $. Since $\left\{ x_n \right\}_{n\geq 0} $ converges, there is $N_{\varepsilon /2} $ such that if $n>N_{\varepsilon /2} $, then $\left| l-x_n \right| < \varepsilon /2 $. Let $n,m>N_{\varepsilon /2} $. Then by the triangle inequality,
+	\[
+		\left| x_n - x_m \right| =\left| x_n - l + l - x_m \right| \leq \left| x_n-l \right| +\left| l-x_m \right| =\left| x_n-l \right| +\left| x_m-l \right| < \frac{\varepsilon }{2} +\frac{\varepsilon }{2} =\varepsilon 
+	.\]
+	Thus, $\left| x_n - x_m \right| <\varepsilon $, and thus $\left\{ x_n \right\} _{n\geq 0} $ is Cauchy.
+
+	Now suppose that $\left\{ x_n \right\}_{n\geq 0} $ is Cauchy. Let $\varepsilon >0$, and there is $N$ such that $m,n>N$ implies $\left| x_n - x_m \right| <\varepsilon $. Then
+	\[
+		\left| x_n-x_m \right| +\left| x_m - x_0 \right| <\varepsilon + \left| x_m-x_0 \right| 
+	.\]
+	By the triangle inequality,
+	\[
+		\left| x_n - x_0 \right| <\varepsilon +\left| x_m-x_0 \right| 
+	.\]
+	This must hold for all $n>N$. Thus all terms for $n$ sufficiently large are bounded by $N$. Since there are at most finitely many terms unaccounted for, the max
+	\[
+		\max \left\{ \left| x_k - x_0 \right| \mid 0\leq k\leq m \right\} \cup \left\{ N+\left| x_m-x_0 \right|  \right\} 
+	\]
+	exists, and is itelf a bound for the sequence.
+\end{proof}
+

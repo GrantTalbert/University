@@ -1,0 +1,245 @@
+\lecture{1}{Fri 11 Sep 2026 12:26}{Translation invariant prefactorization algebras}
+
+To start off, I will summarize\cite{costello-gwilliam-1} chapter 4.8, and we will move on to chapter 5 afterwards. I want to understand vertex algebras, so we will be reading the first 4 chapters of \cite{frenkel-ben-zvi}.
+
+\section{\cite{costello-gwilliam-1} 4.8 Translation-invariant prefactorization algebras}
+
+Following Costello and Gwilliam, we define the following. Given $x\in\mathbb{R} ^n$ and $U\subseteq \mathbb{R} ^n$, define $\tau _xU \coloneqq U + x$.
+
+\begin{definition}\label{dfn:discretely-translation-invariant}
+	Let $\mathcal{F} $ be a prefactorization on $\mathbb{R} ^n$. Then $\mathcal{F} $ is \emph{discretely translation invariant} if there are isomorphisms
+	\[
+		\tau_x^f : \mathcal{F} (U)\cong \mathcal{F} (\tau _xU)
+	\]
+	for all opens $U\subseteq \mathbb{R} ^n$ and all points $x\in\mathbb{R} ^n$. These isomorphisms satisfy the following coherence conditions.
+	\begin{enumerate}
+		\item We require that $\tau _x^f\circ \tau _y^f = \tau _{x+y}^f$ for all $x,y\in\mathbb{R} ^n$.
+		\item For all disjoint opens $U_1, \ldots ,U_n \subseteq V \subseteq \mathbb{R} ^n$, the diagram
+		\[
+			\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\mathcal{F} (U_1)\otimes \cdots \otimes \mathcal{F} (U_n) \ar[" \tau_x^{\otimes n}  ", r] \ar[" m "', d]  & \mathcal{F} (\tau _xU_1)\otimes \cdots \otimes \mathcal{F} (\tau _xU_n) \ar[" m ", d]  \\
+			\mathcal{F} (V) \ar[" \tau _x "', r]  & \mathcal{F} (\tau _xV)
+		\end{tikzcd}
+		\] commutes.
+	\end{enumerate}
+\end{definition}
+
+We generally write $\tau _x$ instead of $\tau _x^f$, such that $\tau _x \mathcal{F} (U)\cong \mathcal{F} (\tau _xU)$.
+
+We have seen a ton of these before. For example, observables of the free scalar field theory on $\mathbb{R} ^n$ with or without mass. We could also do abelian Chern-Simons on $\mathbb{R} ^3$.
+
+This notion should be refined further. We have translation invariance for sections of $\mathcal{F} $, but it will be useful to have some translation invariance for the factorization product. In particular, $m$ should vary smoothly based on the position of the open sets. We will introduce some notation to simplify.
+
+\begin{definition}\label{dfn:derivation-of-pfa}
+	A \emph{degree $k$ derivation} of a prefactorization algebra $\mathcal{F} $ on $M$ valued in cochain complexes is a collection of maps $D_U : \mathcal{F} (U) \to \mathcal{F} (U)$ of cohomological degree $k$ for each open $U\subseteq M$, with the property that for any finite collection $U_1, \ldots ,U_n \subseteq V$ of pairwise disjoint opens in $M$, and for any element $\alpha _i\in \mathcal{F} (U_i)$ for each $i$, the derivation acts by a Leibniz rule
+	\[
+		D_Vm_V^{U_1 \ldots U_n} =\sum_{i}(-1)^{k(\left| \alpha _1 \right| + \cdots + \left| \alpha _{i-1}  \right| } m_V^{U_1 \ldots U_n} (\alpha _1, \ldots ,D_{U_i} \alpha _i, \ldots ,\alpha _n)
+	.\]
+\end{definition}
+
+Derivations of $\mathcal{F} $ form a cochain complex $\operatorname{Der}^{\bullet} (\mathcal{F} )$; in particular, they form a dg Lie algebra. Given a derivation $D$ of degree $k$, the derivation $\dd D$ of degree $k+1$ is defined as the bracket $(\dd D)_U=[\dd _U,D_U]$, for $\dd _U$ the differential on $\mathcal{F} (U)$. Here we note that if $D_U$ is degree $k$, then $D_U^n : \mathcal{F} (U)^n \to \mathcal{F} (U)[k]^n=\mathcal{F} (U)^{k+n} $. Thus composing with the differential yields a map to $\mathcal{F} (U)^{k+n+1} $, and thus $\dd D$ is a derivation of degree $k+1$. The Lie bracket is defined by $[D,D']_U \coloneqq [D_U,D'_U]$. Here recall we use the graded commutator
+\[
+	[f,g] = fg - (-1)^{\left| g \right| } gf
+.\]
+
+\begin{claim}
+	$\operatorname{Der} ^{\bullet} (\mathcal{F} )$ is indeed a dg Lie algebra.
+\end{claim}
+\begin{proof}
+	We first show $\dd ^2=0$. Let $D$ be a derivation, and recall that since $\dd _U$ is a differential on $\mathcal{F} $, 
+	\begin{align*}
+		(\dd ^2D)_U &= [\dd _U,[\dd _U,D_U]]\\
+			    &= \dd _U[\dd _U,D_U] - (-1)^{\left| [\dd _U, D_U] \right| } [\dd _U,D_U]\dd _U \\
+			    &= \dd _U[\dd _U,D_U] - (-1)^{\left| D \right| +1} [\dd _U, D_U]\dd _U\\
+			    &=\dd _U[\dd _U,D_U] + (-1)^{\left| D \right| } [\dd _U,D_U]\dd _U\\
+			    &=\dd ^2_UD_U - (-1)^{\left| D_U \right| } \dd _UD_U\dd _U + (-1)^{\left| D_U \right| }\dd _UD_U\dd _U - (-1)^{\left| D_U \right| }(-1)^{\left| D_U \right| } D_U\dd ^2_U\\
+			    &=-(-1)^{\left| D_U \right| } \dd _UD_U\dd _U + (-1)^{\left| D_U \right| }\dd _UD_U\dd _U\\
+			    &=0
+	\end{align*}
+	Now simply note that the graded commutator is a dg Lie bracket, so we only need to show that $\dd $ is a derivation on the dg Lie bracket. Indeed, if $D,D'$ are derivations, then by the graded Jacobi identity,
+	\[
+		(\dd [D,D'])_U = [\dd _U, [D_U,D'_U]] 
+	\]
+	\[
+		=[[\dd _U,D_U],D'_U] + (-1)^{\left| \dd _U \right| \left| D_U \right| }[D_U,[\dd _U,D'_U]] = [(\dd D)_U,D'_U] + (-1)^{\left| D_U \right| } [D_U,(\dd D')_U]
+	.\]
+	Hence, $\dd $ is a derivation for the dg Lie bracket.
+\end{proof}
+
+
+\begin{definition}\label{dfn:action-on-pfa}
+	An \emph{action} of a dg Lie algebra $\mathfrak{g} $ on a prefactorization algebra $\mathcal{F} $ is a morphism $\mathfrak{g} \to \operatorname{Der} ^{\bullet} (\mathcal{F} )$ of dg Lie algebras.
+\end{definition}
+
+
+Given opens $U_1, \ldots ,U_n,V \subseteq \mathbb{R} ^n$, let the set $\operatorname{Disj}(U_1, \ldots , U_k | V) \subseteq (\mathbb{R} ^n)^k$ consist of all tuples $(x_1, \ldots , x_k)$ such that each $\tau _{x_1} U_1, \ldots , \tau _{x_k} U_k$ is still disjoint, and contained in $V$.
+
+Let $\mathcal{F} $ be any discretely translation invariant factorization algebra on $\mathbb{R} ^n$. Then the translation invariance gives us maps $\mathcal{F} (U_i) \to \mathcal{F} (\tau_{x_i} U_i)$, which assemble into a multilinear map
+\[
+	m_{x_1, \ldots , x_k} : \mathcal{F} (U_1)\times \cdots \times \mathcal{F} (U_k) \to \mathcal{F} (\tau _{x_1} U_1)\times \cdots \times \mathcal{F} (\tau _{x_k} U_k) \to \mathcal{F} (V),
+\]
+where the second map in the composite is the factorization product. Thus we can consider a map $\operatorname{Disj} (U_1, \ldots , U_k | V) \to \mathbb{H} \mathrm{om}(\mathcal{F} (U_1), \ldots , \mathcal{F} (U_k) | \mathcal{F} (V)) $ given by $x\mapsto m_x$. Since $\DVS $ has an internal hom, so does $\Ch_{\DVS } $, and thus it makes sense to talk about when this map is smooth.
+
+\begin{remark}\label{rmk:dvs-hom}
+	We recall what the internal hom for differentiable vector spaces is. Let $V_1, \ldots , V_n,W$ be differentiable vector spaces, and let $M$ be a manifold. Let $\mathbf{C}^{\infty }(M,W)$ be the differentiable vector space $N\mapsto C^\infty(N\times M,W) $. A \emph{smooth family} of multilinear maps $V_1\times \cdots \times V_n \to W$ \emph{parameterized by $M$} is a map $V_1 \times \cdots \times V_n \to \mathbf{C}^{\infty } (M,W)$. Intuitively, for every test manifold $N$, we have a map
+	\[
+		V_1(N)\times \cdots \times V_n(N) \to C^\infty (N\times M,W) = W(N\times M
+	.\]
+	Let $m\in M$. Inclusion $i_m : N \cong N\times \left\{ m \right\} \subseteq N\times M$ yields a pullback $i_m^* : W(N\times M) \to W(N)$. Postcomposing with the above map yields a map
+	\[
+		V_1(N)\times \cdots \times V_n(N)\to W(N\times M) \to W(N)
+	.\]
+	These maps are all natural in $N$, hence for all $m\in M$, we have a multilinear map $V_1\times \cdots \times V_n \to W$ of differentiable vector spaces. Now define $\mathbb{H} \mathrm{om} (V_1, \ldots , V_n | W)$ to be the differentiable vector space assigning a manifold $M$ to all families of multilinear maps $V_1\times \cdots \times V_n \to W$. In the case $M=*$, each family is a singleton, hence $\mathbb{H} \mathrm{om} (V_1, \ldots , V_n | W)(*)$ is just multilinear maps $V_1\times \cdots \times V_n \to W$. This is exactly what we expect, since $E(*)$ recovers the underlying space of any differentiable vector space $E$.
+\end{remark}
+
+
+\begin{definition}\label{dfn:smooth-trans-inv}
+	A discretely translation invariant prefactorization algebra $\mathcal{F} $ on $\mathbb{R} ^n$ is \emph{smoothly translation invariant} if the following hold:
+	\begin{enumerate}
+		\item $m_{x_1, \ldots , x_k} $ depends smoothly on $(x_1, \ldots , x_k)$.
+		\item The prefactorization algebra $\mathcal{F} $ is equipped with an action of the abelian Lie algebra $\mathbb{R} ^n$ of translations. If $v\in\mathbb{R} ^n$, we denote the action maps by
+		\[
+			\frac{\dd }{\dd v}: \mathcal{F} (U) \to \mathcal{F} (U)
+		.\]
+	\item The infinitesimal action is compatible with global translation invariance in the following sense. For $v\in\mathbb{R} ^n$, denote by $v_i\in(\mathbb{R} ^n)^k$ the vector obtained by inserting $v$ into the $i$th slot. Then for all $\alpha _i\in \mathcal{F} (U_i)$,
+	\[
+		\frac{\dd }{\dd v_i}m_{x_1, \ldots ,x_k} (\alpha _1, \ldots ,\alpha _k) = m_{x_1, \ldots ,x_k} \left( \alpha_1, \ldots , \frac{\dd }{\dd v}\alpha _i, \ldots , \alpha _k \right) 
+	.\]
+	\end{enumerate}
+\end{definition}
+
+This definition makes good on the request that the factorization product depend smoothly on the position of the opens. I'm unsure why there is a smooth action by the Lie algebra $\mathbb{R} ^n$.
+
+For example, for the free scalar field theory on $\mathbb{R} $, the derivative $\partial _x$ acts on the complex $\mathcal{E} $ of fields. It passes to the level of observables by asking that it be $\mathbb{R} [\hbar ]$-linear, and act as a derivation for the symmetric product. Since the symmetric product is precisely the factorization product, we see that this is an action of $\mathbb{R} $ on $\Obs^{cl} $ and $\Obs^{q} $. We can generalize to theories on $\mathbb{R} ^n$ by including all partials $\partial _i$.
+
+When passing to the cohomology prefactorization algebra, we observe the same results. Note that the derivation determined by $\partial _x$ on the cohomology pFA of observables on $\mathbb{R} $ corresponds to the Hamiltonian on the Weyl algebra.
+
+From now on, whenever referring to a translation invariant prefactorization algebra, we always mean \emph{smoothly} translation invariant.
+
+There is a nice operadic reformulation of this definition.
+
+\begin{definition}\label{dfn:disksn}
+	Let $\Disks_n$ be the $\mathbb{R} _{>0} $-colored operad whose $n$-multimorphisms are defined as follows. Given $r_1, \ldots , r_n,s\in\mathbb{R}_{>0} $, the set $\Disks_n(r_1, \ldots , r_k | s) \subseteq (\mathbb{R} ^n)^k$ is defined to be all $k$-tuples of points $x_i\in\mathbb{R} ^n$ such that the balls $B_{r_1} (x_1), \ldots , B_{r_k} (x_k)$ are all disjoint, and are all contained within $B_s(0)$. We refer to a multimorphism as a disk configuration. Composition laws are defined by translating the ball $B_s(0)$ to whatever point, and then inserting a disk configuration into this ball.
+\end{definition}
+
+\begin{remark}
+	The operad $\Disks_n$ is like a colored version of the little $n$-disks operad, where we don't require the containing disk to have radius 1.
+\end{remark}
+
+
+We write $\circ _i$ for the composition law in the $i$th slot, to simplify notation heavily. Thus
+\[
+	\circ _i : \Disks_n(r_1, \ldots , r_k | t_i) \times \Disks_n(t_1, \ldots , t_m | s) \to \Disks_n(t_1, \ldots , t_{i-1} ,r_1, \ldots , r_k, t_{i+1} , \ldots , t_m | s)
+.\]
+
+Suppose that $\mathcal{F} $ is a translation invariant prefactorization algebra on $\mathbb{R} ^n$. We can give $\mathcal{F} $ the structure of a $\Disks_n$-algebra as follows. Write
+\[
+	\mathcal{F} _r \coloneqq \mathcal{F} (B_r(0)),
+\]
+and note that $\mathcal{F} _r$ is isomorphic to the sections of $\mathcal{F} $ over any ball of radius $r$ by discrete translation invariance. Given a disk configuration $p\in\Disks_n(r_1, \ldots , r_k | s)$, write $m[p]$ for the factorization product
+\[
+	m[p]: \mathcal{F} _{r_1} \times \cdots \times \mathcal{F} _{r_k}  \to \mathcal{F} _s
+.\]
+This is a multilinear map of differentiable vector spaces, and the map $p\mapsto m[p]$ is smooth since $\mathcal{F} $ is smoothly translation invariant. This yields a $\Disks_n$-operad structure on $\mathcal{F} $ valued in differentiable cochains.
+
+Let's consider some properties of $\Alg_{\Disks_n} (\Ch_{\DVS } )$. Let $N$ be a smooth manifold, and $r_i\in\mathbb{R} $. Then since $\mathcal{F} _{r_i} ^{d_i} $ is a differentiable vector space, and hence a sheaf on $\Man $, we have sections $\mathcal{F} _{r_i} ^{d_i} (N) = C^\infty (N,\mathcal{F} _{r_i} ^{d_i} )$. Choose smooth maps $f_i : N\to \mathcal{F} _{r_i} ^{d_i}$ for degrees $d_i$. Then the map
+\[
+	N\times \Disks_n(r_1, \ldots , r_k | s) \to \mathcal{F} _s
+\]
+\[
+	(x,p) \mapsto m[p](f_1(x), \ldots , f_k(x))
+\]
+is smooth. Additionally, let $\sigma \in S_k$ be some permutation. Then there is an isomorphism
+\[
+	\sigma : \Disks_n(r_1, \ldots , r_k | s) \cong \Disks_n(r_{\sigma (1)} , \ldots , r_{\sigma (k)} | s)
+\]
+defined in the evident way: $\sigma (x_1, \ldots , x_k) = (x_{\sigma (1)} , \ldots , x_{\sigma (k)} )$. 
+
+Finally, note that operadic composition yields some coherence laws
+\[
+	m[q](\beta _1, \ldots , \beta _{i-1} , m[p](\alpha _1, \ldots , \alpha _k), \beta _{i+1} , \ldots , \beta_{\ell } )=m[q\circ _ip](\beta _1, \ldots , \beta _{i-1} ,\alpha _1, \ldots , \alpha _k, \beta _{i+1} , \ldots , \beta _{\ell } )
+.\]
+
+
+We can also provide a co-operadic reformulatio of this data. Define the $\mathbb{R} _{>0} $ colored co-operad by using the spaces $C^\infty (\Disks_n(r_1, \ldots , r_k | s)$ and the completed tensor product $\otimeshat$. Since we know how to tensor a differentiable vector space with smooth maps on a manifold (via $C^\infty (N)\otimes V = C^\infty (N,V)$; we use these notations interchangeably), it makes sense to discuss an algebra over this co-operad in differentiable cochains.
+
+The smoothness of the multiplication map $p\mapsto m[p]$ is rephramed as follows. Consider the map
+\[
+	\mathcal{F} _{r_1} \times \cdots \times \mathcal{F} _{r_k}  \to \mathcal{F} _s \otimes C^\infty (\Disks_n(r_1, \ldots , r_k | s))
+\]
+given by $(\alpha _1, \ldots , \alpha _k)\mapsto m[-](\alpha _1, \ldots , \alpha _k)$. Let
+\[
+	C^\infty(X,\mathbb{H} \mathrm{om}(V_1, \ldots , V_k| W ) ) 
+\]
+denote the space of smooth multilinear maps $V_1 \times \cdots \times V_k \to C^\infty(X,W) $. Note that there is a gluing map
+\[
+	\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	C^\infty (X,\mathbb{H} \mathrm{om}(V_1, \ldots , V_k | W_i) )\times C^\infty(Y, \mathbb{H} \mathrm{om}(W_1, \ldots , W_{\ell } | T) ) \ar[" \circ _i "', d]  \\
+	C^\infty(X\times Y, \mathbb{H} \mathrm{om}(W_1, \ldots , W_{i-1} ,V_1, \ldots ,V_k, W_{i+1} , \ldots , W_{\ell } | T) ) 
+\end{tikzcd}
+\]
+defined as follows. If $f : V_1 \times \cdots \times V_k \to C^\infty(X,W_i) $ and $g : W_1 \times \cdots \times W_{\ell } \to C^\infty(Y,T) $, then we define
+\[
+	g\circ _if : W_1 \times \cdots \times W_{i-1} \times V_1 \times \cdots \times V_k \times \cdots \times W_{\ell }  \to C^\infty(X\times Y, T) 
+\]
+by (here we take $w_a\in W_a$, and write $w_{<i} $ for $(w_1, \ldots , w_{i-1} )$, similarly for $w_{> i} $, and let $v\in V_1 \times \cdots \times V_k$:
+\[
+	(g\circ _if)(w_{<i} , v, w_{>i}) : (x,y) \mapsto g(w_{<i} , f(v)(x), w_{>i})(y)
+.\]
+We can now find elements
+\[
+	\mu (r_1, \ldots , r_k | s)\in C^\infty(\Disks_n(r_1, \ldots , r_k | s), \mathbb{H} \mathrm{om}_{\DVS } (\mathcal{F} _{r_1} , \ldots , \mathcal{F} _{r_k} | \mathcal{F} _s)) 
+\]
+defined by
+\[
+	p\mapsto m[p]
+\]
+for $m[p] : \mathcal{F} _{r_1} \times \cdots \times \mathcal{F} _{r_n}  \to \mathcal{F} _s$, with the following properties.
+\begin{enumerate}
+	\item There is a natural differential arising from the differentials on $\mathcal{F} _{r_i} $, and these elements are closed under it. The differential is defined using the internal on the internal hom of cochains. If $V_1, \ldots , V_k,W$ are differentiable cochains, then $\HOM(V_1, \ldots , V_k | W) $ is defined by taking degree $q$ elements to be multilinear maps of degree $q$. The differential is then defined in the usual way:
+	\[
+		(\dd \phi )(v_1, \ldots , v_k) = \dd _W(\phi (v_1, \ldots , v_k)) - (-1)^{\left| \phi  \right| } \sum_{i=1}^{k} (-1)^{\left| v_1 \right| + \cdots + \left| v_{i-1}  \right| } \phi (v_1, \ldots , \dd v_i, \ldots , v_k)
+	.\]
+	Recall that the differential on tensors acts as a derivation. Thus this is just
+	\[
+		\dd (\phi ) = \dd _W \circ \phi -(-1)^{\left| \phi  \right| } \phi \circ \dd _{V_1 \otimes \cdots \otimes V_k} 
+	.\]
+	\item If $\sigma \in S_k$ is a permutation, then
+	\[
+		\sigma _*\mu (r_1, \ldots , r_k | s) = \mu (r_{\sigma (1)} , \ldots , r_{\sigma (k)} | s)
+	,\]
+	where
+	\[\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\ar[" \sigma _{*}  "', d] C^\infty(\Disks_n(r_1, \ldots , r_k | s) ,\mathbb{H} \mathrm{om}_{\DVS } (\mathcal{F} _{r_1} , \ldots , \mathcal{F} _{r_k} | \mathcal{F} _{s} )) \\
+		C^\infty(\Disks_n(r_{\sigma (1)} , \ldots , r_{\sigma (k)} | s) ,\mathbb{H} \mathrm{om} _{\DVS } (\mathcal{F} _{r_{\sigma (1)} } , \ldots , \mathcal{F} _{r_{\sigma (k)} } | \mathcal{F} _s))
+	\end{tikzcd}
+	\]
+	is the natural isomorphism.
+	\item Let $\circ _i$ be the composition map on $\Disks_n$. Then there is an induced map $\circ_i^*$, and
+	\[
+		\sigma _i^*\mu (t_1, \ldots ,t_{i-1} ,r_1, \ldots ,r_k, t_{i+1} , \ldots ,t_{\ell } ) = \mu (r_1, \ldots ,r_k|t_i) \circ _i \mu (t_1, \ldots , t_{\ell } |s)
+	.\]
+	These elements equip $\mathcal{F} $ with the stucture of a $\Disks_n$-algebra, as stated before.
+\end{enumerate}
+
+For example, consider the free scalar field on $\mathbb{R} ^2$ with no mass. Recall that given a Green's function $G$, we have an isomorphism $W_U : \Obs^{cl} (U)[\hbar ] \to \Obs^{q} (U)[\hbar ]$ for all opens $U$, given by $e^{\hbar \partial _G} (\alpha )$. This yields an isomorphism of prefactorization algebras, when $\Obs^{cl} [\hbar ]$ is equipped with the deformed factorization product
+\[
+	\alpha \star _{\hbar } \beta =W^{-1}_{U \amalg V} (W_U\alpha \cdot W_V\beta )
+.\]
+Here, $\cdot $ is the factorization product on $\Obs^{q} $, and $U,V\subseteq M$ are disjoint opens. This allows us to explicitly describe the product maps
+\[
+	\mu (r_1, \ldots , r_k | s): \mathcal{F} _{r_1} \otimes \cdots \otimes \mathcal{F} _{r_k}  \to C^\infty(\Disks_n(r_1, \ldots , r_k | s), \mathcal{F} _{s} ) 
+.\]
+Here, $\mathcal{F} =\Obs^{q} $, or $(\Obs^{cl} [\hbar ],\star _{\hbar } )$. Given radii $r_1,r_2$ and compactly supported smooth functions $\alpha _1,\alpha _2$ on $B_{r_1} (0)$ and $B_{r_2} (0)$, we define $\mu (\alpha _1,\alpha _2)$ to be the function assigning a disk configuration $(x_1,x_2)$ to the element
+\[
+	\mu _{r_1,r_2} ^s(\alpha _1,\alpha _2)(x_1,x_2) = \tau _{x_1} \alpha _1 \star _{\hbar } \tau _{x_2} \alpha _2
+.\]
+Using the Green's function $G(x,y) = -\frac{1}{2\pi } \ln \left| x-y \right| $, which works on $\mathbb{R} ^2$ when $m=0$, then this equals
+\[
+	(\tau _{x_1} \alpha _1)\cdot (\tau _{x_2} \alpha _2)-\hbar \int_{u_1,u_2\in\mathbb{R} } \alpha _1(u_1+x_1)\alpha _2(u_2+x_2)\ln \left| u_1-u_2 \right| 
+.\]
+To see this, recall that $\partial _G$ contracts with $G$, and is trivial on linear observables. Thus $\partial _G(\alpha _i) = 0$, hence $e^{\hbar \partial _G} \alpha _i = \alpha _i$. Thus we only have $W^{-1} (\tau _{x_1} \alpha _1\cdot \tau _{x_2}\alpha _2) = e^{\hbar \partial _G} (\alpha _1\alpha _2)$. We \emph{can} contract with a quadratic observable, and contraction simply gives
+\[
+	\partial _G(\alpha \beta ) = \int \alpha(u_1)G(u_1,u_2)\beta (u_2)
+.\]
+Thus we see the 0th and 2nd order terms of the exponential, and higher order terms vanish. I don't know where the $-\frac{1}{2\pi } $ has gone.

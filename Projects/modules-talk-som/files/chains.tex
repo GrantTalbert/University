@@ -1,0 +1,57 @@
+\section{Chain complexes and homology}
+
+We now turn to the usefulness of modules in cooking up invariants. Much of modern mathematics, especially algebraic and geometric fields, is extremely abstract. It can be very difficult to do calculations with these abstract objects, and the solutions to our calculations may themselves be so abstract that it's difficult to extract any meaningful information from them. The modern solution to this issue is \emph{homological algebra}.
+
+\begin{definition}\label{dfn:chain-complex}
+	Let $R$ be a ring. A \emph{chain complex} (of $R$-modules) $(M_{\bullet},d_{\bullet} )$  is a collection of $R$-modules $M_{\bullet} =\{M_i\}_{i\in\mathbb{Z} }$ for each integer $i\in\mathbb{Z} $, and $R$-linear maps $d_i : M_i \to M_{i-1} $, which we typically display as the diagram
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\cdots \ar[" d_{i+2}  ", r]  & M_{i+1} \ar[" d_{i+1}  ", r]  & M_i \ar[" d_i ", r]  & M_{i-1} \ar[" d_{i-1}  ", r]  & \cdots ,
+	\end{tikzcd}
+	\]
+	with the following property: for all $i$,
+	\[
+		d_i \circ d_{i+1} =0
+	.\]
+	Here, $0$ denotes the zero morphism $0(x)=0$.
+\end{definition}
+
+\begin{terminology}\label{term:chains}
+	Let $(M_{\bullet} ,d_{\bullet} )$ be a chain complex. We will often refer to the chain complex simply as $M_{\bullet} $, and will leave the $d_{\bullet} $ implicit.  The maps $d_i$ are called the \emph{boundary morphisms} or \emph{differentials} due to important examples in geometry. The module $M_i$ is called the \emph{$i$th degree} of the chain complex $M$, and an element $m\in M_i$ is said to be an element of \emph{degree $i$}. We will often write $m\in M_{\bullet} $ to denote that $m$ is an element of $M_i$ for some $i\in\mathbb{Z} $. We often drop the subscript $i$ on the differential $d$ when it can either be inferred from context, or is not important. We thus often write the requirement that $d_i \circ d_{i+1} =0$ as the equation $d^2=0$, and call this condition ``squaring to zero''.
+\end{terminology}
+
+A very obvious question is ``why do chain complexes exist?'' It's not a crazy thing to imagine a list of vector spaces with maps between them, but why do we require that the maps square to zero? The answer to this question is that we're oftentimes not interested in the chain complex itself. Remember that our goal is to introduce something that is \emph{computable}. Modules are already quite abstract, and so just having a list of modules is not going to simplify anything. However, we can now cook up an invariant of a chain complex, called its \emph{homology}.
+
+\begin{definition}\label{dfn:homology}
+	Let $M_{\bullet} $ be a chain complex. Notice that since $d_i \circ d_{i+1} =0$, we must have that for all $x\in \Im d_{i+1} $, it follows that $d_i(x)=0$. Thus, $x\in \Ker d_i$, meaning
+	\[
+		\Im d_{i+1} \subseteq \Ker d_i
+	.\]
+	Note that these are both submodules of $M_i$. We define the \emph{$i$th homology} of $M_{\bullet} $, denoted $H_i(M_{\bullet} )$, as the module
+	\[
+		H_i(M_{\bullet} )=\frac{\Ker d_{i} }{\Im d_{i+1} } 
+	.\]
+	We define the \emph{homology complex} $H_{\bullet} (M_{\bullet} )$ as the chain complex whose $i$th degree is $H_i(M_{\bullet} )$, and whose differentials are all the zero morphism.
+\end{definition}
+
+The reason homology is nice is because it replaces a collection of modules and maps with just a collection of modules. If these modules turn out to be \emph{vector spaces}, then they have a dimension, meaning we are quite literally calculating a single number. It doesn't get much more concrete than that. The honus is then on mathematicians to cook up chain complexes that have \emph{interesting} homology, and luckily we are very good at that. I will give a heuristic sketch of such a complex at the end of the talk.
+
+For now, let's look a little more at why homology is interesting. Homology turns out to be very computable, since a lot of simple properties of chain complexes can immediately tell us things about their homology. For example, let's consider the chain complex
+\[
+	\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		\cdots \ar[" 0 ", r] & 0 \ar[" 0 ", r] & 0 \ar[" 0 ", r]  & A \ar[" f ", r]  & B \ar[" g ", r]  & C \ar[" 0 ", r]  & 0 \ar[" 0 ", r] & 0 \ar[" 0 ", r] & \cdots ,
+\end{tikzcd}
+\]
+where $0$ is the trivial $R$-module $\left\{ 0 \right\} $, the maps $f,g,0$ are all $R$-linear, and $A,B,C$ are $R$-modules. It's a lot of effort to write out the lists of trailing zeros at either end, so we usually only write
+\[
+	\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+	0 \ar[r, "0"] & A \ar[r, "f"] & B \ar[r, "g"] & C \ar[r, "0"] & 0.
+\end{tikzcd}
+\]
+Let's say that $A$ sits in degree 1, $B$ is in degree 0, and $C$ is in degree $-1$. Let's say that we know absolutely \emph{nothing} about these modules other than the fact that $g$ is injective and $f$ is surjective. I claim that the only homology that is nonzero is the 0th homology.
+
+Showing that the $(-1)$th homology is 0 is the easiest. If $g$ is surjective, then $\Im g = C$. Since $0: C \to 0$ takes everything to 0, we have $\Ker (0 : C \to 0) = C$. Thus, $\Ker 0 = \Im g$. As I proved earlier, this implies $\Ker 0 / \Im g = C / C = 0$.
+
+The proof that the 1st homology vanishes requires re-proving a fact from linear algebra. Note that $\Im(0: 0 \to A) = \left\{ 0 \right\} $, so all I need to prove is that $\Ker f = \left\{ 0 \right\} $. We will use the fact that $f$ is injective. Suppose that $m\in \Ker f$. Then $0=f(m)$. Note that $f(0)=0$ (exercise: can you prove this?). Thus, $f(m)=f(0)$, and since $f$ is injective, $0=m$.
+
+The only thing we cannot calculate is the 0th homology $\Ker g / \Im f$. Surjectivity and injectivity are not enough. A sequence of this form (with 3 nonzero modules) is called a \emph{short sequence}. If all of its homologies vanish, then we call it a \emph{short exact sequence}. It turns out that a large portion of homological algebra can be boiled down to the study of short exact sequences via the use of somewhat sophisticated tools. However, these tools are quite tractible (despite their sophistication), and thus we can reasonably reduce many complex problems to this very computable problem.

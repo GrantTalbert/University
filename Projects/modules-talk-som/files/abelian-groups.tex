@@ -1,0 +1,128 @@
+\section{Motivation}
+
+So far in the Colloquium, we have seen the definition of a group, and in particular, an \emph{abelian group}. We have focused on groups as symmetries of an object, but they are still interesting algebraic structure to study abstractly. We will begin by investigating abelian groups, sine they are generally easier to investigate.
+
+\begin{definition}\label{dfn:group}
+	A \emph{group} is a set $G$ and an operation $\cdot : G\times G \to G$ called \emph{the group operation} or \emph{group multiplication}, which satisfies the following properties, called the \emph{group axioms} (here we often write $a\cdot b$ as $ab$ and call this their \emph{product}):
+	\begin{enumerate}
+		\item For all $a,b,c\in G$, we have $(ab)c=a(bc)$. This is called \emph{associativity}.
+		\item There exists some element $e\in G$ called the \emph{identity}, with the property that for all elements $a\in G$, we have $ea=ae=a$.
+		\item For all $a\in G$, there is an element $a^{-1} $ called the \emph{inverse} of $a$, with the property that $a a^{-1} =a^{-1} a=e$.
+	\end{enumerate}
+	If $G$ also has the property that for all $a,b\in G$, we have $ab=ba$, then $G$ is called an \emph{abelian group}. This property is called the \emph{commutative property}.
+\end{definition}
+
+Note that the requirement that $\cdot $ be a function $G\times G\to G$ is the same as the \emph{closure} axiom that many books use. This simply means that if $g,h\in G$, then $gh\in G$.
+
+The set $G$ is called the \emph{underlying set} of the group $G$.  We may sometimes refer to a group as a pair $(G,\cdot )$, where $G$ is the underlying set and $\cdot $ is the group operation. This is mainly for notational convenience.
+
+Note that in the above definition, we call the group operation ``\emph{multiplication}'', and use common notation for multiplication when writing it. However, there are groups where it would make more sense to refer to the group operation as something else. For example, consider the group of integers numbers $\mathbb{Z} $ under addition. This is indeed a group, since addition is associative, $0\in\mathbb{Z} $ is the identity, and if $n\in\mathbb{Z} $, there is an additive identity $-n\in\mathbb{Z} $. It would make no sense to use the notation in \cref{dfn:group} here, since I would then be writing $n\cdot m$ to mean $n+m$. I should not have to explain why this is a terrible idea.
+
+Thus, there are two main notational conventions for groups. There is \emph{multiplicative notation}, where the group operation is denoted by multiplication, and there is \emph{additive notation}, where the group operation is denoted by addition. It will be useful for us to adopt the following convention.
+
+\begin{convention}\label{convention:mult-add}
+	If $G$ is a group, then unless otherwise stated, we will use multiplicative notation if it is \emph{not} an abelian group. If $G$ is abelian, we will use additive notation (unless otherwise stated). To simplify this, I will often write $(G,+)$ to denote that we are using additive notation, and $(G,\cdot )$ to denote that we are using multiplicative notation.
+\end{convention}
+
+\begin{notation}[Additive notation]\label{notation:additive}
+	Let $(G,+)$ be a group using additive notation. Then for $a,b\in G$, the group operation is written as $a+b$. The inverse of $a$ is written as $-a$ and is called \emph{negative $a$}. Finally, the identity element of $G$ is written as $0\in G$, and is also called \emph{zero}. We may occasionally write $0_G$ instead of $0$ to specify that $0_G$ is an element of $G$. This is useful when dealing with multiple groups at once.
+\end{notation}
+
+We want to study groups abstractly, and abelian groups are a much simpler type of group due to their commutative property. As such, we will begin by investigating some basic properties of abelian groups.
+
+Let's start with a basic observation. Suppose that $(G,+)$ is a group, and $a\in G$ is some element. Then if $n\in\mathbb{Z}_{>0} $ is a \emph{positive} integer, then I can define the following element:
+\[
+	n\cdot a\coloneqq \underbrace{a+a+\cdots +a+a}_{n\text{ times}}
+.\]
+This is very sensible notation; multiplication of integers $n\cdot m$ is just repeated addition $m+m+\cdots +m$, so we simply use the same notation for repeated addition in groups. This allows us to ``multiply'' a positive integer $n$ with an element $a\in G$ of an abelian group.
+
+We can extend this notation to all integers. First, recall that if $n$ is an integer, then $0\cdot n$ is simply $0$. This suggests that 0-fold repeated addition should be the identity element. Thus, if $a\in G$, we define
+\[
+	0\cdot a\coloneqq 0_G
+.\]
+The 0 appearing on the left is the integer 0, and the 0 appearing on the right is the identity of the group $G$. Note that calling our group's identity ``0'' plays very nicely with this ``multiplication by $\mathbb{Z} $'' notation.
+
+Finally, we define multiplication by $-1$ to simply be
+\[
+	-1\cdot a = -a
+.\]
+We can then define
+\[
+	-n\cdot a\coloneqq (-1\cdot n)\cdot a=-1\cdot (n\cdot a)=-(n\cdot a)
+.\]
+This allows us to define a multiplication operation $\mathbb{Z} \times G\to G$. We call this a ``$\mathbb{Z} $-action'' on the group $G$. we will often drop the multiplication dot, and will simply write $na$ instead of $n\cdot a$.
+
+\begin{remark}\label{rmk:exponentiation}
+	This works in non-abelian groups, is written as $a^n$, and is called exponentiation.
+\end{remark}
+
+We can now observe some basic, but extremely important, properties of abelian groups.
+
+\begin{proposition}\label{prp:Z-module}
+	Let $(G,+)$ be an abelian group. Then there are operations $+: G\times G \to G$ and $\cdot : \mathbb{Z} \times G \to G$, which satisfy the following eight properties.
+	\begin{enumerate}
+		\item For all $a,b,c\in G$, we have $(a+b)+c=a+(b+c)$.
+		\item There is some $0\in G$ such that for all $a\in G$, we have $0+a=a+0=a$.
+		\item For all $a\in G$, there is some $-a\in G$ such that $a+(-a)=-a+a=0$.
+		\item For all $a,b\in G$, we have $a+b=b+a$.
+		\item For all $a\in G$, if $1\in\mathbb{Z} $ is the number 1, then $1a=a$.
+		\item For all $n,m\in\mathbb{Z} $ and $a\in G$, we have $(nm)a=n(ma)$.
+		\item For all $n\in\mathbb{Z} $ and all $a,b\in G$, we have $n(a+b)=na+nb$.
+		\item For all $n,m\in\mathbb{Z} $ and all $a\in G$, we have $(n+m)a=na+ma$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Properties (1)-(4) are simply the axioms of an abelian group (\cref{dfn:group}), and thus are automatically true. To prove property (5), note that $1a$ denotes summing over 1 copy of $a$, and thus $1a=a$. The proofs for property (6)-(8) are longer (but not too tricky), and I only intend to cover the first in the talk. However, I will complete all three in these notes.
+
+	(6) Let $n,m\in\mathbb{Z} $ and $a\in G$. We want to show $(nm)a=n(ma)$. Note that
+	\[
+		(nm)a = \underbrace{a+\cdots +a}_{nm\text{ times}} = \sum_{i=1}^{nm}a
+	.\]
+	We also have
+	\[
+		n(ma) = n\left( \sum_{i=1}^m a \right) =\sum_{j=1}^n\sum_{i=1}^m a = \sum_{k=1}^{nm} a
+	.\]
+	Thus, $n(ma)=(nm)a$.
+
+	(7) Let $n\in\mathbb{Z} $ and $a,b\in G$. Then we have
+	\[
+		n(a+b) = \sum_{i=1}^n a+b
+	.\]
+	We also have
+	\[
+		na+nb = \sum_{i=1}^n a + \sum_{i=1}^n b
+	.\]
+	Since $G$ is abelian, and thus addition is commutative, we can rearrange these sums to
+	\[
+		\sum_{i=1}^n a + \sum_{i=1}^n b = \sum_{i=1}^n a+b
+	.\]
+	Thus, $n(a+b)=na+nb$.
+
+	(8) Let $n\in\mathbb{Z} $ and $a,b\in G$. We have
+	\[
+		(n+m)a = \sum_{i=1}^{n+m} a =\sum_{i=1}^n a + \sum_{j=n+1}^{n+m} a = \sum_{i=1}^n a + \sum_{j=1}^m a = na + ma
+	.\]
+	Thus, we are done.
+\end{proof}
+
+I would like to compare the statements of \cref{prp:Z-module} to the definition of a vector space. In linear algebra, you likely learned how to define a vector space where the scalars were the real numbers $\mathbb{R} $. We can also define a \emph{complex} vector space, where the scalars are the complex numbers $\mathbb{C} $. We will work with real vector spaces to keep this discussion simple, but the same discussion applies to any complex vector space. Observe the following.
+
+\begin{definition}\label{dfn:vector-space}
+	A \emph{vector space} is a set $V$, together with an operation $+: V\times V \to V$ called \emph{addition} and an operation $\cdot : \mathbb{R} \times V \to V$ called \emph{scalar multiplication}, which satisfies the following eight properties.
+	\begin{enumerate}
+		\item For all $a,b,c\in V$, we have $(a+b)+c = a+(b+c)$.
+		\item There is some $0\in V$ such that for all $a\in V$, we have $0+a=a+0=a$.
+		\item For all $a\in V$, there is some $-a\in V$ such that $a+(-a)=-a+a=0$.
+		\item For all $a,b\in V$, we have $a+b=b+a$.
+		\item For all $a\in V$, if $1\in\mathbb{R} $ is the number 1, then $1a=a$.
+		\item For all $n,m\in\mathbb{R} $ and $a\in V$, we have $(nm)a=n(ma)$.
+		\item For all $n\in\mathbb{R} $ and all $a,b\in V$, we have $n(a+b)=na+nb$.
+		\item For all $n,m\in\mathbb{R} $ and all $a\in V$, we have $(n+m)a=na+ma$.
+	\end{enumerate}
+\end{definition}
+
+I have chosen my notation carefully to make the following observation immediate. Note that if we take \cref{dfn:vector-space}, swap out $V$ for $G$ and swap out $\mathbb{R} $ for $\mathbb{Z} $, we get back \emph{exactly} the eight properties of \cref{prp:Z-module}!
+
+And this leads me to the central topic of this paper. In linear algebra, we required that our scalars come from $\mathbb{R} $, or sometimes $\mathbb{C} $. But \emph{why?} Why not let the scalars be $\mathbb{Z} $, or $\mathbb{Q} $, or polynomials, or smooth functions, or quaternions, or something even more exotic? Why restrict ourselves to $\mathbb{R} $ and $\mathbb{C} $?
+
+The answer is we don't have to. In fact, it's better not to restrict ourselves to $\mathbb{R} $ and $\mathbb{C} $. As we will see, vector spaces (over $\mathbb{R} $ and $\mathbb{C} $) have very nice properties, and are easier to study, hence why they are covered in a linear algebra course. But there are many algebras in reality which are not vector spaces over these two sets of numbers, but over something else. These objects are important in their own right (as we will see many examples), but are not as ``well-behaved'' as a vector space is. Hence, we use a different name for them: a \emph{module}.

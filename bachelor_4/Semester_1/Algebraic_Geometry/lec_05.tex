@@ -1,0 +1,94 @@
+\lecture{5}{Thu 24 Sep 2026 11:00}{Sheaves, more}
+
+Here is another example of a regular function. The idea is to show that the expression $\varphi =g/f$ can vary in $g,f$ depending on the location, hence we cannot always choose a global reperesentation. Let $X=V(x_1x_4 - x_2x_3)\subseteq \mathbb{A} _k^4$. Given any solution $x$ in the variety, and some $\lambda \in k$, it follows that $\lambda x$ also lies in this variety. We call such an object a \emph{cone}. This follows since the polynomial is homogeneous of degree 2.
+
+Consider the opens $U_1 = X \setminus V(x_2)$ and $U_2 = X\setminus V(x_4)$. Then if $U$ is their union, then note that this is precisely $X\setminus V(x_2,x_4)$, since this is the locus where at least one does not vanish.
+
+Define $\varphi : U \to k$ by
+\[
+	x\mapsto \begin{cases}
+		\frac{x_1}{x_2} , & x\in U_1 \\
+		\frac{x_3}{x_4} , & x\in U_2
+	\end{cases}
+.\]
+We claim this is well-defined. If $x\in U_1 \cap U_2$, then $\frac{x_1}{x_2} =\frac{x_3}{x_4} $ if and only if $x_1x_4 = x_2x_3$. This is precisely the defining equation of $X$, hence $x\in X$ implies that this is well-defined manifestly.
+
+However, the top representation is \emph{not valid} near the point $(0,0,0,1)$, since $x_2=0$. Note that this point falls in $U_2$, since $x_4$ is nonvanishing here. Conversely, $\frac{x_3}{x_4} $ is not valid near $(0,1,0,0)$. Hence we see that $\varphi $ has distinct representations near these points.
+
+\begin{proposition}\label{prp:sheaf-is-sheaf}
+	The sheaf of regular functions is a sheaf.
+\end{proposition}
+\begin{proof}
+	Let $X$ an affine variety, and $\mathcal{O}_{X} $ its presheaf of regular functions. Here we note that the fact this is a presheaf is obvious. The rest is tedious so we only sketch the proof. Note that $\mathcal{O}_{X} $ is a sheaf of rings, taking values in $A(X\text{ or $U$??})[W]$ for some $W$ that I can't figure out.
+
+	To show gluing, we use the local definition of regular functions. Let $\left\{ \varphi _i \right\} _{i\in I} $ be regular functions on an open cover $\left\{ U_i \right\} _{i\in I} $ of $U$. Define a section $\varphi $ over $U$ as follows. Given $x\in U$, we have $x\in U_i$ for some $i$. Define $\varphi (x) = \varphi _i(x)$. If $\varphi _j$ is defined at $x$, then $\varphi _i|U_i \cap U_j = \varphi _j|U_i \cap U_j$ implies $\varphi _j(x)$. Since each of the $\varphi _i$'s is regular, this is locally given as a quotient of two polynomials. Hence, so is $\varphi $.
+\end{proof}
+\begin{remark}
+	Note that we did not use the local definition of a regular function extensively. However, it is important that we had this. If we required that it had a global formula, then we might not be able to glue, since we would have to find a formula that all $\varphi _i$'s simultaneously satisfy. This is not possible in general.
+\end{remark}
+
+\begin{lemma}\label{lma:regular-func-zero-loci}
+	Lert $U\subseteq X$ be open, and $\varphi \in \mathcal{O}_{X}(U)$ a regular funtion. Then the vanishing locus $V(\varphi )$ is closed in $U$.
+\end{lemma}
+\begin{proof}
+	For all $a\in U$, there is some $a\in U_a \subseteq U$ with $\varphi =g_a/f_a$, $g_a,f_a\in A(X)$. Ok I dont care i care more about the following
+\end{proof}
+\begin{claim}
+	$\mathcal{O}_{X} (U)$ is a fucking ring.
+\end{claim}
+\begin{proof}
+	Let $\varphi ,\psi \in \mathcal{O}_{X} (U)$. Then for all $a\in U$, there is $U_a$ and $V_a$ with $a\in U_a,V_a\subseteq U$ and $\varphi =g/f$ on $U_a$, $\psi =k/h$ on $V_a$. We work in the intersection $U_a \cap V_a\ni a$, which is open. Then
+	\[
+		(\varphi +\psi )(x) = \frac{g(x)}{f(x)} + \frac{k(x)}{h(x)} = \frac{g(x)h(x) + f(x)k(x)}{f(x)h(x)} 
+	.\]
+	Since $f(x),h(x) \neq 0$ on $U_a$ and $V_a$ respectively, the same holds on the intersection. Thus this is a well-defined function, so for all $a$, we have $a\in V_a \cap U_a \subseteq U$ with $\varphi +\psi $ equal to a quotient. For multiplication, it's much easier since we just have $gk/fh$. Additionally, since the constant function is a polynomial, this also shows $\mathcal{O}_{X} (U)$ is a $k$-algebra.
+\end{proof}
+\begin{proposition}\label{prp:identity}
+	Let $X$ be irreducible, and $U\subseteq V\subseteq X$ opens of an affine variety. If $\varphi _1,\varphi _2\in \mathcal{O}_{X} (V)$ agree on $U$, then $\varphi _1=\varphi _2$.
+\end{proposition}
+\begin{proof}
+	Note that $V(\varphi _1 - \varphi _2)$ is closed, and we have $U\subseteq V(\varphi _1 - \varphi _2)$. Since $X$ is irreducible, any open is dense. Thus $U$ is dense in $V(\varphi _1 - \varphi _2)$, hence $\overline{U} =V(\varphi _1 - \varphi _2)$. However, $U$ is also dense in $X$, hence $V$, so $\overline{U} =X=V$. Thus $V(\varphi _1 - \varphi _2) = V$, so we are done.
+\end{proof}
+
+We now discuss the basis of distinguished open sets of the Zariski topology. For an arbitrary open $U\subseteq X$, it may be difficult to compute $\mathcal{O}_{X} (U)$. For distinguished opens, the ring is quite tractible as a localization.
+
+\begin{definition}\label{dfn:distinguished-open}
+	Let $f\in A(X)$. Then the \emph{distingushed open} $D(f)$ is the nonvanishing locus of $f$:
+	\[
+		D(f) = X\setminus V(f) = \left\{ x\in X\mid f(x) \neq 0 \right\} 
+	.\]
+	This is clearly open.
+\end{definition}
+
+\begin{claim}
+	Let $f,g\in A(X)$. Then $D(f) \cap D(g)$ is a distinguished open.
+\end{claim}
+\begin{proof}
+	\[
+		D(f) \cap D(g) = D(fg)
+	.\]
+\end{proof}
+\begin{claim}
+	If $U\subseteq X$ is open, then there is an open cover of $U$ by distinguished opens.
+\end{claim}
+\begin{proof}
+	Since $U$ is open, we have $U = X \setminus V(J)$ for some ideal $J\subseteq A(X)$. Since $A(X)$ is Noetherian, we have $I = \left\langle f_1, \ldots , f_r \right\rangle $. The open $U$ is thus the locus where at least one $f_i$ is nonvanishing. Thus we can write it as
+	\[
+		U = \bigcup_{1\leq i\leq r} X \setminus V(f_i) = \bigcup_{1\leq i\leq r} D(f_i)
+	.\]
+	Thus, we are done.
+\end{proof}
+
+\begin{corollary}\label{cor:distinguished-basis}
+	The distinguished opens form a basis for the Zariski topology.
+\end{corollary}
+
+\begin{proposition}\label{prp:regular-functions-on-distinguished-open}
+	We have
+	\[
+		\mathcal{O}_{X} (D(f)) = \left\{ \frac{g}{f^n} \mid g\in A(X) \right\} =A(X)[f^{\mathbb{N}} ]^{-1} 
+	\]
+	for all $f\in A(X)$. We write this localization as $A(X)_f$. In particular, every function on $D(f)$ can be written as a ratio of two polynomials \emph{globally} on $D(f)$. Hence $\mathcal{O}_{X} $ is quite tractible to compute as a ring localization.
+\end{proposition}
+
+

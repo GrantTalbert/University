@@ -1,0 +1,199 @@
+\lecture{1}{Fri 18 Sep 2026 12:42}{Syllabus day}
+
+I was curious why the cartesian product exists in ZFC. The following two definitions are mainly heuristic; we need to prove that they exist in ZFC. This is what interests me.
+
+\begin{definition}[Ordered pair]\label{dfn:1}
+	Let $x,y$ be sets. The \emph{ordered pair} $(x,y)$ is defined as the set $\left\{ x,\left\{ x,y \right\}  \right\} $.
+\end{definition}
+\begin{definition}[Cartesian product]\label{dfn:2}
+	Let $x,y$ be sets. Then $x\times y$ is the set of all ordered pairs $(\widetilde{x} ,\widetilde{y} )$ with $\widetilde{x} \in x$ and $\widetilde{y} \in y$.
+\end{definition}
+
+Recall that ZFC comes with at least countably many variable symbols, such as $x,y,z, \ldots $, and a binary relation $\varepsilon $ between these symbols, called the membership operator. We refer to objects as sets, and we think of the statement $x\in y$ as meaning ``the set $y$ contains the set $x$ as an element of $y$''.
+
+\begin{axiom}[Extensionality]
+	Sets are equal if and only if they have the same elements:
+	\[
+		\forall x\forall y\left( \forall z\left( z\in x \iff z\in y \right) \implies x=y \right) 
+	.\]
+\end{axiom}
+\begin{axiom}[Regularity]
+	Sets cannot contain themselves:
+	\[
+		\forall x\left( (\exists a(a\in x))\implies \exists y(y\in x \land \neg \exists z(z\in y\land  z\in x)) \right) 
+	.\]
+\end{axiom}
+\begin{axiom}[Schema of restricted comprehension]
+	Given any formula $\varphi $ in the language of ZFC which is free in variables $x,w_1, \ldots , w_n,z$ (not $y$), we have the following axiom, which provides set builder notation:
+	\[
+		\forall z\forall w_1 \forall w_2 \cdots \forall w_n \exists y\forall x\left( x\in y \iff ((x\in z) \land \varphi (x, w_1, w_2, \ldots , w_n, z)) \right) 
+	.\]
+	We typically write $y=\left\{ x\in Z\mid \varphi (x) \right\} $.
+\end{axiom}
+\begin{axiom}[Pairing]
+	If $x,y$ are sets, then there exists a set containing $x$ and $y$:
+	\[
+		\forall x\forall y\exists z\left( (x\in z)\land (y\in z) \right) 
+	.\]
+	Note that this only supplies a set containing $x,y$, but does not supply the set $\left\{ x,y \right\} $.
+\end{axiom}
+\begin{axiom}[Union]
+	Unions of families exist:
+	\[
+		\forall \mathcal{F} \exists A \forall Y\forall x\left( (x\in Y \land Y\in \mathcal{F} ) \implies x\in A \right) 
+	.\]
+	This axiom does not assert the existence of $\cup \mathcal{F} $, but provides a set containing $\cup \mathcal{F} $.
+\end{axiom}
+\begin{axiom}[Schema of replacement]
+	Let $\varphi $ be any formula in the language of ZFC which is free in variables $x,y,A,w_1, \ldots , w_n$, and not $B$. Then we have the axiom
+	\[
+		\forall A \forall w_1 \cdots \forall w_n\left( \forall x\left( x\in A \implies \exists !y\varphi  \right) \implies \exists B\forall x\left( x\in A \implies \exists y(y\in B \land \varphi ) \right)  \right) 
+	.\]
+	This allows the image of a function to fall inside a set.
+\end{axiom}
+\begin{definition}\label{dfn:union}
+	Let $\mathcal{F} $ be a set. Let $A$ be the set guarenteed by the axiom of union. Define the set
+	\[
+		\cup \mathcal{F} \coloneqq \left\{ x\in A \mid \exists Y((Y\in \mathcal{F} )\land (x\in Y)) \right\} 
+	.\]
+	This exists by the axiom schema of restricted comprehension.
+\end{definition}
+\begin{construction}
+	Let $x,y$ be sets. Then by the axiom of pairing, there exists a set $z$ such that $x,y\in z$. Define
+	\[
+		\left\{ x,y \right\} \coloneqq \left\{ a\in z\mid (a=x)\lor (a=y) \right\} 
+	.\]
+	Since $=$ exists by the axiom of extensionality, this formula is well-defined, and thus $\left\{ x,y \right\} $ exists by the axiom schema of restricted comprehension.
+\end{construction}
+\begin{definition}\label{dfn:union-pair}
+	With notation as in the above construction, define
+	\[
+		x\cup y \coloneqq \cup \left\{ x,y \right\} 
+	.\]
+\end{definition}
+
+\begin{axiom}[Infnity]
+	A set exists, and it contains the naturals up to isomorphism. Here we write $\varnothing $ for the empty set. The axiom can be modified to postulate the existence of $\varnothing $ as well as the set $X$, but we present a simpler version using two axioms. Write $s(x)$ for the set $x\cup \left\{ x \right\} $. This set exists by the above definition, and by modifying the construction above it to select only the element $x$.
+	\[
+		\exists \varnothing \forall x(\neg(x\in \varnothing ))
+	.\]
+	\[
+		\exists X\left( (\varnothing \in X)\land (x\in X \implies s(x)\in X) \right) 
+	.\]
+	We adopt the notation $0=\varnothing $, $1=s(\varnothing )$, $2=s(s(\varnothing ))$, and so on. This can be made precise later, but for now we use this notation heuristically. This is fine, since we can simply define as many numbers as we require.
+\end{axiom}
+\begin{definition}[Subset]\label{dfn:subset}
+	Let $x,y$ be sets. Then we define
+	\[
+		(y\subseteq x) \iff (z\in y \implies z\in x)
+	.\]
+\end{definition}
+\begin{axiom}[Power set]
+	Power sets exist:
+	\[
+		\forall x\exists y \forall z(z \subseteq x \implies z\in y)
+	.\]
+	The set $y$ contains the power set of $x$. We then define
+	\[
+		\mathcal{P} (x) \coloneqq \left\{ z\in y \mid z\subseteq x \right\} 
+	.\]
+	We call $\mathcal{P} (x)$ the \emph{power set} of $x$.
+\end{axiom}
+
+The axiom of choice is usually included, but we will not need it. Additionally, it requires the definition of a function, which requires the definition of a cartesian product, hence we would be assuming what is to be shown. We now construct the cartesian product. There are two constructions. We begin by detailing a construction using the power set.
+
+\begin{definition}[Equality]\label{dfn:equality}
+	In first-order logic, equality is defined as follows:
+	\[
+		s=t \iff \forall \varphi (\varphi (s) \iff \varphi (t))
+	.\]
+\end{definition}
+
+\begin{lemma}\label{lma:owo2}
+	Let $x=y$ and $y\in z$. Then $x\in z$.
+\end{lemma}
+\begin{proof}
+	Let $\varphi (s) \iff (s\in z)$. Then by the above definition, since $\varphi (y)$ and $x=y$, we have $\varphi (x)$.
+\end{proof}
+
+\begin{lemma}\label{lma:owo}
+	Let $x,y$ be sets. Then $k\in \left\{ x,y \right\} $ if and only if $(k=x)\lor (k=y)$.
+\end{lemma}
+\begin{proof}
+	By construction, there is a set $z$ such that $x\in z$ and $y\in z$, and such that $\left\{ x,y \right\} =\left\{ a\in z \mid (a=x)\lor (a=y) \right\} $. Let $\varphi (a) \iff ( (a=x)\lor (a=y))$.
+
+	($\implies $) Let $k\in \left\{ x,y \right\} $. By restricted comprehension, this implies $k\in z$ and $\varphi (k)$. Since $\varphi (k) \iff ((k=x)\lor (k=y))$, we are done.
+	
+	($\impliedby $) Let $(k=x)\lor (k=y)$. Then $\varphi (k)$. Additionally, we have two cases. If $k=x$, then $x\in z$ implies $k\in z$ by the above lemma. Thus $k\in z$ and $\varphi (k)$ implies $k\in \left\{ x,y \right\} $. The same logic proves the case with $k=y$.
+\end{proof}
+
+
+\begin{proposition}\label{prp:owo}
+	Let $X,Y$ be sets. Then all sets of the form $\left\{ x,y \right\} $ with $x\in X$ and $y\in Y$ are elements of $\mathcal{P} (X \cup Y)$. Formally,
+	\[
+		\forall K\forall X\forall Y\forall x\forall y((x\in X \land x\in Y \land K=\left\{ x,y \right\} ) \implies K\in \mathcal{P} (X \cup Y))
+	.\]
+\end{proposition}
+\begin{proof}
+	Since $\mathcal{P} (X \cup Y)$ is precisely all subsets of $X \cup Y$, it suffices to show that for all $x\in X$ and $y\in Y$, we have $\left\{ x,y \right\} \subseteq X \cup Y$. Let $k\in \left\{ x,y \right\} $. By \cref{lma:owo}, $k=x$ or $k=y$. If $k=x$, then since $x\in X$, by \cref{lma:owo2} we have $k\in X$. By the same logic, we have that if $k=y$, then $k\in Y$. Note that the axiom of union guarentees a set $\underline{\cup\left\{ X,Y \right\} } $ such that
+	\[
+		X \cup Y = \left\{ x\in \underline{\cup \left\{ X,Y \right\} } \mid \exists L((L\in \left\{ X,Y \right\} )\land (x\in L) \right\} 
+	.\]
+	The set $\underline{\cup \left\{ X,Y \right\} }$ has the property that $x\in L$ and $L\in \left\{ X,Y \right\} $ implies $x\in \underline{\cup \left\{ X,Y \right\} }$. Recall that we have $k\in X$ or $k\in Y$. If $k\in X$, then since $X\in \left\{ X,Y \right\} $, we have $k\in \underline{\cup \left\{ X,Y \right\} }$. By the same logic, if $k\in Y$, then $k\in\underline{\cup \left\{ X,Y \right\} }$. Additionally, note that since $k\in X$ or $k\in Y$, we have $\varphi (k)$, for $\varphi $ the relevant property. Thus, $k\in X \cup Y$. Therefore, we have
+	\[
+		\forall k(k\in \left\{ x,y \right\} \implies k\in X \cup Y)
+	.\]
+	By definition, $\left\{ x,y \right\} \subseteq X \cup Y$. It follows that $\left\{ x,y \right\} \in \mathcal{P} (X \cup Y)$.
+\end{proof}
+\begin{corollary}\label{cor:pairs}
+	For all sets $X,Y$ and all $x\in X$ and $y\in Y$, the set $\left\{ x,\left\{ x,y \right\}  \right\} \in \mathcal{P} (X \cup \mathcal{P} (X,Y))$.
+\end{corollary}
+\begin{proof}
+	Note that since $\left\{ x,y \right\} $ is a set, we can define the set $\left\{ x,\left\{ x,y \right\}  \right\} $ in the same way. Note that $x\in X$. Additionally, by \cref{prp:owo}, since $x\in X$ and $y\in Y$, we have $\left\{ x,y \right\} \in \mathcal{P} (X \cup Y)$. Thus, by \cref{prp:owo}, we have $\left\{ x,\left\{ x,y \right\}  \right\} \in \mathcal{P} (X \cup \mathcal{P} (X \cup Y))$.
+\end{proof}
+
+\begin{definition}[Ordered pair]\label{dfn:pair}
+	Let $x,y$ be sets. Define the \emph{ordered pair}
+	\[
+		(x,y) \coloneqq \left\{ x,\left\{ x,y \right\}  \right\} 
+	.\]
+\end{definition}
+\begin{definition}[Cartesian product]\label{dfn:product1}
+	Let $X,Y$ be sets. Define the \emph{cartesian product}
+	\[
+		X\times Y \coloneqq \left\{ p\in \mathcal{P} (X \cup \mathcal{P} (X \cup Y)) \mid \exists x\exists y((x\in X)\land (y\in Y)\land (p=(x,y))) \right\} 
+	.\]
+\end{definition}
+
+
+Now we proceed with the second construction. Appealing to the power set is unnecessary, and we can also construct the set $(x,y)$ using the axiom of pairing.
+
+\begin{construction}
+	Let $x,y$ be sets. Then by the above discussion, the set $\left\{ x,y \right\} $ exists. Since $\left\{ x,y \right\} $ is a set, by the above discussion the set $\left\{ x,\left\{ x,y \right\}  \right\} $ exists. Define $(x,y) \coloneqq \left\{ x,\left\{ x,y \right\}  \right\} $.
+\end{construction}
+
+The difficulty is constructing the cartesian product without universal comprehension. We make heavy use of replacement.
+\begin{construction}
+	Fix sets $X,Y$. We start by constructing the set $\left\{ x \right\} \times Y$ for all $x\in X$. Let $\varphi_x$ be the property
+	\[
+		\varphi_x(y,p) \iff \left( (y\in Y)\land (p=\left\{ \left\{ x \right\} ,\left\{ x,y \right\}  \right\})  \right) 
+	.\]
+	Hence, $p=(x,y)$. Then for all $y\in Y$, there is a unique $p$ such that $\varphi _x$. By the axiom of replacement, there exists a set $B$ with the property that for all $y\in Y$, there exists $p$ such that $p\in B$ and $\varphi $. By uniqueness of $p$, we have that $(x,y)\in B$ for all $y\in Y$. Hence, restricted comprehension provides the set
+	\[
+		\left\{ x \right\} \times Y \coloneqq \left\{ p\in B \mid p=(x,y) \right\} 
+	.\]
+	We now apply replacement a second time. Let $\varphi $ be the property
+	\[
+		\varphi (x,S) \iff \left( (x\in A)\land (S=\left\{ x \right\} \times Y) \right) 
+	.\]
+	Then for all $x\in X$, there clearly exists a unique $S$ such that $\varphi $. The axiom of replacement now yields a set $C$ such that for all $x\in X$, we have $S$ such that $S\in C$ and $\varphi $. By uniqueness, $\left\{ x \right\} \times Y\in C$ for all $x\in X$. Restricted comprehension now allows
+	\[
+		\mathcal{F} \coloneqq \left\{ S\in C \mid \exists x((x\in X)\land (S=\left\{ x \right\} \times Y)) \right\} 
+	.\]
+	The axiom of union now allows
+	\[
+		X\times Y \coloneqq \cup \mathcal{F} 
+	.\]
+	Thus, we have the cartesian product.
+\end{construction}
+

@@ -1,0 +1,57 @@
+\lecture{3}{Thu 10 Sep 2026 11:03}{Investigating affine space}
+
+Note that the singletons of affine space are closed, and correspond precisely to maximal ideals.
+
+\begin{definition}\label{dfn:coordinate-ring}
+	Let $X\subseteq \mathbb{A} _k^n$ be an affine variety. Define the \emph{coordinate ring} of $X$ to be
+	\[
+		\frac{k[x_1, \ldots ,x_n]}{I(X)}
+	.\]
+	Note that since $I(X)=\sqrt{I(X)} $, the coordinate ring is \emph{reduced}, meaning it has no nilpotent element.
+\end{definition}
+
+let $X=V(\left\langle x_1+x_2+x_3 \right\rangle )\subseteq \mathbb{A} ^3_k$ be a plane. Then $A(X) = k[x_1,x_2,x_3] / (x_1+x_2+x_3)$ is the coordinate ring. Pick the ideal $\overline{J} =\left\langle x_3 \right\rangle $. Then $\pi ^{-1} (\overline{J} )=\left\langle x_3,x_1+x_2+x_3 \right\rangle $. Rewriting this as an intersection as varieties this is a line $x_1+x_2$ in the $(x_3=0)$-plane.
+
+Let's return to our discussion of Zariski. Recall that we topologize $\mathbb{A} _k^n$ such that closed subsets are precisely the affine varieties $V(I)$. The subspace topology and the natural Zariski topology on a subvariety will coencide.
+
+\begin{lemma}\label{lma:variety-product}
+	Let $X\subseteq \mathbb{A}_k^n$ and $Y\subseteq \mathbb{A} _k^m$ be affine varieties over the same field. Then the product $X\times Y \subseteq \mathbb{A} _k^n \times \mathbb{A} _k^m$ has the structure of an affine variety (as sets).
+\end{lemma}
+
+To see why there are subtleties here, consider the product of
+\[
+	X=V(\left\langle x_2-x_1^2 \right\rangle ),\qquad Y=V(\left\langle y_2^3-y_1^2 \right\rangle )
+.\]
+Then let's consider
+\[
+	I(X\times y) \subseteq k[x_1,x_2,y_1,y_2] \cong k[x_1,x_2]\otimes_kk[y_1,y_2]
+.\]
+We have
+\[
+	I(X\times Y) = \left\langle x_2-x_1^2, y_2^3 - y_1^2 \right\rangle
+.\]
+
+\begin{proof}
+	If $I(X)=\left\langle f_1(x_1, \ldots ,x_n) , \ldots ,f_r(x_1, \ldots ,x_n) \right\rangle $ and $I(Y) = \left\langle g_i(y_1, \ldots ,y_m) \right\rangle_{1\leq i\leq s} $, (here we use $R$ is Noetherian) then
+	\[
+		X\times Y=V(\left\langle f_1, \ldots ,f_r,g_1, \ldots ,g_s \right\rangle )\subseteq k[x_1, \ldots ,y_m]
+	.\]
+	Note:
+	\[
+		\left\langle f_1, \ldots ,g_s \right\rangle =I(X)\otimes 1+1\otimes I(Y) \subseteq k[x_1, \ldots ,x_n]\otimes _kk[y_1, \ldots ,y_m]
+	.\]
+\end{proof}
+
+Issue: the Zariski topology on $X\times Y$ is \emph{not} the product topology. We will later rectify this issue.
+
+
+Now consider irreducibility and irreducible components. For example, consider $V(\left\langle x_1,x_2 \right\rangle ) \subseteq \mathbb{A} _k^2$. Note that this is just the axes, so we can write
+\[
+	V(\left\langle x_1,x_2 \right\rangle ) \subseteq V(\left\langle x_1 \right\rangle ) \cup V(\left\langle x_2 \right\rangle )
+.\]
+Thus, we can write our variety as a subset of two proper closed subvarieties. However, we cannot do this for the axes themselves: we cannot write them as a finite union of closed subsets. Here, recall that an axis is just $\mathbb{A} ^1$ whose closed subsets are collections of points. Obviously a line is not a finite union of finite points.
+
+\begin{definition}\label{dfn:?}
+	Let $X$ be a topological space. We say $X$ is \emph{reducible} if there are proper closed subsets $X_1,X_2 \subsetneq X$ such that $X_1 \cup X_2 = X$. Otherwise, $X$ is \emph{irreducible}. The space $X$ is \emph{disconnected} if those subsets $X_1,X_2$ can be taken to be disjoint, and otherwise $X$ is \emph{connected}.
+\end{definition}
+

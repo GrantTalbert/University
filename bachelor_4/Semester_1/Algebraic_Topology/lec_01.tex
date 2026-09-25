@@ -1,0 +1,50 @@
+\chapter{The fundamental group}
+
+\lecture{1}{Thu 03 Sep 2026 09:31}{Syllabus day}
+
+We are following Hatcher. Takashi's office is probably CDS 415, or at least in that area. Half the grade will be homework, and the other half will be a final paper/presentation. Assignments will be submitted on gradescope. It is unknown if a syllabus will be made for the course.
+
+The basic idea of algebraic topology is to associate a space $X$ to some algebra $H_{\bullet}(X)$. We want this association to be functorial, i.e. if $f : X \to Y$, then there is a map $f_* : H_{\bullet}(X) \to H_{\bullet}(Y)$, and $(g\circ f)_* = g_*\circ f_*$. There are a number of ways to do this, namely homology and cohomology (cohomology is contravariant though, meaning $(g\circ f)^* = f^*\circ g^*$).
+
+\section{Basic constructions}
+
+\subsection{Paths and homotopy}
+
+I am extremely well-aquainted with homotopy, and choose not to write down much related to it. I have listed only the following useful formula for linear homotopies.
+
+Given $x_0,x_1\in \mathbb{R} ^n$ and paths $f_0,f_1 : x_0 \to x_1$, we define
+\[
+	H(s,t) = (1-t)f_0(s)+tf_1(s)
+.\]
+This is a homotopy $H: f_0 \Rightarrow f_1$. This construction is easily seen to hold in all convex spaces, since the construction is simply a straight line.
+
+\begin{definition}\label{dfn:1.1.1}
+	Let $(X,x)$ be a pointed space. Then the \emph{first fundamental group of $X$ based at $x$} is the set $\Top_*(S^1,(X,x)) / \tildesim $ of loops based at $x$ (the chosen basepoint for $S^1$ is irrelevant), modulo basepoint-preserving homotopy. Group multiplication is given by concatenation of homotopy classes, i.e. $[f][g] = [fg]$, where the juxtaposition $fg$ denotes concatenation.
+\end{definition}
+
+We recall the pasting lemma for later use.
+
+\begin{lemma}[Pasting]\label{lma:1.1.2}
+	Let $A,B \subseteq X$ be both closed or both open subsets of a space, and let $X = A \cup B$. If $f : A \to Y$ and $g : B \to Y$ are maps such that $f|A \cap B=g|A \cap B$, then the continuous map $f\cup g : X \to Y$ defined in the usual way is continuous.
+\end{lemma}
+
+\begin{remark}\label{rmk:1.1.3}
+	It is not immediately clear why we require $A,B$ be open or closed. Indeed, universality of pushout induces a map $f\cup g : A\amalg_{A \cap B} B \to Y$, and it is well known that $A \amalg _{A \cap B} B \cong A \cup B$. However, this isomorphism only holds as \emph{sets}, and since the forgetful functor $U : \Top  \to \Set $ is \emph{right} adjoint (not left), we don't get a nice statement about the topology on $X$ for free. And this is where the issue lies: the topology on $A \amalg_{A \cap B} B$ is not necessarily the same as that on $X$ (here $A,B$ have the subspace topology), \emph{unless} they are either both open or both closed. Given an open $U \subseteq A \amalg _{A \cap B} B$, we immediately have that $U \cap A$ and $U \cap B$ are open. If $A,B$ are not open in $X$, then even if $U$ is open in $X$, we may not have $U \cap A$ and $U \cap B$ open in $X$. Hence, the homeomorphism need not exist. It should be very clear why the closed/open hypotheses fix this issue.
+\end{remark}
+
+I recall a few constructions of pointed spaces that may be useful later.
+
+\begin{definition}\label{dfn:1.1.4}
+	Let $(X,x)$ and $(Y,y)$ be pointed spaces. The coproduct in $\Top _*$, known as the \emph{wedge sum}, is given by
+	\[
+		X \vee Y \coloneqq \frac{X\amalg Y}{x\sim y} 
+	.\]
+	Hence, we attach disjoint copies of $X$ and $Y$ at their basepoint.
+\end{definition}
+\begin{definition}\label{dfn:1.1.5}
+	Let $(X,x)$ and $(Y,y)$ be pointed spaces, and consider the product $X\times Y$. Note that $X\times \left\{ y \right\} \cong X$ and $\left\{ x \right\} \times Y \cong Y$ intersect only at the point $(x,y)$, meaning we have an embedding $X\vee Y \subseteq X\times Y$. Define the \emph{smash product}
+	\[
+		X\wedge Y \coloneqq \frac{X\times Y}{X \vee Y} 
+	.\]
+	This is the product in $\Top _*$.
+\end{definition}

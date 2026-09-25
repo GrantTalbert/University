@@ -1,3 +1,149 @@
 \section{Manifolds}
 
-motivate manifolds in the obvious way
+We begin with a brief review of calculus. Given a positive integer $n\geq 1$, let $\mathbb{R} ^n$ denote the set of all ordered $n$-tuples $(x_1, \ldots , x_n)$, where $x_i\in\mathbb{R} $ for all $1\leq i\leq n$. For example, an ordered 2-tuple $(x_1,x_2)$ is just an ordered pair. Thus, $\mathbb{R} ^2$ is the collection of all ordered pairs. A function $f : \mathbb{R} ^n \to \mathbb{R} ^m$ is a function which takes an $n$-tuple $(x_1, \ldots , x_n)$, and outputs an $m$-tuple $f(x_1, \ldots , x_n) $.
+
+Calculus 1 and 2 study the calculus of functions $f : \mathbb{R}  \to \mathbb{R} $. Given such a function, we can define the \emph{derivative} 
+\[
+	\frac{\mathrm{d}f}{\mathrm{d}x} 
+.\]
+This is a new function $\mathbb{R} \to \mathbb{R} $ which takes a number $x\in\mathbb{R} $ to the rate of change of $f$ at the point $x$. However, not all functions take a single input or output. For example, I can write \emph{temperature} as a function $T(x,y,z,t)$ in \emph{four variables}. The variables $x,y,z$ are the coordinates in 3-dimensional space, and $t$ is the time. This outputs a single number: the temperature at the point $(x,y,z)\in\mathbb{R} ^3$ at the time $t\in\mathbb{R} $. In calculus, we are very interested in the derivatives and integrals of such a function.
+
+Let's start with a function $f : \mathbb{R} ^2 \to \mathbb{R} $. For example, consider $f(x,y) = -x^2 - y^2$. I can graph this in 3-dimensioonal space as a sort of surface [draw picture].
+
+For functions $\mathbb{R} \to \mathbb{R} $, we define the slope at a point as the slope of the line tangent to the curve at that point. However, as we can see in the above image, there are \emph{many} lines we can draw that are tangent to each point. For example, consider the 2 lines I've drawn that are both tangent to $f$ at the point $(0,0)$: [draw picture].
+
+The issue is that there are now many directions we can go in. In 1 dimension, the only directions we could go in were forward and backward, and clearly going forward on a graph makes more sense than going backwards. But now, we can go left, right, forward, backward, and any direction in-between. So how do we solve this issue?
+
+We start by defining a derivative in a \emph{direction}. If we pick a direction, then we can draw all our tangent lines going in that direction. There are two directions that make a lot of sense: the positive $x$ and positive $y$ directions.
+
+\begin{definition}\label{dfn:1-1}
+	Let $f : \mathbb{R} ^2 \to \mathbb{R} $. Define the \emph{partial derivative} with respect to $x$, denoted
+	\[
+		\frac{\partial f}{\partial x} =\partial _xf,
+	\]
+	as the derivative of $f$ in the positive $x$ direction. Simimlarly, the partial derivative with respect to $y$, denoted
+	\[
+		\frac{\partial f}{\partial y} =\partial _yf,
+	\]
+	is the derivative of $f$ in the positive $y$ direction.
+\end{definition}
+
+
+These derivatives are nice to calculate. Notice that if we are only travelling in the $x$-direction, then the $y$ value never changes. In other words, at every point on the line in the below figure, the $y$ value is the same [draw picture]. Thus, the $y$ coordinate is \emph{constant} when we consider the derivative in the $x$ direction.
+
+Thus, to calculate the partial derivative $\partial _xf$, we simply take the normal derivative of $f$ with respect to $x$, and treat the variable $y$ as a constant. In our example $f(x,y) = -x^2 - y^2$, we have
+\[
+	\frac{\partial }{\partial x} \left( -x^2-y^2 \right) = \frac{\partial }{\partial x} \left( -x^2 \right)  + \frac{\partial }{\partial x} \left( -y^2 \right) 
+.\]
+Since $y^2$ is a constant, the derivative on the right is the derivative of a constant. Since the derivative of a constant is 0, we have
+\[
+	\frac{\partial}{\partial x} \left( -x^2 \right) + \frac{\partial }{\partial x} \left( -y^2 \right)  = \frac{\partial }{\partial x} \left( -x^2 \right)+0 = \frac{\mathrm{d}}{\mathrm{d}x} \left( -x^2 \right) =- \frac{\mathrm{d}}{\mathrm{d}x} \left( x^2 \right) =-2x
+.\]
+Thus, $\partial _xf=-2x$.
+
+For a more complex example, consider $g(x,y) = 2xy + x^2 + y^3$. We can calculate
+\[
+	\frac{\partial g}{\partial x} = \frac{\partial }{\partial x} \left( 2xy+x^2+y^3 \right) = \frac{\partial }{\partial x} (2xy) + \frac{\partial }{\partial x} \left( x^2 \right) + \frac{\partial }{\partial x} \left( y^3 \right) =2y \frac{\mathrm{d}}{\mathrm{d}x} (x) + \frac{\mathrm{d}}{\mathrm{d}x} \left( x^2 \right) =2y + 2x
+.\]
+
+We can now consider the question of calculating a total derivative of $f$, like we were able to for functions in 1 variable. Although we only defined the derivatives of $f$ in the directions $x,y$, it's not crazy to imagine calculating the derivative of $f$ in an arbitrary direction. Unfortunately, the formulas aren't as nice, which is why we don't start with these derivatives. But this isn't a crazy idea to imagine.
+
+This leads to a natural notion of a ``total derivative''. Let's go back to our example of $f(x,y) = -x^2 - y^2$. Then $\partial _xf =-2x$. Similarly, we can show $\partial _yf = -2y$. Consider the point $(1,0)\in\mathbb{R} ^2$. Note that $\partial _xf(1,0) = -2$, but $\partial _yf(1,0)=0$. Thus, the derivatives in different directions \emph{can be different} at the same point. A natural idea for a ``total derivative'' is to consider the derivative in the direction such that the derivative is the \emph{biggest}. More precisely, given a point $(x,y)\in\mathbb{R} ^2$, we first find the direction such that the derivative of $f$ in that direction is as big as possible, and then we evaluate that derivative at the point $(x,y)$.
+
+But this means a total derivative has to have two pieces of information: a direction and a magnitude. In other words, a total derivative is a \emph{vector}.
+
+A vector is something that has a direction and a magnitude. We represent it as an arrow that points in the direction it goes, and has the same length as its magnitude. For example, the vector below is an arrow pointing from $(0,1)$ to $(1,1)$. It's direction is in the $x$-direction, and its magnitude (length) is 1. The starting point of a vector is actually not super important. In some cases, it's useful to have a vector start at a particular point in space, but we can almost always figure out what this point is from context. Thus, it's usually easier to forget about the starting point when working with vectors, and only remember the length and magnitude.
+
+This leads to a nice algebraic formulation. By translating all vectors so that they start at $(0,0)\in\mathbb{R} ^2$, we only have to keep track of the endpoint. Thus, if $v$ is a vector starting at $(0,0)$ and pointing to $(x,y)$, we simply write $v=(x,y)$.
+
+\begin{definition}\label{dfn:1-2}
+	Let $f : \mathbb{R} ^2 \to \mathbb{R} $ be a function. The \emph{total derivative} of $f$, also called the \emph{gradient} of $f$, is a function $\mathrm{D} f : \mathbb{R} ^2 \to \mathbb{R} ^2$. It can be calculated as $\mathrm{D} f(x,y) = (\partial _xf(x,y), \partial _yf(x,y))$.
+\end{definition}
+
+Many authors, especially for calculus books, denote the total derivative by $\nabla f$, and call it the gradient. However, we will be going beyond normal calculus, and once we go beyond normal calculus the notation changes to $\mathrm{D} f$, and the name changes to a \emph{total derivative}.
+
+Now consider a function $f : \mathbb{R} ^n \to \mathbb{R} ^m$. Then we can write $f(x_1, \ldots , x_n)$ as an $n$-tuple. Using the notation
+\[
+	f(x_1, \ldots , x_n) = (f_1(x_1, \ldots , x_n), \ldots , f_m(x_1, \ldots , x_n)),
+\]
+we see that $f$ can be built out of a collection of $m$ functions $f_i : \mathbb{R} ^n \to \mathbb{R} $. We define
+\[
+	\frac{\partial f}{\partial x_i} =\left( \frac{\partial f_1}{\partial x_i} , \ldots , \frac{\partial f_m}{\partial x_i}  \right) 
+.\]
+Thus, the calculus of functions $f : \mathbb{R} ^n \to \mathbb{R} ^m$ can be reduced to the calculus of functions $\mathbb{R} ^n\to \mathbb{R} $. From now on, we focus on these functions.
+
+We will discuss integrals later. For now, I want to move on to the meat of the talk. First of all, note that if I have a function $f : \mathbb{R} ^n \to \mathbb{R} $, if I write the coordinates of $\mathbb{R} ^n$ as $(x_1, \ldots , x_n)$, then I can define a partial derivative in any of these directions (and they are calculated the same way). We will often denote the partial of $f$ with respect to $x_i$ as $\partial _if$. We can then define a total derivative $\mathrm{D} f = (\partial _1f, \ldots , \partial _nf)$. However, not everything in real life is $\mathbb{R} ^n$.
+
+For example, consider the Earth. The surface of the Earth is a sphere (important note: when a mathematician says ``sphere'', they mean a \emph{hollow} sphere. The word ``ball'' means a \emph{filled in} sphere). Just like the set of real numbers has a symbol $\mathbb{R} ^2$, the sphere has a symbol: $S^2$ (we will explain the $2$ later). If we want to talk about the temperature on the surface of the Earth at a particular time, we would consider a function $f : S^2 \to \mathbb{R} $ which takes a point $p\in S^2$ to the temperature $f(p)$ at the point $p$. But how do we do calculus on this function?
+
+Multivariable calculus has an answer for us: we use \emph{spherical coordinates}. Given a point $p\in\mathbb{R} ^3$, we can write $p=(r,\theta ,\phi )$, where $r$ is the distance from $p$ to the origin, $\theta $ is the angle that $p$ makes in the $xy$-plane, and $\phi $ is the angle $p$ makes with the $z$-axis. Some authors flip the usage of $\theta $ and $\phi $. Regardless of how you define it, you can come up with formulas for derivatives in these coordinates.
+
+But how about something like the torus? How would you define coordinates on this? [draw picture] More precisely, how could you possibly define coordinates that are not extremely messy, such that their derivatives are also not extremely messy?
+
+And what happens when we go to higher dimensions? Even if something doesn't have a nice geometric interpretation, it can still be important. Let's say you have a collection of $n$ particles. There are a lot of particles in real life, so $n$ can be very very big. Each particle has 3 position variables, so you now have $3n$ variables if you want to keep track of the position of all particles. Due to restrictions on the particles' behavior might not be a function from $\mathbb{R} ^{3n} \to \mathbb{R} $, but from some $3n$-dimensional ``geometric space'' $M$ to $\mathbb{R} $. How can we reasonably do calculus with such functions?
+
+This is the job of differential geometry. In this talk, we will explore how this calculus can be done. This topic is difficult, so at times we may not be super precise about things, and I may not prove that things work the way I say they do. My goal is to give you a broad overview of this fascinating subject, and hopefully pique your curiousity enough to consider studying it in the future.
+
+The entire field of differential geometry starts with the definition of an $n$-manifold. The idea is to be precise about what an ``$n$-dimensional geometric space is''. Additionally, we want this space to support some notion of calculus. Since we already know how to do calculus on $\mathbb{R} ^n$, we will use the tools of calculus in the real numbers to build the tools of calculus on manifolds.
+
+First, note that all of calculus so far has happened using coordinates. We could only define the partial derivatives once we had coordinates $(x_1, \ldots , x_n)$ for $\mathbb{R} ^n$. Using spherical \emph{coordinates}, we can define calculus on the sphere. So if we want to do calculus on a ``manifold'', then it should have a notion of coordinates.
+
+Here is how we make that precise. Let $M$ be a \emph{topological space}. This isn't a topology talk, so we won't be precise about what a topological space is. All we will say is that you can imagine a topological space as a blob, possibly with holes. [draw picture]
+
+For example, $\mathbb{R} ^n$ is a very very straight blob that happens to go on forever, and also happens to have no holes. The sphere $S^2$ is also a very not-blobby blob, and it has one big hole in the middle of it. The torus is another very simple blob, and it has a big hole in the middle of it. [draw picture]
+
+A continuous function between blobs is just a function that doesnt jump around or tear the blob apart. Intuitively, if $p$ is a point on our blob, then if you zoom in close enough to $p$, all the points close to $p$ will stay close to $p$ after taking a continuous function.
+
+So a manifold is a blob. However, we want our manifold to have coordinates. The way we say this is as follows.
+\begin{definition}\label{dfn:1-3}
+	Let $M$ be a topological space (blob). An \emph{open subset} $U\subseteq M$ of $M$ is simply a subset of $M$ that does not contain its boundary. We define \emph{local coordinates on $U$} to be a function $\varphi : U \to V$, where $V\subseteq \mathbb{R} ^n$ is also an open subset, such that $\varphi $ is a bijection (meaning it has an inverse), and its inverse is continuous. We write local coordinates as $(U,\varphi )$, and will sometimes refer to it as a \emph{chart}, a \emph{coordinate chart}, or simply \emph{coordinates}.
+\end{definition}
+
+The reason we only consider open subsets is for topological reasons that the reader can safely disregard. The intuition behind \cref{dfn:1-3} is as follows. Let $U\subseteq M$ be an open subset, and let $p\in U$ be some point. We define the \emph{coordinates} of $p$ to be the point $\varphi (p)\in V \subseteq \mathbb{R} ^n$. Since $p$ is a point in $\mathbb{R} ^n$, we can write it as an $n$-tuple $p=(p_1, \ldots , p_n)$ in $\mathbb{R} ^n$. This is exactly what coordinates are! Coordinates in $\mathbb{R} ^n$ are just a way of writing a point as a list of real numbers. By using $\varphi $, we can write a point in $U$ as a list of real numbers, hence giving $U$ coordinates.
+
+But why is $\varphi $ bijective? First, since $\varphi $ is injective, this means no two different points have the same coordinates. It would be weird if $(p_1, \ldots , p_n)$ wasn't a single point, but was instead 2 or more different points. This also means that given any point $(x_1, \ldots , x_n)\in V$, this corresponds to a point $\varphi ^{-1} (x_1, \ldots , x_n)\in U$. In other words, we can think of $V$ as not being a totally different set than $U$, but rather a copy of $U$ that we use to put coordinates on $U$. For that reason, we often adopt the following convention.
+
+Given a point $p\in U$, we can write $\varphi (p) = (p_1, \ldots , p_n)$. Define the function $x_i : U \to \mathbb{R} $ such that $x_i(p) = p_i$. Then $\varphi (p) = (x_1(p), \ldots , x_n(p))$. We often write $\varphi =(x_1, \ldots , x_n)$, and refer to $x_i$ as the \emph{coordinates} of $U$. Given a point $p$, we may often write $(x_1(p), \ldots , x_n(p))$ simply as $(x_1, \ldots , x_n)$ for simplicity, in the same way that we don't write $p=(x(p),y(p))$ when $p\in\mathbb{R} ^2$, but instead we write $p=(x,y)$.
+
+\begin{definition}\label{dfn:1-4}
+	A \emph{topological $n$-manifold} is a topological space $M$ with the following property. For every point $p\in M$, there is an open set $U\subseteq M$ such that $p\in U$, and there are local coordinates $(\varphi ,U)$, where $\varphi : U \to V$ and $V\subseteq \mathbb{R} ^n$ (note that $n$ must be the same number for all of these coordinate charts). In other words, there is always at least one way to write a point in coordinates. This topological space also has to satisfy the following extra conditions, which are only there for topological technicalities, and the reader can safely ignore:
+	\begin{enumerate}
+		\item $M$ must be second-countable, i.e. it has a countable basis.
+		\item $M$ must be Hausdorff, i.e. for any points $x\neq y$, there are opens $x\in U$ and $y\in V$ with $U \cap V = \varnothing $.
+	\end{enumerate}
+	Some authors also require that manifolds are paracompact.
+\end{definition}
+
+The idea is that a manifold is built out of patches of $\mathbb{R} ^n$. Thus if we zoom in close enough (by taking the open subset $U$ to be really small), we can ``flatten out'' a patch of our manifold $M$ into a patch of the real numbers $\mathbb{R} ^n$. [draw picture]
+
+Finally, we want to be able to do calculus on our manifold. To do this, we can't just use any arbitrary coordinates. We need coordinates that are good for doing calculus. To illustrate what I mean, we must use a bit of circular reasoning. Since this is only motivational, it's totally fine. Once we finish defining manifolds, we will use coordinates to be able to define derivatives of functions $U\to \mathbb{R} $ for any open subset $U\subseteq M$. We will do this by rewriting our function as a function $\mathbb{R} ^n \supseteq V \to \mathbb{R} $ using coordinates. However, each coordinate $x_i$ is a function $U\to \mathbb{R} $, so we can consider the derivatives of the coordinates themselves. Now suppose that we choose \emph{bad} coordinates, meaning that the derivatives of $x_i$ don't exist (remember not all functions are differentiable). How are we able to consider derivatives of a function $U\to \mathbb{R} $ if the coordinates we wrote it in weren't differentiable in the first place?
+
+This is the problem. We need to guarentee that the coordinates we choose are \emph{smooth} in some sense, meaning they have every possible derivative. There is a nifty trick mathematicians have found for ensuring this.
+
+\begin{definition}\label{dfn:1-5}
+	Let $M$ be a topological manifold, and let $(U,\varphi )$ and $(\widetilde{U}, \psi)$ be charts, where $\varphi : U \to V$ and $\psi: \widetilde{U} \to \widetilde{V} $. Since $\varphi $ and $\psi $ are bijective, they have inverses $\varphi ^{-1} ,\psi ^{-1} $. Consider the function
+	\[
+		\varphi \circ \psi ^{-1} : V \cap \widetilde{V}  \to U \cap \widetilde{U} \to V \cap \widetilde{V} 
+	.\]
+	We call this a \emph{transition function}. Since $V,\widetilde{V} \subseteq \mathbb{R} ^n$, this is a function from a subset of $\mathbb{R} ^n$ to a subset of $\mathbb{R} ^n$. Thus, we can talk about the partial derivatives of $\varphi \circ \psi ^{-1} $. If $\varphi \circ \psi ^{-1} $ and $\psi \circ \varphi ^{-1} $ are \emph{smooth}, meaning any possible combination of partial derivatives always exists, then we say the charts $(U,\varphi )$ and $(\widetilde{U} ,\psi )$ are \emph{smoothly compatible}.
+\end{definition}
+
+We can now define a smooth manifold.
+
+\begin{definition}\label{dfn:1-6}
+	Let $M$ be a topological space. An \emph{atlas} is a collection $\mathcal{A} =\left\{ (U_i, \varphi _i) \right\}_{i\in I} $ of coordinate charts of $M$, such that for all $p\in M$, there is some $i\in I$ with $p\in U_i$. A \emph{smooth atlas} is an atlas where for all $i,j\in I$, the charts $(U_i,\varphi _i)$ and $(U_j,\varphi _j)$ are smoothly compatible. A \emph{smooth manifold} is a topological manifold $M$ with a smooth atlas $\mathcal{A} $.
+\end{definition}
+
+The intuition is that when we work with coordinates on a smooth manifold, we only work with \emph{smooth coordinates}. A coordinate chart $(U,\varphi )$ is \emph{smooth} if it is smoothly compatible with all of the charts in the smooth atlas.
+
+The idea is that there are many possible smooth coordinates on a manifold, and it would be a hastle to list all of them out. Using an atlas, we only need to list a couple coordinates which define the ``smooth structure'' of $M$. For example, we can define a smooth structure for the sphere $S^2$ as follows. Define
+\[
+	U_x^+ = \left\{ (x,y,z)\in S^2 \mid x> 0 \right\} ,\qquad U_y^+ = \left\{ (x,y,z)\in S^2 \mid y\neq 0 \right\} ,\qquad U_z^+ = \left\{ (x,y,z) \mid z \neq 0 \right\} 
+.\]
+Define the map $\varphi _{x+} : U_x \to \mathbb{R} ^2$ by $\varphi _{x+}(x,y,z) = (y,z)$. This isn't surjective on all of $\mathbb{R} ^2$, but by restricting our codomain to the image $\varphi_{x+}(U_x^+)$, we can make it surjective.  The trick here is that if $(x,y,z)\in S^2$, then $\sqrt{x^2 + y^2 + z^2} =1$. Thus, if we know $y$ and $z$, we can solve
+\[
+	x^2 = 1 - y^2 - z^2 \implies x = \pm \sqrt{1-y^2-z^2} 
+.\]
+Finally, since we know that $x>0$ in $U_x^+$, we know that we need to choose the positive branch of the square root, meaning $\varphi ^{-1} (y,z) = \sqrt{(1-y^2 - z^2} $.  We can do similar stuff for $U_y^+$ and $U_z^+$, and we can also analogously define sets $U_x^-$, $U_y^-$, and $U_z^-$. Our smooth atlas for $S^2$ is given by these charts $(U_{i}^{\pm} ,\varphi _{i\pm} )$ for $i=x,y,z$.
+
+However, these are not the only coordinates we might want to use on $S^2$. For example, \emph{stereographic projection} is another type of smooth coordinates on $S^2$, and it's smoothly compatible with these charts. The formula is much more complicated, but it has a nice geometric intuition. If you forget about the north pole of the sphere, then you can stretch out the sphere across the whole plane $\mathbb{R} ^2$ [draw picture].

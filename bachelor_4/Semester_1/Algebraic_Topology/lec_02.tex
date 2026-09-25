@@ -1,0 +1,121 @@
+\lecture{2}{Tue 08 Sep 2026 09:31}{The first fundamental group}
+
+The prof rambled about the fundamental group. I knew all of it already, so I spent my time working through more useful stuff (that I also already knew).
+
+As should be expected of a 2-cell, there are both vertical composites and horizontal composites of homotopies. We will now construct both.
+\begin{construction}[Vertical composition of homotopies]\label{const:1-1-6}
+	Let $f,g,h : X \to Y$ be maps, and let $H : f \Rightarrow g$, $K : g \Rightarrow h$ be homotopies. Define the homotopy $K\circ H: f \Rightarrow h$ by
+	\[
+		(K\circ H)(x,t) = \begin{cases}
+			H(x,2t) & 0\leq t\leq 1/2 \\
+			K(x,2t-1) & 1/2 \leq t\leq 1
+		\end{cases}
+	.\]
+	This is well-defined if $K(-,2t-1)$ and $H(-,2t)$ agree at $t=1/2$. Indeed, we have
+	\[
+		H(-,2/2) = H(-,1) = g,
+	\]
+	\[
+		K(-,1-2/2) = K(-,0)=g
+	.\]
+	Finally, note that
+	\[
+		(K\circ H)(-,0) = H(-,0)=f,\qquad (K\circ H)(-,1) = K(-,2-1)=K(-,1)=h
+	.\]
+	Thus, $K\circ H$ is indeed a homotopy $h\simeq f$.
+\end{construction}
+
+\begin{construction}[Horizontal composition of homotopies]\label{const:1-1-7}
+	Let $f_0,f_1 : X \to Y$ and $g_0,g_1: Y \to Z$ be continuous maps of spaces. Let $F: f_0 \Rightarrow f_1$ and $G: g_0 \Rightarrow g_1$ be homotopies. We will construct a homotopy $GF=G\cdot F : g_0\circ f_0 \Rightarrow g_1\circ f_1$, as depicted by the diagram
+	\[
+		\left(\begin{tikzcd}[row sep = 2.5em, column sep = 5em]
+			X \ar[" f_0 "{name=f0}, bend left, r] \ar[" f_1 "'{name=f1}, bend right, r]  & Y \ar[" g_0 "{name=g0}, bend left, r] \ar[" g_1 "'{name=g1}, bend right, r]  & Z
+			\ar[r, Rightarrow, shorten <= 4pt, shorten >= 4pt, from=f0, to=f1, " F  "] \ar[Rightarrow, shorten <= 4pt, shorten >= 4pt, "G", from=g0, to=g1] 
+	\end{tikzcd}\right) = \left( \begin{tikzcd}[row sep = 2.5em, column sep = 5em]
+			X \ar[" g_0\circ f_0 "{name=gf0}, bend left, r] \ar[" g_1\circ f_1 "'{name=gf1}, bend right, r]  & Z
+			\ar[Rightarrow, shorten <= 4pt, shorten >= 4pt, "GF", from=gf0, to=gf1] 
+	\end{tikzcd} \right) .
+	\]
+	To define $GF$, let $\Delta : I \to I\times I$ be the diagonal map $t\mapsto (t,t)$, and let $\alpha : X\times (I\times I) \to (X\times I)\times I$ denote the associator $(x,(s,t))\mapsto ((x,s),t)$. Then we define $GF$ as the composite
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			X\times I \ar[" 1_X \times \Delta  ", r]  & X\times (I\times I) \ar[" \alpha  ", r]  & (X\times I)\times I \ar[" F\times 1_I ", r]  & Y\times I \ar[" G ", r] & Z.
+	\end{tikzcd}
+	\]
+	On elements, this maps
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			(x,t) \ar[" 1_X\times \Delta  ", r]  & (x,(t,t))\ar[" \alpha  ", r]  & ((x,t),t) \ar[" F\times 1_I ", r]  & (F(x,t),t) \ar[" G ", r]  & G(F(x,t),t)
+	\end{tikzcd}.
+	\]
+	It's trivial to see that $1,\Delta ,\alpha $ are continuous, and $F,G$ are continuous by assumption. Thus, $GF$ is continuous. It suffices to show it is a homotopy as claimed. Indeed,
+	\[
+		GF(x,0) = G(F(x,0),0) = G(f_0(x),0) = g_0(f_0(x)) \implies GF(-,0) = g_0\circ f_0,
+	\]
+	\[
+		GF(x,1) = G(F(x,1),1) = G(f_1(x),1) = g_1(f_1(x)) \implies GF(-,1) = g_1\circ f_1
+	.\]
+	Thus, we have horizontal composites.
+\end{construction}
+
+Note that horizontal composition is associative, since it is essentially function composition. However, vertical composition is non-associative since it requires a reparameterization. Thus, $\Top $ is not a 2-category. The following proposition shows that it is associative up to homotopy.
+
+
+\begin{proposition}\label{prp:1-1-8}
+	Let $f : I \to X$ be a path, and let $\varphi : I \to I$ be a map sending $0\mapsto 0$ and $1\mapsto 1$. Then there is a homotopy to the reparameterization
+	\[
+		f\circ \varphi \simeq f
+	.\]
+\end{proposition}
+\begin{proof}
+	We define
+	\[
+		\Phi (t,s) = (1-t)\varphi (s)+ts
+	\]
+	which is a linear homotopy $\varphi \simeq 1$. We then horizontally compose the homotopies
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 5em]
+			I \ar[" \varphi  "{name=vp}, bend left, r] \ar[" 1 "'{name=id}, bend right, r]  & I \ar[" f "{name=f1}, bend left, r] \ar[" f "'{name=f2}, bend right, r]  & X
+			\ar[r, Rightarrow, shorten <= 4pt, shorten >= 4pt, from=vp, to=id, " \Phi  "] \ar[Rightarrow, shorten <= 4pt, shorten >= 4pt, "1", from=f1, to=f2] 
+	\end{tikzcd}
+	\]
+	to yield a homotopy $f\simeq f\circ \varphi $.
+\end{proof}
+
+This motivates the fact that $\Top $ can be viewed as an $\infty $-category. Usually, we identify along the Quillen equivalence $\Top \simeq \sSet $, and note that $\Top $ maps into the fibrant objects $\sSet ^f \cong \mathcal{K} \mathrm{an} $. We then define the $\infty $-category of spaces $\mathcal{S} \coloneqq \mathrm{N} (\mathcal{K} \mathrm{an} )$, for $\mathrm{N} $ the homotopy coherent nerve of the $\sSet $-category $\mathcal{K} \mathrm{an} \subseteq \sSet $.
+
+Ok now back to the lecture.
+
+\begin{proposition}\label{prp:1-1-9}
+	Let $X$ be a path-connected space. Then $\pi _1(X,x_0)$ is invariant under choice of $x_0$.
+\end{proposition}
+\begin{proof}
+	Given $x,y\in X$ basepoints, by path-connectedness of $X$, there is a path $f : x \to y$ in $X$. This map induces the isomorphism on $\pi_1(X,x)\cong \pi _1(X,y)$ via mapping a loop $[\varphi] \in \pi _1(X,x)$ to the loop $[f\cdot \varphi \cdot f^{-1} ]$, where $f^{-1} $ denotes running backwards along $f$, and $\cdot $ is loop concatenation. That this is an isomorphism is obvious.
+\end{proof}
+
+\begin{definition}\label{dfn:1-1-10}
+	Let $X$ be a space. Then $X$ is \emph{simply connected} if $X$ is path connected, and $\pi _1(X)\cong 0$.
+\end{definition}
+
+\begin{discussion}\label{disc:1-1-11}
+	We can translate all of this discussion into $\sSet $. Recall that $\left| \Delta ^2 \right| \cong S^1$, and more generally $\left| \Delta ^{n+1}  \right| \cong S^n$. Given a simplicial set $S_{\bullet} $, define the first fundamental groupoid $\Pi _1(S)$ (warning: see following paragraph) to take $S_0$ as objects, and to take simplicial homotopy classes of maps $f : \Delta ^1 \to S$ as morphisms in the following way. Let $\sigma =f_1([1])$ be the 1-simplex in $S$ that fully determines $S$. Then if $d_0(\sigma ) = y$ and $d_1(\sigma )=x$ are the vertices of $\sigma $, then we write $[\sigma] : x \to y$ in $\Pi _1(S)$ for $[\sigma ]$ the homotopy class (with fixed endpoints) of $f$. Note here that $\Pi _1(S) = \hh S$, for $\hh $ the homotopy category. Given a vertex $s\in S_0$, define $\pi _1(S,s) \coloneqq \Pi_1(s,s)$. Note that this can be identified with homotopy classes of maps $f : \partial \Delta ^2 \to S$ based at $s$ in the sense that $f_0([0]) = s$.
+ 
+	This turns out to be poorly behaved in general. In particular, $\Pi _1(S)$ need not be a category! Since morphisms in $\Pi _1$ are essentially morphisms in a quasi-category, we want to define a composite of $\sigma : x \to y$ and $\tau : y \to z$ as a filler for the inner horn $(\tau ,\bullet, \sigma )$, which is precisely the datum of a 2-simplex $\Sigma \in S_2$ whose faces yield the diagram, together with the dotted arrow
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & y \ar[" \tau  ", dr]  &  \\
+		x \ar[" \sigma  ", ur] \ar[dotted, rr]  &  & z
+	\end{tikzcd},
+	\]
+	rendering the diagram commutative. Of course, this need not exist. If $S$ is a quasi-category, then such a filler exists. This promotes $\Pi _1(S)$ to a category (in particular, the homotopy category $\hh S$ of the $\infty $-category $S$), but not quite a groupoid.
+
+	We also need the datum of an inverse for all maps. In particular, given the horn indicated by the solid arrows
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+		 & y \ar[" \sigma ^{-1}  ", dotted, dr]  &  \\
+		x \ar[" \sigma  ", ur] \ar[" 1 "', rr]  &  & x,
+	\end{tikzcd}
+	\]
+	we would require the existence of a dotted arrow $\sigma ^{-1} $, providing an inverse to $\sigma $. Thus, we need a filler for $(\bullet, 1, \sigma )$. We similarly want fillers for $(\sigma ,1,\bullet)$. Thus, $S$ should be a Kan complex, promoting $S$ to an $\infty $-groupoid, and thus $\Pi _1(S) = \hh S$ to a groupoid. This provides the necessary group structure for $\pi _1(S)$. The higher homotopy groups are defined similarly, using maps $\partial \Delta ^{n+1} \to S$.
+\end{discussion}
+

@@ -5,7 +5,8 @@
 \usepackage{eucal}
 \DeclareMathOperator{\im}{im}
 \newcommand{\tildesim}{\mathbin{\sim}}
-\date{}
+\definecolor{owo}{HTML}{bbbbbb}
+\color{owo}
 \begin{document}
 \makeproblem
 
@@ -251,12 +252,12 @@ and we have a similar decomposition (where once again $1$ is a shorthand for the
 	 &  & Y\times Z\ar[equals, rrrrrr]\ar[" \pi _Y ", two heads, ddll]\ar[" \pi _Z "', two heads, uurr] &  &  &  &  &  & Y\times Z\ar[" \pi _Y ", two heads, ddll] \ar[" \pi _Z "', two heads, uurr] \\
 	 &  &  &  &  &  &  &  &  \\
 	Y\ar[equals, rrrrrr]  &  &  &  &  &  & Y &  & 
-	\arrow[from=f2, to=g2, Rightarrow, color=red, shorten=20pt, " \Phi_2 "']
+	\arrow[from=f2, to=g2, Rightarrow, shorten=20pt, " \Phi_2 "']
 	\arrow[from=1-3, to=1-9, crossing over, equals]
 	\arrow[from=1-9, to=4-9, dashed, " g_1\times g_2 "{name=gg}, crossing over]
-	\arrow[from=ff, to=gg, " \Phi  ", Rightarrow, shorten=20pt, color=red, crossing over]
+	\arrow[from=ff, to=gg, " \Phi  ", Rightarrow, shorten=20pt, crossing over]
 	\arrow[from=1-9, to=6-7, " g_1 "'{name=g1}, bend right, crossing over]
-	\arrow[from=f1, to=g1, Rightarrow, color=red, crossing over, shorten=20pt, " \Phi_1 "]
+	\arrow[from=f1, to=g1, Rightarrow, crossing over, shorten=20pt, " \Phi_1 "]
 	\end{tikzcd}\]
 	commute up to the given homotopies. This diagram does not help the proof at all I just though it looked cool. Since the homotopies are morphisms
 	\[\begin{tikzcd}[row sep = 2.5em, column sep = 0em]

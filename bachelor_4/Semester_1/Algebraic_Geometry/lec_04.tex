@@ -1,0 +1,73 @@
+\lecture{4}{Tue 22 Sep 2026 11:02}{Sheaves, apparently}
+
+I missed 2 classes and did not learn about dimension and some stuff about Zariski's topology. I will add those to my notes after this lecture.
+
+Here's a recap of last time. Given a space $X$, define the dimension of $X$ as
+\[
+	\dim X \coloneqq \sup \left\{ n\in\mathbb{N} \cup \left\{ \infty  \right\} \mid \exists \text{ a chain } \phi \subseteq Y_0 \subsetneq Y_1 \subsetneq \cdots \subsetneq Y_n \subseteq X \text{ of irreducible closed subsets} \right\} 
+.\]
+If $Y\subseteq X$ is an irreducible closed subset, then its codimension $\operatorname{codim}_XY$ of $Y$ in $X$ is the sup over all chains that \emph{start} at $Y$, so $Y=Y_0$.
+
+When $X$ is an affine variety, this notion of dimension coencides with the Krull dimension of $A(X)$. If $R$ a commutative ring, then $\dim_{\mathrm{Kr} } (R)$ is the sup over possibly infinite lengths $n$ of chains of prime ideals $0\subseteq \mathfrak{p}_0 \subsetneq \mathfrak{p} _1 \subsetneq \cdots \subsetneq \mathfrak{p} _n \subsetneq R$. The codimension of a prime ideal is defined analogously, with $\mathfrak{p} =\mathfrak{p} _n$ (The Nullstellensatz is inclusion reversing), and is called its \emph{height}.
+
+Here are some facts about dimension theory in commutative algebra.
+
+\begin{theorem}\label{thm:?}
+	Let $X$ be an irreducible affine variety. Note that products are of varieties, not of spaces.
+	\begin{enumerate}
+		\item $\dim_{\mathrm{Kr}}A(X) = \dim X$ is finite.
+		\item If $Y$ is another irreducible affine variety, then $X\times Y$ has dimension $\dim X +\dim Y$.
+		\item If $Y \subseteq X$ is irreducible, then $\dim X = \dim Y + \operatorname{codim} _XY$.
+		\item If $f\in A(X)$, then every irreducible component of $V(f)$ has codimension 1 in $X$. Hence we say $\dim V(f) = \dim X - 1$. (Krull's principle ideal theorem)
+	\end{enumerate}
+\end{theorem}
+Note that $\dim \mathbb{A} ^1=1$. This implies $\dim \mathbb{A} ^2 = \dim (\mathbb{A} ^1\times \mathbb{A} ^1)=2$. Inductively, $\dim (\mathbb{A} ^n)=n$.
+
+Another corollary is that if $f\in k[x_1, \ldots , x_n]$, then $\dim V(f) = n-1$. We call $V(f)$ the \emph{hypersurface corresponding to $f$}.
+
+\chapter{The sheaf of regular functions}
+
+this should be chapter 3, fix later
+
+We will now rigorize the intuition that elements of the coordinate ring can be thought of as $k$-valued polynomial functions on their affine variety.
+
+\begin{definition}\label{dfn:presheaf}
+	Let $X$ a space and $\mathcal{C} $ a category. A \emph{presheaf} $\mathcal{F} $ on $X$ valued in $\mathcal{C} $ is a functor $\mathcal{F} : \Open(X) ^{\mathrm{op}}  \to \mathcal{C} $. If $U\subseteq V$, we call $\mathcal{F} (V)\to \mathcal{F} (U)$ a restriction morphism. We say $\mathcal{F} $ is a \emph{sheaf} if for all opens $U\subseteq X$ and all open covers $\left\{ U_i \right\} _{i\in I} $ of $U$, the diagram
+	\[
+		\begin{tikzcd}[row sep = 2.5em, column sep = 2.5em]
+			\mathcal{F} (U) \ar[r]  & \displaystyle{\prod_{i\in I} \mathcal{F} (U_i)}\ar[shift left, r] \ar[shift right, r]  & \displaystyle{\prod_{i,j\in I} \mathcal{F} (U_i \cap U_j)}
+	\end{tikzcd}
+	\]
+	exists, and is an equalizer. Here the parallel arrows are given by the maps $U_i \cap U_j \subseteq U_i$ and $U_i \cap U_j \subseteq U_j$, i.e. inserting into the left and right sides.
+\end{definition}
+
+If $\mathcal{C} $ is concrete in the sense that the forgetful functor $U$ can be given as $U \cong \mathcal{C} (*,-)$ with $*$ terminal, then since Hom is continuous and covariant in its second argument, we have a nice characterization of this behavior. Elements of $\mathcal{F} (U)$ are called \emph{sections}. If $s\in \mathcal{F} (V)$ is a section and $U\subseteq V$, then we write $s\mapsto s|U$ for the restriction $\mathcal{F} (V)\to \mathcal{F} (U)$. We now reformulate the equalizer as follows.
+
+If $U\subseteq X$ is an open with $\left\{ U_i \right\} _{i\in I} $ an open cover, and $\left\{ s_i\in \mathcal{F} (U_i) \right\}_{i\in I} $ is a collection of sections such that $s_i|U_i \cap U_j = s_j|U_i \cap U_j$ for all $i,j\in I$, then there is a unique section $s\in \mathcal{F} (U)$ with $s|U_i = s_i$ for all $i\in I$. Also since $\mathcal{F} $ can be computed as a limit, and $\varnothing $ is a colimit (initial) in $\Open(X) $ (thus a limit in the opposite category), we see that $\mathcal{F} (\varnothing )$ is terminal in $\mathcal{C} $.
+
+Examples.
+\begin{enumerate}
+	\item Let $M$ a manifold. Then the sheaf of rings $C^\infty_{M}$ of smooth maps on $M$.
+	\item Let $X$ a complex manifold. Then the sheaf of rings $\mathcal{O}_{X} $ of holomorphic maps $X\to \mathbb{C} $.
+	\item Let $X$ a space. Then the sheaf of rings $C^0_X=\Top (-,\mathbb{R} )|\Open(X)^{\mathrm{op}} $ of continuous maps $X\to \mathbb{R} $.
+	\item Let $X$ a space and $R$ a topological ring. Then the sheaf of rings $C^0_X(-,R)=\Top (-,R)|\Open(X) ^{\mathrm{op}} $ of continuous maps $X\to R$.
+	\item Let $M$ a manifold, and $E\to M$ a smooth vector bundle. Then the sheaf of $\mathbb{R} $-vector spaces $\Gamma (-,E)=\mathcal{E} $ of smooth sections of $E$. Similarly for continuous sections of a continous bundle, and holomorphic sections of a holomorphic bundle.
+	\item Let $M$ a manifold. Then the de Rham complex $\Omega ^{\bullet} _M$ is a sheaf valued in cochains over $\mathbb{R} $.
+	\item Let $M$ be a manifold with $E\to M$ a graded vector bundle. Then $\Gamma (-,E)$ is a sheaf of graded vector spaces. If there is a map $\mathrm{d}: E \to E$ with $\mathrm{d} ^2=0$, then $\Gamma (-,E)$ takes values in cochains over $\mathbb{R} $.
+\end{enumerate}
+
+Things that cannot be defined with a local property are usually not sheaves. For example, consider the sheaf $L^2$ on $\mathbb{R} $ of measureable functions with finite $L^2$-norm. For example, consider the function $f(x) = x$. On some bounded $U\subseteq \mathbb{R} $, it has an integral. However, we can cover $U$ by finite intervals on which $f(x)$ is square-integrable. But the only thing $f(x)$ glues to is $f(x)=x$, which has an an infinite integral over all of $\mathbb{R} $. Hence, we cannot glue this section.
+
+For another example, consider the complex manifold $\mathbb{C} \setminus \left\{ 0 \right\} \eqqcolon \mathbb{C} ^*$. Define $\mathcal{F} $ to be the sheaf of holomorphic functions $f$ such that $e^f = 1$. In other words, $\mathcal{F} $ is the sheaf of branches of the complex logarithm. We cannot define this globally, so $\mathcal{F} (\mathbb{C} ^*)$ is empty. But we can cover $\mathbb{C} ^*$ by opens that \emph{have} a complex logarithm, hence there is no gluing.
+
+\begin{definition}\label{dfn:3-2}
+	Let $X$ be a space, and $\mathcal{O}_X$ a sheaf of rings on $X$. We call $(X,\mathcal{O} _X)$ an \emph{ringed space}, and call $\mathcal{O} _X$ the \emph{structure sheaf} of $X$. We often will simply say ``let $X$ be a ringed space'', and leave the $\mathcal{O} _X$ implicit.
+\end{definition}
+
+Now we will begin our discussion of the structure sheaf of an affine variety. Let $X$ be an affine variety. We have the coordinate ring $A(X)$ of functions on the whole variety, but we also need to be able to consider local information. A good solution will be \emph{regular} functions.
+
+\begin{definition}\label{dfn:3-3}
+	Let $X$ be an affine variety over $k$, and $U\subseteq X$ an open set. Then a \emph{regular function} on $U$ is a map $\varphi : U \to k$ such that for every $a\in U$, there exists an open $a\in U_a \subseteq U$ and polynomials $f,g\in A(X)$ such that $f(x) \neq 0$ for all $x\in U_a$, and $\varphi (x) = g(x) / f(x)$ for all $x\in U_a$. We denote the set of all regular functions on $U$ by $\mathcal{O} _X(U)$.
+\end{definition}
+
+For example, the function $\varphi (x) = p(x) / x^n$ is reasonable on $\mathbb{A}^1\setminus \left\{ 0 \right\} \subseteq \mathbb{A} ^1$, where $p$ is a polynomial on $\mathbb{A} ^1$.

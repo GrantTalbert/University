@@ -1,5 +1,11 @@
 \section{Differential forms and integration}
 
+Now, we want to look at the differential $\dd f$ of a function $f$. Note that this is \emph{not a vector field}: although for all $p$ we have a function $\dd f_p$, this function is not a differential operator. Instead, it is a sort of function of differential operators. Thus, $\dd f$ cannot live in $\mathfrak{X}(U)$. We will need to create a new vector space for $\dd f$ to live in. Luckily, we know exactly what space this should be.
+
+Recall that if $f : M \to N$, then $\dd f_p$ was a linear map $T_pM \to T_{f(p)} N$. Thus, given a vector field $X$, we can define $\dd f(X) = (\dd f_p)(X_p)\in T_{f(p)} N$, and thus $(\dd f)(X)\in \mathfrak{X} (f(M))$. Therefore, $\dd f\in \Hom_{\mathbb{R} }(\mathfrak{X} (M), \mathfrak{X} (f(M)) $.
+
+This is a sort of messy definition, and we can simplify it by specializing to our most interesting case: where $f : U \to \mathbb{R} $, for some open subset $U\subseteq \mathbb{R} $. In fact, we can gain a lot of useful intuition by specializing even further. Let $x^i$ be coordinates on $U$. Then each individual $x^i$ is a function $\mathbb{R} ^n \to \mathbb{R} $. What is $\dd x^i$?
+
 Consider $\dd x^i$ for $x^i$ some coordinate. Show that $\dd x^i(\partial _j) = \delta _{ij} $ under the identification $T_p\mathbb{R} \cong \mathbb{R} $. Introduce $T^*M$ as the dual bundle, and define the pullback map. Introduce $\dd f$ as a section $\Gamma (-,T^*M) \eqqcolon \Omega ^1$. Write $\dd : C^\infty (U) \to \Omega ^1(U)$. Discuss $\mathbb{R} $-linearity and $\dd (fg) = (\dd f)g + f\dd g$. Write a general 1-form as $(f\dd x^i)_p = f(p)\dd x^i|_p$ in coordinates. Argue that $\dd x^i$ is indeed a differential in the direction $x^i$: a derivative is the operator giving us infinitesimal changes, and so this is like the length of that operator, which is infinitesimal... idk. Consider a line integral
 \[
 	\int_{\gamma } f\dd x^i = \int_{0}^{1} \gamma ^*(f \dd x^i) = \int_{0}^{1} f(\gamma (t))\gamma '(t) \,\mathrm{d} t 
