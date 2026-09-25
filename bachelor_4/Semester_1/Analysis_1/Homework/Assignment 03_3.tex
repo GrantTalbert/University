@@ -25,7 +25,7 @@
 \end{notation*}
 
 \begin{remark*}
-	We make heavy use of the Von Neumann ordinals $n = \left\{ 0, \ldots , n-1 \right\} $ with successor $s(n) = n \cup \left\{ n \right\} $. We frequently refer to elements of a natural, or functions between naturals. Hence, it is important to establish that the Peano axioms hold in this setting. I did this about a year and a half ago because I was bored. On the off chance the grader actually wants to read this, I have compiled the relevant excerpts from my notes at \url{https://github.io/granttalbert/University/tree/master/Projects/???}. With this established, we note that a set $X$ has $\left| X \right| =n$ if and only if there is a bijection $X \cong n$. Thus, the identity morphism $1 : n \cong n$ yields $\left| n \right| =n$ for all $n\in\mathbb{N} $.
+	We make heavy use of the Von Neumann ordinals $n = \left\{ 0, \ldots , n-1 \right\} $ with successor $s(n) = n \cup \left\{ n \right\} $. We frequently refer to elements of a natural, or functions between naturals. Hence, it is important to establish that the Peano axioms hold in this setting. I did this about a year and a half ago because I was bored. On the off chance the grader actually wants to read this, I have compiled the relevant excerpts from my notes at \url{https://github.com/granttalbert/University/tree/master/Projects/Peano-via-ZFC/master.pdf}. With this established, we note that a set $X$ has $\left| X \right| =n$ if and only if there is a bijection $X \cong n$. Thus, the identity morphism $1 : n \cong n$ yields $\left| n \right| =n$ for all $n\in\mathbb{N} $.
 \end{remark*}
 
 
@@ -46,9 +46,11 @@
 
 	(3) Let $x\in f(A \cup B)$. Then there exists $y\in A \cup B$ such that $f(y) = x$. In particular, $y\in A$ or $y\in B$. Hence, $f(y)\in f(A)$ or $f(y)\in f(B)$. Thus, $f(y)\in f(A) \cup f(B)$. Now let $x\in f(A) \cup f(B)$. Then $x\in f(A)$ or $x\in f(B)$. Without loss of generality, let $x\in f(A)$. Then there is $y\in A$ such that $f(y)=x$. In particular, $y\in A$ implies $y\in A \cup B$, and thus $x=f(y)\in f(A \cup B)$.
 
-	(4) For the first case, the issue with equality arises since we could have $a\in A$ and $b\in B$ with $a\neq b$, but $f(a)=f(b)$. If $f$ is injective, then we can show a strict equality. Let $f$ be injective, and let $x\in f(A) \cap f(B)$. Then $x\in f(A)$ and $x\in f(B)$. There thus exists $y_A\in A$ such that $f(y_A)=x$, and $y_B\in B$ such that $f(y_B)=x$. Since $x$ is injective, $y_A = y_B$, and thus $y_A=y_B\in A \cap B$. Thus $x\in f(A \cap B)$.
+	(4) For the first case, one issue with equality arises since we could have $a\in A$ and $b\in B$ with $a\neq b$, but $f(a)=f(b)$. If $f$ is injective, then we can show a strict equality. Let $f$ be injective, and let $x\in f(A) \cap f(B)$. Then $x\in f(A)$ and $x\in f(B)$. There thus exists $y_A\in A$ such that $f(y_A)=x$, and $y_B\in B$ such that $f(y_B)=x$. Since $f$ is injective, $y_A = y_B$, and thus $y_A=y_B\in A \cap B$. Thus $x\in f(A \cap B)$.
 
 	For the second case, the issue and fix are the same. Let $f$ be injective, and let $x\in f(A \setminus B)$. Then there exists $y\in A \setminus B$ such that $f(y)=x$. This gives $x=f(y)\in f(A)$. Suppose for contradiction that $f(y)\in f(B)$. Then there is $y'\in B$ such that $f(y')=x$. We thus have $y=y'$ by injectivity. However, $y\notin B$, a contradiction.
+
+	Although sufficient, this is not necessary. For example, in case (1), we could have $f$ map both $A$ and $B$ to a single point $p\in f(A) \cap f(B)$. This is clearly not injective in general, but as long as $A \cap B$ is nonempty, we would have $f(A \cap B)=\left\{ p \right\} $ and $f(A) \cap f(B) = \left\{ p \right\} $. A similar example exists for case (2).
 \end{proof}
 
 \begin{problem}[Exercise 3.4.4]
@@ -60,7 +62,7 @@
 	\end{enumerate}
 \end{problem}
 \begin{proof}
-	(1) Let $x\in f^{-1} (U \cup V)$. Then $f(x)\in U \cup V$. Thus $f(x)\in U$ or $f(x)\in V$. If $f(x)\in U$, then $x\in f^{-1} (U)$. Otherwise, $f(x)\in V$, and thus $x\in f^{-1} (V)$. Thus $x\in U \cup V$. Now let $x\in f^{-1} (U)\cup f^{-1} (V)$. Then $f(x)\in U$ or $f(x)\in V$, hence $f(x)\in U \cup V$.
+	(1) Let $x\in f^{-1} (U \cup V)$. Then $f(x)\in U \cup V$. Thus $f(x)\in U$ or $f(x)\in V$. If $f(x)\in U$, then $x\in f^{-1} (U)$. Otherwise, $f(x)\in V$, and thus $x\in f^{-1} (V)$. Thus $x\in f^{-1} (U) \cup f^{-1} (V)$. Now let $x\in f^{-1} (U)\cup f^{-1} (V)$. Then $f(x)\in U$ or $f(x)\in V$, hence $f(x)\in U \cup V$. Thus, $x\in f^{-1} (U \cup V)$.
 
 	(2) Let $x\in f^{-1} (U \cap V)$. Then $f(x)\in U \cap V$, and thus $f(x)\in U$ and $f(x)\in V$. Thus $x\in f^{-1} (U)$ and $x\in f^{-1} (V)$, hence $x\in f^{-1} (U)\cap f^{-1} (V)$. Now let $x\in f^{-1} (U) \cap f^{-1} (V)$. Then $f(x)\in U$ and $f(x)\in V$, hence $f(x)\in U \cap V$. Thus $x\in f^{-1} (U \cap V)$.
 
@@ -90,7 +92,7 @@
 	\end{enumerate}
 \end{problem}
 \begin{proof}
-	(1) Let $p\in (A\times B)\cap (C\times D)$. Then $p\in A\times B$ and $p\in C\times D$. Write $p=(x,y)$. Then $x\in A$ and $x\in C$, and $y\in B$ and $y\in D$. Hence $x\in A \cap C$ and $y\in B \cap D$, and thus $(x,y)\in (A \cap C)\times (B \cap D)$. Now let $p\in (A \cap C)\times (B \cap D)$. Now let $p\in (A \cap C)\times (B \cap D)$. Letting $p=(x,y)$, we have $x\in A$ and $x\in C$ and $y\in B$ and $y\in D$. Hence $(x,y)\in A \times C$ and $(x,y)\in B \times D$. Thus $(x,y)\in (A \times C)\cap (B\times D)$.
+	(1) Let $p\in (A\times B)\cap (C\times D)$. Then $p\in A\times B$ and $p\in C\times D$. Write $p=(x,y)$. Then $x\in A$ and $x\in C$, and $y\in B$ and $y\in D$. Hence $x\in A \cap C$ and $y\in B \cap D$, and thus $(x,y)\in (A \cap C)\times (B \cap D)$. Now let $p\in (A \cap C)\times (B \cap D)$. Letting $p=(x,y)$, we have $x\in A$ and $x\in C$ and $y\in B$ and $y\in D$. Hence $(x,y)\in A \times C$ and $(x,y)\in B \times D$. Thus $(x,y)\in (A \times B)\cap (C\times D)$.
 
 	(2) This is not true. Let $(x,y)\in (A\times B)\cup (C\times D)$. Then $(x,y)\in A\times B$ or $(x,y)\in C\times D$, hence $x\in A$ or $x\in C$, and $y\in B$ or $y\in D$. Thus we have $(x,y)\in (A \cup C)\times (B \cup D)$. However, the converse need not hold. The issue is if $(x,y)\in (A \cup C)\times (B \cup D)$, then we could have $x\in A$ and $y\in D$, hence $(x,y)\in A \times D$. If $B$ and $D$ are disjoint, and if $A$ and $C$ are also disjoint, then we cannot have $(x,y)\in A \times B$ nor can we have $(x,y)\in C\times D$. For a counterexample, let $A=\left\{ a \right\} $, let $B=\left\{ b \right\} $, let $C=\left\{ c \right\} $, and let $D=\left\{ d \right\} $, with all $a,b,c,d$ distinct sets. Then $(a,d)\in (A \cup C)\times (B \cup D)$, but we cannot have $(a,d)\in (A\times B)\cup (C\times D)$.
 
